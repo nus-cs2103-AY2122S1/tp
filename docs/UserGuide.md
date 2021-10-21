@@ -15,6 +15,10 @@ title: User Guide
 TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
+## About This Guide
+
+
+
 
 ## Quick Start
 
