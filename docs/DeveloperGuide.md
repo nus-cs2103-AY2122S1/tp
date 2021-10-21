@@ -225,7 +225,7 @@ calls `ParserUtil#parsePeriod()`, to obtain the period to mark, and `Person#mark
 
 Step 3. The user executes the command `mark -i 1 d/2001-01-03`. The `mark` command
 calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
-become a single range, `Period#union()` that is called, merges the three `Period`
+become a single range, `Period#union()` that is called, merges the two `Period`
 objects into one.
 
 
