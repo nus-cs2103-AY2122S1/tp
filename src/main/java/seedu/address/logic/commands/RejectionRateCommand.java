@@ -29,7 +29,7 @@ public class RejectionRateCommand extends Command {
 
     public static final String MESSAGE_NO_CURRENT_APPLICANTS = "There are currently no applicants for this position.";
 
-    private final Position toAdd;
+    private final Position position;
 
     /**
      * Creates an RejectionRateCommand to get the specified rejection rate.
