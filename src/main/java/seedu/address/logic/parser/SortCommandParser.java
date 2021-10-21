@@ -40,40 +40,31 @@ public class SortCommandParser implements Parser<SortCommand> {
 
         String trimmedArgs = args.trim().toLowerCase();
 
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(
-                        args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NATIONALITY,
-                        PREFIX_TUTORIAL_GROUP, PREFIX_SOCIAL_HANDLE, PREFIX_GENDER, PREFIX_REMARK, PREFIX_TAG);
-
-        if (trimmedArgs.length() > 3) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
-        }
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        if (PREFIX_NAME.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new NameComparator());
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+        if (PREFIX_PHONE.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new PhoneComparator());
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+        if (PREFIX_EMAIL.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new EmailComparator());
         }
-        if (argMultimap.getValue(PREFIX_NATIONALITY).isPresent()) {
+        if (PREFIX_NATIONALITY.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new NationalityComparator());
         }
-        if (argMultimap.getValue(PREFIX_TUTORIAL_GROUP).isPresent()) {
+        if (PREFIX_TUTORIAL_GROUP.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new TutorialGroupComparator());
         }
-        if (argMultimap.getValue(PREFIX_SOCIAL_HANDLE).isPresent()) {
+        if (PREFIX_SOCIAL_HANDLE.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new SocialHandleComparator());
         }
-        if (argMultimap.getValue(PREFIX_GENDER).isPresent()) {
+        if (PREFIX_GENDER.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new GenderComparator());
         }
-        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+        if (PREFIX_REMARK.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new RemarkComparator());
         }
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+        if (PREFIX_TAG.getPrefix().equals(trimmedArgs)) {
             return new SortCommand(new TagComparator());
         }
 
