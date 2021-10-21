@@ -14,7 +14,7 @@ import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in ComputingConnection. 
+ * Represents a Person in ComputingConnection.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Person {
@@ -103,7 +103,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable languages set, which throws {@code UnsupportedOperationException} 
+     * Returns an immutable languages set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Language> getLanguages() {
@@ -111,7 +111,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable frameworks set, which throws {@code UnsupportedOperationException} 
+     * Returns an immutable frameworks set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Framework> getFrameworks() {
@@ -119,7 +119,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException} 
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
@@ -127,7 +127,7 @@ public class Person {
     }
 
     /**
-     * Returns an immutable interaction set, which throws {@code UnsupportedOperationException} 
+     * Returns an immutable interaction set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Interaction> getInteractions() {
@@ -147,7 +147,7 @@ public class Person {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields. 
+     * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
     @Override

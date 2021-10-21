@@ -42,16 +42,16 @@ public class EditCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) " 
-            + "[" + PREFIX_NAME + "NAME] " 
-            + "[" + PREFIX_EMAIL + "EMAIL] " 
-            + "[" + PREFIX_FACULTY + "FACULTY] " 
-            + "[" + PREFIX_MAJOR + "MAJOR] " 
-            + "[" + PREFIX_SKILL + "SKILL] " 
-            + "[" + PREFIX_LANGUAGE + "LANGUAGE] " 
-            + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] " 
-            + "[" + PREFIX_TAG + "TAG]...\n" 
-            + "Example: " + COMMAND_WORD + " 1 " 
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_FACULTY + "FACULTY] "
+            + "[" + PREFIX_MAJOR + "MAJOR] "
+            + "[" + PREFIX_SKILL + "SKILL] "
+            + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
+            + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
@@ -110,8 +110,8 @@ public class EditCommand extends Command {
         Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor, updatedSkills, updatedLanguages,
-                updatedFrameworks, updatedTags);
+        return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
     }
 
     @Override
@@ -128,12 +128,13 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index) && editPersonDescriptor.equals(e.editPersonDescriptor);
+        return index.equals(e.index)
+                && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will
-     * replace the corresponding field value of the person.
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
      */
     public static class EditPersonDescriptor {
         private Name name;
@@ -145,11 +146,11 @@ public class EditCommand extends Command {
         private Set<Framework> frameworks;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {
-        }
+        public EditPersonDescriptor() {}
 
         /**
-         * Copy constructor. A defensive copy of {@code tags} is used internally.
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
@@ -202,7 +203,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code skill} to this object's {@code skills}. 
+         * Sets {@code skill} to this object's {@code skills}.
          * A defensive copy of {@code skills} is used internally.
          */
         public void setSkills(Set<Skill> skills) {
@@ -210,8 +211,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException} 
-         * if modification is attempted. 
+         * Returns an unmodifiable skill set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code skills} is null.
          */
         public Optional<Set<Skill>> getSkills() {
@@ -219,7 +220,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code language} to this object's {@code languages}. 
+         * Sets {@code language} to this object's {@code languages}.
          * A defensive copy of {@code languages} is used internally.
          */
         public void setLanguages(Set<Language> languages) {
@@ -227,8 +228,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable language set, which throws {@code UnsupportedOperationException} 
-         * if modification is attempted. 
+         * Returns an unmodifiable language set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code languages} is null.
          */
         public Optional<Set<Language>> getLanguages() {
@@ -236,7 +237,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code framework} to this object's {@code frameworks}. 
+         * Sets {@code framework} to this object's {@code frameworks}.
          * A defensive copy of {@code frameworks} is used internally.
          */
         public void setFrameworks(Set<Framework> frameworks) {
@@ -244,8 +245,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable framework set, which throws {@code UnsupportedOperationException} 
-         * if modification is attempted. 
+         * Returns an unmodifiable framework set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code frameworks} is null.
          */
         public Optional<Set<Framework>> getFrameworks() {
@@ -253,7 +254,7 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}. 
+         * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
@@ -261,8 +262,8 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException} 
-         * if modification is attempted. 
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
@@ -284,8 +285,10 @@ public class EditCommand extends Command {
             // state check
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
-            return getName().equals(e.getName()) && getEmail().equals(e.getEmail())
-                    && getFaculty().equals(e.getFaculty()) && getMajor().equals(e.getMajor())
+            return getName().equals(e.getName())
+                    && getEmail().equals(e.getEmail())
+                    && getFaculty().equals(e.getFaculty())
+                    && getMajor().equals(e.getMajor())
                     && getTags().equals(e.getTags());
         }
     }
