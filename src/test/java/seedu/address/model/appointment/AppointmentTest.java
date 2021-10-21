@@ -6,6 +6,9 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class AppointmentTest {
     @Test
     void testToString() {
@@ -58,5 +61,21 @@ public class AppointmentTest {
     public void constructor_invalidDateTime_throwsIllegalArgumentException() {
         String invalidDateTimeString = "blahblah";
         assertThrows(IllegalArgumentException.class, () -> new Appointment(invalidDateTimeString));
+    }
+
+    @Test
+    public void isExpired() {
+        Appointment expiredAppointment = new Appointment("05-Jan-1999 05:40");
+
+        DateTimeFormatter formatter = DateTimeFormatter
+                .ofPattern("dd-MMM-yyyy HH:mm");
+        LocalDateTime upcomingDate = LocalDateTime.now().plusDays(2);
+        Appointment upcomingAppointment = new Appointment(upcomingDate.format(formatter));
+
+        // date has passed
+        assertTrue(expiredAppointment.isExpired());
+
+        // date has yet to pass
+        assertFalse(upcomingAppointment.isExpired());
     }
 }
