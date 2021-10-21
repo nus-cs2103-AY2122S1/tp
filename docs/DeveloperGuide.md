@@ -154,6 +154,25 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
+### Search feature
+
+...
+
+#### Design considerations:
+
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1:** Multiple search commands to search using different identifiers. 
+    * Pros: Easy to implement.
+    * Cons: Inconvenient for user to remember different command words. 
+
+* **Alternative 2(current choice):** Single search command to perform search for multiple identifiers.
+    * Pros: More straightforward and convenient for users.
+    * Cons: We need to identify the type of input given.
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
