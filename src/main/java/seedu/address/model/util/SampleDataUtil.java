@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
@@ -22,7 +24,8 @@ import seedu.address.model.person.Visit;
 public class SampleDataUtil {
 
     public static final Optional<Visit> EXAMPLE_OVERDUE_VISIT = Optional.ofNullable(new Visit("2021-10-01 13:00"));
-    public static final Optional<Visit> EXAMPLE_VALID_VISIT = Optional.ofNullable(new Visit("2021-12-30 09:00"));
+    public static final Optional<Visit> EXAMPLE_VALID_VISIT = Optional.ofNullable(new Visit(LocalDateTime.now()
+            .plusDays(7).format(DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm"))));
 
     public static Person[] getSamplePersons() {
         return new Person[] {
