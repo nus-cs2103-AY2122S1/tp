@@ -24,6 +24,7 @@ import seedu.notor.model.Model;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
@@ -126,7 +127,6 @@ public class PersonCreateCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public Person findPerson(String name) {
             return null;
@@ -164,6 +164,11 @@ public class PersonCreateCommandTest {
 
         @Override
         public ReadOnlyNotor getNotor() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearNotorNote() {
             throw new AssertionError("This method should not be called.");
         }
 

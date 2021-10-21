@@ -1,4 +1,6 @@
 {
+  "note": "",
+  "noteDate": "",
   "_comment": "Notor save file which contains the same Person values as in TypicalPersons#getTypicalNotor()",
   "persons" : [ {
     "name" : "Alice Pauline",
