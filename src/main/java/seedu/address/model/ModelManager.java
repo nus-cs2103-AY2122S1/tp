@@ -76,6 +76,27 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
+    /**
+     * Left temporarily to pass unit tests
+     * Initializes a ModelManager with the given positionBook and userPrefs.
+     */
+    public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(positionBook, userPrefs);
+
+        logger.fine("Initializing with position book: " + positionBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook();
+        this.positionBook = new PositionBook(positionBook);
+        this.applicantBook = new ApplicantBook();
+        this.applicationBook = new ApplicationBook();
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+    }
+
+
     public ModelManager() {
         this(new AddressBook(), new ApplicantBook(), new PositionBook(), new ApplicationBook(), new UserPrefs());
     }
@@ -185,6 +206,12 @@ public class ModelManager implements Model {
         applicantBook.setApplicant(target, editedApplicant);
     }
 
+    @Override
+    public void setPosition(Position target, Position editedPosition) {
+        requireAllNonNull(target, editedPosition);
+        positionBook.setPosition(target, editedPosition);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -213,6 +240,8 @@ public class ModelManager implements Model {
         filteredApplicants.setPredicate(predicateShowAllApplicants);
     }
 
+
+    // needs to update
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -231,6 +260,18 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
+
+
+    @Override
+    public void setPositionBook(ReadOnlyPositionBook positionBook) {
+        this.positionBook.resetData(positionBook);
+    }
+
+    @Override
+    public ReadOnlyPositionBook getPositionBook() {
+        return positionBook;
+    }
+
 
     // Position related methods
     @Override
