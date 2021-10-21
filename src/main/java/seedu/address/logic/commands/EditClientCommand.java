@@ -40,7 +40,7 @@ public class EditClientCommand extends Command {
                     + "[" + PREFIX_PHONE_NUMBER + "PHONE_NUMBER] "
                     + "[" + PREFIX_EMAIL + "EMAIL] "
                     + "[" + PREFIX_ADDRESS + "ADDRESS] "
-                    + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME ... ] \n"
+                    + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME]...\n"
                     + "Example: " + COMMAND_WORD + " 1 "
                     + PREFIX_NAME + "Ben "
                     + PREFIX_PHONE_NUMBER + "12345678 "
