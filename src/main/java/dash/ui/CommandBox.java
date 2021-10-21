@@ -7,6 +7,7 @@ import dash.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 
 /**
@@ -18,6 +19,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private int currentUserInputIndex = 0;
 
     @FXML
     private TextField commandTextField;
@@ -30,6 +32,9 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        commandTextField.setOnKeyPressed(event -> upArrowKeyPressed(event.getCode()));
+        commandTextField.setOnKeyPressed(event -> downArrowKeyPressed(event.getCode()));
     }
 
     /**
@@ -48,6 +53,39 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
+    }
+
+    /**
+     * Checks if up arrow key is pressed.
+     */
+    @FXML
+    public void upArrowKeyPressed(KeyCode keyCode) {
+        System.out.println("UP");
+        if (keyCode != KeyCode.UP) {
+            return;
+        }
+
+        if (currentUserInputIndex >= 9) {
+            return;
+        }
+        commandTextField.setText("upArrowKeyPressed");
+        currentUserInputIndex++;
+    }
+
+    /**
+     * Checks if down arrow key is pressed.
+     */
+    @FXML
+    public void downArrowKeyPressed(KeyCode keyCode) {
+        if (keyCode != KeyCode.DOWN) {
+            return;
+        }
+
+        if (currentUserInputIndex <= 0) {
+            return;
+        }
+        commandTextField.setText("downArrowKeyPressed");
+        currentUserInputIndex++;
     }
 
     /**
