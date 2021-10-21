@@ -2,14 +2,30 @@
 layout: page
 title: Developer Guide
 ---
+
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 This project is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **About this document**
+
+This document serves to explain the structure and implementation of TuitiONE and details how to set up the programming
+environment locally to support further developing of the app.
+
+Here are the interpretations of symbols and formatting used in this document: 
+
+* `highlights` represents code
+* :information_source: indicates additional information
+* :bulb: indicates tips
+* `Tuitione` is used in referencing code due to java naming syntax
+* **TuitiONE** is used when referencing the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -270,7 +286,7 @@ Step 1: User has a list of students and lessons presented in their TuitiONE appl
 
 Step 2: Upon running the delete lesson command, the application runs a few internal steps:
 
-1. The tuitione model obtains the lesson to remove.
+1. The `Tuitione` model obtains the lesson to remove.
 2. The command executor then extracts the students that are in the lesson.
 3. If there are students enrolled:
    1. The lesson unenrolls the students.
@@ -315,7 +331,8 @@ The following activity diagram summarizes what happens when a user executes the 
     * Harder to parse, as the `-l` flag is space separated from the command keyword.
     * User might forget to include the `-l` flag, accidentally deleting a student instead.
 
-<ins>Decision</ins>  
+<ins>Decision</ins>
+
 Ultimately, Option 1 (`delete-l LESSON_INDEX`) is chosen as it requires lesser modification to the existing code base parsing utilities.  
 Additionally, there is not much significance in having an especially pretty command syntax as efficiency (i.e. entering commands fast and correctly) is desired. At the same time, the accidental deletion of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`delete -l LESSON_INDEX`) should only be implemented once an undo/redo feature is implemented.
 
@@ -352,7 +369,7 @@ into the lesson.
 
 Upon running the Enroll command, the application runs a few internal steps:
 
-1. The tuitione model obtains the student to enroll into lesson.
+1. The `Tuitione` model obtains the student to enroll into lesson.
 2. The command executor checks if the student is eligible to be enrolled into lesson.
 3. The command executor checks if the student is currently enrolled in the lesson
 4. Finally, the student is ready to be enrolled into the lesson.
@@ -390,6 +407,7 @@ happens when a user executes the enroll lesson command:
         * Might require user to filter lesson first before referring to GUI, incurring an extra step
 
 <ins>Decision</ins>
+
 Ultimately, Option 2 (`enroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as our team felt that a user would value efficiency when typing multiple enroll commands rather than typing out an entire lesson code.
 The user is still able to refer to the GUI in this instance, with the help with filter commands, making it rather easy for the user to achieve the same result as using a lesson code.
 
@@ -410,18 +428,22 @@ in order for the unenroll operation to be successful.
 
 Given below is an example usage scenario and how the unenroll operation works.
 
-Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
+<ins>Step 1:</ins>
+
+User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
 lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
 
 ![UnenrollState0](images/DeveloperGuideImage/UnenrollState0.png)
 
 Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1. 
 
-Step 2: The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
+<ins>Step 2:</ins>
+
+The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
 internal steps.
 
-1. The tuitione model obtains the student specified. In this case, the student is `Alice`.
-2. The tuitione model obtains the lesson specified. In this case, the lesson is `l`.
+1. The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
+2. The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l`.
 3. The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
 4. If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
 5. Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
@@ -449,13 +471,14 @@ The following activity diagram summarizes what happens when a user executes the 
         * Unique lesson code clearly specifies the lesson that the student is to be unenrolled from.
     * Cons:
         * More difficult to type as the lesson code is quite long.
-* Option 2: `delete STUDENT_INDEX l/LESSON_INDEX`
+* Option 2: `unenroll STUDENT_INDEX l/LESSON_INDEX`
     * Pros:
         * Much faster to type and execute.
     * Cons:
         * User may specify the wrong index and unenroll student from the wrong lesson.
 
-<ins>Decision</ins>  
+<ins>Decision</ins>
+
 Ultimately, Option 2 (`unenroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as it is faster and easier to type. 
 This makes our app faster and easier to use. Additionally, there is not much significance in specifying the lesson 
 through a lesson code as although it cleary specifies the lesson, the chances of the user keying in the wrong index and 
