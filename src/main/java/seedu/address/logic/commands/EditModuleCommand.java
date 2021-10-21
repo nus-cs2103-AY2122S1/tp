@@ -7,12 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Edits the module's name
@@ -70,6 +73,10 @@ public class EditModuleCommand extends EditCommand {
      */
     public CommandResult editModuleInformation(Model model, Module module) {
         Module editedModule = createEditedModule(module, editModuleDescriptor);
+        ObservableList<Student> uniqueStudentList = module.getStudentList();
+        UniqueTaskList uniqueTaskList = module.getTaskList();
+        editedModule.setStudents(uniqueStudentList);
+        editedModule.setTasks(uniqueTaskList.asModifiableObservableList());
         model.deleteModule(module);
         model.addModule(editedModule);
         return new CommandResult(String.format(Messages.MESSAGE_EDIT_MODULE_SUCCESS,
