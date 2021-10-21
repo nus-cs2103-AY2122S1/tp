@@ -12,8 +12,8 @@ public class TodoTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public TodoTask(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
-        super(name, tags, isDone, description);
+    public TodoTask(TaskName name, Set<Tag> tags, boolean isDone, Description description, Priority priority) {
+        super(name, tags, isDone, description, priority);
     }
 
 
@@ -23,7 +23,9 @@ public class TodoTask extends Task {
         builder.append(getName())
                 .append("[TODO]")
                 .append("\nStatus: ")
-                .append(getStatusString());
+                .append(getStatusString())
+                .append("\nPriority: ")
+                .append(getPriority().toString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -32,5 +34,10 @@ public class TodoTask extends Task {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public TodoTask clone() {
+        return (TodoTask) super.clone();
     }
 }

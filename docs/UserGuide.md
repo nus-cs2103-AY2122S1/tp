@@ -170,27 +170,34 @@ Format: `tasks`
 
 Adds a TODO task with the given name.
 
-Format: `todo n/TASK_NAME`
+Format: `todo n/TASK_NAME p/TASK_PRIORITY`
 
-* Adds a todo task with the specified `TASK_NAME`
+* Adds a todo task with the specified `TASK_NAME` and `TASK_PRIORITY`
+* The possible priorities are High, Medium and Low.
+* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as LOW Priority.
+* Tasks that are not specified a priority will be by default LOW Priority.
 
 Examples:
-* `todo n/study` creates the todo task "study".
-* `todo n/play` creates the todo task "play".
+* `todo n/study p/H` creates the todo task "study" and marks it as High Priority.
+* `todo n/play` creates the todo task "play" with the default Low Priority.
 
 ### Adding an event task: `event n/TASK_NAME on/DATE`
 
 Adds an event task with the given name and a specified taskDate.
 
-Format: `event n/TASK_NAME on/DATE`
+Format: `event n/TASK_NAME on/DATE p/TASK_PRIORITY`
 
 * Adds an event task with the specified `TASK_NAME`
 * The event task has the taskDate `DATE`
 * The taskDate must be in the format `YYYY-MM-dd`
+* The possible priorities are High, Medium and Low.
+* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as LOW Priority.
+* Tasks that are not specified a priority will be by default LOW Priority.
 
 Examples:
-* `event n/party on/2021-09-23` creates the event task "party", which is to be held on the given date.
-* `event n/exam on/2021-10-04` creates the event task "exam", which is to be held on the given date.
+* `event n/party on/2021-09-23 p/M` creates the event task "party", which is to be held on the given date with 
+  Medium Priority.
+* `event n/exam on/2021-10-04` creates the event task "exam", which is to be held on the given date, with Low Priority.
 
 ### Adding an deadline task: `deadline n/TASK_NAME by/DATE`
 
@@ -198,13 +205,18 @@ Adds an deadline task with the given name and a specified taskDate.
 
 Format: `event n/TASK_NAME by/DATE`
 
-* Adds an deadline task with the specified `TASK_NAME`
+* Adds a deadline task with the specified `TASK_NAME`
 * The deadline task has the taskDate `DATE`
 * The taskDate must be in the format `YYYY-MM-dd`
+* The possible priorities are High, Medium and Low.
+* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as LOW Priority.
+* Tasks that are not specified a priority will be by default LOW Priority.
 
 Examples:
-* `deadline n/tutorial participation on/2021-09-23` creates the deadline task "tutorial participation", which is to be completed by the given date.
-* `deadline n/assignment submission on/2021-10-04` creates the deadline task "assignment submission", which is to be completed by the given date.
+* `deadline n/tutorial participation on/2021-09-23 p/H` creates the deadline task "tutorial participation", 
+  which is to be completed by the given date with High Priority.
+* `deadline n/assignment submission on/2021-10-04` creates the deadline task "assignment submission", 
+  which is to be completed by the given date with LOW Priority.
 
 
 ### Marking a student as present: `marka`

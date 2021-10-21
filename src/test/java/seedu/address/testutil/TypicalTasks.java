@@ -12,15 +12,17 @@ import seedu.address.model.task.Task;
  */
 public class TypicalTasks {
 
-    public static final Task TUTORIAL = new TaskBuilder().withName("Do Tutorial").withDeadline("2000-02-02")
+    public static final Task TUTORIAL = new DeadlineAndEventTaskBuilder().withName("Do Tutorial").withDate("2000-02-02")
             .withTags("work").build();
-    public static final Task MEETING = new TaskBuilder().withName("Prepare for meeting").withDeadline("2010-02-02")
+    public static final Task MEETING = new DeadlineAndEventTaskBuilder().withName("Prepare for meeting")
+            .withDate("2010-02-02")
             .withTags("work").build();
-    public static final Task DINNER = new TaskBuilder().withName("Buy Dinner").withDeadline("2021-10-12")
+    public static final Task DINNER = new DeadlineAndEventTaskBuilder().withName("Buy Dinner").withDate("2021-10-12")
             .withTags("personal").build();
-    public static final Task FRIEND_BIRTHDAY = new TaskBuilder().withName("Plan Birthday").withDeadline("2021-10-20")
+    public static final Task FRIEND_BIRTHDAY = new DeadlineAndEventTaskBuilder().withName("Plan Birthday")
+            .withDate("2021-10-20")
             .withTags("friends").build();
-    public static final Task EXERCISE = new TaskBuilder().withName("Run").withDeadline("2000-02-02")
+    public static final Task EXERCISE = new DeadlineAndEventTaskBuilder().withName("Run").withDate("2000-02-02")
             .build();
 
     private TypicalTasks() {}

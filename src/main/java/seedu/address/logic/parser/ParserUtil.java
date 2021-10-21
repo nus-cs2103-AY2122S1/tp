@@ -19,6 +19,7 @@ import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Description;
+import seedu.address.model.task.Task.Priority;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 
@@ -82,6 +83,28 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Priority parsePriority(String description) throws ParseException {
+        String trimmedPriorityInCamps = description.trim().toUpperCase();
+        Priority priority;
+        if (!Description.isValidDescription(trimmedPriorityInCamps)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        if (trimmedPriorityInCamps.contains("H")) {
+            priority = Priority.HIGH;
+        } else if (trimmedPriorityInCamps.contains("M")) {
+            priority = Priority.MEDIUM;
+        } else {
+            priority = Priority.LOW;
+        }
+        return priority;
     }
 
     /**
