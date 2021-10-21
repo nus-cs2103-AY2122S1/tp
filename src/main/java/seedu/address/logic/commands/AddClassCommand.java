@@ -7,8 +7,8 @@ import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
@@ -56,22 +56,22 @@ public class AddClassCommand extends Command {
         String message = this.getMessage(students[1], students[3]);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd) + "\n" + message);
     }
-    private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Person> validStudentsAsPerson, Model model) {
-        for (Person person: validStudentsAsPerson) {
-            Person studentToChange = person;
+    private void addClassToStudent(TuitionClass tuitionClass, ArrayList<Student> validStudentsAsPerson, Model model) {
+        for (Student person: validStudentsAsPerson) {
+            Student studentToChange = person;
             person.addClass(tuitionClass);
             person.addTag(new Tag(tuitionClass.getName().getName() + " | " + tuitionClass.getTimeslot()));
-            model.setPerson(studentToChange, person);
+            model.setStudent(studentToChange, person);
         }
     }
     private ArrayList[] getStudents(Model model, ArrayList<String> nowStudents, int limit) {
         ArrayList<String> newStudents = new ArrayList<>();
         ArrayList<String> invalidStudents = new ArrayList<>();
-        ArrayList<Person> validStudentsAsPerson = new ArrayList<>();
+        ArrayList<Student> validStudentsAsPerson = new ArrayList<>();
         ArrayList<String> notAddedStudent = new ArrayList<>();
         for (String s: nowStudents) {
-            Person person = new Person(new Name(s));
-            if (!model.hasPerson(person)) {
+            Student person = new Student(new Name(s));
+            if (!model.hasStudent(person)) {
                 if (!invalidStudents.contains(s)) {
                     invalidStudents.add(s);
                 }
@@ -86,7 +86,7 @@ public class AddClassCommand extends Command {
             }
             if (!newStudents.contains(s)) {
                 newStudents.add(s);
-                validStudentsAsPerson.add(model.getSameNamePerson(person));
+                validStudentsAsPerson.add(model.getSameNameStudent(person));
             }
         }
         ArrayList[] returnValue = new ArrayList[]{newStudents, invalidStudents, validStudentsAsPerson, notAddedStudent};

@@ -150,7 +150,7 @@ public class EditClassCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditCommand.EditPersonDescriptor)) {
+            if (!(other instanceof EditClassCommand.EditClassDescriptor)) {
                 return false;
             }
 
