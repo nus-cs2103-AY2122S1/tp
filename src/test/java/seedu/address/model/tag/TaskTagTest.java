@@ -27,15 +27,12 @@ public class TaskTagTest {
         assertFalse(TaskTag.isValidTagName("SG10"));
         // id is absent
         assertFalse(TaskTag.isValidTagName("SO"));
-        // no whitespace after G:
-        assertFalse(TaskTag.isValidTagName("G:pineapple"));
-        // tag name consists of non alphanumeric value
-        assertFalse(TaskTag.isValidTagName("G: !!"));
+        // invalid tag
+        assertFalse(TaskTag.isValidTagName("Generous"));
         // correct tag names
         assertTrue(TaskTag.isValidTagName("SO1"));
         assertTrue(TaskTag.isValidTagName("SO2021"));
-        assertTrue(TaskTag.isValidTagName("G: Order"));
-        assertTrue(TaskTag.isValidTagName("G: Utility"));
+        assertTrue(TaskTag.isValidTagName("General"));
     }
 
 }

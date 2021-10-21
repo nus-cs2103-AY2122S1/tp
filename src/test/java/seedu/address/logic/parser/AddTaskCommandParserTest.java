@@ -13,7 +13,6 @@ import static seedu.address.logic.commands.CommandTestUtil.TASKTAG_DESC_ORDER;
 import static seedu.address.logic.commands.CommandTestUtil.TASKTAG_DESC_SEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_SEPT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LABEL_ORDER;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASKTAG_ORDER;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalTasks.ORDER;
@@ -61,9 +60,6 @@ class AddTaskCommandParserTest {
 
         // missing date prefix
         assertParseFailure(parser, LABEL_DESC_ORDER + VALID_DATE_SEPT + TASKTAG_DESC_ORDER, expectedMessage);
-
-        // missing tasktag prefix
-        assertParseFailure(parser, LABEL_DESC_ORDER + DATE_DESC_SEPT + VALID_TASKTAG_ORDER, expectedMessage);
     }
 
     @Test
