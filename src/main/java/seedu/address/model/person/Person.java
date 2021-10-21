@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
@@ -33,6 +34,9 @@ public class Person {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
 
+    // Status fields
+    private final Done done;
+
     /**
      * Every field must be present and not null.
      */
@@ -51,6 +55,7 @@ public class Person {
         this.experience = experience;
         this.tags.addAll(tags);
         this.interview = interview;
+        this.done = new Done();
     }
 
 
@@ -104,6 +109,10 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Done getDone() {
+        return done;
+    }
+
     /**
      * Returns true if both persons have the same email and contact number.
      * This defines a weaker notion of equality between two persons.
@@ -142,14 +151,15 @@ public class Person {
                 && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getExperience().equals(getExperience())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getInterview().equals(getInterview());
+                && otherPerson.getInterview().equals(getInterview())
+                && otherPerson.getDone().equals(getDone());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tags, interview);
+                expectedSalary, levelOfEducation, experience, tags, interview, done);
     }
 
     @Override
@@ -178,8 +188,9 @@ public class Person {
         }
 
         builder.append("; Interview: ")
-                .append(getInterview());
+                .append(getInterview())
+                .append("; ").append(getDone());
 
-        return builder.toString();
+        return builder.append("\n").toString();
     }
 }

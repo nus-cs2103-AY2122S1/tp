@@ -1,10 +1,13 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,6 +16,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
@@ -66,6 +70,37 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseMultipleIndex_oneInvalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleIndex("10 a"));
+    }
+
+    @Test
+    public void parseMultipleIndex_allInvalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleIndex("b a c"));
+    }
+
+    @Test
+    public void parseMultipleIndex_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () ->
+                ParserUtil.parseMultipleIndex(Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseMultipleIndex_validInput_success() throws Exception {
+        // Only 1 space in between
+        assertArrayEquals(new Index[]{INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON},
+                ParserUtil.parseMultipleIndex("1 2 3"));
+
+        // Leading and trailing whitespaces
+        assertArrayEquals(new Index[]{INDEX_FIRST_PERSON, INDEX_THIRD_PERSON, INDEX_SECOND_PERSON},
+                ParserUtil.parseMultipleIndex("  1 3 2  "));
+
+        // Varying whitespaces
+        assertArrayEquals(new Index[]{INDEX_THIRD_PERSON, INDEX_FIRST_PERSON, INDEX_SECOND_PERSON},
+                ParserUtil.parseMultipleIndex("  3     1               2  "));
     }
 
     @Test
