@@ -3,7 +3,11 @@ layout: page
 title: Developer Guide
 ---
 
-This document provides the relevant information for developers-as-users and developers-as-maintainers to learn more about the design architecture and user-related considerations made in designing this application. To learn more about the design, you can explore the 'Design' section for the implementations and schematics. The 'Requirements' section in the Appendix explains on the relevant user stories, use cases and non-functional requirements taken into consideration. The 'Instructions for manual testing' section at the end of the Appendix shows the relevant manual tests one can perform as a sanity check.
+This document provides the relevant information for developers-as-users and developers-as-maintainers to learn more about the design architecture and user-related considerations made in designing this application. 
+
+To learn more about the design, you can explore the 'Design' section for the implementations and schematics. The 'Requirements' section in the Appendix explains on the relevant user stories, use cases and non-functional requirements taken into consideration. The 'Instructions for manual testing' section at the end of the Appendix shows the relevant manual tests one can perform as a sanity check.
+
+relevant non-trivial terminologies used are explained in the 'Glossary' Section.
 
 * Table of Contents
   {:toc}
