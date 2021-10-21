@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import java.util.ArrayList;
 
-import seedu.address.model.person.Remark;
+import seedu.address.model.student.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.StudentList;

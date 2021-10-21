@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import seedu.address.model.Nameable;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Remark;
+import seedu.address.model.student.Remark;
+import seedu.address.model.student.Student;
 
 /**
  * Represents a tuition class in the book
@@ -131,7 +131,7 @@ public class TuitionClass implements Nameable {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Student)) {
             return false;
         }
 
@@ -174,33 +174,33 @@ public class TuitionClass implements Nameable {
     /**
      * Return updated Tuition class after removing student.
      *
-     * @param person the student to be removed.
+     * @param student the student to be removed.
      * @return Updated tuition class.
      */
-    public TuitionClass removeStudent(Person person) {
-        this.studentList.getStudents().remove(person.getName().fullName);
+    public TuitionClass removeStudent(Student student) {
+        this.studentList.getStudents().remove(student.getName().fullName);
         return this;
     }
 
-    public boolean containsStudent(Person person) {
-        return this.studentList.getStudents().contains(person.getName().fullName);
+    public boolean containsStudent(Student student) {
+        return this.studentList.getStudents().contains(student.getName().fullName);
     }
 
     /**
      * Adds a new student to an existing class if the student is not already in the class.
      *
-     * @param person student to be added
+     * @param student student to be added
      * @return the tuition class after modification
      */
-    public TuitionClass addStudent(Person person) {
+    public TuitionClass addStudent(Student student) {
         ArrayList<String> nowStudents = this.studentList.getStudents();
-        String name = person.getName().fullName;
+        String name = student.getName().fullName;
         for (String s: nowStudents) {
             if (s.equals(name)) {
                 return null;
             }
         }
-        nowStudents.add(person.getName().fullName);
+        nowStudents.add(student.getName().fullName);
         return this;
     }
 
