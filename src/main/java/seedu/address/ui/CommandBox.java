@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class CommandBox extends UiPart<Region> {
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final Logger logger = LogsCenter.getLogger("CommandBoxLogger");
 
     private final CommandExecutor commandExecutor;
     private final ArrayList<String> commandHistory;
@@ -61,6 +65,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void showNextCommand() {
         if (index == null || index.getOneBased() > commandHistory.size()) {
+            logger.log(Level.INFO, "No next command.");
             return;
         }
 
@@ -79,6 +84,7 @@ public class CommandBox extends UiPart<Region> {
      */
     private void showPreviousCommand() {
         if (index == null || index.getOneBased() <= 1) {
+            logger.log(Level.INFO, "No previous command.");
             return;
         }
 
@@ -94,6 +100,8 @@ public class CommandBox extends UiPart<Region> {
      * @param text Text to be displayed.
      */
     private void updateCommandTextField(String text) {
+        logger.log(Level.INFO, String.format("Showing command: %1$s", text));
+
         commandTextField.setText(text);
         commandTextField.positionCaret(text.length());
     }

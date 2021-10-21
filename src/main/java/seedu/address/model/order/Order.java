@@ -19,6 +19,7 @@ public class Order {
             "Please follow the format for orders: -o PRODUCT_ID QUANTITY TIME\n"
                     + "Valid formats of time: MM/DD, YYYY/MM/DD\nExample: -o 10312 20 2021/10/20";
     public static final String MESSAGE_CONSTRAINTS_ID = "The product with given ID doesn't exist.";
+    public static final String MESSAGE_CONSTRAINTS_POS_QUANTITY = "Quantity must be a positive integer.";
     public static final String MESSAGE_CONSTRAINTS_QUANTITY = "There is not enough stock for the requested product.";
 
     public final LocalDate time;
@@ -31,6 +32,7 @@ public class Order {
     public Order(LocalDate time, int productId, Quantity quantity, Model model) {
         checkArgument(isValidProductID(productId, model), MESSAGE_CONSTRAINTS_ID);
         Product product = model.getProductById(productId);
+        checkArgument(isPositiveQuantity(quantity), MESSAGE_CONSTRAINTS_POS_QUANTITY);
         checkArgument(isValidQuantity(quantity, product), MESSAGE_CONSTRAINTS_QUANTITY);
 
         this.time = time;
@@ -52,6 +54,10 @@ public class Order {
 
     private static boolean isValidQuantity(Quantity quantity, Product product) {
         return quantity.compareTo(product.getQuantity()) <= 0;
+    }
+
+    private static boolean isPositiveQuantity(Quantity quantity) {
+        return quantity.compareTo(new Quantity("0")) > 0;
     }
 
     @Override

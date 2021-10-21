@@ -45,8 +45,10 @@ public class DeleteClientCommand extends Command {
         }
 
         Client clientToDelete = lastShownList.get(targetIndex.getZeroBased());
-        logger.log(Level.INFO, "deleting client now");
         model.deleteClient(clientToDelete);
+
+        logger.log(Level.INFO, String.format("Deleting client %1$s", clientToDelete.getId()));
+
         return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete));
     }
 

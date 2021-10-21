@@ -27,7 +27,7 @@ public class AddClientCommand extends Command {
                     + PREFIX_PHONE_NUMBER + "PHONE_NUMBER "
                     + "[" + PREFIX_EMAIL + "EMAIL] "
                     + "[" + PREFIX_ADDRESS + "ADDRESS] "
-                    + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME ... ] \n"
+                    + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME]...\n"
                     + "Example: " + COMMAND_WORD + " "
                     + "John Doe "
                     + PREFIX_PHONE_NUMBER + "98765432 "
@@ -39,8 +39,7 @@ public class AddClientCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Sellah";
 
-    private AddClientDescriptor addClientDescriptor;
-    private Client clientToAdd;
+    private final Client clientToAdd;
 
     /**
      * Constructor of the class `AddClientCommand`.
@@ -49,7 +48,6 @@ public class AddClientCommand extends Command {
      */
     public AddClientCommand(AddClientDescriptor addClientDescriptor) {
         requireNonNull(addClientDescriptor);
-        this.addClientDescriptor = addClientDescriptor;
         this.clientToAdd = createAddedClient(addClientDescriptor);
     }
 
