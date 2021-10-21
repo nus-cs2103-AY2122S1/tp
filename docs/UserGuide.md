@@ -75,7 +75,7 @@ Add a task to the task list.
 
 After running the add command the task gets added to the task list as shown below:
 
-![add_command](images/addCommandAfter.jpeg)
+![add_command_after](images/addCommandAfter.jpeg)
 
 Format:
 - <code> add <i>n/task_name t/time d/date tg/level </i> </code>
@@ -97,6 +97,12 @@ Examples:
 ### 3.3 Locating a task by name: `find` (coming soon)
 
 Find tasks with matching keywords and show them in the task list.
+
+![find_command](images/findCommand.jpeg)
+
+After running the find command, the tasks having the mentioned keyword are displayed as shown below:
+
+![find_command_after](images/findCommandAfter.jpeg)
 
 Format: `find keyword (more_keywords) (d/date)`
 
@@ -167,6 +173,12 @@ Examples:
 
 Delete a specific task that has been added to your app.
 
+![delete_command](images/deleteCommand.jpeg)
+
+After running the delete command, the task at that particular index gets deleted as shown below:
+
+![delete_command_after](images/deleteCommandAfter.jpeg)
+
 Format:
 - <code> delete <i>task_id</i> </code>
 - <code> delete <i>n/task_name (d/date)</i> </code>
@@ -187,7 +199,9 @@ Examples:
 
 ### 3.7 Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the Uni-Fy.
+
+![clear_command](images/clear.jpeg)
 
 Format: `clear`
 
