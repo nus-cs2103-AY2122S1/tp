@@ -69,6 +69,10 @@ shadowJar {
     archiveName = 'ailurus.jar'
 }
 
+run {
+    enableAssertions = true
+}
+
 defaultTasks 'clean', 'test'
 
 run {
