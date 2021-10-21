@@ -283,6 +283,53 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: More targeted results.
     * Cons: Need to execute multiple filter commands to search for contacts in more than one category.
 
+### Ratings feature
+
+#### Implementation
+
+The Ratings feature is implemented as an additional field in the `Person` object. Similar to the other fields in the `Person` object, the `rating` field is implemented with the following two operations:
+
+* `AddCommand#execute()` —  Optionally initialises rating of contact added.
+* `EditCommand#execute()` —  Optionally modifies rating of contact added.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The ratings field is not compulsory. If the `add` command is used without specifying a rating for the new contact, the contact will be 'unrated' and assigned a default value of 0. Similarly, when a contact's rating is cleared using `edit` command, it is also assigned a default value of 0.   
+
+</div>
+
+Given below is an example usage scenario and how the rating mechanism behaves at each step.
+
+Step 1. The user launches the application. For each contact, the `PersonCard` object is constructed with rating as one of the fields.
+
+Step 2. The user executes `add ... ra/3` to add a new contact. The `add` command calls `ParserUtil#ParseRating()`, creating a `Rating` object if a valid input rating is received.
+
+Step 3. The user executes `edit 1 ... ra/5` to update the 1st contact's rating. The `edit` command calls `ParserUtil#ParseRating()`, creating a `Rating` object if a valid input rating is received.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the input rating is invalid (i.e. a non-integer or outside of the range 1 to 5), the parsers use `Rating#isValidRating()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the modification on rating.  
+
+</div>
+
+The following sequence diagram shows how ratings are modified using `add` command:
+
+![RatingSequenceDiagram.png](images/RatingSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an `add` command with rating specified:
+
+![img.png](images/RatingActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How user modifies rating field:**
+
+* **Alternative 1 (current choice):** As a field written by `AddCommand` and `EditCommand`.
+    * Pros: Easy to implement.
+    * Cons: Rating a contact is less straightforward. 
+      Ratings do not stand out among another features.
+
+* **Alternative 2:** As an individual command `RateCommand`.
+    * Pros: Dedicated all-in-one feature for ratings, easy modification.
+    * Cons: Duplicates functionality of `AddCommand` and `EditCommand`, not particularly essential.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -455,7 +502,6 @@ The following sequence diagram gives an overview of how `Summary` works:
 * tour guides in Singapore
 * has a need to manage a significant number of contacts
 * has a need to collate and access contacts
-* has a need to find contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -500,16 +546,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide`, unless specified otherwise)
 
 
 **UC01 - Add a Contact**
 
 **MSS**
 
-User decides to add a contact
-User inputs the add command to the interface
-AddressBook informs the user that the contact was added
+Tour Guide decides to add a contact
+Tour Guide inputs the add command to the interface
+AddressBook informs the Tour Guide that the contact was added
 AddressBook displays updated list of contacts
 Use case ends.
 
@@ -520,7 +566,7 @@ Use case ends.
 
   Use case resumes at step 2.
 
-* 2b.  User already exists in the AddressBook
+* 2b.  Contact already exists in the AddressBook
 
     * 2b1. Address books show an error message
 
@@ -531,7 +577,7 @@ Use case ends.
 
 **MSS**
 
-1.  User requests to list all contacts
+1.  Tour Guide requests to list all contacts
 2.  AddressBook shows a list of contacts
 
     Use case ends.
@@ -544,11 +590,11 @@ Use case ends.
 
 
 **UC03 - Delete a Contact**
-***Preconditions: User has <u>listed all contacts UC02</u>***
+***Preconditions: Tour Guide has <u>listed all contacts UC02</u>***
 
 **MSS**
 
-1.  User requests to delete a specific contact in the list
+1.  Tour Guide requests to delete a specific contact in the list
 2.  AddressBook deletes the contact
 
     Use case ends.
@@ -566,7 +612,7 @@ Use case ends.
 
 **MSS**
 
-1.  User requests to find a contact
+1.  Tour Guide requests to find a contact
 2.  AddressBook displays a list of all contacts with the given keywords
 
     Use case ends.
