@@ -87,7 +87,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 :bulb: **Tip:**<br>
 
-* GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
+* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).
 
 * A student can have any number of remarks (including 0).
 
@@ -109,17 +109,17 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 * Adds the lesson with the specified prefixes.
 
-* GRADE here follows the similar requirements when adding a student.
+* `GRADE` here follows the similar requirements when adding a student.
 
-* SUBJECT is limited to 20 characters, and its first letter will be capitalized.
+* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.
 
-* DAY_OF_WEEK can only be these form (with the first letter capitalized): Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.
 
-* START_TIME is in 2400 hours format and can only be between 0900 and 1900 (as lessons can only be conducted between 9am to 9pm).
+* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm).
 
 * Lessons are fixed at two hour periods.
 
-* The cost must be a non-negative number 0.0, 2.0, 3.3, …
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …
 
 </div>
 
@@ -159,10 +159,10 @@ Command Format: `delete INDEX`
 
 * Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The index **must be a positive integer** `1`, `2`, `3`, …
 
 Examples:
-* `list` followed by `delete 2` deletes the student indexed 2 in the TuitiONE.
+* `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### Deleting a lesson: `delete-l`
@@ -173,10 +173,10 @@ Command Format: `delete-l INDEX`
 
 * Deletes the lesson of the specified `INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The index **must be a positive integer** `1`, `2`, `3`, …
 
 Examples:
-* `delete-l 1` deletes the lesson with corresponding index.
+* `delete-l 1` deletes the lesson with corresponding index `1`.
 
 ### Enrolling a student from lesson: `enroll`
 
@@ -191,7 +191,7 @@ Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
   3. has no other lessons with conflicting timing.
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
-* Both indexes **must be a positive integer** 1, 2, 3, …
+* Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
 Examples:
 
@@ -206,7 +206,7 @@ Command Format: `unenroll STUDENT_INDEX l/LESSON_INDEX`
 * Unenroll the student identified by `STUDENT_INDEX` in the displayed student list from the specific lesson identified by `LESSON_INDEX` in the displayed lesson list.
 * `STUDENT_INDEX` refers to the index number shown in the displayed student list.
 * `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
-* Both indexes **must be a positive integer** 1, 2, 3, …
+* Both indexes **must be a positive integer** `1`, `2`, `3`, …
 
 Examples:
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
