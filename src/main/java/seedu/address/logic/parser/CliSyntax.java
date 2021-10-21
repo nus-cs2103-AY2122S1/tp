@@ -11,12 +11,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_STUDENT_ID = new Prefix("i/");
     public static final Prefix PREFIX_MODULE_NAME = new Prefix("m/");
-<<<<<<< HEAD
-    public static final Prefix PREFIX_NAME = new Prefix("n/");
-=======
     public static final Prefix PREFIX_NEW_MODULE_NAME = new Prefix("mn/");
     public static final Prefix PREFIX_NAME = new Prefix("n/"); // do we want to reuse this prefix for anything?
->>>>>>> master
     // public static final Prefix PREFIX_STUDENT_NAME = new Prefix("s/");
     public static final Prefix PREFIX_TELE_HANDLE = new Prefix("t/");
     public static final Prefix PREFIX_TASK_ID = new Prefix("ti/");
