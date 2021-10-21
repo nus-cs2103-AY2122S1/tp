@@ -281,6 +281,22 @@ Examples:
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
+### Marking an applicant : `mark`
+
+Marks a specific applicant by index from the list in RecruitIn as 'Done' (have been attended to).
+
+Format: `mark INDEX`
+
+* Marks an applicant at the specified `INDEX` as 'Done'.
+* The `INDEX` refers to the index number shown in the displayed applicants list.
+* `INDEX` **must be a positive integer** 1, 2, 3, …​
+* `INDEX` uses **1-based indexing**.
+* `INDEX` should not exceed the total number of applicants in the displayed applicants list.
+
+Examples:
+* `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as 'Done'.
+* `find John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
+
 ### Exiting the program : `exit`
 
 Exits the program.
