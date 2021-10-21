@@ -233,7 +233,7 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 * `student -de 1 1` deletes the first exam from the first student.
 </details>
 
-### Grouping students 
+### Grouping students
 
 Groups students by their names together. This grouping helps to distinguish between various tuition groups.
 
@@ -285,7 +285,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/20211231` edits the deadline to 20211231 
+* `task -e 4 d/20211231` edits the deadline to 20211231
 
 ### Deleting a task `[coming in v1.3]`
 

@@ -242,13 +242,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 #### Implementation
 
-We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by
 the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
 is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
 
-The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId` 
-includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the 
-`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without 
+The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId`
+includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the
+`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without
 exhausting all classes that have `UniqueId` as instance.
 
 When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
@@ -276,14 +276,14 @@ When storing references of `HasUniqueId`, we can simply store their id, instead 
 
 #### Implementation
 
-Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task` 
-object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object 
+Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task`
+object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object
 and the `Task` object.
 
 ![TaskAssignment](images/TaskAssignmentDiagram.png)
 
 The implementation currently supports two task commands:
-- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object, 
+- `AssignTaskToPersonCommand`: when executed, adds the `UniqueId` representing the `Task` to the set of `UniqueId`s stored in the `Person` object,
 and adds the `UniqueId` representing the `Person` to the set of `UniqueId`s stored in the `Task` object
 - `UnassignTaskToPersonCommand`: when executed, removes the `UniqueId` representing the `Task` from the set of `UniqueId`s stored in the `Person` object,
 and removes the `UniqueId` representing the `Person` from the set of `UniqueId`s stored in the `Task` object
@@ -336,12 +336,12 @@ task. However, this seemed inefficient and hence, we went with the current imple
 
 The command to view a student is facilitated through the `PersonCommandsParser` class. The `PersonCommandsParser` class
 checks the command word given by the user and creates a `ViewPersonCommandParser` object which also creates a `ViewPersonCommand`
-object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be 
+object. The `ViewPersonCommand` object returns the command back to the `LogicManager` class which allows the 'view command' to be
 executed. The `ViewPersonCommand` object gets the list of students via `Model#getfilteredPersonsList()`. It then obtains the
 target student via `AddressBook#get(index)` to return the respective `Person` at the index, hence displaying the details of the student in the 'Result Display'.
 
 #### Implementation rationale
-* `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands 
+* `PersonCommandParser` helps filter out `ViewPersonCommandParser` as it helps differentiate the various commands
   related to student.
 
 #### Alternatives considered
@@ -362,7 +362,7 @@ a `Subject` and a `Timeslot`, which describes a Lesson well.
 A `NoOverlapLessonList` contains a list of lessons, in which the lessons within must not overlap. Overlap is defined as falling on the
 same day and with timings that run within each other.
 
-`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular 
+`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular
 
 The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use maintain knowledge of a
 lesson and its attendees. For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
@@ -373,7 +373,7 @@ a `LessonAssignable`.
 #### Implementation Rationale
 
 `NoOverlapLessonList` is useful in cases such as students where they should not have lessons that overlap. `LessonWithAttendees`
-is a useful wrapper class to obtain the full details of a lesson (the lesson details and the details of attendees), since a lesson 
+is a useful wrapper class to obtain the full details of a lesson (the lesson details and the details of attendees), since a lesson
 does not have a direct reference to its attendee.
 
 Lessons were created to be held by other classes, and thus does not hold information about its attendees. We acknowledge that a
