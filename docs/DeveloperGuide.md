@@ -263,8 +263,8 @@ Step 2. The user executes `filter -cid B01` to display all the students whose Cl
 The following UML sequence diagram shows how the filter command works.
 
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate` 
-, `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate`
+, `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML,
 the lifeline reaches the end of diagram.>
 
 </div>
@@ -337,7 +337,7 @@ CS2100 TAs who
 
 **Value proposition**:
 
-CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students. 
+CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
 
 
 ### User stories

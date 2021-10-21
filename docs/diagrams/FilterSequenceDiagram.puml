@@ -52,13 +52,13 @@ activate Model
 loop number of students in ProgrammerError
     Model -> StudentDetailContainsPredicate : test(Student)
     activate StudentDetailContainsPredicate
-    
+
     StudentDetailContainsPredicate -> QueryStudentDescriptor : doesStudentMatchDescriptor(Student)
     activate QueryStudentDescriptor
-    
+
     QueryStudentDescriptor --> StudentDetailContainsPredicate
     deactivate QueryStudentDescriptor
-    
+
     StudentDetailContainsPredicate --> Model
     deactivate StudentDetailContainsPredicate
 end
