@@ -210,7 +210,9 @@ Step 2: With all checks done, <u>`l:Lesson`</u> object will be added into the `M
 
 ![AddLessonState1](images/DeveloperGuideImage/AddLessonState1-Final_state.png)
 
-Sequence diagram
+The following sequence diagram shows how add lesson operation works:
+
+![AddLessonSequenceDiagram](images/DeveloperGuideImage/AddLessonSequenceDiagram.png)
 
 Activity diagram
 
