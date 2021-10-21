@@ -22,10 +22,7 @@ import seedu.tracker.logic.commands.CommandResult;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.logic.parser.exceptions.ParseException;
-import seedu.tracker.model.Model;
-import seedu.tracker.model.ModelManager;
-import seedu.tracker.model.ReadOnlyModuleTracker;
-import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.*;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.JsonModuleTrackerStorage;
 import seedu.tracker.storage.JsonUserPrefsStorage;
@@ -129,7 +126,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

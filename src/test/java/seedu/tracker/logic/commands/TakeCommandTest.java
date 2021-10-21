@@ -14,10 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
-import seedu.tracker.model.Model;
-import seedu.tracker.model.ModelManager;
-import seedu.tracker.model.ModuleTracker;
-import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.*;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
@@ -25,7 +22,7 @@ import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
 
 public class TakeCommandTest {
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -52,7 +49,7 @@ public class TakeCommandTest {
 
         String expectedMessage = String.format(TakeCommand.MESSAGE_SUCCESS, scheduledModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
         expectedModel.setModule(model.getFilteredModuleList().get(0), scheduledModule);
 
         assertCommandSuccess(takeCommand, model, expectedMessage, expectedModel);
@@ -71,7 +68,7 @@ public class TakeCommandTest {
 
         String expectedMessage = String.format(TakeCommand.MESSAGE_SUCCESS, scheduledModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
         expectedModel.setModule(model.getFilteredModuleList().get(0), scheduledModule);
 
         assertCommandSuccess(takeCommand, model, expectedMessage, expectedModel);

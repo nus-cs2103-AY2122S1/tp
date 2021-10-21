@@ -96,10 +96,11 @@ public class ModelManagerTest {
         ModuleTracker moduleTracker = new ModuleTrackerBuilder().withModule(CS2103T).withModule(CS2101).build();
         ModuleTracker differentModuleTracker = new ModuleTracker();
         UserPrefs userPrefs = new UserPrefs();
+        UserInfo userInfo = new UserInfo();
 
         // same values -> returns true
-        modelManager = new ModelManager(moduleTracker, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(moduleTracker, userPrefs);
+        modelManager = new ModelManager(moduleTracker, userPrefs, userInfo);
+        ModelManager modelManagerCopy = new ModelManager(moduleTracker, userPrefs, userInfo);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -112,7 +113,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different moduleTrackers -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentModuleTracker, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentModuleTracker, userPrefs, userInfo)));
 
         // different filteredList -> returns false
         /*String[] keywords = ALICE.getName().fullName.split("\\s+");
@@ -125,6 +126,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setModuleTrackerFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(moduleTracker, differentUserPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(moduleTracker, differentUserPrefs, userInfo)));
     }
 }

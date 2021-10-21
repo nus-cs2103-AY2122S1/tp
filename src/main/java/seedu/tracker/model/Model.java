@@ -16,6 +16,14 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Module> PREDICATE_SHOW_ALL_MODULES = unused -> true;
 
+    void setUserInfo(ReadOnlyUserInfo userInfo);
+    ReadOnlyUserInfo getUserInfo();
+    void setCurrentSemester(AcademicCalendar academicCalendar);
+    AcademicCalendar getCurrentSemester();
+    void setMcGoal(Mc mc);
+    Mc getMcGoal();
+
+
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
@@ -53,14 +61,6 @@ public interface Model {
 
     /** Returns the ModuleTracker */
     ReadOnlyModuleTracker getModuleTracker();
-
-    void setCurrentSemester(AcademicCalendar academicCalendar);
-
-    AcademicCalendar getCurrentSemester();
-
-    void setMcGoal(Mc mc);
-
-    Mc getMcGoal();
 
     /**
      * Returns true if a module with the same identity as {@code module} exists in the moduleTracker.

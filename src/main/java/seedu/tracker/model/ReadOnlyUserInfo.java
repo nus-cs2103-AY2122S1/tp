@@ -1,10 +1,12 @@
 package seedu.tracker.model;
 
-import javafx.beans.value.ObservableObjectValue;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.module.Mc;
 
 public interface ReadOnlyUserInfo {
-    /**
-     * Returns an user info object.
-     */
-    ObservableObjectValue<UserInfo> getUserInfo();
+
+    AcademicCalendar getCurrentSemester();
+
+    Mc getMcGoal();
+
 }

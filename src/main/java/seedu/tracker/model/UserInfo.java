@@ -1,7 +1,7 @@
 package seedu.tracker.model;
 
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableObjectValue;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
@@ -16,15 +16,13 @@ import static java.util.Objects.requireNonNull;
  * including MC goal and current semester the user sets.
  */
 public class UserInfo implements ReadOnlyUserInfo {
-    AcademicCalendar currentSemester;
-    Mc mcGoal;
+    private AcademicCalendar currentSemester = new AcademicCalendar(new AcademicYear(1), new Semester(1));
+    private Mc mcGoal = new Mc(120);
 
+    /**
+     * Creates a {@code UserInfo} with default values.
+     */
     public UserInfo() {}
-
-    public UserInfo(AcademicCalendar currentSemester, Mc mcGoal) {
-        this.currentSemester = currentSemester;
-        this.mcGoal = mcGoal;
-    }
 
     /**
      * Creates an UserInfo using the details in the {@code toBeCopied}
@@ -35,11 +33,13 @@ public class UserInfo implements ReadOnlyUserInfo {
     }
 
     /**
-     * Replaces the contents of the User Info with {@code details}.
+     * Creates a {@code UserInfo} with the details.
      */
-    public void setUserInfo(UserInfo details) {
-        this.currentSemester = details.getCurrentSemester();
-        this.mcGoal = details.getMcGoal();
+    @JsonCreator
+    public UserInfo(@JsonProperty("currentSemester") AcademicCalendar currentSemester,
+                    @JsonProperty("mcGoal") Mc mcGoal) {
+        this.currentSemester = currentSemester;
+        this.mcGoal = mcGoal;
     }
 
     /**
@@ -47,11 +47,17 @@ public class UserInfo implements ReadOnlyUserInfo {
      */
     public void resetData(ReadOnlyUserInfo newData) {
         requireNonNull(newData);
-
-        setUserInfo(newData.getUserInfo().get());
+        setCurrentSemester(newData.getCurrentSemester());
+        setMcGoal(newData.getMcGoal());
     }
 
-
+    /**
+     * Replaces the contents of the User Info with {@code details}.
+     */
+    public void setUserInfo(UserInfo details) {
+        this.currentSemester = details.getCurrentSemester();
+        this.mcGoal = details.getMcGoal();
+    }
 
     public AcademicCalendar getCurrentSemester() {
         return currentSemester;
@@ -66,6 +72,7 @@ public class UserInfo implements ReadOnlyUserInfo {
     }
 
     public void setCurrentSemester(AcademicCalendar currentSemester) {
+        requireNonNull(currentSemester);
         this.currentSemester = currentSemester;
     }
 
@@ -74,12 +81,8 @@ public class UserInfo implements ReadOnlyUserInfo {
     }
 
     public void setMcGoal(Mc mcGoal) {
+        requireNonNull(mcGoal);
         this.mcGoal = mcGoal;
-    }
-
-    @Override
-    public ObservableObjectValue<UserInfo> getUserInfo() {
-        return new SimpleObjectProperty<>(this);
     }
 
     /**
@@ -95,9 +98,11 @@ public class UserInfo implements ReadOnlyUserInfo {
         if (!(other instanceof UserInfo)) {
             return false;
         }
-
+        
         UserInfo otherInfo = (UserInfo) other;
+        assert other != null : "The UserInfo object shouldn't be null";
 
+        assert otherInfo.mcGoal != null : "Mc Goal shouldn't be null";
         boolean result = otherInfo.getMcGoal().equals(getMcGoal())
                 && otherInfo.getCurrentSemester().equals(getCurrentSemester());
 

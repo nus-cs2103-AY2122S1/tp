@@ -5,10 +5,7 @@ import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.tracker.model.Model;
-import seedu.tracker.model.ModelManager;
-import seedu.tracker.model.ModuleTracker;
-import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.*;
 
 public class ClearCommandTest {
 
@@ -22,8 +19,8 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyModuleTracker_success() {
-        Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+        Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
         expectedModel.setModuleTracker(new ModuleTracker());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

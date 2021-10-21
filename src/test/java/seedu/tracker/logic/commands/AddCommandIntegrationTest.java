@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
@@ -22,7 +23,7 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+        model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
     }
 
     @Test
@@ -33,7 +34,7 @@ public class AddCommandIntegrationTest {
                 .withMc(4);
         Module validModule = validModuleBuilder.build();
 
-        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         expectedModel.addModule(validModule);
 
         assertCommandSuccess(new AddCommand(validModule), model,

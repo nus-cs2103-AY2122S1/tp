@@ -2,14 +2,14 @@
   "userInfo": {
     "currentSemester": {
       "year": {
-        "year": 1
+        "year": 2
       },
       "semester": {
-        "semester": 1
+        "semester": 2
       }
     },
     "mcGoal": {
-      "mc": 120
+      "mc": 160
     }
   }
 }

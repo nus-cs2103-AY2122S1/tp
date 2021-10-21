@@ -15,19 +15,9 @@ import seedu.tracker.commons.util.ConfigUtil;
 import seedu.tracker.commons.util.StringUtil;
 import seedu.tracker.logic.Logic;
 import seedu.tracker.logic.LogicManager;
-import seedu.tracker.model.Model;
-import seedu.tracker.model.ModelManager;
-import seedu.tracker.model.ModuleTracker;
-import seedu.tracker.model.ReadOnlyModuleTracker;
-import seedu.tracker.model.ReadOnlyUserPrefs;
-import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.*;
 import seedu.tracker.model.util.SampleDataUtil;
-import seedu.tracker.storage.JsonModuleTrackerStorage;
-import seedu.tracker.storage.JsonUserPrefsStorage;
-import seedu.tracker.storage.ModuleTrackerStorage;
-import seedu.tracker.storage.Storage;
-import seedu.tracker.storage.StorageManager;
-import seedu.tracker.storage.UserPrefsStorage;
+import seedu.tracker.storage.*;
 import seedu.tracker.ui.Ui;
 import seedu.tracker.ui.UiManager;
 
@@ -56,12 +46,14 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        UserInfoStorage userInfoStorage = new JsonUserInfoStorage(config.getUserInfoFilePath());
+        UserInfo userInfo = initInfo(userInfoStorage);
         ModuleTrackerStorage moduleTrackerStorage = new JsonModuleTrackerStorage(userPrefs.getModuleTrackerFilePath());
         storage = new StorageManager(moduleTrackerStorage, userPrefsStorage);
 
         initLogging(config);
 
-        model = initModelManager(storage, userPrefs);
+        model = initModelManager(storage, userPrefs, userInfo);
 
         logic = new LogicManager(model, storage);
 
@@ -73,7 +65,7 @@ public class MainApp extends Application {
      * The data from the sample mod tracker will be used instead if {@code storage}'s mod tracker is not found,
      * or an empty mod tracker will be used instead if errors occur when reading {@code storage}'s mod tracker.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, ReadOnlyUserInfo userInfo) {
         Optional<ReadOnlyModuleTracker> moduleTrackerOptional;
         ReadOnlyModuleTracker initialData;
         try {
@@ -90,7 +82,7 @@ public class MainApp extends Application {
             initialData = new ModuleTracker();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, userInfo);
     }
 
     private void initLogging(Config config) {
@@ -131,6 +123,38 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
         return initializedConfig;
+    }
+
+    /**
+     * Returns a {@code UserInfo} using the file at {@code storage}'s user info file path,
+     * or a new {@code UserInfo} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected UserInfo initInfo(UserInfoStorage storage) {
+        Path infoFilePath = storage.getUserInfoFilePath();
+        logger.info("Using prefs file : " + infoFilePath);
+
+        UserInfo initializedInfo;
+        try {
+            Optional<UserInfo> infoOptional = storage.readUserInfo();
+            initializedInfo = infoOptional.orElse(new UserInfo());
+        } catch (DataConversionException e) {
+            logger.warning("UserInfo file at " + infoFilePath + " is not in the correct format. "
+                    + "Using default user info");
+            initializedInfo = new UserInfo();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty ModuleTracker");
+            initializedInfo = new UserInfo();
+        }
+
+        //Update info file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveUserInfo(initializedInfo);
+        } catch (IOException e) {
+            logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
+        }
+
+        return initializedInfo;
     }
 
     /**
