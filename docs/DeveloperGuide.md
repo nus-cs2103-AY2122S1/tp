@@ -173,6 +173,29 @@ the `execute("export newfriends.json")` API call.
 
 ![ExportSequenceDiagram](images/ExportSequenceDiagram.png)
 
+### Find command
+
+#### Implementation
+
+The Find command accepts names, tags, Telegram handles or Github usernames as parameters with the following prefixes :
+* no prefix : for names
+* `t/` : for tags
+* `te/` : for Telegram handles
+* `g/` : for Github usernames
+
+and allows users to search for contacts based on the specified criterion.
+It is facilitated by the `FindCommandParser` class, which implements `Parser<FindCommand>`.
+It implements the `parse()` method, which parses the find parameter (eg: name, tag, etc) and returns a `FindCommand`, to be executed in
+`LogicManager`.
+
+The `FindCommand` class extends `Command`. Its instance is created by providing a predicate (condition to be fulfilled by the elements of 
+the `FilteredPersonList` that contains the contact(s) matching the find parameters). Its implementation of
+`Command#execute()` is where the updation of the `FilteredPersonList` to reflect the search performed on the contacts in the address book.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` and `Model` components for
+the `execute("find te/alex_1")` API call.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 ### Welcome Window
 
 #### Implementation
