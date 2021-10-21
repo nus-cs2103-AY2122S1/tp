@@ -28,7 +28,7 @@ Interested to know more? Take a look at our Quick Start guide. Enjoy!
 1. Copy the file to the folder you want to use as the _home folder_ for your app.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![find_command](images/UIUpdated.png)
 
 1. Type the command in the command box and press Enter to execute it.
    * Refer to the [**Features**](#3-features) below for details of each command.
@@ -124,6 +124,8 @@ Examples:
 ### 3.4 Showing Tasks: `show` (coming soon)
 
 Show all tasks that have been added to the app in a specific week.
+
+![show_command](images/showCommand41.jpeg)
 
 Format:
 - <code> show <i>week_number</i> </code>

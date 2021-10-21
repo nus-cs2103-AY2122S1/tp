@@ -6,7 +6,7 @@ title: Uni-Fy
 [![CI Status](https://github.com/AY2122S1-CS2103T-W17-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-W17-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp/branch/master/graph/badge.svg?token=AV4MFDJWM3)](https://codecov.io/gh/AY2122S1-CS2103T-W17-4/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/UIUpdated.png)
 
 **Uni-Fy is a desktop application for managing your academic tasks.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
