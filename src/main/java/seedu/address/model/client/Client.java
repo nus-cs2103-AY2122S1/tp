@@ -3,8 +3,10 @@ package seedu.address.model.client;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.Category;
 import seedu.address.model.commons.ID;
@@ -170,7 +172,11 @@ public class Client implements Category {
             builder.append("; Address: ").append(address);
         }
 
-        if (!orders.isEmpty()) {
+        List<Order> filteredOrders = orders.stream()
+                .filter(order -> Order.isPositiveQuantity(order.quantity))
+                .collect(Collectors.toList());
+
+        if (!filteredOrders.isEmpty()) {
             builder.append("\nOrders: ");
             orders.forEach(order -> builder.append(order).append(", "));
             builder.deleteCharAt(builder.length() - 2);
