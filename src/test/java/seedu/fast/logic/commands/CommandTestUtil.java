@@ -140,18 +140,6 @@ public class CommandTestUtil {
      * - the address book, filtered person list and selected person in {@code actualModel} is changed
      * until the first detect invalid input.
      */
-    // use for multiple delete
-    public static void assertCommandFailure(Command command, Model actualModel, Model expectedModel,
-           String expectedMessage) {
-        // we are unable to defensively copy the model for comparison later, so we can
-        // only do so by copying its components.
-        Fast expectedAddressBook = new Fast(expectedModel.getFast());
-        List<Person> expectedFilteredList = new ArrayList<>(expectedModel.getFilteredPersonList());
-
-        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getFast());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
-    }
 
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the

@@ -33,16 +33,4 @@ public class DeleteCommandParserTest {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 DeleteCommand.MESSAGE_USAGE));
     }
-
-    @Test
-    public void parse_validArgsMultiple_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1 2 3",
-                new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
-    }
-
-    @Test
-    public void parse_invalidArgsMultiple_returnsDeleteCommand() {
-        assertParseFailure(parser, "2 a 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                DeleteCommand.MESSAGE_USAGE));
-    }
 }
