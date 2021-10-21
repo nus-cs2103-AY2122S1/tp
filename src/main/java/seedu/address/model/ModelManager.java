@@ -106,6 +106,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasModuleLesson(ModuleLesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasLesson(lesson);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }

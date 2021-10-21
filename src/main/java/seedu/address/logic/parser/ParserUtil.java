@@ -12,6 +12,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessoncode.LessonCode;
+import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
@@ -177,5 +179,33 @@ public class ParserUtil {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code day} into a {@code LessonDay}.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static LessonDay parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        if (!LessonDay.isValidDay(trimmedDay)) {
+            throw new ParseException(LessonDay.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonDay(trimmedDay);
+    }
+
+    /**
+     * Parses a {@code day} into a {@code LessonDay}.
+     *
+     * @throws ParseException if the given {@code day} is invalid.
+     */
+    public static LessonTime parseTime(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!LessonDay.isValidDay(trimmedTime)) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonTime(trimmedTime);
     }
 }
