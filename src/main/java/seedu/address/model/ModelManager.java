@@ -219,9 +219,21 @@ public class ModelManager implements Model {
     @Override
     public void addToOrder(Item item) {
         requireNonNull(item);
-        assert(hasUnclosedOrder());
+        assert hasUnclosedOrder();
 
         optionalOrder.ifPresent(order -> order.addItem(item));
+    }
+
+    /**
+     * Returns the items in the order that match the {@code itemDescriptor}.
+     * @see ItemDescriptor#isMatch(Item) 
+     */
+    @Override
+    public List<Item> getFromOrder(ItemDescriptor itemDescriptor) {
+        requireNonNull(itemDescriptor);
+        assert hasUnclosedOrder();
+
+        optionalOrder.map(order -> order.getItems(itemDescriptor)).get();
     }
 
     /**
@@ -232,7 +244,7 @@ public class ModelManager implements Model {
         requireNonNull(item);
         assert hasUnclosedOrder();
 
-        optionalOrder.get().removeItem(item);
+        optionalOrder.ifPresent(order -> order.removeItem(item));
     }
 
     /**

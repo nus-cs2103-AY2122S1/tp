@@ -64,6 +64,15 @@ public class Order {
     }
 
     /**
+     * Returns list of items in the inventory that matches the given {@code ItemDescriptor}
+     * @see ItemDescriptor#isMatch(Item)
+     */
+    public List<Item> getItems(ItemDescriptor descriptor) {
+        requireNonNull(descriptor);
+        return items.get(descriptor);
+    }
+
+    /**
      * Gets a list of items in the order.
      */
     public ObservableList<Item> getOrderItems() {

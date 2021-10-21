@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,6 +21,7 @@ public class AddToOrderCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an item to current order list. "
             + "Parameters: "
             + "NAME "
+            + "Or " + PREFIX_ID + "ID"
             + PREFIX_COUNT + "COUNT "
             + "Example: " + COMMAND_WORD + " "
             + "Milk "

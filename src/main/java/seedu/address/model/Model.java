@@ -133,6 +133,12 @@ public interface Model {
     void removeFromOrder(Item item);
 
     /**
+     * Returns the items in the order that match the {@code itemDescriptor}.
+     * @see ItemDescriptor#isMatch(Item)
+     */
+    public List<Item> getFromOrder(ItemDescriptor itemDescriptor);
+
+    /**
      * Destroys the current order when ordering finish.
      */
     void transactAndClearOrder();
