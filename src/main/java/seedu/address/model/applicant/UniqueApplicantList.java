@@ -102,6 +102,9 @@ public class UniqueApplicantList implements Iterable<Applicant> {
         internalList.removeIf(condition);
     }
 
+    /**
+     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}
+     */
     public void updateApplicantsWithPosition(Position positionToEdit,
                                              Position editedPosition) {
         ListIterator<Applicant> iterator = internalList.listIterator();

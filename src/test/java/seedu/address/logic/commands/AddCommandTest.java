@@ -238,6 +238,11 @@ public class AddCommandTest {
         public void updateFilteredPositionList(Predicate<Position> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateApplicantsWithPosition(Position positionToEdit, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

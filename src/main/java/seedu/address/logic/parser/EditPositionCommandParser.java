@@ -29,7 +29,8 @@ public class EditPositionCommandParser implements Parser<EditPositionCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPositionCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditPositionCommand.MESSAGE_USAGE), pe);
         }
 
         EditPositionDescriptor editPositionDescriptor = new EditPositionDescriptor();
@@ -37,7 +38,8 @@ public class EditPositionCommandParser implements Parser<EditPositionCommand> {
             editPositionDescriptor.setTitle(ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get()));
         }
         if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
-            editPositionDescriptor.setDescription(ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get()));
+            editPositionDescriptor.setDescription(ParserUtil.parseDescription(
+                    argMultimap.getValue(PREFIX_DESCRIPTION).get()));
         }
 
         if (!editPositionDescriptor.isAnyFieldEdited()) {
