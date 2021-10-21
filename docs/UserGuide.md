@@ -90,7 +90,7 @@ to help you with the installation. Follow the guide for your operation system fo
 
 #### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Shows a command summary table as well as a link to access this user guide page.
 
 ![help message](images/helpMessage.png)
 
@@ -184,16 +184,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-
-#### Viewing a student's details: `view`
-
-> ❕❕ <b>Note:</b> This feature is subject to changes
-
-View data of student with specified index in detail.
-
-![view student details](images/viewAlexDetail.png)
-
-Format: `view INDEX`
 
 #### Listing all students: `list`
 
@@ -404,7 +394,9 @@ Format: `clear`
 
 #### Viewing all tags: `tag`
 
-Shows all the tags that user has created in TAB.
+Shows all the tags that you have created together with the number of students labelled with each tag.
+
+![taglist](images/taglist.png)
 
 Format: `tag`
 
@@ -430,9 +422,12 @@ Format: `exit`
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**Q:** How do I transfer my data to another Computer?<br>
+**A:** Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q:** I am using a Mac and when I tried to open `Tab.jar`, Mac shows “`TAB.jar` cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
+**A:** Go to `System Preferences` → `Security & Privacy` → `General` and click `Open Anyway` at the bottom as shown in the following screenshot.
+![macSecurity](images/macSecurity.png)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
