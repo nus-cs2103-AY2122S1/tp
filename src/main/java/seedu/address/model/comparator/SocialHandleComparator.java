@@ -1,4 +1,4 @@
-package seedu.address.model.sorter;
+package seedu.address.model.comparator;
 
 import seedu.address.model.person.Person;
 
@@ -9,6 +9,15 @@ public class SocialHandleComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
+        if (p1.getSocialHandle() == null) {
+            if (p2.getSocialHandle() == null) {
+                return 0;
+            }
+            return 1;
+        }
+        if (p2.getSocialHandle() == null) {
+            return -1;
+        }
         return p1.getSocialHandle().value.compareTo(p2.getSocialHandle().value);
     }
 
