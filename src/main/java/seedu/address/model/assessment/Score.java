@@ -16,7 +16,7 @@ public class Score {
      */
     public Score(int score, int totalScore) {
         requireNonNull(score);
-        requireNonNull(score);
+        requireNonNull(totalScore);
         this.score = score;
         this.totalScore = totalScore;
     }
