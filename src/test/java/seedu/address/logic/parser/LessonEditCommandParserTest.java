@@ -4,17 +4,19 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.FUTURE_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.HOMEWORK_DESC_TEXTBOOK;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOMEWORK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TIME_RANGE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PAST_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.SUBJECT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TIME_RANGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_PAST;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
-import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_DATE;
 import static seedu.address.logic.commands.LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
@@ -32,6 +34,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -79,6 +82,9 @@ class LessonEditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
+        // invalid date
+        assertParseFailure(parser, "1 1" + INVALID_DATE_DESC, Date.MESSAGE_CONSTRAINTS);
+
         // invalid subject
         assertParseFailure(parser, "1 1" + INVALID_SUBJECT_DESC, Subject.MESSAGE_CONSTRAINTS);
 
@@ -103,9 +109,10 @@ class LessonEditCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         Index lessonTargetIndex = INDEX_FIRST_LESSON;
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-                + TIME_RANGE_DESC + SUBJECT_DESC + HOMEWORK_DESC_TEXTBOOK;
+            + HOMEWORK_DESC_TEXTBOOK + SUBJECT_DESC + TIME_RANGE_DESC + FUTURE_DATE_DESC;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withDate(VALID_DATE_FUTURE)
                 .withTimeRange(VALID_TIME_RANGE)
                 .withSubject(VALID_SUBJECT)
                 .withHomeworkSet(VALID_HOMEWORK_TEXTBOOK).build();
@@ -136,10 +143,16 @@ class LessonEditCommandParserTest {
         Index targetIndex = INDEX_THIRD_PERSON;
         Index lessonTargetIndex = INDEX_SECOND_LESSON;
 
-        // time range
-        String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + TIME_RANGE_DESC;
-        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withTimeRange(VALID_TIME_RANGE).build();
+        // date
+        String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + PAST_DATE_DESC;
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder().withDate(VALID_DATE_PAST).build();
         LessonEditCommand expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // time range
+        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased() + TIME_RANGE_DESC;
+        descriptor = new EditLessonDescriptorBuilder().withTimeRange(VALID_TIME_RANGE).build();
+        expectedCommand = new LessonEditCommand(targetIndex, lessonTargetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // subject
@@ -162,10 +175,11 @@ class LessonEditCommandParserTest {
         Index lessonTargetIndex = INDEX_THIRD_LESSON;
 
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-                + TIME_RANGE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
+                + FUTURE_DATE_DESC + PAST_DATE_DESC + TIME_RANGE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
                 + HOMEWORK_DESC_TEXTBOOK + HOMEWORK_DESC_TEXTBOOK;
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+            .withDate(VALID_DATE_PAST)
             .withTimeRange(VALID_TIME_RANGE)
             .withSubject(VALID_SUBJECT)
             .withHomeworkSet(VALID_HOMEWORK_TEXTBOOK).build();
@@ -181,23 +195,10 @@ class LessonEditCommandParserTest {
         Index lessonTargetIndex = INDEX_THIRD_LESSON;
 
         String userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-            + FUTURE_DATE_DESC + HOMEWORK_DESC_TEXTBOOK;
-
-        // disallow edits to date
-        assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_DATE);
-
-        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
             + " " + PREFIX_RECURRING + HOMEWORK_DESC_TEXTBOOK;
 
         // disallow edits to type of lesson
         assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_TYPE);
-
-        // attempt to edit date and type, only show first (date) message
-        userInput = targetIndex.getOneBased() + " " + lessonTargetIndex.getOneBased()
-            + " " + PREFIX_RECURRING + PAST_DATE_DESC;
-
-        // disallow edits to date
-        assertParseFailure(parser, userInput, MESSAGE_ATTEMPT_TO_EDIT_DATE);
     }
 
     @Test

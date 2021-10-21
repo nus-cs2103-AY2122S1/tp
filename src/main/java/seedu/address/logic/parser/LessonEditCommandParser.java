@@ -35,16 +35,9 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
                 PREFIX_SUBJECT, PREFIX_HOMEWORK);
 
-        // don't allow changes to date
-        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_DATE);
-
-        }
-
         // don't allow changes to type of lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
             throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE);
-
         }
 
         Index[] indices;
@@ -57,6 +50,10 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
+
+        if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+            editLessonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+        }
 
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             editLessonDescriptor.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));

@@ -35,7 +35,7 @@ public class LessonUtil {
      */
     public static String getLessonEditCommand(int index, int indexToEdit, Lesson lesson) {
         return LessonEditCommand.COMMAND_WORD + " " + index + " " + indexToEdit + " "
-            + getLessonDetailsWithoutDateAndRecurrence(lesson);
+            + getLessonDetailsWithoutRecurrence(lesson);
     }
 
     /**
@@ -58,9 +58,10 @@ public class LessonUtil {
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getLessonDetailsWithoutDateAndRecurrence(Lesson lesson) {
+    public static String getLessonDetailsWithoutRecurrence(Lesson lesson) {
         StringBuilder sb = new StringBuilder();
 
+        sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
         sb.append(PREFIX_TIME + lesson.getTimeRange().value + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
         lesson.getHomework().stream().forEach(

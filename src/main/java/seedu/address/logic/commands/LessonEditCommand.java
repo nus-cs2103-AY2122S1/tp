@@ -55,8 +55,6 @@ public class LessonEditCommand extends UndoableCommand {
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2$s\nfor student: %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
     public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!.";
-    public static final String MESSAGE_ATTEMPT_TO_EDIT_DATE = "You cannot edit the start date of a lesson. Please add "
-            + " another lesson if you wish to do so.";
     public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE = "You cannot edit the type of a lesson. Please add another"
             + " lesson if you wish to do so.";
 
@@ -135,7 +133,8 @@ public class LessonEditCommand extends UndoableCommand {
     private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor) {
         assert lessonToEdit != null;
 
-        Date updatedDate = lessonToEdit.getStartDate(); // Do not allow changes to date
+        Date updatedDate = editLessonDescriptor.getDate()
+                .orElse(lessonToEdit.getStartDate());
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange()
                 .orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject()
@@ -182,7 +181,8 @@ public class LessonEditCommand extends UndoableCommand {
         // state check
         LessonEditCommand e = (LessonEditCommand) other;
         return index.equals(e.index)
-            && indexToEdit.equals(indexToEdit);
+            && indexToEdit.equals(indexToEdit)
+            && editLessonDescriptor.equals(e.editLessonDescriptor);
     }
 
     /**
@@ -191,7 +191,7 @@ public class LessonEditCommand extends UndoableCommand {
      */
     public static class EditLessonDescriptor {
 
-        // Absence of Date field as changes to date is disallowed.
+        private Date date;
         private TimeRange timeRange;
         private Subject subject;
         private Set<Homework> homeworkSet;
@@ -205,6 +205,7 @@ public class LessonEditCommand extends UndoableCommand {
          * A defensive copy of {@code homeworkSet} is used internally.
          */
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
+            setDate(toCopy.date);
             setTimeRange(toCopy.timeRange);
             setSubject(toCopy.subject);
             setHomeworkSet(toCopy.homeworkSet);
@@ -214,7 +215,15 @@ public class LessonEditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(timeRange, subject, homeworkSet);
+            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet);
+        }
+
+        public Optional<Date> getDate() {
+            return Optional.ofNullable(date);
+        }
+
+        public void setDate(Date date) {
+            this.date = date;
         }
 
         public Optional<TimeRange> getTimeRange() {
@@ -267,7 +276,8 @@ public class LessonEditCommand extends UndoableCommand {
             // state check
             EditLessonDescriptor e = (EditLessonDescriptor) other;
 
-            return getTimeRange().equals(e.getTimeRange())
+            return getDate().equals(e.getDate())
+                && getTimeRange().equals(e.getTimeRange())
                 && getSubject().equals(e.getSubject())
                 && getHomeworkSet().equals(e.getHomeworkSet());
         }
