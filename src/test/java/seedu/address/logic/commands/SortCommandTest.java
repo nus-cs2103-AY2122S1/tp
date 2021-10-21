@@ -1,27 +1,17 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.SortComparator;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Frequency;
-import seedu.address.model.person.Occurrence;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonAttributesContainsKeywordsPredicate;
-import seedu.address.model.person.Visit;
-import seedu.address.testutil.DateTimeUtil;
-import seedu.address.testutil.PersonBuilder;
 
 public class SortCommandTest {
     private static final PersonAttributesContainsKeywordsPredicate PREDICATE_STUB = preparePredicate("meier");

@@ -152,9 +152,9 @@ public class AddCommandTest {
 
         @Override
         public void sortFilteredPersonList(Comparator<Person> comparator, boolean isAscending) {
-              throw new AssertionError("This method should not be called.");
+            throw new AssertionError("This method should not be called.");
         }
-      
+
         @Override
         public Summary getSummary() {
             throw new AssertionError("This method should not be called.");
