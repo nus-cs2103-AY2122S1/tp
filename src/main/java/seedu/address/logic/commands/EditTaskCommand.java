@@ -106,7 +106,7 @@ public class EditTaskCommand extends Command {
             return new EventTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate);
         }
 
-        return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone());
+        return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone());
     }
 
     @Override
