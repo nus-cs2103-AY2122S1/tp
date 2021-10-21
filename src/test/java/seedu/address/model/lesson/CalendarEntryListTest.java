@@ -16,7 +16,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
@@ -25,8 +24,8 @@ public class CalendarEntryListTest {
 
     private final CalendarEntryList calendarEntryList = new CalendarEntryList();
 
-    private final Person ALICE_WITH_LESSON = new PersonBuilder(ALICE).withLessons(RECURRING_LESSON).build();
-    private final Person BOB_WITH_LESSON = new PersonBuilder(BOB).withLessons(MAKEUP_LESSON).build();
+    private final Person aliceWithLesson = new PersonBuilder(ALICE).withLessons(RECURRING_LESSON).build();
+    private final Person bobWithLesson = new PersonBuilder(BOB).withLessons(MAKEUP_LESSON).build();
 
     @Test
     public void hasClashes_nullLesson_throwsNullPointerException() {
@@ -44,14 +43,14 @@ public class CalendarEntryListTest {
     }
 
     @Test
-    public void hasClashes_LessonInList_returnsTrue() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
+    public void hasClashes_lessonInList_returnsTrue() {
+        calendarEntryList.addLessons(aliceWithLesson);
         assertTrue(calendarEntryList.hasClashes(RECURRING_LESSON));
     }
 
     @Test
     public void hasClashes_lessonWithClashingTimeRangeInList_returnsTrue() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
+        calendarEntryList.addLessons(aliceWithLesson);
         assertTrue(calendarEntryList.hasClashes(MAKEUP_LESSON));
     }
 
@@ -62,8 +61,8 @@ public class CalendarEntryListTest {
 
     @Test
     public void addLessons_clashingLesson_throwsClashingLessonException() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
-        assertThrows(ClashingLessonException.class, () -> calendarEntryList.addLessons(BOB_WITH_LESSON));
+        calendarEntryList.addLessons(aliceWithLesson);
+        assertThrows(ClashingLessonException.class, () -> calendarEntryList.addLessons(bobWithLesson));
     }
 
     @Test
@@ -78,24 +77,24 @@ public class CalendarEntryListTest {
 
     @Test
     public void setLessons_targetPersonHasLessonNotInList_throwsLessonNotFoundException() {
-        assertThrows(LessonNotFoundException.class,
-                () -> calendarEntryList.setLessons(ALICE_WITH_LESSON, ALICE_WITH_LESSON));
+        assertThrows(
+                LessonNotFoundException.class, () -> calendarEntryList.setLessons(aliceWithLesson, aliceWithLesson));
     }
 
     @Test
     public void setLessons_editedPersonHasSameLessons_success() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
-        calendarEntryList.setLessons(ALICE_WITH_LESSON, ALICE_WITH_LESSON);
+        calendarEntryList.addLessons(aliceWithLesson);
+        calendarEntryList.setLessons(aliceWithLesson, aliceWithLesson);
         CalendarEntryList expectedCalendarEntryList = new CalendarEntryList();
-        expectedCalendarEntryList.addLessons(ALICE_WITH_LESSON);
+        expectedCalendarEntryList.addLessons(aliceWithLesson);
         assertEquals(expectedCalendarEntryList, calendarEntryList);
     }
 
     @Test
     public void setPerson_editedPersonHasClashingLesson_success() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
+        calendarEntryList.addLessons(aliceWithLesson);
         Person editedAlice = new PersonBuilder(ALICE).withLessons(MAKEUP_LESSON).build();
-        calendarEntryList.setLessons(ALICE_WITH_LESSON, editedAlice);
+        calendarEntryList.setLessons(aliceWithLesson, editedAlice);
         CalendarEntryList expectedCalendarEntryList = new CalendarEntryList();
         expectedCalendarEntryList.addLessons(editedAlice);
         assertEquals(expectedCalendarEntryList, calendarEntryList);
@@ -103,50 +102,49 @@ public class CalendarEntryListTest {
 
     @Test
     public void setPerson_editedPersonHasLessonsClashWithOthers_throwsClashingLessonException() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
+        calendarEntryList.addLessons(aliceWithLesson);
         calendarEntryList.addLessons(BOB);
-        assertThrows(ClashingLessonException.class, () -> calendarEntryList.setLessons(BOB, BOB_WITH_LESSON));
+        assertThrows(ClashingLessonException.class, () -> calendarEntryList.setLessons(BOB, bobWithLesson));
     }
 
     @Test
     public void removeLessons_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> calendarEntryList.removeLessons((Person) null));
+        assertThrows(NullPointerException.class, () -> calendarEntryList.removeLessons(null));
     }
 
     @Test
     public void removeLessons_lessonDoesNotExist_throwsLessonNotFoundException() {
-        assertThrows(LessonNotFoundException.class, () -> calendarEntryList.removeLessons(ALICE_WITH_LESSON));
+        assertThrows(LessonNotFoundException.class, () -> calendarEntryList.removeLessons(aliceWithLesson));
     }
 
     @Test
     public void removeLessons_existingLessons_removesLessons() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
-        calendarEntryList.removeLessons(ALICE_WITH_LESSON);
+        calendarEntryList.addLessons(aliceWithLesson);
+        calendarEntryList.removeLessons(aliceWithLesson);
         CalendarEntryList expectedCalendarEntryList = new CalendarEntryList();
         assertEquals(expectedCalendarEntryList, calendarEntryList);
     }
 
     @Test
     public void resetLessons_nullPersonList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> calendarEntryList.resetLessons((List<Person>) null));
+        assertThrows(NullPointerException.class, () -> calendarEntryList.resetLessons(null));
     }
 
     @Test
     public void resetLessons_personList_replacesEntryListWithProvidedLessons() {
-        calendarEntryList.addLessons(ALICE_WITH_LESSON);
+        calendarEntryList.addLessons(aliceWithLesson);
         CalendarEntryList expectedCalendarEntryList = new CalendarEntryList();
-        expectedCalendarEntryList.addLessons(BOB_WITH_LESSON);
+        expectedCalendarEntryList.addLessons(bobWithLesson);
         List<Person> replacementPersonList = new ArrayList<>();
-        replacementPersonList.add(BOB_WITH_LESSON);
+        replacementPersonList.add(bobWithLesson);
         calendarEntryList.resetLessons(replacementPersonList);
         assertEquals(calendarEntryList, calendarEntryList);
     }
 
     @Test
     public void resetLessons_listWithPersonsWithClashingLessons_throwsClashingLessonException() {
-        List<Person> listWithPersonsWithClashingLessons = Arrays.asList(ALICE_WITH_LESSON, BOB_WITH_LESSON);
-        assertThrows(ClashingLessonException.class,
-                () -> calendarEntryList.resetLessons(listWithPersonsWithClashingLessons));
+        List<Person> listWithClashingLessons = Arrays.asList(aliceWithLesson, bobWithLesson);
+        assertThrows(ClashingLessonException.class, () -> calendarEntryList.resetLessons(listWithClashingLessons));
     }
 
 }
