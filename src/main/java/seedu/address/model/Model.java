@@ -24,8 +24,11 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_TASK_HISTORY = unused -> true;
+
     enum DisplayType {
-        STUDENTS, TASKS, GROUPS
+        STUDENTS, TASKS, GROUPS, TASK_HISTORY
     };
 
     /**
