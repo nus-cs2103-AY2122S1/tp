@@ -105,9 +105,7 @@ public class ModelManager implements Model {
     public void deleteStudent(Student target) {
         // Retrieve existing group in model
         GroupName groupName = target.getGroupName();
-        updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
-        Group retrievedGroup = getFilteredGroupList().get(0);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        Group retrievedGroup = getGroupByGroupName(groupName);
 
         // Remove reference to student from the group that the student belonged to
         retrievedGroup.removeStudent(target);
@@ -119,9 +117,7 @@ public class ModelManager implements Model {
     public void addStudent(Student student) {
         // Retrieve existing group in model
         GroupName groupName = student.getGroupName();
-        updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
-        Group retrievedGroup = getFilteredGroupList().get(0);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        Group retrievedGroup = getGroupByGroupName(groupName);
 
         // Add reference to student into the group
         retrievedGroup.addStudent(student);
@@ -143,6 +139,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasGroup(GroupName groupName) {
+        requireAllNonNull(groupName);
+        return getGroupByGroupName(groupName) != null;
+    }
+
+    @Override
     public void deleteGroup(Group target) {
         Set<Student> studentsToDelete = target.getStudents();
 
@@ -158,6 +160,22 @@ public class ModelManager implements Model {
     public void addGroup(Group group) {
         csBook.addGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public Group getGroupByGroupName(GroupName groupName) {
+        updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
+
+        // return null if the group is not found
+        if (getFilteredGroupList().isEmpty()) {
+            updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+            return null;
+        }
+
+        Group retrievedGroup = getFilteredGroupList().get(0);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+
+        return retrievedGroup;
     }
 
     //=========== Filtered Student List Accessors =============================================================

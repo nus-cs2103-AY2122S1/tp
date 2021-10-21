@@ -30,11 +30,11 @@ public class ViewGroupCommandTest {
     public void setUp() {
         List<Group> testGroups = Arrays.asList(new Group(new GroupName("CS2103T"), new Description("SWE Module")));
         Student validStudent1 = new StudentBuilder().withName("Erin")
-                .withGroup("CS2103T", "SWE Module").build();
+                .withGroupName("CS2103T").build();
         Student validStudent2 = new StudentBuilder().withName("Monkey")
-                .withGroup("CS2103T", "SWE Module").build();
+                .withGroupName("CS2103T").build();
         Student validStudent3 = new StudentBuilder().withName("Pei Xian")
-                .withGroup("CS2101", "SWE Module").build();
+                .withGroupName("CS2101").build();
         List<Student> testStudents = Arrays.asList(validStudent1, validStudent2, validStudent3);
         CsBook csBook = getTypicalCsBook();
         csBook.setGroups(testGroups);

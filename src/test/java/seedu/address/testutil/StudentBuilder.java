@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import seedu.address.model.group.Description;
-import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -22,7 +20,7 @@ public class StudentBuilder {
     private Name name;
     private TelegramHandle telegramHandle;
     private Email email;
-    private Group group;
+    private GroupName groupName;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -31,7 +29,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
-        group = new Group(new GroupName(DEFAULT_GROUP_NAME), new Description(DEFAULT_DESCRIPTION));
+        groupName = new GroupName(DEFAULT_GROUP_NAME);
     }
 
     /**
@@ -41,7 +39,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         telegramHandle = studentToCopy.getTelegramHandle();
         email = studentToCopy.getEmail();
-        group = studentToCopy.getGroup();
+        groupName = studentToCopy.getGroupName();
     }
 
     /**
@@ -71,17 +69,16 @@ public class StudentBuilder {
     /**
      * Sets the {@code GroupName} of the {@code Student} that we are building.
      */
-    public StudentBuilder withGroup(String groupName, String description) {
-        this.group = new Group(new GroupName(groupName), new Description(description));
+    public StudentBuilder withGroupName(String groupName) {
+        this.groupName = new GroupName(groupName);
         return this;
     }
 
     /**
      * Sets the {@code GroupName} of the {@code Student} that we are building.
      */
-    public StudentBuilder withGroup(Group group) {
-        this.group = new Group(new GroupName(group.getGroupName().toString()),
-                new Description(group.getDescription().toString()));
+    public StudentBuilder withGroupName(GroupName groupName) {
+        this.groupName = new GroupName(groupName.toString());
         return this;
     }
 
@@ -90,8 +87,7 @@ public class StudentBuilder {
      * @return built student
      */
     public Student build() {
-        // TODO Double confirm, do we need to load a group from the model for this testUtil method/class?
-        return new Student(name, telegramHandle, email, group);
+        return new Student(name, telegramHandle, email, groupName);
     }
 
 }

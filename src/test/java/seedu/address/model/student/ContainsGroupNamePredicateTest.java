@@ -39,14 +39,14 @@ class ContainsGroupNamePredicateTest {
     public void test_containsGroupName_returnsTrue() {
         ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2103T"));
         assertTrue(predicate.test(new StudentBuilder().withName("Alice")
-                .withGroup("CS2103T", "test").build()));
+                .withGroupName("CS2103T").build()));
     }
 
     @Test
     public void test_doesNotContainsGroupName_returnsFalse() {
         ContainsGroupNamePredicate predicate = new ContainsGroupNamePredicate(new GroupName("CS2103T"));
         assertFalse(predicate.test(new StudentBuilder().withName("Alice")
-                .withGroup("GEQ1000", "test").build()));
+                .withGroupName("GEQ1000").build()));
     }
 
 }
