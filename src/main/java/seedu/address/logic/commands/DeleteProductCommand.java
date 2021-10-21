@@ -27,7 +27,7 @@ public class DeleteProductCommand extends Command {
 
     public static final String MESSAGE_DELETE_PRODUCT_SUCCESS = "Deleted Product: %1$s";
 
-    private static final Logger logger = LogsCenter.getLogger("DeleteClientLogger");
+    private static final Logger logger = LogsCenter.getLogger("DeleteProductLogger");
 
     private final Index targetIndex;
 
