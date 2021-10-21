@@ -7,10 +7,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.data.member.Address;
-import seedu.address.model.data.member.Email;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.member.Address;
+import seedu.address.model.module.member.Email;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 
 /**
  * A UI component that displays information of a {@code Member}.

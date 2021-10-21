@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.TaddCommand;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.task.Task;
 
 class TaddCommandParserTest {
     private TaddCommandParser parser = new TaddCommandParser();

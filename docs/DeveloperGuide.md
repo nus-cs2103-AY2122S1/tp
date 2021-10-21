@@ -167,6 +167,52 @@ Future plans for Events
   * Dates should be in reverse chronological order so that upcoming events are shown first
 * Include additional remarks or description for an event
 
+### Add a task feature for a member or several members
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to add the task with given task name to each of the members.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tadd /n take attendance /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
+The parser will then parse the input to create a TaddCommand with task name as "take attendance" and member ids 1 and 2.
+This command will add the task "take attendance" to the first and second member of the member list.
+
+### Delete a task feature for a member
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to delete the task with given task id from the member with given member id.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tdel /t 1 /m 1`. The parser will be called upon to create a TdelCommandParser.
+The parser will then parse the input to create a TdelCommand with task id as 1 and member id as 1.
+This command will delete the first task from the task list of the first member of the member list.
+
+### List tasks feature for a member
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member with given member id from the filtered member list
+and use API from the model manager to list all the tasks of the member.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
+
+Given below is an example usage scenario:
+
+The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
+The parser will then parse the input to create a TlistCommand with member id as 1.
+This command will display all the tasks of the first member of the member list.
+=======
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -175,24 +221,31 @@ Future plans for Events
 
 The `Model` component,
 
-* stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
+* stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), all `Event` objects (which are contained in a `UniqueEventList` object).
 * stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a 'tlist' command)
-* stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the module in the list change.
+* stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own `Position` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>
 
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
-#### Current Implementation of task
+#### Current Implementations
+
+The model that we implemented currently has `Event`, `Task` and `Member`. `Member` has a field with `TaskList` which contains
+`Task` belonging to the `Member`. `Event` has a `Name` field, `EventDate` field, and a field of a HashMap<Member, Boolean>
+to serve as a participant list with attendance. Event and Member both extend from the abstract class `Module` to reduce class duplication.
 
 The `Task` model we implemented currently has a task name and a state that represents it is done or not.
 
-#### Future Plan of task
+#### Future Plans
+
+The future plan for the model is to have `Task` extend from module. The search functions in regard to name will be greatly helped ny the `Module` class.
+We also plan to make the `Position` objects unique to reduce space cost, Each member would contain a reference to the `Position` object instead.
 
 * Make `Task` a subclass of `Module`, which involves adding `TaskName` class.
 * Add deadline field to `Task`
@@ -210,7 +263,15 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 #### Current Implementation
+
 `JsonAdaptedTask` allows `Task` to be stored in a json format and `JsonAdaptedMember` allows `Member` to store an array of `Task`
+
+`JsonAdaptedEvent` allows `Event` to be stored in Json format. Ailurus can now store `Event`, enabling the saving and 
+loading of files with `Event` objects. The Map of participants of the `Event` are saved into Json format by splitting them into two separate lists of `JsonAdaptedMember` and `Boolean` respectively.
+
+#### Future Plans
+
+Storing `Position` in a unique list would reduce the amount of `Position` objects needed.
 
 ### Common classes
 

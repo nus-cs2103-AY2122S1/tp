@@ -13,12 +13,12 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.data.Name;
-import seedu.address.model.data.member.Address;
-import seedu.address.model.data.member.Email;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.data.member.Phone;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.member.Address;
+import seedu.address.model.module.member.Email;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.member.Phone;
+import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.TypicalTasks;
 
