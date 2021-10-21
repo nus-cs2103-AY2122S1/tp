@@ -353,7 +353,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to delete the applicant(s) in the displayed list.
+3.  User requests to delete applicant(s) in the displayed list.
 4.  RecruitIn deletes the applicant(s).
 
     Use case ends.
