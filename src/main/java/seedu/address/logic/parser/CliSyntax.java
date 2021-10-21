@@ -10,6 +10,7 @@ public class CliSyntax {
     public static final Flag FLAG_FRIEND = new Flag("--friend ");
     public static final Flag FLAG_GAME = new Flag("--game ");
     public static final Flag FLAG_ADD = new Flag("--add ");
+    public static final Flag FLAG_EDIT = new Flag("--edit ");
     public static final Flag FLAG_DELETE = new Flag("--delete ");
     public static final Flag FLAG_GET = new Flag("--get ");
     public static final Flag FLAG_LIST = new Flag("--list ");
