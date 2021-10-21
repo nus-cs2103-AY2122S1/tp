@@ -10,13 +10,28 @@ To learn more about the design, you can explore the 'Design' section for the imp
 Relevant non-trivial terminologies used are explained in the 'Glossary' Section.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
 This project is based on the [AddressBook-Level3](https://se-education.org/addressbook-level3/) project created by the [SE-EDU initiative](https://se-education.org).
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **About this document**
+
+This document serves to explain the structure and implementation of TuitiONE and details how to set up the programming
+environment locally to support further developing of the app.
+
+Here are the interpretations of symbols and formatting used in this document: 
+
+* `highlights` represents code
+* :information_source: indicates additional information
+* :bulb: indicates tips
+* `Tuitione` is used in referencing code due to java naming syntax
+* **TuitiONE** is used when referencing the application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -199,16 +214,68 @@ The add lesson feature is relative similar to that of the original add student f
   1. In the current version of implementation, `COST`'s input constraints are:
      1. 0 <= `COST`.
 
+After deconstructing all the relevant properties and validating their validity, a `Lesson` will be generated with a unique `lesson code` that is specific to that lesson. This `lesson code` will be used as a unique string identifier.
 
-Object diagram
+- `lesson code` Format: `<SUBJECT>`-`<GRADE>`-`<DAY_OF_WEEK>`-`<START_TIME>`
 
-Sequence diagram
+Given below is an example usage scenario and how the add lesson operation behaves.
 
-Activity diagram
+_Note: For this usage, we only consider the main successful scenarios (i.e. The lesson we're adding does not exist in TuitiONE and all properties entered are within the constraints)_
+
+Example: `add-l s/Science g/P2 d/Wed t/1200 c/10.50`
+
+Step 1: When the CSO has entered the command, <u>`:AddLessonCommandParser`</u> object will proceed on to parse and check the validity of each property entered. Assuming successful, <u>`:AddLessonCommandParser`</u> object will proceed on to produce a <u>`l:Lesson`</u> with the relevant details filled. The object state diagram is as such:
+
+![AddLessonState0](images/DeveloperGuideImage/AddLessonState0-Initial_state.png)
+
+Step 2: With all checks done, <u>`l:Lesson`</u> object will be added into the `Model` of TuitiONE. The final object state diagram is as such:
+
+![AddLessonState1](images/DeveloperGuideImage/AddLessonState1-Final_state.png)
+
+The following sequence diagram shows how add lesson operation works:
+
+![AddLessonSequenceDiagram](images/DeveloperGuideImage/AddLessonSequenceDiagram.png)
+
+:information_source: **Note:** The lifelines for `AddLessonCommandParser` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+![AddLessonActivityDiagram](images/DeveloperGuideImage/AddLessonActivityDiagram.png)
 
 #### Design considerations:
 
-Command syntax
+<ins>Aspect: How to design the syntax</ins>
+* Command Word Style
+  * (**Current Choice**) Option 1: `add-l`
+    * Pros:
+      * Non-space-separated word allows easier parsing of command word
+      * Unique command word allows command keys to be easily distinguished
+    * Cons:
+      * Redundant creation of a new command word, when there is an existing `add` command word.
+      * Might not be as intuitive as there are now 2 add commands with different keywords.
+  * Option 2: `add -l`
+    * Pros:
+      * More intuitive, `-l` flag can be used to determine that a lesson is to be added, while omitting it means a student is to be added.
+    * Cons:
+      * Harder to parse, as the `-l` flag is space separated from the command keyword.
+      * CSO might forget to include the `-l` flag, accidentally adding a student instead.
+    
+* Command Informational Field Style
+  * Option 1: `LESSON_CODE`
+    * Pros:
+      * Only one continuous line of code is required to be entered.
+    * Cons:
+      * One long string will be to be entered, which the team would then be required to come up with another implementation of parser to parse this piece of information. This would be redundant since we can make use of the existing parser using the CliSyntax.
+      * CSO would have to key in the string in a predetermined order, which the CSO could get easily confused.
+  * (**Current Choice**) Command Information Field Option 2: `s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`
+    * Pros:
+      * Different fields can be placed in any order. Hence, making it easier for CSO to enter the relevant fields.
+      * Informational fields are now more distinct. Hence, it is easier for the CSO to follow through.
+    * Cons:
+      * More `spacebar` and CliSyntax would have to be pressed to cater for each individual fields.
+
+<ins>Decision</ins>
+
+Command Word Style: Option 1 (`add-l`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, there is not much significance in having an especially pretty command syntax as efficiency(i.e. entering commands fast and correctly) is desired. At the same time, the accidental addition of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`add -l`) should only be implemented once an undo/redo feature is implemented.
+Command Informational Field Style: Option 2 (`s/SUBJECT g/GRADE d/DAY t/START_TIME c/COST`) is chosen as it requires lesser modification to the existing code base parsing utilities. Additionally, similar behaviour with the add student command would help the CSO to pick up the command syntax easier since there are lesser things to remember. 
 
 ### Delete Lesson feature
 
@@ -225,7 +292,7 @@ Step 1: User has a list of students and lessons presented in their TuitiONE appl
 
 Step 2: Upon running the delete lesson command, the application runs a few internal steps:
 
-1. The tuitione model obtains the lesson to remove.
+1. The `Tuitione` model obtains the lesson to remove.
 2. The command executor then extracts the students that are in the lesson.
 3. If there are students enrolled:
    1. The lesson unenrolls the students.
@@ -270,7 +337,8 @@ The following activity diagram summarizes what happens when a user executes the 
     * Harder to parse, as the `-l` flag is space separated from the command keyword.
     * User might forget to include the `-l` flag, accidentally deleting a student instead.
 
-<ins>Decision</ins>  
+<ins>Decision</ins>
+
 Ultimately, Option 1 (`delete-l LESSON_INDEX`) is chosen as it requires lesser modification to the existing code base parsing utilities.  
 Additionally, there is not much significance in having an especially pretty command syntax as efficiency (i.e. entering commands fast and correctly) is desired. At the same time, the accidental deletion of a student rather than the intended lesson is a likely scenario, hinting that Option 2 (`delete -l LESSON_INDEX`) should only be implemented once an undo/redo feature is implemented.
 
@@ -307,7 +375,7 @@ into the lesson.
 
 Upon running the Enroll command, the application runs a few internal steps:
 
-1. The tuitione model obtains the student to enroll into lesson.
+1. The `Tuitione` model obtains the student to enroll into lesson.
 2. The command executor checks if the student is eligible to be enrolled into lesson.
 3. The command executor checks if the student is currently enrolled in the lesson
 4. Finally, the student is ready to be enrolled into the lesson.
@@ -345,6 +413,7 @@ happens when a user executes the enroll lesson command:
         * Might require user to filter lesson first before referring to GUI, incurring an extra step
 
 <ins>Decision</ins>
+
 Ultimately, Option 2 (`enroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as our team felt that a user would value efficiency when typing multiple enroll commands rather than typing out an entire lesson code.
 The user is still able to refer to the GUI in this instance, with the help with filter commands, making it rather easy for the user to achieve the same result as using a lesson code.
 
@@ -365,18 +434,22 @@ in order for the unenroll operation to be successful.
 
 Given below is an example usage scenario and how the unenroll operation works.
 
-Step 1: User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
+<ins>Step 1:</ins>
+
+User has a list of students and lessons presented in their TuitiONE application. For this case, the user has a 
 lesson `l` that has two students (`John` and `Alice`). The object state diagram is as such:
 
 ![UnenrollState0](images/DeveloperGuideImage/UnenrollState0.png)
 
 Let 1 be the index of `John`, 2 be the index of `Alice` and let the index of the lesson be 1. 
 
-Step 2: The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
+<ins>Step 2:</ins>
+
+The user uses the command `unenroll 2 l/1`. Upon running the unenroll command, the application runs a few  
 internal steps.
 
-1. The tuitione model obtains the student specified. In this case, the student is `Alice`.
-2. The tuitione model obtains the lesson specified. In this case, the lesson is `l`.
+1. The `Tuitione` model obtains the student specified. In this case, the student is `Alice`.
+2. The `Tuitione` model obtains the lesson specified. In this case, the lesson is `l`.
 3. The command executor checks if the student, `Alice`, is enrolled in the lesson `l`.
 4. If the student is enrolled, the `Alice` will be removed from the list of students in the lesson object `l`.
 5. Subsequently, the lesson `l` will be removed from the set of lessons in the student object `Alice`.
@@ -404,13 +477,14 @@ The following activity diagram summarizes what happens when a user executes the 
         * Unique lesson code clearly specifies the lesson that the student is to be unenrolled from.
     * Cons:
         * More difficult to type as the lesson code is quite long.
-* Option 2: `delete STUDENT_INDEX l/LESSON_INDEX`
+* Option 2: `unenroll STUDENT_INDEX l/LESSON_INDEX`
     * Pros:
         * Much faster to type and execute.
     * Cons:
         * User may specify the wrong index and unenroll student from the wrong lesson.
 
-<ins>Decision</ins>  
+<ins>Decision</ins>
+
 Ultimately, Option 2 (`unenroll STUDENT_INDEX l/LESSON_INDEX`) is chosen as it is faster and easier to type. 
 This makes our app faster and easier to use. Additionally, there is not much significance in specifying the lesson 
 through a lesson code as although it cleary specifies the lesson, the chances of the user keying in the wrong index and 
@@ -459,10 +533,10 @@ The following activity diagram summarizes what happens when a user executes the 
 #### Design considerations:
 
 **Aspect: How to implement filter**
-* **Alternative 1 (current choice)**: one filter command that handles both grade and subject filtering
+* **Option 1 (current choice)**: one filter command that handles both grade and subject filtering
     * Pros: Less commands to remember, user will not feel overwhelmed.
     * Cons: Slightly more difficult to implement, as one command has to handle the 3 cases of user input as mentioned above.
-* **Alternative 2**: 3 separate filter commands, one for each scenario stated above
+* **Option 2**: 3 separate filter commands, one for each scenario stated above
     * Pros: Slightly more straightforward to implement.
     * Cons: Too many existing commands in the application, and may not be as intuitive to use.
     
@@ -539,11 +613,11 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <ins> Aspect: How undo & redo executes:</ins>
 
-* **Alternative 1 (current choice):** Saves the entire tuitione.
+* **Option 1 (current choice):** Saves the entire tuitione.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+* **Option 2:** Individual command knows how to undo/redo by
   itself.
     * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
@@ -609,6 +683,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Customer Service Officer                   | know the command format to enter     | learn to use the application                                     |
 | `* *`    | Customer Service Officer                   | know how much a student has to pay per week | remind the parents to pay punctually                      |
 | `* *`    | Customer Service Officer                   | leave remarks                        | make lessons more convenient for tutors and students in the case they are unable to make it for a specific lesson |
+| `* *`    | Customer Service Officer                   | view the roster of a specific lesson | see the list of students attending the lesson, and make an attendance sheet |
 | `*`      | Customer Service Officer                   | know a student's attendance          | inform teachers or find out why students are missing lessons     |
 | `*`      | Customer Service Officer                   | record a student's attendance        | keep track of student's attendance                               |
 | `*`      | Customer Service Officer                   | update details of existing lessons   | change the specifics of the lesson                               |
@@ -823,7 +898,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 3.
 
-* 2b. Lesson does not exists in TuitiONE.
+* 2b. Lesson does not exist in TuitiONE.
     * 2b1. TuitiONE informs that there does not exist such a Lesson.
 
     Use case ends.
@@ -937,6 +1012,30 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1. CSO enters help.
 2. TuitiONE provides the basic commands, as well as the user guide link.
 
+    Use case ends.
+    
+#### UC13: View Lesson Roster
+
+**MSS**
+
+1. CSO views the current list of lessons, or <ins>filter lesson(s) by their grade and/or subject (UC04)</ins>.
+2. CSO requests to view the roster of a specific lesson.
+3. TuitiONE presents the lesson roster.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. TuitiONE detects an error in entered command.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command.
+      Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 3.
+
+* 2b. There are no students enrolled in the lesson.
+    * 2b1. TuitiONE informs that there are no students in the lesson roster.
+    
     Use case ends.
 
 ### Non-Functional Requirements
