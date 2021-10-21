@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -9,6 +10,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.CategoryCode;
+import seedu.address.model.person.Rating;
 
 /**
  * Parses input arguments and creates a new FilterCommand object
@@ -22,16 +24,21 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      */
     public FilterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_CATEGORY_CODE);
+                PREFIX_CATEGORY_CODE, PREFIX_RATING);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CATEGORY_CODE)
+        if (((!arePrefixesPresent(argMultimap, PREFIX_CATEGORY_CODE))
+            && (!arePrefixesPresent(argMultimap, PREFIX_RATING)))
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
+        Rating rating = new Rating("0");
+        if (argMultimap.getValue(PREFIX_RATING).isPresent()) {
+            rating = ParserUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
+        }
         Set<CategoryCode> categoryCodes = ParserUtil.parseCategories(argMultimap.getAllValues(PREFIX_CATEGORY_CODE));
 
-        return new FilterCommand(categoryCodes);
+        return new FilterCommand(categoryCodes, rating);
 
     }
 

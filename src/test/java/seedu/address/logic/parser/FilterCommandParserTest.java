@@ -3,8 +3,10 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_ATT;
 import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_DESC_FNB;
+import static seedu.address.logic.commands.CommandTestUtil.CATEGORY_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CATEGORY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.RATING_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY_CODE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.model.person.CategoryCode;
+import seedu.address.model.person.Rating;
 
 class FilterCommandParserTest {
 
@@ -52,7 +55,7 @@ class FilterCommandParserTest {
     public void parse_oneCategoryCode_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(Collections.singleton(new CategoryCode("att")));
+                new FilterCommand(Collections.singleton(new CategoryCode("att")), new Rating("0"));
         assertParseSuccess(parser, CATEGORY_DESC_ATT, expectedFilterCommand);
 
         // multiple whitespaces between keywords
@@ -63,11 +66,24 @@ class FilterCommandParserTest {
     public void parse_multipleCategoryCode_returnsFilterCommand() {
         // no leading and trailing whitespaces
         FilterCommand expectedFilterCommand =
-                new FilterCommand(new HashSet<>(Arrays.asList(new CategoryCode("att"), new CategoryCode("fnb"))));
+                new FilterCommand(new HashSet<>(Arrays.asList(new CategoryCode("att"), new CategoryCode("fnb"))),
+                    new Rating("0"));
         assertParseSuccess(parser, CATEGORY_DESC_FNB + CATEGORY_DESC_ATT, expectedFilterCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_DESC_ATT + "      " + CATEGORY_DESC_FNB,
                 expectedFilterCommand);
+    }
+
+    @Test
+    public void parse_noCategoryCode_returnsFilterCommand() {
+        // no leading and trailing whitespaces
+        FilterCommand expectedFilterCommand =
+            new FilterCommand(Collections.emptySet(), new Rating("3"));
+        assertParseSuccess(parser, CATEGORY_EMPTY + RATING_DESC_BOB, expectedFilterCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + CATEGORY_EMPTY + "        " + RATING_DESC_BOB,
+            expectedFilterCommand);
     }
 }
