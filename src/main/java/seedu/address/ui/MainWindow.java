@@ -130,6 +130,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             executeCommand(inputCommand);
         } catch (ParseException | CommandException e) {
+            logger.warning("HandleMouseClicked caught an exception when not supposed to:\n"
+                    + e.getMessage());
             resultDisplay.setFeedbackToUser(e.getMessage());
         }
     }

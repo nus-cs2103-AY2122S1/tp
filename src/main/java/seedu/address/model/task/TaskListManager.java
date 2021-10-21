@@ -6,10 +6,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
@@ -18,6 +20,8 @@ import seedu.address.model.person.Person;
  * Manages which {@code Person}'s taskList to display on the GUI.
  */
 public class TaskListManager {
+    private static final Logger logger = LogsCenter.getLogger(TaskListManager.class);
+
     /** Stores every Person's taskList reference. */
     private final HashMap<String, List<Task>> taskListArchive;
 
@@ -44,6 +48,8 @@ public class TaskListManager {
      * Sets up the archive with all stored person's taskList upon application startup.
      */
     public void initialiseArchive(ObservableList<Person> observablePersonList) {
+        logger.fine("taskListArchive is loaded with storage memory.");
+
         requireNonNull(observablePersonList);
 
         for (Person person : observablePersonList) {
@@ -100,6 +106,9 @@ public class TaskListManager {
      */
     public void setToDisplayTaskList(Name name) {
         requireNonNull(name);
+
+        String logMessage = name.toString() + ": task list set to be displayed.";
+        logger.info(logMessage);
 
         nameOfChosenPerson = name;
 
