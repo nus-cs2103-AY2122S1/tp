@@ -67,6 +67,7 @@ public enum CommandWord {
         String aliasToLowerCase = userInput.toLowerCase();
         for (CommandWord cw : ALIAS_MAP.keySet()) {
             if (cw.aliasList.contains(aliasToLowerCase)) {
+                logger.info("----------------[Alias given is supported][" + userInput + "]");
                 return cw;
             }
         }
