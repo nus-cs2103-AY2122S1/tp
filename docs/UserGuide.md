@@ -28,7 +28,7 @@ Interested to know more? Take a look at our Quick Start guide. Enjoy!
 1. Copy the file to the folder you want to use as the _home folder_ for your app.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![find_command](images/UIUpdated.png)
 
 1. Type the command in the command box and press Enter to execute it.
    * Refer to the [**Features**](#3-features) below for details of each command.
@@ -71,6 +71,12 @@ Format: `help`
 
 Add a task to the task list.
 
+![add_command](images/addCommand.jpeg)
+
+After running the add command the task gets added to the task list as shown below:
+
+![add_command_after](images/addCommandAfter.jpeg)
+
 Format:
 - <code> add <i>n/task_name t/time d/date tg/level </i> </code>
 
@@ -93,6 +99,12 @@ Examples:
 
 Find tasks with matching keywords and show them in the task list.
 
+![find_command](images/findCommand.jpeg)
+
+After running the find command, the tasks having the mentioned keyword are displayed as shown below:
+
+![find_command_after](images/findCommandAfter.jpeg)
+
 Format: `find keyword (more_keywords) (d/date)`
 
 Interpretation:
@@ -113,6 +125,8 @@ Examples:
 ### 3.4 Showing Tasks: `show` (coming soon)
 
 Show all tasks that have been added to the app in a specific week.
+
+![show_command](images/showCommand41.jpeg)
 
 Format:
 - <code> show <i>week_number</i> </code>
@@ -162,6 +176,12 @@ Examples:
 
 Delete a specific task that has been added to your app.
 
+![delete_command](images/deleteCommand.jpeg)
+
+After running the delete command, the task at that particular index gets deleted as shown below:
+
+![delete_command_after](images/deleteCommandAfter.jpeg)
+
 Format:
 - <code> delete <i>task_id (task_id)</i> </code>
 
@@ -176,6 +196,8 @@ Examples:
 ### 3.7 Clearing all entries : `clear`
 
 Clears all entries from the Uni-Fy app.
+
+![clear_command](images/clear.jpeg)
 
 Format: `clear`
 
@@ -197,18 +219,44 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 3.11 Archiving data files `[coming in v2.0]`
+### 3.11 Retrieving past commands `[coming in v1.3]`
+
+Shows the past commands run on **Uni-Fy**.
+
+Format: `history`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
+</div>
+
+### 3.12 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## 4. FAQ
 
+**Q**: What are the minimum system requirements for this application?<br>
+**A**: If your computer runs any of the Operating Systems found [here](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), you will be able to run **Uni-Fy**.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Tasks home folder.
 
+**Q**: Is the source code of this application freely available?<br>
+**A**: Yes, our code is available on our [GitHub repository](https://github.com/AY2122S1-CS2103T-W17-4/tp) under the MIT License. If you wish to contribute to the codebase of this application, please read the [Developer Guide](https://ay2122s1-cs2103t-w17-4.github.io/tp/DeveloperGuide.html) and make a pull request to our repository.
+
+**Q**: I've spotted a bug in your application. How can I report this?<br>
+**A**: We would love to hear from you. You can make a GitHub issue at this [link](https://github.com/AY2122S1-CS2103T-W17-4/tp/issues) with the relevant details.
+
+**Q**: Is my data secure with this application?<br>
+**A**: Your data is stored safely on your machine. **Uni-Fy** stores the data locally and does not upload any data to servers on the Internet. However, you are recommended to use antivirus software on your machine to prevent unauthorised hackers from accessing the local database.
+
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## 5. Command summary
 
@@ -221,4 +269,5 @@ Action | Format, Examples
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
 **Tag** | `TODO`
 **Help** | `help`
+**Retrieve past Commands** | `history`
 **Clear** | `clear`
