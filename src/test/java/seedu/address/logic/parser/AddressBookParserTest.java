@@ -42,7 +42,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        List<String> aliasForClear = CommandWord.getAliasList(CommandWord.CLEAR);
+        List<String> aliasForClear = CommandWord.getAliasList(CommandWord.CLEAR_PERSON);
         for (String alias : aliasForClear) {
             assertTrue(parser.parseCommand(alias) instanceof ClearPersonCommand);
             assertTrue(parser.parseCommand(alias + " 3") instanceof ClearPersonCommand);
@@ -52,7 +52,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        List<String> aliasForDelete = CommandWord.getAliasList(CommandWord.DELETE);
+        List<String> aliasForDelete = CommandWord.getAliasList(CommandWord.DELETE_PERSON);
         for (String alias : aliasForDelete) {
             DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
                     alias + " " + INDEX_FIRST_PERSON.getOneBased());
@@ -62,7 +62,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        List<String> aliasForEdit = CommandWord.getAliasList(CommandWord.EDIT);
+        List<String> aliasForEdit = CommandWord.getAliasList(CommandWord.EDIT_PERSON);
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         for (String alias : aliasForEdit) {
