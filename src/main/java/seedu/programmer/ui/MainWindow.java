@@ -15,13 +15,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Popup;
@@ -30,6 +28,10 @@ import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
+import seedu.programmer.logic.commands.DownloadCommandResult;
+import seedu.programmer.logic.commands.ExitCommandResult;
+import seedu.programmer.logic.commands.HelpCommandResult;
+import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Student;
@@ -54,10 +56,19 @@ public class MainWindow extends UiPart<Stage> {
     private StudentCard studentParticular;
 
     @FXML
+    private Scene primaryScene;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
+    private Button helpButton;
+
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    private Button downloadButton;
 
     @FXML
     private StackPane studentListPanelPlaceholder;
@@ -97,37 +108,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(KeyCombination.valueOf("F1"), this::handleExit);
+        setAccelerator(KeyCombination.valueOf("F2"), this::handleHelp);
+        setAccelerator(KeyCombination.valueOf("F3"), this::handleDownload);
     }
 
     /**
-     * Sets the accelerator of a MenuItem.
+     * Sets the accelerator of a button.
      * @param keyCombination the KeyCombination value of the accelerator
      */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
-
-        /*
-         * TODO: the code below can be removed once the bug reported here
-         * https://bugs.openjdk.java.net/browse/JDK-8131666
-         * is fixed in later version of SDK.
-         *
-         * According to the bug report, TextInputControl (TextField, TextArea) will
-         * consume function-key events. Because CommandBox contains a TextField, and
-         * ResultDisplay contains a TextArea, thus some accelerators (e.g F1) will
-         * not work when the focus is in them because the key event is consumed by
-         * the TextInputControl(s).
-         *
-         * For now, we add following event filter to capture such key events and open
-         * help window purposely so to support accelerators even when focus is
-         * in CommandBox or ResultDisplay.
-         */
-        getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getTarget() instanceof TextInputControl && keyCombination.match(event)) {
-                menuItem.getOnAction().handle(new ActionEvent());
-                event.consume();
-            }
-        });
+    private void setAccelerator(KeyCombination keyCombination, Runnable runnable) {
+        primaryScene.getAccelerators().put(keyCombination, runnable);
     }
 
     /**
@@ -153,10 +144,12 @@ public class MainWindow extends UiPart<Stage> {
     private void setWindowDefaultSize(GuiSettings guiSettings) {
         primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
-        if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
-            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+        if (guiSettings.getWindowCoordinates() == null) {
+            return;
         }
+
+        primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+        primaryStage.setY(guiSettings.getWindowCoordinates().getY());
     }
 
     /**
@@ -164,11 +157,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
+        if (helpWindow.isShowing()) {
             helpWindow.focus();
+            return;
         }
+        helpWindow.show();
     }
 
     void show() {
@@ -176,7 +169,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Closes the application window.
      */
     @FXML
     private void handleExit() {
@@ -208,20 +201,27 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDownload() {
-        try {
-            JSONArray jsonData = getJsonData();
-            File destinationFile = promptUserForDestination();
-            if (destinationFile != null) {
-                boolean writeSuccessful = writeJsonToCsv(jsonData, destinationFile);
-                String message = writeSuccessful ? "Your data has been downloaded to " + destinationFile + "!"
-                                                 : "No data to download!";
-                Popup popup = createPopup(message);
-                showPopupMessage(popup);
-                logger.info("Data successfully downloaded as CSV.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        JSONArray jsonData = getJsonData();
+        assert (jsonData != null);
+
+        if (jsonData.length() == 0) {
+            displayPopup("No data to download!");
+            return;
         }
+
+        File destinationFile = promptUserForDestination();
+        if (destinationFile != null) {
+            writeJsonToCsv(jsonData, destinationFile);
+            displayPopup("Your data has been downloaded to " + destinationFile + "!");
+            logger.info("Data successfully downloaded as CSV.");
+        }
+    }
+
+    private void displayPopup(String message) {
+        // We should not need to display an empty popup
+        assert (message != null);
+        Popup popup = createPopup(message);
+        showPopupMessage(popup);
     }
 
     /**
@@ -234,7 +234,7 @@ public class MainWindow extends UiPart<Stage> {
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
 
         // Set Y coordinate scaled according to primaryStage's height
-        popup.setY(primaryStage.getY() + 0.1 * primaryStage.getHeight());
+        popup.setY(primaryStage.getY() + primaryStage.getHeight() * 0.1);
         popup.show(primaryStage);
     }
 
@@ -265,18 +265,17 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @param jsonData JSONArray of data
      * @param destinationFile File object to write to
-     * @throws IOException if error reading to or from file
-     * @throws JSONException if JSON is invalid
      */
-    private boolean writeJsonToCsv(JSONArray jsonData, File destinationFile) throws JSONException, IOException {
-        String csv = CDL.toString(jsonData);
-        if (csv == null) {
-            return false;
+    private void writeJsonToCsv(JSONArray jsonData, File destinationFile) {
+        // If there were no data, we should not even be trying to write anything
+        assert (jsonData.length() > 0);
+        try {
+            String csv = CDL.toString(jsonData);
+            FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
+            logger.info("The following data was written:\n" + csv);
+        } catch (IOException | JSONException e) {
+            logger.severe("Unexpected error: " + e);
         }
-
-        FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
-        logger.info("The following data was written:\n" + csv);
-        return true;
     }
 
     /**
@@ -288,29 +287,25 @@ public class MainWindow extends UiPart<Stage> {
         String destFileName = "programmerError.csv";
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
-        if (chosenDir != null) {
-            return new File(chosenDir, destFileName);
-        }
-        return null;
+        return chosenDir == null ? null : new File(chosenDir, destFileName);
     }
 
     /**
      * Retrieves students' JSON data stored in ProgrammerError.
      *
      * @return JSONArray of student's data
-     * @throws IOException if error reading to or from file
-     * @throws JSONException if JSON is invalid
      */
-    private JSONArray getJsonData() throws IOException, JSONException {
+    private JSONArray getJsonData() {
         String resourceName = "data/programmerError.json";
-        InputStream is = new FileInputStream(resourceName);
-        String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
-        JSONObject json = new JSONObject(jsonTxt);
-        return json.getJSONArray("students");
-    }
-
-    public StudentListPanel getStudentListPanel() {
-        return studentListPanel;
+        try {
+            InputStream is = new FileInputStream(resourceName);
+            String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
+            JSONObject json = new JSONObject(jsonTxt);
+            return json.getJSONArray("students");
+        } catch (IOException | JSONException e) {
+            logger.severe("Error with the file!");
+            return null;
+        }
     }
 
     /**
@@ -326,16 +321,14 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult instanceof HelpCommandResult) {
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+            } else if (commandResult instanceof ExitCommandResult) {
                 handleExit();
-            }
-
-            if (commandResult.isShowResult()) {
-                handleShowResult(commandResult.getTarget());
+            } else if (commandResult instanceof ShowCommandResult) {
+                handleShowResult(((ShowCommandResult) commandResult).getTarget());
+            } else if (commandResult instanceof DownloadCommandResult) {
+                handleDownload();
             }
 
             return commandResult;

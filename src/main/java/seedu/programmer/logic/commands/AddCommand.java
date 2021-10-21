@@ -2,7 +2,7 @@ package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_GRADE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -22,12 +22,12 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_STUDENT_ID + "STUDENT_ID "
             + PREFIX_CLASS_ID + "CLASS_ID "
-            + PREFIX_GRADE + "GRADE "
+            + PREFIX_EMAIL + "email "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_STUDENT_ID + "A0121234H "
             + PREFIX_CLASS_ID + "B01 "
-            + PREFIX_GRADE + "A+ ";
+            + PREFIX_EMAIL + "e0518441@u.nus.edu";
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ProgrammerError";

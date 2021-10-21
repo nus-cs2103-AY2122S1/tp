@@ -16,13 +16,11 @@ Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+Class UniqueStudentList
+Class Student
+Class StudentId
+Class ClassId
+Class Grade
 
 }
 
@@ -38,17 +36,18 @@ ModelManager -left-> "1" ProgrammerError
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
-ProgrammerError *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+ProgrammerError *--> "1" UniqueStudentList
+UniqueStudentList --> "~* all" Student
+Student *--> Name
+Student *--> StudentId
+Student *--> ClassId
+Student *--> Grade
 
-ModelManager -->"~* filtered" Person
+Name -[hidden]right-> StudentId
+StudentId -[hidden]right-> ClassId
+ClassId -[hidden]right-> Grade
+
+ModelManager -->"~* filtered" Student
 @enduml
+

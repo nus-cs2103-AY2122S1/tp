@@ -93,13 +93,13 @@ public class HelpWindow extends UiPart<Stage> {
                 "fill",
                 "Fill ProgrammerError with sample data, only when the database is empty");
         FeatureTableItem add = new FeatureTableItem("Add",
-                "add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -grade <GRADE>",
+                "add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <email>",
                 "Create records of individual students");
         FeatureTableItem view = new FeatureTableItem("Filter",
                 "filter -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-grade <GRADE>",
                 "Filter the list with the specified parameters. Multiple fields can be used as the filter criteria");
         FeatureTableItem edit = new FeatureTableItem("Edit",
-                "edit <INDEX_IN_LIST> -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-grade <GRADE>",
+                "edit <INDEX_IN_LIST> -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <email>",
                 "Edit the specified field to the new value. Multiple fields can be edited at the same time");
         FeatureTableItem delete = new FeatureTableItem("Delete",
                 "delete <INDEX_IN_LIST>",

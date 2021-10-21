@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
 
 ### Logic component
 
@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+* stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -141,7 +141,7 @@ The `Model` component,
 
 The `Storage` component,
 * can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+* inherits from both `ProgrammerErrorStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
@@ -233,12 +233,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Student List Filtering
 
 #### Proposed Implementation
@@ -308,6 +302,64 @@ The following UML activity diagram summarizes what happens when a user executes 
     * Pros: Allows for users to type less for the same expected behaviour.
     * Cons: New users may be confused with such shortcut commands.
 
+### Show Lab Results Feature
+
+####  Implementation
+
+The show lab results feature allows the user to view the lab result list of a particular student. Its implementation introduces the following classes:
+* `ShowCommand`that extends `Command`
+* `ShowCommandParser` that implements `Parser<ShowCommand>`
+* `ShowCommandResult` that extends `CommandResult`
+
+The syntax of this command is `show <INDEX_ON_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab results of student at index 1 of the current list.
+
+Given below is a possible usage scenario:
+
+[Pre-Condition] There are 2 students in ProgrammerError, and the user has created some lab results for each of them.
+
+Step 1. The user key in the command `show 1`: The information of the student at index 1 as well as his/her lab results are displayed on the side panel.
+
+The mechanism is as described below:
+
+* Upon detecting 'show' as the command word. `ProgrammerErrorParser` will create a `ShowCommandParser` with the input index.
+
+
+* `ShowCommandParser` parses the index and creates a `ShowCommand`, which finds the student to be shown according to the index and creates a `ShowCommandResult` with the student identified.
+
+
+* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identifed student.
+
+
+Step 2. The user key in `show 2`: The side panel is updated with the information and lab results of the student at index 2
+
+Step 3. The user key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
+
+
+The following sequence diagram shows how the show command works:
+
+![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![ShowActivityDiagram](images/ShowActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Show Lab Results executes:**
+
+* **Alternative 1 (current choice):** Each student object keeps track of its own lab results by an ObservableList.
+    * Pros: Easy to implement; Lower chance of having mismatched student and lab records.
+    * Cons: Have to pass a `Student` instance across different classes; May have performance issue if more attributes are added for `Student`
+
+* **Alternative 2:** An ObservableList of lab results of every student in ProgrammerError
+  itself.
+    * Pros: Potential improvement in performance by passing an index, instead of a `Student` instance, across different classes.
+    * Cons: Hard to implement, as we have to ensure the ObservableList of lab results and students have matching index
+      (ie `Student` instance at index 1 of student list has its lab results at index 1 of lab results list),
+      given that other operations such as add and delete can change the indexes easily.
+
+_{more aspects and alternatives to be added}_
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -329,7 +381,7 @@ The following UML activity diagram summarizes what happens when a user executes 
 CS2100 TAs who
 * have to manage a number of students across different classes
 * keep track of the students' attendance
-* keep track of the students' grades
+* keep track of the students' emails
 * prefer and comfortable with CLI tools
 * can type fast
 * are proficient with Unix commands
@@ -338,7 +390,10 @@ CS2100 TAs who
 **Value proposition**:
 
 CS2100 TAs who use ProgrammerError enjoys greater productivity and efficiency when managing his/her classes of students.
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 ### User stories
 
@@ -346,13 +401,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                                                                               | So that I can…​                                                     
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
-| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
+| `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.
 | `* * *`  | user ready to start using the app          | purge all current data         |  get rid of data in the app.      
-| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately.
+| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, email)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
 | `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.   
 | `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.                                      
-| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and grade.
+| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and email.
 | `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.                   
 | `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.         
 | `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.           
@@ -362,10 +417,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.                 
 | `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.                    
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.                                
-| `* *`   | CS2100 TA                                   | update attendance to keep track of participation grade%                                          | I can fulfil my obligations as a TA.                                   
+| `* *`   | CS2100 TA                                   | update attendance to keep track of participation email%                                          | I can fulfil my obligations as a TA.                                   
 | `* *`   | CS2100 TA                                   | edit a student's participation score                                                             | the records are up to date.                                            
 | `* *`   | CS2100 TA                                   | upload the students' performance to LumiNUS conveniently                                         |                                                                        
-| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/grade from the database.       
+| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/email from the database.       
 | `* *`   | CS2100 TA who loves using the keyboard      | type commands                                                                                    | practice my typing skills.                                              
 | `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |                                                                        
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.                               
@@ -581,10 +636,14 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### Download data
 
-1. Dealing with missing/corrupted data files
+1. Select folder from directory chooser window to save data to:
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. To cancel, click 'cancel' to return to the main window.
+    2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
-1. _{ more test cases …​ }_
+### [Proposed] Dashboard
+
+
+1. A dashboard to view the TA's classes lab results.  

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 
 /**
  * Represents a student in the ProgrammerError.
@@ -17,24 +20,30 @@ public class Student {
     private final Name name;
     private final StudentId studentId;
     private final ClassId classId;
-    private final Grade grade;
-    private List<LabResult> labResultList;
+    private final Email email;
+    private ObservableList<LabResult> labResultList;
+
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, StudentId studentId, ClassId classId, Grade grade) {
-        requireAllNonNull(name, studentId, classId, grade);
+    public Student(Name name, StudentId studentId, ClassId classId, Email email) {
+        requireAllNonNull(name, studentId, classId, email);
         this.name = name;
         this.studentId = studentId;
         this.classId = classId;
-        this.grade = grade;
-        this.labResultList = new ArrayList<>();
+        this.email = email;
+        this.labResultList = FXCollections.observableArrayList();
     }
 
     public Name getName() {
         return name;
     }
+
+    public String getFullName() {
+        return name.fullName;
+    }
+
 
     public StudentId getStudentId() {
         return studentId;
@@ -44,11 +53,11 @@ public class Student {
         return classId;
     }
 
-    public Grade getGrade() {
-        return grade;
+    public Email getEmail() {
+        return email;
     }
 
-    public List<LabResult> getLabResultList() {
+    public ObservableList<LabResult> getLabResultList() {
         return labResultList;
     }
 
@@ -56,14 +65,14 @@ public class Student {
      * Add a lab result into the student's record
      * */
     public void addLabResult(LabResult result) {
-        if (this.labResultList == null) {
-            labResultList = new ArrayList<>();
-        }
         this.labResultList.add(result);
     }
 
     public void setLabResultRecord(List<LabResult> labResultRecord) {
-        this.labResultList = labResultRecord;
+        if (labResultRecord == null) {
+            labResultRecord = new ArrayList<>();
+        }
+        this.labResultList.addAll(labResultRecord);
     }
     /**
      * Returns true if both students have the same name.
@@ -96,14 +105,14 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getClassId().equals(getClassId())
-                && otherStudent.getGrade().equals(getGrade())
+                && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getLabResultList().equals(getLabResultList());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentId, classId, grade);
+        return Objects.hash(name, studentId, classId, email);
     }
 
     @Override
@@ -113,8 +122,8 @@ public class Student {
                 + getStudentId()
                 + "; Class ID: "
                 + getClassId()
-                + "; Grade: "
-                + getGrade();
+                + "; Email: "
+                + getEmail();
     }
 
 }

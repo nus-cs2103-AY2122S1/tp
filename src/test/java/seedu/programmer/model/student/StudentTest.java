@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_GRADE_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
 import static seedu.programmer.testutil.TypicalStudents.ALICE;
@@ -28,7 +28,7 @@ public class StudentTest {
         // same name, all other attributes different -> returns false
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB)
                                                        .withClassId(VALID_CLASS_ID_BOB)
-                                                       .withGrade(VALID_GRADE_BOB).build();
+                                                       .withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns true
@@ -76,7 +76,7 @@ public class StudentTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different programmer -> returns false
-        editedAlice = new StudentBuilder(ALICE).withGrade(VALID_GRADE_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertNotEquals(ALICE, editedAlice);
     }
 }
