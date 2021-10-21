@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
@@ -39,6 +40,8 @@ public class McCard extends UiPart<Region> {
     private Label currMc;
     @FXML
     private Label targetMc;
+    @FXML
+    private ProgressBar progressBar;
 
     /**
      * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
@@ -50,8 +53,12 @@ public class McCard extends UiPart<Region> {
         currMc.setText(String.valueOf(mc.value));
 
         int target = CompletedMcList.requirementsList[index];
-        customiseStyle(mc.value, target);
         targetMc.setText(" / " + target + " MCs");
+
+        double progress = mc.value >= target ? 1 : (double) mc.value / target;
+        progressBar.setProgress(progress);
+
+        customiseStyle(mc.value, target);
     }
 
     private String getTitle(int index) {
@@ -77,8 +84,10 @@ public class McCard extends UiPart<Region> {
     private void customiseStyle(int mcValue, int target) {
         if (mcValue < target) {
             currMc.setStyle("-fx-text-fill: pink;");
+            progressBar.setStyle("-fx-accent: pink;");
         } else {
             currMc.setStyle("-fx-text-fill: paleturquoise;");
+            progressBar.setStyle("-fx-accent: paleturquoise;");
         }
     }
 

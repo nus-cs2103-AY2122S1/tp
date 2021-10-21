@@ -350,3 +350,8 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.mc_progress {
+    -fx-text-box-border: transparent;
+    -fx-control-inner-background: transparent;
+}
