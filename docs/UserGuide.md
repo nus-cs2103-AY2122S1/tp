@@ -5,7 +5,7 @@ title: User Guide
 
 Source Control is a **desktop app for CS1101S professors to manage the performance of their students, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). Source Control can give you both a quick overview and a closer look of how your students are doing.
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -35,7 +35,6 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
     * **`search`**`-n John Doe` : Searches for student `John Doe`.
 
     * **`clear`** : Clears all existing data.
-    
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -79,7 +78,7 @@ Format: `add student -n <student_name> -i <student_id>  [-g <group_name>] [-t <t
 
 * Adds a new student with the given name and NUSNET ID into the database.
 * Adds the student into the groups the student belongs to.
-* Adds a tag to the student if applicable. 
+* Adds a tag to the student if applicable.
 
 Examples:
 * `add student -n John Doe -i E0123456`
@@ -131,15 +130,15 @@ Finds students who match the input keywords.
 
 Format: `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)`
 
-* Search for students by their name, NUSNET ID, tag, or the group they belong in. 
-Only one type of tag should be used for each search. 
+* Search for students by their name, NUSNET ID, tag, or the group they belong in.
+Only one type of tag should be used for each search.
 * To search with multiple keywords, separate keywords with spaces. e.g. `search -g T02A R03C`
-* The search is case-insensitive. e.g. `hans` will match `Hans`. 
+* The search is case-insensitive. e.g. `hans` will match `Hans`.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search). 
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 * For search with name or tag, only full words will be matched. e.g. `Han` will not match `Hans`.
-* For search with NUSNET ID or group name, partial search is supported. e.g. `T02` will match `T02A` and `T02B`. 
+* For search with NUSNET ID or group name, partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
 
 Examples:
 * `search -n John Doe`
