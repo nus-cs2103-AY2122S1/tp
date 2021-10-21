@@ -56,11 +56,11 @@
                             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
 
-                        <VBox fx:id="moduleClassList" minWidth="355.0" prefWidth="500.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                        <VBox fx:id="moduleLessonList" minWidth="355.0" prefWidth="500.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
                             <padding>
                                 <Insets bottom="10" left="10" right="10" top="10" />
                             </padding>
-                            <StackPane fx:id="moduleClassListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                            <StackPane fx:id="moduleLessonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                         </VBox>
 
                     </children>

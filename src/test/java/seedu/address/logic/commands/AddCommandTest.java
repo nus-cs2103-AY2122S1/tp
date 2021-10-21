@@ -20,7 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addClass(ModuleClass moduleClass) {
+        public void addLesson(ModuleLesson moduleLesson) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,7 +145,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteClass(ModuleClass target) {
+        public void deleteLesson(ModuleLesson target) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -155,7 +155,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void setModuleClass(ModuleClass target, ModuleClass editedClass) {
+        public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
             throw new AssertionError("This method should not be called");
         }
 
@@ -165,7 +165,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<ModuleClass> getFilteredModuleClassList() {
+        public ObservableList<ModuleLesson> getFilteredModuleLessonList() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -175,7 +175,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateFilteredModuleClassList(Predicate<ModuleClass> predicate) {
+        public void updateFilteredModuleLessonList(Predicate<ModuleLesson> predicate) {
             throw new AssertionError("This method should not be called");
         }
     }

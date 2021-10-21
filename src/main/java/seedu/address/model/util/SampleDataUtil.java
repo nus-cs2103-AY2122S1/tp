@@ -8,9 +8,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.moduleclass.Day;
-import seedu.address.model.moduleclass.ModuleClass;
-import seedu.address.model.moduleclass.Time;
+import seedu.address.model.lessoncode.LessonCode;
+import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
@@ -18,7 +19,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -44,12 +44,16 @@ public class SampleDataUtil {
         };
     }
 
-    public static ModuleClass[] getSampleModuleClasses() {
-        return new ModuleClass[] {
-            new ModuleClass(getModuleCodeSet("CS2040 T05"), new Day("2"), new Time("10:00"), new Remark("COM1-113")),
-            new ModuleClass(getModuleCodeSet("CS2100 T21"), new Day("2"), new Time("15:00"), new Remark("COM2-0223")),
-            new ModuleClass(getModuleCodeSet("CS2103 TG09"), new Day("1"), new Time("14:00"), new Remark("I3 Audi")),
-            new ModuleClass(getModuleCodeSet("CS2106 TG01"), new Day("5"), new Time("10:00"), new Remark("COM1-120")),
+    public static ModuleLesson[] getSampleModuleLessons() {
+        return new ModuleLesson[] {
+            new ModuleLesson(getModuleCodeSet("CS2040 T05"), new LessonDay("2"),
+                    new LessonTime("10:00"), new Remark("COM1-113")),
+            new ModuleLesson(getModuleCodeSet("CS2100 T21"), new LessonDay("2"),
+                    new LessonTime("15:00"), new Remark("COM2-0223")),
+            new ModuleLesson(getModuleCodeSet("CS2103 TG09"), new LessonDay("1"),
+                    new LessonTime("14:00"), new Remark("I3 Audi")),
+            new ModuleLesson(getModuleCodeSet("CS2106 TG01"), new LessonDay("5"),
+                    new LessonTime("10:00"), new Remark("COM1-120")),
         };
     }
 
@@ -59,8 +63,8 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
 
-        for (ModuleClass sampleModuleClass : getSampleModuleClasses()) {
-            sampleAb.addClass(sampleModuleClass);
+        for (ModuleLesson sampleModuleLesson : getSampleModuleLessons()) {
+            sampleAb.addLesson(sampleModuleLesson);
         }
         return sampleAb;
     }
@@ -82,8 +86,11 @@ public class SampleDataUtil {
         String trimmedModuleCode = moduleCode.trim();
         String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
         assert moduleCodeArr.length >= 1 : "Array should not be empty\n";
-        Set<Tag> tags = Arrays.stream(moduleCodeArr).skip(1).map(Tag::new).collect(Collectors.toSet());
-        return new ModuleCode(moduleCodeArr[0], tags);
+        Set<LessonCode> lessonCodes = Arrays.stream(moduleCodeArr)
+                .skip(1)
+                .map(LessonCode::new)
+                .collect(Collectors.toSet());
+        return new ModuleCode(moduleCodeArr[0], lessonCodes);
     }
 
 }

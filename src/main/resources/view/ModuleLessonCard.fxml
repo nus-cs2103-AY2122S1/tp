@@ -25,19 +25,19 @@
                 </Label>
                <FlowPane fx:id="moduleCodeContainer" />
             </HBox>
-            <FlowPane fx:id="tags">
+            <FlowPane fx:id="lessonCodes">
                 <padding>
                     <Insets bottom="5.0" top="5.0" />
                 </padding>
          </FlowPane>
          <HBox>
             <children>
-                  <Label fx:id="day" styleClass="cell_small_label" text="\$day">
+                  <Label fx:id="lessonDay" styleClass="cell_small_label" text="\$lessonDay">
                       <padding>
                           <Insets right="5.0" />
                       </padding>
                </Label>
-                  <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
+                  <Label fx:id="lessonTime" styleClass="cell_small_label" text="\$lessonTime" />
             </children>
          </HBox>
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">

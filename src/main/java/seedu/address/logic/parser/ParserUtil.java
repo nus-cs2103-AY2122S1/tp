@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -84,12 +84,15 @@ public class ParserUtil {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
         for (int i = 1; i < moduleCodeArr.length; i++) {
-            if (!Tag.isValidTagName(moduleCodeArr[i])) {
-                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            if (!LessonCode.isValidLessonCode(moduleCodeArr[i])) {
+                throw new ParseException(LessonCode.MESSAGE_CONSTRAINTS);
             }
         }
-        Set<Tag> tags = Arrays.stream(moduleCodeArr).skip(1).map(Tag::new).collect(Collectors.toSet());
-        return new ModuleCode(moduleCodeArr[0], tags);
+        Set<LessonCode> lessonCodes = Arrays.stream(moduleCodeArr)
+                .skip(1)
+                .map(LessonCode::new)
+                .collect(Collectors.toSet());
+        return new ModuleCode(moduleCodeArr[0], lessonCodes);
     }
 
     /**
@@ -135,30 +138,30 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String tag} into a {@code Tag}.
+     * Parses a {@code String lessonCode} into a {@code LessonCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws ParseException if the given {@code lessonCode} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    public static LessonCode parseLessonCode(String lessonCode) throws ParseException {
+        requireNonNull(lessonCode);
+        String trimmedTag = lessonCode.trim();
+        if (!LessonCode.isValidLessonCode(trimmedTag)) {
+            throw new ParseException(LessonCode.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new LessonCode(trimmedTag);
     }
 
     /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     * Parses {@code Collection<String> lessonCodes} into a {@code Set<LessonCode>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+    public static Set<LessonCode> parseLessonCodes(Collection<String> lessonCodes) throws ParseException {
+        requireNonNull(lessonCodes);
+        final Set<LessonCode> lessonCodeSet = new HashSet<>();
+        for (String tagName : lessonCodes) {
+            lessonCodeSet.add(parseLessonCode(tagName));
         }
-        return tagSet;
+        return lessonCodeSet;
     }
 
     /**

@@ -1,4 +1,4 @@
-package seedu.address.model.moduleclass;
+package seedu.address.model.modulelesson;
 
 
 import static java.util.Objects.requireNonNull;
@@ -8,7 +8,7 @@ import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
-public class Day {
+public class LessonDay {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Days should only contain numbers between 1 to 7, inclusive";
@@ -20,7 +20,7 @@ public class Day {
      *
      * @param dayOfWeek the day of the week.
      */
-    public Day(String dayOfWeek) {
+    public LessonDay(String dayOfWeek) {
         requireNonNull(dayOfWeek);
         checkArgument(isValidDay(dayOfWeek), MESSAGE_CONSTRAINTS);
         value = DayOfWeek.of(Integer.parseInt(dayOfWeek));
@@ -49,8 +49,8 @@ public class Day {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Day // instanceof handles nulls
-                && value.equals(((Day) other).value)); // state check
+                || (other instanceof LessonDay // instanceof handles nulls
+                && value.equals(((LessonDay) other).value)); // state check
     }
 
     @Override

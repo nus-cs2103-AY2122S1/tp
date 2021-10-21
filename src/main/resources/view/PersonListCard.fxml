@@ -36,7 +36,7 @@
             <padding>
                <Insets bottom="5.0" />
             </padding></FlowPane>
-      <FlowPane fx:id="tags">
+      <FlowPane fx:id="lessonCodes">
             <padding>
                <Insets bottom="5.0" />
             </padding></FlowPane>

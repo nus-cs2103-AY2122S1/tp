@@ -42,6 +42,8 @@ public class FindCommandParser implements Parser<FindCommand> {
             );
         }
 
+        assert(numberOfValidPrefixes == 1) : "There should only be one prefix used for the command!";
+
         if (isNamePrefixPresent) {
             return getFindNameCommand(argMultimap);
         } else if (isModulePrefixPresent) {
