@@ -22,6 +22,7 @@ public class StringUtil {
         "([01]?[0-9]|2[0-3]):[0-5][0-9]";
     public static final String PERSON_DELIMITER = "\n";
     public static final String CLIENTID_DELIMITER = ", ";
+    public static final String JSON_FILE_PREFIX = ".json";
 
     /**
      * Returns true if the {@code sentence} contains the {@code word}.
@@ -181,5 +182,23 @@ public class StringUtil {
         requireNonNull(delimiter);
         String[] stringArray = list.stream().map(Object::toString).toArray(String[]::new);
         return String.join(delimiter, stringArray);
+    }
+
+
+    /**
+     * Removes the {@code suffix} from {@code word} if it exists and returns it.
+     * If {@code suffix} does not exists, then {@code word} will just be returned.
+     *
+     * @param word the string to remove the suffix from
+     * @param suffix the suffix that is to be removed
+     */
+    public static String getStringWithoutSuffix(String word, String suffix) {
+        requireNonNull(word);
+        requireNonNull(suffix);
+        if (!word.endsWith(suffix)) {
+            return word;
+        }
+
+        return word.substring(0, word.length() - suffix.length());
     }
 }

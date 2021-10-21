@@ -19,6 +19,8 @@ import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.abcommand.AbCommand;
+import seedu.address.logic.parser.abcommandparser.AbCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
@@ -32,7 +34,7 @@ public class AddressBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private Model model;
+    private final Model model;
 
     public AddressBookParser(Model model) {
         this.model = model;
@@ -87,6 +89,9 @@ public class AddressBookParser {
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments, model);
+
+        case AbCommand.COMMAND_WORD:
+            return new AbCommandParser().parse(arguments, model);
 
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommandParser().parse(arguments, model);

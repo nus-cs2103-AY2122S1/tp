@@ -387,4 +387,37 @@ public class StringUtilTest {
         assertEquals(StringUtil.joinListToString(clientIdList, clientIdDelimiter), clientIdResult);
 
     }
+
+    //---------------- Tests for joinListToString --------------------------------------
+
+    /**
+     * Equivalence Partitions: null, valid with suffix, valid without suffix
+     */
+
+    @Test
+    public void getStringWithoutSuffix_listNull_throwNullPointersException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.getStringWithoutSuffix(null, "wordword"));
+    }
+
+    @Test
+    public void getStringWithoutSuffix_delimiterNull_throwNullPointersException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.getStringWithoutSuffix("wordword", null));
+    }
+
+    @Test
+    public void getStringWithoutSuffix_validInputs_correctResult() {
+        String input = "addressbook.json";
+        String prefix = ".json";
+        String result = StringUtil.getStringWithoutSuffix(input, prefix);
+        String expectedResult = "addressbook";
+        assertEquals(result, expectedResult);
+    }
+
+    @Test
+    public void getStringWithoutSuffix_validInputs_noSuffix() {
+        String input = "addressbook.jso";
+        String prefix = ".json";
+        String result = StringUtil.getStringWithoutSuffix(input, prefix);
+        assertEquals(result, input);
+    }
 }

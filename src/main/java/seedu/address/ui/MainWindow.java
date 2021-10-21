@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePathObject());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -170,6 +170,20 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Switches the Address Book.
+     */
+    private void handleSwitchAddressBook() {
+        this.logic.switchAddressBook();
+    }
+
+    /**
+     * Create a new Address Book.
+     */
+    private void handleCreateAddressBook() throws CommandException {
+        this.logic.createAddressBook();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -191,6 +205,14 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isSwitchAddressBook()) {
+                handleSwitchAddressBook();
+            }
+
+            if (commandResult.isCreateAddressBook()) {
+                handleCreateAddressBook();
             }
 
             return commandResult;

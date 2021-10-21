@@ -24,6 +24,9 @@ Finding your next lead has never been easier.
     * [Locating clients by keywords: search](#locating-clients-by-keywords--search)
     * [Filter current list: filter](#filter-current-list-by-keywords--filter)
     * [Exiting the program: exit](#exiting-the-program--exit)
+    * Create new address book: ab create
+    * Switch to different address book: ab switch
+    * List all address book: ab list
     * [Saving data](#saving-the-data)
     * [Edit data file](#edit-data-file)
 * [FAQ](#faq)
@@ -251,6 +254,36 @@ Exits the program.
 
 Format: `exit`
 
+### Create new address book: `ab create`
+
+Create a new address book by the name provided and switch to it.
+
+Format: `ab create {ADDRESSBOOK_NAME}`
+
+* `{ADDRESSBOOK_NAME}` refers to the name to be given to the new address book.
+* The name of the addressbook cannot be the same as an existing address book.
+
+Examples:
+* 'ab create vip clients' will create a new address book named `vip clients`
+
+### Switch to different address book: `ab switch`
+
+Switch to a different address book that currently exists.
+
+Format: `ab create {ADDRESSBOOK_NAME}`
+
+* `{ADDRESSBOOK_NAME}` refers to the name of the address book to switched to .
+
+Examples:
+* 'ab switch other' will switch over to the address book named `other`
+
+
+### List all address book: `ab list`
+
+List all the name of all the existing address books
+
+Format: `ab list`
+
 ### Saving the data
 
 LeadsForce's data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -284,4 +317,7 @@ Action | Format | Examples
 **Search** | `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | search * e/doe@gmail.com r/5 |
 **Filter** | `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...` | filter * e/doe@gmail.com p/9 |
 **Sort** | `sort <attribute>/{ASC/DESC}` | sort r/asc |
+**Create Address Book** | `ab create {ADDRESSBOOK_NAME}` | ab create vip
+**Switch Address Book** | `ab switch {ADDRESSBOOK_NAME}` | ab switch another
+**List Address Book** | `ab list` | -
 **Exit** | `exit` | - |

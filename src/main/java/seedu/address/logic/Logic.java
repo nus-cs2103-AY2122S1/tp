@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import java.nio.file.Path;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
@@ -42,12 +43,25 @@ public interface Logic {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' address book file path wrapped object.
+     */
+    ObservableValue<Path> getAddressBookFilePathObject();
+
+    /**
      * Returns the user prefs' GUI settings.
      */
     GuiSettings getGuiSettings();
 
     /**
-     * Set the user prefs' GUI settings.
+     * Sets the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Switches the AddressBook to that specified {@code Path filePath}
+     * in {@code addressBookFilePath} of {@code UserPrefs}
+     */
+    void switchAddressBook();
+
+    void createAddressBook() throws CommandException;
 }

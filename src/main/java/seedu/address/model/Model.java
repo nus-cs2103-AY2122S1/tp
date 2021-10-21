@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -52,6 +53,11 @@ public interface Model {
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
+
+    /**
+     * Returns the user prefs' address book file path wrapped object.
+     */
+    ObservableValue<Path> getAddressBookFilePathObject();
 
     /**
      * Sets the user prefs' address book file path.
