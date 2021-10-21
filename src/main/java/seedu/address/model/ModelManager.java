@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.OrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -25,6 +26,8 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
+    //pending re-wrapping by yuichiro
+    private final OrderList orderList;
     private final FilteredList<Order> filteredOrders;
 
     /**
@@ -38,7 +41,11 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-        filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
+
+        //pending re-wrapping by Yuichiro
+        this.orderList = new OrderList();
+        filteredOrders = new FilteredList<>(orderList.asUnmodifiableObservableList());
+
     }
 
     public ModelManager() {
@@ -159,9 +166,10 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-    public void markDone(Task task) {
+    public void markTask(Task task) {
         addressBook.markDone(task);
     }
+
 
     //=========== Order Management ==================================================================================
 
@@ -206,8 +214,12 @@ public class ModelManager implements Model {
         filteredOrders.setPredicate(predicate);
     }
 
+    /**
+     * Marks an order as completed
+     */
     public void markOrder(Order order) {
         addressBook.markOrder(order);
+
     }
 
     //=========== Filtered Person List Accessors =============================================================
