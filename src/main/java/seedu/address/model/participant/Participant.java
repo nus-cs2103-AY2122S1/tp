@@ -236,8 +236,13 @@ public class Participant {
                 && otherParticipant.getBirthDate().equals(getBirthDate());
     }
 
+    /**
+     * Removes this {@code Participant} from the {@code events} he/she is participating in.
+     */
     public void deleteFromEvents() {
-        this.events.forEach(e -> e.removeParticipant(this));
+        for (int i = events.size() - 1; i >= 0; i--) {
+            this.events.get(i).removeParticipant(this);
+        }
     }
 
     /**
