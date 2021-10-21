@@ -152,7 +152,38 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+### Data Archiving Features
+
+#### Import feature
+
+The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file from the file path stored.
+
+This operation is exposed in the `Model` interface as `Model#importFile(Path filePath)`. This is further facilitated by an additional function in `AddressBook`, `AddressBook#mergeFile`.
+
+The following sequence diagram shows how the import operation works:
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+#### !TODO Export feature
+
+### Address Book Management
+
+#### Delete feature
+
+The `delete` mechanism relies on `ModelManager#deletePerson()`. The Person(s) to be deleted is obtained through `ModelManager#getFilteredPersonList()`
+
+Below is a sequence diagram for deleting a Person from the address book, executed after the user inputs `delete 1`
+
+![Sequence of the Delete command](images/DeleteSequenceDiagram.png)
+
+`DeleteCommand` also exposes 2 factory methods: 
+- `DeleteCommand#allShown()` returns a `DeleteCommand` which deletes all Persons shown in the main window.
+- `DeleteCommand#all()` which deletes all Persons in the address book.
+
+Below is a sequence diagram for the deleting all shown Persons executed after the user inputs `delete -f` or `delete -a -f`. `DeleteCommand` iterates through the list returned by `Model#getFilteredPersonList()` to delete all Persons shown in the main window.
+
+![Sequence of the Delete All Shown command](images/DeleteAllShownSequenceDiagram.png)
+
+The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`. 
 
 ### \[Proposed\] Undo/redo feature
 
@@ -234,9 +265,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
