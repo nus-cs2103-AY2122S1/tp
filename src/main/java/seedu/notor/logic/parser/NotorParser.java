@@ -1,5 +1,6 @@
 package seedu.notor.logic.parser;
 
+import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
@@ -76,6 +77,7 @@ public class NotorParser {
             if (ClearCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ClearCommand();
             }
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedNameMatcher.matches()) {
@@ -93,6 +95,7 @@ public class NotorParser {
                     return new SuperGroupCreateCommandParser(name, arguments).parse();
                 }
             }
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedIndexMatcher.matches()) {
@@ -122,6 +125,7 @@ public class NotorParser {
                     return new SubGroupCreateCommandParser(index, arguments).parse();
                 }
             }
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedMatcher.matches()) {
@@ -130,9 +134,8 @@ public class NotorParser {
             final String arguments = targetedMatcher.group("arguments");
             // TODO: List command conversion/find command conversion
         }
-        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-        // Use for invalid command format in parsers.
-        // throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+
+        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
 }
