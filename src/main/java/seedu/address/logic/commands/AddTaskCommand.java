@@ -19,12 +19,16 @@ public class AddTaskCommand extends AddCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a module. "
             + "Parameters: "
-            + PREFIX_MODULE_NAME + "MODULE NAME"
-            + PREFIX_TASK_NAME + "TASK NAME"
-            + PREFIX_TASK_DEADLINE + "TASK DEADLINE";
+            + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_TASK_NAME + "TASK NAME "
+            + PREFIX_TASK_DEADLINE + "TASK DEADLINE\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MODULE_NAME + "CS2103 "
+            + PREFIX_TASK_NAME + "assignment1 "
+            + PREFIX_TASK_DEADLINE + "20/10/2021";
 
     public static final String MESSAGE_ADD_TASK_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the module";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the module.";
     public static final String MESSAGE_MODULE_NOT_FOUND = "This module is not found.";
 
     private final Task toAdd;
