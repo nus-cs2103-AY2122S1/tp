@@ -19,8 +19,8 @@ if () then ([All required fields are entered])
     the respective fields and
     add into TuitiONE;
 
-    :Save the TuitiONE
-    to Storage;
+    :Save TuitiONE
+    into Storage;
 
     :Update TuitiONE's UI with
     the new lesson;
