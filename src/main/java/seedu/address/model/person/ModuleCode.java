@@ -6,7 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
+import seedu.address.model.lessoncode.LessonCode;
 
 /**
  * Represents a module code that a Person is taking in the address book.
@@ -20,19 +20,19 @@ public class ModuleCode {
 
     public static final String VALIDATION_REGEX = "[a-zA-Z]{2,3}[\\d]{4}[a-zA-Z]*";
     public final String value;
-    public final Set<Tag> tags;
+    public final Set<LessonCode> lessonCodes;
 
     /**
      * Constructs a {@code ModuleCode}.
      *
      * @param moduleCode A valid module code.
      */
-    public ModuleCode(String moduleCode, Set<Tag> tags) {
-        requireAllNonNull(moduleCode, tags);
+    public ModuleCode(String moduleCode, Set<LessonCode> lessonCodes) {
+        requireAllNonNull(moduleCode, lessonCodes);
         checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
-        tags.forEach(tag -> checkArgument(Tag.isValidTagName(tag.tagName)));
+        lessonCodes.forEach(lessonCode -> checkArgument(LessonCode.isValidLessonCode(lessonCode.lessonCode)));
         value = moduleCode;
-        this.tags = tags;
+        this.lessonCodes = lessonCodes;
     }
 
     /**
@@ -49,17 +49,17 @@ public class ModuleCode {
         return value;
     }
 
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
+    public Set<LessonCode> getLessonCodes() {
+        return Collections.unmodifiableSet(lessonCodes);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         sb.append(value);
-        for (Tag tag: tags) {
+        for (LessonCode lessonCode : lessonCodes) {
             sb.append(" ");
-            sb.append(tag);
+            sb.append(lessonCode);
         }
         sb.append("]");
         return sb.toString();

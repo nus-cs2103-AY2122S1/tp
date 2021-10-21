@@ -1,28 +1,28 @@
 {
   "persons" : [ ],
-  "classes" : [ {
+  "lessons": [ {
     "moduleCodes" : [ {
       "tags" : [ "B31" ],
       "moduleCodeName" : "CS2100"
     } ],
-    "day": "2",
-    "time": "15:00",
+    "lessonDay": "2",
+    "lessonTime": "15:00",
     "remark": "COM1 0113"
   }, {
     "moduleCodes" : [ {
       "tags" : [ "T09" ],
       "moduleCodeName" : "CS2103"
     } ],
-    "day": "4",
-    "time": "09:00",
+    "lessonDay": "4",
+    "lessonTime": "09:00",
     "remark": "online"
   }, {
     "moduleCodes" : [ {
       "tags" : [ "T18" ],
       "moduleCodeName" : "CS2100"
     } ],
-    "day": "3",
-    "time": "17:00",
+    "lessonDay": "3",
+    "lessonTime": "17:00",
     "remark": "COM1 01-20"
   } ]
 }

@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModuleClasses.CS2100_LAB1;
+import static seedu.address.testutil.TypicalModuleLessons.CS2100_LAB1;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-public class JsonAdaptedModuleClassTest {
+public class JsonAdaptedModuleLessonTest {
 
     private static final String INVALID_DAY = "8";
     private static final String INVALID_TIME = "15:61";
@@ -28,7 +28,7 @@ public class JsonAdaptedModuleClassTest {
 
     @Test
     public void toModelType_validModuleClassDetails_returnsModuleClass() throws Exception {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(CS2100_LAB1);
+        JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(CS2100_LAB1);
         assertEquals(CS2100_LAB1, moduleClass.toModelType());
     }
 
@@ -36,33 +36,33 @@ public class JsonAdaptedModuleClassTest {
     public void toModelType_invalidModuleCode_throwsIllegaArgumentException() {
         List<JsonAdaptedModuleCode> invalidModuleCodes = new ArrayList<>(VALID_MODULE_CODES);
         invalidModuleCodes.add(new JsonAdaptedModuleCode(INVALID_MODULE_CODE, new ArrayList<>()));
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(invalidModuleCodes,
+        JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(invalidModuleCodes,
                 VALID_DAY, VALID_TIME, VALID_REMARK);
         assertThrows(IllegalValueException.class, moduleClass::toModelType);
     }
 
     @Test
     public void toModelType_invalidDay_throwsIllegaArgumentException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_MODULE_CODES,
+        JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODES,
                 INVALID_DAY, VALID_TIME, VALID_REMARK);
         assertThrows(IllegalArgumentException.class, moduleClass::toModelType);
     }
 
     @Test void toModelType_nullDay_throwsIllegalValueException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_MODULE_CODES, null,
+        JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODES, null,
                 VALID_TIME, VALID_REMARK);
         assertThrows(IllegalValueException.class, moduleClass::toModelType);
     }
 
     @Test
     public void toModelType_invalidTime_throwsIllegaArgumentException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_MODULE_CODES,
+        JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODES,
                 VALID_DAY, INVALID_TIME, VALID_REMARK);
         assertThrows(IllegalArgumentException.class, moduleClass::toModelType);
     }
 
     @Test void toModelType_nullTime_throwsIllegalValueException() {
-        JsonAdaptedModuleClass moduleClass = new JsonAdaptedModuleClass(VALID_MODULE_CODES, VALID_DAY,
+        JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODES, VALID_DAY,
                 null, VALID_REMARK);
         assertThrows(IllegalValueException.class, moduleClass::toModelType);
     }

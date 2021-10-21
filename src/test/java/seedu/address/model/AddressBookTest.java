@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.moduleclass.ModuleClass;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -104,7 +104,7 @@ public class AddressBookTest {
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
-        private final ObservableList<ModuleClass> classes = FXCollections.observableArrayList();
+        private final ObservableList<ModuleLesson> classes = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
@@ -116,7 +116,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<ModuleClass> getModuleClassList() {
+        public ObservableList<ModuleLesson> getModuleLessonList() {
             return classes;
         }
     }
