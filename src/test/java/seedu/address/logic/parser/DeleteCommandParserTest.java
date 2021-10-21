@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.person.DeleteCommand;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 

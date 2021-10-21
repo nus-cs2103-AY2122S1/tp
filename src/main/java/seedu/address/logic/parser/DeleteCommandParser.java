@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.person.DeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
