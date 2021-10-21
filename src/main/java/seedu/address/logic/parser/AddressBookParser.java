@@ -21,6 +21,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindFacilityCommand;
 import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
@@ -111,6 +112,9 @@ public class AddressBookParser {
 
         case ShowAliasesCommand.COMMAND_WORD:
             return new ShowAliasesCommand();
+
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
