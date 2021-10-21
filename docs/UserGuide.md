@@ -21,7 +21,7 @@ If you can type fast, TuitiONE can get your contact management tasks done faster
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. _Note how the app contains some sample data_.<br>
 
-   ![Ui](images/UserGuideImage/Ui.png)
+   ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
