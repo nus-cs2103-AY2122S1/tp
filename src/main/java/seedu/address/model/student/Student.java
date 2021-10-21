@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
@@ -20,6 +22,7 @@ public class Student {
 
     // Data fields
     private final Group group;
+    private ObservableList<Assessment> assessments = FXCollections.observableArrayList();
 
     /**
      * Every field must be present and not null.

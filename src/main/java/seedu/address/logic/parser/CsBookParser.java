@@ -19,6 +19,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
+import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -78,11 +79,14 @@ public class CsBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ViewGroupCommand.COMMAND_WORD :
+        case ViewGroupCommand.COMMAND_WORD:
             return new ViewGroupCommandParser().parse(arguments);
 
         case AddGroupCommand.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
+
+        case ViewStudentCommand.COMMAND_WORD:
+            return new ViewStudentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

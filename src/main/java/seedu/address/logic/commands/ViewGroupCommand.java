@@ -17,7 +17,7 @@ public class ViewGroupCommand extends Command {
 
     public static final String COMMAND_WORD = "viewgroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Find and displays details about a group that matches "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and displays details about a group that matches "
             + "the specified group name (case-sensitive).\n"
             + "Parameters: GROUPNAME \n"
             + "Example: " + COMMAND_WORD + " CS2103T";
