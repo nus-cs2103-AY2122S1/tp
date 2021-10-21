@@ -3,13 +3,11 @@ package seedu.programmer.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.programmer.commons.util.CollectionUtil;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 
