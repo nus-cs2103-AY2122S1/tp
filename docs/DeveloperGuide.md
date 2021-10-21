@@ -553,10 +553,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-Tour Guide decides to add a contact
-Tour Guide inputs the add command to the interface
-AddressBook informs the Tour Guide that the contact was added
-AddressBook displays updated list of contacts
+1.Tour Guide decides to add a contact
+
+2.Tour Guide inputs the add command to the interface
+
+3.AddressBook informs the Tour Guide that the contact was added
+
+4.AddressBook displays updated list of contacts
 Use case ends.
 
 **Extensions**

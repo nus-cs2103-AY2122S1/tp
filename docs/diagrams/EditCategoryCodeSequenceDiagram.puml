@@ -73,7 +73,6 @@ activate EditCommand
 
 create Person
 EditCommand -> Person
-note right: creates another person with the updated attributes
 activate Person
 
 Person -> EditCommand
