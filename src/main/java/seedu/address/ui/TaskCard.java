@@ -40,8 +40,8 @@ public class TaskCard extends UiPart<Region> {
 
         // Sets width property of HBox to be dependent on list cell's width and padding property.
         descriptionPane.maxWidthProperty().bind(Bindings.createDoubleBinding(()->
-            lc.getWidth() - lc.getPadding().getLeft() - lc.getPadding().getRight() - 1,
-            lc.widthProperty(), lc.paddingProperty()));
+                lc.getWidth() - lc.getPadding().getLeft() - lc.getPadding().getRight() - 1,
+                lc.widthProperty(), lc.paddingProperty()));
 
         id.setText(displayedIndex + ". ");
         taskName.setText(task.getDescription().description);

@@ -1,8 +1,14 @@
 package seedu.address.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.nio.file.Paths;
+
 import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.GuiSettings;
 
 public class UserPrefsTest {
 
@@ -18,4 +24,16 @@ public class UserPrefsTest {
         assertThrows(NullPointerException.class, () -> userPrefs.setAddressBookFilePath(null));
     }
 
+    @Test
+    public void equals() {
+        UserPrefs userPrefs = new UserPrefs();
+        userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
+        userPrefs.setAddressBookFilePath(Paths.get("addressbook.json"));
+
+        // same object -> returns true
+        assertEquals(userPrefs, userPrefs);
+
+        // null -> returns true
+        assertNotEquals(null, userPrefs);
+    }
 }

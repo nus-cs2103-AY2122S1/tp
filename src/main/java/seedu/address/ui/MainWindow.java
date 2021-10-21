@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -17,10 +16,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.task.Task;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -119,14 +118,22 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Event handler when user clicks on a particular ListCell in the {@code tmp}.
-     * Updates the task list panel to show the task list of the Person represented by
-     * the selected ListCell.
+     * Event handler when user clicks on a particular {@code ListCell} in the {@code personListView}.
+     * Updates the {@code taskListPanel} to show the task list of the {@code Person} represented
+     * by the selected {@code ListCell}.
      */
     @FXML
     public void handleMouseClicked(ListView<Person> personListView) {
-        List<Task> selectedTaskList = personListView.getSelectionModel().getSelectedItem().getTasks();
-        logic.updateDisplayTaskList(selectedTaskList);
+        int selectedIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
+        String inputCommand = ViewTaskListCommand.COMMAND_WORD + " " + selectedIndex;
+
+        try {
+            executeCommand(inputCommand);
+        } catch (ParseException | CommandException e) {
+            logger.warning("HandleMouseClicked caught an exception when not supposed to:\n"
+                    + e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
     }
 
     /** Makes child node of anchor resize together with its parent. */

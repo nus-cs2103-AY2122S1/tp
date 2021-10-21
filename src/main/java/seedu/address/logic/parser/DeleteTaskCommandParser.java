@@ -14,6 +14,7 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteTaskCommand parse(String args) throws ParseException {
+        // Todo: Handle > 2 ti prefixed tokens?
         try {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX);

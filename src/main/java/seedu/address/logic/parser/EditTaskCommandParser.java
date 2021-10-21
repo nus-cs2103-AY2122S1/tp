@@ -29,9 +29,14 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-            taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE), pe);
+        }
+
+        if (argMultimap.getValue(PREFIX_TASK_INDEX).isPresent()) {
+            taskIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TASK_INDEX).get());
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE));
         }
 
         if (argMultimap.getValue(PREFIX_TASK).isPresent()) {

@@ -13,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -152,6 +153,21 @@ public class ParserUtil {
             taskList.add(parseTask(taskName));
         }
         return taskList;
+    }
+
+    /**
+     * Parses a {@code String desc} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code desc} is invalid.
+     */
+    public static Description parseDescription(String desc) throws ParseException {
+        requireNonNull(desc);
+        String trimmedDescription = desc.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
     /**
