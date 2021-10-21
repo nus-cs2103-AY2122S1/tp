@@ -122,15 +122,15 @@ as present for all shifts.
 The format of the input date is in: `YYYY-MM-DD`
 
 Format:\
-`mark i/index d/startDate d/endDate`\
-`mark n/name d/startDate d/endDate`\
-`mark t/tag d/startDate d/endDate`
+`mark -i index d/startDate d/endDate`\
+`mark -n name d/startDate d/endDate`\
+`mark -t tag d/startDate d/endDate`
 
 Possible to mark a single date `mark t/tag d/date`
 
 Examples:\
-`mark i/1 d/2020-01-03 d/2021-01-03`\
-`mark d/Alex Yeoh d/2020-01-03`
+`mark -i 1 d/2020-01-03 d/2021-01-03`\
+`mark -n Alex Yeoh d/2020-01-03`
 
 
 ### Removing the absent mark `unmark`
@@ -140,12 +140,12 @@ Removes the period that was marked by the `mark` command.
 The format of the input date is in: `YYYY-MM-DD`
 
 Format:\
-`unmark n/name d/startDate d/endDate`\
-`unmark i/index d/startDate d/endDate`  
+`unmark -n name d/startDate d/endDate`\
+`unmark -i index d/startDate d/endDate`  
 
 Examples:\
-`unmark i/1 d/2020-01-03 d/2021-01-03`\
-`unmark t/friends d/2020-01-03`
+`unmark -i 1 d/2020-01-03 d/2021-01-03`\
+`unmark -t friends d/2020-01-03`
 
 ### Deleting a Staff : `delete`
 
@@ -258,12 +258,12 @@ Examples:\
 Views a specific staff’s schedule.
 
 Formats:\
-`viewSchedule n/name` \
-`viewSchedule i/index`
+`viewSchedule -n name` \
+`viewSchedule -i index`
 
 Examples:\
-`viewSchedule n/Candice` \
-`viewSchedule i/123`
+`viewSchedule -n Candice` \
+`viewSchedule -i 123`
 
 
 ### Deleting a staff schedule: `deleteSchedule`
@@ -340,16 +340,18 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**View** | `view n/name` <br> `view i/index`
+**View** | `view -n name` <br> `view -i index`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Delete** | `delete n/name` <br> `delete i/index` <br> ` delete r/role` <br> `delete s/status`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View staff schedule** | `viewSchedlue n/name` <br> `viewSchedlue i/index`
+**View staff schedule** | `viewSchedlue -n name` <br> `viewSchedlue -i index`
 **Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift n/name d/fullDayName-shiftNumber` <br> `deleteShift i/index d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
+**Mark absent** | `mark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
+**Remove mark** | `unmark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
