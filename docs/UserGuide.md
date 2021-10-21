@@ -17,7 +17,7 @@ With TAB, you can effortlessly manage your students' contact details faster than
 
 ## About This Guide
 
-This user guide is intended for any user of TAB. It provides instructions for installing TAB, and gives a detailed description of each feature available in TAB.
+This user guide is intended for any user of TAB. It provides installation instructions to help get you started with using TAB, and gives detailed descriptions of the features available in TAB.
 
 **Navigation**
 
@@ -31,7 +31,7 @@ In the [Table of Contents](), each item listed is a link and you can click to go
 
 ## Quick Start
 
-1. Ensure you have **Java 11** or above installed in your computer.
+1. Ensure you have **Java 11** or above installed on your computer.
 
 <div markdown="block" class="alert alert-info">
 
