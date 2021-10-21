@@ -75,7 +75,7 @@ public class EditTaskCommand extends EditCommand {
                 // return editTaskInformation(module); what to return here?
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     // Edit Task -> Edit task in Module

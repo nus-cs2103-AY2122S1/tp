@@ -21,6 +21,7 @@ public class AddTaskCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a module. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_TASK_ID + "TASK ID "
             + PREFIX_TASK_NAME + "TASK NAME "
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE\n"
             + "Example: " + COMMAND_WORD + " "
