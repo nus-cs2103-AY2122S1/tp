@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewTaskListCommandParser" as ViewTaskListCommandParser LOGIC_COLOR
+participant ":ViewTaskListCommand" as ViewTaskListCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+participant ":TaskListManager" as TaskListManager MODEL_COLOR
+end box
+
+[-> LogicManager : execute("cat 2")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("cat 2")
+activate AddressBookParser
+
+create ViewTaskListCommandParser
+AddressBookParser -> ViewTaskListCommandParser
+activate ViewTaskListCommandParser
+
+ViewTaskListCommandParser --> AddressBookParser
+deactivate ViewTaskListCommandParser
+
+AddressBookParser -> ViewTaskListCommandParser : parse("2")
+activate ViewTaskListCommandParser
+
+create ViewTaskListCommand
+ViewTaskListCommandParser -> ViewTaskListCommand
+activate ViewTaskListCommand
+
+ViewTaskListCommand --> ViewTaskListCommandParser : v
+deactivate ViewTaskListCommand
+
+ViewTaskListCommandParser --> AddressBookParser : v
+deactivate ViewTaskListCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewTaskListCommandParser -[hidden]-> AddressBookParser
+destroy ViewTaskListCommandParser
+
+AddressBookParser --> LogicManager : v
+deactivate AddressBookParser
+
+LogicManager -> ViewTaskListCommand : execute()
+activate ViewTaskListCommand
+
+ViewTaskListCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> ViewTaskListCommand : lastShownList
+deactivate Model
+
+ViewTaskListCommand -> Model : displayPersonTaskList(person)
+activate Model
+
+Model -> TaskListManager : setToDisplayTaskList(name)
+activate TaskListManager
+
+TaskListManager --> Model
+deactivate TaskListManager
+
+Model --> ViewTaskListCommand
+deactivate Model
+
+create CommandResult
+ViewTaskListCommand-> CommandResult
+activate CommandResult
+
+CommandResult --> ViewTaskListCommand
+deactivate CommandResult
+
+ViewTaskListCommand --> LogicManager : result
+deactivate ViewTaskListCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

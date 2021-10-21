@@ -184,6 +184,5 @@ public class ModelManager implements Model {
     @Override
     public void displayPersonTaskList(Person person) {
         taskListManager.setToDisplayTaskList(person.getName());
-        taskListManager.updateEntryTaskList(person.getName(), person.getTasks());
     }
 }
