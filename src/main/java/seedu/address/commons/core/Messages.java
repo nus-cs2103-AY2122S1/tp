@@ -14,4 +14,5 @@ public class Messages {
     public static final String MESSAGE_FIND_STUDENT_SUCCESS = "Student %1$s is found!";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Student %1$s is edited!";
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Module %1$s is edited!";
+    public static final String MESSAGE_INVALID_TASK_DISPLAYED_INDEX = "The task index provided is invalid";
 }

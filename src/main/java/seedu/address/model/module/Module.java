@@ -165,6 +165,10 @@ public class Module {
         return tasks.contains(task);
     }
 
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+    }
+
     /**
      * Returns the UniqueTaskList containing the tasks for this module.
      * @return UniqueTaskList containing the tasks for this module.
