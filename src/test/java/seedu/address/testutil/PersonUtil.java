@@ -52,6 +52,8 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getLanguage().ifPresent(language -> sb.append(PREFIX_LANGUAGE).append(language.value).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getLastVisit().ifPresent(lastVisit -> sb.append(PREFIX_LAST_VISIT).append(lastVisit.value)
+                .append(" "));
         if (descriptor.getHealthConditions().isPresent()) {
             Set<HealthCondition> tags = descriptor.getHealthConditions().get();
             if (tags.isEmpty()) {

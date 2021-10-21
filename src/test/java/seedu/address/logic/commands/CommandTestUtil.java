@@ -67,6 +67,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     // '*' not allowed in healthConditions
     public static final String INVALID_HEALTH_CONDITION_DESC = " " + PREFIX_HEALTH_CONDITION + "heartCondition*";
+    public static final String INVALID_LAST_VISIT_DESC = " " + PREFIX_LAST_VISIT + "2000"; //wrong datetime format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -77,7 +78,7 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withLanguage(VALID_LANGUAGE_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withHealthConditions(VALID_HEALTH_CONDITION_DIABETES).build();
+                .withHealthConditions(VALID_HEALTH_CONDITION_DIABETES).withLastVisit(VALID_LAST_VISIT_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withLanguage(VALID_LANGUAGE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withHealthConditions(VALID_HEALTH_CONDITION_DEMENTIA, VALID_HEALTH_CONDITION_DIABETES).build();
