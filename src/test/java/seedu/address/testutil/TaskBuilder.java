@@ -23,6 +23,7 @@ public class TaskBuilder {
     private Set<Tag> tags;
     private boolean isDone;
     private Description description;
+    private Task.Priority priority;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -33,6 +34,7 @@ public class TaskBuilder {
         this.tags = new HashSet<>();
         this.isDone = false;
         this.description = new Description("No Description");
+        this.priority = Task.Priority.LOW;
     }
 
     /**
@@ -77,8 +79,16 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code description} into a {@code Task} and set it to the {@code Task} that we are building.
+     */
+    public TaskBuilder withPriority(String description) {
+        this.priority = Task.Priority.LOW;
+        return this;
+    }
+
     public Task build() {
-        return new Task(taskName, tags, false, description);
+        return new Task(taskName, tags, false, description, priority);
     }
 
 }

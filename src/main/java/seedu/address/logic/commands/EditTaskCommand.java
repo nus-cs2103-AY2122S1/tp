@@ -93,26 +93,27 @@ public class EditTaskCommand extends Command {
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
         Description description = editTaskDescriptor.getDescription()
                 .orElse(new Description(taskToEdit.getDescription()));
+        Task.Priority updatedPriority = editTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
 
         if (taskToEdit instanceof TodoTask) {
             return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(),
-                    description);
+                    description, updatedPriority);
         }
 
         if (taskToEdit instanceof DeadlineTask) {
             TaskDate updatedTaskDate = ((DeadlineTask) taskToEdit).getDeadline();
             return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate,
-                    description);
+                    description, updatedPriority);
         }
 
         if (taskToEdit instanceof EventTask) {
             TaskDate updatedTaskDate = ((EventTask) taskToEdit).getTaskDate();
 
             return new EventTask(updatedTaskName, updatedTags,
-                    taskToEdit.checkIsDone(), updatedTaskDate, description);
+                    taskToEdit.checkIsDone(), updatedTaskDate, description, updatedPriority);
         }
 
-        return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description);
+        return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description, updatedPriority);
     }
 
     @Override
@@ -142,6 +143,7 @@ public class EditTaskCommand extends Command {
         private Description description;
         private TaskDate taskDate;
         private Set<Tag> tags;
+        private Task.Priority priority;
 
         public EditTaskDescriptor() {}
 
@@ -166,6 +168,10 @@ public class EditTaskCommand extends Command {
         public void setTaskName(TaskName taskName) {
             this.taskName = taskName;
         }
+        
+        public void setTaskPriority(Task.Priority priority) {
+            this.priority = priority;
+        }
 
         public Optional<TaskName> getTaskName() {
             return Optional.ofNullable(taskName);
@@ -182,10 +188,13 @@ public class EditTaskCommand extends Command {
         public Optional<Description> getDescription() {
             return Optional.ofNullable(description);
         }
-
-
+        
         public Optional<TaskDate> getDeadline() {
             return Optional.ofNullable(taskDate);
+        }
+
+        public Optional<Task.Priority> getPriority() {
+            return Optional.ofNullable(priority);
         }
 
         /**

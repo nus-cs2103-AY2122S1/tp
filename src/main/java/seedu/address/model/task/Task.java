@@ -18,6 +18,11 @@ public class Task implements Comparable<Task>, Cloneable {
     private Set<Tag> tags = new HashSet<>();
     private String description;
     private boolean isDone;
+    private Priority priority;
+
+    public enum Priority {
+        HIGH, MEDIUM, LOW
+    }
 
     /**
      * Constructs a {@code Task}.
@@ -26,11 +31,20 @@ public class Task implements Comparable<Task>, Cloneable {
      * @param tags A valid Set of Tags.
      * @param description A valid Description of Tags.
      */
+    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description, Priority priority) {
+        this.name = name;
+        this.tags.addAll(tags);
+        this.isDone = isDone;
+        this.description = description.description;
+        this.priority = priority;
+    }
+
     public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = isDone;
         this.description = description.description;
+        this.priority = Priority.LOW;
     }
 
     public TaskName getName() {
@@ -59,6 +73,20 @@ public class Task implements Comparable<Task>, Cloneable {
 
     public String getDescription() {
         return description;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public String getPriorityAsString() {
+        if (this.priority == Priority.HIGH) {
+            return "HIGH ‼️";
+        } else if (this.priority == Priority.MEDIUM) {
+            return "MEDIUM";
+        } else {
+            return "LOW";
+        }
     }
 
     /**
