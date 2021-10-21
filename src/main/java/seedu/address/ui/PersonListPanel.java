@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
@@ -17,7 +18,7 @@ import seedu.address.model.person.Person;
  * Panel containing the list of persons.
  */
 public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "PersonListPanelUpdated.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     private SelectedPersonCard selected = new SelectedPersonCard();
@@ -26,7 +27,7 @@ public class PersonListPanel extends UiPart<Region> {
     private ListView<Person> personListView;
 
     @FXML
-    private StackPane selectedPersonPanelPlaceholder;
+    private ScrollPane selectedPersonPanelPlaceholder;
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
@@ -34,7 +35,8 @@ public class PersonListPanel extends UiPart<Region> {
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
         setSelectedPersonPanel();
-        selectedPersonPanelPlaceholder.getChildren().add(selected.getRoot());
+//        selectedPersonPanelPlaceholder.getChildren().add(selected.getRoot());
+        selectedPersonPanelPlaceholder.setContent(selected.getRoot());
         personListView.setItems(personList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         personListView.setOnMouseClicked(new EventHandler<Event>() {
