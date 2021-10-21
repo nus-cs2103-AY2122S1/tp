@@ -128,7 +128,7 @@ Prefix Input Specifications:
   * An EXPECTED_SALARY should
   * For example:
 * ####LEVEL_OF_EDUCATION `l/`
-  * A LEVEL_OF_EDUCATION should be one of the following: "Elementary", "Middle School", "High School", "University", "Bachelors", "Masters" or "PhD".
+  * A LEVEL_OF_EDUCATION should be one of the following: `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` or `PhD`.
   * A LEVEL_OF_EDUCATION is case-insensitive.
   * For example:
     * LEVEL_OF_EDUCATION inputs such as `Middle School` and `PhD` are acceptable.
