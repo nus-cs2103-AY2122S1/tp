@@ -8,6 +8,10 @@ import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.UniqueItemList;
 
+/**
+ * Wraps all data at the order level
+ * Duplicates are aggregated by adjusting count (by .isSameItem comparison)
+ */
 public class Order {
     private final UniqueItemList items;
 
