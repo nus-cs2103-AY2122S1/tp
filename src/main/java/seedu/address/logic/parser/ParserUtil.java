@@ -101,12 +101,15 @@ public class ParserUtil {
      * Parses a string to return a ClassCode
      * @param classCode String of classCode
      * @return ClassCode
-     * @throws ParseException
+     * @throws ParseException if the given {@code classCode} is invalid.
      */
     public static ClassCode parseClassCode(String classCode) throws ParseException {
         requireNonNull(classCode);
-        String trimmedRemark = classCode.trim();
-        return new ClassCode(trimmedRemark);
+        String trimmedClassCode = classCode.trim();
+        if (!ClassCode.isValidClassCode(trimmedClassCode)) {
+            throw new ParseException(ClassCode.MESSAGE_CONSTRAINTS);
+        }
+        return new ClassCode(trimmedClassCode);
     }
 
     /**

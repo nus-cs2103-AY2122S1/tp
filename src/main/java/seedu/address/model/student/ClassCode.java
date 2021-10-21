@@ -1,5 +1,7 @@
 package seedu.address.model.student;
 
+import java.util.Locale;
+
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -9,9 +11,10 @@ import static java.util.Objects.requireNonNull;
 
 public class ClassCode {
 
-    public static final String MESSAGE_CONSTRAINTS = "ClassCode can take any values, and it should not be blank";
+    public static final String MESSAGE_CONSTRAINTS = "ClassCode must start with G/g, "
+            + "followed by a 2-digit number and it should not be blank";
 
-    public static final String VALIDATION_REGEX = "[G].\\d{2}";
+    public static final String VALIDATION_REGEX = "[G]\\d{2}";
     public final String value;
 
     /**
@@ -21,9 +24,15 @@ public class ClassCode {
      */
     public ClassCode (String classCode) {
         requireNonNull(classCode);
-        value = classCode;
+        value = classCode.toUpperCase(Locale.ROOT);
     }
 
+    /**
+     * Returns true if a given string is a valid classCode.
+     */
+    public static boolean isValidClassCode(String test) {
+        return test.toUpperCase(Locale.ROOT).matches(VALIDATION_REGEX) ;
+    }
 
     @Override
     public String toString() {
