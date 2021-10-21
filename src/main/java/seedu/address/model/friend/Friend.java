@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -63,6 +64,21 @@ public class Friend {
      */
     public Set<GameFriendLink> getGameFriendLinks() {
         return Collections.unmodifiableSet(gameFriendLinks);
+    }
+
+    /**
+     * Searches gameFriendLinks in the friend to check if the gameId is contained inside any
+     * of the GameFriendLinks.
+     * @param gameIdToFind The gameId to check.
+     * @return boolean result on whether the gameId exists in any {@Code GameFriendLink}
+     */
+    public boolean containsGameInGameFriendLinks(GameId gameIdToFind) {
+        for (GameFriendLink gameFriendLink: gameFriendLinks) {
+            if (gameFriendLink.getGameId().equals(gameIdToFind)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
