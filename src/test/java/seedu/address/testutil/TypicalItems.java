@@ -118,6 +118,8 @@ public class TypicalItems {
                 .withName(StringUtil.generateRandomString())
                 .withId(UUID.randomUUID().toString())
                 .withCount("999")
+                .withSalesPrice("2.0")
+                .withCostPrice("1.0")
                 .build();
     }
 }

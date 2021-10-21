@@ -137,6 +137,8 @@ public class Item {
         return otherItem.getName().equals(getName())
                 && otherItem.getId().equals(getId())
                 && otherItem.getCount().equals(getCount())
+                && otherItem.getSalesPrice().equals(getSalesPrice())
+                && otherItem.getCostPrice().equals(getCostPrice())
                 && otherItem.getTags().equals(getTags());
     }
 
