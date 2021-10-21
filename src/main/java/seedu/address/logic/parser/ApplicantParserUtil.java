@@ -11,7 +11,6 @@ import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Description;
-import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 /**
@@ -20,7 +19,6 @@ import seedu.address.model.position.Title;
 public class ApplicantParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String PLACEHOLDER_DESCRIPTION = "This is a placeholder description";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -155,4 +153,5 @@ public class ApplicantParserUtil {
             throw new ParseException(ApplicationStatus.MESSAGE_CONSTRAINTS);
         }
     }
+
 }

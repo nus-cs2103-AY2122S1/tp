@@ -50,6 +50,7 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     //// position-level operations
+
     /**
      * Returns true if a position with the same identity as {@code position} exists in the position book.
      */
@@ -75,11 +76,11 @@ public class PositionBook implements ReadOnlyPositionBook {
     }
 
     /**
-     * Searches for a position with the same identity as {@code dummyPosition}.
+     * Searches for a position by its {@code title}.
      */
-    public Position getPosition(Position dummyPosition) {
-        requireNonNull(dummyPosition);
-        return positions.getPosition(dummyPosition);
+    public Position getPositionByTitle(Title title) {
+        requireNonNull(title);
+        return positions.getPositionByTitle(title);
     }
 
     /**
