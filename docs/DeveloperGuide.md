@@ -347,13 +347,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC04 - Delete an applicant**
+**Use case: UC04 - Deleting an applicant**
 
 **MSS**
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to delete applicant(s) in the displayed list.
+3.  User requests to delete the applicant(s) in the displayed list.
 4.  RecruitIn deletes the applicant(s).
 
     Use case ends.
@@ -414,40 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. RecruitIn displays a message indicating that no search terms are available.
 
       Use case ends.
-      
-**Use case: UC09 - Delete marked applicants**
-
-**MSS**
-
-1.  User requests to <u>list applicants (UC01)</u>.
-2.  RecruitIn displays a list of applicants.
-3.  User requests to delete all applicants marked as "Done".
-4.  RecruitIn deletes all applicants marked as "Done".
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. User requests to <u>find applicant (UC05)</u>.
-
-  Use case resumes at step 2.
-
-* 2a. The list of applicants is empty.
-
-  Use case ends.
-
-* 3a. The delete command is invalid.
-    * 3a1. RecruitIn shows an error message.
-
-      Use case resumes at step 2.
     
-* 3b. There are no applicants marked as "Done".
-    * 3b1. RecruitIn informs the user that no applicants were marked as "Done", and thus no applicants were deleted.
-    
-    Use case ends.
-
-*{More to be added}*
-
 **Use case: UC07 - Marking an applicant**
 
 **MSS**
@@ -461,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>
+* 1a. User requests to <u>find applicant (UC05)</u>.
 
   Use case resumes at step 2.
 
@@ -487,7 +454,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>
+* 1a. User requests to <u>find applicant (UC05)</u>.
 
   Use case resumes at step 2.
 
@@ -499,6 +466,39 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. RecruitIn shows an error message.
 
       Use case resumes at step 2.
+      
+**Use case: UC09 - Deleting marked applicants**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to delete all applicants marked as "Done".
+4.  RecruitIn deletes all applicants marked as "Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The delete command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. There are no applicants marked as "Done".
+    * 3b1. RecruitIn informs the user that no applicants were marked as "Done", and thus no applicants were deleted.
+
+  Use case ends.
+
+*{More to be added}*
 
 ### Non-Functional Requirements
 

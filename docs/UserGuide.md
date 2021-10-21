@@ -287,12 +287,6 @@ Examples:
 * `find n/John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
 * `list` followed by `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
-### Deleting marked applicants: `delete_marked`
-
-Deletes all applicants that are marked as done.
-
-Format: `delete_marked`
-
 ### Showing search terms : `show`
 
 Shows unique search terms available for a specific prefix.
@@ -344,6 +338,12 @@ Examples:
 * `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
 * `find n/John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
 * `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+
+### Deleting marked applicants: `delete_marked`
+
+Deletes all applicants that are marked as done.
+
+Format: `delete_marked`
 
 ### Exiting the program : `exit`
 
@@ -402,9 +402,9 @@ Action | Format, Examples
 **Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00`
 **List** | `list`
 **Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
-**Delete Marked** | `delete_marked`
 **Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
+**Delete Marked** | `delete_marked`
 **Help** | `help`
