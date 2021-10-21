@@ -238,6 +238,25 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### \[Work in progress\] Pin feature
+
+#### Proposed Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `PinCommand#Execute`
+
+Given below is an example usage scenario and how the pin mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add n/David …​` to add a new person.
+
+Step 3. The user decides that the contact, currently at index 1, is important and should be pinned. User executes `pin 1`
+
+Step 4. Connections will pin the contact and moves the contact to the top of the list of contacts.
+
+The following sequence diagram shows how the pin operation works:
+
+![PinSequenceDiagram](images/PinSequenceDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
