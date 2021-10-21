@@ -51,7 +51,6 @@ public class EncryptionManager implements Encryption {
     public void encrypt(Path sourceFilePath, Path destinationFilePath) throws InvalidKeyException, IOException {
         requireNonNull(sourceFilePath);
         requireNonNull(destinationFilePath);
-
         if (isIllegalFileFormat(destinationFilePath)) { // Guard clause
             throw new IOException();
         }
@@ -96,6 +95,7 @@ public class EncryptionManager implements Encryption {
         if (isIllegalFileFormat(encryptedSourceFilePath)) { // Guard clause
             throw new IOException();
         }
+
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
         byte[] fileIv = new byte[16];
         fileIn.read(fileIv);
