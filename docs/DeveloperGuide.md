@@ -285,6 +285,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
 | `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
 | `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
+| `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 | `* * *`  | user                                       | edit an applicant's information               | update their information without having to delete and add them again      |
 | `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
@@ -305,6 +306,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | see all expected salaries available in the list | check easily if a certain expected salary is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all interview times available in the list | check easily if a certain interview time is present in the list without having to go through the entire list      |
 | `* *`    | user                                       | see all tags available in the list | check easily if a certain tag is present in the list without having to go through the entire list      |
+| `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
+| `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
+| `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
+
+
 *{More to be added}*
 
 ### Use cases
@@ -352,20 +358,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-**Use case: UC04 - Delete an applicant**
+**Use case: UC04 - Deleting an applicant**
 
 **MSS**
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to delete a specific applicant in the displayed list.
-4.  RecruitIn deletes the applicant.
+3.  User requests to delete applicant(s) in the displayed list.
+4.  RecruitIn deletes the applicant(s).
 
     Use case ends.
 
 **Extensions**
 
-* 1a. User requests to <u>find applicant (UC05)</u>
+* 1a. User requests to <u>find applicant (UC05)</u>.
 
   Use case resumes at step 2.
 
@@ -419,6 +425,89 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. RecruitIn displays a message indicating that no search terms are available.
 
       Use case ends.
+    
+**Use case: UC07 - Marking an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to mark applicant(s) in the displayed list.
+4.  RecruitIn marks the requested applicant(s) to "Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The mark command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+**Use case: UC08 - Unmarking an applicant**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to unmark applicant(s) in the displayed list.
+4.  RecruitIn unmarks the requested applicant(s) to "Not Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The unmark command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+      
+**Use case: UC09 - Deleting marked applicants**
+
+**MSS**
+
+1.  User requests to <u>list applicants (UC01)</u>.
+2.  RecruitIn displays a list of applicants.
+3.  User requests to delete all applicants marked as "Done".
+4.  RecruitIn deletes all applicants marked as "Done".
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find applicant (UC05)</u>.
+
+  Use case resumes at step 2.
+
+* 2a. The list of applicants is empty.
+
+  Use case ends.
+
+* 3a. The delete command is invalid.
+    * 3a1. RecruitIn shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. There are no applicants marked as "Done".
+    * 3b1. RecruitIn informs the user that no applicants were marked as "Done", and thus no applicants were deleted.
+
+  Use case ends.
 
 *{More to be added}*
 
@@ -436,9 +525,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Employment Type**: Represents the type of work contract, specifically Full time, Part time, Temporary & Internship
 * **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
 * **Level of Education**: Represents the highest/current level of education the applicant has, specifically Elementary, Middle School, High School, University, Bachelors, Masters, PhD
-* **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
 * **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
-
+* **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
