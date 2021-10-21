@@ -1,6 +1,5 @@
 package seedu.address.commons.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
@@ -95,8 +94,8 @@ public class FileUtil {
     /**
      * Deletes the file specified in the filepath, regardless if it exists or not.
      */
-    public static void deleteFile(Path file) {
-        new File(file.toString()).delete();
+    public static void deleteFile(Path filePath) {
+        filePath.toFile().delete();
     }
 
 }
