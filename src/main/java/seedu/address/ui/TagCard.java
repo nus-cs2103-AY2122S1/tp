@@ -27,11 +27,11 @@ public class TagCard extends UiPart<Region> {
      *
      * @param tag Tag to be displayed in the TagCard.
      */
-    public TagCard(Tag tag) {
+    public TagCard(Tag tag, Integer count) {
         super(FXML);
         this.tag = tag;
         tagName.setText(tag.getTagName());
-        numDuplicates.setText(tag.getNumStudentsString());
+        numDuplicates.setText(String.valueOf(count));
     }
 
     @Override

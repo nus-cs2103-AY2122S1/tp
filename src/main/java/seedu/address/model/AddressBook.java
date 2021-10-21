@@ -9,6 +9,7 @@ import java.util.Objects;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.CalendarEntryList;
 import seedu.address.model.lesson.Lesson;
@@ -167,6 +168,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.asUnmodifiableTagList();
     }
 
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return tags.asUnmodifiableMap();
+    }
+
     public Calendar getCalendar() {
         // TODO: Make defensive
         return entries.getCalendar();
@@ -177,12 +183,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                         && persons.equals(((AddressBook) other).persons))
-                        && entries.equals(((AddressBook) other).entries)
                         && tags.equals(((AddressBook) other).tags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, entries, tags);
+        return Objects.hash(persons, tags);
     }
 }

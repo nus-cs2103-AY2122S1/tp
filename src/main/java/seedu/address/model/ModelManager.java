@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -27,7 +28,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final ObservableList<Tag> tagObservableList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,7 +41,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        tagObservableList = this.addressBook.getTagList();
     }
 
     public ModelManager() {
@@ -158,7 +157,12 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Tag> getObservableTagList() {
-        return tagObservableList;
+        return addressBook.getTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return addressBook.getTagCounter();
     }
 
     @Override

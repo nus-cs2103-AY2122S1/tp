@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -13,6 +14,8 @@ import seedu.address.model.tag.Tag;
 public class TagListPanel extends UiPart<Region> {
     private static final String FXML = "TagListPanel.fxml";
 
+    private final ObservableMap<Tag, Integer> tagCounter;
+
     @FXML
     private ListView<Tag> tagListView;
 
@@ -21,8 +24,9 @@ public class TagListPanel extends UiPart<Region> {
      *
      * @param tagList List of tags to be displayed.
      */
-    public TagListPanel(ObservableList<Tag> tagList) {
+    public TagListPanel(ObservableList<Tag> tagList, ObservableMap<Tag, Integer> tagCounter) {
         super(FXML);
+        this.tagCounter = tagCounter;
         tagListView.setItems(tagList);
         tagListView.setCellFactory(listView -> new TagListViewCell());
     }
@@ -39,7 +43,7 @@ public class TagListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new TagCard(tag).getRoot());
+                setGraphic(new TagCard(tag, tagCounter.get(tag)).getRoot());
             }
         }
     }

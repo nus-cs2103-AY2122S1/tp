@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
@@ -72,9 +73,15 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Tag> getFilteredTagList() {
+    public ObservableList<Tag> getObservableTagList() {
         return model.getObservableTagList();
     }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return model.getTagCounter();
+    }
+
 
     @Override
     public Calendar getCalendar() {

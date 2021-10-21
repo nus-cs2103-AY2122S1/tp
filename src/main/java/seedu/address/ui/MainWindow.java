@@ -130,7 +130,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getFilteredTagList());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getObservableTagList(),
+                logic.getTagCounter());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();

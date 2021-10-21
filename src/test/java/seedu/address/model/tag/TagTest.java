@@ -27,13 +27,6 @@ public class TagTest {
     }
 
     @Test
-    public void getNumStudentsString_success() {
-        UniqueTagList tagList = new UniqueTagList();
-        tagList.addTag(TAG_ZOOM);
-        assertEquals("1", TAG_ZOOM.getNumStudentsString());
-    }
-
-    @Test
     public void getTagName_success() {
         // all upper case -> success
         assertEquals("ZOOM", TAG_ZOOM.getTagName());

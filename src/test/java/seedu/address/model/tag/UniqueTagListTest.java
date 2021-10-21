@@ -17,7 +17,6 @@ import static seedu.address.testutil.TypicalTags.TAG_ZOOM;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
@@ -52,29 +50,6 @@ class UniqueTagListTest {
     @Test
     public void addTag_nullTag_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueTagList.addTag(null));
-    }
-
-    @Test
-    public void addTag_uniqueTag_success() {
-        Tag sample = TAG_UNPAID;
-        uniqueTagList.addTag(sample);
-        List<Tag> expectedList = new ArrayList<>(List.of(sample));
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(expectedList);
-        assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertEquals(1, UniqueTagList.getNumStudentsForTag(sample));
-    }
-
-    @Test
-    public void addTag_duplicateTag_success() {
-        Tag tagWithTwoStudents = TAG_UNPAID;
-        List<Tag> expectedList = new ArrayList<>(List.of(tagWithTwoStudents));
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(expectedList);
-        uniqueTagList.addTag(tagWithTwoStudents);
-        uniqueTagList.addTag(tagWithTwoStudents);
-        assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertEquals(2, UniqueTagList.getNumStudentsForTag(tagWithTwoStudents));
     }
 
     @Test
@@ -108,11 +83,14 @@ class UniqueTagListTest {
         Tag tagWithTwoStudents = TAG_FORGETFUL;
         Tag tagWithOneStudents = TAG_ZOOM;
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(Arrays.asList(tagWithTwoStudents, tagWithOneStudents));
+        expectedUniqueTagList.addTag(tagWithTwoStudents);
+        expectedUniqueTagList.addTag(tagWithTwoStudents);
+        expectedUniqueTagList.addTag(tagWithOneStudents);
+
         uniqueTagList.addTagFromPersonList(samplePersonList);
         assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertEquals(2, UniqueTagList.getNumStudentsForTag(tagWithTwoStudents));
-        assertEquals(1, UniqueTagList.getNumStudentsForTag(tagWithOneStudents));
+        assertEquals(2, uniqueTagList.getNumStudentsForTag(tagWithTwoStudents));
+        assertEquals(1, uniqueTagList.getNumStudentsForTag(tagWithOneStudents));
     }
 
     @Test
@@ -133,21 +111,20 @@ class UniqueTagListTest {
 
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
         assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(sample));
+        assertThrows(NullPointerException.class, () -> uniqueTagList.getNumStudentsForTag(sample));
     }
 
     @Test
     public void removeTag_duplicateTag_success() {
         Tag sample = TAG_UNPAID;
-        List<Tag> expectedList = new ArrayList<>(List.of(sample));
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(expectedList);
+        expectedUniqueTagList.addTag(sample);
 
         uniqueTagList.addTag(sample);
         uniqueTagList.addTag(sample);
         uniqueTagList.removeTag(sample);
         assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertEquals(1, UniqueTagList.getNumStudentsForTag(sample));
+        assertEquals(1, uniqueTagList.getNumStudentsForTag(sample));
     }
 
     @Test
@@ -156,50 +133,34 @@ class UniqueTagListTest {
     }
 
     @Test
+    public void removeTagFromPerson_nonExistentTag_throwsTagNotFoundException() {
+        assertThrows(TagNotFoundException.class, () -> uniqueTagList.removeTag(TAG_UNPAID));
+    }
+
+    @Test
     public void removeTagFromPerson_emptyResultList_success() {
-        uniqueTagList.setTags(Arrays.asList(TAG_FORGETFUL, TAG_UNPAID));
+        uniqueTagList.addTag(TAG_FORGETFUL);
+        uniqueTagList.addTag(TAG_UNPAID);
         uniqueTagList.removeTagFromPerson(BENSON);
         assertEquals(new UniqueTagList(), uniqueTagList);
-        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(TAG_FORGETFUL));
-        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(TAG_UNPAID));
+        assertThrows(NullPointerException.class, () -> uniqueTagList.getNumStudentsForTag(TAG_FORGETFUL));
+        assertThrows(NullPointerException.class, () -> uniqueTagList.getNumStudentsForTag(TAG_UNPAID));
     }
 
     @Test
     public void removeTagFromPerson_nonEmptyResultList_success() {
         Tag tagToRemove = TAG_FORGETFUL;
         Tag tagRemained = TAG_UNPAID;
-        uniqueTagList.setTags(Arrays.asList(tagToRemove, tagRemained));
+        uniqueTagList.addTag(tagToRemove);
+        uniqueTagList.addTag(tagRemained);
         uniqueTagList.removeTagFromPerson(ALICE);
+
         UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.setTags(List.of(tagRemained));
+        expectedUniqueTagList.addTag(tagRemained);
+
         assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertEquals(1, UniqueTagList.getNumStudentsForTag(tagRemained));
-        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(tagToRemove));
-    }
-
-    @Test
-    public void setTags_nullList_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> uniqueTagList.setTags(null));
-    }
-
-    @Test
-    public void setTags_replacesOwnListWithProvidedList_success() {
-        Tag tagToReplace = TAG_UNPAID;
-        uniqueTagList.addTag(tagToReplace);
-        Tag replacedTag = TAG_FORGETFUL;
-        List<Tag> tagList = Collections.singletonList(replacedTag);
-        uniqueTagList.setTags(tagList);
-        UniqueTagList expectedUniqueTagList = new UniqueTagList();
-        expectedUniqueTagList.addTag(replacedTag);
-        assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(tagToReplace));
-        assertEquals(1, UniqueTagList.getNumStudentsForTag(replacedTag));
-    }
-
-    @Test
-    public void setTags_listWithTags_throwsDuplicateTagException() {
-        List<Tag> listWithDuplicateTags = Arrays.asList(TAG_UNPAID, TAG_UNPAID);
-        assertThrows(DuplicateTagException.class, () -> uniqueTagList.setTags(listWithDuplicateTags));
+        assertEquals(1, uniqueTagList.getNumStudentsForTag(tagRemained));
+        assertThrows(NullPointerException.class, () -> uniqueTagList.getNumStudentsForTag(tagToRemove));
     }
 
     @Test
@@ -226,8 +187,8 @@ class UniqueTagListTest {
         Person editedPerson = new PersonBuilder().withName(VALID_NAME_AMY).withTags(VALID_TAG_ZOOM).build();
         uniqueTagList.editTagFromPerson(AMY, editedPerson);
         assertEquals(expectedUniqueTagList, uniqueTagList);
-        assertThrows(NullPointerException.class, () -> UniqueTagList.getNumStudentsForTag(TAG_FORGETFUL));
-        assertEquals(1, UniqueTagList.getNumStudentsForTag(TAG_ZOOM));
+        assertThrows(NullPointerException.class, () -> uniqueTagList.getNumStudentsForTag(TAG_FORGETFUL));
+        assertEquals(1, uniqueTagList.getNumStudentsForTag(TAG_ZOOM));
     }
 
     @Test
@@ -237,7 +198,8 @@ class UniqueTagListTest {
 
     @Test
     public void asUnmodifiableTagList_sortedList_success() {
-        uniqueTagList.setTags(Arrays.asList(TAG_ZOOM, TAG_FORGETFUL));
+        uniqueTagList.addTag(TAG_FORGETFUL);
+        uniqueTagList.addTag(TAG_ZOOM);
 
         ObservableList<Tag> sortedList =
                 FXCollections.unmodifiableObservableList(

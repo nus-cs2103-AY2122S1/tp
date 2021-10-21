@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.lesson.Lesson;
@@ -103,6 +104,9 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the filtered tag list */
+    /** Returns an unmodifiable view of the observable tag list */
     ObservableList<Tag> getObservableTagList();
+
+    /** Returns the tag counter map. */
+    ObservableMap<Tag, Integer> getTagCounter();
 }

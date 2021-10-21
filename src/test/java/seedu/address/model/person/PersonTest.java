@@ -18,9 +18,6 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalTags.TAG_FORGETFUL;
 import static seedu.address.testutil.TypicalTags.TAG_ZOOM;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.tag.UniqueTagList;
@@ -141,10 +138,11 @@ public class PersonTest {
     public void removeTagsToTagList_nonEmptyResultList_success() {
         UniqueTagList expectedTagList = new UniqueTagList();
         UniqueTagList actualTagList = new UniqueTagList();
-        actualTagList.setTags(Arrays.asList(TAG_ZOOM, TAG_FORGETFUL));
+        actualTagList.addTag(TAG_FORGETFUL);
+        actualTagList.addTag(TAG_ZOOM);
 
         ALICE.removeTagsFromTagList(actualTagList);
-        expectedTagList.setTags(List.of(TAG_ZOOM));
+        expectedTagList.addTag(TAG_ZOOM);
         assertEquals(expectedTagList, actualTagList);
     }
 
@@ -152,7 +150,7 @@ public class PersonTest {
     public void removeTagsToTagList_emptyResultList_success() {
         UniqueTagList expectedTagList = new UniqueTagList();
         UniqueTagList actualTagList = new UniqueTagList();
-        actualTagList.setTags(List.of(TAG_FORGETFUL));
+        actualTagList.addTag(TAG_FORGETFUL);
 
         ALICE.removeTagsFromTagList(actualTagList);
         assertEquals(expectedTagList, actualTagList);

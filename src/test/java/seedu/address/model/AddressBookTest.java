@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -102,6 +103,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Tag> getTagList() {
             return FXCollections.observableArrayList();
+        }
+
+        @Override
+        public ObservableMap<Tag, Integer> getTagCounter() {
+            return FXCollections.observableHashMap();
         }
     }
 

@@ -45,15 +45,6 @@ public class Tag {
     }
 
     /**
-     * Stringifies the number of students under this tag.
-     *
-     * @return String representation of the number of students under this tag.
-     */
-    public String getNumStudentsString() {
-        return Integer.toString(UniqueTagList.getNumStudentsForTag(this));
-    }
-
-    /**
      * Returns true if both tags are the same object or both tags have the same tag name.
      *
      * @param other Object to be checked.

@@ -4,21 +4,21 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.model.person.Person;
-import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * A list of tags that enforces uniqueness between its elements in terms of tag names, and does not allow nulls.
  */
 public class UniqueTagList {
-    private static final HashMap<Tag, Integer> tagCounter = new HashMap<>();
+    private final ObservableMap<Tag, Integer> tagCounter = FXCollections.observableHashMap();
 
     private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
     private final ObservableList<Tag> internalUnmodifiableList =
@@ -45,8 +45,8 @@ public class UniqueTagList {
     public void addTag(Tag toAdd) {
         requireNonNull(toAdd);
         if (containsTag(toAdd)) {
-            int newNumStudents = tagCounter.get(toAdd) + 1;
-            tagCounter.put(toAdd, newNumStudents);
+            int count = tagCounter.get(toAdd) + 1;
+            tagCounter.put(toAdd, count);
         } else {
             tagCounter.put(toAdd, 1);
             internalList.add(toAdd);
@@ -96,8 +96,8 @@ public class UniqueTagList {
             tagCounter.remove(toRemove);
             internalList.remove(toRemove);
         } else {
-            int newNumStudents = numStudents - 1;
-            tagCounter.put(toRemove, newNumStudents);
+            int count = numStudents - 1;
+            tagCounter.put(toRemove, count);
         }
     }
 
@@ -108,26 +108,6 @@ public class UniqueTagList {
      */
     public void removeTagFromPerson(Person person) {
         person.removeTagsFromTagList(this);
-        sortTags();
-    }
-
-    /**
-     * Replaces the contents of this list with {@code tags}.
-     * {@code tags} must not contain duplicate tags.
-     * Tags will be sorted alphabetically.
-     *
-     * @param tags The Tags to be set.
-     */
-    public void setTags(List<Tag> tags) {
-        requireAllNonNull(tags);
-        if (!tagsAreUnique(tags)) {
-            throw new DuplicateTagException();
-        }
-        tagCounter.clear();
-        internalList.clear();
-        for (Tag tag : tags) {
-            addTag(tag);
-        }
         sortTags();
     }
 
@@ -146,29 +126,12 @@ public class UniqueTagList {
     }
 
     /**
-     * Returns true if {@code tags} contains only unique tags.
-     *
-     * @param tags List of tags to check.
-     * @return True if the list of tags argument contains only unique tags.
-     */
-    private boolean tagsAreUnique(List<Tag> tags) {
-        for (int i = 0; i < tags.size() - 1; i++) {
-            for (int j = i + 1; j < tags.size(); j++) {
-                if (tags.get(i).equals(tags.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    /**
      * Returns the number of students labelled under the specified tag.
      *
      * @param tag Tag to check for number of students labelled under it.
      * @return Number of students labelled under the specified tag.
      */
-    public static int getNumStudentsForTag(Tag tag) {
+    public int getNumStudentsForTag(Tag tag) {
         return tagCounter.get(tag);
     }
 
@@ -191,15 +154,20 @@ public class UniqueTagList {
         return internalUnmodifiableList;
     }
 
+    public ObservableMap<Tag, Integer> asUnmodifiableMap() {
+        return FXCollections.unmodifiableObservableMap(tagCounter);
+    }
+
     @Override
     public int hashCode() {
-        return internalList.hashCode();
+        return Objects.hash(internalList, tagCounter);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTagList // instanceof handles nulls
-                        && internalList.equals(((UniqueTagList) other).internalList));
+                        && internalList.equals(((UniqueTagList) other).internalList)
+                        && tagCounter.equals(((UniqueTagList) other).tagCounter));
     }
 }

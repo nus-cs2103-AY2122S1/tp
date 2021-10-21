@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,8 +37,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered list of tags */
-    ObservableList<Tag> getFilteredTagList();
+    /** Returns an unmodifiable view of the observable list of tags */
+    ObservableList<Tag> getObservableTagList();
+
+    /** Returns an unmodifiable view of the tag counter. */
+    ObservableMap<Tag, Integer> getTagCounter();
 
     /** Returns the CalendarFX calendar */
     Calendar getCalendar();

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -37,11 +38,12 @@ public class CenterPanel extends UiPart<Region> {
      * @param calendar The calendar in the CenterPanel.
      * @param personList The ObservableList of persons.
      */
-    public CenterPanel(Calendar calendar, ObservableList<Person> personList, ObservableList<Tag> tagList) {
+    public CenterPanel(Calendar calendar, ObservableList<Person> personList, ObservableList<Tag> tagList,
+            ObservableMap<Tag, Integer> tagCounter) {
         super(FXML);
         personListPanel = new PersonListPanel(personList);
         schedulePanel = new SchedulePanel(calendar);
-        tagListPanel = new TagListPanel(tagList);
+        tagListPanel = new TagListPanel(tagList, tagCounter);
         displayPersonListPanel();
     }
 
