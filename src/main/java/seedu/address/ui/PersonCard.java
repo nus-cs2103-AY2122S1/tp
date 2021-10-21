@@ -63,8 +63,14 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        rating.setText(person.getRating().value + "\u2B50");
+        String ratingValue = person.getRating().value;
+        if (ratingValue.equals("0")) {
+            rating.setText("unrated");
+        } else {
+            rating.setText(ratingValue + "\u2B50");
+        }
     }
+
 
     @Override
     public boolean equals(Object other) {

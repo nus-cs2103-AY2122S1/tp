@@ -16,9 +16,10 @@ public class CategoryCode {
 
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    private static final List<String> categoryValues = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
+    public static final List<String> CATEGORY_VALUES = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
 
     private enum Category { ATT, FNB, COM, ACC, TPT, OTH }
+
 
     //TODO(HK): Re-look at VALIDATION_REGEX
     /*
@@ -42,7 +43,7 @@ public class CategoryCode {
      */
     public static boolean isValidCategory(String code) {
         String category = code.toLowerCase();
-        return categoryValues.contains(category) && code.matches(VALIDATION_REGEX);
+        return CATEGORY_VALUES.contains(category) && code.matches(VALIDATION_REGEX);
     }
 
     /**
@@ -51,7 +52,7 @@ public class CategoryCode {
      * @return Category object
      */
     private Category stringToCategory(String code) {
-        int category = categoryValues.indexOf(code.toLowerCase());
+        int category = CATEGORY_VALUES.indexOf(code.toLowerCase());
         if (category == 0) {
             return Category.ATT;
         } else if (category == 1) {
@@ -67,6 +68,27 @@ public class CategoryCode {
         } else {
             // Remove this portion in next iteration
             throw new RuntimeException("PROBLEM WITH CATEGORY CODES");
+        }
+    }
+
+    /**
+     * Returns the category code in non-abbreviated format
+     * @return non-abbreviated category
+     */
+    public String getFullCode() {
+        switch (category) {
+        case ATT:
+            return "Attractions";
+        case ACC:
+            return "Accomodation";
+        case FNB:
+            return "Food & Beverages";
+        case TPT:
+            return "Transport";
+        case COM:
+            return "Commerce";
+        default:
+            return "Others";
         }
     }
 

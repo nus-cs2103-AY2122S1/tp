@@ -21,7 +21,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" clapss="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -153,6 +153,182 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+### Category feature
+
+#### Implementation
+The category feature adds to the attributes of the `Person` object. Similar to the other fields of the `Person` object, 
+it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix.
+
+Additionally, it implements the following operations:
+* `isValidCategory()`  — Determines if the input is a valid category
+* `stringToCategory()`  — Converts the input into a constant
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The category field is compulsory and requires
+one of the available category codes (att, fnb, com, acc, tpt, oth). In the absence or invalidity of the category code,
+the contact will not be saved and the user will be prompted to give a valid one.</div>
+
+Given below is an example usage scenario and how category mechanism behaves at each step
+
+Step 1. The user executes the command `filter c/oth` to filter all "others" category contacts in the address book. And
+gets a list of all contacts with the category "others".
+
+Step 2. The user executes the command `edit 1 c/att` which changes the category of the 1st contact from "others" to 
+"attraction".
+
+
+The following sequence diagram shows how modifying the category field with `edit` works:
+![EditCategoryCodeSequenceDiagram.png](images/EditCategoryCodeSequenceDiagram.png)
+
+The following activity diagram shows what happens when a user executes the `edit` command with category specified
+![EditCategoryActivityDiagram](images/EditCategoryActivityDiagram.png)
+
+####Design considerations:
+
+**Aspect: How Category is called by the user:**
+
+* **Alternative 1 (current choice):** Category field is added through `add` or `edit` commands.
+  * Pros: Easy to implement
+  * Cons: May cause `add` command to be too long
+
+* **Alternative 2:** Exclusive command to add Category field
+  * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
+  * Cons: Reduces usability due to the need to remember another command
+
+### Find feature
+
+#### Implementation
+
+The Find feature works such that it modifies the GUI of the application without modifying any contacts in the list.
+It is implemented with the following operation:
+
+* `FindCommand#execute()`  —  Obtains the contacts found to have the specified keyword(s).
+
+The feature makes use of `FindableContainsKeywordsPredicate`, which represents a boolean-valued function that indicates whether there is any _findable_ property of the contacts that contains the keyword(s) given.
+The operation `FindableContainsKeywordsPredicate#test` returns a boolean that indicates whether a specific contact has a _findable_ property that matches the keyword(s) provided by Tour Guide.
+
+The aforementioned _findable_ properties of the contacts that are checked are as follows:
+
+* name
+* phone
+* email
+* address
+* review
+
+Given below is an example usage scenario and how the Find feature behaves at each step:
+
+Step 1. The user executes the command `list` to look at all contacts.
+
+Step 2. The user executes the command `find bay ...` to find contacts with properties that contain the keywords *bay*, ...
+The `find` command calls `FindCommandParser#parse()`.
+
+Step 3. If user command is in the correct format, a `FindCommand` is created with the list of keywords attached to a `FindableContainsKeywordPredicate`.
+The `FindCommand` will then be executed. Otherwise, no command is executed and a `ParseException` is thrown.
+
+The following sequence diagram shows how the Find operation works to show the relevant contacts:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a Tour Guide executes a new command:
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How Find functions:**
+
+* **Alternative 1 (current choice):** Displays contacts with non-full word matches and searches five properties of a contact.
+    * Pros: Shows more contacts as a result of half-matches and more fields.
+    * Cons: Less targeted search, more time needed to go through the list of matches.
+
+* **Alternative 2:** Displays contacts with full word matches and only searches the name.
+    * Pros: More accurate matches assuming Tour Guide searches for exact keywords.
+    * Cons: Less likely to find contacts other than the intended one(s) that might be relevant for a themed or location-based tour itinerary.
+
+=======
+### Filter feature
+
+#### Proposed Implementation
+
+The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
+
+* `Model#updateFilteredPersonList(Predicate p)` - iterates through the addressBook `PersonList`. If a `Person` returns true, the `Person` is added to the `filteredPersons` list.
+* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a person’s `categoryCode` is in the Set
+
+Given below is an example usage scenario of the filter mechanism.
+
+Step 1. The user launched the application for the first time. The `filteredPerson` List will be initialized with all persons in the addressBook `UniquePersonList`.
+
+Step 2. The user executes `filter c/att` command to filter all the attraction contacts in the address book. The `Parser` parses the user input and creates a `FilterCommand`.
+
+Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredPersonList()` with the predicate as an argument, causing the `filteredPerson` List to be modified to contain only attraction contacts in the address book.
+
+The following sequence diagram shows how the filter operation works:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new filter command:
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Functionality of Filter feature**
+
+* **Alternative 1 (current choice):** Filters one or multiple categories.
+    * Pros: More flexible usage as users can choose to enter one or more category codes.
+    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user. 
+
+* **Alternative 2:** Only handles filter by one category.
+    * Pros: More targeted results.
+    * Cons: Need to execute multiple filter commands to search for contacts in more than one category.
+
+### Ratings feature
+
+#### Implementation
+
+The Ratings feature is implemented as an additional field in the `Person` object. Similar to the other fields in the `Person` object, the `rating` field is implemented with the following two operations:
+
+* `AddCommand#execute()` —  Optionally initialises rating of contact added.
+* `EditCommand#execute()` —  Optionally modifies rating of contact added.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The ratings field is not compulsory. If the `add` command is used without specifying a rating for the new contact, the contact will be 'unrated' and assigned a default value of 0. Similarly, when a contact's rating is cleared using `edit` command, it is also assigned a default value of 0.   
+
+</div>
+
+Given below is an example usage scenario and how the rating mechanism behaves at each step.
+
+Step 1. The user launches the application. For each contact, the `PersonCard` object is constructed with rating as one of the fields.
+
+Step 2. The user executes `add ... ra/3` to add a new contact. The `add` command calls `ParserUtil#ParseRating()`, creating a `Rating` object if a valid input rating is received.
+
+Step 3. The user executes `edit 1 ... ra/5` to update the 1st contact's rating. The `edit` command calls `ParserUtil#ParseRating()`, creating a `Rating` object if a valid input rating is received.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the input rating is invalid (i.e. a non-integer or outside of the range 1 to 5), the parsers use `Rating#isValidRating()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the modification on rating.  
+
+</div>
+
+The following sequence diagram shows how ratings are modified using `add` command:
+
+![RatingSequenceDiagram.png](images/RatingSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes an `add` command with rating specified:
+
+![img.png](images/RatingActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How user modifies rating field:**
+
+* **Alternative 1 (current choice):** As a field written by `AddCommand` and `EditCommand`.
+    * Pros: Easy to implement.
+    * Cons: Rating a contact is less straightforward. 
+      Ratings do not stand out among another features.
+
+* **Alternative 2:** As an individual command `RateCommand`.
+    * Pros: Dedicated all-in-one feature for ratings, easy modification.
+    * Cons: Duplicates functionality of `AddCommand` and `EditCommand`, not particularly essential.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -238,7 +414,73 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Review Feature
 
+#### Implementation
+
+The review feature builds upon the `Person` class by adding more functionality to the class. It utilises the `rv/` tag in the `add` command to add a review stored internally as a `Review` object.
+It implements the following operations:
+* `isValidReview()`  — Determines if the input value is valid.
+* `isEmptyReview()`  — Determines if the stored Review is empty (stored as `-No Review-` String).
+
+In addition, numerous classes had to be updated to accommodate the Review feature:
+* `AddCommandParser` to parse the new `rv/` tag.
+* `ParserUtil` to parse the Review content.
+* `EditCommand` and `EditCommandParser` to enable editing of Reviews.
+
+The following sequence diagram gives the overview of the add command with a review:
+
+![Sequence Diagram for Review](images/ReviewSequenceDiagram.png)
+
+The following activity diagram shows how the review operation works:
+
+![Sequence Diagram for Review](images/ReviewActivityDiagram.png)
+
+
+Given below is an example usage scenario of adding a Review:
+
+Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`
+
+Step 2. The user can click on the contact on the GUI to expand it and display the full review
+
+#### Design considerations:
+
+**Aspect: How Review is called by the user:**
+
+* **Alternative 1 (current choice):** Adds a review through the `add` command.
+    * Pros: Easier to implement.
+    * Cons: Add command can become very lengthy.
+
+* **Alternative 2:** Separate command for review
+    * Pros: Increases modularity by making review an entirely new command.
+    * Cons: Too many commands which may confuse the User.
+### Summary Feature
+
+#### Implementation
+
+The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to 
+obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
+* `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
+* `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
+* `setNumberCategory`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+
+Additionally, `Summary` will communicate with `UI` to display the summarised results
+
+The following sequence diagram gives an overview of how `Summary` works:
+
+![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Summary summarises data from the internal AddressBook:**
+
+* **Alternative 1 (current choice):** Works on a Read-Only copy of `AddressBook`.
+    * Pros: Easier to implement, guaranteed to not edit the internals.
+    * Cons: Exposing internal workings of `AddressBook`.
+
+* **Alternative 2:** Gets data directly from `Person`, `Review` etc.
+    * Pros: Data is kept directly with the low-level classes and pulled from there.
+    * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -260,7 +502,6 @@ _{Explain here how the data archiving feature will be implemented}_
 * tour guides in Singapore
 * has a need to manage a significant number of contacts
 * has a need to collate and access contacts
-* has a need to find contacts
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -305,16 +546,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide user`, unless specified otherwise)
+(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `tour guide`, unless specified otherwise)
 
 
 **UC01 - Add a Contact**
 
 **MSS**
 
-User decides to add a contact
-User inputs the add command to the interface
-AddressBook informs the user that the contact was added
+Tour Guide decides to add a contact
+Tour Guide inputs the add command to the interface
+AddressBook informs the Tour Guide that the contact was added
 AddressBook displays updated list of contacts
 Use case ends.
 
@@ -325,7 +566,7 @@ Use case ends.
 
   Use case resumes at step 2.
 
-* 2b.  User already exists in the AddressBook
+* 2b.  Contact already exists in the AddressBook
 
     * 2b1. Address books show an error message
 
@@ -336,7 +577,7 @@ Use case ends.
 
 **MSS**
 
-1.  User requests to list all contacts
+1.  Tour Guide requests to list all contacts
 2.  AddressBook shows a list of contacts
 
     Use case ends.
@@ -349,11 +590,11 @@ Use case ends.
 
 
 **UC03 - Delete a Contact**
-***Preconditions: User has <u>listed all contacts UC02</u>***
+***Preconditions: Tour Guide has <u>listed all contacts UC02</u>***
 
 **MSS**
 
-1.  User requests to delete a specific contact in the list
+1.  Tour Guide requests to delete a specific contact in the list
 2.  AddressBook deletes the contact
 
     Use case ends.
@@ -371,7 +612,7 @@ Use case ends.
 
 **MSS**
 
-1.  User requests to find a contact
+1.  Tour Guide requests to find a contact
 2.  AddressBook displays a list of all contacts with the given keywords
 
     Use case ends.
