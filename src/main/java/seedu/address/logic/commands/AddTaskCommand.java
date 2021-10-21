@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModuleName;
@@ -30,6 +33,8 @@ public class AddTaskCommand extends AddCommand {
     public static final String MESSAGE_ADD_TASK_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the module.";
     public static final String MESSAGE_MODULE_NOT_FOUND = "This module is not found.";
+
+    private static Logger logger = Logger.getLogger("Add Task Logger");
 
     private final Task toAdd;
     private final ModuleName moduleName;
@@ -58,6 +63,8 @@ public class AddTaskCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+        logger.log(Level.INFO, "adding task: " + toAdd.getName()
+                + "into module: " + toAdd.getModuleNameString());
         model.addTask(moduleName, toAdd);
         return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, toAdd));
     }
