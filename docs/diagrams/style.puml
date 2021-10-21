@@ -37,6 +37,8 @@
 !define COMMONS_COLOR_T3 #11594B
 !define COMMONS_COLOR_T4 #0B3B32
 
+!define ENCRYPTION_COLOR #89CF00
+
 !define USER_COLOR #000000
 
 skinparam BackgroundColor #FFFFFFF

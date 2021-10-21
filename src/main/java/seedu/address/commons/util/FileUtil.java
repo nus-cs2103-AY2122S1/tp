@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Writes and reads files
+ * Utility class for file operations
  */
 public class FileUtil {
 
@@ -55,6 +55,17 @@ public class FileUtil {
     }
 
     /**
+     * Creates a directory if it does not exist.
+     */
+    public static void createDirectoryIfEmpty(Path directory) throws IOException {
+        if (Files.exists(directory)) {
+            return;
+        }
+
+        Files.createDirectory(directory);
+    }
+
+    /**
      * Creates parent directories of file if it has a parent directory
      */
     public static void createParentDirsOfFile(Path file) throws IOException {
@@ -78,6 +89,13 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Deletes the file specified in the filepath, regardless if it exists or not.
+     */
+    public static void deleteFile(Path filePath) {
+        filePath.toFile().delete();
     }
 
 }
