@@ -23,6 +23,11 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class GitHubId
+Class NusNetworkId
+Class Type
+Class StudentId
+Class TutorialId
 
 }
 
@@ -45,6 +50,11 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+Person *--> GitHubId
+Person *--> NusNetworkId
+Person *--> Type
+Person *--> StudentId
+Person *--> TutorialId
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
