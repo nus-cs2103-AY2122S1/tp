@@ -268,7 +268,7 @@ Action | Format, Examples
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
 **list** | `list`
-**sort** | `sort [FIELD_TO_BE_SORTED]`
+**sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **clear** | `clear`
 **exit** | `exit`
 **help** | `help`

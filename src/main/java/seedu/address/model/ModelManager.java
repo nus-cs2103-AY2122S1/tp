@@ -38,8 +38,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        sortedPersons = new SortedList<>(this.addressBook.getPersonList());
-        filteredPersons = new FilteredList<>(sortedPersons);
+        this.sortedPersons = new SortedList<>(this.addressBook.getPersonList());
+        sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
+        this.filteredPersons = new FilteredList<>(sortedPersons);
     }
 
     public ModelManager() {
@@ -130,12 +131,14 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+        logger.info("Display person list by the order of name.");
         sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
         filteredPersons.setPredicate(predicate);
     }
 
     @Override
     public void sortFilteredPersonList(Comparator<Person> personComparator, boolean isAscending) {
+        logger.info("Sort the person list.");
         if (isAscending) {
             sortedPersons.setComparator(personComparator);
         } else {
