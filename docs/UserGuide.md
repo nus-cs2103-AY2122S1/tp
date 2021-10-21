@@ -101,9 +101,21 @@ Examples:
 * `find tag/ UE` displays any modules that contain the word "UE" in the tag.
 
 
-### Editing a module : `edit` [Coming soon]
+### Editing a module : `edit'
 
 Edits an existing module in the mod tracker.
+
+Format: `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]`
+
+* At least one of the optional fields must be provided.
+* The given value for the field must be different from the original one.
+* The given value for `CODE` field must not be duplicated with existing `CODE`
+* The INDEX refers to the index number shown in the displayed module list.
+* The INDEX must be a positive integer (1, 2, 3 ...).
+
+Examples:
+* `edit 2 c/CS2103T t/Software Engineering` Edits the code and title of the 1st module to be CS2103T and Software Engineering respectively.
+* `edit 3 n/2` Edits the MC for the 3rd module to be 2.
 
 
 ### Deleting a module : `delete`
@@ -153,6 +165,21 @@ Format: `untake INDEX`
 Example:
 * `untake 1` removes the schedule from the 1st module in the module tracker.
 
+
+### Remove the schedules for a specific semester from modules : `clear`
+
+Remove the schedules for a specific semester from modules in the module tracker.
+
+Format: `clear y/YEAR s/SEMESTER`
+
+* The `YEAR` must be a positive integer from 1-6.
+* The `SEMESTER` must be a positive integer from 1-4.
+* Special semesters 1 and 2 are represented by integer values 3 and 4 respectively (see examples below).
+
+Example:
+* `clear y/1 s/1` removes the schedule for y/1 s/1 from modules.
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -167,8 +194,9 @@ Example:
 Action | Format, Examples
 --------|------------------
 **Add** | `add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]` <br> e.g. `add c/ST2334 t/Probability and Statistics d/Introduces students to basic probability theory and statistical inference n/4`
+**Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
-**Edit** [Coming soon] | `edit`
+**Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
 **Find** | `find [code] [title] [description] [mc] [tag] KEYWORDS` <br> e.g. `find code CS2040S`
 **List** | `list`
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`

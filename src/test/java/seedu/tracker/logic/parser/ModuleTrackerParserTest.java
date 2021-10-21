@@ -44,8 +44,13 @@ public class ModuleTrackerParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        ClearCommand command = (ClearCommand) parser.parseCommand(
+                ClearCommand.COMMAND_WORD + ACADEMIC_YEAR_DESC + SEMESTER_DESC);
+        AcademicYear year = new AcademicYear(VALID_ACADEMIC_YEAR);
+        Semester semester = new Semester(VALID_SEMESTER);
+        AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
+
+        assertEquals(new ClearCommand(academicCalendar), command);
     }
 
     @Test

@@ -265,6 +265,46 @@ When the `FindCommand#execute()` method is called,
         - Difficult for the application to differentiate between keywords and words for specifying a certain component.  
         - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).  
         - Is inconsistent with the format of other commands.
+
+### Clear modules feature
+
+####Implementation
+
+The `clear` command is implemented via the `ClearCommand`, `ClearCommandParser` and `ModuleInSpecificSemesterPredicate` classes.
+
+The `ClearCommandParser` class implements the `Parser` interface.
+The `ClearCommandParser#parse()` method is responsible for parsing the user input to retrieve the `AcademicYear` and `Semester` object which specify the semester that the user want to untake all modules in it. The method will return a `ClearCommand` object with `AcadenicCalendar` as its argument.
+The `ClearCommandParser#arePrefixesPresent()` method is responsible to check if all fields stated in the arguments are provided.
+
+The `ClearCommand` class extends the `Command` class and implements the `ClearCommand#execute()` method which handles the main logic of the class.
+When the `ClearCommand#execute()` method is called,
+- All `Module` objects which has the corresponding `AcademicCalendar` is filtered out from the `Model` and store in a list
+- For each `Module` in the list, the `Module` is replaced by a copy of it without `AcademicCalander` field.
+- A `CommandResult` is returned with the updated `Model`.
+
+#### Design Considerations:
+
+**Aspect: How should clear command work**
+
+- **Alternative 1(current choice)**: When a clear command is called, all modules in a specific semester will be untaked.
+    - Pros:
+      - Allow users to untake multiple modules conveniently.
+      - User can replan the specific semester using clear command.
+    - Cons:
+      - The command name might be confusing
+- **Alternative 2:** When a clear command is called, all modules in a specific semester will be deleted.
+    - Pros:
+      - Allow users to delete multiple modules conveniently.
+      - User can replan the specific semester using clear command.
+    - Cons: 
+      - User need to add all the modules again, if they want to use it later
+- **Alternative 3:** When a clear command is called, all modules in the module tracker list will be deleted.
+    - Pros:
+      - Allow users to delete everything and restart conveniently
+    - Cons:
+      - All modules stored in the storage in advance will be deleted as well
+      - User need to add all the modules again, once the clear command is called
+      - It will be expensive, if the user accidentally use clear command
     
 ### \[Proposed\] Undo/redo feature
 
