@@ -200,7 +200,9 @@ as a field in `Student`.
 ![ProgressListClass](images/StudentWithProgressListClassDiagram.png)
 
 Given below is an example of what happens when the user attempts to add a progress to a student in TutorAid by entering
-a command `add -p 2 Did Homework …​`:
+a command:
+
+`add -p 2 Did Homework …​`
 
 1. The command is first passed into `TutorAidParser#parseCommand`, which extracts the first keyword of every command.
    Since the keyword `add` would be extracted, the remaining arguments of the command (`-p 2 Did Homework …​`)
@@ -213,8 +215,7 @@ a command `add -p 2 Did Homework …​`:
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 At this point, if `AddProgressCommandParser#parse` detects that invalid input has been supplied, the command will fail 
-its execution and `ParseException` will be thrown.
-</div>
+its execution and `ParseException` will be thrown.</div>
 
 4. Lastly, the `AddProgressCommand#execute()` is called upon to add the progress with description `Did Homework`
    into the student at the specified index `2` in TutorAid, which returns a `CommandResult` object to notify the
