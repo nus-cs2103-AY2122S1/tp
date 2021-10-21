@@ -441,6 +441,7 @@ Format: `exit`
 * **CLI**: Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only.
 * **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
 * **JAR**: Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
+* **Lesson Rates**: Amount charged per hour for lessons.
 * **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
 * **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
