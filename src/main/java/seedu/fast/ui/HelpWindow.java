@@ -148,6 +148,8 @@ public class HelpWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus(String command) {
+        assert getRoot() != null : "HelpWindow has not been initialised";
+
         getRoot().requestFocus();
         if (!ParserUtil.matchArgs(command).equals("")) {
             commandList.getSelectionModel().select(command);
