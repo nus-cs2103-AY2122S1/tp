@@ -1,0 +1,17 @@
+@startuml
+
+class InformationWantedFunction {
++  {static} List<Prefix> SUPPORTED_PREFIX
++ apply()
+}
+class RetrieveCommand {
++ execute(Model)
+- executeFilter(Model, InformationWantedFunction)
+}
+
+interface Function<Student, Optional<Information>> {
+}
+
+InformationWantedFunction ..|> Function
+RetrieveCommand --> "*" InformationWantedFunction
+@enduml
