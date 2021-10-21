@@ -1,0 +1,15 @@
+@startuml
+start
+:User launches Dash;
+:User types in "tasks";
+:User types in add command with date/time;
+if () then ([User adds in both date and time])
+    :Task added with stated date and time;
+else if () then ([User adds in date only])
+    :Task added with stated date only;
+else ([User adds in time only])
+    :Task added with current date and stated time;
+endif
+:Task with relevant information appears on UI;
+stop
+@enduml
