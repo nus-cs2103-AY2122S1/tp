@@ -3,6 +3,6 @@ layout: page
 title: Kishendran Vendar Kon's Project Portfolio Page
 ---
 
-### Project: NUSpam
+### Project: Spam
 
 _Coming Soon_

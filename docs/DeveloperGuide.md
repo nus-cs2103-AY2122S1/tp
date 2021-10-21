@@ -2,64 +2,68 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
+
+- Table of Contents
 {:toc}
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- [Encrypting and Decrypting Files in Java](https://www.baeldung.com/java-cipher-input-output-stream) from Baeldung
+  - Adapted and modified. See section on _[Encryption](#encryption)_.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
-* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the components and invokes cleanup methods where necessary.
+
+- At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+- At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
-
+- [**`UI`**](#ui-component): The UI of the App.
+- [**`Logic`**](#logic-component): The command executor.
+- [**`Model`**](#model-component): Holds the data of the App in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+- [**`Encryption`**](#encryption-component): Encrypts and decrypts data
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- defines its _API_ in an `interface` with the same name as the Component.
+- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -79,10 +83,10 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -93,6 +97,7 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
+
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
@@ -110,28 +115,28 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-
 The `Model` component,
 
-* stores the data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- stores the data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
-
 
 ### Storage component
 
@@ -140,31 +145,46 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+- can save both address book data and user preference data in `.json` format, and read them back into corresponding objects.
+- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+### Encryption component
+
+**API** : `Encryption.java`
+
+<img src="images/EncryptionClassDiagram.png" width="200" />
+
+The `Encryption` component,
+
+- encrypts data files and writes to `.enc` format.
+  - accepts file in any format for encryption, per the supplied `Path`.
+- decrypts data files from `.enc` format.
+  - writes to file in any format after decryption, per the supplied `Path`.
+- performs the encryption using a secret key supplied by the `EncryptionKeyGenerator` utility class and the cipher algorithm.
 
 ### Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Implemented\] Import feature
+### Batch Import
 
-#### Chosen implementation
+#### Implementation
 
 The chosen implementation of the `ImportCommand` pulls up a `CsvFileSelector` window that only allows csv files to be selected.
 
 Once a file is selected, the command is supported by two parsers.
 
-* `CsvParser` — Deals with parsing a csv file and assigning its body to its headers via key-value pairs.
+- `CsvParser` — Deals with parsing a csv file and assigning its body to its headers via key-value pairs.
 
-* `ImportCommandParser` — Retrieves the relevant entries from `CsvParser` then checks if the necessary fields are present and correctly formatted before creating the `Person` objects that will be added to the `Model` in `ImportCommand`.
+- `ImportCommandParser` — Retrieves the relevant entries from `CsvParser` then checks if the necessary fields are present and correctly formatted before creating the `Person` objects that will be added to the `Model` in `ImportCommand`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("import")` API call.
 
@@ -178,19 +198,78 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 **Aspect: How csv file is chosen:**
 
-* **Alternative 1 (current choice):** `FileSelector` window.
-  * Pros:
-  	* Ensures users select files that exist and are in the csv format.
-  	* Allows for easy navigability between directories for quick retrieval of the wanted file.
-  * Cons:
-  	* Diverts from target user profile by utilising GUI for commands.
+- **Alternative 1 (current choice):** `FileSelector` window.
+  - Pros:
+  	- Ensures users select files that exist and are in the csv format.
+  	- Allows for easy navigability between directories for quick retrieval of the wanted file.
+  - Cons:
+  	- Diverts from target user profile by utilising GUI for commands.
 
-* **Alternative 2:** Csv file path to be inputted after `import` in command call.
-  * Pros:
-  	* Meets target user profile by utilising CLI rather than GUI.
-  * Cons:
-  	* User has to search for the csv file's absolute path.
-  	* File could not exist or be in the wrong format. Would require additional exception handling.
+- **Alternative 2:** Csv file path to be inputted after `import` in command call.
+  - Pros:
+  	- Meets target user profile by utilising CLI rather than GUI.
+  - Cons:
+  	- User has to search for the csv file's absolute path.
+  	- File could not exist or be in the wrong format. Would require additional exception handling.
+    
+### Encryption
+
+**Specifications:**
+
+- Encryption standard: [AES](https://searchsecurity.techtarget.com/definition/Advanced-Encryption-Standard)
+- Block cipher: AES-256
+- Key generation method: user-supplied password (up to 32 characters long)
+- File extension: [`.enc`](https://fileinfo.com/extension/enc)
+
+#### Implementation
+
+The encryption feature is implemented with the following classes:
+
+- `EncryptionManager` — Handles the encryption and decryption of data files.
+  - Needs a `SecretKey`, which is provided by `EncryptionKeyGenerator` utility class.
+  - Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
+- `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-256 compliant keys.
+  - `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex hash function.
+- `MainApp` — `EncryptionManager` is initiated here and passed as parameter to the constructor of `LogicManager`.
+  - There should be one and only one `EncryptionManager` instance at any time.
+  - This acts as a single source of truth, which avoids clashing keys.
+- `LogicManager` — The `execute()` method uses `EncryptionManager` to decrypt the program data before consuming the data.
+  - The entirety of the [**data file lifecycle**](#data-file-lifecycle) happens within the `execute()` method.
+
+An encrypted file can only be decrypted with the same AES key that was used to encrypt it. In this case, the AES keys are generated solely using a password string supplied by the user. Multiple instances of AES keys are said to be the same if the password string used to generate these keys are the same. This definition of equality ensures the validity of the generated key across sessions.
+
+The supplied password string must be 32 characters long (32 characters = 256 bits needed to generate the AES key). Passwords shorter than 32 characters will be padded with `"/"` to extend the number of bits. _Passwords longer than 32 characters are **not** supported._ As a consequence, the length and randomness of the supplied password make up the strength of the encryption. Shorter and less random passwords are most vulnerable to brute force attacks.
+
+#### Data file lifecycle
+
+The program's data undergoes a lifecycle per operation:
+
+1. The contents of the encrypted data file is decrypted, and is written to a temporary `.json` file.
+2. Other components of the program consumes the `.json` file and modifies its contents.
+3. The modified `.json` file is encrypted and overwrites the contents of the encrypted data file.
+4. The temporary `.json` file is deleted.
+
+The lifecycle ensures the program's data stays encrypted at any point in time. In the event of a program crash, the decrypted file will be impossible to recover, but the encrypted file will stay intact.
+
+The lifecycle can be described by the following sequence diagram:
+
+<img src="images/EncryptionSequenceDiagram.png" width="800">
+
+### Find feature
+
+#### Implementation
+
+The find feature leverages on the `Model#updateFilteredPersonList(Predicate<Person>)` method. It is known that `FindCommand` instances each kept a reference to a `NameContainsKeywordsPredicate` instance for updating the model's filtered list, but since _v1.2_ it has been changed to take in a more general `Predicate<Person>`. This allows us to freely manipulate `FindCommandParser` to generate varieties of find conditions.
+
+In order to systematically process multiple options for a user input's in a find command, we are obliged to create a **static inner class** `FindConditions`, which implements `Predicate<Person>`, with the following methods:
+
+- `#test(Person)` - Overridden method to test whether the given `Person` satisfy the find conditions
+- `#toString()` - Overridden method for the string representation of the find conditions
+- `#put(PersonField, List<String>)` - Adds a find condition, which is list of keywords to be tested against a field
+
+The following is the class diagram summarizing the description above:
+
+![Find Class Diagram](images/FindClassDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -198,9 +277,9 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+- `VersionedAddressBook#commit()` — Saves the current address book state in its history.
+- `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
+- `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -261,14 +340,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+- **Alternative 1 (current choice):** Saves the entire address book.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
+  - Pros: Easy to implement.
+  - Cons: May have performance issues in terms of memory usage.
+
+- **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+  - Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  - Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -276,18 +356,17 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- [Documentation guide](Documentation.md)
+- [Testing guide](Testing.md)
+- [Logging guide](Logging.md)
+- [Configuration guide](Configuration.md)
+- [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -295,32 +374,31 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* handles large volumes of internal and external communications
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
-* requires fast manipulation and precise handling of contact data
+- handles large volumes of internal and external communications
+- prefer desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
+- requires fast manipulation and precise handling of contact data
 
 **Value proposition**: manage contacts faster than a typical mouse/GUI driven app, and minimise tedious and repetitive tasks such as data entry, email blasts, and mail merge
-
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | get help                       | refer to instructions when I forget how to use the App                 |
-| `* * *`  | new user                                   | batch import contacts          | quickly get started                                                    |
-| `* * *`  | user                                       | search for a specific field    | filter my result easily                                                |
-| `* * *`  | user                                       | update contact details         | the information stays updated                                          |
-| `* * *`  | user                                       | purge all data                 | easily start over                                                      |
-| `* * *`  | careless user                              | have case-insensitive commands | speed up my typing                                                     |
-| `*`      | careless user                              | be warned about incorrect data format | minimise errors                                                 |
-| `*`      | with incomplete contact data               | have autofill suggestions      | make the contact data complete                                         |
+| Priority | As a …​                      | I want to …​                          | So that I can…​                                        |
+| -------- | ---------------------------- | ------------------------------------- | ------------------------------------------------------ |
+| `* * *`  | new user                     | get help                              | refer to instructions when I forget how to use the App |
+| `* * *`  | new user                     | batch import contacts                 | quickly get started                                    |
+| `* * *`  | user                         | search for a specific field           | filter my result easily                                |
+| `* * *`  | user                         | update contact details                | the information stays updated                          |
+| `* * *`  | user                         | purge all data                        | easily start over                                      |
+| `* * *`  | careless user                | have case-insensitive commands        | speed up my typing                                     |
+| `*`      | careless user                | be warned about incorrect data format | minimise errors                                        |
+| `*`      | with incomplete contact data | have autofill suggestions             | make the contact data complete                         |
 
-*{More to be added}*
+_{More to be added}_
 
 ### Use cases
 
@@ -339,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 3a. The file is not in the correct format.
+- 3a. The file is not in the correct format.
 
   Use case ends.
 
@@ -354,11 +432,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The command is not in the correct format.
+- 1a. The command is not in the correct format.
 
   Use case ends.
 
-*{More to be added}*
+_{More to be added}_
 
 ### Non-Functional Requirements
 
@@ -367,13 +445,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3. Should be able to import up to 1000 persons without a noticeable sluggishness in performance.
 4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
-*{More to be added}*
+_{More to be added}_
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, OS-X
+- **Mainstream OS**: Windows, Linux, Unix, OS-X
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -397,7 +475,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
+      Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
 

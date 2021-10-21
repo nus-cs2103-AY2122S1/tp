@@ -18,6 +18,7 @@ import seedu.address.model.tag.Tag;
 public class ImportCommandParser {
     public static final String MESSAGE_WRONGLY_FORMATTED_HEADER = "Failed! "
             + "Entries at following rows are wrongly formatted:";
+    public static final String MESSAGE_NAME_COLUMN_MISSING = "Name column is missing";
 
     private CsvParser csvParser;
     private final List<Person> personsToAdd = new ArrayList<>();
@@ -71,13 +72,13 @@ public class ImportCommandParser {
 
     private void parseHeader() throws ParseException {
         csvNames = csvParser.get("name");
-        csvPhones = Optional.of(csvParser.get("phone"));
-        csvEmails = Optional.of(csvParser.get("email"));
-        csvAddresses = Optional.of(csvParser.get("address"));
-        csvTags = Optional.of(csvParser.get("tags"));
+        csvPhones = Optional.ofNullable(csvParser.get("phone"));
+        csvEmails = Optional.ofNullable(csvParser.get("email"));
+        csvAddresses = Optional.ofNullable(csvParser.get("address"));
+        csvTags = Optional.ofNullable(csvParser.get("tags"));
 
         if (csvNames == null) {
-            throw new ParseException("Name column is missing");
+            throw new ParseException(MESSAGE_NAME_COLUMN_MISSING);
         }
     }
 
@@ -93,7 +94,7 @@ public class ImportCommandParser {
                     if (x.get(finalI).equals("")) {
                         return new ArrayList<>();
                     } else {
-                        return Arrays.asList(x.get(finalI).split(" "));
+                        return Arrays.asList(x.get(finalI).split(";"));
                     }
                 });
 
@@ -105,6 +106,5 @@ public class ImportCommandParser {
                 wronglyFormattedEntries.add("Row" + (i + 2) + " : " + e.getLocalizedMessage());
             }
         }
-
     }
 }

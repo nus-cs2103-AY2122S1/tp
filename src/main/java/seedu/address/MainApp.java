@@ -1,7 +1,10 @@
 package seedu.address;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -12,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
@@ -50,6 +54,8 @@ public class MainApp extends Application {
     public void init() throws Exception {
         logger.info("=============================[ Initializing AddressBook ]===========================");
         super.init();
+
+        initImportsDirectory();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
@@ -163,6 +169,29 @@ public class MainApp extends Application {
         }
 
         return initializedPrefs;
+    }
+
+    /**
+     * Creates a imports directory within the project's home directory
+     * and populates it with and importTemplate.csv file.
+     */
+    protected void initImportsDirectory() {
+        String home = System.getProperty("user.dir");
+        Path path = Paths.get(home, "imports");
+        try {
+            FileUtil.createDirectoryIfEmpty(path);
+        } catch (IOException e) {
+            logger.warning("Failed to create imports directory : " + StringUtil.getDetails(e));
+        }
+
+        InputStream src = this.getClass().getResourceAsStream("/templates/importTemplate.csv");
+
+        try {
+            Path target = Paths.get(home, "imports", "importTemplate.csv");
+            Files.copy(src, target);
+        } catch (IOException e) {
+            logger.warning("Failed to retrieve importTemplate.csv : " + StringUtil.getDetails(e));
+        }
     }
 
     @Override
