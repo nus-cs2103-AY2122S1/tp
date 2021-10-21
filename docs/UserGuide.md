@@ -83,7 +83,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
 * GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
 
@@ -103,7 +103,7 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
 * Adds the lesson with the specified prefixes.
 
