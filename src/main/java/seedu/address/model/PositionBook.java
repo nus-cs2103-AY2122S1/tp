@@ -85,9 +85,9 @@ public class PositionBook implements ReadOnlyPositionBook {
     /**
      * Searches for a position by its {@code title}.
      */
-    public Position getPositionByTitle(Title title) {
+    public static Position getPositionByTitle(Title title) {
         requireNonNull(title);
-        return positions.getPositionByTitle(title);
+        return getPositionByTitle(title);
     }
 
     /**

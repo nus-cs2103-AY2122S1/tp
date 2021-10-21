@@ -176,7 +176,7 @@ public class ModelManager implements Model {
     @Override
     public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
         Title positionTitle = applicantParticulars.getPositionTitle();
-        Position position = positionBook.getPositionByTitle(positionTitle);
+        Position position = PositionBook.getPositionByTitle(positionTitle);
         Applicant applicant = new Applicant(applicantParticulars, position);
 
         applicantBook.addApplicant(applicant);
@@ -268,7 +268,6 @@ public class ModelManager implements Model {
         return positionBook;
     }
 
-
     // Position related methods
 
     @Override
@@ -317,7 +316,7 @@ public class ModelManager implements Model {
      * Initialise rejection rate of a new position.
      *
      * @param p The position to be initialised.
-     * @return
+     * @return The rejection rate of a given position in MTR.
      */
     @Override
     public float calculateRejectionRate(Position p) {
