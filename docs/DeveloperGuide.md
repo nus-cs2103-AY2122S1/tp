@@ -1,30 +1,43 @@
----
-layout: page
-title: Developer Guide
----
-* Table of Contents
-{:toc}
+#Developer Guide
 
+### Table of Contents
+* [Acknowledgements](#acknowledgements)
+* [Setting Up, Getting Started](#setting-up-getting-started)
+* [Design](#design)
+  * [Architecture](#architecture)
+  * [UI Component](#ui-component)
+  * [Logic Component](#logic-component)
+  * [Model Component](#model-component)
+  * [Storage Component](#storage-component)
+  * [Common Classes](#common-classes)
+* [Implementation](#implementation)
+  * [RetrieveCommand](#retrievecommand)
+  * [SortCommand](#sortcommand)
+  * [AttendanceCommand](#attendancecommand)
+  * [ParticipationCommand](#participationcommand)
+  * [GradeCommand](#gradecommand)
+  * [ShowCommand](#showcommand)
+  * [HelpCommand](#helpcommand)
+  * [[Proposed] Undo/Redo](#proposed-undoredo-feature)
+* [Guides](#guides)
+* [Appendix](#appendix-requirements)
+  * [Requirement](#appendix-requirements)
+  * [Manual Testing](#appendix-instructions-for-manual-testing)
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* TBC
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting Up, Getting Started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Design**
-
-<div markdown="span" class="alert alert-primary">
-
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
-</div>
 
 ### Architecture
 
@@ -154,25 +167,39 @@ Classes used by multiple components are in the `seedu.academydirectory.commons` 
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### HelpCommand
+### RetrieveCommand
+This command serves to retrieve a specific `Information` of students.
 
-This command serves to guide new users on using the application, which syntax to use and when to use them. Users can view a summary of all commands' syntax,
-or a specific guide on how to use a particular command.
+#### Implementation
+`RetrieveCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+All fields of `Student` class which implements the `Information` interface and whose prefix is present in the `InformationWantedFunction` class
+can be queried by `RetrieveCommand`. Hence, for an `Information` to be query-able, it _must_ implement the `Information` interface and its prefix needs
+to be added to the list of supported prefix under `InformationWantedFunction`. If at least one of the two conditions are not fulfilled, compile errors
+will be thrown. The following is the class diagram for `RetrieveCommand`
+![RetrieveCommandClassDiagram](images/logic/commands/retrievecommand/RetrieveCommandClassDiagram.png)
+
+A `RetrieveCommand` is initialized with a list of `InformationWantedFunction` objects to retrieve the necessary information. Obtaining the queried information
+is done by using the `InformationWantedFunction` objects on all `Student` objects in the model. The specific is shown in the sequence diagram below:
+
+![RetrieveCommandSequenceDiagram](images/logic/commands/retrievecommand/RetrieveCommandSequenceDiagram.png)
+Exactly which field of `Student` should be retrieved is determined by the `Prefix` passed into `InformationWantedFunction` during its creation.
+
+### SortCommand
+
+This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`. When sorting by `Assessment`, users have the option of sorting by individual `Assessment` or by the average grade among. Users can also choose if they want to sort by ascending or descending.
 
 #### Implementation
 
-`HelpCommand` will extend the `Command` class, and consequently `@Override` the `Command#execute()` method to serve its initial purposes.
+`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). This help command will
-be displayed to the user on a separate window later on.
+The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
 
-![HelpCommandSequenceDiagram](images/logic/commands/helpcommand/HelpCommandSequenceDiagram.png)
+![SortCommandSequenceDiagram](images/logic/commands/sortcommand/SortCommandSequenceDiagram.png)
 
-As seen from the diagram, the `HelpCommand` involves the use of conditional branches. If the optional condition is met, a `CommandException` is thrown to let
-users know that the input is invalid. 
+The reference frame for GetComparator can be found below. It details the selection process based on the `attribute` of the `SortCommand`.
 
-Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
-will be created. If it is a specific help, then a specific help command associated with a command will be created.
+![GetComparatorSequenceDiagram](images/logic/commands/sortcommand/GetComparatorSequenceDiagram.png)
 
 ### AttendanceCommand
 
@@ -202,20 +229,6 @@ If the condition is met, a `CommandException` is thrown to let the user know tha
 
  </div>
 
-### GradeCommand
-
-This command serves to update the `Grade` of various `Assessment` that the students will undergo in CS1101S. The assessments include RA1, Midterm, RA2, Practical Exam (PE), and Final.
-
-#### Implementation
-
-`GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-
-The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`. The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
-
-The following sequence diagram describes what happens when `GradeCommand` is executed:
-
-![GradeCommandSequenceDiagram](images/logic/commands/gradecommand/GradeCommandSequenceDiagram.png)
-
 ### ParticipationCommand
 
 This command serves to update the `Participation` score of students. Following the XP system for CS1101S, each student is awarded between 0 and 500 XP (inclusive) per Studio session.
@@ -232,6 +245,20 @@ The implementation is similar to `AttendanceCommand`, with the same sequence dia
 
  </div>
 
+### GradeCommand
+
+This command serves to update the `Grade` of various `Assessment` that the students will undergo in CS1101S. The assessments include RA1, Midterm, RA2, Practical Exam (PE), and Final.
+
+#### Implementation
+
+`GradeCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
+
+The recording of grade is facilitated by adding an `Assessment` parameter to the `Student`. The `Assessment` is implemented with a HashMap that stores the String representation of the assessments as the keys, and the integer `Grade` as the values.
+
+The following sequence diagram describes what happens when `GradeCommand` is executed:
+
+![GradeCommandSequenceDiagram](images/logic/commands/gradecommand/GradeCommandSequenceDiagram.png)
+
 ### ShowCommand
 
 This command serves to display the collated score of all students in the Academy Directory for a specific `Assessment`. The assessments that can be queried are: RA1, Midterm, RA2, Practical Exam (PE), and Final.
@@ -246,40 +273,27 @@ The following sequence diagram describes what happens when `ShowCommand` is exec
 
 ![ShowCommandSequenceDiagram](images/logic/commands/showcommand/ShowCommandSequenceDiagram.png)
 
-### SortCommand
+### HelpCommand
 
-This command sorts the `AcademyDirectory` student list based on their `Participation`, `Assessment` and `Name`. When sorting by `Assessment`, users have the option of sorting by individual `Assessment` or by the average grade among. Users can also choose if they want to sort by ascending or descending.
-
-#### Implementation
-
-`SortCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
-
-The sorting mechanism is based on the `List` interface as it sorts the various `FilteredList` instances using `Comparator`. Based on the `attribute` of the `SortCommand` being executed, the `Comparator` differs as shown by the sequential diagram below:
-
-![SortCommandSequenceDiagram](images/logic/commands/sortcommand/SortCommandSequenceDiagram.png)
-
-The reference frame for GetComparator can be found below. It details the selection process based on the `attribute` of the `SortCommand`.
-
-![GetComparatorSequenceDiagram](images/logic/commands/sortcommand/GetComparatorSequenceDiagram.png)
-### RetrieveCommand
-This command serves to retrieve a specific `Information` of students. 
+This command serves to guide new users on using the application, which syntax to use and when to use them. Users can view a summary of all commands' syntax,
+or a specific guide on how to use a particular command.
 
 #### Implementation
-`RetrieveCommand` will extend the `Command` class and will consequently `@Override` the `Command#execute()` method to serve the aforementioned purpose.
 
-All fields of `Student` class which implements the `Information` interface and whose prefix is present in the `InformationWantedFunction` class
-can be queried by `RetrieveCommand`. Hence, for an `Information` to be query-able, it _must_ implement the `Information` interface and its prefix needs
-to be added to the list of supported prefix under `InformationWantedFunction`. If at least one of the two conditions are not fulfilled, compile errors
-will be thrown. The following is the class diagram for `RetrieveCommand`
-![RetrieveCommandClassDiagram](images/logic/commands/retrievecommand/RetrieveCommandClassDiagram.png)
+`HelpCommand` will extend the `Command` class, and consequently `@Override` the `Command#execute()` method to serve its initial purposes.
 
-A `RetrieveCommand` is initialized with a list of `InformationWantedFunction` objects to retrieve the necessary information. Obtaining the queried information 
-is done by using the `InformationWantedFunction` objects on all `Student` objects in the model. The specific is shown in the sequence diagram below:
+The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). This help command will
+be displayed to the user on a separate window later on.
 
-![RetrieveCommandSequenceDiagram](images/logic/commands/retrievecommand/RetrieveCommandSequenceDiagram.png)
-Exactly which field of `Student` should be retrieved is determined by the `Prefix` passed into `InformationWantedFunction` during its creation.
+![HelpCommandSequenceDiagram](images/logic/commands/helpcommand/HelpCommandSequenceDiagram.png)
 
-### \[Proposed\] Undo/redo feature
+As seen from the diagram, the `HelpCommand` involves the use of conditional branches. If the optional condition is met, a `CommandException` is thrown to let
+users know that the input is invalid.
+
+Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
+will be created. If it is a specific help, then a specific help command associated with a command will be created.
+
+### \[Proposed\] Undo/Redo feature
 
 #### Proposed Implementation
 
@@ -366,7 +380,9 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Guides**
+
+The following links to guides on: Documentation, Logging, Testing, Configuration, Dev-Ops.
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -376,7 +392,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## Appendix: Requirements
 
 ### Product scope
 
@@ -594,7 +610,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: Display grades for an assessment**
+**Use case: Show grades for an assessment**
 
 **MSS**
 
@@ -652,7 +668,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Studios**: A tutorial held in CS1101S and is essential in aiding the students to improve their grasp on the concepts taught during the lecture.
-  Avenger
 * **Avenger**: a CS1101S tutor, responsible for building on concepts and recording attendance and grades.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -681,7 +696,7 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases to come …​ }_
 
 ### Deleting a student
 
@@ -698,7 +713,7 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+1. _{ more test cases to come …​ }_
 
 ### Saving data
 
@@ -706,4 +721,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+1. _{ more test cases to come …​ }_
