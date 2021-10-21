@@ -2,6 +2,9 @@ package seedu.notor.logic.commands.person;
 
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -13,6 +16,7 @@ import seedu.notor.logic.executors.person.PersonNoteExecutor;
  */
 public class PersonNoteCommand extends PersonCommand {
     public static final String COMMAND_WORD = "note";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("note", "n");
 
     private static final String COMMAND_DESCRIPTION =
             ": Edits the notes of the person identified by the index number used in the current person listing.\n";

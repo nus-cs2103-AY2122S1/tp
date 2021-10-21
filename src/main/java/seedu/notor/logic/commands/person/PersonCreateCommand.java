@@ -6,6 +6,8 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPINDEX;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.notor.commons.core.index.Index;
@@ -21,9 +23,9 @@ import seedu.notor.model.person.Person;
  */
 public class PersonCreateCommand extends PersonCommand {
     public static final String COMMAND_WORD = "create";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("create", "c");
 
-    private static final String COMMAND_DESCRIPTION =
-            ": Creates a person in the address book.\n";
+    private static final String COMMAND_DESCRIPTION = ": Creates a person in the address book.\n";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " NAME " + COMMAND_WORD
             + COMMAND_DESCRIPTION

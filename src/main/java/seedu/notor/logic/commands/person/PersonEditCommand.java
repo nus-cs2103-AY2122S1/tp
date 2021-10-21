@@ -5,6 +5,8 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.notor.commons.core.index.Index;
@@ -18,6 +20,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  */
 public class PersonEditCommand extends PersonCommand {
     public static final String COMMAND_WORD = "edit";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("edit", "e");
 
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 

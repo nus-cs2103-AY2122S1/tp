@@ -3,6 +3,7 @@ package seedu.notor.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -61,8 +62,8 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
+        phone = Objects.requireNonNullElse(source.getPhone().value, "");
+        email = Objects.requireNonNullElse(source.getEmail().value, "");
         note = source.getNote().value;
         noteDate = source.getNote().getSavedDate();
         tagged.addAll(source.getTags().stream()
@@ -91,19 +92,17 @@ class JsonAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
-        }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!phone.equals("")) {
+            if (!Phone.isValidPhone(phone)) {
+                throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            }
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+        if (!email.equals("")) {
+            if (!Email.isValidEmail(email)) {
+                throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            }
         }
         final Email modelEmail = new Email(email);
 
