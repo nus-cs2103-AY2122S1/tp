@@ -297,7 +297,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions 
+**Value proposition**: Manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions
 
 
 ### User stories
@@ -375,8 +375,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Actor filters residents, specifying desired FET due date.
 2. System shows the list of residents filtered.
-3. Actor requests for a list of the email addresses of the residents shown. 
-4. System outputs the list email addresses. 
+3. Actor requests for a list of the email addresses of the residents shown.
+4. System outputs the list email addresses.
 5. Actor sends an email to these residents to remind them to take their FET soon.
 
     Use case ends.
