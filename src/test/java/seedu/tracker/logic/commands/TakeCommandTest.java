@@ -126,7 +126,7 @@ public class TakeCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ExitCommand()));
 
         // different index -> returns false
         assertFalse(standardCommand.equals(new TakeCommand(INDEX_SECOND_MODULE, academicCalendar)));
