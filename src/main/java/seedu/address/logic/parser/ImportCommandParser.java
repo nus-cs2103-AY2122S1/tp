@@ -4,9 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_FILEPATH_NOT_EXIST;
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
-import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -26,12 +24,12 @@ public class ImportCommandParser implements Parser {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
-        Path filePath = Paths.get(argsTrimmed);
-        if (!FileUtil.isFileExists(filePath)) {
+        try {
+            Path filePath = ParserUtil.parseExistingFilePath(args);
+            return new ImportCommand(filePath);
+        } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_FILEPATH_NOT_EXIST, argsTrimmed)
-            );
+                    String.format(MESSAGE_FILEPATH_NOT_EXIST, argsTrimmed));
         }
-        return new ImportCommand(filePath);
     }
 }
