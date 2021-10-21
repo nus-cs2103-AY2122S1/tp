@@ -115,10 +115,11 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it gets the current state (i.e. whether the user is on the `Patients` or `Doctors` tab) from the `Model`.
+2. It then uses the `PlannerMdParser` class to parse the user command.
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddPatientCommand`) which is executed by the `LogicManager`.
+4. The command can communicate with the `Model` when it is executed (e.g. to add a patient).
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
@@ -132,8 +133,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `PlannerMdParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddPatientCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddPatientCommand`) which the `PlannerMdParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddPatientCommandParser`, `DeleteDoctorCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component <a name="model"/>
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -327,28 +328,55 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is `PlannerMD` and the **Actor** is the `receptionist`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add a patient/doctor**
 
 **MSS**
 
-1.  Receptionist requests to list of patients and doctors
-2.  PlannerMD shows a list of patients and doctors
-3.  Receptionist requests to delete a specific person in the list
-4.  PlannerMD deletes the person which is reflected immediately in the list
+1. Receptionist requests to add a patient/doctor by typing in their details
+2. PlannerMD adds the patient/doctor which is reflected immediately in the list
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. PlannerMD detects that compulsory details are missing.
+
+    * 1a1. PlannerMD shows an error message.
+
+    Use case resumes at step 1.
+
+* 1b. PlannerMD detects data entered with invalid format.
+
+    * 1b1. PlannerMD shows an error message stating the required format.
+
+    Use case resumes at step 1.
+
+**Use case: Delete a patient/doctor**
+
+**MSS**
+
+1.  Receptionist requests to list patients/doctors
+2.  PlannerMD shows a list of patients/doctors
+3.  Receptionist requests to delete a specific patient/doctor in the list
+4.  PlannerMD deletes the patient/doctor which is reflected immediately in the list
 
     Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
+
+  Use case ends.
+
 * 3a. The given index is invalid.
 
     * 3a1. PlannerMD shows an error message.
 
       Use case resumes at step 2.
+  
   Use case ends.
 
-**Use case: Adding a risk profile to a patient (Coming soon)**
+**Use case: Adding a risk profile to a patient**
 
 **MSS**
 
