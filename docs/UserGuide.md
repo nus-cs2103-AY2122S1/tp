@@ -22,10 +22,6 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * Add description to contact: [remark](#remark)
 
-   * Tag a contact: [tag](#tag)
-
-   * Add contact to favourite: [fav](#fav)
-
    * Exiting the app: [exit / quit](#exit)
 
 * [Saving the data](#saving-data)
@@ -74,7 +70,7 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
   e.g. in `add n/{NAME}`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/{NAME} [t/{TAG}]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g `n/{NAME} [h/{TELE_HANDLE}]` can be used as `n/John Doe h/@johndoe` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/{NAME} p/{PHONE}`, `p/{PHONE} n/{NAME}` is also acceptable.
@@ -95,19 +91,21 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-Command aliases: `man`
+Command aliases: `man` `h`
 
 ***
 
 ### Adding a person: `add` <a name="add"></a>
 
-Adds a person to the address book. Name, email and module code are **compulsory**. Phone number, telegram handle and tags are **optional**. Parameters can be in any order.
+Adds a person to the address book. Name, email and module code are **compulsory**. Phone number, telegram handle and remarks are **optional**. Parameters can be in any order.
 
-Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`
+Format: `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
 
 Examples:
-* `add n/Ben e/ben123@gmail.com m/CS2103T h/@BenIsHere t/Overseas`
-* `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100`
+* `add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`
+* `add n/Mary p/98765432 e/mary123@gmail.com m/CS2100 m/CS2030S T11 B09`
+
+Command aliases: `a`
 
 ***
 
@@ -123,18 +121,20 @@ Command aliases: `ls`
 
 ### Find contacts by name / tag: `find` <a name="find"></a>
 
-Finds a name / tag.
+Finds a name / module code.
 * The search is case-insensitive. eg hans will match Hans
 * The order of the keywords does not matter. eg. Hans Bo will match Bo Hans
-* Only the name/tag is searched.
-* Only full words will be matched eg. Han will not match Hans
-* Persons matching at least one name/tag will be returned.
+* Can only search by name or module code, and not both at once.
+* Partial words will also be matched eg. Han will match Hans
+* Persons must match all name/module code to be returned.
 
-Format: `find {NAME}`/`find {TAG}`
+Format: `find n/{NAME}`/`find m/{MODULE_CODE}`
 
 Examples:
-* `find Ben`
-* `find CS2103T`
+* `find n/Ben`
+* `find m/CS2103T CS2100`
+
+Command aliases: `f`
 
 ***
 
@@ -147,37 +147,36 @@ Edits the person at the specified index.
 * The index number must be a positive integer 1,2,3…
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* When editing module/remark, the existing module/remark of the person will be overwritten.
 
-Format: `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [t/{TAG}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}]`
+Format: `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE} {LESSON_CODE}..].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`
 
 Examples:
 * `edit 1 p/91234567 e/ben321@gmail.com` Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively.
-* `edit 2 n/John Doe` Edits the name of the 2nd person to be `John Doe` and clears all existing tags.
-* `edit 3 h/@BenWasHere t/Overseas` Edits the telegram handle of the 3rd person to be `@BenWasHere` and adds an `Overseas` tag.
+* `edit 2 n/John Doe m/CS2100 T09 B09` Edits the name module of the 2nd person to be `John Doe` and `CS2100 T09 B09` respectively.
+* `edit 3 h/@BenWasHere r/Overseas` Edits the telegram handle and remark of the 3rd person to be `@BenWasHere` and `Overseas` respectively.
 
-Command aliases: `update`
+Command aliases: `update` `e`
 
 ***
 
 ### Delete contact individually / in batches: `delete` <a name="delete"></a>
 
-Delete the specified contact(s) from the address book. It can also be used to delete all contacts associated with a tag (using `b/{TAG}`).
+Delete the specified contact(s) from the address book. It can also be used to delete all contacts associated with a Module Code (using `m/{MODULE_CODE}`).
 
 * Deletes the person at the specified index (inclusive).
 * Index refers to the index number shown in the displayed person list.
 * The index must be a positive integer 1,2,3...
-* `INDEX_B` should be a positive integer strictly greater than `INDEX_A`.
+* `INDEX_B` should be a positive integer greater than or equal to `INDEX_A`.
 
-Format: `delete {INDEX}`/ `delete {INDEX_A, INDEX_B}` / `delete b/{TAG}`
+Format: `delete {INDEX}`/ `delete {INDEX_A}-{INDEX_B}` / `delete m/{MODULE_CODE}`
 
 Examples:
 * `delete 2` deletes the 2nd contact.
-* `delete 2, 5` deletes the 2nd, 3rd, 4th and 5th contacts.
-* `delete b/CS2103T` deletes all the contacts from CS2103T.
+* `delete 2-5` deletes the 2nd, 3rd, 4th and 5th contacts.
+* `delete m/CS2103T` deletes all the contacts from CS2103T.
 
-Command aliases: `del` `del` `rm` 
+Command aliases: `del` `rm` `d` 
 
 ***
 
@@ -185,7 +184,9 @@ Command aliases: `del` `del` `rm`
 
 Purges **all** existing contacts from the address book. Use with caution.
 
-Format: `clear` `clr`
+Format: `clear`
+
+Command aliases: `clr`
 
 ***
 
@@ -200,25 +201,13 @@ Examples:
 * `remark 2 currently overseas`
 ***
 
-### Tag a contact: `tag` <a name="tag"></a>
-
-Tags a contact with a category.
-
-Format: `tag {INDEX} {TAG}`
-
-Examples:
-* `tag Ben CS2103T`
-* `tag Mary Overseas`
-
-***
-
 ### Exiting the program : `exit` <a name="exit"></a>
 
 Exits the program.
 
 Format: `exit`
 
-Command aliases: `quit`
+Command aliases: `quit` `q`
 
 ***
 
@@ -234,18 +223,16 @@ contHACKS data are saved as a JSON file `[JAR file location]/data/contHACKS.json
 If your changes to the data file makes its format invalid, contHACKS will discard all data and start with an empty data file at the next run.
 </div>
 
-
 ## Command Summary <a name="summary"></a>
 
 | Command           | Format                                                                                                    | Example                   |
 |-------------------|-----------------------------------------------------------------------------------------------------------| --------------------------|
-| help / man        | `help`                                                                                                    | `help`                    |
-| add               | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`                      | `add n/Ben Davies e/ben123@gmail.com m/cs2103t`|
+| help / man  / h   | `help`                                                                                                    | `help`                    |
+| add / a           | `add n/{NAME} e/{EMAIL} m/{MODULE_CODE} [{LESSON_CODE}...].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`     | `add n/Ben e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`|
 | list / ls         | `list`                                                                                                    | `list`                    |
-| find              | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
-| edit / update     | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE}] [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [t/{TAG}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
-| delete / del / rm | `delete {INDEX}`/`delete {INDEX_A}, {INDEX_B}`/`delete b/{TAG}`                                           | `delete 2`/`delete 2, 5`/`delete b/CS2103T`|
+| find / f          | `find {NAME}`/`find {TAG}`                                                                                | `find Ben`/`find CS2103T` |
+| edit / update / e | `edit {INDEX} [n/{NAME}] [e/{EMAIL}] [m/{MODULE_CODE} {LESSON_CODE..}].. [p/{PHONE}] [h/{TELEGRAM_HANDLE}] [r/{REMARK}]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
+| delete / rm / d   | `delete {INDEX}`/`delete {INDEX_A}-{INDEX_B}`/`delete m/{MODULE_CODE}`                                    | `delete 2`/`delete 2-5`/`delete m/CS2103T`|
 | clear / clr       | `clear`                                                                                                   | `clear`                    |
 | remark            | `remark {INDEX} {DESCRIPTION}`                                                                            | `remark 2 absent`          |
-| tag               | `tag {INDEX} {TAG}`                                                                                       | `tag 2 overseas`           |
-| exit / quit       | `exit`                                                                                                    | `exit`                     |
+| exit / quit / q   | `exit`                                                                                                    | `exit`                     |
