@@ -334,7 +334,7 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             switch (commandResult.getCommandType()) {
-            case FRIEND_GET: case FRIEND_ADD: case FRIEND_LIST: case FRIEND_DELETE:
+            case FRIEND_GET: case FRIEND_ADD: case FRIEND_ADD_GAME_SKILL: case FRIEND_LIST: case FRIEND_DELETE:
                 handleFriendCommand(commandResult);
                 break;
             case GAME_ADD: case GAME_GET: case GAME_DELETE: case GAME_LIST:

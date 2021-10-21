@@ -44,8 +44,7 @@ public class FriendsListTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Friend editedAlice = new FriendBuilder(ALICE).withGameFriendLinks()
-                .build();
+        Friend editedAlice = new FriendBuilder(ALICE).build();
         List<Friend> newFriends = Arrays.asList(ALICE, editedAlice);
         FriendsListStub newData = new FriendsListStub(newFriends);
 
@@ -71,8 +70,7 @@ public class FriendsListTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         friendsList.addFriend(ALICE);
-        Friend editedAlice = new FriendBuilder(ALICE).withGameFriendLinks()
-                .build();
+        Friend editedAlice = new FriendBuilder(ALICE).build();
         assertTrue(friendsList.hasFriend(editedAlice));
     }
 

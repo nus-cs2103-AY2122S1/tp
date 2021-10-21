@@ -8,6 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_USER_NAME_OMEGA
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGameFriendLinks.APEX_AMY_DRACO_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_LINK;
+import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_SKILL_SIX_LINK;
+import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_DRACO_SKILL_TWO_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_AMY_OMEGA_LINK;
 import static seedu.address.testutil.TypicalGameFriendLinks.CSGO_BOB_DRACO_LINK;
 
@@ -35,26 +37,29 @@ public class GameFriendLinkTest {
 
     @Test
     public void equals() {
-        // same values -> returns true
+        // same values -> equals
         GameFriendLink minecraftCopy = new GameFriendLinkBuilder(CSGO_AMY_DRACO_LINK).build();
         assertEquals(CSGO_AMY_DRACO_LINK, minecraftCopy);
 
-        // same object -> returns true
+        // same object -> equals
         assertEquals(CSGO_AMY_DRACO_LINK, CSGO_AMY_DRACO_LINK);
 
-        // null -> returns false
+        // null -> notEquals
         assertNotEquals(null, CSGO_AMY_DRACO_LINK);
 
-        // different type -> returns false
+        // different type -> notEquals
         assertNotEquals(CSGO_AMY_DRACO_LINK, new BitSet());
 
-        // different friendId -> returns false
+        // different friendId -> notEquals
         assertNotEquals(CSGO_AMY_DRACO_LINK, CSGO_BOB_DRACO_LINK);
 
-        // different gameId -> returns false
+        // different gameId -> notEquals
         assertNotEquals(CSGO_AMY_DRACO_LINK, APEX_AMY_DRACO_LINK);
 
-        // different username -> returns false
+        // different username -> notEquals
         assertNotEquals(CSGO_AMY_DRACO_LINK, CSGO_AMY_OMEGA_LINK);
+
+        // different skill value -> notEquals
+        assertNotEquals(CSGO_AMY_DRACO_SKILL_SIX_LINK, CSGO_AMY_DRACO_SKILL_TWO_LINK);
     }
 }

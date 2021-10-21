@@ -59,7 +59,6 @@ public class CommandTestUtil {
     public static final EditCommand.EditFriendDescriptor DESC_AMY;
     public static final EditCommand.EditFriendDescriptor DESC_BOB;
 
-    // TODO: check if these are still needed for edit command
     static {
         DESC_AMY = new EditFriendDescriptorBuilder().withFriendId(VALID_FRIEND_ID_AMY)
                 .withFriendName(VALID_NAME_AMY).withGames(VALID_GAME_ID_APEX_LEGENDS).build();
