@@ -25,12 +25,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Birthday birthday;
+    private final Pin pin;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Birthday birthday) {
+                  Set<Tag> tags, Birthday birthday, Pin pin) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -38,6 +39,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.birthday = birthday;
+        this.pin = pin;
     }
 
     public Name getName() {
@@ -62,6 +64,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Pin getPin() {
+        return pin;
     }
 
     /**
@@ -109,7 +115,8 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getBirthday().equals(getBirthday());
+                && otherPerson.getBirthday().equals(getBirthday())
+                && otherPerson.getPin().equals(getPin());
     }
 
     @Override
