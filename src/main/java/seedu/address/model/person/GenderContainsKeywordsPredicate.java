@@ -5,7 +5,7 @@ import java.util.Locale;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Person}'s {@code Email} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code Gender} matches any of the keywords given.
  */
 public class GenderContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
