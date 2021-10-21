@@ -23,12 +23,12 @@ import seedu.address.commons.util.FileUtil;
 /**
  * The object that encrypts and decrypts
  */
-public class Cryptor implements Cryptable {
+public class EncryptionManager implements Encryption {
     /**
      * File to be decrypted must have the {@code *.enc} extension.
      */
     private static final String LEGAL_FILE_FORMAT_EXTENSION = ".enc";
-    private static final Logger logger = LogsCenter.getLogger(Cryptor.class);
+    private static final Logger logger = LogsCenter.getLogger(EncryptionManager.class);
 
     private final SecretKey secretKey;
     private final Cipher cipher;
@@ -39,7 +39,7 @@ public class Cryptor implements Cryptable {
      * @throws NoSuchPaddingException If the padding does not exist.
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
      */
-    public Cryptor(SecretKey secretKey, String transformation)
+    public EncryptionManager(SecretKey secretKey, String transformation)
             throws NoSuchPaddingException, NoSuchAlgorithmException {
         this.secretKey = secretKey;
         cipher = Cipher.getInstance(transformation);

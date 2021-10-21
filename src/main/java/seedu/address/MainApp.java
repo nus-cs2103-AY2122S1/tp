@@ -19,9 +19,9 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
-import seedu.address.encryption.Cryptable;
-import seedu.address.encryption.Cryptor;
+import seedu.address.encryption.Encryption;
 import seedu.address.encryption.EncryptionKeyGenerator;
+import seedu.address.encryption.EncryptionManager;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -57,7 +57,7 @@ public class MainApp extends Application {
     protected Storage storage;
     protected Model model;
     protected Config config;
-    protected Cryptable cryptor;
+    protected Encryption cryptor;
 
     @Override
     public void init() throws Exception {
@@ -68,7 +68,7 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
-        cryptor = new Cryptor(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);

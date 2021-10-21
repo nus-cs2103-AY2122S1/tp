@@ -21,9 +21,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.FileUtil;
-import seedu.address.encryption.Cryptable;
-import seedu.address.encryption.Cryptor;
+import seedu.address.encryption.Encryption;
 import seedu.address.encryption.EncryptionKeyGenerator;
+import seedu.address.encryption.EncryptionManager;
 import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
@@ -62,7 +62,7 @@ public class LogicManagerTest {
     private static final Model MODEL = new ModelManager();
 
     private Logic logic;
-    private Cryptable cryptor;
+    private Encryption cryptor;
 
     @BeforeEach
     public void setUp()
@@ -70,7 +70,7 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(MAIN_JSON_FILE_PATH);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(MAIN_PREF_FILE_PATH);
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
-        cryptor = new Cryptor(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
         FileUtil.createFile(MAIN_ENCRYPTED_FILE_PATH);
         logic = new LogicManager(MODEL, storage, cryptor, MAIN_ENCRYPTED_FILE_PATH);
     }

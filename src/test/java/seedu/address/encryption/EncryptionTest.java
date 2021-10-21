@@ -41,7 +41,7 @@ public class EncryptionTest {
             throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             InvalidAlgorithmParameterException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
+        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
@@ -59,7 +59,7 @@ public class EncryptionTest {
             throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, InvalidKeyException,
             InvalidAlgorithmParameterException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
+        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
@@ -92,8 +92,8 @@ public class EncryptionTest {
         SecretKey secretKey1 = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         SecretKey secretKey2 = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
 
-        Cryptable cryptor1 = new Cryptor(secretKey1, CIPHER_TRANSFORMATION);
-        Cryptable cryptor2 = new Cryptor(secretKey2, CIPHER_TRANSFORMATION);
+        Encryption cryptor1 = new EncryptionManager(secretKey1, CIPHER_TRANSFORMATION);
+        Encryption cryptor2 = new EncryptionManager(secretKey2, CIPHER_TRANSFORMATION);
 
         cryptor1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
         cryptor2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);
@@ -111,7 +111,7 @@ public class EncryptionTest {
     public void failure_whenWrongFileFormatIsSuppliedToDecrypt()
             throws NoSuchAlgorithmException, NoSuchPaddingException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Cryptable cryptor = new Cryptor(secretKey, CIPHER_TRANSFORMATION);
+        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         assertThrows(IOException.class, () -> cryptor.decrypt(ILLEGAL_ENCRYPTED_FORMAT, DECRYPTED_FILEPATH_JSON));
     }
@@ -123,8 +123,8 @@ public class EncryptionTest {
         SecretKey key1 = EncryptionKeyGenerator.generateKey(PASSWORD_ONE);
         SecretKey key2 = EncryptionKeyGenerator.generateKey(PASSWORD_TWO);
 
-        Cryptable cryptor1 = new Cryptor(key1, CIPHER_TRANSFORMATION);
-        Cryptable cryptor2 = new Cryptor(key2, CIPHER_TRANSFORMATION);
+        Encryption cryptor1 = new EncryptionManager(key1, CIPHER_TRANSFORMATION);
+        Encryption cryptor2 = new EncryptionManager(key2, CIPHER_TRANSFORMATION);
 
         cryptor1.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_ONE);
         cryptor2.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON_TWO);

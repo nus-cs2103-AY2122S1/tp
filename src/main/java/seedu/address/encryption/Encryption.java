@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 
-public interface Cryptable {
+public interface Encryption {
     /**
      * Encrypts a file from the supplied file path and writes into an encrypted file.
      * @param sourceFilePath The source file path to be encrypted.
