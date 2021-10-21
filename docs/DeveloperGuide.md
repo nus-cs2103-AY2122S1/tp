@@ -154,7 +154,51 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### IncludeCommand
+### Find Command
+
+This command allows searching for residents subjected to 1 or more filters for the different available parameters.
+
+How the flow of logic works:
+1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. If the command was run in the `ResidentTab` it results in a `FindCommandParser` object created and it's `parse` method called with the user input.
+1. The parsing attempts to create a `FindCommand` object. For each existing prefix, it sets the relevant field of a new `FindCompositePredicateThe` object. Parsing of any of the provided values can throw a `ParseException` command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+
+Note:
+ - Name can take in multiple keywords separated by whitespace
+ - `lastFetDate` and `lastCollectionDate` are not included
+ - Room filtering is extended to allow block, level and block-level filtering as well
+
+The following activity diagram illustrates how the `AddressBook#findPerson()` method works:
+
+![FindPersonActivityDiagram](images/logic/commands/includecommand/FindPersonActivityDiagram.png)
+
+The command extends the `Command` class and implements `FindCommand#execute()` to execute the command. A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
+
+When `Event#addResidentsToEvent()` is called, it calls `ResidentList#addResidentList()` to create a new String `newResidents` that consists of current `Person` in the `Event` and append all the `Person` in `toAdd` to this String while making sure that there is no duplicate.
+
+The following sequence diagram demonstrates what happens when the `IncludeCommand` is executed:
+
+![IncludeCommandSequenceDiagram](images/logic/commands/includecommand/IncludeCommandSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when the `IncludeCommand` is executed:
+
+![IncludeCommandActivityDiagram](images/logic/commands/includecommand/IncludeCommandActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Filtering parameters:**
+
+* **Alternative 1 (current choice):** Excluding `lastFetDate` and `lastCollectionDate` parameters.
+    * Pros:
+        - Simpler implementation as there are less filtering predicates to maintain.
+        - `list` command exists to enhance the usage of these 2 fields to extract information. A simple equality check on date is less likely from the user's POV and `list` handles this. Thus excluding this, prevents confusion of possible overlapping functionality on the user's side.
+    * Cons:
+        - The user is unable to search for an exact fet/collection date alongside other filters.
+
+**Aspect: Filtering parameters:**
+
+### Include Command
 
 This command adds multiple residents to an event by referencing the `Event` by its `Index` and the `Person` to add by their `Name` or `Room` through the `AddressBook#findPerson()` method.
 
@@ -185,7 +229,7 @@ The following activity diagram summarizes what happens when the `IncludeCommand`
 * **Alternative 2:** Reference by `eventName`.
   itself.
     * Pros: Do not need to have the `Index` in UI to know what `Event` it is, can just reference it by its name.
-    * Cons: Hard to type when the `eventName` is long, `eventName` not being unique will also cause issues .
+    * Cons: Hard to type when the `eventName` is long, `eventName` not being unique will also cause issues.
 
 ### \[Proposed\] Undo/redo feature
 
