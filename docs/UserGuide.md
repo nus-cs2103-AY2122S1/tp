@@ -193,25 +193,35 @@ Examples:
 * `delete 3` removes the third item in the task list
 * `delete 1 2` removes the first and second items in the task list
 
-### 3.7 Clearing all entries : `clear`
+### 3.7 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
-![clear_command](images/clear.jpeg)
+![clear_command_before](images/clearCommandBefore.jpeg)
+
+When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
+
+![clear_command_after](images/clearCommandAfter.jpeg)
 
 Format: `clear`
 
-### 3.8 Exiting the program : `exit`
+### 3.8 Undoing the previous command : `undo` `[coming in v1.3]`
+
+Reverts your previous command which modified the task list of Uni-Fy.
+
+Format: `undo`
+
+### 3.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.9 Saving the data
+### 3.10 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 3.10 Editing the data file
+### 3.11 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -219,7 +229,7 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 3.11 Retrieving past commands `[coming in v1.3]`
+### 3.12 Retrieving past commands `[coming in v1.3]`
 
 Shows the past commands run on **Uni-Fy**.
 
@@ -229,7 +239,7 @@ Format: `history`
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
 </div>
 
-### 3.12 Archiving data files `[coming in v2.0]`
+### 3.13 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -271,3 +281,4 @@ Action | Format, Examples
 **Help** | `help`
 **Retrieve past Commands** | `history`
 **Clear** | `clear`
+**Undo** | `TODO`
