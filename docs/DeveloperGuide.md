@@ -73,16 +73,43 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, 
+`EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` 
+class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.
+com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+[`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Member` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member` and `Event` object residing in the `Model`.
+
+#### Current Implementations 
+
+The GUI currently reflects the entered events and members recorded in Ailurus. Currently, there are two main windows 
+that reflect the `Event` and `Member` objects that are residing in the `Model`. Directly adding or removing `Event` 
+or `Member` would update the `EventListPanel` and `MemberListPanel` to show their respective `EventCard` 
+and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
+corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
+
+However, there are problems faced when the fields inside `Event` and `Member` are being changed. There seems to be 
+some difficulty in updating the `MemberCard` when a `Task` object is being created under the `Member` object, or is 
+removed. Similarly, the same problem also lies in `EventCard` not updating when a `Member` object associated with 
+the `Event` object is being removed.
+
+#### Future Plans
+
+To address the above-mentioned bug where the `EventCard` and `MemberCard` are not updated spontaneously, we decided 
+to implement a third column featuring `Task` objects. As such, we are able to totally remove the `Member` and `Task` 
+from `EventCard` and `MemberCard` respectively. 
+
+We plan to support this implementation by using the `elist`, `mlist` and `tlist` commands to determine what is being 
+displayed in the `MainWindow`.
 
 ### Logic component
 
