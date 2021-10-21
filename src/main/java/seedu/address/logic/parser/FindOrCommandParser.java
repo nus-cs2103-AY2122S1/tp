@@ -8,23 +8,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FindPredicate;
+import seedu.address.model.person.FindOrPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindCommandParser implements Parser<FindCommand> {
+public class FindOrCommandParser implements Parser<FindOrCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindOrCommand
+     * and returns a FindOrCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindCommand parse(String args) throws ParseException {
+    public FindOrCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -44,8 +46,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(e.getMessage());
         }
 
-        FindPredicate findpredicate = new FindPredicate(nameKeywords, tagList);
-
-        return new FindCommand(findpredicate);
+        FindOrPredicate findOrPredicate = new FindOrPredicate(nameKeywords, tagList);
+        return new FindOrCommand(findOrPredicate);
     }
+
 }
+
