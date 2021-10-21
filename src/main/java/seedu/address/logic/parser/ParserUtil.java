@@ -203,7 +203,7 @@ public class ParserUtil {
     public static LessonTime parseTime(String time) throws ParseException {
         requireNonNull(time);
         String trimmedTime = time.trim();
-        if (!LessonDay.isValidDay(trimmedTime)) {
+        if (!LessonTime.isValidTime(trimmedTime)) {
             throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
         }
         return new LessonTime(trimmedTime);
