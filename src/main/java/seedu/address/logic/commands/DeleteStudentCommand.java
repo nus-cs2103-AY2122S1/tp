@@ -57,7 +57,7 @@ public class DeleteStudentCommand extends DeleteCommand {
                 return deleteStudentFromModule(module);
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     /**

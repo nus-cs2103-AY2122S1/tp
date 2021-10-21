@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditModuleCommand;
 import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,8 +36,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         final String commandWord = "edit " + matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        //            case EditModuleCommand.COMMAND_WORD:
-        //                return new EditModuleCommandParser().parse(arguments);
+        case EditModuleCommand.COMMAND_WORD:
+            return new EditModuleCommandParser().parse(arguments);
         //            case EditTaskCommand.COMMAND_WORD:
         //                return new EditTaskCommandParser().parse(arguments); //to be implemented
         case EditStudentCommand.COMMAND_WORD:

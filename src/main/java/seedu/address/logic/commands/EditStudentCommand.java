@@ -73,14 +73,14 @@ public class EditStudentCommand extends EditCommand {
                 return editStudentInformation(module);
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     /**
-     * Edits a student's information. the student from the specified module.
+     * Edits a student's information from the specified module.
      *
-     * @param module The module the student will be deleted from.
-     * @return Statement indicating that the deletion is successful.
+     * @param module The module the student will be edited from.
+     * @return Statement indicating that the edition is successful.
      * @throws CommandException Exception thrown when student is not found.
      */
     public CommandResult editStudentInformation(Module module) throws CommandException {
@@ -98,21 +98,21 @@ public class EditStudentCommand extends EditCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
+     * edited with {@code editStudentDescriptor}.
      *
      * @param studentToEdit The student to be edited.
-     * @param editPersonDescriptor The edited student descriptions.
+     * @param editStudentDescriptor The edited student descriptions.
      * @return The edited student.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editPersonDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
         assert studentToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(studentToEdit.getName());
-        TeleHandle updatedTeleHandle = editPersonDescriptor.getTeleHandle().orElse(studentToEdit.getTeleHandle());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(studentToEdit.getEmail());
-        StudentId updatedStudentId = editPersonDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
-        UniqueTaskList uniqueTaskList = editPersonDescriptor.uniqueTaskList;
+        Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
+        TeleHandle updatedTeleHandle = editStudentDescriptor.getTeleHandle().orElse(studentToEdit.getTeleHandle());
+        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        StudentId updatedStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
+        UniqueTaskList uniqueTaskList = editStudentDescriptor.uniqueTaskList;
 
         Student editedStudent = new Student(updatedStudentId, updatedName, updatedTeleHandle, updatedEmail);
         editedStudent.setTaskList(uniqueTaskList);

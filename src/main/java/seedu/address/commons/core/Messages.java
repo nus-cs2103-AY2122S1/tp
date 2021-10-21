@@ -13,4 +13,5 @@ public class Messages {
     public static final String MESSAGE_MODULE_NAME_NOT_FOUND = "The module %1$s is not found";
     public static final String MESSAGE_FIND_STUDENT_SUCCESS = "Student %1$s is found!";
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Student %1$s is edited!";
+    public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Module %1$s is edited!";
 }
