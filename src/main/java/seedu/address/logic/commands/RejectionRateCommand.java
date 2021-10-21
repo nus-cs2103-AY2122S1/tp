@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Calculator;
 import seedu.address.model.Model;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -28,8 +29,6 @@ public class RejectionRateCommand extends Command {
 
     public static final String MESSAGE_NO_CURRENT_APPLICANTS = "There are currently no applicants for this position.";
 
-    private int rejectionRate;
-
     private final Position toAdd;
 
     /**
@@ -47,9 +46,9 @@ public class RejectionRateCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        rejectionRate = model.calculateRejectionRate(toAdd);
+        float rejectionRate = model.calculateRejectionRate(toAdd);
 
-        if (rejectionRate == -1) {
+        if (rejectionRate == Calculator.INVALID_REJECTION_RATE) {
             return new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS);
         }
 

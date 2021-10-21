@@ -276,7 +276,7 @@ public class ModelManager implements Model {
      * @param p The position to be initialised.
      */
     @Override
-    public int calculateRejectionRate(Position p) {
+    public float calculateRejectionRate(Position p) {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
@@ -288,6 +288,6 @@ public class ModelManager implements Model {
                 }
             }
         }
-        return Calculator.calculateRejRate(total, count);
+        return Calculator.calculateRejectionRate(total, count);
     }
 }

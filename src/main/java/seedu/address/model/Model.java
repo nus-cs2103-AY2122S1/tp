@@ -139,5 +139,5 @@ public interface Model {
     // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
 
-    int calculateRejectionRate(Position p);
+    float calculateRejectionRate(Position p);
 }
