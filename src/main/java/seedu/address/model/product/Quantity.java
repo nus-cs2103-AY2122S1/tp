@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Quantity implements Comparable<Quantity> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Unit prices should only contain numbers and it should not be blank";
+            "Quantity should only contain numbers and it should not be blank";
 
     /**
      * The quantity should contain digits from 0 to 9 only.
