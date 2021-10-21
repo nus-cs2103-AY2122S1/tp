@@ -1,10 +1,12 @@
-package seedu.notor.ui;
+package seedu.notor.ui.note;
 
 import javafx.fxml.FXML;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.ConfirmationWindow;
+import seedu.notor.ui.ResultDisplay;
 
 public class PersonNoteWindow extends NoteWindow {
 
@@ -56,6 +58,7 @@ public class PersonNoteWindow extends NoteWindow {
             editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                     Note.EMPTY_NOTE, person.getTags());
         }
+        person = editedPerson;
         logic.executeSaveNote(person, editedPerson);
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
     }

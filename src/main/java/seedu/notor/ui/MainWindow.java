@@ -21,6 +21,10 @@ import seedu.notor.model.Notable;
 import seedu.notor.model.Notor;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.note.GeneralNoteWindow;
+import seedu.notor.ui.note.GroupNoteWindow;
+import seedu.notor.ui.note.NoteWindow;
+import seedu.notor.ui.note.PersonNoteWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing

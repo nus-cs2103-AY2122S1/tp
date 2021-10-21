@@ -1,4 +1,4 @@
-package seedu.notor.ui;
+package seedu.notor.ui.note;
 
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -15,12 +15,14 @@ import seedu.notor.commons.util.DateUtil;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.person.Person;
-
+import seedu.notor.ui.ConfirmationWindow;
+import seedu.notor.ui.ResultDisplay;
+import seedu.notor.ui.UiPart;
 
 
 public abstract class NoteWindow extends UiPart<Stage> {
 
-    protected static final ArrayList<NoteWindow> OPENED_NOTE_WINDOWS = new ArrayList<>();
+    public static final ArrayList<NoteWindow> OPENED_NOTE_WINDOWS = new ArrayList<>();
 
     private static final int WIDTH = 616;
     private static final int HEIGHT = 390;

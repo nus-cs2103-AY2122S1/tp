@@ -46,7 +46,6 @@ public abstract class Group implements Notable {
         this.note = note;
         people = new HashMap<>();
     }
-
     @Override
     public Note getNote() {
         return note;

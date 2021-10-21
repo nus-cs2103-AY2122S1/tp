@@ -1,10 +1,12 @@
-package seedu.notor.ui;
+package seedu.notor.ui.note;
 
 import javafx.fxml.FXML;
 import seedu.notor.logic.Logic;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.model.Notor;
 import seedu.notor.model.common.Note;
+import seedu.notor.ui.ConfirmationWindow;
+import seedu.notor.ui.ResultDisplay;
 
 public class GeneralNoteWindow extends NoteWindow {
 

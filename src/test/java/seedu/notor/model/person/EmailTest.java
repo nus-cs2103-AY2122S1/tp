@@ -7,15 +7,9 @@ import static seedu.notor.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class EmailTest {
-
-    @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Email(null));
-    }
-
     @Test
     public void constructor_invalidEmail_throwsIllegalArgumentException() {
-        String invalidEmail = "";
+        String invalidEmail = "asd";
         assertThrows(IllegalArgumentException.class, () -> new Email(invalidEmail));
     }
 
