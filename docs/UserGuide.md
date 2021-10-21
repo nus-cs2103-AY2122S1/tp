@@ -296,12 +296,13 @@ Examples:
 
 ### Marking an applicant : `mark`
 
-Marks a specific applicant by index from the list in RecruitIn as "Done" (have been attended to).
+Marks the specified applicant by index from the list in RecruitIn as "Done" (have been attended to).
 
-Format: `mark INDEX`
+Format: `mark INDEX…​`
 
-* Marks an applicant at the specified `INDEX` as "Done".
+* Marks the specified applicant at the specified `INDEX` as "Done".
 * The `INDEX` refers to the index number shown in the displayed applicants list.
+* At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
@@ -309,15 +310,17 @@ Format: `mark INDEX`
 Examples:
 * `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
 * `find John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
+* `list` followed by `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 
 ### Unmarking an applicant : `unmark`
 
-Unmarks a specific applicant by index from the list in RecruitIn to "Not Done" (have not been attended to).
+Unmarks the specified applicant by index from the list in RecruitIn to "Not Done" (have not been attended to).
 
-Format: `unmark INDEX`
+Format: `unmark INDEX…​`
 
-* Unmarks an applicant at the specified `INDEX` to "Not Done".
+* Unmarks the specified applicant at the specified `INDEX` to "Not Done".
 * The `INDEX` refers to the index number shown in the displayed applicants list.
+* At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
@@ -325,6 +328,7 @@ Format: `unmark INDEX`
 Examples:
 * `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
 * `find John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 
 ### Exiting the program : `exit`
 
@@ -385,6 +389,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
-**Mark** | `mark INDEX`<br> e.g., `mark 3`
-**Unmark** | `unmark INDEX`<br> e.g., `unmark 3`
+**Mark** | `mark INDEX…​`<br> e.g., `mark 3`
+**Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
 **Help** | `help`
