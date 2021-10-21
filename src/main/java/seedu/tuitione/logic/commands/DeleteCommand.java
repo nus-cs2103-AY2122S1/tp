@@ -8,6 +8,7 @@ import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
+import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.student.Student;
 
 /**
@@ -34,13 +35,19 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
+        List<Lesson> lessonsToUnenroll = studentToDelete.getLessons();
+        while (!lessonsToUnenroll.isEmpty()) {
+            Lesson l = lessonsToUnenroll.get(0);
+            l.unenrollStudent(studentToDelete);
+            model.setLesson(l, l);
+        }
         model.deleteStudent(studentToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
 

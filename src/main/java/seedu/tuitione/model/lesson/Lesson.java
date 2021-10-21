@@ -5,9 +5,9 @@ import static seedu.tuitione.commons.util.AppUtil.checkArgument;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import seedu.tuitione.model.student.Grade;
 import seedu.tuitione.model.student.Student;
@@ -82,10 +82,10 @@ public class Lesson {
     }
 
     /**
-     * Returns an unmodifiable set of student for equality checks.
+     * Returns an unmodifiable list of student for equality checks.
      */
     public List<Student> getStudents() {
-        return students.stream().collect(Collectors.toUnmodifiableList());
+        return Collections.unmodifiableList(students);
     }
 
     /**
@@ -100,7 +100,10 @@ public class Lesson {
      * This defines a weaker notion of equality between two lessons.
      */
     public boolean isSameLesson(Lesson otherLesson) {
-        return lessonCode.equals(otherLesson.lessonCode);
+        if (otherLesson == this) {
+            return true;
+        }
+        return (otherLesson != null) && otherLesson.lessonCode.equals(lessonCode);
     }
 
     /**
@@ -118,7 +121,8 @@ public class Lesson {
         if (!student.getGrade().equals(grade)) {
             return false;
         }
-        for (LessonCode code : student.getLessonCodes()) {
+        for (Lesson lesson : student.getLessons()) {
+            LessonCode code = lesson.getLessonCode();
             LessonTime time = LessonCode.getLessonTimeFromCode(code);
             if (time.hasOverlappedTiming(lessonTime)) {
                 return false;
@@ -142,64 +146,64 @@ public class Lesson {
      * Checks if Student is enrolled in this Lesson.
      */
     public boolean containsStudent(Student student) {
-        return students.stream().anyMatch(s -> student.getName().equals(s.getName()));
+        return students.stream().anyMatch(s -> s.isSameStudent(student));
     }
 
     /**
      * Add student to the lesson instance.
-     * Lesson instance holds a stronger linkage to Students, storing Student entities.
      */
-    public void addStudent(Student student) {
+    public void enrollStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToEnroll(student), ENROLLMENT_MESSAGE_CONSTRAINT);
-        students.add(student);
-        student.enrollForLesson(this);
-    }
-
-    /**
-     * Add student to the lesson instance, without any checks
-     * Lesson instance holds a stronger linkage to Students, storing Student entities.
-     */
-    public void addStudentNoConstraint(Student student) {
-        requireNonNull(student);
-        students.add(student);
-        student.enrollForLesson(this);
+        checkArgument(isAbleToEnroll(student), String.format(ENROLLMENT_MESSAGE_CONSTRAINT, student.getName()));
+        addStudent(student);
     }
 
     /**
      * Removes student from the lesson instance.
-     * Lesson instance holds a stronger linkage to Students, tracking Student entities.
      */
-    public void removeStudent(Student student) {
+    public void unenrollStudent(Student student) {
         requireNonNull(student);
-        checkArgument(isAbleToUnenroll(student), String.format(STUDENT_NOT_ENROLLED, student, this));
+        checkArgument(isAbleToUnenroll(student), String.format(STUDENT_NOT_ENROLLED, student.getName(), this));
         for (Student s : students) {
             if (s.isSameStudent(student)) {
-                students.remove(s);
-                s.unenrollFromLesson(this);
-                student.unenrollFromLesson(this);
-                break;
+                removeStudent(s);
+                return;
             }
         }
     }
 
     /**
-     * Removes all students from lesson.
+     * Adds student to the lesson instance, without any checks.
      */
-    public void removeAll() {
-        while (!students.isEmpty()) {
-            Student currStudent = students.get(0);
-            this.removeStudent(currStudent);
+    public void addStudent(Student student) {
+        requireNonNull(student);
+        if (!containsStudent(student)) {
+            students.add(student);
+            student.addLesson(this);
         }
     }
 
     /**
-     * Returns a clone of the Lesson instance.
+     * Updates a student in the lesson instance.
      */
-    public Lesson createClone() {
-        Lesson clone = new Lesson(subject, grade, lessonTime, price);
-        clone.students.addAll(students);
-        return clone;
+    public void updateStudent(Student oldStudent, Student newStudent) {
+        requireAllNonNull(oldStudent, newStudent);
+        for (int idx = 0; idx < students.size(); idx++) {
+            if (students.get(idx).isSameStudent(oldStudent)) {
+                students.set(idx, newStudent);
+                newStudent.addLesson(this);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Removes student to the lesson instance, without any checks.
+     */
+    public void removeStudent(Student student) {
+        requireNonNull(student);
+        students.remove(student);
+        student.removeLesson(this);
     }
 
     @Override

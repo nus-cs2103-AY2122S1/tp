@@ -120,7 +120,7 @@ class JsonSerializableTuitione {
                     throw new IllegalValueException(MESSAGE_DUPLICATE_ENROLLMENT);
                 }
                 if (isSameLesson) {
-                    lesson.addStudent(student);
+                    lesson.enrollStudent(student);
                     hasFoundLesson = true;
                     break;
                 }

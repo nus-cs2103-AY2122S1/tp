@@ -90,7 +90,6 @@ public class Tuitione implements ReadOnlyTuitione {
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 

@@ -3,8 +3,6 @@ package seedu.tuitione.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -49,8 +47,8 @@ public class UnenrollCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-
         List<Student> lastShownStudentList = model.getFilteredStudentList();
+
         ObservableList<Lesson> lastShownLessonList = model.getFilteredLessonList();
         if (indexStudent.getZeroBased() >= lastShownStudentList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
@@ -61,24 +59,19 @@ public class UnenrollCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
         Lesson lesson = lastShownLessonList.get(indexLesson.getZeroBased());
-        Lesson newLesson = lesson.createClone();
 
-        if (!newLesson.containsStudent(studentToUnenroll)) {
+        if (!lesson.containsStudent(studentToUnenroll)) {
             throw new CommandException(String.format(MESSAGE_STUDENT_NOT_IN_LESSON,
                     studentToUnenroll.getName(),
-                    newLesson));
+                    lesson));
         }
+        lesson.unenrollStudent(studentToUnenroll);
 
-        Student newStudent = studentToUnenroll.createClone();
+        model.setStudent(studentToUnenroll, studentToUnenroll);
+        model.setLesson(lesson, lesson);
 
-        newLesson.removeStudent(newStudent);
-        model.setStudent(studentToUnenroll, newStudent);
-        model.setLesson(lesson, newLesson);
-
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-
-        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS, newStudent.getName(), newLesson));
+        return new CommandResult(String.format(MESSAGE_UNENROLL_STUDENT_SUCCESS,
+                studentToUnenroll.getName(), lesson));
     }
 
     @Override
