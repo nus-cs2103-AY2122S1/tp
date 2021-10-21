@@ -4,12 +4,12 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new ImportCommand object
  */
 public class ImportCommandParser implements Parser<ImportCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
+     * Parses the given {@code String} of arguments in the context of the ImportCommand
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */

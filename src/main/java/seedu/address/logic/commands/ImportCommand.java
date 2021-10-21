@@ -28,10 +28,11 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Imports a file identified by the given filename.\n"
             + "Parameters: FILENAME\n"
-            + "Example: " + COMMAND_WORD + " t35";
+            + "Example: " + COMMAND_WORD + " t35.json";
 
     public static final String MESSAGE_SUCCESS = "File successfully imported. %1$d new contacts added";
-    public static final String MESSAGE_INCORRECT_FORMAT = "Data file not in the correct format. Please try again";
+    public static final String MESSAGE_INCORRECT_FORMAT = String.format("Data file not in the correct format. " +
+            "Please make sure that all fields are valid and that the file is in JSON format\n%s", MESSAGE_USAGE) ;
     public static final String MESSAGE_IO_ERROR =
             "Problem while reading from the file. Will be starting with an empty AddressBook";
     public static final String MESSAGE_FILE_NOT_FOUND = "File not found. Please try again";

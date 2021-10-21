@@ -90,7 +90,7 @@ public class ModelManager implements Model {
         AddressBook newAddressBook = new AddressBook(this.addressBook);
         int numOfContacts = 0;
 
-        for (Person p: importedAddressBook.getPersonList()) {
+        for (Person p : importedAddressBook.getPersonList()) {
             newAddressBook.addPerson(p);
             numOfContacts++;
         }
