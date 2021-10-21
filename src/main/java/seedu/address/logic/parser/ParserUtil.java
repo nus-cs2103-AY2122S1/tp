@@ -18,6 +18,7 @@ import seedu.address.model.student.Name;
 import seedu.address.model.student.StudentNumber;
 import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 
@@ -67,6 +68,20 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Description parseDescription(String description) throws ParseException {
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
     /**
@@ -147,19 +162,20 @@ public class ParserUtil {
 
 
     /**
-     * Parses a {@code String deadline} into a {@code Deadline}.
+     * Parses a {@code String taskDate} into a {@code TaskDate}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code deadline} is invalid.
+     * @throws ParseException if the given {@code taskDate} is invalid.
      */
-    public static TaskDate parseDeadline(String deadline) throws ParseException {
-        requireNonNull(deadline);
-        String trimmedDeadline = deadline.trim();
-        if (!TaskDate.isValidDeadline(trimmedDeadline)) {
-            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS + " HUH:" + trimmedDeadline);
+    public static TaskDate parseTaskDate(String taskDate) throws ParseException {
+        requireNonNull(taskDate);
+        String trimmedTaskDate = taskDate.trim();
+        if (!TaskDate.isValidDeadline(trimmedTaskDate)) {
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS + " HUH:" + trimmedTaskDate);
         }
-        return new TaskDate(trimmedDeadline);
+        return new TaskDate(trimmedTaskDate);
     }
+
 
     /**
      * Parses a {@code String email} into an {@code Email}.

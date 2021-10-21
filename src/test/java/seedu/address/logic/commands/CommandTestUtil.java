@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPO;
@@ -26,6 +27,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.task.NameContainsTestKeywordsPredicate;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
+import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -34,6 +36,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_TASK_NAME_STUDY = "Study";
+    public static final String VALID_TASK_NAME_PLAY = "Play";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_STUDENTNUMBER_AMY = "A1112223B";
@@ -44,11 +48,19 @@ public class CommandTestUtil {
     public static final String VALID_REPONAME_BOB = "bob_repo";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_DESCRIPTION_FUN = "fun";
+    public static final String VALID_DESCRIPTION_BORING = "boring";
+
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+    public static final String TASKNAME_DESC_STUDY = " " + PREFIX_NAME + VALID_TASK_NAME_STUDY;
+    public static final String TASKNAME_DESC_PLAY = " " + PREFIX_NAME + VALID_TASK_NAME_PLAY;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String DESCRIPTION_DESC_FUN = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_FUN;
+    public static final String DESCRIPTION_DESC_BORING = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BORING;
     public static final String STUDENTNUMBER_DESC_AMY = " " + PREFIX_STUDENTNUMBER + VALID_STUDENTNUMBER_AMY;
     public static final String STUDENTNUMBER_DESC_BOB = " " + PREFIX_STUDENTNUMBER + VALID_STUDENTNUMBER_BOB;
     public static final String USERNAME_DESC_AMY = " " + PREFIX_USERNAME + VALID_USERNAME_AMY;
@@ -61,6 +73,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "&"; // '&' not allowed in desc
     public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENTNUMBER + "A1233222";
     // missing final character
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "a@my"; // '@' not allowed in username
@@ -73,6 +86,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditStudentDescriptor DESC_AMY;
     public static final EditCommand.EditStudentDescriptor DESC_BOB;
 
+    public static final EditTaskCommand.EditTaskDescriptor DESC_STUDY;
+    public static final EditTaskCommand.EditTaskDescriptor DESC_PLAY;
+
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).withEmail(VALID_EMAIL_AMY)
                 .withStudentNumber(VALID_STUDENTNUMBER_AMY).withUserName(VALID_USERNAME_AMY)
@@ -80,6 +96,8 @@ public class CommandTestUtil {
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).withEmail(VALID_EMAIL_BOB)
                 .withStudentNumber(VALID_STUDENTNUMBER_BOB).withUserName(VALID_USERNAME_BOB)
                 .withRepoName(VALID_REPONAME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_STUDY = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_STUDY).withTags(VALID_TAG_FRIEND).build();
+        DESC_PLAY = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY).withTags(VALID_TAG_HUSBAND).build();
     }
 
     /**

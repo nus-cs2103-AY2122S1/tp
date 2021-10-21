@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -11,6 +12,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddEventTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
@@ -24,7 +26,7 @@ public class AddEventTaskCommandParser {
      */
     public AddEventTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EVENT, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EVENT, PREFIX_TAG, PREFIX_DESCRIPTION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EVENT)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -32,9 +34,17 @@ public class AddEventTaskCommandParser {
         }
 
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
-        TaskDate taskDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_EVENT).get());
+        TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_EVENT).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Task task = new EventTask(name, tagList, false, taskDate);
+        Description description;
+
+        if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            description = Description.NO_DESCRIPTION;
+        }
+
+        Task task = new EventTask(name, tagList, false, taskDate, description);
 
         return new AddEventTaskCommand(task);
     }

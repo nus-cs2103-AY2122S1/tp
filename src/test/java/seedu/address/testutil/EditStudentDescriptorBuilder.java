@@ -15,7 +15,7 @@ import seedu.address.model.student.UserName;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditStudentDescriptor objects.
+ * A utility class to help with building EditTaskDescriptor objects.
  */
 public class EditStudentDescriptorBuilder {
 
@@ -30,7 +30,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditStudentDescriptor} with fields containing {@code student}'s details
+     * Returns an {@code EditTaskDescriptor} with fields containing {@code student}'s details
      */
     public EditStudentDescriptorBuilder(Student student) {
         descriptor = new EditCommand.EditStudentDescriptor();
@@ -43,7 +43,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
@@ -52,7 +52,7 @@ public class EditStudentDescriptorBuilder {
 
 
     /**
-     * Sets the {@code Email} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code Email} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
@@ -60,7 +60,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code StudentNumber} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code StudentNumber} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withStudentNumber(String studentNumber) {
         descriptor.setStudentNumber(new StudentNumber(studentNumber));
@@ -68,7 +68,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code UserName} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code UserName} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withUserName(String userName) {
         descriptor.setUserName(new UserName(userName));
@@ -76,7 +76,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code RepoName} of the {@code EditStudentDescriptor} that we are building.
+     * Sets the {@code RepoName} of the {@code EditTaskDescriptor} that we are building.
      */
     public EditStudentDescriptorBuilder withRepoName(String repoName) {
         descriptor.setRepoName(new RepoName(repoName));
@@ -84,7 +84,7 @@ public class EditStudentDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditStudentDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
      * that we are building.
      */
     public EditStudentDescriptorBuilder withTags(String... tags) {

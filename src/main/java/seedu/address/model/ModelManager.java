@@ -21,6 +21,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 
@@ -237,7 +238,8 @@ public class ModelManager implements Model {
         requireAllNonNull(target, target);
         TaskName name = target.getName();
         Set<Tag> tags = target.getTags();
-        Task newTask = new Task(name, tags, true);
+        String description = target.getDescription();
+        Task newTask = new Task(name, tags, true, new Description(description));
         newTask.markTaskComplete();
         addressBook.setTask(target, newTask);
     }

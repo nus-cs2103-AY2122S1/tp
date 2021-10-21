@@ -16,7 +16,7 @@ public class TaskDate {
     private LocalDate deadline;
 
     /**
-     * Constructs a {@code Deadline}.
+     * Constructs a {@code TaskDate}.
      *
      * @param deadline A valid deadline date.
      */

@@ -13,13 +13,13 @@ public class EventTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public EventTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate date) {
-        super(name, tags, isDone);
+    public EventTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate date, Description description) {
+        super(name, tags, isDone, description);
         this.dueDate = date;
     }
 
     //    @Override
-    public TaskDate getDeadline() {
+    public TaskDate getTaskDate() {
         return dueDate;
     }
 
@@ -52,7 +52,7 @@ public class EventTask extends Task {
 
         EventTask otherTask = (EventTask) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline())
+                && otherTask.getTaskDate().equals(getTaskDate())
                 && otherTask.getTags().equals(getTags());
     }
 
@@ -61,8 +61,10 @@ public class EventTask extends Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("\nDescription: ")
+                .append(getDescription().toString())
                 .append("\nEvent on: ")
-                .append(getDeadline().toString())
+                .append(getTaskDate().toString())
                 .append("\nStatus: ")
                 .append(getStatusString());
 

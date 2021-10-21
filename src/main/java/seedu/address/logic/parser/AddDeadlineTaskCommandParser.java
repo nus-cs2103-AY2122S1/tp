@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -12,6 +13,7 @@ import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
@@ -25,7 +27,7 @@ public class AddDeadlineTaskCommandParser {
      */
     public AddDeadlineTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE, PREFIX_TAG, PREFIX_DESCRIPTION);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DEADLINE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -34,9 +36,17 @@ public class AddDeadlineTaskCommandParser {
         }
 
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
-        TaskDate taskDate = ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_DEADLINE).get());
+        TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DEADLINE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Task task = new DeadlineTask(name, tagList, false, taskDate);
+        Description description;
+
+        if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
+            description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
+        } else {
+            description = Description.NO_DESCRIPTION;
+        }
+
+        Task task = new DeadlineTask(name, tagList, false, taskDate, description);
 
         return new AddDeadlineTaskCommand(task);
     }
