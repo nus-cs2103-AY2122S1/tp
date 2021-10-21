@@ -80,8 +80,7 @@ Format: `help`
 
 View the staff details of a single staff.
 
-Examples:
-
+Examples:\
 `view n/Candice`\
 `view i/123`
 
@@ -90,12 +89,10 @@ Examples:
 * Adds a staff to the system. The tags and information are optional and can be presented in any order.
 * Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
 
-Format:
-
+Format:\
 `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 
-Examples:
-
+Examples:\
 `add n/Joe s/fulltime r/manager p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
 `add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
 
@@ -118,8 +115,7 @@ The format of the input date is in:
 
 `YYYY-MM-DD`
 
-Format:
-
+Format:\
 `mark i/index d/startDate d/endDate`  
 `mark n/name d/startDate d/endDate`  
 `mark t/tag d/startDate d/endDate`
@@ -127,27 +123,23 @@ Format:
 Possible to mark a single date  
 `mark t/tag d/date`
 
-Examples:
-
+Examples:\
 `mark i/1 d/2020-01-03 d/2021-01-03`  
 `mark d/Alex Yeoh d/2020-01-03`  
 
 
 ### Removing the absent mark `unmark`
 
-Removes the period that was marked by the
-`mark` command.
+Removes the period that was marked by the `mark` command.
 
-The format of the input date is in:
-
+The format of the input date is in:\
 `YYYY-MM-DD`
 
-Format:
-
+Format:\
 `unmark n/name d/startDate d/endDate`  
 `unmark i/index d/startDate d/endDate`  
 
-Examples:  
+Examples:\
 `unmark i/1 d/2020-01-03 d/2021-01-03`  
 `unmark t/friends d/2020-01-03`  
 
@@ -155,8 +147,7 @@ Examples:
 
 Deletes the specified staff from the staff list.
 
-Formats:
-
+Formats:\
 `delete n/name`\
 `delete i/index`\
 `delete r/role`\
@@ -165,8 +156,7 @@ Formats:
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-
+Examples:\
 `delete n/Candice`\
 `delete i/12345678`\
 `delete r/cashiers`\
@@ -179,8 +169,7 @@ Examples:
 
 Edits an existing staff in the Staff List.
 
-Formats:
-
+Formats:\
 `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`\
 `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 
@@ -190,8 +179,7 @@ The index refers to the index number shown in the displayed staff list. The inde
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
-
+Examples:\
 `edit -i 1 p/91234567 e/johndoe@example.com`\
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
 `edit -n Candice r/cook`
@@ -206,8 +194,7 @@ Examples:
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
-Format:
-
+Format:\
 `find -n KEYWORD [MORE_KEYWORDS]`
 `find -i INDEX`
 
@@ -257,8 +244,7 @@ Format: `exit`
 
 Adds a time period where the staff is working to the staff’s schedule.
 
-Formats:
-
+Formats:\
 `addShift n/name d/fullDayName-shiftNumber` \
 `addShift i/index d/fullDayName-shiftNumber`
 
@@ -266,8 +252,7 @@ Formats:
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 
-Examples:
-
+Examples:\
 `addShift n/Candice d/Monday-1` \
 `addShift i/1234 d/tuesday-0`
 
@@ -275,13 +260,11 @@ Examples:
 
 Views a specific staff’s schedule.
 
-Formats:
+Formats:\
+`viewSchedule n/name` \
+`viewSchedule i/index`
 
-`viewSchedlue n/name` \
-`viewSchedlue i/index`
-
-Examples:
-
+Examples:\
 `viewSchedule n/Candice` \
 `viewSchedule i/123`
 
@@ -290,13 +273,11 @@ Examples:
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
-Formats:
-
+Formats:\
 `deleteSchedule n/name d/fullDayName-shiftNumber` \
 `deleteSchedule i/index d/fullDayName-shiftNumber`
 
-Examples:
-
+Examples:\
 `deleteSchedule n/Joe d/tuesday-2` \
 `deleteSchedule i/1278 d/friday-1`
 
@@ -304,16 +285,29 @@ Examples:
 
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
-Formats:
-
+Formats:\
 `editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` \
 `editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 
-Examples:
-
+Examples:\
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2` \
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
+### View all the staff working a shift: `viewShift`
+
+Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
+
+Formats:\
+`viewShift -d day-shift_number`
+`viewShift -t day-HH:mm` (Note that this is in 24-hour format)
+
+Note that `day` refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon). 
+
+Examples:\
+`viewShift -d monday-1` \
+`viewShift -d TUESDAY-0` \
+`viewShift -t wednesday-12:00`\
+`viewShift -t THURSDAY-16:30`
 
 ### Saving the data
 
@@ -353,6 +347,7 @@ Action | Format, Examples
 **Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift n/name d/fullDayName-shiftNumber` <br> `deleteShift i/index d/fullDayName-shiftNumber`
+**View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`

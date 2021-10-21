@@ -13,7 +13,7 @@ import static seedu.address.logic.parser.ParserUtil.testByAllFields;
 
 import seedu.address.logic.commands.ViewScheduleCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.PersonContainsFieldsPredicate;
+import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
 
 /**
  * Class representing the view schedule command parser.
