@@ -92,7 +92,7 @@ public class MainApp extends Application {
             initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
             if (!positionBookOptional.isPresent()) {
-                logger.info("Positionbook data file not found. Will be starting with a sample AddressBook");
+                logger.info("Positionbook data file not found. Will be starting with a sample PositionBook");
             }
             initialPositionBookData = positionBookOptional.orElseGet(SampleDataUtil::getSamplePositionBook);
         } catch (DataConversionException e) {

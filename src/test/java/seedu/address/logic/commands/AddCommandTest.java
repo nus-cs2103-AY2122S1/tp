@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
@@ -231,7 +232,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyPositionBook getPositionBook() {
+        public ReadOnlyApplicantBook getApplicantBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setApplicantBook(ReadOnlyApplicantBook applicantBook) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -176,7 +176,7 @@ public interface Model {
     /**
      * Replaces position book data with the data in {@code positionBook}.
      */
-    void setApplicantBook(ReadOnlyPositionBook positionBook);
+    void setApplicantBook(ReadOnlyApplicantBook applicantBook);
 
     /** Returns the ApplicantBook */
     ReadOnlyApplicantBook getApplicantBook();

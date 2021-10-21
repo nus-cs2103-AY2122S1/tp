@@ -60,6 +60,27 @@ public class ModelManager implements Model {
      * Old constructor - left temporarily to pass unit tests
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(addressBook, userPrefs);
+
+        logger.fine("Initializing with address book: " + addressBook
+                + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.positionBook = new PositionBook();
+        this.applicantBook = new ApplicantBook();
+        this.applicationBook = new ApplicationBook();
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+    }
+
+    /**
+     * Old constructor - left temporarily to pass unit tests
+     * Initializes a ModelManager with the given addressBook and userPrefs.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
                         ReadOnlyUserPrefs userPrefs) {
         super();
@@ -262,6 +283,17 @@ public class ModelManager implements Model {
 
 
     //=========== Applicant and ApplicantBook =============================================================
+
+
+    public void setApplicantBook(ReadOnlyApplicantBook applicantBook) {
+        this.applicantBook.resetData(applicantBook);
+    }
+
+    @Override
+    public ReadOnlyApplicantBook getApplicantBook() {
+        return applicantBook;
+    }
+
     @Override
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
