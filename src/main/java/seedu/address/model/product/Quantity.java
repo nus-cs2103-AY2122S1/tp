@@ -6,16 +6,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents a Product's quantity in Sellah.
  */
-public class Quantity {
+public class Quantity implements Comparable<Quantity> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Unit prices should only contain numbers and it should not be blank";
+            "Quantity should only contain numbers and it should not be blank";
 
     /**
      * The quantity should contain digits from 0 to 9 only.
      */
     public static final String VALIDATION_REGEX = "[0-9]+";
 
-    public final String quantity;
+    public final String value;
 
     /**
      * Constructs a {@code Quantity}.
@@ -25,7 +25,7 @@ public class Quantity {
     public Quantity(String quantity) {
         requireNonNull(quantity);
         checkArgument(isValidQuantity(quantity), MESSAGE_CONSTRAINTS);
-        this.quantity = quantity;
+        value = quantity;
     }
 
     /**
@@ -37,20 +37,40 @@ public class Quantity {
         return quantity.matches(VALIDATION_REGEX);
     }
 
+    public boolean lessThan(Quantity quantity) {
+        return this.compareTo(quantity) < 0;
+    }
+
+    public boolean moreThan(Quantity quantity) {
+        return this.compareTo(quantity) > 0;
+    }
+
     @Override
     public String toString() {
-        return quantity;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Quantity // instanceof handles nulls
-                && quantity.equals(((Quantity) other).quantity)); // state check
+                && value.equals(((Quantity) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return quantity.hashCode();
+        return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Quantity quantity) {
+        if (quantity == null) {
+            return 1;
+        }
+
+        int thisVal = Integer.parseInt(value);
+        int otherVal = Integer.parseInt(quantity.value);
+
+        return thisVal - otherVal;
     }
 }

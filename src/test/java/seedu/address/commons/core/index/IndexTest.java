@@ -8,7 +8,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 public class IndexTest {
-
     @Test
     public void createOneBasedIndex() {
         // invalid index
@@ -56,5 +55,23 @@ public class IndexTest {
 
         // different index -> returns false
         assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
+    }
+
+    @Test
+    public void increaseByOne() {
+        Index index = Index.fromZeroBased(1);
+        index.increaseByOne();
+
+        assertEquals(3, index.getOneBased());
+        assertEquals(2, index.getZeroBased());
+    }
+
+    @Test
+    public void decreaseByOne() {
+        Index index = Index.fromZeroBased(1);
+        index.decreaseByOne();
+
+        assertEquals(1, index.getOneBased());
+        assertEquals(0, index.getZeroBased());
     }
 }

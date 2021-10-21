@@ -22,8 +22,9 @@ public class Product implements Category {
     private final Quantity quantity;
 
     public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
-        this(new ID(), name, unitPrice, quantity);
+        this(ID.getNewProductID(), name, unitPrice, quantity);
     }
+
     private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
         requireAllNonNull(id, name, unitPrice);
 
@@ -49,8 +50,38 @@ public class Product implements Category {
         return quantity;
     }
 
+    /**
+     * Returns a new copy of the {@code Product} with the same ID but the supplied data fields. <br>
+     * The only way to copy the ID of a {@code Product} over to another {@code Product}.
+     *
+     * @param product ID of the original product.
+     * @param name New name for the product.
+     * @param unitPrice New unit price for the product.
+     * @param quantity New quantity for the product.
+     */
     public static Product updateProduct(Product product, Name name, UnitPrice unitPrice, Quantity quantity) {
         return new Product(product.getId(), name, unitPrice, quantity);
+    }
+
+    /**
+     * @see #updateProduct(Product, Name, UnitPrice, Quantity)
+     */
+    public static Product updateProduct(Product copyTo, Product copyFrom) {
+        return new Product(copyTo.getId(), copyFrom.name, copyFrom.unitPrice, copyFrom.quantity);
+    }
+
+    /**
+     * Checks if this product has enough stock.
+     *
+     * @param quantity Amount required.
+     * @return true if this quantity <= product.quantity; false otherwise.
+     */
+    public boolean hasEnoughStock(Quantity quantity) {
+        if (this.quantity == null) {
+            return false;
+        }
+
+        return quantity.lessThan(this.quantity) || quantity.equals(this.quantity);
     }
 
     /**
@@ -85,9 +116,9 @@ public class Product implements Category {
 
         Product otherProduct = (Product) other;
         return id.equals(otherProduct.id)
-                       && name.equals(otherProduct.name)
-                       && unitPrice.equals(otherProduct.unitPrice)
-                       && quantity.equals(otherProduct.quantity);
+                && name.equals(otherProduct.name)
+                && unitPrice.equals(otherProduct.unitPrice)
+                && quantity.equals(otherProduct.quantity);
     }
 
     @Override
@@ -99,12 +130,9 @@ public class Product implements Category {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("ID: ")
-                .append(id)
-                .append("; Name: ")
-                .append(name)
-                .append("; Unit Price: ")
-                .append(unitPrice);
+        builder.append("ID: ").append(id)
+                .append("; Name: ").append(name)
+                .append("; Unit Price: ").append(unitPrice);
 
         if (quantity != null) {
             builder.append("; Quantity: ").append(quantity);

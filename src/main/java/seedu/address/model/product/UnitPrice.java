@@ -8,15 +8,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UnitPrice {
     public static final String MESSAGE_CONSTRAINTS =
-            "Unit prices should only contain numbers and optionally '.' for cents,"
-                    + "and it should not be blank";
+            "Unit prices should only contain numbers and optionally '.' for cents, and it should not be blank";
 
     /**
      * The unit price should contain digits from 0 to 9 only, and optionally '.' for cents.
      */
     public static final String VALIDATION_REGEX = "[0-9]+(\\.[0-9]{2})?";
 
-    public final String unitPrice;
+    public final String value;
 
     /**
      * Constructs a {@code UnitPrice}.
@@ -26,7 +25,7 @@ public class UnitPrice {
     public UnitPrice(String unitPrice) {
         requireNonNull(unitPrice);
         checkArgument(isValidUnitPrice(unitPrice), MESSAGE_CONSTRAINTS);
-        this.unitPrice = unitPrice;
+        value = unitPrice;
     }
 
     /**
@@ -40,18 +39,18 @@ public class UnitPrice {
 
     @Override
     public String toString() {
-        return unitPrice;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UnitPrice // instanceof handles nulls
-                && unitPrice.equals(((UnitPrice) other).unitPrice)); // state check
+                && value.equals(((UnitPrice) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return unitPrice.hashCode();
+        return value.hashCode();
     }
 }
