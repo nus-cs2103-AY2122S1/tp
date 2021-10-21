@@ -16,6 +16,12 @@ end box
 [-> LogicManager : execute("delete 1")
 activate LogicManager
 
+LogicManager -> Model : getState()
+activate Model
+
+Model --> LogicManager : state
+deactivate Model
+
 LogicManager -> PlannerMdParser : parseCommand("delete 1", State.PATIENT)
 activate PlannerMdParser
 
