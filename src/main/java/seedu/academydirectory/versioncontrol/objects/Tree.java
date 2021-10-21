@@ -47,4 +47,9 @@ public class Tree extends VcObject {
     public HashMap<String, String> getHashMap() {
         return hashMap;
     }
+
+    @Override
+    public String toString() {
+        return getHash();
+    }
 }

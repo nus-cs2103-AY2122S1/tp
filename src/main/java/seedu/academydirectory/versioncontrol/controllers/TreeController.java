@@ -1,7 +1,9 @@
 package seedu.academydirectory.versioncontrol.controllers;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -31,16 +33,24 @@ public class TreeController extends Controller<Tree> {
      * Constructs a Tree object to be saved to disk
      * @param blobPaths Path to blobs to be duplicated
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
-     * @throws IOException if vcPath given is not writeable
      */
-    public Tree generate(List<Path> blobPaths) throws IOException {
+    public Tree createNewTree(List<Path> blobPaths) {
         // Make a blob snapshot
         ArrayList<Path> blobTargetPaths = new ArrayList<>();
         for (Path blobPath: blobPaths) {
-            String blobHash = generator.generateHashFromFile(blobPath);
+            String blobHash;
+            try {
+                blobHash = generator.generateHashFromFile(blobPath);
+            } catch (IOException e) {
+                return Tree.NULL;
+            }
             Path blobTargetPath = this.vcPath.resolve(Path.of(blobHash));
 
-            Files.copy(blobPath, blobTargetPath, REPLACE_EXISTING);
+            try {
+                Files.copy(blobPath, blobTargetPath, REPLACE_EXISTING);
+            } catch (IOException e) {
+                return Tree.NULL;
+            }
             blobTargetPaths.add(blobTargetPath);
         }
 
@@ -50,41 +60,62 @@ public class TreeController extends Controller<Tree> {
                 blobPaths.stream().map(String::valueOf).collect(Collectors.toList()),
                 blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
         Path treePath = this.vcPath.resolve(Path.of(treeFileName));
-        write(temp);
+        try {
+            write(temp);
 
-        // Delete temporarily created Tree
-        String treeHash = generator.generateHashFromFile(treePath);
-        boolean deletedSuccessfully = treePath.toFile().delete();
+            // Delete temporarily created Tree
+            String treeHash = generator.generateHashFromFile(treePath);
+            boolean deletedSuccessfully = treePath.toFile().delete();
 
-        // Return final tree
-        return new Tree(treeHash,
-                blobPaths.stream().map(String::valueOf).collect(Collectors.toList()),
-                blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
+            // Return final tree
+            return new Tree(treeHash,
+                    blobPaths.stream().map(String::valueOf).collect(Collectors.toList()),
+                    blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
+        } catch (IOException e) {
+            return Tree.NULL;
+        }
     }
 
     /**
      * Constructs a Tree object to be saved to disk.
      * @param blobPath Path to blob to be duplicated
      * @return a Tree object which represents mapping between actual filename and version-controlled filename
-     * @throws IOException if vcPath given is not writeable
      */
-    public Tree generate(Path blobPath) throws IOException {
-        return generate(List.of(blobPath));
+    public Tree createNewTree(Path blobPath) {
+        return createNewTree(List.of(blobPath));
     }
 
     /**
      * Constructs a tree based on hash. Will find the tree object with the same hash in disk
      * @param hash Hash of the tree saved in disk
-     * @param treeParser Parser that constructs current tree
      * @return Commit object of the given hash
      * @throws IOException if no tree of the same hash can be found in disk
      */
-    public Tree generate(String hash, TreeParser treeParser) throws IOException {
-        String[] args = treeParser.parse(vcPath.resolve(Paths.get(hash)));
+    public Tree fetchTreeByHash(String hash) {
+        TreeParser treeParser = new TreeParser();
+
+        // Allow for 5 digit hash to be used
+        File f = new File(String.valueOf(vcPath));
+        String finalHash = hash;
+        File[] matchingFiles = requireNonNull(f.listFiles((x, name) -> name.startsWith(finalHash)));
+        if (matchingFiles.length == 0) {
+            return Tree.NULL;
+        }
+
+        // Pick first match
+        Path filePath = matchingFiles[0].toPath();
+        String[] args = treeParser.parse(filePath);
+
+        if (args == null) {
+            return Tree.NULL;
+        }
+
+        hash = args[0];
+
         List<String> vcNames = new ArrayList<>();
         List<String> actualNames = new ArrayList<>();
-        for (String arg : args) {
-            String[] xs = arg.split(" ");
+        for (int i = 1; i < args.length; i++) {
+            String[] xs = args[i].split(" ");
             vcNames.add(xs[0]);
             actualNames.add(xs[1]);
         }

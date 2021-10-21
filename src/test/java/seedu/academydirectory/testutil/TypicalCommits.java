@@ -27,7 +27,7 @@ public class TypicalCommits {
     }
 
     public static final Commit COMMIT1 = new CommitBuilder()
-            .withHash("123456789ThisIsFun!")
+            .withHash("1d83638a25901e76c8e3882afca2347f8352cd06")
             .withAuthor("Alice Pauline")
             .withDate(date)
             .withMessage("Hello, World!")

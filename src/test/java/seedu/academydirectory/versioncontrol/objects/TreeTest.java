@@ -14,7 +14,7 @@ public class TreeTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Tree tree1Copy = new Tree("1234ThisIsFun!", "hello.world", "world.hello");
+        Tree tree1Copy = new Tree(TREE1.getHash(), "hello.world", "world.hello");
         assertEquals(TREE1, tree1Copy);
 
         // same object -> returns true
@@ -29,8 +29,8 @@ public class TreeTest {
         assertNotEquals(TREE2, null);
 
         // same hash, all other attributes different -> return true
-        Tree editedTree1SameHash = new Tree("1234ThisIsFun!", "Bob", "TheBuilder");
-        Tree editedTree2SameHash = new Tree("123456789ThisIsFun!",
+        Tree editedTree1SameHash = new Tree(TREE1.getHash(), "Bob", "TheBuilder");
+        Tree editedTree2SameHash = new Tree(TREE2.getHash(),
                 List.of("BOB.png", "CAT.java"),
                 List.of("DOG", "Hello?"));
         assertEquals(TREE1, editedTree1SameHash);

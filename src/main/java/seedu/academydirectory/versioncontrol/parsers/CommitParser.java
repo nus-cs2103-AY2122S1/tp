@@ -1,25 +1,35 @@
 package seedu.academydirectory.versioncontrol.parsers;
 
-import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
 
 public class CommitParser extends VcParser<Commit> {
 
     @Override
-    public String[] parse(Path file) throws IOException {
-        String response = loadFile(file);
-        String[] responseArr = response.split(System.lineSeparator());
+    public String[] parse(Path file) {
+        Optional<String[]> responseArr = loadFile(file).map(s -> s.split(System.lineSeparator()));
+        if (responseArr.isEmpty()) {
+            return NULL_PARSE;
+        }
 
-        String author = responseArr[0].split(": ")[1];
-        String date = responseArr[1].split(": ")[1];
-        String[] messageArr = responseArr[2].split(": ");
-        String message = messageArr.length == 1 ? "" : messageArr[1];
+        // Field checks
+        int numField = Arrays.stream(responseArr.get()).map(x -> x.split(": ").length == 2
+                        ? x.split(": ")[0]
+                        : "")
+                .filter(x -> !x.equals("")).toArray().length;
+        if (numField != 5) {
+            return NULL_PARSE;
+        }
 
-        String parentHash = responseArr[4].split(": ")[1];
-        String treeHash = responseArr[5].split(": ")[1];
-
-        return new String[]{String.valueOf(file.getFileName()), author, date, message, parentHash, treeHash};
+        return Stream.concat(Stream.of(String.valueOf(file.getFileName())),
+                Arrays.stream(responseArr.get()).map(x -> x.split(": ").length == 2
+                        ? x.split(": ")[1]
+                        : ""))
+                .toArray(String[]::new);
     }
 }
