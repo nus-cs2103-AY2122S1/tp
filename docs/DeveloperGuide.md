@@ -155,7 +155,7 @@ We provide options for developers to easily customise the constraints on the use
 Field options largely dictate how the parsers respond to user's inputs.
 
 Option | Description
---- | --- 
+--- | ---
 IS_BLANK_VALUE_ALLOWED | If set to `true`, the field is allowed to be blank (for string fields such as phone, name, etc). Default to `true`.
 IS_NULL_VALUE_ALLOWED | If set to `true`, the field is allowed to be null (for int/Date fields such as LastMet, etc). Default to `true`.
 DEFAULT_VALUE | The default value for the field. Set when user does not pass in the prefix on `Client` creation. Default to `""`.
@@ -170,7 +170,7 @@ The following concrete interfaces inherit the `Field` interface. You can alterna
 #### OptionalStringBasedField
 
 Option | Default
---- | --- 
+--- | ---
 IS_BLANK_VALUE_ALLOWED | `true`
 IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`
@@ -179,7 +179,7 @@ IS_EDITABLE | `true`
 #### OptionalNonStringBasedField
 
 Option | Default
---- | --- 
+--- | ---
 IS_BLANK_VALUE_ALLOWED | `true`
 IS_NULL_VALUE_ALLOWED | `true`
 DEFAULT_VALUE | `""`
@@ -188,7 +188,7 @@ IS_EDITABLE | `true`
 #### RequiredField
 
 Option | Default
---- | --- 
+--- | ---
 IS_BLANK_VALUE_ALLOWED | `false`
 IS_NULL_VALUE_ALLOWED | `false`
 DEFAULT_VALUE | `""`(But not applicable here)
