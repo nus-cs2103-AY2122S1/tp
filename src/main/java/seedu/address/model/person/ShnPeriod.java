@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
@@ -58,9 +59,17 @@ public class ShnPeriod {
     public static boolean isValidShnPeriodString(String shnPeriod) {
         requireNonNull(shnPeriod);
         String[] dates = shnPeriod.split(" => ", 2);
-        LocalDate testStartDate = LocalDate.parse(dates[0]);
-        LocalDate testEndDate = LocalDate.parse(dates[1]);
-        return isValidShnPeriod(testStartDate, testEndDate);
+        if (dates.length != 2) {
+            return false;
+        }
+
+        try {
+            LocalDate testStartDate = LocalDate.parse(dates[0]);
+            LocalDate testEndDate = LocalDate.parse(dates[1]);
+            return isValidShnPeriod(testStartDate, testEndDate);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
     }
 
     /**
