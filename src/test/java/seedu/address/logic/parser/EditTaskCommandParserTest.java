@@ -1,18 +1,25 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_BORING;
+import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_FUN;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DESCRIPTION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_PLAY;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.TASKNAME_DESC_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_BORING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_FUN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_PLAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_TASK;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,10 +53,10 @@ public class EditTaskCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_PLAY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + TASKNAME_DESC_PLAY, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_PLAY, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + TASKNAME_DESC_PLAY, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -78,7 +85,7 @@ public class EditTaskCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_TASK;
         String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND
-                + NAME_DESC_PLAY + TAG_DESC_FRIEND;
+                + TASKNAME_DESC_PLAY + TAG_DESC_FRIEND;
 
         EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
@@ -87,69 +94,53 @@ public class EditTaskCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    /* TODO Complete tests
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_TASK;
-        String userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_BORING;
 
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
-                .withEmail(VALID_EMAIL_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_BORING).build();
+        EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_oneFieldSpecified_success() {
+
         // name
-        Index targetIndex = INDEX_THIRD_STUDENT;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_AMY;
-        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY).build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        Index targetIndex = INDEX_THIRD_TASK;
+        String userInput = targetIndex.getOneBased() + TASKNAME_DESC_PLAY;
+        EditTaskCommand.EditTaskDescriptor descriptor =
+                new EditTaskDescriptorBuilder().withName(VALID_TASK_NAME_PLAY).build();
+        EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // email
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // studentNumber
-        userInput = targetIndex.getOneBased() + STUDENTNUMBER_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withStudentNumber(VALID_STUDENTNUMBER_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // userName
-        userInput = targetIndex.getOneBased() + USERNAME_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withUserName(VALID_USERNAME_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
-
-        // repoName
-        userInput = targetIndex.getOneBased() + REPONAME_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withRepoName(VALID_REPONAME_AMY).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        // description
+        userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_BORING;
+        descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_BORING).build();
+        expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // tags
         userInput = targetIndex.getOneBased() + TAG_DESC_FRIEND;
-        descriptor = new EditStudentDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        descriptor = new EditTaskDescriptorBuilder().withTags(VALID_TAG_FRIEND).build();
+        expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY
-                + TAG_DESC_FRIEND + EMAIL_DESC_AMY + TAG_DESC_FRIEND + EMAIL_DESC_BOB + TAG_DESC_HUSBAND;
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_BORING
+                + TAG_DESC_FRIEND + DESCRIPTION_DESC_BORING
+                + TAG_DESC_FRIEND + DESCRIPTION_DESC_FUN + TAG_DESC_HUSBAND;
 
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
-                .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder()
+                .withDescription(VALID_DESCRIPTION_FUN).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -157,30 +148,29 @@ public class EditTaskCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + INVALID_EMAIL_DESC + EMAIL_DESC_BOB;
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_BOB)
-                .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        Index targetIndex = INDEX_FIRST_TASK;
+        String userInput = targetIndex.getOneBased() + INVALID_DESCRIPTION_DESC + DESCRIPTION_DESC_BORING;
+        EditTaskCommand.EditTaskDescriptor descriptor =
+                new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_BORING).build();
+        EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + EMAIL_DESC_BOB;
-        descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_BOB).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
+        userInput = targetIndex.getOneBased() + DESCRIPTION_DESC_BORING;
+        descriptor = new EditTaskDescriptorBuilder().withDescription(VALID_DESCRIPTION_BORING).build();
+        expectedCommand = new EditTaskCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_STUDENT;
+        Index targetIndex = INDEX_THIRD_TASK;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withTags().build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
+        EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withTags().build();
+        EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
-     */
 }
 

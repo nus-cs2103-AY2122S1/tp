@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
@@ -21,6 +22,7 @@ public class TaskBuilder {
     private TaskDate taskDate;
     private Set<Tag> tags;
     private boolean isDone;
+    private Description description;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -30,6 +32,7 @@ public class TaskBuilder {
         this.taskDate = new TaskDate(DEFAULT_TASK_DATE);
         this.tags = new HashSet<>();
         this.isDone = false;
+        this.description = new Description("No Description");
     }
 
     /**
@@ -39,6 +42,7 @@ public class TaskBuilder {
         this.taskName = taskToCopy.getName();
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
+        this.description = new Description(taskToCopy.getDescription());
     }
 
     /**
@@ -65,8 +69,16 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code description} into a {@code Task} and set it to the {@code Task} that we are building.
+     */
+    public TaskBuilder withDescription(String description) {
+        this.description = new Description(description);
+        return this;
+    }
+
     public Task build() {
-        return new Task(taskName, tags, false);
+        return new Task(taskName, tags, false, description);
     }
 
 }

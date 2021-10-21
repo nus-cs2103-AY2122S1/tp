@@ -7,6 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
@@ -51,6 +52,13 @@ public class EditTaskDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Description} of the {@code EditTaskDescriptor} that we are building.
+     */
+    public EditTaskDescriptorBuilder withDescription(String description) {
+        descriptor.setDescription(new Description(description));
+        return this;
+    }
 
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditTaskDescriptor}
