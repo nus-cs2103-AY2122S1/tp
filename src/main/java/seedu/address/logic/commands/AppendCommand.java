@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -45,7 +45,7 @@ public class AppendCommand extends Command {
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD  + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LANGUAGE + "python";
 
     public static final String MESSAGE_APPEND_PERSON_SUCCESS = "Appended data field: %1$s";
@@ -245,7 +245,8 @@ public class AppendCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public boolean equal(Object other) {
+        @Override
+        public boolean equals(Object other) {
             // short circuit if same object
             if (other == this) {
                 return true;
@@ -258,7 +259,10 @@ public class AppendCommand extends Command {
 
             // state check
             AppendPersonDescriptor e = (AppendPersonDescriptor) other;
-            return getSkills().equals(e.getSkills());
+            return getSkills().equals(e.getSkills())
+                    && getLanguages().equals(e.getLanguages())
+                    && getFrameworks().equals(e.getFrameworks())
+                    && getTags().equals(e.getTags());
         }
     }
 }
