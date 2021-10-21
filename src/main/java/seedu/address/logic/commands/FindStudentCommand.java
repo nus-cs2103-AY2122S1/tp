@@ -55,7 +55,7 @@ public class FindStudentCommand extends Command {
 
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
-                String[] moduleNameKeywords = new String[]{moduleName.moduleName};
+                String[] moduleNameKeywords = new String[]{moduleName.getModuleName()};
                 ModuleNameEqualsKeywordsPredicate predicate =
                         new ModuleNameEqualsKeywordsPredicate(Arrays.asList(moduleNameKeywords));
                 model.updateFilteredModuleList(predicate);
@@ -63,7 +63,7 @@ public class FindStudentCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_FIND_STUDENT_SUCCESS, studentId));
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     /**

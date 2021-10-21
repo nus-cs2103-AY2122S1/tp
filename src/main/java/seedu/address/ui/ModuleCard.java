@@ -46,7 +46,7 @@ public class ModuleCard extends UiPart<Region> {
     public ModuleCard(Module module, int displayedIndex) {
         super(FXML);
         this.module = module;
-        name.setText(module.getName().moduleName);
+        name.setText(module.getName().getModuleName());
     }
 
     /**

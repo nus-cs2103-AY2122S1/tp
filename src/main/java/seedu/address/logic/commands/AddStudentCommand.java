@@ -75,7 +75,7 @@ public class AddStudentCommand extends AddCommand {
                 return new CommandResult(String.format(MESSAGE_ADD_STUDENT_SUCCESS, studentToAdd));
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     @Override
