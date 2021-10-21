@@ -124,7 +124,7 @@ Other available optional fields for a student are:
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple tags and lessons to a student in TAB.
 </div>
-
+<br>
 
 There are constraints in place to determine whether the value you provide for a field is valid.
 TAB will inform you if you gave an invalid input for a field.
