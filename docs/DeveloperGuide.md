@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class uses `CommandWord` to find out which `Command` the user wants. `AddressBookParser` then creates the required `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -310,33 +310,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a contact
-2. contHACKS shows a list of existing tags in contHACKS, and asks for input regarding details of the contact
-3. User inputs details of the contact
-4. contHACKS reflects that contact has been created successfully
+1. User requests to create a contact and inputs contact details
+2. contHACKS creates the contact and displays the newly added contact
 
-Use case ends.
+Use case ends
 
 **Extensions**
-* 2a. There are no tags in contHACKS<br />
-    * 2a1. contHACKS reflects that there are no tags in contHACKS<br />
-      Use case ends.
+* 1a. User fails to provide compulsory field
+    * 1a1. contHACKS shows an error message<br />
+    Use case ends
 
 
-* 3a. User does not give a tag to the contact.
-    * 3a1. Contact creation continues without an input tag<br />
-    Use case resumes at step 4.
+* 1b. User input details in a wrong format
+    * 1b1. contHACKS shows an error message<br />
+    Use case ends
 
-
-* 3b. User wants to give a tag to the contact being created, and no tags currently exist in contHACKS
-    * 3b1. User continues to create a contact with the tag name
-    * 3b2. contHACKS creates the new tag and the new contact<br />
-    Use case resumes at step 4.
-
-
-* 3c. User gives insufficient details for contact creation
-    * 3c1. contHACKS shows an error message<br />
-    Use case resumes at step 2.
 
 **Use case: Finding a contact**
 
@@ -345,48 +333,122 @@ Use case ends.
 1. User requests to find a contact based on input details
 2. contHACKS shows a list of contacts that match input details
 
-Use case ends.
+Use case ends
 
 **Extensions**
-* 1a. There are no contacts<br />
-    Use case ends.
+* 1a. There are no contacts that matches the input details
+    * 1a1. contHACKS displays an empty list<br />
+    Use case ends
 
 
 * 1b. User finds by name
-    * 1b1. contHACKS returns a list of contacts with names that match the input<br />
-    Use case ends.
+    * 1b1. contHACKS displays a list of contacts with names that match the input<br />
+    Use case ends
 
 
-* 1c. User finds by tag
-    * 1c1. contHACKS returns a list of contacts that contains the same tag<br />
-    Use case ends.
+* 1c. User finds by module code
+    * 1c1. contHACKS displays a list of contacts that are tagged with the module code<br />
+    Use case ends
+
+
+* 1d. User input details in a wrong format
+    * 1d1. contHACKS shows an error message<br />
+    Use case ends
 
 
 **Use case: Updating a contact**
 
 **MSS**
 
-1. User requests to update a specific contact
-2. contHACKS returns the current details of the contact
-3. User inputs the new details of the contact
-4. contHACKS reflects that contact is successfully updated
+1. User requests to update a specific contact and inputs the new contact details
+2. contHACKS updates the contact with the inputted details and displays the updated contact
 
-Use case ends.
+Use case ends
+
+**Extensions**
+* 1a. Contact does not exist
+    * 1a1. contHACKS shows an error message<br />
+    Use case ends
+
+
+* 1b. User input details in a wrong format
+    * 1b1. contHACKS shows an error message<br />
+    Use case ends
+    
+
+**Use case: Adding remark to a contact**
+
+**MSS**
+
+1. User requests to add a remark to a specific contact
+2. contHACKS updates the contact with the inputted remark and displays the updated contact
+
+Use case ends
+
+**Extensions**
+* 1a. Contact does not exist
+    * 1a1. contHACKS shows an error message<br />
+      Use case ends
+
+
+* 1b. User input the remark in a wrong format
+    * 1b1. contHACKS shows an error message<br />
+      Use case ends
+
+
+**Use case: Deleting a contact**
+
+**MSS**
+
+1. User requests to delete a specific contact
+2. contHACKS deletes the contact and displays the updated contact list
+
+Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
     * 1a1. contHACKS shows an error message.<br />
-    Use case ends.
+      Use case ends
 
 
-* 1b. User just wants to add a new tag to the contact and change nothing else
-    * 1b1. User inputs just the tag, and the index of the contact.<br />
-    Use case resumes at step 4.
+**Use case: Listing the contact list**
+
+**MSS**
+
+1. User requests to for the whole contact list
+2. contHACKS displays the whole contact list
+
+Use case ends
 
 
-* 1c. User gives insufficient details for contact creation
-    * 1c1. contHACKS shows an error message<br />
-    Use case resumes at step 2.
+**Use case: Clear all contacts**
+
+**MSS**
+
+1. User requests to clear all contacts
+2. contHACKS delete all the contacts and displays an empty contact list
+
+Use case ends
+
+
+**Use case: Getting help manual**
+
+**MSS**
+
+1. User requests to for a help manual
+2. contHACKS displays the help manual
+
+Use case ends
+
+
+**Use case: Exiting the application**
+
+**MSS**
+
+1. User requests to exit the application
+2. contHACKS closes
+
+Use case ends
 
 
 ### Non-Functional Requirements
