@@ -14,9 +14,10 @@ public class RecurringLesson extends Lesson {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
+     * @param rates Cost per lesson for the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
+        super(date, timeRange, subject, homework, rates);
     }
 
     /**
