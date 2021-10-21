@@ -209,7 +209,7 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Description
 
-The addressbook allows the user to `search` for clients using keywords. The keywords can be used to match generically
+LeadsForce allows the user to `search` for clients using keywords. The keywords can be used to match generically
 with any client's attribute or specifically with the specified attributes
 
 #### Implementation
@@ -225,8 +225,8 @@ with any client's attribute or specifically with the specified attributes
 9. The `SearchCommand` will finally create a new `CommandResult` which will be returned to `LogicManager`.
 
 Below is sequence diagram for search clients.
-   
-<img src="diagrams/tracing/SearchCommandSequenceDiagram.puml"/>
+
+<img src="images/SearchCommandSequenceDiagram.png" />
 
 #### Implementation of PersonContainsKeywordPredicate
 
@@ -244,7 +244,7 @@ is any.
 
 #### Description
 
-The addressbook allows the user to `filter` for clients using keywords. This works similar to the `search` but it allows
+LeadsForce allows the user to `filter` for clients using keywords. This works similar to the `search` but it allows
 for multiple `filter` to be stacked, which allows for user to look for clients incrementally.
 
 #### Implementation
@@ -261,7 +261,7 @@ for multiple `filter` to be stacked, which allows for user to look for clients i
 
 Below is sequence diagram for filter clients.
 
-<img src="diagrams/tracing/FilterCommandSequenceDiagram.puml"/>
+<img src="images/FilterCommandSequenceDiagram.png" />
 
 #### Implementation of PersonContainsKeywordPredicate
 
@@ -287,7 +287,7 @@ LeadsForce allows users to view client info in the `PersonViewPanel` in the `Sid
 
 Below is the sequence diagram for view clients.
 
-<img src="images/ViewCommandSequenceDiagram.png" width="700" />
+<img src="images/ViewCommandSequenceDiagram.png" />
 
 #### Implementation of PersonHasId
 
