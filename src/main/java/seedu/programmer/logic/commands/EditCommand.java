@@ -15,8 +15,15 @@ import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.CollectionUtil;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
+
+
+
+
 
 /**
  * Edits the details of an existing student in ProgrammerError.

@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 
@@ -116,6 +115,7 @@ public class ParserUtilTest {
     public void parseemail_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail(null));
     }
+}
 
     //todo
 //    @Test
@@ -129,5 +129,4 @@ public class ParserUtilTest {
 //        String emailWithWhitespace = WHITESPACE + VALID_email + WHITESPACE;
 //        Email expectedEmail = new Email(VALID_email);
 //        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-//    }
-}
+//}

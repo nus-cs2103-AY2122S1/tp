@@ -4,10 +4,10 @@ package seedu.programmer.logic.parser;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.CLASS_ID_DESC_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.email_DESC_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.email_DESC_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.programmer.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_CLASS_ID_DESC;
-import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_email_DESC;
+import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.programmer.logic.commands.CommandTestUtil.INVALID_STUDENT_ID_DESC;
 import static seedu.programmer.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -15,8 +15,8 @@ import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_AM
 import static seedu.programmer.logic.commands.CommandTestUtil.STUDENT_ID_DESC_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_email_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_email_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
@@ -81,7 +81,7 @@ public class EditCommandParserTest {
         // invalid class_id
         assertParseFailure(parser, "1" + INVALID_CLASS_ID_DESC, ClassId.MESSAGE_CONSTRAINTS);
         // invalid email
-        assertParseFailure(parser, "1" + INVALID_email_DESC, Email.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS);
 
         // invalid studentId followed by valid classid
         assertParseFailure(parser, "1" + INVALID_STUDENT_ID_DESC + CLASS_ID_DESC_AMY,
@@ -101,10 +101,10 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_STUDENT;
         String userInput = targetIndex.getOneBased() + STUDENT_ID_DESC_BOB
-                + CLASS_ID_DESC_AMY + email_DESC_AMY + NAME_DESC_AMY;
+                + CLASS_ID_DESC_AMY + EMAIL_DESC_AMY + NAME_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withStudentId(VALID_STUDENT_ID_BOB).withClassId(VALID_CLASS_ID_AMY).withemail(VALID_email_AMY).build();
+                .withStudentId(VALID_STUDENT_ID_BOB).withClassId(VALID_CLASS_ID_AMY).withemail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -113,10 +113,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + STUDENT_ID_DESC_BOB + email_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + STUDENT_ID_DESC_BOB + EMAIL_DESC_AMY;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB)
-                .withemail(VALID_email_AMY).build();
+                .withemail(VALID_EMAIL_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -138,8 +138,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // email
-        userInput = targetIndex.getOneBased() + email_DESC_AMY;
-        descriptor = new EditStudentDescriptorBuilder().withemail(VALID_email_AMY).build();
+        userInput = targetIndex.getOneBased() + EMAIL_DESC_AMY;
+        descriptor = new EditStudentDescriptorBuilder().withemail(VALID_EMAIL_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -158,12 +158,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST_STUDENT;
-        String userInput = targetIndex.getOneBased() + STUDENT_ID_DESC_AMY + CLASS_ID_DESC_AMY + email_DESC_AMY
-                + STUDENT_ID_DESC_AMY + email_DESC_AMY + CLASS_ID_DESC_AMY
-                + STUDENT_ID_DESC_BOB + email_DESC_BOB + CLASS_ID_DESC_BOB;
+        String userInput = targetIndex.getOneBased() + STUDENT_ID_DESC_AMY + CLASS_ID_DESC_AMY + EMAIL_DESC_AMY
+                + STUDENT_ID_DESC_AMY + EMAIL_DESC_AMY + CLASS_ID_DESC_AMY
+                + STUDENT_ID_DESC_BOB + EMAIL_DESC_BOB + CLASS_ID_DESC_BOB;
 
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB)
-                .withClassId(VALID_CLASS_ID_BOB).withemail(VALID_email_BOB)
+                .withClassId(VALID_CLASS_ID_BOB).withemail(VALID_EMAIL_BOB)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -184,11 +184,11 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + CLASS_ID_DESC_BOB + INVALID_STUDENT_ID_DESC + email_DESC_BOB
+        userInput = targetIndex.getOneBased() + CLASS_ID_DESC_BOB + INVALID_STUDENT_ID_DESC + EMAIL_DESC_BOB
                 + STUDENT_ID_DESC_BOB;
         descriptor = new EditStudentDescriptorBuilder().withStudentId(VALID_STUDENT_ID_BOB)
                 .withClassId(VALID_CLASS_ID_BOB)
-                .withemail(VALID_email_BOB).build();
+                .withemail(VALID_EMAIL_BOB).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

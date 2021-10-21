@@ -10,9 +10,11 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
-import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
-
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.

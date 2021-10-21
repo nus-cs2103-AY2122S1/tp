@@ -2,8 +2,8 @@ package seedu.programmer.testutil;
 
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_CLASS_ID_BOB;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_email_AMY;
-import static seedu.programmer.logic.commands.CommandTestUtil.VALID_email_BOB;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
@@ -53,9 +53,9 @@ public class TypicalStudents {
 
     // Manually added - student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENT_ID_AMY)
-            .withClassId(VALID_CLASS_ID_AMY).withEmail(VALID_email_AMY).build();
+            .withClassId(VALID_CLASS_ID_AMY).withEmail(VALID_EMAIL_AMY).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withStudentId(VALID_STUDENT_ID_BOB)
-            .withClassId(VALID_CLASS_ID_BOB).withEmail(VALID_email_BOB).build();
+            .withClassId(VALID_CLASS_ID_BOB).withEmail(VALID_EMAIL_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

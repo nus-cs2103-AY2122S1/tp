@@ -14,7 +14,7 @@ public class Email {
             + "1. The local-part should only contain eXXXXXXX where X are numeric characters"
             + "2. This is followed by a '@u.nus.edu'";
 
-    public static final String VALIDATION_REGEX =  "e" + "\\d{7}+" + "@u.nus.edu";
+    public static final String VALIDATION_REGEX = "e" + "\\d{7}+" + "@u.nus.edu";
     public final String email;
 
     /**
