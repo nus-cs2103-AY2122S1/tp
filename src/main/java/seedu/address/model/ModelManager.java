@@ -30,7 +30,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Person> birthdayReminders;
+    private final ObservableList<Person> birthdayReminders;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -107,19 +107,24 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        birthdayReminders.remove(target);
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        addToBirthdayReminderList(person);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
+
+        // Insert edited person in correct order
+        birthdayReminders.remove(target);
+        addToBirthdayReminderList(editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -140,7 +145,7 @@ public class ModelManager implements Model {
     }
 
     //=========== Birthday Reminder List Accessors ===========================================================
-    private static FilteredList<Person> generateBirthdayReminderList(ReadOnlyAddressBook addressBook) {
+    private static ObservableList<Person> generateBirthdayReminderList(ReadOnlyAddressBook addressBook) {
 
         // Retrieves birthdays that have yet to pass
         CompletableFuture<Stream<Person>> beforeCurrentDay = CompletableFuture.supplyAsync(() ->
@@ -161,9 +166,7 @@ public class ModelManager implements Model {
         );
         Stream<Person> concatStream = Stream.concat(beforeCurrentDay.join(), currentDayOnwards.join());
 
-        return new FilteredList<>(
-                concatStream.collect(Collectors.toCollection(FXCollections::observableArrayList))
-        );
+        return concatStream.collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     private static boolean haveBirthdayAfterCurrentDay(Person p) {
@@ -174,9 +177,39 @@ public class ModelManager implements Model {
             .orElse(false);
     }
 
+    private void addToBirthdayReminderList(Person personToAdd) {
+        if (personToAdd.getBirthday().isEmpty()) {
+            return;
+        }
+
+        int i = -1;
+        MonthDay birthdayToAdd = MonthDay.from(personToAdd.getBirthday().get().birthdate);
+        PersonBirthdayComparator comparator = new PersonBirthdayComparator();
+        if (MonthDay.now().isAfter(birthdayToAdd)) {
+            // BirthdayToAdd has past should inserted from the end of the list
+            i = birthdayReminders.size();
+            while (i > 0 && comparator.compare(personToAdd, birthdayReminders.get(i - 1)) < 0) {
+                i--;
+            }
+        }
+        if (!MonthDay.now().isAfter(birthdayToAdd)) {
+            // BirthdayToAdd has not past should inserted at the start of the list
+            i = 0;
+            while (i < birthdayReminders.size() && comparator.compare(personToAdd, birthdayReminders.get(i)) > 0) {
+                i++;
+            }
+        }
+        if (i == birthdayReminders.size() && !MonthDay.now().isAfter(birthdayToAdd)) {
+            // BirthdayToAdd is latest in the list but has not past therefore placed at start of list
+            birthdayReminders.add(0, personToAdd);
+        } else {
+            birthdayReminders.add(i, personToAdd);
+        }
+    }
+
     @Override
     public ObservableList<Person> getBirthdayReminderList() {
-        return birthdayReminders;
+        return new FilteredList<>(birthdayReminders);
     }
 
     @Override
@@ -195,7 +228,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && birthdayReminders.equals(other.birthdayReminders);
     }
 
 }
