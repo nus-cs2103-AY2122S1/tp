@@ -49,6 +49,7 @@ MainWindow -left-|> UiPart
 
 ResultDisplay ----|> UiPart
 CommandBox ----|> UiPart
+PersonTab ----|> UiPart
 PatientListPanel ----|> UiPart
 DoctorListPanel ----|> UiPart
 PatientCard ----|> UiPart
