@@ -37,6 +37,8 @@ public class ToDoTaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
+    private Label priority;
+    @FXML
     private FlowPane tags;
 
     /**
@@ -49,6 +51,7 @@ public class ToDoTaskCard extends UiPart<Region> {
         name.setText(task.getName().toString());
         status.setText(task.getStatusString());
         description.setText(task.getDescription());
+        priority.setText(task.getPriorityAsString());
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

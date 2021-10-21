@@ -38,6 +38,8 @@ public class EventTaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label description;
+    @FXML
+    private Label priority;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -50,6 +52,7 @@ public class EventTaskCard extends UiPart<Region> {
         EventTask deadlineTask = (EventTask) task;
         status.setText(task.getStatusString());
         description.setText(task.getDescription());
+        priority.setText(task.getPriorityAsString());
 
         taskDate.setText(deadlineTask.getTaskDate().toString());
 

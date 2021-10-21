@@ -28,6 +28,7 @@ public class JsonAdaptedTask {
     private String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final boolean isComplete;
+    private final Task.Priority priority;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -36,7 +37,8 @@ public class JsonAdaptedTask {
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                            @JsonProperty("isComplete") boolean isComplete,
-                           @JsonProperty("i") int i) {
+                           @JsonProperty("i") int i,
+                           @JsonProperty("priority") Task.Priority priority) {
         this.name = name;
         this.deadline = deadline;
         this.i = i;
@@ -45,6 +47,7 @@ public class JsonAdaptedTask {
             this.tagged.addAll(tagged);
         }
         i = 0;
+        this.priority = priority;
     }
 
     /**
@@ -73,6 +76,7 @@ public class JsonAdaptedTask {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         this.isComplete = source.checkIsDone();
+        this.priority = source.getPriority();
     }
 
     /**
@@ -111,7 +115,7 @@ public class JsonAdaptedTask {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
-            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription);
+            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription, priority);
         }
         //if (task instanceof EventTask) {
         if (i == 2) {
@@ -124,9 +128,9 @@ public class JsonAdaptedTask {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
-            return new EventTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription);
+            return new EventTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription, priority);
         }
 
-        return new TodoTask(modelName, modelTags, isComplete, modelDescription);
+        return new TodoTask(modelName, modelTags, isComplete, modelDescription, priority);
     }
 }
