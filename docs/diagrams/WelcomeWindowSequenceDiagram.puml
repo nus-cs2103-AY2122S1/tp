@@ -1,7 +1,7 @@
 @startuml
 !include style.puml
 
-box WelcomeWindow UI_COLOR_T1
+box Ui UI_COLOR_T1
 participant ":UiManager" as UiManager UI_COLOR
 participant ":WelcomeWindow" as WelcomeWindow UI_COLOR
 participant ":UiPart" as UiPart UI_COLOR
