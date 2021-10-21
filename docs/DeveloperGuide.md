@@ -154,6 +154,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Insurance feature
+
+#### Implementation
+
+`Insurance` is currently composed of one object, `InsuranceType`, which is a `Enum` of types `Life`, `Health`, and `General`. 
+
+In the future, a `name` property is planned to be added to `Insurance`, representing the name of the insurance.
+
+A `Person` can have any number of different `Insurances`, represented by a `HashSet`. 
+
+`Insurance` can be added to a `Person` through the `add` command, and edited through the `edit` command. 
+
+[Placeholder for sequence diagram showing adding Insurance to Person]
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
