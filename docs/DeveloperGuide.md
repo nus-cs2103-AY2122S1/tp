@@ -23,7 +23,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-T09-2/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -69,24 +69,24 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `ModuleLessonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Person` and `ModuleLesson` objects residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -110,32 +110,25 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `AddressBookParser` class uses `CommandWord` to find out which `Command` the user wants. `AddressBookParser` then creates the required `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Person` and `ModuleLesson` objects (which are contained in a `UniquePersonList` and `UniqueModuleLessonList` object respectively).
+* stores the currently 'selected' `Person` and `ModuleLesson` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` and `ObservableList<ModuleLesson>` that can be 'observed' e.g. the UI can be bound to those lists so that the UI automatically updates when the data in the lists change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
-
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-T09-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -153,6 +146,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Find feature 
+
+#### Implementation
+The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords. 
+Given the following example contact book: 
+* Contact #1: Jason
+* Contact #2: Jasmine 
+* Contact #3: Bob
+
+A search with the command `find n/Jas` would return nothing, as `Jas` is not a complete match with any of the names of the three contacts.
+
+To better fit our target user, someone who wishes to work fast, we have decided to allow partial matches for the find command. 
+This is done by altering the condition in the search predicate, from accepting full word matches to accepting even partial word matches:
+
+`return Arrays.stream(wordsInPreppedSentence).anyMatch(preppedWord::equalsIgnoreCase);`
+
+changed to
+
+`return Arrays.stream(wordsInPreppedSentence).anyMatch(x -> x.toLowerCase().contains(preppedWord.toLowerCase()));`
+
+Also, to facilitate filtered searches, we have implemented finding using prefixes:
+* `find n/` to find by name
+* `find m/` to find by module code
+
+Similar to other commands, this is done using a `argumentTokenizer` to parse for the above prefixes,
+before the correct `Predicate` is instantiated and used for finding the contact. 
+
+#### Design considerations:
+
+**Aspect: Previous and current version of find command:**
+
+* **Alternative 1 (previous version):** Search keyword needs to match entirely.
+    * Pros: Only the correct contact is returned.
+    * Cons: Takes time to type entire names to find the contact you want.
+
+* **Alternative 2 (current version):** Search keyword just needs to match partially.
+    * Pros: Faster searches with just partial keywords.
+    * Cons: Contacts you did not mean to retrieve are also displayed.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -274,33 +306,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *` | potential user | be able to download the app | I can use it to keep track of my contacts |
-| `* * *` | potential user | be able to start the app | I can see how the app would look like |
-| `* * *` | user | be able to create a new contact in the address book | I can save a contact |
-| `* * *` | user | be able to retrieve an existing contact in the address book | I can retrieve more details about the contact |
-| `* * *` | user | be able to update an existing contact in the address book | I can change information about my student if I made a mistake when adding them |
-| `* * *` | user | be able to delete an old contact in the address book | I can delete contacts whom I am not in contact with anymore |
-| `* * *` | user | be able to see their contact details | I can copy the contact details to contact them |
-| `* * *` | new user | be able to find out what kind of commands are available | I can use the app as intended |
-| `* * *` | user | be able to close the app | I can stop using it |
-| `* *` | user | be able to see the group this contact belongs to | I recognise where I know this person from |
-| `* *` | user | be able to purge all current data | I can get rid of sample/experimental data i used for exploring the app |
-| `* *` | user | be able to search for contacts | I don’t have to scroll the entire contact list |
-| `* *` | organised user | be able to sort by modules | I can see the modules in order |
-| `* *` | user | be able to retrieve data fast | I can get the contact in the fastest time possible |
-| `* *` | user | be able to view by categories | I can ignore unrelated contact |
-| `* *` | user | be able to delete contacts by groups | I don’t have to delete one by one |
-| `* *` | user | be able to add a description about a contact | I can add more details about the contact |
-| `* *` | user | be able to sort my contacts | I can see the contact in a certain order |
-| `* *` | user | have access to a help page | I can know how to navigate the app |
-| `*` | potential user exploring the app | be able to see the app populated with sample data | I can easily see how the app works |
-| `*` | user | be able to know which contact I retrieve frequently | I can know which contact is frequently contacted |
-| `*` | Long-time user | be able to know which contact I have not retrieved in a while | I can know which contact might be obsolete |
-| `*` | user | be able to set up profile picture for the contact | I can recognise the person |
-| `*` | forgetful user | be able to have reminders about upcoming classes | I can conduct classes punctually |
-| `*` | Expert user | be able to set up shortcuts | I can do things faster |
-| `*` | user | be able to create favorite contact list | I can find my favourite student/prof/TA |
-| `*` | user | be able to set up profile picture for myself | I can add a personal touch to the application |
+| `* * *` | potential user | be able to download the app | use it to keep track of my contacts |
+| `* * *` | potential user | be able to start the app | see how the app would look like |
+| `* * *` | user | be able to create a new contact in the address book | save a contact |
+| `* * *` | user | be able to retrieve an existing contact in the address book | retrieve more details about the contact |
+| `* * *` | user | be able to update an existing contact in the address book | change information about my student if I made a mistake when adding them |
+| `* * *` | user | be able to delete an old contact in the address book | delete contacts whom I am not in contact with anymore |
+| `* * *` | user | be able to see their contact details | copy the contact details to contact them |
+| `* * *` | new user | be able to find out what kind of commands are available | use the app as intended |
+| `* * *` | user | be able to close the app | stop using it |
+| `* *` | user | be able to purge all current data | get rid of sample/experimental data I used for exploring the app |
+| `* *` | user | be able to view my contacts in alphabetical order | see the contacts in more intuitive way |
+| `* *` | user | be able to delete by module | delete all contacts linked to that module |
+| `* *` | user | be able to delete contacts by groups | delete many contacts in one go |
+| `* *` | user | be able to see the group a contact belongs to | recall how I know the particular person |
+| `* *` | user | be able to search for contacts | save time have to scroll the entire contact list |
+| `* *` | user | be able to retrieve data fast | get the contact in the fastest time possible |
+| `* *` | user | be able to search by categories | ignore unrelated contacts |
+| `* *` | user | be able to add a description about a contact | add more details about the contact |
+| `* *` | user | have access to a help page | know how to navigate the app |
+| `* *` | user | be able to create a class card | see my current classes |
+| `* *` | user | be able to see class details | recall the specifics of the class |
+| `* *` | user | be able to update class details | ensure my class details are correct |
+| `* *` | user | be able to delete a class | remove the classes that are irrelevant |
+| `* *` | potential user exploring the app | be able to see the app populated with sample data | easily see how the app works |
+| `*` | forgetful user | be able to have reminders about upcoming classes | conduct classes punctually |
+| `*` | user | be able to set up profile picture for the contact | recognise the person |
+| `*` | user | be able to set up profile picture for myself | add a personal touch to the application |
+| `*` | Expert user | be able to set up shortcuts | do things faster |
+
 
 ### Use cases
 
@@ -310,33 +344,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to create a contact
-2. contHACKS shows a list of existing tags in contHACKS, and asks for input regarding details of the contact
-3. User inputs details of the contact
-4. contHACKS reflects that contact has been created successfully
+1. User requests to create a contact and inputs contact details
+2. contHACKS creates the contact and displays the newly added contact
 
-Use case ends.
+Use case ends
 
 **Extensions**
-* 2a. There are no tags in contHACKS<br />
-    * 2a1. contHACKS reflects that there are no tags in contHACKS<br />
-      Use case ends.
+* 1a. User fails to provide compulsory field
+    * 1a1. contHACKS shows an error message<br />
+    Use case ends
 
 
-* 3a. User does not give a tag to the contact.
-    * 3a1. Contact creation continues without an input tag<br />
-    Use case resumes at step 4.
+* 1b. User input details in a wrong format
+    * 1b1. contHACKS shows an error message<br />
+    Use case ends
 
-
-* 3b. User wants to give a tag to the contact being created, and no tags currently exist in contHACKS
-    * 3b1. User continues to create a contact with the tag name
-    * 3b2. contHACKS creates the new tag and the new contact<br />
-    Use case resumes at step 4.
-
-
-* 3c. User gives insufficient details for contact creation
-    * 3c1. contHACKS shows an error message<br />
-    Use case resumes at step 2.
 
 **Use case: Finding a contact**
 
@@ -345,48 +367,122 @@ Use case ends.
 1. User requests to find a contact based on input details
 2. contHACKS shows a list of contacts that match input details
 
-Use case ends.
+Use case ends
 
 **Extensions**
-* 1a. There are no contacts<br />
-    Use case ends.
+* 1a. There are no contacts that matches the input details
+    * 1a1. contHACKS displays an empty list<br />
+    Use case ends
 
 
 * 1b. User finds by name
-    * 1b1. contHACKS returns a list of contacts with names that match the input<br />
-    Use case ends.
+    * 1b1. contHACKS displays a list of contacts with names that match the input<br />
+    Use case ends
 
 
-* 1c. User finds by tag
-    * 1c1. contHACKS returns a list of contacts that contains the same tag<br />
-    Use case ends.
+* 1c. User finds by module code
+    * 1c1. contHACKS displays a list of contacts that are tagged with the module code<br />
+    Use case ends
+
+
+* 1d. User input details in a wrong format
+    * 1d1. contHACKS shows an error message<br />
+    Use case ends
 
 
 **Use case: Updating a contact**
 
 **MSS**
 
-1. User requests to update a specific contact
-2. contHACKS returns the current details of the contact
-3. User inputs the new details of the contact
-4. contHACKS reflects that contact is successfully updated
+1. User requests to update a specific contact and inputs the new contact details
+2. contHACKS updates the contact with the inputted details and displays the updated contact
 
-Use case ends.
+Use case ends
+
+**Extensions**
+* 1a. Contact does not exist
+    * 1a1. contHACKS shows an error message<br />
+    Use case ends
+
+
+* 1b. User input details in a wrong format
+    * 1b1. contHACKS shows an error message<br />
+    Use case ends
+    
+
+**Use case: Adding remark to a contact**
+
+**MSS**
+
+1. User requests to add a remark to a specific contact
+2. contHACKS updates the contact with the inputted remark and displays the updated contact
+
+Use case ends
+
+**Extensions**
+* 1a. Contact does not exist
+    * 1a1. contHACKS shows an error message<br />
+      Use case ends
+
+
+* 1b. User input the remark in a wrong format
+    * 1b1. contHACKS shows an error message<br />
+      Use case ends
+
+
+**Use case: Deleting a contact**
+
+**MSS**
+
+1. User requests to delete a specific contact
+2. contHACKS deletes the contact and displays the updated contact list
+
+Use case ends
 
 **Extensions**
 * 1a. Contact does not exist
     * 1a1. contHACKS shows an error message.<br />
-    Use case ends.
+      Use case ends
 
 
-* 1b. User just wants to add a new tag to the contact and change nothing else
-    * 1b1. User inputs just the tag, and the index of the contact.<br />
-    Use case resumes at step 4.
+**Use case: Listing the contact list**
+
+**MSS**
+
+1. User requests to for the whole contact list
+2. contHACKS displays the whole contact list
+
+Use case ends
 
 
-* 1c. User gives insufficient details for contact creation
-    * 1c1. contHACKS shows an error message<br />
-    Use case resumes at step 2.
+**Use case: Clear all contacts**
+
+**MSS**
+
+1. User requests to clear all contacts
+2. contHACKS delete all the contacts and displays an empty contact list
+
+Use case ends
+
+
+**Use case: Getting help manual**
+
+**MSS**
+
+1. User requests to for a help manual
+2. contHACKS displays the help manual
+
+Use case ends
+
+
+**Use case: Exiting the application**
+
+**MSS**
+
+1. User requests to exit the application
+2. contHACKS closes
+
+Use case ends
 
 
 ### Non-Functional Requirements
