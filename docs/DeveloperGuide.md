@@ -512,10 +512,9 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Saving data
+### Download data
 
-1. Dealing with missing/corrupted data files
+1. Select folder from directory chooser window to save data to:
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+    1. To cancel, click 'cancel' to return to the main window.
+    2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.

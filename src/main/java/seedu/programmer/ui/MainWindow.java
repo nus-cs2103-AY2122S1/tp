@@ -180,7 +180,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Closes the application window.
      */
     @FXML
     private void handleExit() {
