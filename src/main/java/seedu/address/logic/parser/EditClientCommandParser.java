@@ -87,6 +87,7 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
         if (orders.isEmpty()) {
             return Optional.empty();
         }
+
         Collection<String> orderSet = orders.size() == 1 && orders.contains("") ? Collections.emptySet() : orders;
         return Optional.of(ParserUtil.parseOrders(orderSet, model));
     }

@@ -6,7 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -74,7 +76,10 @@ public class AddClientCommand extends Command {
         PhoneNumber phoneNumber = addClientDescriptor.getPhoneNumber();
         Email email = addClientDescriptor.getEmail();
         Address address = addClientDescriptor.getAddress();
-        Set<Order> orders = addClientDescriptor.getOrders();
+        Set<Order> orders = addClientDescriptor.getOrders()
+                .stream()
+                .filter(Order::isValidOrder)
+                .collect(Collectors.toSet());
         return new Client(name, phoneNumber, email, address, orders);
     }
 
@@ -93,7 +98,7 @@ public class AddClientCommand extends Command {
         private PhoneNumber phoneNumber;
         private Email email;
         private Address address;
-        private Set<Order> orders;
+        private Set<Order> orders = new HashSet<>();
 
         /**
          * Constructor of the class `AddClientDescriptor`.

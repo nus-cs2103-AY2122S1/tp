@@ -71,6 +71,20 @@ public class Product implements Category {
     }
 
     /**
+     * Checks if this product has enough stock.
+     *
+     * @param quantity Amount required.
+     * @return true if this quantity <= product.quantity; false otherwise.
+     */
+    public boolean hasEnoughStock(Quantity quantity) {
+        if (this.quantity == null) {
+            return false;
+        }
+
+        return quantity.lessThan(this.quantity) || quantity.equals(this.quantity);
+    }
+
+    /**
      * Returns true if both products have the same id.
      * This defines a weaker notion of equality between two products.
      *

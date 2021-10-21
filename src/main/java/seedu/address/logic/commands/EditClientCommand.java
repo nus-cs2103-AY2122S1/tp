@@ -9,9 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -45,8 +47,8 @@ public class EditClientCommand extends Command {
                     + PREFIX_NAME + "Ben "
                     + PREFIX_PHONE_NUMBER + "12345678 "
                     + PREFIX_EMAIL + "ben@gmail.com "
-                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473"
-                    + PREFIX_ORDER + "0 100 2021/10/20"
+                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473 "
+                    + PREFIX_ORDER + "0 100 2021/10/20 "
                     + PREFIX_ORDER + "15 10 10/20";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
@@ -99,10 +101,20 @@ public class EditClientCommand extends Command {
         PhoneNumber updatedPhoneNumber = editClientDescriptor.getPhoneNumber().orElse(clientToEdit.getPhoneNumber());
         Email updatedEmail = editClientDescriptor.getEmail().orElse(clientToEdit.getEmail());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
-        Set<Order> updatedOrders = editClientDescriptor.getOrders().orElse(clientToEdit.getOrders());
+        Set<Order> updatedOrders = getUpdatedOrders(clientToEdit.getOrders(), editClientDescriptor);
 
         return Client.updateClient(clientToEdit, updatedName, updatedPhoneNumber, updatedEmail, updatedAddress,
                 updatedOrders);
+    }
+
+    private static Set<Order> getUpdatedOrders(Set<Order> oldOrders, EditClientDescriptor editClientDescriptor) {
+        Set<Order> updatedOrders = new HashSet<>();
+        editClientDescriptor.getOrders().ifPresent(updatedOrders::addAll);
+        updatedOrders.addAll(oldOrders);
+
+        return updatedOrders.stream()
+                .filter(Order::isValidOrder)
+                .collect(Collectors.toSet());
     }
 
     @Override
@@ -212,8 +224,7 @@ public class EditClientCommand extends Command {
                            && getPhoneNumber().equals(e.getPhoneNumber())
                            && getEmail().equals(e.getEmail())
                            && getAddress().equals(e.getAddress())
-                           && getOrders().get().containsAll(e.getOrders().get())
-                           && e.getOrders().get().containsAll(getOrders().get());
+                           && getOrders().equals(e.getOrders());
         }
     }
 }

@@ -96,8 +96,8 @@ public class Client implements Category {
      * @param email New email for the client.
      * @param address New address for the client.
      */
-    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber, Email email,
-                                      Address address, Set<Order> orders) {
+    public static Client updateClient(Client client, Name name, PhoneNumber phoneNumber, Email email, Address address,
+                                      Set<Order> orders) {
         return new Client(client.getId(), name, phoneNumber, email, address, orders);
     }
 
@@ -105,8 +105,8 @@ public class Client implements Category {
      * @see #updateClient(Client, Client)
      */
     public static Client updateClient(Client copyTo, Client copyFrom) {
-        return new Client(copyTo.getId(), copyFrom.name, copyFrom.phoneNumber, copyFrom.email,
-                copyFrom.address, copyFrom.orders);
+        return new Client(copyTo.getId(), copyFrom.name, copyFrom.phoneNumber, copyFrom.email, copyFrom.address,
+                copyFrom.orders);
     }
 
     /**
@@ -171,8 +171,9 @@ public class Client implements Category {
         }
 
         if (!orders.isEmpty()) {
-            builder.append("; Orders: ");
-            orders.forEach(builder::append);
+            builder.append("\nOrders: ");
+            orders.forEach(order -> builder.append(order).append(", "));
+            builder.deleteCharAt(builder.length() - 2);
         }
 
         return builder.toString();
