@@ -23,7 +23,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
-import seedu.address.model.task.Date;
+import seedu.address.model.Date;
 import seedu.address.model.task.Label;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 

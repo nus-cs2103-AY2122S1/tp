@@ -16,11 +16,9 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
  * implementation more straightforward.
  */
 public class TaskList implements Iterable<Task> {
-
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the task list.
@@ -47,7 +45,6 @@ public class TaskList implements Iterable<Task> {
             throw new TaskNotFoundException();
         }
     }
-
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
@@ -81,7 +78,6 @@ public class TaskList implements Iterable<Task> {
         toMark.setIsDone(true);
         internalList.set(index, toMark);
     }
-
 
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
