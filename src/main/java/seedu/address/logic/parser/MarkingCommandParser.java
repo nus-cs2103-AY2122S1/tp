@@ -27,14 +27,14 @@ public class MarkingCommandParser implements Parser<MarkingCommand> {
     public MarkingCommand parse(String args) throws ParseException {
         try {
             Index[] indexes = ParserUtil.parseMultipleIndex(args);
-            if (typeOfMarking.equals("mark")) {
+            if (typeOfMarking.equals(MarkCommand.COMMAND_WORD)) {
                 return new MarkCommand(indexes);
             } else {
                 return new UnmarkCommand(indexes);
             }
         } catch (ParseException pe) {
             String errorMessage;
-            if (typeOfMarking.equals("mark")) {
+            if (typeOfMarking.equals(MarkCommand.COMMAND_WORD)) {
                 errorMessage = MarkCommand.MESSAGE_USAGE;
             } else {
                 errorMessage = UnmarkCommand.MESSAGE_USAGE;
