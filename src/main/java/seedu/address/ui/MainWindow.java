@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
@@ -17,15 +18,17 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandResultExport;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST;
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -185,24 +188,23 @@ public class MainWindow extends UiPart<Stage> {
      * Closes the application.
      */
     @FXML
-    private void handleChooser(CommandResult commandResult) {
+    private void handleMailingList(CommandResultExport commandResult) {
         File file =  fileChooser.showSaveDialog(primaryStage);
-        Path path = Path.of(file.getPath() + ".csv");
-        //TODO: sanitize user provided path
-
-        List<Person> personList =  ((CommandResultExport) commandResult).getPersonList();
-
-        String toWrite = personList.stream().map(x->x.toString() + "\n").collect(Collectors.joining());
-
-        try{
-            FileUtil.writeToFile(path,toWrite);
-        } catch (Exception e) {
-            logger.info(e.getMessage());
+        String pathStr = file.getPath();
+        if (!pathStr.endsWith(".csv")) {
+            pathStr += ".csv";
         }
-        // folder = fileChooser
-        // but hwhat to save --> need some other info
-        // Command result child class!
-        // child class contains the serialized csv to write
+        Path path = Path.of(pathStr);
+
+        List<Person> personList =  commandResult.getPersonList();
+        List<Prefix> prefixList = commandResult.getPrefixes();
+
+        try {
+            CsvUtil.modelToCsv(personList,path,prefixList);
+        } catch (IOException e) {
+            logger.warning(e.getMessage());
+        }
+
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -229,7 +231,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isChooseFile()) {
-                handleChooser(commandResult);
+                handleMailingList( (CommandResultExport) commandResult);
             }
 
             return commandResult;

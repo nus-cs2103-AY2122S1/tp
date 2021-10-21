@@ -23,7 +23,7 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser,boolean showHelp, boolean exit, boolean chooseFile) {
+    protected CommandResult(String feedbackToUser,boolean showHelp, boolean exit, boolean chooseFile) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
