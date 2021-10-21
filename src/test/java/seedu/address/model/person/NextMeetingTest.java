@@ -15,15 +15,14 @@ public class NextMeetingTest {
         String validStartTime = "08:00";
         String validEndTime = "13:00";
         String location = "NUS";
-        String name = "keith";
 
         String invalidDate = "2021-02-19";
         String invalidTime = "2302";
 
         assertThrows(IllegalArgumentException.class, () -> new NextMeeting(invalidDate, validStartTime,
-            validEndTime, location, name));
+            validEndTime, location));
         assertThrows(IllegalArgumentException.class, () -> new NextMeeting(validDate, invalidTime,
-            validEndTime, location, name));
+            validEndTime, location));
     }
 
     @Test
@@ -46,18 +45,18 @@ public class NextMeetingTest {
 
     @Test
     public void getNullMeeting_returnsNextMeetingWithNullFields() {
-        NextMeeting expectedNextMeeting = new NextMeeting(null, null, null, null, null);
+        NextMeeting expectedNextMeeting = new NextMeeting(null, null, null, null);
         assertEquals(NextMeeting.getNullMeeting(), expectedNextMeeting);
     }
 
     @Test
     public void toString_returnsCorrectRepresentation() {
         // null meeting
-        NextMeeting nullMeeting = new NextMeeting(null, null, null, null, null);
+        NextMeeting nullMeeting = new NextMeeting(null, null, null, null);
         assertEquals(nullMeeting.toString(), NextMeeting.NO_NEXT_MEETING);
 
         // non-empty meeting
-        NextMeeting nextMeeting = new NextMeeting("18-10-2021", "18:00", "19:00", "Zoom", "alice");
+        NextMeeting nextMeeting = new NextMeeting("18-10-2021", "18:00", "19:00", "Zoom");
         assertEquals(nextMeeting.toString(), "18-10-2021 (18:00~19:00), Zoom");
     }
 
@@ -69,37 +68,30 @@ public class NextMeetingTest {
         String time2 = "19:00";
         String location1 = "Zoom";
         String location2 = "NUS";
-        String name1 = "ben";
-        String name2 = "dom";
 
         // same value
-        assertTrue(new NextMeeting(date1, time1, time1, location1, name1).equals(
-            new NextMeeting(date1, time1, time1, location1, name1))
+        assertTrue(new NextMeeting(date1, time1, time1, location1).equals(
+            new NextMeeting(date1, time1, time1, location1))
         );
 
         // different date
-        assertFalse(new NextMeeting(date1, time1, time1, location1, name1).equals(
-            new NextMeeting(date2, time1, time1, location1, name1))
+        assertFalse(new NextMeeting(date1, time1, time1, location1).equals(
+            new NextMeeting(date2, time1, time1, location1))
         );
 
         // different startTime
-        assertFalse(new NextMeeting(date1, time1, time2, location1, name1).equals(
-            new NextMeeting(date1, time2, time2, location1, name1))
+        assertFalse(new NextMeeting(date1, time1, time2, location1).equals(
+            new NextMeeting(date1, time2, time2, location1))
         );
 
         // different endTime
-        assertFalse(new NextMeeting(date1, time1, time1, location1, name1).equals(
-            new NextMeeting(date1, time1, time2, location1, name1))
+        assertFalse(new NextMeeting(date1, time1, time1, location1).equals(
+            new NextMeeting(date1, time1, time2, location1))
         );
 
         // different location
-        assertFalse(new NextMeeting(date1, time1, time2, location1, name1).equals(
-            new NextMeeting(date1, time1, time2, location2, name1))
-        );
-
-        // different name
-        assertFalse(new NextMeeting(date1, time1, time2, location1, name1).equals(
-                new NextMeeting(date1, time1, time2, location1, name2))
+        assertFalse(new NextMeeting(date1, time1, time2, location1).equals(
+            new NextMeeting(date1, time1, time2, location2))
         );
     }
 }

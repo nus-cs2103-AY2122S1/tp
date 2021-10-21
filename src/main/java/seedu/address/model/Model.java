@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -21,11 +20,6 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
-    Predicate<Person> PREDICATE_SHOW_ALL_MEETINGS = unused -> true;
 
     /**
      * {@code Predicate} that always evaluate to true
@@ -89,11 +83,6 @@ public interface Model {
     List<Person> deletePersonByClientIds(List<ClientId> clientIds);
 
     /**
-     * Deletes the meetings from the belonging to the deleted persons
-     */
-    void deleteMeetingsByPersons(List<Person> toDelete);
-
-    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -145,16 +134,6 @@ public interface Model {
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
-
-    /**
-     * Adds a meeting to the current meeting list
-     */
-    void addNextMeeting(NextMeeting nextMeeting);
-
-    /**
-     * Returns an unmodifiable view of the meetings for current user.
-     */
-    ObservableList<NextMeeting> getSortedNextMeetingList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
