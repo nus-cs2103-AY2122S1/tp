@@ -25,4 +25,11 @@ public class PhoneComparator implements Comparator<Person> {
     public String toString() {
         return this.comparator;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PhoneComparator // instanceof handles nulls
+                && comparator.equals(((PhoneComparator) other).comparator)); // state check
+    }
 }

@@ -25,4 +25,11 @@ public class TagComparator implements Comparator<Person> {
     public String toString() {
         return this.comparator;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagComparator // instanceof handles nulls
+                && comparator.equals(((TagComparator) other).comparator)); // state check
+    }
 }

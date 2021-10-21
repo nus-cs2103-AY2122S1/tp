@@ -1,5 +1,6 @@
 package seedu.address.model.comparator;
 
+import seedu.address.model.person.GenderContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 import java.util.Comparator;
@@ -24,5 +25,12 @@ public class EmailComparator implements Comparator<Person> {
     @Override
     public String toString() {
         return this.comparator;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof EmailComparator // instanceof handles nulls
+                && comparator.equals(((EmailComparator) other).comparator)); // state check
     }
 }

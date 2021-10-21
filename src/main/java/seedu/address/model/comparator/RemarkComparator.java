@@ -25,4 +25,11 @@ public class RemarkComparator implements Comparator<Person> {
     public String toString() {
         return this.comparator;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RemarkComparator // instanceof handles nulls
+                && comparator.equals(((RemarkComparator) other).comparator)); // state check
+    }
 }

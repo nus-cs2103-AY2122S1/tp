@@ -25,4 +25,11 @@ public class NationalityComparator implements Comparator<Person> {
     public String toString() {
         return this.comparator;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof NationalityComparator // instanceof handles nulls
+                && comparator.equals(((NationalityComparator) other).comparator)); // state check
+    }
 }

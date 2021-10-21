@@ -25,4 +25,11 @@ public class SocialHandleComparator implements Comparator<Person> {
     public String toString() {
         return this.comparator;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SocialHandleComparator // instanceof handles nulls
+                && comparator.equals(((SocialHandleComparator) other).comparator)); // state check
+    }
 }

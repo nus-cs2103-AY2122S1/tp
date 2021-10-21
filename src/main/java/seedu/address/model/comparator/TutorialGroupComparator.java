@@ -25,4 +25,11 @@ public class TutorialGroupComparator implements Comparator<Person> {
     public String toString() {
         return this.comparator;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TutorialGroupComparator // instanceof handles nulls
+                && comparator.equals(((TutorialGroupComparator) other).comparator)); // state check
+    }
 }
