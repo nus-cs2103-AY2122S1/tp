@@ -6,7 +6,7 @@ title: Managera
 [![CI Status](https://github.com/AY2122S1-CS2103T-T10-2/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-T10-2/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-T10-2/tp/branch/master/graph/badge.svg?token=SVE776T4OX)](https://codecov.io/gh/AY2122S1-CS2103T-T10-2/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/Ui_v1.3.png)
 
 **Managera is a desktop application for managing your event details and its corresponding participant credentials.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
