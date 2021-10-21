@@ -127,11 +127,11 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different studentId -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_STUDENT_ID_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tutorialId -> returns false
-        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TUTORIAL_ID_BOB).build();
+        editedAlice = new PersonBuilder(ALICE).withTutorialId(VALID_TUTORIAL_ID_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 
