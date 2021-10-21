@@ -63,8 +63,6 @@ Module *--> Name
 Event *--> EventDate
 Event --> "~*" Member
 
-TaskList -[hidden]right->Name
-Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
