@@ -19,9 +19,10 @@ This project is based on the [AddressBook-Level3](https://se-education.org/addre
 This document serves to explain the structure and implementation of TuitiONE and details how to set up the programming
 environment locally to support further developing of the app.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** Here are the interpretations of symbols and formatting used in this document: 
+<div markdown="span" class="alert alert-info">:information_source: **Note:**
+Here are the interpretations of symbols and formatting used in this document: 
 
-* `code` the use of highlight on a word indicates that it is code.
+* `highlights` indicate that the term is part of the code
 * information_source: indicates additional information
 * :bulb: indicates tips
 
