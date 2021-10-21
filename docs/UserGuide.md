@@ -28,7 +28,7 @@ You can install the required JDK and JRE from the
 [Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
 
 Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-to help you with the installation. Follow the guide for your operation system for detailed instructions.
+to help you with the installation. Follow the guide for your operating system for detailed instructions.
 </div>
 
 2. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
@@ -56,6 +56,7 @@ to help you with the installation. Follow the guide for your operation system fo
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
+This section describes the available features in TAB.
 
 <div markdown="block" class="alert alert-info">
 
@@ -81,10 +82,14 @@ to help you with the installation. Follow the guide for your operation system fo
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* There are constraints in place to determine whether the value you provided for a field is valid. 
+  TAB will inform you if you gave an invalid input for a field.
 
 </div>
 
 ### Getting Help 
+This section tells you what to do if you require help while using TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -97,6 +102,28 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ### Managing Students
+This section guides you on how to use the commands for managing students in TAB.
+
+A student must have the following essential fields:
+* Name
+* Address
+
+A student must have **at least 1** of these contact fields:
+* Phone number
+* Parent phone number
+* Email
+* Parent email
+
+Other available optional fields for a student are:
+* Academic level
+* Academic stream
+* School
+* Outstanding fees
+* Remarks
+* Tags
+* Lessons
+
+<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -202,6 +229,7 @@ Shows a list of all students in TAB.
 Format: `list`
 
 ### Finding Students
+This section guides you on how to find or filter students of your choice in TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -262,6 +290,29 @@ Examples:
 
 ### Managing Lessons
 
+This section guides you on how to use the commands for managing the lessons of your students in TAB.
+A lesson **must** have the following fields: a start date, a time range and a subject.
+
+A lesson can be categorised into 2 types: 
+1. A **weekly** recurring lesson
+2. A one-off makeup lesson.
+
+The essential fields for a lesson are:
+* Date
+* Time range
+* Subject
+* Rate
+
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about rate**<br>
+The lesson's rate refers to the fee of the lesson per hour.
+This rate will be used in the calculation of fees due after each lesson.
+</div>
+
+An optional field for a lesson is:
+* Homework
+<br>
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Adding a lesson: `ladd`
@@ -278,8 +329,13 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 * Time range `HHmm-HHmm`
 * Subject
 * Homework
+* Rate
 
 Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add multiple pieces of homework to a lesson in TAB.
+</div>
 
 <div markdown="block" class="alert alert-info">
 
@@ -343,7 +399,7 @@ Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWOR
 
 * You can edit all fields of a lesson except the start date.
 
-* You cannot change the lesson type (i.e. recurring and makeup).
+* You cannot change the lesson's type (i.e. recurring and makeup).
   
 * The lesson index refers to the index number shown in the lesson list of the student.
 
@@ -357,6 +413,8 @@ Examples:
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
 ### Viewing the Schedule
+
+This section guides you on how to use TAB's scheduling feature.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,6 +436,8 @@ Format: `schedule`
 
 ### Managing Data
 
+This section informs you on how data is handled in TAB.
+
 --------------------------------------------------------------------------------------------------------------------
 
 #### Saving the data
@@ -393,6 +453,7 @@ If your changes to the data file makes its format invalid, TAB will discard all 
 </div>
 
 ### Miscellaneous Commands
+This section describes the other miscellaneous commands available in TAB.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -429,6 +490,7 @@ Format: `exit`
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
+This section records frequently asked questions from users of TAB.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
@@ -450,8 +512,10 @@ Format: `exit`
   UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 * **UX**: User Experience - The experience a user has when using the app.
 
+## Command summary
+This section lists all available commands in TAB, along with examples on how you can use them.
+
 --------------------------------------------------------------------------------------------------------------------
-## Command Summary
 
 Action | Format, Examples
 --------|------------------
