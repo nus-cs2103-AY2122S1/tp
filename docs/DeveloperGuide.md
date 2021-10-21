@@ -181,13 +181,13 @@ step 3. If the parameters entered by the user is valid, the application will ret
 
 The following sequence diagram show how the view task list operation works:
 
-<img src=![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
+![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the parameters provided by the user is of non-integer form, ParseException will be thrown and an error message providing the correct format will be shown. Also, if the provided INDEX does not exists within the indices of the displayed person list, CommandException is thrown and an error message that warns of invalid INDEX will be shown.
 
 The following activity diagram summarises what happens when a user executes a `cat` command:
 
-<img src=![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
+![ViewTaskListActivityDiagram](images/ViewTaskListActivityDiagram.png)
 
 #### Design consideration:
 
