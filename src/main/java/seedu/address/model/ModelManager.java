@@ -176,7 +176,7 @@ public class ModelManager implements Model {
     @Override
     public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
         Title positionTitle = applicantParticulars.getPositionTitle();
-        Position position = PositionBook.getPositionByTitle(positionTitle);
+        Position position = positionBook.getPositionByTitle(positionTitle);
         Applicant applicant = new Applicant(applicantParticulars, position);
 
         applicantBook.addApplicant(applicant);
@@ -323,8 +323,7 @@ public class ModelManager implements Model {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
-            Position currentPosition = a.getApplication().getPosition();
-            if (currentPosition == p) {
+            if (a.isApplyingTo(p)) {
                 total++;
                 if (a.getApplication().getStatus() == ApplicationStatus.REJECTED) {
                     count++;

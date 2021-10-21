@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Calculator;
 import seedu.address.model.Model;
+import seedu.address.model.PositionBook;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
@@ -14,7 +15,7 @@ import seedu.address.model.position.Title;
  */
 public class RejectionRateCommand extends Command {
 
-    public static final String COMMAND_WORD = "rate-position";
+    public static final String COMMAND_WORD = "rate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Returns the rejection rate of position specified.\n"
@@ -29,31 +30,31 @@ public class RejectionRateCommand extends Command {
 
     public static final String MESSAGE_NO_CURRENT_APPLICANTS = "There are currently no applicants for this position.";
 
-    private final Position toAdd;
+    private final Title positionTitle;
 
     /**
      * Creates an RejectionRateCommand to get the specified rejection rate.
      */
-    public RejectionRateCommand(Position dummyPosition) {
-        this.toAdd = dummyPosition;
+    public RejectionRateCommand(Title positionTitle) {
+        this.positionTitle = positionTitle;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasPosition(toAdd)) {
+        if (!model.hasPositionWithTitle(positionTitle)) {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        float rejectionRate = model.calculateRejectionRate(toAdd);
+        PositionBook positionBook = (PositionBook) model.getPositionBook();
+        Position position = positionBook.getPositionByTitle(positionTitle);
+        float rejectionRate = model.calculateRejectionRate(position);
 
         if (rejectionRate == Calculator.INVALID_REJECTION_RATE) {
             return new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS);
         }
 
-        Title positionName = toAdd.getTitle();
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, positionName, rejectionRate));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, positionTitle, rejectionRate));
     }
 }

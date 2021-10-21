@@ -7,8 +7,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.RejectionRateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.PositionBook;
-import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 
@@ -30,9 +28,8 @@ public class RejectionRateCommandParser implements Parser<RejectionRateCommand> 
         }
 
         Title positionTitle = ApplicantParserUtil.parseTitle(argumentMultimap.getValue(PREFIX_POSITION).get());
-        Position position = PositionBook.getPositionByTitle(positionTitle);
 
-        return new RejectionRateCommand(position);
+        return new RejectionRateCommand(positionTitle);
     }
 
     /**

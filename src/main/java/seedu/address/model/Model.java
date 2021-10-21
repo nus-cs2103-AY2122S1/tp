@@ -191,4 +191,3 @@ public interface Model {
 
     float calculateRejectionRate(Position p);
 }
-
