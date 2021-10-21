@@ -144,10 +144,10 @@ public class Member extends Module {
             builder.append("; Positions: ");
             positions.forEach(builder::append);
         }
-        /*if (!taskList.isEmpty()) {
+        if (!taskList.isEmpty()) {
             builder.append("; Tasks: ");
             taskList.iterator().forEachRemaining(builder::append);
-        }*/
+        }
         return builder.toString();
     }
 

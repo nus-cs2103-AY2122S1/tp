@@ -33,9 +33,6 @@ public class TaskList implements Iterable<Task> {
      */
     public void add(Task toAdd) {
         requireNonNull(toAdd);
-        /* if (contains(toAdd)) {
-            throw new DuplicateTaskException();
-        } */
         internalList.add(toAdd);
     }
 
@@ -50,10 +47,6 @@ public class TaskList implements Iterable<Task> {
         if (index == -1) {
             throw new TaskNotFoundException();
         }
-
-        /*if (!target.isSameTask(editedTask) && contains(editedTask)) {
-            throw new DuplicateTaskException();
-        }*/
 
         internalList.set(index, editedTask);
     }
@@ -102,9 +95,6 @@ public class TaskList implements Iterable<Task> {
      */
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);
-        /*if (!tasksAreUnique(tasks)) {
-            throw new DuplicateTaskException();
-        }*/
 
         internalList.setAll(tasks);
     }

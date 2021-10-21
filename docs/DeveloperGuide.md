@@ -73,16 +73,43 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `MemberListPanel`, 
+`EventListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` 
+class which captures the commonalities between classes that represent parts of the visible GUI.
 
-The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files 
+that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.
+com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in 
+[`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Member` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Member` and `Event` object residing in the `Model`.
+
+#### Current Implementations 
+
+The GUI currently reflects the entered events and members recorded in Ailurus. Currently, there are two main windows 
+that reflect the `Event` and `Member` objects that are residing in the `Model`. Directly adding or removing `Event` 
+or `Member` would update the `EventListPanel` and `MemberListPanel` to show their respective `EventCard` 
+and `MemberCard` accordingly. Each of the `EventCard` and `MemberCard` would display the fields under the 
+corresponding `Event` and `Member` objects as discussed under [Model Component](#model-component).
+
+However, there are problems faced when the fields inside `Event` and `Member` are being changed. There seems to be 
+some difficulty in updating the `MemberCard` when a `Task` object is being created under the `Member` object, or is 
+removed. Similarly, the same problem also lies in `EventCard` not updating when a `Member` object associated with 
+the `Event` object is being removed.
+
+#### Future Plans
+
+To address the above-mentioned bug where the `EventCard` and `MemberCard` are not updated spontaneously, we decided 
+to implement a third column featuring `Task` objects. As such, we are able to totally remove the `Member` and `Task` 
+from `EventCard` and `MemberCard` respectively. 
+
+We plan to support this implementation by using the `elist`, `mlist` and `tlist` commands to determine what is being 
+displayed in the `MainWindow`.
 
 ### Logic component
 
@@ -94,7 +121,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `MaddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a member).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -113,6 +140,79 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+Here is the Activity Diagram for a User when choosing the module and command to interact with in Ailurus:
+
+![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
+
+#### Current Implementation
+
+New feature: Events
+* Events can be added and deleted from event list via `eadd` and `edelete` commands
+* The participating members can be listed using the command `mlist /v EVENT_ID`
+* New events created can have many participants selected from member list.
+* <u>Design Decision</u>: Instead of only allowing adding of events and creating a command
+for adding participants separately, eadd command allows creation of complete event to
+minimise commands required to add them individually. The format is similar to `delete` and `list` commands
+for familiarity with similar commands for other modules.
+
+
+#### Future Plans
+
+Future plans for Events
+* Include adding and deleting of participants, as well as marking whether a participant has attended the event.
+* Include updating of event with participants and different name
+* Include searching for the list of events for a participant
+* Include filtering of events by month or events that are happening today.
+* Include sorting of events by date, name or number of participants.
+  * Dates should be in reverse chronological order so that upcoming events are shown first
+* Include additional remarks or description for an event
+
+### Add a task feature for a member or several members
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to add the task with given task name to each of the members.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tadd /n take attendance /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
+The parser will then parse the input to create a TaddCommand with task name as "take attendance" and member ids 1 and 2.
+This command will add the task "take attendance" to the first and second member of the member list.
+
+### Delete a task feature for a member
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to delete the task with given task id from the member with given member id.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tdel /t 1 /m 1`. The parser will be called upon to create a TdelCommandParser.
+The parser will then parse the input to create a TdelCommand with task id as 1 and member id as 1.
+This command will delete the first task from the task list of the first member of the member list.
+
+### List tasks feature for a member
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member with given member id from the filtered member list
+and use API from the model manager to list all the tasks of the member.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
+
+Given below is an example usage scenario:
+
+The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
+The parser will then parse the input to create a TlistCommand with member id as 1.
+This command will display all the tasks of the first member of the member list.
+=======
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
@@ -122,10 +222,10 @@ How the parsing works:
 The `Model` component,
 
 * stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), all `Event` objects (which are contained in a `UniqueEventList` object).
-* stores the currently 'selected' `Member` and `Event` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>` and `ObservableList<Event>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a 'tlist' command)
+* stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>
 
@@ -140,11 +240,16 @@ The model that we implemented currently has `Event`, `Task` and `Member`. `Membe
 `Task` belonging to the `Member`. `Event` has a `Name` field, `EventDate` field, and a field of a HashMap<Member, Boolean>
 to serve as a participant list with attendance. Event and Member both extend from the abstract class `Module` to reduce class duplication.
 
+The `Task` model we implemented currently has a task name and a state that represents it is done or not.
 
 #### Future Plans
 
 The future plan for the model is to have `Task` extend from module. The search functions in regard to name will be greatly helped ny the `Module` class.
 We also plan to make the `Position` objects unique to reduce space cost, Each member would contain a reference to the `Position` object instead.
+
+* Make `Task` a subclass of `Module`, which involves adding `TaskName` class.
+* Add deadline field to `Task`
+
 
 ### Storage component
 
@@ -158,6 +263,8 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 #### Current Implementation
+
+`JsonAdaptedTask` allows `Task` to be stored in a json format and `JsonAdaptedMember` allows `Member` to store an array of `Task`
 
 `JsonAdaptedEvent` allows `Event` to be stored in Json format. Ailurus can now store `Event`, enabling the saving and 
 loading of files with `Event` objects. The Map of participants of the `Event` are saved into Json format by splitting them into two separate lists of `JsonAdaptedMember` and `Boolean` respectively.
@@ -198,7 +305,7 @@ Step 2. The user executes `delete 5` command to delete the 5th member in the add
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `padd /n David …​` to add a new member. The `padd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `madd /n David …​` to add a new member. The `madd` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 

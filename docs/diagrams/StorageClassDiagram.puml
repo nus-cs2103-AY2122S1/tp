@@ -22,6 +22,8 @@ Class JsonSerializableAddressBook
 Class JsonAdaptedMember
 Class JsonAdaptedPosition
 Class JsonAdaptedEvent
+
+Class JsonAdaptedTask
 }
 
 }
@@ -40,6 +42,7 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedMember
+JsonAdaptedMember --> "*" JsonAdaptedTask
 JsonSerializableAddressBook --> "*" JsonAdaptedEvent
 JsonAdaptedEvent --> "*" JsonAdaptedMember
 JsonAdaptedMember --> "*" JsonAdaptedPosition

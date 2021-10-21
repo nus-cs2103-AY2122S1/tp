@@ -1,0 +1,33 @@
+@startuml
+start
+repeat
+:User chooses to look into one of the modules;
+switch ()
+case ([Event chosen])
+    :list events;
+    if () then ([select events of a member])
+        :list members of specific event;
+    else ([else])
+        :list all events;
+    endif
+    :User chooses what to do with events;
+    :User executes event command;
+case ([Member chosen])
+    :list members;
+    if () then ([select members of an event])
+        :list members of specific event;
+    else ([else])
+        :list all members;
+    endif
+    :User chooses what to do with the members;
+    :User executes member command;
+case ([Task chosen])
+    :list all tasks of a member;
+    :User chooses what to do with the tasks;
+    :User executes task command;
+endswitch
+:AddressBook saves changes to Storage;
+repeat while () is ([else])
+->//[Program exited?]//;
+stop
+@enduml
