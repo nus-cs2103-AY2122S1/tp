@@ -148,6 +148,21 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+#### History
+
+**API** : [`history.java`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/History.java)
+
+<img src="images/HistoryClassDiagram.png" width="250" />
+
+The `History` component,
+* can save immutable snapshots of object instances of any class and supports the retrieval of the saved snapshots at any
+  time.
+* is implemented by the following classes.
+  * [`StringHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/StringHistory.java)
+    , which supports the saving of strings.
+  * [`CopyableHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/CopyableHistory.java)
+    , which supports the saving of objects. 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Implementation**
