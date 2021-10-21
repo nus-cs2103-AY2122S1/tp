@@ -3,6 +3,7 @@ package seedu.address.model.modulelesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.modulelesson.exceptions.DuplicateModuleLessonException;
 import seedu.address.model.modulelesson.exceptions.ModuleLessonNotFoundException;
+import seedu.address.model.person.ModuleCode;
+
 
 public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
 
@@ -124,6 +127,18 @@ public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
         return true;
     }
 
+    /**
+     * Sorts the lesson in alphabetical order of their module codes.
+     */
+    public void sortList() {
+        internalList.sort(new Comparator<ModuleLesson>() {
+            @Override
+            public int compare(ModuleLesson l1, ModuleLesson l2) {
+                return l1.getModuleCodes().toArray(ModuleCode[]::new)[0].getModuleCodeName()
+                        .compareTo(l2.getModuleCodes().toArray(ModuleCode[]::new)[0].getModuleCodeName());
+            }
+        });
+    }
 }
 
 
