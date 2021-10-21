@@ -225,21 +225,37 @@ The following sequence diagram shows how the `listFav` mechanism works:
 ![ListFavSequenceDiagram](images/ListFavSequenceDiagram.png)
 
 
-### Filter Profiles By Name
+### Filter Profiles By Module and Optionally Group Status
 #### Implementation
-The `find` mechanism will allow the user to filter profiles by name.
+The `filter` mechanism will allow the user to filter profiles by module and optionally group status.
 
-The implementation required the creation of a parser for `findCommand` as the command does takes in parameters.
-`findCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
-The GUI will then update to show the profiles that contain the specified name.
+The implementation required the creation of a parser for `filterCommand` as the command does takes in parameters.
+`filterCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then update to show the profiles that contain the specified modules and/or group status.
 
 #### Usage
 To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
-`find NAME` <br/>
-Example: `find Charlotte`
+`filter mod/MODULE [group/GROUP_STATUS]` <br/>
+Example: `filter mod/CS2103T group/SM`
 
-The following sequence diagram shows how the `find` mechanism works:
+The following sequence diagram shows how the `filter` mechanism works:
 ![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+### Edit Group Status of Modules
+#### Implementation
+The `editGroupStatus` mechanism will allow the user to edit the group status of the modules on their profile.
+
+The implementation required the creation of a parser for `editGroupStatusCommand` as the command does takes in parameters.
+`editGroupStatusCommand` class updates the `Model` class and then returns a new instance of the `CommandResult` class.
+The GUI will then update to show the updated group status for the specified module.
+
+#### Usage
+To use this function and create a profile, simply enter the command and the required parameters in the command line in the following format.
+`editGroupStatus mod/MODULE group/GROUP_STATUS` <br/>
+Example: `editGroupStatus mod/CS2103T group/Need member`
+
+The following sequence diagram shows how the `editGroupStatus` mechanism works:
+![FilterSequenceDiagram](images/EditGroupStatusCommandSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
