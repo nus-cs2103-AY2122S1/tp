@@ -162,6 +162,37 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
+The add lesson operation is facilitated by `AddLessonCommand` and `AddLessonCommandParser`. `AddLessonCommand` first parses the user input to extract out the command and the arguments, after which the `AddLessonCommand#execute(model)` method is invoked in the `LogicManager` class to add the lesson with the corresponding details.
+
+The add lesson feature is relative similar to that of the original add student feature. The differences lay in the properties which a lesson could hold as compared to a student. See below for the properties of a lesson:
+
+- `GRADE`: 
+  1. This is a common property between the student class and the lesson class. 
+  2. When enrolling a student for a particular lesson, compatible and matching `GRADE` between student and lesson will be required to successful enrolment.
+  3. In the current version of implementation, `GRADE`'s input constraints are:
+     1. Primary School: "P`X`" <where `X` can be 1, 2, 3, 4, 5, 6>.
+     2. Secondary School: "S `Y`" <where `Y` can be 1, 2, 3, 4>.
+     3. Expansion is allowed to cater for tertiary educational subjects.
+- `SUBJECT`:
+  1. In the current version of implementation, `SUBJECT`'s input constraints are:
+     1. Limited to 20 characters only.
+     2. First letter is required to be capitalized.
+     3. Expansion is allowed to cater for more advanced subjects with naming convention more than 20 characters.
+- `DAY_OF_WEEK`:
+  1. In the current version of implementation, `DAY_OF_WEEK`'s input constraints are:
+     1. Only acceptable input: Mon, Tue, Wed, Thu, Fri, Sat, Sun (With first character capitalized)
+     2. Expansion is allowed to cater for more format variants of `DAY_OF_WEEK` entries.
+- `START_TIME`:
+  1. In the current version of implementation, `START_TIME`'s input constraints are:
+     1. In 2400 hours format.
+     2. Each lesson is presumed to consume 2 hours only.
+     3. 0900 <= `START_TIME` <= 1900, as lesson timing in tuition centre is presumed to be from 0900 to 2200 at most.
+     4. Expansion is allowed to cater for late night classes that extent beyond 2200.
+- `COST`:
+  1. In the current version of implementation, `COST`'s input constraints are:
+     1. 0 <= `COST`.
+
+
 Object diagram
 
 Sequence diagram
