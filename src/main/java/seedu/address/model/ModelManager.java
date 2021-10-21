@@ -104,7 +104,8 @@ public class ModelManager implements Model {
      * Left temporarily to pass unit tests
      * Initializes a ModelManager with the given positionBook and userPrefs.
      */
-    public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyApplicantBook applicantBook,
+                        ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(positionBook, userPrefs);
 
@@ -112,7 +113,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook();
         this.positionBook = new PositionBook(positionBook);
-        this.applicantBook = new ApplicantBook();
+        this.applicantBook = new ApplicantBook(applicantBook);
         this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());

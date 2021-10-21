@@ -16,10 +16,12 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ApplicantBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.PositionBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -62,7 +64,8 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         PositionBookStorage positionBookStorage = new JsonPositionBookStorage(userPrefs.getPositionBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage, positionBookStorage);
+        ApplicantBookStorage applicantBookStorage = new JSONApplicantBookStorage(userPrefs.getApplicantBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, positionBookStorage, applicantBookStorage);
 
         initLogging(config);
 
@@ -81,11 +84,14 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyPositionBook> positionBookOptional;
+        Optional<ReadOnlyApplicantBook> applicantBookOptional;
         ReadOnlyAddressBook initialAddressBookData;
         ReadOnlyPositionBook initialPositionBookData;
+        ReadOnlyApplicantBook initialApplicantBookData;
         try {
             addressBookOptional = storage.readAddressBook();
             positionBookOptional = storage.readPositionBook();
+            applicantBookOptional = storage.readApplicantBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Addressbook data file not found. Will be starting with a sample AddressBook");
             }
@@ -95,19 +101,27 @@ public class MainApp extends Application {
                 logger.info("Positionbook data file not found. Will be starting with a sample PositionBook");
             }
             initialPositionBookData = positionBookOptional.orElseGet(SampleDataUtil::getSamplePositionBook);
+
+            if (!applicantBookOptional.isPresent()) {
+                logger.info("Applicantbook data file not found. Will be starting with a sample ApplicantBook");
+            }
+            initialApplicantBookData = applicantBookOptional.orElseGet(SampleDataUtil::getSampleApplicantBook);
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty "
                     + "AddressBook/PositionBook/ApplicantBook");
             initialAddressBookData = new AddressBook();
             initialPositionBookData = new PositionBook();
+            initialApplicantBookData = new ApplicantBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty "
                     + "AddressBook/PositionBook/ApplicantBook");
             initialAddressBookData = new AddressBook();
             initialPositionBookData = new PositionBook();
+            initialApplicantBookData = new ApplicantBook();
         }
 
-        return new ModelManager(initialAddressBookData, initialPositionBookData, userPrefs);
+        return new ModelManager(initialAddressBookData, initialPositionBookData, initialApplicantBookData, userPrefs);
     }
 
     private void initLogging(Config config) {

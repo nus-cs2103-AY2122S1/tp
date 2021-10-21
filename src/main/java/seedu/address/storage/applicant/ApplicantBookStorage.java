@@ -1,2 +1,5 @@
-package seedu.address.storage.applicant;public interface ApplicantBookStorage {
+package seedu.address.storage.applicant;
+
+public interface ApplicantBookStorage {
+
 }

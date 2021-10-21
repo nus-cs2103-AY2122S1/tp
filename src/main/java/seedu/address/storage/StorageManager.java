@@ -8,9 +8,11 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.applicant.ApplicantBookStorage;
 import seedu.address.storage.position.PositionBookStorage;
 
 /**
@@ -21,16 +23,18 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private ApplicantBookStorage applicantBookStorage;
     private PositionBookStorage positionBookStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
-                          PositionBookStorage positionBookStorage) {
+                          PositionBookStorage positionBookStorage, ApplicantBookStorage applicantBookStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.applicantBookStorage = applicantBookStorage;
         this.positionBookStorage = positionBookStorage;
     }
 
@@ -108,5 +112,34 @@ public class StorageManager implements Storage {
     public void savePositionBook(ReadOnlyPositionBook positionBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to position book data file: " + filePath);
         positionBookStorage.savePositionBook(positionBook, filePath);
+    }
+
+    // ================ ApplicantBook methods ==============================
+
+    @Override
+    public Path getApplicantBookFilePath() {
+        return applicantBookStorage.getApplicantBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyApplicantBook> readApplicantBook() throws DataConversionException, IOException {
+        return readApplicantBook(applicantBookStorage.getApplicantBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read applicant data from file: " + filePath);
+        return applicantBookStorage.readApplicantBook(filePath);
+    }
+
+    @Override
+    public void saveApplicantBook(ReadOnlyApplicantBook applicantBook) throws IOException {
+        saveApplicantBook(applicantBook, applicantBookStorage.getApplicantBookFilePath());
+    }
+
+    @Override
+    public void saveApplicantBook(ReadOnlyApplicantBook applicantBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to applicant book data file: " + filePath);
+        applicantBookStorage.saveApplicantBook(applicantBook, filePath);
     }
 }
