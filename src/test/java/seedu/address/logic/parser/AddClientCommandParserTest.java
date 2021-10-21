@@ -59,6 +59,7 @@ public class AddClientCommandParserTest {
                 "name -pn 43532510 -e @email -a Singapore"));
     }
 
+    /*
     @Test
     public void parse_allFieldsPresent_success() {
         Name name = new Name("John Doe");
@@ -83,6 +84,7 @@ public class AddClientCommandParserTest {
         descriptor.setEmail(null);
         testValidAttributes("John Doe -pn 12345678 -a Singapore", descriptor);
     }
+    */
 
     private void testValidAttributes(String args, AddClientCommand.AddClientDescriptor descriptor) {
         try {

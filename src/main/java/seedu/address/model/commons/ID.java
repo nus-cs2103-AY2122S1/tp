@@ -21,7 +21,7 @@ public class ID {
 
     private final int id;
 
-    private ID(int id) {
+    public ID(int id) {
         this.id = id;
     }
 
