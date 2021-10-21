@@ -38,7 +38,7 @@ public class HelpCommand extends Command {
      * @param helpMessage of the command needed to be clarified by the users
      */
     public HelpCommand(String commandWord, String helpMessage) {
-        requireAllNonNull(helpMessage);
+        requireAllNonNull(helpMessage, commandWord);
         this.commandWord = commandWord;
         this.helpMessage = helpMessage;
         this.isGeneralHelp = false;
