@@ -138,14 +138,20 @@ Prefix Input Specifications:
     * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
     * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ####YEARS_OF_EXPERIENCE `y/`
-  * A YEARS_OF_EXPERIENCE should
+  * A YEARS_OF_EXPERIENCE should be a non-negative integer smaller than or equals to 67 (re-employment age in Singapore).
   * For example:
+    * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
+    * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.5`, and `100` are not acceptable.
 * ####TAG `t/`
   * A TAG should only contain **alphanumeric** characters. Spaces between words are **not** allowed.
   * For example:
     * TAG inputs such as `friends` and `colleagues` are allowed.
     * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
-
+* ####Interview `i/`
+  * An interview should follow the DateTime format `yyyy-MM-dd, H:mm`.
+  * For example: 
+    * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
+    * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable.  
 ### Listing all applicants : `list`
 
 Shows a list of all applicants in RecruitIn.
