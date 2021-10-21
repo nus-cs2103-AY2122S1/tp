@@ -22,8 +22,6 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
    * Add description to contact: [remark](#remark)
 
-   * Tag a contact: [tag](#tag)
-
    * Exiting the app: [exit / quit](#exit)
 
 * [Saving the data](#saving-data)
@@ -200,18 +198,6 @@ Examples:
 * `remark 2 currently overseas`
 ***
 
-### Tag a contact: `tag` <a name="tag"></a>
-
-Tags a contact with a category.
-
-Format: `tag {INDEX} {TAG}`
-
-Examples:
-* `tag Ben CS2103T`
-* `tag Mary Overseas`
-
-***
-
 ### Exiting the program : `exit` <a name="exit"></a>
 
 Exits the program.
@@ -246,5 +232,4 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 | delete / rm / d   | `delete {INDEX}`/`delete {INDEX_A}-{INDEX_B}`/`delete m/{MODULE_CODE}`                                    | `delete 2`/`delete 2-5`/`delete m/CS2103T`|
 | clear / clr       | `clear`                                                                                                   | `clear`                    |
 | remark            | `remark {INDEX} {DESCRIPTION}`                                                                            | `remark 2 absent`          |
-| tag               | `tag {INDEX} {TAG}`                                                                                       | `tag 2 overseas`           |
 | exit / quit / q   | `exit`                                                                                                    | `exit`                     |
