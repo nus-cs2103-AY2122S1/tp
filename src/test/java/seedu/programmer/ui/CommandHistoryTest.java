@@ -16,9 +16,14 @@ public class CommandHistoryTest {
 
         CommandHistory commandHistoryTwo = new CommandHistory();
         commandHistoryTwo.add("test input one");
-        commandHistoryTwo.add("test input two");
 
+        assertNotEquals(commandHistoryOne, commandHistoryTwo);
+
+        commandHistoryTwo.add("test input two");
         assertEquals(commandHistoryOne, commandHistoryTwo);
+
+        commandHistoryTwo.add("test input three");
+        assertNotEquals(commandHistoryOne, commandHistoryTwo);
     }
 
     @Test
