@@ -10,8 +10,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.group.Description;
-import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -43,9 +41,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUP_NAME).get());
 
-        // Actual description will be grabbed from group that should already exist in csBook
-        Group group = new Group(groupName, new Description("placeholder"));
-        Student student = new Student(name, telegramHandle, email, group);
+        Student student = new Student(name, telegramHandle, email, groupName);
 
         return new AddCommand(student);
     }

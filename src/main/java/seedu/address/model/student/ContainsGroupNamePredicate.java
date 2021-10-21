@@ -15,7 +15,7 @@ public class ContainsGroupNamePredicate implements Predicate<Student> {
     @Override
     public boolean test(Student student) {
         //TODO : Change student.getGroup().getGroupName() to student.getGroupName() once we change student group field
-        return groupName.equals(student.getGroup().getGroupName());
+        return groupName.equals(student.getGroupName());
     }
 
     @Override

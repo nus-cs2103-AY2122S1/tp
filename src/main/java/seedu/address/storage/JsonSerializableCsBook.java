@@ -88,12 +88,12 @@ class JsonSerializableCsBook {
         ObservableList<Group> groupList = csBook.getGroupList();
         for (Group groupWithoutStudentList : groupList) {
             List<Student> studentsInGroup = csBook.getStudentList().stream()
-                    .filter(student -> student.getGroup().equals(groupWithoutStudentList)).collect(Collectors.toList());
+                    .filter(student -> student.getGroupName().equals(groupWithoutStudentList.getGroupName()))
+                    .collect(Collectors.toList());
             Group groupWithStudentList = new Group(groupWithoutStudentList.getGroupName(),
                     groupWithoutStudentList.getDescription());
             groupWithStudentList.addAllStudents(studentsInGroup);
             csBook.setGroup(groupWithoutStudentList, groupWithStudentList);
         }
     }
-
 }

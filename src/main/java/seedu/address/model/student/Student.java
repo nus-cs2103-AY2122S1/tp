@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -19,17 +18,17 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private final Group group;
+    private final GroupName groupName;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, TelegramHandle telegramHandle, Email email, Group group) {
-        requireAllNonNull(name, telegramHandle, email, group);
+    public Student(Name name, TelegramHandle telegramHandle, Email email, GroupName groupName) {
+        requireAllNonNull(name, telegramHandle, email, groupName);
         this.name = name;
         this.telegramHandle = telegramHandle;
         this.email = email;
-        this.group = group;
+        this.groupName = groupName;
     }
 
     public Name getName() {
@@ -44,12 +43,8 @@ public class Student {
         return email;
     }
 
-    public Group getGroup() {
-        return group;
-    }
-
     public GroupName getGroupName() {
-        return group.getGroupName();
+        return groupName;
     }
 
     /**
@@ -83,13 +78,13 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getTelegramHandle().equals(getTelegramHandle())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getGroup().equals(getGroup());
+                && otherStudent.getGroupName().equals(getGroupName());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, telegramHandle, email, getGroupName());
+        return Objects.hash(name, telegramHandle, email, groupName);
     }
 
     @Override

@@ -6,13 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
-import java.util.List;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupContainsKeywordsPredicate;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
 
 
@@ -58,17 +53,13 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        if (!model.hasGroup(toAdd.getGroup())) {
+        // Check that given groupName can identify an existing group in the model
+        if (!model.hasGroup(toAdd.getGroupName())) {
             throw new CommandException(MESSAGE_GROUP_NONEXISTENT);
         }
 
-        // Retrieve existing group in model
-        GroupName groupName = toAdd.getGroup().getGroupName();
-        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(List.of(groupName.toString())));
-        Group retrievedGroup = model.getFilteredGroupList().get(0);
-
         Student studentToAdd =
-                new Student(toAdd.getName(), toAdd.getTelegramHandle(), toAdd.getEmail(), retrievedGroup);
+                new Student(toAdd.getName(), toAdd.getTelegramHandle(), toAdd.getEmail(), toAdd.getGroupName());
 
         // Add student with the group fetched from the data in the model
         model.addStudent(studentToAdd);
