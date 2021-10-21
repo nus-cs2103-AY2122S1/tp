@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
+import seedu.address.model.commons.ID;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -131,10 +132,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasProduct(int productId) {
+    public boolean hasProduct(ID productId) {
         requireAllNonNull(productId);
         FilteredList<Product> products = new FilteredList<>(addressBook.getProductList());
-        return products.stream().anyMatch(product -> product.getId().getId() == productId);
+        return products.stream().anyMatch(product -> product.getId().equals(productId));
     }
 
     @Override
@@ -156,9 +157,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Product getProductById(int productId) {
+    public Product getProductById(ID productId) {
         FilteredList<Product> products = new FilteredList<>(addressBook.getProductList());
-        products.setPredicate(product -> product.getId().getId() == productId);
+        products.setPredicate(product -> product.getId().equals(productId));
         return products.get(0);
     }
 
