@@ -1,7 +1,7 @@
 [![CI Status](https://github.com/AY2122S1-CS2103T-F13-4/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-F13-4/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-F13-4/tp/branch/master/graph/badge.svg?token=2Q2DXU84EP)](https://codecov.io/gh/AY2122S1-CS2103T-F13-4/tp)
 
-![Ui](docs/images/UserGuideImage/Ui.png)
+![Ui](docs/images/Ui.png)
 
 ### TuitiONE allows customer service officers to get their student management tasks done quickly and easily.
 <br>

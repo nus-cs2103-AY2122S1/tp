@@ -13,7 +13,7 @@ Here is our module coordinator's
 
 ### Justin Ee
 
-<img src="images/DeveloperProfilePic/eezj35.png" width="200px">
+<img src="images/eezj35.png" width="200px">
 
 [[github](https://github.com/eezj35)]
 [[portfolio](team/eezj35.md)]
@@ -23,7 +23,7 @@ Here is our module coordinator's
 
 ### Michael Lee
 
-<img src="images/DeveloperProfilePic/michael-lee-sk.png" width="200px">
+<img src="images/michael-lee-sk.png" width="200px">
 
 [[github](http://github.com/michael-lee-sk)]
 [[portfolio](team/michael-lee-sk.md)]
@@ -33,7 +33,7 @@ Here is our module coordinator's
 
 ### Rickie Li
 
-<img src="images/DeveloperProfilePic/mgrl2201.png" width="200px">
+<img src="images/mgrl2201.png" width="200px">
 
 [[github](http://github.com/mgrl2201)]
 [[portfolio](team/mgrl2201.md)]
@@ -43,7 +43,7 @@ Here is our module coordinator's
 
 ### Shiyuan Yang
 
-<img src="images/DeveloperProfilePic/timothyoung97.png" width="200px">
+<img src="images/timothyoung97.png" width="200px">
 
 [[github](http://github.com/timothyoung97)]
 [[portfolio](team/timothyoung97.md)]
@@ -53,7 +53,7 @@ Here is our module coordinator's
 
 ### Muhammad Khair
 
-<img src="images/DeveloperProfilePic/muhammad-khair.png" width="200px">
+<img src="images/muhammad-khair.png" width="200px">
 
 [[github](http://github.com/muhammad-khair)]
 [[portfolio](team/muhammad-khair.md)]
