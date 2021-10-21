@@ -29,7 +29,7 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `NUSpam.jar` (Coming Soon).
+1. Download the latest `Spam.jar` (Coming Soon).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your NUSpam.
 
@@ -108,7 +108,7 @@ Examples:
 ### Batch importing contacts: `import`
 
 Imports all contacts from a selected _csv_ file. Calling the command will open a file browser to help select the file.
-  
+
 Format: `import`
 
 Example:
@@ -118,7 +118,8 @@ Example:
 - Select `importTemplate.csv` file.
 - Click open to import contacts.
 
-Note:  
+Note:
+
 - `.csv` file must have corresponding **headers**:
   - name
   - phone
@@ -133,7 +134,7 @@ Note:
 Sneak peek:
 
 ![csv template](images/csvTemplate.png)
-  
+
 ### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
@@ -161,19 +162,34 @@ Examples:
 
 Finds persons whose name, phone number, email, address and/or tag contain contains any of the given keywords.
 
-Format: `find (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`
+Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
 
 - At least one of the optional fields must be provided.
 - The search is case-insensitive. e.g `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Persons matching at least one keyword in **an** option will be returned (i.e. `OR` search for individual fields).
+
+  e.g. `Hans Bo` will return:
+
+  - `Hans Gruber`
+  - `Bo Yang`
+
+- Persons matching **all** given options will be returned (i.e. `AND` search for multiple fields).
+
+  e.g. `-n Hans Bo -p 12345678` will return:
+
+  - `Name: Hans, Phone: 12345678`
+  - `Name: Bo, Phone: 12345678`
+
+  But not:
+
+  - `Name: Hans Bo, Phone: 87654321`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find -n John` returns `john` and `John Doe`
+- `find -n alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person: `delete`
