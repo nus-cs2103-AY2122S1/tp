@@ -9,21 +9,26 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 --------------------------------------------------------------------------------------------------------------------
 
+* Table of Contents 
+{:toc}
+
+<!---
 ## Table of Contents
-    1. Quick Start
-    2. Features
-        1. Viewing help `help`
-        2. Adding a person `add`
-        3. Listing all persons `list`
-        4. Editing a person `edit`
-        5. Locating persons by name `find`
-        6. Deleting a person `delete`
-        7. Clearing all entries `clear`
-        8. Exiting the program `exit`
-        9. Saving the data
-        10. Editing the data file
-    3. FAQ
-    4. Command Summary
+1. Quick Start
+2. Features
+     1. Viewing help `help`
+     2. Adding a person `add`
+     3. Listing all persons `list`
+     4. Editing a person `edit`
+     5. Locating persons by name `find`
+     6. Deleting a person `delete`
+     7. Clearing all entries `clear`
+     8. Exiting the program `exit`
+     9. Saving the data
+     10. Editing the data file
+3. FAQ
+4. Command Summary
+--->
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -41,9 +46,9 @@ type fast, Socius can get your contact management tasks done faster than traditi
    
 1. Note that the app comes with some sample data by default. Type `clear` in the command box to remove those sample data.
 
-1. You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [command summary](#command-summary) for an overview of all commands.
+1. You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
 
-1. The following are some example of commands you can try. Type the command in the command box and press `Enter` to execute it.
+1. The following are some example of commands you can try. Type the command in the command box and press `⤷Enter` to execute it.
     
     * **`list`** : Lists all contacts.
 
