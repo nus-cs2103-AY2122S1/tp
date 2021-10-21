@@ -58,10 +58,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
-Each of the main components (also shown in the diagram above), except `Encryption`,
+Each of the main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -147,11 +147,11 @@ The `Storage` component,
 
 ### Encryption component
 
-**API** : `Cryptable.java`
+**API** : `Encryption.java`
 
-<img src="images/CryptableClassDiagram.png" width="200" />
+<img src="images/EncryptionClassDiagram.png" width="200" />
 
-The `Cryptable` component,
+The `Encryption` component,
 * encrypts data files and writes to `.enc` format.
   * accepts file in any format for encryption, per the supplied `Path`.
 * decrypts data files from `.enc` format.
