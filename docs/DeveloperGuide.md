@@ -209,8 +209,8 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
   - Pros:
   	- Meets target user profile by utilising CLI rather than GUI.
   - Cons:
-  	- User has to search for the csv file's absolute path.
-  	- File could not exist or be in the wrong format. Would require additional exception handling.
+  	- More troublesome for the user as user has to search for the csv file's absolute path.
+  	- File could also not exist or be in the wrong format. Would require additional exception handling.
     
 ### Encryption
 
