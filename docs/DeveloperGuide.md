@@ -129,7 +129,7 @@ The user executes `tadd /n take attendance /m 1 /m 2`. The parser will be called
 The parser will then parse the input to create a TaddCommand with task name as "take attendance" and member ids 1 and 2.
 This command will add the task "take attendance" to the first and second member of the member list.
 
-### Delete a task feature for a member or several members
+### Delete a task feature for a member
 
 #### Current Implementation
 
