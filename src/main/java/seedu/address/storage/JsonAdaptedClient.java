@@ -1,6 +1,10 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,6 +15,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 
 /**
  * Jackson-friendly version of {@link Client}.
@@ -22,17 +27,22 @@ class JsonAdaptedClient {
     private final String phoneNumber;
     private final String email;
     private final String address;
+    private final List<JsonAdaptedOrder> ordered = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedClient} with the given client details.
      */
     @JsonCreator
     public JsonAdaptedClient(@JsonProperty("name") String name, @JsonProperty("phoneNumber") String phoneNumber,
-                             @JsonProperty("email") String email, @JsonProperty("address") String address) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("ordered") List<JsonAdaptedOrder> ordered) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
+        if (ordered != null) {
+            this.ordered.addAll(ordered);
+        }
     }
 
     /**
@@ -44,6 +54,9 @@ class JsonAdaptedClient {
 
         email = isNull(source.getEmail()) ? null : source.getEmail().value;
         address = isNull(source.getAddress()) ? null : source.getAddress().value;
+        ordered.addAll(source.getOrders().stream()
+                .map(JsonAdaptedOrder::new)
+                .collect(Collectors.toList()));
     }
 
     private <T> boolean isNull(T obj) {
@@ -91,6 +104,12 @@ class JsonAdaptedClient {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
 
-        return new Client(modelName, modelPhoneNumber, modelEmail, modelAddress, new HashSet<>());
+        final List<Order> clientOrders = new ArrayList<>();
+        for (JsonAdaptedOrder order : ordered) {
+            clientOrders.add(order.toModelType());
+        }
+        final Set<Order> modelOrders = new HashSet<>(clientOrders);
+
+        return new Client(modelName, modelPhoneNumber, modelEmail, modelAddress, modelOrders);
     }
 }
