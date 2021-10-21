@@ -293,10 +293,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their expected salary      | filter out applicants that match the salary range of the hiring company   |
 | `* * *`  | user                                       | find applicants by their level of education   | filter out applicants that match the desired highest level of education   |
 | `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
+| `* * *`  | user                                       | find applicants by their interview time       | know how many applicants will have interview on a specific time           |
 | `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
 | `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
-
 
 *{More to be added}*
 
