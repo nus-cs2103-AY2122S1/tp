@@ -158,32 +158,46 @@ This section describes some noteworthy details on how certain features are imple
 
 This command allows searching for residents subjected to 1 or more filters for the different available parameters.
 
-How the flow of logic works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+How the parsing works:
+1. When `Logic` is called upon to execute the command, it uses the `AddressBookParser` class to parse the user command.
 1. If the command was run in the `ResidentTab` it results in a `FindCommandParser` object created and it's `parse` method called with the user input.
-1. The parsing attempts to create a `FindCommand` object. For each existing prefix, it sets the relevant field of a new `FindCompositePredicateThe` object. Parsing of any of the provided values can throw a `ParseException` command can communicate with the `Model` when it is executed (e.g. to add a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. The parsing attempts to create a `FindCommand` object. For each existing prefix, it sets the relevant field of a new `FindCompositePredicate` object.
+1. Parsing of any of the provided values can throw a `ParseException` if invalid. If at least one field is set, a `FindCommand` object is returned. If all are unspecified, an exception is thrown.
+1. The command is executed and the result encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Note:
  - Name can take in multiple keywords separated by whitespace
  - `lastFetDate` and `lastCollectionDate` are not included
  - Room filtering is extended to allow block, level and block-level filtering as well
 
-The following activity diagram illustrates how the `AddressBook#findPerson()` method works:
 
-![FindPersonActivityDiagram](images/logic/commands/includecommand/FindPersonActivityDiagram.png)
+The following sequence diagram demonstrates what happens when the `FindCommand` is executed:
 
-The command extends the `Command` class and implements `FindCommand#execute()` to execute the command. A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
+![FindCommandSequenceDiagram](images/logic/commands/findcommand/FindCommandSequenceDiagram.png)
 
-When `Event#addResidentsToEvent()` is called, it calls `ResidentList#addResidentList()` to create a new String `newResidents` that consists of current `Person` in the `Event` and append all the `Person` in `toAdd` to this String while making sure that there is no duplicate.
+The command extends the `Command` class and implements `FindCommand#execute()` to execute the command.
 
-The following sequence diagram demonstrates what happens when the `IncludeCommand` is executed:
+The crucial logic underlying is encapsulated in the `FindCompositePredicate` class. This class holds the filtering variables and constructs the required predicate for filtering. The `test` method creates and combines the predicates as shown:
 
-![IncludeCommandSequenceDiagram](images/logic/commands/includecommand/IncludeCommandSequenceDiagram.png)
+```java
+@Override
+public boolean test(Person person) {
+    List<Predicate<Person>> allPredicates = Arrays.asList(
+        p -> getName().orElse(x -> true).test(p),
+        p -> getRoom().orElse(x -> true).test(p),
+        p -> getPhone().orElse(x -> true).test(p.getPhone()),
+        p -> getEmail().orElse(x -> true).test(p.getEmail()),
+        p -> getVaccStatus().orElse(x -> true).test(p.getVaccStatus()),
+        p -> getFaculty().orElse(x -> true).test(p.getFaculty()));
 
-The following activity diagram summarizes what happens when the `IncludeCommand` is executed:
+    return allPredicates
+            .stream()
+            .reduce(p -> true, Predicate::and)
+            .test(person);
+}
+```
 
-![IncludeCommandActivityDiagram](images/logic/commands/includecommand/IncludeCommandActivityDiagram.png)
+Most variables are checked against using it's respective `equals` method except for `Name` and `Room` for which separate predicates implementing `Predicate<Person>` have been created. This is done to support 1. Multiple keywords matching for name and 2. Room matching by block, level and block-level.
 
 #### Design considerations:
 
