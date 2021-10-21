@@ -9,7 +9,8 @@
     "expectedSalary" : "2500",
     "levelOfEducation" : "PhD",
     "experience" : "0",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "interview" : "-"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
@@ -19,7 +20,9 @@
     "expectedSalary" : "2700",
     "levelOfEducation" : "Masters",
     "experience" : "1",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "interview" : "2021-10-22, 10:00"
+
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
@@ -29,7 +32,8 @@
     "expectedSalary" : "5500",
     "levelOfEducation" : "Elementary",
     "experience" : "2",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "interview" : "-"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
@@ -39,7 +43,8 @@
     "expectedSalary" : "3500",
     "levelOfEducation" : "Middle School",
     "experience" : "3",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "interview" : "-"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
@@ -49,7 +54,8 @@
     "expectedSalary" : "5700",
     "levelOfEducation" : "Bachelors",
     "experience" : "4",
-    "tagged" : [ "old" ]
+    "tagged" : [ "old" ],
+    "interview" : "-"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
@@ -59,7 +65,8 @@
     "expectedSalary" : "1900",
     "levelOfEducation" : "High School",
     "experience" : "5",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "interview" : "-"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
@@ -69,6 +76,7 @@
     "expectedSalary" : "900",
     "levelOfEducation" : "University",
     "experience" : "6",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "interview" : "-"
   } ]
 }

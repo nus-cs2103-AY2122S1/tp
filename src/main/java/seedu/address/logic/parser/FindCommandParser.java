@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,6 +21,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interview.InterviewContainsKeywordsPredicate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.EmploymentType;
@@ -59,7 +61,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
                         PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
-                        PREFIX_EXPERIENCE, PREFIX_TAG);
+                        PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW);
 
         // If find command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
@@ -117,6 +119,10 @@ public class FindCommandParser implements Parser<FindCommand> {
 
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 addToPredicateList(extractTagPrefixInput(argMultimap));
+            }
+
+            if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
+                addToPredicateList(extractInterviewPrefixInput(argMultimap));
             }
         }
 
@@ -314,6 +320,25 @@ public class FindCommandParser implements Parser<FindCommand> {
                     }
                 }
                 return new TagContainsKeywordsPredicate(Arrays.asList(keywords));
+            }
+            return null;
+        }
+
+        private InterviewContainsKeywordsPredicate extractInterviewPrefixInput(ArgumentMultimap argMultimap)
+                throws ParseException {
+            assert argMultimap.getValue(PREFIX_INTERVIEW).isPresent()
+                    : "No inputs for Prefix Interview exists.";
+            String arg = argMultimap.getValue(PREFIX_INTERVIEW).get();
+            String trimmedArg = arg.trim();
+            if (!trimmedArg.isEmpty()) {
+                // check that keywords do not contain alphabets
+                String[] keywords = splitByWhiteSpace(trimmedArg);
+                for (String keyword : keywords) {
+                    if (!InterviewContainsKeywordsPredicate.isValidInterviewKeyword(keyword)) {
+                        throw new ParseException(InterviewContainsKeywordsPredicate.MESSAGE_CONSTRAINTS);
+                    }
+                }
+                return new InterviewContainsKeywordsPredicate(Arrays.asList(keywords));
             }
             return null;
         }

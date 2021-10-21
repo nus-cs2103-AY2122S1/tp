@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -213,5 +215,24 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String interview} into a {@code Interview}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code interview} is invalid.
+     */
+    public static Optional<Interview> parseInterview(String interview) throws ParseException {
+        requireNonNull(interview);
+        String trimmedTime = interview.trim();
+        if (interview.isEmpty()) { // parse empty interview
+            return Optional.of(Interview.EMPTY_INTERVIEW);
+        }
+
+        if (!Interview.isValidInterviewTime(trimmedTime)) {
+            throw new ParseException(Interview.MESSAGE_CONSTRAINTS);
+        }
+        return Optional.of(new Interview(interview));
     }
 }

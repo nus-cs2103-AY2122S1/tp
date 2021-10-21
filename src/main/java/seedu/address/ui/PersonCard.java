@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
 /**
@@ -47,11 +48,14 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label experience;
     @FXML
+    private Label interview;
+    @FXML
     private FlowPane tags;
     @FXML
     private FlowPane done;
     @FXML
     private FlowPane notDone;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,6 +72,8 @@ public class PersonCard extends UiPart<Region> {
         expectedSalary.setText("Expected Salary: $" + person.getExpectedSalary().value);
         levelOfEducation.setText("Level of Education: " + person.getLevelOfEducation().levelOfEducation);
         experience.setText("Years of Experience: " + person.getExperience().value);
+        interview.setText("Interview Time: " + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime);
+
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
