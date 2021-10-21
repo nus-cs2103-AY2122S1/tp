@@ -125,9 +125,6 @@ Other available optional fields for a student are:
 * Tags
 * Lessons
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can add multiple tags and lessons to a student in TAB.
-</div>
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -288,9 +285,9 @@ Examples:
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
-A `Lesson` **must** have the following fields: a start date, a time range and a subject.
+A lesson **must** have the following fields: a start date, a time range and a subject.
 
-A `Lesson` can be categorised into 2 types: 
+A lesson can be categorised into 2 types: 
 1. A **weekly** recurring lesson
 2. A one-off makeup lesson.
 
@@ -307,11 +304,7 @@ This rate will be used in the calculation of fees due after each lesson.
 </div>
 
 An optional field for a lesson is:
-* homework 
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can add multiple pieces of homework to a lesson in TAB.
-</div>
+* homework
 <br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -333,6 +326,10 @@ Adds a lesson with the corresponding details to the specified student in TAB.
 * Rate
 
 Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add multiple pieces of homework to a lesson in TAB.
+</div>
 
 <div markdown="block" class="alert alert-info">
 
