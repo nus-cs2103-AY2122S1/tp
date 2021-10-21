@@ -1,8 +1,7 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
-
-# Socius User Guide
 
 Socius is a **desktop app for managing CS2103T tutorial classmates’ contacts for international students, optimized for
 use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can
