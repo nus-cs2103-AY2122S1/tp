@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,11 +18,20 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Contacts with completed SHN periods have been cleared!";
 
+    private Clock clock;
+
+    public ClearCommand() {
+        this.clock = Clock.systemDefaultZone();
+    }
+
+    public ClearCommand(Clock clock) {
+        this.clock = clock;
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> lastShownListCopy = List.copyOf(model.getFilteredPersonList());
 
         // A dummy SHN period for contacts that do not have SHN periods
         // These contacts will be ignored as the endDate is always set to the future
@@ -29,9 +39,9 @@ public class ClearCommand extends Command {
         ShnPeriod dummyIncompleteShnPeriod = new ShnPeriod(LocalDate.of(2000, 1, 1),
                 futureDate);
 
-        for (int i = 0; i < lastShownList.size(); i++) {
-            Person person = lastShownList.get(i);
-            if (person.getShnPeriod().orElse(dummyIncompleteShnPeriod).isCompletedBy(LocalDate.now())) {
+        for (int i = 0; i < lastShownListCopy.size(); i++) {
+            Person person = lastShownListCopy.get(i);
+            if (person.getShnPeriod().orElse(dummyIncompleteShnPeriod).isCompletedBy(LocalDate.now(clock))) {
                 model.deletePerson(person);
             }
         }

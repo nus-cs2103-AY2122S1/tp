@@ -29,7 +29,8 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "caseNumber" : "7",
-    "homeAddress" : "wall street"
+    "homeAddress" : "wall street",
+    "shnPeriod": "2020-04-13 => 2021-04-27"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",

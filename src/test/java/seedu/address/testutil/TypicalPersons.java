@@ -40,7 +40,8 @@ public class TypicalPersons {
             .withShnPeriod("2020-04-13 => 2020-04-27").withNextOfKinName("John Green").withNextOfKinPhone("84515153")
             .withNextOfKinAddress("120 Hillview Avenue #06-02").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withCaseNumber("7").withHomeAddress("wall street").build();
+            .withEmail("heinz@example.com").withCaseNumber("7").withHomeAddress("wall street")
+            .withShnPeriod("2020-04-13 => 2021-04-27").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withCaseNumber("8").withHomeAddress("10th street").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
