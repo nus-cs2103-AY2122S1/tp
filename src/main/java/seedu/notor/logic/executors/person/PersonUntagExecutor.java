@@ -3,39 +3,31 @@ package seedu.notor.logic.executors.person;
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.notor.commons.core.index.Index;
-import seedu.notor.commons.util.CollectionUtil;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
-import seedu.notor.model.person.Note;
 import seedu.notor.model.person.Person;
-import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
 
 /**
- * Executor for a PersonTagCommand.
+ * Executor for a PersonUntagCommand.
  */
-public class PersonTagExecutor extends PersonExecutor {
-    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Added Tags to %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "The person already has these tags";
+public class PersonUntagExecutor extends PersonExecutor {
+    public static final String MESSAGE_TAG_PERSON_SUCCESS = "Removed Tags from %1$s";
+    public static final String MESSAGE_TAGS_NOT_FOUND = "The person does not have any of these tag(s)";
 
     private final Set<Tag> tags;
 
     /**
-     * Constructor for a PersonTagExecutor instance.
+     * Constructor for a PersonUntagExecutor instance.
      *
      * @param index Index of the person to be edited.
      * @param tags Tags to add.
      */
-    public PersonTagExecutor(Index index, Set<Tag> tags) {
+    public PersonUntagExecutor(Index index, Set<Tag> tags) {
         super(index);
         requireAllNonNull(index, tags);
         this.tags = tags;
@@ -47,7 +39,7 @@ public class PersonTagExecutor extends PersonExecutor {
         Person taggedPerson = createTaggedPerson(person, tags);
 
         if (!person.isSame(taggedPerson) && model.hasPerson(taggedPerson)) {
-            throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
+            throw new ExecuteException(MESSAGE_TAGS_NOT_FOUND);
         }
 
         model.setPerson(person, taggedPerson);
@@ -56,14 +48,14 @@ public class PersonTagExecutor extends PersonExecutor {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToTag} with tags added. If the
-     * tags are already present, it will return the same person.
+     * Creates and returns a {@code Person} with the details of {@code personToTag} with tags removed, if they
+     * are present. If the tags are not present in the tagged person, it will return the same person.
      */
     private static Person createTaggedPerson(Person personToTag, Set<Tag> tags) {
         assert personToTag != null;
 
         Set<Tag> updatedTags = new HashSet<>(personToTag.getTags());
-        updatedTags.addAll(tags);
+        updatedTags.removeAll(tags);
 
         return new Person(personToTag.getName(), personToTag.getPhone(), personToTag.getEmail(),
                 personToTag.getNote(), updatedTags);
@@ -77,11 +69,11 @@ public class PersonTagExecutor extends PersonExecutor {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonTagExecutor)) {
+        if (!(other instanceof PersonUntagExecutor)) {
             return false;
         }
 
-        PersonTagExecutor e = (PersonTagExecutor) other;
+        PersonUntagExecutor e = (PersonUntagExecutor) other;
 
         // state check
         return super.equals(other) && tags.equals(e.tags);

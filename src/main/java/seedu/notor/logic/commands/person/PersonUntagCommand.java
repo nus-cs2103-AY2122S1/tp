@@ -9,23 +9,23 @@ import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonExecutor;
-import seedu.notor.logic.executors.person.PersonTagExecutor;
+import seedu.notor.logic.executors.person.PersonUntagExecutor;
 import seedu.notor.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in Notor.
  */
-public class PersonTagCommand extends PersonCommand {
+public class PersonUntagCommand extends PersonCommand {
 
-    public static final String COMMAND_WORD = "tag";
+    public static final String COMMAND_WORD = "untag";
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + ": Adds tags to the person identified by the index number used in the displayed person list,"
-            + " if they do not already have them. You may list multiple tags separated by commas \n"
+            + ": Removes tags from the person identified by the index number used in the displayed person"
+            + "list, if they exist. You may list multiple tags separated by commas \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_TAG + "TAG]  \n"
+            + "[" + PREFIX_TAG + "TAG ...]  \n"
             + "Example: " + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
-            + PREFIX_TAG + "important, needsSupport";
+            + PREFIX_TAG + "important";
 
     public static final String MESSAGE_NO_TAGS = "At least one tag must be provided.";
 
@@ -38,10 +38,10 @@ public class PersonTagCommand extends PersonCommand {
      * @param index
      * @param tags
      */
-    public PersonTagCommand(Index index, Set<Tag> tags) {
+    public PersonUntagCommand(Index index, Set<Tag> tags) {
         super(index);
         requireAllNonNull(index, tags);
-        this.executor = new PersonTagExecutor(index, tags);
+        this.executor = new PersonUntagExecutor(index, tags);
     }
 
     @Override
@@ -57,12 +57,12 @@ public class PersonTagCommand extends PersonCommand {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonTagCommand)) {
+        if (!(other instanceof PersonUntagCommand)) {
             return false;
         }
 
         // state check
-        PersonTagCommand e = (PersonTagCommand) other;
+        PersonUntagCommand e = (PersonUntagCommand) other;
         return super.equals(other) && executor.equals(e.executor);
     }
 }

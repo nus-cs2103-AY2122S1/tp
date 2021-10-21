@@ -26,6 +26,7 @@ import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
@@ -63,7 +64,8 @@ public class PersonCreateCommandParserTest {
         // zero tags
         String noTag = PersonCommand.COMMAND_WORD + " " + VALID_NAME_BOB + " /" + PersonCreateCommand.COMMAND_WORD
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB;
-        Person expectedPerson = new Person(BOB.getName(), BOB.getPhone(), BOB.getEmail(), new HashSet<>());
+        Person expectedPerson = new Person(BOB.getName(), BOB.getPhone(), BOB.getEmail(), Note.EMPTY_NOTE ,
+                new HashSet<Tag>());
         assertParseSuccess(notorParser.parseCommand(noTag), new PersonCreateCommand(null, expectedPerson));
     }
 

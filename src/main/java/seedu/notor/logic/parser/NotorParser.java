@@ -20,13 +20,15 @@ import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
 import seedu.notor.logic.commands.person.GroupDeleteCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
 import seedu.notor.logic.commands.person.PersonClearNoteCommand;
+import seedu.notor.logic.commands.person.PersonClearTagsCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
-import seedu.notor.logic.commands.tag.TagCommand;
+import seedu.notor.logic.commands.person.PersonTagCommand;
+import seedu.notor.logic.commands.person.PersonUntagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
 import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
@@ -35,12 +37,14 @@ import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonClearNoteCommandParser;
+import seedu.notor.logic.parser.person.PersonClearTagsCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonTagCommandParser;
+import seedu.notor.logic.parser.person.PersonUntagCommandParser;
 
 /**
  * Parses user input.
@@ -137,9 +141,12 @@ public class NotorParser {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 case PersonRemoveGroupCommand.COMMAND_WORD:
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
-                case TagCommand.COMMAND_WORD:
+                case PersonTagCommand.COMMAND_WORD:
                     return new PersonTagCommandParser(index, arguments).parse();
-                // TODO: Implement tag command.
+                case PersonUntagCommand.COMMAND_WORD:
+                    return new PersonUntagCommandParser(index, arguments).parse();
+                case PersonClearTagsCommand.COMMAND_WORD:
+                    return new PersonClearTagsCommandParser(index).parse();
                 default:
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }

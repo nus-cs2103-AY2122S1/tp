@@ -16,12 +16,10 @@ import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 >>>>>>> 3fb9e136 (Feat: Tag Command Working)
 import seedu.notor.logic.commands.person.PersonTagCommand;
-
 import seedu.notor.logic.parser.ArgumentMultimap;
 import seedu.notor.logic.parser.ArgumentTokenizer;
 import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
-import seedu.notor.model.tag.Tag;
 
 <<<<<<< HEAD
 public class PersonTagCommandParser extends PersonCommandParser {
@@ -31,7 +29,7 @@ public class PersonTagCommandParser extends PersonCommandParser {
  */
 public class PersonTagCommandParser extends PersonCommandParser {
     public static final String COMMAND_WORD = "tag";
-    
+
     public PersonTagCommandParser(String unparsedIndex, String arguments) throws ParseException {
         super(unparsedIndex, arguments);
     }
@@ -45,8 +43,7 @@ public class PersonTagCommandParser extends PersonCommandParser {
      */
     public PersonTagCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
 <<<<<<< HEAD
         Index index;
@@ -85,7 +82,7 @@ public class PersonTagCommandParser extends PersonCommandParser {
             throw new ParseException(PersonTagCommand.MESSAGE_NO_TAGS);
         }
         String tags = argMultimap.getValue(PREFIX_TAG).get();
-        
+
         assert tags != null;
         if (tags.isEmpty()) {
             throw new ParseException(PersonTagCommand.MESSAGE_NO_TAGS);
