@@ -1,4 +1,4 @@
-#Developer Guide
+# Developer Guide
 
 ### Table of Contents
 * [Acknowledgements](#acknowledgements)
@@ -176,13 +176,15 @@ This command serves to retrieve a specific `Information` of students.
 All fields of `Student` class which implements the `Information` interface and whose prefix is present in the `InformationWantedFunction` class
 can be queried by `RetrieveCommand`. Hence, for an `Information` to be query-able, it _must_ implement the `Information` interface and its prefix needs
 to be added to the list of supported prefix under `InformationWantedFunction`. If at least one of the two conditions are not fulfilled, compile errors
-will be thrown. The following is the class diagram for `RetrieveCommand`
+will be thrown. The following is the class diagram for `RetrieveCommand`.
+
 ![RetrieveCommandClassDiagram](images/logic/commands/retrievecommand/RetrieveCommandClassDiagram.png)
 
 A `RetrieveCommand` is initialized with a list of `InformationWantedFunction` objects to retrieve the necessary information. Obtaining the queried information
 is done by using the `InformationWantedFunction` objects on all `Student` objects in the model. The specific is shown in the sequence diagram below:
 
 ![RetrieveCommandSequenceDiagram](images/logic/commands/retrievecommand/RetrieveCommandSequenceDiagram.png)
+
 Exactly which field of `Student` should be retrieved is determined by the `Prefix` passed into `InformationWantedFunction` during its creation.
 
 ### SortCommand
