@@ -11,6 +11,7 @@ import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Description;
+import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 /**
@@ -91,19 +92,6 @@ public class ApplicantParserUtil {
             throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
-    }
-
-    /**
-     * Parses a {@code String position} into a {@code Position} with a placeholder description.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @param position the string title of the related position.
-     * @return the Position object of this corresponding position.
-     */
-    public static Position parsePosition(String position) {
-        requireNonNull(position);
-        String trimmedPosition = position.trim();
-        return new Position(new Title(trimmedPosition), new Description(PLACEHOLDER_DESCRIPTION));
     }
 
     // All position related methods

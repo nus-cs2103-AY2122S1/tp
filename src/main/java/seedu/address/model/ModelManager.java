@@ -282,12 +282,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasPositionWithTitle(Title title) {
-        requireNonNull(title);
-        return positionBook.hasPositionWithTitle(title);
-    }
-
-    @Override
     public void addPosition(Position position) {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
