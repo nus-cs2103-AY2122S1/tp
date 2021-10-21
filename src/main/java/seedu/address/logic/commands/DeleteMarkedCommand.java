@@ -16,7 +16,7 @@ public class DeleteMarkedCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_done";
 
-    public static final String MESSAGE_SUCCESS = "Deleted all applicants marked as done";
+    public static final String MESSAGE_SUCCESS = "Deleted all applicants that were marked as done";
 
     @Override
     public CommandResult execute(Model model) {
