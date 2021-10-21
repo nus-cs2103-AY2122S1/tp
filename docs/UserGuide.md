@@ -6,6 +6,8 @@ title: User Guide
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
+This document serves as a guide to help you get started on how to set up and use **TuitiONE**. To start, explore the 'Quick start' section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections to learn more in detail. The 'Command summary' at the end of the document lists a table with all the commands present and their syntax.
+
 * Table of Contents
 {:toc}
 
@@ -231,11 +233,11 @@ Examples:
 
 Displays the student roster of a specified lesson in the student panel.
 
-Command Format: `roster INDEX`
+Command Format: `roster LESSON_INDEX`
 
-* Displays the student roster of the lesson of the specified `INDEX`.
+* Displays the student roster of the lesson of the specified `LESSON_INDEX`.
 * The index refers to the index number shown in the displayed lesson list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The index **must be a positive integer** `1`, `2`, `3`, …
 
 Examples:
 * `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
@@ -283,7 +285,7 @@ Action | Format, Examples
 **Unenroll** | `unenroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `unenroll 1 l/1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **Filter** | `filter [g/GRADE] s[SUBJECT]`<br> e.g. `filter g/P2`
-**View roster** | `roster INDEX` <br> e.g. `roster 1`
+**View roster** | `roster LESSON_INDEX` <br> e.g. `roster 1`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
