@@ -19,22 +19,13 @@ mm --> ac --: lastShownList
 loop for each Index in indexArrayList
     ac -> i ++ : getZeroBased
     i --> ac -- : zero based index
-    ac -> ol ++ : size
-    ol --> ac -- : size of lastShownList
-    ref over ac : IndexWithinRange
-end loop
-
-loop for each Index in indexArrayList
-    ac -> i ++ : getZeroBased
-    i --> ac -- : zero based index
     ac -> ol ++ : get(zero based index)
     ol --> ac -- : studentToEdit
     ac -> st ++ : getAttendance
     st -> sr ++ : getAttendance
     sr --> st --
     st --> ac -- : attendanceToEdit
-    ac -> at ++ : update(studioSession, attendanceStatus)
-    deactivate at
+    ac -> at  : update(studioSession, attendanceStatus)
     ac -> st ++ : getParticipation
     st -> sr ++ : getParticipation
     sr --> st --
