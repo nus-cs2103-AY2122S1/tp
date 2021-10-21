@@ -9,7 +9,8 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [Encrypting and Decrypting Files in Java](https://www.baeldung.com/java-cipher-input-output-stream) from Baeldung
+  * Adapted and modified. See section on _[Encryption](#encryption)_.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -42,12 +43,13 @@ Given below is a quick overview of main components and how they interact with ea
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Encryption`**](#encryption-component): Encrypts and decrypts data
 
 
 **How the architecture components interact with each other**
@@ -56,10 +58,10 @@ The *Sequence Diagram* below shows how the components interact with each other f
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
-Each of the four main components (also shown in the diagram above),
+Each of the main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -132,7 +134,6 @@ The `Model` component,
 
 </div>
 
-
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -140,9 +141,22 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both address book data and user preference data in `.json` format, and read them back into corresponding objects.
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+### Encryption component
+
+**API** : `Encryption.java`
+
+<img src="images/EncryptionClassDiagram.png" width="200" />
+
+The `Encryption` component,
+* encrypts data files and writes to `.enc` format.
+  * accepts file in any format for encryption, per the supplied `Path`.
+* decrypts data files from `.enc` format.
+  * writes to file in any format after decryption, per the supplied `Path`.
+* performs the encryption using a secret key supplied by the `EncryptionKeyGenerator` utility class and the cipher algorithm.
 
 ### Common classes
 
@@ -153,6 +167,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Encryption
+
+**Specifications:**
+* Encryption standard: [AES](https://searchsecurity.techtarget.com/definition/Advanced-Encryption-Standard)
+* Block cipher: AES-256
+* Key generation method: user-supplied password (up to 32 characters long)
+* File extension: [`.enc`](https://fileinfo.com/extension/enc)
+
+#### Implementation
+
+The encryption feature is implemented with the following classes:
+* `EncryptionManager` — Handles the encryption and decryption of data files. 
+  * Needs a `SecretKey`, which is provided by `EncryptionKeyGenerator` utility class.
+  * Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
+* `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-256 compliant keys.
+  * `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex hash function.
+* `MainApp` — `EncryptionManager` is initiated here and passed as parameter to the constructor of `LogicManager`. 
+  * There should be one and only one `EncryptionManager` instance at any time. 
+  * This acts as a single source of truth, which avoids clashing keys.
+* `LogicManager` — The `execute()` method uses `EncryptionManager` to decrypt the program data before consuming the data. 
+  * The entirety of the [**data file lifecycle**](#data-file-lifecycle) happens within the `execute()` method.
+
+An encrypted file can only be decrypted with the same AES key that was used to encrypt it. In this case, the AES keys are generated solely using a password string supplied by the user. Multiple instances of AES keys are said to be the same if the password string used to generate these keys are the same. This definition of equality ensures the validity of the generated key across sessions.
+
+The supplied password string must be 32 characters long (32 characters = 256 bits needed to generate the AES key). Passwords shorter than 32 characters will be padded with `"/"` to extend the number of bits. _Passwords longer than 32 characters are **not** supported._ As a consequence, the length and randomness of the supplied password make up the strength of the encryption. Shorter and less random passwords are most vulnerable to brute force attacks.
+
+#### Data file lifecycle
+
+The program's data undergoes a lifecycle per operation:
+1. The contents of the encrypted data file is decrypted, and is written to a temporary `.json` file.
+2. Other components of the program consumes the `.json` file and modifies its contents.
+3. The modified `.json` file is encrypted and overwrites the contents of the encrypted data file.
+4. The temporary `.json` file is deleted.
+
+The lifecycle ensures the program's data stays encrypted at any point in time. In the event of a program crash, the decrypted file will be impossible to recover, but the encrypted file will stay intact.
+
+The lifecycle can be described by the following sequence diagram:
+
+<img src="images/EncryptionSequenceDiagram.png" width="800">
 
 ### \[Proposed\] Undo/redo feature
 
