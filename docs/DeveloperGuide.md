@@ -179,7 +179,7 @@ This section describes some noteworthy details on how certain features are imple
 #### Implementation
 
 The encryption feature is implemented with the following classes:
-* `Cryptor` — Implements the `Cryptable` API and handles the encryption and decryption of data files. 
+* `EncryptionManager` — Handles the encryption and decryption of data files. 
   * Needs a `SecretKey`, which is provided by `EncryptionKeyGenerator` utility class.
   * Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
 * `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-128 compliant keys.
