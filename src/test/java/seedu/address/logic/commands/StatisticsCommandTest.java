@@ -23,7 +23,7 @@ import seedu.address.model.statistic.Statistic;
 public class StatisticsCommandTest {
 
     private final TutorialGroup tutorialGroup = new TutorialGroup("T09");
-    private final TutorialGroup nonexistentTutorialGroup = new TutorialGroup("99");
+    private final TutorialGroup nonexistentTutorialGroup = new TutorialGroup("T99");
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
