@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.CategoryCode;
-import seedu.address.model.person.IsInFilterPredicate;
+import seedu.address.model.person.IsFilterablePredicate;
 import seedu.address.model.person.Rating;
 
 /**
@@ -26,7 +26,7 @@ public class FilterCommand extends Command {
             + "Example: " + COMMAND_WORD + " c/att" + " ra/5";
 
     private final Set<CategoryCode> categoryCodes;
-    private final IsInFilterPredicate predicate;
+    private final IsFilterablePredicate predicate;
 
     private final Rating rating;
 
@@ -37,7 +37,7 @@ public class FilterCommand extends Command {
     public FilterCommand(Set<CategoryCode> categoryCodes, Rating rating) {
         requireNonNull(categoryCodes);
         this.categoryCodes = categoryCodes;
-        this.predicate = new IsInFilterPredicate(categoryCodes, rating);
+        this.predicate = new IsFilterablePredicate(categoryCodes, rating);
         this.rating = rating;
     }
 

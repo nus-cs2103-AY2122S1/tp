@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 /**
  * Tests that a {@code Person}'s {@code CategoryCode, Rating} matches the specified {@code CategoryCode, Rating}.
  */
-public class IsInFilterPredicate implements Predicate<Person> {
+public class IsFilterablePredicate implements Predicate<Person> {
     private final Set<CategoryCode> categoryCodes;
     private final Rating rating;
 
@@ -15,7 +15,7 @@ public class IsInFilterPredicate implements Predicate<Person> {
      * @param categoryCodes
      * @param rating
      */
-    public IsInFilterPredicate(Set<CategoryCode> categoryCodes, Rating rating) {
+    public IsFilterablePredicate(Set<CategoryCode> categoryCodes, Rating rating) {
         this.categoryCodes = categoryCodes;
         this.rating = rating;
     }
@@ -39,9 +39,9 @@ public class IsInFilterPredicate implements Predicate<Person> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof IsInFilterPredicate// instanceof handles nulls
-                && categoryCodes.equals(((IsInFilterPredicate) other).categoryCodes)
-                && rating.equals(((IsInFilterPredicate) other).rating)); // state check
+                || (other instanceof IsFilterablePredicate// instanceof handles nulls
+                && categoryCodes.equals(((IsFilterablePredicate) other).categoryCodes)
+                && rating.equals(((IsFilterablePredicate) other).rating)); // state check
     }
 
 }

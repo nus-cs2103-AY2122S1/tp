@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
-class IsInFilterPredicateTest {
+class IsFilterablePredicateTest {
 
     @Test
     public void equals() {
@@ -23,16 +23,16 @@ class IsInFilterPredicateTest {
         Rating firstRating = new Rating("2");
         Rating secondRating = new Rating("4");
 
-        IsInFilterPredicate firstPredicate = new IsInFilterPredicate(firstCategoryCodeSet, firstRating);
-        IsInFilterPredicate secondPredicate = new IsInFilterPredicate(secondCategoryCodeSet, secondRating);
-        IsInFilterPredicate thirdPredicate = new IsInFilterPredicate(firstCategoryCodeSet, secondRating);
-        IsInFilterPredicate fourthPredicate = new IsInFilterPredicate(secondCategoryCodeSet, firstRating);
+        IsFilterablePredicate firstPredicate = new IsFilterablePredicate(firstCategoryCodeSet, firstRating);
+        IsFilterablePredicate secondPredicate = new IsFilterablePredicate(secondCategoryCodeSet, secondRating);
+        IsFilterablePredicate thirdPredicate = new IsFilterablePredicate(firstCategoryCodeSet, secondRating);
+        IsFilterablePredicate fourthPredicate = new IsFilterablePredicate(secondCategoryCodeSet, firstRating);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        IsInFilterPredicate firstPredicateCopy = new IsInFilterPredicate(firstCategoryCodeSet, firstRating);
+        IsFilterablePredicate firstPredicateCopy = new IsFilterablePredicate(firstCategoryCodeSet, firstRating);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -51,12 +51,12 @@ class IsInFilterPredicateTest {
     @Test
     public void test_isInCategory_returnsTrue() {
         // One category code
-        IsInFilterPredicate predicate = new IsInFilterPredicate(Collections.singleton(new CategoryCode("fnb")),
+        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
             new Rating("0"));
         assertTrue(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("0").build()));
 
         //Multiple category codes
-        predicate = new IsInFilterPredicate(
+        predicate = new IsFilterablePredicate(
                 new HashSet<>(Arrays.asList(
                     new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
                     new Rating("0"));
@@ -68,12 +68,12 @@ class IsInFilterPredicateTest {
     @Test
     public void test_isInCategory_returnsFalse() {
         //One category code
-        IsInFilterPredicate predicate = new IsInFilterPredicate(Collections.singleton(new CategoryCode("fnb")),
+        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
             new Rating("0"));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("att").build()));
 
         //Multiple category codes
-        predicate = new IsInFilterPredicate(new HashSet<>(Arrays.asList(
+        predicate = new IsFilterablePredicate(new HashSet<>(Arrays.asList(
                 new CategoryCode("acc"), new CategoryCode("tpt"))),
                 new Rating("0"));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("0").build()));
@@ -83,17 +83,17 @@ class IsInFilterPredicateTest {
     @Test
     public void test_isRating_returnsTrue() {
         // No Rating initialises as 0
-        IsInFilterPredicate predicate = new IsInFilterPredicate(Collections.singleton(new CategoryCode("fnb")),
+        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
             new Rating("0"));
         assertTrue(predicate.test(new PersonBuilder().withCategoryCode("fnb").build()));
 
         // One category code
-        predicate = new IsInFilterPredicate(Collections.singleton(new CategoryCode("fnb")),
+        predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
             new Rating("5"));
         assertTrue(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("5").build()));
 
         //Multiple category codes
-        predicate = new IsInFilterPredicate(
+        predicate = new IsFilterablePredicate(
             new HashSet<>(Arrays.asList(
                 new CategoryCode("att"), new CategoryCode("tpt"), new CategoryCode("acc"))),
             new Rating("5"));
@@ -105,12 +105,12 @@ class IsInFilterPredicateTest {
     @Test
     public void test_isRating_returnsFalse() {
         //One category code
-        IsInFilterPredicate predicate = new IsInFilterPredicate(Collections.singleton(new CategoryCode("fnb")),
+        IsFilterablePredicate predicate = new IsFilterablePredicate(Collections.singleton(new CategoryCode("fnb")),
             new Rating("3"));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("fnb").withRating("2").build()));
 
         //Multiple category codes
-        predicate = new IsInFilterPredicate(new HashSet<>(Arrays.asList(
+        predicate = new IsFilterablePredicate(new HashSet<>(Arrays.asList(
             new CategoryCode("acc"), new CategoryCode("tpt"))),
             new Rating("3"));
         assertFalse(predicate.test(new PersonBuilder().withCategoryCode("tpt").withRating("4").build()));
