@@ -179,7 +179,7 @@ public class AddToClassCommand extends Command {
             }
             studentToAdd.addClass(modifiedClass);
             studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " | "
-                    + modifiedClass.getTimeslot().time));
+                    + modifiedClass.getTimeslot()));
             updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         }
         logger.info("Add students [" + logStudentName + "] to class [" + tuitionClass.getName() + "]");

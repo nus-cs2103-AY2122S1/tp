@@ -106,7 +106,7 @@ public class Student implements Nameable {
         for (Integer id : classes.getClasses()) {
             if ((tuitionClass.getId()) == id) {
                 classes.removeClass(id);
-                removeTag(new Tag(tuitionClass.getName().getName() + " | " + tuitionClass.getTimeslot().time));
+                removeTag(new Tag(tuitionClass.getName().getName() + " | " + tuitionClass.getTimeslot()));
                 return this;
             }
         }

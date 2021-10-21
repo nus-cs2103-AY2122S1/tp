@@ -122,7 +122,7 @@ public class Timetable {
      * @param i the position of the tuition class in the tuition class list
      */
     private void insertATuitionClass(TuitionClass tuitionClass, LocalTime startTime, int i) {
-        String date = tuitionClass.getTimeslot().getDay();
+        String date = tuitionClass.getTimeslot().getDayString();
         int colInsert = dates.get(date);
         int rowStartInsert = 6 + Math.round(startTime.until(timeStart.get(i), ChronoUnit.MINUTES) / (float) 10.0);
         int rowFinishInsert;

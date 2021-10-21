@@ -3,7 +3,6 @@ package seedu.address.model.tuition;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -175,8 +174,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
      */
     public ObservableList<TuitionClass> getTodayTuition() {
         LocalDate localDate = LocalDate.now();
-        DayOfWeek weekday = localDate.getDayOfWeek();
-        String today = weekday.toString().substring(0, 3);
+        int today = LocalDate.now().getDayOfWeek().getValue();
         List<TuitionClass> todayTuitionClass = internalList.stream()
                 .filter(tuitionClass -> tuitionClass.matchTheDay(today)).collect(Collectors.toList());
         ObservableList<TuitionClass> observableList = FXCollections.observableList(todayTuitionClass);
@@ -207,7 +205,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
             case DESCENDING:
                 return o2.getName().getName().compareTo(o1.getName().getName());
             case TIME:
-                return o1.getTimeslot().compareTimeOrder(o2.getTimeslot().getTime());
+                //return o1.getTimeslot().compareTimeOrder(o2.getTimeslot().getTime());
             default:
                 return 0;
             }

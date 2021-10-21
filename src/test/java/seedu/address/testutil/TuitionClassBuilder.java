@@ -29,7 +29,7 @@ public class TuitionClassBuilder {
     public TuitionClassBuilder() {
         name = new ClassName(DEFAULT_NAME);
         limit = new ClassLimit(DEFAULT_LIMIT);
-        timeslot = new Timeslot(DEFAULT_TIMESLOT);
+        timeslot = Timeslot.parseString(DEFAULT_TIMESLOT);
         studentList = new StudentList(new ArrayList<>());
         remark = new Remark(DEFAULT_REMARK);
         id = DEFAULT_ID;
@@ -67,7 +67,7 @@ public class TuitionClassBuilder {
      * Sets the {@code Timeslot} of the {@code TuitionClass} that we are building.
      */
     public TuitionClassBuilder withTimeslot(String timeslot) {
-        this.timeslot = new Timeslot(timeslot);
+        this.timeslot = Timeslot.parseString(timeslot);
         return this;
     }
     /**

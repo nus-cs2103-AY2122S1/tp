@@ -2,12 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -186,20 +191,6 @@ public class ParserUtil {
         }
         return new ClassName(trimmedName);
     }
-
-
-    /**
-     * Parses a {@code String timeslot} into a {@code Timeslot}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     */
-    public static Timeslot parseTimeslot(String timeslot) {
-        requireNonNull(timeslot);
-        String trimmedName = timeslot.trim();
-
-        return new Timeslot(trimmedName);
-    }
-
     /**
      * Parses a {@code List students} into a {@code Student}.
      * @param students a list of students, each of which is a string
@@ -236,7 +227,39 @@ public class ParserUtil {
                 args.add(i);
             }
         }
-        //throw  new ParseException(studentIndexes.stream().reduce("", (s, x) -> s+x));
+        Collections.sort(args, (index1, index2) -> {
+            if (index1.getOneBased() < index2.getOneBased()) {
+                return 1;
+            } else if (index1.getOneBased() > index2.getOneBased()) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
         return args;
     }
+
+    /**
+     * Parses a {@code String timeslot} into a {@code Timeslot}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     */
+    public static Timeslot parseTimeslot(String timeslot) throws ParseException {
+        requireNonNull(timeslot);
+        String[] arr = timeslot.trim().split(" ", 2); //Splits day from timings
+        String startTime = String.format("%s %s", arr[0], arr[1].split("-")[0]); //Mon 10:00
+        String endTime = String.format("%s %s", arr[0], arr[1].split("-")[1]); //Mon 11:00
+        DateFormat sdf = new SimpleDateFormat("EEE HH:mm");
+        try {
+            Date start = sdf.parse(startTime);
+            Date end = sdf.parse(endTime);
+            if (start.getTime() >= end.getTime()) {
+                throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+            }
+            return new Timeslot(start, end);
+        } catch (java.text.ParseException e) {
+            throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+        }
+    }
+
 }

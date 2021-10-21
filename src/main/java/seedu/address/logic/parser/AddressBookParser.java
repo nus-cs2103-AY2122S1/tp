@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditClassCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindClassCommand;
@@ -138,6 +139,9 @@ public class AddressBookParser {
         case TimetableCommand.COMMAND_WORD:
         case TimetableCommand.SHORTCUT:
             return new TimetableParser().parse(arguments);
+
+        case EditClassCommand.COMMAND_WORD:
+            return new EditClassCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

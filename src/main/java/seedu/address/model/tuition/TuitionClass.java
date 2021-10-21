@@ -99,8 +99,8 @@ public class TuitionClass implements Nameable {
      * @param weekday
      * @return
      */
-    public boolean matchTheDay(String weekday) {
-        return weekday.equals(this.timeslot.getTime().substring(0, 3).toUpperCase());
+    public boolean matchTheDay(int weekday) {
+        return weekday == timeslot.getStart().getDay();
     }
 
     @Override
@@ -113,13 +113,7 @@ public class TuitionClass implements Nameable {
      * This defines a weaker notion of equality between two tuition classes.
      */
     public boolean isSameTuition(TuitionClass otherTuition) {
-        if (otherTuition == null) {
-            return false;
-        }
-        if (otherTuition == this) {
-            return true;
-        }
-        return otherTuition.getTimeslot().equals(getTimeslot());
+        return this.equals(otherTuition);
     }
 
     //addn/John Doe p/98765432 e/johnd@example.com a/John street, block 123
@@ -130,11 +124,9 @@ public class TuitionClass implements Nameable {
         if (other == this) {
             return true;
         }
-
         if (!(other instanceof Student)) {
             return false;
         }
-
         TuitionClass otherClass = (TuitionClass) other;
         return otherClass.getTimeslot().equals(getTimeslot());
     }
@@ -239,4 +231,16 @@ public class TuitionClass implements Nameable {
     public static TuitionClass getMostRecent() {
         return mostRecent;
     }
+
+    /**
+     *
+     * @param editedClass
+     * @return
+     */
+    public boolean sameClassDetails(TuitionClass editedClass) {
+        return editedClass.getTimeslot().equals(timeslot)
+                && editedClass.getName().equals(name)
+                && editedClass.getLimit().equals(this.getLimit());
+    }
+
 }

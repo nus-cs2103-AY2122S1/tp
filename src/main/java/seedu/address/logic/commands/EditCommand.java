@@ -206,7 +206,7 @@ public class EditCommand extends Command {
         if (other == this) {
             return true;
         }
-        // instanceof handles nulls
+        // instanceof handles nullsw
         if (!(other instanceof EditCommand)) {
             return false;
         }
