@@ -39,7 +39,7 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
-     * Adds a student to the list.
+     * Adds a student to the list and the list is sorted each time.
      * The student must not already exist in the list.
      */
     public void add(Student toAdd) {

@@ -2,6 +2,9 @@ package seedu.programmer.model.student;
 
 import java.util.Comparator;
 
+/**
+ * A class to help sort Students in ascending order.
+ */
 public class SortByName implements Comparator<Student> {
 
     @Override
