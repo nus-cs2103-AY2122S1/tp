@@ -184,10 +184,10 @@ The encryption feature is implemented with the following classes:
   * Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
 * `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-128 compliant keys.
   * `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex hash function.
-* `MainApp` — `Cryptor` is initiated here and passed as parameter to the constructor of `LogicManager`. 
-  * There should be one and only one `Cryptor` instance at any time. 
+* `MainApp` — `EncryptionManager` is initiated here and passed as parameter to the constructor of `LogicManager`. 
+  * There should be one and only one `EncryptionManager` instance at any time. 
   * This acts as a single source of truth, which avoids clashing keys.
-* `LogicManager` — The `execute()` method uses `Cryptor` to decrypt the program data before consuming the data. 
+* `LogicManager` — The `execute()` method uses `EncryptionManager` to decrypt the program data before consuming the data. 
   * The entirety of the [**data file lifecycle**](#data-file-lifecycle) happens within the `execute()` method.
 
 An encrypted file can only be decrypted with the same AES key that was used to encrypt it. In this case, the AES keys are generated solely using a password string supplied by the user. Multiple instances of AES keys are said to be the same if the password string used to generate these keys are the same. This definition of equality ensures the validity of the generated key across sessions.
