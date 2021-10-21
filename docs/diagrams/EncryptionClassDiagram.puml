@@ -5,12 +5,12 @@ skinparam arrowColor ENCRYPTION_COLOR
 skinparam classBackgroundColor ENCRYPTION_COLOR
 
 Package Encryption <<Rectangle>>{
-Interface Cryptable <<Interface>>
-Class Cryptor
+Interface Encryption <<Interface>>
+Class EncryptionManager
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Cryptable
+HiddenOutside ..> Encryption
 
-Cryptor .up.|> Cryptable
+EncryptionManager .up.|> Encryption
 @enduml
