@@ -67,7 +67,7 @@ public class SetCommandTest {
         assertFalse(standardCommand.equals(null));
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertFalse(standardCommand.equals(new ExitCommand()));
 
         // different academic calendar -> returns false
         AcademicYear diffYear = new AcademicYear(2);
