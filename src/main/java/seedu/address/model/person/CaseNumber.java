@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a quarantined person's case number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidCaseNumber(String)}
  */
-public class CaseNumber {
+public class CaseNumber implements Comparable<CaseNumber> {
     public static final String MESSAGE_CONSTRAINTS =
         "Case number should be a positive integer with no leading zeros";
     public static final String VALIDATION_REGEX = "^[1-9]\\d{0,5}$";
@@ -48,4 +48,9 @@ public class CaseNumber {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(CaseNumber otherCaseNumber) {
+        return ((Integer) Integer.parseInt(value))
+                .compareTo(Integer.parseInt(otherCaseNumber.value));
+    }
 }

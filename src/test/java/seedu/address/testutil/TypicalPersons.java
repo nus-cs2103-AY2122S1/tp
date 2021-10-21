@@ -35,7 +35,7 @@ public class TypicalPersons {
             .withShnPeriod("2020-09-23 => 2020-10-07").withNextOfKinName("Anthony Reed").withNextOfKinPhone("92456234")
             .withNextOfKinAddress("4 Jalan Besut").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
-            .withEmail("johnd@example.com").withCaseNumber("6").withHomeAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withCaseNumber("1").withHomeAddress("311, Clementi Ave 2, #02-25")
             .withWorkAddress("29 Flora Rd #01-08").withQuarantineAddress("3 Temasek Boulevard #03-028C")
             .withShnPeriod("2020-04-13 => 2020-04-27").withNextOfKinName("John Green").withNextOfKinPhone("84515153")
             .withNextOfKinAddress("120 Hillview Avenue #06-02").build();
@@ -43,11 +43,11 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withCaseNumber("7").withHomeAddress("wall street")
             .withShnPeriod("2020-04-13 => 2021-04-27").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withCaseNumber("8").withHomeAddress("10th street").build();
+            .withEmail("cornelia@example.com").withCaseNumber("200").withHomeAddress("10th street").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withCaseNumber("9").withHomeAddress("michegan ave").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withCaseNumber("10").withHomeAddress("little tokyo").build();
+            .withEmail("lydia@example.com").withCaseNumber("444442").withHomeAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withCaseNumber("11").withHomeAddress("4th street").build();
 
