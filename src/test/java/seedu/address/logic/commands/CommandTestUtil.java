@@ -48,7 +48,7 @@ public class CommandTestUtil {
     public static final String VALID_NUS_NETWORK_ID_AMY = "e0000000";
     public static final String VALID_NUS_NETWORK_ID_BOB = "e1111111";
     public static final String VALID_TYPE_AMY = "student";
-    public static final String VALID_TYPE_BOB = "student";
+    public static final String VALID_TYPE_BOB = "tutor";
     public static final String VALID_STUDENT_ID_AMY = "A0000000A";
     public static final String VALID_STUDENT_ID_BOB = "A1111111A";
     public static final String VALID_TUTORIAL_ID_AMY = "00";

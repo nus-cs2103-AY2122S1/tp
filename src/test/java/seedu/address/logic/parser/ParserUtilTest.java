@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -36,6 +38,7 @@ public class ParserUtilTest {
     private static final String INVALID_TYPE = "teacher";
     private static final String INVALID_STUDENT_ID = "A000000X";
     private static final String INVALID_TUTORIAL_ID = "000";
+    private static final String INVALID_PATH = "invalid";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -48,6 +51,7 @@ public class ParserUtilTest {
     private static final String VALID_TYPE = "student";
     private static final String VALID_STUDENT_ID = "A0123456X";
     private static final String VALID_TUTORIAL_ID = "11";
+    private static final String VALID_PATH = "src/test/data/ImportTest/test.json";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -322,5 +326,28 @@ public class ParserUtilTest {
         String tutorialIdWithWhitespace = WHITESPACE + VALID_TUTORIAL_ID + WHITESPACE;
         TutorialId expectedTutorialId = new TutorialId(VALID_TUTORIAL_ID);
         assertEquals(expectedTutorialId, ParserUtil.parseTutorialId(tutorialIdWithWhitespace));
+    }
+
+    @Test
+    public void parseExistingFilePath_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseExistingFilePath(INVALID_PATH));
+    }
+
+    @Test
+    public void parseExistingFilePath_invalidValue_throwsNullException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseExistingFilePath((String) null));
+    }
+
+    @Test
+    public void parseExistingFilePath_validValueWithoutWhitespace_returnsFilePath() throws Exception {
+        Path expectedPath = Paths.get(VALID_PATH);
+        assertEquals(expectedPath, ParserUtil.parseExistingFilePath(VALID_PATH));
+    }
+
+    @Test
+    public void parseExistingFilePath_validValueWithWhitespace_returnsFilePath() throws Exception {
+        String nusNetworkIdWithWhitespace = WHITESPACE + VALID_PATH + WHITESPACE;
+        Path expectedPath = Paths.get(VALID_PATH);
+        assertEquals(expectedPath, ParserUtil.parseExistingFilePath(VALID_PATH));
     }
 }

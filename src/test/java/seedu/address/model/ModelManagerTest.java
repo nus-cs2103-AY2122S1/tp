@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,7 +17,10 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.AttributeContainsKeywordsPredicate;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -87,6 +91,30 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void importFile_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.importFile(null));
+    }
+
+    @Test
+    public void importFile_validFilePath_success() throws DataConversionException {
+        modelManager.setAddressBook(getTypicalAddressBook());
+        Person alex = new PersonBuilder()
+                .withName("Alex Marcus")
+                .withPhone("91234567")
+                .withEmail("e0000007@u.nus.edu")
+                .withAddress("123, Jurong West Ave 6, #08-111")
+                .withTags("friends")
+                .withGitHubId("alex-marcus")
+                .withNusNetworkId("e0000007")
+                .withType("student")
+                .withStudentId("A0000010X")
+                .withTutorialId("00")
+                .build();
+        modelManager.importFile(Paths.get("src/test/data/ImportTest/withDuplicates.json"));
+        assertTrue(modelManager.hasPerson(alex));
     }
 
     @Test

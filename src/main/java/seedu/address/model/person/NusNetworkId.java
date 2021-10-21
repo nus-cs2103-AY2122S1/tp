@@ -26,7 +26,7 @@ public class NusNetworkId {
     public NusNetworkId(String nusNetworkId) {
         requireNonNull(nusNetworkId);
         checkArgument(isValidNusNetworkId(nusNetworkId), MESSAGE_CONSTRAINTS);
-        value = nusNetworkId;
+        value = nusNetworkId.toUpperCase();
     }
 
     /**
