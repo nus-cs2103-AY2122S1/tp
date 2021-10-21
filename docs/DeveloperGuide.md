@@ -249,11 +249,19 @@ The program's data undergoes a lifecycle per operation:
 3. The modified `.json` file is encrypted and overwrites the contents of the encrypted data file.
 4. The temporary `.json` file is deleted.
 
-The lifecycle ensures the program's data stays encrypted at any point in time. In the event of a program crash, the decrypted file will be impossible to recover, but the encrypted file will stay intact.
+The lifecycle ensures the program's data stays encrypted at any point in time. In the event of a program crash, the decrypted file will be impossible to recover, but the encrypted file will stay intact. There is no performace delay in operating data up to 1,200 contacts.
 
 The lifecycle can be described by the following sequence diagram:
 
 <img src="images/EncryptionSequenceDiagram.png" width="800">
+
+In the case when there is no data on startup, the following actions will take place:
+
+1. The sample data is written to a temporary `.json` file.
+2. The `.json` file is encrypted.
+3. The temporary `.json` file is deleted.
+
+The data then proceed with the normal lifecycle per operation as described above.
 
 ### Find feature
 
