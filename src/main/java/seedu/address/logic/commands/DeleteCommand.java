@@ -101,6 +101,7 @@ public class DeleteCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         int numberOfDeletedPersons = 0;
         StringBuilder deletedPersons = new StringBuilder();
+        assert predicate.equals(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         while (last >= first) {
             Person personToDelete = lastShownList.get(last);
@@ -113,6 +114,7 @@ public class DeleteCommand extends Command {
     }
 
     private String deleteRelatedPersonByModuleCode(Model model) {
+        assert !predicate.equals(Model.PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredPersonList(predicate);
         List<Person> filteredList = model.getFilteredPersonList();
         int first = 0;
