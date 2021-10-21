@@ -12,10 +12,10 @@ import seedu.address.model.tag.Tag;
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task implements Comparable<Task> {
+public class Task implements Comparable<Task>, Cloneable {
 
-    private final TaskName name;
-    private final Set<Tag> tags = new HashSet<>();
+    private TaskName name;
+    private Set<Tag> tags = new HashSet<>();
     private boolean isDone;
 
     /**
@@ -62,11 +62,11 @@ public class Task implements Comparable<Task> {
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
             return true;
+        } else if (this.getClass().equals(otherTask.getClass())) {
+            return otherTask.getName().equals(getName()) && otherTask.getDate().equals(getDate());
+        } else {
+            return false;
         }
-
-        return otherTask != null
-                && otherTask.getName().equals(getName())
-                && otherTask.getDate().equals(getDate());
     }
 
     /**
@@ -133,5 +133,19 @@ public class Task implements Comparable<Task> {
         LocalDate otherDate = otherTask.getDate();
 
         return thisDate.compareTo(otherDate);
+    }
+
+    @Override
+    public Task clone() {
+        try {
+            Task clone = (Task) super.clone();
+            clone.name = this.name;
+            clone.tags = new HashSet<>();
+            clone.tags.addAll(this.tags);
+            clone.isDone = this.isDone;
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

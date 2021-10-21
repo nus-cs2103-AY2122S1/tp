@@ -33,4 +33,9 @@ public class TodoTask extends Task {
 
         return builder.toString();
     }
+
+    @Override
+    public TodoTask clone() {
+        return (TodoTask) super.clone();
+    }
 }

@@ -21,6 +21,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskName;
 
@@ -237,9 +238,7 @@ public class ModelManager implements Model {
     @Override
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
-        TaskName name = target.getName();
-        Set<Tag> tags = target.getTags();
-        Task newTask = new Task(name, tags, true);
+        Task newTask = target.clone();
         newTask.markTaskComplete();
         addressBook.setTask(target, newTask);
     }

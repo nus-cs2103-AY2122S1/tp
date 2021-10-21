@@ -25,7 +25,7 @@ public class JsonAdaptedTask {
     private final String name;
     private String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private boolean isComplete;
+    private final boolean isComplete;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -33,13 +33,15 @@ public class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                                       @JsonProperty("status") String status) {
+                           @JsonProperty("isComplete") boolean isComplete,
+                           @JsonProperty("i") int i) {
         this.name = name;
         this.deadline = deadline;
+        this.i = i;
+        this.isComplete = isComplete;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
-        i = 0;
     }
 
     /**
@@ -51,14 +53,14 @@ public class JsonAdaptedTask {
             this.i = 1;
             DeadlineTask task = (DeadlineTask) source;
             deadline = task.getDeadline().toString();
-        }
-        if (source instanceof EventTask) {
+        } else if (source instanceof EventTask) {
             this.i = 2;
             EventTask task = (EventTask) source;
             deadline = task.getTaskDate().toString();
         } else {
-            i = 0;
+            this.i = 0;
         }
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -88,7 +90,6 @@ public class JsonAdaptedTask {
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
-        //if (task instanceof DeadlineTask) {
         if (i == 1) {
             if (deadline == null) {
                 throw new IllegalValueException(
@@ -100,9 +101,7 @@ public class JsonAdaptedTask {
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
             return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate);
-        }
-        //if (task instanceof EventTask) {
-        if (i == 2) {
+        } else if (i == 2) {
             if (deadline == null) {
                 throw new IllegalValueException(
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
@@ -113,8 +112,8 @@ public class JsonAdaptedTask {
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
             return new EventTask(modelName, modelTags, isComplete, modelTaskDate);
+        } else {
+            return new TodoTask(modelName, modelTags, isComplete);
         }
-
-        return new TodoTask(modelName, modelTags, isComplete);
     }
 }

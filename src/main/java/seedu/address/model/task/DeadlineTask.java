@@ -5,7 +5,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 public class DeadlineTask extends Task {
-    private final TaskDate dueDate;
+    private TaskDate dueDate;
 
     /**
      * Constructs a {@code Task}.
@@ -71,5 +71,12 @@ public class DeadlineTask extends Task {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public DeadlineTask clone() {
+        DeadlineTask clone = (DeadlineTask) super.clone();
+        clone.dueDate = dueDate;
+        return clone;
     }
 }
