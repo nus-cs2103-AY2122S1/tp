@@ -17,21 +17,21 @@
 4. Unix Command Syntax
     - allow user to use flags to execute operations
     - e.g. `add -n <NAME> -sid <STUDENT_ID>`
-5. Create records of individual students (ADD)
-    - Name, Student ID, Class ID, NULL email as a placeholder for default
+5. Create records of individual students
+    - Name, Student ID, Class ID, NULL grade as a placeholder for default
     - `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-6. View the records of individual students (READ)
-    - Find a student using Student ID
-    - `view -sid <STUDENT_ID>`
-7. Update a student's record (UPDATE)
-    - Update a student's email
-    - `update -sid <STUDENT_ID>`
-8. Delete a student's record  (DELETE)
-    - Delete the entry of the entire student
-    - `delete -sid <STUDENT_ID>`
+6. Filters the records of individual students using query parameters
+    - Filters the list of students based on any combination of the following parameters: Name, Student ID, Class ID
+    - `filter -cid <CLASS_ID>`
+7. Edit a student's record
+    - Edit a student's details at a particular given index
+    - `edit <INDEX> -cid <NEW CLASS_ID>`
+8. Delete a student's record
+    - Delete the entry of the entire student based on a given index
+    - `delete <INDEX>`
 9. Automatically Sorted Class Records
-    - Sort in the backend when inputting data
-    - Sorting key: Student ID
+    - List will always display the students in a sorted order
+    - Sorting key: Student's Name
 10. Save data to Hard Disk
     - Save whenever there is a change (create/edit/delete)
 

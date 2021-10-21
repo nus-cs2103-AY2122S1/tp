@@ -10,14 +10,15 @@ import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.Command;
 import seedu.programmer.logic.commands.CreateLabResultCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
+import seedu.programmer.logic.commands.DownloadCommand;
 import seedu.programmer.logic.commands.EditCommand;
 import seedu.programmer.logic.commands.ExitCommand;
 import seedu.programmer.logic.commands.FillCommand;
+import seedu.programmer.logic.commands.FilterCommand;
 import seedu.programmer.logic.commands.HelpCommand;
 import seedu.programmer.logic.commands.ListCommand;
 import seedu.programmer.logic.commands.PurgeCommand;
 import seedu.programmer.logic.commands.ShowCommand;
-import seedu.programmer.logic.commands.ViewCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 
 /**
@@ -60,8 +61,8 @@ public class ProgrammerErrorParser {
         case PurgeCommand.COMMAND_WORD:
             return new PurgeCommand();
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommandParser().parse(arguments);
+        case FilterCommand.COMMAND_WORD:
+            return new FilterCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -80,6 +81,9 @@ public class ProgrammerErrorParser {
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);
+
+        case DownloadCommand.COMMAND_WORD:
+            return new DownloadCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

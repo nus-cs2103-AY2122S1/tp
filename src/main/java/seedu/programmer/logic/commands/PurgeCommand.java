@@ -1,6 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class PurgeCommand extends Command {
             return new CommandResult(MESSAGE_FAIL);
         }
         model.setProgrammerError(new ProgrammerError());
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

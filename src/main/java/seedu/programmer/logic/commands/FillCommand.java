@@ -1,6 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class FillCommand extends Command {
             model.setProgrammerError(SampleDataUtil.fillSampleProgrammerError());
             return new CommandResult(MESSAGE_SUCCESS);
         }
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_FAIL);
     }
 

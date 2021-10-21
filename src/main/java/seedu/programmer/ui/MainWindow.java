@@ -30,6 +30,10 @@ import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
+import seedu.programmer.logic.commands.DownloadCommandResult;
+import seedu.programmer.logic.commands.ExitCommandResult;
+import seedu.programmer.logic.commands.HelpCommandResult;
+import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Student;
@@ -326,16 +330,21 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult instanceof HelpCommandResult) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult instanceof ExitCommandResult) {
                 handleExit();
             }
 
-            if (commandResult.isShowResult()) {
-                handleShowResult(commandResult.getTarget());
+            if (commandResult instanceof ShowCommandResult) {
+                ShowCommandResult commandResult1 = (ShowCommandResult) commandResult;
+                handleShowResult(commandResult1.getTarget());
+            }
+
+            if (commandResult instanceof DownloadCommandResult) {
+                handleDownload();
             }
 
             return commandResult;
