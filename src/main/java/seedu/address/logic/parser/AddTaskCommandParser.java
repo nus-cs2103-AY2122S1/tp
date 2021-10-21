@@ -27,15 +27,14 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         //checks that preamble has only spaces, and none of the prefix values are empty
         //important for the argmultimap.getvalue().get() calls below
-        if (!arePrefixesPresent(argMultimap, PREFIX_LABEL, PREFIX_DATE, PREFIX_TASK_TAG)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LABEL, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
-        //very basic validation; only prevents empty strings right now
         Label label = ParserUtil.parseLabel(argMultimap.getValue(PREFIX_LABEL).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        TaskTag taskTag = ParserUtil.parseTaskTag(argMultimap.getValue(PREFIX_TASK_TAG).get());
+        TaskTag taskTag = ParserUtil.parseTaskTag(argMultimap.getValue(PREFIX_TASK_TAG).orElse("General"));
         Task task = new Task(label, date, taskTag);
 
         return new AddTaskCommand(task);

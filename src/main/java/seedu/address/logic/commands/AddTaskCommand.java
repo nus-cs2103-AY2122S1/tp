@@ -17,7 +17,7 @@ public class AddTaskCommand extends Command {
             + "Parameters: "
             + PREFIX_LABEL + "LABEL "
             + PREFIX_DATE + "DATE "
-            + PREFIX_TASK_TAG + "TASKTAG\n"
+            + "[" + PREFIX_TASK_TAG + "TASKTAG]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_LABEL + "Sew buttons onto black blazer "
             + PREFIX_DATE + "20th August 2021 "
