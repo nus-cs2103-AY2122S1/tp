@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -26,38 +27,62 @@ public class AddToFolderCommand extends Command {
     public static final String MESSAGE_NONEXISTENT_FOLDER = "This folder does not exist in UNIon";
     public static final String MESSAGE_SUCCESS = "Contact added to Folder: %1$s";
 
-    private final Index index;
+    private final List<Index> indexList;
     private final FolderName folderName;
 
     /**
      * Creates a AddToFolderCommand to add the specified {@code FolderName}
-     * @param index
+     * @param indexList
      * @param folderName
      */
-    public AddToFolderCommand(Index index, FolderName folderName) {
-        requireNonNull(index);
-        this.index = index;
+    public AddToFolderCommand(List<Index> indexList, FolderName folderName) {
+        requireNonNull(indexList);
+        this.indexList = indexList;
         this.folderName = folderName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+        for (Index index : this.indexList){
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
 
-        Person personToAdd = lastShownList.get(index.getZeroBased());
+            Person personToAdd = lastShownList.get(index.getZeroBased());
 
-        if (!model.hasFolderName(folderName)) {
-            throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
-        }
-        if (model.folderContainsPerson(personToAdd, folderName)) {
-            throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
-        }
+            if (duplicateIndexPassed()) {
+                System.out.println("GOES HERE");
+                throw new CommandException("Same input twice");
+            }
+            if (!model.hasFolderName(folderName)) {
+                throw new CommandException(MESSAGE_NONEXISTENT_FOLDER);
+            }
+            if (model.folderContainsPerson(personToAdd, folderName)) {
+                throw new CommandException(MESSAGE_DUPLICATE_CONTACT);
+            }
 
-        model.addContactToFolder(personToAdd, folderName);
+        }
+        for (Index index : this.indexList){
+            Person personToAdd = lastShownList.get(index.getZeroBased());
+            model.addContactToFolder(personToAdd, folderName);
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, folderName));
+    }
+
+    /**
+     * Checks if user input contains repeated indexes
+     * @return true if there are duplicate indexes
+     */
+    public boolean duplicateIndexPassed(){
+        List<Index> uniqueIndexes = new ArrayList<>();
+        for(Index index:this.indexList){
+            if(uniqueIndexes.contains(index)){
+                return true;
+            }
+            uniqueIndexes.add(index);
+        }
+        return false;
     }
 
     @Override
@@ -69,7 +94,7 @@ public class AddToFolderCommand extends Command {
             return false;
         }
         AddToFolderCommand that = (AddToFolderCommand) other;
-        return this.index.equals(that.index)
+        return this.indexList.equals(that.indexList)
                 && this.folderName.equals(that.folderName);
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -21,7 +22,7 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
         if (allValues.size() <= 3) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToFolderCommand.MESSAGE_USAGE));
         }
-        Index index = extractContactIndex(allValues);
+        List<Index> index = extractContactIndex(allValues);
         FolderName folderName = extractFolderName(allValues);
         return new AddToFolderCommand(index, folderName);
     }
@@ -55,17 +56,20 @@ public class AddToFolderParser implements Parser<AddToFolderCommand> {
      * @return Index index {@code Index}
      * @throws ParseException if the given {@code List} is invalid.
      */
-    private Index extractContactIndex(List<String> allValues) throws ParseException {
-        StringBuilder stringBuilder = new StringBuilder();
+    private List<Index> extractContactIndex(List<String> allValues) throws ParseException {
+        List<Index> contactsToAdd = new ArrayList<>();
         for (int i = 1; i < allValues.size(); i++) {
             try {
-                int intValue = Integer.parseInt(allValues.get(i));
-                stringBuilder.append(allValues.get(i));
-                allValues.remove(i);
+                String currString = allValues.get(i);
+                int intValue = Integer.parseInt(currString);
+               Index contactIndex = ParserUtil.parseIndex(Integer.toString(intValue));
+               contactsToAdd.add(contactIndex);
+               i--;
+               allValues.remove(currString);
             } catch (NumberFormatException e) {
                 continue;
             }
         }
-        return ParserUtil.parseIndex(stringBuilder.toString());
+        return contactsToAdd;
     }
 }
