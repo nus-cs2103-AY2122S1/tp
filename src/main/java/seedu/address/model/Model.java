@@ -76,6 +76,13 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    //TODO
+    /**
+     * Displays the given person in the side panel.
+     * The person must exist in the address book.
+     */
+    void displayPerson(Person target);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
