@@ -3,11 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.List;
+
 import seedu.address.model.Model;
 import seedu.address.model.done.Done;
 import seedu.address.model.person.Person;
 
-import java.util.List;
 
 /**
  * Deletes all applicants in the address book that are marked as done.
