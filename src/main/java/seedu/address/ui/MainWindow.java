@@ -13,7 +13,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -25,13 +31,22 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static final String QUICK_START_INSTRUCTIONS = "💡 Quick Tips:\n"
+            + AddCommand.USER_TIP + "\n\n"
+            + DeleteCommand.USER_TIP + "\n\n"
+            + LessonAddCommand.USER_TIP + "\n\n"
+            + ScheduleCommand.USER_TIP + "\n\n"
+            + ClearCommand.USER_TIP + "\n\n"
+            + HelpCommand.USER_TIP + "\n\n"
+            + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane centerPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,11 +128,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList());
+        centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplay.setFeedbackToUser(QUICK_START_INSTRUCTIONS);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -163,8 +182,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    private void handleSchedule() {
+        centerPanel.displaySchedulePanel();
+    }
+
+    private void handlePersonList() {
+        centerPanel.displayPersonListPanel();
     }
 
     /**
@@ -180,6 +203,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowSchedule()) {
+                handleSchedule();
+            } else {
+                handlePersonList();
             }
 
             if (commandResult.isExit()) {

@@ -34,6 +34,5 @@ public class DateTest {
         assertTrue(Date.isValidDate("12 Jan 2022"));
         assertTrue(Date.isValidDate("29 Feb 2020")); // leap year
     }
-
 }
 

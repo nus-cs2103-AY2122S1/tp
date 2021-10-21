@@ -7,10 +7,14 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.calendarfx.model.Calendar;
+
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 
 /**
@@ -95,6 +99,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasClashingLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        return addressBook.hasClashingLesson(lesson);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
     }
@@ -106,10 +116,21 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addPersonAtIndex(Person person, Index index) {
+        addressBook.addPerson(index, person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public Calendar getCalendar() {
+        return addressBook.getCalendar();
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -147,5 +168,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

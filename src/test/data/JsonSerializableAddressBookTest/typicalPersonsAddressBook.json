@@ -7,6 +7,9 @@
     "parentPhone" : "93251352",
     "parentEmail" : "papapauline@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "school": "RI",
+    "acadStream": "IP",
+    "acadLevel": "Y6",
     "outstandingFee": "0",
     "remark" : "She likes Cheesecake",
     "tagged" : [ "friends" ]
@@ -17,6 +20,9 @@
     "parentPhone" : "94328765",
     "parentEmail" : "ben@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
+    "school": "HCI",
+    "acadStream": "IP",
+    "acadLevel": "Y3",
     "outstandingFee": "99.99",
     "remark" : "He likes chocolate ice cream",
     "tagged" : [ "owesMoney", "friends" ]
@@ -27,6 +33,9 @@
     "parentPhone" : "",
     "parentEmail" : "",
     "address" : "wall street",
+    "school": "ACSI",
+    "acadStream": "IB",
+    "acadLevel": "Y1",
     "outstandingFee": "0",
     "remark" : "He likes french fries",
     "tagged" : [ ]
@@ -36,8 +45,11 @@
     "email" : "cornelia@example.com",
     "parentPhone" : "",
     "parentEmail" : "",
-    "outstandingFee": "0",
     "address" : "10th street",
+    "school": "CCHM",
+    "acadStream": "",
+    "acadLevel": "",
+    "outstandingFee": "0",
     "remark" : "",
     "tagged" : [ "friends" ]
   }, {
@@ -46,8 +58,11 @@
     "email" : "werner@example.com",
     "parentPhone" : "",
     "parentEmail" : "",
-    "outstandingFee": "0",
     "address" : "michegan ave",
+    "school": "",
+    "acadStream": "IELTS",
+    "acadLevel": "",
+    "outstandingFee": "0",
     "remark" : "",
     "tagged" : [ ]
   }, {
@@ -56,8 +71,11 @@
     "email" : "lydia@example.com",
     "parentPhone" : "",
     "parentEmail" : "",
-    "outstandingFee": "0",
     "address" : "little tokyo",
+    "school": "",
+    "acadStream": "",
+    "acadLevel": "S5",
+    "outstandingFee": "0",
     "remark" : "",
     "tagged" : [ ]
   }, {
@@ -66,8 +84,11 @@
     "email" : "anna@example.com",
     "parentPhone" : "",
     "parentEmail" : "",
-    "outstandingFee": "0",
     "address" : "4th street",
+    "school": "",
+    "acadStream": "",
+    "acadLevel": "J2",
+    "outstandingFee": "0",
     "remark" : "",
     "tagged" : [ ]
   } ]
