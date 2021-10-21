@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
@@ -17,8 +18,12 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all items whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " pie cookie bread";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_ID + "ID "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Banana Bread or "
+            + PREFIX_ID + "019381 ";
 
     private final NameContainsKeywordsPredicate namePredicate;
     private final IdContainsNumberPredicate idPredicate;
