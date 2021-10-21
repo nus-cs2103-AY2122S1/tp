@@ -37,7 +37,7 @@ public class ParserUtilTest {
     private static final String VALID_PHONE = "123456";
     private static final String VALID_NATIONALITY = "Vietnam";
     private static final String VALID_EMAIL = "rachel@example.com";
-    private static final String VALID_TUTORIAL_GROUP = "09";
+    private static final String VALID_TUTORIAL_GROUP = "T09";
     private static final String VALID_SOCIAL_HANDLE = "@rachelw";
     private static final String VALID_REMARK = "she likes singing";
     private static final String VALID_TAG_1 = "friend";
