@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -13,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -75,6 +77,25 @@ public class JsonAddressBookStorage implements AddressBookStorage {
 
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+    }
+
+    public void saveEmail(List<String> emailList) throws IOException {
+        saveEmail(emailList, filePath);
+    }
+    /**
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
+    public void saveEmail(List<String> emailList, Path filePath) throws IOException {
+        requireNonNull(emailList);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        String email = "";
+        for(String s : emailList){
+            email += s + "\n";
+        }
+        FileUtil.writeToFile(filePath, email);
     }
 
 }
