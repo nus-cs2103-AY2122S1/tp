@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Person;
 
@@ -74,12 +75,17 @@ public class PersonCard extends UiPart<Region> {
         experience.setText("Years of Experience: " + person.getExperience().value);
         interview.setText("Interview Time: " + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime);
 
-
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
 
-        done.getChildren().add(new Label(person.getDone().getDoneStatus()));
+        if (person.getDone().getDoneStatus().equals(Done.STATUS_DONE)) {
+            done.getChildren().add(new Label(Done.STATUS_DONE));
+            notDone.getChildren().clear();
+        } else {
+            notDone.getChildren().add(new Label(Done.STATUS_UNDONE));
+            done.getChildren().clear();
+        }
     }
 
     @Override
