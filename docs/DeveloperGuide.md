@@ -200,6 +200,76 @@ IS_EDITABLE | `true`
 
 This section describes some noteworthy details on how certain features are implemented.
 
+## AddressBook feature
+
+### Search Clients
+
+#### Description
+
+The addressbook allows the user to `search` for clients using keywords. The keywords can be used to match generically
+with any client's attribute or specifically with the specified attributes
+
+#### Implementation
+
+1. The `LogicManager` starts to parses the given input text using `AddresBookParsers`.
+2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `SearchCommandParser` to parse.
+4. The `SearchCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
+5. The `SearchCommandParser` will then create a new `PersonContainsKeywordPredicate` using the `ArgumentMultiMap`.
+6. The `SearchCommandParser` will then create a `SearchCommand` with the `PersonContainsKeywordPredicate`.
+7. The `LogicManger` will call the `execute` method of `SearchCommand`.
+8. The `SearchCommand` wil then call the `updateFilteredPersonList` method of the provided `Model` with it's `PersonContainsKeywordPredicate`.
+9. The `SearchCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
+
+Below is sequence diagram for search clients.
+   
+<img src="diagrams/tracing/SearchCommandSequenceDiagram.puml"/>
+
+#### Implementation of PersonContainsKeywordPredicate
+
+`PersonContainsKeywordPredicate` implements `Predicate<Client>` and allow filtering of a list of `Client` based on 
+generic and attribute keywords.`PersonContainsKeywordPredicate` contains an `ArgumentMultiMap` which holds these 
+keywords. The `preamble` string of the `ArgumentMultiMap` corresponds to generic keywords. All the words in that string
+will be used to match with all the attributes of the `Client`. The different `values` String that is mapped to the
+different `Prefix` corresponds to attribute keywords. Each of these `values` string will then be matched with the
+corresponding `Client`'s attribute that their `Prefix` refers to e.g. if the `Prefix` `e/` was mapped to `@gmail.com`,
+then `@gmail.com` will be used to matched with the `Email` attribute of the `Client`. For this predicate to return true,
+the given `Client` must match with any of the generic keywords if there is any and all the attribute keywords if there
+is any.
+
+### Filter Clients
+
+#### Description
+
+The addressbook allows the user to `filter` for clients using keywords. This works similar to the `search` but it allows
+for multiple `filter` to be stacked, which allows for user to look for clients incrementally.
+
+#### Implementation
+
+1. The `LogicManager` starts to parses the given input text using `AddresBookParsers`
+2. The `AddressBookParser` invoke the respective `Parser` based on the first word of the input text.
+3. The remaining input text will be passed to the `FilterCommandParser` to parse.
+4. The `FilterCommandParser` will tokenize the remaining input text using the `ArgumentTokenizer` into an `ArgumentMultiMap`.
+5. The `FilterCommandParser` will then create a new `PersonContainsKeywordPredicate` using the `ArgumentMultiMap`.
+6. The `FilterCommandParser` will then create a `FilterCommand` with the `PersonContainsKeywordPredicate`
+7. The `LogicManger` will call the `execute` method of `FilterCommand`.
+8. The `FilterCommand` wil then call the `filterFilteredPersonList` method of the provided `Model` with it's `PersonContainsKeywordPredicate`.
+9. The `FilterCommand` will finally create a new `CommandResult` which will be returned to `LogicManger`.
+
+Below is sequence diagram for filter clients.
+
+<img src="diagrams/tracing/FilterCommandSequenceDiagram.puml"/>
+
+#### Implementation of PersonContainsKeywordPredicate
+
+See the above description in `Search Clients`.
+
+### \[Proposed\] Multiple Address Book
+
+#### Proposed Implementation
+
+To be included
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
