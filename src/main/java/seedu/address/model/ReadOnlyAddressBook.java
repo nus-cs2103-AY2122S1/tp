@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,6 +16,12 @@ public interface ReadOnlyAddressBook {
     ObservableList<Person> getPersonList();
 
     /**
+     * Returns an unmodifiable view of the meetings list.
+     * This list will not contain any duplicate NextMeetings.
+     */
+    ObservableList<NextMeeting> getNextMeetingsList();
+
+    /**
      * Returns the current client counter
      */
     String getClientCounter();
@@ -25,4 +32,6 @@ public interface ReadOnlyAddressBook {
     void incrementClientCounter();
 
     void setClientCounter(String s);
+
+    ObservableList<NextMeeting> getSortedNextMeetingsList();
 }

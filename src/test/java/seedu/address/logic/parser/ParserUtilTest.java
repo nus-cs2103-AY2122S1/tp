@@ -282,7 +282,7 @@ public class ParserUtilTest {
     @Test
     public void parseNextMeeting_validValueWithoutWhitespace_returnsNextMeeting() throws Exception {
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-            "Starbucks @ UTown");
+            "Starbucks @ UTown", "");
         assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(VALID_NEXTMEETING));
     }
 
@@ -290,7 +290,7 @@ public class ParserUtilTest {
     public void parseNextMeeting_validValueWithWhitespace_returnsTrimmedNextMeeting() throws Exception {
         String nextMeetingWithWhitespace = WHITESPACE + VALID_NEXTMEETING + WHITESPACE;
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-            "Starbucks @ UTown");
+            "Starbucks @ UTown", "");
         assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(nextMeetingWithWhitespace));
     }
 

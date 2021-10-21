@@ -25,6 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.ClientId;
+import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -149,6 +150,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteMeetingsByPersons(List<Person> toDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public List<Person> setPersonByClientIds(List<ClientId> clientIds,
                 EditPersonDescriptor editedPersonDescriptor) {
             throw new AssertionError("This method should not be called.");
@@ -161,6 +167,16 @@ public class AddCommandTest {
 
         @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addNextMeeting(NextMeeting nextMeeting) {
+
+        }
+
+        @Override
+        public ObservableList<NextMeeting> getSortedNextMeetingList() {
             throw new AssertionError("This method should not be called.");
         }
 
