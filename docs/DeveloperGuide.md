@@ -154,6 +154,42 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Student feature
+
+The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
+
+
+####Implementation
+
+####AddCommand class
+The add student mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
+the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
+If this `Student` already exists, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
+the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
+
+####AddCommandParser class
+The `AddCommandParser` class implements the `Parser<AddCommand>` interface. The `parse()` method checks for the presence of the compulsory prefixes corresponding to the name and NUSNET id of the `Student`, namely `-n` and `-i`.
+It also checks for the presence of the optional group and tag prefixes, namely `-g` and `-t`.
+It then retrieves the characters that follow each prefix and allocates them to the fields the `Student` object has accordingly.
+
+In the case where the compulsory prefixes `-n` and `-i` are not present, a `ParseException` is thrown, prompting the user that the wrong command format has been used.
+
+The following activity diagram summarizes what happens when the user inputs an add student command:
+
+![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
+
+
+The following sequence diagram shows how the add student operation works:
+
+![AddStudentSequenceDiagram](images/AddStudentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -257,8 +293,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* targets professors of CS1101S 
-* has a need to manage a significant number of students 
+* targets professors of CS1101S
+* has a need to manage a significant number of students
 * has a need to analyse students' performance
 * prefer desktop apps over other types
 * can type fast
@@ -351,7 +387,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Source Control shows an error message.
 
       Use case resumes at step 1.
-   
 * 1b. There are multiple students that match any of the specified student names.
 
     * 1b1. Source Control shows an error message with the different Student IDs.
