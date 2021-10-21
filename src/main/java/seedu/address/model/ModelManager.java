@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Task> filteredTasks;
 
     //pending re-wrapping by yuichiro
-    private final OrderList orderBook;
+    private final OrderList orderList;
     private final FilteredList<Order> filteredOrders;
 
     /**
@@ -44,8 +44,8 @@ public class ModelManager implements Model {
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
 
         //pending re-wrapping by Yuichiro
-        this.orderBook = new OrderList();
-        filteredOrders = new FilteredList<>(orderBook.asUnmodifiableObservableList());
+        this.orderList = new OrderList();
+        filteredOrders = new FilteredList<>(orderList.asUnmodifiableObservableList());
 
     }
 
@@ -181,7 +181,7 @@ public class ModelManager implements Model {
 
     @Override
     public void markOrder(Order order) {
-        this.orderBook.markComplete(order);
+        this.orderList.markComplete(order);
     }
 
     //=========== Filtered Person List Accessors =============================================================

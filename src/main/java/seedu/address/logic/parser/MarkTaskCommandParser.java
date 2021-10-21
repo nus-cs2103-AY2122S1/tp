@@ -7,9 +7,9 @@ import seedu.address.logic.commands.MarkTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new MarkDoneCommand object
+ * Parses input arguments and creates a new MarkTaskCommand object
  */
-public class MarkDoneCommandParser implements Parser<MarkTaskCommand> {
+public class MarkTaskCommandParser implements Parser<MarkTaskCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the MarkTaskCommand

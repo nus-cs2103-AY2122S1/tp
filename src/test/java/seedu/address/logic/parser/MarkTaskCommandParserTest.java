@@ -13,7 +13,7 @@ import seedu.address.logic.commands.MarkTaskCommand;
  * Mirrors DeleteCommandParserTest
  */
 public class MarkTaskCommandParserTest {
-    private MarkDoneCommandParser parser = new MarkDoneCommandParser();
+    private MarkTaskCommandParser parser = new MarkTaskCommandParser();
 
     @Test
     public void parse_validArgs_returnsMarkTaskCommand() {
