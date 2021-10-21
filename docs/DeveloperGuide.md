@@ -311,6 +311,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete contacts                | make sure that the address book remains relevant and up to date        |
 | `* * *`  | user                                       | edit individual contacts       | update any of the fields when necessary                                |
 | `* * *`  | user                                       | add individual contacts        | reach out to them later                                                |
+| `* *`    | user                                       | search for contact(s) by tag(s)| contact them based on their grouping                                   |
+| `* *`    | user                                       | search for contact(s) by Telegram handles(s)| contact them conveniently                                 |
+| `* *`    | user                                       | search for contact(s) by Github username(s)| contact them conveniently                                 |
 | `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
