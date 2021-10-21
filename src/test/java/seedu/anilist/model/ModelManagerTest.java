@@ -1,7 +1,7 @@
 package seedu.anilist.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 import static seedu.anilist.testutil.Assert.assertThrows;
@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.AnimeListBuilder;
+import seedu.anilist.ui.TabOption;
 
 public class ModelManagerTest {
 
@@ -82,6 +83,9 @@ public class ModelManagerTest {
         assertFalse(modelManager.hasAnime(AOT));
     }
 
+    private void assertFalse(boolean hasAnime) {
+    }
+
     @Test
     public void hasAnime_animeInAnimeList_returnsTrue() {
         modelManager.addAnime(AOT);
@@ -91,6 +95,17 @@ public class ModelManagerTest {
     @Test
     public void getFilteredAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredAnimeList().remove(0));
+    }
+
+    @Test
+    public void setCurrentTab_toWatchTab_setsToWatchTabCurrentTab() {
+        modelManager.setCurrentTab(TabOption.TabOptions.TOWATCH);
+        assertEquals(TabOption.TabOptions.TOWATCH, modelManager.getCurrentTab().getCurrentTab());
+    }
+
+    @Test
+    public void getCurrentTab_nonNullTab_checksTabNonNull() {
+        assertNotNull(modelManager.getCurrentTab());
     }
 
     @Test

@@ -6,9 +6,11 @@ package seedu.anilist.logic.commands;
 public enum Action {
     ADD, DELETE, DEFAULT;
 
+    public static final String MESSAGE_ACTION_NOT_SUPPORTED_FORMAT = "This action is not supported by $1%s command";
     private static final String AVAILABLE_ACTIONS = "add, delete";
     public static final String MESSAGE_INVALID_ACTION_FORMAT = "%1$s is not a valid action. "
             + "These are the available actions:\n" + AVAILABLE_ACTIONS;
+
 
     /**
      * Returns true if a given string is a valid action.

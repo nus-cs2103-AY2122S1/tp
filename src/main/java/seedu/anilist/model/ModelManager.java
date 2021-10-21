@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.ui.TabOption;
 
 /**
  * Represents the in-memory model of the anime list data.
@@ -22,6 +23,7 @@ public class ModelManager implements Model {
     private final AnimeList animeList;
     private final UserPrefs userPrefs;
     private final FilteredList<Anime> filteredAnime;
+    private final TabOption currentTab;
 
     /**
      * Initializes a ModelManager with the given animeList and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager implements Model {
         this.animeList = new AnimeList(animeList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredAnime = new FilteredList<>(this.animeList.getAnimeList());
+        currentTab = new TabOption("all");
     }
 
     public ModelManager() {
@@ -74,6 +77,17 @@ public class ModelManager implements Model {
     public void setAnimeListFilePath(Path animeListFilePath) {
         requireNonNull(animeListFilePath);
         userPrefs.setAnimeListFilePath(animeListFilePath);
+    }
+
+    @Override
+    public void setCurrentTab(TabOption.TabOptions newCurrentTab) {
+        requireNonNull(newCurrentTab);
+        currentTab.setCurrentTab(newCurrentTab);
+    }
+
+    @Override
+    public TabOption getCurrentTab() {
+        return currentTab;
     }
 
     //=========== AnimeList ================================================================================

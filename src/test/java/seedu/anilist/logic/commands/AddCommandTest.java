@@ -22,6 +22,7 @@ import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.ReadOnlyUserPrefs;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.testutil.AnimeBuilder;
+import seedu.anilist.ui.TabOption;
 
 public class AddCommandTest {
 
@@ -147,6 +148,18 @@ public class AddCommandTest {
         public void updateFilteredAnimeList(Predicate<Anime> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setCurrentTab(TabOption.TabOptions currentTab) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public TabOption getCurrentTab() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
     }
 
     /**
