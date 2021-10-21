@@ -1,18 +1,14 @@
 package safeforhall.testutil;
 
-//import java.util.Set;
-//import java.util.stream.Collectors;
-//import java.util.stream.Stream;
-
-import safeforhall.logic.commands.EditCommand.EditPersonDescriptor;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
+import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
-//import safeforhall.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -93,14 +89,20 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
-     * that we are building.
+     * Sets the {@code LastFetDate} of the {@code EditPersonDescriptor} that we are building.
      */
-    //public EditPersonDescriptorBuilder withTags(String... tags) {
-    //    Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-    //    descriptor.setTags(tagSet);
-    //    return this;
-    //}
+    public EditPersonDescriptorBuilder withLastFetDate(String lastFetDate) {
+        descriptor.setLastFetDate(new LastDate(lastFetDate));
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastCollectionDate} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLastCollectionDate(String lastCollectionDate) {
+        descriptor.setLastCollectionDate(new LastDate(lastCollectionDate));
+        return this;
+    }
 
     public EditPersonDescriptor build() {
         return descriptor;

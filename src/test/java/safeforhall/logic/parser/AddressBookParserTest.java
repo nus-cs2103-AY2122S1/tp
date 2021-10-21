@@ -16,21 +16,23 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
-import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.ClearCommand;
-import safeforhall.logic.commands.DeleteCommand;
 //import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.ListCommand;
-import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.delete.DeletePersonCommand;
+import safeforhall.logic.commands.view.ViewEventCommand;
+import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
-import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 //import safeforhall.testutil.EditPersonDescriptorBuilder;
 import safeforhall.testutil.PersonBuilder;
@@ -43,23 +45,23 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        AddPersonCommand command = (AddPersonCommand) parser.parseCommand(PersonUtil.getAddCommand(person), true);
+        assertEquals(new AddPersonCommand(person), command);
     }
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, true) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", true) instanceof ClearCommand);
     }
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        DeletePersonCommand command = (DeletePersonCommand) parser.parseCommand(
+                DeletePersonCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), true);
         ArrayList<Index> indexArray = new ArrayList<>();
         indexArray.add(INDEX_FIRST_PERSON);
-        assertEquals(new DeleteCommand(indexArray), command);
+        assertEquals(new DeletePersonCommand(indexArray), command);
     }
 
     @Test
@@ -74,8 +76,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, true) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", true) instanceof ExitCommand);
     }
 
     @Test
@@ -86,11 +88,11 @@ public class AddressBookParserTest {
                 FindCommand.COMMAND_WORD + " "
                         + CliSyntax.PREFIX_NAME + joint + " "
                         + CliSyntax.PREFIX_ROOM + "A100" + " "
-                        + CliSyntax.PREFIX_VACCSTATUS + "T");
+                        + CliSyntax.PREFIX_VACCSTATUS + "T", true);
 
         FindCompositePredicate predicate = new FindCompositePredicate();
         predicate.setName(new Name(joint));
-        predicate.setRoom(new Room("A100"));
+        predicate.setRoom("A100");
         predicate.setVaccStatus(new VaccStatus("T"));
 
         assertEquals(new FindCommand(predicate), command);
@@ -98,31 +100,43 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_help() throws Exception {
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, true) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", true) instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_list() throws Exception {
         ListCommand command = (ListCommand) parser.parseCommand(
-                ListCommand.COMMAND_WORD + " k/c d1/10-10-2021");
+                ListCommand.COMMAND_WORD + " k/c d1/10-10-2021", true);
         assertEquals(new ListCommand("c", new LastDate("10-10-2021")), command);
     }
 
     @Test
     public void parseCommand_view() throws Exception {
-        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD) instanceof ViewCommand);
-        assertTrue(parser.parseCommand(ViewCommand.COMMAND_WORD + " 3") instanceof ViewCommand);
+        assertTrue(parser.parseCommand(ViewPersonCommand.COMMAND_WORD, true) instanceof ViewPersonCommand);
+        assertTrue(parser.parseCommand(ViewPersonCommand.COMMAND_WORD + " 3", true) instanceof ViewPersonCommand);
+
+        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD, false) instanceof ViewEventCommand);
+        assertTrue(parser.parseCommand(ViewEventCommand.COMMAND_WORD + " 3", false) instanceof ViewEventCommand);
+    }
+
+    @Test
+    public void parseCommand_include() throws Exception {
+        IncludeCommand command = (IncludeCommand) parser.parseCommand(
+                IncludeCommand.COMMAND_WORD + " "
+                        + "1 " + CliSyntax.PREFIX_RESIDENTS + "a213", false);
+        assertEquals(command, new IncludeCommand(Index.fromOneBased(1), new ResidentList("a213")));
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
-            -> parser.parseCommand(""));
+            -> parser.parseCommand("", true));
     }
 
     @Test
     public void parseCommand_unknownCommand_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand"));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, ()
+            -> parser.parseCommand("unknownCommand", true));
     }
 }

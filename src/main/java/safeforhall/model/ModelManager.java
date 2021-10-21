@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,7 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Person;
 
 /**
@@ -91,6 +96,54 @@ public class ModelManager implements Model {
         return addressBook;
     }
 
+    /**
+     * Converts a {@code ResidentList} that can have a String of Room or Name to an Arraylist of
+     * {@code Person}
+     */
+    @Override
+    public ArrayList<Person> toPersonList(ResidentList residentList) throws CommandException {
+        requireNonNull(residentList);
+        ArrayList<String> residentInformation = residentList.getResidentInformation();
+        ArrayList<Person> personList = new ArrayList<>();
+
+        for (String information : residentInformation) {
+            Optional<Person> personFound;
+            personFound = addressBook.findPerson(information);
+
+            if (personFound.isEmpty()) {
+                throw new CommandException("No person with this " + information + " could be found");
+            } else {
+                personList.add(personFound.get());
+            }
+        }
+        return personList;
+    }
+
+    /**
+     * Reads a string of name from {@code ResidentList} and return an Arraylist of {@code Person}
+     */
+    @Override
+    public ArrayList<Person> getCurrentEventResidents(ResidentList residentList) throws CommandException {
+        requireNonNull(residentList);
+        ArrayList<Person> personList = new ArrayList<>();
+        if (residentList.isEmpty()) {
+            return personList;
+        }
+        String[] residentInformation = residentList.getResidents().split("\\s*,\\s*");
+
+        for (String information : residentInformation) {
+            Optional<Person> personFound;
+            personFound = addressBook.findPerson(information);
+
+            if (personFound.isEmpty()) {
+                throw new CommandException("No event with this " + information + " could be found");
+            } else {
+                personList.add(personFound.get());
+            }
+        }
+        return personList;
+    }
+
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -104,8 +157,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Event getEvent(EventName eventName) throws CommandException {
+        requireNonNull(eventName);
+        Optional<Event> eventOptional = addressBook.findEvent(eventName);
+        if (eventOptional.isEmpty()) {
+            throw new CommandException(eventName + " not found");
+        } else {
+            return eventOptional.get();
+        }
+    }
+
+    @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        addressBook.removeEvent(target);
     }
 
     @Override
@@ -125,6 +194,13 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+    }
+
+    @Override
+    public void setEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        addressBook.setEvent(target, editedEvent);
     }
 
     //=========== Filtered Person List Accessors =============================================================

@@ -80,6 +80,12 @@ public class MainWindow extends UiPart<Stage> {
         return primaryStage;
     }
 
+    public boolean getIsResidentTab() {
+        // Dependent on the ordering of tabs in `MainWindow.fxml`
+        // Resident is at index 0 and Event at index 1
+        return tabPane.getSelectionModel().getSelectedIndex() == 0;
+    }
+
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
     }
@@ -181,11 +187,11 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Executes the command and returns the result.
      *
-     * @see Logic#execute(String)
+     * @see Logic#execute(String, Boolean)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText, getIsResidentTab());
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

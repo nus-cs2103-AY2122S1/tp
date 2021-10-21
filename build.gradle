@@ -71,4 +71,8 @@ shadowJar {
     archiveName = 'safeforhall.jar'
 }
 
+run {
+    enableAssertions = true;
+}
+
 defaultTasks 'clean', 'test'

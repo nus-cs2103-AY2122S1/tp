@@ -42,7 +42,8 @@
     -fx-background-color: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
-    -fx-padding: 0 30 0 30;
+    -fx-padding: 10 40 10 40;
+    -fx-font-size: 12pt;
 }
 
 .tab .tab-label {

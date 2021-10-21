@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
+import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.commons.util.StringUtil;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
@@ -24,9 +26,6 @@ import safeforhall.model.person.VaccStatus;
  */
 public class ParserUtil {
 
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_NO_INDEX_INPUT = "Missing residents' index(es).";
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -35,9 +34,10 @@ public class ParserUtil {
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new ParseException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        } else {
+            return Index.fromOneBased(Integer.parseInt(trimmedIndex));
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
 
     /**
@@ -49,13 +49,8 @@ public class ParserUtil {
     public static ArrayList<Index> parseIndexes(String... indexes) throws ParseException {
         ArrayList<Index> indexArray = new ArrayList<>();
         for (String i : indexes) {
-            try {
-                Integer.parseInt(i);
-            } catch (NumberFormatException e) {
-                throw new ParseException(MESSAGE_NO_INDEX_INPUT);
-            }
             if (!StringUtil.isNonZeroUnsignedInteger(i)) {
-                throw new ParseException(MESSAGE_INVALID_INDEX);
+                throw new ParseException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
             indexArray.add(Index.fromOneBased(Integer.parseInt(i)));
         }
@@ -106,6 +101,21 @@ public class ParserUtil {
             throw new ParseException(Room.MESSAGE_CONSTRAINTS);
         }
         return new Room(trimmedRoom);
+    }
+
+    /**
+     * Parses a {@code String room} into a {@code Room}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code room} is invalid.
+     */
+    public static String parseRoomForFind(String room) throws ParseException {
+        requireNonNull(room);
+        String trimmedRoom = room.trim();
+        if (!Room.isValidRoomForFind(trimmedRoom)) {
+            throw new ParseException(Room.MESSAGE_CONSTRAINTS_FOR_FIND);
+        }
+        return trimmedRoom;
     }
 
     /**
@@ -226,5 +236,20 @@ public class ParserUtil {
             throw new ParseException(Capacity.MESSAGE_CONSTRAINTS);
         }
         return new Capacity(trimmedCapacity);
+    }
+
+    /**
+     * Parses a {@code String information} into a {@code InformationList}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code information} is invalid.
+     */
+    public static ResidentList parseResidents(String information) throws ParseException {
+        requireNonNull(information);
+        String trimmedInformation = information.trim();
+        if (!ResidentList.isValidResidentList(trimmedInformation)) {
+            throw new ParseException(ResidentList.MESSAGE_CONSTRAINTS);
+        }
+        return new ResidentList(trimmedInformation);
     }
 }

@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+Are you a hall administrator in-charge of managing residents in NUS? Do you have to fumble through multiple different excel sheets just to look for a resident's information? Are you worried residents might be subject to the dangers of the pandemic? Well look no further as SafeFor(H)All is the application you need!
 
 SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents’ information to keep hall residents safe during the COVID-19 pandemic via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SafeFor(H)All can get your hall management tasks done faster than traditional GUI apps.
 
@@ -46,16 +47,13 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `view [INDEX]` can be used as `view` or as `view 100.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/CCA]…​` can be used as ` ` (i.e. 0 times), `c/Volleyball`, `c/Frisbee c/Hockey` etc.
+  e.g `view [INDEX]` can be used as `view` or as `view 100`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME f/FACULTY`, `f/FACULTY n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `v/true v/false` only `v/true` will be taken.
+  e.g. if you specify `v/t v/f` only `v/t` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -74,17 +72,19 @@ Format: `help`
 
 ### Adding a resident’s information : `add`
 
-Adds a resident and their information to the application. 
+Adds a resident and their information to the application.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A resident can have any number of CCAs (including 0)
-</div>
+* `NAME` has to be unique
+* `ROOM` is of the form `BLOCK` + `LEVEL` + `NUMBER`, where `BLOCK` is an alphabet, `LEVEL` and `NUMBER` make up 3 digits. e.g. `A100`
+* `VACCINATION_STATUS` can be `T` or `F` (case insensitive)
+* `FACULTY` has to be a single alphabetical word
+* The dates inputted for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` has to be in dd-mm-yyyy format
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC`
-* `add n/Betsy Crowe c/Basketball e/betsyc@example.com v/false r/B400 p/1234567 c/Hockey f/FASS`
+* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
+* `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
 ### Viewing residents’ information : `view`
 
@@ -97,29 +97,33 @@ The index of the resident is the corresponding number in the list
 shown when `view` (without the [INDEX] parameter) is called.
 
 Format: `view [INDEX]`
-* For an index i, 1 &leq; i &leq; n, where n is the number of
-residents in the address book
+* For an index i, 1 &leq; i &leq; n, where n is the number of residents in the address book
 
 Examples:
 
 * `view` shows a list of all the residents
 * `view 30` shows the details of the resident at index 30
 
-### Retrieve a list of residents with their fet due : `list`
+### List of residents whose fet or test kit collection deadline is over or due soon: `list`
 
-Retrieve a list of residents whose ART collection or FET are due within the range of the current date and the optional given date.
+Lists residents whose ART collection or FET tests are due within the range of the given date or the range of the 2 dates given.
 
-Format: `list [FLAG] [d/DATE]`
+Format: `list k/KEYWORD d1/DATE1 d2/DATE2` or `list k/LATE_KEYWORD d1/DATE1`
 
-* The flag can be either -f for fet or -c collection
-* The date inputted has to be in `dd-mm-yyyy` format
-* The given Date must be a date later than the current date
+* Normal keywords are `f` for fet and `c` for collection
+* Late keywords are `lf` for late fet and `lc` for late collection
+* The date inputted has to be in `dd-mm-yyyy` format  
+* When a normal keyword is given, both date1 and date2 have to be inputted
+* The given Date2 must be a date later than the given Date1
+* `date1` is the start date and `date2` is the last date inclusive  
+* When a late keyword is given, only date1 should be given
+* Anyone whose fet and collection is due before but not on `date1` is outputted  
 
 Examples:
-* `list -f` retrieves a list of residents whose FET is due today
-* `list -f 30-9-2021` retrieves a list of residents whose FET is due some day between today and `Sep 21 2021`
-* `list -c` retrieves a list of residents whose FET is due today
-* `list -c 30-9-2021` retrieves a list of residents whose ART Collection is due some day between today and `Sep 21 2021`
+* `list k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
+* `list k/f d1/15-10-2021 d2/20-10-2021` retrieves a list of residents whose `Test Kit Collection` is due some day between `15 Oct 2021` and `20 Oct 2021`, inclusive
+* `list k/lf d1/11-10-2021` retrieves a list of residents whose `FET` is due before `11 Oct 2021`
+* `list k/lc d1/12-10-2021` retrieves a list of residents whose `Test Kit Collection` is due before `12 Oct 2021`
 
 ### Searching by resident information: `search`
 
@@ -138,38 +142,69 @@ Examples:
 * `search n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
 * `search v/false f/soc` returns un-vaccinated residents from SoC <br>
 
-### Editing a person : `edit`
+### Editing a resident : `edit`
 
-Edits an existing resident in the address book.
+Edits the details of existing residents in the address book.
 
-Format: `edit INDEX [MORE_INDICES] [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [r/ROOM] [v/VACCINATION_STATUS] [f/FACULTY] [c/CCA]…​`
+Format: `edit INDEX… [n/NAME] [r/ROOM] [p/PHONE] [e/EMAIL] [v/VACCINATION_STATUS] [f/FACULTY] [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
-* Edits the resident at the specified `INDEX`. The index refers to the index number shown in the displayed resident list. The index **must be a positive integer** 1, 2, 3, …​
+* Edit the residents at the specified `INDEXES`. 
+* Each index refers to the index number shown in the displayed resident list. 
+* The indexes **must be positive integers** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing CCAs, the existing CCAs of the resident will be removed i.e adding of CCAs is not cumulative.
-* You can remove all the resident’s CCAs by typing `c/` without specifying any CCAs after it.
-* Able to edit multiple residents at once by inputting multiple indexes, each separated by a space.
+* Edit multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
 Examples:
-*  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st person to be `johndoe@example.com` and `A101` respectively.
-*  `edit 2 n/Betsy Crower c/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing CCAs.
-*  `edit 1 2 3 v/true` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated.
+*  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
+*  `edit 1 2 3 v/true fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
 ### Deleting a resident : `delete`
 
-Deletes the specified resident from the address book.
+Deletes specified residents from the address book.
 
-Format: `delete INDEX [MORE_INDICES]`
+Format: `delete INDEX…`
 
-* Deletes the resident at the specified `INDEX`.
-* The index refers to the index number shown in the displayed resident list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* Able to delete multiple residents at once by inputting multiple indexes, each separated by a space.
+* Delete the residents at the specified `INDEXES`.
+* Each index refers to the index number shown in the displayed resident list.
+* The indexes **must be positive integers** 1, 2, 3, …​
+* Delete multiple residents in a single command by inputting multiple indexes, each separated by a space.
 
 Examples:
-* `view` followed by `delete 1 2 3` deletes the first 3 people in the address book.
-* `search n/Anne` followed by `delete 1` deletes the 1st person named Anne in the results of the `find` command.
+* `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
+* `find n/Anne` followed by `delete 1` deletes the 1st resident named Anne in the results of the `find` command.
+
+### Editing an event : `edit`
+
+Edits an existing event in the address book.
+
+Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
+
+* Edits the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+*  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
+
+### Add residents to an Event: `include`
+
+Add multiple residents to an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
+
+Format: `include INDEX r/INFORMATION [, MORE INFORMATION]`
+
+* Resident information can be given in the form of name or room, but all has to be all rooms or all names
+* When adding multiple residents, each piece of information is separated by a comma
+* The information inputted is case-insensitive
+* If one or more of the given information is invalid, an error message is outputted and none of the residents are added to the event
+
+Examples:
+* `include 1 r/A101` adds the resident who stays in room A101 to the first event in the address book
+* `include 2 r/A101, A102, A103` adds the residents who stay in rooms A101, A102 and A103 to the second event in the address book
+* `include 3 r/John Doe` adds John Doe to the third event in the address book
+* `include 4 r/John Doe, Jane Doe` adds John Doe and Jane Doe to the fourth event in the address book
 
 ### Clearing all entries : `clear`
 
@@ -189,11 +224,12 @@ Format: `exit`
 
 Action | Format, Examples
 --------|------------------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]` <br> e.g. `view 30`
-**List** | `list [FLAG] [d/DATE]` <br> e.g. `list -f 15-8-2021`
-**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...` <br> e.g. `search n/john alex v/false f/fass` 
-**Edit** | `edit INDEX [MORE_INDICES] [FLAG/UPDATED_PARTICULARS]...`<br> e.g., `edit 1 2 3 v/true`
-**Delete** | `delete INDEX [MORE_INDICES]` <br> e.g. `delete 1 2 3`
+**List** | `list k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `list k/f 15-8-2021 20-08-2021`
+**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]…` <br> e.g. `search n/john alex v/false f/fass` 
+**Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
+**Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
+**Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
 **Help** | `help`
 **Exit** | `exit`

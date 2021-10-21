@@ -19,11 +19,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import safeforhall.commons.core.Messages;
-import safeforhall.logic.commands.AddCommand;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.ListCommand;
-import safeforhall.logic.commands.ViewCommand;
+import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
+import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.Model;
 import safeforhall.model.ModelManager;
@@ -69,26 +69,27 @@ public class LogicManagerTest {
     @Test
     public void execute_validFetCommand_success() throws Exception {
         String listCommand = "list k/f d1/10-10-2021";
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_FET, model);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_FET, model, true);
     }
 
     @Test
     public void execute_validArtCommand_success() throws Exception {
         String listCommand = "list k/c d1/10-10-2021";
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_ART, model);
+        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS_ART, model, true);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ViewCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ViewCommand.MESSAGE_SUCCESS, model);
+        String viewCommand = ViewPersonCommand.COMMAND_WORD;
+        assertCommandSuccess(viewCommand, ViewPersonCommand.MESSAGE_SUCCESS, model, true);
     }
 
     @Test
     public void execute_validFindCommand_success() throws Exception {
         String findCommand = "find n/alice v/t";
         assertCommandSuccess(findCommand,
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()), model);
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()),
+                model, true);
     }
 
     @Test
@@ -102,13 +103,13 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ROOM_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY + COLLECTION_DESC_AMY;
+        String addCommand = AddPersonCommand.COMMAND_WORD + NAME_DESC_AMY + ROOM_DESC_AMY + PHONE_DESC_AMY
+                + EMAIL_DESC_AMY + VACCSTATUS_DESC_AMY + FACULTY_DESC_AMY + FET_DESC_AMY + COLLECTION_DESC_AMY;
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
-        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+        assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel, true);
     }
 
     @Test
@@ -121,18 +122,18 @@ public class LogicManagerTest {
      * - no exceptions are thrown <br>
      * - the feedback message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandFailure(String, Class, String, Model)
+     * @see #assertCommandFailure(String, Class, String, Model, Boolean)
      */
     private void assertCommandSuccess(String inputCommand, String expectedMessage,
-            Model expectedModel) throws CommandException, ParseException {
-        CommandResult result = logic.execute(inputCommand);
+            Model expectedModel, Boolean isResidentTab) throws CommandException, ParseException {
+        CommandResult result = logic.execute(inputCommand, isResidentTab);
         assertEquals(expectedMessage, result.getFeedbackToUser());
         assertEquals(expectedModel, model);
     }
 
     /**
      * Executes the command, confirms that a ParseException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     * @see #assertCommandFailure(String, Class, String, Model, Boolean)
      */
     private void assertParseException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, ParseException.class, expectedMessage);
@@ -140,7 +141,7 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that a CommandException is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     * @see #assertCommandFailure(String, Class, String, Model, Boolean)
      */
     private void assertCommandException(String inputCommand, String expectedMessage) {
         assertCommandFailure(inputCommand, CommandException.class, expectedMessage);
@@ -148,12 +149,12 @@ public class LogicManagerTest {
 
     /**
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
-     * @see #assertCommandFailure(String, Class, String, Model)
+     * @see #assertCommandFailure(String, Class, String, Model, Boolean)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
+        assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel, true);
     }
 
     /**
@@ -161,11 +162,11 @@ public class LogicManagerTest {
      * - the {@code expectedException} is thrown <br>
      * - the resulting error message is equal to {@code expectedMessage} <br>
      * - the internal model manager state is the same as that in {@code expectedModel} <br>
-     * @see #assertCommandSuccess(String, String, Model)
+     * @see #assertCommandSuccess(String, String, Model, Boolean)
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage, Model expectedModel) {
-        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand));
+                                      String expectedMessage, Model expectedModel, Boolean isResidentTab) {
+        assertThrows(expectedException, expectedMessage, () -> logic.execute(inputCommand, isResidentTab));
         assertEquals(expectedModel, model);
     }
 

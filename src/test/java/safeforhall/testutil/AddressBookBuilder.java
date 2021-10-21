@@ -1,6 +1,7 @@
 package safeforhall.testutil;
 
 import safeforhall.model.AddressBook;
+import safeforhall.model.event.Event;
 import safeforhall.model.person.Person;
 
 /**
@@ -25,6 +26,14 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withPerson(Person person) {
         addressBook.addPerson(person);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Event} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withEvent(Event event) {
+        addressBook.addEvent(event);
         return this;
     }
 

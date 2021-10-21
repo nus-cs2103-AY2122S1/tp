@@ -4,19 +4,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.testutil.Assert.assertThrows;
+import static safeforhall.testutil.TypicalEvents.BASKETBALL;
+import static safeforhall.testutil.TypicalEvents.ROAD_RELAY;
 import static safeforhall.testutil.TypicalPersons.ALICE;
+import static safeforhall.testutil.TypicalPersons.BENSON;
 import static safeforhall.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.EventName;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.exceptions.DuplicatePersonException;
 import safeforhall.testutil.PersonBuilder;
@@ -81,6 +87,36 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void findEventSuccess() {
+        addressBook.addEvent(BASKETBALL);
+        addressBook.addEvent(ROAD_RELAY);
+        assertEquals(addressBook.findEvent(new EventName("basketball")).get(), BASKETBALL);
+        assertEquals(addressBook.findEvent(new EventName("road relay")).get(), ROAD_RELAY);
+    }
+
+    @Test
+    public void findEventFailure() {
+        EventName eventName = new EventName("non existent event");
+        assertEquals(Optional.empty(), addressBook.findEvent(eventName));
+    }
+
+    @Test
+    public void findPersonSuccess() throws CommandException {
+        addressBook.addPerson(ALICE);
+        addressBook.addPerson(BENSON);
+        assertEquals(addressBook.findPerson("A100").get(), ALICE);
+        assertEquals(addressBook.findPerson("A101").get(), BENSON);
+        assertEquals(addressBook.findPerson("Alice Pauline").get(), ALICE);
+        assertEquals(addressBook.findPerson("Benson Meier").get(), BENSON);
+    }
+
+    @Test
+    public void findPersonFailure() throws CommandException {
+        assertEquals(Optional.empty(), addressBook.findPerson("A401"));
+        assertEquals(Optional.empty(), addressBook.findPerson("Johnny Lim"));
     }
 
     /**
