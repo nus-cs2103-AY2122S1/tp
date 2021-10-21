@@ -172,7 +172,7 @@ This section describes some noteworthy details on how certain features are imple
 
 **Specifications:**
 * Encryption standard: [AES](https://searchsecurity.techtarget.com/definition/Advanced-Encryption-Standard)
-* Block cipher: AES-128
+* Block cipher: AES-256
 * Key generation method: user-supplied password (up to 32 characters long)
 * File extension: [`.enc`](https://fileinfo.com/extension/enc)
 
@@ -182,7 +182,7 @@ The encryption feature is implemented with the following classes:
 * `EncryptionManager` — Handles the encryption and decryption of data files. 
   * Needs a `SecretKey`, which is provided by `EncryptionKeyGenerator` utility class.
   * Needs a cipher transformation algorithm (AES/CBC/PKCS5Padding); this has been handled by the `javax.crypto.Cipher` API.
-* `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-128 compliant keys.
+* `EncryptionKeyGenerator` — A utility class that provides the method to generate AES-256 compliant keys.
   * `EncryptionKeyGenerator#generateKey()` — Generates a key with the supplied password. It can also be seen as a very complex hash function.
 * `MainApp` — `EncryptionManager` is initiated here and passed as parameter to the constructor of `LogicManager`. 
   * There should be one and only one `EncryptionManager` instance at any time. 
@@ -192,7 +192,7 @@ The encryption feature is implemented with the following classes:
 
 An encrypted file can only be decrypted with the same AES key that was used to encrypt it. In this case, the AES keys are generated solely using a password string supplied by the user. Multiple instances of AES keys are said to be the same if the password string used to generate these keys are the same. This definition of equality ensures the validity of the generated key across sessions.
 
-The supplied password string must be 32 characters long (32 characters = 128 bits needed to generate the AES key). Passwords shorter than 32 characters will be padded with `"/"` to extend the number of bits. _Passwords longer than 32 characters are **not** supported._ As a consequence, the length and randomness of the supplied password make up the strength of the encryption. Shorter and less random passwords are most vulnerable to brute force attacks.
+The supplied password string must be 32 characters long (32 characters = 256 bits needed to generate the AES key). Passwords shorter than 32 characters will be padded with `"/"` to extend the number of bits. _Passwords longer than 32 characters are **not** supported._ As a consequence, the length and randomness of the supplied password make up the strength of the encryption. Shorter and less random passwords are most vulnerable to brute force attacks.
 
 #### Data file lifecycle
 
