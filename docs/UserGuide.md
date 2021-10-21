@@ -2,6 +2,7 @@
 layout: page
 title: User Guide
 ---
+Are you a hall administrator in-charge of managing residents in NUS? Do you have to fumble through multiple different excel sheets just to look for a resident's information? Are you worried residents might be subject to the dangers of the pandemic? Well look no further as SafeFor(H)All is the application you need!
 
 SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents’ information to keep hall residents safe during the COVID-19 pandemic via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SafeFor(H)All can get your hall management tasks done faster than traditional GUI apps.
 
@@ -46,16 +47,13 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `view [INDEX]` can be used as `view` or as `view 100.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[c/CCA]…​` can be used as ` ` (i.e. 0 times), `c/Volleyball`, `c/Frisbee c/Hockey` etc.
+  e.g `view [INDEX]` can be used as `view` or as `view 100`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME f/FACULTY`, `f/FACULTY n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `v/true v/false` only `v/true` will be taken.
+  e.g. if you specify `v/t v/f` only `v/t` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -76,15 +74,17 @@ Format: `help`
 
 Adds a resident and their information to the application. 
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A resident can have any number of CCAs (including 0)
-</div>
+* `NAME` has to be unique
+* `ROOM` is of the form `BLOCK` + `LEVEL` + `NUMBER`, where `BLOCK` is an alphabet, `LEVEL` and `NUMBER` make up 3 digits. e.g. `A100`
+* `VACCINATION_STATUS` can be `T` or `F` (case insensitive)
+* `FACULTY` has to be a single alphabetical word
+* The dates inputted for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` has to be in dd-mm-yyyy format
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC`
-* `add n/Betsy Crowe c/Basketball e/betsyc@example.com v/false r/B400 p/1234567 c/Hockey f/FASS`
+* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
+* `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
 ### Viewing residents’ information : `view`
 
@@ -210,7 +210,7 @@ Format: `exit`
 
 Action | Format, Examples
 --------|------------------
-**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [c/CCA]…​` <br> e.g. `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/true f/SoC c/Frisbee`
+**Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **List** | `list k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `list k/f 15-8-2021 20-08-2021`
 **Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...` <br> e.g. `search n/john alex v/false f/fass` 
