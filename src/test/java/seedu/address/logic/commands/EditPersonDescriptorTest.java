@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TELE_HANDLE_BOB
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.person.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditPersonDescriptorTest {

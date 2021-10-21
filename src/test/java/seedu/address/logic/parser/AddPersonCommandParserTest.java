@@ -35,7 +35,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.person.AddCommand;
+import seedu.address.logic.commands.person.AddPersonCommand;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
@@ -45,7 +45,7 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.TeleHandle;
 import seedu.address.testutil.PersonBuilder;
 
-public class AddCommandParserTest {
+public class AddPersonCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
@@ -59,32 +59,32 @@ public class AddCommandParserTest {
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddPersonCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddPersonCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddPersonCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
-                new AddCommand(expectedPerson));
+                new AddPersonCommand(expectedPerson));
 
         // multiple telegram handles - last handle accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_AMY + TELE_HANDLE_DESC_BOB
-                + REMARK_DESC_BOB, new AddCommand(expectedPerson));
+                + REMARK_DESC_BOB, new AddPersonCommand(expectedPerson));
 
         // multiple remark - last remark accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB
-                + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddCommand(expectedPerson));
+                + REMARK_DESC_AMY + REMARK_DESC_BOB, new AddPersonCommand(expectedPerson));
     }
 
     @Test
@@ -93,12 +93,12 @@ public class AddCommandParserTest {
 
         // missing phone prefix, telegram handle prefix and zero lessonCodes
         assertParseSuccess(parser, NAME_DESC_AMY + EMAIL_DESC_AMY + MODULE_CODE_DESC_CS2040,
-                new AddCommand(expectedPerson));
+                new AddPersonCommand(expectedPerson));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + EMAIL_DESC_BOB
@@ -157,6 +157,6 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + MODULE_CODE_DESC_CS2030S + MODULE_CODE_DESC_CS2040 + TELE_HANDLE_DESC_BOB + REMARK_DESC_BOB,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
     }
 }

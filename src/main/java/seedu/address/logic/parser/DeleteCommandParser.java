@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.person.DeleteCommand;
+import seedu.address.logic.commands.person.DeletePersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
@@ -15,7 +15,7 @@ import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new DeleteCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCommand> {
+public class DeleteCommandParser implements Parser<DeletePersonCommand> {
 
 
     /**
@@ -23,7 +23,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * and returns a DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand parse(String args) throws ParseException {
+    public DeletePersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
 
@@ -31,23 +31,24 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             try {
                 List<String> stringListOfModuleCodes = getStringListOfModuleCode(moduleCodes);
                 ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
-                return new DeleteCommand(
+                return new DeletePersonCommand(
                         new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
             } catch (ParseException pe) {
                 throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
             }
         }
         try {
             if (args.contains("-")) {
                 Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf("-")));
                 Index end = ParserUtil.parseIndex(args.substring(args.indexOf("-") + 1));
-                return new DeleteCommand(start, end);
+                return new DeletePersonCommand(start, end);
             } else {
-                return new DeleteCommand(ParserUtil.parseIndex(args));
+                return new DeletePersonCommand(ParserUtil.parseIndex(args));
             }
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE),
+                    pe);
         }
     }
 

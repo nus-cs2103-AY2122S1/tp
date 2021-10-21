@@ -9,10 +9,10 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.person.RemarkCommand;
+import seedu.address.logic.commands.person.RemarkPersonCommand;
 import seedu.address.model.person.Remark;
 
-public class RemarkCommandParserTest {
+public class RemarkPersonCommandParserTest {
     private RemarkCommandParser parser = new RemarkCommandParser();
     private final String nonEmptyRemark = "Some remark.";
 
@@ -21,18 +21,18 @@ public class RemarkCommandParserTest {
         // have remark
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + PREFIX_REMARK + nonEmptyRemark;
-        RemarkCommand expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(nonEmptyRemark));
+        RemarkPersonCommand expectedCommand = new RemarkPersonCommand(INDEX_FIRST_PERSON, new Remark(nonEmptyRemark));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // no remark
         userInput = targetIndex.getOneBased() + " " + PREFIX_REMARK;
-        expectedCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(""));
+        expectedCommand = new RemarkPersonCommand(INDEX_FIRST_PERSON, new Remark(""));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_missingCompulsoryField_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemarkPersonCommand.MESSAGE_USAGE);
 
         // no parameters
         assertParseFailure(parser, "remark", expectedMessage);

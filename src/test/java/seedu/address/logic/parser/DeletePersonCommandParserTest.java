@@ -12,7 +12,7 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.person.DeleteCommand;
+import seedu.address.logic.commands.person.DeletePersonCommand;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 
@@ -23,45 +23,45 @@ import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
  * The path variation for those two cases occur inside the ParserUtil, and
  * therefore should be covered by the ParserUtilTest.
  */
-public class DeleteCommandParserTest {
+public class DeletePersonCommandParserTest {
 
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
     public void parse_validIndex_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(parser, "1", new DeletePersonCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_validRange_returnsDeleteCommand() {
-        assertParseSuccess(parser, " 1-2", new DeleteCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON));
+        assertParseSuccess(parser, " 1-2", new DeletePersonCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON));
     }
 
     @Test
     public void parse_validModuleCode_returnsDeleteCommand() {
-        DeleteCommand expectedDeleteCommand =
-                new DeleteCommand(new ModuleCodesContainsKeywordsPredicate(
+        DeletePersonCommand expectedDeletePersonCommand =
+                new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
                         Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2040))),
                         new ModuleCode(VALID_MODULE_CODE_CS2040, new HashSet<>()));
         String userInput = String.format(" m/%s", VALID_MODULE_CODE_CS2040);
-        assertParseSuccess(parser, userInput, expectedDeleteCommand);
+        assertParseSuccess(parser, userInput, expectedDeletePersonCommand);
     }
 
     @Test
     public void parse_invalidIndex_throwsParseException() {
         assertParseFailure(parser, "a",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidRange_throwsParseException() {
         assertParseFailure(parser, " 1,2",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyModuleCode_throwsParseException() {
         assertParseFailure(parser, "m/",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
     }
 }

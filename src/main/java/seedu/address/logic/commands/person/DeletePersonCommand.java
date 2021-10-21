@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeletePersonCommand extends Command {
 
     public static final String MESSAGE_USAGE = "delete: "
             + "Deletes the person identified by the index number used in the displayed person list "
@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
      *
      * @param targetIndex the person to be deleted
      */
-    public DeleteCommand(Index targetIndex) {
+    public DeletePersonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         endIndex = targetIndex;
         predicate = Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -56,7 +56,7 @@ public class DeleteCommand extends Command {
      * @param targetIndex the first person to be deleted
      * @param endIndex the last person to be deleted
      */
-    public DeleteCommand(Index targetIndex, Index endIndex) {
+    public DeletePersonCommand(Index targetIndex, Index endIndex) {
         this.targetIndex = targetIndex;
         this.endIndex = endIndex;
         predicate = Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -68,7 +68,7 @@ public class DeleteCommand extends Command {
      * @param predicate the condition to delete the person
      * @param moduleCode the specified module code to delete
      */
-    public DeleteCommand(ModuleCodesContainsKeywordsPredicate predicate, ModuleCode moduleCode) {
+    public DeletePersonCommand(ModuleCodesContainsKeywordsPredicate predicate, ModuleCode moduleCode) {
         targetIndex = Index.fromZeroBased(0);
         endIndex = Index.fromZeroBased(0);
         this.predicate = predicate;
@@ -143,7 +143,7 @@ public class DeleteCommand extends Command {
         Set<ModuleCode> moduleCodes = new HashSet<>(person.getModuleCodes());
         moduleCodes.remove(moduleCode);
 
-        EditCommand.EditPersonDescriptor editPersonDescriptor = new EditCommand.EditPersonDescriptor();
+        EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
         editPersonDescriptor.setModuleCodes(moduleCodes);
 
         Person editedPerson = new Person(person.getName(), person.getEmail(), moduleCodes, person.getPhone(),
@@ -154,9 +154,9 @@ public class DeleteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)
-                && endIndex.equals(((DeleteCommand) other).endIndex)
-                && predicate.equals(((DeleteCommand) other).predicate)); // state check
+                || (other instanceof DeletePersonCommand // instanceof handles nulls
+                && targetIndex.equals(((DeletePersonCommand) other).targetIndex)
+                && endIndex.equals(((DeletePersonCommand) other).endIndex)
+                && predicate.equals(((DeletePersonCommand) other).predicate)); // state check
     }
 }

@@ -9,8 +9,8 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.person.ClearCommand;
-import seedu.address.logic.commands.person.ListCommand;
+import seedu.address.logic.commands.person.ClearPersonCommand;
+import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -50,13 +50,13 @@ public class AddressBookParser {
             return new DeleteCommandParser().parse(arguments);
 
         case CLEAR:
-            return new ClearCommand();
+            return new ClearPersonCommand();
 
         case FIND:
             return new FindCommandParser().parse(arguments);
 
         case LIST:
-            return new ListCommand();
+            return new ListPersonCommand();
 
         case EXIT:
             return new ExitCommand();

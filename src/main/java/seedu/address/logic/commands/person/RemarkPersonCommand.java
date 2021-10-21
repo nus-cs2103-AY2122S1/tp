@@ -18,7 +18,7 @@ import seedu.address.model.person.Remark;
 /**
  * Changes the remark of an existing person in the address book.
  */
-public class RemarkCommand extends Command {
+public class RemarkPersonCommand extends Command {
 
     public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
     public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
@@ -38,7 +38,7 @@ public class RemarkCommand extends Command {
      * @param index index of the person in the filtered person list to edit the remark
      * @param remark remark of the person to be updated to
      */
-    public RemarkCommand(Index index, Remark remark) {
+    public RemarkPersonCommand(Index index, Remark remark) {
         requireAllNonNull(index, remark);
 
         this.index = index;
@@ -82,12 +82,12 @@ public class RemarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof RemarkCommand)) {
+        if (!(other instanceof RemarkPersonCommand)) {
             return false;
         }
 
         // state check
-        RemarkCommand e = (RemarkCommand) other;
+        RemarkPersonCommand e = (RemarkPersonCommand) other;
         return index.equals(e.index) && remark.equals(e.remark);
     }
 }
