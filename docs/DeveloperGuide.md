@@ -6,27 +6,27 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
+## 1. Introduction 
+### 1.1 Acknowledgements
 
 * {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+### 1.2 Setting up, getting started
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Design**
+## 2. Design
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
-### Architecture
+### 2.1 Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
@@ -67,7 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### 2.2 UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +84,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Task` object residing in the `Model`.
 
-### Logic component
+### 2.3 Logic component
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -113,7 +113,7 @@ How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
-### Model component
+### 2.4 Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
@@ -133,7 +133,7 @@ The `Model` component,
 </div>
 
 
-### Storage component
+### 2.5 Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
@@ -144,19 +144,124 @@ The `Storage` component,
 * inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
-### Common classes
+### 2.6 Common classes
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Implementation**
+## 3. Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### 3.1 Add task feature
 
-#### Proposed Implementation
+### 3.2 Delete task feature
+
+The delete feature enables users to delete tasks by specifying the task index or task name.
+
+#### 3.2.1 Implementation
+
+##### DeleteCommand class
+
+The `DeleteCommand` class extends the `Command` class. It manages the deletion of tasks specified by the user based on the index(es) provided. It contains a `String` representing its command word to be used by the parser, a `String` representing its usage to be displayed if used incorrectly, a `String` representing the successful deletion of a task, and a `List<Index>`, `targetIndexes`, which contains the indexes of all tasks to be deleted.
+
+The `execute` method in `DeleteCommand` overrides that in `Command`. In this implementation, it exemplifies defensive programming by ensuring the `model` provided is non-`null`. It then checks if the indexes provided by the user are valid for the current list shown, and continues only if they are all valid (between 1 and the total number of items in the task list). A `CommandException` is thrown in cases of invalid indexes. In the happy path, the tasks are deleted iteratively starting from the first index provided, to the last.
+
+##### DeleteCommandParaser class
+
+The `DeleteCommandParser` class implements the `Parser<DeleteCommand` interface. It manages the parsing of the arguments (index(es) in the case of a delete command) in the user input.
+The `parse` method in `DeleteCommandParser` first converts the argument provided into a `List<Index>`. It then returns a `DeleteCommand` back to `UniFyParser`, initialized with the `List<Index>`.
+
+##### Usage Scenario
+TODO
+
+![DeleteMultipleSequenceDiagram](images/DeleteMultipleSequenceDiagram.png)
+
+#### 3.2.2 Design Consideration
+
+##### Aspect: Reference to use to delete tasks
+
+* **Alternative 1 (current choice):** Allow users to delete tasks using task id.
+    * Pros: Short and really quick for users to type
+    * Cons: If list is long, users might have to spend time scrolling to find task id before deletion
+
+* **Alternative 2:** Allows users to delete tasks by task name
+    * Pros: Tasks sharing task name can be easily deleted together (e.g. user can delete every assignment in Uni-Fy by typing `delete assignment`)
+    * Cons: Might result in collateral deletion accidentally; Takes much longer to input
+    
+Due to the repercussions of Alternative 2 and the efficiency of Alternative 1, we have decided to adopt Alternative 1 as our current implementation.
+
+### 3.3 Show feature
+
+### 3.4 Find task feature
+
+The find feature enables users to find tasks by specifying part of the task name or date.
+
+#### 3.4.1 Implementation
+
+The following are the changes made to achieve this feature:
+
+* A `TaskContainsDatePredicate` class is added under the `model/task` package.
+* The `NameContainsKeywordsPredicate` class is modified to allow partial words.
+* `FindCommand` class is modified to accept multiple predicate object.
+* `FindCommandParser` class is modified to parser both task name and date.
+
+Given below is a usage scenario of this feature using both name and date as inputs.
+
+Step 1. The user executes `add n/Math Quiz 5 d/2021-10-10 t/18:00 tg/Important` to add a task named Math Quiz 5 and with a deadline of 6pm, 10 October 2021.
+
+Step 2. The user executes `add n/Math Assignment 2 d/2021-10-12 t/18:00 tg/Important` to add a task named Math Assignment 2 and with a deadline of 6pm, 12 October 2021.
+
+Step 3. The user executes `find Quiz` command to find all task with the name "Quiz".
+
+Step 4. The user executes `find Math d/2021-10-10` command to find all Math task with a dateline of 10 October 2021.
+
+Step 5. The user executes `list` command to view the full list of tasks.
+
+The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Math d/2021-10-10` command as in Step 4.
+
+![FindSequenceDiagram](images/UML_Diagrams/FindSequenceDiagram.png)
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note on sequence diagram:**<br>
+
+* The lifeline for `findCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
+
+</div>
+
+In the **Logic** Component, when user inputs `find Math d/2021-10-10`, these are the key methods invoked:
+* `LogicManager#execute("find Math d/2021-10-10")`: The `LogicManager` takes in the command text string ("find Math d/2021-10-10").
+* `UniFyParser#parseCommand("find")`: The `UniFyParser` parses the users' input and recognizes the command word, "find", and a `FindCommand` is created.
+* `FindCommand#execute(model)`: The `FindCommand` uses the `updateFilteredTaskList` method of `Model` to update the displayed patient list and returns a `CommandResult` object which represents the result of a
+  command execution.
+
+In the **Model** Component, This is the key method invoked:
+* `Model#updateFilteredTaskList(predicate)`: `Model` uses this method to update the displayed patients list.
+
+The following activity diagram summarizes what happens when the user inputs a find command.
+![FindActivityDiagram](images/UML_Diagrams/findActivityDiagram.png)
+
+#### 3.4.2 Design Consideration
+
+##### Aspect: What to use as reference to find the task?
+
+* **Alternative 1 (current choice):** Allow users to enter task name with date.
+    * Pros: Easier for users to find the task if they know the task name and what date the task in on.
+    * Cons: Harder to implement because multiple predicates have to be used.
+
+* **Alternative 2:** Users can only enter name
+    * Pros: Easy to implement, and only one predicate is required.
+    * Cons: Inconvenient for users if they have recurring task on different dates.
+
+_{more aspects and alternatives to be added}_
+
+### 3.5 Tag task feature
+
+### 3.6 \[Proposed\] Undo/redo feature
+
+#### 3.6.1 Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -219,94 +324,32 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### 3.6.2 Design considerations:
 
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
+    * Pros: Will use less memory (e.g. for `delete`, just save the task being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
 
-### 3.x Find task feature
-
-The find feature enables users to find tasks by specifying part of the task name or date.
-
-#### 3.x.1 Implementation
-
-The following are the changes made to achieve this feature:
-
-* A `TaskContainsDatePredicate` class is added under the `model/task` package.
-* The `NameContainsKeywordsPredicate` class is modified to allow partial words.
-* `FindCommand` class is modified to accept multiple predicate object.
-* `FindCommandParser` class is modified to parser both task name and date.
-
-Given below is a usage scenario of this feature using both name and Nric as inputs.
-
-Step 1. The user executes `add n/Math Quiz 5 d/2021-10-10 t/18:00 tg/Important` to add a task named Math Quiz 5 and with a deadline of 6pm, 10 October 2021.
-
-Step 2. The user executes `add n/Math Assignment 2 d/2021-10-12 t/18:00 tg/Important` to add a task named Math Assignment 2 and with a deadline of 6pm, 12 October 2021.
-
-Step 3. The user executes `find Quiz` command to find all task with the name "Quiz".
-
-Step 4. The user executes `find Math d/2021-10-10` command to find all Math task with a dateline of 10 October 2021.
-
-Step 5. The user executes `list` command to view the full list of tasks.
-
-The sequence diagram below illustrates the interaction between Logic and Model components when the user executes `find Math d/2021-10-10` command as in Step 4.
-
-![FindSequenceDiagram](images/UML_Diagrams/FindSequenceDiagram.png)
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note on sequence diagram:**<br>
-
-* The lifeline for `findCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of the diagram.
-
-</div>
-
-In the **Logic** Component, when user inputs `find Math d/2021-10-10`, these are the key methods invoked:
-* `LogicManager#execute("find Math d/2021-10-10")`: The `LogicManager` takes in the command text string ("find Math d/2021-10-10").
-* `UniFyParser#parseCommand("find")`: The `UniFyParser` parses the users' input and recognizes the command word, "find", and a `FindCommand` is created.
-* `FindCommand#execute(model)`: The `FindCommand` uses the `updateFilteredTaskList` method of `Model` to update the displayed patient list and returns a `CommandResult` object which represents the result of a
-  command execution.
-
-In the **Model** Component, This is the key method invoked:
-* `Model#updateFilteredTaskList(predicate)`: `Model` uses this method to update the displayed patients list.
-
-The following activity diagram summarizes what happens when the user inputs a find command.
-![FindActivityDiagram](images/UML_Diagrams/findActivityDiagram.png)
-
-#### 2.x.2 Design Consideration
-
-##### Aspect: What to use as reference to find the task?
-
-* **Alternative 1 (current choice):** Allow users to enter task name with date.
-    * Pros: Easier for users to find the task if they know the task name and what date the task in on.
-    * Cons: Harder to implement because multiple predicates have to be used.
-
-* **Alternative 2:** Users can only enter name
-    * Pros: Easy to implement, and only one predicate is required.
-    * Cons: Inconvenient for users if they have recurring task on different dates.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
+### 3.7 \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## 4. Documentation, logging, testing, configuration, dev-ops
 
+(TODO: maybe separate this into individual sections)
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
 * [Logging guide](Logging.md)
@@ -315,9 +358,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## Appendix A: Product Scope
 
 **Target user profile**:
 
@@ -330,7 +371,7 @@ _{Explain here how the data archiving feature will be implemented}_
 **Value proposition**: manage academic tasks to allow students to have more control over their time
 
 
-### User stories
+## Appendix B: User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -346,7 +387,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+## Appendix C: Use cases
 
 (For all use cases below, the **System** is `Uni-Fy` and the **Actor** is the `user`, unless specified otherwise)
 
@@ -446,7 +487,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Non-Functional Requirements
+## Appendix D: Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
@@ -454,13 +495,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Glossary
+## Appendix E: Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## Appendix F: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 

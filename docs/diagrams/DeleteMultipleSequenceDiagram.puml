@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":UniFyParser" as UniFyParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete 1 2 3")
+activate LogicManager
+
+LogicManager -> UniFyParser : parseCommand("delete 1 2 3")
+activate UniFyParser
+
+create DeleteCommandParser
+UniFyParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> UniFyParser
+deactivate DeleteCommandParser
+
+UniFyParser -> DeleteCommandParser : parse("1 2 3")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> UniFyParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> UniFyParser
+destroy DeleteCommandParser
+
+UniFyParser --> LogicManager : d
+deactivate UniFyParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> Model : getFilteredTaskList()
+activate Model
+
+Model --> DeleteCommand :
+deactivate Model
+
+loop 3 times
+
+DeleteCommand -> Model : deleteTask(index)
+activate Model
+
+Model --> DeleteCommand :
+deactivate Model
+
+end loop
+
+Model --> DeleteCommand
+deactivate Model
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
