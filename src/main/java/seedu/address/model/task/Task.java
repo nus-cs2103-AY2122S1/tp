@@ -87,13 +87,14 @@ public class Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
+        String completeStatus = isComplete ? "yes" : "no";
         builder.append(getTaskName())
-                .append("; TeachingAssistantBuddy: ")
+                .append("; Module: ")
                 .append(getModuleNameString())
                 .append("; Deadline: ")
                 .append(getTaskDeadline())
                 .append("; Is completed: ")
-                .append("yes/no");
+                .append(completeStatus);
         return builder.toString();
     }
 

@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,6 +34,8 @@ public class DeleteStudentCommand extends DeleteCommand {
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted student: %1$s";
 
+    private static Logger logger = Logger.getLogger("Delete Student Logger");
+
     private StudentId studentId;
     private ModuleName moduleName;
 
@@ -53,7 +57,7 @@ public class DeleteStudentCommand extends DeleteCommand {
                 return deleteStudentFromModule(module);
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     /**
@@ -67,6 +71,7 @@ public class DeleteStudentCommand extends DeleteCommand {
         List<Student> studentList = module.getFilteredStudentList();
         for (Student student : studentList) {
             if (student.getStudentId().equals(studentId)) {
+                logger.log(Level.INFO, "deleting student: " + student.getStudentId());
                 module.removeStudent(student);
                 return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentId));
             }

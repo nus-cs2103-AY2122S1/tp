@@ -46,13 +46,13 @@ public class DeleteModuleCommand extends DeleteCommand {
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
                 moduleToDelete = module;
-                logger.log(Level.INFO, "deleting module: " + moduleToDelete.getName().moduleName);
+                logger.log(Level.INFO, "deleting module: " + moduleToDelete.getName().getModuleName());
                 model.deleteModule(moduleToDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
             }
             ;
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     @Override

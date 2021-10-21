@@ -117,7 +117,7 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
     * Returns true if the given module has the given task {@code task}.
     */
     public boolean hasTask(ModuleName moduleName, Task task) {
-        requireAllNonNull(task);
+        requireAllNonNull(moduleName, task);
         for (Module m : modules) {
             if (m.getName().equals(moduleName)) {
                 return m.hasTask(task);

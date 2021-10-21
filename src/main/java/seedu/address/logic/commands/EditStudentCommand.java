@@ -73,14 +73,15 @@ public class EditStudentCommand extends EditCommand {
                 return editStudentInformation(module);
             }
         }
-        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.moduleName));
+        throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
     /**
-     * Edits a student's information. the student from the specified module.
+     * Edits a student's information from the specified module.
      *
      * @param module The module whose student is being edited.
      * @return Statement indicating that the edit is successful.
+>>>>>>> 4e5b59c26892cdd3ab52daf8d7f651c72f03bd33
      * @throws CommandException Exception thrown when student is not found.
      */
     public CommandResult editStudentInformation(Module module) throws CommandException {
@@ -98,8 +99,8 @@ public class EditStudentCommand extends EditCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Student} with the details of {@code studentToEdit}
+     * edited with {@code editStudentDescriptor}.
      *
      * @param studentToEdit The student to be edited.
      * @param editStudentDescriptor The edited student descriptions.
