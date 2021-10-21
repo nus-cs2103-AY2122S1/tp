@@ -30,7 +30,7 @@ You can install the required JDK and JRE from the
 [Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
 
 Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
-to help you with the installation. Follow the guide for your operation system for detailed instructions.
+to help you with the installation. Follow the guide for your operating system for detailed instructions.
 </div>
 
 2. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
@@ -99,6 +99,35 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 ### Managing Students
+The following section will guide you on how to use the commands relating to the operations for managing students in TAB.
+A student _**must**_ have the following fields: a `name`, an `address` and _**at least 1**_ contact field.
+
+The essential fields for a student are:
+* `name`
+* `address`
+
+The contact fields for a student are:
+* `phone number`
+* `parent phone number`
+* `email`
+* `parent email`
+
+Other available optional fields for a student are:
+* `academic Level`
+* `academic stream`
+* `school`
+* `outstanding fees`
+* `remark`
+* `tag`
+* `lesson`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add multiple tags and lessons to a student in TAB.
+</div>
+
+
+There are constraints in place to determine whether the value you provide for a field is valid.
+TAB will inform you if you gave an invalid input for a field.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -196,6 +225,7 @@ Shows a list of all students in TAB.
 Format: `list`
 
 ### Finding Students
+The following section will guide you on how to use the `find` command in TAB to filter or search for students of choice.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,6 +285,28 @@ Examples:
 * `find stream/express sch/nus cond/any` returns students with stream `express` or school `nus`.
 
 ### Managing Lessons
+
+The following section will guide you on how to use the commands relating to the operations for managing lessons of students in TAB.
+A `Lesson` _**must**_ have the following fields: a start `date`, a `time range` and a `subject`.
+
+A `Lesson` can be categorised in to 2 types: 
+1. A _**weekly**_ recurring lesson
+2. A one-off makeup lesson.
+
+The essential fields for a lesson are:
+* `date`
+* `time range`
+* `subject`
+
+An optional field for a lesson is:
+* `homework`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can add multiple homework pieces to a lesson in TAB.
+</div>
+
+There are constraints in place to determine whether the value you provide for a field is valid.
+TAB will inform you if you gave an invalid input for a field.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -337,7 +389,7 @@ Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWOR
 
 * You can edit all fields of a lesson except the start date.
 
-* You cannot change the lesson type (i.e. recurring and makeup).
+* You cannot change the lesson's type (i.e. recurring and makeup).
   
 * The lesson index refers to the index number shown in the lesson list of the student.
 
@@ -351,6 +403,8 @@ Examples:
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
 ### Viewing the Schedule
+
+TAB provides a feature for you to view a calendar with your lessons within the application itself.
 
 --------------------------------------------------------------------------------------------------------------------
 
