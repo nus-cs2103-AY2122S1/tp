@@ -167,6 +167,52 @@ Future plans for Events
   * Dates should be in reverse chronological order so that upcoming events are shown first
 * Include additional remarks or description for an event
 
+### Add a task feature for a member or several members
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to add the task with given task name to each of the members.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#addTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tadd /n take attendance /m 1 /m 2`. The parser will be called upon to create a TaddCommandParser.
+The parser will then parse the input to create a TaddCommand with task name as "take attendance" and member ids 1 and 2.
+This command will add the task "take attendance" to the first and second member of the member list.
+
+### Delete a task feature for a member
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member(s) from the filtered member list
+and use API from the model manager to delete the task with given task id from the member with given member id.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#deleteTask()`.
+
+Given below is an example usage scenario:
+
+The user executes `tdel /t 1 /m 1`. The parser will be called upon to create a TdelCommandParser.
+The parser will then parse the input to create a TdelCommand with task id as 1 and member id as 1.
+This command will delete the first task from the task list of the first member of the member list.
+
+### List tasks feature for a member
+
+#### Current Implementation
+
+The proposed feature is achieved by getting the member with given member id from the filtered member list
+and use API from the model manager to list all the tasks of the member.
+
+The operations are exposed in the `Model` interface as `Model#getFilteredMemberlist()` and `Model#updateFilteredTaskList()`.
+
+Given below is an example usage scenario:
+
+The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
+The parser will then parse the input to create a TlistCommand with member id as 1.
+This command will display all the tasks of the first member of the member list.
+=======
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
