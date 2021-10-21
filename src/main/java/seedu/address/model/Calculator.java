@@ -6,10 +6,17 @@ package seedu.address.model;
 public class Calculator {
     public static final float INVALID_REJECTION_RATE = 1;
 
+    /**
+     * Calculates the rejection rate.
+     * @param totalApplied Total number of applicants for a position.
+     * @param totalRejected Total number of rejected applicants for a position.
+     * @return A floating point number representing the rejection rate.
+     */
     public static float calculateRejectionRate(int totalApplied, int totalRejected) {
         if (totalApplied == 0) {
             return INVALID_REJECTION_RATE;
         }
-        return (float)totalRejected / totalApplied;
+        return (float) totalRejected / totalApplied;
     }
 }
+
