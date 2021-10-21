@@ -229,13 +229,13 @@ date and time are valid. Then, an Event is created with the returned `EventName`
 This event will be supplied to the `addEventCommand` to be executed.
 
 Since Managera employs a UniqueEventList, it should not have more than one Event with the same name. The `addressBook` 
-is responsible for this, with the function `hasEvent` that returns if the given event already exists. If the event does 
-not already exist, it will be successfully added to the `addressBook` through the model.
+will check if the given event already exists. If not, it will be successfully added to the `addressBook` through the model.
 
 #### Implementation Rationale
 
 As events may span a full day, we decided to implement time as an optional attribute of the Event. However, to accommodate
-this, Event is implemented with abstractions EventName, EventDate and EventTime. These abstractions are helpful in 
+this, Event is implemented with abstractions EventName, EventDate and EventTime. These abstractions are helpful in ensuring
+reliability of the program.
 
 
 ### \[Completed\] Remove Event feature
@@ -255,8 +255,29 @@ When the command is executed, there is a check to ensure the index is within the
 #### Implementation Rationale
 
 We decided that the fastest way to remove an Event would be by its index, based on the list last displayed on the screen.
-This should be much more convenient than entering the exact name of the event to be deleted.
+This should be much more convenient than entering the exact name of the event to be deleted. 
 
+#### Design Considerations:
+##### Aspect: Specifying Event to be Removed: 
+
+* **Alternative 1 (Current Choice)**: Remove by Index:
+    * Pros:
+        1. The index of the event in the currently displayed list can be directly used.
+        2. Faster and more intuitive for users.
+    * Cons:
+        1. The index is independent of the Event, which may lead to an inconsistent user experience. 
+
+* **Alternative 2**: Remove by Event ID:
+    * Pros:
+        1. Every Event will have a unique ID, leading to a consistent user experience. 
+    * Cons:
+        1. The IDs will not be displayed in sequential order and may approach large numbers, which becomes less user-friendly.
+         
+* **Alternative 3**: Remove by Event Name:
+    * Pros:
+        1. User can be more sure of the event they are removing, since it is referencing the Event name.
+    * Cons:
+        1. The user has to fully match the Event name, which is much more cumbersome. 
 
 ### \[Completed\] Filter Event feature
 
