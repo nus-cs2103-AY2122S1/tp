@@ -17,10 +17,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("ledit 1 2 time/1300-1500 subject/Science")
+[-> LogicManager : execute("ledit 1 2 time/...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("ledit 1 2 time/1300-1500 subject/Science")
+LogicManager -> AddressBookParser : parseCommand("ledit 1 2 time/...")
 activate AddressBookParser
 
 create LessonEditCommandParser
@@ -30,7 +30,7 @@ activate LessonEditCommandParser
 LessonEditCommand --> AddressBookParser
 deactivate LessonEditCommandParser
 
-AddressBookParser -> LessonEditCommandParser : parse("1 2 time/1300-1500 subject/Science")
+AddressBookParser -> LessonEditCommandParser : parse("1 2 time/...")
 activate LessonEditCommandParser
 
 create EditLessonDescriptor
@@ -56,7 +56,7 @@ destroy LessonEditCommandParser
 AddressBookParser --> LogicManager : le
 deactivate AddressBookParser
 
-LogicManager -> LessonEditCommand : executeUndoableCommand()
+LogicManager -> LessonEditCommand : execute()
 activate LessonEditCommand
 
 create Lesson
@@ -73,7 +73,7 @@ Model --> LessonEditCommand
 deactivate Model
 
 create Person
-LessonEditCommand -> Person : PersonUtil.createEditedPerson(personToEdit, updatedLessons)
+LessonEditCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
 activate Person
 
 Person --> LessonEditCommand : person

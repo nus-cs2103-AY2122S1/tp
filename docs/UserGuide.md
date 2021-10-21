@@ -304,7 +304,7 @@ Examples:
 
 #### Deleting a lesson : `ldelete`
 
-Deletes the specified lesson from the specified student in TAB.
+Deletes the specified lesson of the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
@@ -327,6 +327,34 @@ Examples:
   
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
+
+
+#### Editing a lesson : `ledit`
+
+Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
+
+Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `ledit` command:**<br>
+
+* Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+
+* You can edit all fields of a lesson except the start date.
+
+* You cannot change the lesson type (i.e. recurring and makeup).
+  
+* The lesson index refers to the index number shown in the lesson list of the student.
+
+* The index and lesson index **must be a positive integer** 1, 2, 3, …
+
+</div>
+
+Examples:
+* `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
+* `ledit 2 3 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
+* `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
 ### Viewing the Schedule
 
@@ -406,7 +434,23 @@ Format: `exit`
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
 
+* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+* **CLI**: Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only.
+* **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
+* **JAR**: Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
+* **Lesson Rates**: Amount charged per hour for lessons.
+* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
+* **UI**: User Interface - the means by which the user and the app interact.
+* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
+  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+* **UX**: User Experience - The experience a user has when using the app.
+
+--------------------------------------------------------------------------------------------------------------------
 ## Command Summary
 
 Action | Format, Examples

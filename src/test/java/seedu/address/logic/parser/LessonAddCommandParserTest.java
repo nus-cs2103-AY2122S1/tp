@@ -21,6 +21,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBO
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -58,18 +61,21 @@ public class LessonAddCommandParserTest {
                 + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple subject - last subject accepted
+        String testSubject = " " + PREFIX_SUBJECT + "Testing";
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC + SUBJECT_DESC
-                + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+            + TIME_RANGE_DESC + testSubject + SUBJECT_DESC + LESSON_RATES_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple time ranges - last time range accepted
+        String testTimeRange = " " + PREFIX_TIME + "1234-1400";
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-                + TIME_RANGE_DESC + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + testTimeRange + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC
                 + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         //multiple lesson rates - last lesson rate accepted
+        String testLessonRates = " " + PREFIX_RATES + 60.00;
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
-                + TIME_RANGE_DESC + LESSON_RATES_DESC + LESSON_RATES_DESC + SUBJECT_DESC
+                + TIME_RANGE_DESC + testLessonRates + LESSON_RATES_DESC + SUBJECT_DESC
                 + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
         // multiple homework - all accepted

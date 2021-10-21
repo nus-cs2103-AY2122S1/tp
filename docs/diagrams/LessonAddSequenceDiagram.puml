@@ -16,10 +16,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("ladd 1 date/20 Jan 2021 time/1300-1500 subject/Science hw/Exercise 2")
+[-> LogicManager : execute("ladd 1 date/...")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("ladd 1 date/20 Jan 2021 time/1300-1500 subject/Science hw/Exercise 2")
+LogicManager -> AddressBookParser : parseCommand("ladd 1 date/...)
 activate AddressBookParser
 
 create LessonAddCommandParser
@@ -29,7 +29,7 @@ activate LessonAddCommandParser
 LessonAddCommand --> AddressBookParser
 deactivate LessonAddCommandParser
 
-AddressBookParser -> LessonAddCommandParser : parse("1 date/20 Jan 2021 time/1300-1500 subject/Science hw/Exercise 2")
+AddressBookParser -> LessonAddCommandParser : parse("1 date/...")
 activate LessonAddCommandParser
 
 create LessonAddCommand
@@ -48,7 +48,7 @@ destroy LessonAddCommandParser
 AddressBookParser --> LogicManager : la
 deactivate AddressBookParser
 
-LogicManager -> LessonAddCommand : executeUndoableCommand()
+LogicManager -> LessonAddCommand : execute()
 activate LessonAddCommand
 
 create Lesson
@@ -65,7 +65,7 @@ Model --> LessonAddCommand
 deactivate Model
 
 create Person
-LessonAddCommand -> Person : PersonUtil.createEditedPerson(personToEdit, updatedLessons)
+LessonAddCommand -> Person : createEditedPerson(personToEdit, updatedLessons)
 activate Person
 
 Person --> LessonAddCommand : person
