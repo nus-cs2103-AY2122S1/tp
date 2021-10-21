@@ -13,8 +13,9 @@ import static seedu.address.logic.parser.PrefixSyntax.PREFIX_PHONE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_ROLE_SYNTAX;
 import static seedu.address.logic.parser.PrefixSyntax.PREFIX_TAG_SYNTAX;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -75,7 +76,7 @@ public class ShowCommand extends Command {
         String prefixString = prefix.getPrefix();
 
         // temporary variables to hold unique search terms and part of UI message to user
-        Set<String> uniqueInputs = new HashSet<>();
+        List<String> uniqueInputs = new ArrayList<>();
         String userText = "";
 
         switch (prefixString) {
@@ -135,49 +136,61 @@ public class ShowCommand extends Command {
         }
     }
 
-    private Set<String> getUniqueNameInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueNameInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getName().toString()).collect(Collectors.toSet());
+                .map(x -> x.getName().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniquePhoneInputs(ObservableList<Person> ol) {
+    private List<String> getUniquePhoneInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getPhone().toString()).collect(Collectors.toSet());
+                .map(x -> x.getPhone().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueEmailInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueEmailInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getEmail().toString()).collect(Collectors.toSet());
+                .map(x -> x.getEmail().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueRoleInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueRoleInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getRole().toString()).collect(Collectors.toSet());
+                .map(x -> x.getRole().toString()).distinct().sorted().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getEmploymentType().toString()).collect(Collectors.toSet());
+                .map(x -> x.getEmploymentType().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueExpectedSalaryInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueExpectedSalaryInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getExpectedSalary().toString()).collect(Collectors.toSet());
+                .map(x -> x.getExpectedSalary().toString()).distinct()
+                .sorted(Comparator.comparing(String::length).thenComparing(String::compareTo))
+                .collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueLevelOfEducationInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueLevelOfEducationInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getLevelOfEducation().toString()).collect(Collectors.toSet());
+                .map(x -> x.getLevelOfEducation().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueExperienceInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueExperienceInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getExperience().toString()).collect(Collectors.toSet());
+                .map(x -> x.getExperience().toString()).distinct()
+                .sorted(Comparator.comparing(String::length).thenComparing(String::compareTo))
+                .collect(Collectors.toList());
     }
 
-    private Set<String> getUniqueTagInputs(ObservableList<Person> ol) {
+    private List<String> getUniqueTagInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .flatMap(person -> person.getTags().stream().map(Tag::toString)).collect(Collectors.toSet());
+                .flatMap(person -> person.getTags().stream().map(Tag::toString))
+                .distinct().sorted().collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ShowCommand // instanceof handles nulls
+                && prefix.equals(((ShowCommand) other).prefix)); // state check
     }
 
     private Set<String> getUniqueInterviewInputs(ObservableList<Person> ol) {

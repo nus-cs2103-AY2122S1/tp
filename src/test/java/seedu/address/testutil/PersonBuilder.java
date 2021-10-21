@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
@@ -43,6 +44,7 @@ public class PersonBuilder {
     private Experience experience;
     private Set<Tag> tags;
     private Optional<Interview> interview;
+    private Done done;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -58,6 +60,7 @@ public class PersonBuilder {
         experience = new Experience(DEFAULT_EXPERIENCE);
         tags = new HashSet<>();
         interview = Optional.ofNullable(new Interview(DEFAULT_INTERVIEW));
+        done = new Done();
     }
 
     /**
@@ -74,6 +77,7 @@ public class PersonBuilder {
         experience = personToCopy.getExperience();
         tags = new HashSet<>(personToCopy.getTags());
         interview = personToCopy.getInterview();
+        done = personToCopy.getDone();
     }
 
     /**

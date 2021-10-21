@@ -25,6 +25,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.done.Done;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -161,7 +162,7 @@ public class EditCommand extends Command {
         private Experience experience;
         private Set<Tag> tags;
         private Optional<Interview> interview;
-
+        private Done done;
 
         public EditPersonDescriptor() {}
 
@@ -180,6 +181,7 @@ public class EditCommand extends Command {
             setExperience(toCopy.experience);
             setTags(toCopy.tags);
             setInterview(toCopy.interview);
+            setDone(toCopy.done);
         }
 
         /**
@@ -277,6 +279,13 @@ public class EditCommand extends Command {
 
         public Optional<Optional<Interview>> getInterview() {
             return Optional.ofNullable(interview);
+
+          public void setDone(Done done) {
+            this.done = done;
+        }
+
+        public Optional<Done> getDone() {
+            return Optional.ofNullable(done);
         }
 
         @Override
@@ -304,6 +313,7 @@ public class EditCommand extends Command {
                     && getExperience().equals(e.getExperience())
                     && getInterview().equals(e.getInterview())
                     && getTags().equals(e.getTags());
+                    && getDone().equals(e.getDone());
         }
     }
 }
