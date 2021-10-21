@@ -83,7 +83,7 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
 * GRADE here can only be in a range of P1-P6 (primary school levels) or S1-S4 (secondary school levels).
 
@@ -103,14 +103,20 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:**
+:bulb: **Tip:**<br>
 
 * Adds the lesson with the specified prefixes.
+
 * GRADE here follows the similar requirements when adding a student.
+
 * SUBJECT is limited to 20 characters, and its first letter will be capitalized.
+
 * DAY_OF_WEEK can only be these form (with the first letter capitalized): Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+
 * START_TIME is in 2400 hours format and can only be between 0900 and 1900 (as lessons can only be conducted between 9am to 9pm).
+
 * Lessons are fixed at two hour periods.
+
 * The cost must be a non-negative number 0.0, 2.0, 3.3, …
 
 </div>
@@ -141,7 +147,7 @@ Command Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  ![result for 'find alex david'](images/UserGuideImage/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
 
