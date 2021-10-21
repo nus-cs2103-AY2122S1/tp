@@ -11,7 +11,7 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_STUDENT_ID = "A0213256H";
     public static final String DEFAULT_CLASS_ID = "B01";
-    public static final String DEFAULT_email = "A";
+    public static final String DEFAULT_EMAIL = "e0518541@u.nus";
 
     private Name name;
     private StudentId studentId;
@@ -25,7 +25,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         classId = new ClassId(DEFAULT_CLASS_ID);
-        email = new Email(DEFAULT_email);
+        email = new Email(DEFAULT_EMAIL);
     }
 
     /**
@@ -35,7 +35,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         studentId = studentToCopy.getStudentId();
         classId = studentToCopy.getClassId();
-        email = studentToCopy.getemail();
+        email = studentToCopy.getEmail();
     }
 
     /**
@@ -66,7 +66,7 @@ public class StudentBuilder {
     /**
      * Sets the {@code Email} of the {@code student} that we are building.
      */
-    public StudentBuilder withemail(String email) {
+    public StudentBuilder withEmail(String email) {
         this.email = new Email(email);
         return this;
     }

@@ -81,7 +81,7 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         studentId.setText("Student ID: " + student.getStudentId().studentId);
         classId.setText("Class ID: " + student.getClassId().classId);
-        email.setText("Email: " + student.getemail().email);
+        email.setText("Email: " + student.getEmail().email);
 
         name.setTextFill(Color.WHITE);
         studentId.setTextFill(Color.WHITE);

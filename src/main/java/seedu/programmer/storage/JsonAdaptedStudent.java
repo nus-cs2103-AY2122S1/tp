@@ -42,7 +42,7 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         studentId = source.getStudentId().studentId;
         classId = source.getClassId().classId;
-        email = source.getemail().email;
+        email = source.getEmail().email;
         //todo: for test of show feature only
         if (source.getLabResultList() != null) {
             labResultList = new ArrayList<>();

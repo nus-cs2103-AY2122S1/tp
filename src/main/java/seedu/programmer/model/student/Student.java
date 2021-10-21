@@ -44,7 +44,7 @@ public class Student {
         return classId;
     }
 
-    public Email getemail() {
+    public Email getEmail() {
         return email;
     }
 
@@ -96,7 +96,7 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getClassId().equals(getClassId())
-                && otherStudent.getemail().equals(getemail())
+                && otherStudent.getEmail().equals(getEmail())
                 && otherStudent.getLabResultList().equals(getLabResultList());
     }
 
@@ -114,7 +114,7 @@ public class Student {
                 + "; Class ID: "
                 + getClassId()
                 + "; Email: "
-                + getemail();
+                + getEmail();
     }
 
 }

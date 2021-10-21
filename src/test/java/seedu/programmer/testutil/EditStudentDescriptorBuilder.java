@@ -30,7 +30,7 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setStudentId(student.getStudentId());
         descriptor.setClassId(student.getClassId());
-        descriptor.setemail(student.getemail());
+        descriptor.setemail(student.getEmail());
     }
 
     /**

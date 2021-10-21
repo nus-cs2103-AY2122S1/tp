@@ -28,7 +28,7 @@ public class StudentTest {
         // same name, all other attributes different -> returns false
         Student editedAlice = new StudentBuilder(ALICE).withStudentId(VALID_STUDENT_ID_BOB)
                                                        .withClassId(VALID_CLASS_ID_BOB)
-                                                       .withemail(VALID_email_BOB).build();
+                                                       .withEmail(VALID_email_BOB).build();
         assertFalse(ALICE.isSameStudent(editedAlice));
 
         // different name, all other attributes same -> returns true
@@ -76,7 +76,7 @@ public class StudentTest {
         assertNotEquals(ALICE, editedAlice);
 
         // different programmer -> returns false
-        editedAlice = new StudentBuilder(ALICE).withemail(VALID_email_BOB).build();
+        editedAlice = new StudentBuilder(ALICE).withEmail(VALID_email_BOB).build();
         assertNotEquals(ALICE, editedAlice);
     }
 }

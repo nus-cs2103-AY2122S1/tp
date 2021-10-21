@@ -29,7 +29,7 @@ public class StudentUtil {
         return PREFIX_NAME + student.getName().fullName + " "
                 + PREFIX_STUDENT_ID + student.getStudentId().studentId + " "
                 + PREFIX_CLASS_ID + student.getClassId().classId + " "
-                + PREFIX_email + student.getemail().email + " ";
+                + PREFIX_email + student.getEmail().email + " ";
     }
 
     /**

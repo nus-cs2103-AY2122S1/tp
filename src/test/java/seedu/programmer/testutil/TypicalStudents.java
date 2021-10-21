@@ -23,39 +23,39 @@ public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withStudentId("A0212425H").withClassId("B01")
-            .withemail("A").build();
+            .withEmail("A").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withStudentId("A0212325H").withClassId("B02")
-            .withemail("B+").build();
+            .withEmail("B+").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz")
             .withStudentId("A0112425H").withClassId("B03")
-            .withemail("A-").build();
+            .withEmail("A-").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier")
             .withStudentId("A0512425H").withClassId("B02")
-            .withemail("A+").build();
+            .withEmail("A+").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer")
             .withStudentId("A0612425H").withClassId("B01")
-            .withemail("D").build();
+            .withEmail("D").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz")
             .withStudentId("A0912425H").withClassId("B11")
-            .withemail("C").build();
+            .withEmail("C").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best")
             .withStudentId("A0852425H").withClassId("B11")
-            .withemail("B").build();
+            .withEmail("B").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier")
             .withStudentId("A0782425H").withClassId("B01")
-            .withemail("B").build();
+            .withEmail("B").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller")
             .withStudentId("A0852425H").withClassId("B01")
-            .withemail("A").build();
+            .withEmail("A").build();
 
     // Manually added - student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENT_ID_AMY)
-            .withClassId(VALID_CLASS_ID_AMY).withemail(VALID_email_AMY).build();
+            .withClassId(VALID_CLASS_ID_AMY).withEmail(VALID_email_AMY).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB).withStudentId(VALID_STUDENT_ID_BOB)
-            .withClassId(VALID_CLASS_ID_BOB).withemail(VALID_email_BOB).build();
+            .withClassId(VALID_CLASS_ID_BOB).withEmail(VALID_email_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -24,7 +24,7 @@ public class AddCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         // Re-initialize these variables before each test
-        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"), new Email("A"));
+        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"), new Email("e0518441@u.nus.edu"));
         model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
     }
 
@@ -49,7 +49,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addStudent(validStudent);
         String differentStudentId = "A6543210B";
         Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId),
-                                                   validStudent.getClassId(), validStudent.getemail());
+                                                   validStudent.getClassId(), validStudent.getEmail());
 
         assertCommandSuccess(new AddCommand(studentDifferentName), expectedModel,
                 String.format(AddCommand.MESSAGE_SUCCESS, studentDifferentName), expectedModel);
@@ -61,7 +61,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addStudent(validStudent);
         String differentName = "Different Name";
         Student studentDifferentName = new Student(new Name(differentName), validStudent.getStudentId(),
-                                                   validStudent.getClassId(), validStudent.getemail());
+                                                   validStudent.getClassId(), validStudent.getEmail());
 
         assertCommandFailure(new AddCommand(studentDifferentName), expectedModel, AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }

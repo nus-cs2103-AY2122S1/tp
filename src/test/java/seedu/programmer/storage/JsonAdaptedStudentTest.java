@@ -21,7 +21,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_STUDENT_ID = BENSON.getStudentId().toString();
     private static final String VALID_CLASS_ID = BENSON.getClassId().toString();
-    private static final String VALID_email = BENSON.getemail().toString();
+    private static final String VALID_email = BENSON.getEmail().toString();
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
