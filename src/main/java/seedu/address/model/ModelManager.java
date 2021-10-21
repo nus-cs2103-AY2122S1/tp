@@ -276,9 +276,9 @@ public class ModelManager implements Model {
         return positionBook.hasPosition(position);
     }
     @Override
-    public boolean hasPositionWithTitle(Title position) {
-        requireNonNull(position);
-        return positionBook.hasPositionWithTitle(position);
+    public boolean hasPositionWithTitle(Title title) {
+        requireNonNull(title);
+        return positionBook.hasPositionWithTitle(title);
     }
 
     @Override
