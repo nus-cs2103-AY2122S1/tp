@@ -1,7 +1,5 @@
 package seedu.address.model.task;
 
-
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -12,23 +10,24 @@ import seedu.address.model.module.ModuleName;
  * Represents a Task of a TeachingAssistantBuddy in the TAB.
  */
 public class Task {
-
     private final ModuleName moduleName;
-    private final String name;
-    private final String deadline;
+    private final TaskId taskId;
+    private final TaskName taskName;
+    private final TaskDeadline taskDeadline;
     private boolean isComplete;
 
     /**
      * Constructs a Task.
      * @param moduleName The TeachingAssistantBuddy this Task is under.
-     * @param name The Name of this Task.
-     * @param deadline The Deadline of this Task.
+     * @param taskName The Name of this Task.
+     * @param taskDeadline The Deadline of this Task.
      */
-    public Task(ModuleName moduleName, String name, String deadline) {
-        requireAllNonNull(moduleName, name, deadline);
+    public Task(ModuleName moduleName, TaskId taskId, TaskName taskName, TaskDeadline taskDeadline) {
+        requireAllNonNull(moduleName, taskId, taskName, taskDeadline);
         this.moduleName = moduleName;
-        this.name = name;
-        this.deadline = deadline;
+        this.taskId = taskId;
+        this.taskName = taskName;
+        this.taskDeadline = taskDeadline;
         this.isComplete = false;
     }
 
@@ -36,20 +35,24 @@ public class Task {
         return this.moduleName.toString();
     }
 
-    public ModuleName getModuleName() {
+    public ModuleName getTaskModuleName() {
         return this.moduleName;
     }
 
-    public String getName() {
-        return name;
+    public TaskId getTaskId() {
+        return this.taskId;
     }
 
-    public String getDeadline() {
-        return deadline;
+    public TaskName getTaskName() {
+        return this.taskName;
+    }
+
+    public TaskDeadline getTaskDeadline() {
+        return this.taskDeadline;
     }
 
     public boolean isComplete() {
-        return isComplete;
+        return this.isComplete;
     }
 
     /**
@@ -63,7 +66,7 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(this.getName())
+                && otherTask.getTaskName().equals(this.getTaskName())
                 && otherTask.getModuleNameString().equals(this.getModuleNameString());
     }
 
@@ -84,11 +87,11 @@ public class Task {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getTaskName())
                 .append("; TeachingAssistantBuddy: ")
                 .append(getModuleNameString())
                 .append("; Deadline: ")
-                .append(getDeadline())
+                .append(getTaskDeadline())
                 .append("; Is completed: ")
                 .append("yes/no");
         return builder.toString();
@@ -106,12 +109,12 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getModuleNameString().equals(getModuleNameString())
-                && otherTask.getName().equals(getName());
+                && otherTask.getTaskName().equals(getTaskName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, moduleName, deadline);
+        return Objects.hash(moduleName, taskId, taskName, taskDeadline);
     }
 
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.util.stream.Stream;
@@ -12,6 +13,9 @@ import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.task.TaskDeadline;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.TaskName;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -29,7 +33,7 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     public EditTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_TASK_NAME,
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_TASK_ID, PREFIX_MODULE_NAME,
                         PREFIX_TASK_DEADLINE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_TASK_NAME)
@@ -38,21 +42,25 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
         }
 
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
-        String taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get());
+        TaskId taskId = ParserUtil.parseTaskId(argMultimap.getValue(PREFIX_TASK_ID).get());
+        TaskName taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get());
+        TaskDeadline taskDeadline = ParserUtil.parseTaskDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         if (argMultimap.getValue(PREFIX_TASK_NAME).isPresent()) {
-            editTaskDescriptor.setName(ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get()));
+            editTaskDescriptor.setTaskName(ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_TASK_DEADLINE).isPresent()) {
-            editTaskDescriptor.setDeadline(ParserUtil.parseDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get()));
+            editTaskDescriptor
+                    .setTaskDeadline(ParserUtil.parseTaskDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get()));
         }
 
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
         }
-        editTaskDescriptor.setName(taskName);
-
+        editTaskDescriptor.setTaskId(taskId);
+        editTaskDescriptor.setTaskName(taskName);
+        editTaskDescriptor.setTaskDeadline((taskDeadline));
         return new EditTaskCommand(moduleName, editTaskDescriptor);
     }
     /**

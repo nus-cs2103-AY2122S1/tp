@@ -9,7 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class TaskId {
 
-    public static final String MESSAGE_CONSTRAINTS = "Must be a valid task Id";
+    public static final String MESSAGE_CONSTRAINTS = "Task Id must start with a capital T, "
+            + "followed by a number representing its index number";
 
     /*
      *  Task Id must start with a capital T, followed by a number representing its index number

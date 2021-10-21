@@ -1,18 +1,18 @@
-package seedu.address.model.module.student;
+package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Task's deadline, must only contain alphanumeric characters.
- * Guarantees: immutable; is valid as declared in {@link #isValidTeleHandle(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskDeadline(String)}
  */
 public class TaskDeadline {
 
 
     public static final String MESSAGE_CONSTRAINTS =
             "TaskDeadline must only contain alphanumeric characters";
-    public static final String VALIDATION_REGEX = "[a-zA-Z0-9]";
+    public static final String VALIDATION_REGEX = "[a-zA-Z0-9-]*";
     public final String value;
 
     /**
@@ -22,14 +22,14 @@ public class TaskDeadline {
      */
     public TaskDeadline(String taskDeadline) {
         requireNonNull(taskDeadline);
-        checkArgument(isValidTeleHandle(taskDeadline), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidTaskDeadline(taskDeadline), MESSAGE_CONSTRAINTS);
         value = taskDeadline;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid taskDeadline.
      */
-    public static boolean isValidTeleHandle(String test) {
+    public static boolean isValidTaskDeadline(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
@@ -41,8 +41,8 @@ public class TaskDeadline {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TeleHandle // instanceof handles nulls
-                && value.equals(((TeleHandle) other).value)); // state check
+                || (other instanceof TaskDeadline // instanceof handles nulls
+                && value.equals(((TaskDeadline) other).value)); // state check
     }
 
     @Override

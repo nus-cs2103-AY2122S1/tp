@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.util.List;
@@ -16,6 +17,9 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDeadline;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.TaskName;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -31,11 +35,13 @@ public class EditTaskCommand extends EditCommand {
             + "one field (name/deadline) to be edited. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_TASK_ID + "TASK ID "
             + PREFIX_TASK_NAME + "TASK NAME "
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
-            + PREFIX_TASK_NAME + "Assignment 1 "
+            + PREFIX_TASK_ID + "1 "
+            + PREFIX_TASK_NAME + "V1.3 "
             + PREFIX_TASK_DEADLINE + "21 Oct 2021 "
             + "(edits all fields)";
 
@@ -85,15 +91,15 @@ public class EditTaskCommand extends EditCommand {
     public CommandResult editTaskInformation(Student student) throws CommandException {
         UniqueTaskList studentTaskList = student.getTaskList();
         for (Task task : studentTaskList) {
-            if (task.getName().equals(editTaskDescriptor.getName())) {
+            if (task.getTaskId().equals(editTaskDescriptor.getTaskId())) {
                 Task editedTask = createEditedTask(task, editTaskDescriptor);
                 // replaces the old task with the editedTask
                 task = editedTask;
-                return new CommandResult(String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, task.getName()));
+                return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
             }
         }
         student.setTaskList(studentTaskList);
-        throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, editTaskDescriptor.name));
+        throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, editTaskDescriptor.taskId));
     }
 
     /**
@@ -107,12 +113,13 @@ public class EditTaskCommand extends EditCommand {
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
         assert taskToEdit != null;
 
-        ModuleName moduleName = taskToEdit.getModuleName();
-        String updatedName = editTaskDescriptor.getName().orElse(taskToEdit.getName());
-        String updatedDeadline = editTaskDescriptor.getDeadline().orElse(taskToEdit.getDeadline());
+        ModuleName moduleName = taskToEdit.getTaskModuleName();
+        // taskId is not to be edited
+        TaskId taskId = taskToEdit.getTaskId();
+        TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
+        TaskDeadline updatedTaskDeadline = editTaskDescriptor.getTaskDeadline().orElse(taskToEdit.getTaskDeadline());
 
-
-        Task editedTask = new Task(moduleName, updatedName, updatedDeadline);
+        Task editedTask = new Task(moduleName, taskId, updatedTaskName, updatedTaskDeadline);
         return editedTask;
     }
 
@@ -140,8 +147,9 @@ public class EditTaskCommand extends EditCommand {
      */
     public static class EditTaskDescriptor {
         private ModuleName moduleName;
-        private String name = "default_edited_task_name";
-        private String deadline;
+        private TaskId taskId;
+        private TaskName taskName;
+        private TaskDeadline taskDeadline;
         private boolean isComplete;
 
         public EditTaskDescriptor() {}
@@ -152,31 +160,40 @@ public class EditTaskCommand extends EditCommand {
          * @param  toCopy The edit task descriptor to be copied.
          */
         public EditTaskDescriptor(EditTaskDescriptor toCopy) {
-            setName(toCopy.name);
-            setDeadline(toCopy.deadline);
+            setTaskId(toCopy.taskId);
+            setTaskName(toCopy.taskName);
+            setTaskDeadline(toCopy.taskDeadline);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, deadline);
+            return CollectionUtil.isAnyNonNull(taskName, taskDeadline);
         }
 
-        public void setName(String name) {
-            this.name = name;
+        public void setTaskId(TaskId taskId) {
+            this.taskId = taskId;
         }
 
-        public Optional<String> getName() {
-            return Optional.ofNullable(name);
+        public Optional<TaskId> getTaskId() {
+            return Optional.ofNullable(taskId);
         }
 
-        public void setDeadline(String deadline) {
-            this.deadline = deadline;
+        public void setTaskName(TaskName taskName) {
+            this.taskName = taskName;
         }
 
-        public Optional<String> getDeadline() {
-            return Optional.ofNullable(deadline);
+        public Optional<TaskName> getTaskName() {
+            return Optional.ofNullable(taskName);
+        }
+
+        public void setTaskDeadline(TaskDeadline taskDeadline) {
+            this.taskDeadline = taskDeadline;
+        }
+
+        public Optional<TaskDeadline> getTaskDeadline() {
+            return Optional.ofNullable(taskDeadline);
         }
 
         public void setIsComplete(boolean isComplete) {
@@ -202,8 +219,8 @@ public class EditTaskCommand extends EditCommand {
             // state check
             EditTaskDescriptor e = (EditTaskDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getDeadline().equals(e.getDeadline())
+            return getTaskName().equals(e.getTaskName())
+                    && getTaskDeadline().equals(e.getTaskDeadline())
                     && getIsComplete().equals(e.getIsComplete());
         }
     }

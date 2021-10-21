@@ -15,7 +15,9 @@ import seedu.address.model.module.student.Name;
 import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.TeleHandle;
 import seedu.address.model.tag.Tag;
-
+import seedu.address.model.task.TaskDeadline;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.TaskName;
 
 
 /**
@@ -141,32 +143,47 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String taskName}.
+     * Parses a {@code String taskId} into a {@code TaskId}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code taskName} is invalid.
      */
-    public static String parseTaskName(String taskName) throws ParseException {
-        requireNonNull(taskName);
-        String trimmedName = taskName.trim();
-        if (!ModuleName.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static TaskId parseTaskId(String taskId) throws ParseException {
+        requireNonNull(taskId);
+        String trimmedId = taskId.trim();
+        if (!TaskId.isValidTaskId(trimmedId)) {
+            throw new ParseException(TaskId.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new TaskId(trimmedId);
     }
 
     /**
-     * Parses a {@code String taskName}.
+     * Parses a {@code String taskName} into a {@code TaskName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code taskName} is invalid.
      */
-    public static String parseDeadline(String taskDeadline) throws ParseException {
-        requireNonNull(taskDeadline);
-        String trimmedName = taskDeadline.trim();
-        if (!ModuleName.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+    public static TaskName parseTaskName(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedTaskName = taskName.trim();
+        if (!TaskName.isValidTaskName(trimmedTaskName)) {
+            throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
         }
-        return trimmedName;
+        return new TaskName(trimmedTaskName);
+    }
+
+    /**
+     * Parses a {@code String taskName} into a {@code TaskDeadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskName} is invalid.
+     */
+    public static TaskDeadline parseTaskDeadline(String taskDeadline) throws ParseException {
+        requireNonNull(taskDeadline);
+        String trimmedTaskDeadline = taskDeadline.trim();
+        if (!TaskDeadline.isValidTaskDeadline(trimmedTaskDeadline)) {
+            throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDeadline(trimmedTaskDeadline);
     }
 }

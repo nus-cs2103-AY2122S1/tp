@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,6 +21,7 @@ public class AddTaskCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a module. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME"
+            + PREFIX_TASK_ID + "TASK ID"
             + PREFIX_TASK_NAME + "TASK NAME"
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE";
 
