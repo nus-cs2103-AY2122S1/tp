@@ -12,7 +12,6 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertEquals(commandResult, new CommandResult("feedback"));
-        assertEquals(commandResult, new CommandResult("feedback", false, false));
 
         // same object -> returns true
         assertEquals(commandResult, commandResult);
@@ -20,17 +19,11 @@ public class CommandResultTest {
         // null -> returns false
         assertNotEquals(null, commandResult);
 
-        // different types -> returns false
-        assertNotEquals(0.5f, commandResult);
+        // different CommandResult type -> returns false
+        assertNotEquals(commandResult, new ExitCommandResult("exit"));
 
         // different feedbackToUser value -> returns false
         assertNotEquals(commandResult, new CommandResult("different"));
-
-        // different showHelp value -> returns false
-        assertNotEquals(commandResult, new CommandResult("feedback", true, false));
-
-        // different exit value -> returns false
-        assertNotEquals(commandResult, new CommandResult("feedback", false, true));
     }
 
     @Test
@@ -43,10 +36,7 @@ public class CommandResultTest {
         // different feedbackToUser value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
-        // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
-
-        // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        // different CommandResult type -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new DownloadCommandResult("different").hashCode());
     }
 }
