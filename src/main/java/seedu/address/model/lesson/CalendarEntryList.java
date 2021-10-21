@@ -10,7 +10,6 @@ import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
@@ -182,7 +181,7 @@ public class CalendarEntryList {
      * @param lesson The lesson to be converted to a calendar entry.
      * @return The calendar entry that also contains this lesson.
      */
-    public Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
+    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
         requireNonNull(lesson);
 
         Entry<Lesson> entry = new Entry<>();
@@ -214,10 +213,20 @@ public class CalendarEntryList {
         // state check
         CalendarEntryList other = (CalendarEntryList) obj;
 
-        return entryList.equals(other.entryList);
-        // Note that ArrayList#equals(Object) Returns true if and only if the specified object is also a list,
-        // both lists have the same size, and all corresponding pairs of elements in the two lists are equal.
-        // CalendarFX's Calendar#equals(Object) method only tests for object equality with == and hence shouldn't be used
+        if (entryList.size() != other.entryList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < entryList.size(); i++) {
+            boolean equalPair = entryList.get(i).getUserObject().equals(other.entryList.get(i).getUserObject());
+            if (!equalPair) {
+                return false;
+            }
+        }
+        return true;
+        // Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
+        // CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
+        // which we do not set, so we should not use it.
     }
 
     @Override
