@@ -263,7 +263,52 @@ Cons: Too much of a hassle with long names, and using only parts of a name was n
 the possibility of multiple people with the same first name, etc. The side panel was implemented to circumvent
 this problem
 
+### \[Implemented\] Adding Date/Time to Tasks (Myat)
 
+To add onto our new task list system, just like how the address book allows storing of additional information like
+phone number and email, the user can now add in a task's date with an optional time information. The addition of
+date/time as a new type of information to be stored opens the door to more functionalities such as listing upcoming
+tasks and finding tasks based on date/time.
+
+Possible use cases:
+- Adding date/time of a task that is due at the specified date and time.
+- Adding date/time of a task that the user wants to start working on at the specified date and time.
+
+#### Implementation
+
+The `TaskDate.java` class is created to represent a date/time object of a task, which is stored inside a `Task` object
+upon creating a `Task` through an `add` command. Inside `TaskDate.java` class, date and time are represented by Java 
+class objects `LocalDate` and `LocalTime`. As the user can choose to either omit both date and time or have time as optional
+information, both of these objects are wrapped in Java `Optional` objects as `Optional<LocalDate>` and `Optional<LocalTime>`.
+This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `Task` which the user adds
+in without stating date/time information. 
+
+The user is also required to follow a specific date and time format which the validity is checked by `DateTask#isValidTaskDate`.
+Java `LocalDate#parse` and `LocalTime#parse` are used to help verify validity of the format keyed in by the user.
+
+Example usage of `add` command to add date/time is as follows:
+- `add d/Homework dt/21/11/2021` - Adds a task "Homework" that is due on 21/11/2021 at an unspecified time.
+- `add d/Tutorial dt/1600` - Adds a task "Tutorial" that starts at 4:00 PM with date as that current day.
+- `add d/Event dt/25/10/2021, 10:00 AM` - Adds a task "Event" that starts at the given date and time.
+
+A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
+is entered.
+
+![TabSystemSequenceDiagram](images/AddDateSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to store date and time in TaskDate:**
+
+* **Alternative 1 (current choice):** Uses `LocalDate` and `LocalTime` to store date and time respectively.
+    * Pros: More flexibility and better abstraction as both can be handled separately. Less complex to implement.
+    * Cons: More methods and code are needed to handle the different types of Object separately which results in 
+    * methods with similar code.
+
+* **Alternative 2:** Uses `LocalDateTime` to store date and time together.
+    * Pros: Less code and methods to handle one Object type and it also results in easier implementation of
+    * comparison methods between two `LocalDateTime` objects.
+    * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
