@@ -128,8 +128,12 @@ Prefix Input Specifications:
   * An EXPECTED_SALARY should
   * For example:
 * ####LEVEL_OF_EDUCATION `l/`
-  * A LEVEL_OF_EDUCATION should
+  * A LEVEL_OF_EDUCATION should be one of the following: "Elementary", "Middle School", "High School", "University", "Bachelors", "Masters" or "PhD".
+  * A LEVEL_OF_EDUCATION is case-insensitive.
   * For example:
+    * LEVEL_OF_EDUCATION inputs such as `Middle School` and `PhD` are acceptable.
+    * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
+    * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ####YEARS_OF_EXPERIENCE `y/`
   * A YEARS_OF_EXPERIENCE should
   * For example:
@@ -300,7 +304,7 @@ Marks the specified applicant by index from the list in RecruitIn as "Done" (hav
 
 Format: `mark INDEX…​`
 
-* Marks the specified applicant at the specified `INDEX` as "Done".
+* Marks the applicant at the specified `INDEX` as "Done".
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `mark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -309,7 +313,7 @@ Format: `mark INDEX…​`
 
 Examples:
 * `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
-* `find John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
+* `find n/John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
 * `list` followed by `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 
 ### Unmarking an applicant : `unmark`
@@ -318,7 +322,7 @@ Unmarks the specified applicant by index from the list in RecruitIn to "Not Done
 
 Format: `unmark INDEX…​`
 
-* Unmarks the specified applicant at the specified `INDEX` to "Not Done".
+* Unmarks the applicant at the specified `INDEX` to "Not Done".
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * At least one `INDEX` must be given. (i.e. `unmark ` is not a valid command)
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
@@ -327,7 +331,7 @@ Format: `unmark INDEX…​`
 
 Examples:
 * `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
-* `find John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* `find n/John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
 * `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 
 ### Exiting the program : `exit`
