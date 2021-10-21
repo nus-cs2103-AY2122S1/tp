@@ -2,6 +2,7 @@ package seedu.address.model.lesson;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.util.LessonUtil.formattedValue;
 
 /**
  * Represents the amount per lesson payable in the address book.
@@ -26,32 +27,7 @@ public class LessonRates {
     public LessonRates(String lessonRates) {
         requireNonNull(lessonRates);
         checkArgument(isValidLessonRates(lessonRates));
-        value = formatLessonRates(lessonRates);
-    }
-
-    /**
-     * This is taken exactly from implementation of {@code Fee#formateFee(String fee)}
-     * Removes leading zeroes and postfixes decimal places.
-     *
-     * @param lessonRates A valid lesson rate.
-     * @return The formatted lesson rates.
-     */
-    private String formatLessonRates(String lessonRates) {
-        String formattedRates = lessonRates;
-        if (formattedRates.startsWith("0")) { // remove all leading zeroes
-            formattedRates = formattedRates.replaceFirst("^0+", "");
-        }
-        if (formattedRates.startsWith(".")) { // prefix missing zero that was removed
-            formattedRates = "0" + formattedRates;
-        }
-        if (!formattedRates.isEmpty() && !formattedRates.contains(".")) { // postfix missing decimal places
-            formattedRates = formattedRates + ".00";
-        }
-        int length = lessonRates.length();
-        if (length >= 2 && lessonRates.charAt(length - 2) == '.') { // postfix missing zero
-            formattedRates = formattedRates + "0";
-        }
-        return formattedRates;
+        value = formattedValue(lessonRates);
     }
 
     public static boolean isValidLessonRates(String test) {

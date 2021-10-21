@@ -28,8 +28,9 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
 
-    // Lesson Rates
+    // Fees calculation related fields
     private final LessonRates lessonRates;
+    private final OutstandingFees outstandingFees;
 
     /**
      * Every field must be present and not null.
@@ -39,14 +40,16 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      * @param rates Cost per hour for the lesson.
+     * @param fees Outstanding fees that student has not paid for this lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
-        requireAllNonNull(date, timeRange, subject, homework);
+    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates, OutstandingFees fees) {
+        requireAllNonNull(date, timeRange, subject, homework, rates, fees);
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
         this.lessonRates = rates;
+        this.outstandingFees = fees;
     }
 
     public Date getDate() {
@@ -83,6 +86,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public LessonRates getLessonRates() {
         return lessonRates;
+    }
+
+    public OutstandingFees getOutstandingFees() {
+        return outstandingFees;
     }
 
     /**
@@ -131,12 +138,13 @@ public abstract class Lesson implements Comparable<Lesson> {
             && otherLesson.getSubject().equals(getSubject())
             && otherLesson.getHomework().equals(getHomework())
             && otherLesson.getLessonRates().equals(getLessonRates())
+            && otherLesson.getOutstandingFees().equals(getOutstandingFees())
             && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, timeRange, subject, homework);
+        return Objects.hash(date, timeRange, subject, homework, lessonRates, outstandingFees);
     }
 
     @Override
@@ -150,6 +158,8 @@ public abstract class Lesson implements Comparable<Lesson> {
             .append(getTimeRange())
             .append("\nSubject: ")
             .append(getSubject())
+            .append("\nOutstanding Fees: ")
+            .append(getOutstandingFees())
             .append("\nLesson Rates: ")
             .append(getLessonRates());
 

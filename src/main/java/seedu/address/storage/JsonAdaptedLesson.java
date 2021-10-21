@@ -10,14 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.Date;
-import seedu.address.model.lesson.Homework;
-import seedu.address.model.lesson.Lesson;
-import seedu.address.model.lesson.LessonRates;
-import seedu.address.model.lesson.MakeUpLesson;
-import seedu.address.model.lesson.RecurringLesson;
-import seedu.address.model.lesson.Subject;
-import seedu.address.model.lesson.TimeRange;
+import seedu.address.model.lesson.*;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -31,6 +24,7 @@ class JsonAdaptedLesson {
     private final String subject;
     private final String lessonRates;
     private final boolean isRecurring;
+    private final JsonAdaptedFees outstandingFees;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
 
     /**
@@ -41,11 +35,13 @@ class JsonAdaptedLesson {
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework,
-                             @JsonProperty("lessonRates") String lessonRates) {
+                             @JsonProperty("lessonRates") String lessonRates,
+                             @JsonProperty("outstandingFees") JsonAdaptedFees outstandingFees) {
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.lessonRates = lessonRates;
+        this.outstandingFees = outstandingFees;
         if (homework != null) {
             this.homework.addAll(homework);
         }
@@ -60,6 +56,7 @@ class JsonAdaptedLesson {
         timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
         lessonRates = source.getLessonRates().value;
+        outstandingFees = new JsonAdaptedFees(source.getOutstandingFees());
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
@@ -112,9 +109,11 @@ class JsonAdaptedLesson {
         }
         final LessonRates modelLessonRates = new LessonRates(lessonRates);
 
+        final OutstandingFees modelOutstandingFees = outstandingFees.toModelType();
+
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
         return isRecurring
-                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates)
-                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates);
+                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates, modelOutstandingFees)
+                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates, modelOutstandingFees);
     }
 }
