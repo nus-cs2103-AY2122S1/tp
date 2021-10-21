@@ -11,13 +11,10 @@ public class Review {
 
     public static final String MESSAGE_CONSTRAINTS = "Reviews can take any value, use '-' to indicate an empty review";
 
-    /*
-     * The first character of the review must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
+    public static final String EMPTY_REVIEW = "- No Review -";
 
     public final String value;
+
 
     /**
      * Constructs an {@code Review}.
@@ -36,6 +33,11 @@ public class Review {
     public static boolean isValidReview(String test) {
         return true;
     }
+
+    public boolean isEmptyReview() {
+        return value.equals(EMPTY_REVIEW);
+    }
+
 
     @Override
     public String toString() {

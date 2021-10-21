@@ -1,0 +1,21 @@
+@startuml
+start
+:User filters contacts by category(s);
+
+:Parser parses command;
+
+'Since the beta syntax does not support placing the condition outside the
+'diamond we place it as the true branch instead.
+
+if () then ([User types valid category code])
+    if () then ([any category code matches any contact])
+      :Contact List shows contact(s) with matching category codes;
+    else ([no contact matches the category code(s)])
+      :Empty list of contacts is displayed;
+    endif
+else ([User types invalid command])
+    :Command Result shows error message;
+    :Contact List remains unchanged;
+endif
+stop
+@enduml

@@ -205,6 +205,43 @@ The following activity diagram summarises what happens when a Tour Guide execute
     * Pros: More accurate matches assuming Tour Guide searches for exact keywords.
     * Cons: Less likely to find contacts other than the intended one(s) that might be relevant for a themed or location-based tour itinerary.
 
+=======
+### Filter feature
+
+#### Proposed Implementation
+
+The filter mechanism works by modifying the GUI of the application to display the contacts in that category without making any changes to the actual contacts stored. The filter implementation makes use of the following operations:
+
+* `Model#updateFilteredPersonList(Predicate p)` - iterates through the addressBook `PersonList`. If a `Person` returns true, the `Person` is added to the `filteredPersons` list.
+* `IsInCategoryPredicate(Set<CategoryCode> categories)` - returns true if a person’s `categoryCode` is in the Set
+
+Given below is an example usage scenario of the filter mechanism.
+
+Step 1. The user launched the application for the first time. The `filteredPerson` List will be initialized with all persons in the addressBook `UniquePersonList`.
+
+Step 2. The user executes `filter c/att` command to filter all the attraction contacts in the address book. The `Parser` parses the user input and creates a `FilterCommand`.
+
+Step 3. The filter command creates an `IsInCategoryPredicate` instance with the `ATT` CategoryCode and calls `Model#updateFilteredPersonList()` with the predicate as an argument, causing the `filteredPerson` List to be modified to contain only attraction contacts in the address book.
+
+The following sequence diagram shows how the filter operation works:
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new filter command:
+
+![FilterActivityDiagram](images/FilterActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Functionality of Filter feature**
+
+* **Alternative 1 (current choice):** Filters one or multiple categories.
+    * Pros: More flexible usage as users can choose to enter one or more category codes.
+    * Cons: May need to use a more complex data structure such as a `Set` to store the category codes entered by user. 
+
+* **Alternative 2:** Only handles filter by one category.
+    * Pros: More targeted results.
+    * Cons: Need to execute multiple filter commands to search for contacts in more than one category.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -290,7 +327,73 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Review Feature
 
+#### Implementation
+
+The review feature builds upon the `Person` class by adding more functionality to the class. It utilises the `rv/` tag in the `add` command to add a review stored internally as a `Review` object.
+It implements the following operations:
+* `isValidReview()`  — Determines if the input value is valid.
+* `isEmptyReview()`  — Determines if the stored Review is empty (stored as `-No Review-` String).
+
+In addition, numerous classes had to be updated to accommodate the Review feature:
+* `AddCommandParser` to parse the new `rv/` tag.
+* `ParserUtil` to parse the Review content.
+* `EditCommand` and `EditCommandParser` to enable editing of Reviews.
+
+The following sequence diagram gives the overview of the add command with a review:
+
+![Sequence Diagram for Review](images/ReviewSequenceDiagram.png)
+
+The following activity diagram shows how the review operation works:
+
+![Sequence Diagram for Review](images/ReviewActivityDiagram.png)
+
+
+Given below is an example usage scenario of adding a Review:
+
+Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`
+
+Step 2. The user can click on the contact on the GUI to expand it and display the full review
+
+#### Design considerations:
+
+**Aspect: How Review is called by the user:**
+
+* **Alternative 1 (current choice):** Adds a review through the `add` command.
+    * Pros: Easier to implement.
+    * Cons: Add command can become very lengthy.
+
+* **Alternative 2:** Separate command for review
+    * Pros: Increases modularity by making review an entirely new command.
+    * Cons: Too many commands which may confuse the User.
+### Summary Feature
+
+#### Implementation
+
+The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to 
+obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
+* `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
+* `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
+* `setNumberCategory`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+
+Additionally, `Summary` will communicate with `UI` to display the summarised results
+
+The following sequence diagram gives an overview of how `Summary` works:
+
+![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Summary summarises data from the internal AddressBook:**
+
+* **Alternative 1 (current choice):** Works on a Read-Only copy of `AddressBook`.
+    * Pros: Easier to implement, guaranteed to not edit the internals.
+    * Cons: Exposing internal workings of `AddressBook`.
+
+* **Alternative 2:** Gets data directly from `Person`, `Review` etc.
+    * Pros: Data is kept directly with the low-level classes and pulled from there.
+    * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
