@@ -257,15 +257,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* NUS computer science university students
-* has a need to manage a significant number of contacts of friends and staff
+* NUS computer science university students with entrepreneurial mindset.
+* has a need to manage a significant number of contacts of friends and staff with a particular skill set.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Through an address book, this product aims to store information, such as faculty, course, frequency of meeting, phone numbers, etc, of friends or staff, so that the student will be able to remember and refer when needed. Manage contacts faster than a typical mouse/GUI driven app
-
+**Value proposition**: Through an address book, this product aims to store information such as faculty, major, programming languages, interests, past projects, remarks of peers that the user has encountered throughout university. ComputingConnection will help the student remember and document his/her network of students encountered in NUS for easy reference in the future.
 
 ### User stories
 
@@ -279,19 +278,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | add a new contact              | record basic contact information of a friend or staff                  |
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
-| `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |             
+| `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
+| `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
+| `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
+| `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
+| `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
 | `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
 | `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
-| `*`      | slightly familiar user                     | schedule an upcoming event     | keep track of my schedules with my contacts better                     |
-| `*`      | slightly familiar user                     | tag a category to an event     | so that I can easily view or filter the events based on type           |
-| `*`      | slightly familiar user                     | tag an event to a contact      | so that I can easily view contacts in a particular event               |
 | `*`      | user with many persons in the address book | sort contacts by name           | locate a contact easily                                                 |
-| `*`      | expert user                                | sort contacts by meeting frequency| reconnect with neglected friends                                     |
 | `*`      | expert user                                | sort contacts by faculty           | consult them should i need help for a project                       |
-| `*`      | expert user                                | sort events based on scheduling           | i know what is coming up next                       |
-| `*`      | expert user                                | delete past events           | in order to clear up the database and reduce clutter                       |
 | `*`      | expert user                                | mass delete information that is not required anymore          | i get rid of redundant info                      |
+| `* * *`  | expert user                 | filter my list of contacts                | view a list of contacts based on a list of tags attached to them                                   |
+| `*`  | expert user                 | filter my organisation list                | view a list of organisations based on the specific tag attached to them                                  |
 
 *{More to be added}*
 
@@ -355,6 +354,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
    * 2a1. ComputingConnection shows an error message.
 
       Use case ends.
+
+**Use case: Add an organisation**
+
+**MSS**
+
+1.  User requests to add an organisation
+2.  ComputingConnection adds the organisation
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input tag formats are incorrect.
+    * 1a1. ComputingConnection shows an error message.
+
+  Use case ends.
 
 **Use case: Delete a specific contact**
 
