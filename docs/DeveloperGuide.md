@@ -304,12 +304,13 @@ The following activity diagram summarises what happens when a user executes an a
 * **Alternative 1 (current choice):** Uses `LocalDate` and `LocalTime` to store date and time respectively.
     * Pros: More flexibility and better abstraction as both can be handled separately. Less complex to implement.
     * Cons: More methods and code are needed to handle the different types of Object separately which results in 
-    * methods with similar code.
+            methods with similar code.
 
 * **Alternative 2:** Uses `LocalDateTime` to store date and time together.
     * Pros: Less code and methods to handle one Object type and it also results in easier implementation of
-    * comparison methods between two `LocalDateTime` objects.
+            comparison methods between two `LocalDateTime` objects.
     * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
