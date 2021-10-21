@@ -238,7 +238,7 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Show Lab Results Feature 
+### Show Lab Results Feature
 
 ####  Implementation
 
@@ -575,5 +575,6 @@ testers are expected to do more *exploratory* testing.
     1. To cancel, click 'cancel' to return to the main window.
     2. In the chosen folder, ProgrammerError will save a CSV file of the students' data named `programmerError.csv`.
 
-### [Proposed] Dashboard 
+### [Proposed] Dashboard
+
 1. A dashboard to view the TA's classes lab results.  
