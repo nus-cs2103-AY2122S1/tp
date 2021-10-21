@@ -6,7 +6,7 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "nationality": "Singapore ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@alicep",
     "remark" : "She likes aardvarks.",
     "tagged" : [ "friends" ]
@@ -16,7 +16,7 @@
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "nationality": "China ",
-    "tutorialGroup": "08",
+    "tutorialGroup": "W08",
     "socialHandle": "@bensonm",
     "remark" : "He can't take beer!",
     "tagged" : [ "owesMoney", "friends" ]
@@ -26,7 +26,7 @@
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "nationality": "Malaysia ",
-    "tutorialGroup": "05",
+    "tutorialGroup": "T05",
     "socialHandle": "@carlk",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
@@ -36,7 +36,7 @@
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "nationality": "Thailand ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@danielm",
     "remark" : "She likes aardvarks.",
     "tagged" : [ "friends" ]
@@ -46,7 +46,7 @@
     "phone" : "9482224",
     "email" : "werner@example.com",
     "nationality": "USA ",
-    "tutorialGroup": "29",
+    "tutorialGroup": "T29",
     "socialHandle": "@ellem",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
@@ -56,7 +56,7 @@
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "nationality": "Australia ",
-    "tutorialGroup": "19",
+    "tutorialGroup": "T19",
     "socialHandle": "@fionak",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
@@ -66,7 +66,7 @@
     "phone" : "9482442",
     "email" : "anna@example.com",
     "nationality": "Vietnam ",
-    "tutorialGroup": "28",
+    "tutorialGroup": "T28",
     "socialHandle": "@georgeb",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]

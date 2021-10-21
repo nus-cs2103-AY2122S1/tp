@@ -5,7 +5,7 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "nationality": "Singapore ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@valid",
     "remark": "likes coding",
     "tagged": [ "friends" ]
@@ -15,7 +15,7 @@
     "phone": "94351253",
     "email": "pauline@example.com",
     "nationality": "Singapore ",
-    "tutorialGroup": "09",
+    "tutorialGroup": "T09",
     "socialHandle": "@valid",
     "remark": "likes coding"
   } ]
