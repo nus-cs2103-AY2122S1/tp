@@ -26,6 +26,7 @@ In the [Table of Contents](), each item listed is a link and you can click to go
 **Conventions Used**
 
 * `text` : denotes a command to be entered into the command box in TAB.
+* <kbd>text</kbd> : denotes a keyboard input.
 * [text](#about-this-guide) : denotes links to other parts of the document or links to be opened in the browser.
 
 
@@ -51,7 +52,7 @@ to help you with the installation. Follow the guide for your operation system fo
 4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all students.
