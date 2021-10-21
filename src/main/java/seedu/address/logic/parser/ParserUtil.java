@@ -1,11 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_COLOUR;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import javafx.scene.paint.Color;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -168,10 +173,22 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        String colour;
+        if (trimmedTag.contains(":")) {
+            int colonIndex = trimmedTag.indexOf(":");
+            colour = trimmedTag.substring(colonIndex + 1);
+            trimmedTag = trimmedTag.substring(0,colonIndex);
+            if (!Tag.isValidTagColour(colour)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        } else {
+            colour = "";
+        }
+        
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        return new Tag(trimmedTag, colour);
     }
 
     /**
