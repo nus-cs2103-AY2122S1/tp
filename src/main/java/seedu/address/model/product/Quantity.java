@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Quantity implements Comparable<Quantity> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Unit prices should only contain numbers and it should not be blank";
+            "Quantity should only contain numbers and it should not be blank";
 
     /**
      * The quantity should contain digits from 0 to 9 only.
@@ -37,6 +37,14 @@ public class Quantity implements Comparable<Quantity> {
         return quantity.matches(VALIDATION_REGEX);
     }
 
+    public boolean lessThan(Quantity quantity) {
+        return this.compareTo(quantity) < 0;
+    }
+
+    public boolean moreThan(Quantity quantity) {
+        return this.compareTo(quantity) > 0;
+    }
+
     @Override
     public String toString() {
         return value;
@@ -57,16 +65,12 @@ public class Quantity implements Comparable<Quantity> {
     @Override
     public int compareTo(Quantity quantity) {
         if (quantity == null) {
-            return 0;
-        }
-        int thisVal = Integer.parseInt(this.value);
-        int otherVal = Integer.parseInt(quantity.value);
-        if (thisVal < otherVal) {
-            return -1;
-        } else if (thisVal > otherVal) {
             return 1;
-        } else {
-            return 0;
         }
+
+        int thisVal = Integer.parseInt(value);
+        int otherVal = Integer.parseInt(quantity.value);
+
+        return thisVal - otherVal;
     }
 }
