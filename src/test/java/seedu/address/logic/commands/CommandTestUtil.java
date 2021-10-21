@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REPO;
@@ -47,13 +48,19 @@ public class CommandTestUtil {
     public static final String VALID_REPONAME_BOB = "bob_repo";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_DESCRIPTION_FUN = "fun";
+    public static final String VALID_DESCRIPTION_BORING = "boring";
+
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String NAME_DESC_PLAY = " " + PREFIX_NAME + VALID_TASK_NAME_PLAY;
-    public static final String NAME_DESC_STUDY = " " + PREFIX_NAME + VALID_TASK_NAME_STUDY;
+    public static final String TASKNAME_DESC_STUDY = " " + PREFIX_NAME + VALID_TASK_NAME_STUDY;
+    public static final String TASKNAME_DESC_PLAY = " " + PREFIX_NAME + VALID_TASK_NAME_PLAY;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String DESCRIPTION_DESC_FUN = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_FUN;
+    public static final String DESCRIPTION_DESC_BORING = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_BORING;
     public static final String STUDENTNUMBER_DESC_AMY = " " + PREFIX_STUDENTNUMBER + VALID_STUDENTNUMBER_AMY;
     public static final String STUDENTNUMBER_DESC_BOB = " " + PREFIX_STUDENTNUMBER + VALID_STUDENTNUMBER_BOB;
     public static final String USERNAME_DESC_AMY = " " + PREFIX_USERNAME + VALID_USERNAME_AMY;
@@ -66,6 +73,7 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "&"; // '&' not allowed in desc
     public static final String INVALID_STUDENTNUMBER_DESC = " " + PREFIX_STUDENTNUMBER + "A1233222";
     // missing final character
     public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "a@my"; // '@' not allowed in username

@@ -13,8 +13,8 @@ public class EventTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public EventTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate date) {
-        super(name, tags, isDone);
+    public EventTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate date, Description description) {
+        super(name, tags, isDone, description);
         this.dueDate = date;
     }
 
@@ -61,6 +61,8 @@ public class EventTask extends Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("\nDescription: ")
+                .append(getDescription().toString())
                 .append("\nEvent on: ")
                 .append(getTaskDate().toString())
                 .append("\nStatus: ")

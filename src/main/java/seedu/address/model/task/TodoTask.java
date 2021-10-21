@@ -12,8 +12,8 @@ public class TodoTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public TodoTask(TaskName name, Set<Tag> tags, boolean isDone) {
-        super(name, tags, isDone);
+    public TodoTask(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
+        super(name, tags, isDone, description);
     }
 
 

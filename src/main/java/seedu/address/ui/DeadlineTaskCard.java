@@ -36,6 +36,8 @@ public class DeadlineTaskCard extends UiPart<Region> {
     private Label status;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label description;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Student} and index to display.
@@ -47,6 +49,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
         name.setText(task.getName().toString());
         DeadlineTask deadlineTask = (DeadlineTask) task;
         status.setText(task.getStatusString());
+        description.setText(task.getDescription());
 
         taskDate.setText(deadlineTask.getDeadline().toString());
 

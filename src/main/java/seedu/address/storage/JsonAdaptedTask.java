@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
@@ -24,6 +25,7 @@ public class JsonAdaptedTask {
     private final int i;
     private final String name;
     private String deadline;
+    private String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final boolean isComplete;
 
@@ -42,6 +44,7 @@ public class JsonAdaptedTask {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        i = 0;
     }
 
     /**
@@ -49,6 +52,11 @@ public class JsonAdaptedTask {
      */
     public JsonAdaptedTask(Task source) {
         name = source.getName().toString();
+        try {
+            description = source.getDescription().toString();
+        } catch (NullPointerException e) {
+            description = "No description";
+        }
         if (source instanceof DeadlineTask) {
             this.i = 1;
             DeadlineTask task = (DeadlineTask) source;
@@ -90,6 +98,9 @@ public class JsonAdaptedTask {
 
         final Set<Tag> modelTags = new HashSet<>(taskTags);
 
+        final Description modelDescription = new Description(description);
+
+        //if (task instanceof DeadlineTask) {
         if (i == 1) {
             if (deadline == null) {
                 throw new IllegalValueException(
@@ -100,8 +111,10 @@ public class JsonAdaptedTask {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
-            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate);
-        } else if (i == 2) {
+            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription);
+        }
+        //if (task instanceof EventTask) {
+        if (i == 2) {
             if (deadline == null) {
                 throw new IllegalValueException(
                         String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
@@ -111,9 +124,9 @@ public class JsonAdaptedTask {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
-            return new EventTask(modelName, modelTags, isComplete, modelTaskDate);
-        } else {
-            return new TodoTask(modelName, modelTags, isComplete);
+            return new EventTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription);
         }
+
+        return new TodoTask(modelName, modelTags, isComplete, modelDescription);
     }
 }
