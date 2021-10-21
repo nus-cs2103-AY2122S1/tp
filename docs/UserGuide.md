@@ -15,10 +15,24 @@ title: User Guide
 TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
+## About This Guide
+
+This user guide is intended for any user of TAB. It provides installation instructions to help get you started with using TAB, and describes in detail the features available in TAB.
+
+**Navigation**
+
+In the [Table of Contents](), each item listed is a link which you can click on to go directly to that section in the guide.
+
+**Conventions Used**
+
+* `text` : denotes a command to be entered into the command box in TAB.
+* <kbd>text</kbd> : denotes a keyboard input, or a button to be clicked on.
+* [text](#about-this-guide) : denotes links to other parts of the document, or links to be opened in the browser.
+
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your computer.
+1. Ensure you have **Java 11** or above installed on your computer.
 
 <div markdown="block" class="alert alert-info">
 
@@ -31,14 +45,14 @@ Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-j
 to help you with the installation. Follow the guide for your operating system for detailed instructions.
 </div>
 
-2. Download the latest `TAB.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
+2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your TAB.
 
 4. Double-click the file to start the app. The window similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press <kbd>ENTER</kbd> to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all students.
