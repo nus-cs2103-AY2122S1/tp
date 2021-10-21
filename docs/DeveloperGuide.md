@@ -185,7 +185,20 @@ Below is a sequence diagram for the deleting all shown Persons executed after th
 
 The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`. 
 
-### \[Proposed\] Undo/redo feature
+### Search features
+
+#### Find feature
+
+The find feature is facilitated by `FindCommand`. It extends `Command` with a type to be searched, as well as the 
+key to be searched. This feature uses `AttributeContainsKeywordsPredicate#test(Person)` and the person to be searched
+is obtained using `ModelManager#getFilteredPersonList()`. If a search using a partial match can be done, the feature
+also uses `AttributeContainsKeywordsPredicate#testByType(Person, String)`.
+
+The following sequence diagram shows how the find operation works for a name:
+![FindCommandNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The following sequence diagram shows how the find operation works for a Tutorial ID:
+[comment]: <> (![FindCommandTutIdSequenceDiagram]&#40;images/FindTutIdSequenceDiagram.png&#41;)
 
 #### Proposed Implementation
 
@@ -194,7 +207,6 @@ The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It ex
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
@@ -202,13 +214,11 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
-
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
 ![UndoRedoState2](images/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
