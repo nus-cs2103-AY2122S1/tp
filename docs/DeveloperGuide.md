@@ -751,28 +751,11 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC08: Filter Lesson(s) by their Grade and/or Subject
-
-**MSS**
-1. CSO enters grade and/or subject to filter lessons by.
-2. TuitiONE lists the lessons that matches the grade and/or subject.
-
-    Use case ends.
-
-**Extension**
-
-* 1a. TuitiONE detects an error in entered command.
-    * 1a1. TuitiONE requests CSO to input a valid command.
-    * 1a2. CSO enters new command.
-      Steps 1a1-1a2 are repeated until the data entered are correct.
-
-    Use case resumes at step 2.
-
-#### UC09: Delete a Lesson
+#### UC08: Delete a Lesson
 
 **MSS**
 
-1. CSO views the current list of lessons, or <ins>filter lesson(s) by their grade and/or subject (UC08)</ins>.
+1. CSO views the current list of lessons, or <ins>filter lesson(s) by their grade and/or subject (UC04)</ins>.
 2. CSO requests to delete a specific lesson in the list.
 3. TuitiONE deletes the lesson.
 
@@ -796,7 +779,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC10 - Update a specific Student’s Details
+#### UC09 - Update a specific Student’s Details
 
 **MSS**
 
@@ -820,12 +803,12 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC11: Enroll a Student to a Lesson
+#### UC10: Enroll a Student to a Lesson
 
 **MSS**
 
 1. CSO finds a student to enroll from the existing list, by <ins>looking up student(s) (UC03)</ins>, or by <ins>filtering student(s) by their grade (UC04)</ins>.
-2. CSO finds a lesson for the student to enroll to based on the existing list, or by <ins>filtering lesson(s) by their grade and/or subject (UC08)</ins>.
+2. CSO finds a lesson for the student to enroll to based on the existing list, or by <ins>filtering lesson(s) by their grade and/or subject (UC04)</ins>.
 3. CSO enters a student and a lesson to enroll the student to the said lesson.
 4. TuitiONE adds the student to the lesson.
 
@@ -859,12 +842,12 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC12: Unenroll a Student from a Lesson
+#### UC11: Unenroll a Student from a Lesson
 
 **MSS**
 
 1. CSO finds a student to unenroll from the existing list, by <ins>looking up student(s) (UC03)</ins>, or by <ins>filtering student(s) by their grade (UC04)</ins>.
-2. CSO finds a lesson for the student to unenroll from based on the existing list, or by <ins>filtering lesson(s) by their grade and/or subject (UC08)</ins>.
+2. CSO finds a lesson for the student to unenroll from based on the existing list, or by <ins>filtering lesson(s) by their grade and/or subject (UC04)</ins>.
 3. CSO requests for student to be unenrolled from the lesson.
 4. TuitiONE removes the student from the lesson.
 
@@ -898,7 +881,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case ends.
 
-#### UC13: Review Commands
+#### UC12: Review Commands
 
 **MSS**
 
