@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteMarkedCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_done";
+    public static final String COMMAND_WORD = "delete_marked";
 
     public static final String MESSAGE_SUCCESS = "Deleted all applicants that were marked as done: \n%1$s";
 
