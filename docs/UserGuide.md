@@ -89,7 +89,7 @@ Examples:
   adds a student with the name Barbara and contact number 12344321
 </details>
 
-### Viewing a student: `student -v` `[coming in v1.2]`
+### Viewing a student: `student -v`
 <details>
 <summary>Views a particular student's details given by the specified index from the
 persons list.</summary>
@@ -103,7 +103,7 @@ Examples:
 * `student -v 3` view the student detail at index 3.
 </details>
 
-### Editing a student: `student -e` `[coming in v1.2]`
+### Editing a student: `student -e`
 <details>
 <summary>
 Edits the detail of a specific student.
@@ -123,7 +123,7 @@ Example:
   respectively.
 </details>
 
-### Deleting a student: `student -d` `[coming in v1.2]`
+### Deleting a student: `student -d`
 <details>
 <summary>
 Deletes the specific student given by the specified index from the persons list.
@@ -235,7 +235,7 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 * `student -de 1 1` deletes the first exam from the first student.
 </details>
 
-### Grouping students  `[coming in v1.2]`
+### Grouping students 
 
 Groups students by their names together. This grouping helps to distinguish between various tuition groups.
 
@@ -250,7 +250,7 @@ Format: `student -g GROUPNAME INDEX…​`
 Examples:
 * `student -g Team2 1 3 5` creates a group "Team2" that includes students at index 1, 3 and 5.
 
-### Adding a task `[coming in v1.2]`
+### Adding a task
 
 Adds a task to the task list.
 
@@ -302,7 +302,7 @@ Format: `task -d INDEX`
 Examples:
 * `task -d 1` deletes the task at index 1
 
-### Assigning tasks to students `[coming in v1.2]`
+### Assigning tasks to students
 
 Assigns a specific task to students’ task list.
 
