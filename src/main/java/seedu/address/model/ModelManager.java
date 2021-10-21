@@ -18,6 +18,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
@@ -133,7 +134,6 @@ public class ModelManager implements Model {
             updatedGroup.getMembers().removeMember(target);
             addressBook.setGroup(group, updatedGroup);
         }
-
 
     }
 
@@ -255,6 +255,12 @@ public class ModelManager implements Model {
     @Override
     public void deleteGroup(Group target) {
         addressBook.removeGroup(target);
+        for (Student student : target.getMembers().studentList) {
+            Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
+                    student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
+                    student.getParticipation(), new GroupName());
+            addressBook.setStudent(student, updatedStudent);
+        }
     }
 
     @Override
