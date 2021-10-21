@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+
+title Activity: Adding a new group
+
+start
+if () then ([group does not already exist])
+  :Add students to group <$rake> ;
+  if () then ([all students matched and added])
+    :Add group to application;
+  else ([else])
+  endif
+else ([group already exists])
+endif
+
+stop
+
+@enduml

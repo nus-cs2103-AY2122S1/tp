@@ -18,8 +18,20 @@ package "AddressBook Storage" #F4F6F6{
 Interface AddressBookStorage <<Interface>>
 Class JsonAddressBookStorage
 Class JsonSerializableAddressBook
-Class JsonAdaptedPerson
+Class JsonAdaptedPerson {
++ name: String
++ id: String
++ groups: String [*]
++ assessments: String [*]
+}
 Class JsonAdaptedTag
+Class JsonAdaptedAssessment {
++ name: String
++ scores: Map<String, String>
+}
+Class JsonAdaptedGroup {
++ name: String
+}
 }
 
 }
@@ -38,6 +50,8 @@ JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonAddressBookStorage .up.|> AddressBookStorage
 JsonAddressBookStorage ..> JsonSerializableAddressBook
 JsonSerializableAddressBook --> "*" JsonAdaptedPerson
+JsonSerializableAddressBook --> "*" JsonAdaptedGroup
+JsonSerializableAddressBook --> "*" JsonAdaptedAssessment
 JsonAdaptedPerson --> "*" JsonAdaptedTag
 
 @enduml

@@ -1,0 +1,25 @@
+@startuml
+
+start
+
+:User executes an AddTaskCommand;
+
+if () then ([command is valid])
+	:Execute AddTaskCommand;
+	if() then ([Student does not exist in database])
+        :Create a new Student with given inputs;
+        :Add Student to database;
+        :Update UI with success message;
+
+	else ([else])
+        :Throw a CommandException;
+        :Update UI with error message;
+    endif
+else ([else])
+	:Throw a ParseException;
+	:Update UI with error message;
+endif
+
+stop
+
+@enduml

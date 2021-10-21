@@ -154,7 +154,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
 ### Search feature
 
 ...
@@ -172,6 +171,78 @@ This section describes some noteworthy details on how certain features are imple
     * Cons: We need to identify the type of input given.
 
 
+### Import feature
+
+The following activity diagram summarizes what happens when the user inputs an import command:
+
+![ImportCommandActivityDiagram](images/ImportCommandActivityDiagram.png)
+
+There are several important details left out of the activity diagram for the sake of clarity:
+
+1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
+The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
+   
+1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
+
+1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
+
+1. When reading a student's scores, the command will add the score to the `Student`, as well as the `Assessment` created from reading the first row.
+
+1. Columns can be empty, except for the assessment name columns in the header row, and the name and ID columns of each student. Empty columns are assumed to be missing data.
+
+### Add Student feature
+
+The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
+
+
+####Implementation
+
+####AddCommand class
+The add student mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
+the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
+If this `Student` already exists, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
+the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
+
+####AddCommandParser class
+The `AddCommandParser` class implements the `Parser<AddCommand>` interface. The `parse()` method checks for the presence of the compulsory prefixes corresponding to the name and NUSNET id of the `Student`, namely `-n` and `-i`.
+It also checks for the presence of the optional group and tag prefixes, namely `-g` and `-t`.
+It then retrieves the characters that follow each prefix and allocates them to the fields the `Student` object has accordingly.
+
+In the case where the compulsory prefixes `-n` and `-i` are not present, a `ParseException` is thrown, prompting the user that the wrong command format has been used.
+
+The following activity diagram summarizes what happens when the user inputs an add student command:
+
+![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
+
+
+The following sequence diagram shows how the add student operation works:
+
+![AddStudentSequenceDiagram](images/AddStudentSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
+
+
+### Add group feature
+
+The add group feature allows users to create new groups, as well as specify students to be added to the group to be created.
+
+#### How the `AddGroupCommand` works:
+1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
+2. For each of the names and IDs, an `AllocDescriptor` is created.
+3. For each of the `AllocDescriptors`, a search is done against the current `StudentList` to find students that match the descriptors.
+   1. If there is a unique match, the student is added to the group.
+       4. The group is added to the application.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+
+</div>
+
+The following activity diagrams summarizes what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+
+![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
+![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -276,8 +347,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* targets professors of CS1101S 
-* has a need to manage a significant number of students 
+* targets professors of CS1101S
+* has a need to manage a significant number of students
 * has a need to analyse students' performance
 * prefer desktop apps over other types
 * can type fast
@@ -370,7 +441,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. Source Control shows an error message.
 
       Use case resumes at step 1.
-   
 * 1b. There are multiple students that match any of the specified student names.
 
     * 1b1. Source Control shows an error message with the different Student IDs.
@@ -394,8 +464,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Student**: A student in the database, identified by their name and ID (their NUSNET ID). Each student can be in multiple groups, and can have scores for multiple assessments.
 * **Group**: A group of students, identified by its name.
-* **Assessment**: An assessment is identified by its name. Each assessment has a maximum score.
-* **Score**: The score that a student has attained for an assignment. Should be between 0 and the maximum score for the assessment. Each student can only have 1 score per assessment.
+* **Assessment**: An assessment is identified by its name. 
+* **Score**: The score that a student has attained for an assignment. Should be between 0 and 100, inclusive. Each student can only have 1 score per assessment.
 
 
 --------------------------------------------------------------------------------------------------------------------
