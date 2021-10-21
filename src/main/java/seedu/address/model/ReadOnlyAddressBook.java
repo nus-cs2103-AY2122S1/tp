@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskHistory;
 
 /**
  * Unmodifiable view of an address book
@@ -27,4 +28,13 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate groups.
      */
     ObservableList<Group> getGroupList();
+
+    /**
+     * Returns an unmodifiable view of the task history list.
+     * This list will not contain any duplicate groups.
+     */
+    ObservableList<TaskHistory> getTaskHistoryList();
+
 }
+
+

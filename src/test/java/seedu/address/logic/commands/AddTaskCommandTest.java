@@ -25,6 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskHistory;
 import seedu.address.testutil.DeadlineAndEventTaskBuilder;
 
 public class AddTaskCommandTest {
@@ -209,6 +210,11 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public void updateFilteredTaskHistoryList(Predicate<TaskHistory> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Group> getFilteredGroupList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -220,6 +226,11 @@ public class AddTaskCommandTest {
 
         @Override
         public void deleteTask(Task target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addTaskHistory(TaskHistory taskHistory) {
             throw new AssertionError("This method should not be called.");
         }
 

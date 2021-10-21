@@ -30,6 +30,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListTaskCommand;
+import seedu.address.logic.commands.ListTaskHistoryCommand;
 import seedu.address.logic.commands.MarkStudentAttCommand;
 import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.commands.MarkTaskDoneCommand;
@@ -139,6 +140,9 @@ public class AddressBookParser {
 
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
+
+        case ListTaskHistoryCommand.COMMAND_WORD:
+            return new ListTaskHistoryCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
