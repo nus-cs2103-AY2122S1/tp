@@ -421,8 +421,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to mark a specific applicant in the displayed list.
-4.  RecruitIn marks the applicant to "Done".
+3.  User requests to mark applicant(s) in the displayed list.
+4.  RecruitIn marks the requested applicant(s) to "Done".
 
     Use case ends.
 
@@ -447,8 +447,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to <u>list applicants (UC01)</u>.
 2.  RecruitIn displays a list of applicants.
-3.  User requests to unmark a specific applicant in the displayed list.
-4.  RecruitIn unmarks the applicant to "Not Done".
+3.  User requests to unmark applicant(s) in the displayed list.
+4.  RecruitIn unmarks the requested applicant(s) to "Not Done".
 
     Use case ends.
 
