@@ -54,7 +54,7 @@ public class EnrollCommand extends Command {
         }
         Student studentToEnroll = lastShownList.get(indexStudent.getZeroBased());
 
-        if (indexLesson.getZeroBased() >= lastShownList.size()) {
+        if (indexLesson.getZeroBased() >= lessonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
         Lesson lesson = lessonList.get(indexLesson.getZeroBased());

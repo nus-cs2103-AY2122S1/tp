@@ -90,15 +90,18 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        while (!studentLessons.isEmpty()) {
-            Lesson lesson = studentLessons.get(0);
-            if (editStudentDescriptor.gradeIsEdited) {
+        if (editStudentDescriptor.gradeIsEdited) {
+            while (!studentLessons.isEmpty()) {
+                Lesson lesson = studentLessons.get(0);
                 lesson.unenrollStudent(studentToEdit);
-            } else {
-                // grade is not modified, hence must be updated in lessons
-                lesson.updateStudent(studentToEdit, editedStudent);
+                model.setLesson(lesson, lesson);
             }
-            model.setLesson(lesson, lesson);
+        } else {
+            // grade is not modified, hence must be updated in lessons
+            for (Lesson lesson : studentLessons) {
+                lesson.updateStudent(studentToEdit, editedStudent);
+                model.setLesson(lesson, lesson);
+            }
         }
 
         model.setStudent(studentToEdit, editedStudent);
