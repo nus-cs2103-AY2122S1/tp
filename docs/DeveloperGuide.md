@@ -352,6 +352,47 @@ The following sequence diagram shows how the view operation works.
 
 ![ViewDiagram](images/ViewStudentDiagram.png)
 
+### Lessons
+
+#### Implementation
+
+Lessons and all related classes are inside the `seedu.address.model.lesson` package. A `Lesson` consists of a `java.time.DayOfWeek`,
+a `Subject` and a `Timeslot`, which describes a Lesson well.
+
+A `NoOverlapLessonList` contains a list of lessons, in which the lessons within must not overlap. Overlap is defined as falling on the
+same day and with timings that run within each other.
+
+`LessonWithAttendees` is a useful wrapper class to hold a list of attendees and lessons. This is used in particular 
+
+The interfaces `Attendee` and `LessonAssignable` is to be implemented by classes of other packages that wish to use maintain knowledge of a
+lesson and its attendees. For example, a `Person` is both an `Attendee` and a `LessonAssignable`, while a `Group` is only
+a `LessonAssignable`.
+
+![LessonDiagram](images/LessonDiagram.png)
+
+#### Implementation Rationale
+
+`NoOverlapLessonList` is useful in cases such as students where they should not have lessons that overlap. `LessonWithAttendees`
+is a useful wrapper class to obtain the full details of a lesson (the lesson details and the details of attendees), since a lesson 
+does not have a direct reference to its attendee.
+
+Lessons were created to be held by other classes, and thus does not hold information about its attendees. We acknowledge that a
+`Lesson` can hold reference to its `Attendee` and vice versa. However, for the sake of simplicity, we have decided let other classes be
+in charge of knowing who _attends_ each `Lesson`.
+
+#### Alternatives considered
+
+When `Lesson` was implemented, the `Person` class was already in place. We had originally considered a two-way reference, in which
+a `Person` had multiple `Lesson` and a `Lesson` had multiple `Person`. However, given that this app was mainly for tuition, in which
+most lessons would be 1:1, it made more sense to assign `Lesson` under a `Person` instead, and if multiple `Person` was attending
+the same `Lesson`, they would be assigned through a `Group`. The avoidance of a two-way reference was also due to the immutability
+of `Person`, in which any updates to a `Person` could cause any references to it to be invalid.
+
+#### \[Proposed\] Future implementation
+
+Add support for a custom recurrence of lessons. Right now it is guaranteed that a lesson would occur weekly, which is in line with
+what many of our users require, but the ability to customise can be useful.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
