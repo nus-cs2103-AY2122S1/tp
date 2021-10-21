@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task {
+public class Task implements Comparable<Task> {
 
     private final TaskName name;
     private final Set<Tag> tags = new HashSet<>();
@@ -64,7 +65,8 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName());
+                && otherTask.getName().equals(getName())
+                && otherTask.getDate().equals(getDate());
     }
 
     /**
@@ -83,10 +85,9 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getTags().equals(getTags());
+                && otherTask.getTags().equals(getTags())
+                && otherTask.getDate().equals(getDate());
     }
-
-
 
     @Override
     public int hashCode() {
@@ -108,5 +109,29 @@ public class Task {
         }
 
         return builder.toString();
+    }
+
+    /**
+     * Returns the date associated with the task if the task is a DeadlineTask or an EventTask.
+     * The maximum LocalDate is returned if the task is a TodoTask.
+     *
+     * @return The date associated with a task.
+     */
+    private LocalDate getDate() {
+        if (this instanceof DeadlineTask) {
+           return ((DeadlineTask) this).getDeadline().getDeadline();
+        } else if (this instanceof EventTask) {
+            return ((EventTask) this).getTaskDate().getDeadline();
+        } else {
+            return LocalDate.MAX;
+        }
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        LocalDate thisDate = this.getDate();
+        LocalDate otherDate = otherTask.getDate();
+
+        return thisDate.compareTo(otherDate);
     }
 }
