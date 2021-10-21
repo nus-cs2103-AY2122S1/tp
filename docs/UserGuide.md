@@ -152,26 +152,18 @@ Delete a specific task that has been added to your app.
 
 Format:
 - <code> delete <i>task_id (task_id)</i> </code>
-- <code> delete <i>n/task_name (d/date)</i> </code>
 
 Interpretation
-* If <code><i>task_id</i></code> field is provided:
-  * Deletes the task corresponding to the <code><i>task_id</i></code>
-  * Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
-* If <code><i>n/task_name</i></code> field is provided:
-  * Deletes the task with name **exactly matching** that given in the <code><i>n/task_name</i></code> field
-  * If <code><i>d/date</code></i> field is provided, search for the task in the given date to delete
-    * Useful in cases where there are multiple copies of the same task, recurring tasks, etc.
-  * If <code><i>d/date</code></i> field is not provided, deletes **every occurence** of tasks matching the given name
+* Deletes the task corresponding to the <code><i>task_id</i></code>
+* Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
 
 Examples:
 * `delete 3` removes the third item in the task list
-* `delete n/quiz` removes every `quiz` task in the app
-* `delete n/quiz d/2021-10-10` deletes only the `quiz` task on `2021-10-10`
+* `delete 1 2` removes the first and second items in the task list
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the Uni-Fy app.
 
 Format: `clear`
 
@@ -187,7 +179,7 @@ Format: `exit`
 
 ### Editing the data file
 
-**Uni-Fy** data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
@@ -211,8 +203,8 @@ _Details coming soon ..._
 Action | Format, Examples
 --------|------------------
 **Add** | <code>add <i>n/task_name t/time d/date tg/level</i></code> <br>e.g `add n/CS3243_Assignment t/13:00 d/2021-12-12 tg/Important`
-**Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
-**Show** | `show`
+**Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
+**Show** | `show week_number `
 **Edit** | `TODO`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
 **Tag** | `TODO`
