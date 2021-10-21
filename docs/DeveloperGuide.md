@@ -158,7 +158,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and a `Role` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag and one `Role` object per unique role, instead of each `Person` needing their own `Tag` and `Role` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -597,8 +597,8 @@ Project scope:
 * **Time Period**: A time period in the staff's schedule.
 * **Status**: The working status of the staff. i.e. A part-timer or a full-timer.
 * **Schedule**: The staffs work schedule with a description of the work carried out.
-* **id**: The identification number assigned to the staff by the management.
-* **Role**: The role of the staff. i.e. Cook, Staff management
+* **Role**: The role(s) of the staff. i.e. Bartender.
+* **Salary**: The salary of the staff per hour.
 * **Address**: The address of the staff.
 * **Constraints**: The constraints the project is working with.
 * **MSS**: Main success scenario
