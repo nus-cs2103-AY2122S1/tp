@@ -154,6 +154,45 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature 
+
+#### Implementation
+The find command returns contacts that matches the input keywords. Initially, it only returns contacts that fully matches the keywords. 
+Given the following example contact book: 
+* Contact #1: Jason
+* Contact #2: Jasmine 
+* Contact #3: Bob
+
+A search with the command `find n/Jas` would return nothing, as `Jas` is not a complete match with any of the names of the three contacts.
+
+To better fit our target user, someone who wishes to work fast, we have decided to allow partial matches for the find command. 
+This is done by altering the condition in the search predicate, from accepting full word matches to accepting even partial word matches:
+
+`return Arrays.stream(wordsInPreppedSentence).anyMatch(preppedWord::equalsIgnoreCase);`
+
+changed to
+
+`return Arrays.stream(wordsInPreppedSentence).anyMatch(x -> x.toLowerCase().contains(preppedWord.toLowerCase()));`
+
+Also, to facilitate filtered searches, we have implemented finding using prefixes:
+* `find n/` to find by name
+* `find m/` to find by module code
+
+Similar to other commands, this is done using a `argumentTokenizer` to parse for the above prefixes,
+before the correct `Predicate` is instantiated and used for finding the contact. 
+
+#### Design considerations:
+
+**Aspect: Previous and current version of find command:**
+
+* **Alternative 1 (previous version):** Search keyword needs to match entirely.
+    * Pros: Only the correct contact is returned.
+    * Cons: Takes time to type entire names to find the contact you want.
+
+* **Alternative 2 (current version):** Search keyword just needs to match partially.
+    * Pros: Faster searches with just partial keywords.
+    * Cons: Contacts you did not mean to retrieve are also displayed.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
