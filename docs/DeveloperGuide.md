@@ -275,7 +275,73 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Review Feature
 
+#### Implementation
+
+The review feature builds upon the `Person` class by adding more functionality to the class. It utilises the `rv/` tag in the `add` command to add a review stored internally as a `Review` object.
+It implements the following operations:
+* `isValidReview()`  — Determines if the input value is valid.
+* `isEmptyReview()`  — Determines if the stored Review is empty (stored as `-No Review-` String).
+
+In addition, numerous classes had to be updated to accommodate the Review feature:
+* `AddCommandParser` to parse the new `rv/` tag.
+* `ParserUtil` to parse the Review content.
+* `EditCommand` and `EditCommandParser` to enable editing of Reviews.
+
+The following sequence diagram gives the overview of the add command with a review:
+
+![Sequence Diagram for Review](images/ReviewSequenceDiagram.png)
+
+The following activity diagram shows how the review operation works:
+
+![Sequence Diagram for Review](images/ReviewActivityDiagram.png)
+
+
+Given below is an example usage scenario of adding a Review:
+
+Step 1. The user adds a new Review using the `add` command e.g. `add n/test e/test@gmail.com p/12344321 a/test c/att rv/test review`
+
+Step 2. The user can click on the contact on the GUI to expand it and display the full review
+
+#### Design considerations:
+
+**Aspect: How Review is called by the user:**
+
+* **Alternative 1 (current choice):** Adds a review through the `add` command.
+    * Pros: Easier to implement.
+    * Cons: Add command can become very lengthy.
+
+* **Alternative 2:** Separate command for review
+    * Pros: Increases modularity by making review an entirely new command.
+    * Cons: Too many commands which may confuse the User.
+### Summary Feature
+
+#### Implementation
+
+The `Summary` class summarises the contents of the entire `AddressBook`. It utilises the `AddressBook` class to 
+obtain a read-only copy of `AddressBook` to summarise the data within. It implements the following operations:
+* `setNumberOfContacts`  — Calculates and sets the number of contacts in the addressbook.
+* `setPercentageReviews()`  — Calculates and sets the percentage of contacts that have a review.
+* `setNumberCategory`  — Calculates and sets the number of contacts in each category defined by `CatergoryCode`.
+
+Additionally, `Summary` will communicate with `UI` to display the summarised results
+
+The following sequence diagram gives an overview of how `Summary` works:
+
+![Sequence Diagram for Summary](images/SummarySequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Summary summarises data from the internal AddressBook:**
+
+* **Alternative 1 (current choice):** Works on a Read-Only copy of `AddressBook`.
+    * Pros: Easier to implement, guaranteed to not edit the internals.
+    * Cons: Exposing internal workings of `AddressBook`.
+
+* **Alternative 2:** Gets data directly from `Person`, `Review` etc.
+    * Pros: Data is kept directly with the low-level classes and pulled from there.
+    * Cons: Extremely complex, especially after user adds, deletes or edits a contact.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**

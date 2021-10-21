@@ -1,0 +1,80 @@
+@startuml
+!include style.puml
+'https://plantuml.com/sequence-diagram
+
+box Main STORAGE_COLOR_T1
+
+participant ":MainApp" as MainApp STORAGE_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+
+participant ":ModelManager" as ModelManager LOGIC_COLOR
+participant ":Summary" as Summary LOGIC_COLOR
+participant ":AddressBook" as AddressBook LOGIC_COLOR
+
+end box
+
+box Model MODEL_COLOR_T1
+
+participant "person:Person" as Person MODEL_COLOR
+end box
+
+
+
+create ModelManager
+MainApp -> ModelManager
+activate ModelManager
+
+
+create Summary
+ModelManager -> Summary : Summary(addressBook)
+activate Summary
+
+Summary -> AddressBook : getPersonList()
+activate AddressBook
+
+AddressBook --> Summary : personList
+deactivate AddressBook
+
+Summary -> Summary : setNumberOfContacts()
+activate Summary
+
+Summary --> Summary
+deactivate Summary
+
+Summary -> Summary : setPercentageReviews()
+activate Summary
+
+loop addressBookSize
+Summary -> Person : getReview()
+activate Person
+
+Person --> Summary
+deactivate Person
+end
+Summary --> Summary
+deactivate Summary
+
+Summary -> Summary : setNumberCategory()
+activate Summary
+
+loop addressBookSize
+Summary -> Person : getCategoryCode()
+activate Person
+
+Person --> Summary
+deactivate Person
+end
+
+Summary --> Summary
+deactivate Summary
+
+Summary --> ModelManager : summary
+deactivate Summary
+
+
+MainApp <-- ModelManager
+deactivate ModelManager
+
+@enduml
