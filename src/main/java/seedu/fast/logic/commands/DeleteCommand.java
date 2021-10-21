@@ -88,14 +88,19 @@ public class DeleteCommand extends Command {
         return indexArray.length > 1;
     }
 
-    private boolean hasDuplicates(Index[] array) {
+    private void checkDuplicates(Index[] array) throws CommandException {
         Set<Integer> set = new HashSet<>();
         for (Index index : array) {
             if (!set.add(index.getZeroBased())) {
-                return true;
+                throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES);
             }
         }
-        return false;
+    }
+
+    private void checkIndex(Index index, List<Person> lastShownList, String message) throws CommandException {
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(message);
+        }
     }
 
     private void executeInvalidIndexScenario() throws CommandException {
@@ -108,9 +113,8 @@ public class DeleteCommand extends Command {
 
     private CommandResult executeSingleDelete(List<Person> lastShownList, Model model) throws CommandException {
         Index targetIndex = indexArray[0];
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
+
+        checkIndex(targetIndex, lastShownList, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
@@ -119,17 +123,15 @@ public class DeleteCommand extends Command {
     }
 
     private CommandResult executeMultipleDelete(List<Person> lastShownList, Model model) throws CommandException {
-        if (hasDuplicates(indexArray)) {
-            throw new CommandException(MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES);
-        }
+        checkDuplicates(indexArray);
 
         Index targetIndex;
         for (int i = 0; i < indexArray.length; i++) {
             targetIndex = Index.indexModifier(indexArray[i], i);
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED,
-                        i, indexArray[i].getOneBased()));
-            }
+            String errorMsg = String.format(MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED, i,
+                    indexArray[i].getOneBased());
+
+            checkIndex(targetIndex, lastShownList, errorMsg);
 
             Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
             model.deletePerson(personToDelete);

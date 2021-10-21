@@ -18,10 +18,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         String[] multipleIndexes = args.trim().split(" ");
+        Index[] result = checkAndParseArgs(multipleIndexes);
+        return new DeleteCommand(result);
+    }
 
-        Index[] result = new Index[multipleIndexes.length];
+    private Index[] checkAndParseArgs(String[] args) throws ParseException {
+        Index[] result = new Index[args.length];
         int count = 0;
-        for (String indexString : multipleIndexes) {
+
+        for (String indexString : args) {
             try {
                 Index index = ParserUtil.parseIndex(indexString);
                 result[count++] = index;
@@ -31,6 +36,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             }
         }
 
-        return new DeleteCommand(result);
+        return result;
     }
 }
