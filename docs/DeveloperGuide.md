@@ -162,7 +162,8 @@ The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It ex
 
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAddressBook#redo()`
+* ores a previously undone address book state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
@@ -238,6 +239,74 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Student List Filtering
+
+#### Proposed Implementation
+
+The proposed filter mechanism is facilitated by the `QueryStudentDescriptor` and the `StudentDetailContainsQueryPredicate`.
+The `StudentDetailContainsQueryPredicate` extends `Predicate<Student>` and contains a private field of type
+`QueryStudentDescriptor` that will be used to test if a given student to the predicate matches all the query fields in
+the `QueryStudentDescriptor`.
+
+* `StudentDetailContainsQueryPredicate#test(Student)` — Evaluates the predicate on the given `Student` argument.
+* `QueryStudentDescriptor#doesStudentMatchDescriptor(Student)` — Evaluates if the `QueryStudentDescriptor` fields
+matches with the corresponding fields of the `Student` argument.
+
+These operations are exposed in the `Model` interface as `Model#updateFilteredStudentList(Predicate<Student>)`.
+
+Given below is an example usage scenario and how the list filtering mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `filter -cid B01` to display all the students whose Class ID matches `B01`.
+
+The following UML sequence diagram shows how the filter command works.
+
+![FilterSequenceDiagram](images/FilterSequenceDiagram.png)
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `StudentDetailContainsPredicate` 
+, `QueryStudentDescriptor` and `FilterCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, 
+the lifeline reaches the end of diagram.>
+
+</div>
+
+The following UML activity diagram summarizes what happens when a user executes a new filter command.
+
+#### Design Consideration
+
+**Aspect: How filter command executes**
+
+* **Alternative 1 (current choice):** Filter commands can take in any combination of query parameters (`-n`, `-cid`, `-sid`)
+  * Pros: Allow for flexibility in the way users want to filter the list.
+  * Cons: More difficult to implement and proper handling of the combinations of query parameters is needed.
+
+* **Alternative 2:** A different type of filter command to filter by each of the student's attribute.
+  * Pros: Implementation does not need to consider the combination of query parameters.
+  * Cons: Multiple commands may be required to filter by more than one query dimension.
+
+**Aspect: How to handle combination of query parameters**
+
+* **Alternative 1 (current choice):** Design a `QueryStudentDescriptor` class that abstracts the handling of the input query parameters.
+    * Pros: Need not explicitly handle the different argument combinations at the higher-level abstractions
+  (e.g. `FilterCommandParser` class)
+    * Cons: Was more difficult to implement.
+
+* **Alternative 2:** Handle the different argument combinations in the `FilterCommandParser` class.
+    * Pros: Easier to handle empty argument cases with explicit conditional checking.
+    * Cons: Bad use of abstraction, SLAP violated and long nested conditional statements.
+
+**Aspect: Naming the function**
+
+* **Alternative 1 (current choice):** Calling it `filter`.
+    * Pros: `filter` is an intuitive command word for the expected functionality.
+    * Cons: From the user experience perspective, it is slightly longer than type than other alternative.
+
+* **Alternative 2:** Calling it `view`.
+    * Pros: It is shorter to type and less refactoring required from the code that this project morphed from.
+    * Cons: `view` is not as intuitive as other alternatives.
+
+* **Alternative 3 (future consideration):** Providing a shortcut command for `filter`.
+    * Pros: Allows for users to type less for the same expected behaviour.
+    * Cons: New users may be confused with such shortcut commands.
 
 --------------------------------------------------------------------------------------------------------------------
 
