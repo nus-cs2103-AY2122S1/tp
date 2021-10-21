@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -225,7 +226,10 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         personToView.setPredicate(predicate);
     }
-
+    @Override
+    public List<Person> retrieveSchedule(LocalDate date) {
+        return addressBook.retrieveLastMeetings(date);
+    }
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
@@ -104,7 +105,7 @@ public interface Model {
     /**
      * Returns person with corresponding clientId.
      *
-     * @param clientId clientId of client
+     * @param clientId of client
      * @return client with given clientId
      */
     Person getPerson(ClientId clientId);
@@ -176,6 +177,14 @@ public interface Model {
      * Returns the name of the person to view
      */
     String getNameOfPersonToView();
+
+    /**
+     * returns a list of NextMeeting that are on the given {@code date}.
+     *
+     * @param date of the schedule
+     * @return the list of NextMeetings with the given {@code date}.
+     */
+    List<Person> retrieveSchedule(LocalDate date);
 
     /**
      * Updates the filter of the filtered person to view list to filter by the given {@code predicate}.

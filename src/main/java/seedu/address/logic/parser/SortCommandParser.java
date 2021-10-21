@@ -24,6 +24,7 @@ public class SortCommandParser implements Parser<SortCommand> {
      * and returns a SortCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
+     * @return
      */
     @Override
     public SortCommand parse(String args, Model model) throws ParseException {
