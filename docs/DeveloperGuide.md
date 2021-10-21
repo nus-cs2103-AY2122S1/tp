@@ -188,6 +188,8 @@ When the app is launched, an instance of this class is created, and the
 including `fadeTransition` and `displayAnimatedText` are used within this
 class to achieve the fading image and character typing effect respectively.
 
+![ExportSequenceDiagram](images/WelcomeWindowSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
