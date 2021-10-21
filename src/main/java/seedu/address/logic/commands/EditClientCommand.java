@@ -47,8 +47,8 @@ public class EditClientCommand extends Command {
                     + PREFIX_NAME + "Ben "
                     + PREFIX_PHONE_NUMBER + "12345678 "
                     + PREFIX_EMAIL + "ben@gmail.com "
-                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473"
-                    + PREFIX_ORDER + "0 100 2021/10/20"
+                    + PREFIX_ADDRESS + "Ridley Park, Singapore 248473 "
+                    + PREFIX_ORDER + "0 100 2021/10/20 "
                     + PREFIX_ORDER + "15 10 10/20";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
