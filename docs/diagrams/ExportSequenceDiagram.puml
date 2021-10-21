@@ -27,7 +27,7 @@ create ExportCommandParser
 AddressBookParser -> ExportCommandParser
 activate ExportCommandParser
 
-ExportCommandParser -> AddressBookParser
+ExportCommandParser --> AddressBookParser
 deactivate ExportCommandParser
 
 AddressBookParser -> ExportCommandParser : parse("newfriends.json")
@@ -37,13 +37,13 @@ create ExportCommand
 ExportCommandParser -> ExportCommand
 activate ExportCommand
 
-ExportCommand -> ExportCommandParser : e
+ExportCommand --> ExportCommandParser : e
 deactivate ExportCommand
 
-ExportCommandParser -> AddressBookParser
+ExportCommandParser --> AddressBookParser
 deactivate ExportCommandParser
 
-AddressBookParser -> LogicManager : e
+AddressBookParser --> LogicManager : e
 deactivate AddressBookParser
 
 LogicManager -> ExportCommand : execute()
@@ -52,30 +52,30 @@ activate ExportCommand
 ExportCommand -> Model : getAddressBook()
 activate Model
 
-Model -> ExportCommand : currentAddressBook
+Model --> ExportCommand : currentAddressBook
 deactivate Model
 
 create JsonAddressBookStorage
 ExportCommand -> JsonAddressBookStorage
 activate JsonAddressBookStorage
 
-JsonAddressBookStorage -> ExportCommand
+JsonAddressBookStorage --> ExportCommand
 deactivate JsonAddressBookStorage
 
 ExportCommand -> JsonAddressBookStorage : exportToJson()
 activate JsonAddressBookStorage
 
-JsonAddressBookStorage -> ExportCommand
+JsonAddressBookStorage --> ExportCommand
 deactivate JsonAddressBookStorage
 
 create CommandResult
 ExportCommand -> CommandResult
 activate CommandResult
 
-CommandResult -> ExportCommand : result
+CommandResult --> ExportCommand : result
 deactivate CommandResult
 
-ExportCommand -> LogicManager : result
+ExportCommand --> LogicManager : result
 deactivate ExportCommand
 
 [<--LogicManager
