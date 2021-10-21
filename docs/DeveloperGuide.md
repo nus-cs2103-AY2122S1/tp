@@ -154,6 +154,26 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Address Book Management
+
+#### Delete feature
+
+The `delete` mechanism relies on `ModelManager#deletePerson()`. The Person(s) to be deleted is obtained through `ModelManager#getFilteredPersonList()`
+
+Below is a sequence diagram for deleting a Person from the address book, executed after the user inputs `delete 1`
+
+![Sequence of the Delete command](images/DeleteSequenceDiagram.png)
+
+`DeleteCommand` also exposes 2 factory methods: 
+- `DeleteCommand#allShown()` returns a `DeleteCommand` which deletes all Persons shown in the main window.
+- `DeleteCommand#all()` which deletes all Persons in the address book.
+
+Below is a sequence diagram for the deleting all shown Persons executed after the user inputs `delete -f` or `delete -a -f`. `DeleteCommand` iterates through the list returned by `Model#getFilteredPersonList()` to delete all Persons shown in the main window.
+
+![Sequence of the Delete All Shown command](images/DeleteAllShownSequenceDiagram.png)
+
+The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
