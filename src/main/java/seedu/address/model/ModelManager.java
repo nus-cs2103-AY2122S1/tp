@@ -22,7 +22,6 @@ import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskHistory;
-import seedu.address.model.task.TaskName;
 
 /**
  * Represents the in-memory model of the address book data.
