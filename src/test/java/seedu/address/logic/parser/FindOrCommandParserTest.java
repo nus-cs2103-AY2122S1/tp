@@ -1,17 +1,19 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.model.person.FindOrPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
-import java.util.List;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class FindOrCommandParserTest {
 

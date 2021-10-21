@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -17,6 +15,12 @@ import static seedu.address.testutil.TypicalPersons.HANNAH;
 import static seedu.address.testutil.TypicalPersons.HANNAH_NO_BIRTHDAY;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -24,11 +28,6 @@ import seedu.address.model.person.FindOrPredicate;
 import seedu.address.model.person.FindPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 
 
 public class FindOrCommandTest {
@@ -175,8 +174,20 @@ public class FindOrCommandTest {
     @Test
     public void execute_namesAndTags_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
-        List<Name> firstNameList = List.of(new Name("cARl"), new Name("benson"));
+        List<Name> firstNameList = List.of(new Name("carl"), new Name("benson"));
         List<Tag> firstTagList = List.of(new Tag("friends"));
+        FindOrPredicate predicate = new FindOrPredicate(firstNameList, firstTagList);
+        FindOrCommand command = new FindOrCommand(predicate);
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_namesAndTagsCaseInsensitive_multiplePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
+        List<Name> firstNameList = List.of(new Name("cArL"), new Name("bEnsOn"));
+        List<Tag> firstTagList = List.of(new Tag("friENDs"));
         FindOrPredicate predicate = new FindOrPredicate(firstNameList, firstTagList);
         FindOrCommand command = new FindOrCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
