@@ -103,6 +103,10 @@ public class AppointmentFilters {
                 .reduce(Predicate::and).orElse(x -> true);
     }
 
+    /**
+     * Converts the filters into a String which when parsed with a {@code FilterAppointmentCommandParser}
+     * gives the same filter.
+     */
     public String getFilterDetails() {
         List<Predicate<Appointment>> allPredicates = new ArrayList<>(
                 Arrays.asList(startAfter, startBefore, hasPatient, hasDoctor));
@@ -111,6 +115,10 @@ public class AppointmentFilters {
                 .collect(Collectors.joining()).trim();
     }
 
+    /**
+     * Converts the filters into a String which when parsed with a {@code FilterUpcomingAppointmentCommandParser}
+     * gives the same filter.
+     */
     public String getUpcomingFilterDetails() {
         List<Predicate<Appointment>> allPredicates = new ArrayList<>(Arrays.asList(hasPatient, hasDoctor));
 
