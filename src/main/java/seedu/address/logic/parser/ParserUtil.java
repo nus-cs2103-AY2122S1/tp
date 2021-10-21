@@ -139,4 +139,34 @@ public class ParserUtil {
         }
         return new ModuleName(trimmedName);
     }
+
+    /**
+     * Parses a {@code String taskName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskName} is invalid.
+     */
+    public static String parseTaskName(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedName = taskName.trim();
+        if (!ModuleName.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
+
+    /**
+     * Parses a {@code String taskName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskName} is invalid.
+     */
+    public static String parseDeadline(String taskDeadline) throws ParseException {
+        requireNonNull(taskDeadline);
+        String trimmedName = taskDeadline.trim();
+        if (!ModuleName.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
 }

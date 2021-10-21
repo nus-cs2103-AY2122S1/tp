@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditStudentCommand;
+import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -37,10 +38,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         switch (commandWord) {
         //            case EditModuleCommand.COMMAND_WORD:
         //                return new EditModuleCommandParser().parse(arguments);
-        //            case EditTaskCommand.COMMAND_WORD:
-        //                return new EditTaskCommandParser().parse(arguments); //to be implemented
         case EditStudentCommand.COMMAND_WORD:
-            return new EditStudentCommandParser().parse(arguments); //to be implemented
+            return new EditStudentCommandParser().parse(arguments);
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
