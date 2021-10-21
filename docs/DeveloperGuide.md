@@ -512,8 +512,8 @@ Project scope:
 * **Time Period**: A time period in the staff's schedule.
 * **Status**: The working status of the staff. i.e. A part-timer or a full-timer.
 * **Schedule**: The staffs work schedule with a description of the work carried out.
-* **id**: The identification number assigned to the staff by the management.
-* **Role**: The role of the staff. i.e. Cook, Staff management
+* **Role**: The role(s) of the staff. i.e. Bartender.
+* **Salary**: The salary of the staff per hour.
 * **Address**: The address of the staff.
 * **Constraints**: The constraints the project is working with.
 * **MSS**: Main success scenario
