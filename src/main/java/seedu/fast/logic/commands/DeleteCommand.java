@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
             + "(Cannot have duplicated index!)";
     public static final String MESSAGE_MULTIPLE_DELETE_FAILED_WITHIN_LIMIT = "The position/number of contacts "
             + "you want to delete cannot be more than the number of contacts you currently have!";
-    public static final String MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT = "You cannot delete more than " +
+    public static final String MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT = "You cannot delete more than "
             + MULTIPLE_DELETE_LIMIT + " contacts at one time!";
     public static final String MESSAGE_MULTIPLE_DELETE_INVALID_INDEX_DETECTED = "%1$s contact(s) has been deleted"
             + " before the invalid index at 'index %2$s' is detected.";

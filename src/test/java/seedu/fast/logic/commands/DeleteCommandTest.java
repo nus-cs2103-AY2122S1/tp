@@ -7,7 +7,6 @@ import static seedu.fast.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.fast.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import org.junit.jupiter.api.Test;
@@ -152,7 +151,7 @@ public class DeleteCommandTest {
     public void execute_multipleIndexExceedLimitUnfilteredList_throwsCommandException() {
         Index[] array = new Index[11];
         for (int i = 0; i < 11; i++) {
-            array[i] = Index.fromOneBased(i+1);
+            array[i] = Index.fromOneBased(i + 1);
         }
 
         DeleteCommand deleteCommand = new DeleteCommand(array);
