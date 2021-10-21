@@ -8,19 +8,23 @@ import java.util.regex.Pattern;
 
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
-import safeforhall.logic.commands.DeleteCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.ListCommand;
-import safeforhall.logic.commands.ViewCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
+import safeforhall.logic.commands.delete.DeleteEventCommand;
+import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.edit.EditEventCommand;
 import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.view.ViewEventCommand;
+import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.add.AddEventCommandParser;
 import safeforhall.logic.parser.add.AddPersonCommandParser;
+import safeforhall.logic.parser.delete.DeleteEventCommandParser;
+import safeforhall.logic.parser.delete.DeletePersonCommandParser;
 import safeforhall.logic.parser.edit.EditEventCommandParser;
 import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -91,8 +95,8 @@ public class AddressBookParser {
         case EditPersonCommand.COMMAND_WORD:
             return new EditPersonCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case DeletePersonCommand.COMMAND_WORD:
+            return new DeletePersonCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -100,8 +104,8 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
 
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommand();
+        case ViewPersonCommand.COMMAND_WORD:
+            return new ViewPersonCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -122,14 +126,14 @@ public class AddressBookParser {
         case AddEventCommand.COMMAND_WORD:
             return new AddEventCommandParser().parse(arguments);
 
+        case DeleteEventCommand.COMMAND_WORD:
+            return new DeleteEventCommandParser().parse(arguments);
+
         case EditEventCommand.COMMAND_WORD:
             return new EditEventCommandParser().parse(arguments);
 
-        /*case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
-
-        case ViewCommand.COMMAND_WORD:
-            return new ViewCommand();*/
+        case ViewEventCommand.COMMAND_WORD:
+            return new ViewEventCommand();
 
         case IncludeCommand.COMMAND_WORD:
             return new IncludeCommandParser().parse(arguments);

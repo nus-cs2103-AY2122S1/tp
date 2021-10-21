@@ -18,7 +18,7 @@ import safeforhall.model.person.Name;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.Phone;
-import safeforhall.model.person.Room;
+import safeforhall.model.person.RoomValidCheckPredicate;
 import safeforhall.model.person.VaccStatus;
 
 /**
@@ -32,6 +32,7 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all residents whose parameters match any of "
             + "the provided keywords for different options (case-insensitive) and displays them as a "
             + "list with index numbers.\n"
+            + "Note that room can searched for by block (A), level (1), and block-level (A1) as well. "
             + "Parameters: "
             + "[" + CliSyntax.PREFIX_NAME + "NAME] "
             + "[" + CliSyntax.PREFIX_ROOM + "ROOM] "
@@ -73,7 +74,7 @@ public class FindCommand extends Command {
      */
     public static class FindCompositePredicate implements Predicate<Person> {
         private Predicate<Person> name;
-        private Predicate<Room> room;
+        private Predicate<Person> room;
         private Predicate<Phone> phone;
         private Predicate<Email> email;
         private Predicate<VaccStatus> vaccStatus;
@@ -81,7 +82,7 @@ public class FindCommand extends Command {
 
         // For equality checks
         private Name eName;
-        private Room eRoom;
+        private String eRoom;
         private Phone ePhone;
         private Email eEmail;
         private VaccStatus eVaccStatus;
@@ -119,9 +120,9 @@ public class FindCommand extends Command {
             this.name = new NameContainsKeywordsPredicate(Arrays.asList(name.fullName.split("\\s+")));
         }
 
-        public void setRoom(Room room) {
+        public void setRoom(String room) {
             this.eRoom = room;
-            this.room = room::equals;
+            this.room = new RoomValidCheckPredicate(room);
         }
 
         public void setPhone(Phone phone) {
@@ -148,7 +149,7 @@ public class FindCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        private Optional<Predicate<Room>> getRoom() {
+        private Optional<Predicate<Person>> getRoom() {
             return Optional.ofNullable(room);
         }
 
@@ -178,7 +179,7 @@ public class FindCommand extends Command {
         public boolean test(Person person) {
             List<Predicate<Person>> allPredicates = Arrays.asList(
                 p -> getName().orElse(x -> true).test(p),
-                p -> getRoom().orElse(x -> true).test(p.getRoom()),
+                p -> getRoom().orElse(x -> true).test(p),
                 p -> getPhone().orElse(x -> true).test(p.getPhone()),
                 p -> getEmail().orElse(x -> true).test(p.getEmail()),
                 p -> getVaccStatus().orElse(x -> true).test(p.getVaccStatus()),

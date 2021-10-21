@@ -1,14 +1,16 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.view;
 
 import static java.util.Objects.requireNonNull;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.CommandResult;
 import safeforhall.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
  */
-public class ViewCommand extends Command {
+public class ViewPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "view";
 
