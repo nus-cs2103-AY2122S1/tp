@@ -1,0 +1,19 @@
+@startuml
+
+start
+:User inputs add command;
+:Logic executes add command;
+:AddCommandParser parses the command;
+
+if() then ([Input arguments are valid])
+    if() then([Person's name does not exist in the address book])
+        :addPerson;
+    else ([else])
+        :Throw CommandException;
+    endif;
+else ([else])
+    :Throw ParseException;
+endif;
+stop
+
+@enduml

@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.Summary;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -151,6 +152,16 @@ public class AddCommandTest {
 
         @Override
         public void sortFilteredPersonList(Comparator<Person> comparator, boolean isAscending) {
+              throw new AssertionError("This method should not be called.");
+        }
+      
+        @Override
+        public Summary getSummary() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateStatistics() {
             throw new AssertionError("This method should not be called.");
         }
     }

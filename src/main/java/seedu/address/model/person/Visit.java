@@ -62,6 +62,26 @@ public class Visit {
     }
 
     /**
+     * Returns true if the visit date is within the coming week.
+     */
+    public boolean isThisWeek() {
+        if (value.isEmpty()) {
+            return false;
+        }
+        return DateTimeUtil.isThisWeek(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
+    }
+
+    /**
+     * Returns true if the visit date is within the current month.
+     */
+    public boolean isThisMonth() {
+        if (value.isEmpty()) {
+            return false;
+        }
+        return DateTimeUtil.isThisMonth(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
+    }
+
+    /**
      * Returns formatted last visit date.
      */
     public String getFormatted() {

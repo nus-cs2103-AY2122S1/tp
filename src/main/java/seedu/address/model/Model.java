@@ -86,10 +86,18 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /**
      * Sorts the person list.
      * @param comparator which is used to sort the person list.
      * @param isAscending the direction of sorting (ascending or descending).
      */
     void sortFilteredPersonList(Comparator<Person> comparator, boolean isAscending);
+
+    /** Returns a summary of the persons and visits statistics */
+    ReadOnlySummary getSummary();
+
+    /** Updates the statistics of the summary */
+    void updateStatistics();
+
 }

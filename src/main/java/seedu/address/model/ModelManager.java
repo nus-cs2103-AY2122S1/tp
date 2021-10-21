@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final Summary summary;
     private final UserPrefs userPrefs;
     private final SortedList<Person> sortedPersons;
     private final FilteredList<Person> filteredPersons;
@@ -41,6 +42,8 @@ public class ModelManager implements Model {
         this.sortedPersons = new SortedList<>(this.addressBook.getPersonList());
         sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
         this.filteredPersons = new FilteredList<>(sortedPersons);
+        this.summary = new Summary(addressBook);
+
     }
 
     public ModelManager() {
@@ -134,6 +137,18 @@ public class ModelManager implements Model {
         logger.info("Display person list by the order of name.");
         sortedPersons.setComparator(SortComparator.SORT_BY_NAME);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=================================== Summary =============================================================
+
+    @Override
+    public ReadOnlySummary getSummary() {
+        return summary;
+    }
+
+    @Override
+    public void updateStatistics() {
+        summary.setStatistics(addressBook);
     }
 
     @Override

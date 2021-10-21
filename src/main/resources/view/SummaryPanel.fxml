@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox id="summaryPanelPane" fx:id="summaryPanelPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" styleClass="summaryPanelPane">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets bottom="5" left="15" right="5" top="5" />
+            </padding>
+            <HBox alignment="CENTER_LEFT" spacing="5">
+                <Label styleClass="summary-heading" text="Summary" />
+            </HBox>
+            <Label fx:id="totalElderly" styleClass="summary-body" text="\$totalElderly" />
+            <Label fx:id="overdueVisits" styleClass="summary-body" text="\$overdueVisits" />
+            <Label fx:id="visitsNextWeek" styleClass="summary-body" text="\$visitsNextWeek" />
+            <Label fx:id="visitsNextMonth" styleClass="summary-body" text="\$visitsNextMonth" />
+            <Label fx:id="visitsLastWeek" styleClass="summary-body" text="\$visitsLastWeek" />
+            <Label fx:id="visitsLastMonth" styleClass="summary-body" text="\$visitsLastMonth" />
+        </VBox>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
+    </GridPane>
+</HBox>
