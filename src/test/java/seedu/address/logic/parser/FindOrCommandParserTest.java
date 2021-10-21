@@ -26,7 +26,6 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_oneName_returnsFindOrCommand() {
-        // no leading and trailing whitespaces
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of();
         FindOrCommand expectedFindOrCommand =
@@ -39,7 +38,6 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_multipleNames_returnsFindOrCommand() {
-        // no leading and trailing whitespaces
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of();
         FindOrCommand expectedFindOrCommand =
@@ -52,7 +50,6 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_oneTag_returnsFindOrCommand() {
-        // no leading and trailing whitespaces
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("friends"));
         FindOrCommand expectedFindOrCommand =
@@ -65,7 +62,6 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_multipleTags_returnsFindOrCommand() {
-        // no leading and trailing whitespaces
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
         FindOrCommand expectedFindOrCommand =
@@ -78,7 +74,6 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_oneNameAndTag_returnsFindOrCommand() {
-        // no leading and trailing whitespaces
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of(new Tag("friends"));
         FindOrCommand expectedFindOrCommand =
@@ -91,7 +86,6 @@ public class FindOrCommandParserTest {
 
     @Test
     public void parse_multipleNamesAndTags_returnsFindOrCommand() {
-        // no leading and trailing whitespaces
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
         FindOrCommand expectedFindOrCommand =
