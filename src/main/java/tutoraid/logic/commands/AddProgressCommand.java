@@ -9,7 +9,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.student.Progress;
-import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 
 
@@ -52,9 +51,7 @@ public class AddProgressCommand extends AddCommand {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-
-        ProgressList progressList = studentToEdit.getProgressList();
-        progressList.addProgress(this.progress);
+        studentToEdit.addProgress(this.progress);
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 

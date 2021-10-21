@@ -62,6 +62,14 @@ public class Student {
         return paymentStatus;
     }
 
+    public void addProgress(Progress toAdd) {
+        progressList.addProgress(toAdd);
+    }
+
+    public Progress deleteLatestProgress() {
+        return progressList.deleteLatestProgress();
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.

@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 
+import tutoraid.commons.util.AppUtil;
+import tutoraid.model.student.exceptions.EmptyProgressListException;
+
 /**
  * Represents a student's list of progress in TutorAid.
  */
@@ -29,12 +32,9 @@ public class ProgressList {
      */
     public ProgressList(ArrayList<String> progressListInStringArrayList) {
         requireNonNull(progressListInStringArrayList);
+        AppUtil.checkArgument(isValidProgressList(progressListInStringArrayList), MESSAGE_CONSTRAINTS);
 
         this.progressList = new ArrayList<>();
-
-        if (!isValidProgressList(progressListInStringArrayList)) {
-            return;
-        }
 
         for (int i = 0; i < progressListInStringArrayList.size(); i++) {
             String currentProgressDescription = progressListInStringArrayList.get(i);
@@ -89,14 +89,14 @@ public class ProgressList {
     }
 
     /**
-     * Deletes the latest progress.
+     * Deletes the latest progress. The list of progress must not be empty.
      */
-    public void deleteLatestProgress() {
+    public Progress deleteLatestProgress() {
         if (progressList.size() == 0) {
-            return;
-        } else {
-            progressList.remove(progressList.size() - 1);
+            throw new EmptyProgressListException();
         }
+
+        return progressList.remove(progressList.size() - 1);
     }
 
     /**

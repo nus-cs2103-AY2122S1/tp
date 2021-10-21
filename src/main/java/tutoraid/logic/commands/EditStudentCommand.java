@@ -95,7 +95,6 @@ public class EditStudentCommand extends Command {
         ParentName updatedParentName = editStudentDescriptor.getParentName().orElse(studentToEdit.getParentName());
         Phone updatedParentPhone = editStudentDescriptor.getParentPhone().orElse(studentToEdit.getParentPhone());
 
-        // not updated here
         ProgressList studentProgress = studentToEdit.getProgressList();
         PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
 

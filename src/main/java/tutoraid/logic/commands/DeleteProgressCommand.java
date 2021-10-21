@@ -9,7 +9,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.student.Progress;
-import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 
 
@@ -47,9 +46,7 @@ public class DeleteProgressCommand extends DeleteCommand {
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
 
-        ProgressList progressList = studentToEdit.getProgressList();
-        Progress progressToDelete = progressList.getLatestProgress();
-        progressList.deleteLatestProgress();
+        Progress progressToDelete = studentToEdit.deleteLatestProgress();
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
