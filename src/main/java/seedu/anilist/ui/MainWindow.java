@@ -45,6 +45,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StackPane statsDisplayPlaceholder;
+
+    @FXML
+    private StatsDisplay statsDisplay;
+
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
@@ -78,6 +84,24 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        statsDisplay = new StatsDisplay();
+        statsDisplayPlaceholder.getChildren().add(statsDisplay.getRoot());
+        updateStatsDisplay();
+
+    }
+
+    private void updateStatsDisplay() {
+        int watchingCount = getAnimeListPanel().getNumWatching();
+        int toWatchCount = getAnimeListPanel().getNumToWatch();
+        int finishedCount = getAnimeListPanel().getNumFinished();
+        int total = watchingCount + toWatchCount + finishedCount;
+
+        statsDisplay.setAnimeListStats(
+                total,
+                watchingCount,
+                toWatchCount,
+                finishedCount);
     }
 
     /**
@@ -120,16 +144,19 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            //resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isExit()) {
                 handleExit();
             }
 
+            updateStatsDisplay();
+
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
+            updateStatsDisplay();
             throw e;
         }
     }

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -17,6 +18,7 @@ import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Status;
 
 /**
  * Panel containing the list of anime.
@@ -25,6 +27,11 @@ public class AnimeListPanel extends UiPart<Region> {
     private static final String FXML = "AnimeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AnimeListPanel.class);
     private final TabOption currentTab;
+
+    //stats to be displayed
+    private int numWatching;
+    private int numToWatch;
+    private int numFinished;
 
     @FXML
     private TabPane animeListTabPane;
@@ -88,13 +95,59 @@ public class AnimeListPanel extends UiPart<Region> {
                             logger.log(Level.WARNING, "Wrongly parsed tab commands");
                         }
                     }
-                }
-        );
+                });
 
+            //Update anime stats upon change
+            animeList.addListener((ListChangeListener<Anime>) anime -> {
+                if (anime.next()) {
+                    setStats();
+                }
+            });
+
+        System.out.println("STATS UPDATED: WATCHING " + numWatching);
         this.currentTab = currentTab;
+        setStats();
     }
 
+    /**
+     * Resets the stats when the anime list changes so they could be recalculated.
+     */
+    private void resetStats() {
+        //resets the stats when the anime list changes so they could be recalculated
+        numWatching = 0;
+        numToWatch = 0;
+        numFinished = 0;
+    }
 
+    /**
+     * Updates anime list stats.
+     */
+    private void setStats() {
+        resetStats();
+        for (Anime anime: animeListView.getItems()) {
+            Status.WatchStatus watchStatus = anime.getStatus().status;
+            if (watchStatus.equals(Status.WatchStatus.WATCHING)) {
+                numWatching += 1;
+            } else if (watchStatus.equals(Status.WatchStatus.TOWATCH)) {
+                numToWatch += 1;
+            } else {
+                //TODO add assertion that it's finished
+                numFinished += 1;
+            }
+        }
+    }
+
+    public int getNumWatching() {
+        return this.numWatching;
+    }
+
+    public int getNumToWatch() {
+        return this.numToWatch;
+    }
+
+    public int getNumFinished() {
+        return this.numFinished;
+    }
 
     public void setActiveTab() {
         if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
