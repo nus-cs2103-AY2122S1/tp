@@ -5,7 +5,6 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -75,7 +74,6 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
