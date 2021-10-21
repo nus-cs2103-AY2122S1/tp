@@ -150,6 +150,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateTabOptionsAnimeList(Predicate<Anime> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setCurrentTab(TabOption.TabOptions currentTab) {
             throw new AssertionError("This method should not be called.");
         }

@@ -1,27 +1,35 @@
 package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_GENRE;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.function.Predicate;
 
 import seedu.anilist.commons.core.Messages;
 import seedu.anilist.model.Model;
-import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
+import seedu.anilist.model.anime.Anime;
 
 /**
- * Finds and lists all animes in anime list whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds all anime(s) whose have matches to at least one specified keyword of
+ * each category (case-insensitive) and displays them as a list with index numbers
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all animes whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " baka senpai tomodachi";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all anime(s) whose have matches to at "
+        + "least one specified keyword of each category (case-insensitive) and "
+        + "displays them as a list with index numbers.\n"
+        + "Parameters: "
+        + "[" + PREFIX_NAME + "NAME KEYWORD]... "
+        + "[" + PREFIX_GENRE + "GENRE KEYWORD]...\n"
+        + "Example: " + COMMAND_WORD + " n/boku no n/hero g/comedy";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final Predicate<Anime> predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+
+    public FindCommand(Predicate<Anime> predicate) {
         this.predicate = predicate;
     }
 

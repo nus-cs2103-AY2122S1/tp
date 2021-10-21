@@ -26,7 +26,7 @@ public class TabOption {
     /**
      * Constructs a {@code TabOption}.
      *
-     * @param currentTab A valid tab status.
+     * @param currentTabString A valid tab status.
      */
     public TabOption(String currentTabString) {
         requireNonNull(currentTabString);

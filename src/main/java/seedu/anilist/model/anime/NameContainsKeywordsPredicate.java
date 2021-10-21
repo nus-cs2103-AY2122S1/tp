@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.anilist.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Anime}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Anime}'s {@code Name} matches any the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Anime> {
     private final List<String> keywords;

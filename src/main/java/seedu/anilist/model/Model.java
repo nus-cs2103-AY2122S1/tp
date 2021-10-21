@@ -81,10 +81,18 @@ public interface Model {
     ObservableList<Anime> getFilteredAnimeList();
 
     /**
-     * Updates the filter of the filtered anime list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered anime list to filter by the given {@code predicate}
+     * corresponding to some query.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimeList(Predicate<Anime> predicate);
+
+    /**
+     * Updates the filter of the filtered anime list to filter by the given {@code predicate} corresponding
+     * to some tab option.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateTabOptionsAnimeList(Predicate<Anime> predicate);
 
     /**
      * Sets the current tab.
