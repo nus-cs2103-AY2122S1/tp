@@ -54,6 +54,7 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 
 **Notes about the command format (Unix Command Syntax):**
 
+- Similar to Unix CLI, the up and down arrow keys can be used to navigate the history of commands executed.
 - Flags will be used to specify different options for the commands. For example, the `-sid` flag can be used to specify a student's student ID.
 - Parameters can be in any order.e.g. if the command specifies `-n NAME -sid STUDENT_ID`,
   `-sid STUDENT_ID -n NAME`is also acceptable.
