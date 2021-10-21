@@ -45,5 +45,4 @@ LogicManager <-- AddProgressCommand
 deactivate AddProgressCommand
 <-- LogicManager : CommandResult
 deactivate LogicManager
-
 @enduml
