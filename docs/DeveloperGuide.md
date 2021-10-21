@@ -207,6 +207,26 @@ The following sequence diagram shows how the add student operation works:
 </div>
 
 
+### Add group feature
+
+The add group feature allows users to create new groups, as well as specify students to be added to the group to be created.
+
+#### How the `AddGroupCommand` works:
+1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
+2. For each of the names and IDs, an `AllocDescriptor` is created.
+3. For each of the `AllocDescriptors`, a search is done against the current `StudentList` to find students that match the descriptors.
+   1. If there is a unique match, the student is added to the group.
+       4. The group is added to the application.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** In the case where there are more than one students matched because they share the same name, an error message will be displayed to the user. The user will then have to specify the student to be added using his/her student ID.
+
+</div>
+
+The following activity diagrams summarizes what happens when a user executes a command to add a new group. In the case where the group is not added, an error message will be displayed with the reason.
+
+![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
+![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
