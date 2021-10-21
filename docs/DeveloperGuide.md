@@ -166,9 +166,13 @@ or a specific guide on how to use a particular command.
 The mechanism of the command is done by retrieving a `HELP_MESSAGE` field in each of the other command classes (other than HelpCommand itself). This help command will
 be displayed to the user on a separate window later on.
 
-// TODO: add image
-As seen from the diagram, the `HelpCommand` involves the use of conditional branches. If the condition is met, a `CommandException` is thrown to let
-users know that the input is invalid. Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown below.
+![HelpCommandSequenceDiagram](images/logic/commands/helpcommand/HelpCommandSequenceDiagram.png)
+
+As seen from the diagram, the `HelpCommand` involves the use of conditional branches. If the optional condition is met, a `CommandException` is thrown to let
+users know that the input is invalid. 
+
+Otherwise, the HelpCommand will use conditional branch to guide users to two different scenarios, as shown above. If it is a general help, a general help command
+will be created. If it is a specific help, then a specific help command associated with a command will be created.
 
 ### AttendanceCommand
 

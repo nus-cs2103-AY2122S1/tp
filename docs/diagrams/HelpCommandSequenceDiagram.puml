@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+
+participant "h:HelpCommand" as HelpCommand LOGIC_COLOR
+participant ":CommandException" as CommandException LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+
+create HelpCommand
+[-> HelpCommand : execute(model)
+activate HelpCommand
+
+opt if commandWord is null or helpMessage is null
+    create CommandException
+    HelpCommand -> CommandException ++ : CommandException(MESSAGE_HELP_NOT_EXIST)
+    CommandException --> HelpCommand : exception created
+    deactivate CommandException
+    [<-- HelpCommand : exception thrown
+end opt
+
+alt if isGeneralHelp
+    create CommandResult
+    HelpCommand -> CommandResult ++ : CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, helpMessage)
+    CommandResult --> HelpCommand : general help command result
+    deactivate CommandResult
+    [<-- HelpCommand : command result
+else
+    create CommandResult
+    HelpCommand -> CommandResult ++ : CommandResult(MESSAGE_HELP_SUCCESS_SPECIFIC, helpMessage)
+    CommandResult --> HelpCommand : specific help command result
+    deactivate CommandResult
+    [<-- HelpCommand : command result
+end alt
+deactivate HelpCommand
+@enduml
