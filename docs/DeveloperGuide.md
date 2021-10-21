@@ -285,7 +285,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
 | `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
 | `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
-| `* *`    | regular user                               | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
+| `* *`    | user                                       | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
+| `* * *`  | user                                       | edit an applicant's information               | update their information without having to delete and add them again      |
 | `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their email                | locate details of applicants without having to go through the entire list |
@@ -294,11 +295,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their expected salary      | filter out applicants that match the salary range of the hiring company   |
 | `* * *`  | user                                       | find applicants by their level of education   | filter out applicants that match the desired highest level of education   |
 | `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
+| `* * *`  | user                                       | find applicants by their tags                 | filter out applicants with desired tags                                   |
 | `* * *`  | user                                       | find applicants by their interview time       | know how many applicants will have interview on a specific time           |
+| `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
+| `* * *`  | user                                       | see all names available in the list           | check easily if a certain name is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all phone numbers available in the list   | check easily if a certain number is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all emails available in the list          | check easily if a certain email is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all applied roles available in the list   | check easily if a certain role is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all employment types available in the list| check easily if a certain employment type is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all expected salaries available in the list | check easily if a certain expected salary is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all interview times available in the list | check easily if a certain interview time is present in the list without having to go through the entire list      |
+| `* *`    | user                                       | see all tags available in the list | check easily if a certain tag is present in the list without having to go through the entire list      |
 | `* * *`  | user                                       | mark applicants as "Done"                     | know which applicants I have attended to                                  |
 | `* * *`  | user                                       | unmark applicants from "Done" to "Not Done"   | reflect the correct current status I have with the applicant              |
-| `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
-| `* *`    | regular user                               | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
+| `* *`    | user                                       | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
+
 
 *{More to be added}*
 
@@ -515,7 +526,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Expected Salary**: Represents the minimum amount the applicant is willing to be paid for the job
 * **Level of Education**: Represents the highest/current level of education the applicant has, specifically Elementary, Middle School, High School, University, Bachelors, Masters, PhD
 * **Years of Experience**: Represents the number of years the applicant has previously worked in their applied role for
-
+* **Search term**: Terms that can be searched for. e.g. Search terms for roles are all the roles that exist in the list, meaning these are all the roles that can be searched for.
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
