@@ -17,18 +17,18 @@ public class Student {
     private final Name name;
     private final StudentId studentId;
     private final ClassId classId;
-    private final Grade grade;
+    private final Email email;
     private List<LabResult> labResultList;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, StudentId studentId, ClassId classId, Grade grade) {
-        requireAllNonNull(name, studentId, classId, grade);
+    public Student(Name name, StudentId studentId, ClassId classId, Email email) {
+        requireAllNonNull(name, studentId, classId, email);
         this.name = name;
         this.studentId = studentId;
         this.classId = classId;
-        this.grade = grade;
+        this.email = email;
         this.labResultList = new ArrayList<>();
     }
 
@@ -44,8 +44,8 @@ public class Student {
         return classId;
     }
 
-    public Grade getGrade() {
-        return grade;
+    public Email getemail() {
+        return email;
     }
 
     public List<LabResult> getLabResultList() {
@@ -96,14 +96,14 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getStudentId().equals(getStudentId())
                 && otherStudent.getClassId().equals(getClassId())
-                && otherStudent.getGrade().equals(getGrade())
+                && otherStudent.getemail().equals(getemail())
                 && otherStudent.getLabResultList().equals(getLabResultList());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, studentId, classId, grade);
+        return Objects.hash(name, studentId, classId, email);
     }
 
     @Override
@@ -113,8 +113,8 @@ public class Student {
                 + getStudentId()
                 + "; Class ID: "
                 + getClassId()
-                + "; Grade: "
-                + getGrade();
+                + "; Email: "
+                + getemail();
     }
 
 }

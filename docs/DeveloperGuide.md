@@ -260,7 +260,7 @@ _{Explain here how the data archiving feature will be implemented}_
 CS2100 TAs who
 * have to manage a number of students across different classes
 * keep track of the students' attendance
-* keep track of the students' grades
+* keep track of the students' emails
 * prefer and comfortable with CLI tools
 * can type fast
 * are proficient with Unix commands
@@ -279,11 +279,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------
 | `* * *`  | potential user exploring the app           | see the app populated with sample data| easily see how the app will look like when it is in use.        
 | `* * *`  | user ready to start using the app          | purge all current data         |  get rid of data in the app.      
-| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall Grade)| so that I can identify and track their progress separately.
+| `* * *`  | CS2100 TA                                  | be able to create records of individual students: (Name, Student ID, Class ID, Overall email)| so that I can identify and track their progress separately.
 | `* * *`  | CS2100 TA                                  | be able to sort the class records| have an organized class record.                                       
 | `* * *`  | CS2100 TA                                  | delete the details of a student| clear the information of students who have dropped out of the class.   
 | `* * *`  | new user                                   | use the in-build help feature  | learn how to use the app quickly.                                      
-| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and grade.
+| `* * *`  | CS2100 TA                                  | be able to view (read) the records of individual students| know more about the student's current performance and email.
 | `* * *`  | CS2100 TA                                  | be able to update the details of a student| correct any mistakes that I have made.                   
 | `* * *`  | CS2100 TA                                  | be able to save the data in a CSV file| upload to LumiNUS and share with the CS2100 Instructors.         
 | `* * *`  | proficient programmer / TA                 | navigate ProgrammerError seamlessly with the use of Unix command| efficiently manage my class.           
@@ -293,10 +293,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * `  | user                                        | know that the software and data will be available 99.999 percent of the time I try to access it  | don't get frustrated and find another software to use.                 
 | `* *`   | CS2100 TA who is an undergradudate myself   | spend little time updating ProgrammerError                                                       | have have sufficient time for my other commitments.                    
 | `* *`   | CS2100 TA with overwhelming work            | be greeted with a nice interface                                                                 | enjoy the process of doing admin tasks.                                
-| `* *`   | CS2100 TA                                   | update attendance to keep track of participation grade%                                          | I can fulfil my obligations as a TA.                                   
+| `* *`   | CS2100 TA                                   | update attendance to keep track of participation email%                                          | I can fulfil my obligations as a TA.                                   
 | `* *`   | CS2100 TA                                   | edit a student's participation score                                                             | the records are up to date.                                            
 | `* *`   | CS2100 TA                                   | upload the students' performance to LumiNUS conveniently                                         |                                                                        
-| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/grade from the database.       
+| `* *`   | impatient CS2100 TA with overwhelming work  | be greeted with a nice interface                                                                 | quickly retrieve a student's particular/email from the database.       
 | `* *`   | CS2100 TA who loves using the keyboard      | type commands                                                                                    | practice my typing skills.                                              
 | `* *`   | CS2100 TA                                   | generate weekly feedbacks via email for my students with ease                                    |                                                                        
 | `* *`   | CS2100 admin                                | have a dashboard to have a bird eye view of my class statistics                                  | be updated quickly on my class progress.                               

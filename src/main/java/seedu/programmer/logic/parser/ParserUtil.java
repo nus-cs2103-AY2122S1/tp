@@ -6,7 +6,7 @@ import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.StringUtil;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 
@@ -80,19 +80,19 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String grade} into an {@code Grade}.
+     * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param grade the input grade
-     * @throws ParseException if the given {@code grade} is invalid.
+     * @param email the input email
+     * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Grade parseGrade(String grade) throws ParseException {
-        requireNonNull(grade);
-        String trimmedGrade = grade.trim();
-        if (!Grade.isValidGrade(trimmedGrade)) {
-            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+    public static Email parseemail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedemail = email.trim();
+        if (!Email.isValidEmail(trimmedemail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
-        return new Grade(trimmedGrade);
+        return new Email(trimmedemail);
     }
 
     //todo: for test of show feature only

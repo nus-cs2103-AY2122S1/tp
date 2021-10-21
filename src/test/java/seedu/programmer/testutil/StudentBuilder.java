@@ -1,10 +1,7 @@
 package seedu.programmer.testutil;
 
-import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
-import seedu.programmer.model.student.Name;
-import seedu.programmer.model.student.Student;
-import seedu.programmer.model.student.StudentId;
+import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.Email;
 
 /**
  * A utility class to help with building student objects.
@@ -14,12 +11,12 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_STUDENT_ID = "A0213256H";
     public static final String DEFAULT_CLASS_ID = "B01";
-    public static final String DEFAULT_GRADE = "A";
+    public static final String DEFAULT_email = "A";
 
     private Name name;
     private StudentId studentId;
     private ClassId classId;
-    private Grade grade;
+    private Email email;
 
     /**
      * Creates a {@code studentBuilder} with the default details.
@@ -28,7 +25,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         studentId = new StudentId(DEFAULT_STUDENT_ID);
         classId = new ClassId(DEFAULT_CLASS_ID);
-        grade = new Grade(DEFAULT_GRADE);
+        email = new Email(DEFAULT_email);
     }
 
     /**
@@ -38,7 +35,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         studentId = studentToCopy.getStudentId();
         classId = studentToCopy.getClassId();
-        grade = studentToCopy.getGrade();
+        email = studentToCopy.getemail();
     }
 
     /**
@@ -67,15 +64,15 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Grade} of the {@code student} that we are building.
+     * Sets the {@code Email} of the {@code student} that we are building.
      */
-    public StudentBuilder withGrade(String grade) {
-        this.grade = new Grade(grade);
+    public StudentBuilder withemail(String email) {
+        this.email = new Email(email);
         return this;
     }
 
     public Student build() {
-        return new Student(name, studentId, classId, grade);
+        return new Student(name, studentId, classId, email);
     }
 
 }

@@ -18,13 +18,13 @@
     - allow user to use flags to execute operations
     - e.g. `add -n <NAME> -sid <STUDENT_ID>`
 5. Create records of individual students (ADD)
-    - Name, Student ID, Class ID, NULL grade as a placeholder for default
+    - Name, Student ID, Class ID, NULL email as a placeholder for default
     - `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 6. View the records of individual students (READ)
     - Find a student using Student ID
     - `view -sid <STUDENT_ID>`
 7. Update a student's record (UPDATE)
-    - Update a student's grade
+    - Update a student's email
     - `update -sid <STUDENT_ID>`
 8. Delete a student's record  (DELETE)
     - Delete the entry of the entire student

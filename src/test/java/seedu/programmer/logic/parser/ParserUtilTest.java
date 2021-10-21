@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
+import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.StudentId;
 
@@ -17,12 +17,12 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_STUDENT_ID = "+651234";
     private static final String INVALID_CLASS_ID = "+65";
-    private static final String INVALID_GRADE = "56";
+    private static final String INVALID_email = "56";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_STUDENT_ID = "A0214325H";
     private static final String VALID_CLASS_ID = "B01";
-    private static final String VALID_GRADE = "A";
+    private static final String VALID_email = "A";
 
 
     private static final String WHITESPACE = " \t\r\n";
@@ -113,20 +113,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGrade_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseGrade(null));
+    public void parseemail_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseemail(null));
     }
 
     @Test
-    public void parseGrade_validValueWithoutWhitespace_returnsGrade() throws Exception {
-        Grade expectedGrade = new Grade(VALID_GRADE);
-        assertEquals(expectedGrade, ParserUtil.parseGrade(VALID_GRADE));
+    public void parseemail_validValueWithoutWhitespace_returnsemail() throws Exception {
+        Email expectedEmail = new Email(VALID_email);
+        assertEquals(expectedEmail, ParserUtil.parseemail(VALID_email));
     }
 
     @Test
-    public void parseGrade_validValueWithWhitespace_returnsTrimmedGrade() throws Exception {
-        String gradeWithWhitespace = WHITESPACE + VALID_GRADE + WHITESPACE;
-        Grade expectedGrade = new Grade(VALID_GRADE);
-        assertEquals(expectedGrade, ParserUtil.parseGrade(gradeWithWhitespace));
+    public void parseemail_validValueWithWhitespace_returnsTrimmedemail() throws Exception {
+        String emailWithWhitespace = WHITESPACE + VALID_email + WHITESPACE;
+        Email expectedEmail = new Email(VALID_email);
+        assertEquals(expectedEmail, ParserUtil.parseemail(emailWithWhitespace));
     }
 }

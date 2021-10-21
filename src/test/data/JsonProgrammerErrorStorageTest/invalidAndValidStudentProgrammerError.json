@@ -3,11 +3,11 @@
     "name": "Valid Person",
     "studentId": "A0212352F",
     "classId": "B01",
-    "grade": "A"
+    "email": "A"
   }, {
-    "name": "Person With Invalid Grade",
+    "name": "Person With Invalid email",
     "studentId": "A0212352F",
     "classId": "B01",
-    "grade": "F+"
+    "email": "F+"
   } ]
 }

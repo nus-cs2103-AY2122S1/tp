@@ -10,11 +10,8 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ModelManager;
 import seedu.programmer.model.UserPrefs;
-import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Grade;
-import seedu.programmer.model.student.Name;
-import seedu.programmer.model.student.Student;
-import seedu.programmer.model.student.StudentId;
+import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.Email;
 
 
 /**
@@ -27,7 +24,7 @@ public class AddCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         // Re-initialize these variables before each test
-        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"), new Grade("A"));
+        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"), new Email("A"));
         model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
     }
 
@@ -52,7 +49,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addStudent(validStudent);
         String differentStudentId = "A6543210B";
         Student studentDifferentName = new Student(validStudent.getName(), new StudentId(differentStudentId),
-                                                   validStudent.getClassId(), validStudent.getGrade());
+                                                   validStudent.getClassId(), validStudent.getemail());
 
         assertCommandSuccess(new AddCommand(studentDifferentName), expectedModel,
                 String.format(AddCommand.MESSAGE_SUCCESS, studentDifferentName), expectedModel);
@@ -64,7 +61,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addStudent(validStudent);
         String differentName = "Different Name";
         Student studentDifferentName = new Student(new Name(differentName), validStudent.getStudentId(),
-                                                   validStudent.getClassId(), validStudent.getGrade());
+                                                   validStudent.getClassId(), validStudent.getemail());
 
         assertCommandFailure(new AddCommand(studentDifferentName), expectedModel, AddCommand.MESSAGE_DUPLICATE_STUDENT);
     }

@@ -35,7 +35,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label classId;
     @FXML
-    private Label grade;
+    private Label email;
 
     /**
      * Creates a {@code studentCode} with the given {@code student} and index to display.
@@ -81,11 +81,11 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         studentId.setText("Student ID: " + student.getStudentId().studentId);
         classId.setText("Class ID: " + student.getClassId().classId);
-        grade.setText("Grade: " + student.getGrade().grade);
+        email.setText("Email: " + student.getemail().email);
 
         name.setTextFill(Color.WHITE);
         studentId.setTextFill(Color.WHITE);
         classId.setTextFill(Color.WHITE);
-        grade.setTextFill(Color.WHITE);
+        email.setTextFill(Color.WHITE);
     }
 }

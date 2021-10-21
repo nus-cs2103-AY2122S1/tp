@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-ProgrammerError (P\|E) is a desktop app for managing students' information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this application is optimized to track personal particulars, grades and attendance of your students across different classes. If you are familiar with Unix commands, this is definitely for you!
+ProgrammerError (P\|E) is a desktop app for managing students' information, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Designed for CS2100 Lab TAs, this application is optimized to track personal particulars, emails and attendance of your students across different classes. If you are familiar with Unix commands, this is definitely for you!
 
 ## Table of Contents
 - [Quick Start](#quick-start)
@@ -14,7 +14,7 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
   4. [View Help: `help`](#view-help)
   5. [Add Student: `add`](#add-student)
   6. [View Student Details: `view`](#view-student)
-  7. [Update Student's Grade: `update`](#update-student)
+  7. [Update Student's email: `update`](#update-student)
   8. [Delete Student: `delete`](#delete-student)
   9. [Exit: `exit`](#exit)
   10. [Download data](#download-data)
@@ -38,7 +38,7 @@ ProgrammerError (P\|E) is a desktop app for managing students' information, opti
 
    * **`view -sid A1234567X`** Views a particular student's by its Student ID
 
-   * **`update -sid A1234567X -grade 100`** Updates a student's grade with the -grade flag
+   * **`update -sid A1234567X -email 100`** Updates a student's email with the -email flag
 
    * **`delete -sid A1234567X`**  : Deletes a student's record by the student ID
 
@@ -109,19 +109,19 @@ Examples:
 - `view -n Sherwin -cid B01` Views all students whose name contains the character sequence `Sherwin` and
   belongs to a class with the class ID containing the character sequence `B01`.
 
-### <a name="update-student"></a>6. Update Student's Grade : `update`
+### <a name="update-student"></a>6. Update Student's email : `update`
 
-Updates the grade of an existing student's in the PE.
+Updates the email of an existing student's in the PE.
 
-Format:`update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+Format:`update -sid <STUDENT_ID> -email <email_SCORE>`
 
-- Updates the student with `<STUDENT_ID> with the grade <GRADE_SCORE>`
+- Updates the student with `<STUDENT_ID> with the email <email_SCORE>`
 - Existing values will be updated to the input values.
 
 Examples:
 
-- `update -sid A1234567X -grade 100` Updates the grade of the student with student ID A1234567X to be 100.
-- `update -sid A2345678X -grade 97.5` Updates the grade of the student with student ID A2345678X to be 97.5.
+- `update -sid A1234567X -email 100` Updates the email of the student with student ID A1234567X to be 100.
+- `update -sid A2345678X -email 97.5` Updates the email of the student with student ID A2345678X to be 97.5.
 
 ### <a name="delete-student"></a>7. Delete Student: `delete`
 
@@ -153,6 +153,6 @@ Command | Format & Examples
 **Help** | `help`
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **View** | `view -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-**Update** | `update -sid <STUDENT_ID> -grade <GRADE_SCORE>`
+**Update** | `update -sid <STUDENT_ID> -email <email_SCORE>`
 **Delete** | `delete -sid <STUDENT_ID>`
 **Exit** | `exit`

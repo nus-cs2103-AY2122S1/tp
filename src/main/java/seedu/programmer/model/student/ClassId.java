@@ -31,7 +31,7 @@ public class ClassId {
     }
 
     /**
-     * Returns true if a given string is a valid grade.
+     * Returns true if a given string is a valid email.
      */
     public static boolean isValidClassId(String classId) {
 
