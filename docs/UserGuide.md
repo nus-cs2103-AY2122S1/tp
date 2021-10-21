@@ -45,15 +45,15 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 1. The following are some example of commands you can try. Type the command in the command box and press `Enter` to execute it.
     
-    * `list` : Lists all contacts.
+    * **`list`** : Lists all contacts.
 
-    * `add n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
+    * **`add`** `n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
 
-    * `delete 3` : Deletes the 3rd contact shown in the current list.
+    * **`delete`** `3` : Deletes the 3rd contact shown in the current list.
 
-    * `clear` : Deletes all contacts.
+    * **`clear`** : Deletes all contacts.
 
-    * `exit` : Exits the app.
+    * **`exit`** : Exits the app.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -91,13 +91,13 @@ Shows a message explaining how to access the help page.
 
 ![help message](images/helpWindow.png)
 
-Format: `help`
+Format: **`help`**
 
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
+Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
 [r/REMARK] [t/TAG]…​`
 
 * Only `n/NAME` field is *compulsory*, while other fields are *optional*.
@@ -109,22 +109,22 @@ A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Dwight Halpert`
-* `add n/John Doe p/98765432 e/johnd@example.com g/M`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 tg/07`
-* `add n/Tan Ah Gao nat/Singapore h/@TanAhCow r/Funny Guy`
+* **`add`** `n/Dwight Halpert`
+* **`add`** `n/John Doe p/98765432 e/johnd@example.com g/M`
+* **`add`** `n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 tg/07`
+* **`add`** `n/Tan Ah Gao nat/Singapore h/@TanAhCow r/Funny Guy`
 
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
-Format: `list`
+Format: **`list`**
 
 ### Editing a person : `edit`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
+Format: **`edit`** `INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
 [r/REMARK] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
@@ -136,15 +136,15 @@ Format: `edit INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GEND
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
+* **`edit`** `1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567`
   and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* **`edit`** `2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: **`find`** `KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -156,17 +156,17 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find n/John` returns `john` and `John Doe`
-* `find n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
+* **`find`** `n/John` returns `john` and `John Doe`
+* **`find`** `n/alex n/david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
-* `find nat/Singapore` <br>
+* **`find`** `nat/Singapore` <br>
   ![result for 'find nat/Singapore'](images/findNatSingapore.png)
 
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: **`delete`** `INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
@@ -174,20 +174,20 @@ Format: `delete INDEX`
 
 Examples:
 
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* **`list`** followed by **`delete`** `2` deletes the 2nd person in the address book.
+* **`find`** `Betsy` followed by **`delete`** `1` deletes the 1st person in the results of the **`find`** command.
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
-Format: `clear`
+Format: **`clear`**
 
 ### Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+Format: **`exit`**
 
 ### Saving the data
 
@@ -221,10 +221,10 @@ the data of your previous Socius home folder.
 
 |Action | Format | Examples|
 |--------|------------------|------------------------------------|
-|**Add** | `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| `add n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
-|**Clear** | `clear` | `clear` |
-|**Delete** | `delete INDEX` | `delete 3`|
-|**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | `edit 2 n/James Lee e/jameslee@example.com` |
-|**Find** | `find KEYWORD [MORE_KEYWORDS]` | `find g/F tg/07` |
-|**List** | `list` | `list` |
-|**Help** | `help` | `help` |
+|**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
+|**Clear** | **`clear`** | **`clear`** |
+|**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
+|**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
+|**Find** | **`find`** `KEYWORD [MORE_KEYWORDS]` | **`find`** `g/F tg/07` |
+|**List** | **`list`** | **`list`** |
+|**Help** | **`help`** | **`help`** |
