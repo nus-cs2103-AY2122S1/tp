@@ -9,7 +9,7 @@ import java.util.Optional;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Person implements Comparable<Person> {
 
     // Identity fields
     private final Name name;
@@ -175,4 +175,8 @@ public class Person {
         return builder.toString();
     }
 
+    @Override
+    public int compareTo(Person otherPerson) {
+        return getName().compareTo(otherPerson.getName());
+    }
 }
