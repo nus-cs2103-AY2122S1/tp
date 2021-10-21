@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
-import static seedu.address.model.Calculator.INVALID_REJECTION_RATE;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Calculator;

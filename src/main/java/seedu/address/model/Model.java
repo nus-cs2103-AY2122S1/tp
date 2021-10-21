@@ -16,7 +16,9 @@ import seedu.address.model.position.Title;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
@@ -61,7 +63,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -90,6 +94,7 @@ public interface Model {
     /**
      * Adds a new applicant to MrTechRecruiter with the given particulars.
      * The intended applicant must not already exist in the applicant book.
+     *
      * @return the newly added applicant.
      */
     Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
@@ -123,30 +128,40 @@ public interface Model {
     void setPosition(Position position, Position editedPosition);
 
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered applicant list */
+    /**
+     * Returns an unmodifiable view of the filtered applicant list
+     */
     ObservableList<Applicant> getFilteredApplicantList();
 
-    /** Returns an unmodifiable view of the filtered position list */
+    /**
+     * Returns an unmodifiable view of the filtered position list
+     */
     ObservableList<Position> getFilteredPositionList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicate);
 
     //=========== Filtered Position List Accessors =============================================================
+
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPositionList(Predicate<Position> predicate);
@@ -156,12 +171,15 @@ public interface Model {
      */
     void setPositionBook(ReadOnlyPositionBook positionBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyPositionBook getPositionBook();
 
     // Position related methods
 
     boolean hasPosition(Position position);
+
     boolean hasPositionWithTitle(Title title);
 
     void addPosition(Position toAdd);
@@ -172,12 +190,5 @@ public interface Model {
     Path getApplicantBookFilePath();
 
     float calculateRejectionRate(Position p);
-<<<<<<< HEAD
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> master
-=======
-}
->>>>>>> master
+

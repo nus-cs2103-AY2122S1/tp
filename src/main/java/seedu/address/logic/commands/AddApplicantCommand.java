@@ -69,8 +69,4 @@ public class AddApplicantCommand extends Command {
                 || (other instanceof AddApplicantCommand // instanceof handles nulls
                 && applicantParticulars.equals(((AddApplicantCommand) other).applicantParticulars));
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 }

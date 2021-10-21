@@ -7,9 +7,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.RejectionRateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.position.Position;
 import seedu.address.model.PositionBook;
+import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
+
 
 /**
  * Parses input arguments and creates a new RejectionRateCommand object
