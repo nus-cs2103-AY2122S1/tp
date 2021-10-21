@@ -164,7 +164,7 @@ The add student feature adds a student with the provided name and NUSNET ID into
 ####AddCommand class
 The add student mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
 the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
-If this `Student` is already existing, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
+If this `Student` already exists, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
 the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
 
 ####AddCommandParser class
