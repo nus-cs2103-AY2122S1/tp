@@ -292,13 +292,17 @@ Given below is an example usage scenario for setting a student's payment status 
 
 3. A `PaymentStatus` instance with the `hasPaid` variable set to `true` is created. This is then passed into the constructor of `Student`, along with the values of the other existing fields of the index-specified student, to create a new `Student` instance.
 
+The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 2 and 3.
+
+<img src="images/ConstructEditedStudentSequenceDiagram.png" width="800" />
+
 4. `Model#setStudent()` is then called upon to replace the existing `Student` instance in the `StudentBook` with the newly created instance. 
 
 5. The result of the `PaidCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager`.
 
-The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components, from Steps 2 to 5.
+The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 4 and 5.
 
-<img src="images/ExecutePaidCommandSequenceDiagram.png" width="850" />
+<img src="images/SetEditedStudentSequenceDiagram.png" width="800" />
 
 A similar execution scenario can be expected for setting a student's payment status as `unpaid`.
 
