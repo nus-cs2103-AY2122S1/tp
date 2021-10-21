@@ -31,8 +31,8 @@ public class Person implements Unique<Person> {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private Note note = Note.EMPTY_NOTE;
-    private HashSet<String> superGroups = new HashSet<>();
-    private HashSet<String> subGroups = new HashSet<>();
+    private HashSet<String> displaySuperGroups = new HashSet<>();
+    private HashSet<String> displaySubGroups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -61,15 +61,15 @@ public class Person implements Unique<Person> {
      * Creates a person with groups and subgroups.
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags,
-            HashSet<String> superGroups, HashSet<String> subGroups) {
+                  HashSet<String> displaySuperGroups, HashSet<String> displaySubGroups) {
         requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.note = note;
         this.tags.addAll(tags);
-        this.superGroups = superGroups;
-        this.subGroups = subGroups;
+        this.displaySuperGroups = displaySuperGroups;
+        this.displaySubGroups = displaySubGroups;
     }
 
     public Name getName() {
@@ -114,10 +114,10 @@ public class Person implements Unique<Person> {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSuperGroup(SuperGroup superGroup) throws DuplicateItemException {
-        if (superGroups.contains(superGroup.toString())) {
+        if (displaySuperGroups.contains(superGroup.toString())) {
             throw new DuplicateItemException();
         }
-        superGroups.add(superGroup.toString());
+        displaySuperGroups.add(superGroup.toString());
     }
 
     /**
@@ -127,10 +127,10 @@ public class Person implements Unique<Person> {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSuperGroup(String superGroup) throws DuplicateItemException {
-        if (superGroups.contains(superGroup)) {
+        if (displaySuperGroups.contains(superGroup)) {
             throw new DuplicateItemException();
         }
-        superGroups.add(superGroup);
+        displaySuperGroups.add(superGroup);
     }
 
     /**
@@ -140,10 +140,10 @@ public class Person implements Unique<Person> {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSubGroup(SubGroup subGroup) {
-        if (subGroups.contains(subGroup.toString())) {
+        if (displaySubGroups.contains(subGroup.toString())) {
             throw new DuplicateItemException();
         }
-        subGroups.add(subGroup.toString());
+        displaySubGroups.add(subGroup.toString());
     }
 
     /**
@@ -153,11 +153,24 @@ public class Person implements Unique<Person> {
      * @throws ItemNotFoundException if person is not in in the group.
      */
     public void removeSuperGroup(String superGroup) throws ItemNotFoundException {
-        if (!superGroups.contains(superGroup)) {
+        if (!displaySuperGroups.contains(superGroup)) {
             throw new ItemNotFoundException();
         }
-        subGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
-        superGroups.remove(superGroup);
+        displaySubGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
+        displaySuperGroups.remove(superGroup);
+    }
+
+    /**
+     * Removes a subgroup from the person.
+     *
+     * @param subGroup the subgroup to be removed.
+     * @throws ItemNotFoundException if SubGroup is not found.
+     */
+    public void removeSuperGroup(SubGroup subGroup) throws ItemNotFoundException {
+        if (!displaySubGroups.contains(subGroup.toString())) {
+            throw new ItemNotFoundException();
+        }
+        displaySubGroups.remove(subGroup.toString());
     }
 
     /**
@@ -167,18 +180,18 @@ public class Person implements Unique<Person> {
      * @throws ItemNotFoundException if SubGroup is not found.
      */
     public void removeSubGroup(SubGroup subGroup) throws ItemNotFoundException {
-        if (!subGroups.contains(subGroup.toString())) {
+        if (!displaySubGroups.contains(subGroup.toString())) {
             throw new ItemNotFoundException();
         }
-        subGroups.remove(subGroup.toString());
+        displaySubGroups.remove(subGroup.toString());
     }
 
     public HashSet<String> getSuperGroups() {
-        return superGroups;
+        return displaySuperGroups;
     }
 
-    public HashSet<String> getSubGroups() {
-        return subGroups;
+    public HashSet<String> getDisplaySubGroups() {
+        return displaySubGroups;
     }
 
 

@@ -69,7 +69,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         superGroups.addAll(source.getSuperGroups());
-        subGroups.addAll(source.getSubGroups());
+        subGroups.addAll(source.getDisplaySubGroups());
     }
 
     /**

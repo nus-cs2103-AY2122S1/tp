@@ -29,7 +29,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_NOTE = BENSON.getNote().toString();
     private static final String VALID_NOTE_DATE = BENSON.getNote().getSavedDate();
     private static final List<String> VALID_GROUPS = new ArrayList<>(BENSON.getSuperGroups());
-    private static final List<String> VALID_SUBGROUPS = new ArrayList<>(BENSON.getSubGroups());
+    private static final List<String> VALID_SUBGROUPS = new ArrayList<>(BENSON.getDisplaySubGroups());
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());

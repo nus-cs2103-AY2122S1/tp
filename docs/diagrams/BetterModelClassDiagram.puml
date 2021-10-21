@@ -7,13 +7,22 @@ skinparam classBackgroundColor MODEL_COLOR
 'class Trie<T>
 'class "Trie<Tag>" as Trie_Tag_List
 
-AddressBook *-right-> "1" UniquePersonList
-AddressBook *-right-> "1" Trie
+Notor *-right-> "1" UniquePersonList
+Notor *-right-> "1" UniqueSuperGroupList
+Notor *-right-> "1" Trie
 Trie -[hidden]down- UniquePersonList
 Trie -[hidden]down- UniquePersonList
 
 Trie *-right-> "*" String
 UniquePersonList -right-> Person
+UniqueSuperGroupList -right-> SuperGroup
+SuperGroup  *--> "*" SubGroup
+
+Group <|-- SuperGroup
+Group <|-- SubGroup
+
+Group  *--> "*" Person
+Group *--> Note
 
 Person -up-> "*" String
 
@@ -21,4 +30,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Note
+Person *--> "*" DisplaySuperGroup
+Person *--> "*" DisplaySubGroup
+
 @enduml
