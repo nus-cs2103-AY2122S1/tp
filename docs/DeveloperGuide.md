@@ -284,7 +284,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | see usage instructions                        | refer to instructions when I forget how to use the App                    |
 | `* * *`  | user                                       | list all applicants                           | keep track of all my applicants                                           |
 | `* * *`  | user                                       | add an applicant                              | update my list of applicants with new people                              |
-| `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need                                        |
+| `* * *`  | user                                       | delete an applicant                           | remove applicants I no longer need
 | `* * *`  | user                                       | find applicants by their name                 | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their phone number         | locate details of applicants without having to go through the entire list |
 | `* * *`  | user                                       | find applicants by their email                | locate details of applicants without having to go through the entire list |
@@ -295,6 +295,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | find applicants by their years of experience  | filter out applicants with desired years of experience                    |
 | `* * *`  | user                                       | find applicants by their interview time       | know how many applicants will have interview on a specific time           |
 | `* * *`  | user                                       | save applicant data                           | refer to it in the future without having to type in their data again      |
+| `* *`    | regular user                               | delete all applicants that are marked as done | so that I can focus only on applicants that I have not worked on, and easily reduce clutter in the address book |
+| `* *`    | regular user                               | delete multiple applicants at once            | so that I can delete applicants more efficiently                          |
 
 *{More to be added}*
 

@@ -260,19 +260,26 @@ Examples:
 
 ### Deleting an applicant : `delete`
 
-Deletes a specific applicant by index from the list in RecruitIn.
+Deletes applicants by their indexes from the list in RecruitIn.
 
-Format: `delete INDEX`
+Format: `delete INDEX...`
 
-* Deletes an applicant at the specified `INDEX`.
+* Deletes an applicant at all specified `INDEX`s (multiple applicants can be deleted in one command).
+* At least one `INDEX` must be given. (i.e. `delete ` is not a valid command)
 * The `INDEX` refers to the index number shown in the displayed applicants list.
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * `INDEX` uses **1-based indexing**.
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd applicant listed in RecruitIn.
+* `list` followed by `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 * `find John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
+
+### Deleting marked applicants: `delete_marked`
+
+Deletes all applicants that are marked as done.
+
+Format: `delete_marked`
 
 ### Showing search terms : `show`
 
@@ -345,7 +352,8 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00`
 **List** | `list`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
+**Delete Marked** | `delete_marked`
 **Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Help** | `help`
