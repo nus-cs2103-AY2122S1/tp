@@ -238,13 +238,47 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Uniquely identify persons/groups/tasks
+
+#### Implementation
+
+We identify different persons/groups/tasks ("elements" for simplicity) by assigning them unique ids. This is done by 
+the `UniqueId` class. Each `UniqueId` instance stores a randomly-generated UUID and the owner of the id. When an element
+is created, the constructors can call `UniqueId#generateId()` to generate a new `UniqueId`.
+
+The interface `HasUniqueId` is created for classes whose instances may need to be uniquely identified. `HasUniqueId` 
+includes a method `getId` that should be overridden by its subclasses. `HasUniqueId#getId()` should return the 
+`UniqueId` of the object. By implementing `HasUniqueId`, other classes can deal with id-related operations without 
+exhausting all classes that have `UniqueId` as instance.
+
+When storing references of `HasUniqueId`, we can simply store their id, instead of storing the entire object.
+
+<img src="images/UniqueIdDiagram.png" alt="Unique id diagram" width="254">
+
+#### Design Consideration
+
+**Aspect: How to generate a unique id:**
+
+- Aspect 1 (Current choice): UUID (128-bit label)
+  - Pros: Low possibility of collision
+  - Cons: Require more spaces to store
+- Aspect 2: `java.rmi.server.UID` (unique ID over time with respect to the host that it was generated on)
+  - Pros: Ensure uniqueness within same device
+  - Cons: As users can copy the data file and run the program in other devices, it may corrupt.
+- Aspect 3: UID + IP address:
+  - Pros: Solve the problem introduced in aspect 2.
+  - Cons: Require more spaces to store, IP addresses may confuse collaborator as they are not supposed to be in an id.
+- Aspect 4: Give a serial number for each objects
+  - Pros: Easy to implement / intuitive.
+  - Cons: Numbers (`int`, `long`) may be out-of-bound, need to keep a reference of the total number of id.
+
 ### Assign/Unassign task to student
 
 #### Implementation
 
-Task assignment to each student is facilitated through the `UniqueId` class, which stores a randomly-generated UUID and the owner of the id. 
-Each `Person` object and each `Task` object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s
-in both the `Person` object and the `Task` object.
+Task assignment to each student is facilitated through the `UniqueId` class. Each `Person` object and each `Task` 
+object has a `UniqueId` to identify them. Task assignment is stored as a set of `UniqueId`s in both the `Person` object 
+and the `Task` object.
 
 ![TaskAssignment](images/TaskAssignmentDiagram.png)
 
@@ -269,6 +303,32 @@ entire set from the `AddressBook` and look up the persons and tasks in the set.
 
 - Adds support for group assignment using similar assignment methods. Automatically assign task to all students in the group
 - Replace the set of `UniqueId`s with a set of `TaskCompletion` objects in order to track which student has done which task
+
+### Edit a task
+
+### Implementation
+This command is implemented to allow tutors to edit the details of the tasks stored in TutorMaster.
+
+The tutor's input to edit a particular task is executed by the Logic Manager. The logic manager passes the input to the
+`AddressBookParser` class which checks for the matching command. The arguments of the input are passed to `TaskCommandsParser`
+class which will then check for the matching action word. In this case, the action word will be '-e' and the arguments will be
+passed to `EditTaskCommandParser` class which will create an `EditTaskCommand` object. This command object is return to the
+`LogicManager` class to be executed. The `EditTaskCommand` object will create a newly edited task with the edited details and
+set the edited task in place of the original task in the model. It also returns a `CommandResult` object that is returned
+to the `LogicManager` class.
+
+![EditTask](images/EditTaskSequenceDiagram.png)
+
+### Implementation Rationale
+When a new task is created with the details input by the user, the uniqueId of the task also changes. This implies that
+the list of uniqueIds of tasks assigned to each student will have to be edited so store the newly created task in place of
+the original task. To tackle this issue, we created a new constructor for the `Task` class such that we can pass in the
+uniqueId of the original task so that the id is retained and does not change. This simplifies matters when it comes to
+assigning and unassigning tasks to the students.
+
+### Alternatives considered
+An alternative considered was to edit the list of uniqueIds of tasks assigned to each student after editing a particular
+task. However, this seemed inefficient and hence, we went with the current implementation.
 
 ### View a student
 
