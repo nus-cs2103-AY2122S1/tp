@@ -1,6 +1,5 @@
 package seedu.address.model.comparator;
 
-import seedu.address.model.person.GenderContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 import java.util.Comparator;
