@@ -438,6 +438,7 @@ Format: `exit`
 
 * **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
 * **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+* **CLI**: Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only.
 * **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
 * **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
 * **Mainstream OS**: Windows, Linux, Unix, OS-X.
