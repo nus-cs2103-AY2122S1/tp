@@ -8,8 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-
 /**
  * Represents the time slot the tuition class takes
  */
