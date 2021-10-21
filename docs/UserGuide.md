@@ -254,12 +254,15 @@ _Details coming soon ..._
 **Q**: Is the source code of this application freely available?<br>
 **A**: Yes, our code is available on our [GitHub repository](https://github.com/AY2122S1-CS2103T-W17-4/tp) under the MIT License. If you wish to contribute to the codebase of this application, please read the [Developer Guide](https://ay2122s1-cs2103t-w17-4.github.io/tp/DeveloperGuide.html) and make a pull request to our repository.
 
+**Q**: I've spotted a bug in your application. How can I report this?<br>
+**A**: We would love to hear from you. You can make a GitHub issue at this [link](https://github.com/AY2122S1-CS2103T-W17-4/tp/issues) with the relevant details.
+
 **Q**: Is my data secure with this application?<br>
 **A**: Your data is stored safely on your machine. **Uni-Fy** stores the data locally and does not upload any data to servers on the Internet. However, you are recommended to use antivirus software on your machine to prevent unauthorised hackers from accessing the local database.
 
-**Q**: I've spotted a bug in your application. How can I report this?<br>
-**A**: We would love to hear from you. You can make a GitHub issue at this [link](https://github.com/AY2122S1-CS2103T-W17-4/tp/issues) with the relevant details.
+
 --------------------------------------------------------------------------------------------------------------------
+
 
 ## 5. Command summary
 
