@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
@@ -87,6 +88,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         private String getConditionString(PersonField field, List<String> list) {
+            requireNonNull(field);
             Optional<String> listString = list.stream().reduce((a, b) -> a + ", " + b);
             return field + ": " + listString.orElse("");
         }
