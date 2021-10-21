@@ -58,7 +58,7 @@ public class Applicant {
         this.application = application;
     }
 
-    public Position getPosition() {
+    public Position getPositionApplyingTo() {
         return application.getPosition();
     }
 

@@ -214,7 +214,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public int initialiseRejectionRate(Position p) {
+        public int calculateRejectionRate(Position p) {
             throw new AssertionError("This method should not be called.");
         };
     }

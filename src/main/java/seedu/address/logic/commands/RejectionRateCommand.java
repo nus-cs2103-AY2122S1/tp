@@ -47,7 +47,7 @@ public class RejectionRateCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        rejectionRate = model.initialiseRejectionRate(toAdd);
+        rejectionRate = model.calculateRejectionRate(toAdd);
 
         if (rejectionRate == -1) {
             return new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS);

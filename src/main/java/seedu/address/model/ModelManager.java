@@ -276,11 +276,11 @@ public class ModelManager implements Model {
      * @param p The position to be initialised.
      */
     @Override
-    public int initialiseRejectionRate(Position p) {
+    public int calculateRejectionRate(Position p) {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
-            Position currentPosition = a.getPosition();
+            Position currentPosition = a.getPositionApplyingTo();
             if (currentPosition.isSamePosition(p)) {
                 total++;
                 if (a.getApplicationStatus() == Application.ApplicationStatus.REJECTED) {
