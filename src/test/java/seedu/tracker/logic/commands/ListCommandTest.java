@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 
 /**
@@ -22,8 +23,8 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
-        expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+        expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
     }
 
     @Test

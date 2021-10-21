@@ -23,25 +23,60 @@ public class ModelManager implements Model {
 
     private final ModuleTracker moduleTracker;
     private final UserPrefs userPrefs;
+    private final UserInfo userInfo;
     private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given moduleTracker and userPrefs.
      */
-    public ModelManager(ReadOnlyModuleTracker moduleTracker, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyModuleTracker moduleTracker, ReadOnlyUserPrefs userPrefs, ReadOnlyUserInfo userInfo) {
         super();
-        requireAllNonNull(moduleTracker, userPrefs);
+        requireAllNonNull(moduleTracker, userPrefs, userInfo);
 
         logger.fine("Initializing with mod tracker: " + moduleTracker + " and user prefs " + userPrefs);
 
         this.moduleTracker = new ModuleTracker(moduleTracker);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.userInfo = new UserInfo(userInfo);
         filteredModules = new FilteredList<>(this.moduleTracker.getModuleList());
     }
 
     public ModelManager() {
-        this(new ModuleTracker(), new UserPrefs());
+        this(new ModuleTracker(), new UserPrefs(), new UserInfo());
     }
+
+    //=========== UserPrefs ==================================================================================
+    @Override
+    public void setUserInfo(ReadOnlyUserInfo userInfo) {
+        requireNonNull(userInfo);
+        this.userInfo.resetData(userInfo);
+    }
+
+    @Override
+    public ReadOnlyUserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    @Override
+    public void setCurrentSemester(AcademicCalendar academicCalendar) {
+        userInfo.setCurrentSemester(academicCalendar);
+    }
+
+    @Override
+    public AcademicCalendar getCurrentSemester() {
+        return userInfo.getCurrentSemester();
+    }
+
+    @Override
+    public void setMcGoal(Mc mcGoal) {
+        userInfo.setMcGoal(mcGoal);
+    }
+
+    @Override
+    public Mc getMcGoal() {
+        return userInfo.getMcGoal();
+    }
+
 
     //=========== UserPrefs ==================================================================================
 
@@ -88,26 +123,6 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyModuleTracker getModuleTracker() {
         return moduleTracker;
-    }
-
-    @Override
-    public void setCurrentSemester(AcademicCalendar academicCalendar) {
-        this.moduleTracker.setCurrentSemester(academicCalendar);
-    }
-
-    @Override
-    public AcademicCalendar getCurrentSemester() {
-        return moduleTracker.getCurrentSemester();
-    }
-
-    @Override
-    public void setMcGoal(Mc mcGoal) {
-        this.moduleTracker.setMcGoal(mcGoal);
-    }
-
-    @Override
-    public Mc getMcGoal() {
-        return moduleTracker.getMcGoal();
     }
 
     @Override
