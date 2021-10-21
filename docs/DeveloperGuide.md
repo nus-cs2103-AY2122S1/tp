@@ -214,7 +214,9 @@ The following sequence diagram shows how add lesson operation works:
 
 ![AddLessonSequenceDiagram](images/DeveloperGuideImage/AddLessonSequenceDiagram.png)
 
-Activity diagram
+:information_source: **Note:** The lifelines for `AddLessonCommandParser` should end at destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+![AddLessonActivityDiagram](images/DeveloperGuideImage/AddLessonActivityDiagram.png)
 
 #### Design considerations:
 
