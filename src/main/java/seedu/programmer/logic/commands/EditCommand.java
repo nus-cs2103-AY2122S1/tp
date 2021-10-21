@@ -2,7 +2,7 @@ package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_email;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
@@ -32,7 +32,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STUDENT_ID + "STUDENT_ID] "
             + "[" + PREFIX_CLASS_ID + "CLASS_ID] "
-            + "[" + PREFIX_email + "email] "
+            + "[" + PREFIX_EMAIL + "email] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENT_ID + "A0121234H "
             + PREFIX_CLASS_ID + "B01";

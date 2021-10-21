@@ -1,7 +1,7 @@
 package seedu.programmer.testutil;
 
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_email;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -29,7 +29,7 @@ public class StudentUtil {
         return PREFIX_NAME + student.getName().fullName + " "
                 + PREFIX_STUDENT_ID + student.getStudentId().studentId + " "
                 + PREFIX_CLASS_ID + student.getClassId().classId + " "
-                + PREFIX_email + student.getEmail().email + " ";
+                + PREFIX_EMAIL + student.getEmail().email + " ";
     }
 
     /**
@@ -41,7 +41,7 @@ public class StudentUtil {
         descriptor.getStudentId().ifPresent(studentId ->
                 sb.append(PREFIX_STUDENT_ID).append(studentId.studentId).append(" "));
         descriptor.getClassId().ifPresent(classId -> sb.append(PREFIX_CLASS_ID).append(classId.classId).append(" "));
-        descriptor.getemail().ifPresent(email -> sb.append(PREFIX_email).append(email.email).append(" "));
+        descriptor.getemail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.email).append(" "));
 
         return sb.toString();
     }

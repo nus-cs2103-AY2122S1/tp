@@ -86,7 +86,7 @@ public class ParserUtil {
      * @param email the input email
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Email parseemail(String email) throws ParseException {
+    public static Email parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedemail = email.trim();
         if (!Email.isValidEmail(trimmedemail)) {

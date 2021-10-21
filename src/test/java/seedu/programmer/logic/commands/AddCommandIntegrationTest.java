@@ -24,7 +24,8 @@ public class AddCommandIntegrationTest {
     @BeforeEach
     public void setUp() {
         // Re-initialize these variables before each test
-        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"), new Email("e0518441@u.nus.edu"));
+        validStudent = new Student(new Name("Tester"), new StudentId("A0123456B"), new ClassId("B01"),
+                new Email("e0518441@u.nus.edu"));
         model = new ModelManager(getTypicalProgrammerError(), new UserPrefs());
     }
 

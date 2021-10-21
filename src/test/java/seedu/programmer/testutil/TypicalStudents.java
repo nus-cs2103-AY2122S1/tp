@@ -23,33 +23,33 @@ public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withStudentId("A0212425H").withClassId("B01")
-            .withEmail("A").build();
+            .withEmail("e0422331@u.nus.edu").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withStudentId("A0212325H").withClassId("B02")
-            .withEmail("B+").build();
+            .withEmail("e0433331@u.nus.edu").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz")
             .withStudentId("A0112425H").withClassId("B03")
-            .withEmail("A-").build();
+            .withEmail("e0433331@u.nus.edu").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier")
             .withStudentId("A0512425H").withClassId("B02")
-            .withEmail("A+").build();
+            .withEmail("e0417731@u.nus.edu").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer")
             .withStudentId("A0612425H").withClassId("B01")
-            .withEmail("D").build();
+            .withEmail("e0418731@u.nus.edu").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz")
             .withStudentId("A0912425H").withClassId("B11")
-            .withEmail("C").build();
+            .withEmail("e0418231@u.nus.edu").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best")
             .withStudentId("A0852425H").withClassId("B11")
-            .withEmail("B").build();
+            .withEmail("e0418631@u.nus.edu").build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier")
             .withStudentId("A0782425H").withClassId("B01")
-            .withEmail("B").build();
+            .withEmail("e0418331@u.nus.edu").build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller")
             .withStudentId("A0852425H").withClassId("B01")
-            .withEmail("A").build();
+            .withEmail("e0422331@u.nus.edu").build();
 
     // Manually added - student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_STUDENT_ID_AMY)

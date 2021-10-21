@@ -11,7 +11,7 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_STUDENT_ID = "A0213256H";
     public static final String DEFAULT_CLASS_ID = "B01";
-    public static final String DEFAULT_EMAIL = "e0518541@u.nus";
+    public static final String DEFAULT_EMAIL = "e0518541@u.nus.edu";
 
     private Name name;
     private StudentId studentId;
