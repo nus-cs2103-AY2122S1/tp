@@ -103,6 +103,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudent(Student target) {
         tuitione.removeStudent(target);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -114,8 +115,8 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-
         tuitione.setStudent(target, editedStudent);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     @Override
@@ -140,6 +141,7 @@ public class ModelManager implements Model {
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireAllNonNull(target, editedLesson);
         tuitione.setLesson(target, editedLesson);
+        updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
     }
 
     //=========== Filtered Student and Lesson List Accessors ======================================================

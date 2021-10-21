@@ -3,8 +3,6 @@ package seedu.tuitione.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -56,28 +54,23 @@ public class EnrollCommand extends Command {
         }
         Student studentToEnroll = lastShownList.get(indexStudent.getZeroBased());
 
-        if (indexLesson.getZeroBased() >= lastShownList.size()) {
+        if (indexLesson.getZeroBased() >= lessonList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
-
         Lesson lesson = lessonList.get(indexLesson.getZeroBased());
-        Lesson newLesson = lesson.createClone();
 
-        if (newLesson.containsStudent(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), newLesson));
+        if (lesson.containsStudent(studentToEnroll)) {
+            throw new CommandException(String.format(MESSAGE_STUDENT_IN_LESSON, studentToEnroll.getName(), lesson));
         }
-        if (!newLesson.isAbleToEnroll(studentToEnroll)) {
-            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), newLesson));
+        if (!lesson.isAbleToEnroll(studentToEnroll)) {
+            throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
         }
 
-        Student newStudent = studentToEnroll.createClone();
-        newLesson.addStudent(newStudent);
-        model.setLesson(lesson, newLesson);
-        model.setStudent(studentToEnroll, newStudent);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        lesson.enrollStudent(studentToEnroll);
+        model.setLesson(lesson, lesson);
+        model.setStudent(studentToEnroll, studentToEnroll);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, newStudent.getName(), lesson));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, studentToEnroll.getName(), lesson));
     }
 
     @Override

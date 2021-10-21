@@ -87,7 +87,7 @@ public class FilterCommandTest {
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 2);
         Grade grade = new Grade("S2");
-        MATH_S2.addStudent(BENSON);
+        MATH_S2.enrollStudent(BENSON);
         FilterCommand command = new FilterCommand(grade, null);
         expectedModel.updateFilteredStudentList(new StudentIsOfSpecifiedGrade(grade));
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(grade));
@@ -95,7 +95,7 @@ public class FilterCommandTest {
 
         assertEquals(Arrays.asList(BENSON), model.getFilteredStudentList());
         assertEquals(Arrays.asList(MATH_S2, PHYSICS_S2), model.getFilteredLessonList());
-        MATH_S2.removeStudent(BENSON);
+        MATH_S2.unenrollStudent(BENSON);
     }
 
 }

@@ -59,8 +59,8 @@ public class TypicalLessons {
     }
 
     private static List<Lesson> getTypicalLessons() {
-        return new ArrayList<>(Arrays.asList(SCIENCE_P2.createClone(),
-                MATH_S2.createClone(),
-                PHYSICS_S2.createClone()));
+        return new ArrayList<>(Arrays.asList(new LessonBuilder(SCIENCE_P2).build(),
+                new LessonBuilder(MATH_S2).build(),
+                new LessonBuilder(PHYSICS_S2).build()));
     }
 }

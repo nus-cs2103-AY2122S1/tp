@@ -1,18 +1,18 @@
 package seedu.tuitione.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
-import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.remark.Remark;
 
 /**
@@ -30,18 +30,14 @@ public class Student {
     private final Address address;
     private final Grade grade;
     private final Set<Remark> remarks = new HashSet<>();
-    private final Map<LessonCode, Price> lessonCodesAndPrices = new HashMap<>();
-    private final Set<Lesson> lessons = new HashSet<>();
+    private final List<Lesson> lessons = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name,
-                   ParentContact parentContact,
-                   Email email,
-                   Address address,
-                   Grade grade,
-                   Set<Remark> remarks) {
+    public Student(Name name, ParentContact parentContact, Email email, Address address,
+            Grade grade, Set<Remark> remarks) {
+
         requireAllNonNull(name, parentContact, email, address, remarks);
 
         this.name = name;
@@ -81,50 +77,36 @@ public class Student {
     }
 
     /**
-     * Returns an immutable lesson code and price map, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Map<LessonCode, Price> getLessonCodesAndPrices() {
-        return Collections.unmodifiableMap(lessonCodesAndPrices);
-    }
-
-    /**
-     * Returns an immutable lesson code set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<LessonCode> getLessonCodes() {
-        return Collections.unmodifiableSet(lessonCodesAndPrices.keySet());
-    }
-
-    /**
      * Returns the number of lessons the Student has enrolled in.
      */
     public int getNumberOfLessonsEnrolled() {
-        return lessonCodesAndPrices.size();
+        return lessons.size();
     }
 
     /**
-     * Returns an immutable lesson price list, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lessons list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public List<Price> getLessonPrices() {
-        return List.copyOf(lessonCodesAndPrices.values());
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessons);
     }
 
     /**
-     * Returns an immutable lessons set, which throws {@code UnsupportedOperationException}
+     * Returns an immutable lesson code list, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Lesson> getLessons() {
-        return lessons;
+    public List<LessonCode> getLessonCodes() {
+        return lessons.stream()
+                .map(Lesson::getLessonCode)
+                .collect(Collectors.toUnmodifiableList());
     }
 
     /**
      * Returns the Student's weekly subscription price.
      */
     public double getSubscriptionPrice() {
-        return this.getLessonPrices().stream()
-                .map(e -> e.value)
+        return lessons.stream()
+                .map(l -> l.getPrice().value)
                 .reduce(0.0, Double::sum);
     }
 
@@ -139,52 +121,57 @@ public class Student {
         return (otherStudent != null) && otherStudent.name.equals(name);
     }
 
+    public boolean containsLesson(Lesson lesson) {
+        return lessons.stream().anyMatch(l -> l.isSameLesson(lesson));
+    }
+
     /**
-     * Adds lesson to student instance. Student instance holds a weaker linkage to Lessons, using its lesson code.
+     * Adds lesson to student instance.
      */
     public void enrollForLesson(Lesson lesson) {
-        lessons.add(lesson);
-        lessonCodesAndPrices.put(lesson.getLessonCode(), lesson.getPrice());
+        requireNonNull(lesson);
+        if (!containsLesson(lesson)) {
+            lesson.enrollStudent(this);
+        }
     }
 
     /**
-     * Puts the lesson codes and prices of the given input into the current students' lesson codes and prices.
-     */
-    public void setLessonCodesAndPrices(Map<LessonCode, Price> map) {
-        lessonCodesAndPrices.putAll(map);
-    }
-
-    /**
-     * Puts the lessons of the given input into the current students' lessons set.
-     */
-    public void setLessons(Set<Lesson> newLessons) {
-        lessons.addAll(newLessons);
-    }
-
-    /**
-     * Adds the lesson into the current students' lessons set.
-     */
-    public void addLesson(Lesson newLesson) {
-        lessons.add(newLesson);
-    }
-
-    /**
-     * Remove lesson from student instance. Student instance uses a weaker linkage to Lessons, using its lesson code.
+     * Remove lesson from student instance.
      */
     public void unenrollFromLesson(Lesson lesson) {
-        LessonCode codeToUnenroll = lesson.getLessonCode();
-        lessonCodesAndPrices.remove(codeToUnenroll);
-        lessons.remove(lesson);
+        requireNonNull(lesson);
+        lesson.unenrollStudent(this);
     }
 
     /**
-     * Returns a clone of the Student instance.
+     * Adds the lesson into the student's lessons list.
      */
-    public Student createClone() {
-        Student newStudent = new Student(name, parentContact, email, address, grade, remarks);
-        newStudent.lessonCodesAndPrices.putAll(lessonCodesAndPrices);
-        newStudent.lessons.addAll(lessons);
-        return newStudent;
+    public void addLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        if (!containsLesson(lesson)) {
+            lessons.add(lesson);
+        }
+    }
+
+    /**
+     * Updates a lesson in the student instance.
+     */
+    public void updateLesson(Lesson oldLesson, Lesson newLesson) {
+        requireAllNonNull(oldLesson, newLesson);
+        for (int idx = 0; idx < lessons.size(); idx++) {
+            if (lessons.get(idx).isSameLesson(oldLesson)) {
+                lessons.set(idx, newLesson);
+                return;
+            }
+        }
+    }
+
+    /**
+     * Removes the lesson from the student's lessons list.
+     */
+    public void removeLesson(Lesson lesson) {
+        requireNonNull(lesson);
+        lessons.remove(lesson);
     }
 
     /**
@@ -206,13 +193,13 @@ public class Student {
                 && otherStudent.address.equals(address)
                 && otherStudent.grade.equals(grade)
                 && otherStudent.remarks.equals(remarks)
-                && otherStudent.lessonCodesAndPrices.equals(lessonCodesAndPrices);
+                && otherStudent.getLessonCodes().equals(getLessonCodes());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, parentContact, email, address, remarks, lessonCodesAndPrices);
+        return Objects.hash(name, parentContact, email, address, remarks, getLessonCodes());
     }
 
     @Override
@@ -231,9 +218,9 @@ public class Student {
             builder.insert(builder.length() - 1, ';');
         }
 
-        if (!lessonCodesAndPrices.isEmpty()) {
+        if (!lessons.isEmpty()) {
             builder.append("Lesson(s): ");
-            lessonCodesAndPrices.keySet().forEach(l -> builder.append(l).append(" "));
+            getLessonCodes().forEach(lc -> builder.append(lc).append(" "));
         }
         return builder.toString();
     }

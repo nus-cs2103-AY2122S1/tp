@@ -91,7 +91,9 @@ public class TypicalStudents {
     }
 
     public static List<Student> getTypicalStudents() {
-        return new ArrayList<>(Arrays.asList(ALICE.createClone(), BENSON.createClone(), CARL.createClone(),
-                DANIEL.createClone(), ELLE.createClone(), FIONA.createClone(), GEORGE.createClone()));
+        return new ArrayList<>(Arrays.asList(new StudentBuilder(ALICE).build(), new StudentBuilder(BENSON).build(),
+                new StudentBuilder(CARL).build(), new StudentBuilder(DANIEL).build(),
+                new StudentBuilder(ELLE).build(), new StudentBuilder(FIONA).build(),
+                new StudentBuilder(GEORGE).build()));
     }
 }

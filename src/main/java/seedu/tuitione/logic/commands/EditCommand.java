@@ -8,13 +8,10 @@ import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,8 +21,6 @@ import seedu.tuitione.commons.util.CollectionUtil;
 import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
-import seedu.tuitione.model.lesson.LessonCode;
-import seedu.tuitione.model.lesson.Price;
 import seedu.tuitione.model.remark.Remark;
 import seedu.tuitione.model.student.Address;
 import seedu.tuitione.model.student.Email;
@@ -88,37 +83,28 @@ public class EditCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Set<Lesson> studentLessons = studentToEdit.getLessons();
+        List<Lesson> studentLessons = studentToEdit.getLessons();
         Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        if (!editStudentDescriptor.gradeIsEdited) {
-            Map<LessonCode, Price> lessonsCurrentlyTaken = studentToEdit.getLessonCodesAndPrices();
-            editedStudent.setLessonCodesAndPrices(lessonsCurrentlyTaken);
-
-            for (Lesson lesson : studentLessons) {
-                Lesson lessonClone = lesson.createClone();
-                lessonClone.removeStudent(studentToEdit);
-                lessonClone.addStudentNoConstraint(editedStudent); // editedStudent will be able to enroll
-                model.setLesson(lesson, lessonClone);
-                editedStudent.addLesson(lessonClone);
-            }
-        }
-
         if (editStudentDescriptor.gradeIsEdited) {
+            while (!studentLessons.isEmpty()) {
+                Lesson lesson = studentLessons.get(0);
+                lesson.unenrollStudent(studentToEdit);
+                model.setLesson(lesson, lesson);
+            }
+        } else {
+            // grade is not modified, hence must be updated in lessons
             for (Lesson lesson : studentLessons) {
-                Lesson lessonClone = lesson.createClone();
-                lessonClone.removeStudent(studentToEdit);
-                model.setLesson(lesson, lessonClone);
+                lesson.updateStudent(studentToEdit, editedStudent);
+                model.setLesson(lesson, lesson);
             }
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
     }
 
@@ -136,12 +122,8 @@ public class EditCommand extends Command {
         Grade updatedGrade = editStudentDescriptor.getGrade().orElse(studentToEdit.getGrade());
         Set<Remark> updatedRemarks = editStudentDescriptor.getRemarks().orElse(studentToEdit.getRemarks());
 
-        return new Student(updatedName,
-                updatedParentContact,
-                updatedEmail,
-                updatedAddress,
-                updatedGrade,
-                updatedRemarks);
+        return new Student(updatedName, updatedParentContact, updatedEmail, updatedAddress,
+                updatedGrade, updatedRemarks);
     }
 
     @Override

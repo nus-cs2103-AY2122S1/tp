@@ -1,8 +1,6 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_LESSONS;
-import static seedu.tuitione.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 
@@ -37,22 +35,19 @@ public class DeleteLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Lesson> lastShownList = model.getFilteredLessonList();
-
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
-        Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
 
-        List<Student> students = lessonToDelete.getStudents();
-        students.forEach(s -> {
+        Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
+        List<Student> studentsToUnenroll = lessonToDelete.getStudents();
+        while (!studentsToUnenroll.isEmpty()) {
+            Student s = studentsToUnenroll.get(0);
             s.unenrollFromLesson(lessonToDelete);
             model.setStudent(s, s);
-        }); // remove student -> lesson code linkages
-        lessonToDelete.removeAll();
-
+        }
         model.deleteLesson(lessonToDelete);
-        model.updateFilteredLessonList(PREDICATE_SHOW_ALL_LESSONS);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
         return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete));
     }
 

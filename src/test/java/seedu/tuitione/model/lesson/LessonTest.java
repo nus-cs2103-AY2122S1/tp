@@ -66,12 +66,12 @@ public class LessonTest {
         // student with clashing timing -> false
         Student busyStudent = new StudentBuilder().build();
         Lesson clashingLesson = LessonBuilder.getDefault();
-        clashingLesson.addStudent(busyStudent);
+        clashingLesson.enrollStudent(busyStudent);
         assertFalse(defaultLesson.isAbleToEnroll(busyStudent));
 
         // student already enrolled -> false
         Student enrolledStudent = new StudentBuilder().build();
-        defaultLesson.addStudent(enrolledStudent);
+        defaultLesson.enrollStudent(enrolledStudent);
         assertFalse(defaultLesson.isAbleToEnroll(enrolledStudent));
     }
 
@@ -82,7 +82,7 @@ public class LessonTest {
         assertFalse(defaultLesson.isAbleToUnenroll(student));
 
         // enroll and test
-        defaultLesson.addStudent(student);
+        defaultLesson.enrollStudent(student);
         assertTrue(defaultLesson.isAbleToUnenroll(student));
     }
 
@@ -94,58 +94,36 @@ public class LessonTest {
         assertFalse(defaultLesson.containsStudent(enrolledStudent));
 
         // student present
-        defaultLesson.addStudent(enrolledStudent);
+        defaultLesson.enrollStudent(enrolledStudent);
         assertTrue(defaultLesson.containsStudent(enrolledStudent));
     }
 
     @Test
     public void addStudent() {
         Student student = new StudentBuilder().withGrade(defaultLesson.getGrade().value).build();
-        defaultLesson.addStudent(student);
+        defaultLesson.enrollStudent(student);
 
         assertEquals(1, defaultLesson.getStudents().size());
         assertTrue(defaultLesson.containsStudent(student));
 
-        assertEquals(1, student.getLessonCodesAndPrices().size());
-        assertTrue(student.getLessonCodes().contains(defaultLesson.getLessonCode()));
-        assertTrue(student.getLessonPrices().contains(defaultLesson.getPrice()));
+        assertEquals(1, student.getLessons().size());
+        assertTrue(student.getLessons().contains(defaultLesson));
     }
 
     @Test
     public void removeStudent() {
         Student toRemove = new StudentBuilder().build();
         // student not present
-        String notPresentMessage = String.format(Lesson.STUDENT_NOT_ENROLLED, toRemove, defaultLesson);
-        assertThrows(IllegalArgumentException.class, notPresentMessage, () -> defaultLesson.removeStudent(toRemove));
+        String notPresentMessage = String.format(Lesson.STUDENT_NOT_ENROLLED, toRemove.getName(), defaultLesson);
+        assertThrows(IllegalArgumentException.class, notPresentMessage, () -> defaultLesson.unenrollStudent(toRemove));
         assertEquals(0, defaultLesson.getLessonSize());
 
         // student present and to remove
-        defaultLesson.addStudent(toRemove);
+        defaultLesson.enrollStudent(toRemove);
         assertEquals(1, defaultLesson.getLessonSize());
-        assertEquals(1, toRemove.getLessonCodesAndPrices().size());
 
-        defaultLesson.removeStudent(toRemove);
+        defaultLesson.unenrollStudent(toRemove);
         assertEquals(0, defaultLesson.getLessonSize());
-    }
-
-    @Test
-    public void removeAll() {
-        Student studentA = new StudentBuilder().withGrade(defaultLesson.getGrade().value).build();
-        Student studentB = new StudentBuilder().withName("John Low").withGrade(defaultLesson.getGrade().value).build();
-
-        defaultLesson.addStudent(studentA);
-        defaultLesson.addStudent(studentB);
-        assertEquals(2, defaultLesson.getStudents().size());
-
-        defaultLesson.removeAll();
-        assertEquals(0, defaultLesson.getStudents().size());
-        assertEquals(0, studentA.getLessonCodesAndPrices().size());
-        assertEquals(0, studentB.getLessonCodesAndPrices().size());
-    }
-
-    @Test
-    public void createClone() {
-        assertEquals(defaultLesson, defaultLesson.createClone());
     }
 
     @Test
@@ -174,7 +152,7 @@ public class LessonTest {
         assertNotEquals(defaultLesson, differentPriceLesson);
 
         Lesson lessonWithDifferentStudents = new LessonBuilder().build();
-        lessonWithDifferentStudents.addStudent(
+        lessonWithDifferentStudents.enrollStudent(
             new StudentBuilder().withGrade(defaultLesson.getGrade().value).build()
         );
         assertNotEquals(defaultLesson, lessonWithDifferentStudents);

@@ -84,8 +84,8 @@ public class SampleDataUtil {
         Student bernice = students[1];
         Lesson science = lessons[0];
         Lesson math = lessons[1];
-        science.addStudent(alex);
-        math.addStudent(bernice);
+        science.enrollStudent(alex);
+        math.enrollStudent(bernice);
 
         Tuitione sampleAb = new Tuitione();
         for (Student sampleStudent : students) {

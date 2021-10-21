@@ -9,6 +9,7 @@ import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalStudents.getTypicalTuitione;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.tuitione.commons.core.Messages;
@@ -24,7 +25,12 @@ import seedu.tuitione.model.student.Student;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalTuitione(), new UserPrefs());
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        model = new ModelManager(getTypicalTuitione(), new UserPrefs());
+    }
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -58,7 +64,6 @@ public class DeleteCommandTest {
 
         Model expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
         expectedModel.deleteStudent(studentToDelete);
-        showNoStudent(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
