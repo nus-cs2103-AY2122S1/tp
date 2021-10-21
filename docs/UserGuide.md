@@ -77,7 +77,7 @@ Interpretation
 Examples:
 * `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
 
-### Locating a task by name: `find` (coming soon)
+### Locating a task by name: `find`
 
 Find tasks with matching keywords and show them in the task list.
 
@@ -98,7 +98,7 @@ Examples:
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
 
 
-### Showing Tasks: `show` (coming soon)
+### Showing Tasks: `show`
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -118,7 +118,7 @@ Examples:
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 
 
-### Setting Priority Level for Tasks: `tag` (coming soon)
+### Setting Priority Level for Tasks: `tag`
 
 Set a task's priority.
 
@@ -151,12 +151,13 @@ Examples:
 Delete a specific task that has been added to your app.
 
 Format:
-- <code> delete <i>task_id</i> </code>
+- <code> delete <i>task_id (task_id)</i> </code>
 - <code> delete <i>n/task_name (d/date)</i> </code>
 
 Interpretation
 * If <code><i>task_id</i></code> field is provided:
   * Deletes the task corresponding to the <code><i>task_id</i></code>
+  * Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
 * If <code><i>n/task_name</i></code> field is provided:
   * Deletes the task with name **exactly matching** that given in the <code><i>n/task_name</i></code> field
   * If <code><i>d/date</code></i> field is provided, search for the task in the given date to delete
