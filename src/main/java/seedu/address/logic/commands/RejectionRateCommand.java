@@ -34,7 +34,7 @@ public class RejectionRateCommand extends Command {
     /**
      * Creates an RejectionRateCommand to get the specified rejection rate.
      */
-    public RejectionRateCommand(Position dummyPosition) {
+    public RejectionRateCommand(Position position) {
         this.toAdd = dummyPosition;
     }
 
