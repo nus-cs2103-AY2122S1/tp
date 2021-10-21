@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.person;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
@@ -10,6 +10,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.person.FindPersonCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;

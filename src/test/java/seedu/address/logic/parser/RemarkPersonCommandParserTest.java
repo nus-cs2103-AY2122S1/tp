@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.person.RemarkPersonCommand;
+import seedu.address.logic.parser.person.RemarkCommandParser;
 import seedu.address.model.person.Remark;
 
 public class RemarkPersonCommandParserTest {

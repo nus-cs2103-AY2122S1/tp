@@ -12,6 +12,11 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.person.ClearPersonCommand;
 import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.person.AddCommandParser;
+import seedu.address.logic.parser.person.DeleteCommandParser;
+import seedu.address.logic.parser.person.EditCommandParser;
+import seedu.address.logic.parser.person.FindCommandParser;
+import seedu.address.logic.parser.person.RemarkCommandParser;
 
 /**
  * Parses user input.
