@@ -34,7 +34,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().parallel().anyMatch(toCheck::isSamePerson);
     }
 
     /**
