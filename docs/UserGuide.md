@@ -15,7 +15,7 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `safeforhall.jar` from [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+1. Download the latest `safeforhall.jar` from [here](https://github.com/AY2122S1-CS2103T-T15-4/tp/releases/tag/v1.3.trial).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your SafeFor(H)All Application.
 
@@ -25,9 +25,9 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`view`** : Lists all contacts.
+   * **`view`** : Lists all residents.
 
-   * **`add`**`n/John Doe r/A100 v/true f/SoC` : Adds a resident named `John Doe` to the application.
+   * **`add`**`n/John Doe r/A100 v/t f/SoC` : Adds a resident named `John Doe` with the given information to the application.
 
    * **`delete`**`3` : Deletes the 3rd resident shown in the current list.
 
@@ -47,30 +47,29 @@ SafeFor(H)All is a **desktop app for hall admins to keep track of hall residents
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `view [INDEX]` can be used as `view` or as `view 100`.
+  e.g `add n/NAME [fd/LAST_FET_DATE]` can be used as `add n/John` or as `add n/John fd/09-09-2021`.
 
+* An ellipsis (...) implies multiple of that parameter can be provided.<br>
+  e.g `edit INDEX...` can be used as `edit 1` or as `edit 1 2 3 5 8`.
+  
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME f/FACULTY`, `f/FACULTY n/NAME` is also acceptable.
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `v/t v/f` only `v/t` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `exit`, `view`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+
+* [TODO] INCLUDE A DESCRIPTION ON DATE FORMATS
 
 </div>
 
-### Viewing help : `help`
+### For Residents
 
-Make changes ->
-Shows a message explaning how to access the help page.
+These commands will function as specified when run under the `Resident` tab.
 
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-
-### Adding a resident’s information : `add`
+#### Adding a resident’s information : `add`
 
 Adds a resident and their information to the application. 
 
@@ -86,12 +85,9 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
-### Viewing residents’ information : `view`
+#### Viewing residents’ information : `view`
 
 Shows a numbered list of all the residents in the address book.
-
-The optional argument [INDEX] will show the details of the
-resident at the specified index.
 
 The index of the resident is the corresponding number in the list
 shown when `view` (without the [INDEX] parameter) is called.
@@ -104,7 +100,7 @@ Examples:
 * `view` shows a list of all the residents
 * `view 30` shows the details of the resident at index 30
 
-### List of residents whose fet or test kit collection deadline is over or due soon: `list`
+#### Listing residents by fet/collection deadlines : `list`
 
 Lists residents whose ART collection or FET tests are due within the range of the given date or the range of the 2 dates given.
 
@@ -125,24 +121,33 @@ Examples:
 * `list k/lf d1/11-10-2021` retrieves a list of residents whose `FET` is due before `11 Oct 2021`
 * `list k/lc d1/12-10-2021` retrieves a list of residents whose `Test Kit Collection` is due before `12 Oct 2021`
 
-### Searching by resident information: `search`
+#### Searching by resident information: `search`
 
-Filters for residents by the provided keywords for each available parameter.
+Shows a list of residents that match the provided keywords for different available parameters.
 
-Format: `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]...`
+Format: `find [PREFIX/KEYWORD]...`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
-* The order of the keywords provided for the name does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Allowed flags include; `n/`, `r/`, `e`, `p/`, `f/` and `v/`
+* Flags for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` are not used. Refer to [List Command](#Listing residents by fet/collection deadlines) on how to make use of these fields.
+* Notes on searching by name:
+    - It is case-insensitive. e.g `hans` will match `Hans`, `True` will match `true`
+    - The order of the keywords provided for the name does not matter. e.g `Hans Bo` will match `Bo Hans`
+    - Only full words will be matched e.g `Han` will not match `Hans`
+    - Residents matching at least one keyword for the name will be returned (i.e. `OR` search).
+  e.g `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Notes on searching by room:
+    - A block can be used as a search. e.g `r/A`
+    - A level can be used as a search. e.g `r/2`
+    - A block-level can be used as a search. e.g `r/A2`
+    - A full valid room can be used as a search. e.g `r/A210`
+* All other fields are subject to the same validity conditions as in the [Add Command](#Adding a resident's information)
 
 Examples:
-* `search n/John` returns `john` and `John Doe`
-* `search n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
-* `search v/false f/soc` returns un-vaccinated residents from SoC <br>
+* `find n/John` returns `john` and `John Doe`
+* `find n/alex david v/true` returns vaccinated residents, `Alex Yeoh` and `David Li`
+* `find v/false f/soc` returns un-vaccinated residents from SoC <br>
 
-### Editing a resident : `edit`
+#### Editing a resident : `edit`
 
 Edits the details of existing residents in the address book.
 
@@ -159,7 +164,7 @@ Examples:
 *  `edit 1 e/johndoe@example.com r/A101` Edits the email address and room number of the 1st resident to be `johndoe@example.com` and `A101` respectively.
 *  `edit 1 2 3 v/true fd/20-10-2021` Sets the vaccination status of the 1st, 2nd, and 3rd resident as vaccinated, and sets their last FET dates to 20-10-2021.
 
-### Deleting a resident : `delete`
+#### Deleting a resident : `delete`
 
 Deletes specified residents from the address book.
 
@@ -174,7 +179,26 @@ Examples:
 * `view` followed by `delete 1 2 3` deletes the first 3 residents in the address book.
 * `find n/Anne` followed by `delete 1` deletes the 1st resident named Anne in the results of the `find` command.
 
-### Editing an event : `edit`
+### For Events
+
+These commands will function as specified when run under the `Event` tab.
+
+#### Adding an event : `add`
+
+Adds a new event to the address book.
+
+Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE [r/RESIDENTS]`
+
+[TODO]
+* The combination of the 4 required parameters should be unique
+* `FACULTY` has to be a single alphabetical word
+* `FACULTY` has to be a single alphabetical word
+
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
+* `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
+
+#### Editing an event : `edit`
 
 Edits an existing event in the address book.
 
@@ -189,7 +213,7 @@ Format: `edit INDEX [n/EVENT_NAME] [d/EVENT_DATE] [l/VENUE] [c/CAPACITY]`
 Examples:
 *  `edit 1 n/Football Training l/Field c/50` Edits the name, venue, and capacity of the 1st event in the event list to be `Football Training`, `Field`, and `50` respectively.
 
-### Add residents to an Event: `include`
+#### Add residents to an Event: `include`
 
 Add multiple residents to an event based on the information given(name or room number), a resident is only expected to be given one piece of information.
 
@@ -206,13 +230,29 @@ Examples:
 * `include 3 r/John Doe` adds John Doe to the third event in the address book
 * `include 4 r/John Doe, Jane Doe` adds John Doe and Jane Doe to the fourth event in the address book
 
-### Clearing all entries : `clear`
+### Commons
+
+These commands will function the same in either tab.
+
+#### Viewing help : `help`
+
+Provides the link for the user to reach this online user guide.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+#### History
+
+The `up` and `down` arrow keys when used with the input box in focus, allows traversal of past input commands to increase of use and efficiency.
+
+#### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits the program.
 
@@ -227,7 +267,7 @@ Action | Format, Examples
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]` <br> e.g. `view 30`
 **List** | `list k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `list k/f 15-8-2021 20-08-2021`
-**Search** | `search n/KEYWORD [MORE_KEYWORDS] [FLAG/KEYWORD]…` <br> e.g. `search n/john alex v/false f/fass` 
+**Find** | `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` 
 **Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
 **Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
 **Include** | `include INDEX r/INFORMATION [,MORE_INFORMATION]` <br> e.g. `include 1 r/A102, E416`
