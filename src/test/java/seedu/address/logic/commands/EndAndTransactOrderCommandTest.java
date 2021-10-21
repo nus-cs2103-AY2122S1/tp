@@ -28,7 +28,7 @@ public class EndAndTransactOrderCommandTest {
     public void execute_normalTransaction_itemRemoved() throws CommandException {
         ModelStubWithOrderAndInventory modelStub = new ModelStubWithOrderAndInventory();
 
-        Item item = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item item = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
         Inventory inventory = new Inventory();
         Order order = new Order();
         inventory.addItem(item);
@@ -50,8 +50,8 @@ public class EndAndTransactOrderCommandTest {
         // Order item has more quantity than item in inventory, inventory item should be removed
         ModelStubWithOrderAndInventory modelStub = new ModelStubWithOrderAndInventory();
 
-        Item inventoryItem = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
-        Item orderItem = new Item(new Name("milk"), "A0123", 15, new HashSet<>(), 1.1, 2.2);
+        Item inventoryItem = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
+        Item orderItem = new Item(new Name("milk"), 120123, 15, new HashSet<>(), 1.1, 2.2);
         Inventory inventory = new Inventory();
         Order order = new Order();
         inventory.addItem(inventoryItem);
@@ -73,8 +73,8 @@ public class EndAndTransactOrderCommandTest {
         // Order item has more quantity than item in inventory, inventory item should be removed
         ModelStubWithOrderAndInventory modelStub = new ModelStubWithOrderAndInventory();
 
-        Item inventoryItem = new Item(new Name("milk"), "A0123", 15, new HashSet<>(), 1.1, 2.2);
-        Item orderItem = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item inventoryItem = new Item(new Name("milk"), 120123, 15, new HashSet<>(), 1.1, 2.2);
+        Item orderItem = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
         Inventory inventory = new Inventory();
         Order order = new Order();
         inventory.addItem(inventoryItem);
@@ -86,7 +86,7 @@ public class EndAndTransactOrderCommandTest {
         EndAndTransactOrderCommand command = new EndAndTransactOrderCommand();
         command.execute(modelStub);
 
-        Item transactedItem = new Item(new Name("milk"), "A0123", 5, new HashSet<>(), 1.1, 2.2);
+        Item transactedItem = new Item(new Name("milk"), 120123, 5, new HashSet<>(), 1.1, 2.2);
         Inventory expectedInventory = new Inventory();
         expectedInventory.addItem(transactedItem);
 

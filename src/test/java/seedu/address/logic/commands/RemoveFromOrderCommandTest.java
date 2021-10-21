@@ -27,7 +27,7 @@ public class RemoveFromOrderCommandTest {
     public void execute_normalRemoval_itemRemoved() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
         modelStub.setOrder(new Order());
-        Item toRemove = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item toRemove = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
         modelStub.addToOrder(toRemove);
         Order expectedOrder = new Order();
 
@@ -41,8 +41,8 @@ public class RemoveFromOrderCommandTest {
     public void execute_removeWithOnlyNameMatch_itemRemoved() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
         modelStub.setOrder(new Order());
-        Item item = new Item(new Name("milk"), "A0123", 10, new HashSet<>());
-        Item toRemove = new Item(new Name("milk"), UUID.randomUUID().toString(), 12, new HashSet<>(), 1.1, 2.2);
+        Item item = new Item(new Name("milk"), 120123, 10, new HashSet<>());
+        Item toRemove = new Item(new Name("milk"), Integer.parseInt(UUID.randomUUID().toString()), 12, new HashSet<>(), 1.1, 2.2);
         modelStub.addToOrder(item);
         Order expectedOrder = new Order();
 
@@ -56,9 +56,9 @@ public class RemoveFromOrderCommandTest {
     public void execute_removeWithOnlyIdMatch_itemRemoved() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
         modelStub.setOrder(new Order());
-        Item item = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item item = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
         Item toRemove = new Item(new Name(StringUtil.generateRandomString()),
-                "A0123", 12, new HashSet<>(), 1.1, 2.2);
+                120123, 12, new HashSet<>(), 1.1, 2.2);
         modelStub.addToOrder(item);
         Order expectedOrder = new Order();
 
@@ -72,8 +72,8 @@ public class RemoveFromOrderCommandTest {
     public void execute_removeNonExistentialItem_orderUnchanged() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
         modelStub.setOrder(new Order());
-        Item item = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
-        Item toRemove = new Item(new Name("banana"), "B0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item item = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
+        Item toRemove = new Item(new Name("banana"), 120123, 10, new HashSet<>(), 1.1, 2.2);
         modelStub.addToOrder(item);
         Order expectedOrder = new Order();
         expectedOrder.addItem(item);

@@ -76,23 +76,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String count} into a {@code Integer}.
-     */
-    public static Integer parseCount(String count) throws ParseException {
-        try {
-            Integer.parseInt(count);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
-        }
-
-        if (Integer.parseInt(count) > 0) {
-            return Integer.parseInt(count);
-        } else {
-            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);
-        }
-    }
-
-    /**
      * Parses {@code String costPrice} into a {@code Double}.
      */
     public static Double parseCostPrice(String costPrice) throws ParseException {
@@ -129,16 +112,33 @@ public class ParserUtil {
     /**
      * Parses {@code String count} into a {@code id}.
      */
-    public static String parseId(String id) throws ParseException {
+    public static Integer parseId(String id) throws ParseException {
         try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_FORMAT);
         }
-        if (id.length() == 6 && id.charAt(0) != 45) {
-            return id;
+        if (id.length() == 6 && Integer.parseInt(id) > 45) {
+            return Integer.parseInt(id);
         } else {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
+        }
+    }
+
+    /**
+     * Parses {@code String count} into a {@code Integer}.
+     */
+    public static Integer parseCount(String count) throws ParseException {
+        try {
+            Integer.parseInt(count);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_FORMAT);
+        }
+
+        if (Integer.parseInt(count) > 0) {
+            return Integer.parseInt(count);
+        } else {
+            throw new ParseException(Messages.MESSAGE_INVALID_COUNT_INTEGER);
         }
     }
 }

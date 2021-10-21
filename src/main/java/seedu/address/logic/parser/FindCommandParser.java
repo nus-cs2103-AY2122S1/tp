@@ -32,7 +32,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         String[] nameKeywords = trimmedArgs.split("\\s+");
         List<String> fields = Arrays.asList(nameKeywords);
         boolean isAllNumbers = checkAllNumbers(fields);
-        if (checkNegativeId(fields)) {
+        if (checkNegativeId(fields) || checkLengthId(fields)) {
             throw new ParseException(String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN,
                     FindCommand.MESSAGE_USAGE));
         }
@@ -60,6 +60,22 @@ public class FindCommandParser implements Parser<FindCommand> {
             }
         }
         return isNegative;
+    }
+
+    /**
+     * Checks whether the given {@code String} of arguments is negative.
+     *
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public boolean checkLengthId (List<String> args) {
+        boolean isWrongLength = false;
+        for (int i = 0; i < args.size(); i = i + 1) {
+            if (args.get(i).charAt(0) == 0) {
+                isWrongLength = true;
+                break;
+            }
+        }
+        return isWrongLength;
     }
 
     /**

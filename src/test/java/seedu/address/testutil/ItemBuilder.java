@@ -43,7 +43,7 @@ public class ItemBuilder {
      */
     public ItemBuilder(Item itemToCopy) {
         name = itemToCopy.getName();
-        id = itemToCopy.getId();
+        id = Integer.toString(itemToCopy.getId());
         count = Integer.toString(itemToCopy.getCount());
         costPrice = Double.toString(itemToCopy.getCostPrice());
         salesPrice = Double.toString(itemToCopy.getSalesPrice());
@@ -102,7 +102,7 @@ public class ItemBuilder {
      * Build the {@code Item}
      */
     public Item build() {
-        return new Item(name, id, Integer.parseInt(count), tags, Double.parseDouble(costPrice),
+        return new Item(name, Integer.parseInt(id), Integer.parseInt(count), tags, Double.parseDouble(costPrice),
                 Double.parseDouble(salesPrice));
     }
 

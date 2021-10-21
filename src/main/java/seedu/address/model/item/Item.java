@@ -17,7 +17,7 @@ public class Item {
 
     // Identity fields
     private final Name name;
-    private final String id;
+    private final Integer id;
     private final Double costPrice;
     private final Double salesPrice;
 
@@ -28,7 +28,7 @@ public class Item {
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, String id, Integer count, Set<Tag> tags, Double costPrice, Double salesPrice) {
+    public Item(Name name, Integer id, Integer count, Set<Tag> tags, Double costPrice, Double salesPrice) {
         requireAllNonNull(name, id, count, tags, costPrice, salesPrice);
         this.count = count;
         this.name = name;
@@ -41,7 +41,7 @@ public class Item {
     /**
      * Old constructor
      */
-    public Item(Name name, String id, Integer count, Set<Tag> tags) {
+    public Item(Name name, Integer id, Integer count, Set<Tag> tags) {
         requireAllNonNull(name, id, count, tags);
         this.count = count;
         this.name = name;
@@ -68,7 +68,7 @@ public class Item {
         return name;
     }
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 

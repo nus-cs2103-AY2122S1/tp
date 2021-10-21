@@ -61,11 +61,18 @@ public class ItemDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Count} of the {@code ItemDescriptor} that we are building.
+     */
+    public ItemDescriptorBuilder withId(String id) {
+        descriptor.setCount(Integer.parseInt(id));
+        return this;
+    }
 
     /**
      * Sets the {@code id} of the {@code ItemDescriptor} that we are building.
      */
-    public ItemDescriptorBuilder withId(String id) {
+    public ItemDescriptorBuilder withId(int id) {
         descriptor.setId(id);
         return this;
     }

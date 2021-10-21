@@ -31,7 +31,7 @@ public class ItemDescriptorTest {
 
         // Set Id
         descriptor = new ItemDescriptor();
-        descriptor.setId(VALID_ID_BAGEL);
+        descriptor.setId(Integer.parseInt(VALID_ID_BAGEL));
         assertEquals(descriptor.getId().get(), VALID_ID_BAGEL);
 
         // Set Count
