@@ -10,6 +10,7 @@ import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
@@ -196,5 +197,31 @@ public class CalendarEntryList {
         }
         entry.setTitle(entryTitle.toString());
         return entry;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof CalendarEntryList)) {
+            return false;
+        }
+
+        // state check
+        CalendarEntryList other = (CalendarEntryList) obj;
+
+        return entryList.equals(other.entryList);
+        // Note that ArrayList#equals(Object) Returns true if and only if the specified object is also a list,
+        // both lists have the same size, and all corresponding pairs of elements in the two lists are equal.
+        // CalendarFX's Calendar#equals(Object) method only tests for object equality with == and hence shouldn't be used
+    }
+
+    @Override
+    public int hashCode() {
+        return calendar.hashCode();
     }
 }
