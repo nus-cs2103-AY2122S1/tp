@@ -87,9 +87,9 @@ Command Format: `add n/NAME p/PARENT_CONTACT e/EMAIL a/ADDRESS g/GRADE [r/REMARK
 
 :bulb: **Tip:**<br>
 
-* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).
+* `GRADE` here can only be in a range of `P1`-`P6` (primary school levels) or `S1`-`S4` (secondary school levels).<br>
 
-* A student can have any number of remarks (including 0).
+* A student can have any number of remarks (including 0).<br>
 
 </div>
 
@@ -107,19 +107,19 @@ Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
 
 :bulb: **Tip:**<br>
 
-* Adds the lesson with the specified prefixes.
+* Adds the lesson with the specified prefixes.<br>
 
-* `GRADE` here follows the similar requirements when adding a student.
+* `GRADE` here follows the similar requirements when adding a student.<br>
 
-* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.
+* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.<br>
 
-* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.
+* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.<br>
 
-* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm).
+* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm).<br>
 
-* Lessons are fixed at two hour periods.
+* Lessons are fixed at two hour periods.<br>
 
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …<br>
 
 </div>
 
