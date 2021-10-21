@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.data.event.Event;
 import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,7 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
-    private final TaskListManager taskListManager;
+    private TaskList taskListManager;
     private final FilteredList<Task> filteredTasks;
 
     /**
@@ -42,8 +43,8 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
-        this.taskListManager = new TaskListManager();
-        filteredTasks = new FilteredList<>(this.taskListManager.getObservableTaskList());
+        this.taskListManager = new TaskList();
+        filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
     }
 
     public ModelManager() {
@@ -185,7 +186,9 @@ public class ModelManager implements Model {
     @Override
     public void loadTaskList(Member member) {
         requireNonNull(member);
-        taskListManager.loadTaskList(member.getTaskList());
+        if (this.taskListManager != member.getTaskList()) {
+            this.taskListManager = member.getTaskList();
+        }
     }
 
     /**
@@ -195,7 +198,8 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTask(Member member, Task task) {
         loadTaskList(member);
-        return taskListManager.hasTask(task);
+        requireNonNull(task);
+        return taskListManager.contains(task);
     }
 
     /**
@@ -205,7 +209,7 @@ public class ModelManager implements Model {
     @Override
     public void addTask(Member member, Task task) {
         loadTaskList(member);
-        taskListManager.addTask(task);
+        taskListManager.add(task);
     }
 
     /**
@@ -215,7 +219,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteTask(Member member, Task task) {
         loadTaskList(member);
-        taskListManager.removeTask(task);
+        taskListManager.remove(task);
     }
 
     /**
@@ -225,7 +229,7 @@ public class ModelManager implements Model {
     @Override
     public void deleteTask(Member member, int index) {
         loadTaskList(member);
-        taskListManager.removeTask(index);
+        taskListManager.remove(index);
     }
 
     /**
@@ -254,7 +258,7 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Task> getFilteredTaskList(Member member) {
         loadTaskList(member);
-        return taskListManager.getObservableTaskList();
+        return taskListManager.asUnmodifiableObservableList();
     }
 
     /**

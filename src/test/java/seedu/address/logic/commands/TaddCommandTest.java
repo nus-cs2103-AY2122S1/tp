@@ -20,10 +20,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.TaskListManager;
 import seedu.address.model.data.event.Event;
 import seedu.address.model.data.member.Member;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
 
@@ -238,7 +238,7 @@ class TaddCommandTest {
         private final AddressBook addressBook;
         private final Member member;
         private final Task task;
-        private final TaskListManager taskListManager;
+        private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
 
@@ -249,20 +249,20 @@ class TaddCommandTest {
             this.member = filteredMembers.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
-            this.taskListManager = new TaskListManager();
+            this.taskListManager = new TaskList();
         }
 
         @Override
         public boolean hasTask(Member member, Task task) {
             loadTaskList(member);
-            return taskListManager.hasTask(task);
+            return taskListManager.contains(task);
         }
 
         @Override
         public void addTask(Member member, Task task) {
             requireNonNull(member);
             loadTaskList(member);
-            taskListManager.addTask(task);
+            taskListManager.add(task);
         }
 
         @Override
@@ -278,7 +278,9 @@ class TaddCommandTest {
         @Override
         public void loadTaskList(Member member) {
             requireNonNull(member);
-            taskListManager.loadTaskList(member.getTaskList());
+            if (this.taskListManager != member.getTaskList()) {
+                this.taskListManager = member.getTaskList();
+            }
         }
     }
 }
