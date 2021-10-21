@@ -119,7 +119,7 @@ public class Task implements Comparable<Task>, Cloneable {
      */
     private LocalDate getDate() {
         if (this instanceof DeadlineTask) {
-           return ((DeadlineTask) this).getDeadline().getDeadline();
+            return ((DeadlineTask) this).getDeadline().getDeadline();
         } else if (this instanceof EventTask) {
             return ((EventTask) this).getTaskDate().getDeadline();
         } else {

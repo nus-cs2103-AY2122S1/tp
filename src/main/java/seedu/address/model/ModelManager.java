@@ -8,7 +8,6 @@ import static seedu.address.model.Model.DisplayType.TASKS;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,10 +19,7 @@ import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskName;
 
 /**
  * Represents the in-memory model of the address book data.

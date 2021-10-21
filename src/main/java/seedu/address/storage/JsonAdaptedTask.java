@@ -21,7 +21,7 @@ import seedu.address.model.task.TodoTask;
 public class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
-    private int i;
+    private final int i;
     private final String name;
     private String deadline;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();

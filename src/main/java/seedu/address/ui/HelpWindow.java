@@ -1,16 +1,10 @@
 package seedu.address.ui;
 
-import java.awt.event.ActionEvent;
-import java.util.Objects;
 import java.util.logging.Logger;
 
-import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
@@ -24,8 +18,6 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103-w14-4.github.io/tp/UserGuide.html#quick-start";
     public static final String HELP_MESSAGE = "For more information, refer to the user guide: " + USERGUIDE_URL;
-//    public final Image summaryImage = new Image(Objects.requireNonNull(
-//            this.getClass().getResourceAsStream("/images/command_summary.PNG")));
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
