@@ -199,25 +199,35 @@ Examples:
 * `delete n/quiz` removes every `quiz` task in the app
 * `delete n/quiz d/2021-10-10` deletes only the `quiz` task on `2021-10-10`
 
-### 3.7 Clearing all entries : `clear`
+### 3.7 Deleting all tasks : `clear`
 
-Clears all entries from the Uni-Fy.
+Clears all the tasks from the task list of Uni-Fy.
 
-![clear_command](images/clear.jpeg)
+![clear_command_before](images/clearCommandBefore.jpeg)
+
+When you run the clear command, all the tasks in the task list of Uni-Fy get deleted as shown below:
+
+![clear_command_after](images/clearCommandAfter.jpeg)
 
 Format: `clear`
 
-### 3.8 Exiting the program : `exit`
+### 3.8 Undoing the previous command : `undo` `[coming in v1.3]`
+
+Reverts your previous command which modified the task list of Uni-Fy.
+
+Format: `undo`
+
+### 3.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.9 Saving the data
+### 3.10 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 3.10 Editing the data file
+### 3.11 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -225,7 +235,7 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 3.11 Retrieving past commands `[coming in v1.3]`
+### 3.12 Retrieving past commands `[coming in v1.3]`
 
 Shows the past commands run on **Uni-Fy**.
 
@@ -235,7 +245,7 @@ Format: `history`
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
 </div>
 
-### 3.12 Archiving data files `[coming in v2.0]`
+### 3.13 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -270,10 +280,11 @@ Action | Format, Examples
 --------|------------------
 **Add** | <code>add <i>n/task_name t/time d/date tg/level</i></code> <br>e.g `add n/CS3243_Assignment t/13:00 d/2021-12-12 tg/Important`
 **Delete** | <code>delete <i>task_id</i></code> <br> <code>delete <i>n/task_name (d/date)</i> </code> <br> e.g. <code>delete n/quiz d/2021-10-10 </code>
-**Show** | `show`
+**Show** | <code><i>show week_number</i></code>
 **Edit** | `TODO`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
 **Tag** | `TODO`
 **Help** | `help`
 **Retrieve past Commands** | `history`
 **Clear** | `clear`
+**Undo** | `TODO`
