@@ -17,7 +17,16 @@ With TAB, you can effortlessly manage your students' contact details faster than
 
 ## About This Guide
 
+This user guide is intended for any user of TAB. It provides instructions for installing TAB, and gives a detailed description of each feature available in TAB.
 
+**Navigation**
+
+In the [Table of Contents](), each item listed is a link and you can click to go directly to that section in the guide.
+
+**Conventions Used**
+
+* `text` : denotes a command to be entered into the command box in TAB.
+* [text](#about-this-guide) : denotes links to other parts of the document or links to be opened in the browser.
 
 
 ## Quick Start
