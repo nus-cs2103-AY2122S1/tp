@@ -55,7 +55,7 @@ public class StudentCard extends Card<Student> {
         studentPhone.setText(formatCardLabel(LABEL_STUDENT_PHONE, student.getStudentPhone().value));
         parentName.setText(formatCardLabel(LABEL_PARENT_NAME, student.getParentName().fullName));
         parentPhone.setText(formatCardLabel(LABEL_PARENT_PHONE, student.getParentPhone().value));
-        progress.setText(formatCardLabel(LABEL_PROGRESS, student.getProgress().toString()));
+        progress.setText(formatCardLabel(LABEL_PROGRESS, student.getLatestProgress().toString()));
         paymentStatus.setText(formatCardLabel(LABEL_PAYMENT_STATUS, student.getPaymentStatus().toString()));
     }
 }

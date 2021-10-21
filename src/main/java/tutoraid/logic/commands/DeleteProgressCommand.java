@@ -45,15 +45,11 @@ public class DeleteProgressCommand extends DeleteCommand {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Progress deletedProgress = studentToEdit.getProgress();
 
-        Student editedStudent = new Student(
-                studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
-                studentToEdit.getParentPhone(), new Progress("No Progress"), studentToEdit.getPaymentStatus());
+        Progress progressToDelete = studentToEdit.deleteLatestProgress();
 
-        model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, deletedProgress, studentToEdit));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, progressToDelete, studentToEdit));
     }
 }
