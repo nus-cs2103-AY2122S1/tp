@@ -24,8 +24,10 @@ import tutoraid.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private static StudentListPanel fullPanel = null;
-    private static StudentListPanel minimalPanel = null;
+    private static StudentListPanel fullStudentPanel = null;
+    private static StudentListPanel minimalStudentPanel = null;
+    private static LessonListPanel fullLessonPanel = null;
+    private static LessonListPanel minimalLessonPanel = null;
 
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -35,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
+    private LessonListPanel lessonListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,6 +49,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
+
+    @FXML
+    private StackPane lessonListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -63,8 +69,10 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
-        fullPanel = new StudentListPanel(logic.getFilteredStudentList(), true);
-        minimalPanel = new StudentListPanel(logic.getFilteredStudentList(), false);
+        fullStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), true);
+        minimalStudentPanel = new StudentListPanel(logic.getFilteredStudentList(), false);
+        fullLessonPanel = new LessonListPanel(logic.getFilteredLessonList(), true);
+        minimalLessonPanel = new LessonListPanel(logic.getFilteredLessonList(), false);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
@@ -84,6 +92,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -117,18 +126,29 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillStudentCard(boolean viewAll) {
         studentListPanel = viewAll
-            ? fullPanel
-            : minimalPanel;
+                ? fullStudentPanel
+                : minimalStudentPanel;
         studentListPanelPlaceholder.getChildren().clear();
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+    }
+
+    /**
+     * Fills up all the lesson's particulars of this window.
+     */
+    void fillLessonCard(boolean viewAll) {
+        lessonListPanel = viewAll
+                ? fullLessonPanel
+                : minimalLessonPanel;
+        lessonListPanelPlaceholder.getChildren().clear();
+        lessonListPanelPlaceholder.getChildren().add(lessonListPanel.getRoot());
     }
 
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        fillStudentCard(false); // TutorAid launches with list view
-
+        fillStudentCard(false);
+        fillLessonCard(false);
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -181,6 +201,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
+    }
+
+    public LessonListPanel getLessonListPanel() {
+        return lessonListPanel;
     }
 
     /**
