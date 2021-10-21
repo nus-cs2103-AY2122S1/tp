@@ -130,7 +130,11 @@ public class TypicalPersons {
             .withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER in name
+
+    public static final String KEYWORD_MATCHING_AVE = "Ave"; // A keyword that matches AVE in address
+
+    public static final String KEYWORD_MATCHING_FRIENDS = "Friends"; // A keyword that matches the tag FRIENDS
 
     private TypicalPersons() {} // prevents instantiation
 

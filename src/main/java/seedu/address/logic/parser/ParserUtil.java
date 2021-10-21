@@ -2,12 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindCommand.FindCondition;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
@@ -35,7 +40,8 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * stripped.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     *
+     * @throws ParseException If the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String strippedIndex = oneBasedIndex.strip();
@@ -48,7 +54,8 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index[]} and returns it. Leading and trailing whitespaces will be
      * stripped.
-     * @throws ParseException if the specified indices are invalid (not non-zero unsigned integer).
+     *
+     * @throws ParseException If the specified indices are invalid (not non-zero unsigned integer).
      */
     public static Index[] parseIndices(String args) throws ParseException {
         // There will be 2 index arguments
@@ -282,13 +289,77 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> homework} into a {@code Set<Homework>}.
      */
-    public static Set<Homework> parseHomeworkList(Collection<String> homework)
-            throws ParseException {
+    public static Set<Homework> parseHomeworkList(Collection<String> homework) throws ParseException {
         requireNonNull(homework);
         final Set<Homework> homeworkSet = new HashSet<>();
         for (String description : homework) {
             homeworkSet.add(parseIndividualPieceOfHomework(description));
         }
         return homeworkSet;
+    }
+
+    /**
+     * Parses {@code String keywords} into a {@code List<String>}.
+     * Leading and trailing whitespaces will be stripped and
+     * keywords string is split by whitespace into a list of words.
+     *
+     * @throws ParseException If the given {@code address} is invalid.
+     */
+    public static List<String> parseKeywords(String keywords) throws ParseException {
+        requireNonNull(keywords);
+        String strippedKeywords = keywords.strip();
+        if (strippedKeywords.isEmpty()) {
+            throw new ParseException(FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        }
+        return Arrays.asList(strippedKeywords.split("\\s+"));
+    }
+
+    /**
+     * Parses {@code String keywords} into a {@code String}.
+     * Leading and trailing whitespaces of keywords will be stripped.
+     * A tag keyword can only be one word.
+     *
+     * @throws ParseException If the given {@code address} is invalid.
+     */
+    public static String parseTagKeyword(String keyword) throws ParseException {
+        requireNonNull(keyword);
+        String strippedKeyword = keyword.strip();
+        if (strippedKeyword.isEmpty()) {
+            throw new ParseException(FindCommand.MESSAGE_KEYWORD_CONSTRAINTS);
+        }
+        if (!Tag.isValidTagName(strippedKeyword)) {
+            throw new ParseException(FindCommand.MESSAGE_TAG_KEYWORD_CONSTRAINTS);
+        }
+        return strippedKeyword;
+    }
+
+    /**
+     * Parses {@code Collection<String> keywords} into a {@code List<String>}.
+     */
+    public static List<String> parseTagKeywords(Collection<String> keywords) throws ParseException {
+        requireNonNull(keywords);
+        final List<String> tagKeywords = new ArrayList<>();
+        for (String keyword : keywords) {
+            tagKeywords.add(parseTagKeyword(keyword));
+        }
+        return tagKeywords;
+    }
+
+    /**
+     * Parses a {@code String condition} into a {@code FindCondition}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException If the given {@code Subject} is invalid.
+     */
+    public static FindCondition parseFindCondition(String condition) throws ParseException {
+        requireNonNull(condition);
+        String strippedCondition = condition.strip();
+
+        FindCondition findCondition = FindCondition.valueOfName(strippedCondition);
+        if (findCondition == null) {
+            throw new ParseException(FindCommand.MESSAGE_CONDITION_CONSTRAINTS);
+        }
+
+        return findCondition;
     }
 }

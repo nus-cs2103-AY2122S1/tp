@@ -15,21 +15,11 @@ import java.util.TreeSet;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
-import seedu.address.model.person.AcadLevel;
-import seedu.address.model.person.AcadStream;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
-import seedu.address.model.person.School;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.util.PersonUtil;
 
-public class LessonAddCommand extends Command {
+public class LessonAddCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Add Lesson";
 
@@ -59,11 +49,11 @@ public class LessonAddCommand extends Command {
             + PREFIX_HOMEWORK + "Textbook Page 52";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to the student identified "
-        + "by the index number\n"
-        + "Parameters: " + COMMAND_PARAMETERS + "\n"
-        + "Examples:\n"
-        + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
-        + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
+            + "by the index number\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Examples:\n"
+            + "Makeup lesson: " + COMMAND_EXAMPLE_MAKEUP_LESSON + "\n"
+            + "Recurring lesson: " + COMMAND_EXAMPLE_RECURRING_LESSON;
 
     public static final String USER_TIP = "Try adding a lesson to a student using: \n"
             + COMMAND_WORD + " "
@@ -76,6 +66,8 @@ public class LessonAddCommand extends Command {
 
     private final Index index;
     private final Lesson toAdd;
+    private Person personBeforeLessonAdd;
+    private Person personAfterLessonAdd;
 
     /**
      * Creates a LessonAddCommand to add the specified {@code Lesson}
@@ -89,49 +81,50 @@ public class LessonAddCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      */
-    private static Person createEditedPerson(Person personToEdit, Lesson lesson) {
+    private static Person createEditedPerson(Person personToEdit, Lesson toAdd) {
         assert personToEdit != null;
 
-        Name updatedName = personToEdit.getName();
-        Phone updatedPhone = personToEdit.getPhone();
-        Email updatedEmail = personToEdit.getEmail();
-        Phone updatedParentPhone = personToEdit.getParentPhone();
-        Email updatedParentEmail = personToEdit.getParentEmail();
-        Address updatedAddress = personToEdit.getAddress();
-        School updatedSchool = personToEdit.getSchool();
-        AcadStream updatedAcadStream = personToEdit.getAcadStream();
-        AcadLevel updatedAcadLevel = personToEdit.getAcadLevel();
-        Fee updatedOutstandingFee = personToEdit.getFee();
-        Remark updatedRemark = personToEdit.getRemark();
-        Set<Tag> updatedTags = personToEdit.getTags();
-
         Set<Lesson> lessons = new TreeSet<>(personToEdit.getLessons());
-        lessons.add(lesson);
+        lessons.add(toAdd);
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedParentPhone,
-                updatedParentEmail, updatedAddress, updatedSchool, updatedAcadStream, updatedAcadLevel,
-                updatedOutstandingFee, updatedRemark, updatedTags, lessons);
+        return PersonUtil.createdEditedPerson(personToEdit, lessons);
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeUndoableCommand() throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, toAdd);
-
         if (model.hasClashingLesson(toAdd)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
 
-        model.setPerson(personToEdit, editedPerson);
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, editedPerson));
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, personAfterLessonAdd));
+    }
+
+    @Override
+    protected void undo() {
+        requireNonNull(model);
+
+        model.setPerson(personAfterLessonAdd, personBeforeLessonAdd);
+    }
+
+    @Override
+    protected void redo() {
+        requireNonNull(model);
+
+        try {
+            executeUndoableCommand();
+        } catch (CommandException ce) {
+            throw new AssertionError(MESSAGE_REDO_FAILURE);
+        }
     }
 
     @Override

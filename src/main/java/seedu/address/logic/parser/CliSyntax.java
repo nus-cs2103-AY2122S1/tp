@@ -28,4 +28,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUBJECT = new Prefix("subject/");
     public static final Prefix PREFIX_HOMEWORK = new Prefix("hw/");
 
+    /* Prefix definitions for command options */
+    public static final Prefix PREFIX_FIND_CONDITION = new Prefix("cond/");
 }

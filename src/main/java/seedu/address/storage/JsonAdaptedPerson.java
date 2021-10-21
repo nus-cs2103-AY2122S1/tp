@@ -29,6 +29,7 @@ import seedu.address.model.tag.Tag;
  */
 class JsonAdaptedPerson {
 
+    public static final String MESSAGE_CLASHING_LESSON = "Person contains clashing lesson(s).";
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     private final String name;
@@ -112,8 +113,12 @@ class JsonAdaptedPerson {
         }
 
         final List<Lesson> personLessons = new ArrayList<>();
-        for (JsonAdaptedLesson lesson : lessons) {
-            personLessons.add(lesson.toModelType());
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            Lesson lesson = jsonAdaptedLesson.toModelType();
+            if (personLessons.stream().anyMatch(personLesson -> personLesson.isClashing(lesson))) {
+                throw new IllegalValueException(MESSAGE_CLASHING_LESSON);
+            }
+            personLessons.add(lesson);
         }
 
         if (name == null) {

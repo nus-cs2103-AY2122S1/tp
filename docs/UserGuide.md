@@ -10,15 +10,13 @@ title: User Guide
 
 ## Introduction
 
-Are you a busy private 1-to-1 home tutor who finds it difficult to remember all your students' information?
-
-**Tuition Address Book (TAB)** is an all-in-one *desktop application* that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
+**Tuition Address Book (TAB)** is an all-in-one desktop application that helps you keep track of the large number of students and their respective lesson information, and empower you to provide the best quality home tuition service.
 
 TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
+With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
-Use TAB to effortlessly manage your students' contact details faster than a typical mouse/GUI driven app!
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your computer.
 
@@ -198,9 +196,17 @@ Deletes the specified student from TAB.
 
 Format: `delete INDEX`
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `delete` command:**<br>
+
 * Deletes the student at the specified `INDEX`.
+  
 * The index refers to the index number shown in the displayed student list.
+  
 * The index **must be a positive integer** 1, 2, 3, …
+
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
@@ -412,11 +418,21 @@ This section guides you on how to use TAB's scheduling feature.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing schedule: `schedule` [coming soon]
+#### Viewing schedule: `schedule`
 
-Displays a read-only weekly schedule.
+Displays a read-only schedule of your upcoming week.
+
+![view schedule](images/ViewSchedule.png)
 
 Format: `schedule`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the `schedule` command:**<br>
+
+* Typing `list` or any other valid command in the command box will bring you back out of schedule view.
+
+</div>
 
 ### Managing Data
 
@@ -480,9 +496,26 @@ This section records frequently asked questions from users of TAB.
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+## Glossary
+
+* **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
+* **Academic stream**: Mainstream tracks in Singapore (i.e. Express, NA, NT, IP, IB) as well as other common exam streams (e.g. IELTS, SAT, ACT).
+* **CLI**: Command Line Interface - a type of user interface through which users interact with the app in the form of text inputs only.
+* **GUI**: Graphical User Interface - a type of user interface through which users interact with the app via visual representations.
+* **JAR**: Java Archive - a file format used for aggregating multiple Java class files and their associated components (e.g. images) into a single file for distribution.
+* **Lesson Rates**: Amount charged per hour for lessons.
+* **Makeup lesson**: A lesson that occurs only once, for a student who has missed a previous lesson.
+* **Mainstream OS**: Windows, Linux, Unix, OS-X.
+* **Recurring lesson**: A lesson that will occur more than once in patterned intervals.
+* **UI**: User Interface - the means by which the user and the app interact.
+* **UTC+8**: The UTC offset used by Singapore Standard Time (SST), 8 hours ahead of UTC. Historically also referred to as GMT+8.
+  UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
+* **UX**: User Experience - The experience a user has when using the app.
 
 ## Command summary
-This section lists all available commands in TAB, along with examples on how you can use them. 
+This section lists all available commands in TAB, along with examples on how you can use them.
+
+--------------------------------------------------------------------------------------------------------------------
 
 Action | Format, Examples
 --------|------------------
