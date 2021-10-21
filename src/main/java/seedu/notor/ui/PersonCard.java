@@ -2,6 +2,7 @@ package seedu.notor.ui;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -60,8 +61,8 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        email.setText(person.getEmail().value);
+        phone.setText(Objects.requireNonNullElse(person.getPhone().value, ""));
+        email.setText(Objects.requireNonNullElse(person.getEmail().value, ""));
         if (!person.getNoteSavedDate().isEmpty()) {
             note.setText(person.getNote().getNoEmptyLineNote());
             noteLastModified.setText(person.getNoteSavedDate());

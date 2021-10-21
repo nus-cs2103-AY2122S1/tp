@@ -51,11 +51,11 @@ public class PersonCreateCommandParser extends PersonCommandParser {
         }
 
         Name name = new Name(uncheckedName);
-        Phone phone = null;
+        Phone phone = new Phone(null);
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         }
-        Email email = null;
+        Email email = new Email(null);
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         }
