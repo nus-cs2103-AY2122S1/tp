@@ -73,7 +73,7 @@ public class LevelOfEducation {
     public LevelOfEducation(String levelOfEducation) {
         requireNonNull(levelOfEducation);
         checkArgument(isValidLevelOfEducation(levelOfEducation), MESSAGE_CONSTRAINTS);
-        this.levelOfEducation = levelOfEducation;
+        this.levelOfEducation = getCorrectCapitalization(levelOfEducation);
     }
 
     /**
@@ -83,13 +83,13 @@ public class LevelOfEducation {
      * @return Boolean indicating if given string is a valid level of education.
      */
     public static boolean isValidLevelOfEducation(String test) {
-        return test.equals(Education.ELEMENTARY.educationLevel)
-                || test.equals(Education.MIDDLE_SCHOOL.educationLevel)
-                || test.equals(Education.HIGH_SCHOOL.educationLevel)
-                || test.equals(Education.UNIVERSITY.educationLevel)
-                || test.equals(Education.BACHELORS.educationLevel)
-                || test.equals(Education.MASTERS.educationLevel)
-                || test.equals(Education.PHD.educationLevel);
+        return test.equalsIgnoreCase(Education.ELEMENTARY.educationLevel)
+                || test.equalsIgnoreCase(Education.MIDDLE_SCHOOL.educationLevel)
+                || test.equalsIgnoreCase(Education.HIGH_SCHOOL.educationLevel)
+                || test.equalsIgnoreCase(Education.UNIVERSITY.educationLevel)
+                || test.equalsIgnoreCase(Education.BACHELORS.educationLevel)
+                || test.equalsIgnoreCase(Education.MASTERS.educationLevel)
+                || test.equalsIgnoreCase(Education.PHD.educationLevel);
     }
 
     @Override
@@ -107,5 +107,15 @@ public class LevelOfEducation {
     @Override
     public int hashCode() {
         return levelOfEducation.hashCode();
+    }
+
+    private String getCorrectCapitalization(String levelOfEducation) {
+        ArrayList<String> levelsOfEducation = LevelOfEducation.Education.getEducationLevels();
+        for (String l: levelsOfEducation) {
+            if (l.equalsIgnoreCase(levelOfEducation)) {
+                return l;
+            }
+        }
+        return null;
     }
 }
