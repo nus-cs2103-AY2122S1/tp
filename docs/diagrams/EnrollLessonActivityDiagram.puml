@@ -1,0 +1,55 @@
+@startuml
+start
+:User executes
+enroll lesson
+command;
+
+
+:Search for lesson and student in Tuitione;
+
+if () then ([lesson and student exists in Tuitione])
+
+    if() then ([student has
+    same grade
+    as lesson]
+    )
+
+
+    if() then ([student is currently not
+    enrolled in the lesson]
+    )
+
+    :Enrolls student to
+    the specified lesson;
+
+    else ([else])
+
+    :Tuitione informs that
+    student cannot be enrolled;
+    stop
+    endif
+
+
+    else ([else])
+
+    :Tuitione informs that
+    student cannot be enrolled;
+    stop
+    endif
+
+    :Save new Tuitione
+    to Storage;
+
+    :Update UI with
+    new Tuitione;
+
+else ([else])
+
+    :Tuitione informs
+    that student or lesson
+    does not exist;
+
+endif
+
+stop
+@enduml
