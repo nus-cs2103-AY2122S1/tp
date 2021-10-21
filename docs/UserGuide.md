@@ -129,8 +129,8 @@ Finds contacts whose names contain any of the given keywords.
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive, e.g.,  `hotel` will match `Hotel`
-* The order of the keywords does not matter. e.g. `81 `Hotel` will match `Hotel 81`
-* Only the name is searched.
+* The order of the keywords does not matter. e.g. `81 Hotel` will match `Hotel 81`
+* The name, phone, email, address and review will be searched.
 * Contacts matching at least one keyword will be returned (i.e., OR search). e.g. `Hotel 81` will return `Hotel 81 Changi`, `Shangri-La Hotels and Resorts`
 
 Examples:

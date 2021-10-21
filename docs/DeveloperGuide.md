@@ -21,7 +21,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 ## **Design**
 
-<div markdown="span" class="alert alert-primary">
+<div markdown="span" clapss="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
@@ -154,6 +154,58 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Find feature
+
+#### Implementation
+
+The Find feature works such that it modifies the GUI of the application without modifying any contacts in the list.
+It is implemented with the following operation:
+
+* `FindCommand#execute()`  —  Obtains the contacts found to have the specified keyword(s).
+
+The feature makes use of `FindableContainsKeywordsPredicate`, which represents a boolean-valued function that indicates whether there is any _findable_ property of the contacts that contains the keyword(s) given.
+The operation `FindableContainsKeywordsPredicate#test` returns a boolean that indicates whether a specific contact has a _findable_ property that matches the keyword(s) provided by Tour Guide.
+
+The aforementioned _findable_ properties of the contacts that are checked are as follows:
+
+* name
+* phone
+* email
+* address
+* review
+
+Given below is an example usage scenario and how the Find feature behaves at each step:
+
+Step 1. The user executes the command `list` to look at all contacts.
+
+Step 2. The user executes the command `find bay ...` to find contacts with properties that contain the keywords *bay*, ...
+The `find` command calls `FindCommandParser#parse()`.
+
+Step 3. If user command is in the correct format, a `FindCommand` is created with the list of keywords attached to a `FindableContainsKeywordPredicate`.
+The `FindCommand` will then be executed. Otherwise, no command is executed and a `ParseException` is thrown.
+
+The following sequence diagram shows how the Find operation works to show the relevant contacts:
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a Tour Guide executes a new command:
+
+![FindActivityDiagram](images/FindActivityDiagram.png)
+
+
+#### Design considerations:
+
+**Aspect: How Find functions:**
+
+* **Alternative 1 (current choice):** Displays contacts with non-full word matches and searches five properties of a contact.
+    * Pros: Shows more contacts as a result of half-matches and more fields.
+    * Cons: Less targeted search, more time needed to go through the list of matches.
+
+* **Alternative 2:** Displays contacts with full word matches and only searches the name.
+    * Pros: More accurate matches assuming Tour Guide searches for exact keywords.
+    * Cons: Less likely to find contacts other than the intended one(s) that might be relevant for a themed or location-based tour itinerary.
+
+=======
 ### Filter feature
 
 #### Proposed Implementation
