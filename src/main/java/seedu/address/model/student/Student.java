@@ -24,6 +24,7 @@ public class Student {
     private final Address address;
     private final ClassCode classCode;
     private final Set<Tag> tags = new HashSet<>();
+    //private final List<StudentMark> marks = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
