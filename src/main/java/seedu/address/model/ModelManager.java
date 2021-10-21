@@ -141,6 +141,16 @@ public class ModelManager implements Model {
         addressBook.setModuleLesson(target, editedLesson);
     }
 
+    @Override
+    public void clearPersons() {
+        addressBook.clearPersonList();
+    }
+
+    @Override
+    public void clearLessons() {
+        addressBook.clearLessonList();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
