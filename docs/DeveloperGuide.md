@@ -181,8 +181,8 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-The add student feature adds a student contact to TutorAid. A student contact consists of details such as: the student's name, student's contact number, the parent's 
-name and parent's contact number. 
+The add student feature adds a student contact to TutorAid. A student contact consists of details such as: the 
+student's name, student's contact number, the parent's name and parent's contact number. 
 
 The feature is mainly implemented by the following methods:
 * `AddStudentCommand#execute()` —Creates a student object and adds it to TutorAid.
@@ -196,14 +196,14 @@ Given below is an example of what happens when the user attempts to add a studen
 a command `add -s sn/John Doe …​`:
 
 1. The command is first passed into `TutorAidParser#parseCommand`, which extracts the first keyword of every command. 
-Since the keyword `add` would be extracted, the remaining arguments of the command (`-s sn/John Doe …​`) are passed 
-then into `AddCommandParser#parse`.
+   Since the keyword `add` would be extracted, the remaining arguments of the command (`-s sn/John Doe …​`) are passed 
+   then into `AddCommandParser#parse`.
 
 2. `AddCommandParser#parse` extracts the command flag `-s` at the start of its argument, which denotes the addition 
-of a student contact. Thus, the remaining (`sn/John Doe …​`) is then passed into `AddStudentCommandParser#parse`.
+   of a student contact. Thus, the remaining (`sn/John Doe …​`) is then passed into `AddStudentCommandParser#parse`.
 
 3. Each of the  different arguments of student contact, such as the student name, student contact number, parent name 
-and parent number, is parsed by `AddStudentCommandParser#parse` based on the given input. 
+   and parent number, is parsed by `AddStudentCommandParser#parse` based on the given input. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 At this point, if `AddStudentCommandParser#parse` detects that no student name has been supplied, the command will fail 
@@ -211,11 +211,12 @@ its execution and `ParseException` will be thrown.
 </div>
 
 4. For optional parameters, which are all parameters other the student's name, if the argument is not supplied by the 
-user, a default argument (`""`) is supplied by the method. These individual arguments are then passed into 
-`Model#Student()` to create a student object. 
+   user, a default argument (`""`) is supplied by the method. These individual arguments are then passed into 
+   `Model#Student()` to create a student object. 
 
-5. Lastly, the `AddStudentCommand#execute` is called upon to add the student into TutorAid, which returns a `CommandResult` object to notify the user that the student has been successfully added.
-The student details are stored in `tutoraid.json`.
+5. Lastly, the `AddStudentCommand#execute` is called upon to add the student into TutorAid, which returns a
+   `CommandResult` object to notify the user that the student has been successfully added. 
+   The student details are stored in `tutoraid.json`.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 If the student object created appears to be a duplicate of an existing contact (all contact fields have the same), the 

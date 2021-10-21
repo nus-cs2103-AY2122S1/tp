@@ -34,6 +34,6 @@ create CommandResult
 AddStudentCommand -> CommandResult
 activate CommandResult
 deactivate CommandResult
-<-- CommandResult
+LogicManager <-- CommandResult
 
 @enduml
