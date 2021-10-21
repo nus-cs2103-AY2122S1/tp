@@ -15,6 +15,7 @@ title: Developer Guide
 5. [Implementation](#implementation)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
+   -  [Add/Delete student feature](#add-delete-student-feature)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 7. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
@@ -180,21 +181,80 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Implementation
 
-This feature adds a student contact to TutorAid, which includes details such as the student's name, contact 
-number, the parent's name and contact number. It is mainly implemented by `AddStudentCommand#execute()` in the 
-`AddStudentCommand` class. It also facilitated by the following methods:
-* `TutorAidParser#parseCommand`
-* `AddCommandParser#parse`
+The add student feature adds a student contact to TutorAid. A student contact consists of details such as: the student's name, student's contact number, the parent's 
+name and parent's contact number. 
 
-Given below is an example of what happens when the user attempts to add a student to TutorAid:
+The feature is mainly implemented by the following methods:
+* `AddStudentCommand#execute()` —Creates a student object and adds it to TutorAid.
+  
+It is also additionally facilitated by the methods below:
+* `TutorAidParser#parseCommand` —Checks for the command word that is required for the addition of a student.
+* `AddCommandParser#parse` —Checks for the command flag that specifies the addition of a student.
+* `AddStudentCommandParser#parse` —Parses the individual arguments to create a student object.
 
-Step 1. The user launches the application for the first time.
+Given below is an example of what happens when the user attempts to add a student to TutorAid by entering 
+a command `add -s sn/John Doe …​`:
 
-Step 2. The user executes `add -s sn/John Doe …​` to add this student to TutorAid. 
-This command is first passed to `TutorAidParser#parseCommand`, which extracts the first keyword of every command. One 
-the keyword `add` has been parsed, the remaining arguments of the command (`-s sn/John Doe …​`) are passed into
-`AddCommandParser#parse`.
+1. The command is first passed into `TutorAidParser#parseCommand`, which extracts the first keyword of every command. 
+Since the keyword `add` would be extracted, the remaining arguments of the command (`-s sn/John Doe …​`) are passed 
+then into `AddCommandParser#parse`.
 
+2. `AddCommandParser#parse` extracts the command flag `-s` at the start of its argument, which denotes the addition 
+of a student contact. Thus, the remaining (`sn/John Doe …​`) is then passed into `AddStudentCommandParser#parse`.
+
+3. Each of the  different arguments of student contact, such as the student name, student contact number, parent name 
+and parent number, is parsed by `AddStudentCommandParser#parse` based on the given input. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+At this point, if `AddStudentCommandParser#parse` detects that no student name has been supplied, the command will fail 
+its execution and `ParseException` will be thrown.
+</div>
+
+4. For optional parameters, which are all parameters other the student's name, if the argument is not supplied by the 
+user, a default argument (`""`) is supplied by the method. These individual arguments are then passed into 
+`Model#Student()` to create a student object. 
+
+5. Lastly, the `AddStudentCommand#execute` is called upon to add the student into TutorAid, which returns a `CommandResult` object to notify the user that the student has been successfully added.
+The student details are stored in `tutoraid.json`.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+If the student object created appears to be a duplicate of an existing contact (all contact fields have the same), the 
+new student object will not be stored in TutorAid and user will be alerted of the duplicate instead. 
+</div>
+
+Below is the sequence diagram that depicts points 1-4 of process described above:
+![AddStudent](images/AddStudentSequenceDiagram.png)
+
+### Design considerations:
+
+**Aspect: How to differentiate the `add -s` command from other `add` commands:**
+
+* **Alternative 1 (current choice):** The `add` command word and `-s` command flag 
+  are parsed one after another, in two different classes. 
+    * Pros: Better use of abstraction and increases cohesion, where one class only extracts the command word and 
+      another class extract the command flag.
+    * Cons: Time taken to execute command may increase as more classes and methods are required to execute the command.
+
+* **Alternative 2:** The `add` command word and `-s` command flag are parsed in the same class, by the same method. 
+    * Pros: Command can be executed more quickly as only one method is required to parse the command and pass the 
+      relevant arguments to `Model#Student()` to create the student object.
+    * Cons: Having a single parse method may result in it having multiple responsibilities to parse various parts of a 
+      command (command word, command flag and arguments).
+    
+
+### Delete student feature: `del -s`
+
+#### Implementation
+
+The delete feature deletes a student contact from TutorAid. 
+
+The feature is mainly implemented by the following methods:
+* `DeleteStudentCommand#execute()` in `DeleteStudentCommand` class: Deletes a student from TutorAid
+
+It is also additionally facilitated by the methods below:
+* `TutorAidParser#parseCommand` —Checks for the command word that is required for the addition of a student.
+* `DeleteCommandParser#parse` —Checks for the command flag that specifies the addition of a student.
+* `DeleteStudentCommandParser#parse` —Parses the student index specified
 
 
 ### \[Proposed\] Undo/redo feature
