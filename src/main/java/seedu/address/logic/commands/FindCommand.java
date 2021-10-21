@@ -2,9 +2,12 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 
@@ -26,12 +29,15 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "[" + PREFIX_NAME + "NAME] " + "[" + PREFIX_NAME + "MORE_NAMES] "
+            + "[" + PREFIX_GENDER + "GENDER] " + "[" + PREFIX_GENDER + "MORE_GENDER] "
             + "[" + PREFIX_PHONE + "PHONE] " + "[" + PREFIX_PHONE + "MORE_PHONES] "
-            + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_PHONE + "MORE_EMAILS] "
-            + "[" + PREFIX_NATIONALITY + "NATIONALITY] " + "[" + PREFIX_PHONE + "MORE_NATIONALITY] "
-            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP] " + "[" + PREFIX_PHONE + "MORE_TUTORIAL GROUPS] "
+            + "[" + PREFIX_EMAIL + "EMAIL] " + "[" + PREFIX_EMAIL + "MORE_EMAILS] "
+            + "[" + PREFIX_NATIONALITY + "NATIONALITY] " + "[" + PREFIX_NATIONALITY + "MORE_NATIONALITY] "
+            + "[" + PREFIX_TUTORIAL_GROUP + "TUTORIAL_GROUP] " + "[" + PREFIX_TUTORIAL_GROUP + "MORE_TUTORIAL_GROUPS] "
+            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL_HANDLE] " + "[" + PREFIX_SOCIAL_HANDLE + "MORE_SOCIAL_HANDLE] "
+            + "[" + PREFIX_REMARK + "REMARK] " + "[" + PREFIX_REMARK + "MORE_REMARKS] "
             + "[" + PREFIX_TAG + "TAG] " + "[" + PREFIX_TAG + "MORE_TAGS]...\n "
-            + "Example: " + COMMAND_WORD + "n/alice p/91234567 tg/19";
+            + "Example: " + COMMAND_WORD + " n/alice g/f p/91234567 tg/19";
 
     private Predicate<Person> predicate;
 
