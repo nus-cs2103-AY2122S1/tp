@@ -117,11 +117,12 @@ public class UniqueNextMeetingList implements Iterable<NextMeeting> {
         });
     }
 
-
+    /**
+     * Sorts all meetings according to date, start time and end time.
+     */
     private SortedList<NextMeeting> sortNextMeetings(ObservableList<NextMeeting> allMeetings) {
 
         SortedList<NextMeeting> sortedMeetings = new SortedList<>(allMeetings);
-        //Create comparator for next meeting
 
         sortedMeetings.setComparator((currentMeeting, nextMeeting) -> {
             return currentMeeting.date.compareTo(nextMeeting.date) != 0
