@@ -229,6 +229,10 @@ In order to systematically process multiple options for a user input's in a find
 - `#toString()` - Overridden method for the string representation of the find conditions
 - `#put(PersonField, List<String>)` - Adds a find condition, which is list of keywords to be tested against a field
 
+The following is the class diagram summarizing the description above:
+
+![Find Class Diagram](images/FindClassDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
