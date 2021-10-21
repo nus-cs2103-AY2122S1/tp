@@ -11,7 +11,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
-participant "addressBook:AddressBook" as AddressBook MODEL_COLOR
 end box
 
 [-> LogicManager : execute("import data/toImport.json")
@@ -52,12 +51,6 @@ activate ImportCommand
 
 ImportCommand -> Model : importFile(data/toImport.json)
 activate Model
-
-Model -> AddressBook : mergeFile(data/toImport.json)
-activate AddressBook
-
-AddressBook -> Model
-deactivate AddressBook
 
 Model --> ImportCommand
 deactivate Model
