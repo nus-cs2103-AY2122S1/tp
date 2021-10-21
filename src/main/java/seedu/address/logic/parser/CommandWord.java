@@ -22,15 +22,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
  *     Why can't enum's constructor access static fields</a>
  */
 public enum CommandWord {
-    ADD("add", "a"),
-    CLEAR("clear", "clr"),
-    DELETE("delete", "del", "rm", "d"),
-    EDIT("edit", "update", "e"),
-    EXIT("exit", "quit", "q"),
-    FIND("find", "f"),
     HELP("help", "man", "h"),
-    LIST("list", "ls"),
-    REMARK("remark");
+    EXIT("exit", "quit", "q"),
+    ADD_PERSON("add", "a"),
+    CLEAR_PERSON("clear", "clr"),
+    DELETE_PERSON("delete", "del", "rm", "d"),
+    EDIT_PERSON("edit", "update", "e"),
+    FIND_PERSON("find", "f"),
+    LIST_PERSON("list", "ls"),
+    REMARK_PERSON("remark");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
 

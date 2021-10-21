@@ -6,12 +6,17 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.person.ClearPersonCommand;
+import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.person.AddPersonCommandParser;
+import seedu.address.logic.parser.person.DeletePersonCommandParser;
+import seedu.address.logic.parser.person.EditPersonCommandParser;
+import seedu.address.logic.parser.person.FindPersonCommandParser;
+import seedu.address.logic.parser.person.RemarkPersonCommandParser;
 
 /**
  * Parses user input.
@@ -40,23 +45,23 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (CommandWord.getCommandType(commandWord)) {
 
-        case ADD:
-            return new AddCommandParser().parse(arguments);
+        case ADD_PERSON:
+            return new AddPersonCommandParser().parse(arguments);
 
-        case EDIT:
-            return new EditCommandParser().parse(arguments);
+        case EDIT_PERSON:
+            return new EditPersonCommandParser().parse(arguments);
 
-        case DELETE:
-            return new DeleteCommandParser().parse(arguments);
+        case DELETE_PERSON:
+            return new DeletePersonCommandParser().parse(arguments);
 
-        case CLEAR:
-            return new ClearCommand();
+        case CLEAR_PERSON:
+            return new ClearPersonCommand();
 
-        case FIND:
-            return new FindCommandParser().parse(arguments);
+        case FIND_PERSON:
+            return new FindPersonCommandParser().parse(arguments);
 
-        case LIST:
-            return new ListCommand();
+        case LIST_PERSON:
+            return new ListPersonCommand();
 
         case EXIT:
             return new ExitCommand();
@@ -64,8 +69,8 @@ public class AddressBookParser {
         case HELP:
             return new HelpCommand();
 
-        case REMARK:
-            return new RemarkCommandParser().parse(arguments);
+        case REMARK_PERSON:
+            return new RemarkPersonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
