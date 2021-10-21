@@ -34,6 +34,8 @@ public interface Logic {
      * @throws CommandException
      */
     void executeSaveNote(Person person, Person editedPerson) throws CommandException;
+
+    void executeSaveNote() throws CommandException;
     /**
      * Returns the Notor.
      *

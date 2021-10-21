@@ -69,6 +69,19 @@ public class LogicManager implements Logic {
         }
     }
 
+    /**
+     * Executes command to save Note of Group.
+     * @throws CommandException If an error occurs during command execution.
+     */
+    public void executeSaveNote() throws CommandException {
+        // TODO: Update Group Display
+        try {
+            storage.saveNotor(model.getNotor());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+    }
+
 
     @Override
     public ReadOnlyNotor getNotor() {

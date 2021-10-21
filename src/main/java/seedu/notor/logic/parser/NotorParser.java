@@ -7,13 +7,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.notor.logic.commands.ClearCommand;
+import seedu.notor.logic.commands.ClearNoteCommand;
 import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.ExitCommand;
 import seedu.notor.logic.commands.HelpCommand;
+import seedu.notor.logic.commands.NoteCommand;
+import seedu.notor.logic.commands.group.GroupClearNoteCommand;
 import seedu.notor.logic.commands.group.GroupCommand;
+import seedu.notor.logic.commands.group.GroupNoteCommand;
 import seedu.notor.logic.commands.group.SubGroupCreateCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
+import seedu.notor.logic.commands.person.GroupDeleteCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
+import seedu.notor.logic.commands.person.PersonClearNoteCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
@@ -22,9 +28,13 @@ import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.commands.tag.TagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
+import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
+import seedu.notor.logic.parser.group.GroupNoteCommandParser;
 import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
+import seedu.notor.logic.parser.person.PersonClearNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
@@ -76,6 +86,10 @@ public class NotorParser {
                 return new ExitCommand();
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
+            case NoteCommand.COMMAND_WORD:
+                return new NoteCommand();
+            case ClearNoteCommand.COMMAND_WORD:
+                return new ClearNoteCommand();
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -116,6 +130,8 @@ public class NotorParser {
                     return new PersonEditCommandParser(index, arguments).parse();
                 case PersonNoteCommand.COMMAND_WORD:
                     return new PersonNoteCommandParser(index).parse();
+                case PersonClearNoteCommand.COMMAND_WORD:
+                    return new PersonClearNoteCommandParser(index).parse();
                 case PersonAddGroupCommand.COMMAND_WORD:
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 case PersonRemoveGroupCommand.COMMAND_WORD:
@@ -124,10 +140,18 @@ public class NotorParser {
                     throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             case GroupCommand.COMMAND_WORD:
-                if (subCommandWord.equals(SubGroupCreateCommand.COMMAND_WORD)) {
+                switch (subCommandWord) {
+                case SubGroupCreateCommand.COMMAND_WORD:
                     return new SubGroupCreateCommandParser(index, arguments).parse();
+                case GroupDeleteCommand.COMMAND_WORD:
+                    return new GroupDeleteCommandParser(index).parse();
+                case GroupNoteCommand.COMMAND_WORD:
+                    return new GroupNoteCommandParser(index).parse();
+                case GroupClearNoteCommand.COMMAND_WORD:
+                    return new GroupClearNoteCommandParser(index).parse();
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             case TagCommand.COMMAND_WORD:
                 // TODO: Implement tag command.
             default:

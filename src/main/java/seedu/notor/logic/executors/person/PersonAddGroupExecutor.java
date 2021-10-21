@@ -5,6 +5,7 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.exceptions.DuplicateItemException;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.person.Person;
 
 /**
@@ -32,7 +33,11 @@ public class PersonAddGroupExecutor extends PersonExecutor {
         try {
             Person person = super.getPerson();
             Group group = model.findGroup(groupName);
-            person.addGroup(group);
+            if (groupName.contains("_")) {
+                person.addSubGroup((SubGroup) group);
+            } else {
+                person.addGroup(group);
+            }
             group.addPerson(person);
             return new CommandResult(String.format(MESSAGE_SUCCESS, groupName));
         } catch (DuplicateItemException e) {

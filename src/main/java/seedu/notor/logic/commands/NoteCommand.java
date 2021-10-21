@@ -9,7 +9,7 @@ import seedu.notor.model.Model;
  * Shows general note.
  */
 public class NoteCommand implements Command {
-    public static final String COMMAND_WORD = "WAITING FOR REFACTOR OF PERSON NOTE";
+    public static final String COMMAND_WORD = "note";
 
     public static final String MESSAGE_SUCCESS = "Opened General Note.";
 
