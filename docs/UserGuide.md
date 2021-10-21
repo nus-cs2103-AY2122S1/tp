@@ -203,9 +203,21 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 3.11 Archiving data files `[coming in v2.0]`
+### 3.11 Retrieving past commands `[coming in v1.3]`
+
+Shows the past commands run on **Uni-Fy**.
+
+Format: `history`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
+</div>
+
+### 3.12 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
+
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -227,4 +239,5 @@ Action | Format, Examples
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
 **Tag** | `TODO`
 **Help** | `help`
+**Retrieve past Commands** | `history`
 **Clear** | `clear`
