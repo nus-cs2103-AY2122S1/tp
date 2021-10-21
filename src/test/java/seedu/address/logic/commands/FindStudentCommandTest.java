@@ -64,6 +64,7 @@ public class FindStudentCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredStudentList());
     }
 
+    @Test
     public void execute_multipleKeywords_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
