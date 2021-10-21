@@ -176,7 +176,7 @@ In the case where the compulsory prefixes `-n` and `-i` are not present, a `Pars
 
 The following activity diagram summarizes what happens when the user inputs an add student command:
 
-![AddStudentLogicFlow](images/AddStudentLogicFlow.png)
+![AddStudentActivityDiagram](images/AddStudentActivityDiagram.png)
 
 
 The following sequence diagram shows how the add student operation works:
