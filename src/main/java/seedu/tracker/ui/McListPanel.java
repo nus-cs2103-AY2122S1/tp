@@ -26,10 +26,10 @@ public class McListPanel extends UiPart<Region> {
     /**
      * Creates a {@code ModuleListPanel} with the given {@code ObservableList}.
      */
-    public McListPanel() {
+    public McListPanel(ObservableList<Mc> obsList) {
         super(FXML);
-        ArrayList<Mc> mcList = createTempMcList();
-        ObservableList<Mc> obsList = FXCollections.observableArrayList(mcList);
+//        ArrayList<Mc> mcList = createTempMcList();
+//        ObservableList<Mc> obsList = FXCollections.observableArrayList(mcList);
         mcListView.setItems(obsList);
         mcListView.setCellFactory(listView -> new McListPanel.McListViewCell());
     }
@@ -58,7 +58,7 @@ public class McListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new McCard(mc).getRoot());
+                setGraphic(new McCard(mc, getIndex()).getRoot());
             }
         }
     }

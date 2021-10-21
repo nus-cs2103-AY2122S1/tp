@@ -10,6 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
+import seedu.tracker.model.module.CompletedMcList;
 import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 
@@ -42,15 +43,35 @@ public class McCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
      */
-    public McCard(Mc mc) {
+    public McCard(Mc mc, int index) {
         super(FXML);
         this.mc = mc;
-        title.setText("Test title: ");
+        title.setText(getTitle(index));
         currMc.setText(String.valueOf(mc.value));
 
-        int target = 99;
+        int target = CompletedMcList.requirementsList[index];
         customiseStyle(mc.value, target);
-        targetMc.setText(" / " + target);
+        targetMc.setText(" / " + target + " MCs");
+    }
+
+    private String getTitle(int index) {
+        switch (index) {
+        case CompletedMcList.GE_INDEX:
+            return "GE";
+        case CompletedMcList.UE_INDEX:
+            return "UE";
+        case CompletedMcList.FOUNDATION_INDEX:
+            return "Foundation";
+        case CompletedMcList.BREADTH_DEPTH_INDEX:
+            return "Breath and Depth";
+        case CompletedMcList.PROFESSIONALISM_INDEX:
+            return "IT Professionalism";
+        case CompletedMcList.MATH_SCIENCE_INDEX:
+            return "Math and Science";
+        default:
+            assert false; //should never reach here
+            return "Module";
+        }
     }
 
     private void customiseStyle(int mcValue, int target) {
