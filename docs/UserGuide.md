@@ -94,9 +94,9 @@ Shows a command summary table as well as a link to access this user guide page.
 
 Format: `help`
 
-- You may select a cell and press `CONTROL` + `C` or `COMMAND` + `C` on your keyboard to copy the selected cell value.
-- You may click `Copy URL` to copy the link to this user guide.
-- You may click the right end to each column to sort the rows alphabetically.
+- You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
+- You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
+- You can click the right end to each column to sort the rows alphabetically.
 
 ![help message](images/helpMessage.png)
 <div style="text-align:center"><i>Help window interface.</i></div>
@@ -433,8 +433,8 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: I am using a Mac and when I tried to open `Tab.jar`, Mac shows “`TAB.jar` cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
-**A**: Go to `System Preferences` → `Security & Privacy` → `General` and click `Open Anyway` at the bottom as shown in the following screenshot.
+**Q**: I am using a Mac and when I tried to open **Tab.jar**, Mac shows “**TAB.jar** cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
+**A**: Go to <kbd>System Preferences</kbd> → <kbd>Security & Privacy</kbd> → <kbd>General</kbd> and click <kbd>Open Anyway</kbd> at the bottom as shown in the following screenshot.
 
 ![macSecurity](images/macSecurity.png)
 <div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
