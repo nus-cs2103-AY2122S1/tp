@@ -5,9 +5,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.done.Done;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +29,7 @@ public class Person {
     private final ExpectedSalary expectedSalary;
     private final LevelOfEducation levelOfEducation;
     private final Experience experience;
+    private Optional<Interview> interview;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -39,8 +42,9 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email,
                   Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
-                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags);
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags,
+                  Optional<Interview> interview) {
+        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags, interview);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -50,6 +54,7 @@ public class Person {
         this.levelOfEducation = levelOfEducation;
         this.experience = experience;
         this.tags.addAll(tags);
+        this.interview = interview;
         this.done = new Done();
     }
 
@@ -58,8 +63,10 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email,
                   Role role, EmploymentType employmentType, ExpectedSalary expectedSalary,
-                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags, Done done) {
-        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience, tags, done);
+                  LevelOfEducation levelOfEducation, Experience experience, Set<Tag> tags,
+                  Optional<Interview> interview, Done done) {
+        requireAllNonNull(name, phone, email, role, expectedSalary, levelOfEducation, experience,
+                tags, interview, done);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -69,6 +76,7 @@ public class Person {
         this.levelOfEducation = levelOfEducation;
         this.experience = experience;
         this.tags.addAll(tags);
+        this.interview = interview;
         this.done = done;
     }
 
@@ -103,6 +111,16 @@ public class Person {
     public Experience getExperience() {
         return experience;
     }
+
+    /**
+     * If interview is present, return interview; Else, return an instance of empty interview.
+     *
+     * @return Person's interview timing or an empty interview.
+     */
+    public Optional<Interview> getInterview() {
+        return interview;
+    }
+
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -154,6 +172,7 @@ public class Person {
                 && otherPerson.getLevelOfEducation().equals(getLevelOfEducation())
                 && otherPerson.getExperience().equals(getExperience())
                 && otherPerson.getTags().equals(getTags())
+                && otherPerson.getInterview().equals(getInterview())
                 && otherPerson.getDone().equals(getDone());
     }
 
@@ -161,7 +180,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tags, done);
+                expectedSalary, levelOfEducation, experience, tags, interview, done);
     }
 
     @Override
@@ -189,7 +208,9 @@ public class Person {
             tags.forEach(builder::append);
         }
 
-        builder.append("; ").append(getDone());
+        builder.append("; Interview: ")
+                .append(getInterview())
+                .append("; ").append(getDone());
 
         return builder.append("\n").toString();
     }

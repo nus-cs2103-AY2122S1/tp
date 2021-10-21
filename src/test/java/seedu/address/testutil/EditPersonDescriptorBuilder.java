@@ -46,6 +46,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setLevelOfEducation(person.getLevelOfEducation());
         descriptor.setExperience(person.getExperience());
         descriptor.setTags(person.getTags());
+        descriptor.setInterview(person.getInterview());
     }
 
     /**

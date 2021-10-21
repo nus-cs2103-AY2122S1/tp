@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -38,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE, PREFIX_EXPECTED_SALARY,
-                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG);
+                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW);
 
         Index index;
 
@@ -83,7 +84,14 @@ public class EditCommandParser implements Parser<EditCommand> {
                     ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get()));
         }
 
+
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+
+        if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
+            editPersonDescriptor.setInterview(
+                    ParserUtil.parseInterview(argMultimap.getValue(PREFIX_INTERVIEW).orElse("")));
+        }
+
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

@@ -42,6 +42,7 @@ public class TypicalPersons {
             .withLevelOfEducation("PhD")
             .withExperience("0")
             .withTags("friends")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
@@ -53,6 +54,7 @@ public class TypicalPersons {
             .withLevelOfEducation("Masters")
             .withExperience("1")
             .withTags("owesMoney", "friends")
+            .withInterview("2021-10-22, 10:00")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
@@ -63,6 +65,7 @@ public class TypicalPersons {
             .withExpectedSalary("5500")
             .withLevelOfEducation("Elementary")
             .withExperience("2")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
@@ -74,6 +77,7 @@ public class TypicalPersons {
             .withLevelOfEducation("Middle School")
             .withExperience("3")
             .withTags("friends")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
@@ -85,6 +89,7 @@ public class TypicalPersons {
             .withLevelOfEducation("Bachelors")
             .withExperience("4")
             .withTags("old")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
@@ -95,6 +100,7 @@ public class TypicalPersons {
             .withExpectedSalary("1900")
             .withLevelOfEducation("High School")
             .withExperience("5")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
@@ -105,6 +111,7 @@ public class TypicalPersons {
             .withExpectedSalary("900")
             .withLevelOfEducation("University")
             .withExperience("6")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     // Manually added
@@ -116,6 +123,7 @@ public class TypicalPersons {
             .withExpectedSalary("3300")
             .withLevelOfEducation("PhD")
             .withExperience("7")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
@@ -126,6 +134,7 @@ public class TypicalPersons {
             .withExpectedSalary("7100")
             .withLevelOfEducation("Masters")
             .withExperience("8")
+            .withInterview("")
             .withDone(Done.STATUS_UNDONE).build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
@@ -138,8 +147,8 @@ public class TypicalPersons {
             .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_AMY)
             .withExperience(VALID_EXPERIENCE_AMY)
             .withTags(VALID_TAG_FRIEND)
-            .withDone(VALID_DONE_AMY)
-            .build();
+            .withInterview("")
+            .withDone(VALID_DONE_AMY).build();
 
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
@@ -150,8 +159,8 @@ public class TypicalPersons {
             .withLevelOfEducation(VALID_LEVEL_OF_EDUCATION_BOB)
             .withExperience(VALID_EXPERIENCE_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .withDone(VALID_DONE_BOB)
-            .build();
+            .withInterview("")
+            .withDone(VALID_DONE_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

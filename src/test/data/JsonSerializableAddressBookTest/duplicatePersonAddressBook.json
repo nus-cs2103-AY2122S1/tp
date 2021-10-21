@@ -9,6 +9,7 @@
     "levelOfEducation": "PhD",
     "experience" : "0",
     "tagged": [ "friends" ],
+    "interview" : "-",
     "done" : "Not Done"
   }, {
     "name": "Janice Paula",
@@ -19,6 +20,7 @@
     "expectedSalary" : "7500",
     "levelOfEducation": "PhD",
     "experience" : "1",
+    "interview" : "-",
     "done" : "Not Done"
   } ]
 }

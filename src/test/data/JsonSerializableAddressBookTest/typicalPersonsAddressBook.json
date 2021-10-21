@@ -10,6 +10,7 @@
     "levelOfEducation" : "PhD",
     "experience" : "0",
     "tagged" : [ "friends" ],
+    "interview" : "-",
     "done" : "Not Done"
   }, {
     "name" : "Benson Meier",
@@ -21,6 +22,7 @@
     "levelOfEducation" : "Masters",
     "experience" : "1",
     "tagged" : [ "owesMoney", "friends" ],
+    "interview" : "2021-10-22, 10:00",
     "done" : "Not Done"
   }, {
     "name" : "Carl Kurz",
@@ -32,6 +34,7 @@
     "levelOfEducation" : "Elementary",
     "experience" : "2",
     "tagged" : [ ],
+    "interview" : "-",
     "done" : "Not Done"
   }, {
     "name" : "Daniel Meier",
@@ -43,6 +46,7 @@
     "levelOfEducation" : "Middle School",
     "experience" : "3",
     "tagged" : [ "friends" ],
+    "interview" : "-",
     "done" : "Not Done"
   }, {
     "name" : "Elle Meyer",
@@ -54,6 +58,7 @@
     "levelOfEducation" : "Bachelors",
     "experience" : "4",
     "tagged" : [ "old" ],
+    "interview" : "-",
     "done" : "Not Done"
   }, {
     "name" : "Fiona Kunz",
@@ -65,6 +70,7 @@
     "levelOfEducation" : "High School",
     "experience" : "5",
     "tagged" : [ ],
+    "interview" : "-",
     "done" : "Not Done"
   }, {
     "name" : "George Best",
@@ -76,6 +82,7 @@
     "levelOfEducation" : "University",
     "experience" : "6",
     "tagged" : [ ],
+    "interview" : "-",
     "done" : "Not Done"
   } ]
 }
