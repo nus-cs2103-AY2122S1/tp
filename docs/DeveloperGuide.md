@@ -16,14 +16,14 @@ title: Developer Guide
    - [[Proposed] View student/lesson feature](#proposed-view-studentlesson-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
-7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-8. [Appendix: Requirements](#appendix-requirements)
+6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+7. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
    - [User stories](#user-stories)
    - [Use cases](#use-cases)
    - [Non-Functional Requirements](#non-functional-requirements)
    - [Glossary](#glossary)
-9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    - [Launch and shutdown](#launch-and-shutdown)
    - [Deleting a person](#deleting-a-person)
    - [Saving data](#saving-data)
@@ -184,7 +184,7 @@ This section describes some noteworthy details on how certain features are imple
 The proposed view student/lesson mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `modelManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
 * `ModelManager#viewStudent()` — Updates student panel with the student of interest and lesson panel with the lessons the student of interest is in.
-* `ModelManager#viewLesson()` — Updates lesson panel with the lesson of interest and student panel with the students that have this lesson of interest.
+* `ModelManager#viewLesson()` — Updates lesson panel with the lesson of interest and student panel with the students that are in this lesson of interest.
 
 This operation is exposed in the `Model` interface as `Model#viewStudent()` and `Model#viewLesson()`.
 
