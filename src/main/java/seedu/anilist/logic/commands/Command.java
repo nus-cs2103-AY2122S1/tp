@@ -10,7 +10,7 @@ public abstract class Command {
 
     /** Indicates if the command is an intermediate command which requires
      * a follow-up user confirmation. */
-    private boolean isIntermediate = false;
+    private final boolean isIntermediate = false;
 
     /**
      * Indicates if the command is an intermediate command.

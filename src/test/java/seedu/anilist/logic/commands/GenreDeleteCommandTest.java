@@ -1,3 +1,4 @@
+
 package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

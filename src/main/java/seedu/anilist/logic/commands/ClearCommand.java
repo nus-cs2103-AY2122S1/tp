@@ -13,7 +13,9 @@ public class ClearCommand extends Command {
             + "anime(s)?\nThis action is irreversible.\n"
             + "Enter 'clear' again to proceed and otherwise to abort.";
 
-    private boolean isIntermediate = true;
+    /** Indicates if the command is an intermediate command.
+     * Overridden from the Command class */
+    private final boolean isIntermediate = true;
 
     @Override
     public boolean requiresConfirmation() {
