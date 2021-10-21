@@ -244,8 +244,7 @@ Example usage of either command is as follows:
 - `edit 2 p/1 p/3` - Replaces task 2's set of people with a set consisting of persons 1 and 3.
 
 A sequence diagram is provided below:
-
-![TabSystemSequenceDiagram](images/AssignPeopleSequenceDiagram.png)
+![AssignPeopleSequenceDiagram](images/AssignPeopleSequenceDiagram.png)
 
 #### Challenges  
 
@@ -292,9 +291,11 @@ Example usage of `add` command to add date/time is as follows:
 - `add d/Event dt/25/10/2021, 10:00 AM` - Adds a task "Event" that starts at the given date and time.
 
 A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
-is entered.
+is entered:
+![AddDateSequenceDiagram](images/AddDateSequenceDiagram.png)
 
-![TabSystemSequenceDiagram](images/AddDateSequenceDiagram.png)
+The following activity diagram summarises what happens when a user executes an add command with date and/or time:
+![AddDateActivityDiagram](images/AddDateActivityDiagram.png)
 
 #### Design considerations:
 
