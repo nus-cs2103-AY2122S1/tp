@@ -208,6 +208,26 @@ The following activity diagrams summarizes what happens when a user executes a c
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
+### Add Allocation feature
+
+The `add alloc` feature allocates an existing student into a group.
+
+Given below is an example usage case and how the `add alloc` command mechanism behaves at each step.
+
+#### Implementation
+
+Step 1. The user executes `add alloc -g T02 -n Alex Yeoh` command to add the student named `Alex Yeoh` to the group `T02`. The `add alloc` command creates an `AddAllocCommandParser` object to parse the user input into respective command arguments.
+
+Step 2. The `AddAllocCommandParser` checks for validity of the user input and creates an `AddAllocCommand.AllocDescriptor` object to store information of the allocation which is then used to create an `AddAllocCommand` object to execute the command.
+
+Step 3. `AddAllocCommand#execute()` checks for validity of the command arguments, i.e. the existence of group `T02` and student `Alex Yeoh` in the database, the existence of student `Alex Yeoh` in group `T02`.
+
+Step 4. `AddAllocCommand#execute()` calls `AddAllocCommand#createEditedStudent()` to create an instance of student `Alex Yeoh` allocated to group `T02`, and modifies the current unallocated student `Alex Yeoh` in the database with the newly allocated instance through `ReadOnlyAddressBook#setStudent`.
+
+Step 5. `AddAllocCommand#execute()` calls `Group#addStudent()` to add student `Alex Yeoh` into the group.
+
+Use case ends.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
