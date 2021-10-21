@@ -82,7 +82,7 @@ public class EditTaskCommand extends Command {
         tasks.set(targetTaskIndex.getZeroBased(), editedTask);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), tasks);
+                personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

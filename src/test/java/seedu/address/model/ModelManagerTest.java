@@ -7,19 +7,24 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
 
@@ -99,26 +104,36 @@ public class ModelManagerTest {
     @Test
     public void getDisplayTaskList_success() {
         Task[] taskList = {};
-        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
-        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
-                mockObservableList);
-        assertEquals(modelManager.getDisplayTaskList(), mockUnmodifiableObservableList);
+        ObservableList<Task> observableList = FXCollections.observableList(Arrays.asList(taskList));
+        FilteredList<Task> filteredTasks = new FilteredList<>(observableList);
+        assertEquals(modelManager.getDisplayTaskList(), (ObservableList<Task>) filteredTasks);
     }
 
     @Test
-    public void updateDisplayTaskList_success() {
-        Task[] taskList = {new Task("1"), new Task("2"), new Task("3")};
-        modelManager.updateDisplayTaskList(Arrays.asList(taskList));
-        ObservableList<Task> mockObservableList = FXCollections.observableList(Arrays.asList(taskList));
-        ObservableList<Task> mockUnmodifiableObservableList = FXCollections.unmodifiableObservableList(
-                mockObservableList);
-        assertEquals(modelManager.getDisplayTaskList(), mockUnmodifiableObservableList);
+    public void displayPersonTaskList_success() {
+        modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        Person validPerson = new PersonBuilder().withTasks("1", "2", "3").build();
+        List<Task> taskList = validPerson.getTasks();
+
+        modelManager.addPerson(validPerson);
+        modelManager.displayPersonTaskList(validPerson);
+        ObservableList<Task> filteredTasks = modelManager.getDisplayTaskList();
+
+        assertEquals(taskList.size(), filteredTasks.size());
+
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            assertEquals(taskList.get(i), filteredTasks.get(i));
+        }
     }
 
     @Test
     public void getDisplayTaskList_modifyList_throwsUnsupportedOperationException() {
-        Task[] taskList = {new Task("1"), new Task("2"), new Task("3")};
-        modelManager.updateDisplayTaskList(Arrays.asList(taskList));
+        modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        Person person = modelManager.getFilteredPersonList().get(0);
+        modelManager.displayPersonTaskList(person);
+
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getDisplayTaskList().remove(0));
     }
 
@@ -150,16 +165,19 @@ public class ModelManagerTest {
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
-        // different displayTaskList -> returns false
-        Task firstTask = new Task("transfer $100");
-        Task secondTask = new Task("transfer $101");
-        Task[] taskListOne = {firstTask, secondTask};
-        Task[] taskListTwo = {secondTask, firstTask};
+        // different TaskListManager -> returns false
+        Person firstPerson = new PersonBuilder().withTasks("transfer $100", "transfer $101").build();
+        Person secondPerson = new PersonBuilder().withTasks("transfer $101", "transfer 100").build();
         ModelManager mockModelManager = new ModelManager(addressBook, userPrefs);
         mockModelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        mockModelManager.updateDisplayTaskList(Arrays.asList(taskListOne));
-        modelManager.updateDisplayTaskList(Arrays.asList(taskListTwo));
+        mockModelManager.addPerson(firstPerson);
+        modelManager.addPerson(secondPerson);
         assertFalse(modelManager.equals(mockModelManager));
+
+        // Same TaskListManager -> returns true
+        mockModelManager.deletePerson(firstPerson);
+        modelManager.deletePerson(secondPerson);
+        assertTrue(modelManager.equals(mockModelManager));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

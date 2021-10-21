@@ -5,11 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.util.Comparator;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -17,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,8 +28,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> onlyFilteredPersons;
     private final SortedList<Person> filteredPersons;
 
-    private final ObservableList<Task> displayTaskList;
-    private final ObservableList<Task> unmodifiableDisplayTaskList;
+    private final TaskListManager taskListManager;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -42,9 +41,9 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.taskListManager = new TaskListManager();
 
-        displayTaskList = FXCollections.observableArrayList();
-        unmodifiableDisplayTaskList = FXCollections.unmodifiableObservableList(displayTaskList);
+        taskListManager.initialiseArchive(this.getAddressBook().getPersonList());
 
         onlyFilteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredPersons = new SortedList<>(onlyFilteredPersons);
@@ -110,12 +109,14 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        taskListManager.deleteEntry(target.getName());
     }
 
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        taskListManager.createNewEntry(person);
     }
 
     @Override
@@ -123,6 +124,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         addressBook.setPerson(target, editedPerson);
+        taskListManager.updateEntry(target, editedPerson);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -139,6 +141,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
+
         onlyFilteredPersons.setPredicate(predicate);
     }
 
@@ -168,19 +171,18 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons)
-                && displayTaskList.equals(other.displayTaskList);
+                && taskListManager.equals(other.taskListManager);
     }
 
     //=========== display task List Accessors =============================================================
 
     @Override
-    public void updateDisplayTaskList(List<Task> taskList) {
-        requireNonNull(taskList);
-        displayTaskList.setAll(taskList);
+    public ObservableList<Task> getDisplayTaskList() {
+        return taskListManager.getFilteredTasks();
     }
 
     @Override
-    public ObservableList<Task> getDisplayTaskList() {
-        return unmodifiableDisplayTaskList;
+    public void displayPersonTaskList(Person person) {
+        taskListManager.setToDisplayTaskList(person.getName());
     }
 }

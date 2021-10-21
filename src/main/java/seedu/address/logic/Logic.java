@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -50,11 +49,9 @@ public interface Logic {
      */
     void setGuiSettings(GuiSettings guiSettings);
 
-    /**
-     * Updates the currently displayed person's taskList to the given {@code taskList}.
-     */
-    void updateDisplayTaskList(List<Task> taskList);
-
-    /** Returns an unmodifiable view of the display task list. */
+    /** Returns an unmodifiable view of the task list to be displayed on the GUI. */
     ObservableList<Task> getDisplayTaskList();
+
+    /** Displays {@code person}'s task list on the GUI. */
+    void displayPersonTaskList(Person person);
 }

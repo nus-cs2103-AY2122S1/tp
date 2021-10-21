@@ -1,10 +1,13 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -15,61 +18,69 @@ public class NameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("first");
-        List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
+        List<String> firstPredicateKeywordList = List.of("first");
+        List<String> secondPredicateKeywordList = List.of("second");
 
         NameContainsKeywordsPredicate firstPredicate = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
         NameContainsKeywordsPredicate secondPredicate = new NameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
-        assertTrue(firstPredicate.equals(firstPredicate));
+        assertEquals(firstPredicate, firstPredicate);
 
         // same values -> returns true
         NameContainsKeywordsPredicate firstPredicateCopy = new NameContainsKeywordsPredicate(firstPredicateKeywordList);
-        assertTrue(firstPredicate.equals(firstPredicateCopy));
+        assertEquals(firstPredicate, firstPredicateCopy);
 
         // different types -> returns false
-        assertFalse(firstPredicate.equals(1));
+        assertFalse(firstPredicate.equals("first"));
 
         // null -> returns false
-        assertFalse(firstPredicate.equals(null));
+        assertNotEquals(null, firstPredicate);
 
-        // different person -> returns false
-        assertFalse(firstPredicate.equals(secondPredicate));
+        // different names -> returns false
+        assertNotEquals(firstPredicate, secondPredicate);
     }
 
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
+        Person samplePerson = new PersonBuilder().withName("John William Cena").build();
         // One keyword
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(new ArrayList<>(List.of("John")));
+        assertTrue(predicate.test(samplePerson));
 
         // Multiple keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        predicate = new NameContainsKeywordsPredicate(new ArrayList<>(Arrays.asList("John", "Cena")));
+        assertTrue(predicate.test(samplePerson));
 
-        // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Carol").build()));
+        // One abbreviated keyword
+        predicate = new NameContainsKeywordsPredicate(new ArrayList<>(List.of("Will")));
+        assertTrue(predicate.test(samplePerson));
 
-        // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+        // Multiple abbreviated keywords
+        predicate = new NameContainsKeywordsPredicate(new ArrayList<>(Arrays.asList("Jo", "Will")));
+        assertTrue(predicate.test(samplePerson));
+
+        // Multiple abbreviated keywords in random case
+        predicate = new NameContainsKeywordsPredicate(new ArrayList<>(Arrays.asList("jO", "WIlL")));
+        assertTrue(predicate.test(samplePerson));
     }
 
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
-        // Zero keywords
-        NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").build()));
-
+        NameContainsKeywordsPredicate predicate;
         // Non-matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
+        predicate = new NameContainsKeywordsPredicate(new ArrayList<>(List.of("Carol")));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
+    }
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+    @Test
+    public void test_keywordsEmpty_throwsException() {
+        NameContainsKeywordsPredicate predicate;
+        // Empty keyword
+        predicate = new NameContainsKeywordsPredicate(new ArrayList<>());
+        assertThrows(
+                IllegalArgumentException.class, (
+                ) -> predicate.test(new PersonBuilder().withName("Alice Bob").build())
+        );
     }
 }

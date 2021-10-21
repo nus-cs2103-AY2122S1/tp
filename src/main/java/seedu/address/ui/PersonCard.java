@@ -58,7 +58,7 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        taskList.setText(person.getTasks().toString());
+        taskList.setText(person.getDescription().toString());
     }
 
     @Override

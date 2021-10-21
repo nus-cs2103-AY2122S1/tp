@@ -40,6 +40,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -58,7 +59,7 @@ public class HelpWindow extends AnchorPane {
     private static final Hashtable<String, CommandDetail> commandTable = new Hashtable<>();
 
     private static Stage stage;
-    private static boolean isActive = false;
+    private static final boolean isActive = false;
     private static HelpWindow helpWindow;
 
     private interface CommandDetail {
@@ -87,6 +88,7 @@ public class HelpWindow extends AnchorPane {
      */
     private HelpWindow() {
         stage = new Stage();
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("/view/HelpWindow.fxml"));
             fxmlLoader.setController(this);
@@ -104,11 +106,12 @@ public class HelpWindow extends AnchorPane {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        fillCommandTable();
+
         helpMessage.setText(HELP_MESSAGE);
         additionalInfo.setText("");
         userGuideMessage.setText(USER_GUIDE_MESSAGE);
         copyButton.setText("Copy URL");
+        fillCommandTable();
     }
 
     public static HelpWindow getWindow() {
@@ -204,7 +207,7 @@ public class HelpWindow extends AnchorPane {
     private void setupTableData() {
         Person samplePerson = new Person(
                 new Name("Amy Bee"), new Phone("123456789"), new Email("amy@gmail.com"),
-                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>()
+                new Address("123, Jurong West Ave 6, #08-111"), new HashSet<>(), new ArrayList<>(), new Description("")
         );
         EditCommand.EditPersonDescriptor descriptor = new EditCommand.EditPersonDescriptor();
         descriptor.setName(samplePerson.getName());
@@ -250,7 +253,6 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
         commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
-        commandTable.put("viewtask", this::handleViewTask); // placeholder
         commandTable.put("close", this::handleCloseWindow);
     }
 
@@ -306,9 +308,9 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleFind() {
-        additionalInfo.setText(
-                "Format: find KEYWORD [MORE_KEYWORDS]\n"
-                        + "Only full words will be matched and persons matching at least one keyword will be returned"
+        additionalInfo.setText("Format: find FLAG KEYWORD [MORE_KEYWORDS]\n"
+                + "Persons matching all the keywords will be returned\n"
+                + "The flags available to use are -a, -e, -n, -p and -t"
         );
     }
 
@@ -332,13 +334,8 @@ public class HelpWindow extends AnchorPane {
     }
 
     private void handleDelTask() {
-        additionalInfo.setText("Format: deltask INDEX ti/TASK_INDEX\n"
+        additionalInfo.setText("Format: deletetask INDEX ti/TASK_INDEX\n"
                 + "Deletes a task attached to the person at the specified INDEX");
-    }
-
-    private void handleViewTask() {
-        additionalInfo.setText("Format: viewtask INDEX\n"
-                + "Displays the list of tasks attached to the person at the specifiedINDEX");
     }
 
     private void handleEditTask() {

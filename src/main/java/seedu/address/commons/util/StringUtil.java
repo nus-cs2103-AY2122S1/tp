@@ -5,7 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Helper functions for handling strings.
@@ -36,6 +38,44 @@ public class StringUtil {
 
         return Arrays.stream(wordsInPreppedSentence)
                 .anyMatch(preppedWord::equalsIgnoreCase);
+    }
+
+    /**
+     * Returns true if the {@code sentence} contains the {@code wordsList} in the expected order.
+     *   Ignores case, but words in the wordsList need to partially match words in the sentence and their relative
+     *   ordering.
+     *
+     *   <br>examples:<pre>
+     *       containsWordsInOrderIgnoreCase("ABc def", "abc") == true
+     *       containsWordsInOrderIgnoreCase("ABc def", "ab d") == true
+     *       containsWordsInOrderIgnoreCase("ABc def", "def abc") == false
+     *       </pre>
+     * @param sentence cannot be null
+     * @param wordsList cannot be null, cannot be empty
+     */
+    public static boolean containsWordsInOrderIgnoreCase(String sentence, List<String> wordsList) {
+        requireNonNull(sentence);
+        requireNonNull(wordsList);
+        checkArgument(!wordsList.isEmpty(), "Words parameter cannot be empty");
+
+        List<String> wordsInPreppedSentence = new ArrayList<>(List.of(sentence.split("\\s+")));
+        int wordsIndex = 0;
+        for (int i = 0; i < wordsList.size(); i++) {
+            wordsList.set(i, wordsList.get(i).trim().toLowerCase());
+        }
+        for (int i = 0; i < wordsInPreppedSentence.size(); i++) {
+            wordsInPreppedSentence.set(i, wordsInPreppedSentence.get(i).trim().toLowerCase());
+        }
+
+        for (String s : wordsInPreppedSentence) {
+            if (s.startsWith(wordsList.get(wordsIndex))) {
+                if (++wordsIndex == wordsList.size()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
