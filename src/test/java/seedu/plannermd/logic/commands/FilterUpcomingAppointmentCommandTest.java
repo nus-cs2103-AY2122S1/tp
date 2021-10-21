@@ -49,7 +49,6 @@ public class FilterUpcomingAppointmentCommandTest {
     @Test
     public void execute_noParameterSpecified_allUpcomingAppointmentsMatch() {
         reinitialiseModel();
-        System.out.println(LocalDate.now().format(AppointmentDate.DATE_FORMATTER));
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
         AppointmentFilters filters = new AppointmentFiltersBuilder().withUpcoming().build();
         FilterUpcomingAppointmentCommand command = new FilterUpcomingAppointmentCommand(filters);
