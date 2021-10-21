@@ -25,3 +25,4 @@ Given below are my contributions to the project.
         * Added glossary terms [\#81]()
         * Added use cases [\#81]()
         * Added non-functional requirements [\#81]()
+* Added command to find class [\#130]()
