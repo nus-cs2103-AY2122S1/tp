@@ -15,6 +15,7 @@ Class StudentListPanel
 Class StudentCard
 Class StatusBarFooter
 Class CommandBox
+Class CommandHistory
 Class LabResultListPanel
 }
 
@@ -39,6 +40,8 @@ MainWindow *-down-> "1" StudentCard
 MainWindow *-down-> "1" LabResultListPanel
 MainWindow --> "0..1" HelpWindow
 
+PersonListPanel -down-> "*" PersonCard
+CommandBox -down-> "1" CommandHistory
 StudentListPanel -down-> "*" StudentCard
 
 MainWindow -left-|> UiPart
