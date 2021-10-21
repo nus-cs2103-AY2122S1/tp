@@ -3,9 +3,12 @@ package seedu.address.logic.parser.friends;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ADD_GAME_SKILL;
 import static seedu.address.logic.parser.CliSyntax.FLAG_DELETE;
+import static seedu.address.logic.parser.CliSyntax.FLAG_EDIT;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
 import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
@@ -40,6 +43,13 @@ class FriendCommandParserTest {
                 + " " + FLAG_GAME + VALID_GAME_ID_CSGO + " " + FLAG_VALUE + "3";
         assertEquals(parser.parse(addFriendGameSkillInput),
                 new AddFriendGameSkillCommandParser().parse(addFriendGameSkillInput));
+    }
+
+    @Test
+    public void parseEdit_validCommandFlag_correctParserReturned() throws ParseException {
+        String editInput = FLAG_POSTFIX.getFlag() + FLAG_EDIT.getFlag() + VALID_FRIEND_ID_AMY + " "
+                + FLAG_FRIEND_NAME + VALID_NAME_AMY;
+        assertEquals(parser.parse(editInput), new EditFriendCommandParser().parse(editInput));
     }
 
     @Test
