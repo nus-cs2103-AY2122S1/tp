@@ -164,7 +164,7 @@ Future plans for Events
 * Include searching for the list of events for a participant
 * Include filtering of events by month or events that are happening today.
 * Include sorting of events by date, name or number of participants.
-    * Dates should be in reverse chronological order so that upcoming events are shown first
+   * Dates should be in reverse chronological order so that upcoming events are shown first
 * Include additional remarks or description for an event
 
 ### Add a task feature for a member or several members
