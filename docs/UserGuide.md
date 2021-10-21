@@ -289,7 +289,7 @@ Examples:
 The following section will guide you on how to use the commands relating to the operations for managing lessons of students in TAB.
 A `Lesson` _**must**_ have the following fields: a start `date`, a `time range` and a `subject`.
 
-A `Lesson` can be categorised in to 2 types: 
+A `Lesson` can be categorised into 2 types: 
 1. A _**weekly**_ recurring lesson
 2. A one-off makeup lesson.
 
