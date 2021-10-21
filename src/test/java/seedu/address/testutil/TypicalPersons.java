@@ -42,6 +42,14 @@ public class TypicalPersons {
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").build();
 
+    public static final Person ALICE_NAME_ONLY = new PersonBuilder().withName("Alice Pauline").buildNameOnly();
+    public static final Person BENSON_NAME_ONLY = new PersonBuilder().withName("Benson Meier").buildNameOnly();
+    public static final Person CARL_NAME_ONLY = new PersonBuilder().withName("Carl Kurz").buildNameOnly();
+    public static final Person DANIEL_NAME_ONLY = new PersonBuilder().withName("Daniel Meier").buildNameOnly();
+    public static final Person ELLE_NAME_ONLY = new PersonBuilder().withName("Elle Meyer").buildNameOnly();
+    public static final Person FIONA_NAME_ONLY = new PersonBuilder().withName("Fiona Kunz").buildNameOnly();
+    public static final Person GEORGE_NAME_ONLY = new PersonBuilder().withName("George Best").buildNameOnly();
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").build();
@@ -72,6 +80,11 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getTypicalPersonsNameOnly() {
+        return new ArrayList<>(Arrays.asList(ALICE_NAME_ONLY, BENSON_NAME_ONLY, CARL_NAME_ONLY,
+                DANIEL_NAME_ONLY, ELLE_NAME_ONLY, FIONA_NAME_ONLY, GEORGE_NAME_ONLY));
     }
 
     public static List<String> getTypicalNamesStringForm() {
@@ -116,7 +129,7 @@ public class TypicalPersons {
 
     public static List<String> getTypicalTagsStringForm() {
         return new ArrayList<>(Arrays.asList("friends",
-                "owesMoney friends",
+                "owesMoney;friends",
                 "",
                 "friends",
                 "",
