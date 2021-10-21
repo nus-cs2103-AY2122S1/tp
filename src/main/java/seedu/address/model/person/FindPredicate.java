@@ -9,7 +9,7 @@ import seedu.address.model.tag.Tag;
 
 
 /**
- * Tests that a {@code Person}'s {@code Name} AND {@code Tag} matches all of the tags given.
+ * Tests that a {@code Person}'s {@code Name} AND {@code Tag} matches ALL of the tags given.
  */
 public class FindPredicate implements Predicate<Person> {
 

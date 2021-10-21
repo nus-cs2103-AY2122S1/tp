@@ -8,17 +8,17 @@ import seedu.address.model.person.FindOrPredicate;
 
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
+ * Finds and lists all persons in address book whose name contains ANY of the argument keywords provided.
  * Keyword matching is case insensitive.
  */
 public class FindOrCommand extends Command {
 
     public static final String COMMAND_WORD = "findOr";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain ANY of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Parameters: n/[name] ... t/[tag] ...\n"
+            + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues";
 
     private final FindOrPredicate findOrPredicate;
 

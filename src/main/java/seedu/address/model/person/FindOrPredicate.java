@@ -8,7 +8,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s {@code Name} OR {@code Tag} matches all of the tags given.
+ * Tests that a {@code Person}'s {@code Name} OR {@code Tag} matches ANY of the tags given.
  */
 public class FindOrPredicate implements Predicate<Person> {
 
@@ -31,10 +31,10 @@ public class FindOrPredicate implements Predicate<Person> {
         Tag[] arrayTags = new Tag[person.getTags().toArray().length];
         if (!nameList.isEmpty()) {
             return nameList.stream()
-                    .anyMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name.fullName)
+                    .anyMatch(name -> StringUtil.containsWordIgnoreCase(person.getName().fullName, name.fullName))
                             || tagList.stream()
                             .anyMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))
-                                    .anyMatch(personTag -> personTag.compareTag(tag, false))));
+                                    .anyMatch(personTag -> personTag.compareTag(tag, false)));
         } else {
             return tagList.stream()
                             .anyMatch(tag -> Arrays.stream(person.getTags().toArray(arrayTags))

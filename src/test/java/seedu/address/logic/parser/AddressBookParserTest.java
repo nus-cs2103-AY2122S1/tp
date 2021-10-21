@@ -140,7 +140,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findNamesAndTags() throws Exception {
         List<String> nameStringList = List.of("Alan", "Bob", "Chris");
         List<String> tagStringList = List.of("football", "friends");
         List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
@@ -182,7 +182,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_findOr() throws Exception {
+    public void parseCommand_findOrNamesAndTags() throws Exception {
         List<String> nameStringList = List.of("Alan", "Bob", "Chris");
         List<String> tagStringList = List.of("football", "friends");
         List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));

@@ -100,7 +100,7 @@ public class FindOrCommandTest {
     }
 
     @Test
-    public void execute_twoExistentName_noPersonFound() {
+    public void execute_twoExistentName_twoPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         List<Name> firstNameList = List.of(new Name("alice"), new Name("benson"));
         List<Tag> firstTagList = List.of();
