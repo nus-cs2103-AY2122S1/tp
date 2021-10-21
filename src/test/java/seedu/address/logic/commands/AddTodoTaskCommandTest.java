@@ -24,7 +24,6 @@ import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskHistory;
-import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.DeadlineAndEventTaskBuilder;
 
 public class AddTodoTaskCommandTest {
