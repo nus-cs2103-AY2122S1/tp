@@ -18,7 +18,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.util.GitHubUtil;
 import seedu.address.model.person.Person;
 
 
@@ -29,6 +28,7 @@ public class PersonDetails extends UiPart<Region> {
 
     private static final String FXML = "PersonDetails.fxml";
     private static final String TELEGRAM_URL_PREFIX = "https://t.me/";
+    private static final String GITHUB_URL_PREFIX = "https://github.com/";
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     /**
@@ -78,12 +78,14 @@ public class PersonDetails extends UiPart<Region> {
         name.setText(person.getName().fullName);
         String teleUrl = TELEGRAM_URL_PREFIX + person.getTelegram();
         telegram.setText("@" + person.getTelegram().value);
+        String githubUrl = GITHUB_URL_PREFIX + person.getGithub();
         github.setText(person.getGithub().value);
         tags.getChildren().removeIf(c -> true);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         telegram.setOnMouseClicked((event) -> openTelegram(teleUrl));
+        github.setOnMouseClicked((event) -> openGithub(githubUrl));
         if (person.getPhone().value.isBlank()) {
             phone.setText("-");
         } else {
@@ -107,8 +109,7 @@ public class PersonDetails extends UiPart<Region> {
         profileView.setClip(clip);
 
         // To Obtain the user GitHub username and to fetch and display it.
-        String userName = person.getGithub().toString();
-        Image userGitHubProfilePicture = GitHubUtil.getProfilePicture(userName);
+        Image userGitHubProfilePicture = person.getProfilePicture();
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(userGitHubProfilePicture);
     }
@@ -122,12 +123,26 @@ public class PersonDetails extends UiPart<Region> {
         try {
             Desktop.getDesktop().browse(new URL(teleUrl).toURI());
         } catch (IOException e) {
-            logger.severe("Could not open browser to show link to telegram.");
+            logger.severe("Could not open browser to show link to Telegram.");
         } catch (URISyntaxException e) {
-            logger.severe("URL to telegram not formatted well.");
+            logger.severe("URL to Telegram not formatted well.");
         }
     }
 
+    /**
+     * Opens the link to the person's Github profile in the default web browser on
+     * the system.
+     */
+    @FXML
+    public void openGithub(String githubUrl) {
+        try {
+            Desktop.getDesktop().browse(new URL(githubUrl).toURI());
+        } catch (IOException e) {
+            logger.severe("Could not open browser to show link to Github.");
+        } catch (URISyntaxException e) {
+            logger.severe("URL to Github not formatted well.");
+        }
+    }
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javafx.scene.image.Image;
+import seedu.address.commons.util.GitHubUtil;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,6 +28,10 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    //Extra fields
+    private Image profilePicture;
+    private Thread parallelTask;
+
     /**
      * Every field must be present and not null.
      */
@@ -39,6 +45,11 @@ public class Person implements Comparable<Person> {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
+        this.parallelTask = new Thread(() -> {
+            profilePicture = GitHubUtil.getProfilePicture(github.value);
+        });
+        parallelTask.start();
     }
 
     public Name getName() {
@@ -63,6 +74,17 @@ public class Person implements Comparable<Person> {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Image getProfilePicture() {
+        if (parallelTask != null && parallelTask.isAlive()) {
+            try {
+                parallelTask.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return profilePicture;
     }
 
     /**

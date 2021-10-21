@@ -166,6 +166,11 @@ public class AddCommandTest {
 
         @Override
         public PersonListPanel getPersonListControl() {
+            return null;
+        }
+
+        @Override
+        public void setTabIndex(int index) {
             throw new AssertionError("This method should not be called.");
         }
     }

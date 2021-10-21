@@ -70,10 +70,10 @@ public class StringUtil {
     }
 
     public static String clean(String s) {
-        return s.strip().replaceAll("[\n|\r|\"|\f|\b|']", "").replaceAll("[\t\\s+]", " ");
+        return s.strip().replaceAll("[\n|\r|\"|\f|\b|']", "").replaceAll("\\s+", " ").strip();
     }
 
     public static String clean(String s, String toRemove) {
-        return clean(s).replaceAll(toRemove, "");
+        return clean(s).replaceAll(toRemove, "").strip();
     }
 }

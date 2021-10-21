@@ -9,6 +9,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.model.person.GithubContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.person.TelegramHandleContainsKeywordsPredicate;
@@ -24,6 +25,24 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_emptyArgGithub_throwsParseException() {
+        assertParseFailure(parser, "g/ ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArgTag_throwsParseException() {
+        assertParseFailure(parser, "t/ ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_emptyArgTelegram_throwsParseException() {
+        assertParseFailure(parser, "te/ ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_invalidArg1_throwsParseException() {
         assertParseFailure(parser, "@alex",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -33,6 +52,30 @@ public class FindCommandParserTest {
     public void parse_invalidArg2_throwsParseException() {
         assertParseFailure(parser, "tele/alex",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArg3_throwsParseException() {
+        assertParseFailure(parser, "git/bern",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidArg4_throwsParseException() {
+        assertParseFailure(parser, "github/bern",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validGithubUsernameArgs_returnsFindCommand() {
+        // no leading and trailing whitespaces
+        FindCommand expectedFindCommand =
+                new FindCommand(new GithubContainsKeywordsPredicate(Arrays
+                        .asList("alex", "bern")));
+        assertParseSuccess(parser, "g/alex bern", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, "g/\n alex \n \t bern  \t", expectedFindCommand);
     }
 
     @Test

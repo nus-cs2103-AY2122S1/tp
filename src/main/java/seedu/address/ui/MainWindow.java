@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -39,7 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonDetails personDetails;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private TabPaneFooter tabPaneFooter;
+    private TabPaneHeader tabPaneHeader;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -90,6 +92,13 @@ public class MainWindow extends UiPart<Stage> {
         this.primaryStage = primaryStage;
         this.logic = logic;
 
+        // Fix dimension based on screen resolution
+        Dimension dimensions = Toolkit.getDefaultToolkit().getScreenSize();
+        primaryStage.setMaxWidth(dimensions.getWidth() / 1.8);
+        primaryStage.setMaxHeight(dimensions.getHeight() / 1.2);
+        primaryStage.setMinWidth(dimensions.getWidth() / 2);
+        primaryStage.setMinHeight(dimensions.getHeight() / 1.4);
+
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
@@ -98,7 +107,7 @@ public class MainWindow extends UiPart<Stage> {
         helpWindow = new HelpWindow();
 
         eventsIcon.setOnMouseClicked(event -> {
-            tabPaneFooter.getTabPane().getSelectionModel().select(2);
+            tabPaneHeader.getTabPane().getSelectionModel().select(2);
         });
     }
 
@@ -155,9 +164,10 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneFooter = new TabPaneFooter(logic);
+        tabPaneHeader = new TabPaneHeader(logic);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-        tabPanePlaceholder.getChildren().add(tabPaneFooter.getRoot());
+        tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
+        personListPanel.setTabPaneHeader(tabPaneHeader);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());

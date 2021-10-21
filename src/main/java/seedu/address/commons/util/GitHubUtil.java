@@ -1,44 +1,32 @@
 package seedu.address.commons.util;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.HashMap;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import javafx.scene.image.Image;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Github;
 
 /**
  * Helps in obtaining data from the GitHub API.
  */
 public class GitHubUtil {
+    public static final Image DEFAULT_USER_PROFILE_PICTURE = new Image(
+            GitHubUtil.class.getResourceAsStream("/images/profile.png"));
+
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
 
-    private static final String API_URL_PREFIX = "https://api.github.com/";
-    private static final String GITHUB_URL_PREFIX = "https://www.github.com/";
-    private static final Image defaultUserProfilePicture = new Image(
-            GitHubUtil.class.getResourceAsStream("/images/profile.png"));
-    private static int responseCode;
-    private static URL url;
-
-    /**
-     * Initializes a GitHubUtil Object.
-     */
-    private GitHubUtil() {
-    }
+    private static final String GITHUB_URL_PREFIX = "https://github.com/";
+    private static final HttpClient httpClient = HttpClient.newHttpClient();
 
     /**
      * Establishes a connection to the server, and
@@ -46,88 +34,26 @@ public class GitHubUtil {
      *
      * @param extension The extension of the url to go to.
      */
-    private static void establishConnectionForWebsite(String extension) {
+    private static String establishConnectionForWebsite(String extension) {
         try {
-            url = new URL(GITHUB_URL_PREFIX + extension);
+            String url = GITHUB_URL_PREFIX + extension;
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .build();
+            HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) "
-                    + "Gecko/20100316 Firefox/3.6.2");
-            conn.connect();
-
-            responseCode = conn.getResponseCode();
-        } catch (MalformedURLException e) {
-            logger.severe("Improper URL Format.");
-        } catch (IOException e) {
-            logger.severe("A Connection with the server could not be established.");
-        }
-    }
-
-    /**
-     * Establishes a connection to the server via API, and
-     * updates the response code accordingly.
-     *
-     * @param userName The name of the user.
-     */
-    private static void establishConnectionForApi(String userName) {
-        String userUrl = API_URL_PREFIX + userName;
-
-        try {
-            url = new URL(userUrl);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            responseCode = conn.getResponseCode();
-        } catch (MalformedURLException e) {
-            logger.severe("Improper URL Format.");
-        } catch (IOException e) {
-            logger.severe("A Connection with the server could not be established.");
-        }
-    }
-
-    /**
-     * Returns a {@code JSONObject} consisting of the user data
-     * obtained from the GitHub API.
-     *
-     * @param userName The name of the user.
-     * @return A {@code JSONObject} consisting of the user data.
-     * @throws RuntimeException If the server did not respond well.
-     */
-    public static JSONObject getProfile(String userName) throws RuntimeException {
-        assert userName != null && !userName.equals("") : "No UserName Found";
-
-        establishConnectionForApi("users/" + userName);
-        JSONObject data = null;
-
-        if (responseCode != 200) {
-            logger.severe("Server responded with error code " + responseCode);
-            throw new RuntimeException("Data could not be obtained.");
-        } else {
-            String inline = "";
-
-            try {
-                Scanner scanner = new Scanner(url.openStream());
-
-                while (scanner.hasNext()) {
-                    inline += scanner.nextLine();
-                }
-
-                scanner.close();
-            } catch (IOException e) {
-                logger.severe("Data could not be obtained from the URL.");
+            if (httpResponse.statusCode() != 200) {
+                logger.severe("Server responded with error code " + httpResponse.statusCode());
+                return null;
             }
 
-            try {
-                JSONParser jsonParser = new JSONParser();
-                data = (JSONObject) jsonParser.parse(inline);
-            } catch (ParseException e) {
-                logger.severe("Data obtained could not be parsed into JSON Format.");
-            }
+            return StringUtil.clean(httpResponse.body());
+        } catch (MalformedURLException e) {
+            logger.severe("Improper URL Format.");
+        } catch (IOException | InterruptedException e) {
+            logger.severe("A Connection with the server could not be established.");
         }
-        return data;
+        return null;
     }
 
     /**
@@ -139,149 +65,123 @@ public class GitHubUtil {
      */
     public static Image getProfilePicture(String userName) {
         assert userName != null && !userName.equals("") : "No UserName Found";
-        JSONObject jsonObject = null;
 
-        try {
-            jsonObject = getProfile(userName);
-        } catch (RuntimeException e) {
-            logger.severe("Profile Picture Could not be obtained. Using default.");
-            return defaultUserProfilePicture;
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
         }
 
-        assert jsonObject != null : "No Data Found";
-
-        String userProfileUrl = (String) jsonObject.get("avatar_url");
-        Image image = new Image(userProfileUrl);
-
-        return image;
+        String htmlString = establishConnectionForWebsite(userName);
+        if (htmlString == null) {
+            return DEFAULT_USER_PROFILE_PICTURE;
+        } else {
+            Pattern p = Pattern.compile(
+                    "(?<=class=avatar avatar-user)(.*?)(?=\\s*/>)");
+            Matcher m = p.matcher(htmlString);
+            String target = "";
+            while (m.find()) {
+                target = m.group();
+            }
+            target = target.split("src=")[1];
+            return new Image(target);
+        }
     }
 
+
     /**
-     * Returns a list of user repositories present on their GitHub.
-     *
+     * Returns the list of the most recently contributed repositories
+     * on a person's Github
      * @param userName The name of the user.
-     * @param page The page to start to get data from.
-     * @return An {@code ArrayList<String>} consisting of user repositories.
+     * @return a list of repository names
      */
-    public static ArrayList<String> getRepoNames(String userName, int page) throws RuntimeException {
-        establishConnectionForApi("users/" + userName + "/repos?per_page=100&page=" + page);
+    public static ArrayList<String> getRepoNames(String userName) {
 
-        JSONArray data = null;
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
 
-        if (responseCode != 200) {
-            logger.severe("Server responded with error code " + responseCode);
+        String htmlString = establishConnectionForWebsite(userName + "?tab=repositories");
+
+        if (htmlString == null) {
             throw new RuntimeException("Data could not be obtained.");
         } else {
-            StringBuilder inline = new StringBuilder();
+            Pattern p = Pattern.compile("(?<=codeRepository)(.*?)(?=</a>)");
+            Matcher m = p.matcher(htmlString);
+            ArrayList<String> repos = new ArrayList<>();
 
-            try {
-                Scanner scanner = new Scanner(url.openStream());
-
-                while (scanner.hasNext()) {
-                    inline.append(scanner.nextLine());
-                }
-
-                scanner.close();
-            } catch (IOException e) {
-                logger.severe("Data could not be obtained from the URL.");
+            while (m.find()) {
+                repos.add(StringUtil.clean(m.group(), ">"));
             }
 
-            try {
-                JSONParser jsonParser = new JSONParser();
-                data = (JSONArray) jsonParser.parse(inline.toString());
-            } catch (ParseException e) {
-                logger.severe("Data obtained could not be parsed into JSON Format.");
+            return repos;
+        }
+    }
+
+    private static HashMap<String, Double> getRepoLanguages(String userName, String repoName) {
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
+
+        String htmlString = establishConnectionForWebsite(userName + "/" + repoName);
+        if (htmlString == null) {
+            logger.severe("Data could not be obtained.");
+            return null;
+        } else {
+            Pattern p = Pattern.compile("(?<=color-text-primary text-bold mr-1)(.*?)(?=</a>)");
+            Matcher m = p.matcher(htmlString);
+            HashMap<String, Double> repoLanguages = new HashMap<>();
+            while (m.find()) {
+                String[] texts = StringUtil.clean(m.group(), ">").split("</span");
+                String language = texts[0];
+                String value = texts[1].replace(" <span", "").replace("%", "");
+                repoLanguages.put(language, Double.parseDouble(value) / 100);
             }
+            return repoLanguages;
         }
-        ArrayList<String> repos = new ArrayList<>();
-        assert data != null : "No Data Found";
+    }
 
-        for (Object o : data) {
-            JSONObject repo = (JSONObject) o;
-            repos.add(repo.get("name").toString());
-        }
+    private static void normalize(HashMap<String, Double> features) {
+        double sum = features.values().stream().parallel().mapToDouble(k -> k).sum();
+        features.keySet().stream().parallel().forEach(k -> {
+            features.replace(k, features.get(k) / sum);
+        });
+    }
 
-        if (repos.size() == 100) {
-            ArrayList<String> extras = getRepoNames(userName, page + 1);
-            repos.addAll(extras);
-        }
-
-        return repos;
+    private static void updateLanguageStats(HashMap<String, Double> total, HashMap<String, Double> stats) {
+        stats.keySet().stream().parallel().forEach(k -> {
+            if (total.containsKey(k)) {
+                total.replace(k, total.get(k) + stats.get(k));
+            } else {
+                total.put(k, stats.get(k));
+            }
+        });
     }
 
     /**
-     * Returns a boolean indicating whether the programming language has
-     * already been added to the list or not.
-     *
-     * @param language The language to check for.
-     * @param listOfLanguages The list consisting of programming languages.
-     * @return A boolean, indicating whether the language is present in the list or not.
-     */
-    public static boolean isProgrammingLanguagePresent(String language, ArrayList<String> listOfLanguages) {
-        for (int j = 0; j < listOfLanguages.size(); j++) {
-            if (listOfLanguages.get(j).equals(language)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Returns a list of programming languages the user has used
-     * and is familiar with.
+     * Returns the % of contribution of every language that a person
+     * has made on Github to date
      *
      * @param userName The name of the user.
-     * @return An {@code ArrayList<String>} consisting of programming languages.
+     * @return An {@code HashMap} object mapping Languages to their % found on GitHub
      */
-    public static ArrayList<String> getFamiliarProgrammingLanguages(String userName) throws RuntimeException {
-        ArrayList<String> programmingLanguages = new ArrayList<>();
-        ArrayList<String> userRepos = getRepoNames(userName, 0);
-
-        for (int i = 0; i < userRepos.size(); i++) {
-            establishConnectionForApi("repos/" + userName + "/" + userRepos.get(i) + "/languages");
-
-            JSONObject data = null;
-
-            if (responseCode != 200) {
-                logger.severe("Server responded with error code " + responseCode);
-                throw new RuntimeException("Data could not be obtained.");
-            } else {
-                StringBuilder inline = new StringBuilder();
-
-                try {
-                    Scanner scanner = new Scanner(url.openStream());
-
-                    while (scanner.hasNext()) {
-                        inline.append(scanner.nextLine());
-                    }
-
-                    scanner.close();
-                } catch (IOException e) {
-                    logger.severe("Data could not be obtained from the URL.");
-                }
-
-                try {
-                    JSONParser jsonParser = new JSONParser();
-                    data = (JSONObject) jsonParser.parse(inline.toString());
-                } catch (ParseException e) {
-                    logger.severe("Data obtained could not be parsed into JSON Format.");
-                }
-            }
-            assert data != null : "No Data Found";
-
-            Iterator<String> languages = data.keySet().iterator();
-            while (languages.hasNext()) {
-                String languageToAdd = (String) languages.next();
-                if (!isProgrammingLanguagePresent(languageToAdd, programmingLanguages)) {
-                    programmingLanguages.add(languageToAdd);
-                }
-            }
+    public static HashMap<String, Double> getLanguageStats(String userName) {
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
         }
-        return programmingLanguages;
+
+        ArrayList<String> repoNames = getRepoNames(userName);
+        HashMap<String, Double> languageStats = new HashMap<>();
+        repoNames.stream().parallel().forEach(repo -> {
+            HashMap<String, Double> tempStats = getRepoLanguages(userName, repo);
+            if (tempStats != null) {
+                updateLanguageStats(languageStats, tempStats);
+            }
+        });
+        normalize(languageStats);
+        return languageStats;
     }
 
     /**
-     * Returns the total number of commits/contributions a person on GitHub
+     * Returns the total number of contributions a person on GitHub
      * has made to date.
      *
      * @param userName The name of the user.
@@ -289,39 +189,27 @@ public class GitHubUtil {
      * @throws RuntimeException If the server did not respond well.
      */
     public static int getContributionsCount(String userName) throws RuntimeException {
-        establishConnectionForWebsite(userName);
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
+        String htmlString = establishConnectionForWebsite(userName);
 
-        if (responseCode != 200) {
-            logger.severe("Server responded with error code " + responseCode);
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
+
+        if (htmlString == null) {
             throw new RuntimeException("Data could not be obtained.");
         } else {
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            Pattern p = Pattern.compile("(?<=<h2 class=f4 text-normal mb-2>)(.*?)(?=</h2>)");
+            Matcher m = p.matcher(htmlString);
+            String target = "";
 
-                String inputLine;
-                StringBuilder html = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    html.append(inputLine);
-                }
-
-                in.close();
-
-                String htmlString = html.toString();
-
-                Pattern p = Pattern.compile("(?<=<h2 class=\"f4 text-normal mb-2\">)(.*?)(?=</h2>)");
-                Matcher m = p.matcher(htmlString);
-                String target = "";
-
-                while (m.find()) {
-                    target = m.group();
-                }
-
-                return Integer.parseInt(target.strip().split("\\s+")[0]);
-            } catch (IOException e) {
-                logger.severe("Contribution Count Could not be obtained.");
-                return -1;
+            while (m.find()) {
+                target = m.group();
             }
+
+            return Integer.parseInt(target.strip().split("\\s+")[0]);
         }
     }
 
@@ -334,41 +222,29 @@ public class GitHubUtil {
      * @throws RuntimeException If the server did not respond well.
      */
     public static int getRepoCount(String userName) throws RuntimeException {
-        establishConnectionForWebsite(userName);
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
+        String htmlString = establishConnectionForWebsite(userName);
 
-        if (responseCode != 200) {
-            logger.severe("Server responded with error code " + responseCode);
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
+
+        if (htmlString == null) {
             throw new RuntimeException("Data could not be obtained.");
         } else {
-            try {
-                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+            Pattern p = Pattern.compile("(?<=Repositories)(.*?)(?=</span>)");
+            Matcher m = p.matcher(htmlString);
+            String target = "";
 
-                String inputLine;
-                StringBuilder html = new StringBuilder();
-
-                while ((inputLine = in.readLine()) != null) {
-                    html.append(inputLine);
-                }
-
-                in.close();
-
-                String htmlString = html.toString();
-
-                Pattern p = Pattern.compile("(?<=Repositories)(.*?)(?=</span>)");
-                Matcher m = p.matcher(htmlString);
-                String target = "";
-
-                while (m.find()) {
-                    target = m.group();
-                }
-
-                return Integer.parseInt(target.split("class=\"Counter\">")[1]);
-            } catch (IOException e) {
-                logger.severe("Repo Count Could not be obtained.");
-                return -1;
+            while (m.find()) {
+                target = m.group();
             }
+            if (target.isBlank()) {
+                return 0;
+            }
+            return Integer.parseInt(target.split("class=Counter>")[1]);
         }
     }
-
-    //Add Storing capabilities for avatar_url
 }

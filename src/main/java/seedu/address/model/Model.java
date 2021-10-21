@@ -113,4 +113,11 @@ public interface Model {
      * @return PersonListPanel object
      */
     PersonListPanel getPersonListControl();
+
+    /**
+     * Selects the Tab at given index
+     *
+     * @param index the index of tab to select
+     */
+    void setTabIndex(int index);
 }
