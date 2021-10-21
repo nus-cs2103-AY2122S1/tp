@@ -238,6 +238,62 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Show Lab Results Feature 
+
+####  Implementation
+
+The show lab results feature allows the user to view the lab result list of a particular student. Its implementation introduces the following classes:
+* `ShowCommand`that extends `Command`
+* `ShowCommandParser` that implements `Parser<ShowCommand>`
+* `ShowCommandResult` that extends `CommandResult`
+
+The syntax of this command is `show <INDEX_ON_LIST>`. For instance,`show 1` asks ProgrammerError to display the lab results of student at index 1 of the current list.
+
+Given below is a possible usage scenario:
+
+[Pre-Condition] There are 2 students in ProgrammerError, and the user has created some lab results for each of them.
+
+Step 1. The user key in the command `show 1`: The information of the student at index 1 as well as his/her lab results are displayed on the side panel.
+
+The mechanism is as described below:
+
+* Upon detecting 'show' as the command word. `ProgrammerErrorParser` will create a `ShowCommandParser` with the input index.
+
+
+* `ShowCommandParser` parses the index and creates a `ShowCommand`, which finds the student to be shown according to the index and creates a `ShowCommandResult` with the student identified.
+  
+
+* `MainWindow` receives the `ShowCommandResult` and displays the information and lab results of the identifed student.
+
+
+Step 2. The user key in `show 2`: The side panel is updated with the information and lab results of the student at index 2
+
+Step 2. The user key in `show 3`: ProgrammerError will show an error message in the `resultDisplay`, warning the user that the index is invalid. This is triggered by `CommandException`, which is thrown by `ShowCommand`.
+
+
+The following sequence diagram shows how the show command works:
+
+![ShowSequenceDiagram](images/ShowSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![ShowActivityDiagram](images/ShowActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How Show Lab Results executes:**
+
+* **Alternative 1 (current choice):** Each student object keeps track of its own lab results by an ObservableList.
+    * Pros: Easy to implement; Lower chance of having mismatched student and lab records.
+    * Cons: Have to pass a `Student` instance across different classes; May have performance issue if more attributes are added for `Student` 
+
+* **Alternative 2:** An ObservableList of lab results of every student in ProgrammerError
+  itself.
+    * Pros: Potential improvement in performance by passing an index, instead of a `Student` instance, across different classes.
+    * Cons: Hard to implement, as we have to ensure the ObservableList of lab results and students have matching index 
+      (ie `Student` instance at index 1 of student list has its lab results at index 1 of lab results list),
+      given that other operations such as add and delete can change the indexes easily.
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
