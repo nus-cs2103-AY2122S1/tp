@@ -65,7 +65,7 @@ public class AddTaskCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
-        logger.log(Level.INFO, "adding task: " + toAdd.getName()
+        logger.log(Level.INFO, "adding task: " + toAdd.getTaskName()
                 + "into module: " + toAdd.getModuleNameString());
         model.addTask(moduleName, toAdd);
         return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, toAdd));

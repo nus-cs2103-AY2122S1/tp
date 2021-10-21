@@ -70,7 +70,7 @@ public class EditTaskCommand extends EditCommand {
                 // right module reached
                 List<Student> studentList = module.getFilteredStudentList();
                 for (Student student : studentList) {
-                    editTaskInformation(student);
+                    return editTaskInformation(student);
                 }
                 // return editTaskInformation(module); what to return here?
             }
@@ -91,10 +91,10 @@ public class EditTaskCommand extends EditCommand {
     public CommandResult editTaskInformation(Student student) throws CommandException {
         UniqueTaskList studentTaskList = student.getTaskList();
         for (Task task : studentTaskList) {
-            if (task.getTaskId().equals(editTaskDescriptor.getTaskId())) {
+            if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
                 Task editedTask = createEditedTask(task, editTaskDescriptor);
                 // replaces the old task with the editedTask
-                task = editedTask;
+                studentTaskList.setTask(task, editedTask);
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
             }
         }
@@ -146,7 +146,6 @@ public class EditTaskCommand extends EditCommand {
      * corresponding field value of the task.
      */
     public static class EditTaskDescriptor {
-        private ModuleName moduleName;
         private TaskId taskId;
         private TaskName taskName;
         private TaskDeadline taskDeadline;

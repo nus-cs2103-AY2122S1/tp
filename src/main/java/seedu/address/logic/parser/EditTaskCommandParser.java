@@ -13,9 +13,7 @@ import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleName;
-import seedu.address.model.task.TaskDeadline;
 import seedu.address.model.task.TaskId;
-import seedu.address.model.task.TaskName;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -33,18 +31,16 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
     public EditTaskCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_TASK_ID, PREFIX_MODULE_NAME,
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_TASK_ID, PREFIX_TASK_NAME,
                         PREFIX_TASK_DEADLINE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_TASK_NAME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_TASK_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE));
         }
 
         ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
         TaskId taskId = ParserUtil.parseTaskId(argMultimap.getValue(PREFIX_TASK_ID).get());
-        TaskName taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_NAME).get());
-        TaskDeadline taskDeadline = ParserUtil.parseTaskDeadline(argMultimap.getValue(PREFIX_TASK_DEADLINE).get());
 
         EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         if (argMultimap.getValue(PREFIX_TASK_NAME).isPresent()) {
@@ -59,8 +55,6 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             throw new ParseException(EditTaskCommand.MESSAGE_NOT_EDITED);
         }
         editTaskDescriptor.setTaskId(taskId);
-        editTaskDescriptor.setTaskName(taskName);
-        editTaskDescriptor.setTaskDeadline((taskDeadline));
         return new EditTaskCommand(moduleName, editTaskDescriptor);
     }
     /**
