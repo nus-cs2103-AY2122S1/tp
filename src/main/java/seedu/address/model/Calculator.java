@@ -4,10 +4,12 @@ package seedu.address.model;
  * This singleton class deals with calculating the rejection rate of a specified position only.
  */
 public class Calculator {
-    public static int calculateRejRate(int totalApplied, int totalRejected) {
+    public static final float INVALID_REJECTION_RATE = 1;
+
+    public static float calculateRejectionRate(int totalApplied, int totalRejected) {
         if (totalApplied == 0) {
-            return -1;
+            return INVALID_REJECTION_RATE;
         }
-        return totalRejected / totalApplied;
+        return (float)totalRejected / totalApplied;
     }
 }

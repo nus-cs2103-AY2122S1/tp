@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
+import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -316,20 +317,21 @@ public class ModelManager implements Model {
      * Initialise rejection rate of a new position.
      *
      * @param p The position to be initialised.
+     * @return
      */
     @Override
-    public int initialiseRejectionRate(Position p) {
+    public float calculateRejectionRate(Position p) {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
-            Position currentPosition = a.getPosition();
+            Position currentPosition = a.getApplication().getPosition();
             if (currentPosition == p) {
                 total++;
-                if (a.getApplicationStatus() == Application.ApplicationStatus.REJECTED) {
+                if (a.getApplication().getStatus() == ApplicationStatus.REJECTED) {
                     count++;
                 }
             }
         }
-        return Calculator.calculateRejRate(total, count);
+        return Calculator.calculateRejectionRate(total, count);
     }
 }
