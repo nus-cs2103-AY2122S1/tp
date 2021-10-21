@@ -154,6 +154,39 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### IncludeCommand
+
+This command adds multiple residents to an event by referencing the `Event` by its `Index` and the `Person` to add by their `Name` or `Room` through the `AddressBook#findPerson()` method.
+
+The following activity diagram illustrates how the `AddressBook#findPerson()` method works:
+
+![FindPersonActivityDiagram](images/logic/commands/includecommand/FindPersonActivityDiagram.png)
+
+The command extends the `Command` class and implements `IncludeCommand#execute()` to execute the command. A `ResidentList` which contains a list of `Person` to add to an `Event`, is a field added to an `Event`.
+
+When `Event#addResidentsToEvent()` is called, it calls `ResidentList#addResidentList()` to create a new String `newResidents` that consists of current `Person` in the `Event` and append all the `Person` in `toAdd` to this String while making sure that there is no duplicate.
+
+The following sequence diagram demonstrates what happens when the `IncludeCommand` is executed:
+
+![IncludeCommandSequenceDiagram](images/logic/commands/includecommand/IncludeCommandSequenceDiagram.png)
+
+The following activity diagram summarizes what happens when the `IncludeCommand` is executed:
+
+![IncludeCommandActivityDiagram](images/logic/commands/includecommand/IncludeCommandActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to reference event in the CLI:**
+
+* **Alternative 1 (current choice):** Reference by `Index`.
+    * Pros: Easy to reference and no need to type out the whole `eventName`, `Index` is also unique.
+    * Cons: Need to find the `Index` of the `Event` in the UI to know what `Index` the `Event` has if the number of `Event` is large.
+
+* **Alternative 2:** Reference by `eventName`.
+  itself.
+    * Pros: Do not need to have the `Index` in UI to know what `Event` it is, can just reference it by its name.
+    * Cons: Hard to type when the `eventName` is long, `eventName` not being unique will also cause issues .
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -264,7 +297,7 @@ _{Explain here how the data archiving feature will be implemented}_
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
 
-**Value proposition**: Manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions 
+**Value proposition**: Manage residents' information faster than a typical mouse/GUI driven app and allow easy enforcement of Covid-19 restrictions
 
 
 ### User stories
@@ -342,8 +375,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. Actor filters residents, specifying desired FET due date.
 2. System shows the list of residents filtered.
-3. Actor requests for a list of the email addresses of the residents shown. 
-4. System outputs the list email addresses. 
+3. Actor requests for a list of the email addresses of the residents shown.
+4. System outputs the list email addresses.
 5. Actor sends an email to these residents to remind them to take their FET soon.
 
     Use case ends.
