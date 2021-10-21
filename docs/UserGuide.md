@@ -6,6 +6,8 @@ title: User Guide
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
+This document serves as a guide to help you get started on how to set up and use **TuitiONE**. To start, explore the 'Quick start' section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections to learn more in detail. The 'Command summary' at the end of the document lists a table with all the commands present and their syntax.
+
 * Table of Contents
 {:toc}
 
@@ -229,9 +231,17 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all student and lesson entries from the TuitiONE.
+Clears all students and lessons from the TuitiONE.
 
 Command Format: `clear`
+
+<div markdown="span" class="alert alert-warning">
+
+:exclamation: **Caution:**
+
+Using this command removes all data from TuitiONE. Only use this command if you want to reset all information on the application and start anew.
+
+</div>
 
 ### Exiting the program : `exit`
 
