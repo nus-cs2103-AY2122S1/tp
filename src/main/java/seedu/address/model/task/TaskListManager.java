@@ -16,7 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
- * Serves as a main data base for every {@code Person}'s taskList.
+ * Serves as a main database for every {@code Person}'s taskList.
  * Manages which {@code Person}'s taskList to display on the GUI.
  */
 public class TaskListManager {

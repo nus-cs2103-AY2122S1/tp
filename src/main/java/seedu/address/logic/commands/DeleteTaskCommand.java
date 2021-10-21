@@ -5,10 +5,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -16,7 +18,7 @@ import seedu.address.model.task.Task;
 
 public class DeleteTaskCommand extends Command {
 
-    public static final String MESSAGE_SUCCESS = "Removed %1$s task from %2$s";
+    public static final String MESSAGE_SUCCESS = "Removed %1$d %2$s from %3$s";
     public static final String COMMAND_WORD = "deletetask";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the task, specified by the TASKINDEX, from person"
@@ -29,18 +31,18 @@ public class DeleteTaskCommand extends Command {
             + "from person specified by the INDEX";
 
     private final Index targetPersonIndex;
-    private final Index targetTaskIndex;
+    private final List<Index> targetTaskIndexes;
 
     /**
      * Constructor for a DeleteTaskCommand to delete a task from a person.
      * @param targetPersonIndex The Index of the target person.
-     * @param targetTaskIndex The Index of the target Task that belongs to target person.
+     * @param targetTaskIndexes The Index of the target Task that belongs to target person.
      */
-    public DeleteTaskCommand(Index targetPersonIndex, Index targetTaskIndex) {
+    public DeleteTaskCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
         requireNonNull(targetPersonIndex);
-        requireNonNull(targetTaskIndex);
+        requireNonNull(targetTaskIndexes);
         this.targetPersonIndex = targetPersonIndex;
-        this.targetTaskIndex = targetTaskIndex;
+        this.targetTaskIndexes = targetTaskIndexes;
     }
 
     @Override
@@ -58,13 +60,23 @@ public class DeleteTaskCommand extends Command {
         //Make new copy for defensive programming.
         List<Task> tasks = new ArrayList<>();
         tasks.addAll(personToEdit.getTasks());
+        List<Index> copyOfIndexList = new ArrayList<>();
+        copyOfIndexList.addAll(targetTaskIndexes);
 
-        if (targetTaskIndex.getZeroBased() >= tasks.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
+        Collections.sort(copyOfIndexList, Collections.reverseOrder());
+
+        for (Index targetTaskIndex : targetTaskIndexes) {
+            if (targetTaskIndex.getZeroBased() >= tasks.size()) {
+                throw new CommandException(String.format(Messages.MESSAGE_INVALID_TASK, personToEdit.getName()));
+            }
         }
 
-        Task taskToRemove = tasks.get(targetTaskIndex.getZeroBased());
-        tasks.remove(targetTaskIndex.getZeroBased());
+        List<Task> tasksToRemove = new ArrayList<>();
+        for (Index targetTaskIndex : copyOfIndexList) {
+            Task taskToRemove = tasks.get(targetTaskIndex.getZeroBased());
+            tasksToRemove.add(taskToRemove);
+            tasks.remove(targetTaskIndex.getZeroBased());
+        }
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -73,7 +85,7 @@ public class DeleteTaskCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, taskToRemove));
+        return new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
     }
 
     public String getCommand() {
@@ -89,8 +101,9 @@ public class DeleteTaskCommand extends Command {
      * the task removed.
      * {@code personToEdit}.
      */
-    private String generateSuccessMessage(Person personToEdit, Task taskRemoved) {
-        return String.format(MESSAGE_SUCCESS, taskRemoved.getTaskName(), personToEdit.getName());
+    private String generateSuccessMessage(Person personToEdit, int amount) {
+        String taskOrTasks = StringUtil.singularOrPlural("task", amount);
+        return String.format(MESSAGE_SUCCESS, amount, taskOrTasks, personToEdit.getName());
     }
 
     @Override
@@ -98,6 +111,6 @@ public class DeleteTaskCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
                 && targetPersonIndex.equals(((DeleteTaskCommand) other).targetPersonIndex)
-                && targetTaskIndex.equals(((DeleteTaskCommand) other).targetTaskIndex)); // state check
+                && targetTaskIndexes.equals(((DeleteTaskCommand) other).targetTaskIndexes)); // state check
     }
 }
