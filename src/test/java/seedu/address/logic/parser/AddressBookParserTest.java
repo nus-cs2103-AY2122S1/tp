@@ -20,12 +20,15 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMarkedCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MarkCommand;
+import seedu.address.logic.commands.UnmarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -58,12 +61,32 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_deleteMarked() throws Exception {
+        assertTrue(parser.parseCommand(DeleteMarkedCommand.COMMAND_WORD) instanceof DeleteMarkedCommand);
+        assertTrue(parser.parseCommand(DeleteMarkedCommand.COMMAND_WORD + " 3") instanceof DeleteMarkedCommand);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_mark() throws Exception {
+        MarkCommand command = (MarkCommand) parser.parseCommand(
+                MarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new MarkCommand(new Index[]{INDEX_FIRST_PERSON}), command);
+    }
+
+    @Test
+    public void parseCommand_unmark() throws Exception {
+        UnmarkCommand command = (UnmarkCommand) parser.parseCommand(
+                UnmarkCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new UnmarkCommand(new Index[]{INDEX_FIRST_PERSON}), command);
     }
 
     @Test

@@ -44,7 +44,7 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_LEVEL_OF_EDUCATION = BENSON.getLevelOfEducation().toString();
     private static final String VALID_EXPERIENCE = BENSON.getExperience().toString();
     private static final String VALID_INTERVIEW = BENSON.getInterview().get().toString();
-
+    private static final String VALID_DONE = BENSON.getDone().toString();
 
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
@@ -60,7 +60,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(INVALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -69,7 +69,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullName_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(null, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -78,7 +78,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, INVALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -87,7 +87,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, null, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -96,7 +96,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, INVALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = Email.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -105,7 +105,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullEmail_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, null,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -114,7 +114,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidRole_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 INVALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = Role.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -123,7 +123,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullRole_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 null, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -132,7 +132,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidEmploymentType_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, INVALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = EmploymentType.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -141,7 +141,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullEmploymentType_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, null, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, EmploymentType.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -150,7 +150,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidExpectedSalary_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, INVALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = ExpectedSalary.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -159,7 +159,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullExpectedSalary_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, null,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ExpectedSalary.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -168,7 +168,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidLevelOfEducation_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                INVALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                INVALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = LevelOfEducation.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -177,7 +177,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullLevelOfEducation_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                null, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                null, VALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, LevelOfEducation.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -186,7 +186,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidExperience_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, INVALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, INVALID_EXPERIENCE, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = Experience.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -195,7 +195,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_nullExperience_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, null, VALID_TAGS, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, null, VALID_TAGS, VALID_INTERVIEW, VALID_DONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Experience.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
@@ -206,7 +206,7 @@ public class JsonAdaptedPersonTest {
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, invalidTags, VALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, invalidTags, VALID_INTERVIEW, VALID_DONE);
         assertThrows(IllegalValueException.class, person::toModelType);
     }
 
@@ -214,7 +214,7 @@ public class JsonAdaptedPersonTest {
     public void toModelType_invalidInterview_throwsIllegalValueException() {
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ROLE, VALID_EMPLOYMENT_TYPE, VALID_EXPECTED_SALARY,
-                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, INVALID_INTERVIEW);
+                VALID_LEVEL_OF_EDUCATION, VALID_EXPERIENCE, VALID_TAGS, INVALID_INTERVIEW, VALID_DONE);
         String expectedMessage = Interview.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
