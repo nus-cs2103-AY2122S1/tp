@@ -311,6 +311,23 @@ Alternative 1 is selected, implemented using additional`StackPane` on top of the
 for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
 component in `MainWindow`.
 
+### Adding contacts to folder : `echo index1 ... indexN >> Folder`
+
+###Implementation
+Contacts are added by updating the `ObservableList` in `UniqueFolderList`.
+A new `Folder` object is created containing the new `Person` and replaces the old folder in the `UniqueFolderList`.
+
+#### Design considerations
+
+* Alternative 1: If there is an invalid index, allow adding of contact for the remaining valid index
+    * Pros: Easier to implement.
+    * Cons: Difficult for user to know which contacts have been added into the folder
+* Alternative 2: Only allow adding of contacts when all indexes are valid
+    * Pros: Easier for user to know which contacts have been added into the folder
+    * Cons: Requires more code and effort to ensure all indexes are valid before adding them to folder
+
+Alternative 2 is selected, as it is more user-friendly and intuitive.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
