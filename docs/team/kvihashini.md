@@ -9,7 +9,7 @@ Tutor Master is a desktop app for freelance tutors to manage their students’ g
 
 Given below are my contributions to the project.
 
-* **New Features**: 
+* **New Features**:
     * Added skeleton model for Groups. [\#48](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/48)
     * Added 'view student' command and wrote tests for the command. [\#47](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/47)
 * **Documentation**:
@@ -17,7 +17,7 @@ Given below are my contributions to the project.
         * Added documentation for the features `delete task` and `assign task` [\#10](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/10)
     * Developer Guide:
         * Added non-functional requirements and glossary terms. [\#3](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/3), [\#4](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/4)
-    * README: 
+    * README:
         * Updated README to match project. [\#25](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/25)
 * **UI**
     * Product:

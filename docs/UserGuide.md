@@ -71,8 +71,7 @@ Views a info page for a list of commands and examples
 Format: `help`
 
 ### Adding a student: `student -a`
-<details>
-<summary>Adds a student to the students list.</summary>
+<details markdown="1"><summary>Adds a student to the students list.</summary>
 
 Format: `student -a -n NAME [-c CONTACT] [-em EMAIL] [-s DAY/STARTTIME/ENDTIME]​`
 
@@ -90,9 +89,8 @@ Examples:
 </details>
 
 ### Viewing a student: `student -v`
-<details>
-<summary>Views a particular student's details given by the specified index from the
-persons list.</summary>
+<details markdown="1">
+<summary>Views a particular student's details given by the specified index from the persons list.</summary>
 
 Format: `student -v INDEX`
 
@@ -104,7 +102,7 @@ Examples:
 </details>
 
 ### Editing a student: `student -e`
-<details>
+<details markdown="1">
 <summary>
 Edits the detail of a specific student.
 </summary>
@@ -124,7 +122,7 @@ Example:
 </details>
 
 ### Deleting a student: `student -d`
-<details>
+<details markdown="1">
 <summary>
 Deletes the specific student given by the specified index from the persons list.
 </summary>
@@ -147,7 +145,7 @@ Shows a list of all students in the students list.
 Format: `list`
 
 ### Locating students by name: `student -f`
-<details>
+<details markdown="1">
 <summary>
 Finds students whose names contain any of the given keywords.
 </summary>
@@ -168,7 +166,7 @@ Examples:
 
 ### Adding a lesson to a student: `student -al`
 
-<details>
+<details markdown="1">
 <summary>
 Adds a lesson to the specific student
 </summary>
@@ -188,7 +186,7 @@ Example:
 </details>
 
 ### Deleting a lesson from a student: `student -dl`
-<details>
+<details markdown="1">
 <summary>
 Deletes a lesson from the specific student
 </summary>
@@ -204,7 +202,7 @@ Example:
 </details>
 
 ### Adding an exam to a student: `student -ae`
-<details>
+<details markdown="1">
 <summary>
 Adds an exam to the specific student
 </summary>
@@ -221,7 +219,7 @@ Example:
 </details>
 
 ### Deleting an exam from a student: `student -de`
-<details>
+<details markdown="1">
 <summary>
 Deletes a lesson from the specific student
 </summary>
@@ -235,7 +233,7 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 * `student -de 1 1` deletes the first exam from the first student.
 </details>
 
-### Grouping students 
+### Grouping students
 
 Groups students by their names together. This grouping helps to distinguish between various tuition groups.
 
@@ -287,7 +285,7 @@ Format: `task -e INDEX [n/NAME] [d/DEADLINE]`
 * The current value will be updated to the value input by the user
 
 Examples:
-* `task -e 4 d/20211231` edits the deadline to 20211231 
+* `task -e 4 d/20211231` edits the deadline to 20211231
 
 ### Deleting a task `[coming in v1.3]`
 
