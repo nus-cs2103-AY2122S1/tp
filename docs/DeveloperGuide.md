@@ -602,6 +602,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | Customer Service Officer                   | know the command format to enter     | learn to use the application                                     |
 | `* *`    | Customer Service Officer                   | know how much a student has to pay per week | remind the parents to pay punctually                      |
 | `* *`    | Customer Service Officer                   | leave remarks                        | make lessons more convenient for tutors and students in the case they are unable to make it for a specific lesson |
+| `* *`    | Customer Service Officer                   | view the roster of a specific lesson | see the list of students attending the lesson, and make an attendance sheet |
 | `*`      | Customer Service Officer                   | know a student's attendance          | inform teachers or find out why students are missing lessons     |
 | `*`      | Customer Service Officer                   | record a student's attendance        | keep track of student's attendance                               |
 | `*`      | Customer Service Officer                   | update details of existing lessons   | change the specifics of the lesson                               |
@@ -816,7 +817,7 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 
     Use case resumes at step 3.
 
-* 2b. Lesson does not exists in TuitiONE.
+* 2b. Lesson does not exist in TuitiONE.
     * 2b1. TuitiONE informs that there does not exist such a Lesson.
 
     Use case ends.
@@ -930,6 +931,30 @@ For all use cases below, the **System** is the `TuitiONE` and the **Actor** is t
 1. CSO enters help.
 2. TuitiONE provides the basic commands, as well as the user guide link.
 
+    Use case ends.
+    
+#### UC13: View Lesson Roster
+
+**MSS**
+
+1. CSO views the current list of lessons, or <ins>filter lesson(s) by their grade and/or subject (UC04)</ins>.
+2. CSO requests to view the roster of a specific lesson.
+3. TuitiONE presents the lesson roster.
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. TuitiONE detects an error in entered command.
+    * 2a1. TuitiONE requests CSO to input a valid command.
+    * 2a2. CSO enters new command.
+      Steps 2a1-2a2 are repeated until the data entered are correct.
+
+    Use case resumes at step 3.
+
+* 2b. There are no students enrolled in the lesson.
+    * 2b1. TuitiONE informs that there are no students in the lesson roster.
+    
     Use case ends.
 
 ### Non-Functional Requirements
