@@ -1,17 +1,20 @@
 package seedu.address.model.person;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
-import seedu.address.model.person.exceptions.DuplicateNextMeetingException;
-import seedu.address.model.person.exceptions.MeetingNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
+import seedu.address.model.person.exceptions.DuplicateNextMeetingException;
+import seedu.address.model.person.exceptions.MeetingNotFoundException;
+
+
+
+
 
 /**
  * A list of NextMeetings that enforces uniqueness between its elements and does not allow nulls.
@@ -55,7 +58,7 @@ public class UniqueNextMeetingList implements Iterable<NextMeeting> {
      */
     public NextMeeting getNextMeeting(Name withWho) {
         ObservableList<NextMeeting> meetingInQuestion = internalList
-                .filtered(meeting -> meeting.withWho.equals(withWho));
+                .filtered(meeting -> meeting.getWithWho().equals(withWho));
         if (meetingInQuestion.isEmpty()) {
             throw new MeetingNotFoundException();
         }
@@ -101,10 +104,15 @@ public class UniqueNextMeetingList implements Iterable<NextMeeting> {
         return internalSortedList;
     }
 
+    /**
+     * Deletes all meetings whose client name matches the names of person in {@code ObservableList}.
+     */
     public void deleteByPersons(List<Person> toDelete) {
         toDelete.stream().forEach((person) -> {
             if (person.getNextMeeting() != null) {
-                this.remove(person.getNextMeeting());
+                if (contains(person.getNextMeeting())) {
+                    this.remove(person.getNextMeeting());
+                }
             }
         });
     }

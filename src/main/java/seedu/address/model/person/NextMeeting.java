@@ -33,7 +33,7 @@ public class NextMeeting implements OptionalPersonNonStringField {
     public final String startTimeInString;
     public final String endTimeInString;
     public final String location;
-    public Name withWho;
+    private Name withWho;
 
     /**
      * Constructs a {@code NextMeeting}.
@@ -67,6 +67,10 @@ public class NextMeeting implements OptionalPersonNonStringField {
         this.endTime = parseToLocalTime(endTime);
     }
 
+    public Name getWithWho() {
+        return this.withWho;
+    }
+
     public void setWithWho(Name withWho) {
         this.withWho = withWho;
     }
@@ -96,10 +100,12 @@ public class NextMeeting implements OptionalPersonNonStringField {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof NextMeeting // instanceof handles nulls
-            && dateInString.equals(((NextMeeting) other).dateInString)
+            && dateInString.equals(((NextMeeting) other).dateInString) // state check
             && startTimeInString.equals(((NextMeeting) other).startTimeInString)
             && endTimeInString.equals(((NextMeeting) other).endTimeInString)
             && location.equals(((NextMeeting) other).location)
-            && withWho.equals(((NextMeeting) other).withWho)); // state check
+            && (((withWho != null) && ((NextMeeting) other).withWho != null)
+                ? withWho.equals(((NextMeeting) other).withWho)
+                : ((withWho == null) && ((NextMeeting) other).withWho == null) ? true : false));
     }
 }
