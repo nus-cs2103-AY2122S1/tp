@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.appointment.AppointmentContainsDoctorPredicate;
@@ -23,19 +25,19 @@ public class AppointmentFilters {
     /**
      * Appointment starts after a certain point in time.
      */
-    private Predicate<Appointment> startAfter = x -> true;
+    private Predicate<Appointment> startAfter;
     /**
      * Appointment starts before a certain point in time.
      */
-    private Predicate<Appointment> startBefore = x -> true;
+    private Predicate<Appointment> startBefore;
     /**
      * Appointment contains a patient whose names matches a given set of keywords.
      */
-    private Predicate<Appointment> hasPatient = x -> true;
+    private Predicate<Appointment> hasPatient;
     /**
      * Appointment contains a doctor whose names matches a given set of keywords.
      */
-    private Predicate<Appointment> hasDoctor = x -> true;
+    private Predicate<Appointment> hasDoctor;
 
     private AppointmentFilters() {}
 
@@ -97,7 +99,23 @@ public class AppointmentFilters {
         List<Predicate<Appointment>> allPredicates = new ArrayList<>(
                 Arrays.asList(startAfter, startBefore, hasPatient, hasDoctor));
 
-        return allPredicates.stream().reduce(Predicate::and).orElse(x -> true);
+        return allPredicates.stream().map(x -> Optional.ofNullable(x).orElse(y -> true))
+                .reduce(Predicate::and).orElse(x -> true);
+    }
+
+    public String getFilterDetails() {
+        List<Predicate<Appointment>> allPredicates = new ArrayList<>(
+                Arrays.asList(startAfter, startBefore, hasPatient, hasDoctor));
+
+        return allPredicates.stream().map(x -> Optional.ofNullable(x).map(Object::toString).orElse(""))
+                .collect(Collectors.joining()).trim();
+    }
+
+    public String getUpcomingFilterDetails() {
+        List<Predicate<Appointment>> allPredicates = new ArrayList<>(Arrays.asList(hasPatient, hasDoctor));
+
+        return allPredicates.stream().map(x -> Optional.ofNullable(x).map(Object::toString).orElse(""))
+                .collect(Collectors.joining()).trim();
     }
 
     @Override
@@ -108,9 +126,9 @@ public class AppointmentFilters {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AppointmentFilters that = (AppointmentFilters) o;
-        return startAfter.equals(that.startAfter) && startBefore.equals(that.startBefore)
-                && hasPatient.equals(that.hasPatient) && hasDoctor.equals(that.hasDoctor);
+        AppointmentFilters filters = (AppointmentFilters) o;
+        return Objects.equals(startAfter, filters.startAfter) && Objects.equals(startBefore, filters.startBefore)
+                && Objects.equals(hasPatient, filters.hasPatient) && Objects.equals(hasDoctor, filters.hasDoctor);
     }
 
     @Override

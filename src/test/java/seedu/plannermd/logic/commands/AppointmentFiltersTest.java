@@ -5,6 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.plannermd.logic.commands.CommandTestUtil.FILTER_VALID_END_DATE;
 import static seedu.plannermd.logic.commands.CommandTestUtil.FILTER_VALID_START_DATE;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_STRING_END_DATE;
+import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_STRING_START_DATE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_END;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -85,5 +91,32 @@ class AppointmentFiltersTest {
         assertThrows(NullPointerException.class, () -> sampleFilter.setStartAfter(null));
         assertThrows(NullPointerException.class, () -> sampleFilter.setHasPatient(null));
         assertThrows(NullPointerException.class, () -> sampleFilter.setHasDoctor(null));
+    }
+
+    @Test
+    public void testFilterDetails() {
+        String userInput = PREFIX_START + VALID_STRING_START_DATE + " " + PREFIX_END + VALID_STRING_END_DATE + " "
+                + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John";
+        AppointmentFilters filters = new AppointmentFiltersBuilder().withPatientKeywords("Alice")
+                .withDoctorKeywords("John").withStartDate(FILTER_VALID_START_DATE)
+                .withEndDate(FILTER_VALID_END_DATE).build();
+        assertEquals(userInput, filters.getFilterDetails());
+
+        userInput = PREFIX_START + VALID_STRING_START_DATE + " " + PREFIX_END + VALID_STRING_END_DATE;
+        filters = new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE)
+                .withEndDate(FILTER_VALID_END_DATE).build();
+        assertEquals(userInput, filters.getFilterDetails());
+    }
+
+    @Test
+    public void testUpcomingFilterDetails() {
+        String userInput = PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John";
+        AppointmentFilters filters = new AppointmentFiltersBuilder().withUpcoming().withPatientKeywords("Alice")
+                .withDoctorKeywords("John").build();
+        assertEquals(userInput, filters.getUpcomingFilterDetails());
+
+        userInput = PREFIX_PATIENT + "Alice";
+        filters = new AppointmentFiltersBuilder().withUpcoming().withPatientKeywords("Alice").build();
+        assertEquals(userInput, filters.getUpcomingFilterDetails());
     }
 }

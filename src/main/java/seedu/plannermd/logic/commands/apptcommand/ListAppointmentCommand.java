@@ -15,6 +15,7 @@ import seedu.plannermd.model.appointment.AppointmentIsAfterPredicate;
  */
 public class ListAppointmentCommand extends AppointmentCommand {
 
+    public static final String COMMAND_WORD = "appt -l";
     public static final String MESSAGE_SUCCESS = "Listed all appointments for today.";
 
     @Override

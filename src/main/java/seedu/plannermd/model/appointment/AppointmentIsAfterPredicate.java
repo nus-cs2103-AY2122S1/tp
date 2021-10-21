@@ -1,6 +1,7 @@
 package seedu.plannermd.model.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -45,4 +46,8 @@ public class AppointmentIsAfterPredicate implements Predicate<Appointment> {
                 && filterStartDateTime.equals(((AppointmentIsAfterPredicate) other).filterStartDateTime));
     }
 
+    @Override
+    public String toString() {
+        return PREFIX_START + filterStartDateTime.format(AppointmentDate.DATE_FORMATTER) + " ";
+    }
 }

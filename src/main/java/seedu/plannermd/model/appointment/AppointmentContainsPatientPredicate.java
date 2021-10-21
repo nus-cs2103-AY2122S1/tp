@@ -1,6 +1,7 @@
 package seedu.plannermd.model.appointment;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -33,5 +34,10 @@ public class AppointmentContainsPatientPredicate implements Predicate<Appointmen
         return other == this // short circuit if same object
                 || (other instanceof AppointmentContainsPatientPredicate // instanceof handles nulls
                 && keywords.equals(((AppointmentContainsPatientPredicate) other).keywords)); // state check
+    }
+
+    @Override
+    public String toString() {
+        return PREFIX_PATIENT + String.join(" ", keywords) + " ";
     }
 }

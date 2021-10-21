@@ -56,15 +56,13 @@ public class FilterAppointmentCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John "
-                + PREFIX_START + VALID_STRING_START_DATE + " " + PREFIX_END + VALID_STRING_END_DATE;
         AppointmentFilters filters = new AppointmentFiltersBuilder().withPatientKeywords("Alice")
                 .withDoctorKeywords("John").withStartDate(FILTER_VALID_START_DATE)
                 .withEndDate(FILTER_VALID_END_DATE).build();
         FilterAppointmentCommand expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
         // Whitespace before and after user input
-        userInput = "   " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John " + PREFIX_START
+        String userInput = "   " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John " + PREFIX_START
                 + VALID_STRING_START_DATE + " " + PREFIX_END + VALID_STRING_END_DATE + " ";
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -72,68 +70,60 @@ public class FilterAppointmentCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         // Patient name and start date
-        String userInput = PREFIX_PATIENT + "Alice Doe " + PREFIX_START + VALID_STRING_START_DATE;
         AppointmentFilters filters = new AppointmentFiltersBuilder().withPatientKeywords("Alice", "Doe")
                 .withStartDate(FILTER_VALID_START_DATE).build();
         FilterAppointmentCommand expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
 
         // Start date and end date
-        userInput = PREFIX_START + VALID_STRING_START_DATE + " " + PREFIX_END + VALID_STRING_END_DATE;
         filters = new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE)
                 .withEndDate(FILTER_VALID_END_DATE).build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
 
         // Same start date and end date -> should filter all appointments on that day
-        userInput = PREFIX_START + VALID_STRING_START_DATE + " " + PREFIX_END + VALID_STRING_START_DATE;
         filters = new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE)
                 .withEndDate(FILTER_VALID_START_DATE).build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
     }
 
     @Test
     public void parse_oneFieldSpecified_success() {
         // Patient name - 1 word
-        String userInput = PREFIX_PATIENT + "John";
         AppointmentFilters filters = new AppointmentFiltersBuilder().withPatientKeywords("John").build();
         FilterAppointmentCommand expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
-        userInput = PREFIX_PATIENT + "  John"; // White spaces around name
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
+        String userInput = PREFIX_PATIENT + "  John"; // White spaces around name
         assertParseSuccess(parser, userInput, expectedCommand);
 
 
         // Patient name - multiple words
-        userInput = PREFIX_PATIENT + "John Doe";
         filters = new AppointmentFiltersBuilder().withPatientKeywords("John", "Doe").build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
         userInput = PREFIX_PATIENT + "John   Doe"; // More than 1 white space
         assertParseSuccess(parser, userInput, expectedCommand);
 
 
         // Doctor name - 1 word
-        userInput = PREFIX_DOCTOR + "John";
         filters = new AppointmentFiltersBuilder().withDoctorKeywords("John").build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
         userInput = PREFIX_DOCTOR + "  John"; // White spaces around name
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Doctor name - multiple words
-        userInput = PREFIX_DOCTOR + "John Doe";
         filters = new AppointmentFiltersBuilder().withDoctorKeywords("John", "Doe").build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
         userInput = PREFIX_DOCTOR + "John   Doe"; // More than 1 white space
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // With valid start date
-        userInput = PREFIX_START + VALID_STRING_START_DATE;
         filters = new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE).build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
         userInput = PREFIX_START + " " + VALID_STRING_START_DATE; // Whitespace before startDate
         assertParseSuccess(parser, userInput, expectedCommand);
         userInput = PREFIX_START + "2/8/2021"; // Single digit date and month
@@ -143,10 +133,9 @@ public class FilterAppointmentCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // With valid end date
-        userInput = PREFIX_END + VALID_STRING_END_DATE;
         filters = new AppointmentFiltersBuilder().withEndDate(FILTER_VALID_END_DATE).build();
         expectedCommand = new FilterAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getFilterDetails(), expectedCommand);
         userInput = PREFIX_END + " " + VALID_STRING_END_DATE + "  "; // Whitespace before endDate
         assertParseSuccess(parser, userInput, expectedCommand);
         userInput = PREFIX_END + "2/8/2021"; // Single digit date and month

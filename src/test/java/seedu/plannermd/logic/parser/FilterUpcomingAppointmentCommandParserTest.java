@@ -38,49 +38,44 @@ public class FilterUpcomingAppointmentCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        String userInput = PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John";
         AppointmentFilters filters = new AppointmentFiltersBuilder().withUpcoming().withPatientKeywords("Alice")
                 .withDoctorKeywords("John").build();
         FilterUpcomingAppointmentCommand expectedCommand = new FilterUpcomingAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getUpcomingFilterDetails(), expectedCommand);
         // Whitespace before and after user input
-        userInput = "   " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John  ";
+        String userInput = "   " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "John   ";
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_oneFieldSpecified_success() {
         // Patient name - 1 word
-        String userInput = PREFIX_PATIENT + "John";
         AppointmentFilters filters = new AppointmentFiltersBuilder().withUpcoming()
                 .withPatientKeywords("John").build();
         FilterUpcomingAppointmentCommand expectedCommand = new FilterUpcomingAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
-        userInput = PREFIX_PATIENT + "  John"; // White spaces around name
+        assertParseSuccess(parser, filters.getUpcomingFilterDetails(), expectedCommand);
+        String userInput = PREFIX_PATIENT + "  John"; // White spaces around name
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Patient name - multiple words
-        userInput = PREFIX_PATIENT + "John Doe";
         filters = new AppointmentFiltersBuilder().withUpcoming().withPatientKeywords("John", "Doe").build();
         expectedCommand = new FilterUpcomingAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getUpcomingFilterDetails(), expectedCommand);
         userInput = PREFIX_PATIENT + "John   Doe"; // More than 1 white space
         assertParseSuccess(parser, userInput, expectedCommand);
 
 
         // Doctor name - 1 word
-        userInput = PREFIX_DOCTOR + "John";
         filters = new AppointmentFiltersBuilder().withUpcoming().withDoctorKeywords("John").build();
         expectedCommand = new FilterUpcomingAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getUpcomingFilterDetails(), expectedCommand);
         userInput = PREFIX_DOCTOR + "  John"; // White spaces around name
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // Doctor name - multiple words
-        userInput = PREFIX_DOCTOR + "John Doe";
         filters = new AppointmentFiltersBuilder().withUpcoming().withDoctorKeywords("John", "Doe").build();
         expectedCommand = new FilterUpcomingAppointmentCommand(filters);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(parser, filters.getUpcomingFilterDetails(), expectedCommand);
         userInput = PREFIX_DOCTOR + "John   Doe"; // More than 1 white space
         assertParseSuccess(parser, userInput, expectedCommand);
     }
