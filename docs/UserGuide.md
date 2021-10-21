@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: User Guide
 ---
 
@@ -9,7 +9,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 <!---
@@ -43,15 +43,15 @@ type fast, Socius can get your contact management tasks done faster than traditi
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
 1. *Double-click* the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
-   
+
    ![Ui](images/Ui.png)
-   
+
 1. Note that the app comes with some sample data by default. Type `clear` in the command box to remove those sample data.
 
 1. You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
 
 1. The following are some example of commands you can try. Type the command in the command box and press `⤷Enter` to execute it.
-    
+
     * **`list`** : Lists all contacts.
 
     * **`add`** `n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
