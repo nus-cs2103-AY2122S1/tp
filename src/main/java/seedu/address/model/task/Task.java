@@ -1,5 +1,6 @@
 package seedu.address.model.task;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,11 +12,11 @@ import seedu.address.model.tag.Tag;
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task {
+public class Task implements Comparable<Task>, Cloneable {
 
-    private final TaskName name;
-    private final Set<Tag> tags = new HashSet<>();
-    private final String description;
+    private TaskName name;
+    private Set<Tag> tags = new HashSet<>();
+    private String description;
     private boolean isDone;
 
     /**
@@ -67,10 +68,12 @@ public class Task {
     public boolean isSameTask(Task otherTask) {
         if (otherTask == this) {
             return true;
+        } else if (this.getClass().equals(otherTask.getClass())) {
+            return otherTask.getName().equals(getName()) && otherTask.getDate().equals(getDate())
+                    && otherTask.getDescription().equals(getDescription());
+        } else {
+            return false;
         }
-
-        return otherTask != null
-                && otherTask.getName().equals(getName());
     }
 
     /**
@@ -89,10 +92,10 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
-                && otherTask.getTags().equals(getTags());
+                && otherTask.getTags().equals(getTags())
+                && otherTask.getDate().equals(getDate())
+                && otherTask.getDescription().equals(getDescription());
     }
-
-
 
     @Override
     public int hashCode() {
@@ -114,5 +117,44 @@ public class Task {
         }
 
         return builder.toString();
+    }
+
+    /**
+     * Returns the date associated with the task if the task is a DeadlineTask or an EventTask.
+     * The maximum LocalDate is returned if the task is a TodoTask.
+     *
+     * @return The date associated with a task.
+     */
+    private LocalDate getDate() {
+        if (this instanceof DeadlineTask) {
+            return ((DeadlineTask) this).getDeadline().getDeadline();
+        } else if (this instanceof EventTask) {
+            return ((EventTask) this).getTaskDate().getDeadline();
+        } else {
+            return LocalDate.MAX;
+        }
+    }
+
+    @Override
+    public int compareTo(Task otherTask) {
+        LocalDate thisDate = this.getDate();
+        LocalDate otherDate = otherTask.getDate();
+
+        return thisDate.compareTo(otherDate);
+    }
+
+    @Override
+    public Task clone() {
+        try {
+            Task clone = (Task) super.clone();
+            clone.name = this.name;
+            clone.tags = new HashSet<>();
+            clone.tags.addAll(this.tags);
+            clone.isDone = this.isDone;
+            clone.description = this.description;
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

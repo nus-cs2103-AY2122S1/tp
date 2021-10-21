@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class UniqueTaskList implements Iterable<Task> {
             throw new DuplicateTaskException();
         }
         internalList.add(toAdd);
+        sortList();
     }
 
     /**
@@ -55,6 +57,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         internalList.set(index, editedTask);
+        sortList();
     }
 
     /**
@@ -78,6 +81,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public void setTasks(UniqueTaskList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortList();
     }
 
     /**
@@ -91,6 +95,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
         internalList.setAll(tasks);
+        sortList();
     }
 
     /**
@@ -129,5 +134,9 @@ public class UniqueTaskList implements Iterable<Task> {
             }
         }
         return true;
+    }
+
+    private void sortList() {
+        Collections.sort(internalList);
     }
 }

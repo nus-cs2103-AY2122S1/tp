@@ -22,12 +22,12 @@ import seedu.address.model.task.TodoTask;
 public class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
-    private int i;
+    private final int i;
     private final String name;
     private String deadline;
     private String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private boolean isComplete;
+    private final boolean isComplete;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -35,9 +35,12 @@ public class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                                       @JsonProperty("status") String status) {
+                           @JsonProperty("isComplete") boolean isComplete,
+                           @JsonProperty("i") int i) {
         this.name = name;
         this.deadline = deadline;
+        this.i = i;
+        this.isComplete = isComplete;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -58,14 +61,14 @@ public class JsonAdaptedTask {
             this.i = 1;
             DeadlineTask task = (DeadlineTask) source;
             deadline = task.getDeadline().toString();
-        }
-        if (source instanceof EventTask) {
+        } else if (source instanceof EventTask) {
             this.i = 2;
             EventTask task = (EventTask) source;
             deadline = task.getTaskDate().toString();
         } else {
-            i = 0;
+            this.i = 0;
         }
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
