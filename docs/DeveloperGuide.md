@@ -153,6 +153,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+### Category feature
+
+#### Implementation
+The category feature adds to the attributes of the `Person` object. Similar to the other fields of the `Person` object, 
+it can be added and edited by calling the relevant `add` and `edit` commands by using `c/` prefix.
+
+Additionally, it implements the following operations:
+* `isValidCategory()`  — Determines if the input is a valid category
+* `stringToCategory()`  — Converts the input into a constant
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The category field is compulsory and requires
+one of the available category codes (att, fnb, com, acc, tpt, oth). In the absence or invalidity of the category code,
+the contact will not be saved and the user will be prompted to give a valid one.</div>
+
+Given below is an example usage scenario and how category mechanism behaves at each step
+
+Step 1. The user executes the command `filter c/oth` to filter all "others" category contacts in the address book. And
+gets a list of all contacts with the category "others".
+
+Step 2. The user executes the command `edit 1 c/att` which changes the category of the 1st contact from "others" to 
+"attraction".
+
+
+The following sequence diagram shows how modifying the category field with `edit` works:
+![EditCategoryCodeSequenceDiagram.png](images/EditCategoryCodeSequenceDiagram.png)
+
+The following activity diagram shows what happens when a user executes the `edit` command with category specified
+![EditCategoryActivityDiagram](images/EditCategoryActivityDiagram.png)
+
+####Design considerations:
+
+**Aspect: How Category is called by the user:**
+
+* **Alternative 1 (current choice):** Category field is added through `add` or `edit` commands.
+  * Pros: Easy to implement
+  * Cons: May cause `add` command to be too long
+
+* **Alternative 2:** Exclusive command to add Category field
+  * Pros: Reduces the chance of Feature Overload for `add` and `edit` commands
+  * Cons: Reduces usability due to the need to remember another command
 
 ### Find feature
 
