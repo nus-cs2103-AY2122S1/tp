@@ -161,12 +161,12 @@ Displays the task list associated to the specified person onto the `taskListPane
 
 The view task list feature is facilitated by :
 
-`TaskListManager` : 
+`TaskListManager` :
 
 - It serves as a archive to track the task lists reference of every `Person`.
 - It maintains an `ObservableList` which encapsulates a `Person`'s task list, and is referenced by the `UI ` for display on the GUI.
 
-- It implements the following operation that support the view task list feature: 
+- It implements the following operation that support the view task list feature:
   - `TaskListManager#setToDisplayTaskList` — set the currently displayed task list to the task list of the specified person.
 
 This operation is exposed in the `Model` interface as `Model#displayPersonTaskList`.
@@ -181,7 +181,7 @@ step 3. If the parameters entered by the user is valid, the application will ret
 
 The following sequence diagram show how the view task list operation works:
 
-<img src=![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png) 
+<img src=![ViewTaskListSequenceDiagram](images/ViewTaskListSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the parameters provided by the user is of non-integer form, ParseException will be thrown and an error message providing the correct format will be shown. Also, if the provided INDEX does not exists within the indices of the displayed person list, CommandException is thrown and an error message that warns of invalid INDEX will be shown.
 
@@ -196,7 +196,7 @@ The following activity diagram summarises what happens when a user executes a `c
 - **Alternative 1 (current choice):** Have two side-by-side panels, left for person list and right for task list.
 
   - Pros: User is able to concurrently view more information.
-  - Cons: 
+  - Cons:
     - More work to create and optimize the split panel.
     - Content wrapping can was tricky since there is a slider in the middle to resize either panels.
 
@@ -204,7 +204,7 @@ The following activity diagram summarises what happens when a user executes a `c
 
   - Pros: More convenient to implement.
 
-  - Cons: 
+  - Cons:
 
     - `list` has to be executed again if user wants to redirect back to the person list (extra overhead
 
