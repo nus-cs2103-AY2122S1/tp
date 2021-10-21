@@ -18,11 +18,13 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.CommandType;
 import seedu.address.model.task.DeadlineTask;
 import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskHistory;
 import seedu.address.model.task.TaskName;
 import seedu.address.model.task.TodoTask;
 
@@ -79,6 +81,7 @@ public class EditTaskCommand extends Command {
 
         model.setTask(taskToEdit, editedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        model.addTaskHistory(new TaskHistory(taskToEdit.getName(), CommandType.EDIT));
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
 
