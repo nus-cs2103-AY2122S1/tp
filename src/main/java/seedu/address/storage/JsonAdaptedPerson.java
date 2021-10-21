@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -36,6 +38,7 @@ class JsonAdaptedPerson {
     private final String expectedSalary;
     private final String levelOfEducation;
     private final String experience;
+    private final String interview;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -51,7 +54,8 @@ class JsonAdaptedPerson {
             @JsonProperty("expectedSalary") String expectedSalary,
             @JsonProperty("levelOfEducation") String levelOfEducation,
             @JsonProperty("experience") String experience,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("interview") String interview) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -63,6 +67,8 @@ class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.interview = interview;
+
     }
 
     /**
@@ -76,10 +82,12 @@ class JsonAdaptedPerson {
         employmentType = source.getEmploymentType().employmentType;
         expectedSalary = source.getExpectedSalary().value;
         levelOfEducation = source.getLevelOfEducation().levelOfEducation;
-        experience = source.getExperience().value.toString();
+        experience = source.getExperience().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        interview = source.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime;
+
     }
 
     /**
@@ -163,8 +171,23 @@ class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        final Optional<Interview> modelInterview;
+        if (interview == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Interview.class.getSimpleName()));
+        }
+        if (interview.equals("-")) {
+            modelInterview = Optional.ofNullable(Interview.EMPTY_INTERVIEW);
+        } else {
+            if (!Interview.isValidInterviewTime(interview)) {
+                throw new IllegalValueException(Interview.MESSAGE_CONSTRAINTS);
+            }
+            modelInterview = Optional.ofNullable(new Interview(interview));
+        }
+
+
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelEmploymentType,
-                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags);
+                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, modelInterview);
     }
 
 }

@@ -1,9 +1,11 @@
 package seedu.address.testutil;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.done.Done;
+import seedu.address.model.interview.Interview;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -29,6 +31,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EXPECTED_SALARY = "3200";
     public static final String DEFAULT_LEVEL_OF_EDUCATION = "PhD";
     public static final String DEFAULT_EXPERIENCE = "0";
+    public static final String DEFAULT_INTERVIEW = "2021-10-21, 19:00";
+
 
     private Name name;
     private Phone phone;
@@ -39,6 +43,7 @@ public class PersonBuilder {
     private LevelOfEducation levelOfEducation;
     private Experience experience;
     private Set<Tag> tags;
+    private Optional<Interview> interview;
     private Done done;
 
     /**
@@ -54,6 +59,7 @@ public class PersonBuilder {
         levelOfEducation = new LevelOfEducation(DEFAULT_LEVEL_OF_EDUCATION);
         experience = new Experience(DEFAULT_EXPERIENCE);
         tags = new HashSet<>();
+        interview = Optional.ofNullable(new Interview(DEFAULT_INTERVIEW));
         done = new Done();
     }
 
@@ -70,6 +76,7 @@ public class PersonBuilder {
         levelOfEducation = personToCopy.getLevelOfEducation();
         experience = personToCopy.getExperience();
         tags = new HashSet<>(personToCopy.getTags());
+        interview = personToCopy.getInterview();
         done = personToCopy.getDone();
     }
 
@@ -146,11 +153,19 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code Interview} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withInterview(String interview) {
+        this.interview = Optional.ofNullable(new Interview(interview));
+        return this;
+    }
+
+    /**
      * Builds a {@code Person} with the given information.
      */
     public Person build() {
         return new Person(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tags);
+                expectedSalary, levelOfEducation, experience, tags, interview);
     }
 
 }

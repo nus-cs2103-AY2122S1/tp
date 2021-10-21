@@ -84,6 +84,55 @@ Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2`
 
+Prefix Input Specifications:
+
+**Note**: **Alphanumeric** characters refers specifically to characters a-z, A-Z and 0-9.
+* ####NAME `n/`
+  * A NAME should only contain **alphanumeric** characters. Spaces between words are allowed.
+  * For example:
+    * NAME inputs such as `John`, `Mary Sue` and `9ine 6ix` are acceptable.
+    * NAME inputs such as `J@hn`, `Mary S^e` and `B{}b` are not acceptable.
+* ####CONTACT_NUMBER `p/`
+  * A CONTACT_NUMBER should contain a minimum of 3 digits. No characters other than the digits 0-9 are allowed.
+  * For example:
+    * CONTACT_NUMBER inputs such as `99999999` and `999` are acceptable.
+    * CONTACT_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
+* ####EMAIL_ADDRESS `e/`
+  * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by an `@` character.
+  * The **local part**:
+    * must contain **at least 1** alphanumeric character. 
+    * It can contain alphanumeric characters separated by any 1 of these characters `+_.-`. e.g. `John-a-bc`
+    * It must **start with** and **end with** an alphanumeric character.
+  * The **domain part**:
+    * must contain **at least 2** alphanumeric characters.
+    * It can contain sections, each containing alphanumeric characters separated by `_`. Each section must end with
+    `.`. The sections must be followed by **at least** 2 alphanumeric characters. e.g. `John-a.a-b-c.bc`
+  * For example:
+    * EMAIL_ADDRESS inputs such as `PeterJack_1190@example.com` and `e1234567@u.nus.edu` are acceptable.
+    * EMAIL_ADDRESS inputs such as `peterjack@example.c` and `peter..jack@example.com` are unacceptable.
+* ####ROLE `r/`
+  * A ROLE should only contain **alphanumeric** characters. Spaces between words are allowed.
+  * For example:
+    * ROLE inputs such as `Software Engineer` and `Sales Assistant` are acceptable.
+    * ROLE inputs such as `Softw@re Engin^^r` and `Day + Night Security Guard` are not acceptable.
+* ####EMPLOYMENT_TYPE `et/`
+  * An EMPLOYMENT_TYPE should
+  * For example:
+* ####EXPECTED_SALARY `s/`
+  * An EXPECTED_SALARY should
+  * For example:
+* ####LEVEL_OF_EDUCATION `l/`
+  * A LEVEL_OF_EDUCATION should
+  * For example:
+* ####YEARS_OF_EXPERIENCE `y/`
+  * A YEARS_OF_EXPERIENCE should
+  * For example:
+* ####TAG `t/`
+  * A TAG should only contain **alphanumeric** characters. Spaces between words are **not** allowed.
+  * For example:
+    * TAG inputs such as `friends` and `colleagues` are allowed.
+    * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
+
 ### Listing all applicants : `list`
 
 Shows a list of all applicants in RecruitIn.
@@ -108,6 +157,7 @@ Prefix Input Specifications:
 * *Name* `n/`
   * Each additional keyword for *Name* leads to a more **accommodating** search.
   * A *Name* is considered matching if at least 1 keyword is equal to at least 1 word in the *Name*.
+  * NAME input must comply with input specifications for add [here](####name).
   * For example:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
@@ -116,6 +166,7 @@ Prefix Input Specifications:
 * *Contact Number* `p/`
   * Each additional keyword for *Contact Number* leads to a more **accommodating** search.
   * A *Contact Number* is considered matching if at least 1 keyword is equal to at least 1 word in the *Contact Number*
+  * CONTACT_NUMBER input must comply with input specifications for add [here](####contact_number).
   * For example:
     * A `99999999` input can only match with *Contact Number*s that are `99999999`.
     * A `99999999 88888888` input can only match with *Contact Number*s that are `99999999` and `88888888`.
@@ -124,6 +175,7 @@ Prefix Input Specifications:
 * *Email* `e/`
   * Each additional keyword for *Email* leads to a more **accommodating** search.
   * An *Email* is considered matching if at least 1 keyword is equal to at least 1 word in the *Email*.
+  * EMAIL_ADDRESS input must comply with input specifications for add [here](####email_address).
   * For example:
     * A `alexyeoh@example.com` input can match with *Email*s such as `alexyeoh@example.com`.
     * A `alexyeoh@example.com marysue@gmail.com` input can match with *Email*s such as `alexyeoh@example.com`
@@ -133,6 +185,7 @@ and `marysue@gmail.com`.
 * *Role* `r/`
   * Each additional keyword for *Role* leads to a more **restrictive** search
   * A *Role* is considered matching only if every single keyword is equal to at least 1 word in the *Role*.
+  * ROLE input must comply with input specifications for add [here](####role).
   * For example:
     * A `Software` input can match with *Role*s such as `Software Engineer`, `Software` or `Software Developer`
     * A `Software Engineer` input can match with *Role*s such as `Software Engineer` or `Senior Software Engineer`
@@ -142,6 +195,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
 * *Employment Type* `et/`
   * Each additional keyword for Email leads to a more **accommodating** search, as long as all keywords are **valid**.
   * A *Employment Type* is considered matching only if it starts with any of the keywords and all keywords are valid.
+  * EMPLOYMENT_TYPE input must comply with input specifications for add [here](####employment_type).
   * For example:
     * A `Full time` or `full time` or `full` input will match only with *Employment Type*s that are ```Full time```
     * A ```Full part``` input will match with all *Employment Type*s that are ```Full time``` or ```Part time```
@@ -153,6 +207,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
 * *Expected Salary* `p/`
     * Each additional keyword for *Expected Salary* leads to a more **accommodating** search.
     * An *Expected Salary* is considered matching if at least 1 keyword is within `500` from at least 1 *Expected Salary*.
+    * EXPECTED_SALARY input must comply with input specifications for add [here](####expected_salary).
     * For example:
         * A `3000` input can match with *Expected Salary*s that range from `2500` to `3500` inclusive.
         * A `2500 5000` input can match with *Expected Salary*s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
@@ -162,6 +217,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
   * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
   * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
   * A *Level of Education* is considered matching only if keyword is equal to at least 1 letter in the possible types of *Level of Education*
+  * LEVEL_OF_EDUCATION input must comply with input specifications for add [here](####level_of_education).
   * For example:
     * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
     * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
@@ -170,6 +226,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
 * *Years of Experience* `y/`
     * Each additional keyword for *Year of Experience* leads to a more **accommodating** search.
     * A *Year of Experience* is considered matching if the value is larger than or equal to the keyword.
+    * YEARS_OF_EXPERIENCE input must comply with input specifications for add [here](####years_of_experience).
     * For example:
         * A `3` input can match with *Year of Experience*s that are higher than or equal to 3.
         * A `2 3` input can match with *Year of Experience*s that are higher than or equal to 2.
@@ -178,6 +235,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
 * *Tag* `t/`
     * Each additional keyword for *Tag* leads to a more **accommodating** search.
     * A *Tag* is considered matching if at least 1 keyword is equals to at least 1 *Tag*.
+    * TAG input must comply with input specifications for add [here](####tag).
     * For example:
         * An `old` input can match with applicants that have the *Tag* `old`
         * An `experienced old` input can match with applicants that have the *Tag* `experienced`, or `old`, or both.

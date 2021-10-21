@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMPLOYMENT_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPECTED_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -33,7 +34,7 @@ public class ShowCommandParser implements Parser<ShowCommand> {
                 ArgumentTokenizer.tokenizeWithoutPreamble(trimmedArgs, PREFIX_NAME,
                         PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
                         PREFIX_EXPECTED_SALARY, PREFIX_LEVEL_OF_EDUCATION,
-                        PREFIX_EXPERIENCE, PREFIX_TAG);
+                        PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW);
 
         // If show command has no prefix, it is invalid
         if (argMultimap.isEmpty()) {
@@ -87,6 +88,10 @@ public class ShowCommandParser implements Parser<ShowCommand> {
 
             if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
                 prefix = PREFIX_TAG;
+            }
+
+            if (argMultimap.getValue(PREFIX_INTERVIEW).isPresent()) {
+                prefix = PREFIX_INTERVIEW;
             }
 
         }
