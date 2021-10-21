@@ -69,7 +69,8 @@ public class Task implements Comparable<Task>, Cloneable {
         if (otherTask == this) {
             return true;
         } else if (this.getClass().equals(otherTask.getClass())) {
-            return otherTask.getName().equals(getName()) && otherTask.getDate().equals(getDate());
+            return otherTask.getName().equals(getName()) && otherTask.getDate().equals(getDate())
+                    && otherTask.getDescription().equals(getDescription());
         } else {
             return false;
         }
@@ -92,7 +93,8 @@ public class Task implements Comparable<Task>, Cloneable {
         Task otherTask = (Task) other;
         return otherTask.getName().equals(getName())
                 && otherTask.getTags().equals(getTags())
-                && otherTask.getDate().equals(getDate());
+                && otherTask.getDate().equals(getDate())
+                && otherTask.getDescription().equals(getDescription());
     }
 
     @Override
@@ -149,6 +151,7 @@ public class Task implements Comparable<Task>, Cloneable {
             clone.tags = new HashSet<>();
             clone.tags.addAll(this.tags);
             clone.isDone = this.isDone;
+            clone.description = this.description;
             return clone;
         } catch (CloneNotSupportedException e) {
             throw new AssertionError();
