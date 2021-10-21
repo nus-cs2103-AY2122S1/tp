@@ -42,7 +42,8 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_notSixDigitsIdArgs_throwsParseException() {
-        assertParseFailure(parser, " id/123", String.format(MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " id/123", String.format(
+                MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
     }
 
     @Test

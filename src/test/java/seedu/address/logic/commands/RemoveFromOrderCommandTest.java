@@ -5,7 +5,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
