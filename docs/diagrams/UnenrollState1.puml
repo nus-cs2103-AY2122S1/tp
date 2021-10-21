@@ -9,7 +9,7 @@ package Tuitione <<rectangle>> {
         object "<u>l:Lesson" as Lesson {
             lessonCode = Math-P2-Wed-1800
             grade = P2
-            size = 2
+            size = 1
         }
     }
     package Students <<rectangle>> {
