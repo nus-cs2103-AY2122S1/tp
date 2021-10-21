@@ -1,0 +1,23 @@
+{
+  "persons" : [ {
+    "name" : "Test Import",
+    "phone" : "87438805",
+    "email" : "test1@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "remark" : "$remark is gone!",
+    "nationality": "Singaporean",
+    "tutorialGroup": "09",
+    "socialHandle": "@asdas",
+    "tagged" : [ "friends" ]
+  }, {
+    "name" : "Test Import Two",
+    "phone" : "99272738",
+    "email" : "test2@example.com",
+    "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "remark" : "",
+    "nationality": "Malaysian",
+    "tutorialGroup": "09",
+    "socialHandle": "@asdas",
+    "tagged" : [ "colleagues", "friends" ]
+  } ]
+}

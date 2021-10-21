@@ -17,6 +17,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ImportCommandTest {
 
+    private final String PROPER_FILE = "import.json";
     private final String NONEXISTENT_FILE = "random.json";
     private final String INCORRECT_DATA_FORMAT_FILE = "incorrect.json";
     private final String INCORRECT_FILE_EXTENSION = "import.txt";
@@ -29,7 +30,7 @@ public class ImportCommandTest {
 
     @Test
     public void execute_correctFile_success() throws CommandException {
-        CommandResult commandResult = new ImportCommand("import.json").execute(model);
+        CommandResult commandResult = new ImportCommand(PROPER_FILE).execute(model);
 
         assertEquals(commandResult.getFeedbackToUser(), String.format(ImportCommand.MESSAGE_SUCCESS, 2));
     }
