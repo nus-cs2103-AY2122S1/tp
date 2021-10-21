@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ViewTaskListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -123,8 +124,16 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleMouseClicked(ListView<Person> personListView) {
-        Person selectedPerson = personListView.getSelectionModel().getSelectedItem();
-        logic.displayPersonTaskList(selectedPerson);
+        int selectedIndex = personListView.getSelectionModel().getSelectedIndex() + 1;
+        String inputCommand = ViewTaskListCommand.COMMAND_WORD + " " + selectedIndex;
+
+        try {
+            executeCommand(inputCommand);
+        } catch (ParseException | CommandException e) {
+            logger.warning("HandleMouseClicked caught an exception when not supposed to:\n"
+                    + e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage());
+        }
     }
 
     /** Makes child node of anchor resize together with its parent. */
