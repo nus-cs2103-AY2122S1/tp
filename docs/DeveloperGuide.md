@@ -192,8 +192,19 @@ The add lesson feature is relative similar to that of the original add student f
   1. In the current version of implementation, `COST`'s input constraints are:
      1. 0 <= `COST`.
 
+After deconstructing all the relevant properties and validating their validity, a `Lesson` will be generated with a unique `lesson code` that is specific to that lesson. This `lesson code` will be used as a unique string identifier.
 
-Object diagram
+- `lesson code` Format: `<SUBJECT>`-`<GRADE>`-`<DAY_OF_WEEK>`-`<START_TIME>`
+
+Given below is an example usage scenario and how the add lesson operation behaves.
+
+_Note: For this usage, we only consider the main successful scenarios (i.e. The lesson we're adding does not exist in TuitiONE and all properties entered are within the constraints)_
+
+Example: `add-l s/Science g/P5 d/Wed t/1200 c/10.50`
+
+Step 1: When the CSO has entered the command, <u>`:AddLessonCommandParser`</u> object will proceed on to parse and check the validity of each property entered. Assuming successful, <u>`:AddLessonCommandParser`</u> object will proceed on to produce a <u>`Lesson`</u> with the relevant details filled.
+
+
 
 Sequence diagram
 
