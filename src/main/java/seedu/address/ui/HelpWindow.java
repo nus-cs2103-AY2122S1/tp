@@ -216,12 +216,13 @@ public class HelpWindow extends AnchorPane {
         descriptor.setAddress(samplePerson.getAddress());
         descriptor.setTags(samplePerson.getTags());
 
+
         ObservableList<Command> data = FXCollections.observableArrayList(
                 new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(Index.fromZeroBased(0)),
                 new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0)),
+                new DeleteTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
                 new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), new Task("sample"))
         );
 
