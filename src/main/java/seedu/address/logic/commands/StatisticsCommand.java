@@ -15,7 +15,7 @@ import seedu.address.model.statistic.Statistic;
  */
 public class StatisticsCommand extends Command {
 
-    public static final String COMMAND_WORD = "stats";
+    public static final String COMMAND_WORD = "stat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Displays statistics of the current data.\n"

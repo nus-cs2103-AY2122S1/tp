@@ -79,7 +79,7 @@ public class Statistic {
     }
 
     /**
-     * Format state as text for viewing.
+     * Format statistics as text for viewing.
      */
     public String toString() {
         return String.format("%s\n\n%s", computeGenderStatistic(), computeNationalityStatistic());
