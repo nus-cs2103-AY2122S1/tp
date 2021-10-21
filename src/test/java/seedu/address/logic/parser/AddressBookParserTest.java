@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteMarkedCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -57,6 +58,12 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(new Index[]{INDEX_FIRST_PERSON}), command);
+    }
+
+    @Test
+    public void parseCommand_deleteMarked() throws Exception {
+        assertTrue(parser.parseCommand(DeleteMarkedCommand.COMMAND_WORD) instanceof DeleteMarkedCommand);
+        assertTrue(parser.parseCommand(DeleteMarkedCommand.COMMAND_WORD + " 3") instanceof DeleteMarkedCommand);
     }
 
     @Test
