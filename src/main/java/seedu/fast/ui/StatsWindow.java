@@ -180,7 +180,7 @@ public class StatsWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
-        assert getRoot() != null : "Stats window is not initialised";
+        assert getRoot() != null : "StatsWindow is not initialised";
         populatePriorityPieChart();
         labelPriorityPieChart();
         getRoot().requestFocus();
