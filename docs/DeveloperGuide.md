@@ -154,6 +154,25 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Export command
+
+#### Implementation
+
+The Export command accepts the name of a JSON file as a parameter, and exports the current list of contacts to the 
+specified file. It is facilitated by the `ExportCommandParser` class, which implements `Parser<ExportCommand>`. 
+It implements the `parse()` method, which parses the filename and returns an `ExportCommand`, to be executed in 
+`LogicManager`.
+ 
+The `ExportCommand` class extends `Command`. It stores the filename as a class variable and its implementation of
+`Command#execute()` is where the generation of the JSON file begins. The current addressbook, is obtained by 
+`Model#getAddressBook()`. A temporary instance of `JsonAddressBookStorage` is created by passing in the filename, and it
+saves the current addressbook to the specified file name using the method `exportToJson()`.
+
+The Sequence Diagram below illustrates the interactions within the `Logic`, `Storage` and `Model` components for 
+the `execute("export newfriends.json")` API call.
+
+![ExportSequenceDiagram](images/ExportSequenceDiagram.png)
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

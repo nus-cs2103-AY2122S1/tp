@@ -18,6 +18,7 @@ public class PersonListPanel extends UiPart<Region> {
     private static final String FXML = "PersonListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
     private final PersonDetails personDetails;
+    private TabPaneHeader tabPaneHeader;
 
     @FXML
     private ListView<Person> personListView;
@@ -53,6 +54,18 @@ public class PersonListPanel extends UiPart<Region> {
         return personListView.getSelectionModel().getSelectedIndex();
     }
 
+    public void setTabPaneHeader(TabPaneHeader tabPaneHeader) {
+        this.tabPaneHeader = tabPaneHeader;
+    }
+
+    public int getTabIndex() {
+        return tabPaneHeader.getTabPane().getSelectionModel().getSelectedIndex();
+    }
+
+    public void setTabIndex(int index) {
+        tabPaneHeader.getTabPane().getSelectionModel().select(index);
+    }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
@@ -69,5 +82,4 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

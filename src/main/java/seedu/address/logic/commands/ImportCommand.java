@@ -91,6 +91,10 @@ public class ImportCommand extends Command {
                 continue;
             }
         }
+        if (model.getPersonListControl() != null) {
+            model.setTabIndex(0);
+        }
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_IMPORT_SUCCESS, fileName));
     }
 

@@ -15,37 +15,44 @@
          <children>
             <HBox style="-fx-alignment: center_left;">
                <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
+                  <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
                <children>
-                  <ImageView id="profileView" fx:id="profileView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="profileView" fx:id="profileView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); -fx-background-radius: 20;">
                      <image>
                         <Image url="@../images/profile.png" />
                      </image>
                   </ImageView>
-                  <Label fx:id="name" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 25px;" text="Full Name" textFill="#e8e8e8">
+                  <VBox alignment="CENTER_LEFT">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
-                  </Label>
+                     <children>
+                        <Label fx:id="name" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 1.5em;" text="Full Name" textFill="#e8e8e8">
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <FlowPane id="tags" fx:id="tags">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </FlowPane>
+                     </children>
+                  </VBox>
                </children>
             </HBox>
-            <FlowPane id="tags" fx:id="tags">
-               <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
-               </VBox.margin>
-            </FlowPane>
             <VBox>
                <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
+                  <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
                <children>
-                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="TELEGRAM" textFill="#e8e8e8">
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 1.25em;" text="TELEGRAM" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="telegram" style="-fx-text-fill: #e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8" underline="true">
+                  <Label fx:id="telegram" style="-fx-text-fill: #84ddf3; -fx-font-size: 0.95em;" text="Label" textFill="#84ddf3" underline="true">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -55,12 +62,12 @@
             </VBox>
             <VBox>
                <children>
-                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="GITHUB" textFill="#e8e8e8">
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 1.25em;" text="GITHUB" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="github" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                  <Label fx:id="github" style="-fx-text-fill: #84ddf3; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8" underline="true">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -68,20 +75,20 @@
                   <Line endX="150.0" startX="-150.0" stroke="#434343" strokeWidth="2.0" />
                </children>
                <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
+                  <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
             </VBox>
             <VBox>
                <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
+                  <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
                <children>
-                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="PHONE NUMBER" textFill="#e8e8e8">
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 1.25em;" text="PHONE NUMBER" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="phone" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                  <Label fx:id="phone" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -91,15 +98,15 @@
             </VBox>
             <VBox>
                <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
+                  <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
                <children>
-                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="ADDRESS" textFill="#e8e8e8">
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 1.25em;" text="ADDRESS" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="address" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                  <Label fx:id="address" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>
@@ -109,15 +116,15 @@
             </VBox>
             <VBox>
                <VBox.margin>
-                  <Insets bottom="20.0" left="5.0" />
+                  <Insets bottom="10.0" left="5.0" />
                </VBox.margin>
                <children>
-                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 20px;" text="EMAIL" textFill="#e8e8e8">
+                  <Label style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 1.25em;" text="EMAIL" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="email" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 15px;" text="Label" textFill="#e8e8e8">
+                  <Label fx:id="email" style="-fx-text-fill: #e8e8e8#e8e8e8; -fx-font-size: 0.95em;" text="Label" textFill="#e8e8e8">
                      <VBox.margin>
                         <Insets bottom="5.0" />
                      </VBox.margin>

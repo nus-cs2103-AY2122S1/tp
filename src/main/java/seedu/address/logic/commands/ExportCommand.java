@@ -8,6 +8,7 @@ import java.nio.file.Path;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.storage.JsonAddressBookStorage;
 
 /**
@@ -57,9 +58,10 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         Path filePath = Path.of(testPath + fileName);
+        ReadOnlyAddressBook currentAddressBook = model.getAddressBook();
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
         try {
-            temporaryStorage.exportToJson(model.getAddressBook());
+            temporaryStorage.exportToJson(currentAddressBook);
         } catch (FileAlreadyExistsException faee) {
             throw new CommandException(String.format(MESSAGE_EXPORT_FAILURE, fileName));
         } catch (IOException ioe) {

@@ -168,4 +168,9 @@ public class ModelManager implements Model {
     public PersonListPanel getPersonListControl() {
         return this.personList;
     }
+
+    @Override
+    public void setTabIndex(int index) {
+        this.personList.setTabIndex(index);
+    }
 }
