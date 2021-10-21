@@ -200,7 +200,7 @@ Format: `removeEvent INDEX`
 
 Example Usage:
 * `listEvents` followed by `removeEvent 2` deletes the 2nd Event on the current list.
-* `filterEvents d/2021-09-18` followed by `delete 1` deletes the 1st Event in the results of the `filterEvents` command.
+* `filterEvents d/2021-09-18` followed by `removeEvent 1` deletes the 1st Event in the results of the `filterEvents` command.
 
 ### Editing an event : `editEvent`
 
@@ -250,11 +250,11 @@ Example Usage:
 * `filterEvents d/2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
 * `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 18th September 2021 9am.
 
-### List Events: `listEvent`
+### List Events: `listEvents`
 
 Show a list of all events in Managera.
 
-Format: `listEvent`
+Format: `listEvents`
 
 ### Locating Events by name: `findEvent`
 
