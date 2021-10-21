@@ -49,11 +49,7 @@ benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can g
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Parameters can be in any order.<br>
-<<<<<<< HEAD
-  e.g. if the command specifies `n/NAME p/TELEGRAM_HANDLE`, `p/TELEGRAM_HANDLE n/NAME` is also acceptable.
-=======
   e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/albino_monkii t/albino_api`, only `t/albino_api` will be taken.
@@ -65,7 +61,7 @@ benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can g
 
 ### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 ![help message](images/helpMessage.png)
 
@@ -76,15 +72,10 @@ Format: `help`
 
 Adds a student to the CSBook.
 
-<<<<<<< HEAD
-Format: `add n/NAME p/TELEGRAM_HANDLE e/EMAIL a/ADDRESS [t/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
-</div>
-=======
 Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
+
+* Adds the student into CSBook as well as the group it is assigned
+* The group must exist before the student is created. Each student must never not belong to a group
 
 Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
@@ -100,24 +91,16 @@ Format: `list`
 
 Edits an existing student in the CSBook.
 
-<<<<<<< HEAD
-Format: `edit INDEX [n/NAME] [p/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
-=======
 Format: `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-<<<<<<< HEAD
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the telegramHandle number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-=======
+
 *  `edit 1 t/@albino_monkey e/e0540014X@u.nus.edu` Edits the telegram handle and email address of the 1st student to be `@albino_monkey` and `e0540014X@u.nus.edu` respectively.
 *  `edit 2 n/Jiaxian` Edits the name of the 2nd student to be `Jiaxian`.
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
 
 ### Locating students by name: `find`
 
@@ -135,6 +118,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
@@ -143,7 +128,7 @@ Deletes the specified student from CSBook.
 
 Format: `delete INDEX`
 
-* Deletes the student at the specified `INDEX`.
+* Deletes the student at the specified `INDEX` and removes the student from their assigned group.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
@@ -152,13 +137,15 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
 ### View details of a group
-Finds and displays details about a group, including the group description, 
+Finds and displays details about a group, including the group description,
 number of students and some details about each student in the group .
 
 Format: `viewgroup GROUPNAME`
 
 Examples:
 * `viewgroup CS2103T` displays the group's description and its students.
+
+
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 
@@ -170,6 +157,8 @@ Format: `listgroups`
 
 Examples:
 * `listgroups` displays a list of all the groups, including their group description and number of students in them.
+
+
   ![result for `listgroups`](images/listGroups.png)
 
 ### Clearing all entries : `clear`
@@ -180,23 +169,24 @@ Format: `clear`
 
 ### Creating a group: `addgroup`
 
-Creates a group with the given group name and given description so that students can be added into it. 
+Creates a group with the given group name and given description so that students can be added into it.
 
 Format: `addgroup n/GROUPNAME d/DESCRIPTION`
 
 * Creates a group with the specified `GROUPNAME` and `DESCRIPTION`.
 
 Examples:
-* `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod` 
+* `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod`
 where students can be added into.
 
 ### Delete Group: deletegroup
 
-Deletes the group with the specified group name.
+Deletes the group with the specified group name as well as all students associated with the group.
 
 Format: `deletegroup GROUPNAME`
 
-* Deletes the group with the specified `GROUPNAME`.
+* Deletes the group with the specified `GROUPNAME` as well as all students associated with the group.
+* Use the `edit` command to change the group of a student if deleting the student is undesirable.
 
 Examples:
 * `deletegroup CS2103T` deletes the group CS2103T.
@@ -213,32 +203,24 @@ CSBook data are saved in the hard disk automatically after any command that chan
 
 ### Editing the data file
 
-CSBook data are saved as a JSON file `[JAR file location]/data/CSBook.json`. Advanced users are welcome to update data directly by editing that data file.
+CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are highly advised to not edit the data file directly.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
+If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
 </div>
 
---------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
 Action | Format, Examples
 --------|------------------
-<<<<<<< HEAD
-**Add** | `add n/NAME p/TELEGRAM_HANDLE e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/TELEGRAM_HANDLE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-=======
 **Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] `<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
-**List** | `list` 
->>>>>>> ff2a7f5e7e87f9b02e1a6e604ac83958baa27998
+**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUPNAME]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
+**List** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add Group** | `addgroup GROUPNAME`
+**Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
 **Delete Group** | `deletegroup GROUPNAME`
 **View Group** | `viewgroup GROUPNAME`
 **List Groups** | `listgroups`

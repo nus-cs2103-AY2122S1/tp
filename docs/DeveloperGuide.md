@@ -73,9 +73,9 @@ The sections below give more details of each component.
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+![Structure of the UI component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `StudentListPanel`, `GroupListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2122S1-CS2103T-T09-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-T09-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
@@ -84,7 +84,7 @@ The `UI` component,
 - executes user commands using the `Logic` component.
 - listens for changes to `Model` data so that the UI can be updated with the modified data.
 - keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-- depends on some classes in the `Model` component, as it displays `Student` object residing in the `Model`.
+- depends on some classes in the `Model` component, as it displays `Student` and `Group` objects residing in the `Model`.
 
 ### Logic component
 
@@ -96,7 +96,7 @@ Here's a (partial) class diagram of the `Logic` component:
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `CsBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a student).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -114,7 +114,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 
-- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- When called upon to parse a user command, the `CsBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `CsBookParser` returns back as a `Command` object.
 - All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -125,12 +125,13 @@ How the parsing works:
 
 The `Model` component,
 
-- stores the address book data i.e., all `Student` objects (which are contained in a `UniqueStudentList` object).
+- stores the CS book data i.e., all `Student` and `Group` objects (which are contained in a `UniqueStudentList` and `UniqueGroupList` object respectively).
 - stores the currently 'selected' `Student` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Student>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- stores the currently 'selected' `Group` objects (e.g., results of a search query) as a separate _filtered_ list similarly to `Student` objects with an `ObservableList<Group>`.
 - stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 - does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Student` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Student` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** How `Group` and `Student` objects are stored and referenced by each other is shown in the diagram below. In the future, the model will be changed such that each `Student` will only have a `GroupName` to identify the `Group` it is associated with, and each `Group` will only store the `Name` of the `Student` in the `Group`. This will be done in hopes of looser coupling between the two classes.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -144,13 +145,13 @@ The `Model` component,
 
 The `Storage` component,
 
-- can save both address book data and user preference data in json format, and read them back into corresponding objects.
-- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- can save both CS book data and user preference data in json format, and read them back into corresponding objects.
+- inherits from both `CsBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 - depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.csbook.commons` package.
 
 ---
 
@@ -158,41 +159,257 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Loading data
+
+Implementation
+
+The loading of data into CsBook is facilitated by `JsonCsBookStorage`, `JsonSerializableCsBook`, `JsonAdaptedGroup` and
+`JsonAdaptedStudent`. The relevant operations for loading CSBook data is as follows:
+
+- `JsonCsBookStorage#readCsBook()` — Reads the current CSBook data
+- `JsonSerializableCsBook#toModelType()` - Converts the JsonSerializableCsBook to a CsBook object
+- `JsonSerializableCsBook#addStudentsToCsBook(csBook)` - Adds all students to a given CsBook
+- `JsonSerializableCsBook#addGroupsToCsBook(csBook)` - Adds all groups to a given CsBook
+- `JsonSerializableCsBook#addStudentsToGroups(csBook)` - Adds all students to their corresponding Groups
+- `JsonAdaptedStudent#toModelType(groupList)` - Converts the JsonAdaptedStudent to a Student object
+- `JsonAdaptedGroup#toModelType()` - Converts the JsonAdaptedGroup to a Group object
+
+Given below how loading data behaves at each step.
+
+Step 1. The user starts the app and an encrypted data file containing CsBook's information is present. The data
+is decrypted and a call to `JsonCsBookStorage#readCsBook()` is made. After this, a call to `JsonSerializableCsBook#toModelType()`
+is made to convert the data into a CsBook object.
+
+![LoadSequence0](images/LoadSequence0.png)
+
+Step 2. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`.
+Next, we add the students from the data into Csbook by calling `JsonAdaptedStudent#toModelType(groupList)`. `groupList` is
+required to add students to ensure that each student has a valid group.
+
+![LoadSequence1](images/LoadSequence1.png)
+
+Step 3. Currently, each group does not have its lists of students, we would need to add it in using `JsonSerializableCsBook#addStudentsToGroups(csBook)`.
+The group list is retrieved from `csBook`. For each group in the group list, we will filter the list of students by checking if the student belongs to the group,
+then add the students in by calling `Group#addAll(StudentsInGroup)`. This would return us a new group that contains the students, and we will update `csBook` by calling
+`CsBook#setGroup(group, groupWithStudentList)`.
+
+![LoadSequence2](images/LoadSequence2.png)
+
+The following sequence diagram shows how the overall loading data operation works:
+
+![LoadSequenceAll](images/LoadSequenceAll.png)
+
+#### Design considerations
+
+**Aspect: How we choose to load data:**
+
+- **Alternative 1 (current choice):** Load groups without their student list, load students, then update each group's student list using the loaded students.
+
+    - Pros: Allows us to validate the student's group name field and saves space as we do not need to store the student list for each group in our data file.
+    - Cons: May take more time to load as we need to do more computation.
+
+- **Alternative 2:** Have each group store their student's information in the data file, load students and load groups separately.
+
+    - Pros: Less computation as we can immediately convert the data file to retrieve the students and groups.
+    - Cons: Wastes space as each student's details is recorded twice in the data file, once in the list of students and
+    once in the list of groups.
+
+### JSON encryption feature
+
+#### Implementation
+
+The JSON encryption mechanism is facilitated by `JsonCsBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
+Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the
+CSBook data to an encrypted JSON file are as follows:
+
+- `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)` — Saves the current CSBook data
+- `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` — Saves the given data to a encrypted JSON file
+- `EncryptionUtil.encryptSerializableObject(Serializable)` — Encrypts a `Serializable` object
+- `FileUtil#writeToEncryptedFile(Path, SealedObject)` — Writes the encrypted object to a file
+
+Decrypting an encrypted JSON file goes through a similar process. The relevant operations for decrypting the
+encrypted JSON file to the CSBook are as follows:
+
+- `JsonCsBookStorage#readCsBook()` — Reads the CSBook data from the encrypted JSON file
+- `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` — Reads the data from a encrypted JSON file
+- `EncryptionUtil#decryptSealedObject(SealedObject)` — Decrypts a `SealedObject`
+- `FileUtil#readFromEncryptedFile(Path)` — Reads the encrypted object from a file
+
+Given below is an example usage scenario and how encryption/decryption behaves at each step.
+
+Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to
+`JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`, which creates a new `JsonSerializableCsBook` object. The CSBook data which is
+now in `Serializable` form is passed to `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` to be saved as an encrypted JSON file.
+
+![EncryptSequence0](images/EncryptSequence0.png)
+
+Step 2. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a `Serializable`,
+and encrypts it using `EncryptionUtil.encryptSerializableObject(Serializable)`. The method returns a `SealedObject` object,
+which contains the encrypted JSON data.
+
+![EncryptSequence1](images/EncryptSequence1.png)
+
+Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file.
+`EncryptedJsonUtil` passes the `SealedObject` object to `FileUtil#writeToEncryptedFile(Path, SealedObject)` to be written to a file.
+
+![EncryptSequence2](images/EncryptSequence2.png)
+
+The following sequence diagram shows how the overall encryption operation works:
+
+![EncryptSequenceAll](images/EncryptSequenceAll.png)
+
+The decryption operation accomplishes the opposite of the encryption operation.
+
+Step 4. When a user launches the application for the first time, a call it made to `JsonCsBookStorage#readCsBook()`
+to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` to
+read the encrypted JSON file.
+
+![DecryptSequence0](images/DecryptSequence0.png)
+
+Step 5. `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` calls `FileUtil#readFromEncryptedFile(Path)` to
+read the encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the
+encrypted CSBook data.
+
+![DecryptSequence1](images/DecryptSequence1.png)
+
+Step 6. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
+object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then
+transformed by `JsonCsBookStorage#readCsBook()` into a `ReadOnlyCsBook` that is used to populate the model.
+
+![DecryptSequence2](images/DecryptSequence2.png)
+
+The following sequence diagram shows how the overall decryption operation works:
+
+![DecryptSequenceAll](images/DecryptSequenceAll.png)
+
+#### Design considerations
+
+**Aspect: How JSON encryption and decryption executes:**
+
+- **Alternative 1 (current choice):** Encrypts the entire CSBook data.
+
+    - Pros: More secure.
+    - Cons: May take up more storage due to excessive encryption.
+
+- **Alternative 2:** Encrypts individual fields.
+
+    - Pros: Uses less storage by encrypting data and not fields.
+      (e.g. `name: Jun Wei` is encrypted to become `name: ????????????????????`)
+    - Cons: Less secure compared to encrypting the entire JSON file.
+
+### Student Group Management Feature
+
+#### Implementation
+
+The management of `Group` objects and `Student` objects is done by the `ModelManager`.
+While the choosing of operations to perform is determined by the user through the use of commands
+(E.g. `AddCommand`), we mainly discuss how `Group` objects reference `Student` objects and vice versa
+through discussing the implementation of the `ModelManager` class and `Student`, `Group` object fields.
+
+The relevant operations for managing groups, with regard to `Student` operations are as follows:
+- `ModelManager#deleteStudent(Student)` - Deletes a `Student` from the model, and remove the `Student` reference from
+  the respective `Group` that the student belongs to
+- `ModelManager#addStudent(Student)` - Adds a `Student` to the model, and add a reference to the `Student` in the
+  respective `Group` the student is assigned to
+
+The relevant operations for managing groups, with regard to `Group` operations are as follows:
+- `ModelManager#deleteGroup(Group)` - Deletes a `Group` from the model, as well as delete all `Student` objects
+  associated with the group
+- `ModelManager#addGroup(Group)` - Adds a `Group` to the model
+
+Given below is an example usage scenario and how the management of groups behaves at each step.
+
+Step 1. Starting with an empty model, the user will first have to create an empty `Group` to be able to add `Student`
+objects to. The user executes a command that will create a new `Group` and add it to the model by calling
+`ModelManager#addGroup(Group)`.
+
+![GroupManagementSequence0](images/GroupManagementSequence0.png)
+
+Step 2. After the `Group` is added to the model, the user then executes a command to create a new `Student` that will
+be a part of an existing group. This command will then call `ModelManager#addStudent(Student)` with the created
+`Student` which adds the student to the model, and then finds the corresponding `Group` that the `Student` will be
+added to, and add a reference to the `Student` in the `Group`.
+
+![GroupManagementSequence1](images/GroupManagementSequence1.png)
+
+(Optional steps) The user may manipulate the groups or individual students using any of the available commands, but
+these will not be discussed here as the focus is on how the grouping of students is done.
+
+Step 3. The user executes a command to delete a `Student` in order to, for example, remove a past student. The command
+then invokes `ModelManager#deleteStudent(Student)`, which will find the respective `Group` that the `Student` belongs to
+using the stored `Group` reference in the `Student` and remove the `Group`'s reference to the `Student`. Then, the
+`Student` itself is deleted from the model.
+
+![GroupManagementSequence2](images/GroupManagementSequence2.png)
+
+Step 4. The user executes a command to delete a `Group` in order to, for example, remove an entire group and its
+students after the user has finished teaching a module. The command invokes `ModelManager#deleteGroup(Group)`, which
+finds the `Group` in the model, and for each `Student` reference found, removes them from `csbook`. After all `Student`
+objects associated with the `Group` has been removed, the `Group` itself is then deleted.
+
+![GroupManagementSequence3](images/GroupManagementSequence3.png)
+
+#### Design considerations
+
+**Aspect: How a Student references a Group and vice versa:**
+
+- **Alternative 1 (current choice):** Each `Group` stores a reference of `Student` and vice versa
+
+    - Pros: More straightforward to implement.
+    - Cons: Increases coupling between `Group` and `Student` significantly
+
+- **Alternative 2:** Each `Group` only stores unique student `Name`s and `Student` stores unique `GroupName`s
+    - Pros: Reduces coupling between `Group` and `Student` significantly
+    - Cons: We must ensure that both `Name` and `GroupName`s are all unique throughout the `csbook`
+
+**Aspect: What happens when `ModelManager#deleteGroup(Group)` command is executed:**
+
+- **Alternative 1 (current choice):** Deletes all `Student` objects associated with the `Group`
+
+    - Pros: Easy to implement.
+    - Cons: Restricts us to just one `Group` per `Student` when implemented as-is
+
+- **Alternative 2:** Only delete the `Group` itself and only remove the `Group` reference within `Student` objects
+
+    - Pros: Allows for a `Student` to belong to multiple `Group`s
+    - Cons: When implemented as-is, allows `Student`s to not belong to any `Group`, violating our assumption that all
+      `Student`s have a `Group`
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedCsBook`. It extends `CsBook` with an undo/redo history, stored internally as an `csBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-- `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-- `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-- `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+- `VersionedCsBook#commit()` — Saves the current CS book state in its history.
+- `VersionedCsBook#undo()` — Restores the previous CS book state from its history.
+- `VersionedCsBook#redo()` — Restores a previously undone CS book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitCsBook()`, `Model#undoCsBook()` and `Model#redoCsBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedCsBook` will be initialized with the initial CS book state, and the `currentStatePointer` pointing to that single CS book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th student in the CS book. The `delete` command calls `Model#commitCsBook()`, causing the modified state of the CS book after the `delete 5` command executes to be saved in the `csBookStateList`, and the `currentStatePointer` is shifted to the newly inserted CS book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCsBook()`, causing another modified CS book state to be saved into the `csBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCsBook()`, so the CS book state will not be saved into the `csBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCsBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CS book state, and restores the CS book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial CsBook state, then there are no previous CsBook states to restore. The `undo` command uses `Model#canUndoCsBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -205,17 +422,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoCsBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the CS book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `csBookStateList.size() - 1`, pointing to the latest CS book state, then there are no undone CsBook states to restore. The `redo` command uses `Model#canRedoCsBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the CS book, such as `list`, will usually not call `Model#commitCsBook()`, `Model#undoCsBook()` or `Model#redoCsBook()`. Thus, the `csBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitCsBook()`. Since the `currentStatePointer` is not pointing at the end of the `csBookStateList`, all CS book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -227,7 +444,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-- **Alternative 1 (current choice):** Saves the entire address book.
+- **Alternative 1 (current choice):** Saves the entire CS book.
 
   - Pros: Easy to implement.
   - Cons: May have performance issues in terms of memory usage.
@@ -279,21 +496,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | add a new student entry         |                  |
 | `* * *`  | new user                                   | edit a student entry         | can make changes to my students' information without removing and adding them separately                 |
 | `* * *`  | new user                                   | delete a student entry         | remove students that I no longer teach                 |
-| `* * *`  | new user                                   | group my weaker students together         | easily identify these students and focus more of my energies on them                 |
+| `* * *`  | new user                                   | group my weaker students together         | easily identify these students and focus more on them                 |
 | `* * *`  | new user                                   | view the students in a particular group        | check on their performance as a group                 |
 | `* * *`  | new user                                   | remove students from a group        | ensure that each group contains the correct students as their performance changes                 |
 | `* * *`  | new user                                   | search for my groups with a parameter        | find a specific group given a detail I know about that group              |
 | `* * *`  | new user                                   | delete a group       | remove certain groups which are no longer needed              |
-| `* * *`  | new user                                   | export my student's information containing their grades        | share/document all the data               |
+| `* * *`  | new user                                   | export my students' information containing their grades        | share/document all the data               |
 | `* *`  | new user                                   | record my student's assessment grade         | keep track of their individual performance                 |
+| `* *`  | new user                                   | take down notes on my students               | keep track of their strengths and weaknesses to be able to help them better |
 | `* *`  | new user                                   | search for my students with a parameter        | find specific students given a detail I know about them               |
 | `* *`  | new user                                   | sort my students by their grades        | find the top and bottom performers of my class               |
 | `* *`  | lazy user                                  | be able to autocomplete my student's name       | easily find my student's name in the event that I forget their full name              |
-| `* *`  | lazy user                                  | access commands that I frequent easily      | save time on typing out my most frequently used commands              |
-| `* *`  | lazy user                                  | import my student details from luminus      | avoid having to manually key in my student's information             |
-| `* *`  | user that cares about security             | safeguard my CSBook    | ensure only authorized users can view my student's data            |
-| `* *`  | user that cares about security             | encrypt my student's information    | protect my students' sensitive data from potential malware            |
-| `* *`  | user that cares about security             | backup my student's information   | in the event that my student's information gets corrupted            |
+| `* *`  | lazy user                                  | access commands that I frequently use easily      | save time on typing out my most-used commands              |
+| `* *`  | lazy user                                  | import my students' details from luminus      | avoid having to manually key in my students' information             |
+| `* *`  | user that cares about security             | safeguard my CSBook    | ensure only authorized users can view my students' data            |
+| `* *`  | user that cares about security             | encrypt my students' information    | protect my students' sensitive data from potential malware            |
+| `* *`  | user that cares about security             | backup my students' information   | in the event that my student's information gets corrupted            |
 | `*`  | new user                                   | visualise my student's assessment data        | visualize graphically how my students are performing in class                 |
 | `*`  | lazy user                                  | chat with my student via Telegram directly from the app      | avoid having to open the Telegram app separately             |
 | `*`  | experienced user                           | set-up custom shortcuts     | easily access my most frequently used commands            |

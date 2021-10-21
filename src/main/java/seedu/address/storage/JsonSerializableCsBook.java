@@ -10,16 +10,16 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.CsBook;
+import seedu.address.model.ReadOnlyCsBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable CsBook that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "csbook")
+class JsonSerializableCsBook {
 
     public static final String MESSAGE_DUPLICATE_STUDENT = "Students list contains duplicate student(s).";
 
@@ -30,61 +30,70 @@ class JsonSerializableAddressBook {
     private final List<JsonAdaptedGroup> groups = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given students.
+     * Constructs a {@code JsonSerializableCsBook} with the given students.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
-                                            @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
+    public JsonSerializableCsBook(@JsonProperty("students") List<JsonAdaptedStudent> students,
+                                  @JsonProperty("groups") List<JsonAdaptedGroup> groups) {
         this.groups.addAll(groups);
         this.students.addAll(students);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyCsBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableCsBook}.
      */
-    public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
+    public JsonSerializableCsBook(ReadOnlyCsBook source) {
         students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
         groups.addAll(source.getGroupList().stream().map(JsonAdaptedGroup::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code CsBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public CsBook toModelType() throws IllegalValueException {
+        CsBook csBook = new CsBook();
+        addGroupsToCsBook(csBook);
+        addStudentsToCsBook(csBook);
+        addStudentsToGroups(csBook);
 
+        return csBook;
+    }
+
+    public void addGroupsToCsBook(CsBook csBook) throws IllegalValueException {
         for (JsonAdaptedGroup jsonAdaptedGroup : groups) {
             Group group = jsonAdaptedGroup.toModelType();
-            if (addressBook.hasGroup(group)) {
+            if (csBook.hasGroup(group)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
-            addressBook.addGroup(group);
+            csBook.addGroup(group);
         }
+    };
 
-        ObservableList<Group> groupList = addressBook.getGroupList();
-
+    public void addStudentsToCsBook(CsBook csBook) throws IllegalValueException {
+        ObservableList<Group> groupList = csBook.getGroupList();
         for (JsonAdaptedStudent jsonAdaptedStudent : students) {
             Student student = jsonAdaptedStudent.toModelType(groupList);
-            if (addressBook.hasStudent(student)) {
+            if (csBook.hasStudent(student)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
-            addressBook.addStudent(student);
+            csBook.addStudent(student);
         }
+    }
 
+    public void addStudentsToGroups(CsBook csBook) {
+        ObservableList<Group> groupList = csBook.getGroupList();
         for (Group groupWithoutStudentList : groupList) {
-            List<Student> studentsInGroup = addressBook.getStudentList().stream()
+            List<Student> studentsInGroup = csBook.getStudentList().stream()
                     .filter(student -> student.getGroup().equals(groupWithoutStudentList)).collect(Collectors.toList());
             Group groupWithStudentList = new Group(groupWithoutStudentList.getGroupName(),
                     groupWithoutStudentList.getDescription());
             groupWithStudentList.addAllStudents(studentsInGroup);
-            addressBook.setGroup(groupWithoutStudentList, groupWithStudentList);
+            csBook.setGroup(groupWithoutStudentList, groupWithStudentList);
         }
-
-        return addressBook;
     }
 
 }

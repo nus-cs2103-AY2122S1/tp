@@ -18,7 +18,7 @@ import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T_NAME;
 import java.util.ArrayList;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.CsBook;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 
@@ -70,10 +70,10 @@ public class TypicalStudents {
     private TypicalStudents() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical students.
+     * Returns an {@code CsBook} with all the typical students.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static CsBook getTypicalCsBook() {
+        CsBook ab = new CsBook();
 
         for (Student student : getTypicalStudents()) {
             ab.addStudent(student);

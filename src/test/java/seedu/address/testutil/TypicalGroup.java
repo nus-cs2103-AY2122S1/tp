@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.CsBook;
 import seedu.address.model.group.Group;
 
 
@@ -30,8 +30,8 @@ public class TypicalGroup {
 
     private TypicalGroup() {} // prevents instantiation
 
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook csb = new AddressBook();
+    public static CsBook getTypicalCsBook() {
+        CsBook csb = new CsBook();
         for (Group group : getTypicalGroups()) {
             csb.addGroup(group);
         }

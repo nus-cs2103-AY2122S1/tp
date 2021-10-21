@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+
+
+box Model MODEL_COLOR_T1
+participant ":ModelManager" as ModelManager MODEL_COLOR
+participant "csBook:CsBook" as CsBook MODEL_COLOR
+end box
+
+[-> ModelManager : addGroup(Group)
+activate ModelManager
+ModelManager -> CsBook : addGroup(Group)
+activate CsBook
+CsBook --> ModelManager
+deactivate CsBook
+ModelManager -> ModelManager : updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS)
+
+ModelManager -->[
+deactivate ModelManager
+
+
+@enduml

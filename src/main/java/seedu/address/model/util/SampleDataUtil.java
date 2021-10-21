@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.CsBook;
+import seedu.address.model.ReadOnlyCsBook;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
@@ -11,7 +11,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code CsBook} with sample data.
  */
 public class SampleDataUtil {
     public static Student[] getSampleStudents() {
@@ -39,8 +39,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyCsBook getSampleCsBook() {
+        CsBook sampleAb = new CsBook();
         for (Student sampleStudent : getSampleStudents()) {
             sampleAb.addStudent(sampleStudent);
         }

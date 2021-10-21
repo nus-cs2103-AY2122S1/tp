@@ -1,0 +1,17 @@
+@startuml
+!include style.puml
+
+box Storage STORAGE_COLOR_T1
+participant ":JsonCsBookStorage" as JsonCsBookStorage STORAGE_COLOR
+participant ":JsonSerializableCsBook" as JsonSerializableCsBook STORAGE_COLOR
+end box
+
+[-> JsonCsBookStorage : readCsBook()
+activate JsonCsBookStorage
+
+JsonCsBookStorage -> JsonSerializableCsBook : toModelType()
+
+activate JsonSerializableCsBook
+
+
+@enduml
