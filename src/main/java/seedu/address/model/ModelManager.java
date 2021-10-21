@@ -77,12 +77,8 @@ public class ModelManager implements Model {
         filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
     }
 
-    /**
-     * Old constructor - left temporarily to pass unit tests
-     * Initializes a ModelManager with the given addressBook and userPrefs.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
-                        ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
+                        ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, positionBook, userPrefs);
 
@@ -92,7 +88,7 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.positionBook = new PositionBook(positionBook);
-        this.applicantBook = new ApplicantBook();
+        this.applicantBook = new ApplicantBook(applicantBook);
         this.applicationBook = new ApplicationBook();
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
@@ -104,6 +100,39 @@ public class ModelManager implements Model {
      * Left temporarily to pass unit tests
      * Initializes a ModelManager with the given positionBook and userPrefs.
      */
+    public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(positionBook, userPrefs);
+
+        logger.fine("Initializing with position book: " + positionBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook();
+        this.positionBook = new PositionBook(positionBook);
+        this.applicantBook = new ApplicantBook();
+        this.applicationBook = new ApplicationBook();
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+    }
+
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyPositionBook positionBook,
+                        ReadOnlyUserPrefs userPrefs) {
+        super();
+        requireAllNonNull(positionBook, userPrefs);
+
+        logger.fine("Initializing with position book: " + positionBook + " and user prefs " + userPrefs);
+
+        this.addressBook = new AddressBook(addressBook);
+        this.positionBook = new PositionBook(positionBook);
+        this.applicantBook = new ApplicantBook();
+        this.applicationBook = new ApplicationBook();
+        this.userPrefs = new UserPrefs(userPrefs);
+        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
+        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
+    }
+
     public ModelManager(ReadOnlyPositionBook positionBook, ReadOnlyApplicantBook applicantBook,
                         ReadOnlyUserPrefs userPrefs) {
         super();

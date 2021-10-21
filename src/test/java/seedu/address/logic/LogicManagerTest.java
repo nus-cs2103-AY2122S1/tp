@@ -30,6 +30,7 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.applicant.JsonApplicantBookStorage;
 import seedu.address.storage.position.JsonPositionBookStorage;
 import seedu.address.testutil.PersonBuilder;
 
@@ -49,7 +50,10 @@ public class LogicManagerTest {
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         JsonPositionBookStorage positionBookStorage = new JsonPositionBookStorage(
                 temporaryFolder.resolve("positionBook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, positionBookStorage);
+        JsonApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(
+                temporaryFolder.resolve("applicantBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                applicantBookStorage, positionBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -80,7 +84,10 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         JsonPositionBookStorage positionBookStorage = new JsonPositionBookStorage(
                 temporaryFolder.resolve("positionBook.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage, positionBookStorage);
+        JsonApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(
+                temporaryFolder.resolve("applicantBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                applicantBookStorage, positionBookStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
