@@ -154,7 +154,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Search features
+
+#### Find feature
+
+The find feature is facilitated by `FindCommand`. It extends `Command` with a type to be searched, as well as the 
+key to be searched. This feature uses `AttributeContainsKeywordsPredicate#test(Person)` and the person to be searched
+is obtained using `ModelManager#getFilteredPersonList()`. If a search using a partial match can be done, the feature
+also uses `AttributeContainsKeywordsPredicate#testByType(Person, String)`.
+
+The following sequence diagram shows how the find operation works for a name:
+![FindCommandNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The following sequence diagram shows how the find operation works for a Tutorial ID:
+[comment]: <> (![FindCommandTutIdSequenceDiagram]&#40;images/FindTutIdSequenceDiagram.png&#41;)
 
 #### Proposed Implementation
 
