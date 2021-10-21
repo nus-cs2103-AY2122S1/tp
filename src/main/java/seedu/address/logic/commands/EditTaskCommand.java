@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.Description;
 import seedu.address.model.task.EventTask;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
@@ -90,23 +91,28 @@ public class EditTaskCommand extends Command {
 
         TaskName updatedTaskName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getName());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
+        Description description = editTaskDescriptor.getDescription()
+                .orElse(new Description(taskToEdit.getDescription()));
 
         if (taskToEdit instanceof TodoTask) {
-            return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone());
+            return new TodoTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(),
+                    description);
         }
 
         if (taskToEdit instanceof DeadlineTask) {
             TaskDate updatedTaskDate = ((DeadlineTask) taskToEdit).getDeadline();
-            return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate);
+            return new DeadlineTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate,
+                    description);
         }
 
         if (taskToEdit instanceof EventTask) {
             TaskDate updatedTaskDate = ((EventTask) taskToEdit).getTaskDate();
 
-            return new EventTask(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), updatedTaskDate);
+            return new EventTask(updatedTaskName, updatedTags,
+                    taskToEdit.checkIsDone(), updatedTaskDate, description);
         }
 
-        return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone());
+        return new Task(updatedTaskName, updatedTags, taskToEdit.checkIsDone(), description);
     }
 
     @Override
@@ -133,6 +139,7 @@ public class EditTaskCommand extends Command {
      */
     public static class EditTaskDescriptor {
         private TaskName taskName;
+        private Description description;
         private TaskDate taskDate;
         private Set<Tag> tags;
 
@@ -146,13 +153,14 @@ public class EditTaskCommand extends Command {
             setTaskName(toCopy.taskName);
             setDeadline(toCopy.taskDate);
             setTags(toCopy.tags);
+            setDescription(toCopy.description);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(taskName, taskDate, tags);
+            return CollectionUtil.isAnyNonNull(taskName, taskDate, tags, description);
         }
 
         public void setTaskName(TaskName taskName) {
@@ -166,6 +174,15 @@ public class EditTaskCommand extends Command {
         public void setDeadline(TaskDate taskDate) {
             this.taskDate = taskDate;
         }
+
+        public void setDescription(Description description) {
+            this.description = description;
+        }
+
+        public Optional<Description> getDescription() {
+            return Optional.ofNullable(description);
+        }
+
 
         public Optional<TaskDate> getDeadline() {
             return Optional.ofNullable(taskDate);
@@ -205,6 +222,7 @@ public class EditTaskCommand extends Command {
 
             return getTaskName().equals(e.getTaskName())
                     && getDeadline().equals(e.getDeadline())
+                    && getDescription().equals(e.getDescription())
                     && getTags().equals(e.getTags());
         }
     }

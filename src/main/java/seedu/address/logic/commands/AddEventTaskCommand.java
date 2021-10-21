@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -16,10 +17,12 @@ public class AddEventTaskCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_EVENT + "EVENT "
+            + PREFIX_DESCRIPTION + "DESCRIPTION "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Tutorial Prep "
             + PREFIX_EVENT + "2021-09-12 "
+            + PREFIX_DESCRIPTION + "Prof Aaron's mod "
             + PREFIX_TAG + "W1404";
 
     public static final String MESSAGE_SUCCESS = "New event task added: %1$s";

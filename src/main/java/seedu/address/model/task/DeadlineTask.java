@@ -13,8 +13,8 @@ public class DeadlineTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate dueDate) {
-        super(name, tags, isDone);
+    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate dueDate, Description description) {
+        super(name, tags, isDone, description);
         this.dueDate = dueDate;
     }
 
@@ -59,6 +59,8 @@ public class DeadlineTask extends Task {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append("\nDescription: ")
+                .append(getDescription().toString())
                 .append("\nTaskDate: ")
                 .append(getDeadline().toString())
                 .append("\nStatus: ")

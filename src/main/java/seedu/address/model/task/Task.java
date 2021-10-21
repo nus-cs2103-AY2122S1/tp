@@ -15,6 +15,7 @@ public class Task {
 
     private final TaskName name;
     private final Set<Tag> tags = new HashSet<>();
+    private final String description;
     private boolean isDone;
 
     /**
@@ -22,11 +23,13 @@ public class Task {
      *
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
+     * @param description A valid Description of Tags.
      */
-    public Task(TaskName name, Set<Tag> tags, boolean isDone) {
+    public Task(TaskName name, Set<Tag> tags, boolean isDone, Description description) {
         this.name = name;
         this.tags.addAll(tags);
         this.isDone = isDone;
+        this.description = description.description;
     }
 
     public TaskName getName() {
@@ -53,6 +56,9 @@ public class Task {
         return Collections.unmodifiableSet(tags);
     }
 
+    public String getDescription() {
+        return description;
+    }
 
     /**
      * Returns true if both Tasks have the same name.
