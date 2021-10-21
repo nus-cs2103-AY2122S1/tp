@@ -13,6 +13,20 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
+## **Introduction**
+
+CohortConnect is a desktop application for CS students to network. It is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+
+Our app makes it easy to connect with like-minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging Github’s metadata using a proprietary algorithm.
+
+This guide is for current or future developers working on features for CohortConnect, or developers who want to learn 
+more about how CohortConnect is built. It explains the requirements of CohortConnect, the implementation of each 
+individual component, as well as how they are pieced together to execute a command entered by the user.
+
+This developer guide assumes the reader has general knowledge of Java, Object-Oriented Programming and UML notation.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
@@ -23,7 +37,7 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder.
 </div>
 
 ### Architecture
@@ -152,7 +166,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes noteworthy details on how certain features are implemented.
 
 ### Export command
 
@@ -177,11 +191,11 @@ the `execute("export newfriends.json")` API call.
 
 #### Implementation
 
-The Find command accepts names, tags, Telegram handles or Github usernames as parameters with the following prefixes :
+The Find command accepts names, tags, Telegram handles or GitHub usernames as parameters with the following prefixes :
 * no prefix : for names
 * `t/` : for tags
 * `te/` : for Telegram handles
-* `g/` : for Github usernames
+* `g/` : for GitHub usernames
 
 and allows users to search for contacts based on the specified criterion.
 It is facilitated by the `FindCommandParser` class, which implements `Parser<FindCommand>`.
@@ -290,7 +304,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | add individual contacts        | reach out to them later                                                |
 | `* *`    | user                                       | search for contact(s) by tag(s)| contact them based on their grouping                                   |
 | `* *`    | user                                       | search for contact(s) by Telegram handles(s)| contact them conveniently                                 |
-| `* *`    | user                                       | search for contact(s) by Github username(s)| contact them conveniently                                 |
+| `* *`    | user                                       | search for contact(s) by GitHub username(s)| contact them conveniently                                 |
 | `* * *`  | Prof                                       | be able to export a set of contacts | let other professors, TAs and students get a set of contacts quickly |
 | `* * *`  | new user                                   | be able to import a set of contacts          | have some to begin with                                  |
 | `* * *`  | new user                                   | have an introduction splash screen           | utilise the app and its feature well                     |
@@ -302,7 +316,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | new user                                   | learn the command formats                                   | perform tasks quickly and efficiently     |
 | `* * *`  | new user                                   | save contacts                                               | contact these people in the future        |
 | `* * *`  | user                                       | be able to store my contact omitting certain fields         | save contact without having to include email or address |
-
+| `* *`    | user                                       | have a clean and uncluttered GUI                           | navigate easily between different functions in the application |
+| `* *`    | user                                       | retrieve previous and next commands with up and down arrow key | browse my command history to retype misspelled commands |
+| `* * *`  | CS student                                 | sync my data with GitHub account | identify my colleagues by their profiles and connect with other users |
+| `* * *`  | CS student                                 | view the profiles of my contacts | learn more about them and connect with them |
+| `* *`    | user                                       | navigate to a contact's Telegram or GitHub in a single click | easily contact and interact with them |
 
 ### Use cases
 
@@ -555,5 +573,14 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Navigate to and open `/data/addressbook.json` in a text editor.
+
+   2. Delete one line of code from a Person object, such as `"tagged" : [ "friends" ]`
+
+   3. Restart CohortConnect.
+
+   4. CohortConnect will start with no contacts.
+
+   5. An error message will be shown in the `ResultDisplay`, stating that the file is corrupted.
+   
 
