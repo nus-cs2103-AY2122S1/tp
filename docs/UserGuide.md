@@ -95,11 +95,16 @@ This section tells you what to do if you require help while using TAB.
 
 #### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a command summary table as well as a link to access this user guide page.
 
 Format: `help`
+
+- You can select a cell and press <kbd>CONTROL</kbd> + <kbd>C</kbd> or <kbd>COMMAND</kbd> + <kbd>C</kbd> on your keyboard to copy the selected cell value.
+- You can click <kbd>Copy URL</kbd> button to copy the link to this user guide.
+- You can click the right end to each column to sort the rows alphabetically.
+
+![help message](images/helpMessage.png)
+<div style="text-align:center"><i>Help window interface.</i></div>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
@@ -144,6 +149,7 @@ A student can have any number of tags (including 0).
 * At least one contact field is required.<br>
   e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
   included in the add command.
+* `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
 
 </div>
 
@@ -211,16 +217,6 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
 * `find n/Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
-
-#### Viewing a student's details: `view`
-
-> ❕❕ <b>Note:</b> This feature is subject to changes
-
-View data of student with specified index in detail.
-
-![view student details](images/viewAlexDetail.png)
-
-Format: `view INDEX`
 
 #### Listing all students: `list`
 
@@ -465,9 +461,13 @@ Format: `clear`
 
 #### Viewing all tags: `tag`
 
-Shows all the tags that user has created in TAB.
+Shows all the tags that you have created together with the number of students labelled with each tag.
 
 Format: `tag`
+
+![taglist](images/taglist.png)
+<div style="text-align:center"><i>The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</i></div>
+
 
 #### Undoing previous command: `undo`
 
@@ -494,6 +494,12 @@ This section records frequently asked questions from users of TAB.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: I am using a Mac and when I tried to open **Tab.jar**, Mac shows “**TAB.jar** cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
+**A**: Go to <kbd>System Preferences</kbd> → <kbd>Security & Privacy</kbd> → <kbd>General</kbd> and click <kbd>Open Anyway</kbd> at the bottom as shown in the following screenshot.
+
+![macSecurity](images/macSecurity.png)
+<div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
 
 --------------------------------------------------------------------------------------------------------------------
 ## Glossary
