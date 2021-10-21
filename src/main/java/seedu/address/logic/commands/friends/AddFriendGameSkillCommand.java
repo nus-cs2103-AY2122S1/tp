@@ -4,9 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_VALUE;
 
-import java.util.Optional;
-import java.util.Set;
-
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
@@ -14,8 +11,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.GameId;
-import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.SkillValue;
 
 public class AddFriendGameSkillCommand extends Command {
@@ -43,9 +40,9 @@ public class AddFriendGameSkillCommand extends Command {
     public static final String MESSAGE_NO_GAME_LINK_FOUND = "Adding skill value failed. "
             + "Game_ID provided is not linked to friend.";
 
-    private FriendId friendIdToAddSkillFor;
-    private GameId gameIdToAddSkillFor;
-    private SkillValue skillValue;
+    private final FriendId friendIdToAddSkillFor;
+    private final GameId gameIdToAddSkillFor;
+    private final SkillValue skillValue;
 
     /**
      * Constructor for AddFriendGameSkillCommand that takes in the friend and game to update skill level for
@@ -71,16 +68,11 @@ public class AddFriendGameSkillCommand extends Command {
             throw new CommandException(MESSAGE_FRIEND_ID_NOT_IN_MODEL);
         }
         Friend friendToUpdateSkillValue = model.getFriend(friendIdToAddSkillFor);
-        Set<GameFriendLink> friendGameFriendLinks = friendToUpdateSkillValue.getGameFriendLinks();
-
-        Optional<GameFriendLink> linkToUpdate = friendGameFriendLinks.stream().filter(
-            gfl -> gfl.getGameId().equals(this.gameIdToAddSkillFor)).findFirst();
-
-        if (linkToUpdate.isEmpty()) {
+        try {
+            friendToUpdateSkillValue.updateGameFriendLinkSkillValue(gameIdToAddSkillFor, skillValue);
+        } catch (GameLinkNotFoundException glnfe) {
             throw new CommandException(MESSAGE_NO_GAME_LINK_FOUND);
         }
-
-        linkToUpdate.get().setSkillValue(skillValue);
         return new CommandResult(String.format(MESSAGE_SUCCESS_ADD_FRIEND_GAME_SKILL, friendIdToAddSkillFor,
                 gameIdToAddSkillFor, skillValue), CommandType.FRIEND_ADD_GAME_SKILL);
     }
