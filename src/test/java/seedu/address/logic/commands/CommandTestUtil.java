@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_UNIT_PRICE;
@@ -15,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
+import seedu.address.logic.commands.EditProductCommand.EditProductDescriptor;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -25,6 +28,7 @@ import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductContainsKeywordsPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;
 import seedu.address.testutil.EditProductDescriptorBuilder;
+import seedu.address.testutil.TypicalProducts;
 
 /**
  * Contains helper methods for testing commands.
@@ -38,6 +42,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ORDER_ONE = TypicalProducts.CANNON.getId() + " 1 1/1";
+    public static final String VALID_ORDER_TWO = TypicalProducts.DAISY.getId() + " 455 2020/12/31";
 
     public static final String VALID_NAME_CANNON = "Cannon";
     public static final String VALID_NAME_DAISY = "Daisy";
@@ -61,6 +67,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+    public static final String ORDER_DESC_ONE = " " + PREFIX_ORDER + VALID_ORDER_ONE;
+    public static final String ORDER_DESC_TWO = " " + PREFIX_ORDER + VALID_ORDER_TWO;
 
     public static final String NAME_DESC_CANNON = " " + PREFIX_NAME + VALID_NAME_CANNON;
     public static final String NAME_DESC_DAISY = " " + PREFIX_NAME + VALID_NAME_DAISY;
@@ -73,16 +81,14 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_NUMBER_DESC = " " + PREFIX_PHONE_NUMBER + "911a"; // 'a' not allowed in pn
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
+    public static final String INVALID_ORDER_DESC = " " + PREFIX_ORDER + "1"; // order needs id, quantity and time
     public static final String INVALID_UNIT_PRICE_DESC = " " + PREFIX_UNIT_PRICE + "2s"; // 's' not allowed for prices
     public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "3f"; // 'f' not allowed for quantities
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
-    public static final EditClientCommand.EditClientDescriptor DESC_AMY;
-    public static final EditClientCommand.EditClientDescriptor DESC_BOB;
-    public static final EditProductCommand.EditProductDescriptor DESC_CANNON;
-    public static final EditProductCommand.EditProductDescriptor DESC_DAISY;
+    public static final EditClientDescriptor DESC_AMY;
+    public static final EditClientDescriptor DESC_BOB;
+    public static final EditProductDescriptor DESC_CANNON;
+    public static final EditProductDescriptor DESC_DAISY;
 
     static {
         DESC_AMY = new EditClientDescriptorBuilder()
