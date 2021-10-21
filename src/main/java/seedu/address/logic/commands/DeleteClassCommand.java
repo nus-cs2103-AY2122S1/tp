@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 
 public class DeleteClassCommand extends Command {
@@ -48,12 +48,12 @@ public class DeleteClassCommand extends Command {
                 invalidClasses.add(currIndex.getOneBased());
                 continue;
             }
-            List<Person> currStudents = classToDelete
+            List<Student> currStudents = classToDelete
                     .getStudentList().getStudents().stream()
-                    .map(x -> model.getSameNamePerson(new Person(new Name(x)))).collect(Collectors.toList());
-            for (Person person : currStudents) {
-                Person updatedPerson = person.removeClass(classToDelete);
-                model.setPerson(person, updatedPerson);
+                    .map(x -> model.getSameNameStudent(new Student(new Name(x)))).collect(Collectors.toList());
+            for (Student student : currStudents) {
+                Student updatedStudent = student.removeClass(classToDelete);
+                model.setStudent(student, updatedStudent);
             }
             removed.add(classToDelete.getName().name + "|" + classToDelete.getTimeslot());
             model.deleteTuition(classToDelete);

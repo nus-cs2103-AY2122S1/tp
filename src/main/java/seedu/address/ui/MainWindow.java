@@ -18,7 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.TuitionClass;
 import seedu.address.model.tuition.UniqueTuitionList;
 import seedu.address.ui.infopage.InfoPage;
@@ -41,7 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private PersonListPanel personListPanel;
+    private StudentListPanel studentListPanel;
     private TuitionListPanel tuitionListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -53,7 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane studentListPanelPlaceholder;
 
     @FXML
     private StackPane tuitionListPanelPlaceholder;
@@ -127,8 +127,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         tuitionListPanel = new TuitionListPanel(logic.getFilteredTuitionList());
         tuitionListPanelPlaceholder.getChildren().add(tuitionListPanel.getRoot());
@@ -195,8 +195,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public StudentListPanel getStudentListPanel() {
+        return studentListPanel;
     }
 
     /**
@@ -265,7 +265,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void showStudentPage() {
-        updateInfoPage(new StudentInfoPage(Person.getMostRecent()));
+        updateInfoPage(new StudentInfoPage(Student.getMostRecent()));
     }
 
     private void showTuitionPage() {
@@ -284,7 +284,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateStudentListTitle(boolean bool) {
-        personListPanel.setFiltered(bool);
+        studentListPanel.setFiltered(bool);
     }
 
     private void updateTuitionListTitle(boolean bool) {

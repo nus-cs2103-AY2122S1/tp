@@ -8,7 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Student;
 
 /**
  * Command to display full information of a student to user.
@@ -39,17 +39,17 @@ public class ViewCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        List<Person> personList = model.getFilteredPersonList();
+        List<Student> studentList = model.getFilteredStudentList();
 
-        if (index.getOneBased() > personList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (index.getOneBased() > studentList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        Person person = personList.get(index.getZeroBased());
+        Student student = studentList.get(index.getZeroBased());
 
-        Person.setMostRecentTo(person);
+        Student.setMostRecentTo(student);
 
-        return new CommandResult(MESSAGE_SUCCESS + person.getName(),
+        return new CommandResult(MESSAGE_SUCCESS + student.getName(),
                 CommandResult.UiAction.SHOW_STUDENT_PAGE);
     }
 

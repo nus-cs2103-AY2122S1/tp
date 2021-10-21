@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Remark;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Remark;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.StudentList;
@@ -32,7 +32,7 @@ class JsonAdaptedTuition {
     //private final ArrayList<String> student = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedTuition(@JsonProperty("name") String name, @JsonProperty("limit") int limit,
@@ -65,7 +65,7 @@ class JsonAdaptedTuition {
     /**
      * Converts this Jackson-friendly adapted tuition object into the model's {@code TuitionClass} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted student.
      */
     public TuitionClass toModelType() throws IllegalValueException {
 

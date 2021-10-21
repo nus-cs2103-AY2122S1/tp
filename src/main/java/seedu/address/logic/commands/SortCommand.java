@@ -56,7 +56,7 @@ public class SortCommand extends Command {
 
     private void sort(SortCommandParser.Order order, Model model) {
         model.sort(order);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     private String getSuccessMessage(String order) {

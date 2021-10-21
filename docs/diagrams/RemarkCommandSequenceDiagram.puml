@@ -19,10 +19,11 @@ activate logic LOGIC_COLOR
 logic -[LOGIC_COLOR]> ui : showRemarkEditor
 activate ui UI_COLOR_T1
 
-ui -[UI_COLOR_T1]> editor : setRemark
+create editor
+ui -[UI_COLOR_T1]> editor
 activate editor UI_COLOR_T1
 
-user -[USER_COLOR]>editor : new remark
+user -[USER_COLOR]>editor : "new remark"
 editor -[UI_COLOR_T1]-> ui : newRemark
 deactivate editor
 

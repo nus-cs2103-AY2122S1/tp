@@ -13,18 +13,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.SortCommandParser;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.student.UniqueStudentList;
+import seedu.address.model.student.exceptions.DuplicateStudentException;
+import seedu.address.model.student.exceptions.StudentNotFoundException;
 import seedu.address.model.tuition.exceptions.DuplicateTuitionException;
 import seedu.address.model.tuition.exceptions.TuitionNotFoundException;
 
 /**
  * A list of tuition that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code TuitionClass#isSameTuition(TuitionClass)}.
+ * A student is considered unique by comparing using {@code TuitionClass#isSameTuition(TuitionClass)}.
  * As such, adding and updating of tuition uses TuitionClass#isSameTuition(TuitionClass) for
  * equality to ensure that the Tuition being added or updated is
  * unique in terms of identity in the UniqueTuitionList.
- * However, the removal of a person uses TuitionClass#equals(Object) to ensure
+ * However, the removal of a student uses TuitionClass#equals(Object) to ensure
  * that the TuitionClass with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -74,18 +75,18 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     /**
      * Replaces the tuition {@code target} in the list with {@code editedTuition}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The student identity of {@code editedStudent} must not be the same as another existing student in the list.
      */
     public void setTuition(TuitionClass target, TuitionClass editedTuition) {
         requireAllNonNull(target, editedTuition);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new PersonNotFoundException();
+            throw new StudentNotFoundException();
         }
 
         if (!target.isSameTuition(editedTuition) && contains(editedTuition)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateStudentException();
         }
 
         internalList.set(index, editedTuition);
@@ -110,12 +111,12 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
 
     /**
      * Replaces the contents of this list with {@code tuitions}.
-     * {@code persons} must not contain duplicate persons.
+     * {@code students} must not contain duplicate students.
      */
     public void setTuitions(List<TuitionClass> tuitions) {
         requireAllNonNull(tuitions);
         if (!tuitionsAreUnique(tuitions)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateStudentException();
         }
 
         internalList.setAll(tuitions);
@@ -136,7 +137,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.person.UniquePersonList // instanceof handles nulls
+                || (other instanceof UniqueStudentList // instanceof handles nulls
                 && internalList.equals(((seedu.address.model.tuition.UniqueTuitionList) other).internalList));
     }
 
@@ -146,7 +147,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code students} contains only unique students.
      */
     private boolean tuitionsAreUnique(List<TuitionClass> tuitionClasses) {
         for (int i = 0; i < tuitionClasses.size() - 1; i++) {

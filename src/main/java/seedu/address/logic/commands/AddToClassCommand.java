@@ -14,8 +14,8 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tuition.StudentList;
 import seedu.address.model.tuition.TuitionClass;
@@ -98,8 +98,8 @@ public class AddToClassCommand extends Command {
     }
 
     private void updateModel(Model model, TuitionClass tuitionClass,
-                             TuitionClass modifiedClass, Person studentToAdd, Person studentToChange) {
-        model.setPerson(studentToChange, studentToAdd);
+                             TuitionClass modifiedClass, Student studentToAdd, Student studentToChange) {
+        model.setStudent(studentToChange, studentToAdd);
         model.setTuition(tuitionClass, modifiedClass);
     }
 
@@ -113,22 +113,23 @@ public class AddToClassCommand extends Command {
      */
     private ArrayList[] getStudent(StudentList studentList, Model model, TuitionClass tuitionClass) {
         ArrayList<String> invalidStudentNames = new ArrayList<>();
-        ArrayList<Person> newStudents = new ArrayList<>();
+        ArrayList<Student> newStudents = new ArrayList<>();
         ArrayList<String> notAdded = new ArrayList<>();
         ArrayList<String> validStudentNames = new ArrayList<>();
         ArrayList<String> existingStudent = new ArrayList<>();
         validStudentNames.addAll(tuitionClass.getStudentList().getStudents());
         int limit = tuitionClass.getLimit().getLimit();
         for (String studentName: studentList.getStudents()) {
-            Person person = new Person(new Name(studentName));
-            if (!model.hasPerson(person)) {
+            Student student = new Student(new Name(studentName));
+            if (!model.hasStudent(student)) {
                 if (!invalidStudentNames.contains(studentName)) {
                     invalidStudentNames.add(studentName);
                 }
                 continue;
             }
             if (validStudentNames.contains(studentName)) {
-                if (!existingStudent.contains(studentName) && !newStudents.contains(model.getSameNamePerson(person))) {
+                if (!existingStudent.contains(studentName)
+                        && !newStudents.contains(model.getSameNameStudent(student))) {
                     existingStudent.add(studentName);
                 }
                 continue;
@@ -139,8 +140,8 @@ public class AddToClassCommand extends Command {
                 }
                 continue;
             }
-            if (!newStudents.contains(model.getSameNamePerson(person))) {
-                newStudents.add(model.getSameNamePerson(person));
+            if (!newStudents.contains(model.getSameNameStudent(student))) {
+                newStudents.add(model.getSameNameStudent(student));
                 validStudentNames.add(studentName);
             }
         }
@@ -157,23 +158,23 @@ public class AddToClassCommand extends Command {
      */
     private CommandResult executeStudentName(Model model, TuitionClass tuitionClass) {
         ArrayList[] students = this.getStudent(studentList, model, tuitionClass);
-        ArrayList<Person> newStudents = students[0];
+        ArrayList<Student> newStudents = students[0];
         String logStudentName = "";
         if (newStudents.size() == 0) {
             return new CommandResult(getMessage(students));
         }
         TuitionClass modifiedClass = null;
-        for (Person student: newStudents) {
+        for (Student student: newStudents) {
             modifiedClass = model.addToClass(tuitionClass, student);
         }
         if (modifiedClass == null) {
             return new CommandResult(getMessage(students));
         }
-        for (Person person: newStudents) {
-            Person studentToAdd = person;
-            Person studentToChange = person;
-            logStudentName += person.getNameString();
-            if (!person.equals(newStudents.get(newStudents.size() - 1))) {
+        for (Student student : newStudents) {
+            Student studentToAdd = student;
+            Student studentToChange = student;
+            logStudentName += student.getNameString();
+            if (!student.equals(newStudents.get(newStudents.size() - 1))) {
                 logStudentName += ", ";
             }
             studentToAdd.addClass(modifiedClass);
@@ -194,7 +195,7 @@ public class AddToClassCommand extends Command {
     private CommandResult executeStudentIndex(Model model, TuitionClass tuitionClass) throws CommandException {
         ArrayList<String> studentNames = new ArrayList<>();
         for (Index index: studentIndex) {
-            Person student = model.getStudent(index);
+            Student student = model.getStudent(index);
             if (student == null) {
                 this.unfoundIndex.add("Index " + index.getOneBased() + " ");
             } else {
@@ -213,7 +214,7 @@ public class AddToClassCommand extends Command {
      */
     private String getMessage(ArrayList[] students) {
         ArrayList<String> invalidStudentNames = students[1];
-        ArrayList<Person> newStudents = students[0];
+        ArrayList<Student> newStudents = students[0];
         ArrayList<String> notAdded = students[3];
         boolean limitExceeded = notAdded.size() > 0;
         boolean hasInvalidNames = invalidStudentNames.size() > 0;
@@ -221,8 +222,8 @@ public class AddToClassCommand extends Command {
         boolean studentExists = students[4].size() > 0;
         String message = "";
         ArrayList<String> studentAdded = new ArrayList<>();
-        for (Person person: newStudents) {
-            studentAdded.add(person.getName().toString());
+        for (Student student : newStudents) {
+            studentAdded.add(student.getName().toString());
         }
         if (noStudentAdded) {
             message += MESSAGE_NO_STUDENT_ADDED + "\n";
