@@ -225,7 +225,20 @@ Command Format: `filter [g/GRADE] [s/Subject]`
 
 Examples:
 * `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective list.
-* `filter l/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
+* `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
+
+### Viewing of lesson roster: `roster`
+
+Displays the student roster of a specified lesson in the student panel.
+
+Command Format: `roster INDEX`
+
+* Displays the student roster of the lesson of the specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
 
 ### Clearing all entries : `clear`
 
@@ -270,6 +283,7 @@ Action | Format, Examples
 **Unenroll** | `unenroll STUDENT_INDEX l/LESSON_INDEX`<br> e.g. `unenroll 1 l/1`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **Filter** | `filter [g/GRADE] s[SUBJECT]`<br> e.g. `filter g/P2`
+**View roster** | `roster INDEX` <br> e.g. `roster 1`
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
