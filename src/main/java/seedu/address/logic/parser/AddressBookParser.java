@@ -10,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.modulelesson.ClearModuleLessonCommand;
+import seedu.address.logic.commands.modulelesson.ListModuleLessonCommand;
 import seedu.address.logic.commands.person.ClearPersonCommand;
 import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -62,6 +63,9 @@ public class AddressBookParser {
 
         case LIST_PERSON:
             return new ListPersonCommand();
+
+        case LIST_MODULE_LESSON:
+            return new ListModuleLessonCommand();
 
         case CLEAR_MODULE_LESSON:
             return new ClearModuleLessonCommand();

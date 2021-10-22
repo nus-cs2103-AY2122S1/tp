@@ -19,6 +19,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.person.EditPersonCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -118,8 +120,9 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered person list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
@@ -133,7 +136,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the persons at the given {@code targetIndex1} and
+     * Updates {@code model}'s filtered person list to show only the persons at the given {@code targetIndex1} and
      * {@code targetIndex2} in the {@code model}'s address book.
      */
     public static void showPersonAtMultipleIndex(Model model, Index targetIndex1, Index targetIndex2) {
@@ -150,4 +153,18 @@ public class CommandTestUtil {
         assertEquals(2, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered lesson list to show only the lesson at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleLessonList().size());
+
+        ModuleLesson lesson = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
+        final String moduleCode = lesson.getModuleCode().getModuleCodeName();
+        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(moduleCode));
+        System.out.println(model.getFilteredModuleLessonList());
+
+        assertEquals(1, model.getFilteredModuleLessonList().size());
+    }
 }
