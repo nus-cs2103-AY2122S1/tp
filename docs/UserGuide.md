@@ -189,11 +189,11 @@ Examples:
 
 Adds a profile to your favourites list.
 
-Format: `addfav STUDENT_ID`
+Format: `addFav STUDENT_ID`
 
 Examples:
-* `addfav A0222594A`
-* `addfav A1234967R`
+* `addFav A0222594A`
+* `addFav A1234967R`
   <br>
   <br>
   ![result for 'addfav A1234967R'](images/screenshots/addfav.png)
@@ -202,11 +202,11 @@ Examples:
 
 Removes a user-specified profile from the favourites list.
 
-Format: `remfav STUDENT_ID`
+Format: `remFav STUDENT_ID`
 
 Examples:
-* `remove A0212345X`
-* `remove A1234567R`
+* `remFav A0212345X`
+* `remFav A1234567R`
   <br>
   <br>
   ![result for 'remfav A1234567R'](images/screenshots/remfav.png)
@@ -226,10 +226,10 @@ Format: `list`
 
 Shows a list of all profiles that the user has added to their favourites list.
 
-Format: `listfav`
+Format: `listFav`
 <br>
 <br>
-![result for 'listfav'](images/screenshots/listfav.png)
+![result for 'listFav'](images/screenshots/listfav.png)
 
 #### 4.3 Find profiles by name : `find`
 
