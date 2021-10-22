@@ -287,7 +287,7 @@ Displays the specified contact from the contact list.
 
 Format: `view INDEX`
 
-* Deletes the contact at the specified INDEX
+* Displays the contact at the specified INDEX
 * The index refers to the index number shown in the displayed contact list
 * The index must be a positive integer 1, 2, 3, ...
 
