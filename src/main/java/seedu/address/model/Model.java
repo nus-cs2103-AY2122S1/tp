@@ -107,14 +107,14 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
     void deleteTask(Task toDelete);
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
-    void markDone(Task task);
+    void markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
     /**
@@ -123,7 +123,7 @@ public interface Model {
     void addOrder(Order order);
 
     /**
-     * Returns true if an order with the same identity as {@code order} exists in the task list.
+     * Returns true if a order with the same identity as {@code order} exists in the order list.
      */
     boolean hasOrder(Order order);
 
@@ -134,7 +134,8 @@ public interface Model {
      */
     void setOrder(Order target, Order editedOrder);
 
-    /** Returns and unmodifiable view of the filtered order list */
+
+    /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
     void deleteOrder(Order toDelete);

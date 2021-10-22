@@ -39,6 +39,7 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
+
     }
 
     public ModelManager() {
@@ -119,7 +120,7 @@ public class ModelManager implements Model {
     //=========== Task Management ==================================================================================
 
     /**
-     * check if tasklist has this task.
+     * Checks if tasklist has this task.
      */
     @Override
     public boolean hasTask(Task task) {
@@ -128,7 +129,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * adding a task to tasklist.
+     * Adds a task to tasklist.
      */
     public void addTask(Task toAdd) {
         addressBook.addTask(toAdd);
@@ -136,7 +137,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * deleting a task from tasklist.
+     * Deletes a task from tasklist.
      */
     public void deleteTask(Task toDelete) {
         addressBook.deleteTask(toDelete);
@@ -159,14 +160,15 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-    public void markDone(Task task) {
+    public void markTask(Task task) {
         addressBook.markDone(task);
     }
+
 
     //=========== Order Management ==================================================================================
 
     /**
-     * check if orderlist has this order.
+     * Checks if orderlist has this order.
      */
     @Override
     public boolean hasOrder(Order order) {
@@ -181,7 +183,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * adding an order to tasklist.
+     * Adds an order to orderlist.
      */
     public void addOrder(Order toAdd) {
         addressBook.addOrder(toAdd);
@@ -189,7 +191,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * deleting an order from orderlist.
+     * Deletes an order from orderlist.
      */
     public void deleteOrder(Order toDelete) {
         addressBook.deleteOrder(toDelete);
@@ -206,8 +208,12 @@ public class ModelManager implements Model {
         filteredOrders.setPredicate(predicate);
     }
 
+    /**
+     * Marks an order as completed
+     */
     public void markOrder(Order order) {
         addressBook.markOrder(order);
+
     }
 
     //=========== Filtered Person List Accessors =============================================================
