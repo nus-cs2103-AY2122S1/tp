@@ -181,7 +181,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Card-like UI Elements
 
-Card-like UI elements are objects that are shown to the user in the their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
+Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
 
 These UI elements inherit the `Card` class, which in turn inherits `UiPart<Region>`. 
 
@@ -193,11 +193,11 @@ There are thus two static instances of `StudentListPanel` and `LessonListPanel` 
 
 ![CardUiSequence](images/CardUiSequence.png)
 
-When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes. The correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels to the user.
+When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes to prepare them to accept new nodes (panels). Then, the correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels to the user.
 
-Conversely, if a user chooses to hide the details, `UiManager.hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
+Conversely, if a user chooses to hide the details, `UiManager#hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
 
-The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. On launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow::fillInnerParts`. The details are shown below:
+The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. In contrast, during the application launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow::fillInnerParts`. The details are shown below:
 
 ![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
 
