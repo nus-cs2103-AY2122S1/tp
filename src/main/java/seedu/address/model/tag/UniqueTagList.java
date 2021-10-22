@@ -167,7 +167,7 @@ public class UniqueTagList {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTagList // instanceof handles nulls
-                        && internalList.equals(((UniqueTagList) other).internalList)
-                        && tagCounter.equals(((UniqueTagList) other).tagCounter));
+                && internalList.equals(((UniqueTagList) other).internalList)
+                && tagCounter.equals(((UniqueTagList) other).tagCounter));
     }
 }

@@ -182,8 +182,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                        && persons.equals(((AddressBook) other).persons))
-                        && tags.equals(((AddressBook) other).tags);
+                && persons.equals(((AddressBook) other).persons))
+                && tags.equals(((AddressBook) other).tags);
     }
 
     @Override
