@@ -43,6 +43,8 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
 1. Double-click the file to start the app. A GUI should appear in a few seconds
 
+<img src="images/MainApp.png" width="800px">
+
 1. Type the command in the command box and press Enter to execute it <br> e.g. typing **`help`** and pressing Enter will open the help window<br>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -61,6 +63,8 @@ These are the key terms defined for usage of the commands:
 - **Index**: Refers to the number displayed next to the name in the displayed person list. <br> e.g. 1, 2, 3...
 
 - **Alias**: These are alternative words that you can use to perform the same command 
+
+<img src="images/Walkthrough.png" width="800px">
 
 Notes about the command format:<br>
 
@@ -103,6 +107,8 @@ Format: `help`
 
 Command aliases: `man` `h`
 
+<img src="images/HelpCommand.png" width="800px">
+
 ***
 
 ### Adding a person: `add` <a name="add"></a>
@@ -123,6 +129,8 @@ Examples:
 * `add n/Terry e/terry321@gmail.com m/CS2100 B31 T18`
 
 Command alias: `a`
+
+<img src="images/AddCommand.png" width="800px">
 
 ***
 
@@ -153,6 +161,8 @@ Examples:
 
 Command alias: `f`
 
+<img src="images/FindCommand.png" width="800px">
+
 ***
 
 ### Editing contact: `edit` <a name="edit"></a>
@@ -173,6 +183,8 @@ Examples:
 
 Command aliases: `update` `e`
 
+<img src="images/EditCommand.png" width="1000px">
+
 ***
 
 ### Deleting contact individually / in batches: `delete` <a name="delete"></a>
@@ -191,6 +203,8 @@ Examples:
 
 Command aliases: `del` `rm` `d` 
 
+<img src="images/DeleteCommand.png" width="800px">
+
 ***
 
 ### Deleting all contacts: `clear` <a name="clear"></a>
@@ -200,6 +214,8 @@ Purges **all** existing contacts from the address book. **Use with caution.**
 Format: `clear`
 
 Command alias: `clr`
+
+<img src="images/ClearCommand.png" width="800px">
 
 ***
 
