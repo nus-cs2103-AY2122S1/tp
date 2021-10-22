@@ -22,7 +22,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DURATION = new Prefix("dur/");
     public static final Prefix PREFIX_START = new Prefix("s/");
     public static final Prefix PREFIX_END = new Prefix("e/");
-    public static final Prefix PREFIX_DURATION = new Prefix("dur/");
 
     /* Flag definitions */
     public static final String FLAG_ADD = "-a";
