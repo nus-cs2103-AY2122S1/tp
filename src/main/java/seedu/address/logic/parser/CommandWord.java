@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -25,15 +27,17 @@ public enum CommandWord {
     HELP("help", "man", "h"),
     EXIT("exit", "quit", "q"),
     ADD_PERSON("add", "a"),
-    CLEAR_PERSON("clear", "clr"),
+    CLEAR_PERSON("clear", "clr", "c"),
     DELETE_PERSON("delete", "del", "rm", "d"),
     EDIT_PERSON("edit", "update", "e"),
     FIND_PERSON("find", "f"),
     LIST_PERSON("list", "ls"),
     REMARK_PERSON("remark"),
-    EDIT_MODULE_LESSON("editc", "ec");
+    EDIT_MODULE_LESSON("editc", "ec"),
+    CLEAR_MODULE_LESSON("clearc", "clrc", "cc");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
+    private static final Logger logger = LogsCenter.getLogger(CommandWord.class);
 
     static {
         Map<CommandWord, ArrayList<String>> aliasMap = new HashMap<>();
@@ -63,9 +67,11 @@ public enum CommandWord {
         String aliasToLowerCase = userInput.toLowerCase();
         for (CommandWord cw : ALIAS_MAP.keySet()) {
             if (cw.aliasList.contains(aliasToLowerCase)) {
+                logger.info("----------------[Alias given is supported][" + userInput + "]");
                 return cw;
             }
         }
+        logger.info("----------------[Not a supported alias][" + userInput + "]");
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 
