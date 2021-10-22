@@ -28,6 +28,9 @@ public class ReserveCommandParser implements Parser<ReserveCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         LocalDateTime time = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_TIME).get());
 
+        assert numberOfPeople > 0;
+        assert phone.value.length() > 0;
+
         return new ReserveCommand(phone, numberOfPeople, time);
     }
 }
