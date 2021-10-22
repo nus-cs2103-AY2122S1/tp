@@ -1,14 +1,14 @@
-package seedu.academydirectory.versioncontrol.logic.parsers;
+package seedu.academydirectory.logic.parser;
 
 import static seedu.academydirectory.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.versioncontrol.logic.commands.RevertCommand;
+import seedu.academydirectory.logic.commands.RevertCommand;
 
 /**
  * Parses input arguments and creates a new RevertCommand object
  */
-public class RevertCommandParser {
+public class RevertCommandParser implements Parser<RevertCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RevertCommand

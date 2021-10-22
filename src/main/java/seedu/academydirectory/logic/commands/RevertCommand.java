@@ -1,16 +1,15 @@
-package seedu.academydirectory.versioncontrol.logic.commands;
+package seedu.academydirectory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.text.ParseException;
 
-import seedu.academydirectory.logic.commands.CommandResult;
-import seedu.academydirectory.versioncontrol.OptionalVersion;
-import seedu.academydirectory.versioncontrol.Version;
+import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 
-public class RevertCommand extends VcCommand {
+public class RevertCommand extends Command {
     public static final String COMMAND_WORD = "revert";
 
     public static final String HELP_MESSAGE = "### Revert to a history : `revert`\n"
@@ -35,11 +34,15 @@ public class RevertCommand extends VcCommand {
     }
 
     @Override
-    public CommandResult execute(OptionalVersion<Version> version) throws IOException, ParseException {
-        requireNonNull(version);
-        Commit relevantCommit = version.revert(this.fiveDigitHash);
-        if (relevantCommit.equals(Commit.NULL)) {
-            return new CommandResult(REVERT_REQUEST_REJECTED, true, false);
+    public CommandResult execute(VersionedModel model) throws CommandException {
+        requireNonNull(model);
+        try {
+            Commit relevantCommit = model.revert(this.fiveDigitHash);
+            if (relevantCommit.equals(Commit.NULL)) {
+                throw new CommandException(REVERT_REQUEST_REJECTED);
+            }
+        } catch (IOException | ParseException e) {
+            throw new CommandException(REVERT_REQUEST_REJECTED, e);
         }
         return new CommandResult(REVERT_SUCCESSFUL_ACKNOWLEDGEMENT, false, true);
     }

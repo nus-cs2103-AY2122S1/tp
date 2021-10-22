@@ -8,11 +8,11 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.assertComman
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
+import seedu.academydirectory.model.VersionedModel;
 
 public class HelpCommandTest {
-    private final Model model = new ModelManager();
+    private final VersionedModel model = new ModelManager();
 
     @Test
     public void valid_help_commands() {

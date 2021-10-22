@@ -24,6 +24,8 @@ import seedu.academydirectory.logic.commands.RetrieveCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.SortCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.logic.commands.HistoryCommand;
+import seedu.academydirectory.logic.commands.RevertCommand;
 
 /**
  * Parses user input.
@@ -98,6 +100,12 @@ public class AcademyDirectoryParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommandParser().parse(arguments);
+
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+
+        case RevertCommand.COMMAND_WORD:
+            return new RevertCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

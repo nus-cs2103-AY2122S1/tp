@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Information;
 import seedu.academydirectory.model.student.InformationWantedFunction;
 
@@ -61,7 +62,7 @@ public class RetrieveCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
         return new CommandResult(filterList.stream().parallel().map(x -> executeFilter(model, x))
                 .collect(Collectors.joining("\n")));

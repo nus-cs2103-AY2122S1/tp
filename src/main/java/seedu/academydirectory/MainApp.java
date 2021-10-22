@@ -16,11 +16,11 @@ import seedu.academydirectory.commons.util.StringUtil;
 import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.LogicManager;
 import seedu.academydirectory.model.AcademyDirectory;
-import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.UserPrefs;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.util.SampleDataUtil;
 import seedu.academydirectory.storage.AcademyDirectoryStorage;
 import seedu.academydirectory.storage.JsonAcademyDirectoryStorage;
@@ -30,8 +30,6 @@ import seedu.academydirectory.storage.StorageManager;
 import seedu.academydirectory.storage.UserPrefsStorage;
 import seedu.academydirectory.ui.Ui;
 import seedu.academydirectory.ui.UiManager;
-import seedu.academydirectory.versioncontrol.OptionalVersion;
-import seedu.academydirectory.versioncontrol.VersionManager;
 
 /**
  * Runs the application.
@@ -45,8 +43,7 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
-    protected Model model;
-    protected OptionalVersion<seedu.academydirectory.versioncontrol.Version> versionManager;
+    protected VersionedModel model;
     protected Config config;
 
     @Override
@@ -65,20 +62,9 @@ public class MainApp extends Application {
 
         initLogging(config);
 
-        // TODO: Take CLI argument to use VersionManager or not
-        seedu.academydirectory.versioncontrol.Version vm;
-        boolean useVm = true;
-        if (useVm) {
-            vm = new VersionManager(storage.getAcademyDirectoryFilePath());
-        } else {
-            vm = null;
-        }
-
-        versionManager = OptionalVersion.<seedu.academydirectory.versioncontrol.Version>ofNullable(vm);
-
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model, storage, versionManager);
+        logic = new LogicManager(model, storage);
 
         ui = new UiManager(logic);
     }
@@ -89,7 +75,7 @@ public class MainApp extends Application {
      * is not found, or an empty academy directory will be used instead if errors occur when reading {@code storage}'s
      * academy directory.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private VersionedModel initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAcademyDirectory> academyDirectoryOptional;
         ReadOnlyAcademyDirectory initialData;
         try {

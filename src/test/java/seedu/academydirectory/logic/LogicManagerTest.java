@@ -26,6 +26,7 @@ import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.UserPrefs;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.storage.JsonAcademyDirectoryStorage;
 import seedu.academydirectory.storage.JsonUserPrefsStorage;
@@ -38,7 +39,7 @@ public class LogicManagerTest {
     @TempDir
     public Path temporaryFolder;
 
-    private Model model = new ModelManager();
+    private final VersionedModel model = new ModelManager();
     private Logic logic;
 
     @BeforeEach

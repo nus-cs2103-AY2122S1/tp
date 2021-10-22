@@ -6,9 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
 
+import java.io.IOException;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -18,11 +21,12 @@ import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.AcademyDirectory;
-import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.testutil.StudentBuilder;
+import seedu.academydirectory.versioncontrol.objects.Commit;
 
 public class AddCommandTest {
 
@@ -78,7 +82,7 @@ public class AddCommandTest {
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private class ModelStub implements VersionedModel {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -152,6 +156,21 @@ public class AddCommandTest {
         @Override
         public <T> ObservableList<T> getFilteredStudentListView(Function<? super Student, ? extends T> function) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean commit(String message) {
+            return true;
+        }
+
+        @Override
+        public List<String> retrieveHistory() {
+            return List.of("");
+        }
+
+        @Override
+        public Commit revert(String fiveCharHash) throws IOException, ParseException {
+            return Commit.NULL;
         }
     }
 

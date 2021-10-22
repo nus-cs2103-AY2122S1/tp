@@ -2,7 +2,6 @@ package seedu.academydirectory.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -13,14 +12,10 @@ import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.AcademyDirectoryParser;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.storage.Storage;
-import seedu.academydirectory.versioncontrol.OptionalVersion;
-import seedu.academydirectory.versioncontrol.Version;
-import seedu.academydirectory.versioncontrol.logic.commands.VcCommand;
-import seedu.academydirectory.versioncontrol.logic.parsers.AcademyDirectoryVcCommandParser;
 
 /**
  * The main LogicManager of the app.
@@ -29,48 +24,34 @@ public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
-    private final Model model;
+    private final VersionedModel model;
     private final Storage storage;
-    private final OptionalVersion<Version> version;
     private final AcademyDirectoryParser academyDirectoryParser;
-    private final AcademyDirectoryVcCommandParser versionControlParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code StorageManager}.
      */
-    public LogicManager(Model model, Storage storage, OptionalVersion<Version> version) {
+    public LogicManager(VersionedModel model, Storage storage) {
         this.model = model;
         this.storage = storage;
-        this.version = version;
         academyDirectoryParser = new AcademyDirectoryParser();
-        versionControlParser = new AcademyDirectoryVcCommandParser();
     }
 
-    public LogicManager(Model model, Storage storage) {
-        this(model, storage, OptionalVersion.ofNullable(null));
-    }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
-        try {
-            VcCommand command = versionControlParser.parseCommand(commandText);
-            commandResult = command.execute(version);
-        } catch (IOException | java.text.ParseException ioe) {
-            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-        } catch (ParseException e) {
-            Command command = academyDirectoryParser.parseCommand(commandText);
-            commandResult = command.execute(model);
+        Command command = academyDirectoryParser.parseCommand(commandText);
+        commandResult = command.execute(model);
 
-            try {
-                storage.saveAcademyDirectory(model.getAcademyDirectory());
-                logger.log(Level.INFO, "Commit successful? " + (version.commit(commandText) ? "Yes" : "No"));
-            } catch (IOException ioe) {
-                throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
-            }
+        try {
+            storage.saveAcademyDirectory(model.getAcademyDirectory());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
+
         return commandResult;
     }
 

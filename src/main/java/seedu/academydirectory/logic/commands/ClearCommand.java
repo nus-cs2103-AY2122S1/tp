@@ -3,7 +3,7 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.academydirectory.model.AcademyDirectory;
-import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.VersionedModel;
 
 /**
  * Clears the academy directory.
@@ -20,9 +20,10 @@ public class ClearCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
         model.setAcademyDirectory(new AcademyDirectory());
+        model.commit(MESSAGE_SUCCESS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

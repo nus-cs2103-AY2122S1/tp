@@ -8,7 +8,7 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 
 /**
@@ -70,7 +70,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(VersionedModel model) throws CommandException {
         requireNonNull(model);
 
         if (model.hasStudent(toAdd)) {
@@ -78,6 +78,8 @@ public class AddCommand extends Command {
         }
 
         model.addStudent(toAdd);
+
+        model.commit(String.format(MESSAGE_SUCCESS, toAdd));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
