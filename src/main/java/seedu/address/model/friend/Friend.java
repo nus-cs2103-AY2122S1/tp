@@ -9,6 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
+import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.SkillValue;
@@ -86,6 +87,21 @@ public class Friend {
      */
     public Set<GameFriendLink> getGameFriendLinks() {
         return Collections.unmodifiableSet(gameFriendLinks);
+    }
+
+    /**
+     * Returns true if the friend is currently associated with the game provided.
+     * @param game Game to check.
+     * @return True if the friend is associated with the game.
+     */
+    public boolean hasGameAssociation(Game game) {
+        Set<GameFriendLink> gameFriendLinks = this.getGameFriendLinks();
+        if (gameFriendLinks.stream().filter(gameFriendLink -> gameFriendLink
+                .getGameId().equals(game.getGameId())).count() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**

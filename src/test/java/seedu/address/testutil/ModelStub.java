@@ -105,6 +105,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void unlinkFriend(Friend toUnlink, Game game) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ReadOnlyGamesList getGamesList() {
         throw new AssertionError("This method should not be called.");
     }

@@ -145,6 +145,11 @@ public class ModelManager implements Model {
         friendsList.linkFriend(toLink, gameFriendLink);
     }
 
+    @Override
+    public void unlinkFriend(Friend toUnlink, Game game) {
+        friendsList.unlinkFriend(toUnlink, game);
+    }
+
     //=========== Filtered Friend List Accessors =============================================================
 
     /**

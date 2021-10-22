@@ -50,9 +50,6 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `get --game GAME_NAME`, `GAME_NAME` is a parameter which can be used as `get --game CSGO`.
 
-* Items in square brackets are optional.<br>
-  e.g `friend FRIEND_ID [--name NAME]` can be used as `friend Draco --name “Marcus Tang”` or as `friend Draco`.
-
 * Items with `…` after them can be used one or more times.<br>
   e.g. `GAME_NAME:IN_GAME_USERNAME…` can be used as `Valorant:biscuitismydog`, `Valorant:biscuitismydog Minecraft:Draco` etc.
 
@@ -117,19 +114,30 @@ Format: `game --delete GAME_NAME`
 Examples:
 * `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
 
-### Link games with a friend: `link`
+### Link games with a friend: `friend --link`
 
-Links game and the associated in-game username for each game to a friend for the provided gitGud FRIEND_ID to
-his/her friend information.
+Links game and the associated in-game username for the game to a friend with the provided FRIEND_ID.
 
-Format: `link --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
+Format: `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
 
 * Both FRIEND_ID and GAME_NAME has to already be inside the database.
 
 Examples:
-* `link --friend Draco --game DOTA --user Draco995`
+* `friend --link Draco --game DOTA --user Draco995`
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
   to the friend with the gitGud FRIEND_ID ‘Draco’.
+
+### Unlinking a game from a friend: `friend --unlink`
+
+Removes the link between a friend and a game.
+
+Format: `friend --unlink FRIEND_ID --game GAME_NAME`
+
+* FRIEND_ID has to already be inside the database.
+* The friend has to have a current association with the provided GAME_NAME.
+
+Examples:
+* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_NAME 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
 ### Listing multiple friends data: `friend --list`
 
@@ -213,7 +221,8 @@ Action | Format, Examples
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
 **Add game** | `game --add GAME_NAME` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
-**Link game and friend** | `link --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME”…`<br> e.g., `link --friend Draco --game Valorant --user taufiq007`
+**Link game and friend** | `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
+**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_NAME` <br> e.g., `friend --unlink Draco --game DOTA`
 **List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
 **List Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
 **Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
