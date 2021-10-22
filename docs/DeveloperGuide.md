@@ -175,7 +175,7 @@ However, one use case we wanted to cater to was students who group their contact
 * **Alternative 2**: Match full words only
     * Pros: Easy to implement as this uses the same logic as finding persons by name
     * Cons: May lead to unexpected behaviour for the above use case
-    
+
 Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
 
 ### \[Proposed\] Undo/redo feature
@@ -277,7 +277,7 @@ The following diagram shows how `mkdir` works:
 * **Alternative 1 (current choice)**: Folders hold references to contacts
   * Pros: Easier management of folders
   * Cons: More difficult to implement
-    
+
 Diagram:
 
 ![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
@@ -285,7 +285,7 @@ Diagram:
 * **Alternative 2**: Contacts hold references to folders
     * Pros: Easy to implement
     * Cons: More complex management of folders, Similar to tags which is already implemented
-    
+
 Diagram:
 
 ![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
@@ -297,8 +297,8 @@ Diagram:
 Folders are removed by first specifying the old folder's name and followed
 by the new folder's name.
 
-The underlying implementation essentially creates a new folder with the 
-newly specified name and copies all the contacts from the old to the new 
+The underlying implementation essentially creates a new folder with the
+newly specified name and copies all the contacts from the old to the new
 folder. The new folder is saved in the `UniqueFolderList` in `AddressBook`
 just like the old folder.
 
@@ -308,13 +308,10 @@ The following diagram shows how `mv` works:
 
 #### Design considerations:
 
-* **Alternative 1 (current choice)**: Old folder and new folder name is 
-  separated by the pipe operator `|`.
-    * Pros: Easy to distinguish between the folder to be replaced and
-      the new incoming folder name considering how folder name can have blank
-      spaces in between.
-    * Cons: More difficult to implement.
-    
+* **Alternative 1 (current choice)**: Old folder and new folder name are separated by the pipe operator `|`.
+    * Pros: Easy to distinguish between the folder to be replaced and the new incoming folder name considering how folder name can have blank spaces in between
+    * Cons: More difficult to implement
+
 ### Viewing list of folders: `ls -folders`
 
 #### Implementation

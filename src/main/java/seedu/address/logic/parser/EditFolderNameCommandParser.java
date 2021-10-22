@@ -30,7 +30,7 @@ public class EditFolderNameCommandParser implements Parser<EditFolderNameCommand
                     EditFolderNameCommand.MESSAGE_USAGE));
         }
         FolderName[] folderNames = extractFolderNames(allValues);
-        assert folderNames.length != 2 : "Should have exactly 2 folders only!";
+        assert folderNames.length == 2 : "Should have exactly 2 folders only!";
 
         return new EditFolderNameCommand(new Folder(folderNames[0]), new Folder(folderNames[1]));
     }

@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-UNIon is a desktop app for organizing various types of contacts, optimized for use for the vast majority of computing students. 
-If you are already familiar with Unix commands, then UNIon will be easy for you to use. 
+UNIon is a desktop app for organizing various types of contacts, optimized for use for the vast majority of computing students.
+If you are already familiar with Unix commands, then UNIon will be easy for you to use.
 
 * Table of Contents
 {:toc}
@@ -214,7 +214,7 @@ Format: `echo CONTACT_INDEX >> FOLDER_NAME`
 - `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
 - `FOLDER_NAME` must be an existing folder
     - Command fails if there is no existing folder with that name
-    
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -240,7 +240,6 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-    
 ## Command summary
 
 Action | Format, Examples
