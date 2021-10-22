@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-### **About this document**
+## **About this document**
 
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
@@ -22,7 +22,7 @@ Here are the interpretations of symbols and formatting used in this document:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### **Quick start**
+## **Quick start**
 
 1. Ensure you have Java `11` or above installed in your work station.
 
@@ -52,7 +52,7 @@ Here are the interpretations of symbols and formatting used in this document:
 
 --------------------------------------------------------------------------------------------------------------------
 
-### **Features**
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -78,7 +78,7 @@ Here are the interpretations of symbols and formatting used in this document:
 
 </div>
 
-### **Getting help**
+### Getting help
 
 #### Viewing help: `help`
 
@@ -88,7 +88,7 @@ TuitiONE will display the help panel which shows you a summary of the command sy
 
 Command Format: `help`
 
-### **Managing Students**
+### Managing Students
 
 #### Adding a student: `add`
 
@@ -186,7 +186,7 @@ Example(s):
 
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
-### **Managing Lessons**
+### Managing Lessons
 
 #### Adding a lesson: `add-l`
 
@@ -244,7 +244,7 @@ Command Format: `roster LESSON_INDEX`
 Examples:
 * `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
 
-### **Miscellaneous Commands**
+### Miscellaneous Commands
 
 #### Filtering of list: `filter`
 
@@ -287,7 +287,7 @@ Exits the program.
 
 Command Format: `exit`
 
-### **Managing Data**
+### Managing Data
 
 #### Saving the data
 
@@ -307,7 +307,7 @@ If the changes you made to the data file render its format invalid, TuitiONE wil
 
 --------------------------------------------------------------------------------------------------------------------
 
-### **Command summary**
+## **Command summary**
 
 Action | Format, Examples
 --------|------------------
@@ -326,13 +326,13 @@ Action | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 
-### **Glossary**
+## **Glossary**
 
 * **Java**: A widely used programming language
 * **JAR**: An executable java file for you to open the app
 * **GUI**: Graphical User Interface
 
-### **FAQ**
+## **FAQ**
 
 * **Q:** Where can I view the list of commands?
 
