@@ -16,7 +16,7 @@ public class CapacityTest {
 
     @Test
     public void constructor_invalidCapacity_throwsIllegalArgumentException() {
-        String invalidCapacity = "";
+        String invalidCapacity = "-20";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Capacity(invalidCapacity));
     }
 
