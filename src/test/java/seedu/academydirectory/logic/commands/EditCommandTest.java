@@ -32,7 +32,7 @@ import seedu.academydirectory.testutil.StudentBuilder;
  */
 public class EditCommandTest {
 
-    private VersionedModel model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
+    private final VersionedModel model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

@@ -2,6 +2,8 @@ package seedu.academydirectory.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.academydirectory.model.AcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
 
@@ -23,7 +25,6 @@ public class ClearCommand extends Command {
     public CommandResult execute(VersionedModel model) {
         requireNonNull(model);
         model.setAcademyDirectory(new AcademyDirectory());
-        model.commit(MESSAGE_SUCCESS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, Optional.of(MESSAGE_SUCCESS));
     }
 }

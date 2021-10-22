@@ -6,6 +6,7 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_GRADE;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
@@ -80,8 +81,8 @@ public class GradeCommand extends Command {
                 assessmentToEdit, studentToEdit.getTags());
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        model.commit(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment),
+                Optional.of(String.format(MESSAGE_SUCCESS, editedStudent.getName(), assessment)));
     }
 
     @Override

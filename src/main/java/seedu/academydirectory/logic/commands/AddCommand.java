@@ -7,6 +7,8 @@ import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
+import java.util.Optional;
+
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
@@ -79,8 +81,8 @@ public class AddCommand extends Command {
 
         model.addStudent(toAdd);
 
-        model.commit(String.format(MESSAGE_SUCCESS, toAdd.getName()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd),
+                Optional.of(String.format(MESSAGE_SUCCESS, toAdd.getName())));
     }
 
     @Override

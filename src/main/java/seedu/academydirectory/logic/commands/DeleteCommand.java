@@ -3,6 +3,7 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
@@ -55,8 +56,8 @@ public class DeleteCommand extends Command {
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudent(studentToDelete);
-        model.commit(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete.getName()));
-        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete),
+                Optional.of(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete.getName())));
     }
 
     @Override

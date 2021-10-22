@@ -5,6 +5,7 @@ import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
@@ -88,8 +89,7 @@ public class AttendanceCommand extends Command {
             model.setStudent(studentToEdit, editedStudent);
         }
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        model.commit(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
-        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
+        return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS, Optional.of(MESSAGE_UPDATE_ATTENDANCE_SUCCESS));
 
     }
 

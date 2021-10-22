@@ -241,12 +241,12 @@ public class ModelManager implements VersionedModel {
             Tree newTree = treeController.createNewTree(storagePath);
             Commit newCommit = commitController.createNewCommit(message, () -> newTree, () -> parentCommit);
 
+            // Move HEAD pointer
+            moveHead(newCommit);
+
             // Write VcObjects to disk
             treeController.write(newTree);
             commitController.write(newCommit);
-
-            // Move HEAD pointer
-            moveHead(newCommit);
             return true;
         } catch (IOException e) {
             e.printStackTrace();
