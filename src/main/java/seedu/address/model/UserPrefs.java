@@ -38,8 +38,12 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setPositionBookFilePath(newUserPrefs.getPositionBookFilePath());
+        setApplicantBookFilePath(newUserPrefs.getApplicantBookFilePath());
     }
 
+
+    @Override
     public GuiSettings getGuiSettings() {
         return guiSettings;
     }
@@ -49,17 +53,34 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.guiSettings = guiSettings;
     }
 
+    @Override
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
 
+    @Override
     public Path getPositionBookFilePath() {
         return positionBookFilePath;
+    }
+
+    @Override
+    public Path getApplicantBookFilePath() {
+        return applicantBookFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setPositionBookFilePath(Path positionBookFilePath) {
+        requireNonNull(positionBookFilePath);
+        this.positionBookFilePath = positionBookFilePath;
+    }
+
+    public void setApplicantBookFilePath(Path applicantBookFilePath) {
+        requireNonNull(applicantBookFilePath);
+        this.applicantBookFilePath = applicantBookFilePath;
     }
 
     @Override
@@ -90,7 +111,4 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return sb.toString();
     }
 
-    public Path getApplicantBookFilePath() {
-        return applicantBookFilePath;
-    }
 }

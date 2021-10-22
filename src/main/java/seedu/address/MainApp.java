@@ -16,9 +16,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ApplicantBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.PositionBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyApplicantBook;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
@@ -28,6 +32,10 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.applicant.ApplicantBookStorage;
+import seedu.address.storage.applicant.JsonApplicantBookStorage;
+import seedu.address.storage.position.JsonPositionBookStorage;
+import seedu.address.storage.position.PositionBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -57,7 +65,9 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        PositionBookStorage positionBookStorage = new JsonPositionBookStorage(userPrefs.getPositionBookFilePath());
+        ApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(userPrefs.getApplicantBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, applicantBookStorage, positionBookStorage);
 
         initLogging(config);
 
@@ -75,22 +85,45 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyPositionBook> positionBookOptional;
+        Optional<ReadOnlyApplicantBook> applicantBookOptional;
+        ReadOnlyAddressBook initialAddressBookData;
+        ReadOnlyPositionBook initialPositionBookData;
+        ReadOnlyApplicantBook initialApplicantBookData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Addressbook data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+
+            positionBookOptional = storage.readPositionBook();
+            if (!positionBookOptional.isPresent()) {
+                logger.info("Positionbook data file not found. Will be starting with a sample PositionBook");
+            }
+            initialPositionBookData = positionBookOptional.orElseGet(SampleDataUtil::getSamplePositionBook);
+
+            applicantBookOptional = storage.readApplicantBook(initialPositionBookData);
+            if (!applicantBookOptional.isPresent()) {
+                logger.info("Applicantbook data file not found. Will be starting with a sample ApplicantBook");
+            }
+            initialApplicantBookData = applicantBookOptional.orElseGet(SampleDataUtil::getSampleApplicantBook);
+
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty "
+                    + "AddressBook/PositionBook/ApplicantBook");
+            initialAddressBookData = new AddressBook();
+            initialPositionBookData = new PositionBook();
+            initialApplicantBookData = new ApplicantBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty "
+                    + "AddressBook/PositionBook/ApplicantBook");
+            initialAddressBookData = new AddressBook();
+            initialPositionBookData = new PositionBook();
+            initialApplicantBookData = new ApplicantBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialAddressBookData, initialApplicantBookData, initialPositionBookData, userPrefs);
     }
 
     private void initLogging(Config config) {
