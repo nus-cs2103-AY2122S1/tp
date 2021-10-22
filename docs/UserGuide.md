@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-**Sellah** is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address
-book that contains the contact information and order details related to clients and partners.
+**Sellah** is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is used to keep
+track of the contact information of clients and details of the products in inventory.
 
 * Table of Contents
     * [Quick Start](#quick-start)
@@ -47,7 +47,7 @@ book that contains the contact information and order details related to clients 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**<br>
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add NAME`, `NAME` is a parameter which can be used as `add Ben`.
@@ -239,11 +239,28 @@ Format:
 * Previous command: `↑`
 * Next command: `↓`
 
-Notes:
+<div markdown="span" class="alert alert-primary">:bulb: **Notes:**
+</div>
 
 * Pressing `↑` when the first command is currently displayed will do nothing.
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
+ 
+
+### Saving the data
+
+Sellah data are saved in the hard disk automatically after any command that changes the data. There is no need to 
+save manually.
+
+### Editing the data file
+
+Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. Advanced users are welcome to 
+update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Sellah will discard all data and start with an empty 
+data file at the next run.
+</div>
 
 ### Statistics: `stat` [coming soon]
 
@@ -257,11 +274,10 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: ...<br>
-**A**: ...<br>
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+the data of your previous Sellah home folder.<br>
 
-**Q**: ...<br>
-**A**: ...<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
