@@ -9,6 +9,10 @@ import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
 import seedu.address.model.application.Application;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
+
+import static java.util.Objects.requireNonNull;
 
 
 /**
@@ -22,6 +26,7 @@ public class EditApplicantDescriptor {
     private Email email;
     private Address address;
     private Application application;
+    private Title title;
 
     public EditApplicantDescriptor() {}
 
@@ -84,19 +89,34 @@ public class EditApplicantDescriptor {
         return Optional.ofNullable(application);
     }
 
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    public Optional<Title> getTitle() {
+        return Optional.ofNullable(title);
+    }
+
+
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit) {
-        assert applicantToEdit != null;
+        requireNonNull(applicantToEdit);
         Name updatedName = getName().orElse(applicantToEdit.getName());
         Phone updatedPhone = getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = getEmail().orElse(applicantToEdit.getEmail());
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
-        Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
 
-        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication);
+        if (getApplication().isPresent()) {
+            Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
+            return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication);
+        }
+
+
+
+
     }
 
     @Override

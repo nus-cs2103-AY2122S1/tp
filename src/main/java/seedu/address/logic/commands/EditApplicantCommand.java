@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.descriptors.EditApplicantDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.position.Title;
 
 
 public class EditApplicantCommand extends Command {
@@ -33,28 +34,25 @@ public class EditApplicantCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com ";
 
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
-
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book.";
 
     private final Index index;
-
+    private final Title title;
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
      * @param index of the applicant in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
-    public EditApplicantCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
+    public EditApplicantCommand(Index index, Title title, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
         requireNonNull(editApplicantDescriptor);
 
         this.index = index;
+        this.title = title;
         this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
     }
-
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -68,17 +66,31 @@ public class EditApplicantCommand extends Command {
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit);
 
-        /*
-        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedPosition)) {
+        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
         }
 
-         */
-
         model.setApplicant(applicantToEdit, editedApplicant);
-
         model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
         return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof EditApplicantCommand)) {
+            return false;
+        }
+
+        // state check
+        EditApplicantCommand e = (EditApplicantCommand) other;
+        return index.equals(e.index)
+                && editApplicantDescriptor.equals(e.editApplicantDescriptor);
     }
 
 

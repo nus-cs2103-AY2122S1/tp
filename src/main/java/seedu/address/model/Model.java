@@ -168,6 +168,17 @@ public interface Model {
     void setApplicant(Applicant target, Applicant editedApplicant);
 
     /**
+     * Adds the given applicant.
+     * {@code applicant} must not already exist in the applicant book.
+     */
+    void addApplicant(Applicant applicant);
+
+    /**
+     * Returns true if {@code applicant} exists in MrTechRecruiter.
+     */
+    boolean hasApplicant(Applicant applicant);
+
+    /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      */
