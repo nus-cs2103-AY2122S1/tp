@@ -14,20 +14,20 @@ import seedu.address.model.TaskBook;
 import seedu.address.model.task.Task;
 
 /**
- * An Immutable AddressBook that is serializable to JSON format.
+ * An Immutable TaskBook that is serializable to JSON format.
  */
 @JsonRootName(value = "tasklist")
-class JsonSerializableTaskList {
+class JsonSerializableTaskBook {
 
     public static final String MESSAGE_DUPLICATE_TASK = "task list contains duplicate task(s).";
 
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given task.
+     * Constructs a {@code JsonSerializableTaskList} with the given task.
      */
     @JsonCreator
-    public JsonSerializableTaskList(@JsonProperty("tasks") List<JsonAdaptedTask> persons) {
+    public JsonSerializableTaskBook(@JsonProperty("tasks") List<JsonAdaptedTask> persons) {
         this.tasks.addAll(persons);
     }
 
@@ -36,12 +36,12 @@ class JsonSerializableTaskList {
      *
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
-    public JsonSerializableTaskList(ReadOnlyTaskBook source) {
+    public JsonSerializableTaskBook(ReadOnlyTaskBook source) {
         tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code AddressBook} object.
+     * Converts this address book into the model's {@code TaskBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

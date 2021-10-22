@@ -17,13 +17,13 @@ import seedu.address.model.ReadOnlyTaskBook;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonTaskListStorage implements TaskListStorage {
+public class JsonTaskBookStorage implements TaskListStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonTaskListStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonTaskBookStorage.class);
 
     private Path filePath;
 
-    public JsonTaskListStorage(Path filePath) {
+    public JsonTaskBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
@@ -47,8 +47,8 @@ public class JsonTaskListStorage implements TaskListStorage {
     public Optional<ReadOnlyTaskBook> readTaskList(Path filePath) throws DataConversionException, IOException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableTaskList> jsonTaskList = JsonUtil.readJsonFile(
-                filePath, JsonSerializableTaskList.class);
+        Optional<JsonSerializableTaskBook> jsonTaskList = JsonUtil.readJsonFile(
+                filePath, JsonSerializableTaskBook.class);
         if (!jsonTaskList.isPresent()) {
             return Optional.empty();
         }
@@ -75,6 +75,6 @@ public class JsonTaskListStorage implements TaskListStorage {
         requireNonNull(taskList);
         requireNonNull(filePath);
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableTaskList(taskList), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableTaskBook(taskList), filePath);
     }
 }

@@ -19,7 +19,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.TaskListBuilder;
+import seedu.address.testutil.TaskBookBuilder;
 
 public class ModelManagerTest {
 
@@ -101,7 +101,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        TaskBook taskList = new TaskListBuilder().withTask(TASK1).withTask(TASK2).build();
+        TaskBook taskList = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
         TaskBook differentTaskList = new TaskBook();
         UserPrefs userPrefs = new UserPrefs();
 

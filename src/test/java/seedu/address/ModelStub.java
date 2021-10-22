@@ -108,12 +108,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setTaskList(ReadOnlyTaskBook addressBook) {
+    public void setTaskBook(ReadOnlyTaskBook addressBook) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public ReadOnlyTaskBook getTaskList() {
+    public ReadOnlyTaskBook getTaskBook() {
         throw new AssertionError("This method should not be called.");
     }
 

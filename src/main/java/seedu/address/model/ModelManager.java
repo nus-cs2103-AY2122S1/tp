@@ -22,7 +22,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final TaskBook taskList;
+    private final TaskBook taskBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
@@ -36,10 +36,10 @@ public class ModelManager implements Model {
         requireAllNonNull(addressBook, taskList , userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.taskList = new TaskBook(taskList);
+        this.taskBook = new TaskBook(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<>(this.taskList.getTaskList());
+        filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
         filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
 
     }
@@ -134,13 +134,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTaskList(ReadOnlyTaskBook taskList) {
-        this.taskList.resetData(taskList);
+    public void setTaskBook(ReadOnlyTaskBook taskBook) {
+        this.taskBook.resetData(taskBook);
     }
 
     @Override
-    public ReadOnlyTaskBook getTaskList() {
-        return taskList;
+    public ReadOnlyTaskBook getTaskBook() {
+        return taskBook;
     }
     /**
      * Checks if tasklist has this task.
@@ -148,14 +148,14 @@ public class ModelManager implements Model {
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return taskList.hasTask(task);
+        return taskBook.hasTask(task);
     }
 
     /**
      * Adds a task to tasklist.
      */
     public void addTask(Task toAdd) {
-        taskList.addTask(toAdd);
+        taskBook.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -163,13 +163,13 @@ public class ModelManager implements Model {
      * Deletes a task from tasklist.
      */
     public void deleteTask(Task toDelete) {
-        taskList.deleteTask(toDelete);
+        taskBook.deleteTask(toDelete);
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-        taskList.setTask(target, editedTask);
+        taskBook.setTask(target, editedTask);
     }
 
     @Override
@@ -185,7 +185,7 @@ public class ModelManager implements Model {
 
     @Override
     public void markTask(Task toMark) {
-        taskList.markDone(toMark);
+        taskBook.markDone(toMark);
     }
 
     //=========== Order Management ==================================================================================

@@ -60,9 +60,9 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new Label("Buy a green button"), new Date("28th of September"), new TaskTag("Dummy")),
-            new Task(new Label("Buy a red button"), new Date("29th of September"), new TaskTag("Dummy")),
-            new Task(new Label("Buy a blue button"), new Date("30th of September"), new TaskTag("Dummy")),
+            new Task(new Label("Buy a green button"), new Date("28th of September"), new TaskTag("SO1")),
+            new Task(new Label("Buy a red button"), new Date("29th of September"), new TaskTag("SO1")),
+            new Task(new Label("Buy a blue button"), new Date("30th of September"), new TaskTag("SO1")),
         };
     }
 

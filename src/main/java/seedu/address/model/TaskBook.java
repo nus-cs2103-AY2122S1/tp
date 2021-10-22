@@ -29,7 +29,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     public TaskBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates a TaskList using the Persons in the {@code toBeCopied}
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this();
@@ -47,7 +47,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code TaskBook} with {@code newData}.
      */
     public void resetData(ReadOnlyTaskBook newData) {
         setTasks(newData.getTaskList());
@@ -67,8 +67,8 @@ public class TaskBook implements ReadOnlyTaskBook {
         tasks.markDone(task);
     }
 
-    public void setTask(Task target, Task editedtask) {
-        tasks.setTask(target, editedtask);
+    public void setTask(Task target, Task editedTask) {
+        tasks.setTask(target, editedTask);
     }
 
     public boolean hasTask(Task task) {
@@ -80,7 +80,7 @@ public class TaskBook implements ReadOnlyTaskBook {
 
     @Override
     public String toString() {
-        return tasks.asUnmodifiableObservableList().size() + " persons";
+        return tasks.asUnmodifiableObservableList().size() + " tasks";
         // TODO: refine later
     }
 

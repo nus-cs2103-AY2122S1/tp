@@ -8,22 +8,22 @@ import seedu.address.model.task.Task;
  * Example usage: <br>
  *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
-public class TaskListBuilder {
+public class TaskBookBuilder {
 
     private TaskBook taskList;
 
-    public TaskListBuilder() {
+    public TaskBookBuilder() {
         taskList = new TaskBook();
     }
 
-    public TaskListBuilder(TaskBook taskList) {
+    public TaskBookBuilder(TaskBook taskList) {
         this.taskList = taskList;
     }
 
     /**
      * Adds a new {@code Task} to the {@code TaskListManager} that we are building.
      */
-    public TaskListBuilder withTask(Task task) {
+    public TaskBookBuilder withTask(Task task) {
         taskList.addTask(task);
         return this;
     }
