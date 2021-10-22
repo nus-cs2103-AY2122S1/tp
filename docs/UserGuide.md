@@ -157,11 +157,11 @@ Notes:
       information in `ORDER`.
     * If the client does not have an order with same `ID`, then that `ORDER` will be added.
     * If the `ORDER`'s `QUANTITY` is 0, then that `ORDER` will be removed.
-    * For example, assuming client already has an order [ `ID` = 1, `QUANTITY` = 3, (other information)... ], and the
-      input `ORDER`s are [ `ID` = 1, `QUANTITY` = 0, ... ] and [ `ID` = 2, `QUANTITY` = 10, ... ]:
-        * [ `ID` = 1, `QUANTITY` = 3, ... ] will be updated to [ `ID` = 1, `QUANTITY` = 0, ... ] as they have the same
-          `ID`, and since `QUANTITY` is now 0, this `ORDER` will be removed.
-        * [ `ID` = 2, `QUANTITY` = 10, ... ] will be added as the client does not have an order with the same `ID`.
+    * For example, assuming client already has an order `[ ID = 1, QUANTITY = 3, (other information)... ]`, and the
+      input `ORDER`s are `[ ID = 1, QUANTITY = 0, ... ]` and `[ ID = 2, QUANTITY = 10, ... ]`:
+        * `[ ID = 1, QUANTITY = 3, ... ]` will be updated to `[ ID = 1, QUANTITY = 0, ... ]` as they have the same `ID`,
+          and since `QUANTITY` is now 0, this `ORDER` will be removed.
+        * `[ ID = 2, QUANTITY = 10, ... ]` will be added as the client does not have an order with the same `ID`.
 
 Examples:
 
