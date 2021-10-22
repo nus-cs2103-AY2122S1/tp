@@ -1,12 +1,14 @@
 package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY_TIME_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.friends.ScheduleFriendCommandParser.INVALID_PERIOD_OR_FREE_ARGUMENT;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,8 +50,8 @@ class ScheduleFriendCommandParserTest {
         // missing endTime
         userInput = " " + FLAG_SCHEDULE + VALID_FRIEND_ID_AMY + " " + FLAG_PERIOD
                 + startTime + " " + day + " " + FLAG_FREE + isFree;
-        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                ScheduleFriendCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, userInput, String.format(MESSAGE_INVALID_DAY_TIME_FORMAT,
+                INVALID_PERIOD_OR_FREE_ARGUMENT));
 
     }
 

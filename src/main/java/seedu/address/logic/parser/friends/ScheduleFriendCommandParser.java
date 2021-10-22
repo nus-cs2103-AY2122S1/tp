@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.friends;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY_TIME_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
 import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
@@ -19,6 +20,9 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
  * Parses input arguments and creates a new ListFriendCommand object
  */
 public class ScheduleFriendCommandParser implements Parser<ScheduleFriendCommand> {
+
+    public static final String INVALID_PERIOD_OR_FREE_ARGUMENT = "Invalid " + FLAG_PERIOD
+            + " or " + FLAG_FREE + " arguments";
 
     /**
      * Parses the given {@code String} of arguments in the context of the ScheduleFriendCommand
@@ -42,7 +46,7 @@ public class ScheduleFriendCommandParser implements Parser<ScheduleFriendCommand
             String[] period = argMultimap.getValue(FLAG_PERIOD).get().split(" ");
             if (period.length != 3 || !(argMultimap.getValue(FLAG_FREE).get().equals("0")
                     || argMultimap.getValue(FLAG_FREE).get().equals("1"))) {
-                throw new InvalidDayTimeException("Invalid " + FLAG_PERIOD + " or " + FLAG_FREE + " arguments");
+                throw new InvalidDayTimeException(INVALID_PERIOD_OR_FREE_ARGUMENT);
             }
             int dayIndex = Integer.parseInt(period[2]);
             boolean isFree = argMultimap.getValue(FLAG_FREE).get().equals("1");
@@ -50,8 +54,8 @@ public class ScheduleFriendCommandParser implements Parser<ScheduleFriendCommand
 
             return new ScheduleFriendCommand(friendId, dayIndex, period[0], period[1], isFree);
         } catch (InvalidDayTimeException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ScheduleFriendCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_DAY_TIME_FORMAT,
+                    e.getMessage()));
         }
 
 
