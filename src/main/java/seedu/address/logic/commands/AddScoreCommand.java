@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,12 +39,12 @@ public class AddScoreCommand extends Command {
             + PREFIX_ID + "<student_id>) "
             + PREFIX_SCORE + "<score_in_percentage>";
 
-    public static final String MESSAGE_SUCCESS = "New score added: %1$s";
+    public static final String MESSAGE_ADD_SUCCESS = "New score added: %1$s";
+    public static final String MESSAGE_UPDATE_SUCCESS = "Score updated from %1$s to %2$s: %3$s";
     public static final String MESSAGE_NONEXISTENT_ASSESSMENT = "This assessment does not exist.";
     public static final String MESSAGE_NONEXISTENT_STUDENT = "This student does not exist.";
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
             "Score needs to be added through ID for this student due to duplicate naming.";
-    public static final String MESSAGE_EXISTENT_SCORE = "This assessment is already graded.";
 
     private final ScoreDescriptor scoreDescriptor;
 
@@ -65,8 +64,9 @@ public class AddScoreCommand extends Command {
         List<Assessment> assessmentList = addressBook.getAssessmentList();
         List<Student> studentList = addressBook.getStudentList();
 
-        assert scoreDescriptor.getScore().isPresent();
         assert scoreDescriptor.getAssessment().isPresent();
+        assert scoreDescriptor.getScore().isPresent();
+
         if (!assessmentList.contains(scoreDescriptor.getAssessment().get())) {
             throw new CommandException(MESSAGE_NONEXISTENT_ASSESSMENT);
         }
@@ -84,15 +84,19 @@ public class AddScoreCommand extends Command {
 
         Student studentToEdit = studentsToEdit.get(0);
 
-        if (assessmentToEdit.isGraded(studentToEdit.getId())) {
-            throw new CommandException(MESSAGE_EXISTENT_SCORE);
+        boolean wasGraded = assessmentToEdit.isGraded(studentToEdit.getId());
+        Score oldScore = null;
+        if (wasGraded) {
+            oldScore = assessmentToEdit.getScores().get(studentToEdit.getId());
         }
 
-        Student editedStudent = createEditedStudents(studentToEdit, scoreDescriptor);
+        Student editedStudent = createEditedStudents(studentToEdit, scoreDescriptor, assessmentToEdit);
 
         assessmentToEdit.setScore(editedStudent.getId(), scoreDescriptor.getScore().get());
         model.setStudent(studentToEdit, editedStudent);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedStudent));
+        return new CommandResult(wasGraded
+                ? String.format(MESSAGE_UPDATE_SUCCESS, oldScore, scoreDescriptor.getScore().get(), editedStudent)
+                : String.format(MESSAGE_ADD_SUCCESS, editedStudent));
     }
 
     /**
@@ -112,20 +116,20 @@ public class AddScoreCommand extends Command {
      * as specified in the {@code scoreDescriptor}.
      */
     public static List<Student> getToEditStudents(List<Student> students, ScoreDescriptor scoreDescriptor) {
-        List<Student> scoreStudents = students.stream()
+        return students.stream()
                 .filter(scoreDescriptor.isToEditStudent())
-                .collect(Collectors.toList());
-        return Collections.unmodifiableList(scoreStudents);
+                .collect(Collectors.toUnmodifiableList());
     }
 
     /**
      * Creates and returns a {@code Student} with the details of {@code preScoreStudent}
      * being added score as specified in {@code scoreDescriptor}.
      */
-    public static Student createEditedStudents(Student toEditStudent, ScoreDescriptor scoreDescriptor) {
+    public static Student createEditedStudents(Student toEditStudent, ScoreDescriptor scoreDescriptor,
+                                               Assessment assessmentToEdit) {
         assert toEditStudent != null;
         assert scoreDescriptor.getScore().isPresent();
-        assert scoreDescriptor.getAssessment().isPresent();
+        assert assessmentToEdit != null;
 
         Name name = toEditStudent.getName();
         ID id = toEditStudent.getId();
@@ -133,11 +137,7 @@ public class AddScoreCommand extends Command {
         Map<Assessment, Score> scores = toEditStudent.getScores();
         Set<Tag> tags = toEditStudent.getTags();
 
-        Assessment assessmentToEdit = scoreDescriptor.getAssessment().get();
         Score scoreToEdit = scoreDescriptor.getScore().get();
-        assert !scores.containsKey(assessmentToEdit);
-        // TODO: need to double check whether
-        //  assessment does not exit or is inputted with null score
 
         Map<Assessment, Score> editedScores = new HashMap<>(scores);
         editedScores.put(assessmentToEdit, scoreToEdit);

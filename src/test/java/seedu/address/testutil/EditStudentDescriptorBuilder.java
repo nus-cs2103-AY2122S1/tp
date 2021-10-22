@@ -38,7 +38,6 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setId(student.getId());
         descriptor.setGroups(student.getGroups());
-        // descriptor.setScore(student.getScores());
         descriptor.setTags(student.getTags());
     }
 
@@ -65,14 +64,6 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder withGroups(String... groups) {
         List<Group> groupList = Stream.of(groups).map(Group::new).collect(Collectors.toList());
         descriptor.setGroups(groupList);
-        return this;
-    }
-
-    /**
-     * Sets the {@code scores} of the {@code EditStudentDescriptor} that we are building.
-     */
-    public EditStudentDescriptorBuilder withScores(Map<Assessment, Score> scores) {
-        descriptor.setScores(scores);
         return this;
     }
 

@@ -109,6 +109,27 @@ public class AssessmentList {
     }
 
     /**
+     * Removes all references to the student from the assessment list
+     */
+    public void removeStudent(Student toRemove) {
+        requireNonNull(toRemove);
+
+        for (Assessment assessment : assessments) {
+            assessment.getScores().remove(toRemove.getId());
+        }
+    }
+
+    /**
+     * Removes all references to the previous student and adds in references to the edited student
+     */
+    public void replaceStudent(Student previous, Student edited) {
+        requireAllNonNull(previous, edited);
+
+        removeStudent(previous);
+        update(edited);
+    }
+
+    /**
      * Replaces the contents of this list with {@code assessments}.
      * {@code assessments} must not contain duplicate assessments.
      */

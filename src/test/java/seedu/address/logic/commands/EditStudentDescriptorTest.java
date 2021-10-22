@@ -48,10 +48,6 @@ public class EditStudentDescriptorTest {
         editedAmy = new EditStudentDescriptorBuilder(EDIT_DESCRIPTOR_AMY).withGroups(VALID_GROUP_RECITATION).build();
         assertNotEquals(EDIT_DESCRIPTOR_AMY, editedAmy);
 
-        // different scores -> returns false
-        editedAmy = new EditStudentDescriptorBuilder(EDIT_DESCRIPTOR_AMY).withScores(VALID_SCORES_BOB).build();
-        assertNotEquals(EDIT_DESCRIPTOR_AMY, editedAmy);
-
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(EDIT_DESCRIPTOR_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(EDIT_DESCRIPTOR_AMY, editedAmy);

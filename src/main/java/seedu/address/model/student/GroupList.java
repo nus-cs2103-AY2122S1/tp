@@ -84,6 +84,27 @@ public class GroupList {
         groups.set(index, editedGroup);
     }
 
+    public void removeStudent(Student toRemove) {
+        requireNonNull(toRemove);
+
+        for (Group group : toRemove.getGroups()) {
+            if (groups.contains(group)) {
+                Group groupInList = groups.get(groups.indexOf(group));
+                groupInList.removeStudent(toRemove.getId());
+            }
+        }
+    }
+
+    /**
+     * Removes any references to the previous student and inserts references to the new student
+     */
+    public void replaceStudent(Student previous, Student edited) {
+        requireAllNonNull(previous, edited);
+
+        removeStudent(previous);
+        update(edited);
+    }
+
     /**
      * Removes the equivalent Group from the list.
      * The Group must exist in the list.
