@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
  * Represent the limit of the participant
  */
 public class ClassLimit {
+    public static final String MESSAGE_CONSTRAINTS = "The limit is not correct, should be a positive integer \n";
     public final int limit;
 
     /**
@@ -41,6 +42,9 @@ public class ClassLimit {
      * @return true if the limit is valid.
      */
     public static boolean isValid(int myLimit) {
-        return myLimit > 0;
+        if (myLimit <= 0) {
+            return false;
+        }
+        return Math.floor(myLimit) == myLimit;
     }
 }

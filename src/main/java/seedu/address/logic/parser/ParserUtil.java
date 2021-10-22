@@ -151,11 +151,15 @@ public class ParserUtil {
      *
      *
      */
-    public static ClassLimit parseLimit(String limit) {
+    public static ClassLimit parseLimit(String limit) throws ParseException{
         requireNonNull(limit);
         String trimmedLimit = limit.trim();
-
-        return new ClassLimit(Integer.valueOf(trimmedLimit));
+        try {
+            Integer myLimit = Integer.valueOf(trimmedLimit);
+            return new ClassLimit(myLimit);
+        } catch (NumberFormatException e) {
+            throw new ParseException(ClassLimit.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**
