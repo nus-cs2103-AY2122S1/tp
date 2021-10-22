@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -26,8 +25,6 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
-    //pending re-wrapping by yuichiro
-    private final OrderList orderList;
     private final FilteredList<Order> filteredOrders;
 
     /**
@@ -41,10 +38,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
-
-        //pending re-wrapping by Yuichiro
-        this.orderList = new OrderList();
-        filteredOrders = new FilteredList<>(orderList.asUnmodifiableObservableList());
+        filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
 
     }
 
@@ -126,7 +120,7 @@ public class ModelManager implements Model {
     //=========== Task Management ==================================================================================
 
     /**
-     * check if tasklist has this task.
+     * Checks if tasklist has this task.
      */
     @Override
     public boolean hasTask(Task task) {
@@ -135,7 +129,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * adding a task to tasklist.
+     * Adds a task to tasklist.
      */
     public void addTask(Task toAdd) {
         addressBook.addTask(toAdd);
@@ -143,7 +137,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * deleting a task from tasklist.
+     * Deletes a task from tasklist.
      */
     public void deleteTask(Task toDelete) {
         addressBook.deleteTask(toDelete);
@@ -174,7 +168,7 @@ public class ModelManager implements Model {
     //=========== Order Management ==================================================================================
 
     /**
-     * check if orderlist has this order.
+     * Checks if orderlist has this order.
      */
     @Override
     public boolean hasOrder(Order order) {
@@ -189,7 +183,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * adding an order to tasklist.
+     * Adds an order to orderlist.
      */
     public void addOrder(Order toAdd) {
         addressBook.addOrder(toAdd);
@@ -197,7 +191,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * deleting an order from orderlist.
+     * Deletes an order from orderlist.
      */
     public void deleteOrder(Order toDelete) {
         addressBook.deleteOrder(toDelete);
