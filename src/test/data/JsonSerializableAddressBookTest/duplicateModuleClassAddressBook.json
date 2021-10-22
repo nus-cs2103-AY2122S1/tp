@@ -1,18 +1,12 @@
 {
   "persons" : [ ],
   "lessons" : [ {
-    "moduleCodes" : [ {
-      "tags" : [ "T21" ],
-      "moduleCodeName" : "CS2100"
-    } ],
+    "moduleCodes" : "CS2100 T21",
     "lessonDay": "5",
     "lessonTime": "10:00",
     "remark": "T01"
   }, {
-    "moduleCodes" : [ {
-      "tags" : [ "T21" ],
-      "moduleCodeName" : "CS2100"
-    } ],
+    "moduleCodes" : "CS2100 T21",
     "lessonDay": "5",
     "lessonTime": "10:00",
     "remark": "T01"
