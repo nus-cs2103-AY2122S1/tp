@@ -51,6 +51,9 @@ that contains the contact information and order details related to clients and p
 * Items in square brackets are optional.<br>
   e.g `NAME [-e EMAIL]` can be used as `Ben -e ben@gmail.com` or as `Ben`.
 
+* Items with `...` after them can be used multiple times including zero times.
+  e.g. `[-o ORDER]...` can be used as ` ` (i.e. 0 times), `-o 0 1 10/21`, `-o 0 1 2021/10/21 -o 1 5 10/20` etc.
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-pn PHONE_NUMBER -e EMAIL`, `-e EMAIL -pn PHONE_NUMBER` is also acceptable.
 
@@ -69,12 +72,12 @@ Adds a new client or product to the application with an automatically generated 
 
 Format:
 
-* Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]`
+* Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 * Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
 Notes:
 
-* Adds a client with name, phone number and optional email and address.
+* Adds a client with name, phone number and optional email, address and orders.
 * Adds a product with name, unit price and optional quantity.
 * The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `price`.
 * The user will be informed if the client/product to be added already exits.
@@ -235,10 +238,10 @@ _Details coming soon ..._
             <a href="#adding-add">Add</a>
         </td>
         <td>
-            Add a client: <code>add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS]</code><br> 
+            Add a client: <code>add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...</code><br>
             e.g., <code>add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd</code><br>
-            <br> 
-            Add a product: <code>add -p NAME -$ UNIT_PRICE [-q QUANTITY]</code><br> 
+            <br>
+            Add a product: <code>add -p NAME -$ UNIT_PRICE [-q QUANTITY]</code><br>
             e.g., <code>add -p pen -$ 10.0 -q 120</code>
         </td>
     </tr>
@@ -275,12 +278,12 @@ _Details coming soon ..._
             <a href="#deleting-delete">Delete</a>
         </td>
         <td>
-            Delete a client: <code>delete -c INDEX</code><br> 
-            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of 
+            Delete a client: <code>delete -c INDEX</code><br>
+            e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of
             <code>20</code> including id, name, phone number, email and address.<br>
             <br>
-            Delete a product: <code>delete -p INDEX</code><br> 
-            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of 
+            Delete a product: <code>delete -p INDEX</code><br>
+            e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of
             <code>5</code> including id, name, unit price and quantity.
             <br>
         </td>

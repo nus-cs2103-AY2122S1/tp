@@ -24,6 +24,7 @@ import seedu.address.logic.commands.StatCommand;
 import seedu.address.logic.commands.ViewClientCommand;
 import seedu.address.logic.commands.ViewProductCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 
 /**
  * Parses user input.
@@ -44,7 +45,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, Model model) throws ParseException {
         final String trimmedUserInput = userInput.trim();
         Matcher matcher = ADVANCED_COMMAND_FORMAT.matcher(trimmedUserInput);
 
@@ -67,7 +68,7 @@ public class AddressBookParser {
 
         switch (commandWord) {
         case AddClientCommand.COMMAND_WORD:
-            return new AddClientCommandParser().parse(arguments);
+            return new AddClientCommandParser(model).parse(arguments);
 
         case AddProductCommand.COMMAND_WORD:
             return new AddProductCommandParser().parse(arguments);
@@ -79,7 +80,7 @@ public class AddressBookParser {
             return new ViewProductCommandParser().parse(arguments);
 
         case EditClientCommand.COMMAND_WORD:
-            return new EditClientCommandParser().parse(arguments);
+            return new EditClientCommandParser(model).parse(arguments);
 
         case EditProductCommand.COMMAND_WORD:
             return new EditProductCommandParser().parse(arguments);

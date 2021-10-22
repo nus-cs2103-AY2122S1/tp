@@ -201,6 +201,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Client/Product Feature
+
+The add feature allows the users to add a new `Client` or `Product` with details into the application. The commands are
+composed of a keyword `add` followed by `-c` for adding clients and `-p` for adding products.
+
+The user inputs the command through `MainWindow` of the UI component, which will pass the input string to
+`LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the
+command word, the arguments will be used in `AddClientCommandParser` or `AddProductCommandParser` class for parsing.
+The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the
+execution, data added will be saved to storage.
+
+For `AddClientCommandParser`, a `Model` is needed as it helps to check whether a string representing an `Order` is
+valid.
+
+The flow of the sequence diagram would be the same for adding `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `add -c Ben -pn 98765432` Command](images/AddClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `add` may be executed**
+
+* **Alternative 1 (current choice)** : User can add either a client or a product at a time
+    * Pros : Allows the user to focus on adding a client or product
+    * Cons : Might be slow if there are a lot of clients/products to add
+* **Alternative 2** : User can add multiple clients or products
+    * Pros : Allows the user to add multiple clients or products in one command
+    * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
+      be done through the`edit` command (requires the user to memorise the IDs)
+
 ### Edit Client/Product Feature
 
 This feature allows the users to edit the details of a `Client` or `Product` of their choice. When editing a `Client` or
@@ -259,9 +289,9 @@ This feature allows the users to delete a `Client` or `Product` of their choice.
 
 The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
-`DeleteClientCommandParser`, parsing the inputs and returning a `DeleteClientCommand` or . The command will then be 
-executed in `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state 
-of address book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display 
+`DeleteClientCommandParser`, parsing the inputs and returning a `DeleteClientCommand` or . The command will then be
+executed in `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of
+address book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display
 feedback of the `CommandResult` to the user.
 
 The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
@@ -279,7 +309,6 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
     * Pros : Saves time if the user wish to delete multiple clients or products at the same time
     * Cons : More complex code which would lead to higher amount of error
 
-
 ### Find Client/Product Feature
 
 This feature allows the users to find a `Client` or `Product` based on their `name`.
@@ -287,8 +316,8 @@ This feature allows the users to find a `Client` or `Product` based on their `na
 The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
 `FindClientCommandParser`, parsing the inputs and returning a `FindClientCommand`. The command will then be executed in
-`LogicManager`, returning a `CommandResult`.The `CommandResult` will finally be returned to `MainWindow`, 
-which will display feedback of the `CommandResult` to the user.
+`LogicManager`, returning a `CommandResult`.The `CommandResult` will finally be returned to `MainWindow`, which will
+display feedback of the `CommandResult` to the user.
 
 The flow of the sequence diagram would be the same for finding `Products`, but the UI displayed will be different.
 
@@ -302,12 +331,21 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
     * Pros : Allows the user to focus on finding a particular client or product
     * Cons : Unable to find clients or products without name
 * **Alternative 2** : User can find clients by their details such as name, address, email, etc.. and products by their
-                      name, price, etc..
+  name, price, etc..
     * Pros : Saves time if the user is unable to remember the exact name of a client/product.
     * Cons : More complex code which would lead to higher amount of error
 
-    
-### \[Proposed\] Undo/redo feature
+### Command History Feature
+
+This feature allows the user to navigate to previous commands using `↑` and `↓` keys.
+
+The command histories are stored in an `ArrayList<String>`, as well as with the help of a `Index`. Each time the user
+inputs a command, it is stored into the `ArrayList`. `Index` begins at the end of the `ArrayList`. As user inputs `↑`,
+previous command will be shown till no more available. `↓` is used to go back to the next command. As user reaches the
+last and latest command stored in `ArrayList`, the next `↓` will clear the command input field. At any time, user can
+choose to just stop and proceed on to edit or input the current history command.
+
+### \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation
 
@@ -631,13 +669,12 @@ User story ends.
 * 1a. The input parameter is invalid.
 
     * 1a1. Sellah shows an error message.
-    
+
       Use case resumes at step 1.
 
 * 1b. The command format is incorrect.
 
-    * 1b1. Sellah shows an error message.
-      Use case resumes at step 1.
+    * 1b1. Sellah shows an error message. Use case resumes at step 1.
 
 * 2a. The list is empty.
 
@@ -719,7 +756,7 @@ expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-       
+
 1. _{ more test cases …​ }_
 
 ### Saving data

@@ -13,7 +13,9 @@ Given below are my contributions to the project.
 
 * **New Feature**: Added a history command. (Pull request
   [\#139](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/139),
-  [\#141](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/141))
+  [\#141](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/141),
+  [\#145](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/145),
+  [\#152](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/152))
     * What it does: allows the user to navigate to previous commands using up/down keys.
     * Justification: This feature allows user to reuse previous input commands quickly without the need to retype again.
       This is especially helpful if the previous command is very long (e.g.
@@ -40,10 +42,15 @@ Given below are my contributions to the project.
     * User Guide:
         * Added documentation for the features `edit` and `Table of Content` (Pull requests
           [\#35](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/35),
-          [\#40](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/40))
-        * Added `Command Summary Table` (Pull requests [\#44](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/44),
+          [\#40](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/40),
+          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162))
+        * Added `Command Summary Table` (Pull requests
+          [\#44](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/44),
           [\#46](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/46),
-          [\#47](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/47))
+          [\#47](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/47),
+          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162))
+        * Added documentation for the features `Command History` (Pull request
+          [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162))
     * Developer Guide:
         * Added use cases of the `edit` feature. (Pull requests
           [\#48](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/48),
@@ -52,7 +59,8 @@ Given below are my contributions to the project.
           [\#132](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/132))
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#91](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/91)
+    * PRs reviewed (with non-trivial review comments):
+      [\#91](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/91)
     * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
     * Reported bugs and suggestions for other teams in the class (examples: [1](), [2](), [3]())
     * Some parts of the history feature I added was adopted by several other class mates ([1](), [2]())

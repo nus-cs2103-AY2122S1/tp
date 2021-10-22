@@ -3,7 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -12,6 +17,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 
 public class AddClientCommand extends Command {
     public static final String COMMAND_WORD = "add -c";
@@ -22,18 +28,20 @@ public class AddClientCommand extends Command {
                     + "NAME "
                     + PREFIX_PHONE_NUMBER + "PHONE_NUMBER "
                     + "[" + PREFIX_EMAIL + "EMAIL] "
-                    + "[" + PREFIX_ADDRESS + "ADDRESS] \n"
+                    + "[" + PREFIX_ADDRESS + "ADDRESS] "
+                    + "[" + PREFIX_ORDER + "PRODUCT_ID QUANTITY TIME]...\n"
                     + "Example: " + COMMAND_WORD + " "
                     + "John Doe "
                     + PREFIX_PHONE_NUMBER + "98765432 "
                     + PREFIX_EMAIL + "john.doe@eg.email "
-                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore";
+                    + PREFIX_ADDRESS + "24, XXX Rd, Singapore"
+                    + PREFIX_ORDER + "0 100 2021/10/20"
+                    + PREFIX_ORDER + "15 10 10/20";
 
     public static final String MESSAGE_SUCCESS = "New client added: %1$s";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This client already exists in Sellah";
 
-    private AddClientDescriptor addClientDescriptor;
-    private Client clientToAdd;
+    private final Client clientToAdd;
 
     /**
      * Constructor of the class `AddClientCommand`.
@@ -42,7 +50,6 @@ public class AddClientCommand extends Command {
      */
     public AddClientCommand(AddClientDescriptor addClientDescriptor) {
         requireNonNull(addClientDescriptor);
-        this.addClientDescriptor = addClientDescriptor;
         this.clientToAdd = createAddedClient(addClientDescriptor);
     }
 
@@ -69,7 +76,11 @@ public class AddClientCommand extends Command {
         PhoneNumber phoneNumber = addClientDescriptor.getPhoneNumber();
         Email email = addClientDescriptor.getEmail();
         Address address = addClientDescriptor.getAddress();
-        return new Client(name, phoneNumber, email, address);
+        Set<Order> orders = addClientDescriptor.getOrders()
+                .stream()
+                .filter(Order::isValidOrder)
+                .collect(Collectors.toSet());
+        return new Client(name, phoneNumber, email, address, orders);
     }
 
     @Override
@@ -87,6 +98,7 @@ public class AddClientCommand extends Command {
         private PhoneNumber phoneNumber;
         private Email email;
         private Address address;
+        private Set<Order> orders = new HashSet<>();
 
         /**
          * Constructor of the class `AddClientDescriptor`.
@@ -150,6 +162,24 @@ public class AddClientCommand extends Command {
          */
         public Address getAddress() {
             return this.address;
+        }
+
+        /**
+         * Updates a client's orders.
+         *
+         * @param orders The client's updated orders.
+         */
+        public void setOrders(Set<Order> orders) {
+            this.orders = orders;
+        }
+
+        /**
+         * Gets the orders from a client.
+         *
+         * @return The orders from a client.
+         */
+        public Set<Order> getOrders() {
+            return this.orders;
         }
     }
 }
