@@ -41,7 +41,7 @@ public class BirthdayReminderCard extends UiPart<Region> {
         phone.setText(person.getPhoneNumber());
         Optional<Birthday> possibleBirthday = person.getBirthday();
         assert possibleBirthday.isPresent();
-        birthday.setText(possibleBirthday.map(Birthday::display).get());
+        birthday.setText(possibleBirthday.map(Birthday::display).orElse(""));
     }
 
     @Override

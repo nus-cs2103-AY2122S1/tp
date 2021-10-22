@@ -8,6 +8,8 @@ import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_EIGHTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -25,6 +27,7 @@ import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -32,7 +35,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.FindOrPredicate;
+import seedu.address.model.person.FindPredicate;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonTagsContainsCaseInsensitiveTagsPredicate;
 import seedu.address.model.person.PersonTagsContainsCaseSensitiveTagsPredicate;
@@ -107,11 +112,87 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+    public void parseCommand_findOnlyNames() throws Exception {
+        List<String> nameStringList = List.of("Alan", "Bob", "Chris");
+        List<String> tagStringList = List.of();
+        List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
+        List<Tag> tagList = List.of();
+        FindPredicate findPredicate = new FindPredicate(nameList, tagList);
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+                FindCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(findPredicate), command);
+    }
+
+    @Test
+    public void parseCommand_findOnlyTags() throws Exception {
+        List<String> nameStringList = List.of();
+        List<String> tagStringList = List.of("football", "friends");
+        List<Name> nameList = List.of();
+        List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
+        FindPredicate findPredicate = new FindPredicate(nameList, tagList);
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(findPredicate), command);
+    }
+
+    @Test
+    public void parseCommand_findNamesAndTags() throws Exception {
+        List<String> nameStringList = List.of("Alan", "Bob", "Chris");
+        List<String> tagStringList = List.of("football", "friends");
+        List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
+        List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
+        FindPredicate findPredicate = new FindPredicate(nameList, tagList);
+        FindCommand command = (FindCommand) parser.parseCommand(
+                FindCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(findPredicate), command);
+    }
+
+    @Test
+    public void parseCommand_findOrOnlyNames() throws Exception {
+        List<String> nameStringList = List.of("Alan", "Bob", "Chris");
+        List<String> tagStringList = List.of();
+        List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
+        List<Tag> tagList = List.of();
+        FindOrPredicate findOrPredicate = new FindOrPredicate(nameList, tagList);
+        FindOrCommand command = (FindOrCommand) parser.parseCommand(
+                FindOrCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindOrCommand(findOrPredicate), command);
+    }
+
+    @Test
+    public void parseCommand_findOrOnlyTags() throws Exception {
+        List<String> nameStringList = List.of();
+        List<String> tagStringList = List.of("football", "friends");
+        List<Name> nameList = List.of();
+        List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
+        FindOrPredicate findOrPredicate = new FindOrPredicate(nameList, tagList);
+        FindOrCommand command = (FindOrCommand) parser.parseCommand(
+                FindOrCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindOrCommand(findOrPredicate), command);
+    }
+
+    @Test
+    public void parseCommand_findOrNamesAndTags() throws Exception {
+        List<String> nameStringList = List.of("Alan", "Bob", "Chris");
+        List<String> tagStringList = List.of("football", "friends");
+        List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
+        List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
+        FindOrPredicate findOrPredicate = new FindOrPredicate(nameList, tagList);
+        FindOrCommand command = (FindOrCommand) parser.parseCommand(
+                FindOrCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+                        .collect(Collectors.joining(" "))
+                        + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
+        assertEquals(new FindOrCommand(findOrPredicate), command);
     }
 
     @Test
