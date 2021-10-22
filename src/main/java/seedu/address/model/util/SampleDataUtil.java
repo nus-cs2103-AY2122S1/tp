@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Date;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyTaskList;
-import seedu.address.model.TaskListManager;
+import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -18,6 +18,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TaskTag;
 import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
@@ -59,9 +60,9 @@ public class SampleDataUtil {
 
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task(new Label("Buy a green button"), new Date("28th of September")),
-            new Task(new Label("Buy a red button"), new Date("29th of September")),
-            new Task(new Label("Buy a blue button"), new Date("30th of September")),
+            new Task(new Label("Buy a green button"), new Date("28th of September"), new TaskTag("Dummy")),
+            new Task(new Label("Buy a red button"), new Date("29th of September"), new TaskTag("Dummy")),
+            new Task(new Label("Buy a blue button"), new Date("30th of September"), new TaskTag("Dummy")),
         };
     }
 
@@ -73,8 +74,8 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    public static ReadOnlyTaskList getSampleTaskList() {
-        TaskListManager simpleTL = new TaskListManager();
+    public static ReadOnlyTaskBook getSampleTaskList() {
+        TaskBook simpleTL = new TaskBook();
         for (Task sampleTask : getSampleTasks()) {
             simpleTL.addTask(sampleTask);
         }

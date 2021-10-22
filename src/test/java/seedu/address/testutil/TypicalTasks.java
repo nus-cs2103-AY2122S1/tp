@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.TaskListManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.task.Task;
 
 public class TypicalTasks {
@@ -32,8 +32,8 @@ public class TypicalTasks {
     /**
      * Returns an {@code AddressBook} with all the typical tasks added.
      */
-    public static TaskListManager getTypicalTaskList() {
-        TaskListManager tl = new TaskListManager();
+    public static TaskBook getTypicalTaskList() {
+        TaskBook tl = new TaskBook();
         for (Task task : getTypicalTasks()) {
             tl.addTask(task);
         }

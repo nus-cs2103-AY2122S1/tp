@@ -11,7 +11,7 @@ import seedu.address.model.task.TaskList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class TaskListManager implements ReadOnlyTaskList {
+public class TaskBook implements ReadOnlyTaskBook {
 
     private final TaskList tasks;
 
@@ -26,12 +26,12 @@ public class TaskListManager implements ReadOnlyTaskList {
         tasks = new TaskList();
     }
 
-    public TaskListManager() {}
+    public TaskBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public TaskListManager(ReadOnlyTaskList toBeCopied) {
+    public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,7 +49,7 @@ public class TaskListManager implements ReadOnlyTaskList {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyTaskList newData) {
+    public void resetData(ReadOnlyTaskBook newData) {
         setTasks(newData.getTaskList());
     }
 

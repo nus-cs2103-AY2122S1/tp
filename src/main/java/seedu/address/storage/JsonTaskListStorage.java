@@ -12,7 +12,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.ReadOnlyTaskBook;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -33,7 +33,7 @@ public class JsonTaskListStorage implements TaskListStorage {
     }
 
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException {
         return readTaskList(filePath);
     }
 
@@ -44,7 +44,7 @@ public class JsonTaskListStorage implements TaskListStorage {
      * @throws DataConversionException if the file is not in the correct format.
      */
     @Override
-    public Optional<ReadOnlyTaskList> readTaskList(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyTaskBook> readTaskList(Path filePath) throws DataConversionException, IOException {
         requireNonNull(filePath);
 
         Optional<JsonSerializableTaskList> jsonTaskList = JsonUtil.readJsonFile(
@@ -61,17 +61,17 @@ public class JsonTaskListStorage implements TaskListStorage {
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskList addressBook) throws IOException {
+    public void saveTaskList(ReadOnlyTaskBook addressBook) throws IOException {
         saveTaskList(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveTaskList(ReadOnlyTaskList)}.
+     * Similar to {@link #saveTaskList(ReadOnlyTaskBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
     @Override
-    public void saveTaskList(ReadOnlyTaskList taskList, Path filePath) throws IOException {
+    public void saveTaskList(ReadOnlyTaskBook taskList, Path filePath) throws IOException {
         requireNonNull(taskList);
         requireNonNull(filePath);
         FileUtil.createIfMissing(filePath);

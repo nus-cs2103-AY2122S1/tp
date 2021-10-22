@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import seedu.address.model.TaskListManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.task.Task;
 
 /**
@@ -10,13 +10,13 @@ import seedu.address.model.task.Task;
  */
 public class TaskListBuilder {
 
-    private TaskListManager taskList;
+    private TaskBook taskList;
 
     public TaskListBuilder() {
-        taskList = new TaskListManager();
+        taskList = new TaskBook();
     }
 
-    public TaskListBuilder(TaskListManager taskList) {
+    public TaskListBuilder(TaskBook taskList) {
         this.taskList = taskList;
     }
 
@@ -28,7 +28,7 @@ public class TaskListBuilder {
         return this;
     }
 
-    public TaskListManager build() {
+    public TaskBook build() {
         return taskList;
     }
 }

@@ -103,10 +103,10 @@ public interface Model {
     /**
      * Replaces address book data with the data in {@code addressBook}.
      */
-    void setTaskList(ReadOnlyTaskList addressBook);
+    void setTaskList(ReadOnlyTaskBook addressBook);
 
     /** Returns the TaskList */
-    ReadOnlyTaskList getTaskList();
+    ReadOnlyTaskBook getTaskList();
 
 
     /**

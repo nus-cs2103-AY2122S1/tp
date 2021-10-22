@@ -22,7 +22,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
-    private final TaskListManager taskList;
+    private final TaskBook taskList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
@@ -31,12 +31,12 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskList taskList, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskList, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, taskList , userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.taskList = new TaskListManager(taskList);
+        this.taskList = new TaskBook(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskList.getTaskList());
@@ -45,7 +45,7 @@ public class ModelManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TaskListManager(), new UserPrefs());
+        this(new AddressBook(), new TaskBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -134,12 +134,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTaskList(ReadOnlyTaskList taskList) {
+    public void setTaskList(ReadOnlyTaskBook taskList) {
         this.taskList.resetData(taskList);
     }
 
     @Override
-    public ReadOnlyTaskList getTaskList() {
+    public ReadOnlyTaskBook getTaskList() {
         return taskList;
     }
     /**

@@ -101,8 +101,8 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        TaskListManager taskList = new TaskListBuilder().withTask(TASK1).withTask(TASK2).build();
-        TaskListManager differentTaskList = new TaskListManager();
+        TaskBook taskList = new TaskListBuilder().withTask(TASK1).withTask(TASK2).build();
+        TaskBook differentTaskList = new TaskBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true

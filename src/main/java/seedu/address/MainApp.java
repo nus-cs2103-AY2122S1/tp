@@ -19,9 +19,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.TaskListManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -95,8 +95,8 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
         }
-        ReadOnlyTaskList initialTaskList;
-        Optional<ReadOnlyTaskList> taskListOptional;
+        ReadOnlyTaskBook initialTaskList;
+        Optional<ReadOnlyTaskBook> taskListOptional;
         try {
             taskListOptional = storage.readTaskList();
             if (!taskListOptional.isPresent()) {
@@ -105,10 +105,10 @@ public class MainApp extends Application {
             initialTaskList = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialTaskList = new TaskListManager();
+            initialTaskList = new TaskBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialTaskList = new TaskListManager();
+            initialTaskList = new TaskBook();
         }
         return new ModelManager(initialAddressBook, initialTaskList, userPrefs);
     }

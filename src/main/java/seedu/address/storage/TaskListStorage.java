@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyTaskList;
+import seedu.address.model.ReadOnlyTaskBook;
 
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
@@ -18,28 +18,28 @@ public interface TaskListStorage {
     Path getTaskListFilePath();
 
     /**
-     * Returns TaskList data as a {@link ReadOnlyTaskList}.
+     * Returns TaskList data as a {@link ReadOnlyTaskBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTaskList> readTaskList() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException;
 
     /**
      * @see #getTaskListFilePath()
      */
-    Optional<ReadOnlyTaskList> readTaskList(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskList(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyTaskList} to the storage.
+     * Saves the given {@link ReadOnlyTaskBook} to the storage.
      * @param addressBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskList(ReadOnlyTaskList addressBook) throws IOException;
+    void saveTaskList(ReadOnlyTaskBook addressBook) throws IOException;
 
     /**
-     * @see #saveTaskList(ReadOnlyTaskList)
+     * @see #saveTaskList(ReadOnlyTaskBook)
      */
-    void saveTaskList(ReadOnlyTaskList addressBook, Path filePath) throws IOException;
+    void saveTaskList(ReadOnlyTaskBook addressBook, Path filePath) throws IOException;
 
 }

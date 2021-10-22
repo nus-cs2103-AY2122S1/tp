@@ -20,7 +20,7 @@ import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.TaskListManager;
+import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
@@ -32,7 +32,7 @@ import seedu.address.testutil.TypicalTasks;
  */
 public class EditTaskCommandTest {
 
-    private TaskListManager typicalTaskList = TypicalTasks.getTypicalTaskList();
+    private TaskBook typicalTaskList = TypicalTasks.getTypicalTaskList();
 
     private Model model = new ModelManager(new AddressBook(), typicalTaskList, new UserPrefs());
 
