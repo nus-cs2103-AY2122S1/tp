@@ -120,16 +120,6 @@ public interface Model {
     void setPosition(Position position, Position editedPosition);
 
     /**
-     * Returns true if {@code position} exists in MrTechRecruiter.
-     */
-    boolean hasPosition(Position toAdd);
-
-    /**
-     * Returns an unmodifiable view of the filtered person list
-     */
-    ObservableList<Person> getFilteredPersonList();
-
-    /**
      * Returns an unmodifiable view of the filtered applicant list
      */
     ObservableList<Applicant> getFilteredApplicantList();
@@ -163,9 +153,6 @@ public interface Model {
      * Replaces position book data with the data in {@code positionBook}.
      */
     void setPositionBook(ReadOnlyPositionBook positionBook);
-
-    /** Returns the PositionBook */
-    ReadOnlyPositionBook getPositionBook();
 
     /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
