@@ -8,7 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.ID_DESC_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_COUNT_VALUE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ID_BAGEL_2;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COUNT_BAGEL;
@@ -104,10 +103,6 @@ public class RemoveCommandParserTest {
 
         // invalid id with negative number
         assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL_2 + COUNT_DESC_BAGEL,
-                Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
-
-        // invalid id with 3 numbers
-        assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL + COUNT_DESC_BAGEL,
                 Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
 
         // invalid count format

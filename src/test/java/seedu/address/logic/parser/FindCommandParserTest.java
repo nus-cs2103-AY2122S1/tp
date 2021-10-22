@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_100PLUS;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
@@ -41,9 +42,10 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_notSixDigitsIdArgs_throwsParseException() {
-        assertParseFailure(parser, " id/123", String.format(
-                MESSAGE_INVALID_ID_LENGTH_AND_SIGN, FindCommand.MESSAGE_USAGE));
+    public void parse_notSixDigitsIdArgs_returnsFindCommand() {
+        FindCommand expectedFindCommand =
+                new FindCommand(new IdContainsNumberPredicate(Arrays.asList(VALID_ID_BAGEL)));
+        assertParseSuccess(parser, " id/123", expectedFindCommand);
     }
 
     @Test
