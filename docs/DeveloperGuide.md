@@ -204,6 +204,21 @@ This section describes some noteworthy details on how certain features are imple
 
 ![Interactions Inside the Logic Component for the `delete student` Command](images/DeleteStudentSequenceDiagram.png)
 
+### Add Task
+
+1. When `Logic` is called upon to execute the user input `add task m/CS2103 a/assignment1 d/20/10/2021`, it uses the 
+   `TeachingAssistantBuddyParser` class to parse the user command.
+2. `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to `AddCommandParser`.
+3. `AddCommandParser` then figures out the type of object to add, in this case a `task` object as indicated by the 
+   keyword `task`, and pass the rest of the arguments to `AddTaskCommandParser`.
+4. `AddTaskCommandParser` will create a `moduleName` object, a `taskName` object, and a `taskDeadline` object based on 
+   the input arguments. They are then passed to `AddTaskCommand`.
+5. This results in a `AddTaskCommand` object (which is a subclass of `AddCommand`), which is executed by the `Logic 
+   Manager`.
+6. The `AddTaskCommand` communicates with the `Model` when it is executed.
+7. The `Model` will add a new `Task` with the new `taskName` under the `Module` with that `moduleName`.
+8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
