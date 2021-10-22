@@ -332,7 +332,7 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedApplicant);
         applicantBook.setApplicant(target, editedApplicant);
     }
-    
+
     @Override
     public ReadOnlyApplicantBook getApplicantBook() {
         return applicantBook;
