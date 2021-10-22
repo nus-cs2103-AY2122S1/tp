@@ -187,7 +187,7 @@ or
 ```
 vs 2
 ```
-![Ui](images/student_view.png)
+![view student](images/student_view.png)
 *Displaying a student's details in the information page.*
 
 #### Viewing a tuition class: `class` | `vc`
@@ -201,7 +201,7 @@ or
 ```
 vc 3
 ```
-![Ui](images/class_view.png)
+![view class](images/class_view.png)
 *Displaying a class' details in the information page.*
 
 ### 3.3 Edit student/tuition class
@@ -316,7 +316,7 @@ Upon entering the command, a pop-up window with a text box is displayed for the 
 Users can add, remove, or edit remarks through the editor window.
 </div>
 
-![Ui](images/remark_editor_student.png)
+![Remark editor](images/remark_editor_student.png)
 *Editing remarks with editor window*
 
 #### Adding remark to a student: `remark` | `re`
@@ -348,8 +348,6 @@ or
 ```
 rec 1
 ```
-![Ui](images/remark_editor_class.png)
-*Editing the remarks of a tuition class.*
 
 <div markdown="span" class="alert alert-primary">
 Note: When creating a new student or tuition class with the `add` command, you can use the `r/` tag to add remarks  directly.
@@ -391,7 +389,7 @@ TutAssistor will display a list of all classes with `physics` or `chemistry` in 
 
 
 The filtered list should look similar to the example shown below: <br>
-![Ui](images/find_screenshot.png)
+![FindCommand example](images/find_screenshot.png)
 *Example of executing `find alice tan` command*
 
 ### 3.8 List all students/tuition classes
@@ -432,13 +430,13 @@ Format:
 timetable
 ```
 
-![Ui](images/time_table.png)
+![Timetable](images/time_table.png)
 *A weekly view of all classes.*
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today.
 
-![Ui](images/today_view.png)
+![Today view](images/today_view.png)
 *A list of view of all classes happening today.*
 
 ### 3.12 View help: `help` | `h`
@@ -447,7 +445,7 @@ Shows a command summary, as well as a link to the user guide. <br>
 
 Format: `help`
 
-![Ui](images/helpWindow.png)
+![Help window](images/helpWindow.png)
 
 *The help window*
 
