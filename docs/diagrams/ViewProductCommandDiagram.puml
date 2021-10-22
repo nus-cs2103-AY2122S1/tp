@@ -16,7 +16,7 @@ end box
 [-> LogicManager : execute("view -p 5")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("view -p 5")
+LogicManager -> AddressBookParser : parseCommand("view -p 5", model)
 activate AddressBookParser
 
 create DeleteCommandParser
