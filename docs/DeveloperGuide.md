@@ -162,6 +162,19 @@ The workflow of the Add command is shown in the Activity diagram illustrated bel
 
 ![AddActivityDiagram](images/logic/commands/addcommand/AddActivityDiagram.png)
 
+#### Design considerations:
+
+**Aspect: Optional `LastDate` fields when adding residents** 
+
+* **Alternative 1 (current choice):** `lastFetDate` and `lastCollectionDate` are optional fields
+  * Pros: 
+    - Provides more flexibility for users when adding residents to the application, as users have the choice to include or exclude these fields.
+    - Saves time as all fields can be added in a single command
+  * Cons: The length of command is increased as there are potentially more fields for the user to type.
+  
+* **Alternative 2:** Add `lastFetDate` and `lastCollectionDate` by editing the Person object
+  * Pros: Makes add command more user-friendly as the command is more succinct
+  * Cons: User has to go through a two-step process of `add` and `edit` to initialise a residents information 
 
 
 ### Find Command
