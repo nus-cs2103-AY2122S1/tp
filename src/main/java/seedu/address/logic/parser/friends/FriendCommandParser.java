@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_FRIEND_FLAG;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.friends.AddFriendCommand;
+import seedu.address.logic.commands.friends.AddFriendGameSkillCommand;
 import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.logic.commands.friends.GetFriendCommand;
@@ -35,6 +36,9 @@ public class FriendCommandParser implements Parser<Command> {
         switch (userInput[0]) {
         case AddFriendCommand.COMMAND_WORD:
             return new AddFriendCommandParser().parse(arguments);
+
+        case AddFriendGameSkillCommand.COMMAND_WORD:
+            return new AddFriendGameSkillCommandParser().parse(arguments);
 
         case EditFriendCommand.COMMAND_WORD:
             return new EditFriendCommandParser().parse(arguments);

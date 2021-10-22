@@ -63,20 +63,20 @@ public class AddFriendCommandTest {
         AddFriendCommand addAliceCommand = new AddFriendCommand(alice);
         AddFriendCommand addBobCommand = new AddFriendCommand(bob);
 
-        // same object -> returns true
+        // same object -> equals
         assertEquals(addAliceCommand, addAliceCommand);
 
-        // same values -> returns true
+        // same values -> equals
         AddFriendCommand addAliceCommandCopy = new AddFriendCommand(alice);
         assertEquals(addAliceCommandCopy, addAliceCommand);
 
         // different types -> returns false
         assertNotEquals(1, addAliceCommand);
 
-        // null -> returns false
+        // null -> notEquals
         assertNotEquals(null, addAliceCommand);
 
-        // different friend -> returns false
+        // different friend -> notEquals
         assertNotEquals(addBobCommand, addAliceCommand);
     }
 
