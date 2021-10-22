@@ -11,7 +11,7 @@ public class DeliveryDetails {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Delivery details is wrongly formatted. You need to input a date in yyyy-mm-dd or dd-mm-yyyy "
-                    + "format and a time in 12hr/24hr clock format (eg: 6:00 PM or 18:00). "
+                    + "format and a time in 24hr clock format (eg: 18:00 for 6 pm). "
                     + "You can choose to entire enter a date first or time first in any of the formats mentioned";
 
     private static final DateTimeFormatter[] dateTimeFormatters = {
