@@ -14,7 +14,6 @@ import java.util.function.Supplier;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
-import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
 public class CommitController extends Controller<Commit> {
