@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -74,7 +75,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         private void put(PersonField field, List<String> values) {
-            inputs.put(field, values);
+            inputs.put(field, values.stream().map(v -> v.trim().replaceAll(ParserUtil.REGEX_SURROUNDING_DOUBLE_QUOTE, "")).collect(Collectors.toList()));
         }
 
         private Predicate<Person> getPredicate(String args, PersonField field) {
