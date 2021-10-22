@@ -107,17 +107,13 @@ public class OutstandingFees {
      */
     public static class LastAddedDate {
 
-        public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd MMM yyyy "
+        public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format uuuu-MM-dd "
                 + "and adhere to the following constraints:\n"
-                + "1. dd and yyyy are numerical characters.\n"
-                + "2. MMM are alphabetical characters. e.g. Jan, Feb, ..., Dec\n"
-                + "3. Must be a valid date for the year.";
+                + "1. dd, MM and uuuu are numerical characters.\n"
+                + "2. Must be a valid date for the year.";
 
-        private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
-                .parseCaseInsensitive()
-                .appendPattern("dd MMM uuuu")
-                .toFormatter(Locale.ENGLISH)
-                .withResolverStyle(ResolverStyle.STRICT);
+        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
+        private static final String VALIDATION_REGEX_DATE = "^[0-9]{4}-(0[1-9]|1[0-2])-[0-9]{2}";
 
         public final String lastAdded;
         private final LocalDate lastAddedDate;
@@ -128,7 +124,7 @@ public class OutstandingFees {
          */
         private LastAddedDate() {
             lastAddedDate = LocalDate.now();
-            lastAdded = FORMATTER.format(lastAddedDate);
+            lastAdded = lastAddedDate.toString();
         }
 
         /**
@@ -156,7 +152,7 @@ public class OutstandingFees {
             } catch (DateTimeParseException e) {
                 isValid = false;
             } finally {
-                return test.matches(VALIDATION_REGEX) && isValid;
+                return test.matches(VALIDATION_REGEX_DATE) && isValid;
             }
         }
 

@@ -52,7 +52,7 @@ public class Person {
                   Address address, School school, AcadStream acadStream, AcadLevel acadLevel,
                   Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
         requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
-                school, acadStream, remark, tags, lessons);
+                school, acadStream, acadLevel, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -101,6 +101,8 @@ public class Person {
     public AcadLevel getAcadLevel() {
         return acadLevel;
     }
+
+    //requires a get Fee method
 
     public Remark getRemark() {
         return remark;

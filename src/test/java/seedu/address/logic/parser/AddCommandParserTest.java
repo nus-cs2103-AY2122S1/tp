@@ -9,8 +9,6 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.FEE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.FEE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ACAD_LEVEL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
@@ -67,64 +65,57 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
-                + FEE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
-                + FEE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
-                + FEE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
-                + FEE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB
                 + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
-                + FEE_DESC_BOB + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple school - last school accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ACAD_LEVEL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHOOL_DESC_AMY + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB
-                + FEE_DESC_BOB + REMARK_DESC_BOB
+                + REMARK_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple acad streams - last acad stream accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_AMY + ACAD_STREAM_DESC_BOB
-                + ACAD_LEVEL_DESC_BOB + FEE_DESC_BOB + REMARK_DESC_BOB
+                + ACAD_LEVEL_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple acad levels - last acad level accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB
-                + ACAD_LEVEL_DESC_AMY + ACAD_LEVEL_DESC_BOB + FEE_DESC_BOB + REMARK_DESC_BOB
+                + ACAD_LEVEL_DESC_AMY + ACAD_LEVEL_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
-
-        // multiple fee - last fee accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
-                + FEE_DESC_AMY + FEE_DESC_BOB
-                + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple remarks - last remark accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB + FEE_DESC_BOB
+                + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB
                 + REMARK_DESC_AMY + REMARK_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
 
         // multiple tags - all accepted
@@ -133,7 +124,7 @@ public class AddCommandParserTest {
 
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + PARENT_PHONE_DESC_BOB + PARENT_EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB + FEE_DESC_BOB + REMARK_DESC_BOB
+                + SCHOOL_DESC_BOB + ACAD_STREAM_DESC_BOB + ACAD_LEVEL_DESC_BOB + REMARK_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
     }
 
@@ -142,7 +133,7 @@ public class AddCommandParserTest {
         // zero tags and no remarks
         Person expectedPerson = new PersonBuilder(AMY).withEmail("")
                 .withParentPhone().withParentEmail().withSchool().withAcadStream().withAcadLevel()
-                .withFee().withRemark().withTags().build();
+                .withRemark().withTags().build();
         assertParseSuccess(parser,
                 NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY,
                 new AddCommand(expectedPerson));
@@ -152,7 +143,7 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                         + PARENT_PHONE_DESC_AMY + PARENT_EMAIL_DESC_AMY
-                        + ADDRESS_DESC_AMY + ACAD_LEVEL_DESC_AMY + FEE_DESC_AMY
+                        + ADDRESS_DESC_AMY + ACAD_LEVEL_DESC_AMY
                         + REMARK_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson2));
 
@@ -162,7 +153,7 @@ public class AddCommandParserTest {
                 NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                         + PARENT_PHONE_DESC_AMY + PARENT_EMAIL_DESC_AMY
                         + SCHOOL_DESC_AMY + ACAD_STREAM_DESC_AMY
-                        + FEE_DESC_AMY + REMARK_DESC_AMY + TAG_DESC_FRIEND,
+                        + REMARK_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson3));
     }
 

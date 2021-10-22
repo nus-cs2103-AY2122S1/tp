@@ -7,10 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ACAD_STREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_FEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -59,8 +59,6 @@ public class CommandTestUtil {
     public static final String VALID_ACAD_STREAM_BOB = "Bob stream";
     public static final String VALID_ACAD_LEVEL_AMY = "S1";
     public static final String VALID_ACAD_LEVEL_BOB = "P6";
-    public static final String VALID_FEE_AMY = "12345.67";
-    public static final String VALID_FEE_BOB = "0.50";
     public static final String VALID_REMARK_AMY = "Amy loves sushi!";
     public static final String VALID_REMARK_BOB = "Bob loves sashimi!";
     public static final String VALID_TAG_HUSBAND = "husband";
@@ -84,8 +82,6 @@ public class CommandTestUtil {
     public static final String ACAD_STREAM_DESC_BOB = " " + PREFIX_ACAD_STREAM + VALID_ACAD_STREAM_BOB;
     public static final String ACAD_LEVEL_DESC_AMY = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_AMY;
     public static final String ACAD_LEVEL_DESC_BOB = " " + PREFIX_ACAD_LEVEL + VALID_ACAD_LEVEL_BOB;
-    public static final String FEE_DESC_AMY = " " + PREFIX_FEE + VALID_FEE_AMY;
-    public static final String FEE_DESC_BOB = " " + PREFIX_FEE + VALID_FEE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
@@ -104,7 +100,6 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_ACAD_LEVEL_DESC = " " + PREFIX_ACAD_LEVEL
             + "abcdefghijklmnopq"; // max 15 characters allowed for acad level
-    public static final String INVALID_FEE_DESC = " " + PREFIX_FEE + "$999.99"; // '$' not allowed in fees
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String VALID_DATE_PAST = "15 May 1988";
@@ -112,6 +107,7 @@ public class CommandTestUtil {
     public static final String VALID_TIME_RANGE = "1234-1345";
     public static final String VALID_LESSON_RATES = "50.50";
     public static final String VALID_SUBJECT = "Language Arts";
+    public static final String VALID_OUTSTANDING_FEES = "100.00";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
     public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
 
@@ -119,6 +115,7 @@ public class CommandTestUtil {
     public static final String FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_FUTURE;
     public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
     public static final String LESSON_RATES_DESC = " " + PREFIX_RATES + VALID_LESSON_RATES;
+    public static final String OUTSTANDING_FEES_DESC = " " + PREFIX_OUTSTANDING_FEES + VALID_OUTSTANDING_FEES;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
@@ -127,6 +124,8 @@ public class CommandTestUtil {
     public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
     public static final String INVALID_LESSON_RATES_DESC =
             " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates
+    public static final String INVALID_OUTSTANDING_FEES_DESC =
+            " " + PREFIX_OUTSTANDING_FEES + "$100.00"; //'$' not allowed in outstanding fees
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "-An+"; // Not alphanumeric
     public static final String INVALID_HOMEWORK_DESC =
             " " + PREFIX_HOMEWORK + "Homework cannot be more than fifty characters long,"
@@ -146,7 +145,7 @@ public class CommandTestUtil {
                 .withSchool(VALID_SCHOOL_AMY)
                 .withAcadStream(VALID_ACAD_STREAM_AMY)
                 .withAcadLevel(VALID_ACAD_LEVEL_AMY)
-                .withFee(VALID_FEE_AMY).withRemark(VALID_REMARK_AMY)
+                .withRemark(VALID_REMARK_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
 
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
@@ -156,7 +155,7 @@ public class CommandTestUtil {
                 .withSchool(VALID_SCHOOL_BOB)
                 .withAcadStream(VALID_ACAD_STREAM_BOB)
                 .withAcadLevel(VALID_ACAD_LEVEL_BOB)
-                .withFee(VALID_FEE_BOB).withRemark(VALID_REMARK_BOB)
+                .withRemark(VALID_REMARK_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 

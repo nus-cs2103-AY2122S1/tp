@@ -27,12 +27,10 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
-    // TODO: Tests for parsing fees
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_FEE = "$9,999.999";
     private static final String INVALID_TAG = "#friend";
 
     private static final String INVALID_TIME = "1200";
@@ -174,29 +172,6 @@ public class ParserUtilTest {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Email expectedEmail = new Email(VALID_EMAIL);
         assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
-    }
-
-    @Test
-    public void parseFee_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseFee((String) null));
-    }
-
-    @Test
-    public void parseFee_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseFee(INVALID_FEE));
-    }
-
-    @Test
-    public void parseFee_validValueWithoutWhitespace_returnsFee() throws Exception {
-        Fee expectedFee = new Fee(VALID_FEE);
-        assertEquals(expectedFee, ParserUtil.parseFee(VALID_FEE));
-    }
-
-    @Test
-    public void parseFee_validValueWithWhitespace_returnsTrimmedFee() throws Exception {
-        String feeWithWhitespace = WHITESPACE + VALID_FEE + WHITESPACE;
-        Fee expectedFee = new Fee(VALID_FEE);
-        assertEquals(expectedFee, ParserUtil.parseFee(feeWithWhitespace));
     }
 
     @Test

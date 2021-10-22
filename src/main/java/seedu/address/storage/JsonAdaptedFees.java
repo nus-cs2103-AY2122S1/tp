@@ -54,7 +54,7 @@ public class JsonAdaptedFees {
                     LastAddedDate.class.getSimpleName()));
         }
         if (!LastAddedDate.isValidLastAddedDate(lastAdded)) {
-            throw new IllegalValueException(OutstandingFees.LastAddedDate.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(LastAddedDate.MESSAGE_CONSTRAINTS);
         }
         final LastAddedDate modelLastAdded = new LastAddedDate(lastAdded);
 

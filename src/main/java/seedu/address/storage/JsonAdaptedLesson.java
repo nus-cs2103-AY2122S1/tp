@@ -109,6 +109,10 @@ class JsonAdaptedLesson {
         }
         final LessonRates modelLessonRates = new LessonRates(lessonRates);
 
+        if (outstandingFees == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    OutstandingFees.class.getSimpleName()));
+        }
         final OutstandingFees modelOutstandingFees = outstandingFees.toModelType();
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);

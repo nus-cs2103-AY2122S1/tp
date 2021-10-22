@@ -123,12 +123,6 @@ public class PersonCard extends UiPart<Region> {
             remark.setText("Remark: " + person.getRemark().value);
         }
 
-        if (person.getFee().isEmpty()) {
-            outstandingFee.setManaged(false);
-        } else {
-            outstandingFee.setText("Outstanding Fees: $" + person.getFee().value);
-        }
-
         if (person.getTags().isEmpty()) {
             tags.setManaged(false);
         } else {

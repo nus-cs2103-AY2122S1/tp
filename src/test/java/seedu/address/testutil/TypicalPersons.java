@@ -8,8 +8,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_FEE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PARENT_EMAIL_AMY;
@@ -46,7 +44,6 @@ public class TypicalPersons {
             .withSchool("RI")
             .withAcadStream("IP")
             .withAcadLevel("Y6")
-            .withFee("")
             .withRemark("She likes Cheesecake")
             .withTags("friends").build();
 
@@ -54,9 +51,8 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withParentPhone("94328765").withParentEmail("ben@example.com")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withSchool("HCI").withAcadStream("IP").withAcadLevel("Y3")
-            .withFee("99.99").withRemark("He likes chocolate ice cream")
+            .withAddress("311, Clementi Ave 2, #02-25").withSchool("HCI")
+            .withAcadStream("IP").withAcadLevel("Y3").withRemark("He likes chocolate ice cream")
             .withTags("owesMoney", "friends").build();
 
     // some optional fields missing
@@ -113,7 +109,6 @@ public class TypicalPersons {
             .withSchool(VALID_SCHOOL_AMY)
             .withAcadStream(VALID_ACAD_STREAM_AMY)
             .withAcadLevel(VALID_ACAD_LEVEL_AMY)
-            .withFee(VALID_FEE_AMY)
             .withRemark(VALID_REMARK_AMY)
             .withTags(VALID_TAG_FRIEND).build();
 
@@ -126,7 +121,6 @@ public class TypicalPersons {
             .withSchool(VALID_SCHOOL_BOB)
             .withAcadStream(VALID_ACAD_STREAM_BOB)
             .withAcadLevel(VALID_ACAD_LEVEL_BOB)
-            .withFee(VALID_FEE_BOB)
             .withRemark(VALID_REMARK_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 

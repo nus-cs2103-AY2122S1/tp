@@ -2,12 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -23,6 +18,7 @@ import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -40,7 +36,7 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-                        PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
+                        PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_OUTSTANDING_FEES);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_TIME, PREFIX_SUBJECT, PREFIX_RATES)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE));
@@ -58,16 +54,17 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         TimeRange timeRange = ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         LessonRates lessonRates = ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get());
+        OutstandingFees outstandingFees = ParserUtil.parseOutstandingFees(argMultimap.getValue(PREFIX_OUTSTANDING_FEES).orElse("0.00"));
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework, lessonRates);
+            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework, lessonRates, outstandingFees);
             return new LessonAddCommand(index, lesson);
         }
 
-        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework, lessonRates);
+        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework, lessonRates, outstandingFees);
         return new LessonAddCommand(index, lesson);
     }
 
