@@ -189,7 +189,7 @@ These UI elements inherit the `Card` class, which in turn inherits `UiPart<Regio
 
 At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed.
 
-There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. Every time the `Model` is updated, `MainWindow::fillStudentCard` and `MainWindow::fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
+There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. Every time the `Model` is updated, `MainWindow#fillStudentCard` and `MainWindow#fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
 
 ![CardUiSequence](images/CardUiSequence.png)
 
@@ -197,7 +197,7 @@ When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentL
 
 Conversely, if a user chooses to hide the details, `UiManager#hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
 
-The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. In contrast, during the application launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow::fillInnerParts`. The details are shown below:
+The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. In contrast, during the application launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow#fillInnerParts`. The details are shown below:
 
 ![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
 
