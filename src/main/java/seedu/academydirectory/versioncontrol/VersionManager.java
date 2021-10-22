@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
@@ -102,39 +103,29 @@ public class VersionManager implements Version {
         return firstLine + System.lineSeparator() + secondLine;
     }
 
-    private String getPresentableHistory(Commit commit, int num) {
+    private String getPresentableHistory(Commit commit, int num, String label) {
         assert num == 0 || num == 1;
         if (num == 0) {
-            return commit.getHash().substring(0, 5) + " - " + DF.format(commit.getDate());
+            return commit.getHash().substring(0, 5) + " - " + DF.format(commit.getDate()) + " " + label;
         } else {
             return "\t\t" + commit.getMessage();
         }
+    }
+
+    private String getPresentableHistory(Commit commit, int num) {
+        return getPresentableHistory(commit, num, "");
     }
 
     @Override
     public List<String> retrieveHistory() {
         return retrieveHistoryAdvanced();
     }
-
-
-    private List<String> retrieveHistoryNoob() {
-        return commitController.retrieveCommitHistory(head).stream().map(this::getPresentableHistory)
-                .collect(Collectors.toList());
-    }
-
-
-
+    
     private List<String> retrieveHistoryAdvanced() {
         Label latestLabel = labelController.fetchLabelByName("temp_LATEST");
-        if (latestLabel.equals(Label.NULL)) {
-            return retrieveHistoryNoob();
-        }
 
         Commit headCommit = head;
         Commit latestCommit = latestLabel.getCommitSupplier().get();
-        if (latestCommit.equals(Commit.NULL)) {
-            return retrieveHistoryNoob();
-        }
 
         Commit lca = commitController.findLca(headCommit, latestCommit);
 
@@ -147,14 +138,19 @@ public class VersionManager implements Version {
         List<Commit> headToEarly = commitController.retrieveCommitHistory(headCommit, lca);
 
         List<Commit> sortedBranch = Stream.concat(latestToEarly.stream(), headToEarly.stream())
-                .sorted(Comparator.comparing(Commit::getDate).reversed()).collect(Collectors.toList());
-        List<Commit> sortedEarlyHistory = earlyHistory.stream().sorted(Comparator.comparing(Commit::getDate).reversed())
+                .sorted(Comparator.comparing(Commit::getDate)).collect(Collectors.toList());
+        List<Commit> sortedEarlyHistory = earlyHistory.stream().sorted(Comparator.comparing(Commit::getDate))
                 .collect(Collectors.toList());
 
         List<String> result = new ArrayList<>();
         for (Commit commit : sortedEarlyHistory) {
             result.add("| " + getPresentableHistory(commit, 1));
-            result.add("* " + getPresentableHistory(commit, 0));
+            result.add("* " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));
+        }
+
+        if (sortedBranch.size() == 0) {
+            Collections.reverse(result);
+            return result;
         }
 
         result.add("|/"); // Separates early history from branch
@@ -163,21 +159,21 @@ public class VersionManager implements Version {
         for (Commit commit : sortedBranch) {
             if (latestToEarly.contains(commit)) {
                 result.add("| | " + getPresentableHistory(commit, 1));
-                result.add("* | " + getPresentableHistory(commit, 0));
+                result.add("* | " + getPresentableHistory(commit, 0, commit.equals(latestCommit) ? "(prior)" : ""));
             } else {
                 result.add("| | " + getPresentableHistory(commit, 1));
-                result.add("| * " + getPresentableHistory(commit, 0));
+                result.add("| * " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));
             }
         }
+        Collections.reverse(result);
         return result;
     }
 
-
-
-
     @Override
     public Commit revert(String fiveCharHash) throws IOException, ParseException {
-        Commit mainCommit = commitController.generate("temp_LATEST", head);
+        Label latest = labelController.createNewLabel("temp_LATEST", head);
+        labelController.write(latest.getName(), latest);
+        Commit mainCommit = latest.getCommitSupplier().get();
 
         Commit relevantCommit = fetchCommit(fiveCharHash);
         if (relevantCommit.equals(Commit.NULL)) {
