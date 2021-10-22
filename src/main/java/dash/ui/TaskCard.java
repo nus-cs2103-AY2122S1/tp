@@ -36,6 +36,11 @@ public class TaskCard extends UiPart<Region> {
     private Image tagGrey = new Image("/images/tag_greyed.png", 20, 20, false, true);
     private Image contact = new Image("/images/contact.png", 20, 20, false, true);
     private Image contactGrey = new Image("/images/contact_greyed.png", 20, 20, false, true);
+    private Image calendar = new Image("/images/date.png", 20, 20, false, true);
+    private Image calendarGrey = new Image("/images/date_greyed.png", 20, 20, false, true);
+    private Image clock = new Image("/images/time.png", 20, 20, false, true);
+    private Image clockGrey = new Image("/images/time_greyed.png", 20, 20, false, true);
+
 
     @FXML
     private HBox cardPane;
@@ -46,7 +51,11 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label completionStatus;
     @FXML
+    private Label dateImage;
+    @FXML
     private Label date;
+    @FXML
+    private Label timeImage;
     @FXML
     private Label time;
     @FXML
@@ -80,6 +89,14 @@ public class TaskCard extends UiPart<Region> {
         assigneeImage.setText(" ");
         assigneeImage.setGraphic(assigneeIcon);
 
+        ImageView dateIcon = new ImageView(calendar);
+        dateImage.setText(" ");
+        dateImage.setGraphic(dateIcon);
+
+        ImageView timeIcon = new ImageView(clock);
+        timeImage.setText(" ");
+        timeImage.setGraphic(timeIcon);
+
         if (task.getTaskDate().hasDate()) {
             date.setText(task.getTaskDate().toDateString());
         }
@@ -102,15 +119,15 @@ public class TaskCard extends UiPart<Region> {
 
     public void setAsComplete() {
         if (this.cardIndex % 2 == 0) {
-            this.cardPane.setStyle("-fx-background-color: #ebcbae;");
+            this.cardPane.setStyle("-fx-background-color: #c7ab91;");
         } else {
-            this.cardPane.setStyle("-fx-background-color: #ffe6cf;");
+            this.cardPane.setStyle("-fx-background-color: #e0c1a4;");
         }
 
         this.desc.setStyle("-fx-text-fill: #878787;");
         this.id.setStyle("-fx-text-fill: #878787;");
         ImageView checkmark = new ImageView(checkmarkOrange);
-        completionStatus.setText(" ");
+        completionStatus.setText("");
         completionStatus.setGraphic(checkmark);
 
         this.date.setStyle("-fx-text-fill: #878787;");
@@ -125,6 +142,14 @@ public class TaskCard extends UiPart<Region> {
         ImageView assigneeIconGrey = new ImageView(contactGrey);
         assigneeImage.setText(" ");
         assigneeImage.setGraphic(assigneeIconGrey);
+
+        ImageView dateIconGrey = new ImageView(calendarGrey);
+        dateImage.setText(" ");
+        dateImage.setGraphic(dateIconGrey);
+
+        ImageView timeIconGrey = new ImageView(clockGrey);
+        timeImage.setText(" ");
+        timeImage.setGraphic(timeIconGrey);
     }
 
     @Override
