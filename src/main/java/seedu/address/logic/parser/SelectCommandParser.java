@@ -53,7 +53,7 @@ public class SelectCommandParser implements Parser<SelectCommand> {
 
     private List<Index> getIndexesFromString(String args) throws ParseException {
         requireNonNull(args);
-        String[] indexStrings = args.split(" ");
+        String[] indexStrings = args.split("\\s+");
         List<Index> indexList = new ArrayList<>();
         for (String s : indexStrings) {
             indexList.add(ParserUtil.parseIndex(s));

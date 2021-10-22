@@ -63,14 +63,15 @@ public class SelectCommand extends Command {
             requireNonNull(selectedPersons);
             model.addSelected(selectedPersons);
         }
-        return new CommandResult(persons.size() + " persons selected!");
+        return new CommandResult(model.getSelectedPersonList().size() + " persons selected!");
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SelectCommand // instanceof handles nulls
-                        && indexes.equals(((SelectCommand) other).indexes)); // state check
+                        && indexes.equals(((SelectCommand) other).indexes)
+                        && isInclusion == ((SelectCommand) other).isInclusion); // state check
     }
 
     private List<Person> getPersons(List<Person> list) throws IndexOutOfBoundsException {
@@ -104,7 +105,7 @@ public class SelectCommand extends Command {
 
     private boolean isHigherThanIndexes(int size) {
         for (Index index : indexes) {
-            if (index.getZeroBased() >= size) {
+            if (index.getOneBased() > size) {
                 return false;
             }
         }
