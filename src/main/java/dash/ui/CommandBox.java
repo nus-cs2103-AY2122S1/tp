@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 
 /**
@@ -33,8 +34,19 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
-        commandTextField.setOnKeyPressed(event -> upArrowKeyPressed(event.getCode()));
-        commandTextField.setOnKeyPressed(event -> downArrowKeyPressed(event.getCode()));
+        commandTextField.setOnKeyPressed(event -> handleUpOrDownArrowKeyPressed(event.getCode()));
+
+        /* TODO: Fix this. Currently overrides the above behaviour as well.
+        // disables default behaviour of TextField, where up and down arrow keys move caret
+        commandTextField.addEventFilter(KeyEvent.ANY, keyEvent -> {
+            switch (keyEvent.getCode()) {
+            case UP:
+                // Fallthrough
+            case DOWN:
+                keyEvent.consume();
+            }
+        });
+        */
     }
 
     /**
@@ -56,36 +68,19 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Checks if up arrow key is pressed.
+     * Handles the Up/Down arrow key pressed event.
      */
     @FXML
-    public void upArrowKeyPressed(KeyCode keyCode) {
-        System.out.println("UP");
-        if (keyCode != KeyCode.UP) {
-            return;
+    public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
+        if (keyCode == KeyCode.DOWN && currentUserInputIndex > 0) {
+            commandTextField.setText("");
+            currentUserInputIndex--;
         }
 
-        if (currentUserInputIndex >= 9) {
-            return;
+        if (keyCode == KeyCode.UP && currentUserInputIndex < 9) {
+            commandTextField.setText("");
+            currentUserInputIndex++;
         }
-        commandTextField.setText("upArrowKeyPressed");
-        currentUserInputIndex++;
-    }
-
-    /**
-     * Checks if down arrow key is pressed.
-     */
-    @FXML
-    public void downArrowKeyPressed(KeyCode keyCode) {
-        if (keyCode != KeyCode.DOWN) {
-            return;
-        }
-
-        if (currentUserInputIndex <= 0) {
-            return;
-        }
-        commandTextField.setText("downArrowKeyPressed");
-        currentUserInputIndex++;
     }
 
     /**
