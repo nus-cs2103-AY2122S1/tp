@@ -279,6 +279,10 @@ rec 1
 ![Ui](images/remark_editor_class.png)
 Editing window for a tuition class's remarks.
 
+<div markdown="span" class="alert alert-primary">
+Note: When creating a new student or tuition class, you can use the `r/` tag to add remarks  directly.
+</div>
+
 ### Finding students by name: `find`
 
 Command Shortcut: `f`
@@ -376,7 +380,7 @@ When typing in the command box, use the **up** and **down** arrow keys to access
 
 ### Clearing all stored data: `clear`
 <div markdown="span" class="alert alert-primary">
-❗THINK CAREFULLY BEFORE USING THIS COMMAND. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA. IT IS NOT REVERSIBLE. ❗
+❗THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA❗
 </div>
 
 Clears all current student and tuition class data.
