@@ -52,7 +52,7 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             CsvParser csvParser = new CsvParser();
-            csvParser.parse(new CsvFileSelector("docs", "assets", "templates"));
+            csvParser.parse(new CsvFileSelector("imports"));
             return new ImportCommandParser().parse(csvParser);
 
         case ExportCommand.COMMAND_WORD:

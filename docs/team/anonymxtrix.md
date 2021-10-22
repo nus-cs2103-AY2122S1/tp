@@ -3,6 +3,6 @@ layout: page
 title: Loh Xian Ze, Bryan's Project Portfolio Page
 ---
 
-### Project: NUSpam
+### Project: Spam
 
 _Coming Soon_

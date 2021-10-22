@@ -37,11 +37,28 @@ public class ImportCommandParserTest {
             + Tag.MESSAGE_CONSTRAINTS;
 
     @Test
-    public void execute_parse_success() throws Exception {
+    public void execute_parseAllColumnsPresent_success() throws Exception {
         CsvParser csvParser = new CsvParserStubProvidingValidEntries();
         csvParser.parse(new CsvFileSelectorDummy());
         ImportCommand producedCommand = new ImportCommandParser().parse(csvParser);
         assertEquals(producedCommand, new ImportCommand(TypicalPersons.getTypicalPersons()));
+    }
+
+    @Test
+    public void execute_parseMissingOptionalColumns_success() throws Exception {
+        CsvParser csvParser = new CsvParserStubMissingOptionalColumns();
+        csvParser.parse(new CsvFileSelectorDummy());
+        ImportCommand producedCommand = new ImportCommandParser().parse(csvParser);
+        assertEquals(producedCommand, new ImportCommand(TypicalPersons.getTypicalPersonsNameOnly()));
+    }
+
+    @Test
+    public void execute_parseMissingNameColumn_failure() throws Exception {
+        CsvParser csvParser = new CsvParserStubMissingNameColumn();
+        csvParser.parse(new CsvFileSelectorDummy());
+
+        assertThrows(ParseException.class,
+                ImportCommandParser.MESSAGE_NAME_COLUMN_MISSING, () -> new ImportCommandParser().parse(csvParser));
     }
 
     @Test
@@ -75,6 +92,26 @@ public class ImportCommandParserTest {
             return data.get(columnName);
         }
 
+    }
+
+    private class CsvParserStubMissingOptionalColumns extends CsvParserStubProvidingValidEntries {
+        @Override
+        public List<String> get(String columnName) {
+            if (columnName != "name") {
+                return null;
+            }
+            return super.get(columnName);
+        }
+    }
+
+    private class CsvParserStubMissingNameColumn extends CsvParserStubProvidingValidEntries {
+        @Override
+        public List<String> get(String columnName) {
+            if (columnName == "name") {
+                return null;
+            }
+            return super.get(columnName);
+        }
     }
 
     private class CsvParserStubProvidingInvalidEntries extends CsvParser {

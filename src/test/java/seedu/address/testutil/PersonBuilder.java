@@ -20,6 +20,11 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    private static final String DEFAULT_EMPTY_STRING = "";
+
+    private static final Phone BLANK_PHONE = new Phone(DEFAULT_EMPTY_STRING);
+    private static final Email BLANK_EMAIL = new Email(DEFAULT_EMPTY_STRING);
+    private static final Address BLANK_ADDRESS = new Address(DEFAULT_EMPTY_STRING);
 
     private Name name;
     private Phone phone;
@@ -93,4 +98,7 @@ public class PersonBuilder {
         return new Person(name, phone, email, address, tags);
     }
 
+    public Person buildNameOnly() {
+        return new Person(name, BLANK_PHONE, BLANK_EMAIL, BLANK_ADDRESS, tags);
+    }
 }

@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-NUSpam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
+Spam is a desktop app for managing contacts **targeted at marketers who require fast manipulation and precise handling of contact data.** It enables marketers to more easily manage and make use of email and phone leads, and **minimise tedious and repetitive tasks** such as data entry, email blasts, and mail merge.
 
 - [Quick start](#quick-start)
 - [Features](#features)
@@ -29,9 +29,9 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `NUSpam.jar` (Coming Soon).
+1. Download the latest `Spam.jar` (Coming Soon).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your NUSpam.
+1. Copy the file to the folder you want to use as the _home folder_ for your Spam.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -74,7 +74,7 @@ NUSpam is a desktop app for managing contacts **targeted at marketers who requir
 > > Note:
 > >
 > > All flags will have a long version and a short version that can be used. The long version will be prefixed with
-> > `--` while the short versions will be prefixed with `-`. (Eg. `--phone` and `-p`)
+> > `--` while the short versions will be prefixed with `-`. (E.g. `--phone` and `-p`)
 
 </div>
 
@@ -108,7 +108,7 @@ Examples:
 ### Batch importing contacts: `import`
 
 Imports all contacts from a selected _csv_ file. Calling the command will open a file browser to help select the file.
-  
+
 Format: `import`
 
 Example:
@@ -119,21 +119,21 @@ Example:
 - Click open to import contacts.
 
 Note:  
-- `.csv` file must have corresponding **headers**:
+- `.csv` file should have corresponding **headers**:
   - name
-  - phone
-  - email
-  - address
+  - phone(optional)
+  - email(optional)
+  - address(optional)
   - tags(optional)
 - Addresses containing **commas (,)** should be wrapped in **"double quotes"**.
-- Multiple tags should be seperated via **single whitespace**.
+- Multiple tags should be seperated via **semicolons (;)**.
 - Make sure to save the spreadsheet data as **`.csv`** and not **`.csv UTF-8`**.
 - A template `importTemplate.csv` can be found in the default directory of the file browser.
 
 Sneak peek:
 
 ![csv template](images/csvTemplate.png)
-  
+
 ### Listing all persons: `list`
 
 Shows a list of all persons in the address book.
@@ -149,7 +149,7 @@ Format: `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email)
 - Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 - At least one of the optional fields must be provided.
 - Existing values will be updated to the input values.
-- When editing tags, the existing tags of the person will be removed ie. adding of tags is not cumulative.
+- When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 - You can remove all the person’s tags by typing `-t` without specifying any tags after it.
 
 Examples:
@@ -159,21 +159,38 @@ Examples:
 
 ### Locating persons: `find`
 
-Finds persons whose name, phone number, email, address and/or tag contain contains any of the given keywords.
+Finds persons whose respective fields contain any of the respective keywords.
 
-Format: `find (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`
+Format: `find (-n/--name) [NAME] (-p/--phone) [PHONE] (-e/--email) [EMAIL] (-a/--address) [ADDRESS] (-t/--tag) [TAG]`
 
 - At least one of the optional fields must be provided.
-- The search is case-insensitive. e.g `hans` will match `Hans`
+- The search is case-insensitive. e.g. `hans` will match `Hans`
 - The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- The order of the optional fields does not matter. e.g. `-n Hans Bo -p 12345678` and `-p 12345678 -n Hans Bo` will return the same result
+- Optional fields can be repeated. e.g. `-t friend -t colleagues` returns only persons with tags containing both `friends` and `colleagues`
 - Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+- Persons matching at least one keyword in **EACH** option will be returned (i.e. `OR` search within individual fields).
+
+  e.g. `Hans Bo` will return:
+
+  - `Hans Gruber`
+  - `Bo Yang`
+
+- Persons matching **all** given options will be returned (i.e. `AND` search across multiple fields).
+
+  e.g. `-n Hans Bo -p 12345678` will return:
+
+  - `Name: Hans, Phone: 12345678`
+  - `Name: Bo, Phone: 12345678`
+
+  But not:
+
+  - `Name: Hans Bo, Phone: 87654321`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find -n John` returns `john` and `John Doe`
+- `find -n alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person: `delete`

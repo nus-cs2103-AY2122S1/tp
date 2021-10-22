@@ -1,0 +1,22 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor COMMONS_COLOR_T2
+skinparam classBackgroundColor COMMONS_COLOR_T2
+
+package "History" {
+
+class "<<interface>>\nHistory" as History
+class "{abstract}\nBaseHistory" as BaseHistory
+class StringHistory
+class CopyableHistory
+
+}
+
+class HiddenOutside #FFFFFF
+HiddenOutside .down.> History
+BaseHistory .up.|> History
+CopyableHistory -up-|> BaseHistory
+StringHistory -up-|> BaseHistory
+
+@enduml

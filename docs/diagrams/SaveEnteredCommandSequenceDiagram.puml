@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+
+Actor User USER_COLOR
+
+box "UI" UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":CommandInput" as CommandInput UI_COLOR_T3
+end box
+
+box "History" COMMONS_COLOR
+participant ":StringHistory" as History COMMONS_COLOR_T2
+end box
+
+loop Every key typed
+    User -> CommandBox : handleKeyTyped(event)
+    activate CommandBox UI_COLOR
+        CommandBox -> CommandInput : set(enteredCommand)
+        activate CommandInput UI_COLOR_T3
+        CommandBox <-- CommandInput
+        deactivate CommandInput
+    User <-- CommandBox
+    deactivate CommandBox
+end
+
+User -> CommandBox : handleCommandEntered()
+activate CommandBox UI_COLOR
+    opt command entered is not empty
+        CommandBox -> CommandInput : save()
+        activate CommandInput UI_COLOR_T3
+            CommandInput -> History : add(value)
+            activate History COMMONS_COLOR_T2
+            CommandInput <-- History
+            deactivate History
+        CommandBox <-- CommandInput
+        deactivate CommandInput
+    end
+User <-- CommandBox
+deactivate CommandBox
+
+
+@enduml
