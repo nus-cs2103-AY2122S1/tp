@@ -310,7 +310,7 @@ public class ModelManager implements Model {
     public Path getApplicantBookFilePath() {
         return userPrefs.getApplicantBookFilePath();
     }
-
+    
     //========== Rejection rates =======================================
     /**
      * Initialise rejection rate of a new position.
