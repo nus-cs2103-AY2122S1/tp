@@ -10,7 +10,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand
-     * and returns a DeleteCommand object for execution.
+     * and returns a ImportCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ImportCommand parse(String args) throws ParseException {
