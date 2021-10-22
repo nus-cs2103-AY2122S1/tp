@@ -26,6 +26,9 @@ public class DeleteReservationCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Instantiates a {@code DeleteReservationCommand} with a given index
+     */
     public DeleteReservationCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         assert this.targetIndex.getOneBased() > 0;
