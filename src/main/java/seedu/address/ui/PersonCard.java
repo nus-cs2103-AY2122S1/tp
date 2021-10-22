@@ -21,6 +21,12 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
+    // Images for favorite button
+    private static final Image FAVORITE = new Image(
+            PersonCard.class.getResourceAsStream("/images/fav.png"));
+    private static final Image NOT_FAVORITE = new Image(
+            PersonCard.class.getResourceAsStream("/images/unfav.png"));
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -41,6 +47,9 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private ImageView profileView;
+    @FXML
+    private ImageView favBtn;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -64,6 +73,9 @@ public class PersonCard extends UiPart<Region> {
         Image userGitHubProfilePicture = person.getProfilePicture();
         profileView.setEffect(new DropShadow(20, Color.BLACK));
         profileView.setImage(userGitHubProfilePicture);
+
+        // set favBtn here based on isFavorite
+        favBtn.setImage(NOT_FAVORITE);
     }
 
     @Override
