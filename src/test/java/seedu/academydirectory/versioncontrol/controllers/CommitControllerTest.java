@@ -13,7 +13,6 @@ import static seedu.academydirectory.testutil.TypicalCommits.COMMIT5;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;

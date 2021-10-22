@@ -6,6 +6,7 @@ import java.util.Optional;
 import seedu.academydirectory.versioncontrol.objects.Label;
 
 public class LabelParser extends VcParser<Label> {
+    @Override
     public String[] parse(Path file) {
         Optional<String> response = loadFile(file);
         if (response.isEmpty()) {
