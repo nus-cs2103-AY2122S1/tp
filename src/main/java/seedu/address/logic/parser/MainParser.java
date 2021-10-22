@@ -21,7 +21,7 @@ import seedu.address.logic.parser.games.GameCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class MainParser {
 
     /**
      * Used for initial separation of command word and args.
