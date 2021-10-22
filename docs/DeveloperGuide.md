@@ -243,17 +243,17 @@ The processing of a claim command from the user can be split into 2 general step
 1. Parsing the user input into a `ClaimCommand`
 3. Executing the `ClaimCommand`
 Each step will be described in the sections below.
-   
+
 **Step 1:** Parsing of user input
 
-Parsing of the user input is primarily handled by the `ClaimCommandParser` which calls other helper classes to 
+Parsing of the user input is primarily handled by the `ClaimCommandParser` which calls other helper classes to
 parse the text into the data classes `Title`, `Description` and `Status`
 
 <img src="images/ClaimCommandParserSequenceDiagram.png" width="800" />
 
-`ClaimCommandParser` uses the parsed data classes to create an `EditClaimDescriptor`. It does not create a `Claim` at 
-this stage because the user input could be giving an incomplete description of a `Claim` with missing fields. These 
-missing fields imply that the user wants to edit or delete an existing claim. The difference between a `Claim` and 
+`ClaimCommandParser` uses the parsed data classes to create an `EditClaimDescriptor`. It does not create a `Claim` at
+this stage because the user input could be giving an incomplete description of a `Claim` with missing fields. These
+missing fields imply that the user wants to edit or delete an existing claim. The difference between a `Claim` and
 `EditClaimDescriptor` can be seen in the class diagram below.
 
 <img src="images/ClaimEditClaimDescriptorClassDiagram.png" width="300" />
@@ -278,14 +278,13 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
     * Cons: User has to remember a lot of commands
-    
 #### Future Improvements
 {:.no_toc}
 
-* A Java HashSet may not be the most appropriate data structure to store claims since it is unable to find a claim 
+* A Java HashSet may not be the most appropriate data structure to store claims since it is unable to find a claim
   in O(1) time. Instead, a HashMap may be more appropriate, using the claim title as key.
-* Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes 
-  to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should 
+* Currently, there is no relationship between Claim and EditClaimDescriptor. This means that any future changes
+  to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
   both extend from an abstract class to ensure that any future modification would not lead to regressions.
 
 
