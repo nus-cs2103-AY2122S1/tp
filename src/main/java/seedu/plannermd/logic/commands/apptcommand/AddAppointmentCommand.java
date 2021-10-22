@@ -1,7 +1,6 @@
 package seedu.plannermd.logic.commands.apptcommand;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;

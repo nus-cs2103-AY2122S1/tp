@@ -5,8 +5,8 @@ import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORM
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -83,7 +83,7 @@ public class AddAppointmentCommandParser {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    final private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+     private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("d/M/yyyy")
             .appendPattern(" HH:mm")
             .toFormatter();
