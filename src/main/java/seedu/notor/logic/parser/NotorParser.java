@@ -104,7 +104,7 @@ public class NotorParser {
             final String subCommandWord = targetedIndexMatcher.group("subCommandWord").trim();
             final String arguments = targetedIndexMatcher.group("arguments");
             if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (subCommandWord.equals(PersonDeleteCommand.COMMAND_WORD)) {
+                if (PersonDeleteCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonDeleteCommandParser(index).parse();
                 }
                 if (PersonEditCommand.COMMAND_WORDS.contains(subCommandWord)) {
