@@ -234,9 +234,39 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Tags
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+
+Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple tags can be added for each person, with no duplicates.
+
+#### Usage
+
+Given below is an example usage scenario and how the Tag mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add ... t/tag` command to add a person with a tag into CONNECTIONS.
+
+Step 3. CONNECTIONS displays the newly added contact with the added tag.
+
+Step 4. The user decides to add additional tags to the contact at index 1, and executes `tag 1 t/tag`.
+
+Step 5. CONNECTIONS will update the contact to include the new tag
+
+Step 6. The user decides to remove a tag from a contact at index 3, and executes `untag 3 t/tag`.
+
+Step 7. CONNECTIONS updates and remove the tag from the contact.
+
+#### Design considerations:
+
+* **Current implementation: Tags aresaved within a `Set<Tag>` within `Person`**
+  * Pros: Easy to implement and doesn't allow for duplicates. 
+  * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
+  
+* **Alternative: Utilise a separate `HashMap` data structure to map contacts to tags.**
+  * Pros: Fast retrieval of tagged contacts.
+  * Cons: Difficult to maintain a separate data structure.
 
 ### \[Work in progress\] Pin feature
 
@@ -271,6 +301,25 @@ The following sequence diagram shows how the pin operation works:
 * **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
+
+### \[Work in progress\] Help feature
+
+#### Implementation
+
+The help command is facilitated by `HelpCommand` which interfaces with `Command`, and `HelpCommandParser`.
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `help` to seek help on CONNECTION's usage.
+
+Step 3. CONNECTIONS displays a list of available commands.
+
+Step 4. The user decides to view the usage of `add` to learn to add a contact, and executes `help add`.
+
+Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
