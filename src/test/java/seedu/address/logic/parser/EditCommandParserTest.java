@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.HEALTH_CONDITION_DESC
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HEALTH_CONDITION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_LANGUAGE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_LAST_VISIT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LANGUAGE_DESC_AMY;
@@ -39,6 +40,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -86,8 +88,12 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_LANGUAGE_DESC,
                 Language.MESSAGE_CONSTRAINTS); // invalid LANGUAGE
         assertParseFailure(parser, "1" + INVALID_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS); // invalid address
+
         // invalid health condition
         assertParseFailure(parser, "1" + INVALID_HEALTH_CONDITION_DESC, HealthCondition.MESSAGE_CONSTRAINTS);
+
+        //invalid last visit
+        assertParseFailure(parser, "1" + INVALID_LAST_VISIT_DESC, LastVisit.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid language
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + LANGUAGE_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);

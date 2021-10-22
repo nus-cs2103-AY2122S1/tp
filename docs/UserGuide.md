@@ -129,9 +129,9 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing elderly's attributes in SeniorLove.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] [h/HEALTH_CONDITION]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -139,10 +139,13 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION
 * When editing health conditions, the existing health conditions of the person will be removed i.e adding of health conditions is not cumulative.
 * You can remove all the person’s health conditions by typing `h/` without
     specifying any health conditions after it.
+* You can remove the person's last visit by typing `lv/` without specifying any datetime after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions.
+*  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st person to be `91234567` and `English` respectively. All other attributes are not modified.
+*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
+*  `edit 1 lv/2021-10-10 13:00` Edits the last visit of the 1st person to be `10 Oct 2021 13:00`. All other attributes are not modified.
+*  `edit 1 lv/` Removes the last visit for the 1st person. All other attributes are not modified.
 
 
 ### Listing all persons : `list`

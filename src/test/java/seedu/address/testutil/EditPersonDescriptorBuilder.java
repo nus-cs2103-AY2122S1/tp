@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.healthcondition.HealthCondition;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Language;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -37,6 +38,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setLanguage(person.getLanguage());
         descriptor.setAddress(person.getAddress());
         descriptor.setHealthConditions(person.getHealthConditions());
+        descriptor.setLastVisit(person.getLastVisit().get());
     }
 
     /**
@@ -68,6 +70,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code LastVisit} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withLastVisit(String lastVisit) {
+        descriptor.setLastVisit(new LastVisit(lastVisit));
         return this;
     }
 
