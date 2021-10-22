@@ -30,7 +30,7 @@ public class AddPositionCommandIntegrationTest {
     public void execute_newPosition_success() {
         Position validPosition = new PositionBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getPositionBook(), new UserPrefs());
         expectedModel.addPosition(validPosition);
 
         assertCommandSuccess(new AddPositionCommand(validPosition), model,
