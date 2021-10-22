@@ -32,7 +32,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_2 = "sweet";
     private static final String VALID_COUNT_1 = "2";
     private static final String VALID_COUNT_2 = "12";
-    private static final String VALID_Id_1 = "223131";
+    private static final String VALID_Id_1 = "223";
     private static final String VALID_Id_2 = "122489";
 
     private static final String WHITESPACE = " \t\r\n";
@@ -173,11 +173,6 @@ public class ParserUtilTest {
     @Test
     public void parseId_negativeValue_throwsParseException() {
         assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_Id_2));
-    }
-
-    @Test
-    public void parseId_notSixDigits_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseId(INVALID_Id_3));
     }
 
     @Test
