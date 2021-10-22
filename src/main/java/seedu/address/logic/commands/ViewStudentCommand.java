@@ -39,6 +39,7 @@ public class ViewStudentCommand extends Command {
         Student studentToView = lastShownList.get(this.index.getZeroBased());
         IsStudentPredicate predicate = new IsStudentPredicate(studentToView);
         model.updateFilteredStudentList(predicate);
-        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, studentToView.getName()));
+        return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, studentToView.getName()),
+            false, false, true);
     }
 }

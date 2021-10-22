@@ -11,7 +11,7 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    private final boolean showGroups;
+    private final boolean viewStudent;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -22,11 +22,11 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean showGroups) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewStudent) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
-        this.showGroups = showGroups;
+        this.viewStudent = viewStudent;
     }
 
     /**
@@ -49,8 +49,8 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isShowGroups() {
-        return showGroups;
+    public boolean isViewStudent() {
+        return viewStudent;
     }
 
     @Override

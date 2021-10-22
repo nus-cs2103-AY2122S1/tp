@@ -20,6 +20,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -37,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private GroupListPanel groupListPanel;
+    private AssessmentListPanel assessmentListPanel;
+    private DetailedStudentCard detailedStudentCard;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -118,11 +121,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        leftPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-
-        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        rightPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        showAllStudentsAndGroups();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -174,6 +173,28 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleViewStudent() {
+        Student studentToView = logic.getFilteredStudentList().get(0);
+
+        detailedStudentCard = new DetailedStudentCard(studentToView);
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(detailedStudentCard.getRoot());
+
+        assessmentListPanel = new AssessmentListPanel(studentToView.getAssessments());
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(assessmentListPanel.getRoot());
+    }
+
+    private void showAllStudentsAndGroups() {
+        leftPanelPlaceholder.getChildren().clear();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        leftPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+
+        rightPanelPlaceholder.getChildren().clear();
+        groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
+        rightPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+    }
+
     public StudentListPanel getStudentListPanel() {
         return studentListPanel;
     }
@@ -214,6 +235,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isViewStudent()) {
+                handleViewStudent();
+            } else {
+                showAllStudentsAndGroups();
             }
 
             return commandResult;

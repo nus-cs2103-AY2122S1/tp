@@ -3,34 +3,26 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
-/**
- * A UI component that displays information of a {@code Student}.
- */
-public class StudentCard extends UiPart<Region> {
+public class DetailedStudentCard extends UiPart<Region> {
 
-    private static final String FXML = "StudentListCard.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on CsBook level 4</a>
-     */
+    private static final String FXML = "DetailedStudentCard.fxml";
 
     public final Student student;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private VBox detailsCard;
     @FXML
-    private Label id;
+    private VBox noteCard;
+    @FXML
+    private Label name;
     @FXML
     private Label telegramHandle;
     @FXML
@@ -38,23 +30,20 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label groupName;
     @FXML
-    private VBox studentCard;
+    private TextArea notes;
 
-    /**
-     * Creates a {@code StudentCard} with the given {@code Student} and index to display.
-     */
-    public StudentCard(Student student, int displayedIndex) {
+    public DetailedStudentCard(Student student) {
         super(FXML);
         this.student = student;
         if (student.isWeak()) {
-            ObservableList<String> styleClass = studentCard.getStyleClass();
+            ObservableList<String> styleClass = name.getStyleClass();
             styleClass.add("flag");
         }
-        id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         groupName.setText(student.getGroup().getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
+        notes.setText(student.getNote().getNote());
     }
 
     @Override
@@ -65,13 +54,12 @@ public class StudentCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof StudentCard)) {
+        if (!(other instanceof DetailedStudentCard)) {
             return false;
         }
 
         // state check
-        StudentCard card = (StudentCard) other;
-        return id.getText().equals(card.id.getText())
-                && student.equals(card.student);
+        DetailedStudentCard card = (DetailedStudentCard) other;
+        return student.equals(card.student);
     }
 }

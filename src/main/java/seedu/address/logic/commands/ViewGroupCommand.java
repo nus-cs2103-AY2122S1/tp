@@ -39,8 +39,8 @@ public class ViewGroupCommand extends Command {
         requireNonNull(model);
         model.updateFilteredStudentList(predicate);
         String displayedText = getGroupInformation(model) + "\n" + Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
-        return new CommandResult(
-                String.format(displayedText, model.getFilteredStudentList().size()));
+        return new CommandResult(String.format(displayedText, model.getFilteredStudentList().size()),
+            false, false, true);
     }
 
     @Override

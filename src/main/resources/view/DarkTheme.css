@@ -94,7 +94,6 @@
 }
 
 .list-cell {
-    -fx-spacing: 100;
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 2px;
@@ -315,7 +314,6 @@
 }
 
 #cardPane {
-    -fx-spacing: 100;
     -fx-background-color: transparent;
     -fx-border-width: 0;
 }
@@ -344,4 +342,22 @@
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
+
+#notes .content{
+    -fx-background-color: #383838;
+    -fx-background-radius: 0;
+}
+
+#notes {
+    -fx-background-color: transparent;
+}
+
+#noteCard {
+    -fx-background-color: #383838;
+}
+
+#detailsCard {
+    -fx-background-color: #3c3e3f;
+}
+
 

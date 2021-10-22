@@ -3,6 +3,7 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,7 @@ public class Student {
     // Data fields
     private final Group group;
     private ObservableList<Assessment> assessments = FXCollections.observableArrayList();
+    private final Note note = new Note();
 
     /**
      * Every field must be present and not null.
@@ -55,8 +57,17 @@ public class Student {
         return group.getGroupName();
     }
 
+    public ObservableList<Assessment> getAssessments() {
+        assessments.addAll(new Assessment(), new Assessment(), new Assessment());
+        return this.assessments;
+    }
+
+    public Note getNote() {
+        return this.note;
+    }
+
     public boolean isWeak() {
-        return true;
+        return false;
     }
 
     /**
