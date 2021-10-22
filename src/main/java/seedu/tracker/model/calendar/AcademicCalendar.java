@@ -5,8 +5,19 @@ import static seedu.tracker.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 public class AcademicCalendar {
+    public static final String MESSAGE_CONSTRAINTS = "Academic Year should only contain numbers from 1 to 6, and "
+            + "semester should only contain numbers from 1 to 4. Both of them should not be blank.";
     private final AcademicYear year;
     private final Semester semester;
+
+    /**
+     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * This default constructor shouldn't be used anywhere else.
+     */
+    public AcademicCalendar() {
+        this.year = null;
+        this.semester = null;
+    }
 
     /**
      * Constructs Academic calendar.
@@ -25,6 +36,12 @@ public class AcademicCalendar {
         return semester;
     }
 
+    /**
+     * Returns true if a given int is a valid Academic calendar.
+     */
+    public static boolean isValidAcademicCalendar(int testYear, int testSem) {
+        return AcademicYear.isValidAcademicYear(testYear) && Semester.isValidSemester(testSem);
+    }
     /**
      * Returns true if both academic calendar have the same year and semester.
      */

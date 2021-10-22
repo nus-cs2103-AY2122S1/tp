@@ -1,8 +1,9 @@
 package seedu.tracker.model.calendar;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 public class Semester {
 
@@ -12,13 +13,21 @@ public class Semester {
     public final int value;
 
     /**
-     * Constructs a semester.
-     * @param semester A valid semester.
+     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * This default constructor shouldn't be used anywhere else.
      */
-    public Semester(int semester) {
-        requireNonNull(semester);
-        checkArgument(isValidSemester(semester), MESSAGE_CONSTRAINTS);
-        this.value = semester;
+    public Semester() {
+        this.value = 0;
+    }
+
+    /**
+     * Constructs a semester.
+     * @param value A valid semester.
+     */
+    public Semester(int value) {
+        requireNonNull(value);
+        checkArgument(isValidSemester(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -40,4 +49,8 @@ public class Semester {
                 && value == (((Semester) other).value); // state check
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
 }

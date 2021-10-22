@@ -17,6 +17,7 @@ import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.ModuleTracker;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
@@ -25,7 +26,7 @@ import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
 
 public class TakeCommandTest {
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void constructor_nullIndex_throwsNullPointerException() {
@@ -52,7 +53,8 @@ public class TakeCommandTest {
 
         String expectedMessage = String.format(TakeCommand.MESSAGE_SUCCESS, scheduledModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setModule(model.getFilteredModuleList().get(0), scheduledModule);
 
         assertCommandSuccess(takeCommand, model, expectedMessage, expectedModel);
@@ -63,7 +65,8 @@ public class TakeCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        Module scheduledModule = new ModuleBuilder(moduleInFilteredList).withAcademicCalendar(1, 1).build();
+        Module scheduledModule = new ModuleBuilder(moduleInFilteredList)
+                .withAcademicCalendar(1, 1).build();
         AcademicYear year = new AcademicYear(1);
         Semester semester = new Semester(1);
         AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
@@ -71,7 +74,8 @@ public class TakeCommandTest {
 
         String expectedMessage = String.format(TakeCommand.MESSAGE_SUCCESS, scheduledModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setModule(model.getFilteredModuleList().get(0), scheduledModule);
 
         assertCommandSuccess(takeCommand, model, expectedMessage, expectedModel);

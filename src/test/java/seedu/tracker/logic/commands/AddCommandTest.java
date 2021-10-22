@@ -19,6 +19,7 @@ import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.ReadOnlyUserInfo;
 import seedu.tracker.model.ReadOnlyUserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
@@ -126,6 +127,16 @@ public class AddCommandTest {
 
         @Override
         public void setCurrentSemester(AcademicCalendar academicCalendar) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUserInfo(ReadOnlyUserInfo userInfo) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyUserInfo getUserInfo() {
             throw new AssertionError("This method should not be called.");
         }
 
