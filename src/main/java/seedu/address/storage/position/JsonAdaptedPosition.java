@@ -29,7 +29,7 @@ class JsonAdaptedPosition {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Position} into this class for Jackson use.
      */
     public JsonAdaptedPosition(Position source) {
         title = source.getTitle().fullTitle;
@@ -37,9 +37,9 @@ class JsonAdaptedPosition {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted position object into the model's {@code Position} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted position.
      */
     public Position toModelType() throws IllegalValueException {
 
