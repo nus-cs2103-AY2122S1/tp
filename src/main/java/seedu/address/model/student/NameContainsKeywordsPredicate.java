@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -10,14 +11,26 @@ import seedu.address.commons.util.StringUtil;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
+    private List<String> keywordsClone = new ArrayList<>();
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
+    /**
+     * Ignores special characters in input keyword
+     */
+    private void removeSpecialCharacters() {
+        for (String keyword : keywords) {
+            String newKeyword = keyword.replaceAll("\\W", "");
+            keywordsClone.add(newKeyword);
+        }
+    }
+
     @Override
     public boolean test(Student student) {
-        return keywords.stream()
+        removeSpecialCharacters();
+        return keywordsClone.stream()
                 .anyMatch(keyword -> StringUtil.containsSubstringIgnoreCase(student.getName().fullName, keyword));
     }
 
