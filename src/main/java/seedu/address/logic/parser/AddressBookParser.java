@@ -80,7 +80,7 @@ public class AddressBookParser {
 
         case StatisticsCommand.COMMAND_WORD:
             return new StatisticsCommandParser().parse(arguments);
-            
+
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
 
