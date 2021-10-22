@@ -39,6 +39,7 @@ public class Person {
         this.availability = availability;
         this.todayAttendance = new TodayAttendance(false);
         this.totalAttendance = new TotalAttendance(0);
+        this.tags.addAll(tags);
     }
 
 
@@ -209,9 +210,9 @@ public class Person {
         builder.append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
-                .append("Today: ")
+                .append(" ")
                 .append(getTodayAttendance())
-                .append("Total: ")
+                .append(" ")
                 .append(getTotalAttendance());
 
         Availability availability = getAvailability();

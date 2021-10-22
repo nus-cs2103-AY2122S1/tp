@@ -83,9 +83,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_cleara() throws ParseException {
-        assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD) instanceof ClearAttendanceCommand);
+        assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD, aliases) instanceof ClearAttendanceCommand);
         assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD
-                + " 1") instanceof ClearAttendanceCommand);
+                + " 1", aliases) instanceof ClearAttendanceCommand);
     }
 
     @Test

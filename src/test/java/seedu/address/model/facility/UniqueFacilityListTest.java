@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_OUTDOOR_TENNIS
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -55,8 +56,10 @@ public class UniqueFacilityListTest {
         uniqueFacilityList.add(new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build());
 
         ObservableList<Person> members = FXCollections.observableArrayList();
-        Person firstMember = new PersonBuilder().withAvailability("Mon Tue").build();
-        Person secondMember = new PersonBuilder().withAvailability("Mon Thu").build();
+        Person firstMember = new PersonBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
+                DayOfWeek.FRIDAY)).build();
+        Person secondMember = new PersonBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
+                DayOfWeek.THURSDAY)).build();
         members.add(firstMember);
         members.add(secondMember);
 

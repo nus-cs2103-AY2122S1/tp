@@ -82,14 +82,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets {@code TodayAttendance} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withTodayAttendance(Boolean attendance) {
-        this.todayAttendance = new TodayAttendance(attendance);
-        return this;
-    }
-
-    /**
      * Sets the {@code Availability} of the {@code Person} that we are building.
      * Used with string input.
      */
@@ -99,6 +91,14 @@ public class PersonBuilder {
             availability.add(DayOfWeek.of(Integer.parseInt(dayNumber)));
         }
         this.availability = new Availability(availability);
+        return this;
+    }
+
+    /**
+     * Sets {@code TodayAttendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTodayAttendance(Boolean attendance) {
+        this.todayAttendance = new TodayAttendance(attendance);
         return this;
     }
 
