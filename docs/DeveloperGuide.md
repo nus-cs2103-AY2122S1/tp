@@ -114,15 +114,16 @@ How the parsing works:
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W15-2/tp/blob/master/src/main/java/dash/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the contacts' data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+* stores the task list data i.e., all `Task` objects  (which are contained in a `TaskList` object).
+* stores the currently 'selected' `Person` or `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as unmodifiable `ObservableList<Person>` or `ObservableList<Task>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -311,7 +312,31 @@ The following activity diagram summarises what happens when a user executes an a
     * Pros: Less code and methods to handle one Object type and it also results in easier implementation of
             comparison methods between two `LocalDateTime` objects.
     * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
-  
+
+### \[Implemented\] Listing Upcoming Tasks (Hanif)
+
+With the implementation of `TaskDate.java`, we can easily look up upcoming tasks by comparing dates and times.
+
+#### Implementation
+In `UpcomingTaskCommand.java`, a field of type `Predicate<Task>` named `TaskDateAfterCurrentDatePredicate` is used to encapsulate the logic of determining whether or not a task is upcoming. It contains fields that store the current date and time via `LocalDateTime.now()`, and the current date via `LocalDate.now()`.
+The overridden `Predicate#test(Task task)` method first checks if the `task.TaskDate` object has a date, then if it has a date but no time, and finally whether it has both date and time.
+
+When `UpcomingTaskCommand.execute(Model model)` is called by `LogicManager`, `UpcomingTaskCommand` passes `TaskDateAfterCurrentDatePredicate` to `Model#updateFilteredTaskList(Predicate<Task> predicate)`, which filters out the upcoming tasks and updates the viewable `ObservableList<Task>`. 
+
+A sequence diagram is provided below:
+![UpcomingTaskCommandSequenceDiagram](images/UpcomingTaskCommandSequenceDiagram.png)
+
+#### Proposed Extension
+Currently, `UpcomingTaskCommand` returns upcoming tasks in the same order that they are listed in the original task list. They are not sorted by date. A proposed extension would be to implement a new method that iterates through the filtered list and sorts the tasks by date after `Model#updateFilteredTaskList` is called since it simply filters the list with the predicate.
+
+#### Alternatives Considered
+* Changing the syntax of the `upcoming` command to include a number i.e. `upcoming 7` to indicate upcoming tasks in the next 7 days.
+  * Pros: More specific, limits the scope of viewable tasks which would help usability.
+  * Cons: Not immediately clear what unit of time the number would represent. 
+    On one hand, it would be too limiting if we as developers decided the unit of time, and on the other hand it would be too clunky to have the user define it themselves. 
+    Implementing the proposed extension of sorting upcoming tasks would better address the issue. Additionally, having unnecessarily longer syntax would decrease the speed at which the user would be able to operate, which goes against Dash's primary design goal of prioritizing speed.
+    
+
 ### \[Proposed\] Using the Up/Down Arrow Keys to Select Previous User Inputs
 
 A proposed improvement to the text-based input method is to allow users to easily reenter previously inputted commands 
