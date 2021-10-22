@@ -35,7 +35,6 @@ public class AddCommand extends UndoableCommand {
             + "[" + PREFIX_SCHOOL + "SCHOOL] "
             + "[" + PREFIX_ACAD_STREAM + "ACAD_STREAM] "
             + "[" + PREFIX_ACAD_LEVEL + "ACAD_LEVEL] "
-            + "[" + PREFIX_FEE + "FEE] "
             + "[" + PREFIX_REMARK + "REMARK] "
             + "[" + PREFIX_TAG + "TAG]...";
 
@@ -51,7 +50,6 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_SCHOOL + "Nan Chiau High School "
             + PREFIX_ACAD_STREAM + "Express "
             + PREFIX_ACAD_LEVEL + "S1 "
-            + PREFIX_FEE + "50 "
             + PREFIX_REMARK + "He owes me a dinner! "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "neighbour";

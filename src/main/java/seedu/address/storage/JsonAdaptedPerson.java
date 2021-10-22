@@ -16,7 +16,6 @@ import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -41,7 +40,6 @@ class JsonAdaptedPerson {
     private final String school;
     private final String acadStream;
     private final String acadLevel;
-    private final String outstandingFee;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedLesson> lessons = new ArrayList<>();
@@ -55,7 +53,6 @@ class JsonAdaptedPerson {
                              @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
                              @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
                              @JsonProperty("acadLevel") String acadLevel,
-                             @JsonProperty("outstanding fee") String outstandingFee,
                              @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                              @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
@@ -68,7 +65,6 @@ class JsonAdaptedPerson {
         this.school = school;
         this.acadStream = acadStream;
         this.acadLevel = acadLevel;
-        this.outstandingFee = outstandingFee;
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -91,7 +87,6 @@ class JsonAdaptedPerson {
         school = source.getSchool().value;
         acadStream = source.getAcadStream().value;
         acadLevel = source.getAcadLevel().value;
-        outstandingFee = source.getFee().value;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -189,10 +184,7 @@ class JsonAdaptedPerson {
         }
         final AcadLevel modelAcadLevel = new AcadLevel(acadLevel);
 
-        if (outstandingFee == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Fee.class.getSimpleName()));
-        }
-        final Fee modelFee = new Fee(outstandingFee);
+
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -204,7 +196,7 @@ class JsonAdaptedPerson {
         final Set<Lesson> modelLessons = new TreeSet<>(personLessons);
 
         return new Person(modelName, modelPhone, modelEmail, modelParentPhone, modelParentEmail,
-                modelAddress, modelSchool, modelAcadStream, modelAcadLevel, modelFee, modelRemark, modelTags,
+                modelAddress, modelSchool, modelAcadStream, modelAcadLevel, modelRemark, modelTags,
                 modelLessons);
     }
 }

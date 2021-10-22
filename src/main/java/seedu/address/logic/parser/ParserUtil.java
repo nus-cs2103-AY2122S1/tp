@@ -23,7 +23,6 @@ import seedu.address.model.person.AcadLevel;
 import seedu.address.model.person.AcadStream;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
@@ -158,21 +157,6 @@ public class ParserUtil {
         requireNonNull(acadStream);
         String strippedAcadStream = acadStream.strip();
         return new AcadStream(strippedAcadStream);
-    }
-
-    /**
-     * Parses a {@code String fee} into an {@code Fee}.
-     * Leading and trailing whitespaces will be stripped.
-     *
-     * @throws ParseException if the given {@code fee} is invalid.
-     */
-    public static Fee parseFee(String fee) throws ParseException {
-        requireNonNull(fee);
-        String strippedFee = fee.strip();
-        if (!Fee.isValidFee(strippedFee)) {
-            throw new ParseException(Fee.MESSAGE_CONSTRAINTS);
-        }
-        return new Fee(strippedFee);
     }
 
     /**

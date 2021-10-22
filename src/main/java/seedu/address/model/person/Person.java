@@ -30,7 +30,6 @@ public class Person {
     private final AcadStream acadStream;
     private final AcadLevel acadLevel;
     private final Remark remark;
-    private final Fee outstandingFee;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Lesson> lessons = new TreeSet<>();
 
@@ -45,16 +44,15 @@ public class Person {
      * @param address The address of this person.
      * @param school The school of this person.
      * @param acadStream The academic stream of this person.
-     * @param outstandingFee The outstanding fees of this person.
      * @param remark Any remarks on this person.
      * @param tags Tags that categorise this person.
      * @param lessons The Set of Lessons objects that this person will become owner of.
      */
     public Person(Name name, Phone phone, Email email, Phone parentPhone, Email parentEmail,
                   Address address, School school, AcadStream acadStream, AcadLevel acadLevel,
-                  Fee outstandingFee, Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
+                  Remark remark, Set<Tag> tags, Set<Lesson> lessons) {
         requireAllNonNull(name, phone, email, parentPhone, parentEmail, address,
-                school, acadStream, outstandingFee, remark, tags, lessons);
+                school, acadStream, remark, tags, lessons);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -64,7 +62,6 @@ public class Person {
         this.school = school;
         this.acadStream = acadStream;
         this.acadLevel = acadLevel;
-        this.outstandingFee = outstandingFee;
         this.remark = remark;
         this.tags.addAll(tags);
         this.lessons.addAll(lessons);
@@ -103,10 +100,6 @@ public class Person {
 
     public AcadLevel getAcadLevel() {
         return acadLevel;
-    }
-
-    public Fee getFee() {
-        return outstandingFee;
     }
 
     public Remark getRemark() {
@@ -173,7 +166,6 @@ public class Person {
                 && otherPerson.getSchool().equals(getSchool())
                 && otherPerson.getAcadStream().equals(getAcadStream())
                 && otherPerson.getAcadLevel().equals(getAcadLevel())
-                && otherPerson.getFee().equals(getFee())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getLessons().equals(getLessons());
@@ -183,7 +175,7 @@ public class Person {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(name, phone, email, parentPhone, parentEmail, address,
-                school, acadStream, acadLevel, outstandingFee, remark, tags);
+                school, acadStream, acadLevel, remark, tags);
     }
 
     @Override
@@ -217,10 +209,6 @@ public class Person {
 
         if (!getAcadLevel().isEmpty()) {
             builder.append("\nAcademic Level: ").append(getAcadLevel());
-        }
-
-        if (!getFee().isEmpty()) {
-            builder.append("\nOutstanding Fees: ").append(getFee());
         }
 
         if (!getRemark().isEmpty()) {
