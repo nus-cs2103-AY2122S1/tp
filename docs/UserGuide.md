@@ -75,7 +75,7 @@ Displays help message to the user.
 
 Format: `help`
 
-Expected Output: ![Ui](images/Ui.png)
+Expected Output: ![Ui](images/UiHelpCommand.png)
 
 ### Exit: `exit`
 
@@ -205,6 +205,8 @@ Examples:
 * `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email and
   address.
 * `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
+
+Expected Output: ![Ui](images/UiViewCommand.png)
 
 ### Command History:
 
