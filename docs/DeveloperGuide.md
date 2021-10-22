@@ -203,10 +203,10 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Client/Product Feature
 
-The add feature allows the users to add a new `Client` or `Product` with details into the application. The commands are
+The add feature adds a new `Client` or `Product` with details into the application. The commands are
 composed of a keyword `add` followed by `-c` for adding clients and `-p` for adding products.
 
-The user inputs the command through `MainWindow` of the UI component, which will pass the input string to
+Input the command through `MainWindow` of the UI component, which will pass the input string to
 `LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the
 command word, the arguments will be used in `AddClientCommandParser` or `AddProductCommandParser` class for parsing.
 The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the
@@ -224,19 +224,19 @@ The flow of the sequence diagram would be the same for adding `Products`, but th
 **Aspect : How `add` may be executed**
 
 * **Alternative 1 (current choice)** : User can add either a client or a product at a time
-    * Pros : Allows the user to focus on adding a client or product
+    * Pros : Focus on adding a client or product
     * Cons : Might be slow if there are a lot of clients/products to add
 * **Alternative 2** : User can add multiple clients or products
-    * Pros : Allows the user to add multiple clients or products in one command
+    * Pros : Adds multiple clients or products in one command
     * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
       be done through the`edit` command (requires the user to memorise the IDs)
 
 ### Edit Client/Product Feature
 
-This feature allows the users to edit the details of a `Client` or `Product` of their choice. When editing a `Client` or
-`Product`, the user is required to enter at least 1 field to edit in the input command.
+This feature allows edits the details of a `Client` or `Product` of their choice. When editing a `Client` or
+`Product`, at least 1 field is required to be edited.
 
-The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+The input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
 `EditClientCommandParser`, parsing the inputs and returning a `EditClientCommand`. The command will then be executed in
 `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of address
@@ -252,16 +252,16 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
 **Aspect : How `edit` may be executed**
 
 * **Alternative 1 (current choice)** : User can edit either a client or a product at a time
-    * Pros : Allows the user to focus on editing a particular client or product
+    * Pros : Focus on editing a particular client or product
     * Cons : Unable to edit multiple clients or products at the same time
 * **Alternative 2** : User can edit multiple clients or products
-    * Pros : Saves time if the user wish to edit a field in all clients or products to the same value
+    * Pros : Saves time if editing a field in all clients or products to the same value
     * Cons : More complex code which would lead to higher amount of error
 
 ### View Client/Product Feature
 
-This feature allows the users to view the details of the `Client` or `Product` of their choice. When viewing a `Client`,
-more details such as `Products` bought before, will be visible to the user. The user input is first handled and
+This feature views the details of the `Client` or `Product` of their choice. When viewing a `Client`,
+more details such as `Products` bought before, will be visible to the user. Input is first handled and
 retrieved by `MainWindow` in the UI component before being passed to the `LogicManager` to execute.
 
 First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
@@ -276,7 +276,7 @@ the inputs and returning a `ViewClientCommand`. The command will then be execute
 **Aspect : How `view` may be executed**
 
 * **Alternative 1 (current choice)** : User can view either a client or product
-    * Pros : Allows the user to focus on a particular client or product
+    * Pros : Focus on a particular client or product
     * Cons : Unable to view multiple clients or products
 * **Alternative 2** : User can view multiple clients or products
     * Pros : Easier comparisons between clients or products
@@ -284,10 +284,10 @@ the inputs and returning a `ViewClientCommand`. The command will then be execute
 
 ### Delete Client/Product Feature
 
-This feature allows the users to delete a `Client` or `Product` of their choice. When deleting a `Client` or
-`Product`, the user is required to list all clients/products using the `list -p` or `list -c` command
+This feature deletes a `Client` or `Product`. When deleting a `Client` or
+`Product`, listing all clients/products using the `list -p` or `list -c` command is required.
 
-The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+Input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
 `DeleteClientCommandParser`, parsing the inputs and returning a `DeleteClientCommand` or . The command will then be
 executed in `LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of
@@ -303,17 +303,17 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
 **Aspect : How `delete` may be executed**
 
 * **Alternative 1 (current choice)** : User can delete either a client or a product at a time
-    * Pros : Allows the user to focus on deleting a particular client or product
+    * Pros : Focus on deleting a particular client or product
     * Cons : Unable to delete multiple clients or products at the same time
 * **Alternative 2** : User can delete multiple clients or products
-    * Pros : Saves time if the user wish to delete multiple clients or products at the same time
+    * Pros : Deletion of multiple clients or products at the same time
     * Cons : More complex code which would lead to higher amount of error
 
 ### Find Client/Product Feature
 
-This feature allows the users to find a `Client` or `Product` based on their `name`.
+This feature finds a `Client` or `Product` based on their `name`.
 
-The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+Input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
 `LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
 `FindClientCommandParser`, parsing the inputs and returning a `FindClientCommand`. The command will then be executed in
 `LogicManager`, returning a `CommandResult`.The `CommandResult` will finally be returned to `MainWindow`, which will
@@ -328,22 +328,21 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
 **Aspect : How `find` may be executed**
 
 * **Alternative 1 (current choice)** : User can find a client/product by their name
-    * Pros : Allows the user to focus on finding a particular client or product
+    * Pros : Focus on finding a particular client or product
     * Cons : Unable to find clients or products without name
-* **Alternative 2** : User can find clients by their details such as name, address, email, etc.. and products by their
-  name, price, etc..
-    * Pros : Saves time if the user is unable to remember the exact name of a client/product.
+* **Alternative 2** : Find clients by their details such as name, address, email, etc. and products by their
+  name, price, etc.
+    * Pros : Able to quickly find clients or products if the respective name cannot be remembered at the moment
     * Cons : More complex code which would lead to higher amount of error
 
 ### Command History Feature
 
-This feature allows the user to navigate to previous commands using `↑` and `↓` keys.
+This feature allows navigation to previous commands using `↑` and `↓` keys.
 
-The command histories are stored in an `ArrayList<String>`, as well as with the help of a `Index`. Each time the user
-inputs a command, it is stored into the `ArrayList`. `Index` begins at the end of the `ArrayList`. As user inputs `↑`,
-previous command will be shown till no more available. `↓` is used to go back to the next command. As user reaches the
-last and latest command stored in `ArrayList`, the next `↓` will clear the command input field. At any time, user can
-choose to just stop and proceed on to edit or input the current history command.
+The command histories are stored in an `ArrayList<String>`, as well as with the help of a `Index`. For every input, it is stored into the `ArrayList`. `Index` begins at the end of the `ArrayList`. When `↑` is pressed,
+previous command will be shown till no more available. `↓` is used to go back to the next command. When the
+last and latest command stored in `ArrayList` is reached, the next `↓` will clear the command input field. At any time, user can
+choose to just stop and proceed on to edit or input the current history command. 
 
 ### \[Proposed\] Undo/Redo Feature
 
