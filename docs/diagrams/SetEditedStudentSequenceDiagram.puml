@@ -2,6 +2,7 @@
 !include style.puml
 
 box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":PaidCommand" as PaidCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -11,6 +12,7 @@ participant "model:Model" as Model MODEL_COLOR
 end box
 
 activate PaidCommand
+activate LogicManager
 
 PaidCommand -> Model : setStudent(studentToEdit, editedStudent)
 activate Model
@@ -27,5 +29,8 @@ PaidCommand -> CommandResult
 activate CommandResult
 CommandResult --> PaidCommand
 deactivate CommandResult
+
+PaidCommand --> LogicManager
+deactivate PaidCommand
 
 @enduml
