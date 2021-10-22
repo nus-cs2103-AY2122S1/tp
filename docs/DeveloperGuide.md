@@ -202,14 +202,14 @@ as a field in `Student`.
 
 ![ProgressListClass](images/StudentWithProgressListClassDiagram.png)
 
-Given below is an example of what happens when the user attempts to add a progress to a student in TutorAid by entering
-a command:
+Given below is an example of what happens when the user attempts to add a progress entry to a student in TutorAid
+by entering a command:
 
 `add -p 2 Did Homework​`
 
 1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
-2. `TutorAidParser#parseCommand` then extracts the first keyword of every command. Since the keyword `add` would be
+2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be
    extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into
    `AddCommandParser#parse`.
 
@@ -291,7 +291,6 @@ A similar execution scenario can be expected for view lesson mechanism.
 * **Alternative 2:** Filter list beforehand and update view panel on command.
     * Pros: Will use less memory (e.g. for `view -s`, just load the pre-generated student panel).
     * Cons: We must ensure that all possible view panels combinations are covered and this might cause slower application initialization.
-
     
 ### Card-like UI Elements
 
