@@ -91,7 +91,11 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AcademyDirectory");
             initialData = new AcademyDirectory();
         }
-
+        try {
+            storage.saveAcademyDirectory(initialData);
+        } catch (IOException e) {
+            logger.warning("Unable to save to disk. Will not be able to revert properly..");
+        }
         return new ModelManager(initialData, userPrefs);
     }
 
