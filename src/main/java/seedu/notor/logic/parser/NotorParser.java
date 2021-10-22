@@ -7,13 +7,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.notor.logic.commands.ClearCommand;
+import seedu.notor.logic.commands.ClearNoteCommand;
 import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.ExitCommand;
 import seedu.notor.logic.commands.HelpCommand;
+import seedu.notor.logic.commands.NoteCommand;
+import seedu.notor.logic.commands.group.GroupClearNoteCommand;
 import seedu.notor.logic.commands.group.GroupCommand;
+import seedu.notor.logic.commands.group.GroupDeleteCommand;
+import seedu.notor.logic.commands.group.GroupNoteCommand;
 import seedu.notor.logic.commands.group.SubGroupCreateCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
+import seedu.notor.logic.commands.person.PersonClearNoteCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
@@ -21,9 +27,13 @@ import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
+import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
+import seedu.notor.logic.parser.group.GroupNoteCommandParser;
 import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
+import seedu.notor.logic.parser.person.PersonClearNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
@@ -77,6 +87,12 @@ public class NotorParser {
             if (ClearCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ClearCommand();
             }
+            if (NoteCommand.COMMAND_WORDS.contains(commandWord)) {
+                return new NoteCommand();
+            }
+            if (ClearNoteCommand.COMMAND_WORDS.contains(commandWord)) {
+                return new ClearNoteCommand();
+            }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
@@ -113,6 +129,9 @@ public class NotorParser {
                 if (PersonNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonNoteCommandParser(index).parse();
                 }
+                if (PersonClearNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonClearNoteCommandParser(index).parse();
+                }
                 if (PersonAddGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
                 }
@@ -121,8 +140,17 @@ public class NotorParser {
                 }
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (subCommandWord.equals(SubGroupCreateCommand.COMMAND_WORD)) {
+                if (SubGroupCreateCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new SubGroupCreateCommandParser(index, arguments).parse();
+                }
+                if (GroupDeleteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new GroupDeleteCommandParser(index).parse();
+                }
+                if (GroupNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new GroupNoteCommandParser(index).parse();
+                }
+                if (GroupClearNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new GroupClearNoteCommandParser(index).parse();
                 }
             }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

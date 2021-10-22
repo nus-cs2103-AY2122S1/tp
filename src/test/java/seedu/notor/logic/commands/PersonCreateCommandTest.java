@@ -206,32 +206,12 @@ public class PersonCreateCommandTest {
         }
 
         @Override
-        public ObservableList<SubGroup> getFilteredSubGroupList() {
-            return null;
-        }
-
-        @Override
-        public void updateFilteredSubGroupList(Predicate<SubGroup> predicate) {
-
-        }
-
-        @Override
         public void deleteSubGroup(SubGroup subGroup) {
 
         }
 
         @Override
         public boolean isPersonView() {
-            return false;
-        }
-
-        @Override
-        public boolean isGroupView() {
-            return false;
-        }
-
-        @Override
-        public boolean isSubGroupView() {
             return false;
         }
     }

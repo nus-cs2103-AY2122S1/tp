@@ -2,6 +2,9 @@ package seedu.notor.logic.commands.group;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -13,6 +16,7 @@ import seedu.notor.logic.executors.group.GroupDeleteExecutor;
 public class GroupDeleteCommand extends GroupCommand {
 
     public static final String COMMAND_WORD = "delete";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("delete", "d");
 
     private static final String COMMAND_DESCRIPTION =
             ": Deletes the group identified by the index number used in the displayed group list.\n";

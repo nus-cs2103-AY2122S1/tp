@@ -2,9 +2,11 @@ package seedu.notor.logic.commands.group;
 
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
-import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.group.GroupExecutor;
 import seedu.notor.logic.executors.group.GroupNoteExecutor;
@@ -14,15 +16,16 @@ import seedu.notor.logic.executors.group.GroupNoteExecutor;
  */
 public class GroupNoteCommand extends GroupCommand {
     public static final String COMMAND_WORD = "note";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("note", "n");
 
     private static final String COMMAND_DESCRIPTION =
             ": Edits the notes of the group identified by the index number used in the current group listing.\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters: none"
             + "Example: "
-            + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+            + GroupCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
 
     private final GroupExecutor executor;
 

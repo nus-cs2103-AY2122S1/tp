@@ -8,8 +8,6 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
-import seedu.notor.model.group.SubGroup;
-import seedu.notor.model.group.SuperGroup;
 import seedu.notor.ui.WarningWindow;
 
 /**
@@ -34,23 +32,18 @@ public class GroupClearNoteExecutor extends GroupExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        // TODO: To update after list is done.
-        if (true) {
-            SuperGroup superGroup = super.getGroup();
-            WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE,
-                    superGroup.getName()));
-            warningWindow.show();
-            if (warningWindow.canContinue()) {
-                superGroup.setNote(Note.EMPTY_NOTE);
-                return new CommandResult(String.format(MESSAGE_CLEAR_GROUP_NOTE_SUCCESS, superGroup));
+        Group group = super.getGroup();
+        WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE, group));
+        warningWindow.show();
+        // TODO: To update the if true after list is done. it is suppose to check person view.
+        if (warningWindow.canContinue()) {
+            if (true) {
+                group.setNote(Note.EMPTY_NOTE);
+                return new CommandResult(String.format(MESSAGE_CLEAR_GROUP_NOTE_SUCCESS, group));
             }
-            return new CommandResult(String.format(MESSAGE_CLEAR_GROUP_NOTE_CANCEL, superGroup));
-        } else if (model.isSubGroupView()) {
-            SubGroup subGroup = super.getSubGroup();
-            return new CommandResult(generateSuccessMessage(subGroup), false, true, false, subGroup);
-        } else {
-            throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
+            throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
         }
+        return new CommandResult(MESSAGE_CLEAR_GROUP_NOTE_CANCEL);
     }
 
     /**

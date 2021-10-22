@@ -2,6 +2,9 @@ package seedu.notor.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -14,7 +17,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
 public class PersonClearNoteCommand extends PersonCommand {
 
     public static final String COMMAND_WORD = "clearnote";
-
+    public static final List<String> COMMAND_WORDS = Arrays.asList("clearnote", "cn");
 
     private static final String COMMAND_DESCRIPTION = ": Clears the note of a person in notor.\n";
 
