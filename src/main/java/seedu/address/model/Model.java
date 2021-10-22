@@ -107,7 +107,7 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
     void deleteTask(Task toDelete);
@@ -134,7 +134,7 @@ public interface Model {
      */
     void setOrder(Order target, Order editedOrder);
 
-    /** Returns and unmodifiable view of the filtered order list */
+    /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
     void deleteOrder(Order toDelete);
