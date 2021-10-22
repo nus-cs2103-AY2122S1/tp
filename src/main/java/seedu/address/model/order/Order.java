@@ -2,7 +2,7 @@ package seedu.address.model.order;
 
 import seedu.address.model.Date;
 
-public class Order {
+public class Order implements Comparable<Order> {
     private static final String idPrefix = "SO";
     private static int count = 1;
 
@@ -108,5 +108,11 @@ public class Order {
                 && otherOrder.getDate().equals(getDate())
                 && otherOrder.getAmount().equals(getAmount());
 
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        //Orders are compared using their id.
+        return Long.compare(this.id, o.id);
     }
 }
