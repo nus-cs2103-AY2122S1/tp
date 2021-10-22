@@ -2,8 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,6 +15,8 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
@@ -199,6 +204,30 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String shortcut} into Shortcut.
+     */
+    public static Shortcut parseShortcut(String shortcut) throws ParseException {
+        requireNonNull(shortcut);
+        String trimmedShortcut = shortcut.trim();
+        if (!Shortcut.isValidShortcut(trimmedShortcut)) {
+            throw new ParseException(Shortcut.MESSAGE_CONSTRAINTS);
+        }
+        return new Shortcut(trimmedShortcut);
+    }
+
+    /**
+     * Parses a {@code String commandWord} into commandWord.
+     */
+    public static CommandWord parseCommandWord(String commandWord) throws ParseException {
+        requireNonNull(commandWord);
+        String trimmedCommandWord = commandWord.trim();
+        if (!CommandWord.isValidCommandWord(trimmedCommandWord)) {
+            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+        }
+        return new CommandWord(trimmedCommandWord);
+    }
+
+    /**
      * Parses an {@code String availability string} into an {@code Availability}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -206,7 +235,7 @@ public class ParserUtil {
      */
     public static Availability parseAvailability(String availabilityString) throws ParseException {
         requireNonNull(availabilityString);
-        String trimmedAvailabilityString = availabilityString.trim().toUpperCase();
+        String trimmedAvailabilityString = availabilityString.trim();
         List<String> availabilityDaysWithNoDuplicates =
                 Arrays.stream(trimmedAvailabilityString.split(" "))
                 .distinct().collect(Collectors.toList());
@@ -215,8 +244,15 @@ public class ParserUtil {
             throw new ParseException(Availability.MESSAGE_CONSTRAINTS);
         }
 
-        String availability = Arrays.stream(trimmedAvailabilityString.split(" "))
-                .distinct().collect(Collectors.joining(" "));
+        List<DayOfWeek> availability;
+        if (availabilityDaysWithNoDuplicates.get(0).isEmpty()) { // valid but empty
+            availability = new ArrayList<>();
+        } else {
+            availability = Arrays.stream(trimmedAvailabilityString.split(" "))
+                    .distinct().map(dayNumber -> DayOfWeek.of(Integer.parseInt(dayNumber)))
+                    .collect(Collectors.toList());
+        }
+        Collections.sort(availability);
         return new Availability(availability);
     }
 }

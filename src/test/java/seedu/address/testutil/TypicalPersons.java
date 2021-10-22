@@ -7,6 +7,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_Y2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,10 +46,10 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withPhone(VALID_PHONE_AMY).withAvailability(VALID_AVAILABILITY_AMY)
-            .withTodayAttendance(false).withTotalAttendance(0).build();
+            .withTodayAttendance(false).withTotalAttendance(0).withTags(VALID_TAG_Y2).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withAvailability(VALID_AVAILABILITY_BOB)
-            .withTodayAttendance(false).withTotalAttendance(0).build();
+            .withTodayAttendance(false).withTotalAttendance(0).withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

@@ -23,11 +23,11 @@ public class SetMemberAvailabilityCommand extends Command {
             + "by the indices used in the last member listing. "
             + "Existing availability will be overwritten by the input.\n"
             + "Parameters: INDEX1 INDEX2 INDEX3 (must be positive integers) "
-            + "d/[AVAILABLE DAYS (case insensitive)]\n"
+            + "d/AVAILABLE DAYS (where 1 represents Monday, 2 represents Tuesday ... and 7 represents Sunday\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "d/mon Thu fri";
+            + "d/1 2 3 7";
 
-    public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Set availability of members";
+    public static final String MESSAGE_SET_AVAILABILITY_SUCCESS = "Successfully set availability of %s to %s";
 
     private final List<Index> indices;
     private final Availability availability;
@@ -53,13 +53,19 @@ public class SetMemberAvailabilityCommand extends Command {
 
             Person personToEdit = lastShownList.get(i.getZeroBased());
             Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), availability);
+                    personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTags());
 
             model.setPerson(personToEdit, editedPerson);
         }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(MESSAGE_SET_AVAILABILITY_SUCCESS);
+        StringBuilder names = new StringBuilder();
+        for (Person p : lastShownList) {
+            names.append(p.getName());
+            names.append(", ");
+        }
+
+        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability));
     }
 
     @Override

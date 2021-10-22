@@ -2,18 +2,16 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_DAY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
-import java.util.Arrays;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -27,47 +25,30 @@ public class SplitCommandTest {
     private Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
-    public void constructor_null_exceptionThrown() {
-        assertThrows(NullPointerException.class, () -> new SplitCommand(null));
-    }
-
-    @Test
     public void execute_validDay_success() {
-        SplitCommand command = new SplitCommand("Thu");
-        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS, "Thu");
+        SplitCommand command = new SplitCommand(4);
+        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS,
+                DayOfWeek.of(4).getDisplayName(TextStyle.FULL, Locale.getDefault()));
         Person person = new PersonBuilder().build();
-        person.setDays(Arrays.asList("Mon", "Tue", "Thu"));
         model.setPerson(ALICE, person);
         expectedModel.setPerson(ALICE, person);
-        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate("Thu");
+        PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(1);
         expectedModel.split(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidDay_exceptionThrown() {
-        List<String> invalidDays = Arrays.asList("Monday", "MON", "mon");
-        for (String invalidDay : invalidDays) {
-            SplitCommand command = new SplitCommand(invalidDay);
-            assertThrows(CommandException.class,
-                    String.format(MESSAGE_INVALID_DAY, SplitCommand.MESSAGE_USAGE), () -> command.execute(model));
-        }
-    }
-
-    @Test
     public void equals() {
-        SplitCommand firstCommand = new SplitCommand("Mon");
-        SplitCommand secondCommand = new SplitCommand("Tue");
+        SplitCommand firstCommand = new SplitCommand(1);
+        SplitCommand secondCommand = new SplitCommand(2);
 
         assertTrue(firstCommand.equals(firstCommand));
 
-        SplitCommand firstCommandCopy = new SplitCommand("Mon");
+        SplitCommand firstCommandCopy = new SplitCommand(1);
         assertTrue(firstCommand.equals(firstCommandCopy));
 
         assertFalse(firstCommand.equals(secondCommand));
         assertFalse(firstCommand.equals(null));
         assertFalse(firstCommand.equals(1));
     }
-
-
 }

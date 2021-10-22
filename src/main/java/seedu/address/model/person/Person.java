@@ -1,9 +1,15 @@
 package seedu.address.model.person;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -21,17 +27,40 @@ public class Person {
     private final Availability availability;
     private final TodayAttendance todayAttendance;
     private final TotalAttendance totalAttendance;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Availability availability) {
-        requireAllNonNull(name, phone, availability);
+    public Person(Name name, Phone phone, Availability availability, Set<Tag> tags) {
+        requireAllNonNull(name, phone, availability, tags);
         this.name = name;
         this.phone = phone;
         this.availability = availability;
         this.todayAttendance = new TodayAttendance(false);
         this.totalAttendance = new TotalAttendance(0);
+    }
+
+
+    /**
+     * Constructor with all fields of a member.
+     * @param name Name of member.
+     * @param phone Phone number of member.
+     * @param availability Availability of member.
+     * @param todayAttendance Today's attendance of member.
+     * @param totalAttendance Total attendance of member.
+     * @param tags Tags associated with member.
+     */
+    public Person(Name name, Phone phone, Availability availability,
+                  TodayAttendance todayAttendance, TotalAttendance totalAttendance,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance, tags);
+        this.name = name;
+        this.phone = phone;
+        this.availability = availability;
+        this.totalAttendance = totalAttendance;
+        this.todayAttendance = todayAttendance;
+        this.tags.addAll(tags);
     }
 
     /**
@@ -74,6 +103,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -90,16 +127,13 @@ public class Person {
      * Returns true if person is available on specified day. Otherwise,
      * false is returned.
      *
-     * @param day Day to be checked if person is available.
+     * @param dayNumber Day to be checked if person is available.
      * @return Boolean value if person is available on day.
      */
-    public boolean isAvailableOnDay(String day) {
-        return availability.contains(day);
+    public boolean isAvailableOnDay(int dayNumber) {
+        return availability.contains(DayOfWeek.of(dayNumber));
     }
 
-    public void setDays(List<String> days) {
-        this.days = days;
-    }
 
     /**
      * Sets the member as present today.
@@ -159,13 +193,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getAvailability().equals(getAvailability())
                 && otherPerson.getTodayAttendance().equals(getTodayAttendance())
-                && otherPerson.getTotalAttendance().equals(getTotalAttendance());
+                && otherPerson.getTotalAttendance().equals(getTotalAttendance())
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, availability);
+        return Objects.hash(name, phone, availability, tags);
     }
 
     @Override
@@ -174,12 +209,21 @@ public class Person {
         builder.append(getName())
                 .append("; Phone: ")
                 .append(getPhone())
-                .append(": Availability: ")
-                .append(getAvailability())
                 .append("Today: ")
                 .append(getTodayAttendance())
                 .append("Total: ")
                 .append(getTotalAttendance());
+
+        Availability availability = getAvailability();
+        if (!availability.isEmpty()) {
+            builder.append("; Availability: ");
+            builder.append(availability);
+        }
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
         return builder.toString();
     }
 }

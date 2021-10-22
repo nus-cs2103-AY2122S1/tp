@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ListMembersCommand" as ListMembersCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":AliasMap" as AliasMap MODEL_COLOR
+end box
+
+[-> LogicManager : execute(l)
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand(l)
+activate AddressBookParser
+
+AddressBookParser -> AliasMap : convertAliasIfPresent()
+activate AliasMap
+AliasMap --> AddressBookParser
+deactivate AliasMap
+
+create ListMembersCommand
+AddressBookParser -> ListMembersCommand
+activate ListMembersCommand
+
+ListMembersCommand --> AddressBookParser
+deactivate ListMembersCommand
+
+AddressBookParser --> LogicManager
+deactivate AddressBookParser
+
+LogicManager -> ListMembersCommand : execute()
+activate ListMembersCommand
+
+ListMembersCommand --> LogicManager : result
+deactivate ListMembersCommand
+ListMembersCommand -[hidden]-> LogicManager : result
+destroy ListMembersCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
