@@ -3,79 +3,46 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Stream;
-
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.AddToOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.Name;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.item.ItemDescriptor;
 
+/**
+ * Parses input arguments and creates a new AddToOrderCommand object
+ */
 public class AddToOrderCommandParser implements Parser<AddToOrderCommand> {
-    private static final Double DUMMY_PRICE = 1.0;
+
     /**
      * Parses {@code userInput} into a {@code AddToOrderCommand} and returns it.
      */
     @Override
     public AddToOrderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_COUNT);
+                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG);
 
-        if (!(isNameOrIdPresent(argMultimap) && isCountPresent(argMultimap))
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (argMultimap.getValue(PREFIX_ID).isEmpty() && argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddToOrderCommand.MESSAGE_USAGE));
         }
 
-        Name name;
-        Integer id;
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            // Use name as long as name is given.
-            name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            id = Integer.parseInt(UUID.randomUUID().toString());
+        ItemDescriptor toAddDescriptor = new ItemDescriptor();
+
+        // Parse name
+        if (!argMultimap.getPreamble().isEmpty()) {
+            toAddDescriptor.setName(ParserUtil.parseName(argMultimap.getPreamble()));
+        }
+        // Parse Id
+        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
+            toAddDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
+        }
+        // Parse count
+        if (argMultimap.getValue(PREFIX_COUNT).isPresent()) {
+            toAddDescriptor.setCount(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
         } else {
-            // Use ID if only ID is given.
-            name = new Name(StringUtil.generateRandomString());
-            id = Integer.parseInt(argMultimap.getValue(PREFIX_ID).get());
+            toAddDescriptor.setCount(1);
         }
 
-        Integer count = ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        // TODO STILL IMPLEMENTED USING DUMMY_PRICE
-        Double costPrice = DUMMY_PRICE;
-        Double salesPrice = DUMMY_PRICE;
-
-        Item item = new Item(name, id, count, tagList, costPrice, salesPrice);
-
-        return new AddToOrderCommand(item);
-    }
-
-    /**
-     * Returns true if {@code PREFIX_NAME} or {@code PREFIX_COUNT} is present.
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isNameOrIdPresent(ArgumentMultimap argumentMultimap) {
-        return arePrefixesPresent(argumentMultimap, PREFIX_NAME) || arePrefixesPresent(argumentMultimap, PREFIX_ID);
-    }
-
-    /**
-     * Returns true if {@code PREFIX_COUNT} is present.
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean isCountPresent(ArgumentMultimap argumentMultimap) {
-        return arePrefixesPresent(argumentMultimap, PREFIX_COUNT);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return new AddToOrderCommand(toAddDescriptor);
     }
 }

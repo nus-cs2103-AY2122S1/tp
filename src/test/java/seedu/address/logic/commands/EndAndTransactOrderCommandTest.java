@@ -127,9 +127,9 @@ public class EndAndTransactOrderCommandTest {
         }
 
         @Override
-        public void removeFromOrder(Item item) {
+        public void removeFromOrder(Item item, int amount) {
             assert hasUnclosedOrder();
-            optionalOrder.get().removeItem(item);
+            optionalOrder.get().removeItem(item, amount);
         }
 
         @Override

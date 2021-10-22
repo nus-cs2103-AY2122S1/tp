@@ -1,20 +1,37 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
-
-import java.util.HashSet;
-import java.util.Optional;
+import static seedu.address.testutil.TypicalItems.BAGEL;
+import static seedu.address.testutil.TypicalItems.DONUT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ModelStub;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.Name;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
+import seedu.address.testutil.ItemDescriptorBuilder;
 
 public class AddToOrderCommandTest {
+
+    private Model modelWithoutOrder = new ModelManager();
+    private Model modelWithOrder = getModelWithOrder();
+
+    /**
+     * Returns a model with donuts and an empty unclosed order
+     */
+    private Model getModelWithOrder() {
+        Model model = new ModelManager();
+        model.addItem(DONUT);
+        model.setOrder(new Order());
+
+        return model;
+    }
 
     @Test
     public void constructor_nullItem_throwsNullPointerException() {
@@ -22,55 +39,111 @@ public class AddToOrderCommandTest {
     }
 
     @Test
-    public void execute_modelHasNoUnclosedOrder_giveNoUnclosedOrderMessage() throws CommandException {
-        ModelStubWithOrder modelStub = new ModelStubWithOrder();
-        Item tobeAdded = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
-        AddToOrderCommand command = new AddToOrderCommand(tobeAdded);
-        CommandResult expectedResult = new CommandResult("Please use `sorder` to enter ordering mode first.");
+    public void execute_modelHasNoUnclosedOrder_giveNoUnclosedOrderMessage() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptor(DONUT);
 
-        assertEquals(command.execute(modelStub), expectedResult);
+        AddToOrderCommand command = new AddToOrderCommand(toAddDescriptor);
+
+        assertCommandFailure(command, modelWithoutOrder, AddToOrderCommand.MESSAGE_NO_UNCLOSED_ORDER);
     }
 
     @Test
-    public void execute_modelHasOrder_itemAddedToOrder() throws CommandException {
-        ModelStubWithOrder modelStub = new ModelStubWithOrder();
-        Item tobeAdded = new Item(new Name("milk"), 120122, 10, new HashSet<>(), 1.1, 2.2);
-        Order expectedOrder = new Order();
-        modelStub.setOrder(new Order());
+    public void execute_itemNameInInventory_itemAddedToOrder() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withCount(DONUT.getCount())
+                .build();
 
-        AddToOrderCommand command = new AddToOrderCommand(tobeAdded);
-        CommandResult result = command.execute(modelStub);
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+        CommandResult expectedResult = new CommandResult(
+                String.format(AddToOrderCommand.MESSAGE_SUCCESS, DONUT.getCount(), VALID_NAME_DONUT));
 
-        expectedOrder.addItem(tobeAdded);
+        // Item not in order
+        Model expectedModel = getModelWithOrder();
+        expectedModel.addToOrder(DONUT);
 
-        assertEquals(expectedOrder, modelStub.optionalOrder.get());
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+
+        // Item already in order
+        expectedModel.addToOrder(DONUT);
+
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
     }
 
+    @Test
+    public void execute_itemIdInInventory_itemAddedToOrder() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptorBuilder()
+                .withId(VALID_ID_DONUT)
+                .withCount(DONUT.getCount())
+                .build();
 
-    /**
-     * A model stub that has only order related functionality.
-     */
-    private class ModelStubWithOrder extends ModelStub {
-        private Optional<Order> optionalOrder;
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+        CommandResult expectedResult = new CommandResult(
+                String.format(AddToOrderCommand.MESSAGE_SUCCESS, DONUT.getCount(), VALID_NAME_DONUT));
 
-        ModelStubWithOrder() {
-            optionalOrder = Optional.empty();
-        }
+        // Item not in order
+        Model expectedModel = getModelWithOrder();
+        expectedModel.addToOrder(DONUT);
 
-        @Override
-        public void setOrder(Order order) {
-            this.optionalOrder = Optional.of(order);
-        }
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
 
-        @Override
-        public boolean hasUnclosedOrder() {
-            return optionalOrder.isPresent();
-        }
+        // Item already in order
+        expectedModel.addToOrder(DONUT);
 
-        @Override
-        public void addToOrder(Item item) {
-            assert hasUnclosedOrder();
-            optionalOrder.get().addItem(item);;
-        }
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
     }
+
+    @Test
+    public void execute_itemNameAndIdInInventory_itemAddedToOrder() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withId(VALID_ID_DONUT)
+                .withCount(DONUT.getCount())
+                .build();
+
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+        CommandResult expectedResult = new CommandResult(
+                String.format(AddToOrderCommand.MESSAGE_SUCCESS, DONUT.getCount(), VALID_NAME_DONUT));
+
+        // Test when item not in order
+        Model expectedModel = getModelWithOrder();
+        expectedModel.addToOrder(DONUT);
+
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+
+        // Test when item already in order
+        expectedModel.addToOrder(DONUT);
+
+        assertCommandSuccess(addCommand, modelWithOrder, expectedResult, expectedModel);
+    }
+
+    @Test
+    public void execute_itemNotInInventory_itemAddedToOrder() {
+        ItemDescriptor toAddDescriptor = new ItemDescriptor(BAGEL);
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+
+        String expectedMessage = AddToOrderCommand.MESSAGE_ITEM_NOT_FOUND;
+
+        assertCommandFailure(addCommand, modelWithOrder, expectedMessage);
+    }
+
+    @Test
+    public void execute_multipleMatchesInInventory_throwCommandException() {
+        modelWithOrder.addItem(BAGEL);
+        ItemDescriptor toAddDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withId(VALID_ID_BAGEL)
+                .withCount(1)
+                .build();
+
+        AddToOrderCommand addCommand = new AddToOrderCommand(toAddDescriptor);
+
+        Model expectedModel = getModelWithOrder();
+        expectedModel.addItem(BAGEL);
+        expectedModel.updateFilteredItemList(toAddDescriptor::isMatch);
+        String expectedMessage = AddToOrderCommand.MESSAGE_MULTIPLE_MATCHES;
+
+        assertCommandFailure(addCommand, modelWithOrder, expectedModel, expectedMessage);
+    }
+
 }

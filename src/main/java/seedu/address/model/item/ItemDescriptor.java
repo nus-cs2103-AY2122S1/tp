@@ -25,6 +25,18 @@ public class ItemDescriptor {
     }
 
     /**
+     * Construct an {@code ItemDescriptor} that corresponds with the given {@code Item}
+     */
+    public ItemDescriptor(Item toCopy) {
+        setName(toCopy.getName());
+        setId(toCopy.getId());
+        setCount(toCopy.getCount());
+        setCostPrice(toCopy.getCostPrice());
+        setSalesPrice(toCopy.getSalesPrice());
+        setTags(toCopy.getTags());
+    }
+
+    /**
      * Copy constructor.
      * A defensive copy of {@code tags} is used internally.
      */

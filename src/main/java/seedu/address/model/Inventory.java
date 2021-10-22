@@ -14,7 +14,7 @@ import seedu.address.model.order.TransactionRecord;
 
 /**
  * Wraps all data at the inventory level
- * Duplicates are not allowed (by .isSameItem comparison)
+ * Duplicates are aggregated by adjusting count (by .isSameItem comparison)
  */
 public class Inventory implements ReadOnlyInventory {
 

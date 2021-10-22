@@ -189,9 +189,6 @@ public class ModelManager implements Model {
 
     // ============== Order related methods ========================
 
-    /**
-     * Sets the current order of the model.
-     */
     @Override
     public void setOrder(Order order) {
         requireNonNull(order);
@@ -205,39 +202,35 @@ public class ModelManager implements Model {
         return optionalOrder.get();
     }
 
-    /**
-     * Returns a boolean that the model has an unclosed order or not.
-     */
     @Override
     public boolean hasUnclosedOrder() {
         return optionalOrder.isPresent();
     }
 
-    /**
-     * Adds item to the current order list.
-     */
     @Override
     public void addToOrder(Item item) {
         requireNonNull(item);
         assert hasUnclosedOrder();
 
-        optionalOrder.get().addItem(item);
+        optionalOrder.ifPresent(order -> order.addItem(item));
     }
 
-    /**
-     * Removes the item from the current order list.
-     */
     @Override
-    public void removeFromOrder(Item item) {
+    public List<Item> getFromOrder(ItemDescriptor itemDescriptor) {
+        requireNonNull(itemDescriptor);
+        assert hasUnclosedOrder();
+
+        return optionalOrder.map(order -> order.getItems(itemDescriptor)).get();
+    }
+
+    @Override
+    public void removeFromOrder(Item item, int amount) {
         requireNonNull(item);
         assert hasUnclosedOrder();
 
-        optionalOrder.get().removeItem(item);
+        optionalOrder.ifPresent(order -> order.removeItem(item, amount));
     }
 
-    /**
-     * Updates the inventory according to current order and exit ordering mode, the transaction is recorded as well.
-     */
     @Override
     public void transactAndClearOrder() {
         assert hasUnclosedOrder();

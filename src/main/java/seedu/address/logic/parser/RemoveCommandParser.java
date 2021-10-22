@@ -27,24 +27,24 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RemoveCommand.MESSAGE_USAGE));
         }
 
-        ItemDescriptor toAddDescriptor = new ItemDescriptor();
+        ItemDescriptor toRemoveDescriptor = new ItemDescriptor();
 
         // Parse name
         if (!argMultimap.getPreamble().isEmpty()) {
-            toAddDescriptor.setName(ParserUtil.parseName(argMultimap.getPreamble()));
+            toRemoveDescriptor.setName(ParserUtil.parseName(argMultimap.getPreamble()));
         }
         // Parse Id
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            toAddDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
+            toRemoveDescriptor.setId(ParserUtil.parseId(argMultimap.getValue(PREFIX_ID).get()));
         }
         // Parse count
         if (argMultimap.getValue(PREFIX_COUNT).isPresent()) {
-            toAddDescriptor.setCount(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
+            toRemoveDescriptor.setCount(ParserUtil.parseCount(argMultimap.getValue(PREFIX_COUNT).get()));
         } else {
-            toAddDescriptor.setCount(1);
+            toRemoveDescriptor.setCount(1);
         }
 
-        return new RemoveCommand(toAddDescriptor);
+        return new RemoveCommand(toRemoveDescriptor);
     }
 
 }
