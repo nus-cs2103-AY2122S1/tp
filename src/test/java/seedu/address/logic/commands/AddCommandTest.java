@@ -23,8 +23,11 @@ import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -128,12 +131,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addApplicantToPosition(Applicant applicant, Position position) {
+        public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasApplicant(Applicant applicant) {
+        public boolean hasApplicantWithName(Name applicantName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -198,6 +201,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPosition(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPositionWithTitle(Title toCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPositionBook(ReadOnlyPositionBook positionBook) {
             throw new AssertionError("This method should not be called.");
         }
@@ -205,10 +218,6 @@ public class AddCommandTest {
         @Override
         public ReadOnlyPositionBook getPositionBook() {
             throw new AssertionError("This method should not be called.");
-        }
-
-        public boolean hasPosition(Position toAdd) {
-            return false;
         }
 
         @Override

@@ -6,8 +6,11 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * The API of the Model component.
@@ -72,6 +75,18 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds a new applicant to MrTechRecruiter with the given particulars.
+     * The intended applicant must not already exist in the applicant book.
+     * @return the newly added applicant.
+     */
+    Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
+
+    /**
+     * Returns true if an applicant named {@code applicantName} exists in MrTechRecruiter.
+     */
+    boolean hasApplicantWithName(Name applicantName);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -154,6 +169,10 @@ public interface Model {
      * Returns true if an applicant with the same identity as {@code applicant} exists in MrTechRecruiter.
      */
     boolean hasApplicant(Applicant applicant);
+    // Position related methods
+
+    boolean hasPosition(Position position);
+    boolean hasPositionWithTitle(Title title);
 
     /**
      * Adds the given applicant to the given position.
@@ -171,6 +190,11 @@ public interface Model {
     /**
      * Returns the user prefs' applicant book file path.
      */
+    void addPosition(Position toAdd);
+
+    void deletePosition(Position positionToDelete);
+
+    // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
 
     /**
