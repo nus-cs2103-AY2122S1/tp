@@ -45,8 +45,6 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
 <img src="images/MainApp.png" width="800px">
 
-1. Type the command in the command box and press Enter to execute it <br> e.g. typing **`help`** and pressing Enter will open the help window<br>
-
 --------------------------------------------------------------------------------------------------------------------
 ## Walk-through <a name = "walkthrough"></a>
 
