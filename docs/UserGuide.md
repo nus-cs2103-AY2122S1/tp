@@ -9,6 +9,7 @@ that contains the contact information and order details related to clients and p
 * Table of Contents
     * [Quick Start](#quick-start)
     * [Features](#features)
+        * [Help](#help-help)
         * [Exit](#exit-exit)
         * [Add](#adding-add)
         * [Delete](#deleting-delete)
@@ -17,6 +18,7 @@ that contains the contact information and order details related to clients and p
         * [List](#listing-list)
         * [View](#viewing-view)
         * [Command History](#command-history)
+        * [Statistics (Coming Soon)](#statistics-coming-soon)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
@@ -65,6 +67,14 @@ that contains the contact information and order details related to clients and p
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
+
+### Help: `help`
+
+Displays help message to the user.
+
+Format: `help`
+
+Expected Output: ![Ui](images/Ui.png)
 
 ### Exit: `exit`
 
@@ -210,7 +220,9 @@ Notes:
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
 
+### Statistics [coming soon]
 
+_Details coming soon ..._
 
 ### Loading and Saving the data [coming soon]
 
