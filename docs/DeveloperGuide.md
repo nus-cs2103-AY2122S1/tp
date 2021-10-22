@@ -13,7 +13,7 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 5. [Implementation](#implementation)
-   - [[Proposed] View student/lesson feature](#view-studentlesson-feature)
+   - [View student/lesson feature](#view-studentlesson-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
 6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
