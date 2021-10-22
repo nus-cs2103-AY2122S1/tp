@@ -24,12 +24,14 @@ public interface ApplicantBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws DataConversionException, IOException;
+    Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws
+            DataConversionException, IOException;
 
     /**
      * @see #getApplicantBookFilePath()
      */
-    Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws DataConversionException, IOException;
+    Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws
+            DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyApplicantBook} to the storage.

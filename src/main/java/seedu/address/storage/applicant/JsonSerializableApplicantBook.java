@@ -50,7 +50,7 @@ public class JsonSerializableApplicantBook {
         ApplicantBook applicantBook = new ApplicantBook();
         for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
             Applicant applicant = jsonAdaptedApplicant.toModelType(positionBook);
-            if (applicantBook.hasApplicant(applicant)) {
+            if (applicantBook.hasApplicantWithName(applicant.getName())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_POSITION);
             }
             applicantBook.addApplicant(applicant);

@@ -10,7 +10,6 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 

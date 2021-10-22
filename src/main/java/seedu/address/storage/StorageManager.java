@@ -122,15 +122,16 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyApplicantBook> readApplicantBook() throws DataConversionException, IOException {
-        return readApplicantBook(applicantBookStorage.getApplicantBookFilePath());
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws
+            DataConversionException, IOException {
+        return readApplicantBook(applicantBookStorage.getApplicantBookFilePath(), positionBook);
     }
 
     @Override
-    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath) throws DataConversionException,
-            IOException {
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws
+            DataConversionException, IOException {
         logger.fine("Attempting to read applicant data from file: " + filePath);
-        return applicantBookStorage.readApplicantBook(filePath);
+        return applicantBookStorage.readApplicantBook(filePath, positionBook);
     }
 
     @Override

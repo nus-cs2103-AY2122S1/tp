@@ -33,7 +33,8 @@ public class JsonApplicantBookStorage implements ApplicantBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws DataConversionException {
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws
+            DataConversionException {
         return readApplicantBook(filePath, positionBook);
     }
 
@@ -43,7 +44,8 @@ public class JsonApplicantBookStorage implements ApplicantBookStorage {
      * @param filePath location of the applicant data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws DataConversionException {
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws
+            DataConversionException {
         requireNonNull(filePath);
         requireNonNull(positionBook);
 

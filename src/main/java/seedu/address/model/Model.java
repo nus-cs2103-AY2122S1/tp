@@ -165,34 +165,15 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
 
-    /**
-     * Returns true if an applicant with the same identity as {@code applicant} exists in MrTechRecruiter.
-     */
-    boolean hasApplicant(Applicant applicant);
     // Position related methods
 
-    boolean hasPosition(Position position);
     boolean hasPositionWithTitle(Title title);
-
-    /**
-     * Adds the given applicant to the given position.
-     * {@code applicant} must not already exist in the applicant book.
-     * {@code position} must already exist in the position book.
-     */
-    void addApplicantToPosition(Applicant applicant, Position position);
 
     /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      */
     void deleteApplicant(Applicant target);
-
-    /**
-     * Returns the user prefs' applicant book file path.
-     */
-    void addPosition(Position toAdd);
-
-    void deletePosition(Position positionToDelete);
 
     // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();

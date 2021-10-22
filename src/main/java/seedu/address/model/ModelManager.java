@@ -76,27 +76,6 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Old constructor - left temporarily to pass unit tests.
-     */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyApplicantBook applicantBook,
-                        ReadOnlyPositionBook positionBook, ReadOnlyUserPrefs userPrefs) {
-        super();
-        requireAllNonNull(addressBook, positionBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook
-                + " , position book: " + positionBook
-                + " and user prefs " + userPrefs);
-
-        this.addressBook = new AddressBook(addressBook);
-        this.positionBook = new PositionBook(positionBook);
-        this.applicantBook = new ApplicantBook(applicantBook);
-        this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredApplicants = new FilteredList<>(this.applicantBook.getApplicantList());
-        filteredPositions = new FilteredList<>(this.positionBook.getPositionList());
-    }
-
-    /**
      * Left temporarily to pass unit tests
      * Initializes a ModelManager with the given positionBook and userPrefs.
      */
@@ -351,28 +330,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasApplicant(Applicant applicant) {
-        requireNonNull(applicant);
-        return applicantBook.hasApplicant(applicant);
-    }
-
-    @Override
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
         applicantBook.setApplicant(target, editedApplicant);
-    }
-
-    @Override
-    public void addApplicantToPosition(Applicant applicant, Position dummyPosition) {
-        Position position = positionBook.getPosition(dummyPosition);
-        Application application = new Application(applicant, position);
-
-        // Sets the application of the applicant to the application with original position object
-        applicant.setApplication(application);
-
-        applicantBook.addApplicant(applicant);
-        applicationBook.addApplication(application);
-        updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
     }
 
     @Override
