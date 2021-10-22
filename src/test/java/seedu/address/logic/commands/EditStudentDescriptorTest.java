@@ -7,7 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.EDIT_DESCRIPTOR_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_RECITATION;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;

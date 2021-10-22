@@ -103,11 +103,6 @@ public class AssessmentList {
         }
     }
 
-    public void setAssessments(AssessmentList replacement) {
-        requireNonNull(replacement);
-        Collections.copy(assessments, replacement.assessments);
-    }
-
     /**
      * Removes all references to the student from the assessment list
      */
@@ -127,6 +122,11 @@ public class AssessmentList {
 
         removeStudent(previous);
         update(edited);
+    }
+
+    public void setAssessments(AssessmentList replacement) {
+        requireNonNull(replacement);
+        Collections.copy(assessments, replacement.assessments);
     }
 
     /**

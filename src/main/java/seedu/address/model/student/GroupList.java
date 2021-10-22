@@ -84,6 +84,9 @@ public class GroupList {
         groups.set(index, editedGroup);
     }
 
+    /**
+     * Removes any references to the student in groups.
+     */
     public void removeStudent(Student toRemove) {
         requireNonNull(toRemove);
 

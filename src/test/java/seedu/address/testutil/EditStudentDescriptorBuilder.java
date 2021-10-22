@@ -1,17 +1,14 @@
 package seedu.address.testutil;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
