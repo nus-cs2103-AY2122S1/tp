@@ -117,7 +117,7 @@ public class AddressBookParser {
 
         case ShowIncompleteOrders.COMMAND_WORD:
             return new ShowIncompleteOrders();
-            
+
         case DeleteOrderCommand.COMMAND_WORD:
             return new DeleteOrderCommandParser().parse(arguments);
 
