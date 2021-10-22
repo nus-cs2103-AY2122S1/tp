@@ -183,15 +183,10 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-<<<<<<< HEAD
-    public void markDone(Task task) {
-        taskList.markDone(task);
-=======
-    public void markTask(Task task) {
-        addressBook.markDone(task);
->>>>>>> bc2a8034bf208a46b05c009c3f267f995571eabc
+    @Override
+    public void markTask(Task toMark) {
+        taskList.markDone(toMark);
     }
-
 
     //=========== Order Management ==================================================================================
 

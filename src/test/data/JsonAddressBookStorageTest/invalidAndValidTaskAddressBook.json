@@ -9,8 +9,12 @@
     "remark" : "dummy remark",
     "tagged" : [ "friends" ]
 <<<<<<< HEAD
+<<<<<<< HEAD
   } ]
 =======
+=======
+
+>>>>>>> 7439ea28b2dc6d72bae2c6c2c8ded260caf5dec7
   } ],
   "tasks" : [ {
     "label" : "Valid task",
@@ -24,5 +28,8 @@
     "taskTag": "SO007",
     "isDone" : "idk"
   }]
+<<<<<<< HEAD
 >>>>>>> bc2a8034bf208a46b05c009c3f267f995571eabc
+=======
+>>>>>>> 7439ea28b2dc6d72bae2c6c2c8ded260caf5dec7
 }

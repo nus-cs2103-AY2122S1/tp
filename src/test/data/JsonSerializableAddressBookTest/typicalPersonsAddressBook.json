@@ -64,7 +64,11 @@
     "remark" : "",
     "tagged" : [ ]
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+
+>>>>>>> 7439ea28b2dc6d72bae2c6c2c8ded260caf5dec7
   } ],
   "tasks" : [ {
     "label" : "Buy red button",
@@ -81,6 +85,9 @@
     "date" : "23th of September 2021",
     "taskTag": "SO3230",
     "isDone" : "true"
+<<<<<<< HEAD
 >>>>>>> bc2a8034bf208a46b05c009c3f267f995571eabc
+=======
+>>>>>>> 7439ea28b2dc6d72bae2c6c2c8ded260caf5dec7
   } ]
 }
