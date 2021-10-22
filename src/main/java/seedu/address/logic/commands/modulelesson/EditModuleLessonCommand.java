@@ -36,7 +36,7 @@ public class EditModuleLessonCommand extends Command {
             + "by the index number used in the displayed lesson list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_MODULE_CODE + "MODULE_INFO]... "
+            + "[" + PREFIX_MODULE_CODE + "MODULE_INFO] "
             + "[" + PREFIX_DAY + "DAY_OF_THE_WEEK] "
             + "[" + PREFIX_TIME + "TIME_OF_THE_DAY] "
             + "[" + PREFIX_REMARK + "REMARK]\n"
