@@ -33,6 +33,13 @@ public class WeeklyTasks implements Iterable<Task> {
         this(taskList, INITIAL_WEEK);
     }
 
+    /**
+     * Constructs a {@code WeeklyTasks}.
+     * For the given week of the YEAR.
+     *
+     * @param taskList A valid task list.
+     * @param week A valid week of the year.
+     */
     public WeeklyTasks(ObservableList<Task> taskList, Integer week) {
         weeklyTaskList = FXCollections.observableArrayList();
         allTaskList = taskList;

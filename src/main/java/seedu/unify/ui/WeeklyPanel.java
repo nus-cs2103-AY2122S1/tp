@@ -35,7 +35,8 @@ public class WeeklyPanel extends UiPart<Region> {
         super(FXML);
         SimpleIntegerProperty observableWeekNumber = weeklyTasks.getObservableWeekNumber();
         LocalDate firstDayOfWeek = weeklyTasks.getFirstDayOfWeek();
-        weekLabel.setText(String.format(WEEK_LABEL, observableWeekNumber.getValue(), weeklyTasks.getFirstDayOfWeek().toString()));
+        weekLabel.setText(String.format(
+                WEEK_LABEL, observableWeekNumber.getValue(), weeklyTasks.getFirstDayOfWeek().toString()));
         for (int i = 0; i < 7; i++) {
             DailyPanel dailyPanel = new DailyPanel(weeklyTasks.getDailyTaskList(i), firstDayOfWeek.plusDays(i));
             dailyHBox.getChildren().add(dailyPanel.getRoot());
@@ -46,7 +47,8 @@ public class WeeklyPanel extends UiPart<Region> {
         observableWeekNumber.addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                weekLabel.setText(String.format(WEEK_LABEL, newValue.intValue(), weeklyTasks.getFirstDayOfWeek().toString()));
+                weekLabel.setText(String.format(
+                        WEEK_LABEL, newValue.intValue(), weeklyTasks.getFirstDayOfWeek().toString()));
             }
         });
     }
