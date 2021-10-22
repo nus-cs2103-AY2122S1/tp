@@ -151,7 +151,7 @@ public class ParserUtil {
      *
      *
      */
-    public static ClassLimit parseLimit(String limit) throws ParseException{
+    public static ClassLimit parseLimit(String limit) throws ParseException {
         requireNonNull(limit);
         String trimmedLimit = limit.trim();
         try {
