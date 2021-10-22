@@ -118,7 +118,7 @@ public class ParserUtil {
         } catch (NumberFormatException e) {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_FORMAT);
         }
-        if (id.length() == 6 && Integer.parseInt(id) > 0) {
+        if (id.length() <= 6 && Integer.parseInt(id) > 0) {
             return Integer.parseInt(id);
         } else {
             throw new ParseException(Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
