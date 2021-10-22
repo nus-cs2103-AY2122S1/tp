@@ -32,11 +32,11 @@ public abstract class NoteWindow extends UiPart<Stage> {
     private static final int CENTER_X = (SCREEN_X - WIDTH) / 2;
     private static final int CENTER_Y = (SCREEN_Y - HEIGHT) / 2;
     private static final String FXML = "NoteWindow.fxml";
-    private static final Modifier CTRL = KeyCombination.CONTROL_DOWN;
-    private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, CTRL);
-    private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, CTRL);
-    private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, CTRL);
-    private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, CTRL);
+    private static final Modifier SHORTCUT = KeyCombination.SHORTCUT_DOWN;
+    private static final KeyCombination SAVE_KEY = new KeyCodeCombination(KeyCode.S, SHORTCUT);
+    private static final KeyCombination EXIT_AND_SAVE_KEY = new KeyCodeCombination(KeyCode.Q, SHORTCUT);
+    private static final KeyCombination EXIT_KEY = new KeyCodeCombination(KeyCode.W, SHORTCUT);
+    private static final KeyCombination TIME_STAMP_KEY = new KeyCodeCombination(KeyCode.T, SHORTCUT);
 
     @FXML
     protected TextArea noteTextArea;
