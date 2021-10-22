@@ -16,7 +16,7 @@ import tutoraid.logic.commands.DeleteStudentCommand;
  */
 public class DeleteStudentCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeleteStudentCommandParser parser = new DeleteStudentCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

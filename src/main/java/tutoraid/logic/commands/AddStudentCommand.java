@@ -13,17 +13,17 @@ import tutoraid.model.student.Student;
 /**
  * Adds a student to TutorAid.
  */
-public class AddStudentCommand extends Command {
+public class AddStudentCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "add -s";
+    public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TutorAid. "
+    public static final String MESSAGE_USAGE = COMMAND_FLAG + ": Adds a student to TutorAid. "
             + "Parameters: "
             + PREFIX_STUDENT_NAME + "STUDENT NAME "
             + PREFIX_STUDENT_PHONE + "STUDENT PHONE "
             + PREFIX_PARENT_NAME + "PARENT NAME "
             + PREFIX_PARENT_PHONE + "PARENT PHONE "
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_FLAG + " "
             + PREFIX_STUDENT_NAME + "John Doe "
             + PREFIX_STUDENT_PHONE + "81234567 "
             + PREFIX_PARENT_NAME + "Mrs Doe "

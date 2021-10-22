@@ -13,14 +13,14 @@ import tutoraid.model.student.Student;
 /**
  * Deletes a student identified using its displayed index from the TutorAid.
  */
-public class DeleteStudentCommand extends Command {
+public class DeleteStudentCommand extends DeleteCommand {
 
-    public static final String COMMAND_WORD = "del -s";
+    public static final String COMMAND_FLAG = "-s";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_FLAG
             + ": Deletes the student identified by the index number used in the displayed student list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + COMMAND_FLAG + " 1";
 
     public static final String MESSAGE_DELETE_STUDENT_SUCCESS = "Deleted Student: %1$s";
 

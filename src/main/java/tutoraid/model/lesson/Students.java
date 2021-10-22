@@ -36,8 +36,9 @@ public class Students {
 
     @Override
     public String toString() {
-        return students.stream().map(Object::toString)
-                .collect(Collectors.joining(", "));
+        String connector = "\n    ";
+        return connector + students.stream().map(Student::toNameString)
+                .collect(Collectors.joining(connector));
     }
 
     @Override

@@ -100,6 +100,15 @@ public class Student {
         return Objects.hash(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
     }
 
+    /**
+     * Returns the name of the student in a string form
+     *
+     * @return The name of the student in a String
+     */
+    public String toNameString() {
+        return this.getStudentName().toString();
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();

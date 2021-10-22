@@ -6,8 +6,7 @@ import static tutoraid.ui.StudentCard.formatCardLabel;
 import org.junit.jupiter.api.Test;
 
 
-
-public class StudentCardTest {
+public class CardTest {
 
     @Test
     public void formatCardLabel_emptyLabelEmptyField() {

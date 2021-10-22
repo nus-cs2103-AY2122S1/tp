@@ -1,29 +1,55 @@
 package tutoraid.logic.parser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import tutoraid.commons.core.Messages;
-import tutoraid.commons.core.index.Index;
+import tutoraid.logic.commands.DeleteCommand;
+import tutoraid.logic.commands.DeleteProgressCommand;
 import tutoraid.logic.commands.DeleteStudentCommand;
+import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Checks if a given delete command is to delete a student from TutorAid or to delete the progress note of a student.
  */
-public class DeleteCommandParser implements Parser<DeleteStudentCommand> {
+public class DeleteCommandParser implements Parser<DeleteCommand> {
+    /**
+     * Used for initial separation of command flag ('-s' or '-p') and args.
+     */
+    private static final Pattern BASIC_COMMAND_FORMAT =
+            Pattern.compile("(?<commandFlag>\\S+)(?<arguments>.*)");
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns a DeleteCommand object for execution.
+     * Parses user input into a specific delete command for execution.
+     * @param userInput user input string after the 'del' keyword has been removed
+     * @return the specific add command (delete student or delete progress) based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteStudentCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return new DeleteStudentCommand(index);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteStudentCommand.MESSAGE_USAGE), pe);
+    @Override
+    public DeleteCommand parse(String userInput) throws ParseException {
+        final Matcher matcher;
+        final String commandFlag;
+        final String arguments;
+
+        matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_DELETE_COMMAND, HelpCommand.MESSAGE_USAGE));
+        }
+        commandFlag = matcher.group("commandFlag");
+        arguments = matcher.group("arguments");
+
+        switch (commandFlag) {
+
+        case DeleteStudentCommand.COMMAND_FLAG:
+            return new DeleteStudentCommandParser().parse(arguments);
+
+        case DeleteProgressCommand.COMMAND_FLAG:
+            return new DeleteProgressCommandParser().parse(arguments);
+
+        default:
+            throw new ParseException(Messages.MESSAGE_INVALID_DELETE_COMMAND);
         }
     }
-
 }
