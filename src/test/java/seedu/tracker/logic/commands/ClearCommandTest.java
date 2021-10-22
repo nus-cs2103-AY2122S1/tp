@@ -28,8 +28,8 @@ import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
 
 class ClearCommandTest {
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+    private Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void constructor_nullPredicate_throwsNullPointerException() {
@@ -72,8 +72,7 @@ class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
         expectedModel.setModuleTracker(new ModuleTracker());
     }
-  
-    @Test
+
     public void execute_allFieldsSpecified_clear() {
         AcademicYear year = new AcademicYear(1);
         Semester semester = new Semester(1);

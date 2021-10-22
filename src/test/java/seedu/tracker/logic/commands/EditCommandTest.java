@@ -127,7 +127,7 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
                 new UserPrefs(), new UserInfo());
-        expectedModel.setModule(model.getFilteredModuleList().get(0), editedPerson);
+        expectedModel.setModule(model.getFilteredModuleList().get(0), editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
