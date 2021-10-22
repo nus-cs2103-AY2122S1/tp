@@ -7,14 +7,15 @@
       "address": "123, Jurong West Ave 6, #08-111",
       "birthDate": "12/12/1922",
       "remark": "Awaiting PCR test result",
-      "tagged": [ "friends" ]
+      "tagged": [ "friends" ],
+      "risk": "HIGH"
     }
   ],
   "doctors": [
     {
-      "name": "Alice Pauline",
+      "name": "Pork Floss",
       "phone": "94351253",
-      "email": "alice@example.com",
+      "email": "pork@example.com",
       "address": "4th street",
       "birthDate": "12/12/1921",
       "remark": "PCR done",
@@ -23,20 +24,10 @@
   ],
   "appointments": [
     {
-      "patient": {
-        "name": "Alice Pauline",
-        "phone": "94351253",
-        "email": "alice@example.com",
-        "address": "123, Jurong West Ave 6, #08-111",
-        "birthDate": "12/12/1922",
-        "remark": "Awaiting PCR test result",
-        "tagged": [ "friends" ],
-        "risk": "HIGH"
-      },
       "doctor": {
-        "name": "Alice Pauline",
+        "name": "Pork Floss",
         "phone": "94351253",
-        "email": "alice@example.com",
+        "email": "pork@example.com",
         "address": "4th street",
         "birthDate": "12/12/1921",
         "remark": "PCR done",
@@ -44,17 +35,17 @@
       },
       "date": "2/2/2021",
       "session": {
-        "start": "11:30",
-        "end": "12:00",
-        "duration": 30
+        "start": "22:30",
+        "end": "00:00",
+        "duration": 90
       },
-      "remark": "X-ray"
+      "remark": "Blood test"
     },
     {
       "patient": {
-        "name": "Alice Pauline",
+        "name": "Bob Ross",
         "phone": "94351253",
-        "email": "alice@example.com",
+        "email": "bobby@example.com",
         "address": "123, Jurong West Ave 6, #08-111",
         "birthDate": "12/12/1922",
         "remark": "Awaiting PCR test result",
@@ -62,7 +53,7 @@
         "risk": "HIGH"
       },
       "doctor": {
-        "name": "Alice Pauline",
+        "name": "Bobby Rossy",
         "phone": "94351253",
         "email": "alice@example.com",
         "address": "4th street",
@@ -76,7 +67,35 @@
         "end": "12:00",
         "duration": 30
       },
-      "remark": "X-ray"
+      "remarks": "X-ray"
+    },
+    {
+      "patient": {
+        "name": "Alice Chains",
+        "phone": "97606500",
+        "email": "alice@example.com",
+        "address": "123, Jurong Eest Ave 6, #08-111",
+        "birthDate": "12/12/1922",
+        "remark": "Awaiting PCR test result",
+        "tagged": [ "friends" ],
+        "risk": "HIGH"
+      },
+      "doctor": {
+        "name": "Bobby Rossy",
+        "phone": "94351253",
+        "email": "bobby@example.com",
+        "address": "4th street",
+        "birthDate": "12/12/1965",
+        "remark": "PCR done",
+        "tagged": [ "colleagues" ]
+      },
+      "date": "2/2/2021",
+      "session": {
+        "start": "11:30",
+        "end": "12:00",
+        "duration": 30
+      },
+      "remark": "Ask about condition the past two weeks"
     }
   ]
 }

@@ -58,7 +58,7 @@ public class TypicalPlannerMd {
     public static PlannerMd getTypicalAppointmentsPlannerMd() {
         PlannerMd pm = new PlannerMd();
         for (Appointment appointment : getTypicalAppointments()) {
-
+            pm.addAppointment(appointment);
         }
         return pm;
     }

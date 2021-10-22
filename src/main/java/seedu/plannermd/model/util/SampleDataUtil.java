@@ -109,7 +109,7 @@ public class SampleDataUtil {
             samplePm.addDoctor(sampleDoctor);
         }
         for (Appointment sampleAppointment : getSampleAppointments()) {
-            //TODO: add sample appointments
+            samplePm.addAppointment(sampleAppointment);
         }
         return samplePm;
     }
