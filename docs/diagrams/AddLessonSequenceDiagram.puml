@@ -14,10 +14,10 @@ participant ":Model" as Model MODEL_COLOR
 participant "l:Lesson" as Lesson MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add-l s/Science g/P2 d/Wed t/1200 c/10.50")
+[-> LogicManager : execute(Input)
 activate LogicManager
 
-LogicManager -> TuitioneParser : parseCommand("add-l s/Science g/P5 d/Wed t/1200 c/10.50")
+LogicManager -> TuitioneParser : parseCommand(Input)
 activate TuitioneParser
 
 create AddLessonCommandParser
@@ -27,7 +27,7 @@ activate AddLessonCommandParser
 AddLessonCommandParser --> TuitioneParser
 deactivate AddLessonCommandParser
 
-TuitioneParser -> AddLessonCommandParser : parse("s/Science g/P5 d/Wed t/1200 c/10.50")
+TuitioneParser -> AddLessonCommandParser : parse(Input)
 activate AddLessonCommandParser
 
 create Lesson
