@@ -64,7 +64,6 @@ public class AddressBookParser {
             return new ClearCommand();
 
         case SearchCommand.COMMAND_WORD:
-            System.out.println("argg: " + arguments);
             return new SearchCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:

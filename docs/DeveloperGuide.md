@@ -286,7 +286,7 @@ if command is valid. Command is invalid if user input is empty, or if user enter
 
 #### Design considerations
 
-**Aspect: How undo & redo executes:**
+**Aspect: How search executes:**
 
 * **Alternative 1:** Multiple search commands to search using different identifiers.
     * Pros: Easy to implement.
