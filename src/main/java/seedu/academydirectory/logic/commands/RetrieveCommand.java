@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
+import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -49,6 +50,7 @@ public class RetrieveCommand extends Command {
     }
 
     private String executeFilter(Model model, InformationWantedFunction filter) {
+        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         ObservableList<Information> view = model.getFilteredStudentListView(filter)
                 .stream()
                 .filter(Optional::isPresent)
