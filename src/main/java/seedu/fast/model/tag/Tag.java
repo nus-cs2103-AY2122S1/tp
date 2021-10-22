@@ -62,7 +62,7 @@ public class Tag {
      * Returns true if a given string has a valid length.
      */
     public static boolean isValidTagLength(String test) {
-        return test.length() < TagUtil.MAX_LENGTH_TAG;
+        return test.length() <= TagUtil.MAX_LENGTH_TAG;
     }
 
     /**
