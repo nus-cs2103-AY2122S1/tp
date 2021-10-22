@@ -14,7 +14,11 @@ import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 import javafx.scene.image.Image;
 
-import static seedu.fast.ui.UiUtil.*;
+import static seedu.fast.ui.UiUtil.tagImage;
+import static seedu.fast.ui.UiUtil.emailImage;
+import static seedu.fast.ui.UiUtil.addressImage;
+import static seedu.fast.ui.UiUtil.phoneImage;
+
 
 
 /**
@@ -45,7 +49,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private VBox address;
     @FXML
-    private Label email;
+    private VBox email;
     @FXML
     private VBox tags;
     @FXML
@@ -73,15 +77,11 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-//        phone.setText(person.getPhone().value);
         phone.getChildren().add(new ItemComponent(person.getPhone().value, phoneImage));
-//        address.setText(person.getAddress().value);
         address.getChildren().add(new ItemComponent(person.getAddress().value, addressImage));
-        email.setText(person.getEmail().value);
+        email.getChildren().add(new ItemComponent(person.getEmail().value, emailImage));
+//        email.setText(person.getEmail().value);
         remark.setText(person.getRemark().value);
-//        person.getTags().stream()
-//                .sorted(Comparator.comparing(tag -> tag.tagName))
-//                .forEach(tag -> tagTest.getChildren().add(colorSelector(tag.tagName)));
         tags.getChildren().add(new TagComponent(person.getTags(), tagImage));
 
         appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
@@ -91,7 +91,7 @@ public class PersonCard extends UiPart<Region> {
                 person.getAppointment().getDate()));
         appointmentCount.setText("Appointment: " + person.getCount());
     }
-    
+
     /**
      * Check if appointment has been scheduled with this contact and modify the displayed header.
      * If appointment is scheduled, appointment header remains as "Upcoming Appointment"
