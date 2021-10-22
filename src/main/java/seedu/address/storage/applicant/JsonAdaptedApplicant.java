@@ -49,7 +49,7 @@ public class JsonAdaptedApplicant {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        this.positionApplyingTo = source.getApplication().getPosition().getTitle().fullTitle;
+        positionApplyingTo = source.getApplication().getPosition().getTitle().fullTitle;
     }
 
     /**
