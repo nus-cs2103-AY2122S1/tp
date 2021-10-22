@@ -30,7 +30,7 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_LESSON_DURATION =
-            "Provide both start time and end time. Start time <= end time";
+            "Provide both start time and end time. Start time <= end time.";
     public static final String MESSAGE_INVALID_MODULE_INFO = "Either the module code or lesson code is not provided.";
 
     /**

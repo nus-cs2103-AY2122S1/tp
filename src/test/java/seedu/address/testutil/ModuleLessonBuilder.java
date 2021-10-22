@@ -12,12 +12,14 @@ public class ModuleLessonBuilder {
 
     public static final ModuleCode DEFAULT_MODULE_CODE = parseModuleCode("CS2103 T17");
     public static final String DEFAULT_DAY = "2";
-    public static final String DEFAULT_TIME = "15:00";
+    public static final String DEFAULT_START_TIME = "15:00";
+    public static final String DEFAULT_END_TIME = "16:00";
     public static final String DEFAULT_REMARK = "Location: COM1 113";
 
     private ModuleCode moduleCode;
     private LessonDay lessonDay;
-    private LessonTime lessonTime;
+    private LessonTime lessonStartTime;
+    private LessonTime lessonEndTime;
     private Remark remark;
 
     /**
@@ -26,7 +28,8 @@ public class ModuleLessonBuilder {
     public ModuleLessonBuilder() {
         moduleCode = DEFAULT_MODULE_CODE;
         lessonDay = new LessonDay(DEFAULT_DAY);
-        lessonTime = new LessonTime(DEFAULT_TIME);
+        lessonStartTime = new LessonTime(DEFAULT_START_TIME);
+        lessonEndTime = new LessonTime(DEFAULT_END_TIME);
         remark = new Remark(DEFAULT_REMARK);
     }
 
@@ -36,7 +39,8 @@ public class ModuleLessonBuilder {
     public ModuleLessonBuilder(ModuleLesson classToCopy) {
         moduleCode = classToCopy.getModuleCode();
         lessonDay = classToCopy.getDay();
-        lessonTime = classToCopy.getTime();
+        lessonStartTime = classToCopy.getLessonStartTime();
+        lessonEndTime = classToCopy.getLessonEndTime();
         remark = classToCopy.getRemark();
     }
 
@@ -58,10 +62,18 @@ public class ModuleLessonBuilder {
     }
 
     /**
-     * Sets the {@code lessonTime} of the {@code ModuleLesson} that we are building.
+     * Sets the {@code lessonStartTime} of the {@code ModuleLesson} that we are building.
      */
-    public ModuleLessonBuilder withLessonTime(String lessonTime) {
-        this.lessonTime = new LessonTime(lessonTime);
+    public ModuleLessonBuilder withLessonStartTime(String lessonStartTime) {
+        this.lessonStartTime = new LessonTime(lessonStartTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code lessonEndTime} of the {@code ModuleLesson} that we are building.
+     */
+    public ModuleLessonBuilder withLessonEndTime(String lessonEndTime) {
+        this.lessonEndTime = new LessonTime(lessonEndTime);
         return this;
     }
 
@@ -74,7 +86,7 @@ public class ModuleLessonBuilder {
     }
 
     public ModuleLesson build() {
-        return new ModuleLesson(moduleCode, lessonDay, lessonTime, remark);
+        return new ModuleLesson(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
     }
 
 
