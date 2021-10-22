@@ -6,33 +6,41 @@ title: Developer Guide
 * Table of Contents
     * [Acknowledgements](#acknowledgements)
     * [Setting up & getting started](#setting-up--getting-started)
-    * [Design](#design)
-        * [Architecture](#architecture)
-        * [UI component](#ui-component)
-        * [Logic component](#logic-component)
-        * [Model component](#model-component)
-        * [Storage component](#storage-component)
-        * [Common classes](#common-classes)
-    * [Implementation](#implementation)
-        * [Add Client/Product Feature](#add-clientproduct-feature)
-        * [Delete Client/Product Feature](#deleting-a-clientproduct)
-        * [Edit Client/Product Feature](#edit-clientproduct-feature)
-        * [Find Client/Product Feature](#find-clientproduct-feature)
-        * [View Client/Product Feature](#view-clientproduct-feature)
-        * [Command History Feature](#command-history-feature)
-        * [\[Proposed\] Undo/Redo Feature](#proposed-undoredo-feature)
-        * [\[Proposed\] Data archiving](#proposed-data-archiving)
+    * <details><summary><a href="#design">Design</a></summary>
+        <ul>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#ui-component">UI component</a></li>
+            <li><a href="#logic-component">Logic component</a></li>
+            <li><a href="#model-component">Model component</a></li>
+            <li><a href="#storage-component">Storage component</a></li>
+            <li><a href="#common-classes">Common classes</a></li>
+        </ul></details>
+    * <details><summary><a href="#implementation">Implementation</a></summary>
+        <ul>
+            <li><a href="#add-clientproduct-feature">Add Client/Product Feature</a></li>
+            <li><a href="#delete-clientproduct-feature">Delete Client/Product Feature</a></li>
+            <li><a href="#edit-clientproduct-feature">Edit Client/Product Feature</a></li>
+            <li><a href="#find-clientproduct-feature">Find Client/Product Feature</a></li>
+            <li><a href="#view-clientproduct-feature">View Client/Product Feature</a></li>
+            <li><a href="#command-history-feature">Command History Feature</a></li>
+            <li><a href="#proposed-undoredo-feature">[Proposed] Undo/Redo Feature</a></li>
+            <li><a href="#proposed-data-archiving">[Proposed] Data archiving</a></li>
+        </ul></details>
     * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-    * [Appendix: Requirements](#appendix-requirements)
-        * [Product scope](#product-scope)
-        * [User stories](#user-stories)
-        * [Use cases](#use-cases)
-        * [Non-Functional Requirements](#non-functional-requirements)
-        * [Glossary](#glossary)
-    * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-        * [Launch and shutdown](#launch-and-shutdown)
-        * [Deleting a client/product](#deleting-a-clientproduct)
-        * [Saving data](#saving-data)
+    * <details><summary><a href="#appendix-requirements">Appendix: Requirements</a></summary>
+        <ul>
+            <li><a href="#product-scope">Product scope</a></li>
+            <li><a href="#user-stories">User stories</a></li>
+            <li><a href="#use-cases">Use cases</a></li>
+            <li><a href="#non-functional-requirements">Non-Functional Requirements</a></li>
+            <li><a href="#glossary">Glossary</a></li>
+        </ul></details>
+    * <details><summary><a href="#appendix-instructions-for-manual-testing">Appendix: Instructions for manual testing</a></summary>
+        <ul>
+            <li><a href="#launch-and-shutdown">Launch and shutdown</a></li>
+            <li><a href="#deleting-a-clientproduct">Deleting a client/product</a></li>
+            <li><a href="#saving-data">Saving data</a></li>
+        </ul></details>
 
 --------------------------------------------------------------------------------------------------------------------
 
