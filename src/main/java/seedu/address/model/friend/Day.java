@@ -7,6 +7,7 @@ import static seedu.address.model.util.DayTimeUtil.getTimeFromIndex;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.friend.exceptions.InvalidDayTimeException;
@@ -17,8 +18,18 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
  */
 public class Day {
 
+    private static final int NUMBER_OF_SLOTS = 24;
     private final boolean[] timeSlots;
     private final DayOfWeek dayOfWeek;
+
+    /**
+     * Constructs a default {@code Day}.
+     * Utilised by jackson for serialization
+     */
+    public Day() {
+        this.timeSlots = new boolean[NUMBER_OF_SLOTS];
+        this.dayOfWeek = DayOfWeek.of(1);
+    }
 
     /**
      * Constructs a {@code Day}.
@@ -27,7 +38,7 @@ public class Day {
      */
     public Day(DayOfWeek dayOfWeek) {
         requireNonNull(dayOfWeek);
-        this.timeSlots = new boolean[24];
+        this.timeSlots = new boolean[NUMBER_OF_SLOTS];
         this.dayOfWeek = dayOfWeek;
     }
 
@@ -42,12 +53,13 @@ public class Day {
     public void setTime(String startTime, String endTime, boolean isFree) throws InvalidDayTimeException {
         int startIndex = getIndexFromTime(startTime);
         int endIndex = getIndexFromTime(endTime);
+        endIndex = endIndex == 0 ? 24 : endIndex; // when endTime is 0000, it is treated as 2400
 
-        if (endIndex < startIndex) {
-            throw new InvalidDayTimeException("End time cannot be before start time");
+        if (endIndex <= startIndex) {
+            throw new InvalidDayTimeException("End time cannot be before/be the same as start time");
         }
 
-        for (int i = startIndex; i <= endIndex; i++) {
+        for (int i = startIndex; i <= endIndex - 1; i++) {
             timeSlots[i] = isFree;
         }
     }
@@ -63,11 +75,11 @@ public class Day {
 
     /**
      * Gets free time slots grouped.
-     * eg. groups 0800 0900 1000 to [0800, 1000]
+     * eg. groups 0800-0900 (index 8) and 0900-1000 (index 9) to [0800, 1000]
      *
      * @return Grouped free timeslots
      */
-    public ArrayList<String[]> getTimeSlots() throws InvalidDayTimeException {
+    public List<String[]> getGroupedTimeSlots() throws InvalidDayTimeException {
         ArrayList<String[]> groupedSlots = new ArrayList<>();
 
         String previousTimeSlot = "";

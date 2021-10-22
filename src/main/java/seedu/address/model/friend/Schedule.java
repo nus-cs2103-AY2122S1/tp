@@ -2,6 +2,7 @@ package seedu.address.model.friend;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -27,7 +28,7 @@ public class Schedule {
     /**
      * Sets the schedule of the day.
      *
-     * @param day       Day to set
+     * @param day       Day to set.
      * @param startTime Start of timeslot.
      * @param endTime   End of timeslot.
      * @param isFree    Is timeslot free.
@@ -50,9 +51,19 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Schedule{" +
-                "schedule=" + schedule +
-                '}';
+        final StringBuilder builder = new StringBuilder();
+        for (Day day : schedule) {
+            builder.append("\nDay: ")
+                    .append(day.getDayName())
+                    .append("; Free TimeSlots: ");
+            try {
+                day.getGroupedTimeSlots().forEach(timeSlot -> builder.append(Arrays.toString(timeSlot)).append(", "));
+            } catch (InvalidDayTimeException e) {
+                builder.append("Could not display timeslots");
+            }
+            builder.append(";");
+        }
+        return builder.toString();
     }
 
     @Override

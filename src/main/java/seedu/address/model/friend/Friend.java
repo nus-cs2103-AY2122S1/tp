@@ -120,6 +120,7 @@ public class Friend {
             builder.append("; Games: ");
             gameSet.forEach(builder::append);
         }
+        builder.append(schedule);
         return builder.toString();
     }
 }

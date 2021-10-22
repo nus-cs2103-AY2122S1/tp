@@ -54,7 +54,7 @@ public class EditFriendCommand extends Command {
      * Creates and returns a {@code Friend} with the details of {@code friendToEdit}
      * edited with {@code EditFriendDescriptor}.
      */
-    private static Friend createEditedPerson(Friend friendToEdit, EditFriendDescriptor editFriendDescriptor) {
+    private static Friend createEditedFriend(Friend friendToEdit, EditFriendDescriptor editFriendDescriptor) {
         assert friendToEdit != null;
         assert editFriendDescriptor != null;
 
@@ -76,7 +76,7 @@ public class EditFriendCommand extends Command {
         }
 
         Friend friendToEdit = model.getFriend(friendIdToEdit);
-        Friend editedFriend = createEditedPerson(friendToEdit, editFriendDescriptor);
+        Friend editedFriend = createEditedFriend(friendToEdit, editFriendDescriptor);
 
         model.setFriend(friendToEdit, editedFriend);
 

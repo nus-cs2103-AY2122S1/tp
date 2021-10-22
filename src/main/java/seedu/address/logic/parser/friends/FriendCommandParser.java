@@ -10,6 +10,7 @@ import seedu.address.logic.commands.friends.DeleteFriendCommand;
 import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.logic.commands.friends.GetFriendCommand;
 import seedu.address.logic.commands.friends.ListFriendCommand;
+import seedu.address.logic.commands.friends.ScheduleFriendCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -41,6 +42,9 @@ public class FriendCommandParser implements Parser<Command> {
 
         case DeleteFriendCommand.COMMAND_WORD:
             return new DeleteFriendCommandParser().parse(arguments);
+
+        case ScheduleFriendCommand.COMMAND_WORD:
+            return new ScheduleFriendCommandParser().parse(arguments);
 
         case GetFriendCommand.COMMAND_WORD:
             return new GetFriendCommandParser().parse(arguments);

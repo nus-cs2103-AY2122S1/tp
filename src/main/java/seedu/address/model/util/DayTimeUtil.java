@@ -24,7 +24,7 @@ public class DayTimeUtil {
      * @throws InvalidDayTimeException Invalid time input (must be within 0 - 23)
      */
     public static String getTimeFromIndex(int index) throws InvalidDayTimeException {
-        if (index < 0 || index > 23) {
+        if (index < 0 || index > 24) {
             throw new InvalidDayTimeException("Invalid time index input");
         }
         if (index < 10) {
