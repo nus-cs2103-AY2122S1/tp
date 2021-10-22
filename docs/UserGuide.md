@@ -1,6 +1,6 @@
 # PlannerMD User Guide
 
-PlannerMD is a command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
+PlannerMD is an easy-to-use command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -90,7 +90,7 @@ Format: `toggle`
 
 ### Adding a patient: `add`
 
-Adds a patient to the patient records. (Note: for date of birth, PlannerMD will convert any value beyond the last valid day-of-month to be the last valid day-of-month.)
+Adds a patient to the patient records. 
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​ [risk/RISK]`
 
@@ -178,11 +178,11 @@ Examples:
 
 ### Managing Tags `tag`
 
-### Adding tags to a patient:
+### Adding tags to a patient: `tag -a`
 
 Adds a new tag to a patient’s record.
 
-Format: `tag id/INDEX t/TAG`
+Format: `tag -a INDEX t/TAG`
 
 * Adds a `TAG` to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list.
 * The index must be a **positive integer** 1, 2, 3, ...
@@ -191,13 +191,13 @@ Format: `tag id/INDEX t/TAG`
 
 
 Examples:
-`tag id/1 t/Covid` tags patient with id 1 with a *Covid* tag.
+`tag -a 1 t/Covid` tags the first patient with a *Covid* tag.
 
 ### Deleting a patient's tags : `tag -d`
 
 Deletes a tag from a patient's record.
 
-Format: `tag -d id/INDEX t/TAG`
+Format: `tag -d INDEX t/TAG`
 
 * Deletes the `TAG` from the patient at the specified `INDEX`.
 * The `TAG` must match one of the patient's existing tags.
@@ -205,7 +205,7 @@ Format: `tag -d id/INDEX t/TAG`
 
 
 Examples:
-`tag -d id/1 t/Covid` deletes the *Covid* tag from patient with id 1.
+`tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
 
 ---
 
@@ -213,7 +213,7 @@ Examples:
 
 ### Adding a doctor: `add`
 
-Adds a doctor to the doctor records. (Note: for date of birth, PlannerMD will convert any value beyond the last valid day-of-month to be the last valid day-of-month.)
+Adds a doctor to the doctor records.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`
 
@@ -297,11 +297,11 @@ Examples:
 
 ### Managing Tags `tag`
 
-### Adding tags to a doctor:
+### Adding tags to a doctor: `tag -a`
 
 Adds a new tag to a doctor’s record.
 
-Format: `tag id/INDEX t/TAG`
+Format: `tag -a INDEX t/TAG`
 
 * Adds a `TAG` to the doctor at the specified `INDEX`. The index refers to the index number shown in the displayed doctor list.
 * The index must be a **positive integer** 1, 2, 3, ...
@@ -310,13 +310,13 @@ Format: `tag id/INDEX t/TAG`
 
 
 Examples:
-`tag id/1 t/Pediatrician` tags doctor with id 1 with a *Pediatrician* tag.
+`tag -a 1 t/Pediatrician` tags the first doctor with a *Pediatrician* tag.
 
 ### Deleting a doctor's tags : `tag -d`
 
 Deletes a tag from a doctor's record.
 
-Format: `tag -d id/INDEX t/TAG`
+Format: `tag -d INDEX t/TAG`
 
 * Deletes the `TAG` from the doctor at the specified `INDEX`.
 * The `TAG` must match one of the doctor's existing tags.
@@ -324,7 +324,7 @@ Format: `tag -d id/INDEX t/TAG`
 
 
 Examples:
-`tag -d id/1 t/Pediatrician` deletes the *Pediatrician* tag from doctor with id 1.
+`tag -d 1 t/Pediatrician` deletes the *Pediatrician* tag from the first doctor.
 
 ---
 
