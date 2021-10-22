@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskList;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
@@ -93,6 +94,26 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getTaskListFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTaskListFilePath(Path taskListFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTaskList(ReadOnlyTaskList addressBook) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyTaskList getTaskList() {
         throw new AssertionError("This method should not be called.");
     }
 

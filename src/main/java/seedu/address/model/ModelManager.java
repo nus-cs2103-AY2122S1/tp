@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final AddressBook addressBook;
+    private final TaskListManager taskList;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
@@ -30,19 +31,20 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskList taskList, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(addressBook, taskList , userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
+        this.taskList = new TaskListManager(taskList);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
+        filteredTasks = new FilteredList<>(this.taskList.getTaskList());
         filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new TaskListManager(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -69,6 +71,8 @@ public class ModelManager implements Model {
         userPrefs.setGuiSettings(guiSettings);
     }
 
+    //=========== AddressBook ================================================================================
+
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
@@ -80,7 +84,6 @@ public class ModelManager implements Model {
         userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -118,20 +121,40 @@ public class ModelManager implements Model {
 
     //=========== Task Management ==================================================================================
 
+    @Override
+    public Path getTaskListFilePath() {
+        return userPrefs.getTaskListFilePath();
+    }
+
+    @Override
+    public void setTaskListFilePath(Path taskListFilePath) {
+        requireNonNull(taskListFilePath);
+        userPrefs.getTaskListFilePath(taskListFilePath);
+    }
+
+    @Override
+    public void setTaskList(ReadOnlyTaskList taskList) {
+        this.taskList.resetData(taskList);
+    }
+
+    @Override
+    public ReadOnlyTaskList getTaskList() {
+        return taskList;
+    }
     /**
      * check if tasklist has this task.
      */
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return addressBook.hasTask(task);
+        return taskList.hasTask(task);
     }
 
     /**
      * adding a task to tasklist.
      */
     public void addTask(Task toAdd) {
-        addressBook.addTask(toAdd);
+        taskList.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
     }
 
@@ -139,13 +162,13 @@ public class ModelManager implements Model {
      * deleting a task from tasklist.
      */
     public void deleteTask(Task toDelete) {
-        addressBook.deleteTask(toDelete);
+        taskList.deleteTask(toDelete);
     }
 
     @Override
     public void setTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
-        addressBook.setTask(target, editedTask);
+        taskList.setTask(target, editedTask);
     }
 
     @Override
@@ -160,7 +183,7 @@ public class ModelManager implements Model {
     }
 
     public void markDone(Task task) {
-        addressBook.markDone(task);
+        taskList.markDone(task);
     }
 
     //=========== Order Management ==================================================================================
