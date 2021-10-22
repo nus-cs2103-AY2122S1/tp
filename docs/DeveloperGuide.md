@@ -272,7 +272,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                     | add my contact’s next-of-kin’s information | contact the patient’s next-of-kin should an emergency arise |
 | `* *`  | user                                     | quickly batch-remove contacts whose SHN has been completed | clear outdated contacts |
 | `* *`  | user                                     | delete multiple contacts at once | more easily clean my contacts |
-
+| `* *`    | user                                     | batch-update SHN periods       | extend or shorten the SHN end dates according to government mandates    |
 
 *{More to be added}*
 
@@ -405,6 +405,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: UC07 - Batch-update SHN periods**
+
+**MSS:**
+
+1. User requests to list persons.
+2. Track2Gather shows a list of persons.
+3. User chooses to batch-update the SHN periods.
+4. Track2Gather requests for the required user input to process the update.
+5. User inputs the parameters.
+6. Track2Gather updates all person's SHN period according to the input.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 5a. The given user input is invalid. 
+  * 5a1. Track2Gather shows the correct format for batch-update of SHN periods.
+
+  Use case resumes from step 4.
+
 
 *{More to be added}*
 
@@ -498,6 +521,21 @@ testers are expected to do more *exploratory* testing.
     
     1. Test case: `clear x` (where x is any character)<br>
        Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+
+### Batch-updating SHN periods
+1. Batch-updating SHN periods while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons with an SHN period.
+
+   2. Test case: `tshift 3` or `tshift +3`<br>
+   Expected: All person's SHN end dates will be postponed by `3` days. Details of the batch-update will be displayed as the status message.
+
+   3. Test case: `tshift -3`<br>
+      Expected: All person's SHN end dates will be brought forwards by `3` days. Details of the batch-update will be displayed as the status message.
+
+   4. Test case: `tshift 91`<br>
+      Expected: Unable to shift beyond the limit of `90` days. No person's SHN end dates will be shifted. Error details shown in the status message.
+
+2. _{ more test cases …​ }_
 
 ### Saving data
 

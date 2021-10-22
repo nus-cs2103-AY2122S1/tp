@@ -33,6 +33,8 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
     * **`edit`** : Edit an existing person’s details at the specified index.
    
     * **`find`** : Find a person by name.
+
+    * **`tshift`** : Shifts all person's SHN end dates by the specified number of days.
    
     * **`list`** : Shows a list of all persons.
 
@@ -110,6 +112,20 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`
 
+### Finding persons by name: `tshift`
+
+Shifts all person's SHN end dates by the specified number of days.
+
+Format: `tshift [PLUS_MINUS_SIGN]DAYS`
+* `DAYS` should be a number between `1` and `90` inclusive
+* Postpones the SHN end date if the evaluated value is positive
+* Brings forward the SHN end date if the value is negative
+* The SHN end dates will only be brought forward up to and including a day after the person's SHN start date
+
+Examples:
+* `tshift 3` postpones all SHN end dates by 3 days. This is identical to `tshift +3`
+* `tshift -3` brings forward all SHN end dates by up to 3 days
+
 ### Deleting a person : `delete`
 
 Deletes the person(s) identified by the specified index number(s) used in the displayed persons list.
@@ -178,6 +194,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL cn/CASE_NUMBER ha/HOME_ADDRESS [wa/WORK_ADDRESS] [qa/QUARANTINE_ADDRESS] [sh/ADD_SHN_PERIOD] [kn/NEXT_OF_KIN_NAME] [kp/NEXT_OF_KIN_PHONE] [ka/NEXT_OF_KIN_ADDRESS]`<br> e.g., `add n/Jane p/12345678 e/jane@email.com cn/600204 ha/123 Changi Road #01-100 700123 wa/50 Jurong Road 120050 qa/12 Harbourfront Ring 123012 sh/2021-01-01 2021-01-14 kn/Peter kp/90011234 ka/73 Yishun Drive #10-301 310073`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [cn/CASE_NUMBER] [ha/HOME_ADDRESS]`<br> e.g., `edit 1 n/Henry Hugh`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**TShift** | `tshift [PLUS_MINUS_SIGN]DAYS`<br> e.g., `tshift 3`
 **Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **List** | `list`
 **Clear** | `clear`
