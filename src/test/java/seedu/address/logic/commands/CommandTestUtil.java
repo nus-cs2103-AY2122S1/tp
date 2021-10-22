@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHOOL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
@@ -111,6 +112,7 @@ public class CommandTestUtil {
     public static final String VALID_TIME_RANGE = "1234-1345";
     public static final String VALID_CLASHING_TIME_RANGE = "1300-1355";
     public static final String VALID_NON_CLASHING_TIME_RANGE = "1600-1855";
+    public static final String VALID_LESSON_RATES = "50.50";
     public static final String VALID_SUBJECT = "Language Arts";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
     public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
@@ -120,12 +122,15 @@ public class CommandTestUtil {
     public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
     public static final String CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_CLASHING_TIME_RANGE;
     public static final String NON_CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_NON_CLASHING_TIME_RANGE;
+    public static final String LESSON_RATES_DESC = " " + PREFIX_RATES + VALID_LESSON_RATES;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
 
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
     public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
+    public static final String INVALID_LESSON_RATES_DESC =
+            " " + PREFIX_RATES + "$50.50"; //'$' not allowed in lesson rates
     public static final String INVALID_SUBJECT_DESC = " " + PREFIX_SUBJECT + "-An+"; // Not alphanumeric
     public static final String INVALID_HOMEWORK_DESC =
             " " + PREFIX_HOMEWORK + "Homework cannot be more than fifty characters long,"

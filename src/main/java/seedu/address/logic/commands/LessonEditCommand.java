@@ -21,6 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
@@ -141,10 +142,11 @@ public class LessonEditCommand extends UndoableCommand {
                 .orElse(lessonToEdit.getSubject());
         Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet()
                 .orElse(lessonToEdit.getHomework());
+        LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
 
         return lessonToEdit.isRecurring()
-                ? new RecurringLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet)
-                : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet);
+                ? new RecurringLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate)
+                : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate);
     }
 
     @Override
@@ -195,6 +197,7 @@ public class LessonEditCommand extends UndoableCommand {
         private TimeRange timeRange;
         private Subject subject;
         private Set<Homework> homeworkSet;
+        private LessonRates rate;
 
         // Absence of isRecurring boolean field as changes to type of lesson is disallowed.
 
@@ -209,13 +212,14 @@ public class LessonEditCommand extends UndoableCommand {
             setTimeRange(toCopy.timeRange);
             setSubject(toCopy.subject);
             setHomeworkSet(toCopy.homeworkSet);
+            setRate(toCopy.rate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet);
+            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate);
         }
 
         public Optional<Date> getDate() {
@@ -261,6 +265,14 @@ public class LessonEditCommand extends UndoableCommand {
             this.homeworkSet = (homeworkSet != null) ? new HashSet<>(homeworkSet) : null;
         }
 
+        public Optional<LessonRates> getRate() {
+            return Optional.ofNullable(rate);
+        }
+
+        public void setRate(LessonRates rate) {
+            this.rate = rate;
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -279,7 +291,8 @@ public class LessonEditCommand extends UndoableCommand {
             return getDate().equals(e.getDate())
                 && getTimeRange().equals(e.getTimeRange())
                 && getSubject().equals(e.getSubject())
-                && getHomeworkSet().equals(e.getHomeworkSet());
+                && getHomeworkSet().equals(e.getHomeworkSet())
+                && getRate().equals(e.getRate());
         }
     }
 }

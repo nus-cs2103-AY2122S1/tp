@@ -9,6 +9,7 @@ import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
 
@@ -33,6 +34,7 @@ public class EditLessonDescriptorBuilder {
         descriptor.setTimeRange(lesson.getTimeRange());
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
+        descriptor.setRate(lesson.getLessonRates());
     }
 
     /**
@@ -66,6 +68,14 @@ public class EditLessonDescriptorBuilder {
     public EditLessonDescriptorBuilder withHomeworkSet(String... homeworkList) {
         Set<Homework> homeworkSet = Stream.of(homeworkList).map(Homework::new).collect(Collectors.toSet());
         descriptor.setHomeworkSet(homeworkSet);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Rate} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withRate(String rate) {
+        descriptor.setRate(new LessonRates(rate));
         return this;
     }
 

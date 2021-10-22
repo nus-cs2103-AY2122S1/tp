@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -33,7 +34,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-                PREFIX_SUBJECT, PREFIX_HOMEWORK);
+                PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
 
         // don't allow changes to type of lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
@@ -63,6 +64,10 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
         parseHomeworkForLessonEdit(argMultimap.getAllValues(PREFIX_HOMEWORK))
             .ifPresent(editLessonDescriptor::setHomeworkSet);
+
+        if (argMultimap.getValue(PREFIX_RATES).isPresent()) {
+            editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
+        }
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(LessonEditCommand.MESSAGE_NOT_EDITED);

@@ -14,9 +14,10 @@ public class MakeUpLesson extends Lesson {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
+     * @param rates Cost per lesson for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
+        super(date, timeRange, subject, homework, rates);
     }
 
     /**
@@ -57,24 +58,5 @@ public class MakeUpLesson extends Lesson {
         }
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        String typeOfLesson = "Makeup Lesson";
-        builder.append(typeOfLesson)
-            .append(" ")
-            .append(getStartDate())
-            .append(" Time: ")
-            .append(getTimeRange())
-            .append(" Subject: ")
-            .append(getSubject());
-
-        Set<Homework> homework = getHomework();
-        if (!homework.isEmpty()) {
-            builder.append(" Homework: ");
-            homework.forEach(hw -> builder.append(hw + ", "));
-        }
-        return builder.toString();
-    }
 }
 

@@ -14,9 +14,10 @@ public class RecurringLesson extends Lesson {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
+     * @param rates Cost per lesson for the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
+        super(date, timeRange, subject, homework, rates);
     }
 
     /**
@@ -59,26 +60,6 @@ public class RecurringLesson extends Lesson {
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        String typeOfLesson = "Recurring Lesson";
-        builder.append(typeOfLesson)
-            .append(" ")
-            .append(getDisplayDate())
-            .append(" Time: ")
-            .append(getTimeRange())
-            .append(" Subject: ")
-            .append(getSubject());
-
-        Set<Homework> homework = getHomework();
-        if (!homework.isEmpty()) {
-            builder.append(" Homework: ");
-            homework.forEach(hw -> builder.append(hw + ", "));
-        }
-        return builder.toString();
     }
 
 }

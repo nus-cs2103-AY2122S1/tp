@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -30,6 +31,7 @@ public class LessonAddCommand extends UndoableCommand {
             + "[" + PREFIX_RECURRING + "] "
             + PREFIX_DATE + "dd MMM yyyy "
             + PREFIX_TIME + "HHmm-HHmm "
+            + PREFIX_RATES + "RATES "
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
@@ -39,12 +41,14 @@ public class LessonAddCommand extends UndoableCommand {
             + PREFIX_RECURRING + " "
             + PREFIX_DATE + "09 Dec 2021 "
             + PREFIX_TIME + "1030-1230 "
+            + PREFIX_RATES + "37.50 "
             + PREFIX_SUBJECT + "Math "
             + PREFIX_HOMEWORK + "TYS Page 2";
 
     public static final String COMMAND_EXAMPLE_MAKEUP_LESSON = COMMAND_WORD + " 1 "
             + PREFIX_DATE + "10 Oct 2021 "
             + PREFIX_TIME + "1430-1600 "
+            + PREFIX_RATES + "37.50 "
             + PREFIX_SUBJECT + "Science "
             + PREFIX_HOMEWORK + "TYS Page 2 "
             + PREFIX_HOMEWORK + "Textbook Page 52";

@@ -1,0 +1,38 @@
+@startuml
+!include style.puml
+
+Actor User as user USER_COLOR
+
+box Ui UI_COLOR_T1
+participant ":CommandBox" as MainWindow UI_COLOR
+participant ":CenterPanel" as CenterPanel UI_COLOR
+end box
+
+box Logic LOGIC_COLOR_T1
+participant ":Logic" as Logic LOGIC_COLOR
+end box
+
+user -> MainWindow : "schedule"
+activate MainWindow
+
+MainWindow -> Logic : execute("schedule")
+activate Logic
+
+Logic --> MainWindow : result
+deactivate Logic
+
+MainWindow -> MainWindow : handleSchedule()
+activate MainWindow
+
+MainWindow -> CenterPanel : displaySchedulePanel()
+activate CenterPanel
+
+CenterPanel --> MainWindow
+deactivate CenterPanel
+
+MainWindow --> MainWindow
+deactivate MainWindow
+
+MainWindow --> user : schedule view
+deactivate MainWindow
+@enduml
