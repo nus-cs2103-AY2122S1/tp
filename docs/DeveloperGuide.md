@@ -154,6 +154,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add Command
+
+This command allows the user to add residents or events to the SafeFor(H)All application depending on the currently active tab.
+
+The workflow of the Add command is shown in the Activity diagram illustrated below.
+
+![AddActivityDiagram](images/logic/commands/addcommand/AddActivityDiagram.png)
+
+
+
 ### Find Command
 
 This command allows searching for residents subjected to 1 or more filters for the different available parameters.
