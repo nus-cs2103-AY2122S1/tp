@@ -17,6 +17,8 @@ Here are the interpretations of symbols and formatting used in this document:
 * :bulb: indicates tips.
 * :exclamation: indicates that you should take caution.
 
+--------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
 {:toc}
 
@@ -326,11 +328,15 @@ Action | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## **Glossary**
 
 * **Java**: A widely used programming language
 * **JAR**: An executable java file for you to open the app
 * **GUI**: Graphical User Interface
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **FAQ**
 
