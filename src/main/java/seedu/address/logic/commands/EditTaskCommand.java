@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -32,7 +34,7 @@ public class EditTaskCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a task's information. Must provide at least "
-            + "one field (name/deadline) to be edited. "
+            + "one editable field (name/deadline) to be edited. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
             + PREFIX_TASK_ID + "TASK ID "
@@ -43,7 +45,10 @@ public class EditTaskCommand extends EditCommand {
             + PREFIX_TASK_ID + "T1 "
             + PREFIX_TASK_NAME + "V13 "
             + PREFIX_TASK_DEADLINE + "21 Oct 2021 "
-            + "(edits all fields)";
+            + "(edits all fields)"
+            + "You may omit editable fields that are not being edited.";
+
+    private static Logger logger = Logger.getLogger("Edit Task Logger");
 
     private EditTaskDescriptor editTaskDescriptor;
     private ModuleName moduleName;
@@ -78,9 +83,6 @@ public class EditTaskCommand extends EditCommand {
         throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
     }
 
-    // Edit Task -> Edit task in Module
-    // Go through student list of module, for each student, change the task's description but not the completion(?)
-
     /**
      * Edits a task's information. The task will be from the specified student.
      *
@@ -97,6 +99,8 @@ public class EditTaskCommand extends EditCommand {
             if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
                 Task editedTask = createEditedTask(task, editTaskDescriptor);
                 // replaces the old task with the editedTask
+                logger.log(Level.INFO, "editing task: " + task.getTaskId()
+                        + " of all students in module: " + task.getModuleNameString());
                 studentTaskList.setTask(task, editedTask);
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
             }
@@ -120,6 +124,8 @@ public class EditTaskCommand extends EditCommand {
             if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
                 Task editedTask = createEditedTask(task, editTaskDescriptor);
                 // replaces the old task with the editedTask
+                logger.log(Level.INFO, "editing task: " + task.getTaskId()
+                        + " of module: " + module.getName());
                 moduleTaskList.setTask(task, editedTask);
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
             }
