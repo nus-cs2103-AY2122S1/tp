@@ -29,6 +29,7 @@ public class JsonAdaptedMemberTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_POSITION = "#friend";
     private static final String INVALID_TASK_NAME = " ";
+    private static final String INVALID_TASK_DEADLINE = "1973/01/01 00:00";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
