@@ -176,6 +176,27 @@ This section describes some noteworthy details on how certain features are imple
 
 * `ReservationList` checks for time crash before adding a new `Reservation`
 
+### Set Tables Command
+
+#### Implementation
+
+- Set Tables command `[settables]` takes in a list of numbers as arguments and creates a TableList that is stored in the ModelManager
+
+- The input integers have to be comma separated and each integer is taken as the size of one new table. 
+
+- Input is checked to be valid and exception is thrown if the input are not positive-integers
+
+- Input integers can also be formatted as `[size of table]x[number of tables with this size]`
+  - This allows the user to quickly add large number of tables with the same table size at once instead of typing out the entire list
+  - (eg. Instead of typing `settables 10,10,10,10,10,6,6,6,6,1`, the user can type `settables 10x5,6x4,1` which help in efficiency as a keyboard-preferred user)
+
+- There is no add/remove/edit table or table list
+  - This is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
+
+- Everytime user uses this command, the entire list of tables will be replaced, and ALL reservations will be deleted.
+  - Again, this is to prevent the reservations and previously-linked table id not being in sync
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -616,6 +637,7 @@ Use case ends.
 * **Employment type** : Used to distinguish the different categories of employees (Part-time, Full-time etc.)
 * **Shift**: Time slot that employee is supposed to be working
 * **Supplier**: One of the types of contact, used to represent a supplier of the restaurant
+* **Table**: Contains a size and a table ID, and is used to ensure that each reservation has an available table
 * **Reservation**: Reservations can be made by customers for a specific timeslot in the restaurant
 * **Waiting list**: List of customers who are unable to get a reservation due to maxed-out reservations
 
