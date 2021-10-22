@@ -154,6 +154,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Filter applicants feature
+
+#### Implementation
+
+The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
+which filters its contents based on a specified `Predicate`.  
+This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called.
+
+Given below is an example usage scenario of the applicant filter feature.
+
+*{More to be added}*
+
+#### Rationale for implementation
+
+The `Descriptor` pattern (used similarly in features such as the editing of applicants) comes in handy whenever its corresponding command accepts a variable number of arguments & unspecified arguments are assumed to be ignored.
+For instance, the edit applicant feature accepts a variable number of fields to be edited, and leaves all unspecified fields untouched.  
+
+The filter feature fits in this category, as the user should be able to specify a variable number of filtering criteria,
+and unspecified criteria should be left out of the filter.
+Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`.
+It is also used to in the validation of the filtering criteria.
+
+*{More to be added}*
+
+#### Alternatives considered
+
+- Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`
+  - Does not make good use of the in-built functionality of `FilteredList`
+
+*{More to be added}*
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
