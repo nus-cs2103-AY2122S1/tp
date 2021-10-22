@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Task;
@@ -14,37 +14,37 @@ public class JsonAdaptedTask {
 
     public static final String MISSING_NAME_MESSAGE_FORMAT = "Task name field is missing!";
 
-    private final String task;
+    private final String taskName;
+    private final String taskDate;
+    private final String taskTime;
+    private final String taskVenue;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given {@code task}.
      */
     @JsonCreator
-    public JsonAdaptedTask(String task) {
-        this.task = task;
+    public JsonAdaptedTask(@JsonProperty("taskName") String taskName, @JsonProperty("taskDate") String taskDate,
+                           @JsonProperty("taskTime") String taskTime, @JsonProperty("taskVenue") String taskVenue) {
+        this.taskName = taskName;
+        this.taskDate = taskDate;
+        this.taskTime = taskTime;
+        this.taskVenue = taskVenue;
     }
 
     /**
      * Converts a given {@code Task} into this class for Jackson use.
      */
     public JsonAdaptedTask(Task source) {
-        String taskName = source.getTaskName().taskName;
-        String taskDate = source.getDate() == null
-                ? " "
-                : source.getDate().taskDate.toString();
-        String taskTime = source.getTime() == null
-                ? " "
+        this.taskName = source.getTaskName().taskName;
+        this.taskDate = source.getDate() == null
+                ? null
+                : source.getDate().toString();
+        this.taskTime = source.getTime() == null
+                ? null
                 : source.getTime().toString();
-        String taskVenue = source.getVenue() == null
-                ? " "
+        this.taskVenue = source.getVenue() == null
+                ? null
                 : source.getVenue().venue;
-        String seperator = "|";
-        task = taskName + seperator + taskDate + seperator + taskTime + seperator + taskVenue;
-    }
-
-    @JsonValue
-    public String getTask() {
-        return task;
     }
 
     /**
@@ -53,13 +53,8 @@ public class JsonAdaptedTask {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Task toModelType() throws IllegalValueException {
-        String[] taskDetails = task.split("\\|");
-        String taskName = taskDetails[0];
-        String taskDate = taskDetails[1];
-        String taskTime = taskDetails[2];
-        String taskVenue = taskDetails[3];
 
-        if (taskName.equals(" ")) {
+        if (taskName == null) {
             throw new IllegalValueException(MISSING_NAME_MESSAGE_FORMAT);
         }
         if (!TaskName.isValidTaskName(taskName)) {
@@ -68,7 +63,7 @@ public class JsonAdaptedTask {
         final TaskName modelName = new TaskName(taskName);
 
         TaskDate modelDate = null;
-        if (!taskDate.equals(" ")) {
+        if (taskDate != null) {
             if (TaskDate.isValidTaskDate(taskDate)) {
                 modelDate = new TaskDate(taskDate);
             } else {
@@ -77,7 +72,7 @@ public class JsonAdaptedTask {
         }
 
         TaskTime modelTime = null;
-        if (!taskTime.equals(" ")) {
+        if (taskTime != null) {
             if (TaskTime.isValidTaskTime(taskTime)) {
                 modelTime = new TaskTime(taskTime);
             } else {
@@ -86,7 +81,7 @@ public class JsonAdaptedTask {
         }
 
         Venue modelVenue = null;
-        if (!taskVenue.equals(" ")) {
+        if (taskVenue != null) {
             if (Venue.isValidVenue(taskVenue)) {
                 modelVenue = new Venue(taskVenue);
             } else {

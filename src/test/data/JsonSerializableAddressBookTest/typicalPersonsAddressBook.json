@@ -6,7 +6,22 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
-    "tasks" : [ "eat| | | ", "sleep| | | ", "study| | | " ],
+    "tasks" : [ {
+      "taskName" : "eat",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "sleep",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "study",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : "Owner of Lunta Inc"
   }, {
     "name" : "Benson Meier",
@@ -14,7 +29,22 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
-    "tasks" : [ "a| | | ", "b| | | ", "c| | | " ],
+    "tasks" : [ {
+      "taskName" : "a",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "bc",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "c",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : "HR in Sarimba"
   }, {
     "name" : "Benjamin Wesley",
@@ -22,7 +52,22 @@
     "email" : "benwe@example.com",
     "address" : "23, Coleman Street, #05-30",
     "tagged" : [ "cousin" ],
-    "tasks" : [ "work| | | ", "play| | | ", "sleep| | | " ],
+    "tasks" : [ {
+      "taskName" : "eat",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "sleep",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "study",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : ""
   },{
     "name" : "Carl Kurz",
@@ -38,7 +83,22 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tagged" : [ "friends" ],
-    "tasks" : [ "c| | | ", "d| | | ", "e| | | " ],
+    "tasks" : [ {
+      "taskName" : "c",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "d",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    }, {
+      "taskName" : "e",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : "Potential Client?"
   }, {
     "name" : "Elle Meyer",
@@ -46,7 +106,12 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tagged" : [ ],
-    "tasks" : [ "consult prof Damith about project iteration v1.| | | " ],
+    "tasks" : [ {
+      "taskName" : "consult prof Damith about project iteration v1.",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : "CS2103/T Teammate"
   }, {
     "name" : "Fiona Kunz",
@@ -54,7 +119,12 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tagged" : [ ],
-    "tasks" : [ "a| | | " ],
+    "tasks" : [ {
+      "taskName" : "a",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : "b"
   }, {
     "name" : "George Best",
@@ -62,7 +132,12 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ],
-    "tasks" : [ "a| | | ", "bbb| | | ", "ccccc| | | ", "ddddd| | | ", "eeeeeeeeeeeee| | | " ],
+    "tasks" : [ {
+      "taskName" : "asdasd",
+      "taskDate" : null,
+      "taskTime" : null,
+      "taskVenue" : null
+    } ],
     "description" : "fffffffffffffff"
   } ]
 }

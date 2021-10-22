@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
@@ -16,7 +15,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
-import seedu.address.storage.JsonAdaptedTask;
+import seedu.address.model.task.TaskName;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -105,12 +104,9 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTasks(String... tasks) {
         List<Task> taskList = new ArrayList<>();
         for (String task : tasks) {
-            try {
-                Task newTask = new JsonAdaptedTask(task).toModelType();
-                taskList.add(newTask);
-            } catch (IllegalValueException e) {
-                System.out.println("Error");
-            }
+            TaskName taskName = new TaskName(task);
+            Task newTask = new Task(taskName, null, null, null);
+            taskList.add(newTask);
         }
         descriptor.setTasks(taskList);
         return this;
