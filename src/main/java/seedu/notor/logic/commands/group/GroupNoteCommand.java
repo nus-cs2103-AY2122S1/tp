@@ -21,11 +21,11 @@ public class GroupNoteCommand extends GroupCommand {
     private static final String COMMAND_DESCRIPTION =
             ": Edits the notes of the group identified by the index number used in the current group listing.\n";
 
-    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters: none"
             + "Example: "
-            + GroupCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+            + GroupCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final GroupExecutor executor;
 
