@@ -111,10 +111,12 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
-                .append(": Availability: ")
-                .append(getAvailability());
-
+                .append(getPhone());
+        Availability availability = getAvailability();
+        if (!availability.isEmpty()) {
+            builder.append("; Availability: ");
+            builder.append(availability);
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
