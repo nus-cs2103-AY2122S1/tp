@@ -2,12 +2,16 @@ package seedu.address.testutil;
 
 import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * A utility class to help with building Person objects.
@@ -21,6 +25,7 @@ public class PersonBuilder {
     private Name name;
     private Phone phone;
     private Availability availability;
+    private Set<Tag> tags;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -29,6 +34,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         availability = new Availability(DEFAULT_AVAILABILITY);
+        tags = new HashSet<>();
     }
 
     /**
@@ -38,6 +44,7 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         availability = personToCopy.getAvailability();
+        tags = new HashSet<>(personToCopy.getTags());
     }
 
     /**
@@ -77,8 +84,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withTags(String ... tags) {
+        this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, availability);
+        return new Person(name, phone, availability, tags);
     }
 
 }
