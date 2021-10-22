@@ -64,7 +64,9 @@ These are the key terms defined for usage of the commands:
 
 - **Alias**: These are alternative words that you can use to perform the same command 
 
-<img src="images/Walkthrough.png" width="800px">
+Refer to the image below for more information on the different components of ContHACKS!
+
+<img src="images/Walkthrough.png" width="1000px">
 
 Notes about the command format:<br>
 
