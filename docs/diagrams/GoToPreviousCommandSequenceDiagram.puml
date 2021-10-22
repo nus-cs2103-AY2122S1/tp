@@ -1,0 +1,33 @@
+@startuml
+!include style.puml
+
+Actor User USER_COLOR
+
+box "UI" UI_COLOR_T1
+participant ":CommandBox" as CommandBox UI_COLOR
+participant ":CommandInput" as CommandInput UI_COLOR_T3
+end box
+
+box "History" COMMONS_COLOR
+participant ":StringHistory" as History COMMONS_COLOR_T2
+end box
+
+User -> CommandBox : Press Up Key
+activate CommandBox UI_COLOR
+
+    CommandBox -> CommandInput : next()
+    activate CommandInput UI_COLOR_T3
+
+        CommandInput -> History : get(index)
+        activate History COMMONS_COLOR_T2
+
+        CommandInput <-- History : previousCommand
+        deactivate History
+
+    CommandBox <-- CommandInput : previousCommand
+    deactivate CommandInput
+
+User <-- CommandBox : Display Previous Command
+deactivate CommandBox
+
+@enduml
