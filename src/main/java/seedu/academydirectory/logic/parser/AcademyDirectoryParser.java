@@ -18,14 +18,14 @@ import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.FindCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
+import seedu.academydirectory.logic.commands.HistoryCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
 import seedu.academydirectory.logic.commands.ParticipationCommand;
 import seedu.academydirectory.logic.commands.RetrieveCommand;
+import seedu.academydirectory.logic.commands.RevertCommand;
 import seedu.academydirectory.logic.commands.ShowCommand;
 import seedu.academydirectory.logic.commands.SortCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.logic.commands.HistoryCommand;
-import seedu.academydirectory.logic.commands.RevertCommand;
 
 /**
  * Parses user input.

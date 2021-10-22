@@ -79,8 +79,8 @@ public class AddCommand extends Command {
 
         model.addStudent(toAdd);
 
-        model.commit(String.format(MESSAGE_SUCCESS, toAdd));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getName()));
+        model.commit(String.format(MESSAGE_SUCCESS, toAdd.getName()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
