@@ -116,21 +116,55 @@ public class DeletePersonCommand extends Command {
         }
     }
 
-    private String deleteAll(Model model) {
-        List<Person> lastShownList = model.getFilteredPersonList();
-        int first = targetIndex.getZeroBased();
-        int last = endIndex.getZeroBased();
-        int numberOfDeletedPersons = 0;
-        StringBuilder deletedPersons = new StringBuilder();
+    private boolean isDeleteLesson() {
+        return moduleCode.getLessonCodes().size() > 0;
+    }
 
+    private String deleteLessonTag(Model model, List<Person> filteredList) {
+        int first = 0;
+        int last = filteredList.size() - 1;
+        int numberOfDeletedPersons = 0;
+        int numberOfEditedPersons = 0;
+        StringBuilder deletedPersons = new StringBuilder();
+        StringBuilder editedPersons = new StringBuilder();
         while (last >= first) {
-            Person personToDelete = lastShownList.get(last);
-            model.deletePerson(personToDelete);
-            deletedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToDelete));
-            numberOfDeletedPersons++;
+            Person personToCheck = filteredList.get(last);
+            if (hasMoreThan1Lesson(personToCheck.get(moduleCode))) {
+                deleteModuleLesson(personToCheck, model, personToCheck.get(moduleCode));
+                editedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToCheck));
+                numberOfEditedPersons++;
+            } else {
+                deletedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, filteredList.get(last)));
+                model.deletePerson(filteredList.get(last));
+                numberOfDeletedPersons++;
+            }
             last--;
         }
-        return String.format(MESSAGE_NUMBER_DELETED_PERSON, numberOfDeletedPersons) + deletedPersons;
+        return String.format(MESSAGE_NUMBER_DELETED_PERSON, numberOfDeletedPersons) + deletedPersons
+                + String.format(MESSAGE_NUMBER_EDITED_PERSON, numberOfEditedPersons) + editedPersons;
+    }
+
+    private boolean hasMoreThan1Lesson(ModuleCode moduleCode) {
+        return moduleCode.getLessonCodes().size() > 1;
+    }
+
+    private void deleteModuleLesson(Person person, Model model, ModuleCode personModuleCode) {
+        Set<LessonCode> tags = new HashSet<>(personModuleCode.getLessonCodes());
+        String onlyTags = moduleCode.toString().substring(moduleCode.toString().indexOf(" "));
+        String lessonName = onlyTags.substring(onlyTags.indexOf("[") + 1, onlyTags.indexOf("]"));
+        tags.remove(new LessonCode(lessonName));
+
+        ModuleCode newModuleCode = new ModuleCode(moduleCode.getModuleCodeName(), tags);
+        Set<ModuleCode> moduleCodes = new HashSet<>(person.getModuleCodes());
+        moduleCodes.remove(moduleCode);
+        moduleCodes.add(newModuleCode);
+
+        EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
+        editPersonDescriptor.setModuleCodes(moduleCodes);
+
+        Person editedPerson = new Person(person.getName(), person.getEmail(), moduleCodes, person.getPhone(),
+                person.getTeleHandle(), person.getRemark());
+        model.setPerson(person, editedPerson);
     }
 
     private String deleteRelatedPersonByModuleCode(Model model, List<Person> filteredList) {
@@ -169,55 +203,21 @@ public class DeletePersonCommand extends Command {
         model.setPerson(person, editedPerson);
     }
 
-    private String deleteLessonTag(Model model, List<Person> filteredList) {
-        int first = 0;
-        int last = filteredList.size() - 1;
+    private String deleteAll(Model model) {
+        List<Person> lastShownList = model.getFilteredPersonList();
+        int first = targetIndex.getZeroBased();
+        int last = endIndex.getZeroBased();
         int numberOfDeletedPersons = 0;
-        int numberOfEditedPersons = 0;
         StringBuilder deletedPersons = new StringBuilder();
-        StringBuilder editedPersons = new StringBuilder();
+
         while (last >= first) {
-            Person personToCheck = filteredList.get(last);
-            if (hasMoreThan1Lesson(personToCheck.get(moduleCode))) {
-                deleteModuleLesson(personToCheck, model, personToCheck.get(moduleCode));
-                editedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToCheck));
-                numberOfEditedPersons++;
-            } else {
-                deletedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, filteredList.get(last)));
-                model.deletePerson(filteredList.get(last));
-                numberOfDeletedPersons++;
-            }
+            Person personToDelete = lastShownList.get(last);
+            model.deletePerson(personToDelete);
+            deletedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToDelete));
+            numberOfDeletedPersons++;
             last--;
         }
-        return String.format(MESSAGE_NUMBER_DELETED_PERSON, numberOfDeletedPersons) + deletedPersons
-                + String.format(MESSAGE_NUMBER_EDITED_PERSON, numberOfEditedPersons) + editedPersons;
-    }
-
-    private boolean isDeleteLesson() {
-        return moduleCode.getLessonCodes().size() > 0;
-    }
-
-    private boolean hasMoreThan1Lesson(ModuleCode moduleCode) {
-        return moduleCode.getLessonCodes().size() > 1;
-    }
-
-    private void deleteModuleLesson(Person person, Model model, ModuleCode personModuleCode) {
-        Set<LessonCode> tags = new HashSet<>(personModuleCode.getLessonCodes());
-        String onlyTags = moduleCode.toString().substring(moduleCode.toString().indexOf(" "));
-        String lessonName = onlyTags.substring(onlyTags.indexOf("[") + 1, onlyTags.indexOf("]"));
-        tags.remove(new LessonCode(lessonName));
-
-        ModuleCode newModuleCode = new ModuleCode(moduleCode.getModuleCodeName(), tags);
-        Set<ModuleCode> moduleCodes = new HashSet<>(person.getModuleCodes());
-        moduleCodes.remove(moduleCode);
-        moduleCodes.add(newModuleCode);
-
-        EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
-        editPersonDescriptor.setModuleCodes(moduleCodes);
-
-        Person editedPerson = new Person(person.getName(), person.getEmail(), moduleCodes, person.getPhone(),
-                person.getTeleHandle(), person.getRemark());
-        model.setPerson(person, editedPerson);
+        return String.format(MESSAGE_NUMBER_DELETED_PERSON, numberOfDeletedPersons) + deletedPersons;
     }
 
     @Override
