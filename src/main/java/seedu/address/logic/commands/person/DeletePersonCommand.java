@@ -150,8 +150,10 @@ public class DeletePersonCommand extends Command {
 
     private void deleteModuleLesson(Person person, Model model, ModuleCode personModuleCode) {
         Set<LessonCode> tags = new HashSet<>(personModuleCode.getLessonCodes());
-        String onlyTags = moduleCode.toString().substring(moduleCode.toString().indexOf(" "));
+        String onlyTags = moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1);
+        System.out.println(onlyTags);
         String lessonName = onlyTags.substring(onlyTags.indexOf("[") + 1, onlyTags.indexOf("]"));
+        System.out.println(lessonName);
         tags.remove(new LessonCode(lessonName));
 
         ModuleCode newModuleCode = new ModuleCode(moduleCode.getModuleCodeName(), tags);
