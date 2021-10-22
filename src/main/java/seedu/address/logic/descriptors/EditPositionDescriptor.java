@@ -19,7 +19,6 @@ public class EditPositionDescriptor {
 
     /**
      * Copy constructor.
-     * A defensive copy of {@code tags} is used internally.
      */
     public EditPositionDescriptor(EditPositionDescriptor toCopy) {
         setTitle(toCopy.title);

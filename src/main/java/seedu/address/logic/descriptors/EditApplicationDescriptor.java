@@ -44,10 +44,10 @@ public class EditApplicationDescriptor {
 
     public Application createEditedApplication(Application applicationToEdit) {
         assert applicationToEdit != null;
-        Position position = getPosition().orElse(applicationToEdit.getPosition());
-        ApplicationStatus status = getStatus().orElse(applicationToEdit.getStatus());
+        Position updatedPosition = getPosition().orElse(applicationToEdit.getPosition());
+        ApplicationStatus updatedStatus = getStatus().orElse(applicationToEdit.getStatus());
 
-        return new Application(position, status);
+        return new Application(updatedPosition, updatedStatus);
     }
 
 
