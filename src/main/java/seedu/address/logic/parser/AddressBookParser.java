@@ -20,6 +20,8 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MarkDoneCommand;
+import seedu.address.logic.commands.ShowCompletedTasks;
+import seedu.address.logic.commands.ShowIncompleteTasks;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,6 +86,12 @@ public class AddressBookParser {
 
         case ListTaskCommand.COMMAND_WORD:
             return new ListTaskCommand();
+
+        case ShowCompletedTasks.COMMAND_WORD:
+            return new ShowCompletedTasks();
+
+        case ShowIncompleteTasks.COMMAND_WORD:
+            return new ShowIncompleteTasks();
 
         case MarkDoneCommand.COMMAND_WORD:
             return new MarkDoneCommandParser().parse(arguments);
