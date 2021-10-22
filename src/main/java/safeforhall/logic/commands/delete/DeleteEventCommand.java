@@ -31,6 +31,7 @@ public class DeleteEventCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert false;
         requireNonNull(model);
         List<Event> lastShownList = model.getFilteredEventList();
         List<Event> targetEventsArray = new ArrayList<>();
