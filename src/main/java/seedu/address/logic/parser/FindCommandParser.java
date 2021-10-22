@@ -75,7 +75,9 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         private void put(PersonField field, List<String> values) {
-            inputs.put(field, values.stream().map(v -> v.trim().replaceAll(ParserUtil.REGEX_SURROUNDING_DOUBLE_QUOTE, "")).collect(Collectors.toList()));
+            inputs.put(field, values.stream().map(v -> v.trim()
+                    .replaceAll(ParserUtil.REGEX_SURROUNDING_DOUBLE_QUOTE, ""))
+                    .collect(Collectors.toList()));
         }
 
         private Predicate<Person> getPredicate(String args, PersonField field) {
