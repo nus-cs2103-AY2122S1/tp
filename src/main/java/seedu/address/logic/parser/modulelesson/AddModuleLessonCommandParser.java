@@ -27,9 +27,9 @@ import seedu.address.model.person.Remark;
  */
 public class AddModuleLessonCommandParser implements Parser<AddModuleLessonCommand> {
     /**
-     * Parses {@code userInput} into a command and returns it.
+     * Parses the given {@code String} of arguments in the context of the AddModuleLessonCommand
+     * and returns an AddModuleLessonCommand object for execution.
      *
-     * @param args
      * @throws ParseException if {@code String} does not conform the expected format
      */
     @Override
