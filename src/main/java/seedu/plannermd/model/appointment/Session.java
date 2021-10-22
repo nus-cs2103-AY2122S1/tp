@@ -129,6 +129,14 @@ public class Session {
         return duration.getMinutes();
     }
 
+    /**
+     * Returns the start time in input format.
+     */
+    public String toInputStringFormat() {
+        return start.format(TIME_FORMATTER);
+    }
+
+
     @Override
     public String toString() {
         return "Start: " + getFormattedStartTime() + "; End: " + getFormattedEndTime();

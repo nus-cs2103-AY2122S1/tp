@@ -18,7 +18,7 @@ public class JsonAdaptedAppointment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
 
-    private static final String IDENTIFIER_DATE = "date";
+    public static final String IDENTIFIER_DATE = "date";
 
     private final JsonAdaptedPatient patient;
     private final JsonAdaptedDoctor doctor;

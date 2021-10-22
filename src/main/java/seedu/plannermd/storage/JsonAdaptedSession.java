@@ -15,8 +15,7 @@ public class JsonAdaptedSession {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Appointment's %s field is missing!";
 
-    private static final String IDENTIFIER_START_TIME = "Start Time";
-    private static final String IDENTIFIER_DURATION = "Duration";
+    public static final String IDENTIFIER_START_TIME = "Start Time";
 
     private final String start;
     private final Integer duration;
@@ -56,7 +55,8 @@ public class JsonAdaptedSession {
         }
 
         if (duration == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, IDENTIFIER_DURATION));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Duration.class.getSimpleName()));
         }
         if (!Duration.isValidDuration(duration)) {
             throw new IllegalValueException(Duration.MESSAGE_CONSTRAINTS);
