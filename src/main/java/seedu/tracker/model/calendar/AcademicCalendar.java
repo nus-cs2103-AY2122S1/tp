@@ -31,8 +31,13 @@ public class AcademicCalendar {
      * @return true if this academic calendar is chronologically before the other
      */
     public boolean isBefore(AcademicCalendar other) {
-        return getAcademicYear().value <= other.getAcademicYear().value
-                && getSemester().value < other.getSemester().value;
+        if (getAcademicYear().value < other.getAcademicYear().value) {
+            return true;
+        } else if (getAcademicYear().value > other.getAcademicYear().value) {
+            return false;
+        } else {
+            return getSemester().value < other.getSemester().value;
+        }
     }
 
     /**
