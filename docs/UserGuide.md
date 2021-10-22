@@ -193,6 +193,19 @@ Examples:
 * **`list`** followed by **`delete`** `2` deletes the 2nd person in the address book.
 * **`find`** `Betsy` followed by **`delete`** `1` deletes the 1st person in the results of the **`find`** command.
 
+### Computing statistics of a tutorial group : `stats`
+
+Computes the gender and nationality statistics of the specified tutorial group.
+
+Format: `stats TUTORIAL_GROUP`
+
+* Computes the statistics of the specified tutorial group.
+* If there are no tutorial groups with the given name/number, it will notify the user.
+
+Examples:
+
+* `stats T09` computes the gender and nationality statistics of the tutorial group `T09`.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
