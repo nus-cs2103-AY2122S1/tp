@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 <p align="center">
-  <img src="images/ta_logo_cropped.png">
+  <img src="images/ta_logo_fdfdfd_cropped.png">
 </p>
 
 Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find answers, learn about the features, and manage tutoring better.
