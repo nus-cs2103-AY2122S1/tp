@@ -1,5 +1,8 @@
-# ModuLink: User Guide
+# ModuLink
 ModuLink is a **desktop app for CS students to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a CS student and you need a platform to connect with your peers and to find project groups, ModuLink is the choice for you.
+
+## User Guide
+Here is a reference guide to the features and potential uses of ModuLink.
 
 **Table of Contents**
 1. [Quick Start](#quick-start)
@@ -24,9 +27,9 @@ ModuLink is a **desktop app for CS students to manage contacts, optimized for us
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-    * **`create`**`n/John Doe id/A0222594A p/24680135 e/johnd@example.com` : Creates a ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
+    * **`create`**`n/John Doe id/A0123456A p/24680135 e/johnd@example.com` : Creates a ModuLink user profile with the name John Doe and the relevant student ID, phone number and email.
 
-    * **`add`**`id/A0222594A` : Adds the profile with student ID A0222594A to your ModuLink favourite contacts.
+    * **`addFav`**`id/A0222594A` : Adds the profile with student ID A0222594A to your ModuLink favourite contacts.
 
     * **`list`** : Lists all profiles in your ModuLink favourites list.
 
@@ -95,7 +98,7 @@ Creates your user profile. You can also choose to add modules and indicate your 
 
 Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/MODULE [GROUP_STATUS]]...`
 
-:information_source: Notes:
+**:information_source: Notes:**
 * STUDENT_ID must be unique
 * The group statuses available are: Need member, Need group, Don't need group/Not looking for group.
 * The default status when a module is added without a description is 'Don't need group/Not looking for group'. The respective module will be displayed as a blue tag.
@@ -105,19 +108,18 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/MODULE [GROUP_S
 Examples:
 * `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2103T`
 * `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com mod/CS2101 need a member`
-* `create n/Betsy Crowe id/A0222594A p/24680135 e/betsycrowe@example.com`
+* `create n/Alexa Tan id/A0012367N p/998877662 e/alexa.tan@example.com mod/CS2030S need member mod/CS2100`
     <br>
     <br>
 ![result for 'create n/Alexa Tan id/A0012367N p/998877662 e/alexa.tan@example.com mod/CS2030S need member mod/CS2100'](images/screenshots/createProfile.png)
 
 #### 1.2 Edit your profile : `edit`
 
-Edits your own profile. You can choose to edit any attributes in your profile. You can edit multiple attributes at once.
+Edits your own profile. You can choose to edit any attributes in your own profile. You can edit multiple attributes at once.
 
 Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
 
 Examples:
-* `edit id/A1234567R`
 * `edit p/123321432 e/changedemail@example.com`
     <br>
   <br>
@@ -158,7 +160,7 @@ Edits the group status of user-specified module(s).
 
 Format: `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...`
 
-:information_source: Notes:
+**:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
 
 Examples:
@@ -183,7 +185,7 @@ Examples:
 
 ### 3. Manage favorites
 
-#### 3.1 Add a profile as a favorite : `addfav`
+#### 3.1 Add a profile as a favorite : `addFav`
 
 Adds a profile to your favourites list.
 
@@ -196,7 +198,7 @@ Examples:
   <br>
   ![result for 'addfav A1234967R'](images/screenshots/addfav.png)
 
-### 3.2 Remove a profile from favourites list : `remfav`
+### 3.2 Remove a profile from favourites list : `remFav`
 
 Removes a user-specified profile from the favourites list.
 
@@ -220,7 +222,7 @@ Format: `list`
     <br>
 ![result for 'list'](images/screenshots/list.png)
 
-#### 4.2 List all profiles marked as favorite : `listfav`
+#### 4.2 List all profiles marked as favorite : `listFav`
 
 Shows a list of all profiles that the user has added to their favourites list.
 
@@ -315,7 +317,7 @@ ModuLink's data is saved in the hard disk automatically after any command that c
 
 ModuLink's data are saved as a JSON file `[JAR file location]/data/modulink.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: Caution:
 If your changes to the data file makes its format invalid, ModuLink will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -332,14 +334,14 @@ If your changes to the data file makes its format invalid, ModuLink will discard
 
 ### Parameter summary
 
-Prefix | Parameter | With which commands can you use it?
--------|-----------|------------------------------------
-**`n/`** | NAME | `create`, `edit`
-**`id/`** | STUDENT ID | `create`, `edit`, `view`, `addfav`, `remfav`, `findId`
-**`p/`** | PHONE NUMBER | `create`, `edit`
-**`e/`** | EMAIL | `create`, `edit`
-**`mod/`** | MODULE | `create`, `edit`, `addMod`, `remMod`, `editGroupStatus`, `filter`
-**`group/`** | GROUP STATUS | `filter`
+Prefix | Parameter
+-------|-----------
+**`n/`** | NAME
+**`id/`** | STUDENT ID
+**`p/`** | PHONE NUMBER
+**`e/`** | EMAIL
+**`mod/`** | MODULE
+**`group/`** | GROUP STATUS
 
 ### Command summary
 
@@ -351,12 +353,12 @@ Action | Format, Examples
 **Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T Need a member mod/CS1231S`
 **Edit module group status** | `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...`, `editGroupStatus mod/CS2103T updateStatus/Need a member`
 **Remove module** | `remMod mod/MODULE [mod/MODULE]...`, `remMod mod/CS2100 mod/CS2103T`
-**Add Favourite** | `addfav STUDENT_ID` <br> e.g., `addfav A0222594A`
-**Remove Favourite** | `remfav STUDENT_ID` <br> e.g., `remfav A0222594A`
+**Add Favourite** | `addFav STUDENT_ID` <br> e.g., `addFav A0222594A`
+**Remove Favourite** | `remFav STUDENT_ID` <br> e.g., `remFav A0222594A`
 **List** | `list`
-**List favorites** | `listfav`
+**List favorites** | `listFav`
 **Find by name** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex david` returns `Alex Yeoh, David Li`
-**Find by student ID** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `find A0222594A` returns person with student Id matching A0222594A.
+**Find by student ID** | `findId KEYWORD [MORE_KEYWORDS]` <br> e.g., `findId A0222594A` returns person with student Id matching A0222594A.
 **Filter** | `filter mod/MODULE_CODE [group/GROUP_STATUS]`<br> e.g. no group filter: `filter mod/CS2030` with group filter: `filter mod/CS2030 group/SM`
 **Help** | `help`
 **Exit** | `exit`
