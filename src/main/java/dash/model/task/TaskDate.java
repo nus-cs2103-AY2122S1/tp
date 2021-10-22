@@ -142,7 +142,7 @@ public class TaskDate {
                 LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormat));
                 isDate = true;
             } catch (Exception e) {
-                System.out.println("wrong format");
+                isDate = isDate || false;
             }
         }
         return isDate;
@@ -158,7 +158,7 @@ public class TaskDate {
                 isDate = true;
                 taskDateString = dateString;
             } catch (Exception e) {
-                System.out.println("wrong format");
+                isDate = isDate || false;
             }
         }
         return isDate;
@@ -178,7 +178,7 @@ public class TaskDate {
                 LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat));
                 isTime = true;
             } catch (Exception e) {
-                System.out.println("wrong format");
+                isTime = isTime || false;
             }
         }
         return isTime;
@@ -194,7 +194,7 @@ public class TaskDate {
                 isTime = true;
                 taskTimeString = timeString;
             } catch (Exception e) {
-                System.out.println("wrong format");
+                isTime = isTime || false;
             }
         }
         return isTime;
