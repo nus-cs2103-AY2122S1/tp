@@ -28,7 +28,7 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 **Conventions Used**
 
 * `text` : denotes a command to be entered into the command box in TAB.
-* <kbd>TEXT</kbd> : denotes a keyboard input, or a button to be clicked on.
+* <kbd>text</kbd> : denotes a keyboard input, or a button to be clicked on.
 * [text](#about-this-guide) : denotes links to other parts of the document, or links to be opened in the browser.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -437,7 +437,7 @@ TAB data are saved in the hard disk automatically after any command that changes
 
 #### Editing the data file
 
-TAB data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+TAB data are saved as a JSON file **[JAR file location]/data/addressbook.json**. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
@@ -493,7 +493,7 @@ This section records frequently asked questions from users of TAB.
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
-**Q**: I am using a Mac and when I tried to open **Tab.jar**, Mac shows “**TAB.jar** cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
+**Q**: I am using a Mac and when I tried to open **TAB.jar**, Mac shows “TAB.jar cannot be opened because it is from an unidentified developer". How do I resolve this issue? <br>
 **A**: Go to <kbd>System Preferences</kbd> → <kbd>Security & Privacy</kbd> → <kbd>General</kbd> and click <kbd>Open Anyway</kbd> at the bottom as shown in the following screenshot.
 
 ![macSecurity](images/macSecurity.png)
