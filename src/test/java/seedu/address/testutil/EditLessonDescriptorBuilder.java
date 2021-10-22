@@ -1,7 +1,5 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
@@ -29,7 +27,7 @@ public class EditLessonDescriptorBuilder {
      */
     public EditLessonDescriptorBuilder(ModuleLesson lesson) {
         descriptor = new EditLessonDescriptor();
-        descriptor.setModuleCode(lesson.getModuleCodes());
+        descriptor.setModuleCode(lesson.getModuleCode());
         descriptor.setLessonDay(lesson.getDay());
         descriptor.setLessonTime(lesson.getTime());
         descriptor.setRemark(lesson.getRemark());
@@ -38,7 +36,7 @@ public class EditLessonDescriptorBuilder {
     /**
      * Sets the {@code ModuleCode} of the {@code EditLessonDescriptor} that we are building.
      */
-    public EditLessonDescriptorBuilder withModuleCode(Set<ModuleCode> code) {
+    public EditLessonDescriptorBuilder withModuleCode(ModuleCode code) {
         descriptor.setModuleCode(code);
         return this;
     }

@@ -1,20 +1,31 @@
 package seedu.address.logic.commands.modulelesson;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
+import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_DUPLICATE_LESSON;
+import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
-
-import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.ModuleLesson;
-import seedu.address.model.person.ModuleCode;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.ModuleLessonBuilder;
 
@@ -24,18 +35,124 @@ import seedu.address.testutil.ModuleLessonBuilder;
 public class EditModuleLessonCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-//    @Test
-//    public void execute_someFieldsSpecifiedUnfilteredList_success() {
-//        //TODO
-//        Index indexLastLesson = Index.fromOneBased(model.getFilteredModuleLessonList().size());
-//        ModuleLesson lastLesson = model.getFilteredModuleLessonList().get(indexLastLesson.getZeroBased());
-//
-//        ModuleLessonBuilder lessonInList = new ModuleLessonBuilder(lastLesson);
-//        ModuleLesson editedLesson = lessonInList.withModuleCode(VALID_MODULE_CODE_CS2040).build();
-//
-//        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-//                .withModuleCode(new HashSet<ModuleCode>(parseModuleCode(VALID_MODULE_CODE_CS2040))).build()
-//    }
+    @Test
+    public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        //TODO
+        Index indexLastLesson = Index.fromOneBased(model.getFilteredModuleLessonList().size());
+        ModuleLesson lastLesson = model.getFilteredModuleLessonList().get(indexLastLesson.getZeroBased());
 
+        ModuleLessonBuilder lessonInList = new ModuleLessonBuilder(lastLesson);
+        ModuleLesson editedLesson = lessonInList.withModuleCode(VALID_MODULE_CODE_CS2030S).build();
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+        EditModuleLessonCommand editModuleLessonCommand = new EditModuleLessonCommand(indexLastLesson, descriptor);
+
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+
+        expectedModel.setModuleLesson(lastLesson, editedLesson);
+
+        assertCommandSuccess(editModuleLessonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_noFieldSpecifiedUnfilteredList_success() {
+        EditModuleLessonCommand editModuleLessonCommand =
+                new EditModuleLessonCommand(INDEX_FIRST_PERSON, new EditLessonDescriptor());
+        ModuleLesson editedLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+
+        assertCommandSuccess(editModuleLessonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_filteredList_success() {
+        showLessonAtIndex(model, INDEX_FIRST_PERSON);
+
+        ModuleLesson lessonInFilteredList = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ModuleLesson editedLesson = new ModuleLessonBuilder(lessonInFilteredList).withLessonDay("7").build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST_PERSON,
+                new EditLessonDescriptorBuilder().withLessonDay(new LessonDay("7")).build());
+        String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
+
+        expectedModel.setModuleLesson(lessonInFilteredList, editedLesson);
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_duplicateLessonUnfilteredList_failure() {
+        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(firstLesson).build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_SECOND_PERSON, descriptor);
+
+        assertCommandFailure(command, model, MESSAGE_DUPLICATE_LESSON);
+    }
+
+    @Test
+    public void execute_duplicateLessonFilteredList_failure() {
+        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        showLessonAtIndex(model, INDEX_SECOND_PERSON);
+
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(firstLesson).build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(command, model, MESSAGE_DUPLICATE_LESSON);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexUnfilteredList_failure() {
+        Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
+        EditLessonDescriptor descriptor =
+                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
+
+        assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidPersonIndexFilteredList_failure() {
+        showLessonAtIndex(model, INDEX_FIRST_PERSON);
+        Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
+
+        // ensures that invalidIndex is still in bounds of address book list
+        assertTrue(invalidIndex.getZeroBased() < model.getAddressBook().getModuleLessonList().size());
+
+        EditLessonDescriptor descriptor =
+                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+        EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
+
+        assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void equals() {
+        final EditModuleLessonCommand standardCommand = new EditModuleLessonCommand(INDEX_FIRST_PERSON, DESC_CS2030S);
+
+        // same values -> returns true
+        EditLessonDescriptor copyDescriptor = new EditLessonDescriptor(DESC_CS2030S);
+        EditModuleLessonCommand cmdWithSameValues = new EditModuleLessonCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        assertTrue(standardCommand.equals(cmdWithSameValues));
+
+        // same object -> returns true
+        assertTrue(standardCommand.equals(standardCommand));
+
+        // null -> return false
+        assertFalse(standardCommand.equals(null));
+
+        // different type -> return false;
+        assertFalse(standardCommand.equals(new ListModuleLessonCommandTest()));
+
+        // different index -> return false;
+        assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_SECOND_PERSON, DESC_CS2030S)));
+
+        // different descriptor -> returns false
+        assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_FIRST_PERSON, DESC_CS2040S)));
+
+
+    }
 }

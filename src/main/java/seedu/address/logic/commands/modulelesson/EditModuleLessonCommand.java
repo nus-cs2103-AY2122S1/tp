@@ -8,11 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -46,7 +43,6 @@ public class EditModuleLessonCommand extends Command {
             + PREFIX_TIME + "10:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS.";
 
     private final Index index;
@@ -93,8 +89,8 @@ public class EditModuleLessonCommand extends Command {
                                                    EditLessonDescriptor editLessonDescriptor) {
         assert moduleLessonToEdit != null;
 
-        Set<ModuleCode> updatedModuleCode = editLessonDescriptor.getModuleCode()
-                .orElse(moduleLessonToEdit.getModuleCodes());
+        ModuleCode updatedModuleCode = editLessonDescriptor.getModuleCode()
+                .orElse(moduleLessonToEdit.getModuleCode());
         LessonDay updatedLessonDay = editLessonDescriptor.getLessonDay().orElse(moduleLessonToEdit.getDay());
         LessonTime updatedLessonTime = editLessonDescriptor.getLessonTime().orElse(moduleLessonToEdit.getTime());
         Remark updatedRemark = editLessonDescriptor.getRemark().orElse(moduleLessonToEdit.getRemark());
@@ -124,7 +120,7 @@ public class EditModuleLessonCommand extends Command {
      * value will replace the corresponding field value of the lesson.
      */
     public static class EditLessonDescriptor {
-        private Set<ModuleCode> code;
+        private ModuleCode code;
         private LessonDay day;
         private LessonTime time;
         private Remark remark;
@@ -134,7 +130,7 @@ public class EditModuleLessonCommand extends Command {
         /**
          * Copy constructor.
          */
-        public EditLessonDescriptor(EditLessonDescriptor toCopy){
+        public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setModuleCode(toCopy.code);
             setLessonDay(toCopy.day);
             setLessonTime(toCopy.time);
@@ -148,11 +144,11 @@ public class EditModuleLessonCommand extends Command {
             return CollectionUtil.isAnyNonNull(code, day, time, remark);
         }
 
-        public void setModuleCode(Set<ModuleCode> code) {
+        public void setModuleCode(ModuleCode code) {
             this.code = code;
         }
 
-        public Optional<Set<ModuleCode>> getModuleCode() {
+        public Optional<ModuleCode> getModuleCode() {
             return Optional.ofNullable(code);
         }
 

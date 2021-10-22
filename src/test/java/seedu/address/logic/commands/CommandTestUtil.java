@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
+import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -16,11 +17,17 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand;
 import seedu.address.logic.commands.person.EditPersonCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
+import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -40,6 +47,7 @@ public class CommandTestUtil {
     public static final String VALID_TELE_HANDLE_BOB = "@bobgoh";
     public static final String VALID_MODULE_CODE_CS2030S = "CS2030S T12";
     public static final String VALID_MODULE_CODE_CS2040 = "CS2040";
+    public static final String VALID_MODULE_CODE_CS2040S = "CS2040S B05";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -67,6 +75,9 @@ public class CommandTestUtil {
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditModuleLessonCommand.EditLessonDescriptor DESC_CS2040S;
+    public static final EditModuleLessonCommand.EditLessonDescriptor DESC_CS2030S;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
@@ -74,6 +85,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
+        DESC_CS2040S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2040S))
+                .withLessonDay(new LessonDay("2")).withLessonTime(new LessonTime("10:00")).build();
+        DESC_CS2030S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S))
+                .withLessonDay(new LessonDay("5")).withLessonTime(new LessonTime("13:30")).build();
     }
 
     /**
@@ -150,4 +165,18 @@ public class CommandTestUtil {
         assertEquals(2, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered lesson list to show only the lesson at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleLessonList().size());
+
+        ModuleLesson lesson = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
+        final String moduleCode = lesson.getModuleCode().getModuleCodeName();
+        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(moduleCode));
+        System.out.println(model.getFilteredModuleLessonList());
+
+        assertEquals(1, model.getFilteredModuleLessonList().size());
+    }
 }
