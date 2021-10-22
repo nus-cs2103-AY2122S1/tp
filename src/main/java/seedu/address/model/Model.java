@@ -107,7 +107,7 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
     void deleteTask(Task toDelete);
@@ -123,7 +123,7 @@ public interface Model {
     void addOrder(Order order);
 
     /**
-     * Returns true if a order with the same identity as {@code order} exists in the order list.
+     * Returns true if an order with the same identity as {@code order} exists in the order list.
      */
     boolean hasOrder(Order order);
 
