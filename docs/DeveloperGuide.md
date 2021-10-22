@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `AnimeListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,7 +82,7 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `Anime` object residing in the `Model`.
 
 ### Logic component
 
@@ -121,12 +121,12 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Anime` objects (which are contained in a `UniqueAnimeList` object).
+* stores the currently 'selected' `Anime` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Anime>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AnimeList`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AnimeList`, which `Anime` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Anime` needing their own `Tag` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -140,7 +140,7 @@ The `Model` component,
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
+* can save both anime list data and user preference data in json format, and read them back into corresponding objects.
 * inherits from both `AnimeListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
@@ -160,31 +160,31 @@ This section describes some noteworthy details on how certain features are imple
 
 The proposed undo/redo mechanism is facilitated by `VersionedAnimeList`. It extends `AnimeList` with an undo/redo history, stored internally as an `animeListStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAnimeList#commit()` — Saves the current address book state in its history.
-* `VersionedAnimeList#undo()` — Restores the previous address book state from its history.
-* `VersionedAnimeList#redo()` — Restores a previously undone address book state from its history.
+* `VersionedAnimeList#commit()` — Saves the current anime list state in its history.
+* `VersionedAnimeList#undo()` — Restores the previous anime list state from its history.
+* `VersionedAnimeList#redo()` — Restores a previously undone anime list state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitAnimeList()`, `Model#undoAnimeList()` and `Model#redoAnimeList()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAnimeList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAnimeList` will be initialized with the initial anime list state, and the `currentStatePointer` pointing to that single anime list state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th anime in the address book. The `delete` command calls `Model#commitAnimeList()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `animeListStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th anime in the anime list. The `delete` command calls `Model#commitAnimeList()`, causing the modified state of the anime list after the `delete 5` command executes to be saved in the `animeListStateList`, and the `currentStatePointer` is shifted to the newly inserted anime list state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new anime. The `add` command also calls `Model#commitAnimeList()`, causing another modified address book state to be saved into the `animeListStateList`.
+Step 3. The user executes `add n/David …​` to add a new anime. The `add` command also calls `Model#commitAnimeList()`, causing another modified anime list state to be saved into the `animeListStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAnimeList()`, so the address book state will not be saved into the `animeListStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAnimeList()`, so the anime list state will not be saved into the `animeListStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the anime was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAnimeList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the anime was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAnimeList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous anime list state, and restores the anime list to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -201,17 +201,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAnimeList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoAnimeList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the anime list to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `animeListStateList.size() - 1`, pointing to the latest address book state, then there are no undone AnimeList states to restore. The `redo` command uses `Model#canRedoAnimeList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `animeListStateList.size() - 1`, pointing to the latest anime list state, then there are no undone AnimeList states to restore. The `redo` command uses `Model#canRedoAnimeList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAnimeList()`, `Model#undoAnimeList()` or `Model#redoAnimeList()`. Thus, the `animeListStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the anime list, such as `list`, will usually not call `Model#commitAnimeList()`, `Model#undoAnimeList()` or `Model#redoAnimeList()`. Thus, the `animeListStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAnimeList()`. Since the `currentStatePointer` is not pointing at the end of the `animeListStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAnimeList()`. Since the `currentStatePointer` is not pointing at the end of the `animeListStateList`, all anime list states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -223,7 +223,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How undo & redo executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire anime list.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
@@ -231,6 +231,40 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the anime being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
+
+### \[Proposed\] Clear Feature
+
+#### Proposed Implementation
+
+The proposed clear mechanism is facilitated by 3 `Command`s, namely `ClearCommand`,
+`AbortClearCommand` and `ConfirmClearCommand`. This results in a confirmation message to be displayed
+to the user when the user executes `clear`, after which it can either be confirmed (by entering `clear` again) or 
+aborted (by entering any other input).
+
+The last command executed by the user is stored internally as a `Command` in `LogicManager`.
+`LogicManager` makes use of the method `Command::requiresConfirmation` to check whether the
+last command requires a user confirmation. If this is the case, the `Parser` parses the next user input
+as a confirmation message instead.
+
+{To be added later}
+
+#### Design considerations:
+
+**Aspect: Determining valid confirmation input messages:**
+
+* **Alternative 1 (current choice):** User enters `clear` again to actually clear displayed animes; 
+  else to abort.
+    * Pros: The least ambiguous; message reflects what is to be done. Only two scenarios (user input is 
+      `clear` vs user input is not `clear`) to handle.
+    * Cons: Entering regular commands such as `list` will abort the `clear` command instead of
+       executing as per normal.
+
+* **Alternative 2:** User enters `y` to actually clear displayed animes and `n` to abort; otherwise
+  the input is deemed invalid and an exception is thrown.
+    * Pros: These are common CLI confirmation formats that the user may be familiar with.
+    * Cons: Entering `clear` again will simply result in an exception thrown, which may add to the
+    confusion. In addition, if the input is invalid, the `clear` command is aborted anyway,
+      making having invalid inputs redundant.
 
 ### \[Proposed\] Find Feature
 
