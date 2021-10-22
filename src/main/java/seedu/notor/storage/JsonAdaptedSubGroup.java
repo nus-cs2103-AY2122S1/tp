@@ -52,11 +52,10 @@ public class JsonAdaptedSubGroup {
      */
     public SubGroup toModelType() throws IllegalValueException {
         if (note == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
         if (noteDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Note.class.getSimpleName()));
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
         final Note modelNote = new Note(note, noteDate);
         return new SubGroup(new Name(name), new HashSet<>(), parent, modelNote);

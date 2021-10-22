@@ -32,7 +32,7 @@ public interface Logic {
      *
      * @param person The person with yet to edit notes.
      * @param editedPerson The person with newly edited notes.
-     * @throws CommandException
+     * @throws CommandException If note could not be saved.
      */
     void executeSaveNote(Person person, Person editedPerson) throws CommandException;
 

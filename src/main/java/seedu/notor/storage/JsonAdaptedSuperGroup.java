@@ -27,8 +27,8 @@ public class JsonAdaptedSuperGroup {
      */
     @JsonCreator
     public JsonAdaptedSuperGroup(@JsonProperty("name") String name, @JsonProperty("note") String note,
-                                 @JsonProperty("noteDate") String noteDate,
-                                @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
+            @JsonProperty("noteDate") String noteDate,
+            @JsonProperty("subGroups") List<JsonAdaptedSubGroup> subGroups) {
         this.name = name;
         this.subGroups.addAll(subGroups);
         this.note = note;
@@ -55,11 +55,10 @@ public class JsonAdaptedSuperGroup {
      */
     public SuperGroup toModelType() throws IllegalValueException {
         if (note == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
         if (noteDate == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Note.class.getSimpleName()));
+            throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
         final Note modelNote = new Note(note, noteDate);
         SuperGroup group = new SuperGroup(new Name(name), modelNote);
