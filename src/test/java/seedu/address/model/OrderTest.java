@@ -54,7 +54,7 @@ class OrderTest {
     }
 
     @Test
-    public void addItem_ExistingItem_itemCountIncreased() {
+    public void addItem_existingItem_itemCountIncreased() {
         Order order = new Order();
         order.addItem(APPLE_PIE.updateCount(1));
         order.addItem(APPLE_PIE.updateCount(2));

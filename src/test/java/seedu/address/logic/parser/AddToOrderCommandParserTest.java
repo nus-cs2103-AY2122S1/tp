@@ -43,8 +43,9 @@ public class AddToOrderCommandParserTest {
                 new AddToOrderCommand(expectedDescriptor));
 
         // multiple id - last id accepted
-        assertParseSuccess(parser, VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL
-                , new AddToOrderCommand(expectedDescriptor));
+        assertParseSuccess(parser,
+                VALID_NAME_BAGEL + ID_DESC_DONUT + ID_DESC_BAGEL + COUNT_DESC_BAGEL,
+                new AddToOrderCommand(expectedDescriptor));
 
         // multiple count - last count accepted
         assertParseSuccess(parser,
