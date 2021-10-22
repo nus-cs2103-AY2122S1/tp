@@ -32,18 +32,19 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 
 ## Quick Start
 
-1. Ensure you have **Java 11** or above installed on your computer.
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: JDK Installation Guide**
 
-You can install the required JDK and JRE from the 
+You can install the required JDK and JRE from the
 [Java SE Development Kit Downloads page](https://www.oracle.com/java/technologies/downloads/).
 
 Here is a [website](https://docs.oracle.com/en/java/javase/17/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 to help you with the installation. Follow the guide for your operating system for detailed instructions.
 </div>
+
+
+1. Ensure you have **Java 11** or above installed on your computer.
 
 2. Download the latest **TAB.jar** from [here](https://github.com/AY2122S1-CS2103T-F13-3/tp/releases).
 
@@ -65,7 +66,7 @@ to help you with the installation. Follow the guide for your operating system fo
 
    * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) section for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -118,7 +119,7 @@ Format: `help`
 - You can click the right end to each column to sort the rows alphabetically.
 
 ![help message](images/helpMessage.png)
-<div style="text-align:center"><i>Help window interface.</i></div>
+<div class="caption">Help window interface.</div>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
@@ -142,7 +143,10 @@ Other available optional fields for a student are:
 * Tags
 * Lessons
 
-<br>
+<div markdown="block" class="alert alert-info">
+**:information_source: Note:**<br>
+A student can be identified by the index number shown in the displayed list of students.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -156,16 +160,10 @@ Format: `add n/NAME a/ADDRESS [p/PHONE_NUMBER] [e/EMAIL] [pp/PARENT_PHONE_NUMBER
 A student can have any number of tags (including 0).
 </div>
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `add` command:**<br>
-
 * At least one contact field is required.<br>
   e.g. at least one of the `p/PHONE_NUMBER`, `e/EMAIL`, `pp/PARENT_PHONE_NUMBER`, or `pe/PARENT_EMAIL` fields must be 
   included in the add command.
 * `lvl/ACADEMIC_LEVEL` field allows only a maximum of 15 characters (including spaces).
-
-</div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pp/92345678 pe/jackdoe@example.com sch/John's School stream/John stream lvl/J1`
@@ -177,11 +175,7 @@ Edits an existing student in TAB.
 
 Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NUMBER] [pe/PARENT_EMAIL] [sch/SCHOOL] [stream/ACAD_STREAM] [lvl/ACAD_LEVEL] [f/OUTSTANDING_FEES] [r/REMARK] [t/TAG]…​`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `edit` command:**<br>
-
-* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed list of students.<br>
+* Edits the student at the specified `INDEX`. <br>
   e.g. `edit 2` means that you wish to edit the 2nd student in the displayed list.
 
 * You must provide at least one field.<br>
@@ -203,8 +197,6 @@ Format: `edit INDEX [n/NAME] [a/ADDRESS] [p/PHONE] [e/EMAIL] [pp/PARENT_PHONE_NU
 * You can delete all tags of a student by typing `t/` without any arguments.<br>
   e.g. `edit 2 t/` will remove all existing tags from the 2nd student in the displayed list.
 
-</div>
-
 Examples:
 * `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st student to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` Edits the name of the 2nd student to be `Betsy Crower` and clears all existing tags.
@@ -216,17 +208,9 @@ Deletes the specified student from TAB.
 
 Format: `delete INDEX`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `delete` command:**<br>
-
 * Deletes the student at the specified `INDEX`.
-  
-* The index refers to the index number shown in the displayed student list.
-  
-* The index **must be a positive integer** 1, 2, 3, …
 
-</div>
+* The index must be a valid index number of a student shown in the displayed list.
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd student in TAB.
@@ -249,32 +233,30 @@ Finds all students whose fields match the given keyword(s), based on the specifi
 
 Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [p/PHONE_KEYWORDS] [e/EMAIL_KEYWORDS] [pp/PARENT_PHONE_KEYWORDS] [pe/PARENT_EMAIL_KEYWORDS] [sch/SCHOOL_KEYWORDS] [stream/ACAD_STREAM_KEYWORDS] [lvl/ACAD_LEVEL_KEYWORDS] [t/TAG_KEYWORD]…​`
 
-<div markdown="block" class="alert alert-info">
+Notes about the find condition:
 
-**:information_source: Notes about the `find` command:**<br>
-
-* You can find students by all the fields except remark and fee.
-
-* The filter condition indicates that a student is only considered a match when `all`, `any` or `none`
+* The find condition indicates that a student is only considered a match when `all`, `any` or `none`
   of the fields which you are searching for match the student.<br>
   e.g. 
     * `find n/John t/math cond/all` will return students with both the name `John` and the tag `math`.
     * `find n/John t/math cond/any` will return students with only the name `John`, or only the tag `math`, or both.
     * `find n/John t/math cond/none` will return students without the name `John` and the tag `math`.
 
-* The filter condition will not accept other arguments besides `all`, `any` and `none`.<br>
+* The find condition will not accept other arguments besides `all`, `any` and `none`.<br>
   e.g. `cond/every` will result in an error.
   
-* The filter condition is optional and defaults to `all` if not specified.
+* The find condition is optional and defaults to `all` if not specified.
 
-* The filter condition is case-insensitive.<br>
+* The find condition is case-insensitive.<br>
   e.g. `None` or `ANY` are valid.
   
+Notes about search keywords:
+
 * You must provide at least one field to search.<br>
   e.g. entering just `find` or `find cond/any` alone is not a valid command. You need to include the fields you wish to search for.
 
 * You must provide at least one keyword to search for.<br>
-  e.g. entering just `find n/ ` alone is not a valid command as the keyword is empty.
+  e.g. entering just `find n/` alone is not a valid command as the keyword is empty.
 
 * Tags must only have one keyword.<br>
   e.g. `find t/zoom math` is invalid. To search by multiple tags, you can do `find t/zoom t/math`.
@@ -291,12 +273,29 @@ Format: `find [cond/{all | any | none}] [n/NAME_KEYWORDS] [a/ADDRESS_KEYWORDS] [
 * A field needs to contain all specified keywords to be matched.<br>
   e.g. keywords `Amad Ali` will not match `Amad` or `Ali Abdul`, but it will match `Amad bin Ali`.
 
-</div>
-
 Examples:
-* `find a/west p/9876 n/john` matches student with name `Johnny tan`, address `Clementi west`, and phone number `98765432`.
-* `find cond/none t/new t/paid t/zoom` returns students with none of the tags `new`, `paid` and `zoom`.
-* `find stream/express sch/nus cond/any` returns students with stream `express` or school `nus`.
+
+The figure below shows TAB with four students in the list.
+<div align="center">
+  <img class="figure" src="images/FindStudents1.png" width="450px" alt="find initial list"/>
+</div>
+<div class="caption">Initial list of students displayed in TAB</div>
+
+To find a student, you may enter `find a/serangoon n/Bern` into the command box.
+
+All students in TAB whose address matches `serangoon` and whose name matches `Bern` will be returned. The figure below shows the list after the find command is executed.
+
+<div align="center">
+  <img class="figure" src="images/FindStudents2.png" width="400px" alt="find eg1"/>
+</div>
+<div class="caption">TAB displays one student after the find command.</div>
+
+To find students without the `unpaid` tag and whose school is not `NYJC`, you may enter the command `find cond/none t/unpaid sch/NYJC`. The figure below shows the list after this find command is executed.
+
+<div align="center">
+  <img class="figure" src="images/FindStudents3.png" width="400px" alt="find eg2"/>
+</div>
+<div class="caption">TAB displays two students after the find command.</div>
 
 ### Managing Lessons
 
@@ -314,9 +313,11 @@ The essential fields for a lesson are:
 * Rate
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Notes about rate**<br>
-The lesson's rate refers to the fee of the lesson per hour.
+**:information_source: Note:**<br>
+* The lesson's rate refers to the fee of the lesson per hour.
 This rate will be used in the calculation of fees due after each lesson.
+
+*  A lesson can be identified by the index number shown in the lesson list of the student.
 </div>
 
 An optional field for a lesson is:
@@ -327,19 +328,7 @@ An optional field for a lesson is:
 
 #### Adding a lesson: `ladd`
 
-Adds a lesson with the corresponding details to the specified student in TAB.
-
-**Types of lesson:**
-* Recurring
-* Makeup
-
-**Lesson fields:**
-* Date of lesson `dd MMM yyyy`
-  *  e.g. `02 Jan 2018`
-* Time range `HHmm-HHmm`
-* Subject
-* Homework
-* Rate
+Adds a lesson to the specified student in TAB.
 
 Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
 
@@ -347,15 +336,9 @@ Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT
 You can add multiple pieces of homework to a lesson in TAB.
 </div>
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `ladd` command:**<br>
-
 * The type of lesson will be inferred from the presence of the `recurring/` prefix.
   
 * The date is case-insensitive. i.e. `12 jaN 2022` is equivalent to `12 JAN 2022`.
-
-</div>
 
 Examples:
 
@@ -374,19 +357,11 @@ Deletes the specified lesson of the specified student in TAB.
 
 Format: `ldelete INDEX LESSON_INDEX`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `ldelete` command:**<br>
-
 * Deletes the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
   
-* The index refers to the index number shown in the displayed student list.
+* The index must be a valid index number shown in the displayed student list.
   
-* The lesson index refers to the index number shown in the lesson list of the student.
-  
-* The index and lesson index **must be a positive integer** 1, 2, 3, …
-
-</div>
+* The lesson index must be a valid index number shown in the lesson list of the student.
 
 Examples:
 * `list` followed by `ldelete 2 1` deletes the 1st lesson for the 2nd student in TAB.
@@ -401,21 +376,15 @@ Edits the specified lesson of the specified student in TAB with the indicated ch
 
 Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWORK]…​`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `ledit` command:**<br>
-
 * Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
 
 * You can edit all fields of a lesson except the start date.
 
 * You cannot change the lesson's type (i.e. recurring and makeup).
-  
-* The lesson index refers to the index number shown in the lesson list of the student.
 
-* The index and lesson index **must be a positive integer** 1, 2, 3, …
+* The index must be a valid index number shown in the displayed student list.
 
-</div>
+* The lesson index must be a valid index number shown in the lesson list of the student.
 
 Examples:
 * `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
@@ -432,17 +401,12 @@ This section guides you on how to use TAB's scheduling feature.
 
 Displays a read-only schedule of your upcoming week.
 
-![view schedule](images/ViewSchedule.png)
-
 Format: `schedule`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the `schedule` command:**<br>
+![view schedule](images/ViewSchedule.png)
+<div class="caption">Schedule displaying lessons for the upcoming week.</div>
 
 * Typing `list` or any other valid command in the command box will bring you back out of schedule view.
-
-</div>
 
 ### Managing Data
 
@@ -480,7 +444,7 @@ Shows all the tags that you have created together with the number of students la
 Format: `tag`
 
 ![taglist](images/taglist.png)
-<div style="text-align:center"><i>The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</i></div>
+<div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
 
 #### Undoing previous command: `undo`
