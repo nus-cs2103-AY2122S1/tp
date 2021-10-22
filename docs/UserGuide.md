@@ -26,7 +26,7 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 **Conventions Used**
 
 * `text` : denotes a command to be entered into the command box in TAB.
-* <kbd>text</kbd> : denotes a keyboard input, or a button to be clicked on.
+* <kbd>TEXT</kbd> : denotes a keyboard input, or a button to be clicked on.
 * [text](#about-this-guide) : denotes links to other parts of the document, or links to be opened in the browser.
 
 
