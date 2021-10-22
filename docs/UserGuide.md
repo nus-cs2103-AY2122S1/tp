@@ -15,6 +15,8 @@ title: User Guide
 TAB comes with a clean Graphical User Interface (GUI) while optimised for user interaction via a CLI (Command Line Interface).
 With TAB, you can effortlessly manage your students' contact details faster than a typical mouse/GUI driven app.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## About This Guide
 
 This user guide is intended for any user of TAB. It provides installation instructions to help get you started with using TAB, and describes in detail the features available in TAB.
@@ -29,6 +31,7 @@ In the [Table of Contents](), each item listed is a link which you can click on 
 * <kbd>TEXT</kbd> : denotes a keyboard input, or a button to be clicked on.
 * [text](#about-this-guide) : denotes links to other parts of the document, or links to be opened in the browser.
 
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick Start
 
@@ -70,6 +73,8 @@ to help you with the installation. Follow the guide for your operating system fo
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Features
 This section describes the available features in TAB.
 
@@ -103,6 +108,8 @@ This section describes the available features in TAB.
 
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Getting Help 
 This section tells you what to do if you require help while using TAB.
 
@@ -120,6 +127,8 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 <div class="caption">Help window interface.</div>
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Students
 This section guides you on how to use the commands for managing students in TAB.
@@ -222,6 +231,8 @@ Shows a list of all students in TAB.
 
 Format: `list`
 
+<div style="page-break-after: always;"></div>
+
 ### Finding Students
 This section guides you on how to find or filter students of your choice in TAB.
 
@@ -296,6 +307,8 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
   <img class="figure" src="images/FindStudents3.png" width="400px" alt="find eg2"/>
 </div>
 <div class="caption">TAB displays two students after the find command.</div>
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Lessons
 
@@ -391,6 +404,8 @@ Examples:
 * `ledit 2 3 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
 * `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing the Schedule
 
 This section guides you on how to use TAB's scheduling feature.
@@ -407,6 +422,8 @@ Format: `schedule`
 <div class="caption">Schedule displaying lessons for the upcoming week.</div>
 
 * Typing `list` or any other valid command in the command box will bring you back out of schedule view.
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Data
 
@@ -425,6 +442,8 @@ TAB data are saved as a JSON file `[JAR file location]/data/addressbook.json`. A
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, TAB will discard all data and start with an empty data file at the next run.
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Miscellaneous Commands
 This section describes the other miscellaneous commands available in TAB.
@@ -466,6 +485,7 @@ Exits the program.
 Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## FAQ
 This section records frequently asked questions from users of TAB.
@@ -480,6 +500,8 @@ This section records frequently asked questions from users of TAB.
 <div style="text-align:center"><i>The arrow indicates where you should click to open the app.</i></div>
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Glossary
 
 * **Academic level**: Mainstream academic years from primary to tertiary education in Singapore (i.e. Primary 1-6, Secondary 1-5, Junior College 1-2 and Year 1-6).
@@ -496,10 +518,12 @@ This section records frequently asked questions from users of TAB.
   UTC, or Coordinated Universal Time, is the primary time standard by which the world regulates clocks and time.
 * **UX**: User Experience - The experience a user has when using the app.
 
+--------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## Command summary
 This section lists all available commands in TAB, along with examples on how you can use them.
 
---------------------------------------------------------------------------------------------------------------------
 
 Action | Format, Examples
 --------|------------------
