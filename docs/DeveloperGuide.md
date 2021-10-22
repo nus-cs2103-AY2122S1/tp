@@ -178,7 +178,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add student feature: `add -s`
+### Add student feature
 
 #### Implementation
 
@@ -186,7 +186,7 @@ The 'add student' feature adds a student contact to TutorAid. A student contact 
 student's contact number, the parent's name and parent's contact number. 
 
 The feature is mainly implemented by the following methods:
-* `AddStudentCommand#execute()` —Adds a `Student` object to TutorAid.
+* `AddStudentCommand::execute()` — Adds a `Student` object to TutorAid.
   
 It is also additionally facilitated by the methods below:
 * `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a student 
@@ -206,7 +206,7 @@ a command `add -s sn/John Doe …​`:
 2. `AddCommandParser#parse()` extracts the command flag `-s` at the start of its argument, which denotes the addition 
    of a student contact. Thus, the remaining (`sn/John Doe …​`) is passed into `AddStudentCommandParser#parse`.
 
-3. Each of the  different arguments of student contact, such as the student name, student contact number, parent name 
+3. Each of the different arguments of student contact, such as the student name, student contact number, parent name 
    and parent number, is parsed by `AddStudentCommandParser#parse()` based on the given input. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
@@ -252,7 +252,7 @@ Below is the sequence diagram that depicts an overview of a student contact bein
       parts of a command, such as the command word, command flag and arguments.
     
 
-### Delete student feature: `del -s`
+### Delete student feature
 
 #### Implementation
 
