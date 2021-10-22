@@ -1,19 +1,12 @@
 package seedu.tracker.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.tracker.model.calendar.AcademicCalendar;
-import seedu.tracker.model.calendar.AcademicYear;
-import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.CompletedMcList;
 import seedu.tracker.model.module.Mc;
-import seedu.tracker.model.module.Module;
 
 /**
  * An UI component that displays information of a {@code Module}.
@@ -52,7 +45,7 @@ public class McCard extends UiPart<Region> {
         title.setText(getTitle(index));
         currMc.setText(String.valueOf(mc.value));
 
-        int target = CompletedMcList.requirementsList[index];
+        int target = CompletedMcList.MC_REQUIREMENTS_LIST[index];
         targetMc.setText(" / " + target + " MCs");
 
         double progress = mc.value >= target ? 1 : (double) mc.value / target;

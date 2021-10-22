@@ -18,13 +18,5 @@ public class ModuleByTagNamePredicate implements Predicate<Module> {
     public boolean test(Module module) {
         return module.getTags().stream().anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.toString(), tagName));
     }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ModuleByTagNamePredicate // instanceof handles nulls
-                && tagName.equals(((ModuleByTagNamePredicate) other).tagName)); // state check
-    }
-
 }
 

@@ -36,7 +36,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         Semester defaultSemester = new Semester(2);
         currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
-        completedMcList = new CompletedMcList(modules.asUnmodifiableObservableList(), currentSemester);
+        completedMcList = new CompletedMcList(currentSemester);
         mcGoal = new Mc(160);
     }
 
