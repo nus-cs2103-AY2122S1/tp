@@ -122,8 +122,12 @@ Prefix Input Specifications:
     * ROLE inputs such as `Software Engineer` and `Sales Assistant` are acceptable.
     * ROLE inputs such as `Softw@re Engin^^r` and `Day + Night Security Guard` are not acceptable.
 * ####EMPLOYMENT_TYPE `et/`
-  * An EMPLOYMENT_TYPE should
+  * An EMPLOYMENT_TYPE should be one of the following: `Full time`, `Part time`, `Temporary` or `Internship`.
+  * An EMPLOYMENT_TYPE is case-insensitive.
   * For example:
+    * EMPLOYMENT_TYPE inputs such as 'Full time` and `Internship` are acceptable.
+    * EMPLOYMENT_TYPE inputs such as `fUlL tiMe` and `iNtErnShIP` are acceptable.
+    * EMPLOYMENT_TYPE inputs such as `Long term` are not acceptable.
 * ####EXPECTED_SALARY `s/`
   * An EXPECTED_SALARY should only represent non-negative integers.
     * Non-negative integers range from 0 to 2^(31) - 1 inclusive.
