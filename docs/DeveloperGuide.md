@@ -390,7 +390,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**Use case: Edit a contact**
 
+**MSS**
+
+1. User requests to list contacts
+2. ContactSH shows a list of contacts
+3. User requests to edit a specific contact in the list
+4. ContactSH edits the specified details of the contact
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. ContactSH shows an error message.
+
+      Use case resumes at step 2.
+    
 **Use case: Delete a contact**
 
 **MSS**
