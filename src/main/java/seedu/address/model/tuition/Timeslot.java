@@ -159,9 +159,14 @@ public class Timeslot {
         String startTime = String.format("%s %s", arr[0], arr[1].split("-")[0]); //Mon 10:00
         String endTime = String.format("%s %s", arr[0], arr[1].split("-")[1]); //Mon 11:00
         DateFormat sdf = new SimpleDateFormat("EEE HH:mm");
+        DateFormat dayFormat = new SimpleDateFormat("EEE");
         try {
             Date start = sdf.parse(startTime);
             Date end = sdf.parse(endTime);
+            int day = dayFormat.parse(startTime).getDay();
+            if (start.getTime() >= end.getTime() || start.getDay() != day || end.getDay() != day) {
+                return null;
+            }
             return new Timeslot(start, end);
         } catch (java.text.ParseException e) {
             return null;
