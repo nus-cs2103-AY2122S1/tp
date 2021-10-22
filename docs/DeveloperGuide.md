@@ -595,6 +595,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete Latest Mark from Student**
+
+**MSS**
+
+1. User lists all students with `liststu`
+
+2. ClassMATE shows a list of students
+
+3. User enters command `deletelm x` where 'x' is the index of student to delete marks of
+
+4. ClassMATE deletes the latest mark stored for that student
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+  * 3a1. ClassMATE shows an error message.
+
+  Use case resumes at step 2.
+
+* 3b. There are no marks stored for the student.
+
+  * 3b1. ClassMATE shows an error message.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
