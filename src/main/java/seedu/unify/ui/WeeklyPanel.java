@@ -1,27 +1,26 @@
 package seedu.unify.ui;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.logging.Logger;
 
-import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.unify.commons.core.LogsCenter;
-import seedu.unify.model.task.Date;
-import seedu.unify.model.task.Task;
-import seedu.unify.model.task.WeeklyTracker;
+import seedu.unify.model.task.WeeklyTasks;
 
+/**
+ * Panel containing the list of daily panels for a particular week.
+ */
 public class WeeklyPanel extends UiPart<Region> {
 
     private static final String FXML = "WeeklyPanel.fxml";
+    private static final String WEEK_LABEL = "Week %d (%s)";
     private final Logger logger = LogsCenter.getLogger(WeeklyPanel.class);
-    // add date to be passed down from Weekly Panel
-    private Date[] dateRange;
 
     @FXML
     private Label weekLabel;
@@ -32,46 +31,24 @@ public class WeeklyPanel extends UiPart<Region> {
     /**
      * Creates a {@code WeeklyPanel} with the given {@code ObservableList}.
      */
-    public WeeklyPanel(ObservableList<Task> weeklyTaskList) {
+    public WeeklyPanel(WeeklyTasks weeklyTasks) {
         super(FXML);
-        Integer week;
-        LocalDate currentDay;
-        week = WeeklyTracker.getWeek();
-        weekLabel.setText("Week " + week);
-        currentDay = LocalDate.ofYearDay(2021, week * 7)
-                .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-        dailyHBox.getChildren().clear();
+        SimpleIntegerProperty observableWeekNumber = weeklyTasks.getObservableWeekNumber();
+        LocalDate firstDayOfWeek = weeklyTasks.getFirstDayOfWeek();
+        weekLabel.setText(String.format(WEEK_LABEL, observableWeekNumber.getValue(), weeklyTasks.getFirstDayOfWeek().toString()));
         for (int i = 0; i < 7; i++) {
-            // these are just placeholders
-            DailyPanel dailyPanel = new DailyPanel(currentDay, weeklyTaskList);
-            currentDay = currentDay.plusDays(1);
+            DailyPanel dailyPanel = new DailyPanel(weeklyTasks.getDailyTaskList(i), firstDayOfWeek.plusDays(i));
             dailyHBox.getChildren().add(dailyPanel.getRoot());
-            dailyPanel.getRoot().setStyle("-fx-border-style: solid inside;" + "-fx-border-width: 1;");
+            // This can probably be replaced with something more efficient
             dailyHBox.widthProperty()
                     .addListener(e -> dailyPanel.getRoot().setPrefWidth(dailyHBox.getWidth() / 7));
         }
-
-        weeklyTaskList.addListener((ListChangeListener<Task>) c -> {
-            Integer week1 = WeeklyTracker.getWeek();
-            weekLabel.setText("Week " + week1);
-            LocalDate currentDays = LocalDate.ofYearDay(2021, week1 * 7)
-                    .with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
-            dailyHBox.getChildren().clear();
-            for (int i = 0; i < 7; i++) {
-                // these are just placeholders
-                DailyPanel dailyPanel1 = new DailyPanel(currentDays, weeklyTaskList);
-                currentDays = currentDays.plusDays(1);
-                dailyHBox.getChildren().add(dailyPanel1.getRoot());
-                dailyPanel1.getRoot().setStyle("-fx-border-style: solid inside;" + "-fx-border-width: 1;");
-                dailyHBox.widthProperty()
-                        .addListener(e -> dailyPanel1.getRoot().setPrefWidth(dailyHBox.getWidth() / 7));
+        observableWeekNumber.addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                weekLabel.setText(String.format(WEEK_LABEL, newValue.intValue(), weeklyTasks.getFirstDayOfWeek().toString()));
             }
         });
-
-        // must include an increment operation to either
-        // 1) Set Date for Daily Panels
-        // 2) Form a date range and loop through to create Daily Panels
-
-
     }
+
 }

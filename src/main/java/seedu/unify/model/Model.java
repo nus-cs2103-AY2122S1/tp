@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.unify.commons.core.GuiSettings;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.WeeklyTasks;
 
 /**
  * The API of the Model component.
@@ -79,7 +80,8 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
-    ObservableList<Task> getWeeklyTaskList();
+    /** Returns a task list filtered by the week */
+    WeeklyTasks getWeeklyTasks();
 
     /**
      * Updates the filter of the filtered task list to filter by the given {@code predicate}.

@@ -24,6 +24,13 @@
     -fx-opacity: 1;
 }
 
+.label-header-medium {
+    -fx-font-size: 15pt;
+    -fx-font-family: "Open Sans Light";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Open Sans Semibold";

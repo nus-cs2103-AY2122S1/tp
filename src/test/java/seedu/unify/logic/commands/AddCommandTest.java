@@ -21,6 +21,7 @@ import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.ReadOnlyUserPrefs;
 import seedu.unify.model.UniFy;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.WeeklyTasks;
 import seedu.unify.testutil.TaskBuilder;
 
 public class AddCommandTest {
@@ -144,7 +145,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Task> getWeeklyTaskList() {
+        public WeeklyTasks getWeeklyTasks() {
             return null;
         }
 
