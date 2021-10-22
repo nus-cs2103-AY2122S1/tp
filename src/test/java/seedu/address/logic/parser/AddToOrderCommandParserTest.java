@@ -115,7 +115,7 @@ public class AddToOrderCommandParserTest {
 
         // invalid id with 3 numbers
         assertParseFailure(parser, VALID_NAME_BAGEL + INVALID_ID_BAGEL + COUNT_DESC_BAGEL
-                + TAG_DESC_POPULAR + TAG_DESC_BAKED, Messages.MESSAGE_INVALID_ID_LENGTH_AND_SIGN);
+                + TAG_DESC_POPULAR + TAG_DESC_BAKED, Messages.MESSAGE_INVALID_ID_FORMAT);
 
         // invalid count format
         assertParseFailure(parser, VALID_NAME_BAGEL + ID_DESC_BAGEL + INVALID_COUNT_FORMAT + TAG_DESC_BAKED,
