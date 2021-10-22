@@ -48,13 +48,13 @@ public class TypicalEvents {
     public static final Event SAMPLE_EVENT_COPY_DIFFERENT_PARTICIPANTS = new Event(new EventName("Sleep"),
             new EventDate("2021-09-18"), new EventTime("1000"), false,
             Collections.singletonList(new ParticipantBuilder().build()));
-    public static final Event SAMPLE_EVENT_COPY_NO_TIME = new Event(new EventName("Sleeped"),
+    public static final Event SAMPLE_EVENT_COPY_NO_TIME = new Event(new EventName("Slept"),
             new EventDate("2021-09-18"));
 
     private TypicalEvents() {}
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code AddressBook} with all the typical events.
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
