@@ -24,18 +24,18 @@ This User Guide will help you set up your contact list and familiarise yourself 
     * [Adding a contact: `add`](#adding-a-contact-add)
     * [Listing all contacts: `list`](#listing-all-contacts-list)
     * [Editing a contact: `edit`](#editing-a-contact-edit)
-    * [Locating contacts by name: `find`](#locating-contacts-find)
+    * [Locating contacts: `find`](#locating-contacts-find)
     * [Deleting a contact: `delete`](#deleting-a-contact-delete)
-    * [Filtering by category: `filter`](#filtering-contacts-filter)
-    * [Undoing operations: `undo`](#undoing-the-operations-undo)
-    * [Redoing operations: `redo`](#redoing-the-operations-redo)
+    * [Filtering by category: `filter`](#filtering-by-category-filter)
+    * [Undoing operations : `undo`](#undoing-operations-undo)
+    * [Redoing operations : `redo`](#redoing-operations-redo)
     * [Sorting contacts: `sort`](#sorting-the-contacts-sort)
     * [Summarizing contacts: `sum`](#summarizing-contacts-sum)
-    * [Viewing a contact: `view`](#viewing-a-contact-view)
+    * [Viewing a contact : `view`](#viewing-a-contact-view)
     * [Exporting data: `export`](#exporting-data-export)
     * [Displaying commands: `cmd`](#displaying-commands-cmd)
-    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
-    * [Exiting the program: `exit`](#exiting-the-program-exit)
+    * [Clearing all entries : `clear`](#clearing-all-entries-clear)
+    * [Exiting the program : `exit`](#exiting-the-program-exit)
     * [Navigating input history](#navigating-input-history)
     * [Saving the data](#saving-the-data)
     * [Editing the data file](#editing-the-data-file)
@@ -235,7 +235,7 @@ Expected Outcome for `filter c/fnb`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
 
-### Undoing the operations: `undo`
+### Undoing operations: `undo`
 Undoes the last change made to the list of contacts.
 
 Format: `undo`
@@ -243,7 +243,7 @@ Format: `undo`
 Examples :
 * If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored
 
-### Redoing the operations: `redo`
+### Redoing operations: `redo`
 Redoes the last change undone on the list of contacts.
 
 Format: `redo`
