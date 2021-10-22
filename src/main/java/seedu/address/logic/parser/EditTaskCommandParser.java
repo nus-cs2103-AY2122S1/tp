@@ -10,8 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTaskCommand;
+import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.task.Task;
 
 
 public class EditTaskCommandParser implements Parser<EditTaskCommand> {
@@ -29,7 +29,6 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
 
         Index index;
         Index taskIndex;
-        Task editedTask;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -43,12 +42,24 @@ public class EditTaskCommandParser implements Parser<EditTaskCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE));
         }
 
+        EditTaskDescriptor editTaskDescriptor = new EditTaskDescriptor();
         if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
-            editedTask = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
-        } else {
+            editTaskDescriptor.setTaskName(ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TASK_DATE).isPresent()) {
+            editTaskDescriptor.setTaskDate(ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TASK_TIME).isPresent()) {
+            editTaskDescriptor.setTaskTime(ParserUtil.parseTaskTime(argMultimap.getValue(PREFIX_TASK_TIME).get()));
+        }
+        if (argMultimap.getValue(PREFIX_TASK_VENUE).isPresent()) {
+            editTaskDescriptor.setTaskVenue(ParserUtil.parseTaskVenue(argMultimap.getValue(PREFIX_TASK_VENUE).get()));
+        }
+
+        if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditTaskCommand.MESSAGE_TASK_NOT_EDITED);
         }
 
-        return new EditTaskCommand(index, taskIndex, editedTask);
+        return new EditTaskCommand(index, taskIndex, editTaskDescriptor);
     }
 }

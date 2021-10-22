@@ -1,19 +1,28 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskTime;
+import seedu.address.model.task.Venue;
 
 /**
  * Edits the details of an existing task.
@@ -26,8 +35,11 @@ public class EditTaskCommand extends Command {
             + "by the index number used in the displayed person list and task number. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK_INDEX + "TASK_INDEX "
-            + "[" + PREFIX_TASK_DESCRIPTION + "TASKNAME]...\n"
+            + PREFIX_TASK_INDEX + " TASK_INDEX "
+            + "[" + PREFIX_TASK_DESCRIPTION + " TASK_NAME] "
+            + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
+            + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
+            + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_INDEX + "2 "
             + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
@@ -41,20 +53,20 @@ public class EditTaskCommand extends Command {
 
     private final Index targetPersonIndex;
     private final Index targetTaskIndex;
-    private final Task editedTask;
+    private final EditTaskDescriptor editTaskDescriptor;
 
     /**
      * @param targetPersonIndex of the person in the filtered person list
      * @param targetTaskIndex of the task to edit
      */
-    public EditTaskCommand(Index targetPersonIndex, Index targetTaskIndex, Task editedTask) {
+    public EditTaskCommand(Index targetPersonIndex, Index targetTaskIndex, EditTaskDescriptor editTaskDescriptor) {
         requireNonNull(targetPersonIndex);
         requireNonNull(targetTaskIndex);
-        requireNonNull(editedTask);
+        requireNonNull(editTaskDescriptor);
 
         this.targetPersonIndex = targetPersonIndex;
         this.targetTaskIndex = targetTaskIndex;
-        this.editedTask = editedTask;
+        this.editTaskDescriptor = editTaskDescriptor;
     }
 
     @Override
@@ -75,6 +87,8 @@ public class EditTaskCommand extends Command {
         }
 
         Task taskToEdit = tasks.get(targetTaskIndex.getZeroBased());
+        Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
+
         if (taskToEdit.equals(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
@@ -87,6 +101,19 @@ public class EditTaskCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+    }
+
+    private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
+        assert(taskToEdit != null);
+
+        TaskName updatedName = editTaskDescriptor.getTaskName().orElse(taskToEdit.getTaskName());
+        TaskDate updatedDate = editTaskDescriptor.getTaskDate().orElse(taskToEdit.getDate());
+        TaskTime updatedTime = editTaskDescriptor.getTaskTime().orElse(taskToEdit.getTime());
+        Venue updatedVenue = editTaskDescriptor.getTaskVenue().orElse(taskToEdit.getVenue());
+
+        Task updatedTask = new Task(updatedName, updatedDate, updatedTime, updatedVenue);
+
+        return updatedTask;
     }
 
     @Override
@@ -105,7 +132,7 @@ public class EditTaskCommand extends Command {
         EditTaskCommand e = (EditTaskCommand) other;
         return targetPersonIndex.equals(e.targetPersonIndex)
                 && targetTaskIndex.equals(e.targetTaskIndex)
-                && editedTask.equals(e.editedTask);
+                && editTaskDescriptor.equals(e.editTaskDescriptor);
     }
 
     public String getCommand() {
@@ -114,5 +141,88 @@ public class EditTaskCommand extends Command {
 
     public String getDescription() {
         return DESCRIPTION;
+    }
+
+    /**
+     * Stores the details to edit the task with. Each non-empty field value will replace the
+     * corresponding field value of the task.
+     */
+    public static class EditTaskDescriptor {
+        private TaskName taskName;
+        private TaskDate taskDate;
+        private TaskTime taskTime;
+        private Venue taskVenue;
+
+        public EditTaskDescriptor() {}
+
+        /**
+         * Copy constructor.
+         */
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
+            setTaskName(toCopy.taskName);
+            setTaskDate(toCopy.taskDate);
+            setTaskTime(toCopy.taskTime);
+            setTaskVenue(toCopy.taskVenue);
+        }
+
+        /**
+         * Returns true if at least one field is edited.
+         */
+        public boolean isAnyFieldEdited() {
+            return CollectionUtil.isAnyNonNull(taskName, taskDate, taskTime, taskVenue);
+        }
+
+        public void setTaskName(TaskName taskName) {
+            this.taskName = taskName;
+        }
+
+        public Optional<TaskName> getTaskName() {
+            return Optional.ofNullable(taskName);
+        }
+
+        public void setTaskDate(TaskDate taskDate) {
+            this.taskDate = taskDate;
+        }
+
+        public Optional<TaskDate> getTaskDate() {
+            return Optional.ofNullable(taskDate);
+        }
+
+        public void setTaskTime(TaskTime taskTime) {
+            this.taskTime = taskTime;
+        }
+
+        public Optional<TaskTime> getTaskTime() {
+            return Optional.ofNullable(taskTime);
+        }
+
+        public void setTaskVenue(Venue venue) {
+            this.taskVenue = taskVenue;
+        }
+
+        public Optional<Venue> getTaskVenue() {
+            return Optional.ofNullable(taskVenue);
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            // short circuit if same object
+            if (other == this) {
+                return true;
+            }
+
+            // instanceof handles nulls
+            if (!(other instanceof EditTaskDescriptor)) {
+                return false;
+            }
+
+            // state check
+            EditTaskDescriptor e = (EditTaskDescriptor) other;
+
+            return getTaskName().equals(e.getTaskName())
+                    && getTaskDate().equals(e.getTaskDate())
+                    && getTaskTime().equals(e.getTaskTime())
+                    && getTaskVenue().equals(e.getTaskVenue());
+        }
     }
 }

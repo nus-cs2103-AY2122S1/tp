@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's description in the address book.
+ * Represents a Task's name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
  */
 public class TaskName {
@@ -20,9 +20,9 @@ public class TaskName {
     public final String taskName;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code TaskName}.
      *
-     * @param taskName A valid name.
+     * @param taskName A valid task name.
      */
     public TaskName(String taskName) {
         requireNonNull(taskName);
@@ -31,7 +31,7 @@ public class TaskName {
     }
 
     /**
-     * Returns true if a given string is a valid description.
+     * Returns true if a given string is a valid task name.
      */
     public static boolean isValidTaskName(String test) {
         return test.matches(VALIDATION_REGEX);

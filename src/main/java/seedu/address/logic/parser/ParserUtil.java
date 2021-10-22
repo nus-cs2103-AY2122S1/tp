@@ -6,9 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -26,7 +23,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskTime;
 import seedu.address.model.task.Venue;
 
 /**
@@ -148,42 +147,26 @@ public class ParserUtil {
                 PREFIX_TASK_DATE, PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
 
         TaskName taskName;
-        LocalDate date = null;
-        LocalTime time = null;
+        TaskDate date = null;
+        TaskTime time = null;
         Venue venue = null;
 
         if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
-            String taskNameString = argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get().trim();
-            if (!TaskName.isValidTaskName(taskNameString)) {
-                throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
-            }
-            taskName = new TaskName(taskNameString);
+            taskName = parseTaskName(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get());
         } else {
             throw new ParseException(Task.MESSAGE_CONSTRAINTS);
         }
 
         if (argMultimap.getValue(PREFIX_TASK_DATE).isPresent()) {
-            try {
-                date = LocalDate.parse(argMultimap.getValue(PREFIX_TASK_DATE).get());
-            } catch (DateTimeParseException e) {
-                throw new ParseException("Task date should be in the format YYYY-MM-DD");
-            }
+            date = parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get());
         }
 
         if (argMultimap.getValue(PREFIX_TASK_TIME).isPresent()) {
-            try {
-                time = LocalTime.parse(argMultimap.getValue(PREFIX_TASK_TIME).get());
-            } catch (DateTimeParseException e) {
-                throw new ParseException("Task time should be in the format HH:MM");
-            }
+            time = parseTaskTime(argMultimap.getValue(PREFIX_TASK_TIME).get());
         }
 
         if (argMultimap.getValue(PREFIX_TASK_VENUE).isPresent()) {
-            String venueString = argMultimap.getValue(PREFIX_TASK_VENUE).get().trim();
-            if (!Venue.isValidVenue(venueString)) {
-                throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
-            }
-            venue = new Venue(venueString);
+            venue = parseTaskVenue(argMultimap.getValue(PREFIX_TASK_VENUE).get());
         }
 
         return new Task(taskName, date, time, venue);
@@ -199,6 +182,42 @@ public class ParserUtil {
             taskList.add(parseTask(" " + PREFIX_TASK_DESCRIPTION + " " + taskString));
         }
         return taskList;
+    }
+
+    public static TaskName parseTaskName(String taskName) throws ParseException {
+        requireNonNull(taskName);
+        String trimmedTaskName = taskName.trim();
+        if (!TaskName.isValidTaskName(trimmedTaskName)) {
+            throw new ParseException(TaskName.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskName(trimmedTaskName);
+    }
+
+    public static TaskDate parseTaskDate(String taskDate) throws ParseException {
+        requireNonNull(taskDate);
+        String trimmedTaskDate = taskDate.trim();
+        if (!TaskDate.isValidTaskDate(trimmedTaskDate)) {
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDate(trimmedTaskDate);
+    }
+
+    public static TaskTime parseTaskTime(String taskTime) throws ParseException {
+        requireNonNull(taskTime);
+        String trimmedTaskTime = taskTime.trim();
+        if (!TaskTime.isValidTaskTime(trimmedTaskTime)) {
+            throw new ParseException(TaskTime.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskTime(trimmedTaskTime);
+    }
+
+    public static Venue parseTaskVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedTaskVenue = venue.trim();
+        if (!Venue.isValidVenue(venue)) {
+            throw new ParseException(Venue.MESSAGE_CONSTRAINTS);
+        }
+        return new Venue(venue);
     }
 
     /**

@@ -1,16 +1,13 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskTime;
 import seedu.address.model.task.Venue;
 
 public class JsonAdaptedTask {
@@ -34,10 +31,10 @@ public class JsonAdaptedTask {
         String taskName = source.getTaskName().taskName;
         String taskDate = source.getDate() == null
                 ? " "
-                : source.getDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+                : source.getDate().taskDate.toString();
         String taskTime = source.getTime() == null
                 ? " "
-                : source.getTime().format(DateTimeFormatter.ISO_LOCAL_TIME);
+                : source.getTime().toString();
         String taskVenue = source.getVenue() == null
                 ? " "
                 : source.getVenue().venue;
@@ -70,37 +67,31 @@ public class JsonAdaptedTask {
         }
         final TaskName modelName = new TaskName(taskName);
 
-        final LocalDate modelDate;
+        TaskDate modelDate = null;
         if (!taskDate.equals(" ")) {
-            try {
-                modelDate = LocalDate.parse(taskDate);
-            } catch (DateTimeParseException e) {
-                throw new IllegalValueException("Task date should be in the format YYYY-MM-DD");
+            if (TaskDate.isValidTaskDate(taskDate)) {
+                modelDate = new TaskDate(taskDate);
+            } else {
+                throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
-        } else {
-            modelDate = null;
         }
 
-        final LocalTime modelTime;
+        TaskTime modelTime = null;
         if (!taskTime.equals(" ")) {
-            try {
-                modelTime = LocalTime.parse(taskTime);
-            } catch (DateTimeParseException e) {
-                throw new IllegalValueException("Task time should be in the format HH:MM");
+            if (TaskTime.isValidTaskTime(taskTime)) {
+                modelTime = new TaskTime(taskTime);
+            } else {
+                throw new IllegalValueException(TaskTime.MESSAGE_CONSTRAINTS);
             }
-        } else {
-            modelTime = null;
         }
 
-        final Venue modelVenue;
+        Venue modelVenue = null;
         if (!taskVenue.equals(" ")) {
             if (Venue.isValidVenue(taskVenue)) {
                 modelVenue = new Venue(taskVenue);
             } else {
                 throw new IllegalValueException(Venue.MESSAGE_CONSTRAINTS);
             }
-        } else {
-            modelVenue = null;
         }
 
         return new Task(modelName, modelDate, modelTime, modelVenue);

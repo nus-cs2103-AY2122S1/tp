@@ -45,8 +45,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskName;
 
 
 public class HelpWindow extends AnchorPane {
@@ -215,14 +213,15 @@ public class HelpWindow extends AnchorPane {
         descriptor.setAddress(samplePerson.getAddress());
         descriptor.setTags(samplePerson.getTags());
 
+        EditTaskCommand.EditTaskDescriptor taskDescriptor = new EditTaskCommand.EditTaskDescriptor();
+
         ObservableList<Command> data = FXCollections.observableArrayList(
                 new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(null),
                 new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
                 new DeleteTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0)),
-                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0),
-                        new Task(new TaskName("sample"), null, null, null))
+                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), taskDescriptor)
         );
 
         tableView.setItems(data);

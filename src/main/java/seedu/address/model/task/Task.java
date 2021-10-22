@@ -2,23 +2,20 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 public class Task {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Task should contain at least the task name.";
 
     public final TaskName taskName;
-    public final LocalDate date;
-    public final LocalTime time;
+    public final TaskDate date;
+    public final TaskTime time;
     public final Venue venue;
 
     /**
      * Constructor for task. Creates a new task with the given a String name.
      */
-    public Task (TaskName taskName, LocalDate date, LocalTime time, Venue venue) {
+    public Task (TaskName taskName, TaskDate date, TaskTime time, Venue venue) {
         requireNonNull(taskName);
         this.taskName = taskName;
         this.date = date;
@@ -30,11 +27,11 @@ public class Task {
         return taskName;
     }
 
-    public LocalDate getDate() {
+    public TaskDate getDate() {
         return date;
     }
 
-    public LocalTime getTime() {
+    public TaskTime getTime() {
         return time;
     }
 

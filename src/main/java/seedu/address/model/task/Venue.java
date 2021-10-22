@@ -5,8 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Task's venue in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
- */public class Venue {
+ * Guarantees: immutable; is valid as declared in {@link #isValidVenue(String)}
+ */
+public class Venue {
     public static final String MESSAGE_CONSTRAINTS =
             "Task venue should contain at least 1 non-whitespace character";
 
