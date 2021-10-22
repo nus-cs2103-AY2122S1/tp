@@ -1,6 +1,7 @@
 package seedu.anilist.ui;
 
 import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -143,8 +144,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setTheme(String themeCss) {
         this.themeCss = themeCss;
-        File f = new File(cssFilePath + themeCss);
-        String filepath = "file:///" + f.getAbsolutePath().replace("\\", "/");
         switch(themeCss) {
         case "CharlotteTheme.css":
             charlotteTheme.setSelected(true);
@@ -159,9 +158,14 @@ public class MainWindow extends UiPart<Stage> {
             wonderEggTheme.setSelected(true);
             break;
         default:
-            assert false : "invalid CSS file";
-            return;
+            logger.log(Level.WARNING, themeCss + " file not found. Setting default theme Charlotte Theme.");
+            themeCss = "CharlotteTheme.css";
+            this.themeCss = themeCss;
+            charlotteTheme.setSelected(true);
+            break;
         }
+        File f = new File(cssFilePath + themeCss);
+        String filepath = "file:///" + f.getAbsolutePath().replace("\\", "/");
         Scene scene = primaryStage.getScene();
         ObservableList<String> styleSheets = scene.getStylesheets();
         styleSheets.remove(0);
