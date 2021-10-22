@@ -25,4 +25,23 @@ public class RemarkTest {
         assertFalse(standard.hashCode() == remarkWithDifferentValue.hashCode());
     }
 
+    @Test
+    public void isValidRemark() {
+        // null address
+        assertThrows(NullPointerException.class, () -> Remark.isValidRemark(null));
+
+        // invalid addresses
+        assertTrue(Address.isValidAddress(
+                "This is a string that contains seventy-six characters which shouldn't pass. ")); // 76 chara
+
+        // valid addresses
+        assertTrue(Remark.isValidRemark("")); // empty string
+        assertTrue(Remark.isValidRemark(" ")); // spaces only
+        assertTrue(Address.isValidAddress("Likes to eat")); // less than 20 chara
+        assertTrue(Address.isValidAddress("-")); // one character
+        assertTrue(Address.isValidAddress(
+                "This is a string that contains seventy-four characters. which should pass. ")); // 75 chara
+
+    }
+
 }
