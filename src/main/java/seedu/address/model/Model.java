@@ -123,7 +123,7 @@ public interface Model {
     void addOrder(Order order);
 
     /**
-     * Returns true if a order with the same identity as {@code order} exists in the order list.
+     * Returns true if an order with the same identity as {@code order} exists in the order list.
      */
     boolean hasOrder(Order order);
 
