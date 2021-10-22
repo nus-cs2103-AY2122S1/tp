@@ -84,6 +84,24 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int importAddressBook(ReadOnlyAddressBook importedAddressBook) {
+        requireNonNull(importedAddressBook);
+
+        AddressBook newAddressBook = new AddressBook(this.addressBook);
+        int numOfContacts = 0;
+
+        for (Person p : importedAddressBook.getPersonList()) {
+            newAddressBook.addPerson(p);
+            numOfContacts++;
+        }
+
+        setAddressBook(newAddressBook);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        return numOfContacts;
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return addressBook;
     }
