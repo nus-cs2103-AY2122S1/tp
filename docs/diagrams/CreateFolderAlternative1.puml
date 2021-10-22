@@ -1,0 +1,26 @@
+@startuml
+!include style.puml
+'https://plantuml.com/class-diagram
+
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+class Folder
+class FolderName
+class Person
+class Name
+class Phone
+class Tag
+class Address
+class Email
+
+
+Folder --> "*" Person
+Folder --> FolderName
+Person --> Name
+Person --> Phone
+Person --> Address
+Person --> Email
+Person --> "*" Tag
+@enduml

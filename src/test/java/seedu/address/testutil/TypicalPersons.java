@@ -16,8 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.folder.Folder;
-import seedu.address.model.folder.FolderName;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,12 +55,6 @@ public class TypicalPersons {
             .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
-    // Folders
-    public static final Folder CS2103 = new Folder(new FolderName("CS2103"));
-    public static final Folder TEAM_PROJECT = new Folder(new FolderName(("Team Project")));
-    public static final Folder CCA = new Folder(new FolderName("CCA"));
-    public static final Folder EXCLUDED_FOLDER = new Folder(new FolderName("Excluded folder"));
-
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation
@@ -80,23 +72,5 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
-    }
-
-    /**
-     * Returns an {@code AddressBook} with all the typical persons and folders.
-     */
-    public static AddressBook getTypicalAddressBookWithFolders() {
-        AddressBook ab = new AddressBook();
-        for (Person person : getTypicalPersons()) {
-            ab.addPerson(person);
-        }
-        for (Folder folder : getTypicalFolders()) {
-            ab.addFolder(folder);
-        }
-        return ab;
-    }
-
-    public static List<Folder> getTypicalFolders() {
-        return new ArrayList<>(Arrays.asList(CS2103, TEAM_PROJECT, CCA));
     }
 }

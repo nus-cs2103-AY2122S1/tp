@@ -17,6 +17,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditFolderNameCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindFoldersCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListFoldersCommand;
@@ -60,6 +61,8 @@ public class AddressBookParser {
             return new ClearCommand();
         } else if (userInput.startsWith(DeleteCommand.COMMAND_WORD)) {
             return new DeleteCommandParser().parse(arguments);
+        } else if (userInput.startsWith(FindFoldersCommand.COMMAND_WORD)) {
+            return new FindFoldersCommandParser().parse(arguments);
         } else if (userInput.startsWith(FindCommand.COMMAND_WORD)) {
             return new FindCommandParser().parse(arguments);
         } else if (userInput.startsWith(ListFoldersCommand.COMMAND_WORD)) {
