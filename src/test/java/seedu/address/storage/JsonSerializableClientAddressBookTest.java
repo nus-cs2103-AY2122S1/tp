@@ -35,7 +35,8 @@ public class JsonSerializableClientAddressBookTest {
                     typicalClientsAddressBook.getClientList().get(i).getName(),
                     typicalClientsAddressBook.getClientList().get(i).getPhoneNumber(),
                     typicalClientsAddressBook.getClientList().get(i).getEmail(),
-                    typicalClientsAddressBook.getClientList().get(i).getAddress()
+                    typicalClientsAddressBook.getClientList().get(i).getAddress(),
+                    typicalClientsAddressBook.getClientList().get(i).getOrders()
             ));
         }
         assertEquals(addressBookFromFile, typicalClientsAddressBookUpdated);
@@ -61,7 +62,8 @@ public class JsonSerializableClientAddressBookTest {
                     typicalClientsAddressBook.getClientList().get(0).getName(),
                     typicalClientsAddressBook.getClientList().get(0).getPhoneNumber(),
                     typicalClientsAddressBook.getClientList().get(0).getEmail(),
-                    typicalClientsAddressBook.getClientList().get(0).getAddress()
+                    typicalClientsAddressBook.getClientList().get(0).getAddress(),
+                    typicalClientsAddressBook.getClientList().get(0).getOrders()
             ));
         }
         assertEquals(addressBookFromFile, typicalClientsAddressBookUpdated);

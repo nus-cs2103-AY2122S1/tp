@@ -3,6 +3,7 @@ package seedu.address.model.product;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.address.model.Category;
 import seedu.address.model.commons.ID;
@@ -32,6 +33,8 @@ public class Product implements Category {
         this.name = name;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
+        Logger logger = Logger.getLogger("create product object");
+        logger.info("new product created");
     }
 
     public ID getId() {
@@ -68,6 +71,20 @@ public class Product implements Category {
      */
     public static Product updateProduct(Product copyTo, Product copyFrom) {
         return new Product(copyTo.getId(), copyFrom.name, copyFrom.unitPrice, copyFrom.quantity);
+    }
+
+    /**
+     * Checks if this product has enough stock.
+     *
+     * @param quantity Amount required.
+     * @return true if this quantity <= product.quantity; false otherwise.
+     */
+    public boolean hasEnoughStock(Quantity quantity) {
+        if (this.quantity == null) {
+            return false;
+        }
+
+        return quantity.lessThan(this.quantity) || quantity.equals(this.quantity);
     }
 
     /**

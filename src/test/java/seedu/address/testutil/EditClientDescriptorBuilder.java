@@ -1,11 +1,21 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
+import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
+import seedu.address.model.product.Quantity;
 
 /**
  * A utility class to help with building EditClientDescriptor objects.
@@ -30,6 +40,7 @@ public class EditClientDescriptorBuilder {
         descriptor.setPhoneNumber(client.getPhoneNumber());
         descriptor.setEmail(client.getEmail());
         descriptor.setAddress(client.getAddress());
+        descriptor.setOrders(client.getOrders());
     }
 
     /**
@@ -61,6 +72,28 @@ public class EditClientDescriptorBuilder {
      */
     public EditClientDescriptorBuilder withAddress(String address) {
         descriptor.setAddress(new Address(address));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Order} of the {@code EditClientDescriptor} that we are building.
+     */
+    public EditClientDescriptorBuilder withOrders(String... orders) {
+        Set<Order> orderSet = Stream.of(orders)
+                .map(order -> {
+                    String[] args = order.split(" ");
+                    if (args[2].length() <= 5) {
+                        int year = Calendar.getInstance().get(Calendar.YEAR);
+                        args[2] = String.format("%d/%s", year, args[2]);
+                    }
+
+                    ID id = new ID(args[0]);
+                    Quantity quantity = new Quantity(args[1]);
+                    LocalDate time = LocalDate.parse(args[2], DateTimeFormatter.ofPattern("yyyy/M/d"));
+
+                    return new Order(id, quantity, time);
+                }).collect(Collectors.toSet());
+        descriptor.setOrders(orderSet);
         return this;
     }
 

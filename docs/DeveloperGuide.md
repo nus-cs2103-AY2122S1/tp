@@ -116,7 +116,7 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddClientCommand`) which is
    executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -124,11 +124,11 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete -c 1` Command](images/DeleteClientSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a
+:information_source: **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a
 limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
@@ -140,10 +140,10 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as
+  placeholder for the specific command name e.g., `AddClientCommandParser`) which uses the other classes shown above to parse
+  the user command and create a `XYZCommand` object (e.g., `AddClientCommand`) which the `AddressBookParser` returns back as
   a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser`
+* All `XYZCommandParser` classes (e.g., `AddClientCommandParser`, `DeleteClientCommandParser`, ...) inherit from the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -200,6 +200,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add Client/Product Feature
+
+The add feature allows the users to add a new `Client` or `Product` with details into the application. The commands are
+composed of a keyword `add` followed by `-c` for adding clients and `-p` for adding products.
+
+The user inputs the command through `MainWindow` of the UI component, which will pass the input string to
+`LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the
+command word, the arguments will be used in `AddClientCommandParser` or `AddProductCommandParser` class for parsing.
+The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the
+execution, data added will be saved to storage.
+
+For `AddClientCommandParser`, a `Model` is needed as it helps to check whether a string representing an `Order` is
+valid.
+
+The flow of the sequence diagram would be the same for adding `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `add -c Ben -pn 98765432` Command](images/AddClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `add` may be executed**
+
+* **Alternative 1 (current choice)** : User can add either a client or a product at a time
+    * Pros : Allows the user to focus on adding a client or product
+    * Cons : Might be slow if there are a lot of clients/products to add
+* **Alternative 2** : User can add multiple clients or products
+    * Pros : Allows the user to add multiple clients or products in one command
+    * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
+      be done through the`edit` command (requires the user to memorise the IDs)
 
 ### Edit Client/Product Feature
 
