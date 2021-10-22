@@ -206,7 +206,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Task
 
-1. When `Logic` is called upon to execute the user input `add task m/CS2103 a/assignment1 d/20/10/2021`, it uses the 
+1. When `Logic` is called upon to execute the user input `add task m/CS2103 ti/T1 a/assignment1 d/20/10/2021`, it uses the 
    `TeachingAssistantBuddyParser` class to parse the user command.
 2. `TeachingAssistantBuddyParser` parses the first command word `add`, and pass the rest of the input to `AddCommandParser`.
 3. `AddCommandParser` then figures out the type of object to add, in this case a `task` object as indicated by the 
@@ -218,6 +218,27 @@ This section describes some noteworthy details on how certain features are imple
 6. The `AddTaskCommand` communicates with the `Model` when it is executed.
 7. The `Model` will add a new `Task` with the new `taskName` under the `Module` with that `moduleName`.
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+### Edit Task
+
+1. When `Logic` is called upon to execute the user input `edit task m/CS2103 ti/T1 a/final exam`, it uses the
+   `TeachingAssistantBuddyParser` class to parse the user command.
+2. `TeachingAssistantBuddyParser` parses the first command word `edit`, and pass the rest of the input to `EditCommandParser`.
+3. The `EditCommandParser` then figures out the type of object to edit, in this case a `Task` object as indicated by `task`.
+4. The `EditTaskCommandParser` will then parse the tokens, `m/CS2103` and `ti/T1` in this case, to determine the module (`CS2103`in this case), 
+   and the taskId (`T1` in this case) of the task that is being edited, and pass the rest of the tokens to `EditTaskCommand`.
+5. The `EditTaskCommand` create an `EditTaskDescriptor` object (defined in EditTaskCommand), using the given `moduleName` object, 
+   `taskId` object, and any other tokens passed from `EditTaskCommandParser` representing the newly updated fields of the task object.
+6. This results in a `EditTaskCommand` object (which is a subclass of `EditCommand`), which is executed by the `Logic
+   Manager`.
+7. The `EditTaskCommand` communicates with the `Model` when it is executed.
+8. The `Model` will look for the `Task` with the specified task id, `T1` in this case,  inside the `Module` specified by
+   the module name, `CS2103` in this case, and then replacing the old editable fields (such as task name, task deadline) 
+   of that `Task` using any optionally provided new fields.
+9. The `Model` will look for the `Task` with the specified task id, `T1` in this case, for every `Student` in the `Module` specified by
+   the module name, `CS2103` in this case, and replacing the old editable fields of (such as task name, task deadline) 
+   of that `Task` using any optionally provided new fields.
+11. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 ### \[Proposed\] Undo/redo feature
 
