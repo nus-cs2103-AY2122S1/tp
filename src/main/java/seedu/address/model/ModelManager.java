@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -23,7 +24,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<Person> selectedPersons;
+    private final ObservableList<Person> selectedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,8 +38,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        selectedPersons = new FilteredList<>(this.addressBook.getPersonList());
-        selectedPersons.setPredicate(p -> false);
+        selectedPersons = FXCollections.observableArrayList();
     }
 
     public ModelManager() {
@@ -118,7 +118,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addSelected(List<Person> persons) {
-        // TODO Auto-generated method stub
+        selectedPersons.addAll(persons);
     }
 
     @Override
