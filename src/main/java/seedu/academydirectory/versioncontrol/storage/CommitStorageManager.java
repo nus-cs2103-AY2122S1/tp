@@ -45,8 +45,8 @@ public class CommitStorageManager extends StorageManager<Commit> {
 
         List<String> fields = new ArrayList<>();
         while (args.hasNext()) {
-            String[] arg = args.next().split(": ");
-            fields.add(arg.length == 2 ? arg[1] : "");
+            String[] arg = args.next().split(":", 2);
+            fields.add(arg.length == 2 ? arg[1].trim() : "");
         }
 
         if (fields.size() != 5) {
