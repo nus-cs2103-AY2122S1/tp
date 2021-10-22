@@ -9,10 +9,10 @@ import seedu.academydirectory.logic.commands.DeleteCommand;
 import seedu.academydirectory.logic.commands.EditCommand;
 import seedu.academydirectory.logic.commands.ExitCommand;
 import seedu.academydirectory.logic.commands.FindCommand;
+import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
-import seedu.academydirectory.logic.commands.GetCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
 public class HelpCommandParser implements Parser<HelpCommand> {
