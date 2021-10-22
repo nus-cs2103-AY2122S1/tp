@@ -28,6 +28,7 @@ public class DeleteReservationCommand extends Command {
 
     public DeleteReservationCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        assert this.targetIndex.getOneBased() > 0;
     }
 
     @Override
@@ -40,6 +41,7 @@ public class DeleteReservationCommand extends Command {
         }
 
         Reservation toDelete = lastShownList.get(targetIndex.getZeroBased());
+        assert toDelete != null;
         model.deleteReservation(toDelete);
         return new CommandResult(
                 String.format(MESSAGE_DELETE_RESERVATION_SUCCESS, toDelete),
