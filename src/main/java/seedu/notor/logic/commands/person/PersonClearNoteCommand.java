@@ -15,7 +15,6 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  * Clears the Note of the person by the given index.
  */
 public class PersonClearNoteCommand extends PersonCommand {
-
     public static final String COMMAND_WORD = "clearnote";
     public static final List<String> COMMAND_WORDS = Arrays.asList("clearnote", "cn");
 
@@ -59,5 +58,4 @@ public class PersonClearNoteCommand extends PersonCommand {
         PersonClearNoteCommand e = (PersonClearNoteCommand) other;
         return executor.equals(e.executor);
     }
-
 }
