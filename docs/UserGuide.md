@@ -137,8 +137,9 @@ Only one type of tag should be used for each search.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
 e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
-* For search with name or tag, only full words will be matched. e.g. `Han` will not match `Hans`.
-* For search with NUSNET ID or group name, partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
+* For search with name, only full words will be matched. e.g. `Han` will not match `Hans`.
+* For search with NUSNET ID, group name or tag, partial search is supported. e.g. `T02` will match `T02A` and `T02B`. 
+`friend` will match `friends`. 
 
 Examples:
 * `search -n John Doe`

@@ -1,0 +1,19 @@
+@startuml
+
+start
+
+:User executes command;
+
+if () then ([command is valid])
+    :Identify type of input;
+    :Process input argument into list of words;
+	:Create corresponding Predicate<Student> object;
+	:Update filtered student list;
+	:Update UI;
+else ([else])
+	:Throw a ParseException;
+endif
+
+stop
+
+@enduml
