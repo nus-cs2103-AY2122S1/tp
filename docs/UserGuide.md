@@ -4,7 +4,7 @@ layout: page
 title: User Guide
 ---
 
-![WTG logo](src/main/resources/images/tour_booth.png)
+![WTG logo](images/tour_booth.png)
 
 WhereTourGo: A Tour Guide’s Best Friend
 
