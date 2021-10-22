@@ -72,7 +72,7 @@ book that contains the contact information and order details related to clients 
 
 ### Help: `help`
 
-Displays help message to the user.
+Displays a help message.
 
 Format: `help`
 
@@ -97,8 +97,8 @@ Notes:
 
 * Adds a client with name, phone number and optional email, address and orders.
 * Adds a product with name, unit price and optional quantity.
-* The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `UNIT_PRICE`.
-* The user will be informed if the client/product to be added already exits.
+* An error message will be displayed if the format of a field is incorrect, e.g. input `ten dollars` for the field `UNIT_PRICE`.
+* A message will be displayed if the client/product to be added already exits.
 
 Examples:
 
@@ -120,7 +120,7 @@ Notes:
 * Deletes the client/product based on the client/product’s `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
-* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
+* An error message will be displayed if the client/product doesn't exist.
 
 Examples:
 
@@ -149,7 +149,7 @@ Notes:
 * Edits the client/product at the specified `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
-* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
+* An error message will be displayed if the client/product doesn't exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * `ORDER`s are identified by their `ID`s.
@@ -181,7 +181,7 @@ Notes:
 
 * Finds the client/product based on the `NAME` provided.
 * `NAME` provided must fully match the `NAME` in the application and can be case-insensitive.
-* User will be informed if there are no matching `NAME` in the application.
+* If there are no matching `NAME` in the application, an error message will be displayed
 
 Examples:
 
@@ -199,7 +199,7 @@ Format:
 
 Notes:
 
-* User will be informed if there are no clients/products in the application.
+* A message will be displayed if there are no clients/products in the application.
 
 Examples:
 
@@ -220,7 +220,7 @@ Notes:
 * Views the client/product at the specified `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
-* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
+* If the client/product doesn't exist, a display message is shown.
 
 Examples:
 
@@ -232,7 +232,7 @@ Expected Output: ![Ui](images/UiViewCommand.png)
 
 ### Command History:
 
-Allows the user to navigate to previous commands using `↑` and `↓` keys.
+Allows navigation to previous commands using `↑` and `↓` keys.
 
 Format:
 
