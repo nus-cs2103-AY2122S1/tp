@@ -5,10 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.DisplayType.GROUPS;
 import static seedu.address.model.Model.DisplayType.STUDENTS;
 import static seedu.address.model.Model.DisplayType.TASKS;
+import static seedu.address.model.Model.DisplayType.TASK_HISTORY;
 
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,10 +20,8 @@ import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Description;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskHistory;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -36,6 +34,7 @@ public class ModelManager implements Model {
     private final FilteredList<Student> filteredStudents;
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<Group> filteredGroups;
+    private final FilteredList<TaskHistory> filteredTaskHistory;
     private DisplayType displayType;
 
     /**
@@ -53,6 +52,7 @@ public class ModelManager implements Model {
         filteredStudents = new FilteredList<>(this.addressBook.getStudentList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        filteredTaskHistory = new FilteredList<>(this.addressBook.getTaskHistoryList());
     }
 
     public ModelManager() {
@@ -221,6 +221,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addTaskHistory(TaskHistory taskHistory) {
+        addressBook.addTaskHistory(taskHistory);
+    }
+
+    @Override
     public void addTask(Task student) {
         addressBook.addTask(student);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -236,10 +241,7 @@ public class ModelManager implements Model {
     @Override
     public void completeTask(Task target) {
         requireAllNonNull(target, target);
-        TaskName name = target.getName();
-        Set<Tag> tags = target.getTags();
-        String description = target.getDescription();
-        Task newTask = new Task(name, tags, true, new Description(description));
+        Task newTask = target.clone();
         newTask.markTaskComplete();
         addressBook.setTask(target, newTask);
     }
@@ -311,6 +313,14 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
+
+    @Override
+    public void updateFilteredTaskHistoryList(Predicate<TaskHistory> predicate) {
+        displayType = TASK_HISTORY;
+        requireNonNull(predicate);
+        filteredTaskHistory.setPredicate(predicate);
+    }
+
 
     //=========== Filtered Group List Accessors =============================================================
 

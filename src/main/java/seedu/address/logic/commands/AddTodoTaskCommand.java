@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.task.CommandType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskHistory;
 
 public class AddTodoTaskCommand extends Command {
 
@@ -24,7 +26,7 @@ public class AddTodoTaskCommand extends Command {
             + PREFIX_TAG + "W1404";
 
     //TODO todo task description
-    public static final String MESSAGE_SUCCESS = "New todo task added: %1$s + n/ Description: ";
+    public static final String MESSAGE_SUCCESS = "New todo task added: %1$s + \nDescription: ";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the tApp";
 
     public final Task toAdd;
@@ -45,6 +47,8 @@ public class AddTodoTaskCommand extends Command {
         }
 
         model.addTask(toAdd);
+        model.addTaskHistory(new TaskHistory(toAdd.getName(), CommandType.ADD));
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

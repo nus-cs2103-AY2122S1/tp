@@ -446,7 +446,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC7 - Add task with time**
+**Use case: UC7 - Add a task with date**
 
 **MSS**
 
@@ -458,13 +458,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The task list is empty.
+* 1a. The task name is empty.
 
     * 1a1. tApp displays an error message stating that the task name is invalid
 
       Use case ends.
 
-* 1b. The task list is empty.
+* 1b. The command format is incorrect.
 
     * 1b1. tApp displays an error message requesting the user to follow the correct format
 

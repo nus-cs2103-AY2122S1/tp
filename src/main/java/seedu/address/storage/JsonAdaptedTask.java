@@ -22,12 +22,13 @@ import seedu.address.model.task.TodoTask;
 public class JsonAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
-    private int i;
+    private final int i;
     private final String name;
     private String deadline;
     private String description;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private boolean isComplete;
+    private final boolean isComplete;
+    private final Task.Priority priority;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given task details.
@@ -35,13 +36,18 @@ public class JsonAdaptedTask {
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("deadline") String deadline,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-                                       @JsonProperty("status") String status) {
+                           @JsonProperty("isComplete") boolean isComplete,
+                           @JsonProperty("i") int i,
+                           @JsonProperty("priority") Task.Priority priority) {
         this.name = name;
         this.deadline = deadline;
+        this.i = i;
+        this.isComplete = isComplete;
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
         i = 0;
+        this.priority = priority;
     }
 
     /**
@@ -58,18 +64,19 @@ public class JsonAdaptedTask {
             this.i = 1;
             DeadlineTask task = (DeadlineTask) source;
             deadline = task.getDeadline().toString();
-        }
-        if (source instanceof EventTask) {
+        } else if (source instanceof EventTask) {
             this.i = 2;
             EventTask task = (EventTask) source;
             deadline = task.getTaskDate().toString();
         } else {
-            i = 0;
+            this.i = 0;
         }
+
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         this.isComplete = source.checkIsDone();
+        this.priority = source.getPriority();
     }
 
     /**
@@ -108,7 +115,7 @@ public class JsonAdaptedTask {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
-            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription);
+            return new DeadlineTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription, priority);
         }
         //if (task instanceof EventTask) {
         if (i == 2) {
@@ -121,9 +128,9 @@ public class JsonAdaptedTask {
                 throw new IllegalValueException(TaskDate.MESSAGE_CONSTRAINTS);
             }
             final TaskDate modelTaskDate = new TaskDate(deadline);
-            return new EventTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription);
+            return new EventTask(modelName, modelTags, isComplete, modelTaskDate, modelDescription, priority);
         }
 
-        return new TodoTask(modelName, modelTags, isComplete, modelDescription);
+        return new TodoTask(modelName, modelTags, isComplete, modelDescription, priority);
     }
 }

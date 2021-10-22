@@ -8,7 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.task.CommandType;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskHistory;
 
 public class AddEventTaskCommand extends Command {
     public static final String COMMAND_WORD = "event";
@@ -46,6 +48,7 @@ public class AddEventTaskCommand extends Command {
         }
 
         model.addTask(toAdd);
+        model.addTaskHistory(new TaskHistory(toAdd.getName(), CommandType.ADD));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -21,6 +21,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskHistory;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddressBookTest {
@@ -91,6 +92,7 @@ public class AddressBookTest {
         private final ObservableList<Student> students = FXCollections.observableArrayList();
         private final ObservableList<Task> tasks = FXCollections.observableArrayList();
         private final ObservableList<Group> groups = FXCollections.observableArrayList();
+        private final ObservableList<TaskHistory> taskHistoryList = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Student> students) {
             this.students.setAll(students);
@@ -109,6 +111,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Group> getGroupList() {
             return groups;
+        }
+
+        @Override
+        public ObservableList<TaskHistory> getTaskHistoryList() {
+            return taskHistoryList;
         }
     }
 
