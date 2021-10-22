@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -214,8 +215,33 @@ public class ModelManager implements Model {
      */
     public void markOrder(Order order) {
         addressBook.markOrder(order);
-
     }
+
+    /**
+     * For each person, finds orders associated with the person, and adds up the amount.
+     * Creates a ClientTotalOrder for each person.
+     *
+     * @return an ObservableList of {@code ClientTotalOrder}.
+     */
+    @Override
+    public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
+        for (Person client : addressBook.getPersonList()) {
+            clientTotalOrders.add(getClientTotalOrder(client));
+        }
+        return clientTotalOrders;
+    }
+
+    private ClientTotalOrder getClientTotalOrder(Person client) {
+        String clientName = client.getName().toString();
+        Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
+        double totalOrder = addressBook.getOrderList().stream()
+                .filter(correctClient)
+                .mapToDouble(Order::getAmountAsDouble)
+                .sum();
+        return new ClientTotalOrder(clientName, totalOrder);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

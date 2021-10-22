@@ -3,35 +3,36 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.Logic;
+import seedu.address.model.ClientTotalOrder;
 
 /**
  * Controller for a total orders page
  */
 public class TotalOrdersWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(TotalOrdersWindow.class);
-    // TODO change to TotalOrdersWindow.fxml when ready
-    private static final String FXML = "HelpWindow.fxml";
+    private static final String FXML = "TotalOrdersWindow.fxml";
+
+    private final Logic logic;
 
     @FXML
-    private Button copyButton;
+    private TableView<ClientTotalOrder> table;
+    @FXML
+    private TableColumn<ClientTotalOrder, String> clientCol;
+    @FXML
+    private TableColumn<ClientTotalOrder, Double> totalCol;
 
     /**
-     * Creates a new TotalOrdersWindow.
-     *
-     * @param root Stage to use as the root of the TotalOrdersWindow.
+     * Creates a {@code TotalOrdersWindow} with the given {@code Logic}.
      */
-    public TotalOrdersWindow(Stage root) {
-        super(FXML, root);
-    }
-
-    /**
-     * Creates a new TotalOrdersWindow.
-     */
-    public TotalOrdersWindow() {
-        this(new Stage());
+    public TotalOrdersWindow(Logic logic) {
+        super(FXML, new Stage());
+        this.logic = logic;
     }
 
     /**
@@ -80,11 +81,11 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     }
 
     /**
-     * Dummy method to pass the compilation.
-     * TODO remove this method after TotalOrdersWindow.fxml is ready
+     * Reloads ClientTotalOrders items from AddressBook.
      */
-    @FXML
-    private void copyUrl() {
-        ;
+    public void reloadData() {
+        table.setItems(logic.getClientTotalOrders());
+        clientCol.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+        totalCol.setCellValueFactory(new PropertyValueFactory<>("totalOrder"));
     }
 }

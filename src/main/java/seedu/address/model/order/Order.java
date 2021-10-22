@@ -71,6 +71,15 @@ public class Order implements Comparable<Order> {
         return idPrefix + this.id;
     }
 
+    /**
+     * Returns the amount as a double.
+     *
+     * @return the double representation of the amount.
+     */
+    public double getAmountAsDouble() {
+        return Double.parseDouble(amount.toString());
+    }
+
     // Order string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {

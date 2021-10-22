@@ -71,7 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        totalOrdersWindow = new TotalOrdersWindow();
+        totalOrdersWindow = new TotalOrdersWindow(logic);
         helpWindow = new HelpWindow();
     }
 
@@ -150,6 +150,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the total orders window or focuses on it if it's already opened.
      */
     public void handleTotalOrders() {
+        totalOrdersWindow.reloadData();
         if (!totalOrdersWindow.isShowing()) {
             totalOrdersWindow.show();
         } else {
