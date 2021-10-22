@@ -164,7 +164,7 @@ There are several important details left out of the activity diagram for the sak
 
 1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
 The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
-   
+ 
 1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
 
 1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
@@ -251,15 +251,15 @@ Use case ends.
 
 ### Search feature
 
-The `search` feature is allows user to filter student list by name, NUSNET ID, group, or tag. 
+The `search` feature is allows user to filter student list by name, NUSNET ID, group, or tag.
 
 #### Implementation
 
-The following diagram shows the search operation after user input `search -n Alex Yu`. 
+The following diagram shows the search operation after user input `search -n Alex Yu`.
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
-A `Predicate<Student>` object will be created for each search command. 
+A `Predicate<Student>` object will be created for each search command.
 It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
 
 To support the differentiated search functionality for different identifiers, multiple classes extending from
@@ -275,12 +275,12 @@ To support the differentiated search functionality for different identifiers, mu
 * `TagContainsKeywordsPredicate`: checks if the tag of student contains any string in the given keywords.
   Partial search is supported. e.g. `friend` will match `friends`.
 
-The following diagram summarizes what happens after user input search command: 
+The following diagram summarizes what happens after user input search command:
 
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks if command is valid. Command is invalid if user input is empty, or if 
-user entered more or less than one parameter.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
+if command is valid. Command is invalid if user input is empty, or if user entered more or less than one parameter.
 </div>
 
 
@@ -517,7 +517,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Student**: A student in the database, identified by their name and ID (their NUSNET ID). Each student can be in multiple groups, and can have scores for multiple assessments.
 * **Group**: A group of students, identified by its name.
-* **Assessment**: An assessment is identified by its name. 
+* **Assessment**: An assessment is identified by its name.
 * **Score**: The score that a student has attained for an assignment. Should be between 0 and 100, inclusive. Each student can only have 1 score per assessment.
 
 
