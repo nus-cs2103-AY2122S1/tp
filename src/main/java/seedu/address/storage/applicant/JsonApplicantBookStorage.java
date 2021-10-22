@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyApplicantBook;
+import seedu.address.model.ReadOnlyPositionBook;
 
 /**
  * A class to access ApplicantBook data stored as a json file on the hard disk.
@@ -32,18 +33,19 @@ public class JsonApplicantBookStorage implements ApplicantBookStorage {
     }
 
     @Override
-    public Optional<ReadOnlyApplicantBook> readApplicantBook() throws DataConversionException {
-        return readApplicantBook(filePath);
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(ReadOnlyPositionBook positionBook) throws DataConversionException {
+        return readApplicantBook(filePath, positionBook);
     }
 
     /**
-     * Similar to {@link #readApplicantBook()}.
+     * Similar to {@link #readApplicantBook(ReadOnlyPositionBook positionBook)}.
      *
      * @param filePath location of the applicant data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyApplicantBook> readApplicantBook(Path filePath, ReadOnlyPositionBook positionBook) throws DataConversionException {
         requireNonNull(filePath);
+        requireNonNull(positionBook);
 
         Optional<JsonSerializableApplicantBook> jsonApplicantBook = JsonUtil.readJsonFile(
                 filePath, JsonSerializableApplicantBook.class);
@@ -52,7 +54,7 @@ public class JsonApplicantBookStorage implements ApplicantBookStorage {
         }
 
         try {
-            return Optional.of(jsonApplicantBook.get().toModelType());
+            return Optional.of(jsonApplicantBook.get().toModelType(positionBook));
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);

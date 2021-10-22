@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
@@ -57,7 +58,7 @@ public class JsonAdaptedApplicant {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted applicant.
      */
-    public Applicant toModelType() throws IllegalValueException {
+    public Applicant toModelType(ReadOnlyPositionBook positionBook) throws IllegalValueException {
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -95,8 +96,7 @@ public class JsonAdaptedApplicant {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Position.class.getSimpleName()));
         }
-        final Position modelPosition = new Position(new Title(positionApplyingTo),
-                new Description(PLACEHOLDER_DESCRIPTION));
+        final Position modelPosition = positionBook.getPositionByTitle(new Title(positionApplyingTo));
 
         return new Applicant(modelName, modelPhone, modelEmail, modelAddress, modelPosition);
     }

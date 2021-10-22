@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ApplicantBook;
 import seedu.address.model.ReadOnlyApplicantBook;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.applicant.Applicant;
 
 /**
@@ -41,14 +42,14 @@ public class JsonSerializableApplicantBook {
     }
 
     /**
-     * Converts this applicant book into the model's {@code AddressBook} object.
+     * Converts this applicant book into the model's {@code ApplicantBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public ApplicantBook toModelType() throws IllegalValueException {
+    public ApplicantBook toModelType(ReadOnlyPositionBook positionBook) throws IllegalValueException {
         ApplicantBook applicantBook = new ApplicantBook();
         for (JsonAdaptedApplicant jsonAdaptedApplicant : applicants) {
-            Applicant applicant = jsonAdaptedApplicant.toModelType();
+            Applicant applicant = jsonAdaptedApplicant.toModelType(positionBook);
             if (applicantBook.hasApplicant(applicant)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_POSITION);
             }

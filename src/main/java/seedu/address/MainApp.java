@@ -92,18 +92,18 @@ public class MainApp extends Application {
         ReadOnlyApplicantBook initialApplicantBookData;
         try {
             addressBookOptional = storage.readAddressBook();
-            positionBookOptional = storage.readPositionBook();
-            applicantBookOptional = storage.readApplicantBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Addressbook data file not found. Will be starting with a sample AddressBook");
             }
             initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
+            positionBookOptional = storage.readPositionBook();
             if (!positionBookOptional.isPresent()) {
                 logger.info("Positionbook data file not found. Will be starting with a sample PositionBook");
             }
             initialPositionBookData = positionBookOptional.orElseGet(SampleDataUtil::getSamplePositionBook);
 
+            applicantBookOptional = storage.readApplicantBook(initialPositionBookData);
             if (!applicantBookOptional.isPresent()) {
                 logger.info("Applicantbook data file not found. Will be starting with a sample ApplicantBook");
             }
