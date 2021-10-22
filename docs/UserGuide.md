@@ -220,7 +220,7 @@ Format 2: `del INDEX-INDEX`
 
 <div markdown="span" class="alert alert-primary">:exclamation: Reminder:
 If *Format 1* is used, there should be a space in between each `INDEX`.
-If *Format 2* is used, first `INDEX` should be smaller than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
 </div>
 
 Examples:
