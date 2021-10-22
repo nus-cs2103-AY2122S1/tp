@@ -32,9 +32,9 @@ public class EditLessonCommandParser implements Parser<EditLessonCommand> {
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        } catch (ParseException | ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE), pe);
+                    MESSAGE_INVALID_COMMAND_FORMAT, EditLessonCommand.MESSAGE_USAGE), e);
         }
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();

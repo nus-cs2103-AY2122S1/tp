@@ -10,7 +10,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_STUDENT_PHONE = new Prefix("sp/");
     public static final Prefix PREFIX_PARENT_NAME = new Prefix("pn/");
     public static final Prefix PREFIX_PARENT_PHONE = new Prefix("pp/");
-    public static final Prefix PREFIX_LESSON_NAME = new Prefix("l/");
+    public static final Prefix PREFIX_LESSON_NAME = new Prefix("n/");
     public static final Prefix PREFIX_LESSON_PRICE = new Prefix("p/");
     public static final Prefix PREFIX_LESSON_TIMING = new Prefix("t/");
     public static final Prefix PREFIX_LESSON_CAPACITY = new Prefix("c/");

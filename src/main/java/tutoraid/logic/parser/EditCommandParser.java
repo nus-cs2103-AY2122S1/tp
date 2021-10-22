@@ -48,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             return new EditLessonCommandParser().parse(arguments);
 
         default:
-            throw new ParseException(Messages.MESSAGE_INVALID_ADD_COMMAND);
+            throw new ParseException(Messages.MESSAGE_INVALID_EDIT_COMMAND);
         }
     }
 }

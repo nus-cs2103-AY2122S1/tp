@@ -113,7 +113,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(LessonName.MESSAGE_CONSTRAINTS);
         }
         return new LessonName(trimmedName);
     }
