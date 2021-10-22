@@ -1,0 +1,39 @@
+@startuml
+participant ":MainWindow" as MainWindow
+participant ":LogicManager" as LogicManager
+participant ":TaskTabParser" as TaskTabParser
+participant "command:UpcomingTaskCommand" as UpcomingTaskCommand
+participant "commandResult:CommandResult" as CommandResult
+
+activate MainWindow
+MainWindow -> LogicManager: execute("upcoming")
+activate LogicManager
+
+LogicManager -> TaskTabParser: parseCommand(...)
+activate TaskTabParser
+
+create UpcomingTaskCommand
+TaskTabParser -> UpcomingTaskCommand
+activate UpcomingTaskCommand
+UpcomingTaskCommand --> TaskTabParser
+deactivate UpcomingTaskCommand
+
+TaskTabParser --> LogicManager: command
+deactivate TaskTabParser
+
+LogicManager -> UpcomingTaskCommand: execute(model)
+activate UpcomingTaskCommand
+
+create CommandResult
+UpcomingTaskCommand -> CommandResult
+activate CommandResult
+CommandResult --> UpcomingTaskCommand: commandResult
+deactivate CommandResult
+
+UpcomingTaskCommand --> LogicManager: commandResult
+deactivate UpcomingTaskCommand
+
+LogicManager --> MainWindow: commandResult
+deactivate LogicManager
+
+@enduml
