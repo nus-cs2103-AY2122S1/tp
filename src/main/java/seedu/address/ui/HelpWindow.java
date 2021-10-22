@@ -218,7 +218,7 @@ public class HelpWindow extends AnchorPane {
 
 
         ObservableList<Command> data = FXCollections.observableArrayList(
-                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(null),
+                new AddCommand(samplePerson), new ClearCommand(), new DeleteCommand(Index.fromZeroBased(0)),
                 new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
