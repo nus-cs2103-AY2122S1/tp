@@ -45,7 +45,7 @@ public class FriendCard extends UiPart<Region> {
         this.friend = friend;
         id.setText(displayedIndex + ". ");
         friendId.setText(friend.getFriendId().value);
-        friendName.setText(friend.getName().fullName);
+        friendName.setText(friend.getFriendName().fullName);
         friend.getGameFriendLinks().stream()
                 .sorted(Comparator.comparing(game -> game.getGameId().value))
                 .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));

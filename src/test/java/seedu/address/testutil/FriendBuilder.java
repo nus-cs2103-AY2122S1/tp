@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.Schedule;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,6 +21,7 @@ public class FriendBuilder {
     private FriendName friendName;
     private FriendId friendId;
     private Set<GameFriendLink> games;
+    private Schedule schedule;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -28,6 +30,7 @@ public class FriendBuilder {
         friendId = new FriendId(DEFAULT_FRIEND_ID);
         friendName = new FriendName(DEFAULT_NAME);
         games = new HashSet<>();
+        schedule = new Schedule();
     }
 
     /**
@@ -35,8 +38,9 @@ public class FriendBuilder {
      */
     public FriendBuilder(Friend friendToCopy) {
         friendId = friendToCopy.getFriendId();
-        friendName = friendToCopy.getName();
+        friendName = friendToCopy.getFriendName();
         games = new HashSet<>(friendToCopy.getGameFriendLinks());
+        schedule = friendToCopy.getSchedule();
     }
 
     /**
@@ -64,8 +68,15 @@ public class FriendBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Schedule} of the {@code Friend} that we are building.
+     */
+    public FriendBuilder withSchedule(Schedule schedule) {
+        this.schedule = schedule;
+        return this;
+    }
 
     public Friend build() {
-        return new Friend(friendId, friendName, games);
+        return new Friend(friendId, friendName, games, schedule);
     }
 }

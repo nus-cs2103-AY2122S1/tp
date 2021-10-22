@@ -30,7 +30,7 @@ public class FriendMainCard extends UiPart<Region> {
      */
     public FriendMainCard(Friend friend, ObservableList<Game> gameList) {
         super(FXML);
-        friendTitle.setText(String.format(FRIEND_TITLE, friend.getName(), friend.getFriendId()));
+        friendTitle.setText(String.format(FRIEND_TITLE, friend.getFriendName(), friend.getFriendId()));
         gameListView.setItems(gameList);
         gameListView.setCellFactory(listView -> new GameListViewCell());
         this.currentFriend = friend;

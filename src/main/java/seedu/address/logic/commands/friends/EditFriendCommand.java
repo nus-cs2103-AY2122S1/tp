@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.Schedule;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -58,10 +59,11 @@ public class EditFriendCommand extends Command {
         assert editFriendDescriptor != null;
 
         FriendId friendId = friendToEdit.getFriendId();
-        FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getName());
+        FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getFriendName());
         Set<GameFriendLink> gameFriendLinks = friendToEdit.getGameFriendLinks();
+        Schedule schedule = friendToEdit.getSchedule();
 
-        return new Friend(friendId, updatedFriendName, gameFriendLinks);
+        return new Friend(friendId, updatedFriendName, gameFriendLinks, schedule);
     }
 
     @Override

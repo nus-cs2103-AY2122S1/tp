@@ -121,7 +121,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredFriendsList().size());
 
         Friend friend = model.getFilteredFriendsList().get(targetIndex.getZeroBased());
-        final String[] splitName = friend.getName().fullName.split("\\s+");
+        final String[] splitName = friend.getFriendName().fullName.split("\\s+");
         model.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredFriendsList().size());

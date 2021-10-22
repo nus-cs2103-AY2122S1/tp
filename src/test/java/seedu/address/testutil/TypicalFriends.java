@@ -11,6 +11,7 @@ import java.util.List;
 
 import seedu.address.model.FriendsList;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.Schedule;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -19,9 +20,9 @@ public class TypicalFriends {
 
     // TODO: Yu Zher - write tests with game friend links included
     public static final Friend ALICE = new FriendBuilder().withFriendName("Alice Pauline").withFriendId("94351253")
-            .withGameFriendLinks().build();
+            .withGameFriendLinks().withSchedule(new Schedule()).build();
     public static final Friend BENSON = new FriendBuilder().withFriendName("Benson Meier").withFriendId("98765432")
-            .withGameFriendLinks().build();
+            .withGameFriendLinks().withSchedule(new Schedule()).build();
     public static final Friend CARL = new FriendBuilder().withFriendName("Carl Kurz").withFriendId("95352563")
             .build();
     public static final Friend DANIEL = new FriendBuilder().withFriendName("Daniel Meier").withFriendId("87652533")
