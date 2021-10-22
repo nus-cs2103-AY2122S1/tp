@@ -9,7 +9,10 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
+import java.util.List;
 
+import seedu.plannermd.commons.core.Messages;
+import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
@@ -20,15 +23,11 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Remark;
 
-import seedu.plannermd.commons.core.Messages;
-import seedu.plannermd.commons.core.index.Index;
-import java.util.List;
-
 public class AddAppointmentCommand extends AppointmentCommand {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + FLAG_ADD + ": Adds an appointment to PlannerMD "
             + "Parameters: " + PREFIX_PATIENT + "INDEX_OF_PATIENT " + PREFIX_DOCTOR + "INDEX_OF_DOCTOR "
-            + PREFIX_START + "DATE_AND_TIME" + "[" + PREFIX_DURATION + "DURATION" + "] "+ "["
+            + PREFIX_START + "DATE_AND_TIME" + "[" + PREFIX_DURATION + "DURATION" + "] " + "["
             + PREFIX_REMARK + " REMARK" + "]\n" + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " "
             + PREFIX_PATIENT + "1 "
             + PREFIX_DOCTOR + "2 " + PREFIX_START + "2/2/2022 12:00 "

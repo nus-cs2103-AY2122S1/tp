@@ -8,14 +8,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 
-import seedu.plannermd.commons.core.index.Index;
-import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
-import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.appointment.AppointmentDate;
-import seedu.plannermd.model.appointment.Duration;
-import seedu.plannermd.model.appointment.Session;
-import seedu.plannermd.model.person.Remark;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -24,7 +16,15 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.stream.Stream;
 
-public class AddAppointmentCommandParser  {
+import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
+import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.appointment.AppointmentDate;
+import seedu.plannermd.model.appointment.Duration;
+import seedu.plannermd.model.appointment.Session;
+import seedu.plannermd.model.person.Remark;
+
+public class AddAppointmentCommandParser {
     public static final String END_DATE_BEFORE_START_DATE_MESSAGE = "End date cannot be before start date.";
     public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
             + AddAppointmentCommand.MESSAGE_USAGE;
@@ -83,7 +83,7 @@ public class AddAppointmentCommandParser  {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
-    private final DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+    final private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("d/M/yyyy")
             .appendPattern(" HH:mm")
             .toFormatter();

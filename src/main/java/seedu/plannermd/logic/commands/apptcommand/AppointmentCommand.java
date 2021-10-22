@@ -4,8 +4,8 @@ import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
 import seedu.plannermd.logic.commands.Command;
 
