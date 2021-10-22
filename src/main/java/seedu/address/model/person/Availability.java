@@ -51,6 +51,13 @@ public class Availability {
         return values.contains(day);
     }
 
+    /**
+     * Returns true if availability list is empty.
+     */
+    public boolean isEmpty() {
+        return values.isEmpty();
+    }
+
     @Override
     public String toString() {
         return values.stream().map(dayOfWeek -> dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault()))
