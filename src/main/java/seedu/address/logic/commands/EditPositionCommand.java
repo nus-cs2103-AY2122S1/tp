@@ -84,5 +84,4 @@ public class EditPositionCommand extends Command {
                 && editPositionDescriptor.equals(e.editPositionDescriptor);
     }
 
-
 }
