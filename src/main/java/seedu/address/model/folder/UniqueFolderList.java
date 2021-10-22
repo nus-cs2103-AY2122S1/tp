@@ -119,7 +119,7 @@ public class UniqueFolderList implements Iterable<Folder> {
             throw new DuplicateFolderException();
         }
 
-        editedFolder.setAll(target);
+        editedFolder.setAll(internalList.get(index));
         internalList.set(index, editedFolder);
     }
 
