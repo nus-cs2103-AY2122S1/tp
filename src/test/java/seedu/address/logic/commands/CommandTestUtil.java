@@ -81,6 +81,8 @@ public class CommandTestUtil {
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
             + PREFIX_SOCIAL_HANDLE + "@fef fef"; // space not allowed in social handle
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TAG_COLOUR_DESC = " " + PREFIX_TAG + "hubby" + PREFIX_TAG_COLOUR
+            + "blue"; // '*' not allowed in tags
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
