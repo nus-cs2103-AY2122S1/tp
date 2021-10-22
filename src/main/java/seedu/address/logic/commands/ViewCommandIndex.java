@@ -34,4 +34,11 @@ public class ViewCommandIndex extends ViewCommand {
         return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson), selectedPerson);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewCommandIndex // instanceof handles nulls
+                && targetIndex.equals(((ViewCommandIndex) other).targetIndex)); // state check
+    }
+
 }
