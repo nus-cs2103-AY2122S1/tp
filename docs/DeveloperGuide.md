@@ -14,16 +14,17 @@ title: Developer Guide
    - [Common classes](#common-classes)
 5. [Implementation](#implementation)
    - [View student/lesson feature](#view-studentlesson-feature)
+   - [Card-like UI Elements](#card-like-ui-elements)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
+7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+8. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
    - [User stories](#user-stories)
    - [Use cases](#use-cases)
    - [Non-Functional Requirements](#non-functional-requirements)
    - [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    - [Launch and shutdown](#launch-and-shutdown)
    - [Deleting a person](#deleting-a-person)
    - [Saving data](#saving-data)
@@ -171,11 +172,12 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
 
 ### View student/lesson feature
 
@@ -202,7 +204,7 @@ The following sequence diagram shows how the view student operation works:
 
 A similar execution scenario can be expected for view lesson mechanism.
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How view student/lesson executes:**
 
@@ -213,6 +215,31 @@ A similar execution scenario can be expected for view lesson mechanism.
 * **Alternative 2:** Filter list beforehand and update view panel on command.
     * Pros: Will use less memory (e.g. for `view -s`, just load the pre-generated student panel).
     * Cons: We must ensure that all possible view panels combinations are covered and this might cause slower application initialization.
+
+    
+### Card-like UI Elements
+
+Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
+
+These UI elements inherit the `Card` class, which in turn inherits `UiPart<Region>`. 
+
+![CardClassDiagram](images/CardClassDiagram.png)
+
+At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed.
+
+There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. Every time the `Model` is updated, `MainWindow#fillStudentCard` and `MainWindow#fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
+
+![CardUiSequence](images/CardUiSequence.png)
+
+When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes to prepare them to accept new nodes (panels). Then, the correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels to the user.
+
+Conversely, if a user chooses to hide the details, `UiManager#hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
+
+The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. In contrast, during the application launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow#fillInnerParts`. The details are shown below:
+
+![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
+
+The panels default to the minimal panels for the application launch.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -414,7 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
       Use case resumes from step 2.
-      
+    
 * 4a. TutorAid detects an error in the command to delete a student.
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -682,7 +709,7 @@ Preconditions: There is at least one student added to TutorAid.
 * 4a. TutorAid detects an error in the reset payment command
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-  
+    
     * 4a2. Tutor re-enters the command.
 
       Steps 4a1-4a2 are repeated until the data entered are correct.
@@ -846,7 +873,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
       Steps 4a1-4a2 are repeated until the command entered is correct.
 
       Use case resumes from step 5.
-      
+    
 * 7a. TutorAid detects an error in the command to remove a student from a class.
 
     * 7a1. TutorAid displays an error message and requests the tutor to re-enter the command.
