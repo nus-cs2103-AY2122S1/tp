@@ -10,6 +10,7 @@ Class "{abstract}\nUiPart" as UiPart
 Class UiManager
 Class MainWindow
 Class HelpWindow
+Class StudentWindow
 Class ResultDisplay
 Class StudentListPanel
 Class ClassListPanel
@@ -38,6 +39,7 @@ MainWindow *-down-> "1" StudentListPanel
 MainWindow *-down-> "1" ClassListPanel
 MainWindow *-down-> "1" StatusBarFooter
 MainWindow --> "0..1" HelpWindow
+MainWindow --> "0..1" StudentWindow
 
 StudentListPanel -down-> "*" StudentCard
 ClassListPanel -down-> "*" ClassCard
@@ -52,6 +54,7 @@ StudentCard --|> UiPart
 ClassCard --|> UiPart
 StatusBarFooter --|> UiPart
 HelpWindow --|> UiPart
+StudentWindow --|> UiPart
 
 ClassCard ..> Model
 StudentCard ..> Model

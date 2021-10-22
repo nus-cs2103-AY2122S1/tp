@@ -18,8 +18,10 @@ Class ReadOnlyUserPrefs
 
 Class UniqueStudentList
 Class UniqueTutorialClassList
-Class TutorialClass
+Class UniqueTutorialGroupList
 Class Student
+Class TutorialClass
+Class TutorialGroup
 Class Address
 Class Email
 Class Name
@@ -27,6 +29,8 @@ Class Phone
 Class Tag
 Class ClassCode
 Class Schedule
+Class GroupName
+Class GroupType
 
 }
 
@@ -44,8 +48,10 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 Classmate *--> "1" UniqueStudentList
 Classmate *--> "1" UniqueTutorialClassList
+Classmate *--> "1" UniqueTutorialGroupList
 UniqueStudentList *-down-> "~* all" Student
 UniqueTutorialClassList *-down-> "~* all" TutorialClass
+UniqueTutorialGroupList *-down-> "~* all" TutorialGroup
 Student *--> Name
 Student *--> Phone
 Student *--> Email
@@ -55,6 +61,9 @@ Student *--> "*" Tag
 TutorialClass *--> ClassCode
 TutorialClass *--> "*" Tag
 TutorialClass *--> Schedule
+TutorialGroup *--> GroupName
+TutorialGroup *--> ClassCode
+TutorialGroup *--> GroupType
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
@@ -62,4 +71,5 @@ Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Student
 ModelManager -->"~* filtered" TutorialClass
+ModelManager --->"~* filtered" TutorialGroup
 @enduml
