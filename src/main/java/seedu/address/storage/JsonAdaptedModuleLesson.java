@@ -1,10 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import static seedu.address.logic.parser.ParserUtil.parseModuleCode;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +20,7 @@ public class JsonAdaptedModuleLesson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module Lesson's %s field is missing!";
 
-    private final List<JsonAdaptedModuleCode> moduleCodes = new ArrayList<>();
+    private final String moduleCode;
     private final String lessonDay;
     private final String lessonTime;
     private final String remark;
@@ -34,13 +30,11 @@ public class JsonAdaptedModuleLesson {
      *
      */
     @JsonCreator
-    public JsonAdaptedModuleLesson(@JsonProperty("moduleCodes") List<JsonAdaptedModuleCode> moduleCodes,
+    public JsonAdaptedModuleLesson(@JsonProperty("moduleCodes") String moduleCode,
                                    @JsonProperty("lessonDay") String lessonDay,
                                    @JsonProperty("lessonTime") String lessonTime,
                                    @JsonProperty("remark") String remark) {
-        if (moduleCodes != null) {
-            this.moduleCodes.addAll(moduleCodes);
-        }
+        this.moduleCode = moduleCode;
         this.lessonDay = lessonDay;
         this.lessonTime = lessonTime;
         this.remark = remark;
@@ -50,9 +44,7 @@ public class JsonAdaptedModuleLesson {
      * Converts a given {@code ModuleLesson} into this lesson for Jackson use.
      */
     public JsonAdaptedModuleLesson(ModuleLesson source) {
-        moduleCodes.addAll(source.getModuleCodes().stream()
-                .map(JsonAdaptedModuleCode::new)
-                .collect(Collectors.toList()));
+        moduleCode = source.getModuleCode().toString();
         lessonDay = source.getDay().getDayAsIntString();
         lessonTime = source.getTime().toString();
         remark = source.getRemark().value;
@@ -64,35 +56,33 @@ public class JsonAdaptedModuleLesson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted module lesson.
      */
     public ModuleLesson toModelType() throws IllegalValueException {
-        if (moduleCodes == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
+        if (this.moduleCode == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModuleCode.class.getSimpleName()));
         }
-        final List<ModuleCode> lessonModuleCodes = new ArrayList<>();
-        for (JsonAdaptedModuleCode moduleCode : moduleCodes) {
-            lessonModuleCodes.add(moduleCode.toModelType());
-        }
-        final Set<ModuleCode> modelModuleCodes = new HashSet<>(lessonModuleCodes);
 
-        if (lessonDay == null) {
+        final ModuleCode moduleCode = parseModuleCode(this.moduleCode);
+
+        if (this.lessonDay == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonDay.class.getSimpleName())
             );
         }
         final LessonDay lessonDay = new LessonDay(this.lessonDay);
 
-        if (lessonTime == null) {
+        if (this.lessonTime == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonTime.class.getSimpleName())
             );
         }
         final LessonTime lessonTime = new LessonTime(this.lessonTime);
 
-        if (remark == null) {
+        if (this.remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        final Remark lessonRemark = new Remark(remark);
+        final Remark remark = new Remark(this.remark);
 
-        return new ModuleLesson(modelModuleCodes, lessonDay, lessonTime, lessonRemark);
+        return new ModuleLesson(moduleCode, lessonDay, lessonTime, remark);
     }
 
 }
