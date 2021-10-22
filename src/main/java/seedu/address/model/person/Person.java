@@ -31,6 +31,7 @@ public class Person {
         this.availability = availability;
     }
 
+
     public Name getName() {
         return name;
     }

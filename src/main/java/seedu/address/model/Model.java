@@ -140,6 +140,8 @@ public interface Model {
      */
     ObservableList<Facility> getFilteredFacilityList();
 
+    Person getSamePerson(Person person);
+
     /**
      * Clears the contents of the member list.
      */

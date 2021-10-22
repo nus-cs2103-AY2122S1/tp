@@ -167,6 +167,15 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getSamePerson(Person toFind) {
+        return addressBook.getPersonList()
+                .stream()
+                .filter(person -> person.isSamePerson(toFind))
+                .findAny()
+                .orElse(null);
+    }
+
+    @Override
     public void resetMemberList() {
         addressBook.resetMemberList();
     }

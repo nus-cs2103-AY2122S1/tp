@@ -28,9 +28,11 @@ public class ImportCommand extends Command {
         requireNonNull(model);
         for (Person person: personList) {
             if (model.hasPerson(person)) {
-                continue;
+                Person personToReplace = model.getSamePerson(person);
+                model.setPerson(personToReplace, person);
+            } else {
+                model.addPerson(person);
             }
-            model.addPerson(person);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }
