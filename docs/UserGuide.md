@@ -9,14 +9,14 @@ that contains the contact information and order details related to clients and p
 * Table of Contents
     * [Quick Start](#quick-start)
     * [Features](#features)
+        * [Exit](#exit-exit)
         * [Add](#adding-add)
-        * [Edit](#editing-edit)
-        * [View](#viewing-view)
         * [Delete](#deleting-delete)
+        * [Edit](#editing-edit)
         * [Find](#finding-find)
         * [List](#listing-list)
+        * [View](#viewing-view)
         * [Command History](#command-history)
-        * [Exit](#exiting-exit)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
@@ -51,8 +51,8 @@ that contains the contact information and order details related to clients and p
 * Items in square brackets are optional.<br>
   e.g `NAME [-e EMAIL]` can be used as `Ben -e ben@gmail.com` or as `Ben`.
 
-* Items with `...` after them can be used multiple times including zero times.
-  e.g. `[-o ORDER]...` can be used as ` ` (i.e. 0 times), `-o 0 1 10/21`, `-o 0 1 2021/10/21 -o 1 5 10/20` etc.
+* Items with `...` after them can be used multiple times including zero times. e.g. `[-o ORDER]...` can be used as ` ` (
+  i.e. 0 times), `-o 0 1 10/21`, `-o 0 1 2021/10/21 -o 1 5 10/20`, etc.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `-pn PHONE_NUMBER -e EMAIL`, `-e EMAIL -pn PHONE_NUMBER` is also acceptable.
@@ -65,6 +65,12 @@ that contains the contact information and order details related to clients and p
   e.g. if the command specifies `exit 123`, it will be interpreted as `exit`.
 
 </div>
+
+### Exit: `exit`
+
+Exits the program.
+
+Format: `exit`
 
 ### Adding: `add`
 
@@ -87,6 +93,26 @@ Examples:
 * `add -c Ben -pn 98765432` adds a new `client` `Ben`, whose `phone number` is `98765432`.
 * `add -p pen -$ 10.0 -q 150` adds a new `product` `pen` with a `unit price` of `$10.0` and there are `150`
   pens in stock.
+
+### Deleting: `delete`
+
+Deletes the specified client/product from the tracker.
+
+Format:
+
+* Delete a client: `delete -c INDEX`
+* Delete a product: `delete -p INDEX`
+
+Notes:
+
+* Deletes the client/product based on the client/product’s INDEX.
+* The INDEX refers to the index shown in the displayed client/product list.
+* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
+
+Examples:
+
+* `delete -c 1` deletes the client with index 1 in the tracker.
+* `delete -p 2` deletes the product with index 2 in the tracker.
 
 ### Editing: `edit`
 
@@ -111,45 +137,6 @@ Examples:
 
 * `edit -c 1 -n Ben` Edits the name of the client with `INDEX` of `1` to `Ben`.
 * `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `INDEX` of `3` to `Ben10` and the quantity to `20`.
-
-### Viewing: `view`
-
-Views a current client/product from the application.
-
-Format:
-
-* View a client: `view -c INDEX`
-* View a product: `view -p INDEX`
-
-Notes:
-
-* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
-
-Examples:
-
-* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email and
-  address.
-* `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
-
-### Deleting: `delete`
-
-Deletes the specified client/product from the tracker.
-
-Format:
-
-* Delete a client: `delete -c INDEX`
-* Delete a product: `delete -p INDEX`
-
-Notes:
-
-* Deletes the client/product based on the client/product’s INDEX.
-* The INDEX refers to the index shown in the displayed client/product list.
-* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
-
-Examples:
-
-* `delete -c 1` deletes the client with index 1 in the tracker.
-* `delete -p 2` deletes the product with index 2 in the tracker.
 
 ### Finding: `find`
 
@@ -189,6 +176,25 @@ Examples:
 * `list -c` Shows a list of all clients in the application.
 * `list -p` Shows a list of all products in the application.
 
+### Viewing: `view`
+
+Views a current client/product from the application.
+
+Format:
+
+* View a client: `view -c INDEX`
+* View a product: `view -p INDEX`
+
+Notes:
+
+* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
+
+Examples:
+
+* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email and
+  address.
+* `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
+
 ### Command History:
 
 Allows the user to navigate to previous commands using `↑` and `↓` keys.
@@ -204,11 +210,7 @@ Notes:
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
 
-### Exiting: `exit`
 
-Exits the program.
-
-Format: `exit`
 
 ### Loading and Saving the data [coming soon]
 
