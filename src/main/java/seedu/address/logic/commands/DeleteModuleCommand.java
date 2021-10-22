@@ -46,7 +46,7 @@ public class DeleteModuleCommand extends DeleteCommand {
         for (Module module : lastShownList) {
             if (module.getName().equals(moduleName)) {
                 moduleToDelete = module;
-                String moduleName =  moduleToDelete.getName().getModuleName();
+                String moduleName = moduleToDelete.getName().getModuleName();
                 logger.log(Level.INFO, "deleting module: " + moduleName);
                 model.deleteModule(moduleToDelete);
                 return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
