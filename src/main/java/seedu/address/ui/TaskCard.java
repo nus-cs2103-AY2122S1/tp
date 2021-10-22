@@ -3,6 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
 
@@ -23,6 +24,8 @@ public class TaskCard extends UiPart<Region> {
     private Label date;
     @FXML
     private CheckBox isDone;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -34,6 +37,7 @@ public class TaskCard extends UiPart<Region> {
         label.setText(task.getLabel().toString());
         date.setText("Deadline:  " + task.getDate().parsedDate);
         isDone.setSelected(task.getIsDone());
+        tags.getChildren().add(new Label(task.getTaskTag().tagName));
     }
 
     @Override
