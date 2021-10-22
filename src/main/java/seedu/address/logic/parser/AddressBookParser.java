@@ -18,7 +18,6 @@ import seedu.address.logic.parser.person.AddPersonCommandParser;
 import seedu.address.logic.parser.person.DeletePersonCommandParser;
 import seedu.address.logic.parser.person.EditPersonCommandParser;
 import seedu.address.logic.parser.person.FindPersonCommandParser;
-import seedu.address.logic.parser.person.RemarkPersonCommandParser;
 
 /**
  * Parses user input.
@@ -64,9 +63,6 @@ public class AddressBookParser {
 
         case LIST_PERSON:
             return new ListPersonCommand();
-
-        case REMARK_PERSON:
-            return new RemarkPersonCommandParser().parse(arguments);
 
         case LIST_MODULE_LESSON:
             return new ListModuleLessonCommand();
