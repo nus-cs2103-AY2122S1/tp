@@ -19,10 +19,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040S_B05;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_LESSON_REMARK;
+import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_NO_FIELD_PROVIDED;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_NO_FIELD_PROVIDED;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 

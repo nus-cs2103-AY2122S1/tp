@@ -107,8 +107,8 @@ public class EditModuleLessonCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
-        EditLessonDescriptor descriptor =
-                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                        .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
@@ -122,8 +122,8 @@ public class EditModuleLessonCommandTest {
         // ensures that invalidIndex is still in bounds of address book list
         assertTrue(invalidIndex.getZeroBased() < model.getAddressBook().getModuleLessonList().size());
 
-        EditLessonDescriptor descriptor =
-                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
+        EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
+                        .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
