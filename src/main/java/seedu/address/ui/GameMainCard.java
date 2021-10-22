@@ -20,6 +20,7 @@ import seedu.address.ui.util.SampleStyles;
 public class GameMainCard extends UiPart<Region> {
     private static final String FXML = "GameMainCard.fxml";
     private static final String GAME_TITLE = "Game: %s";
+    private static final String DEFAULT_GAME_TITLE = "No game selected";
 
     private final Logger logger = LogsCenter.getLogger(GameMainCard.class);
 
@@ -39,7 +40,7 @@ public class GameMainCard extends UiPart<Region> {
      */
     public GameMainCard() {
         super(FXML);
-        gameTitle.setText("No game selected");
+        gameTitle.setText(DEFAULT_GAME_TITLE);
     }
 
     /**

@@ -19,7 +19,8 @@ import seedu.address.ui.util.SampleStyles;
 
 public class FriendMainCard extends UiPart<Region> {
     private static final String FXML = "FriendMainCard.fxml";
-    private static final String FRIEND_TITLE = "%s \n Friend ID: %s";
+    private static final String FRIEND_TITLE = "Friend ID: %s \n Name: %s";
+    private static final String DEFAULT_FRIEND_TITLE = "No friend selected";
 
     private final Logger logger = LogsCenter.getLogger(FriendMainCard.class);
 
@@ -39,7 +40,7 @@ public class FriendMainCard extends UiPart<Region> {
      */
     public FriendMainCard() {
         super(FXML);
-        friendTitle.setText("No friend selected");
+        friendTitle.setText(DEFAULT_FRIEND_TITLE);
     }
 
     /**
