@@ -148,7 +148,7 @@ public interface Model {
 
     /** Resets the order list to its regular ordering based on id */
     void resetOrderView();
-  
+
     /** Returns an unmodifiable view of the list of ClientTotalOrders */
     ObservableList<ClientTotalOrder> getClientTotalOrders();
 }
