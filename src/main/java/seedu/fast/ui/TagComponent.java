@@ -16,16 +16,19 @@ import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.tag.Tag;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
+ * A HBox that contains the set of tags and the tag image.
  */
 public class TagComponent extends HBox {
     @FXML
-    private FlowPane component;
+    private FlowPane tags;
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * The constructor for TagComponent
+     * @param tagSet The set of Tags.
+     * @param img The image of the icon.
+     */
     public TagComponent(Set<Tag> tagSet, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/TagComponent.fxml"));
@@ -37,11 +40,16 @@ public class TagComponent extends HBox {
         }
         tagSet.stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> component.getChildren().add(colorSelector(tag.tagName)));
+                .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
         displayPicture.setImage(img);
     }
 
 
+    /**
+     * Does a string comparison to determine what color the tag should be.
+     * @param tagName Tag name.
+     * @return A new Label with its color predetermined.
+     */
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
 
