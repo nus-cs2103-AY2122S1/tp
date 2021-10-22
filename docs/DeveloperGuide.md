@@ -213,8 +213,8 @@ by entering a command:
    extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into
    `AddCommandParser#parse()`.
 
-3. `AddCommandParser#parse` extracts the command flag `-p` at the start of its argument, which denotes the addition
-   of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse`.
+3. `AddCommandParser#parse()` extracts the command flag `-p` at the start of its argument, which denotes the addition
+   of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse()`.
 
 4. The remaining (`2 Did Homework​`) is then parsed into index `2` and progress description `Did Homework`, which
    are then used to construct an `AddProgressCommand` object. 
