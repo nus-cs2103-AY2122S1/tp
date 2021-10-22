@@ -32,8 +32,8 @@ public class CommandsList {
         String separator = "";
         for (int i = 0; i < LIST_OF_COMMANDS.length; i++) {
             listOfCommandsAsString.append(separator);
-            listOfCommandsAsString.append(LIST_OF_COMMANDS[i]);
-            separator = ", ";
+            listOfCommandsAsString.append("    - ").append(LIST_OF_COMMANDS[i]);
+            separator = "\n";
         }
 
         return listOfCommandsAsString.toString();

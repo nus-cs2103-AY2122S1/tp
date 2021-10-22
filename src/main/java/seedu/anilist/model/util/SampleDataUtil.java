@@ -58,7 +58,7 @@ public class SampleDataUtil {
             new Anime(new Name("Blue Period"),
                     new Episode("0"),
                     new Status("t"),
-                    getGenreSet( "drama", "slice of life")),
+                    getGenreSet("drama", "slice of life")),
             new Anime(new Name("Komi-san wa, Comyushou desu."),
                     new Episode("0"),
                     new Status("t"),

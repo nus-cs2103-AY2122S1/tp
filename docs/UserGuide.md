@@ -29,51 +29,51 @@ faster than traditional GUI apps.
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `delete n/Doraemon`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `delete n/Doraemon`
 
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [e/EPISODE]` can be used as `n/Doraemon` or as `n/Doraemon e/1.`
+* Items in square brackets are optional<br>
+  e.g `n/NAME [e/EPISODE]` can be used as `n/Doraemon` or as `n/Doraemon e/1`
 </div>
 
-### Adding anime: `add`
+### Adding an anime: `add`
 
-Adds an anime into the list.<br>
+Adds an anime into the list<br>
 Format: `add n/NAME [e/EPISODE] [s/STATUS] [g/GENRE]...`
 - `EPISODE` refers to the latest episode watched for the anime `NAME`
 - `EPISODE` must be a non-negative integer 0, 1, 2...
 - `STATUS` refers to the watch status for the anime `NAME`
 - Available statuses: `towatch`, `watching`, `finished`
 - Short-forms: `t`, `w`, `f`
-- `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed.
-- You can provide any number of `GENRE`.
+- `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed
+- You can provide any number of `GENRE`
 
 Examples:
 * `add n/Shingeki no Kyojin e/2 s/w g/fantasy`
 
 ### Deleting an anime : `delete`
 
-Deletes the specified anime from the list.<br>
+Deletes the specified anime from the list<br>
 Format: `delete INDEX`
 
-- Deletes the anime at the specified `INDEX`.
+- Deletes the anime at the specified `INDEX`
 - The index must be a positive integer 1, 2, 3, ...
 
 Examples:
-*  `delete 1` deletes the 1st anime in the anime list.
+*  `delete 1` deletes the 1st anime in the anime list
 
 ### Viewing help : `help`
 
-Lists all currently supports commands, and provides a link to this user guide.<br>
+Lists all currently supports commands, and provides a link to this user guide<br>
 Format: `help`
 
-### Listing anime: `list`
+### Listing animes: `list`
 
-Shows a list of all anime names the user has added.<br>
-An additional status parameter can be specified to switch tabs, showing only anime with that status.<br>
+Shows a list of all anime names the user has added<br>
+An additional status parameter can be specified to switch tabs, showing only animes with that status<br>
 Format: `list [s/STATUS]`
 
-- `STATUS` refers to the updated status of the anime.
+- `STATUS` refers to the updated status of the anime
 - Available statuses: `towatch`, `watching`, `finished`
 - Shortforms: `t`, `w`, `f`
 
@@ -83,42 +83,57 @@ Examples:
 
 ### Updating an anime's episode: `update`
 
-Updates the episode that you are currently on for a specified anime.<br>
+Updates the episode that you are currently on for a specified anime<br>
 Format: `update INDEX e/NEWEPISODE`
 
-- `NEWEPISODE` refers to the latest episode watched.
-- Updates the anime at the specified `INDEX`.
+- `NEWEPISODE` refers to the latest episode watched
 - `EPISODE` must be a non-negative integer 0, 1, 2...
+- Updates the anime at the specified `INDEX`
+- The index must be a positive integer 1, 2, 3, ...
+
 
 Examples:
 *  `update 1 e/3`
 
 ### Updating an anime's status: `status`
 
-Updates the status of a specified anime.<br>
+Updates the status of a specified anime<br>
 Format: `status INDEX s/UPDATEDSTATUS`
 
-- `UPDATEDSTATUS` refers to the updated status of the anime.
+- `UPDATEDSTATUS` refers to the updated status of the anime
 - Available statuses: `towatch`, `watching`, `finished`
 - Short-forms: `t`, `w`, `f`
-- Updates the anime at the specified `INDEX`.
+- Updates the anime at the specified `INDEX`
 - The index must be a positive integer 1, 2, 3, ...
 
 Examples:
 *  `status 1 s/f`
 
-### Add/Delete a genre from an anime: `genre`
+### Updating an anime's name: `rename`
 
-Adds or deletes a genre from a specified anime.<br>
-All genres will be automatically changed to lowercase, and duplicate genres are not allowed.<br>
+Updates the name of a specified anime<br>
+Format: `rename INDEX s/NEWNAME`
+
+- `NEWNAME` refers to the new name of the anime
+- Updates the anime at the specified `INDEX`
+- The index must be a positive integer 1, 2, 3, ...
+
+Examples:
+*  `status 1 s/f`
+
+### Adding/Deleting a genre from an anime: `genre`
+
+Adds or deletes a genre from a specified anime<br>
+All genres will be automatically changed to lowercase, and duplicate genres are not allowed<br>
 Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 
-- `ACTION` specifies whether you are adding or deleting genres.
-- Current list of available actions: `add`, `delete`.
-- Updates the anime at the specified `INDEX`.
+- `ACTION` specifies whether you are adding or deleting genres
+- Current list of available actions: `add`, `delete`
+- `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed
+- You need to provide at least 1 `GENRE`
+- Updates the anime at the specified `INDEX`
 - The index must be a positive integer 1, 2, 3, ...
-- `GENRE` can only contain alphabets and spaces. Two or more consecutive spaces are not allowed.
-- You need to provide at least 1 `GENRE`.
+
   
   Examples:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
@@ -126,8 +141,11 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 
 ### Clearing all animes currently displayed: `clear`
 
-Displays a confirmation prompt to user asking whether they wish to proceed with clearing the displayed animes.<br>
-User can choose to proceed by entering 'clear' again,
-in which case all animes currently displayed on screen would be cleared from the anime list.<br>
-Otherwise, the clear command is cancelled. <br>
+Removes all anime currently displayed on the screen<br>
 Format: `clear`
+
+- Only animes from the current tab will be removed from the application
+- User will be prompted with a confirmation message, and can proceed by entering 'clear' again
+- Entering anything else will cancel the command
+
+
