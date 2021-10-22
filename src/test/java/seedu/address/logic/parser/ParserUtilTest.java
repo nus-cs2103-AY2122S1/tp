@@ -14,6 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Capacity;
 import seedu.address.model.facility.FacilityName;
 import seedu.address.model.facility.Location;
@@ -296,5 +298,52 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseShortcut_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseShortcut((String) null));
+    }
+
+    @Test
+    public void parseShortcut_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseShortcut("   "));
+    }
+
+    @Test
+    public void parseShortcut_validValueWithoutWhitespace_returnsShortcut() throws Exception {
+        Shortcut expectedShortcut = new Shortcut("lf");
+        assertEquals(expectedShortcut, ParserUtil.parseShortcut("lf"));
+    }
+
+    @Test
+    public void parseShortcut_validValueWithWhitespace_returnsTrimmedShortcut() throws Exception {
+        String shortcutWithWhitespace = WHITESPACE + "lf" + WHITESPACE;
+        Shortcut expectedShortcut = new Shortcut("lf");
+        assertEquals(expectedShortcut, ParserUtil.parseShortcut(shortcutWithWhitespace));
+    }
+
+    @Test
+    public void parseCommandWord_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseCommandWord((String) null));
+    }
+
+    @Test
+    public void parseCommandWord_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseCommandWord("   "));
+        assertThrows(ParseException.class, () -> ParserUtil.parseCommandWord("bing"));
+    }
+
+    @Test
+    public void parseCommandWord_validValueWithoutWhitespace_returnsCommandWord() throws Exception {
+        CommandWord expectedCommandWord = new CommandWord("listf");
+        assertEquals(expectedCommandWord, ParserUtil.parseCommandWord("listf"));
+    }
+
+    @Test
+    public void parseCommandWord_validValueWithWhitespace_returnsTrimmedCommandWord() throws Exception {
+        String commandWordWithWhitespace = WHITESPACE + "listf" + WHITESPACE;
+        CommandWord expectedCommandWord = new CommandWord("listf");
+        assertEquals(expectedCommandWord, ParserUtil.parseCommandWord(commandWordWithWhitespace));
     }
 }

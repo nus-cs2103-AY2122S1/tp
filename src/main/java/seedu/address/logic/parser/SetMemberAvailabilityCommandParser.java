@@ -14,7 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Availability;
 
 /**
- * Parses input arguments and creates a new {@code SetMemberAvailabilityCommand} object
+ * Parses input arguments and creates a new {@code SetMemberAvailabilityCommand} object.
  */
 public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvailabilityCommand> {
 

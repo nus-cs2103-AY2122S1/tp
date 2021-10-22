@@ -1,9 +1,15 @@
 package seedu.address.model.person;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.DayOfWeek;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents a Person in the address book.
@@ -19,15 +25,17 @@ public class Person {
 
     // Data fields
     private final Availability availability;
+    private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Availability availability) {
-        requireAllNonNull(name, phone, availability);
+    public Person(Name name, Phone phone, Availability availability, Set<Tag> tags) {
+        requireAllNonNull(name, phone, availability, tags);
         this.name = name;
         this.phone = phone;
         this.availability = availability;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -43,6 +51,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -55,8 +71,8 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    public boolean isAvailableOnDay(String day) {
-        return availability.contains(day);
+    public boolean isAvailableOnDay(int dayNumber) {
+        return availability.contains(DayOfWeek.of(dayNumber));
     }
 
     public void setDays(List<String> days) {
@@ -80,13 +96,14 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getAvailability().equals(getAvailability());
+                && otherPerson.getAvailability().equals(getAvailability())
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, availability);
+        return Objects.hash(name, phone, availability, tags);
     }
 
     @Override
@@ -94,9 +111,17 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone())
-                .append(": Availability: ")
-                .append(getAvailability());
+                .append(getPhone());
+        Availability availability = getAvailability();
+        if (!availability.isEmpty()) {
+            builder.append("; Availability: ");
+            builder.append(availability);
+        }
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
         return builder.toString();
     }
 }

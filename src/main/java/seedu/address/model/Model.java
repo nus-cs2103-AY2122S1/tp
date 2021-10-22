@@ -5,6 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.alias.Alias;
+import seedu.address.model.alias.AliasMap;
+import seedu.address.model.alias.CommandWord;
+import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
 
@@ -48,6 +52,24 @@ public interface Model {
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Returns the user pref's aliases.
+     */
+    AliasMap getAliases();
+
+    /**
+     * Adds the given alias to user prefs.
+     */
+    void addAlias(Alias alias);
+
+    /**
+     * Removes the given alias from user prefs.
+     *
+     * @param shortcut the shortcut to remove.
+     * @return commandWord associated with shortcut, null if alias does not exist.
+     */
+    CommandWord removeAlias(Shortcut shortcut);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
