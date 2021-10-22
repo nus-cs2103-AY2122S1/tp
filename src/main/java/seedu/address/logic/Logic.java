@@ -10,6 +10,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
+import seedu.address.model.client.NextMeeting;
 
 /**
  * API of the Logic component
@@ -37,9 +38,10 @@ public interface Logic {
      */
     ObservableList<Client> getFilteredClientList();
 
-    /**
-     * Returns an unmodifiable view of the client to view
-     */
+    /** Returns an unmodifiable view of the filtered meetings */
+    ObservableList<NextMeeting> getSortedNextMeetingList();
+
+    /** Returns an unmodifiable view of the client to view */
     ObservableList<Client> getClientToView();
 
     /**
