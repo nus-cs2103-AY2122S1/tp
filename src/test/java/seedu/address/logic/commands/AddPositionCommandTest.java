@@ -245,6 +245,10 @@ public class AddPositionCommandTest {
         }
 
         @Override
+        public void updateApplicantsWithPosition(Position positionToEdit, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public void setApplicantBook(ReadOnlyApplicantBook applicantBook) {
             throw new AssertionError("This method should not be called.");
         }

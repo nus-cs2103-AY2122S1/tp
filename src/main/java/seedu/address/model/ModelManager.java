@@ -224,6 +224,9 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+
+
+
     //=========== Filtered Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -325,14 +328,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ReadOnlyApplicantBook getApplicantBook() {
-        return applicantBook;
-    }
-
-    @Override
     public void setApplicant(Applicant target, Applicant editedApplicant) {
         requireAllNonNull(target, editedApplicant);
         applicantBook.setApplicant(target, editedApplicant);
+    }
+
+    @Override
+    public ReadOnlyApplicantBook getApplicantBook() {
+        return applicantBook;
     }
 
     @Override
@@ -346,6 +349,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition) {
+        requireAllNonNull(positionToEdit, editedPosition);
+        applicantBook.updateApplicantsWithPosition(positionToEdit, editedPosition);
+    }
+
+    @Override
     public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
         requireNonNull(predicate);
         filteredApplicants.setPredicate(predicate);
@@ -354,5 +363,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Applicant> getFilteredApplicantList() {
         return filteredApplicants;
+
     }
 }

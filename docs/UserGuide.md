@@ -80,6 +80,17 @@ Examples:
 * `add-position tit/software engineer des/work in a team that builds a facial recognition application`
 
 
+### Editing a position: `edit-position`
+Edits the specified position in MrTechRecruiter.
+
+Format: `edit-position INDEX tit/NEWTITLE des/NEWDESCRIPTION`
+
+* Edit the position with the specified `INDEX`
+
+Examples: 
+* `edit-position INDEX tit/Algorithm Engineer des/embed algorithms into the facial recognition application `
+
+
 ### Deleting a position: `delete-position`
 
 Deletes the specified position from MrTechRecruiter.
@@ -105,7 +116,19 @@ If the job position exists, its rejection rate should update accordingly.
 
 Examples:
 * `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 pos/software engineer`
-* `add-applicant n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
+* `add-applicant n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 pos/database administrator`
+
+### Editing an applicant: `edit-applicant`
+Edits the specified applicant in MrTechRecruiter
+
+Format: `edit-applicant INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS pos/POSITION` 
+
+* Edit the applicant with the specified `INDEX`
+* The `position` must have been added to MrTechRecruiter
+
+Examples:
+* `edit-applicant n/Jasmine Doe p/98761432 e/johnd@example.com`
+* `edit-applicant n/Betsy p/1234567 pos/database administrator`
 
 ### Deleting an applicant: `delete-applicant`
 

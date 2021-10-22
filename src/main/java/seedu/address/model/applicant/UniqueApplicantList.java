@@ -5,12 +5,17 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.descriptors.EditApplicantDescriptor;
+import seedu.address.logic.descriptors.EditApplicationDescriptor;
 import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
+import seedu.address.model.application.Application;
+import seedu.address.model.position.Position;
 
 /**
  * A list of applicants that enforces uniqueness between its elements and does not allow nulls.
@@ -95,6 +100,35 @@ public class UniqueApplicantList implements Iterable<Applicant> {
     public void removeIf(Predicate<? super Applicant> condition) {
         requireNonNull(condition);
         internalList.removeIf(condition);
+    }
+
+    /**
+     * Updates all applicants applying to {@code positionToEdit} with {@code editedPosition}
+     */
+    public void updateApplicantsWithPosition(Position positionToEdit,
+                                             Position editedPosition) {
+        ListIterator<Applicant> iterator = internalList.listIterator();
+
+        while (iterator.hasNext()) {
+            Applicant applicant = iterator.next();
+            if (!applicant.isApplyingTo(positionToEdit)) {
+                continue;
+            }
+            EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
+            editApplicationDescriptor.setPosition(editedPosition);
+            Application updatedApplication = editApplicationDescriptor
+                    .createEditedApplication(applicant.getApplication());
+
+            EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
+            editApplicantDescriptor.setApplication(updatedApplication);
+            Applicant updatedApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
+
+            remove(applicant);
+            add(updatedApplicant);
+        }
+
+        //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
+
     }
 
     public void setApplicants(UniqueApplicantList replacement) {

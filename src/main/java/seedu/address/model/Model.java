@@ -119,6 +119,11 @@ public interface Model {
      */
     boolean hasPosition(Position toAdd);
 
+    boolean hasPositionWithTitle(Title title);
+
+    /** Returns an unmodifiable view of the filtered applicant list */
+    ObservableList<Applicant> getFilteredApplicantList();
+
     /**
      * Adds the given position.
      * {@code position} must not already exist in the position book.
@@ -162,20 +167,12 @@ public interface Model {
      */
     void setApplicant(Applicant target, Applicant editedApplicant);
 
-    /** Returns an unmodifiable view of the filtered applicant list */
-    ObservableList<Applicant> getFilteredApplicantList();
-
-    // Position related methods
-
-    boolean hasPositionWithTitle(Title title);
-
     /**
      * Deletes the given applicant.
      * The applicant must exist in the address book.
      */
     void deleteApplicant(Applicant target);
 
-    // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
 
     /**
@@ -191,4 +188,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
+
+    void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
+
 }
