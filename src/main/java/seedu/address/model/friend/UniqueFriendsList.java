@@ -12,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
+import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
@@ -121,6 +122,22 @@ public class UniqueFriendsList implements Iterable<Friend> {
         Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getFriendName(),
                 currentGames, toLink.getSchedule());
         this.setFriend(toLink, editedFriend);
+    }
+
+    /**
+     * Unlinks a Friend {@code friendtoUnlink} with game {@code gameToUnlink}.
+     * The friend must exist in the list.
+     */
+    public void unlink(Friend friendToUnlink, Game gameToUnlink) {
+        requireAllNonNull(friendToUnlink, gameToUnlink);
+
+        // Get a modifiable copy of the current games in toUnlink
+        Set<GameFriendLink> currentGames = new HashSet<>(friendToUnlink.getGameFriendLinks());
+        GameId gameId = gameToUnlink.getGameId();
+        currentGames.removeIf(game -> game.getGameId().equals(gameId));
+        Friend editedFriend = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getFriendName(),
+                currentGames, friendToUnlink.getSchedule());
+        this.setFriend(friendToUnlink, editedFriend);
     }
 
     public void setFriends(UniqueFriendsList replacement) {

@@ -10,6 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
@@ -26,7 +27,7 @@ public class EditFriendCommand extends Command {
     public static final String COMMAND_WORD = "--edit";
     public static final String USAGE_EXAMPLE = "Example: friend " + COMMAND_WORD + " Draco "
             + FLAG_FRIEND_NAME + "Marcus Tang";
-    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited - %1$s";
+    public static final String MESSAGE_EDIT_FRIEND_SUCCESS = "Friend edited - \nId: %1$s \nNew name: %2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided. \n" + USAGE_EXAMPLE;
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the friend identified "
             + "by friend's FRIEND_ID. "
@@ -80,7 +81,10 @@ public class EditFriendCommand extends Command {
 
         model.setFriend(friendToEdit, editedFriend);
 
-        return new CommandResult(String.format(MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend));
+        return new CommandResult(String.format(MESSAGE_EDIT_FRIEND_SUCCESS,
+                editedFriend.getFriendId(),
+                editedFriend.getFriendName()),
+                CommandType.FRIEND_EDIT);
     }
 
     @Override

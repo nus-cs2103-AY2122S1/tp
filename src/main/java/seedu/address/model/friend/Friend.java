@@ -5,9 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
+import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 
 /**
  * Represents a Friend in the gitGud friend's list.
@@ -53,6 +58,25 @@ public class Friend {
         this.schedule = new Schedule();
     }
 
+    /**
+     * Updates the skill value for the {@code GameFriendLink} with the given {@code gameId} and linked to
+     * this friend.
+     *
+     * @param gameId     valid gameId which is already linked to this friend.
+     * @param skillValue value to update friend's skill value to.
+     * @throws GameLinkNotFoundException thrown when gameId provided is not linked to this friend.
+     */
+    public void updateGameFriendLinkSkillValue(GameId gameId, SkillValue skillValue) throws GameLinkNotFoundException {
+        Optional<GameFriendLink> linkToUpdate = gameFriendLinks.stream().filter(
+            gfl -> gfl.getGameId().equals(gameId)).findFirst();
+
+        if (linkToUpdate.isEmpty()) {
+            throw new GameLinkNotFoundException();
+        }
+
+        linkToUpdate.get().setSkillValue(skillValue);
+    }
+
     public FriendId getFriendId() {
         return friendId;
     }
@@ -71,6 +95,21 @@ public class Friend {
      */
     public Set<GameFriendLink> getGameFriendLinks() {
         return Collections.unmodifiableSet(gameFriendLinks);
+    }
+
+    /**
+     * Returns true if the friend is currently associated with the game provided.
+     * @param game Game to check.
+     * @return True if the friend is associated with the game.
+     */
+    public boolean hasGameAssociation(Game game) {
+        Set<GameFriendLink> gameFriendLinks = this.getGameFriendLinks();
+        if (gameFriendLinks.stream().filter(gameFriendLink -> gameFriendLink
+                .getGameId().equals(game.getGameId())).count() == 0) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     /**
@@ -119,6 +158,7 @@ public class Friend {
         if (!gameSet.isEmpty()) {
             builder.append("; Games: ");
             gameSet.forEach(builder::append);
+            builder.append(" ");
         }
         builder.append(schedule);
         return builder.toString();

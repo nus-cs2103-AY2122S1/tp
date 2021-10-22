@@ -27,7 +27,12 @@
         "dayOfWeek" : "SUNDAY"
       } ]
     },
-    "gameFriendLinks" : [ ]
+    "gameFriendLinks" : [ {
+      "gameId" : "CSGO",
+      "friendId" : "94351253",
+      "friendGameUserName" : "OmegaLynx",
+      "skillValue" : "8"
+    } ]
   }, {
     "friendId" : "98765432",
     "friendName" : "Benson Meier",
@@ -55,7 +60,12 @@
         "dayOfWeek" : "SUNDAY"
       } ]
     },
-    "gameFriendLinks" : [ ]
+    "gameFriendLinks" : [ {
+      "gameId" : "CSGO",
+      "friendId" : "98765432",
+      "friendGameUserName" : "OmegaLynx",
+      "skillValue" : null
+    } ]
   }, {
     "friendId" : "95352563",
     "friendName" : "Carl Kurz",

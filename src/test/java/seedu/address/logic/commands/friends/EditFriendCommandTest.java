@@ -46,7 +46,8 @@ public class EditFriendCommandTest {
 
         EditFriendCommand editFriendCommand = new EditFriendCommand(friendToEdit.getFriendId(), editFriendDescriptor);
 
-        String expectedMessage = String.format(EditFriendCommand.MESSAGE_EDIT_FRIEND_SUCCESS, editedFriend);
+        String expectedMessage = String.format(EditFriendCommand.MESSAGE_EDIT_FRIEND_SUCCESS,
+                editedFriend.getFriendId(), editedFriend.getFriendName());
 
         expectedModel.setFriend(expectedModel.getFriend(friendToEdit.getFriendId()), editedFriend);
 

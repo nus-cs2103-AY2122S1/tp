@@ -16,11 +16,9 @@ public class AddGameCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GAME = "A game with the same GAME_ID"
             + " already exists in the gitGud games list.";
     public static final String MESSAGE_USAGE = "To add a game: \n"
-            + COMMAND_WORD
+            + "game " + COMMAND_WORD
             + " GAME_ID: "
             + "Adds a game to the gitGud games list. \n"
-            + "Parameters: "
-            + "GAME_ID"
             + "Example: "
             + COMMAND_WORD + " "
             + "Valorant";
