@@ -210,7 +210,8 @@ public class ParserUtil {
         requireNonNull(lessonTime);
         String trimmedLessonTime = lessonTime.trim();
         String[] lessonTimeArr = trimmedLessonTime.split("\\s+");
-        if (lessonTimeArr.length != 2 || LocalTime.parse(lessonTimeArr[0]).isAfter(LocalTime.parse(lessonTimeArr[1]))) {
+        if (lessonTimeArr.length != 2
+                || !LocalTime.parse(lessonTimeArr[0]).isBefore(LocalTime.parse(lessonTimeArr[1]))) {
             throw new ParseException(MESSAGE_INVALID_LESSON_DURATION);
         }
         if (!LessonTime.isValidTime(lessonTimeArr[0]) || !LessonTime.isValidTime(lessonTimeArr[1])) {
