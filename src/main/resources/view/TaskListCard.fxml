@@ -27,8 +27,20 @@
                 <Label fx:id="desc" text="\$first" styleClass="cell_big_label"/>
                 <Label fx:id="completionStatus"/>
             </HBox>
-            <Label fx:id="date"/>
-            <Label fx:id="time"/>
+            <HBox>
+                <padding>
+                    <Insets top="2" bottom="2" />
+                </padding>
+                <Label fx:id="dateImage"/>
+                <Label fx:id="date"/>
+            </HBox>
+            <HBox>
+                <padding>
+                    <Insets top="2" bottom="2" />
+                </padding>
+                <Label fx:id="timeImage"/>
+                <Label fx:id="time"/>
+            </HBox>
             <HBox>
                 <padding>
                     <Insets top="2" bottom="2" />
