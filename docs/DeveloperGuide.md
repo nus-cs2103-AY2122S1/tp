@@ -193,6 +193,8 @@ It is also additionally facilitated by the methods below:
   contact.
 * `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a student contact.
 * `AddStudentCommandParser#parse()` — Parses the individual arguments to create a `Student` object.
+* `ModelManager#addStudent()` — Represents the in-memory model of TutorAid's student book data.
+* `StudentBook#addStudent()` — Adds a student to TutorAid's student book.
 
 Given below is an example of what happens when the user attempts to add a student contact to TutorAid by entering 
 a command `add -s sn/John Doe …​`:
@@ -220,9 +222,10 @@ Below is the sequence diagram that depicts the parsing of the `add -s` command:
 
 5. The individual arguments for the student contact are then passed into `Model#Student()` to create a `Student` object. 
 
-6. Lastly, the `AddStudentCommand#execute()` is called upon to add the student into TutorAid, which returns a
-   `CommandResult` object to notify the user that the student has been successfully added. The student details are 
-   then stored in `tutorAidStudents.json`.
+6. The `AddStudentCommand#execute()` is then called upon to add the student into TutorAid. This in turn calls on 
+   `ModelManager#addStudent()` and `StudentBook#addStudent()` to store the details of the new student contact in memory. 
+   
+7. Lastly, a `CommandResult` object is returned to notify the user that the student has been successfully added.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 If the student object created appears to be a duplicate of an existing contact (a contact is said to be a duplicate if 
@@ -258,7 +261,7 @@ The delete feature deletes a student contact from TutorAid.
 The feature is mainly implemented by the following methods:
 * `DeleteStudentCommand#execute()` in `DeleteStudentCommand` class: Deletes a student from TutorAid
 
-It is also additionally facilitated by the methods below:
+It is also additionally facilitated by these methods:
 * `TutorAidParser#parseCommand()` — Checks for the command word that is required for the deletion of a student.
 * `DeleteCommandParser#parse()` — Checks for the command flag that specifies the deletion of a student.
 * `DeleteStudentCommandParser#parse()` — Parses the student index specified.
