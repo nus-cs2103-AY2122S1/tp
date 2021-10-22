@@ -212,6 +212,22 @@ Examples:
 * `list` followed by `del 2` deletes the second clients in FAST.
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+Can be used to delete up to **10** contacts in a single `del` command by supplying more `INDEX`.
+
+Format 1: `del INDEX INDEX [INDEX]...`
+Format 2: `del INDEX-INDEX`
+
+<div markdown="span" class="alert alert-primary">:exclamation: Reminder:
+If *Format 1* is used, there should be a space in between each `INDEX`.
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
+</div>
+
+Examples:
+* `del 2 4 6 8 10` deletes the 2nd, 4th, 6th, 8th and 10th person in FAST.
+* `del 3-5` deletes the 3rd, 4th and 5th person in FAST.
+</div>
+
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This CANNOT be undone!</div>
 
@@ -230,73 +246,77 @@ Examples:
 * `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first client.
 * `rmk 1` removes the remark from the first client.<br>
 
-### Adding an appointment: `appt`
+### Adding an appointment: `aa`
 
 Adds a scheduled appointment with the client. An appointment includes a date, time and venue. This allows you to keep
 track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-eppt),
-[delete](#deleting-an-appointment-dappt), or [mark as completed](#updating-completed-appointment-done) and appointment.
+[delete](#deleting-an-appointment-dappt), or [mark as completed](#updating-completed-appointment-done) an appointment.
 
-Format: `appt INDEX d/DATE [t/TIME] [v/VENUE]`
+![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
 
-* Adds a scheduled appointment with the client at the specified `INDEX` if no appointment exists yet.
+Format: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
+
+* Only able to add a scheduled appointment with the client at the specified `INDEX` if no appointment exists yet.
 * `INDEX` refers to the index shown in the displayed client list.
 * `DATE` the date of the appointment in the format **`yyyy-mm-dd`**.
 * `TIME` the time of the appointment in the 24-hour format **`HH:mm`**.
-* `VENUE` the location of the appointment, which can at most be 30 characters long (including whitespaces).
+* `VENUE` the location of the appointment, which can at most be 30 characters long <br>(including whitespaces).
 
 Examples:
-* `appt 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
-* `appt 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
-* `find Matthew John` followed by `appt 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
+* `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
+* `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
+* `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
 
-### Editing an appointment: `eppt`
+### Editing an appointment: `ea`
 
 Edits a scheduled [appointment](#adding-an-appointment-appt) with the client. This command is useful when your appointment has been rescheduled or 
 has a change in location.
 
-Format: `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`
+Format: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
 
 * Edits a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be updated with the input data.
 * `INDEX` refers to the index shown in the displayed client list.
 * `DATE` the date of the appointment in the format **`yyyy-mm-dd`**.
 * `TIME` the time of the appointment in the 24-hour format **`HH:mm`**.
-* `VENUE` the location of the appointment, which can at most be 30 characters long (including whitespaces).
+* `VENUE` the location of the appointment, which can at most be 30 characters long <br>(including whitespaces).
 * At least **one** of the optional fields must be present.
 
 Examples:
-* `eppt 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
-* `eppt 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
+* `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
+* `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
-### Deleting an appointment: `dappt`
+### Deleting an appointment: `da`
 
 Deletes a scheduled [appointment](#adding-an-appointment-appt) with the client. This command should be used when 
 the appointment has been cancelled with a client.
 
-Format: `dappt INDEX`
+Format: `da INDEX`
 
 * Deletes a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
 * `INDEX` refers to the index shown in the displayed client list. 
 
 Examples:
-* `dappt 1` deletes the appointment of the first client.
-* `find Ben` followed by `dappt 3` deletes the appointment the third client in the result of the `find` command.
+* `da 1` deletes the appointment of the first client.
+* `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
 
-### Updating completed appointment: `done`
+### Updating completed appointment: `ma`
 
 Marks the appointment [appointment](#adding-an-appointment-appt) with the client as completed. This also allows you to keep 
 track of the number of completed appointments with your client.
 
-Format: `done INDEX`
+![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
+
+Format: `ma INDEX`
 * Increment the completed appointment count with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
 * `INDEX` refers to the index shown in the displayed client list. 
 
 Examples:
-* `done 1` updates the completed appointment counter of the first client.
-* `find Matthew` followed by `done 3` updates the completed appointment counter of the third client in the result of 
+* `ma 1` updates the completed appointment counter of the first client.
+* `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
 
 ### Sorting all clients: `sort`
@@ -419,12 +439,12 @@ If your changes to the data file makes its format invalid, FAST will discard all
 
 Action | Format, Examples
 --------|------------------
-**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
+**Add Appointment** | `aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Appointment** | `dappt INDEX`<br> e.g. `dappt 1`
+**Delete Appointment** | `da INDEX`<br> e.g. `da 1`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
-**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `eppt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 **Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
@@ -435,4 +455,4 @@ Action | Format, Examples
 **Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
 **Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
-**Update Completed Appointment** | `done INDEX`<br> e.g. `done 5`
+**Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`

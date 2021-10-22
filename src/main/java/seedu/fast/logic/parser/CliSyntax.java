@@ -15,7 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPOINTMENT = new Prefix("d/");
     public static final Prefix PREFIX_APPOINTMENT_TIME = new Prefix("t/");
     public static final Prefix PREFIX_APPOINTMENT_VENUE = new Prefix("v/");
-    public static final Prefix PREFIX_DELETE_APPOINTMENT = new Prefix("d/");
     public static final Prefix PREFIX_ADD_TAG = new Prefix("a/");
     public static final Prefix PREFIX_DELETE_TAG = new Prefix("d/");
 

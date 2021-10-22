@@ -14,7 +14,7 @@ import seedu.fast.model.person.Person;
 
 public class MarkAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "done";
+    public static final String COMMAND_WORD = "ma";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks an appointment with the person identified as completed"

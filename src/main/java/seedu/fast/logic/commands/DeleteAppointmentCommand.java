@@ -13,7 +13,7 @@ import seedu.fast.model.person.Person;
 
 public class DeleteAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "dappt";
+    public static final String COMMAND_WORD = "da";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes appointment with the person identified"
