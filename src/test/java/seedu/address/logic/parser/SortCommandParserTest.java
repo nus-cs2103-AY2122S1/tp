@@ -20,11 +20,11 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSortCommand() {
-        // no leading and trailing spaces
+        // leading and trailing whitespaces will be trimmed
         SortCommand expectedSortCommand = new SortCommand(new NameComparator());
         assertParseSuccess(parser, " n/   ", expectedSortCommand);
 
-        // no leading and trailing whitespaces
+        // leading and trailing whitespaces will be trimmed
         assertParseSuccess(parser, " \t n/ \n", expectedSortCommand);
     }
 

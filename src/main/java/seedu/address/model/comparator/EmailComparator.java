@@ -17,7 +17,7 @@ public class EmailComparator implements Comparator<Person> {
         if (p2.getEmail() == null) {
             return -1;
         }
-        return p1.getEmail().value.compareTo(p2.getEmail().value);
+        return p1.getEmail().toString().compareTo(p2.getEmail().toString());
     }
 
     @Override

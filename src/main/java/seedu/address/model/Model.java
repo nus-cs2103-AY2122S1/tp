@@ -90,8 +90,8 @@ public interface Model {
     ObservableList<Person> getSortedPersonList();
 
     /**
-     * Updates the sort of the person list to sort by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Updates the sort of the person list to sort by the given {@code comparator}.
+     * @throws NullPointerException if {@code comparator} is null.
      */
     void updateSortedPersonList(Comparator<Person> comparator);
 }

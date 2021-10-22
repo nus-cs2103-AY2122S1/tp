@@ -17,7 +17,7 @@ public class RemarkComparator implements Comparator<Person> {
         if (p2.getRemark() == null) {
             return -1;
         }
-        return p1.getRemark().value.compareTo(p2.getRemark().value);
+        return p1.getRemark().toString().compareTo(p2.getRemark().toString());
     }
 
     @Override

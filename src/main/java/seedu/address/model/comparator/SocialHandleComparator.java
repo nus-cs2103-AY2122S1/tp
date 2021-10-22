@@ -17,7 +17,7 @@ public class SocialHandleComparator implements Comparator<Person> {
         if (p2.getSocialHandle() == null) {
             return -1;
         }
-        return p1.getSocialHandle().value.compareTo(p2.getSocialHandle().value);
+        return p1.getSocialHandle().toString().compareTo(p2.getSocialHandle().toString());
     }
 
     @Override

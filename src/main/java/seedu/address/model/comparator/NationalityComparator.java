@@ -18,7 +18,7 @@ public class NationalityComparator implements Comparator<Person> {
         if (p2.getNationality() == null) {
             return -1;
         }
-        return p1.getNationality().value.compareTo(p2.getNationality().value);
+        return p1.getNationality().toString().compareTo(p2.getNationality().toString());
     }
 
     @Override

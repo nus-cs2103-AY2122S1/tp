@@ -18,7 +18,7 @@ public class GenderComparator implements Comparator<Person> {
         if (p2.getGender() == null) {
             return -1;
         }
-        return p1.getGender().gender.compareTo(p2.getGender().gender);
+        return p1.getGender().toString().compareTo(p2.getGender().toString());
     }
 
     @Override

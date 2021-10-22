@@ -17,7 +17,7 @@ public class TagComparator implements Comparator<Person> {
         if (p2.getFirstTag() == null) {
             return -1;
         }
-        return p1.getFirstTag().tagName.compareTo(p2.getFirstTag().tagName);
+        return p1.getFirstTag().getTagName().compareTo(p2.getFirstTag().getTagName());
     }
 
     @Override

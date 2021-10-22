@@ -39,7 +39,7 @@ public class NameComparatorTest {
         Person p3 = new PersonBuilder().withName("Ben").build();
         Person p4 = new PersonBuilder().withName("Carl").build();
 
-        // If both have Nationality, sorted alphabetically
+        // If both have Name, sorted alphabetically
         assertTrue(comparator.compare(p1, p3) < 0);
         assertTrue(comparator.compare(p1, p4) < 0);
 

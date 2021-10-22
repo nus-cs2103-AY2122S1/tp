@@ -17,7 +17,7 @@ public class PhoneComparator implements Comparator<Person> {
         if (p2.getPhone() == null) {
             return -1;
         }
-        return p1.getPhone().value.compareTo(p2.getPhone().value);
+        return p1.getPhone().toString().compareTo(p2.getPhone().toString());
     }
 
     @Override
