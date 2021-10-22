@@ -161,7 +161,7 @@ Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
 
 Before:
 
-![EditBefore](images/List.png)
+![EditBefore](images/list.png)
 
 After:
 
