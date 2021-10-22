@@ -24,7 +24,7 @@ public class RejectionRateCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_POSITION + "software engineer";
 
-    public static final String MESSAGE_SUCCESS = "Rejection rate for %1$s = %2$d%%";
+    public static final String MESSAGE_SUCCESS = "Rejection rate for %1$s = %2$f%%";
 
     public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
