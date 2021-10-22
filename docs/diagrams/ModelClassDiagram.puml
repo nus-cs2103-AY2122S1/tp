@@ -45,8 +45,6 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 
 UniqueClientList ---right-> "~* all" Client
 AddressBook *-right-> "1" UniqueClientList
-UniqueClientList ---right-> "~* all" Client
-AddressBook *-right-> "1" UniqueClientList
 AddressBook *-right-> "1" UniqueTagList
 UniqueTagList -[hidden]down- UniqueClientList
 UniqueTagList -[hidden]down- UniqueClientList
@@ -63,16 +61,6 @@ Client *--> DisposableIncome
 Client *--> RiskAppetite
 Client *--> LastMet
 Client *--> NextMeeting
-Client *--> Name
-Client *--> Phone
-Client *--> Email
-Client *--> Address
-Client *--> DisposableIncome
-Client *--> RiskAppetite
-Client *--> LastMet
-Client *--> NextMeeting
 
-ModelManager -->"~* filtered" Client
 ModelManager -down-> "~* filtered" Client
-ModelManager -->"~* filtered" Client
 @enduml

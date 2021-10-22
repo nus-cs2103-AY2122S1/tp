@@ -230,7 +230,7 @@ with any client's attribute or specifically with the specified attributes
 
 Below is sequence diagram for search clients.
 
-<img src="images/SearchCommandSequenceDiagram.png" />
+<img src="images/tracing/SearchCommandSequenceDiagram.png" />
 
 #### Implementation of ClientContainsKeywordPredicate
 
@@ -265,7 +265,7 @@ for multiple `filter` to be stacked, which allows for user to look for clients i
 
 Below is sequence diagram for filter clients.
 
-<img src="images/FilterCommandSequenceDiagram.png" />
+<img src="images/tracing/FilterCommandSequenceDiagram.png" />
 
 #### Implementation of ClientContainsKeywordPredicate
 
