@@ -44,12 +44,12 @@ public class AddAppointmentCommandParser  {
                 PREFIX_DURATION, PREFIX_REMARK);
         if (!arePrefixesPresent(argMultimap, PREFIX_PATIENT, PREFIX_DOCTOR, PREFIX_START)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT
-                    , AddAppointmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE));
         }
 
-        AddAppointmentCommand.AddAppointmentDescriptor addAppointmentDescriptor
-                =  new AddAppointmentCommand.AddAppointmentDescriptor();
+        AddAppointmentCommand.AddAppointmentDescriptor addAppointmentDescriptor =
+                new AddAppointmentCommand.AddAppointmentDescriptor();
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
         addAppointmentDescriptor.setRemark(remark);
         String trimmedParsedDateTime = argMultimap.getValue(PREFIX_START).get().trim();
@@ -67,8 +67,8 @@ public class AddAppointmentCommandParser  {
             patientIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_PATIENT).get());
             doctorIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DOCTOR).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT
-                    , AddAppointmentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddAppointmentCommand.MESSAGE_USAGE), pe);
         }
 
         return new AddAppointmentCommand(patientIndex, doctorIndex, addAppointmentDescriptor);

@@ -10,8 +10,10 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
+
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
+
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.appointment.AppointmentDate;
