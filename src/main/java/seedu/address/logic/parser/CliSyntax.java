@@ -28,6 +28,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_SUBJECT = new Prefix("subject/");
     public static final Prefix PREFIX_HOMEWORK = new Prefix("hw/");
     public static final Prefix PREFIX_RATES = new Prefix("rates/");
+    public static final Prefix PREFIX_OUTSTANDING_FEES = new Prefix("f/");
 
     /* Prefix definitions for command options */
     public static final Prefix PREFIX_FIND_CONDITION = new Prefix("cond/");
