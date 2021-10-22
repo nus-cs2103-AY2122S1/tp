@@ -20,6 +20,7 @@ import seedu.address.model.tuition.TuitionClass;
 
 public class EditClassCommand extends Command {
     public static final String COMMAND_WORD = "editclass";
+    public static final String SHORTCUT = "ec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits details of the class identified by the index numbers used in the Classes list.\n"

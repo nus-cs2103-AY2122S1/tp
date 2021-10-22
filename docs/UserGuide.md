@@ -3,16 +3,89 @@ layout: page
 title: User Guide
 ---
 
-TutAssistor is a ***desktop app for private tutors to manage tuition class time slots, optimized for use via a Command Line Interface (CLI)***.
+<p align="center">
+  <img src="images/tutassistor_logo.png">
+</p>
 
-It enables tutors to resolve conflicts in their tuition schedule and manage their students more efficiently.
+Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find answers, learn about the features, and manage tutoring better.
 
-* Table of Contents
-{:toc}
+# Table of Contents
+1. [Introduction](#1-introduction)
+
+   1.1 [What is TutAssistor?](#11-what-is-tutassistor)
+
+   1.2 [How to use this guide?](12-how-to-use-this-guide)
+
+3. [Get started](#2-get-started)
+4. [Features](#3-features)
+
+   3.1 [Add student/class](#31-add-studenttuition-class)
+
+   3.2 [View student/class](#32-view-studenttuition-class)
+
+   3.3 [Edit student/class](#33-edit-studenttuition-class)
+
+   3.4 [Delete student/class](#34-delete-studenttuition-class)
+
+   3.5 [Move student](#35-addremove-student-from-class)
+
+   3.6 [Add remark](#36-add-remark-to-studenttuition-class)
+
+   3.7 [Find students/classes](#37-find-studenttuition-class)
+
+   3.8 [List students/classes](#38-list-all-studentstuition-classes)
+
+   3.9 [Sort classes](#39-sort-tuition-classes-sort--s)
+
+   3.10 [View timetable](#310-view-timetable-timetable--tt)
+
+   3.11 [View today's classes](#311-view-todays-classes-today--td)
+
+   3.12 [View help](#312-view-help-help--h)
+
+   3.13 [Navigate Input History](#313-navigate-input-history)
+ 
+   3.14 [Clear data](#314-clear-data-clear)
+
+   3.15 [Exit the program](#315-exit-the-app-exit)
+   
+   3.16 [Track payment `coming in v2.0`](#316-track-payment-coming-in-v20)
+
+4. [Additional Command Format Information](#4-additional-command-format-information)
+   
+   4.1 [Name](#41-name)
+   
+   4.2 [Phone Number](#42-phone-number)
+   
+   4.3 [Email](#43-email)
+  
+   4.4 [Timeslot](#44-timeslot)
+
+   4.5 [Index](#45-index)
+
+5. [FAQ](#5-faq)
+6. [Command Summary](#6-command-summary)
+
+--------------------------------------------------------------------------------------------------------------------
+## 1 Introduction
+
+### 1.1 What is TutAssistor?
+TutAssistor is a ***desktop app intended for private tutors to manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
+
+TutAssistor provides an all-in-one platform for tutors to track student details, resolve conflicting tuition timeslots, and efficiently make notes for each lesson.
+
+### 1.2 How to use this guide?
+The features in this guide are formatted with the following conventions:
+* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the ' | ' symbol. The user can use the command shortcuts to reduce typing. 
+* **Command Format** - Each command is accompanied by a set of information provided by the user. Refer to the [Features](#3-features) below for details of each command.
+* **Example** - Possible usage of each features are provided. Users may follow these examples when familiarising with the app. 
+* **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
+
+Jump right in to the next section to get you started!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 2 Get Started
 
 ### For Windows
 1. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
@@ -32,20 +105,42 @@ cd Downloads
 java -jar TutAssistor.jar
 ```
 
+After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
+![Ui](images/ui_ug.png)
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
-<div markdown="span" class="alert alert-primary">
-Tip: When using the following commands, refer to the 'Addition Formatting Information for Commands' section of this guide to learn the requirements for the various parameters used.
+## 3 Features
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+
+* Items in square brackets are optional.<br>
+  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+
+* Items with `…`​ after them can be used zero or more times.<br>
+  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+
+* Parameters can be in any order.<br>
+  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
+
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+   
+Tip: Refer to the 'Additional Command Format Information' under section 3 to learn the requirements of the various parameters used.
+   
 </div>
 
-### Adding students/tuition classes
+### 3.1 Add student/tuition class
 
-#### Adding a student: `add`
-
-Command Shortcut: `a`
-
-Adds a student’s information such as n/NAME, p/PHONE_NUMBER.
+#### Adding a student: `add` | `a`
+Adds a student with the specified information such as name, phone number, etc.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]`
 
@@ -58,18 +153,17 @@ add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-12 r/Can only attend on even weeks
 ```
 
-#### Adding a tuition class: `addclass`
-
-Command Shortcut: `ac`
-
-Adds a tuition class with a set l/LIMIT of students at specified ts/TIMESLOT.
-
-The students to be added are optional. The time slot should follow the format "Www hh:mm-hh:mm" to help TutAssistor check if the time slot is already taken or there is an overlap on time slots. 
-If there is any conflict or overlap, TutAssistor will alert the conflict.
+#### Adding a tuition class: `addclass` | `ac`
+Adds a tuition class with a set limit of students at a specified timeslot. TutAssistor will notify the user if there are any conflicting timeslots.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
-Note that if you are listing multiple students, there must not be a space after each comma.
+* It is optional to add students into the class when creating a tuition class.
+* The timeslot should follow the format "Www hh:mm-hh:mm".
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+There should not be a space after each comma when listing multiple students.
+</div>
 
 Examples:
 ```
@@ -79,14 +173,10 @@ addclass n/Chemistry l/16 ts/Thu 15:00-17:00 s/Bernice Yu,Richard Ng
 ac n/Math l/8 ts/Mon 11:00-14:00 r/Quiz on final lesson
 ```
 
-### Viewing students/tuition classes
+### 3.2 View student/tuition class
+Displays the details the specified student or class in the information page.
 
-Provides a detailed view of student or class information of a given INDEX.
-
-#### Viewing a student: `student`
-
-Command Shortcut: `vs`
-
+#### Viewing a student: `student` | `vs`
 Format: `student INDEX`
 
 Example:
@@ -97,13 +187,10 @@ or
 ```
 vs 2
 ```
-![Ui](images/student_view.png)
-An example of a student information page.
+![view student](images/student_view.png)
+*Displaying a student's details in the information page.*
 
-#### Viewing a tuition class: `class`
-
-Command Shortcut: `vc`
-
+#### Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
 
 Example:
@@ -114,18 +201,13 @@ or
 ```
 vc 3
 ```
-![Ui](images/class_view.png)
-An example of a class information page.
+![view class](images/class_view.png)
+*Displaying a class' details in the information page.*
 
-### Editing students/tuition classes
+### 3.3 Edit student/tuition class
+Edits an existing student or tuition class.
 
-Edits a student’s information such as n/NAME, p/PHONE_NUMBER.
-Edits a tuition class's information such as its ts/TIMESLOT.
-
-#### Editing a student: `edit`
-
-Command Shortcut: `e`
-
+#### Editing a student: `edit` | `e`
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 Examples:
@@ -136,10 +218,7 @@ edit 1 n/Jason Tan a/221b Baker Street
 e 2 p/62353535
 ```
 
-#### Editing a class: `editclass`
-
-Command Shortcut: `ec`
-
+#### Editing a class: `editclass` | `ec`
 Format: `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]`
 
 Examples:
@@ -150,13 +229,14 @@ editclass 2 l/10
 ec 3 n/Trigonometry ts/Sun 10:00-11:00
 ```
 
-### Deleting students/tuition classes
+### 3.4 Delete student/tuition class
+Deletes a student or a tuition class from TutAssistor.
 
-Deletes a student or a tuition class of a given INDEX. Has the option to delete multiple at a time.
+* At least one student or class index must be provided.
+   
+* Provide multiple indices to delete multiple students or classes at once.
 
-#### Deleting students: `delete`
-
-Command Shortcut: `del`
+#### Deleting students: `delete` | `del`
 
 Format: `delete STUDENT_INDEX [STUDENT_INDEX]...`
 
@@ -168,9 +248,7 @@ delete 1 2
 del 1
 ```
 
-#### Deleting tuition classes: `deleteclass`
-
-Command Shortcut: `delc`
+#### Deleting tuition classes: `deleteclass` | `delc`
 
 Format: `deleteclass CLASS_INDEX [CLASS_INDEX]...`
 
@@ -182,19 +260,18 @@ deleteclass 1 2
 delc 4
 ```
 
-### Adding/Removing an existing student from class
+### 3.5 Add/Remove student from class
 
-Move a student into/out of classes by adding or removing them.
+Moves a student to/from a class.
 
-#### Adding existing students to a class: `addtoclass`
+#### Adding existing students to a class: `addtoclass` | `atc`
 
-Command Shortcut: `atc`
+Adds one or more existing students to an existing class.
 
-Add one or more existing students to an existing class, using student NAME or INDEX.
+When adding multiple students at once, use:
+* commas(`,`) to separate names, with no spaces after each comma.
 
-When adding students by NAME, use commas(`,`) to separate names, with no spaces after each comma.
-
-When adding students by INDEX, use spaces to separate indexes.
+* spaces to separate indices.
 
 Format:
 
@@ -218,11 +295,9 @@ addtoclass s/James,Felicia tc/2
 atc s/James tc/3
 ```
 
-#### Removing existing students from a class: `remove`
+#### Removing existing students from a class: `remove` | `rm`
 
-Command Shortcut: `rm`
-
-Removes existing students from a tuition class using student INDEX.
+Removes an existing student from a tuition class.
 
 Format: `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/CLASS_INDEX`
 
@@ -234,16 +309,19 @@ remove si/1 tc/1
 rm si/1 2 3 4 tc/2
 ```
 
-### Adding remark to a student/tuition class
-Upon entering the command, a pop-up window is displayed for the user to edit the remarks.
+### 3.6 Add remark to student/tuition class
+Upon entering the command, a pop-up window with a text box is displayed for the user to edit remarks.
 
-#### Adding remarks to a student: `remark`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Users can add, remove, or edit remarks through the editor window.
+</div>
 
-Command Shortcut: `re`
+![Remark editor](images/remark_editor_student.png)
+*Editing remarks with editor window*
 
-Adds or modifies a remark for a student of a given INDEX.
+#### Adding remark to a student: `remark` | `re`
 
-A window with a text box will be displayed to edit the remarks for that student.
+Adds a remark for a student.
 
 Format: `remark STUDENT_INDEX`
 
@@ -255,16 +333,10 @@ or
 ```
 re 2
 ```
-![Ui](images/remark_editor_student.png)
-Editing window for a student's remarks.
 
-#### Adding remarks to a tuition class: `remarkclass`
+#### Adding remark to a tuition class: `remarkclass` | `rec`
 
-Command Shortcut: `rec`
-
-Adds or modifies a remark for a tuition class of a given INDEX.
-
-A window with a text box will be displayed to edit the remarks for that class.
+Adds a remark for a tuition class.
 
 Format: `remarkclass CLASS_INDEX`
 
@@ -276,14 +348,16 @@ or
 ```
 rec 1
 ```
-![Ui](images/remark_editor_class.png)
-Editing window for a tuition class's remarks.
 
-### Finding students by name: `find`
+<div markdown="span" class="alert alert-primary">
+Note: When creating a new student or tuition class with the `add` command, you can use the `r/` tag to add remarks  directly.
+</div>
 
-Command Shortcut: `f`
+### 3.7 Find student/tuition class
+Filters the list based on the given keywords. The keywords are case-insensitive.
 
-Filters the list of students to only display all students whose names contain any of the given keywords (case-insensitive).
+#### Finding students by name: `find` | `f`
+Displays a list of students whose name matches the given keywords.
 
 Format: `find KEYWORD [KEYWORD]...`
 
@@ -297,17 +371,9 @@ f alice tan
 ```
 TutAssistor will display a list of all students with `alice` or `tan` in their name.
 
-#### Listing all students: `list`
+#### Finding classes by name: `findclass` | `fc`
 
-Command Shortcut: `l`
-
-Display list of all students after conducting a search with the `find` command.
-
-### Finding classes by name: `findclass`
-
-Command Shortcut: `fc`
-
-Filters the list of classes to only display all classes whose names contain any of the given keywords (case-insensitive).
+Displays a list of classes whose name matches the given keywords.
 
 Format: `findclass KEYWORD [KEYWORD]...`
 
@@ -321,118 +387,145 @@ fc physics chemistry
 ```
 TutAssistor will display a list of all classes with `physics` or `chemistry` in their name.
 
-#### Listing all classes: `listclass`
 
-Command Shortcut: `lc`
+The filtered list should look similar to the example shown below: <br>
+![FindCommand example](images/find_screenshot.png)
+*Example of executing `find alice tan` command*
 
-Displays list of all classes after conducting a search with the `findclass` command.
+### 3.8 List all students/tuition classes
+Shows the full list of students or classes.
 
-### Sorting tuition classes: `sort`
+#### Listing all students: `list` | `l`
 
-Command Shortcut: `s`
+Displays a list of all students.
+
+Format: `list`
+
+#### Listing all classes: `listclass` | `lc`
+
+Displays list of all classes.
+
+Format: `listclass`
+
+### 3.9 Sort tuition classes: `sort` | `s`
 
 Sorts tuition class list according to time or alphabetical order.
 
-Without exiting TutAssistor, the list will be auto-sorted
-when adding and editing classes after the tutor sorted the list.
+* After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
+* The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
 
 Format: `sort [o/ORDER]`
 
-Examples: (examples below are all possible usages of `sort`)
-* `sort` (sort by time)
-* `sort o/asc` (sort by ascending alphabetical order)
-* `sort o/desc` (sort by descending alphabetical order)
-* `sort o/time` (sort by time)
+The possible usages of `sort` are given below:
+* `sort` sorts by time
+* `sort o/asc` sorts by ascending alphabetical order
+* `sort o/desc` sorts by descending alphabetical order
+* `sort o/time` sorts by time
 
-### View timetable: `timetable`
+### 3.10 View timetable: `timetable` | `tt`
+Shows classes scheduled in this week in a timetable.
 
-Command Shortcut: `tt`
-
-Example:
+Format:
 ```
 timetable
 ```
 
-Shows lessons scheduled in this week in a timetable.
-![Ui](images/time_table.png)
+![Timetable](images/time_table.png)
+*A weekly view of all classes.*
 
-### View today tuition classes: `today`
-
-Command Shortcut: `td`
-
+### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today.
-![Ui](images/today_view.png)
 
-### Viewing help: `help`
+![Today view](images/today_view.png)
+*A list of view of all classes happening today.*
 
-Command Shortcut: `h`
+### 3.12 View help: `help` | `h`
 
 Shows a command summary, as well as a link to the user guide. <br>
-![Ui](images/helpWindow.png)
 
-### Navigating input history
+Format: `help`
+
+![Help window](images/helpWindow.png)
+
+*The help window*
+
+### 3.13 Navigate input history
 
 When typing in the command box, use the **up** and **down** arrow keys to access and navigate through previously entered inputs.
 
-### Clearing all stored data: `clear`
-<div markdown="span" class="alert alert-primary">
-❗THINK CAREFULLY BEFORE USING THIS COMMAND. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA. IT IS NOT REVERSIBLE. ❗
-</div>
-
+### 3.14 Clear data: `clear`
 Clears all current student and tuition class data.
 
-### Exiting the app: `exit`
+Format: `clear`
 
-Exits the program.<br>
+<div markdown="span" class="alert alert-primary">
+❗THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA❗
+</div>
+
+### 3.15 Exit the app: `exit`
+
+Exits the program.
+
 Format: `exit`
 
-## Additional Formatting Information for Commands
+### 3.16 Track payment `coming in v2.0`
+_Detais coming soon..._
 
-### Names
-Student Names must be unique, aka there cannot be 2 or more students registered with the exact same name.
+--------------------------------------------------------------------------------------------------------------------
+
+## 4 Additional Command Format Information
+
+### 4.1 Name
+Student name is unique. There cannot be 2 or more students registered with the exact same name.
 
 Names for tuition classes may be reused.
 
-### Phone Numbers
-Phone numbers should only contain numbers, and should be at least 3 digits long.
+### 4.2 Phone Number
+Phone number should only contain digits, and should be at least 3 digits long.
 
-### Emails
-Emails should be of the format `local-part@domain` and adhere to the following constraints:
+### 4.3 Email
+Email should be of the format `local-part@domain` and adhere to the following constraints:
 1. The `local-part` should only contain alphanumeric characters and these special characters, `+` `_` `.` `-`. The `local-part` may not start or end with any special characters.
 2. This is followed by a `@` and then a `domain` name. The domain name is made up of domain labels separated by periods.
    The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any
 
-### Timeslots
-Timeslots for classes follow the following format:
+### 4.4 Timeslot
+Timeslot for classes follows the format:
 ```
-WWW HH:MM-HH:MM
+Ddd HH:mm-HH:mm
 ```
 where
-- `WWW` is the day of the week, **abbreviated to the first three letters, with only the first letter capitalised**.
+- `Ddd` is the day of the week, **abbreviated to the first three letters, with only the first letter capitalised**.
 
     Examples:
     - Correct: `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`
     - Incorrect: `mon`, `tuesday`, `WED`, `Thurs`, `Friday`, etc
-- `HH:MM` is the time with 2 digits for the hour and 2 digits for the minute. The first time must be earlier in the day than the second time.
+- `HH:mm` is the time with 2 digits for the hour and 2 digits for the minute. The first time must be earlier in the day than the second time.
+
     Examples:
     - Correct: `09:00-14:30`
     - Incorrect: `9:00-14:00`, `9am-2pm`, `9-2`, `09:00-08:00`
 
-### Index
-Indices for students or tuition classes must be a whole number, starting from `1`.
+### 4.5 Index
+Index for a student or tuition class must be a positive integer, starting from `1`. It must not exceed the size of the list.
 
-It must not exceed the size of the respective list.
-
-Example:
-
-If the list consists of `5` students/tuition classes -
+For example, if the list consists of `5` students/tuition classes:
 - Correct: `1`, `2`, `3`, `4`, `5`
 - Incorrect: `0`, `1.5`, `a`, `6`, etc.
 
-## Command Summary
+--------------------------------------------------------------------------------------------------------------------
+
+## 5 FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 6 Command Summary
 
 Action | Format | Shortcut
 -------|--------|---------
@@ -449,8 +542,8 @@ Action | Format | Shortcut
 ***Add Remarks to Student*** | `remark INDEX_STUDENT` | `re`
 ***Add Remarks to Class*** | `remarkclass INDEX_CLASS` | `rec`
 ***Find Student by Name*** | `find KEYWORD [KEYWORD]...` | `f`
-***List all Students*** | `list` | `l`
 ***Find Class by Name*** | `findclass KEYWORD [KEYWORD]...` | `fc`
+***List all Students*** | `list` | `l`
 ***List all Classes*** | `listclass` | `lc`
 ***Sort Tuition Class*** | `sort [o/ORDER]` | `s`
 ***View Timetable*** | `timetable` | `tt`
