@@ -4,7 +4,7 @@ layout: page
 title: User Guide
 ---
 
-![WTG logo](..\src\main\resources\images\tour_booth.png)
+![WTG logo](\src\main\resources\images\tour_booth.png)
 
 WhereTourGo: A Tour Guide’s Best Friend
 
@@ -24,13 +24,13 @@ This User Guide will help you set up your contact list and familiarise yourself 
     * [Viewing help: `help`](#viewing-help-help)
     * [Adding a contact: `add`](#adding-a-contact-add)
     * [Listing all contacts: `list`](#listing-all-contacts-list)
-    * [Editing a contact: `edit`](#editing-all-contacts-edit)
-    * [Locating contacts by name: `find`](locating-contacts-by-name-find)
+    * [Editing a contact: `edit`](#editing-a-contact-edit)
+    * [Locating contacts: `find`](locating-contacts-find)
     * [Deleting a contact: `delete`](deleting-a-contact-delete)
     * [Filtering by category: `filter`](filtering-by-category-filter)
     * [Undoing operations : `undo`](undoing-operations-undo)
     * [Redoing operations : `redo`](redoing-operations-redo)
-    * [Sorting contacts: `sort`](sorting-contacts-sort)
+    * [Sorting contacts: `sort`](sorting-the-contacts-sort)
     * [Summarizing contacts: `sum`](summarizing-contacts-sum)
     * [Viewing a contact : `view`](viewing-a-contact-view)
     * [Exporting data: `export`](exporting-data-export)
@@ -223,13 +223,13 @@ Examples:
   Expected Outcome for `filter c/fnb`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
-### Undoing the operations : `undo`
+### Undoing operations : `undo`
 Undoes the last change made to the list of contacts.
 Format: `undo`
 Examples :
 If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
 
-### Redoing the operations: `redo`
+### Redoing operations: `redo`
 Redoes the last change undone on the list of contacts.
 Format: `redo`
 Examples :
