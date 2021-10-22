@@ -17,7 +17,7 @@ activate Model
 Model --> PaidCommand
 deactivate Model
 
-PaidCommand -> Model : updatedFilteredStudentList(true)
+PaidCommand -> Model : updateFilteredStudentList(true)
 activate Model
 Model --> PaidCommand
 deactivate Model
