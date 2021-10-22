@@ -94,18 +94,23 @@ Format:
 * Add a client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 * Add a product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
-Notes:
-
-* Adds a client with name, phone number and optional email, address and orders.
-* Adds a product with name, unit price and optional quantity.
-* An error message will be displayed if the format of a field is incorrect, e.g. input `ten dollars` for the field `UNIT_PRICE`.
-* A message will be displayed if the client/product to be added already exits.
-
 Examples:
 
 * `add -c Ben -pn 98765432` adds a new `Client` `Ben`, whose `PHONE_NUMBER` is `98765432`.
 * `add -p pen -$ 10.00 -q 150` adds a new `Product` `pen` with a `UNIT_PRICE` of `$10.00` and there are `150` pens in
   stock.
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
+
+* Adds a client with name, phone number and optional email, address and orders.
+* Adds a product with name, unit price and optional quantity.
+* An error message will be displayed if the format of a field is incorrect, e.g. input `ten dollars` for the
+  field `UNIT_PRICE`.
+* A message will be displayed if the client/product to be added already exits.
+
+</div>
 
 ### Deleting: `delete`
 
@@ -116,17 +121,21 @@ Format:
 * Delete a client: `delete -c INDEX`
 * Delete a product: `delete -p INDEX`
 
-Notes:
+Examples:
+
+* `delete -c 1` deletes the client with index 1 in the application.
+* `delete -p 2` deletes the product with index 2 in the application.
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
 
 * Deletes the client/product based on the client/product’s `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
 * An error message will be displayed if the client/product doesn't exist.
 
-Examples:
-
-* `delete -c 1` deletes the client with index 1 in the application.
-* `delete -p 2` deletes the product with index 2 in the application.
+</div>
 
 ### Clear Everything: `clear`
 
@@ -145,7 +154,14 @@ Format:
 * Edit a client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 * Edit a product: `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
 
-Notes:
+Examples:
+
+* `edit -c 1 -n Ben` Edits the name of the client with `INDEX` of `1` to `Ben`.
+* `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `INDEX` of `3` to `Ben10` and the quantity to `20`.
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
 
 * Edits the client/product at the specified `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
@@ -164,10 +180,7 @@ Notes:
           and since `QUANTITY` is now 0, this `ORDER` will be removed.
         * `[ ID = 2, QUANTITY = 10, ... ]` will be added as the client does not have an order with the same `ID`.
 
-Examples:
-
-* `edit -c 1 -n Ben` Edits the name of the client with `INDEX` of `1` to `Ben`.
-* `edit -p 3 -n Ben10 -q 20` Edits the name of the product with `INDEX` of `3` to `Ben10` and the quantity to `20`.
+</div>
 
 ### Finding: `find`
 
@@ -178,16 +191,20 @@ Format:
 * Find clients: `find -c NAME`
 * Find products: `find -p NAME`
 
-Notes:
+Examples:
+
+* `find -c john` Shows a list of all clients with the `NAME` `john` in the application.
+* `find -c phone` Shows a list of all products with the `NAME` `phone` in the application.
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
 
 * Finds the client/product based on the `NAME` provided.
 * `NAME` provided must fully match the `NAME` in the application and can be case-insensitive.
 * If there are no matching `NAME` in the application, an error message will be displayed
 
-Examples:
-
-* `find -c john` Shows a list of all clients with the `NAME` `john` in the application.
-* `find -c phone` Shows a list of all products with the `NAME` `phone` in the application.
+</div>
 
 ### Listing: `list`
 
@@ -198,14 +215,18 @@ Format:
 * List clients: `list -c`
 * List products: `list -p`
 
-Notes:
-
-* A message will be displayed if there are no clients/products in the application.
-
 Examples:
 
 * `list -c` Shows a list of all clients in the application.
 * `list -p` Shows a list of all products in the application.
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
+
+* A message will be displayed if there are no clients/products in the application.
+
+</div>
 
 ### Viewing: `view`
 
@@ -216,18 +237,22 @@ Format:
 * View a client: `view -c INDEX`
 * View a product: `view -p INDEX`
 
-Notes:
+Examples:
+
+* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email, address
+  and orders.
+* `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
 
 * Views the client/product at the specified `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
 * If the client/product doesn't exist, a display message is shown.
 
-Examples:
-
-* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email, address
-  and orders.
-* `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
+</div>
 
 Expected Output: ![Ui](images/UiViewCommand.png)
 
@@ -247,19 +272,18 @@ Format:
 * Pressing `↑` when the first command is currently displayed will do nothing.
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
-    
+
 </div>
- 
 
 ### Saving the data
 
-Sellah data are saved in the hard disk automatically after any command that changes the data. There is no need to 
-save manually.
+Sellah data are saved in the hard disk automatically after any command that changes the data. There is no need to save
+manually.
 
 ### Editing the data file
 
-Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. Advanced users are welcome to 
-update data directly by editing that data file.
+Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. Advanced users are welcome to update data
+directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Sellah will discard all data and start with an empty 
@@ -275,7 +299,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
 the data of your previous Sellah home folder.<br>
 
 
