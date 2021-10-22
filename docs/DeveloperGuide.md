@@ -278,7 +278,7 @@ This feature is facilitated by the following operations:
 * `PaidCommandParser#parse()` - Returns an instance of `PaidCommand`.
 * `UnpaidCommandParser#parse()` - Returns an instance of `UnpaidCommand`.
 
-To represent a student's payment status, a `PaymentStatus` class is created. It stores an immutable instance variable `hasPaid`, of boolean type. We then work with the `Student` model, and implement `PaymentStatus` as a field in `Student`.
+To represent a student's payment status, a `PaymentStatus` class is introduced. It stores an immutable instance variable `hasPaid`, of boolean type. We then work with the `Student` model, and implement `PaymentStatus` as a field in `Student`.
 
 <img src="images/StudentWithPaymentStatusClassDiagram.png" width="150" />
 
