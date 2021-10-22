@@ -18,6 +18,11 @@ public class ItemComponent extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for ItemComponent
+     * @param text Information to be displayed.
+     * @param img Image of the icon.
+     */
     public ItemComponent(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/PersonComponent.fxml"));

@@ -1,20 +1,17 @@
 package seedu.fast.ui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import seedu.fast.model.person.Appointment;
-import seedu.fast.model.person.Person;
-
 import static seedu.fast.ui.UiUtil.ADDRESS_IMAGE;
 import static seedu.fast.ui.UiUtil.EMAIL_IMAGE;
 import static seedu.fast.ui.UiUtil.PHONE_IMAGE;
 import static seedu.fast.ui.UiUtil.TAG_IMAGE;
 
-
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import seedu.fast.model.person.Appointment;
+import seedu.fast.model.person.Person;
 
 /**
  * An UI component that displays information of a {@code Person}.
