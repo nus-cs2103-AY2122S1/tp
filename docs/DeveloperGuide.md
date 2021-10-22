@@ -314,7 +314,7 @@ The user can then tag an `Anime` with a `Genre` in this list.
 
 Given below is a MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
 
-**Use case: UCP1 - List all anime**
+**Use case: UCP1 - Add genre to an anime**
 
 **MSS**
 1.  <ins>User lists all anime(UC01)</ins>
