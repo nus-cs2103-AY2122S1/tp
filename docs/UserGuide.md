@@ -97,13 +97,13 @@ Notes:
 
 * Adds a client with name, phone number and optional email, address and orders.
 * Adds a product with name, unit price and optional quantity.
-* The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `price`.
+* The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `UNIT_PRICE`.
 * The user will be informed if the client/product to be added already exits.
 
 Examples:
 
-* `add -c Ben -pn 98765432` adds a new `client` `Ben`, whose `phone number` is `98765432`.
-* `add -p pen -$ 10.00 -q 150` adds a new `product` `pen` with a `unit price` of `$10.00` and there are `150` pens in
+* `add -c Ben -pn 98765432` adds a new `Client` `Ben`, whose `PHONE_NUMBER` is `98765432`.
+* `add -p pen -$ 10.00 -q 150` adds a new `Product` `pen` with a `UNIT_PRICE` of `$10.00` and there are `150` pens in
   stock.
 
 ### Deleting: `delete`
