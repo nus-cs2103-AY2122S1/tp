@@ -1,10 +1,9 @@
- 
 ---
 layout: page
 title: User Guide
 ---
 
-![WTG logo](..\src\main\resources\images\tour_booth.png)
+![WTG logo](../src/main/resources/images/tour_booth.png)
 
 WhereTourGo: A Tour Guide’s Best Friend
 
@@ -24,24 +23,24 @@ This User Guide will help you set up your contact list and familiarise yourself 
     * [Viewing help: `help`](#viewing-help-help)
     * [Adding a contact: `add`](#adding-a-contact-add)
     * [Listing all contacts: `list`](#listing-all-contacts-list)
-    * [Editing a contact: `edit`](#editing-all-contacts-edit)
-    * [Locating contacts by name: `find`](locating-contacts-by-name-find)
-    * [Deleting a contact: `delete`](deleting-a-contact-delete)
-    * [Filtering by category: `filter`](filtering-by-category-filter)
-    * [Undoing operations : `undo`](undoing-operations-undo)
-    * [Redoing operations : `redo`](redoing-operations-redo)
-    * [Sorting contacts: `sort`](sorting-contacts-sort)
-    * [Summarizing contacts: `sum`](summarizing-contacts-sum)
-    * [Viewing a contact : `view`](viewing-a-contact-view)
-    * [Exporting data: `export`](exporting-data-export)
-    * [Displaying commands: `cmd`](displaying-commands-cmd)
-    * [Clearing all entries : `clear`](clearing-all-entries-clear)
-    * [Exiting the program : `exit`](exiting-the-program-exit)
-    * [Navigating input history](navigating-input-history)
-    * [Saving the data](saving-the-data)
-    * [Editing the data file](editing-the-data-file)
-* [FAQ](faq)
-* [Command Summary](command-summary)
+    * [Editing a contact: `edit`](#editing-a-contact-edit)
+    * [Locating contacts by name: `find`](#locating-contacts-find)
+    * [Deleting a contact: `delete`](#deleting-a-contact-delete)
+    * [Filtering by category: `filter`](#filtering-contacts-filter)
+    * [Undoing operations: `undo`](#undoing-the-operations-undo)
+    * [Redoing operations: `redo`](#redoing-the-operations-redo)
+    * [Sorting contacts: `sort`](#sorting-the-contacts-sort)
+    * [Summarizing contacts: `sum`](#summarizing-contacts-sum)
+    * [Viewing a contact: `view`](#viewing-a-contact-view)
+    * [Exporting data: `export`](#exporting-data-export)
+    * [Displaying commands: `cmd`](#displaying-commands-cmd)
+    * [Clearing all entries: `clear`](#clearing-all-entries-clear)
+    * [Exiting the program: `exit`](#exiting-the-program-exit)
+    * [Navigating input history](#navigating-input-history)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -99,7 +98,7 @@ This User Guide will help you set up your contact list and familiarise yourself 
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Opens the User Guide in the Browser
 
@@ -200,18 +199,21 @@ Examples:
 * `list` followed by `delete Singapore DUCKTours` deletes the contact with name ' Singapore DUCKTours’
 * `find shangri-la` followed by `delete Shangri-La Hotels & Resorts` deletes the contact with name 'Shangri-La Hotels & Resorts'
 
-### Filtering by category : `filter`
-
-Shows a list of all contacts in the specified category
-
+### Filtering contacts: `filter`
+Shows a list of all contacts in the specified category or with the specified rating.
 Category codes:
 * Attraction :`c/att`
 * F&B :`c/fnb`
 * Commerce :`c/com`
 * Accommodation :`c/acc`
 * Transport :`c/tpt`
-
-Format: `filter c/CATEGORY...`
+  Ratings :
+* 1-star : `ra/1`
+* 2-star : `ra/2`
+* 3-star : `ra/3`
+* 4-star : `ra/4`
+* 5-star : `ra/5`
+  Format: `filter [c/CATEGORY] [ra/NUMBER] ... `
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can filter contacts in one or many categories
@@ -220,10 +222,13 @@ You can filter contacts in one or many categories
 Examples:
 * `filter c/fnb` returns McDonald's, KFC, and Burger King (all F&B contacts)
 * `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts)
+* `filter ra/3` returns all contacts with 3-star rating from all categories
+* `filter c/fnb ra/3` returns all F&B contacts with 3-star rating
   Expected Outcome for `filter c/fnb`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
-### Undoing the operations : `undo`
+
+### Undoing the operations: `undo`
 Undoes the last change made to the list of contacts.
 Format: `undo`
 Examples :
@@ -236,7 +241,7 @@ Examples :
 If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
 If you then execute `redo` , the Marina Bay Sands contact will be deleted again.
 
-### Sorting the contacts : `sort`
+### Sorting the contacts: `sort`
 Sorts the list of contacts in a specified order. The sort feature is sorted by Contact name (in alphabetical order) or by Rating (in descending order).
 Format : `sort FIELD`
 Examples :
@@ -301,13 +306,13 @@ Displays a list of the commands used in WhereTourGo, along with their functional
 
 Format: `cmd`
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the contact list.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
