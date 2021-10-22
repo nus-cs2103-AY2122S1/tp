@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,6 +35,7 @@ public enum CommandWord {
     REMARK_PERSON("remark");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
+    private static final Logger logger = LogsCenter.getLogger(CommandWord.class);
 
     static {
         Map<CommandWord, ArrayList<String>> aliasMap = new HashMap<>();
@@ -62,9 +65,11 @@ public enum CommandWord {
         String aliasToLowerCase = userInput.toLowerCase();
         for (CommandWord cw : ALIAS_MAP.keySet()) {
             if (cw.aliasList.contains(aliasToLowerCase)) {
+                logger.info("----------------[Alias given is supported][" + userInput + "]");
                 return cw;
             }
         }
+        logger.info("----------------[Not a supported alias][" + userInput + "]");
         throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 
