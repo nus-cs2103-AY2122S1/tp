@@ -1,23 +1,18 @@
 package seedu.fast.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.fast.commons.util.Colors;
-import seedu.fast.commons.util.TagUtil;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
-import javafx.scene.image.Image;
 
-import static seedu.fast.ui.UiUtil.tagImage;
-import static seedu.fast.ui.UiUtil.emailImage;
-import static seedu.fast.ui.UiUtil.addressImage;
-import static seedu.fast.ui.UiUtil.phoneImage;
+import static seedu.fast.ui.UiUtil.ADDRESS_IMAGE;
+import static seedu.fast.ui.UiUtil.EMAIL_IMAGE;
+import static seedu.fast.ui.UiUtil.PHONE_IMAGE;
+import static seedu.fast.ui.UiUtil.TAG_IMAGE;
 
 
 
@@ -64,10 +59,6 @@ public class PersonCard extends UiPart<Region> {
     private Label appointmentVenue;
     @FXML
     private Label appointmentCount;
-    @FXML
-    private FlowPane tagTest;
-
-
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -77,12 +68,11 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.getChildren().add(new ItemComponent(person.getPhone().value, phoneImage));
-        address.getChildren().add(new ItemComponent(person.getAddress().value, addressImage));
-        email.getChildren().add(new ItemComponent(person.getEmail().value, emailImage));
-//        email.setText(person.getEmail().value);
+        phone.getChildren().add(new ItemComponent(person.getPhone().value, PHONE_IMAGE));
+        address.getChildren().add(new ItemComponent(person.getAddress().value, ADDRESS_IMAGE));
+        email.getChildren().add(new ItemComponent(person.getEmail().value, EMAIL_IMAGE));
         remark.setText(person.getRemark().value);
-        tags.getChildren().add(new TagComponent(person.getTags(), tagImage));
+        tags.getChildren().add(new TagComponent(person.getTags(), TAG_IMAGE));
 
         appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
         appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTimeFormatted(), "Time",

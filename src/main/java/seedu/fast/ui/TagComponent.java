@@ -25,8 +25,8 @@ public class TagComponent extends HBox {
     private ImageView displayPicture;
 
     /**
-     * The constructor for TagComponent
-     * @param tagSet The set of Tags.
+     * An UI component that contains the set of tags and the icon image.
+     * @param tagSet The Set of Tags.
      * @param img The image of the icon.
      */
     public TagComponent(Set<Tag> tagSet, Image img) {
@@ -46,9 +46,9 @@ public class TagComponent extends HBox {
 
 
     /**
-     * Does a string comparison to determine what color the tag should be.
-     * @param tagName Tag name.
-     * @return A new Label with its color predetermined.
+     * Selects the color for tags based on their String names.
+     * @param tagName Name of the Tag.
+     * @return Label with color.
      */
     public Label colorSelector(String tagName) {
         Label temp = new Label(tagName);
