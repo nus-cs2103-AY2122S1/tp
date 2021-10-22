@@ -49,6 +49,7 @@ public class ModelManager implements Model {
         filteredClients = new FilteredList<>(sortedClients);
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         clientToView = new FilteredList<>(this.addressBook.getClientList());
+        clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
 
     public ModelManager() {
