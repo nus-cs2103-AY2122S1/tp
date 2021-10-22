@@ -250,12 +250,16 @@ public class ParserUtil {
         String startTime = String.format("%s %s", arr[0], arr[1].split("-")[0]); //Mon 10:00
         String endTime = String.format("%s %s", arr[0], arr[1].split("-")[1]); //Mon 11:00
         DateFormat sdf = new SimpleDateFormat("EEE HH:mm");
+        DateFormat dayFormat = new SimpleDateFormat("EEE");
         try {
             Date start = sdf.parse(startTime);
             Date end = sdf.parse(endTime);
-            if (start.getTime() >= end.getTime()) {
+            int day = dayFormat.parse(startTime).getDay();
+
+            if (start.getTime() >= end.getTime() || start.getDay() != day || end.getDay() != day) {
                 throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
             }
+            //throw new ParseException("a" + start.getDate() + "b " + end.getDate());
             return new Timeslot(start, end);
         } catch (java.text.ParseException e) {
             throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);

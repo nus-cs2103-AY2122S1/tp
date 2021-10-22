@@ -55,8 +55,8 @@ public class AddClassCommandParser implements Parser<AddClassCommand> {
             return new AddClassCommand(tuitionClass);
 
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddClassCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddClassCommand.MESSAGE_USAGE), pe);
+            //throw new ParseException(pe.getMessage());
         }
     }
 
