@@ -370,3 +370,31 @@
 .tooltip-text {
     -fx-text-fill: white;
 }
+
+/* STATS CSS */
+
+chart-pie-label-line {
+    -fx-stroke: #ffffff;
+    -fx-fill: #ffffff;
+}
+
+.chart-pie-label {
+    -fx-stroke: #ffffff;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1em;
+}
+.chart-legend {
+    -fx-padding: 8 8 8 8;
+    -fx-border-width: 15;
+    -fx-alignment: LEFT;
+    -fx-stroke: WHITE;
+    -fx-text-fill: WHITE;
+    -fx-tile-alignment: RIGHT;
+    -fx-tick-label-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.chart-title {
+    -fx-text-fill: #ffffff;
+    -fx-alignment: CENTER;
+}

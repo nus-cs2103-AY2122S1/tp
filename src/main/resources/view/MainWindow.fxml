@@ -40,6 +40,11 @@
                    <StackPane fx:id="animeListPanelPlaceholder" prefHeight="100.0" prefWidth="106.0" HBox.hgrow="ALWAYS" />
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
+                               <StackPane fx:id="statsDisplayPlaceholder" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" nodeOrientation="RIGHT_TO_LEFT" styleClass="pane-with-border" HBox.hgrow="ALWAYS">
+                                   <padding>
+                                       <Insets bottom="5" left="50" right="10" top="5" />
+                                   </padding>
+                               </StackPane>
                                 <StackPane fx:id="resultDisplayPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                             <padding>
                               <Insets bottom="5" left="10" right="10" top="5" />

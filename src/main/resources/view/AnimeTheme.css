@@ -380,6 +380,32 @@
     -fx-text-fill: white;
 }
 
+/* STATS CSS */
+
+chart-pie-label-line {
+    -fx-stroke: #ffffff;
+    -fx-fill: #ffffff;
+}
+
+.chart-pie-label {
+    -fx-stroke: #ffffff;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 1em;
+}
+.chart-legend {
+    -fx-alignment: CENTER;
+    -fx-stroke: WHITE;
+    -fx-text-fill: WHITE;
+    -fx-tile-alignment: CENTER;
+    -fx-tick-label-fill: white;
+    -fx-background-radius: 5px;
+}
+
+.chart-title {
+    -fx-text-fill: #ffffff;
+    -fx-alignment: CENTER;
+}
+
 /* TABS CSS */
 
 .tab-pane .tab-header-area .tab-header-background {
