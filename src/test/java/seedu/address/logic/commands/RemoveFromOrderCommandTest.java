@@ -159,6 +159,18 @@ public class RemoveFromOrderCommandTest {
     }
 
     @Test
+    public void execute_overRemoveItem_throwCommandException() {
+        ItemDescriptor toRemoveDescriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_DONUT)
+                .withCount(BAGEL.getCount() + 1)
+                .build();
+
+        RemoveFromOrderCommand command = new RemoveFromOrderCommand(toRemoveDescriptor);
+
+        assertCommandFailure(command, modelWithOrder, RemoveFromOrderCommand.MESSAGE_INSUFFICIENT_ITEM);
+    }
+
+    @Test
     public void execute_multipleMatchesInOrder_throwCommandException() {
         modelWithOrder.addToOrder(BAGEL);
         ItemDescriptor toRemoveDescriptor = new ItemDescriptorBuilder()
