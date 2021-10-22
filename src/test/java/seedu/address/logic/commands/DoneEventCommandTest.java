@@ -31,11 +31,12 @@ class DoneEventCommandTest {
                 .get(INDEX_FIRST_EVENT.getZeroBased());
         DoneEventCommand doneCommand = new DoneEventCommand(INDEX_FIRST_EVENT);
 
+        Event eventMarkedDone = eventToMarkAsDone.markAsDone();
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.markEventAsDone(eventToMarkAsDone);
+        expectedModel.setEvent(eventToMarkAsDone, eventMarkedDone);
 
         String expectedMessage = String.format(DoneEventCommand.MESSAGE_DONE_EVENT_SUCCESS,
-                eventToMarkAsDone.markAsDone());
+                eventMarkedDone);
 
         assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
     }
