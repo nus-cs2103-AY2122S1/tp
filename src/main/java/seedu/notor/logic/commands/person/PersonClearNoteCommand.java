@@ -20,11 +20,11 @@ public class PersonClearNoteCommand extends PersonCommand {
 
     private static final String COMMAND_DESCRIPTION = ": Clears the note of a person in notor.\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters: none"
             + "Example: "
-            + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+            + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final PersonExecutor executor;
 
