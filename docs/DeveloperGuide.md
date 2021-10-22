@@ -15,29 +15,36 @@ title: Developer Guide
   - [Storage component](#storage-component)
   - [Common classes](#common-classes)
 - [**Implementation**](#implementation)
-  - [\[Completed\] Filter Event feature](#completed-filter-event-feature)
-    - [Implementation Details](#implementation-details)
-    - [Implementation Rationale](#implementation-rationale)
-    - [Design Considerations:](#design-considerations)
-      - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
-      - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
-  - [\[Completed\] View Participant's Details feature](#completed-view-participants-details-feature)
-    - [Implementation Details](#implementation-details-1)
-    - [Implementation Rationale](#implementation-rationale-1)
-    - [Design Considerations:](#design-considerations-1)
-      - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
-  - [\[Completed\] Add/Remove Participant to/from event by index](#completed-addremove-participant-tofrom-event-by-index)
-    - [Implementation Details](#implementation-details-2)
-    - [Implementation Rationale](#implementation-rationale-2)
-  - [\[Completed\] View Event Details feature](#completed-view-event-details-feature)
-    - [Implementation Details](#implementation-details-3)
-    - [Implementation Rationale](#implementation-rationale-3)
-    - [Design Considerations:](#design-considerations-2)
-      - [Aspect: Similar Event names:](#aspect-similar-event-names)
-  - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
-    - [Proposed Implementation](#proposed-implementation)
-    - [Design considerations:](#design-considerations-3)
-  - [\[Proposed\] Data archiving](#proposed-data-archiving)
+    - [\[Completed\] Add Event feature](#completed-add-event-feature)
+       - [Implementation Details](#implementation-details)
+       - [Implementation Rationale](#implementation-rationale)
+    - [\[Completed\] Remove Event feature](#completed-remove-event-feature)
+       - [Implementation Details](#implementation-details)
+       - [Design Considerations:](#design-considerations)
+          - [Aspect: Specifying Event to be Removed:](#aspect-specifying-event-to-be-removed)
+- [\[Completed\] Filter Event feature](#completed-filter-event-feature)
+      - [Implementation Details](#implementation-details)
+      - [Implementation Rationale](#implementation-rationale)
+      - [Design Considerations:](#design-considerations)
+        - [Aspect: Criteria to filter by:](#aspect-criteria-to-filter-by)
+        - [Aspect: With or without prefix:](#aspect-with-or-without-prefix)
+    - [\[Completed\] View Participant's Details feature](#completed-view-participants-details-feature)
+      - [Implementation Details](#implementation-details-1)
+      - [Implementation Rationale](#implementation-rationale-1)
+      - [Design Considerations:](#design-considerations-1)
+        - [Aspect: Similar participant IDs:](#aspect-similar-participant-ids)
+    - [\[Completed\] Add/Remove Participant to/from event by index](#completed-addremove-participant-tofrom-event-by-index)
+      - [Implementation Details](#implementation-details-2)
+      - [Implementation Rationale](#implementation-rationale-2)
+    - [\[Completed\] View Event Details feature](#completed-view-event-details-feature)
+      - [Implementation Details](#implementation-details-3)
+      - [Implementation Rationale](#implementation-rationale-3)
+      - [Design Considerations:](#design-considerations-2)
+        - [Aspect: Similar Event names:](#aspect-similar-event-names)
+    - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
+      - [Proposed Implementation](#proposed-implementation)
+      - [Design considerations:](#design-considerations-3)
+    - [\[Proposed\] Data archiving](#proposed-data-archiving)
 - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
 - [**Appendix: Requirements**](#appendix-requirements)
   - [Product scope](#product-scope)
@@ -208,6 +215,65 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### \[Completed\] Add Event feature
+
+This feature allows Managera users to create an event at the specified date and time.
+
+#### Implementation Details
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+we can simply add a new `commandType` case for `AddEventCommand` in `AddressBookParser`. 
+
+The `AddEventCommandParser` reads the user's input and passes it to `ParserUtil` to ensure that the event's name, 
+date and time are valid. Then, an Event is created with the returned `EventName`, `EventDate` and `EventTime` objects. 
+This event will be supplied to the `addEventCommand` to be executed.
+
+Since Managera employs a UniqueEventList, it should not have more than one Event with the same name. The `addressBook` 
+will check if the given event already exists. If not, it will be successfully added to the `addressBook` through the model.
+
+#### Implementation Rationale
+
+As events may span a full day, we decided to implement time as an optional attribute of the Event. However, to accommodate
+this, Event is implemented with abstractions EventName, EventDate and EventTime. These abstractions are helpful in ensuring
+reliability of the program.
+
+
+### \[Completed\] Remove Event feature
+
+This feature allows Managera users to remove an existing event at a particular index of the displayed list.
+
+#### Implementation Details
+
+The `AddressBookParser` is responsible for determining the type of `Command` to be created from user input,
+we can simply add a new `commandType` case for `RemoveEventCommand` in `AddressBookParser`.
+
+The `RemoveEventCommandParser` reads the user's input and passes it to `ParserUtil` which returns an `Index`. This 
+`Index` will be supplied to the `removeEventCommand` to be executed. 
+
+When the command is executed, there is a check to ensure the index is within the range of the displayed list. 
+
+#### Design Considerations:
+##### Aspect: Specifying Event to be Removed: 
+
+* **Alternative 1 (Current Choice)**: Remove by Index:
+    * Pros:
+        1. The index of the event in the currently displayed list can be directly used.
+        2. Faster and more intuitive for users.
+    * Cons:
+        1. The index is independent of the Event, which may lead to an inconsistent user experience. 
+
+* **Alternative 2**: Remove by Event ID:
+    * Pros:
+        1. Every Event will have a unique ID, leading to a consistent user experience. 
+    * Cons:
+        1. The IDs will not be displayed in sequential order and may approach large numbers, which becomes less user-friendly.
+         
+* **Alternative 3**: Remove by Event Name:
+    * Pros:
+        1. User can be more sure of the event they are removing, since it is referencing the Event name.
+    * Cons:
+        1. The user has to fully match the Event name, which is much more cumbersome. 
 
 ### \[Completed\] Filter Event feature
 
