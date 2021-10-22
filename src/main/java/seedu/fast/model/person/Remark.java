@@ -1,7 +1,5 @@
 package seedu.fast.model.person;
 
-import seedu.fast.logic.parser.ParserUtil;
-
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -11,7 +9,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class Remark {
     public final String value;
-    public static final int MAX_LENGTH_REMARK = 80;
+    public static final int MAX_LENGTH_REMARK = 75;
 
     /**
      * Constructs a {@code Remark}.
