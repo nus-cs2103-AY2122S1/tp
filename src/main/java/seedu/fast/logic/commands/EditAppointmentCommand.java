@@ -20,7 +20,7 @@ import seedu.fast.model.person.Person;
 
 public class EditAppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "eppt";
+    public static final String COMMAND_WORD = "ea";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits appointment with the person identified"
             + " by the index number used in the last person listing.\n\n"

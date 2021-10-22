@@ -4,9 +4,12 @@ import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.fast.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.fast.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.fast.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.DeleteCommand;
 
 /**
@@ -21,12 +24,58 @@ public class DeleteCommandParserTest {
     private DeleteCommandParser parser = new DeleteCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+    public void parse_validArgsSingle_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1", new DeleteCommand(new Index[] {INDEX_FIRST_PERSON}));
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    public void parse_invalidArgsSingle_throwsParseException() {
+        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_validArgsMultiple_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1 2 3",
+                new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
+    }
+
+    @Test
+    public void parse_invalidArgsMultiple_throwsParseException() {
+        assertParseFailure(parser, "2 a 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_rangeArgs_returnsDeleteCommand() {
+        assertParseSuccess(parser, "1-3",
+                new DeleteCommand(new Index[] {INDEX_FIRST_PERSON, INDEX_SECOND_PERSON, INDEX_THIRD_PERSON}));
+    }
+
+    @Test
+    public void parse_sameRangeArgs_returnsDeleteCommand() {
+        assertParseSuccess(parser, "3-3",
+                new DeleteCommand(new Index[] {INDEX_THIRD_PERSON}));
+    }
+
+    @Test
+    public void parse_reversedRangeArgs_throwsParseException() {
+        assertParseFailure(parser, "10-8", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_invalidRangeArgs_throwsParseException() {
+        assertParseFailure(parser, "a-5", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "-5", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "1-", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
+
+        assertParseFailure(parser, "1 - 3", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteCommand.MESSAGE_USAGE));
     }
 }
