@@ -8,6 +8,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "remark" : "dummy remark",
     "tagged" : [ "friends" ]
+
   } ],
   "tasks" : [ {
     "label" : "Valid task",

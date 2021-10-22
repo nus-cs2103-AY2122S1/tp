@@ -71,7 +71,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setTasks(newData.getTaskList());
 
     }
 
@@ -112,29 +111,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
-    //// task-level operations
-
-    public void addTask(Task toAdd) {
-        tasks.add(toAdd);
-    }
-
-    public void deleteTask(Task toDelete) {
-        tasks.remove(toDelete);
-    }
-
-    public void markDone(Task task) {
-        tasks.markDone(task);
-    }
-
-    public void setTask(Task target, Task editedtask) {
-        tasks.setTask(target, editedtask);
-    }
-
-    public boolean hasTask(Task task) {
-        return tasks.hasTask(task);
-    }
-
     /// order-level operations
 
     public void addOrder(Order toAdd) {
@@ -170,11 +146,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Task> getTaskList() {
-        return tasks.asUnmodifiableObservableList();
     }
 
     @Override
