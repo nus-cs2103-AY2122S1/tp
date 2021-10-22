@@ -1,15 +1,16 @@
-package seedu.address.model.salesorder;
+package seedu.address.model.order;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Customer related to a SalesOrder.
+ * Represents a Customer related to a Order.
  */
 public class Customer {
     public static final String MESSAGE_CONSTRAINTS =
-            "Customer name should contain only letters and spaces and be non-empty";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+            "Customer name should be non-empty, and contain one or more blocks of alphanumeric characters, "
+            + "separated by at most one space";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+( \\p{Alnum}+)*";
     public final String name;
 
     /**
@@ -19,11 +20,11 @@ public class Customer {
      */
     public Customer(String name) {
         requireNonNull(name);
-        checkArgument(isValidAmount(name), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidCustomer(name), MESSAGE_CONSTRAINTS);
         this.name = name;
     }
 
-    public static boolean isValidAmount(String test) {
+    public static boolean isValidCustomer(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

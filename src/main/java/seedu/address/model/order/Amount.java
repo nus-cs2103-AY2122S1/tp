@@ -1,21 +1,22 @@
-package seedu.address.model.salesorder;
+package seedu.address.model.order;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an amount associated with a SalesOrder.
+ * Represents an amount associated with a Order.
  */
 public class Amount {
     public static final String MESSAGE_CONSTRAINTS =
-            "Sales order amount should only contain numbers and be non-empty";
-    public static final String VALIDATION_REGEX = "\\d+";
+            "Sales order amount should only contain numbers, and optionally, at most one block starting with a dot"
+            + "followed by between one or or two numbers";
+    public static final String VALIDATION_REGEX = "^\\d+(\\.?\\d{1,2})?";
     public final String amount;
 
     /**
      * Constructs an {@code Amount}
      *
-     * @param amount A valid SalesOrder amount.
+     * @param amount A valid Order amount.
      */
     public Amount(String amount) {
         requireNonNull(amount);

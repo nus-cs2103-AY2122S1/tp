@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    Predicate<Order> PREDICATE_SHOW_ALL_ORDERS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -105,12 +107,39 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
     void deleteTask(Task toDelete);
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
-    void markDone(Task task);
+    void markTask(Task toMark);
+
+    //======================================== ORDER FUNCTIONALITIES =================================================
+    /**
+     * Adds the given order.
+     */
+    void addOrder(Order order);
+
+    /**
+     * Returns true if a order with the same identity as {@code order} exists in the order list.
+     */
+    boolean hasOrder(Order order);
+
+    /**
+     * Replaces the given order {@code target} with {@code editedOrder}.
+     * {@code target} must exist in the order list.
+     * The order identity of {@code editedOrder} must not be the same as another existing order in the order list.
+     */
+    void setOrder(Order target, Order editedOrder);
+
+    /** Returns an unmodifiable view of the filtered order list */
+    ObservableList<Order> getFilteredOrderList();
+
+    void deleteOrder(Order toDelete);
+
+    void updateFilteredOrderList(Predicate<Order> predicate);
+
+    void markOrder(Order order);
 }
