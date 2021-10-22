@@ -23,6 +23,8 @@ public class TaskCard extends UiPart<Region> {
     private Label date;
     @FXML
     private CheckBox isDone;
+    @FXML
+    private Label taskTag;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -34,6 +36,7 @@ public class TaskCard extends UiPart<Region> {
         label.setText(task.getLabel().toString());
         date.setText("Deadline:  " + task.getDate().toString());
         isDone.setSelected(task.getIsDone());
+        taskTag.setText(task.getTaskTag().toString());
     }
 
     @Override
