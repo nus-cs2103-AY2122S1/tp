@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-Sellah is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address book
-that contains the contact information and order details related to clients and partners.
+**Sellah** is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address
+book that contains the contact information and order details related to clients and partners.
 
 * Table of Contents
     * [Quick Start](#quick-start)
@@ -27,12 +27,12 @@ that contains the contact information and order details related to clients and p
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer. You can download it from
+1. Ensure you have `Java 11` or above installed in your Computer. You can download it from
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
 
 1. Download the latest `sellah.jar` from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your Sellah.
+1. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data.<br>
