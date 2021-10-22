@@ -20,13 +20,9 @@ public class JsonAdaptedModuleLessonTest {
     private static final String VALID_REMARK = CS2100_LAB1.getRemark().toString();
 
     @Test
-    public void toModelType_validModuleClassDetails_returnsModuleClass() {
+    public void toModelType_validModuleClassDetails_returnsModuleClass() throws IllegalValueException {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(CS2100_LAB1);
-        try {
-            assertEquals(CS2100_LAB1, moduleClass.toModelType());
-        } catch (IllegalValueException e) {
-            e.printStackTrace();
-        }
+        assertEquals(CS2100_LAB1, moduleClass.toModelType());
     }
 
     @Test
