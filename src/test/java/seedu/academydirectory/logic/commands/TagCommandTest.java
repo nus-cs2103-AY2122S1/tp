@@ -45,7 +45,8 @@ class TagCommandTest {
                 new TagCommand(INDEX_FIRST_STUDENT, tagSet);
         String expectedMessage =
                 String.format(TagCommand.MESSAGE_SUCCESS, editedStudent.getName());
-        VersionedModel expectedModel = new ModelManager(new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
+        VersionedModel expectedModel = new ModelManager(
+                new AcademyDirectory(model.getAcademyDirectory()), new UserPrefs());
         expectedModel.setStudent(firstStudent, editedStudent);
         assertCommandSuccess(addTagCommand, model, expectedMessage, expectedModel);
     }
