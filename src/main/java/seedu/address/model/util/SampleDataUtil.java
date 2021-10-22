@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,9 +20,12 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.person.supplier.DeliveryDetails;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.SupplyType;
+import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,43 +54,42 @@ public class SampleDataUtil {
         return new Supplier[] {
             new Supplier(new Name("Supplier1"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), getTagSet("friends"),
-                    new SupplyType("Chicken"), new DeliveryDetails("7th of every month")),
+                    new SupplyType("Chicken"), new DeliveryDetails("2021-10-19 14:00")),
             new Supplier(new Name("Supplier2"), new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     getTagSet("colleagues", "friends"), new SupplyType("Rice"),
-                    new DeliveryDetails("Every Tuesday")),
-            new Supplier(new Name("Supplier3"), new Phone("93210283"), new Email("charlotte@example.com"),
-                    new Address("Blk 11 Ang Mo Kio Street 74, #11-04"), getTagSet("neighbours"),
-                    new SupplyType("Noodles"), new DeliveryDetails("Every 3 months")),
-            new Supplier(new Name("Supplier4"), new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"), getTagSet("family"),
-                    new SupplyType("Cutlery"), new DeliveryDetails("Every Wednesday")),
-            new Supplier(new Name("Supplier5"), new Phone("92492021"), new Email("irfan@example.com"),
+                    new DeliveryDetails("12:00 2021-05-19")),
+            new Supplier(new Name("Supplier3"), new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("classmates"),
-                    new SupplyType("Potatoes"), new DeliveryDetails("Every last friday of the month")),
-            new Supplier(new Name("Supplier6"), new Phone("92624417"), new Email("royb@example.com"),
+                    new SupplyType("Potatoes"), new DeliveryDetails("19-10-2021 10:00")),
+            new Supplier(new Name("Supplier4"), new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("colleagues"),
-                    new SupplyType("Flour"), new DeliveryDetails("Everyday 6pm"))
+                    new SupplyType("Flour"), new DeliveryDetails("10:00 15-10-2021"))
         };
     }
 
     public static Employee[] getSampleEmployees() {
-        return new Employee[]{
+        return new Employee[] {
             new Employee(new Name("Javier Phon"), new Phone("81234567"), new Email("javphon@example.com"),
-                new Address("Blk 5 Bukit Batok St 2, #177-35"), getTagSet("Employee"), new Leaves("14"),
-                new Salary("8000"), new JobTitle("Team Lead")),
+                    new Address("Blk 5 Bukit Batok St 2, #177-35"), getTagSet("Chef"), new Leaves("14"),
+                    new Salary("8000"), new JobTitle("Head Chef"),
+                    getShiftSet("2020-12-04 0800", "2020-12-05 1600", "2020-12-07 0800")),
             new Employee(new Name("Chetwin Low"), new Phone("85555555"), new Email("chetlqh@example.com"),
-                new Address("Blk 7 Yew Tee St 10, #10-35"), getTagSet("Employee"), new Leaves("10"),
-                new Salary("1200"), new JobTitle("Intern")),
+                    new Address("Blk 7 Yew Tee St 10, #10-35"), getTagSet("New"), new Leaves("10"),
+                    new Salary("1200"), new JobTitle("Dishwasher"),
+                        getShiftSet("2020-12-04 0800", "2020-12-05 0800", "2020-12-06 1600")),
             new Employee(new Name("Clement Kong"), new Phone("99999999"), new Email("clementk@example.com"),
-                new Address("Blk 20 Bishan St 37, #03-10"), getTagSet("Employee", "Myself"), new Leaves("14"),
-                new Salary("5500"), new JobTitle("Project Manager")),
+                    new Address("Blk 20 Bishan St 37, #03-10"), getTagSet("Old", "Myself"), new Leaves("14"),
+                    new Salary("7700"), new JobTitle("Manager"),
+                    getShiftSet("2020-12-05 0800", "2020-12-06 1600", "2020-12-08 0800")),
             new Employee(new Name("Pham Ba Thang"), new Phone("82974023"), new Email("pham@example.com"),
-                new Address("Blk 17 Bukit Gombat St 20, #01-02"), getTagSet("Employee"), new Leaves("14"),
-                new Salary("6000"), new JobTitle("Senior Developer")),
+                    new Address("Blk 17 Bukit Gombat St 20, #01-02"), getTagSet("Talent"), new Leaves("14"),
+                    new Salary("6000"), new JobTitle("Sous Chef"),
+                    getShiftSet("2020-12-07 0800", "2020-12-08 1600", "2020-12-09 0800")),
             new Employee(new Name("Lee Hern Ping"), new Phone("90000000"), new Email("Leehp@example.com"),
-                new Address("Blk 1 Seragoon St 3, #05-05"), getTagSet("Employee"), new Leaves("14"),
-                new Salary("5000"), new JobTitle("Junior Developer"))
+                    new Address("Blk 1 Seragoon St 3, #05-05"), getTagSet("Hardworker", "Handsome"),
+                    new Leaves("14"), new Salary("5000"), new JobTitle("Waiter"),
+                    getShiftSet("2020-12-04 0800", "2020-12-05 1600"))
         };
     }
 
@@ -120,6 +123,21 @@ public class SampleDataUtil {
         };
     }
 
+    public static Reservation[] getSampleReservations() {
+        return new Reservation[] {
+            new Reservation(new Phone("92492021"), 2, LocalDateTime.parse("2021-12-24T20:00"),
+                    new Table(2, 10)),
+            new Reservation(new Phone("91031282"), 4, LocalDateTime.parse("2021-11-11T13:00"),
+                    new Table(4, 11)),
+            new Reservation(new Phone("93210283"), 2, LocalDateTime.parse("2021-12-25T19:30"),
+                    new Table(2, 12)),
+            new Reservation(new Phone("99272758"), 3, LocalDateTime.parse("2021-10-30T19:00"),
+                    new Table(3, 13)),
+            new Reservation(new Phone("87438807"), 6, LocalDateTime.parse("2021-02-14T11:30"),
+                    new Table(6, 14))
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Customer sampleCustomer : getSampleCustomers()) {
@@ -130,6 +148,9 @@ public class SampleDataUtil {
         }
         for (Supplier sampleSupplier : getSampleSuppliers()) {
             sampleAb.addSupplier(sampleSupplier);
+        }
+        for (Reservation sampleReservation : getSampleReservations()) {
+            sampleAb.addReservation(sampleReservation);
         }
         return sampleAb;
     }
@@ -158,6 +179,15 @@ public class SampleDataUtil {
     public static Set<SpecialRequest> getSpecialRequestSet(String... strings) {
         return Arrays.stream(strings)
                 .map(SpecialRequest::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a shifts set containing the list of strings given.
+     */
+    public static Set<Shift> getShiftSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Shift::new)
                 .collect(Collectors.toSet());
     }
 

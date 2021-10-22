@@ -55,20 +55,20 @@ public class CustomerCard extends UiPart<Region> {
         this.customer = customer;
         id.setText(displayedIndex + ". ");
         name.setText(customer.getName().fullName);
-        phone.setText(customer.getPhone().value);
-        address.setText(customer.getAddress().value);
-        email.setText(customer.getEmail().value);
-        loyaltyPoints.setText(customer.getLoyaltyPoints().value);
+        phone.setText("Phone: " + customer.getPhone().value);
+        address.setText("Address: " + customer.getAddress().value);
+        email.setText("Email: " + customer.getEmail().value);
+        loyaltyPoints.setText("Points: " + customer.getLoyaltyPoints().value + " points");
         customer.getAllergies().stream()
                 .sorted(Comparator.comparing(allergy -> allergy.allergyName))
                 .forEach(allergy -> allergies.getChildren().add(new Label(allergy.allergyName)));
-        customer.getSpecialRequests().stream()
-                .sorted(Comparator.comparing(specialRequest -> specialRequest.specialRequestName))
-                .forEach(specialRequest -> specialRequests.getChildren()
-                        .add(new Label(specialRequest.specialRequestName)));
         customer.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        customer.getSpecialRequests().stream()
+                .sorted(Comparator.comparing(tag -> tag.specialRequestName))
+                .forEach(specialRequest -> specialRequests.getChildren()
+                        .add(new Label(specialRequest.specialRequestName)));
     }
 
     @Override

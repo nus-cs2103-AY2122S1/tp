@@ -18,6 +18,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,6 +34,7 @@ public class JsonAdaptedEmployee {
     private final String leaves;
     private final String salary;
     private final String jobTitle;
+    private final List<JsonAdaptedShift> shifts = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
     /**
@@ -42,7 +44,8 @@ public class JsonAdaptedEmployee {
     public JsonAdaptedEmployee(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("leaves") String leaves,
-                             @JsonProperty("salary") String salary, @JsonProperty("jobTitle") String jobTitle) {
+                             @JsonProperty("salary") String salary, @JsonProperty("jobTitle") String jobTitle,
+                             @JsonProperty("shift") List<JsonAdaptedShift> shifts) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,6 +56,9 @@ public class JsonAdaptedEmployee {
         this.leaves = leaves;
         this.salary = salary;
         this.jobTitle = jobTitle;
+        if (shifts != null) {
+            this.shifts.addAll(shifts);
+        }
     }
 
     /**
@@ -69,6 +75,9 @@ public class JsonAdaptedEmployee {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        shifts.addAll(source.getShifts().stream()
+                .map(JsonAdaptedShift::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -78,8 +87,13 @@ public class JsonAdaptedEmployee {
      */
     public Employee toModelType() throws IllegalValueException {
         final List<Tag> employeeTags = new ArrayList<>();
+        final List<Shift> employeeShifts = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             employeeTags.add(tag.toModelType());
+        }
+
+        for (JsonAdaptedShift shift : shifts) {
+            employeeShifts.add(shift.toModelType());
         }
 
         if (name == null) {
@@ -139,7 +153,10 @@ public class JsonAdaptedEmployee {
         final JobTitle modelJobTitle = new JobTitle(jobTitle);
 
         final Set<Tag> modelTags = new HashSet<>(employeeTags);
+
+        final Set<Shift> modelShifts = new HashSet<>(employeeShifts);
+
         return new Employee(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelLeaves, modelSalary, modelJobTitle);
+                modelLeaves, modelSalary, modelJobTitle, modelShifts);
     }
 }

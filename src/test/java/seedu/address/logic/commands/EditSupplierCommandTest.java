@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_MONTHLY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_SUPPLY_TYPE_BEEF;
@@ -127,7 +127,7 @@ public class EditSupplierCommandTest {
     public void execute_invalidSupplierIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredSupplierList().size() + 1);
         EditSupplierDescriptor descriptor =
-                new EditSupplierDescriptorBuilder().withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY).build();
+                new EditSupplierDescriptorBuilder().withDeliveryDetails(VALID_DELIVERY_DETAIL_BOB).build();
         EditSupplierCommand editSupplierCommand = new EditSupplierCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editSupplierCommand, model, Messages.MESSAGE_INVALID_SUPPLIER_DISPLAYED_INDEX);

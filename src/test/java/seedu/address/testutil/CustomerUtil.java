@@ -64,7 +64,7 @@ public class CustomerUtil {
         if (descriptor.getAllergies().isPresent()) {
             Set<Allergy> allergies = descriptor.getAllergies().get();
             if (allergies.isEmpty()) {
-                sb.append(PREFIX_ALLERGIES);
+                sb.append(PREFIX_ALLERGIES).append(" ");
             } else {
                 allergies.forEach(s -> sb.append(PREFIX_ALLERGIES).append(s.allergyName).append(" "));
             }
@@ -72,7 +72,7 @@ public class CustomerUtil {
         if (descriptor.getSpecialRequests().isPresent()) {
             Set<SpecialRequest> specialRequests = descriptor.getSpecialRequests().get();
             if (specialRequests.isEmpty()) {
-                sb.append(PREFIX_SPECIALREQUESTS);
+                sb.append(PREFIX_SPECIALREQUESTS).append(" ");
             } else {
                 specialRequests.forEach(s -> sb.append(PREFIX_SPECIALREQUESTS)
                         .append(s.specialRequestName).append(" "));

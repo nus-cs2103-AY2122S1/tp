@@ -13,7 +13,7 @@
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
     "supplyType": "Chicken Thighs",
-    "deliveryDetails": "Everyday 8am"
+    "deliveryDetails": "2021-09-19 08:00"
   }, {
     "name" : "Chetwin Low",
     "phone" : "98765432",
@@ -21,7 +21,7 @@
     "address" : "5 Faber Drive",
     "tagged" : [ "owesMoney", "friends" ],
     "supplyType": "Chicken Breast",
-    "deliveryDetails": "Every week Monday"
+    "deliveryDetails": "05-05-2021 16:30"
   }, {
     "name" : "Pham Ba Thang",
     "phone" : "95352563",
@@ -29,7 +29,7 @@
     "address" : "wall street",
     "tagged" : [ ],
     "supplyType": "Pineapples",
-    "deliveryDetails": "Every 3rd Friday of the Month"
+    "deliveryDetails": "2021-10-17 18:15"
   }, {
     "name" : "Kong Fanji",
     "phone" : "87652533",
@@ -37,7 +37,7 @@
     "address" : "10th street",
     "tagged" : [ "friends" ],
     "supplyType": "Duel Masters",
-    "deliveryDetails": "Every Thursday"
+    "deliveryDetails": "21-10-2021 11:00"
   }, {
     "name" : "Hern Ping",
     "phone" : "9482224",
@@ -45,7 +45,7 @@
     "address" : "michegan ave",
     "tagged" : [ ],
     "supplyType": "Hernpiblo",
-    "deliveryDetails": "Every last Friday of the Month"
+    "deliveryDetails": "11:30 22-10-2021"
   }, {
     "name" : "Fiora Kunz",
     "phone" : "9482427",
@@ -53,7 +53,7 @@
     "address" : "little tokyo",
     "tagged" : [ ],
     "supplyType": "Beef",
-    "deliveryDetails": "27th October"
+    "deliveryDetails": "10:30 23-10-2021"
   }, {
     "name" : "Greg Best",
     "phone" : "9482442",
@@ -61,7 +61,7 @@
     "address" : "4th street",
     "tagged" : [ ],
     "supplyType": "Fish",
-    "deliveryDetails": "15th October 2pm"
+    "deliveryDetails": "09:30 2021-10-24"
   } ],
   "reservations": [
 

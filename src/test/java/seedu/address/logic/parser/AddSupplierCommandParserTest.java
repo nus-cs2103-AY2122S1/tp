@@ -25,7 +25,7 @@ import static seedu.address.logic.commands.SupplierCommandTestUtil.SUPPLY_TYPE_D
 import static seedu.address.logic.commands.SupplierCommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_MONTHLY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_PHONE_BOB;
@@ -143,12 +143,12 @@ public class AddSupplierCommandParserTest {
 
         // missing deliveryDetails prefix
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + SUPPLY_TYPE_DESC_BOB + VALID_DELIVERY_DETAIL_MONTHLY,
+                        + SUPPLY_TYPE_DESC_BOB + VALID_DELIVERY_DETAIL_BOB,
                 expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                        + VALID_SUPPLY_TYPE_BEEF + VALID_DELIVERY_DETAIL_MONTHLY,
+                        + VALID_SUPPLY_TYPE_BEEF + VALID_DELIVERY_DETAIL_BOB,
                 expectedMessage);
     }
 

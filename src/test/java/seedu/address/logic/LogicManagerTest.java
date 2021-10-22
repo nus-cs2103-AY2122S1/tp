@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.LP_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SPECIALREQUEST_DESC_LIVEBAND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ALLERGY_NONSENSE;
@@ -39,7 +40,6 @@ import seedu.address.logic.commands.AddCustomerCommand;
 import seedu.address.logic.commands.AddEmployeeCommand;
 import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.ListCustomerCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -82,14 +82,8 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCustomerCommand = "deletecustomer 9";
+        String deleteCustomerCommand = "deletec 9";
         assertCommandException(deleteCustomerCommand, MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCustomerCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCustomerCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
@@ -126,7 +120,8 @@ public class LogicManagerTest {
 
         // Execute add command
         String addEmployeeCommand = AddEmployeeCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + TAG_DESC_FRIEND;
+                + ADDRESS_DESC_AMY + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + SHIFTS_DESC_AMY
+                + TAG_DESC_FRIEND;
         Employee expectedEmployee = new EmployeeBuilder(AMY_EMPLOYEE).build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addEmployee(expectedEmployee);

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,7 +19,7 @@ import seedu.address.model.person.employee.Employee;
  * Adds an employee to the address book.
  */
 public class AddEmployeeCommand extends Command {
-    public static final String COMMAND_WORD = "addemployee";
+    public static final String COMMAND_WORD = "adde";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
             + "Parameters: "
@@ -29,6 +30,7 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_LEAVES + " LEAVES "
             + PREFIX_SALARY + " SALARY "
             + PREFIX_JOBTITLE + " JOB TITLE "
+            + "[" + PREFIX_SHIFT + "SHIFT]"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -38,6 +40,7 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_LEAVES + "14"
             + PREFIX_SALARY + "5000"
             + PREFIX_JOBTITLE + "Account Manager"
+            + PREFIX_SHIFT + "2021-12-24 0800"
             + PREFIX_TAG + "SEA";
 
     public static final String MESSAGE_SUCCESS = "New employee has been added: %1$s";

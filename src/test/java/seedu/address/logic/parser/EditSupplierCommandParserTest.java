@@ -23,8 +23,8 @@ import static seedu.address.logic.commands.SupplierCommandTestUtil.TAG_DESC_FRIE
 import static seedu.address.logic.commands.SupplierCommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_DAILY;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_MONTHLY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_AMY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_NAME_AMY;
@@ -131,7 +131,7 @@ public class EditSupplierCommandParserTest {
         EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_CHICKEN)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY).build();
+                .withDeliveryDetails(VALID_DELIVERY_DETAIL_BOB).build();
         EditSupplierCommand expectedCommand = new EditSupplierCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -190,7 +190,7 @@ public class EditSupplierCommandParserTest {
 
         // delivery details
         userInput = targetIndex.getOneBased() + DELIVERY_DETAILS_DESC_AMY;
-        descriptor = new EditSupplierDescriptorBuilder().withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
+        descriptor = new EditSupplierDescriptorBuilder().withDeliveryDetails(VALID_DELIVERY_DETAIL_AMY).build();
         expectedCommand = new EditSupplierCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -205,7 +205,7 @@ public class EditSupplierCommandParserTest {
 
         EditSupplierDescriptor descriptor = new EditSupplierDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .withSupplyType(VALID_SUPPLY_TYPE_BEEF).withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY)
+                .withSupplyType(VALID_SUPPLY_TYPE_BEEF).withDeliveryDetails(VALID_DELIVERY_DETAIL_BOB)
                 .build();
         EditSupplierCommand expectedCommand = new EditSupplierCommand(targetIndex, descriptor);
 

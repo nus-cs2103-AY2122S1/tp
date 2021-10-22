@@ -46,11 +46,11 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_LEAVES = "14";
     private static final String VALID_SALARY = "4000";
-    private static final String VALID_JOBTITLE = "Sales Team Lead";
+    private static final String VALID_JOB_TITLE = "Sales Team Lead";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_SUPPLY_TYPE = "Chicken and Beef";
-    private static final String VALID_DELIVERY_DETAILS = "Every Monday 2pm";
+    private static final String VALID_DELIVERY_DETAILS = "14:00 2021-10-19";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -251,14 +251,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseJobTitle_validValueWithoutWhitespace_returnsName() throws Exception {
-        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE);
-        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(VALID_JOBTITLE));
+        JobTitle expectedJobTitle = new JobTitle(VALID_JOB_TITLE);
+        assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(VALID_JOB_TITLE));
     }
 
     @Test
     public void parseJobTitle_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String jobTitleWithWhitespace = WHITESPACE + VALID_JOBTITLE + WHITESPACE;
-        JobTitle expectedJobTitle = new JobTitle(VALID_JOBTITLE);
+        String jobTitleWithWhitespace = WHITESPACE + VALID_JOB_TITLE + WHITESPACE;
+        JobTitle expectedJobTitle = new JobTitle(VALID_JOB_TITLE);
         assertEquals(expectedJobTitle, ParserUtil.parseJobTitle(jobTitleWithWhitespace));
     }
 

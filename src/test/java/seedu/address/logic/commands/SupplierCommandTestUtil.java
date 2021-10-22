@@ -40,8 +40,8 @@ public class SupplierCommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_SUPPLY_TYPE_BEEF = "Beef";
     public static final String VALID_SUPPLY_TYPE_CHICKEN = "Chicken";
-    public static final String VALID_DELIVERY_DETAIL_DAILY = "Everyday at 6pm";
-    public static final String VALID_DELIVERY_DETAIL_MONTHLY = "Every 3rd Friday of the month";
+    public static final String VALID_DELIVERY_DETAIL_AMY = "2021-12-25 17:00";
+    public static final String VALID_DELIVERY_DETAIL_BOB = "11:00 26-12-2021";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -55,9 +55,9 @@ public class SupplierCommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String SUPPLY_TYPE_DESC_AMY = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_CHICKEN;
     public static final String SUPPLY_TYPE_DESC_BOB = " " + PREFIX_SUPPLY_TYPE + VALID_SUPPLY_TYPE_BEEF;
-    public static final String DELIVERY_DETAILS_DESC_AMY = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_DAILY;
+    public static final String DELIVERY_DETAILS_DESC_AMY = " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_AMY;
     public static final String DELIVERY_DETAILS_DESC_BOB =
-            " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_MONTHLY;
+            " " + PREFIX_DELIVERY_DETAILS + VALID_DELIVERY_DETAIL_BOB;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -66,7 +66,7 @@ public class SupplierCommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // & not allowed in supply types
     public static final String INVALID_SUPPLY_TYPE_DESC = " " + PREFIX_SUPPLY_TYPE + "Chicken & Beef";
-    // @ not allowed in delivery details
+    // Not a valid parsable date time
     public static final String INVALID_DELIVERY_DETAILS_DESC = " " + PREFIX_DELIVERY_DETAILS + "Everyday @ 6pm";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -79,11 +79,11 @@ public class SupplierCommandTestUtil {
         DESC_AMY = new EditSupplierDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_CHICKEN)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
+                .withDeliveryDetails(VALID_DELIVERY_DETAIL_AMY).build();
         DESC_BOB = new EditSupplierDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withSupplyType(VALID_SUPPLY_TYPE_BEEF)
-                .withDeliveryDetails(VALID_DELIVERY_DETAIL_MONTHLY).build();
+                .withDeliveryDetails(VALID_DELIVERY_DETAIL_BOB).build();
     }
 
 

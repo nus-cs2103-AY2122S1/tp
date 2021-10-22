@@ -38,7 +38,7 @@ public class SupplierUtil {
         sb.append(PREFIX_ADDRESS + supplier.getAddress().value + " ");
         supplier.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         sb.append(PREFIX_SUPPLY_TYPE + supplier.getSupplyType().supplyType + " ");
-        sb.append(PREFIX_DELIVERY_DETAILS + supplier.getDeliveryDetails().deliveryDetails + " ");
+        sb.append(PREFIX_DELIVERY_DETAILS + supplier.getDeliveryDetails().toString() + " ");
         return sb.toString();
     }
 
@@ -62,7 +62,7 @@ public class SupplierUtil {
         descriptor.getSupplyType().ifPresent(st ->
                 sb.append(PREFIX_SUPPLY_TYPE).append(st.supplyType).append(" "));
         descriptor.getDeliveryDetails().ifPresent(dd ->
-                sb.append(PREFIX_DELIVERY_DETAILS).append(dd.deliveryDetails).append(" "));
+                sb.append(PREFIX_DELIVERY_DETAILS).append(dd.toString()).append(" "));
         return sb.toString();
     }
 }

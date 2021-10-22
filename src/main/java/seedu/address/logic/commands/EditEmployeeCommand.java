@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
@@ -30,6 +31,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +39,7 @@ import seedu.address.model.tag.Tag;
  */
 public class EditEmployeeCommand extends Command {
 
-    public static final String COMMAND_WORD = "editemployee";
+    public static final String COMMAND_WORD = "edite";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
             + "by the index number used in the displayed person list. "
@@ -50,6 +52,7 @@ public class EditEmployeeCommand extends Command {
             + "[" + PREFIX_LEAVES + "LEAVES] "
             + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_JOBTITLE + "JOB TITLE] "
+            + "[" + PREFIX_SHIFT + "SHIFT] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -113,9 +116,10 @@ public class EditEmployeeCommand extends Command {
         Salary updatedSalary = editEmployeeDescriptor.getSalary().orElse(employeeToEdit.getSalary());
         JobTitle updatedJobTitle = editEmployeeDescriptor.getJobTitle().orElse(employeeToEdit.getJobTitle());
         Set<Tag> updatedTags = editEmployeeDescriptor.getTags().orElse(employeeToEdit.getTags());
+        Set<Shift> updatedShifts = editEmployeeDescriptor.getShifts().orElse(employeeToEdit.getShifts());
 
         return new Employee(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedLeaves,
-                updatedSalary, updatedJobTitle);
+                updatedSalary, updatedJobTitle, updatedShifts);
     }
 
     @Override
@@ -138,7 +142,7 @@ public class EditEmployeeCommand extends Command {
 
     /**
      * Stores the details to edit the employee with. Each non-empty field value will replace the
-     * corresponding field value of the emplyoee.
+     * corresponding field value of the employee.
      */
     public static class EditEmployeeDescriptor {
         private Name name;
@@ -148,6 +152,7 @@ public class EditEmployeeCommand extends Command {
         private Leaves leaves;
         private Salary salary;
         private JobTitle jobTitle;
+        private Set<Shift> shifts;
         private Set<Tag> tags;
 
         public EditEmployeeDescriptor() {}
@@ -164,6 +169,7 @@ public class EditEmployeeCommand extends Command {
             setLeaves(toCopy.leaves);
             setSalary(toCopy.salary);
             setJobTitle(toCopy.jobTitle);
+            setShifts(toCopy.shifts);
             setTags(toCopy.tags);
         }
 
@@ -172,7 +178,7 @@ public class EditEmployeeCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, leaves,
-                    salary, jobTitle, tags);
+                    salary, jobTitle, shifts, tags);
         }
 
         public void setName(Name name) {
@@ -232,6 +238,23 @@ public class EditEmployeeCommand extends Command {
         }
 
         /**
+         * Sets {@code shifts} to this object's {@code shifts}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setShifts(Set<Shift> shifts) {
+            this.shifts = (shifts != null) ? new HashSet<>(shifts) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code shifts} is null.
+         */
+        public Optional<Set<Shift>> getShifts() {
+            return (shifts != null) ? Optional.of(Collections.unmodifiableSet(shifts)) : Optional.empty();
+        }
+
+        /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
@@ -270,7 +293,8 @@ public class EditEmployeeCommand extends Command {
                     && getTags().equals(e.getTags())
                     && getLeaves().equals(e.getLeaves())
                     && getSalary().equals(e.getSalary())
-                    && getJobTitle().equals(e.getJobTitle());
+                    && getJobTitle().equals(e.getJobTitle())
+                    && getShifts().equals(e.getShifts());
         }
     }
 }
