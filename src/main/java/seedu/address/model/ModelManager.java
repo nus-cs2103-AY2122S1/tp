@@ -173,8 +173,15 @@ public class ModelManager implements Model {
         MonthDay currentMonthDay = MonthDay.now();
         Optional<Birthday> possibleBirthday = p.getBirthday();
         return possibleBirthday
-            .map(birthday -> currentMonthDay.isAfter(MonthDay.from((birthday.birthdate))))
+            .map(birthday -> isAfterCurrentMonthday(birthday))
             .orElse(false);
+    }
+
+    private static boolean isAfterCurrentMonthday(Birthday birthday) {
+        requireNonNull(birthday);
+        MonthDay currentMonthDay = MonthDay.now();
+        MonthDay birthdateInMonthDay = MonthDay.from((birthday.birthdate));
+        return currentMonthDay.isAfter(birthdateInMonthDay);
     }
 
     private void addToBirthdayReminderList(Person personToAdd) {
@@ -182,28 +189,30 @@ public class ModelManager implements Model {
             return;
         }
 
-        int i = -1;
+        int indexToInsert = -1;
         MonthDay birthdayToAdd = MonthDay.from(personToAdd.getBirthday().get().birthdate);
         PersonBirthdayComparator comparator = new PersonBirthdayComparator();
         if (MonthDay.now().isAfter(birthdayToAdd)) {
             // BirthdayToAdd has past should inserted from the end of the list
-            i = birthdayReminders.size();
-            while (i > 0 && comparator.compare(personToAdd, birthdayReminders.get(i - 1)) < 0) {
-                i--;
+            indexToInsert = birthdayReminders.size();
+            while (indexToInsert > 0
+                    && comparator.compare(personToAdd, birthdayReminders.get(indexToInsert - 1)) < 0) {
+                indexToInsert--;
             }
         }
         if (!MonthDay.now().isAfter(birthdayToAdd)) {
             // BirthdayToAdd has not past should inserted at the start of the list
-            i = 0;
-            while (i < birthdayReminders.size() && comparator.compare(personToAdd, birthdayReminders.get(i)) > 0) {
-                i++;
+            indexToInsert = 0;
+            while (indexToInsert < birthdayReminders.size()
+                    && comparator.compare(personToAdd, birthdayReminders.get(indexToInsert)) > 0) {
+                indexToInsert++;
             }
         }
-        if (i == birthdayReminders.size() && !MonthDay.now().isAfter(birthdayToAdd)) {
+        if (indexToInsert == birthdayReminders.size() && !MonthDay.now().isAfter(birthdayToAdd)) {
             // BirthdayToAdd is latest in the list but has not past therefore placed at start of list
             birthdayReminders.add(0, personToAdd);
         } else {
-            birthdayReminders.add(i, personToAdd);
+            birthdayReminders.add(indexToInsert, personToAdd);
         }
     }
 
