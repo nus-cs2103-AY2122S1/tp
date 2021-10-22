@@ -80,6 +80,7 @@ public class AddCommandTest {
     public void execute_newItemNoName_incompleteInfofailure() {
         ItemDescriptor validDescriptor = new ItemDescriptorBuilder()
                 .withName(VALID_NAME_BAGEL)
+                .withCount(1)
                 .build();
 
         AddCommand addCommand = new AddCommand(validDescriptor);
