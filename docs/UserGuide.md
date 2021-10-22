@@ -52,10 +52,16 @@ ________________________________________________________________________________
   e.g. in `findm KEYWORD`, `KEYWORD` is a parameter which can be used as `findm Ben`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME p/PHONE_NUMBER [d/DAY(S)]` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111`.
+  e.g `n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` can be used as `n/Ben p/91111111 d/1` or as `n/John p/91111111` or as `n/John p/91111111 t/exco`.
+  
+* Items with `...` after them can be used multiple times including zero times.<br>
+  e.g. `t/TAG]...` can be used as ` `(i.e. 0 times), `t/exco`, `t/exco t/y2`etc.
   
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME l/LOCATION`, `l/LOCATION n/NAME` is also acceptable.
+  
+* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter wll be taken.<br>
+  e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
   
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `listf`, `clearm` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
@@ -139,8 +145,9 @@ Examples:
 
 Adds a member to the members list
 
-Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]`
+Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
 * `[d/DAY(S)]` is an optional field indicating a list of days for which the member is available for that week
+* `[t/TAG]` is an optional field indicating the tags associated with the member.
 * `1` represents Monday, `2` represents Tuesday … and `7` represents Sunday
 * Members added without availability will have an empty list of days
 
@@ -152,13 +159,21 @@ Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]`
 Examples:
 * `addm n/John p/91234567 d/1 3 5` adds John to the member list and indicates his availability on Monday, Tuesday
    and Friday.
-* `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default
+  
+* `addm n/John p/91234567 t/exco t/y2` adds John to the member list and tags him as 'exco' and 'y2'.
+* `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default.
 
 ### Listing all members: `listm`
 
 Shows a list of all members
 
 Format: `listm`
+
+### Sorting member list: `sortm`
+
+Shows a list of all members, sorted alphabetically
+
+Format: `sortm`
 
 ### Finding a member `findm`
 
@@ -295,7 +310,7 @@ If changes made to the data file makes its format invalid, SportsPA will discard
 Action | Format, Examples
 --------|------------------
 **Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
-**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
 **Clear facilities**|`clearf`
 **Clear member**| `clearm`
 **Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
