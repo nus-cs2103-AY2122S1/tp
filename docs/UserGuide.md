@@ -252,6 +252,8 @@ Adds a scheduled appointment with the client. An appointment includes a date, ti
 track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-eppt),
 [delete](#deleting-an-appointment-dappt), or [mark as completed](#updating-completed-appointment-done) an appointment.
 
+![Appointment](images/UG-Screenshots/AppointmentScreenshot.PNG)
+
 Format: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
 * Only able to add a scheduled appointment with the client at the specified `INDEX` if no appointment exists yet.
