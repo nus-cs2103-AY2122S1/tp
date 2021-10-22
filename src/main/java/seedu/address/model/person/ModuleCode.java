@@ -65,6 +65,19 @@ public class ModuleCode {
         return sb.toString();
     }
 
+    /**
+     * Returns a string representation without the [].
+     * Mainly used in parsing.
+     */
+    public String toStringWithoutBracket() {
+        StringBuilder sb = new StringBuilder(value);
+        for (LessonCode lessonCode : lessonCodes) {
+            sb.append(" ");
+            sb.append(lessonCode);
+        }
+        return sb.toString();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this

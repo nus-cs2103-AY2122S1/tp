@@ -10,12 +10,13 @@ import static seedu.address.testutil.TypicalModuleLessons.CS2103_TUT1;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.ModuleLessonBuilder;
 
 public class ModuleLessonTest {
 
     @Test
-    public void isSameModuleClass() {
+    public void isSameModuleClass() throws ParseException {
         assertTrue(CS2100_LAB1.isSameModuleLesson(CS2100_LAB1));
 
         assertFalse(CS2100_TUT1.isSameModuleLesson(null));

@@ -1,12 +1,13 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
+import java.util.Set;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.modulelesson.ModuleLesson;
 
 public class ModuleLessonCard extends UiPart<Region> {
@@ -39,14 +40,10 @@ public class ModuleLessonCard extends UiPart<Region> {
         super(FXML);
         this.moduleLesson = moduleLesson;
         id.setText(displayedIndex + ". ");
-        moduleLesson.getModuleCodes().stream()
-                .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
-                .forEach(moduleCode -> moduleCodeContainer.getChildren().add(new Label(moduleCode.value)));
 
-        moduleLesson.getModuleCodes().stream()
-                .sorted(Comparator.comparing(moduleCode -> moduleCode.value))
-                .map(moduleCode -> moduleCode.lessonCodes)
-                .forEach(t -> t.forEach(lessonCode -> lessonCodes.getChildren().add(new Label(lessonCode.lessonCode))));
+        moduleCodeContainer.getChildren().add(new Label(moduleLesson.getModuleCode().getModuleCodeName()));
+        Set<LessonCode> lessonCodeSet = moduleLesson.getModuleCode().getLessonCodes();
+        lessonCodeSet.forEach(lc -> this.lessonCodes.getChildren().add(new Label(lc.toString())));
         lessonDay.setText(moduleLesson.getDay().toString());
         lessonTime.setText(moduleLesson.getTime().toString());
         remark.setText(moduleLesson.getRemark().value);
