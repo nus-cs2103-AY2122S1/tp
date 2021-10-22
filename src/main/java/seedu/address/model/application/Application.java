@@ -23,7 +23,7 @@ public class Application {
     /**
      * Internal constructor for a job application which specifies an application status.
      */
-    private Application(Position position, ApplicationStatus applicationStatus) {
+    public Application(Position position, ApplicationStatus applicationStatus) {
         this.position = position;
         this.status = applicationStatus;
     }

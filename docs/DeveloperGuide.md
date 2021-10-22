@@ -67,7 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component [need changes]
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +84,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic component [need changes]
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -154,52 +154,36 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Incomplete\] Rejection Rate feature
+### Filter applicants feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed rejection rate mechanism is facilitated by `Model` and `Calculator`.
-The `Model` component checks if the position exists and accesses it, while `Calculator` calculates 
-the rejection rate.
-Implements the following functions:
-* `ModelManager#hasPositionWithTitle()`  — Checks if a position with such a given title exists.
-* `Calculator#calculateRejectionRate()`  — Calculates the rejection rate of a position based on the number of applicants and number of rejected applicants. 
-  
-These operations are exposed in the `Model` interface as `Model#hasPositionWithTitle()` and `Model#calculateRejectionRate` respectively.
+The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
+which filters its contents based on a specified `Predicate`.  
+This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called.
 
-Given below is an example usage scenario and how the rejection rate mechanism works at every step.
+Given below is an example usage scenario of the applicant filter feature.
 
-Step 1. The user launches the application and is assumed to have some positions and applicants applying for a position in the PositionBook and ApplicantBook respectively.
+*{More to be added}*
 
-![InitialState](images/rejection-rates/Initial-state.png)
+#### Rationale for implementation
 
-Step 2. The user executes `rate pos/Software Engineer` command to calculate the rejection rate of Software Engineer in the PositionBook. 
-The `rate` command calls `Model#hasPositionWithTitle`, causing the model to check whether `Software Engineer` exists in the database as a Position.
+The `Descriptor` pattern (used similarly in features such as the editing of applicants) comes in handy whenever its corresponding command accepts a variable number of arguments & unspecified arguments are assumed to be ignored.
+For instance, the edit applicant feature accepts a variable number of fields to be edited, and leaves all unspecified fields untouched.  
 
-![Step2](images/rejection-rates/Step2.png)
+The filter feature fits in this category, as the user should be able to specify a variable number of filtering criteria,
+and unspecified criteria should be left out of the filter.
+Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`.
+It is also used to in the validation of the filtering criteria.
 
-Step 3. If the position exists, it will access the ApplicantBook via `Model#calculateRejectionRate()`, beginning a count of the number of applicants for the job and the number of rejected applicants of the same job.
+*{More to be added}*
 
-![Step3](images/rejection-rates/Step3.png)
+#### Alternatives considered
 
-Step 4. After these numbers have been obtained, the `Calculator` class is called to calculate via `Calculator#calculateRejectionRate`. This resulting floating point number is then the rejection rate of the position.
+- Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`
+  - Does not make good use of the in-built functionality of `FilteredList`
 
-![SeqDiagram](images/rejection-rates/SeqDiagram.png)
-
-Step 5. Any command the user executes next simply refreshes the current state to its original state as shown in step 1.
-
-#### Design considerations:
-
-#### Aspect: How rejection rate executes:
-
-* **Alternative 1** (current choice): Only calculate the rejection rate when needed and not store it anywhere.
-  * Pros: Saves a significant amount of space and reduces immutability. Implementation is simple.
-  * Cons: A user could want to calculate many rejection rates frequently and hence not storing these values might have performance issues in the long run. 
-* **Alternative 2**: Store all rejection rates with their respective positions in a dictionary.
-  * Pros: Accessing the rejection rates of a certain position will only require access to the dictionary and nothing else - limited accessibility.
-          Also, accessing a rejection rate will be much quicker.
-  * Cons: Potentially a large amount of space required, slowing performance. Also, the dictionary needs to be updated everytime an applicant's status changes or when a position/applicant is added/deleted,
-          which could result in many inter-linked implementations for the dictionary, rendering it slow.
+*{More to be added}*
 
 ### \[Proposed\] Undo/redo feature
 
@@ -285,6 +269,14 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Finding applicants by name
+
+I will explain here how the feature to find applicants by name
+is implemented.
+
+But I am leaving this here first as a placeholder,
+and will update with the actual explanation soon.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -357,6 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Edit a new position** [coming soon]
 
 **Use case: Delete a new position**
 
@@ -398,6 +391,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. MrTechRecruiter shows an error message.
 
       Use case resumes at step 1.
+
+**Use case: Edit a new applicant** [coming soon]
 
 **Use case: Delete an applicant**
 
@@ -493,6 +488,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 *{More to be added}*
+
+**Use case: Calculate the rejection rate for a position** [coming soon]
 
 ### Non-Functional Requirements
 

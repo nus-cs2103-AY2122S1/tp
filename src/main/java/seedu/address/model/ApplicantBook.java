@@ -97,6 +97,11 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
         applicants.removeIf(applicant -> applicant.isApplyingTo(position));
     }
 
+    public void updateApplicantsWithPosition(Position positionToEdit,
+                                             Position editedPosition) {
+        applicants.updateApplicantsWithPosition(positionToEdit, editedPosition);
+    }
+
     @Override
     public String toString() {
         return applicants.asUnmodifiableObservableList().size() + " applicants";

@@ -244,6 +244,11 @@ public class AddCommandTest {
         public float calculateRejectionRate(Position p) {
             throw new AssertionError("This method should not be called.");
         };
+      
+        public void updateApplicantsWithPosition(Position positionToEdit, Position newPosition) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public ReadOnlyApplicantBook getApplicantBook() {
             throw new AssertionError("This method should not be called.");
         }
