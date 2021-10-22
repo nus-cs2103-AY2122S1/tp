@@ -3,17 +3,13 @@ package seedu.address.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendName;
+import seedu.address.ui.util.SampleStyles;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -55,9 +51,7 @@ public class FriendCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(game -> game.getGameId().value))
                 .forEach(game -> {
                     Label label = new Label(game.getGameId().value);
-                    label.setBackground(new Background(new BackgroundFill(Color.rgb(114, 137, 218, 1),
-                            new CornerRadii(10.0),
-                            new Insets(-5.0, -7.0, -5.0, -7.0))));
+                    label.setBackground(SampleStyles.BLURPLE_BACKGROUND);
 
                     games.getChildren().add(label);
                 });
