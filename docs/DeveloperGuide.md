@@ -250,13 +250,27 @@ Step 1. The user launches the application for the first time.
 
 Step 2. The user executes `add n/David …​` to add a new person.
 
-Step 3. The user decides that the contact, currently at index 1, is important and should be pinned. User executes `pin 1`
+Step 3. Connections displays the new person. 
 
-Step 4. Connections will pin the contact and moves the contact to the top of the list of contacts.
+Step 4. The user decides that the contact, currently at index 1, is important and should be pinned. User executes pin 1
+
+Step 5. Connections will pin the contact and moves the contact to the top of the list of contacts.
 
 The following sequence diagram shows how the pin operation works:
 
 ![PinSequenceDiagram](images/PinSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How pin executes:**
+
+* **Alternative 1:** Person has a boolean field isPinned to indicate if the person is pinned or not
+    * Pros: Easy to implement, less memory usage
+    * Cons: Less flexibility in expanding the usage of pin.
+
+* **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not
+    * Pros: More flexible to expand, other methods can be added to Pin if needed.
+    * Cons: Will use more memory.
 
 --------------------------------------------------------------------------------------------------------------------
 

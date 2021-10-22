@@ -1,6 +1,10 @@
 @startuml
 !include style.puml
 
+box UI UI_COLOR
+participant "UI" as UI UI_COLOR
+end box
+
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
@@ -13,7 +17,7 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("pin 1")
+UI -> LogicManager : execute("pin 1")
 activate LogicManager
 
 LogicManager -> AddressBookParser : parseCommand("pin 1")
@@ -73,6 +77,6 @@ deactivate Model
 PinCommand --> LogicManager : result
 deactivate PinCommand
 
-[<--LogicManager
+UI <--LogicManager: result
 deactivate LogicManager
 @enduml
