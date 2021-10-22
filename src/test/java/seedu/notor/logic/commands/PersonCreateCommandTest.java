@@ -2,13 +2,12 @@ package seedu.notor.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.notor.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +24,7 @@ import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
@@ -47,7 +47,7 @@ public class PersonCreateCommandTest {
 
         assertEquals(String.format(PersonCreateExecutor.MESSAGE_SUCCESS, validPerson),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(List.of(validPerson), modelStub.personsAdded);
     }
 
     // @formatter:off
@@ -70,26 +70,26 @@ public class PersonCreateCommandTest {
         PersonCreateCommand addBobCommand = new PersonCreateCommand(null, bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertEquals(addAliceCommand,addAliceCommand);
 
         // same values -> returns true
         PersonCreateCommand addAliceCommandCopy = new PersonCreateCommand(null, alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        assertEquals(addAliceCommand,addAliceCommandCopy);
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertNotEquals(1,addAliceCommand);
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertNotEquals(null,addAliceCommand);
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertNotEquals(addAliceCommand,addBobCommand);
     }
 
     /**
      * A default model stub that have all of the methods failing.
      */
-    private class ModelStub implements Model {
+    private static class ModelStub implements Model {
         @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
@@ -124,7 +124,6 @@ public class PersonCreateCommandTest {
         public void createPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
-
 
         @Override
         public Person findPerson(String name) {
@@ -167,6 +166,11 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void clearNotorNote() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -200,12 +204,42 @@ public class PersonCreateCommandTest {
         public void updateFilteredGroupList(Predicate<Group> predicate) {
 
         }
+
+        @Override
+        public ObservableList<SubGroup> getFilteredSubGroupList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredSubGroupList(Predicate<SubGroup> predicate) {
+
+        }
+
+        @Override
+        public void deleteSubGroup(SubGroup subGroup) {
+
+        }
+
+        @Override
+        public boolean isPersonView() {
+            return false;
+        }
+
+        @Override
+        public boolean isGroupView() {
+            return false;
+        }
+
+        @Override
+        public boolean isSubGroupView() {
+            return false;
+        }
     }
 
     /**
      * A Model stub that contains a single person.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private static class ModelStubWithPerson extends ModelStub {
         private final Person person;
 
         ModelStubWithPerson(Person person) {
@@ -223,7 +257,7 @@ public class PersonCreateCommandTest {
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private static class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
 
         @Override

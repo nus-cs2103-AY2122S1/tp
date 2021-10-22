@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.notor.commons.exceptions.IllegalValueException;
 import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 
@@ -21,19 +22,28 @@ class JsonSerializableNotor {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Notor's %s field is missing!";
+
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
     private final List<JsonAdaptedSuperGroup> superGroups = new ArrayList<>();
+
+    private final String note;
+
+    private final String noteDate;
 
 
     /**
      * Constructs a {@code JsonSerializableNotor} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableNotor(@JsonProperty("persons") List<JsonAdaptedPerson> persons,
-        @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups) {
+    public JsonSerializableNotor(@JsonProperty("note") String note, @JsonProperty("noteDate") String noteDate,
+                                 @JsonProperty("persons") List<JsonAdaptedPerson> persons,
+                                 @JsonProperty("superGroups") List<JsonAdaptedSuperGroup> superGroups) {
         this.persons.addAll(persons);
         this.superGroups.addAll(superGroups);
+        this.note = note;
+        this.noteDate = noteDate;
     }
 
     /**
@@ -47,6 +57,8 @@ class JsonSerializableNotor {
         superGroups
             .addAll(source.getSuperGroups().stream().map(JsonAdaptedSuperGroup::new).collect(
             Collectors.toList()));
+        note = source.getNote().value;
+        noteDate = source.getNote().getSavedDate();
     }
 
     /**
@@ -55,7 +67,17 @@ class JsonSerializableNotor {
      * @throws IllegalValueException if there were any data constraints violated.
      */
     public Notor toModelType() throws IllegalValueException {
-        Notor notor = new Notor();
+        if (note == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
+        }
+        if (noteDate == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Note.class.getSimpleName()));
+        }
+        final Note modelNote = new Note(note, noteDate);
+
+        Notor notor = new Notor(modelNote);
+
         for (JsonAdaptedSuperGroup jsonAdaptedSuperGroup : superGroups) {
             SuperGroup superGroup = jsonAdaptedSuperGroup.toModelType();
             if (!notor.hasSuperGroup(superGroup)) {

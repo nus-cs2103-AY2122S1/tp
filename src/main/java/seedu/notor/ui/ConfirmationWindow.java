@@ -7,6 +7,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.notor.logic.commands.exceptions.CommandException;
+import seedu.notor.ui.note.NoteWindow;
 
 public class ConfirmationWindow extends UiPart<Stage> {
 

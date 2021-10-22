@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import seedu.notor.model.person.Person;
-
-
+import seedu.notor.model.Notable;
 
 /**
  * Represents the result of a command execution.
@@ -28,18 +26,32 @@ public class CommandResult {
     /** The note should be shown for the respective user. */
     private final boolean showNote;
 
-    private final Person person;
+
+    private final Notable notable;
 
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showNote, Person person, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showNote, boolean exit, Notable notable) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showNote = showNote;
         this.exit = exit;
-        this.person = person;
+        this.notable = notable;
+    }
+
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showNote, boolean exit) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = showHelp;
+        this.showNote = showNote;
+        this.exit = exit;
+        this.notable = null;
     }
 
     /**
@@ -47,7 +59,11 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, null, false);
+        this.feedbackToUser = feedbackToUser;
+        this.showHelp = false;
+        this.showNote = false;
+        this.notable = null;
+        this.exit = false;
     }
 
     public String getFeedbackToUser() {
@@ -66,8 +82,8 @@ public class CommandResult {
         return exit;
     }
 
-    public Person person() {
-        return person;
+    public Notable getNotable() {
+        return notable;
     }
 
     @Override

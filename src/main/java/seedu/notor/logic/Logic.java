@@ -8,6 +8,7 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.person.Person;
 
@@ -31,9 +32,13 @@ public interface Logic {
      *
      * @param person The person with yet to edit notes.
      * @param editedPerson The person with newly edited notes.
-     * @throws CommandException
+     * @throws CommandException If note could not be saved.
      */
     void executeSaveNote(Person person, Person editedPerson) throws CommandException;
+
+    void executeSaveNote() throws CommandException;
+
+    void executeSaveNote(Notor notor) throws CommandException;
     /**
      * Returns the Notor.
      *
@@ -60,4 +65,6 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+
 }

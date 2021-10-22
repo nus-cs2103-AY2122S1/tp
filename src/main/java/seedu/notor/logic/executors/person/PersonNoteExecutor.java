@@ -32,7 +32,7 @@ public class PersonNoteExecutor extends PersonExecutor {
                 storedPerson.getName(), storedPerson.getPhone(), storedPerson.getEmail(),
                 storedPerson.getNote(), storedPerson.getTags());
 
-        return new CommandResult(generateSuccessMessage(editedPerson), false, true, editedPerson, false);
+        return new CommandResult(generateSuccessMessage(editedPerson), false, true, false, editedPerson);
     }
 
     /**

@@ -17,7 +17,14 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.commands.exceptions.CommandException;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.model.Notable;
+import seedu.notor.model.Notor;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.person.Person;
+import seedu.notor.ui.note.GeneralNoteWindow;
+import seedu.notor.ui.note.GroupNoteWindow;
+import seedu.notor.ui.note.NoteWindow;
+import seedu.notor.ui.note.PersonNoteWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -26,6 +33,8 @@ import seedu.notor.model.person.Person;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String UNSAVED_NOTE_MESSAGE = "You have unsaved notes, "
+            + "do you want to exit Notor without saving?";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -68,7 +77,10 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
         helpWindow = new HelpWindow();
-
+        getRoot().setOnCloseRequest(e -> {
+            e.consume();
+            handleExit();
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -151,12 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Opens the note window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleNote(Person person, Logic logic) {
-        NoteWindow noteWindow = new NoteWindow(person, logic, resultDisplay);
+    private void manageNoteWindow(NoteWindow noteWindow) {
         if (!NoteWindow.OPENED_NOTE_WINDOWS.contains(noteWindow)) {
             NoteWindow.OPENED_NOTE_WINDOWS.add(noteWindow);
             noteWindow.show();
@@ -166,21 +173,73 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    @FXML
+    private void handleNote(Person person, Logic logic) {
+        NoteWindow noteWindow = new PersonNoteWindow(person, logic, resultDisplay);
+        manageNoteWindow(noteWindow);
+    }
+
+    @FXML
+    private void handleNote(Group group, Logic logic) {
+        NoteWindow noteWindow = new GroupNoteWindow(group, logic, resultDisplay);
+        manageNoteWindow(noteWindow);
+    }
+
+    @FXML
+    private void handleNote(Notor notor, Logic logic) {
+        NoteWindow noteWindow = new GeneralNoteWindow(notor, logic, resultDisplay);
+        manageNoteWindow(noteWindow);
+    }
+
+    /**
+     * Handles opening of Person Note or Group Note.
+     * @param notable The object that is notable.
+     * @param logic The Logic of Notor.
+     */
+    public void handleNote(Notable notable, Logic logic) throws CommandException {
+        if (notable instanceof Person) {
+            handleNote((Person) notable, logic);
+        } else if (notable instanceof Group) {
+            handleNote((Group) notable, logic);
+        } else {
+            handleNote((Notor) notable, logic);
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
 
     /**
-     * Closes the application.
+     * Closes the application. Shows a warning window for user to confirm whether to exit without saving note if there
+     * is unsaved note.
      */
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
+        boolean isAllNotesSaved = checkIfAllNotesSaved();
+
+        if (!isAllNotesSaved) {
+            WarningWindow warningWindow = new WarningWindow(UNSAVED_NOTE_MESSAGE);
+            warningWindow.show();
+            if (!warningWindow.canContinue()) {
+                return;
+            }
+        }
         NoteWindow.OPENED_NOTE_WINDOWS.forEach(NoteWindow::hide);
+        helpWindow.hide();
         primaryStage.hide();
+    }
+
+    private boolean checkIfAllNotesSaved() {
+        for (NoteWindow noteWindow : NoteWindow.OPENED_NOTE_WINDOWS) {
+            if (!noteWindow.isSave()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -201,7 +260,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
             if (commandResult.isShowNote()) {
-                handleNote(commandResult.person(), logic);
+                if (commandResult.getNotable() != null) {
+                    handleNote(commandResult.getNotable(), logic);
+                }
             }
             if (commandResult.isExit()) {
                 handleExit();

@@ -1,4 +1,6 @@
 {
+  "note": "",
+  "noteDate": "",
   "_comment": "Notor save file which contains the same Person values as in TypicalPersons#getTypicalNotor()",
   "persons" : [ {
     "name" : "Alice Pauline",
@@ -66,12 +68,18 @@
   } ],
   "superGroups" : [ {
     "name" : "Orbital",
+    "note" : "sadasdasdsad",
+    "noteDate" : "Last Modified: (Wed, Oct 20 2021 19:50)",
     "subGroups" : [ {
       "name" : "Group1",
-      "parent" : "Orbital"
+      "parent" : "Orbital",
+      "note" : "sadasdasdsad",
+      "noteDate" : "Last Modified: (Wed, Oct 20 2021 19:50)"
     } ]
   }, {
     "name" : "CS2103",
-    "subGroups" : [ ]
+    "subGroups" : [ ],
+    "note" : "sadasdasdsad",
+    "noteDate" : "Last Modified: (Wed, Oct 20 2021 19:50)"
   } ]
 }

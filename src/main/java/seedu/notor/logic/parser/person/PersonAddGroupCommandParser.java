@@ -3,6 +3,7 @@ package seedu.notor.logic.parser.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.notor.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_GROUPNAME;
+import static seedu.notor.logic.parser.CliSyntax.PREFIX_SUBGROUP;
 
 import java.util.stream.Stream;
 
@@ -29,7 +30,7 @@ public class PersonAddGroupCommandParser extends PersonCommandParser {
      */
     public PersonCommand parse() throws ParseException {
         requireNonNull(arguments);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_GROUPNAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(arguments, PREFIX_GROUPNAME, PREFIX_SUBGROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNAME)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -39,6 +40,15 @@ public class PersonAddGroupCommandParser extends PersonCommandParser {
         assert argMultimap.getValue(PREFIX_GROUPNAME).isPresent();
 
         String groupName = argMultimap.getValue(PREFIX_GROUPNAME).get();
+
+        String subGroupName = null;
+        if (argMultimap.getValue(PREFIX_SUBGROUP).isPresent()) {
+            subGroupName = argMultimap.getValue(PREFIX_SUBGROUP).get();
+        }
+
+        if (subGroupName != null) {
+            return new PersonAddGroupCommand(index, groupName + "_" + subGroupName);
+        }
         return new PersonAddGroupCommand(index, groupName);
     }
 

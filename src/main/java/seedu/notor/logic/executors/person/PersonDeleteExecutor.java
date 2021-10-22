@@ -25,8 +25,7 @@ public class PersonDeleteExecutor extends PersonExecutor {
         if (warningWindow.canContinue()) {
             model.deletePerson(toBeDeletedPerson);
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, toBeDeletedPerson));
-        } else {
-            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_CANCEL, toBeDeletedPerson));
         }
+        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_CANCEL, toBeDeletedPerson));
     }
 }
