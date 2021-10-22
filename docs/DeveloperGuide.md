@@ -238,6 +238,14 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Finding applicants by name
+
+I will explain here how the feature to find applicants by name
+is implemented.
+
+But I am leaving this here first as a placeholder,
+and will update with the actual explanation soon.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
