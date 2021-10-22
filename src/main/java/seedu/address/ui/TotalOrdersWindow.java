@@ -3,9 +3,10 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.ClientTotalOrders;
 
 /**
  * Controller for a total orders page
@@ -15,7 +16,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     private static final String FXML = "TotalOrdersWindow.fxml";
 
     @FXML
-    private Button copyButton;
+    private TableView<ClientTotalOrders> table;
 
     /**
      * Creates a new TotalOrdersWindow.
