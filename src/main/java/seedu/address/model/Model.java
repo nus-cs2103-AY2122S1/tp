@@ -124,7 +124,7 @@ public interface Model {
     void addOrder(Order order);
 
     /**
-     * Returns true if a order with the same identity as {@code order} exists in the order list.
+     * Returns true if an order with the same identity as {@code order} exists in the order list.
      */
     boolean hasOrder(Order order);
 
@@ -134,6 +134,7 @@ public interface Model {
      * The order identity of {@code editedOrder} must not be the same as another existing order in the order list.
      */
     void setOrder(Order target, Order editedOrder);
+
 
     /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
