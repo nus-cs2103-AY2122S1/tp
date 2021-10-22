@@ -49,6 +49,11 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
+    /**
+     * Adds imported data from {@code addressBook} to the current address book data.
+     */
+    int importAddressBook(ReadOnlyAddressBook addressBook);
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 

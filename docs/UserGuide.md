@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: User Guide
 ---
 
@@ -9,7 +9,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 --------------------------------------------------------------------------------------------------------------------
 
-* Table of Contents 
+* Table of Contents
 {:toc}
 
 <!---
@@ -18,14 +18,16 @@ type fast, Socius can get your contact management tasks done faster than traditi
 2. Features
      1. Viewing help `help`
      2. Adding a person `add`
-     3. Listing all persons `list`
-     4. Editing a person `edit`
-     5. Locating persons by name `find`
-     6. Deleting a person `delete`
-     7. Clearing all entries `clear`
-     8. Exiting the program `exit`
-     9. Saving the data
-     10. Editing the data file
+     3. Importing contacts from a file `import`
+     4. Listing all persons `list`
+     5. Editing a person `edit`
+     6. Locating persons by name `find`
+     7. Deleting a person `delete`
+     8. Computing statistics of a tutorial group : `stats`
+     9. Clearing all entries `clear`
+     10. Exiting the program `exit`
+     11. Saving the data
+     12. Editing the data file
 3. FAQ
 4. Command Summary
 --->
@@ -41,15 +43,15 @@ type fast, Socius can get your contact management tasks done faster than traditi
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
 1. *Double-click* the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
-   
+
    ![Ui](images/Ui.png)
-   
+
 1. Note that the app comes with some sample data by default. Type `clear` in the command box to remove those sample data.
 
 1. You can refer to the next section on [Features](#features) for more details of each command. Alternatively, you can go to [Command Summary](#command-summary) for an overview of all commands.
 
 1. The following are some example of commands you can try. Type the command in the command box and press `⤷Enter` to execute it.
-    
+
     * **`list`** : Lists all contacts.
 
     * **`add`** `n/John Doe tg/W08 nat/Singaporean` : Adds a contact named `John Doe` to Socius.
@@ -119,6 +121,15 @@ Examples:
 * **`add`** `n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 tg/07`
 * **`add`** `n/Tan Ah Gao nat/Singapore h/@TanAhCow r/Funny Guy`
 
+### Importing contacts from a file `import`
+
+Imports and adds every person that is listed in the specified file.
+
+Format: `import FILE_NAME.json`
+
+* File must be in JSON format.
+* File must be located within the `data` directory in the same directory as `socius.jar`.
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
@@ -181,6 +192,19 @@ Examples:
 
 * **`list`** followed by **`delete`** `2` deletes the 2nd person in the address book.
 * **`find`** `Betsy` followed by **`delete`** `1` deletes the 1st person in the results of the **`find`** command.
+
+### Computing statistics of a tutorial group : `stats`
+
+Computes the gender and nationality statistics of the specified tutorial group.
+
+Format: `stats TUTORIAL_GROUP`
+
+* Computes the statistics of the specified tutorial group.
+* If there are no tutorial groups with the given name/number, it will notify the user.
+
+Examples:
+
+* `stats T09` computes the gender and nationality statistics of the tutorial group `T09`.
 
 ### Clearing all entries : `clear`
 
