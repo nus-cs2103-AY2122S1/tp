@@ -1,9 +1,11 @@
 package tutoraid.testutil;
 
+import java.util.ArrayList;
+
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
-import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
@@ -15,14 +17,14 @@ public class StudentBuilder {
     public static final String DEFAULT_STUDENT_PHONE = "96355255";
     public static final String DEFAULT_PARENT_NAME = "Mr Bee";
     public static final String DEFAULT_PARENT_PHONE = "85355255";
-    public static final String DEFAULT_PROGRESS = "No Progress";
+    public static final ArrayList<String> DEFAULT_PROGRESS_LIST = new ArrayList<>();
     public static final boolean DEFAULT_PAYMENT_STATUS = false;
 
     private StudentName studentName;
     private Phone studentPhone;
     private ParentName parentName;
     private Phone parentPhone;
-    private Progress progress;
+    private ProgressList progressList;
     private PaymentStatus paymentStatus;
 
     /**
@@ -33,7 +35,7 @@ public class StudentBuilder {
         studentPhone = new Phone(DEFAULT_STUDENT_PHONE);
         parentName = new ParentName(DEFAULT_PARENT_NAME);
         parentPhone = new Phone(DEFAULT_PARENT_PHONE);
-        progress = new Progress(DEFAULT_PROGRESS);
+        progressList = new ProgressList(DEFAULT_PROGRESS_LIST);
         paymentStatus = new PaymentStatus(DEFAULT_PAYMENT_STATUS);
     }
 
@@ -45,7 +47,7 @@ public class StudentBuilder {
         studentPhone = studentToCopy.getStudentPhone();
         parentName = studentToCopy.getParentName();
         parentPhone = studentToCopy.getParentPhone();
-        progress = studentToCopy.getProgress();
+        progressList = studentToCopy.getProgressList();
         paymentStatus = studentToCopy.getPaymentStatus();
     }
 
@@ -82,10 +84,10 @@ public class StudentBuilder {
     }
 
     /**
-     * Sets the {@code Progress} of the {@code Student} that we are building.
+     * Sets the {@code ProgressList} of the {@code Student} that we are building.
      */
-    public StudentBuilder withProgress(String progress) {
-        this.progress = new Progress(progress);
+    public StudentBuilder withProgressList(ArrayList<String> progressListDescriptions) {
+        this.progressList = new ProgressList(progressListDescriptions);
         return this;
     }
 
@@ -98,6 +100,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
+        return new Student(studentName, studentPhone, parentName, parentPhone, progressList, paymentStatus);
     }
 }
