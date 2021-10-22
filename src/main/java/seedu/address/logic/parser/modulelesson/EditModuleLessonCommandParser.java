@@ -10,7 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
@@ -25,6 +27,7 @@ import seedu.address.model.person.ModuleCode;
  * Parses input arguments and creates a new EditModuleLessonCommand object
  */
 public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCommand> {
+    private final Logger logger = LogsCenter.getLogger(EditModuleLessonCommandParser.class);
 
     /**
      * Parses the given {@code args} in the context of the EditModuleLessonCommand
@@ -34,6 +37,7 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
     @Override
     public EditModuleLessonCommand parse(String args) throws ParseException {
         requireNonNull(args);
+        logger.info("----------------[Trying to parse input into EditModuleLessonCommand][" + args + "]");
         ArgumentMultimap argumentMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_DAY, PREFIX_TIME, PREFIX_REMARK);
 
@@ -42,6 +46,7 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
         } catch (ParseException e) {
+            logger.info("----------------[Parsing failed due to invalid index][" + argumentMultimap.getPreamble() + "]");
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditModuleLessonCommand.MESSAGE_USAGE), e);
         }
@@ -64,6 +69,7 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
         }
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
+            logger.info("----------------[Parsing failed due to invalid index][" + argumentMultimap.getPreamble() + "]");
             throw new ParseException(EditModuleLessonCommand.MESSAGE_NOT_EDITED);
         }
 
