@@ -22,6 +22,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MarkOrderCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
+import seedu.address.logic.commands.TotalOrdersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -95,6 +96,9 @@ public class AddressBookParser {
 
         case AddOrderCommand.COMMAND_WORD:
             return new AddOrderCommandParser().parse(arguments);
+            
+        case TotalOrdersCommand.COMMAND_WORD:
+            return new TotalOrdersCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
