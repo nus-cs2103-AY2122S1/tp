@@ -40,7 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private TaskListPanel taskListPanel;
     private GroupListPanel groupListPanel;
-    private ResultDisplay resultDisplay;
+    // private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
     @FXML

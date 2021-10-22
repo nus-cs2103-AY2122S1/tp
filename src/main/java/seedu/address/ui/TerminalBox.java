@@ -18,6 +18,9 @@ public class TerminalBox extends VBox {
     @FXML
     private Label responseText;
 
+    /**
+     * Creates a {@code TerminalBox} with the given input and response strings.
+     */
     public TerminalBox(String input, String response) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/TerminalBox.fxml"));
@@ -32,6 +35,9 @@ public class TerminalBox extends VBox {
         this.responseText.setText(response);
     }
 
+    /**
+     * Creates a {@code TerminalBox} with the given input string and exception.
+     */
     public TerminalBox(String input, Exception exception) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/TerminalBox.fxml"));
