@@ -414,6 +414,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                       | see the total attendance of each member| assess the level of commitment of members                      |
 | `* *`    | user                                       | manually edit member's allocation to facilities | accomodate to last minute changes or requests made by members|
 | `* *`    | user                                       | see all the dates              | know when are the days of training                                     |
+| `* *`    | user                                       | add tags for members | sort the members by tags |
 | `* *`    | lazy user                                  | add a list of people's contacts into the application| I don't have to individually add them manually     |
 | `* *`    | user with many members added into the app  | sort persons by name           | locate a person easily       |
 | `* * `    | expert user | create shortcut for tasks | save time on frequently performed tasks
