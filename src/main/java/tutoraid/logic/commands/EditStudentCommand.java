@@ -25,12 +25,12 @@ import tutoraid.model.student.StudentName;
 /**
  * Edits the details of an existing student in the address book.
  */
-public class EditStudentCommand extends Command {
+public class EditStudentCommand extends EditCommand {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_FLAG = "-s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the student identified "
-            + "by the index number used in the displayed student list. "
+            + "by the index number used in the Student Panel. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_STUDENT_NAME + "STUDENT NAME "

@@ -5,6 +5,10 @@ import static java.util.Objects.requireNonNull;
 import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.StringUtil;
 import tutoraid.logic.parser.exceptions.ParseException;
+import tutoraid.model.lesson.Capacity;
+import tutoraid.model.lesson.LessonName;
+import tutoraid.model.lesson.Price;
+import tutoraid.model.lesson.Timing;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
@@ -21,6 +25,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -98,4 +103,63 @@ public class ParserUtil {
         return new Progress(trimmedProgress);
     }
 
+    /**
+     * Parses a {@code String name} into a {@code LessonName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static LessonName parseLessonName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String price} into a {@code Price}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
+            throw new ParseException(Price.MESSAGE_CONSTRAINTS);
+        }
+        return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String capacity} into a {@code Capacity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code capacity} is invalid.
+     */
+    public static Capacity parseCapacity(String capacity) throws ParseException {
+        requireNonNull(capacity);
+        String trimmedCapacity = capacity.trim();
+        if (!Capacity.isValidCapacity(trimmedCapacity)) {
+            throw new ParseException(Capacity.MESSAGE_CONSTRAINTS);
+        }
+        return new Capacity(trimmedCapacity);
+    }
+
+    /**
+     * Parses a {@code String timing} into a {@code Timing}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code timing} is invalid.
+     */
+    public static Timing parseTiming(String timing) throws ParseException {
+        requireNonNull(timing);
+        String trimmedTiming = timing.trim();
+        if (!Timing.isValidTiming(trimmedTiming)) {
+            throw new ParseException(Timing.MESSAGE_CONSTRAINTS);
+        }
+        return new Timing(trimmedTiming);
+    }
 }
