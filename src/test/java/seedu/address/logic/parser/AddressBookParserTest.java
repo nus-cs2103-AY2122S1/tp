@@ -31,6 +31,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
+import seedu.address.logic.commands.SortMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.alias.Alias;
@@ -211,6 +212,12 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ShowAliasesCommand.COMMAND_WORD, aliases) instanceof ShowAliasesCommand);
         assertTrue(parser.parseCommand(
                 ShowAliasesCommand.COMMAND_WORD + " 3", aliases) instanceof ShowAliasesCommand);
+    }
+
+    @Test
+    public void parseCommand_sortm() throws Exception {
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD, aliases) instanceof SortMemberCommand);
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " 3", aliases) instanceof SortMemberCommand);
     }
 
     @Test
