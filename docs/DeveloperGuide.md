@@ -391,7 +391,28 @@ Execution of the `AddMarkCommand`
   * Pros: Since there are 13 weeks and two tutorials a week, there will be a projected 26 tutorials held. Thus, a fixed size of 26 elements will allow the list to reflect this requirement.
   * Cons: Instructors are limited to this 26-class limit, and cannot store marks for extra tutorials/make-up sessions.
 
+### ClassCode Implementation Feature
+(Contributed by Zhou Yirui)
+ClassMATE allows user to assign student to a tutorial class using a ClassCode. A user is able to:
 
+1. Add ClassCode to a student
+2. Edit ClassCode of a student
+
+#### Current Implementation
+The class `ClassCode` facilitates all operations related to classCode. `ClassCode` is implemented such that a
+Tutorial Class with the corresponding ClassCode must exist before the ClassCode can be added. Tutorial Class `G00` is a
+default class that do not need to be created.
+
+Given below is an example of how classCode can be used.
+
+Step 1: After launching the application for the first time, user executes `addstu n/Abigail p/91199119 e/ab@gmail.com a/Downling Park #15-20 c/G08`.
+The `addstu` command calls `Model#hasTutorialClass()`, and the model component checks if the TutorialClass specified by the
+class code exists. If it exists, the student is added successfully, else, an error message is given.
+
+
+#### Proposed Implementation
+Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `deletec` command changes the ClassCode of all students
+of TutorialClass `G08` to `G00`.
 
 --------------------------------------------------------------------------------------------------------------------
 
