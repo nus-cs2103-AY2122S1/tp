@@ -27,7 +27,7 @@ public class ExportCommandIntegrationTest {
     }
 
     @Test
-    public void execute_exportCommand_success2() throws Exception {
+    public void execute_exportCommandNameOnly_success() throws Exception {
         ExportCommand command = new ExportCommand(CsvWriterTest.TESTED_FILE_PATH, new CsvWriter());
         Model model = new ModelStubProvidingValidFilteredListNamesOnly();
         command.execute(model);
