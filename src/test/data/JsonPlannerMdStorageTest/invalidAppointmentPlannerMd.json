@@ -24,9 +24,8 @@
     "date": "2/2/2021",
     "session": {
       "start": "11:30",
-      "end": "12:00",
       "duration": 30
     },
-    "remarks": "X-ray"
+    "remark": "X-ray"
   }]
 }

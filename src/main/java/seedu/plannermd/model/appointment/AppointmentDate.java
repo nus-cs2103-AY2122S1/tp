@@ -52,6 +52,13 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
     }
 
     /**
+     * Returns the date in input format.
+     */
+    public String toInputStringFormat() {
+        return date.format(DATE_FORMATTER);
+    }
+
+    /**
      * Returns true if the given date is equal to date.
      */
     public boolean isEqualDate(AppointmentDate otherDate) {

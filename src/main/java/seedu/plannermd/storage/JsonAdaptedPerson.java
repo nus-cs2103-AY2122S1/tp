@@ -109,12 +109,12 @@ class JsonAdaptedPerson {
         if (!Address.isValidAddress(address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Remark modelRemark = new Remark(remark);
+        final Address modelAddress = new Address(address);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
-        final Address modelAddress = new Address(address);
+        final Remark modelRemark = new Remark(remark);
 
         if (birthDate == null) {
             throw new IllegalValueException(

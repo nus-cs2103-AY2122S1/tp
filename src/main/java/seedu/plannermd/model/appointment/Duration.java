@@ -45,6 +45,14 @@ public class Duration {
         return new Duration();
     }
 
+
+    /**
+     * Returns the number of minutes.
+     */
+    public Integer getMinutes() {
+        return duration;
+    }
+
     @Override
     public String toString() {
         return duration + " minutes";

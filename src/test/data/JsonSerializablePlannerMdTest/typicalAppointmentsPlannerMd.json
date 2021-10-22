@@ -30,7 +30,7 @@
         "end": "00:00",
         "duration": 90
       },
-      "remarks": "Blood test"
+      "remark": "Blood test"
     },
     {
       "patient": {
@@ -90,7 +90,7 @@
         "end": "12:00",
         "duration": 30
       },
-      "remarks": "Ask about condition the past two weeks"
+      "remark": "Ask about condition the past two weeks"
     }
   ]
 }

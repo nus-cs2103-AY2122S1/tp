@@ -46,7 +46,7 @@
         "end": "12:00",
         "duration": 30
       },
-      "remarks": "X-ray"
+      "remark": "X-ray"
     },
     {
       "patient": {
@@ -76,7 +76,7 @@
         "end": "12:00",
         "duration": 30
       },
-      "remarks": "X-ray"
+      "remark": "X-ray"
     }
   ]
 }

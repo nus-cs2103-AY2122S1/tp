@@ -122,6 +122,13 @@ public class Session {
         return end.format(DISPLAYED_TIME_FORMATTER);
     }
 
+    /**
+     * Returns the number of minutes in this Session.
+     */
+    public Integer getMinutes() {
+        return duration.getMinutes();
+    }
+
     @Override
     public String toString() {
         return "Start: " + getFormattedStartTime() + "; End: " + getFormattedEndTime();
