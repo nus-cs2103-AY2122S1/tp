@@ -32,10 +32,10 @@ public interface TaskListStorage {
 
     /**
      * Saves the given {@link ReadOnlyTaskBook} to the storage.
-     * @param addressBook cannot be null.
+     * @param taskBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskList(ReadOnlyTaskBook addressBook) throws IOException;
+    void saveTaskList(ReadOnlyTaskBook taskBook) throws IOException;
 
     /**
      * @see #saveTaskList(ReadOnlyTaskBook)

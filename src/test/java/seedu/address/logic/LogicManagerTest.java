@@ -31,6 +31,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonSalesOrderBookStorage;
 import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -51,8 +52,12 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonTaskBookStorage taskListStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("taskList.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        JsonSalesOrderBookStorage salesOrderBookStorage =
+                new JsonSalesOrderBookStorage(temporaryFolder.resolve("saleOrder.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage,
+                salesOrderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -81,10 +86,13 @@ public class LogicManagerTest {
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonTaskBookStorage taskListStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("ioExceptionTaskList.json"));
+        JsonSalesOrderBookStorage salesOrderBookStorage =
+                new JsonSalesOrderBookStorage(temporaryFolder.resolve("ioExceptionSalesOrderBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
 
-        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage,
+                taskListStorage, salesOrderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -136,9 +144,11 @@ public class LogicManagerTest {
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(), new UserPrefs());
+    private void assertCommandFailure(String inputCommand,
+                                      Class<? extends Throwable> expectedException,
+                                      String expectedMessage) {
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(),
+                model.getSalesOrderBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

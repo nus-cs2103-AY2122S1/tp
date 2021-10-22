@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,13 @@ public class OrderList implements Iterable<Order> {
         }
 
         internalList.set(index, editedOrder);
+    }
+
+
+    public void setOrders(List<Order> orders) {
+        requireAllNonNull(orders);
+
+        internalList.setAll(orders);
     }
 
     /**

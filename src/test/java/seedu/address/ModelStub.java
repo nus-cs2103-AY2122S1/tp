@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySalesOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
@@ -139,6 +140,26 @@ public class ModelStub implements Model {
 
     @Override
     public void markTask(Task task) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getSaleOrderPath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setSalesOrderBookFilePath(Path taskListFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlySalesOrderBook getSalesOrderBook() {
         throw new AssertionError("This method should not be called.");
     }
 

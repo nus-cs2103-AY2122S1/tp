@@ -19,15 +19,19 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlySalesOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.SalesOrderBook;
 import seedu.address.model.TaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonSalesOrderBookStorage;
 import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.SalesOrderBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.TaskListStorage;
@@ -62,7 +66,9 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         TaskListStorage taskListStorage = new JsonTaskBookStorage(userPrefs.getTaskListFilePath());
-        storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        SalesOrderBookStorage salesOrderBookStorage =
+                new JsonSalesOrderBookStorage(userPrefs.getSalesOrderBookFilePath());
+        storage = new StorageManager(addressBookStorage, taskListStorage, salesOrderBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -95,22 +101,40 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
         }
+
         ReadOnlyTaskBook initialTaskList;
         Optional<ReadOnlyTaskBook> taskListOptional;
         try {
             taskListOptional = storage.readTaskList();
             if (!taskListOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+                logger.info("Data file not found. Will be starting with a sample SalesBook");
             }
             initialTaskList = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            logger.warning("Data file not in the correct format. Will be starting with an empty SalesBook");
             initialTaskList = new TaskBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty SalesBook");
             initialTaskList = new TaskBook();
         }
-        return new ModelManager(initialAddressBook, initialTaskList, userPrefs);
+
+        ReadOnlySalesOrderBook initialSalesOrderBook;
+        Optional<ReadOnlySalesOrderBook> salesOrderBookOptional;
+        try {
+            salesOrderBookOptional = storage.readSalesOrderBook();
+            if (!salesOrderBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample SalesBook");
+            }
+            initialSalesOrderBook = salesOrderBookOptional.orElseGet(SampleDataUtil::getSampleOSalesOrderBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty SalesBook");
+            initialSalesOrderBook = new SalesOrderBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty SalesBook");
+            initialSalesOrderBook = new SalesOrderBook();
+        }
+
+        return new ModelManager(initialAddressBook, initialTaskList, initialSalesOrderBook, userPrefs);
     }
 
     private void initLogging(Config config) {

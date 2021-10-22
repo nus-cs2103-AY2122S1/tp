@@ -101,9 +101,9 @@ public interface Model {
     void setTaskListFilePath(Path taskListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces Sales order book data with the data in {@code taskBook}.
      */
-    void setTaskBook(ReadOnlyTaskBook addressBook);
+    void setTaskBook(ReadOnlyTaskBook taskBook);
 
     /** Returns the TaskList */
     ReadOnlyTaskBook getTaskBook();
@@ -136,6 +136,27 @@ public interface Model {
     void markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
+
+
+    /**
+     * Returns the user prefs' Sales order file path.
+     */
+    Path getSaleOrderPath();
+
+    /**
+     * Sets the user prefs' Sales order  file path.
+     */
+    void setSalesOrderBookFilePath(Path taskListFilePath);
+
+    /**
+     * Replaces Sales order book data with the data in {@code salesOrderBook}.
+     */
+    void setSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook);
+
+    /** Returns the TaskList */
+    ReadOnlySalesOrderBook getSalesOrderBook();
+
+
     /**
      * Adds the given order.
      */

@@ -23,6 +23,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final TaskBook taskBook;
+    private final SalesOrderBook salesOrderBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
@@ -31,21 +32,23 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskList, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskBook,
+                        ReadOnlySalesOrderBook salesOrderBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, taskList , userPrefs);
+        requireAllNonNull(addressBook, taskBook, salesOrderBook, userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.taskBook = new TaskBook(taskList);
+        this.taskBook = new TaskBook(taskBook);
+        this.salesOrderBook = new SalesOrderBook(salesOrderBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
-        filteredOrders = new FilteredList<>(this.addressBook.getOrderList());
+        filteredOrders = new FilteredList<>(this.salesOrderBook.getOrderList());
 
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TaskBook(), new UserPrefs());
+        this(new AddressBook(), new TaskBook(), new SalesOrderBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -143,7 +146,7 @@ public class ModelManager implements Model {
         return taskBook;
     }
     /**
-     * Checks if tasklist has this task.
+     * Checks if taskList has this task.
      */
     @Override
     public boolean hasTask(Task task) {
@@ -152,7 +155,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Adds a task to tasklist.
+     * Adds a task to taskList.
      */
     public void addTask(Task toAdd) {
         taskBook.addTask(toAdd);
@@ -160,7 +163,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes a task from tasklist.
+     * Deletes a task from taskList.
      */
     public void deleteTask(Task toDelete) {
         taskBook.deleteTask(toDelete);
@@ -188,7 +191,29 @@ public class ModelManager implements Model {
         taskBook.markDone(toMark);
     }
 
+
     //=========== Order Management ==================================================================================
+
+    @Override
+    public Path getSaleOrderPath() {
+        return userPrefs.getSalesOrderBookFilePath();
+    }
+
+    @Override
+    public void setSalesOrderBookFilePath(Path salesOrderBookFilePath) {
+        requireNonNull(salesOrderBookFilePath);
+        userPrefs.getSalesOrderBookFilePath(salesOrderBookFilePath);
+    }
+
+    @Override
+    public void setSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook) {
+        this.salesOrderBook.resetData(salesOrderBook);
+    }
+
+    @Override
+    public ReadOnlySalesOrderBook getSalesOrderBook() {
+        return salesOrderBook;
+    }
 
     /**
      * Checks if orderlist has this order.
@@ -196,20 +221,20 @@ public class ModelManager implements Model {
     @Override
     public boolean hasOrder(Order order) {
         requireNonNull(order);
-        return addressBook.hasOrder(order);
+        return salesOrderBook.hasOrder(order);
     }
 
     @Override
     public void setOrder(Order target, Order editedOrder) {
         requireAllNonNull(target, editedOrder);
-        addressBook.setOrder(target, editedOrder);
+        salesOrderBook.setOrder(target, editedOrder);
     }
 
     /**
      * Adds an order to orderlist.
      */
     public void addOrder(Order toAdd) {
-        addressBook.addOrder(toAdd);
+        salesOrderBook.addOrder(toAdd);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
@@ -217,7 +242,7 @@ public class ModelManager implements Model {
      * Deletes an order from orderlist.
      */
     public void deleteOrder(Order toDelete) {
-        addressBook.deleteOrder(toDelete);
+        salesOrderBook.deleteOrder(toDelete);
     }
 
     @Override
@@ -235,8 +260,7 @@ public class ModelManager implements Model {
      * Marks an order as completed
      */
     public void markOrder(Order order) {
-        addressBook.markOrder(order);
-
+        salesOrderBook.markOrder(order);
     }
 
     //=========== Filtered Person List Accessors =============================================================

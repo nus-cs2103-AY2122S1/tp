@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalOrders.getTypicalSalesOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
 
@@ -23,8 +24,10 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskList(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), getTypicalTaskList(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskList(),
+                getTypicalSalesOrderBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(),
+                getTypicalTaskList(), getTypicalSalesOrderBook(), new UserPrefs());
     }
 
     @Test
