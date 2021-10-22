@@ -7,6 +7,7 @@
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans";
     -fx-opacity: 0.9;
+    -fx-text-fill: white;
 }
 
 .tab-pane {
@@ -141,11 +142,6 @@
 }
 .result-display .scroll-pane .content{
     -fx-background-color: transparent;
-}
-
-
-.result-display .label {
-    -fx-text-fill: black !important;
 }
 
 .status-bar .label {
