@@ -133,7 +133,7 @@ After launching the app, the GUI similar to the one shown below should appear in
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
    
-Tip: Refer to the 'Additional Command Format Information' under section 3 to learn the requirements of the various parameters used.
+Tip: Refer to the [Additional Command Format Information](#4-additional-command-format-information) under section 4 to learn the requirements of the various parameters used.
    
 </div>
 
