@@ -26,6 +26,7 @@ import seedu.address.model.tag.Tag;
 public class ImportCommandParser implements Parser<ImportCommand> {
 
     public static final String MESSAGE_FILE_NOT_FOUND = "No CSV file called %s found.";
+
     /**
      * Parses the given {@code String} of arguments in the context of the ImportCommand
      * and returns a ImportCommand object for execution.
@@ -58,21 +59,8 @@ public class ImportCommandParser implements Parser<ImportCommand> {
                 }
                 Name name = ParserUtil.parseName(values[0]);
                 Phone phone = ParserUtil.parsePhone(values[1]);
-                Availability availability;
-                Set<Tag> tags;
-                availability = ParserUtil.parseAvailability(values[2]);
-                String trimmedTags;
-                if (values[3].isEmpty()) {
-                    tags = new HashSet<>();
-                } else if (values[3].charAt(0) == '"') {
-                    trimmedTags = values[3].substring(1, values[3].length() - 1);
-                    List<String> tagList = Arrays.asList(trimmedTags.split(","));
-                    tags = ParserUtil.parseTags(tagList);
-                } else {
-                    trimmedTags = values[3];
-                    List<String> tagList = Arrays.asList(trimmedTags.split(","));
-                    tags = ParserUtil.parseTags(tagList);
-                }
+                Availability availability = ParserUtil.parseAvailability(values[2]);
+                Set<Tag> tags = parseTagCsv(values[3]);
 
                 Person person = new Person(name, phone, availability, tags);
                 personList.add(person);
@@ -84,6 +72,30 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
+    }
 
+    /**
+     * Helper function to parse the tags from a CSV file.
+     * Returns a {@codeSet<Tags>} object.
+     *
+     * @param tags the given tags from the CSV file
+     * @return the set of tags after being parsed
+     * @throws ParseException if the tags from the CSV file do not conform with the expected format.
+     */
+    private Set<Tag> parseTagCsv(String tags) throws ParseException {
+        Set<Tag> tagSet;
+        String trimmedTags;
+        if (tags.isEmpty()) {
+            tagSet = new HashSet<>();
+        } else if (tags.charAt(0) == '"') {
+            trimmedTags = tags.substring(1, tags.length() - 1);
+            List<String> tagList = Arrays.asList(trimmedTags.split(","));
+            tagSet = ParserUtil.parseTags(tagList);
+        } else {
+            trimmedTags = tags;
+            List<String> tagList = Arrays.asList(trimmedTags.split(","));
+            tagSet = ParserUtil.parseTags(tagList);
+        }
+        return tagSet;
     }
 }
