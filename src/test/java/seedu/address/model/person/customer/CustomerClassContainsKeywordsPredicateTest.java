@@ -59,10 +59,16 @@ public class CustomerClassContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new CustomerClassContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new CustomerBuilder().withName("Alice Bob").build()));
+
+        // Keywords match phone, email and address, but does not match name
+        predicate = new CustomerClassContainsKeywordsPredicate(Arrays.asList("12345",
+                "alice@email.com", "Main", "Street"));
+        assertTrue(predicate.test(new CustomerBuilder().withName("Alice").withPhone("12345")
+                .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsTrue() {
+    public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         CustomerClassContainsKeywordsPredicate predicate =
                 new CustomerClassContainsKeywordsPredicate(Collections.emptyList());
@@ -71,11 +77,5 @@ public class CustomerClassContainsKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new CustomerClassContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new CustomerBuilder().withName("Alice Bob").build()));
-
-        // Keywords match phone, email and address, but does not match name
-        predicate = new CustomerClassContainsKeywordsPredicate(Arrays.asList("12345",
-                "alice@email.com", "Main", "Street"));
-        assertTrue(predicate.test(new CustomerBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 }

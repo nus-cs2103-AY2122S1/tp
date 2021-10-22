@@ -20,7 +20,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
-import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
+import seedu.address.model.person.supplier.SupplierClassContainsKeywordsPredicate;
 import seedu.address.testutil.EditSupplierDescriptorBuilder;
 
 /**
@@ -140,7 +140,7 @@ public class SupplierCommandTestUtil {
 
         Supplier supplier = model.getFilteredSupplierList().get(targetIndex.getZeroBased());
         final String[] splitName = supplier.getName().fullName.split("\\s+");
-        model.updateFilteredSupplierList(new SupplierNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredSupplierList(new SupplierClassContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredSupplierList().size());
     }

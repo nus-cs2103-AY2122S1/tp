@@ -59,6 +59,12 @@ public class EmployeeClassContainsKeywordsPredicateTest {
         // Mixed-case keywords
         predicate = new EmployeeClassContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
         assertTrue(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
+
+        // Keywords contains same phone, email and address
+        predicate = new EmployeeClassContainsKeywordsPredicate(
+                Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        assertTrue(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
+                .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 
     @Test
@@ -71,11 +77,5 @@ public class EmployeeClassContainsKeywordsPredicateTest {
         // Non-matching keyword
         predicate = new EmployeeClassContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EmployeeBuilder().withName("Alice Bob").build()));
-
-        // Keywords contains same phone, email and address
-        predicate =
-                new EmployeeClassContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertTrue(predicate.test(new EmployeeBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
     }
 }
