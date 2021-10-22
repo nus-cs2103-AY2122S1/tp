@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_EXCO;
+import static seedu.address.model.util.SampleDataUtil.getTagSet;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -19,14 +21,22 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonTest {
 
     @Test
+    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
+        Person person = new PersonBuilder().build();
+        assertThrows(UnsupportedOperationException.class, () -> person.getTags().remove(0));
+    }
+
+    @Test
     public void constructor_null_throwsException() {
         List<DayOfWeek> validAvailability = Arrays.asList(DayOfWeek.MONDAY);
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name(null), new Phone("92929292"), new Availability(validAvailability)));
+                new Person(new Name(null), new Phone("92929292"), new Availability(validAvailability),
+                        getTagSet("y1")));
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name("Alice"), new Phone(null), new Availability(validAvailability)));
+                new Person(new Name("Alice"), new Phone(null), new Availability(validAvailability),
+                        getTagSet("exco")));
         assertThrows(NullPointerException.class, () ->
-                new Person(new Name("Alice"), new Phone("92929292"), new Availability(null)));
+                new Person(new Name("Alice"), new Phone("92929292"), new Availability(null), null));
     }
 
     @Test
@@ -90,6 +100,10 @@ public class PersonTest {
 
         // different phone -> returns false
         editedAlice = new PersonBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different tags -> returns false
+        editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_EXCO).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }
