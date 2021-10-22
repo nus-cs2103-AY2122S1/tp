@@ -24,6 +24,7 @@
             <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                 <Label fx:id="index" styleClass="cell_big_label">
                     <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
