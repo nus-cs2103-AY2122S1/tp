@@ -29,11 +29,14 @@ public class MakeUpLesson extends Lesson {
     }
 
     /**
-     * This method should not be called since MakeUpLesson only has one date.
+     * Get the date of the makeup lesson to display.
+     * Date will be start date since a makeup lesson only has one date.
+     *
+     * @return startDate Start date of the makeup lesson.
      */
     @Override
-    public Date getNextDate() {
-        throw new UnsupportedOperationException("Makeup lesson has no upcoming date.");
+    public Date getDisplayDate() {
+        return getStartDate();
     }
 
     /**

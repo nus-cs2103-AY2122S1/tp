@@ -92,9 +92,9 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
-     * Get the upcoming date of the lesson.
+     * Get the date of the lesson to display to the user.
      */
-    public abstract Date getNextDate();
+    public abstract Date getDisplayDate();
 
     /**
      * Returns true both lessons clash.
@@ -148,8 +148,8 @@ public abstract class Lesson implements Comparable<Lesson> {
         i.e. The upcoming date for recurring lessons; or the start date for makeup lessons
         (since makeup lesson is a one-time event).
          */
-        Date date = isRecurring() ? getNextDate() : getStartDate();
-        Date dateToCompare = other.isRecurring() ? other.getNextDate() : other.getStartDate();
+        Date date = isRecurring() ? getDisplayDate() : getStartDate();
+        Date dateToCompare = other.isRecurring() ? other.getDisplayDate() : other.getStartDate();
         int compareDate = date.compareTo(dateToCompare);
         int compareTime = getTimeRange().compareTo(other.getTimeRange());
         // Compare time if date is equal

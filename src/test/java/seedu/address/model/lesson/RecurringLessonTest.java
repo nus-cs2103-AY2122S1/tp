@@ -22,7 +22,7 @@ class RecurringLessonTest {
         Lesson lesson = new RecurringLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
             new TimeRange(TIME_RANGE),
             new Subject(SUBJECT), HOMEWORK);
-        assertEquals(LocalDate.now(), lesson.getNextDate().getLocalDate());
+        assertEquals(LocalDate.now(), lesson.getDisplayDate().getLocalDate());
     }
 
 

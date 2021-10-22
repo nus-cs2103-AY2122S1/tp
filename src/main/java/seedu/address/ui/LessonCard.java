@@ -36,8 +36,7 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
         title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
-        date.setText("Date: " + (
-                lesson.isRecurring() ? lesson.getNextDate().value : lesson.getStartDate().value));
+        date.setText("Date: " + lesson.getDisplayDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         lesson.getHomework().stream()
             .sorted(Comparator.comparing(homework -> homework.description))
