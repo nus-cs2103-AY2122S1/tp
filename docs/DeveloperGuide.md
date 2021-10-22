@@ -3,7 +3,36 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents {:toc}
+* Table of Contents
+    * [Acknowledgements](#acknowledgements)
+    * [Setting up & getting started](#setting-up--getting-started)
+    * [Design](#design)
+        * [Architecture](#architecture)
+        * [UI component](#ui-component)
+        * [Logic component](#logic-component)
+        * [Model component](#model-component)
+        * [Storage component](#storage-component)
+        * [Common classes](#common-classes)
+    * [Implementation](#implementation)
+        * [Add Client/Product Feature](#add-clientproduct-feature)
+        * [Delete Client/Product Feature](#deleting-a-clientproduct)
+        * [Edit Client/Product Feature](#edit-clientproduct-feature)
+        * [Find Client/Product Feature](#find-clientproduct-feature)
+        * [View Client/Product Feature](#view-clientproduct-feature)
+        * [Command History Feature](#command-history-feature)
+        * [\[Proposed\] Undo/Redo Feature](#proposed-undoredo-feature)
+        * [\[Proposed\] Data archiving](#proposed-data-archiving)
+    * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    * [Appendix: Requirements](#appendix-requirements)
+        * [Product scope](#product-scope)
+        * [User stories](#user-stories)
+        * [Use cases](#use-cases)
+        * [Non-Functional Requirements](#non-functional-requirements)
+        * [Glossary](#glossary)
+    * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+        * [Launch and shutdown](#launch-and-shutdown)
+        * [Deleting a client/product](#deleting-a-clientproduct)
+        * [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -14,7 +43,7 @@ title: Developer Guide
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Setting up, getting started**
+## **Setting up & getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
@@ -116,8 +145,8 @@ Here's a (partial) class diagram of the `Logic` component:
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddClientCommand`) which is
-   executed by the `LogicManager`.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddClientCommand`)
+   which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -128,8 +157,8 @@ call.
 
 <div markdown="span" class="alert alert-info">
 
-:information_source: **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due to a
-limitation of PlantUML, the lifeline reaches the end of diagram.
+:information_source: **Note:** The lifeline for `DeleteClientCommandParser` should end at the destroy marker (X) but due
+to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
@@ -140,10 +169,11 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 How the parsing works:
 
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a
-  placeholder for the specific command name e.g., `AddClientCommandParser`) which uses the other classes shown above to parse
-  the user command and create a `XYZCommand` object (e.g., `AddClientCommand`) which the `AddressBookParser` returns back as
-  a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddClientCommandParser`, `DeleteClientCommandParser`, ...) inherit from the `Parser`
+  placeholder for the specific command name e.g., `AddClientCommandParser`) which uses the other classes shown above to
+  parse the user command and create a `XYZCommand` object (e.g., `AddClientCommand`) which the `AddressBookParser`
+  returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddClientCommandParser`, `DeleteClientCommandParser`, ...) inherit from
+  the `Parser`
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -152,7 +182,6 @@ How the parsing works:
 [`Model.java`](https://github.com/AY2122S1-CS2103T-T12-1/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
-
 
 The `Model` component,
 
@@ -203,14 +232,14 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Add Client/Product Feature
 
-The add feature adds a new `Client` or `Product` with details into the application. The commands are
-composed of a keyword `add` followed by `-c` for adding clients and `-p` for adding products.
+The add feature adds a new `Client` or `Product` with details into the application. The commands are composed of a
+keyword `add` followed by `-c` for adding clients and `-p` for adding products.
 
 Input the command through `MainWindow` of the UI component, which will pass the input string to
 `LogicManager`. In `LogicManager`, the `parseCommand` method in `AddressBookParser` will be called, depending on the
 command word, the arguments will be used in `AddClientCommandParser` or `AddProductCommandParser` class for parsing.
-The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the
-execution, data added will be saved to storage.
+The `parse` method will return the result as a `Command`, which will be executed in `LogicManager`. After the execution,
+data added will be saved to storage.
 
 For `AddClientCommandParser`, a `Model` is needed as it helps to check whether a string representing an `Order` is
 valid.
@@ -230,57 +259,6 @@ The flow of the sequence diagram would be the same for adding `Products`, but th
     * Pros : Adds multiple clients or products in one command
     * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
       be done through the`edit` command (requires the user to memorise the IDs)
-
-### Edit Client/Product Feature
-
-This feature allows edits the details of a `Client` or `Product` of their choice. When editing a `Client` or
-`Product`, at least 1 field is required to be edited.
-
-The input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
-`LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
-`EditClientCommandParser`, parsing the inputs and returning a `EditClientCommand`. The command will then be executed in
-`LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of address
-book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display feedback of
-the `CommandResult` to the user.
-
-The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
-
-![Interactions Inside the Logic Component for the `edit -c 1 -n Sora` Command](images/EditClientSequenceDiagram.png)
-
-#### Design Considerations
-
-**Aspect : How `edit` may be executed**
-
-* **Alternative 1 (current choice)** : User can edit either a client or a product at a time
-    * Pros : Focus on editing a particular client or product
-    * Cons : Unable to edit multiple clients or products at the same time
-* **Alternative 2** : User can edit multiple clients or products
-    * Pros : Saves time if editing a field in all clients or products to the same value
-    * Cons : More complex code which would lead to higher amount of error
-
-### View Client/Product Feature
-
-This feature views the details of the `Client` or `Product` of their choice. When viewing a `Client`,
-more details such as `Products` bought before, will be visible to the user. Input is first handled and
-retrieved by `MainWindow` in the UI component before being passed to the `LogicManager` to execute.
-
-First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
-the inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
-`CommandResult` which will be returned to the user. The flow of the sequence diagram would be the same for viewing
-`Products`, but the UI displayed will be different.
-
-![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
-
-#### Design Considerations
-
-**Aspect : How `view` may be executed**
-
-* **Alternative 1 (current choice)** : User can view either a client or product
-    * Pros : Focus on a particular client or product
-    * Cons : Unable to view multiple clients or products
-* **Alternative 2** : User can view multiple clients or products
-    * Pros : Easier comparisons between clients or products
-    * Cons : More complex code which would lead to higher amount of error
 
 ### Delete Client/Product Feature
 
@@ -309,6 +287,33 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
     * Pros : Deletion of multiple clients or products at the same time
     * Cons : More complex code which would lead to higher amount of error
 
+### Edit Client/Product Feature
+
+This feature allows edits the details of a `Client` or `Product` of their choice. When editing a `Client` or
+`Product`, at least 1 field is required to be edited.
+
+The input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+`LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
+`EditClientCommandParser`, parsing the inputs and returning a `EditClientCommand`. The command will then be executed in
+`LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of address
+book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display feedback of
+the `CommandResult` to the user.
+
+The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `edit -c 1 -n Sora` Command](images/EditClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `edit` may be executed**
+
+* **Alternative 1 (current choice)** : User can edit either a client or a product at a time
+    * Pros : Focus on editing a particular client or product
+    * Cons : Unable to edit multiple clients or products at the same time
+* **Alternative 2** : User can edit multiple clients or products
+    * Pros : Saves time if editing a field in all clients or products to the same value
+    * Cons : More complex code which would lead to higher amount of error
+
 ### Find Client/Product Feature
 
 This feature finds a `Client` or `Product` based on their `name`.
@@ -330,19 +335,44 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
 * **Alternative 1 (current choice)** : User can find a client/product by their name
     * Pros : Focus on finding a particular client or product
     * Cons : Unable to find clients or products without name
-* **Alternative 2** : Find clients by their details such as name, address, email, etc. and products by their
-  name, price, etc.
+* **Alternative 2** : Find clients by their details such as name, address, email, etc. and products by their name,
+  price, etc.
     * Pros : Able to quickly find clients or products if the respective name cannot be remembered at the moment
+    * Cons : More complex code which would lead to higher amount of error
+
+### View Client/Product Feature
+
+This feature views the details of the `Client` or `Product` of their choice. When viewing a `Client`, more details such
+as `Products` bought before, will be visible to the user. Input is first handled and retrieved by `MainWindow` in the UI
+component before being passed to the `LogicManager` to execute.
+
+First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
+the inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
+`CommandResult` which will be returned to the user. The flow of the sequence diagram would be the same for viewing
+`Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `view` may be executed**
+
+* **Alternative 1 (current choice)** : User can view either a client or product
+    * Pros : Focus on a particular client or product
+    * Cons : Unable to view multiple clients or products
+* **Alternative 2** : User can view multiple clients or products
+    * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
 
 ### Command History Feature
 
 This feature allows navigation to previous commands using `↑` and `↓` keys.
 
-The command histories are stored in an `ArrayList<String>`, as well as with the help of a `Index`. For every input, it is stored into the `ArrayList`. `Index` begins at the end of the `ArrayList`. When `↑` is pressed,
-previous command will be shown till no more available. `↓` is used to go back to the next command. When the
-last and latest command stored in `ArrayList` is reached, the next `↓` will clear the command input field. At any time, user can
-choose to just stop and proceed on to edit or input the current history command. 
+The command histories are stored in an `ArrayList<String>`, as well as with the help of a `Index`. For every input, it
+is stored into the `ArrayList`. `Index` begins at the end of the `ArrayList`. When `↑` is pressed, previous command will
+be shown till no more available. `↓` is used to go back to the next command. When the last and latest command stored
+in `ArrayList` is reached, the next `↓` will clear the command input field. At any time, user can choose to just stop
+and proceed on to edit or input the current history command.
 
 ### \[Proposed\] Undo/Redo Feature
 
