@@ -124,7 +124,6 @@ public class EditTaskCommand extends EditCommand {
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
             }
         }
-        module.setTaskList(moduleTaskList);
         throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, editTaskDescriptor.taskId));
     }
 
