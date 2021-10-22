@@ -60,7 +60,7 @@ public class CommandTestUtil {
     public static final String INVALID_NAME = "Cake$";
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + INVALID_NAME; // '&' not allowed in names
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_ID_BAGEL = " " + PREFIX_ID + "231";
+    public static final String INVALID_ID_BAGEL = " " + PREFIX_ID + "231a";
     public static final String INVALID_ID_BAGEL_2 = " " + PREFIX_ID + "-123232";
     public static final String INVALID_COUNT_FORMAT = " " + PREFIX_COUNT + "abc";
     public static final String INVALID_COUNT_VALUE = " " + PREFIX_COUNT + "-14";
