@@ -161,9 +161,14 @@ This section describes some noteworthy details on how certain features are imple
 3. The `DeleteCommandParser` then figures out the type of object to delete, in this case a `Module` object as indicated by `module`.
 4. The `DeleteModuleCommandParser` will wrap the module name in a `ModuleName` object and pass it into a `DeleteModuleCommand`.
 5. This results in a `DeleteModuleCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
-6. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
-7. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
-8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+![How the command `delete module m/CS2103` is parsed in the Logic component](images/DeleteModuleSequenceDiagram1.png)
+7. The `DeleteModuleCommand` communicates with the `Model` when it is executed.
+8. The `Model` will look for a `Module` with the specified `ModuleName` and delete it.
+9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+![How the `DeleteModuleCommand` is executed](images/DeleteModuleSequenceDiagram2.png)
+
 
 ### Edit Module
 
@@ -188,8 +193,6 @@ This section describes some noteworthy details on how certain features are imple
 7. The `Model` will add a new `Module` with the new `ModuleName`. 
 8. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteModuleSequenceDiagram.png)
-
 ### Delete Student
 
 1. When the `Logic` is called upon to execute `delete student m/CS2103 i/A1234567A`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
@@ -201,8 +204,6 @@ This section describes some noteworthy details on how certain features are imple
 7. The `Model` will look for a `Module` with the specified `ModuleName`.
 8. The `Module` with the specified `ModuleName` will then look for the student with the specified `StudentId` and delete the student.
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
-
-![Interactions Inside the Logic Component for the `delete student` Command](images/DeleteStudentSequenceDiagram.png)
 
 ### Add Task
 
