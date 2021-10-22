@@ -205,6 +205,8 @@ This section describes some noteworthy details on how certain features are imple
 8. The `Module` with the specified `ModuleName` will then look for the student with the specified `StudentId` and delete the student.
 9. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
+![Interactions Inside the Logic Component for the `delete student` Command](images/DeleteStudentSequenceDiagram.png)
+
 ### Add Task
 
 1. When `Logic` is called upon to execute the user input `add task m/CS2103 a/assignment1 d/20/10/2021`, it uses the 
