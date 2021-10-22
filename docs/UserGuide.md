@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-**Sellah** is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is an address
-book that contains the contact information and order details related to clients and partners.
+**Sellah** is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is used to keep
+track of the contact information of clients and details of the products in inventory.
 
 * Table of Contents
     * [Quick Start](#quick-start)
@@ -19,14 +19,15 @@ book that contains the contact information and order details related to clients 
         * [List](#listing-list)
         * [View](#viewing-view)
         * [Command History](#command-history)
+        * [Saving the data](#saving-the-data)
+        * [Editing the data file](#editing-the-data-file)
         * [Statistics (Coming Soon)](#statistics-stat-coming-soon)
-        * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have `Java 11` or above installed in your Computer. You can download it from
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
@@ -47,7 +48,7 @@ book that contains the contact information and order details related to clients 
 
 <div markdown="block" class="alert alert-info">
 
-**Notes about the command format:**<br>
+**:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add NAME`, `NAME` is a parameter which can be used as `add Ben`.
@@ -72,7 +73,7 @@ book that contains the contact information and order details related to clients 
 
 ### Help: `help`
 
-Displays help message to the user.
+Displays a help message.
 
 Format: `help`
 
@@ -97,8 +98,8 @@ Notes:
 
 * Adds a client with name, phone number and optional email, address and orders.
 * Adds a product with name, unit price and optional quantity.
-* The user will be informed if the format of a field is incorrect, e.g. input `ten dollars` for the field `UNIT_PRICE`.
-* The user will be informed if the client/product to be added already exits.
+* An error message will be displayed if the format of a field is incorrect, e.g. input `ten dollars` for the field `UNIT_PRICE`.
+* A message will be displayed if the client/product to be added already exits.
 
 Examples:
 
@@ -120,7 +121,7 @@ Notes:
 * Deletes the client/product based on the client/product’s `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
-* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
+* An error message will be displayed if the client/product doesn't exist.
 
 Examples:
 
@@ -149,7 +150,7 @@ Notes:
 * Edits the client/product at the specified `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
-* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
+* An error message will be displayed if the client/product doesn't exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * `ORDER`s are identified by their `ID`s.
@@ -181,7 +182,7 @@ Notes:
 
 * Finds the client/product based on the `NAME` provided.
 * `NAME` provided must fully match the `NAME` in the application and can be case-insensitive.
-* User will be informed if there are no matching `NAME` in the application.
+* If there are no matching `NAME` in the application, an error message will be displayed
 
 Examples:
 
@@ -199,7 +200,7 @@ Format:
 
 Notes:
 
-* User will be informed if there are no clients/products in the application.
+* A message will be displayed if there are no clients/products in the application.
 
 Examples:
 
@@ -220,7 +221,7 @@ Notes:
 * Views the client/product at the specified `INDEX`.
     * The `INDEX` refers to the index shown in the displayed client/product list.
     * The `INDEX` **must be a positive integer** 1, 2, 3, ...
-* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
+* If the client/product doesn't exist, a display message is shown.
 
 Examples:
 
@@ -232,24 +233,40 @@ Expected Output: ![Ui](images/UiViewCommand.png)
 
 ### Command History:
 
-Allows the user to navigate to previous commands using `↑` and `↓` keys.
+Allows navigation to previous commands using `↑` and `↓` keys.
 
 Format:
 
 * Previous command: `↑`
 * Next command: `↓`
 
-Notes:
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
 
 * Pressing `↑` when the first command is currently displayed will do nothing.
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
+    
+</div>
+ 
+
+### Saving the data
+
+Sellah data are saved in the hard disk automatically after any command that changes the data. There is no need to 
+save manually.
+
+### Editing the data file
+
+Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. Advanced users are welcome to 
+update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Sellah will discard all data and start with an empty 
+data file at the next run.
+</div>
 
 ### Statistics: `stat` [coming soon]
-
-_Details coming soon ..._
-
-### Loading and Saving the data [coming soon]
 
 _Details coming soon ..._
 
@@ -257,11 +274,10 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: ...<br>
-**A**: ...<br>
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+the data of your previous Sellah home folder.<br>
 
-**Q**: ...<br>
-**A**: ...<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
