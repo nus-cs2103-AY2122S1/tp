@@ -1,14 +1,15 @@
 package seedu.fast.ui;
 
-import java.util.Comparator;
+import static seedu.fast.ui.UiUtil.ADDRESS_IMAGE;
+import static seedu.fast.ui.UiUtil.EMAIL_IMAGE;
+import static seedu.fast.ui.UiUtil.PHONE_IMAGE;
+import static seedu.fast.ui.UiUtil.TAG_IMAGE;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.fast.commons.util.Colors;
-import seedu.fast.commons.util.TagUtil;
+import javafx.scene.layout.VBox;
 import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Person;
 
@@ -36,13 +37,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private VBox phone;
     @FXML
-    private Label address;
+    private VBox address;
     @FXML
-    private Label email;
+    private VBox email;
     @FXML
-    private FlowPane tags;
+    private VBox tags;
     @FXML
     private Label remark;
     @FXML
@@ -64,13 +65,11 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        phone.getChildren().add(new ItemComponent(person.getPhone().value, PHONE_IMAGE));
+        address.getChildren().add(new ItemComponent(person.getAddress().value, ADDRESS_IMAGE));
+        email.getChildren().add(new ItemComponent(person.getEmail().value, EMAIL_IMAGE));
         remark.setText(person.getRemark().value);
-        person.getTags().stream()
-                .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(colorSelector(tag.tagName)));
+        tags.getChildren().add(new TagComponent(person.getTags(), TAG_IMAGE));
 
         appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
         appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTimeFormatted(), "Time",
@@ -78,38 +77,6 @@ public class PersonCard extends UiPart<Region> {
         appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
                 person.getAppointment().getDate()));
         appointmentCount.setText("Appointment: " + person.getCount());
-    }
-
-    /**
-     * Creates a Label with the given tag name.
-     * @param tagName The given tag name.
-     * @return Label with the given tag name and custom color.
-     */
-    public Label colorSelector(String tagName) {
-        Label temp = new Label(tagName);
-
-        switch (tagName.toUpperCase()) { //Todo: add more color tags & abstract out case names
-
-        case TagUtil.FRIENDS:
-            temp.setStyle(Colors.BLUE);
-            break;
-
-        case TagUtil.HIGH_PRIORITY:
-            temp.setStyle(Colors.RED);
-            break;
-
-        case TagUtil.MEDIUM_PRIORITY:
-            temp.setStyle(Colors.ORANGE);
-            break;
-
-        case TagUtil.LOW_PRIORITY:
-            temp.setStyle(Colors.GREEN);
-            break;
-
-        default:
-            temp.setStyle(Colors.GREY);
-        }
-        return temp;
     }
 
     /**
