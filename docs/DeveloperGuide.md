@@ -154,7 +154,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-
 ### Import feature
 
 The following activity diagram summarizes what happens when the user inputs an import command:
@@ -228,6 +227,7 @@ The following activity diagrams summarizes what happens when a user executes a c
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
 
+
 ### Add Allocation feature
 
 The `add alloc` feature allocates an existing student into a group.
@@ -251,7 +251,7 @@ Use case ends.
 
 ### Search feature
 
-The 'search' feature is allows user to filter student list by name, NUSNET ID, group, or tag. 
+The `search` feature is allows user to filter student list by name, NUSNET ID, group, or tag. 
 
 #### Implementation
 
@@ -259,10 +259,13 @@ The following diagram shows the search operation after user input `search -n Ale
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
+
 A Predicate<Student> object will be created for each search command. 
-It contains `test(Student student)` function which checks if the given student matches the list of keywords given.\n
+It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
+
 To support the differentiated search functionality for different identifiers, multiple classes extending from
 `Predicate<Student>` can be created, each with different implementation of `test(Student student)` function.
+
 * `NameContainsKeywordsPredicate`: checks if any word in the full name of student matches exactly any word in the
   given keywords. e.g. `Alex Yu` will match Alex Yeoh and Bernice Yu. Partial search is not supported
   e.g. `Han` will not match `Hans`.
@@ -278,9 +281,8 @@ The following diagram summarizes what happens after user input search command:
 ![SearchActivityDiagram](images/SearchActivityDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks if command is valid. Command is invalid if user input is empty, or if 
-user entered more or less than one parameter. 
-
-
+user entered more or less than one parameter.
+</div>
 
 
 #### Design considerations
