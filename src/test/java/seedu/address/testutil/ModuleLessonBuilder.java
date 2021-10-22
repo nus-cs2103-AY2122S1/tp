@@ -1,8 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.model.util.SampleDataUtil.getModuleCodeSet;
-
-import java.util.Set;
+import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
@@ -12,12 +10,12 @@ import seedu.address.model.person.Remark;
 
 public class ModuleLessonBuilder {
 
-    public static final Set<ModuleCode> DEFAULT_MODULE_CODE = getModuleCodeSet("CS2103 T17");
+    public static final ModuleCode DEFAULT_MODULE_CODE = parseModuleCode("CS2103 T17");
     public static final String DEFAULT_DAY = "2";
     public static final String DEFAULT_TIME = "15:00";
     public static final String DEFAULT_REMARK = "Location: COM1 113";
 
-    private Set<ModuleCode> moduleCode;
+    private ModuleCode moduleCode;
     private LessonDay lessonDay;
     private LessonTime lessonTime;
     private Remark remark;
@@ -36,7 +34,7 @@ public class ModuleLessonBuilder {
      * Initialises the ModuleClass with the data of {@code classToCopy}.
      */
     public ModuleLessonBuilder(ModuleLesson classToCopy) {
-        moduleCode = classToCopy.getModuleCodes();
+        moduleCode = classToCopy.getModuleCode();
         lessonDay = classToCopy.getDay();
         lessonTime = classToCopy.getTime();
         remark = classToCopy.getRemark();
@@ -46,7 +44,7 @@ public class ModuleLessonBuilder {
      * Sets the {@code moduleCode} of the {@code ModuleClass} that we are building.
      */
     public ModuleLessonBuilder withModuleCode(String moduleCode) {
-        this.moduleCode = getModuleCodeSet(moduleCode);
+        this.moduleCode = parseModuleCode(moduleCode);
         return this;
     }
 
