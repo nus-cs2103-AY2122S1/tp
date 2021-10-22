@@ -274,6 +274,22 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
+            <a href="#help-help">Help</a>
+        </td>
+        <td>
+            Display help message: <code>help</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#exit-exit">Exit</a>
+        </td>
+        <td>
+            Exit the program: <code>exit</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#adding-add">Add</a>
         </td>
         <td>
@@ -281,35 +297,7 @@ _Details coming soon ..._
             e.g., <code>add -c James Tan -pn 98765432 -e james.email@example.com -a 123, Clementi Rd</code><br>
             <br>
             Add a product: <code>add -p NAME -$ UNIT_PRICE [-q QUANTITY]</code><br>
-            e.g., <code>add -p pen -$ 10.0 -q 120</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="#editing-edit">Edit</a>
-        </td>
-        <td>
-            Edit a client: <code>edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]</code><br>
-            e.g., <code>edit -c 1 -n Ben</code> Edits the name of the client with <code>INDEX</code> of <code>1</code> to
-            <code>Ben</code>.<br>
-            <br>
-            Edit a product: <code>edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]</code><br>
-            e.g., <code>edit -p 3 -n Ben10 -q 20</code> Edits the name of the product with <code>INDEX</code> of
-            <code>3</code> to <code>Ben10</code> and the quantity to <code>20</code>.
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="#viewing-view">View</a>
-        </td>
-        <td>
-            View a client: <code>view -c INDEX</code><br>
-            e.g., <code>view -c 20</code> Views all the details of the client with <code>INDEX</code> of <code>20</code>
-            including id, name, phone number, email and address.<br>
-            <br>
-            View a product: <code>view -p INDEX</code><br>
-            e.g., <code>view -p 5</code> Views all the details of the product with <code>INDEX</code> of
-            <code>5</code> including id, name, unit price and quantity.
+            e.g., <code>add -p pen -$ 10.00 -q 120</code>
         </td>
     </tr>
     <tr>
@@ -319,7 +307,7 @@ _Details coming soon ..._
         <td>
             Delete a client: <code>delete -c INDEX</code><br>
             e.g., <code>delete -c 20</code> Deletes all the details of the client with <code>INDEX</code> of
-            <code>20</code> including id, name, phone number, email and address.<br>
+            <code>20</code> including id, name, phone number, email, address and orders.<br>
             <br>
             Delete a product: <code>delete -p INDEX</code><br>
             e.g., <code>delete -p 5</code> Deletes all the details of the product with <code>INDEX</code> of
@@ -329,14 +317,39 @@ _Details coming soon ..._
     </tr>
     <tr>
         <td>
+            <a href="#clear-everything-clear">Clear</a>
+        </td>
+        <td>
+            Removes all client and product data from the application: <code>clear</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#editing-edit">Edit</a>
+        </td>
+        <td>
+            Edit a client:
+            <code>edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...</code><br>
+            e.g., <code>edit -c 1 -n Ben</code> Edits the name of the client with <code>INDEX</code> of <code>1</code>
+            to <code>Ben</code>.<br>
+            <br>
+            Edit a product: <code>edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]</code><br>
+            e.g., <code>edit -p 3 -n Ben10 -q 20</code> Edits the name of the product with <code>INDEX</code> of
+            <code>3</code> to <code>Ben10</code> and the quantity to <code>20</code>.
+        </td>
+    </tr>
+    <tr>
+        <td>
             <a href="#finding-find">Find</a>
         </td>
         <td>
             Find clients: <code>find -c NAME</code><br>
-            e.g., <code>find -c john</code> Shows a list of all clients with the <code>NAME</code> <code>john</code> in the application.<br>
+            e.g., <code>find -c john</code> Shows a list of all clients with the <code>NAME</code> <code>john</code> in
+            the application.<br>
             <br>
             Find products: <code>find -p NAME</code> <br>
-            e.g. <code>find -c phone</code> Shows a list of all products with the <code>NAME</code> <code>phone</code> in the application.
+            e.g. <code>find -p phone</code> Shows a list of all products with the <code>NAME</code> <code>phone</code>
+            in the application.
         </td>
     </tr>
     <tr>
@@ -344,11 +357,22 @@ _Details coming soon ..._
             <a href="#listing-list">List</a>
         </td>
         <td>
-            List all client: <code>list -c</code><br>
-            e.g., <code>list -c</code> Lists all the clients in the application.<br>
+            List all clients: <code>list -c</code><br>
+            List all products: <code>list -p</code>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="#viewing-view">View</a>
+        </td>
+        <td>
+            View a client: <code>view -c INDEX</code><br>
+            e.g., <code>view -c 20</code> Views all the details of the client with <code>INDEX</code> of <code>20</code>
+            including id, name, phone number, email, address and orders.<br>
             <br>
-            List all product: <code>list -p</code><br>
-            e.g., <code>list -p</code> Lists all the products in the application.
+            View a product: <code>view -p INDEX</code><br>
+            e.g., <code>view -p 5</code> Views all the details of the product with <code>INDEX</code> of
+            <code>5</code> including id, name, unit price and quantity.
         </td>
     </tr>
     <tr>
@@ -357,16 +381,9 @@ _Details coming soon ..._
         </td>
         <td>
             Allows the user to navigate to previous commands using <code>↑</code> and <code>↓</code> keys.<br>
+            <br>
             Previous command: <code>↑</code><br>
             Next command: <code>↓</code>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a href="#exiting-exit">Exit</a>
-        </td>
-        <td>
-            Exit the program: <code>exit</code>
         </td>
     </tr>
 </table>
