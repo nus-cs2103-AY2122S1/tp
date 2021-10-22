@@ -6,7 +6,7 @@
     "address" : "Blk 30 Geylang Street 29, #06-40",
     "remark" : "$remark is gone!",
     "nationality": "Singaporean",
-    "tutorialGroup": "09",
+    "tutorialGroup": "09", //tutorialGroup must start with "M/T/W/F"
     "socialHandle": "@asdas",
     "tagged" : [ "friends" ]
   }, {
@@ -16,7 +16,7 @@
     "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
     "remark" : "",
     "nationality": "Malaysian",
-    "tutorialGroup": "09",
+    "tutorialGroup": "09", //tutorialGroup must start with "M/T/W/F"
     "socialHandle": "@asdas",
     "tagged" : [ "colleagues", "friends" ]
   } ]
