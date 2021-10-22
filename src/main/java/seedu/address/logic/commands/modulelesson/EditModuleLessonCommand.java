@@ -43,7 +43,7 @@ public class EditModuleLessonCommand extends Command {
             + "Example: edit 1 "
             + PREFIX_MODULE_CODE + "CS2103T T09 "
             + PREFIX_DAY + "2 "
-            + PREFIX_TIME + "1000-1200";
+            + PREFIX_TIME + "10:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

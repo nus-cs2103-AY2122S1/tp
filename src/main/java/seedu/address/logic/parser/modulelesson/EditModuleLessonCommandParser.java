@@ -63,6 +63,10 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
             editLessonDescriptor.setRemark(ParserUtil.parseRemark(argumentMultimap.getValue(PREFIX_REMARK).get()));
         }
 
+        if (!editLessonDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditModuleLessonCommand.MESSAGE_NOT_EDITED);
+        }
+
         return new EditModuleLessonCommand(index, editLessonDescriptor);
     }
 
