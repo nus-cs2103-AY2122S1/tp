@@ -312,9 +312,9 @@ Execution of the `AddClassCommand`
 * Alternative 1 (current choice): Use two separate lists to store students and tutorial classes
     * Pros: Faster, simpler command executions for student and tutorial class commands.
     Easier to maintain overall. Therefore, all students and all tutorial classes can be accessed independent of each other.
-    * Cons: Class specific student commands are slower. For example a user is required to 'viewc' in order to filter just the students in the class,
+    * Cons: Class specific student commands are slower. For example a user is required to `viewc` in order to filter just the students in the class,
     increasing the overall time
-* Alternative 2: Nesting for students within Tutorial Class
+* Alternative 2: Nesting of students within Tutorial Class
     * Pros: Faster in class specific student commands and students are better organised.
     * Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
 
@@ -392,6 +392,7 @@ Execution of the `AddMarkCommand`
 
 ### ClassCode Implementation Feature
 (Contributed by Zhou Yirui)
+
 ClassMATE allows user to assign student to a tutorial class using a ClassCode. A user is able to:
 
 1. Add ClassCode to a student
