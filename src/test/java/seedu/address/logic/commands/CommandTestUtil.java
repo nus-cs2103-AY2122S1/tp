@@ -17,8 +17,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.PositionBook;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.TitleContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -36,6 +39,11 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+
+    public static final String VALID_TITLE_DATAENGINEER = "Data Engineer";
+    public static final String VALID_TITLE_DATASCIENTIST = "Data Scientist";
+    public static final String VALID_DESCRIPTION_DATAENGINEER = "Create data pipeline for service";
+    public static final String VALID_DESCRIPTION_DATASCIENTIST = "Apply state-of-the-art machine learning models";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -111,6 +119,24 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     */
+    public static void assertPositionCommandFailure(Command command, Model actualModel, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        PositionBook expectedPositionBook = new PositionBook(actualModel.getPositionBook());
+        List<Position> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPositionList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedPositionBook, actualModel.getPositionBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPositionList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -123,6 +149,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the position at the given {@code targetIndex} in the
+     * {@code model}'s position book.
+     */
+    public static void showPositionAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredPositionList().size());
+
+        Position position = model.getFilteredPositionList().get(targetIndex.getZeroBased());
+        final String[] splitName = position.getTitle().fullTitle.split("\\s+");
+        model.updateFilteredPositionList(new TitleContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(2, model.getFilteredPositionList().size());
     }
 
 }

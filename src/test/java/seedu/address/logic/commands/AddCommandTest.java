@@ -19,8 +19,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.Name;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
+import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -104,12 +110,32 @@ public class AddCommandTest {
         }
 
         @Override
+        public Path getPositionBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Path getApplicantBookFilePath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasApplicantWithName(Name applicantName) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -134,7 +160,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteApplicant(Applicant target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setPerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setApplicant(Applicant target, Applicant editedApplicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPosition(Position target, Position editedPosition) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -144,7 +185,57 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Applicant> getFilteredApplicantList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPosition(Position position) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPositionWithTitle(Title toCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setPositionBook(ReadOnlyPositionBook positionBook) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyPositionBook getPositionBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPosition(Position toAdd) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deletePosition(Position positionToDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Position> getFilteredPositionList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredPositionList(Predicate<Position> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
