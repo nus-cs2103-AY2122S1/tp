@@ -11,7 +11,7 @@ public class TaskDeadline {
 
 
     public static final String MESSAGE_CONSTRAINTS =
-            "TaskDeadline must only contain alphanumeric characters";
+            "TaskDeadline must only contain alphanumeric characters and dashes";
     public static final String VALIDATION_REGEX = "[a-zA-Z0-9-]*";
     public final String value;
 

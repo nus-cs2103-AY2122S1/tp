@@ -40,7 +40,7 @@ public class EditTaskCommand extends EditCommand {
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
-            + PREFIX_TASK_ID + "1 "
+            + PREFIX_TASK_ID + "T1 "
             + PREFIX_TASK_NAME + "V13 "
             + PREFIX_TASK_DEADLINE + "21 Oct 2021 "
             + "(edits all fields)";
