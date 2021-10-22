@@ -42,7 +42,7 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
-     * Sets the student's {@code Phone} of the {@code EditLessonDescriptor} that we are building.
+     * Sets the student's {@code Capacity} of the {@code EditLessonDescriptor} that we are building.
      */
     public EditLessonDescriptorBuilder withCapacity(String capacity) {
         descriptor.setCapacity(new Capacity(capacity));
@@ -50,7 +50,7 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code ParentName} of the {@code EditLessonDescriptor} that we are building.
+     * Sets the {@code Price} of the {@code EditLessonDescriptor} that we are building.
      */
     public EditLessonDescriptorBuilder withPrice(String price) {
         descriptor.setPrice(new Price(price));
@@ -58,7 +58,7 @@ public class EditLessonDescriptorBuilder {
     }
 
     /**
-     * Sets the parent's {@code Phone} of the {@code EditLessonDescriptor} that we are building.
+     * Sets the parent's {@code Timing} of the {@code EditLessonDescriptor} that we are building.
      */
     public EditLessonDescriptorBuilder withTiming(String timing) {
         descriptor.setTiming(new Timing(timing));

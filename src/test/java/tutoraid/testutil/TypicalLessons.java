@@ -80,6 +80,13 @@ public class TypicalLessons {
             .withTiming(VALID_TIMING_SCIENCE_TWO)
             .build();
 
+    public static final Lesson MATHS_TWO_NO_STUDENTS = new LessonBuilder()
+            .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+            .withCapacity(VALID_CAPACITY_MATHS_TWO)
+            .withPrice(VALID_PRICE_MATHS_TWO)
+            .withTiming(VALID_TIMING_MATHS_TWO)
+            .build();
+
     private TypicalLessons() {
     } // prevents instantiation
 
@@ -94,7 +101,22 @@ public class TypicalLessons {
         return lb;
     }
 
+    /**
+     * Returns an {@code LessonBook} with all the typical lessons but no students.
+     */
+    public static LessonBook getTypicalLessonBookWithoutStudents() {
+        LessonBook lb = new LessonBook();
+        for (Lesson lesson : getTypicalLessonsWithoutStudents()) {
+            lb.addLesson(lesson);
+        }
+        return lb;
+    }
+
     public static List<Lesson> getTypicalLessons() {
         return new ArrayList<>(Arrays.asList(MATHS_ONE, SCIENCE_ONE));
+    }
+
+    public static List<Lesson> getTypicalLessonsWithoutStudents() {
+        return new ArrayList<>(List.of(MATHS_TWO_NO_STUDENTS));
     }
 }

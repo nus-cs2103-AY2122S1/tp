@@ -15,9 +15,11 @@ import tutoraid.model.LessonBook;
 import tutoraid.model.Model;
 import tutoraid.model.StudentBook;
 import tutoraid.model.lesson.Lesson;
+import tutoraid.model.lesson.LessonNameContainsKeywordsPredicate;
 import tutoraid.model.student.NameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.EditLessonDescriptorBuilder;
 import tutoraid.testutil.EditStudentDescriptorBuilder;
 
 /**
@@ -104,6 +106,8 @@ public class CommandTestUtil {
 
     public static final EditStudentCommand.EditStudentDescriptor DESC_AMY;
     public static final EditStudentCommand.EditStudentDescriptor DESC_BOB;
+    public static final EditLessonCommand.EditLessonDescriptor DESC_MATH;
+    public static final EditLessonCommand.EditLessonDescriptor DESC_SCIENCE;
 
     static {
         DESC_AMY = new EditStudentDescriptorBuilder()
@@ -117,6 +121,18 @@ public class CommandTestUtil {
                 .withStudentPhone(VALID_STUDENT_PHONE_BOB)
                 .withParentPhone(VALID_PARENT_PHONE_BOB)
                 .withParentName(VALID_PARENT_NAME_BOB)
+                .build();
+        DESC_MATH = new EditLessonDescriptorBuilder()
+                .withLessonName(VALID_LESSON_NAME_MATHS_TWO)
+                .withCapacity(VALID_CAPACITY_MATHS_TWO)
+                .withPrice(VALID_PRICE_MATHS_TWO)
+                .withTiming(VALID_TIMING_MATHS_TWO)
+                .build();
+        DESC_SCIENCE = new EditLessonDescriptorBuilder()
+                .withLessonName(VALID_LESSON_NAME_SCIENCE_TWO)
+                .withCapacity(VALID_CAPACITY_SCIENCE_TWO)
+                .withPrice(VALID_PRICE_SCIENCE_TWO)
+                .withTiming(VALID_TIMING_SCIENCE_TWO)
                 .build();
     }
 
@@ -180,6 +196,19 @@ public class CommandTestUtil {
         model.updateFilteredStudentList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredStudentList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the lesson at the given {@code targetIndex} in the
+     * {@code model}'s lesson book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredLessonList().size());
+        Lesson lesson = model.getFilteredLessonList().get(targetIndex.getZeroBased());
+        final String[] splitName = lesson.getLessonName().lessonName.split("\\s+");
+        model.updateFilteredLessonList(new LessonNameContainsKeywordsPredicate(List.of(splitName[0])));
+
+        assertEquals(1, model.getFilteredLessonList().size());
     }
 
 }

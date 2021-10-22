@@ -178,7 +178,6 @@ public class ModelManager implements Model {
     @Override
     public void setLesson(Lesson target, Lesson editedLesson) {
         CollectionUtil.requireAllNonNull(target, editedLesson);
-
         lessonBook.setLesson(target, editedLesson);
     }
 
