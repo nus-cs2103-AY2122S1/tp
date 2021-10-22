@@ -162,6 +162,14 @@ The workflow of the Add command is shown in the Activity diagram illustrated bel
 
 ![AddActivityDiagram](images/logic/commands/addcommand/AddActivityDiagram.png)
 
+# Delete Command
+
+This command allows the user to delete residents or events to the SafeFor(H)All applicaiton depending on the currently active tab.
+
+The workflow of the Delete command is shown in the Activity diagram illustrated below.
+
+![AddActivityDiagram](images/logic/commands/deletecommand/DeleteActivityDiagram.png)
+
 #### Design considerations:
 
 **Aspect: Optional `LastDate` fields when adding residents** 
