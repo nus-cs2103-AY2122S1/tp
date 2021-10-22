@@ -80,7 +80,9 @@ public class Reservation {
      */
     @Override
     public String toString() {
-        return String.format("phone: %s, numberOfPeople: %s, time: %s, table: %s",
-                phone, numberOfPeople, dateTime.format(DATE_TIME_PRINTING_FORMAT), table);
+        return String.format(
+                "phone: %s, numberOfPeople: %s, time: %s, table: %s",
+                phone, numberOfPeople, dateTime.format(DATE_TIME_PRINTING_FORMAT), table
+        );
     }
 }
