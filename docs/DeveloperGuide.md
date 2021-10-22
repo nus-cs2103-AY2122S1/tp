@@ -259,8 +259,7 @@ The following diagram shows the search operation after user input `search -n Ale
 
 ![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
-
-A Predicate<Student> object will be created for each search command. 
+A `Predicate<Student>` object will be created for each search command. 
 It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
 
 To support the differentiated search functionality for different identifiers, multiple classes extending from
