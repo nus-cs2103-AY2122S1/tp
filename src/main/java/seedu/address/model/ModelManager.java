@@ -167,6 +167,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void sortMemberList() {
+        addressBook.sortMemberList();
+    }
+
+    @Override
     public void resetMemberList() {
         addressBook.resetMemberList();
     }

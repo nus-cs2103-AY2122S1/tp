@@ -60,6 +60,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.facilities.setFacilities(facilities);
     }
 
+    public void sortMemberList() {
+        this.persons.sortMembers();
+    }
     /**
      * Clears the contents of the member list.
      */

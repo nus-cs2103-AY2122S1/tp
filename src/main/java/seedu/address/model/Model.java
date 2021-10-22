@@ -141,6 +141,11 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
+     * Sorts the member list in alphabetical order.
+     */
+    void sortMemberList();
+
+    /**
      * Clears the contents of the member list.
      */
     void resetMemberList();
