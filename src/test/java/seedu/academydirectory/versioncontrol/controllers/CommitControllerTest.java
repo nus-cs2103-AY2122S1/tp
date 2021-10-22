@@ -1,17 +1,24 @@
 package seedu.academydirectory.versioncontrol.controllers;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.testutil.TypicalCommits.COMMIT1;
+import static seedu.academydirectory.testutil.TypicalCommits.COMMIT2;
+import static seedu.academydirectory.testutil.TypicalCommits.COMMIT3;
+import static seedu.academydirectory.testutil.TypicalCommits.COMMIT4;
+import static seedu.academydirectory.testutil.TypicalCommits.COMMIT5;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.academydirectory.testutil.TypicalCommits;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
@@ -95,5 +102,72 @@ public class CommitControllerTest {
         assertEquals(Commit.NULL, actualCommit);
 
         assertTrue(TESTING_DIR.toFile().delete());
+    }
+
+    @Test
+    public void retrieveCommitHistory() {
+        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+        Commit rootCommit = TypicalCommits.COMMIT2;
+        Commit childCommit = TypicalCommits.COMMIT3;
+
+        // With no end point
+        Commit[] actualCommitHistory = commitController.retrieveCommitHistory(childCommit).toArray(Commit[]::new);
+        Commit[] expectedCommitHistory = new Commit[]{childCommit, rootCommit};
+        assertArrayEquals(expectedCommitHistory, actualCommitHistory);
+
+        // With endpoint
+        actualCommitHistory = commitController.retrieveCommitHistory(childCommit, rootCommit).toArray(Commit[]::new);
+        expectedCommitHistory = new Commit[]{childCommit};
+        assertArrayEquals(expectedCommitHistory, actualCommitHistory);
+
+        // Same Commit -> Empty array
+        actualCommitHistory = commitController.retrieveCommitHistory(childCommit, childCommit).toArray(Commit[]::new);
+        assertEquals(0, actualCommitHistory.length);
+
+        actualCommitHistory = commitController.retrieveCommitHistory(rootCommit, rootCommit).toArray(Commit[]::new);
+        assertEquals(0, actualCommitHistory.length);
+
+        // Start at Commit.Null -> Empty array
+        actualCommitHistory = commitController.retrieveCommitHistory(Commit.NULL, childCommit).toArray(Commit[]::new);
+        assertEquals(0, actualCommitHistory.length);
+    }
+
+    @Test
+    public void findLca() {
+        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+        // same commits
+        assertEquals(COMMIT2, commitController.findLca(COMMIT2, COMMIT2));
+
+        // LCA to Null commit is Null Commit
+        assertEquals(Commit.NULL, commitController.findLca(COMMIT5, Commit.NULL));
+        assertEquals(Commit.NULL, commitController.findLca(Commit.NULL, COMMIT5));
+
+        // start with same depth
+        Commit leftChildCommit = TypicalCommits.COMMIT3;
+        Commit rightChildCommit = COMMIT4;
+        assertEquals(COMMIT2, commitController.findLca(leftChildCommit, rightChildCommit));
+
+        // start with different depth
+        rightChildCommit = TypicalCommits.COMMIT5;
+        assertEquals(COMMIT2, commitController.findLca(leftChildCommit, rightChildCommit));
+
+        leftChildCommit = TypicalCommits.COMMIT5;
+        rightChildCommit = TypicalCommits.COMMIT3;
+        assertEquals(COMMIT2, commitController.findLca(leftChildCommit, rightChildCommit));
+    }
+
+    @Test
+    public void getHighestAncestor() {
+        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+
+        // No ancestor in range -> Commit.NULL
+        assertEquals(Commit.NULL, commitController.getHighestAncestor(COMMIT2, COMMIT2));
+
+        // No nodes between start Commit and endExclusive -> return start Commit
+        assertEquals(COMMIT3, commitController.getHighestAncestor(COMMIT3, COMMIT2));
+        assertEquals(COMMIT4, commitController.getHighestAncestor(COMMIT4, COMMIT2));
+
+        // Return highest ancestor
+        assertEquals(COMMIT4, commitController.getHighestAncestor(COMMIT5, COMMIT2));
     }
 }

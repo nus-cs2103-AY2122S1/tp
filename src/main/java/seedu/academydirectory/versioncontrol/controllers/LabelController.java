@@ -25,8 +25,8 @@ public class LabelController extends Controller<Label> {
     }
 
     @Override
-    public List<String> getWriteableFormat(Label vcObject) {
-        return List.of("ref: " + vcObject.getHash());
+    public List<String> getWriteableFormat(Label label) {
+        return List.of("ref: " + label.getCommitSupplier().get().getHash());
     }
 
     /**

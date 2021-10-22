@@ -9,7 +9,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.function.Supplier;
@@ -37,11 +36,10 @@ public class CommitController extends Controller<Commit> {
         String author = "Author: " + System.getProperty("user.name");
         String date = "Date: " + df.format(commit.getDate());
         String message = "Message: " + commit.getMessage();
-        String noop = "";
         String parent = "Parent: " + commit.getParentSupplier().get().getHash();
         String treeRef = "TreeRef: " + commit.getTreeSupplier().get().getHash();
 
-        return List.of(author, date, message, noop, parent, treeRef);
+        return List.of(author, date, message, parent, treeRef);
     }
 
     /**
@@ -125,18 +123,6 @@ public class CommitController extends Controller<Commit> {
         return new Commit(hash, author, date, message, parentCommitSupplier, treeSupplier);
     }
 
-    /**
-     * Generate a new file with the given name corresponding to the given commit
-     * @param name filename
-     * @param commit Commit to be written
-     * @return written Commit
-     * @throws IOException thrown if unable to write
-     */
-    public Commit generate(String name, Commit commit) throws IOException {
-        write(name, commit);
-        return commit;
-    }
-
     public static DateFormat getDf() {
         return df;
     }
@@ -160,9 +146,13 @@ public class CommitController extends Controller<Commit> {
      */
     public List<Commit> retrieveCommitHistory(Commit commit, Commit endExclusive) {
         List<Commit> history = new ArrayList<>();
+        if (commit.equals(endExclusive) || commit.equals(Commit.NULL)) {
+            return new ArrayList<>();
+        }
+
         history.add(commit);
         Supplier<Commit> parentCommitSupplier = commit.getParentSupplier();
-        while (parentCommitSupplier.get() != endExclusive) {
+        while (!parentCommitSupplier.get().equals(endExclusive)) {
             commit = parentCommitSupplier.get();
             history.add(commit);
             parentCommitSupplier = commit.getParentSupplier();
