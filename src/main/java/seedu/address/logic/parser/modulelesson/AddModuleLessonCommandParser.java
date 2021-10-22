@@ -44,12 +44,12 @@ public class AddModuleLessonCommandParser implements Parser<AddModuleLessonComma
                     AddModuleLessonCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        ModuleCode moduleCode = ParserUtil.parseModuleCodeForModuleLesson(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         LessonDay lessonDay = ParserUtil.parseLessonDay(argMultimap.getValue(PREFIX_LESSON_DAY).get());
         List<LessonTime> lessonTime = ParserUtil.parseLessonTime(argMultimap.getValue(PREFIX_LESSON_TIME).get());
         LessonTime lessonStartTime = lessonTime.get(0);
         LessonTime lessonEndTime = lessonTime.get(1);
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).orElse(""));
 
         ModuleLesson moduleLesson = new ModuleLesson(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
         return new AddModuleLessonCommand(moduleLesson);

@@ -31,6 +31,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_LESSON_DURATION =
             "Provide both start time and end time. Start time <= end time";
+    public static final String MESSAGE_INVALID_MODULE_INFO = "Either the module code or lesson code is not provided.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -99,6 +100,29 @@ public class ParserUtil {
                 .map(LessonCode::new)
                 .collect(Collectors.toSet());
         return new ModuleCode(moduleCodeArr[0], lessonCodes);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException If the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCodeForModuleLesson(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
+        if (moduleCodeArr.length < 2) {
+            throw new ParseException(MESSAGE_INVALID_MODULE_INFO);
+        }
+        if (!ModuleCode.isValidModuleCode(moduleCodeArr[0])) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        if (!LessonCode.isValidLessonCode(moduleCodeArr[1])) {
+            throw new ParseException(LessonCode.MESSAGE_CONSTRAINTS);
+        }
+        Set<LessonCode> lessonCodeSet = Set.of(new LessonCode(moduleCodeArr[1]));
+        return new ModuleCode(moduleCodeArr[0], lessonCodeSet);
     }
 
     /**
