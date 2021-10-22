@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -138,7 +137,7 @@ public class JsonAdaptedParticipant {
             // Can't do this due to BirthDate implementation
             modelBirthDate = BirthDate.notSpecified();
         } else {
-            modelBirthDate = BirthDate.of(LocalDate.parse(this.birthDate));
+            modelBirthDate = BirthDate.of(this.birthDate);
         }
 
         final List<Note> personNotes = new ArrayList<>();
