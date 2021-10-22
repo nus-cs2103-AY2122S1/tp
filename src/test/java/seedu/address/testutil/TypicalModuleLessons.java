@@ -14,14 +14,23 @@ public class TypicalModuleLessons {
 
     public static final ModuleLesson CS2100_LAB1 = new ModuleLessonBuilder()
             .withModuleCode("CS2100 B31")
+            .withLessonDay("2")
+            .withLessonStartTime("15:00")
+            .withLessonEndTime("16:00")
             .withRemark("COM1 0113")
             .build();
     public static final ModuleLesson CS2103_TUT1 = new ModuleLessonBuilder()
             .withModuleCode("CS2103 T09")
+            .withLessonDay("4")
+            .withLessonStartTime("09:00")
+            .withLessonEndTime("10:00")
             .withRemark("online")
             .build();
     public static final ModuleLesson CS2100_TUT1 = new ModuleLessonBuilder()
             .withModuleCode("CS2100 T18")
+            .withLessonDay("3")
+            .withLessonStartTime("17:00")
+            .withLessonEndTime("19:00")
             .withRemark("COM1 01-20")
             .build();
 

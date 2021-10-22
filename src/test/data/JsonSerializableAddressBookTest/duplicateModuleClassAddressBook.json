@@ -3,12 +3,14 @@
   "lessons" : [ {
     "moduleCodes" : "CS2100 T21",
     "lessonDay": "5",
-    "lessonTime": "10:00",
+    "lessonStartTime": "10:00",
+    "lessonEndTime": "11:00",
     "remark": "T01"
   }, {
     "moduleCodes" : "CS2100 T21",
     "lessonDay": "5",
-    "lessonTime": "10:00",
+    "lessonStartTime": "10:00",
+    "lessonEndTime": "11:00",
     "remark": "T01"
   } ]
 }

@@ -46,9 +46,11 @@ public class ModuleLessonTest {
 
     @Test
     public void toStringTest() {
-        assertEquals(CS2100_LAB1.toString(), "Module: CS2100 B31; Day: Tuesday; Time: 15:00; Remark: COM1 0113");
+        assertEquals(CS2100_LAB1.toString(),
+                "Module: CS2100 B31; Day: Tuesday; Start time: 15:00; End time: 16:00; Remark: COM1 0113");
 
-        assertEquals(CS2100_TUT1.toString(), "Module: CS2100 T18; Day: Wednesday; Time: 17:00; "
+        assertEquals(CS2100_TUT1.toString(),
+                "Module: CS2100 T18; Day: Wednesday; Start time: 17:00; End time: 19:00; "
                 + "Remark: COM1 01-20");
     }
 

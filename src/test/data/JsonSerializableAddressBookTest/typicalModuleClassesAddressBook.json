@@ -3,17 +3,20 @@
   "lessons": [ {
     "moduleCodes" : "CS2100 B31",
     "lessonDay": "2",
-    "lessonTime": "15:00",
+    "lessonStartTime": "15:00",
+    "lessonEndTime": "16:00",
     "remark": "COM1 0113"
   }, {
     "moduleCodes" : "CS2103 T09",
     "lessonDay": "4",
-    "lessonTime": "09:00",
+    "lessonStartTime": "09:00",
+    "lessonEndTime": "10:00",
     "remark": "online"
   }, {
     "moduleCodes" : "CS2100 T18",
     "lessonDay": "3",
-    "lessonTime": "17:00",
+    "lessonStartTime": "17:00",
+    "lessonEndTime": "19:00",
     "remark": "COM1 01-20"
   } ]
 }

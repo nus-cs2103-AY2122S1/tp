@@ -16,7 +16,8 @@ public class JsonAdaptedModuleLessonTest {
 
     private static final String VALID_MODULE_CODE = "CS2040S T16";
     private static final String VALID_DAY = CS2100_LAB1.getDay().getDayAsIntString();
-    private static final String VALID_TIME = CS2100_LAB1.getTime().toString();
+    private static final String VALID_START_TIME = CS2100_LAB1.getLessonStartTime().toString();
+    private static final String VALID_END_TIME = CS2100_LAB1.getLessonEndTime().toString();
     private static final String VALID_REMARK = CS2100_LAB1.getRemark().toString();
 
     @Test
@@ -28,33 +29,33 @@ public class JsonAdaptedModuleLessonTest {
     @Test
     public void toModelType_invalidModuleCode_throwsIllegaArgumentException() {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(INVALID_MODULE_CODE,
-                VALID_DAY, VALID_TIME, VALID_REMARK);
+                VALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_REMARK);
         assertThrows(IllegalValueException.class, moduleClass::toModelType);
     }
 
     @Test
     public void toModelType_invalidDay_throwsIllegaArgumentException() {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODE,
-                INVALID_DAY, VALID_TIME, VALID_REMARK);
+                INVALID_DAY, VALID_START_TIME, VALID_END_TIME, VALID_REMARK);
         assertThrows(IllegalArgumentException.class, moduleClass::toModelType);
     }
 
     @Test void toModelType_nullDay_throwsIllegalValueException() {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODE, null,
-                VALID_TIME, VALID_REMARK);
+                VALID_START_TIME, VALID_END_TIME, VALID_REMARK);
         assertThrows(IllegalValueException.class, moduleClass::toModelType);
     }
 
     @Test
     public void toModelType_invalidTime_throwsIllegaArgumentException() {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODE,
-                VALID_DAY, INVALID_TIME, VALID_REMARK);
+                VALID_DAY, INVALID_TIME, VALID_END_TIME, VALID_REMARK);
         assertThrows(IllegalArgumentException.class, moduleClass::toModelType);
     }
 
     @Test void toModelType_nullTime_throwsIllegalValueException() {
         JsonAdaptedModuleLesson moduleClass = new JsonAdaptedModuleLesson(VALID_MODULE_CODE, VALID_DAY,
-                null, VALID_REMARK);
+                null, VALID_END_TIME, VALID_REMARK);
         assertThrows(IllegalValueException.class, moduleClass::toModelType);
     }
 
