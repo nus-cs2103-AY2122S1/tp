@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -50,6 +52,11 @@ public class Person {
      */
     public Set<ModuleCode> getModuleCodes() {
         return Collections.unmodifiableSet(moduleCodes);
+    }
+
+    public ModuleCode get(ModuleCode moduleCode) {
+        List<ModuleCode> listOfModuleCode = new ArrayList<>(moduleCodes);
+        return listOfModuleCode.get(listOfModuleCode.indexOf(moduleCode));
     }
 
     public Phone getPhone() {

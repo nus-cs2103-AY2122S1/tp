@@ -47,6 +47,19 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").build();
 
+    //Manually added for DeletePersonCommandTest
+    public static final Person HENRY = new PersonBuilder().withName("Henry Davis")
+            .withEmail("henry@example.com")
+            .withPhone("94351853")
+            .withRemark("He likes Pizza.")
+            .withModuleCodes("CS2100").build();
+
+    public static final Person ISAAC = new PersonBuilder().withName("Isaac Tan")
+            .withEmail("isaaac@example.com")
+            .withPhone("94951253")
+            .withRemark("He likes basketball")
+            .withModuleCodes("CS2100", "CS2106").build();
+
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
             .withEmail(VALID_EMAIL_AMY).withModuleCodes(VALID_MODULE_CODE_CS2040).build();
@@ -69,6 +82,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, HENRY, ISAAC));
     }
 }

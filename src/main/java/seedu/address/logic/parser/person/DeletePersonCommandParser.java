@@ -30,35 +30,47 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     public DeletePersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
-
-        if (moduleCodes.size() == 1) { //delete only accepts deleting 1 batch of module code at a time
+        if (moduleCodes.size() > 1) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE)
+            );
+        }
+        if (moduleCodes.size() == 1) {
             try {
-                List<String> stringListOfModuleCodes = getStringListOfModuleCode(moduleCodes);
-                ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
-                return new DeletePersonCommand(
-                        new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
+                return deleteByModuleCode(moduleCodes);
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
             }
         }
         try {
-            if (args.contains("-")) {
-                Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf("-")));
-                Index end = ParserUtil.parseIndex(args.substring(args.indexOf("-") + 1));
-                return new DeletePersonCommand(start, end);
-            } else {
-                return new DeletePersonCommand(ParserUtil.parseIndex(args));
-            }
+            return deleteByIndex(args);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
         }
     }
 
-    private List<String> getStringListOfModuleCode(List<String> moduleCodes) throws ParseException {
-        return ParserUtil.parseModuleCodes(moduleCodes).stream()
+    private DeletePersonCommand deleteByIndex(String args) throws ParseException {
+        if (args.contains("-")) {
+            Index start = ParserUtil.parseIndex(args.substring(1, args.indexOf("-")));
+            Index end = ParserUtil.parseIndex(args.substring(args.indexOf("-") + 1));
+            return new DeletePersonCommand(start, end);
+        } else {
+            return new DeletePersonCommand(ParserUtil.parseIndex(args));
+        }
+    }
+
+    private DeletePersonCommand deleteByModuleCode(List<String> moduleCodes) throws ParseException {
+        List<String> stringListOfModuleCodes = ParserUtil.parseModuleCodes(moduleCodes).stream()
                 .map(moduleCode -> moduleCode.toString())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());;
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
+        if (moduleCode.getLessonCodes().size() > 1) {
+            throw new ParseException("error message");
+        }
+
+        return new DeletePersonCommand(
+                new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
     }
 }
