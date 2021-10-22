@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.friend.exceptions.DuplicateFriendException;
 import seedu.address.model.friend.exceptions.FriendNotFoundException;
+import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.testutil.FriendBuilder;
 
 public class UniqueFriendsListTest {
@@ -41,7 +42,8 @@ public class UniqueFriendsListTest {
     @Test
     public void contains_friendWithSameIdentityFieldsInList_returnsTrue() {
         uniqueFriendsList.add(ALICE);
-        Friend editedAlice = new FriendBuilder(ALICE).withFriendName("Alice Pauline").withGameFriendLinks().build();
+        Friend editedAlice = new FriendBuilder(ALICE).withFriendName("Alice Pauline")
+                .withGameFriendLinks(ALICE.getGameFriendLinks().toArray(GameFriendLink[]::new)).build();
         assertTrue(uniqueFriendsList.contains(editedAlice));
     }
 

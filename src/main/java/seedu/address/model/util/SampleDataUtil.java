@@ -25,6 +25,8 @@ public class SampleDataUtil {
     // include private constructor for utility class
     private SampleDataUtil() { }
 
+
+
     public static Friend[] getSampleFriends() {
         Game[] sampleGames = getSampleGames();
         return new Friend[]{
@@ -92,12 +94,8 @@ public class SampleDataUtil {
         return new Friend(friendId, friendName, gameFriendLinks);
     }
 
-    private static boolean validateSampleFriendIdUnique(FriendId friendId) {
-        return Arrays.stream(getSampleFriends()).noneMatch(s -> s.getFriendId().equals(friendId));
-    }
-
     private static boolean validateSampleGameExists(Game game) {
-        return Arrays.stream(getSampleGames()).anyMatch(g -> g.equals(game));
+        return Arrays.asList(getSampleGames()).contains(game);
     }
 
     public static Set<GameFriendLink> getGameFriendLinkSet(GameFriendLink... gameFriendLinks) {

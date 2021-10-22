@@ -27,6 +27,6 @@ public class GameFriendLinksContainsGameIdPredicate implements Predicate<Game> {
 
     @Override
     public boolean test(Game game) {
-        return friend.containsGameInGameFriendLinks(game.getGameId());
+        return friend.hasGameAssociation(game);
     }
 }

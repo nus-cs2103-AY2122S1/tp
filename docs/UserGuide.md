@@ -29,7 +29,7 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
-   * **`list --friend`** : Lists all friends.
+   * **`friend --list`** : Lists all friends.
 
    * **`friend`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud FRIEND_ID of __Draco__ to the application.
 
@@ -49,9 +49,6 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `get --game GAME_NAME`, `GAME_NAME` is a parameter which can be used as `get --game CSGO`.
-
-* Items in square brackets are optional.<br>
-  e.g `friend FRIEND_ID [--name NAME]` can be used as `friend Draco --name “Marcus Tang”` or as `friend Draco`.
 
 * Items with `…` after them can be used one or more times.<br>
   e.g. `GAME_NAME:IN_GAME_USERNAME…` can be used as `Valorant:biscuitismydog`, `Valorant:biscuitismydog Minecraft:Draco` etc.
@@ -117,53 +114,64 @@ Format: `game --delete GAME_NAME`
 Examples:
 * `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
 
-### Link games with a friend: `link`
+### Link games with a friend: `friend --link`
 
-Links game and the associated in-game username for each game to a friend for the provided gitGud FRIEND_ID to
-his/her friend information.
+Links game and the associated in-game username for the game to a friend with the provided FRIEND_ID.
 
-Format: `link --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
+Format: `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
 
 * Both FRIEND_ID and GAME_NAME has to already be inside the database.
 
 Examples:
-* `link --friend Draco --game DOTA --user Draco995`
+* `friend --link Draco --game DOTA --user Draco995`
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
   to the friend with the gitGud FRIEND_ID ‘Draco’.
 
-### Listing multiple friends data: `list --friend`
+### Unlinking a game from a friend: `friend --unlink`
+
+Removes the link between a friend and a game.
+
+Format: `friend --unlink FRIEND_ID --game GAME_NAME`
+
+* FRIEND_ID has to already be inside the database.
+* The friend has to have a current association with the provided GAME_NAME.
+
+Examples:
+* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_NAME 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
+
+### Listing multiple friends data: `friend --list`
 
 Lists all friends stored in gitGud whose friend id contains any of the given keywords.
 
-Format: `list [--friend [KEYWORD]]`
+Format: `friend --list [KEYWORD]`
 
-* The `--friend` flag is optional, if no flag is added or if `KEYWORD` is left empty, all friends stored in gitGud will be listed
+* If `KEYWORD` is left empty, all friends stored in gitGud will be listed
 * The filter keyword is case insensitive e.g `Tau_bar` will match `tau_bar`
 * Only the `FRIEND_ID` of friends is filtered
 * Partial matches will be displayed e.g. `tau` will match `tau_bar`
 
 Examples:
-* `list` or  `list --friend` Lists all friends stored in gitGud
-* `list --friend ta` Lists all friends stored in gitGud that have `ta` in their name
+* `friend --list` or  `friend --list` Lists all friends stored in gitGud
+* `friend --list ta` Lists all friends stored in gitGud that have `ta` in their name
 
-![result for 'list --game'](images/UiListFriend.png)
+![result for 'game --list'](images/UiListFriend.png)
 
-### Listing multiple games data: `list --game`
+### Listing multiple games data: `game --list`
 
 Lists all games stored in gitGud whose friend id contains any of the given keywords.
 
-Format: `list --game [KEYWORD]`
+Format: `game --list [KEYWORD]`
 
 * If `KEYWORD` is left empty, all games stored in gitGud will be listed
 * The filter keyword is case insensitive e.g `valorant` will match `Valorant`
-* Only the `GAME_NAME` of games is filtered
+* Only the `GAME_ID` of games is filtered
 * Partial matches will be displayed e.g. `Valo` will match `Valorant`
 
 Examples:
-* `list --game` Lists all games stored in gitGud
-* `list --game Valo` Lists all friends stored in gitGud that have `Valo` in their name
+* `game --list` Lists all games stored in gitGud
+* `game --list Valo` Lists all friends stored in gitGud that have `Valo` in their name
 
-![result for 'list --game'](images/UiListGame.png)
+![result for 'game --list'](images/UiListGame.png)
 
 ### Getting a single friend's complete data: `get --friend`
 
@@ -213,9 +221,10 @@ Action | Format, Examples
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
 **Add game** | `game --add GAME_NAME` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
 **Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
-**Link game and friend** | `link --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME”…`<br> e.g., `link --friend Draco --game Valorant --user taufiq007`
-**List Friend** | `list [--friend [KEYWORD]]`<br> e.g., `list`, `list --friend`, `list --friend Tau`
-**List Games** | `list --game [KEYWORD]`<br> e.g., `list --game`, `list --game Valorant`
+**Link game and friend** | `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
+**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_NAME` <br> e.g., `friend --unlink Draco --game DOTA`
+**List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
+**List Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
 **Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
 **Get game** | `get --game GAME_NAME`<br> e.g., `get --game Valorant`
 

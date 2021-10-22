@@ -34,6 +34,5 @@ public class UserNameTest {
         assertTrue(UserName.isValidUserName("!@#$%^")); // special characters only
         assertTrue(UserName.isValidUserName("peter@123.!?")); // alphabets with special characters
         assertTrue(UserName.isValidUserName("Roger@Jackson#1111")); // long names
-
     }
 }

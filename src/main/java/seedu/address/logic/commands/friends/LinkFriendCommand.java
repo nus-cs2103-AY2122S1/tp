@@ -1,14 +1,16 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.friends;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
-
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
+import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 import seedu.address.model.gamefriendlink.UserName;
@@ -17,13 +19,13 @@ import seedu.address.model.gamefriendlink.UserName;
  * Links an existing friend to an existing game, associating them.
  */
 
-public class LinkCommand extends Command {
+public class LinkFriendCommand extends Command {
 
-    public static final String COMMAND_WORD = "link";
+    public static final String COMMAND_WORD = "--link";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Links game(s) and the associated in-game username(s) "
-            + "for each game to a friend. \n"
+            + ": Links a game and the associated in-game username "
+            + "to a friend. \n"
             + "Parameters: --friend FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME...\n"
             + "Example: " + COMMAND_WORD + " --friend Draco --game Valorant --user SmurfLord";
 
@@ -32,9 +34,9 @@ public class LinkCommand extends Command {
     private final UserName userName;
 
     /**
-     * Constructor for LinkCommand.
+     * Constructor for LinkFriendCommand.
      */
-    public LinkCommand(FriendId friendId, GameId gameId, UserName userName) {
+    public LinkFriendCommand(FriendId friendId, GameId gameId, UserName userName) {
         requireAllNonNull(friendId, gameId, userName);
 
         this.friendId = friendId;
@@ -51,18 +53,15 @@ public class LinkCommand extends Command {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_GAME_ID);
         }
 
-        GameFriendLink gameFriendLink = new GameFriendLink(gameId, friendId, userName);
-        List<Friend> lastShownFriendList = model.getFilteredFriendsList();
         // Obtain a Friend object from the model that matches friendId
-        Friend friendToEdit = lastShownFriendList
-                .stream()
-                .filter(friend -> friend.getFriendId().equals(friendId))
-                .findFirst()
-                .get();
+        Friend friendToEdit = model.getFriend(friendId);
+        Game gameToLink = model.getGame(gameId);
+        GameFriendLink gameFriendLink = new GameFriendLink(gameToLink.getGameId(), friendToEdit.getFriendId(),
+                userName);
 
         model.linkFriend(friendToEdit, gameFriendLink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
-        return new CommandResult(generateSuccessMessage(friendToEdit), CommandType.LINK);
+        return new CommandResult(generateSuccessMessage(friendToEdit), CommandType.FRIEND_LINK);
     }
 
     /**
@@ -80,12 +79,12 @@ public class LinkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof LinkCommand)) {
+        if (!(other instanceof LinkFriendCommand)) {
             return false;
         }
 
         // state check
-        LinkCommand e = (LinkCommand) other;
+        LinkFriendCommand e = (LinkFriendCommand) other;
         return friendId.equals(e.friendId)
                 && gameId.equals(e.gameId)
                 && userName.equals(e.userName);
