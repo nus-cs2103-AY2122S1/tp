@@ -51,7 +51,7 @@ This User Guide will help you set up your contact list and familiarise yourself 
 1. Copy the file to the folder you want to use as the _home folder_ for your WhereTourGo
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data<br>
-   <img src="images/sample.png" width="400">
+   ![Ui](images/sample.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window<br>
    Some example commands you can try:
@@ -131,7 +131,7 @@ Examples:
 * `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`
   
 Expected Outcome for `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4` :
-<img src="images/add.png" width="400">
+![Add](images/add.png)
 
 ### Listing all contacts: `list`
 
@@ -158,11 +158,15 @@ Examples:
 * `edit 3 ra/3` Edits the rating of the 3rd contact to be `3`
   
 Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
+
 Before:
-<img src="images/edit.png" width="400">
+
+![EditBefore](images/List.png)
 
 After:
-<img src="images/list.png" width="400">
+
+![EditAfter](images/edit.png)
+
 ### Locating contacts: `find`
 
 Finds contacts whose names, addresses, phone numbers, email addresses or reviews contain any of the given keywords.
@@ -179,7 +183,8 @@ Examples:
 * `find bay` returns `Gardens by the Bay` and `Marina Bay Sands`
   
 Expected Outcome for `find bay`:
-<img src="images/find.png" width="400">
+
+![EditBefore](images/find.png)
 
 ### Deleting a contact: `delete`
 
@@ -235,7 +240,8 @@ Examples:
 * `filter c/fnb ra/3` returns all F&B contacts with 3-star rating
   
 Expected Outcome for `filter c/fnb`:
-<img src="images/filter.png" width="400">
+
+![EditBefore](images/filter.png)
 
 
 ### Undoing operations: `undo`
