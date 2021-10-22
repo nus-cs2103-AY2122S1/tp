@@ -220,7 +220,7 @@ by entering a command:
    are then used to construct an `AddProgressCommand` object. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
-At this point, if `AddProgressCommandParser#parse` detects that invalid input has been supplied, the command will fail 
+At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail 
 its execution and `ParseException` will be thrown.</div>
 
 Below is the sequence diagram that depicts the parsing of the `add -p` command:
