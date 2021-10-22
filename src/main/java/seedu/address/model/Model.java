@@ -207,4 +207,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
+
+    void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
 }
