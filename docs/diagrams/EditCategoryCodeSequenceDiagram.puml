@@ -6,7 +6,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
-participant "editPersonDescriptor:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
+'participant "editPersonDescriptor:EditPersonDescriptor" as EditPersonDescriptor LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -47,13 +47,6 @@ create EditCommand
 EditCommandParser -> EditCommand: EditCommand(1, personDescriptor)
 activate EditCommand
 
-create EditPersonDescriptor
-EditCommand -> EditPersonDescriptor
-activate EditPersonDescriptor
-
-EditPersonDescriptor -> EditCommand
-deactivate EditPersonDescriptor
-
 EditCommand -> EditCommandParser
 deactivate EditCommand
 
@@ -68,12 +61,11 @@ deactivate LogicManager
 
 activate EditCommand
 EditCommand -> EditCommand: createEditedPerson(personToEdit, editPersonDescriptor)
-note bottom: personToEdit is the Person object to be edited
+note bottom: editPersonDescriptor object holds the updated fields
 activate EditCommand
 
 create Person
 EditCommand -> Person
-note right: creates another person with the updated attributes
 activate Person
 
 Person -> EditCommand

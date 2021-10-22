@@ -8,11 +8,11 @@ if () then ([contains review field])
   :Parse Review;
   if () then ([contains at least  1 character])
   :Create Review Object;
-  else (else)
+  else ([else])
   :Create Review Object with "-No Review";
   endif
 
-else (else)
+else ([else])
 endif
 
 :Create Person Object;
