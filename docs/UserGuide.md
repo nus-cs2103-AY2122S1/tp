@@ -62,13 +62,13 @@ Adds a student to the address book.
 Format:
 
 ```
-add n/<NAME> te/<TELEGRAM> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+add n/<NAME> te/<TELEGRAM> g/<GITHUB> [p/<PHONE_NUMBER>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
 
 ```
-add n/John Doe te/@johndoe123 p/98765432 e/johnd@example.com a/John street, block 123, #01-01
+add n/John Doe te/@johndoe123 g/john-doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01
 ```
 
 <h3 id = "Delete"> </h3>
@@ -98,7 +98,7 @@ Edits an existing student in the address book.
 Format: 
 
 ```
-edit <INDEX> [n/<NAME>] [te/TELEGRAM] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
+edit <INDEX> [n/<NAME>] [te/TELEGRAM] [g/GITHUB] [p/<PHONE>] [e/<EMAIL>] [a/<ADDRESS>] [t/<TAG>]
 ```
 
 Example:
@@ -243,9 +243,9 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Student | add n/\<NAME> te/\<TELEGRAM> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Add a new Student | add n/\<NAME> te/\<TELEGRAM> g/\<GITHUB> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Delete a Student | delete \<INDEX> |
-| Edit a Student | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Edit a Student | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [g/\<GITHUB>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
 | Find a Student (by Name) | find \<STRING> |
 | Find a Student (by Tag) | find t/\<TAG> |
 | Find a Student (by Telegram Handle) | find @\<TELEGRAM> |
