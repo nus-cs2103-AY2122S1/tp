@@ -134,8 +134,8 @@ public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
         internalList.sort(new Comparator<ModuleLesson>() {
             @Override
             public int compare(ModuleLesson l1, ModuleLesson l2) {
-                return l1.getModuleCodes().toArray(ModuleCode[]::new)[0].getModuleCodeName().toLowerCase()
-                        .compareTo(l2.getModuleCodes().toArray(ModuleCode[]::new)[0].getModuleCodeName().toLowerCase());
+                return l1.getModuleCode().getModuleCodeName().toLowerCase()
+                        .compareTo(l2.getModuleCode().getModuleCodeName().toLowerCase());
             }
         });
     }
