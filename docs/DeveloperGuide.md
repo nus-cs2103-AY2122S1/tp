@@ -394,12 +394,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to list contacts
-2. ContactSH shows a list of contacts
-3. User requests to edit a specific contact in the list
-4. ContactSH edits the specified details of the contact
+1. User requests a list of contacts.
+2. ContactSH shows a list of contacts.
+3. User requests to edit a specific contact in the list.
+4. ContactSH edits the contact.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
@@ -410,6 +410,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. ContactSH shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The given edit information is invalid.
+
+    * 3b1. ContactSH shows an error message.
 
       Use case resumes at step 2.
     
@@ -435,37 +441,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContactSH shows an error message.
 
       Use case resumes at step 2.
-
-**Use case: Update Contact**
-
-**MSS**
-
-1. User requests a list of contacts.
-2. ContactSH shows a list of contacts.
-3. User requests to edit a specific contact in the list.
-4. ContactSH edits the contact.
-
-    Use case ends.
-
-**Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
-
-* 3a. The given index is invalid.
-
-    * 3a1. ContactSH shows an error message.
-
-      Use case resumes at step 2.
-
-* 3b. The given edit information is invalid.
-
-    * 3b1. ContactSH shows an error message.
-
-      Use case resumes at step 2.
-
-
+    
 **Use case: Find contact(s) by a criterion**
 
 **MSS**
@@ -489,8 +465,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. ContactSH returns message stating no contact found.
 
       Use case ends.
-
-
+    
 **Use case: Find command and its usage**
 
 **MSS**
@@ -510,6 +485,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case resumes at step 2.
 
+**Use case: Sort contacts by name**
+
+**MSS**
+
+1. User requests to sort contacts by name.
+2. ContactSH returns a sorted list of contacts.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The reverse flag is given.
+
+    * 1a1. ContactSH returns a reverse sorted list of contacts.
+
+    Use case ends.
 
 *{More to be added}*
 
