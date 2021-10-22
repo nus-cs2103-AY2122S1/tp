@@ -99,7 +99,7 @@ This User Guide will help you set up your contact list and familiarise yourself 
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Opens the User Guide in the Browser
 
@@ -200,7 +200,7 @@ Examples:
 * `list` followed by `delete Singapore DUCKTours` deletes the contact with name ' Singapore DUCKTours’
 * `find shangri-la` followed by `delete Shangri-La Hotels & Resorts` deletes the contact with name 'Shangri-La Hotels & Resorts'
 
-### Filtering by category : `filter`
+### Filtering by category: `filter`
 
 Shows a list of all contacts in the specified category
 
@@ -223,7 +223,7 @@ Examples:
   Expected Outcome for `filter c/fnb`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
-### Undoing operations : `undo`
+### Undoing operations: `undo`
 Undoes the last change made to the list of contacts.
 Format: `undo`
 Examples :
@@ -236,7 +236,7 @@ Examples :
 If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
 If you then execute `redo` , the Marina Bay Sands contact will be deleted again.
 
-### Sorting the contacts : `sort`
+### Sorting the contacts: `sort`
 Sorts the list of contacts in a specified order. The sort feature is sorted by Contact name (in alphabetical order) or by Rating (in descending order).
 Format : `sort FIELD`
 Examples :
@@ -301,13 +301,13 @@ Displays a list of the commands used in WhereTourGo, along with their functional
 
 Format: `cmd`
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from the contact list.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 
 Exits the program.
 
