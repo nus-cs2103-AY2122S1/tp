@@ -11,4 +11,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_PARENT_NAME = new Prefix("pn/");
     public static final Prefix PREFIX_PARENT_PHONE = new Prefix("pp/");
     public static final Prefix PREFIX_LIST_ALL = new Prefix("-a");
+
+    public static final Prefix PREFIX_LESSON_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_LESSON_PRICE = new Prefix("p/");
+    public static final Prefix PREFIX_LESSON_TIMING = new Prefix("t/");
+    public static final Prefix PREFIX_LESSON_CAPACITY = new Prefix("c/");
 }

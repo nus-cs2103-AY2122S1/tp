@@ -21,7 +21,9 @@ public class Capacity {
      */
     public Capacity(String capacity) {
         requireNonNull(capacity);
-        checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
+        if (!capacity.equals("")) {
+            checkArgument(isValidCapacity(capacity), MESSAGE_CONSTRAINTS);
+        }
         this.capacity = capacity;
     }
 
