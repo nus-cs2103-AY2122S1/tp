@@ -3,7 +3,9 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.AddressBook;
@@ -18,6 +20,10 @@ public class TotalOrdersWindow extends UiPart<Stage> {
 
     @FXML
     private TableView<ClientTotalOrder> table;
+    @FXML
+    private TableColumn<ClientTotalOrder, String> clientCol;
+    @FXML
+    private TableColumn<ClientTotalOrder, Double> totalCol;
 
     /**
      * Creates a new TotalOrdersWindow.
@@ -26,7 +32,6 @@ public class TotalOrdersWindow extends UiPart<Stage> {
      */
     public TotalOrdersWindow(Stage root) {
         super(FXML, root);
-        table.setItems(AddressBook.getClientTotalOrders());
     }
 
     /**
@@ -79,5 +84,14 @@ public class TotalOrdersWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Reloads ClientTotalOrders items from AddressBook.
+     */
+    public void reloadData() {
+        table.setItems(AddressBook.getClientTotalOrders());
+        clientCol.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+        totalCol.setCellValueFactory(new PropertyValueFactory<>("totalOrder"));
     }
 }

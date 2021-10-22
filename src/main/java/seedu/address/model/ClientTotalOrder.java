@@ -21,4 +21,12 @@ public class ClientTotalOrder {
         this.clientName = new SimpleStringProperty(clientName);
         this.totalOrder = new SimpleDoubleProperty(totalOrder);
     }
+
+    public String getClientName() {
+        return clientName.getValue();
+    }
+
+    public Double getTotalOrder() {
+        return totalOrder.getValue();
+    }
 }
