@@ -1,7 +1,7 @@
 package seedu.academydirectory.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.academydirectory.testutil.Assert.assertThrows;
@@ -72,28 +72,25 @@ class GradeCommandTest {
         // same values -> returns true
         GradeCommand commandWithSameValues =
                 new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName1, validGrade1);
-        assertTrue(standardCommand.equals(commandWithSameValues));
+        assertEquals(standardCommand, commandWithSameValues);
 
         // same object -> returns true
-        assertTrue(standardCommand.equals(standardCommand));
+        assertEquals(standardCommand, standardCommand);
 
         // null -> returns false
-        assertFalse(standardCommand.equals(null));
+        assertNotEquals(null, standardCommand);
 
         // different types -> returns false
-        assertFalse(standardCommand.equals(new ClearCommand()));
+        assertNotEquals(standardCommand, new ClearCommand());
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(
-                new GradeCommand(INDEX_SECOND_STUDENT, validAssessmentName1, validGrade1)));
+        assertNotEquals(standardCommand, new GradeCommand(INDEX_SECOND_STUDENT, validAssessmentName1, validGrade1));
 
         // different assessment -> returns false
-        assertFalse(standardCommand.equals(
-                new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName2, validGrade1)));
+        assertNotEquals(standardCommand, new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName2, validGrade1));
 
         // different grade -> returns false
-        assertFalse(standardCommand.equals(
-                new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName1, validGrade2)));
+        assertNotEquals(standardCommand, new GradeCommand(INDEX_FIRST_STUDENT, validAssessmentName1, validGrade2));
     }
 
 }
