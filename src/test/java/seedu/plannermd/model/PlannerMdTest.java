@@ -34,6 +34,7 @@ public class PlannerMdTest {
     public void constructor() {
         assertEquals(Collections.emptyList(), plannerMd.getPatientList());
         assertEquals(Collections.emptyList(), plannerMd.getDoctorList());
+        assertEquals(Collections.emptyList(), plannerMd.getAppointmentList());
     }
 
     @Test

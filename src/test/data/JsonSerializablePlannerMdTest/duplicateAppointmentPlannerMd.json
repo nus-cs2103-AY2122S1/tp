@@ -7,7 +7,8 @@
       "address": "123, Jurong West Ave 6, #08-111",
       "birthDate": "12/12/1922",
       "remark": "Awaiting PCR test result",
-      "tagged": [ "friends" ]
+      "tagged": [ "friends" ],
+      "risk": "LOW"
     }
   ],
   "doctors": [
@@ -42,10 +43,9 @@
         "remark": "PCR done",
         "tagged": [ "colleagues" ]
       },
-      "date": "2/2/2021",
+      "date": "2/2/2022",
       "session": {
         "start": "11:30",
-        "end": "12:00",
         "duration": 30
       },
       "remark": "X-ray"
@@ -70,10 +70,9 @@
         "remark": "PCR done",
         "tagged": [ "colleagues" ]
       },
-      "date": "2/2/2021",
+      "date": "2/2/2022",
       "session": {
         "start": "11:30",
-        "end": "12:00",
         "duration": 30
       },
       "remark": "X-ray"

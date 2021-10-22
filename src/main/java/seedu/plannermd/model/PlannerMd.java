@@ -222,7 +222,8 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         return other == this // short circuit if same object
                 || (other instanceof PlannerMd // instanceof handles nulls
                 && doctors.equals(((PlannerMd) other).doctors)
-                && patients.equals(((PlannerMd) other).patients));
+                && patients.equals(((PlannerMd) other).patients))
+                && appointments.equals(((PlannerMd) other).appointments);
     }
 
     @Override
