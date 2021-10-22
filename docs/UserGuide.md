@@ -9,6 +9,8 @@ title: User Guide
 
 Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find answers, learn about the features, and manage tutoring better.
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 1. [Introduction](#1-introduction)
 
@@ -67,6 +69,8 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 6. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 1 Introduction
 
 ### 1.1 What is TutAssistor?
@@ -76,7 +80,7 @@ TutAssistor provides an all-in-one platform for tutors to track student details,
 
 ### 1.2 How to use this guide?
 The features in this guide are formatted with the following conventions:
-* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the ' | ' symbol. The user can use the command shortcuts to reduce typing. 
+* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the <code>&#124;</code> symbol. The user can use the command shortcuts to reduce typing. 
 * **Command Format** - Each command is accompanied by a set of information provided by the user. Refer to the [Features](#3-features) below for details of each command.
 * **Example** - Possible usage of each features are provided. Users may follow these examples when familiarising with the app. 
 * **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
@@ -84,6 +88,7 @@ The features in this guide are formatted with the following conventions:
 Jump right in to the next section to get you started!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2 Get Started
 
@@ -96,19 +101,22 @@ Jump right in to the next section to get you started!
 2. Open Terminal.
 3. Change the active directory to the location of TutAssistor.jar.
 
-For example,
-```
-cd Downloads
-```
+   For example,
+    
+   ```
+   cd Downloads
+   ```
 4. Run the following command.
-```
-java -jar TutAssistor.jar
-```
+  
+   ```
+   java -jar TutAssistor.jar
+   ```
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 ![Ui](images/ui_ug.png)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3 Features
 <div markdown="block" class="alert alert-info">
@@ -133,7 +141,7 @@ After launching the app, the GUI similar to the one shown below should appear in
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
    
-Tip: Refer to the 'Additional Command Format Information' under section 3 to learn the requirements of the various parameters used.
+Tip: Refer to the [Additional Command Format Information](#4-additional-command-format-information) under section 4 to learn the requirements of the various parameters used.
    
 </div>
 
@@ -472,6 +480,7 @@ Format: `exit`
 _Detais coming soon..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4 Additional Command Format Information
 
@@ -517,6 +526,7 @@ For example, if the list consists of `5` students/tuition classes:
 - Incorrect: `0`, `1.5`, `a`, `6`, etc.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 5 FAQ
 
@@ -524,6 +534,7 @@ For example, if the list consists of `5` students/tuition classes:
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6 Command Summary
 
