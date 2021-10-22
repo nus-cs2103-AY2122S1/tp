@@ -302,7 +302,7 @@ The sequence diagram below illustrates the interactions happening within the `Lo
 
 The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 4 and 5.
 
-<img src="images/SetEditedStudentSequenceDiagram.png" width="650" />
+<img src="images/SetEditedStudentSequenceDiagram.png" width="500" />
 
 A similar execution scenario can be expected for setting a student's payment status as `unpaid`.
 
