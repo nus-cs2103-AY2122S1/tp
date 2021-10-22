@@ -3,12 +3,12 @@ layout: page
 title: User Guide
 ---
 
-## **About this document**
+### **About this document**
 
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
-This document serves as a guide to help you get started on how to set up and use **TuitiONE**. To start, explore the 'Quick start' section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections to learn more in detail. The 'Command summary' at the end of the document lists a table with all the commands present and their syntax.
+This document serves as a guide to help you get started on how you can set up and use **TuitiONE**. To start, you explore the [Quick start](#quick-start) section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections (such as in [Managing Students](#managing-students) and [Managing Lessons](#managing-lessons)) to learn more in detail. The [Command summary](#command-summary) lists a table with all the commands present and their syntax. If there are any doubts on the terms and usage of this app, you can refer to the [Glossary](#glossary) and [FAQ](#faq) located at the end of the document.
 
 Here are the interpretations of symbols and formatting used in this document: 
 
@@ -335,4 +335,5 @@ Action | Format, Examples
 ## FAQ
 
 * **Q:** Where can I view the list of commands?
+
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
