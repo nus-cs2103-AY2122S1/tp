@@ -15,10 +15,8 @@ public class DeliveryDetails {
                     + "You can choose to entire enter a date first or time first in any of the formats mentioned";
 
     private static final DateTimeFormatter[] dateTimeFormatters = {
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), DateTimeFormatter.ofPattern("yyyy-MM-dd h:mm a"),
-            DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd"), DateTimeFormatter.ofPattern("h:mm a yyyy-MM-dd"),
-            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"), DateTimeFormatter.ofPattern("dd-MM-yyyy h:mm a"),
-            DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"), DateTimeFormatter.ofPattern("h:mm a dd-MM-yyyy"),
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"), DateTimeFormatter.ofPattern("HH:mm yyyy-MM-dd"),
+            DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"), DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")
     };
 
     private static DateTimeFormatter chosenFormat = null;
