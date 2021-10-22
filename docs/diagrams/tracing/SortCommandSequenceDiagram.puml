@@ -19,7 +19,6 @@ activate logic
 logic -> abp ++: parseCommand(commandText)
 create scp
 abp -> scp
-scp -> abp --;
 abp -> scp ++: parse(arguments)
 scp -> scp ++: getPrefix(argMultimap, ALL_PREFIXES)
 scp -> scp --: prefix
@@ -28,8 +27,8 @@ scp -> sd ++: sortDirection
 sd --> scp --:
 create sba
 scp -> sba ++: prefix, sortDirection
-sd --> scp --:
-create fc
+sba --> scp --:
+create sc
 scp -> sc ++: sorter
 sc --> scp --: command
 scp --> abp --: command
