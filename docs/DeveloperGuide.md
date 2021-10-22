@@ -263,6 +263,47 @@ Cons: Too much of a hassle with long names, and using only parts of a name was n
 the possibility of multiple people with the same first name, etc. The side panel was implemented to circumvent
 this problem
 
+### \[Proposed\] Using the Up/Down Arrow Keys to Select Previous User Inputs
+
+A proposed improvement to the text-based input method is to allow users to easily reenter previously inputted commands 
+by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle feature which 
+will improve the usability of the app. 
+
+An example use case would be when a user wants to add two tasks with description "CS2100 Tutorial 7" and "CS2100 
+Tutorial 8" to their task List. Instead of typing out a near-identical command for the second task, they could press 
+the up arrow key, access their previously entered commmand and change '7' to '8'.
+
+#### Implementation
+
+The proposed implementation involves adding a new class `PreviousUserInputList` to `Model`. This class will encapsulate 
+a list of Strings, which will be used to set the text in the `CommandBox`. This list will be updated in `LogicManager` 
+if the user input results in a valid command execution. There will be an equivalent class in `Storage` to store this 
+list.
+
+In order to facilitate selection of previous user inputs with the arrow keys, we must keep track of the index of the 
+above list. This index will be located in the `CommandBox` and will be used to select the appropriate user input to 
+set as the text in the text box.
+
+#### Design considerations
+
+- Keeping track of different lists of user inputs for different tabs
+
+We decided against keeping track of different lists of user inputs corresponding to commands on different tabs. We 
+judged the benefits of this feature to be minimal and not worth the extra complexity in `Model` and `Storage`. 
+Moreover, we would have to make an arbitrary decision on where to store the user inputs corresponding to switching 
+tabs.
+  
+- Storing the index of the list in `Model`
+
+Due to the fact that the index should reset between uses of the app, we decided that there is not need to store the 
+index of the currently in-focus user input in `Model` or the `Storage`. The index can safely be reset to 0 upon input 
+of a command or upon opening the app. 
+  
+- Storing user inputs that are invalid
+
+We decided not to store user inputs that are invalid due to the current behaviour of the text box: when an invalid 
+input is entered, the input remains in the text box with a red font. In the case of a typo, since the user can easily 
+modify this previous input, there seems to be no need to store it.
 
 --------------------------------------------------------------------------------------------------------------------
 
