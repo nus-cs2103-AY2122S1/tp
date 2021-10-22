@@ -27,7 +27,8 @@ that contains the contact information and order details related to clients and p
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. You can download it from
+   [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
 
 1. Download the latest `sellah.jar` from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases).
 
