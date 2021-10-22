@@ -10,8 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
-
-
 /**
  * Displays details of a person identified using it's displayed index or name on the side panel.
  */
@@ -33,8 +31,7 @@ public class ViewCommandIndex extends ViewCommand {
         }
 
         Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
-        model.displayPerson(selectedPerson);
-        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson));
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson), selectedPerson);
     }
 
 }
