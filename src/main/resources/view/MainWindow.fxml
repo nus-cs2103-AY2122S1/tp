@@ -33,7 +33,7 @@
                      <RadioMenuItem fx:id="darkTheme" mnemonicParsing="false" text="Dark" />
                      <RadioMenuItem fx:id="charlotteTheme" mnemonicParsing="false" text="Charlotte" />
                      <RadioMenuItem fx:id="squidGirlTheme" mnemonicParsing="false" text="Squid Girl" />
-                     <RadioMenuItem fx:id="wonderEggTheme" mnemonicParsing="false" text="Wonder Egg" />
+                     <RadioMenuItem fx:id="wonderEggTheme" mnemonicParsing="false" text="Wonder Egg Priority" />
                  </items>
                </Menu>
         </MenuBar>
