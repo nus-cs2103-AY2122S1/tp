@@ -4,7 +4,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CHARLIE;
 import static seedu.address.testutil.TypicalPersons.IDA;
 
 import java.nio.file.Path;
@@ -16,9 +18,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 public class ImportCommandParserTest {
 
@@ -36,23 +40,45 @@ public class ImportCommandParserTest {
 
     @Test
     public void parse_typicalImportFile_returnsFindCommand() {
-        ImportCommand expectedImportCommand = new ImportCommand(new ArrayList<Person>(Arrays.asList(BOB, IDA)));
+        ImportCommand expectedImportCommand = new ImportCommand(
+                new ArrayList<Person>(Arrays.asList(BOB, IDA, AMY, CHARLIE)));
         assertParseSuccess(parser, "src/test/data/ImportCommandParserTest/typicalImportFile.csv",
                 expectedImportCommand);
     }
 
     @Test
-    public void parse_InvalidNameFile_throwsParseException() {
+    public void parse_InvalidNameImportFile_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/InvalidNameImportFile.csv";
         assertThrows(ParseException.class, Name.MESSAGE_CONSTRAINTS,
                 () -> parser.parse(filePath));
     }
 
     @Test
-    public void parse_InvalidPhoneFile_throwsParseException() {
+    public void parse_InvalidPhoneImportFile_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/InvalidPhoneImportFile.csv";
         assertThrows(ParseException.class, Phone.MESSAGE_CONSTRAINTS,
                 () -> parser.parse(filePath));
+    }
+
+    @Test
+    public void parse_InvalidAvailabilityImportFile_throwsParseException() {
+        String filePath = "src/test/data/ImportCommandParserTest/InvalidAvailabilityImportFile.csv";
+        assertThrows(ParseException.class, Availability.MESSAGE_CONSTRAINTS,
+                () -> parser.parse(filePath));
+    }
+
+    @Test
+    public void parse_InvalidTagsImportFile_throwsParseException() {
+        String filePath = "src/test/data/ImportCommandParserTest/InvalidTagsImportFile.csv";
+        assertThrows(ParseException.class, Tag.MESSAGE_CONSTRAINTS,
+                () -> parser.parse(filePath));
+    }
+
+    @Test
+    public void parse_InvalidFormatImportFile_throwsParseExecption() {
+        String filepath = "src/test/data/ImportCommandParserTest/InvalidFormatImportFile.csv";
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE),
+                () -> parser.parse(filepath));
     }
 
     @Test
