@@ -244,8 +244,7 @@ Example usage of either command is as follows:
 - `edit 2 p/1 p/3` - Replaces task 2's set of people with a set consisting of persons 1 and 3.
 
 A sequence diagram is provided below:
-
-![TabSystemSequenceDiagram](images/AssignPeopleSequenceDiagram.png)
+![AssignPeopleSequenceDiagram](images/AssignPeopleSequenceDiagram.png)
 
 #### Challenges  
 
@@ -263,6 +262,97 @@ Cons: Too much of a hassle with long names, and using only parts of a name was n
 the possibility of multiple people with the same first name, etc. The side panel was implemented to circumvent
 this problem
 
+
+### \[Implemented\] Adding Date/Time to Tasks (Myat)
+
+To add onto our new task list system, just like how the address book allows storing of additional information like
+phone number and email, the user can now add in a task's date with an optional time information. The addition of
+date/time as a new type of information to be stored opens the door to more functionalities such as listing upcoming
+tasks and finding tasks based on date/time.
+
+Possible use cases:
+- Adding date/time of a task that is due at the specified date and time.
+- Adding date/time of a task that the user wants to start working on at the specified date and time.
+
+#### Implementation
+
+The `TaskDate.java` class is created to represent a date/time object of a task, which is stored inside a `Task` object
+upon creating a `Task` through an `add` command. Inside `TaskDate.java` class, date and time are represented by Java 
+class objects `LocalDate` and `LocalTime`. As the user can choose to either omit both date and time or have time as optional
+information, both of these objects are wrapped in Java `Optional` objects as `Optional<LocalDate>` and `Optional<LocalTime>`.
+This makes handling of a `TaskDate` object safer as the date and time objects do not exist in a `Task` which the user adds
+in without stating date/time information. 
+
+The user is also required to follow a specific date and time format which the validity is checked by `DateTask#isValidTaskDate`.
+Java `LocalDate#parse` and `LocalTime#parse` are used to help verify validity of the format keyed in by the user.
+
+Example usage of `add` command to add date/time is as follows:
+- `add d/Homework dt/21/11/2021` - Adds a task "Homework" that is due on 21/11/2021 at an unspecified time.
+- `add d/Tutorial dt/1600` - Adds a task "Tutorial" that starts at 4:00 PM with date as that current day.
+- `add d/Event dt/25/10/2021, 10:00 AM` - Adds a task "Event" that starts at the given date and time.
+
+A sequence diagram is provided below that shows how TaskDate class works when the command "add d/Homework dt/21/11/2021"
+is entered:
+![AddDateSequenceDiagram](images/AddDateSequenceDiagram.png)
+
+The following activity diagram summarises what happens when a user executes an add command with date and/or time:
+![AddDateActivityDiagram](images/AddDateActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to store date and time in TaskDate:**
+
+* **Alternative 1 (current choice):** Uses `LocalDate` and `LocalTime` to store date and time respectively.
+    * Pros: More flexibility and better abstraction as both can be handled separately. Less complex to implement.
+    * Cons: More methods and code are needed to handle the different types of Object separately which results in 
+            methods with similar code.
+
+* **Alternative 2:** Uses `LocalDateTime` to store date and time together.
+    * Pros: Less code and methods to handle one Object type and it also results in easier implementation of
+            comparison methods between two `LocalDateTime` objects.
+    * Cons: Less flexibility and more tedious to check different combinations of DateTime formats.
+  
+### \[Proposed\] Using the Up/Down Arrow Keys to Select Previous User Inputs
+
+A proposed improvement to the text-based input method is to allow users to easily reenter previously inputted commands 
+by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle feature which 
+will improve the usability of the app. 
+
+An example use case would be when a user wants to add two tasks with description "CS2100 Tutorial 7" and "CS2100 
+Tutorial 8" to their task List. Instead of typing out a near-identical command for the second task, they could press 
+the up arrow key, access their previously entered commmand and change '7' to '8'.
+
+#### Implementation
+
+The proposed implementation involves adding a new class `PreviousUserInputList` to `Model`. This class will encapsulate 
+a list of Strings, which will be used to set the text in the `CommandBox`. This list will be updated in `LogicManager` 
+if the user input results in a valid command execution. There will be an equivalent class in `Storage` to store this 
+list.
+
+In order to facilitate selection of previous user inputs with the arrow keys, we must keep track of the index of the 
+above list. This index will be located in the `CommandBox` and will be used to select the appropriate user input to 
+set as the text in the text box.
+
+#### Design considerations
+
+- Keeping track of different lists of user inputs for different tabs
+
+We decided against keeping track of different lists of user inputs corresponding to commands on different tabs. We 
+judged the benefits of this feature to be minimal and not worth the extra complexity in `Model` and `Storage`. 
+Moreover, we would have to make an arbitrary decision on where to store the user inputs corresponding to switching 
+tabs.
+  
+- Storing the index of the list in `Model`
+
+Due to the fact that the index should reset between uses of the app, we decided that there is not need to store the 
+index of the currently in-focus user input in `Model` or the `Storage`. The index can safely be reset to 0 upon input 
+of a command or upon opening the app. 
+  
+- Storing user inputs that are invalid
+
+We decided not to store user inputs that are invalid due to the current behaviour of the text box: when an invalid 
+input is entered, the input remains in the text box with a red font. In the case of a typo, since the user can easily 
+modify this previous input, there seems to be no need to store it.
 
 --------------------------------------------------------------------------------------------------------------------
 

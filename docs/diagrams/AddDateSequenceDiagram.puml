@@ -1,0 +1,67 @@
+@startuml
+participant ":MainWindow" as MainWindow
+participant ":LogicManager" as LogicManager
+participant ":TaskTabParser" as TaskTabParser
+participant ":AddTaskCommandParser" as AddTaskCommandParser
+participant "taskDate:TaskDate" as TaskDate
+participant "task:Task" as Task
+participant "command:AddTaskCommand" as AddTaskCommand
+participant "commandResult:CommandResult" as CommandResult
+
+activate MainWindow
+MainWindow -> LogicManager: execute("add... dt/21/11/2021")
+activate LogicManager
+
+LogicManager -> TaskTabParser: parseCommand(...)
+activate TaskTabParser
+
+create AddTaskCommandParser
+TaskTabParser -> AddTaskCommandParser
+activate AddTaskCommandParser
+AddTaskCommandParser --> TaskTabParser
+deactivate AddTaskCommandParser
+
+TaskTabParser -> AddTaskCommandParser: parse(...)
+activate AddTaskCommandParser
+
+create TaskDate
+AddTaskCommandParser -> TaskDate: ParserUtil.parseTaskDate(...)
+activate TaskDate
+TaskDate --> AddTaskCommandParser: taskDate
+deactivate TaskDate
+
+create Task
+AddTaskCommandParser -> Task: Task(..., taskDate,..)
+activate Task
+Task --> AddTaskCommandParser: task
+deactivate Task
+
+create AddTaskCommand
+AddTaskCommandParser -> AddTaskCommand: AddTaskCommand(task)
+activate AddTaskCommand
+
+AddTaskCommand --> AddTaskCommandParser: command
+deactivate AddTaskCommand
+
+AddTaskCommandParser --> TaskTabParser: command
+deactivate AddTaskCommandParser
+
+TaskTabParser --> LogicManager: command
+deactivate TaskTabParser
+
+LogicManager -> AddTaskCommand: execute(model)
+activate AddTaskCommand
+
+create CommandResult
+AddTaskCommand -> CommandResult
+activate CommandResult
+CommandResult --> AddTaskCommand: commandResult
+deactivate CommandResult
+
+AddTaskCommand --> LogicManager: commandResult
+deactivate AddTaskCommand
+
+LogicManager --> MainWindow: commandResult
+deactivate LogicManager
+
+@enduml
