@@ -6,8 +6,7 @@ import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.model.group.SubGroup;
-import seedu.notor.model.group.SuperGroup;
+import seedu.notor.model.group.Group;
 
 public abstract class GroupExecutor extends Executor {
     protected final Index index;
@@ -16,18 +15,8 @@ public abstract class GroupExecutor extends Executor {
         this.index = index;
     }
 
-    protected SuperGroup getGroup() throws ExecuteException {
-        List<SuperGroup> lastShownList = model.getFilteredGroupList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new ExecuteException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-
-        return lastShownList.get(index.getZeroBased());
-    }
-
-    protected SubGroup getSubGroup() throws ExecuteException {
-        List<SubGroup> lastShownList = model.getFilteredSubGroupList();
+    protected Group getGroup() throws ExecuteException {
+        List<? extends Group> lastShownList = model.getFilteredGroupList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new ExecuteException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

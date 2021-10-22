@@ -1,9 +1,11 @@
 package seedu.notor.logic.executors.group;
 
+import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.exceptions.DuplicateItemException;
+import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 
@@ -27,14 +29,20 @@ public class SubGroupCreateExecutor extends GroupExecutor {
     @Override public CommandResult execute() throws ExecuteException {
         try {
             if (model.getFilteredGroupList().size() > index.getOneBased()) {
-                SuperGroup superGroup = model.getFilteredGroupList().get(index.getZeroBased());
-                superGroup.addSubGroup(subGroup);
-                subGroup.setParent(superGroup);
+                Group group = model.getFilteredGroupList().get(index.getZeroBased());
+                // TODO: Guard clause for if group is a SubGroup instead.
+                // Make it return its own type of error.
+                if (group instanceof SuperGroup) {
+                    SuperGroup superGroup = (SuperGroup) group;
+                    superGroup.addSubGroup(subGroup);
+                    subGroup.setParent(superGroup);
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
+                }
+                throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
             } else {
                 // TODO: stub error message, this is supposed to be for when index is out of bounds.
                 throw new ExecuteException("");
             }
-            return new CommandResult(String.format(MESSAGE_SUCCESS, subGroup));
         } catch (DuplicateItemException e) {
             throw new ExecuteException(MESSAGE_DUPLICATE_GROUP);
         }
