@@ -17,13 +17,12 @@ import seedu.address.model.game.Game;
  */
 public class FriendListPanel extends UiPart<Region> {
     private static final String FXML = "FriendListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(FriendListPanel.class);
-
     /**
      * The default FriendMainCard with no friend's data to be used when a non-get command is run.
      */
     private static final FriendMainCard DEFAULT_FRIEND_MAIN_CARD = new FriendMainCard();
 
+    private final Logger logger = LogsCenter.getLogger(FriendListPanel.class);
     private FriendMainCard friendMainCard;
 
     @FXML
@@ -31,8 +30,6 @@ public class FriendListPanel extends UiPart<Region> {
 
     @FXML
     private StackPane friendMainCardPlaceholder;
-
-
 
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.

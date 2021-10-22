@@ -1,12 +1,13 @@
 package seedu.address.model.game;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.friend.*;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.util.SampleDataUtil.getSampleFriends;
 import static seedu.address.model.util.SampleDataUtil.getSampleGames;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.friend.Friend;
 
 class GameFriendLinksContainsGameIdPredicateTest {
 
@@ -48,7 +49,7 @@ class GameFriendLinksContainsGameIdPredicateTest {
     }
 
     @Test
-    void test_GFLContainsGameId_returnsTrue() {
+    void test_gflContainsGameId_returnsTrue() {
         Game game = getSampleGames()[1];
         Friend friend = getSampleFriends()[0];
 
@@ -59,7 +60,7 @@ class GameFriendLinksContainsGameIdPredicateTest {
     }
 
     @Test
-    void test_GFLContainsGameId_returnsFalse() {
+    void test_gflContainsGameId_returnsFalse() {
         Game game = getSampleGames()[2];
         Friend friend = getSampleFriends()[0];
 

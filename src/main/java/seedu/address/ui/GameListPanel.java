@@ -17,13 +17,12 @@ import seedu.address.model.game.Game;
  */
 public class GameListPanel extends UiPart<Region> {
     private static final String FXML = "GameListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(GameListPanel.class);
-
     /**
      * The default GameMainCard with no game's data to be used when a non-get command is run.
      */
     private static final GameMainCard DEFAULT_GAME_MAIN_CARD = new GameMainCard();
 
+    private final Logger logger = LogsCenter.getLogger(GameListPanel.class);
     private GameMainCard gameMainCard;
 
     @FXML

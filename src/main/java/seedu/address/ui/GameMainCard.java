@@ -6,19 +6,15 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendGameFriendLinksContainsGamePredicate;
 import seedu.address.model.game.Game;
+import seedu.address.ui.util.SampleStyles;
 
 
 public class GameMainCard extends UiPart<Region> {
@@ -57,11 +53,7 @@ public class GameMainCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(friend -> friend.getFriendId().value))
                 .forEach(friend -> {
                     Label label = new Label(friend.getFriendId().value);
-                    label.setTextFill(Color.WHITE);
-                    label.setBackground(new Background(new BackgroundFill(Color.rgb(114, 137, 218, 1),
-                            new CornerRadii(10.0),
-                            new Insets(-5.0, -7.0, -5.0, -7.0))));
-
+                    label.setBackground(SampleStyles.BLURPLE_BACKGROUND);
                     friends.getChildren().add(label);
                 });
         this.currentGame = game;

@@ -9,8 +9,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.game.Game;
 
-
-
 public class FriendGameFriendLinksContainsGamePredicateTest {
     @Test
     void getGame() {
@@ -47,7 +45,7 @@ public class FriendGameFriendLinksContainsGamePredicateTest {
     }
 
     @Test
-    void test_GFLContainGame_returnsTrue() {
+    void test_gflContainGame_returnsTrue() {
         Game game = getSampleGames()[1];
         Friend friend = getSampleFriends()[0];
 
@@ -58,7 +56,7 @@ public class FriendGameFriendLinksContainsGamePredicateTest {
     }
 
     @Test
-    void test_GFLDoesNotContainGame_returnsFalse() {
+    void test_gflDoesNotContainGame_returnsFalse() {
         Game game = getSampleGames()[2];
         Friend friend = getSampleFriends()[0];
 

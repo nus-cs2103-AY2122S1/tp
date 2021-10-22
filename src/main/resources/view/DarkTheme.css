@@ -5,28 +5,8 @@
 
 .label {
     -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: #555555;
+    -fx-font-family: "Open Sans";
     -fx-opacity: 0.9;
-}
-
-.label-bright {
-    -fx-font-size: 11pt;
-    -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
-}
-
-.label-header {
-    -fx-font-size: 32pt;
-    -fx-font-family: "Open Sans Light";
-    -fx-text-fill: white;
-    -fx-opacity: 1;
-}
-
-.text-field {
-    -fx-font-size: 12pt;
-    -fx-font-family: "Open Sans Semibold";
 }
 
 .tab-pane {
@@ -146,7 +126,7 @@
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Monaco";
     -fx-font-size: 13pt;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
@@ -209,7 +189,7 @@
 
 .menu-bar .label {
     -fx-font-size: 14pt;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Monaco";
     -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
@@ -336,7 +316,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Monaco";
     -fx-font-size: 13pt;
     -fx-text-fill: black;
 }

@@ -80,9 +80,6 @@ public class SampleDataUtil {
      */
     public static Friend createSampleFriend(String friendIdString, String friendNameString, Game... games) {
         FriendId friendId = new FriendId(friendIdString);
-//        if (validateSampleFriendIdUnique(friendId)) {
-//            return null;
-//        }
 
         Set<GameFriendLink> gameFriendLinks = new HashSet<>();
         FriendName friendName = new FriendName(friendNameString);
