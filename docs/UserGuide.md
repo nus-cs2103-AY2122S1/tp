@@ -56,6 +56,8 @@ tasks done faster than traditional GUI apps.
 ### Module add task: `add task`
 
 Create a new task for a specific module
+Task name should only contain alphanumeric characters
+Task deadline should only contain alphanumeric characters and dashes
 
 Format: `add task m/<module name>, a/<task name>, d/<task deadline>`
 
@@ -126,6 +128,8 @@ Examples:
 
 Edits a task's information (at least one editable field (name/deadline) should be provided,
 and only provided editable fields will be changed)
+Task name should only contain alphanumeric characters
+Task deadline should only contain alphanumeric characters and dashes
 
 Format: `edit task m/<module name> ti/<task id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
 
