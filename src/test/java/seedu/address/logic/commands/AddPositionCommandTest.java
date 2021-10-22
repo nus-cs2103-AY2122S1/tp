@@ -258,7 +258,7 @@ public class AddPositionCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
-    
+
     /**
      * A Model stub that contains a single position.
      */
