@@ -247,8 +247,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the {@Code FriendMainCard} when the {@Code find} command is run.
-     * @param commandResult The {@Code commandResult} from the find command.
+     * Shows the {@Code FriendMainCard} when the {@Code get} command is run.
+     * @param commandResult The {@Code commandResult} from the get command.
      */
     private void handleShowFriendMainCard(CommandResult commandResult) {
         // only mounts the friend main card if it is not already mounted or if friend different
@@ -262,8 +262,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the {@Code GameMainCard} when the {@Code find} command is run.
-     * @param commandResult The {@Code commandResult} from the find command.
+     * Shows the {@Code GameMainCard} when the {@Code get} command is run.
+     * @param commandResult The {@Code commandResult} from the get command.
      */
     private void handleShowGameMainCard(CommandResult commandResult) {
         // only mounts the friend main card if it is not already mounted
