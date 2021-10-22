@@ -39,8 +39,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
             try {
                 return deleteByModuleCode(moduleCodes);
             } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(pe.getMessage());
             }
         }
         try {
@@ -67,7 +66,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
                 .collect(Collectors.toList());;
         ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
         if (moduleCode.getLessonCodes().size() > 1) {
-            throw new ParseException("error message");
+            throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_LESSON_CODE_USAGE);
         }
 
         return new DeletePersonCommand(

@@ -22,12 +22,14 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -42,7 +44,7 @@ public class DeletePersonCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         //Deletes 1 person
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete);
         expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1) + expectedMessage;
@@ -50,7 +52,7 @@ public class DeletePersonCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -58,7 +60,7 @@ public class DeletePersonCommandTest {
         //Deletes 2 persons
         Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeletePersonCommand deleteCommand1 = new DeletePersonCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
 
         String expectedMessage1 = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 2)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete1)
@@ -68,7 +70,7 @@ public class DeletePersonCommandTest {
         expectedModel1.deletePerson(personToDelete1);
         expectedModel1.deletePerson(personToDelete2);
 
-        assertCommandSuccess(deleteCommand1, model, expectedMessage1, expectedModel1);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage1, expectedModel1);
     }
 
     @Test
@@ -77,7 +79,7 @@ public class DeletePersonCommandTest {
         Person person2 = model.getFilteredPersonList().get(INDEX_ISAAC.getZeroBased());
         Person newPerson2 = new PersonBuilder(person2).withModuleCodes(VALID_MODULE_CODE_CS2106).build();
 
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100))),
                 new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
 
@@ -90,34 +92,34 @@ public class DeletePersonCommandTest {
         expectedModel.deletePerson(person1);
         expectedModel.setPerson(person2, newPerson2);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(outOfBoundIndex);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_invalidRangeUnfilteredList_throwsCommandException() {
         Index invalidStartIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 2);
         Index invalidEndIndex = Index.fromOneBased(model.getFilteredPersonList().size() - 4);
-        DeletePersonCommand deleteCommand1 = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(invalidStartIndex, invalidEndIndex);
 
-        assertCommandFailure(deleteCommand1, model, Messages.MESSAGE_INVALID_RANGE);
+        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_RANGE);
     }
 
     @Test
     public void execute_invalidModuleCodeUnfilteredList_throwsCommandException() {
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[CS1231]")));
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(
                 predicate, new ModuleCode("CS1231", new HashSet<>()));
 
-        assertCommandFailure(deleteCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
+        assertCommandFailure(deletePersonCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
     }
 
     @Test
@@ -126,7 +128,7 @@ public class DeletePersonCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(INDEX_FIRST_PERSON);
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete);
         expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1) + expectedMessage;
@@ -134,7 +136,7 @@ public class DeletePersonCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
@@ -144,7 +146,7 @@ public class DeletePersonCommandTest {
 
         Person personToDelete1 = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person personToDelete2 = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
-        DeletePersonCommand deleteCommand1 = new DeletePersonCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(INDEX_FIRST_PERSON, INDEX_SECOND_PERSON);
 
         String expectedMessage1 = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 2)
                 + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, personToDelete1)
@@ -154,7 +156,7 @@ public class DeletePersonCommandTest {
         expectedModel1.deletePerson(personToDelete1);
         expectedModel1.deletePerson(personToDelete2);
 
-        assertCommandSuccess(deleteCommand1, model, expectedMessage1, expectedModel1);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage1, expectedModel1);
     }
 
     @Test
@@ -167,7 +169,7 @@ public class DeletePersonCommandTest {
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106)));
 
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(predicate,
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
@@ -177,7 +179,7 @@ public class DeletePersonCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.setPerson(person, newPerson);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

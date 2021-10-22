@@ -30,11 +30,16 @@ public class DeletePersonCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_MODULE_CODE + "MODULE CODE\n"
             + "Example: delete 1 , delete 1-3 , delete "
-            + PREFIX_MODULE_CODE + "CS2040S";
+            + PREFIX_MODULE_CODE + "CS2040S, "
+            + "delete " + PREFIX_MODULE_CODE + "CS2040S T09";
 
     public static final String MESSAGE_DELETE_BY_MODULE_USAGE = "delete: "
             + "Delete only accepts one batch delete by Module Code at a time\n"
             + "Example: delete " + PREFIX_MODULE_CODE + "CS2040S";
+
+    public static final String MESSAGE_DELETE_BY_LESSON_CODE_USAGE = "delete: "
+            + "Delete only accepts one batch delete by Lesson Code at a time\n"
+            + "Example: delete " + PREFIX_MODULE_CODE + "CS2040S T09";
 
     public static final String MESSAGE_NUMBER_DELETED_PERSON = "%d Deleted Persons: \n";
     public static final String MESSAGE_NUMBER_EDITED_PERSON = "\n%d Edited Persons: \n";
@@ -107,20 +112,18 @@ public class DeletePersonCommand extends Command {
         if (model.getFilteredPersonList().isEmpty()) {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
-        } else if (isDeleteLesson()) {
-            model.updateFilteredPersonList(predicate);
-            return deleteLessonTag(model, model.getFilteredPersonList());
+        } else if (isDeleteLessonCode()) {
+            return deleteLessonCode(model, model.getFilteredPersonList());
         } else {
-            model.updateFilteredPersonList(predicate);
-            return deleteRelatedPersonByModuleCode(model, model.getFilteredPersonList());
+            return deleteByModuleCode(model, model.getFilteredPersonList());
         }
     }
 
-    private boolean isDeleteLesson() {
+    private boolean isDeleteLessonCode() {
         return moduleCode.getLessonCodes().size() > 0;
     }
 
-    private String deleteLessonTag(Model model, List<Person> filteredList) {
+    private String deleteLessonCode(Model model, List<Person> filteredList) {
         int first = 0;
         int last = filteredList.size() - 1;
         int numberOfDeletedPersons = 0;
@@ -129,8 +132,13 @@ public class DeletePersonCommand extends Command {
         StringBuilder editedPersons = new StringBuilder();
         while (last >= first) {
             Person personToCheck = filteredList.get(last);
-            if (hasMoreThan1Lesson(personToCheck.get(moduleCode))) {
-                deleteModuleLesson(personToCheck, model, personToCheck.get(moduleCode));
+            if (hasMoreThanOneLesson(personToCheck.get(moduleCode))) {
+                deleteLessonCodeTag(personToCheck, model, personToCheck.get(moduleCode));
+                editedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToCheck));
+                numberOfEditedPersons++;
+            } else if (personToCheck.getModuleCodes().size() > 1) {
+                deleteLessonCodeTag(personToCheck, model, personToCheck.get(moduleCode));
+                deleteModuleCodeTag(personToCheck, model);
                 editedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToCheck));
                 numberOfEditedPersons++;
             } else {
@@ -144,11 +152,11 @@ public class DeletePersonCommand extends Command {
                 + String.format(MESSAGE_NUMBER_EDITED_PERSON, numberOfEditedPersons) + editedPersons;
     }
 
-    private boolean hasMoreThan1Lesson(ModuleCode moduleCode) {
+    private boolean hasMoreThanOneLesson(ModuleCode moduleCode) {
         return moduleCode.getLessonCodes().size() > 1;
     }
 
-    private void deleteModuleLesson(Person person, Model model, ModuleCode personModuleCode) {
+    private void deleteLessonCodeTag(Person person, Model model, ModuleCode personModuleCode) {
         Set<LessonCode> tags = new HashSet<>(personModuleCode.getLessonCodes());
         String onlyTags = moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1);
         tags.remove(new LessonCode(onlyTags));
@@ -166,7 +174,7 @@ public class DeletePersonCommand extends Command {
         model.setPerson(person, editedPerson);
     }
 
-    private String deleteRelatedPersonByModuleCode(Model model, List<Person> filteredList) {
+    private String deleteByModuleCode(Model model, List<Person> filteredList) {
         int first = 0;
         int last = filteredList.size() - 1;
         int numberOfDeletedPersons = 0;
@@ -206,14 +214,13 @@ public class DeletePersonCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         int first = targetIndex.getZeroBased();
         int last = endIndex.getZeroBased();
-        int numberOfDeletedPersons = 0;
+        int numberOfDeletedPersons = last - first + 1;
         StringBuilder deletedPersons = new StringBuilder();
 
         while (last >= first) {
             Person personToDelete = lastShownList.get(last);
             model.deletePerson(personToDelete);
             deletedPersons.insert(0, String.format(MESSAGE_DELETE_SUCCESS, personToDelete));
-            numberOfDeletedPersons++;
             last--;
         }
         return String.format(MESSAGE_NUMBER_DELETED_PERSON, numberOfDeletedPersons) + deletedPersons;
