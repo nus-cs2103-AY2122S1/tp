@@ -8,20 +8,22 @@ track of the contact information of clients and details of the products in inven
 
 * Table of Contents
     * [Quick Start](#quick-start)
-    * [Features](#features)
-        * [Help](#help-help)
-        * [Exit](#exit-exit)
-        * [Add](#adding-add)
-        * [Delete](#deleting-delete)
-        * [Clear](#clear-everything-clear)
-        * [Edit](#editing-edit)
-        * [Find](#finding-find)
-        * [List](#listing-list)
-        * [View](#viewing-view)
-        * [Command History](#command-history)
-        * [Saving the data](#saving-the-data)
-        * [Editing the data file](#editing-the-data-file)
-        * [Statistics (Coming Soon)](#statistics-stat-coming-soon)
+    * <details><summary><a href="#features">Features</a></summary>
+        <ul>
+            <li><a href="#help-help">Help</a></li>
+            <li><a href="#exit-exit">Exit</a></li>
+            <li><a href="#adding-add">Add</a></li>
+            <li><a href="#deleting-delete">Delete</a></li>
+            <li><a href="#clear-everything-clear">Clear</a></li>
+            <li><a href="#editing-edit">Edit</a></li>
+            <li><a href="#finding-find">Find</a></li>
+            <li><a href="#listing-list">List</a></li>
+            <li><a href="#viewing-view">View</a></li>
+            <li><a href="#command-history">Command History</a></li>
+            <li><a href="#saving-the-data">Saving the data</a></li>
+            <li><a href="#editing-the-data-file">Editing the data file</a></li>
+            <li><a href="#statistics-stat-coming-soon">Statistics (Coming Soon)</a></li>
+        </ul></details>
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
