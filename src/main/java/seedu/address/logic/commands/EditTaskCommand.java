@@ -41,7 +41,7 @@ public class EditTaskCommand extends EditCommand {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_TASK_ID + "1 "
-            + PREFIX_TASK_NAME + "V1.3 "
+            + PREFIX_TASK_NAME + "V13 "
             + PREFIX_TASK_DEADLINE + "21 Oct 2021 "
             + "(edits all fields)";
 
@@ -70,9 +70,9 @@ public class EditTaskCommand extends EditCommand {
                 // right module reached
                 List<Student> studentList = module.getFilteredStudentList();
                 for (Student student : studentList) {
-                    return editTaskInformation(student);
+                    editTaskIListOfStudent(student);
                 }
-                // return editTaskInformation(module); what to return here?
+                return editTaskListOfModule(module);
             }
         }
         throw new CommandException(String.format(Messages.MESSAGE_MODULE_NAME_NOT_FOUND, moduleName.getModuleName()));
@@ -88,7 +88,10 @@ public class EditTaskCommand extends EditCommand {
      * @return Statement indicating that the edit is successful.
      * @throws CommandException Exception thrown when task is not found.
      */
-    public CommandResult editTaskInformation(Student student) throws CommandException {
+    public CommandResult editTaskIListOfStudent(Student student) throws CommandException {
+        if (student == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT, "student is null"));
+        }
         UniqueTaskList studentTaskList = student.getTaskList();
         for (Task task : studentTaskList) {
             if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
@@ -98,7 +101,30 @@ public class EditTaskCommand extends EditCommand {
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
             }
         }
-        student.setTaskList(studentTaskList);
+        throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, editTaskDescriptor.taskId));
+    }
+
+    /**
+     * Edits a task's information. The task will be from the specified student.
+     *
+     * @param module The student whose task will be edited.
+     * @return Statement indicating that the edit is successful.
+     * @throws CommandException Exception thrown when task is not found.
+     */
+    public CommandResult editTaskListOfModule(Module module) throws CommandException {
+        if (module == null) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT, "student is null"));
+        }
+        UniqueTaskList moduleTaskList = module.getTaskList();
+        for (Task task : moduleTaskList) {
+            if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
+                Task editedTask = createEditedTask(task, editTaskDescriptor);
+                // replaces the old task with the editedTask
+                moduleTaskList.setTask(task, editedTask);
+                return new CommandResult(String.format(Messages.MESSAGE_EDIT_TASK_SUCCESS, task.getTaskName()));
+            }
+        }
+        module.setTaskList(moduleTaskList);
         throw new CommandException(String.format(Messages.MESSAGE_TASK_NOT_FOUND, editTaskDescriptor.taskId));
     }
 
