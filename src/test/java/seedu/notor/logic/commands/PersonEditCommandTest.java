@@ -7,7 +7,7 @@ import static seedu.notor.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.notor.logic.commands.CommandTestUtil.assertExecuteFailure;
 import static seedu.notor.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -45,7 +45,8 @@ public class PersonEditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
+        // TODO: revise this test case so that it does not depend on hardcoded person
+        Person editedPerson = new PersonBuilder().withTags("friends").build();
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder(editedPerson).build();
         PersonEditCommand personEditCommand = new PersonEditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -53,7 +54,6 @@ public class PersonEditCommandTest {
 
         Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
-
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
 
@@ -63,11 +63,10 @@ public class PersonEditCommandTest {
         Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
 
         PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         PersonEditCommand personEditCommand = new PersonEditCommand(indexLastPerson, descriptor);
 
         String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);

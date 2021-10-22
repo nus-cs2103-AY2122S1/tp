@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 import seedu.notor.model.Notable;
 import seedu.notor.model.common.Name;
@@ -183,13 +184,18 @@ public class Person implements Unique<Person>, Notable {
         return subGroups;
     }
 
-
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+    
+    public String getTagsString() {
+        AtomicReference<String> tagString = new AtomicReference<>(new String());
+        tags.forEach(str -> tagString.set(tagString.get() + str + ", "));
+        return tagString.get();
     }
 
     /**

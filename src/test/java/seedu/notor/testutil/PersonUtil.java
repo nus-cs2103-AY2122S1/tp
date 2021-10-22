@@ -9,11 +9,16 @@ import seedu.notor.model.person.Person;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns a create command string for adding a {@code person} which does not have any tags.
      */
-    public static String getAddCommand(Person person) {
+    public static String getCreateCommand(Person person) {
         return String.format("person %s /create p:%s e:%s", person.getName(),
                 person.getPhone(), person.getEmail());
+    }
+
+    public static String getCreateCommandWithTags(Person person) {
+        return String.format("person %s /create p:%s e:%s t:%s", person.getName(),
+                person.getPhone(), person.getEmail(), person.getTagsString());
     }
 
     /**

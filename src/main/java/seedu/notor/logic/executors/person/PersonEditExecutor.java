@@ -60,9 +60,8 @@ public class PersonEditExecutor extends PersonExecutor {
         Name updatedName = personEditDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = personEditDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = personEditDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Note updatedNote = personEditDescriptor.getNote().orElse(personToEdit.getNote());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote);
+        return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getNote(), personToEdit.getTags(),
+                personToEdit.getSuperGroups(), personToEdit.getDisplaySubGroups());
     }
 
     @Override

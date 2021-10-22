@@ -44,7 +44,7 @@ public class PersonCreateExecutor extends PersonExecutor {
                 person.addGroup(group);
             } else {
                 // TODO: stub error message, this is supposed to be for when index is out of bounds.
-                throw new ExecuteException("");
+                throw new ExecuteException("Index is out of bounds");
             }
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, person));
