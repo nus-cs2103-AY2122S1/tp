@@ -10,7 +10,8 @@ import seedu.notor.ui.WarningWindow;
  * Clears general note.
  */
 public class ClearNoteCommand implements Command {
-
+    // Keep this around for command description usage.
+    public static final String COMMAND_WORD = "clearnote";
     public static final List<String> COMMAND_WORDS = Arrays.asList("clearnote", "cn");
     public static final String MESSAGE_CLEAR_NOTE_SUCCESS = "Cleared general note.";
     public static final String MESSAGE_CLEAR_NOTE_CANCEL = "Clearing of general note has been cancelled.";
