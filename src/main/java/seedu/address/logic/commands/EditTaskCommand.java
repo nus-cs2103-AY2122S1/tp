@@ -70,7 +70,7 @@ public class EditTaskCommand extends EditCommand {
                 // right module reached
                 List<Student> studentList = module.getFilteredStudentList();
                 for (Student student : studentList) {
-                    editTaskIListOfStudent(student);
+                    editTaskListOfStudent(student);
                 }
                 return editTaskListOfModule(module);
             }
@@ -88,7 +88,7 @@ public class EditTaskCommand extends EditCommand {
      * @return Statement indicating that the edit is successful.
      * @throws CommandException Exception thrown when task is not found.
      */
-    public CommandResult editTaskIListOfStudent(Student student) throws CommandException {
+    public CommandResult editTaskListOfStudent(Student student) throws CommandException {
         if (student == null) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT, "student is null"));
         }
