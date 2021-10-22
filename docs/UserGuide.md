@@ -113,7 +113,7 @@ Example(s):
 
 #### Listing all students: `list`
 
-Shows a list of all students and lessons in the TuitiONE.
+Shows you a list of all students and lessons in the TuitiONE.
 
 Command Format: `list`
 
@@ -154,7 +154,7 @@ Example(s):
 
 #### Enrolling a student from lesson: `enroll`
 
-Enroll a specified student from a given TuitiONE lesson.
+Enroll a specified student to a given TuitiONE lesson.
 
 Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
@@ -233,7 +233,7 @@ Example(s):
 
 #### Viewing of lesson roster: `roster`
 
-Displays the student roster of a specified lesson in the student panel.
+Shows you the student roster of a specified lesson in the student panel.
 
 Command Format: `roster LESSON_INDEX`
 
@@ -248,7 +248,7 @@ Examples:
 
 #### Filtering of list: `filter`
 
-Filter the respective list to display entries that correspond to the conditions as specified.
+Filter the respective list(s) to display entries that correspond to the conditions as specified.
 
 Command Format: `filter [g/GRADE] [s/Subject]`
 
@@ -262,12 +262,14 @@ Command Format: `filter [g/GRADE] [s/Subject]`
 
 Example(s):
 
-* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective list.
+* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective lists.
 * `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
+* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student
+ list by grade of `P2`, and display the corresponding entries in the respective lists.
 
 #### Clearing all entries : `clear`
 
-Clears all students and lessons from the TuitiONE.
+Clears all students and lessons data stored in TuitiONE.
 
 Command Format: `clear`
 
