@@ -18,8 +18,10 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.anilist.logic.commands.AbortClearCommand;
 import seedu.anilist.logic.commands.AddCommand;
 import seedu.anilist.logic.commands.ClearCommand;
+import seedu.anilist.logic.commands.ConfirmClearCommand;
 import seedu.anilist.logic.commands.DeleteCommand;
 import seedu.anilist.logic.commands.ExitCommand;
 import seedu.anilist.logic.commands.FindCommand;
@@ -107,6 +109,25 @@ public class AnimeListParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + STATUS_DESC_WATCHING) instanceof ListCommand);
+    }
+
+    @Test
+    public void parseConfirmationCommand_abortClear() throws Exception {
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "n") instanceof AbortClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "X") instanceof AbortClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "  ") instanceof AbortClearCommand);
+
+        //If the previous command requires confirmation (i.e. ClearCommand), these become invalid inputs which
+        //would abort the clear operation
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "list") instanceof AbortClearCommand);
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "help") instanceof AbortClearCommand);
+    }
+
+    @Test
+    public void parseConfirmationCommand_confirmClear() throws Exception {
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear") instanceof ConfirmClearCommand);
+        //trailing whitespace
+        assertTrue(parser.parseConfirmationCommand(new ClearCommand(), "clear  ") instanceof ConfirmClearCommand);
     }
 
     @Test

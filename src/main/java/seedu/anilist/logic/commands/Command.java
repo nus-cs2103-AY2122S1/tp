@@ -8,6 +8,19 @@ import seedu.anilist.model.Model;
  */
 public abstract class Command {
 
+    /** Indicates if the command is an intermediate command which requires
+     * a follow-up user confirmation. */
+    private final boolean isIntermediate = false;
+
+    /**
+     * Indicates if the command is an intermediate command.
+     *
+     * @return whether the command requires a follow-up user confirmation
+     */
+    public boolean requiresConfirmation() {
+        return this.isIntermediate;
+    }
+
     /**
      * Executes the command and returns the result message.
      *

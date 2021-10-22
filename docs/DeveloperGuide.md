@@ -232,6 +232,29 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the anime being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
+### \[Proposed\] Find Feature
+
+#### Proposed Implementation
+
+The proposed find mechanism is implemented through the use of 2 `Predicate<Anime>`, one for the tab options and one for
+regular filter.
+
+{To be added later}
+
+#### Design considerations:
+
+**Aspect: How find executes:**
+
+* **Alternative 1 (current choice):** Search the keywords with the prefixes `/g` and `/n`. Does not reset tab and 
+resets after each search. 
+    * Pros: Allow for search with multiple spaces in between, allow for searching within tabs.
+    * Cons: Complicated to implement.
+
+* **Alternative 2:** Search each keyword split by whitespace. Resets tab after each search.
+    * Pros: Less complicated and less coupling.
+    * Cons: Does not allow for searches with specific criteria nor keywords with whitespaces in between, does not allow 
+    searching within tabs.
+
 _{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
@@ -396,6 +419,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. AniList shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: UC06 - Find anime by name and genre**
+
+1. User requests to find anime based on some name and genre
+2. AniList shows a list of anime filtered based on these criteria and the current 
+tab.
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The given request is invalid.
+
+    * 1a1. AniList shows an error message.
+
+      Use case ends.
 
 *{More to be added}*
 

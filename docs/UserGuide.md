@@ -123,3 +123,11 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
   Examples:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
 *  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
+
+### Clearing all animes currently displayed: `clear`
+
+Displays a confirmation prompt to user asking whether they wish to proceed with clearing the displayed animes.<br>
+User can choose to proceed by entering 'clear' again,
+in which case all animes currently displayed on screen would be cleared from the anime list.<br>
+Otherwise, the clear command is cancelled. <br>
+Format: `clear`

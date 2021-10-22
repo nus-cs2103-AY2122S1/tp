@@ -1,7 +1,10 @@
 package seedu.anilist.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -23,6 +26,9 @@ import seedu.anilist.ui.TabOption;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+
+    private Optional<Command> lastCmd;
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -33,6 +39,7 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
+        this.lastCmd = Optional.empty();
         this.model = model;
         this.storage = storage;
         animeListParser = new AnimeListParser();
@@ -41,10 +48,19 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
         CommandResult commandResult;
-        Command command = animeListParser.parseCommand(commandText);
-        commandResult = command.execute(model);
+        if (!this.lastCmd.isPresent() || !this.lastCmd.get().requiresConfirmation()) {
+            Command command = animeListParser.parseCommand(commandText);
+            assert command != null;
+            commandResult = command.execute(model);
+            this.lastCmd = Optional.of(command);
+        } else {
+            //command present and requires confirmation
+            Command command = animeListParser.parseConfirmationCommand(this.lastCmd.get(), commandText);
+            assert command != null;
+            commandResult = command.execute(model);
+            this.lastCmd = Optional.of(command);
+        }
 
         try {
             storage.saveAnimeList(model.getAnimeList());
@@ -88,5 +104,16 @@ public class LogicManager implements Logic {
     @Override
     public TabOption getCurrentTab() {
         return model.getCurrentTab();
+    }
+
+    @Override
+    public String getThemeCss() {
+        return model.getThemeCss();
+    }
+
+    @Override
+    public void setThemeCss(String themeCss) {
+        requireNonNull(themeCss);
+        model.setThemeCss(themeCss);
     }
 }

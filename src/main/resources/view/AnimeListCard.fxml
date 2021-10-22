@@ -21,11 +21,11 @@
             <padding>
               <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox alignment="CENTER_LEFT" spacing="5">
+            <HBox alignment="CENTER_LEFT" spacing="5" VBox.vgrow="ALWAYS">
               <Label fx:id="id" minWidth="-Infinity" styleClass="cell_big_label" />
-              <Label fx:id="name" styleClass="cell_big_label" text="\$first" textOverrun="CLIP" wrapText="true" />
+              <Label fx:id="name" styleClass="cell_big_label" text="\$first" wrapText="true" HBox.hgrow="ALWAYS" />
             </HBox>
-            <FlowPane fx:id="genres" />
+            <FlowPane fx:id="genres" VBox.vgrow="ALWAYS" />
           </VBox>
             <VBox maxWidth="100.0" minWidth="100.0" prefWidth="100.0" HBox.hgrow="NEVER">
                <children>
