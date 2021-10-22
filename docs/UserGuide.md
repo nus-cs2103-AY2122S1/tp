@@ -19,7 +19,7 @@ book that contains the contact information and order details related to clients 
         * [List](#listing-list)
         * [View](#viewing-view)
         * [Command History](#command-history)
-        * [Statistics (Coming Soon)](#statistics-coming-soon)
+        * [Statistics (Coming Soon)](#statistics-stat-coming-soon)
         * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
@@ -245,7 +245,7 @@ Notes:
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
 
-### Statistics [coming soon]
+### Statistics: `stat` [coming soon]
 
 _Details coming soon ..._
 
