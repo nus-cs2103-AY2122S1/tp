@@ -76,7 +76,7 @@ TutAssistor provides an all-in-one platform for tutors to track student details,
 
 ### 1.2 How to use this guide?
 The features in this guide are formatted with the following conventions:
-* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the '\|' symbol. The user can use the command shortcuts to reduce typing. 
+* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the <code>&#124;</code> symbol. The user can use the command shortcuts to reduce typing. 
 * **Command Format** - Each command is accompanied by a set of information provided by the user. Refer to the [Features](#3-features) below for details of each command.
 * **Example** - Possible usage of each features are provided. Users may follow these examples when familiarising with the app. 
 * **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
