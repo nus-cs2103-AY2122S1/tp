@@ -1,12 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.CLEAR;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.CREATE_ADDRESSBOOK;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.EXIT;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.FINISH_CLEAR;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.NORMAL;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SHOW_HELP;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.START_CLEAR;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SWITCH_ADDRESSBOOK;
 
 import java.util.Objects;
@@ -56,11 +55,7 @@ public class CommandResult {
     }
 
     public boolean isClearing() {
-        return type.equals(START_CLEAR);
-    }
-
-    public boolean isCleared() {
-        return type.equals(FINISH_CLEAR);
+        return type.equals(CLEAR);
     }
 
     @Override
@@ -95,9 +90,7 @@ public class CommandResult {
         /** The application should exit. */
         EXIT,
         /** The current AddressBook is started to clear */
-        START_CLEAR,
-        /** The current AddressBook has been cleared */
-        FINISH_CLEAR,
+        CLEAR,
         /** The application is switching AddressBook **/
         SWITCH_ADDRESSBOOK,
         /** The application is creating AddressBook **/

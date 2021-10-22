@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.START_CLEAR;
+import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.CLEAR;
 
 import seedu.address.model.Model;
 
@@ -20,6 +20,6 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_CONFIRMATION_REQUEST, START_CLEAR);
+        return new CommandResult(MESSAGE_CONFIRMATION_REQUEST, CLEAR);
     }
 }
