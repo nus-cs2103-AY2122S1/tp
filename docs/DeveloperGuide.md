@@ -181,7 +181,7 @@ The `History` component,
   * [`StringHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/StringHistory.java)
     , which supports the saving of strings.
   * [`CopyableHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/CopyableHistory.java)
-    , which supports the saving of objects. 
+    , which supports the saving of objects.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -201,12 +201,12 @@ This section describes some noteworthy details on how the following features are
 
 ##### User Story
 
-As an experienced command line user, I want to be able to press the up and down arrow keys to cycle through my past 
+As an experienced command line user, I want to be able to press the up and down arrow keys to cycle through my past
 commands.
 
 * As an experienced command line user, I want to be able to modify a previously entered command to create a new command
-without changing what is saved. 
-  
+without changing what is saved.
+
 ##### Use Cases
 
 ```text
@@ -218,7 +218,7 @@ MSS:
                 2.  User executes the command.
                 3.  System saves the executed command.
                 Use case ends.
-                
+
 Extensions:
                 2a. System detects that the executed command is either empty string or spaces.
                     2a1.    System does not save the executed command.
@@ -234,7 +234,7 @@ MSS:
                 1.  User presses the up arrow key.
                 2.  System displays the previously entered command.
                 Use case ends.
-                
+
 Extensions:
                 1a. System detects that the earliest entered command is displayed.
                     1a1.    System continues to display the earliest entered command.
@@ -250,7 +250,7 @@ MSS:
                 1.  User presses the down arrow key.
                 2.  System displays the next entered command.
                 Use case ends.
-                
+
 Extensions:
                 1a. System detects that the newest entered command is displayed.
                     1a1.    System continues to display the newest entered command.
@@ -272,7 +272,7 @@ MSS:
 
 ##### Considerations
 
-There are a few ways in which the history system's data structure could be implemented. Some possible options are 
+There are a few ways in which the history system's data structure could be implemented. Some possible options are
 elaborated in detail [here](https://gist.github.com/CMCDragonkai/d266a3055735545447439f0fa662a0e1). Below are the pros
 and cons of some options.
 
@@ -282,43 +282,43 @@ and cons of some options.
 | Array   | Scrolling through saved snapshots in the history is fast. Easier to support UC4 in the implementation. | Appending new saved snapshots to the front is very slow.                       |
 | Queue   | Easier to support UC4 in the implementation. Appending snapshots to the front is very fast             | Scrolling through saved snapshots in the history is slower than above methods. |
 
-In the end, we decided to implement the History data structure using a queue because it has the smallest disadvantage. 
-This is because the maximum size of the history that we anticipate will not be very large (ie. less than 
-200). As such, the disadvantage of computationally expensive queue retrievals will not be as significant as the 
-disadvantages brought about by the other two implementations. 
+In the end, we decided to implement the History data structure using a queue because it has the smallest disadvantage.
+This is because the maximum size of the history that we anticipate will not be very large (ie. less than
+200). As such, the disadvantage of computationally expensive queue retrievals will not be as significant as the
+disadvantages brought about by the other two implementations.
 
 #### Implementation
 
-The implementation of the command input history feature can be split into two parts. The implementation of the history 
-API and how it is used in the feature. 
+The implementation of the command input history feature can be split into two parts. The implementation of the history
+API and how it is used in the feature.
 
 ##### History API
 
-The specifications of the history API can be found in the 
-[`History`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/History.java) 
-interface located in the [`commons.util.history`](https://github.com/AY2122S1-CS2103T-W13-2/tp/tree/master/src/main/java/seedu/address/commons/util/history) 
+The specifications of the history API can be found in the
+[`History`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/History.java)
+interface located in the [`commons.util.history`](https://github.com/AY2122S1-CS2103T-W13-2/tp/tree/master/src/main/java/seedu/address/commons/util/history)
 package. This interface mandates that all implementations of `History` should implement the following methods:
 
 * `#add(object)` - Add a snapshot of the object into the history.
 * `#get(index)` - Get the snapshot of the object stored at the index in the history.
 * `#size()` - Get the number of snapshots currently stored in the history.
 
-The history API is implemented by abstract class [`BaseHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/BaseHistory.java) 
-which provides the storage mechanism and options for the 
-saved snapshots. The [`StringHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/StringHistory.java) 
-and [`CopyableHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/CopyableHistory.java) 
-classes then perform the defensive copying of provided objects in addition to making use of `BaseHistory` for the 
-storage mechanism. The defensive copying mechanism of `#add(object)` in `CopyableHistory` can be illustrated with a 
-sequence diagram as shown below. 
+The history API is implemented by abstract class [`BaseHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/BaseHistory.java)
+which provides the storage mechanism and options for the
+saved snapshots. The [`StringHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/StringHistory.java)
+and [`CopyableHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/CopyableHistory.java)
+classes then perform the defensive copying of provided objects in addition to making use of `BaseHistory` for the
+storage mechanism. The defensive copying mechanism of `#add(object)` in `CopyableHistory` can be illustrated with a
+sequence diagram as shown below.
 
 ![CopyableHistory Add Sequence Diagram](images/CopyableHistoryAddSequenceDiagram.png)
 
 #### Usage
 
-The command input history feature is implemented by the 
-[`CommandInput`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/ui/CommandInput.java) 
+The command input history feature is implemented by the
+[`CommandInput`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/ui/CommandInput.java)
 class in the [`ui`](https://github.com/AY2122S1-CS2103T-W13-2/tp/tree/master/src/main/java/seedu/address/ui) package.
-The class diagram below shows the structure of the implementation. 
+The class diagram below shows the structure of the implementation.
 
 ![CommandInput Class Diagram](images/CommandInputClassDiagram.png)
 
@@ -331,7 +331,7 @@ The class diagram below shows the structure of the implementation.
 * `#save()` - Saves the current string in the `CommandInput` to the history.
 
 The following sequence diagrams show what happens when the user enters the command, executes the command and presses the
-up arrow key to go to a previously entered command. 
+up arrow key to go to a previously entered command.
 
 ![Save Command Sequence Diagram](images/SaveEnteredCommandSequenceDiagram.png)
 ![Go To Previous Command Sequence Diagram](images/GoToPreviousCommandSequenceDiagram.png)
@@ -373,7 +373,7 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
   - Cons:
   	- More troublesome for the user as user has to search for the csv file's absolute path.
   	- File could also not exist or be in the wrong format. Would require additional exception handling.
-    
+
 ### Encryption
 
 **Specifications:**
