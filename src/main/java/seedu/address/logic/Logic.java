@@ -23,7 +23,15 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException   If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException;
+    CommandResult normalExecute(String commandText) throws CommandException, ParseException;
+
+    /**
+     * Executes the command in context of clearing AddressBook.
+     *
+     * @param commandText The command as entered by the user.
+     * @return the result of the command execution.
+     */
+    CommandResult clearExecute(String commandText) throws CommandException, ParseException;
 
     /**
      * Returns the AddressBook.
@@ -68,5 +76,9 @@ public interface Logic {
      */
     void switchAddressBook();
 
+    /**
+     * Creates the AddressBook at the specified {@code Path filePath}
+     * @throws CommandException If an error occurs during command execution.
+     */
     void createAddressBook() throws CommandException;
 }
