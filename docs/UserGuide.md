@@ -102,12 +102,12 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/MODULE [GROUP_S
 * STUDENT_ID must be unique
 * The group statuses available are: Need member, Need group, Don't need group/Not looking for group.
 * The default status when a module is added without a description is 'Don't need group/Not looking for group'. The respective module will be displayed as a blue tag.
-* To indicate you need members for your group, you can specify any phrase that includes 'member'. The respective module will be displayed as a yellow tag.
-* To indicate you are looking for a group, you can specify any phrase that includes 'group'. The respective module will be displayed as a red tag.
+* To indicate you need members for your group, you can include the description 'need member'. The respective module will be displayed as a yellow tag.
+* To indicate you are looking for a group, you can include the description 'need group'. The respective module will be displayed as a red tag.
 
 Examples:
 * `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2103T`
-* `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com mod/CS2101 need a member`
+* `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com mod/CS2101 need group`
 * `create n/Alexa Tan id/A0012367N p/998877662 e/alexa.tan@example.com mod/CS2030S need member mod/CS2100`
     <br>
     <br>
@@ -164,7 +164,7 @@ Format: `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/M
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
 
 Examples:
-* `editGroupStatus mod/CS2103T updateStatus/Need a member`
+* `editGroupStatus mod/CS2103T updateStatus/need member`
 * `editGroupStatus mod/CS2101`
   <br>
   <br>
