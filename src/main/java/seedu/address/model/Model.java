@@ -118,23 +118,23 @@ public interface Model {
 
     //======================================== ORDER FUNCTIONALITIES =================================================
     /**
-     * Adds the given task.
+     * Adds the given order.
      */
     void addOrder(Order order);
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the task list.
+     * Returns true if an order with the same identity as {@code order} exists in the task list.
      */
     boolean hasOrder(Order order);
 
     /**
-     * Replaces the given task {@code target} with {@code editedTask}.
-     * {@code target} must exist in the task list.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
+     * Replaces the given order {@code target} with {@code editedOrder}.
+     * {@code target} must exist in the order list.
+     * The order identity of {@code editedOrder} must not be the same as another existing order in the order list.
      */
     void setOrder(Order target, Order editedOrder);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns and unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
     void deleteOrder(Order toDelete);
