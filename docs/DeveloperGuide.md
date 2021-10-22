@@ -238,13 +238,24 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Finding applicants by name
+### Add applicant feature
 
-I will explain here how the feature to find applicants by name
-is implemented.
+The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
+commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
+attribute, which contains all the details of the applicant (Name, Phone, Email, Address, 
+Title of Position Applying to), parsed straight from the user input.
 
-But I am leaving this here first as a placeholder,
-and will update with the actual explanation soon.
+The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
+applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
+`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
+`applicantBook`.
+
+Given below is an example usage scenario and how the add applicant feature behaves at each step.
+Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
+exist.
+
+Step 1. 
+
 
 
 --------------------------------------------------------------------------------------------------------------------
