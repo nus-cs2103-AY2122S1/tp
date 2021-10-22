@@ -3,14 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
+import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
-
-import java.util.List;
 
 /**
  * Adds item to the order list.
@@ -28,11 +27,11 @@ public class AddToOrderCommand extends Command {
             + PREFIX_COUNT + "10 ";
 
 
-    public static final String MESSAGE_SUCCESS = " has been added to order.";
+    public static final String MESSAGE_SUCCESS = "Items added to order: %d x %s";
     public static final String MESSAGE_ITEM_NOT_FOUND = "No such item in the inventory";
     public static final String MESSAGE_NO_UNCLOSED_ORDER = "Please use `sorder` to enter ordering mode first.";
     public static final String MESSAGE_MULTIPLE_MATCHES =
-            "Multiple candidates found, check item's details again?";
+            "Multiple candidates found, which one do you mean to add?";
 
     private final ItemDescriptor toAddDescriptor;
 
@@ -58,7 +57,7 @@ public class AddToOrderCommand extends Command {
 
         if (!model.hasUnclosedOrder()) {
             // Not in ordering mode, tell user to enter ordering mode first.
-            return new CommandResult(MESSAGE_NO_UNCLOSED_ORDER);
+            throw new CommandException(MESSAGE_NO_UNCLOSED_ORDER);
         }
 
         List<Item> matchingItems = model.getItems(toAddDescriptor);
@@ -74,7 +73,16 @@ public class AddToOrderCommand extends Command {
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
 
-        model.addToOrder(matchingItems.get(0).updateCount(toAddDescriptor.getCount().get()));
-        return new CommandResult(toAddDescriptor.getName() + MESSAGE_SUCCESS);
+        Item toAddItem = matchingItems.get(0).updateCount(toAddDescriptor.getCount().get());
+        model.addToOrder(toAddItem);
+        return new CommandResult(
+                String.format(MESSAGE_SUCCESS, toAddItem.getCount(), toAddItem.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddToOrderCommand // instanceof handles nulls
+                && toAddDescriptor.equals(((AddToOrderCommand) other).toAddDescriptor));
     }
 }

@@ -213,69 +213,6 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void addToOrder_nullItem_throwNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.addToOrder(null));
-    }
-
-    @Test
-    public void addToOrder_noOrderIsSetYet_throwAssertionError() {
-        ModelManager model = new ModelManager();
-        assertThrows(AssertionError.class, () -> model.addToOrder(APPLE_PIE));
-    }
-
-    @Test
-    public void addToOrder_normalItem_itemAdded() {
-        modelManager.setOrder(new Order());
-        Order expectedOrder = new Order();
-        modelManager.addToOrder(APPLE_PIE);
-        expectedOrder.addItem(APPLE_PIE);
-
-        assertEquals(modelManager.getOrder(), expectedOrder);
-    }
-
-    /*
-    @Test
-    public void addToOrder_duplicateItem_itemCountIncrease() {
-        // TODO: Implement duplicate item count increasing!
-        modelManager.setOrder(TypicalOrders.getTypicalOrder());
-        Order expectedOrder = TypicalOrders.getTypicalOrder();
-        modelManager.addToOrder(APPLE_PIE);
-        expectedOrder.addItem(APPLE_PIE);
-
-        assertEquals(modelManager.getOrder(), expectedOrder);
-    }*/
-
-    @Test
-    public void removeFromOrder_nullItem_throwNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.removeFromOrder(null));
-    }
-
-    @Test
-    public void removeFromOrder_noOrderIsSetYet_throwAssertionError() {
-        ModelManager model = new ModelManager();
-        assertThrows(AssertionError.class, () -> model.removeFromOrder(APPLE_PIE));
-    }
-
-    @Test
-    public void removeFromOrder_normalItem_itemRemoved() {
-        modelManager.setOrder(TypicalOrders.getTypicalOrder());
-        Order expectedOrder = TypicalOrders.getTypicalOrder();
-        modelManager.removeFromOrder(APPLE_PIE);
-        expectedOrder.removeItem(APPLE_PIE);
-
-        assertEquals(modelManager.getOrder(), expectedOrder);
-    }
-
-    @Test
-    public void removeFromOrder_nonExistingItem_orderNotChanged() {
-        modelManager.setOrder(TypicalOrders.getTypicalOrder());
-        Order expectedOrder = TypicalOrders.getTypicalOrder();
-        modelManager.removeFromOrder(TypicalItems.getRandomItem());
-
-        assertEquals(modelManager.getOrder(), expectedOrder);
-    }
-
-    @Test
     public void transactAndClearOrder_noOrderIsSetYet_throwAssertionError() {
         ModelManager model = new ModelManager();
         assertThrows(AssertionError.class, model::transactAndClearOrder);

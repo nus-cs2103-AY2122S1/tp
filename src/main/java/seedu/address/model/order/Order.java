@@ -40,6 +40,7 @@ public class Order {
 
         if (!items.contains(newItem)) {
             items.add(newItem);
+            return;
         }
 
         Item existingItem = items.get(new ItemDescriptor(newItem)).get(0);
@@ -50,16 +51,24 @@ public class Order {
 
     /**
      * Remove the specified {@code Item} from order.
+     * {@code target} must exist in the inventory.
+     * @throws IllegalArgumentException if {@code target}'s count less than amount.
      */
-    public void removeItem(Item toBeRemoved) {
-        requireNonNull(toBeRemoved);
+    public void removeItem(Item target, int amount) {
+        requireNonNull(target);
+        assert(amount > 0);
 
-        for (Item item : items.asUnmodifiableObservableList()) {
-            if (item.isSameItem(toBeRemoved)) { // Same name OR same id
-                items.remove(item);
-                break;
-            }
-            ;
+        if (target.getCount() < amount) {
+            throw new IllegalArgumentException();
+        }
+
+        Item newItem = target.updateCount(target.getCount() - amount);
+        if (newItem.getCount() == 0) {
+            // Remove from order if amount is 0
+            items.remove(target);
+        } else {
+            // Else, just adjust count
+            items.setItem(target, newItem);
         }
     }
 

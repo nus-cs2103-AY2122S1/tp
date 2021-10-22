@@ -126,11 +126,11 @@ public interface Model {
     void addToOrder(Item item);
 
     /**
-     * Removes the item from the current order list.
-     *
-     * @param item
+     * Decrements the count of the given {@code target} in the order by {@code amount}.
+     * {@code target} must exist in the order.
+     * {@code amount} must be less than {@code target}'s count.
      */
-    void removeFromOrder(Item item);
+    void removeFromOrder(Item target, int amount);
 
     /**
      * Returns the items in the order that match the {@code itemDescriptor}.
