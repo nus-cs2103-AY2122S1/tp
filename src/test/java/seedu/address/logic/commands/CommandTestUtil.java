@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,13 +39,13 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_TASK_TASK1 = "task 1";
-    public static final String VALID_TASK_TASK2 = "task 2";
+    public static final String VALID_TASK_NAME_TASK1 = "task 1";
+    public static final String VALID_TASK_NAME_TASK2 = "task 2";
     public static final List<Task> VALID_TASK_LIST_1 = new ArrayList<Task>(
-            Arrays.asList(new Task(VALID_TASK_TASK1))
+            Arrays.asList(new Task(new TaskName(VALID_TASK_NAME_TASK1), null, null, null))
     );
     public static final List<Task> VALID_TASK_LIST_2 = new ArrayList<Task>(
-            Arrays.asList(new Task(VALID_TASK_TASK2))
+            Arrays.asList(new Task(new TaskName(VALID_TASK_NAME_TASK2), null, null, null))
     );
     public static final String VALID_DESCRIPTION_AMY = "Owner of platinum membership";
     public static final String VALID_DESCRIPTION_BOB = "Potential Chinese Supplier";

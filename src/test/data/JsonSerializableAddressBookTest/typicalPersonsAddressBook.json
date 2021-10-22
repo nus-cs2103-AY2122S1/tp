@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
-    "tasks" : [ "eat", "sleep", "study" ],
+    "tasks" : [ "eat| | | ", "sleep| | | ", "study| | | " ],
     "description" : "Owner of Lunta Inc"
   }, {
     "name" : "Benson Meier",
@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
     "tagged" : [ "owesMoney", "friends" ],
-    "tasks" : [ "a", "b", "c" ],
+    "tasks" : [ "a| | | ", "b| | | ", "c| | | " ],
     "description" : "HR in Sarimba"
   }, {
     "name" : "Benjamin Wesley",
@@ -22,7 +22,7 @@
     "email" : "benwe@example.com",
     "address" : "23, Coleman Street, #05-30",
     "tagged" : [ "cousin" ],
-    "tasks" : [ "work", "play", "sleep" ],
+    "tasks" : [ "work| | | ", "play| | | ", "sleep| | | " ],
     "description" : ""
   },{
     "name" : "Carl Kurz",
@@ -38,7 +38,7 @@
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "tagged" : [ "friends" ],
-    "tasks" : [ "c", "d", "e" ],
+    "tasks" : [ "c| | | ", "d| | | ", "e| | | " ],
     "description" : "Potential Client?"
   }, {
     "name" : "Elle Meyer",
@@ -46,7 +46,7 @@
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "tagged" : [ ],
-    "tasks" : [ "consult prof Damith about project iteration v1.3" ],
+    "tasks" : [ "consult prof Damith about project iteration v1.| | | " ],
     "description" : "CS2103/T Teammate"
   }, {
     "name" : "Fiona Kunz",
@@ -54,7 +54,7 @@
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "tagged" : [ ],
-    "tasks" : [ "a" ],
+    "tasks" : [ "a| | | " ],
     "description" : "b"
   }, {
     "name" : "George Best",
@@ -62,7 +62,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ],
-    "tasks" : [ "a", "bbb", "ccccc", "ddddd", "eeeeeeeeeeeee" ],
+    "tasks" : [ "a| | | ", "bbb| | | ", "ccccc| | | ", "ddddd| | | ", "eeeeeeeeeeeee| | | " ],
     "description" : "fffffffffffffff"
   } ]
 }

@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TASK1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_TASK1;
 import static seedu.address.logic.commands.EditTaskCommand.MESSAGE_TASK_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
@@ -15,18 +15,18 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditTaskCommand;
-import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 
 public class EditTaskCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditTaskCommand.MESSAGE_USAGE);
 
-    private static final String VALID_TASK = PREFIX_TASK_DESCRIPTION + VALID_TASK_TASK1;
+    private static final String VALID_TASK = PREFIX_TASK_DESCRIPTION + VALID_TASK_NAME_TASK1;
 
     private static final String INVALID_TASK = PREFIX_TASK_DESCRIPTION + " ";
 
-    private static final String VALID_TASK_INDEX = PREFIX_TASK_INDEX + "1 ";
+    private static final String VALID_TASK_INDEX = PREFIX_TASK_INDEX + " 1 ";
 
     private EditTaskCommandParser parser = new EditTaskCommandParser();
 
@@ -63,21 +63,21 @@ public class EditTaskCommandParserTest {
     @Test
     public void parse_invalidTaskIndex_failure() {
         // negative task index
-        assertParseFailure(parser, "1 ti/-5 " + VALID_TASK, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti -5 " + VALID_TASK, MESSAGE_INVALID_INDEX);
 
         // zero task index
-        assertParseFailure(parser, "1 ti/0 " + VALID_TASK, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti 0 " + VALID_TASK, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as task index
-        assertParseFailure(parser, "1 ti/1 some random string", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti 1 some random string", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as task index
-        assertParseFailure(parser, "1 ti/1 i/ string", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti 1 i/ string", MESSAGE_INVALID_INDEX);
     }
 
     @Test
     public void parse_invalidTask_failure() {
-        assertParseFailure(parser, "1 " + VALID_TASK_INDEX + INVALID_TASK, Task.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1 " + VALID_TASK_INDEX + INVALID_TASK, TaskName.MESSAGE_CONSTRAINTS);
     }
 
     @Test
@@ -85,10 +85,11 @@ public class EditTaskCommandParserTest {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + " " + VALID_TASK_INDEX + VALID_TASK;
         Index targetTaskIndex = INDEX_FIRST_TASK;
-        Task editedTask = new Task(VALID_TASK_TASK1);
+        EditTaskCommand.EditTaskDescriptor editTaskDescriptor = new EditTaskCommand.EditTaskDescriptor();
+        editTaskDescriptor.setTaskName(new TaskName(VALID_TASK_NAME_TASK1));
 
         EditTaskCommand expectedCommand = new EditTaskCommand(targetIndex,
-                targetTaskIndex, editedTask);
+                targetTaskIndex, editTaskDescriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

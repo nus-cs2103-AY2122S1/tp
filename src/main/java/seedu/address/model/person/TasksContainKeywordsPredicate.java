@@ -55,7 +55,7 @@ public class TasksContainKeywordsPredicate extends AttributeContainsKeywordsPred
     public boolean tasksMatchKeyword(List<Task> tasks, String keyword) {
         List<String> preppedTaskNames = new ArrayList<>();
         for (Task task : tasks) {
-            preppedTaskNames.add(task.taskName.toLowerCase());
+            preppedTaskNames.add(task.getTaskName().taskName.toLowerCase());
         }
         return preppedTaskNames.stream().anyMatch(s -> s.startsWith(keyword.toLowerCase()));
     }

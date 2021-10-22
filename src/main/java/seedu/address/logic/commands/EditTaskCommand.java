@@ -100,7 +100,7 @@ public class EditTaskCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask.toString()));
     }
 
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {

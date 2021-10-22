@@ -25,6 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 
 public class AddTaskCommandTest {
 
@@ -39,7 +40,7 @@ public class AddTaskCommandTest {
                     null)
         );
         List<Task> taskList = new ArrayList<>();
-        taskList.add(new Task("Task1"));
+        taskList.add(new Task(new TaskName("Task1"), null, null, null));
         assertThrows(NullPointerException.class, () -> new AddTaskCommand(null, taskList));
     }
 
@@ -53,7 +54,7 @@ public class AddTaskCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
         List<Task> newTasks = new ArrayList<>();
-        newTasks.add(new Task("walk"));
+        newTasks.add(new Task(new TaskName("walk"), null, null, null));
         tasks.addAll(newTasks);
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
