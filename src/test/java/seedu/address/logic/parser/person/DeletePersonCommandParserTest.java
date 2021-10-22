@@ -41,7 +41,7 @@ public class DeletePersonCommandParserTest {
     public void parse_validModuleCode_returnsDeleteCommand() {
         DeletePersonCommand expectedDeletePersonCommand =
                 new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
-                        Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2040))),
+                        Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2040))),
                         new ModuleCode(VALID_MODULE_CODE_CS2040, new HashSet<>()));
         String userInput = String.format(" m/%s", VALID_MODULE_CODE_CS2040);
         assertParseSuccess(parser, userInput, expectedDeletePersonCommand);
