@@ -20,11 +20,14 @@ import seedu.tracker.logic.commands.ExitCommand;
 import seedu.tracker.logic.commands.HelpCommand;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.TakeCommand;
+import seedu.tracker.logic.commands.UntakeCommand;
+import seedu.tracker.logic.commands.ViewCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Module;
+import seedu.tracker.model.module.ModuleInSpecificSemesterPredicate;
 import seedu.tracker.testutil.ModuleBuilder;
 import seedu.tracker.testutil.ModuleUtil;
 
@@ -41,8 +44,13 @@ public class ModuleTrackerParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        ClearCommand command = (ClearCommand) parser.parseCommand(
+                ClearCommand.COMMAND_WORD + ACADEMIC_YEAR_DESC + SEMESTER_DESC);
+        AcademicYear year = new AcademicYear(VALID_ACADEMIC_YEAR);
+        Semester semester = new Semester(VALID_SEMESTER);
+        AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
+
+        assertEquals(new ClearCommand(academicCalendar), command);
     }
 
     @Test
@@ -81,6 +89,25 @@ public class ModuleTrackerParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_view() throws Exception {
+        ViewCommand command = (ViewCommand) parser.parseCommand(
+                ViewCommand.COMMAND_WORD + ACADEMIC_YEAR_DESC + SEMESTER_DESC);
+        AcademicYear year = new AcademicYear(VALID_ACADEMIC_YEAR);
+        Semester semester = new Semester(VALID_SEMESTER);
+        AcademicCalendar academicCalendar = new AcademicCalendar(year, semester);
+
+        ModuleInSpecificSemesterPredicate predicate = new ModuleInSpecificSemesterPredicate(academicCalendar);
+        assertEquals(new ViewCommand(predicate), command);
+    }
+
+    @Test
+    public void parseCommand_untake() throws Exception {
+        UntakeCommand command = (UntakeCommand) parser.parseCommand(
+                UntakeCommand.COMMAND_WORD + " " + INDEX_FIRST_MODULE.getOneBased());
+        assertEquals(new UntakeCommand(INDEX_FIRST_MODULE), command);
     }
 
     @Test

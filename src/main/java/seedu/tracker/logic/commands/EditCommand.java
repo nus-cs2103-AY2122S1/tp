@@ -44,7 +44,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_MC + "MC] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_CODE + "CS2103T"
+            + PREFIX_CODE + "CS2103T "
             + PREFIX_TITLE + "Software Engineering";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
