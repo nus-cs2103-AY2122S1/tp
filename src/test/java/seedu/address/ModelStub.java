@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
@@ -123,6 +124,11 @@ public class ModelStub implements Model {
 
     @Override
     public void markOrder(Order order) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableList<ClientTotalOrder> getClientTotalOrders() {
         throw new AssertionError("This method should not be called.");
     }
 

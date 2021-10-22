@@ -8,7 +8,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.AddressBook;
+import seedu.address.logic.Logic;
 import seedu.address.model.ClientTotalOrder;
 
 /**
@@ -18,6 +18,8 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(TotalOrdersWindow.class);
     private static final String FXML = "TotalOrdersWindow.fxml";
 
+    private final Logic logic;
+
     @FXML
     private TableView<ClientTotalOrder> table;
     @FXML
@@ -26,19 +28,11 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     private TableColumn<ClientTotalOrder, Double> totalCol;
 
     /**
-     * Creates a new TotalOrdersWindow.
-     *
-     * @param root Stage to use as the root of the TotalOrdersWindow.
+     * Creates a {@code TotalOrdersWindow} with the given {@code Logic}.
      */
-    public TotalOrdersWindow(Stage root) {
-        super(FXML, root);
-    }
-
-    /**
-     * Creates a new TotalOrdersWindow.
-     */
-    public TotalOrdersWindow() {
-        this(new Stage());
+    public TotalOrdersWindow(Logic logic) {
+        super(FXML, new Stage());
+        this.logic = logic;
     }
 
     /**
@@ -90,7 +84,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
      * Reloads ClientTotalOrders items from AddressBook.
      */
     public void reloadData() {
-        table.setItems(AddressBook.getClientTotalOrders());
+        table.setItems(logic.getClientTotalOrders());
         clientCol.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("totalOrder"));
     }

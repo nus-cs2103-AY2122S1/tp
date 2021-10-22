@@ -3,9 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.order.Order;
 import seedu.address.model.order.OrderList;
@@ -20,8 +18,6 @@ import seedu.address.model.task.TaskList;
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
-    /* Singleton design, but only accessible internally */
-    private static AddressBook addressBook;
 
     private final UniquePersonList persons;
     private final TaskList tasks;
@@ -40,9 +36,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         orders = new OrderList();
     }
 
-    public AddressBook() {
-        addressBook = this;
-    }
+    public AddressBook() {}
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -50,31 +44,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
-        addressBook = this;
-    }
-
-    /**
-     * For each person, finds orders associated with the person, and adds up the amount.
-     * Creates a ClientTotalOrder for each person.
-     *
-     * @return an ObservableList of {@code ClientTotalOrder}.
-     */
-    public static ObservableList<ClientTotalOrder> getClientTotalOrders() {
-        ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
-        for (Person client : addressBook.persons) {
-            clientTotalOrders.add(getClientTotalOrder(client));
-        }
-        return clientTotalOrders;
-    }
-
-    private static ClientTotalOrder getClientTotalOrder(Person client) {
-        String clientName = client.getName().toString();
-        Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
-        double totalOrder = addressBook.orders.asUnmodifiableObservableList().stream()
-                .filter(correctClient)
-                .mapToDouble(Order::getAmountAsDouble)
-                .sum();
-        return new ClientTotalOrder(clientName, totalOrder);
     }
 
     //// list overwrite operations
@@ -158,8 +127,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.markDone(task);
     }
 
-    public void setTask(Task target, Task editedtask) {
-        tasks.setTask(target, editedtask);
+    public void setTask(Task target, Task editedTask) {
+        tasks.setTask(target, editedTask);
     }
 
     public boolean hasTask(Task task) {

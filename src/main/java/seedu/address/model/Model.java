@@ -134,7 +134,7 @@ public interface Model {
      */
     void setOrder(Order target, Order editedOrder);
 
-    /** Returns and unmodifiable view of the filtered order list */
+    /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
     void deleteOrder(Order toDelete);
@@ -142,4 +142,7 @@ public interface Model {
     void updateFilteredOrderList(Predicate<Order> predicate);
 
     void markOrder(Order order);
+
+    /** Returns an unmodifiable view of the list of ClientTotalOrders */
+    ObservableList<ClientTotalOrder> getClientTotalOrders();
 }

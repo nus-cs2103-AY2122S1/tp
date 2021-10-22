@@ -71,7 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        totalOrdersWindow = new TotalOrdersWindow();
+        totalOrdersWindow = new TotalOrdersWindow(logic);
         helpWindow = new HelpWindow();
     }
 
