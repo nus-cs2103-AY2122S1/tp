@@ -376,7 +376,7 @@ During the parsing, a new `Student` instance is created. This `Student` instance
 
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
-//TODO: Add sequence diagram for AddMark. 
+![AddMarkSequenceDiagram](images/AddMarkSequenceDiagram.png)
 
 Execution of the `AddMarkCommand`
 

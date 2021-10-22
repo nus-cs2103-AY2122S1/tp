@@ -1,0 +1,45 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":**AddMarkCommand**" as AddMarkCommand LOGIC_COLOR
+participant "**r:CommandResult**" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "**s:Student**" as Student MODEL_COLOR
+end box
+
+[-> AddMarkCommand : ""execute(m)""
+activate AddMarkCommand
+
+AddMarkCommand -[LOGIC_COLOR_T1]> AddMarkCommand : ""addStudentMark(s, sm)""
+activate AddMarkCommand
+AddMarkCommand -> Student : ""addStudentMark(sm)""
+activate Student
+
+
+note right
+""sm"" is the StudentMark
+that is to be added
+to Student ""s""
+end note
+
+Student --> AddMarkCommand
+deactivate Student
+deactivate AddMarkCommand
+
+create CommandResult
+AddMarkCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddMarkCommand : ""r""
+deactivate CommandResult
+
+[<-- AddMarkCommand : ""r""
+deactivate AddMarkCommand
+
+AddMarkCommand -[hidden]> CommandResult
+destroy AddMarkCommand
+
+@enduml
