@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.person.EditPersonCommand.EditPersonDescriptor;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Person;
 
