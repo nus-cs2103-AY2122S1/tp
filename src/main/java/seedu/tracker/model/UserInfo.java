@@ -1,5 +1,7 @@
 package seedu.tracker.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
@@ -16,7 +18,9 @@ public class UserInfo implements ReadOnlyUserInfo {
 
     public UserInfo() {}
 
-    public UserInfo(AcademicCalendar currentSemester, Mc mcGoal) {
+    @JsonCreator
+    public UserInfo(@JsonProperty("currentSemester") AcademicCalendar currentSemester,
+                    @JsonProperty("mcGoal") Mc mcGoal) {
         this.currentSemester = currentSemester;
         this.mcGoal = mcGoal;
     }

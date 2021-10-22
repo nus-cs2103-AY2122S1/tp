@@ -76,6 +76,7 @@ class JsonUserInfoStorageTest {
     public void saveUserInfo_allInOrder_success() throws IOException, DataConversionException {
         UserInfo original = new UserInfo();
         original.setCurrentSemester(new AcademicCalendar(new AcademicYear(5), new Semester(1)));
+        original.setMcGoal(new Mc(160));
 //        Path infoFilePath = testFolder.resolve("TempInfo.json");
         Path infoFilePath = TEST_DATA_FOLDER.resolve("TempInfo.json");
         JsonUserInfoStorage jsonUserInfoStorage = new JsonUserInfoStorage(infoFilePath);
