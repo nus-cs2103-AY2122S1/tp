@@ -6,7 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.ClientTotalOrders;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ClientTotalOrder;
 
 /**
  * Controller for a total orders page
@@ -16,7 +17,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     private static final String FXML = "TotalOrdersWindow.fxml";
 
     @FXML
-    private TableView<ClientTotalOrders> table;
+    private TableView<ClientTotalOrder> table;
 
     /**
      * Creates a new TotalOrdersWindow.
@@ -25,6 +26,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
      */
     public TotalOrdersWindow(Stage root) {
         super(FXML, root);
+        table.setItems(AddressBook.getClientTotalOrders());
     }
 
     /**
