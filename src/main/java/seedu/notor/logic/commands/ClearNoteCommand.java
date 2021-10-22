@@ -1,7 +1,6 @@
 package seedu.notor.logic.commands;
 
 import seedu.notor.model.Model;
-import seedu.notor.model.Notor;
 import seedu.notor.ui.WarningWindow;
 
 /**
