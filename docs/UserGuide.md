@@ -156,6 +156,8 @@ Prefix Input Specifications:
   * For example: 
     * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
     * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable.  
+
+
 ### Listing all applicants : `list`
 
 Shows a list of all applicants in RecruitIn.
