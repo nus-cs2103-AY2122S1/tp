@@ -30,6 +30,8 @@ public class SubGroupCreateExecutor extends GroupExecutor {
         try {
             if (model.getFilteredGroupList().size() > index.getOneBased()) {
                 Group group = model.getFilteredGroupList().get(index.getZeroBased());
+                // TODO: Guard clause for if group is a SubGroup instead.
+                // Make it return its own type of error.
                 if (group instanceof SuperGroup) {
                     SuperGroup superGroup = (SuperGroup) group;
                     superGroup.addSubGroup(subGroup);
