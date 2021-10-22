@@ -2,7 +2,12 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
+import static seedu.address.testutil.TypicalItems.BAGEL;
+import static seedu.address.testutil.TypicalItems.DONUT;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +15,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.item.Item;
+import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.order.Order;
+import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.TypicalItems;
 import seedu.address.testutil.TypicalOrders;
 
@@ -96,6 +103,52 @@ class OrderTest {
         Order expectedOrder = new Order();
 
         assertEquals(order, expectedOrder);
+    }
+
+    @Test
+    public void getItem_itemInInventory_returnsItem() {
+        order.addItem(BAGEL);
+
+        // Search by name
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        assertEquals(order.getItems(descriptor), List.of(BAGEL));
+
+        // Search by id
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        assertEquals(order.getItems(descriptor), List.of(BAGEL));
+
+        // Search by name and id
+        descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertEquals(order.getItems(descriptor), List.of(BAGEL));
+    }
+
+    @Test
+    public void getItem_itemNotInInventory_returnEmptyList() {
+        order.addItem(DONUT);
+
+        // Search by name
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        assertEquals(order.getItems(descriptor), List.of());
+
+        // Search by id
+        descriptor = new ItemDescriptorBuilder().withId(VALID_ID_BAGEL).build();
+        assertEquals(order.getItems(descriptor), List.of());
+
+        // Search by name and id
+        descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_BAGEL).build();
+        assertEquals(order.getItems(descriptor), List.of());
+    }
+
+    @Test
+    public void getItem_multipleMatches_returnMultiple() {
+        order.addItem(DONUT);
+        order.addItem(BAGEL);
+
+        ItemDescriptor descriptor = new ItemDescriptorBuilder()
+                .withName(VALID_NAME_BAGEL).withId(VALID_ID_DONUT).build();
+        assertEquals(order.getItems(descriptor), List.of(DONUT, BAGEL));
     }
 
 }
