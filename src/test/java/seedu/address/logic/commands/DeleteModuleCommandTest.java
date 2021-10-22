@@ -13,14 +13,15 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.testutil.TypicalModules;
 
-
 class DeleteModuleCommandTest {
-    private Model model = new ModelManager(TypicalModules.getTypicalBuddy(), new UserPrefs());
+    private TeachingAssistantBuddy testBuddy = TypicalModules.getTypicalBuddy();
+    private Model model = new ModelManager(testBuddy, new UserPrefs());
 
     @Test
     public void execute_validNameUnfilteredList_success() {

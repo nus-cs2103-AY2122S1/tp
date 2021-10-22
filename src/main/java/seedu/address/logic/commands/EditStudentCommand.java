@@ -79,8 +79,8 @@ public class EditStudentCommand extends EditCommand {
     /**
      * Edits a student's information from the specified module.
      *
-     * @param module The module the student will be edited from.
-     * @return Statement indicating that the edition is successful.
+     * @param module The module whose student is being edited.
+     * @return Statement indicating that the edit is successful.
      * @throws CommandException Exception thrown when student is not found.
      */
     public CommandResult editStudentInformation(Module module) throws CommandException {

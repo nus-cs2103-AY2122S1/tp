@@ -16,6 +16,9 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDeadline;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.TaskName;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -79,11 +82,12 @@ public class AddStudentCommand extends AddCommand {
                 UniqueTaskList newStudentTaskList = new UniqueTaskList();
                 for (Task task : thisModuleTaskList) {
 
-                    ModuleName moduleName = task.getModuleName();
-                    String taskName = task.getName();
-                    String taskDeadline = task.getDeadline();
+                    ModuleName moduleName = task.getTaskModuleName();
+                    TaskId taskId = task.getTaskId();
+                    TaskName taskName = task.getTaskName();
+                    TaskDeadline taskDeadline = task.getTaskDeadline();
 
-                    Task taskToAdd = new Task(moduleName, taskName, taskDeadline);
+                    Task taskToAdd = new Task(moduleName, taskId, taskName, taskDeadline);
 
                     newStudentTaskList.add(taskToAdd);
                 }

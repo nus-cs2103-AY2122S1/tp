@@ -25,8 +25,9 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-                <Label fx:id="deadline" styleClass="cell_small_label" text="\$deadline" />
+                <Label fx:id="taskName" styleClass="cell_big_label" text="\$taskName"/>
+                <Label fx:id="taskId" text="\$taskId" styleClass="cell_small_label" />
+                <Label fx:id="taskDeadline" styleClass="cell_small_label" text="\$taskDeadline" />
                 <Label fx:id="isComplete" styleClass="cell_small_label" text="\$isComplete" />
             </HBox>
         </VBox>
