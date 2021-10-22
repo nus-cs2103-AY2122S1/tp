@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.abcommand.AbCommand.MESSAGE_SWITCH_ADDRESSBOOK_SUCCESS;
 import static seedu.address.logic.commands.abcommand.AbSwitchCommand.MESSAGE_ADDRESSBOOK_NOT_FOUND;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -35,15 +35,15 @@ public class AbSwitchCommandTest {
     private static final Path TEST_DATA_FOLDER = Path.of("src", "test", "data");
 
     private static final Path userPrefsFilePath = TEST_DATA_FOLDER.resolve(
-            Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
+        Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
 
-    private static final String addressBookFilePathName = "typicalPersonsAddressBook";
-    private static final String anotherAddressBookFilePathName = "anotherTypicalPersonsAddressBook";
+    private static final String addressBookFilePathName = "typicalClientsAddressBook";
+    private static final String anotherAddressBookFilePathName = "anotherTypicalClientsAddressBook";
 
     private static final Path addressBookFilePath = TEST_DATA_FOLDER.resolve(
-            Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
+        Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
     private static final Path anotherAddressBookFilePath = TEST_DATA_FOLDER.resolve(
-            Path.of("JsonSerializableAddressBookTest", anotherAddressBookFilePathName + ".json"));
+        Path.of("JsonSerializableAddressBookTest", anotherAddressBookFilePathName + ".json"));
 
     private final UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(userPrefsFilePath);
     private final AddressBookStorage addressBookStorage = new JsonAddressBookStorage(addressBookFilePath);
@@ -87,17 +87,17 @@ public class AbSwitchCommandTest {
         // null -> returns false
         assertFalse(abSwitchCommand1.equals(null));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(abSwitchCommand1.equals(abSwitchCommand2));
     }
 
     @Test
     public void execute_success() {
         AbSwitchCommand abSwitchCommand1 = new AbSwitchCommand(
-                anotherAddressBookFilePathName, anotherAddressBookFilePath);
+            anotherAddressBookFilePathName, anotherAddressBookFilePath);
         expectedModel.setAddressBookFilePath(anotherAddressBookFilePath);
         CommandResult result = new CommandResult(
-                String.format(MESSAGE_SWITCH_ADDRESSBOOK_SUCCESS, anotherAddressBookFilePathName), SWITCH_ADDRESSBOOK);
+            String.format(MESSAGE_SWITCH_ADDRESSBOOK_SUCCESS, anotherAddressBookFilePathName), SWITCH_ADDRESSBOOK);
         assertCommandSuccess(abSwitchCommand1, model, result, expectedModel);
         logic.switchAddressBook();
         assertEquals(logic.getAddressBook(), anotherLogic.getAddressBook());

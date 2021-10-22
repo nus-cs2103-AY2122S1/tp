@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.abcommand.AbCommand.MESSAGE_CREATE_ADDRESSBOOK_SUCCESS;
 import static seedu.address.logic.commands.abcommand.AbCreateCommand.MESSAGE_ADDRESSBOOK_EXISTS;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalClients.getTypicalAddressBook;
 
 import java.nio.file.Path;
 
@@ -34,11 +34,11 @@ import seedu.address.storage.UserPrefsStorage;
 public class AbCreateCommandTest {
     private static final Path TEST_DATA_FOLDER = Path.of("src", "test", "data");
 
-    private static final String addressBookFilePathName = "typicalPersonsAddressBook";
+    private static final String addressBookFilePathName = "typicalClientsAddressBook";
     private static final Path userPrefsFilePath = TEST_DATA_FOLDER.resolve(
-            Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
+        Path.of("JsonUserPrefsStorageTest", "TypicalUserPref.json"));
     private static final Path addressBookFilePath = TEST_DATA_FOLDER.resolve(
-            Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
+        Path.of("JsonSerializableAddressBookTest", addressBookFilePathName + ".json"));
 
     @TempDir
     public Path testFolder;
@@ -76,7 +76,7 @@ public class AbCreateCommandTest {
         // null -> returns false
         assertFalse(abCreateCommand1.equals(null));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(abCreateCommand1.equals(abCreateCommand2));
     }
 
@@ -87,7 +87,7 @@ public class AbCreateCommandTest {
         AbCreateCommand abCreateCommand1 = new AbCreateCommand(newFilePathName, newFilePath);
         expectedModel.setAddressBookFilePath(newFilePath);
         CommandResult result = new CommandResult(
-                String.format(MESSAGE_CREATE_ADDRESSBOOK_SUCCESS, newFilePath), CREATE_ADDRESSBOOK);
+            String.format(MESSAGE_CREATE_ADDRESSBOOK_SUCCESS, newFilePath), CREATE_ADDRESSBOOK);
         assertCommandSuccess(abCreateCommand1, model, result, expectedModel);
         logic.createAddressBook();
         assertEquals(logic.getAddressBook(), new AddressBook());

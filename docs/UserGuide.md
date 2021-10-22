@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 LeadsForce is a desktop app that is optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
-Catered towards student financial advisors, LeadsForce makes the process of managing client information seamless! 
+Catered towards student financial advisors, LeadsForce makes the process of managing client information seamless!
 LeadsForce does this by helping the financial advisors store and retrieve client information effortlessly and seamlessly.
 
 Finding your next lead has never been easier.
@@ -133,7 +133,7 @@ Examples:
 
 ### Retrieve Particular Contact : `view`
 
-Fully view a client’s information in detail. 
+Fully view a client’s information in detail.
 
 Format: `view {CLIENT'S ID}`
 
@@ -191,7 +191,7 @@ Examples:
 
 ### Find meeting schedule : `schedule`
 
-Finds the meeting schedule that the user has on a specified date. 
+Finds the meeting schedule that the user has on a specified date.
 
 Format: `schedule {DATE}`
 
@@ -205,7 +205,7 @@ Finds clients whose contacts match with the given keywords.
 
 Format: `search {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
 
-* `KEYWORD` will be used to match with all attribute of the person.
+* `KEYWORD` will be used to match with all attribute of the client.
 * `<attribute>/` refers to the argument tag for the client's attribute.
 * `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.
 * If no `KEYWORD` is provided, search will be based on `<attribute>/{ATTRIBUTE_KEYWORD}` only.
@@ -227,7 +227,7 @@ Filter the current list by the given keywords.
 Format: `filter {KEYWORD}... <attribute>/{ATTRIBUTE_KEYWORD}...`
 
 * Works similar to `search` but `filter` works based on the current list shown as opposed to entire lists of contacts.
-* `KEYWORD` will be used to match with all attribute of the person.
+* `KEYWORD` will be used to match with all attribute of the client.
 * If no `KEYWORD` is provided, then filter will be based on `<attribute>/{ATTRIBUTE_KEYWORD}`
 * `<attribute>/` refers to the argument tag for the client's attribute.
 * `{ATTRIBUTE_KEYWORD}` refers to the keyword that is to be matched with the corresponding client attribute.

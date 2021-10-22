@@ -6,8 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.ClientId;
-import seedu.address.model.person.PersonHasId;
+import seedu.address.model.client.ClientHasId;
+import seedu.address.model.client.ClientId;
 
 /**
  * Parses input arguments and creates a new ViewCommand object
@@ -33,6 +33,6 @@ public class ViewCommandParser implements Parser<ViewCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE), pe);
         }
 
-        return new ViewCommand(clientId, new PersonHasId(clientId));
+        return new ViewCommand(clientId, new ClientHasId(clientId));
     }
 }

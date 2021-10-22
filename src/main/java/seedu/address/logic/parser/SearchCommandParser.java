@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -32,7 +32,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         String preparedArgs = " ".concat(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer
             .tokenize(preparedArgs, ALL_PREFIXES);
-        return new SearchCommand(new PersonContainsKeywordsPredicate(argMultimap));
+        return new SearchCommand(new ClientContainsKeywordsPredicate(argMultimap));
     }
 
 }

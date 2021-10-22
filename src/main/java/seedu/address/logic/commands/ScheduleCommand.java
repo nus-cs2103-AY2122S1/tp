@@ -9,19 +9,19 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a client identified using it's displayed index from the address book.
  */
 public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": showcases the meetings that the financial advisor has on the day. \n"
-            + "Parameters: Day-Month-Year \n"
-            + "Example: " + COMMAND_WORD + " 01-01-2021";
+        + ": showcases the meetings that the financial advisor has on the day. \n"
+        + "Parameters: Day-Month-Year \n"
+        + "Example: " + COMMAND_WORD + " 01-01-2021";
 
     public static final String MESSAGE_SCHEDULE_SUCCESS = "Found Schedule for %1$s";
     public static final String MESSAGE_INVALID_DATE_FAILURE = "Please input a date in the format of Day-Month-Year.";
@@ -39,7 +39,7 @@ public class ScheduleCommand extends Command {
 
         // there is no events schedule for the day
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
-        List<Person> clientsWithMeetings = model.retrieveSchedule(scheduleDate);
+        List<Client> clientsWithMeetings = model.retrieveSchedule(scheduleDate);
 
         if (clientsWithMeetings.size() == 0) {
             return new CommandResult(String.format(MESSAGE_NO_SCHEDULE_ON_DATE_SUCCESS));
@@ -51,7 +51,7 @@ public class ScheduleCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ScheduleCommand // instanceof handles nulls
-                && scheduleDate.equals(((ScheduleCommand) other).scheduleDate)); // state check
+            || (other instanceof ScheduleCommand // instanceof handles nulls
+            && scheduleDate.equals(((ScheduleCommand) other).scheduleDate)); // state check
     }
 }

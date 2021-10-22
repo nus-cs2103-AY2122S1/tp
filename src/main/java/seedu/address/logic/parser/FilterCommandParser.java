@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import seedu.address.logic.commands.FilterCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.PersonContainsKeywordsPredicate;
+import seedu.address.model.client.ClientContainsKeywordsPredicate;
 
 public class FilterCommandParser implements Parser<FilterCommand> {
     /**
@@ -29,6 +29,6 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         String preparedArgs = " ".concat(trimmedArgs);
         ArgumentMultimap argMultimap = ArgumentTokenizer
             .tokenize(preparedArgs, ALL_PREFIXES);
-        return new FilterCommand(new PersonContainsKeywordsPredicate(argMultimap));
+        return new FilterCommand(new ClientContainsKeywordsPredicate(argMultimap));
     }
 }

@@ -7,7 +7,7 @@ Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant ":SearchCommandParser" as fcp LOGIC_COLOR
 Participant "command:SearchCommand" as fc LOGIC_COLOR
 Participant "result:CommandResult" as cr LOGIC_COLOR
-Participant "predicate:PersonContainsKeywordPredicate" as pckp LOGIC_COLOR
+Participant "predicate:ClientContainsKeywordPredicate" as pckp LOGIC_COLOR
 end box
 box "Model" #Pink
 Participant "model:Model" as model MODEL_COLOR
@@ -28,7 +28,7 @@ fc --> fcp --: command
 fcp --> abp --: command
 abp --> logic --: command
 logic -> fc ++: execute(model)
-fc -> model ++: updateFilteredPersonList(predicate)
+fc -> model ++: updateFilteredClientList(predicate)
 loop all client
     model -> pckp ++: test(client)
     pckp --> model --

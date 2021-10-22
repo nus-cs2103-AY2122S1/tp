@@ -20,7 +20,7 @@ public class AbListCommandTest {
         // null -> returns false
         assertFalse(abListCommand1.equals(null));
 
-        // different person -> returns false
+        // different client -> returns false
         assertFalse(abListCommand1.equals(abListCommand2));
     }
 }

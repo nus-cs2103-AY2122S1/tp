@@ -10,7 +10,7 @@ Participant ":AddressBookParser" as abp LOGIC_COLOR
 Participant ":ViewCommandParser" as fcp LOGIC_COLOR
 Participant "command:ViewCommand" as fc LOGIC_COLOR
 Participant "result:CommandResult" as cr LOGIC_COLOR
-Participant "predicate:PersonHasId" as pckp LOGIC_COLOR
+Participant "predicate:ClientHasId" as pckp LOGIC_COLOR
 end box
 box "Model" #Pink
 Participant "model:Model" as model MODEL_COLOR
@@ -55,12 +55,12 @@ deactivate abp
 logic -> fc ++: execute(model)
 activate fc LOGIC_COLOR
 
-fc -> model ++: updatePersonToView(predicate)
+fc -> model ++: updateClientToView(predicate)
 activate model MODEL_COLOR
 model --> fc --:
 deactivate model
 
-fc -> model ++: isPersonExistToView()
+fc -> model ++: isClientExistToView()
 activate model MODEL_COLOR
 model --> fc --:
 deactivate model

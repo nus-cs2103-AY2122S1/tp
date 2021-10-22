@@ -23,7 +23,7 @@ class JsonSerializableUserPrefs {
     private final GuiSettings guiSettings;
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializableAddressBook} with the given clients.
      */
     @JsonCreator
     public JsonSerializableUserPrefs(@JsonProperty("guiSettings") GuiSettings guiSettings,
