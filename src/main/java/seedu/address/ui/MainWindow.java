@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -50,8 +52,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane studentListPanelPlaceholder;
 
+    //    @FXML
+    //    private StackPane resultDisplayPlaceholder;
+
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private ScrollPane scrollPane;
+
+    @FXML
+    private VBox terminalContainer;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -119,8 +127,8 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        //        resultDisplay = new ResultDisplay();
+        //        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -152,6 +160,11 @@ public class MainWindow extends UiPart<Stage> {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());
             primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
+    }
+
+    @FXML
+    public void initialize() {
+        scrollPane.vvalueProperty().bind(terminalContainer.heightProperty());
     }
 
     /**
@@ -195,7 +208,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            //            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -206,10 +220,14 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             updateInnerParts();
+            terminalContainer.getChildren().add(
+                    new TerminalBox(commandText, commandResult.getFeedbackToUser()));
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            //            resultDisplay.setFeedbackToUser(e.getMessage());
+            terminalContainer.getChildren().add(
+                    new TerminalBox(commandText, e));
             throw e;
         }
     }
