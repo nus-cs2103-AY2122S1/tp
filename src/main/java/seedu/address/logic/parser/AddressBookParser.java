@@ -141,6 +141,7 @@ public class AddressBookParser {
             return new TimetableParser().parse(arguments);
 
         case EditClassCommand.COMMAND_WORD:
+        case EditClassCommand.SHORTCUT:
             return new EditClassCommandParser().parse(arguments);
 
         default:
