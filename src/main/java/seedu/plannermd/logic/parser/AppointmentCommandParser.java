@@ -42,7 +42,6 @@ public class AppointmentCommandParser {
 
         final String flag = matcher.group("flag");
         final String arguments = matcher.group("arguments");
-        System.out.println(flag);
         switch (flag) {
         case FLAG_ADD:
             return new AddAppointmentCommandParser().parse(arguments);

@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -54,13 +55,14 @@ public class AddAppointmentCommandParser  {
                 PREFIX_DURATION, PREFIX_REMARK);
         if (!arePrefixesPresent(argMultimap, PREFIX_PATIENT, PREFIX_DOCTOR, PREFIX_START)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDoctorCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAppointmentCommand.MESSAGE_USAGE));
         }
 
         AddAppointmentCommand.AddAppointmentDescriptor addAppointmentDescriptor =  new AddAppointmentCommand.AddAppointmentDescriptor();
         Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
         addAppointmentDescriptor.setRemark(remark);
         String trimmedParsedDateTime = argMultimap.getValue(PREFIX_START).get().trim();
+        System.out.println(trimmedParsedDateTime);
         String time = getTimeFromDateTime(trimmedParsedDateTime);
         String date = getDateFromDateTime(trimmedParsedDateTime);
         AppointmentDate appointmentDate = new AppointmentDate(date);
@@ -93,18 +95,14 @@ public class AddAppointmentCommandParser  {
 
     private final DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("d/M/yyyy")
-            .optionalStart()
-            .appendPattern(" HHmm")
-            .optionalEnd()
-            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .appendPattern(" HH:mm")
             .toFormatter();
 
     private String getTimeFromDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         try {
-            LocalTime inputTime = LocalTime.from(LocalDateTime.parse(dateTime, fmt));
-            return inputTime.toString();
+            LocalTime inputTime = LocalDateTime.parse(dateTime, fmt).toLocalTime();
+            return inputTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         } catch (DateTimeParseException e) {
             throw new ParseException(AddAppointmentCommand.MESSAGE_WRONG_DATE_TIME);
         }
@@ -113,8 +111,8 @@ public class AddAppointmentCommandParser  {
     private String getDateFromDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
         try {
-            LocalDate inputDate = LocalDate.from(LocalDateTime.parse(dateTime, fmt));
-            return inputDate.toString();
+            LocalDate inputDate = LocalDateTime.parse(dateTime, fmt).toLocalDate();
+            return inputDate.format(DateTimeFormatter.ofPattern("d/M/yyyy"));
         } catch (DateTimeParseException e) {
             throw new ParseException(AddAppointmentCommand.MESSAGE_WRONG_DATE_TIME);
         }
