@@ -1,7 +1,6 @@
 package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +17,38 @@ public class ParticipationCommand extends Command {
 
     public static final String COMMAND_WORD = "part";
 
+    public static final String HELP_MESSAGE = "### Editing a student’s Studio participation: `part`\n"
+            + "Avengers will be able to track the participation of their students during the relevant studios. "
+            + "\n"
+            + "We will be keeping track of Studio participation with a counter system which starts at 0 by default.\n"
+            + "\n"
+            + "Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`\n"
+            + "\n"
+            + "* Edits the Studio participation of a student or multiple students based on their `INDEX`.\n"
+            + "* Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown "
+            + "in the displayed student list. The index **must be a positive integer** 1, 2, 3, …\u200B\n"
+            + "* The `STUDIO_SESSION` field is a positive integer from 1 to 12 inclusive which refers to the "
+            + "Studio Session to be modified.\n"
+            + "* The `PARTICIPATION_TO_ADD` field is an integer from -500 to 500 inclusive which indicates "
+            + "the Participation score of the student.\n"
+            + "* `PARTICIPATION_TO_ADD` will be added to the student's current Participation score\n"
+            + "* A student’s Studio Participation score cannot be reduced below 0.\n"
+            + "* If a student's `Attendance` is `false` and the Participation score to be added is greater than 0, "
+            + "the student will also be marked as having attended the Studio.\n"
+            + "\n"
+            + "Examples:\n"
+            + "* `part 1, 2, 3 ses/12 add/500`\n"
+            + "* `part 4, 6 ses/2 add/-300`\n"
+            + "* `part 4 ses/9 add/1`";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the participation count of the student(s) identified "
             + "by the index number used in the last person listing as well "
             + "as the index of the Studio session. Existing participation will "
             + "be overwritten by the input or incremented/decremented depending on the flag.\n"
-            + "Parameters: INDEX(ES) (must be a positive integer(s))"
-            + "ses/ STUDIO_SESSION_INDEX (must be a positive integer within range)"
-            + "add/ PARTICIPATION_TO_ADD"
+            + "Parameters: INDEX(ES) (positive integer) "
+            + "ses/ STUDIO_SESSION_INDEX (positive integer within range) "
+            + "add/ PARTICIPATION_TO_ADD\n"
             + "Example: " + COMMAND_WORD + " 1 ses/ 7 add/ 1";
 
     public static final String MESSAGE_UPDATE_PARTICIPATION_SUCCESS = "Participation updated!";
@@ -81,7 +104,6 @@ public class ParticipationCommand extends Command {
             editedStudent.setParticipation(participationToEdit);
             model.setStudent(studentToEdit, editedStudent);
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_UPDATE_PARTICIPATION_SUCCESS);
 
     }

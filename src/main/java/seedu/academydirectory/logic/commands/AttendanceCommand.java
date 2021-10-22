@@ -1,7 +1,6 @@
 package seedu.academydirectory.logic.commands;
 
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.academydirectory.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +43,8 @@ public class AttendanceCommand extends Command {
             + "by the index number used in the last person listing as well "
             + "as the index of the Studio session. Existing attendance will "
             + "be overwritten by the input.\n"
-            + "Parameters: INDEX(ES) (must be a positive integer(s))"
-            + "ses/ STUDIO_SESSION_INDEX (must be a positive integer within range)"
+            + "Parameters: INDEX(ES) (positive integer) "
+            + "ses/ STUDIO_SESSION_INDEX (positive integer within range) "
             + "att/ ATTENDANCE_STATUS (0 or 1)\n"
             + "Example: " + COMMAND_WORD + " 1 ses/ 7 att/ 1";
 
@@ -87,7 +86,6 @@ public class AttendanceCommand extends Command {
                     studentToEdit.getAssessment(), studentToEdit.getTags());
             model.setStudent(studentToEdit, editedStudent);
         }
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(MESSAGE_UPDATE_ATTENDANCE_SUCCESS);
 
     }

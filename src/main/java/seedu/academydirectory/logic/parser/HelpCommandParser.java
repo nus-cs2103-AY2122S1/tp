@@ -12,6 +12,7 @@ import seedu.academydirectory.logic.commands.FindCommand;
 import seedu.academydirectory.logic.commands.GradeCommand;
 import seedu.academydirectory.logic.commands.HelpCommand;
 import seedu.academydirectory.logic.commands.ListCommand;
+import seedu.academydirectory.logic.commands.ParticipationCommand;
 import seedu.academydirectory.logic.commands.RetrieveCommand;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
 
@@ -59,6 +60,9 @@ public class HelpCommandParser implements Parser<HelpCommand> {
 
         case ExitCommand.COMMAND_WORD:
             return new HelpCommand(userInput, ExitCommand.HELP_MESSAGE);
+
+        case ParticipationCommand.COMMAND_WORD:
+            return new HelpCommand(userInput, ParticipationCommand.HELP_MESSAGE);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
