@@ -17,7 +17,7 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 1. Copy the file to the folder you want to use as the _home folder_ for your Staff’d.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/NewUi.jpg)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
@@ -40,7 +40,7 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-  
+
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
@@ -63,8 +63,9 @@ Format: `help`
 ## Basic management of Staff Details
 
 
-### Tag legend - `todo: standardize tags for all commands`
+### Tag legend
 
+####Tags for Specific Fields
 |Tag|Description|
 |---|-----------|
 |n/|Name|
@@ -75,6 +76,15 @@ Format: `help`
 |i/|Index|
 |e/|Email|
 |t/|Extra tags|
+
+#### Tags for Lookup
+|Tag|Name|
+|---|----|
+|-n|Name|
+|-i|Index|
+|-d|Day Of the Week|
+|-t|Time|
+
 
 ### View a staff - `view`
 
@@ -105,38 +115,37 @@ Format: `list`
 ### Marking a staff as absent : `mark`
 
 Marks a specified staff(s) as not working for a specified date.
-The salary for that date will be not included in calculation, 
+The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
 
-The format of the input date is in:`YYYY-MM-DD`
+The format of the input date is in: `YYYY-MM-DD`
 
 Format:\
-`mark i/index d/startDate d/endDate`  
-`mark n/name d/startDate d/endDate`  
-`mark t/tag d/startDate d/endDate`
+`mark -i index d/startDate d/endDate`\
+`mark -n name d/startDate d/endDate`\
+`mark -t tag d/startDate d/endDate`
 
 Possible to mark a single date `mark t/tag d/date`
 
 Examples:\
-`mark i/1 d/2020-01-03 d/2021-01-03`  
-`mark d/Alex Yeoh d/2020-01-03`  
+`mark -i 1 d/2020-01-03 d/2021-01-03`\
+`mark -n Alex Yeoh d/2020-01-03`
 
 
 ### Removing the absent mark `unmark`
 
 Removes the period that was marked by the `mark` command.
 
-The format of the input date is in:\
-`YYYY-MM-DD`
+The format of the input date is in: `YYYY-MM-DD`
 
 Format:\
-`unmark n/name d/startDate d/endDate`  
-`unmark i/index d/startDate d/endDate`  
+`unmark -n name d/startDate d/endDate`\
+`unmark -i index d/startDate d/endDate`  
 
 Examples:\
-`unmark i/1 d/2020-01-03 d/2021-01-03`  
-`unmark t/friends d/2020-01-03`  
+`unmark -i 1 d/2020-01-03 d/2021-01-03`\
+`unmark -t friends d/2020-01-03`
 
 ### Deleting a Staff : `delete`
 
@@ -179,13 +188,8 @@ Examples:\
 `edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
 `edit -n Candice r/cook`
 
-|Tag|Name|Description|
-|---|----|-----------|
-|-n|Name|Contact with the name will be edited.|
-|-i|Index|Contact with that index will be edited.|
 
-
-### Locating staff: `find`
+### Finding staff: `find`
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
@@ -201,9 +205,9 @@ Name Search:
   e.g. `John Nathan` will return `John Wick`, `Nathan Tan`
 
 Index Search:
-* If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will 
+* If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
   be performed on the overall staff list.
-* The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0 
+* The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0
   if the Staff List is empty)
 * Only single search is supported, and this search will return only the specific Staff at that index
 
@@ -212,13 +216,11 @@ Examples:
 * `find -n alex david` returns `Alex Yeoh`, `David Li`
 * `find -i 3` returns the staff at the 3rd position on the list
 
-|Tag|Name|Description|
-|---|----|-----------|
-|-n|Name|Contacts with the name will be found.|
-|-i|Index|Contact corresponding to that index in the displayed staff list will be found.|
+List before using Find command:
+  ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
 
-
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+List after using Find coma
+![List after find command is called](images/findCommand/AfterFindCommand.jpg)
 
 
 ### Clearing all entries : `clear`
@@ -256,12 +258,12 @@ Examples:\
 Views a specific staff’s schedule.
 
 Formats:\
-`viewSchedule n/name` \
-`viewSchedule i/index`
+`viewSchedule -n name` \
+`viewSchedule -i index`
 
 Examples:\
-`viewSchedule n/Candice` \
-`viewSchedule i/123`
+`viewSchedule -n Candice` \
+`viewSchedule -i 123`
 
 
 ### Deleting a staff schedule: `deleteSchedule`
@@ -284,7 +286,8 @@ Formats:\
 `editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 
 Examples:\
-`editSchedule n/Candice old/tuesday-1 new/tuesday-2` \
+
+`editSchedule n/Candice old/tuesday-1 new/tuesday-2`\
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
 ### View all the staff working a shift: `viewShift`
@@ -292,16 +295,21 @@ Examples:\
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
 Formats:\
-`viewShift -d day-shift_number`
-`viewShift -t day-HH:mm` (Note that this is in 24-hour format)
+`viewShift -d day-shift_number`\
+`viewShift -t day-HH:mm` (Note that this is in 24-hour format)\
+`viewShift` [This also displays the staff working during the current shift]
 
-Note that `day` refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon). 
+Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
 
 Examples:\
-`viewShift -d monday-1` \
-`viewShift -d TUESDAY-0` \
+`viewShift -d monday-1`\
+`viewShift -d TUESDAY-0`\
 `viewShift -t wednesday-12:00`\
-`viewShift -t THURSDAY-16:30`
+`viewShift -t THURSDAY-16:30`\
+
+Demonstration:\
+![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
+
 
 ### Saving the data
 
@@ -332,16 +340,18 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**View** | `view n/name` <br> `view i/index`
+**View** | `view -n name` <br> `view -i index`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
-**Delete** | `delete n/name` <br> `delete i/index` <br> `delete r/role` <br> `delete s/status`
+**Delete** | `delete n/name` <br> `delete i/index` <br> ` delete r/role` <br> `delete s/status`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View staff schedule** | `viewSchedlue n/name` <br> `viewSchedlue i/index`
+**View staff schedule** | `viewSchedlue -n name` <br> `viewSchedlue -i index`
 **Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift n/name d/fullDayName-shiftNumber` <br> `deleteShift i/index d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
+**Mark absent** | `mark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
+**Remove mark** | `unmark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`

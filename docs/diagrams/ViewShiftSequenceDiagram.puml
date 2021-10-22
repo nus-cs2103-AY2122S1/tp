@@ -1,0 +1,86 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":ViewShiftCommandParser" as ViewShiftCommandParser LOGIC_COLOR
+participant "command:ViewShiftCommand" as ViewShiftCommand LOGIC_COLOR
+participant "result:CommandResult" as CommandResult LOGIC_COLOR
+participant "predicate:isWorkingPredicate" as isWorkingPredicate LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("viewShift -d Monday-0")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("viewShift -d Monday-0")
+activate AddressBookParser
+
+create ViewShiftCommandParser
+AddressBookParser -> ViewShiftCommandParser
+activate ViewShiftCommandParser
+
+ViewShiftCommandParser --> AddressBookParser
+deactivate ViewShiftCommandParser
+
+AddressBookParser -> ViewShiftCommandParser : parse("viewShift -d Monday-0")
+activate ViewShiftCommandParser
+
+create ViewShiftCommand
+ViewShiftCommandParser -> ViewShiftCommand
+activate ViewShiftCommand
+
+create isWorkingPredicate
+ViewShiftCommand -> isWorkingPredicate
+activate isWorkingPredicate
+
+isWorkingPredicate --> ViewShiftCommand
+deactivate isWorkingPredicate
+
+ViewShiftCommand --> ViewShiftCommandParser : command
+deactivate ViewShiftCommand
+
+ViewShiftCommandParser --> AddressBookParser : command
+deactivate ViewShiftCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+ViewShiftCommandParser -[hidden]-> AddressBookParser
+destroy ViewShiftCommandParser
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> ViewShiftCommand : execute()
+activate ViewShiftCommand
+
+ViewShiftCommand -> Model : updateFilteredPersonList(isWorkingPredicate)
+activate Model
+Model --> ViewShiftCommand : ObservableList<Person> Filtered_Staff
+
+alt viewShift by Slot Number
+    ViewShiftCommand -> Model : executeViewShiftBySlot()
+    Model --> ViewShiftCommand : result
+
+else  viewShift by Time
+    ViewShiftCommand -> Model : executeViewShiftByTime()
+    Model --> ViewShiftCommand : result
+end
+
+deactivate Model
+
+create CommandResult
+ViewShiftCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ViewShiftCommand : commandResult
+deactivate CommandResult
+
+ViewShiftCommand --> LogicManager : commandResult
+deactivate ViewShiftCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
