@@ -17,7 +17,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListGroupsCommand;
 import seedu.address.logic.commands.ViewGroupCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -69,9 +68,6 @@ public class CsBookParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-
-        case ListGroupsCommand.COMMAND_WORD:
-            return new ListGroupsCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
