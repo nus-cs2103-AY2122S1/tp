@@ -55,7 +55,7 @@ public class ModuleCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         code.setText(module.getCode().value);
         title.setText(module.getTitle().value);
-        mc.setText(String.valueOf(module.getMc().mc));
+        mc.setText(String.valueOf(module.getMc().value));
         description.setText(module.getDescription().value);
 
         if (module.hasAcademicCalendar()) {

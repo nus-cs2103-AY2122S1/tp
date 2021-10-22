@@ -14,18 +14,25 @@ public class Mc {
 
     public static final String MESSAGE_CONSTRAINTS =
             "MC credit should only be an Integer, and it should not be less than 0.";
-    public final int mc;
+    public final int value;
 
+    /**
+     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * This default constructor shouldn't be used anywhere else.
+     */
+    public Mc() {
+        this.value = 0;
+    }
 
     /**
      * Constructs a {@code Phone}.
      *
-     * @param mc A valid mc credit.
+     * @param value A valid mc credit.
      */
-    public Mc(int mc) {
-        requireNonNull(mc);
-        checkArgument(isValidMc(mc), MESSAGE_CONSTRAINTS);
-        this.mc = mc;
+    public Mc(int value) {
+        requireNonNull(value);
+        checkArgument(isValidMc(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -37,18 +44,18 @@ public class Mc {
 
     @Override
     public String toString() {
-        return mc + "MC(s)";
+        return value + "MC(s)";
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof seedu.tracker.model.module.Mc // instanceof handles nulls
-                && mc == (((seedu.tracker.model.module.Mc) other).mc)); // state check
+                && value == (((seedu.tracker.model.module.Mc) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(mc);
+        return Objects.hash(value);
     }
 }

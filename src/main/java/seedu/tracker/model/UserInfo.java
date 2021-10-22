@@ -1,30 +1,40 @@
 package seedu.tracker.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import static java.util.Objects.requireNonNull;
+
+import java.util.Objects;
+
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Mc;
 
-import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-
-
+/**
+ * Represents User's information.
+ */
 public class UserInfo implements ReadOnlyUserInfo {
-    private AcademicCalendar currentSemester;
-    private Mc mcGoal;
+    private AcademicCalendar currentSemester = new AcademicCalendar(new AcademicYear(1), new Semester(1));
+    private Mc mcGoal = new Mc(120);
 
+    /**
+     * Creates a {@code UserInfo} with default values.
+     */
     public UserInfo() {}
 
-    @JsonCreator
-    public UserInfo(@JsonProperty("currentSemester") AcademicCalendar currentSemester,
-                    @JsonProperty("mcGoal") Mc mcGoal) {
+    /**
+     * Creates a {@code UserInfo} with details in {@code currentSemester} and {@code mcGoal}.
+     *
+     * @param currentSemester semester to be set
+     * @param mcGoal Mc goal to be set
+     */
+    public UserInfo(AcademicCalendar currentSemester, Mc mcGoal) {
         this.currentSemester = currentSemester;
         this.mcGoal = mcGoal;
     }
 
+    /**
+     * Creates a {@code UserInfo} with the details in {@code userInfo}.
+     */
     public UserInfo(ReadOnlyUserInfo userInfo) {
         this();
         resetData(userInfo);
@@ -48,6 +58,9 @@ public class UserInfo implements ReadOnlyUserInfo {
         this.mcGoal = mcGoal;
     }
 
+    /**
+     * Resets the existing data of this {@code UserInfo} with {@code newUserInfo}.
+     */
     public void resetData(ReadOnlyUserInfo newUserInfo) {
         requireNonNull(newUserInfo);
         setCurrentSemester(newUserInfo.getCurrentSemester());

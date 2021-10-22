@@ -21,7 +21,11 @@ import org.junit.jupiter.api.Test;
 import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.logic.commands.EditCommand.EditModuleDescriptor;
-import seedu.tracker.model.*;
+import seedu.tracker.model.Model;
+import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.ModuleTracker;
+import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 import seedu.tracker.testutil.ModuleBuilder;
@@ -41,7 +45,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setModule(model.getFilteredModuleList().get(0), editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -62,7 +67,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setModule(lastModule, editedModule);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -78,7 +84,8 @@ public class EditCommandTest {
                 .withTags(VALID_TAG_CORE).withAcademicCalendar(3, 2).build();
 
         Module moduleWithAcademicCal = moduleInList.withAcademicCalendar(3, 2).build();
-        Model modelToEdit = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
+        Model modelToEdit = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         modelToEdit.setModule(lastModule, moduleWithAcademicCal);
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withCode(VALID_CODE_CP3108A)
@@ -87,7 +94,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setModule(lastModule, editedModule);
 
         assertCommandSuccess(editCommand, modelToEdit, expectedMessage, expectedModel);
@@ -100,7 +108,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
@@ -116,7 +125,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setModule(model.getFilteredModuleList().get(0), editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);

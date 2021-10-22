@@ -36,9 +36,9 @@ public class JsonAdaptedModuleTest {
     private static final String VALID_CODE = GEQ1000Scheduled.getCode().toString();
     private static final String VALID_TITLE = GEQ1000Scheduled.getTitle().toString();
     private static final String VALID_DESCRIPTION = GEQ1000Scheduled.getDescription().toString();
-    private static final int VALID_MC = GEQ1000Scheduled.getMc().mc;
-    private static final int VALID_ACADEMIC_YEAR = GEQ1000Scheduled.getAcademicCalendar().getAcademicYear().year;
-    private static final int VALID_SEMESTER = GEQ1000Scheduled.getAcademicCalendar().getSemester().semester;
+    private static final int VALID_MC = GEQ1000Scheduled.getMc().value;
+    private static final int VALID_ACADEMIC_YEAR = GEQ1000Scheduled.getAcademicCalendar().getAcademicYear().value;
+    private static final int VALID_SEMESTER = GEQ1000Scheduled.getAcademicCalendar().getSemester().value;
 
     private static final List<JsonAdaptedTag> VALID_TAGS = GEQ1000.getTags().stream()
         .map(JsonAdaptedTag::new)

@@ -22,9 +22,14 @@ import seedu.tracker.logic.commands.CommandResult;
 import seedu.tracker.logic.commands.ListCommand;
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.logic.parser.exceptions.ParseException;
-import seedu.tracker.model.*;
+import seedu.tracker.model.Model;
+import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.JsonModuleTrackerStorage;
+import seedu.tracker.storage.JsonUserInfoStorage;
 import seedu.tracker.storage.JsonUserPrefsStorage;
 import seedu.tracker.storage.StorageManager;
 import seedu.tracker.testutil.ModuleBuilder;
@@ -40,10 +45,11 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonModuleTrackerStorage addressBookStorage =
-                new JsonModuleTrackerStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonModuleTrackerStorage moduleTrackerStorage =
+                new JsonModuleTrackerStorage(temporaryFolder.resolve("moduleTracker.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUserInfoStorage userInfoStorage = new JsonUserInfoStorage(temporaryFolder.resolve("userInfo.json"));
+        StorageManager storage = new StorageManager(moduleTrackerStorage, userPrefsStorage, userInfoStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -68,11 +74,13 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonModuleTrackerStorage addressBookStorage =
-                new JsonModuleTrackerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonModuleTrackerStorage moduleTrackerStorage =
+                new JsonModuleTrackerIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionModuleTracker.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonUserInfoStorage userInfoStorage =
+                new JsonUserInfoStorage(temporaryFolder.resolve("ioExceptionUserInfo.json"));
+        StorageManager storage = new StorageManager(moduleTrackerStorage, userPrefsStorage, userInfoStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

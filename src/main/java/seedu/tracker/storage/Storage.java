@@ -5,7 +5,12 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.tracker.commons.exceptions.DataConversionException;
-import seedu.tracker.model.*;
+import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.ReadOnlyUserInfo;
+import seedu.tracker.model.ReadOnlyUserPrefs;
+import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.UserPrefs;
+
 
 /**
  * API of the Storage component

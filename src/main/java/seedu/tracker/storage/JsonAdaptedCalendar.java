@@ -30,8 +30,8 @@ public class JsonAdaptedCalendar {
      * Converts a given {@code AcademicCalendar} into this class for Jackson use.
      */
     public JsonAdaptedCalendar(AcademicCalendar source) {
-        this.year = source.getAcademicYear().year;
-        this.semester = source.getSemester().semester;
+        this.year = source.getAcademicYear().value;
+        this.semester = source.getSemester().value;
     }
 
     @JsonValue

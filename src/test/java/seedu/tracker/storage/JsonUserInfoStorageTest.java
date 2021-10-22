@@ -1,22 +1,23 @@
 package seedu.tracker.storage;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
-import seedu.tracker.commons.exceptions.DataConversionException;
-import seedu.tracker.model.UserInfo;
-
-import seedu.tracker.model.calendar.AcademicCalendar;
-import seedu.tracker.model.calendar.AcademicYear;
-import seedu.tracker.model.calendar.Semester;
-import seedu.tracker.model.module.Mc;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static seedu.tracker.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import seedu.tracker.commons.exceptions.DataConversionException;
+import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
+import seedu.tracker.model.module.Mc;
 
 
 class JsonUserInfoStorageTest {
@@ -53,8 +54,6 @@ class JsonUserInfoStorageTest {
                 : null;
     }
 
-
-    // Solve this first! Todo: read from json file fails
     @Test
     public void readUserInfo_fileInOrder_successfullyRead() throws DataConversionException, IOException {
         UserInfo expected = getTypicalUserInfo();
@@ -64,25 +63,62 @@ class JsonUserInfoStorageTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void readUserInfo_valuesMissingFromFile_defaultValueUsed() throws DataConversionException {
+        UserInfo actual = readUserInfo("EmptyUserInfo.json").get();
+        assertEquals(new UserInfo(), actual);
+    }
+
+    @Test
+    public void readUserInfo_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
+        UserInfo expected = getTypicalUserInfo();
+        UserInfo actual = readUserInfo("ExtraValuesUserInfo.json").get();
+        assertEquals(expected, actual);
+    }
+
     private UserInfo getTypicalUserInfo() {
         UserInfo userInfo = new UserInfo();
-        userInfo.setCurrentSemester(new AcademicCalendar(new AcademicYear(2), new Semester(1)));
+        userInfo.setCurrentSemester(new AcademicCalendar(new AcademicYear(4), new Semester(1)));
         userInfo.setMcGoal(new Mc(160));
         return userInfo;
     }
 
-    // Todo : can't read back from json files
+    @Test
+    public void saveInfo_nullInfo_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveUserInfo(null, "SomeFile.json"));
+    }
+
+    @Test
+    public void saveInfo_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveUserInfo(new UserInfo(), null));
+    }
+
+    /**
+     * Saves {@code userInfo} at the specified {@code infoFileInTestDataFolder} filepath.
+     */
+    private void saveUserInfo(UserInfo userInfo, String infoFileInTestDataFolder) {
+        try {
+            new JsonUserInfoStorage(addToTestDataPathIfNotNull(infoFileInTestDataFolder))
+                    .saveUserInfo(userInfo);
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file", ioe);
+        }
+    }
     @Test
     public void saveUserInfo_allInOrder_success() throws IOException, DataConversionException {
         UserInfo original = new UserInfo();
-        original.setCurrentSemester(new AcademicCalendar(new AcademicYear(5), new Semester(1)));
+        original.setCurrentSemester(new AcademicCalendar(new AcademicYear(4), new Semester(1)));
         original.setMcGoal(new Mc(160));
-//        Path infoFilePath = testFolder.resolve("TempInfo.json");
-        Path infoFilePath = TEST_DATA_FOLDER.resolve("TempInfo.json");
+        Path infoFilePath = testFolder.resolve("TempInfo.json");
         JsonUserInfoStorage jsonUserInfoStorage = new JsonUserInfoStorage(infoFilePath);
 
         jsonUserInfoStorage.saveUserInfo(original);
-//        UserInfo readBack = jsonUserInfoStorage.readUserInfo().get();
-//        assertEquals(original, readBack);
+        UserInfo readBack = jsonUserInfoStorage.readUserInfo().get();
+        assertEquals(original, readBack);
+
+        original.setMcGoal(new Mc(320));
+        jsonUserInfoStorage.saveUserInfo(original);
+        readBack = jsonUserInfoStorage.readUserInfo().get();
+        assertEquals(original, readBack);
     }
 }

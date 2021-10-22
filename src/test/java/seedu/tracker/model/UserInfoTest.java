@@ -1,8 +1,8 @@
 package seedu.tracker.model;
 
-import org.junit.jupiter.api.Test;
+import static seedu.tracker.testutil.Assert.assertThrows;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class UserInfoTest {
     @Test

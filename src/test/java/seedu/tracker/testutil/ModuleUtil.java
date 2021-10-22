@@ -29,7 +29,7 @@ public class ModuleUtil {
         sb.append(PREFIX_CODE + module.getCode().value + " ");
         sb.append(PREFIX_TITLE + module.getTitle().value + " ");
         sb.append(PREFIX_DESCRIPTION + module.getDescription().value + " ");
-        sb.append(PREFIX_MC + String.format("%s", module.getMc().mc) + " ");
+        sb.append(PREFIX_MC + String.format("%s", module.getMc().value) + " ");
         module.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

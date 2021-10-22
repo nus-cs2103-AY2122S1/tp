@@ -34,7 +34,7 @@ public class ModelManager implements Model {
         requireAllNonNull(moduleTracker, userPrefs, userInfo);
 
         logger.fine("Initializing with mod tracker: " + moduleTracker + ", user prefs " + userPrefs
-        + " and user information: " + userInfo);
+                + " and user information: " + userInfo);
 
         this.moduleTracker = new ModuleTracker(moduleTracker);
         this.userPrefs = new UserPrefs(userPrefs);

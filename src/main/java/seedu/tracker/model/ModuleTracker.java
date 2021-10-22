@@ -20,8 +20,6 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
     private final UserInfo userInfo;
-    private AcademicCalendar currentSemester;
-    private Mc mcGoal;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -35,9 +33,6 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         Semester defaultSemester = new Semester(1);
         modules = new UniqueModuleList();
         userInfo = new UserInfo();
-
-        currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
-        mcGoal = new Mc(160);
     }
 
     public ModuleTracker() {}
@@ -53,19 +48,19 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     //// list overwrite operations
 
     public void setCurrentSemester(AcademicCalendar academicCalendar) {
-        this.currentSemester = academicCalendar;
+        this.userInfo.setCurrentSemester(academicCalendar);
     }
 
     public AcademicCalendar getCurrentSemester() {
-        return this.currentSemester;
+        return this.userInfo.getCurrentSemester();
     }
 
     public void setMcGoal(Mc mcGoal) {
-        this.mcGoal = mcGoal;
+        this.userInfo.setMcGoal(mcGoal);
     }
 
     public Mc getMcGoal() {
-        return this.mcGoal;
+        return this.userInfo.getMcGoal();
     }
 
     /**

@@ -1,8 +1,5 @@
 package seedu.tracker.model.calendar;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import static seedu.tracker.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -14,11 +11,18 @@ public class AcademicCalendar {
     private final Semester semester;
 
     /**
+     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * This default constructor shouldn't be used anywhere else.
+     */
+    public AcademicCalendar() {
+        this.year = null;
+        this.semester = null;
+    }
+
+    /**
      * Constructs Academic calendar.
      */
-    @JsonCreator
-    public AcademicCalendar(@JsonProperty("year") AcademicYear year,
-                            @JsonProperty("semester") Semester semester) {
+    public AcademicCalendar(AcademicYear year, Semester semester) {
         requireAllNonNull(year, semester);
         this.year = year;
         this.semester = semester;

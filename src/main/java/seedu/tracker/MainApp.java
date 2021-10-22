@@ -15,13 +15,26 @@ import seedu.tracker.commons.util.ConfigUtil;
 import seedu.tracker.commons.util.StringUtil;
 import seedu.tracker.logic.Logic;
 import seedu.tracker.logic.LogicManager;
-import seedu.tracker.model.*;
+import seedu.tracker.model.Model;
+import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.ModuleTracker;
+import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.ReadOnlyUserInfo;
+import seedu.tracker.model.ReadOnlyUserPrefs;
+import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.util.SampleDataUtil;
-import seedu.tracker.storage.*;
+import seedu.tracker.storage.JsonModuleTrackerStorage;
+import seedu.tracker.storage.JsonUserInfoStorage;
+import seedu.tracker.storage.JsonUserPrefsStorage;
+import seedu.tracker.storage.ModuleTrackerStorage;
+import seedu.tracker.storage.Storage;
+import seedu.tracker.storage.StorageManager;
+import seedu.tracker.storage.UserInfoStorage;
+import seedu.tracker.storage.UserPrefsStorage;
 import seedu.tracker.ui.Ui;
 import seedu.tracker.ui.UiManager;
 
-import javax.xml.crypto.Data;
 
 /**
  * Runs the application.
@@ -51,7 +64,7 @@ public class MainApp extends Application {
         UserInfoStorage userInfoStorage = new JsonUserInfoStorage(config.getUserInfoFilePath());
         UserInfo userInfo = initInfo(userInfoStorage);
         ModuleTrackerStorage moduleTrackerStorage = new JsonModuleTrackerStorage(userPrefs.getModuleTrackerFilePath());
-        storage = new StorageManager(moduleTrackerStorage, userPrefsStorage);
+        storage = new StorageManager(moduleTrackerStorage, userPrefsStorage, userInfoStorage);
 
         initLogging(config);
 
@@ -135,7 +148,7 @@ public class MainApp extends Application {
      */
     protected UserInfo initInfo(UserInfoStorage storage) {
         Path infoFilePath = storage.getUserInfoFilePath();
-        logger.info("Using prefs file : " + infoFilePath);
+        logger.info("Using info file : " + infoFilePath);
 
         UserInfo initializedInfo;
         try {
@@ -203,6 +216,7 @@ public class MainApp extends Application {
         logger.info("============================ [ Stopping Module Tracker ] =============================");
         try {
             storage.saveUserPrefs(model.getUserPrefs());
+            storage.saveUserInfo(model.getUserInfo());
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }

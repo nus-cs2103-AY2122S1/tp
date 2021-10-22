@@ -7,7 +7,12 @@ import java.util.logging.Logger;
 
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.commons.exceptions.DataConversionException;
-import seedu.tracker.model.*;
+import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.ReadOnlyUserInfo;
+import seedu.tracker.model.ReadOnlyUserPrefs;
+import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.UserPrefs;
+
 
 /**
  * Manages storage of ModuleTracker data in local storage.
@@ -22,10 +27,12 @@ public class StorageManager implements Storage {
     /**
      * Creates a {@code StorageManager} with the given {@code ModuleTrackerStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(ModuleTrackerStorage moduleTrackerStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ModuleTrackerStorage moduleTrackerStorage,
+                          UserPrefsStorage userPrefsStorage, UserInfoStorage userInfoStorage) {
         super();
         this.moduleTrackerStorage = moduleTrackerStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.userInfoStorage = userInfoStorage;
     }
 
     // ================ UserPrefs methods ==============================

@@ -1,25 +1,32 @@
 package seedu.tracker.model.calendar;
 
-
-import java.util.Objects;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.util.AppUtil.checkArgument;
+
+import java.util.Objects;
 
 public class AcademicYear {
     public static final String MESSAGE_CONSTRAINTS =
             "Academic Year should only contain numbers from 1 to 6, and it should not be blank";
 
-    public final int year;
+    public final int value;
+
+    /**
+     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * This default constructor shouldn't be used anywhere else.
+     */
+    public AcademicYear() {
+        this.value = 0;
+    }
 
     /**
      * Constructs an academic year.
-     * @param year A valid academic year.
+     * @param value A valid academic year.
      */
-    public AcademicYear(int year) {
-        requireNonNull(year);
-        checkArgument(isValidAcademicYear(year), MESSAGE_CONSTRAINTS);
-        this.year = year;
+    public AcademicYear(int value) {
+        requireNonNull(value);
+        checkArgument(isValidAcademicYear(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -32,18 +39,18 @@ public class AcademicYear {
 
     @Override
     public String toString() {
-        return Integer.toString(year);
+        return Integer.toString(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AcademicYear) // instanceof handles nulls
-                && year == (((AcademicYear) other).year); // state check
+                && value == (((AcademicYear) other).value); // state check
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(year);
+        return Objects.hash(value);
     }
 }
