@@ -2,12 +2,14 @@
 layout: page
 title: Uni-Fy User Guide
 ---
+![logo](images/Uni-fy_logo.png)
 
 * Table of Contents
   {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
+
 ## 1. Introduction
+
 Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) 
 while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
@@ -15,11 +17,33 @@ If you can type fast, Uni-Fy can get your tasks to display faster than tradition
 Interested to know more? Take a look at our Quick Start guide. Enjoy!
 
 
+--------------------------------------------------------------------------------------------------------------------
+## 2. About this document
 
+Welcome to the Uni-Fy User Guide!
+
+If you are new to Uni-Fy, this user guide will get you up and running in no time! It equips you with the basic 
+knowledge you need to use Uni-Fy properly. 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 2. Quick start
+## 3. Formatting
+
+The Uni-Fy user guide contains different formatting used throughout the document which is used to convey different meanings.
+This table below illustrates what each formatting means. 
+
+| Formatting    | What                            | Meaning   | Example                     |
+| ----------    |-------------------------------------|-----------|--------------------------|
+| `add`      | Words in light-blue highlight, also known as a mark-up| A command that can be typed into Uni-Fy|`help`|
+| `n/TASK_NAME` | Words in UPPER_CASE | A parameter to be supplied by the user |`n/CS3243`|
+| `n/TASK_NAME [tg/TAG_LEVEL]` | Words in square brackets| Optional parameter |`n/CS3243` or <br> `n/CS3243 tg/Important` |
+| `[tg/TAG_LEVEL]…` | Words with `…` after them| Parameters that can be input multiple times including 0 times|`tg/Important tg/Assignment` or `tg/Urgent `|
+| [**Blue underline**](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
+
+--------------------------------------------------------------------------------------------------------------------
+
+
+## 4. Getting started
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -35,7 +59,7 @@ Interested to know more? Take a look at our Quick Start guide. Enjoy!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Features
+## 5. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -58,7 +82,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
     * Time is represented in HH:MM format
 </div>
 
-### 3.1 Viewing help : `help`
+### 5.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -67,7 +91,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### 3.2 Adding a task: `add` 
+### 5.2 Adding a task: `add` 
 
 Add a task to the task list.
 
@@ -95,7 +119,7 @@ Examples:
 * `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
 
 
-### 3.3 Locating a task by name: `find`
+### 5.3 Locating a task by name: `find`
 
 Find tasks with matching keywords and show them in the task list.
 
@@ -122,7 +146,7 @@ Examples:
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
 
 
-### 3.4 Showing Tasks: `show` (coming soon)
+### 5.4 Showing Tasks: `show` (coming soon)
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -144,7 +168,7 @@ Examples:
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 
 
-### 3.5 Setting Priority Level for Tasks: `tag` (coming soon)
+### 5.5 Setting Priority Level for Tasks: `tag` (coming soon)
 
 Set a task's priority.
 
@@ -172,7 +196,7 @@ Examples:
 * `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
 
 
-### 3.6 Deleting tasks : `delete` (coming soon)
+### 5.6 Deleting tasks : `delete` (coming soon)
 
 Delete a specific task that has been added to your app.
 
@@ -193,7 +217,7 @@ Examples:
 * `delete 3` removes the third item in the task list
 * `delete 1 2` removes the first and second items in the task list
 
-### 3.7 Deleting all tasks : `clear`
+### 5.7 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
@@ -205,23 +229,23 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 Format: `clear`
 
-### 3.8 Undoing the previous command : `undo` `[coming in v1.3]`
+### 5.8 Undoing the previous command : `undo` `[coming in v1.3]`
 
 Reverts your previous command which modified the task list of Uni-Fy.
 
 Format: `undo`
 
-### 3.9 Exiting the program : `exit`
+### 5.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 3.10 Saving the data
+### 5.10 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 3.11 Editing the data file
+### 5.11 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -229,7 +253,7 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 3.12 Retrieving past commands `[coming in v1.3]`
+### 5.12 Retrieving past commands `[coming in v1.3]`
 
 Shows the past commands run on **Uni-Fy**.
 
@@ -239,7 +263,7 @@ Format: `history`
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
 </div>
 
-### 3.13 Archiving data files `[coming in v2.0]`
+### 5.13 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -247,7 +271,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 4. FAQ
+## 6. FAQ
 
 **Q**: What are the minimum system requirements for this application?<br>
 **A**: If your computer runs any of the Operating Systems found [here](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), you will be able to run **Uni-Fy**.
@@ -268,7 +292,7 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 
-## 5. Command summary
+## 7. Command summary
 
 Action | Format, Examples
 --------|------------------
