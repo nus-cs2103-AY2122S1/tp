@@ -27,12 +27,13 @@ public enum CommandWord {
     HELP("help", "man", "h"),
     EXIT("exit", "quit", "q"),
     ADD_PERSON("add", "a"),
-    CLEAR_PERSON("clear", "clr"),
+    CLEAR_PERSON("clear", "clr", "c"),
     DELETE_PERSON("delete", "del", "rm", "d"),
     EDIT_PERSON("edit", "update", "e"),
     FIND_PERSON("find", "f"),
     LIST_PERSON("list", "ls"),
-    REMARK_PERSON("remark");
+    REMARK_PERSON("remark"),
+    CLEAR_MODULE_LESSON("clearc", "clrc", "cc");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
     private static final Logger logger = LogsCenter.getLogger(CommandWord.class);
