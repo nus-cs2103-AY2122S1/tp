@@ -19,14 +19,15 @@ track of the contact information of clients and details of the products in inven
         * [List](#listing-list)
         * [View](#viewing-view)
         * [Command History](#command-history)
+        * [Saving the data](#saving-the-data)
+        * [Editing the data file](#editing-the-data-file)
         * [Statistics (Coming Soon)](#statistics-stat-coming-soon)
-        * [Load & Save Data (Coming Soon)](#loading-and-saving-the-data-coming-soon)
     * [FAQ](#faq)
     * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## Quick Start
 
 1. Ensure you have `Java 11` or above installed in your Computer. You can download it from
    [here](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html).
@@ -239,12 +240,15 @@ Format:
 * Previous command: `↑`
 * Next command: `↓`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Notes:**
-</div>
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Notes:**<br>
 
 * Pressing `↑` when the first command is currently displayed will do nothing.
 * Pressing `↓` when the last command is currently displayed will clear the command input field.
     * Subsequent `↓` will do nothing.
+    
+</div>
  
 
 ### Saving the data
@@ -263,10 +267,6 @@ data file at the next run.
 </div>
 
 ### Statistics: `stat` [coming soon]
-
-_Details coming soon ..._
-
-### Loading and Saving the data [coming soon]
 
 _Details coming soon ..._
 
