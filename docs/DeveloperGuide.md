@@ -13,16 +13,17 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 5. [Implementation](#implementation)
+   - [Add progress feature](#add-progress-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
+7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+8. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
    - [User stories](#user-stories)
    - [Use cases](#use-cases)
    - [Non-Functional Requirements](#non-functional-requirements)
    - [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    - [Launch and shutdown](#launch-and-shutdown)
    - [Deleting a person](#deleting-a-person)
    - [Saving data](#saving-data)
@@ -176,22 +177,21 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add progress feature: `add -p`
+### Add progress feature
 
 #### Implementation
 
 The add progress feature adds a progress to an existing student's progress list in TutorAid. Each student can have up
-to 10 progress. Adding a new progress to a student with 10 progress will result in the deletion of the oldest progress
-of the student.
+to 10 progress entries. Adding a new entry to a student with 10 entries will result in the deletion of the oldest entry.
 
 This feature implements the following operations:
 * `AddProgressCommand#execute()` —Creates a Progress object and adds it to a ProgressList object of a Student object
 in TutorAid.
 
-It is also additionally facilitated by the methods below:
-* `TutorAidParser#parseCommand()` —Checks for the command word that is required for the addition of a progress.
-* `AddCommandParser#parse()` —Checks for the command flag that specifies the addition of a progress.
-* `AddProgressCommandParser#parse()` —Parses the individual arguments to create a Progress object.
+It is also facilitated by the methods below:
+* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a progress.
+* `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a progress.
+* `AddProgressCommandParser#parse()` — Parses the individual arguments to create a Progress object.
 
 When a Student object is created, a ProgressList object is created for this Student object. This ProgressList object
 stores an ArrayList of type Progress that keeps track of a maximum of 10 Progress objects. We implement `ProgressList`
@@ -204,25 +204,41 @@ a command:
 
 `add -p 2 Did Homework​`
 
-1. The command is first passed into `TutorAidParser#parseCommand`, which extracts the first keyword of every command.
-   Since the keyword `add` would be extracted, the remaining arguments of the command (`-p 2 Did Homework​`)
-   are then passed into `AddCommandParser#parse`.
+1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
 
-2. `AddCommandParser#parse` extracts the command flag `-p` at the start of its argument, which denotes the addition
+2. `TutorAidParser#parseCommand` then extracts the first keyword of every command. Since the keyword `add` would be
+   extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into
+   `AddCommandParser#parse`.
+
+3. `AddCommandParser#parse` extracts the command flag `-p` at the start of its argument, which denotes the addition
    of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse`.
 
-3. The remaining (`2 Did Homework​`) is then parsed into index `2` and progress description `Did Homework`
+4. The remaining (`2 Did Homework​`) is then parsed into index `2` and progress description `Did Homework`, which
+   are then used to construct an `AddProgressCommand` object. 
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** 
 At this point, if `AddProgressCommandParser#parse` detects that invalid input has been supplied, the command will fail 
 its execution and `ParseException` will be thrown.</div>
 
-4. Lastly, the `AddProgressCommand#execute()` is called upon to add the progress with description `Did Homework`
-   into the student at the specified index `2` in TutorAid, which returns a `CommandResult` object to notify the
-   user that the progress has been successfully added.
-   The student details stored in `tutoraid.json` are updated with regard to this change.
+Below is the sequence diagram that depicts the parsing of the `add -p` command:
+![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
 
-![AddProgress](images/AddProgressSequenceDiagram.png)
+5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the
+   index-specified `Student` instance.
+
+Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit:
+![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
+
+6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
+
+7. `AddProgressCommand` then calls the `Model#updateFilteredStudentList()` to update the data in the system with
+   regard to this change.
+
+8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is
+   returned to `LogicManager`.
+
+Below is the sequence diagram that depicts the process of the adding a progress to a student:
+![AddProgressToStudent](images/AddProgressToStudentSequenceDiagram.png)
 
 #### Design considerations:
 
@@ -235,6 +251,7 @@ its execution and `ParseException` will be thrown.</div>
 * **Alternative 2:** Implements an ArrayList of type Progress in the Student class.
     * Pros: Easier to implement.
     * Cons: Student class may have too many responsibilities.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
