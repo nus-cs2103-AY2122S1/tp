@@ -24,6 +24,8 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.TypicalPersons;
 
 public class ImportCommandTest {
+    private static final String PATH_FORMAT = "src/test/data/ImportCommandTest/%s.csv";
+
     @Test
     public void execute_validFile_success() {
         ImportCommand command = new ImportCommand(
@@ -63,13 +65,11 @@ public class ImportCommandTest {
 
     @Test
     public void execute_badData_failure() {
-        String pathFormat = "src/test/data/ImportCommandTest/%s.csv";
-
         ImportCommand command = new ImportCommand(
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "missingAssessmentName")));
+                Path.of(String.format(PATH_FORMAT, "wrongAssessmentName")));
 
         assertCommandFailure(command, new ModelManager(), Assessment.MESSAGE_CONSTRAINTS);
 
@@ -77,15 +77,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "wrongAssessmentName")));
-
-        assertCommandFailure(command, new ModelManager(), Assessment.MESSAGE_CONSTRAINTS);
-
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "missingId")));
+                Path.of(String.format(PATH_FORMAT, "wrongId")));
 
         assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
 
@@ -93,15 +85,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "wrongId")));
-
-        assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
-
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "missingName")));
+                Path.of(String.format(PATH_FORMAT, "wrongName")));
 
         assertCommandFailure(command, new ModelManager(), Name.MESSAGE_CONSTRAINTS);
 
@@ -109,15 +93,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "wrongName")));
-
-        assertCommandFailure(command, new ModelManager(), Name.MESSAGE_CONSTRAINTS);
-
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "wrongGroup")));
+                Path.of(String.format(PATH_FORMAT, "wrongGroup")));
 
         assertCommandFailure(command, new ModelManager(), Group.MESSAGE_CONSTRAINTS);
 
@@ -125,7 +101,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "wrongScore")));
+                Path.of(String.format(PATH_FORMAT, "wrongScore")));
 
         assertCommandFailure(command, new ModelManager(), Score.MESSAGE_CONSTRAINTS);
 
@@ -133,8 +109,54 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_GROUP_COUNT,
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(pathFormat, "wrongTag")));
+                Path.of(String.format(PATH_FORMAT, "wrongTag")));
 
         assertCommandFailure(command, new ModelManager(), Tag.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_missingData_failure() {
+        ImportCommand command = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                Path.of(String.format(PATH_FORMAT, "missingAssessmentName")));
+
+        assertCommandFailure(command, new ModelManager(), Assessment.MESSAGE_CONSTRAINTS);
+
+        command = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                Path.of(String.format(PATH_FORMAT, "missingId")));
+
+        assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
+
+        command = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                Path.of(String.format(PATH_FORMAT, "missingName")));
+
+        assertCommandFailure(command, new ModelManager(), Name.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
+    public void execute_duplicateData_failure() {
+        ImportCommand command = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                Path.of(String.format(PATH_FORMAT, "duplicateAssessmentName")));
+
+        assertCommandFailure(command, new ModelManager(), ImportCommand.MESSAGE_DUPLICATE_ASSESSMENT);
+
+        command = new ImportCommand(
+                VALID_TYPICAL_PERSONS_GROUP_COUNT,
+                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
+                VALID_TYPICAL_PERSONS_TAG_COUNT,
+                Path.of(String.format(PATH_FORMAT, "duplicateId")));
+
+        assertCommandFailure(command, new ModelManager(), ImportCommand.MESSAGE_DUPLICATE_ID);
     }
 }

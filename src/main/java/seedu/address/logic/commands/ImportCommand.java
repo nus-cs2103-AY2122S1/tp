@@ -24,6 +24,7 @@ import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 
 
@@ -46,6 +47,8 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INVALID_FILE = "Failed to read from the file";
     public static final String MESSAGE_INVALID_NUMBER = "Failed to read the number of columns";
     public static final String MESSAGE_OUT_OF_BOUNDS = "Reached unexpected end of line while reading from file";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "Duplicate assessment found in file";
+    public static final String MESSAGE_DUPLICATE_ID = "Duplicate student ID found in file";
 
     private final int groupCount;
     private final int assessmentCount;
@@ -79,12 +82,19 @@ public class ImportCommand extends Command {
         for (int i = 0; i < assessmentCount; i++) {
             String assessmentName = readValue(headers, groupCount + 2 + i);
             Assessment assessment = makeAssessment(assessmentName);
+            if (assessments.contains(assessment)) {
+                throw new CommandException(MESSAGE_DUPLICATE_ASSESSMENT);
+            }
             assessments.add(assessment);
             newAb.addAssessment(assessment);
         }
 
         for (int i = 1; i < lines.length; i++) {
-            newAb.addStudent(readStudentFromRow(lines[i], assessments, newAb.getGroupList()));
+            try {
+                newAb.addStudent(readStudentFromRow(lines[i], assessments, newAb.getGroupList()));
+            } catch (DuplicatePersonException e) {
+                throw new CommandException(MESSAGE_DUPLICATE_ID);
+            }
         }
 
         model.setAddressBook(newAb);

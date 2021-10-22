@@ -71,7 +71,10 @@ public class Group {
      * {@code id} must not already exist in the group.
      */
     public void addStudent(ID id) {
-        students.add(id);
+        requireNonNull(id);
+        if (!hasStudent(id)) {
+            students.add(id);
+        }
     }
 
     /**

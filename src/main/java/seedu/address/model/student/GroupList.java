@@ -46,6 +46,7 @@ public class GroupList {
 
     /**
      * Updates the group list accordingly to the student info.
+     * Ensures that the student is properly recorded in every group in the group list
      *
      * @see seedu.address.model.AddressBook#addStudent(Student)
      */
@@ -56,6 +57,9 @@ public class GroupList {
         for (Group group : studentGroups) {
             if (!groups.contains(group)) {
                 groups.add(group);
+            } else {
+                Group groupInList = groups.get(groups.indexOf(group));
+                groupInList.addStudent(toUpdate.getId());
             }
         }
     }
