@@ -22,13 +22,13 @@ Our app makes it easy to connect with like minded students in your module. Our *
 ## Table of Contents
  - [Quick Start](#QuickStart)
  - [Features](#Features)
-    - [Adding a new Contact - add](#Add)
-    - [Delete a Contact - delete](#Delete)
-    - [Edit a Contact - edit](#Edit)
-    - [Find a Contact - find](#Find)
-    - [Show a Contact - show](#Show)
-    - [Importing Contacts - import ](#Import)
-    - [Exporting Contacts - export](#Export)
+    - [Adding a new Student - add](#Add)
+    - [Delete a Student - delete](#Delete)
+    - [Edit a Student - edit](#Edit)
+    - [Find a Student - find](#Find)
+    - [Show a Student Contact - show](#Show)
+    - [Importing Student Contacts - import ](#Import)
+    - [Exporting Student Contacts - export](#Export)
   - [Coming Soon](#ComingSoon)
   - [FAQ](#FAQ)
   - [Command Summary](#CommandSummary)
@@ -55,9 +55,9 @@ Notes about command format:
 
 <h3 id = "Add"> </h3>
 
-## Adding a new Contact - `add`
+## Adding a new Student - `add`
 
-Adds a person to the address book.
+Adds a student to the address book.
 
 Format:
 
@@ -73,9 +73,9 @@ add n/John Doe te/@johndoe123 p/98765432 e/johnd@example.com a/John street, bloc
 
 <h3 id = "Delete"> </h3>
 
-## Delete a Contact - `delete`
+## Delete a Student - `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified student from the address book.
 
 Format:
 
@@ -91,9 +91,9 @@ delete 7
 
 <h3 id = "Edit"> </h3>
 
-## Edit a Contact - `edit`
+## Edit a Student - `edit`
 
-Edits an existing person in the address book.
+Edits an existing student in the address book.
 
 Format: 
 
@@ -109,9 +109,9 @@ edit 1 n/John te/john_123 t/TA
 
 <h3 id = "Find"> </h3>
 
-## Find a Contact - `find`
+## Find a Student - `find`
 
-Finds an existing contact by name(s), tag(s), or telegram handle(s).
+Finds an existing student by name(s), tag(s), or telegram handle(s).
 
 Format 1: 
 
@@ -151,7 +151,7 @@ find @alex_1 bobx2
 
 <h3 id = "Show"> </h3>
 
-## Show a Contact - `show`
+## Show a Student Contact - `show`
 
 Shows detailed information of a contact. This can be done using the name of the contact or the index.
 
@@ -183,7 +183,7 @@ show 4
 
 <h3 id = "Import"> </h3>
 
-## Importing Contacts - `import`
+## Importing Student Contacts - `import`
 
 Imports contacts from the specified JSON file.
 
@@ -201,7 +201,7 @@ import CS2103T.JSON
 
 <h3 id = "Export"> </h3>
 
-## Exporting Contacts - `export`
+## Exporting Student Contacts - `export`
 
 Exports contacts to the specified JSON file.
 
@@ -224,7 +224,7 @@ export Friends.JSON
 1. Splash Screen
 2. Optional Fields and Telegram handle
 3. Find using Tags
-4. Import and Export Contacts 
+4. Import and Export Student Details 
 5. Show Function to display details
 
 <h2 id = "FAQ"> </h2>
@@ -243,13 +243,13 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Contact | add n/\<NAME> te/\<TELEGRAM> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
-| Delete a Contact | delete \<INDEX> |
-| Edit a Contact | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
-| Find a Contact (by Name) | find \<STRING> |
-| Find a Contact (by Tag) | find t/\<TAG> |
-| Find a Contact (by Telegram Handle) | find @\<TELEGRAM> |
-| Show a Contact (by Name)| show \<NAME> |
-| Show a Contact (by Index) | show \<INDEX> |
-| Import Contacts | import filename.JSON |
-| Exporting Contacts | export filename.JSON |
+| Add a new Student | add n/\<NAME> te/\<TELEGRAM> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Delete a Student | delete \<INDEX> |
+| Edit a Student | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
+| Find a Student (by Name) | find \<STRING> |
+| Find a Student (by Tag) | find t/\<TAG> |
+| Find a Student (by Telegram Handle) | find @\<TELEGRAM> |
+| Show a Student Contact (by Name)| show \<NAME> |
+| Show a Student Contact (by Index) | show \<INDEX> |
+| Import Student Contacts | import filename.JSON |
+| Exporting Student Contacts | export filename.JSON |
