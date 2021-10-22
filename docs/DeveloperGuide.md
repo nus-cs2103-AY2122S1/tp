@@ -272,6 +272,22 @@ The following sequence diagram shows how the pin operation works:
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
 
+### \[Work in progress\] Birthday Reminder feature
+Show a list of people with upcoming birthday.
+
+#### Proposed Implementation
+
+Step 1. On app startup sort people with birthday by birth month and day only into a list of person.
+
+Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
+to current day.
+
+Step 3. The rest of the list with birthday after this first person will be displayed in sorted order.
+
+Step 4. Once at the end of the list, cycle back to the person with the earliest birthday and display 
+subsequent people in the list in sorted order until the person with a birthday that has just past and 
+already the first person in the resulting the birthday reminder list.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
