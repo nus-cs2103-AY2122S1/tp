@@ -9,6 +9,8 @@ title: User Guide
 
 Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find answers, learn about the features, and manage tutoring better.
 
+<div style="page-break-after: always;"></div>
+
 # Table of Contents
 1. [Introduction](#1-introduction)
 
@@ -67,6 +69,8 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 6. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
+
 ## 1 Introduction
 
 ### 1.1 What is TutAssistor?
@@ -84,6 +88,7 @@ The features in this guide are formatted with the following conventions:
 Jump right in to the next section to get you started!
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 2 Get Started
 
@@ -111,6 +116,7 @@ After launching the app, the GUI similar to the one shown below should appear in
 ![Ui](images/ui_ug.png)
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 3 Features
 <div markdown="block" class="alert alert-info">
@@ -474,6 +480,7 @@ Format: `exit`
 _Detais coming soon..._
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 4 Additional Command Format Information
 
@@ -519,6 +526,7 @@ For example, if the list consists of `5` students/tuition classes:
 - Incorrect: `0`, `1.5`, `a`, `6`, etc.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 5 FAQ
 
@@ -526,6 +534,7 @@ For example, if the list consists of `5` students/tuition classes:
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## 6 Command Summary
 
