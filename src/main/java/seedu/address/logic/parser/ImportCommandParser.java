@@ -76,10 +76,10 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
     /**
      * Helper function to parse the tags from a CSV file.
-     * Returns a {@codeSet<Tags>} object.
+     * Returns a {@code Set<Tags>} object.
      *
-     * @param tags the given tags from the CSV file
-     * @return the set of tags after being parsed
+     * @param tags the given tags from the CSV file.
+     * @return the {@code Set<Tags>} object after being parsed.
      * @throws ParseException if the tags from the CSV file do not conform with the expected format.
      */
     private Set<Tag> parseTagCsv(String tags) throws ParseException {
