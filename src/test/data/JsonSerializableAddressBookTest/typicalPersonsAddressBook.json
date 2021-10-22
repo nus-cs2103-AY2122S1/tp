@@ -17,6 +17,14 @@
     "tasks" : [ "a", "b", "c" ],
     "description" : "HR in Sarimba"
   }, {
+    "name" : "Benjamin Wesley",
+    "phone" : "88956321",
+    "email" : "benwe@example.com",
+    "address" : "23, Coleman Street, #05-30",
+    "tagged" : [ "cousin" ],
+    "tasks" : [ "work", "play", "sleep" ],
+    "description" : ""
+  },{
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",

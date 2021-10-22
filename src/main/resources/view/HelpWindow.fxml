@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <fx:root minHeight="300.0" minWidth="446.0" prefHeight="557.0" prefWidth="599.0" stylesheets="@HelpWindow.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <Label fx:id="helpMessage" alignment="CENTER" layoutX="147.0" layoutY="14.0" maxHeight="Infinity" maxWidth="Infinity" prefHeight="39.0" prefWidth="303.0" text="Label" textAlignment="CENTER" wrapText="true" />
   <TextField fx:id="textField" alignment="CENTER" layoutX="209.0" layoutY="68.0" prefHeight="25.0" prefWidth="180.0" />
