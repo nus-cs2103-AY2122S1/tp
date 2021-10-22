@@ -3,21 +3,13 @@ package seedu.notor.logic.executors.person;
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 import seedu.notor.commons.core.index.Index;
-import seedu.notor.commons.util.CollectionUtil;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
-import seedu.notor.model.person.Email;
-import seedu.notor.model.person.Name;
-import seedu.notor.model.person.Note;
 import seedu.notor.model.person.Person;
-import seedu.notor.model.person.Phone;
 import seedu.notor.model.tag.Tag;
 
 /**

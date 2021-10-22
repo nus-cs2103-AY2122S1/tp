@@ -15,6 +15,7 @@ import seedu.notor.logic.parser.ArgumentTokenizer;
 import seedu.notor.logic.parser.ParserUtil;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.model.common.Name;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
@@ -67,7 +68,7 @@ public class PersonCreateCommandParser extends PersonCommandParser {
             index = ParserUtil.parseGroupIndex(argMultimap.getValue(PREFIX_GROUPINDEX).get());
         }
 
-        Person person = new Person(name, phone, email, tagList);
+        Person person = new Person(name, phone, email, Note.EMPTY_NOTE, tagList);
 
         return new PersonCreateCommand(index, person);
     }

@@ -11,7 +11,6 @@ import seedu.notor.model.common.Note;
 import seedu.notor.model.group.Group;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
-import seedu.notor.model.tag.Tag;
 import seedu.notor.model.util.UniqueList;
 
 /**

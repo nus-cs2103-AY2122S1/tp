@@ -5,6 +5,10 @@ import static seedu.notor.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_PHONE;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
