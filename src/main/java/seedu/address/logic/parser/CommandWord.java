@@ -30,7 +30,7 @@ public enum CommandWord {
     CLEAR_PERSON("clear", "clr", "c"),
     DELETE_PERSON("delete", "del", "rm", "d"),
     EDIT_PERSON("edit", "update", "e"),
-    FIND_PERSON("find", "f")
+    FIND_PERSON("find", "f"),
     LIST_PERSON("list", "ls"),
     REMARK_PERSON("remark"),
     CLEAR_MODULE_LESSON("clearc", "clrc", "cc");
