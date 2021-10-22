@@ -4,6 +4,9 @@ import seedu.address.logic.commands.modulelesson.AddModuleLessonCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and creates a new AddModuleLessonCommand object.
+ */
 public class AddModuleLessonCommandParser implements Parser<AddModuleLessonCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
