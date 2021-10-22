@@ -77,7 +77,7 @@ public class Student {
         }
 
         return otherStudent != null
-                && otherStudent.getName().equals(getName());
+                && this.equals(otherStudent);
     }
 
     /**
