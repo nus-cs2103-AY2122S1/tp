@@ -55,21 +55,6 @@ public class ModuleCode {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("[");
-        sb.append(value);
-        for (LessonCode lessonCode : lessonCodes) {
-            sb.append(" ");
-            sb.append(lessonCode);
-        }
-        sb.append("]");
-        return sb.toString();
-    }
-
-    /**
-     * Returns a string representation without the [].
-     * Mainly used in parsing.
-     */
-    public String toStringWithoutBracket() {
         StringBuilder sb = new StringBuilder(value);
         for (LessonCode lessonCode : lessonCodes) {
             sb.append(" ");

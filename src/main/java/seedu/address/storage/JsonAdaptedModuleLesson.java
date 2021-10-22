@@ -44,7 +44,7 @@ public class JsonAdaptedModuleLesson {
      * Converts a given {@code ModuleLesson} into this lesson for Jackson use.
      */
     public JsonAdaptedModuleLesson(ModuleLesson source) {
-        moduleCode = source.getModuleCode().toStringWithoutBracket();
+        moduleCode = source.getModuleCode().toString();
         lessonDay = source.getDay().getDayAsIntString();
         lessonTime = source.getTime().toString();
         remark = source.getRemark().value;
@@ -57,7 +57,8 @@ public class JsonAdaptedModuleLesson {
      */
     public ModuleLesson toModelType() throws IllegalValueException {
         if (this.moduleCode == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Module.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModuleCode.class.getSimpleName()));
         }
 
         final ModuleCode moduleCode = parseModuleCode(this.moduleCode);

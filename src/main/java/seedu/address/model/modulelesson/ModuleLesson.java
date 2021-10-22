@@ -25,6 +25,8 @@ public class ModuleLesson {
      */
     public ModuleLesson(ModuleCode moduleCode, LessonDay lessonDay, LessonTime lessonTime, Remark remark) {
         requireAllNonNull(moduleCode, lessonDay, lessonTime, remark);
+        // ModuleCode in ModuleLesson should contain exactly 1 lesson code
+        assert moduleCode.getLessonCodes().size() == 1;
         this.moduleCode = moduleCode;
         this.lessonDay = lessonDay;
         this.lessonTime = lessonTime;

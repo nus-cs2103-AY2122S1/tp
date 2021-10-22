@@ -10,13 +10,12 @@ import static seedu.address.testutil.TypicalModuleLessons.CS2103_TUT1;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.testutil.ModuleLessonBuilder;
 
 public class ModuleLessonTest {
 
     @Test
-    public void isSameModuleClass() throws ParseException {
+    public void isSameModuleLesson() {
         assertTrue(CS2100_LAB1.isSameModuleLesson(CS2100_LAB1));
 
         assertFalse(CS2100_TUT1.isSameModuleLesson(null));
@@ -26,7 +25,7 @@ public class ModuleLessonTest {
         assertTrue(CS2100_LAB1.isSameModuleLesson(editedCS2100Lab));
 
         // name differs in case, all other attributes same -> returns false
-        editedCS2100Lab = new ModuleLessonBuilder(CS2100_LAB1).withModuleCode("cs2100").build();
+        editedCS2100Lab = new ModuleLessonBuilder(CS2100_LAB1).withModuleCode("cs2100 B31").build();
         assertFalse(CS2100_LAB1.isSameModuleLesson(editedCS2100Lab));
     }
 
@@ -47,9 +46,9 @@ public class ModuleLessonTest {
 
     @Test
     public void toStringTest() {
-        assertEquals(CS2100_LAB1.toString(), "Module: [CS2100 B31]; Day: Tuesday; Time: 15:00; Remark: COM1 0113");
+        assertEquals(CS2100_LAB1.toString(), "Module: CS2100 B31; Day: Tuesday; Time: 15:00; Remark: COM1 0113");
 
-        assertEquals(CS2100_TUT1.toString(), "Module: [CS2100 T18]; Day: Wednesday; Time: 17:00; "
+        assertEquals(CS2100_TUT1.toString(), "Module: CS2100 T18; Day: Wednesday; Time: 17:00; "
                 + "Remark: COM1 01-20");
     }
 
