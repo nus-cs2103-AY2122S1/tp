@@ -3,10 +3,12 @@ package seedu.address.model.friend;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -120,6 +122,25 @@ public class UniqueFriendsList implements Iterable<Friend> {
 
         Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getName(), currentGames);
         this.setFriend(toLink, editedFriend);
+    }
+
+    /**
+     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     */
+    public void removeLinkAllFriends(GameId gameId) {
+        for (Friend currFriend: internalList) {
+            Set<GameFriendLink> currSet = new HashSet<>(currFriend.getGameFriendLinks());
+            Stream<GameFriendLink> currSetStream = currSet.stream()
+                    .filter(gameFriendLink -> gameFriendLink.getGameId().equals(gameId));
+            GameFriendLink currLink = currSetStream.findFirst().orElse(null);
+            if (currLink == null) {
+                continue;
+            }
+
+            currSet.remove(currLink);
+            Friend editedFriend = new Friend(currFriend.getFriendId(), currFriend.getName(), currSet);
+            this.setFriend(currFriend, editedFriend);
+        }
     }
 
     public void setFriends(UniqueFriendsList replacement) {

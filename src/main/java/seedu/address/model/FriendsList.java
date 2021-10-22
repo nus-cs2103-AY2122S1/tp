@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.UniqueFriendsList;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -110,6 +111,13 @@ public class FriendsList implements ReadOnlyFriendsList {
      */
     public void linkFriend(Friend toLink, GameFriendLink gameFriendLink) {
         friends.link(toLink, gameFriendLink);
+    }
+
+    /**
+     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     */
+    public void removeLinkAllFriends(GameId gameId) {
+        friends.removeLinkAllFriends(gameId);
     }
 
     /**
