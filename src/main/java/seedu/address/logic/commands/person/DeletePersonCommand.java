@@ -87,33 +87,37 @@ public class DeletePersonCommand extends Command {
         requireNonNull(model);
         int sizeOfPersonList = model.getFilteredPersonList().size();
         String successMessage;
-        model.updateFilteredPersonList(predicate);
-        List<Person> filteredList = model.getFilteredPersonList();
 
-        if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS && filteredList.isEmpty()) {
-            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
-        }else
-            if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS && !isDeleteLesson()) {
-            successMessage = deleteRelatedPersonByModuleCode(model, filteredList);
-        } else
-            if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS && isDeleteLesson()) {
-            successMessage = deleteLessonTag(model, filteredList);
-        } else
-            if (targetIndex.getZeroBased() >= sizeOfPersonList) {
+        if (predicate != Model.PREDICATE_SHOW_ALL_PERSONS) {
+            successMessage = deleteByModule(model);
+        } else if (targetIndex.getZeroBased() >= sizeOfPersonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        } else
-            if (targetIndex.getZeroBased() > endIndex.getZeroBased()
+        } else if (targetIndex.getZeroBased() > endIndex.getZeroBased()
                 || endIndex.getZeroBased() >= sizeOfPersonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
         } else {
-            successMessage = deleteAll(model, filteredList);
+            successMessage = deleteAll(model);
         }
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(successMessage);
     }
 
-    private String deleteAll(Model model, List<Person> lastShownList) {
+    private String deleteByModule(Model model) throws CommandException {
+        model.updateFilteredPersonList(predicate);
+        if (model.getFilteredPersonList().isEmpty()) {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
+        } else if (isDeleteLesson()) {
+            model.updateFilteredPersonList(predicate);
+            return deleteLessonTag(model, model.getFilteredPersonList());
+        } else {
+            model.updateFilteredPersonList(predicate);
+            return deleteRelatedPersonByModuleCode(model, model.getFilteredPersonList());
+        }
+    }
+
+    private String deleteAll(Model model) {
+        List<Person> lastShownList = model.getFilteredPersonList();
         int first = targetIndex.getZeroBased();
         int last = endIndex.getZeroBased();
         int numberOfDeletedPersons = 0;

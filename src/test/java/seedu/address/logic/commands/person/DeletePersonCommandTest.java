@@ -114,7 +114,8 @@ public class DeletePersonCommandTest {
     public void execute_invalidModuleCodeUnfilteredList_throwsCommandException() {
         ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[CS1231]")));
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(predicate, new ModuleCode("CS1231", new HashSet<>()));
+        DeletePersonCommand deleteCommand = new DeletePersonCommand(
+                predicate, new ModuleCode("CS1231", new HashSet<>()));
 
         assertCommandFailure(deleteCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
     }
@@ -187,9 +188,9 @@ public class DeletePersonCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        DeletePersonCommand deleteCommand = new DeletePersonCommand(outOfBoundIndex);
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deletePersonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test

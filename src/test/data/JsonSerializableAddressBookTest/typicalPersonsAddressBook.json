@@ -91,6 +91,29 @@
       "moduleCode": "CS2040",
       "tags": [ ]
     } ]
+  }, {
+    "name" : "Henry Davis",
+    "phone" : "94351853",
+    "email" : "henry@example.com",
+    "teleHandle": "",
+    "remark" : "He likes Pizza.",
+    "moduleCodes": [ {
+      "moduleCode" : "CS2100",
+      "tags" : [ ]
+    } ]
+  },  {
+    "name" : "Isaac Tan",
+    "phone" : "94951253",
+    "email" : "isaaac@example.com",
+    "teleHandle": "",
+    "remark" : "He likes basketball",
+    "moduleCodes": [ {
+      "moduleCode": "CS2100",
+      "tags" : [ ]
+    }, {
+      "moduleCode": "CS2106",
+      "tags" :[ ]
+    } ]
   } ],
   "lessons": [ ]
 }
