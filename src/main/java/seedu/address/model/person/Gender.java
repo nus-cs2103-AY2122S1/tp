@@ -40,6 +40,26 @@ public class Gender {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns true if the gender is a male.
+     */
+    public boolean isMale() {
+        return gender.equals("M");
+    }
+
+    /**
+     * Returns true if the gender is a female.
+     */
+    public boolean isFemale() {
+        return gender.equals("F");
+    }
+
+    /**
+     * Returns true if the gender is others.
+     */
+    public boolean isOther() {
+        return gender.equals("O");
+    }
 
     @Override
     public String toString() {
