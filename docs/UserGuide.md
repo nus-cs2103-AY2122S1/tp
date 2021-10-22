@@ -3,9 +3,9 @@ layout: page
 title: User Guide
 ---
 
-![WTG logo](../src/main/resources/images/tour_booth.png)
+![WTG logo]<img src="../src/main/resources/images/tour_booth.png" width="100">
 
-WhereTourGo: A Tour Guide’s Best Friend
+WhereTourGo: A Tour Guide’s Best Friend!
 
 **WhereTourGo (WTG)** is a desktop app for managing your tour contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
@@ -58,7 +58,7 @@ This User Guide will help you set up your contact list and familiarise yourself 
 
     * **`list`** : Lists all contacts
 
-    * **`add`**`add c/att n/Mandarin Oriental p/98765432 e/Mandarin_Oriental@example.com a/Marina Bay Sands, Singapore 123432` : Adds a contact named `Mandarin Oriental`
+    * **`add`**`c/att n/Mandarin Oriental p/98765432 e/Mandarin_Oriental@example.com a/Marina Bay Sands, Singapore 123432` : Adds a contact named `Mandarin Oriental`
 
     * **`delete`**`3` : Deletes the 3rd contact shown in the current list
 
@@ -93,14 +93,15 @@ This User Guide will help you set up your contact list and familiarise yourself 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  *Duplicate contact names are not allowed
+  
+*Duplicate contact names are not allowed
   e.g. if there exists a contact named ‘Marina Bay Sands’, adding or editing a contact with the name ‘Marina Bay Sands’ is not allowed.<br>
 
 </div>
 
 ### Viewing help: `help`
 
-Opens the User Guide in the Browser
+Opens the User Guide in the Browser.
 
 Format: `help`
 
@@ -128,7 +129,8 @@ A contact can have a review
 
 Examples:
 * `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`
-  Expected Outcome for `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4` :
+  
+Expected Outcome for `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4` :
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
 ### Listing all contacts: `list`
@@ -154,7 +156,8 @@ Examples:
 *  `edit 1 p/92345678 e/Mandarin_Oriental@example.com` Edits the phone number and email address of the 1st contact to be `92345678` and `Mandarin_Oriental@example.com` respectively
 *  `edit 2 n/Marina Bay Sands t/` Edits the name of the 2nd contact to be `Marina Bay Sands` and clears all existing tags
 * `edit 3 ra/3` Edits the rating of the 3rd contact to be `3`
-  Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
+  
+Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
 ### Locating contacts: `find`
@@ -171,12 +174,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find hotel` returns `D’ Hotel` and `Shangri-La Hotels and Resorts`
 * `find bay` returns `Gardens by the Bay` and `Marina Bay Sands`
-  Expected Outcome for `find bay`:
+  
+Expected Outcome for `find bay`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
 ### Deleting a contact: `delete`
 
-Deletes the specified contact from the contact list.
+Deletes the specified contact from the contact list, either by name or index.
 
 Format: `delete INDEX`
 
@@ -201,6 +205,9 @@ Examples:
 
 ### Filtering contacts: `filter`
 Shows a list of all contacts in the specified category or with the specified rating.
+
+Format: `filter [c/CATEGORY] [ra/NUMBER] ... `
+
 Category codes:
 * Attraction :`c/att`
 * F&B :`c/fnb`
@@ -213,9 +220,8 @@ Category codes:
 * 3-star : `ra/3`
 * 4-star : `ra/4`
 * 5-star : `ra/5`
-  Format: `filter [c/CATEGORY] [ra/NUMBER] ... `
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
 You can filter contacts in one or many categories
 </div>
 
@@ -224,37 +230,46 @@ Examples:
 * `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts)
 * `filter ra/3` returns all contacts with 3-star rating from all categories
 * `filter c/fnb ra/3` returns all F&B contacts with 3-star rating
-  Expected Outcome for `filter c/fnb`:
+  
+Expected Outcome for `filter c/fnb`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
 
 ### Undoing the operations: `undo`
 Undoes the last change made to the list of contacts.
+
 Format: `undo`
+
 Examples :
-If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
+* If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored
 
 ### Redoing the operations: `redo`
 Redoes the last change undone on the list of contacts.
+
 Format: `redo`
+
 Examples :
-If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
-If you then execute `redo` , the Marina Bay Sands contact will be deleted again.
+* If you execute the command `delete Marina Bay Sands`, then execute the command `undo` , the Marina Bay Sands contact will be restored.
+If you then execute `redo` , the Marina Bay Sands contact will be deleted again
 
 ### Sorting the contacts: `sort`
 Sorts the list of contacts in a specified order. The sort feature is sorted by Contact name (in alphabetical order) or by Rating (in descending order).
+
 Format : `sort FIELD`
+
 Examples :
-*`sort name` returns the same list of contacts displayed in an alphabetical order
-*`sort rating` returns the same list of contacts displayed from the contacts with the highest to lowest rating
+* `sort name` returns the same list of contacts displayed in an alphabetical order
+* `sort rating` returns the same list of contacts displayed from the contacts with the highest to lowest rating
 
 ### Summarizing contacts: `sum`
 Shows a summary of the content of WhereTourGo. The data presented as a summary are as follows:
 * number of contacts in the contact list
 * the percentage of contacts that have a review
 * the number of contacts in each category defined by `CategoryCode`
-  Format: `sum`
-  Expected Outcome for `sum`:
+
+Format: `sum`
+
+Expected Outcome for `sum`:
   ADD A SCREENSHOT HERE !!!!!!!!!!!!!!!!!!!!!!!
 
 ### Viewing a contact: `view`
@@ -283,7 +298,7 @@ Examples:
 * `find Gardens By The Bay` followed by `view Gardens By The Bay` displays the contact with name 'Gardens By The Bay'
 
 ### Exporting data: `export`
-(MIGHT WANT TO ADD AN EXAMPLE OF THE TXT FILE)
+
 Exports all the contacts from the contact list to a well-formatted `.txt` file.
 
 Format: `export`
@@ -329,7 +344,7 @@ WhereTourGo data is saved in the hard disk automatically after any command that 
 
 WhereTourGo data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: Caution:
 If your changes to the data file makes its format invalid, WhereTourGo will discard all data and start with an empty data file at the next run.
 </div>
  
