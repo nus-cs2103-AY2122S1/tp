@@ -17,8 +17,15 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        String[] multipleIndexes = args.trim().split(" ");
-        Index[] result = checkAndParseArgs(multipleIndexes);
+        Index[] result;
+        if (isRangeInput(args)) {
+            String[] rangedIndex = spiltRangeInput(args);
+            result = parseRangeInput(rangedIndex);
+        } else {
+            String[] multipleIndexes = args.trim().split(" ");
+            result = checkAndParseArgs(multipleIndexes);
+        }
+
         return new DeleteCommand(result);
     }
 
@@ -34,6 +41,38 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
             }
+        }
+
+        return result;
+    }
+
+    private boolean isRangeInput(String args) {
+        return args.contains("-") && args.trim().length() == 3;
+    }
+
+    // should return a string array of length 2
+    private String[] spiltRangeInput(String args) {
+        String[] rangedIndexes = args.trim().split("-");
+        return rangedIndexes;
+    }
+
+    private Index[] parseRangeInput(String[] args) throws ParseException {
+        assert args.length == 2 : "Invalid range input";
+
+        Index[] result;
+        Index startIndex, endIndex;
+        try {
+            startIndex = ParserUtil.parseIndex(args[0]);
+            endIndex = ParserUtil.parseIndex(args[1]);
+            result = new Index[endIndex.getOneBased() - startIndex.getOneBased() + 1];
+        } catch (ParseException pe) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+        }
+
+        int count = 0;
+        for (int i = startIndex.getOneBased(); i <= endIndex.getOneBased(); i++) {
+            result[count++] = Index.fromOneBased(i);
         }
 
         return result;
