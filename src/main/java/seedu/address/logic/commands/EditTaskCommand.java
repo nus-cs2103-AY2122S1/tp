@@ -82,16 +82,14 @@ public class EditTaskCommand extends EditCommand {
     // Go through student list of module, for each student, change the task's description but not the completion(?)
 
     /**
-     * Edits a task's information. The task will be from the specified student.
+     * Edits a {@code Task}'s information. The {@code Task} will be from the specified {@code Student}.
      *
      * @param student The student whose task will be edited.
      * @return Statement indicating that the edit is successful.
      * @throws CommandException Exception thrown when task is not found.
      */
     public CommandResult editTaskListOfStudent(Student student) throws CommandException {
-        if (student == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT, "student is null"));
-        }
+        requireNonNull(student);
         UniqueTaskList studentTaskList = student.getTaskList();
         for (Task task : studentTaskList) {
             if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
@@ -105,16 +103,14 @@ public class EditTaskCommand extends EditCommand {
     }
 
     /**
-     * Edits a task's information. The task will be from the specified student.
+     * Edits a {@code Task}'s information. The {@code Task} will be from the specified {@code Student}.
      *
      * @param module The student whose task will be edited.
      * @return Statement indicating that the edit is successful.
      * @throws CommandException Exception thrown when task is not found.
      */
     public CommandResult editTaskListOfModule(Module module) throws CommandException {
-        if (module == null) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_STUDENT, "student is null"));
-        }
+        requireNonNull(module);
         UniqueTaskList moduleTaskList = module.getTaskList();
         for (Task task : moduleTaskList) {
             if (task.getTaskId().equals(editTaskDescriptor.taskId)) {
@@ -128,8 +124,8 @@ public class EditTaskCommand extends EditCommand {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code Task} with the details of {@code taskToEdit}
+     * edited with {@code editTaskDescriptor}.
      *
      * @param taskToEdit The task to be edited.
      * @param editTaskDescriptor The edited task descriptions.
@@ -167,8 +163,8 @@ public class EditTaskCommand extends EditCommand {
     }
 
     /**
-     * Stores the details to edit the task with. Each non-empty field value will replace the
-     * corresponding field value of the task.
+     * Stores the details to edit the {@code Task} with. Each non-empty field value will replace the
+     * corresponding field value of the {@code Task}.
      */
     public static class EditTaskDescriptor {
         private TaskId taskId;
