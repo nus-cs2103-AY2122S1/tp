@@ -115,7 +115,7 @@ public interface Model {
     void setPosition(Position position, Position editedPosition);
 
     /**
-     * Returns true if a position with the same title as {@code position} exists in MrTechRecruiter.
+     * Returns true if {@code position} exists in MrTechRecruiter.
      */
     boolean hasPosition(Position toAdd);
 
