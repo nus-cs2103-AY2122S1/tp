@@ -153,4 +153,9 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Returns an unmodifiable view of the user input list
+     */
+    ObservableList<String> getUserInputList();
 }

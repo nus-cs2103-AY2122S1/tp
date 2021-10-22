@@ -24,13 +24,15 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final TaskList taskList;
     private final UserPrefs userPrefs;
+    private final UserInputList userInputList;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and taskList.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList taskList) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, TaskList taskList, UserInputList userInputList) {
         super();
         CollectionUtil.requireAllNonNull(addressBook, userPrefs, taskList);
 
@@ -40,12 +42,13 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.taskList = new TaskList(taskList);
+        this.userInputList = new UserInputList(userInputList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskList.getObservableTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new TaskList());
+        this(new AddressBook(), new UserPrefs(), new TaskList(), new UserInputList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -220,5 +223,6 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-
+    @Override
+    public ObservableList<String> getUserInputList() { return userInputList.getObservableUserInputList(); }
 }

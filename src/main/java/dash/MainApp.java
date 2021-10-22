@@ -13,12 +13,7 @@ import dash.commons.util.ConfigUtil;
 import dash.commons.util.StringUtil;
 import dash.logic.Logic;
 import dash.logic.LogicManager;
-import dash.model.AddressBook;
-import dash.model.Model;
-import dash.model.ModelManager;
-import dash.model.ReadOnlyAddressBook;
-import dash.model.ReadOnlyUserPrefs;
-import dash.model.UserPrefs;
+import dash.model.*;
 import dash.model.task.TaskList;
 import dash.model.util.SampleDataUtil;
 import dash.storage.Storage;
@@ -82,6 +77,7 @@ public class MainApp extends Application {
         Optional<TaskList> taskListOptional;
         ReadOnlyAddressBook initialAddressBookData;
         TaskList initialTaskListData;
+        UserInputList initialUserInputListData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -110,7 +106,10 @@ public class MainApp extends Application {
             initialTaskListData = new TaskList();
         }
 
-        return new ModelManager(initialAddressBookData, userPrefs, initialTaskListData);
+        // TODO: Replace with userInputList from storage
+        initialUserInputListData = new UserInputList();
+
+        return new ModelManager(initialAddressBookData, userPrefs, initialTaskListData, initialUserInputListData);
     }
 
     private void initLogging(Config config) {

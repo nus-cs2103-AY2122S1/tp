@@ -44,6 +44,11 @@ public interface Logic {
     ObservableList<Task> getFilteredTaskList();
 
     /**
+     * Returns an unmodifiable view of a list of previous valid user inputs.
+     */
+    ObservableList<String> getUserInputList();
+
+    /**
      * Returns the user prefs' address book file path.
      */
     Path getAddressBookFilePath();
