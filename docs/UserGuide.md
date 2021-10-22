@@ -96,16 +96,16 @@ Jump right in to the next section to get you started!
 2. Open Terminal.
 3. Change the active directory to the location of TutAssistor.jar.
 
-For example,
-```
-cd Downloads
-```
-
+    For example,
+    
+    ```
+    cd Downloads
+    ```
 4. Run the following command.
-
-```
-java -jar TutAssistor.jar
-```
+  
+    ```
+    java -jar TutAssistor.jar
+    ```
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 ![Ui](images/ui_ug.png)
