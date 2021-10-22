@@ -11,8 +11,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.modulelesson.exceptions.DuplicateModuleLessonException;
 import seedu.address.model.modulelesson.exceptions.ModuleLessonNotFoundException;
-import seedu.address.model.person.ModuleCode;
-
 
 public class UniqueModuleLessonList implements Iterable<ModuleLesson> {
 

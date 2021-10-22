@@ -2,8 +2,6 @@ package seedu.address.model.modulelesson;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.person.ModuleCode;
-
 /**
  * Tests that a {@code ModuleLesson}'s {@code ModuleCode}s matches the keyword given.
  */
