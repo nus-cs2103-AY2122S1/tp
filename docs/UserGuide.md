@@ -5,7 +5,7 @@ title: Uni-Fy User Guide
 ![logo](images/Uni-Fy_Logo.png)
 
 * Table of Contents
-  {:toc}
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## 1. Introduction
