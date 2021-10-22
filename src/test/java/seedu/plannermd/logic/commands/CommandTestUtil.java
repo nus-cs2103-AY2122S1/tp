@@ -51,6 +51,14 @@ public class CommandTestUtil {
     public static final String VALID_RISK_AMY = "LOW";
     public static final String VALID_RISK_BOB = "MEDIUM";
 
+    public static final String VALID_APPT_DATE_THIRTY_MIN = "2/2/2022";
+    public static final String VALID_APPT_DATE_TWO_HOUR = "12/12/2022";
+    public static final String VALID_APPT_REMARK = "Patient wants a blood test";
+    public static final int VALID_APPT_DURATION = 30;
+    public static final String VALID_APPT_DATE = "3/3/2033";
+    public static final String VALID_APPT_TIME = "23:59";
+
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -68,6 +76,7 @@ public class CommandTestUtil {
     public static final String RISK_DESC_AMY = " " + PREFIX_RISK + VALID_RISK_AMY;
     public static final String RISK_DESC_BOB = " " + PREFIX_RISK + VALID_RISK_BOB;
 
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -83,6 +92,7 @@ public class CommandTestUtil {
 
     public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_AMY;
     public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_BOB;
+
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

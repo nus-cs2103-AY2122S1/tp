@@ -1,5 +1,13 @@
 package seedu.plannermd.logic.commands.apptcommand;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
+
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.CommandResult;
@@ -13,14 +21,6 @@ import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Remark;
 
 import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 
 public class AddAppointmentCommand extends AppointmentCommand {
 

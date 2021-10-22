@@ -168,9 +168,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String remark} into an {@code Remark}.
+     * Parses a {@code String remark} into a {@code Remark}.
      * Leading and trailing whitespaces will be trimmed.
-     * Optional Risk field accepts an empty string as UNCLASSIFIED.
+     * Optional Remark field accepts an empty string as an empty remark.
      *
      * @throws ParseException if the given {@code risk} is invalid.
      */
@@ -183,15 +183,13 @@ public class ParserUtil {
         return new Remark(trimmedRemark);
     }
 
-//    public static AppointmentDate parseStartDate(String startDate) throws ParseException {
-//        requireNonNull(startDate);
-//        String trimmedStartDate = startDate.trim();
-//        if (!AppointmentDate.isValidAppointmentDate(trimmedStartDate)) {
-//            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
-//        }
-//        return new AppointmentDate(trimmedStartDate);
-//    }
-
+    /**
+     * Parses a {@code String duration} into a {@code Duration}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Optional Risk field accepts an empty string as a default duration of 10 minutes.
+     *
+     * @throws ParseException if the given {@code risk} is invalid.
+     */
     public static Duration parseDuration(String duration) throws ParseException {
         requireNonNull(duration);
         String trimmedDuration = duration.trim();
@@ -199,10 +197,11 @@ public class ParserUtil {
             return Duration.getDefaultDuration();
         }
         try {
-            if (!Duration.isValidDuration(trimmedDuration)) {
+            int trimmedDurationAsInt = Integer.parseInt(trimmedDuration);
+            if (!Duration.isValidDuration(trimmedDurationAsInt)) {
                 throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
             }
-            return new Duration(trimmedDuration);
+            return new Duration(trimmedDurationAsInt);
         } catch (NumberFormatException e) {
             throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
         }

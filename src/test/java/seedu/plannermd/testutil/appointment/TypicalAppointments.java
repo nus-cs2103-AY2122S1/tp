@@ -7,9 +7,9 @@ import java.util.List;
 import seedu.plannermd.model.appointment.Appointment;
 
 public class TypicalAppointments {
-    private static final Appointment TWO_HOUR_APPOINTMENT = new AppointmentBuilder().build();
-    private static final Appointment FIVE_MIN_APPOINTMENT = new AppointmentBuilder().build();
-    private static final Appointment THIRTY_MIN_APPOINTMENT = new AppointmentBuilder().build();
+    public static final Appointment TWO_HOUR_APPOINTMENT = new AppointmentBuilder().withDate("19/10/2022").build();
+    public static final Appointment FIVE_MIN_APPOINTMENT = new AppointmentBuilder().withDate("19/12/2021").build();
+    public static final Appointment THIRTY_MIN_APPOINTMENT = new AppointmentBuilder().withDate("17/01/2022").build();
 
     private TypicalAppointments() {
     } // prevents instantiation
