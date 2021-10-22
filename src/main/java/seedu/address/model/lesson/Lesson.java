@@ -28,6 +28,9 @@ public abstract class Lesson implements Comparable<Lesson> {
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
 
+    // Lesson Rates
+    private final LessonRates lessonRates;
+
     /**
      * Every field must be present and not null.
      *
@@ -35,13 +38,15 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
+     * @param rates Cost per hour for the lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
+    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
         requireAllNonNull(date, timeRange, subject, homework);
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
+        this.lessonRates = rates;
     }
 
     public Date getDate() {
@@ -74,6 +79,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public String getTypeOfLesson() {
         return isRecurring() ? RECURRING : MAKEUP;
+    }
+
+    public LessonRates getLessonRates() {
+        return lessonRates;
     }
 
     /**
@@ -121,6 +130,7 @@ public abstract class Lesson implements Comparable<Lesson> {
             && otherLesson.getTimeRange().equals(getTimeRange())
             && otherLesson.getSubject().equals(getSubject())
             && otherLesson.getHomework().equals(getHomework())
+            && otherLesson.getLessonRates().equals(getLessonRates())
             && otherLesson.isRecurring() == isRecurring();
     }
 
@@ -139,7 +149,9 @@ public abstract class Lesson implements Comparable<Lesson> {
             .append("\nTime: ")
             .append(getTimeRange())
             .append("\nSubject: ")
-            .append(getSubject());
+            .append(getSubject())
+            .append("\nLesson Rates: ")
+            .append(getLessonRates());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
