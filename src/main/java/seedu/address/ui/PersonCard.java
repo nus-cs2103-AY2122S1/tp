@@ -22,9 +22,9 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
 
     // Images for favorite button
-    private static Image Favorite = new Image(
+    private static final Image FAVORITE = new Image(
             PersonCard.class.getResourceAsStream("/images/fav.png"));
-    private static Image notFavorite = new Image(
+    private static final Image NOT_FAVORITE = new Image(
             PersonCard.class.getResourceAsStream("/images/unfav.png"));
 
     /**
@@ -75,7 +75,7 @@ public class PersonCard extends UiPart<Region> {
         profileView.setImage(userGitHubProfilePicture);
 
         // set favBtn here based on isFavorite
-        favBtn.setImage(notFavorite);
+        favBtn.setImage(NOT_FAVORITE);
     }
 
     @Override
