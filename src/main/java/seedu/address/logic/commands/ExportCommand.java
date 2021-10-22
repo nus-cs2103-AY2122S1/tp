@@ -99,8 +99,8 @@ public class ExportCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ExportCommand // instanceof handles nulls
+        return other == this
+                || (other instanceof ExportCommand
                 && filePath.equals(((ExportCommand) other).filePath));
     }
 
