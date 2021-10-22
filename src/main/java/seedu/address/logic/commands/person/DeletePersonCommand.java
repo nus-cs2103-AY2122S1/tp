@@ -33,13 +33,13 @@ public class DeletePersonCommand extends Command {
             + PREFIX_MODULE_CODE + "CS2040S";
 
     public static final String MESSAGE_DELETE_BY_MODULE_USAGE = "delete: "
-            + "Delete only accepts 1 batch delete by Module Code\n"
+            + "Delete only accepts one batch delete by Module Code at a time\n"
             + "Example: delete " + PREFIX_MODULE_CODE + "CS2040S";
 
     public static final String MESSAGE_NUMBER_DELETED_PERSON = "%d Deleted Persons: \n";
     public static final String MESSAGE_NUMBER_EDITED_PERSON = "\n%d Edited Persons: \n";
     public static final String MESSAGE_DELETE_SUCCESS = "%1$s \n";
-    public static final String MESSAGE_NO_SUCH_MODULE_CODE = "No such existing Module Code";
+    public static final String MESSAGE_NO_SUCH_MODULE_CODE = "No such Module Code";
 
     private final Index targetIndex;
     private final Index endIndex;
