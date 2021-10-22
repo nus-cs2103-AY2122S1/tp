@@ -202,7 +202,8 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CsvUtil.modelToCsv(personList,path,prefixList);
         } catch (IOException e) {
-            logger.warning(e.getMessage());
+            logger.info("writing csv failed" + e.getMessage());
+            resultDisplay.setFeedbackToUser(e.getMessage());
         }
 
     }

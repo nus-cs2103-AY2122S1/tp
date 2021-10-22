@@ -17,6 +17,7 @@ public class CommandResultExport extends CommandResult{
     public CommandResultExport(String feedbackToUser, List<Person> personList, Collection<Prefix> prefixes) {
         super(feedbackToUser,false,false,true);
         requireNonNull(personList);
+        requireNonNull(prefixes);
         this.personList = List.copyOf(personList);
         this.prefixes = List.copyOf(prefixes);
     }
