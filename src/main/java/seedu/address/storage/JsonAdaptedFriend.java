@@ -86,6 +86,15 @@ class JsonAdaptedFriend {
         final FriendName modelFriendName = new FriendName(friendName);
         final Set<GameFriendLink> gameFriendLinkSet = new HashSet<>(gameFriendLinksList);
 
+        if (schedule == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Schedule.class.getSimpleName()));
+        }
+
+        if (!Schedule.isValidSchedule(schedule)) {
+            throw new IllegalValueException(Schedule.MESSAGE_INVALID_SCHEDULE);
+        }
+
         return new Friend(modelFriendId, modelFriendName, gameFriendLinkSet, schedule);
     }
 }

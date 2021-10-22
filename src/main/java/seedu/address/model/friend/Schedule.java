@@ -13,6 +13,9 @@ import seedu.address.model.friend.exceptions.InvalidDayTimeException;
  * Represents a Friend's schedule in gitGud's friend list.
  */
 public class Schedule {
+
+    public static final String MESSAGE_INVALID_SCHEDULE = "Schedule must contain 7 valid days,from Monday to Sunday.";
+
     private final ArrayList<Day> schedule;
 
     /**
@@ -23,6 +26,24 @@ public class Schedule {
         for (int i = 1; i <= 7; i++) {
             schedule.add(new Day(DayOfWeek.of(i)));
         }
+    }
+
+    /**
+     * Returns true if valid schedule.
+     *
+     * @param schedule Schedule to validate.
+     * @return True if valid.
+     */
+    public static boolean isValidSchedule(Schedule schedule) {
+        if (schedule.getSchedule().size() != 7) {
+            return false;
+        }
+        boolean isValid = true;
+        for (int i = 1; i <= 7; i++) {
+            Day current = schedule.getSchedule().get(i - 1);
+            isValid = isValid && Day.isValidDay(current) && current.getDayName().equals(DayOfWeek.of(i).name());
+        }
+        return isValid;
     }
 
     /**
@@ -37,7 +58,7 @@ public class Schedule {
     public void setScheduleDay(int day, String startTime, String endTime, boolean isFree)
             throws InvalidDayTimeException {
         if (day < 1 || day > 7) {
-            throw new InvalidDayTimeException("Invalid day value");
+            throw new InvalidDayTimeException("Day value must be an Integer within 1 - 7 (inclusive).");
         }
         schedule.get(day - 1).setTime(startTime, endTime, isFree);
     }

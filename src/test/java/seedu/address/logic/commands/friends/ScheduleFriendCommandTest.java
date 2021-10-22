@@ -88,7 +88,7 @@ class ScheduleFriendCommandTest {
         // Same Object
         assertTrue(scheduleFriendCommand.equals(scheduleFriendCommand));
 
-        //Different FriendId
+        // Different FriendId
         assertFalse(scheduleFriendCommand.equals(new ScheduleFriendCommand(
                 model.getFriendsList().getFriendsList().get(1).getFriendId(), day, startTime, endTime, isFree)));
     }

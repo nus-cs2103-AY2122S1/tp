@@ -66,6 +66,16 @@ public class Day {
     }
 
     /**
+     * Returns true if valid day.
+     *
+     * @param day Day to validate.
+     * @return True if valid.
+     */
+    public static boolean isValidDay(Day day) {
+        return day.dayOfWeek != null && day.timeSlots != null && day.timeSlots.length == 24;
+    }
+
+    /**
      * Gets day name.
      *
      * @return Name of day.
