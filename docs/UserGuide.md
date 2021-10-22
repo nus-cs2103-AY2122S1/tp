@@ -300,13 +300,14 @@ Format: `findStudent KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
+* Special characters will be ignored e.g. `Alice!` will match `Alice`
 * Partial names will be matched e.g. `Han` will match `Hans`
 * Students matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find Joh` returns `john` and `John Doe`
-* `find alex davi` returns `Alex Yeoh`, `David Li`<br>
+* `find Joh@` returns `john` and `John Doe`
+* `find alex! davi` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a task: `deleteTask INDEX`
