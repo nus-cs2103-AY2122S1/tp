@@ -154,23 +154,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Search feature
-
-...
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1:** Multiple search commands to search using different identifiers. 
-    * Pros: Easy to implement.
-    * Cons: Inconvenient for user to remember different command words. 
-
-* **Alternative 2(current choice):** Single search command to perform search for multiple identifiers.
-    * Pros: More straightforward and convenient for users.
-    * Cons: We need to identify the type of input given.
-
-
 ### Import feature
 
 The following activity diagram summarizes what happens when the user inputs an import command:
@@ -181,7 +164,7 @@ There are several important details left out of the activity diagram for the sak
 
 1. The import feature is reliant on having a correctly formatted csv file (which is to be exported from sites like lumiNUS and Source Academy, and modified to fit the format).
 The user needs to provide the number of `Groups`, `Assessments`, and `Tags` since we can't detect this automatically from the format of the file. The proper format of the file can be found in the user guide.
-   
+
 1. A `CommandException` will be thrown if any input does not follow the formatting specified in the respective classes such as `Name`, `ID`, and `Score`.
 
 1. When reading a student's groups, the command will try to use an existing `Group` if possible, to ensure that the `Group` holds a reference to all `Students` in the group. A new `Group` will only be created in the case where the group hasn't already been created.
@@ -195,15 +178,15 @@ The user needs to provide the number of `Groups`, `Assessments`, and `Tags` sinc
 The add student feature adds a student with the provided name and NUSNET ID into the database. If the student comes with optionally specified groups and tags, these fields will be added accordingly.
 
 
-####Implementation
+#### Implementation
 
-####AddCommand class
-The add student mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
+#### AddCommand class
+The `add student` mechanism is facilitated by the `AddCommand` class which extends the `Command` class. The `AddCommand` class overrides the `execute()` method in `Command`. In this implementation,
 the method first checks if the `Student` object supplied as parameters is non-null. Then, it checks if the `Student` already exists in the database.
 If this `Student` already exists, a `CommandException` will be thrown, telling the user that a duplicate `Student` is being added. If
 the `Student` does not exist in the database yet, the `Model#addStudent()` method is called.
 
-####AddCommandParser class
+#### AddCommandParser class
 The `AddCommandParser` class implements the `Parser<AddCommand>` interface. The `parse()` method checks for the presence of the compulsory prefixes corresponding to the name and NUSNET id of the `Student`, namely `-n` and `-i`.
 It also checks for the presence of the optional group and tag prefixes, namely `-g` and `-t`.
 It then retrieves the characters that follow each prefix and allocates them to the fields the `Student` object has accordingly.
@@ -226,7 +209,7 @@ The following sequence diagram shows how the add student operation works:
 
 ### Add group feature
 
-The add group feature allows users to create new groups, as well as specify students to be added to the group to be created.
+The `add group` feature allows users to create new groups, as well as specify students to be added to the group to be created.
 
 #### How the `AddGroupCommand` works:
 1. The user specifies the group name, as well as a list of names and/or IDs of the students to be added into the group.
@@ -243,6 +226,7 @@ The following activity diagrams summarizes what happens when a user executes a c
 
 ![AddGroupActivityDiagram](images/AddGroupActivityDiagram.png)
 ![AddStudentToGroupActivityDiagram](images/AddStudentsToGroupActivityDiagram.png)
+
 
 ### Add Allocation feature
 
@@ -263,6 +247,55 @@ Step 4. `AddAllocCommand#execute()` calls `AddAllocCommand#createEditedStudent()
 Step 5. `AddAllocCommand#execute()` calls `Group#addStudent()` to add student `Alex Yeoh` into the group.
 
 Use case ends.
+
+
+### Search feature
+
+The `search` feature is allows user to filter student list by name, NUSNET ID, group, or tag.
+
+#### Implementation
+
+The following diagram shows the search operation after user input `search -n Alex Yu`.
+
+![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
+
+A `Predicate<Student>` object will be created for each search command.
+It contains `test(Student student)` function which checks if the given student matches the list of keywords given.
+
+To support the differentiated search functionality for different identifiers, multiple classes extending from
+`Predicate<Student>` can be created, each with different implementation of `test(Student student)` function.
+
+* `NameContainsKeywordsPredicate`: checks if any word in the full name of student matches exactly any word in the
+  given keywords. e.g. `Alex Yu` will match Alex Yeoh and Bernice Yu. Partial search is not supported
+  e.g. `Han` will not match `Hans`.
+* `IdContainsKeywordsPredicate`: checks if the ID of student contains any string in the given keywords.
+  Partial search is supported. e.g. `E05` will match `E0523412`.
+* `GroupContainsKeywordsPredicate`: checks if any group of student contains any string in the given keywords.
+  Partial search is supported. e.g. `T02` will match `T02A` and `T02B`.
+* `TagContainsKeywordsPredicate`: checks if the tag of student contains any string in the given keywords.
+  Partial search is supported. e.g. `friend` will match `friends`.
+
+The following diagram summarizes what happens after user input search command:
+
+![SearchActivityDiagram](images/SearchActivityDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** SearchCommandParser checks
+if command is valid. Command is invalid if user input is empty, or if user entered more or less than one parameter.
+</div>
+
+
+#### Design considerations
+
+**Aspect: How search executes:**
+
+* **Alternative 1:** Multiple search commands to search using different identifiers.
+    * Pros: Easy to implement.
+    * Cons: Inconvenient for user to remember different command words.
+
+* **Alternative 2(current choice):** Single search command to perform search for multiple identifiers.
+    * Pros: More straightforward and convenient for users.
+    * Cons: We need to identify the type of input given.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -329,7 +362,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
-#### Design considerations:
+#### Design considerations
 
 **Aspect: How undo & redo executes:**
 
@@ -484,7 +517,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others.
 * **Student**: A student in the database, identified by their name and ID (their NUSNET ID). Each student can be in multiple groups, and can have scores for multiple assessments.
 * **Group**: A group of students, identified by its name.
-* **Assessment**: An assessment is identified by its name. 
+* **Assessment**: An assessment is identified by its name.
 * **Score**: The score that a student has attained for an assignment. Should be between 0 and 100, inclusive. Each student can only have 1 score per assessment.
 
 
