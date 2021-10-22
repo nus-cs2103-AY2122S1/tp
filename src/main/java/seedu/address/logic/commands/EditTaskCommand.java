@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
@@ -55,8 +56,7 @@ public class EditTaskCommand extends EditCommand {
      * @param editTaskDescriptor The edited task descriptor.
      */
     public EditTaskCommand(ModuleName moduleName, EditTaskDescriptor editTaskDescriptor) {
-        requireNonNull(editTaskDescriptor);
-        requireNonNull(moduleName);
+        requireAllNonNull(moduleName, editTaskDescriptor);
         this.editTaskDescriptor = editTaskDescriptor;
         this.moduleName = moduleName;
     }
