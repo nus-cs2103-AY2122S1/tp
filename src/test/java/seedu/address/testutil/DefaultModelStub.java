@@ -109,11 +109,6 @@ public class DefaultModelStub implements Model {
     }
 
     @Override
-    public void markEventAsDone(Event target) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public ObservableList<Event> getFilteredEventList() {
         throw new AssertionError("This method should not be called.");
     }
