@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -148,8 +149,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Retrieve the NextMeeting from the given LocalDate by the user {@code date}.
      * Returns client with corresponding clientId.
      *
+     * @return a list of NextMeetings that's on the same date as {@code date}
+     */
+    public List<Client> retrieveLastMeetings(LocalDate date) {
+        requireNonNull(date);
+        return clients.retrieveNextMeetings(date);
+    }
+
+    /**
      * @param clientId clientId of client
      * @return client with given clientId
      */
@@ -246,8 +256,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && clients.equals(((AddressBook) other).clients));
+            || (other instanceof AddressBook // instanceof handles nulls
+            && clients.equals(((AddressBook) other).clients));
     }
 
 

@@ -18,6 +18,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
      * and returns a SearchCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
+     * @return
      */
     @Override
     public SearchCommand parse(String args, Model model) throws ParseException {

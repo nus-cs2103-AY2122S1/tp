@@ -14,6 +14,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * and returns a FilterCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
+     * @return
      */
     @Override
     public FilterCommand parse(String args, Model model) throws ParseException {

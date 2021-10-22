@@ -1,10 +1,12 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
@@ -53,6 +55,11 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the user prefs' address book file path wrapped object.
+     */
+    ObservableValue<Path> getAddressBookFilePathObject();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -98,7 +105,7 @@ public interface Model {
     /**
      * Returns client with corresponding clientId.
      *
-     * @param clientId clientId of client
+     * @param clientId of client
      * @return client with given clientId
      */
     Client getClient(ClientId clientId);
@@ -172,8 +179,15 @@ public interface Model {
     String getNameOfClientToView();
 
     /**
+     * returns a list of NextMeeting that are on the given {@code date}.
      * Updates the filter of the filtered client to view list to filter by the given {@code predicate}.
      *
+     * @param date of the schedule
+     * @return the list of NextMeetings with the given {@code date}.
+     */
+    List<Client> retrieveSchedule(LocalDate date);
+
+    /**
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateClientToView(Predicate<Client> predicate);

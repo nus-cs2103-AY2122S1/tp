@@ -2,6 +2,7 @@ package seedu.address.model.client;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
@@ -128,6 +129,10 @@ public class Client {
 
         return otherClient.getName().equals(getName())
                 || otherClient.getEmail().equals(getEmail());
+    }
+
+    public LocalDate getNextMeetingDate() {
+        return nextMeeting.getDate();
     }
 
     /**

@@ -4,16 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.commands.EditCommand.createEditedClient;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
-import seedu.address.model.client.exceptions.ClientNotFoundException;
 import seedu.address.model.client.exceptions.DuplicateClientException;
+import seedu.address.model.client.exceptions.ClientNotFoundException;
 
 /**
  * A list of clients that enforces uniqueness between its elements and does not allow nulls.
@@ -30,7 +32,7 @@ public class UniqueClientList implements Iterable<Client> {
 
     private final ObservableList<Client> internalList = FXCollections.observableArrayList();
     private final ObservableList<Client> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+        FXCollections.unmodifiableObservableList(internalList);
 
     /**
      * Returns true if the list contains an equivalent client as the given argument.
@@ -89,7 +91,7 @@ public class UniqueClientList implements Iterable<Client> {
      */
     public Client getClient(ClientId clientId) {
         ObservableList<Client> clientInQuestion = internalList
-                .filtered(client -> client.getClientId().equals(clientId));
+            .filtered(client -> client.getClientId().equals(clientId));
         if (clientInQuestion.isEmpty()) {
             throw new ClientNotFoundException();
         }
@@ -104,7 +106,7 @@ public class UniqueClientList implements Iterable<Client> {
      */
     public boolean hasClientId(ClientId clientId) {
         ObservableList<Client> clientInQuestion = internalList
-                .filtered(client -> client.getClientId().equals(clientId));
+            .filtered(client -> client.getClientId().equals(clientId));
         return !clientInQuestion.isEmpty();
     }
 
@@ -132,7 +134,7 @@ public class UniqueClientList implements Iterable<Client> {
         List<ClientId> clientIdNotFound = new ArrayList<>();
         for (ClientId clientId : clientIds) {
             ObservableList<Client> clientInQuestion = internalList
-                    .filtered(client -> client.getClientId().equals(clientId));
+                .filtered(client -> client.getClientId().equals(clientId));
             if (clientInQuestion.isEmpty()) {
                 clientIdNotFound.add(clientId);
             } else {
@@ -167,6 +169,25 @@ public class UniqueClientList implements Iterable<Client> {
     }
 
     /**
+     * Finds Clients with meetings on the given {@code date}.
+     *
+     * @param date inputted by user for the "schedule" command.
+     * @return list of clients with meetings on the given {@code date}.
+     */
+
+    public List<Client> retrieveNextMeetings(LocalDate date) {
+        Predicate<Client> clientsWithSameDateNextMeeting = (client) -> {
+            LocalDate meetingDate = client.getNextMeetingDate();
+            if (meetingDate != null) {
+                return meetingDate.equals(date);
+            } else {
+                return false;
+            }
+        };
+        return internalList.filtered(clientsWithSameDateNextMeeting);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Client> asUnmodifiableObservableList() {
@@ -181,8 +202,8 @@ public class UniqueClientList implements Iterable<Client> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueClientList // instanceof handles nulls
-                && internalList.equals(((UniqueClientList) other).internalList));
+            || (other instanceof UniqueClientList // instanceof handles nulls
+            && internalList.equals(((UniqueClientList) other).internalList));
     }
 
     @Override

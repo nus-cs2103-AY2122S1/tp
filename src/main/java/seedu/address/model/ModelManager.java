@@ -4,11 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
@@ -80,6 +82,11 @@ public class ModelManager implements Model {
     @Override
     public Path getAddressBookFilePath() {
         return userPrefs.getAddressBookFilePath();
+    }
+
+    @Override
+    public ObservableValue<Path> getAddressBookFilePathObject() {
+        return userPrefs.getAddressBookFilePathObject();
     }
 
     @Override
@@ -221,6 +228,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public List<Client> retrieveSchedule(LocalDate date) {
+        return addressBook.retrieveLastMeetings(date);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -235,9 +247,9 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-                && userPrefs.equals(other.userPrefs)
-                && filteredClients.equals(other.filteredClients)
-                && filteredTags.equals(other.filteredTags)
-                && clientToView.equals(other.clientToView);
+            && userPrefs.equals(other.userPrefs)
+            && filteredClients.equals(other.filteredClients)
+            && filteredTags.equals(other.filteredTags)
+            && clientToView.equals(other.clientToView);
     }
 }

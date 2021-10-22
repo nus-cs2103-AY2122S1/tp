@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -16,6 +17,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
@@ -114,6 +116,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableValue<Path> getAddressBookFilePathObject() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -192,6 +199,11 @@ public class AddCommandTest {
         @Override
         public String getNameOfClientToView() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Client> retrieveSchedule(LocalDate date) {
+            return null;
         }
 
         @Override
