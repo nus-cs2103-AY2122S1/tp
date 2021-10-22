@@ -35,6 +35,7 @@ type fast enough, gitGud can get you contact management tasks done faster than t
     * Developer Guide:
         * Added use case for the `get` feature.
         * Added the Non-Functional Requirements (NFR) section.
+        * Update the `Model` component
     * README:
         * Created and added the product logo.
 

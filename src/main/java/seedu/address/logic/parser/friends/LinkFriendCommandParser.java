@@ -1,19 +1,23 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.friends;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_SPACE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LINK;
 import static seedu.address.logic.parser.CliSyntax.FLAG_USERNAME;
 import static seedu.address.logic.parser.ParserUtil.areFlagsPresent;
 
-import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.commands.friends.LinkFriendCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.UserName;
 
-public class LinkCommandParser implements Parser<LinkCommand> {
+public class LinkFriendCommandParser implements Parser<LinkFriendCommand> {
     private FriendId friendId;
     private GameId gameId;
     private UserName userName;
@@ -24,22 +28,22 @@ public class LinkCommandParser implements Parser<LinkCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public LinkCommand parse(String args) throws ParseException {
+    public LinkFriendCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, FLAG_GAME, FLAG_FRIEND_SPACE, FLAG_USERNAME);
+                ArgumentTokenizer.tokenize(args, FLAG_LINK, FLAG_GAME, FLAG_USERNAME);
 
         // All fields must be present.
-        if (!areFlagsPresent(argMultimap, FLAG_GAME, FLAG_FRIEND_SPACE, FLAG_USERNAME)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        if (!areFlagsPresent(argMultimap, FLAG_LINK, FLAG_GAME, FLAG_USERNAME)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkFriendCommand.MESSAGE_USAGE));
         }
 
-        friendId = ParserUtil.parseFriendId(argMultimap.getValue(FLAG_FRIEND_SPACE).get());
+        friendId = ParserUtil.parseFriendId(argMultimap.getValue(FLAG_LINK).get());
         gameId = ParserUtil.parseGameId(argMultimap.getValue(FLAG_GAME).get());
         userName = ParserUtil.parseUserName(argMultimap.getValue(FLAG_USERNAME).get());
 
-        return new LinkCommand(friendId, gameId, userName);
+        return new LinkFriendCommand(friendId, gameId, userName);
     }
 
 }

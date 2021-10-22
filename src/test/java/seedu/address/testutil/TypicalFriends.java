@@ -4,6 +4,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.testutil.TypicalGameFriendLinks.ALICE_CSGO_SKILL_VALUE_EIGHT_LINK;
+import static seedu.address.testutil.TypicalGameFriendLinks.BOB_CSGO_SKILL_VALUE_NULL_LINK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,12 +18,14 @@ import seedu.address.model.friend.Friend;
  * A utility class containing a list of {@code Person} objects to be used in tests.
  */
 public class TypicalFriends {
-
-    // TODO: Yu Zher - write tests with game friend links included
-    public static final Friend ALICE = new FriendBuilder().withFriendName("Alice Pauline").withFriendId("94351253")
-            .withGameFriendLinks().build();
-    public static final Friend BENSON = new FriendBuilder().withFriendName("Benson Meier").withFriendId("98765432")
-            .withGameFriendLinks().build();
+    public static final String ALICE_FRIEND_ID = "94351253";
+    public static final String BENSON_FRIEND_ID = "98765432";
+    public static final Friend ALICE = new FriendBuilder().withFriendName("Alice Pauline")
+            .withFriendId(ALICE_FRIEND_ID)
+            .withGameFriendLinks(ALICE_CSGO_SKILL_VALUE_EIGHT_LINK).build();
+    public static final Friend BENSON = new FriendBuilder().withFriendName("Benson Meier")
+            .withFriendId(BENSON_FRIEND_ID)
+            .withGameFriendLinks(BOB_CSGO_SKILL_VALUE_NULL_LINK).build();
     public static final Friend CARL = new FriendBuilder().withFriendName("Carl Kurz").withFriendId("95352563")
             .build();
     public static final Friend DANIEL = new FriendBuilder().withFriendName("Daniel Meier").withFriendId("87652533")
@@ -44,8 +48,6 @@ public class TypicalFriends {
             .withFriendId(VALID_FRIEND_ID_AMY).build();
     public static final Friend BOB = new FriendBuilder().withFriendName(VALID_NAME_BOB)
             .withFriendId(VALID_FRIEND_ID_BOB).build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalFriends() {
     } // prevents instantiation

@@ -11,7 +11,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.friends.EditFriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.friends.EditFriendCommandParser;
@@ -21,7 +20,7 @@ import seedu.address.logic.parser.games.GameCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class MainParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -49,9 +48,6 @@ public class AddressBookParser {
 
         case GameCommandParser.COMMAND_WORD:
             return new GameCommandParser().parse(arguments);
-
-        case LinkCommand.COMMAND_WORD:
-            return new LinkCommandParser().parse(arguments);
 
         case EditFriendCommand.COMMAND_WORD:
             return new EditFriendCommandParser().parse(arguments);
