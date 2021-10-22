@@ -25,7 +25,9 @@ public class ModuleLessonCard extends UiPart<Region> {
     @FXML
     private Label lessonDay;
     @FXML
-    private Label lessonTime;
+    private Label lessonStartTime;
+    @FXML
+    private Label lessonEndTime;
     @FXML
     private Label remark;
     @FXML
@@ -45,7 +47,8 @@ public class ModuleLessonCard extends UiPart<Region> {
         Set<LessonCode> lessonCodeSet = moduleLesson.getModuleCode().getLessonCodes();
         lessonCodeSet.forEach(lc -> this.lessonCodes.getChildren().add(new Label(lc.toString())));
         lessonDay.setText(moduleLesson.getDay().toString());
-        lessonTime.setText(moduleLesson.getTime().toString());
+        lessonStartTime.setText(moduleLesson.getLessonStartTime().toString());
+        lessonEndTime.setText(moduleLesson.getLessonEndTime().toString());
         remark.setText(moduleLesson.getRemark().value);
     }
 
