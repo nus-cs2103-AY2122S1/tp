@@ -2,7 +2,6 @@
 layout: page
 title: Developer Guide
 ---
-
 ## **About this document**
 
 This document provides the relevant information for developers-as-users and developers-as-maintainers to learn more about the design architecture and user-related considerations made in designing this application.

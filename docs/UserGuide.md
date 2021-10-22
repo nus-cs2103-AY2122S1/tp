@@ -2,13 +2,12 @@
 layout: page
 title: User Guide
 ---
-
 ## **About this document**
 
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
-This document serves as a guide to help you get started on how to set up and use **TuitiONE**. To start, explore the 'Quick start' section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections to learn more in detail. The 'Command summary' at the end of the document lists a table with all the commands present and their syntax.
+This document serves as a guide to help you get started on how you can set up and use **TuitiONE**. To start, you explore the [Quick start](#quick-start) section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections (such as in [Managing Students](#managing-students) and [Managing Lessons](#managing-lessons)) to learn more in detail. The [Command summary](#command-summary) lists a table with all the commands present and their syntax. If there are any doubts on the terms and usage of this app, you can refer to the [Glossary](#glossary) and [FAQ](#faq) located at the end of the document.
 
 Here are the interpretations of symbols and formatting used in this document: 
 
@@ -22,7 +21,7 @@ Here are the interpretations of symbols and formatting used in this document:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## **Quick start**
 
 1. Ensure you have Java `11` or above installed in your work station.
 
@@ -52,7 +51,7 @@ Here are the interpretations of symbols and formatting used in this document:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
@@ -78,9 +77,9 @@ Here are the interpretations of symbols and formatting used in this document:
 
 </div>
 
-### Getting help
+## **Getting help**
 
-#### Viewing help: `help`
+### Viewing help: `help`
 
 TuitiONE will display the help panel which shows you a summary of the command syntax that is usable to the current version of TuitiONE.
 
@@ -88,9 +87,9 @@ TuitiONE will display the help panel which shows you a summary of the command sy
 
 Command Format: `help`
 
-### Managing Students
+## **Managing Students**
 
-#### Adding a student: `add`
+### Adding a student: `add`
 
 Adds a student to the TuitiONE.
 
@@ -111,13 +110,13 @@ Example(s):
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
-#### Listing all students: `list`
+### Listing all students: `list`
 
 Shows you a list of all students and lessons in the TuitiONE.
 
 Command Format: `list`
 
-#### Locating students by name: `find`
+### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
@@ -137,7 +136,7 @@ Example(s):
 
 ![result for 'find alex david'](images/UserGuideImage/findAlexDavidResult.png)
 
-#### Deleting a student : `delete`
+### Deleting a student : `delete`
 
 Deletes a student from the TuitiONE.
 
@@ -152,7 +151,7 @@ Example(s):
 * `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-#### Enrolling a student from lesson: `enroll`
+### Enrolling a student from lesson: `enroll`
 
 Enroll a specified student to a given TuitiONE lesson.
 
@@ -171,7 +170,7 @@ Example(s):
 
 * `enroll 1 l/1` will enroll the student indexed at `1` in the displayed student list to the lesson indexed at `1` in the displayed lesson list.
 
-#### Unenrolling a student from lesson: `unenroll`
+### Unenrolling a student from lesson: `unenroll`
 
 Unenroll a student from a given TuitiONE lesson.
 
@@ -186,9 +185,9 @@ Example(s):
 
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
-### Managing Lessons
+## **Managing Lessons**
 
-#### Adding a lesson: `add-l`
+### Adding a lesson: `add-l`
 
 Adds a lesson to the TuitiONE with the specified prefixes.
 
@@ -217,7 +216,7 @@ Example(s):
 * `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
 * `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
 
-#### Deleting a lesson: `delete-l`
+### Deleting a lesson: `delete-l`
 
 Deletes a lesson from the TuitiONE.
 
@@ -231,7 +230,7 @@ Example(s):
 
 * `delete-l 1` deletes the lesson with corresponding index `1`.
 
-#### Viewing of lesson roster: `roster`
+### Viewing of lesson roster: `roster`
 
 Shows you the student roster of a specified lesson in the student panel.
 
@@ -244,9 +243,9 @@ Command Format: `roster LESSON_INDEX`
 Examples:
 * `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
 
-### Miscellaneous Commands
+## **Miscellaneous Commands**
 
-#### Filtering of list: `filter`
+### Filtering of list: `filter`
 
 Filter the respective list(s) to display entries that correspond to the conditions as specified.
 
@@ -267,7 +266,7 @@ Example(s):
 * `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student
  list by grade of `P2`, and display the corresponding entries in the respective lists.
 
-#### Clearing all entries : `clear`
+### Clearing all entries : `clear`
 
 Clears all students and lessons data stored in TuitiONE.
 
@@ -281,19 +280,19 @@ Using this command removes all data from TuitiONE. Only use this command if you 
 
 </div>
 
-#### Exiting the program : `exit`
+### Exiting the program : `exit`
 
 Exits the program.
 
 Command Format: `exit`
 
-### Managing Data
+## **Managing Data**
 
-#### Saving the data
+### Saving the data
 
 TuitiONE data is saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
-#### Editing the data file
+### Editing the data file
 
 TuitiONE data is saved as a `.json` file `[JAR file location]/data/TuitiONE.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -307,7 +306,7 @@ If the changes you made to the data file render its format invalid, TuitiONE wil
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **Command summary**
 
 Action | Format, Examples
 --------|------------------
@@ -326,13 +325,14 @@ Action | Format, Examples
 **Help** | `help`
 **Exit** | `exit`
 
-## Glossary
+## **Glossary**
 
 * **Java**: A widely used programming language
 * **JAR**: An executable java file for you to open the app
 * **GUI**: Graphical User Interface
 
-## FAQ
+## **FAQ**
 
 * **Q:** Where can I view the list of commands?
+
   **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
