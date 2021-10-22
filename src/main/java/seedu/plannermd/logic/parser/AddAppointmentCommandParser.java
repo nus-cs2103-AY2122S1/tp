@@ -25,10 +25,10 @@ import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.person.Remark;
 
 public class AddAppointmentCommandParser {
-    public static final String END_DATE_BEFORE_START_DATE_MESSAGE = "End date cannot be before start date.";
-    public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
-            + AddAppointmentCommand.MESSAGE_USAGE;
-    private static final String UNUSED_PREAMBLE = "0";
+    private final DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+            .appendPattern("d/M/yyyy")
+            .appendPattern(" HH:mm")
+            .toFormatter();
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterAppointmentCommand
@@ -82,11 +82,6 @@ public class AddAppointmentCommandParser {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
-     private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-            .appendPattern("d/M/yyyy")
-            .appendPattern(" HH:mm")
-            .toFormatter();
 
     private String getTimeFromDateTime(String dateTime) throws ParseException {
         requireNonNull(dateTime);
