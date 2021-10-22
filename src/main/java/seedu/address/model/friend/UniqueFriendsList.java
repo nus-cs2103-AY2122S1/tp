@@ -119,7 +119,8 @@ public class UniqueFriendsList implements Iterable<Friend> {
         currentGames.removeIf(game -> game.getGameId().equals(gameId));
         currentGames.add(gameFriendLink);
 
-        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getName(), currentGames);
+        Friend editedFriend = new Friend(toLink.getFriendId(), toLink.getFriendName(),
+                currentGames, toLink.getSchedule());
         this.setFriend(toLink, editedFriend);
     }
 
@@ -134,7 +135,8 @@ public class UniqueFriendsList implements Iterable<Friend> {
         Set<GameFriendLink> currentGames = new HashSet<>(friendToUnlink.getGameFriendLinks());
         GameId gameId = gameToUnlink.getGameId();
         currentGames.removeIf(game -> game.getGameId().equals(gameId));
-        Friend editedFriend = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getName(), currentGames);
+        Friend editedFriend = new Friend(friendToUnlink.getFriendId(), friendToUnlink.getFriendName(),
+                currentGames, friendToUnlink.getSchedule());
         this.setFriend(friendToUnlink, editedFriend);
     }
 

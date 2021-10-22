@@ -23,6 +23,7 @@ public class Friend {
     // used to uniquely identify each Friend.
     private final FriendId friendId;
     private final FriendName friendName;
+    private final Schedule schedule;
 
     // Data fields
     private final Set<GameFriendLink> gameFriendLinks = new HashSet<>();
@@ -34,12 +35,14 @@ public class Friend {
      * @param friendId        a valid friend id.
      * @param friendName      a valid friend name.
      * @param gameFriendLinks a set of game-friend links of this friend.
+     * @param schedule        Schedule of friend.
      */
-    public Friend(FriendId friendId, FriendName friendName, Set<GameFriendLink> gameFriendLinks) {
+    public Friend(FriendId friendId, FriendName friendName, Set<GameFriendLink> gameFriendLinks, Schedule schedule) {
         requireAllNonNull(friendId, gameFriendLinks);
         this.friendId = friendId;
         this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
         this.gameFriendLinks.addAll(gameFriendLinks);
+        this.schedule = schedule;
     }
 
     /**
@@ -52,6 +55,7 @@ public class Friend {
         requireAllNonNull(friendId);
         this.friendId = friendId;
         this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
+        this.schedule = new Schedule();
     }
 
     /**
@@ -77,8 +81,12 @@ public class Friend {
         return friendId;
     }
 
-    public FriendName getName() {
+    public FriendName getFriendName() {
         return friendName;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
     }
 
     /**
@@ -129,7 +137,7 @@ public class Friend {
         Friend otherFriend = (Friend) other;
         return otherFriend.getFriendId().equals(getFriendId())
                 && otherFriend.getGameFriendLinks().equals(getGameFriendLinks())
-                && otherFriend.getName().equals(getName());
+                && otherFriend.getFriendName().equals(getFriendName());
     }
 
     @Override
@@ -144,7 +152,7 @@ public class Friend {
         builder.append("Friend ID: ")
                 .append(getFriendId())
                 .append("; Name: ")
-                .append(getName());
+                .append(getFriendName());
 
         Set<GameFriendLink> gameSet = getGameFriendLinks();
         if (!gameSet.isEmpty()) {
@@ -152,6 +160,7 @@ public class Friend {
             gameSet.forEach(builder::append);
             builder.append(" ");
         }
+        builder.append(schedule);
         return builder.toString();
     }
 }

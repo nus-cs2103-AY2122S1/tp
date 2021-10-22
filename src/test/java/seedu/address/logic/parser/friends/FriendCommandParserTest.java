@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.friends;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_FRIEND_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FRIEND_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GAME_ID_CSGO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -11,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.FLAG_EDIT;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GET;
+import static seedu.address.logic.parser.CliSyntax.FLAG_LIST;
 import static seedu.address.logic.parser.CliSyntax.FLAG_POSTFIX;
 import static seedu.address.logic.parser.CliSyntax.FLAG_VALUE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -59,6 +61,12 @@ class FriendCommandParserTest {
     }
 
     @Test
+    public void parseSchedule_validCommandFlag_correctParserReturned() throws ParseException {
+        String scheduleInput = SCHEDULE_FRIEND_AMY;
+        assertEquals(parser.parse(scheduleInput), new ScheduleFriendCommandParser().parse(scheduleInput));
+    }
+
+    @Test
     public void parseGet_validCommandFlag_correctParserReturned() throws ParseException {
         String getInput = FLAG_POSTFIX.getFlag() + FLAG_GET.getFlag() + VALID_FRIEND_ID_AMY;
         assertEquals(parser.parse(getInput), new GetFriendCommandParser().parse(getInput));
@@ -66,7 +74,7 @@ class FriendCommandParserTest {
 
     @Test
     public void parseList_validCommandFlag_correctParserReturned() throws ParseException {
-        String listInput = " --list";
+        String listInput = FLAG_POSTFIX.getFlag() + FLAG_LIST.getFlag();
         assertEquals(parser.parse(listInput), new ListFriendCommandParser().parse(listInput));
     }
 }

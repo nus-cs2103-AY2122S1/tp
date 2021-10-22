@@ -20,7 +20,7 @@ public class ListFriendCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsListCommand() {
+    public void parse_validArgs_returnsListFriendCommand() {
         // filter by friend and keyword test
         String userInput = " --list test";
         String expectedParsedKeyword = "test";
