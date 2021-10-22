@@ -2,7 +2,7 @@
 layout: page
 title: Uni-Fy User Guide
 ---
-![logo](images/Uni-fy_logo.png)
+![logo](images/Uni-Fy_Logo.png)
 
 * Table of Contents
   {:toc}
