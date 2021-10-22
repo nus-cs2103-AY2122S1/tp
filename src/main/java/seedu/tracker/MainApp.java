@@ -21,6 +21,8 @@ import seedu.tracker.storage.*;
 import seedu.tracker.ui.Ui;
 import seedu.tracker.ui.UiManager;
 
+import javax.xml.crypto.Data;
+
 /**
  * Runs the application.
  */
@@ -124,6 +126,7 @@ public class MainApp extends Application {
         }
         return initializedConfig;
     }
+
 
     /**
      * Returns a {@code UserInfo} using the file at {@code storage}'s user info file path,

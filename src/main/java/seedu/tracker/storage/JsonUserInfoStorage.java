@@ -22,20 +22,13 @@ public class JsonUserInfoStorage implements UserInfoStorage {
     }
 
     @Override
-    public Optional<UserInfo> readUserInfo() throws DataConversionException {
+    public Optional<UserInfo> readUserInfo() throws DataConversionException, IOException {
         return readUserInfo(filePath);
     }
 
-
-    /**
-     * Similar to {@link #readUserInfo()}
-     * @param filePath location of the data. Cannot be null.
-     * @throws DataConversionException if the file format is not as expected.
-     */
-    public Optional<UserInfo> readUserInfo(Path filePath) throws DataConversionException {
-        return JsonUtil.readJsonFile(filePath, UserInfo.class);
+    public Optional<UserInfo> readUserInfo(Path infoFilePath) throws DataConversionException {
+        return JsonUtil.readJsonFile(infoFilePath, UserInfo.class);
     }
-
 
     @Override
     public void saveUserInfo(ReadOnlyUserInfo userInfo) throws IOException {

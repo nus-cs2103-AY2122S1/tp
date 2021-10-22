@@ -23,23 +23,23 @@ public class ModelManager implements Model {
 
     private final ModuleTracker moduleTracker;
     private final UserPrefs userPrefs;
-    private final FilteredList<Module> filteredModules;
     private final UserInfo userInfo;
+    private final FilteredList<Module> filteredModules;
 
     /**
      * Initializes a ModelManager with the given moduleTracker and userPrefs.
      */
     public ModelManager(ReadOnlyModuleTracker moduleTracker, ReadOnlyUserPrefs userPrefs, ReadOnlyUserInfo userInfo) {
         super();
-        requireAllNonNull(moduleTracker, userPrefs);
+        requireAllNonNull(moduleTracker, userPrefs, userInfo);
 
         logger.fine("Initializing with mod tracker: " + moduleTracker + ", user prefs " + userPrefs
         + " and user information: " + userInfo);
 
         this.moduleTracker = new ModuleTracker(moduleTracker);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredModules = new FilteredList<>(this.moduleTracker.getModuleList());
         this.userInfo = new UserInfo(userInfo);
+        filteredModules = new FilteredList<>(this.moduleTracker.getModuleList());
     }
 
     public ModelManager() {
@@ -78,6 +78,7 @@ public class ModelManager implements Model {
         requireNonNull(mcGoal);
         this.userInfo.setMcGoal(mcGoal);
     }
+
     //=========== UserPrefs ==================================================================================
 
     @Override

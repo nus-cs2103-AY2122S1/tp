@@ -14,6 +14,10 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import seedu.tracker.commons.core.GuiSettings;
+import seedu.tracker.model.calendar.AcademicCalendar;
+import seedu.tracker.model.calendar.AcademicYear;
+import seedu.tracker.model.calendar.Semester;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.testutil.ModuleTrackerBuilder;
 
 public class ModelManagerTest {
@@ -24,7 +28,53 @@ public class ModelManagerTest {
     public void constructor() {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
+        assertEquals(new UserInfo(), modelManager.getUserInfo());
+        assertEquals(new AcademicCalendar(new AcademicYear(1), new Semester(1)), modelManager.getCurrentSemester());
+        assertEquals(new Mc(120), modelManager.getMcGoal());
         assertEquals(new ModuleTracker(), new ModuleTracker(modelManager.getModuleTracker()));
+    }
+
+    @Test
+    public void setUserInfo_nulUserInfo_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setUserInfo(null));
+    }
+
+    @Test
+    public void setUserInfo_validUserInfo_copiesUserInfo() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setMcGoal(new Mc(320));
+        userInfo.setCurrentSemester(new AcademicCalendar(new AcademicYear(5), new Semester(2)));
+        modelManager.setUserInfo(userInfo);
+        assertEquals(userInfo, modelManager.getUserInfo());
+
+        // Modifying userInfo should not modify modelManager's userInfo
+        UserInfo oldUserInfo = new UserInfo(userInfo);
+        userInfo.setMcGoal(new Mc(1));
+        assertEquals(oldUserInfo, modelManager.getUserInfo());
+    }
+
+    @Test
+    public void setCurrentSemester_nullSemester_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setCurrentSemester(null));
+    }
+
+    @Test
+    public void setCurrentSemester_validSemester_success() {
+        AcademicCalendar currentSemester = new AcademicCalendar(new AcademicYear(3), new Semester(3));
+        modelManager.setCurrentSemester(currentSemester);
+        assertEquals(currentSemester, modelManager.getCurrentSemester());
+    }
+
+    @Test
+    public void setMcGoal_nullPath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> modelManager.setMcGoal(null));
+    }
+
+    @Test
+    public void setMcGoal_validMc_success() {
+        Mc mcGoal = new Mc(160);
+        modelManager.setMcGoal(mcGoal);
+        assertEquals(mcGoal, modelManager.getMcGoal());
     }
 
     @Test

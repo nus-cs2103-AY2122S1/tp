@@ -122,17 +122,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public void setCurrentSemester(AcademicCalendar academicCalendar) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserInfo(ReadOnlyUserInfo userInfo) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ReadOnlyUserInfo getUserInfo() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void setCurrentSemester(AcademicCalendar academicCalendar) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -18,10 +18,11 @@ public interface Model {
 
     void setUserInfo(ReadOnlyUserInfo userInfo);
     ReadOnlyUserInfo getUserInfo();
-    void setCurrentSemester(AcademicCalendar academicCalendar);
+
     AcademicCalendar getCurrentSemester();
-    void setMcGoal(Mc mc);
+    void setCurrentSemester(AcademicCalendar currentSemester);
     Mc getMcGoal();
+    void setMcGoal(Mc mcGoal);
 
 
     /**
