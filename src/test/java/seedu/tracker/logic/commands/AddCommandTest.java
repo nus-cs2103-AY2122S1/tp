@@ -145,6 +145,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Mc> getCompletedMcList() {
+            throw new AssertionError("This method should not be called");
+        };
+
+        @Override
+        public void updateCompletedMcs() {
+            throw new AssertionError("This method should not be called");
+        };
+
+        @Override
         public boolean hasModule(Module module) {
             throw new AssertionError("This method should not be called.");
         }

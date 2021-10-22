@@ -38,6 +38,43 @@ public class TypicalModules {
             .withDescription("OOP")
             .withAcademicCalendar(1, 2).build();
 
+    public static final Module MA1101R = new ModuleBuilder().withCode("MA1101R")
+            .withTitle("Linear Algebra")
+            .withDescription("introduction to linear algebra")
+            .withTags("mathscience")
+            .withAcademicCalendar(2, 1).build();
+
+    public static final Module CS2102 = new ModuleBuilder().withCode("CS2102")
+            .withTitle("Database Systems")
+            .withDescription("introduction to relational algebra, database design")
+            .withTags("breadthdepth")
+            .withAcademicCalendar(2, 1).build();
+
+    public static final Module IS1103 = new ModuleBuilder().withCode("IS1103")
+            .withTitle("Ethics in Computing")
+            .withDescription("introduction to ethics in the computing domain")
+            .withTags("itprofessionalism")
+            .withAcademicCalendar(2, 1).build();
+
+    public static final Module GEA1000 = new ModuleBuilder().withCode("GEA1000")
+            .withTitle("Quantitative Reasoning with Data")
+            .withDescription("essential data literacy skills to analyse data")
+            .withTags("ge")
+            .withAcademicCalendar(2, 1).build();
+
+    public static final Module CS2040S = new ModuleBuilder().withCode("CS2040S")
+            .withTitle("Data Structures and Algorithms")
+            .withDescription("introduces students to the design and implementation of fundamental data structures " +
+                    "and algorithms")
+            .withTags("foundation")
+            .withAcademicCalendar(1, 3).build();
+
+    public static final Module CP2106 = new ModuleBuilder().withCode("CP2106")
+            .withTitle("Orbital")
+            .withDescription("platform for students to gain hands-on industrial experience for computing technologies")
+            .withTags("ue")
+            .withAcademicCalendar(1, 3).build();
+
     private TypicalModules() {} // prevents instantiation
 
     /**
@@ -52,6 +89,7 @@ public class TypicalModules {
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, GEQ1000, MA1521, CS1231S, CS2030S));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS2101, GEQ1000, MA1521, CS1231S, CS2030S, MA1101R,
+                CS2102, IS1103, GEA1000, CS2040S, CP2106));
     }
 }

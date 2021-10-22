@@ -1,6 +1,7 @@
 package seedu.tracker.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.commons.core.Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX;
 import static seedu.tracker.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.tracker.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.collections.ObservableList;
 import seedu.tracker.logic.commands.AddCommand;
 import seedu.tracker.logic.commands.CommandResult;
 import seedu.tracker.logic.commands.ListCommand;
@@ -26,6 +28,7 @@ import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.UserPrefs;
+import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.JsonModuleTrackerStorage;
 import seedu.tracker.storage.JsonUserPrefsStorage;
@@ -91,6 +94,16 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredModuleList().remove(0));
+    }
+
+    @Test
+    public void getCompletedMcList_returnsDefaultList() {
+        ObservableList<Mc> completedMcs = logic.getCompletedMcList();
+        boolean isValid = true;
+        for (Mc mc : completedMcs) {
+            isValid = isValid && mc.value == 0;
+        }
+        assertTrue(isValid);
     }
 
     /**
