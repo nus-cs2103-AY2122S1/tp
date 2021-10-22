@@ -291,6 +291,16 @@ resets after each search.
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] Themes Feature
+
+#### Propose Implementation
+
+The proposed theme mechanism is simply done by completely altering the base css file of the program. The active css 
+file will be saved in `preferences.json` upon exiting the application.
+
+If `preferences.json` is empty or the theme css file given is not valid, the default theme will be used instead and 
+will replace the invalid css file specification in `preferences.json`.
+
 ### \[Proposed\] Genre tagging feature
 
 #### Current Implementation
@@ -360,7 +370,6 @@ Given below is a MSS of an example usage scenario of a user adding a `Genre` to 
     
     
 
---------------------------------------------------------------------------------------------------------------------
 
 ## **Glossary, Naming Conventions**
 
@@ -546,6 +555,13 @@ tab.
       Use case ends.
 
 *{More to be added}*
+
+**Use case: UC07 - Change application theme**
+
+1. User changes the anime theme based on the menu bar theme options
+2. AniList applies the required css file based on the theme selected
+
+    Use case ends.
 
 ### Non-Functional Requirements
 
