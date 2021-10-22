@@ -70,20 +70,20 @@ public class PersonCreateCommandTest {
         PersonCreateCommand addBobCommand = new PersonCreateCommand(null, bob);
 
         // same object -> returns true
-        assertEquals(addAliceCommand,addAliceCommand);
+        assertEquals(addAliceCommand, addAliceCommand);
 
         // same values -> returns true
         PersonCreateCommand addAliceCommandCopy = new PersonCreateCommand(null, alice);
-        assertEquals(addAliceCommand,addAliceCommandCopy);
+        assertEquals(addAliceCommand, addAliceCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1,addAliceCommand);
+        assertNotEquals(1, addAliceCommand);
 
         // null -> returns false
-        assertNotEquals(null,addAliceCommand);
+        assertNotEquals(null, addAliceCommand);
 
         // different person -> returns false
-        assertNotEquals(addAliceCommand,addBobCommand);
+        assertNotEquals(addAliceCommand, addBobCommand);
     }
 
     /**
