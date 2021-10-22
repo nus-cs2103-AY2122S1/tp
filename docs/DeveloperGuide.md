@@ -290,6 +290,31 @@ Diagram:
 
 ![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
 
+### Edit folder name feature: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
+
+#### Implementation
+
+Folders are removed by first specifying the old folder's name and followed
+by the new folder's name.
+
+The underlying implementation essentially creates a new folder with the 
+newly specified name and copies all the contacts from the old to the new 
+folder. The new folder is saved in the `UniqueFolderList` in `AddressBook`
+just like the old folder.
+
+The following diagram shows how `mv` works:
+
+![EditFolderNameSequenceDiagram](images/EditFolderNameSequenceDiagram.png)
+
+#### Design considerations:
+
+* **Alternative 1 (current choice)**: Old folder and new folder name is 
+  separated by the pipe operator `|`.
+    * Pros: Easy to distinguish between the folder to be replaced and
+      the new incoming folder name considering how folder name can have blank
+      spaces in between.
+    * Cons: More difficult to implement.
+    
 ### Viewing list of folders: `ls -folders`
 
 #### Implementation
