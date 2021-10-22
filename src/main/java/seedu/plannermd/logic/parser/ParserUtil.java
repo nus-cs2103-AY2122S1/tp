@@ -2,11 +2,6 @@ package seedu.plannermd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.text.NumberFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +9,7 @@ import java.util.Set;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
-import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.Duration;
-import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;

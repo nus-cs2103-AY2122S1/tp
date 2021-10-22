@@ -1,7 +1,5 @@
 package seedu.plannermd.model.appointment;
 
-import seedu.plannermd.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
 
@@ -44,7 +42,7 @@ public class Duration {
      * Factory method to return a default duration.
      */
     public static Duration getDefaultDuration() {
-        return new Duration(10);
+        return new Duration();
     }
 
     @Override

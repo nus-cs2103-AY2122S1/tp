@@ -47,10 +47,10 @@ public class AddAppointmentCommand extends AppointmentCommand {
             + "6. Hour must be between 0-23 (0 in front of single digit is optional)\n"
             + "7. Minute must be between 0-59 (0 in front of single digit is optional).";
 
-    Index patientIndex;
-    Index doctorIndex;
-    AddAppointmentDescriptor addAppointmentDescriptor;
-    Appointment toAdd;
+    private Index patientIndex;
+    private Index doctorIndex;
+    private AddAppointmentDescriptor addAppointmentDescriptor;
+    private Appointment toAdd;
 
     /**
      * Creates an AddAppointmentCommand to add the specified {@code Appointment}.
