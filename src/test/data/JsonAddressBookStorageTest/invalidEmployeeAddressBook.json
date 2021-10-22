@@ -9,7 +9,8 @@
     "address": "4th street",
     "leaves": "10",
     "salary": "4000",
-    "jobTitle": "Senior Developer"
+    "jobTitle": "Senior Developer",
+    "shifts" : [ "2021-12-10 0800" ]
   } ],
   "suppliers": [
 

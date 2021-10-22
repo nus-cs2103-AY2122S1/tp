@@ -3,6 +3,7 @@ package seedu.address.model.reservation;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import seedu.address.model.person.Phone;
@@ -12,6 +13,9 @@ import seedu.address.model.table.Table;
  * Represents a reservation
  */
 public class Reservation {
+    private static final DateTimeFormatter DATE_TIME_PRINTING_FORMAT =
+            DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
+
     private Phone phone;
     private int numberOfPeople;
     private LocalDateTime dateTime;
@@ -76,7 +80,9 @@ public class Reservation {
      */
     @Override
     public String toString() {
-        return String.format("phone: %s, numberOfPeople: %s, time: %s, table: %s",
-                phone, numberOfPeople, dateTime, table);
+        return String.format(
+                "phone: %s, numberOfPeople: %s, time: %s, table: %s",
+                phone, numberOfPeople, dateTime.format(DATE_TIME_PRINTING_FORMAT), table
+        );
     }
 }

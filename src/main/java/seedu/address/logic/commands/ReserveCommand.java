@@ -19,7 +19,7 @@ import seedu.address.model.table.Table;
  * Represents the command to add reservation
  */
 public class ReserveCommand extends Command {
-    public static final String COMMAND_WORD = "reserve";
+    public static final String COMMAND_WORD = "addr";
     public static final String MESSAGE_USAGE = String.format(
             "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
             + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"

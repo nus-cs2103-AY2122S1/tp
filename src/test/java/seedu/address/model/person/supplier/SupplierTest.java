@@ -3,7 +3,7 @@ package seedu.address.model.person.supplier;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_DAILY;
+import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_DELIVERY_DETAIL_AMY;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.SupplierCommandTestUtil.VALID_PHONE_BOB;
@@ -36,7 +36,7 @@ public class SupplierTest {
         // same name, all other attributes different -> returns true
         Supplier editedChetwin = new SupplierBuilder(CHETWIN).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .withSupplyType(VALID_SUPPLY_TYPE_BEEF).withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
+                .withSupplyType(VALID_SUPPLY_TYPE_BEEF).withDeliveryDetails(VALID_DELIVERY_DETAIL_AMY).build();
         assertTrue(CHETWIN.isSamePerson(editedChetwin));
 
         // different name, all other attributes same -> returns false
@@ -96,7 +96,7 @@ public class SupplierTest {
         assertFalse(CHETWIN.equals(editedChetwin));
 
         // different delivery details -> returns false
-        editedChetwin = new SupplierBuilder(CHETWIN).withDeliveryDetails(VALID_DELIVERY_DETAIL_DAILY).build();
+        editedChetwin = new SupplierBuilder(CHETWIN).withDeliveryDetails(VALID_DELIVERY_DETAIL_AMY).build();
         assertFalse(CHETWIN.equals(editedChetwin));
     }
 }

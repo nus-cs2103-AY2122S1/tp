@@ -6,7 +6,8 @@
     "address": "4th street",
     "leaves": "Invalid",
     "salary": "SSS",
-    "jobTitle": "Product manager"
+    "jobTitle": "Product manager",
+    "shifts" : [ "2021-12-10 0830" ]
   } ],
   "customers": [
 

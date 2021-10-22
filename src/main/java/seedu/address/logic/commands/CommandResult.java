@@ -47,9 +47,9 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.showCustomer = showCustomer;
-        this.showReservation = showReservation;
         this.showEmployee = showEmployee;
         this.showSupplier = showSupplier;
+        this.showReservation = showReservation;
     }
 
     /**
@@ -77,11 +77,11 @@ public class CommandResult {
     }
 
     public boolean isShowEmployee() {
-        return showCustomer;
+        return showEmployee;
     }
 
     public boolean isShowReservation() {
-        return showCustomer;
+        return showReservation;
     }
 
     public boolean isShowSupplier() {

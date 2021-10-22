@@ -22,6 +22,7 @@ import seedu.address.model.person.customer.SpecialRequest;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.person.supplier.DeliveryDetails;
 import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
@@ -275,6 +276,33 @@ public class ParserUtil {
             throw new ParseException(JobTitle.MESSAGE_CONSTRAINTS);
         }
         return new JobTitle(trimmedJobTitle);
+    }
+
+    /**
+     * Parses a {@code String allergy} into a {@code Allergy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code specialRequest} is invalid.
+     */
+    public static Shift parseShift(String shift) throws ParseException {
+        requireNonNull(shift);
+        String trimmedShift = shift.trim();
+        if (!Shift.isValidShift(trimmedShift)) {
+            throw new ParseException(Shift.MESSAGE_CONSTRAINTS);
+        }
+        return new Shift(trimmedShift);
+    }
+
+    /**
+     * Parses {@code Collection<String> specialRequests} into a {@code Set<SpecialRequest>}.
+     */
+    public static Set<Shift> parseShifts(Collection<String> shifts) throws ParseException {
+        requireNonNull(shifts);
+        final Set<Shift> shiftSet = new HashSet<>();
+        for (String shift : shifts) {
+            shiftSet.add(parseShift(shift));
+        }
+        return shiftSet;
     }
 
     /**

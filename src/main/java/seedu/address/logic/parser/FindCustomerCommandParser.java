@@ -6,16 +6,16 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.FindCustomerCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindCustomerCommand object
  */
-public class FindCommandParser implements Parser<FindCustomerCommand> {
+public class FindCustomerCommandParser implements Parser<FindCustomerCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindCustomerCommand
+     * and returns a FindCustomerCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCustomerCommand parse(String args) throws ParseException {
@@ -27,7 +27,7 @@ public class FindCommandParser implements Parser<FindCustomerCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCustomerCommand(new CustomerNameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCustomerCommand(new CustomerClassContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }

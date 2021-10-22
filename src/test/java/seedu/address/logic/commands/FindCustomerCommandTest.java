@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +29,10 @@ public class FindCustomerCommandTest {
 
     @Test
     public void equals() {
-        CustomerNameContainsKeywordsPredicate firstPredicate =
-                new CustomerNameContainsKeywordsPredicate(Collections.singletonList("first"));
-        CustomerNameContainsKeywordsPredicate secondPredicate =
-                new CustomerNameContainsKeywordsPredicate(Collections.singletonList("second"));
+        CustomerClassContainsKeywordsPredicate firstPredicate =
+                new CustomerClassContainsKeywordsPredicate(Collections.singletonList("first"));
+        CustomerClassContainsKeywordsPredicate secondPredicate =
+                new CustomerClassContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCustomerCommand findFirstCommand = new FindCustomerCommand(firstPredicate);
         FindCustomerCommand findSecondCommand = new FindCustomerCommand(secondPredicate);
@@ -57,7 +57,7 @@ public class FindCustomerCommandTest {
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 0);
-        CustomerNameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        CustomerClassContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,7 +67,7 @@ public class FindCustomerCommandTest {
     @Test
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_CUSTOMERS_LISTED_OVERVIEW, 3);
-        CustomerNameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
+        CustomerClassContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
         FindCustomerCommand command = new FindCustomerCommand(predicate);
         expectedModel.updateFilteredCustomerList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -77,7 +77,7 @@ public class FindCustomerCommandTest {
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
-    private CustomerNameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new CustomerNameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private CustomerClassContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new CustomerClassContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

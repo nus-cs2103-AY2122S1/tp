@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LEAVES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -19,6 +20,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,7 +36,7 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_LEAVES, PREFIX_SALARY, PREFIX_JOBTITLE, PREFIX_TAG);
+                        PREFIX_LEAVES, PREFIX_SALARY, PREFIX_JOBTITLE, PREFIX_SHIFT, PREFIX_TAG);
 
         Index index;
 
@@ -69,6 +71,7 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
             editEmployeeDescriptor.setJobTitle(ParserUtil.parseJobTitle(argMultimap.getValue(PREFIX_JOBTITLE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEmployeeDescriptor::setTags);
+        parseShiftsForEdit(argMultimap.getAllValues(PREFIX_SHIFT)).ifPresent(editEmployeeDescriptor::setShifts);
 
         if (!editEmployeeDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditEmployeeCommand.MESSAGE_NOT_EDITED);
@@ -89,5 +92,20 @@ public class EditEmployeeCommandParser implements Parser<EditEmployeeCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> shifts} into a {@code Set<Shift>} if {@code shifts} is non-empty.
+     * If {@code shifts} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Shift>} containing zero tags.
+     */
+    private Optional<Set<Shift>> parseShiftsForEdit(Collection<String> shifts) throws ParseException {
+        assert shifts != null;
+
+        if (shifts.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> shiftSet = shifts.size() == 1 && shifts.contains("") ? Collections.emptySet() : shifts;
+        return Optional.of(ParserUtil.parseShifts(shiftSet));
     }
 }
