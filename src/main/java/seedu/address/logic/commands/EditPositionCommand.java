@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_POSITIONS;
 
 import java.util.List;
@@ -18,7 +19,14 @@ public class EditPositionCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-position";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the position identified ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the position identified "
+            + "by the index number used in the displayed position list. "
+            + "Existing values will be overwritten by the input values."
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_TITLE + "TITLE] "
+            + "[" + PREFIX_DESCRIPTION + "DESCRIPTION] "
+            + "Example: " + COMMAND_WORD + " 1 "
+            + PREFIX_DESCRIPTION + "Create data pipeline";
 
     public static final String MESSAGE_EDIT_POSITION_SUCCESS = "Edited Position: %1$s";
 
@@ -27,8 +35,8 @@ public class EditPositionCommand extends Command {
     public static final String MESSAGE_DUPLICATE_POSITION = "This position already exists in the position book.";
 
     private final Index index;
-    private final EditPositionDescriptor editPositionDescriptor;
 
+    private final EditPositionDescriptor editPositionDescriptor;
 
     /**
      * @param index of the position in the filtered position list to edit

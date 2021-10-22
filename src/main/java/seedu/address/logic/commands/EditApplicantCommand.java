@@ -1,0 +1,85 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
+
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.descriptors.EditApplicantDescriptor;
+import seedu.address.model.Model;
+import seedu.address.model.applicant.Applicant;
+
+
+public class EditApplicantCommand extends Command {
+
+    public static final String COMMAND_WORD = "edit-applicant";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the applicant identified "
+            + "by the index number used in the displayed applicant list. "
+            + "Existing values will be overwritten by the input values."
+            + "Parameters: INDEX (must be a positive integer) "
+            + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_POSITION + "POSITION] "
+            + "Example: " + COMMAND_WORD + " 2 "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com ";
+
+    public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
+
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
+
+    public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book.";
+
+    private final Index index;
+
+    private final EditApplicantDescriptor editApplicantDescriptor;
+
+    /**
+     * @param index of the applicant in the filtered applicant list to edit
+     * @param editApplicantDescriptor details to edit the applicant with
+     */
+    public EditApplicantCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
+        requireNonNull(index);
+        requireNonNull(editApplicantDescriptor);
+
+        this.index = index;
+        this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
+    }
+
+
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Applicant> lastShownList = model.getFilteredApplicantList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
+        }
+
+        Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
+        Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit);
+
+        /*
+        if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedPosition)) {
+            throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);
+        }
+
+         */
+
+        model.setApplicant(applicantToEdit, editedApplicant);
+
+        model.updateFilteredApplicantList(PREDICATE_SHOW_ALL_APPLICANTS);
+        return new CommandResult(String.format(MESSAGE_EDIT_APPLICANT_SUCCESS, editedApplicant));
+    }
+
+
+}
