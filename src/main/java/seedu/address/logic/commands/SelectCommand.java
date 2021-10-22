@@ -63,8 +63,7 @@ public class SelectCommand extends Command {
             requireNonNull(selectedPersons);
             model.addSelected(selectedPersons);
         }
-        // TODO Update to a better command result
-        return new CommandResult("feedbackToUser");
+        return new CommandResult(persons.size() + " persons selected!");
     }
 
     @Override

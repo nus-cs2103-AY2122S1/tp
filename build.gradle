@@ -8,8 +8,8 @@ plugins {
 
 mainClassName = 'seedu.address.Main'
 
-sourceCompatibility = 11
-targetCompatibility = 11
+sourceCompatibility = 17
+targetCompatibility = 17
 
 repositories {
     mavenCentral()
@@ -75,8 +75,8 @@ shadowJar {
     archiveName = 'addressbook.jar'
 }
 
-run {
-    enableAssertions = true
-}
+// run {
+//     enableAssertions = true
+// }
 
 defaultTasks 'clean', 'test'

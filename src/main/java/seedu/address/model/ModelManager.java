@@ -118,12 +118,16 @@ public class ModelManager implements Model {
 
     @Override
     public void addSelected(List<Person> persons) {
-        selectedPersons.addAll(persons);
+        for (Person p: persons) {
+            if (!selectedPersons.contains(p)) {
+                selectedPersons.add(p);
+            }
+        }
     }
 
     @Override
     public void removeSelected(List<Person> persons) {
-        // TODO Auto-generated method stub
+        selectedPersons.removeAll(persons);
     }
 
     //=========== Filtered Person List Accessors =============================================================
