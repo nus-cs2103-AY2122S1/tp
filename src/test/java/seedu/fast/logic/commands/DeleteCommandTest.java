@@ -80,14 +80,21 @@ public class DeleteCommandTest {
     public void equals() {
         DeleteCommand singleDeleteFirstCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
         DeleteCommand singleDeleteSecondCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON});
+        DeleteCommand multipleDeleteFirstCommand = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON,
+                INDEX_SECOND_PERSON});
+        DeleteCommand multipleDeleteSecondCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON,
+                INDEX_FIRST_PERSON});
 
         // same object -> returns true
         assertTrue(singleDeleteFirstCommand.equals(singleDeleteFirstCommand));
+        assertTrue(multipleDeleteFirstCommand.equals(multipleDeleteFirstCommand));
 
         // same values -> returns true
         DeleteCommand singleDeleteFirstCommandCopy = new DeleteCommand(new Index[] {INDEX_FIRST_PERSON});
         assertTrue(singleDeleteFirstCommand.equals(singleDeleteFirstCommandCopy));
-
+        DeleteCommand multipleDeleteSecondCommandCopy = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON,
+                INDEX_FIRST_PERSON});
+        assertTrue(multipleDeleteSecondCommandCopy.equals(multipleDeleteSecondCommandCopy));
 
         // different types -> returns false
         assertFalse(singleDeleteFirstCommand.equals(1));
@@ -97,6 +104,7 @@ public class DeleteCommandTest {
 
         // different person -> returns false
         assertFalse(singleDeleteFirstCommand.equals(singleDeleteSecondCommand));
+        assertFalse(multipleDeleteFirstCommand.equals(multipleDeleteSecondCommand));
     }
 
     /**
@@ -137,6 +145,25 @@ public class DeleteCommandTest {
                 1, outOfBoundIndex.getOneBased());
 
         assertCommandFailure(deleteCommand, model, expectedModel, expectedMessage);
+    }
+
+    @Test
+    public void execute_multipleIndexExceedLimitUnfilteredList_throwsCommandException() {
+        Index[] array = new Index[11];
+        for (int i = 0; i < 11; i++) {
+            array[i] = Index.fromOneBased(i + 1);
+        }
+
+        DeleteCommand deleteCommand = new DeleteCommand(array);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_FAILED_EXCEED_LIMIT);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
+    }
+
+    @Test
+    public void execute_multipleIndexDuplicatedUnfilteredList_throwsCommandException() {
+        DeleteCommand deleteCommand = new DeleteCommand(new Index[] {INDEX_SECOND_PERSON, INDEX_SECOND_PERSON});
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_MULTIPLE_DELETE_FAILED_DUPLICATES);
+        assertCommandFailure(deleteCommand, model, expectedMessage);
     }
 
     @Test
