@@ -11,10 +11,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 participant ":VersionedAddressBook" as VersionedAddressBook MODEL_COLOR
 end box
-[-> LogicManager : execute(undo)
+[-> LogicManager : execute("undo")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(undo)
+LogicManager -> AddressBookParser : parseCommand("undo", model)
 activate AddressBookParser
 
 create UndoCommand

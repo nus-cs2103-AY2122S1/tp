@@ -16,11 +16,11 @@ end box
 [-> LogicManager : execute("edit -c 1 -n Sora")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("edit -c 1 -n Sora")
+LogicManager -> AddressBookParser : parseCommand("edit -c 1 -n Sora", model)
 activate AddressBookParser
 
 create EditClientCommandParser
-AddressBookParser -> EditClientCommandParser
+AddressBookParser -> EditClientCommandParser : EditClientCommandParser(model)
 activate EditClientCommandParser
 
 EditClientCommandParser --> AddressBookParser
