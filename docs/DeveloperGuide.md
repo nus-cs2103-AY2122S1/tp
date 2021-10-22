@@ -260,57 +260,6 @@ The flow of the sequence diagram would be the same for adding `Products`, but th
     * Cons : Difficult to find a client/product since the command can be very long, in this case, updates will have to
       be done through the`edit` command (requires the user to memorise the IDs)
 
-### Edit Client/Product Feature
-
-This feature allows the users to edit the details of a `Client` or `Product` of their choice. When editing a `Client` or
-`Product`, the user is required to enter at least 1 field to edit in the input command.
-
-The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
-`LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
-`EditClientCommandParser`, parsing the inputs and returning a `EditClientCommand`. The command will then be executed in
-`LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of address
-book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display feedback of
-the `CommandResult` to the user.
-
-The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
-
-![Interactions Inside the Logic Component for the `edit -c 1 -n Sora` Command](images/EditClientSequenceDiagram.png)
-
-#### Design Considerations
-
-**Aspect : How `edit` may be executed**
-
-* **Alternative 1 (current choice)** : User can edit either a client or a product at a time
-    * Pros : Allows the user to focus on editing a particular client or product
-    * Cons : Unable to edit multiple clients or products at the same time
-* **Alternative 2** : User can edit multiple clients or products
-    * Pros : Saves time if the user wish to edit a field in all clients or products to the same value
-    * Cons : More complex code which would lead to higher amount of error
-
-### View Client/Product Feature
-
-This feature allows the users to view the details of the `Client` or `Product` of their choice. When viewing a `Client`,
-more details such as `Products` bought before, will be visible to the user. The user input is first handled and
-retrieved by `MainWindow` in the UI component before being passed to the `LogicManager` to execute.
-
-First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
-the inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
-`CommandResult` which will be returned to the user. The flow of the sequence diagram would be the same for viewing
-`Products`, but the UI displayed will be different.
-
-![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
-
-#### Design Considerations
-
-**Aspect : How `view` may be executed**
-
-* **Alternative 1 (current choice)** : User can view either a client or product
-    * Pros : Allows the user to focus on a particular client or product
-    * Cons : Unable to view multiple clients or products
-* **Alternative 2** : User can view multiple clients or products
-    * Pros : Easier comparisons between clients or products
-    * Cons : More complex code which would lead to higher amount of error
-
 ### Delete Client/Product Feature
 
 This feature allows the users to delete a `Client` or `Product` of their choice. When deleting a `Client` or
@@ -338,6 +287,33 @@ The flow of the sequence diagram would be the same for editing `Products`, but t
     * Pros : Saves time if the user wish to delete multiple clients or products at the same time
     * Cons : More complex code which would lead to higher amount of error
 
+### Edit Client/Product Feature
+
+This feature allows the users to edit the details of a `Client` or `Product` of their choice. When editing a `Client` or
+`Product`, the user is required to enter at least 1 field to edit in the input command.
+
+The user input is first handled and retrieved by `MainWindow` in the UI component before being passed to the
+`LogicManager` to execute. First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to
+`EditClientCommandParser`, parsing the inputs and returning a `EditClientCommand`. The command will then be executed in
+`LogicManager`, returning a `CommandResult`. `StorageManager` will then attempt to save the current state of address
+book into local storage. The `CommandResult` will finally be returned to `MainWindow`, which will display feedback of
+the `CommandResult` to the user.
+
+The flow of the sequence diagram would be the same for editing `Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `edit -c 1 -n Sora` Command](images/EditClientSequenceDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `edit` may be executed**
+
+* **Alternative 1 (current choice)** : User can edit either a client or a product at a time
+    * Pros : Allows the user to focus on editing a particular client or product
+    * Cons : Unable to edit multiple clients or products at the same time
+* **Alternative 2** : User can edit multiple clients or products
+    * Pros : Saves time if the user wish to edit a field in all clients or products to the same value
+    * Cons : More complex code which would lead to higher amount of error
+
 ### Find Client/Product Feature
 
 This feature allows the users to find a `Client` or `Product` based on their `name`.
@@ -362,6 +338,30 @@ The flow of the sequence diagram would be the same for finding `Products`, but t
 * **Alternative 2** : User can find clients by their details such as name, address, email, etc.. and products by their
   name, price, etc..
     * Pros : Saves time if the user is unable to remember the exact name of a client/product.
+    * Cons : More complex code which would lead to higher amount of error
+
+### View Client/Product Feature
+
+This feature allows the users to view the details of the `Client` or `Product` of their choice. When viewing a `Client`,
+more details such as `Products` bought before, will be visible to the user. The user input is first handled and
+retrieved by `MainWindow` in the UI component before being passed to the `LogicManager` to execute.
+
+First, `LogicManager` will call `AddressBookParser`, which will pass the inputs to `ViewClientCommandParser`, parsing
+the inputs and returning a `ViewClientCommand`. The command will then be executed in `LogicManager`, returning a
+`CommandResult` which will be returned to the user. The flow of the sequence diagram would be the same for viewing
+`Products`, but the UI displayed will be different.
+
+![Interactions Inside the Logic Component for the `view -c 5` Command](images/ViewClientCommandDiagram.png)
+
+#### Design Considerations
+
+**Aspect : How `view` may be executed**
+
+* **Alternative 1 (current choice)** : User can view either a client or product
+    * Pros : Allows the user to focus on a particular client or product
+    * Cons : Unable to view multiple clients or products
+* **Alternative 2** : User can view multiple clients or products
+    * Pros : Easier comparisons between clients or products
     * Cons : More complex code which would lead to higher amount of error
 
 ### Command History Feature
