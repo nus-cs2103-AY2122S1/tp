@@ -38,8 +38,16 @@ public class Table {
         return numOfSeats;
     }
 
+    /**
+     * Compare this table size with another table size. If equal, then compare their table ID.
+     * @param other other table to compare to
+     * @return positive integer if this table size is bigger than the other table being compared to, or if equal size,
+     * positive integer if this table ID is bigger than the other
+     */
     public int compareTableSize(Table other) {
-        return numOfSeats - other.numOfSeats;
+        return numOfSeats - other.numOfSeats != 0
+                ? numOfSeats - other.numOfSeats
+                : tableId - other.tableId;
     }
 
     public static void resetTableCount() {

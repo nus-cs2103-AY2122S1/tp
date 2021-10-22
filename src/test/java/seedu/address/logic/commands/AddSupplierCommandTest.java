@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationsManager;
+import seedu.address.model.table.Table;
 import seedu.address.model.table.TableManager;
 import seedu.address.testutil.SupplierBuilder;
 
@@ -188,6 +190,21 @@ public class AddSupplierCommandTest {
 
         @Override
         public void setReservation(Reservation target, Reservation editedReservation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetReservations() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setTableList(List<Table> tableList) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetTableCount() {
             throw new AssertionError("This method should not be called.");
         }
 
