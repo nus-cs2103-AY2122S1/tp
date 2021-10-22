@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -188,7 +189,7 @@ public class ModelManager implements Model {
      */
     public void addOrder(Order toAdd) {
         addressBook.addOrder(toAdd);
-        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
+        resetOrderView();
     }
 
     /**
@@ -276,6 +277,19 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    @Override
+    public void sortOrderList(Comparator<Order> comparator) {
+        addressBook.sortOrders(comparator);
+        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    @Override
+    public void resetOrderView() {
+        Comparator<Order> defaultComparator = Order::compareTo;
+        addressBook.sortOrders(defaultComparator);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
 }

@@ -1,6 +1,7 @@
 package seedu.address;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -159,6 +160,16 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredOrderList(Predicate<Order> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void sortOrderList(Comparator<Order> comparator) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void resetOrderView() {
         throw new AssertionError("This method should not be called.");
     }
 }
