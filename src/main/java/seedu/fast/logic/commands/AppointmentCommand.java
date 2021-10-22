@@ -20,7 +20,7 @@ import seedu.fast.model.person.Person;
  */
 public class AppointmentCommand extends Command {
 
-    public static final String COMMAND_WORD = "appt";
+    public static final String COMMAND_WORD = "aa";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
             + " by the index number used in the last person listing.\n\n"
