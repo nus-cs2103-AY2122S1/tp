@@ -111,19 +111,20 @@ public class UniqueApplicantList implements Iterable<Applicant> {
 
         while (iterator.hasNext()) {
             Applicant applicant = iterator.next();
-            if (applicant.isApplyingTo(positionToEdit)) {
-                EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
-                editApplicationDescriptor.setPosition(editedPosition);
-                Application updatedApplication = editApplicationDescriptor
-                        .createEditedApplication(applicant.getApplication());
-
-                EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
-                editApplicantDescriptor.setApplication(updatedApplication);
-                Applicant updatedApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
-
-                remove(applicant);
-                add(updatedApplicant);
+            if (!applicant.isApplyingTo(positionToEdit)) {
+                continue;
             }
+            EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
+            editApplicationDescriptor.setPosition(editedPosition);
+            Application updatedApplication = editApplicationDescriptor
+                    .createEditedApplication(applicant.getApplication());
+
+            EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
+            editApplicantDescriptor.setApplication(updatedApplication);
+            Applicant updatedApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
+
+            remove(applicant);
+            add(updatedApplicant);
         }
 
         //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
