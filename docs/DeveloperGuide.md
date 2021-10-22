@@ -174,6 +174,17 @@ Classes used by multiple components are in the `seedu.salesnote.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Sort orders by amount feature
+
+#### Implementation
+
+The feature sorts all the orders in the addressbook by their amount in descending order. 
+
+To ensure that the orders can be sorted, both `Order` and its attribute `Amount` implement the `Comparable` interface. 
+Order uses its `id` field to produce the default ordering of the `OrderList`. 
+
+{to be completed}
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
