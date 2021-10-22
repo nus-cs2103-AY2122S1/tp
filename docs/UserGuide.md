@@ -439,12 +439,12 @@ If your changes to the data file makes its format invalid, FAST will discard all
 
 Action | Format, Examples
 --------|------------------
-**Add Appointment** | `appt INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `appt 3 d/2021-03-27 t/18:00 v/Clementi Park`
+**Add Appointment** | `aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Appointment** | `dappt INDEX`<br> e.g. `dappt 1`
+**Delete Appointment** | `da INDEX`<br> e.g. `da 1`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
-**Edit Appointment** | `eppt INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `eppt 3 v/Clementi Town d/2021-03-27 t/18:00`
+**Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
 **Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
@@ -455,4 +455,4 @@ Action | Format, Examples
 **Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
 **Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
-**Update Completed Appointment** | `done INDEX`<br> e.g. `done 5`
+**Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
