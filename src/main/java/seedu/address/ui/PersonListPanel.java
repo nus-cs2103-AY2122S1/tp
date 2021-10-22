@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * Panel containing the list of persons.
@@ -29,11 +30,14 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ScrollPane selectedPersonPanelPlaceholder;
 
+
+
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Person> personList, Summary summary) {
         super(FXML);
+        selected.updateSummary(summary);
         setSelectedPersonPanel();
         selectedPersonPanelPlaceholder.setContent(selected.getRoot());
         updateDetailsIfChanged(personList);

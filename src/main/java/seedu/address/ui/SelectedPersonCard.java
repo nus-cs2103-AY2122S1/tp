@@ -3,14 +3,19 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -30,6 +35,7 @@ public class SelectedPersonCard extends UiPart<Region> {
 
 
     private Person person;
+    private Summary summary;
 
     @FXML
     private HBox cardPane;
@@ -49,6 +55,8 @@ public class SelectedPersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label rating;
+    @FXML
+    private PieChart pieChart;
 
     /**
      * Creates an empty {@code PersonCode}.
@@ -67,14 +75,23 @@ public class SelectedPersonCard extends UiPart<Region> {
         //setPersonDetails();
     }
 
+    /**
+     * Sets the Summary of the AddressBook.
+     */
+    public void updateSummary(Summary summary) {
+        this.summary = summary;
+    }
+
 
     /**
      * Sets the details of Selected Person with the given {@code Person}.
      */
     public void setPersonDetails() {
         if (person == null) {
-            setEmptyPersonDetails();
+//            setEmptyPersonDetails();
+            setSummary();
         } else {
+            setPersonVisible();
             category.setText("Category: " + person.getCategoryCode().getFullCode());
             name.setText(person.getName().fullName);
             phone.setText("Phone: " + person.getPhone().value);
@@ -89,7 +106,6 @@ public class SelectedPersonCard extends UiPart<Region> {
 
             address.setTextAlignment(TextAlignment.JUSTIFY);
             review.setTextAlignment(TextAlignment.JUSTIFY);
-
             logger.info("Person details set " + person);
         }
     }
@@ -107,6 +123,49 @@ public class SelectedPersonCard extends UiPart<Region> {
         tags.getChildren().clear();
         rating.setText("NIL" + "\u2B50");
         logger.info("Empty person set");
+    }
+
+    /**
+     * Sets the Summary of the AddressBook
+     */
+    public void setSummary() {
+        setSummaryVisible();
+        ObservableList<PieChart.Data> pieChartData =
+                FXCollections.observableArrayList(
+                        new PieChart.Data("Grapefruit", 13),
+                        new PieChart.Data("Oranges", 25),
+                        new PieChart.Data("Plums", 10),
+                        new PieChart.Data("Pears", 22),
+                        new PieChart.Data("Apples", 30));
+        category.setText("Category: NIL");
+        pieChart.setData(pieChartData);
+        pieChart.setTitle("Testing");
+
+        logger.info("Summary Set");
+    }
+
+    private void setPersonVisible() {
+        category.setVisible(true);
+        name.setVisible(true);
+        phone.setVisible(true);
+        address.setVisible(true);
+        review.setVisible(true);
+        email.setVisible(true);
+        tags.setVisible(true);
+        rating.setVisible(true);
+        pieChart.setVisible(false);
+    }
+
+    private void setSummaryVisible() {
+        category.setVisible(false);
+        name.setVisible(false);
+        phone.setVisible(false);
+        address.setVisible(false);
+        review.setVisible(false);
+        email.setVisible(false);
+        tags.setVisible(false);
+        rating.setVisible(false);
+        pieChart.setVisible(true);
     }
 
     /**
