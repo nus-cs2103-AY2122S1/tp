@@ -87,9 +87,22 @@ public class PersonCard extends UiPart<Region> {
         }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label l = new Label(tag.tagName);
+                    l.setStyle("-fx-background-color: " + tag.tagColour + ";");
+                    tags.getChildren().add(l);
+                });
     }
 
+    /*        person.getTags().stream()
+                    .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> {
+            if (tag.tagColour.isEmpty()){
+                tags.getChildren().add(new Label(tag.tagName));
+            } else {
+                tags.getChildren().add(new Label(tag.tagName));
+            }
+        });*/
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

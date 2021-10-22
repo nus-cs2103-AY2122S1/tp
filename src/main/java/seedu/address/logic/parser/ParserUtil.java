@@ -1,16 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_COLOUR;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import javafx.scene.paint.Color;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -34,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -177,18 +173,21 @@ public class ParserUtil {
         if (trimmedTag.contains(":")) {
             int colonIndex = trimmedTag.indexOf(":");
             colour = trimmedTag.substring(colonIndex + 1);
-            trimmedTag = trimmedTag.substring(0,colonIndex);
+            trimmedTag = trimmedTag.substring(0, colonIndex);
             if (!Tag.isValidTagColour(colour)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS_COLOURS);
+            }
+            if (!Tag.isValidTagName(trimmedTag)) {
                 throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
             }
-        } else {
-            colour = "";
+            return new Tag(trimmedTag, colour);
         }
-        
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new Tag(trimmedTag, colour);
+        return new Tag(trimmedTag);
+
+
     }
 
     /**
