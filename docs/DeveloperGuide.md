@@ -317,14 +317,20 @@ Represents the watch status of an anime
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                         | So that I can…​                                                     |
-| -------- | ------------------------------------------ | --------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions                  | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new anime                         | keep track of the anime                                                |
-| `* * *`  | user                                       | delete an anime                         | remove anime that I no longer need                                     |
-| `* * *`  | user                                       | list all anime                          | see all anime I have added                                             |
-| `* * *`  | user                                       | update anime episode                    | ensure I am on the right episode of the anime                          |
-| `* * *`  | user                                       | update anime status                     | know if I have watched or am watching the anime                        |
+| Priority | As a …​                                 | I want to …​                             | So that I can…​                                                     |
+| -------- | ------------------------------------------ | ------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | new user                                   | see usage instructions                      | refer to instructions when I forget how to use the App                 |
+| `* * *`  | user                                       | add a new anime                             | keep track of the anime                                                |
+| `* * *`  | user                                       | delete an anime                             | remove anime that I no longer need                                     |
+| `* * *`  | user                                       | list all anime                              | see all animes I have added                                            |
+| `* *`  | user                                         | update anime episode                        | ensure I am on the right episode of the anime                          |
+| `* *`  | user                                         | update anime status                         | know if I have watched or am watching the anime                        |
+| `* *`  | user                                         | change anime name                           | rename the anime if I made a mistake                                   |
+| `* *`  | user                                         | add a genre to an anime                     | keep track of what genre the anime is in                               |
+| `* *`  | user                                         | delete a genre from an anime                | remove unnecessary genres from an anime                                |
+| `* *`  | user                                         | clear my anime list                         | remove multiple animes at once                                         |
+| `* *`  | user                                         | list all anime with a specific watch status | see all animes in each watch status                                    |
+| `* *`  | user                                         | find specific animes                        | see all animes with specific genres or names                           |
 
 
 *{More to be added}*
