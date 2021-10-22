@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -175,7 +175,7 @@ However, one use case we wanted to cater to was students who group their contact
 * **Alternative 2**: Match full words only
     * Pros: Easy to implement as this uses the same logic as finding persons by name
     * Cons: May lead to unexpected behaviour for the above use case
-
+    
 Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
 
 ### \[Proposed\] Undo/redo feature
@@ -248,13 +248,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How undo & redo executes:**
 
 * **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+  * Pros: Easy to implement.
+  * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
+  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
 
@@ -275,9 +275,9 @@ The following diagram shows how `mkdir` works:
 #### Design considerations:
 
 * **Alternative 1 (current choice)**: Folders hold references to contacts
-    * Pros: Easier management of folders
-    * Cons: More difficult to implement
-
+  * Pros: Easier management of folders
+  * Cons: More difficult to implement
+    
 Diagram:
 
 ![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
@@ -285,7 +285,7 @@ Diagram:
 * **Alternative 2**: Contacts hold references to folders
     * Pros: Easy to implement
     * Cons: More complex management of folders, Similar to tags which is already implemented
-
+    
 Diagram:
 
 ![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
@@ -381,38 +381,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: UC01 - Add a new folder**\
 **Actor: User**\
 **Guarantees:**
-* A new folder with the specified name is created as part of the application.
+   * A new folder with the specified name is created as part of the application.
 
 **MSS:**
-1. User keys in folder name after `mkdir` keyword.
-2. UNIon accepts input and a new folder is created.
+   1. User keys in folder name after `mkdir` keyword.
+   2. UNIon accepts input and a new folder is created.
 
-Use case ends.
+   Use case ends.
 
 **Extensions:**
-> 1a. UNIon detects error in the format specified by user.
->> 1a1. No new folder is created\
->> 1a2. User keys folder name `mkdir` keyword.\
->> Steps 1a1-1a2 are repeated until the data entered are correct.
+   > 1a. UNIon detects error in the format specified by user.
+      >> 1a1. No new folder is created\
+      >> 1a2. User keys folder name `mkdir` keyword.\
+      >> Steps 1a1-1a2 are repeated until the data entered are correct.
 
 **System: UNIon**\
 **Use case: UC02 - Add a new contact to UNIon**\
 **Actor: User**\
 **Guarantees:**
-* A new contact with the specified details is stored as a standalone in the application.
+   * A new contact with the specified details is stored as a standalone in the application.
 
 **MSS:**
 
-1. User inputs contact details after `Add` keyword.
-2. UNIon accepts input and adds contact to the pool of contacts.
+   1. User inputs contact details after `Add` keyword.
+   2. UNIon accepts input and adds contact to the pool of contacts.
 
-Use case ends.
+   Use case ends.
 
 **Extensions:**
-> 1a. UNIon detects error in format given by user.
->> 1a1. No new contact was registered by UNIon\
->> 1a2. User inputs details after `Add` keyword.\
->> Steps 1a1-1a2 are repeated until the data format entered are correct.
+   > 1a. UNIon detects error in format given by user.
+      >> 1a1. No new contact was registered by UNIon\
+      >> 1a2. User inputs details after `Add` keyword.\
+      >> Steps 1a1-1a2 are repeated until the data format entered are correct.
 
 **System: UNIon**\
 **Use case: UC03 - Add existing contact to a existing folder**\
@@ -420,23 +420,23 @@ Use case ends.
 **Preconditions:** Folder and contact already exists in UNIon\
 **MSS:**
 
-1. <u> User adds a new folder named A (UC01) </u>
-2. <u> User adds a new contact named Clarence (UC02) </u>
-3. User specifies the contact index to be added to the named folder.
-4. UNIon adds the contact specified into the respective folder.
+   1. <u> User adds a new folder named A (UC01) </u>
+   2. <u> User adds a new contact named Clarence (UC02) </u>
+   3. User specifies the contact index to be added to the named folder.
+   4. UNIon adds the contact specified into the respective folder.
 
-Use case ends.
+   Use case ends.
 
 **Extensions:**
-> 3a. User inputs an invalid index.
->> 3a1. Contact not added to folder.
->> 3a2. User inputs contact index to the named folder.\
->> Steps 3a1-3a2 are repeated until the data format entered are correct.
+   > 3a. User inputs an invalid index.
+      >> 3a1. Contact not added to folder.
+      >> 3a2. User inputs contact index to the named folder.\
+      >> Steps 3a1-3a2 are repeated until the data format entered are correct.
 
-> 3b. User specifies a folder name that does not exist.
->> 3b1. Contact not added to any folder.
->> 3b2. User inputs contact index to named folder.\
->> Steps 3b1-3b2 are repeated until the data format entered are correct.
+   > 3b. User specifies a folder name that does not exist.
+      >> 3b1. Contact not added to any folder.
+      >> 3b2. User inputs contact index to named folder.\
+      >> Steps 3b1-3b2 are repeated until the data format entered are correct.
 
 **System: UNIon**\
 **Use case: UC04 - Delete specified folder**\
@@ -444,16 +444,16 @@ Use case ends.
 **Guarantees:** Folder specified is deleted from UNIon \
 **Preconditions:** Folder must already exist in UNIon
 **MSS:**
-1. User specifies folder name after `rmdir`.
-2. UNIon removes the specified folder from its system.
+   1. User specifies folder name after `rmdir`.
+   2. UNIon removes the specified folder from its system.
 
     Use case ends.
 
 **Extensions**
-> 1a. UNIon detects error of input by user.
->> 1a1. Folder remains in the UNIon.\
->> 1a2. User respecifies the folder to be removed.\
-Steps 1a1 - 1a2 are repeated until data format is correct.
+   > 1a. UNIon detects error of input by user.
+      >> 1a1. Folder remains in the UNIon.\
+      >> 1a2. User respecifies the folder to be removed.\
+      Steps 1a1 - 1a2 are repeated until data format is correct.
 
 **System: UNIon**\
 **Use case: UC05 - Remove all contacts**\
@@ -461,16 +461,16 @@ Steps 1a1 - 1a2 are repeated until data format is correct.
 **Guarantees:** All contacts are deleted from UNIon
 
 **MSS:**
-1. User inputs command to remove all contacts
-2. UNIon clears all the contacts it has stoerd till thus far.
+   1. User inputs command to remove all contacts
+   2. UNIon clears all the contacts it has stoerd till thus far.
 
-Use case ends.
+   Use case ends.
 
 **Extensions**
-> 1a. UNIon detects error of input by user.
->> 1a1. All contacts remain in UNIon.
->> 1a2. User re-inputs command.\
-Steps 1a1 - 1a2 are repeated until data format is correct.
+   > 1a. UNIon detects error of input by user.
+      >> 1a1. All contacts remain in UNIon.
+      >> 1a2. User re-inputs command.\
+      Steps 1a1 - 1a2 are repeated until data format is correct.
 
 ### Non-Functional Requirements
 
@@ -507,15 +507,15 @@ testers are expected to do more *exploratory* testing.
 
 1. Initial launch
 
-    1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder
 
-    1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
-    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
+   1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-    1. Re-launch the app by double-clicking the jar file.<br>
+   1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
@@ -524,16 +524,16 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `delete 1`<br>
-       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-    1. Test case: `delete 0`<br>
-       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
-       Expected: Similar to previous.
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
 
@@ -541,6 +541,6 @@ testers are expected to do more *exploratory* testing.
 
 1. Dealing with missing/corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
