@@ -60,7 +60,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         assert args.length == 2 : "Invalid range input";
 
         Index[] result;
-        Index startIndex, endIndex;
+        Index startIndex;
+        Index endIndex;
         try {
             startIndex = ParserUtil.parseIndex(args[0]);
             endIndex = ParserUtil.parseIndex(args[1]);
