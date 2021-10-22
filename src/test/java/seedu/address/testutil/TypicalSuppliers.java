@@ -37,13 +37,13 @@ public class TypicalSuppliers {
             .withDeliveryDetails("05-05-2021 16:30").build();
     public static final Supplier THANG = new SupplierBuilder().withName("Pham Ba Thang").withPhone("95352563")
             .withEmail("thang@example.com").withAddress("wall street").withSupplyType("Pineapples")
-            .withDeliveryDetails("2021-10-17 6:15 PM").build();
+            .withDeliveryDetails("2021-10-17 18:15").build();
     public static final Supplier CLEMENT = new SupplierBuilder().withName("Kong Fanji").withPhone("87652533")
             .withEmail("Fanji@example.com").withAddress("10th street").withTags("friends")
-            .withSupplyType("Duel Masters").withDeliveryDetails("21-10-2021 11:00 AM").build();
+            .withSupplyType("Duel Masters").withDeliveryDetails("21-10-2021 11:00").build();
     public static final Supplier HERNPING = new SupplierBuilder().withName("Hern Ping").withPhone("9482224")
             .withEmail("hp@example.com").withAddress("michegan ave").withSupplyType("Hernpiblo")
-            .withDeliveryDetails("11:30 AM 22-10-2021").build();
+            .withDeliveryDetails("11:30 22-10-2021").build();
     public static final Supplier FIORA = new SupplierBuilder().withName("Fiora Kunz").withPhone("9482427")
             .withEmail("lydia@example.com").withAddress("little tokyo").withSupplyType("Beef")
             .withDeliveryDetails("10:30 23-10-2021").build();
@@ -54,7 +54,7 @@ public class TypicalSuppliers {
     // Manually added
     public static final Supplier HOON_SUPPLIER = new SupplierBuilder().withName("Hoon Meier").withPhone("8482424")
             .withEmail("stefan@example.com").withAddress("little india").withSupplyType("Mee Hoon Kueh")
-            .withDeliveryDetails("7:30 AM 2021-10-25").build();
+            .withDeliveryDetails("07:30 2021-10-25").build();
     public static final Supplier IDA_SUPPLIER = new SupplierBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").withSupplyType("Pork")
             .withDeliveryDetails("15:00 2021-12-25").build();

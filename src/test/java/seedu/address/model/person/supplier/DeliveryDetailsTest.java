@@ -44,20 +44,20 @@ public class DeliveryDetailsTest {
         assertFalse(DeliveryDetails.isValidDeliveryDetail("12:00 am 2021-12-25"));
         //invalid date
         assertFalse(DeliveryDetails.isValidDeliveryDetail("12:00 AM 2021-13-25"));
+        // invalid 12 hr clock format followed by valid yyyy-MM-dd date format
+        assertFalse(DeliveryDetails.isValidDeliveryDetail("12:00 AM 2021-12-25"));
+        // invalid 12 hr clock format followed by valid dd-MM-yyyy date format
+        assertFalse(DeliveryDetails.isValidDeliveryDetail("1:00 PM 26-12-2021"));
+        // yyyy-MM-dd date format followed by invalid 12 hr clock format
+        assertFalse(DeliveryDetails.isValidDeliveryDetail("2021-12-25 12:00 AM"));
+        // dd-MM-yyyy date format followed by valid 12 hr clock format
+        assertFalse(DeliveryDetails.isValidDeliveryDetail("26-12-2021 1:00 PM"));
 
         // valid delivery details
-        // valid 12 hr clock format followed by valid yyyy-MM-dd date format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("12:00 AM 2021-12-25"));
-        // valid 12 hr clock format followed by valid dd-MM-yyyy date format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("1:00 PM 26-12-2021"));
         // valid 24 hr clock format followed by valid yyyy-MM-dd date format
         assertTrue(DeliveryDetails.isValidDeliveryDetail("08:00 2021-01-15"));
         // valid 24 hr clock format followed by valid dd-MM-yyyy date format
         assertTrue(DeliveryDetails.isValidDeliveryDetail("06:30 14-02-2021"));
-        // valid yyyy-MM-dd date format followed by valid 12 hr clock format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("2021-12-25 12:00 AM"));
-        // valid dd-MM-yyyy date format followed by valid 12 hr clock format
-        assertTrue(DeliveryDetails.isValidDeliveryDetail("26-12-2021 1:00 PM"));
         // valid yyyy-MM-dd date format followed by valid 24 hr clock format
         assertTrue(DeliveryDetails.isValidDeliveryDetail("2021-01-15 08:00"));
         // valid dd-MM-yyyy date format followed by valid 24 hr clock format

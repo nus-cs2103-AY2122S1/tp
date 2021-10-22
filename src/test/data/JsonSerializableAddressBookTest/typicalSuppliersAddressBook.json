@@ -29,7 +29,7 @@
     "address" : "wall street",
     "tagged" : [ ],
     "supplyType": "Pineapples",
-    "deliveryDetails": "2021-10-17 6:15 PM"
+    "deliveryDetails": "2021-10-17 18:15"
   }, {
     "name" : "Kong Fanji",
     "phone" : "87652533",
@@ -37,7 +37,7 @@
     "address" : "10th street",
     "tagged" : [ "friends" ],
     "supplyType": "Duel Masters",
-    "deliveryDetails": "21-10-2021 11:00 AM"
+    "deliveryDetails": "21-10-2021 11:00"
   }, {
     "name" : "Hern Ping",
     "phone" : "9482224",
@@ -45,7 +45,7 @@
     "address" : "michegan ave",
     "tagged" : [ ],
     "supplyType": "Hernpiblo",
-    "deliveryDetails": "11:30 AM 22-10-2021"
+    "deliveryDetails": "11:30 22-10-2021"
   }, {
     "name" : "Fiora Kunz",
     "phone" : "9482427",
