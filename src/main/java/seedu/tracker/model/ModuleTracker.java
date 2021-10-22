@@ -20,9 +20,8 @@ import seedu.tracker.model.module.UniqueModuleList;
 public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
-    private AcademicCalendar currentSemester;
-    private Mc mcGoal;
     private CompletedMcList completedMcList;
+    private final UserInfo userInfo;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,12 +31,9 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
      *   among constructors.
      */
     {
-        AcademicYear defaultAcademicYear = new AcademicYear(1);
-        Semester defaultSemester = new Semester(2);
-        currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
-        completedMcList = new CompletedMcList(currentSemester);
-        mcGoal = new Mc(160);
+        userInfo = new UserInfo();
+        completedMcList = new CompletedMcList(userInfo.getCurrentSemester());
     }
 
     public ModuleTracker() {}
@@ -54,26 +50,27 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         return completedMcList.getCompletedMcList();
     }
 
-    public void updateCompletedMcList() {
-        this.completedMcList.update(this.modules.asUnmodifiableObservableList(), currentSemester);
+    public void updateCompletedMcList(AcademicCalendar academicCalendar) {
+        this.completedMcList.update(this.modules.asUnmodifiableObservableList(), academicCalendar);
     }
 
     //// list overwrite operations
 
     public void setCurrentSemester(AcademicCalendar academicCalendar) {
-        this.currentSemester = academicCalendar;
+        this.userInfo.setCurrentSemester(academicCalendar);
+        updateCompletedMcList(academicCalendar);
     }
 
     public AcademicCalendar getCurrentSemester() {
-        return this.currentSemester;
+        return this.userInfo.getCurrentSemester();
     }
 
     public void setMcGoal(Mc mcGoal) {
-        this.mcGoal = mcGoal;
+        this.userInfo.setMcGoal(mcGoal);
     }
 
     public Mc getMcGoal() {
-        return this.mcGoal;
+        return this.userInfo.getMcGoal();
     }
 
     /**
@@ -90,7 +87,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     public void resetData(ReadOnlyModuleTracker newData) {
         requireNonNull(newData);
         setModules(newData.getModuleList());
-        completedMcList.update(newData.getModuleList(), currentSemester);
+        completedMcList.update(newData.getModuleList(), userInfo.getCurrentSemester());
     }
 
     //// module-level operations
@@ -142,6 +139,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
+
 
     @Override
     public boolean equals(Object other) {

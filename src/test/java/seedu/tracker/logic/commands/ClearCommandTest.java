@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.ModuleTracker;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
@@ -26,8 +28,8 @@ import seedu.tracker.model.module.Title;
 import seedu.tracker.model.tag.Tag;
 
 class ClearCommandTest {
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+    private Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void constructor_nullPredicate_throwsNullPointerException() {
@@ -65,6 +67,12 @@ class ClearCommandTest {
     }
 
     @Test
+    public void execute_nonEmptyModuleTracker_success() {
+        Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+        Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+        expectedModel.setModuleTracker(new ModuleTracker());
+    }
+
     public void execute_allFieldsSpecified_clear() {
         AcademicYear year = new AcademicYear(1);
         Semester semester = new Semester(1);

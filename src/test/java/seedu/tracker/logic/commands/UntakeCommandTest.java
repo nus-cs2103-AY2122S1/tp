@@ -19,6 +19,7 @@ import seedu.tracker.commons.core.Messages;
 import seedu.tracker.commons.core.index.Index;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.module.Code;
 import seedu.tracker.model.module.Description;
@@ -29,14 +30,14 @@ import seedu.tracker.model.tag.Tag;
 
 public class UntakeCommandTest {
 
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Module moduleToUntake = model.getFilteredModuleList().get(INDEX_FOURTH_MODULE.getZeroBased());
         UntakeCommand untakeCommand = new UntakeCommand(INDEX_FOURTH_MODULE);
 
-        ModelManager expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         Module expectedModule = createUnscheduledModule(moduleToUntake);
         expectedModel.setModule(moduleToUntake, expectedModule);
 
@@ -71,7 +72,7 @@ public class UntakeCommandTest {
         Module moduleToUntake = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
         UntakeCommand untakeCommand = new UntakeCommand(INDEX_FIRST_MODULE);
 
-        ModelManager expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getModuleTracker(), new UserPrefs(), new UserInfo());
         Module expectedModule = createUnscheduledModule(moduleToUntake);
         expectedModel.setModule(moduleToUntake, expectedModule);
 
@@ -104,6 +105,7 @@ public class UntakeCommandTest {
 
     /**
      * Creates a {@code Module} without an academicCalendar attribute.
+     *
      * @param module to be unscheduled.
      * @return {@code Module} without the academicCalendar attribute.
      */

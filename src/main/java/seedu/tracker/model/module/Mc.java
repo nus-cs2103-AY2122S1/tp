@@ -3,6 +3,8 @@ package seedu.tracker.model.module;
 import static java.util.Objects.requireNonNull;
 import static seedu.tracker.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Module's MC credits in the module tracker.
  * Guarantees: immutable; is valid as declared in {@link #isValidMc(int)}
@@ -15,14 +17,22 @@ public class Mc {
     public final int value;
 
     /**
+     * Constructs a dummy object only used by JsonUserInfoStorage.
+     * This default constructor shouldn't be used anywhere else.
+     */
+    public Mc() {
+        this.value = 0;
+    }
+
+    /**
      * Constructs a {@code Phone}.
      *
-     * @param mc A valid mc credit.
+     * @param value A valid mc credit.
      */
-    public Mc(int mc) {
-        requireNonNull(mc);
-        checkArgument(isValidMc(mc), MESSAGE_CONSTRAINTS);
-        this.value = mc;
+    public Mc(int value) {
+        requireNonNull(value);
+        checkArgument(isValidMc(value), MESSAGE_CONSTRAINTS);
+        this.value = value;
     }
 
     /**
@@ -42,5 +52,10 @@ public class Mc {
         return other == this // short circuit if same object
                 || (other instanceof seedu.tracker.model.module.Mc // instanceof handles nulls
                 && value == (((seedu.tracker.model.module.Mc) other).value)); // state check
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

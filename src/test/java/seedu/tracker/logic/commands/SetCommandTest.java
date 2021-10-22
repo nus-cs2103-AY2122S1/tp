@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.ModuleTracker;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
@@ -17,7 +18,7 @@ import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.Mc;
 
 public class SetCommandTest {
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void execute_academicYearSpecified_success() {
@@ -29,7 +30,8 @@ public class SetCommandTest {
 
         String expectedMessage = String.format(SetCommand.MESSAGE_SUCCESS_SEM, academicCalendar);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setCurrentSemester(academicCalendar);
 
         assertCommandSuccess(setCommand, model, expectedMessage, expectedModel);
@@ -43,7 +45,8 @@ public class SetCommandTest {
 
         String expectedMessage = String.format(SetCommand.MESSAGE_SUCCESS_MC, mcGoal);
 
-        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()), new UserPrefs());
+        Model expectedModel = new ModelManager(new ModuleTracker(model.getModuleTracker()),
+                new UserPrefs(), new UserInfo());
         expectedModel.setMcGoal(mcGoal);
 
         assertCommandSuccess(setCommand, model, expectedMessage, expectedModel);

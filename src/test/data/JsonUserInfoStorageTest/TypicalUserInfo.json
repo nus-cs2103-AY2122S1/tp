@@ -1,0 +1,15 @@
+{
+  "userInfo": {
+    "currentSemester": {
+      "year": {
+        "value": 1
+      },
+      "semester": {
+        "value": 1
+      }
+    },
+    "mcGoal": {
+      "value": 120
+    }
+  }
+}

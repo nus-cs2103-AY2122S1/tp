@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
@@ -23,8 +24,8 @@ import seedu.tracker.model.calendar.Semester;
 import seedu.tracker.model.module.ModuleInSpecificSemesterPredicate;
 
 class ViewCommandTest {
-    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
+    private Model expectedModel = new ModelManager(getTypicalModuleTracker(), new UserPrefs(), new UserInfo());
 
     @Test
     public void constructor_nullPredicate_throwsNullPointerException() {
