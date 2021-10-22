@@ -202,6 +202,7 @@ public class ModelManager implements Model {
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(target);
+        target.shiftParticipants(editedEvent);
         addressBook.setEvent(target, editedEvent);
     }
 
