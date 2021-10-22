@@ -375,7 +375,7 @@ During the parsing, a new `Student` instance is created. This `Student` instance
 
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
-//TODO: Add sequence diagram for AddMark.
+![AddMarkSequenceDiagram](images/AddMarkSequenceDiagram.png)
 
 Execution of the `AddMarkCommand`
 
@@ -391,6 +391,67 @@ Execution of the `AddMarkCommand`
   * Cons: Instructors are limited to this 26-class limit, and cannot store marks for extra tutorials/make-up sessions.
 
 
+
+### Tutorial Group Management Features
+(Contributed by Ngu Yi Yang and Zhou Yirui)
+
+ClassMATE allows the user to manage information relevant to the TutorialGroup. A User is able to:
+
+1. Add a new tutorial group to an existing tutorial class
+2. Remove an existing tutorial group from an existing tutorial class
+3. List all tutorial groups. (Coming Soon)
+4. View a tutorial group's details (Coming Soon)
+5. Add a student to an existing tutorial group (Coming Soon)
+6. Remove a student from tutorial group (Coming Soon)
+
+#### Current Implementation
+
+The class `Classmate` facilitates all operations related to tutorial groups. It maintains a
+`UniqueTutorialGroupList` of containing all tutorial groups, as well as a `FliteredList` of `TutorialGroup` instances reflecting the current state of the
+tutorial group list to be displayed to the user. TutorialGroups are identical only if all its attributes, Group name, Class code and Group type are the same.
+The `Classmate` contains a summary of all the logic of the tutorial group commands which can be split into two parts,
+adding tutorial groups to tutorial classes (e.g. `AddGroupCommand`)  executed on the `UniqueTutorialGroupList`, and adding students to tutorial groups.
+Displaying of groups in the UI has not been implemented yet. 
+
+The following operations are implemented:
+* `Classmate#hasTutorialGroup(TutorialGroup tutorialGroup)` - Checks if tutorial group is in ClassMATE
+* `Classmate#addTutorialGroup(TutorialGroup tutorialGroup)` - Adds tutorial group to ClassMATE
+* `Classmate#removeTutorialGroup(TutorialGroup tutorialGroup)` - Deletes existing tutorial group from ClassMATE
+* `Classmate#getTutorialGroupList()` - Retrieves entire list of tutorial groups.
+
+
+Given below is an example of how the tutorial group features can be used:
+
+Step 1. The user launches the application for the first time. The `UniqueTutorialGroupList` would be derived from the
+initial ClassMATE state.
+
+Step 2. The user executes an `addcg gn/1 c/G06 type/OP1` command. The `addcg` command calls `Model#hasTutorialClass()`,
+and the model component checks if the TutorialClass specified by the class code exists, adding a new tutorial group to Classmate
+and calls `Model#addTutorialGroup()` if it does.
+This modifies and saves the state of ClassMATE.
+
+Step 3. The user executes a `deletecg 1` command. The `deletecg` command calls `Model#deleteTutorialGroup()`, modifying and saving the
+state of ClassMATE by deleting the class stored at the given index in the `UniqueTutorialGroupList`.
+
+Using the example of the `AddGroupCommand`,
+when the user enters the `addcg` command to add a tutorial group, the user input command undergoes the same command parsing as described in [Section 3.3, “Logic component”](#33-logic-component).
+During the parsing, a new TutorialGroup instance is created. This `TutorialGroup` instance will be received by the `AddGroupCommand` when it is created.
+
+The *Sequence Diagram* is similar to that for adding of Tutorial class, as shown under [Tutorial Class Management Features](#tutorial-class-management-features). Additionally,
+it checks whether the specified tutorial class exists before invoking the `model#addTutorialGroup()` method.
+
+
+#### Design Considerations
+
+#### Aspect: Storing Tutorial Groups as lists
+* Alternative 1 (current choice): Use a single list to store all tutorial groups.
+    * Pros: Simpler to implement, without the use of multiple lists to store tutorial groups of different types ("OP1" or "OP2").
+      Storing tutorial groups as arrays in JSON is less complicated.
+    * Cons: Searching or filtering the list of tutorial groups by group types may take a longer time.
+    
+* Alternative 2: Use multiple lists to store groups of different categories (by class or type)
+    * Pros: Faster when performing find functions and groups are better organised.
+    * Cons: Splitting groups based on a category makes it harder to extend to support filtering groups with a different category from what is implemented. Deleting of groups may also become more complicated.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -533,6 +594,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Delete Latest Mark from Student**
+
+**MSS**
+
+1. User lists all students with `liststu`
+
+2. ClassMATE shows a list of students
+
+3. User enters command `deletelm x` where 'x' is the index of student to delete marks of
+
+4. ClassMATE deletes the latest mark stored for that student
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+  * 3a1. ClassMATE shows an error message.
+
+  Use case resumes at step 2.
+
+* 3b. There are no marks stored for the student.
+
+  * 3b1. ClassMATE shows an error message.
+
+  Use case ends.
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -554,6 +647,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Tutorial class**: A CS2101 tutorial class. Each student can only have up to one tutorial class
 * **Student**: An NUS student taking the CS2101(T) module
 * **Group**: A group is a subsection of the class and contains a few students for the purpose of small activities or group project
+* **Group name**: The name of a group in the CS2101 class, which is specified by a number.
+* **Class code**: The name of a typical class in for the CS2101 module. E.g. G06.
+* **Group type**: The type of a group in the CS2101 class, which is either OP1 or OP2.
 
 --------------------------------------------------------------------------------------------------------------------
 
