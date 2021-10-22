@@ -44,7 +44,6 @@ public class PersonBuilder {
         tags = new HashSet<>();
         birthday = new Birthday(DEFAULT_BIRTHDAY);
         pin = new Pin(DEFAULT_PIN);
-
     }
 
     /**
