@@ -206,9 +206,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void markEventAsDone(Event target) {
-        requireNonNull(target);
-        addressBook.markEventAsDone(target);
+    public String markEventAsDone(int index) {
+        Event eventToMarkDone = this.filteredEvents.get(index);
+        eventToMarkDone.markAsDone();
+        return eventToMarkDone.toString();
     }
 
     @Override
