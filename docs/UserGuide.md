@@ -100,7 +100,9 @@ For example,
 ```
 cd Downloads
 ```
+
 4. Run the following command.
+
 ```
 java -jar TutAssistor.jar
 ```
