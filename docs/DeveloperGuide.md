@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-* Table of Contents
+* Table of Contents 
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -158,7 +158,7 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
   should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list and a `Role` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag and one `Role` object per unique role, instead of each `Person` needing their own `Tag` and `Role` objects.<br>
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
@@ -189,104 +189,86 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Mark/unmark feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo
-history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the
-following operations:
+The mark/unmark feature is facillated by `Person`. It uses the following
+operations of `Person`.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+ * `Person#mark()` — Adds the input time period to the person to be marked as absent. 
+ * `Person#unmark()` — Removes the input time period from the person.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()`
-and `Model#redoAddressBook()` respectively.
+These operations make use of `Period#union()` and `Period#complement` and are exposed
+by `MarkCommand#execute()` and `RemoveMarkCommand#execute()`.
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the
-initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Given below is an example usage scenario and how the mark/unmark command
+changes the information stored.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+Step 1. The user launches the application for the first time. The staff all
+the staff information is read from the save file `addressbook.json`.
+The initial information of the staff that we are looking at 
+will look something like this. The `Period` object that we are using can be taken to
+represent 1/1/2001 to 2/1/2001
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command
-calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes
-to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book
-state.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+![state0](images/MarkState0.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`
-, causing another modified address book state to be saved into the `addressBookStateList`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+Step 2. The user executes the command `mark -i 1 d/2001-01-04`. The `mark` command
+calls `ParserUtil#parsePeriod()`, to obtain the period to mark, and `Person#mark()` to mark this period on this person. This method uses
+`Period#union()` to union the period with the set.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
-</div>
+![state1](images/MarkState1.png)
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing
-the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer`
-once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 3. The user executes the command `mark -i 1 d/2001-01-03`. The `mark` command
+calls `ParserUtil#parsePeriod()`, to obtain the period to mark as before. As this period makes the current range, 1/1/2001 to 2/1/2001 and 4/1/2001
+become a single range, `Period#union()` that is called, merges the two `Period`
+objects into one.
 
-![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+![state2](images/MarkState2.png)
 
-</div>
+The following sequence diagram shows how the mark command works.
 
-The following sequence diagram shows how the undo operation works:
 
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+![seq](images/MarkSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+The `unmark` command does the opposite — it calls `Person#mark()`, which replaces the
+`Period` that are contained in the `Person` with the `Period` objects representing
+the initial `Period` without the input `Period`.
 
-</div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once
-to the right, pointing to the previously undone state, and restores the address book to that state.
+#### Design considerations
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+**Aspect: How to mark attendance**
 
-</div>
+ * **Alternative 1 (current implementation):** Mark absent.
+   * Pros: Changes less amount of data in the case of high turnout rate.
+   * Cons: Harder to implement features that make use of a staff not being present.
+ * **Alternative 2**: Mark present.
+   * Pros: Easier to implement other features that make use of a staff being present. 
+   * Cons: Changes more data in the case of high turnout rate.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such
-as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`.
-Thus, the `addressBookStateList` remains unchanged.
+**Aspect: How mark and unmark is represented**
 
-![UndoRedoState4](images/UndoRedoState4.png)
+ * **Alternative 1 (current implementation):** Stored in the class for a staff.
+   * Pros: Easy to implement.
+   * Cons: Increased reliance on 
+ * **Alternative 2**: Stored in the class representing a shift. 
+   * Pros: Easier to implement features related to both shifts and attendance.
+   * Cons: More memory intensive.
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not
-pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be
-purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern
-desktop applications follow.
+**Aspect: Representation of a `Period`**
 
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+ * **Alternative 1(current implementation):** Use `LocalDate` to represent a period
+   * Pros: Makes the command easier to enter. 
+   * Cons: Makes shift related features and attendance related features harder to use.
+ * **Alternative 2(possible implementation):** Use `LocalDateTime` to represent a period
+   * Pros: Makes shift related features easier to implement.
+   * Cons: Parser becomes more complicated.
 
 ### Add shift to staff's schedule
 
@@ -355,6 +337,109 @@ Notes:
 * **Alternative 2 (proposed implementation):** Add shift to a group of staffs.
     * Pros: Save time for users.
     * Cons: User need to specify the group of staffs before adding shift to their schedules.
+
+
+--------------------------------------------------------------------------------------------------------------------
+### Find Staff
+
+#### Implementation
+
+`Find` is a command for the app to search for staff by a specific index or name. When the command is called,
+whether it is a search by name or search by index should be indicated with the respective tags `-n` and `-i`.
+
+The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
+
+- `ModelManager#updateFilteredPersonList(Predicate<Person)` — Update the filtered list based on the predicate set.
+- `ModelManager#getUnFilteredPersonList()`— Retrieve the filtered list of staff
+
+Also, `FindCommandParser` was created to achieve this functionality.
+
+![FindCommand](images/findCommand/FindClassDiagram.png)
+
+The way of implementing `find` functionality follows the architecture of the app. Given below is an example usage
+scenarios and the workflow of the `find` command.
+
+Step 1. The user executes command `find -n John`.
+`Ui` component reads the command as a string from user's input. After that, `MainWindow`
+passes the string to `LogicManager` to manipulate the command.
+
+Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command. Since the command starts
+with `find`, a new `FindCommandParser` is created to parse the command further.
+
+Step 3. `FindCommandParser` determines that the search is by name, due to the `-n` tag. Hence, `FindCommand` is created with the information. In this case, the name of staff to search is "John".
+
+Step 4. `FindCommand` creates a NameContainsKeywordsPredicates object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
+for staff whose names match the keywords.
+
+Step 5. Following this, the displayed staff list will display the updated filtered list. 
+
+The activity diagram of this `Find` command is shown below:
+
+![Find Command Sequence Diagram](images/findCommand/findSequenceDiagram.png)
+
+Notes:
+
+1. The process is similar for a search by index, but with `NameContainsKeywordsPredicate` replaced with `StaffHasCorrectIndexPredicate`
+2. A command is considered as a valid `Find` command if it follows these formats:
+
+- `find -n keywords`
+- `find -i index`
+
+3. The keywords are not case-sensitive.
+4. Index search operates on the filtered list, which is the displayed staff list, and not the overall staff list.
+
+
+--------------------------------------------------------------------------------------------------------------------
+### ViewShift
+
+#### Implementation
+
+`viewShift` is a command for the app to search for the staff working at a specific day and shift. The search is either conducted
+by a specific time or by the slot number. When the command is used, whether it is a search by slot number or search by time
+should be indicated with the respective tags `-d` and `-t`.
+
+The Find functionality is facilitated by  `ModelManager`. It uses the following operation of `ModelManager`.
+
+- `ModelManager#updateFilteredPersonList(Predicate<Person)` — Update the filtered list based on the predicate set.
+- `ModelManager#getUnFilteredPersonList()`— Retrieve the filtered list of staff
+-
+Also, `FindCommandParser` was created to achieve this functionality.
+
+![ViewShiftCommand](images/viewShiftCommand/ViewShiftClassDiagram.png)
+
+The way of implementing `viewShift` follows the architecture of the app. Given below is an example usage scenarios and the 
+workflow of the `find` command.
+
+Step 1. The user executes command `viewShift -t monday-17:00`.
+`Ui` component reads the command as a string from user's input. After that, `MainWindow`
+passes the string to `LogicManager` to manipulate the command.
+
+Step 2. `LogicManager` passes the command to `AddressBookParser` to parse the command. Since the command starts
+with `viewShift`, a new `viewShiftCommand` object is created to parse the command further.
+
+Step 3. `ViewShiftCommandParser` determines that the search is by time, due to the `-t` tag. 
+Hence, `viewShift` is created with the information. In this case, the day of the week is `MONDAY` and the time is `17:00`.
+
+Step 4. `viewShiftCommand` creates a PersonIsWorkingPredicate object which is then used as a parameter in `ModelManager#updateFilteredPersonList` to filter the list
+for staff who are working at that particular timing.
+
+Step 5. Following this, the displayed staff list will display the updated filtered list, and the names of those working will
+also be outputted on the left of the GUI.
+
+The activity diagram of this `Find` command is shown below:
+
+![ViewShift Command Sequence Diagram](images/viewShiftCommand/viewShiftSequenceDiagram.png)
+
+Notes:
+
+1. The process is similar for a search by slot number.
+2. A command is considered as a valid `viewShift` command if it follows these formats:
+- `viewShift -d dayofweek-slotnumber`
+- `viewShift -t dayofweek-time`
+
+3. Note that the `dayofweek` is not case-sensitive, and that time must be inputted in a `HH:mm` format.
+4. The viewShift Command operates on the overall staff list and not just the displayed list.
+5. Inputting `viewShift` alone also outputs the staff currently working.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -512,8 +597,8 @@ Project scope:
 * **Time Period**: A time period in the staff's schedule.
 * **Status**: The working status of the staff. i.e. A part-timer or a full-timer.
 * **Schedule**: The staffs work schedule with a description of the work carried out.
-* **id**: The identification number assigned to the staff by the management.
-* **Role**: The role of the staff. i.e. Cook, Staff management
+* **Role**: The role(s) of the staff. i.e. Bartender.
+* **Salary**: The salary of the staff per hour.
 * **Address**: The address of the staff.
 * **Constraints**: The constraints the project is working with.
 * **MSS**: Main success scenario
