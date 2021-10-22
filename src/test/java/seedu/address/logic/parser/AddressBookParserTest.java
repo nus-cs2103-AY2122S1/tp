@@ -14,7 +14,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -95,9 +94,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        List<String> keywords = Arrays.asList("foo");
         FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + PREFIX_NAME + "foo");
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 

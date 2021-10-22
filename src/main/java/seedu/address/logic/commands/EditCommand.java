@@ -89,7 +89,7 @@ public class EditCommand extends Command {
         assert itemToEdit != null;
 
         Name updatedName = itemDescriptor.getName().orElse(itemToEdit.getName());
-        String updatedId = itemDescriptor.getId().orElse(itemToEdit.getId());
+        Integer updatedId = itemDescriptor.getId().orElse(itemToEdit.getId());
         Integer updatedCount = itemDescriptor.getCount().orElse(itemToEdit.getCount());
         Double updatedCostPrice = itemDescriptor.getCostPrice().orElse(itemToEdit.getCostPrice());
         Double updatedSalesPrice = itemDescriptor.getSalesPrice().orElse(itemToEdit.getSalesPrice());

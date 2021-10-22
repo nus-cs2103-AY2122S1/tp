@@ -19,7 +19,7 @@ public class IdContainsNumberPredicate implements Predicate<Item> {
     @Override
     public boolean test(Item item) {
         return keynumbers.stream()
-                .anyMatch(keynumbers -> StringUtil.containsWordIgnoreCase(item.getId(), keynumbers));
+                .anyMatch(keynumbers -> StringUtil.containsWordIgnoreCase(item.getId().toString(), keynumbers));
     }
 
     @Override

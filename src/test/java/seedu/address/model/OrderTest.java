@@ -6,7 +6,6 @@ import static seedu.address.testutil.TypicalItems.APPLE_PIE;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +76,7 @@ class OrderTest {
 
         Item applePieWithOnlyName = new ItemBuilder()
                 .withName("Apple Pie")
-                .withId(UUID.randomUUID().toString())
+                .withId("416386")
                 .withCount("5")
                 .withTags("baked").build();
 

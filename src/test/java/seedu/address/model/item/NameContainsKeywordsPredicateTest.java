@@ -64,7 +64,7 @@ public class NameContainsKeywordsPredicateTest {
         assertFalse(predicate.test(new ItemBuilder().withName("Apple Pie Banana Muffin").build()));
 
         // Keywords match id and tag, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("#12345", "baked"));
-        assertFalse(predicate.test(new ItemBuilder().withName("Apple Pie").withId("#12345").withTags("baked").build()));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("123475", "baked"));
+        assertFalse(predicate.test(new ItemBuilder().withName("Apple Pie").withId("123475").withTags("baked").build()));
     }
 }

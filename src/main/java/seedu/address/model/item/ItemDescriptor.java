@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
 public class ItemDescriptor {
 
     private Name name;
-    private String id;
+    private Integer id;
     private Set<Tag> tags;
     private Integer count;
     private Double costPrice;
@@ -52,11 +52,11 @@ public class ItemDescriptor {
         return Optional.ofNullable(name);
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public Optional<String> getId() {
+    public Optional<Integer> getId() {
         return Optional.ofNullable(id);
     }
 

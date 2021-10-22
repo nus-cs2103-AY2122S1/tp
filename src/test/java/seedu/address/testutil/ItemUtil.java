@@ -55,7 +55,7 @@ public class ItemUtil {
     public static String getItemDetails(Item item) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + item.getName().fullName + " ");
-        sb.append(PREFIX_ID + item.getId() + " ");
+        sb.append(PREFIX_ID + Integer.toString(item.getId()) + " ");
         sb.append(PREFIX_COUNT + Integer.toString(item.getCount()) + " ");
         item.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

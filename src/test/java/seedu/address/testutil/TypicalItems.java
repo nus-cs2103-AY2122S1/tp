@@ -15,7 +15,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_POPULAR;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.Inventory;
@@ -116,8 +115,10 @@ public class TypicalItems {
     public static Item getRandomItem() {
         return new ItemBuilder()
                 .withName(StringUtil.generateRandomString())
-                .withId(UUID.randomUUID().toString())
+                .withId("157325")
                 .withCount("999")
+                .withSalesPrice("2.0")
+                .withCostPrice("1.0")
                 .build();
     }
 }

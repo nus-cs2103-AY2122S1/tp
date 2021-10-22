@@ -22,7 +22,7 @@ class JsonAdaptedItem {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Item's %s field is missing!";
 
     private final String name;
-    private final String id;
+    private final Integer id;
     private final Integer count;
     private final Double salesPrice;
     private final Double costPrice;
@@ -33,13 +33,13 @@ class JsonAdaptedItem {
      */
     @JsonCreator
     public JsonAdaptedItem(@JsonProperty("name") String name,
-                           @JsonProperty("phone") String id,
+                           @JsonProperty("id") String id,
                            @JsonProperty("count") String count,
                            @JsonProperty("costPrice") String costPrice,
                            @JsonProperty("salesPrice") String salesPrice,
                            @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
-        this.id = id;
+        this.id = Integer.parseInt(id);
         this.count = Integer.parseInt(count);
         this.costPrice = Double.parseDouble(costPrice);
         this.salesPrice = Double.parseDouble(salesPrice);

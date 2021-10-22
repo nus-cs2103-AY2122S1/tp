@@ -24,7 +24,7 @@ public class AddToOrderCommandTest {
     @Test
     public void execute_modelHasNoUnclosedOrder_giveNoUnclosedOrderMessage() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
-        Item tobeAdded = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item tobeAdded = new Item(new Name("milk"), 120123, 10, new HashSet<>(), 1.1, 2.2);
         AddToOrderCommand command = new AddToOrderCommand(tobeAdded);
         CommandResult expectedResult = new CommandResult("Please use `sorder` to enter ordering mode first.");
 
@@ -34,7 +34,7 @@ public class AddToOrderCommandTest {
     @Test
     public void execute_modelHasOrder_itemAddedToOrder() throws CommandException {
         ModelStubWithOrder modelStub = new ModelStubWithOrder();
-        Item tobeAdded = new Item(new Name("milk"), "A0123", 10, new HashSet<>(), 1.1, 2.2);
+        Item tobeAdded = new Item(new Name("milk"), 120122, 10, new HashSet<>(), 1.1, 2.2);
         Order expectedOrder = new Order();
         modelStub.setOrder(new Order());
 

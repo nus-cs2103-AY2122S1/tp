@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.ItemDescriptor;
@@ -16,12 +19,15 @@ import seedu.address.model.item.ItemDescriptor;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    private static Logger logger = Logger.getLogger("AddCommandParser");
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
+        logger.log(Level.INFO, "going to start parsing");
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_COUNT, PREFIX_TAG,
                         PREFIX_COSTPRICE, PREFIX_SALESPRICE);

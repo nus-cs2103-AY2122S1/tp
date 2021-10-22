@@ -35,15 +35,15 @@ public class RemoveFromOrderCommandParser implements Parser<RemoveFromOrderComma
         }
 
         Name name;
-        String id;
+        Integer id;
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             // Use name as long as name is given.
             name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            id = UUID.randomUUID().toString();
+            id = Integer.parseInt(UUID.randomUUID().toString());
         } else {
             // Use ID if only ID is given.
             name = new Name(StringUtil.generateRandomString());
-            id = argMultimap.getValue(PREFIX_ID).get();
+            id = Integer.parseInt(argMultimap.getValue(PREFIX_ID).get());
         }
 
         Integer count = DUMMY_COUNT;
