@@ -15,7 +15,7 @@
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
         </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" prefHeight="195.0" prefWidth="150.0" GridPane.columnIndex="0">
+        <VBox alignment="CENTER_LEFT" prefWidth="150.0" GridPane.columnIndex="0">
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
@@ -31,17 +31,17 @@
             <FlowPane fx:id="tags" />
             <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-         <VBox fx:id="vBox" prefHeight="105.0" prefWidth="130.0" HBox.hgrow="ALWAYS">
-            <children>
-               <Label fx:id="note" alignment="TOP_LEFT" maxWidth="Infinity" prefHeight="90.0" prefWidth="130.0" style="-fx-background-color: #808080; -fx-background-radius: 5 5 0 0;" styleClass="cell_small_label" />
-                  <Label fx:id="noteLastModified" maxWidth="Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="200.0" style="-fx-background-color: #888888; -fx-background-radius: 0 0 5 5;" styleClass="cell_small_label" text="\$noteLastSaved" />
-            </children>
-         </VBox>
+            <VBox fx:id="vBox" prefHeight="75.0" prefWidth="130.0" HBox.hgrow="ALWAYS">
+                <children>
+                    <Label fx:id="note" alignment="TOP_LEFT" maxWidth="Infinity" prefHeight="90.0" prefWidth="130.0" style="-fx-background-color: #808080; -fx-background-radius: 5 5 0 0;" styleClass="cell_small_label" />
+                    <Label fx:id="noteLastModified" maxWidth="Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="200.0" style="-fx-background-color: #888888; -fx-background-radius: 0 0 5 5;" styleClass="cell_small_label" text="\$noteLastSaved" />
+                </children>
+            </VBox>
             <Label fx:id="groups" styleClass="cell_small_label" text="\$groups" />
             <Label fx:id="subGroups" styleClass="cell_small_label" text="\$subGroups" />
         </VBox>
-      <rowConstraints>
-         <RowConstraints />
-      </rowConstraints>
+        <rowConstraints>
+            <RowConstraints />
+        </rowConstraints>
     </GridPane>
 </HBox>

@@ -25,6 +25,7 @@ import seedu.notor.model.Notor;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.ReadOnlyUserPrefs;
 import seedu.notor.model.group.Group;
+import seedu.notor.model.group.SubGroup;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
@@ -125,7 +126,6 @@ public class PersonCreateCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public Person findPerson(String name) {
             return null;
@@ -167,6 +167,11 @@ public class PersonCreateCommandTest {
         }
 
         @Override
+        public void clearNotorNote() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
@@ -199,6 +204,36 @@ public class PersonCreateCommandTest {
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
 
+        }
+
+        @Override
+        public ObservableList<SubGroup> getFilteredSubGroupList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredSubGroupList(Predicate<SubGroup> predicate) {
+
+        }
+
+        @Override
+        public void deleteSubGroup(SubGroup subGroup) {
+
+        }
+
+        @Override
+        public boolean isPersonView() {
+            return false;
+        }
+
+        @Override
+        public boolean isGroupView() {
+            return false;
+        }
+
+        @Override
+        public boolean isSubGroupView() {
+            return false;
         }
     }
 

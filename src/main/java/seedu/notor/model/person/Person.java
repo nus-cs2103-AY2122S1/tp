@@ -1,12 +1,13 @@
 package seedu.notor.model.person;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.notor.model.Notable;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
 import seedu.notor.model.exceptions.DuplicateItemException;
@@ -21,7 +22,7 @@ import seedu.notor.model.util.Unique;
  * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person implements Unique<Person> {
+public class Person implements Unique<Person>, Notable {
 
     // Identity fields
     private final Name name;
@@ -31,14 +32,14 @@ public class Person implements Unique<Person> {
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
     private Note note = Note.EMPTY_NOTE;
-    private HashSet<String> displaySuperGroups = new HashSet<>();
-    private HashSet<String> displaySubGroups = new HashSet<>();
+    private HashSet<String> superGroups = new HashSet<>();
+    private HashSet<String> subGroups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Set<Tag> tags) {
-        requireNonNull(name);
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -49,7 +50,7 @@ public class Person implements Unique<Person> {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags) {
-        requireNonNull(name);
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,15 +62,15 @@ public class Person implements Unique<Person> {
      * Creates a person with groups and subgroups.
      */
     public Person(Name name, Phone phone, Email email, Note note, Set<Tag> tags,
-            HashSet<String> displaySuperGroups, HashSet<String> displaySubGroups) {
-        requireNonNull(name);
+                  HashSet<String> superGroups, HashSet<String> subGroups) {
+        requireAllNonNull(name, phone, email, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.note = note;
         this.tags.addAll(tags);
-        this.displaySuperGroups = displaySuperGroups;
-        this.displaySubGroups = displaySubGroups;
+        this.superGroups = superGroups;
+        this.subGroups = subGroups;
     }
 
     public Name getName() {
@@ -84,6 +85,7 @@ public class Person implements Unique<Person> {
         return email;
     }
 
+    @Override
     public Note getNote() {
         return note;
     }
@@ -114,10 +116,10 @@ public class Person implements Unique<Person> {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSuperGroup(SuperGroup superGroup) throws DuplicateItemException {
-        if (displaySuperGroups.contains(superGroup.toString())) {
+        if (superGroups.contains(superGroup.toString())) {
             throw new DuplicateItemException();
         }
-        displaySuperGroups.add(superGroup.toString());
+        superGroups.add(superGroup.toString());
     }
 
     /**
@@ -127,10 +129,10 @@ public class Person implements Unique<Person> {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSuperGroup(String superGroup) throws DuplicateItemException {
-        if (displaySuperGroups.contains(superGroup)) {
+        if (superGroups.contains(superGroup)) {
             throw new DuplicateItemException();
         }
-        displaySuperGroups.add(superGroup);
+        superGroups.add(superGroup);
     }
 
     /**
@@ -140,10 +142,10 @@ public class Person implements Unique<Person> {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSubGroup(SubGroup subGroup) {
-        if (displaySubGroups.contains(subGroup.toString())) {
+        if (subGroups.contains(subGroup.toString())) {
             throw new DuplicateItemException();
         }
-        displaySubGroups.add(subGroup.toString());
+        subGroups.add(subGroup.toString());
     }
 
     /**
@@ -153,11 +155,11 @@ public class Person implements Unique<Person> {
      * @throws ItemNotFoundException if person is not in in the group.
      */
     public void removeSuperGroup(String superGroup) throws ItemNotFoundException {
-        if (!displaySuperGroups.contains(superGroup)) {
+        if (!superGroups.contains(superGroup)) {
             throw new ItemNotFoundException();
         }
-        displaySubGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
-        displaySuperGroups.remove(superGroup);
+        subGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
+        superGroups.remove(superGroup);
     }
 
     /**
@@ -166,19 +168,19 @@ public class Person implements Unique<Person> {
      * @param subGroup the subgroup to be removed.
      * @throws ItemNotFoundException if SubGroup is not found.
      */
-    public void removeSuperGroup(SubGroup subGroup) throws ItemNotFoundException {
-        if (!displaySubGroups.contains(subGroup.toString())) {
+    public void removeSubGroup(SubGroup subGroup) throws ItemNotFoundException {
+        if (!subGroups.contains(subGroup.toString())) {
             throw new ItemNotFoundException();
         }
-        displaySubGroups.remove(subGroup.toString());
+        subGroups.remove(subGroup.toString());
     }
 
     public HashSet<String> getSuperGroups() {
-        return displaySuperGroups;
+        return superGroups;
     }
 
     public HashSet<String> getDisplaySubGroups() {
-        return displaySubGroups;
+        return subGroups;
     }
 
 
@@ -237,19 +239,11 @@ public class Person implements Unique<Person> {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail());
-
-        String noteSavedDate = note.getSavedDate();
-        if (!noteSavedDate.isEmpty()) {
-            builder.append("; Last Edited: ")
-                    .append(getNoteSavedDate());
-        }
         Set<Tag> tags = getTags();
-
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
-
         return builder.toString();
     }
 

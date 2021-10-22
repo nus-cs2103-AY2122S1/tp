@@ -29,6 +29,18 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
     }
 
     /**
+     * Constructor for a SuperGroup instance.
+     *
+     * @param name Name of the SuperGroup to be created.
+     * @param note The note of SuperGroup.
+     */
+    public SuperGroup(Name name, Note note) {
+        super(name, new HashSet<>());
+        subGroups = new UniqueList<>();
+        this.note = note;
+    }
+
+    /**
      * Creates a new SuperGroup where name is the name of the group.
      *
      * @param name Name of the SuperGroup.
@@ -95,8 +107,28 @@ public class SuperGroup extends Group implements Unique<SuperGroup> {
         return null;
     }
 
+    /**
+     * Deletes the SubGroup given the SubGroup.
+     *
+     * @param subGroup the SubGroup to be deleted.
+     */
+    public void deleteSubGroup(SubGroup subGroup) {
+        for (Person person : people.values()) {
+            person.removeSubGroup(subGroup);
+        }
+        subGroups.remove(subGroup);
+    }
+
     public void addPersonToSubGroup(String subGroupName, Person p) {
         findSubGroup(subGroupName).addPerson(p);
+    }
+
+    /**
+     * Returns true if a given string is a valid group name.
+     */
+    public static boolean isValidGroupName(String test) {
+        // TODO: Check if this is the only condition.
+        return !test.matches(".*[:/_].*");
     }
 
     @Override

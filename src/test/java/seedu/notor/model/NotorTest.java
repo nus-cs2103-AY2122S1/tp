@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.group.SuperGroup;
 import seedu.notor.model.person.Person;
 import seedu.notor.testutil.PersonBuilder;
@@ -88,6 +89,11 @@ public class NotorTest {
         @Override
         public ObservableList<SuperGroup> getSuperGroups() {
             return null;
+        }
+
+        @Override
+        public Note getNote() {
+            return Note.EMPTY_NOTE;
         }
     }
 

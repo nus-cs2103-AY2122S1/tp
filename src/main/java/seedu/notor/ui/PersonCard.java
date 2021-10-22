@@ -2,7 +2,6 @@ package seedu.notor.ui;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 
 /**
@@ -61,9 +61,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(Objects.requireNonNullElse(person.getPhone().value, ""));
-        email.setText(Objects.requireNonNullElse(person.getEmail().value, ""));
-        if (!person.getNoteSavedDate().isEmpty()) {
+        phone.setText(person.getPhone().value);
+        email.setText(person.getEmail().value);
+        if (!person.getNote().equals(Note.EMPTY_NOTE)) {
             note.setText(person.getNote().getNoEmptyLineNote());
             noteLastModified.setText(person.getNoteSavedDate());
             noteLastModified.setTextAlignment(TextAlignment.CENTER);

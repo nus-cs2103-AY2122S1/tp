@@ -7,23 +7,34 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.notor.logic.commands.ClearCommand;
+import seedu.notor.logic.commands.ClearNoteCommand;
 import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.ExitCommand;
 import seedu.notor.logic.commands.HelpCommand;
+import seedu.notor.logic.commands.NoteCommand;
+import seedu.notor.logic.commands.group.GroupClearNoteCommand;
 import seedu.notor.logic.commands.group.GroupCommand;
+import seedu.notor.logic.commands.group.GroupNoteCommand;
 import seedu.notor.logic.commands.group.SubGroupCreateCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
+import seedu.notor.logic.commands.person.GroupDeleteCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
+import seedu.notor.logic.commands.person.PersonClearNoteCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
+import seedu.notor.logic.commands.tag.TagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
+import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
+import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
+import seedu.notor.logic.parser.group.GroupNoteCommandParser;
 import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
+import seedu.notor.logic.parser.person.PersonClearNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
@@ -49,7 +60,7 @@ public class NotorParser {
                     + "(?<arguments>(\\s+.*)|(.*))"); // remaining arguments of the command or trailing spaces
     private static final Pattern TARGETED_NAME_COMMAND_FORMAT = Pattern.compile(
             "(?<commandWord>\\w+)\\s+" // command word and any trailing spaces
-                    + "(?<name>[a-zA-Z][a-zA-Z ]+\\s+)" // index or name and any trailing spaces
+                    + "(?<name>[A-Z][a-zA-Z ]+\\s+)" // index or name and any trailing spaces
                     + "/(?<subCommandWord>\\w+)" // subcommand word and any trailing spaces
                     + "(?<arguments>(\\s+.*)|(.*))"); // remaining arguments of the command
 
@@ -68,16 +79,20 @@ public class NotorParser {
 
         if (generalMatcher.matches()) {
             final String commandWord = generalMatcher.group("commandWord");
-            if (HelpCommand.COMMAND_WORDS.contains(commandWord)) {
+            switch (commandWord) {
+            case HelpCommand.COMMAND_WORD:
                 return new HelpCommand();
-            }
-            if (ExitCommand.COMMAND_WORDS.contains(commandWord)) {
+            case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
-            }
-            if (ClearCommand.COMMAND_WORDS.contains(commandWord)) {
+            case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
+            case NoteCommand.COMMAND_WORD:
+                return new NoteCommand();
+            case ClearNoteCommand.COMMAND_WORD:
+                return new ClearNoteCommand();
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedNameMatcher.matches()) {
@@ -85,17 +100,20 @@ public class NotorParser {
             final String name = targetedNameMatcher.group("name").trim();
             final String subCommandWord = targetedNameMatcher.group("subCommandWord").trim();
             final String arguments = targetedNameMatcher.group("arguments");
-            if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (PersonCreateCommand.COMMAND_WORDS.contains(subCommandWord)) {
+            switch (commandWord) {
+            case PersonCommand.COMMAND_WORD:
+                if (subCommandWord.equals(PersonCreateCommand.COMMAND_WORD)) {
                     return new PersonCreateCommandParser(name, arguments).parse();
                 }
-            }
-            if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (SuperGroupCreateCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            case GroupCommand.COMMAND_WORD:
+                if (subCommandWord.equals(SuperGroupCreateCommand.COMMAND_WORD)) {
                     return new SuperGroupCreateCommandParser(name, arguments).parse();
                 }
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedIndexMatcher.matches()) {
@@ -103,29 +121,42 @@ public class NotorParser {
             final String index = targetedIndexMatcher.group("index").trim();
             final String subCommandWord = targetedIndexMatcher.group("subCommandWord").trim();
             final String arguments = targetedIndexMatcher.group("arguments");
-            if (PersonCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (subCommandWord.equals(PersonDeleteCommand.COMMAND_WORD)) {
+            switch (commandWord) {
+            case PersonCommand.COMMAND_WORD:
+                switch (subCommandWord) {
+                case PersonDeleteCommand.COMMAND_WORD:
                     return new PersonDeleteCommandParser(index).parse();
-                }
-                if (PersonEditCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                case PersonEditCommand.COMMAND_WORD:
                     return new PersonEditCommandParser(index, arguments).parse();
-                }
-                if (PersonNoteCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                case PersonNoteCommand.COMMAND_WORD:
                     return new PersonNoteCommandParser(index).parse();
-                }
-                if (PersonAddGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                case PersonClearNoteCommand.COMMAND_WORD:
+                    return new PersonClearNoteCommandParser(index).parse();
+                case PersonAddGroupCommand.COMMAND_WORD:
                     return new PersonAddGroupCommandParser(index, arguments).parse();
-                }
-                if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                case PersonRemoveGroupCommand.COMMAND_WORD:
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
-            }
-            if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
-                if (subCommandWord.equals(SubGroupCreateCommand.COMMAND_WORD)) {
+            case GroupCommand.COMMAND_WORD:
+                switch (subCommandWord) {
+                case SubGroupCreateCommand.COMMAND_WORD:
                     return new SubGroupCreateCommandParser(index, arguments).parse();
+                case GroupDeleteCommand.COMMAND_WORD:
+                    return new GroupDeleteCommandParser(index).parse();
+                case GroupNoteCommand.COMMAND_WORD:
+                    return new GroupNoteCommandParser(index).parse();
+                case GroupClearNoteCommand.COMMAND_WORD:
+                    return new GroupClearNoteCommandParser(index).parse();
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
+            case TagCommand.COMMAND_WORD:
+                // TODO: Implement tag command.
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
 
         if (targetedMatcher.matches()) {
