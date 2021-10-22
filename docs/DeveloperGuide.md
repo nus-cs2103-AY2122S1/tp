@@ -211,7 +211,7 @@ by entering a command:
 
 2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be
    extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into
-   `AddCommandParser#parse`.
+   `AddCommandParser#parse()`.
 
 3. `AddCommandParser#parse` extracts the command flag `-p` at the start of its argument, which denotes the addition
    of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse`.
