@@ -15,6 +15,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 
+/**
+ * Parses input arguments and creates a new ImportCommand object
+ */
 public class ImportCommandParser implements Parser<ImportCommand> {
 
     public static final String MESSAGE_FILE_NOT_FOUND = "No CSV file called %s found.";

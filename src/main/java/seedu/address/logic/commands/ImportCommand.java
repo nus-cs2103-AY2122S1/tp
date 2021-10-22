@@ -8,6 +8,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Imports a list of Persons from a given CSV file.
+ */
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
@@ -19,6 +22,11 @@ public class ImportCommand extends Command {
 
     private final ArrayList<Person> personList;
 
+    /**
+     * Creates an ImportCommand object to add the given list of Persons.
+     *
+     * @param personList the given list of Persons
+     */
     public ImportCommand(ArrayList<Person> personList) {
         this.personList = personList;
     }
@@ -29,6 +37,7 @@ public class ImportCommand extends Command {
         for (Person person: personList) {
             if (model.hasPerson(person)) {
                 Person personToReplace = model.getSamePerson(person);
+                requireNonNull(personToReplace);
                 model.setPerson(personToReplace, person);
             } else {
                 model.addPerson(person);

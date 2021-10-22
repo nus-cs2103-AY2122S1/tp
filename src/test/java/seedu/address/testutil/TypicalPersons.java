@@ -42,6 +42,8 @@ public class TypicalPersons {
             .withPhone("8482424").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withPhone("8482131").build();
+    public static final Person ALICE_DIFFERENT_PHONE = new PersonBuilder().withName("Alice Pauline")
+            .withPhone("94839542").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)

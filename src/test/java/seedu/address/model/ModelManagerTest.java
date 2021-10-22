@@ -2,11 +2,14 @@ package seedu.address.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_DIFFERENT_PHONE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -86,6 +89,17 @@ public class ModelManagerTest {
     public void hasPerson_personInAddressBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
+    }
+
+    @Test
+    public void getSamePerson_personWithSameNameInAddressBook_returnsPersonWithSameName() {
+        modelManager.addPerson(ALICE);
+        assertEquals(modelManager.getSamePerson(ALICE_DIFFERENT_PHONE), ALICE);
+    }
+
+    @Test
+    public void getSamePerson_personWithSameNameNotInAddressBook_returnsNull() {
+        assertNull(modelManager.getSamePerson(BOB));
     }
 
     @Test
