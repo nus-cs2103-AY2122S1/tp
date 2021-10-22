@@ -3,10 +3,10 @@ package seedu.plannermd.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.plannermd.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
@@ -15,7 +15,6 @@ import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.Duration;
 import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.person.Remark;
-
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -59,7 +58,7 @@ public class AddAppointmentCommandParser  {
         AppointmentDate appointmentDate = new AppointmentDate(date);
         addAppointmentDescriptor.setAppointmentDate(appointmentDate);
         Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
-        Session session = new Session(time,duration);
+        Session session = new Session(time, duration);
         addAppointmentDescriptor.setSession(session);
         Index patientIndex;
         Index doctorIndex;

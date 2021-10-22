@@ -1,19 +1,17 @@
 package seedu.plannermd.logic.commands.apptcommand;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.plannermd.logic.parser.CliSyntax.FLAG_ADD;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 
-import seedu.plannermd.commons.core.Messages;
-import seedu.plannermd.commons.core.index.Index;
 
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
-
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.appointment.AppointmentDate;
@@ -22,6 +20,8 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.Remark;
 
+import seedu.plannermd.commons.core.Messages;
+import seedu.plannermd.commons.core.index.Index;
 import java.util.List;
 
 public class AddAppointmentCommand extends AppointmentCommand {
@@ -29,16 +29,17 @@ public class AddAppointmentCommand extends AppointmentCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " " + FLAG_ADD + ": Adds an appointment to PlannerMD "
             + "Parameters: " + PREFIX_PATIENT + "INDEX_OF_PATIENT " + PREFIX_DOCTOR + "INDEX_OF_DOCTOR "
             + PREFIX_START + "DATE_AND_TIME" + "[" + PREFIX_DURATION + "DURATION" + "] "+ "["
-            + PREFIX_REMARK + " REMARK" + "]\n" + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " " + PREFIX_PATIENT + "1 "
+            + PREFIX_REMARK + " REMARK" + "]\n" + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " "
+            + PREFIX_PATIENT + "1 "
             + PREFIX_DOCTOR + "2 " + PREFIX_START + "2/2/2022 12:00 "
             + PREFIX_DURATION + "45 " + PREFIX_REMARK + "Patient wants a blood test";
 
 
     public static final String MESSAGE_SUCCESS = "New appointment added: %1$s";
-    public static final String MESSAGE_CONFLICTING_APPOINTMENT
-            = "This appointment cannot be added due to a clash in timings";
-    public static final String MESSAGE_DUPLICATE_APPOINTMENT
-            = "This appointment already exists in PlannerMD";
+    public static final String MESSAGE_CONFLICTING_APPOINTMENT =
+            "This appointment cannot be added due to a clash in timings";
+    public static final String MESSAGE_DUPLICATE_APPOINTMENT =
+            "This appointment already exists in PlannerMD";
     public static final String MESSAGE_WRONG_DATE_TIME = "Sessions should be of  the format DD/MM/YYYY HH:MM "
             + "and adhere to the following constraints:\n"
             + "1. Must be a valid date (after now)\n"
@@ -57,7 +58,8 @@ public class AddAppointmentCommand extends AppointmentCommand {
     /**
      * Creates an AddAppointmentCommand to add the specified {@code Appointment}.
      */
-    public AddAppointmentCommand(Index patientIndex, Index doctorIndex, AddAppointmentDescriptor addAppointmentDescriptor) {
+    public AddAppointmentCommand(Index patientIndex, Index doctorIndex,
+                                 AddAppointmentDescriptor addAppointmentDescriptor) {
         requireNonNull(patientIndex);
         requireNonNull(doctorIndex);
         requireNonNull(addAppointmentDescriptor);

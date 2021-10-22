@@ -16,7 +16,7 @@ public abstract class AppointmentCommand extends Command {
             COMMAND_WORD + "{FLAG} {ARGUMENTS}: Executes appointment command given by flag tag\n"
             + "Commands: \n"
             + FLAG_ADD +  PREFIX_PATIENT + "INDEX_OF_PATIENT " + PREFIX_DOCTOR + "INDEX_OF_DOCTOR "
-            + PREFIX_START + "DATE_AND_TIME" + "[" + PREFIX_DURATION + "DURATION" + "]"+ "["
+            + PREFIX_START + "DATE_AND_TIME" + "[" + PREFIX_DURATION + "DURATION" + "]" + "["
             + PREFIX_REMARK + " REMARK" + "]\n";
             //EDIT
             //DELETE
