@@ -96,7 +96,7 @@ public class AddressBookParser {
 
         case AddOrderCommand.COMMAND_WORD:
             return new AddOrderCommandParser().parse(arguments);
-            
+
         case TotalOrdersCommand.COMMAND_WORD:
             return new TotalOrdersCommand();
 

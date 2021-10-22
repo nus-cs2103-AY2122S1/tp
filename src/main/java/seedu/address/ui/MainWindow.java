@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private OrderListPanel orderListPanel;
     private ResultDisplay resultDisplay;
+    private final TotalOrdersWindow totalOrdersWindow;
     private final HelpWindow helpWindow;
 
     @FXML
@@ -70,6 +71,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
+        totalOrdersWindow = new TotalOrdersWindow();
         helpWindow = new HelpWindow();
     }
 
@@ -145,6 +147,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the total orders window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleTotalOrders() {
+        if (!totalOrdersWindow.isShowing()) {
+            totalOrdersWindow.show();
+        } else {
+            totalOrdersWindow.focus();
+        }
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -182,6 +196,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowTotalOrders()) {
+                handleTotalOrders();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

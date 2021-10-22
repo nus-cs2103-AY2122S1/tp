@@ -13,7 +13,7 @@ public class CommandResult {
 
     /** Total orders should be shown to the user. */
     private final boolean totalOrders;
-    
+
     /** Help information should be shown to the user. */
     private final boolean showHelp;
 
@@ -45,7 +45,7 @@ public class CommandResult {
     public boolean isShowTotalOrders() {
         return totalOrders;
     }
-    
+
     public boolean isShowHelp() {
         return showHelp;
     }
