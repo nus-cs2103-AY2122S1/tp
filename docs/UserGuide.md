@@ -5,7 +5,7 @@ title: User Guide
 
 <p align = "center"><img src="images/tour_booth.png" width="400"></p>
 
-<h1 align ="center"> WhereTourGo: A Tour Guide’s Best Friend! </h1>
+<h2 align ="center"> WhereTourGo: A Tour Guide’s Best Friend! </h2>
 
 **WhereTourGo (WTG)** is a desktop app for managing your tour contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 
