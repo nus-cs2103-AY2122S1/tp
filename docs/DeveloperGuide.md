@@ -200,6 +200,8 @@ The following sequence diagram shows how the view student operation works:
 
 ![ViewStudentSequenceDiagram](images/ViewStudentSequenceDiagram.png)
 
+A similar execution scenario can be expected for view lesson mechanism.
+
 #### Design considerations:
 
 **Aspect: How view student/lesson executes:**
