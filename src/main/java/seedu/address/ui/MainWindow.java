@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else open the internal help window
+     * Opens the Online User Guide if possible, else opens the internal help window
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
@@ -154,7 +154,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else open the internal help window
+     * Opens the Command Summary if possible, else opens the internal help window
      */
     public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
