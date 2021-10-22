@@ -1,5 +1,10 @@
 package seedu.address.model.lesson;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.util.LessonUtil.formattedValue;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -7,19 +12,14 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Locale;
 import java.util.Objects;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.util.LessonUtil.formattedValue;
-
 /**
  * Represents the Outstanding Fees for the lesson in the address book.
  */
 public class OutstandingFees {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Outstanding Fees should be formatted with a decimal point '.' as a separator between the dollars and cents, "
+            "Outstanding Fees should be formatted with a decimal point '.' "
+                    + "as a separator between the dollars and cents, "
                     + "and adhere to the following constraints:\n"
                     + "1. Outstanding Fees should only contain numbers and at most one decimal point.\n"
                     + "2. Outstanding Fees should not start or end with a decimal point"
@@ -29,7 +29,7 @@ public class OutstandingFees {
     public final String value;
 
     //Date of when outstanding fees were last updated
-    public LastAddedDate lastAdded;
+    private LastAddedDate lastAdded;
 
     /**
      * Constructs a {@code OutstandingFees}.
@@ -112,8 +112,11 @@ public class OutstandingFees {
                 + "1. dd, MM and uuuu are numerical characters.\n"
                 + "2. Must be a valid date for the year.";
 
-        private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         private static final String VALIDATION_REGEX_DATE = "^[0-9]{4}-(0[1-9]|1[0-2])-[0-9]{2}";
+        private static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
+                .appendPattern("uuuu-MM-dd")
+                .toFormatter(Locale.ENGLISH)
+                .withResolverStyle(ResolverStyle.STRICT);
 
         public final String lastAdded;
         private final LocalDate lastAddedDate;

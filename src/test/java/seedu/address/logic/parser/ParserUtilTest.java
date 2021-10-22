@@ -20,7 +20,6 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Fee;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;

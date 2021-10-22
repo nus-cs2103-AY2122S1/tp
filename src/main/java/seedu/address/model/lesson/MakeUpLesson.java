@@ -17,7 +17,8 @@ public class MakeUpLesson extends Lesson {
      * @param rates Cost per hour for the lesson.
      * @param fees Outstanding fees for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates, OutstandingFees fees) {
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject,
+                        Set<Homework> homework, LessonRates rates, OutstandingFees fees) {
         super(date, timeRange, subject, homework, rates, fees);
     }
 

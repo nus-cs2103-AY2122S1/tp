@@ -11,8 +11,8 @@ import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.OutstandingFees.LastAddedDate;
 import seedu.address.model.lesson.RecurringLesson;
-import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.util.SampleDataUtil;
 
 public class LessonBuilder {

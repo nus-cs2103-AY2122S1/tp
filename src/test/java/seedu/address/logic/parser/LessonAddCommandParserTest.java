@@ -87,7 +87,7 @@ public class LessonAddCommandParserTest {
                 + SUBJECT_DESC + OUTSTANDING_FEES_DESC
                 + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
 
-        //multiple outstanding fee - last lesson rate accepted
+        //multiple outstanding fee - last outstanding fees accepted
         String testOutstandingFees = " " + PREFIX_OUTSTANDING_FEES + 99.99;
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
                 + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC

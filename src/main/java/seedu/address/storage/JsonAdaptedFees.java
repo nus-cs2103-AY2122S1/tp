@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.OutstandingFees.LastAddedDate;
@@ -11,7 +12,7 @@ import seedu.address.model.lesson.OutstandingFees.LastAddedDate;
  */
 public class JsonAdaptedFees {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Outstanding fee's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Outstanding Fee's %s field is missing!";
 
     private final String value;
     private final String lastAdded;

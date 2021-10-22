@@ -13,7 +13,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.lesson.*;
+import seedu.address.model.lesson.Date;
+import seedu.address.model.lesson.LessonRates;
+import seedu.address.model.lesson.OutstandingFees;
+import seedu.address.model.lesson.Subject;
+import seedu.address.model.lesson.TimeRange;
 
 class JsonAdaptedLessonTest {
 
@@ -27,7 +31,8 @@ class JsonAdaptedLessonTest {
     private static final String VALID_TIME_RANGE = RECURRING_LESSON.getTimeRange().toString();
     private static final String VALID_LESSON_RATES = RECURRING_LESSON.getLessonRates().toString();
     private static final String VALID_SUBJECT = RECURRING_LESSON.getSubject().toString();
-    private static final JsonAdaptedFees VALID_OUTSTANDING_FEES = new JsonAdaptedFees(RECURRING_LESSON.getOutstandingFees());
+    private static final JsonAdaptedFees VALID_OUTSTANDING_FEES =
+            new JsonAdaptedFees(RECURRING_LESSON.getOutstandingFees());
     private static final List<JsonAdaptedHomework> VALID_HOMEWORK_PIECES = RECURRING_LESSON
         .getHomework()
         .stream()
