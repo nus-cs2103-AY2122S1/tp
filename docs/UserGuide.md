@@ -305,7 +305,7 @@ Examples:
 Marks the appointment [appointment](#adding-an-appointment-appt) with the client as completed. This also allows you to keep 
 track of the number of completed appointments with your client.
 
-![markAppointment](docs/images/UG Screenshots/MarkAppointmentScreenshot.PNG)
+![markAppointment](docs/images/UG-Screenshots/MarkAppointmentScreenshot.PNG)
 
 Format: `ma INDEX`
 * Increment the completed appointment count with the client at the specified `INDEX` if the appointment exist.
