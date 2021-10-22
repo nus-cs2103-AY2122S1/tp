@@ -13,6 +13,7 @@ book that contains the contact information and order details related to clients 
         * [Exit](#exit-exit)
         * [Add](#adding-add)
         * [Delete](#deleting-delete)
+        * [Clear](#clear-everything-clear)
         * [Edit](#editing-edit)
         * [Find](#finding-find)
         * [List](#listing-list)
@@ -35,7 +36,7 @@ book that contains the contact information and order details related to clients 
 1. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
-   contains some sample data.<br>
+   contains some sample data. You can use the [`clear`](#clear-everything-clear) command to purge all data.<br>
    ![Ui](images/Ui.png)
 
 1. Refer to the [Features](#features) below for details of each command.
@@ -125,6 +126,14 @@ Examples:
 
 * `delete -c 1` deletes the client with index 1 in the application.
 * `delete -p 2` deletes the product with index 2 in the application.
+
+### Clear Everything: `clear`
+
+Removes all client and product data from the application.
+
+Format: `clear`
+
+Expected Output: ![Ui](images/UiClearCommand.png)
 
 ### Editing: `edit`
 
