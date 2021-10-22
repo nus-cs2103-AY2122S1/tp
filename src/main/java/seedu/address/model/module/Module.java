@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskId;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -156,21 +155,6 @@ public class Module {
      */
     public void studentAddTask(Student student, Task task) {
         student.addTask(task);
-    }
-
-    /**
-     * Edits the given student's old task (specified by oldTaskID) using a new task object.
-     * @param student The student whose task will be modified.
-     * @param oldTaskId The TaskId of the task to be modified.
-     * @param newTask The new Task which will replace the old Task in the student's task list.
-     */
-    public void studentEditTask(Student student, TaskId oldTaskId, Task newTask) {
-        UniqueTaskList studentTaskList = student.getTaskList();
-        for (Task task : studentTaskList) {
-            if (task.getTaskId().equals(oldTaskId)) {
-                studentTaskList.setTask(task, newTask);
-            }
-        }
     }
 
     /**
