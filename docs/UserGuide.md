@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-![WTG logo]<img src="../src/main/resources/images/tour_booth.png" width="500">
+<img src="../src/main/resources/images/tour_booth.png" width="500">
 
 # WhereTourGo: A Tour Guide’s Best Friend!
 
