@@ -3,7 +3,27 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-{:toc}
+    - [Acknowledgements](#acknowledgements)
+    - [Setting up, getting started](#setting-up-getting-started)
+    - [Design](#design)
+        - [Architecture](#architecture)
+        - [UI Component](#ui-component)
+        - [Logic Component](#logic-component)
+        - [Model Component](#model-component)
+        - [Storage Component](#storage-component)
+        - [Common classes](#common-classes)
+    - [Implementation](#implementation)
+    - [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    - [Appendix: Requirements](#appendix-requirements)
+        - [Product scope](#product-scope)
+        - [User stories](#user-stories)
+        - [Use cases](#use-cases)
+        - [Non-functional Requirements](#non-functional-requirements)
+        - [Glossary](#glossary)
+    - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+        - [Launch and shutdown](#launch-and-shutdown)
+        - [Deleting a person](#deleting-a-client)
+        - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -311,7 +331,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `SalesNote` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a client**
+#### Use case: Add a client
 
 **MSS**
 
@@ -329,7 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: Delete a client**
+#### Use case: Delete a client
 
 **MSS**
 
@@ -351,9 +371,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SalesNote shows an error message.
 
       Use case resumes at step 2.
-
-
-**Use case: Add a task**
+    
+#### Use case: Add a task
 
 **MSS**
 
@@ -371,7 +390,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: Delete a task**
+#### Use case: Delete a task
 
 **MSS**
 
@@ -393,6 +412,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. SalesNote shows an error message.
 
       Use case resumes at step 2.
+
+#### Use case: Add an order
+
+**MSS**
+
+1. User requests to add a specific order to the list
+2. SalesNote adds the order
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. The format of the request is invalid.
+
+    * 1a1. SalesNote shows an error message.
+
+      Use case ends.
+
+#### Use case: Delete an order
+
+**MSS**
+
+1.  User requests to list orders
+2.  SalesNote shows a list of orders
+3.  User requests to delete a specific order in the list
+4.  SalesNote deletes the order
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. SalesNote shows an error message.
+
+      Use case resumes at step 2.
+
 
 *{More to be added}*
 
