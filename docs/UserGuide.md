@@ -102,12 +102,12 @@ Notes:
 Examples:
 
 * `add -c Ben -pn 98765432` adds a new `client` `Ben`, whose `phone number` is `98765432`.
-* `add -p pen -$ 10.0 -q 150` adds a new `product` `pen` with a `unit price` of `$10.0` and there are `150`
-  pens in stock.
+* `add -p pen -$ 10.00 -q 150` adds a new `product` `pen` with a `unit price` of `$10.00` and there are `150` pens in
+  stock.
 
 ### Deleting: `delete`
 
-Deletes the specified client/product from the tracker.
+Deletes the specified client/product from the application.
 
 Format:
 
@@ -116,14 +116,15 @@ Format:
 
 Notes:
 
-* Deletes the client/product based on the client/product’s INDEX.
-* The INDEX refers to the index shown in the displayed client/product list.
-* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
+* Deletes the client/product based on the client/product’s `INDEX`.
+    * The `INDEX` refers to the index shown in the displayed client/product list.
+    * The `INDEX` **must be a positive integer** 1, 2, 3, ...
+* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
 
 Examples:
 
-* `delete -c 1` deletes the client with index 1 in the tracker.
-* `delete -p 2` deletes the product with index 2 in the tracker.
+* `delete -c 1` deletes the client with index 1 in the application.
+* `delete -p 2` deletes the product with index 2 in the application.
 
 ### Editing: `edit`
 
@@ -131,18 +132,27 @@ Edits an existing client or product in the application.
 
 Format:
 
-* Edit a client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS]`
+* Edit a client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 * Edit a product: `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
 
 Notes:
 
 * Edits the client/product at the specified `INDEX`.
-    * The index refers to the index number shown in the displayed client/product list by
-      [`list`](#listing-list) or [`view`](#viewing-view) commands.
-    * The index **must be a positive integer** 1, 2, 3, ...
+    * The `INDEX` refers to the index shown in the displayed client/product list.
+    * The `INDEX` **must be a positive integer** 1, 2, 3, ...
+* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* User will be informed if the client/product of the give `INDEX` does not exist.
+* `ORDER`s are identified by their `ID`s.
+    * If the client has an order with same `ID`, then that order's other information will be updated with the
+      information in `ORDER`.
+    * If the client does not have an order with same `ID`, then that `ORDER` will be added.
+    * If the `ORDER`'s `QUANTITY` is 0, then that `ORDER` will be removed.
+    * For example, assuming client already has an order [ `ID` = 1, `QUANTITY` = 3, (other information)... ], and the
+      input `ORDER`s are [ `ID` = 1, `QUANTITY` = 0, ... ] and [ `ID` = 2, `QUANTITY` = 10, ... ]:
+        * [ `ID` = 1, `QUANTITY` = 3, ... ] will be updated to [ `ID` = 1, `QUANTITY` = 0, ... ] as they have the same
+          `ID`, and since `QUANTITY` is now 0, this `ORDER` will be removed.
+        * [ `ID` = 2, `QUANTITY` = 10, ... ] will be added as the client does not have an order with the same `ID`.
 
 Examples:
 
@@ -198,12 +208,15 @@ Format:
 
 Notes:
 
-* If the product/client doesn't exist, then we inform the user that such a product/client doesn't exist.
+* Views the client/product at the specified `INDEX`.
+    * The `INDEX` refers to the index shown in the displayed client/product list.
+    * The `INDEX` **must be a positive integer** 1, 2, 3, ...
+* If the client/product doesn't exist, then we inform the user that such a client/product doesn't exist.
 
 Examples:
 
-* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email and
-  address.
+* `view -c 20` Views all the details of the client with `INDEX` of `20` including id, name, phone number, email, address
+  and orders.
 * `view -p 5` Views all the details of the product with `INDEX` of `5` including id, name, unit price and quantity.
 
 Expected Output: ![Ui](images/UiViewCommand.png)
