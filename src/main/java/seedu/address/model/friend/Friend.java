@@ -5,10 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
+import seedu.address.model.friend.exceptions.GameLinkNotFoundException;
 import seedu.address.model.game.Game;
+import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 
 /**
  * Represents a Friend in the gitGud friend's list.
@@ -50,6 +54,25 @@ public class Friend {
         this.friendName = friendName == null ? FriendName.DEFAULT_FRIEND_NAME : friendName;
     }
 
+    /**
+     * Updates the skill value for the {@code GameFriendLink} with the given {@code gameId} and linked to
+     * this friend.
+     *
+     * @param gameId     valid gameId which is already linked to this friend.
+     * @param skillValue value to update friend's skill value to.
+     * @throws GameLinkNotFoundException thrown when gameId provided is not linked to this friend.
+     */
+    public void updateGameFriendLinkSkillValue(GameId gameId, SkillValue skillValue) throws GameLinkNotFoundException {
+        Optional<GameFriendLink> linkToUpdate = gameFriendLinks.stream().filter(
+            gfl -> gfl.getGameId().equals(gameId)).findFirst();
+
+        if (linkToUpdate.isEmpty()) {
+            throw new GameLinkNotFoundException();
+        }
+
+        linkToUpdate.get().setSkillValue(skillValue);
+    }
+
     public FriendId getFriendId() {
         return friendId;
     }
@@ -83,6 +106,7 @@ public class Friend {
 
     /**
      * Returns true if both friends have same friendId.
+     *
      * @return boolean result of equals.
      */
     public boolean isSameFriendId(Friend friend) {
@@ -126,6 +150,7 @@ public class Friend {
         if (!gameSet.isEmpty()) {
             builder.append("; Games: ");
             gameSet.forEach(builder::append);
+            builder.append(" ");
         }
         return builder.toString();
     }

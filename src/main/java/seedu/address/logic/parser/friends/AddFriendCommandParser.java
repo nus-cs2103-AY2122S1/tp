@@ -27,7 +27,7 @@ public class AddFriendCommandParser implements Parser<AddFriendCommand> {
         // assign friend name
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, FLAG_ADD, FLAG_FRIEND_NAME);
 
-        if (!ParserUtil.areFlagsPresent(argumentMultimap, FLAG_ADD)) {
+        if (!ParserUtil.areFlagsPresent(argumentMultimap, FLAG_ADD) || argumentMultimap.getValue(FLAG_ADD).isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFriendCommand.MESSAGE_USAGE));
         }
         FriendName friendName = argumentMultimap.getValue(FLAG_FRIEND_NAME).isPresent()

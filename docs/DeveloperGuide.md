@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -23,36 +23,37 @@ Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/docs/diagrams) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The ***Architecture Diagram*** given above explains the high-level design of gitGud.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2122S1-CS2103T-W13-4/tp/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of gitGud consists of four components.
 
-* [**`UI`**](#ui-component): The UI of the App.
+* [**`UI`**](#ui-component): The UI of the gitGud.
 * [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
+* [**`Model`**](#model-component): Holds application data for gitGud in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user 
+issues the command `friend --delete Draco`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
@@ -69,13 +70,15 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+**API** : [`Ui.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-![Structure of the UI Component](images/UiClassDiagram.png)
+**Description** :
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The `UI` component is responsible for managing the user interface of the application so that it responds correctly to any command to user inputs.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
+**Functionality** :
 
 The `UI` component,
 
@@ -83,6 +86,12 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+
+**Component Structure**
+
+![Structure of the UI Component](images/UiClassDiagram.png)
+
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 ### Logic component
 
@@ -135,14 +144,29 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W13-4/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+             
+**Description** :                                                                                    
+
+The `Storage` component is responsible for persisting application data to be stored in json file format and reading stored data
+back into the application. 
+
+**Functionality** :
+
+The storage component saves the following application data in json format and reads them back into corresponding objects:
+* friends list
+* games list
+* user preferences
+
+**Component Structure** : 
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+There are 3 main model objects stored by the Storage component in json format, namely `Friend`, `Game`,
+and `UserPrefs`, each stored in separate json files.
+
+The Storage component inherits from `FriendsListStorage`, `GamesListStorage` and 
+`UserPrefStorage`, which means it can be treated as any one of the three.
 
 ### Common classes
 
@@ -257,12 +281,13 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 * Gamer who plays competitive games
-* Student in a University
+* Computer Science university student
 * Busy (can only play at specific times based on a weekly schedule)
 * Plays multiple online competitive multiplayer games (e.g., Apex legends, Minecraft, Valorant, etc)
-* Has a group of similar persona gamer friends who like him are busy
+* Has a group of similar persona gamer friends who like him are busy with their computer science university degrees
 
-University student gamer who is busy but wants to keep track of equally busy friends who want to play online competitive multiplayer games together.
+Computer Science university student gamer who is busy but wants to keep track of equally busy friends who want to play 
+online competitive multiplayer games together.
 
 
 **Value proposition**:
@@ -272,8 +297,8 @@ often be challenging scheduling times to play games with friends out of a packed
 Additionally, it can be challenging to make the most out of the limited time available by choosing
 the right friends to play with - those you have the most fun playing with or have great performance at the game.
 
-#### How gitGud solves the problem and make users' life easier:
-gitGud allows users to store both yours and your friends' available timeslots and find matching times to play multiplayer
+#### How gitGud solves the problem and make users' lives easier:
+gitGud allows users to store your friends' available timeslots and find matching times to play multiplayer
 competitive games together - allowing users to identify and coordinate gaming sessions with friends.
 It also allows users to keep track of each friend's competitive gaming performance and rate how much fun they had gaming with a friend
 after each gaming session. These factors are used for gitGud to recommend and help users to decide which friends to play with
@@ -286,10 +311,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | Priority | As a (describes user) | I want to (functionality)                                          | So that I can (rationale)                                 |
 |----------|-----------------------|--------------------------------------------------------------------|-----------------------------------------------------------|
 | ***      | user                  | be able to easily add my friends personal info/data (name, userid) | store a list of friends who I can possibly play with      |
-| ***      | user                  | be able to link my friends to the games they play                  | associate my friends with a particular game               |
+| ***      | user                  | be able to link my friends to the games they play                  | associate my friends with a particular game and store their usernames for each game               |
 | ***      | user                  | be able to view a list of my friends information                   | see who my friends are                                    |
 | ***      | user                  | be able to delete a friend from the contact list                   | remove friends that were mistakenly added                 |
 | ***      | user                  | be able to see full information of a friend from the contact list  | get any information I want about the friend               |
+| ***      | user                  | be able to easily add games that I want to play with my friends    | store the games that I plan to play with my friends       |
+| ***      | user                  | be able to view a list of my game information                      | see which of my friends play certain games                |
+| ***      | user                  | be able to delete a game from the contact list                     | remove games that were mistakenly added or due to typos   |
+| ***      | user                  | be able to see full information of a game from the games list      | see information about which friends play the game and their in-game usernames   |
 
 *{More to be added}*
 
@@ -371,7 +400,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`).
+1. User links a friend (using `FRIEND_ID`) with a particular game (using `GAME_NAME`) and the username for that game 
+   (using `USERNAME`).
 2. gitGud associates the friend with the game provided.
 
     Use case ends.
@@ -442,7 +472,8 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample friends. The window size may not be 
+      optimum.
 
 1. Saving window preferences
 
@@ -453,22 +484,163 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Adding a friend
+1. Adding a friend to gitGud
 
-1. Deleting a person while all persons are being shown
+    1. Prerequisites: List all friends using the `friend --list` command. There should not be a friend with 
+       `FRIEND_ID` Draco as well as friend with `FRIEND_ID` MrFeely already stored in gitGud. 
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `friend --add Draco --name Marcus`<br>
+       Expected: Friend with `FRIEND_ID` Draco is added. gitGud states that `FRIEND_ID` is added.
+       
+    3. Test case: `friend --add MrFeely`<br>
+       Expected: Friend with `FRIEND_ID` MrFeely is added. gitGud states that `FRIEND_ID` is added.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+    4. Other incorrect add commands to try: `friend --name Marcus`, `friend --add`, `friend --name`, ...`
+       Expected: No friend is added. Error details shown in the status message. Status bar remains the same.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+2. _{ more test cases …​ }_
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+### Adding a game
+1. Adding a game to gitGud
+
+    1. Prerequisites: List all games using the `game --list` command. There should not be a game with `GAME_NAME` 
+       Valorant already stored in gitGud.
+
+    2. Test case: `game --add Valorant`<br>
+       Expected: Game with `GAME_NAME` Valorant is added. gitGud states that `GAME_NAME` is added.
+
+    3. Test case: `game --add`<br>
+       Expected: No game is added. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
+
+### Linking a friend to a game
+1. Linking a friend to a game in gitGud.
+
+    1. Prerequisites: There exists a friend with `FRIEND_ID` Draco, and there exists a game with `GAME_NAME` Valorant.
+
+    2. Test case: `link --friend Draco --game Valorant --user Draconian`<br>
+       Expected: A link between Draco and Valorant is created and Draco's username for Valorant, Draconian, is 
+       stored in the link.
+
+    3. Test case: `link --game Valorant --name Draco --user Draconian`<br>
+       Expected: No link is added. Error details shown in the status message. Status bar remains the same.
+
+    3. Test case: `link --friend Draco --game Valorant`<br>
+       Expected: No link is added. Error details shown in the status message. Status bar remains the same.
+
+    4. Other incorrect link commands to try: `link --friend Draco --user Draconian`, `link --game Valorant --user 
+       Draconian`, `link --friend`, ...
+       Expected: Similar to previous.
+
+2. _{ more test cases …​ }_
+
+### Deleting a friend
+
+1. Deleting a friend from gitGud
+
+   1. Prerequisites: Only one friend with `FRIEND_ID` Draco exists in gitGud.
+
+   1. Test case: `friend --delete Draco`<br>
+      Expected: Friend with `FRIEND_ID` Draco is deleted. gitGud states that `FRIEND_ID` is deleted.
+
+   1. Test case: `friend --delete MrFeely`<br>
+      Expected: No friend is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `friend --delete`, `...` 
       Expected: Similar to previous.
 
+2. _{ more test cases …​ }_
+
+### Deleting a game
+
+1. Deleting a game from gitGud
+
+    1. Prerequisites: Only one game with `GAME_NAME` Valorant exists.
+
+    1. Test case: `game --delete Valorant`<br>
+       Expected: Game with `GAME_NAME` Valorant is deleted. gitGud states that `GAME_NAME` is deleted.
+
+    1. Test case: `game --delete CSGO`<br>
+       Expected: No game is deleted. Error details shown in the status message. Status bar remains the same.
+
+    1. Other incorrect delete commands to try: `game --delete`, `...`
+       Expected: Similar to previous.
+
 1. _{ more test cases …​ }_
+
+### Filtering friends in friends' list using a keyword
+
+1. Filtering friends' list using a keyword
+
+    1. Prerequisites: There exists more than one friend in gitGud, one of which has the `FRIEND_ID` Draco.
+
+    2. Test case: `friend --list`<br>
+       Expected: All friends are listed.
+
+    3. Test case: `friend --list Draco`<br>
+       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword Draco.
+
+    4. Test case: `friend --list Dra`<br>
+       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `Dra`.
+
+    5. Test case: `friend --list co`<br>
+       Expected: The friend Draco is listed, as his `FRIEND_ID` contains the keyword `co`.
+
+### Filtering friends in games' list using a keyword
+
+1. Filtering games' list using a keyword
+
+    1. Prerequisites: There exists more than one game in gitGud, one of which has the `GAME_NAME` Valorant.
+
+    2. Test case: `game --list`<br>
+       Expected: All games are listed.
+
+    3. Test case: `game --list Valorant`<br>
+       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `Valorant`.
+
+    4. Test case: `game --list Valo`<br>
+       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `Valo`.
+
+    4. Test case: `game --list ant`<br>
+       Expected: The game Valorant is listed, as its `GAME_ID` contains the keyword `ant`.
+
+### Viewing a friend's full data
+
+1. View a friend's full game information, including their in-game usernames
+
+    1. Prerequisites: A friend with `FRIEND_ID` Draco exists in gitGud.
+
+    2. Test case: `friend --get Draco`<br>
+       Expected: The full information about friend with `FRIEND_ID` Draco is listed.
+
+    3. Test case: `friend --get Dra`<br>
+        Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `friend --get co`<br>
+       Expected: No friend is found. Error details shown in the status message. Status bar remains the same.
+
+    5. \Other incorrect delete commands to try: `friend --get`, `...`
+       Expected: Similar to previous.
+   
+2. ### Viewing a game's full data
+
+1. View a game's full information, including the friends which play that game.
+
+    1. Prerequisites: A game with `GAME_NAME` Valorant exists in gitGud.
+
+    2. Test case: `game --get Valorant`<br>
+       Expected: The full information about game with `GAME_NAME` Valorant is listed.
+
+    3. Test case: `game --get Valo`<br>
+       Expected: No game is found. Error details shown in the status message. Status bar remains the same.
+
+    4. Test case: `game --get rant`<br>
+       Expected: No game is found. Error details shown in the status message. Status bar remains the same.
+
+    5. \Other incorrect delete commands to try: `game --get`, `...`
+       Expected: Similar to previous.
 
 ### Saving data
 

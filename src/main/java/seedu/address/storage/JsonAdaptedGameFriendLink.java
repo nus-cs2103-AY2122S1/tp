@@ -4,15 +4,18 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
 
 public class JsonAdaptedGameFriendLink {
     private final String gameId;
     private final String friendId;
     private final String friendGameUserName;
+    private final String skillValue;
 
     /**
      * Constructs a {@code JsonAdaptedGameFriendLink} with the given gameId, friendId and friendGameUserName.
@@ -21,10 +24,12 @@ public class JsonAdaptedGameFriendLink {
     public JsonAdaptedGameFriendLink(
             @JsonProperty("gameId") String gameId,
             @JsonProperty("friendId") String friendId,
-            @JsonProperty("friendGameUserName") String friendGameUserName) {
+            @JsonProperty("friendGameUserName") String friendGameUserName,
+            @JsonProperty("skillValue") String skillValue) {
         this.gameId = gameId;
         this.friendId = friendId;
         this.friendGameUserName = friendGameUserName;
+        this.skillValue = skillValue;
     }
 
     /**
@@ -34,6 +39,12 @@ public class JsonAdaptedGameFriendLink {
         friendId = sourceInstance.getFriendId().value;
         gameId = sourceInstance.getGameId().value;
         friendGameUserName = sourceInstance.getUserName().value;
+        SkillValue skillValueToSave = sourceInstance.getSkillValue();
+        if (skillValueToSave == null) {
+            this.skillValue = null;
+        } else {
+            this.skillValue = skillValueToSave.toString();
+        }
     }
 
     /**
@@ -51,6 +62,14 @@ public class JsonAdaptedGameFriendLink {
         if (!UserName.isValidUserName(friendGameUserName)) {
             throw new IllegalValueException(UserName.MESSAGE_CONSTRAINTS);
         }
-        return new GameFriendLink(new GameId(gameId), new FriendId(friendId), new UserName(friendGameUserName));
+        if (skillValue != null
+                && !SkillValue.validateSkillValueString(skillValue)) {
+            throw new IllegalValueException(SkillValue.MESSAGE_CONSTRAINTS);
+        }
+
+        SkillValue loadedSkillValue = skillValue == null ? null : ParserUtil.parseSkillValue(skillValue);
+
+        return new GameFriendLink(new GameId(gameId), new FriendId(friendId), new UserName(friendGameUserName),
+                loadedSkillValue);
     }
 }

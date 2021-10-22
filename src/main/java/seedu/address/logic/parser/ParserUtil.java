@@ -14,6 +14,7 @@ import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
 
 /**
@@ -52,6 +53,7 @@ public class ParserUtil {
      */
     public static FriendId parseFriendId(String friendId) throws ParseException {
         requireNonNull(friendId);
+
         String trimmedName = friendId.trim();
         if (friendId.isBlank()) {
             throw new ParseException(FriendId.MESSAGE_EMPTY_FRIEND_ID);
@@ -113,6 +115,21 @@ public class ParserUtil {
             throw new ParseException(UserName.MESSAGE_CONSTRAINTS);
         }
         return new UserName(userName);
+    }
+
+    /**
+     * Takes in {@code skillVal} and returns the corresponding {@code SkillValue} if its range is valid.
+     */
+    public static SkillValue parseSkillValue(String skillVal) throws ParseException {
+        try {
+            Integer skillValue = Integer.parseInt(skillVal);
+            if (!SkillValue.validateSkillValue(skillValue)) {
+                throw new ParseException(SkillValue.MESSAGE_CONSTRAINTS);
+            }
+            return new SkillValue(skillValue);
+        } catch (NumberFormatException nfe) {
+            throw new ParseException(SkillValue.MESSAGE_CONSTRAINTS);
+        }
     }
 
     /**

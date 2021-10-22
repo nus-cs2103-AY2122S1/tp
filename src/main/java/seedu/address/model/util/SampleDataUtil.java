@@ -22,20 +22,26 @@ import seedu.address.model.gamefriendlink.UserName;
  * in the event of storage load failure.
  */
 public class SampleDataUtil {
+    // include private constructor for utility class
+    private SampleDataUtil() { }
+
+
+
     public static Friend[] getSampleFriends() {
+        Game[] sampleGames = getSampleGames();
         return new Friend[]{
-                createFriend("AlexY123", "Alex Yeoh",
-                        "Valorant", "Minecraft"),
-                createFriend("BernieSanders", "Bernice Yu",
-                        "RocketLeague", "Doom"),
-                createFriend("ChickenTender", "Charlotte Oliveiro",
-                        "Halo", "Valorant"),
-                createFriend("Davidz", "David Li",
-                        "ApexLegends"),
-                createFriend("II3", "Irfan Ibrahim",
-                        "CSGO"),
-                createFriend("RoyJoy", "Roy Balakrishnan",
-                        "Valorant", "CSGO")
+                createSampleFriend("AlexY123", "Alex Yeoh",
+                        sampleGames[1], sampleGames[3]),
+                createSampleFriend("BernieSanders", "Bernice Yu",
+                        sampleGames[5], sampleGames[4]),
+                createSampleFriend("ChickenTender", "Charlotte Oliveiro",
+                        sampleGames[6], sampleGames[1]),
+                createSampleFriend("Davidz", "David Li",
+                        sampleGames[7]),
+                createSampleFriend("II3", "Irfan Ibrahim",
+                        sampleGames[0]),
+                createSampleFriend("RoyJoy", "Roy Balakrishnan",
+                        sampleGames[1], sampleGames[0])
         };
     }
 
@@ -43,7 +49,12 @@ public class SampleDataUtil {
         return new Game[] {
             new Game(new GameId("CSGO")),
             new Game(new GameId("Valorant")),
-            new Game(new GameId("LeagueofLegends"))
+            new Game(new GameId("LeagueofLegends")),
+            new Game(new GameId("Minecraft")),
+            new Game(new GameId("Doom")),
+            new Game(new GameId("RocketLeague")),
+            new Game(new GameId("Halo")),
+            new Game(new GameId("ApexLegends"))
         };
     }
 
@@ -65,22 +76,26 @@ public class SampleDataUtil {
 
     /**
      * Create a Friend object with an array of gameIds.
+     *
+     * Sample friends can only have GameFriendLinks to games which exist in the sample games list and must have unique
+     * FriendIds.
      */
-    public static Friend createFriend(String friendIdString, String friendNameString, String... gameIds) {
-        Set<GameFriendLink> gameFriendLinks = new HashSet<>();
+    public static Friend createSampleFriend(String friendIdString, String friendNameString, Game... games) {
         FriendId friendId = new FriendId(friendIdString);
+
+        Set<GameFriendLink> gameFriendLinks = new HashSet<>();
         FriendName friendName = new FriendName(friendNameString);
-        for (String gameId : gameIds) {
-            gameFriendLinks.add(new GameFriendLink(new GameId(gameId), friendId, new UserName("Username")));
+        for (Game game : games) {
+            // only link game and friend if game exists
+            if (validateSampleGameExists(game)) {
+                gameFriendLinks.add(new GameFriendLink(game.getGameId(), friendId, new UserName("Username")));
+            }
         }
         return new Friend(friendId, friendName, gameFriendLinks);
     }
 
-    public static Set<GameFriendLink> getGameSet(String... strings) {
-        //        return Arrays.stream(strings)
-        //                .map(Game)
-        //                .collect(Collectors.toSet());
-        return new HashSet<>();
+    private static boolean validateSampleGameExists(Game game) {
+        return Arrays.asList(getSampleGames()).contains(game);
     }
 
     public static Set<GameFriendLink> getGameFriendLinkSet(GameFriendLink... gameFriendLinks) {
