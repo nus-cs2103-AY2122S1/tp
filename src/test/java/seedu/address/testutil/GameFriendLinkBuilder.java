@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_USER_NAME_OMEGA
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
 
 /**
@@ -21,6 +22,7 @@ public class GameFriendLinkBuilder {
     private GameId gameId;
     private FriendId friendId;
     private UserName userName;
+    private SkillValue skillValue;
 
     /**
      * Creates a {@code GameFriendLinkBuilder} with the default details.
@@ -64,8 +66,15 @@ public class GameFriendLinkBuilder {
         return this;
     }
 
-    public GameFriendLink build() {
-        return new GameFriendLink(gameId, friendId, userName);
+    /**
+     * Sets the {@code SkillLevel} of the {@code GameFriendLink} that we are building.
+     */
+    public GameFriendLinkBuilder withSkillValue(SkillValue skillValue) {
+        this.skillValue = skillValue;
+        return this;
     }
 
+    public GameFriendLink build() {
+        return new GameFriendLink(gameId, friendId, userName, skillValue);
+    }
 }

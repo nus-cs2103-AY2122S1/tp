@@ -14,7 +14,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 
 public class FriendsListParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final MainParser parser = new MainParser();
 
     @Test
     public void parseCommand_addFriend() throws Exception {

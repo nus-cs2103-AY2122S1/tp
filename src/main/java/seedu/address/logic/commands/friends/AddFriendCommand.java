@@ -7,7 +7,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 
@@ -17,13 +16,9 @@ public class AddFriendCommand extends Command {
     public static final String MESSAGE_DUPLICATE_FRIEND_ID = "A friend with the same FRIEND_ID already exists in "
             + "the friends list.";
     public static final String MESSAGE_USAGE = "To add a friend: \n"
-            + COMMAND_WORD
+            + "friend " + COMMAND_WORD
             + " FRIEND_ID [--name NAME]: "
             + "Adds a friend to the gitGud friends list. \n"
-            + "Parameters: "
-            + "FRIEND_ID ["
-            + CliSyntax.FLAG_FRIEND_NAME
-            + " NAME]\n"
             + "Example: "
             + COMMAND_WORD + " "
             + "myfeely923 "

@@ -16,12 +16,14 @@ Given below are my contributions to the project.
 * **New Features**
   1. Project-wide refactoring of codebase to adapt AB3 to gitGud's needs. 
      - Refactored Persons and Tags to Friends and Games classes for team usage.
-  2. Add Friend functionality 
-  3. Add Game functionality 
-  4. Implemented Storage support for Friends and Games
+  2. Add Friend functionality
+  3. Edit Friend functionality
+  4. Add Game functionality 
+  5. Implemented Storage support for Friends and Games
   
 * **Testing**
   1. Wrote unit/integration tests for storage, add friend and add game commands.
+  2. Wrote unit/integration tests(with Model) for Edit Friend functionality
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2122s1.github.io/tp-dashboard/?search=kevin9foong&sort=groupTitle&sortWithin=title&since=2021-09-17&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=false)
 
@@ -37,6 +39,7 @@ Given below are my contributions to the project.
   * Developer Guide:
     1. Added the value proposition for gitGud.
     2. Added use case for `add friend`.
+    3. Added documentation for Storage component (e.g. UML diagram, description etc). 
   * README:
     1. Updated Github Actions build status badge to reflect status of gitGud team repository.
     2. Updated description and organised layout of README.
