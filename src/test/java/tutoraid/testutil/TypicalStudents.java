@@ -6,8 +6,8 @@ import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PARENT_PHONE_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_PAYMENT_STATUS_BOB;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_AMY;
-import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_BOB;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_LIST_AMY;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_PROGRESS_LIST_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_NAME_BOB;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_STUDENT_PHONE_AMY;
@@ -29,7 +29,7 @@ public class TypicalStudents {
             .withStudentPhone("94351234")
             .withParentName("Mrs Tan")
             .withParentPhone("94351253")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
     public static final Student BENSON = new StudentBuilder()
@@ -37,7 +37,7 @@ public class TypicalStudents {
             .withStudentPhone("98765423")
             .withParentName("Mrs Meier")
             .withParentPhone("98765432")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(true)
             .build();
     public static final Student CARL = new StudentBuilder()
@@ -45,7 +45,7 @@ public class TypicalStudents {
             .withStudentPhone("95352563")
             .withParentName("Mr Kurz")
             .withParentPhone("95352567")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
     public static final Student DANIEL = new StudentBuilder()
@@ -53,7 +53,7 @@ public class TypicalStudents {
             .withStudentPhone("87652533")
             .withParentName("Mrs Meier")
             .withParentPhone("98765432")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
     public static final Student ELLE = new StudentBuilder()
@@ -68,7 +68,7 @@ public class TypicalStudents {
             .withStudentPhone("9482427")
             .withParentName("Mr Daniel")
             .withParentPhone("9482423")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
     public static final Student GEORGE = new StudentBuilder()
@@ -76,7 +76,7 @@ public class TypicalStudents {
             .withStudentPhone("9482442")
             .withParentName("Mrs Kayla")
             .withParentPhone("94824432")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
 
@@ -86,7 +86,7 @@ public class TypicalStudents {
             .withStudentPhone("8482424")
             .withParentName("Mrs Meier")
             .withParentPhone("98765432")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
     public static final Student IDA = new StudentBuilder()
@@ -94,7 +94,7 @@ public class TypicalStudents {
             .withStudentPhone("8482131")
             .withParentName("Mr Mueller")
             .withParentPhone("8482155")
-            .withProgress("No Progress")
+            .withProgressList(new ArrayList<>())
             .withPaymentStatus(false)
             .build();
 
@@ -104,7 +104,7 @@ public class TypicalStudents {
             .withStudentPhone(VALID_STUDENT_PHONE_AMY)
             .withParentName(VALID_PARENT_NAME_AMY)
             .withParentPhone(VALID_PARENT_PHONE_AMY)
-            .withProgress(VALID_PROGRESS_AMY)
+            .withProgressList(VALID_PROGRESS_LIST_AMY)
             .withPaymentStatus(VALID_PAYMENT_STATUS_AMY)
             .build();
     public static final Student BOB = new StudentBuilder()
@@ -112,7 +112,7 @@ public class TypicalStudents {
             .withStudentPhone(VALID_STUDENT_PHONE_BOB)
             .withParentName(VALID_PARENT_NAME_BOB)
             .withParentPhone(VALID_PARENT_PHONE_BOB)
-            .withProgress(VALID_PROGRESS_BOB)
+            .withProgressList(VALID_PROGRESS_LIST_BOB)
             .withPaymentStatus(VALID_PAYMENT_STATUS_BOB)
             .build();
 

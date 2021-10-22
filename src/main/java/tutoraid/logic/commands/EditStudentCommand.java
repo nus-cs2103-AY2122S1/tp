@@ -18,7 +18,7 @@ import tutoraid.model.Model;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
-import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
@@ -95,8 +95,7 @@ public class EditStudentCommand extends Command {
         ParentName updatedParentName = editStudentDescriptor.getParentName().orElse(studentToEdit.getParentName());
         Phone updatedParentPhone = editStudentDescriptor.getParentPhone().orElse(studentToEdit.getParentPhone());
 
-        // not updated here
-        Progress studentProgress = studentToEdit.getProgress();
+        ProgressList studentProgress = studentToEdit.getProgressList();
         PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
