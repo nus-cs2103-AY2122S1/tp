@@ -25,7 +25,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private CheckBox isDone;
     @FXML
-    private FlowPane tags;
+    private FlowPane tagPane;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -35,9 +35,10 @@ public class TaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         label.setText(task.getLabel().toString());
-        date.setText("Deadline:  " + task.getDate().parsedDate);
+        date.setText("Deadline:  " + task.getDate().toString());
         isDone.setSelected(task.getIsDone());
-        tags.getChildren().add(new Label(task.getTaskTag().tagName));
+        Label tagLabel = new Label(task.getTaskTag().toString());
+        tagPane.getChildren().add(tagLabel);
     }
 
     @Override
