@@ -154,6 +154,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Employee
+
+### Proposed alternative considerations
+
+* `EmployeeList` is always sorted by date and time
+
 ### Supplier
 
 ### Proposed alternative considerations
@@ -652,6 +658,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+      
+### Deleting a customer/employee/supplier
+
+1. Deleting a customer/employee/supplier while all customers/employees/suppliers are being shown
+
+   1. Prerequisites: List all persons using the `customer`/`employee`/`supplier` command. Multiple people of that person type will be shown in the list.
+
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete 0`<br>
+      Expected: Nobody is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
