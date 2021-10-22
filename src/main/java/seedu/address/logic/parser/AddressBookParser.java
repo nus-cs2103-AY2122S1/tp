@@ -63,9 +63,6 @@ public class AddressBookParser {
         case LIST_PERSON:
             return new ListPersonCommand();
 
-        case REMARK_PERSON:
-            return new RemarkPersonCommandParser().parse(arguments);
-
         case CLEAR_MODULE_LESSON:
             return new ClearModuleLessonCommand();
 
