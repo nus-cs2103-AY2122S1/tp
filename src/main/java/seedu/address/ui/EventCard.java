@@ -39,7 +39,7 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getNameString());
-        isDone.setText(event.getIsDone() ? Event.COMPLETED : Event.UNCOMPLETED);
+        isDone.setText(event.getDoneValue() ? Event.COMPLETED : Event.UNCOMPLETED);
         date.setText(event.getDateString());
         time.setText(event.getTimeString());
         event.getParticipants().stream()

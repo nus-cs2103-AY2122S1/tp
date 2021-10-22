@@ -207,6 +207,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String markEventAsDone(int index) {
+        Event eventToMarkDone = this.filteredEvents.get(index);
+        eventToMarkDone.markAsDone();
+        return eventToMarkDone.toString();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

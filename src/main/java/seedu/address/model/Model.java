@@ -118,11 +118,19 @@ public interface Model {
      */
     void setEvent(Event target, Event editedEvent);
 
+    /**
+     * Marks the Event at {@code index} as done.
+     * {@code index} must be within the bounds of the Event list.
+     *
+     * @return The string representation of the Event.
+     */
+    String markEventAsDone(int index);
+
     /** Returns an unmodifiable view of list of Events *///getFilteredEventList
     ObservableList<Event> getFilteredEventList();
 
     /**
-     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered Event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);

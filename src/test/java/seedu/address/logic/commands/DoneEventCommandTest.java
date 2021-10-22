@@ -28,15 +28,13 @@ class DoneEventCommandTest {
     @Test
     public void execute_validIndex_success() {
         Event eventToMarkAsDone = model.getFilteredEventList()
-                .get(INDEX_FIRST_EVENT.getZeroBased());
-        DoneEventCommand doneCommand = new DoneEventCommand(INDEX_FIRST_EVENT);
-
-        Event eventMarkedDone = eventToMarkAsDone.markAsDone();
+                .get(INDEX_SECOND_EVENT.getZeroBased());
+        DoneEventCommand doneCommand = new DoneEventCommand(INDEX_SECOND_EVENT);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.setEvent(eventToMarkAsDone, eventMarkedDone);
+        expectedModel.markEventAsDone(INDEX_SECOND_EVENT.getZeroBased());
 
         String expectedMessage = String.format(DoneEventCommand.MESSAGE_DONE_EVENT_SUCCESS,
-                eventMarkedDone);
+                eventToMarkAsDone);
 
         assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
     }

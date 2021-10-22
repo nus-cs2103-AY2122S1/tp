@@ -44,10 +44,8 @@ public class DoneEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToMarkDone = lastShownList.get(targetIndex.getZeroBased());
-        Event eventMarkedDone = eventToMarkDone.markAsDone();
-        model.setEvent(eventToMarkDone, eventMarkedDone);
-        return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, eventMarkedDone));
+        String eventToString = model.markEventAsDone(targetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, eventToString));
     }
 
     @Override

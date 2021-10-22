@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.participant.Participant;
@@ -16,7 +19,7 @@ public class Event implements Comparable<Event> {
 
     public static final String COMPLETED = "Completed";
     public static final String UNCOMPLETED = "Uncompleted";
-    private boolean isDone;
+    private BooleanProperty isDone;
     private ObservableList<Participant> participants = FXCollections.observableArrayList();
     private EventName eventName;
     private EventDate eventDate;
@@ -33,7 +36,7 @@ public class Event implements Comparable<Event> {
         this.eventName = name;
         this.eventDate = date;
         this.eventTime = time;
-        isDone = false;
+        this.isDone = new SimpleBooleanProperty(false);
     }
 
     /**
@@ -50,7 +53,7 @@ public class Event implements Comparable<Event> {
         this.eventName = name;
         this.eventDate = date;
         this.eventTime = time;
-        this.isDone = isDone;
+        this.isDone = new SimpleBooleanProperty(isDone);
         this.participants.addAll(participants);
     }
 
@@ -88,7 +91,11 @@ public class Event implements Comparable<Event> {
         return eventTime.toString();
     }
 
-    public boolean getIsDone() {
+    public boolean getDoneValue() {
+        return isDone.get();
+    }
+
+    public Observable getIsDone() {
         return isDone;
     }
 
@@ -140,12 +147,11 @@ public class Event implements Comparable<Event> {
     }
 
     /**
-     * Returns a copy of the Event that is marked done.
+     * Marks the event as done.
      *
-     * @return An Event that is marked done.
      */
-    public Event markAsDone() {
-        return new Event(eventName, eventDate, eventTime, true, participants);
+    public void markAsDone() {
+        this.isDone.set(true);
     }
 
     /**
@@ -182,7 +188,7 @@ public class Event implements Comparable<Event> {
         return otherEvent.getName().equals(getName())
                 && otherEvent.getDate().equals(getDate())
                 && otherEvent.getTime().equals(getTime())
-                && otherEvent.getIsDone() == (getIsDone())
+                && otherEvent.getDoneValue() == (getDoneValue())
                 && otherEvent.getParticipants().equals(getParticipants());
     }
 
@@ -199,7 +205,7 @@ public class Event implements Comparable<Event> {
                 getNameString(),
                 getDateString(),
                 getTimeString(),
-                getIsDone() ? "Completed" : "Uncompleted",
+                getDoneValue() ? "Completed" : "Uncompleted",
                 getParticipants().size());
     }
 
