@@ -69,7 +69,7 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
         }
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
-            logger.info("----------------[Parsing failed due to invalid index][" + argumentMultimap.getPreamble() + "]");
+            logger.info("----------------[Parsing failed due to no field edited][" + argumentMultimap.getPreamble() + "]");
             throw new ParseException(EditModuleLessonCommand.MESSAGE_NOT_EDITED);
         }
 
