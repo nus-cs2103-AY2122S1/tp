@@ -14,19 +14,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.academydirectory.versioncontrol.objects.Tree;
-import seedu.academydirectory.versioncontrol.parsers.TreeParser;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
 
 public class TreeController extends Controller<Tree> {
+    private final TreeStorageManager treeStorageManager;
+    private final Path vcPath;
+
     /**
      * Creates a Controller for Tree object. Use this object to create Tree objects and not by calling Tree's
      * constructor.
      * @param generator produce hash of commit. Hashing algorithm defined in generator
-     * @param vcPath general path to place version control related files
+     * @param treeStorageManager TreeStorageManager to interface with disk
      */
-    public TreeController(HashGenerator generator, Path vcPath) {
-        super(generator, vcPath);
+    public TreeController(HashGenerator generator, TreeStorageManager treeStorageManager) {
+        super(generator);
+        this.treeStorageManager = treeStorageManager;
+        this.vcPath = treeStorageManager.getVcPath();
     }
 
     /**
@@ -61,7 +66,7 @@ public class TreeController extends Controller<Tree> {
                 blobTargetPaths.stream().map(String::valueOf).collect(Collectors.toList()));
         Path treePath = this.vcPath.resolve(Path.of(treeFileName));
         try {
-            write(temp);
+            treeStorageManager.write(treeFileName, temp);
 
             // Delete temporarily created Tree
             String treeHash = generator.generateHashFromFile(treePath);
@@ -92,42 +97,16 @@ public class TreeController extends Controller<Tree> {
      * @throws IOException if no tree of the same hash can be found in disk
      */
     public Tree fetchTreeByHash(String hash) {
-        TreeParser treeParser = new TreeParser();
-
         // Allow for 5 digit hash to be used
         File f = new File(String.valueOf(vcPath));
-        String finalHash = hash;
-        File[] matchingFiles = requireNonNull(f.listFiles((x, name) -> name.startsWith(finalHash)));
+        File[] matchingFiles = requireNonNull(f.listFiles((x, name) -> name.startsWith(hash)));
         if (matchingFiles.length == 0) {
             return Tree.NULL;
         }
 
         // Pick first match
         Path filePath = matchingFiles[0].toPath();
-        String[] args = treeParser.parse(filePath);
-
-        if (args == null) {
-            return Tree.NULL;
-        }
-
-        hash = args[0];
-
-        List<String> vcNames = new ArrayList<>();
-        List<String> actualNames = new ArrayList<>();
-        for (int i = 1; i < args.length; i++) {
-            String[] xs = args[i].split(" ");
-            vcNames.add(xs[0]);
-            actualNames.add(xs[1]);
-        }
-        return new Tree(hash, actualNames, vcNames);
-    }
-
-    @Override
-    public List<String> getWriteableFormat(Tree tree) {
-        HashMap<String, String> hashMap = tree.getHashMap();
-        return hashMap.keySet().stream()
-                .map(key -> key + " " + hashMap.get(key))
-                .collect(Collectors.toList());
+        return treeStorageManager.read(String.valueOf(filePath.getFileName()));
     }
 
     /**
@@ -143,5 +122,9 @@ public class TreeController extends Controller<Tree> {
             Path vcFilepath = Paths.get(vcFilename);
             Files.copy(vcFilepath, actualFilepath, REPLACE_EXISTING);
         }
+    }
+
+    public void write(Tree tree) throws IOException {
+        treeStorageManager.write(tree.getHash(), tree);
     }
 }

@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 import seedu.academydirectory.testutil.TypicalCommits;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
+import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -36,7 +38,9 @@ public class CommitControllerTest {
         }
         assertTrue(TESTING_DIR.toFile().mkdir());
 
-        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(TESTING_DIR, treeStorageManager);
+        CommitController commitController = new CommitController(hashGenerator, commitStorageManager);
 
         // Null Tree and Null Commit
         String message = "Initial Commit";
@@ -75,7 +79,9 @@ public class CommitControllerTest {
         }
         assertTrue(TESTING_DIR.toFile().mkdir());
 
-        CommitController commitController = new CommitController(hashGenerator, DATA_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(DATA_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(DATA_DIR, treeStorageManager);
+        CommitController commitController = new CommitController(hashGenerator, commitStorageManager);
 
         // Exact Hash used -> Commit fetched successfully
         String commitHash = "1d83638a25901e76c8e3882afca2347f8352cd06";
@@ -105,7 +111,10 @@ public class CommitControllerTest {
 
     @Test
     public void retrieveCommitHistory() {
-        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(TESTING_DIR, treeStorageManager);
+        CommitController commitController = new CommitController(hashGenerator, commitStorageManager);
+
         Commit rootCommit = TypicalCommits.COMMIT2;
         Commit childCommit = TypicalCommits.COMMIT3;
 
@@ -133,7 +142,10 @@ public class CommitControllerTest {
 
     @Test
     public void findLca() {
-        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(TESTING_DIR, treeStorageManager);
+        CommitController commitController = new CommitController(hashGenerator, commitStorageManager);
+
         // same commits
         assertEquals(COMMIT2, commitController.findLca(COMMIT2, COMMIT2));
 
@@ -157,7 +169,9 @@ public class CommitControllerTest {
 
     @Test
     public void getHighestAncestor() {
-        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(TESTING_DIR, treeStorageManager);
+        CommitController commitController = new CommitController(hashGenerator, commitStorageManager);
 
         // No ancestor in range -> Commit.NULL
         assertEquals(Commit.NULL, commitController.getHighestAncestor(COMMIT2, COMMIT2));

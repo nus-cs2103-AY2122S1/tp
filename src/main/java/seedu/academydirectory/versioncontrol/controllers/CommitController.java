@@ -5,9 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,31 +13,23 @@ import java.util.function.Supplier;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Tree;
-import seedu.academydirectory.versioncontrol.parsers.CommitParser;
+import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
 public class CommitController extends Controller<Commit> {
-    private static final DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private final CommitStorageManager commitStorageManager;
+    private final Path vcPath;
 
     /**
      * Creates a Controller for Commit object. Use this object to create Commit objects and not by calling Commit
      * constructor.
      * @param generator produce hash of commit. Hashing algorithm defined in generator
-     * @param vcPath general path to place version control related files
      */
-    public CommitController(HashGenerator generator, Path vcPath) {
-        super(generator, vcPath);
-    }
-
-    @Override
-    public List<String> getWriteableFormat(Commit commit) {
-        String author = "Author: " + System.getProperty("user.name");
-        String date = "Date: " + df.format(commit.getDate());
-        String message = "Message: " + commit.getMessage();
-        String parent = "Parent: " + commit.getParentSupplier().get().getHash();
-        String treeRef = "TreeRef: " + commit.getTreeSupplier().get().getHash();
-
-        return List.of(author, date, message, parent, treeRef);
+    public CommitController(HashGenerator generator, CommitStorageManager commitStorageManager) {
+        super(generator);
+        this.commitStorageManager = commitStorageManager;
+        this.vcPath = commitStorageManager.getVcPath();
     }
 
     /**
@@ -58,11 +48,11 @@ public class CommitController extends Controller<Commit> {
         String author = System.getProperty("user.name");
         Date date = new Date();
         Commit temp = new Commit(commitFileName, author, date, message, parentCommitSupplier, treeSupplier);
+        Path commitPath = vcPath.resolve(Paths.get(commitFileName));
 
-        Path commitPath = this.vcPath.resolve(Path.of(commitFileName));
         try {
             // Write a temporary commit to disk
-            write(temp);
+            commitStorageManager.write(commitFileName, temp);
 
             // Delete temporarily created Commit
             String commitHash = generator.generateHashFromFile(commitPath);
@@ -81,9 +71,6 @@ public class CommitController extends Controller<Commit> {
      * @return Commit object of the given hash
      */
     public Commit fetchCommitByHash(String hash) {
-        CommitParser commitParser = new CommitParser();
-        TreeController treeController = new TreeController(generator, vcPath);
-
         // Allow for 5 digit hash to be used
         File f = new File(String.valueOf(vcPath));
         String finalHash = hash.trim();
@@ -94,37 +81,7 @@ public class CommitController extends Controller<Commit> {
 
         // Pick first match
         Path filePath = matchingFiles[0].toPath();
-        String[] args = commitParser.parse(filePath);
-
-        if (args == null) {
-            return Commit.NULL;
-        }
-        Date date;
-        try {
-            date = df.parse(args[2]);
-        } catch (ParseException ignored) {
-            return Commit.NULL;
-        }
-
-        hash = args[0];
-        String author = args[1];
-        String message = args[3];
-        String parentHash = args[4];
-        String treeHash = args[5];
-
-        Supplier<Commit> parentCommitSupplier = () -> parentHash.equals(Commit.NULL.getHash())
-                ? Commit.NULL
-                : fetchCommitByHash(parentHash);
-
-        Supplier<Tree> treeSupplier = () -> {
-            return treeController.fetchTreeByHash(treeHash);
-        };
-
-        return new Commit(hash, author, date, message, parentCommitSupplier, treeSupplier);
-    }
-
-    public static DateFormat getDf() {
-        return df;
+        return commitStorageManager.read(String.valueOf(filePath.getFileName()));
     }
 
     /**
@@ -208,5 +165,9 @@ public class CommitController extends Controller<Commit> {
             return start;
         }
         return move(start.getParentSupplier().get(), numStep - 1);
+    }
+
+    public void write(Commit commit) throws IOException {
+        commitStorageManager.write(commit.getHash(), commit);
     }
 }

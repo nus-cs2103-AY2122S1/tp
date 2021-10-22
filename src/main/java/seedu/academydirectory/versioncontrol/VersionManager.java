@@ -23,6 +23,9 @@ import seedu.academydirectory.versioncontrol.controllers.TreeController;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
 import seedu.academydirectory.versioncontrol.objects.Tree;
+import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
+import seedu.academydirectory.versioncontrol.storage.LabelStorageManager;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -43,10 +46,18 @@ public class VersionManager implements Version {
      * @param storagePath path to where file storage is saved
      */
     public VersionManager(Path storagePath) {
+        Path vcPath = Paths.get("vc");
         HashGenerator generator = new HashGenerator(HashMethod.SHA1);
-        this.commitController = new CommitController(generator, vcPath);
-        this.treeController = new TreeController(generator, vcPath);
-        this.labelController = new LabelController(generator, vcPath);
+
+        // Create storage managers
+        TreeStorageManager treeStorageManager = new TreeStorageManager(vcPath);
+        this.treeController = new TreeController(generator, treeStorageManager);
+
+        CommitStorageManager commitStorageManager = new CommitStorageManager(vcPath, treeStorageManager);
+        this.commitController = new CommitController(generator, commitStorageManager);
+
+        LabelStorageManager labelStorageManager = new LabelStorageManager(vcPath, commitStorageManager);
+        this.labelController = new LabelController(generator, labelStorageManager);
 
         this.storagePath = storagePath;
 
@@ -80,17 +91,17 @@ public class VersionManager implements Version {
         Commit parentCommit = head;
         try {
             // Make VcObjects
-            Tree tree = treeController.createNewTree(storagePath);
-            Commit newCommit = commitController.createNewCommit(message, () -> tree, () -> parentCommit);
+            Tree newTree = treeController.createNewTree(storagePath);
+            Commit newCommit = commitController.createNewCommit(message, () -> newTree, () -> parentCommit);
 
             // Write VcObjects to disk
-            treeController.write(tree);
+            treeController.write(newTree);
             commitController.write(newCommit);
 
             // Move HEAD pointer
             moveHead(newCommit);
             return true;
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
@@ -107,10 +118,6 @@ public class VersionManager implements Version {
 
     @Override
     public List<String> retrieveHistory() {
-        return retrieveHistoryAdvanced();
-    }
-
-    private List<String> retrieveHistoryAdvanced() {
         Label latestLabel = labelController.fetchLabelByName("temp_LATEST");
 
         Commit headCommit = head;
@@ -161,7 +168,7 @@ public class VersionManager implements Version {
     @Override
     public Commit revert(String fiveCharHash) throws IOException, ParseException {
         Label latest = labelController.createNewLabel("temp_LATEST", head);
-        labelController.write(latest.getName(), latest);
+        labelController.write(latest);
         Commit mainCommit = latest.getCommitSupplier().get();
         assert mainCommit.equals(head);
 

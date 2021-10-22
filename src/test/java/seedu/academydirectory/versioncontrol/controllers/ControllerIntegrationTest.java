@@ -1,9 +1,7 @@
 package seedu.academydirectory.versioncontrol.controllers;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static seedu.academydirectory.versioncontrol.parsers.VcParser.NULL_PARSE;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -13,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
-import seedu.academydirectory.versioncontrol.parsers.CommitParser;
-import seedu.academydirectory.versioncontrol.parsers.LabelParser;
-import seedu.academydirectory.versioncontrol.parsers.TreeParser;
+import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
+import seedu.academydirectory.versioncontrol.storage.LabelStorageManager;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -26,14 +24,15 @@ public class ControllerIntegrationTest {
 
     @Test
     public void generateCommitFromHead() throws IOException {
-        CommitController commitController = new CommitController(hashGenerator, TESTING_DIR);
-        CommitParser commitParser = new CommitParser();
+        // Create storage managers
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        TreeController treeController = new TreeController(hashGenerator, treeStorageManager);
 
-        LabelController labelController = new LabelController(hashGenerator, TESTING_DIR);
-        LabelParser labelParser = new LabelParser();
+        CommitStorageManager commitStorageManager = new CommitStorageManager(TESTING_DIR, treeStorageManager);
+        CommitController commitController = new CommitController(hashGenerator, commitStorageManager);
 
-        TreeParser treeParser = new TreeParser();
-        TreeController treeController = new TreeController(hashGenerator, TESTING_DIR);
+        LabelStorageManager labelStorageManager = new LabelStorageManager(TESTING_DIR, commitStorageManager);
+        LabelController labelController = new LabelController(hashGenerator, labelStorageManager);
 
         Label actualLabel = labelController.fetchLabelByName("HEAD");
         assertNotEquals(Label.NULL, actualLabel);
@@ -41,17 +40,10 @@ public class ControllerIntegrationTest {
         Commit actualCommit = actualLabel.getCommitSupplier().get();
         assertNotEquals(Commit.NULL, actualCommit);
 
-        String[] expectedLabel = labelParser.parse(TESTING_DIR.resolve(Paths.get("HEAD")));
-        String[] expectedCommit = commitParser.parse(TESTING_DIR.resolve(Paths.get(expectedLabel[0])));
+        Label expectedLabel = labelStorageManager.read("HEAD");
+        Commit expectedCommit = expectedLabel.getCommitSupplier().get();
 
-        assertNotEquals(expectedLabel, NULL_PARSE);
-        assertEquals(expectedCommit[0], actualCommit.getHash());
-        assertEquals(expectedCommit[1], actualCommit.getAuthor());
-        assertEquals(
-                assertDoesNotThrow(() -> CommitController.getDf().parse(expectedCommit[2])),
-                actualCommit.getDate());
-        assertEquals(expectedCommit[3], actualCommit.getMessage());
-        assertEquals(expectedCommit[4], actualCommit.getParentSupplier().get().getHash());
-        assertEquals(expectedCommit[5], actualCommit.getTreeSupplier().get().getHash());
+        assertEquals(expectedLabel, actualLabel);
+        assertEquals(expectedCommit, actualCommit);
     }
 }

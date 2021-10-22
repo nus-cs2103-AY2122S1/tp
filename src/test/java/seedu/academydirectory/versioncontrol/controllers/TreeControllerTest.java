@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.testutil.TypicalTrees.TREE1;
-import static seedu.academydirectory.testutil.TypicalTrees.TREE2;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,11 +13,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.versioncontrol.objects.Tree;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -37,7 +36,8 @@ public class TreeControllerTest {
         }
         assertTrue(TESTING_DIR.toFile().mkdir());
 
-        TreeController treeController = new TreeController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        TreeController treeController = new TreeController(hashGenerator, treeStorageManager);
 
         // Blobs present -> Correctly Duplicated
         String blobName = "HEAD";
@@ -76,7 +76,8 @@ public class TreeControllerTest {
         }
         assertTrue(TESTING_DIR.toFile().mkdir());
 
-        TreeController treeController = new TreeController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        TreeController treeController = new TreeController(hashGenerator, treeStorageManager);
 
         String blobName = "TAIL";
         Path blobPath = BLOB_DIR.resolve(Paths.get(blobName));
@@ -98,7 +99,8 @@ public class TreeControllerTest {
         }
         assertTrue(TESTING_DIR.toFile().mkdir());
 
-        TreeController treeController = new TreeController(hashGenerator, DATA_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(DATA_DIR);
+        TreeController treeController = new TreeController(hashGenerator, treeStorageManager);
 
         // Exact Hash used -> Commit fetched successfully
         String treeHash = "9d34f3e9ada5ae7cc5c063b905a5d7893f792497";
@@ -127,22 +129,5 @@ public class TreeControllerTest {
         assertEquals(Tree.NULL, actualTree);
 
         assertTrue(TESTING_DIR.toFile().delete());
-    }
-
-    @Test
-    public void getWriteableFormat() {
-        if (TESTING_DIR.toFile().exists()) {
-            assertTrue(TESTING_DIR.toFile().delete());
-        }
-        assertTrue(TESTING_DIR.toFile().mkdir());
-
-        TreeController treeController = new TreeController(hashGenerator, TESTING_DIR);
-
-        // Null tree
-        assertEquals(List.of("null null"), treeController.getWriteableFormat(Tree.NULL));
-
-        assertEquals(List.of("world.hello hello.world"), treeController.getWriteableFormat(TREE1));
-        assertEquals(List.of("world_hello Hello.png", "world_hello? Hello World.java"),
-                treeController.getWriteableFormat(TREE2));
     }
 }

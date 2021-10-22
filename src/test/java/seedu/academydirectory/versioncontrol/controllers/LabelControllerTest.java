@@ -12,6 +12,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
+import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
+import seedu.academydirectory.versioncontrol.storage.LabelStorageManager;
+import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -27,7 +30,10 @@ public class LabelControllerTest {
             assertTrue(TESTING_DIR.toFile().delete());
         }
         assertTrue(TESTING_DIR.toFile().mkdir());
-        LabelController labelController = new LabelController(hashGenerator, TESTING_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(TESTING_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(TESTING_DIR, treeStorageManager);
+        LabelStorageManager labelStorageManager = new LabelStorageManager(TESTING_DIR, commitStorageManager);
+        LabelController labelController = new LabelController(hashGenerator, labelStorageManager);
 
         // null passed in -> exception thrown
         assertThrows(NullPointerException.class, () -> labelController.createNewLabel(null, null));
@@ -46,7 +52,10 @@ public class LabelControllerTest {
 
     @Test
     public void fetchLabelByName() {
-        LabelController labelController = new LabelController(hashGenerator, DATA_DIR);
+        TreeStorageManager treeStorageManager = new TreeStorageManager(DATA_DIR);
+        CommitStorageManager commitStorageManager = new CommitStorageManager(DATA_DIR, treeStorageManager);
+        LabelStorageManager labelStorageManager = new LabelStorageManager(DATA_DIR, commitStorageManager);
+        LabelController labelController = new LabelController(hashGenerator, labelStorageManager);
 
         String labelName = "HEAD";
         Path filepath = DATA_DIR.resolve(Paths.get(labelName));

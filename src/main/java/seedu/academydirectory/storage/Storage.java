@@ -10,7 +10,7 @@ import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * API of the StorageManager component
  */
 public interface Storage extends AcademyDirectoryStorage, UserPrefsStorage {
 

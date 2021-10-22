@@ -1,32 +1,29 @@
 package seedu.academydirectory.versioncontrol.controllers;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.academydirectory.versioncontrol.parsers.VcParser.NULL_PARSE;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.List;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
-import seedu.academydirectory.versioncontrol.parsers.LabelParser;
+import seedu.academydirectory.versioncontrol.storage.LabelStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 
 public class LabelController extends Controller<Label> {
+    private final LabelStorageManager labelStorageManager;
+    private final Path vcPath;
+
     /**
      * Creates a Controller for Label object.
      * @param generator produce hash of commit. Hashing algorithm defined in generator
-     * @param vcPath general path to place version control related files
+     * @param labelStorageManager labelStorageManager to interact with disk
      */
-    public LabelController(HashGenerator generator, Path vcPath) {
-        super(generator, vcPath);
-    }
-
-    @Override
-    public List<String> getWriteableFormat(Label label) {
-        return List.of("ref: " + label.getCommitSupplier().get().getHash());
+    public LabelController(HashGenerator generator, LabelStorageManager labelStorageManager) {
+        super(generator);
+        this.labelStorageManager = labelStorageManager;
+        this.vcPath = labelStorageManager.getVcPath();
     }
 
     /**
@@ -44,7 +41,7 @@ public class LabelController extends Controller<Label> {
 
         Path labelPath = this.vcPath.resolve(Path.of(labelFileName));
         try {
-            write(temp);
+            labelStorageManager.write(labelFileName, temp);
 
             String labelHash = generator.generateHashFromFile(labelPath);
             boolean deletedSuccessfully = labelPath.toFile().delete();
@@ -61,8 +58,6 @@ public class LabelController extends Controller<Label> {
      * @return Label object of the given hash
      */
     public Label fetchLabelByName(String labelName) {
-        LabelParser labelParser = new LabelParser();
-
         File f = new File(String.valueOf(vcPath));
         File[] matchingFiles = requireNonNull(f.listFiles((x, name) -> name.startsWith(labelName)));
         if (matchingFiles.length == 0) {
@@ -71,20 +66,10 @@ public class LabelController extends Controller<Label> {
 
         // Pick first match
         Path labelPath = matchingFiles[0].toPath();
+        return labelStorageManager.read(String.valueOf(labelPath.getFileName()));
+    }
 
-        String[] args = labelParser.parse(labelPath);
-        if (Arrays.equals(args, NULL_PARSE)) {
-            return Label.NULL;
-        }
-        String refHash = args[0];
-
-        String hash;
-        try {
-            hash = generator.generateHashFromFile(labelPath);
-        } catch (IOException e) {
-            return Label.NULL;
-        }
-
-        return new Label(hash, labelName, () -> new CommitController(generator, vcPath).fetchCommitByHash(refHash));
+    public void write(Label label) throws IOException {
+        labelStorageManager.write(label.getName(), label);
     }
 }

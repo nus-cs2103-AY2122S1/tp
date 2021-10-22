@@ -36,7 +36,7 @@ public class LogicManager implements Logic {
     private final AcademyDirectoryVcCommandParser versionControlParser;
 
     /**
-     * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     * Constructs a {@code LogicManager} with the given {@code Model} and {@code StorageManager}.
      */
     public LogicManager(Model model, Storage storage, OptionalVersion<Version> version) {
         this.model = model;
