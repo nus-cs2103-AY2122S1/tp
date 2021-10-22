@@ -8,7 +8,10 @@
     "socialHandle" : "@asdas",
     "gender" : "M",
     "remark" : "$remark is gone!",
-    "tagged" : [ "friends" ]
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    } ]
   }, {
     "name" : "Test Import Two",
     "phone" : "99272738",
@@ -18,6 +21,12 @@
     "socialHandle" : "@asdas",
     "gender" : "M",
     "remark" : "",
-    "tagged" : [ "colleagues", "friends" ]
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    }, {
+      "tagName" : "colleague",
+      "tagColour" : "#3e7b91"
+    } ]
   } ]
 }
