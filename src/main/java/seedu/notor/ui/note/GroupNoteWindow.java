@@ -22,8 +22,8 @@ public class GroupNoteWindow extends NoteWindow {
         super(logic, resultDisplay);
         noteTextArea.setText(group.getNote().value);
         this.group = group;
-        confirmationWindow = new ConfirmationWindow(group.getName().toString(), this);
-        getRoot().setTitle(group.getName().toString());
+        confirmationWindow = new ConfirmationWindow(group.getName(), this);
+        getRoot().setTitle(group.getName());
         noteTextArea.setWrapText(true);
         getRoot().setOnCloseRequest(e -> {
             e.consume();

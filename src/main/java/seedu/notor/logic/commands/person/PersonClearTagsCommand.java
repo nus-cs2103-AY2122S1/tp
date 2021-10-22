@@ -2,6 +2,9 @@ package seedu.notor.logic.commands.person;
 
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -14,6 +17,7 @@ import seedu.notor.logic.executors.person.PersonExecutor;
 public class PersonClearTagsCommand extends PersonCommand {
 
     public static final String COMMAND_WORD = "cleartags";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("cleartags", "ct");
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
             + ": Clears all tags from the person identified by the index number used in the displayed "

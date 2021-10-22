@@ -2,6 +2,9 @@ package seedu.notor.logic.commands.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
@@ -12,17 +15,16 @@ import seedu.notor.logic.executors.person.PersonExecutor;
  * Clears the Note of the person by the given index.
  */
 public class PersonClearNoteCommand extends PersonCommand {
-
     public static final String COMMAND_WORD = "clearnote";
-
+    public static final List<String> COMMAND_WORDS = Arrays.asList("clearnote", "cn");
 
     private static final String COMMAND_DESCRIPTION = ": Clears the note of a person in notor.\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters: none"
             + "Example: "
-            + PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+            + PersonCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final PersonExecutor executor;
 
@@ -56,5 +58,4 @@ public class PersonClearNoteCommand extends PersonCommand {
         PersonClearNoteCommand e = (PersonClearNoteCommand) other;
         return executor.equals(e.executor);
     }
-
 }

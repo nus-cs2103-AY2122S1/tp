@@ -8,8 +8,6 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonNoteExecutor;
 import seedu.notor.model.group.Group;
-import seedu.notor.model.group.SubGroup;
-import seedu.notor.model.group.SuperGroup;
 
 /**
  * Executor for a GroupNoteCommand.
@@ -31,16 +29,12 @@ public class GroupNoteExecutor extends GroupExecutor {
 
     @Override
     public CommandResult execute() throws ExecuteException {
-        // TODO: To update after list is done.
+        // TODO: To update the if true after list is done. it is suppose to check person view.
         if (true) {
-            SuperGroup superGroup = super.getGroup();
-            return new CommandResult(generateSuccessMessage(superGroup), false, true, false, superGroup);
-        } else if (model.isSubGroupView()) {
-            SubGroup subGroup = super.getSubGroup();
-            return new CommandResult(generateSuccessMessage(subGroup), false, true, false, subGroup);
-        } else {
-            throw new ExecuteException(Messages.MESSAGE_GROUPS_NOT_LISTED);
+            Group group = super.getGroup();
+            return new CommandResult(generateSuccessMessage(group), false, true, false, group);
         }
+        throw new ExecuteException(Messages.MESSAGE_GROUPS_OR_SUBGROUP_NOT_LISTED);
     }
 
     /**

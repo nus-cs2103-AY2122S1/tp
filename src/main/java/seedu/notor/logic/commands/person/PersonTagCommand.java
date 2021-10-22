@@ -3,6 +3,8 @@ package seedu.notor.logic.commands.person;
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.notor.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import seedu.notor.commons.core.index.Index;
@@ -18,6 +20,7 @@ import seedu.notor.model.tag.Tag;
 public class PersonTagCommand extends PersonCommand {
 
     public static final String COMMAND_WORD = "tag";
+    public static final List<String> COMMAND_WORDS = Arrays.asList("tag", "t");
 
     public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " 1 " + COMMAND_WORD
             + ": Adds tags to the person identified by the index number used in the displayed person list,"

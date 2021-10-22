@@ -4,7 +4,6 @@ import seedu.notor.logic.commands.group.GroupDeleteCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 
 public class GroupDeleteCommandParser extends GroupCommandParser {
-
     public GroupDeleteCommandParser(String unparsedIndex) throws ParseException {
         super(unparsedIndex, null);
     }

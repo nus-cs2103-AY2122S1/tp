@@ -126,7 +126,7 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered group list
      */
-    ObservableList<SuperGroup> getFilteredGroupList();
+    ObservableList<? extends Group> getFilteredGroupList();
 
     /**
      * Updates the filter of the filtered group list to filter by the given {@code predicate}.
@@ -135,24 +135,8 @@ public interface Model {
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
 
-    /**
-     * Returns an unmodifiable view of the filtered subgroup list
-     */
-    ObservableList<SubGroup> getFilteredSubGroupList();
-
-    /**
-     * Updates the filter of the filtered sybgroup list to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredSubGroupList(Predicate<SubGroup> predicate);
-
     void deleteSubGroup(SubGroup subGroup);
 
     //=========== View Check =============================================================
     boolean isPersonView();
-
-    boolean isGroupView();
-
-    boolean isSubGroupView();
 }

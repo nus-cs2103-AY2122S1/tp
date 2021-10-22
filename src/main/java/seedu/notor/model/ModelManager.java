@@ -27,14 +27,8 @@ public class ModelManager implements Model {
     private final Notor notor;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final FilteredList<SuperGroup> filteredGroups;
+    private final FilteredList<? extends Group> filteredGroups;
     private boolean isPersonView = true;
-    private boolean isGroupView = false;
-    private boolean isSubGroupView = false;
-    /**
-     * Represents the current subGroups shown in the UI. It is null when not shown.
-     */
-    private final FilteredList<SubGroup> filteredSubGroups = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -190,7 +184,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<SuperGroup> getFilteredGroupList() {
+    public ObservableList<? extends Group> getFilteredGroupList() {
         return filteredGroups;
     }
 
@@ -200,31 +194,10 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
-    @Override
-    public ObservableList<SubGroup> getFilteredSubGroupList() {
-        return filteredSubGroups;
-    }
-
-    @Override
-    public void updateFilteredSubGroupList(Predicate<SubGroup> predicate) {
-        requireNonNull(predicate);
-        filteredSubGroups.setPredicate(predicate);
-    }
-
     //=========== View Check =============================================================
     @Override
     public boolean isPersonView() {
         return isPersonView;
-    }
-
-    @Override
-    public boolean isGroupView() {
-        return isGroupView;
-    }
-
-    @Override
-    public boolean isSubGroupView() {
-        return isSubGroupView;
     }
 
     @Override
