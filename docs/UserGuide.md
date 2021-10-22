@@ -465,6 +465,7 @@ Format: `tag`
 ![taglist](images/taglist.png)
 <div class="caption">The text on the left shows the tag names created and the number on the right indicates the number of students labelled with each tag.</div>
 
+<div style="page-break-after: always;"></div>
 
 #### Undoing previous command: `undo`
 
