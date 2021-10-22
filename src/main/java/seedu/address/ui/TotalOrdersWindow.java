@@ -12,8 +12,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class TotalOrdersWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(TotalOrdersWindow.class);
-    // TODO change to TotalOrdersWindow.fxml when ready
-    private static final String FXML = "HelpWindow.fxml";
+    private static final String FXML = "TotalOrdersWindow.fxml";
 
     @FXML
     private Button copyButton;
@@ -77,14 +76,5 @@ public class TotalOrdersWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
-    }
-
-    /**
-     * Dummy method to pass the compilation.
-     * TODO remove this method after TotalOrdersWindow.fxml is ready
-     */
-    @FXML
-    private void copyUrl() {
-        ;
     }
 }
