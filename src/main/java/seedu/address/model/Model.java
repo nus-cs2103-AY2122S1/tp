@@ -65,6 +65,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a module lesson with the same information as {@code moduleLesson} exists in the address book.
+     */
+    boolean hasModuleLesson(ModuleLesson moduleLesson);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
