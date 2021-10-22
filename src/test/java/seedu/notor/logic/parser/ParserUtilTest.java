@@ -158,7 +158,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags("").isEmpty());
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(""));
     }
 
     @Test

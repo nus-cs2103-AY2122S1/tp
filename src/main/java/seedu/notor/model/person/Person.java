@@ -39,7 +39,7 @@ public class Person implements Unique<Person>, Notable {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Note note) {
-        requireAllNonNull(name, phone, email, tags);
+        requireAllNonNull(name, phone, email);
         this.name = name;
         this.phone = phone;
         this.email = email;

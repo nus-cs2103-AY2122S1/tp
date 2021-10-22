@@ -1,10 +1,9 @@
-package seedu.notor.logic.commands.person;
+package seedu.notor.logic.commands.group;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.logic.commands.CommandResult;
-import seedu.notor.logic.commands.group.GroupCommand;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.group.GroupDeleteExecutor;
 

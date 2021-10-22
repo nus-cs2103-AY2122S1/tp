@@ -46,9 +46,5 @@ public class PersonEditDescriptorTest {
         // different email -> returns false
         editedAmy = new PersonEditDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
         assertNotEquals(DESC_AMY, editedAmy);
-
-        // different tags -> returns false
-        editedAmy = new PersonEditDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertNotEquals(DESC_AMY, editedAmy);
     }
 }
