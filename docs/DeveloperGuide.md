@@ -291,6 +291,75 @@ resets after each search.
 
 _{more aspects and alternatives to be added}_
 
+### \[Proposed\] Genre tagging feature
+
+#### Current Implementation
+
+The `Genre` command allows the user to specify any `Genre` for an `Anime`, and stores it in a `Set` in the `Anime`.
+However, the `Genre` specified isn't tracked anywhere else.<br>
+If a user wishes to specify the same `Genre` for a different `Anime`, the user will have to type the `Genre`'s name 
+again exactly, and the system will create a new `Genre` and store it inside that `Anime` as well. 
+* Pros: Easy to implement, and easy to manage as we don't have to worry about syncing the `Genres` in multiple lists
+* Cons: Inconvenient for the user, as `Genres` with slightly different names are considered as different, even if the user may have meant for them to be the same.
+    For example, `science fiction`, `sci fi`, `scifi`
+
+#### Proposed Implementation
+
+Instead of directly adding a `Genre` to an `Anime`, we can instead add it to a `GenresList`, and keep track of all user defined `Genres` there.<br>
+The user can then tag an `Anime` with a `Genre` in this list.
+* Pros: User no longer have to keep track of all the `Genres` that has been added, and this prevents "similar `Genres`", which improves `find` by `Genre` functionality
+* Cons: More storage intensive, as we have to now store a list of `Genre`. 
+  `Genre` must be synced in multiple locations, and deletion of a `Genre` from the `GenreList` would require the system to remove the `Genre` from all tagged `Animes`.
+  
+
+Given below is a MSS of an example usage scenario of a user adding a `Genre` to an `Anime`.
+
+**Use case: UCP1 - List all anime**
+
+**MSS**
+1.  <ins>User lists all anime(UC01)</ins>
+2.  User decides which `Anime` to add a `Genre`
+3.  User requests a list of all previously added `Genre`
+4.  System displays a list of all previously added `Genre`
+5.  User chooses a `Genre` to tag the `Anime` with
+6.  User requests to tag an `Anime` with a `Genre`
+7.  System tags the Anime with the specified `Genre`
+    
+    Use case ends. 
+
+**Extensions**
+
+- 4a. The `Genre` user wishes to tag is not in the list
+
+    - 4a1. User adds a new `Genre` to the list
+    
+    Use case resumes at step 4
+  
+- 4a1. The `Genre` user wishes to add is already in the list
+  
+    - 4a1a. System displays an error message, telling user that the `Genre` already exists
+    
+    Use case resumes at step 4
+
+#### Design considerations:
+
+**Aspect: Interaction with `find`:**
+
+* **Alternative 1** `Genre` keeps track of which anime is tagged by this `Genre`. Find searches from the `GenreList`.
+    * Pros: Very efficient, as we do not need to go through the list of anime checking each of the anime. Works well when number of `Anime` is large.
+    * Cons: More storage intensive, requires us to store the list of tagged `Anime` for every `Genre`. 
+      Could also cause problems if the save file is tempered with, as there is bi-directional referencing between `Anime` and `Genre`
+      
+* **Alternative 2 (Suggested)** Find searches through the list of `Anime` and see if each `Anime` is tagged with this `Genre`
+    * Pros: Less bug prone, easy to implement, doesn't require a bi-directional navigability between `Anime` and `Genre`
+    * Cons: Can have an effect on performance when a large number of `Anime` is in the list
+    
+**Aspect: How to implement `GenreList`**
+* `GenreList` as a `HashSet`
+    * Pros: Prevents duplication, easy to implement.
+    
+    
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Glossary, Naming Conventions**
