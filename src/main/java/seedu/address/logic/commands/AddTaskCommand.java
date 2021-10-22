@@ -29,6 +29,7 @@ public class AddTaskCommand extends AddCommand {
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
+            + PREFIX_TASK_ID + "T1 "
             + PREFIX_TASK_NAME + "assignment1 "
             + PREFIX_TASK_DEADLINE + "20/10/2021";
 

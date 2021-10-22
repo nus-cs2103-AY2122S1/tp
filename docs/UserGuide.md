@@ -56,6 +56,8 @@ tasks done faster than traditional GUI apps.
 ### Module add task: `add task`
 
 Create a new task for a specific module
+Task name should only contain alphanumeric characters
+Task deadline should only contain alphanumeric characters and dashes
 
 Format: `add task m/<module name>, a/<task name>, d/<task deadline>`
 
@@ -79,11 +81,13 @@ Examples:
 
 Adds a new task to the specified module
 
-Format: `module add <module name>, <task name>`
+Format: `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>`
 
 Examples:
-* `module add CS2103, assignment1`: Adds the task assignment1 to module CS2103
-* `module add CS2100, lab1`: Adds the task lab1 to module CS2100
+* `add task m/CS2103 ti/T1 a/practical exam d/12-11-2021`: Adds task 'practical exam' with deadline
+   on '12-11-2021' to module 'CS2103'
+* `add task m/CS2103 ti/T3 a/Lab1 d/21-10-2021`: Adds the task lab1 with deadline on 21-10-2021 to module CS2100
+
 
 ### Add student to a specific module: `add student`
 
@@ -109,7 +113,8 @@ Examples:
 
 ### Edit a student's information: `edit student`
 
-Edits a student's information (at least one field (name/tele handle/email) should be provided)
+Edits a student's information (at least one editable field (name/tele handle/email) should be provided, 
+and only provided editable fields will be changed)
 
 Format: `edit student m/<module name> i/<student id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
 
@@ -118,6 +123,20 @@ Examples:
   A0123456A in module CS2103 to John Doe
 * `edit student m/CS2100 i/A0123457A t/@amylee e/amy@u.nus.edu`: Edits the tele handle and email of the student with id
   A0123457A in module CS2100 to @amylee and amy@u.nus.edu respectively
+
+### Edit a task's information: `edit task`
+
+Edits a task's information (at least one editable field (name/deadline) should be provided,
+and only provided editable fields will be changed)
+Task name should only contain alphanumeric characters
+Task deadline should only contain alphanumeric characters and dashes
+
+Format: `edit task m/<module name> ti/<task id> n/<edited student name> t/<edited student tele handle> e/<edited student email>`
+
+Examples:
+* `edit task m/CS2103 i/T10 a/Final exam d/20-11-2021`: Edits the name and deadline of the task with task id 'T10'
+  to 'Final exam' and '20-11-2021' respectively
+* `edit task m/CS2103 i/T10 d/23-11-2021`: Edits only the deadline of the task with task id 'T10' to '20-11-2021'
 
 ### Find a student: `find`
 

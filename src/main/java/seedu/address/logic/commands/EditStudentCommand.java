@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
@@ -33,20 +35,23 @@ public class EditStudentCommand extends EditCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a student's information. Must provide at least "
-            + "one field (name/tele handle/email) to be edited. "
+            + "one editable field (name/tele handle/email) to be edited. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
             + PREFIX_STUDENT_ID + "STUDENT ID "
             + PREFIX_NAME + "EDITED NAME (OR) "
             + PREFIX_TELE_HANDLE + "EDITED TELE HANDLE (OR) "
-            + PREFIX_EMAIL + "EDITED EMAIL\n"
+            + PREFIX_EMAIL + "EDITED EMAIL \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
             + PREFIX_STUDENT_ID + "A1234567A "
             + PREFIX_NAME + "John Doe "
             + PREFIX_TELE_HANDLE + "@johndoe "
             + PREFIX_EMAIL + "johnd@example.com "
-            + "(edits all fields)";
+            + "(edits all fields)\n"
+            + "You may omit editable fields that are not being edited.";
+
+    private static Logger logger = Logger.getLogger("Edit Student Logger");
 
     private EditStudentDescriptor editStudentDescriptor;
     private ModuleName moduleName;
@@ -89,7 +94,8 @@ public class EditStudentCommand extends EditCommand {
             if (student.getStudentId().equals(editStudentDescriptor.studentId)) {
                 editStudentDescriptor.setUniqueTaskList(student.getTaskList());
                 Student editedStudent = createEditedStudent(student, editStudentDescriptor);
-
+                logger.log(Level.INFO, "editing student: " + student.getName()
+                        + " from module: " + module.getName());
                 module.setStudent(student, editedStudent);
                 return new CommandResult(String.format(Messages.MESSAGE_EDIT_STUDENT_SUCCESS, student.getStudentId()));
             }
