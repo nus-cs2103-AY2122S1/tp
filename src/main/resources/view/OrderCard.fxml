@@ -22,13 +22,13 @@
       <HBox alignment="CENTER_LEFT">
           <Label fx:id="salesid" styleClass="cell_big_label">
               <minWidth>
+                  <!-- Ensures that the label text is never truncated -->
                   <Region fx:constant="USE_PREF_SIZE" />
               </minWidth>
           </Label>
           <Label fx:id="id" styleClass="cell_big_label" />
           <Label fx:id="label" styleClass="cell_big_label" text="\$label" />
       </HBox>
-      <HBox spacing="5.0" />
       <HBox alignment="CENTER_LEFT" spacing="10.0">
           <children>
               <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
