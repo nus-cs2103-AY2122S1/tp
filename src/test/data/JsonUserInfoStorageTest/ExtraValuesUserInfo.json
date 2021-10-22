@@ -1,0 +1,14 @@
+{
+  "currentSemester" : {
+    "year" : {
+      "value" : 4
+    },
+    "extra" : "some value ",
+    "semester" : {
+      "value" : 1
+    }
+  },
+  "mcGoal" : {
+    "value" : 160
+  }
+}
