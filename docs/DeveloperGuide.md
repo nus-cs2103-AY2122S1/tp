@@ -289,6 +289,53 @@ disadvantages brought about by the other two implementations.
 
 #### Implementation
 
+The implementation of the command input history feature can be split into two parts. The implementation of the history 
+API and how it is used in the feature. 
+
+##### History API
+
+The specifications of the history API can be found in the 
+[`History`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/History.java) 
+interface located in the [`commons.util.history`](https://github.com/AY2122S1-CS2103T-W13-2/tp/tree/master/src/main/java/seedu/address/commons/util/history) 
+package. This interface mandates that all implementations of `History` should implement the following methods:
+
+* `#add(object)` - Add a snapshot of the object into the history.
+* `#get(index)` - Get the snapshot of the object stored at the index in the history.
+* `#size()` - Get the number of snapshots currently stored in the history.
+
+The history API is implemented by abstract class [`BaseHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/BaseHistory.java) 
+which provides the storage mechanism and options for the 
+saved snapshots. The [`StringHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/StringHistory.java) 
+and [`CopyableHistory`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/commons/util/history/CopyableHistory.java) 
+classes then perform the defensive copying of provided objects in addition to making use of `BaseHistory` for the 
+storage mechanism. The defensive copying mechanism of `#add(object)` in `CopyableHistory` can be illustrated with a 
+sequence diagram as shown below. 
+
+![CopyableHistory Add Sequence Diagram](images/CopyableHistoryAddSequenceDiagram.png)
+
+#### Usage
+
+The command input history feature is implemented by the 
+[`CommandInput`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/ui/CommandInput.java) 
+class in the [`ui`](https://github.com/AY2122S1-CS2103T-W13-2/tp/tree/master/src/main/java/seedu/address/ui) package.
+The class diagram below shows the structure of the implementation. 
+
+![CommandInput Class Diagram](images/CommandInputClassDiagram.png)
+
+`CommandInput` exposes the following methods for `CommandBox` to control its state.
+
+* `#value()` - Gets the current value in the `CommandInput`
+* `#set(string)` - Sets the current value in the `CommandInput` to the string.
+* `#next()` - Retrieves the next previously entered command.
+* `#previous()` - Retrieve the next recently entered command.
+* `#save()` - Saves the current string in the `CommandInput` to the history.
+
+The following sequence diagrams show what happens when the user enters the command, executes the command and presses the
+up arrow key to go to a previously entered command. 
+
+![Save Command Sequence Diagram](images/SaveEnteredCommandSequenceDiagram.png)
+![Go To Previous Command Sequence Diagram](images/GoToPreviousCommandSequenceDiagram.png)
+
 ### Batch Import
 
 #### Implementation
