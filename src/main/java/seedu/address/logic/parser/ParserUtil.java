@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +14,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lessoncode.LessonCode;
+import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Name;
@@ -25,6 +29,8 @@ import seedu.address.model.person.TeleHandle;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_LESSON_DURATION =
+            "Provide both start time and end time. Start time <= end time";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -177,5 +183,39 @@ public class ParserUtil {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String lessonDay} into a {@code LessonDau}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code lessonDay} is invalid.
+     */
+    public static LessonDay parseLessonDay(String lessonDay) throws ParseException {
+        requireNonNull(lessonDay);
+        String trimmedLessonDay = lessonDay.trim();
+        if (!LessonDay.isValidDay(trimmedLessonDay)) {
+            throw new ParseException(LessonDay.MESSAGE_CONSTRAINTS);
+        }
+        return new LessonDay(trimmedLessonDay);
+    }
+
+    /**
+     * Parses a {@code String lessonTime} into a {@code List<LessonTime>}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {Wcode lessonTime} is invalid.
+     */
+    public static List<LessonTime> parseLessonTime(String lessonTime) throws ParseException {
+        requireNonNull(lessonTime);
+        String trimmedLessonTime = lessonTime.trim();
+        String[] lessonTimeArr = trimmedLessonTime.split("\\s+");
+        if (lessonTimeArr.length != 2 || LocalTime.parse(lessonTimeArr[0]).isAfter(LocalTime.parse(lessonTimeArr[1]))) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DURATION);
+        }
+        if (!LessonTime.isValidTime(lessonTimeArr[0]) || !LessonTime.isValidTime(lessonTimeArr[1])) {
+            throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        return Arrays.stream(lessonTimeArr).map(LessonTime::new).collect(Collectors.toUnmodifiableList());
     }
 }
