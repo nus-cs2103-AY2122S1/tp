@@ -97,12 +97,6 @@ public class VersionManager implements Version {
         }
     }
 
-    private String getPresentableHistory(Commit commit) {
-        String firstLine = getPresentableHistory(commit, 0);
-        String secondLine = getPresentableHistory(commit, 1);
-        return firstLine + System.lineSeparator() + secondLine;
-    }
-
     private String getPresentableHistory(Commit commit, int num, String label) {
         assert num == 0 || num == 1;
         if (num == 0) {
@@ -112,15 +106,11 @@ public class VersionManager implements Version {
         }
     }
 
-    private String getPresentableHistory(Commit commit, int num) {
-        return getPresentableHistory(commit, num, "");
-    }
-
     @Override
     public List<String> retrieveHistory() {
         return retrieveHistoryAdvanced();
     }
-    
+
     private List<String> retrieveHistoryAdvanced() {
         Label latestLabel = labelController.fetchLabelByName("temp_LATEST");
 
@@ -144,7 +134,7 @@ public class VersionManager implements Version {
 
         List<String> result = new ArrayList<>();
         for (Commit commit : sortedEarlyHistory) {
-            result.add("| " + getPresentableHistory(commit, 1));
+            result.add("| " + getPresentableHistory(commit, 1, ""));
             result.add("* " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));
         }
 
@@ -158,10 +148,10 @@ public class VersionManager implements Version {
         // Latest on left lane
         for (Commit commit : sortedBranch) {
             if (latestToEarly.contains(commit)) {
-                result.add("| | " + getPresentableHistory(commit, 1));
+                result.add("| | " + getPresentableHistory(commit, 1, ""));
                 result.add("* | " + getPresentableHistory(commit, 0, commit.equals(latestCommit) ? "(prior)" : ""));
             } else {
-                result.add("| | " + getPresentableHistory(commit, 1));
+                result.add("| | " + getPresentableHistory(commit, 1, ""));
                 result.add("| * " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));
             }
         }
@@ -174,8 +164,9 @@ public class VersionManager implements Version {
         Label latest = labelController.createNewLabel("temp_LATEST", head);
         labelController.write(latest.getName(), latest);
         Commit mainCommit = latest.getCommitSupplier().get();
+        assert mainCommit.equals(head);
 
-        Commit relevantCommit = fetchCommit(fiveCharHash);
+        Commit relevantCommit = commitController.fetchCommitByHash(fiveCharHash);
         if (relevantCommit.equals(Commit.NULL)) {
             return Commit.NULL;
         }
@@ -184,28 +175,6 @@ public class VersionManager implements Version {
         treeController.regenerateBlobs(relevantTree);
         moveHead(relevantCommit);
         return relevantCommit;
-    }
-
-
-    private Commit fetchCommit(String hash) throws IOException, ParseException {
-        Commit currentCommit = head;
-        String currentHash = currentCommit.getHash();
-        if (currentHash.substring(0, 5).equals(hash)) {
-            return currentCommit;
-        }
-
-        Supplier<Commit> parentCommitSupplier = head.getParentSupplier();
-        while (parentCommitSupplier.get() != Commit.NULL) {
-            currentCommit = parentCommitSupplier.get();
-            currentHash = currentCommit.getHash();
-
-            if (currentHash.substring(0, 5).equals(hash)) {
-                return currentCommit;
-            }
-            parentCommitSupplier = currentCommit.getParentSupplier();
-        }
-
-        return Commit.NULL;
     }
 
     private void moveHead(Commit commit) throws IOException {

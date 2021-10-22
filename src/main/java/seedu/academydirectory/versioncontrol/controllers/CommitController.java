@@ -86,7 +86,7 @@ public class CommitController extends Controller<Commit> {
 
         // Allow for 5 digit hash to be used
         File f = new File(String.valueOf(vcPath));
-        String finalHash = hash;
+        String finalHash = hash.trim();
         File[] matchingFiles = requireNonNull(f.listFiles((x, name) -> name.startsWith(finalHash)));
         if (matchingFiles.length == 0) {
             return Commit.NULL;
