@@ -47,45 +47,40 @@ public class ImportCommandParserTest {
     }
 
     @Test
-    public void parse_InvalidNameImportFile_throwsParseException() {
+    public void parse_invalidNameImportFile_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/InvalidNameImportFile.csv";
-        assertThrows(ParseException.class, Name.MESSAGE_CONSTRAINTS,
-                () -> parser.parse(filePath));
+        assertThrows(ParseException.class, Name.MESSAGE_CONSTRAINTS, () -> parser.parse(filePath));
     }
 
     @Test
-    public void parse_InvalidPhoneImportFile_throwsParseException() {
+    public void parse_invalidPhoneImportFile_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/InvalidPhoneImportFile.csv";
-        assertThrows(ParseException.class, Phone.MESSAGE_CONSTRAINTS,
-                () -> parser.parse(filePath));
+        assertThrows(ParseException.class, Phone.MESSAGE_CONSTRAINTS, () -> parser.parse(filePath));
     }
 
     @Test
-    public void parse_InvalidAvailabilityImportFile_throwsParseException() {
+    public void parse_invalidAvailabilityImportFile_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/InvalidAvailabilityImportFile.csv";
-        assertThrows(ParseException.class, Availability.MESSAGE_CONSTRAINTS,
-                () -> parser.parse(filePath));
+        assertThrows(ParseException.class, Availability.MESSAGE_CONSTRAINTS, () -> parser.parse(filePath));
     }
 
     @Test
-    public void parse_InvalidTagsImportFile_throwsParseException() {
+    public void parse_invalidTagsImportFile_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/InvalidTagsImportFile.csv";
-        assertThrows(ParseException.class, Tag.MESSAGE_CONSTRAINTS,
-                () -> parser.parse(filePath));
+        assertThrows(ParseException.class, Tag.MESSAGE_CONSTRAINTS, () -> parser.parse(filePath));
     }
 
     @Test
-    public void parse_InvalidFormatImportFile_throwsParseExecption() {
+    public void parse_invalidFormatImportFile_throwsParseExecption() {
         String filepath = "src/test/data/ImportCommandParserTest/InvalidFormatImportFile.csv";
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE),
-                () -> parser.parse(filepath));
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        ImportCommand.MESSAGE_USAGE), () -> parser.parse(filepath));
     }
 
     @Test
-    public void parse_FileNotFound_throwsParseException() {
+    public void parse_fileNotFound_throwsParseException() {
         String filePath = "src/test/data/ImportCommandParserTest/FileNotFound.csv";
         assertThrows(ParseException.class,
-                String.format(ImportCommandParser.MESSAGE_FILE_NOT_FOUND, filePath),
-                () -> parser.parse(filePath));
+                String.format(ImportCommandParser.MESSAGE_FILE_NOT_FOUND, filePath), () -> parser.parse(filePath));
     }
 }

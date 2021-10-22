@@ -44,11 +44,12 @@ public class ImportCommandParser implements Parser<ImportCommand> {
 
         String line;
         ArrayList<Person> personList = new ArrayList<>();
+
         try {
             FileReader importFileReader = new FileReader(trimmedArgs);
             BufferedReader br = new BufferedReader(importFileReader);
             br.readLine();
-            while((line = br.readLine()) != null) {
+            while ((line = br.readLine()) != null) {
                 String[] values = line.split(",", 4);
 
                 if (values.length < 4) {
@@ -72,7 +73,6 @@ public class ImportCommandParser implements Parser<ImportCommand> {
                     List<String> tagList = Arrays.asList(trimmedTags.split(","));
                     tags = ParserUtil.parseTags(tagList);
                 }
-
 
                 Person person = new Person(name, phone, availability, tags);
                 personList.add(person);
