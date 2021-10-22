@@ -1,14 +1,14 @@
 package tutoraid.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Deletes a lesson identified using its displayed index from the TutorAid.
