@@ -21,7 +21,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists residents whose ART collection or"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists residents whose ART collection or "
             + "FET tests are due within the range of the given date or the range of the 2 dates given. "
             + "Parameters: "
             + CliSyntax.PREFIX_KEYWORD + "KEYWORD "
