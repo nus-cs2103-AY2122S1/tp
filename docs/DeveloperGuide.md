@@ -242,7 +242,7 @@ to the user when the user executes `clear`, after which it can either be confirm
 aborted (by entering any other input).
 
 The last command executed by the user is stored internally as a `Command` in `LogicManager`.
-`LogicManager` makes use of the method `Command::requiresConfirmation` to check whether the
+`LogicManager` makes use of the method `Command#requiresConfirmation` to check whether the
 last command requires a user confirmation. If this is the case, the `Parser` parses the next user input
 as a confirmation message instead.
 
