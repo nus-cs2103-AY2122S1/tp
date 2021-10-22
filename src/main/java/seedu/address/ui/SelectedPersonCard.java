@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
@@ -78,13 +79,17 @@ public class SelectedPersonCard extends UiPart<Region> {
             name.setText(person.getName().fullName);
             phone.setText("Phone: " + person.getPhone().value);
             address.setText("Address: " + person.getAddress().value);
-            review.setText("Reviews: " + person.getReview().value);
+            review.setText("Review: " + person.getReview().value);
             email.setText("Email: " + person.getEmail().value);
             tags.getChildren().clear();
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
                     .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
             rating.setText(person.getRating().value + "\u2B50");
+
+            address.setTextAlignment(TextAlignment.JUSTIFY);
+            review.setTextAlignment(TextAlignment.JUSTIFY);
+
             logger.info("Person details set " + person);
         }
     }
@@ -97,7 +102,7 @@ public class SelectedPersonCard extends UiPart<Region> {
         name.setText("No contact selected.");
         phone.setText("Phone: NIL");
         address.setText("Address: NIL");
-        review.setText("Reviews: NIL");
+        review.setText("Review: NIL");
         email.setText("Email: NIL");
         tags.getChildren().clear();
         rating.setText("NIL" + "\u2B50");
