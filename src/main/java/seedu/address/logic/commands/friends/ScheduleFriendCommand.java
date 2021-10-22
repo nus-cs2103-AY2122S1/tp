@@ -24,7 +24,7 @@ public class ScheduleFriendCommand extends Command {
             + "Parameters: FRIEND_ID --period START_HOUR END_HOUR DAY --free IS_FREE\n"
             + "Example: " + COMMAND_WORD + " Draco --period 0800 0900 3 --free 1\n";
 
-    public static final String MESSAGE_SCHEDULE_PERSON_SUCCESS = "Scheduled Person: %1$s";
+    public static final String MESSAGE_SCHEDULE_FRIEND_SUCCESS = "Scheduled Friend: %1$s";
     private FriendId friendToScheduleId;
     private int day;
     private String startTime;
@@ -76,9 +76,8 @@ public class ScheduleFriendCommand extends Command {
             Friend friendToSchedule = model.getFriend(friendToScheduleId);
             Friend scheduledFriend = createScheduledFriend(friendToSchedule);
             model.setFriend(friendToSchedule, scheduledFriend);
-            // TODO change back to friendToScheduleId
-            return new CommandResult(String.format(MESSAGE_SCHEDULE_PERSON_SUCCESS,
-                    scheduledFriend), CommandType.FRIEND_DELETE);
+            return new CommandResult(String.format(MESSAGE_SCHEDULE_FRIEND_SUCCESS,
+                    friendToScheduleId), CommandType.FRIEND_SCHEDULE);
         } catch (InvalidDayTimeException e) {
             throw new CommandException(String.format(MESSAGE_INVALID_DAY_TIME_FORMAT, e.getMessage()));
         }

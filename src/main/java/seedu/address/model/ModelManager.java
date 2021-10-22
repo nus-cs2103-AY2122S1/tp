@@ -136,7 +136,8 @@ public class ModelManager implements Model {
     @Override
     public void setFriend(Friend target, Friend editedFriend) {
         requireAllNonNull(target, editedFriend);
-
+        // For debugging purposes while UI does not support displaying all fields yet.
+        logger.info("ModelManager:setFriend - " + editedFriend);
         friendsList.setFriend(target, editedFriend);
     }
 

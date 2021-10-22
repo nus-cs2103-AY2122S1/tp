@@ -40,10 +40,9 @@ public class ScheduleFriendCommandParser implements Parser<ScheduleFriendCommand
 
         try {
             String[] period = argMultimap.getValue(FLAG_PERIOD).get().split(" ");
-            if (period.length != 3
-                    || !(argMultimap.getValue(FLAG_FREE).get().equals("1")
-                    || argMultimap.getValue(FLAG_FREE).get().equals("0"))) {
-                throw new InvalidDayTimeException("Missing --period arguments or Invalid IS_FREE argument");
+            if (period.length != 3 || !(argMultimap.getValue(FLAG_FREE).get().equals("0")
+                    || argMultimap.getValue(FLAG_FREE).get().equals("1"))) {
+                throw new InvalidDayTimeException("Invalid " + FLAG_PERIOD + " or " + FLAG_FREE + " arguments");
             }
             int dayIndex = Integer.parseInt(period[2]);
             boolean isFree = argMultimap.getValue(FLAG_FREE).get().equals("1");

@@ -25,7 +25,8 @@ import seedu.address.model.gamefriendlink.UserName;
  */
 public class SampleDataUtil {
     // include private constructor for utility class
-    private SampleDataUtil() { }
+    private SampleDataUtil() {
+    }
 
     public static Friend[] getSampleFriends() {
         Game[] sampleGames = getSampleGames();
@@ -47,7 +48,7 @@ public class SampleDataUtil {
     }
 
     public static Game[] getSampleGames() {
-        return new Game[] {
+        return new Game[]{
             new Game(new GameId("CSGO")),
             new Game(new GameId("Valorant")),
             new Game(new GameId("LeagueofLegends")),
@@ -73,17 +74,17 @@ public class SampleDataUtil {
             scheduleThree.setScheduleDay(5, "0800", "2200", true);
             scheduleThree.setScheduleDay(6, "0900", "2200", true);
 
-            return new Schedule[] {
-                    scheduleOne,
-                    scheduleTwo,
-                    scheduleThree
+            return new Schedule[]{
+                scheduleOne,
+                scheduleTwo,
+                scheduleThree
             };
 
         } catch (InvalidDayTimeException e) {
-            return new Schedule[] {
-                    new Schedule(),
-                    new Schedule(),
-                    new Schedule()
+            return new Schedule[]{
+                new Schedule(),
+                new Schedule(),
+                new Schedule()
             };
         }
 
@@ -107,11 +108,12 @@ public class SampleDataUtil {
 
     /**
      * Create a Friend object with an array of gameIds.
-     *
+     * <p>
      * Sample friends can only have GameFriendLinks to games which exist in the sample games list and must have unique
      * FriendIds.
      */
-    public static Friend createSampleFriend(String friendIdString, String friendNameString, Schedule schedule, Game... games) {
+    public static Friend createSampleFriend(String friendIdString, String friendNameString, Schedule schedule,
+                                            Game... games) {
         FriendId friendId = new FriendId(friendIdString);
 
         Set<GameFriendLink> gameFriendLinks = new HashSet<>();

@@ -34,7 +34,8 @@ public class Schedule {
      * @param isFree    Is timeslot free.
      * @throws InvalidDayTimeException Invalid time or day.
      */
-    public void setScheduleDay(int day, String startTime, String endTime, boolean isFree) throws InvalidDayTimeException {
+    public void setScheduleDay(int day, String startTime, String endTime, boolean isFree)
+            throws InvalidDayTimeException {
         if (day < 1 || day > 7) {
             throw new InvalidDayTimeException("Invalid day value");
         }
@@ -68,8 +69,12 @@ public class Schedule {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Schedule schedule1 = (Schedule) o;
         return Objects.equals(schedule, schedule1.schedule);
     }

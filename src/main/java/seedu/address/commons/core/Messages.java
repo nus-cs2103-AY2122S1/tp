@@ -15,4 +15,5 @@ public class Messages {
     public static final String MESSAGE_FRIEND_ID_NOT_FOUND = "No friend found with the FRIEND_ID - %1$s";
     public static final String MESSAGE_GAME_ID_NOT_FOUND = "No game found with the GAME_ID - %1$s";
     public static final String MESSAGE_INVALID_DAY_TIME_FORMAT = "Invalid day or time format - %1$s";
+    public static final String MESSAGE_END_TIME_ORDER = "End time cannot be before/be the same as start time";
 }

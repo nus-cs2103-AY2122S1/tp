@@ -1,6 +1,7 @@
 package seedu.address.model.friend;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_END_TIME_ORDER;
 import static seedu.address.model.util.DayTimeUtil.getIndexFromTime;
 import static seedu.address.model.util.DayTimeUtil.getTimeFromIndex;
 
@@ -26,7 +27,7 @@ public class Day {
      * Constructs a default {@code Day}.
      * Utilised by jackson for serialization
      */
-    public Day() {
+    private Day() {
         this.timeSlots = new boolean[NUMBER_OF_SLOTS];
         this.dayOfWeek = DayOfWeek.of(1);
     }
@@ -56,7 +57,7 @@ public class Day {
         endIndex = endIndex == 0 ? 24 : endIndex; // when endTime is 0000, it is treated as 2400
 
         if (endIndex <= startIndex) {
-            throw new InvalidDayTimeException("End time cannot be before/be the same as start time");
+            throw new InvalidDayTimeException(MESSAGE_END_TIME_ORDER);
         }
 
         for (int i = startIndex; i <= endIndex - 1; i++) {
@@ -104,8 +105,12 @@ public class Day {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Day day = (Day) o;
         return Arrays.equals(timeSlots, day.timeSlots) && dayOfWeek == day.dayOfWeek;
     }
@@ -119,9 +124,9 @@ public class Day {
 
     @Override
     public String toString() {
-        return "Day{" +
-                "timeSlots=" + Arrays.toString(timeSlots) +
-                ", dayOfWeek=" + dayOfWeek.name() +
-                '}';
+        return "Day{"
+                + "timeSlots=" + Arrays.toString(timeSlots)
+                + ", dayOfWeek=" + dayOfWeek.name()
+                + '}';
     }
 }
