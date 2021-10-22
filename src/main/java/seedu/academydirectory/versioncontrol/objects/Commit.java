@@ -30,7 +30,7 @@ public class Commit extends VcObject {
         super(hash);
         this.author = author;
         this.date = date;
-        this.message = message == null ? "" : message;
+        this.message = message == null ? "" : message.substring(0, Math.min(message.length(), 128));
         this.parentSupplier = parentSupplier;
         this.treeSupplier = treeSupplier;
     }

@@ -4,9 +4,17 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.Optional;
 
+import seedu.academydirectory.commons.exceptions.DataConversionException;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.model.AcademyDirectory;
+import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
+import seedu.academydirectory.model.util.SampleDataUtil;
+import seedu.academydirectory.storage.AcademyDirectoryStorage;
+import seedu.academydirectory.storage.JsonAcademyDirectoryStorage;
+import seedu.academydirectory.storage.StorageManager;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 
 public class RevertCommand extends Command {
@@ -19,7 +27,7 @@ public class RevertCommand extends Command {
             + "Format: `revert KEYWORD`";
 
     public static final String REVERT_SUCCESSFUL_ACKNOWLEDGEMENT = "Successfully reverted Academy"
-            + " Directory as requested ... Restart the app to see changes!";
+            + " Directory as requested!";
 
     public static final String REVERT_REQUEST_REJECTED = "Unable to revert Academy Directory as requested ...";
 
@@ -44,6 +52,21 @@ public class RevertCommand extends Command {
         } catch (IOException | ParseException e) {
             throw new CommandException(REVERT_REQUEST_REJECTED, e);
         }
-        return new CommandResult(REVERT_SUCCESSFUL_ACKNOWLEDGEMENT, false, true);
+
+        AcademyDirectoryStorage academyDirectoryStorage =
+                new JsonAcademyDirectoryStorage(model.getAcademyDirectoryFilePath());
+        StorageManager storage = new StorageManager(academyDirectoryStorage, null);
+        Optional<ReadOnlyAcademyDirectory> academyDirectoryOptional;
+        ReadOnlyAcademyDirectory initialData;
+
+        try {
+            academyDirectoryOptional = storage.readAcademyDirectory();
+            initialData = academyDirectoryOptional.orElseGet(SampleDataUtil::getSampleAcademyDirectory);
+        } catch (DataConversionException | IOException e) {
+            initialData = new AcademyDirectory();
+        }
+
+        model.setAcademyDirectory(initialData);
+        return new CommandResult(REVERT_SUCCESSFUL_ACKNOWLEDGEMENT, false, false);
     }
 }

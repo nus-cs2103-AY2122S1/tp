@@ -55,7 +55,7 @@ public class DeleteCommand extends Command {
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteStudent(studentToDelete);
-        model.commit(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
+        model.commit(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete.getName()));
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
 
