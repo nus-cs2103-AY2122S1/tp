@@ -31,7 +31,7 @@ public class ClassCode {
      * Returns true if a given string is a valid classCode.
      */
     public static boolean isValidClassCode(String test) {
-        return test.toUpperCase(Locale.ROOT).matches(VALIDATION_REGEX) ;
+        return test.toUpperCase(Locale.ROOT).matches(VALIDATION_REGEX);
     }
 
     @Override

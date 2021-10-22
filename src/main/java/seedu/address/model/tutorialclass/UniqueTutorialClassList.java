@@ -3,11 +3,14 @@ package seedu.address.model.tutorialclass;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.student.ClassCode;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassException;
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
 
