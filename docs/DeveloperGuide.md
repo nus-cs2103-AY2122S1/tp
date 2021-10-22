@@ -168,6 +168,101 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes noteworthy details on how certain features are implemented.
 
+### Telegram
+
+#### Implementation
+
+The telegram handle field is facilitated by the `Telegram` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Telegram` object. 
+
+The `Telegram` class implements the following operation:
+
+* `Telegram#isValidTelegram(String test)` — Returns true if a given string is a valid telegram handle.
+
+Regex used in verifying the validity of telegram handle:
+
+`public static final String VALIDATION_REGEX = "\\w{5,64}";`
+* `\w` — **Word**. Any word character (alphanumeric & underscore)
+* `{5,64}` — **Quantifier**. Match between 5 and 64 of the preceding token.
+
+The `Telegram` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where every field, including the `Telegram` field, is compulsory except the `Tag` field.
+
+![PersonWithTelegramClassDiagram](images/PersonWithTelegramClassDiagram.png)
+
+### Optional Fields
+
+#### Implementation
+
+The `Phone`, `Email` and `Address` fields were modified such that these fields are no longer compulsory. The class diagram below illustrates the `Person` class after the addition of the `Telegram` field. The `Name` and `Telegram` fields are compulsory while the rest are optional.
+
+![PersonOptionalFieldClassDiagram](images/PersonOptionalFieldClassDiagram.png)
+
+In order to accomodate to the above mentioned new optional fields, the respective constructors were modified such that the following examples are considered valid inputs.
+
+Example 1: Adding new contact without email and address.
+
+```
+add n/John Doe te/@johndoe123 p/98765432 
+```
+
+Example 2: Adding new contact without phone, email and address.
+
+```
+add n/John Doe te/@johndoe123
+```
+
+A more interesting input would be as such.
+
+Example 3: Adding new contact without email and address but with empty phone input.
+
+```
+add n/John Doe te/@johndoe123 p/
+```
+
+In such a case, the constructors are modified such that the above input is also deemed as valid. The rationale behind this is that there is nothing for the `VALIDATION_REGEX` to verify, unlike in the following example.
+
+Example 4: Adding new contact without email and address but with invalid phone input.
+
+```
+add n/John Doe te/@johndoe123 p/invalidPhoneNumber
+```
+
+For the case above, the respective constructors will carry out validation on the given input.
+
+In order to allow for optional fields, the `AddCommandParser` also has to be modified. In particular, the following methods are modified
+* `AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)`
+* `AddCommandParser#parse(args)`
+
+For the `arePrefixesPresent` method, the prefixes provided were changed to only include the following mandatory fields:
+* `PREFIX_NAME`
+* `PREFIX_TELEGRAM`
+
+`AddCommandParser#arePrefixesPresent(argumentMultimap, prefixes)` uses the static parsing methods in `ParserUtil` to parse the different fields in `Person`. The individual fields are first initialised with an empty string, which is now a valid input. The method then calls the `arePrefixesPresent` method to check if the provided prefix is present. If present, the method will then call the respective static parsing methods in `ParserUtil`.
+
+### GitHub
+
+#### Implementation
+
+The GitHub field is facilitated by the `Github` class. It is stored interally as a `String` in the data file `addressbook.json` and is then initialized as a `Github` object. 
+
+The `Github` class implements the following operation:
+
+* `Github#isValidGithub(String test)` — Returns true if a given string is a valid GitHub username.
+
+Regex used in verifying the validity of GitHub username:
+
+`public static final String VALIDATION_REGEX = "[a-z\d](?:[a-z\d]|-(?=[a-z\d])){0,38}";`
+* `[a-z\d]` — **Character set**. Match any character in the set.
+* `a-z` — **Range**. Matches a character in the range "a" to "z" (char code 97 to 122). Case sensitive.
+* `\d` — **Digit**. Matches any digit character (0-9).
+* `(?:[a-z\d]|-(?=[a-z\d]))` — **Non-capturing group**. Groups multiple tokens together without creating a capture group.
+* `|` — **Alternation**. Acts like a boolean OR. Matches the expression before or after the **|**.
+* `-` — **Character**. Matches a "-" character (char code 45).
+* `{0,38}` — **Quantifier**. Match between 0 and 38 of the preceding token.
+
+The `Github` class is first integrated into the `Person` class and added as a new field to the `Person` class. This is illustrated by the class diagram below, where only the `Name`, `Telegram` and `Github` fields are compulsory.
+
+![PersonWithGithubClassDiagram](images/PersonWithGithubClassDiagram.png)
+
 ### Export command
 
 #### Implementation
