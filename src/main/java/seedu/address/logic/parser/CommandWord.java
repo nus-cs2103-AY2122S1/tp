@@ -29,8 +29,7 @@ public enum CommandWord {
     DELETE_PERSON("delete", "del", "rm", "d"),
     EDIT_PERSON("edit", "update", "e"),
     FIND_PERSON("find", "f"),
-    LIST_PERSON("list", "ls"),
-    REMARK_PERSON("remark");
+    LIST_PERSON("list", "ls");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
 
