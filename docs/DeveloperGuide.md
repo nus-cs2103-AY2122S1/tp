@@ -279,6 +279,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | beginner user                              | list all current contacts      | have an overview of my populated contacts                              |
 | `* * *`  | beginner user                              | assign tags or categories to users | categorise contacts by groups                                      |
 | `* * *`  | beginner user                              | edit a contact                 | categorise contacts by groups                                          |
+| `* * *`  | beginner user                              | append data fields to a contact | add on new data fields to existing ones                          |
+| `* * *`  | beginner user                              | remove specific data fields | precisely remove incorrect data fields of a contact                       |
 | `* * *`  | slightly familiar user                 | delete a contact                | can remove clutter or errors                                   |
 | `* * *`  | slightly familiar user                 | add a new organisation                | record basic information of the organisation and the people related to it                                   |
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
@@ -296,7 +298,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `ComputingConnection` and the **Actor** is the `user`, unless specified otherwise)
 
 **Use case: Add a contact**
 
@@ -337,6 +339,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ComputingConnection shows an error message to prompt user to edit that field.
 
       Use case ends.
+
+**Use case: Append to a contact**
+
+**MSS**
+
+1. User requests to append data fields to a contact
+2. ComputingConnection appends the data field to the specific contact and displays the new details of the contact.
+Use case ends. 
+
+**Extensions**
+* 1a. ComputingConnection detects an error in the entered data.
+    * 1a1. ComputingConnection shows an error message to prompt user of the correct format. 
+    * 1a2. User enters valid data fields
+    Steps 1a1-1a2 are repeated until the data entered is correct. 
+    Use case resumes from step 4.
+
 
 **Use case: Search for a specific contact**
 
