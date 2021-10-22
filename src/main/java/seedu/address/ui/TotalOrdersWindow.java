@@ -12,7 +12,7 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class TotalOrdersWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(TotalOrdersWindow.class);
-    // TODO change to TotalOrdersWindo.fxml when ready
+    // TODO change to TotalOrdersWindow.fxml when ready
     private static final String FXML = "HelpWindow.fxml";
 
     @FXML

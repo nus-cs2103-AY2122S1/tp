@@ -149,7 +149,6 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Opens the total orders window or focuses on it if it's already opened.
      */
-    @FXML
     public void handleTotalOrders() {
         if (!totalOrdersWindow.isShowing()) {
             totalOrdersWindow.show();
@@ -182,6 +181,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        totalOrdersWindow.hide();
         helpWindow.hide();
         primaryStage.hide();
     }
