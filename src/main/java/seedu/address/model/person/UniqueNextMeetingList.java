@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -147,17 +149,11 @@ public class UniqueNextMeetingList implements Iterable<NextMeeting> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code meetings} contains only unique meetings.
      */
     private boolean meetingsAreUnique(List<NextMeeting> meetings) {
-        for (int i = 0; i < meetings.size() - 1; i++) {
-            for (int j = i + 1; j < meetings.size(); j++) {
-                if (meetings.get(i).equals(meetings.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        Set<NextMeeting> set = new HashSet<>(meetings);
+        return set.size() == meetings.size();
     }
 
     @Override

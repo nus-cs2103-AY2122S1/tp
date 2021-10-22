@@ -17,7 +17,6 @@ import java.util.function.Function;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClientId;
-import seedu.address.model.person.NextMeeting;
 import seedu.address.model.person.Person;
 
 /**
@@ -81,7 +80,7 @@ public class AddCommand extends Command {
         // TODO: model.incrementClientCounter should not be exposed, instead increment directly within addPerson
         model.getAddressBook().incrementClientCounter();
 
-        if (person.getNextMeeting() != NextMeeting.NULL_MEETING) {
+        if (person.hasNextMeeting()) {
             model.addNextMeeting(person.getNextMeeting());
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, person));

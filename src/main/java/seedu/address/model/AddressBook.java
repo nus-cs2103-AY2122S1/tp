@@ -78,7 +78,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setMeetings(List<NextMeeting> meetings) {
         this.meetings.setNextMeetings(meetings);
-        removeUnreferencedTags();
     }
 
     /**

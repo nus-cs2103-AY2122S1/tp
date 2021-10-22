@@ -94,6 +94,10 @@ public class Person {
         return disposableIncome;
     }
 
+    public boolean hasNextMeeting() {
+        return !nextMeeting.isNullMeeting();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

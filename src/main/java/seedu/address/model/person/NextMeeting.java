@@ -79,6 +79,10 @@ public class NextMeeting implements OptionalPersonNonStringField {
         return this.withWho.fullName;
     }
 
+    public boolean isNullMeeting() {
+        return this.equals(NULL_MEETING);
+    }
+
     public static NextMeeting getNullMeeting() {
         return NULL_MEETING;
     }
@@ -104,8 +108,7 @@ public class NextMeeting implements OptionalPersonNonStringField {
             && startTimeInString.equals(((NextMeeting) other).startTimeInString)
             && endTimeInString.equals(((NextMeeting) other).endTimeInString)
             && location.equals(((NextMeeting) other).location)
-            && (((withWho != null) && ((NextMeeting) other).withWho != null)
-                ? withWho.equals(((NextMeeting) other).withWho)
-                : ((withWho == null) && ((NextMeeting) other).withWho == null) ? true : false));
+                && ((withWho == null && ((NextMeeting) other).withWho == null)
+                || withWho.equals(((NextMeeting) other).withWho)));
     }
 }
