@@ -201,13 +201,13 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTask_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTask((String) null));
+    public void parseTaskName_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTaskName(null));
     }
 
     @Test
-    public void parsTask_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTask(INVALID_TASK_NAME));
+    public void parsTaskName_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTaskName(INVALID_TASK_NAME));
     }
 
     @Test

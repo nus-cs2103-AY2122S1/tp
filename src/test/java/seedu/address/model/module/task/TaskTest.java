@@ -1,22 +1,46 @@
 package seedu.address.model.module.task;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_DEADLINE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_POEM_TASK_NAME;
+import static seedu.address.testutil.TypicalTasks.MEETING;
+import static seedu.address.testutil.TypicalTasks.MEETING_DONE;
+import static seedu.address.testutil.TypicalTasks.PROJECT;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import seedu.address.testutil.TaskBuilder;
 
 class TaskTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Task(null， ));
-    }
+    public void equals() {
+        // same values -> returns true
+        Task meetingCopy = new TaskBuilder(MEETING).build();
+        Assertions.assertTrue(MEETING.equals(meetingCopy));
 
-    @Test
-    public void constructor_invalidTask_throwsIllegalArgumentException() {
-        String invalidTask = "";
-        assertThrows(IllegalArgumentException.class, () -> new Task(invalidTask));
+        // same object -> returns true
+        Assertions.assertTrue(MEETING.equals(MEETING));
+
+        // null -> returns false
+        Assertions.assertFalse(MEETING.equals(null));
+
+        // different type -> returns false
+        Assertions.assertFalse(MEETING.equals(5));
+
+        // different task -> returns false
+        Assertions.assertFalse(MEETING.equals(PROJECT));
+
+        // different name -> returns false
+        Task editedTask = new TaskBuilder(MEETING).withName(VALID_POEM_TASK_NAME).build();
+        Assertions.assertFalse(MEETING.equals(editedTask));
+
+        // different done status -> returns false
+        Assertions.assertFalse(MEETING.equals(MEETING_DONE));
+
+        // different deadline -> return false
+        Task editedDeadlineMeeting = new TaskBuilder(MEETING).withDeadline(VALID_POEM_TASK_DEADLINE).build();
+        Assertions.assertFalse(MEETING.equals(editedDeadlineMeeting));
     }
 
 }

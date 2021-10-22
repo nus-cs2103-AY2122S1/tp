@@ -12,7 +12,7 @@ import seedu.address.model.module.task.TaskDeadline;
  * Jackson-friendly version pf {@link Task}
  */
 class JsonAdaptedTask {
-    public static final String MISSING_FIELD_EVENT_FORMAT = "Task's %s field is missing!";
+    public static final String MISSING_FIELD_TASK_FORMAT = "Task's %s field is missing!";
 
     private final String taskName;
     private final Boolean isDone;
@@ -45,7 +45,7 @@ class JsonAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException {
         if (taskName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_TASK_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(taskName)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -53,17 +53,17 @@ class JsonAdaptedTask {
         final Name modelTaskName = new Name(taskName);
 
         if (isDone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, Boolean.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_TASK_FORMAT, Boolean.class.getSimpleName()));
         }
 
         if (deadline == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_FIELD_TASK_FORMAT,
                     TaskDeadline.class.getSimpleName()));
         }
         if (!TaskDeadline.isValidTaskDeadline(deadline)) {
             throw new IllegalValueException(TaskDeadline.MESSAGE_CONSTRAINTS);
         }
-        final TaskDeadline modelTaskDeadline = new TaskDeadline(TaskDeadline.MESSAGE_CONSTRAINTS);
+        final TaskDeadline modelTaskDeadline = new TaskDeadline(deadline);
 
         return new Task(modelTaskName, isDone, modelTaskDeadline);
     }

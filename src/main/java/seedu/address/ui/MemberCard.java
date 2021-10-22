@@ -61,8 +61,8 @@ public class MemberCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(position -> position.positionName))
                 .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
         member.getTaskList().asUnmodifiableObservableList().stream()
-                .sorted(Comparator.comparing(Task::getTaskName))
-                .forEach(task -> tasks.getChildren().add(new Label(task.getTaskName())));
+                .sorted(Comparator.comparing(Task::toString)) // no idea why Task::getName can not work
+                .forEach(task -> tasks.getChildren().add(new Label(task.getName().toString())));
     }
 
     @Override

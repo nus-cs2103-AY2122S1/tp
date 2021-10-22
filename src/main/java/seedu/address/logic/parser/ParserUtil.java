@@ -15,7 +15,6 @@ import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;
 import seedu.address.model.module.member.Phone;
 import seedu.address.model.module.member.position.Position;
-import seedu.address.model.module.task.Task;
 import seedu.address.model.module.task.TaskDeadline;
 
 /**

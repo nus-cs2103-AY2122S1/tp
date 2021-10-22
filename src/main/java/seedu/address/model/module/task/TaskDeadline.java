@@ -13,14 +13,14 @@ import java.util.Objects;
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskDeadline(String)}
  */
 public class TaskDeadline {
-    private static final String DATE_TIME_FORMAT = "dd/MM/yyyy HH:mm";
+    private static final String DEADLINE_FORMAT = "dd/MM/yyyy HH:mm";
 
-    public static final DateTimeFormatter DEADLINE_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+    public static final DateTimeFormatter DEADLINE_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DEADLINE_FORMAT);
 
     public static final String MESSAGE_CONSTRAINTS = new StringBuilder()
             .append("Task deadline should of format: ")
-            .append(DATE_TIME_FORMAT)
-            .append(". It should only contain numbers and '/', and it should not be blank.")
+            .append(DEADLINE_FORMAT)
+            .append(". It should only contain numbers, ':', and '/', and it should not be blank.")
             .toString();
 
     private final LocalDateTime deadline;
