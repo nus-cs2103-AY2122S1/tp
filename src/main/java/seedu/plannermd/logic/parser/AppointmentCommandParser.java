@@ -12,7 +12,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.FLAG_LIST;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.AppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.DeleteAppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.EditAppointmentCommand;
@@ -43,10 +42,10 @@ public class AppointmentCommandParser {
 
         final String flag = matcher.group("flag");
         final String arguments = matcher.group("arguments");
-
+        System.out.println(flag);
         switch (flag) {
         case FLAG_ADD:
-            return new AddAppointmentCommand();
+            return new AddAppointmentCommandParser().parse(arguments);
 
         case FLAG_EDIT:
             return new EditAppointmentCommand();

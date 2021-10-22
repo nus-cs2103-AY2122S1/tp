@@ -2,6 +2,11 @@ package seedu.plannermd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,12 +14,16 @@ import java.util.Set;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.appointment.AppointmentDate;
+import seedu.plannermd.model.appointment.Duration;
+import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -156,5 +165,46 @@ public class ParserUtil {
             throw new ParseException(Risk.MESSAGE_CONSTRAINTS);
         }
         return new Risk(trimmedAndUpperCaseRisk);
+    }
+
+    /**
+     * Parses a {@code String remark} into an {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Optional Risk field accepts an empty string as UNCLASSIFIED.
+     *
+     * @throws ParseException if the given {@code risk} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (trimmedRemark.isEmpty()) {
+            return Remark.getEmptyRemark();
+        }
+        return new Remark(trimmedRemark);
+    }
+
+//    public static AppointmentDate parseStartDate(String startDate) throws ParseException {
+//        requireNonNull(startDate);
+//        String trimmedStartDate = startDate.trim();
+//        if (!AppointmentDate.isValidAppointmentDate(trimmedStartDate)) {
+//            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+//        }
+//        return new AppointmentDate(trimmedStartDate);
+//    }
+
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (trimmedDuration.isEmpty()) {
+            return Duration.getDefaultDuration();
+        }
+        try {
+            if (!Duration.isValidDuration(trimmedDuration)) {
+                throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+            }
+            return new Duration(trimmedDuration);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
     }
 }

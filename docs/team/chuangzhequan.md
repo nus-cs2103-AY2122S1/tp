@@ -16,6 +16,11 @@ Given below are my contributions to the project.
 * **Project management**:
 
 * **Enhancements to existing features**:
+  * Added Date of Birth field into the Person class and test cases to test the validity of the date 
+  * Added command to add doctor
+  * Added test cases for adding doctor
+  * Added Appointment class test builders to be used for testing the Appointment class and its features
+  * Added command to add appointment
 
 * **Documentation**:
   * User Guide:
@@ -25,7 +30,8 @@ Given below are my contributions to the project.
     * Added value propositions
     * Added user stories
     * Added use cases
-    * Added Birth Date field to Person class 
+    * Added Birth Date field to Person class
+    * Updated the Architecture section to reflect state changes between PATIENT and DOCTOR
 
 * **Community**:
 
