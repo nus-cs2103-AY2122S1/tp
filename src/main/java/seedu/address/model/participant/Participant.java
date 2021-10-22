@@ -246,6 +246,17 @@ public class Participant {
     }
 
     /**
+     * Re-links this participant with the newly editedEvent.
+     *
+     * @param oldEvent      An instance of event that was edited.
+     * @param editedEvent   The newly edited event to link this participant to.
+     */
+    public void replaceEvent(Event oldEvent, Event editedEvent) {
+        events.remove(oldEvent);
+        events.add(editedEvent);
+    }
+
+    /**
      * Returns true if both participants have the same identity and data fields.
      * This defines a stronger notion of equality between two participants.
      */

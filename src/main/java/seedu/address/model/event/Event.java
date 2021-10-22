@@ -97,6 +97,17 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Re-links the participant of this event to the newly edited event.
+     *
+     * @param editedEvent  An instance of the newly edited event.
+     */
+    public void shiftParticipants(Event editedEvent) {
+        for (int i = 0; i < participants.size(); i++) {
+            participants.get(i).replaceEvent(this, editedEvent);
+        }
+    }
+
+    /**
      * Adds the given participant to the list of participants.
      *
      * @param participant The participant to be added.

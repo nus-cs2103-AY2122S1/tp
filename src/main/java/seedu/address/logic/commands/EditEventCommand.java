@@ -69,6 +69,7 @@ public class EditEventCommand extends Command {
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
+        eventToEdit.shiftParticipants(editedEvent);
         model.setEvent(eventToEdit, editedEvent);
         return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
