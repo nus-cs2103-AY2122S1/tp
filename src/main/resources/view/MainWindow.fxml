@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -19,8 +20,7 @@
   <scene>
     <Scene>
       <stylesheets>
-        <URL value="@Fonts.css" />
-        <URL value="@AnimeTheme.css" />
+        <URL value="@CharlotteTheme.css" />
       </stylesheets>
 
       <VBox>
@@ -28,6 +28,14 @@
           <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
+               <Menu mnemonicParsing="false" text="Themes">
+                 <items>
+                     <RadioMenuItem fx:id="darkTheme" mnemonicParsing="false" text="Dark" />
+                     <RadioMenuItem fx:id="charlotteTheme" mnemonicParsing="false" text="Charlotte" />
+                     <RadioMenuItem fx:id="squidGirlTheme" mnemonicParsing="false" text="Squid Girl" />
+                     <RadioMenuItem fx:id="wonderEggTheme" mnemonicParsing="false" text="Wonder Egg Priority" />
+                 </items>
+               </Menu>
         </MenuBar>
 
               <VBox fx:id="animeList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">

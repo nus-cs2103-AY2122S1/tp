@@ -159,7 +159,15 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public String getThemeCss() {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void setThemeCss(String themeCss) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

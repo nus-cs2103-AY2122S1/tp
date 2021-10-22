@@ -1,9 +1,16 @@
 package seedu.anilist.ui;
 
+import java.io.File;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
+import javafx.scene.Scene;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.GuiSettings;
@@ -22,6 +29,13 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+    private final String cssFilePath = "src/main/resources/view/";
+    private final String[] themesArr = {
+        "CharlotteTheme.css",
+        "DarkTheme.css",
+        "SquidGirlTheme.css",
+        "WonderEggTheme.css"
+    };
 
     private Stage primaryStage;
     private Logic logic;
@@ -29,12 +43,11 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private AnimeListPanel animeListPanel;
     private ResultDisplay resultDisplay;
+    private ToggleGroup themeToggleGroup = new ToggleGroup();
+    private String themeCss;
 
     @FXML
     private StackPane commandBoxPlaceholder;
-
-    @FXML
-    private MenuItem helpMenuItem;
 
     @FXML
     private StackPane animeListPanelPlaceholder;
@@ -44,6 +57,18 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private RadioMenuItem darkTheme;
+
+    @FXML
+    private RadioMenuItem charlotteTheme;
+
+    @FXML
+    private RadioMenuItem squidGirlTheme;
+
+    @FXML
+    private RadioMenuItem wonderEggTheme;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -57,6 +82,43 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        themeCss = logic.getThemeCss();
+
+        darkTheme.setToggleGroup(themeToggleGroup);
+        charlotteTheme.setToggleGroup(themeToggleGroup);
+        squidGirlTheme.setToggleGroup(themeToggleGroup);
+        wonderEggTheme.setToggleGroup(themeToggleGroup);
+
+        setTheme(themeCss);
+
+        charlotteTheme.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setTheme(themesArr[0]);
+            }
+        });
+
+        darkTheme.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setTheme(themesArr[1]);
+            }
+        });
+
+        squidGirlTheme.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setTheme(themesArr[2]);
+            }
+        });
+
+        wonderEggTheme.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                setTheme(themesArr[3]);
+            }
+        });
     }
 
     public Stage getPrimaryStage() {
@@ -78,6 +140,36 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void setTheme(String themeCss) {
+        this.themeCss = themeCss;
+        switch(themeCss) {
+        case "CharlotteTheme.css":
+            charlotteTheme.setSelected(true);
+            break;
+        case "DarkTheme.css":
+            darkTheme.setSelected(true);
+            break;
+        case "SquidGirlTheme.css":
+            squidGirlTheme.setSelected(true);
+            break;
+        case "WonderEggTheme.css":
+            wonderEggTheme.setSelected(true);
+            break;
+        default:
+            logger.log(Level.WARNING, themeCss + " file not found. Setting default theme Charlotte Theme.");
+            themeCss = "CharlotteTheme.css";
+            this.themeCss = themeCss;
+            charlotteTheme.setSelected(true);
+            break;
+        }
+        File f = new File(cssFilePath + themeCss);
+        String filepath = "file:///" + f.getAbsolutePath().replace("\\", "/");
+        Scene scene = primaryStage.getScene();
+        ObservableList<String> styleSheets = scene.getStylesheets();
+        styleSheets.remove(0);
+        styleSheets.add(filepath);
     }
 
     /**
@@ -103,6 +195,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
+        logic.setThemeCss(themeCss);
         logic.setGuiSettings(guiSettings);
         primaryStage.hide();
     }

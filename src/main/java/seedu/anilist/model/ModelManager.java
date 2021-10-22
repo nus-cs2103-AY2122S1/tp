@@ -69,6 +69,17 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public String getThemeCss() {
+        return userPrefs.getThemeCss();
+    }
+
+    @Override
+    public void setThemeCss(String themeCss) {
+        requireNonNull(themeCss);
+        userPrefs.setThemeCss(themeCss);
+    }
+
+    @Override
     public Path getAnimeListFilePath() {
         return userPrefs.getAnimeListFilePath();
     }
@@ -154,6 +165,7 @@ public class ModelManager implements Model {
         if (!(obj instanceof ModelManager)) {
             return false;
         }
+
 
         // state check
         ModelManager other = (ModelManager) obj;
