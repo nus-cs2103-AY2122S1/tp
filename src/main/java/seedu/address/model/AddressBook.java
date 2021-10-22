@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.customer.UniqueCustomerList;
 import seedu.address.model.person.employee.Employee;
@@ -13,7 +14,9 @@ import seedu.address.model.person.employee.UniqueEmployeeList;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.person.supplier.UniqueSupplierList;
 import seedu.address.model.reservation.Reservation;
-import seedu.address.model.reservation.ReservationList;
+import seedu.address.model.reservation.ReservationsManager;
+import seedu.address.model.table.Table;
+import seedu.address.model.table.TableManager;
 
 /**
  * Wraps all data at the address-book level
@@ -24,7 +27,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueCustomerList customers;
     private final UniqueEmployeeList employees;
     private final UniqueSupplierList suppliers;
-    private final ReservationList reservations;
+    private final ReservationsManager reservationsManager;
+    private final TableManager tableManager;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -37,7 +41,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         customers = new UniqueCustomerList();
         employees = new UniqueEmployeeList();
         suppliers = new UniqueSupplierList();
-        reservations = new ReservationList();
+        reservationsManager = new ReservationsManager();
+        tableManager = new TableManager();
     }
 
     public AddressBook() {}
@@ -53,7 +58,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     public void setReservations(List<Reservation> reservations) {
-        this.reservations.setReservations(reservations);
+        this.reservationsManager.setReservations(reservations);
+    }
+
+    public void setTables(List<Table> tables) {
+        this.tableManager.setTables(tables);
     }
 
     /**
@@ -89,6 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setEmployees(newData.getEmployeeList());
         setSuppliers(newData.getSupplierList());
         setReservations(newData.getReservationList());
+        setTables(newData.getTableList());
     }
 
     //// person-level operations
@@ -99,6 +109,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasCustomer(Customer customer) {
         requireNonNull(customer);
         return customers.contains(customer);
+    }
+
+    /**
+     * Returns true if a customer with the same phone as {@code phone} exists in the address book.
+     */
+    public boolean hasCustomerWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return customers.containsCustomerWithPhone(phone);
     }
 
     /**
@@ -168,14 +186,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasReservation(Reservation reservation) {
         requireNonNull(reservation);
-        return reservations.contains(reservation);
+        return reservationsManager.hasReservation(reservation);
     }
 
     /**
      * Adds a new reservation to the list
      */
     public void addReservation(Reservation reservation) {
-        reservations.add(reservation);
+        reservationsManager.addReservation(reservation);
     }
 
     /**
@@ -183,8 +201,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setReservation(Reservation target, Reservation editedReservation) {
         requireNonNull(editedReservation);
-
-        reservations.setReservation(target, editedReservation);
+        reservationsManager.setReservation(target, editedReservation);
     }
 
     /**
@@ -192,7 +209,63 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the list
      */
     public void removeReservation(Reservation key) {
-        reservations.remove(key);
+        reservationsManager.removeReservation(key);
+    }
+
+    //// table-level operations
+
+    /**
+     * Check if {@code table} exists in the database
+     */
+    public boolean hasTable(Table table) {
+        requireNonNull(table);
+        return tableManager.hasTable(table);
+    }
+
+    /**
+     * Adds a new table to the list
+     */
+    public void addTable(Table table) {
+        tableManager.addTable(table);
+    }
+
+    /**
+     * Replaces the table {@code target} in the list with {@code editedTable}
+     */
+    public void setTable(Table target, Table editedTable) {
+        requireNonNull(editedTable);
+        tableManager.setTable(target, editedTable);
+    }
+
+    /**
+     * Removes {@code key} from the database
+     * {@code key} must exist in the list
+     */
+    public void removeTable(Table key) {
+        tableManager.removeTable(key);
+    }
+
+    //// tableList-level operations
+
+    /**
+     * Adds a new table to the list
+     */
+    public void setTableList(List<Table> tableList) {
+        tableManager.setTableList(tableList);
+    }
+
+    /**
+     * Deletes all reservations
+     */
+    public void resetReservations() {
+        reservationsManager.resetReservations();
+    }
+
+    /**
+     * Resets the table list to an empty list
+     */
+    public void resetTableCount() {
+        tableManager.resetTableCount();
     }
 
     //// util methods
@@ -201,11 +274,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         // TODO: refine later
         return String.format(
-                "%d customers\n%d employees\n%d suppliers\n%d reservations\n",
+                "%d customers\n%d employees\n%d suppliers\n%d reservations\n%d tables",
                 customers.asUnmodifiableObservableList().size(),
                 employees.asUnmodifiableObservableList().size(),
                 suppliers.asUnmodifiableObservableList().size(),
-                reservations.asUnmodifiableObservableList().size());
+                reservationsManager.getUnmodifiableObservableList().size(),
+                tableManager.getUnmodifiableObservableList().size());
     }
 
     @Override
@@ -219,7 +293,20 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public ObservableList<Reservation> getReservationList() {
-        return reservations.asUnmodifiableObservableList();
+        return reservationsManager.getUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Table> getTableList() {
+        return tableManager.getUnmodifiableObservableList();
+    }
+
+    public ReservationsManager getReservationsManager() {
+        return reservationsManager;
+    }
+
+    public TableManager getTableManager() {
+        return tableManager;
     }
 
     @Override
@@ -229,7 +316,7 @@ public class AddressBook implements ReadOnlyAddressBook {
                 && customers.equals(((AddressBook) other).customers)
                 && employees.equals(((AddressBook) other).employees)
                 && suppliers.equals(((AddressBook) other).suppliers)
-                && reservations.equals(((AddressBook) other).reservations));
+                && reservationsManager.equals(((AddressBook) other).reservationsManager));
     }
 
     @Override
@@ -264,6 +351,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public int hashCode() {
-        return Objects.hash(customers, employees, suppliers, reservations);
+        return Objects.hash(customers, employees, suppliers, reservationsManager);
     }
 }

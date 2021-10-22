@@ -11,6 +11,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.ReservationsManager;
+import seedu.address.model.reservation.exception.ReservationException;
+import seedu.address.model.table.Table;
 
 /**
  * Represents the command to add reservation
@@ -25,20 +28,22 @@ public class ReserveCommand extends Command {
             PREFIX_PHONE, PREFIX_TIME
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
-    public static final String MESSAGE_UNSUCCESSFUL = "Reservation already exist: %1$s";
+    public static final String MESSAGE_RESERVATION_EXISTS = "Reservation already exist: %1$s";
+    public static final String MESSAGE_CUSTOMER_MISSING =
+            "No customer with phone number %1$s exist.\nUnable to create reservation.";
 
     private Phone phone;
     private int numberOfPeople;
-    private LocalDateTime time;
+    private LocalDateTime dateTime;
 
     /**
      * Creates a command to add a reservation
      */
-    public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime time) {
-        requireAllNonNull(phone, time);
+    public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime dateTime) {
+        requireAllNonNull(phone, dateTime);
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
-        this.time = time;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -47,15 +52,22 @@ public class ReserveCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // TODO: Check the time whether can add or not
-
-        Reservation reservation = new Reservation(phone, numberOfPeople, time);
-        if (model.hasReservation(reservation)) {
-            throw new CommandException(String.format(MESSAGE_UNSUCCESSFUL, reservation));
+        if (!model.hasCustomerWithPhone(phone)) {
+            throw new CommandException(String.format(MESSAGE_CUSTOMER_MISSING, phone));
         }
-        model.addReservation(reservation);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, reservation), false, false, false, false,
-                false, true);
+        ReservationsManager reservationsManager = model.getReservationsManager();
+        try {
+            Table tableToBeAssigned = reservationsManager.getAvailableTable(model, numberOfPeople, dateTime);
+            Reservation reservation = new Reservation(phone, numberOfPeople, dateTime, tableToBeAssigned);
+            if (model.hasReservation(reservation)) {
+                throw new CommandException(String.format(MESSAGE_RESERVATION_EXISTS, reservation));
+            }
+            model.addReservation(reservation);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, reservation), false, false, false, false,
+                    false, true);
+        } catch (ReservationException e) {
+            throw new CommandException(String.format(e.getMessage(), dateTime));
+        }
     }
 
     /**
@@ -73,6 +85,6 @@ public class ReserveCommand extends Command {
         ReserveCommand that = (ReserveCommand) o;
         return phone.equals(that.phone)
                 && numberOfPeople == that.numberOfPeople
-                && time.equals(that.time);
+                && dateTime.equals(that.dateTime);
     }
 }

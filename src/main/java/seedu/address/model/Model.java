@@ -1,14 +1,19 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.ReservationsManager;
+import seedu.address.model.table.Table;
+import seedu.address.model.table.TableManager;
 
 /**
  * The API of the Model component.
@@ -69,6 +74,12 @@ public interface Model {
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
      */
     boolean hasCustomer(Customer customer);
+
+    /**
+     * Returns true if a customer with the same phone as {@code phone} exists in the address book.
+     */
+    boolean hasCustomerWithPhone(Phone phone);
+
     /**
      * Returns true if an employee with the same identity as {@code employee} exists in the address book.
      */
@@ -132,6 +143,21 @@ public interface Model {
      */
     void setReservation(Reservation target, Reservation editedReservation);
 
+    /**
+     * Removes all reservations
+     */
+    void resetReservations();
+
+    /**
+     * Adds the given table list.
+     */
+    void setTableList(List<Table> tableList);
+
+    /**
+     * Resets the count of tables to zero
+     */
+    void resetTableCount();
+
 
     /** Returns an unmodifiable view of the filtered customer list */
     ObservableList<Customer> getFilteredCustomerList();
@@ -143,6 +169,10 @@ public interface Model {
      * Returns an unmodifiable view of the filtered reservation list
      */
     ObservableList<Reservation> getFilteredReservationList();
+
+    ReservationsManager getReservationsManager();
+
+    TableManager getTableManager();
 
     /**
 

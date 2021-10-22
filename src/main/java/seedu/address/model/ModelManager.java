@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,10 +12,14 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.ReservationsManager;
+import seedu.address.model.table.Table;
+import seedu.address.model.table.TableManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -28,6 +33,8 @@ public class ModelManager implements Model {
     private final FilteredList<Employee> filteredEmployees;
     private final FilteredList<Supplier> filteredSuppliers;
     private final FilteredList<Reservation> filteredReservations;
+    private final ReservationsManager reservationsManager;
+    private final TableManager tableManager;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -44,6 +51,8 @@ public class ModelManager implements Model {
         filteredEmployees = new FilteredList<>(this.addressBook.getEmployeeList());
         filteredSuppliers = new FilteredList<>(this.addressBook.getSupplierList());
         filteredReservations = new FilteredList<>(this.addressBook.getReservationList());
+        reservationsManager = this.addressBook.getReservationsManager();
+        tableManager = this.addressBook.getTableManager();
     }
 
     public ModelManager() {
@@ -102,6 +111,13 @@ public class ModelManager implements Model {
         requireNonNull(customer);
         return addressBook.hasCustomer(customer);
     }
+
+    @Override
+    public boolean hasCustomerWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return addressBook.hasCustomerWithPhone(phone);
+    }
+
     @Override
     public boolean hasEmployee(Employee employee) {
         requireNonNull(employee);
@@ -186,6 +202,21 @@ public class ModelManager implements Model {
         addressBook.setReservation(target, editedReservation);
     }
 
+    @Override
+    public void setTableList(List<Table> tableList) {
+        requireNonNull(tableList);
+        addressBook.setTableList(tableList);
+    }
+
+    @Override
+    public void resetReservations() {
+        addressBook.resetReservations();
+    }
+
+    @Override
+    public void resetTableCount() {
+        addressBook.resetTableCount();
+    }
 
     //=========== Filtered Employee List Accessors =============================================================
 
@@ -256,6 +287,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public ReservationsManager getReservationsManager() {
+        return this.reservationsManager;
+    }
+
+    @Override
+    public TableManager getTableManager() {
+        return this.tableManager;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -274,6 +315,8 @@ public class ModelManager implements Model {
                 && filteredCustomers.equals(other.filteredCustomers)
                 && filteredEmployees.equals(other.filteredEmployees)
                 && filteredSuppliers.equals(other.filteredSuppliers)
-                && filteredReservations.equals(other.filteredReservations);
+                && filteredReservations.equals(other.filteredReservations)
+                && reservationsManager.equals(other.reservationsManager)
+                && tableManager.equals(other.tableManager);
     }
 }

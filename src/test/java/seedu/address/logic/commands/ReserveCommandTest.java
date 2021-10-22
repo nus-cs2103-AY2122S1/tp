@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalCustomers.getTypicalAddressBook;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +16,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 
 
 class ReserveCommandTest {
     private static final int DUMMY_NUMBER_OF_PEOPLE = 2;
     private static final Phone DUMMY_PHONE = new Phone("98765432");
     private static final LocalDateTime DUMMY_DATE_TIME = LocalDateTime.parse("2021-11-11T20:00");
+    private static final Table DUMMY_TABLE = new Table(5, 10);
     private static final int DIFFERENT_NUMBER_OF_PEOPLE = 3;
     private static final Phone DIFFERENT_PHONE = new Phone("12345678");
     private static final LocalDateTime DIFFERENT_DATE_TIME = LocalDateTime.parse("2021-11-12T21:00");
@@ -39,9 +42,17 @@ class ReserveCommandTest {
     }
 
     @Test
-    public void execute_validReservation_addSuccessful() throws Exception {
+    public void execute_validReservationButNoTables_throwsCommandException() throws Exception {
         ReserveCommand command = new ReserveCommand(DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME);
-        Reservation expectedReservation = new Reservation(DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME);
+        assertThrows(CommandException.class, () -> command.execute(model));
+    }
+
+    @Test
+    public void execute_validReservationWithTablesSetAlready_addSuccessful() throws Exception {
+        ReserveCommand command = new ReserveCommand(DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME);
+        model.setTableList(Collections.singletonList(DUMMY_TABLE));
+        Reservation expectedReservation =
+                new Reservation(DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME, DUMMY_TABLE);
 
         command.execute(model);
 
@@ -53,7 +64,7 @@ class ReserveCommandTest {
         ReserveCommand reserveCommand = new ReserveCommand(
                 DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME
         );
-        model.addReservation(new Reservation(DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME));
+        model.addReservation(new Reservation(DUMMY_PHONE, DUMMY_NUMBER_OF_PEOPLE, DUMMY_DATE_TIME, DUMMY_TABLE));
         assertThrows(CommandException.class, () -> reserveCommand.execute(model));
     }
 
