@@ -2,18 +2,26 @@
 layout: page
 title: User Guide
 ---
+## **About this document**
 
 **TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
 
-This document serves as a guide to help you get started on how to set up and use **TuitiONE**. To start, explore the 'Quick start' section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections to learn more in detail. The 'Command summary' at the end of the document lists a table with all the commands present and their syntax.
+This document serves as a guide to help you get started on how you can set up and use **TuitiONE**. To start, you explore the [Quick start](#quick-start) section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections (such as in [Managing Students](#managing-students) and [Managing Lessons](#managing-lessons)) to learn more in detail. The [Command summary](#command-summary) lists a table with all the commands present and their syntax. If there are any doubts on the terms and usage of this app, you can refer to the [Glossary](#glossary) and [FAQ](#faq) located at the end of the document.
+
+Here are the interpretations of symbols and formatting used in this document: 
+
+* `highlights` represents code.
+* :information_source: indicates additional information.
+* :bulb: indicates tips.
+* :exclamation: indicates that you should take caution.
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## **Quick start**
 
 1. Ensure you have Java `11` or above installed in your work station.
 
@@ -43,13 +51,13 @@ This document serves as a guide to help you get started on how to set up and use
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## **Features**
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
@@ -69,13 +77,17 @@ This document serves as a guide to help you get started on how to set up and use
 
 </div>
 
+## **Getting help**
+
 ### Viewing help: `help`
 
-TuitiONE will display the help panel which shows a summary of the command syntax that is usable to the current version of TuitiONE.
+TuitiONE will display the help panel which shows you a summary of the command syntax that is usable to the current version of TuitiONE.
 
 [comment]: <> (![help message]&#40;images/helpMessage.png&#41;)
 
 Command Format: `help`
+
+## **Managing Students**
 
 ### Adding a student: `add`
 
@@ -98,38 +110,9 @@ Example(s):
 * `add n/John Doe p/98765432 e/jd@gmail.com a/John street, block 123, #01-01 g/P2`
 * `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 
-### Adding a lesson: `add-l`
-
-Adds a lesson to the TuitiONE with the specified prefixes.
-
-Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
-
-<div markdown="block" class="alert alert-primary">
-
-:bulb: **Tip:**<br>
-
-* `GRADE` here follows the similar requirements when adding a student.<br>
-
-* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.<br>
-
-* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.<br>
-
-* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.<br>
-
-* Lessons are fixed at **two** hour periods.<br>
-
-* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …<br>
-
-</div>
-
-Example(s):
-
-* `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
-* `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
-
 ### Listing all students: `list`
 
-Shows a list of all students and lessons in the TuitiONE.
+Shows you a list of all students and lessons in the TuitiONE.
 
 Command Format: `list`
 
@@ -151,7 +134,7 @@ Example(s):
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-  ![result for 'find alex david'](images/UserGuideImage/findAlexDavidResult.png)
+![result for 'find alex david'](images/UserGuideImage/findAlexDavidResult.png)
 
 ### Deleting a student : `delete`
 
@@ -168,23 +151,9 @@ Example(s):
 * `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### Deleting a lesson: `delete-l`
-
-Deletes a lesson from the TuitiONE.
-
-Command Format: `delete-l INDEX`
-
-* Deletes the lesson of the specified `INDEX`.
-* The index refers to the index number shown in the displayed lesson list.
-* The index **must be a positive integer** `1`, `2`, `3`, …
-
-Example(s):
-
-* `delete-l 1` deletes the lesson with corresponding index `1`.
-
 ### Enrolling a student from lesson: `enroll`
 
-Enroll a specified student from a given TuitiONE lesson.
+Enroll a specified student to a given TuitiONE lesson.
 
 Command Format: `enroll STUDENT_INDEX l/LESSON_INDEX`
 
@@ -216,9 +185,69 @@ Example(s):
 
 * `unenroll 1 l/1` will unenroll the student indexed `1` in the displayed student list from the lesson indexed at `1` in the displayed lesson list.
 
+## **Managing Lessons**
+
+### Adding a lesson: `add-l`
+
+Adds a lesson to the TuitiONE with the specified prefixes.
+
+Command Format: `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/START_TIME c/COST`
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: **Tip:**<br>
+
+* `GRADE` here follows the similar requirements when adding a student.<br>
+
+* `SUBJECT` is limited to `20` characters, and its first letter will be capitalized.<br>
+
+* `DAY_OF_WEEK` can only be these form (with the first letter capitalized): `Mon`, `Tue`, `Wed`, `Thu`, `Fri`, `Sat`, `Sun`.<br>
+
+* `START_TIME` is in `2400` hours format and can only be between `0900` and `1900` (as lessons can only be conducted between 9am to 9pm). It must also be in intervals of `30` minutes: `1300` and `1330` are acceptable timings but not `1315`.<br>
+
+* Lessons are fixed at **two** hour periods.<br>
+
+* The cost must be a non-negative number `0.0`, `2.0`, `3.3`, …<br>
+
+</div>
+
+Example(s):
+
+* `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
+* `add-l s/Mathematics g/S4 d/Fri t/1500 c/10.3`
+
+### Deleting a lesson: `delete-l`
+
+Deletes a lesson from the TuitiONE.
+
+Command Format: `delete-l INDEX`
+
+* Deletes the lesson of the specified `INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** `1`, `2`, `3`, …
+
+Example(s):
+
+* `delete-l 1` deletes the lesson with corresponding index `1`.
+
+### Viewing of lesson roster: `roster`
+
+Shows you the student roster of a specified lesson in the student panel.
+
+Command Format: `roster LESSON_INDEX`
+
+* Displays the student roster of the lesson of the specified `LESSON_INDEX`.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** `1`, `2`, `3`, …
+
+Examples:
+* `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
+
+## **Miscellaneous Commands**
+
 ### Filtering of list: `filter`
 
-Filter the respective list to display entries that correspond to the conditions as specified.
+Filter the respective list(s) to display entries that correspond to the conditions as specified.
 
 Command Format: `filter [g/GRADE] [s/Subject]`
 
@@ -232,25 +261,14 @@ Command Format: `filter [g/GRADE] [s/Subject]`
 
 Example(s):
 
-* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective list.
+* `filter g/P2` will filter both of the student list and lesson list by grade of `P2` and display the corresponding entries in the respective lists.
 * `filter s/Science` will filter the lesson list by subject of `Science` and display the corresponding entries in the respective list.
-
-### Viewing of lesson roster: `roster`
-
-Displays the student roster of a specified lesson in the student panel.
-
-Command Format: `roster LESSON_INDEX`
-
-* Displays the student roster of the lesson of the specified `LESSON_INDEX`.
-* The index refers to the index number shown in the displayed lesson list.
-* The index **must be a positive integer** `1`, `2`, `3`, …
-
-Examples:
-* `roster 1` will display the students currently enrolled in the lesson indexed at `1` in the student panel.
+* `filter s/Science g/P2` will filter the lesson list by subject of `Science` and grade of `P2`, and the student
+ list by grade of `P2`, and display the corresponding entries in the respective lists.
 
 ### Clearing all entries : `clear`
 
-Clears all students and lessons from the TuitiONE.
+Clears all students and lessons data stored in TuitiONE.
 
 Command Format: `clear`
 
@@ -268,9 +286,11 @@ Exits the program.
 
 Command Format: `exit`
 
+## **Managing Data**
+
 ### Saving the data
 
-TuitiONE data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+TuitiONE data is saved in the hard disk automatically after any command that changes the data. There is no need for you to save manually.
 
 ### Editing the data file
 
@@ -286,7 +306,7 @@ If the changes you made to the data file render its format invalid, TuitiONE wil
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## **Command summary**
 
 Action | Format, Examples
 --------|------------------
@@ -304,3 +324,15 @@ Action | Format, Examples
 **List** | `list`
 **Help** | `help`
 **Exit** | `exit`
+
+## **Glossary**
+
+* **Java**: A widely used programming language
+* **JAR**: An executable java file for you to open the app
+* **GUI**: Graphical User Interface
+
+## **FAQ**
+
+* **Q:** Where can I view the list of commands?
+
+  **A:** You can type `help` or you can click on the 'Help' tab on the top left of the app window.
