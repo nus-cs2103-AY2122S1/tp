@@ -115,7 +115,7 @@ public interface Model {
     void setPosition(Position position, Position editedPosition);
 
     /**
-     * Returns true if a position with the same title as {@code position} exists in MrTechRecruiter.
+     * Returns true if {@code position} exists in MrTechRecruiter.
      */
     boolean hasPosition(Position toAdd);
 
@@ -160,7 +160,7 @@ public interface Model {
      * The applicant identity of {@code editedApplicant} must not be the same as another existing person in
      * MrTechRecruiter.
      */
-    public void setApplicant(Applicant target, Applicant editedApplicant);
+    void setApplicant(Applicant target, Applicant editedApplicant);
 
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
