@@ -148,11 +148,25 @@ API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/s
 <img src="images/ModelClassDiagram.png" width="450" />
 
 
-The `Model` component,
+The `Model` component
 
+- stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
+- stores the order data i.e., an optional `Order` which contains all `Items` added to it.
+- stores the transaction history of orders i.e., a set of `TransactionRecord` objects. 
+- does not depend on any of the other three components (as the Model represents data entities of the domain, 
+  they should make sense on their own without depending on other components)
+- Is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects. 
+  i.e., updates `Inventory` when `Order` is placed by user, and note down `TransactionRecord`.
+
+
+<<<<<<< HEAD
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+=======
 * stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
 * stores the currently 'selected' `Item` objects (e.g., results of a search query) as a separate _filtered_ list which
   is exposed to outsiders as an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to
+>>>>>>> master
   this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
   a `ReadOnlyUserPref` objects.
