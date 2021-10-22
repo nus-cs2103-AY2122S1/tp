@@ -184,6 +184,12 @@ public class ParserUtil {
         return taskList;
     }
 
+    /**
+     * Parses a {@code String taskName} into a {@code TaskName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskName} is invalid.
+     */
     public static TaskName parseTaskName(String taskName) throws ParseException {
         requireNonNull(taskName);
         String trimmedTaskName = taskName.trim();
@@ -193,6 +199,12 @@ public class ParserUtil {
         return new TaskName(trimmedTaskName);
     }
 
+    /**
+     * Parses a {@code String taskDate} into a {@code TaskDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDate} is invalid.
+     */
     public static TaskDate parseTaskDate(String taskDate) throws ParseException {
         requireNonNull(taskDate);
         String trimmedTaskDate = taskDate.trim();
@@ -202,6 +214,12 @@ public class ParserUtil {
         return new TaskDate(trimmedTaskDate);
     }
 
+    /**
+     * Parses a {@code String taskTime} into a {@code TaskTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskTime} is invalid.
+     */
     public static TaskTime parseTaskTime(String taskTime) throws ParseException {
         requireNonNull(taskTime);
         String trimmedTaskTime = taskTime.trim();
@@ -211,6 +229,12 @@ public class ParserUtil {
         return new TaskTime(trimmedTaskTime);
     }
 
+    /**
+     * Parses a {@code String venue} into a {@code Venue}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code venue} is invalid.
+     */
     public static Venue parseTaskVenue(String venue) throws ParseException {
         requireNonNull(venue);
         String trimmedTaskVenue = venue.trim();
