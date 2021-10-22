@@ -183,7 +183,7 @@ Examples:
 
 Command aliases: `update` `e`
 
-<img src="images/EditCommand.png" width="1000px">
+<img src="images/EditCommand.png" width="800px">
 
 ***
 
