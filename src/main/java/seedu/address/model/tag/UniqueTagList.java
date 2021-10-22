@@ -15,7 +15,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
- * A list of tags that enforces uniqueness between its elements in terms of tag names, and does not allow nulls.
+ * A list of tags that enforces uniqueness between its elements in terms of tag names, does not allow nulls,
+ * and keeps track of the number of persons labelled with each existing tag.
  */
 public class UniqueTagList {
     private final ObservableMap<Tag, Integer> tagCounter = FXCollections.observableHashMap();
@@ -79,6 +80,7 @@ public class UniqueTagList {
 
     /**
      * Removes the specified tag from the internal tag list.
+     * The specified tag should exist in the tag list with positive number of students labelled with it.
      *
      * @param toRemove Tag to be removed from the list.
      */
