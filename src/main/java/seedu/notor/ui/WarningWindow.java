@@ -30,7 +30,7 @@ public class WarningWindow extends UiPart<Stage> {
         this.canContinue = false;
         Text text = new Text(message);
         textFlow.getChildren().add(text);
-        Platform.runLater( () -> cancelButton.requestFocus());
+        Platform.runLater(() -> cancelButton.requestFocus());
         getRoot().setTitle("Warning");
         getRoot().initModality(Modality.APPLICATION_MODAL);
         getRoot().setResizable(false);

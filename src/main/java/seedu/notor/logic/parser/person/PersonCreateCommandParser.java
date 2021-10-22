@@ -60,12 +60,12 @@ public class PersonCreateCommandParser extends PersonCommandParser {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         }
-        
+
         Set<Tag> tagList = new HashSet<>();
         if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
             tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
         }
-        
+
         if (argMultimap.getValue(PREFIX_GROUPINDEX).isPresent()) {
             index = ParserUtil.parseGroupIndex(argMultimap.getValue(PREFIX_GROUPINDEX).get());
         }

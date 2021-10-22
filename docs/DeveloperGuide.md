@@ -112,7 +112,7 @@ API** : [`Model.java`](https://github.com/se-edu/Notor-level3/tree/master/src/ma
 
 * `Person` does not contain the `Address` field anymore.
 * `Person` contains a new `Note` field, `SuperGroup` field and `SubGroup` field.
-* `Person` does not contain direct reference to `SuperGroup` and `SubGroup` but 
+* `Person` does not contain direct reference to `SuperGroup` and `SubGroup` but
 strings of SuperGroup and for display purposes.
 
 * This UML diagram is the current class structure implemented.

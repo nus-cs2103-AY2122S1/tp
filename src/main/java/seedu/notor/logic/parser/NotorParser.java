@@ -140,17 +140,20 @@ public class NotorParser {
                 }
                 if (PersonAddGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonAddGroupCommandParser(index, arguments).parse();
-                } if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
-                    return new PersonRemoveGroupCommandParser(index, arguments).parse();
-                } if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
-                    return new PersonTagCommandParser(index, arguments).parse();
-                } if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {
-                    return new PersonUntagCommandParser(index, arguments).parse();
-                } if (PersonClearTagsCommand.COMMAND_WORDS.contains(subCommandWord)) {
-                    return new PersonClearTagsCommandParser(index).parse();
-                } else {
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
+                if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonRemoveGroupCommandParser(index, arguments).parse();
+                }
+                if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonTagCommandParser(index, arguments).parse();
+                }
+                if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonUntagCommandParser(index, arguments).parse();
+                }
+                if (PersonClearTagsCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonClearTagsCommandParser(index).parse();
+                }
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (SubGroupCreateCommand.COMMAND_WORDS.contains(subCommandWord)) {

@@ -21,8 +21,6 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NOTE = "Why is her last name Bee tho?";
     public static final String DEFAULT_NOTE_DATE = "Thu., 11/02/2022";
-    private static final Tag DEFAULT_TAG = new Tag("generic");
-    
 
     private Name name;
     private Phone phone;

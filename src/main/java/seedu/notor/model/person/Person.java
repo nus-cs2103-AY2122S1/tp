@@ -191,7 +191,7 @@ public class Person implements Unique<Person>, Notable {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-    
+
     public String getTagsString() {
         AtomicReference<String> tagString = new AtomicReference<>(new String());
         tags.forEach(str -> tagString.set(tagString.get() + str + ", "));
