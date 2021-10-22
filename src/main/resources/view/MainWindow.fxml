@@ -58,6 +58,20 @@
                                         </AnchorPane>
                                     </content>
                                 </Tab>
+                                <Tab closable="false" styleClass="dark" text="Schedule">
+                                    <content>
+                                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                            <children>
+                                                <VBox fx:id="schedulePanel" minWidth="340" prefHeight="431.0" prefWidth="432.0" styleClass="pane-with-border" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                    <padding>
+                                                        <Insets bottom="10" left="10" right="10" top="10" />
+                                                    </padding>
+                                                    <StackPane fx:id="schedulePanelPlaceholder" VBox.vgrow="ALWAYS" />
+                                                </VBox>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
                             </tabs>
                         </TabPane>
                     </children>

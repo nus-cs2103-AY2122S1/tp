@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Shift;
 import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
 
 
@@ -19,7 +20,7 @@ import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
  * which views the schedule by Person.
  */
 public class ViewShiftCommand extends Command {
-    public static final String DEFAULT_MESSAGE = "Staff working at that shift: \n";
+    public static final String DEFAULT_MESSAGE = "Staff working on shift ";
     public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
             + "Parameters:\n"
@@ -85,13 +86,13 @@ public class ViewShiftCommand extends Command {
         int counter = 1;
         for (Person p : staffs) {
             boolean hasShift = p.isWorking(dayOfWeek, slotNum);
+            result.append(dayOfWeek).append(" ").append(slotNum).append(":\n");
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;
             }
         }
-
-        if (result.toString().equals("")) {
+        if (counter == 0) {
             return new CommandResult(NO_STAFF_WORKING);
         } else {
             return new CommandResult(DEFAULT_MESSAGE + result.toString());
@@ -105,21 +106,13 @@ public class ViewShiftCommand extends Command {
      * @return The staff working at that day of the week and time
      */
     public CommandResult executeViewShiftByTime(ObservableList<Person> staffs) {
-        StringBuilder result = new StringBuilder();
-        int counter = 1;
-        for (Person p : staffs) {
-            boolean hasShift = p.isWorking(dayOfWeek, time);
-            if (hasShift) {
-                result.append(counter).append(". ").append(p.getName()).append("\n");
-                counter++;
-            }
-        }
+        String result = Shift.filterListByShift(staffs, dayOfWeek, time);
         if (result.equals("")) {
             return new CommandResult(NO_STAFF_WORKING);
         } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
             return new CommandResult(HELP_MESSAGE + getWorkingStaffByTime(staffs));
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result.toString());
+            return new CommandResult(DEFAULT_MESSAGE + result);
         }
     }
 
