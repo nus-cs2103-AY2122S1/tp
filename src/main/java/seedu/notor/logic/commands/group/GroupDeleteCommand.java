@@ -21,11 +21,11 @@ public class GroupDeleteCommand extends GroupCommand {
     private static final String COMMAND_DESCRIPTION =
             ": Deletes the group identified by the index number used in the displayed group list.\n";
 
-    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX " + COMMAND_WORD
+    public static final String MESSAGE_USAGE = GroupCommand.COMMAND_WORD + " INDEX /" + COMMAND_WORD
             + COMMAND_DESCRIPTION
             + "Parameters: none"
             + "Example: "
-            + GroupCommand.COMMAND_WORD + " 1 " + COMMAND_WORD;
+            + GroupCommand.COMMAND_WORD + " 1 /" + COMMAND_WORD;
 
     private final GroupDeleteExecutor executor;
 
