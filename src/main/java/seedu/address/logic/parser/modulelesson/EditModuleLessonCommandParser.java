@@ -4,14 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_USAGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -32,8 +32,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCommand> {
 
-    public static final String MESSAGE_NO_FIELD_PROVIDED = "At least one field to edit must be provided.";
-
     private final Logger logger = LogsCenter.getLogger(EditModuleLessonCommandParser.class);
 
     /**
@@ -46,7 +44,8 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
         requireNonNull(args);
         logger.info("----------------[Trying to parse input into EditModuleLessonCommand][" + args + "]");
         ArgumentMultimap validArgumentMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_DAY, PREFIX_TIME, PREFIX_REMARK);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE,
+                        PREFIX_LESSON_DAY, PREFIX_LESSON_TIME, PREFIX_REMARK);
 
         checkInvalidPrefixPresent(args);
 
@@ -66,21 +65,24 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
                     ParserUtil.parseModuleCode(validArgumentMultimap.getValue(PREFIX_MODULE_CODE).get()));
         }
 
-        if (validArgumentMultimap.getValue(PREFIX_DAY).isPresent()) {
-            editLessonDescriptor.setLessonDay(ParserUtil.parseDay(validArgumentMultimap.getValue(PREFIX_DAY).get()));
+        if (validArgumentMultimap.getValue(PREFIX_LESSON_DAY).isPresent()) {
+            editLessonDescriptor.setLessonDay(
+                    ParserUtil.parseDay(validArgumentMultimap.getValue(PREFIX_LESSON_DAY).get()));
         }
 
-        if (validArgumentMultimap.getValue(PREFIX_TIME).isPresent()) {
-            editLessonDescriptor.setLessonTime(ParserUtil.parseTime(validArgumentMultimap.getValue(PREFIX_TIME).get()));
+        if (validArgumentMultimap.getValue(PREFIX_LESSON_TIME).isPresent()) {
+            editLessonDescriptor.setLessonTime(
+                    ParserUtil.parseTime(validArgumentMultimap.getValue(PREFIX_LESSON_TIME).get()));
         }
 
         if (validArgumentMultimap.getValue(PREFIX_REMARK).isPresent()) {
-            editLessonDescriptor.setRemark(ParserUtil.parseRemark(validArgumentMultimap.getValue(PREFIX_REMARK).get()));
+            editLessonDescriptor.setRemark(
+                    ParserUtil.parseRemark(validArgumentMultimap.getValue(PREFIX_REMARK).get()));
         }
 
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             logger.info("[Parsing failed due to no field edited][" + validArgumentMultimap.getPreamble() + "]");
-            throw new ParseException(MESSAGE_NO_FIELD_PROVIDED);
+            throw new ParseException(EditModuleLessonCommand.MESSAGE_NO_FIELD_PROVIDED);
         }
 
         return new EditModuleLessonCommand(index, editLessonDescriptor);

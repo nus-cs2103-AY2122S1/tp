@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2030S;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
@@ -44,10 +44,10 @@ public class EditModuleLessonCommandTest {
         ModuleLesson lastLesson = model.getFilteredModuleLessonList().get(indexLastLesson.getZeroBased());
 
         ModuleLessonBuilder lessonInList = new ModuleLessonBuilder(lastLesson);
-        ModuleLesson editedLesson = lessonInList.withModuleCode(VALID_MODULE_CODE_CS2030S).build();
+        ModuleLesson editedLesson = lessonInList.withModuleCode(VALID_MODULE_CODE_CS2030S_T12).build();
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand editModuleLessonCommand = new EditModuleLessonCommand(indexLastLesson, descriptor);
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
@@ -108,7 +108,7 @@ public class EditModuleLessonCommandTest {
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
         EditLessonDescriptor descriptor =
-                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
@@ -123,7 +123,7 @@ public class EditModuleLessonCommandTest {
         assertTrue(invalidIndex.getZeroBased() < model.getAddressBook().getModuleLessonList().size());
 
         EditLessonDescriptor descriptor =
-                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+                new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         EditModuleLessonCommand command = new EditModuleLessonCommand(invalidIndex, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);

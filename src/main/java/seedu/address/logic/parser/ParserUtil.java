@@ -196,9 +196,9 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code day} into a {@code LessonDay}.
+     * Parses a {@code time} into a {@code LessonTime}.
      *
-     * @throws ParseException if the given {@code day} is invalid.
+     * @throws ParseException if the given {@code time} is invalid.
      */
     public static LessonTime parseTime(String time) throws ParseException {
         requireNonNull(time);

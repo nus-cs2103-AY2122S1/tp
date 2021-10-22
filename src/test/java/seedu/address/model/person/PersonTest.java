@@ -3,7 +3,7 @@ package seedu.address.model.person;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
@@ -90,7 +90,7 @@ public class PersonTest {
         assertFalse(ALICE.equals(editedAlice));
 
         // different modules -> return false
-        editedAlice = new PersonBuilder(ALICE).withModuleCodes(VALID_MODULE_CODE_CS2030S).build();
+        editedAlice = new PersonBuilder(ALICE).withModuleCodes(VALID_MODULE_CODE_CS2030S_T12).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

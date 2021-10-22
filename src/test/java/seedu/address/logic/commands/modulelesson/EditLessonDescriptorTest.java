@@ -3,7 +3,7 @@ package seedu.address.logic.commands.modulelesson;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2040S;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ public class EditLessonDescriptorTest {
 
         // different module -> returns false
         EditLessonDescriptor diffModuleDescriptor = new EditLessonDescriptorBuilder(DESC_CS2040S)
-                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S)).build();
+                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12)).build();
         assertFalse(descriptor.equals(diffModuleDescriptor));
 
         // different day -> returns false

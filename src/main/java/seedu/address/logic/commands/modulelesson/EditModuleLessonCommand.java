@@ -2,10 +2,10 @@ package seedu.address.logic.commands.modulelesson;
 
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_LESSONS;
 
 import java.util.List;
@@ -34,16 +34,17 @@ public class EditModuleLessonCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_MODULE_CODE + "MODULE_INFO] "
-            + "[" + PREFIX_DAY + "DAY_OF_THE_WEEK] "
-            + "[" + PREFIX_TIME + "TIME_OF_THE_DAY] "
+            + "[" + PREFIX_LESSON_DAY + "DAY_OF_THE_WEEK] "
+            + "[" + PREFIX_LESSON_TIME + "TIME_OF_THE_DAY] "
             + "[" + PREFIX_REMARK + "REMARK]\n"
             + "Example: edit 1 "
             + PREFIX_MODULE_CODE + "CS2103T T09 "
-            + PREFIX_DAY + "2 "
-            + PREFIX_TIME + "10:00";
+            + PREFIX_LESSON_DAY + "2 "
+            + PREFIX_LESSON_TIME + "10:00";
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS.";
+    public static final String MESSAGE_NO_FIELD_PROVIDED = "At least one field to edit must be provided.";
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;
