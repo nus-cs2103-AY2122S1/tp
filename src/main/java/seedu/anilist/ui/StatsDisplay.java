@@ -28,25 +28,18 @@ public class StatsDisplay extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(StatsDisplay.class);
     //TODO add more stats eg top genres
     private static final String FXML = "StatsDisplay.fxml";
-//
-//    @FXML
-//    private PieChart pieChart;
 
-//    @FXML
-//    private Button copyButton;
-//
-//    @FXML
-//    private Label helpMessage;
+    @FXML
+    private PieChart pieChart;
 
     /**
      * Creates a StatsDisplay UI component.
      */
     public StatsDisplay(Stage root) {
         super(FXML, root);
-//        pieChart.setLabelsVisible(false);
-//        //pieChart.setAnimated(false);
-//        pieChart.setLegendSide(Side.RIGHT);
-        //helpMessage.setText("TESTTESTTEST");
+        pieChart.setLabelsVisible(false);
+        //pieChart.setAnimated(false);
+        pieChart.setLegendSide(Side.RIGHT);
     }
 
     /**
@@ -102,9 +95,9 @@ public class StatsDisplay extends UiPart<Stage> {
     }
 
     public void setAnimeListStats(int totalAnimesCount, int watchingCount, int toWatchCount, int finishedCount) {
-//        pieChart.getData().clear();
-//        requireAllNonNull(totalAnimesCount, toWatchCount, watchingCount, finishedCount);
-//        pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, totalAnimesCount));
+        pieChart.getData().clear();
+        requireAllNonNull(totalAnimesCount, toWatchCount, watchingCount, finishedCount);
+        pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, totalAnimesCount));
 
         addToPieChart(NUM_ANIMES_WATCHING_MSG, watchingCount);
         addToPieChart(NUM_ANIMES_TOWATCH_MSG, toWatchCount);
@@ -113,6 +106,6 @@ public class StatsDisplay extends UiPart<Stage> {
 
 
     private void addToPieChart(String displayMsg, int count) {
-        //pieChart.getData().add(new PieChart.Data(String.format(displayMsg, count), count));
+        pieChart.getData().add(new PieChart.Data(String.format(displayMsg, count), count));
     }
 }

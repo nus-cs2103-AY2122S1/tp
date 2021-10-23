@@ -109,15 +109,14 @@ public class AnimeListPanel extends UiPart<Region> {
                 });
 
             //Update anime stats upon change
-            animeListMain.getAnimeList().addListener((ListChangeListener<Anime>) anime -> {
-                if (anime.next()) {
-                    setStats();
-                }
-            });
+//            animeListMain.getAnimeList().addListener((ListChangeListener<Anime>) anime -> {
+//                if (anime.next()) {
+//                    setStats();
+//                }
+//            });
 
         logger.log(Level.INFO, "Stats updated.");
         this.currentTab = currentTab;
-        setStats();
     }
 
     /**
@@ -136,18 +135,18 @@ public class AnimeListPanel extends UiPart<Region> {
      */
     private void setStats() {
         resetStats();
-        for (Anime anime: animeListMain.getAnimeList()) {
-            episodesCount += anime.getEpisode().getValue();
-            Status.WatchStatus watchStatus = anime.getStatus().status;
-            if (watchStatus.equals(Status.WatchStatus.WATCHING)) {
-                watchingCount += 1;
-            } else if (watchStatus.equals(Status.WatchStatus.TOWATCH)) {
-                toWatchCount += 1;
-            } else {
-                assert watchStatus.equals(Status.WatchStatus.FINISHED);
-                finishedCount += 1;
-            }
-        }
+//        for (Anime anime: animeListMain.getAnimeList()) {
+//            episodesCount += anime.getEpisode().getValue();
+//            Status.WatchStatus watchStatus = anime.getStatus().status;
+//            if (watchStatus.equals(Status.WatchStatus.WATCHING)) {
+//                watchingCount += 1;
+//            } else if (watchStatus.equals(Status.WatchStatus.TOWATCH)) {
+//                toWatchCount += 1;
+//            } else {
+//                assert watchStatus.equals(Status.WatchStatus.FINISHED);
+//                finishedCount += 1;
+//            }
+//        }
     }
 
     public int getWatchingCount() {

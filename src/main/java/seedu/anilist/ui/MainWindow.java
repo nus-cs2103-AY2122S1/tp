@@ -86,18 +86,18 @@ public class MainWindow extends UiPart<Stage> {
         //updateStatsDisplay();
     }
 
-//    private void updateStatsDisplay() {
-//        int watchingCount = getAnimeListPanel().getWatchingCount();
-//        int toWatchCount = getAnimeListPanel().getToWatchCount();
-//        int finishedCount = getAnimeListPanel().getFinishedCount();
-//        int total = watchingCount + toWatchCount + finishedCount;
-//
-//        statsDisplay.setAnimeListStats(
-//                total,
-//                watchingCount,
-//                toWatchCount,
-//                finishedCount);
-//    }
+    private void updateStatsDisplay() {
+        int watchingCount = getAnimeListPanel().getWatchingCount();
+        int toWatchCount = getAnimeListPanel().getToWatchCount();
+        int finishedCount = getAnimeListPanel().getFinishedCount();
+        int total = watchingCount + toWatchCount + finishedCount;
+
+        statsDisplay.setAnimeListStats(
+                total,
+                watchingCount,
+                toWatchCount,
+                finishedCount);
+    }
 
     /**
      * Sets the default size based on {@code guiSettings}.
@@ -116,6 +116,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleStats() {
+        updateStatsDisplay();
         if (!statsDisplay.isShowing()) {
             statsDisplay.show();
         } else {
@@ -162,13 +163,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            //updateStatsDisplay();
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
-            //updateStatsDisplay();
             throw e;
         }
     }
