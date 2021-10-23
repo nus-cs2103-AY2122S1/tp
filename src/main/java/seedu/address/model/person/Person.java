@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +19,6 @@ import seedu.address.model.id.exceptions.IdNotFoundException;
 import seedu.address.model.lesson.Attendee;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAssignable;
-import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.lesson.NoOverlapLessonList;
 import seedu.address.model.lesson.exceptions.CannotAssignException;
 import seedu.address.model.lesson.exceptions.OverlappingLessonsException;
@@ -153,13 +151,8 @@ public class Person implements HasUniqueId, Attendee,
         return Collections.unmodifiableSet(assignedGroupIds);
     }
 
-    /**
-     * Check if person can attend lesson
-     *
-     * @param lesson lesson to check
-     * @return true if person can attend the lesson
-     */
-    public boolean canAttendLesson(Lesson lesson) {
+    @Override
+    public boolean canAssignLesson(Lesson lesson) {
         return !lessonsList.doesLessonOverlap(lesson);
     }
 
@@ -187,13 +180,17 @@ public class Person implements HasUniqueId, Attendee,
     }
 
     @Override
-    public List<LessonWithAttendees> getLessonsWithAttendees() {
-        List<LessonWithAttendees> toReturn = new ArrayList<>();
-        List<Attendee> attendees = new ArrayList<>(Arrays.asList(this));
-        for (Lesson lesson : lessonsList.getLessons()) {
-            toReturn.add(new LessonWithAttendees(lesson, attendees));
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessonsList.getLessons());
+    }
+
+    @Override
+    public LessonAssignable setLessons(List<Lesson> lessons) throws CannotAssignException {
+        if (NoOverlapLessonList.doAnyLessonsOverlap(lessons)) {
+            throw new CannotAssignException(OverlappingLessonsException.MESSAGE);
         }
-        return toReturn;
+        NoOverlapLessonList newList = NoOverlapLessonList.of(lessons);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);
     }
 
     /**
@@ -257,17 +254,6 @@ public class Person implements HasUniqueId, Attendee,
         Person newPerson = new Person(this);
         newPerson.assignedGroupIds.remove(id);
         return newPerson;
-    }
-
-    /**
-     * Immutable way of updating the lessons list. Note that the id will be re-generated.
-     *
-     * @param newLessonsList to change to
-     * @return new Person instance with the updated lessons list
-     */
-    public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds,
-                newLessonsList, exams, assignedGroupIds);
     }
 
     /**

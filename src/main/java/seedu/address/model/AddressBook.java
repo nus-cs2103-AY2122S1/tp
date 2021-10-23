@@ -10,6 +10,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
+import seedu.address.model.lesson.Attendee;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -195,6 +198,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.remove(key);
     }
 
+    public UniqueIdMapper<Person> getPersonMapper() {
+        return persons;
+    }
+
+    public UniqueIdMapper<Group> getGroupMapper() {
+        return groups;
+    }
+
     //// util methods
 
     @Override
@@ -222,8 +233,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
         List<LessonWithAttendees> lessons = new ArrayList<>();
-        for (Person p : persons) {
-            lessons.addAll(p.getLessonsWithAttendees());
+        for (Person person : persons) {
+            List<Attendee> newList = new ArrayList<>();
+            newList.add(person);
+            for (Lesson lesson : person.getLessons()) {
+                lessons.add(new LessonWithAttendees(lesson, newList));
+            }
+        }
+        for (Group group : groups) {
+            List<Attendee> newList = new ArrayList<>(persons.getFromUniqueIds(group.getAssignedPersonIds()));
+            for (Lesson lesson : group.getLessons()) {
+                lessons.add(new LessonWithAttendees(lesson, newList));
+            }
         }
         Collections.sort(lessons, new LessonWithAttendees.SortByLesson());
         return lessons;
