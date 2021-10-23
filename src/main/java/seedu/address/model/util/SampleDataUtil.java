@@ -6,9 +6,14 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Date;
+import seedu.address.model.OrderBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.TaskBook;
+import seedu.address.model.order.Amount;
+import seedu.address.model.order.Customer;
+import seedu.address.model.order.Order;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -66,6 +71,12 @@ public class SampleDataUtil {
         };
     }
 
+    public static Order[] getSampleOrders() {
+        return new Order[] {
+            new Order(new Customer("Alex Yeoh"), new Date("10th of October"), new Amount("10")),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -74,12 +85,20 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    public static ReadOnlyTaskBook getSampleTaskList() {
+    public static ReadOnlyTaskBook getSampleTaskBook() {
         TaskBook simpleTL = new TaskBook();
         for (Task sampleTask : getSampleTasks()) {
             simpleTL.addTask(sampleTask);
         }
         return simpleTL;
+    }
+
+    public static ReadOnlyOrderBook getSampleOrderBook() {
+        OrderBook simpleSB = new OrderBook();
+        for (Order sampleOrders : getSampleOrders()) {
+            simpleSB.addOrder(sampleOrders);
+        }
+        return simpleSB;
     }
 
     /**

@@ -18,7 +18,9 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.OrderBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.TaskBook;
@@ -26,8 +28,10 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonOrderBookStorage;
 import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.OrderBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.TaskBookStorage;
@@ -62,7 +66,10 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         TaskBookStorage taskBookStorage = new JsonTaskBookStorage(userPrefs.getTaskBookPath());
-        storage = new StorageManager(addressBookStorage, taskBookStorage, userPrefsStorage);
+        OrderBookStorage orderBookStorage =
+                new JsonOrderBookStorage(userPrefs.getOrderBookFilePath());
+        storage = new StorageManager(addressBookStorage, taskBookStorage, orderBookStorage, userPrefsStorage);
+
 
         initLogging(config);
 
@@ -95,22 +102,40 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
         }
-        ReadOnlyTaskBook initialTaskList;
-        Optional<ReadOnlyTaskBook> taskListOptional;
+
+        ReadOnlyTaskBook initialTaskBook;
+        Optional<ReadOnlyTaskBook> taskBookOptional;
         try {
-            taskListOptional = storage.readTaskList();
-            if (!taskListOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            taskBookOptional = storage.readTaskList();
+            if (!taskBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TaskBook");
             }
-            initialTaskList = taskListOptional.orElseGet(SampleDataUtil::getSampleTaskList);
+            initialTaskBook = taskBookOptional.orElseGet(SampleDataUtil::getSampleTaskBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialTaskList = new TaskBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty TaskBook");
+            initialTaskBook = new TaskBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialTaskList = new TaskBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty TaskBook");
+            initialTaskBook = new TaskBook();
         }
-        return new ModelManager(initialAddressBook, initialTaskList, userPrefs);
+
+        ReadOnlyOrderBook initialOrderBook;
+        Optional<ReadOnlyOrderBook> orderBookOptional;
+        try {
+            orderBookOptional = storage.readOrderBook();
+            if (!orderBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample OrderBook");
+            }
+            initialOrderBook = orderBookOptional.orElseGet(SampleDataUtil::getSampleOrderBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty OrderBook");
+            initialOrderBook = new OrderBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty OrderBook");
+            initialOrderBook = new OrderBook();
+        }
+
+        return new ModelManager(initialAddressBook, initialTaskBook, initialOrderBook, userPrefs);
     }
 
     private void initLogging(Config config) {

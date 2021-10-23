@@ -102,9 +102,13 @@ public interface Model {
     void setTaskListFilePath(Path taskListFilePath);
 
     /**
+<<<<<<< HEAD
+     * Replaces Sales order book data with the data in {@code taskBook}.
+=======
      * Replaces task book data with the data in {@code taskBook}.
+>>>>>>> refactor-taskManager
      */
-    void setTaskBook(ReadOnlyTaskBook addressBook);
+    void setTaskBook(ReadOnlyTaskBook taskBook);
 
     /** Returns the TaskList */
     ReadOnlyTaskBook getTaskBook();
@@ -137,6 +141,27 @@ public interface Model {
     void markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
+
+
+    /**
+     * Returns the user prefs' Order books  file path.
+     */
+    Path getOrderPath();
+
+    /**
+     * Sets the user prefs' Order books  file path.
+     */
+    void setOrderBookFilePath(Path orderBookFilePath);
+
+    /**
+     * Replaces Order books data with the data in {@code salesOrderBook}.
+     */
+    void setOrderBook(ReadOnlyOrderBook orderBook);
+
+    /** Returns the TaskList */
+    ReadOnlyOrderBook getOrderBook();
+
+
     /**
      * Adds the given order.
      */

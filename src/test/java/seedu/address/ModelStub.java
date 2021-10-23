@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
@@ -141,6 +142,26 @@ public class ModelStub implements Model {
 
     @Override
     public void markTask(Task task) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getOrderPath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setOrderBookFilePath(Path orderBookFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setOrderBook(ReadOnlyOrderBook orderBook) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyOrderBook getOrderBook() {
         throw new AssertionError("This method should not be called.");
     }
 
