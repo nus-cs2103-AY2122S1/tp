@@ -5,6 +5,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.modulelesson.LessonDayContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 
@@ -31,6 +32,10 @@ public class FindModuleLessonCommand extends Command {
     private final Predicate<ModuleLesson> predicate;
 
     public FindModuleLessonCommand(ModuleCodeContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    public FindModuleLessonCommand(LessonDayContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
