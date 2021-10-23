@@ -126,6 +126,12 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
+    /** Returns an unmodifiable view of the selected event */
+    ObservableList<Event> setSingleEvent(Event event);
+
+    /** Returns an unmodifiable view of the selected event */
+    ObservableList<Event> getSingleEvent();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

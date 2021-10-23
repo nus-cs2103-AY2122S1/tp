@@ -29,6 +29,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Event> filteredEvents;
+    private FilteredList<Event> singleEvent;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +44,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredEvents = new FilteredList<>(this.addressBook.getEventList());
+        singleEvent = new FilteredList<>(this.addressBook.getEventList());
     }
 
     public ModelManager() {
@@ -217,6 +219,16 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Event> getFilteredEventList() {
         return filteredEvents;
+    }
+
+    @Override
+    public ObservableList<Event> setSingleEvent(Event event) {
+        singleEvent.setPredicate(event::equals);
+        return singleEvent;
+    }
+
+    public ObservableList<Event> getSingleEvent() {
+        return singleEvent;
     }
 
     @Override
