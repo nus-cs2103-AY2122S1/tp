@@ -1,4 +1,8 @@
-# ModuLink
+---
+layout: page
+title: ModuLink
+---
+
 ModuLink is a **desktop app for CS students to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a CS student and you need a platform to connect with your peers and to find project groups, ModuLink is the choice for you.
 
 ## User Guide
