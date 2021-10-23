@@ -136,6 +136,19 @@ public class ModelManager implements Model {
         return addressBook.getCalendar();
     }
 
+    /**
+     * Returns an unmodifiable view of the observable tag list.
+     */
+    @Override
+    public ObservableList<Tag> getObservableTagList() {
+        return addressBook.getTagList();
+    }
+
+    @Override
+    public ObservableMap<Tag, Integer> getTagCounter() {
+        return addressBook.getTagCounter();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -151,19 +164,6 @@ public class ModelManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
-    }
-
-    /**
-     * Returns an unmodifiable view of the observable tag list.
-     */
-    @Override
-    public ObservableList<Tag> getObservableTagList() {
-        return addressBook.getTagList();
-    }
-
-    @Override
-    public ObservableMap<Tag, Integer> getTagCounter() {
-        return addressBook.getTagCounter();
     }
 
     @Override
