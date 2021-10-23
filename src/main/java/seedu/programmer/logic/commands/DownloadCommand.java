@@ -13,7 +13,7 @@ public class DownloadCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     @Override
-    public CommandResult execute(Model model) {
+    public DownloadCommandResult execute(Model model) {
         return new DownloadCommandResult("Download command executed");
     }
 }
