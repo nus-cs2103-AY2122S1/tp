@@ -11,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
 
@@ -36,11 +35,10 @@ public class AddressBookListMenu extends UiPart<Menu> {
         this.menuItems = this.menu.getItems();
         Function<Path, MenuItem> menuItemFunction = path -> {
             String addressBookName;
-            try {
-                addressBookName = FileUtil.convertToAddressBookName(path);
-            } catch (IllegalValueException e) {
+            if (!FileUtil.isJsonFile(path)) {
                 return null;
             }
+            addressBookName = FileUtil.convertToAddressBookName(path);
             MenuItem temp = new MenuItem(addressBookName);
             temp.setOnAction(x -> logic.switchAddressBook(path));
             return temp;
@@ -48,6 +46,7 @@ public class AddressBookListMenu extends UiPart<Menu> {
 
         Consumer<Path> addedConsumer = path ->
                 Optional.ofNullable(menuItemFunction.apply(path)).ifPresent(menuItems::add);
+
         Consumer<Path> removedConsumer = path -> {
             Predicate<MenuItem> matchMenuItem = menuItem -> menuItem.getText().equals(path.toString());
             ObservableList<MenuItem> temp = menuItems.filtered(matchMenuItem);

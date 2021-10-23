@@ -1,9 +1,7 @@
 package seedu.address.logic.commands.abcommand;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.FileUtil.isFileExists;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,11 +46,11 @@ public class AbDeleteCommand extends AbCommand {
         try {
             isDeleted = Files.deleteIfExists(filePath);
         } catch (IOException e) {
-            throw new CommandException(String.format(MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS, addressBookName));
+            throw new CommandException(String.format(MESSAGE_DELETE_ADDRESSBOOK_FAILURE, addressBookName));
         }
 
         if (!isDeleted) {
-            throw new CommandException(String.format(MESSAGE_DELETE_ADDRESSBOOK_FAILURE, addressBookName));
+            throw new CommandException(String.format(MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS, addressBookName));
         }
 
         model.deleteAddressBookList(filePath);

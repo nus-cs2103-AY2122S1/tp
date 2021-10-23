@@ -7,6 +7,7 @@ import java.nio.file.Path;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.FileUtil;
 
 /**
  * A wrapper containing the Path to all the AddressBook Json File.
@@ -42,5 +43,12 @@ public class AddressBookList {
         } catch (IOException ie) {
             return temp;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        addressBookPaths.forEach(x -> sb.append("\n-").append(FileUtil.convertToAddressBookName(x)));
+        return sb.toString();
     }
 }

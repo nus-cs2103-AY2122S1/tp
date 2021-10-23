@@ -120,6 +120,11 @@ public class ModelManager implements Model {
         this.addressBookList.deleteAddressBookPath(filePath);
     }
 
+    @Override
+    public String getAddressBookListString() {
+        return this.addressBookList.toString();
+    }
+
     //=========== AddressBook ================================================================================
 
     @Override

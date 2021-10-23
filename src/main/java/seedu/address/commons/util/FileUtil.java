@@ -1,16 +1,10 @@
 package seedu.address.commons.util;
 
-import static seedu.address.model.UserPrefs.DEFAULT_ADDRESSBOOK_DIRECTORY;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.UserPrefs;
 
 /**
  * Writes and reads files
@@ -32,14 +26,18 @@ public class FileUtil {
      * Converts {@code Path} into it's address book name
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String convertToAddressBookName(Path filePath) throws IllegalValueException {
+    public static String convertToAddressBookName(Path filePath) {
         String filePathString = filePath.toString();
         int index = filePathString.lastIndexOf("\\");
         String fileName = filePathString.substring(index + 1);
-        if (!fileName.endsWith(StringUtil.JSON_FILE_PREFIX)) {
-            throw new IllegalValueException("File is not Json file");
-        }
         return fileName.substring(0, fileName.length() - 5);
+    }
+
+    /**
+     * Return true if {@code filePath} is Json file.
+     */
+    public static boolean isJsonFile(Path filePath) {
+        return filePath.toString().endsWith(StringUtil.JSON_FILE_PREFIX);
     }
 
     public static boolean isFileExists(Path file) {

@@ -122,7 +122,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Path> getAddressBookList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setAddressBookFilePath(Path addressBookFilePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAddressBookList(Path filePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteAddressBookList(Path filePath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getAddressBookListString() {
             throw new AssertionError("This method should not be called.");
         }
 

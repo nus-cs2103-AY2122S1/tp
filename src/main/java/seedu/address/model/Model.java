@@ -86,6 +86,11 @@ public interface Model {
     void deleteAddressBookList(Path filePath);
 
     /**
+     * Returns string representation of all address book list
+     */
+    String getAddressBookListString();
+
+    /**
      * Replaces address book data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
