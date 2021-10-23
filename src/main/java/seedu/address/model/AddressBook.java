@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -11,10 +12,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.ClientId;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.ClientId;
+import seedu.address.model.client.Name;
+import seedu.address.model.client.NextMeeting;
+import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.client.UniqueNextMeetingList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagIsUnreferenced;
 import seedu.address.model.tag.UniqueTagList;
@@ -22,13 +26,14 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameClient comparison)
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    private final UniquePersonList persons;
+    private final UniqueClientList clients;
+    private final UniqueNextMeetingList meetings;
     private final UniqueTagList tags;
 
     private String clientCounter;
@@ -41,7 +46,8 @@ public class AddressBook implements ReadOnlyAddressBook {
          * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
          *   among constructors.
          */
-        persons = new UniquePersonList();
+        clients = new UniqueClientList();
+        meetings = new UniqueNextMeetingList();
         tags = new UniqueTagList();
     }
 
@@ -49,7 +55,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an AddressBook using the Clients in the {@code toBeCopied}
      */
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -59,12 +65,20 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the client list with {@code clients}.
+     * {@code clients} must not contain duplicate clients.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setClients(List<Client> clients) {
+        this.clients.setClients(clients);
         removeUnreferencedTags();
+    }
+
+    /**
+     * Replaces the contents of the meetings list with {@code meetings}.
+     * {@code meetings} must not contain duplicate NextMeetings.
+     */
+    public void setMeetings(List<NextMeeting> meetings) {
+        this.meetings.setNextMeetings(meetings);
     }
 
     /**
@@ -101,19 +115,57 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
-
-        setPersons(newData.getPersonList());
+        setClients(newData.getClientList());
+        setMeetings(newData.getNextMeetingsList());
         setClientCounter(newData.getClientCounter());
+    }
+
+    //// meeting-level operations
+
+    /**
+     * Returns true if a nextMeeting with the same identity as {@code nextMeeting} exists in the address book.
+     */
+    public boolean hasNextMeeting(NextMeeting nextMeeting) {
+        requireNonNull(nextMeeting);
+        return meetings.contains(nextMeeting);
+    }
+
+    /**
+     * Adds a NextMeeting to the address book.
+     * The meeting must not already exist in the address book.
+     */
+    public void addNextMeeting(NextMeeting nextMeeting) {
+        meetings.add(nextMeeting);
+    }
+
+    /**
+     * Returns NextMeeting with corresponding withWho.
+     *
+     * @param withWho name of client
+     * @return meeting with matching client
+     */
+    public NextMeeting getNextMeeting(Name withWho) {
+        requireNonNull(withWho);
+        return meetings.getNextMeeting(withWho);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeNextMeeting(NextMeeting key) {
+        meetings.remove(key);
+        removeUnreferencedTags();
     }
 
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a client with the same identity as {@code client} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasClient(Client client) {
+        requireNonNull(client);
+        return clients.contains(client);
     }
 
     /**
@@ -123,47 +175,56 @@ public class AddressBook implements ReadOnlyAddressBook {
      * @return true if a client with the given clientId exists
      */
     public boolean hasClientId(ClientId clientId) {
-        return persons.hasClientId(clientId);
+        return clients.hasClientId(clientId);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a client to the address book.
+     * The client must not already exist in the address book.
      */
-    public void addPerson(Person p) {
-        persons.add(p);
+    public void addClient(Client p) {
+        clients.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      *
      * @return
      */
-    public List<Person> setPersonByClientIds(List<ClientId> clientIds, EditPersonDescriptor editedPersonDescriptor) {
+    public List<Client> setClientByClientIds(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireNonNull(clientIds);
-        requireNonNull(editedPersonDescriptor);
-        return persons.setPersonByClientIds(clientIds, editedPersonDescriptor);
+        requireNonNull(editedClientDescriptor);
+        return clients.setClientByClientIds(clientIds, editedClientDescriptor);
     }
 
     /**
-     * Returns person with corresponding clientId.
+     * Retrieve the NextMeeting from the given LocalDate by the user {@code date}.
+     * Returns client with corresponding clientId.
      *
+     * @return a list of NextMeetings that's on the same date as {@code date}
+     */
+    public List<Client> retrieveLastMeetings(LocalDate date) {
+        requireNonNull(date);
+        return clients.retrieveNextMeetings(date);
+    }
+
+    /**
      * @param clientId clientId of client
      * @return client with given clientId
      */
-    public Person getPerson(ClientId clientId) {
+    public Client getClient(ClientId clientId) {
         requireNonNull(clientId);
-        return persons.getPerson(clientId);
+        return clients.getClient(clientId);
     }
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
-        persons.remove(key);
+    public void removeClient(Client key) {
+        clients.remove(key);
         removeUnreferencedTags();
     }
 
@@ -213,33 +274,55 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     /**
-     * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
-     * Person with {@code clientId} and {@code email} must exist in the address book.
+     * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
+     * Client with {@code clientId} and {@code email} must exist in the address book.
      */
-    public List<Person> deletePersonByClientIds(List<ClientId> clientIds) {
-        return persons.deletePersonByClientIds(clientIds);
+    public List<Client> deleteClientByClientIds(List<ClientId> clientIds) {
+        return clients.deleteClientByClientIds(clientIds);
+    }
+
+    public void deleteMeetingsByClients(List<Client> toDelete) {
+        meetings.deleteByClients(toDelete);
     }
 
     /**
-     * Removes person with matching {@code clientId} and {@code email} from this {@code AddressBook}.
-     * Person with {@code clientId} and {@code email} must exist in the address book.
+     * Removes client with matching {@code clientId} and {@code email} from this {@code AddressBook}.
+     * Client with {@code clientId} and {@code email} must exist in the address book.
      */
     public FilteredList<Tag> removeTagByFields(List<Predicate<Tag>> predicates) {
         return tags.removeByFields(predicates);
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+    public ObservableList<Client> getClientList() {
+        return clients.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<NextMeeting> getNextMeetingsList() {
+        return meetings.asUnmodifiableObservableList();
+    };
+
+    @Override
+    public ObservableList<NextMeeting> getSortedNextMeetingsList() {
+        return meetings.asSortedObservableList();
+    };
 
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
     }
 
+    /**
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addMeeting(NextMeeting nextMeeting) {
+        meetings.add(nextMeeting);
+    }
+
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return clients.asUnmodifiableObservableList().size() + " clients";
         // TODO: refine later
     }
 
@@ -247,12 +330,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof AddressBook // instanceof handles nulls
-            && persons.equals(((AddressBook) other).persons));
+            && clients.equals(((AddressBook) other).clients));
     }
 
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return clients.hashCode();
     }
 }

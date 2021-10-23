@@ -1,7 +1,8 @@
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.NextMeeting;
 
 /**
  * Unmodifiable view of an address book
@@ -9,10 +10,16 @@ import seedu.address.model.person.Person;
 public interface ReadOnlyAddressBook {
 
     /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
+     * Returns an unmodifiable view of the clients list.
+     * This list will not contain any duplicate clients.
      */
-    ObservableList<Person> getPersonList();
+    ObservableList<Client> getClientList();
+
+    /**
+     * Returns an unmodifiable view of the meetings list.
+     * This list will not contain any duplicate NextMeetings.
+     */
+    ObservableList<NextMeeting> getNextMeetingsList();
 
     /**
      * Returns the current client counter
@@ -25,4 +32,6 @@ public interface ReadOnlyAddressBook {
     void incrementClientCounter();
 
     void setClientCounter(String s);
+
+    ObservableList<NextMeeting> getSortedNextMeetingsList();
 }
