@@ -102,9 +102,9 @@ public interface Model {
     void setTaskListFilePath(Path taskListFilePath);
 
     /**
-     * Replaces task book data with the data in {@code taskBook}.
+     * Replaces taskBook data with the data in {@code taskBook}.
      */
-    void setTaskBook(ReadOnlyTaskBook addressBook);
+    void setTaskBook(ReadOnlyTaskBook taskBook);
 
     /** Returns the TaskList */
     ReadOnlyTaskBook getTaskBook();
@@ -130,13 +130,42 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
+    /**
+     * Deletes a task from taskBook.
+     */
     void deleteTask(Task toDelete);
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    void deleteTaskIf(Predicate<Task> pred);
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
     void markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
+
+
+    /**
+     * Returns the user prefs' Order books  file path.
+     */
+    Path getOrderPath();
+
+    /**
+     * Sets the user prefs' Order books  file path.
+     */
+    void setOrderBookFilePath(Path orderBookFilePath);
+
+    /**
+     * Replaces Order books data with the data in {@code salesOrderBook}.
+     */
+    void setOrderBook(ReadOnlyOrderBook orderBook);
+
+    /** Returns the TaskList */
+    ReadOnlyOrderBook getOrderBook();
+
+
     /**
      * Adds the given order.
      */

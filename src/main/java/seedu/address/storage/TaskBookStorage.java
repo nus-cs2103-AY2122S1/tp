@@ -35,6 +35,7 @@ public interface TaskBookStorage {
      * @param taskBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
+
     void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
 
     /**

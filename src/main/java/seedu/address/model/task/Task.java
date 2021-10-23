@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
 
 /**
