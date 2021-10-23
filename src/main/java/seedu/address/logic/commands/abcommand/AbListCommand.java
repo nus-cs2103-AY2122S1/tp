@@ -15,7 +15,7 @@ public class AbListCommand extends AbCommand {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all existing address books\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + AbCommand.COMMAND_WORD + " " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "Listed all address book:%s";
 
