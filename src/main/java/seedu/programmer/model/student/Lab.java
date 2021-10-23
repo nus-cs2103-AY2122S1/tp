@@ -1,9 +1,9 @@
 package seedu.programmer.model.student;
 
 //todo: for testing show feature only
-public class LabResult {
+public class Lab {
     private String title;
-    private Double actualScore;
+    private Double actualScore = 0.0;
     private Double totalScore;
 
     /**
@@ -11,13 +11,22 @@ public class LabResult {
      * @param actualScore  the score obtained by the student
      * @param totalScore the total score
      * */
-    public LabResult(String title, Double actualScore, Double totalScore) {
+    public Lab(String title, Double actualScore, Double totalScore) {
         this.title = title;
         this.actualScore = actualScore;
         this.totalScore = totalScore;
     }
 
-    public LabResult(){}
+    /**
+     * @param title the title of the lab
+     * @param totalScore the total score
+     * */
+    public Lab(String title, Double totalScore) {
+        this.title = title;
+        this.totalScore = totalScore;
+    }
+
+    public Lab(){}
 
     public String getTitle() {
         return title;
@@ -34,10 +43,10 @@ public class LabResult {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LabResult // instanceof handles nulls
-                && title.equals(((LabResult) other).getTitle())
-                && actualScore.equals(((LabResult) other).getActualScore()))
-                && totalScore.equals(((LabResult) other).getTotalScore()); // state check
+                || (other instanceof Lab // instanceof handles nulls
+                && title.equals(((Lab) other).getTitle())
+                && actualScore.equals(((Lab) other).getActualScore()))
+                && totalScore.equals(((Lab) other).getTotalScore()); // state check
     }
 
 }

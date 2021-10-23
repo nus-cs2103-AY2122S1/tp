@@ -58,6 +58,13 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Get a list of all the students.
+     */
+    public ObservableList<Student> getList() {
+        return internalList;
+    }
+
+    /**
      * Replaces the student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the list.
      * The student identity of {@code editedStudent} must not be the same as another existing student in the list.

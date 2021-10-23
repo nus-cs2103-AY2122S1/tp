@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.Command;
-import seedu.programmer.logic.commands.CreateLabResultCommand;
+import seedu.programmer.logic.commands.AddLabCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
 import seedu.programmer.logic.commands.DownloadCommand;
 import seedu.programmer.logic.commands.EditCommand;
@@ -76,7 +76,7 @@ public class ProgrammerErrorParser {
         case FillCommand.COMMAND_WORD:
             return new FillCommand();
 
-        case CreateLabResultCommand.COMMAND_WORD:
+        case AddLabCommand.COMMAND_WORD:
             return new CreateLabResultCommandParser().parse(arguments);
 
         case ShowCommand.COMMAND_WORD:
