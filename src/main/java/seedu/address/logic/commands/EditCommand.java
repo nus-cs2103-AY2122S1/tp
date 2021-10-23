@@ -30,6 +30,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Rating;
 import seedu.address.model.person.Review;
+import seedu.address.model.summary.Summary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -92,7 +93,8 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        Summary summary = new Summary(model.getAddressBook());
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson), summary);
     }
 
     /**

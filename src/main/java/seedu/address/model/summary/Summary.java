@@ -2,12 +2,13 @@ package seedu.address.model.summary;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.person.CategoryCode;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Review;
 
 
 /**
@@ -16,21 +17,21 @@ import seedu.address.model.person.Review;
  */
 public class Summary {
     private int numberOfContacts;
-    //  private final int percentageRatings;
-    private int percentageReviews;
-    private HashMap<String, Integer> numberCategory;
+    private final HashMap<String, Integer> percentageRatings;
+    private HashMap<String, Integer> percentageCategory;
 
     private List<Person> personList;
+
 
     /**
      * Constructor to create a summary of the addressBook.
      * @param addressBook addressBook to summarise.
      */
-    public Summary(AddressBook addressBook) {
+    public Summary(ReadOnlyAddressBook addressBook) {
         this.personList = addressBook.getPersonList();
         numberOfContacts = setNumberOfContacts();
-        percentageReviews = setPercentageReviews();
-        numberCategory = setNumberCategory();
+        percentageCategory = setNumberCategory();
+        percentageRatings = setPercentageRatings();
     }
 
     /**
@@ -41,47 +42,44 @@ public class Summary {
         return personList.size();
     }
 
-    private int setPercentageRatings(Model model) {
-        List<Person> personList = model.getAddressBook().getPersonList();
-
-        return 0;
-    }
-
     /**
-     * Sets the total percentage of Reviews in the addressBook.
-     * @return total percentage of reviews of all contacts.
+     * Sets the total number of Ratings in each category (0-5 stars).
+     * @return HashMap of total number of contacts in each category.
      */
-    private int setPercentageReviews() {
-        if (numberOfContacts <= 0) {
-            return 100;
-        }
-        int count = 0;
+    private HashMap<String, Integer> setPercentageRatings() {
+        HashMap<String, Integer> count = new HashMap<>();
         for (Person person : personList) {
-            Review review = person.getReview();
-            if (!review.isEmptyReview()) {
-                count++;
+            String rating = person.getRating().toString();
+            if (count.containsKey(rating)) {
+                int value = count.get(rating);
+                int newValue = value + 1;
+                count.replace(rating, newValue);
+            } else {
+                count.put(rating, 1);
             }
         }
-        return 100 * count / numberOfContacts;
+
+        return count;
     }
+
 
     /**
      * Sets the total number of contacts in each category.
      * @return HashMap of total number of contacts in each category.
      */
     private HashMap<String, Integer> setNumberCategory() {
-        List<String> categoryValues = CategoryCode.CATEGORY_VALUES;
         HashMap<String, Integer> count = new HashMap<>();
-
-        for (String categoryValue : categoryValues) {
-            count.put(categoryValue, 0);
-        }
 
         for (Person person : personList) {
             String categoryString = person.getCategoryCode().toString().toLowerCase();
-            int value = count.get(categoryString);
-            int newValue = value + 1;
-            count.replace(categoryString, newValue);
+            if (count.containsKey(categoryString)) {
+                int value = count.get(categoryString);
+                int newValue = value + 1;
+                count.replace(categoryString, newValue);
+            } else {
+                count.put(categoryString, 1);
+            }
+
         }
 
         return count;
@@ -91,12 +89,41 @@ public class Summary {
         return numberOfContacts;
     }
 
-    public int getPercentageReviews() {
-        return percentageReviews;
+    public HashMap<String, Integer> getPercentageCategory() {
+        return percentageCategory;
     }
 
-    public HashMap<String, Integer> getNumberCategory() {
-        return numberCategory;
+    public HashMap<String, Integer> getPercentageRatings() {
+        return percentageRatings;
+    }
+
+    //=========== GUI ==================================================================================
+
+    public String getNumberOfContactsGui() {
+        String totalContacts = "Total Number of Contacts: ";
+        return totalContacts + numberOfContacts;
+    }
+
+    public ObservableList<PieChart.Data> getPercentageCategoryGui() {
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        for (Map.Entry<String, Integer> entry : percentageCategory.entrySet()) {
+            String key = entry.getKey().toUpperCase();
+            Integer value = entry.getValue();
+            pieChartData.add(new PieChart.Data(key, value));
+        }
+        return pieChartData;
+    }
+
+    public ObservableList<PieChart.Data> getPercentageRatingsGui() {
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        for (Map.Entry<String, Integer> entry : percentageRatings.entrySet()) {
+            String key = entry.getKey() + "\u2B50";
+            Integer value = entry.getValue();
+            pieChartData.add(new PieChart.Data(key, value));
+        }
+        return pieChartData;
     }
 
 }
