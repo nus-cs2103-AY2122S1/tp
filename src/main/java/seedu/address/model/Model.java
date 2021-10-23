@@ -102,11 +102,7 @@ public interface Model {
     void setTaskListFilePath(Path taskListFilePath);
 
     /**
-<<<<<<< HEAD
-     * Replaces Sales order book data with the data in {@code taskBook}.
-=======
-     * Replaces task book data with the data in {@code taskBook}.
->>>>>>> refactor-taskManager
+     * Replaces taskBook data with the data in {@code taskBook}.
      */
     void setTaskBook(ReadOnlyTaskBook taskBook);
 
@@ -134,7 +130,15 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
+    /**
+     * Deletes a task from taskBook.
+     */
     void deleteTask(Task toDelete);
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    void deleteTaskIf(Predicate<Task> pred);
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
