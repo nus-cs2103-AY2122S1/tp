@@ -51,7 +51,7 @@ public class FindModuleLessonCommand extends Command {
         requireNonNull(model);
         model.updateFilteredModuleLessonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredModuleLessonList().size()));
+                String.format(Messages.MESSAGE_LESSONS_LISTED_OVERVIEW, model.getFilteredModuleLessonList().size()));
     }
 
     @Override
