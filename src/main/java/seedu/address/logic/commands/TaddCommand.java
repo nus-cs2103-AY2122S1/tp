@@ -53,6 +53,7 @@ public class TaddCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
+        assert false;
         return other == this // short circuit if same object
                 || (other instanceof TaddCommand // instanceof handles nulls
                 && toAdd.equals(((TaddCommand) other).toAdd));
