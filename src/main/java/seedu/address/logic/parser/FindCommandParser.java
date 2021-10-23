@@ -42,7 +42,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 return new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
             case "-l":
                 return new FindCommand(new TagsContainKeywordsPredicate(Arrays.asList(nameKeywords)));
-            case "-t":
+            case "-tn":
                 return new FindCommand(new TasksContainKeywordsPredicate(Arrays.asList(nameKeywords)));
             default:
                 throw new ParseException(

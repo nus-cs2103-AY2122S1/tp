@@ -23,9 +23,9 @@ public class AddTaskParserTest {
         List<Task> taskList2 = new ArrayList<>();
         taskList2.add(new Task("play"));
         taskList2.add(new Task("sleep"));
-        assertParseSuccess(parser, "1 task/play", new AddTaskCommand(INDEX_FIRST_PERSON,
+        assertParseSuccess(parser, "1 -tn play", new AddTaskCommand(INDEX_FIRST_PERSON,
                 taskList1));
-        assertParseSuccess(parser, "1 task/play task/sleep", new AddTaskCommand(INDEX_FIRST_PERSON,
+        assertParseSuccess(parser, "1 -tn play -tn sleep", new AddTaskCommand(INDEX_FIRST_PERSON,
                 taskList2));
     }
 

@@ -63,16 +63,16 @@ public class EditTaskCommandParserTest {
     @Test
     public void parse_invalidTaskIndex_failure() {
         // negative task index
-        assertParseFailure(parser, "1 ti/-5 " + VALID_TASK, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti -5 " + VALID_TASK, MESSAGE_INVALID_INDEX);
 
         // zero task index
-        assertParseFailure(parser, "1 ti/0 " + VALID_TASK, MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti 0 " + VALID_TASK, MESSAGE_INVALID_INDEX);
 
         // invalid arguments being parsed as task index
-        assertParseFailure(parser, "1 ti/1 some random string", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti 1 some random string", MESSAGE_INVALID_INDEX);
 
         // invalid prefix being parsed as task index
-        assertParseFailure(parser, "1 ti/1 i/ string", MESSAGE_INVALID_INDEX);
+        assertParseFailure(parser, "1 -ti 1 -i string", MESSAGE_INVALID_INDEX);
     }
 
     @Test
