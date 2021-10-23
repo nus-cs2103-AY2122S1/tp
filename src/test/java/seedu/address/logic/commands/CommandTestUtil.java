@@ -92,7 +92,10 @@ public class CommandTestUtil {
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "Ãgent"; // non-ASCII character
 
     public static final String INVALID_LESSON_DAY_DESC = " " + PREFIX_LESSON_DAY + "9"; // not a day of a week
-    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "99:00"; // not a valid time
+    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "99:00 99:00"; // not a valid time
+    public static final String MISSING_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "12:00"; // missing end time
+    public static final String INVALID_LESSON_DURATION_DESC = " " + PREFIX_LESSON_TIME
+            + VALID_LESSON_TIME_12 + " " + VALID_LESSON_TIME_11; // Start time is after end time
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

@@ -31,9 +31,9 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.Remark;
 import seedu.address.testutil.EditLessonDescriptorBuilder;
@@ -78,7 +78,7 @@ public class EditModuleLessonCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(p, "1" + INVALID_MODULE_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS);
         assertParseFailure(p, "1" + INVALID_LESSON_DAY_DESC, LessonDay.MESSAGE_CONSTRAINTS);
-        assertParseFailure(p, "1" + INVALID_LESSON_TIME_DESC, ParserUtil.MESSAGE_INVALID_LESSON_DURATION);
+        assertParseFailure(p, "1" + INVALID_LESSON_TIME_DESC, LessonTime.MESSAGE_CONSTRAINTS);
         assertParseFailure(p, "1" + INVALID_REMARK_DESC, Remark.MESSAGE_CONSTRAINTS);
 
         // invalid module code followed by valid day

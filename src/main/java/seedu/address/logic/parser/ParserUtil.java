@@ -29,8 +29,9 @@ import seedu.address.model.person.TeleHandle;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_MISSING_TIME = "Missing compulsory start time or end time.";
     public static final String MESSAGE_INVALID_LESSON_DURATION =
-            "Missing compulsory start time or end time. The start time should be before end time.";
+            "The start time should be before end time.";
     public static final String MESSAGE_INVALID_MODULE_INFO =
             "Missing either the module code or the lesson code. Both are compulsory.";
 
@@ -235,12 +236,14 @@ public class ParserUtil {
         requireNonNull(lessonTime);
         String trimmedLessonTime = lessonTime.trim();
         String[] lessonTimeArr = trimmedLessonTime.split("\\s+");
-        if (lessonTimeArr.length != 2
-                || !LocalTime.parse(lessonTimeArr[0]).isBefore(LocalTime.parse(lessonTimeArr[1]))) {
-            throw new ParseException(MESSAGE_INVALID_LESSON_DURATION);
+        if (lessonTimeArr.length != 2) {
+            throw new ParseException(MESSAGE_MISSING_TIME);
         }
         if (!LessonTime.isValidTime(lessonTimeArr[0]) || !LessonTime.isValidTime(lessonTimeArr[1])) {
             throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
+        }
+        if (!LocalTime.parse(lessonTimeArr[0]).isBefore(LocalTime.parse(lessonTimeArr[1]))) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DURATION);
         }
         return Arrays.stream(lessonTimeArr).map(LessonTime::new).collect(Collectors.toUnmodifiableList());
     }

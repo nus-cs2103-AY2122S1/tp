@@ -30,7 +30,7 @@ public class ModuleLessonBuilder {
         lessonDay = new LessonDay(DEFAULT_DAY);
         lessonStartTime = new LessonTime(DEFAULT_START_TIME);
         lessonEndTime = new LessonTime(DEFAULT_END_TIME);
-        remark = new Remark(DEFAULT_REMARK);
+        remark = new Remark("");
     }
 
     /**
