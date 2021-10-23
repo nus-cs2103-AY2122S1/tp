@@ -20,6 +20,8 @@ public class Help {
 
     /**
      * Opens the png image of the Command Summary
+     * @throws IOException if the specified file has no associated application or the associated application fails to
+     * be launched
      */
     public void openCommandSummary() throws IOException {
         Desktop.getDesktop().open(helpWindow);
@@ -27,6 +29,8 @@ public class Help {
 
     /**
      * Opens the online User Guide if possible, throw IOException otherwise
+     * @throws IOException if the user default browser is not found, or it fails to be launched, or the default handler
+     * application failed to be launched
      */
     public void openUserGuide() throws IOException {
         Desktop.getDesktop().browse(

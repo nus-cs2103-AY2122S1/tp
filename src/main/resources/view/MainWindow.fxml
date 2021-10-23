@@ -30,7 +30,7 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
-            <MenuItem fx:id ="helpMenuItemUG" mnemonicParsing="false" onAction="#openCommandSummary" text = "Command Summary"></MenuItem>
+            <MenuItem fx:id ="helpMenuItemUG" mnemonicParsing="false" onAction="#handleCommandSummary" text = "Command Summary"></MenuItem>
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
