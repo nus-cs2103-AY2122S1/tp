@@ -359,6 +359,7 @@
     -fx-background-color: transparent, derive(-fx-base1, -10%), transparent,
         derive(-fx-base1, -10%);
     -fx-text-fill: white;
+    -fx-prompt-text-fill: #d8d8d8;
 }
 
 #resultDisplay .content {
