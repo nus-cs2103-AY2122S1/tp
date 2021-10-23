@@ -257,6 +257,17 @@ public class Participant {
     }
 
     /**
+     * Replaces this Participant with a given edited Participant in this Participant's Events.
+     *
+     * @param editedParticipant The given edited Participant.
+     */
+    public void shiftEvents(Participant editedParticipant) {
+        for (int i = 0; i < events.size(); i++) {
+            events.get(i).replaceParticipant(this, editedParticipant);
+        }
+    }
+
+    /**
      * Returns true if both participants have the same identity and data fields.
      * This defines a stronger notion of equality between two participants.
      */
