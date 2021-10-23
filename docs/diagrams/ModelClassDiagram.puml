@@ -35,6 +35,10 @@ Class CompletionStatus
 package Tag {
 Class Tag
 }
+
+package HelpCard {
+Class HelpCommand
+}
 }
 
 Task *--> "1" TaskDescription
