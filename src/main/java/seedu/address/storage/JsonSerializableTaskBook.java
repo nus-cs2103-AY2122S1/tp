@@ -16,10 +16,10 @@ import seedu.address.model.task.Task;
 /**
  * An Immutable TaskBook that is serializable to JSON format.
  */
-@JsonRootName(value = "tasklist")
+@JsonRootName(value = "taskBook")
 class JsonSerializableTaskBook {
 
-    public static final String MESSAGE_DUPLICATE_TASK = "task list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "taskBook contains duplicate task(s).";
 
     private final List<JsonAdaptedTask> tasks = new ArrayList<>();
 
