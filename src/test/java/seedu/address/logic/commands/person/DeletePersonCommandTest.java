@@ -215,14 +215,14 @@ public class DeletePersonCommandTest {
         DeletePersonCommand deleteBatchCommand1 = new DeletePersonCommand(INDEX_FIRST, INDEX_SECOND);
         DeletePersonCommand deleteBatchCommand2 = new DeletePersonCommand(INDEX_FIRST, INDEX_THIRD);
 
-        ModuleCodesContainsKeywordsPredicate predicate_CS2106 = new ModuleCodesContainsKeywordsPredicate(
+        ModuleCodesContainsKeywordsPredicate first_predicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106)));
-        ModuleCodesContainsKeywordsPredicate predicate_CS2100 = new ModuleCodesContainsKeywordsPredicate(
+        ModuleCodesContainsKeywordsPredicate second_predicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100)));
 
-        DeletePersonCommand deleteByModule1 = new DeletePersonCommand(predicate_CS2106,
+        DeletePersonCommand deleteByModule1 = new DeletePersonCommand(first_predicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
-        DeletePersonCommand deleteByModule2 = new DeletePersonCommand(predicate_CS2100,
+        DeletePersonCommand deleteByModule2 = new DeletePersonCommand(second_predicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
 
         // same object -> returns true
@@ -237,7 +237,7 @@ public class DeletePersonCommandTest {
         DeletePersonCommand deleteBatchCommandCopy = new DeletePersonCommand(INDEX_FIRST, INDEX_SECOND);
         assertTrue(deleteBatchCommand1.equals(deleteBatchCommandCopy));
 
-        DeletePersonCommand deleteByModuleCopy = new DeletePersonCommand(predicate_CS2106,
+        DeletePersonCommand deleteByModuleCopy = new DeletePersonCommand(first_predicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
         assertTrue(deleteByModule1.equals(deleteByModuleCopy));
 
