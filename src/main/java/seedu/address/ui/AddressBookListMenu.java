@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -34,6 +35,7 @@ public class AddressBookListMenu extends UiPart<Menu> {
     public AddressBookListMenu(ObservableList<Path> jsonFileList, ObservableValue<Path> currentFile, Logic logic) {
         super(FXML);
         this.menuItems = this.menu.getItems();
+
         Function<Path, MenuItem> menuItemFunction = path -> {
             String addressBookName;
             if (!FileUtil.isJsonFile(path)) {
@@ -49,7 +51,8 @@ public class AddressBookListMenu extends UiPart<Menu> {
                 Optional.ofNullable(menuItemFunction.apply(path)).ifPresent(menuItems::add);
 
         Consumer<Path> removedConsumer = path -> {
-            Predicate<MenuItem> matchMenuItem = menuItem -> menuItem.getText().equals(path.toString());
+            Predicate<MenuItem> matchMenuItem = menuItem ->
+                    menuItem.getText().equals(FileUtil.convertToAddressBookName(path));
             ObservableList<MenuItem> temp = menuItems.filtered(matchMenuItem);
             if (temp.isEmpty()) {
                 return;
@@ -59,16 +62,22 @@ public class AddressBookListMenu extends UiPart<Menu> {
             menuItems.remove(tempMenu);
         };
 
-        jsonFileList.forEach(addedConsumer);
+        jsonFileList.stream().filter(x -> !x.equals(currentFile.getValue())).forEach(addedConsumer);
+
         ListChangeListener<Path> addressBookListListener = c -> {
             while (c.next()) {
-                c.getAddedSubList().forEach(addedConsumer);
                 c.getRemoved().forEach(removedConsumer);
             }
         };
 
-        this.menu.setText(FileUtil.convertToAddressBookName(currentFile.getValue()));
-        currentFile.addListener((o, x, y) -> this.menu.setText(FileUtil.convertToAddressBookName(y)));
         jsonFileList.addListener(addressBookListListener);
+
+        this.menu.setText(FileUtil.convertToAddressBookName(currentFile.getValue()));
+        currentFile.addListener((o, x, y) -> {
+            String temp = FileUtil.convertToAddressBookName(y);
+            menu.setText(temp);
+            addedConsumer.accept(x);
+            removedConsumer.accept(y);
+        });
     }
 }
