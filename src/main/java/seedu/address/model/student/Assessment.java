@@ -3,16 +3,8 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.TreeMap;
-
-import javafx.scene.chart.Chart;
-import seedu.address.commons.util.ChartUtil;
 
 /**
  * Represents a Student's assessment.
@@ -23,7 +15,6 @@ public class Assessment {
     public static final String MESSAGE_CONSTRAINTS =
             "Assessment names should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
 
     // Assessment score list
     public final Map<ID, Score> scores = new HashMap<>();
@@ -102,7 +93,6 @@ public class Assessment {
     public int hashCode() {
         return value.hashCode();
     }
-
 
 
 }

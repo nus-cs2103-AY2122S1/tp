@@ -49,7 +49,6 @@ public class Score {
         return integral + "." + decimal;
     }
 
-    // TODO: More defensive coding
     public double getNumericValue() {
         return Double.parseDouble(value);
     }
