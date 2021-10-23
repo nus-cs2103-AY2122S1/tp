@@ -199,15 +199,14 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
-    private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, Category category) {
-        if (category instanceof Client) {
+    private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, boolean isClient) {
+        if (isClient) {
             if (selectedTab == 1) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
-        if (category instanceof Product) {
+        } else {
             if (selectedTab == 0) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
@@ -269,40 +268,25 @@ public class MainWindow extends UiPart<Stage> {
             Category category = commandResult.getInfo();
 
             CommandType commandType = commandResult.getCommandType();
+            Boolean isClient = commandResult.getIsClientCommand();
 
             switch(commandType) {
             case HELP:
                 handleHelp();
+                break;
             case EXIT:
                 handleExit();
+                break;
             case STAT:
                 handleStat();
+                break;
             case VIEW:
                 handleView(tpb, selectedTab, category);
+                break;
             default:
-                handleChangeTab(tpb, selectedTab, category);
+                handleChangeTab(tpb, selectedTab, isClient);
+                break;
             }
-
-//
-//            if (commandResult.getCommandType().equals(CommandType.LIST)) {
-//                handleChangeTab(tpb, selectedTab, category);
-//            }
-//
-//            if (commandResult.getCommandType().equals(CommandType.VIEW)) {
-//                handleView(tpb, selectedTab, category);
-//            }
-//
-//            if (commandResult.getCommandType().equals(CommandType.HELP)) {
-//                handleHelp();
-//            }
-//
-//            if (commandResult.getCommandType().equals(CommandType.EXIT)) {
-//                handleExit();
-//            }
-//
-//            if ((commandResult.getCommandType().equals(CommandType.STAT))) {
-//                handleStat();
-//            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {
