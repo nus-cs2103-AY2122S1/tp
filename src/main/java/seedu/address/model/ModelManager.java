@@ -95,6 +95,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Path getAddressBookDirectory() {
+        return userPrefs.getAddressBookDirectory();
+    }
+
+    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);

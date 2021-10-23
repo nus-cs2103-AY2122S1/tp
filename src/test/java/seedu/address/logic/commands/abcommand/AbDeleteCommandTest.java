@@ -90,6 +90,6 @@ public class AbDeleteCommandTest {
     }
 
     private Path getPath(String s) {
-        return Path.of(FileUtil.convertToAddressBookPathString(s));
+        return Path.of(FileUtil.convertToAddressBookPathString(s, this.model.getAddressBookDirectory()));
     }
 }

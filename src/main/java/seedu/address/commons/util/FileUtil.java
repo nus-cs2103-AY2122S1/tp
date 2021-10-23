@@ -17,9 +17,9 @@ public class FileUtil {
      * Converts {@code String addressBookName} into a {@code Path}
      * Leading and trailing whitespaces will be trimmed.
      */
-    public static String convertToAddressBookPathString(String addressBookName) {
+    public static String convertToAddressBookPathString(String addressBookName, Path fileDirectory) {
         String trimmedLowerCase = addressBookName.trim().toLowerCase();
-        return String.format("data/%s.json", trimmedLowerCase);
+        return String.format("%s/%s.json", fileDirectory.toString(), trimmedLowerCase);
     }
 
     /**

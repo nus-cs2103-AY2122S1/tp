@@ -22,7 +22,7 @@ public class AbCommandParserTest {
     @Test
     public void parseCommand_abcreate() throws Exception {
         String input = "addressbook";
-        String filePathName = FileUtil.convertToAddressBookPathString(input);
+        String filePathName = FileUtil.convertToAddressBookPathString(input, model.getAddressBookDirectory());
         Path pathName = Path.of(filePathName);
         AbCreateCommand command = (AbCreateCommand) abCommandParser.parse(
                 AbCreateCommand.COMMAND_WORD + " " + input, model);
@@ -32,7 +32,7 @@ public class AbCommandParserTest {
     @Test
     public void parseCommand_abdelete() throws Exception {
         String input = "addressbook";
-        String filePathName = FileUtil.convertToAddressBookPathString(input);
+        String filePathName = FileUtil.convertToAddressBookPathString(input, model.getAddressBookDirectory());
         Path pathName = Path.of(filePathName);
         AbDeleteCommand command = (AbDeleteCommand) abCommandParser.parse(
                 AbDeleteCommand.COMMAND_WORD + " " + input, model);
@@ -42,7 +42,7 @@ public class AbCommandParserTest {
     @Test
     public void parseCommand_abswitch() throws Exception {
         String input = "addressbook";
-        String filePathName = FileUtil.convertToAddressBookPathString(input);
+        String filePathName = FileUtil.convertToAddressBookPathString(input, model.getAddressBookDirectory());
         Path pathName = Path.of(filePathName);
         AbSwitchCommand command = (AbSwitchCommand) abCommandParser.parse(
                 AbSwitchCommand.COMMAND_WORD + " " + input, model);

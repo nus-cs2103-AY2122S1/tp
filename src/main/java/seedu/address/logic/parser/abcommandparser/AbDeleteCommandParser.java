@@ -33,7 +33,7 @@ public class AbDeleteCommandParser implements Parser<AbDeleteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AbDeleteCommand.MESSAGE_USAGE));
         }
 
-        String filePathName = convertToAddressBookPathString(lowercaseArgs);
+        String filePathName = convertToAddressBookPathString(lowercaseArgs, model.getAddressBookDirectory());
 
         if (!isValidPath(filePathName)) {
             throw new ParseException(String.format(MESSAGE_ADDRESSBOOK_NOT_VALID, trimmedArgs));

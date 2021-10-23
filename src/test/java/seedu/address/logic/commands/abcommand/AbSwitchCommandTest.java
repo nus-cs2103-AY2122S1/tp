@@ -116,7 +116,7 @@ public class AbSwitchCommandTest {
     }
 
     private Path getPath(String s) {
-        return Path.of(FileUtil.convertToAddressBookPathString(s));
+        return Path.of(FileUtil.convertToAddressBookPathString(s, this.model.getAddressBookDirectory()));
     }
 
     private ReadOnlyAddressBook getAddressBookWrapper(Storage storage) {

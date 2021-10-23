@@ -63,12 +63,17 @@ public interface Model {
     /**
      * Returns the list of all address book file path.
      */
-    ObservableValue<Path> getAddressBookFilePathObject();
+    ObservableList<Path> getAddressBookList();
 
     /**
      * Returns the user prefs' address book file path wrapped object.
      */
-    ObservableList<Path> getAddressBookList();
+    ObservableValue<Path> getAddressBookFilePathObject();
+
+    /**
+     * Returns the user prefs' address book directory.
+     */
+    Path getAddressBookDirectory();
 
     /**
      * Sets the user prefs' address book file path.
@@ -233,5 +238,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateClientToView(Predicate<Client> predicate);
-
 }

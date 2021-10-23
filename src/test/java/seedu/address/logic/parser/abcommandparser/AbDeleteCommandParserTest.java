@@ -23,7 +23,7 @@ public class AbDeleteCommandParserTest {
     @Test
     public void parse_validArg_returnAbDeleteCommand() {
         String input = "addressbook";
-        Path filePath = Path.of(FileUtil.convertToAddressBookPathString(input));
+        Path filePath = Path.of(FileUtil.convertToAddressBookPathString(input, Path.of("data")));
         AbDeleteCommand expectedAbDeleteCommand = new AbDeleteCommand(input, filePath);
         assertParseSuccess(parser, " " + input + "  ", expectedAbDeleteCommand);
     }
