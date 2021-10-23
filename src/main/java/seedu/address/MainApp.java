@@ -230,25 +230,13 @@ public class MainApp extends Application {
         try {
             cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             FileUtil.deleteFile(storage.getAddressBookFilePath());
-            afterLogIn(cryptor);
+            model = initModelManager(storage, userPrefs, cryptor);
+            logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
+            ui = new UiManager(logic);
+            ui.start(stage);
         } catch (InvalidAlgorithmParameterException | IOException | InvalidKeyException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Sets up the cryptor, model, logic for the addressBook page.
-     * Displays the new UI.
-     *
-     * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
-     * @throws NoSuchPaddingException If the padding does not exist.
-     * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
-     */
-    public void afterLogIn(Encryption cryptor) throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
-        model = initModelManager(storage, userPrefs, cryptor);
-        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
-        ui = new UiManager(logic);
-        ui.start(stage);
     }
 
     @Override
