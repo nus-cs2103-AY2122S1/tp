@@ -73,6 +73,7 @@ $/|Salary
 i/|Index
 e/|Email
 t/|Extra tags
+d/|Date (for mark command) and Shift (for shift related commands)
 
 #### Flags for Lookup
 
@@ -147,12 +148,12 @@ _Details coming soon ..._
 
 ### Basic management of Staff Details
 
-#### View a staff - `view`
+#### Viewing a staff : `view`
 
 Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, email, address) of a staff or by index of the staff.
 
- * Does not allow for non-specific lookup. Any fields entered must be an exact reference.
- * For example, the query `-n Candice` will result in any Staff with the exact name __Candice__ and noone else.
+ * Does not allow for a non-specific lookup. Any fields entered must be an exact reference.
+ * For example, the query `-n Candice` will result in any Staff with the exact name __Candice__ and no-one else.
 
 Format:  
 `view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
@@ -161,7 +162,7 @@ Examples:
 `view -n Candice`
 `view -t friends -t neighbours`
 
-#### Adding a staff - `add`
+#### Adding a staff : `add`
 
 Adds a staff to the system. 
 
@@ -203,7 +204,7 @@ Examples:
 `mark -n Alex Yeoh d/2020-01-03`
 
 
-#### Removing the absent mark `unmark`
+#### Removing the absent mark : `unmark`
 
 Removes the period that was marked by the `mark` command.
 
@@ -258,34 +259,34 @@ Examples:
 `edit -n Candice r/cook`
 
 
-#### Finding staff: `find`
+#### Finding staff : `find`
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
 Name Search:
 
-* The search is case-insensitive. e.g `bob` will match `Bob`
-* The order of the keywords does not matter. e.g. `Candice Dee` will match `Dee Candice`
-* Only full words will be matched e.g. `Boba` will not match `Bob`
+* The search is case-insensitive. e.g `bob` will match `Bob`.
+* The order of the keywords does not matter. e.g. `Candice Dee` will match `Dee Candice`.
+* Only full words will be matched e.g. `Boba` will not match `Bob`.
 * Staff matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `John Nathan` will return `John Wick`, `Nathan Tan`
+  e.g. `John Nathan` will return `John Wick`, `Nathan Tan`.
 
 Index Search:
 
 * If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
   be performed on the overall staff list.
-* The index must be within range (i.e. from 1 until the size of the Staff List, if the list is empty, no input is accepted)
-* Only single search is supported, and this search will return only the specific Staff at that index
+* The index must be within range. (i.e. from 1 until the size of the Staff List, if the list is empty, no input is accepted)
+* Only single search is supported, and this search will return only the specific Staff at that index.
 
 Format:  
-`find -n KEYWORD [MORE_KEYWORDS]`
-`find -i INDEX`
+`find -n KEYWORD [MORE_KEYWORDS]`  
+`find -i INDEX`  
 
 
 Examples:  
 `find -n John`  
-`find -n alex david`  
-`find -i 3`
+`find -n alex david`    
+`find -i 3`  
 
 List before using Find command:
 ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
@@ -308,7 +309,7 @@ Format: `exit`
 
 ### Basic Management of Staff Schedules
 
-#### Adding a shift to staff's schedule: `addShift`
+#### Adding a shift to a staff's schedule : `addShift`
 
 Adds a time period where the staff is working to the staff’s schedule.
 
@@ -324,9 +325,9 @@ Examples:
 `addShift -n Candice d/Monday-1`   
 `addShift -i 1234 d/tuesday-0`
 
-#### View a staff schedule : `viewSchedule`
+#### Viewing schedule of staff(s): `viewSchedule`
 
-Views a specific staff’s schedule.
+Views the schedule of staff's that satisfy the query conditions.
 
 Formats:  
 `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
@@ -340,7 +341,7 @@ The output will look like the following.
 ![viewShedule](images/viewScheduleImage.png)
 
 
-#### Deleting a staff schedule: `deleteSchedule`
+#### Deleting a staff schedule : `deleteSchedule`
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
@@ -352,7 +353,7 @@ Examples:
 `deleteSchedule -n Joe d/tuesday-2`  
 `deleteSchedule -i 1278 d/friday-1`
 
-#### Editing a staff schedule: `editSchedule`
+#### Editing a staff schedule : `editSchedule`
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
 Formats:  
@@ -363,11 +364,11 @@ Examples:
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2`  
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
-#### View all the staff working a shift: `viewShift`
+#### Viewing all the staff(s) working a shift : `viewShift`
 
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
- * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`
+ * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
  * The DAY entry is not case sensitive.
 
 Formats:  
