@@ -109,6 +109,10 @@ public class Person implements Comparable<Person> {
         return isFavourite;
     }
 
+    public void setIsFavourite() {
+        this.isFavourite = true;
+    }
+
     public Image getProfilePicture() {
         if (parallelTask != null && parallelTask.isAlive()) {
             try {
