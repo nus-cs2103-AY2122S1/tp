@@ -35,13 +35,13 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskBook,
-                        ReadOnlyOrderBook salesOrderBook, ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyOrderBook orderBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, taskBook, salesOrderBook, userPrefs);
+        requireAllNonNull(addressBook, taskBook, orderBook, userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.taskBook = new TaskBook(taskBook);
-        this.orderBook = new OrderBook(salesOrderBook);
+        this.orderBook = new OrderBook(orderBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
@@ -148,7 +148,7 @@ public class ModelManager implements Model {
         return taskBook;
     }
     /**
-     * Checks if taskList has this task.
+     * Checks if taskBook has this task.
      */
     @Override
     public boolean hasTask(Task task) {
@@ -157,7 +157,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Adds a task to taskList.
+     * Adds a task to taskBook.
      */
     public void addTask(Task toAdd) {
         taskBook.addTask(toAdd);
@@ -165,7 +165,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes a task from taskList.
+     * Deletes a task from taskBook.
      */
     public void deleteTask(Task toDelete) {
         taskBook.deleteTask(toDelete);
@@ -220,7 +220,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Checks if order book has this order.
+     * Checks if orderBook has this order.
      */
     @Override
     public boolean hasOrder(Order order) {
@@ -235,7 +235,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Adds an order to order book.
+     * Adds an order to orderBook.
      */
     public void addOrder(Order toAdd) {
         orderBook.addOrder(toAdd);
@@ -243,7 +243,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Deletes an order from order book.
+     * Deletes an order from orderBook.
      */
     public void deleteOrder(Order toDelete) {
         orderBook.deleteOrder(toDelete);

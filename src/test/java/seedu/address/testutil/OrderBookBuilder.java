@@ -22,7 +22,7 @@ public class OrderBookBuilder {
     }
 
     /**
-     * Adds a new {@code Task} to the {@code OrderBookBuilder} that we are building.
+     * Adds a new {@code Order} to the {@code OrderBookBuilder} that we are building.
      */
     public OrderBookBuilder withOrder(Order order) {
         orderBook.addOrder(order);

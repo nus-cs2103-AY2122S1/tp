@@ -84,15 +84,15 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        JsonTaskBookStorage taskListStorage =
+        JsonTaskBookStorage taskBookStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("ioExceptionTaskList.json"));
-        JsonOrderBookStorage salesOrderBookStorage =
+        JsonOrderBookStorage orderBookStorage =
                 new JsonOrderBookStorage(temporaryFolder.resolve("ioExceptionSalesOrderBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
 
         StorageManager storage = new StorageManager(addressBookStorage,
-                taskListStorage, salesOrderBookStorage, userPrefsStorage);
+                taskBookStorage, orderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command

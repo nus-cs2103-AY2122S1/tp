@@ -27,7 +27,7 @@ public class ListCommandTest {
         model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(),
                 getTypicalOrderBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(),
-                getTypicalTaskBook(), getTypicalOrderBook(), new UserPrefs());
+                model.getTaskBook(), model.getOrderBook(), new UserPrefs());
 
     }
 

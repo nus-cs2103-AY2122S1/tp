@@ -71,9 +71,9 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         return orderBookFilePath;
     }
 
-    public void getOrderBookFilePath(Path salesOrderBookFilePath) {
+    public void getOrderBookFilePath(Path orderBookFilePath) {
         requireNonNull(addressBookFilePath);
-        this.orderBookFilePath = salesOrderBookFilePath;
+        this.orderBookFilePath = orderBookFilePath;
     }
 
     @Override

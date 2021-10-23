@@ -149,12 +149,12 @@ public interface Model {
     Path getOrderPath();
 
     /**
-     * Sets the user prefs'  Order books  file path.
+     * Sets the user prefs' Order books  file path.
      */
     void setOrderBookFilePath(Path orderBookFilePath);
 
     /**
-     * Replaces Order books  data with the data in {@code salesOrderBook}.
+     * Replaces Order books data with the data in {@code salesOrderBook}.
      */
     void setOrderBook(ReadOnlyOrderBook orderBook);
 

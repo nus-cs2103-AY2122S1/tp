@@ -20,7 +20,7 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
-    private TaskBookStorage taskListStorage;
+    private TaskBookStorage taskBookStorage;
     private OrderBookStorage orderBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
@@ -34,7 +34,7 @@ public class StorageManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.taskListStorage = taskListStorage;
+        this.taskBookStorage = taskListStorage;
         this.orderBookStorage = orderBookStorage;
     }
 
@@ -88,32 +88,32 @@ public class StorageManager implements Storage {
 
     @Override
     public Path getTaskListFilePath() {
-        return taskListStorage.getTaskListFilePath();
+        return taskBookStorage.getTaskListFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskBook> readTaskList() throws DataConversionException, IOException {
-        return readTaskList(taskListStorage.getTaskListFilePath());
+        return readTaskList(taskBookStorage.getTaskListFilePath());
     }
 
     @Override
     public Optional<ReadOnlyTaskBook> readTaskList(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return taskListStorage.readTaskList(filePath);
+        return taskBookStorage.readTaskList(filePath);
     }
 
     @Override
     public void saveTaskBook(ReadOnlyTaskBook taskList) throws IOException {
-        saveTaskBook(taskList, taskListStorage.getTaskListFilePath());
+        saveTaskBook(taskList, taskBookStorage.getTaskListFilePath());
     }
 
     @Override
     public void saveTaskBook(ReadOnlyTaskBook taskList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskListStorage.saveTaskBook(taskList, filePath);
+        taskBookStorage.saveTaskBook(taskList, filePath);
     }
 
-    // ================ SalesOrderBook methods ==============================
+    // ================ OrderBook methods ==============================
 
     @Override
     public Path getOrderFilePath() {

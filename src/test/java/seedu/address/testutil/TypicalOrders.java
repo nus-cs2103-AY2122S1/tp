@@ -23,14 +23,14 @@ public class TypicalOrders {
     public static final Order SALESORDER3 = new OrderBuilder().withCustomer("Clark")
             .withDate("20th of September 2021").withAmount("20").build();
 
-    // Manually added - Task's details found in {@code CommandTestUtil}
+    // Manually added - Order's details found in {@code CommandTestUtil}
     public static final Order ORDER = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE1)
             .withDate(VALID_DATE_SEPT).withAmount(VALID_AMOUNT_SALE1).build();
     public static final Order ORDER2 = new OrderBuilder().withCustomer(VALID_CUSTOMER_SALE2)
             .withDate(VALID_DATE_OCT).withAmount(VALID_AMOUNT_SALE2).build();
 
     /**
-     * Returns an {@code AddressBook} with all the typical tasks added.
+     * Returns an {@code OrderBook} with all the typical tasks added.
      */
     public static OrderBook getTypicalOrderBook() {
         OrderBook sb = new OrderBook();

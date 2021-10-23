@@ -33,7 +33,7 @@ public class OrderBook implements ReadOnlyOrderBook {
     public OrderBook() {}
 
     /**
-     * Creates an OrderBook using the Persons in the {@code toBeCopied}
+     * Creates an OrderBook using the Orders in the {@code toBeCopied}
      */
     public OrderBook(ReadOnlyOrderBook toBeCopied) {
         this();
@@ -42,7 +42,7 @@ public class OrderBook implements ReadOnlyOrderBook {
 
     /**
      * Replaces the contents of the orders list with {@code orders}.
-     * {@code orders} must not contain duplicate tasks.
+     * {@code orders} must not contain duplicate orders.
      */
     public void setOrders(List<Order> orders) {
         this.orders.setOrders(orders);

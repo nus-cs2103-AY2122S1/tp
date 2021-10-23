@@ -19,12 +19,12 @@ import seedu.address.model.order.Order;
 @JsonRootName(value = "orderBook")
 class JsonSerializableOrderBook {
 
-    public static final String MESSAGE_DUPLICATE_TASK = "sales order contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_ORDER = "salesBook contains duplicate order(s).";
 
     private final List<JsonAdaptedOrder> orders = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableOrderBook} with the given task.
+     * Constructs a {@code JsonSerializableOrderBook} with the given orders.
      */
     @JsonCreator
     public JsonSerializableOrderBook(@JsonProperty("orders") List<JsonAdaptedOrder> orders) {
