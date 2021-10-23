@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
 import static seedu.address.testutil.TypicalParticipants.ALEX;
@@ -50,8 +49,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Participant editedAlex = new ParticipantBuilder(ALEX).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Participant editedAlex = new ParticipantBuilder(ALEX).withAddress(VALID_ADDRESS_BOB).build();
         List<Participant> newParticipants = Arrays.asList(ALEX, editedAlex);
         AddressBookStub newData = new AddressBookStub(newParticipants);
 
@@ -77,8 +75,7 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addParticipant(ALEX);
-        Participant editedAlex = new ParticipantBuilder(ALEX).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Participant editedAlex = new ParticipantBuilder(ALEX).withAddress(VALID_ADDRESS_BOB).build();
         assertTrue(addressBook.hasParticipant(editedAlex));
     }
 

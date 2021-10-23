@@ -6,12 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -21,10 +18,8 @@ import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
-import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.participant.Phone;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -38,7 +33,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG, PREFIX_DATE);
+                PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -50,14 +45,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         // NOT REQUIRED
         BirthDate birthDate = ParserUtil.parseBirthDate(argMultimap.getValue(PREFIX_DATE).orElse("N/A"));
-        // TODO: If separating adding of notes and NOK, change to simply an Empty Set and Empty Arraylist.
-        Set<Note> noteList = ParserUtil.parseNotes(argMultimap.getAllValues(PREFIX_NOTE));
+        // TODO: If separating adding NOK, change to simply an Empty Arraylist.
         ArrayList<NextOfKin> nextOfKins = ParserUtil.parseNextOfKins(argMultimap.getAllValues(PREFIX_NEXT_OF_KIN));
 
-        Participant participant = new Participant(name, phone, email, address, tagList, birthDate, noteList,
+        Participant participant = new Participant(name, phone, email, address, birthDate,
                 nextOfKins);
 
         return new AddCommand(participant);

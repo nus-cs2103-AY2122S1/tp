@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_P_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_P_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showParticipantAtIndex;
@@ -54,11 +53,10 @@ public class EditCommandTest {
         Participant lastParticipant = model.getFilteredParticipantList().get(indexLastParticipant.getZeroBased());
 
         ParticipantBuilder participantInList = new ParticipantBuilder(lastParticipant);
-        Participant editedParticipant = participantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        Participant editedParticipant = participantInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).build();
 
         EditParticipantDescriptor descriptor = new EditParticipantDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withPhone(VALID_PHONE_BOB).build();
         EditCommand editCommand = new EditCommand(indexLastParticipant, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PARTICIPANT_SUCCESS, editedParticipant);

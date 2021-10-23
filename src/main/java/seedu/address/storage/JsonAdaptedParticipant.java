@@ -1,9 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -15,11 +13,9 @@ import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
-import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
-import seedu.address.model.tag.Tag;
 
 public class JsonAdaptedParticipant {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Participant's %s field is missing!";
@@ -29,10 +25,8 @@ public class JsonAdaptedParticipant {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     //Add on for Managera Participants
     private final String birthDate;
-    private final List<JsonAdaptedNote> notes = new ArrayList<>();
     private final List<JsonAdaptedNextOfKin> nextOfKins = new ArrayList<>();
 
     /**
@@ -42,22 +36,14 @@ public class JsonAdaptedParticipant {
     public JsonAdaptedParticipant(@JsonProperty("id") String id, @JsonProperty("name") String name,
                                   @JsonProperty("phone") String phone,
                                   @JsonProperty("email") String email, @JsonProperty("address") String address,
-                                  @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                                   @JsonProperty("birthDate") String birthDate,
-                                  @JsonProperty("notes") List<JsonAdaptedNote> notes,
                                   @JsonProperty("nextOfKin") List<JsonAdaptedNextOfKin> nextOfKins) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
         this.birthDate = birthDate;
-        if (notes != null) {
-            this.notes.addAll(notes);
-        }
         if (nextOfKins != null) {
             this.nextOfKins.addAll(nextOfKins);
         }
@@ -72,13 +58,8 @@ public class JsonAdaptedParticipant {
         phone = source.getPhoneValue();
         email = source.getEmailValue();
         address = source.getAddressValue();
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
         birthDate = source.getBirthDateString();
-        notes.addAll(source.getNotes().stream().map(JsonAdaptedNote::new).collect(Collectors.toList()));
         nextOfKins.addAll(source.getNextOfKins().stream().map(JsonAdaptedNextOfKin::new).collect(Collectors.toList()));
-        // TODO: Notes to be implemented
     }
 
     public String getId() {
@@ -92,11 +73,6 @@ public class JsonAdaptedParticipant {
      * @throws IllegalValueException if there were any data constraints violated in the adapted participant.
      */
     public Participant toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
-
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -129,8 +105,6 @@ public class JsonAdaptedParticipant {
         }
         final Address modelAddress = new Address(address);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-
         BirthDate modelBirthDate;
         if (!BirthDate.isValidBirthDate(this.birthDate)) {
             // throw new IllegalValueException(BirthDate.MESSAGE_DATE_CONSTRAINTS);
@@ -139,13 +113,6 @@ public class JsonAdaptedParticipant {
         } else {
             modelBirthDate = BirthDate.of(this.birthDate);
         }
-
-        final List<Note> personNotes = new ArrayList<>();
-        for (JsonAdaptedNote note : notes) {
-            personNotes.add(note.toModelType());
-        }
-
-        Set<Note> notes = new HashSet<>(personNotes);
 
         ArrayList<NextOfKin> modelNextOfKins = new ArrayList<>();
         for (JsonAdaptedNextOfKin nok : nextOfKins) {
@@ -157,7 +124,7 @@ public class JsonAdaptedParticipant {
             throw new IllegalValueException(ParticipantId.MESSAGE_CONSTRAINTS);
         }
 
-        return new Participant(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                modelBirthDate, notes, modelNextOfKins, modelId);
+        return new Participant(modelName, modelPhone, modelEmail, modelAddress,
+                modelBirthDate, modelNextOfKins, modelId);
     }
 }
