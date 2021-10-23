@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -31,6 +32,7 @@ import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.remark.Remark;
 
 /**
  * Edits the details of an existing person in ComputingConnection.
@@ -50,7 +52,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_REMARKS + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
@@ -109,9 +112,10 @@ public class EditCommand extends Command {
         Set<Language> updatedLanguages = editPersonDescriptor.getLanguages().orElse(personToEdit.getLanguages());
         Set<Framework> updatedFrameworks = editPersonDescriptor.getFrameworks().orElse(personToEdit.getFrameworks());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Remark> updatedRemarks = editPersonDescriptor.getRemarks().orElse(personToEdit.getRemarks());
 
         return new Person(updatedName, updatedEmail, updatedFaculty, updatedMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks);
     }
 
     @Override
@@ -145,6 +149,7 @@ public class EditCommand extends Command {
         private Set<Language> languages;
         private Set<Framework> frameworks;
         private Set<Tag> tags;
+        private Set<Remark> remarks;
 
         public EditPersonDescriptor() {}
 
@@ -161,6 +166,7 @@ public class EditCommand extends Command {
             setLanguages(toCopy.languages);
             setFrameworks(toCopy.frameworks);
             setTags(toCopy.tags);
+            setRemarks(toCopy.remarks);
         }
 
         /**
@@ -268,6 +274,23 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setRemarks(Set<Remark> remarks) {
+            this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Remark>> getRemarks() {
+            return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
         @Override

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -24,6 +25,7 @@ import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.remark.Remark;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -37,7 +39,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY,
-                PREFIX_MAJOR, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG);
+                PREFIX_MAJOR, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY, PREFIX_MAJOR)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -52,8 +54,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Language> languageList = ParserUtil.parseLanguages(argMultimap.getAllValues(PREFIX_LANGUAGE));
         Set<Framework> frameworkList = ParserUtil.parseFrameworks(argMultimap.getAllValues(PREFIX_FRAMEWORK));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Remark> remarkList = ParserUtil.parseRemarks(argMultimap.getAllValues(PREFIX_REMARKS));
 
-        Person person = new Person(name, email, faculty, major, skillList, languageList, frameworkList, tagList);
+        Person person = new Person(name, email, faculty, major, skillList, languageList, frameworkList, tagList, remarkList);
 
         return new AddCommand(person);
     }

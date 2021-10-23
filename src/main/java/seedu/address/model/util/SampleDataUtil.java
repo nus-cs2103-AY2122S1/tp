@@ -15,6 +15,7 @@ import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.remark.Remark;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -25,27 +26,33 @@ public class SampleDataUtil {
             new Person(new Name("Alex Yeoh"), new Email("alexyeoh@example.com"),
                     new Faculty("computing"), new Major("computer science"),
                     getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("friends")),
+                    getFrameworkSet("javafx"), getTagSet("friends"),
+                    getRemarkSet("remarks1")),
             new Person(new Name("Bernice Yu"), new Email("berniceyu@example.com"),
                     new Faculty("fass"), new Major("economics"),
                     getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("colleagues", "friends")),
+                    getFrameworkSet("javafx"), getTagSet("colleagues", "friends"),
+                    getRemarkSet("remarks1")),
             new Person(new Name("Charlotte Oliveiro"), new Email("charlotte@example.com"),
                     new Faculty("fass"), new Major("social work"),
                     getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("neighbours")),
+                    getFrameworkSet("javafx"), getTagSet("neighbours"),
+                    getRemarkSet("remarks1")),
             new Person(new Name("David Li"), new Email("lidavid@example.com"),
                 new Faculty("science"), new Major("physics"),
                     getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("family")),
+                    getFrameworkSet("javafx"), getTagSet("family"),
+                    getRemarkSet("remarks1")),
             new Person(new Name("Irfan Ibrahim"), new Email("irfan@example.com"),
                     new Faculty("computing"), new Major("business analytics"),
                     getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("classmates")),
+                    getFrameworkSet("javafx"), getTagSet("classmates"),
+                    getRemarkSet("remarks1")),
             new Person(new Name("Roy Balakrishnan"), new Email("royb@example.com"),
                     new Faculty("computing"), new Major("computer science"),
                     getSkillSet("frontend"), getLanguageSet("java"),
-                    getFrameworkSet("javafx"), getTagSet("colleagues"))
+                    getFrameworkSet("javafx"), getTagSet("colleagues"),
+                    getRemarkSet("remarks1"))
         };
     }
 
@@ -90,6 +97,15 @@ public class SampleDataUtil {
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a remark set containing the list of strings given.
+     */
+    public static Set<Remark> getRemarkSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Remark::new)
                 .collect(Collectors.toSet());
     }
 

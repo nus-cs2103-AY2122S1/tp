@@ -40,7 +40,8 @@ public class TypicalPersons {
             .withSkills("backend")
             .withLanguages("sql")
             .withFrameworks("psql")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withRemarks("remark for benson").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
             .withEmail("heinz@example.com")
             .withFaculty("computing")
