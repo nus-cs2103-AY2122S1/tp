@@ -3,15 +3,14 @@ package safeforhall.logic.commands.view;
 import static java.util.Objects.requireNonNull;
 import static safeforhall.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
+import java.util.List;
+
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
-import safeforhall.ui.EventAdditionalCard;
-import safeforhall.ui.EventAdditionalListPanel;
 
-import java.util.List;
 
 /**
  * Lists all persons in the address book to the user.

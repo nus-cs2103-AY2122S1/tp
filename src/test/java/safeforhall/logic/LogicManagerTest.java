@@ -81,7 +81,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String viewCommand = ViewPersonCommand.COMMAND_WORD;
-        assertCommandSuccess(viewCommand, ViewPersonCommand.MESSAGE_SUCCESS, model, true);
+        assertCommandSuccess(viewCommand, ViewPersonCommand.MESSAGE_ALL_RESIDENTS_SHOWN, model, true);
     }
 
     @Test

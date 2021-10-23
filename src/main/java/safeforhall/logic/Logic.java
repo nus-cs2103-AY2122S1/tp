@@ -36,6 +36,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the selected resident */
+    ObservableList<Person> getSinglePerson();
+
     /** Returns an unmodifiable view of the filtered list of events */
     ObservableList<Event> getFilteredEventList();
 

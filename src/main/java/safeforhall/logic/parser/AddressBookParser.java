@@ -29,6 +29,7 @@ import safeforhall.logic.parser.edit.EditEventCommandParser;
 import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.logic.parser.view.ViewEventCommandParser;
+import safeforhall.logic.parser.view.ViewPersonCommandParser;
 
 /**
  * Parses user input.
@@ -106,7 +107,7 @@ public class AddressBookParser {
             return new ListCommandParser().parse(arguments);
 
         case ViewPersonCommand.COMMAND_WORD:
-            return new ViewPersonCommand();
+            return new ViewPersonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

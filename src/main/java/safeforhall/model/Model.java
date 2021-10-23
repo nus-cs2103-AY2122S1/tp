@@ -126,8 +126,14 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
+    /** Returns an unmodifiable view of the selected resident */
+    void setSinglePerson(Person person);
+
     /** Returns an unmodifiable view of the selected event */
-    ObservableList<Event> setSingleEvent(Event event);
+    void setSingleEvent(Event event);
+
+    /** Returns an unmodifiable view of the selected resident */
+    ObservableList<Person> getSinglePerson();
 
     /** Returns an unmodifiable view of the selected event */
     ObservableList<Event> getSingleEvent();

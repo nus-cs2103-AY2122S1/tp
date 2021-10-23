@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private EventListPanel eventListPanel;
     private EventAdditionalListPanel eventAdditionalListPanel;
     private PersonListPanel personListPanel;
+    private PersonAdditionalListPanel personAdditionalListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -46,6 +47,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane personAdditionalListPanelPlaceholder;
 
     @FXML
     private StackPane eventListPanelPlaceholder;
@@ -130,6 +134,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        personAdditionalListPanel = new PersonAdditionalListPanel(logic.getSinglePerson());
+        personAdditionalListPanelPlaceholder.getChildren().add(personAdditionalListPanel.getRoot());
 
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());

@@ -11,6 +11,7 @@ import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
 public class EventAdditionalCard extends UiPart<Region> {
+
     private static final String FXML = "EventAdditionalCard.fxml";
 
     public final Event event;
