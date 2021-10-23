@@ -2,16 +2,23 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
+import java.util.Optional;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Frequency;
+import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 
 /**
  * Adds a person to the address book.
@@ -28,6 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_LAST_VISIT + "LAST_VISIT] "
             + "[" + PREFIX_VISIT + "VISIT] "
+            + "[" + PREFIX_FREQUENCY + "FREQUENCY " + PREFIX_OCCURRENCE + "OCCURRENCE] "
             + "[" + PREFIX_HEALTH_CONDITION + "HEALTH_CONDITION]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -35,12 +43,16 @@ public class AddCommand extends Command {
             + PREFIX_LANGUAGE + "English "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_LAST_VISIT + "2021-07-28 12:00 "
-            + PREFIX_VISIT + "2021-07-30 18:30 "
+            + PREFIX_VISIT + "2021-11-30 18:30 "
             + PREFIX_HEALTH_CONDITION + "diabetes "
             + PREFIX_HEALTH_CONDITION + "dementia";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_INVALID_OPTIONAL_FREQUENCY_FLAG =
+            "Frequency cannot be empty for multiple occurrence.";
+    public static final String MESSAGE_INVALID_OPTIONAL_VISIT_FLAG =
+            "Visit cannot be empty for non-empty frequency or multiple occurrence";
 
     private final Person toAdd;
 
@@ -59,6 +71,19 @@ public class AddCommand extends Command {
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
+
+        Optional<Visit> visit = toAdd.getVisit();
+        Optional<Frequency> frequency = toAdd.getFrequency();
+        Optional<Occurrence> occurrence = toAdd.getOccurrence();
+
+        if (!toAdd.hasVisit() && occurrence.get().isMoreThan(1) || !(frequency.get().equals(Frequency.EMPTY))) {
+            throw new CommandException(MESSAGE_INVALID_OPTIONAL_VISIT_FLAG);
+        }
+
+        if (occurrence.get().isMoreThan(1) && frequency.get().equals(Frequency.EMPTY)) {
+            throw new CommandException(MESSAGE_INVALID_OPTIONAL_FREQUENCY_FLAG);
+        }
+
 
         model.addPerson(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

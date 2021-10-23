@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.FREQUENCY_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.FREQUENCY_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTH_CONDITION_DESC_DEMENTIA;
 import static seedu.address.logic.commands.CommandTestUtil.HEALTH_CONDITION_DESC_DIABETES;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
@@ -16,6 +18,8 @@ import static seedu.address.logic.commands.CommandTestUtil.LAST_VISIT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.LAST_VISIT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.OCCURRENCE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.OCCURRENCE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -76,6 +80,19 @@ public class AddCommandParserTest {
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + LANGUAGE_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + LAST_VISIT_DESC_BOB + HEALTH_CONDITION_DESC_DIABETES,
                 new AddCommand(expectedPerson));
+
+        // multiple frequencies - last frequency accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + LANGUAGE_DESC_BOB + ADDRESS_DESC_BOB
+                        + LAST_VISIT_DESC_BOB + FREQUENCY_DESC_AMY + FREQUENCY_DESC_BOB + OCCURRENCE_DESC_BOB
+                        + HEALTH_CONDITION_DESC_DIABETES,
+                new AddCommand(expectedPerson));
+
+        // multiple occurrences - last occurrence accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + LANGUAGE_DESC_BOB + ADDRESS_DESC_BOB
+                        + LAST_VISIT_DESC_BOB + FREQUENCY_DESC_BOB + OCCURRENCE_DESC_AMY + OCCURRENCE_DESC_BOB
+                        + HEALTH_CONDITION_DESC_DIABETES,
+                new AddCommand(expectedPerson));
+
 
         // multiple healthConditions - all accepted
         Person expectedPersonMultipleHealthConditions = new PersonBuilder(BOB)
