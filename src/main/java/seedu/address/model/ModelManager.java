@@ -378,16 +378,17 @@ public class ModelManager implements Model {
      */
     @Override
     public float calculateRejectionRate(Title title) {
-        int total = 0;
-        int count = 0;
-        for (Applicant a : applicantBook.getApplicantList()) {
-            if (a.isApplyingTo(positionBook.getPositionByTitle(title))) {
-                total++;
-                if (a.getApplication().getStatus() == ApplicationStatus.REJECTED) {
-                    count++;
-                }
-            }
-        }
+        Position currPosition = positionBook.getPositionByTitle(title);
+        int total = (int) applicantBook.getApplicantList()
+                .stream()
+                .filter(applicant -> applicant.isApplyingTo(currPosition))
+                .count();
+
+        int count = (int) applicantBook.getApplicantList()
+                .stream()
+                .filter(applicant -> applicant.isApplyingTo(currPosition)
+                        && (applicant.getApplication().getStatus() == ApplicationStatus.REJECTED))
+                .count();
         return Calculator.calculateRejectionRate(total, count);
     }
 }
