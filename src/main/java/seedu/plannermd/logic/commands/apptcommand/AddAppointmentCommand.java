@@ -66,7 +66,6 @@ public class AddAppointmentCommand extends AppointmentCommand {
         this.addAppointmentDescriptor = new AddAppointmentDescriptor(addAppointmentDescriptor);
     }
 
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -74,7 +73,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
         List<Patient> patientList = model.getFilteredPatientList();
         List<Doctor> doctorList = model.getFilteredDoctorList();
         if (patientIndex.getZeroBased() >= patientList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_DOCTOR_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
         if (doctorIndex.getZeroBased() >= doctorList.size()) {
@@ -159,8 +158,8 @@ public class AddAppointmentCommand extends AppointmentCommand {
 
         @Override
         public String toString() {
-            return appointmentDate.date + " " + session.start + " " + session.end + " " + session.duration.duration + " "
-                    + remark.value;
+            return appointmentDate.date + " " + session.start + " " + session.end + " "
+                    + session.duration.duration + " " + remark.value;
         }
 
         @Override

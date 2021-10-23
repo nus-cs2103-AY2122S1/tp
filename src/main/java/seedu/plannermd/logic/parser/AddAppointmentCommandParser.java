@@ -63,7 +63,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
 
         Duration duration = Duration.getDefaultDuration();
         if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
-             duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
+            duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
         }
 
         Session session = new Session(time, duration);

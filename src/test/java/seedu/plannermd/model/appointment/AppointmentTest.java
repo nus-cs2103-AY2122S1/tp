@@ -9,7 +9,7 @@ import static seedu.plannermd.logic.commands.CommandTestUtil.VALID_APPT_TIME;
 import static seedu.plannermd.testutil.appointment.TypicalAppointments.THIRTY_MIN_APPOINTMENT;
 import static seedu.plannermd.testutil.appointment.TypicalAppointments.TWO_HOUR_APPOINTMENT;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_BOB;
-import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
+import static seedu.plannermd.testutil.patient.TypicalPatients.BOB;
 
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +46,7 @@ public class AppointmentTest {
         assertFalse(THIRTY_MIN_APPOINTMENT.equals(editedThirtyMinuteAppt));
 
         // different patient -> returns false
-        editedThirtyMinuteAppt = new AppointmentBuilder(THIRTY_MIN_APPOINTMENT).withPatient(ALICE).build();
+        editedThirtyMinuteAppt = new AppointmentBuilder(THIRTY_MIN_APPOINTMENT).withPatient(BOB).build();
         assertFalse(THIRTY_MIN_APPOINTMENT.equals(editedThirtyMinuteAppt));
 
         // different session -> returns false
