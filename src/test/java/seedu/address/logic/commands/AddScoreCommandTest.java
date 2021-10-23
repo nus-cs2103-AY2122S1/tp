@@ -68,7 +68,7 @@ public class AddScoreCommandTest {
         expectedModel.setStudent(simpleAmy, expectedAmy);
         expectedModel.setAssessment(simpleAssessment, expectedAssessment);
 
-        String expectedMessage = String.format(AddScoreCommand.MESSAGE_SUCCESS, expectedAmy);
+        String expectedMessage = String.format(AddScoreCommand.MESSAGE_ADD_SUCCESS, expectedAmy);
 
         assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -94,7 +94,7 @@ public class AddScoreCommandTest {
         expectedModel.setStudent(simpleAmy, expectedAmy);
         expectedModel.setAssessment(simpleAssessment, expectedAssessment);
 
-        String expectedMessage = String.format(AddScoreCommand.MESSAGE_SUCCESS, expectedAmy);
+        String expectedMessage = String.format(AddScoreCommand.MESSAGE_ADD_SUCCESS, expectedAmy);
 
         assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }
@@ -151,11 +151,11 @@ public class AddScoreCommandTest {
     }
 
     @Test
-    public void execute_existentScore_failure() {
+    public void execute_replaceScore_success() {
         ScoreDescriptor scoreDescriptor = new ScoreDescriptorBuilder()
                 .withAssessment(VALID_ASSESSMENT_AMY)
                 .withName(VALID_NAME_AMY)
-                .withScore(VALID_SCORE_AMY).build();
+                .withScore("50").build();
         AddScoreCommand addScoreCommand = new AddScoreCommand(scoreDescriptor);
 
         Assessment assessmentWithAmyGraded = new AssessmentBuilder(simpleAssessment)
@@ -164,9 +164,20 @@ public class AddScoreCommandTest {
         model.addStudent(simpleAmy);
         model.addAssessment(assessmentWithAmyGraded);
 
-        String expectedMessage = AddScoreCommand.MESSAGE_EXISTENT_SCORE;
+        Student expectedAmy = new PersonBuilder(simpleAmy)
+                .withScores(Map.of(simpleAssessment, new Score("50"))).build();
 
-        assertCommandFailure(addScoreCommand, model, expectedMessage);
+        Assessment expectedAssessment = new AssessmentBuilder(assessmentWithAmyGraded)
+                .withScores(Map.of(VALID_ID_AMY, "50")).build();
+
+        String expectedMessage = String.format(
+                AddScoreCommand.MESSAGE_UPDATE_SUCCESS, new Score(VALID_SCORE_AMY), new Score("50"), expectedAmy);
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setStudent(simpleAmy, expectedAmy);
+        expectedModel.setAssessment(simpleAssessment, expectedAssessment);
+
+        assertCommandSuccess(addScoreCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

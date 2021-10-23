@@ -115,6 +115,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
 
+        if (!target.getId().equals(editedStudent.getId())) {
+            assessments.replaceStudent(target, editedStudent);
+            groups.replaceStudent(target, editedStudent);
+        }
+
         students.setStudent(target, editedStudent);
     }
 
@@ -152,6 +157,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean hasAssessment(Assessment assessment) {
         requireNonNull(assessment);
         return assessments.contains(assessment);
+    }
+
+    public Assessment getAssessment(Assessment assessmentToMatch) {
+        requireNonNull(assessmentToMatch);
+
+        for (Assessment assessment : getAssessmentList()) {
+            if (assessment.equals(assessmentToMatch)) {
+                return assessment;
+            }
+        }
+
+        return null;
     }
 
     /**
