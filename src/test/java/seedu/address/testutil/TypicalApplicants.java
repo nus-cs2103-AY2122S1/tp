@@ -15,6 +15,8 @@ import java.util.List;
 
 import seedu.address.model.ApplicantBook;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
+import seedu.address.model.position.Title;
 
 public class TypicalApplicants {
 
@@ -68,4 +70,8 @@ public class TypicalApplicants {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    public static ApplicantParticulars getApplicantParticulars(Applicant applicant, Title positionTitle) {
+        return new ApplicantParticulars(applicant.getName(), applicant.getPhone(), applicant.getEmail(),
+                applicant.getAddress(), positionTitle);
+    }
 }
