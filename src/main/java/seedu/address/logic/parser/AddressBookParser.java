@@ -77,7 +77,7 @@ public class AddressBookParser {
 
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommand();
-            
+
         case CmdCommand.COMMAND_WORD:
             return new CmdCommand();
 
