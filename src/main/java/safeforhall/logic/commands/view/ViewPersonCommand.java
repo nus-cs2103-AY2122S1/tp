@@ -5,9 +5,11 @@ import static safeforhall.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
+import safeforhall.commons.core.Messages;
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.CommandResult;
+import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.Model;
 import safeforhall.model.person.Person;
 
@@ -22,7 +24,7 @@ public class ViewPersonCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Views the additional details of the "
             + "identified resident by the index numbers used in the displayed resident list, "
-            + "or views all residents when the index is not specified."
+            + "or views all residents when the index is not specified. "
             + "Example: " + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_VIEW_RESIDENT_SUCCESS = "Resident details displayed in sidebar";
@@ -40,13 +42,17 @@ public class ViewPersonCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (targetIndex == null) {
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            model.setNoPerson();
             return new CommandResult(MESSAGE_ALL_RESIDENTS_SHOWN);
         } else {
             List<Person> lastShownList = model.getFilteredPersonList();
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+            }
             Person personToShow = lastShownList.get(targetIndex.getZeroBased());
             model.setSinglePerson(personToShow);
             return new CommandResult(MESSAGE_VIEW_RESIDENT_SUCCESS);

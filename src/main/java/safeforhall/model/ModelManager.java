@@ -228,6 +228,11 @@ public class ModelManager implements Model {
         singlePerson.setPredicate(person::equals);
     }
 
+    @Override
+    public void setNoPerson() {
+        singlePerson.setPredicate(resident -> false);
+    }
+
     public ObservableList<Person> getSinglePerson() {
         return singlePerson;
     }
@@ -235,6 +240,11 @@ public class ModelManager implements Model {
     @Override
     public void setSingleEvent(Event event) {
         singleEvent.setPredicate(event::equals);
+    }
+
+    @Override
+    public void setNoEvent() {
+        singleEvent.setPredicate(event -> false);
     }
 
     public ObservableList<Event> getSingleEvent() {

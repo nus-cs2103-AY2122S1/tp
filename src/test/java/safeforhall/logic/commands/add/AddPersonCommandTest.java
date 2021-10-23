@@ -217,6 +217,16 @@ public class AddPersonCommandTest {
         public void setSingleEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void setNoPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setNoEvent() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
