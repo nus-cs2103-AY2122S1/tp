@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 
 import java.util.Set;
 
@@ -22,7 +22,7 @@ public class FilterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all contacts by category or rating "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: [" + PREFIX_CATEGORY_CODE + "CATEGORY_CODE] "
-            + "[" + PREFIX_NAME + "NAME] \n"
+            + "[" + PREFIX_RATING + "RATING] \n"
             + "Example: " + COMMAND_WORD + " c/att" + " ra/5";
 
     private final Set<CategoryCode> categoryCodes;

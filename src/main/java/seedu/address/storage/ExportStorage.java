@@ -25,7 +25,6 @@ public class ExportStorage {
     private static void initExportStorage() throws IOException {
         // clear the file, make directory
         FileUtil.createIfMissing(current.exportFilePath);
-        System.out.println(current.exportFilePath + "init");
     }
 
     /**
@@ -35,7 +34,6 @@ public class ExportStorage {
     public static void addToStorage(String personString) {
         try {
             FileUtil.appendToFile(current.exportFilePath, personString);
-            System.out.println(personString + "write");
         } catch (IOException ignored) {
             System.out.println("");
         }
