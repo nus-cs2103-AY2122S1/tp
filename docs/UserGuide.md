@@ -12,16 +12,48 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 ## Quick start
 
+### Firing up Staff'd
+
 1. Ensure you have Java `11` or above installed in your Computer.
+
+1. Download the latest __staffd.jar__ from [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Staff’d.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/NewUi.jpg)
+2. If linux is your operating system, run `chmod +x staffd.jar` from the _home folder_.
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+3. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
 
-1. Refer to the [Features](#features) below for details of each command.
+### First Steps on Staff'd
+
+1. On the first initialisation, Staff'd will have some sample data for you to play with.
+
+1. The following is an example of how you might use Staff'd.
+
+1. Joe wants to join your restaurant.
+
+1. Try adding a Joe using the `add` command.<br>`add n/Joe s/fulltime r/kitchen p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`
+
+1. Type the command in the command box and press Enter to execute it.
+
+1. Say the Staff in question has to work on the next monday's afternoon shift.
+
+1. Use the `addShift` command to add the staff to the morning shift. <br> `addShift n/Joe d/monday-0`
+  
+1. Joe has a flu and is now unable to work on the next monday which is on 25th October 2021.
+
+1. Mark Joe as absent with the `mark` command. <br> `mark -n Joe d/2021-10-25`
+
+1. Joe has recovered faster than expected and is able to work on monday.
+
+1. Remove the mark from Joe with the `unmark` command. <br> `unmark -n Joe d/2021-10-25`
+
+1. On the first day of work, Joe has caused 10 customers food poisoning and is fired.
+
+1. Remove Joe from Staff'd with the delete command. <br> `delete -n Joe`
+
+1. Refer to the [Features](#features) below for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +135,7 @@ Format:\
 `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 
 Examples:\
-`add n/Joe s/fulltime r/manager p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
+`add n/Joe s/fulltime r/kitchen p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
 `add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
 
 ### Listing all persons : `list`
