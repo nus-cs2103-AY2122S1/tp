@@ -1,46 +1,39 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST;
-import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PARTICIPANT_ID;
 
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventName;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.participant.ParticipantId;
-
 
 public class AddParticipantToEventCommand extends Command {
 
     public static final String COMMAND_WORD = "addParticipant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a participant with matching ID to an Event.\n"
+            + ": adds Participant with specified index to an event with another specified index.\n"
             + "Parameters: \n"
-            + PREFIX_PARTICIPANT_ID + "PARTICIPANT_ID "
-            + PREFIX_EVENT + " EVENT_NAME "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_PARTICIPANT_ID + "aleyeo " + PREFIX_EVENT + " 240Km Marathon";
+            + "PARTICIPANT_INDEX "
+            + "EVENT_INDEX "
+            + "Example: " + COMMAND_WORD + "1 2";
 
-    public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS =
-            "Added %1$s to %2$s successfully";
+    public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS = "Added %1$s to %2$s successfully";
 
-    private final ParticipantId participantId;
-    private final EventName eventName;
+    private final Index participantIndex;
+    private final Index eventIndex;
 
     /**
-     * Creates an AddParticipantToEventCommand to add the specified {@code Participant} according to
-     * specified {@code participantId} to {@code event} with {@code eventName}
+     * Creates an AddParticipantToEventCommandByIndex to add {@code Participant} at
+     * specified {@code participantIndex} to {@code event} at specified {@code eventIndex}
      */
-    public AddParticipantToEventCommand(ParticipantId participantId, EventName eventName) {
-        this.participantId = participantId;
-        this.eventName = eventName;
+    public AddParticipantToEventCommand(Index participantIndex, Index eventIndex) {
+        this.participantIndex = participantIndex;
+        this.eventIndex = eventIndex;
     }
 
     @Override
@@ -49,46 +42,38 @@ public class AddParticipantToEventCommand extends Command {
         List<Participant> lastShownParticipantList = model.getFilteredParticipantList();
         List<Event> lastShownEventList = model.getFilteredEventList();
 
-        boolean hasParticipant =
-                lastShownParticipantList.stream().anyMatch(p -> p.getParticipantId().equals(participantId));
+        Participant participantToAdd;
 
-
-        if (!hasParticipant) {
-            throw new CommandException(
-                    String.format(MESSAGE_PARTICIPANT_NOT_FOUND, participantId, ListCommand.COMMAND_WORD));
+        try {
+            participantToAdd = lastShownParticipantList.get(participantIndex.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX);
         }
 
-        boolean hasEvent = lastShownEventList.stream().anyMatch(e -> e.getName().equals(eventName));
+        Event selectedEvent;
 
-        if (!hasEvent) {
-            throw new CommandException(
-                    String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName, ListEventCommand.COMMAND_WORD));
+        try {
+            selectedEvent = lastShownEventList.get(eventIndex.getZeroBased());
+        } catch (IndexOutOfBoundsException e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
-
-
-        Participant participantToAdd = lastShownParticipantList.stream()
-                .filter(p -> p.getParticipantId().equals(participantId))
-                .findFirst().get();
-
-        Event selectedEvent = lastShownEventList.stream()
-                .filter(e -> e.getName().equals(eventName))
-                .findFirst().get();
 
         if (selectedEvent.hasParticipant(participantToAdd)) {
             throw new CommandException(Messages.showParticipantExists(participantToAdd.getFullName()));
         }
 
+        // add participant
         selectedEvent.addParticipant(participantToAdd);
 
         return new CommandResult(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
-                participantToAdd.getFullName(), eventName));
+                participantToAdd.getFullName(), selectedEvent.getName()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddParticipantToEventCommand // instanceof handles nulls
-                && participantId.equals(((AddParticipantToEventCommand) other).participantId))
-                && eventName.equals(((AddParticipantToEventCommand) other).eventName); //state check
+                && participantIndex.equals(((AddParticipantToEventCommand) other).participantIndex))
+                && eventIndex.equals(((AddParticipantToEventCommand) other).eventIndex); //state check
     }
 }
