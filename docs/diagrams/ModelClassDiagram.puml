@@ -23,6 +23,7 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class Appointment
 
 }
 
@@ -44,6 +45,7 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> Appointment
 Person *--> "*" Tag
 
 Name -[hidden]right-> Phone
