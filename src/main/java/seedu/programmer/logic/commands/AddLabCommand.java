@@ -21,7 +21,7 @@ public class AddLabCommand extends Command {
     //todo: for test of show feature only
     public static final String MESSAGE_USAGE = COMMAND_WORD + "work in progress";
 
-    public static final String MESSAGE_ADD_LAB_SUCCESS = "Success";
+    public static final String MESSAGE_ADD_LAB_SUCCESS = "Lab Added: %1$s";
 
     //private final Index targetIndex;
 
@@ -56,7 +56,7 @@ public class AddLabCommand extends Command {
 //        replacement.addLabResult(result);
 
         //model.setStudent(target, replacement);
-        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS));
+        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
     }
 
     @Override
