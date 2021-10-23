@@ -341,17 +341,17 @@ The output will look like the following.
 ![viewShedule](images/viewScheduleImage.png)
 
 
-#### Deleting a shift from a staff : `deleteSchedule`
+#### Deleting a shift from a staff : `deleteShift`
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
 Formats:  
-`deleteSchedule -n NAME d/fullDayName-shiftNumber`  
-`deleteSchedule -i INDEX d/fullDayName-shiftNumber`
+`deleteShift -n NAME d/fullDayName-shiftNumber`  
+`deleteShift -i INDEX d/fullDayName-shiftNumber`
 
 Examples:  
-`deleteSchedule -n Joe d/tuesday-2`  
-`deleteSchedule -i 1278 d/friday-1`
+`deleteShift -n Joe d/tuesday-2`  
+`deleteShift -i 1278 d/friday-1`
 
 #### Editing a staff schedule : `editSchedule`
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
@@ -408,7 +408,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 **Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER`
-**Delete staff shift** | `deleteSchedule -n NAME d/DAY-SHIFTNUMBER` <br> `deleteSchedule -i INDEX d/DAY-SHIFTNUMBER`
+**Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER` <br> `viewShift -ti DAY-HH:mm`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
