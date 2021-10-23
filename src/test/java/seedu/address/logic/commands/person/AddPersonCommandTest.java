@@ -142,6 +142,11 @@ public class AddPersonCommandTest {
         }
 
         @Override
+        public boolean hasModuleLesson(ModuleLesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -158,6 +163,16 @@ public class AddPersonCommandTest {
 
         @Override
         public void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void clearPersons() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void clearLessons() {
             throw new AssertionError("This method should not be called");
         }
 
