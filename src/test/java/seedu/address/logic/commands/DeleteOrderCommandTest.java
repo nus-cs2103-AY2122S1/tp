@@ -18,14 +18,11 @@ import seedu.address.ModelStub;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Date;
-import seedu.address.model.order.Amount;
-import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
+import seedu.address.testutil.OrderBuilder;
 
 public class DeleteOrderCommandTest {
-    private static final Order testOrder = new Order(new Customer("test customer"),
-            new Date("test date"), new Amount("99.99"));
+    private static final Order testOrder = new OrderBuilder().build();
 
     @Test
     public void execute_validIndexDeletion_success() throws Exception {
