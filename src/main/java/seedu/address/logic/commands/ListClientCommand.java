@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
 
 import seedu.address.model.Model;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Lists all Clients in the application to the user.

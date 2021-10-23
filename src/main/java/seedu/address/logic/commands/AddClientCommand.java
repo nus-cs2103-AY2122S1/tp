@@ -18,7 +18,6 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
-import seedu.address.model.util.SampleDataUtil;
 
 public class AddClientCommand extends Command {
     public static final String COMMAND_WORD = "add -c";

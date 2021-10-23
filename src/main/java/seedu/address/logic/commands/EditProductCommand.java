@@ -19,7 +19,6 @@ import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Edits the details of an existing product in the address book.

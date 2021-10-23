@@ -26,7 +26,6 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Edits the details of an existing client in the address book.
