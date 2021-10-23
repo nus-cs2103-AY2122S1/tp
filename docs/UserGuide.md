@@ -407,9 +407,9 @@ Action | Format, Examples
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-**Add staff to shift** | `addShift -n name d/fullDayName-shiftNumber` <br> `addShift -i index d/fullDayName-shiftNumber`
-**Delete staff shift** | `deleteSchedule -n NAME d/fullDayName-shiftNumber` <br> `deleteSchedule -i INDEX d/fullDayName-shiftNumber`
-**View shift** | `viewShift -d day-shift_number` <br> `viewShift -ti day-HH:mm`
+**Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER`
+**Delete staff shift** | `deleteSchedule -n NAME d/DAY-SHIFTNUMBER` <br> `deleteSchedule -i INDEX d/DAY-SHIFTNUMBER`
+**View shift** | `viewShift -d DAY-SHIFTNUMBER` <br> `viewShift -ti DAY-HH:mm`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 **List** | `list`
