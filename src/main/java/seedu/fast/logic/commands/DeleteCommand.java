@@ -14,7 +14,6 @@ import seedu.fast.commons.core.index.Index;
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Model;
 import seedu.fast.model.person.Person;
-import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.storage.JsonFastStorage;
 
 /**
