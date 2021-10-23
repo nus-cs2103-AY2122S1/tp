@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 import javafx.scene.chart.Chart;
 import seedu.address.commons.util.ChartUtil;
@@ -208,7 +209,7 @@ public class Assessment {
         }
 
         public Map<String, Number> getScoreDistribution() {
-            Map<String, Number> distribution = new HashMap<>();
+            Map<String, Number> distribution = new TreeMap<>();
             binCounts.forEach((bin, count) -> distribution.put(bin.toString(), count));
             return distribution;
         }
