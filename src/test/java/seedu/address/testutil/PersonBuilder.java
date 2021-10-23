@@ -22,7 +22,7 @@ import seedu.address.model.util.SampleDataUtil;
 public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_ID = "E0543948";
+    public static final String DEFAULT_ID = "E0543947";
 
     private Name name;
     private ID id;
