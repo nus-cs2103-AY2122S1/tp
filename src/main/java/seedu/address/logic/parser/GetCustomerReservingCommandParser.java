@@ -6,7 +6,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.GetCustomerReservingCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class GetCustomerReservingCommandParser  implements Parser<GetCustomerReservingCommand> {
+public class GetCustomerReservingCommandParser implements Parser<GetCustomerReservingCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the GetCustomerReservingCommand

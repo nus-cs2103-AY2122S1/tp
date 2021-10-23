@@ -1,6 +1,7 @@
 package seedu.address.model.person.customer;
 
 import java.util.function.Predicate;
+
 import seedu.address.model.person.Phone;
 
 public class CustomerContainsPhonePredicate implements Predicate<Customer> {
@@ -19,6 +20,6 @@ public class CustomerContainsPhonePredicate implements Predicate<Customer> {
     public boolean equals(Object other) {
         return other == this // short circuit if same objects
                 || (other instanceof CustomerContainsPhonePredicate // instanceof handles null
-                && phone.equals(((CustomerContainsPhonePredicate)other).phone));
+                && phone.equals(((CustomerContainsPhonePredicate) other).phone));
     }
 }

@@ -6,7 +6,31 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCustomerCommand;
+import seedu.address.logic.commands.AddEmployeeCommand;
+import seedu.address.logic.commands.AddSupplierCommand;
+import seedu.address.logic.commands.CheckCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CustomerCommand;
+import seedu.address.logic.commands.DeleteCustomerCommand;
+import seedu.address.logic.commands.DeleteEmployeeCommand;
+import seedu.address.logic.commands.DeleteReservationCommand;
+import seedu.address.logic.commands.DeleteSupplierCommand;
+import seedu.address.logic.commands.EditCustomerCommand;
+import seedu.address.logic.commands.EditEmployeeCommand;
+import seedu.address.logic.commands.EditSupplierCommand;
+import seedu.address.logic.commands.EmployeeCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCustomerCommand;
+import seedu.address.logic.commands.FindEmployeeCommand;
+import seedu.address.logic.commands.FindSupplierCommand;
+import seedu.address.logic.commands.GetCustomerReservingCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ReservationCommand;
+import seedu.address.logic.commands.ReserveCommand;
+import seedu.address.logic.commands.SetTablesCommand;
+import seedu.address.logic.commands.SupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
