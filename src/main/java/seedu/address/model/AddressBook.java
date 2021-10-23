@@ -123,8 +123,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.remove(toDelete);
     }
 
-    public void markDone(Task task) {
-        tasks.markDone(task);
+    public void markTask(Task task) {
+        tasks.markTask(task);
     }
 
     public void setTask(Task target, Task editedTask) {
