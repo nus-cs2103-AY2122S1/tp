@@ -26,6 +26,13 @@ public class Lab {
         this.totalScore = totalScore;
     }
 
+    /**
+     * @param title the title of the lab
+     * */
+    public Lab(String title) {
+        this.title = title;
+    }
+
     public Lab(){}
 
     public String getTitle() {
@@ -44,9 +51,11 @@ public class Lab {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
-                && title.equals(((Lab) other).getTitle())
-                && actualScore.equals(((Lab) other).getActualScore()))
-                && totalScore.equals(((Lab) other).getTotalScore()); // state check
+                && title.equals(((Lab) other).getTitle()));
     }
 
+    @Override
+    public String toString() {
+        return this.title;
+    }
 }

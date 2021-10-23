@@ -10,6 +10,7 @@ import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.Command;
 import seedu.programmer.logic.commands.AddLabCommand;
 import seedu.programmer.logic.commands.DeleteCommand;
+import seedu.programmer.logic.commands.DeleteLabCommand;
 import seedu.programmer.logic.commands.DownloadCommand;
 import seedu.programmer.logic.commands.EditCommand;
 import seedu.programmer.logic.commands.ExitCommand;
@@ -78,6 +79,9 @@ public class ProgrammerErrorParser {
 
         case AddLabCommand.COMMAND_WORD:
             return new AddLabCommandParser().parse(arguments);
+
+        case DeleteLabCommand.COMMAND_WORD:
+            return new DeleteLabCommandParser().parse(arguments);
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);

@@ -48,10 +48,10 @@ class JsonAdaptedStudent {
         classId = source.getClassId().classId;
         email = source.getEmail().email;
         //todo: for test of show feature only
-//        if (source.getLabResultList() != null) {
-//            labResultList = new ArrayList<>();
-//            labResultList.addAll(source.getLabResultList());
-//        }
+        if (source.getLabResultList() != null) {
+            labResultList = new ArrayList<>();
+            labResultList.addAll(source.getLabResultList());
+        }
     }
 
     /**
@@ -95,7 +95,7 @@ class JsonAdaptedStudent {
         final Email modelEmail = new Email(email);
         Student student = new Student(modelName, modelStudentId, modelClassId, modelEmail);
         //todo: for test of show feature only
-        //student.setLabResultRecord(labResultList);
+        student.setLabResultRecord(labResultList);
         return student;
     }
 

@@ -68,6 +68,13 @@ public class Student {
         this.labResultList.add(result);
     }
 
+    /**
+     * Add a lab result into the student's record
+     * */
+    public void delLabResult(Lab result) {
+        this.labResultList.remove(result);
+    }
+
     public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
             labResultRecord = new ArrayList<>();
