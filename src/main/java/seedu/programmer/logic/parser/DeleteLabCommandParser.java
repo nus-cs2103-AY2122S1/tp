@@ -31,7 +31,7 @@ public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
         }
 
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(null));
+        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(""));
         Lab labResult = new Lab(title);
 
         return new DeleteLabCommand(labResult);
