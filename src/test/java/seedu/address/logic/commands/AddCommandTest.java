@@ -156,6 +156,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Assessment getAssessment(Assessment assessmentToMatch) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addAssessment(Assessment assessment) {
             throw new AssertionError("This method should not be called.");
         }

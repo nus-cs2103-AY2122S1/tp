@@ -43,6 +43,10 @@ public class CommandResult {
         this(feedbackToUser, chart, false, false);
     }
 
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, null, showHelp, exit);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
