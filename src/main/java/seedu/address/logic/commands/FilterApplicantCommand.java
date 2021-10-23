@@ -37,7 +37,7 @@ public class FilterApplicantCommand extends Command {
     private final FilterApplicantDescriptor filterApplicantDescriptor;
 
     /**
-     * Creates an AddPositionCommand to add the specified {@code Position}
+     * Creates a FilterApplicantCommand according to the specified {@code filterApplicantDescriptor}.
      */
     public FilterApplicantCommand(FilterApplicantDescriptor filterApplicantDescriptor) {
         requireNonNull(filterApplicantDescriptor);
