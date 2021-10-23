@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,15 +130,9 @@ public class UniqueFriendsList implements Iterable<Friend> {
     public void removeLinkAllFriends(GameId gameId) {
         for (Friend currFriend : internalList) {
             Set<GameFriendLink> currSet = new HashSet<>(currFriend.getGameFriendLinks());
-            Stream<GameFriendLink> currSetStream = currSet.stream()
-                    .filter(gameFriendLink -> gameFriendLink.getGameId().equals(gameId));
-            GameFriendLink currLink = currSetStream.findFirst().orElse(null);
-            if (currLink == null) {
-                continue;
-            }
-
-            currSet.remove(currLink);
-            Friend editedFriend = new Friend(currFriend.getFriendId(), currFriend.getName(), currSet);
+            currSet.removeIf(gameFriendLink -> gameFriendLink.getGameId().equals(gameId));
+            Friend editedFriend = new Friend(currFriend.getFriendId(), currFriend.getFriendName(),
+                    currSet, currFriend.getSchedule());
             this.setFriend(currFriend, editedFriend);
         }
     }
