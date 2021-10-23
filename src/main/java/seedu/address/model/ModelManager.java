@@ -189,10 +189,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
-    @Override
-    public String toString() {
-        return "ModelManager{" + "addressBook=" + addressBook + "\nfilteredPersons=" +
-                filteredPersons + '}';
-    }
 }

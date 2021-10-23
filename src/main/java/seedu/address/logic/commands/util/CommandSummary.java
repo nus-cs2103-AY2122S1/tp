@@ -16,7 +16,6 @@ import seedu.address.logic.commands.LessonDeleteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.TagCommand;
-import seedu.address.model.tag.Tag;
 
 /**
  * Wrapper class for command usage summary with the respective command action, format and example.
