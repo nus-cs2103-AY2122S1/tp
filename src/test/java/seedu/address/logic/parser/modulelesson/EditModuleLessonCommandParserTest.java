@@ -16,7 +16,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_TUES
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_WED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_11;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040S_B05;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_LESSON_REMARK;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_NO_FIELD_PROVIDED;
@@ -159,12 +158,12 @@ public class EditModuleLessonCommandParserTest {
         Index ind = INDEX_FIRST;
         StringBuilder sb = new StringBuilder(ind.getOneBased() + "");
         sb.append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_TUES)
-                .append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_TUES)
-                .append(MODULE_CODE_DESC_CS2040).append(LESSON_DAY_DESC_WED)
+                .append(MODULE_CODE_DESC_CS2040).append(LESSON_DAY_DESC_TUES)
+                .append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_WED)
                 .append(LESSON_TIME_DESC_11).append(REMARK_DESC_MODULES);
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
-                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2040))
+                .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
                 .withLessonDay(new LessonDay(VALID_LESSON_DAY_WED))
                 .withLessonTime(new LessonTime(VALID_LESSON_TIME_11))
                 .withRemark(new Remark(VALID_MODULE_LESSON_REMARK)).build();

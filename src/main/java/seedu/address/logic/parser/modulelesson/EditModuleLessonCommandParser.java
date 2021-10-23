@@ -66,7 +66,7 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
         if (validArgumentMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
             ModuleCode moduleCode =
                     ParserUtil.parseModuleCode(validArgumentMultimap.getValue(PREFIX_MODULE_CODE).get());
-            if (moduleCode.getLessonCodes().size() == 0){
+            if (moduleCode.getLessonCodes().size() == 0) {
                 throw new ParseException(MESSAGE_NO_LESSON_CODE_PROVIDED);
             } else if (moduleCode.getLessonCodes().size() > 1) {
                 throw new ParseException(MESSAGE_MORE_THAN_ONE_LESSON_CODE);
