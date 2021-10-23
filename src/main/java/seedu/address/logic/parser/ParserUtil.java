@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.SortOrder;
 import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Capacity;
@@ -27,6 +28,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+
+import javax.swing.*;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -254,5 +257,17 @@ public class ParserUtil {
         }
         Collections.sort(availability);
         return new Availability(availability);
+    }
+
+    /**
+     * Parses a {@code String sortOrder} into sortOrder.
+     */
+    public static SortOrder parseSortOrder(String sortOrder) throws ParseException {
+        requireNonNull(sortOrder);
+        String trimmedSortOrder = sortOrder.trim();
+        if (!SortOrder.isValidSortOrder(trimmedSortOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortOrder);
     }
 }

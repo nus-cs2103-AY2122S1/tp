@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.SortOrder;
 import seedu.address.model.alias.Alias;
 import seedu.address.model.alias.AliasMap;
 import seedu.address.model.alias.CommandWord;
@@ -205,7 +206,7 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public void sortMemberList() {
+        public void sortMemberList(SortOrder sortOrder) {
             throw new AssertionError("This method should not be called");
         }
 

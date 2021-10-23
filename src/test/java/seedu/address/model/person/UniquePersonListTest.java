@@ -162,7 +162,7 @@ public class UniquePersonListTest {
     public void sortMember_unsortedList_sortedAlphabetically() {
         uniquePersonList.add(BOB);
         uniquePersonList.add(ALICE);
-        uniquePersonList.sortMembers();
+        uniquePersonList.sortMembersByName();
         UniquePersonList expectedUniquePersonList = new UniquePersonList();
         expectedUniquePersonList.add(ALICE);
         expectedUniquePersonList.add(BOB);

@@ -114,7 +114,7 @@ public class AddressBookParser {
             return new ShowAliasesCommand();
 
         case SortMemberCommand.COMMAND_WORD:
-            return new SortMemberCommand();
+            return new SortMemberCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

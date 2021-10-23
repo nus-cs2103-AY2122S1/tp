@@ -7,11 +7,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -155,8 +157,38 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Sorts the member list in alphabetical order.
      */
-    public void sortMembers() {
+    public void sortMembersByName() {
         Comparator<Person> personNameComparator = new PersonNameComparator();
         Collections.sort(internalList, personNameComparator);
+    }
+
+    /**
+     * Sorts the member list by tags.
+     * Members with more tags are larger.
+     * If members have the same number of tags,
+     * list is sorted by their first tag title lexicographically.
+     * Members with no tags are the smallest.
+     */
+    public void sortMembersByTags() {
+        Collections.sort(internalList, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                Set<Tag> tagsO1 = o1.getTags();
+                Set<Tag> tagsO2 = o2.getTags();
+                if (tagsO1.isEmpty() && tagsO2.isEmpty()) {
+                    return 0;
+                } else if (tagsO1.isEmpty()) {
+                    return -1;
+                } else if (tagsO2.isEmpty()) {
+                    return 1;
+                } else if (tagsO1.size() == tagsO2.size()) {
+                    String tagO1Name = tagsO1.stream().findFirst().get().toString();
+                    String tagO2Name = tagsO2.stream().findFirst().get().toString();
+                    return -1 * tagO1Name.compareToIgnoreCase(tagO2Name);
+                }
+                return tagsO1.size() > tagsO2.size() ? 1 : -1;
+            }
+        });
+        Collections.reverse(internalList);
     }
 }
