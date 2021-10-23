@@ -29,6 +29,7 @@
       <Label fx:id="telegramHandle" styleClass="cell_small_label" text="\$telegramHandle" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="groupName" styleClass="cell_small_label" text="\$groupName" />
+      <Label fx:id="assessments" styleClass="cell_small_label" text="\$assessments" />
     </VBox>
   </GridPane>
 </HBox>

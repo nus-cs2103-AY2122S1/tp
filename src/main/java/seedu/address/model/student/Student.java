@@ -51,6 +51,10 @@ public class Student {
         return groupName;
     }
 
+    public Set<Assessment> getAssessments() {
+        return assessments;
+    }
+
     public boolean hasAssessment(Assessment assessment) {
         return assessments.contains(assessment);
     }

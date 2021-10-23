@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
+import static seedu.address.model.assessment.Score.SCORE_DELIMITER;
 
 import java.util.List;
 
@@ -20,13 +21,12 @@ public class AddAssessmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student's assessment to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + "INDEX (must be a positive integer) "
             + PREFIX_ASSESSMENT_NAME + "ASSESSMENT NAME "
             + PREFIX_SCORE + "SCORE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ASSESSMENT_NAME + "Midterms "
-            + PREFIX_SCORE + "60/100 ";
+            + PREFIX_SCORE + "60" + SCORE_DELIMITER + "100 ";
 
     public static final String MESSAGE_SUCCESS = "New assessment added to %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in %1$s assessments";

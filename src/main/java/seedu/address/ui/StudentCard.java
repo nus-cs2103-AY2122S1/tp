@@ -35,6 +35,8 @@ public class StudentCard extends UiPart<Region> {
     private Label email;
     @FXML
     private Label groupName;
+    @FXML
+    private Label assessments;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -47,6 +49,7 @@ public class StudentCard extends UiPart<Region> {
         groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
+        assessments.setText(student.getAssessments().toString());
     }
 
     @Override
