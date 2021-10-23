@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICANTS;
 
 import java.util.List;
@@ -13,7 +16,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.descriptors.EditApplicantDescriptor;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.position.Title;
+
 
 
 public class EditApplicantCommand extends Command {
@@ -38,19 +41,17 @@ public class EditApplicantCommand extends Command {
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book.";
 
     private final Index index;
-    private final Title title;
     private final EditApplicantDescriptor editApplicantDescriptor;
 
     /**
      * @param index of the applicant in the filtered applicant list to edit
      * @param editApplicantDescriptor details to edit the applicant with
      */
-    public EditApplicantCommand(Index index, Title title, EditApplicantDescriptor editApplicantDescriptor) {
+    public EditApplicantCommand(Index index, EditApplicantDescriptor editApplicantDescriptor) {
         requireNonNull(index);
         requireNonNull(editApplicantDescriptor);
 
         this.index = index;
-        this.title = title;
         this.editApplicantDescriptor = new EditApplicantDescriptor(editApplicantDescriptor);
     }
 
@@ -64,7 +65,7 @@ public class EditApplicantCommand extends Command {
         }
 
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
-        Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit);
+        Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit, model);
 
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);

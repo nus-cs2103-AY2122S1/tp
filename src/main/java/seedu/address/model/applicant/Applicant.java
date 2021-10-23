@@ -8,6 +8,7 @@ import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * Represents an Applicant in the address book.
@@ -82,6 +83,10 @@ public class Applicant {
 
     public Application getApplication() {
         return application;
+    }
+
+    public Title getTitle() {
+        return application.getTitle();
     }
 
     /**

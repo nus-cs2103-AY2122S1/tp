@@ -121,6 +121,8 @@ public interface Model {
 
     boolean hasPositionWithTitle(Title title);
 
+    Position getPositionByTitle(Title title);
+
     /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
 

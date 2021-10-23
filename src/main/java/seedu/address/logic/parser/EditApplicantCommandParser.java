@@ -2,23 +2,19 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddApplicantCommand;
-import seedu.address.logic.commands.EditApplicantCommand;
-import seedu.address.logic.commands.EditPositionCommand;
-import seedu.address.logic.descriptors.EditApplicantDescriptor;
-import seedu.address.logic.descriptors.EditPositionDescriptor;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.applicant.Address;
-import seedu.address.model.applicant.Email;
-import seedu.address.model.applicant.Name;
-import seedu.address.model.applicant.Phone;
-import seedu.address.model.position.Title;
-
 import java.util.stream.Stream;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.EditApplicantCommand;
+import seedu.address.logic.descriptors.EditApplicantDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.position.Title;
 
 
 public class EditApplicantCommandParser implements Parser<EditApplicantCommand> {
@@ -45,8 +41,6 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
                     EditApplicantCommand.MESSAGE_USAGE), pe);
         }
 
-
-
         EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
@@ -64,9 +58,14 @@ public class EditApplicantCommandParser implements Parser<EditApplicantCommand> 
         }
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             positionTitle = ApplicantParserUtil.parseTitle(argMultimap.getValue(PREFIX_POSITION).get());
+            editApplicantDescriptor.setTitle(positionTitle);
         }
 
-        return new EditApplicantCommand(index, positionTitle, editApplicantDescriptor);
+        if (!editApplicantDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditApplicantCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditApplicantCommand(index, editApplicantDescriptor);
 
     }
 

@@ -59,6 +59,9 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
 
     //// position-level operations
 
+    /**
+     * Returns true if the {@code applicant} exists in the applicant book.
+     */
     public boolean hasApplicant(Applicant applicant) {
         requireNonNull(applicant);
         return applicants.contains(applicant);

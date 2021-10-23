@@ -1,8 +1,11 @@
 package seedu.address.logic.descriptors;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.Model;
 import seedu.address.model.applicant.Address;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
@@ -11,9 +14,6 @@ import seedu.address.model.applicant.Phone;
 import seedu.address.model.application.Application;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
-
-import static java.util.Objects.requireNonNull;
-
 
 /**
  * Stores the details to edit the applicant with. Each non-empty field value will replace the
@@ -46,7 +46,7 @@ public class EditApplicantDescriptor {
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldEdited() {
-        return CollectionUtil.isAnyNonNull(name, phone, email, address, application);
+        return CollectionUtil.isAnyNonNull(name, phone, email, address, application, title);
     }
 
     public void setName(Name name) {
@@ -101,6 +101,7 @@ public class EditApplicantDescriptor {
     /**
      * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
      * edited with {@code editApplicantDescriptor}.
+     * This version has application information.
      */
     public Applicant createEditedApplicant(Applicant applicantToEdit) {
         requireNonNull(applicantToEdit);
@@ -108,15 +109,29 @@ public class EditApplicantDescriptor {
         Phone updatedPhone = getPhone().orElse(applicantToEdit.getPhone());
         Email updatedEmail = getEmail().orElse(applicantToEdit.getEmail());
         Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
+        Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
 
-        if (getApplication().isPresent()) {
-            Application updatedApplication = getApplication().orElse(applicantToEdit.getApplication());
-            return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication);
-        }
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedApplication);
+    }
 
+    /**
+     * Creates and returns a {@code Applicant} with the details of {@code applicantToEdit}
+     * edited with {@code editApplicantDescriptor}.
+     * This version has only title information.
+     */
+    public Applicant createEditedApplicant(Applicant applicantToEdit, Model model) {
+        assert getApplication().isEmpty() : "This method is used when there is no application information";
 
+        requireNonNull(applicantToEdit);
+        Name updatedName = getName().orElse(applicantToEdit.getName());
+        Phone updatedPhone = getPhone().orElse(applicantToEdit.getPhone());
+        Email updatedEmail = getEmail().orElse(applicantToEdit.getEmail());
+        Address updatedAddress = getAddress().orElse(applicantToEdit.getAddress());
 
+        Title title = getTitle().orElse(applicantToEdit.getTitle());
 
+        Position updatedPosition = model.getPositionByTitle(title);
+        return new Applicant(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedPosition);
     }
 
     @Override

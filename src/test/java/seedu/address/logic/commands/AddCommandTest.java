@@ -171,6 +171,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setApplicant(Applicant target, Applicant editedApplicant) {
             throw new AssertionError("This method should not be called.");
         }
@@ -207,6 +217,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPositionWithTitle(Title toCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Position getPositionByTitle(Title title) {
             throw new AssertionError("This method should not be called.");
         }
 

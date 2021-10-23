@@ -98,7 +98,7 @@ public class AddressBookParser {
             return new EditPositionCommandParser().parse(arguments);
 
         case EditApplicantCommand.COMMAND_WORD:
-            return new EditApplicantCommandParser.parse(arguments);
+            return new EditApplicantCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
