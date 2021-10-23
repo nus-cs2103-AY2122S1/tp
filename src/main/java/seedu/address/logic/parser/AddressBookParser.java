@@ -21,6 +21,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOrderCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListOrderCommand;
 import seedu.address.logic.commands.ListTaskCommand;
 import seedu.address.logic.commands.MarkOrderCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
@@ -132,6 +133,10 @@ public class AddressBookParser {
 
         case FindOrderCommand.COMMAND_WORD:
             return new FindOrderCommandParser().parse(arguments);
+
+        case ListOrderCommand.COMMAND_WORD:
+            return new ListOrderCommand();
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
