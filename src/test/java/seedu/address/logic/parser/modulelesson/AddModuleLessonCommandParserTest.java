@@ -2,8 +2,8 @@ package seedu.address.logic.parser.modulelesson;
 
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DAY_DESC_TUES;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DAY_DESC_WED;
-import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC_10_12;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC_11_12;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC_12_13;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2040S_B05;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
@@ -52,7 +52,7 @@ public class AddModuleLessonCommandParserTest {
 
         // multiple timings - last timing accepted
         assertParseSuccess(parser, MODULE_CODE_DESC_CS2030S_T12 + LESSON_DAY_DESC_TUES
-                + LESSON_TIME_DESC_10_12 + LESSON_TIME_DESC_11_12 + REMARK_DESC_MODULES,
+                + LESSON_TIME_DESC_12_13 + LESSON_TIME_DESC_11_12 + REMARK_DESC_MODULES,
                 new AddModuleLessonCommand(expectedModuleLesson));
 
         // multiple remark - last remark accepted

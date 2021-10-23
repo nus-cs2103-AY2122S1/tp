@@ -51,9 +51,10 @@ public class CommandTestUtil {
     // Module Lesson
     public static final String VALID_LESSON_DAY_TUES = "2";
     public static final String VALID_LESSON_DAY_WED = "3";
-    public static final String VALID_LESSON_TIME_10 = "10:00";
     public static final String VALID_LESSON_TIME_11 = "11:00";
     public static final String VALID_LESSON_TIME_12 = "12:00";
+    public static final String VALID_LESSON_TIME_11_12 = "11:00 12:00";
+    public static final String VALID_LESSON_TIME_12_13 = "12:00 13:00";
     public static final String VALID_MODULE_LESSON_REMARK = "COM1-130";
     public static final String VALID_REMARK_ONLINE = "Online";
     // Both
