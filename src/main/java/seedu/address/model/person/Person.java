@@ -15,6 +15,8 @@ import seedu.address.model.Model;
 import seedu.address.model.TaskAssignable;
 import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.exceptions.DuplicateIdException;
+import seedu.address.model.id.exceptions.IdNotFoundException;
 import seedu.address.model.lesson.Attendee;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonAssignable;
@@ -44,15 +46,16 @@ public class Person implements HasUniqueId, Attendee,
     private final Set<UniqueId> assignedTaskIds = new HashSet<>();
     private final NoOverlapLessonList lessonsList;
     private final List<Exam> exams = new ArrayList<>();
+    private final Set<UniqueId> assignedGroupIds = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
                   Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList,
-                  List<Exam> exams) {
+                  List<Exam> exams, Set<UniqueId> assignedGroupIds) {
         this.id = UniqueId.generateId(this);
-        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList, exams);
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, id, lessonsList, exams, assignedGroupIds);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -61,14 +64,17 @@ public class Person implements HasUniqueId, Attendee,
         this.assignedTaskIds.addAll(assignedTaskIds);
         this.lessonsList = lessonsList;
         this.exams.addAll(exams);
+        this.assignedGroupIds.addAll(assignedGroupIds);
     }
 
     /**
      * Every field must be present and not null.
      */
     public Person(UniqueId uniqueId, Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList, List<Exam> exams) {
-        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList, exams);
+                  Set<UniqueId> assignedTaskIds, NoOverlapLessonList lessonsList, List<Exam> exams,
+                  Set<UniqueId> assignedGroupIds) {
+        requireAllNonNull(name, phone, email, address, tags, assignedTaskIds, uniqueId, lessonsList, exams,
+                assignedGroupIds);
         this.id = uniqueId;
         uniqueId.setOwner(this);
         this.name = name;
@@ -79,6 +85,24 @@ public class Person implements HasUniqueId, Attendee,
         this.assignedTaskIds.addAll(assignedTaskIds);
         this.lessonsList = lessonsList;
         this.exams.addAll(exams);
+        this.assignedGroupIds.addAll(assignedGroupIds);
+    }
+
+    /**
+     * Constructs a person based on anther person immutably
+     * @param toCopy person to copy
+     */
+    public Person (Person toCopy) {
+        this.id = toCopy.id;
+        this.name = toCopy.name;
+        this.phone = toCopy.phone;
+        this.email = toCopy.email;
+        this.address = toCopy.address;
+        this.tags.addAll(toCopy.tags);
+        this.assignedTaskIds.addAll(toCopy.assignedTaskIds);
+        this.lessonsList = toCopy.lessonsList;
+        this.exams.addAll(toCopy.exams);
+        this.assignedGroupIds.addAll(toCopy.assignedGroupIds);
     }
 
     public Name getName() {
@@ -125,6 +149,10 @@ public class Person implements HasUniqueId, Attendee,
         return Collections.unmodifiableList(exams);
     }
 
+    public Set<UniqueId> getAssignedGroupIds() {
+        return Collections.unmodifiableSet(assignedGroupIds);
+    }
+
     /**
      * Check if person can attend lesson
      *
@@ -149,13 +177,13 @@ public class Person implements HasUniqueId, Attendee,
             throw new CannotAssignException(e.getMessage());
         }
 
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);
     }
 
     @Override
     public Person unassignLesson(int index) throws IndexOutOfBoundsException {
         NoOverlapLessonList newList = lessonsList.removeLesson(index);
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);
     }
 
     @Override
@@ -174,7 +202,7 @@ public class Person implements HasUniqueId, Attendee,
      * @return Person with exam added
      */
     public Person addExam(Exam e) {
-        Person newPerson = new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams);
+        Person newPerson = new Person(this);
         newPerson.exams.add(e);
         return newPerson;
     }
@@ -189,8 +217,45 @@ public class Person implements HasUniqueId, Attendee,
         if (index < 0 || index >= exams.size()) {
             throw new IndexOutOfBoundsException();
         }
-        Person newPerson = new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams);
+        Person newPerson = new Person(this);
         newPerson.exams.remove(index);
+        return newPerson;
+    }
+
+    /**
+     * Checks if this person has the specified group id
+     * @param id to check
+     * @return true if present
+     */
+    public boolean hasGroupId(UniqueId id) {
+        return assignedGroupIds.contains(id);
+    }
+
+    /**
+     * Adds the group id to the person. Group id is presumed to belong to a group.
+     * @param id to add.
+     * @return new Person containing the added id.
+     */
+    public Person addGroupId(UniqueId id) {
+        if (assignedGroupIds.contains(id)) {
+            throw new DuplicateIdException();
+        }
+        Person newPerson = new Person(this);
+        newPerson.assignedGroupIds.add(id);
+        return newPerson;
+    }
+
+    /**
+     * Remove the group id from the person.
+     * @param id to remove.
+     * @return new Person with id removed.
+     */
+    public Person removeGroupId(UniqueId id) {
+        if (!assignedGroupIds.contains(id)) {
+            throw new IdNotFoundException(id);
+        }
+        Person newPerson = new Person(this);
+        newPerson.assignedGroupIds.remove(id);
         return newPerson;
     }
 
@@ -201,7 +266,8 @@ public class Person implements HasUniqueId, Attendee,
      * @return new Person instance with the updated lessons list
      */
     public Person updateLessonsList(NoOverlapLessonList newLessonsList) {
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, newLessonsList, exams);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds,
+                newLessonsList, exams, assignedGroupIds);
     }
 
     /**
@@ -212,7 +278,8 @@ public class Person implements HasUniqueId, Attendee,
      */
     public Person updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
-        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds, lessonsList, exams);
+        return new Person(id, name, phone, email, address, tags, newAssignedTaskIds,
+                lessonsList, exams, assignedGroupIds);
     }
 
     /**
@@ -261,7 +328,8 @@ public class Person implements HasUniqueId, Attendee,
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getLessonsList().equals(lessonsList)
-                && otherPerson.getExams().equals(exams);
+                && otherPerson.getExams().equals(exams)
+                && otherPerson.getAssignedGroupIds().equals(assignedGroupIds);
     }
 
     @Override

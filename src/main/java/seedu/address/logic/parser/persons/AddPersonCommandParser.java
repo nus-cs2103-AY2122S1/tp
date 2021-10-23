@@ -55,8 +55,10 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Set<UniqueId> assignedTaskIds = new HashSet<>(); // add command does not allow assigning tasks straight away
         NoOverlapLessonList noLessons = new NoOverlapLessonList();
         List<Exam> noExams = new ArrayList<>();
+        Set<UniqueId> noGroups = new HashSet<>();
         // default empty lessons list
-        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds, noLessons, noExams);
+        Person person = new Person(name, phone, email, address, tagList, assignedTaskIds,
+                noLessons, noExams, noGroups);
 
         return new AddPersonCommand(person);
     }
