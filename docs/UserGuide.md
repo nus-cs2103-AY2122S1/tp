@@ -57,7 +57,7 @@ Interface (GUI).
 
 </div>
 
-### Viewing help : `help` [Coming soon]
+### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -101,7 +101,7 @@ Examples:
 * `find tag/ UE` displays any modules that contain the word "UE" in the tag.
 
 
-### Editing a module : `edit'
+### Editing a module : `edit`
 
 Edits an existing module in the mod tracker.
 
@@ -179,6 +179,32 @@ Format: `clear y/YEAR s/SEMESTER`
 Example:
 * `clear y/1 s/1` removes the schedule for y/1 s/1 from modules.
 
+### Viewing user information : `info`
+
+Shows a message containing user's Mc goal and current semester.
+
+![info message](images/infoMessage.png)
+
+Format: `help`
+
+### Setting user's Mc goal OR current semester : `set`
+
+Updates user's Mc goal or current semester.
+
+![info message](images/infoMessage.png)
+
+Format: `FORMAT: set n/MC` `set y/YEAR s/SEM`
+* Commands must follow the specified format, **no fields should be left blank**.
+* **MC** must be a **positive integer** (1,2,3...).
+* **YEAR** must be a **integer between 1 and 6** (i.e. 1,2,3,4,5,6).
+* **SEM** must be a **integer between 1 and 4** (i.e. 1,2,3,4).
+* **s/3** and **s/4** stands for Special Term 1 and Special Term 2 separately.
+
+Examples:
+* `set n/160` - set Mc goal 160 credits
+* `set y/2 s/1` - set the current semester Year 2, Sem 1
+* `set y/3 s/3` - set the current semester Year 3, Special Term 1
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -201,4 +227,6 @@ Action | Format, Examples
 **List** | `list`
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
-**Help** [Coming soon] | `help`
+**Help**| `help`
+**Info**| `info`
+**Set**| `set n/MC` or `set y/YEAR s/SEMESTER` <br> e.g. `set n/120` `set y/2 s/1`
