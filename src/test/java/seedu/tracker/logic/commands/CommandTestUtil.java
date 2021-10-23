@@ -20,7 +20,7 @@ import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModuleTracker;
 import seedu.tracker.model.module.Module;
-import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.model.module.ModuleContainsKeywordsPredicate;
 import seedu.tracker.testutil.EditModuleDescriptorBuilder;
 
 /**
@@ -151,7 +151,7 @@ public class CommandTestUtil {
 
         Module module = model.getFilteredModuleList().get(targetIndex.getZeroBased());
         final String[] splitName = module.getCode().value.split("\\s+");
-        model.updateFilteredModuleList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredModuleList(new ModuleContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredModuleList().size());
     }

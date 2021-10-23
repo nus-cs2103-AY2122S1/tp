@@ -6,18 +6,18 @@ import java.util.function.Predicate;
 import seedu.tracker.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Module}'s {@code Code} matches any of the keywords given.
+ * Tests that a {@code Module} contains any of the keywords given.
  */
-public class NameContainsKeywordsPredicate implements Predicate<Module> {
+public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
     private final String optionalFilter;
 
     /**
-     * Constructs a NameContainsKeywordsPredicate class and stores the first prefix as an optional filter.
+     * Constructs a ModuleContainsKeywordsPredicate class and stores the first prefix as an optional filter.
      *
      * @param keywords for finding the respective modules
      */
-    public NameContainsKeywordsPredicate(List<String> keywords) {
+    public ModuleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
         optionalFilter = keywords.size() > 0 ? keywords.get(0) : "";
     }
@@ -63,8 +63,8 @@ public class NameContainsKeywordsPredicate implements Predicate<Module> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof ModuleContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((ModuleContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }

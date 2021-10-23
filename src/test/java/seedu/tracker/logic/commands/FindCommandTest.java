@@ -18,7 +18,7 @@ import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
-import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.model.module.ModuleContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -29,10 +29,10 @@ public class FindCommandTest {
 
     @Test
     public void equals() {
-        NameContainsKeywordsPredicate firstPredicate =
-            new NameContainsKeywordsPredicate(Collections.singletonList("first"));
-        NameContainsKeywordsPredicate secondPredicate =
-            new NameContainsKeywordsPredicate(Collections.singletonList("second"));
+        ModuleContainsKeywordsPredicate firstPredicate =
+            new ModuleContainsKeywordsPredicate(Collections.singletonList("first"));
+        ModuleContainsKeywordsPredicate secondPredicate =
+            new ModuleContainsKeywordsPredicate(Collections.singletonList("second"));
 
         FindCommand findFirstCommand = new FindCommand(firstPredicate);
         FindCommand findSecondCommand = new FindCommand(secondPredicate);
@@ -57,7 +57,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noModuleFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 0);
-        NameContainsKeywordsPredicate predicate = preparePredicate(" ");
+        ModuleContainsKeywordsPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -67,7 +67,7 @@ public class FindCommandTest {
     @Test
     public void execute_multipleKeywords_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
-        NameContainsKeywordsPredicate predicate = preparePredicate("CS2103T CS2101");
+        ModuleContainsKeywordsPredicate predicate = preparePredicate("CS2103T CS2101");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -75,9 +75,9 @@ public class FindCommandTest {
     }
 
     /**
-     * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
+     * Parses {@code userInput} into a {@code ModuleContainsKeywordsPredicate}.
      */
-    private NameContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private ModuleContainsKeywordsPredicate preparePredicate(String userInput) {
+        return new ModuleContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }
