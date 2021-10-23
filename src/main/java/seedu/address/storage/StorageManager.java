@@ -19,6 +19,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
+    private UserCommandCache userCommandCache;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
@@ -27,6 +28,7 @@ public class StorageManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+        this.userCommandCache = userCommandCache.getInstance();
     }
 
     // ================ UserPrefs methods ==============================
@@ -76,4 +78,14 @@ public class StorageManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    // ================ UserCommandCache methods ==============================
+    /** Get the next input command in the cache */
+    public String getAfter() {
+        return userCommandCache.getAfter();
+    }
+
+    /** Get the previous input command in the cache */
+    public String getBefore() {
+        return userCommandCache.getBefore();
+    }
 }
