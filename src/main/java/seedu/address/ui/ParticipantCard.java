@@ -1,16 +1,13 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Participant}.
@@ -42,13 +39,7 @@ public class ParticipantCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
-    @FXML
-    private Label participantId;
-    @FXML
     private Label birthDate;
-    @FXML
-    private FlowPane notes;
     @FXML
     private Label nextOfKins;
 
@@ -63,15 +54,7 @@ public class ParticipantCard extends UiPart<Region> {
         phone.setText(participant.getPhoneValue());
         address.setText(participant.getAddressValue());
         email.setText(participant.getEmailValue());
-        participant.getTags().stream()
-                .sorted(Comparator.comparing(Tag::getTagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
-
-        participantId.setText(participant.getParticipantIdValue());
         birthDate.setText(participant.getBirthDateString());
-        participant.getNotes().stream()
-                .sorted(Comparator.comparing(Note::toString))
-                .forEach(note -> notes.getChildren().add(noteLabel(note)));
         nextOfKins.setText(participant.getNextOfKins().stream().map(i -> i.toString() + "\n")
                 .collect(Collectors.joining()));
 
