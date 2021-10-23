@@ -273,7 +273,7 @@ The following sequence diagram shows how the pin operation works:
     * Cons: Will use more memory.
 
 ### \[Work in progress\] Birthday Reminder feature
-Show a list of people with upcoming birthday.
+Shows a list of people with upcoming birthday.
 
 #### Proposed Implementation
 
@@ -284,9 +284,8 @@ to current day.
 
 Step 3. The rest of the list with birthday after this first person will be displayed in sorted order.
 
-Step 4. Once at the end of the list, cycle back to the person with the earliest birthday and display 
-subsequent people in the list in sorted order until the person with a birthday that has just past and 
-already the first person in the resulting the birthday reminder list.
+Step 4. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
+earliest birthday and display remaining people in sorted order.
 
 --------------------------------------------------------------------------------------------------------------------
 
