@@ -13,10 +13,61 @@ their contacts. More importantly, FAST is **optimized for those who prefer to wo
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For Financial Advisors that 
 can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
+### Structure of this document
+To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
+As such, this user guide has been structured to help you find what you are looking for.
+
+In [How to use this user guide](#how-to-use-this-user-guide), you can learn how to most effectively read through this guide.
+
+In [Features overview](#features-overview), you will find all the features available in FAST.
+
+In [Quick start](#quick-start), you will find simple instructions on how to quickly begin using FAST.
+
+In [Features](#features), you can find documentation on how to use the features available in FAST.
+
+In [FAQs](#faqs), you may find answers to questions or problems you might have while using FAST.
+
+In [Command summary](#command-summary), you will find a summary of the commands available in FAST.
+
 ### How to use this user guide
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links which will jump to the corresponding section of the user guide. These
 links allow you to quickly navigate this document.
+
+Multiple special formats are used to highlight information that will be important or useful to you.
+These include:
+
+**Cautions**
+
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution** Example caution
+</div>
+
+Messages that appear in these boxes are important to take note of, as not knowing them might harm your user experience.
+
+**Tips**
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Example tip
+</div>
+
+Messages that appear in these boxes can help you to more effectively use FAST.
+
+**Useful information**
+
+<div markdown="block" class="alert alert-info">
+:information_source: Example useful information
+</div>
+
+Messages that appear in these boxes will be useful in helping you to understand how to use FAST.
+
+**Technical Information**
+
+`Example technical information`
+
+Messages that appear in these boxes indicate that the message is of a more technical nature, such as user input.
+
+
 
 ### Features overview
 Here is an overview of the features FAST offers:
@@ -32,7 +83,7 @@ Interested? Jump to [Quick Start](#quick-start) to get started!
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer. FAST can be used 
-on any operating system including Windows, MacOS or Linux
+on any operating system including Windows, macOS or Linux
 
 1. Download the latest `fast.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-4/tp/releases).
 
@@ -47,7 +98,7 @@ on any operating system including Windows, MacOS or Linux
    </div>
 1. You are now ready to start managing your clients!
    
-### User Interface
+### User interface
 Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
@@ -174,6 +225,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Only the edited fields will be updated to the input values, while the unedited values are unchanged.
 * When editing tags, all existing tags of the client will be replaced with the new tags.
 * You can remove all the client’s tags by typing `t/` without specifying any tags after it.
+* For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
@@ -181,14 +233,14 @@ Examples:
 
 ### Searching for clients: `find`
 
-Finds clients by their name, [priority](#using-priority-tags-pr), [tags](#editing-a-tag-tag) or 
+Finds clients by their name, [priority](#tags), [tags](#tags) or 
 [remarks](#adding-a-remark-rmk). This is useful if your have many clients in FAST and wish to quickly find a
 specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
 
 Format: `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]`
 OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * You can search by name, priority, tags or remarks using the formats shown above.
 * Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
@@ -275,8 +327,8 @@ FAST is capable of storing and keeping track of appointments for your clients. Y
 Format: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
 Adds a scheduled appointment with the client. An appointment includes a date, time and venue. This allows you to keep
-track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-eppt),
-[delete](#deleting-an-appointment-dappt), or [mark as completed](#updating-completed-appointment-done) an appointment.
+track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-ea),
+[delete](#deleting-an-appointment-da), or [mark as completed](#updating-completed-appointment-ma) an appointment.
 
 ![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
 
@@ -290,12 +342,12 @@ Examples:
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
    <div markdown="block" class="alert alert-info">
    :information_source: This command will not work if the client has already been assigned an appointment. You will have to
-   use the [edit appointment](#editing-an-appointment-eppt) command.<br>
+   use the [edit appointment](#editing-an-appointment-ea) command.<br>
    </div>
    
 #### Editing an appointment: `ea`
 
-Edits a scheduled [appointment](#adding-an-appointment-appt) with the client. This command is useful when your appointment has been rescheduled or 
+Edits a scheduled [appointment](#appointments) with the client. This command is useful when your appointment has been rescheduled or 
 has a change in location.
 
 Format: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
@@ -310,7 +362,7 @@ Examples:
 
 #### Deleting an appointment: `da`
 
-Deletes a scheduled [appointment](#adding-an-appointment-appt) with the client. This command should be used when 
+Deletes a scheduled [appointment](#appointments) with the client. This command should be used when 
 the appointment has been cancelled with a client.
 
 Format: `da INDEX`
@@ -322,9 +374,9 @@ Examples:
 * `da 1` deletes the appointment of the first client.
 * `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
 
-### Updating completed appointment: `ma`
+#### Updating completed appointment: `ma`
 
-Marks the appointment [appointment](#adding-an-appointment-appt) with the client as completed. This also allows you to keep 
+Marks the appointment [appointment](#adding-an-appointment-aa) with the client as completed. This also allows you to keep 
 track of the number of completed appointments with your client.
 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
@@ -342,73 +394,81 @@ Examples:
 
 ### Sorting all clients: `sort`
 
-Sorts all existing client by the given condition. Currently, you can sort by name, [appointment date](#adding-an-appointment-appt),
-and [priority tag](#using-priority-tags-pr). This allows you to keep your clients list orderly and well-organised.
+Sorts all existing client by the given condition. Currently, you can sort by name, [appointment date](#appointments),
+and [priority tag](#tags). This allows you to keep your clients list orderly and well-organised.
 It can also be used to quickly sieve through large client lists.
 
 Format: `sort KEYWORD`
 * There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
 * `name` will sort all clients in alphabetical order from A to Z.
-* `appointment` will sort all client by appointment date from earliest date to latest.
-* `priority` will sort all client by priority tag from highest priority to lowest priorty.
+* `appointment` will sort all client by appointment date from the earliest date to latest.
+* `priority` will sort all client by priority tag from the highest to the lowest priority.
 
 Examples:
-* `sort priority` Sorts all existing clients by the priority from highest priority tag to lowest priority tag.
+* `sort priority` Sorts all existing clients by their priority tag, from the highest priority to the lowest priority.
 
-### Editing a tag: `tag`
+### Tags
 
-Modifies a tag from a specified client. Tags are split into 3 categories: general tags, [priority tags](#using-priority-tags-pr),
-and [investment plan tags](#using-investment-plan-tags-ip). 
+Tags are a quick way for you to organise your contacts, and recall their key characteristics. In FAST, we have three main types of tags:
+
+![tagOverview](images/tags_overview.png)
+
+1. Normal tags, which you can customise according to your needs.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tags should be used to categorise clients; use short names for normal tags that you may be able to use for other clients as well!
+</div>
+
+2. Priority tags, which have fixed names and help you to remember which contacts you need to focus on first.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client can **only have 1 priority tag** , but they can have other non-priority tags alongside the one priority tag.
+</div>
+
+3. Investment plan tags, which help you recall the plans that each contact has bought.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client can have more than 1 investment plan tag, but they may not have more than 1 of the same investment plan tag.
+
+For example, a client may have both Savings and Investment concurrently, but not 2 instances of Savings at the same time. 
+</div>
+
+#### Tag Naming Conventions
+
+You can refer to the table below to quickly learn about how to use these three tags.
+
+Tag type|Prefix|Term
+--------|-------|-----
+Normal|`No Prefix`| Your preferred tag name, that contains at most 20 alphanumeric characters and no spaces
+Priority|`pr/`| `low`: Low Priority<br>`med`:Medium Priority<br>`high`:High Priority
+Investment plan|`ip/`| `health`: Health Insurance<br>`invest`: Investment<br>`life`: Life Insurance<br>`motor`: Motor Insurance<br>`property`: Property Insurance <br>`save`: Savings <br>`travel`: Travel Insurance
+
+In general, append the term to the prefix when referring to a priority or investment plan tag.
+Normal tags do not have prefixes, so simply type in the desired tag name.
+
+More examples of how to use these will be given in the following section.
+
+#### Editing a tag: `tag`
+
+Modifies the tags of a specified client. 
 
 Format: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
 * Does not affect any unmentioned tags, unlike `edit`.
-* `INDEX` refers to the index shown in the displayed client list. 
 * Delete operations are performed first before add operations, regardless of their order in the input.
 * Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Tags should be used to categorise clients, use short tag names that you may be able to use for other clients as well!
-</div>
+
 
 Example: 
-* `tag 1 a/thin d/fat` will add the `thin` tag while deleting the `fat` tag.
-* `tag 1 d/pr/low a/pr/high` will delete the `LowPriority` tag before adding the `HighPriority` tag.
+* `tag 1 a/family d/friend` will delete the `friend` tag before adding the `family` tag.
+
+![tagExample1](images/tagExample1.png)
+
+* `tag 1 d/pr/high a/pr/low` will delete the `HighPriority` tag before adding the `LowPriority` tag.
+
+![tagExample2](images/tagExample2.png)
+
 * `tag 1 a/ip/property` will add a `PropertyInsurance` tag to the contact.
 
-### Using Priority tags: `pr/`
-
-A set of fixed tags to indicate the priority level of clients. To use a priority tag, refer to the
-[tags](#editing-a-tag-tag) section.
-
-Usage: replace any fields requiring `[TAG]` with one of the following terms:
-* LowPriority: `pr/low`
-* MediumPriority: `pr/med`
-* HighPriority: `pr/high`
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A client can only have 1 priority tag, but they can have other non-priority tags alongside the one priority tag.
-</div>
-
-Example:
-* `tag 2 a/pr/low` will add a `LowPriority` tag to the specified client.
-* `edit 1 t/pr/med` will set the specified client to have only the `MediumPriority` tag.
-
-### Using Investment Plan tags: `ip/`
-
-A set of fixed tags to indicate the type of investment plans purchased by clients. To use an investment
-plan tag, refer to the [tags](#editing-a-tag-tag) section.
-
-Usage: replace any fields requiring `[TAG]` with one of the following terms:
-* HealthInsurance: `ip/health`
-* Investment: `ip/invest`
-* LifeInsurance: `ip/life`
-* MotorInsurance: `ip/motor`
-* PropertyInsurance: `ip/property`
-* Savings: `ip/save`
-* TravelInsurance: `ip/travel`
-
-Example: 
-* `tag 2 a/ip/life` will add a `LifeInsurance` tag to the specified client.
-* `edit 1 t/ip/motor` will set the specified client to have only the `MotorInsurance` tag.
+![tagExample3](images/tagExample3.png)
 
 ### Viewing statistics
 
@@ -443,11 +503,12 @@ save manually.
 
 ### Editing the data file
 
-FAST data are saved as a JSON file `[JAR file location]/data/fast.json`. Advanced users are welcome to update data 
-directly by editing that data file.
+FAST data is saved as a JSON file. It can be found at `[JAR file location]/data/fast.json`. If you are an advanced user, feel free 
+to update your data directly, by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, FAST will discard all data and start with an empty data file at the next run.
+**Be extremely careful when making any changes to the data file!**<br>
+If any of your changes to the data file causes FAST to be unable to read the data file, FAST will start with an empty data file on the next run!
 </div>
 
 
@@ -455,10 +516,17 @@ If your changes to the data file makes its format invalid, FAST will discard all
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQs
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAST home folder.
+**A**: Install the app in the other computer and move your previous FAST `data` folder into the new FAST home folder. The `data` folder is shown below. <br>
+
+![moveData](images/moveData.png)
+
+**Q**: How do I save my data?<br>
+**A**: You do not need to manually save any data, FAST automatically saves all your data for you when you exit the application.
+**Q**: I edited my data file, and now when I start FAST all my contacts are gone! What happened?
+**A**: It is likely that some of your changes to your data file caused FAST to be unable to read your data file. Double-check the changes you made, or revert them if necessary. If FAST is able to read the data file after you made the changes, all your saved contacts will appear on the next start.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -466,20 +534,18 @@ If your changes to the data file makes its format invalid, FAST will discard all
 
 Action | Format, Examples
 --------|------------------
-**Add Appointment** | `aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`
+**Appointment** | **Add appointment**<br>`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br><br>**Delete Appointment**<br> `da INDEX`<br> e.g. `da 1`<br><br>**Edit Appointment**<br> `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br><br>**Update Completed Appointment**<br> `ma INDEX`<br> e.g. `ma 5`
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete Appointment** | `da INDEX`<br> e.g. `da 1`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
-**Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
-**Edit Tag** | `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Help** | `help [COMMAND]` <br> e.g. `help add`
-**Investment Plan Tag** |HealthInsurance: `ip/health`<br>Investment: `ip/invest`<br>LifeInsurance: `ip/life`<br>MotorInsurance: `ip/motor`<br>PropertyInsurance: `ip/property`<br>Savings: `ip/save`<br>TravelInsurance: `ip/travel`
 **List** | `list`
-**Priority Tag** | LowPriority: `pr/low`<br>MediumPriority: `pr/med`<br>HighPriority: `pr/high`
 **Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
-**Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
+**Tag** | **Edit Tag**<br> `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`<br><br>**Investment Plan Tag**<br>Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>**Priority Tag**<br>Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
+
+
+
