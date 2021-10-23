@@ -57,6 +57,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private MenuItem remindMenuItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -92,6 +95,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(remindMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -159,6 +163,18 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
+        if (!helpWindow.isShowing()) {
+            helpWindow.show();
+        } else {
+            helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleRemind() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {

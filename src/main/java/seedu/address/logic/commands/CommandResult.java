@@ -12,22 +12,27 @@ public class CommandResult {
     private final String feedbackToUser;
 
     /** Help information should be shown to the user. */
-    private final boolean showHelp;
+    private final boolean isShowHelp;
 
     /** Schedule should be shown to the user. */
-    private final boolean showSchedule;
+    private final boolean isShowSchedule;
+
+    /** Reminder of upcoming lessons should be shown to the user. */
+    private final boolean isShowReminder;
 
     /** The application should exit. */
-    private final boolean exit;
+    private final boolean isExit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isShowSchedule,
+                         boolean isShowReminder, boolean isExit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.showSchedule = showSchedule;
-        this.exit = exit;
+        this.isShowHelp = isShowHelp;
+        this.isShowSchedule = isShowSchedule;
+        this.isShowReminder = isShowReminder;
+        this.isExit = isExit;
     }
 
     /**
@@ -35,7 +40,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false, false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -43,19 +48,23 @@ public class CommandResult {
     }
 
     public boolean isShowHelp() {
-        return showHelp;
+        return isShowHelp;
     }
 
     public boolean isShowSchedule() {
-        return showSchedule;
+        return isShowSchedule;
     }
 
     public boolean isShowStudentList() {
-        return !showSchedule;
+        return !isShowSchedule;
+    }
+
+    public boolean isShowReminder() {
+        return isShowReminder;
     }
 
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 
     @Override
@@ -71,19 +80,20 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && showSchedule == otherCommandResult.showSchedule
-                && exit == otherCommandResult.exit;
+                && isShowHelp == otherCommandResult.isShowHelp
+                && isShowSchedule == otherCommandResult.isShowSchedule
+                && isShowReminder == otherCommandResult.isShowReminder
+                && isExit == otherCommandResult.isExit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showSchedule, exit);
+        return Objects.hash(feedbackToUser, isShowHelp, isShowSchedule, isShowReminder, isExit);
     }
 
     @Override
     public String toString() {
-        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", showHelp = " + showHelp
-                + ", exit = " + exit;
+        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", showHelp = " + isShowHelp
+                + ", exit = " + isExit;
     }
 }

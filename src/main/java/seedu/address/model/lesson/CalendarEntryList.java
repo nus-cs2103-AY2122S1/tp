@@ -3,7 +3,10 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.calendarfx.model.Calendar;
@@ -28,6 +31,8 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
+    private static final long TWO_DAY_TIME_DIFF_SEC = 2880;
+
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
 
@@ -172,6 +177,25 @@ public class CalendarEntryList {
         for (Person person : persons) {
             addLessons(person);
         }
+    }
+
+    /**
+     * Returns a hashmap of upcoming lessons with the name of the student within two days from current time.
+     *
+     * @return Hashmap of upcoming lessons within two days.
+     */
+    public HashMap<String, Lesson> getUpcomingLessons() {
+        HashMap<String, Lesson> upcomingLessons = new HashMap<>();
+
+        for (Entry<Lesson> lessonEntry : entryList) {
+            long timeDiff = ChronoUnit.SECONDS.between(LocalDateTime.now(), lessonEntry.getEndAsLocalDateTime());
+            if (timeDiff > 0 && timeDiff < TWO_DAY_TIME_DIFF_SEC) {
+                String entryTitle = lessonEntry.getTitle();
+                String name = entryTitle.substring(1, entryTitle.length() - 1);
+                upcomingLessons.put(name, lessonEntry.getUserObject());
+            }
+        }
+        return upcomingLessons;
     }
 
     /**
