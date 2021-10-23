@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.TaskBook;
@@ -19,7 +20,6 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 

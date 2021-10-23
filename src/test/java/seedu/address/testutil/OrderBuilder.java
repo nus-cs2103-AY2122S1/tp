@@ -1,18 +1,21 @@
 package seedu.address.testutil;
 
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.order.Amount;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
 
 public class OrderBuilder {
 
+    public static final String DEFAULT_LABEL = "Blue Shirt";
     public static final String DEFAULT_CUSTOMER = "Johnson";
     public static final String DEFAULT_AMOUNT = "99.99";
     public static final String DEFAULT_DATE = "20th October 2021";
     public static final boolean DEFAULT_IS_COMPLETE = false;
     public static final long DEFAULT_ID = 2021;
 
+    private Label label;
     private Customer customer;
     private Amount amount;
     private Date date;
@@ -23,6 +26,7 @@ public class OrderBuilder {
      * Creates a {@code OrderBuilder} with the default details.
      */
     public OrderBuilder() {
+        label = new Label(DEFAULT_LABEL);
         customer = new Customer(DEFAULT_CUSTOMER);
         amount = new Amount(DEFAULT_AMOUNT);
         date = new Date(DEFAULT_DATE);
@@ -34,6 +38,7 @@ public class OrderBuilder {
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public OrderBuilder(Order orderToCopy) {
+        label = orderToCopy.getLabel();
         customer = orderToCopy.getCustomer();
         amount = orderToCopy.getAmount();
         date = orderToCopy.getDate();
@@ -77,7 +82,7 @@ public class OrderBuilder {
      * builds the Order.
      */
     public Order build() {
-        Order order = new Order(customer, date, amount);
+        Order order = new Order(label, customer, date, amount);
         order.setIsComplete(isComplete);
         order.setId(this.id);
         return order;

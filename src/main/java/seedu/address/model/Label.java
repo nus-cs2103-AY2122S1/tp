@@ -1,4 +1,4 @@
-package seedu.address.model.task;
+package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Label {
     public static final String MESSAGE_CONSTRAINTS =
-            "Label should begin with an alphanumeric character, followed by up to 99 more characters that"
+            "A Label should begin with a alphanumeric character, followed by up to 99 more characters that"
             + "are alphanumeric or spaces";
 
     public static final String VALIDATION_REGEX = "\\p{Alnum}+[ \\p{Alnum}]*";
