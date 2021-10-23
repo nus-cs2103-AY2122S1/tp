@@ -174,6 +174,12 @@ Classes used by multiple components are in the `seedu.salesnote.commons` package
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Display client's total orders feature
+
+#### Implementation
+
+The feature displays the total orders for each client in a new window. Its mechanism is a mix of the mechanisms for `MainWindow` and `HelpWindow`. 
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
