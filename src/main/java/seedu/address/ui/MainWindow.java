@@ -198,6 +198,8 @@ public class MainWindow extends UiPart<Stage> {
                 Chart chart = commandResult.getChart();
                 assert chart != null;
                 graphDisplay.setChart(chart);
+            } else {
+                graphDisplay.clearCharts();
             }
 
             if (commandResult.isShowHelp()) {
