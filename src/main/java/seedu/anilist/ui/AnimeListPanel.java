@@ -25,6 +25,8 @@ public class AnimeListPanel extends UiPart<Region> {
     private static final String FXML = "AnimeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AnimeListPanel.class);
     private final TabOption currentTab;
+    private final CommandExecutor commandExecutor;
+    private final ObservableList<Anime> animeList;
 
     @FXML
     private TabPane animeListTabPane;
@@ -58,6 +60,18 @@ public class AnimeListPanel extends UiPart<Region> {
      */
     public AnimeListPanel(ObservableList<Anime> animeList, TabOption currentTab, CommandExecutor commandExecutor) {
         super(FXML);
+        this.currentTab = currentTab;
+        this.commandExecutor = commandExecutor;
+        this.animeList = animeList;
+
+        initTab();
+    }
+
+
+    /**
+     * Initializes the tab component of Anime List Panel
+     */
+    public void initTab() {
         animeListView.setItems(animeList);
         animeListView.setCellFactory(listView -> new AnimeListViewCell());
 
@@ -90,11 +104,7 @@ public class AnimeListPanel extends UiPart<Region> {
                     }
                 }
         );
-
-        this.currentTab = currentTab;
     }
-
-
 
     public void setActiveTab() {
         if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
@@ -107,6 +117,58 @@ public class AnimeListPanel extends UiPart<Region> {
             animeListTabPane.getSelectionModel().select(finishedTab);
         } else {
             animeListTabPane.getSelectionModel().select(allTab);
+        }
+    }
+
+    /**
+     * Sets the tab value to the next tab, loops to `all` if tab is currently on `finished`
+     */
+    public void setNextTab() {
+        try {
+            if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
+                animeListTabPane.getSelectionModel().select(watchingTab);
+                commandExecutor.execute("list s/watching");
+            } else if (currentTab.getCurrentTab() == TabOption.TabOptions.TOWATCH) {
+                animeListTabPane.getSelectionModel().select(finishedTab);
+                commandExecutor.execute("list s/finished");
+            } else if (currentTab.getCurrentTab() == TabOption.TabOptions.WATCHING) {
+                animeListTabPane.getSelectionModel().select(toWatchTab);
+                commandExecutor.execute("list s/towatch");
+            } else if (currentTab.getCurrentTab() == TabOption.TabOptions.FINISHED) {
+                animeListTabPane.getSelectionModel().select(allTab);
+                commandExecutor.execute("list");
+            } else {
+                animeListTabPane.getSelectionModel().select(allTab);
+                commandExecutor.execute("list");
+            }
+        } catch (CommandException | ParseException e) {
+            logger.log(Level.WARNING, "Wrongly parsed tab commands, resetting to all Tab");
+        }
+    }
+
+    /**
+     * Sets the tab value to the previous tab, loops to `finished` if tab is currently on `all`
+     */
+    public void setPrevTab() {
+        try {
+            if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
+                animeListTabPane.getSelectionModel().select(finishedTab);
+                commandExecutor.execute("list s/finished");
+            } else if (currentTab.getCurrentTab() == TabOption.TabOptions.TOWATCH) {
+                animeListTabPane.getSelectionModel().select(watchingTab);
+                commandExecutor.execute("list s/watching");
+            } else if (currentTab.getCurrentTab() == TabOption.TabOptions.WATCHING) {
+                animeListTabPane.getSelectionModel().select(allTab);
+                commandExecutor.execute("list");
+            } else if (currentTab.getCurrentTab() == TabOption.TabOptions.FINISHED) {
+                animeListTabPane.getSelectionModel().select(toWatchTab);
+                commandExecutor.execute("list s/towatch");
+            } else {
+                animeListTabPane.getSelectionModel().select(allTab);
+                commandExecutor.execute("list");
+            }
+        } catch (CommandException | ParseException e) {
+            logger.log(Level.WARNING, "Wrongly parsed tab commands, resetting to all Tab");
         }
     }
 

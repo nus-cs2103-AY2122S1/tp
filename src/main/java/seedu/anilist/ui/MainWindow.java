@@ -82,10 +82,42 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        initTheme();
 
+        // Configure Hotkeys for tab switching
+        KeyCombination nextTabHotKey = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
+        Runnable nextTabRunnable = () -> animeListPanel.setNextTab();
+        primaryStage.getScene().getAccelerators().put(nextTabHotKey, nextTabRunnable);
+        KeyCombination prevTabHotKey = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN);
+        Runnable prevTabRunnable = () -> animeListPanel.setPrevTab();
+        primaryStage.getScene().getAccelerators().put(prevTabHotKey, prevTabRunnable);
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void fillInnerParts() {
+        animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
+
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAnimeListFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void initTheme() {
         KeyCombination themeHotKey = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
         Runnable themeRunnable = this::setNextTheme;
         primaryStage.getScene().getAccelerators().put(themeHotKey, themeRunnable);
@@ -126,27 +158,6 @@ public class MainWindow extends UiPart<Stage> {
                 setTheme(themesArr[3]);
             }
         });
-    }
-
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    /**
-     * Fills up all the placeholders of this window.
-     */
-    void fillInnerParts() {
-        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
-        animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAnimeListFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     private void setTheme(String themeCss) {
