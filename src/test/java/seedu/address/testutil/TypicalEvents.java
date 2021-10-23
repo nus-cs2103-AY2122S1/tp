@@ -64,6 +64,18 @@ public class TypicalEvents {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with a copy of all the typical events.
+     * Used when events in the addressbook are mutated.
+     */
+    public static AddressBook getTypicalAddressBookCopy() {
+        AddressBook ab = new AddressBook();
+        for (Event event : getTypicalEvents()) {
+            ab.addEvent(new EventBuilder(event).build());
+        }
+        return ab;
+    }
+
     public static List<Event> getTypicalEvents() {
         return new ArrayList<>(Arrays.asList(SAMPLE_EVENT, SAMPLE_EVENT_COPY_NO_TIME, SAMPLE_EVENT_COPY_DIFFERENT_NAME,
                 ANOTHER_EVENT, SAMPLE_EVENT_2));
