@@ -718,7 +718,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC17 - Find student contact by name**
+**Use case: UC17 - Find student by name**
 
 **MSS**
 
@@ -734,6 +734,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. tApp displays an empty list
 
       Use case ends.
+
+**Use case: UC18 - Find groups by name**
+
+Similar to UC17 (Find student by name), except we are finding groups.
 
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
