@@ -256,7 +256,7 @@ Use the ↑ and ↓ arrow keys to navigate between previously entered commands.
 | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Add**    | `add (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" ...` <br> e.g., `add -n "James Ho" -p "22224444" -e "jamesho@example.com" -a "123, Clementi Rd, 1234665" -t "friend"` |
 | **Clear**  | `clear`                                                                                                                                                                |
-| **Delete** | `delete "UID1,UID2,..."`<br> e.g., `delete "3,2,7"`                                                                                                                    |
+| **Delete** | `delete [INDEX]`<br> e.g., `delete 3`                                                                                                                    |
 | **Edit**   | `edit "[INDEX]" (-n/--name) "[NAME]" (-p/--phone) "[PHONE]"…​`<br> e.g., `edit "2" -n "James Lee" -e "jameslee@example.com"`                                           |
 | **Exit**   | `exit`                                                                                                                                                                 |
 | **Find**   | `find (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" (-a/--address) "[ADDRESS]" (-t/--tag) "[TAG]"`<br> e.g., `find -n "James Jake"`               |
