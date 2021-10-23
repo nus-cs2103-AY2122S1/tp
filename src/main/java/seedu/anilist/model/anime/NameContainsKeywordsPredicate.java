@@ -1,7 +1,5 @@
 package seedu.anilist.model.anime;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -16,6 +14,12 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 public class NameContainsKeywordsPredicate implements Predicate<Anime> {
     private final List<Name> names;
 
+    /**
+     * Constructs a {@code NameContainsKeywordsPredicate}.
+     *
+     * @param keywords Keywords to search within the anime's name.
+     * @throws ParseException if the keywords given are not valid.
+     */
     public NameContainsKeywordsPredicate(List<String> keywords) throws ParseException {
         names = new ArrayList<>();
         for (String keyword: keywords) {

@@ -18,12 +18,12 @@ public class NameContainsKeywordsPredicateTest {
     @Test
     public void constructor_invalidNameKeywords_throwsParseException() {
         // Empty String
-        assertThrows(ParseException.class,
-            () -> new GenresContainedPredicate(Collections.singletonList("")));
+        assertThrows(ParseException.class, () ->
+            new GenresContainedPredicate(Collections.singletonList("")));
 
         // Non-ASCII
-        assertThrows(ParseException.class,
-            () -> new GenresContainedPredicate(Collections.singletonList("非ascii字符")));
+        assertThrows(ParseException.class, () ->
+            new GenresContainedPredicate(Collections.singletonList("非ascii字符")));
     }
 
     @Test

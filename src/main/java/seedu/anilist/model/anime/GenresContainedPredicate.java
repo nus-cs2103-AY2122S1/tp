@@ -8,15 +8,21 @@ import seedu.anilist.logic.parser.ParserUtil;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.genre.Genre;
 
+/**
+ * Tests that a {@code Anime}'s {@code Tag} matches any the keywords given.
+ */
 public class GenresContainedPredicate implements Predicate<Anime> {
     private final List<Genre> genres;
 
     /**
-     * Tests that a {@code Anime}'s {@code Tag} matches any the keywords given.
+     * Constructs a {@code GenresContainedPredicate}.
+     *
+     * @param genreKeywords Keywords to search within the anime's genre.
+     * @throws ParseException if the keywords given are not valid.
      */
-    public GenresContainedPredicate(List<String> genreNames) throws ParseException {
+    public GenresContainedPredicate(List<String> genreKeywords) throws ParseException {
         genres = new ArrayList<>();
-        for (String genreName : genreNames) {
+        for (String genreName : genreKeywords) {
             genres.add(ParserUtil.parseGenre(genreName));
         }
     }

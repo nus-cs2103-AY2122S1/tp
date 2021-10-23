@@ -1,7 +1,6 @@
 package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;

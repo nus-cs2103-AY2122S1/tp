@@ -1,16 +1,17 @@
 package seedu.anilist.model.anime;
 
-import org.junit.jupiter.api.Test;
-import seedu.anilist.logic.parser.exceptions.ParseException;
-import seedu.anilist.testutil.AnimeBuilder;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import seedu.anilist.logic.parser.exceptions.ParseException;
+import seedu.anilist.testutil.AnimeBuilder;
 
 public class GenresContainedPredicateTest {
 
@@ -19,7 +20,7 @@ public class GenresContainedPredicateTest {
         List<String> firstGenreKeywordList = Collections.singletonList("first");
         List<String> secondGenreKeywordList = Arrays.asList("first", "second");
         GenresContainedPredicate firstPredicate = new GenresContainedPredicate(firstGenreKeywordList);
-        GenresContainedPredicate secondPredicate  = new GenresContainedPredicate(secondGenreKeywordList);
+        GenresContainedPredicate secondPredicate = new GenresContainedPredicate(secondGenreKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
@@ -39,14 +40,14 @@ public class GenresContainedPredicateTest {
     }
 
     @Test
-    public void constructor_InvalidGenreKeyword_throwsParseException() {
+    public void constructor_invalidGenreKeyword_throwsParseException() {
         // Empty String
-        assertThrows(ParseException.class,
-            () -> new GenresContainedPredicate(Collections.singletonList("")));
+        assertThrows(ParseException.class, () ->
+            new GenresContainedPredicate(Collections.singletonList("")));
 
         // Non-ASCII
-        assertThrows(ParseException.class,
-            () -> new GenresContainedPredicate(Collections.singletonList("非ascii字符")));
+        assertThrows(ParseException.class, () ->
+            new GenresContainedPredicate(Collections.singletonList("非ascii字符")));
     }
 
     @Test

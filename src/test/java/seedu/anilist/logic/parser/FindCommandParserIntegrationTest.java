@@ -1,8 +1,30 @@
 package seedu.anilist.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
+import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.anilist.testutil.TypicalAnimes.AOT;
+import static seedu.anilist.testutil.TypicalAnimes.BRS;
+import static seedu.anilist.testutil.TypicalAnimes.CSM;
+import static seedu.anilist.testutil.TypicalAnimes.DBZ;
+import static seedu.anilist.testutil.TypicalAnimes.ELF;
+import static seedu.anilist.testutil.TypicalAnimes.FSN;
+import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.function.Predicate;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.anilist.logic.commands.FindCommand;
-import seedu.anilist.logic.commands.RenameCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.ModelManager;
@@ -12,30 +34,6 @@ import seedu.anilist.model.anime.GenresContainedPredicate;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.model.genre.Genre;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Predicate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.anilist.commons.core.Messages.MESSAGE_ANIME_LISTED_OVERVIEW;
-import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.anilist.testutil.TypicalAnimes.AOT;
-import static seedu.anilist.testutil.TypicalAnimes.BRS;
-import static seedu.anilist.testutil.TypicalAnimes.CSM;
-import static seedu.anilist.testutil.TypicalAnimes.DBZ;
-import static seedu.anilist.testutil.TypicalAnimes.ELF;
-import static seedu.anilist.testutil.TypicalAnimes.FSN;
-import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 
 public class FindCommandParserIntegrationTest {
     private static final String MESSAGE_INVALID_FORMAT =

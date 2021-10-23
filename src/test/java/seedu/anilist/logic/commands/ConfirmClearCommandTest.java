@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.ModelManager;
 import seedu.anilist.model.UserPrefs;
@@ -56,7 +57,7 @@ public class ConfirmClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyFilteredByKeywordAnimeList_success() {
+    public void execute_nonEmptyFilteredByKeywordAnimeList_success() throws ParseException {
         //Constructs a model containing TypicalAnimes and a filtered list containing
         //the animes that match keywords
         NameContainsKeywordsPredicate predicate =
