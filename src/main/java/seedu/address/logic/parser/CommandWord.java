@@ -32,7 +32,6 @@ public enum CommandWord {
     EDIT_PERSON("edit", "update", "e"),
     FIND_PERSON("find", "f"),
     LIST_PERSON("list", "ls"),
-    REMARK_PERSON("remark"),
     EDIT_MODULE_LESSON("editc", "ec"),
     FIND_MODULE_LESSON("findc", "fc"),
     LIST_MODULE_LESSON("listc", "lc"),
