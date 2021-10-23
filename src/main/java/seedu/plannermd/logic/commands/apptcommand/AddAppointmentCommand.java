@@ -51,7 +51,6 @@ public class AddAppointmentCommand extends AppointmentCommand {
     private Index patientIndex;
     private Index doctorIndex;
     private AddAppointmentDescriptor addAppointmentDescriptor;
-    private Appointment toAdd;
 
     /**
      * Creates an AddAppointmentCommand to add the specified {@code Appointment}.
@@ -66,6 +65,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
         this.doctorIndex = doctorIndex;
         this.addAppointmentDescriptor = new AddAppointmentDescriptor(addAppointmentDescriptor);
     }
+
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -87,8 +87,6 @@ public class AddAppointmentCommand extends AppointmentCommand {
         Appointment toAdd = new Appointment(patientToAdd, doctorToAdd, addAppointmentDescriptor.getAppointmentDate(),
                 addAppointmentDescriptor.getSession(), addAppointmentDescriptor.getRemark());
 
-        this.toAdd = toAdd;
-
         if (model.hasAppointment(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPOINTMENT);
         }
@@ -105,7 +103,15 @@ public class AddAppointmentCommand extends AppointmentCommand {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddAppointmentCommand // instanceof handles nulls
-                && toAdd.equals(((AddAppointmentCommand) other).toAdd));
+                && patientIndex.equals(((AddAppointmentCommand) other).patientIndex)
+                && doctorIndex.equals(((AddAppointmentCommand) other).doctorIndex)
+                && addAppointmentDescriptor.equals(((AddAppointmentCommand) other).addAppointmentDescriptor)
+                );
+    }
+
+    @Override
+    public String toString() {
+        return (patientIndex.getZeroBased() + " " + doctorIndex.getZeroBased() + addAppointmentDescriptor.toString());
     }
 
     /**
@@ -149,6 +155,12 @@ public class AddAppointmentCommand extends AppointmentCommand {
 
         public Remark getRemark() {
             return remark;
+        }
+
+        @Override
+        public String toString() {
+            return appointmentDate.date + " " + session.start + " " + session.end + " " + session.duration.duration + " "
+                    + remark.value;
         }
 
         @Override

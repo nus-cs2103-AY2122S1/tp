@@ -24,7 +24,7 @@ import seedu.plannermd.model.appointment.Duration;
 import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.person.Remark;
 
-public class AddAppointmentCommandParser {
+public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
     private final DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("d/M/yyyy")
             .appendPattern(" HH:mm")
@@ -49,15 +49,23 @@ public class AddAppointmentCommandParser {
 
         AddAppointmentCommand.AddAppointmentDescriptor addAppointmentDescriptor =
                 new AddAppointmentCommand.AddAppointmentDescriptor();
-        Remark remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        Remark remark = Remark.getEmptyRemark();
+        if (argMultimap.getValue(PREFIX_REMARK).isPresent()) {
+            remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
+        }
+
         addAppointmentDescriptor.setRemark(remark);
         String trimmedParsedDateTime = argMultimap.getValue(PREFIX_START).get().trim();
-        System.out.println(trimmedParsedDateTime);
         String time = getTimeFromDateTime(trimmedParsedDateTime);
         String date = getDateFromDateTime(trimmedParsedDateTime);
         AppointmentDate appointmentDate = new AppointmentDate(date);
         addAppointmentDescriptor.setAppointmentDate(appointmentDate);
-        Duration duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
+
+        Duration duration = Duration.getDefaultDuration();
+        if (argMultimap.getValue(PREFIX_DURATION).isPresent()) {
+             duration = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get());
+        }
+
         Session session = new Session(time, duration);
         addAppointmentDescriptor.setSession(session);
         Index patientIndex;

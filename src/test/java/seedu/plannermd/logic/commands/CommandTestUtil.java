@@ -4,11 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
@@ -26,7 +30,7 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
-import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
+import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
 /**
@@ -50,14 +54,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_RISK_AMY = "LOW";
     public static final String VALID_RISK_BOB = "MEDIUM";
-
-    public static final String VALID_APPT_DATE_THIRTY_MIN = "2/2/2022";
-    public static final String VALID_APPT_DATE_TWO_HOUR = "12/12/2022";
-    public static final String VALID_APPT_REMARK = "Patient wants a blood test";
-    public static final int VALID_APPT_DURATION = 30;
-    public static final String VALID_APPT_DATE = "3/3/2033";
-    public static final String VALID_APPT_TIME = "23:59";
-
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -93,6 +89,50 @@ public class CommandTestUtil {
     public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_AMY;
     public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_BOB;
 
+    public static final String VALID_APPT_DATE_THIRTY_MIN = "2/2/2022";
+    public static final String VALID_APPT_DATE_TWO_HOUR = "12/12/2022";
+    public static final String VALID_APPT_REMARK = "Patient wants a blood test";
+    public static final int VALID_APPT_DURATION = 30;
+    public static final String VALID_APPT_TIME = "23:59";
+    public static final String VALID_APPT_TIME_THIRTY_MIN = "22:35";
+    public static final String VALID_APPT_TIME_TWO_HOUR = "12:35";
+    public static final int VALID_APPT_DEFAULT_DURATION = 10;
+    public static final int VALID_APPT_DURATION_THIRTY_MIN = 30;
+    public static final int VALID_APPT_DURATION_TWO_HOUR = 120;
+    public static final String VALID_PATIENT_INDEX = "1";
+    public static final String ANOTHER_VALID_PATIENT_INDEX = "2";
+    public static final String VALID_DOCTOR_INDEX = "2";
+    public static final String ANOTHER_VALID_DOCTOR_INDEX = "2";
+
+    public static final String APPT_START_THIRTY_MIN_DESC = " " + PREFIX_START + VALID_APPT_DATE_THIRTY_MIN
+            + " " + VALID_APPT_TIME_THIRTY_MIN;
+    public static final String APPT_DURATION_THIRTY_MIN_DESC = " " + PREFIX_DURATION
+            + VALID_APPT_DURATION_THIRTY_MIN;
+    public static final String APPT_START_TWO_HOUR_DESC = " " + PREFIX_START + VALID_APPT_DATE_TWO_HOUR
+            + " " + VALID_APPT_TIME_TWO_HOUR;
+    public static final String APPT_DURATION_TWO_HOUR_DESC = " " + PREFIX_DURATION
+            + VALID_APPT_DURATION_TWO_HOUR;
+    public static final String APPT_PATIENT_INDEX_DESC = " " + PREFIX_PATIENT + VALID_PATIENT_INDEX;
+    public static final String APPT_ANOTHER_PATIENT_INDEX_DESC = " " + PREFIX_PATIENT + ANOTHER_VALID_PATIENT_INDEX;
+    public static final String APPT_DOCTOR_INDEX_DESC = " " + PREFIX_DOCTOR + VALID_DOCTOR_INDEX;
+    public static final String APPT_ANOTHER_DOCTOR_INDEX_DESC = " " + PREFIX_DOCTOR + ANOTHER_VALID_DOCTOR_INDEX;
+    public static final String APPT_REMARK_DESC = " " + PREFIX_REMARK + VALID_APPT_REMARK;
+
+    public static final String INVALID_PATIENT_INDEX = "WAT";
+    public static final String INVALID_DOCTOR_INDEX = "!!!!";
+    public static final String INVALID_START_DATE = "2-2-2022";
+    public static final String INVALID_START_TIME = "1211";
+    public static final String INVALID_DURATION = "forty-five minutes";
+
+    public static final String INVALID_PATIENT_INDEX_DESC = " " + PREFIX_PATIENT + INVALID_PATIENT_INDEX;
+    public static final String INVALID_DOCTOR_INDEX_DESC = " " + PREFIX_DOCTOR + INVALID_DOCTOR_INDEX;
+
+    public static final String INVALID_START_DATE_DESC = " " + PREFIX_START + INVALID_START_DATE
+            + " " + VALID_APPT_TIME_TWO_HOUR;
+    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START + VALID_APPT_DATE_THIRTY_MIN
+            + " " + INVALID_START_TIME;
+    public static final String INVALID_DURATION_DESC = " " + PREFIX_DURATION
+            + INVALID_DURATION;
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)

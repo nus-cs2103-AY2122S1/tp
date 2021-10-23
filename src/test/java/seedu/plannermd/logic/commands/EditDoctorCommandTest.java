@@ -26,8 +26,8 @@ import seedu.plannermd.model.ModelManager;
 import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.doctor.Doctor;
-import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.doctor.DoctorBuilder;
+import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditDoctorCommand.
