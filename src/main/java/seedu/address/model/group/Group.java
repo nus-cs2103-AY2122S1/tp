@@ -154,7 +154,7 @@ public class Group {
 
         Group otherGroup = (Group) other;
         return otherGroup.getName().equals(getName())
-                && otherGroup.getMembers().equals(getMembers())
+                && otherGroup.getMembersList().equals(getMembersList())
                 && otherGroup.getGroupGithubLink().equals(getGroupGithubLink())
                 && otherGroup.getTags().equals(getTags());
     }

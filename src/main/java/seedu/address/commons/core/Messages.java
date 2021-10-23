@@ -17,4 +17,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_GROUP_MEMBER_INDEX = "This student already has a group";
     public static final String MESSAGE_INVALID_GROUP_MEMBER_REMOVAL_INDEX = "The member index provided is invalid";
 
+    public static final String MESSAGE_WRONG_NUMBER_OF_INDEX =
+            "Only %1$d indices separated by white spaces can be provided. Currently %2$d are provided.";
 }

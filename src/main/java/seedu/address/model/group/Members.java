@@ -6,8 +6,6 @@ import seedu.address.model.student.Student;
 
 public class Members {
 
-    public static final String MESSAGE_CONSTRAINTS = "Weeks should be between 1 and %1$s";
-
     public final ArrayList<Student> studentList;
 
     /**

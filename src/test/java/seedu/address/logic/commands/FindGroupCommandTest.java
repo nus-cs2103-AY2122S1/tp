@@ -67,7 +67,7 @@ public class FindGroupCommandTest {
     @Test
     public void execute_multipleKeywords_multipleGroupsFound() {
         String expectedMessage = String.format(MESSAGE_GROUPS_LISTED_OVERVIEW, 3);
-        GroupContainsKeywordsPredicate predicate = preparePredicate("w14 w15 m16");
+        GroupContainsKeywordsPredicate predicate = preparePredicate("w14 f01 m16");
         FindGroupCommand command = new FindGroupCommand(predicate);
         expectedModel.updateFilteredGroupList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);

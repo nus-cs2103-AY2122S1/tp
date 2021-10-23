@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_WRONG_NUMBER_OF_INDEX;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class DeleteStudentGroupCommandParser implements Parser<DeleteStudentGrou
 
         if (index.size() != 2) {
             throw new ParseException(
-                    String.format(DeleteStudentGroupCommand.MESSAGE_WRONG_NUMBER_OF_INDEX, index.size()));
+                    String.format(MESSAGE_WRONG_NUMBER_OF_INDEX, 2, index.size()));
         }
 
         return new DeleteStudentGroupCommand(index.get(0), index.get(1));

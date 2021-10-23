@@ -95,11 +95,17 @@ class JsonAdaptedGroup {
         if (year == null) {
             modelYear = new LinkYear();
         } else {
+            if (!LinkYear.isValidYear(year)) {
+                throw new IllegalValueException(LinkYear.MESSAGE_CONSTRAINTS);
+            }
             modelYear = new LinkYear(year);
         }
         if (repoName == null) {
             modelRepoName = new RepoName();
         } else {
+            if (!RepoName.isValidRepoName(repoName)) {
+                throw new IllegalValueException(RepoName.MESSAGE_CONSTRAINTS);
+            }
             modelRepoName = new RepoName(repoName);
         }
 

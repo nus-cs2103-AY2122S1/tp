@@ -2,6 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_G1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_G2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REPONAME_AMY;
@@ -29,19 +31,19 @@ public class TypicalStudents {
             .withStudentNumber("A0000000B").withUserName("paulice").withRepoName("ip").withTags("friends").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withStudentNumber("A0000000B")
             .withEmail("johnd@example.com").withTags("owesMoney", "friends").withUserName("benben")
-            .withGroupName("w14-4").withRepoName("ip").build();
+            .withGroupName(VALID_GROUPNAME_G1).withRepoName("ip").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withUserName("cark")
-            .withGroupName("w14-4").withRepoName("ip").withStudentNumber("A0000000B").withEmail("heinz@example.com")
-            .build();
+            .withGroupName(VALID_GROUPNAME_G1).withRepoName("ip").withStudentNumber("A0000000B")
+            .withEmail("heinz@example.com").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@example.com")
-            .withGroupName("w14-4").withStudentNumber("A0000000B").withUserName("danmei").withRepoName("ip")
+            .withGroupName(VALID_GROUPNAME_G1).withStudentNumber("A0000000B").withUserName("danmei").withRepoName("ip")
             .withTags("friends").build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withUserName("em")
-            .withGroupName("w15-5").withRepoName("ip").withStudentNumber("A0000000B").withEmail("werner@example.com")
-            .build();
+            .withGroupName(VALID_GROUPNAME_G2).withRepoName("ip").withStudentNumber("A0000000B")
+            .withEmail("werner@example.com").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withUserName("fku")
-            .withGroupName("w15-5").withRepoName("ip").withStudentNumber("A0000000B").withEmail("lydia@example.com")
-            .build();
+            .withGroupName(VALID_GROUPNAME_G2).withRepoName("ip").withStudentNumber("A0000000B")
+            .withEmail("lydia@example.com").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withUserName("user")
             .withRepoName("ipppp").withStudentNumber("A0000000B").withEmail("anna@example.com").build();
 

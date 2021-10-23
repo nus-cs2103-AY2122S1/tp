@@ -27,8 +27,6 @@ public class DeleteStudentGroupCommand extends Command {
             + "1 ";
 
     public static final String MESSAGE_DELETE_MEMBER_SUCCESS = "Member: %1$s has been removed from group %2$s!";
-    public static final String MESSAGE_WRONG_NUMBER_OF_INDEX =
-            "Only 2 indices separated by white spaces can be provided. Currently %1$s are provided.";
 
     private final Index groupIndex;
     private final Index memberIndex;
