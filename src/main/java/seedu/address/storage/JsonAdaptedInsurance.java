@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -18,7 +19,8 @@ class JsonAdaptedInsurance {
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedInsurance(String insuranceType, String insuranceBrand) {
+    public JsonAdaptedInsurance(@JsonProperty("insuranceType") String insuranceType,
+            @JsonProperty("insuranceBrand") String insuranceBrand) {
         this.insuranceType = insuranceType;
         this.insuranceBrand = insuranceBrand;
     }
@@ -29,16 +31,6 @@ class JsonAdaptedInsurance {
     public JsonAdaptedInsurance(Insurance source) {
         insuranceType = source.getTypeName();
         insuranceBrand = source.getBrand();
-    }
-
-    @JsonValue
-    public String getInsuranceType() {
-        return insuranceType;
-    }
-
-    @JsonValue
-    public String getInsuranceBrand() {
-        return insuranceBrand;
     }
 
     /**
