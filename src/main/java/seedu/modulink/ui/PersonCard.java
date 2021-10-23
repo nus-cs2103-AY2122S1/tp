@@ -1,6 +1,5 @@
 package seedu.modulink.ui;
 
-import java.io.File;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -20,8 +19,6 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private static final File iconFile = new File("src/main/resources/images/fav_icon.png");
-    private static final Image favIcon = new Image(iconFile.toURI().toString());
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -58,6 +55,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ".");
         name.setText(person.getName().fullName);
         if (person.getIsFavourite()) {
+            Image favIcon = new Image(getClass().getResourceAsStream("/images/fav_icon.png"));
             fav.setImage(favIcon);
         }
         studentId.setText(person.getStudentId().value);
