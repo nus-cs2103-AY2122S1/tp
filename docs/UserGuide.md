@@ -5,7 +5,7 @@ title: User Guide
 
 ![gitGud](images/gitgud.png)
 
-gitGud is a **desktop application for managing your friends' gaming information**. gitGud uses a gamer-themed **Graphical User Interface 
+gitGud is a **desktop application for managing your friends' gaming information**. It uses a gamer-themed **Graphical User Interface 
 (GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. 
 
 Keeping track of all of yours friends' gaming information and schedules is difficult and time-consuming.
