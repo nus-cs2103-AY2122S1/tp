@@ -99,7 +99,7 @@ public class CommandResult {
 
     @Override
     public String toString() {
-        return "Feedback To User: " + feedbackToUser + "\n" + "Show Student ListL: " + isShowHelp + "\n"
+        return "Feedback To User: " + feedbackToUser + "\n" + "Show Student List: " + isShowHelp + "\n"
                 + "Show Help: " + isShowHelp + "\n" + "Show Tag List: " + isShowTagList + "\n"
                 + "Show Schedule: " + isShowSchedule + "\n" + "Exit: " + isExit;
     }

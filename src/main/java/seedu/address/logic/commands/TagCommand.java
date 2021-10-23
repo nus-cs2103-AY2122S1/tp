@@ -1,7 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 
 public class TagCommand extends Command {
@@ -14,8 +12,6 @@ public class TagCommand extends Command {
 
     @Override
     public CommandResult execute() throws CommandException {
-        requireNonNull(model);
-        model.getObservableTagList();
         return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
     }
 }
