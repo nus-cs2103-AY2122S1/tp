@@ -11,14 +11,14 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
 
 /**
- * Finds all anime(s) whose have matches to at least one specified keyword of
+ * Finds all anime(s) that matches at least one specified keyword of
  * each category (case-insensitive) and displays them as a list with index numbers
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all anime(s) whose have matches to at "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all anime(s) that matches at "
         + "least one specified keyword of each category (case-insensitive) and "
         + "displays them as a list with index numbers.\n"
         + "Parameters: "

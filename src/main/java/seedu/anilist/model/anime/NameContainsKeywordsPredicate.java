@@ -9,7 +9,7 @@ import seedu.anilist.logic.parser.ParserUtil;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
- * Tests that a {@code Anime}'s {@code Name} matches any the keywords given.
+ * Tests that an {@code Anime}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Anime> {
     private final List<Name> names;

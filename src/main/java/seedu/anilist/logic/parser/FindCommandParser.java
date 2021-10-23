@@ -24,26 +24,26 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         Predicate<Anime> combinedPred = unused -> true;
-        boolean check = false;
+        boolean hasValidArguments = false;
 
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENRE);
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            check = true;
+            hasValidArguments = true;
             combinedPred = combinedPred.and(
                 new NameContainsKeywordsPredicate(argMultimap.getAllValues(PREFIX_NAME))
             );
         }
 
         if (argMultimap.getValue(PREFIX_GENRE).isPresent()) {
-            check = true;
+            hasValidArguments = true;
             combinedPred = combinedPred.and(
                 new GenresContainedPredicate(argMultimap.getAllValues(PREFIX_GENRE))
             );
         }
 
-        if (!check) {
+        if (!hasValidArguments) {
             throw new ParseException(
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }

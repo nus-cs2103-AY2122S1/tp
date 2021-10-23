@@ -65,10 +65,22 @@ public class NameContainsKeywordsPredicateTest {
         // Only one matching keyword
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Black", "Chainsaw"));
         assertTrue(predicate.test(new AnimeBuilder().withName("Attack Chainsaw").build()));
+    }
 
-        // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Attack", "Black"));
-        assertTrue(predicate.test(new AnimeBuilder().withName("Attack Black").build()));
+    @Test
+    public void test_nameContainsMixedCaseKeywords_returnsTrue() throws ParseException {
+        // One keyword
+        NameContainsKeywordsPredicate predicate =
+            new NameContainsKeywordsPredicate(Collections.singletonList("AtTack"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("aTtack black").build()));
+
+        // Multiple keywords
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("attAck", "Black"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("ATtack BLacK").build()));
+
+        // Only one matching keyword
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("bLack", "cHainsaw"));
+        assertTrue(predicate.test(new AnimeBuilder().withName("Attack Chainsaw").build()));
     }
 
     @Test

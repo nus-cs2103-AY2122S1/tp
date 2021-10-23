@@ -65,9 +65,23 @@ public class GenresContainedPredicateTest {
         // Only one matching keyword
         predicate = new GenresContainedPredicate(Arrays.asList("comedy", "shonen"));
         assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
+    }
 
-        // Mixed-case keywords
-        predicate = new GenresContainedPredicate(Arrays.asList("CoMeDy"));
+    @Test
+    public void test_genresSetContainsMixedCaseGenre_returnsTrue() throws ParseException {
+        // Genre will always be lower-cased
+        // One keyword
+        GenresContainedPredicate predicate =
+            new GenresContainedPredicate(Collections.singletonList("coMedy"));
+        assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
+
+
+        // Multiple keywords
+        predicate = new GenresContainedPredicate(Arrays.asList("coMeDy", "hORror"));
+        assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
+
+        // Only one matching keyword
+        predicate = new GenresContainedPredicate(Arrays.asList("coMeDy", "ShoNen"));
         assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
     }
 
