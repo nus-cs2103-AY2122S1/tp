@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,20 +27,24 @@ import seedu.address.model.task.Task;
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCommandParser implements Parser<Command> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public Command parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
                         PREFIX_TASK, PREFIX_DESCRIPTION);
 
         Index index;
+
+        if (argMultimap.getValue(PREFIX_TASK).isPresent()) {
+            return new EditTaskCommandParser().parse(args);
+        }
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -67,7 +72,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        parseTasksForEdit(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(editPersonDescriptor::setTasks);
+//        parseTasksForEdit(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(editPersonDescriptor::setTasks);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
