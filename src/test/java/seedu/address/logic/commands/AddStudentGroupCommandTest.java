@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.showGroupAtIndex;
+import static seedu.address.testutil.TypicalGroups.GROUPNAME1;
+import static seedu.address.testutil.TypicalGroups.GROUPNAME2;
+import static seedu.address.testutil.TypicalGroups.VALID_UNINSTATITATED_GROUP;
 import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.address.testutil.TypicalIndexes.VALID_UNINSTATITATED_GROUP;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -105,7 +106,7 @@ public class AddStudentGroupCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getGroupList().size());
 
         AddStudentGroupCommand addStudentGroupCommand = new AddStudentGroupCommand(outOfBoundIndex,
-                new GroupName("W14-4"));
+                GROUPNAME1);
 
         assertCommandFailure(addStudentGroupCommand, model, Messages.MESSAGE_INVALID_GROUP_MEMBER_INDEX);
     }
@@ -114,16 +115,16 @@ public class AddStudentGroupCommandTest {
     @Test
     public void equals() {
         AddStudentGroupCommand addStudentGroupCommand = new AddStudentGroupCommand(INDEX_FIRST_STUDENT,
-                new GroupName("W14-4"));
+                GROUPNAME1);
         AddStudentGroupCommand addSecondCommand = new AddStudentGroupCommand(INDEX_SECOND_STUDENT,
-                new GroupName("W15-4"));
+                GROUPNAME2);
 
         // same object -> returns true
         assertTrue(addStudentGroupCommand.equals(addStudentGroupCommand));
 
         // same values -> returns true
         AddStudentGroupCommand addFirstCommandCopy = new AddStudentGroupCommand(INDEX_FIRST_STUDENT,
-                new GroupName("W14-4"));
+              GROUPNAME1);
         assertTrue(addStudentGroupCommand.equals(addFirstCommandCopy));
 
         // different types -> returns false
