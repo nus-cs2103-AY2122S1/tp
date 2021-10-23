@@ -26,8 +26,8 @@ public class TypicalModuleLessons {
             .withLessonEndTime("10:00")
             .withRemark("online")
             .build();
-    public static final ModuleLesson CS2100_TUT1 = new ModuleLessonBuilder()
-            .withModuleCode("CS2100 T18")
+    public static final ModuleLesson CS2106_TUT1 = new ModuleLessonBuilder()
+            .withModuleCode("CS2106 T18")
             .withLessonDay("3")
             .withLessonStartTime("17:00")
             .withLessonEndTime("19:00")
@@ -48,6 +48,6 @@ public class TypicalModuleLessons {
     }
 
     public static List<ModuleLesson> getTypicalModuleClasses() {
-        return new ArrayList<>(Arrays.asList(CS2100_LAB1, CS2103_TUT1, CS2100_TUT1));
+        return new ArrayList<>(Arrays.asList(CS2100_LAB1, CS2103_TUT1, CS2106_TUT1));
     }
 }

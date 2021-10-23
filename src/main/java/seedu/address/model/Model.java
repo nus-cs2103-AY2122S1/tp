@@ -64,6 +64,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasModuleLesson(ModuleLesson lesson);
+
     /**
      * Returns true if a module lesson with the same information as {@code moduleLesson} exists in the address book.
      */
@@ -107,6 +109,15 @@ public interface Model {
      */
     void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson);
 
+    /**
+     * Remove all contact saved in contHACKS.
+     */
+    void clearPersons();
+
+    /**
+     * Remove all module lesson saved in contHACKS.
+     */
+    void clearLessons();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

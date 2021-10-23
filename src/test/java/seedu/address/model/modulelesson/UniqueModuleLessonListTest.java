@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalModuleLessons.CS2100_LAB1;
-import static seedu.address.testutil.TypicalModuleLessons.CS2100_TUT1;
+import static seedu.address.testutil.TypicalModuleLessons.CS2106_TUT1;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -83,18 +83,18 @@ public class UniqueModuleLessonListTest {
     @Test
     public void setClass_editedModuleClassHasDifferentIdentity_success() {
         uniqueClassList.add(CS2100_LAB1);
-        uniqueClassList.setModuleLesson(CS2100_LAB1, CS2100_TUT1);
+        uniqueClassList.setModuleLesson(CS2100_LAB1, CS2106_TUT1);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
-        expectedUniqueClassList.add(CS2100_TUT1);
+        expectedUniqueClassList.add(CS2106_TUT1);
         assertEquals(expectedUniqueClassList, uniqueClassList);
     }
 
     @Test
     public void setModuleClass_editedClassHasNonUniqueIdentity_throwsDuplicateModuleClassException() {
         uniqueClassList.add(CS2100_LAB1);
-        uniqueClassList.add(CS2100_TUT1);
+        uniqueClassList.add(CS2106_TUT1);
         assertThrows(DuplicateModuleLessonException.class, () -> uniqueClassList.setModuleLesson(
-                CS2100_LAB1, CS2100_TUT1));
+                CS2100_LAB1, CS2106_TUT1));
     }
 
     @Test
@@ -124,7 +124,7 @@ public class UniqueModuleLessonListTest {
     public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
         uniqueClassList.add(CS2100_LAB1);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
-        expectedUniqueClassList.add(CS2100_TUT1);
+        expectedUniqueClassList.add(CS2106_TUT1);
         uniqueClassList.setModuleLessons(expectedUniqueClassList);
         assertEquals(expectedUniqueClassList, uniqueClassList);
     }
@@ -137,10 +137,10 @@ public class UniqueModuleLessonListTest {
     @Test
     public void setModuleClasses_list_replacesOwnListWithProvidedList() {
         uniqueClassList.add(CS2100_LAB1);
-        List<ModuleLesson> classList = Collections.singletonList(CS2100_TUT1);
+        List<ModuleLesson> classList = Collections.singletonList(CS2106_TUT1);
         uniqueClassList.setModuleLessons(classList);
         UniqueModuleLessonList expectedUniqueClassList = new UniqueModuleLessonList();
-        expectedUniqueClassList.add(CS2100_TUT1);
+        expectedUniqueClassList.add(CS2106_TUT1);
         assertEquals(expectedUniqueClassList, uniqueClassList);
     }
 

@@ -9,15 +9,17 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.modulelesson.ClearModuleLessonCommand;
+import seedu.address.logic.commands.modulelesson.ListModuleLessonCommand;
 import seedu.address.logic.commands.person.ClearPersonCommand;
 import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.modulelesson.AddModuleLessonCommandParser;
+import seedu.address.logic.parser.modulelesson.EditModuleLessonCommandParser;
 import seedu.address.logic.parser.person.AddPersonCommandParser;
 import seedu.address.logic.parser.person.DeletePersonCommandParser;
 import seedu.address.logic.parser.person.EditPersonCommandParser;
 import seedu.address.logic.parser.person.FindPersonCommandParser;
-import seedu.address.logic.parser.person.RemarkPersonCommandParser;
 
 /**
  * Parses user input.
@@ -63,6 +65,15 @@ public class AddressBookParser {
 
         case LIST_PERSON:
             return new ListPersonCommand();
+
+        case LIST_MODULE_LESSON:
+            return new ListModuleLessonCommand();
+
+        case EDIT_MODULE_LESSON:
+            return new EditModuleLessonCommandParser().parse(arguments);
+
+        case CLEAR_MODULE_LESSON:
+            return new ClearModuleLessonCommand();
 
         case EXIT:
             return new ExitCommand();

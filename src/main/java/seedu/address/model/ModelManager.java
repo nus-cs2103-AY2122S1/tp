@@ -88,6 +88,8 @@ public class ModelManager implements Model {
 
     /**
      * Sorts the address book data in alphabetical order.
+     * For {@code Person}, it is sorted by their name.
+     * For {@code ModuleLesson}, it is sorted by their module code.
      */
     @Override
     public void sortAddressBook() {
@@ -145,6 +147,16 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedLesson);
 
         addressBook.setModuleLesson(target, editedLesson);
+    }
+
+    @Override
+    public void clearPersons() {
+        addressBook.clearPersonList();
+    }
+
+    @Override
+    public void clearLessons() {
+        addressBook.clearLessonList();
     }
 
     //=========== Filtered Person List Accessors =============================================================
