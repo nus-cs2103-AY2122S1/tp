@@ -247,10 +247,10 @@ ClassMATE allows the user to manage information relevant to the TutorialClass. A
 
 #### Current Implementation
 
-The class `Classmate` facilitates all operations related to tutorial classes. It maintains a
-`UniqueTutorialClassList` of containing all tutorial classes, as well as a `FliteredList` of `TutorialClass` instances reflecting the current state of the 
-tutorial class list to be displayed to the user. The `Classmate` conatins a summary
-of all the logic of the tutorial class commands (e.g. `AddClassCommand`)  executed on the `UniqueTutorialCLassList`.
+The class `Classmate` facilitates all operations related to tutorial classes. It maintains a `UniqueTutorialClassList`
+of containing all tutorial classes, as well as a `FliteredList` of `TutorialClass` instances reflecting the current
+state of the tutorial class list to be displayed to the user. The `Classmate` contains a summary of all the logic of the
+tutorial class commands (e.g. `AddClassCommand`)  executed on the `UniqueTutorialCLassList`.
 
 The following operations are implemented:
 * `Classmate#hasTutorialClass(TutorialClass tutorialClass)` - Checks if tutorial class is in ClassMATE
@@ -265,7 +265,7 @@ These operations are exposed in the `Model` interface as `Model#hasTutorialClass
 
 Given below is an example of how the tutorial class features can be used:
 
-Step 1. The user launches the application for the first time. The `UniqueTutorialClassList` would be derived from the 
+Step 1. The user launches the application for the first time. The `UniqueTutorialClassList` would be derived from the
 initial ClassMATE state, and all tutorial classes stored will be displayed.
 
 Step 2. The user executes an `addc c/G00 s/Tues 12 - 2pm` command. The `addc` command calls `Model#addTutorialClass()`, adding a new tutorial class to Classmate. This modifies and saves the
@@ -301,21 +301,20 @@ Execution of the `AddClassCommand`
 #### Aspect: Finding Tutorial Classes
 
 * Alternative 1 (current choice): Find Tutorial Classes by selecting all classes with classcodes matching the search keyword
-    * Pros: Shorter keyword to type, therefore increasing user typing speed. User is also able to 
-    find multiple classes
+    * Pros: Shorter keyword to type, therefore increasing user typing speed. User is also able to find multiple classes
     * Cons: Lower Accuracy in searching for a specific class, having to search through multiple classes
     
-* Alternative 2: Find tutorial class by exact classcode
+* Alternative 2: Find tutorial class by exact class code
     * Pros: Higher Accuracy in search
-    * Cons: Takes longer for user to type commands, less user friendly
+    * Cons: Takes longer for user to type commands, less user-friendly
     
 #### Aspect: Student and Tutorial Class lists
 * Alternative 1 (current choice): Use two separate lists to store students and tutorial classes
-    * Pros: Faster, simpler command executions for student and tutorial class commands. 
+    * Pros: Faster, simpler command executions for student and tutorial class commands.
     Easier to maintain overall. Therefore, all students and all tutorial classes can be accessed independent of each other.
-    * Cons: Class specific student commands are slower. For example a user is required to 'viewc' in order to filter just the students in the class,
+    * Cons: Class specific student commands are slower. For example a user is required to `viewc` in order to filter just the students in the class,
     increasing the overall time
-* Alternative 2: Nesting for students within Tutorial Class
+* Alternative 2: Nesting of students within Tutorial Class
     * Pros: Faster in class specific student commands and students are better organised.
     * Complexity of tutorial classes is increased and slower to navigate to view other tutorial classes or perform general commands on the students
 
@@ -333,7 +332,7 @@ ClassMATE allows the user to manage information about Class Participation gradin
 
 Each Student will contain a `List` known as `marks` that will store all participation mark values for the Student. This list is internally stored as an `ArrayList`. Using an `Enumeration` of Student Marks, which contains the following Marks:
 
-* `POOR` (0 marks) 
+* `POOR` (0 marks)
 * `LOW` (1 mark)
 * `AVG` (2 marks)
 * `GOOD` (3 marks)
@@ -351,7 +350,7 @@ These commands inherit from the `Command` class, and are named accordingly.
 
 Given below is an example of how the student marks features can be used:
 
-Step 1. The user launches the application for the first time. The existing `marks` list would be derived from the 
+Step 1. The user launches the application for the first time. The existing `marks` list would be derived from the
 initial ClassMATE state, and all students stored will be displayed along with their currently stored marks below their name
 
 Step 2. The user executes an `addm 1 m/low` command. The `addm` command calls `Model#setStudent()`, adding the mark provided (`LOW` in this case) to Classmate. This modifies and saves the state of ClassMATE. The updated `UniqueStudentList` will be displayed in the `ClassListPanel` to the user.
@@ -376,7 +375,7 @@ During the parsing, a new `Student` instance is created. This `Student` instance
 
 The *Sequence Diagram* below summarizes the aforementioned steps.
 
-//TODO: Add sequence diagram for AddMark. 
+![AddMarkSequenceDiagram](images/AddMarkSequenceDiagram.png)
 
 Execution of the `AddMarkCommand`
 
@@ -391,7 +390,29 @@ Execution of the `AddMarkCommand`
   * Pros: Since there are 13 weeks and two tutorials a week, there will be a projected 26 tutorials held. Thus, a fixed size of 26 elements will allow the list to reflect this requirement.
   * Cons: Instructors are limited to this 26-class limit, and cannot store marks for extra tutorials/make-up sessions.
 
+### ClassCode Implementation Feature
+(Contributed by Zhou Yirui)
 
+ClassMATE allows user to assign student to a tutorial class using a ClassCode. A user is able to:
+
+1. Add ClassCode to a student
+2. Edit ClassCode of a student
+
+#### Current Implementation
+The class `ClassCode` facilitates all operations related to classCode. `ClassCode` is implemented such that a
+Tutorial Class with the corresponding ClassCode must exist before the ClassCode can be added. Tutorial Class `G00` is a
+default class that do not need to be created.
+
+Given below is an example of how classCode can be used.
+
+Step 1: After launching the application for the first time, user executes `addstu n/Abigail p/91199119 e/ab@gmail.com a/Downling Park #15-20 c/G08`.
+The `addstu` command calls `Model#hasTutorialClass()`, and the model component checks if the TutorialClass specified by the
+class code exists. If it exists, the student is added successfully, else, an error message is given.
+
+
+#### Proposed Implementation
+Step 2: The user deletes TutorialClass G08 using the `deletec` command. The `deletec` command changes the ClassCode of all students
+of TutorialClass `G08` to `G00`.
 
 ### Tutorial Group Management Features
 (Contributed by Ngu Yi Yang and Zhou Yirui)
@@ -594,6 +615,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ClassMATE shows an error message.
 
       Use case resumes at step 2.
+
+**Use case: Delete Latest Mark from Student**
+
+**MSS**
+
+1. User lists all students with `liststu`
+
+2. ClassMATE shows a list of students
+
+3. User enters command `deletelm x` where 'x' is the index of student to delete marks of
+
+4. ClassMATE deletes the latest mark stored for that student
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+  * 3a1. ClassMATE shows an error message.
+
+  Use case resumes at step 2.
+
+* 3b. There are no marks stored for the student.
+
+  * 3b1. ClassMATE shows an error message.
+
+  Use case ends.
 
 ### Non-Functional Requirements
 

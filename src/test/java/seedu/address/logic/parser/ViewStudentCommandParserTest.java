@@ -13,7 +13,7 @@ class ViewStudentCommandParserTest {
     private ViewStudentCommandParser parser = new ViewStudentCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
+    public void parse_validArgs_returnsViewStudentCommand() {
         assertParseSuccess(parser, "1", new ViewStudentCommand(INDEX_FIRST_STUDENT));
     }
 

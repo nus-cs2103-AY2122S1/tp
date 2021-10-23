@@ -16,10 +16,12 @@ import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindClassCommand;
 import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListClassCommand;
 import seedu.address.logic.commands.ListStudentCommand;
+import seedu.address.logic.commands.ViewClassCommand;
 import seedu.address.logic.commands.ViewStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -71,11 +73,20 @@ public class ClassmateParser {
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
 
+        case ViewClassCommand.COMMAND_WORD:
+            return new ViewClassCommandParser().parse(arguments);
+
+        case ViewStudentCommand.COMMAND_WORD:
+            return new ViewStudentCommandParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindStudentCommand.COMMAND_WORD:
             return new FindStudentCommandParser().parse(arguments);
+
+        case FindClassCommand.COMMAND_WORD:
+            return new FindClassCommandParser().parse(arguments);
 
         case ListStudentCommand.COMMAND_WORD:
             return new ListStudentCommand();
@@ -89,12 +100,10 @@ public class ClassmateParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case ViewStudentCommand.COMMAND_WORD:
-            return new ViewStudentCommandParser().parse(arguments);
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
 }
+
