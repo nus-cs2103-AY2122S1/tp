@@ -19,7 +19,7 @@ import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MarkStudentAttCommand;
@@ -72,11 +72,11 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_find() throws Exception {
+    public void parseCommand_findStudent() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
+                FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
