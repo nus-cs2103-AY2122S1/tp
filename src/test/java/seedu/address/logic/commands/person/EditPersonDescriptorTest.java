@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
@@ -57,7 +57,7 @@ public class EditPersonDescriptorTest {
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different module codes -> return false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModuleCodes(VALID_MODULE_CODE_CS2030S).build();
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withModuleCodes(VALID_MODULE_CODE_CS2030S_T12).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

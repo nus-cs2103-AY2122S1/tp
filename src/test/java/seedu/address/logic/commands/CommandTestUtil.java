@@ -3,11 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELE_HANDLE;
+import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -16,11 +19,17 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand;
 import seedu.address.logic.commands.person.EditPersonCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.modulelesson.LessonDay;
+import seedu.address.model.modulelesson.LessonTime;
+import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
+import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EditLessonDescriptorBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -38,8 +47,14 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_TELE_HANDLE_AMY = "@amytang";
     public static final String VALID_TELE_HANDLE_BOB = "@bobgoh";
-    public static final String VALID_MODULE_CODE_CS2030S = "CS2030S T12";
+    public static final String VALID_MODULE_CODE_CS2030S_T12 = "CS2030S T12";
     public static final String VALID_MODULE_CODE_CS2040 = "CS2040";
+    public static final String VALID_MODULE_CODE_CS2040S_B05 = "CS2040S B05";
+    public static final String VALID_LESSON_DAY_TUES = "2";
+    public static final String VALID_LESSON_DAY_WED = "3";
+    public static final String VALID_LESSON_TIME_11 = "11:00";
+    public static final String VALID_LESSON_TIME_12 = "12:00";
+    public static final String VALID_MODULE_LESSON_REMARK = "COM1-130";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -49,10 +64,15 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String TELE_HANDLE_DESC_AMY = " " + PREFIX_TELE_HANDLE + VALID_TELE_HANDLE_AMY;
     public static final String TELE_HANDLE_DESC_BOB = " " + PREFIX_TELE_HANDLE + VALID_TELE_HANDLE_BOB;
-    public static final String MODULE_CODE_DESC_CS2030S = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2030S;
+    public static final String MODULE_CODE_DESC_CS2030S_T12 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2030S_T12;
     public static final String MODULE_CODE_DESC_CS2040 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    public static final String LESSON_DAY_DESC_TUES = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_TUES;
+    public static final String LESSON_DAY_DESC_WED = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_WED;
+    public static final String LESSON_TIME_DESC_11 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11;
+    public static final String LESSON_TIME_DESC_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_12;
+    public static final String REMARK_DESC_MODULES = " " + PREFIX_REMARK + VALID_MODULE_LESSON_REMARK;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -60,12 +80,19 @@ public class CommandTestUtil {
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "yoz"; // missing '@' symbol
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "CS 50"; // space not allowed
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "Ãgent"; // non-ASCII character
+    public static final String INVALID_LESSON_DAY_DESC = " " + PREFIX_LESSON_DAY + "9"; // not a day of a week
+    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "99:00"; // not a valid time
+
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditPersonCommand.EditPersonDescriptor DESC_AMY;
     public static final EditPersonCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final EditModuleLessonCommand.EditLessonDescriptor DESC_CS2040S;
+    public static final EditModuleLessonCommand.EditLessonDescriptor DESC_CS2030S;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -74,6 +101,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
+        DESC_CS2040S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2040S_B05))
+                .withLessonDay(new LessonDay("2")).withLessonTime(new LessonTime("10:00")).build();
+        DESC_CS2030S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
+                .withLessonDay(new LessonDay("5")).withLessonTime(new LessonTime("13:30")).build();
     }
 
     /**
@@ -118,8 +149,9 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered person list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
@@ -133,7 +165,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the persons at the given {@code targetIndex1} and
+     * Updates {@code model}'s filtered person list to show only the persons at the given {@code targetIndex1} and
      * {@code targetIndex2} in the {@code model}'s address book.
      */
     public static void showPersonAtMultipleIndex(Model model, Index targetIndex1, Index targetIndex2) {
@@ -150,4 +182,18 @@ public class CommandTestUtil {
         assertEquals(2, model.getFilteredPersonList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered lesson list to show only the lesson at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showLessonAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleLessonList().size());
+
+        ModuleLesson lesson = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
+        final String moduleCode = lesson.getModuleCode().getModuleCodeName();
+        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(moduleCode));
+        System.out.println(model.getFilteredModuleLessonList());
+
+        assertEquals(1, model.getFilteredModuleLessonList().size());
+    }
 }
