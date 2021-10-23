@@ -1,16 +1,17 @@
 package seedu.address.model.organisation;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-
-import static java.util.Objects.requireNonNull;
 
 public class Organisation {
 
     private final Name name;
     private final UniquePersonList persons;
 
+    /**
+     * Constructor for Organisation.
+     * @param n name of organisation
+     */
     public Organisation(String n) {
         name = new Name(n);
         persons = new UniquePersonList();

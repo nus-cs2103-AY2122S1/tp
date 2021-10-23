@@ -1,7 +1,6 @@
 package seedu.address.model.organisation;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
@@ -13,10 +12,11 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of organisations that enforces uniqueness between its elements and does not allow nulls.
- * An organisation is considered unique by comparing using {@code Organisation#isSameOrganisation(Organisation)}. As such, adding and updating of
- * organisations uses Organisation#isSameOrganisation(Organisation) for equality so as to ensure that the organisation being added or updated is
- * unique in terms of identity in the UniqueOrganisationList. However, the removal of a organisation uses Organisation#equals(Object) so
- * as to ensure that the organisation with exactly the same fields will be removed.
+ * An organisation is considered unique by comparing using {@code Organisation#isSameOrganisation(Organisation)}.
+ * As such, adding and updating of organisations uses Organisation#isSameOrganisation(Organisation) for equality
+ * so as to ensure that the organisation being added or updated is unique in terms of identity in the
+ * UniqueOrganisationList. However, the removal of a organisation uses Organisation#equals(Object) so as
+ * to ensure that the organisation with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
@@ -80,25 +80,25 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
         internalList.add(toAdd);
     }
 
-    /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
-     */
-//    public void setPerson(Person target, Person editedPerson) {
-//        requireAllNonNull(target, editedPerson);
-//
-//        int index = internalList.indexOf(target);
-//        if (index == -1) {
-//            throw new PersonNotFoundException();
-//        }
-//
-//        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-//            throw new DuplicatePersonException();
-//        }
-//
-//        internalList.set(index, editedPerson);
-//    }
+    //    /**
+    //     * Replaces the person {@code target} in the list with {@code editedPerson}.
+    //     * {@code target} must exist in the list.
+    //     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+    //     */
+    //    public void setPerson(Person target, Person editedPerson) {
+    //        requireAllNonNull(target, editedPerson);
+    //
+    //        int index = internalList.indexOf(target);
+    //        if (index == -1) {
+    //            throw new PersonNotFoundException();
+    //        }
+    //
+    //        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+    //            throw new DuplicatePersonException();
+    //        }
+    //
+    //        internalList.set(index, editedPerson);
+    //    }
 
     /**
      * Removes the equivalent organisation from the list.
@@ -112,23 +112,23 @@ public class UniqueOrganisationList implements Iterable<Organisation> {
         }
     }
 
-//    public void setPersons(seedu.address.model.person.UniquePersonList replacement) {
-//        requireNonNull(replacement);
-//        internalList.setAll(replacement.internalList);
-//    }
-//
-//    /**
-//     * Replaces the contents of this list with {@code persons}.
-//     * {@code persons} must not contain duplicate persons.
-//     */
-//    public void setPersons(List<Person> persons) {
-//        requireAllNonNull(persons);
-//        if (!personsAreUnique(persons)) {
-//            throw new DuplicatePersonException();
-//        }
-//
-//        internalList.setAll(persons);
-//    }
+    //    public void setPersons(seedu.address.model.person.UniquePersonList replacement) {
+    //        requireNonNull(replacement);
+    //        internalList.setAll(replacement.internalList);
+    //    }
+    //
+    //    /**
+    //     * Replaces the contents of this list with {@code persons}.
+    //     * {@code persons} must not contain duplicate persons.
+    //     */
+    //    public void setPersons(List<Person> persons) {
+    //        requireAllNonNull(persons);
+    //        if (!personsAreUnique(persons)) {
+    //            throw new DuplicatePersonException();
+    //        }
+    //
+    //        internalList.setAll(persons);
+    //    }
 
     /**
      * Sort organisation list alphabetically
