@@ -12,10 +12,10 @@ import seedu.address.model.order.OrderList;
 
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the order-book level
+ * Duplicates are not allowed (by .isSameOrder comparison)
  */
-public class SalesOrderBook implements ReadOnlySalesOrderBook {
+public class OrderBook implements ReadOnlyOrderBook {
 
     private final OrderList orders;
 
@@ -30,19 +30,19 @@ public class SalesOrderBook implements ReadOnlySalesOrderBook {
         orders = new OrderList();
     }
 
-    public SalesOrderBook() {}
+    public OrderBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an OrderBook using the Persons in the {@code toBeCopied}
      */
-    public SalesOrderBook(ReadOnlySalesOrderBook toBeCopied) {
+    public OrderBook(ReadOnlyOrderBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
 
     /**
-     * Replaces the contents of the tasks list with {@code tasks}.
-     * {@code tasks} must not contain duplicate tasks.
+     * Replaces the contents of the orders list with {@code orders}.
+     * {@code orders} must not contain duplicate tasks.
      */
     public void setOrders(List<Order> orders) {
         this.orders.setOrders(orders);
@@ -50,9 +50,9 @@ public class SalesOrderBook implements ReadOnlySalesOrderBook {
 
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code OrderBook} with {@code newData}.
      */
-    public void resetData(ReadOnlySalesOrderBook newData) {
+    public void resetData(ReadOnlyOrderBook newData) {
         requireNonNull(newData);
 
         setOrders(newData.getOrderList());
@@ -100,8 +100,8 @@ public class SalesOrderBook implements ReadOnlySalesOrderBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SalesOrderBook // instanceof handles nulls
-                && orders.equals(((SalesOrderBook) other).orders));
+                || (other instanceof OrderBook // instanceof handles nulls
+                && orders.equals(((OrderBook) other).orders));
     }
 
     @Override

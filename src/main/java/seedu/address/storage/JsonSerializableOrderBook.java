@@ -9,44 +9,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ReadOnlySalesOrderBook;
-import seedu.address.model.SalesOrderBook;
+import seedu.address.model.OrderBook;
+import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.order.Order;
 
 /**
- * An Immutable TaskBook that is serializable to JSON format.
+ * An Immutable SalesBook that is serializable to JSON format.
  */
-@JsonRootName(value = "salesOrder")
-class JsonSerializableSalesOrderBook {
+@JsonRootName(value = "orderBook")
+class JsonSerializableOrderBook {
 
     public static final String MESSAGE_DUPLICATE_TASK = "sales order contains duplicate task(s).";
 
     private final List<JsonAdaptedOrder> orders = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableTaskList} with the given task.
+     * Constructs a {@code JsonSerializableOrderBook} with the given task.
      */
     @JsonCreator
-    public JsonSerializableSalesOrderBook(@JsonProperty("orders") List<JsonAdaptedOrder> orders) {
+    public JsonSerializableOrderBook(@JsonProperty("orders") List<JsonAdaptedOrder> orders) {
         this.orders.addAll(orders);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyOrderBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableOrderBook}.
      */
-    public JsonSerializableSalesOrderBook(ReadOnlySalesOrderBook source) {
+    public JsonSerializableOrderBook(ReadOnlyOrderBook source) {
         orders.addAll(source.getOrderList().stream().map(JsonAdaptedOrder::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code TaskBook} object.
+     * Converts this order book into the model's {@code OrderBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */
-    public SalesOrderBook toModelType() throws IllegalValueException {
-        SalesOrderBook orderBook = new SalesOrderBook();
+    public OrderBook toModelType() throws IllegalValueException {
+        OrderBook orderBook = new OrderBook();
         for (JsonAdaptedOrder jsonAdaptedOrder : orders) {
             Order order = jsonAdaptedOrder.toModelType();
             orderBook.addOrder(order);

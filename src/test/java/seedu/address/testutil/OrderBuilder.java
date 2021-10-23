@@ -31,7 +31,7 @@ public class OrderBuilder {
     }
 
     /**
-     * Initializes the TaskBuilder with the data of {@code taskToCopy}.
+     * Initializes the OrderBuilder with the data of {@code orderToCopy}.
      */
     public OrderBuilder(Order orderToCopy) {
         customer = orderToCopy.getCustomer();

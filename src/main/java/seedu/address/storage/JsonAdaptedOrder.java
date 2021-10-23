@@ -24,7 +24,7 @@ class JsonAdaptedOrder {
     private final String isComplete;
 
     /**
-     * Constructs a {@code JsonAdaptedTask} with the given task details.
+     * Constructs a {@code JsonAdaptedOrder} with the given order details.
      */
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("id") String id, @JsonProperty("date") String date,
@@ -38,7 +38,7 @@ class JsonAdaptedOrder {
     }
 
     /**
-     * Converts a given {@code Task} into this class for Jackson use.
+     * Converts a given {@code Order} into this class for Jackson use.
      */
     public JsonAdaptedOrder(Order source) {
         id = String.valueOf(source.getId());
@@ -50,9 +50,9 @@ class JsonAdaptedOrder {
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted order object into the model's {@code Order} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted order.
      */
     public Order toModelType() throws IllegalValueException {
 

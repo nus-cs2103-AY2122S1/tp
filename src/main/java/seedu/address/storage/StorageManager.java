@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySalesOrderBook;
+import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.UserPrefs;
@@ -21,7 +21,7 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private TaskBookStorage taskListStorage;
-    private SalesOrderBookStorage salesOrderBookStorage;
+    private OrderBookStorage orderBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
@@ -29,13 +29,13 @@ public class StorageManager implements Storage {
      */
 
     public StorageManager(AddressBookStorage addressBookStorage, TaskBookStorage taskListStorage,
-                          SalesOrderBookStorage salesOrderBookStorage, UserPrefsStorage userPrefsStorage) {
+                          OrderBookStorage orderBookStorage, UserPrefsStorage userPrefsStorage) {
 
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.taskListStorage = taskListStorage;
-        this.salesOrderBookStorage = salesOrderBookStorage;
+        this.orderBookStorage = orderBookStorage;
     }
 
     // ================ UserPrefs methods ==============================
@@ -116,31 +116,31 @@ public class StorageManager implements Storage {
     // ================ SalesOrderBook methods ==============================
 
     @Override
-    public Path getSalesOrderFilePath() {
-        return salesOrderBookStorage.getSalesOrderFilePath();
+    public Path getOrderFilePath() {
+        return orderBookStorage.getOrderFilePath();
     }
 
     @Override
-    public Optional<ReadOnlySalesOrderBook> readSalesOrderBook() throws DataConversionException, IOException {
-        return readSalesOrderBook(salesOrderBookStorage.getSalesOrderFilePath());
+    public Optional<ReadOnlyOrderBook> readOrderBook() throws DataConversionException, IOException {
+        return readOrderBook(orderBookStorage.getOrderFilePath());
     }
 
     @Override
-    public Optional<ReadOnlySalesOrderBook> readSalesOrderBook(Path filePath)
+    public Optional<ReadOnlyOrderBook> readOrderBook(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return salesOrderBookStorage.readSalesOrderBook(filePath);
+        return orderBookStorage.readOrderBook(filePath);
     }
 
     @Override
-    public void saveSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook) throws IOException {
-        saveSalesOrderBook(salesOrderBook, salesOrderBookStorage.getSalesOrderFilePath());
+    public void saveOrderBook(ReadOnlyOrderBook orderBook) throws IOException {
+        saveOrderBook(orderBook, orderBookStorage.getOrderFilePath());
     }
 
     @Override
-    public void saveSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook, Path filePath) throws IOException {
+    public void saveOrderBook(ReadOnlyOrderBook orderBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        salesOrderBookStorage.saveSalesOrderBook(salesOrderBook, filePath);
+        orderBookStorage.saveOrderBook(orderBook, filePath);
     }
 
 }

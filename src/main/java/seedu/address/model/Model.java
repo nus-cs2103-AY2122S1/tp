@@ -144,22 +144,22 @@ public interface Model {
 
 
     /**
-     * Returns the user prefs' Sales order file path.
+     * Returns the user prefs' Order books  file path.
      */
-    Path getSaleOrderPath();
+    Path getOrderPath();
 
     /**
-     * Sets the user prefs' Sales order  file path.
+     * Sets the user prefs'  Order books  file path.
      */
-    void setSalesOrderBookFilePath(Path taskListFilePath);
+    void setOrderBookFilePath(Path orderBookFilePath);
 
     /**
-     * Replaces Sales order book data with the data in {@code salesOrderBook}.
+     * Replaces Order books  data with the data in {@code salesOrderBook}.
      */
-    void setSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook);
+    void setOrderBook(ReadOnlyOrderBook orderBook);
 
     /** Returns the TaskList */
-    ReadOnlySalesOrderBook getSalesOrderBook();
+    ReadOnlyOrderBook getOrderBook();
 
 
     /**

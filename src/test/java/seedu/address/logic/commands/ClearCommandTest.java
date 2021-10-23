@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalOrders.getTypicalSalesOrderBook;
+import static seedu.address.testutil.TypicalOrders.getTypicalOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
@@ -24,15 +24,11 @@ public class ClearCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-<<<<<<< HEAD
         Model model = new ModelManager(getTypicalAddressBook(),
-                getTypicalTaskList(), getTypicalSalesOrderBook(), new UserPrefs());
+                getTypicalTaskBook(), getTypicalOrderBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(),
-                getTypicalTaskList(), getTypicalSalesOrderBook(), new UserPrefs());
-=======
-        Model model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(), new UserPrefs());
->>>>>>> refactor-taskManager
+                getTypicalTaskBook(), getTypicalOrderBook(), new UserPrefs());
+
         expectedModel.setAddressBook(new AddressBook());
 
         assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);

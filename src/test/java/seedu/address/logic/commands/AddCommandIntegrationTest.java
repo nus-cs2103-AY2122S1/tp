@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalOrders.getTypicalSalesOrderBook;
+import static seedu.address.testutil.TypicalOrders.getTypicalOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
@@ -24,12 +24,8 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-<<<<<<< HEAD
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskList(),
-                getTypicalSalesOrderBook(), new UserPrefs());
-=======
-        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(), new UserPrefs());
->>>>>>> refactor-taskManager
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(),
+                getTypicalOrderBook(), new UserPrefs());
     }
 
     @Test
@@ -37,7 +33,7 @@ public class AddCommandIntegrationTest {
         Person validPerson = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(),
-                model.getTaskBook(), model.getSalesOrderBook(), new UserPrefs());
+                model.getTaskBook(), model.getOrderBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);
 
         assertCommandSuccess(new AddCommand(validPerson), model,

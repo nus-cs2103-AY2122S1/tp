@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.SalesOrderBook;
+import seedu.address.model.OrderBook;
 import seedu.address.model.order.Order;
 
 public class TypicalOrders {
@@ -32,8 +32,8 @@ public class TypicalOrders {
     /**
      * Returns an {@code AddressBook} with all the typical tasks added.
      */
-    public static SalesOrderBook getTypicalSalesOrderBook() {
-        SalesOrderBook sb = new SalesOrderBook();
+    public static OrderBook getTypicalOrderBook() {
+        OrderBook sb = new OrderBook();
         for (Order order : getTypicalOrder()) {
             sb.addOrder(order);
         }

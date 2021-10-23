@@ -25,7 +25,7 @@ public class ModelManager implements Model {
 
     private final AddressBook addressBook;
     private final TaskBook taskBook;
-    private final SalesOrderBook salesOrderBook;
+    private final OrderBook orderBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
@@ -35,22 +35,22 @@ public class ModelManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskBook,
-                        ReadOnlySalesOrderBook salesOrderBook, ReadOnlyUserPrefs userPrefs) {
+                        ReadOnlyOrderBook salesOrderBook, ReadOnlyUserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, taskBook, salesOrderBook, userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
         this.taskBook = new TaskBook(taskBook);
-        this.salesOrderBook = new SalesOrderBook(salesOrderBook);
+        this.orderBook = new OrderBook(salesOrderBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());
-        filteredOrders = new FilteredList<>(this.salesOrderBook.getOrderList());
+        filteredOrders = new FilteredList<>(this.orderBook.getOrderList());
 
     }
 
     public ModelManager() {
-        this(new AddressBook(), new TaskBook(), new SalesOrderBook(), new UserPrefs());
+        this(new AddressBook(), new TaskBook(), new OrderBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -199,54 +199,54 @@ public class ModelManager implements Model {
     //=========== Order Management ==================================================================================
 
     @Override
-    public Path getSaleOrderPath() {
-        return userPrefs.getSalesOrderBookFilePath();
+    public Path getOrderPath() {
+        return userPrefs.getOrderBookFilePath();
     }
 
     @Override
-    public void setSalesOrderBookFilePath(Path salesOrderBookFilePath) {
-        requireNonNull(salesOrderBookFilePath);
-        userPrefs.getSalesOrderBookFilePath(salesOrderBookFilePath);
+    public void setOrderBookFilePath(Path orderBookFilePath) {
+        requireNonNull(orderBookFilePath);
+        userPrefs.getOrderBookFilePath(orderBookFilePath);
     }
 
     @Override
-    public void setSalesOrderBook(ReadOnlySalesOrderBook salesOrderBook) {
-        this.salesOrderBook.resetData(salesOrderBook);
+    public void setOrderBook(ReadOnlyOrderBook orderBook) {
+        this.orderBook.resetData(orderBook);
     }
 
     @Override
-    public ReadOnlySalesOrderBook getSalesOrderBook() {
-        return salesOrderBook;
+    public ReadOnlyOrderBook getOrderBook() {
+        return orderBook;
     }
 
     /**
-     * Checks if orderlist has this order.
+     * Checks if order book has this order.
      */
     @Override
     public boolean hasOrder(Order order) {
         requireNonNull(order);
-        return salesOrderBook.hasOrder(order);
+        return orderBook.hasOrder(order);
     }
 
     @Override
     public void setOrder(Order target, Order editedOrder) {
         requireAllNonNull(target, editedOrder);
-        salesOrderBook.setOrder(target, editedOrder);
+        orderBook.setOrder(target, editedOrder);
     }
 
     /**
-     * Adds an order to orderlist.
+     * Adds an order to order book.
      */
     public void addOrder(Order toAdd) {
-        salesOrderBook.addOrder(toAdd);
+        orderBook.addOrder(toAdd);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     /**
-     * Deletes an order from orderlist.
+     * Deletes an order from order book.
      */
     public void deleteOrder(Order toDelete) {
-        salesOrderBook.deleteOrder(toDelete);
+        orderBook.deleteOrder(toDelete);
     }
 
     @Override
@@ -264,7 +264,7 @@ public class ModelManager implements Model {
      * Marks an order as completed
      */
     public void markOrder(Order order) {
-        salesOrderBook.markOrder(order);
+        orderBook.markOrder(order);
     }
 
     /**
@@ -285,7 +285,7 @@ public class ModelManager implements Model {
     private ClientTotalOrder getClientTotalOrder(Person client) {
         String clientName = client.getName().toString();
         Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
-        double totalOrder = salesOrderBook.getOrderList().stream()
+        double totalOrder = orderBook.getOrderList().stream()
                 .filter(correctClient)
                 .mapToDouble(Order::getAmountAsDouble)
                 .sum();
@@ -331,14 +331,14 @@ public class ModelManager implements Model {
 
     @Override
     public void sortOrderList(Comparator<Order> comparator) {
-        salesOrderBook.sortOrders(comparator);
+        orderBook.sortOrders(comparator);
         filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
     }
 
     @Override
     public void resetOrderView() {
         Comparator<Order> defaultComparator = Order::compareTo;
-        salesOrderBook.sortOrders(defaultComparator);
+        orderBook.sortOrders(defaultComparator);
         updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 

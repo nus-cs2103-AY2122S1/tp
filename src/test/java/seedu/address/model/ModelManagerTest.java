@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.SalesOrderBookBuilder;
+import seedu.address.testutil.OrderBookBuilder;
 import seedu.address.testutil.TaskBookBuilder;
 
 public class ModelManagerTest {
@@ -102,26 +102,18 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-<<<<<<< HEAD
-        TaskBook taskList = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
-        TaskBook differentTaskList = new TaskBook();
-        SalesOrderBook salesOrderBook = new SalesOrderBookBuilder().withOrder(SALESORDER1)
-                .withOrder(SALESORDER1).build();
-        SalesOrderBook differentSalesOrderBook = new SalesOrderBook();
-        UserPrefs userPrefs = new UserPrefs();
 
-        // same values -> returns true
-        modelManager = new ModelManager(addressBook, taskList, salesOrderBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, taskList, salesOrderBook, userPrefs);
-=======
         TaskBook taskBook = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
         TaskBook differentTaskBook = new TaskBook();
+        OrderBook salesOrderBook = new OrderBookBuilder().withOrder(SALESORDER1)
+                .withOrder(SALESORDER1).build();
+        OrderBook differentSalesOrderBook = new OrderBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, taskBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, taskBook, userPrefs);
->>>>>>> refactor-taskManager
+        modelManager = new ModelManager(addressBook, taskBook, salesOrderBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, taskBook, salesOrderBook, userPrefs);
+
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -134,21 +126,15 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-<<<<<<< HEAD
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook,
-                differentTaskList, differentSalesOrderBook, userPrefs)));
-=======
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentTaskBook, userPrefs)));
->>>>>>> refactor-taskManager
+                differentTaskBook, differentSalesOrderBook, userPrefs)));
+
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-<<<<<<< HEAD
-        assertFalse(modelManager.equals(new ModelManager(addressBook, taskList, salesOrderBook, userPrefs)));
-=======
-        assertFalse(modelManager.equals(new ModelManager(addressBook, taskBook, userPrefs)));
->>>>>>> refactor-taskManager
+
+        assertFalse(modelManager.equals(new ModelManager(addressBook, taskBook, salesOrderBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -156,10 +142,5 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-<<<<<<< HEAD
-        assertFalse(modelManager.equals(new ModelManager(addressBook, taskList, salesOrderBook, differentUserPrefs)));
-=======
-        assertFalse(modelManager.equals(new ModelManager(addressBook, taskBook, differentUserPrefs)));
->>>>>>> refactor-taskManager
     }
 }

@@ -31,7 +31,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonSalesOrderBookStorage;
+import seedu.address.storage.JsonOrderBookStorage;
 import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -52,8 +52,8 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonTaskBookStorage taskListStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("taskList.json"));
-        JsonSalesOrderBookStorage salesOrderBookStorage =
-                new JsonSalesOrderBookStorage(temporaryFolder.resolve("saleOrder.json"));
+        JsonOrderBookStorage salesOrderBookStorage =
+                new JsonOrderBookStorage(temporaryFolder.resolve("saleOrder.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, taskListStorage,
@@ -86,8 +86,8 @@ public class LogicManagerTest {
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonTaskBookStorage taskListStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("ioExceptionTaskList.json"));
-        JsonSalesOrderBookStorage salesOrderBookStorage =
-                new JsonSalesOrderBookStorage(temporaryFolder.resolve("ioExceptionSalesOrderBook.json"));
+        JsonOrderBookStorage salesOrderBookStorage =
+                new JsonOrderBookStorage(temporaryFolder.resolve("ioExceptionSalesOrderBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
 
@@ -148,7 +148,7 @@ public class LogicManagerTest {
                                       Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(),
-                model.getSalesOrderBook(), new UserPrefs());
+                model.getOrderBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

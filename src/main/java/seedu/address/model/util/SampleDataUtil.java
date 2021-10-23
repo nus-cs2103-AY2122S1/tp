@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Date;
+import seedu.address.model.OrderBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.ReadOnlySalesOrderBook;
+import seedu.address.model.ReadOnlyOrderBook;
 import seedu.address.model.ReadOnlyTaskBook;
-import seedu.address.model.SalesOrderBook;
 import seedu.address.model.TaskBook;
 import seedu.address.model.order.Amount;
 import seedu.address.model.order.Customer;
@@ -85,7 +85,7 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    public static ReadOnlyTaskBook getSampleTaskList() {
+    public static ReadOnlyTaskBook getSampleTaskBook() {
         TaskBook simpleTL = new TaskBook();
         for (Task sampleTask : getSampleTasks()) {
             simpleTL.addTask(sampleTask);
@@ -93,8 +93,8 @@ public class SampleDataUtil {
         return simpleTL;
     }
 
-    public static ReadOnlySalesOrderBook getSampleOSalesOrderBook() {
-        SalesOrderBook simpleSB = new SalesOrderBook();
+    public static ReadOnlyOrderBook getSampleOrderBook() {
+        OrderBook simpleSB = new OrderBook();
         for (Order sampleOrders : getSampleOrders()) {
             simpleSB.addOrder(sampleOrders);
         }
