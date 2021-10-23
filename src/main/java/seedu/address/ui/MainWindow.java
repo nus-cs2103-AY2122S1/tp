@@ -1,6 +1,19 @@
 package seedu.address.ui;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.logging.Logger;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+import org.json.CDL;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +22,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -35,12 +49,16 @@ public class MainWindow extends UiPart<Stage> {
     private SummaryPanel summaryPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private DownloadWindow downloadWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private MenuItem downloadMenuItem;
 
     @FXML
     private StackPane panelPlaceholder;
@@ -67,6 +85,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        downloadWindow = new DownloadWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -75,6 +94,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(downloadMenuItem, KeyCombination.valueOf("F2"));
     }
 
     /**
@@ -188,6 +208,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        downloadWindow.hide();
         primaryStage.hide();
     }
 
@@ -216,6 +237,10 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
+            if (commandResult.isShowDownload()) {
+                handleDownload();
+            }
+
             if (commandResult.isExit()) {
                 handleExit();
             }
@@ -225,6 +250,64 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Retrieves data stored in SeniorLove.
+     *
+     * @return JSONArray of data
+     * @throws IOException File reading error
+     * @throws JSONException JSON error
+     */
+    private JSONArray getData() throws IOException, JSONException {
+        String dataFile = "data/addressbook.json";
+        InputStream inputStream = new FileInputStream(dataFile);
+        String jsonTxt = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        JSONObject json = new JSONObject(jsonTxt);
+        return json.getJSONArray("persons");
+    }
+
+    /**
+     * Writes JSON data to a CSV file.
+     *
+     * @param data JSONArray of data
+     * @param dest File object being written to
+     * @throws IOException File reading error
+     * @throws JSONException JSON error
+     */
+    private void writeToCsv(JSONArray data, File dest) throws JSONException, IOException {
+        String csv = CDL.toString(data);
+        FileUtils.writeStringToFile(dest, csv, Charset.defaultCharset());
+    }
+
+    /**
+     * Initialises a file in user's chosen directory.
+     *
+     * @return File object to be added to user's directory
+     */
+    private File userChooseDestination() {
+        String csvName = "addressbook.csv";
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        return new File(directoryChooser.showDialog(primaryStage), csvName);
+    }
+
+    /**
+     * Downloads data in SeniorLove into a CSV file in user's directory.
+     */
+    @FXML
+    private void handleDownload() {
+        try {
+            JSONArray data = getData();
+            File dest = userChooseDestination();
+            writeToCsv(data, dest);
+            if (!downloadWindow.isShowing()) {
+                downloadWindow.show();
+            } else {
+                downloadWindow.focus();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

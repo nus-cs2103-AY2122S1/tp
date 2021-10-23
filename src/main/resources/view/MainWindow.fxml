@@ -32,6 +32,9 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Download">
+            <MenuItem fx:id="downloadMenuItem" mnemonicParsing="false" onAction="#handleDownload" text="Download" />
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
