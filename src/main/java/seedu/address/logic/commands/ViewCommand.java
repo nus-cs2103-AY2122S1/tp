@@ -17,10 +17,10 @@ import seedu.address.model.participant.ParticipantIdMatchesGivenIdPredicate;
 public class ViewCommand extends Command {
     public static final String COMMAND_WORD = "view";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the participant whose ID matches  "
-            + "the given ID (case-insensitive) and displays the participant's details.\n"
-            + "Parameters: PARTICIPANT_ID\n"
-            + "Example: " + COMMAND_WORD + " aleyeo1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds the participant identified by the "
+            + "index number used in the displayed participant list and displays the participant's details.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     private final String givenId;
     private final ParticipantIdMatchesGivenIdPredicate predicate;
