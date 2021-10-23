@@ -32,6 +32,7 @@ public class ViewStudentCommand extends Command {
         model.updateFilteredStudentList(predicate);
 
         if (model.getFilteredStudentList().size() == 0) {
+            model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, name));
         }
 
