@@ -1,8 +1,8 @@
 ---
 layout: page
-title: ModuLink
 ---
 
+# ModuLink
 [![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/se-edu/addressbook-level3/actions)
 [![codecov](https://codecov.io/gh/se-edu/addressbook-level3/branch/master/graph/badge.svg)](https://codecov.io/gh/se-edu/addressbook-level3)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W12-4/tp/branch/master/graph/badge.svg?token=RS2T7CZCPN)](https://codecov.io/gh/AY2122S1-CS2103T-W12-4/tp)
