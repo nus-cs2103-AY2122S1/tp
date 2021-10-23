@@ -6,6 +6,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.modulelesson.LessonDayContainsKeywordsPredicate;
+import seedu.address.model.modulelesson.LessonTimeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 
@@ -25,7 +26,7 @@ public class FindModuleLessonCommand extends Command {
             + "find " + PREFIX_MODULE_CODE + "CS2030S CS2100\n"
             + "2) search by lesson day(s) using the prefix " + PREFIX_LESSON_DAY
             + "find " + PREFIX_LESSON_DAY + "2\n"
-            + "3) search by lesson time(s) using the prefix " + PREFIX_LESSON_TIME
+            + "3) search by lesson start time(s) using the prefix " + PREFIX_LESSON_TIME
             + "find " + PREFIX_LESSON_TIME + "CS2030S CS2100\n";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
 
@@ -36,6 +37,10 @@ public class FindModuleLessonCommand extends Command {
     }
 
     public FindModuleLessonCommand(LessonDayContainsKeywordsPredicate predicate) {
+        this.predicate = predicate;
+    }
+
+    public FindModuleLessonCommand(LessonTimeContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

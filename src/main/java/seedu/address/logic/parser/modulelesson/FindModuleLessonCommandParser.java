@@ -6,6 +6,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.LessonDayContainsKeywordsPredicate;
+import seedu.address.model.modulelesson.LessonTimeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 
 import java.util.Arrays;
@@ -49,7 +50,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         } else if (isDayPrefixPresent) {
             return getFindDayCommand(argMultimap);
         } else if (isTimePrefixPresent) {
-            return getFindModuleCommand(argMultimap);
+            return getFindTimeCommand(argMultimap);
         }
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
     }
@@ -85,5 +86,19 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
                 .collect(Collectors.toList());
 
         return new FindModuleLessonCommand(new LessonDayContainsKeywordsPredicate(lessonDayKeywordsList));
+    }
+
+    private FindModuleLessonCommand getFindTimeCommand (ArgumentMultimap argMultimap) throws ParseException {
+        Optional<String> searchInput = argMultimap.getValue(PREFIX_LESSON_TIME);
+        String times = searchInput.get().trim();
+        if (times.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
+        }
+
+        List<String> lessonTimeKeywordsList = Arrays.stream(times.split("\\s+"))
+                .collect(Collectors.toList());
+
+        return new FindModuleLessonCommand(new LessonTimeContainsKeywordsPredicate(lessonTimeKeywordsList));
     }
 }
