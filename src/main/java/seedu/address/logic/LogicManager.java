@@ -50,7 +50,7 @@ public class LogicManager implements Logic {
 
         try {
             storage.saveAddressBook(model.getAddressBook());
-            storage.saveTaskList(model.getTaskBook());
+            storage.saveTaskBook(model.getTaskBook());
         } catch (IOException ioe) {
             logger.info("could not save");
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);

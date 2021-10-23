@@ -69,7 +69,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Marks a task as done.
      */
-    public void markTask(Task toMark) {
+    public void markDone(Task toMark) {
         requireNonNull(toMark);
         if (!hasTask(toMark)) {
             throw new TaskNotFoundException();

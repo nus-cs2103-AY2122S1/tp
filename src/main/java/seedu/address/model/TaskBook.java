@@ -8,8 +8,8 @@ import seedu.address.model.task.TaskList;
 
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the task-book level
+ * Duplicates are not allowed (by .isSameTask comparison)
  */
 public class TaskBook implements ReadOnlyTaskBook {
 
@@ -29,7 +29,7 @@ public class TaskBook implements ReadOnlyTaskBook {
     public TaskBook() {}
 
     /**
-     * Creates a TaskList using the Persons in the {@code toBeCopied}
+     * Creates a TaskList using the Tasks in the {@code toBeCopied}
      */
     public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this();

@@ -17,7 +17,7 @@ import seedu.address.model.ReadOnlyTaskBook;
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
  */
-public class JsonTaskBookStorage implements TaskListStorage {
+public class JsonTaskBookStorage implements TaskBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(JsonTaskBookStorage.class);
 
@@ -61,17 +61,17 @@ public class JsonTaskBookStorage implements TaskListStorage {
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskBook addressBook) throws IOException {
-        saveTaskList(addressBook, filePath);
+    public void saveTaskBook(ReadOnlyTaskBook addressBook) throws IOException {
+        saveTaskBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveTaskList(ReadOnlyTaskBook)}.
+     * Similar to {@link #saveTaskBook(ReadOnlyTaskBook)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
     @Override
-    public void saveTaskList(ReadOnlyTaskBook taskList, Path filePath) throws IOException {
+    public void saveTaskBook(ReadOnlyTaskBook taskList, Path filePath) throws IOException {
         requireNonNull(taskList);
         requireNonNull(filePath);
         FileUtil.createIfMissing(filePath);

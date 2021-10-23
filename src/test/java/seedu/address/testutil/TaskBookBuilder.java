@@ -10,25 +10,25 @@ import seedu.address.model.task.Task;
  */
 public class TaskBookBuilder {
 
-    private TaskBook taskList;
+    private TaskBook taskBook;
 
     public TaskBookBuilder() {
-        taskList = new TaskBook();
+        taskBook = new TaskBook();
     }
 
     public TaskBookBuilder(TaskBook taskList) {
-        this.taskList = taskList;
+        this.taskBook = taskList;
     }
 
     /**
      * Adds a new {@code Task} to the {@code TaskListManager} that we are building.
      */
     public TaskBookBuilder withTask(Task task) {
-        taskList.addTask(task);
+        taskBook.addTask(task);
         return this;
     }
 
     public TaskBook build() {
-        return taskList;
+        return taskBook;
     }
 }

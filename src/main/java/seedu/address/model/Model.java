@@ -102,7 +102,7 @@ public interface Model {
     void setTaskListFilePath(Path taskListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces task book data with the data in {@code taskBook}.
      */
     void setTaskBook(ReadOnlyTaskBook addressBook);
 

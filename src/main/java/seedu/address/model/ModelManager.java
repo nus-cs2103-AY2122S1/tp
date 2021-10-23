@@ -33,12 +33,12 @@ public class ModelManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskList, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyTaskBook taskBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, taskList , userPrefs);
+        requireAllNonNull(addressBook, taskBook , userPrefs);
 
         this.addressBook = new AddressBook(addressBook);
-        this.taskBook = new TaskBook(taskList);
+        this.taskBook = new TaskBook(taskBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskBook.getTaskList());

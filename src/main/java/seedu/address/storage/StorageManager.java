@@ -19,13 +19,13 @@ public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
-    private TaskListStorage taskListStorage;
+    private TaskBookStorage taskListStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AddressBookStorage addressBookStorage, TaskListStorage taskListStorage,
+    public StorageManager(AddressBookStorage addressBookStorage, TaskBookStorage taskListStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
@@ -98,14 +98,14 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskBook taskList) throws IOException {
-        saveTaskList(taskList, taskListStorage.getTaskListFilePath());
+    public void saveTaskBook(ReadOnlyTaskBook taskList) throws IOException {
+        saveTaskBook(taskList, taskListStorage.getTaskListFilePath());
     }
 
     @Override
-    public void saveTaskList(ReadOnlyTaskBook taskList, Path filePath) throws IOException {
+    public void saveTaskBook(ReadOnlyTaskBook taskList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        taskListStorage.saveTaskList(taskList, filePath);
+        taskListStorage.saveTaskBook(taskList, filePath);
     }
 
 
