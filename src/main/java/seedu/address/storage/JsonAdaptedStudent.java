@@ -7,15 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
-
-
 
 /**
  * Jackson-friendly version of {@link Student}.
@@ -51,7 +48,7 @@ class JsonAdaptedStudent {
         name = source.getName().fullName;
         telegramHandle = source.getTelegramHandle().value;
         email = source.getEmail().value;
-        groupName = source.getGroup().getGroupName().toString();
+        groupName = source.getGroupName().toString();
     }
 
     /**
@@ -89,29 +86,29 @@ class JsonAdaptedStudent {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                 GroupName.class.getSimpleName()));
         }
-
+        if (!GroupName.isValidName(groupName)) {
+            throw new IllegalValueException(GroupName.MESSAGE_CONSTRAINTS);
+        }
         final GroupName modelGroupName = new GroupName(groupName);
 
-        Group modelGroup = retrieveByName(modelGroupName, groupList);
+        if (!groupExistsInGroupList(modelGroupName, groupList)) {
+            throw new IllegalValueException(MESSAGE_GROUP_NAME_NOT_FOUND);
+        }
 
-        return new Student(modelName, modelTelegramHandle, modelEmail, modelGroup);
+        return new Student(modelName, modelTelegramHandle, modelEmail, modelGroupName);
     }
 
     /**
-     * Returns a {@code Group} from a given group list that matches the given {@code GroupName}.
+     * Returns true if the name of a {@code Group} from a given group list matches the given {@code GroupName}.
      * @return group from the group list that matches the given group name
-     * @throws IllegalValueException if no group that matches the groupName can be found.
      */
-    public Group retrieveByName(GroupName groupName, ObservableList<Group> groupList) throws IllegalValueException {
+    public boolean groupExistsInGroupList(GroupName groupName, ObservableList<Group> groupList) {
         requireNonNull(groupName);
         for (Group group : groupList) {
             if (group.getGroupName().equals(groupName)) {
-                String groupNameString = groupName.toString();
-                String descriptionString = group.getDescription().toString();
-                return new Group(new GroupName(groupNameString),
-                        new Description(descriptionString));
+                return true;
             }
         }
-        throw new IllegalValueException(MESSAGE_GROUP_NAME_NOT_FOUND);
+        return false;
     }
 }

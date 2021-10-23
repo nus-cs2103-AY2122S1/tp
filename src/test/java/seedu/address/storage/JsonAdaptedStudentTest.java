@@ -26,7 +26,7 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_TELEGRAM_HANDLE = BENSON.getTelegramHandle().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_GROUP_NAME = BENSON.getGroup().getGroupName().toString();
+    private static final String VALID_GROUP_NAME = BENSON.getGroupName().toString();
     private static final String VALID_DESCRIPTION = "A Software engineering module";
 
     //TODO Fix test case

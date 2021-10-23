@@ -134,7 +134,6 @@ public class CsBook implements ReadOnlyCsBook {
         groups.remove(key);
     }
 
-
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.
      * {@code target} must exist in the address book.

@@ -43,7 +43,7 @@ public class DetailedStudentCard extends UiPart<Region> {
             styleClass.add("flag");
         }
         name.setText(student.getName().fullName);
-        groupName.setText(student.getGroup().getGroupName().toString());
+        groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
         notes.setText(student.getNote().getNote());
