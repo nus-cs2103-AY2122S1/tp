@@ -1,6 +1,8 @@
 package dash.logic.commands.taskcommand;
 
-import static dash.logic.parser.CliSyntax.*;
+import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collections;
@@ -71,7 +73,7 @@ public class EditTaskCommand extends Command {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        model.setTask(taskToEdit, editedTask);
+        model.setTask(index.getZeroBased(), editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
