@@ -52,7 +52,7 @@ public class DeletePersonCommand extends Command {
     private ModuleCode moduleCode;
 
     /**
-     * Creates a DeleteCommand to delete the person at specified index
+     * Creates a DeletePersonCommand to delete the person at specified index
      *
      * @param targetIndex the person to be deleted
      */
@@ -63,7 +63,7 @@ public class DeletePersonCommand extends Command {
     }
 
     /**
-     * Creates a DeleteCommand to delete the persons between the specified indexes.
+     * Creates a DeletePersonCommand to delete the persons between the specified indexes.
      *
      * @param targetIndex the first person to be deleted
      * @param endIndex the last person to be deleted
@@ -75,7 +75,7 @@ public class DeletePersonCommand extends Command {
     }
 
     /**
-     * Creates a DeleteCommand to delete the persons with the specified predicate
+     * Creates a DeletePersonCommand to delete the persons with the specified predicate
      *
      * @param predicate the condition to delete the person
      * @param moduleCode the specified module code to delete
