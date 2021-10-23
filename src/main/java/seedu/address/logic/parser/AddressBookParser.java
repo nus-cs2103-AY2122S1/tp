@@ -108,7 +108,7 @@ public class AddressBookParser {
 
         case ShowIncompleteTasks.COMMAND_WORD:
             return new ShowIncompleteTasks();
-            
+
         case FindTaskCommand.COMMAND_WORD:
             return new FindTaskCommandParser().parse(arguments);
 
