@@ -15,8 +15,9 @@ public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
     public static final String MESSAGE_USAGE = ": Imports the member data from a CSV file into SportsPA's data file.\n"
-            + "Each line of the CSV file must be as such: NAME, PHONE, [AVAILABILITY]\n"
-            + "Parameters: KEYWORD CSV_FILE_PATH"
+            + "There must be headers for the CSV file and they should be in this order:"
+            + " NAME, PHONE, AVAILABILITY, TAGS"
+            + "Parameters: KEYWORD CSV_FILE_PATH\n"
             + "Example: " + COMMAND_WORD + " myFilePath.csv";
     public static final String MESSAGE_SUCCESS = "Successfully imported from CSV file!";
 
