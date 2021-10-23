@@ -81,6 +81,10 @@ public class OrderBook implements ReadOnlyOrderBook {
         return orders.hasOrder(order);
     }
 
+    public boolean hasOrder(long id) {
+        return orders.hasOrder(id);
+    }
+
     public void sortOrders(Comparator<Order> comparator) {
         orders.sort(comparator);
     }
