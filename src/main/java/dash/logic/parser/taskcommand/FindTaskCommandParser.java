@@ -17,6 +17,7 @@ import dash.logic.parser.ArgumentTokenizer;
 import dash.logic.parser.Parser;
 import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
+import dash.model.task.TaskDate;
 
 
 /**
@@ -63,8 +64,8 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             if (argMultimap.getValue(PREFIX_TASK_DATE).get().isEmpty()) {
                 throw new ParseException("Arguments cannot be empty");
             }
-            String[] dateKeywords = argMultimap.getValue(PREFIX_TASK_DATE).get().split("\\s+");
-            findTaskDescriptor.setDate(Arrays.asList(dateKeywords));
+            TaskDate taskDateArg = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            findTaskDescriptor.setDate(taskDateArg);
         }
         if (tagPresent) {
             if (argMultimap.getValue(PREFIX_TAG).get().isEmpty()) {

@@ -18,6 +18,15 @@ public class TaskDate {
         + "They should also be valid and follow a format. (eg. Date: dd/MM/yyyy, Time: HHmm) "
         + "If both Date and Time are included, Date should come first before Time and they should be separated "
         + "by a comma. A full list of available formats can be seen under the Help tab.";
+    public static final String FORMAT_CONSTRAINTS = "Dates can be listed in these formats: \n"
+            + "dd/MM/yyyy\n"
+            + "dd-MM-yyyy\n"
+            + "yyyy/MM/dd\n"
+            + "yyyy-MM-dd\n"
+            + "dd MMM yyyy\n\n"
+            + "Times can be listed in these formats: \n"
+            + "HHmm\n"
+            + "hh:mm a\n";
     private static final String[] DATE_FORMATS = {
         "dd/MM/yyyy",
         "dd-MM-yyyy",
