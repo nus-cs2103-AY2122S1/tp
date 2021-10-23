@@ -141,9 +141,10 @@ public class ParserUtil {
         if (!TaskDate.isValidTaskDate(trimmedTaskDate)) {
             throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
         }
-        if (!TaskDate.isThisDate(trimmedTaskDate) && !TaskDate.isThisTime(trimmedTaskDate)) {
-            throw new ParseException(TaskDate.FORMAT_CONSTRAINTS);
-        }
+
+//        if (!TaskDate.isThisDate(trimmedTaskDate) && !TaskDate.isThisTime(trimmedTaskDate)) {
+//            throw new ParseException(TaskDate.FORMAT_CONSTRAINTS);
+//        }
         return new TaskDate(trimmedTaskDate);
     }
 

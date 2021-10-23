@@ -14,15 +14,15 @@ public class DateContainsKeywordsPredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
-        boolean dateEqual = false;
-        boolean timeEqual = false;
+        boolean dateEqual = task.getTaskDate().hasDate();
+        boolean timeEqual = task.getTaskDate().hasTime();
         if (task.getTaskDate().hasDate() && this.taskDate.hasDate()) {
             dateEqual = task.getTaskDate().toDateString().equals(this.taskDate.toDateString());
         }
         if (task.getTaskDate().hasTime() && this.taskDate.hasTime()) {
             timeEqual = task.getTaskDate().toTimeString().equals(this.taskDate.toTimeString());
         }
-        return dateEqual || timeEqual;
+        return dateEqual && timeEqual;
     }
 
     @Override
