@@ -23,6 +23,7 @@ import seedu.tracker.model.ReadOnlyUserInfo;
 import seedu.tracker.model.ReadOnlyUserPrefs;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.testutil.ModuleBuilder;
 
@@ -156,12 +157,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public ObservableList<Mc> getCompletedMcList() {
+        public ObservableList<McProgress> getMcProgressList() {
             throw new AssertionError("This method should not be called");
         };
 
         @Override
-        public void updateCompletedMcs() {
+        public void updateMcProgress() {
             throw new AssertionError("This method should not be called");
         };
 

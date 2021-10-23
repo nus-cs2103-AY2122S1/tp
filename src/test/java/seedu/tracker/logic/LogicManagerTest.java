@@ -30,6 +30,7 @@ import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.JsonModuleTrackerStorage;
 import seedu.tracker.storage.JsonUserInfoStorage;
@@ -102,11 +103,11 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getCompletedMcList_returnsDefaultList() {
-        ObservableList<Mc> completedMcs = logic.getCompletedMcList();
+    public void getMcProgressList_returnsDefaultList() {
+        ObservableList<McProgress> mcProgress = logic.getMcProgressList();
         boolean isValid = true;
-        for (Mc mc : completedMcs) {
-            isValid = isValid && mc.value == 0;
+        for (McProgress progress : mcProgress) {
+            isValid = isValid && progress.getCompleted().value == 0;
         }
         assertTrue(isValid);
     }
