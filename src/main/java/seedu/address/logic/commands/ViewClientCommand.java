@@ -51,7 +51,7 @@ public class ViewClientCommand extends Command {
         Client client = lastShownList.get(index.getZeroBased());
 
         return new CommandResult(String.format(Messages.MESSAGE_VIEW_CLIENT, client.getId()),
-                CommandType.VIEW, client);
+                CommandType.VIEW, client, true);
     }
 
     @Override

@@ -51,7 +51,7 @@ public class DeleteProductCommand extends Command {
         logger.log(Level.INFO, String.format("Deleting product %1$s", productToDelete.getId()));
 
         return new CommandResult(String.format(MESSAGE_DELETE_PRODUCT_SUCCESS, productToDelete),
-                CommandType.DELETE, SampleDataUtil.getSampleProducts()[0]);
+                CommandType.DELETE, null, false);
     }
 
     @Override

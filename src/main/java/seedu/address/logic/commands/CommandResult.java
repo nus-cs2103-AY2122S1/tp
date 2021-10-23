@@ -17,21 +17,28 @@ public class CommandResult {
 
     private final Category info;
 
+    private boolean isClientCommand;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, CommandType commandType, Category info) {
+    public CommandResult(String feedbackToUser, CommandType commandType, Category info, boolean isClientCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.commandType = commandType;
         this.info = info;
+        this.isClientCommand = isClientCommand;
+    }
+
+    public CommandResult(String feedbackToUser, CommandType commandType) {
+        this(feedbackToUser, commandType, null, false);
     }
 
     /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser, CommandType commandType) {
-        this(feedbackToUser, commandType, null);
+    public CommandResult(String feedbackToUser) {
+        this(feedbackToUser, null, null, false);
     }
 
     public String getFeedbackToUser() {
@@ -44,6 +51,10 @@ public class CommandResult {
 
     public CommandType getCommandType() {
         return commandType;
+    }
+
+    public boolean getIsClientCommand() {
+        return isClientCommand;
     }
 
     @Override

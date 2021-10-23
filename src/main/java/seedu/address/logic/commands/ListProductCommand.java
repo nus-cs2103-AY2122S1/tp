@@ -20,6 +20,6 @@ public class ListProductCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
-        return new CommandResult(MESSAGE_SUCCESS, CommandType.LIST, SampleDataUtil.getSampleProducts()[0]);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.LIST, null, false);
     }
 }

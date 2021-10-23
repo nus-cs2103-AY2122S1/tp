@@ -51,7 +51,7 @@ public class DeleteClientCommand extends Command {
         logger.log(Level.INFO, String.format("Deleting client %1$s", clientToDelete.getId()));
 
         return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete),
-                CommandType.DELETE, SampleDataUtil.getSampleClients()[0]);
+                CommandType.DELETE, null, true);
     }
 
     @Override

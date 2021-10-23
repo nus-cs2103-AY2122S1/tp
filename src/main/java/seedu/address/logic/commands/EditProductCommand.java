@@ -77,7 +77,7 @@ public class EditProductCommand extends Command {
         model.setProduct(productToEdit, editedProduct);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct),
-                CommandType.EDIT, SampleDataUtil.getSampleProducts()[0]);
+                CommandType.EDIT, null, false);
     }
 
     /**
