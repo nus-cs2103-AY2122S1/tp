@@ -4,17 +4,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.model.event.Event;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Participant in an event.
- * Guarantees: name, phone, email, address, tags, birthDate, notes, nextOfKins are present and not null, field values
+ * Guarantees: name, phone, email, address, birthDate, nextOfKins are present and not null, field values
  * are validated, immutable.
  */
 public class Participant {
@@ -26,11 +22,8 @@ public class Participant {
 
     // Data fields
     private final Address address;
-    private final Set<Tag> tags = new HashSet<>();
-
     private final ParticipantId id;
     private final BirthDate birthDate;
-    private final Set<Note> notes = new HashSet<>();
     private final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
 
     private final ArrayList<Event> events = new ArrayList<>();
@@ -44,21 +37,17 @@ public class Participant {
      * @param phone      Phone object of the participant.
      * @param email      Email object of the participant.
      * @param address    Address object of the participant.
-     * @param tags       tags of the participant.
      * @param birthDate  birthdate of the participant.
-     * @param notes      notes attached by the manager.
      * @param nextOfKin  nextOfKin of the participant.
      */
-    public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
-                       Set<Note> notes, Collection<NextOfKin> nextOfKin) {
-        requireAllNonNull(name, phone, email, address, tags, birthDate, notes);
+    public Participant(Name name, Phone phone, Email email, Address address, BirthDate birthDate,
+                       Collection<NextOfKin> nextOfKin) {
+        requireAllNonNull(name, phone, email, address, birthDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.birthDate = birthDate;
-        this.notes.addAll(notes);
         this.nextOfKins.addAll(nextOfKin);
         this.id = ParticipantId.of(this);
     }
@@ -71,22 +60,18 @@ public class Participant {
      * @param phone      Phone object of the participant.
      * @param email      Email object of the participant.
      * @param address    Address object of the participant.
-     * @param tags       tags of the participant.
      * @param birthDate  birthdate of the participant.
-     * @param notes      notes attached by the manager.
      * @param nextOfKin  nextOfKin of the participant.
      * @param id         ParticipantId object of the participant.
      */
-    public Participant(Name name, Phone phone, Email email, Address address, Set<Tag> tags, BirthDate birthDate,
-                       Set<Note> notes, Collection<NextOfKin> nextOfKin, ParticipantId id) {
-        requireAllNonNull(name, phone, email, address, tags, birthDate, notes);
+    public Participant(Name name, Phone phone, Email email, Address address, BirthDate birthDate,
+                       Collection<NextOfKin> nextOfKin, ParticipantId id) {
+        requireAllNonNull(name, phone, email, address, birthDate);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.birthDate = birthDate;
-        this.notes.addAll(notes);
         this.nextOfKins.addAll(nextOfKin);
         this.id = id;
     }
@@ -121,14 +106,6 @@ public class Participant {
 
     public String getAddressValue() {
         return address.toString();
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
     }
 
     /**
@@ -187,32 +164,6 @@ public class Participant {
     }
 
     /**
-     * Adds a Note to the set of notes.
-     *
-     * @param note Note to be added.
-     */
-    public void addNote(Note note) {
-        notes.add(note);
-    }
-
-    /**
-     * Removes a specific Note from the set of notes.
-     *
-     * @param note Note to be removed.
-     */
-    public void removeNote(Note note) {
-        notes.remove(note);
-    }
-
-    /**
-     * Returns an immutable note set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Note> getNotes() {
-        return Collections.unmodifiableSet(notes);
-    }
-
-    /**
      * Returns a string representation of the Participant's id.
      *
      * @return the Participant's id.
@@ -257,6 +208,17 @@ public class Participant {
     }
 
     /**
+     * Replaces this Participant with a given edited Participant in this Participant's Events.
+     *
+     * @param editedParticipant The given edited Participant.
+     */
+    public void shiftEvents(Participant editedParticipant) {
+        for (int i = 0; i < events.size(); i++) {
+            events.get(i).replaceParticipant(this, editedParticipant);
+        }
+    }
+
+    /**
      * Returns true if both participants have the same identity and data fields.
      * This defines a stronger notion of equality between two participants.
      */
@@ -275,16 +237,14 @@ public class Participant {
                 && otherParticipant.getPhone().equals(getPhone())
                 && otherParticipant.getEmail().equals(getEmail())
                 && otherParticipant.getAddress().equals(getAddress())
-                && otherParticipant.getTags().equals(getTags())
                 && otherParticipant.getBirthDate().equals(getBirthDate())
-                && otherParticipant.getNotes().equals(getNotes())
                 && otherParticipant.getNextOfKins().equals(getNextOfKins());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), getTags(), birthDate, notes, nextOfKins);
+        return Objects.hash(getName(), getPhone(), getEmail(), getAddress(), birthDate, nextOfKins);
     }
 
     @Override
@@ -299,27 +259,30 @@ public class Participant {
                 .append("\nAddress: ")
                 .append(getAddress());
 
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("\nTags: ");
-            tags.forEach(builder::append);
-        }
-
         builder.append("\nDate of birth: ").append(getBirthDate());
 
-        Set<Note> notes = getNotes();
-        if (!notes.isEmpty()) {
-            builder.append("\nNotes: ");
-            notes.forEach(builder::append);
-        }
-
-        ArrayList<NextOfKin> nextOfKins = getNextOfKins();
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: ");
             nextOfKins.forEach(builder::append);
         }
 
+        if (!events.isEmpty()) {
+            builder.append("\n\nAttending events:\n").append(formEventsList());
+        }
+
+        return builder.toString();
+    }
+
+    private String formEventsList() {
+        int index = 1;
+        StringBuilder builder = new StringBuilder();
+        for (Event event : events) {
+            builder.append(index)
+                    .append(". ")
+                    .append(event.getNameString())
+                    .append("\n");
+            index++;
+        }
         return builder.toString();
     }
 }
