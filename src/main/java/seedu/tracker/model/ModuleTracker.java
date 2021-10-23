@@ -19,8 +19,7 @@ import seedu.tracker.model.module.UniqueModuleList;
 public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
-    private AcademicCalendar currentSemester;
-    private Mc mcGoal;
+    private final UserInfo userInfo;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,9 +31,8 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     {
         AcademicYear defaultAcademicYear = new AcademicYear(1);
         Semester defaultSemester = new Semester(1);
-        currentSemester = new AcademicCalendar(defaultAcademicYear, defaultSemester);
         modules = new UniqueModuleList();
-        mcGoal = new Mc(160);
+        userInfo = new UserInfo();
     }
 
     public ModuleTracker() {}
@@ -50,19 +48,19 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     //// list overwrite operations
 
     public void setCurrentSemester(AcademicCalendar academicCalendar) {
-        this.currentSemester = academicCalendar;
+        this.userInfo.setCurrentSemester(academicCalendar);
     }
 
     public AcademicCalendar getCurrentSemester() {
-        return this.currentSemester;
+        return this.userInfo.getCurrentSemester();
     }
 
     public void setMcGoal(Mc mcGoal) {
-        this.mcGoal = mcGoal;
+        this.userInfo.setMcGoal(mcGoal);
     }
 
     public Mc getMcGoal() {
-        return this.mcGoal;
+        return this.userInfo.getMcGoal();
     }
 
     /**
@@ -131,6 +129,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
     }
+
 
     @Override
     public boolean equals(Object other) {

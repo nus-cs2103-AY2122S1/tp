@@ -7,6 +7,7 @@ import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
 
 import seedu.tracker.logic.commands.exceptions.CommandException;
 import seedu.tracker.model.Model;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
 
@@ -28,9 +29,8 @@ public class SetCommand extends Command {
             + PREFIX_MC + "188";
     public static final String MESSAGE_SUCCESS_SEM = "Current semester set:\n %1$s";
     public static final String MESSAGE_SUCCESS_MC = "Mc goal set:\n %1$s";
-    private boolean sem = false;
-    private AcademicCalendar currentSemester;
-    private Mc mcGoal;
+    private boolean isSemChanged = false;
+    private UserInfo toBeUpdated = new UserInfo();
 
     /**
      * Creates a SetCommand.
@@ -38,10 +38,10 @@ public class SetCommand extends Command {
      * @param academicCalendar the specific semester that is to set as current semester
      */
     public SetCommand(AcademicCalendar academicCalendar) {
-        sem = true;
+        isSemChanged = true;
         requireNonNull(academicCalendar);
 
-        this.currentSemester = academicCalendar;
+        this.toBeUpdated.setCurrentSemester(academicCalendar);
     }
     /**
      * Creates a SetCommand.
@@ -51,20 +51,23 @@ public class SetCommand extends Command {
     public SetCommand(Mc mcGoal) {
         requireNonNull(mcGoal);
 
-        this.mcGoal = mcGoal;
+        this.toBeUpdated.setMcGoal(mcGoal);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (sem) {
+
+        if (isSemChanged) {
             //model.setCurrentSemester(currentSemester);
+            model.setCurrentSemester(toBeUpdated.getCurrentSemester());
             return new CommandResult(
-                    String.format(MESSAGE_SUCCESS_SEM, currentSemester));
+                    String.format(MESSAGE_SUCCESS_SEM, model.getCurrentSemester()));
         } else {
             //model.setMcGoal(mcGoal);
+            model.setMcGoal(toBeUpdated.getMcGoal());
             return new CommandResult(
-                    String.format(MESSAGE_SUCCESS_MC, mcGoal));
+                    String.format(MESSAGE_SUCCESS_MC, model.getMcGoal()));
         }
     }
 
@@ -83,7 +86,7 @@ public class SetCommand extends Command {
         // state check
         SetCommand t = (SetCommand) other;
 
-        return sem ? currentSemester.equals(t.currentSemester)
-                   : mcGoal.equals(t.mcGoal);
+        return isSemChanged ? toBeUpdated.getCurrentSemester().equals(t.toBeUpdated.getCurrentSemester())
+                   : toBeUpdated.getMcGoal().equals(t.toBeUpdated.getMcGoal());
     }
 }

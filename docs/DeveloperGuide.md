@@ -154,6 +154,158 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Take a module feature
+
+#### Implementation
+
+The `take` command is implemented via the `TakeCommand` and `TakeCommandParser` classes.
+
+The `TakeCommandParser` class implements the `Parser` interface and is responsible for parsing the user input to retrieve the index and `AcademicYear` object which represents the year and semester. <br>
+The `TakeCommandParser#parse()` method does this, and returns a `TakeCommand` object with the index and the `AcademicYear` object as arguments.
+
+The `TakeCommand` class extends the `Command` class and implements the `TakeCommand#execute()` method which handles the main logic of the class. <br>
+It contains non-null `index` and `academicCalendar` fields. <br>
+When the `TakeCommand#execute()` method is called,
+
+- The `Module` object corresponding to the `index` is found from the `Model`.
+- A copy of the `Module` object is made with the value of `academicCalendar`, which is stored in its corresponding field in the copy.
+- The `Module` object in the Model is then replaced by this copy.
+
+Note:
+
+- When a new `Module` object is added to the module tracker, its `academicCalendar` field is unassigned by default.
+- Removing a schedule from a module is not supported in the `take` command, this functionality is instead moved to a separate `untake` command.
+- If the module is already scheduled, its current `academicCalendar` field will be overridden by a new `AcademicCalendar` object.
+
+#### Design considerations:
+
+**Aspect: How the user can take a module**
+
+- **Alternative 1 (current choice):** User uses a separate command (`take`) to take a module
+    - Pros:
+        - Allows some flexibility for the user if he has not decided when to take the module.
+    - Cons:
+        - More steps involved for the user to take a module.
+- **Alternative 2:** User indicates the year and semester when adding the module to the tracker.
+    - Pros:
+        - Easier for the user to take a module as there are less steps involved.
+    - Cons:
+        - The `add` command will contain many arguments, which might make it difficult for users to remember.
+
+**Aspect: Format of user input**
+
+- **Alternative 1 (current choice):** Users use `y/`, `s/` prefixes to specify year and semester.
+    - Pros:
+        - Easier to parse user inputs to get the needed data.
+    - Cons:
+        - Less flexible for the user.
+- **Alternative 2:** Users are allowed to specify the year and semester using string inputs (i.e. y1s2, year 1 semester 2)
+    - Pros:
+        - Greater flexibility for the user.
+    - Cons:
+        - More difficult to parse the user input to extract the needed data.
+        - Is inconsistent with the format of other commands.
+
+### Find modules feature
+
+#### Implementation
+
+The `find` command is implemented via the `FindCommand`, `FindCommandParser` and `NameContainsKeywordsPredicate` classes.
+
+The `FindCommandParser` class implements the `Parser` interface and the `FindCommandParser#parse()` method is responsible for parsing the user input to retrieve the `args` String which represents the keywords to search the modules by. <br>
+When the `FindCommandParser#parse()` method is called,
+
+- The `args` String is converted into two arrays of String(s) called `nameKeywords` and `optionalFilter`.
+- The `nameKeywords` array consists of the keywords to search the modules with and the `optionalFilter` array consists of specific components of the module to search for the keywords.
+- A new `NameContainsKeywordsPredicate` object is created by passing in the arrays `nameKeywords` and `optionalFilter` as arguments.
+- A `FindCommand` object is returned with the `NameContainsKeywordsPredicate` object as its argument.
+
+The `NameContainsKeywordsPredicate` class implements the `Predicate` interface and the `NameContainsKeywordsPredicate#test()` method is responsible for checking if the given module contains any of the valid keywords. <br>
+It contains the non-null `keywords` and `optionalFilter` fields, which is used to find the appropriate modules in the `NameContainsKeywordsPredicate#test()` method. <br>
+When the `NameContainsKeywordsPredicate#test()` method is called, it takes in a `Module` and returns a boolean depending on whether the keyword is found inside the `module`.
+
+
+The `FindCommand` class extends the `Command` class and implements the `FindCommand#execute()` method which handles the main logic of the class. <br>
+It contains the non-null `predicate` field. <br>
+When the `FindCommand#execute()` method is called,
+
+- The `Model` object is updated with a new `predicate`.
+- The `Model` filters the module list based on the given `predicate`.
+- A `CommandResult` is returned with the updated `Model`.
+
+#### Design considerations:
+
+**Aspect: How the user can find a module**
+
+- **Alternative 1 (current choice):** User uses a separate command (`find`) to take a module, along with additional optional parameters as filters.
+    - Pros:
+        - Gives the user more control when finding a specific module.
+        - Allows the user to view a more curated/specific set of results.
+    - Cons:
+        - User might want to view a general set of modules.
+        - Might be troublesome for the user to memorise all the optional parameters.
+- **Alternative 2:** User uses a separate command (`find`) to take a module, without the use of additional optional parameters.
+    - Pros:
+        - Easier for the user to use as there is no need to memorise all the optional parameters.
+    - Cons:
+        - More error prone (such as users typing `find c` and the application returns all the modules, which has the same effect as using the list command.
+
+**Aspect: Format of user input**
+
+- **Alternative 1 (current choice):** Users use `c/`, `t/` prefixes to specify which components of the module to search in.
+    - Pros:
+        - Easier to parse user inputs to get the needed data.
+    - Cons:
+        - Less flexible for the user.
+        - Might be troublesome for the user to memorise all the optional parameters.
+- **Alternative 2:** Users are allowed to use generic prefixes to specify which components of the module to search in.
+    - Pros:
+        - Greater flexibility for the user and more intuitive for the user.
+    - Cons:
+        - Difficult for the application to differentiate between keywords and words for specifying a certain component.  
+        - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).  
+        - Is inconsistent with the format of other commands.
+
+### Clear modules feature
+
+####Implementation
+
+The `clear` command is implemented via the `ClearCommand`, `ClearCommandParser` and `ModuleInSpecificSemesterPredicate` classes.
+
+The `ClearCommandParser` class implements the `Parser` interface.
+The `ClearCommandParser#parse()` method is responsible for parsing the user input to retrieve the `AcademicYear` and `Semester` object which specify the semester that the user want to untake all modules in it. The method will return a `ClearCommand` object with `AcadenicCalendar` as its argument.
+The `ClearCommandParser#arePrefixesPresent()` method is responsible to check if all fields stated in the arguments are provided.
+
+The `ClearCommand` class extends the `Command` class and implements the `ClearCommand#execute()` method which handles the main logic of the class.
+When the `ClearCommand#execute()` method is called,
+- All `Module` objects which has the corresponding `AcademicCalendar` is filtered out from the `Model` and store in a list
+- For each `Module` in the list, the `Module` is replaced by a copy of it without `AcademicCalander` field.
+- A `CommandResult` is returned with the updated `Model`.
+
+#### Design Considerations:
+
+**Aspect: How should clear command work**
+
+- **Alternative 1(current choice)**: When a clear command is called, all modules in a specific semester will be untaked.
+    - Pros:
+      - Allow users to untake multiple modules conveniently.
+      - User can replan the specific semester using clear command.
+    - Cons:
+      - The command name might be confusing
+- **Alternative 2:** When a clear command is called, all modules in a specific semester will be deleted.
+    - Pros:
+      - Allow users to delete multiple modules conveniently.
+      - User can replan the specific semester using clear command.
+    - Cons: 
+      - User need to add all the modules again, if they want to use it later
+- **Alternative 3:** When a clear command is called, all modules in the module tracker list will be deleted.
+    - Pros:
+      - Allow users to delete everything and restart conveniently
+    - Cons:
+      - All modules stored in the storage in advance will be deleted as well
+      - User need to add all the modules again, once the clear command is called
+      - It will be expensive, if the user accidentally use clear command
+    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -260,7 +412,9 @@ _{Explain here how the data archiving feature will be implemented}_
 * NUS CS students
 * has a need to manage their Modular Credits(MCs)
 * has a need to track the compulsory modules they are required to take
-* has a need to track their current CAP
+* can type fast
+* prefers typing to mouse interactions
+* is reasonably comfortable using CLI apps
 
 **Value proposition**: keeps track of the number of MCs completed and how many left to complete for the whole course
 of study, which is a feature lacking in current tools.
