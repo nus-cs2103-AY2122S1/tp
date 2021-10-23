@@ -96,7 +96,7 @@ Format: `add (-n/--name) "[NAME]" (-p/--phone) "[PHONE]" (-e/--email) "[EMAIL]" 
 
 Examples:
 
-- `add -n "John Doe" -p "+6501234567" -e "johndoe@example.com" -a "NUS School of Computing" -t "undergraduate,computer science"` adds a contact with name of `John Doe`, phone number `+6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
+- `add -n "John Doe" -p "6501234567" -e "johndoe@example.com" -a "NUS School of Computing" -t "undergraduate,computer science"` adds a contact with name of `John Doe`, phone number `6501234567`, email `johndoe@example.com`, address `NUS School of Computing`, tags `undergraduate` and `computer science`.
 - `add -n "Jane Deer" -t "woman"` adds a contact with the name of `Jane Deer` and tag of `woman`.
 
 ### Batch importing contacts: `import`
@@ -109,8 +109,8 @@ Example:
 
 ![import window](images/importWindow.png)
 
-- Select `importTemplate.csv` file.
-- Click open to import contacts.
+1. Select the `.csv` file.
+1. Click open to import contacts.
 
 Note:  
 - `.csv` file should have corresponding **headers**:
@@ -124,9 +124,13 @@ Note:
 - Make sure to save the spreadsheet data as **`.csv`** and not **`.csv UTF-8`**.
 - A template `importTemplate.csv` can be found in the default directory of the file browser.
 
-Sneak peek:
+Valid `.csv` file example:
 
-![csv template](images/csvTemplate.png)
+| name | phone    | email                | address       | tag              |
+| -----| -------- | -------------------- | ------------- | ---------------- |
+| Adam | 81234567 | adam<span>@test.com  | "ABC, Street" |                  |
+| Beth | 620400   | beth123<span>@eg.edu | 123 Drive     |friend            |
+| Cody | 90005000 | Cody<span>@test.org  | Oak Lane      | mentor;colleague |
 
 ### Listing all persons: `list`
 
@@ -191,24 +195,13 @@ Examples:
 
 Deletes the person of choice from the address book.
 
-Format: `delete "UID1,UID2,..."`
+Format: `delete "[INDEX]"`
 
-- Deletes a specific user(s) based on the User ID. ​
-- The number of UID in the input is arbitrary.
-- At least one User ID must be provided.​
+- Deletes the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
 
-- `delete "1,2"` deletes two person with UID 1 and 2 in the address book.
-
-Format: `delete -a"`
-
-- Deletes ALL users in the current scope. ​
-- A warning will pop up for further confirmation.
-
-Examples:
-
-- `find Betsy` followed by `delete -a` deletes ALL person in the results of the `find` command.
+- `delete 1` deletes the first person in the list.
 
 ### Clearing all entries: `clear`
 
