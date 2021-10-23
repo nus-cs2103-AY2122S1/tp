@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,7 +31,7 @@ public class AddressBookListMenu extends UiPart<Menu> {
      * Creates a {@code AddressBookListMenu} with the give {@code Logic}.
      * @param jsonFileList ObservableList containing the {@code Path} to all the Address Book Json file
      */
-    public AddressBookListMenu(ObservableList<Path> jsonFileList, Logic logic) {
+    public AddressBookListMenu(ObservableList<Path> jsonFileList, ObservableValue<Path> currentFile, Logic logic) {
         super(FXML);
         this.menuItems = this.menu.getItems();
         Function<Path, MenuItem> menuItemFunction = path -> {
@@ -65,6 +66,9 @@ public class AddressBookListMenu extends UiPart<Menu> {
                 c.getRemoved().forEach(removedConsumer);
             }
         };
+
+        this.menu.setText(FileUtil.convertToAddressBookName(currentFile.getValue()));
+        currentFile.addListener((o, x, y) -> this.menu.setText(FileUtil.convertToAddressBookName(y)));
         jsonFileList.addListener(addressBookListListener);
     }
 }

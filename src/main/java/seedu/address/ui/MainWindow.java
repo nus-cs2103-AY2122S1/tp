@@ -135,7 +135,8 @@ public class MainWindow extends UiPart<Stage> {
         sideBar = new SideBar(logic.getClientToView(), logic.getSortedNextMeetingList());
         sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
 
-        addressBookListMenu = new AddressBookListMenu(logic.getAddressBookList(), logic);
+        addressBookListMenu = new AddressBookListMenu(logic.getAddressBookList(),
+                logic.getAddressBookFilePathObject(), logic);
         menuBar.getMenus().add(addressBookListMenu.getRoot());
     }
 
