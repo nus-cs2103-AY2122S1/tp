@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import java.util.Set;
 
 import seedu.address.logic.commands.AddStudentCommand;
-import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -31,13 +31,13 @@ public class StudentUtil {
      */
     public static String getStudentDetails(Student student) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + student.getName().fullName + " ");
-        sb.append(PREFIX_EMAIL + student.getEmail().value + " ");
-        sb.append(PREFIX_STUDENTNUMBER + student.getStudentNumber().toString() + " ");
-        sb.append(PREFIX_USERNAME + student.getUserName().toString() + " ");
-        sb.append(PREFIX_REPO + student.getRepoName().toString() + " ");
-        student.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
+        sb.append(PREFIX_NAME).append(student.getName().fullName).append(" ");
+        sb.append(PREFIX_EMAIL).append(student.getEmail().value).append(" ");
+        sb.append(PREFIX_STUDENTNUMBER).append(student.getStudentNumber().toString()).append(" ");
+        sb.append(PREFIX_USERNAME).append(student.getUserName().toString()).append(" ");
+        sb.append(PREFIX_REPO).append(student.getRepoName().toString()).append(" ");
+        student.getTags().forEach(
+            s -> sb.append(PREFIX_TAG).append(s.tagName).append(" ")
         );
         return sb.toString();
     }
@@ -50,10 +50,10 @@ public class StudentUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getStudentNumber().ifPresent(studentNumber -> sb.append(PREFIX_STUDENTNUMBER)
-                .append(studentNumber.toString()).append(" "));
-        descriptor.getUserName().ifPresent(userName -> sb.append(PREFIX_USERNAME).append(userName.toString())
+                .append(studentNumber).append(" "));
+        descriptor.getUserName().ifPresent(userName -> sb.append(PREFIX_USERNAME).append(userName)
                 .append(" "));
-        descriptor.getRepoName().ifPresent(repoName -> sb.append(PREFIX_REPO).append(repoName.toString())
+        descriptor.getRepoName().ifPresent(repoName -> sb.append(PREFIX_REPO).append(repoName)
                 .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

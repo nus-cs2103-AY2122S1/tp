@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
@@ -11,8 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_BOB;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
+import seedu.address.logic.commands.EditStudentCommand.EditStudentDescriptor;
 import seedu.address.testutil.EditStudentDescriptorBuilder;
 
 public class EditTaskDescriptorTest {
@@ -20,42 +19,42 @@ public class EditTaskDescriptorTest {
     @Test
     public void equals() {
         // same values -> returns true
-        EditStudentDescriptor descriptorWithSameValues = new EditCommand.EditStudentDescriptor(DESC_AMY);
-        assertTrue(DESC_AMY.equals(descriptorWithSameValues));
+        EditStudentDescriptor descriptorWithSameValues = new EditStudentCommand.EditStudentDescriptor(DESC_AMY);
+        assertEquals(DESC_AMY, descriptorWithSameValues);
 
         // same object -> returns true
-        assertTrue(DESC_AMY.equals(DESC_AMY));
+        assertEquals(DESC_AMY, DESC_AMY);
 
         // null -> returns false
-        assertFalse(DESC_AMY.equals(null));
+        assertNotEquals(null, DESC_AMY);
 
         // different types -> returns false
-        assertFalse(DESC_AMY.equals(5));
+        assertNotEquals(5, DESC_AMY);
 
         // different values -> returns false
-        assertFalse(DESC_AMY.equals(DESC_BOB));
+        assertNotEquals(DESC_AMY, DESC_BOB);
 
         // different name -> returns false
-        EditCommand.EditStudentDescriptor editedAmy = new EditStudentDescriptorBuilder(DESC_AMY)
+        EditStudentCommand.EditStudentDescriptor editedAmy = new EditStudentDescriptorBuilder(DESC_AMY)
                 .withName(VALID_NAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
 
         // different email -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
         // different username -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withUserName(VALID_USERNAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
         // different reponame -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withRepoName(VALID_REPONAME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
 
 
         // different tags -> returns false
         editedAmy = new EditStudentDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
+        assertNotEquals(DESC_AMY, editedAmy);
     }
 }
