@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -40,6 +41,7 @@ public class LessonEditCommand extends UndoableCommand {
             + "LESSON_INDEX (must be a positive integer)\n"
             + "[" + PREFIX_TIME + "HHmm-HHmm] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_RATES + "RATE] "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 1 "
@@ -55,7 +57,7 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2$s\nfor student: %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
-    public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!.";
+    public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!";
     public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE = "You cannot edit the type of a lesson. Please add another"
             + " lesson if you wish to do so.";
 
