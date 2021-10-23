@@ -57,10 +57,18 @@ public class Insurance {
 
     /**
      * Gets the type of this Insurance
-     * @return
+     * @return @code{type}
      */
     public InsuranceType getType() {
         return type;
+    }
+
+    /**
+     * Returns a String representing the type this Insurance is
+     * @return @code{type.getTypeName()}
+     */
+    public String getTypeName() {
+        return type.getTypeName();
     }
 
     @Override
