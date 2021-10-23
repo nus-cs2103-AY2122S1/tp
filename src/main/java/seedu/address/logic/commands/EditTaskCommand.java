@@ -42,6 +42,7 @@ public class EditTaskCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task list.";
     public static final String MESSAGE_NO_CHANGES_MADE = "You haven't made any changes to the task.";
+    public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given Id cannot be found.";
 
     private final Index index;
     private final EditTaskDescriptor editTaskDescriptor;
@@ -74,8 +75,13 @@ public class EditTaskCommand extends Command {
             throw new CommandException(MESSAGE_NO_CHANGES_MADE);
         }
 
-        if (!taskToEdit.equals(editedTask) && model.hasTask(editedTask)) {
+        if (model.hasTask(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
+        }
+
+        long tagId = editedTask.getTagId();
+        if (tagId != -1 && !model.hasOrder(tagId)) {
+            throw new CommandException(MESSAGE_UNFOUND_ORDERID);
         }
 
         model.setTask(taskToEdit, editedTask);
