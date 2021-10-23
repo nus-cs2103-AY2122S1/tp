@@ -30,7 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TUTORIAL_GROUP = "B";
-    private static final String INVALID_SOCIAL_HANDLE = "rachel walker";
+    private static final String INVALID_SOCIAL_HANDLE = "tg:rachel walker";
     private static final String INVALID_TAG = "#friend";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_GENDER = "M";
@@ -38,7 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_NATIONALITY = "Vietnam";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TUTORIAL_GROUP = "09";
-    private static final String VALID_SOCIAL_HANDLE = "@rachelw";
+    private static final String VALID_SOCIAL_HANDLE = "tg:rachelw";
     private static final String VALID_REMARK = "she likes singing";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
@@ -176,29 +176,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseSocialHandle_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseSocialHandle((String) null));
-    }
-
-    @Test
-    public void parseSocialHandle_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseSocialHandle(INVALID_SOCIAL_HANDLE));
-    }
-
-    @Test
-    public void parseSocialHandle_validValueWithoutWhitespace_returnsSocialHandle() throws Exception {
-        SocialHandle expectedSocialHandle = new SocialHandle(VALID_SOCIAL_HANDLE);
-        assertEquals(expectedSocialHandle, ParserUtil.parseSocialHandle(VALID_SOCIAL_HANDLE));
-    }
-
-    @Test
-    public void parseSocialHandle_validValueWithWhitespace_returnsTrimmedSocialHandle() throws Exception {
-        String socialHandleWithWhitespace = WHITESPACE + VALID_SOCIAL_HANDLE + WHITESPACE;
-        SocialHandle expectedSocialHandle = new SocialHandle(VALID_SOCIAL_HANDLE);
-        assertEquals(expectedSocialHandle, ParserUtil.parseSocialHandle(socialHandleWithWhitespace));
-    }
-
-    @Test
     public void parseGender_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseGender((String) null));
     }
@@ -284,4 +261,20 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseSocialHandles_collectionWithInvalidSocialHandles_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(
+                Arrays.asList(VALID_SOCIAL_HANDLE, INVALID_SOCIAL_HANDLE)));
+    }
+
+    @Test
+    public void parseSocialHandles_collectionWithValidSocialHandles_returnsSocialHandleSet() throws Exception {
+        Set<SocialHandle> actualSocialHandleSet = ParserUtil.parseSocialHandles(Arrays.asList(VALID_SOCIAL_HANDLE));
+        Set<SocialHandle> expectedSocialHandleSet = new HashSet<>(
+                Arrays.asList(new SocialHandle(VALID_SOCIAL_HANDLE)));
+
+        assertEquals(expectedSocialHandleSet, actualSocialHandleSet);
+    }
+
 }

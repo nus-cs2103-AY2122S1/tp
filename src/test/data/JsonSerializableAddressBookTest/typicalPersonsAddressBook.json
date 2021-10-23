@@ -7,9 +7,12 @@
     "email" : "alice@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "09",
-    "socialHandle": "@alicep",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "socialHandles" : [ {
+      "platform" : "tg",
+      "value" : "alicep"
+    } ]
   }, {
     "name" : "Benson Meier",
     "gender": "M",
@@ -17,9 +20,12 @@
     "email" : "johnd@example.com",
     "nationality": "China ",
     "tutorialGroup": "08",
-    "socialHandle": "@bensonm",
     "remark" : "He can't take beer!",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "socialHandles" : [ {
+      "platform" : "tg",
+      "value" : "bensonm"
+    } ]
   }, {
     "name" : "Carl Kurz",
     "gender": "M",
@@ -27,9 +33,12 @@
     "email" : "heinz@example.com",
     "nationality": "Malaysia ",
     "tutorialGroup": "05",
-    "socialHandle": "@carlk",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "socialHandles" : [ {
+      "platform" : "tl",
+      "value" : "carlk"
+    } ]
   }, {
     "name" : "Daniel Meier",
     "gender": "M",
@@ -37,9 +46,12 @@
     "email" : "cornelia@example.com",
     "nationality": "Thailand ",
     "tutorialGroup": "09",
-    "socialHandle": "@danielm",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "socialHandles" : [ {
+      "platform" : "tg",
+      "value" : "danielm"
+    } ]
   }, {
     "name" : "Elle Meyer",
     "gender": "F",
@@ -47,7 +59,6 @@
     "email" : "werner@example.com",
     "nationality": "USA ",
     "tutorialGroup": "29",
-    "socialHandle": "@ellem",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
@@ -57,7 +68,6 @@
     "email" : "lydia@example.com",
     "nationality": "Australia ",
     "tutorialGroup": "19",
-    "socialHandle": "@fionak",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   }, {
@@ -67,7 +77,6 @@
     "email" : "anna@example.com",
     "nationality": "Vietnam ",
     "tutorialGroup": "28",
-    "socialHandle": "@georgeb",
     "remark" : "She likes aardvarks.",
     "tagged" : [ ]
   } ]

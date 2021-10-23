@@ -15,6 +15,7 @@ import java.util.Set;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.SocialHandle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,11 +41,10 @@ public class PersonUtil {
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_NATIONALITY + person.getNationality().value + " ");
         sb.append(PREFIX_TUTORIAL_GROUP + person.getTutorialGroup().value + " ");
-        sb.append(PREFIX_SOCIAL_HANDLE + person.getSocialHandle().value + " ");
         sb.append(PREFIX_REMARK + person.getRemark().value + " ");
-        person.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        person.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
+        person.getSocialHandles().stream()
+                .forEach(s -> sb.append(PREFIX_SOCIAL_HANDLE + s.platform + ":" + s.value + " "));
         return sb.toString();
     }
 
@@ -61,16 +61,27 @@ public class PersonUtil {
                 .append(nationality.value).append(" "));
         descriptor.getTutorialGroup().ifPresent(tutorialGroup -> sb.append(PREFIX_TUTORIAL_GROUP)
                 .append(tutorialGroup.value).append(" "));
-        descriptor.getSocialHandle().ifPresent(socialHandle -> sb.append(PREFIX_SOCIAL_HANDLE)
-                .append(socialHandle.value).append(" "));
         descriptor.getRemark().ifPresent(remark -> sb.append(PREFIX_REMARK).append(remark.value).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG + " ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
+            }
+        }
+        if (descriptor.getSocialHandles().isPresent()) {
+            Set<SocialHandle> socialHandles = descriptor.getSocialHandles().get();
+            if (socialHandles.isEmpty()) {
+                sb.append(PREFIX_SOCIAL_HANDLE + " ");
+            } else {
+                socialHandles.forEach(s -> sb
+                        .append(PREFIX_SOCIAL_HANDLE)
+                        .append(s.platform)
+                        .append(":")
+                        .append(s.value)
+                        .append(" "));
             }
         }
         return sb.toString();

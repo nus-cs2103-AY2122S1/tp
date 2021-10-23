@@ -26,7 +26,6 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_NATIONALITY = "Singapore";
     public static final String DEFAULT_TUTORIAL_GROUP = "01";
-    public static final String DEFAULT_SOCIAL_HANDLE = "@amybee";
     public static final String DEFAULT_REMARK = "She likes aardvarks.";
 
     private Name name;
@@ -35,9 +34,9 @@ public class PersonBuilder {
     private Email email;
     private Nationality nationality;
     private TutorialGroup tutorialGroup;
-    private SocialHandle socialHandle;
     private Remark remark;
     private Set<Tag> tags;
+    private Set<SocialHandle> socialHandles;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -49,9 +48,9 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         nationality = new Nationality(DEFAULT_NATIONALITY);
         tutorialGroup = new TutorialGroup(DEFAULT_TUTORIAL_GROUP);
-        socialHandle = new SocialHandle(DEFAULT_SOCIAL_HANDLE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
+        socialHandles = new HashSet<>();
     }
 
     /**
@@ -64,9 +63,9 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         nationality = personToCopy.getNationality();
         tutorialGroup = personToCopy.getTutorialGroup();
-        socialHandle = personToCopy.getSocialHandle();
         remark = personToCopy.getRemark();
         tags = new HashSet<>(personToCopy.getTags());
+        socialHandles = new HashSet<>(personToCopy.getSocialHandles());
     }
 
     /**
@@ -83,6 +82,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code socialHandles} into a {@code Set<SocialHandle>}
+     * and set it to the {@code Person} that we are building.
+     */
+    public PersonBuilder withSocialHandles(String ... socialHandles) {
+        this.socialHandles = SampleDataUtil.getSocialHandleSet(socialHandles);
         return this;
     }
 
@@ -119,14 +127,6 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code SocialHandle} of the {@code Person} that we are building.
-     */
-    public PersonBuilder withSocialHandle(String socialHandle) {
-        this.socialHandle = new SocialHandle(socialHandle);
-        return this;
-    }
-
-    /**
      * Sets the {@code Gender} of the {@code Person} that we are building.
      */
     public PersonBuilder withGender(String gender) {
@@ -147,7 +147,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, phone, email, nationality, tutorialGroup,
-                socialHandle, gender, remark, tags);
+                gender, remark, tags, socialHandles);
     }
 
 }

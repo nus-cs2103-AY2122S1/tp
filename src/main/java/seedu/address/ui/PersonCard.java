@@ -41,13 +41,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label tutorialGroup;
     @FXML
-    private Label socialHandle;
-    @FXML
     private Label gender;
     @FXML
     private Label remark;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane socialHandles;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -73,10 +73,6 @@ public class PersonCard extends UiPart<Region> {
         if (person.getTutorialGroup().value.isEmpty()) {
             tutorialGroup.setManaged(false);
         }
-        socialHandle.setText(person.getSocialHandle().value);
-        if (person.getSocialHandle().value.isEmpty()) {
-            socialHandle.setManaged(false);
-        }
         gender.setText(person.getGender().gender);
         if (person.getGender().gender.isEmpty()) {
             gender.setManaged(false);
@@ -88,6 +84,10 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        person.getSocialHandles().stream()
+                .sorted(Comparator.comparing(socialHandle -> socialHandle.platform))
+                .forEach(socialHandle -> socialHandles.getChildren()
+                .add(new Label(socialHandle.platform + " : " + socialHandle.value)));
     }
 
     @Override

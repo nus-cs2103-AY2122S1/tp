@@ -33,10 +33,11 @@ class JsonAdaptedPerson {
     private final String email;
     private final String nationality;
     private final String tutorialGroup;
-    private final String socialHandle;
+    private final String socialHandle = "";
     private final String gender;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedSocialHandle> socialHandles = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,20 +48,23 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("nationality") String nationality,
                              @JsonProperty("tutorialGroup") String tutorialGroup,
-                             @JsonProperty("socialHandle") String socialHandle,
+                             //@JsonProperty("socialHandle") String socialHandle, //Deprecated
                              @JsonProperty("gender") String gender,
                              @JsonProperty("remark") String remark,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("socialHandles") List<JsonAdaptedSocialHandle> socialHandles) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
-        this.socialHandle = socialHandle;
         this.gender = gender;
         this.remark = remark;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (socialHandles != null) {
+            this.socialHandles.addAll(socialHandles);
         }
     }
 
@@ -73,13 +77,14 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         nationality = source.getNationality().value;
         tutorialGroup = source.getTutorialGroup().value;
-        socialHandle = source.getSocialHandle().value;
         gender = source.getGender().gender;
         remark = source.getRemark().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-
+        socialHandles.addAll(source.getSocialHandles().stream()
+                .map(JsonAdaptedSocialHandle::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -135,15 +140,6 @@ class JsonAdaptedPerson {
         }
         final TutorialGroup modelTutorialGroup = new TutorialGroup(tutorialGroup);
 
-        if (socialHandle == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, SocialHandle.class.getSimpleName()));
-        }
-        if (!SocialHandle.isValidSocialHandle(socialHandle)) {
-            throw new IllegalValueException(SocialHandle.MESSAGE_CONSTRAINTS);
-        }
-        final SocialHandle modelSocialHandle = new SocialHandle(socialHandle);
-
         if (gender == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
@@ -163,8 +159,15 @@ class JsonAdaptedPerson {
         final Remark modelRemark = new Remark(remark);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final List<SocialHandle> personSocialHandles = new ArrayList<>();
+        for (JsonAdaptedSocialHandle socialHandle : socialHandles) {
+            personSocialHandles.add(socialHandle.toModelType());
+        }
+        final Set<SocialHandle> modelSocialHandles = new HashSet<>(personSocialHandles);
+
         return new Person(modelName, modelPhone, modelEmail, modelNationality,
-                modelTutorialGroup, modelSocialHandle, modelGender, modelRemark, modelTags);
+                modelTutorialGroup, modelGender, modelRemark, modelTags, modelSocialHandles);
     }
 
 }

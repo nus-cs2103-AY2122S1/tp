@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_NATIONALITY + "NATIONALITY "
             + PREFIX_TUTORIAL_GROUP + "TUTORIAL GROUP "
-            + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE "
+            + "[" + PREFIX_SOCIAL_HANDLE + "SOCIAL HANDLE]... "
             + PREFIX_REMARK + "REMARK "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_NATIONALITY + "Singapore "
             + PREFIX_TUTORIAL_GROUP + "09 "
-            + PREFIX_SOCIAL_HANDLE + "@johnd "
+            + PREFIX_SOCIAL_HANDLE + "tg:johnd "
             + PREFIX_REMARK + "likes to code "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";

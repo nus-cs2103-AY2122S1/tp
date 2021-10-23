@@ -6,8 +6,12 @@
     "email": "hans@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "09",
-    "socialHandle": "@valid",
-    "remark": "likes coding"
+    "remark": "likes coding",
+    "tagged" : [ "friends", "classmate" ],
+    "socialHandles" : [ {
+      "platform" : "ig",
+      "value" : "hans3470"
+    } ]
   }, {
     "name": "Person With Invalid Phone Field",
     "gender": "M",
@@ -15,7 +19,6 @@
     "email": "hans@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "28",
-    "socialHandle": "@valid",
     "remark": "likes coding"
   } ]
 }

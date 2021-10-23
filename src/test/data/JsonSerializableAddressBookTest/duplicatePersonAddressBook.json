@@ -6,7 +6,6 @@
     "email": "alice@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "09",
-    "socialHandle": "@valid",
     "remark": "likes coding",
     "tagged": [ "friends" ]
   }, {
@@ -16,7 +15,6 @@
     "email": "pauline@example.com",
     "nationality": "Singapore ",
     "tutorialGroup": "09",
-    "socialHandle": "@valid",
     "remark": "likes coding"
   } ]
 }

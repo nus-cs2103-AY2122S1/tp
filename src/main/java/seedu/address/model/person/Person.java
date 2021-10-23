@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.SpecialTag;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,50 +17,43 @@ public class Person {
 
     // Identity fields
     private final Name name;
-    private final Phone phone;
-    private final Email email;
 
     // Data fields
+    private final Phone phone;
+    private final Email email;
     private final Nationality nationality;
     private final TutorialGroup tutorialGroup;
-    private final SocialHandle socialHandle;
     private final Gender gender;
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
-    private final Set<SpecialTag> specialTags = new HashSet<>();
+    private final Set<SocialHandle> socialHandles = new HashSet<>();
 
     /**
-     * Every field must be present and not null.
+     * Constructs a {@code Person}
+     *
+     * @param name
+     * @param phone
+     * @param email
+     * @param nationality
+     * @param tutorialGroup
+     * @param gender
+     * @param remark
+     * @param tags
+     * @param socialHandles
      */
     public Person(Name name, Phone phone, Email email, Nationality nationality,
-                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Gender gender,
-                  Remark remark, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, gender, remark, tags);
+                  TutorialGroup tutorialGroup, Gender gender,
+                  Remark remark, Set<Tag> tags, Set<SocialHandle> socialHandles) {
+        requireAllNonNull(name, phone, email, nationality, tutorialGroup, gender, remark, tags, socialHandles);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.nationality = nationality;
         this.tutorialGroup = tutorialGroup;
-        this.socialHandle = socialHandle;
         this.gender = gender;
         this.remark = remark;
         this.tags.addAll(tags);
-    }
-
-    public Person(Name name, Phone phone, Email email, Nationality nationality,
-                  TutorialGroup tutorialGroup, SocialHandle socialHandle, Gender gender,
-                  Remark remark, Set<Tag> tags, Set<SpecialTag> specialTags) {
-        requireAllNonNull(name, phone, email, nationality, tutorialGroup, socialHandle, gender, remark, tags);
-        this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.nationality = nationality;
-        this.tutorialGroup = tutorialGroup;
-        this.socialHandle = socialHandle;
-        this.gender = gender;
-        this.remark = remark;
-        this.tags.addAll(tags);
-        this.specialTags.addAll(specialTags);
+        this.socialHandles.addAll(socialHandles);
     }
 
     public Name getName() {
@@ -84,10 +76,6 @@ public class Person {
         return tutorialGroup;
     }
 
-    public SocialHandle getSocialHandle() {
-        return socialHandle;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -104,10 +92,9 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public Set<SpecialTag> getSpecialTags() {
-        return Collections.unmodifiableSet(specialTags);
+    public Set<SocialHandle> getSocialHandles() {
+        return Collections.unmodifiableSet(socialHandles);
     }
-
 
     /**
      * Returns true if both persons have the same name.
@@ -142,43 +129,39 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getTutorialGroup().equals(getTutorialGroup())
-                && otherPerson.getSocialHandle().equals(getSocialHandle())
                 && otherPerson.getGender().equals(getGender())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getSpecialTags().equals(getSpecialTags());
+                && otherPerson.getSocialHandles().equals(getSocialHandles());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, nationality, tutorialGroup, socialHandle,
-                gender, remark, tags, specialTags);
+        return Objects.hash(name, phone, email, nationality, tutorialGroup,
+                gender, remark, tags, socialHandles);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append("; Gender: ")
-                .append(getGender())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Nationality: ")
-                .append(getNationality())
-                .append("; Tutorial Group: ")
-                .append(getTutorialGroup())
-                .append("; Social handle: ")
-                .append(getSocialHandle())
-                .append("; Remark: ")
-                .append(getRemark());
+                .append("; Gender: ").append(getGender())
+                .append("; Phone: ").append(getPhone())
+                .append("; Email: ").append(getEmail())
+                .append("; Nationality: ").append(getNationality())
+                .append("; Tutorial Group: ").append(getTutorialGroup())
+                .append("; Remark: ").append(getRemark());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+        Set<SocialHandle> socialHandles = getSocialHandles();
+        if (!socialHandles.isEmpty()) {
+            builder.append("; Social Handles: ");
+            socialHandles.forEach(builder::append);
         }
 
         return builder.toString();
