@@ -22,6 +22,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListApplicantCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListPositionCommand;
+import seedu.address.logic.commands.RejectionRateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -93,8 +94,12 @@ public class AddressBookParser {
         case DeletePositionCommand.COMMAND_WORD:
             return new DeletePositionCommandParser().parse(arguments);
 
+        case RejectionRateCommand.COMMAND_WORD:
+            return new RejectionRateCommandParser().parse(arguments);
+
         case EditPositionCommand.COMMAND_WORD:
             return new EditPositionCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
+import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -275,6 +276,8 @@ public class ModelManager implements Model {
         return userPrefs.getPositionBookFilePath();
     }
 
+    // Position related methods
+
     @Override
     public boolean hasPosition(Position position) {
         requireNonNull(position);
@@ -364,5 +367,28 @@ public class ModelManager implements Model {
     public ObservableList<Applicant> getFilteredApplicantList() {
         return filteredApplicants;
 
+    }
+
+    //========== Rejection rates =======================================
+    /**
+     * Initialise rejection rate of a new position.
+     *
+     * @param title The title of the position to be calculated.
+     * @return The rejection rate of a given position in MTR.
+     */
+    @Override
+    public float calculateRejectionRate(Title title) {
+        Position currPosition = positionBook.getPositionByTitle(title);
+        int total = (int) applicantBook.getApplicantList()
+                .stream()
+                .filter(applicant -> applicant.isApplyingTo(currPosition))
+                .count();
+
+        int count = (int) applicantBook.getApplicantList()
+                .stream()
+                .filter(applicant -> applicant.isApplyingTo(currPosition)
+                        && (applicant.getApplication().getStatus() == ApplicationStatus.REJECTED))
+                .count();
+        return Calculator.calculateRejectionRate(total, count);
     }
 }
