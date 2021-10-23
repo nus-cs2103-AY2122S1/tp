@@ -270,9 +270,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                     | save my contacts               | keep track of their details between sessions                            |
 | `* *`    | experienced user                         | directly adjust my save files  | bypass the CLI for simple bulk tasks                                    |
 | `* * *`  | user                                     | add my contact’s next-of-kin’s information | contact the patient’s next-of-kin should an emergency arise |
-| `* *`  | user                                     | quickly batch-remove contacts whose SHN has been completed | clear outdated contacts |
-| `* *`  | user                                     | delete multiple contacts at once | more easily clean my contacts |
-
+| `* *`    | user                                     | quickly batch-remove contacts whose SHN has been completed | clear outdated contacts                     |
+| `* *`    | user                                     | delete multiple contacts at once | more easily clean my contacts                                         |
+| `* *`    | user                                     | update contact's contact details and SHN periods | so that i do not have to re-enter existing data       |
 
 *{More to be added}*
 
@@ -442,16 +442,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -488,16 +488,37 @@ testers are expected to do more *exploratory* testing.
 
 2. _{ more test cases …​ }_
 
+### Editing a Person
+
+1. Editing a person while all persons are being shown
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `edit 1 n/John Doe`<br>
+      Expected: First person in the list has their name edited to `John Doe`. Details of the edited person shown in the status message.
+
+   3. Test case: `edit 1 n/John Doe cn/12`<br>
+      Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`. Details of the edited person shown in the status message.
+
+   4. Test case: `edit 1`<br>
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+
+   5. Test case: `edit 1 INVALID_PREFIX/EXAMPLE`<br>
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+
+2. _{ more test cases …​ }_
+
 ### Clearing person(s) with completed SHN periods
 
 1. Clearing person(s) while all persons are being shown
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-    1. Test case: `clear`<br>
-       Expected: All persons with completed SHN periods are deleted from the list. Success message is shown. Timestamp in the status bar is updated.
+   2. Test case: `clear`<br>
+      Expected: All persons with completed SHN periods are deleted from the list. Success message is shown. Timestamp in the status bar is updated.
     
-    1. Test case: `clear x` (where x is any character)<br>
-       Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+   3. Test case: `clear x` (where x is any character)<br>
+      Expected: Similar to previous. All trailing characters or whitespaces are ignored.
+
+2. _{ more test cases …​ }_
 
 ### Saving data
 
