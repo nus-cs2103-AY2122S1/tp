@@ -34,6 +34,9 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private PersonListPanelMinimal personListPanelMinimal;
     private TaskListPanel taskListPanel;
+    private HelpListPanel helpListPanelGeneral;
+    private HelpListPanel helpListPanelContact;
+    private HelpListPanel helpListPanelTask;
     private HelpPanel helpPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -126,11 +129,19 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         tabMenu.getContactsGridPane().add(personListPanel.getRoot(), 0, 1);
+
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         tabMenu.getTasksGridPane().add(taskListPanel.getRoot(), 0, 1);
         personListPanelMinimal = new PersonListPanelMinimal(logic.getFilteredPersonList());
         tabMenu.getTasksGridPane().add(personListPanelMinimal.getRoot(), 1, 1);
+
         helpPanel = new HelpPanel(resultDisplay);
+        helpListPanelGeneral = new HelpListPanel(helpPanel.initialiseHelpListGeneral());
+        helpListPanelContact = new HelpListPanel(helpPanel.initialiseHelpListContact());
+        helpListPanelTask = new HelpListPanel(helpPanel.initialiseHelpListTask());
+        helpPanel.getCommandContainer().add(helpListPanelGeneral.getRoot(), 0, 1);
+        helpPanel.getCommandContainer().add(helpListPanelContact.getRoot(), 0, 4);
+        helpPanel.getCommandContainer().add(helpListPanelTask.getRoot(), 0, 7);
         tabMenu.getHelpGridPane().add(helpPanel.getRoot(), 0, 1);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
