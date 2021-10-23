@@ -124,6 +124,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void importFile(Path filePath) {
+            throw new AssertionError("this method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }

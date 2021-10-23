@@ -14,8 +14,13 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.GitHubId;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NusNetworkId;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.StudentId;
+import seedu.address.model.person.TutorialId;
+import seedu.address.model.person.Type;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,21 +45,31 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * Parses {@code filePath} into an {@code Path} and returns it. Leading and trailing whitespaces will be
      * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * @throws ParseException if the specified filepath is invalid (cannot be converted to a Path).
      */
-    public static Path parseFilePath(String filePath) throws ParseException {
+    public static Path parseNewFilePath(String filePath) throws ParseException {
         requireNonNull(filePath);
         String trimmedFilePath = filePath.trim();
-        if (trimmedFilePath == null) {
-            throw new ParseException(MESSAGE_INVALID_FILEPATH);
-        }
-
-        if (trimmedFilePath != null && !FileUtil.isValidPath(trimmedFilePath)) {
+        if (!FileUtil.isValidPath(trimmedFilePath)) {
             throw new ParseException(MESSAGE_INVALID_FILEPATH);
         }
         return Paths.get(trimmedFilePath);
+    }
+
+    /**
+     * Parses {@code filePath} into an {@code Path} and returns it.
+     * @throws ParseException if the specified filepath is invalid (does not exist).
+     */
+    public static Path parseExistingFilePath(String filePath) throws ParseException {
+        requireNonNull(filePath);
+        String trimmedFilePath = filePath.trim();
+        Path path = Paths.get(trimmedFilePath);
+        if (!FileUtil.isFileExists(path)) {
+            throw new ParseException(MESSAGE_INVALID_FILEPATH);
+        }
+        return path;
     }
 
     /**
@@ -143,4 +158,81 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String gitHubId} into an {@code GitHubId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gitHubId} is invalid.
+     */
+    public static GitHubId parseGitHubId(String gitHubId) throws ParseException {
+        requireNonNull(gitHubId);
+        String trimmedGitHubId = gitHubId.trim();
+        if (!GitHubId.isValidGitHubId(trimmedGitHubId)) {
+            throw new ParseException(GitHubId.MESSAGE_CONSTRAINTS);
+        }
+        return new GitHubId(trimmedGitHubId);
+    }
+
+    /**
+     * Parses a {@code String nusNetworkId} into an {@code NusNetworkId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nusNetworkId} is invalid.
+     */
+    public static NusNetworkId parseNusNetworkId(String nusNetworkId) throws ParseException {
+        requireNonNull(nusNetworkId);
+        String trimmedNusNetworkId = nusNetworkId.trim();
+        if (!NusNetworkId.isValidNusNetworkId(trimmedNusNetworkId)) {
+            throw new ParseException(NusNetworkId.MESSAGE_CONSTRAINTS);
+        }
+        return new NusNetworkId(trimmedNusNetworkId);
+    }
+
+    /**
+     * Parses a {@code String type} into an {@code NusNetworkId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code type} is invalid.
+     */
+    public static Type parseType(String type) throws ParseException {
+        requireNonNull(type);
+        String trimmedType = type.trim();
+        if (!Type.isValidType(trimmedType)) {
+            throw new ParseException(Type.MESSAGE_CONSTRAINTS);
+        }
+        return new Type(trimmedType);
+    }
+
+    /**
+     * Parses a {@code String studentId} into an {@code NusNetworkId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code studentId} is invalid.
+     */
+    public static StudentId parseStudentId(String studentId) throws ParseException {
+        requireNonNull(studentId);
+        String trimmedStudentId = studentId.trim();
+        if (!StudentId.isValidStudentId(trimmedStudentId)) {
+            throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
+        }
+        return new StudentId(trimmedStudentId);
+    }
+
+    /**
+     * Parses a {@code String tutorialId} into an {@code NusNetworkId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tutorialId} is invalid.
+     */
+    public static TutorialId parseTutorialId(String tutorialId) throws ParseException {
+        requireNonNull(tutorialId);
+        String trimmedTutorialId = tutorialId.trim();
+        if (!TutorialId.isValidTutorialId(trimmedTutorialId)) {
+            throw new ParseException(TutorialId.MESSAGE_CONSTRAINTS);
+        }
+        return new TutorialId(trimmedTutorialId);
+    }
+
+
 }

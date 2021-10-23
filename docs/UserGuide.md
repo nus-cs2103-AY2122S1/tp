@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ProfBook Level 3 (*P*B3)  is a desktop app for managing contacts, optimized for use via a Command Line Interface
+(CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, PB3 can get your
+contact management tasks done faster than traditional GUI apps. PB3 helps CS2103 Instructors manage both students
+and TAs contacts within teams and tutorial groups. It is optimized for CLI users so that tasks can be done in bulk especially when dealing with huge number of contacts
 
 * Table of Contents
 {:toc}
@@ -14,9 +17,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `profbook.jar` from [here](https://github.com/AY2122S1-CS2103-T16-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your ProfBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -72,20 +75,19 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-
 ### Adding a person: `add`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME s/STUDENT_ID N/NUSNet_ID g/GITHUB_ID T/TUTORIAL_ID {r/student|r/tutor} p/PHONE_NUMBER a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Siddharth Srivastava s/A0226588N N/E0638874 g/Siddharth-Sid T/16 r/student p/98765432 a/John street, block 123, #01-01 t/incomplete ip`
+* `add n/Rachel Cheah s/A0894765F N/E0987654 g/RachelCheah T/16 r/student p/12345678 a/123, Jurong West Ave 6, #08-111`
 
 ### Listing all persons : `list`
 
@@ -97,7 +99,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [s/STUDENT_ID] [N/NUSNet_ID] [g/GITHUB_ID] [T/TUTORIAL_ID] [{r/student|r/tutor}] [p/PHONE_NUMBER] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -107,8 +109,9 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
     specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 n/Siddharth Srivastava t/IncompleteIP` Edits the name of the 1st person to be `Siddharth Srivastava` and replaces all existing tags with the tag `IncompleteIP`.
 
 ### Locating persons by name: `find`
 
@@ -151,11 +154,19 @@ Examples:
 
 ### Import existing contacts from JSON: `import`
 
-Merges all contacts in a JSON file with the existing contacts in PAB3.
+Merges all contacts in a JSON file with the existing contacts in PB3.
 
 Format: `import FILENAME`
 
 * Reads the contacts in `FILENAME` and merges them into the existing contacts.
+
+### Export filtered contacts to JSON: `export`
+
+Exports all current filtered contacts into a JSON file.
+
+Format: `export FILENAME`
+
+* Takes the current filtered list of contacts and writes them into `FILENAME`
 
 ### Exiting the program : `exit`
 
@@ -165,17 +176,21 @@ Format: `exit`
 
 ### Saving the data
 
-PAB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save 
+PB3 data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually.
 
 ### Editing the data file
 
-PAB3 data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update 
+PB3 data is saved as a JSON file `[JAR file location]/data/profbook.json`. Advanced users are welcome to update
 data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, ProfBook will discard all data and start with an empty data
+file at the next run.
 </div>
+
+### Coming Soon
+Export feature...
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -183,8 +198,8 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that 
-contains the data of your previous PAB3 home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that
+contains the data of your previous PB3 home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -1,0 +1,82 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteCommandParser" as DeleteCommandParser LOGIC_COLOR
+participant "d:DeleteCommand" as DeleteCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete -f")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete -f")
+activate AddressBookParser
+
+create DeleteCommandParser
+AddressBookParser -> DeleteCommandParser
+activate DeleteCommandParser
+
+DeleteCommandParser --> AddressBookParser
+deactivate DeleteCommandParser
+
+AddressBookParser -> DeleteCommandParser : parse("-f")
+activate DeleteCommandParser
+
+create DeleteCommand
+DeleteCommandParser -> DeleteCommand : allShown()
+activate DeleteCommand
+
+DeleteCommand --> DeleteCommandParser : d
+deactivate DeleteCommand
+
+DeleteCommandParser --> AddressBookParser : d
+deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> AddressBookParser
+destroy DeleteCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> DeleteCommand : execute()
+activate DeleteCommand
+
+DeleteCommand -> DeleteCommand : deleteAllShown()
+activate DeleteCommand
+
+DeleteCommand -> Model : getFilteredPersonList()
+activate Model
+
+Model --> DeleteCommand : personsToDelete
+
+loop for each person in personsToDelete
+DeleteCommand -> Model : deletePerson(person)
+activate Model
+
+Model --> DeleteCommand
+deactivate Model
+end
+
+create CommandResult
+DeleteCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> DeleteCommand
+deactivate CommandResult
+
+DeleteCommand --> DeleteCommand
+deactivate DeleteCommand
+
+DeleteCommand --> LogicManager : result
+deactivate DeleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

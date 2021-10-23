@@ -3,44 +3,79 @@
   "persons" : [ {
     "name" : "Alice Pauline",
     "phone" : "94351253",
-    "email" : "alice@example.com",
+    "email" : "e0000000@u.nus.edu",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "gitHubId" : "alice-pauline",
+    "nusNetworkId" : "e0000000",
+    "type" : "student",
+    "studentId" : "A0000000X",
+    "tutorialId" : "00"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
-    "email" : "johnd@example.com",
+    "email" : "e0000001@u.nus.edu",
     "address" : "311, Clementi Ave 2, #02-25",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ "owesMoney", "friends" ],
+    "gitHubId" : "benson-meier",
+    "nusNetworkId" : "e0000001",
+    "type" : "student",
+    "studentId" : "A0000001X",
+    "tutorialId" : "01"
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
-    "email" : "heinz@example.com",
+    "email" : "e0000002@u.nus.edu",
     "address" : "wall street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "gitHubId" : "carl-kurz",
+    "nusNetworkId" : "e0000002",
+    "type" : "student",
+    "studentId" : "A0000002X",
+    "tutorialId" : "02"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
-    "email" : "cornelia@example.com",
+    "email" : "e0000003@u.nus.edu",
     "address" : "10th street",
-    "tagged" : [ "friends" ]
+    "tagged" : [ "friends" ],
+    "gitHubId" : "daniel-meier",
+    "nusNetworkId" : "e0000003",
+    "type" : "student",
+    "studentId" : "A0000003X",
+    "tutorialId" : "03"
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
-    "email" : "werner@example.com",
+    "email" : "e0000004@u.nus.edu",
     "address" : "michegan ave",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "gitHubId" : "elle-meyer",
+    "nusNetworkId" : "e0000004",
+    "type" : "student",
+    "studentId" : "A0000004X",
+    "tutorialId" : "04"
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
-    "email" : "lydia@example.com",
+    "email" : "e0000005@u.nus.edu",
     "address" : "little tokyo",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "gitHubId" : "fiona-kunz",
+    "nusNetworkId" : "e0000005",
+    "type" : "student",
+    "studentId" : "A0000005X",
+    "tutorialId" : "05"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
+    "email" : "e0000006@u.nus.edu",
     "address" : "4th street",
-    "tagged" : [ ]
+    "tagged" : [ ],
+    "gitHubId" : "george-best",
+    "nusNetworkId" : "e0000006",
+    "type" : "student",
+    "studentId" : "A0000006X",
+    "tutorialId" : "06"
   } ]
 }

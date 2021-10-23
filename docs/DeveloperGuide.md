@@ -152,9 +152,53 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 ## **Implementation**
 
-This section describes some noteworthy details on how certain features are implemented.
+### Data Archiving Features
 
-### \[Proposed\] Undo/redo feature
+#### Import feature
+
+The import feature is facilitated by `ImportCommand`. It extends `Command` with a file path where the targeted import file is stored, stored internally as a `filePath`. It also overwrites the `execute` function to import the json file from the file path stored.
+
+This operation is exposed in the `Model` interface as `Model#importFile(Path filePath)`. This is further facilitated by an additional function in `AddressBook`, `AddressBook#mergeFile`.
+
+The following sequence diagram shows how the import operation works:
+![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
+
+#### !TODO Export feature
+
+### Address Book Management
+
+#### Delete feature
+
+The `delete` mechanism relies on `ModelManager#deletePerson()`. The Person(s) to be deleted is obtained through `ModelManager#getFilteredPersonList()`
+
+Below is a sequence diagram for deleting a Person from the address book, executed after the user inputs `delete 1`
+
+![Sequence of the Delete command](images/DeleteSequenceDiagram.png)
+
+`DeleteCommand` also exposes 2 factory methods: 
+- `DeleteCommand#allShown()` returns a `DeleteCommand` which deletes all Persons shown in the main window.
+- `DeleteCommand#all()` which deletes all Persons in the address book.
+
+Below is a sequence diagram for the deleting all shown Persons executed after the user inputs `delete -f` or `delete -a -f`. `DeleteCommand` iterates through the list returned by `Model#getFilteredPersonList()` to delete all Persons shown in the main window.
+
+![Sequence of the Delete All Shown command](images/DeleteAllShownSequenceDiagram.png)
+
+The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`. 
+
+### Search features
+
+#### Find feature
+
+The find feature is facilitated by `FindCommand`. It extends `Command` with a type to be searched, as well as the 
+key to be searched. This feature uses `AttributeContainsKeywordsPredicate#test(Person)` and the person to be searched
+is obtained using `ModelManager#getFilteredPersonList()`. If a search using a partial match can be done, the feature
+also uses `AttributeContainsKeywordsPredicate#testByType(Person, String)`.
+
+The following sequence diagram shows how the find operation works for a name:
+![FindCommandNameSequenceDiagram](images/FindNameSequenceDiagram.png)
+
+The following sequence diagram shows how the find operation works for a Tutorial ID:
+[comment]: <> (![FindCommandTutIdSequenceDiagram]&#40;images/FindTutIdSequenceDiagram.png&#41;)
 
 #### Proposed Implementation
 
@@ -163,7 +207,6 @@ The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It ex
 * `VersionedAddressBook#commit()` — Saves the current address book state in its history.
 * `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
 * `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
 These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
@@ -171,13 +214,11 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
-
 Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
 Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
 ![UndoRedoState2](images/UndoRedoState2.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
@@ -234,9 +275,6 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -257,7 +295,8 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
+* instructor from cs2103
+* has a need to manage a significant number of contacts of students and tutors
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -276,7 +315,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | Professor                                  | add a new person                              | keep track of all my students and TAs                                               |
 | `* * *`  | Professor                                  | tag contacts                                  | keep track of Lecture/Tutorial groups that different contacts belong to             |
 | `* * *`  | beginner user                              | see all the contacts I have at once           | easily tell who I have added and who I have not                                     |
-| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using PAB3 without manually inputting every piece of information              |
+| `* * *`  | impatient user                             | import my existing contacts from a json file  | start using PB3 without manually inputting every piece of information              |
 | `* * *`  | cautious user                              | export my existing contacts to a json file    | move my address book or keep a backup                                               |
 | `* * *`  | beginner user                              | save the data to a json document              | update it manually and have the option to close the program and open it again later |
 | `* * *`  | organised user                             | delete a specific contact with a specific detail | remove entries that I no longer need                                             |
@@ -297,7 +336,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list persons
+1.  User requests to list/search persons
 2.  AddressBook shows a list of persons
 3.  User requests to delete a specific person in the list
 4.  AddressBook deletes the person
@@ -316,20 +355,118 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+
+**Use case: Add a person**
+
+**MSS**
+
+1. User requests to add a person
+2. AddressBook checks if input is valid
+3. AddressBook adds the persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Arguments that should be there is not there
+  * 2a1. Address Book rejects the command and shows an error message.
+
+    Use case ends.
+
+
+
+**Use case: Edit a contact**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  AddressBook shows a list of persons
+3.  User requests to edit a specific person in the list
+4.  AddressBook edits the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+* 3b. The attribute to be edited does not exist.
+  * 3b1. AddressBook shows an error message.
+  * Use case ends
+  *
+
+
+**Use case: Export contacts**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  AddressBook shows a list of persons
+3.  User requests to export the list
+4.  AddressBook exports list to JSON file
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The file directory is invalid
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Import existing contacts**
+
+**MSS**
+
+1. User requests to import existing contacts from JSON file.
+2. AddressBook checks if file is valid format
+3. AddressBook shows a list of persons
+4. User decides to import (or not)
+5. AddressBook imports if user selects yes
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The file is in invalid format/does not exist
+
+    * 3a1. AddressBook shows an error message.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The system should be usable by a novice who has never used any similar application.
+5. The project is expected to adhere to a schedule that delivers a new version every 2 weeks.
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Person**: A single contact in the address book. An individual can be represented by multiple Persons if they are added multiple times.
+* **Tag**: A text string associated with a person. A person can have multiple tags, and a tag can be added to multiple persons.
 
 --------------------------------------------------------------------------------------------------------------------
 
