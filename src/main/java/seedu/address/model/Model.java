@@ -64,6 +64,8 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasModuleLesson(ModuleLesson lesson);
+
     /**
      * Deletes the given person.
      * The person must exist in the address book.
