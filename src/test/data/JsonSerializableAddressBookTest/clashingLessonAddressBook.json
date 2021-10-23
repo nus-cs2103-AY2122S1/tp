@@ -18,6 +18,7 @@
       "timeRange" : "1030-1230",
       "subject" : "Math",
       "homework" : [ ],
+      "lessonRates" : "37.50",
       "isRecurring" : true
     } ]
   }, {
@@ -38,6 +39,7 @@
       "timeRange" : "1030-1230",
       "subject" : "Science",
       "homework" : [ "TYS Page 2" ],
+      "lessonRates" : "37.50",
       "isRecurring" : false
     } ]
   } ]
