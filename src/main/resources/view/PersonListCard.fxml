@@ -16,6 +16,7 @@
         </padding>
         <GridPane alignment="CENTER" prefHeight="195.0" prefWidth="370.0">
             <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.99996821085611" minWidth="10.0" prefWidth="20" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.99996821085611" minWidth="10.0" prefWidth="100" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="135.66664505004883" minWidth="10.0" prefWidth="100" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.66667683919275" minWidth="10.0" prefWidth="150" />
@@ -29,14 +30,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="name" contentDisplay="CENTER" styleClass="cell_big_label" text="\$first" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$phone" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="address" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$address" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$email" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$status" wrapText="true" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$salary" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" prefHeight="90.0" prefWidth="63.0" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="index" contentDisplay="CENTER" styleClass="cell_big_label" text="\$index" wrapText="true" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="name" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_big_label" text="\$name" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="phone" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$phone" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="address" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$address" wrapText="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="email" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$email" wrapText="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <FlowPane fx:id="roles" alignment="CENTER" columnHalignment="CENTER" prefHeight="94.0" prefWidth="64.0" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="status" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$status" wrapText="true" GridPane.columnIndex="6" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <Label fx:id="salary" alignment="CENTER" contentDisplay="CENTER" styleClass="cell_small_label" text="\$salary" wrapText="true" GridPane.columnIndex="7" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                <FlowPane fx:id="tags" alignment="CENTER" columnHalignment="CENTER" prefHeight="90.0" prefWidth="63.0" GridPane.columnIndex="8" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             </children>
         </GridPane>
     </VBox>
