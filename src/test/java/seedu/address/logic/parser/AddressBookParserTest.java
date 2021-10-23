@@ -84,7 +84,7 @@ public class AddressBookParserTest {
     public void parseCommand_findGroup() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindGroupCommand command = (FindGroupCommand) parser.parseCommand(
-                FindGroupCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindGroupCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindGroupCommand(new GroupContainsKeywordsPredicate(keywords)), command);
     }
 

@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_YEAR;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -208,7 +209,6 @@ public class CommandTestUtil {
 
         Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
         final String[] splitName = group.getName().name.split("\\s+");
-        model.updateFilteredGroupList(new NameContainsGroupKeywordsPredicate(List.of(splitName[0])));
         model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredGroupList().size());
