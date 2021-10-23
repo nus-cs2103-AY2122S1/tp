@@ -1,8 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +28,19 @@ public class DeleteCommand extends Command {
     public static final int INVALID_INDEX = -1;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified "
-            + "by the index number used in the displayed person list or by the name identifier.\n\n"
+            + ": Deletes the person(s) identified "
+            + "by the index number used in the displayed person list or by their name "
+            + "or by their status or role.\n\n"
             + "Parameters:\n"
-            + PREFIX_INDEX + "INDEX or "
-            + PREFIX_NAME + " NAME\n\n"
+            + PREFIX_DASH_INDEX + " INDEX\n"
+            + PREFIX_DASH_NAME + " NAME\n"
+            + PREFIX_DASH_ROLE + " ROLE\n"
+            + PREFIX_DASH_STATUS + " STATUS\n\n"
             + "Examples:\n" + COMMAND_WORD + " "
-            + PREFIX_INDEX + "1\n"
-            + COMMAND_WORD + " " + PREFIX_NAME + "Alex Yeoh";
+            + PREFIX_DASH_INDEX + " 1\n"
+            + COMMAND_WORD + " " + PREFIX_DASH_NAME + " Alex Yeoh\n"
+            + COMMAND_WORD + " " + PREFIX_DASH_ROLE + " kitchen\n"
+            + COMMAND_WORD + " " + PREFIX_DASH_STATUS + " parttime";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
     public static final String MESSAGE_DELETE_PEOPLE_SUCCESS = "Deleted these people:\n\n";
