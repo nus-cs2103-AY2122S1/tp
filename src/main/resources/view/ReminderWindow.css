@@ -1,0 +1,72 @@
+.list-view {
+    -fx-background-color: #E2E5F2;
+    -fx-text-fill: #424874;
+    -fx-padding: 10 0 10 5;
+}
+
+.label {
+    -fx-text-fill: #424874;
+    -fx-padding: 2px;
+}
+
+.list-cell {
+    -fx-wrap-text: true;
+    -fx-font-size: 14px;
+    -fx-background-radius: 15;
+    -fx-background-insets: 5 10 5 10;
+    -fx-padding: 12 17 12 17;
+}
+
+.list-cell:odd {
+    -fx-background-color: white;
+}
+
+.list-cell:even {
+    -fx-background-color: white;
+}
+
+.list-cell:selected {
+    -fx-background-color: #A6B1E145;
+}
+
+/* Style adapted from: https://edencoding.com/style-tableview-javafx/ */
+.list-view .virtual-flow .scroll-bar:vertical,
+.list-view .virtual-flow .scroll-bar:vertical .track,
+.list-view .virtual-flow .scroll-bar:vertical .track-background,
+.list-view .virtual-flow .scroll-bar:horizontal,
+.list-view .virtual-flow .scroll-bar:horizontal .track,
+.list-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: #E2E5F2;
+}
+
+.list-view .virtual-flow .scroll-bar .increment-button,
+.list-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2.5;
+}
+
+.list-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color: #EFF1F6;
+}
+
+.list-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: #EFF1F6;
+}
+
+.cell_big_label {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+}
+
+#homeworkList {
+    -fx-hgap: 7;
+    -fx-padding: 3 0 3 0;
+}
+
+#homeworkList .label {
+    -fx-text-fill: white;
+    -fx-background-color: #F2A861;
+    -fx-padding: 3 12 3 12;
+    -fx-background-radius: 20;
+    -fx-font-size: 14;
+}

@@ -11,7 +11,7 @@
         <Scene>
             <stylesheets>
                 <URL value="@Fonts.css" />
-                <URL value="@HelpWindow.css" />
+                <URL value="@ReminderWindow.css" />
             </stylesheets>
             <VBox minHeight="600.0" minWidth="550.0">
             <children>
