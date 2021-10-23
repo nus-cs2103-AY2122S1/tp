@@ -31,7 +31,8 @@ public class FindProductCommand extends Command {
         requireNonNull(model);
         model.updateFilteredProductList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()));
+                String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()),
+                CommandType.FIND, null, false);
     }
 
     @Override

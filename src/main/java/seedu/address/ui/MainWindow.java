@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Category;
@@ -198,17 +199,14 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
-    private void handleList(TabPaneBehavior tpb, int selectedTab, Category category) {
-        if (category instanceof Client) {
-            logger.info("List all clients");
+    private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, boolean isClient) {
+        if (isClient) {
             if (selectedTab == 1) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
-        if (category instanceof Product) {
-            logger.info("List all products");
+        } else {
             if (selectedTab == 0) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
@@ -269,24 +267,25 @@ public class MainWindow extends UiPart<Stage> {
             TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
             Category category = commandResult.getInfo();
 
-            if (commandResult.isList()) {
-                handleList(tpb, selectedTab, category);
-            }
+            CommandType commandType = commandResult.getCommandType();
+            Boolean isClient = commandResult.getIsClientCommand();
 
-            if (commandResult.isViewMore()) {
-                handleView(tpb, selectedTab, category);
-            }
-
-            if (commandResult.isShowHelp()) {
+            switch(commandType) {
+            case HELP:
                 handleHelp();
-            }
-
-            if (commandResult.isExit()) {
+                break;
+            case EXIT:
                 handleExit();
-            }
-
-            if (commandResult.isStat()) {
+                break;
+            case STAT:
                 handleStat();
+                break;
+            case VIEW:
+                handleView(tpb, selectedTab, category);
+                break;
+            default:
+                handleChangeTab(tpb, selectedTab, isClient);
+                break;
             }
 
             return commandResult;

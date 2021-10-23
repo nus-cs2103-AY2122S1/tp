@@ -9,6 +9,6 @@ public class StatCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(MESSAGE_SUCCESS, false, false, false, null, true, false);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.STAT, null, false);
     }
 }
