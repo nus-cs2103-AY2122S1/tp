@@ -159,6 +159,7 @@ public class ModelManager implements Model {
     /**
      * Adds a task to taskBook.
      */
+    @Override
     public void addTask(Task toAdd) {
         taskBook.addTask(toAdd);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
@@ -167,8 +168,16 @@ public class ModelManager implements Model {
     /**
      * Deletes a task from taskBook.
      */
+    @Override
     public void deleteTask(Task toDelete) {
         taskBook.deleteTask(toDelete);
+    }
+
+    /**
+     * Deletes all tasks matching predicate from taskBook.
+     */
+    public void deleteTaskIf(Predicate<Task> pred) {
+        taskBook.deleteTaskIf(pred);
     }
 
     @Override
@@ -187,7 +196,6 @@ public class ModelManager implements Model {
         requireNonNull(predicate);
         filteredTasks.setPredicate(predicate);
     }
-
 
     @Override
     public void markTask(Task toMark) {
