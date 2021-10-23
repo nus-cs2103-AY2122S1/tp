@@ -18,7 +18,6 @@ import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
-import seedu.address.model.participant.Note;
 import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
@@ -147,33 +146,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code String note} into a {@code Note}.
-     */
-    public static Note parseNote(String note) throws ParseException {
-        requireNonNull(note);
-        String trimmedNote = note.trim();
-        // format: Importance: <content>
-        String[] parts = trimmedNote.split(":");
-        if (parts.length != 2) {
-            throw new ParseException(Note.MESSAGE_INVALID_NOTE_FORMAT);
-        }
-        Note.Importance importance = parseImportance(parts[0]);
-        return new Note(parts[1].trim(), importance);
-    }
-
-    /**
-     * Parses {@code Collection<String> notes} into a {@code Set<Note>}.
-     */
-    public static Set<Note> parseNotes(Collection<String> notes) throws ParseException {
-        requireNonNull(notes);
-        final Set<Note> tagNotes = new HashSet<>();
-        for (String noteDescription : notes) {
-            tagNotes.add(parseNote(noteDescription));
-        }
-        return tagNotes;
-    }
-
-    /**
      * Parses {@code String nextOfKin} into a {@code NextOfKin}.
      */
     public static NextOfKin parseNextOfKin(String nextOfKin) throws ParseException {
@@ -194,26 +166,6 @@ public class ParserUtil {
         return nextOfKins;
     }
 
-    /**
-     * Parses {@code String importance} into a {@code Importance in Note}.
-     */
-    public static Note.Importance parseImportance(String importance) throws ParseException {
-        requireNonNull(importance);
-        switch (importance) {
-        case "VERY_HIGH":
-            return Note.Importance.VERY_HIGH;
-        case "HIGH":
-            return Note.Importance.HIGH;
-        case "MEDIUM":
-            return Note.Importance.MEDIUM;
-        case "LOW":
-            return Note.Importance.LOW;
-        case "VERY_LOW":
-            return Note.Importance.VERY_LOW;
-        default:
-            throw new ParseException(MESSAGE_INVALID_IMPORTANCE + " " + importance);
-        }
-    }
     /**
      * Parses {@code String eventName} into a {@code EventName}.
      */

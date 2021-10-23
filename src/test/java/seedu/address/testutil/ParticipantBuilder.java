@@ -7,8 +7,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.participant.Address;
@@ -16,12 +14,9 @@ import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
 import seedu.address.model.participant.NextOfKin;
-import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
-
 
 public class ParticipantBuilder {
 
@@ -37,9 +32,7 @@ public class ParticipantBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Set<Tag> tags;
     private BirthDate birthDate;
-    private Set<Note> notes;
     private ArrayList<NextOfKin> nextOfKins;
 
     /**
@@ -50,9 +43,7 @@ public class ParticipantBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        tags = new HashSet<>();
         birthDate = BirthDate.notSpecified();
-        notes = new HashSet<>();
         nextOfKins = new ArrayList<>();
     }
 
@@ -64,9 +55,7 @@ public class ParticipantBuilder {
         phone = participantToCopy.getPhone();
         email = participantToCopy.getEmail();
         address = participantToCopy.getAddress();
-        tags = new HashSet<>(participantToCopy.getTags());
         birthDate = participantToCopy.getBirthDate();
-        notes = new HashSet<>(participantToCopy.getNotes());
         nextOfKins = participantToCopy.getNextOfKins();
     }
 
@@ -75,14 +64,6 @@ public class ParticipantBuilder {
      */
     public ParticipantBuilder withName(String name) {
         this.name = new Name(name);
-        return this;
-    }
-
-    /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Participant} that we are building.
-     */
-    public ParticipantBuilder withTags(String... tags) {
-        this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
 
@@ -127,22 +108,6 @@ public class ParticipantBuilder {
     }
 
     /**
-     * Sets the {@code notes} of the {@code Participant} that we are building.
-     */
-    public ParticipantBuilder withNotes(Set<Note> notes) {
-        this.notes = notes;
-        return this;
-    }
-
-    /**
-     * Sets the {@code notes} of the {@code Participant} that we are building.
-     */
-    public ParticipantBuilder withNotes(Note... notes) {
-        this.notes = SampleDataUtil.getNoteSet(notes);
-        return this;
-    }
-
-    /**
      * Sets the {@code nextOfKins} of the {@code Participant} that we are building.
      */
     public ParticipantBuilder withNextOfKins(NextOfKin... nextOfKins) {
@@ -156,7 +121,7 @@ public class ParticipantBuilder {
      * @return a Participant.
      */
     public Participant build() {
-        return new Participant(name, phone, email, address, tags, birthDate, notes, nextOfKins);
+        return new Participant(name, phone, email, address, birthDate, nextOfKins);
     }
 
 }
