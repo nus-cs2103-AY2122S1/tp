@@ -115,7 +115,8 @@ public class Order implements Comparable<Order> {
         Order otherOrder = (Order) other;
         return otherOrder.getCustomer().equals(getCustomer())
                 && otherOrder.getDate().equals(getDate())
-                && otherOrder.getAmount().equals(getAmount());
+                && otherOrder.getAmount().equals(getAmount())
+                && otherOrder.getId() == getId();
 
     }
 
