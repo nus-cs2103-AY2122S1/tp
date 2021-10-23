@@ -277,8 +277,15 @@ public class MainWindow extends UiPart<Stage> {
      * @throws JSONException JSON error
      */
     private void writeToCsv(JSONArray data, File dest) throws JSONException, IOException {
-        String csvData = CDL.toString(data);
-        FileUtils.writeStringToFile(dest, csvData, Charset.defaultCharset());
+        if (dest != null) {
+            String csvData = CDL.toString(data);
+            FileUtils.writeStringToFile(dest, csvData, Charset.defaultCharset());
+            if (!downloadWindow.isShowing()) {
+                downloadWindow.show();
+            } else {
+                downloadWindow.focus();
+            }
+        }
     }
 
     /**
@@ -289,7 +296,11 @@ public class MainWindow extends UiPart<Stage> {
     private File userChooseDestination() {
         String csvName = "addressbook.csv";
         DirectoryChooser directoryChooser = new DirectoryChooser();
-        return new File(directoryChooser.showDialog(primaryStage), csvName);
+        File file = directoryChooser.showDialog(primaryStage);
+        if (file == null) {
+            return null;
+        }
+        return new File(file, csvName);
     }
 
     /**
@@ -301,11 +312,6 @@ public class MainWindow extends UiPart<Stage> {
             JSONArray data = getData();
             File dest = userChooseDestination();
             writeToCsv(data, dest);
-            if (!downloadWindow.isShowing()) {
-                downloadWindow.show();
-            } else {
-                downloadWindow.focus();
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
