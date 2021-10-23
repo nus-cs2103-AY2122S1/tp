@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.security.NoSuchAlgorithmException;
+import javax.crypto.NoSuchPaddingException;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,11 +13,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.encryption.exceptions.UnsupportedPasswordException;
-import seedu.address.model.UserPrefs;
-
-import javax.crypto.NoSuchPaddingException;
-import java.security.NoSuchAlgorithmException;
-
 
 public class LoginScreen implements Ui {
 
@@ -26,6 +24,12 @@ public class LoginScreen implements Ui {
     private MainApp app;
     private boolean isNew;
 
+    /**
+     * Constructs a new LoginScreen.
+     *
+     * @param app The app to have the login screen.
+     * @param isNew The boolean value for whether the user is new.
+     */
     public LoginScreen(MainApp app, boolean isNew) {
         this.app = app;
         this.isNew = isNew;
@@ -65,7 +69,6 @@ public class LoginScreen implements Ui {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -80,7 +83,7 @@ public class LoginScreen implements Ui {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        userInput.setOnAction((event) ->  {
+        userInput.setOnAction((event) -> {
             if (isNew) {
                 app.setInputPassword(userInput.getText());
             }

@@ -10,6 +10,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.logging.Logger;
+import javax.crypto.NoSuchPaddingException;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -43,18 +44,13 @@ import seedu.address.ui.LoginScreen;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
-import javax.crypto.NoSuchPaddingException;
-
 /**
  * Runs the application.
  */
 public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 1, true);
-
-    private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
-    // TODO: Remove hardcoded password by end of v1.3b;
-    private String input_password;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
 
     protected Ui ui;
     protected Logic logic;
@@ -63,6 +59,7 @@ public class MainApp extends Application {
     protected Config config;
     protected Encryption cryptor;
 
+    private String inputPassword;
     private Stage stage;
     private UserPrefs userPrefs;
 
@@ -216,7 +213,16 @@ public class MainApp extends Application {
         }
     }
 
-    public void logIn(String input) throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
+    /**
+     * Attempts to log in with the given password.
+     *
+     * @param input The input password from user.
+     * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
+     * @throws NoSuchPaddingException If the padding does not exist.
+     * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
+     */
+    public void logIn(String input) throws UnsupportedPasswordException,
+            NoSuchPaddingException, NoSuchAlgorithmException {
         cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
         if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
             logger.info("Data file not found. Will be starting with a sample AddressBook");
@@ -231,19 +237,23 @@ public class MainApp extends Application {
         try {
             cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             FileUtil.deleteFile(storage.getAddressBookFilePath());
-            input_password = input;
+            inputPassword = input;
             afterLogIn();
-        } catch (InvalidAlgorithmParameterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
+        } catch (InvalidAlgorithmParameterException | IOException | InvalidKeyException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Sets up the cryptor, model, logic for the addressBook page.
+     * Displays the new UI.
+     *
+     * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
+     * @throws NoSuchPaddingException If the padding does not exist.
+     * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
+     */
     public void afterLogIn() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input_password), CIPHER_TRANSFORMATION);
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(inputPassword), CIPHER_TRANSFORMATION);
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         ui = new UiManager(logic);
@@ -251,7 +261,7 @@ public class MainApp extends Application {
     }
 
     public void setInputPassword(String password) {
-        input_password = password;
+        inputPassword = password;
     }
 
     @Override
