@@ -427,7 +427,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------- | ---------------------------------------------------------------------- |
 | `* * *`  | user                                                         | see usage instructions                                  | refer to instructions when I forget how to use the App                 |
 | `* * *`  | CS student                                                   | view the compulsory core modules for my major           | keep track of the required module courses
-| `* * *`  | CS student                                                   | mark the module as done/selected for current sem        | 
+| `* * *`  | CS student                                                   | mark the module as done/selected for current sem        |
 | `* * *`  | CS student                                                   | view the modules I'm currently taking                   |
 | `* * *`  | CS student                                                   | delete modules                                          | remove module entries that I no longer need
 | `* * *`  | CS student                                                   | edit the module details                                 | modify information for any module entry
@@ -493,9 +493,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. Mod tracker shows an error message.
 
       Use case resumes at step 2.
-* 5a. The module code given is invalid 
+* 5a. The module code given is invalid
     * 5a1. Mod tracker shows an error message.
-      
       Use case ends.
 
 *{More to be added}*
@@ -509,7 +508,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5.  Should work properly no matter where the application is stored.
 6.  This product will not be connected to the internet, it will be a totally offline application. 
 *{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
