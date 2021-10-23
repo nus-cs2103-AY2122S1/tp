@@ -62,8 +62,8 @@ class LessonEditCommandTest {
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
 
         String expectedMessage =
-                String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                        formerLesson, editedLesson, personAfterLessonEdit);
+                String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(),
+                        formerLesson, editedLesson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
@@ -94,8 +94,8 @@ class LessonEditCommandTest {
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
 
         String expectedMessage =
-                String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-                    formerLesson, editedLesson, personAfterLessonEdit);
+                String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(),
+                    formerLesson, editedLesson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
@@ -119,7 +119,7 @@ class LessonEditCommandTest {
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, new EditLessonDescriptor());
 
         String expectedMessage = String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-            formerLesson, formerLesson, personBeforeLessonEdit);
+                personBeforeLessonEdit.getName(), formerLesson, formerLesson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -140,8 +140,8 @@ class LessonEditCommandTest {
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(editedLesson).build();
 
         Lesson formerLesson = personBeforeLessonEdit
-            .getLessons().stream().collect(Collectors.toList())
-            .get(INDEX_FIRST_LESSON.getZeroBased());
+                .getLessons().stream().collect(Collectors.toList())
+                .get(INDEX_FIRST_LESSON.getZeroBased());
 
         model.setPerson(personInFilteredList, personBeforeLessonEdit); // Ensure at least one lesson to edit
         Person personAfterLessonEdit = new PersonBuilder(personInFilteredList).withLessons(editedLesson).build();
@@ -150,11 +150,12 @@ class LessonEditCommandTest {
                 prepareLessonEditCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, descriptor);
 
         String expectedMessage = String.format(LessonEditCommand.MESSAGE_EDIT_LESSON_SUCCESS,
-            formerLesson, editedLesson, personAfterLessonEdit);
+                personAfterLessonEdit.getName(),
+                formerLesson, editedLesson);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
-            personAfterLessonEdit);
+                personAfterLessonEdit);
 
         assertCommandSuccess(lessonEditCommand, model, expectedMessage, expectedModel);
     }
