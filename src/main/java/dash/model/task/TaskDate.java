@@ -6,6 +6,7 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -52,7 +53,7 @@ public class TaskDate {
         }
 
         if (detectedTimeFormat != null) {
-            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat);
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat, Locale.US);
             this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
         }
     }
@@ -175,7 +176,7 @@ public class TaskDate {
 
         for (String timeFormat : TIME_FORMATS) {
             try {
-                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat));
+                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat, Locale.US));
                 isTime = true;
             } catch (Exception e) {
                 isTime = isTime || false;
@@ -189,7 +190,7 @@ public class TaskDate {
 
         for (String timeFormat : TIME_FORMATS) {
             try {
-                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat));
+                LocalTime.parse(timeString, DateTimeFormatter.ofPattern(timeFormat, Locale.US));
                 detectedTimeFormat = timeFormat;
                 isTime = true;
                 taskTimeString = timeString;
