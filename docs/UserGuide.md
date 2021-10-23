@@ -406,24 +406,37 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Viewing the Schedule
+### Viewing your Schedule
 
 This section guides you on how to use TAB's scheduling feature.
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing schedule: `schedule`
+#### Viewing your weekly schedule: `week`
 
 Displays a read-only schedule of your upcoming week.
 
-Format: `schedule`
+Format: `week`
 
-![view schedule](images/ViewSchedule.png)
-<div class="caption">Schedule displaying lessons for the upcoming week.</div>
+[New GUI screenshots coming soon...]
 
-* Typing `list` or any other valid command in the command box will bring you back out of schedule view.
+<div class="caption">Weekly view of the schedule.</div>
+
+* Typing `list`, or any valid [miscellaneous commands](miscellaneous-commands) or [managing lesson](managing-lessons) commands in the command box will bring you back out of the calendar interface.
 
 <div style="page-break-after: always;"></div>
+
+#### Navigating forward in the schedule: `next`
+
+Simply type `next` in the command box to go forwards in the calendar interface.
+
+Format: `next`
+
+#### Navigating backwards in the schedule: `back`
+
+Go backwards in the calendar interface using this command.
+
+Format: `back`
 
 ### Managing Data
 

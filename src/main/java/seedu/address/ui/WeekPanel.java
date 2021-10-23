@@ -16,21 +16,21 @@ import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.TimeRange;
 
-public class SchedulePanel extends UiPart<Region> {
+public class WeekPanel extends UiPart<Region> {
 
-    private static final String FXML = "SchedulePanel.fxml";
+    private static final String FXML = "WeekPanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     private final WeekPage calendarView;
 
     @FXML
-    private StackPane scheduleView;
+    private StackPane weekView;
 
     /**
-     * Creates a {@code SchedulePanel} with the given {@code Calendar}.
+     * Creates a {@code WeekPanel} with the given {@code Calendar}.
      */
-    public SchedulePanel(Calendar calendar) {
+    public WeekPanel(Calendar calendar) {
         super(FXML);
         calendarView = new WeekPage();
         initialiseCalendar(calendar);
@@ -53,7 +53,7 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.getDetailedWeekView().setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT);
         calendarView.getDetailedWeekView().setEarlyLateHoursStrategy(DayViewBase.EarlyLateHoursStrategy.HIDE);
         calendarView.getDetailedWeekView().getWeekView().setDisable(true);
-        scheduleView.getChildren().setAll(calendarView);
+        weekView.getChildren().setAll(calendarView);
     }
 
     /**

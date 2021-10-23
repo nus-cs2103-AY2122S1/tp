@@ -17,7 +17,7 @@ public class CenterPanel extends UiPart<Region> {
 
     private static final String FXML = "CenterPanel.fxml";
 
-    private SchedulePanel schedulePanel;
+    private WeekPanel weekPanel;
 
     private PersonListPanel personListPanel;
 
@@ -33,12 +33,12 @@ public class CenterPanel extends UiPart<Region> {
     public CenterPanel(Calendar calendar, ObservableList<Person> personList) {
         super(FXML);
         personListPanel = new PersonListPanel(personList);
-        schedulePanel = new SchedulePanel(calendar);
+        weekPanel = new WeekPanel(calendar);
         displayPersonListPanel();
     }
 
     public boolean isShowingSchedule() {
-        return centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot());
+        return centerPanelPlaceholder.getChildren().contains(weekPanel.getRoot());
     }
 
     /**
@@ -46,7 +46,7 @@ public class CenterPanel extends UiPart<Region> {
      */
     public void goNext() {
         displaySchedulePanel();
-        schedulePanel.goNext();
+        weekPanel.goNext();
     }
 
     /**
@@ -54,7 +54,7 @@ public class CenterPanel extends UiPart<Region> {
      */
     public void goToday() {
         displaySchedulePanel();
-        schedulePanel.goToday();
+        weekPanel.goToday();
     }
 
     /**
@@ -62,7 +62,7 @@ public class CenterPanel extends UiPart<Region> {
      */
     public void goBack() {
         displaySchedulePanel();
-        schedulePanel.goBack();
+        weekPanel.goBack();
     }
 
     /**
@@ -75,11 +75,11 @@ public class CenterPanel extends UiPart<Region> {
     }
 
     /**
-     * Bring SchedulePanel to top of the stack's child list.
+     * Bring WeekPanel to top of the stack's child list.
      */
     public void displaySchedulePanel() {
-        if (!centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot())) {
-            centerPanelPlaceholder.getChildren().setAll(schedulePanel.getRoot());
+        if (!centerPanelPlaceholder.getChildren().contains(weekPanel.getRoot())) {
+            centerPanelPlaceholder.getChildren().setAll(weekPanel.getRoot());
         }
     }
 }
