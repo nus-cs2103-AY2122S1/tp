@@ -49,15 +49,15 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 1, true);
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     public static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    private static Encryption cryptor;
 
     protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
     protected Config config;
-    public static Encryption cryptor;
 
     private Stage stage;
     private UserPrefs userPrefs;

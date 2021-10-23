@@ -1,11 +1,14 @@
 package seedu.address.logic;
 
+import static seedu.address.MainApp.CIPHER_TRANSFORMATION;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
+import javax.crypto.NoSuchPaddingException;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -25,10 +28,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
-
-import javax.crypto.NoSuchPaddingException;
-
-import static seedu.address.MainApp.CIPHER_TRANSFORMATION;
 
 /**
  * The main LogicManager of the app.
@@ -62,14 +61,17 @@ public class LogicManager implements Logic {
         Command command = addressBookParser.parseCommand(commandText);
         if (command instanceof PasswordCommand) {
             try {
-                Encryption temp = new EncryptionManager(EncryptionKeyGenerator.generateKey(((PasswordCommand) command).getOldPassword()), CIPHER_TRANSFORMATION);
-                Encryption new_token = new EncryptionManager(EncryptionKeyGenerator.generateKey(((PasswordCommand) command).getNewPassword()), CIPHER_TRANSFORMATION);
+                Encryption temp = new EncryptionManager(EncryptionKeyGenerator
+                        .generateKey(((PasswordCommand) command).getOldPassword()), CIPHER_TRANSFORMATION);
+                Encryption newToken = new EncryptionManager(EncryptionKeyGenerator
+                        .generateKey(((PasswordCommand) command).getNewPassword()), CIPHER_TRANSFORMATION);
                 temp.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
-                new_token.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
-                cryptor = new_token;
+                newToken.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
+                cryptor = newToken;
                 FileUtil.deleteFile(storage.getAddressBookFilePath());
-            } catch (NoSuchPaddingException | InvalidAlgorithmParameterException | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
-                e.printStackTrace();
+            } catch (NoSuchPaddingException | InvalidAlgorithmParameterException
+                    | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
+                return new CommandResult("Something went wrong. Please try again!");
             } catch (IOException e) {
                 return new CommandResult("Wrong password. Please try again!");
             }
