@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
@@ -28,14 +28,14 @@ public class AddShiftCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift to the staff identified "
             + "by the index number used in the displayed staff list or the name of staff." + "\n\n"
             + "Parameters:\n"
-            + PREFIX_INDEX + "INDEX or "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_DASH_INDEX + " INDEX or "
+            + PREFIX_DASH_NAME + " NAME "
              + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n\n"
             + "Example:\n" + COMMAND_WORD + " "
-            + PREFIX_INDEX + "1 "
+            + PREFIX_DASH_INDEX + " 1 "
             + PREFIX_DAY_SHIFT + "monday-1\n"
             + COMMAND_WORD + " "
-            + PREFIX_NAME + "JOE "
+            + PREFIX_DASH_NAME + " JOE "
             + PREFIX_DAY_SHIFT + "TUESDAY-0";
 
     public static final String MESSAGE_ADD_SHIFT_SUCCESS = "New shift added to the schedule of %s: %s, %s.";

@@ -29,7 +29,7 @@ public class AddShiftCommandParserTest {
 
     @Test
     public void prefix_duplicate_throwsParseException() {
-        assertParseFailure(parser, "addShift i/1 n/testingName d/monday-1",
+        assertParseFailure(parser, "addShift -i 1 n/testingName d/monday-1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
     }
 
@@ -39,7 +39,7 @@ public class AddShiftCommandParserTest {
                 "monday-1");
         AddShiftCommand expectedIndexCommand = new AddShiftCommand(Index.fromOneBased(1), null,
                 "monday-1");
-        assertParseSuccess(parser, " n/testing d/monday-1", expectedNameCommand);
-        assertParseSuccess(parser, " i/1 d/monday-1", expectedIndexCommand);
+        assertParseSuccess(parser, " -n testing d/monday-1", expectedNameCommand);
+        assertParseSuccess(parser, " -i 1 d/monday-1", expectedIndexCommand);
     }
 }

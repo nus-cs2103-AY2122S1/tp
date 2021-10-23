@@ -244,16 +244,16 @@ Format: `exit`
 Adds a time period where the staff is working to the staff’s schedule.
 
 Formats:\
-`addShift n/name d/fullDayName-shiftNumber` \
-`addShift i/index d/fullDayName-shiftNumber`
+`addShift -n name d/fullDayName-shiftNumber` \
+`addShift -i index d/fullDayName-shiftNumber`
 
 
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 
 Examples:\
-`addShift n/Candice d/Monday-1` \
-`addShift i/1234 d/tuesday-0`
+`addShift -n Candice d/Monday-1` \
+`addShift -i 1234 d/tuesday-0`
 
 ### View a staff schedule : `viewSchedule`
 
@@ -347,8 +347,8 @@ Action | Format, Examples
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Add staff schedule** | `addShift -n NAME d/fullDayName-shiftNumber` <br> `addShift -i INDEX d/fullDayName-shiftNumber`
 **View staff schedule** | `viewSchedlue -n NAME` <br> `viewSchedlue -i INDEX`
-**Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/INDEX d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/NAME old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/INDEX old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift -n NAME d/fullDayName-shiftNumber` <br> `deleteShift -i INDEX d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
