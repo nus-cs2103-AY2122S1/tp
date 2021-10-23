@@ -25,7 +25,7 @@ public class ExportEmailCommandParser implements Parser<ExportEmailCommand> {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportEmailCommand.MESSAGE_USAGE));
         }
         try {
-            Path filePath = ParserUtil.parseFilePath(args);
+            Path filePath = ParserUtil.parseNewFilePath(args);
             return new ExportEmailCommand(filePath);
         } catch (ParseException pe) {
             throw new ParseException(
