@@ -4,37 +4,37 @@ import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.stream.Stream;
 
-import safeforhall.logic.commands.ListCommand;
+import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.person.LastDate;
 
-public class ListCommandParser implements Parser<ListCommand> {
+public class DeadlineCommandParser implements Parser<DeadlineCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public ListCommand parse(String args) throws ParseException {
+    public DeadlineCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE1,
                         CliSyntax.PREFIX_DATE2);
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_KEYWORD, CliSyntax.PREFIX_DATE1)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE));
         }
 
         String keyword = argMultimap.getValue(CliSyntax.PREFIX_KEYWORD).get();
         if (!isKeywordValid(argMultimap, keyword)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE_LATE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeadlineCommand.MESSAGE_USAGE_LATE));
         }
 
         if (argMultimap.getValue(CliSyntax.PREFIX_DATE2).isEmpty()) {
             LastDate date = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE1).get());
-            return new ListCommand(keyword, date);
+            return new DeadlineCommand(keyword, date);
         } else {
             LastDate date1 = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE1).get());
             LastDate date2 = ParserUtil.parseDate(argMultimap.getValue(CliSyntax.PREFIX_DATE2).get());
-            return new ListCommand(keyword, date1, date2);
+            return new DeadlineCommand(keyword, date1, date2);
         }
     }
 

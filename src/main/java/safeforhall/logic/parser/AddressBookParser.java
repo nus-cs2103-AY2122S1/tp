@@ -8,11 +8,11 @@ import java.util.regex.Pattern;
 
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.IncludeCommand;
-import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeleteEventCommand;
@@ -101,8 +101,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+        case DeadlineCommand.COMMAND_WORD:
+            return new DeadlineCommandParser().parse(arguments);
 
         case ViewPersonCommand.COMMAND_WORD:
             return new ViewPersonCommand();

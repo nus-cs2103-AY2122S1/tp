@@ -100,11 +100,11 @@ Examples:
 * `view` shows a list of all the residents
 * `view 30` shows the details of the resident at index 30
 
-#### Listing residents by fet/collection deadlines : `list`
+#### Listing residents by fet/collection deadlines : `deadline`
 
 Lists residents whose ART collection or FET tests are due within the range of the given date or the range of the 2 dates given.
 
-Format: `list k/KEYWORD d1/DATE1 d2/DATE2` or `list k/LATE_KEYWORD d1/DATE1`
+Format: `deadline k/KEYWORD d1/DATE1 d2/DATE2` or `deadline k/LATE_KEYWORD d1/DATE1`
 
 * Normal keywords are `f` for fet and `c` for collection
 * Late keywords are `lf` for late fet and `lc` for late collection
@@ -116,10 +116,10 @@ Format: `list k/KEYWORD d1/DATE1 d2/DATE2` or `list k/LATE_KEYWORD d1/DATE1`
 * Anyone whose fet and collection is due before but not on `date1` is outputted  
 
 Examples:
-* `list k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
-* `list k/f d1/15-10-2021 d2/20-10-2021` retrieves a list of residents whose `Test Kit Collection` is due some day between `15 Oct 2021` and `20 Oct 2021`, inclusive
-* `list k/lf d1/11-10-2021` retrieves a list of residents whose `FET` is due before `11 Oct 2021`
-* `list k/lc d1/12-10-2021` retrieves a list of residents whose `Test Kit Collection` is due before `12 Oct 2021`
+* `deadline k/f d1/10-10-2021 d2/12-10-2021` retrieves a list of residents whose `FET` is due between `10 Oct 2021` and `12 Oct 2021`, inclusive
+* `deadline k/f d1/15-10-2021 d2/20-10-2021` retrieves a list of residents whose `Test Kit Collection` is due some day between `15 Oct 2021` and `20 Oct 2021`, inclusive
+* `deadline k/lf d1/11-10-2021` retrieves a list of residents whose `FET` is due before `11 Oct 2021`
+* `deadline k/lc d1/12-10-2021` retrieves a list of residents whose `Test Kit Collection` is due before `12 Oct 2021`
 
 #### Searching by resident information: `search`
 
@@ -266,7 +266,7 @@ Action | Format, Examples
 --------|------------------
 **Add** |  `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]` <br> e.g. `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 **View** | `view [INDEX]` <br> e.g. `view 30`
-**List** | `list k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `list k/f 15-8-2021 20-08-2021`
+**Deadline** | `deadline k/KEYWORD d1/DATE1 d2/DATE` <br> e.g. `deadline k/f 15-8-2021 20-08-2021`
 **Find** | `find [PREFIX/KEYWORD]...` <br> e.g. `find n/john alex v/false f/fass` 
 **Edit** | **Resident:** <br> `edit INDEX… [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 2 3 v/true fd/20-10-2021` <br><br> **Event:** <br> `edit INDEX [FLAG/UPDATED_PARTICULARS]…`<br> e.g., `edit 1 n/Football Training l/Field`
 **Delete** | **Resident:** <br> `delete INDEX…` <br> e.g. `delete 1 2 3`
