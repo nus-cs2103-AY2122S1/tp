@@ -67,8 +67,9 @@ Given below are my contributions to the project.
           [\#50](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/50))
         * Added implementation details of the feature `edit`. (Pull request
           [\#132](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/132))
-        * Added implementation details of the feature `Command History`. (Pull request
-          [\#165](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/165))
+        * Added implementation details of the feature `Command History`. (Pull requests
+          [\#165](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/165),
+          [\#200](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/200))
         * Added `Table of Content` (Pull requests
           [\#188](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/188),
           [\#191](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/191))
