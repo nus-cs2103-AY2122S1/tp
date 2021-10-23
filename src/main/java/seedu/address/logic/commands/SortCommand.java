@@ -23,7 +23,6 @@ public class SortCommand extends Command {
             + "Example: " + COMMAND_WORD + " " + PREFIX_VISIT + " or " + COMMAND_WORD + " " + PREFIX_LAST_VISIT;
 
     public static final String MESSAGE_SUCCESS = "Sorted listed persons successfully";
-    public static final String MESSAGE_INVALID_FLAG = "Flags are missing or invalid.";
 
     private final Comparator<Person> comparator;
     private final boolean isAscending;

@@ -25,20 +25,20 @@ public class SortCommandParser implements Parser<SortCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_VISIT, PREFIX_LAST_VISIT);
 
-        try {
-            if (argMultimap.isAllPresent(PREFIX_LAST_VISIT, PREFIX_VISIT)) {
-                throw new ParseException(SortCommand.MESSAGE_INVALID_FLAG);
-            } else if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
-                return new SortCommand(SORT_BY_LAST_VISIT, false);
-            } else if (argMultimap.getValue(PREFIX_VISIT).isPresent()) {
-                return new SortCommand(SORT_BY_NEXT_VISIT, true);
-            } else {
-                throw new ParseException(SortCommand.MESSAGE_INVALID_FLAG);
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE), pe);
+        if (argMultimap.isAllPresent(PREFIX_LAST_VISIT, PREFIX_VISIT)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
+        } else if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
+            return new SortCommand(SORT_BY_LAST_VISIT, false);
+
+        } else if (argMultimap.getValue(PREFIX_VISIT).isPresent()) {
+            return new SortCommand(SORT_BY_NEXT_VISIT, true);
+
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+
         }
+
     }
 
 }

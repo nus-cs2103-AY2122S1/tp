@@ -26,13 +26,18 @@ public class SortCommandParserTest {
     @Test
     public void parser_invalidFieldPresent_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+
+        // invalid flag
         assertParseFailure(parser, " e/", expectedMessage);
+
+        // both flags
         assertParseFailure(parser, String.format(" %s %s", PREFIX_LAST_VISIT, PREFIX_VISIT), expectedMessage);
     }
 
     @Test
     public void parser_missingCompulsoryFieldPresent_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
+
         // no parameters
         assertParseFailure(parser, "", expectedMessage);
     }
