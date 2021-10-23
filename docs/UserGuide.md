@@ -89,7 +89,7 @@ Format: `help`
 
 Adds a person to ContactSH.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [-d Description] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -97,7 +97,7 @@ A person can have any number of tags (including 0)
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 -d Bald t/criminal` 
 
 ### Listing all persons : `list`
 
@@ -109,7 +109,7 @@ Format: `list`
 
 Edits an existing person in ContactSH.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [-d DESCRIPTION] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -158,24 +158,26 @@ Examples:
 
 Add a task to the current list of tasks attached to a person.
 
-Format: `addtask INDEX task/TASKNAME`
+Format: `addtask INDEX task/TASKNAME...`
 
 * Adds a task to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
 * The name of the task is specified by the TASKNAME.
 
 Examples:
-* `addtask 1 task/call for meeting` Adds the task "call for meeting" to the list of task of the person in 1st person.
+* `addtask 1 task/call for meeting task/do homework` Adds the task "call for meeting" and "do homework" to the list of task of the person in 1st person.
 ### Delete task:
 
 Deletes a task from the specified person.
 
-Format: `deltask INDEX ti/TASK_INDEX`
+Format: `deletetask INDEX ti/TASK_INDEX...`
 
 * Deletes a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
 * The task deleted is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
+* If the same TASK_INDEX is specified more than once, it will be deleted once. 
 
 Examples:
-* `deltask 2 ti/2` Deletes the 2nd task attached to the 2nd person.
+* `deletetask 2 ti/2 ti/2` Deletes the 2nd task attached to the 2nd person.
+* `deletetask 1 ti/2 ti/3` Deletes the 2nd and 3rd task attached to the 1st person.
 
 ### Edit task:
 
@@ -256,13 +258,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [-d Description] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 -d Rich t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [-d Description] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
 **Sort** | `sort [-r]`
 **Help** | `help`
-**Add Task** | `addtask INDEX task/TASKNAME` <br> e.g., `addtask 2 task/celebrate $1 million revenue`
-**Delete Task** | `deltask INDEX ti/TASK_INDEX` <br> e.g., `deltask 2 ti/2`
+**Add Task** | `addtask INDEX task/TASKNAME` <br> e.g., `addtask 2 task/celebrate $1 million revenue task/Contact Professor to get help`
+**Delete Task** | `deltask INDEX ti/TASK_INDEX` <br> e.g., `deletetask 2 ti/2 ti/3`
