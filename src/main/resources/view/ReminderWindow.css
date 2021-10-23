@@ -1,5 +1,5 @@
 .list-view {
-    -fx-background-color: #D3DAFB50;
+    -fx-background-color: #A6B1E150;
     -fx-text-fill: #424874;
     -fx-padding: 10 0 10 5;
 }
@@ -18,15 +18,15 @@
 }
 
 .list-cell:odd {
-    -fx-background-color: #FBFBFD;
+    -fx-background-color: #FBFCFFE6;
 }
 
 .list-cell:even {
-    -fx-background-color: #FBFBFD;
+    -fx-background-color: #FBFCFFE6;
 }
 
 .list-cell:selected {
-    -fx-background-color: #A6B1E145;
+    -fx-background-color: #A6B1E165;
 }
 
 /* Style adapted from: https://edencoding.com/style-tableview-javafx/ */
