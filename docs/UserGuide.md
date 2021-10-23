@@ -341,7 +341,7 @@ The output will look like the following.
 ![viewShedule](images/viewScheduleImage.png)
 
 
-#### Deleting a staff schedule : `deleteSchedule`
+#### Deleting a shift from a staff : `deleteSchedule`
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
