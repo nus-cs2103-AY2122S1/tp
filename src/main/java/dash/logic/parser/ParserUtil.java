@@ -148,6 +148,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String taskDate} into a {@code TaskDate} specialised for editing a TaskDate.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code taskDate} is invalid.
+     */
+    public static TaskDate parseTaskDateToEdit(String taskDate) throws ParseException {
+        requireNonNull(taskDate);
+        String trimmedTaskDate = taskDate.trim();
+        if (!TaskDate.isValidTaskDate(trimmedTaskDate)) {
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDate(trimmedTaskDate, true);
+    }
+
+    /**
      * Parses a {@code String taskDate} into a {@code TaskDate}.
      * Leading and trailing whitespaces will be trimmed.
      *

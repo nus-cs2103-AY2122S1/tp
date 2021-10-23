@@ -42,7 +42,7 @@ public class CompleteTaskCommand extends Command {
         Task taskToComplete = lastShownList.get(targetIndex.getZeroBased());
         Task completedTask = createCompletedTask(taskToComplete);
 
-        model.setTask(taskToComplete, completedTask);
+        model.setTask(targetIndex.getZeroBased(), completedTask);
 
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_COMPLETE_TASK_SUCCESS, completedTask));
