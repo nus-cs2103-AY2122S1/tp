@@ -506,7 +506,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  New users can have a grasp of the core features quickly with the help of user guide.
 5.  Should work properly no matter where the application is stored.
-6.  This product will not be connected to the internet, it will be a totally offline application. 
+6.  This product will not be connected to the internet, it will be a totally offline application.
 *{More to be added}*
 ### Glossary
 
