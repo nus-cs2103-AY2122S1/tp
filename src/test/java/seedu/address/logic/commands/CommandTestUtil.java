@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.applicant.Application.ApplicationStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.descriptors.FilterApplicantDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.PositionBook;
@@ -23,6 +25,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.TitleContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.FilterApplicantDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -62,11 +65,16 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_FILTER_TITLE_DATAMINER = "Data Miner";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    public static final FilterApplicantDescriptor FILTER_DESC_FULL;
+    public static final FilterApplicantDescriptor FILTER_DESC_PARTIAL;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -75,6 +83,13 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        FILTER_DESC_FULL = new FilterApplicantDescriptorBuilder()
+                .withPositionTitle(VALID_TITLE_DATASCIENTIST)
+                .withApplicationStatus(ApplicationStatus.PENDING)
+                .build();
+        FILTER_DESC_PARTIAL = new FilterApplicantDescriptorBuilder()
+                .withPositionTitle(VALID_TITLE_DATASCIENTIST)
+                .build();
     }
 
     /**

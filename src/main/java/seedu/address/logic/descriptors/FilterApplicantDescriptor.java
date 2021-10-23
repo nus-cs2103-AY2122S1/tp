@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.application.Application.ApplicationStatus;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.position.Title;
 
 /**

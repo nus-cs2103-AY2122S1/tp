@@ -1,6 +1,7 @@
 package seedu.address.model.applicant;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class Application {
      * Internal constructor for a job application which specifies an application status.
      */
     public Application(Position position, ApplicationStatus applicationStatus) {
+        requireAllNonNull(position, applicationStatus);
         this.position = position;
         this.status = applicationStatus;
     }
