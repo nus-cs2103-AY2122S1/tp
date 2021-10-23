@@ -43,7 +43,7 @@ public class EditLessonDescriptorTest {
 
         // different time -> returns false
         EditLessonDescriptor diffTimeDescriptor = new EditLessonDescriptorBuilder(DESC_CS2040S)
-                .withLessonTime(new LessonTime("08:00")).build();
+                .withLessonStartTime(new LessonTime("08:00")).build();
         assertFalse(descriptor.equals(diffTimeDescriptor));
 
         // different remark -> returns false

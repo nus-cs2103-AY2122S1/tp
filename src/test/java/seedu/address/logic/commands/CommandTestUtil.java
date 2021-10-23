@@ -37,6 +37,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Person
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
@@ -47,15 +48,20 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_TELE_HANDLE_AMY = "@amytang";
     public static final String VALID_TELE_HANDLE_BOB = "@bobgoh";
-    public static final String VALID_MODULE_CODE_CS2030S_T12 = "CS2030S T12";
-    public static final String VALID_MODULE_CODE_CS2040 = "CS2040";
-    public static final String VALID_MODULE_CODE_CS2040S_B05 = "CS2040S B05";
+    // Module Lesson
     public static final String VALID_LESSON_DAY_TUES = "2";
     public static final String VALID_LESSON_DAY_WED = "3";
     public static final String VALID_LESSON_TIME_11 = "11:00";
     public static final String VALID_LESSON_TIME_12 = "12:00";
+    public static final String VALID_LESSON_TIME_11_12 = "11:00 12:00";
+    public static final String VALID_LESSON_TIME_12_13 = "12:00 13:00";
     public static final String VALID_MODULE_LESSON_REMARK = "COM1-130";
-
+    public static final String VALID_REMARK_ONLINE = "Online";
+    // Both
+    public static final String VALID_MODULE_CODE_CS2030S_T12 = "CS2030S T12";
+    public static final String VALID_MODULE_CODE_CS2040 = "CS2040";
+    public static final String VALID_MODULE_CODE_CS2040S_B05 = "CS2040S B05";
+    // Person description
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -64,15 +70,19 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String TELE_HANDLE_DESC_AMY = " " + PREFIX_TELE_HANDLE + VALID_TELE_HANDLE_AMY;
     public static final String TELE_HANDLE_DESC_BOB = " " + PREFIX_TELE_HANDLE + VALID_TELE_HANDLE_BOB;
-    public static final String MODULE_CODE_DESC_CS2030S_T12 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2030S_T12;
-    public static final String MODULE_CODE_DESC_CS2040 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
+    // Module lesson description
     public static final String LESSON_DAY_DESC_TUES = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_TUES;
     public static final String LESSON_DAY_DESC_WED = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_WED;
-    public static final String LESSON_TIME_DESC_11 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11;
-    public static final String LESSON_TIME_DESC_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_12;
+    public static final String LESSON_TIME_DESC_11_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11_12;
+    public static final String LESSON_TIME_DESC_12_13 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_12_13;
     public static final String REMARK_DESC_MODULES = " " + PREFIX_REMARK + VALID_MODULE_LESSON_REMARK;
+    public static final String REMARK_DESC_ONLINE = " " + PREFIX_REMARK + VALID_REMARK_ONLINE;
+    // Both
+    public static final String MODULE_CODE_DESC_CS2030S_T12 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2030S_T12;
+    public static final String MODULE_CODE_DESC_CS2040S_B05 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040S_B05;
+    public static final String MODULE_CODE_DESC_CS2040 = " " + PREFIX_MODULE_CODE + VALID_MODULE_CODE_CS2040;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -80,10 +90,12 @@ public class CommandTestUtil {
     public static final String INVALID_TELE_HANDLE_DESC = " " + PREFIX_TELE_HANDLE + "yoz"; // missing '@' symbol
     public static final String INVALID_MODULE_CODE_DESC = " " + PREFIX_MODULE_CODE + "CS 50"; // space not allowed
     public static final String INVALID_REMARK_DESC = " " + PREFIX_REMARK + "Ãgent"; // non-ASCII character
+
     public static final String INVALID_LESSON_DAY_DESC = " " + PREFIX_LESSON_DAY + "9"; // not a day of a week
-    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "99:00"; // not a valid time
-
-
+    public static final String INVALID_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "99:00 99:00"; // not a valid time
+    public static final String MISSING_LESSON_TIME_DESC = " " + PREFIX_LESSON_TIME + "12:00"; // missing end time
+    public static final String INVALID_LESSON_DURATION_DESC = " " + PREFIX_LESSON_TIME
+            + VALID_LESSON_TIME_12 + " " + VALID_LESSON_TIME_11; // Start time is after end time
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -102,9 +114,9 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
         DESC_CS2040S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2040S_B05))
-                .withLessonDay(new LessonDay("2")).withLessonTime(new LessonTime("10:00")).build();
+                .withLessonDay(new LessonDay("2")).withLessonStartTime(new LessonTime("10:00")).build();
         DESC_CS2030S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
-                .withLessonDay(new LessonDay("5")).withLessonTime(new LessonTime("13:30")).build();
+                .withLessonDay(new LessonDay("5")).withLessonStartTime(new LessonTime("13:30")).build();
     }
 
     /**

@@ -108,9 +108,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasModuleLesson(ModuleLesson lesson) {
-        requireNonNull(lesson);
-        return addressBook.hasLesson(lesson);
+    public boolean hasModuleLesson(ModuleLesson moduleLesson) {
+        requireNonNull(moduleLesson);
+        return addressBook.hasLesson(moduleLesson);
     }
 
     @Override
