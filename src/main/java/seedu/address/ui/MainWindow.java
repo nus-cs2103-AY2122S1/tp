@@ -17,6 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Category;
@@ -198,7 +199,7 @@ public class MainWindow extends UiPart<Stage> {
 
     }
 
-    private void handleList(TabPaneBehavior tpb, int selectedTab, Category category) {
+    private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, Category category) {
         if (category instanceof Client) {
             logger.info("List all clients");
             if (selectedTab == 1) {
@@ -269,23 +270,23 @@ public class MainWindow extends UiPart<Stage> {
             TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
             Category category = commandResult.getInfo();
 
-            if (commandResult.isList()) {
-                handleList(tpb, selectedTab, category);
+            if (commandResult.getCommandType().equals(CommandType.LIST)) {
+                handleChangeTab(tpb, selectedTab, category);
             }
 
-            if (commandResult.isViewMore()) {
+            if (commandResult.getCommandType().equals(CommandType.VIEW)) {
                 handleView(tpb, selectedTab, category);
             }
 
-            if (commandResult.isShowHelp()) {
+            if (commandResult.getCommandType().equals(CommandType.HELP)) {
                 handleHelp();
             }
 
-            if (commandResult.isExit()) {
+            if (commandResult.getCommandType().equals(CommandType.EXIT)) {
                 handleExit();
             }
 
-            if (commandResult.isStat()) {
+            if ((commandResult.getCommandType().equals(CommandType.STAT))) {
                 handleStat();
             }
 

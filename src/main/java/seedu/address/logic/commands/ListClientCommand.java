@@ -20,7 +20,6 @@ public class ListClientCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        return new CommandResult(MESSAGE_SUCCESS, false,
-                false, false, SampleDataUtil.getSampleClients()[0], false, true);
+        return new CommandResult(MESSAGE_SUCCESS, CommandType.LIST, SampleDataUtil.getSampleClients()[0]);
     }
 }
