@@ -56,25 +56,7 @@ public enum Slot {
     public int getOrder() {
         return order;
     }
-
-    /**
-     * Gets the start time of a slot.
-     *
-     * @return The start time of a slot.
-     */
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    /**
-     * Gets the end time of a slot.
-     *
-     * @return The end time of a slot.
-     */
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
+    
     /**
      * Checks if a specified timing is within the slot period.
      *
