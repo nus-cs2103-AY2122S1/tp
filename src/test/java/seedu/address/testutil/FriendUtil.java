@@ -25,7 +25,7 @@ public class FriendUtil {
     public static String getFriendDetails(Friend friend) {
         StringBuilder sb = new StringBuilder();
         sb.append(friend.getFriendId().value + " ");
-        sb.append(FLAG_FRIEND_NAME + friend.getName().fullName + " ");
+        sb.append(FLAG_FRIEND_NAME + friend.getFriendName().fullName + " ");
         friend.getGameFriendLinks().stream().forEach(
             game -> sb.append(FLAG_GAME_OLD + game.getGameId().value + " ")
         );

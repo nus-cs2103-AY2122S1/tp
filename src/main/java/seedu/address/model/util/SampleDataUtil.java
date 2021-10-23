@@ -11,6 +11,8 @@ import seedu.address.model.ReadOnlyGamesList;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.Schedule;
+import seedu.address.model.friend.exceptions.InvalidDayTimeException;
 import seedu.address.model.game.Game;
 import seedu.address.model.game.GameId;
 import seedu.address.model.gamefriendlink.GameFriendLink;
@@ -23,30 +25,30 @@ import seedu.address.model.gamefriendlink.UserName;
  */
 public class SampleDataUtil {
     // include private constructor for utility class
-    private SampleDataUtil() { }
-
-
+    private SampleDataUtil() {
+    }
 
     public static Friend[] getSampleFriends() {
         Game[] sampleGames = getSampleGames();
+        Schedule[] sampleSchedules = getSampleSchedules();
         return new Friend[]{
-                createSampleFriend("AlexY123", "Alex Yeoh",
+                createSampleFriend("AlexY123", "Alex Yeoh", sampleSchedules[0],
                         sampleGames[1], sampleGames[3]),
-                createSampleFriend("BernieSanders", "Bernice Yu",
+                createSampleFriend("BernieSanders", "Bernice Yu", sampleSchedules[1],
                         sampleGames[5], sampleGames[4]),
-                createSampleFriend("ChickenTender", "Charlotte Oliveiro",
+                createSampleFriend("ChickenTender", "Charlotte Oliveiro", sampleSchedules[2],
                         sampleGames[6], sampleGames[1]),
-                createSampleFriend("Davidz", "David Li",
+                createSampleFriend("Davidz", "David Li", sampleSchedules[2],
                         sampleGames[7]),
-                createSampleFriend("II3", "Irfan Ibrahim",
+                createSampleFriend("II3", "Irfan Ibrahim", sampleSchedules[1],
                         sampleGames[0]),
-                createSampleFriend("RoyJoy", "Roy Balakrishnan",
+                createSampleFriend("RoyJoy", "Roy Balakrishnan", sampleSchedules[0],
                         sampleGames[1], sampleGames[0])
         };
     }
 
     public static Game[] getSampleGames() {
-        return new Game[] {
+        return new Game[]{
             new Game(new GameId("CSGO")),
             new Game(new GameId("Valorant")),
             new Game(new GameId("LeagueofLegends")),
@@ -56,6 +58,36 @@ public class SampleDataUtil {
             new Game(new GameId("Halo")),
             new Game(new GameId("ApexLegends"))
         };
+    }
+
+    public static Schedule[] getSampleSchedules() {
+        try {
+            Schedule scheduleOne = new Schedule();
+            scheduleOne.setScheduleDay(0, "1800", "2200", true);
+
+            Schedule scheduleTwo = new Schedule();
+            scheduleTwo.setScheduleDay(2, "0200", "1600", true);
+            scheduleTwo.setScheduleDay(3, "0300", "1600", true);
+            scheduleTwo.setScheduleDay(4, "0400", "1600", true);
+
+            Schedule scheduleThree = new Schedule();
+            scheduleThree.setScheduleDay(5, "0800", "2200", true);
+            scheduleThree.setScheduleDay(6, "0900", "2200", true);
+
+            return new Schedule[]{
+                scheduleOne,
+                scheduleTwo,
+                scheduleThree
+            };
+
+        } catch (InvalidDayTimeException e) {
+            return new Schedule[]{
+                new Schedule(),
+                new Schedule(),
+                new Schedule()
+            };
+        }
+
     }
 
     public static ReadOnlyGamesList getSampleGamesList() {
@@ -76,11 +108,12 @@ public class SampleDataUtil {
 
     /**
      * Create a Friend object with an array of gameIds.
-     *
+     * <p>
      * Sample friends can only have GameFriendLinks to games which exist in the sample games list and must have unique
      * FriendIds.
      */
-    public static Friend createSampleFriend(String friendIdString, String friendNameString, Game... games) {
+    public static Friend createSampleFriend(String friendIdString, String friendNameString, Schedule schedule,
+                                            Game... games) {
         FriendId friendId = new FriendId(friendIdString);
 
         Set<GameFriendLink> gameFriendLinks = new HashSet<>();
@@ -91,7 +124,7 @@ public class SampleDataUtil {
                 gameFriendLinks.add(new GameFriendLink(game.getGameId(), friendId, new UserName("Username")));
             }
         }
-        return new Friend(friendId, friendName, gameFriendLinks);
+        return new Friend(friendId, friendName, gameFriendLinks, schedule);
     }
 
     private static boolean validateSampleGameExists(Game game) {

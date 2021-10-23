@@ -48,7 +48,7 @@ public class FriendMainCard extends UiPart<Region> {
      */
     public FriendMainCard(Friend friend, ObservableList<Game> gamesList) {
         super(FXML);
-        friendTitle.setText(String.format(FRIEND_TITLE, friend.getFriendId(), friend.getName()));
+        friendTitle.setText(String.format(FRIEND_TITLE, friend.getFriendId(), friend.getFriendName()));
         ObservableList<Game> filteredGamesList = filterGamesList(friend, gamesList);
         filteredGamesList.stream()
                 .sorted(Comparator.comparing(game -> game.getGameId().value))

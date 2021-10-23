@@ -189,7 +189,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(friendsList, differentGamesList, userPrefs)));
 
         // different filteredFriendsList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = ALICE.getFriendName().fullName.split("\\s+");
         modelManager.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(friendsList, gamesList, userPrefs)));
 

@@ -18,7 +18,7 @@ public class FriendNameContainsKeywordsPredicate implements Predicate<Friend> {
     @Override
     public boolean test(Friend friend) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(friend.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(friend.getFriendName().fullName, keyword));
     }
 
     @Override

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.Schedule;
 
 // TODO: Update tests for FriendId and Games based on UG specs
 public class JsonAdaptedFriendTest {
@@ -20,10 +21,11 @@ public class JsonAdaptedFriendTest {
     private static final String INVALID_GAME = "R@staurantC!ty";
 
     private static final String VALID_FRIEND_ID = BENSON.getFriendId().toString();
-    private static final String VALID_NAME_BENSON = BENSON.getName().toString();
+    private static final String VALID_NAME_BENSON = BENSON.getFriendName().toString();
     private static final List<JsonAdaptedGameFriendLink> VALID_GAME_FRIEND_LINK = BENSON.getGameFriendLinks().stream()
             .map(JsonAdaptedGameFriendLink::new)
             .collect(Collectors.toList());
+    private static final Schedule VALID_SCHEDULE = BENSON.getSchedule();
 
     @Test
     public void toModelType_validPersonDetails_returnsFriend() throws Exception {
@@ -34,22 +36,22 @@ public class JsonAdaptedFriendTest {
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
         JsonAdaptedFriend person =
-                new JsonAdaptedFriend(VALID_FRIEND_ID, INVALID_NAME, VALID_GAME_FRIEND_LINK);
+                new JsonAdaptedFriend(VALID_FRIEND_ID, INVALID_NAME, VALID_GAME_FRIEND_LINK, VALID_SCHEDULE);
         String expectedMessage = FriendName.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_friendIdNull_throwsIllegalValueException() throws Exception {
-        JsonAdaptedFriend person = new JsonAdaptedFriend(null, BENSON.getName().toString(),
-                VALID_GAME_FRIEND_LINK);
+        JsonAdaptedFriend person = new JsonAdaptedFriend(null, BENSON.getFriendName().toString(),
+                VALID_GAME_FRIEND_LINK, VALID_SCHEDULE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, FriendId.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        JsonAdaptedFriend person = new JsonAdaptedFriend(VALID_FRIEND_ID, null, VALID_GAME_FRIEND_LINK);
+        JsonAdaptedFriend person = new JsonAdaptedFriend(VALID_FRIEND_ID, null, VALID_GAME_FRIEND_LINK, VALID_SCHEDULE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, FriendName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
