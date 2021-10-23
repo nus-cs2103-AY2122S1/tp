@@ -1,5 +1,8 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_CLEARED;
+import static seedu.address.logic.commands.ClearCommand.MESSAGE_NOT_CLEARED;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -14,6 +17,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -45,7 +49,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult normalExecute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
@@ -55,6 +59,18 @@ public class LogicManager implements Logic {
         saveAddressBook();
 
         return commandResult;
+    }
+
+    @Override
+    public CommandResult clearExecute(String commandText) throws CommandException, ParseException {
+        boolean confirmedClear = ParserUtil.parseConfirmation(commandText);
+        if (!confirmedClear) {
+            return new CommandResult(MESSAGE_NOT_CLEARED);
+        }
+
+        model.setAddressBook(new AddressBook());
+        saveAddressBook();
+        return new CommandResult(MESSAGE_CLEARED);
     }
 
     @Override
