@@ -9,7 +9,7 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
 ### About this guide
 
-This guide aims to help users get familiar with using RecruitIn's functions.
+This guide aims to help users get familiar with using RecruitIn's features.
 * **New users** can get started by following the steps under [Quick start](#quick-start).
 * **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. A **summary** of existing features can also be viewed under [Command summary](#command-summary).
 * **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
@@ -291,7 +291,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
 
 
 * ##### INTERVIEW `i/`
-    * An INTERVIEW is considered matching with a ***Interview*** only if the time string contains the complete keyword.
+    * An INTERVIEW is considered matching with a ***Interview*** only if the ***Interview***'s time string contains **at least 1** keyword.
     * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
     * For example:
         * A `2021` input can match with applicants that have the *Interview* in year 2021.
