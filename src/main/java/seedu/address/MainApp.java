@@ -52,11 +52,8 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 1, true);
 
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
-    // TODO: Remove hardcoded password by end of v1.3b
-    private static final String PASSWORD = "password1234";
+    // TODO: Remove hardcoded password by end of v1.3b;
     private static String INPUT_PASSWORD;
-    public static Boolean isLoggedIn = false;
-
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -67,6 +64,7 @@ public class MainApp extends Application {
     protected Encryption cryptor;
 
     private Stage stage;
+    private UserPrefs userPrefs;
 
     @Override
     public void init() throws Exception {
@@ -77,17 +75,13 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(PASSWORD), CIPHER_TRANSFORMATION);
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-        UserPrefs userPrefs = initPrefs(userPrefsStorage);
+        userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
-
-        model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
 
         if (FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
             ui = new LoginScreen(this, userPrefs);
@@ -230,14 +224,25 @@ public class MainApp extends Application {
     }
 
     public void logIn(String input) throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
-        if (input.equals(MainApp.PASSWORD)) {
+        try {
+            cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+            FileUtil.deleteFile(storage.getAddressBookFilePath());
             MainApp.INPUT_PASSWORD = input;
-            MainApp.isLoggedIn = true;
             afterLogIn();
+        } catch (InvalidAlgorithmParameterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
         }
     }
 
     public void afterLogIn() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(INPUT_PASSWORD), CIPHER_TRANSFORMATION);
+        model = initModelManager(storage, userPrefs);
+        logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         ui = new UiManager(logic);
         ui.start(stage);
     }
