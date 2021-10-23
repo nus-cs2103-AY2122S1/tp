@@ -36,9 +36,7 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE));
         }
 
-        //Index index = Index.fromOneBased(ParserUtil.parseNumber(argMultimap.getValue(PREFIX_INDEX).orElse(null)));
         String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(null));
-        //Double result = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null));
         Double total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
         Lab labResult = new Lab(title, total);
 
