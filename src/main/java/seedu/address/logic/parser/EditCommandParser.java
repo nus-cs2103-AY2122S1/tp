@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -24,6 +25,8 @@ import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.remark.Remark;
+
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -39,7 +42,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_FACULTY, PREFIX_MAJOR,
-                        PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG);
+                        PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
 
         Index index;
 
@@ -66,6 +69,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseFrameworksForEdit(argMultimap.getAllValues(PREFIX_FRAMEWORK))
                 .ifPresent(editPersonDescriptor::setFrameworks);
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseRemarksForEdit(argMultimap.getAllValues(PREFIX_REMARKS)).ifPresent(editPersonDescriptor::setRemarks);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -136,6 +140,21 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> remarks} into a {@code Set<Remark>} if {@code remarks} is non-empty.
+     * If {@code remarks} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Remark>} containing zero remarks.
+     */
+    private Optional<Set<Remark>> parseRemarksForEdit(Collection<String> remarks) throws ParseException {
+        assert remarks != null;
+
+        if (remarks.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> remarkSet = remarks.size() == 1 && remarks.contains("") ? Collections.emptySet() : remarks;
+        return Optional.of(ParserUtil.parseRemarks(remarkSet));
     }
 
 }

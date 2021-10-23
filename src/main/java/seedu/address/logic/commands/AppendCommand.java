@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -27,6 +28,7 @@ import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.remark.Remark;
 
 /**
  * Appends a new data field to the existing data fields of a person in ComputingConnection.
@@ -44,7 +46,8 @@ public class AppendCommand extends Command {
             + "[" + PREFIX_SKILL + "SKILL] "
             + "[" + PREFIX_LANGUAGE + "LANGUAGE] "
             + "[" + PREFIX_FRAMEWORK + "FRAMEWORK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_REMARKS + "REMARK]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LANGUAGE + "python";
 
@@ -125,8 +128,14 @@ public class AppendCommand extends Command {
         updatedTags.addAll(currentTags);
         updatedTags.addAll(newTags);
 
+        Set<Remark> newRemarks = appendPersonDescriptor.getRemarks().orElse(Set.of()); // Else, empty set
+        Set<Remark> currentRemarks = personToAppendTo.getRemarks();
+        Set<Remark> updatedRemarks = new HashSet<>();
+        updatedRemarks.addAll(currentRemarks);
+        updatedRemarks.addAll(newRemarks);
+
         return new Person(previousName, previousEmail, previousFaculty, previousMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags, updatedRemarks);
     }
 
     @Override
@@ -156,6 +165,7 @@ public class AppendCommand extends Command {
         private Set<Language> languages;
         private Set<Framework> frameworks;
         private Set<Tag> tags;
+        private Set<Remark> remarks;
 
         public AppendPersonDescriptor() {}
 
@@ -168,13 +178,14 @@ public class AppendCommand extends Command {
             setLanguages(toCopy.languages);
             setFrameworks(toCopy.frameworks);
             setTags(toCopy.tags);
+            setRemarks(toCopy.remarks);
         }
 
         /**
          * Returns true if at least one field has been appended.
          */
         public boolean isAnyFieldAppended() {
-            return CollectionUtil.isAnyNonNull(skills, languages, frameworks, tags);
+            return CollectionUtil.isAnyNonNull(skills, languages, frameworks, tags, remarks);
         }
 
         /**
@@ -243,6 +254,23 @@ public class AppendCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code remarks} to this object's {@code remarks}.
+         * A defensive copy of {@code remarks} is used internally.
+         */
+        public void setRemarks(Set<Remark> remarks) {
+            this.remarks = (remarks != null) ? new HashSet<>(remarks) : null;
+        }
+
+        /**
+         * Returns an unmodifiable remarks set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code remarks} is null.
+         */
+        public Optional<Set<Remark>> getRemarks() {
+            return (remarks != null) ? Optional.of(Collections.unmodifiableSet(remarks)) : Optional.empty();
         }
 
         @Override
