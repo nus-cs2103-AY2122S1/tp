@@ -24,10 +24,10 @@ public class EditAppointmentCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits appointment with the client identified"
             + " by the index number used in the last client listing.\n\n"
-            + "Parameters (to edit an appointment): \nINDEX (must be a positive integer), "
+            + "Parameters: \nINDEX (must be a positive integer), "
             + "[" + PREFIX_APPOINTMENT + "DATE] (must be yyyy-mm-dd), "
             + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format), 'leave blank' to remove it), "
-            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 30 characters long), 'leave blank' to remove it;"
+            + "[" + PREFIX_APPOINTMENT_VENUE + "VENUE] (maximum 30 characters long), 'leave blank' to remove it."
             + "\n\nExamples: \n" + "To edit the entire appointment: " + COMMAND_WORD + " 1 "
             + PREFIX_APPOINTMENT + "2021-10-25 "
             + PREFIX_APPOINTMENT_TIME + "22:15 "

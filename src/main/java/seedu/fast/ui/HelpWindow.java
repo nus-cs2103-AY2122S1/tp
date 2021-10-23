@@ -31,7 +31,7 @@ import seedu.fast.logic.parser.ParserUtil;
 import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
-import seedu.fast.ui.StatsWindow;
+
 
 /**
  * Controller for a help page
@@ -45,22 +45,20 @@ public class HelpWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
-    private static final String QUICK_START_MESSAGE = "Please select a command in the dropdown to view "
-        + "its usage\n"
-        + "We recommend that you play around with FAST to get a better idea of the features and their usages. Don't worry, these"
-        + "are all sample data! Here are some commands you can try to see what they do:\n"
-        + "    \n"
-        + "1. Add a contact named \"John Doe\" to FAST\n"
-        + "   * add n/John Doe\n"
-        + "    \n"
-        + "2. Delete the 3rd contact in FAST\n"
-        + "    * delete 3\n"
-        + "    \n"
-        + "3. Try searching for a high priority client!\n"
-        + "    * find pr/high\n"
-        + "    \n"
-        + "4. Try setting an appointment for him.\n"
-        + "    * appt 1 d/2021-12-12 t/14:30 v/Buona Vista";
+    private static final String QUICK_START_MESSAGE =
+        "Here are some of the notations and style we used for all the commands: \n"
+            + "Words in `UPPER_CASE` are the parameters to be added in by the user.\n"
+            + " * e.g. for `add n/NAME`, you replace `NAME` with your client's name "
+            + "such as \n`add n/John Doe`.\n\n"
+            + "Items in square brackets are optional.\n"
+            + " * e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.\n\n"
+            + "Items with `…` after them can be used zero or more times.\n"
+            + " * e.g. `[t/TAG]…` can be `t/friend`, `t/friend t/family` or just left empty.\n\n"
+            + "Parameters can be in any order.\n"
+            + " * e.g. for the format: `n/NAME p/PHONE`, `p/PHONE n/NAME` is also accepted.\n\n"
+            + "If a parameter is expected only once, but you specified it multiple times, only the "
+            + "last parameter will be taken.\n"
+            + " * e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.";
     private static final String ADD_COMMAND_USAGE = AddCommand.MESSAGE_USAGE;
     private static final String APPOINTMENT_COMMAND_USAGE = AppointmentCommand.MESSAGE_USAGE;
     private static final String CLEAR_COMMAND_USAGE = ClearCommand.MESSAGE_USAGE;
@@ -130,18 +128,18 @@ public class HelpWindow extends UiPart<Stage> {
      * Shows the help window.
      *
      * @throws IllegalStateException <ul>
-     *                                   <li>
-     *                                       if this method is called on a thread other than the JavaFX Application Thread.
-     *                                   </li>
-     *                                   <li>
-     *                                       if this method is called during animation or layout processing.
-     *                                   </li>
-     *                                   <li>
-     *                                       if this method is called on the primary stage.
-     *                                   </li>
-     *                                   <li>
-     *                                       if {@code dialogStage} is already showing.
-     *                                   </li>
+     *                               <li>
+     *                               if this method is called on a thread other than the JavaFX Application Thread.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called during animation or layout processing.
+     *                               </li>
+     *                               <li>
+     *                               if this method is called on the primary stage.
+     *                               </li>
+     *                               <li>
+     *                               if {@code dialogStage} is already showing.
+     *                               </li>
      *                               </ul>
      */
     public void show() {
