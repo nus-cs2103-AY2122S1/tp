@@ -102,7 +102,7 @@ public class CsBook implements ReadOnlyCsBook {
 
     /**
      * Removes {@code key} from this {@code CsBook}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the CSBook.
      */
     public void removeStudent(Student key) {
         students.remove(key);

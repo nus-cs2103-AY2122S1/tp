@@ -16,7 +16,11 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Email;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.TelegramHandle;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -102,6 +106,18 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void changeStudentGroup(Student student, Group newGroup) {
+        requireNonNull(student);
+        Student foundStudent = getStudentByName(student.getName());
+        Name name = foundStudent.getName();
+        TelegramHandle telegramHandle = foundStudent.getTelegramHandle();
+        Email email = foundStudent.getEmail();
+        GroupName groupName = newGroup.getGroupName();
+        Student updatedStudent = new Student(name, telegramHandle, email, groupName);
+        csBook.setStudent(foundStudent, updatedStudent);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         // Retrieve existing group in model
         GroupName groupName = target.getGroupName();
@@ -126,6 +142,22 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Student getStudentByName(Name studentName) {
+        updateFilteredStudentList(new NameContainsKeywordsPredicate(List.of(studentName.toString())));
+
+        // return null if the group is not found
+        if (getFilteredStudentList().isEmpty()) {
+            updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            return null;
+        }
+
+        Student retrievedStudent = getFilteredStudentList().get(0);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+
+        return retrievedStudent;
+    }
+
+    @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
 
@@ -142,6 +174,26 @@ public class ModelManager implements Model {
     public boolean hasGroup(GroupName groupName) {
         requireAllNonNull(groupName);
         return getGroupByGroupName(groupName) != null;
+    }
+
+    @Override
+    public void updateGroupStudent(Group group, Student student) {
+        requireAllNonNull(group, student);
+        // get students original group
+        GroupName oldGroupName = student.getGroupName();
+        Group oldGroup = getGroupByGroupName(oldGroupName);
+
+        // remove reference to student in old group
+        oldGroup.removeStudent(student);
+
+        // get new group
+        GroupName newGroupName = group.getGroupName();
+        Group newGroup = getGroupByGroupName(newGroupName);
+
+        //TODO: junwei might need to change to student name below
+
+        // add reference to student in new group
+        newGroup.addStudent(student);
     }
 
     @Override
