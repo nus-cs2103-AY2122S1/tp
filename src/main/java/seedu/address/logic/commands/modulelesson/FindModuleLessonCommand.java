@@ -11,7 +11,9 @@ import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import java.util.function.Predicate;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 public class FindModuleLessonCommand extends Command {
 
@@ -44,7 +46,7 @@ public class FindModuleLessonCommand extends Command {
         requireNonNull(model);
         model.updateFilteredModuleLessonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredModuleLessonList().size()));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class ModuleCodeContainsKeywordsPredicate implements Predicate<ModuleLess
     @Override
     public boolean test(ModuleLesson moduleLesson) {
         return keywords.stream()
-                .allMatch(keyword -> moduleLesson.getModuleCode().getModuleCodeName().equalsIgnoreCase(keyword));
+                .anyMatch(keyword -> moduleLesson.getModuleCode().getModuleCodeName().equalsIgnoreCase(keyword));
     }
 
     @Override

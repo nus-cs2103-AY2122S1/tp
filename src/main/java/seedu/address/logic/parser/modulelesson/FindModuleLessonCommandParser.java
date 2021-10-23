@@ -67,7 +67,6 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         }
 
         List<String> moduleKeywordsList = Arrays.stream(modules.split("\\s+"))
-                .map(module -> '[' + module + ']')
                 .collect(Collectors.toList());
 
         return new FindModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(moduleKeywordsList));
