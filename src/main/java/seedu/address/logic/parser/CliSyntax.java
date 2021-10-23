@@ -28,6 +28,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DASH_TAG = new Prefix("-t");
     public static final Prefix PREFIX_DASH_STATUS = new Prefix("-s");
     public static final Prefix PREFIX_DASH_DAY_SHIFT = new Prefix("-d");
-    public static final Prefix PREFIX_DASH_TIME = new Prefix("-t");
+    public static final Prefix PREFIX_DASH_TIME = new Prefix("-ti");
 
 }

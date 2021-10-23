@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-Staff’d helps F&B managers manage details and schedules of their staff. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands.
+Staff’d helps food & beverage managers manage details and schedules of their staff. It is optimized for CLI users so that frequent tasks can be done faster by typing in commands. It is optimized for restaurants with two active shifts.
 
 * Table of Contents
 {:toc}
@@ -59,6 +59,33 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 
 ## Features
 
+### Flag legend
+
+#### Flags for Specific Fields
+
+Flags|Description
+---|-----------
+n/|Name
+s/|Status (as a full-time/part-time worker)
+r/|Role (e.g. kitchen, floor)
+a/|Address
+$/|Salary
+i/|Index
+e/|Email
+t/|Extra tags
+
+#### Flags for Lookup
+
+Flags|Name
+---|----
+-n|Name
+-i|Index
+-d|Day Of the Week
+-t|Tag
+-ti|Time
+
+
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -79,12 +106,14 @@ Staff’d helps F&B managers manage details and schedules of their staff. It is 
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extra parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
-### Viewing help : `help`
+### Utility Features
+
+#### Viewing help : `help`
 
 Shows a message explaning how to access the help page.
 
@@ -92,105 +121,120 @@ Shows a message explaning how to access the help page.
 
 Format: `help`
 
-## Basic management of Staff Details
+#### Listing all persons : `list`
 
+Shows a list of all staffs in the staff view.
 
-### Tag legend
-
-####Tags for Specific Fields
-|Tag|Description|
-|---|-----------|
-|n/|Name|
-|s/|Status (as a full-time/part-time worker)|
-|r/|Role (e.g. Cook, Staff Management)|
-|a/|Address|
-|$/|Salary|
-|i/|Index|
-|e/|Email|
-|t/|Extra tags|
-
-#### Tags for Lookup
-|Tag|Name|
-|---|----|
-|-n|Name|
-|-i|Index|
-|-d|Day Of the Week|
-|-t|Time|
-
-
-### View a staff - `view`
-
-View the staff details of a single staff.
-
-Examples:\
-`view n/Candice`\
-`view i/123`
-
-### Adding a staff - `add`
-
-* Adds a staff to the system. The tags and information are optional and can be presented in any order.
-* Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
-
-Format:\
-`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
-
-Examples:\
-`add n/Joe s/fulltime r/kitchen p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`\
-`add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
-
-### Listing all persons : `list`
-
-Shows a list of all staffs in the staff list.
+![staff view](images/staff_view.png)
 
 Format: `list`
 
-### Marking a staff as absent : `mark`
+#### Saving the data
+
+Staff'd data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Editing the data file
+
+Staff'd data are saved as a JSON file. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, Staff'd will discard all data and start with an empty data file at the next run.
+</div>
+
+#### Archiving data files `[coming in v2.0]`
+
+_Details coming soon ..._
+
+
+### Basic management of Staff Details
+
+#### View a staff - `view`
+
+Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, email, address) of a staff or by index of the staff.
+
+ * Does not allow for non specific lookup. Any fields entered must be an exact reference, it cannot be non exact.
+ * For example, the query `-n Candice` will result in any Staff with the exact name __Candice__ and noone else.
+
+Format:  
+`view -n NAME`  
+`view -i INDEX`  
+`view -t TAG`  
+`view -r ROLE`
+
+Examples:  
+`view -n Candice`  
+`view -i 123`  
+`view -t friends`
+
+#### Adding a staff - `add`
+
+Adds a staff to the system. 
+
+ * The tags and information are optional and can be presented in any order.
+ * Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
+
+Format:  
+`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`  
+
+Examples:  
+`add n/Joe s/fulltime r/kitchen p/98765432 $/1234789 e/Joe@example.com a/John street, block 123, #01-01`  
+`add n/Candice s/parttime p/91234567 $/2 e/candice@example.com a/Newgate Prison`
+
+
+
+#### Marking a staff as absent : `mark`
 
 Marks a specified staff(s) as not working for a specified date.
-The salary for that date will be not included in calculation,
+
+ * The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
+ * The format of the input date is in: `YYYY-MM-DD`
 
-The format of the input date is in: `YYYY-MM-DD`
+Format:  
 
-Format:\
-`mark -i index d/startDate d/endDate`\
-`mark -n name d/startDate d/endDate`\
-`mark -t tag d/startDate d/endDate`
+Marking a period:
 
-Possible to mark a single date `mark t/tag d/date`
+`mark -i INDEX d/STARTDATE d/END_DATE`  
+`mark -n NAME d/STARTDATE d/END_DATE`  
+`mark -t TAG d/STARTDATE d/END_DATE`
 
-Examples:\
-`mark -i 1 d/2020-01-03 d/2021-01-03`\
+Possible to mark a single date:
+
+`mark -t TAG d/DATE`  
+`mark -n NAME d/DATE`
+
+Examples:  
+`mark -i 1 d/2020-01-03 d/2021-01-03`  
 `mark -n Alex Yeoh d/2020-01-03`
 
 
-### Removing the absent mark `unmark`
+#### Removing the absent mark `unmark`
 
 Removes the period that was marked by the `mark` command.
 
 The format of the input date is in: `YYYY-MM-DD`
 
-Format:\
-`unmark -n name d/startDate d/endDate`\
+Format:  
+`unmark -n name d/startDate d/endDate`  
 `unmark -i index d/startDate d/endDate`  
 
-Examples:\
-`unmark -i 1 d/2020-01-03 d/2021-01-03`\
+Examples:  
+`unmark -i 1 d/2020-01-03 d/2021-01-03`  
 `unmark -t friends d/2020-01-03`
 
-### Deleting a Staff : `delete`
+#### Deleting a Staff : `delete`
 
 Deletes the specified staff from the staff list.
 
-Formats:\
-`delete -n NAME`\
-`delete -i INDEX`\
-`delete -r ROLE`\
-`delete -s STATUS`
-
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
+
+Formats:  
+`delete -n NAME`  
+`delete -i INDEX`  
+`delete -r ROLE`  
+`delete -s STATUS`  
 
 Examples:\
 `delete -n Candice`\
@@ -201,12 +245,12 @@ Examples:\
 [comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
 [comment]: <> (* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.)
 
-### Editing a staff : `edit`
+#### Editing a staff : `edit`
 
 Edits an existing staff in the Staff List.
 
-Formats:\
-`edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`\
+Formats:  
+`edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`  
 `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 
 
@@ -215,21 +259,22 @@ The index refers to the index number shown in the displayed staff list. The inde
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:\
-`edit -i 1 p/91234567 e/johndoe@example.com`\
-`edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`\
+Examples:  
+`edit -i 1 p/91234567 e/johndoe@example.com`  
+`edit -n Bob p/69696969 e/candicepleasedateme@tinder.com`  
 `edit -n Candice r/cook`
 
 
-### Finding staff: `find`
+#### Finding staff: `find`
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
-Format:\
+Format:  
 `find -n KEYWORD [MORE_KEYWORDS]`
 `find -i INDEX`
 
 Name Search:
+
 * The search is case-insensitive. e.g `bob` will match `Bob`
 * The order of the keywords does not matter. e.g. `Candice Dee` will match `Dee Candice`
 * Only full words will be matched e.g. `Boba` will not match `Bob`
@@ -237,6 +282,7 @@ Name Search:
   e.g. `John Nathan` will return `John Wick`, `Nathan Tan`
 
 Index Search:
+
 * If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
   be performed on the overall staff list.
 * The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0
@@ -249,115 +295,103 @@ Examples:
 * `find -i 3` returns the staff at the 3rd position on the list
 
 List before using Find command:
-  ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
+![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
 
-List after using Find coma
+List after using Find command:
 ![List after find command is called](images/findCommand/AfterFindCommand.jpg)
 
 
-### Clearing all entries : `clear`
+#### Clearing all entries : `clear`
 
 Clears all entries from the Staff List.
 
 Format: `clear`
 
-### Exiting the program : `exit`
+#### Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-## Basic Management of Staff Schedules
+### Basic Management of Staff Schedules
 
-### Adding a shift to staff's schedule: `addShift`
+#### Adding a shift to staff's schedule: `addShift`
 
 Adds a time period where the staff is working to the staff’s schedule.
-
-Formats:\
-`addShift n/name d/fullDayName-shiftNumber` \
-`addShift i/index d/fullDayName-shiftNumber`
-
 
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
 * The `fulldayname` field required to specify shifts are not case sensitive.
 
-Examples:\
-`addShift n/Candice d/Monday-1` \
-`addShift i/1234 d/tuesday-0`
+Formats:  
+`addShift -n name d/fullDayName-shiftNumber`  
+`addShift -i index d/fullDayName-shiftNumber`
 
-### View a staff schedule : `viewSchedule`
+
+Examples:  
+`addShift -n Candice d/Monday-1`   
+`addShift -i 1234 d/tuesday-0`
+
+#### View a staff schedule : `viewSchedule`
 
 Views a specific staff’s schedule.
 
-Formats:\
-`viewSchedule -n name` \
+Formats:  
+`viewSchedule -n name`  
 `viewSchedule -i index`
 
-Examples:\
-`viewSchedule -n Candice` \
+Examples:  
+`viewSchedule -n Candice`  
 `viewSchedule -i 123`
 
 
-### Deleting a staff schedule: `deleteSchedule`
+
+
+#### Deleting a staff schedule: `deleteSchedule`
 
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
-Formats:\
-`deleteSchedule -n NAME d/fullDayName-shiftNumber` \
+Formats:  
+`deleteSchedule -n NAME d/fullDayName-shiftNumber`  
 `deleteSchedule -i INDEX d/fullDayName-shiftNumber`
 
-Examples:\
-`deleteSchedule -n Joe d/tuesday-2` \
+Examples:  
+`deleteSchedule -n Joe d/tuesday-2`  
 `deleteSchedule -i 1278 d/friday-1`
 
-### Editing a staff schedule: `editSchedule`
+#### Editing a staff schedule: `editSchedule`
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
 
-Formats:\
-`editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` \
+Formats:  
+`editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber`  
 `editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 
-Examples:\
-
-`editSchedule n/Candice old/tuesday-1 new/tuesday-2`\
+Examples:  
+`editSchedule n/Candice old/tuesday-1 new/tuesday-2`  
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
-### View all the staff working a shift: `viewShift`
+#### View all the staff working a shift: `viewShift`
 
 Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
 
-Formats:\
-`viewShift -d day-shift_number`\
-`viewShift -t day-HH:mm` (Note that this is in 24-hour format)\
-`viewShift` [This also displays the staff working during the current shift]
+ * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`
+ * The DAY entry is not case sensitive.
+
+Formats:  
+`viewShift -d DAY-shift_number`  
+`viewShift -ti DAY-HH:mm`
 
 Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
 
-Examples:\
-`viewShift -d monday-1`\
-`viewShift -d TUESDAY-0`\
-`viewShift -t wednesday-12:00`\
-`viewShift -t THURSDAY-16:30`\
+Examples:  
+`viewShift -d monday-1`  
+`viewShift -d TUESDAY-0`  
+`viewShift -ti wednesday-12:00`  
+`viewShift -ti THURSDAY-16:30`  
 
-Demonstration:\
+Demonstration:  
 ![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
 
 
-### Saving the data
-
-Staff'd data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-Staff'd data are saved as a JSON file. Advanced users are welcome to update data directly by editing that data file.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Staff'd will discard all data and start with an empty data file at the next run.
-</div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -378,10 +412,9 @@ Action | Format, Examples
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedlue -n name` <br> `viewSchedlue -i index`
-**Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/index d/fullDayName-shiftNumber`
-**Edit staff schedule** | `editShift n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/index old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
-**Delete staff shift** | `deleteShift -n NAME d/fullDayName-shiftNumber` <br> `deleteShift -i INDEX d/fullDayName-shiftNumber`
-**View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
+**Add staff to shift** | `addShift -n name d/fullDayName-shiftNumber` <br> `addShift -i index d/fullDayName-shiftNumber`
+**Delete staff shift** | `deleteSchedule -n NAME d/fullDayName-shiftNumber` <br> `deleteSchedule -i INDEX d/fullDayName-shiftNumber`
+**View shift** | `viewShift -d day-shift_number` <br> `viewShift -ti day-HH:mm`
 **Mark absent** | `mark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
 **Remove mark** | `unmark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
 **List** | `list`
