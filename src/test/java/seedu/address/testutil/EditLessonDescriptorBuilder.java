@@ -29,7 +29,8 @@ public class EditLessonDescriptorBuilder {
         descriptor = new EditLessonDescriptor();
         descriptor.setModuleCode(lesson.getModuleCode());
         descriptor.setLessonDay(lesson.getDay());
-        descriptor.setLessonTime(lesson.getTime());
+        descriptor.setLessonStartTime(lesson.getLessonStartTime());
+        descriptor.setLessonEndTime(lesson.getLessonEndTime());
         descriptor.setRemark(lesson.getRemark());
     }
 
@@ -52,8 +53,16 @@ public class EditLessonDescriptorBuilder {
     /**
      * Sets the {@code LessonTime} of the {@code EditLessonDescriptor} that we are building.
      */
-    public EditLessonDescriptorBuilder withLessonTime(LessonTime time) {
-        descriptor.setLessonTime(time);
+    public EditLessonDescriptorBuilder withLessonStartTime(LessonTime startTime) {
+        descriptor.setLessonStartTime(startTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LessonTime} of the {@code EditLessonDescriptor} that we are building.
+     */
+    public EditLessonDescriptorBuilder withLessonEndTime(LessonTime endTime) {
+        descriptor.setLessonEndTime(endTime);
         return this;
     }
 
