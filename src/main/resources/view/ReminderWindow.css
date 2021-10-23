@@ -1,5 +1,5 @@
 .list-view {
-    -fx-background-color: #A6B1E150;
+    -fx-background-color: #A6B1E160;
     -fx-text-fill: #424874;
     -fx-padding: 10 0 10 5;
 }
@@ -18,11 +18,11 @@
 }
 
 .list-cell:odd {
-    -fx-background-color: #FBFCFFE6;
+    -fx-background-color: #F1F5FF;
 }
 
 .list-cell:even {
-    -fx-background-color: #FBFCFFE6;
+    -fx-background-color: #F1F5FF;
 }
 
 .list-cell:selected {
