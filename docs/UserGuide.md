@@ -191,8 +191,6 @@ Format: `help`
 
 Updates user's Mc goal or current semester.
 
-![info message](images/infoMessage.png)
-
 Format: `FORMAT: set n/MC` `set y/YEAR s/SEM`
 * Commands must follow the specified format, **no fields should be left blank**.
 * **MC** must be a **positive integer** (1,2,3...).
