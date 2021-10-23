@@ -159,6 +159,6 @@ public class UniqueGroupList implements Iterable<Group>, UniqueIdMapper<Group> {
 
     @Override
     public Set<Group> getFromUniqueIds(Set<UniqueId> ids) throws IdNotFoundException {
-        return UniqueIdMapper.<Group>getUniqueIdsFromList(ids, internalList);
+        return UniqueIdMapper.<Group>getFromUniqueIdsAndItemList(ids, internalList);
     }
 }

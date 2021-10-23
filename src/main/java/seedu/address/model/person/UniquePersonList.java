@@ -139,6 +139,6 @@ public class UniquePersonList implements Iterable<Person>, UniqueIdMapper<Person
 
     @Override
     public Set<Person> getFromUniqueIds(Set<UniqueId> ids) {
-        return UniqueIdMapper.<Person>getUniqueIdsFromList(ids, internalList);
+        return UniqueIdMapper.<Person>getFromUniqueIdsAndItemList(ids, internalList);
     }
 }
