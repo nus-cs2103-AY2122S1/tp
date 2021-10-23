@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
+
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ShowAssessmentCommand;
@@ -15,7 +16,8 @@ public class ShowAssessmentCommandParser implements Parser<ShowAssessmentCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowAssessmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ShowAssessmentCommand.MESSAGE_USAGE));
         }
 
         Assessment assessment = ParserUtil.parseAssessment(argMultimap.getValue(PREFIX_ASSESSMENT).get());

@@ -13,6 +13,7 @@ public class Score {
             "Score should be in percentage format, and it should have at most 2 decimal places";
     public static final String INTEGRAL_PART_REGEX = "\\d{1,2}";
     public static final String DECIMAL_PART_REGEX = "(\\.\\d{1,2})?";
+    public static final double MIN_SCORE = 0.0;
     public static final double MAX_SCORE = 100.0;
     public static final String MAX_SCORE_REGEX = "|100.00|100.0|100";
     public static final String VALIDATION_REGEX = INTEGRAL_PART_REGEX + DECIMAL_PART_REGEX + MAX_SCORE_REGEX;

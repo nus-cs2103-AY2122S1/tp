@@ -12,8 +12,11 @@ import java.util.TreeMap;
 import javafx.scene.chart.Chart;
 import seedu.address.commons.util.ChartUtil;
 
+/**
+ * Represents statistics about an assessment and the students' performance.
+ */
 public class AssessmentStatistics {
-    public static final double DEFAULT_INTERVAL = 10.0;
+    public static final double DEFAULT_BIN_SIZE = 10.0;
 
     private static final String CHART_X_AXIS_LABEL = "Scores";
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
@@ -23,17 +26,23 @@ public class AssessmentStatistics {
     private int numScores = 0;
     private double sumOfScores = 0.0;
 
+    /**
+     * Constructs a {@code AssessmentStatistics} with the specified {@code Assessment}.
+     */
     public AssessmentStatistics(Assessment assessment) {
-        this(assessment, DEFAULT_INTERVAL);
+        this(assessment, DEFAULT_BIN_SIZE);
     }
 
-    public AssessmentStatistics(Assessment assessment, double interval) {
+    /**
+     * Constructs a {@code AssessmentStatistics} with the specified {@code Assessment} and bin size.
+     */
+    public AssessmentStatistics(Assessment assessment, double binSize) {
         requireNonNull(assessment);
         requireNonNull(assessment.scores);
 
         this.assessment = assessment;
 
-        List<Bin> bins = createBins(interval);
+        List<Bin> bins = createBins(binSize);
         binCounts = new HashMap<>();
         for (Bin b : bins) {
             binCounts.put(b, 0);
@@ -46,14 +55,18 @@ public class AssessmentStatistics {
         }
     }
 
-    private static List<Bin> createBins(double interval) {
+    /**
+     * Creates a list of bins spanning from the minimum to maximum score, with each {@code Bin} having the specified
+     * bin size.
+     */
+    private static List<Bin> createBins(double binSize) {
         List<Bin> bins = new ArrayList<>();
 
-        double binLowestValue = 0.0;
+        double binLowestValue = Score.MIN_SCORE;
 
         while (binLowestValue < Score.MAX_SCORE) {
             Score binLowestScore = new Score(String.valueOf(binLowestValue));
-            double binHighestValue = Math.min(binLowestValue + interval, Score.MAX_SCORE);
+            double binHighestValue = Math.min(binLowestValue + binSize, Score.MAX_SCORE);
             Score binHighestScore = new Score(String.valueOf(binHighestValue));
             bins.add(new Bin(binLowestScore, binHighestScore));
             binLowestValue = binHighestValue;
@@ -62,6 +75,9 @@ public class AssessmentStatistics {
         return bins;
     }
 
+    /**
+     * Returns the {@code Bin} that the {@code Score} belongs in.
+     */
     private Bin getBin(Score score) {
         for (Bin b : binCounts.keySet()) {
             if (b.includesScore(score)) {
@@ -75,40 +91,61 @@ public class AssessmentStatistics {
         return null;
     }
 
+    /**
+     * Adds the specified {@code Score} to its corresponding {@code Bin}.
+     */
     private void addScoreToBin(Score score) {
         Bin binForScore = getBin(score);
         binCounts.put(binForScore, binCounts.get(binForScore) + 1);
     }
 
+    /**
+     * Returns a distribution of scores for the assessment, with the bins in their string representations.
+     */
     private Map<String, Number> getScoreDistribution() {
         Map<String, Number> distribution = new TreeMap<>();
         binCounts.forEach((bin, count) -> distribution.put(bin.toString(), count));
         return distribution;
     }
 
+    /**
+     * Returns the mean score for the {@code Assessment}.
+     */
     public double getMean() {
         return sumOfScores / numScores;
     }
 
-    public Chart toBarChart() {
+    /**
+     * Returns a histogram representing the scores for the assessment.
+     */
+    public Chart toHistogram() {
         return ChartUtil.createBarChart(assessment.getValue(), CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL,
                 getScoreDistribution());
     }
 
+    /**
+     * Represents a bin in the histogram.
+     */
     public static class Bin {
         private final Score binMinimum;
         private final Score binMaximum;
         private final boolean maxIsInclusive;
 
+        /**
+         * Constructs a {@code Bin} spanning from the specified minimum to the specified maximum score.
+         */
         public Bin(Score binMinimum, Score binMaximum) {
             this.binMinimum = binMinimum;
             this.binMaximum = binMaximum;
             maxIsInclusive = binMaximum.isMaxScore();
         }
 
+        /**
+         * Returns whether the specified {@code Score} is included in this bin.
+         */
         public boolean includesScore(Score score) {
-            return score.getNumericValue() >= binMinimum.getNumericValue() &&
-                    (maxIsInclusive
+            return score.getNumericValue() >= binMinimum.getNumericValue()
+                    && (maxIsInclusive
                             ? score.getNumericValue() <= binMaximum.getNumericValue()
                             : score.getNumericValue() < binMaximum.getNumericValue());
         }

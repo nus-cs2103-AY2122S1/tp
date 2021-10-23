@@ -8,7 +8,11 @@ import seedu.address.model.Model;
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.AssessmentStatistics;
 
+/**
+ * Displays detailed information about an assessment.
+ */
 public class ShowAssessmentCommand extends Command {
+
     public static final String COMMAND_WORD = "show assessment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays an assessment and its statistics. \n"
@@ -22,6 +26,9 @@ public class ShowAssessmentCommand extends Command {
 
     private final Assessment toDisplay;
 
+    /**
+     * Creates an ShowAssessmentCommand to display the specified {@code Assessment}
+     */
     public ShowAssessmentCommand(Assessment assessment) {
         requireNonNull(assessment);
         this.toDisplay = assessment;
@@ -40,6 +47,22 @@ public class ShowAssessmentCommand extends Command {
 
         AssessmentStatistics statistics = new AssessmentStatistics(assessmentFound);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, assessmentFound.getValue()), statistics.toBarChart());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assessmentFound.getValue()), statistics.toHistogram());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddGroupCommand)) {
+            return false;
+        }
+
+        // state check
+        return toDisplay.equals(((ShowAssessmentCommand) other).toDisplay);
     }
 }
