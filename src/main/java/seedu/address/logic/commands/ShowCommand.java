@@ -9,11 +9,17 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Predicate;
-import javafx.collections.ObservableList;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.*;
+import seedu.address.model.student.Assessment;
+import seedu.address.model.student.AssessmentStatistics;
+import seedu.address.model.student.ID;
+import seedu.address.model.student.IdContainsKeywordsPredicate;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.NameContainsKeywordsPredicate;
+import seedu.address.model.student.Student;
 
 /**
  * Shows information of a student or an assessment.
@@ -39,6 +45,9 @@ public class ShowCommand extends Command {
     private ID id;
     private Assessment assessment;
 
+    /**
+     * Constructor for a {@code ShowCommand}.
+     */
     public ShowCommand(Name name, ID id, Assessment assessment) {
         setName(name);
         setId(id);

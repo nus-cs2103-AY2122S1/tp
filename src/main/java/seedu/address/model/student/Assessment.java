@@ -23,7 +23,7 @@ public class Assessment {
     public final String name;
 
     // Assessment statistics
-    public AssessmentStatistics statistics = null;
+    private AssessmentStatistics statistics;
 
     /**
      * Constructs an {@code Assessment}.

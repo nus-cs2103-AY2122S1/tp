@@ -165,8 +165,8 @@ public class AssessmentStatistics {
     /**
      * Returns the Xth percentile score for the {@code Assessment}.
      */
-    public double getXPercentile(int X) {
-        assert X > -1 && X < 101;
+    public double getXPercentile(int x) {
+        assert x > -1 && x < 101;
 
         Collection<Score> scores = assessment.getScores().values();
         List<Double> sorted = scores.stream()
@@ -174,7 +174,7 @@ public class AssessmentStatistics {
                 .sorted().collect(Collectors.toList());
 
         long size = sorted.size();
-        return sorted.get(((int) Math.ceil(X/100.0 * size)) - 1);
+        return sorted.get(((int) Math.ceil(x / 100.0 * size)) - 1);
     }
 
     /**

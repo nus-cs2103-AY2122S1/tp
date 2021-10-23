@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import static seedu.address.logic.commands.ShowCommand.Info;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
@@ -29,13 +27,21 @@ public class InfoDisplay extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public Student student;
-    public Assessment assessment;
+    private Student student;
+    private Assessment assessment;
 
     @FXML
     private Label name;
     @FXML
-    private Label info1, info2, info3, info4, info5;
+    private Label info1;
+    @FXML
+    private Label info2;
+    @FXML
+    private Label info3;
+    @FXML
+    private Label info4;
+    @FXML
+    private Label info5;
 
     public InfoDisplay() {
         super(FXML);
