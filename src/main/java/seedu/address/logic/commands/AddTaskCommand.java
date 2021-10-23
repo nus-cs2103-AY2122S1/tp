@@ -40,7 +40,7 @@ public class AddTaskCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasOrder(toAdd.getTagId())) {
+        if (toAdd.getTagId() != -1 && !model.hasOrder(toAdd.getTagId())) {
             throw new CommandException(MESSAGE_UNFOUND_ORDERID);
         }
 
