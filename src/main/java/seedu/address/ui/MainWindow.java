@@ -18,6 +18,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.util.Help;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -81,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
-     * @param keyCombination the KeyCombination value of the accelerator
+     * @param keyCombination the KeyCombination value of the accelerator.
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
         menuItem.setAccelerator(keyCombination);
@@ -139,7 +140,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else opens the secondary internal help window
+     * Opens the Online User Guide if possible, else opens the secondary internal help window.
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
@@ -154,7 +155,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else opens the secondary internal help window
+     * Opens the Command Summary if possible, else opens the secondary internal help window.
      */
     public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
@@ -169,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the secondary help window
+     * Opens the secondary help window.
      */
     @FXML
     public void handleBackUpHelp() {

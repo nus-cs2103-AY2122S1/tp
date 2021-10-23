@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * Represents the category of the Contact
+ * Represents the category of the Contact.
  */
 public class CategoryCode {
     public static final String MESSAGE_CONSTRAINTS =
@@ -47,9 +47,9 @@ public class CategoryCode {
     }
 
     /**
-     * Converts the given category code into a Category object
-     * @param code to be turned into enum object
-     * @return Category object
+     * Converts the given category code into a Category object.
+     * @param code to be turned into enum object.
+     * @return Category object.
      */
     private Category stringToCategory(String code) {
         int category = CATEGORY_VALUES.indexOf(code.toLowerCase());
@@ -72,8 +72,8 @@ public class CategoryCode {
     }
 
     /**
-     * Returns the category code in non-abbreviated format
-     * @return non-abbreviated category
+     * Returns the category code in non-abbreviated format.
+     * @return non-abbreviated category.
      */
     public String getFullCode() {
         switch (category) {
