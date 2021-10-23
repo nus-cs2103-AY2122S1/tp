@@ -24,10 +24,9 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Exported to file: %1$s";
     public static final String MESSAGE_FAILURE = "Failed to export to file";
 
-    public final String BASE_PATH = "sourceControl.csv";
+    public final String BASE_PATH = "sourceControl%1$s.csv";
     private int tries = 0;
     private int groupColumns;
-    private int assessmentColumns;
     private int tagColumns;
     private Path file;
 
@@ -35,10 +34,9 @@ public class ExportCommand extends Command {
      * Creates an ExportCommand to export data to a file. Ensures that a new file is created every time.
      */
     public ExportCommand() {
-        this.file = Path.of(BASE_PATH);
+        generateNewPath();
         while (FileUtil.isFileExists(file)) {
-            tries++;
-            this.file = Path.of(BASE_PATH + "(" + tries + ")");
+            generateNewPath();
         }
     }
 
@@ -53,13 +51,12 @@ public class ExportCommand extends Command {
         StringBuilder writeContent = new StringBuilder();
         writeContent.append("Name,Id,");
 
-        List<Group> groups = model.getAddressBook().getGroupList();
-        appendGroupHeaders(writeContent, groups);
+        List<Student> students = model.getAddressBook().getStudentList();
+        appendGroupHeaders(writeContent, students);
 
         List<Assessment> assessments = model.getAddressBook().getAssessmentList();
         appendAssessmentHeaders(writeContent, assessments);
 
-        List<Student> students = model.getAddressBook().getStudentList();
         appendTagHeaders(writeContent, students);
 
         replaceLastCharacterWithNewLine(writeContent);
@@ -77,8 +74,11 @@ public class ExportCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, file.toString()));
     }
 
-    private void appendGroupHeaders(StringBuilder writeContent, List<Group> groups) {
-        groupColumns = groups.size();
+    private void appendGroupHeaders(StringBuilder writeContent, List<Student> students) {
+        groupColumns = 0;
+        for (Student student : students) {
+            groupColumns = Math.max(groupColumns, student.getGroups().size());
+        }
 
         for (int i = 1; i <= groupColumns; i++) {
             writeContent.append("Group ").append(i).append(",");
@@ -86,8 +86,6 @@ public class ExportCommand extends Command {
     }
 
     private void appendAssessmentHeaders(StringBuilder writeContent, List<Assessment> assessments) {
-        assessmentColumns = assessments.size();
-
         for (Assessment assessment : assessments) {
             writeContent.append(assessment.value).append(",");
         }
@@ -105,8 +103,8 @@ public class ExportCommand extends Command {
     }
 
     private void appendStudentRow(StringBuilder writeContent, Student student, List<Assessment> assessments) {
-        writeContent.append(student.getName().fullName);
-        writeContent.append(student.getId().getValue());
+        writeContent.append(student.getName().fullName).append(",");
+        writeContent.append(student.getId().getValue()).append(",");
 
         List<Group> groups = student.getGroups();
         for (Group group : groups) {
@@ -137,6 +135,12 @@ public class ExportCommand extends Command {
 
     private void replaceLastCharacterWithNewLine(StringBuilder writeContent) {
         int length = writeContent.length();
-        writeContent.replace(length, length - 1, "\n");
+        writeContent.replace(length - 1, length, "\n");
+    }
+
+    private void generateNewPath() {
+        String path = String.format(BASE_PATH, tries == 0 ? "" : "(" + tries + ")");
+        tries++;
+        this.file = Path.of(path);
     }
 }
