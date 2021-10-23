@@ -72,11 +72,11 @@ public class EncryptionManager implements Encryption {
         requireNonNull(content);
 
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] iv = cipher.getIV();
+        byte[] initializationVector = cipher.getIV();
 
         try (FileOutputStream fileOut = new FileOutputStream(destinationFilePath.toString());
              CipherOutputStream cipherOut = new CipherOutputStream(fileOut, cipher)) {
-            fileOut.write(iv);
+            fileOut.write(initializationVector);
             cipherOut.write(content.getBytes());
             logger.fine("Content encrypted.");
         } catch (IOException e) {
@@ -99,9 +99,9 @@ public class EncryptionManager implements Encryption {
         }
 
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
-        byte[] fileIv = new byte[16];
-        fileIn.read(fileIv);
-        cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileIv));
+        byte[] fileInitializationVector = new byte[16];
+        fileIn.read(fileInitializationVector);
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileInitializationVector));
         CipherInputStream cipherIn = new CipherInputStream(fileIn, cipher);
 
         InputStreamReader inputReader = new InputStreamReader(cipherIn);
