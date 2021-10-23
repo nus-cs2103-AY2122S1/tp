@@ -32,16 +32,9 @@ public class SummaryTest {
     }
 
     @Test
-    public void execute_getPercentageReviews_success() {
+    public void execute_getPercentageCategory_success() {
         Summary summary = new Summary(getTypicalAddressBook());
-        int summarySize = summary.getPercentageReviews();
-        assertTrue(summarySize > 0);
-    }
-
-    @Test
-    public void execute_getNumberCategory_success() {
-        Summary summary = new Summary(getTypicalAddressBook());
-        HashMap<String, Integer> summarySize = summary.getNumberCategory();
+        HashMap<String, Integer> summarySize = summary.getPercentageCategory();
         List<String> categoryValues = CategoryCode.CATEGORY_VALUES;
         assertEquals(categoryValues.size(), summarySize.size());
 
@@ -49,5 +42,17 @@ public class SummaryTest {
             assertTrue(summarySize.containsKey(key));
         }
     }
+
+//    @Test
+//    public void execute_getPercentageRatings_success() {
+//        Summary summary = new Summary(getTypicalAddressBook());
+//        HashMap<String, Integer> summarySize = summary.getPercentageRatings();
+//        List<String> categoryValues = CategoryCode.CATEGORY_VALUES;
+//        assertEquals(categoryValues.size(), summarySize.size());
+//
+//        for (String key : categoryValues) {
+//            assertTrue(summarySize.containsKey(key));
+//        }
+//    }
 
 }

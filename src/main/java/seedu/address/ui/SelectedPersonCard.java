@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.logging.Logger;
 
 import javafx.collections.FXCollections;
@@ -11,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.TextAlignment;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -56,7 +56,13 @@ public class SelectedPersonCard extends UiPart<Region> {
     @FXML
     private Label rating;
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChartRating; // summarises category codes
+    @FXML
+    private PieChart pieChartCategory;
+    @FXML
+    private Label totalContacts;
+    @FXML
+    private Label summaryHeader;
 
     /**
      * Creates an empty {@code PersonCode}.
@@ -88,7 +94,6 @@ public class SelectedPersonCard extends UiPart<Region> {
      */
     public void setPersonDetails() {
         if (person == null) {
-//            setEmptyPersonDetails();
             setSummary();
         } else {
             setPersonVisible();
@@ -130,16 +135,18 @@ public class SelectedPersonCard extends UiPart<Region> {
      */
     public void setSummary() {
         setSummaryVisible();
-        ObservableList<PieChart.Data> pieChartData =
-                FXCollections.observableArrayList(
-                        new PieChart.Data("Grapefruit", 13),
-                        new PieChart.Data("Oranges", 25),
-                        new PieChart.Data("Plums", 10),
-                        new PieChart.Data("Pears", 22),
-                        new PieChart.Data("Apples", 30));
-        category.setText("Category: NIL");
-        pieChart.setData(pieChartData);
-        pieChart.setTitle("Testing");
+
+        summaryHeader.setText("Your Contact List Statistics:");
+
+        ObservableList<PieChart.Data>pieChartCategoryData = summary.getPercentageCategoryGUI();
+        pieChartCategory.setData(pieChartCategoryData);
+        pieChartCategory.setTitle("Category");
+
+        ObservableList<PieChart.Data>pieChartRatingData = summary.getPercentageRatingsGUI();
+        pieChartRating.setData(pieChartRatingData);
+        pieChartRating.setTitle("Rating");
+
+        totalContacts.setText(summary.getNumberOfContactsGUI());
 
         logger.info("Summary Set");
     }
@@ -153,7 +160,10 @@ public class SelectedPersonCard extends UiPart<Region> {
         email.setVisible(true);
         tags.setVisible(true);
         rating.setVisible(true);
-        pieChart.setVisible(false);
+        pieChartRating.setVisible(false);
+        pieChartCategory.setVisible(false);
+        totalContacts.setVisible(false);
+        summaryHeader.setVisible(false);
     }
 
     private void setSummaryVisible() {
@@ -165,7 +175,10 @@ public class SelectedPersonCard extends UiPart<Region> {
         email.setVisible(false);
         tags.setVisible(false);
         rating.setVisible(false);
-        pieChart.setVisible(true);
+        pieChartRating.setVisible(true);
+        pieChartCategory.setVisible(true);
+        totalContacts.setVisible(true);
+        summaryHeader.setVisible(true);
     }
 
     /**

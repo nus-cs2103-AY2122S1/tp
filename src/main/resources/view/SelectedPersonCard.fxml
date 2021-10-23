@@ -64,6 +64,32 @@
                 <RowConstraints />
             </rowConstraints>
         </GridPane>
-        <PieChart fx:id="pieChart"/>
+        <GridPane HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+                <Label fx:id="summaryHeader" styleClass="details_contact_name" text="\$totalContacts">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                    </padding>
+                </Label>
+                <HBox>
+                    <PieChart fx:id="pieChartRating" legendVisible="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+                    <PieChart fx:id="pieChartCategory" legendVisible="false" maxHeight="200.0" minHeight="200.0" prefHeight="200.0" />
+                </HBox>
+                <Label fx:id="totalContacts" styleClass="details_contact_field" text="\$totalContacts">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" top="10.0" />
+                    </padding>
+                </Label>
+            <padding>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            </VBox>
+         <columnConstraints>
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+        </GridPane>
     </StackPane>
 </HBox>
