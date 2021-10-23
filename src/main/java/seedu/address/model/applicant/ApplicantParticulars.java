@@ -1,9 +1,5 @@
-package seedu.address.model.applicant.applicantparticulars;
+package seedu.address.model.applicant;
 
-import seedu.address.model.applicant.Address;
-import seedu.address.model.applicant.Email;
-import seedu.address.model.applicant.Name;
-import seedu.address.model.applicant.Phone;
 import seedu.address.model.position.Title;
 
 /**
