@@ -26,7 +26,6 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
-    private LessonListPanel lessonListPanel;
 
     @FXML
     private HBox cardPane;
@@ -56,8 +55,6 @@ public class PersonCard extends UiPart<Region> {
     private Label remark;
     @FXML
     private FlowPane tags;
-    @FXML
-    private StackPane lessonListPanelPlaceholder;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
