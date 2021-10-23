@@ -35,6 +35,8 @@ import seedu.address.model.util.PersonUtil;
  */
 public class LessonEditCommand extends UndoableCommand {
 
+    public static final String COMMAND_ACTION = "Edit Lesson";
+
     public static final String COMMAND_WORD = "ledit";
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
@@ -47,6 +49,8 @@ public class LessonEditCommand extends UndoableCommand {
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 1 "
             + PREFIX_HOMEWORK + "Textbook Pg2 "
             + PREFIX_SUBJECT + "Biology";
+
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
             + " of the student identified by the index number used in the displayed student list.\n"

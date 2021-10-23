@@ -16,6 +16,8 @@ public class ViewCommand extends Command {
 
     public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) ";
 
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
+
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Displayed list of lessons for %1$s!";
