@@ -31,6 +31,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonOrderBookStorage;
 import seedu.address.storage.JsonTaskBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
@@ -51,8 +52,12 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonTaskBookStorage taskListStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("taskList.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        JsonOrderBookStorage salesOrderBookStorage =
+                new JsonOrderBookStorage(temporaryFolder.resolve("saleOrder.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage,
+                salesOrderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -79,12 +84,15 @@ public class LogicManagerTest {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
-        JsonTaskBookStorage taskListStorage =
+        JsonTaskBookStorage taskBookStorage =
                 new JsonTaskBookStorage(temporaryFolder.resolve("ioExceptionTaskList.json"));
+        JsonOrderBookStorage orderBookStorage =
+                new JsonOrderBookStorage(temporaryFolder.resolve("ioExceptionSalesOrderBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
 
-        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(addressBookStorage,
+                taskBookStorage, orderBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -136,9 +144,11 @@ public class LogicManagerTest {
      * Executes the command, confirms that the exception is thrown and that the result message is correct.
      * @see #assertCommandFailure(String, Class, String, Model)
      */
-    private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
-            String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(), new UserPrefs());
+    private void assertCommandFailure(String inputCommand,
+                                      Class<? extends Throwable> expectedException,
+                                      String expectedMessage) {
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getTaskBook(),
+                model.getOrderBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
