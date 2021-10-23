@@ -374,6 +374,33 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
+### Importing multiple members using a CSV file: `import`
+
+When you need to add or update the details of multiple members, you can import data from a comma-seperated values
+file using `import`.
+
+Format: `import CSV_FILE_PATH`
+
+* Data imported from the CSV file **must** have 4 headers in this order:
+   1) Name
+   2) Phone number
+   3) Availability
+   4) Tags
+* When filling in the details of each member in the CSV file, the Names and Phone fields must be filled 
+  while Availability and Tagsfields are optional.
+* `CSV_FILE_PATH` should be relative to the JAR file location.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** The details imported from the CSV file will overwrite any existing details of the members.
+</div>
+
+Examples: 
+
+* `import myFile.csv` imports member data from the CSV file in `[JAR_file_location]/myFile.csv`
+
+[Back to Table of Contents](#table-of-contents)
+
 ### Creating an alias: `alias`
 
 Some of our commands' names may be not be to your liking. Hence, SportsPA offers you the flexibility of personalising
@@ -459,10 +486,8 @@ the data of your previous SportsPA home folder.
 
 Action | Format, Examples
 --------|------------------
-**Add
-facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
-**Add
-member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
+**Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
 **Clear facilities**|`clearf`
 **Clear member**| `clearm`
 **Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
@@ -475,6 +500,7 @@ member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John 
 **List facilities**| `listf`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
 **Split members**| `split d/DAY` <br> eg. `split d/1`
+**Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
 **Creates alias**| `alias s/SHORTCUT cw/COMMAND_WORD` <br> eg. `alias s/lf cw/listf`
 **List aliases**| `aliases`
 **Deletes alias**| `unalias SHORTCUT` <br> eg. `unalias lf`
