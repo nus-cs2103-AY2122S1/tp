@@ -1,14 +1,10 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
-import seedu.address.model.participant.Participant;
 
 public class EventCard extends UiPart<Region> {
 
@@ -29,7 +25,7 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
-    private FlowPane participants;
+    private Label numberOfParticipants;
 
     /**
      * Creates a {@code EventCard} with the given {@code Event} and index to display.
@@ -42,9 +38,12 @@ public class EventCard extends UiPart<Region> {
         isDone.setText(event.getDoneValue() ? Event.COMPLETED : Event.UNCOMPLETED);
         date.setText(event.getDateString());
         time.setText(event.getTimeString());
-        event.getParticipants().stream()
-                .sorted(Comparator.comparing(Participant::getFullName))
-                .forEach(participant -> participants.getChildren().add(new Label(participant.getFullName())));
+        int noOfParticipants = event.getParticipants().size();
+        if (noOfParticipants <= 1) {
+            numberOfParticipants.setText(String.format("%d participant", noOfParticipants));
+        } else {
+            numberOfParticipants.setText(String.format("%d participants", noOfParticipants));
+        }
     }
 
     @Override
