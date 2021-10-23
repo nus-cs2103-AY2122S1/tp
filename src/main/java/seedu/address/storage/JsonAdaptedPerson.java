@@ -15,6 +15,7 @@ import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
@@ -36,6 +37,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedLanguage> languages = new ArrayList<>();
     private final List<JsonAdaptedFramework> frameworks = new ArrayList<>();
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedRemark> remarks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +49,8 @@ class JsonAdaptedPerson {
                              @JsonProperty("skills") List<JsonAdaptedSkill> skills,
                              @JsonProperty("languages") List<JsonAdaptedLanguage> languages,
                              @JsonProperty("frameworks") List<JsonAdaptedFramework> frameworks,
-                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                             @JsonProperty("remarks") List<JsonAdaptedRemark> remarks) {
         this.name = name;
         this.email = email;
         this.faculty = faculty;
@@ -67,6 +70,10 @@ class JsonAdaptedPerson {
 
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+
+        if (remarks != null) {
+            this.remarks.addAll(remarks);
         }
     }
 
@@ -94,6 +101,10 @@ class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+
+        remarks.addAll(source.getRemarks().stream()
+                .map(JsonAdaptedRemark::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -120,6 +131,11 @@ class JsonAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<Remark> personRemarks = new ArrayList<>();
+        for (JsonAdaptedRemark remark : remarks) {
+            personRemarks.add(remark.toModelType());
         }
 
         if (name == null) {
@@ -158,10 +174,11 @@ class JsonAdaptedPerson {
         final Set<Language> modelLanguages = new HashSet<>(personLanguages);
         final Set<Framework> modelFrameworks = new HashSet<>(personFrameworks);
         final Set<Tag> modelTags = new HashSet<>(personTags);
+        final Set<Remark> modelRemarks = new HashSet<>(personRemarks);
 
 
         return new Person(modelName, modelEmail, modelFaculty, modelMajor,
-                modelSkills, modelLanguages, modelFrameworks, modelTags);
+                modelSkills, modelLanguages, modelFrameworks, modelTags, modelRemarks);
     }
 
 }

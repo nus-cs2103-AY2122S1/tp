@@ -13,9 +13,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_SKILL = new Prefix("s/");
     public static final Prefix PREFIX_LANGUAGE = new Prefix("l/");
     public static final Prefix PREFIX_FRAMEWORK = new Prefix("fr/");
-    public static final Prefix PREFIX_REMARKS = new Prefix("r/");
     public static final Prefix PREFIX_INTERESTS = new Prefix("i/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_REMARKS = new Prefix("r/");
     public static final Prefix PREFIX_INTERACTION = new Prefix("int/");
     public static final Prefix PREFIX_DATE = new Prefix("on/");
 }

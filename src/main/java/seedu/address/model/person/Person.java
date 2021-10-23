@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.interaction.Interaction;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
@@ -35,13 +36,14 @@ public class Person {
 
     // Misc Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Remark> remarks = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills, Set<Language> languages,
-            Set<Framework> frameworks, Set<Tag> tags) {
-        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags);
+            Set<Framework> frameworks, Set<Tag> tags, Set<Remark> remarks) {
+        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
         this.name = name;
         this.email = email;
         this.faculty = faculty;
@@ -50,14 +52,15 @@ public class Person {
         this.languages.addAll(languages);
         this.frameworks.addAll(frameworks);
         this.tags.addAll(tags);
+        this.remarks.addAll(remarks);
     }
 
     /**
      * Used to create a person with a new skill
      */
     public Person(Name name, Email email, Faculty faculty, Major major, Set<Skill> skills, Set<Language> languages,
-            Set<Framework> frameworks, Set<Tag> tags, Set<Interaction> interactions) {
-        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags);
+            Set<Framework> frameworks, Set<Tag> tags, Set<Remark> remarks, Set<Interaction> interactions) {
+        requireAllNonNull(name, email, faculty, major, skills, languages, frameworks, tags, remarks);
         this.name = name;
         this.email = email;
         this.faculty = faculty;
@@ -67,6 +70,7 @@ public class Person {
         this.frameworks.addAll(frameworks);
         this.tags.addAll(tags);
         this.interactions.addAll(interactions);
+        this.remarks.addAll(remarks);
     }
 
     /**
@@ -75,7 +79,7 @@ public class Person {
     public Person appendInteraction(Interaction interaction) {
         requireAllNonNull(interactions);
         this.interactions.add(interaction);
-        return new Person(name, email, faculty, major, skills, languages, frameworks, tags, this.interactions);
+        return new Person(name, email, faculty, major, skills, languages, frameworks, tags, remarks, this.interactions);
     }
 
     public Name getName() {
@@ -124,6 +128,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable remark set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Remark> getRemarks() {
+        return Collections.unmodifiableSet(remarks);
     }
 
     /**
@@ -207,6 +219,12 @@ public class Person {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        Set<Remark> remarks = getRemarks();
+        if (!remarks.isEmpty()) {
+            builder.append("; Remarks: ");
+            remarks.forEach(builder::append);
         }
 
         Set<Interaction> interactions = getInteractions();

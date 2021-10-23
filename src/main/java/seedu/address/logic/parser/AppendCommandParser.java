@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -16,6 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AppendCommand;
 import seedu.address.logic.commands.AppendCommand.AppendPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
@@ -34,7 +36,8 @@ public class AppendCommandParser implements Parser<AppendCommand> {
     public AppendCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_LANGUAGE,
+                        PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
 
         Index index;
 
@@ -52,6 +55,8 @@ public class AppendCommandParser implements Parser<AppendCommand> {
                 .ifPresent(appendPersonDescriptor::setFrameworks);
         parseTagsForAppend(argMultimap.getAllValues(PREFIX_TAG))
                 .ifPresent(appendPersonDescriptor::setTags);
+        parseRemarksForAppend(argMultimap.getAllValues(PREFIX_REMARKS))
+                .ifPresent(appendPersonDescriptor::setRemarks);
 
         if (!appendPersonDescriptor.isAnyFieldAppended()) {
             throw new ParseException(AppendCommand.MESSAGE_NOT_APPENDED);
@@ -126,5 +131,22 @@ public class AppendCommandParser implements Parser<AppendCommand> {
                 ? Collections.emptySet()
                 : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> remarks} into a {@code Set<Remark>} if {@code remarks} is non-empty.
+     * If {@code remarks} contains only one element which is an empty string, it will be parsed into a
+     * {@code Set<Remark>} containing zero remarks.
+     */
+    private Optional<Set<Remark>> parseRemarksForAppend(Collection<String> remarks) throws ParseException {
+        assert remarks != null;
+
+        if (remarks.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> remarkSet = remarks.size() == 1 && remarks.contains("")
+                ? Collections.emptySet()
+                : remarks;
+        return Optional.of(ParserUtil.parseRemarks(remarkSet));
     }
 }
