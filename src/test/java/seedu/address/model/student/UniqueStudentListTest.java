@@ -40,11 +40,11 @@ public class UniqueStudentListTest {
     }
 
     @Test
-    public void contains_studentWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_studentWithDifferentAddressAndTagFieldsInList_returnsFalse() {
         uniqueStudentList.add(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(uniqueStudentList.contains(editedAlice));
+        assertFalse(uniqueStudentList.contains(editedAlice));
     }
 
     @Test

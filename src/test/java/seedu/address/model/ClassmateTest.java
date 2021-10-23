@@ -50,9 +50,8 @@ public class ClassmateTest {
     public void resetData_withDuplicateStudents_throwsDuplicateStudentException() {
         // Two students with the same identity fields
         //TODO: Add sample tutorialClasses to tests. Replace new ArrayList in newData constructor line.
-        Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Student> newStudents = Arrays.asList(ALICE, editedAlice);
+        Student alice = new StudentBuilder(ALICE).build();
+        List<Student> newStudents = Arrays.asList(ALICE, alice);
         ClassmateStub newData = new ClassmateStub(newStudents, new ArrayList<>(), new ArrayList<>());
 
         assertThrows(DuplicateStudentException.class, () -> classmate.resetData(newData));
@@ -75,11 +74,11 @@ public class ClassmateTest {
     }
 
     @Test
-    public void hasStudent_studentWithSameIdentityFieldsInClassmate_returnsTrue() {
+    public void hasStudent_studentWithDifferentAddressAndTagFieldsInClassmate_returnsFalse() {
         classmate.addStudent(ALICE);
         Student editedAlice = new StudentBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(classmate.hasStudent(editedAlice));
+        assertFalse(classmate.hasStudent(editedAlice));
     }
 
     @Test
