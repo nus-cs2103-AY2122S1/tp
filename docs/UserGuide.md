@@ -189,14 +189,13 @@ Examples:
 **Note**: Italicised word refers to a stored prefix value. e.g. ***Name*** could refer to the value `John` stored as a name in the application.
 * ##### NAME `n/`
 <details>
-  <summary>
+  <summary>Expand to see details</summary>
+  
   * A NAME is considered matching with a ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
   * All keywords provided as NAME input must comply with input specifications for add given [**here**](#name-n).
   * For example:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
-  </summary>
-  
 </details>
 
 * ##### CONTACT_NUMBER `p/`
