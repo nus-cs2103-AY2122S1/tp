@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleListProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -125,8 +126,10 @@ public class MainWindow extends UiPart<Stage> {
 
         selectedListPanel = new PersonListPanel(logic.getSelectedPersonList());
         selectedListPanelPlaceholder.getChildren().add(selectedListPanel.getRoot());
-        SimpleListProperty<Person> selectionProperty = new SimpleListProperty<>(logic.getSelectedPersonList());
-        selectedList.managedProperty().bind(selectionProperty.emptyProperty().not());
+        BooleanBinding hasSelection = new SimpleListProperty<Person>(logic.getSelectedPersonList()).emptyProperty()
+                .not();
+        selectedList.managedProperty().bind(hasSelection);
+        selectedList.visibleProperty().bind(hasSelection);
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
