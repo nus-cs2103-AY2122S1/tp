@@ -51,7 +51,6 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 2, 1, true);
     public static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
-    private static Encryption cryptor;
 
     protected Ui ui;
     protected Logic logic;
@@ -86,7 +85,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
+    private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs, Encryption cryptor) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
 
@@ -217,7 +216,7 @@ public class MainApp extends Application {
      */
     public void logIn(String input) throws UnsupportedPasswordException,
             NoSuchPaddingException, NoSuchAlgorithmException {
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
         if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
             logger.info("Data file not found. Will be starting with a sample AddressBook");
             try {
@@ -231,7 +230,7 @@ public class MainApp extends Application {
         try {
             cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             FileUtil.deleteFile(storage.getAddressBookFilePath());
-            afterLogIn();
+            afterLogIn(cryptor);
         } catch (InvalidAlgorithmParameterException | IOException | InvalidKeyException e) {
             e.printStackTrace();
         }
@@ -245,8 +244,8 @@ public class MainApp extends Application {
      * @throws NoSuchPaddingException If the padding does not exist.
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
      */
-    public void afterLogIn() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
-        model = initModelManager(storage, userPrefs);
+    public void afterLogIn(Encryption cryptor) throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
+        model = initModelManager(storage, userPrefs, cryptor);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         ui = new UiManager(logic);
         ui.start(stage);
