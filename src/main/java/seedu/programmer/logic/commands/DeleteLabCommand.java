@@ -1,7 +1,6 @@
 package seedu.programmer.logic.commands;
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.logic.parser.CliSyntax.*;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.List;
 
@@ -21,7 +20,7 @@ public class DeleteLabCommand extends Command {
             + "Parameters: "
             + PREFIX_LAB_TITLE + "Lab Title "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "1 ";
+            + PREFIX_LAB_TITLE + "1 ";
 
     public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
 
