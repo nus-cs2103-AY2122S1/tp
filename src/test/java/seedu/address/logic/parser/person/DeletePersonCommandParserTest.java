@@ -61,7 +61,19 @@ public class DeletePersonCommandParserTest {
 
     @Test
     public void parse_emptyModuleCode_throwsParseException() {
-        assertParseFailure(parser, "m/",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, " m/",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleCode.MESSAGE_CONSTRAINTS));
+    }
+
+    @Test
+    public void parse_multiplyModuleCode_throwsParseException() {
+        assertParseFailure(parser, " m/CS2040S m/CS2030S",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE));
+    }
+
+    @Test
+    public void parse_multipleLessonCode_throwsParseException() {
+        assertParseFailure(parser, " m/CS2030S T12 L09",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT,DeletePersonCommand.MESSAGE_DELETE_BY_LESSON_CODE_USAGE));
     }
 }

@@ -30,16 +30,11 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     public DeletePersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
-        if (moduleCodes.size() > 1) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE)
-            );
-        }
-        if (moduleCodes.size() == 1) {
+        if (moduleCodes.size() >= 1) {
             try {
                 return deleteByModuleCode(moduleCodes);
             } catch (ParseException pe) {
-                throw new ParseException(pe.getMessage());
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()));
             }
         }
         try {
@@ -65,10 +60,12 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
                 .map(moduleCode -> moduleCode.toString())
                 .collect(Collectors.toList());;
         ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
+        if (moduleCodes.size() > 1) {
+            throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE);
+        }
         if (moduleCode.getLessonCodes().size() > 1) {
             throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_LESSON_CODE_USAGE);
         }
-
         return new DeletePersonCommand(
                 new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
     }

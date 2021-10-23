@@ -215,9 +215,20 @@ public class DeletePersonCommandTest {
         DeletePersonCommand deleteBatchCommand1 = new DeletePersonCommand(INDEX_FIRST, INDEX_SECOND);
         DeletePersonCommand deleteBatchCommand2 = new DeletePersonCommand(INDEX_FIRST, INDEX_THIRD);
 
+        ModuleCodesContainsKeywordsPredicate predicate_CS2106 = new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106)));
+        ModuleCodesContainsKeywordsPredicate predicate_CS2100 = new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100)));
+
+        DeletePersonCommand deleteByModule1 = new DeletePersonCommand(predicate_CS2106,
+                new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
+        DeletePersonCommand deleteByModule2 = new DeletePersonCommand(predicate_CS2100,
+                new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
+
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
         assertTrue(deleteBatchCommand1.equals(deleteBatchCommand1));
+        assertTrue(deleteByModule1.equals(deleteByModule1));
 
         // same values -> returns true
         DeletePersonCommand deleteFirstCommandCopy = new DeletePersonCommand(INDEX_FIRST);
@@ -225,6 +236,10 @@ public class DeletePersonCommandTest {
 
         DeletePersonCommand deleteBatchCommandCopy = new DeletePersonCommand(INDEX_FIRST, INDEX_SECOND);
         assertTrue(deleteBatchCommand1.equals(deleteBatchCommandCopy));
+
+        DeletePersonCommand deleteByModuleCopy = new DeletePersonCommand(predicate_CS2106,
+                new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
+        assertTrue(deleteByModule1.equals(deleteByModuleCopy));
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
@@ -236,5 +251,7 @@ public class DeletePersonCommandTest {
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
 
         assertFalse(deleteBatchCommand1.equals(deleteBatchCommand2));
+
+        assertFalse(deleteByModule1.equals(deleteByModule2));
     }
 }
