@@ -86,11 +86,7 @@ public class Date implements Comparable<Date> {
      * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate() {
-        if (!this.isOver()) {
-            return this;
-        }
-
-        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.next(getDayOfWeek()));
+        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
         Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }
