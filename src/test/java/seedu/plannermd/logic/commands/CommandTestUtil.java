@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
 import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
@@ -30,6 +31,7 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
+import seedu.plannermd.testutil.appointment.AddAppointmentDescriptorBuilder;
 import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
@@ -134,6 +136,9 @@ public class CommandTestUtil {
     public static final String INVALID_DURATION_DESC = " " + PREFIX_DURATION
             + INVALID_DURATION;
 
+    public static final AddAppointmentCommand.AddAppointmentDescriptor DESC_THIRTY_MIN_APPT;
+    public static final AddAppointmentCommand.AddAppointmentDescriptor DESC_TWO_HOUR_APPT;
+
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
@@ -148,6 +153,12 @@ public class CommandTestUtil {
         DESC_DR_BOB = new EditDoctorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_THIRTY_MIN_APPT = new AddAppointmentDescriptorBuilder().withAppointmentDate(VALID_APPT_DATE_THIRTY_MIN)
+                .withSession(VALID_APPT_TIME_THIRTY_MIN, VALID_APPT_DURATION_THIRTY_MIN)
+                .withRemark(VALID_APPT_REMARK).build();
+        DESC_TWO_HOUR_APPT = new AddAppointmentDescriptorBuilder().withAppointmentDate(VALID_APPT_DATE_TWO_HOUR)
+                .withSession(VALID_APPT_TIME_TWO_HOUR, VALID_APPT_DURATION_TWO_HOUR)
+                .withRemark(VALID_APPT_REMARK).build();
     }
 
     /**

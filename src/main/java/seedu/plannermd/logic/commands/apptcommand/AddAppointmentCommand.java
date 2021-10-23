@@ -178,8 +178,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
             AddAppointmentCommand.AddAppointmentDescriptor e = (AddAppointmentCommand.AddAppointmentDescriptor) other;
 
             return getSession().equals(e.getSession())
-                    && getAppointmentDate().equals(e.getAppointmentDate())
-                    && getRemark().equals(e.getRemark());
+                    && getAppointmentDate().equals(e.getAppointmentDate());
         }
     }
 }
