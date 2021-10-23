@@ -4,6 +4,7 @@ import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FOR
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.stream.Stream;
+
 import seedu.programmer.logic.commands.DeleteLabCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;

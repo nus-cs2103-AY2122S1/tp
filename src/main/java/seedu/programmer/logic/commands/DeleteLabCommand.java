@@ -3,8 +3,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.programmer.commons.core.Messages;
-import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;
@@ -20,7 +18,7 @@ public class DeleteLabCommand extends Command {
     //todo: for test of show feature only
     public static final String MESSAGE_USAGE = COMMAND_WORD + "work in progress";
 
-    public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s" ;
+    public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
 
     private final Lab result;
 
