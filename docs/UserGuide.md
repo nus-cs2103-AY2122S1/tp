@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
 
 ### *Welcome to the SportsPA User Guide!*
@@ -14,9 +15,8 @@ the commands available. If this is your first time using SportsPA, we also provi
 the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
-
 ## Table of Contents
-
+* Table of Contents
 {:toc}
 
 _____________________________________________________________________________________________________________
@@ -144,7 +144,7 @@ Format: `listf`
 
 ### Finding a facility : `findf`
 
-Only want to see facilities you are looking for? `findf` lets you finds and filter facilities whose location contains
+If you want to see specific facilities you are looking for, `findf` lets you find and filter facilities whose location contains
 any of the given keywords.
 
 Format: `findf KEYWORD [MORE_KEYWORDS]`
@@ -260,7 +260,7 @@ Format: `sortm`
 
 ### Finding a member `findm`
 
-Only want to see members you are looking for? `findm` lets you find and filter members whose name contains any of the
+If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
 given keywords.
 
 Format: `findm KEYWORD [MORE_KEYWORDS]`
