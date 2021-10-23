@@ -21,7 +21,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.NameContainsGroupKeywordsPredicate;
+import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.NameContainsTestKeywordsPredicate;
@@ -50,8 +50,6 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_DESCRIPTION_FUN = "fun";
     public static final String VALID_DESCRIPTION_BORING = "boring";
-
-
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -197,7 +195,7 @@ public class CommandTestUtil {
 
         Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
         final String[] splitName = group.getName().name.split("\\s+");
-        model.updateFilteredGroupList(new NameContainsGroupKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredGroupList(new GroupContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredGroupList().size());
     }
