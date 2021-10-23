@@ -8,9 +8,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.CommandType;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskHistory;
 
 public class DeleteTaskCommand extends Command {
 
@@ -40,7 +38,6 @@ public class DeleteTaskCommand extends Command {
 
         Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteTask(taskToDelete);
-        model.addTaskHistory(new TaskHistory(taskToDelete.getName(), CommandType.DELETE));
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
