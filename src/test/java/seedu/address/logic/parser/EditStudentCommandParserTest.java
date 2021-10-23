@@ -94,9 +94,12 @@ public class EditStudentCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Student} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC, Name.MESSAGE_CONSTRAINTS);
@@ -108,7 +111,8 @@ public class EditStudentCommandParserTest {
         String userInput = targetIndex.getOneBased() + TAG_DESC_HUSBAND + EMAIL_DESC_AMY + USERNAME_DESC_AMY
                 + NAME_DESC_AMY + STUDENTNUMBER_DESC_AMY + REPONAME_DESC_AMY + TAG_DESC_FRIEND;
 
-        EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
+        EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
                 .withEmail(VALID_EMAIL_AMY).withStudentNumber(VALID_STUDENTNUMBER_AMY).withRepoName(VALID_REPONAME_AMY)
                 .withUserName(VALID_USERNAME_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
@@ -187,7 +191,8 @@ public class EditStudentCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_STUDENT;
         String userInput = targetIndex.getOneBased() + INVALID_EMAIL_DESC + EMAIL_DESC_BOB;
-        EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withEmail(VALID_EMAIL_BOB)
+        EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder()
+                .withEmail(VALID_EMAIL_BOB)
                 .build();
         EditStudentCommand expectedCommand = new EditStudentCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
