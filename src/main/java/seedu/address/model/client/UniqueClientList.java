@@ -153,9 +153,7 @@ public class UniqueClientList implements Iterable<Client> {
     }
 
     /**
-     * Replaces the client {@code target} in the list with {@code editedClient}.
-     * {@code target} must exist in the list.
-     * The client identity of {@code editedClient} must not be the same as another existing client in the list.
+     * Replaces the client in the list with {@code editedClient} if their NextMeeting date is over.
      */
     public void updateLastMetDate() {
         LocalDate currentDate = LocalDate.now();

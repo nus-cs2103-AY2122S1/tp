@@ -32,7 +32,7 @@ public class SampleDataUtil {
                     "Prudential PRUwealth, AIA Pro Achiever 2.0, Syfe Select, a lot more plans......."
                         + ", Even more plans................................."),
                 new LastMet("24-01-2021"),
-                new NextMeeting("27-07-2021", "08:00", "09:00", "Starbucks @ UTown", "Alex Yeoh"),
+                new NextMeeting("25-12-2021", "08:00", "09:00", "Starbucks @ UTown", "Alex Yeoh"),
                 getTagSet("friends")),
             new Client(new ClientId("1"), new Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),

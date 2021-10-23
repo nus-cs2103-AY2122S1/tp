@@ -1,5 +1,6 @@
 package seedu.address.model.client;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.convertEmptyStringIfNull;
@@ -93,6 +94,10 @@ public class NextMeeting implements OptionalNonStringBasedField {
         return test.matches(VALID_MEETING_STRING);
     }
 
+    /**
+     * Returns the a boolean of whether this {@code NextMeeting} falls before
+     * the given {@code checkDate} and {@code checkTime}
+     */
     public boolean isMeetingOver(LocalDate checkDate, LocalTime checkTime) {
         if (date == null || endTime == null) {
             return false;
@@ -100,7 +105,11 @@ public class NextMeeting implements OptionalNonStringBasedField {
         return date.isBefore(checkDate) || date.isEqual(checkDate) && endTime.isBefore(checkTime);
     }
 
+    /**
+     * Converts this {@code NextMeeting} to a {@code LastMet}
+     */
     public LastMet convertToLastMet() {
+        requireNonNull(date);
         return new LastMet(dateInString);
     }
 

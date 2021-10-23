@@ -153,7 +153,9 @@ public class EditCommand extends Command {
         CurrentPlan oldCurrentPlan = clientToEdit.getCurrentPlan();
         Set<Tag> oldTags = clientToEdit.getTags();
 
-        LastMet updatedLastMet = clientToEdit.getNextMeeting().convertToLastMet();
+        LastMet updatedLastMet = clientToEdit.getLastMet().getLaterLastMet(
+            clientToEdit.getNextMeeting().convertToLastMet()
+        );
         NextMeeting updatedNextMeeting = NextMeeting.NULL_MEETING;
 
 
