@@ -23,7 +23,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 
 /**
- * The object that encrypts and decrypts
+ * The object that encrypts and decrypts files.
+ * Adapted and modified from <a href="https://www.baeldung.com/java-cipher-input-output-stream">
+ * Encrypting and Decrypting Files in Java</a> by Baeldung.
  */
 public class EncryptionManager implements Encryption {
     /**
