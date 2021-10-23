@@ -6,20 +6,7 @@ import static seedu.anilist.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.anilist.logic.commands.AbortClearCommand;
-import seedu.anilist.logic.commands.AddCommand;
-import seedu.anilist.logic.commands.ClearCommand;
-import seedu.anilist.logic.commands.Command;
-import seedu.anilist.logic.commands.ConfirmClearCommand;
-import seedu.anilist.logic.commands.DeleteCommand;
-import seedu.anilist.logic.commands.ExitCommand;
-import seedu.anilist.logic.commands.FindCommand;
-import seedu.anilist.logic.commands.GenreCommand;
-import seedu.anilist.logic.commands.HelpCommand;
-import seedu.anilist.logic.commands.ListCommand;
-import seedu.anilist.logic.commands.RenameCommand;
-import seedu.anilist.logic.commands.UpdateEpisodeCommand;
-import seedu.anilist.logic.commands.UpdateStatusCommand;
+import seedu.anilist.logic.commands.*;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
@@ -72,6 +59,9 @@ public class AnimeListParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
 
         case UpdateEpisodeCommand.COMMAND_WORD:
             return new UpdateEpisodeCommandParser().parse(arguments);

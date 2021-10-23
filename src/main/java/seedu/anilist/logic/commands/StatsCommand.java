@@ -19,6 +19,6 @@ public class StatsCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setCurrentTab(TabOption.TabOptions.STATS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, true, false);
     }
 }
