@@ -148,6 +148,11 @@ public interface Model {
     boolean hasOrder(Order order);
 
     /**
+     * Returns true if an order with the order id {@code id} exists in the order list.
+     */
+    boolean hasOrder(long id);
+
+    /**
      * Replaces the given order {@code target} with {@code editedOrder}.
      * {@code target} must exist in the order list.
      * The order identity of {@code editedOrder} must not be the same as another existing order in the order list.

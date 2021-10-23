@@ -135,6 +135,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return orders.hasOrder(order);
     }
 
+    public boolean hasOrder(long id) {
+        return orders.hasOrder(id);
+    }
+
     public void sortOrders(Comparator<Order> comparator) {
         orders.sort(comparator);
     }

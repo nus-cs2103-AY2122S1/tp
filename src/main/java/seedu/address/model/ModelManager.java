@@ -203,6 +203,14 @@ public class ModelManager implements Model {
         return addressBook.hasOrder(order);
     }
 
+    /**
+     * Checks if orderlist has an order with this id.
+     */
+    @Override
+    public boolean hasOrder(long id) {
+        return addressBook.hasOrder(id);
+    }
+
     @Override
     public void setOrder(Order target, Order editedOrder) {
         requireAllNonNull(target, editedOrder);

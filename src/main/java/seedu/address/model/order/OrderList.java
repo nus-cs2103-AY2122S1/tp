@@ -70,6 +70,14 @@ public class OrderList implements Iterable<Order> {
     }
 
     /**
+     * Returns true if an order in the OrderList have the id
+     */
+    public boolean hasOrder(long id) {
+        System.out.println(id);
+        return internalList.stream().anyMatch(order -> order.getId() == id);
+    }
+
+    /**
      * Marks an order as complete, if it exists in the OrderList
      * @param toMark
      */

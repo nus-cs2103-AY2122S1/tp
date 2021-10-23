@@ -30,6 +30,18 @@ public class TaskTag {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Returns -1 if this is a general tag. Else, returns the order id in the tagname.
+     */
+    public long getTagId() {
+        if (tagName.equals("General")) {
+            return -1;
+        }
+        String idString = tagName.substring(2);
+
+        return Long.parseLong(idString);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

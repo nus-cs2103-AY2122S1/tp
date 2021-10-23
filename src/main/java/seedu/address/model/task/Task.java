@@ -71,6 +71,13 @@ public class Task {
     }
 
     /**
+     * Return the task tag id of the task
+     */
+    public long getTagId() {
+        return taskTag.getTagId();
+    }
+
+    /**
      * Override of toString to provide a user-friendly String representation of Task objects.
      *
      * @return A string representing the Task meant to be printed for the user.

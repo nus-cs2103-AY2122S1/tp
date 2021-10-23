@@ -24,6 +24,7 @@ public class AddTaskCommand extends Command {
             + PREFIX_TASK_TAG + "SO2103";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_UNFOUND_ORDERID = "The sales order with the given Id cannot be found.";
 
     private final Task toAdd;
 
@@ -38,6 +39,11 @@ public class AddTaskCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (!model.hasOrder(toAdd.getTagId())) {
+            throw new CommandException(MESSAGE_UNFOUND_ORDERID);
+        }
+
         model.addTask(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.TASK);
     }
