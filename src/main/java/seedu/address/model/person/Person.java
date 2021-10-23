@@ -149,6 +149,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the appointment scheduled with this person is happening in the future.
+     */
+    public boolean hasUpcomingAppointment() {
+        return this.appointment.isUpcoming();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

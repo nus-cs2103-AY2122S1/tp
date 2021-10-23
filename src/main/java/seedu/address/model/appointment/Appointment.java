@@ -99,7 +99,13 @@ public class Appointment implements Comparable<Appointment> {
         return this.appointmentTime.format(FORMATTER);
     }
 
-    public boolean isExpired() {
-        return this.appointmentTime.compareTo(LocalDateTime.now()) < 0;
+    /**
+     * Returns true if the date and time contained in this appointment is happening in the future.
+     */
+    public boolean isUpcoming() {
+        if (appointmentTime == null) {
+            return false;
+        }
+        return this.appointmentTime.compareTo(LocalDateTime.now()) > 0;
     }
 }

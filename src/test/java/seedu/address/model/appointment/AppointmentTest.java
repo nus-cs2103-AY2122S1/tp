@@ -63,17 +63,17 @@ public class AppointmentTest {
     }
 
     @Test
-    public void isExpired() {
+    public void isUpcoming() {
         Appointment expiredAppointment = new Appointment("05-Jan-1999 05:40");
 
         LocalDateTime upcomingDate = LocalDateTime.now().plusDays(2);
         Appointment upcomingAppointment = new Appointment(upcomingDate.format(Appointment.FORMATTER));
 
         // date has passed
-        assertTrue(expiredAppointment.isExpired());
+        assertFalse(expiredAppointment.isUpcoming());
 
         // date has yet to pass
-        assertFalse(upcomingAppointment.isExpired());
+        assertTrue(upcomingAppointment.isUpcoming());
     }
 
     @Test

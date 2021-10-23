@@ -112,7 +112,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public ObservableList<Person> asSortedByAppointment() {
         return internalList.sorted(Comparator.comparing(Person::getAppointment))
-                .filtered(person -> !person.getAppointment().isExpired());
+                .filtered(Person::hasUpcomingAppointment);
     }
 
     @Override
