@@ -69,7 +69,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_codePredicate_multipleModuleFound() {
+    public void execute_codePredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 4);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("c/ CS");
         FindCommand command = new FindCommand(predicate);
@@ -79,7 +79,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_titlePredicate_multipleModuleFound() {
+    public void execute_titlePredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("t/ on");
         FindCommand command = new FindCommand(predicate);
@@ -89,7 +89,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_descriptionPredicate_multipleModuleFound() {
+    public void execute_descriptionPredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("d/ the");
         FindCommand command = new FindCommand(predicate);
@@ -99,7 +99,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_academicYearPredicate_multipleModuleFound() {
+    public void execute_academicYearPredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 3);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("y/ 1");
         FindCommand command = new FindCommand(predicate);
@@ -109,13 +109,23 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_semesterPredicate_multipleModuleFound() {
+    public void execute_semesterPredicate_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("s/ 1");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(MA1521, CS1231S), model.getFilteredModuleList());
+    }
+
+    @Test
+    public void execute_tagPredicate_oneModuleFound() {
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 1);
+        ModuleContainsKeywordsPredicate predicate = preparePredicate("tag/ ge");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredModuleList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(GEQ1000), model.getFilteredModuleList());
     }
 
     @Test
