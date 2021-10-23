@@ -4,7 +4,7 @@ title: User Guide
 ---
 
 NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their course completion.**
-It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User 
+It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
 
 * Table of Contents
@@ -48,7 +48,6 @@ Interface (GUI).
 
 * Items in square brackets are optional.<br>
   e.g. `c/CODE [tag/TAG]` can be used as `c/CS2103T tag/core` or as `c/CS2103T`.
-  
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/GEQ1000 m/GEQ1000`, only `m/GEQ1000` will be taken.
 
@@ -191,7 +190,7 @@ Format: `help`
 
 Updates user's Mc goal or current semester.
 
-Format: `FORMAT: set n/MC` `set y/YEAR s/SEM`
+Format: `set n/MC` `set y/YEAR s/SEM`
 * Commands must follow the specified format, **no fields should be left blank**.
 * **MC** must be a **positive integer** (1,2,3...).
 * **YEAR** must be a **integer between 1 and 6** (i.e. 1,2,3,4,5,6).
@@ -203,6 +202,17 @@ Examples:
 * `set y/2 s/1` - set the current semester Year 2, Sem 1
 * `set y/3 s/3` - set the current semester Year 3, Special Term 1
 
+
+### See modules taken in a specific semester : `view`
+
+See all the modules the user have taken in a specific semester.
+
+Format: `view y/YEAR s/SEM`
+* **YEAR** and **SEM** should follow the specified format as mentioned in `set` command previously.
+
+Examples:
+* `view y/2 s/1` - see all the modules the user have taken in year 2 semester 1.
+* `view y/2 s/3` - see all the modules taken in year 2 special Term 1.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -228,3 +238,4 @@ Action | Format, Examples
 **Help**| `help`
 **Info**| `info`
 **Set**| `set n/MC` or `set y/YEAR s/SEMESTER` <br> e.g. `set n/120` `set y/2 s/1`
+**View**| `view y/YEAR s/SEMESTER` <br> e.g. `view y/2 s/1`
