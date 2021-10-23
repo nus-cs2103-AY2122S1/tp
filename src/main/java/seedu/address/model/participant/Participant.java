@@ -208,6 +208,17 @@ public class Participant {
     }
 
     /**
+     * Replaces this Participant with a given edited Participant in this Participant's Events.
+     *
+     * @param editedParticipant The given edited Participant.
+     */
+    public void shiftEvents(Participant editedParticipant) {
+        for (int i = 0; i < events.size(); i++) {
+            events.get(i).replaceParticipant(this, editedParticipant);
+        }
+    }
+
+    /**
      * Returns true if both participants have the same identity and data fields.
      * This defines a stronger notion of equality between two participants.
      */
@@ -250,12 +261,28 @@ public class Participant {
 
         builder.append("\nDate of birth: ").append(getBirthDate());
 
-        ArrayList<NextOfKin> nextOfKins = getNextOfKins();
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: ");
             nextOfKins.forEach(builder::append);
         }
 
+        if (!events.isEmpty()) {
+            builder.append("\n\nAttending events:\n").append(formEventsList());
+        }
+
+        return builder.toString();
+    }
+
+    private String formEventsList() {
+        int index = 1;
+        StringBuilder builder = new StringBuilder();
+        for (Event event : events) {
+            builder.append(index)
+                    .append(". ")
+                    .append(event.getNameString())
+                    .append("\n");
+            index++;
+        }
         return builder.toString();
     }
 }

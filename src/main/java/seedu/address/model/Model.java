@@ -119,12 +119,10 @@ public interface Model {
     void setEvent(Event target, Event editedEvent);
 
     /**
-     * Marks the Event at {@code index} as done.
-     * {@code index} must be within the bounds of the Event list.
-     *
-     * @return The string representation of the Event.
+     * Marks the given Event {@code target} as done.
+     * {@code target} must exist in Managera.
      */
-    String markEventAsDone(int index);
+    void markEventAsDone(Event target);
 
     /** Returns an unmodifiable view of list of Events *///getFilteredEventList
     ObservableList<Event> getFilteredEventList();
