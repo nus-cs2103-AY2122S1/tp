@@ -36,7 +36,7 @@ public class DeleteLessonCommand extends DeleteCommand {
         List<Lesson> lastShownList = model.getFilteredLessonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
 
         Lesson lessonToDelete = lastShownList.get(targetIndex.getZeroBased());
