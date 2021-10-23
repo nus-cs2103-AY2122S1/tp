@@ -60,6 +60,8 @@ public class CommandTestUtil {
     // Both
     public static final String VALID_MODULE_CODE_CS2030S_T12 = "CS2030S T12";
     public static final String VALID_MODULE_CODE_CS2040 = "CS2040";
+    public static final String VALID_MODULE_CODE_CS2100 = "CS2100";
+    public static final String VALID_MODULE_CODE_CS2106 = "CS2106";
     public static final String VALID_MODULE_CODE_CS2040S_B05 = "CS2040S B05";
     // Person description
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
