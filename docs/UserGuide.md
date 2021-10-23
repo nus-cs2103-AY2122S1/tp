@@ -43,7 +43,7 @@ on any operating system including Windows, MacOS or Linux
    ![Ui](images/Ui.png)
    
    <div markdown="block" class="alert alert-info">
-   :information_source: Icons shown above will be added in future iterations<br>
+   :information_source: More icons will be added in future iterations<br>
    </div>
 1. You are now ready to start managing your clients!
    
@@ -71,8 +71,14 @@ are all sample data! Here are some commands you can try to see what they do:
 3. View all your saved contacts
     *  **`list`**
     
+4. Try searching for a high priority client!
+    * `find pr/high`
+    
+5. Try setting an appointment for him.
+    * `appt 1 d/2021-12-12 t/14:30 v/Buona Vista`
+    
 <div markdown="block" class="alert alert-info">
-:information_source: When you are ready to use FAST to keep track of your clients, you can use 
+:information_source: When you are ready to use FAST to keep track of your own clients, you can use 
 `clear` to delete this sample data. <br>
 </div>
 
@@ -198,6 +204,9 @@ Examples:
 * `find pr/high med` returns all clients with `HighPriority` and `MediumPriority`.
 * `find t/friends enemies` returns all clients tagged with `friends` or `enemies`.
 * `find r/good` returns all clients with remarks containing `good`.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+When searching for remarks, use more specific queries for better results.
+</div>
 
 ### Deleting a client: `del`
 
@@ -241,12 +250,29 @@ Format: `rmk INDEX [r/REMARK]`
 * Adds a remark to the client at the specified `INDEX`.
 * Remarks have a character limit of 100 characters.
 * To delete a remark, leave the remark parameter `[r/REMARK]` empty.
+   <div markdown="block" class="alert alert-info">
+   :information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
+   which should mostly be one or two words.<br>
+   </div>
 
 Examples:
 * `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first client.
+![result for `rmk 1 r/loves to eat`](images/remarkResult.png)
 * `rmk 1` removes the remark from the first client.<br>
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Try to add remarks with specific keywords so that it is easier to [search](#searching-for-clients-find) for them.
+</div>
 
-### Adding an appointment: `aa`
+### Appointments
+
+FAST is capable of storing and keeping track of appointments for your clients. You may save the date, time and venue of an appointment.
+* `DATE` the date of the appointment should be inputted in the format **`yyyy-mm-dd`**.
+* `TIME` the time of the appointment should be inputted in the 24-hour format **`HH:mm`**.
+* `VENUE` the location of the appointment can at most be 30 characters long (including whitespaces).
+
+#### Adding an appointment: `aa`
+
+Format: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
 Adds a scheduled appointment with the client. An appointment includes a date, time and venue. This allows you to keep
 track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-eppt),
@@ -254,21 +280,20 @@ track of all your clients' appointment dates all within the same app. You can al
 
 ![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
 
-Format: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
-
-* Only able to add a scheduled appointment with the client at the specified `INDEX` if no appointment exists yet.
-* `INDEX` refers to the index shown in the displayed client list.
-* `DATE` the date of the appointment in the format **`yyyy-mm-dd`**.
-* `TIME` the time of the appointment in the 24-hour format **`HH:mm`**.
-* `VENUE` the location of the appointment, which can at most be 30 characters long <br>(including whitespaces).
+* The `DATE` of the appointment must at least be specified.
 
 Examples:
 * `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
+![result for `appt 1 d/2021-03-27`](images/appointment.png)
 * `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
 * `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
-
-### Editing an appointment: `ea`
+   <div markdown="block" class="alert alert-info">
+   :information_source: This command will not work if the client has already been assigned an appointment. You will have to
+   use the [edit appointment](#editing-an-appointment-eppt) command.<br>
+   </div>
+   
+#### Editing an appointment: `ea`
 
 Edits a scheduled [appointment](#adding-an-appointment-appt) with the client. This command is useful when your appointment has been rescheduled or 
 has a change in location.
@@ -277,17 +302,13 @@ Format: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
 
 * Edits a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be updated with the input data.
-* `INDEX` refers to the index shown in the displayed client list.
-* `DATE` the date of the appointment in the format **`yyyy-mm-dd`**.
-* `TIME` the time of the appointment in the 24-hour format **`HH:mm`**.
-* `VENUE` the location of the appointment, which can at most be 30 characters long <br>(including whitespaces).
 * At least **one** of the optional fields must be present.
 
 Examples:
 * `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
-### Deleting an appointment: `da`
+#### Deleting an appointment: `da`
 
 Deletes a scheduled [appointment](#adding-an-appointment-appt) with the client. This command should be used when 
 the appointment has been cancelled with a client.
@@ -296,7 +317,6 @@ Format: `da INDEX`
 
 * Deletes a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
-* `INDEX` refers to the index shown in the displayed client list. 
 
 Examples:
 * `da 1` deletes the appointment of the first client.
@@ -312,10 +332,11 @@ track of the number of completed appointments with your client.
 Format: `ma INDEX`
 * Increment the completed appointment count with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
-* `INDEX` refers to the index shown in the displayed client list. 
 
 Examples:
+
 * `ma 1` updates the completed appointment counter of the first client.
+![result for `done 1`](images/appointmentDone.png)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
 
@@ -345,6 +366,9 @@ Format: `tag INDEX [a/TAG] [d/TAG]`
 * `INDEX` refers to the index shown in the displayed client list. 
 * Delete operations are performed first before add operations, regardless of their order in the input.
 * Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tags should be used to categorise clients, use short tag names that you may be able to use for other clients as well!
+</div>
 
 Example: 
 * `tag 1 a/thin d/fat` will add the `thin` tag while deleting the `fat` tag.
@@ -360,6 +384,9 @@ Usage: replace any fields requiring `[TAG]` with one of the following terms:
 * LowPriority: `pr/low`
 * MediumPriority: `pr/med`
 * HighPriority: `pr/high`
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A client can only have 1 priority tag, but they can have other non-priority tags alongside the one priority tag.
+</div>
 
 Example:
 * `tag 2 a/pr/low` will add a `LowPriority` tag to the specified client.
