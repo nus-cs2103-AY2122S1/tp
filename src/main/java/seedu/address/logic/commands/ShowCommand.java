@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -106,7 +107,7 @@ public class ShowCommand extends Command {
      * Creates a {@code Predicate} checking if a student has a matched name or ID.
      */
     private Predicate<Student> createStudentPredicate() {
-        return name != null ? new NameContainsKeywordsPredicate(Collections.singletonList(name.toString()))
+        return name != null ? new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")))
                 : id != null ? new IdContainsKeywordsPredicate(Collections.singletonList(id.toString())) : null;
     }
 

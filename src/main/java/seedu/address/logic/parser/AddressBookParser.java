@@ -112,6 +112,9 @@ public class AddressBookParser {
         case AddAllocCommand.COMMAND_WORD:
             return new AddAllocCommandParser().parse(arguments);
 
+        case AddAssessmentCommand.COMMAND_WORD:
+            return new AddAssessmentCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -120,9 +123,6 @@ public class AddressBookParser {
 
         case ShowAssessmentCommand.COMMAND_WORD:
             return new ShowAssessmentCommandParser().parse(arguments);
-
-        case AddAssessmentCommand.COMMAND_WORD:
-            return new AddAssessmentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

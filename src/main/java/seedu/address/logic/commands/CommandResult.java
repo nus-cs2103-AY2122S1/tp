@@ -70,6 +70,10 @@ public class CommandResult {
         return info;
     }
 
+    public boolean hasInfo() {
+        return info != null;
+    }
+
     public Chart getChart() {
         return chart;
     }

@@ -16,6 +16,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -38,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private InfoDisplay infoDisplay;
     private GraphDisplay graphDisplay;
 
     @FXML
@@ -57,6 +59,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane infoDisplayPlaceholder;
 
     @FXML
     private StackPane graphDisplayPlaceholder;
@@ -133,6 +138,9 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        infoDisplay = new InfoDisplay();
+        infoDisplayPlaceholder.getChildren().add(infoDisplay.getRoot());
+
         graphDisplay = new GraphDisplay();
         graphDisplayPlaceholder.getChildren().add(graphDisplay.getRoot());
     }
@@ -193,6 +201,12 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.hasInfo()) {
+                ShowCommand.Info info = commandResult.getInfo();
+                assert info != null;
+                infoDisplay.setInfo(info);
+            }
 
             if (commandResult.hasChart()) {
                 Chart chart = commandResult.getChart();
