@@ -34,7 +34,7 @@ public class ImportCommandParser implements Parser<ImportCommand> {
         }
 
         String fileName = fileNameKeywords[0];
-        if (!StringUtil.isJson(fileName)) {
+        if (!(StringUtil.isJson(fileName) || StringUtil.isCsv(fileName))) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
         }
