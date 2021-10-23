@@ -3,9 +3,9 @@ package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
@@ -78,7 +78,7 @@ public class GenreDeleteCommandTest {
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
                 .withGenres(ANIME_ONE_GENRE)
                 .build();
-        GenreDeleteCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreDeleteCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
 
 
         GenreDeleteCommand genreDeleteCommand = new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor);
@@ -97,7 +97,7 @@ public class GenreDeleteCommandTest {
                 .withGenres()
                 .build();
         GenreDeleteCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder()
-                .withGenre(ANIME_ONE_GENRE, VALID_GENRE_SHOUNEN)
+                .withGenre(ANIME_ONE_GENRE, VALID_GENRE_ACTION)
                 .build();
 
 
@@ -142,7 +142,7 @@ public class GenreDeleteCommandTest {
 
     @Test
     public void equals() {
-        GenreDeleteCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreDeleteCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
         final GenreDeleteCommand standardCommand = new GenreDeleteCommand(INDEX_FIRST_ANIME, descriptor);
 
         // same values -> returns true

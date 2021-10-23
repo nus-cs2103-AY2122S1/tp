@@ -2,6 +2,9 @@ package seedu.anilist.model.genre;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
+
+import java.util.Locale;
 
 /**
  * Represents a Genre of an Anime in the anime list.
@@ -9,9 +12,9 @@ import static seedu.anilist.commons.util.AppUtil.checkArgument;
  */
 public class Genre {
 
-    public static final String MESSAGE_CONSTRAINTS = "Genres names should be alphanumeric with at most one space "
-            + "separating each word.";
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}]+(?:[\\p{IsWhite_Space}][\\p{Alnum}]+)*";
+    public static final String MESSAGE_CONSTRAINTS = "Genres must be inside the list of available genres.\n"
+            + "To view the list, enter: "
+            + "genre " + PREFIX_ACTION + "list";
 
     public final String genreName;
 
@@ -30,7 +33,8 @@ public class Genre {
      * Returns true if a given string is a valid genre name.
      */
     public static boolean isValidGenreName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        requireNonNull(test);
+        return GenreList.contains(test.toLowerCase(Locale.ROOT));
     }
 
     @Override

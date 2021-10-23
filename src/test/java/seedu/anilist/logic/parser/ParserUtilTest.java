@@ -26,8 +26,8 @@ public class ParserUtilTest {
 
     private static final String VALID_ACTION_ADD = "add";
     private static final String VALID_NAME = "PSYCHO-PASS";
-    private static final String VALID_GENRE_1 = "cyberpunk";
-    private static final String VALID_GENRE_2 = "psychological thriller";
+    private static final String VALID_GENRE_1 = "adventure";
+    private static final String VALID_GENRE_2 = "psychological";
 
     private static final String WHITESPACE = " \t\r\n";
 

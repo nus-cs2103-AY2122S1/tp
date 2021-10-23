@@ -31,8 +31,8 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AKIRA = "Akira";
     public static final String VALID_NAME_BNHA = "Boku No Hero Academia";
-    public static final String VALID_GENRE_SHOUNEN = "shounen";
-    public static final String VALID_GENRE_SCIENCE_FICTION = "science fiction";
+    public static final String VALID_GENRE_ACTION = "action";
+    public static final String VALID_GENRE_SCIENCE_FICTION = "sci fi";
     public static final String VALID_EPISODE_ONE = "1";
     public static final String VALID_EPISODE_TWO = "2";
     public static final String VALID_ACTION_ADD = "add";
@@ -41,10 +41,11 @@ public class CommandTestUtil {
     public static final String VALID_STATUS_WATCHING = "watching";
 
     public static final String INVALID_ACTION_NO_SUCH_ACTION = "dancing";
+    public static final String INVALID_GENRE_NOT_IN_LIST = "tentacles";
 
     public static final String NAME_DESC_AKIRA = " " + PREFIX_NAME + VALID_NAME_AKIRA;
     public static final String NAME_DESC_BNHA = " " + PREFIX_NAME + VALID_NAME_BNHA;
-    public static final String GENRE_DESC_SHOUNEN = " " + PREFIX_GENRE + VALID_GENRE_SHOUNEN;
+    public static final String GENRE_DESC_ACTION = " " + PREFIX_GENRE + VALID_GENRE_ACTION;
     public static final String GENRE_DESC_SCIENCE_FICTION = " " + PREFIX_GENRE + VALID_GENRE_SCIENCE_FICTION;
     public static final String EPISODE_DESC_EPISODE_ONE = " " + PREFIX_EPISODE + VALID_EPISODE_ONE;
     public static final String EPISODE_DESC_EPISODE_TWO = " " + PREFIX_EPISODE + VALID_EPISODE_TWO;
@@ -73,7 +74,7 @@ public class CommandTestUtil {
     public static final UpdateStatusCommand.StatusDescriptor DESC_TOWATCH;
     public static final UpdateStatusCommand.StatusDescriptor DESC_WATCHING;
     public static final UpdateStatusCommand.StatusDescriptor DESC_WATCHING_SHORTFORM;
-    public static final GenreCommand.GenresDescriptor DESC_GENRE_SHOUNEN;
+    public static final GenreCommand.GenresDescriptor DESC_GENRE_ACTION;
     public static final GenreCommand.GenresDescriptor DESC_GENRE_SCIENCE_FICTION;
 
     static {
@@ -84,7 +85,7 @@ public class CommandTestUtil {
         DESC_TOWATCH = new StatusDescriptorBuilder().withStatus("towatch").build();
         DESC_WATCHING = new StatusDescriptorBuilder().withStatus("watching").build();
         DESC_WATCHING_SHORTFORM = new StatusDescriptorBuilder().withStatus("w").build();
-        DESC_GENRE_SHOUNEN = new GenresDescriptorBuilder().withGenre(VALID_GENRE_SHOUNEN).build();
+        DESC_GENRE_ACTION = new GenresDescriptorBuilder().withGenre(VALID_GENRE_ACTION).build();
         DESC_GENRE_SCIENCE_FICTION = new GenresDescriptorBuilder().withGenre(VALID_GENRE_SCIENCE_FICTION).build();
     }
 
