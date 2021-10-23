@@ -4,31 +4,32 @@ import seedu.address.model.TaskBook;
 import seedu.address.model.task.Task;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building TaskBook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code TaskBook tb = new TaskBookBuilder().ew TaskBuilder().withLabel("dummy").withDate("tmr")
+ *             .withTaskTag("tag").build();}
  */
 public class TaskBookBuilder {
 
-    private TaskBook taskList;
+    private TaskBook taskBook;
 
     public TaskBookBuilder() {
-        taskList = new TaskBook();
+        taskBook = new TaskBook();
     }
 
     public TaskBookBuilder(TaskBook taskList) {
-        this.taskList = taskList;
+        this.taskBook = taskList;
     }
 
     /**
      * Adds a new {@code Task} to the {@code TaskListManager} that we are building.
      */
     public TaskBookBuilder withTask(Task task) {
-        taskList.addTask(task);
+        taskBook.addTask(task);
         return this;
     }
 
     public TaskBook build() {
-        return taskList;
+        return taskBook;
     }
 }

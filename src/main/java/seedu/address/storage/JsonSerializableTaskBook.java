@@ -27,21 +27,21 @@ class JsonSerializableTaskBook {
      * Constructs a {@code JsonSerializableTaskList} with the given task.
      */
     @JsonCreator
-    public JsonSerializableTaskBook(@JsonProperty("tasks") List<JsonAdaptedTask> persons) {
-        this.tasks.addAll(persons);
+    public JsonSerializableTaskBook(@JsonProperty("tasks") List<JsonAdaptedTask> tasks) {
+        this.tasks.addAll(tasks);
     }
 
     /**
-     * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
+     * Converts a given {@code ReadOnlyTaskBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableTaskBook}.
      */
     public JsonSerializableTaskBook(ReadOnlyTaskBook source) {
         tasks.addAll(source.getTaskList().stream().map(JsonAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this address book into the model's {@code TaskBook} object.
+     * Converts this task book into the model's {@code TaskBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
      */

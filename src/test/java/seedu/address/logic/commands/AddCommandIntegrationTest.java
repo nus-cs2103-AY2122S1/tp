@@ -4,7 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalOrders.getTypicalSalesOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,8 +24,12 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
+<<<<<<< HEAD
         model = new ModelManager(getTypicalAddressBook(), getTypicalTaskList(),
                 getTypicalSalesOrderBook(), new UserPrefs());
+=======
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(), new UserPrefs());
+>>>>>>> refactor-taskManager
     }
 
     @Test

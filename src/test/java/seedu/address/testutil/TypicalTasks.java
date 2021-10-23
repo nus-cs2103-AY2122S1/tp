@@ -32,7 +32,7 @@ public class TypicalTasks {
     /**
      * Returns an {@code AddressBook} with all the typical tasks added.
      */
-    public static TaskBook getTypicalTaskList() {
+    public static TaskBook getTypicalTaskBook() {
         TaskBook tl = new TaskBook();
         for (Task task : getTypicalTasks()) {
             tl.addTask(task);

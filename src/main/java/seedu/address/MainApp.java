@@ -34,7 +34,7 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.SalesOrderBookStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
-import seedu.address.storage.TaskListStorage;
+import seedu.address.storage.TaskBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -65,10 +65,11 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
-        TaskListStorage taskListStorage = new JsonTaskBookStorage(userPrefs.getTaskListFilePath());
+        TaskBookStorage taskBookStorage = new JsonTaskBookStorage(userPrefs.getTaskBookPath());
         SalesOrderBookStorage salesOrderBookStorage =
                 new JsonSalesOrderBookStorage(userPrefs.getSalesOrderBookFilePath());
-        storage = new StorageManager(addressBookStorage, taskListStorage, salesOrderBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, taskBookStorage, salesOrderBookStorage, userPrefsStorage);
+
 
         initLogging(config);
 

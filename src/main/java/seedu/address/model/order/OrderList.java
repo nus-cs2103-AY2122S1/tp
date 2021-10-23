@@ -4,6 +4,7 @@ package seedu.address.model.order;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -109,6 +110,10 @@ public class OrderList implements Iterable<Order> {
     @Override
     public int hashCode() {
         return internalList.hashCode();
+    }
+
+    public void sort(Comparator<Order> comparator) {
+        internalList.sort(comparator);
     }
 
 }

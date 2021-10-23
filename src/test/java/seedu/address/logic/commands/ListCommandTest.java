@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalOrders.getTypicalSalesOrderBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalTasks.getTypicalTaskList;
+import static seedu.address.testutil.TypicalTasks.getTypicalTaskBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,10 +24,15 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
+<<<<<<< HEAD
         model = new ModelManager(getTypicalAddressBook(), getTypicalTaskList(),
                 getTypicalSalesOrderBook(), new UserPrefs());
         expectedModel = new ModelManager(model.getAddressBook(),
                 getTypicalTaskList(), getTypicalSalesOrderBook(), new UserPrefs());
+=======
+        model = new ModelManager(getTypicalAddressBook(), getTypicalTaskBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), getTypicalTaskBook(), new UserPrefs());
+>>>>>>> refactor-taskManager
     }
 
     @Test

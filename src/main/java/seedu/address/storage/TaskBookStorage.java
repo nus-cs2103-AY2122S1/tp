@@ -10,7 +10,7 @@ import seedu.address.model.ReadOnlyTaskBook;
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface TaskListStorage {
+public interface TaskBookStorage {
 
     /**
      * Returns the file path of the data file.
@@ -35,11 +35,12 @@ public interface TaskListStorage {
      * @param taskBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveTaskList(ReadOnlyTaskBook taskBook) throws IOException;
+
+    void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
 
     /**
-     * @see #saveTaskList(ReadOnlyTaskBook)
+     * @see #saveTaskBook(ReadOnlyTaskBook)
      */
-    void saveTaskList(ReadOnlyTaskBook addressBook, Path filePath) throws IOException;
+    void saveTaskBook(ReadOnlyTaskBook addressBook, Path filePath) throws IOException;
 
 }

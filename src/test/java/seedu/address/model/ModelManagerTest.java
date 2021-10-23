@@ -32,7 +32,6 @@ public class ModelManagerTest {
         assertEquals(new UserPrefs(), modelManager.getUserPrefs());
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new AddressBook(), new AddressBook(modelManager.getAddressBook()));
-        //assertEquals(new TaskListManager(), new TaskListManager(modelManager.getTaskList()));
     }
 
     @Test
@@ -103,6 +102,7 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
+<<<<<<< HEAD
         TaskBook taskList = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
         TaskBook differentTaskList = new TaskBook();
         SalesOrderBook salesOrderBook = new SalesOrderBookBuilder().withOrder(SALESORDER1)
@@ -113,6 +113,15 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, taskList, salesOrderBook, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, taskList, salesOrderBook, userPrefs);
+=======
+        TaskBook taskBook = new TaskBookBuilder().withTask(TASK1).withTask(TASK2).build();
+        TaskBook differentTaskBook = new TaskBook();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        modelManager = new ModelManager(addressBook, taskBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, taskBook, userPrefs);
+>>>>>>> refactor-taskManager
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -125,13 +134,21 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
+<<<<<<< HEAD
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook,
                 differentTaskList, differentSalesOrderBook, userPrefs)));
+=======
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, differentTaskBook, userPrefs)));
+>>>>>>> refactor-taskManager
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+<<<<<<< HEAD
         assertFalse(modelManager.equals(new ModelManager(addressBook, taskList, salesOrderBook, userPrefs)));
+=======
+        assertFalse(modelManager.equals(new ModelManager(addressBook, taskBook, userPrefs)));
+>>>>>>> refactor-taskManager
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -139,6 +156,10 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+<<<<<<< HEAD
         assertFalse(modelManager.equals(new ModelManager(addressBook, taskList, salesOrderBook, differentUserPrefs)));
+=======
+        assertFalse(modelManager.equals(new ModelManager(addressBook, taskBook, differentUserPrefs)));
+>>>>>>> refactor-taskManager
     }
 }

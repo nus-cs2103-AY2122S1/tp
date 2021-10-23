@@ -1,10 +1,12 @@
 package seedu.address;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlySalesOrderBook;
@@ -169,6 +171,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public ObservableList<Order> getFilteredOrderList() {
         throw new AssertionError("This method should not be called.");
     }
@@ -195,6 +202,16 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredOrderList(Predicate<Order> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void sortOrderList(Comparator<Order> comparator) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void resetOrderView() {
         throw new AssertionError("This method should not be called.");
     }
 }

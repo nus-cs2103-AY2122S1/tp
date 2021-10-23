@@ -33,7 +33,7 @@ import seedu.address.testutil.TypicalTasks;
  */
 public class EditTaskCommandTest {
 
-    private TaskBook typicalTaskList = TypicalTasks.getTypicalTaskList();
+    private TaskBook typicalTaskList = TypicalTasks.getTypicalTaskBook();
 
     private Model model = new ModelManager(new AddressBook(), typicalTaskList,
             new SalesOrderBook(), new UserPrefs());

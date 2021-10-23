@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
@@ -127,7 +129,7 @@ public class ModelManager implements Model {
 
     @Override
     public Path getTaskListFilePath() {
-        return userPrefs.getTaskListFilePath();
+        return userPrefs.getTaskBookPath();
     }
 
     @Override
@@ -186,9 +188,11 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+
     @Override
     public void markTask(Task toMark) {
         taskBook.markDone(toMark);
+
     }
 
 
@@ -263,6 +267,32 @@ public class ModelManager implements Model {
         salesOrderBook.markOrder(order);
     }
 
+    /**
+     * For each person, finds orders associated with the person, and adds up the amount.
+     * Creates a ClientTotalOrder for each person.
+     *
+     * @return an ObservableList of {@code ClientTotalOrder}.
+     */
+    @Override
+    public ObservableList<ClientTotalOrder> getClientTotalOrders() {
+        ObservableList<ClientTotalOrder> clientTotalOrders = FXCollections.observableArrayList();
+        for (Person client : addressBook.getPersonList()) {
+            clientTotalOrders.add(getClientTotalOrder(client));
+        }
+        return clientTotalOrders;
+    }
+
+    private ClientTotalOrder getClientTotalOrder(Person client) {
+        String clientName = client.getName().toString();
+        Predicate<Order> correctClient = (order) -> order.getCustomer().toString().equals(clientName);
+        double totalOrder = salesOrderBook.getOrderList().stream()
+                .filter(correctClient)
+                .mapToDouble(Order::getAmountAsDouble)
+                .sum();
+        return new ClientTotalOrder(clientName, totalOrder);
+    }
+
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -297,6 +327,19 @@ public class ModelManager implements Model {
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    @Override
+    public void sortOrderList(Comparator<Order> comparator) {
+        salesOrderBook.sortOrders(comparator);
+        filteredOrders.setPredicate(PREDICATE_SHOW_ALL_ORDERS);
+    }
+
+    @Override
+    public void resetOrderView() {
+        Comparator<Order> defaultComparator = Order::compareTo;
+        salesOrderBook.sortOrders(defaultComparator);
+        updateFilteredOrderList(PREDICATE_SHOW_ALL_ORDERS);
     }
 
 }
