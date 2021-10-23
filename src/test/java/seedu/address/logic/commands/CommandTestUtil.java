@@ -40,8 +40,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_NATIONALITY_AMY = "Singapore";
     public static final String VALID_NATIONALITY_BOB = "Malaysia";
-    public static final String VALID_TUTORIAL_GROUP_AMY = "09";
-    public static final String VALID_TUTORIAL_GROUP_BOB = "28";
+    public static final String VALID_TUTORIAL_GROUP_AMY = "T09";
+    public static final String VALID_TUTORIAL_GROUP_BOB = "T28";
     public static final String VALID_REMARK_AMY = "Like skiing.";
     public static final String VALID_REMARK_BOB = "Favourite pastime: Eating";
     public static final String VALID_TAG_HUSBAND = "husband";

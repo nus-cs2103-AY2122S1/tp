@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TutorialGroup {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Tutorial Groups should only contain numbers, and it should not be blank";
-    public static final String VALIDATION_REGEX = "\\d+";
+            "Tutorial Groups should only contain one letter that is either M/T/W/F followed by two digits, "
+                    + "and it should not be blank";
+    public static final String VALIDATION_REGEX = "[mtwfMTWF]\\d{2}";
 
     public final String value;
 

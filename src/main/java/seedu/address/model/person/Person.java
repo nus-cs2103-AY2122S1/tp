@@ -92,6 +92,13 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Tag getFirstTag() {
+        if (!tags.isEmpty()) {
+            return tags.iterator().next();
+        }
+        return null;
+    }
+  
     public Set<SocialHandle> getSocialHandles() {
         return Collections.unmodifiableSet(socialHandles);
     }
