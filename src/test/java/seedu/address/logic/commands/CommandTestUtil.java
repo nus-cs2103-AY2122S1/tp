@@ -49,6 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_TELE_HANDLE_BOB = "@bobgoh";
     public static final String VALID_MODULE_CODE_CS2030S_T12 = "CS2030S T12";
     public static final String VALID_MODULE_CODE_CS2040 = "CS2040";
+    public static final String VALID_MODULE_CODE_CS2100 = "CS2100";
+    public static final String VALID_MODULE_CODE_CS2106 = "CS2106";
     public static final String VALID_MODULE_CODE_CS2040S_B05 = "CS2040S B05";
     public static final String VALID_LESSON_DAY_TUES = "2";
     public static final String VALID_LESSON_DAY_WED = "3";
