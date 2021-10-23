@@ -244,12 +244,6 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    @Override
-    public void updateFilteredApplicantList(Predicate<Applicant> predicate) {
-        requireNonNull(predicate);
-        filteredApplicants.setPredicate(predicate);
-    }
-
     // needs to update
     @Override
     public boolean equals(Object obj) {

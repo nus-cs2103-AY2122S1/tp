@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 
 import seedu.address.logic.commands.FilterApplicantCommand;
-import seedu.address.logic.commands.FilterApplicantCommand.FilterApplicantDescriptor;
+import seedu.address.logic.descriptors.FilterApplicantDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
