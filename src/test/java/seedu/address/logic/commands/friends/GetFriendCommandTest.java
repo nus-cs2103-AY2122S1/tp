@@ -21,6 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.game.GameFriendLinksContainsGameIdPredicate;
 import seedu.address.testutil.FriendBuilder;
 
 /**
@@ -40,6 +41,7 @@ public class GetFriendCommandTest {
         String expectedMessage = String.format(GetFriendCommand.MESSAGE_FRIEND_FULL_INFORMATION,
                 friendToGet.getFriendId());
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(), new UserPrefs());
+        expectedModel.updateFilteredGamesList(new GameFriendLinksContainsGameIdPredicate(friendToGet));
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FRIEND_GET, friendToGet);
 
         assertCommandSuccess(getCommand, model, expectedCommandResult, expectedModel);
@@ -67,7 +69,7 @@ public class GetFriendCommandTest {
         // show no one
         showNoFriend(expectedModel);
         CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.FRIEND_GET, friendToGet);
-
+        expectedModel.updateFilteredGamesList(new GameFriendLinksContainsGameIdPredicate(friendToGet));
         assertCommandSuccess(getCommand, model, expectedCommandResult, expectedModel);
     }
 

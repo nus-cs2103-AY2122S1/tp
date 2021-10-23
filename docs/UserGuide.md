@@ -5,9 +5,11 @@ title: User Guide
 
 ![gitGud](images/gitgud.png)
 
-gitGud is a **desktop application for managing friends' gaming information**. gitGud uses a simple **Graphical User Interface 
-(GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. If you can 
-type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
+gitGud is a **desktop application for managing your friends' gaming information**. It uses a gamer-themed **Graphical User Interface 
+(GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. 
+
+Keeping track of all of yours friends' gaming information and schedules is difficult and time-consuming.
+With gitGud, there is no need to get tilted(frustrated) by this anymore as **how fast you type determines how fast you manage your gaming contacts**.
 
 
 * Table of Contents
@@ -31,7 +33,7 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 
    * **`friend --list`** : Lists all friends.
 
-   * **`friend`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud FRIEND_ID of __Draco__ to the application.
+   * **`friend --add`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud FRIEND_ID of __Draco__ to the application.
 
    * **`friend --delete`**`Draco` : Deletes friend with gitGud FRIEND_ID of __Draco__.
 
@@ -50,9 +52,6 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `get --game GAME_NAME`, `GAME_NAME` is a parameter which can be used as `get --game CSGO`.
 
-* Items with `…` after them can be used one or more times.<br>
-  e.g. `GAME_NAME:IN_GAME_USERNAME…` can be used as `Valorant:biscuitismydog`, `Valorant:biscuitismydog Minecraft:Draco` etc.
-
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
 
@@ -61,15 +60,11 @@ type fast enough, gitGud can get you contact management tasks done faster than t
 
 </div>
 
-### Viewing help: `help`
+### Friend commands  
 
-Shows a message explaning how to access the help page.
+Commands that involve adding, editing, deleting or viewing of friends in your gitGud friend list.
 
-![help message](images/helpMessage.png)
-
-Format: `help`
-
-### Adding a friend: `friend --add`
+#### Adding a friend: `friend --add`
 
 Adds a new friend to gitGud friend’s list with an associated **unique** friend identifier.
 
@@ -81,7 +76,7 @@ Examples:
 * `friend --add tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
   has the real-life name 'Taufiq'.
 
-### Deleting a friend: `friend --delete`
+#### Deleting a friend: `friend --delete`
 
 Deletes a friend from gitGud’s friend’s list using gitGud’s unique friend identifier.
 
@@ -93,53 +88,48 @@ Format: `friend --delete FRIEND_ID`
 Examples:
 * `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
 
-### Adding a game: `game --add`
-
-Adds a game with the given **unique** GAME_ID into the gitGud game list.
-
-Format: `game --add GAME_ID`
-
-* If the GAME_ID provided already exists, an error will be displayed. 
-* The GAME_ID provided must be a single word e.g. `ApexLegends` and not `Apex Legends`.
-
-Examples:
-* `game --add Valorant` Adds a brand-new game into the game list with the unique GAME_ID 'Valorant'.
-
-### Deleting a game: `game --delete`
-
-Deletes a game from the gitGud game list.
-
-Format: `game --delete GAME_NAME`
-
-Examples:
-* `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
-
-### Link games with a friend: `friend --link`
+#### Link games with a friend: `friend --link`
 
 Links game and the associated in-game username for the game to a friend with the provided FRIEND_ID.
 
-Format: `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
+A link between a particular friend and game shows that the friend plays the game. This association is required for subsequent commands, e.g. for the application to display all games that a friend plays or to recommend a friend to play with based on a particular game.
 
-* Both FRIEND_ID and GAME_NAME has to already be inside the database.
+Format: `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`
+
+* Both FRIEND_ID and GAME_ID has to already be inside the database.
 
 Examples:
 * `friend --link Draco --game DOTA --user Draco995`
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
   to the friend with the gitGud FRIEND_ID ‘Draco’.
 
-### Unlinking a game from a friend: `friend --unlink`
+#### Unlinking a game from a friend: `friend --unlink`
 
 Removes the link between a friend and a game.
 
-Format: `friend --unlink FRIEND_ID --game GAME_NAME`
+Format: `friend --unlink FRIEND_ID --game GAME_ID`
 
 * FRIEND_ID has to already be inside the database.
-* The friend has to have a current association with the provided GAME_NAME.
+* The friend has to have a current association with the provided GAME_ID.
 
 Examples:
-* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_NAME 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
+* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_ID 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
-### Listing multiple friends data: `friend --list`
+#### Getting a single friend's complete data: `get --friend`
+
+Takes a look at a particular friend's complete data by searching their `FRIEND_ID`. A friend's complete data includes:
+* List of games the friend plays
+* In-game username for each game
+
+Format: `get [--friend] FRIEND_ID`
+* The `FRIEND_ID` must currently exist in the database
+
+Examples:
+* `get --friend Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his username for each game
+* `get kev` Gets the complete data for friend "kev"
+
+
+#### Listing multiple friends data: `friend --list`
 
 Lists all friends stored in gitGud whose friend id contains any of the given keywords.
 
@@ -156,7 +146,68 @@ Examples:
 
 ![result for 'game --list'](images/UiListFriend.png)
 
-### Listing multiple games data: `game --list`
+#### Scheduling a friends: `friend --schedule`
+
+Schedules an existing friend by updating their schedule to indicate the time periods they are free or busy.
+* gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
+
+Format: `friend --schedule FRIEND_ID --period START_TIME END_TIME DAY --free IS_FREE`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the schedule:**<br>
+
+New friends start off which a schedule with all periods marked as busy.
+
+</div>  
+
+* `FRIEND_ID` must belong to an existing friend in gitGud
+* `START_HOUR` and `END_HOUR` are written in 24 Hour notation and must be whole hours (e.g. 0230 and 1201 are not accepted)
+* `END_HOUR` must be after `START_HOUR`, the only exception is if `END_HOUR` is `0000` where it is taken as midnight.
+* `DAY` must be an integer between 1 and 7 inclusive, with each day representing a day of the week from Monday to Sunday.
+* `IS_FREE` is used to mark the period as a free or busy period, with `1` meaning free and `0` meaning busy
+
+Examples:
+* `friend --schedule Draco --period 1800 2200 2 --free 1` Schedules "Draco" as free from 1800 to 2200 on Tuesday.
+* `friend --schedule Draco --period 1200 0000 7 --free 0` Schedules "Draco" as busy from 1200 to 0000 (midnight) on Sunday.
+
+### Game commands
+
+Commands that involve adding, editing, deleting or viewing of games in your gitGud friend list.
+
+#### Adding a game: `game --add`
+
+Adds a game with the given **unique** GAME_ID into the gitGud game list.
+
+Format: `game --add GAME_ID`
+
+* If the GAME_ID provided already exists, an error will be displayed. 
+* The GAME_ID provided must be a single word e.g. `ApexLegends` and not `Apex Legends`.
+
+Examples:
+* `game --add Valorant` Adds a brand-new game into the game list with the unique GAME_ID 'Valorant'.
+
+#### Deleting a game: `game --delete`
+
+Deletes a game from the gitGud game list.
+
+Format: `game --delete GAME_NAME`
+
+Examples:
+* `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
+
+#### Getting a single game's complete data: `get --game`
+
+Gets all the relevant information for a game that was previously added, this includes:
+* All the friends (represented by their `FRIEND_ID`) that play the game
+
+Format: `get --game GAME_NAME`
+* The `GAME_NAME` must currently exist in the database
+
+Examples:
+* `get --game CSGO` Gets all the relevant information for the game "CSGO". This includes all the friends in your database that play the game
+
+#### Listing multiple games data: `game --list`
 
 Lists all games stored in gitGud whose friend id contains any of the given keywords.
 
@@ -173,29 +224,23 @@ Examples:
 
 ![result for 'game --list'](images/UiListGame.png)
 
-### Getting a single friend's complete data: `get --friend`
+### Other commands
 
-Takes a look at a particular friend's complete data by searching their `FRIEND_ID`. A friend's complete data includes:
-* List of games the friend plays
-* In-game username for each game
+Miscellaneous useful commands for the user.
 
-Format: `get [--friend] FRIEND_ID`
-* The `FRIEND_ID` must currently exist in the database
+#### Viewing help: `help`
 
-Examples:
-* `get --friend Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his username for each game
-* `get kev` Gets the complete data for friend "kev"
+Shows a message explaning how to access the help page.
 
-### Getting a single game's complete data: `get --game`
+![help message](images/helpMessage.png)
 
-Gets all the relevant information for a game that was previously added, this includes:
-* All the friends (represented by their `FRIEND_ID`) that play the game
+Format: `help`
 
-Format: `get --game GAME_NAME`
-* The `GAME_NAME` must currently exist in the database
+#### Exiting the program : `exit`
 
-Examples:
-* `get --game CSGO` Gets all the relevant information for the game "CSGO". This includes all the friends in your database that play the game
+Exits the program.
+
+Format: `exit`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -203,9 +248,6 @@ Examples:
 
 **Q**: How do I **_transfer_** my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
-
-**Q**: What happens if I add _**multiple flags**_ that clash? e.g. `list --friend tau --game Val`  
-**A**: Only the first valid flag is taken and subsequent flags will be ignored.
 
 **Q**: How do I _**update**_ a friend’s data that is already on the database?<br>
 **A**: You can delete the friend and then add the friend with the new data.
@@ -216,15 +258,17 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Viewing Help** | `help`
 **Add friend** | `friend --add FRIEND_ID [--name "NAME"]` <br> e.g., `friend --add Draco --name "Marcus Tang"`
 **Delete friend** | `friend --delete FRIEND_ID`<br> e.g., `friend --delete Draco`
-**Add game** | `game --add GAME_NAME` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
-**Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
-**Link game and friend** | `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
-**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_NAME` <br> e.g., `friend --unlink Draco --game DOTA`
-**List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
-**List Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
 **Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
-**Get game** | `get --game GAME_NAME`<br> e.g., `get --game Valorant`
+**List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
+**Schedule Friend** | `friend --schedule FRIEND_ID --period START_TIME END_TIME DAY --free IS_FREE`<br> e.g., `friend --schedule Draco --period 1800 2200 2 --free 1`
+**Add game** | `game --add GAME_ID` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
+**Delete game** | `game --delete GAME_ID` <br> e.g., `game --delete Valorant`
+**Get game** | `get --game GAME_ID`<br> e.g., `get --game Valorant`
+**List Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
+**Link game and friend** | `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
+**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_ID` <br> e.g., `friend --unlink Draco --game DOTA`
+**Viewing Help** | `help`
+**Exit program** | `exit`
 

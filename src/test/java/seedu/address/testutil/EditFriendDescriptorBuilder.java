@@ -25,7 +25,7 @@ public class EditFriendDescriptorBuilder {
      */
     public EditFriendDescriptorBuilder(Friend friend) {
         descriptor = new EditFriendCommand.EditFriendDescriptor();
-        descriptor.setFriendName(friend.getName());
+        descriptor.setFriendName(friend.getFriendName());
     }
 
     /**

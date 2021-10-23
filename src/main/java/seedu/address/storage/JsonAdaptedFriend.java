@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.Schedule;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -25,6 +26,7 @@ class JsonAdaptedFriend {
     private final String friendId;
     private final String friendName;
     private final List<JsonAdaptedGameFriendLink> gameFriendLinks = new ArrayList<>();
+    private final Schedule schedule;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -32,12 +34,14 @@ class JsonAdaptedFriend {
     @JsonCreator
     public JsonAdaptedFriend(@JsonProperty("friendId") String friendId,
                              @JsonProperty("friendName") String friendName,
-                             @JsonProperty("gameFriendLink") List<JsonAdaptedGameFriendLink> gameFriendLinks) {
+                             @JsonProperty("gameFriendLink") List<JsonAdaptedGameFriendLink> gameFriendLinks,
+                             @JsonProperty("schedule") Schedule schedule) {
         this.friendId = friendId;
         this.friendName = friendName;
         if (gameFriendLinks != null) {
             this.gameFriendLinks.addAll(gameFriendLinks);
         }
+        this.schedule = schedule;
     }
 
     /**
@@ -45,10 +49,11 @@ class JsonAdaptedFriend {
      */
     public JsonAdaptedFriend(Friend sourceInstance) {
         friendId = sourceInstance.getFriendId().value;
-        friendName = sourceInstance.getName().fullName;
+        friendName = sourceInstance.getFriendName().fullName;
         gameFriendLinks.addAll(sourceInstance.getGameFriendLinks().stream()
                 .map(JsonAdaptedGameFriendLink::new)
                 .collect(Collectors.toList()));
+        schedule = sourceInstance.getSchedule();
     }
 
     /**
@@ -81,6 +86,15 @@ class JsonAdaptedFriend {
         final FriendName modelFriendName = new FriendName(friendName);
         final Set<GameFriendLink> gameFriendLinkSet = new HashSet<>(gameFriendLinksList);
 
-        return new Friend(modelFriendId, modelFriendName, gameFriendLinkSet);
+        if (schedule == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Schedule.class.getSimpleName()));
+        }
+
+        if (!Schedule.isValidSchedule(schedule)) {
+            throw new IllegalValueException(Schedule.MESSAGE_INVALID_SCHEDULE);
+        }
+
+        return new Friend(modelFriendId, modelFriendName, gameFriendLinkSet, schedule);
     }
 }

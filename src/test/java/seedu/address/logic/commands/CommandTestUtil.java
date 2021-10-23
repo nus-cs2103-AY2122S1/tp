@@ -3,8 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.FLAG_ADD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_FREE;
 import static seedu.address.logic.parser.CliSyntax.FLAG_FRIEND_NAME;
 import static seedu.address.logic.parser.CliSyntax.FLAG_GAME_OLD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_PERIOD;
+import static seedu.address.logic.parser.CliSyntax.FLAG_SCHEDULE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGames.APEX_LEGENDS;
 import static seedu.address.testutil.TypicalGames.CSGO;
@@ -40,6 +43,11 @@ public class CommandTestUtil {
     public static final String VALID_USER_NAME_DRACO = "draco#1777";
     public static final String VALID_USER_NAME_OMEGA = "OmegaLynx";
 
+    public static final String VALID_DAY = "1"; // Monday
+    public static final String VALID_START_TIME = "0200";
+    public static final String VALID_END_TIME = "0800";
+    public static final String VALID_IS_FREE_TIME = "1";
+
     public static final String FRIEND_ID_DESC_AMY = " " + FLAG_ADD + VALID_FRIEND_ID_AMY;
     public static final String FRIEND_ID_DESC_BOB = " " + FLAG_ADD + VALID_FRIEND_ID_BOB;
     public static final String NAME_DESC_AMY = " " + FLAG_FRIEND_NAME + VALID_NAME_AMY;
@@ -50,6 +58,10 @@ public class CommandTestUtil {
     public static final String GAME_DESC_CSGO = " " + FLAG_ADD + CSGO.gameId;
     public static final String GAME_DESC_VALORANT = " " + FLAG_ADD + VALORANT.gameId;
     public static final String GAME_DESC_APEX_LEGENDS = " " + FLAG_ADD + APEX_LEGENDS.gameId;
+
+    public static final String SCHEDULE_FRIEND_AMY = " " + FLAG_SCHEDULE + " " + VALID_FRIEND_ID_AMY + " " + FLAG_PERIOD
+            + " " + VALID_START_TIME + " " + VALID_END_TIME + " " + VALID_DAY + " " + FLAG_FREE
+            + " " + VALID_IS_FREE_TIME;
 
     public static final String INVALID_NAME_DESC = " " + FLAG_FRIEND_NAME + " " + "James&"; // '&' not allowed in names
     public static final String INVALID_GAME_DESC = " " + FLAG_GAME_OLD + "kickstar*"; // '*' not allowed in games
@@ -121,7 +133,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredFriendsList().size());
 
         Friend friend = model.getFilteredFriendsList().get(targetIndex.getZeroBased());
-        final String[] splitName = friend.getName().fullName.split("\\s+");
+        final String[] splitName = friend.getFriendName().fullName.split("\\s+");
         model.updateFilteredFriendsList(new FriendNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredFriendsList().size());

@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendId;
 import seedu.address.model.friend.FriendName;
+import seedu.address.model.friend.Schedule;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
@@ -54,15 +55,16 @@ public class EditFriendCommand extends Command {
      * Creates and returns a {@code Friend} with the details of {@code friendToEdit}
      * edited with {@code EditFriendDescriptor}.
      */
-    private static Friend createEditedPerson(Friend friendToEdit, EditFriendDescriptor editFriendDescriptor) {
+    private static Friend createEditedFriend(Friend friendToEdit, EditFriendDescriptor editFriendDescriptor) {
         assert friendToEdit != null;
         assert editFriendDescriptor != null;
 
         FriendId friendId = friendToEdit.getFriendId();
-        FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getName());
+        FriendName updatedFriendName = editFriendDescriptor.getFriendName().orElse(friendToEdit.getFriendName());
         Set<GameFriendLink> gameFriendLinks = friendToEdit.getGameFriendLinks();
+        Schedule schedule = friendToEdit.getSchedule();
 
-        return new Friend(friendId, updatedFriendName, gameFriendLinks);
+        return new Friend(friendId, updatedFriendName, gameFriendLinks, schedule);
     }
 
     @Override
@@ -75,13 +77,13 @@ public class EditFriendCommand extends Command {
         }
 
         Friend friendToEdit = model.getFriend(friendIdToEdit);
-        Friend editedFriend = createEditedPerson(friendToEdit, editFriendDescriptor);
+        Friend editedFriend = createEditedFriend(friendToEdit, editFriendDescriptor);
 
         model.setFriend(friendToEdit, editedFriend);
 
         return new CommandResult(String.format(MESSAGE_EDIT_FRIEND_SUCCESS,
                 editedFriend.getFriendId(),
-                editedFriend.getName()),
+                editedFriend.getFriendName()),
                 CommandType.FRIEND_EDIT);
     }
 

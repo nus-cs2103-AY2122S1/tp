@@ -8,6 +8,8 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
+import seedu.address.model.friend.FriendName;
+import seedu.address.ui.util.SampleStyles;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -29,8 +31,6 @@ public class FriendCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label friendId;
-    @FXML
     private Label friendName;
     @FXML
     private Label id;
@@ -38,17 +38,36 @@ public class FriendCard extends UiPart<Region> {
     private FlowPane games;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code FriendCard} with the given {@code Friend} and index to display.
      */
     public FriendCard(Friend friend, int displayedIndex) {
         super(FXML);
         this.friend = friend;
         id.setText(displayedIndex + ". ");
-        friendId.setText(friend.getFriendId().value);
-        friendName.setText(friend.getName().fullName);
+        friendName.setText(formatFriendNameId(friend));
+        games.setHgap(20.0);
+        games.setVgap(15.0);
         friend.getGameFriendLinks().stream()
                 .sorted(Comparator.comparing(game -> game.getGameId().value))
-                .forEach(game -> games.getChildren().add(new Label(game.getGameId().value + " ")));
+                .forEach(game -> {
+                    Label label = new Label(game.getGameId().value);
+                    label.setBackground(SampleStyles.BLURPLE_BACKGROUND);
+
+                    games.getChildren().add(label);
+                });
+    }
+
+    /**
+     * Formats the friendName for the {@Code FriendCard}.
+     * @param friend The friend whose id and name (if available) is to be displayed.
+     * @return String with the friend's id and name.
+     */
+    private String formatFriendNameId(Friend friend) {
+        if (friend.getFriendName().equals(FriendName.DEFAULT_FRIEND_NAME)) {
+            return friend.getFriendId().toString();
+        } else {
+            return friend.getFriendId() + " (Name: " + friend.getFriendName().fullName + ")";
+        }
     }
 
     @Override

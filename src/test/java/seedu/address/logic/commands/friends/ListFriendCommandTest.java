@@ -22,7 +22,8 @@ import seedu.address.model.friend.Friend;
 import seedu.address.model.friend.FriendIdContainsKeywordPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code ListFriendCommand}.
  */
 public class ListFriendCommandTest {
 
