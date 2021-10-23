@@ -5,6 +5,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.person.DeletePersonCommand;
 import seedu.address.model.Model;
 import seedu.address.model.modulelesson.ModuleLesson;
 
@@ -73,5 +74,13 @@ public class DeleteModuleLessonCommand extends Command {
             last--;
         }
         return String.format(MESSAGE_NUMBER_DELETED_LESSONS, last - first + 1) + successMessage;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof DeleteModuleLessonCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteModuleLessonCommand) other).targetIndex)
+                && endIndex.equals(((DeleteModuleLessonCommand) other).endIndex)); // state check
     }
 }
