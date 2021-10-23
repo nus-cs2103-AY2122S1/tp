@@ -13,20 +13,33 @@ public class DeleteModuleLessonCommand extends Command {
     public static final String MESSAGE_USAGE = "delete: "
             + "Deletes the Lesson identified by the index number used in the displayed Lesson list "
             + "Parameters: INDEX (must be a positive integer) "
-            + "Example: delete 1";
+            + "Example: deletec 1, deletec 1-3";
 
     public static final String MESSAGE_NUMBER_DELETED_LESSONS = "%d Deleted Lessons: \n";
     public static final String MESSAGE_DELETE_LESSON_SUCCESS = "%1$s \n";
 
     private final Index targetIndex;
+    private final Index endIndex;
 
     /**
-     * Creates a DeleteModuleLessonCommand to delete the person at specified index
+     * Creates a DeleteModuleLessonCommand to delete lesson at specified index
      *
-     * @param targetIndex the person to be deleted
+     * @param targetIndex the lesson to be deleted
      */
     public DeleteModuleLessonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        endIndex = targetIndex;
+    }
+
+    /**
+     * Creates a DeleteModuleLessonCommand to delete lessons in a specified range
+     *
+     * @param targetIndex the lesson with the smallest index
+     * @param endIndex the lesson with the largest index
+     */
+    public DeleteModuleLessonCommand(Index targetIndex, Index endIndex) {
+        this.targetIndex = targetIndex;
+        this.endIndex = endIndex;
     }
 
     /**
@@ -38,19 +51,27 @@ public class DeleteModuleLessonCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-
-        if (targetIndex.getZeroBased() >= model.getFilteredModuleLessonList().size()) {
+        int sizeOfModuleLessonList = model.getFilteredModuleLessonList().size();
+        if (targetIndex.getZeroBased() >= sizeOfModuleLessonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        if (targetIndex.getZeroBased() > endIndex.getZeroBased() || endIndex.getZeroBased() >= sizeOfModuleLessonList) {
+            throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
         }
         String successMessage = deleteAll(model);
         return new CommandResult(successMessage);
     }
 
     private String deleteAll(Model model) {
-        ModuleLesson moduleLessonToDelete = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
-        String successMessage = String.format(MESSAGE_DELETE_LESSON_SUCCESS, moduleLessonToDelete);
-        model.deleteLesson(moduleLessonToDelete);
-
-        return String.format(MESSAGE_NUMBER_DELETED_LESSONS, 1) + successMessage;
+        int first = targetIndex.getZeroBased();
+        int last = endIndex.getZeroBased();
+        StringBuilder successMessage = new StringBuilder();
+        while (first <= last) {
+            ModuleLesson moduleLessonToDelete = model.getFilteredModuleLessonList().get(last);
+            successMessage.insert(0, String.format(MESSAGE_DELETE_LESSON_SUCCESS, moduleLessonToDelete));
+            model.deleteLesson(moduleLessonToDelete);
+            last--;
+        }
+        return String.format(MESSAGE_NUMBER_DELETED_LESSONS, last - first + 1) + successMessage;
     }
 }

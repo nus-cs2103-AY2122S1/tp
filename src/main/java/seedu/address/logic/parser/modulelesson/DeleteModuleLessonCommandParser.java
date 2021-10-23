@@ -1,6 +1,7 @@
 package seedu.address.logic.parser.modulelesson;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.DeleteModuleLessonCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -16,6 +17,11 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     @Override
     public DeleteModuleLessonCommand parse(String userInput) throws ParseException {
         try {
+            if (userInput.contains("-")) {
+                Index start = ParserUtil.parseIndex(userInput.substring(1, userInput.indexOf("-")));
+                Index end = ParserUtil.parseIndex(userInput.substring(userInput.indexOf("-") + 1));
+                return new DeleteModuleLessonCommand(start, end);
+            }
             return new DeleteModuleLessonCommand(ParserUtil.parseIndex(userInput));
         } catch (ParseException pe) {
             throw new ParseException(
