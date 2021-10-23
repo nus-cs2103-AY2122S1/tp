@@ -31,7 +31,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, CommandType commandType) {
-        this(feedbackToUser, null , null);
+        this(feedbackToUser, commandType, null);
     }
 
     public String getFeedbackToUser() {

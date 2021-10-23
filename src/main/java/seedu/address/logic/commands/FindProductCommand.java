@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.product.ProductContainsKeywordsPredicate;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Finds and lists all products in application whose name contains any of the argument keywords.
@@ -32,7 +33,7 @@ public class FindProductCommand extends Command {
         model.updateFilteredProductList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PRODUCTS_LISTED_OVERVIEW, model.getFilteredProductList().size()),
-                CommandType.FIND);
+                CommandType.FIND, SampleDataUtil.getSampleProducts()[0]);
     }
 
     @Override

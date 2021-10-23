@@ -26,6 +26,7 @@ import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Edits the details of an existing client in the address book.
@@ -88,7 +89,7 @@ public class EditClientCommand extends Command {
         model.setClient(clientToEdit, editedClient);
         model.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_CLIENT_SUCCESS, editedClient),
-                CommandType.EDIT);
+                CommandType.EDIT, SampleDataUtil.getSampleClients()[0]);
     }
 
     /**

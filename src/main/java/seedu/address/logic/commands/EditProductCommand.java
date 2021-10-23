@@ -19,6 +19,7 @@ import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Edits the details of an existing product in the address book.
@@ -76,7 +77,7 @@ public class EditProductCommand extends Command {
         model.setProduct(productToEdit, editedProduct);
         model.updateFilteredProductList(PREDICATE_SHOW_ALL_PRODUCTS);
         return new CommandResult(String.format(MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct),
-                CommandType.EDIT);
+                CommandType.EDIT, SampleDataUtil.getSampleProducts()[0]);
     }
 
     /**

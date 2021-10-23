@@ -12,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Deletes a client identified using it's displayed index from the address book.
@@ -50,7 +51,7 @@ public class DeleteClientCommand extends Command {
         logger.log(Level.INFO, String.format("Deleting client %1$s", clientToDelete.getId()));
 
         return new CommandResult(String.format(MESSAGE_DELETE_CLIENT_SUCCESS, clientToDelete),
-                CommandType.DELETE);
+                CommandType.DELETE, SampleDataUtil.getSampleClients()[0]);
     }
 
     @Override

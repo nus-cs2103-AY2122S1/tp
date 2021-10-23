@@ -201,7 +201,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, Category category) {
         if (category instanceof Client) {
-            logger.info("List all clients");
             if (selectedTab == 1) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
@@ -209,7 +208,6 @@ public class MainWindow extends UiPart<Stage> {
             }
         }
         if (category instanceof Product) {
-            logger.info("List all products");
             if (selectedTab == 0) {
                 tabPane.setDisable(true);
                 tpb.selectNextTab();
@@ -270,25 +268,41 @@ public class MainWindow extends UiPart<Stage> {
             TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
             Category category = commandResult.getInfo();
 
-            if (commandResult.getCommandType().equals(CommandType.LIST)) {
+            CommandType commandType = commandResult.getCommandType();
+
+            switch(commandType) {
+            case HELP:
+                handleHelp();
+            case EXIT:
+                handleExit();
+            case STAT:
+                handleStat();
+            case VIEW:
+                handleView(tpb, selectedTab, category);
+            default:
                 handleChangeTab(tpb, selectedTab, category);
             }
 
-            if (commandResult.getCommandType().equals(CommandType.VIEW)) {
-                handleView(tpb, selectedTab, category);
-            }
-
-            if (commandResult.getCommandType().equals(CommandType.HELP)) {
-                handleHelp();
-            }
-
-            if (commandResult.getCommandType().equals(CommandType.EXIT)) {
-                handleExit();
-            }
-
-            if ((commandResult.getCommandType().equals(CommandType.STAT))) {
-                handleStat();
-            }
+//
+//            if (commandResult.getCommandType().equals(CommandType.LIST)) {
+//                handleChangeTab(tpb, selectedTab, category);
+//            }
+//
+//            if (commandResult.getCommandType().equals(CommandType.VIEW)) {
+//                handleView(tpb, selectedTab, category);
+//            }
+//
+//            if (commandResult.getCommandType().equals(CommandType.HELP)) {
+//                handleHelp();
+//            }
+//
+//            if (commandResult.getCommandType().equals(CommandType.EXIT)) {
+//                handleExit();
+//            }
+//
+//            if ((commandResult.getCommandType().equals(CommandType.STAT))) {
+//                handleStat();
+//            }
 
             return commandResult;
         } catch (CommandException | ParseException e) {

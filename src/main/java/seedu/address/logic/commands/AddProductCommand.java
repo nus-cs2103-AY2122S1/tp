@@ -10,6 +10,7 @@ import seedu.address.model.commons.Name;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
+import seedu.address.model.util.SampleDataUtil;
 
 public class AddProductCommand extends Command {
     public static final String COMMAND_WORD = "add -p";
@@ -52,7 +53,7 @@ public class AddProductCommand extends Command {
 
         model.addProduct(productToAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, productToAdd),
-                CommandType.ADD);
+                CommandType.ADD, SampleDataUtil.getSampleProducts()[0]);
     }
 
     /**
