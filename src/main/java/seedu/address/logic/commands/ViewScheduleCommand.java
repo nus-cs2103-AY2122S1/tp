@@ -46,17 +46,26 @@ public class ViewScheduleCommand extends Command {
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_PHONE + "91234567 "
             + PREFIX_DASH_EMAIL + "johndoe@example.com";
-    private static final String NAME_NOT_IN_LIST_ERROR = "Name used not in dataset.";
+    private static final String PERSON_NOT_IN_LIST = "No staff satisfies conditions applied.";
 
     private final PersonContainsFieldsPredicate predicate;
     private final int index;
 
+    /**
+     * Constructs a view schedule command that views the schedule of the staff
+     * filtered by {@code PersonContainsFieldsPredicate predicate}.
+     */
     public ViewScheduleCommand(PersonContainsFieldsPredicate predicate) {
         requireNonNull(predicate);
         this.predicate = predicate;
         this.index = -1;
     }
 
+    /**
+     * Constructs a ViewScheduleCommand that views tha schedule of the
+     * staff at {@code Index index} and fulfils the {@code PersonContainsFieldsPredicate predicate}.
+     *
+     */
     public ViewScheduleCommand(PersonContainsFieldsPredicate predicate, Index index) {
         requireAllNonNull(predicate, index);
         this.index = index.getZeroBased();
@@ -76,7 +85,7 @@ public class ViewScheduleCommand extends Command {
         ObservableList<Person> staffs = model.getUnFilteredPersonList()
                 .filtered(this.predicate);
         if (staffs.size() == 0) {
-            throw new CommandException(NAME_NOT_IN_LIST_ERROR);
+            throw new CommandException(PERSON_NOT_IN_LIST);
         }
 
         String result = getResult(staffs);
@@ -99,6 +108,9 @@ public class ViewScheduleCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
         Person result = model.getFilteredPersonList().get(index);
+        if (!predicate.test(result)) {
+            return new CommandResult(PERSON_NOT_IN_LIST);
+        }
 
         return new CommandResult(getResult(List.of(result)));
 
