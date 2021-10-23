@@ -192,4 +192,22 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAppointmentList(Predicate<? super Appointment> predicate);
+
+    /**
+     * Deletes appointments with {@code person} from the appointment list
+     *
+     * @param person person whose appointments should be deleted
+     * @param <T> Subtype of Person
+     */
+    <T extends Person> void deleteAppointmentsWithPerson(T  person);
+
+    /**
+     * Update appointments with {@code person} to {@code editedPerson} from the appointment list
+     *
+     * @param person person whose appointments should be updated
+     * @param editedPerson the person to replace {@code person} in existing appointments
+     * @param <T> Subtype of Person
+     */
+    <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson);
+
 }

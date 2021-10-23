@@ -127,6 +127,16 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void deleteAppointmentsWithPerson_deletePerson_appointmentsDeleted() {
+        //TODO
+    }
+
+    @Test
+    public void editAppointmentsWithPerson_editPerson_appointmentsEdited() {
+        //TODO
+    }
+
+    @Test
     public void equals() {
         PlannerMd plannerMd = new PlannerMdBuilder()
                 .withPatient(ALICE).withPatient(BENSON)

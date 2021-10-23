@@ -53,6 +53,7 @@ public class RemarkPatientCommand extends RemarkCommand {
 
         model.setPatient(patientToEdit, editedPatient);
         model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PERSONS);
+        model.editAppointmentsWithPerson(patientToEdit, editedPatient);
 
         return new CommandResult(generateSuccessMessage(editedPatient));
     }

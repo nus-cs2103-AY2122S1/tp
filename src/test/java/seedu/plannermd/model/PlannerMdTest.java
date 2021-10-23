@@ -111,6 +111,16 @@ public class PlannerMdTest {
         assertThrows(UnsupportedOperationException.class, () -> plannerMd.getDoctorList().remove(0));
     }
 
+    @Test
+    public void deleteAppointmentsWithPerson_deletePerson_appointmentsDeleted() {
+        //TODO
+    }
+
+    @Test
+    public void editAppointmentsWithPerson_editPerson_appointmentsEdited() {
+        //TODO
+    }
+
     /**
      * A stub ReadOnlyPlannerMd whose persons list can violate interface constraints.
      */

@@ -11,6 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.plannermd.model.appointment.exceptions.AppointmentNotFoundException;
 import seedu.plannermd.model.appointment.exceptions.DuplicateAppointmentException;
+import seedu.plannermd.model.doctor.Doctor;
+import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
+
 
 /**
  * A list of appointments that enforces uniqueness between its elements and does not allow nulls.
@@ -98,6 +102,66 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
 
         internalList.setAll(appointments);
     }
+
+    /**
+     * Iterates though list of {@code Appointments} and delete those with person
+     * @param person
+     * @param <T>
+     */
+    public <T extends Person> void deleteAppointmentsWithPerson(T person) {
+        if (person instanceof Patient) {
+            deleteAppointmentsWithPatient((Patient) person);
+        } else if (person instanceof Doctor) {
+            deleteAppointmentsWithDoctor((Doctor) person);
+        }
+    }
+
+    public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
+        if (person instanceof Patient) {
+            editAppointmentsWithPatient((Patient) person, (Patient) editedPerson);
+        } else if (person instanceof Doctor) {
+            editAppointmentsWithDoctor((Doctor) person, (Doctor) editedPerson);
+        }
+    }
+
+    public void deleteAppointmentsWithPatient(Patient  patient) {
+        for (Appointment appointment : internalList) {
+            if (appointment.getPatient().isSamePerson(patient)) {
+                internalList.remove(patient);
+            }
+        }
+    }
+
+    public void deleteAppointmentsWithDoctor(Doctor doctor) {
+        for (Appointment appointment : internalList) {
+            if (appointment.getPatient().isSamePerson(doctor)) {
+                internalList.remove(doctor);
+            }
+        }
+    }
+
+    public void editAppointmentsWithPatient(Patient  patient, Patient editedPatient) {
+        for (Appointment appointment : internalList) {
+            if (appointment.getPatient().isSamePerson(patient)) {
+                Appointment editedAppointment
+                        = new Appointment(editedPatient, appointment.getDoctor(),
+                        appointment.getAppointmentDate(), appointment.getSession(), appointment.getRemark());
+                setAppointment(appointment, editedAppointment);
+            }
+        }
+    }
+
+    public void editAppointmentsWithDoctor(Doctor doctor, Doctor editedDoctor) {
+        for (Appointment appointment : internalList) {
+            if (appointment.getDoctor().isSamePerson(doctor)) {
+                Appointment editedAppointment
+                        = new Appointment(appointment.getPatient(), editedDoctor,
+                        appointment.getAppointmentDate(), appointment.getSession(), appointment.getRemark());
+                setAppointment(appointment, editedAppointment);
+            }
+        }
+    }
+
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

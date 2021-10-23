@@ -14,6 +14,7 @@ import seedu.plannermd.commons.core.LogsCenter;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 
 /**
  * Represents the in-memory model of the plannermd data.
@@ -236,6 +237,16 @@ public class ModelManager implements Model {
     public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
         requireNonNull(predicate);
         filteredAppointments.setPredicate(predicate);
+    }
+
+    @Override
+    public <T extends Person> void deleteAppointmentsWithPerson(T  person) {
+        plannerMd.deleteAppointmentsWithPerson(person);
+    }
+
+    @Override
+    public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
+        plannerMd.editAppointmentsWithPerson(person, editedPerson);
     }
 
     @Override
