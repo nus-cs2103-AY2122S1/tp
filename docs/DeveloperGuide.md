@@ -267,10 +267,6 @@ The following activity diagram summarizes what happens when the `IncludeCommand`
   itself.
     * Pros: Do not need to have the `Index` in UI to know what `Event` it is, can just reference it by its name.
     * Cons: Hard to type when the `eventName` is long, `eventName` not being unique will also cause issues.
-    
-### Delete Command
-
-* The
 
 ### \[Proposed\] Undo/redo feature
 
