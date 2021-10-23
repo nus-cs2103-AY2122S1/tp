@@ -1,5 +1,15 @@
 package seedu.address.logic.parser.modulelesson;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import seedu.address.logic.commands.modulelesson.FindModuleLessonCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -8,14 +18,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.LessonDayContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.LessonTimeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCommand> {
 
@@ -34,7 +36,9 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         long numberOfValidPrefixes = countValidPrefixes(isModulePrefixPresent, isDayPrefixPresent, isTimePrefixPresent);
 
         if (numberOfValidPrefixes == 0) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE)
+            );
         }
 
         if (numberOfValidPrefixes > 1) {

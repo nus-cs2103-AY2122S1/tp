@@ -10,7 +10,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.modulelesson.ClearModuleLessonCommand;
-import seedu.address.logic.commands.modulelesson.FindModuleLessonCommand;
 import seedu.address.logic.commands.modulelesson.ListModuleLessonCommand;
 import seedu.address.logic.commands.person.ClearPersonCommand;
 import seedu.address.logic.commands.person.ListPersonCommand;
