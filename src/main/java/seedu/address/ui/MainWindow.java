@@ -211,13 +211,11 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isShowSchedule()) {
-                handleSchedule();
-            }
-
             if (commandResult.isDisplayStudent()) {
                 Person student = commandResult.getStudent();
                 handlePersonGridPanel(student);
+            } else if (commandResult.isShowSchedule()) {
+                handleSchedule();
             } else {
                 handlePersonGridPanel();
             }
