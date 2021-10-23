@@ -36,8 +36,6 @@ public class ViewStudentCommandTest {
     @Test
     public void execute_invalidStudent_throwsCommandException() {
         Name nonExistentStudentName = new Name("abcde");
-        ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(nonExistentStudentName);
-        expectedModel.updateFilteredStudentList(predicate);
         String expectedMsg = String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, nonExistentStudentName);
         assertCommandSuccess(new ViewStudentCommand(nonExistentStudentName), model, expectedMsg, expectedModel);
     }

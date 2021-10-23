@@ -66,3 +66,4 @@ public class DetailedStudentCard extends UiPart<Region> {
         return student.equals(card.student);
     }
 }
+
