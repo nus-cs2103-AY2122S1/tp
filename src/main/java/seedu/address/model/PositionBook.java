@@ -85,7 +85,7 @@ public class PositionBook implements ReadOnlyPositionBook {
     @Override
     public Position getPositionByTitle(Title title) {
         requireNonNull(title);
-        return getPositionByTitle(title);
+        return positions.getPositionByTitle(title);
     }
 
     /**

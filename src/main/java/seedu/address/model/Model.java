@@ -192,7 +192,12 @@ public interface Model {
     // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
 
-    float calculateRejectionRate(Position p);
+    /**
+     * Calculates the rejection rate of a given position.
+     * @param title The title of the position to be calculated.
+     * @return The rejection rate of the specified position.
+     */
+    float calculateRejectionRate(Title title);
 
     /**
      * Replaces position book data with the data in {@code positionBook}.

@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Calculator;
 import seedu.address.model.Model;
-import seedu.address.model.PositionBook;
-import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 
 /**
@@ -47,9 +45,7 @@ public class RejectionRateCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        PositionBook positionBook = (PositionBook) model.getPositionBook();
-        Position position = positionBook.getPositionByTitle(positionTitle);
-        float rejectionRate = model.calculateRejectionRate(position);
+        float rejectionRate = model.calculateRejectionRate(positionTitle);
 
         if (rejectionRate == Calculator.INVALID_REJECTION_RATE) {
             return new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS);

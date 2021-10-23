@@ -20,5 +20,4 @@ public class Calculator {
         }
         return (float) totalRejected / totalApplied;
     }
-
 }

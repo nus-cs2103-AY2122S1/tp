@@ -373,15 +373,15 @@ public class ModelManager implements Model {
     /**
      * Initialise rejection rate of a new position.
      *
-     * @param p The position to be initialised.
+     * @param title The title of the position to be calculated.
      * @return The rejection rate of a given position in MTR.
      */
     @Override
-    public float calculateRejectionRate(Position p) {
+    public float calculateRejectionRate(Title title) {
         int total = 0;
         int count = 0;
         for (Applicant a : applicantBook.getApplicantList()) {
-            if (a.isApplyingTo(p)) {
+            if (a.isApplyingTo(positionBook.getPositionByTitle(title))) {
                 total++;
                 if (a.getApplication().getStatus() == ApplicationStatus.REJECTED) {
                     count++;

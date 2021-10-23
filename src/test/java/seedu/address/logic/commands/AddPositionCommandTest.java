@@ -245,7 +245,7 @@ public class AddPositionCommandTest {
         }
 
         @Override
-        public float calculateRejectionRate(Position p) {
+        public float calculateRejectionRate(Title p) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -304,7 +304,4 @@ public class AddPositionCommandTest {
             return new AddressBook();
         }
     }
-
-
-
 }
