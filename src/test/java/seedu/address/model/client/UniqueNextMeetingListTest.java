@@ -114,5 +114,4 @@ public class UniqueNextMeetingListTest {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueNextMeetingList.asUnmodifiableObservableList().remove(0));
     }
-
 }
