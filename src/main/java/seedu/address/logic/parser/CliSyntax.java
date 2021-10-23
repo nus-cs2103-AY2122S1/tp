@@ -11,7 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("-e ");
     public static final Prefix PREFIX_ADDRESS = new Prefix("-a ");
     public static final Prefix PREFIX_TAG = new Prefix("-l ");
-    public static final Prefix PREFIX_TASK = new Prefix("-t ");
+    public static final Prefix PREFIX_TASK = new Prefix("-tn ");
     public static final Prefix PREFIX_TASK_INDEX = new Prefix("-ti ");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("-d ");
 }
