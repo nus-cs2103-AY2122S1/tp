@@ -12,7 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 
 /**
@@ -25,6 +28,17 @@ public class TypicalGroups {
             .withYear("AY20212022").withTags("nottApp").build();
     public static final Group GROUP3 = new GroupBuilder().withName("m16-6").withRepo("ip").withYear("AY20192020")
             .build();
+
+    public static final RepoName REPONAME1 = new RepoName("tp");
+    public static final RepoName REPONAME2 = new RepoName("2103_tp-project");
+
+    public static final LinkYear YEAR1 = new LinkYear("AY20212022");
+    public static final LinkYear YEAR2 = new LinkYear("AY20222023");
+
+    public static final GroupName GROUPNAME1 = new GroupName("W14-4");
+    public static final GroupName GROUPNAME2 = new GroupName("W14-5");
+
+    public static final GroupName VALID_UNINSTATITATED_GROUP = new GroupName("m11-1");
 
     private TypicalGroups() {} // prevents instantiation
 
