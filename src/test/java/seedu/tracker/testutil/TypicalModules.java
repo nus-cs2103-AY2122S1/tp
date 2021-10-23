@@ -23,6 +23,12 @@ public class TypicalModules {
             .withTitle("Asking Questions")
             .withDescription("introduces six dominant modes of questioning").build();
 
+    public static final Module GER1000 = new ModuleBuilder().withCode("GER1000")
+            .withTitle("Quantitative Reasoning")
+            .withDescription("equip undergraduates with basic reasoning skills "
+            + "on using data to address real world issues")
+            .withTags("GE").build();
+
     public static final Module MA1521 = new ModuleBuilder().withCode("MA1521")
             .withTitle("Calculus")
             .withDescription("introduces calculus")
