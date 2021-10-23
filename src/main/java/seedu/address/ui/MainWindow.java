@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else open the internal help window
+     * Opens the Online User Guide if possible, else opens the internal help window
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
@@ -154,9 +154,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else open the internal help window
+     * Opens the Command Summary if possible, else opens the internal help window
      */
-    public void openCommandSummary() {
+    public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openCommandSummary();
@@ -209,6 +209,10 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isShowCommandSummary()) {
+                handleCommandSummary();
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
