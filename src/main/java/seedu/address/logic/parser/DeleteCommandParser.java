@@ -20,7 +20,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
-        System.out.println(args);
         List<String> argList = Arrays.asList(args.trim().split("\\s+"));
 
         if (argList.size() == 1 && argList.get(0).equals("-a")) {

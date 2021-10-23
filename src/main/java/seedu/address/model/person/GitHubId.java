@@ -43,9 +43,17 @@ public class GitHubId {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GitHubId // instanceof handles nulls
-                && value.equals(((GitHubId) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof GitHubId)) {
+            return false;
+        }
+
+        GitHubId otherGitHubId = (GitHubId) other;
+
+        return value.equals(otherGitHubId.value); // state check
     }
 
     @Override
