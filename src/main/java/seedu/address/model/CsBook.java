@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
@@ -144,6 +145,18 @@ public class CsBook implements ReadOnlyCsBook {
         requireNonNull(editedGroup);
 
         groups.setGroup(target, editedGroup);
+    }
+
+    public boolean hasAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        return student.hasAssessment(assessment);
+    }
+
+    public void addAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        student.addAssessment(assessment);
     }
 
     //// util methods
