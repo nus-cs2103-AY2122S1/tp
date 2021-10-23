@@ -43,24 +43,37 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
     @Override
     public boolean test(Module module) {
         List<String> prefixesPresent = findPrefixesPresent(prefixList);
+        List<String> keywordsPresent = findKeywordsPresent(prefixesPresent);
         if (prefixesPresent.isEmpty()) {
-            return (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
-                || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword))
-                || (module.hasAcademicCalendar())
-                && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
-                module.getAcademicCalendar().getAcademicYear().toString(), keyword))
-                || keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
-                module.getAcademicCalendar().getSemester().toString(), keyword)));
+            if (module.hasAcademicCalendar()) {
+                return (keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword))
+                    || keywordsPresent.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    module.getAcademicCalendar().getAcademicYear().toString(), keyword))
+                    || keywordsPresent.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    module.getAcademicCalendar().getSemester().toString(), keyword)));
+            } else {
+                return (keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
+                    || keywordsPresent.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
+            }
         } else {
-            return doesModuleContainKeywords(prefixesPresent, module);
+            return doesModuleContainKeywords(prefixesPresent, keywordsPresent, module);
         }
     }
 
@@ -72,17 +85,15 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
     }
 
     /**
-     * Constructs a list of prefixes that the user has inputted
-     * and removes the prefix from the user input.
+     * Constructs a list of prefix(es) that the user has inputted.
      *
      * @param prefixes the list of prefixes allowed for FindCommand
-     * @return a list of Strings containing prefixes that the user has inputted
+     * @return a list of String(s) containing prefix(es) that the user has inputted
      */
     private List<String> findPrefixesPresent(List<Prefix> prefixes) {
         ArrayList<String> prefixesPresent = new ArrayList<>();
         for (Prefix prefix : prefixes) {
             if (keywords.contains(prefix.getPrefix())) {
-                keywords.remove(prefix.getPrefix());
                 prefixesPresent.add(prefix.getPrefix());
             }
         }
@@ -90,69 +101,90 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
     }
 
     /**
+     * Creates a new list of keywords that has the prefix(es) removed.
+     *
+     * @param prefixesPresent the list of prefix(es) the user has inputted
+     * @return a list of Strings containing the keyword(s) to be searched for
+     */
+    private List<String> findKeywordsPresent(List<String> prefixesPresent) {
+        ArrayList<String> keywordsPresent = new ArrayList<>();
+        for (String keyword : keywords) {
+            if (!prefixesPresent.contains(keyword)) {
+                keywordsPresent.add(keyword);
+            }
+        }
+        return keywordsPresent;
+    }
+
+    /**
      * Checks the specific component in the {@code Module} for the given keywords.
      *
      * @param prefixesPresent the list of prefixes to specify which component to check
+     * @param keywordsPresent the list of keywords to check the module with
      * @param module to be checked
      * @return true if the keyword is found
      */
-    private boolean doesModuleContainKeywords(List<String> prefixesPresent, Module module) {
+    private boolean doesModuleContainKeywords(List<String> prefixesPresent,List<String> keywordsPresent, Module module) {
         boolean moduleContainsKeywords = false;
         for (String prefix : prefixesPresent) {
             switch (prefix) {
 
             case "c/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword)));
                 break;
 
             case "t/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword)));
                 break;
 
             case "d/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword)));
                 break;
 
             case "n/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword)));
                 break;
 
             case "tag/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
                 break;
 
             case "y/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getAcademicCalendar()
-                        .getAcademicYear().toString(), keyword)));
+                if (module.hasAcademicCalendar()) {
+                    moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getAcademicCalendar()
+                            .getAcademicYear().toString(), keyword)));
+                }
                 break;
 
             case "s/":
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
-                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getAcademicCalendar()
-                        .getSemester().toString(), keyword)));
+                if (module.hasAcademicCalendar()) {
+                    moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
+                        .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getAcademicCalendar()
+                            .getSemester().toString(), keyword)));
+                }
                 break;
 
             default:
-                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                moduleContainsKeywords = moduleContainsKeywords || (keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
-                    || keywords.stream()
+                    || keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword))
-                    || keywords.stream()
+                    || keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
-                    || keywords.stream()
+                    || keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
-                    || keywords.stream()
+                    || keywordsPresent.stream()
                     .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword))
                     || (module.hasAcademicCalendar())
-                    && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    && keywordsPresent.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                     module.getAcademicCalendar().getAcademicYear().toString(), keyword))
-                    || keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    || keywordsPresent.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
                     module.getAcademicCalendar().getSemester().toString(), keyword)));
             }
         }
