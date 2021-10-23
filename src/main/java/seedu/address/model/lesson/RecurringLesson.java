@@ -38,10 +38,7 @@ public class RecurringLesson extends Lesson {
      */
     @Override
     public Date getDisplayDate() {
-        if (getStartDate().isOver()) {
-            return getStartDate().updateDate();
-        }
-        return getStartDate();
+        return getStartDate().updateDate();
     }
 
     /**

@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
 
 /**
@@ -25,7 +25,7 @@ public class Date implements Comparable<Date> {
             + "3. Must be a valid date for the year.";
 
     /*
-    Date strings should be formatted as dd MMM uuuu, where dd and uuuu are digits.
+    Date strings should be formatted as d MMM uuuu, where d and uuuu are digits.
     and MMM are alphabets e.g. Jan, Mar, Nov, etc.
      */
     public static final String VALIDATION_REGEX = "^[0-2]?[0-9]\\s[a-zA-Z]{3}\\s[0-9]{4}";
@@ -86,19 +86,12 @@ public class Date implements Comparable<Date> {
      * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate() {
-        /*
-        Check the number of weeks between this date and the current date.
-        Round up the number of weeks between the 2 dates.
-         */
-        int numberOfDaysInAWeek = 7;
-        long numberOfDays = ChronoUnit.DAYS.between(getLocalDate(), LocalDate.now());
-        long numberOfWeeks = ChronoUnit.WEEKS.between(getLocalDate(), LocalDate.now())
-            + (numberOfDays % numberOfDaysInAWeek > 0 ? 1 : 0);
-
-        if (numberOfWeeks <= 0) { // No need update if week has not passed
+        if (!this.isOver()) {
             return this;
         }
-        Date newDate = new Date(getLocalDate().plusWeeks(numberOfWeeks).format(FORMATTER));
+
+        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.next(getDayOfWeek()));
+        Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }
 

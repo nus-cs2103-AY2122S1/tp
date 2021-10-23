@@ -168,7 +168,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
     /**
-     * Compares this RecurringLesson object with the other Lesson object.
+     * Compares this Lesson object with the other Lesson object.
      *
      * @param other The Lesson object to compare with.
      * @return 1, if this is later than other;0 if equal; -1 if this is earlier.
@@ -180,9 +180,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         i.e. The upcoming date for recurring lessons; or the start date for makeup lessons
         (since makeup lesson is a one-time event).
          */
-        Date date = isRecurring() ? getDisplayDate() : getStartDate();
-        Date dateToCompare = other.isRecurring() ? other.getDisplayDate() : other.getStartDate();
-        int compareDate = date.compareTo(dateToCompare);
+        int compareDate = getDisplayDate().compareTo(other.getDisplayDate());
         int compareTime = getTimeRange().compareTo(other.getTimeRange());
         // Compare time if date is equal
         return compareDate == 0 ? compareTime : compareDate;

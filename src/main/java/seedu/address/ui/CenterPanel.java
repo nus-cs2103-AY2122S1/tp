@@ -20,8 +20,6 @@ public class CenterPanel extends UiPart<Region> {
 
     private SchedulePanel schedulePanel;
 
-    private PersonListPanel personListPanel;
-
     private PersonGridPanel personGridPanel;
 
     @FXML
@@ -35,14 +33,9 @@ public class CenterPanel extends UiPart<Region> {
      */
     public CenterPanel(Calendar calendar, ObservableList<Person> personList, ObservableList<Lesson> lessonList) {
         super(FXML);
-        personListPanel = new PersonListPanel(personList);
         schedulePanel = new SchedulePanel(calendar);
         personGridPanel = new PersonGridPanel(personList, lessonList);
-        displayPersonGridPanel();
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+        displayPersonGridPanel(personList, lessonList);
     }
 
     public SchedulePanel getSchedulePanel() {
@@ -50,24 +43,13 @@ public class CenterPanel extends UiPart<Region> {
     }
 
     /**
-     * Bring PersonListPanel to top of the stack's child list.
-     */
-    public void displayPersonListPanel() {
-        if (!centerPanelPlaceholder.getChildren().contains(personListPanel.getRoot())) {
-            centerPanelPlaceholder.getChildren().setAll(personListPanel.getRoot());
-        }
-    }
-
-    /**
      * Bring PersonGridPanel to top of the stack's child list.
      */
-    public void displayPersonGridPanel() {
-        if (!centerPanelPlaceholder.getChildren().contains(personGridPanel.getRoot())) {
-            personGridPanel.setListPanels();
-            centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
-        }
+    public void displayPersonGridPanel(ObservableList<Person> personList, ObservableList<Lesson> lessons) {
+        personGridPanel = new PersonGridPanel(personList, lessons);
+        personGridPanel.setListPanels();
+        centerPanelPlaceholder.getChildren().setAll(personGridPanel.getRoot());
     }
-
 
     /**
      * Bring PersonGridPanel to top of the stack's child list.

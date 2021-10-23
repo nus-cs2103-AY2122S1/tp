@@ -188,8 +188,8 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displaySchedulePanel();
     }
 
-    private void handlePersonList() {
-        centerPanel.displayPersonListPanel();
+    private void handlePersonGridPanel() {
+        centerPanel.displayPersonGridPanel(logic.getFilteredPersonList(), logic.getEmptyLessonList());
     }
 
     private void handlePersonGridPanel(Person student) {
@@ -218,10 +218,8 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isDisplayStudent()) {
                 Person student = commandResult.getStudent();
                 handlePersonGridPanel(student);
-            }
-
-            if (commandResult.isShowStudentList()) {
-                handlePersonList();
+            } else {
+                handlePersonGridPanel();
             }
 
             if (commandResult.isExit()) {
