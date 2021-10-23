@@ -21,18 +21,18 @@ public class TagCommand extends Command {
     public static final String COMMAND_WORD = "tag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds to or deletes the tag(s) of the person identified "
-            + "by the index number used in the last person listing. "
+            + ": Adds to or deletes the tag(s) of the client identified "
+            + "by the index number used in the last client listing. "
             + "Existing tags will not be overwritten by the input.\n\n"
             + "Parameters: \nINDEX (must be a postive integer) "
             + "a/[TAGNAME]\n"
             + "d/[TAGNAME]\n\n"
             + "Example: \n" + COMMAND_WORD + " 1 "
             + "a/Friend d/Family";
-    public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited tags of Person: %1$s";
+    public static final String MESSAGE_EDIT_TAG_SUCCESS = "Edited tags of Client: %1$s";
     public static final String MESSAGE_TAGS_ARE_REPEATED = "A tag with the name %1$s already exists!";
     public static final String MESSAGE_TAG_DOES_NOT_EXIST = "The tag %1$s does not exist!";
-    public static final String MESSAGE_MULTIPLE_PRIORITY_TAGS = "Each person can only have one Priority tag!";
+    public static final String MESSAGE_MULTIPLE_PRIORITY_TAGS = "Each client can only have one Priority tag!";
 
     private final Index index;
     private Set<Tag> addTags;

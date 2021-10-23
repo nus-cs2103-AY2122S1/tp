@@ -15,7 +15,7 @@ public class Tag {
             + "format for a PriorityTag (low, med or high) or InvestmentPlanTag ()";
 
 
-    public static final String MESSAGE_USAGE = "tag: label a person with a keyword or term. \n"
+    public static final String MESSAGE_USAGE = "tag: label a client with a keyword or term. \n"
         + "Tags can be applied using the Add,Edit or Tag command.\n\n"
         + "Parameters (using Edit): \n"
         + "edit INDEX t/TAG\n\n"

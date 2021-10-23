@@ -16,9 +16,9 @@ public class DeleteAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "da";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes appointment with the person identified"
-            + " by the index number used in the last person listing.\n\n"
-            + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
+            + ": Deletes appointment with the client identified"
+            + " by the index number used in the last client listing.\n\n"
+            + "Parameters: \nINDEX (must be a positive integer)\n\n"
             + "Example: \n" + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_DELETE_APPOINTMENT_SUCCESS = "Deleted appointment with %1$s";
