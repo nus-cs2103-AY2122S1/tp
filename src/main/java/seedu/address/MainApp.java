@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.encryption.Encryption;
 import seedu.address.encryption.EncryptionKeyGenerator;
 import seedu.address.encryption.EncryptionManager;
+import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -37,8 +39,11 @@ import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.ui.LoginScreen;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Runs the application.
@@ -49,6 +54,8 @@ public class MainApp extends Application {
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     // TODO: Remove hardcoded password by end of v1.3b
     private static final String PASSWORD = "password1234";
+    private static String INPUT_PASSWORD;
+    public static Boolean isLoggedIn = false;
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -58,6 +65,8 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected Encryption cryptor;
+
+    private Stage stage;
 
     @Override
     public void init() throws Exception {
@@ -78,10 +87,13 @@ public class MainApp extends Application {
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
 
-        ui = new UiManager(logic);
+        if (FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
+            ui = new LoginScreen(this, userPrefs);
+        } else {
+            ui = new LoginScreen(this, null);
+        }
     }
 
     /**
@@ -217,9 +229,23 @@ public class MainApp extends Application {
         }
     }
 
+    public void logIn(String input) throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
+        if (input.equals(MainApp.PASSWORD)) {
+            MainApp.INPUT_PASSWORD = input;
+            MainApp.isLoggedIn = true;
+            afterLogIn();
+        }
+    }
+
+    public void afterLogIn() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
+        ui = new UiManager(logic);
+        ui.start(stage);
+    }
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
+        this.stage = primaryStage;
         ui.start(primaryStage);
     }
 
