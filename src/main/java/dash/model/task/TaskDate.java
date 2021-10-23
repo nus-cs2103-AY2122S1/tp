@@ -216,7 +216,7 @@ public class TaskDate {
      * @return String of Time in given format, empty string if no time is present.
      */
     public String toTimeString() {
-        return time.map(mapTime -> mapTime.format(DateTimeFormatter.ofPattern("hh:mm a")))
+        return time.map(mapTime -> mapTime.format(DateTimeFormatter.ofPattern("hh:mm a", Locale.US)))
                 .orElse("");
     }
 
