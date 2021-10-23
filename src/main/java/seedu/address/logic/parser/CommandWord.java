@@ -34,7 +34,8 @@ public enum CommandWord {
     LIST_PERSON("list", "ls"),
     REMARK_PERSON("remark"),
     LIST_MODULE_LESSON("listc", "lc"),
-    CLEAR_MODULE_LESSON("clearc", "clrc", "cc");
+    CLEAR_MODULE_LESSON("clearc", "clrc", "cc"),
+    DELETE_MODULE_LESSON("deletec", "delc", "rmc", "dc");
 
     private static final Map<CommandWord, ArrayList<String>> ALIAS_MAP;
     private static final Logger logger = LogsCenter.getLogger(CommandWord.class);

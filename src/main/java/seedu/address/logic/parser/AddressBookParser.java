@@ -10,10 +10,12 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.modulelesson.ClearModuleLessonCommand;
+import seedu.address.logic.commands.modulelesson.DeleteModuleLessonCommand;
 import seedu.address.logic.commands.modulelesson.ListModuleLessonCommand;
 import seedu.address.logic.commands.person.ClearPersonCommand;
 import seedu.address.logic.commands.person.ListPersonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.modulelesson.DeleteModuleLessonCommandParser;
 import seedu.address.logic.parser.person.AddPersonCommandParser;
 import seedu.address.logic.parser.person.DeletePersonCommandParser;
 import seedu.address.logic.parser.person.EditPersonCommandParser;
@@ -54,6 +56,9 @@ public class AddressBookParser {
 
         case DELETE_PERSON:
             return new DeletePersonCommandParser().parse(arguments);
+
+        case DELETE_MODULE_LESSON:
+            return new DeleteModuleLessonCommandParser().parse(arguments);
 
         case CLEAR_PERSON:
             return new ClearPersonCommand();
