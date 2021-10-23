@@ -13,6 +13,7 @@ import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -21,7 +22,10 @@ import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.commons.util.CollectionUtil;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
-import seedu.edrecord.model.module.ModuleGroupMap;
+import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.grade.Grade;
+import seedu.edrecord.model.group.Group;
+import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.name.Name;
 import seedu.edrecord.model.person.Email;
 import seedu.edrecord.model.person.Info;
@@ -59,7 +63,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -104,8 +108,9 @@ public class EditCommand extends Command {
         Info updatedInfo = editPersonDescriptor.getInfo().orElse(personToEdit.getInfo());
         ModuleGroupMap previousModules = personToEdit.getModules();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Map<Assignment, Grade> grades = personToEdit.getGrades();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, previousModules, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedInfo, previousModules, updatedTags, grades);
     }
 
     @Override

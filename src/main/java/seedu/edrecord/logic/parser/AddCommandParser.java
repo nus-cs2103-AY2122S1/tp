@@ -9,6 +9,7 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -57,7 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         module.addGroup(group);
         ModuleGroupMap moduleGroupMap = new ModuleGroupMap();
         moduleGroupMap.add(module, group);
-        Person person = new Person(name, phone, email, info, moduleGroupMap, tagList);
+        Person person = new Person(name, phone, email, info, moduleGroupMap, tagList, new HashMap<>());
 
         return new AddCommand(person);
     }

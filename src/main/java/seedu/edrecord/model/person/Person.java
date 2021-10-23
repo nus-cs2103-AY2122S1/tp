@@ -32,7 +32,7 @@ public class Person {
     private final Info info;
     private final ModuleGroupMap modules = new ModuleGroupMap();
     private final Set<Tag> tags = new HashSet<>();
-    private final HashMap<Assignment, Grade> grades = new HashMap<>();
+    private final Map<Assignment, Grade> grades = new HashMap<>();
 
     /**
      * Every field must be present and cannot be null.
