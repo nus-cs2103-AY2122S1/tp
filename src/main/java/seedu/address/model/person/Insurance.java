@@ -45,16 +45,6 @@ public class Insurance {
         throw new IllegalValueException(insuranceName + INVALID_ARG_SUFFIX);
     }
 
-    @Deprecated
-    public static Insurance of(String insuranceName) throws IllegalValueException {
-        for (InsuranceType type : InsuranceType.values()) {
-            if (type.getTypeName().equalsIgnoreCase(insuranceName)) {
-                return new Insurance(type, "");
-            }
-        }
-        throw new IllegalValueException(insuranceName + INVALID_ARG_SUFFIX);
-    }
-
     /**
      * Gets the type of this Insurance
      * @return @code{type}
