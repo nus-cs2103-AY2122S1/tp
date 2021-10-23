@@ -285,7 +285,8 @@ Step 1. The user launches the application.
 
 Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
 
-Step 3. Connections displays any person whose name contains `David` while also having `friend` and `football` tagged to them.
+Step 3. Connections displays any person whose name contains `David` **while also having** `friend` **and** 
+`football` tagged to them.
 
 #### Design considerations:
 
@@ -309,10 +310,10 @@ Given below is an example usage scenario and how the Find mechanism behaves at e
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `find n/David n/Henry t/friend t/footnall` to search for a matching entry.
+Step 2. The user executes `findOr n/David n/Henry t/friend t/footnall` to search for a matching entry.
 
-Step 3. Connections displays all persons whose name contains either `David` or `Henry` OR are tagged to either 
-`friend` or `football`.
+Step 3. Connections displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
+tagged to **either** `friend` **or** `football`.
 
 #### Design considerations:
 
