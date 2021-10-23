@@ -88,6 +88,15 @@ public class EditTaskCommandTest {
     }
 
     @Test
+    public void execute_invalidId_failure() {
+        Task edittedTask = new TaskBuilder().withTaskTag("SO100").build();
+        EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(edittedTask).build();
+        EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_SECOND_TASK, descriptor);
+
+        assertCommandFailure(editTaskCommand, model, EditTaskCommand.MESSAGE_UNFOUND_ORDERID);
+    }
+
+    @Test
     public void execute_invalidTaskIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
         EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder().withLabel(VALID_LABEL_ORDER).build();
