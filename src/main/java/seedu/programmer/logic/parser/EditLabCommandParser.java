@@ -1,7 +1,9 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.programmer.logic.parser.CliSyntax.*;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_INDEX;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.stream.Stream;
 
