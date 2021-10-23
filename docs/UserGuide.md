@@ -15,7 +15,7 @@ the commands available. If this is your first time using SportsPA, we also provi
 the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
-
+## Table of Contents
 * Table of Contents
 {:toc}
 
