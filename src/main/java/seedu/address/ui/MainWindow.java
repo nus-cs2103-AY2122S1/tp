@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TabPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -32,7 +33,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private WeekViewList schedulePanel;
+    private WeekShiftsPane schedulePanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -53,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private TabPane tabPane;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -117,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        schedulePanel = new WeekViewList(logic.getFilteredPersonList());
+        schedulePanel = new WeekShiftsPane(logic.getFilteredPersonList());
         schedulePanelPlaceholder.getChildren().add(schedulePanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -170,6 +174,14 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Switches the tab showing.
+     */
+    @FXML
+    private void handleSwitchTab() {
+        tabPane.getSelectionModel().selectNext();
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -191,6 +203,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isSwitchTab()) {
+                handleSwitchTab();
             }
 
             return commandResult;

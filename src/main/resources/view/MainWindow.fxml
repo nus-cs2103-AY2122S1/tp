@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="1000" onCloseRequest="#handleExit" title="Staff'd" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/staffd_icon.jpg" />
   </icons>
@@ -42,7 +42,7 @@
                                   <Insets bottom="5" left="10" right="10" top="5" />
                               </padding>
                           </StackPane>
-                        <TabPane prefHeight="322.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
+                        <TabPane fx:id="tabPane" prefHeight="322.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS">
                             <tabs>
                                 <Tab closable="false" styleClass="dark" text="Staff View">
                                     <content>

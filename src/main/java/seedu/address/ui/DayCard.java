@@ -1,16 +1,15 @@
 package seedu.address.ui;
 
 import java.time.DayOfWeek;
-import java.util.Comparator;
-import java.util.Set;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Shift;
 import seedu.address.model.person.Slot;
 
 /**
@@ -19,6 +18,7 @@ import seedu.address.model.person.Slot;
 public class DayCard extends UiPart<Region> {
 
     private static final String FXML = "DayCard.fxml";
+    private final Logger logger = LogsCenter.getLogger(DayCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -34,10 +34,6 @@ public class DayCard extends UiPart<Region> {
     private VBox slotPane;
     @FXML
     private Label dayLabel;
-    @FXML
-    private Label morningSlot;
-    @FXML
-    private Label afternoonSlot;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -45,11 +41,9 @@ public class DayCard extends UiPart<Region> {
     public DayCard(DayOfWeek day, ObservableList<Person> stafflist) {
         super(FXML);
         this.day = day;
-        dayLabel.setText(day.toString());
-
-        //todo change when we finalise how the slots are to be implemented.
-        morningSlot.setText("Morning Shift Staff:\n" + Shift.filterListByShift(stafflist, day, Slot.MORNING.getStartTime()));
-        afternoonSlot.setText("Afternoon Shift Staff:\n" + Shift.filterListByShift(stafflist, day, Slot.AFTERNOON.getStartTime()));
+        dayLabel.setText(day.toString().substring(0, 3));
+        slotPane.getChildren().addAll(new SlotCard(day, Slot.MORNING, stafflist).getRoot(),
+                new SlotCard(day, Slot.AFTERNOON, stafflist).getRoot());
     }
 
     @Override

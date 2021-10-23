@@ -3,10 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fx:id="slotPane" prefHeight="800.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="slotPane" minHeight="300.0" prefHeight="800.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-       <Label fx:id="dayLabel" contentDisplay="CENTER" styleClass="cell_big_label" text="\$dayName" wrapText="true" />
-       <Label fx:id="morningSlot" contentDisplay="CENTER" styleClass="cell_small_label" text="\$morningStaff" wrapText="true" />
-       <Label fx:id="afternoonSlot" contentDisplay="CENTER" styleClass="cell_small_label" text="\$afternoonStaff" wrapText="true" />
+       <Label fx:id="dayLabel" textAlignment="CENTER" styleClass="big_label_white" text="\$dayName" wrapText="true" />
    </children>
 </VBox>

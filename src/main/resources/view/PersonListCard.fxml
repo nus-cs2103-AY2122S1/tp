@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="dayPanel" fx:id="cardPane" prefHeight="105.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="dayPanel" fx:id="cardPane" prefHeight="105.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <VBox alignment="CENTER_LEFT" minHeight="6.0" prefHeight="105.0" prefWidth="841.0">
         <padding>
             <Insets bottom="5" left="15" right="5" top="5" />
