@@ -1,4 +1,4 @@
-package seedu.address.model.application;
+package seedu.address.model.applicant;
 
 import java.util.Objects;
 

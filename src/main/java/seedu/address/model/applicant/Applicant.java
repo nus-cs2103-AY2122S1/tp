@@ -4,9 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
-import seedu.address.model.application.Application;
-import seedu.address.model.application.Application.ApplicationStatus;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 
 /**
