@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -11,8 +12,12 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.encryption.Encryption;
+import seedu.address.encryption.EncryptionKeyGenerator;
+import seedu.address.encryption.EncryptionManager;
+import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,6 +25,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.storage.Storage;
+
+import javax.crypto.NoSuchPaddingException;
+
+import static seedu.address.MainApp.CIPHER_TRANSFORMATION;
 
 /**
  * The main LogicManager of the app.
@@ -31,7 +40,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
-    private final Encryption cryptor;
+    private Encryption cryptor;
     private final Path encryptedFilePath;
 
     /**
@@ -51,8 +60,21 @@ public class LogicManager implements Logic {
 
         CommandResult commandResult;
         Command command = addressBookParser.parseCommand(commandText);
+        if (command instanceof PasswordCommand) {
+            try {
+                Encryption temp = new EncryptionManager(EncryptionKeyGenerator.generateKey(((PasswordCommand) command).getOldPassword()), CIPHER_TRANSFORMATION);
+                Encryption new_token = new EncryptionManager(EncryptionKeyGenerator.generateKey(((PasswordCommand) command).getNewPassword()), CIPHER_TRANSFORMATION);
+                temp.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
+                new_token.encrypt(storage.getAddressBookFilePath(), encryptedFilePath);
+                cryptor = new_token;
+                FileUtil.deleteFile(storage.getAddressBookFilePath());
+            } catch (NoSuchPaddingException | InvalidAlgorithmParameterException | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                return new CommandResult("Wrong password. Please try again!");
+            }
+        }
         commandResult = command.execute(model);
-
         try { // decrypt -> modify -> encrypt -> delete subroutine
             cryptor.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
             storage.saveAddressBook(model.getAddressBook());
