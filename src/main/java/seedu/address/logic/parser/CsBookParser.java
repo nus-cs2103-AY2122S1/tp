@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.commands.AddAssessmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -48,8 +49,14 @@ public class CsBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        case AddAssessmentCommand.COMMAND_WORD:
+            return new AddAssessmentCommandParser().parse(arguments);
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -80,9 +87,6 @@ public class CsBookParser {
 
         case ViewGroupCommand.COMMAND_WORD :
             return new ViewGroupCommandParser().parse(arguments);
-
-        case AddGroupCommand.COMMAND_WORD:
-            return new AddGroupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
