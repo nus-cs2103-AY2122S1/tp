@@ -135,12 +135,17 @@ public class Assessment {
             public int hashCode() {
                 return Objects.hash(binMinimum, binMaximum);
             }
+
+            @Override
+            public String toString() {
+                return String.format("%.0f-%.0f", binMinimum.getNumericValue(), binMaximum.getNumericValue());
+            }
         }
 
         private List<Bin> bins;
         private final Map<Bin, Integer> binCounts;
 
-        private AssessmentStatistics(Assessment assessment) {
+        public AssessmentStatistics(Assessment assessment) {
             this(assessment, DEFAULT_INTERVAL);
         }
 
@@ -164,7 +169,7 @@ public class Assessment {
 
             while (binLowestValue < Score.MAX_SCORE) {
                 Score binLowestScore = new Score(String.valueOf(binLowestValue));
-                double binHighestValue = Math.max(binLowestValue + interval, Score.MAX_SCORE);
+                double binHighestValue = Math.min(binLowestValue + interval, Score.MAX_SCORE);
                 Score binHighestScore = new Score(String.valueOf(binHighestValue));
                 bins.add(new Bin(binLowestScore, binHighestScore));
                 binLowestValue = binHighestValue;
