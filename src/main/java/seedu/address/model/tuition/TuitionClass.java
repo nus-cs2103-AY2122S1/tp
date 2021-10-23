@@ -100,7 +100,7 @@ public class TuitionClass implements Nameable {
      * @return
      */
     public boolean matchTheDay(int weekday) {
-        return weekday == timeslot.getStart().getDay();
+        return weekday == timeslot.getDay().getDay();
     }
 
     @Override
@@ -242,5 +242,5 @@ public class TuitionClass implements Nameable {
                 && editedClass.getName().equals(name)
                 && editedClass.getLimit().equals(this.getLimit());
     }
-
 }
+

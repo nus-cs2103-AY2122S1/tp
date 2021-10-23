@@ -4,12 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -250,24 +254,26 @@ public class ParserUtil {
      */
     public static Timeslot parseTimeslot(String timeslot) throws ParseException {
         requireNonNull(timeslot);
-        String[] arr = timeslot.trim().split(" ", 2); //Splits day from timings
-        String startTime = String.format("%s %s", arr[0], arr[1].split("-")[0]); //Mon 10:00
-        String endTime = String.format("%s %s", arr[0], arr[1].split("-")[1]); //Mon 11:00
-        DateFormat sdf = new SimpleDateFormat("EEE HH:mm");
-        DateFormat dayFormat = new SimpleDateFormat("EEE");
-        try {
-            Date start = sdf.parse(startTime);
-            Date end = sdf.parse(endTime);
-            int day = dayFormat.parse(startTime).getDay();
+        String[] arr = timeslot.trim().split(" ", 2); //Splits day from time
+        String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
 
-            if (start.getTime() >= end.getTime() || start.getDay() != day || end.getDay() != day) {
+        if (arr.length < 2 || times == null || times.length < 2) {
+            throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
+        }
+        DateFormat dayFormat = new SimpleDateFormat("EEE");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH);
+        try {
+            Date day = dayFormat.parse(arr[0]);
+            LocalTime start = LocalTime.parse(times[0], timeFormat);
+            LocalTime end = LocalTime.parse(times[1], timeFormat);
+
+            if (!start.isBefore(end)) {
                 throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
             }
-            //throw new ParseException("a" + start.getDate() + "b " + end.getDate());
-            return new Timeslot(start, end);
-        } catch (java.text.ParseException e) {
+            return new Timeslot(day, start, end);
+        } catch (DateTimeException | java.text.ParseException de) {
             throw new ParseException(Messages.MESSAGE_TIMESLOT_FORMAT);
         }
     }
-
 }
+
