@@ -3,11 +3,15 @@ package dash.ui;
 import java.util.logging.Logger;
 
 import dash.commons.core.LogsCenter;
+import dash.model.help.HelpCommand;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -16,38 +20,68 @@ public class HelpPanel extends UiPart<Region> {
     private static final String COPY_MESSAGE_UG = "User Guide URL copied to clipboard!";
     private static final String COPY_MESSAGE_DG = "Developer Guide URL copied to clipboard!";
 
-    private static final String HELP_CONTENT = "General:\n"
-            + "1. Contacts Tab -> contacts\n"
-            + "2. Tasks Tab -> tasks\n"
-            + "3. Help Tab -> help\n"
-            + "4. Exit Tab -> exit\n\n"
-            + "Contacts Tab:\n"
-            + "1. Add -> add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]\n"
-            + "2. Edit -> edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]\n"
-            + "3. Delete -> delete INDEX\n"
-            + "4. Find by name -> find NAME\n"
-            + "5. Find by other info -> find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]\n"
-            + "6. Clear Contacts -> clear\n"
-            + "7. Tag Person -> tag INDEX [t/TAG]\n\n"
-            + "Tasks Tab:\n"
-            + "1. Add -> add d/DESCRIPTION [dt/DATE,TIME] [t/TAG]\n"
-            + "2. Edit -> edit INDEX [d/DESCRIPTION] [t/TAG]\n"
-            + "3. Delete -> delete INDEX\n"
-            + "4. Find by description -> find DESCRIPTION\n"
-            + "5. Find by tag -> find t/TAG\n"
-            + "6. Find by date -> find dt/DATE\n"
-            + "7. Find by assignee -> find p/PERSON\n"
-            + "8. Find by completion status -> find c/true or find c/false\n"
-            + "9. Clear Tasks -> clear\n"
-            + "10. Tag Tasks -> tag INDEX [t/TAG]\n"
-            + "11. Assign People to Tasks -> assign INDEX [p/INDEX]\n"
-            + "12. Complete Tasks -> complete INDEX\n\n"
-            + "Acceptable Date/Time formats:\n"
-            + "Date -> dd/MM/yyyy , dd-MM-yyyy , yyyy/MM/dd , yyyy-MM-dd, dd MMM yyyy\n"
-            + "Time -> HHmm , hh:mm a\n\n"
+    private static final String HELP_CONTENT = "Acceptable Date/Time formats:\n"
+            + "Date: dd/MM/yyyy , dd-MM-yyyy , yyyy/MM/dd , yyyy-MM-dd, dd MMM yyyy\n"
+            + "Time: HHmm , hh:mm a\n\n"
             + "For more detailed information,"
             + " visit our User Guide or Developer Guide by clicking the buttons below to copy \n"
-            + " their URLs. \n\n";
+            + "their URLs. \n\n";
+
+    private static final String GENERAL_CONTACTS_HEADER = "contacts";
+    private static final String GENERAL_CONTACTS_DESC = "Switches to Contacts Tab.";
+
+    private static final String GENERAL_TASKS_HEADER = "tasks";
+    private static final String GENERAL_TASKS_DESC = "Switches to Tasks Tab.";
+
+    private static final String GENERAL_HELP_HEADER = "help";
+    private static final String GENERAL_HELP_DESC = "Switches to Help Tab.";
+
+    private static final String CONTACTS_ADD_HEADER = "add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]";
+    private static final String CONTACTS_ADD_DESC = "Adds a contact with the specified fields.";
+
+    private static final String CONTACTS_EDIT_HEADER = "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] "
+            + "[t/TAG]";
+    private static final String CONTACTS_EDIT_DESC = "Edits specified fields of a given contact.";
+
+    private static final String CONTACTS_DELETE_HEADER = "delete INDEX";
+    private static final String CONTACTS_DELETE_DESC = "Deletes a contact with the given index.";
+
+    private static final String CONTACTS_FIND_A_HEADER = "find NAME";
+    private static final String CONTACTS_FIND_A_DESC = "Finds a contact with the given name.";
+
+    private static final String CONTACTS_FIND_B_HEADER = "find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]";
+    private static final String CONTACTS_FIND_B_DESC = "Finds a contact with the given fields.";
+
+    private static final String CONTACTS_CLEAR_HEADER = "clear";
+    private static final String CONTACTS_CLEAR_DESC = "Clears all contacts from the contacts list.";
+
+    private static final String CONTACTS_TAG_HEADER = "tag INDEX [t/TAG]";
+    private static final String CONTACTS_TAG_DESC = "Replaces the tags of the given contact with the given tags.";
+
+    private static final String TASKS_ADD_HEADER = "add d/DESCRIPTION [dt/DATE,TIME] [t/TAG]";
+    private static final String TASKS_ADD_DESC = "Adds a task with the specified fields.";
+
+    private static final String TASKS_EDIT_HEADER = "edit INDEX [d/DESCRIPTION] [dt/DATE, TIME] [p/PERSON] [t/TAG]";
+    private static final String TASKS_EDIT_DESC = "Edits specified fields of a given task.";
+
+    private static final String TASKS_DELETE_HEADER = "delete INDEX";
+    private static final String TASKS_DELETE_DESC = "Deletes a task with the given index.";
+
+    private static final String TASKS_FIND_HEADER = "find [d/DESCRIPTION] [dt/DATE, TIME] [p/PERSON] [t/TAG] "
+            + "[c/COMPLETION STATUS (TRUE OR FALSE)] (at least one)";
+    private static final String TASKS_FIND_DESC = "Finds a task with the given fields.";
+
+    private static final String TASKS_CLEAR_HEADER = "clear";
+    private static final String TASKS_CLEAR_DESC = "Clears all tasks from the task list.";
+
+    private static final String TASKS_TAG_HEADER = "tag INDEX [t/TAG]";
+    private static final String TASKS_TAG_DESC = "Replaces the tags of the given task with the given tags.";
+
+    private static final String TASKS_ASSIGN_HEADER = "assign INDEX [p/INDEX]";
+    private static final String TASKS_ASSIGN_DESC = "Assign a given contact to a task.";
+
+    private static final String TASKS_COMPLETE_HEADER = "complete INDEX";
+    private static final String TASKS_COMPLETE_DESC = "Mark a task as complete.";
 
     private static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w15-2.github.io/tp/UserGuide.html";
 
@@ -61,7 +95,10 @@ public class HelpPanel extends UiPart<Region> {
     private VBox container;
 
     @FXML
-    private Label text;
+    private Label helpContent;
+
+    @FXML
+    private GridPane commandContainer;
 
     @FXML
     private Button copyUserGuideButton;
@@ -75,9 +112,53 @@ public class HelpPanel extends UiPart<Region> {
      */
     public HelpPanel(ResultDisplay resultDisplay) {
         super(FXML);
-        text.setText(HELP_CONTENT);
         this.resultDisplay = resultDisplay;
-        text.setWrapText(true);
+        helpContent.setText(HELP_CONTENT);
+    }
+
+    /**
+     * Creates a new ObservableList to store General commands.
+     *
+     */
+    public ObservableList<HelpCommand> initialiseHelpListGeneral() {
+        ObservableList<HelpCommand> generalList = FXCollections.observableArrayList();
+        generalList.add(new HelpCommand(GENERAL_CONTACTS_HEADER, GENERAL_CONTACTS_DESC));
+        generalList.add(new HelpCommand(GENERAL_TASKS_HEADER, GENERAL_TASKS_DESC));
+        generalList.add(new HelpCommand(GENERAL_HELP_HEADER, GENERAL_HELP_DESC));
+        return generalList;
+    }
+
+    /**
+     * Creates a new ObservableList to store Contact commands.
+     *
+     */
+    public ObservableList<HelpCommand> initialiseHelpListContact() {
+        ObservableList<HelpCommand> contactList = FXCollections.observableArrayList();
+        contactList.add(new HelpCommand(CONTACTS_ADD_HEADER, CONTACTS_ADD_DESC));
+        contactList.add(new HelpCommand(CONTACTS_EDIT_HEADER, CONTACTS_EDIT_DESC));
+        contactList.add(new HelpCommand(CONTACTS_DELETE_HEADER, CONTACTS_DELETE_DESC));
+        contactList.add(new HelpCommand(CONTACTS_FIND_A_HEADER, CONTACTS_FIND_A_DESC));
+        contactList.add(new HelpCommand(CONTACTS_FIND_B_HEADER, CONTACTS_FIND_B_DESC));
+        contactList.add(new HelpCommand(CONTACTS_CLEAR_HEADER, CONTACTS_CLEAR_DESC));
+        contactList.add(new HelpCommand(CONTACTS_TAG_HEADER, CONTACTS_TAG_DESC));
+        return contactList;
+    }
+
+    /**
+     * Creates a new ObservableList to store Task commands.
+     *
+     */
+    public ObservableList<HelpCommand> initialiseHelpListTask() {
+        ObservableList<HelpCommand> taskList = FXCollections.observableArrayList();
+        taskList.add(new HelpCommand(TASKS_ADD_HEADER, TASKS_ADD_DESC));
+        taskList.add(new HelpCommand(TASKS_EDIT_HEADER, TASKS_EDIT_DESC));
+        taskList.add(new HelpCommand(TASKS_DELETE_HEADER, TASKS_DELETE_DESC));
+        taskList.add(new HelpCommand(TASKS_FIND_HEADER, TASKS_FIND_DESC));
+        taskList.add(new HelpCommand(TASKS_CLEAR_HEADER, TASKS_CLEAR_DESC));
+        taskList.add(new HelpCommand(TASKS_TAG_HEADER, TASKS_TAG_DESC));
+        taskList.add(new HelpCommand(TASKS_ASSIGN_HEADER, TASKS_ASSIGN_DESC));
+        taskList.add(new HelpCommand(TASKS_COMPLETE_HEADER, TASKS_COMPLETE_DESC));
+        return taskList;
     }
 
     /**
@@ -103,6 +184,15 @@ public class HelpPanel extends UiPart<Region> {
         url.putString(DEVGUIDE_URL);
         clipboard.setContent(url);
         resultDisplay.setFeedbackToUser(COPY_MESSAGE_DG);
+    }
+
+    /**
+     * Returns the GridPane holding the help panel items.
+     *
+     * @return The GridPane container.
+     */
+    public GridPane getCommandContainer() {
+        return this.commandContainer;
     }
 
 }

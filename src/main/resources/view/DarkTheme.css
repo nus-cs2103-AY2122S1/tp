@@ -17,6 +17,13 @@
     -fx-opacity: 1;
 }
 
+.label-code {
+    -fx-font-size: 13pt;
+    -fx-font-family: "Consolas Bold";
+    -fx-text-fill: white;
+    -fx-opacity: 1;
+}
+
 .label-header {
     -fx-font-size: 32pt;
     -fx-font-family: "Open Sans Light";
@@ -411,5 +418,18 @@
 
 .tab-pane .tab-header-area {
     visibility: hidden;
+}
+
+.helpHeader {
+    -fx-background-color: #665d44;
+    -fx-border-top-width: 1px;
+    -fx-border-radius: 10 10 0 0;
+    -fx-background-radius: 10 10 0 0;
+    -fx-text-fill: white;
+    -fx-font-size: 15pt;
+}
+
+.helpList {
+    -fx-background-color: #665d44;
 }
 
