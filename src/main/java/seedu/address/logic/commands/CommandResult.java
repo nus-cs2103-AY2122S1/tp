@@ -43,17 +43,17 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code info},
-     * and other fields set to their default value.
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * {@code info}, {@code chart}, and other fields set to their default value.
      */
+    public CommandResult(String feedbackToUser, Info info, Chart chart) {
+        this(feedbackToUser, info, chart, false, false);
+    }
+
     public CommandResult(String feedbackToUser, Info info) {
         this(feedbackToUser, info, null, false, false);
     }
 
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code chart},
-     * and other fields set to their default value.
-     */
     public CommandResult(String feedbackToUser, Chart chart) {
         this(feedbackToUser, null, chart, false, false);
     }

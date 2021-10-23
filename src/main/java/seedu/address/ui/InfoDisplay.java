@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.model.student.Assessment;
+import seedu.address.model.student.AssessmentStatistics;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.Student;
 
@@ -34,7 +35,7 @@ public class InfoDisplay extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label info1, info2, info3, info4;
+    private Label info1, info2, info3, info4, info5;
 
     public InfoDisplay() {
         super(FXML);
@@ -63,6 +64,13 @@ public class InfoDisplay extends UiPart<Region> {
 
     public void setAssessmentInfo(Assessment assessment) {
         name.setText(assessment.getName());
+
+        AssessmentStatistics statistics = assessment.getStatistics();
+        info1.setText("Grade range: " + statistics.getMin() + "-" + statistics.getMax());
+        info2.setText("Median: " + statistics.getMedian());
+        info3.setText("Mean: " + statistics.getMean());
+        info4.setText("25th percentile: " + statistics.getXPercentile(25));
+        info5.setText("75th percentile: " + statistics.getXPercentile(75));
     }
 
     @Override

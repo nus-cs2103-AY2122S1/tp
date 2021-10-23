@@ -13,12 +13,7 @@ import javafx.collections.ObservableList;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.student.Assessment;
-import seedu.address.model.student.ID;
-import seedu.address.model.student.IdContainsKeywordsPredicate;
-import seedu.address.model.student.Name;
-import seedu.address.model.student.NameContainsKeywordsPredicate;
-import seedu.address.model.student.Student;
+import seedu.address.model.student.*;
 
 /**
  * Shows information of a student or an assessment.
@@ -96,11 +91,16 @@ public class ShowCommand extends Command {
      */
     private CommandResult showAssessment(Model model) throws CommandException {
         assert getAssessment().isPresent();
-
         Assessment matchedAssessment = model.getAssessment(assessment);
-        assert matchedAssessment != null;
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (matchedAssessment == null) {
+            throw new CommandException(MESSAGE_NONEXISTENT_ASSESSMENT);
+        }
+
+        matchedAssessment.setStatistics();
+        Info info = new Info(matchedAssessment);
+        AssessmentStatistics statistics = matchedAssessment.getStatistics();
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
     }
 
     /**

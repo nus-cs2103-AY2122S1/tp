@@ -16,5 +16,8 @@
       </HBox>
         <Label fx:id="info1" styleClass="cell_small_label" />
         <Label fx:id="info2" styleClass="cell_small_label" />
+        <Label fx:id="info3" styleClass="cell_small_label" />
+        <Label fx:id="info4" styleClass="cell_small_label" />
+        <Label fx:id="info5" styleClass="cell_small_label" />
   </VBox>
 </StackPane>

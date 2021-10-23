@@ -3,11 +3,15 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javafx.scene.chart.Chart;
 import seedu.address.commons.util.ChartUtil;
@@ -109,10 +113,68 @@ public class AssessmentStatistics {
     }
 
     /**
+     * Returns the minimum score for the {@code Assessment}.
+     */
+    public double getMin() {
+        Collection<Score> scores = assessment.getScores().values();
+        Optional<Double> min = scores.stream()
+                .map(Score::getNumericValue)
+                .min(Comparator.naturalOrder());
+        assert min.isPresent();
+        return min.get();
+    }
+
+    /**
+     * Returns the maximum score for the {@code Assessment}.
+     */
+    public double getMax() {
+        Collection<Score> scores = assessment.getScores().values();
+        Optional<Double> max = scores.stream()
+                .map(Score::getNumericValue)
+                .max(Comparator.naturalOrder());
+        assert max.isPresent();
+        return max.get();
+    }
+
+    /**
+     * Returns the median score for the {@code Assessment}.
+     */
+    public double getMedian() {
+        Collection<Score> scores = assessment.getScores().values();
+        List<Double> sorted = scores.stream()
+                .map(Score::getNumericValue)
+                .sorted().collect(Collectors.toList());
+
+        long size = sorted.size();
+        if (size % 2 == 1) { // odd number of scores
+            return sorted.get((int) (size + 1) / 2 - 1);
+        } else { // even number of scores
+            long half = size / 2;
+            return (sorted.get((int) half - 1)
+                + sorted.get((int) half)) / 2;
+        }
+    }
+
+    /**
      * Returns the mean score for the {@code Assessment}.
      */
     public double getMean() {
         return sumOfScores / numScores;
+    }
+
+    /**
+     * Returns the Xth percentile score for the {@code Assessment}.
+     */
+    public double getXPercentile(int X) {
+        assert X > -1 && X < 101;
+
+        Collection<Score> scores = assessment.getScores().values();
+        List<Double> sorted = scores.stream()
+                .map(Score::getNumericValue)
+                .sorted().collect(Collectors.toList());
+
+        long size = sorted.size();
+        return sorted.get(((int) Math.ceil(X/100.0 * size)) - 1);
     }
 
     /**
