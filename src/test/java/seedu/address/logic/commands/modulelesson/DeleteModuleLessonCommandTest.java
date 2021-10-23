@@ -1,13 +1,18 @@
 package seedu.address.logic.commands.modulelesson;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -46,5 +51,59 @@ public class DeleteModuleLessonCommandTest {
         expectedModel.deleteLesson(lessonToDelete1);
         expectedModel.deleteLesson(lessonToDelete2);
         assertCommandSuccess(deleteModuleLessonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleLessonList().size() + 1);
+        DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(outOfBoundIndex);
+
+        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_invalidRangeUnfilteredList_throwsCommandException() {
+        DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(INDEX_SECOND, INDEX_FIRST);
+
+        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+    }
+
+    @Test
+    public void execute_invalidEndIndexRangeUnfilteredList_throwsCommandException() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleLessonList().size() + 1);
+        DeleteModuleLessonCommand deleteModuleLessonCommand =
+                new DeleteModuleLessonCommand(INDEX_SECOND, outOfBoundIndex);
+
+        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+    }
+
+    @Test
+    public void equals() {
+        DeleteModuleLessonCommand deleteFirstCommand = new DeleteModuleLessonCommand(INDEX_FIRST);
+        DeleteModuleLessonCommand deleteSecondCommand = new DeleteModuleLessonCommand(INDEX_SECOND);
+        DeleteModuleLessonCommand deleteBatchCommand1 = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_SECOND);
+        DeleteModuleLessonCommand deleteBatchCommand2 = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_THIRD);
+
+        // same object -> returns true
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
+        assertTrue(deleteBatchCommand1.equals(deleteBatchCommand1));
+
+        // same values -> returns true
+        DeleteModuleLessonCommand deleteFirstCommandCopy = new DeleteModuleLessonCommand(INDEX_FIRST);
+        assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
+
+        DeleteModuleLessonCommand deleteBatchCommandCopy = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_SECOND);
+        assertTrue(deleteBatchCommand1.equals(deleteBatchCommandCopy));
+
+        // different types -> returns false
+        assertFalse(deleteFirstCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(deleteFirstCommand.equals(null));
+
+        // different person -> returns false
+        assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
+
+        assertFalse(deleteBatchCommand1.equals(deleteBatchCommand2));
     }
 }
