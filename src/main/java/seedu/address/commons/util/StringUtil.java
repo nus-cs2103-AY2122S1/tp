@@ -96,7 +96,7 @@ public class StringUtil {
     }
 
     /**
-     * Strip leading 0s from a string.
+     * Strips leading 0s from a string.
      *
      * @param s String to modify.
      * @return Stripped string.
