@@ -86,7 +86,7 @@ public class MainWindow extends UiPart<Stage> {
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
 
-        KeyCombination themeHotKey = new KeyCodeCombination(KeyCode.T,  KeyCombination.CONTROL_DOWN);
+        KeyCombination themeHotKey = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
         Runnable themeRunnable = this::setNextTheme;
         primaryStage.getScene().getAccelerators().put(themeHotKey, themeRunnable);
 
