@@ -43,6 +43,32 @@ class AcademicCalendarTest {
     }
 
     @Test
+    public void isBeforeTest() {
+        AcademicYear year3 = new AcademicYear(3);
+        AcademicYear year1 = new AcademicYear(1);
+
+        Semester semester1 = new Semester(1);
+        Semester semester2 = new Semester(2);
+        AcademicCalendar y3s1 = new AcademicCalendar(year3, semester1);
+        AcademicCalendar y3s1Copy = new AcademicCalendar(year3, semester1);
+
+        AcademicCalendar y3s2 = new AcademicCalendar(year3, semester2);
+        AcademicCalendar y1s2 = new AcademicCalendar(year1, semester2);
+
+        //same semester -> false
+        assertEquals(false, y3s1.isBefore(y3s1Copy));
+
+        //y3s1 before y3s2 -> true
+        assertEquals(true, y3s1.isBefore(y3s2));
+
+        //y3s1 not before y1s2 -> false
+        assertEquals(false, y3s1.isBefore(y1s2));
+
+        //y1s1 is before y3s1 -> true
+        assertEquals(true, y1s2.isBefore(y3s1));
+    }
+
+    @Test
     public void hashCode_sameObject_sameResult() {
         AcademicYear academicYear = new AcademicYear(2);
         Semester semester = new Semester(1);
