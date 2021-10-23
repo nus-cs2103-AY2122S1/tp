@@ -28,7 +28,7 @@ Interface (GUI).
 
    * **`list`** : Lists all modules.
 
-   * `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core` : Adds a module named `CS2103T` to the Mod Tracker.
+   * **`add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core`** : Adds a module named `CS2103T` to the Mod Tracker.
 
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
@@ -151,9 +151,9 @@ Example:
 * `take 1 y/1 s/4` schedules the 1st module in the module tracker for year 1 special semester 2.
 
 
-### Remove the schedule from ("untake") a module : `untake`
+### Removing the schedule from ("untake") a module : `untake`
 
-Remove the schedule from a module in the module tracker.
+Removes the schedule from a module in the module tracker.
 
 Format: `untake INDEX`
 
@@ -214,6 +214,46 @@ Examples:
 * `view y/2 s/1` - see all the modules the user have taken in year 2 semester 1.
 * `view y/2 s/3` - see all the modules taken in year 2 special Term 1.
 
+
+### Track the course completion
+
+Tracks the number of Mcs completed in total, and for each course requirement. <br>
+The user's progress will be displayed in the panel on the right.
+
+![Mcs Display](images/mcsDisplay.png)
+
+The user's progress is displayed in the form of:
+* The number of Mcs completed for that category, over the number of required Mcs.
+* A progress bar filled according to the level of completion.
+
+**Total Mcs completed display:**
+
+![total Mcs Display](images/totalMcsCompletedDisplay.png)
+* Shows the total number of Mcs taken, over the user's set Mc goal.
+* The total number of Mcs taken is calculated from all modules taken before the current semester.
+  * For example: If the current semester is year 1 semester 2, the total number of Mcs will be calculated
+  from all modules taken in year 1 semester 1 only.
+
+**Course requirements display:**
+
+![requirements Mcs Display](images/courseRequirementsDisplay.png)
+* Shows the total number of Mcs taken for that requirement, over the number of Mcs needed to satisfy the requirement.
+* The total number of Mcs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
+  * For example: Mcs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
+* Modules with the following tags will be used in calculating the Mcs completed for the corresponding requirement:
+
+Requirement | Tag (not case sensitive)
+------------|-----------
+GE | "ge"
+UE | "ue"
+Foundation | "foundation"
+Breadth and Depth | "breadthdepth"
+IT Professionalism | "itprofessionalism"
+Math and Science | "mathscience"
+
+Notes:
+* If the Mc requirement has been satisfied, the completed Mcs and progress bar will be coloured light blue.
+* If the Mc requirement is not satisfied, the completed Mcs and progress bar will be coloured pink.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
