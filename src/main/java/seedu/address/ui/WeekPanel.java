@@ -49,7 +49,6 @@ public class WeekPanel extends UiPart<Region> {
         calendarView.setStartTime(TimeRange.DAY_START);
         calendarView.setEndTime(TimeRange.DAY_END);
         calendarView.getDetailedWeekView().setVisibleHours(15);
-        calendarView.getDetailedWeekView().setAdjustToFirstDayOfWeek(false);
         calendarView.getDetailedWeekView().setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT);
         calendarView.getDetailedWeekView().setEarlyLateHoursStrategy(DayViewBase.EarlyLateHoursStrategy.HIDE);
         calendarView.getDetailedWeekView().getWeekView().setDisable(true);

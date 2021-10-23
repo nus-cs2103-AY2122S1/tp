@@ -207,13 +207,6 @@
     -fx-background-color: black;
 }
 
-/*
- * Metro style Push Button
- * Author: Pedro Duque Vieira
- * http://pixelduke.wordpress.com/2012/10/23/jmetro-windows-8-controls-on-java/
- */
-
-
 .dialog-pane {
     -fx-background-color: #1d1d1d;
 }
