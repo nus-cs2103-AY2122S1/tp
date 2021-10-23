@@ -29,7 +29,7 @@ public class StatsDisplay extends UiPart<AnchorPane> {
     public StatsDisplay() {
         super(FXML);
         pieChart.setLabelsVisible(false);
-        pieChart.setAnimated(false);
+        //pieChart.setAnimated(false);
         pieChart.setLegendSide(Side.RIGHT);
     }
 

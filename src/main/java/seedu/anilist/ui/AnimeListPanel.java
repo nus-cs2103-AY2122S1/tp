@@ -17,6 +17,8 @@ import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
+import seedu.anilist.model.AnimeList;
+import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.Status;
 
@@ -27,11 +29,14 @@ public class AnimeListPanel extends UiPart<Region> {
     private static final String FXML = "AnimeListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(AnimeListPanel.class);
     private final TabOption currentTab;
+    private final ReadOnlyAnimeList animeListMain;
 
     //stats to be displayed
-    private int numWatching;
-    private int numToWatch;
-    private int numFinished;
+    private int watchingCount;
+    private int toWatchCount;
+    private int finishedCount;
+
+    private int episodesCount;
 
     @FXML
     private TabPane animeListTabPane;
@@ -60,11 +65,17 @@ public class AnimeListPanel extends UiPart<Region> {
     @FXML
     private Tab finishedTab;
 
+    @FXML
+    private Tab statsTab;
+
     /**
      * Creates a {@code AnimeListPanel} with the given {@code ObservableList}.
      */
-    public AnimeListPanel(ObservableList<Anime> animeList, TabOption currentTab, CommandExecutor commandExecutor) {
+    public AnimeListPanel(ReadOnlyAnimeList animeListMain, ObservableList<Anime> animeList,
+                          TabOption currentTab, CommandExecutor commandExecutor) {
         super(FXML);
+        this.animeListMain = animeListMain;
+
         animeListView.setItems(animeList);
         animeListView.setCellFactory(listView -> new AnimeListViewCell());
 
@@ -98,13 +109,13 @@ public class AnimeListPanel extends UiPart<Region> {
                 });
 
             //Update anime stats upon change
-            animeList.addListener((ListChangeListener<Anime>) anime -> {
+            animeListMain.getAnimeList().addListener((ListChangeListener<Anime>) anime -> {
                 if (anime.next()) {
                     setStats();
                 }
             });
 
-        System.out.println("STATS UPDATED: WATCHING " + numWatching);
+        logger.log(Level.INFO, "Stats updated.");
         this.currentTab = currentTab;
         setStats();
     }
@@ -114,9 +125,10 @@ public class AnimeListPanel extends UiPart<Region> {
      */
     private void resetStats() {
         //resets the stats when the anime list changes so they could be recalculated
-        numWatching = 0;
-        numToWatch = 0;
-        numFinished = 0;
+        watchingCount = 0;
+        toWatchCount = 0;
+        finishedCount = 0;
+        episodesCount = 0;
     }
 
     /**
@@ -124,29 +136,34 @@ public class AnimeListPanel extends UiPart<Region> {
      */
     private void setStats() {
         resetStats();
-        for (Anime anime: animeListView.getItems()) {
+        for (Anime anime: animeListMain.getAnimeList()) {
+            episodesCount += anime.getEpisode().getValue();
             Status.WatchStatus watchStatus = anime.getStatus().status;
             if (watchStatus.equals(Status.WatchStatus.WATCHING)) {
-                numWatching += 1;
+                watchingCount += 1;
             } else if (watchStatus.equals(Status.WatchStatus.TOWATCH)) {
-                numToWatch += 1;
+                toWatchCount += 1;
             } else {
-                //TODO add assertion that it's finished
-                numFinished += 1;
+                assert watchStatus.equals(Status.WatchStatus.FINISHED);
+                finishedCount += 1;
             }
         }
     }
 
-    public int getNumWatching() {
-        return this.numWatching;
+    public int getWatchingCount() {
+        return this.watchingCount;
     }
 
-    public int getNumToWatch() {
-        return this.numToWatch;
+    public int getToWatchCount() {
+        return this.toWatchCount;
     }
 
-    public int getNumFinished() {
-        return this.numFinished;
+    public int getFinishedCount() {
+        return this.finishedCount;
+    }
+    
+    public int getEpisodesCount() {
+        return this.getEpisodesCount();
     }
 
     public void setActiveTab() {
@@ -158,6 +175,8 @@ public class AnimeListPanel extends UiPart<Region> {
             animeListTabPane.getSelectionModel().select(watchingTab);
         } else if (currentTab.getCurrentTab() == TabOption.TabOptions.FINISHED) {
             animeListTabPane.getSelectionModel().select(finishedTab);
+        } else if (currentTab.getCurrentTab() == TabOption.TabOptions.STATS) {
+            animeListTabPane.getSelectionModel().select(statsTab);
         } else {
             animeListTabPane.getSelectionModel().select(allTab);
         }

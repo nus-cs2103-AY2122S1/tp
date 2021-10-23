@@ -2,6 +2,7 @@ package seedu.anilist.ui;
 
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.StackPane;
@@ -12,6 +13,8 @@ import seedu.anilist.logic.Logic;
 import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
+import seedu.anilist.model.AnimeList;
+import seedu.anilist.model.anime.Anime;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -73,7 +76,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
+        animeListPanel = new AnimeListPanel(logic.getAnimeList(), logic.getFilteredAnimeList(),
+                logic.getCurrentTab(), this::executeCommand);
         animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -92,9 +96,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateStatsDisplay() {
-        int watchingCount = getAnimeListPanel().getNumWatching();
-        int toWatchCount = getAnimeListPanel().getNumToWatch();
-        int finishedCount = getAnimeListPanel().getNumFinished();
+        int watchingCount = getAnimeListPanel().getWatchingCount();
+        int toWatchCount = getAnimeListPanel().getToWatchCount();
+        int finishedCount = getAnimeListPanel().getFinishedCount();
         int total = watchingCount + toWatchCount + finishedCount;
 
         statsDisplay.setAnimeListStats(
