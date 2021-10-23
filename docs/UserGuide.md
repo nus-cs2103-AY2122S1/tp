@@ -48,6 +48,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+## Person Commands
 
 ### Adding a person: `add`
 
@@ -117,6 +118,43 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+## Task Commands
+
+## Order Commands
+
+### Listing all orders: `listorder`
+
+Shows a list of all orders in the application.
+
+### Adding a order: `addorder`
+
+Adds an order to the application.
+
+Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
+
+Examples:
+* `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
+* `addorder l/school uniform c/John a/15.00 d/15th October 2021`
+
+### Deleting an order: `deleteorder`
+
+Deletes an order from the application.
+
+Format: `deleteorder INDEX`
+
+* Deletes the order at the specified `INDEX`
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+Note that this will also delete all tasks tagged to the deleted order.
+
+### Marking an order as complete: `markorder`
+
+Format: `markorder INDEX`
+* Marks the order at the specified `INDEX` as completed
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
 
 ### Clearing all entries : `clear`
 
