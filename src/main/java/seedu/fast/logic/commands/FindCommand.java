@@ -25,7 +25,7 @@ public class FindCommand extends Command {
     public static final String REMARK_PREFIX = "r/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Finds all persons whose names contain any of "
+            + ": Finds all client whose names contain any of "
             + "the specified keywords (case-insensitive) or priority tags, \n"
             + "tags or remarks and displays them as a list with index numbers.\n\n"
             + "Parameters: \nQUERY [MORE_QUERIES]...\n"

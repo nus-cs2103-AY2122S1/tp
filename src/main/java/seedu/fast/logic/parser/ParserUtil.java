@@ -33,8 +33,10 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
-        "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment",
+        "Edit Appointment", "Delete Appointment", "Mark Appointment", "Clear", "Delete",
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Statistics", "Tag", "Investment Plan Tag",
+        "Priority Tag", "Misc"};
 
 
 

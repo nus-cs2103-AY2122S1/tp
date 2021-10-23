@@ -10,9 +10,9 @@ public class PriorityTag extends Tag {
 
     public static final String PRIORITY_TAG_PREFIX = "pr/";
 
-    public static final String MESSAGE_USAGE = "Priority tag: label a person with a priority. "
+    public static final String MESSAGE_USAGE = "Priority tag: label a client with a priority. "
             + "The priority can be high, med, or low\n"
-            + "Similar to tag, to apply a priority tag, you have to use Add,Edit or Tag command.\n\n"
+            + "Similar to tag, to apply a priority tag, you have to use Add, Edit or Tag command.\n\n"
             + "Parameters (using Edit): \n"
             + "edit INDEX t/ pr/PRIORITY\n\n"
             + "Example: \n"

@@ -19,8 +19,8 @@ public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "rmk";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the remark of the person identified "
-            + "by the index number used in the last person listing. "
+            + ": Edits the remark of the client identified "
+            + "by the index number used in the last client listing. "
             + "Existing remark will be overwritten by the input.\n\n"
             + "Parameters: \nINDEX (must be a postive integer) "
             + "r/ [REMARK]\n"
@@ -28,8 +28,8 @@ public class RemarkCommand extends Command {
             + "Example: \n" + COMMAND_WORD + " 1 "
             + "r/ Likes to swim.";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Person: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Person: %1$s";
+    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added remark to Client: %1$s";
+    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed remark from Client: %1$s";
 
     private final Index index;
     private Remark remark;
