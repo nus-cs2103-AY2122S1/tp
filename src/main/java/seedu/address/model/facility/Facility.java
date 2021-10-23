@@ -2,9 +2,8 @@ package seedu.address.model.facility;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
 /**
@@ -15,7 +14,7 @@ public class Facility {
     private final Location location;
     private final Time time;
     private final Capacity capacity;
-    private List<Person> personAllocatedList = new ArrayList<>();
+    private ObservableList<Person> personAllocatedList = FXCollections.observableArrayList();
 
     /**
      * Creates a Facility object with the specified name,
@@ -50,8 +49,16 @@ public class Facility {
         return capacity;
     }
 
+    public boolean isMaxCapacity() {
+        return !capacity.isWithinCapacity(personAllocatedList.size());
+    }
+
     public void clearAllocationList() {
-        personAllocatedList = new ArrayList<>();
+        personAllocatedList = FXCollections.observableArrayList();
+    }
+
+    public boolean isPersonAllocated(Person person) {
+        return personAllocatedList.contains(person);
     }
 
     public String getPersonsAsString() {

@@ -12,10 +12,13 @@ public class Messages {
     // Member-specific Messages
     public static final String MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX = "The member index provided is invalid";
     public static final String MESSAGE_MEMBERS_LISTED_OVERVIEW = "%1$d members listed!";
-    public static final String MESSAGE_INVALID_DAY = "The day provided is invalid! \n%1$s";
+    public static final String MESSAGE_MEMBER_NOT_AVAILABLE = "The member is not available on that day";
+    public static final String MESSAGE_MEMBER_ALREADY_ALLOCATED =
+            "The member has already been allocated to that facility";
 
     // Facility-specific Messages
     public static final String MESSAGE_FACILITIES_LISTED_OVERVIEW = "%1$d facilities listed!";
     public static final String MESSAGE_INVALID_FACILITY_DISPLAYED_INDEX = "The facility index provided is invalid";
+    public static final String MESSAGE_FACILITY_AT_MAX_CAPACITY = "The facility provided is already at max capacity";
 
 }

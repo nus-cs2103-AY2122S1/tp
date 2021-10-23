@@ -228,7 +228,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses an {@code String availability string} into an {@code Availability}.
+     * Parses an {@code String availabilityString} into an {@code Availability}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code availability string} is invalid.
@@ -254,5 +254,18 @@ public class ParserUtil {
         }
         Collections.sort(availability);
         return new Availability(availability);
+    }
+
+    /**
+     * Parses a {@code String dayString} into DayOfWeek.
+     */
+    public static DayOfWeek parseDay(String dayString) throws ParseException {
+        requireNonNull(dayString);
+        String validationRegex = "[1-7]";
+        if (!dayString.matches(validationRegex)) {
+            throw new ParseException(CommandWord.MESSAGE_CONSTRAINTS);
+        }
+        int dayNumber = Integer.parseInt(dayString);
+        return DayOfWeek.of(dayNumber);
     }
 }

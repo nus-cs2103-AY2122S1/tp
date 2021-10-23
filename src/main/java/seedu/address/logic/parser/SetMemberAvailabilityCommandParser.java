@@ -14,13 +14,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Availability;
 
 /**
- * Parses input arguments and creates a new {@code SetMemberAvailabilityCommand} object.
+ * Parses input arguments and creates a new SetMemberAvailabilityCommand object.
  */
 public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvailabilityCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the SetMemberAvailabilityCommand
-     * and returns a {@code SetMemberAvailabilityCommand} object for execution.
+     * and returns a SetMemberAvailabilityCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -37,9 +37,9 @@ public class SetMemberAvailabilityCommandParser implements Parser<SetMemberAvail
             for (String s : indicesArray) {
                 indices.add(ParserUtil.parseIndex(s));
             }
-        } catch (IllegalValueException ive) {
+        } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SetMemberAvailabilityCommand.MESSAGE_USAGE), ive);
+                    SetMemberAvailabilityCommand.MESSAGE_USAGE), pe);
         }
 
         Availability availability = ParserUtil.parseAvailability(argMultimap.getValue(PREFIX_AVAILABILITY).get());
