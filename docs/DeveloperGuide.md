@@ -238,7 +238,7 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple tags can be added for each person, with no duplicates.
+Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each person.
 
 #### Usage
 
@@ -246,21 +246,21 @@ Given below is an example usage scenario and how the Tag mechanism behaves at ea
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `add ... t/tag` command to add a person with a tag into CONNECTIONS.
+Step 2. The user executes `add ... t/friend` command to add a person tagged with `friend` into CONNECTIONS.
 
 Step 3. CONNECTIONS displays the newly added contact with the added tag.
 
-Step 4. The user decides to add additional tags to the contact at index 1, and executes `tag 1 t/tag`.
+Step 4. The user decides to add additional tags to the contact at index 1, and executes `tag 1 t/classmate`.
 
-Step 5. CONNECTIONS will update the contact to include the new tag
+Step 5. CONNECTIONS will update the specified contact to include the new tag `classmate`
 
-Step 6. The user decides to remove a tag from a contact at index 3, and executes `untag 3 t/tag`.
+Step 6. The user decides to remove the tag `student` from a contact at index 3, and executes `untag 3 t/student`.
 
-Step 7. CONNECTIONS updates and remove the tag from the contact.
+Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
 
 #### Design considerations:
 
-* **Current implementation: Tags aresaved within a `Set<Tag>` within `Person`**
+* **Current implementation: Tags are saved within a `Set<Tag>` within `Person`**
   * Pros: Easy to implement and doesn't allow for duplicates. 
   * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
   
@@ -362,7 +362,7 @@ tagged to **either** `friend` **or** `football`.
 
 #### Implementation
 
-The help command is facilitated by `HelpCommand` which interfaces with `Command`, and `HelpCommandParser`.
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`
 
 Given below is an example usage scenario and how the Help mechanism behaves at each step.
 
@@ -722,12 +722,12 @@ Future versions user stories
 
 **Extensions**
 
-* 2a. Help command was not specified with a valid command
+* 2a. Command was not provided
   * 2a1. Connections show all available commands
 
       Use case ends.
 
-* 2b. Help command was supplied with an invalid command
+* 2b. Command provided is invalid
   * 2a1. Connections display an error message followed by a list of valid commands
 
   Use case ends.
