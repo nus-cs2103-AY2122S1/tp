@@ -13,10 +13,61 @@ their contacts. More importantly, FAST is **optimized for those who prefer to wo
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). For Financial Advisors that 
 can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
+### Structure of this document
+To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
+As such, this user guide has been structured to help you find what you are looking for.
+
+In [How to use this user guide](#how-to-use-this-user-guide), you can learn how to most effectively read through this guide.
+
+In [Features overview](#features-overview), you will find all the features available in FAST.
+
+In [Quick start](#quick-start), you will find simple instructions on how to quickly begin using FAST.
+
+In [Features](#features), you can find documentation on how to use the features available in FAST.
+
+In [FAQs](#faqs), you may find answers to questions or problems you might have while using FAST.
+
+In [Command summary](#command-summary), you will find a summary of the commands available in FAST.
+
 ### How to use this user guide
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links which will jump to the corresponding section of the user guide. These
 links allow you to quickly navigate this document.
+
+Multiple special formats are used to highlight information that will be important or useful to you.
+These include:
+
+**Cautions**
+
+<div markdown="span" class="alert alert-warning">
+:exclamation: **Caution** Example caution
+</div>
+
+Messages that appear in these boxes are important to take note of, as not knowing them might harm your user experience.
+
+**Tips**
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Example tip
+</div>
+
+Messages that appear in these boxes can help you to more effectively use FAST.
+
+**Useful information**
+
+<div markdown="block" class="alert alert-info">
+:information_source: Example useful information
+</div>
+
+Messages that appear in these boxes will be useful in helping you to understand how to use FAST.
+
+**Technical Information**
+
+`Example technical information`
+
+Messages that appear in these boxes indicate that the message is of a more technical nature, such as user input.
+
+
 
 ### Features overview
 Here is an overview of the features FAST offers:
@@ -47,7 +98,7 @@ on any operating system including Windows, macOS or Linux
    </div>
 1. You are now ready to start managing your clients!
    
-### User Interface
+### User interface
 Referring to the image above, the _Menu bar_ at the top is where you can access the _Help page_, _Stats page_ and exit 
 FAST. <br><br>
 Next, the _Results display_ is where FAST gives you feedback to your commands. For example, if you make a typo
@@ -466,7 +517,7 @@ and start with an empty data file on the next run!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQs
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAST home folder.<br>
