@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.ModelStub;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 class AddTaskCommandTest {
