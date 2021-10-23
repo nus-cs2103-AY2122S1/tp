@@ -44,7 +44,7 @@ public class PersonCreateCommand extends PersonCommand {
     private final PersonExecutor executor;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an CreateCommand to add the specified {@code Person}
      */
     public PersonCreateCommand(Index index, Person person) throws ParseException {
         super(index);

@@ -6,10 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_NOTE_DATE;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.notor.testutil.Assert.assertThrows;
 import static seedu.notor.testutil.TypicalPersons.ALICE;
+import static seedu.notor.testutil.TypicalPersons.BENSON;
 import static seedu.notor.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
@@ -84,5 +87,17 @@ public class PersonTest {
         // different tags -> returns false
         editedAlice = new PersonBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(ALICE, editedAlice);
+
+        // different note -> returns false
+        editedAlice = new PersonBuilder(ALICE).withNote(VALID_NOTE_AMY, VALID_NOTE_DATE).build();
+        assertNotEquals(ALICE, editedAlice);
+
+        // different supergroups -> returns false
+        editedAlice = new PersonBuilder(ALICE).withSuperGroups("[family friend, financial aid]").build();
+        assertNotEquals(ALICE, editedAlice);
+
+        // different subgroups -> returns false
+        Person editedBenson = new PersonBuilder(BENSON).withSubGroups("").build();
+        assertNotEquals(BENSON, editedBenson);
     }
 }

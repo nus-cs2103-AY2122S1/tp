@@ -3,21 +3,16 @@ package seedu.notor.logic.executors.person;
 import static seedu.notor.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.notor.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.notor.commons.core.index.Index;
 import seedu.notor.commons.util.CollectionUtil;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.common.Name;
-import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
-import seedu.notor.model.tag.Tag;
 
 /**
  * Executor for a PersonEditCommand.
@@ -25,6 +20,7 @@ import seedu.notor.model.tag.Tag;
 public class PersonEditExecutor extends PersonExecutor {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    private static final String MESSAGE_NO_FIELDS_CHANGED = "All parameters are the same; no changes were made";
 
     private final PersonEditDescriptor personEditDescriptor;
 
@@ -45,8 +41,14 @@ public class PersonEditExecutor extends PersonExecutor {
         Person person = super.getPerson();
         Person editedPerson = createEditedPerson(person, personEditDescriptor);
 
+        // checks that name has not been changed to that of another person in Notor
         if (!person.isSame(editedPerson) && model.hasPerson(editedPerson)) {
             throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        // check that fields are actually edited
+        if (person.equals(editedPerson)) {
+            throw new ExecuteException(MESSAGE_NO_FIELDS_CHANGED);
         }
 
         model.setPerson(person, editedPerson);
@@ -64,10 +66,8 @@ public class PersonEditExecutor extends PersonExecutor {
         Name updatedName = personEditDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = personEditDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = personEditDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Set<Tag> updatedTags = personEditDescriptor.getTags().orElse(personToEdit.getTags());
-        Note updatedNote = personEditDescriptor.getNote().orElse(personToEdit.getNote());
-
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, personToEdit.getNote(), personToEdit.getTags(),
+                personToEdit.getSuperGroups(), personToEdit.getDisplaySubGroups());
     }
 
     @Override
@@ -96,8 +96,6 @@ public class PersonEditExecutor extends PersonExecutor {
         private Name name;
         private Phone phone;
         private Email email;
-        private Set<Tag> tags;
-        private Note note;
 
         public PersonEditDescriptor() {
         }
@@ -110,15 +108,13 @@ public class PersonEditExecutor extends PersonExecutor {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setTags(toCopy.tags);
-            setNote(toCopy.note);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email);
         }
 
         public void setName(Name name) {
@@ -145,31 +141,6 @@ public class PersonEditExecutor extends PersonExecutor {
             return Optional.ofNullable(email);
         }
 
-        public void setNote(Note note) {
-            this.note = note;
-        }
-
-        public Optional<Note> getNote() {
-            return Optional.ofNullable(note);
-        }
-
-        /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : new HashSet<>();
-        }
-
-        /**
-         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
-        public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
-        }
-
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -186,8 +157,7 @@ public class PersonEditExecutor extends PersonExecutor {
             PersonEditDescriptor e = (PersonEditDescriptor) other;
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getTags().equals(e.getTags());
+                    && getEmail().equals(e.getEmail());
         }
     }
 }

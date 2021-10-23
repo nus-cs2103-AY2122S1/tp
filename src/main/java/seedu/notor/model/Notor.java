@@ -19,9 +19,7 @@ import seedu.notor.model.util.UniqueList;
  */
 public class Notor implements ReadOnlyNotor {
 
-
     private final UniqueList<Person> persons;
-
     private final UniqueList<SuperGroup> superGroups;
 
     private Note note;

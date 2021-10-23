@@ -32,8 +32,10 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_NOTE_AMY = "Like skiing.";
+    public static final String VALID_NOTE_AMY = "Fri, Oct 22 2021 20:58\n\n\nLikes to ski. Wish that I could go to "
+            + "sleep now";
     public static final String VALID_NOTE_BOB = "Favourite pastime: Eating";
+    public static final String VALID_NOTE_DATE = "Last Modified: (Fri, Oct 22 2021 20:59)";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -61,10 +63,10 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new PersonEditDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_FRIEND)
+                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY)
                 .build();
         DESC_BOB = new PersonEditDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
     }
 

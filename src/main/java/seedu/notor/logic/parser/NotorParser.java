@@ -20,12 +20,15 @@ import seedu.notor.logic.commands.group.SubGroupCreateCommand;
 import seedu.notor.logic.commands.group.SuperGroupCreateCommand;
 import seedu.notor.logic.commands.person.PersonAddGroupCommand;
 import seedu.notor.logic.commands.person.PersonClearNoteCommand;
+import seedu.notor.logic.commands.person.PersonClearTagsCommand;
 import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonCreateCommand;
 import seedu.notor.logic.commands.person.PersonDeleteCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.commands.person.PersonNoteCommand;
 import seedu.notor.logic.commands.person.PersonRemoveGroupCommand;
+import seedu.notor.logic.commands.person.PersonTagCommand;
+import seedu.notor.logic.commands.person.PersonUntagCommand;
 import seedu.notor.logic.parser.exceptions.ParseException;
 import seedu.notor.logic.parser.group.GroupClearNoteCommandParser;
 import seedu.notor.logic.parser.group.GroupDeleteCommandParser;
@@ -34,11 +37,14 @@ import seedu.notor.logic.parser.group.SubGroupCreateCommandParser;
 import seedu.notor.logic.parser.group.SuperGroupCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonAddGroupCommandParser;
 import seedu.notor.logic.parser.person.PersonClearNoteCommandParser;
+import seedu.notor.logic.parser.person.PersonClearTagsCommandParser;
 import seedu.notor.logic.parser.person.PersonCreateCommandParser;
 import seedu.notor.logic.parser.person.PersonDeleteCommandParser;
 import seedu.notor.logic.parser.person.PersonEditCommandParser;
 import seedu.notor.logic.parser.person.PersonNoteCommandParser;
 import seedu.notor.logic.parser.person.PersonRemoveGroupCommandParser;
+import seedu.notor.logic.parser.person.PersonTagCommandParser;
+import seedu.notor.logic.parser.person.PersonUntagCommandParser;
 
 /**
  * Parses user input.
@@ -138,6 +144,16 @@ public class NotorParser {
                 if (PersonRemoveGroupCommand.COMMAND_WORDS.contains(subCommandWord)) {
                     return new PersonRemoveGroupCommandParser(index, arguments).parse();
                 }
+                if (PersonTagCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonTagCommandParser(index, arguments).parse();
+                }
+                if (PersonUntagCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonUntagCommandParser(index, arguments).parse();
+                }
+                if (PersonClearTagsCommand.COMMAND_WORDS.contains(subCommandWord)) {
+                    return new PersonClearTagsCommandParser(index).parse();
+                }
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
             if (GroupCommand.COMMAND_WORDS.contains(commandWord)) {
                 if (SubGroupCreateCommand.COMMAND_WORDS.contains(subCommandWord)) {

@@ -1,7 +1,6 @@
 package seedu.notor.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.notor.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.notor.testutil.Assert.assertThrows;
 import static seedu.notor.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -158,7 +157,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
-        assertTrue(ParserUtil.parseTags("").isEmpty());
+        assertThrows(ParseException.class, () -> ParserUtil.parseTags(""));
     }
 
     @Test

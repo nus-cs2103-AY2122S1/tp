@@ -25,9 +25,16 @@ public class NotorParserTest {
     private final NotorParser parser = new NotorParser();
 
     @Test
-    public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        PersonCreateCommand command = (PersonCreateCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
+    public void parseCommand_create() throws Exception {
+        Person person = new PersonBuilder().withNote(Note.EMPTY_NOTE).build();
+        PersonCreateCommand command = (PersonCreateCommand) parser.parseCommand(PersonUtil.getCreateCommand(person));
+        assertEquals(new PersonCreateCommand(null, person), command);
+    }
+
+    public void parseCommand_createWithTags() throws Exception {
+        Person person = new PersonBuilder().withTags("friends").build();
+        PersonCreateCommand command =
+                (PersonCreateCommand) parser.parseCommand(PersonUtil.getCreateCommandWithTags(person));
         assertEquals(new PersonCreateCommand(null, person), command);
     }
 

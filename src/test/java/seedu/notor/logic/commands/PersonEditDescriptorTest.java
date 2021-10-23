@@ -7,7 +7,6 @@ import static seedu.notor.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.notor.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.jupiter.api.Test;
 
@@ -45,10 +44,6 @@ public class PersonEditDescriptorTest {
 
         // different email -> returns false
         editedAmy = new PersonEditDescriptorBuilder(DESC_AMY).withEmail(VALID_EMAIL_BOB).build();
-        assertNotEquals(DESC_AMY, editedAmy);
-
-        // different tags -> returns false
-        editedAmy = new PersonEditDescriptorBuilder(DESC_AMY).withTags(VALID_TAG_HUSBAND).build();
         assertNotEquals(DESC_AMY, editedAmy);
     }
 }

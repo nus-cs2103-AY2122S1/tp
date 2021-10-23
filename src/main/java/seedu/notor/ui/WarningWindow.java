@@ -1,6 +1,8 @@
 package seedu.notor.ui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
@@ -15,6 +17,9 @@ public class WarningWindow extends UiPart<Stage> {
     @FXML
     private TextFlow textFlow;
 
+    @FXML
+    private Button cancelButton;
+
     /**
      * Creates a Warning Window if user attempts to delete Person or clear Notor.
      *
@@ -25,6 +30,7 @@ public class WarningWindow extends UiPart<Stage> {
         this.canContinue = false;
         Text text = new Text(message);
         textFlow.getChildren().add(text);
+        Platform.runLater(() -> cancelButton.requestFocus());
         getRoot().setTitle("Warning");
         getRoot().initModality(Modality.APPLICATION_MODAL);
         getRoot().setResizable(false);

@@ -49,7 +49,7 @@ Refer to the [Features](#Features) below for details of each command.
   e.g. in `person /create n:NAME`, `NAME` is a parameter which can be used as `/create n:John Doe`.
 * Round brackets `()` refer to COMPULSORY arguments.<br>
   e.g `g:(GROUP_NAME)` means that the group name must be entered a that position.
-  
+
 * Items in square brackets are optional.<br>
   e.g `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
 * Items with `…`​ after them can be used multiple times including zero times, with a comma separating terms.<br>
@@ -74,8 +74,8 @@ Format: `help`
 
 #### Clearing all entries : `clear`
 
-Clears all entries from Notor. Be warned; data will be deleted and **will not be saved**. The intended use of this 
-command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
+Clears all entries from Notor. Be warned; data will be deleted and **will not be saved**. The intended use of this
+ command is to clear the dummy starting data, but you can also use it to reset your Notor from within the program.
 
 Format: `clear`
 * Take care not to confuse this command with the more specific`/clearnote` command.
@@ -460,7 +460,7 @@ Action                    | Format                                              
 **Note**                  | `person (INDEX) /note`                                                        | `p (INDEX) /n`
 **Clear Note**            | `person (INDEX) /clearnote`                                                   | `p (INDEX) /cn`
 **Tag**                   | `person (INDEX) /tag [t:TAG1,TAG2,...]`                                       | `p (INDEX) /t [t:TAG1,TAG2,...]`
-**Untag**                 | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /u [t:TAG1,TAG2,...]`
+**Untag**                 | `person (INDEX) /untag [t:TAG1,TAG2,...]`                                     | `p (INDEX) /ut [t:TAG1,TAG2,...]`
 **Clear Tags**            | `person (INDEX) /cleartags`                                                   | `p (INDEX) / ct`
 **List Persons**          | `person /list`                                                                | `p /l`
 **List Persons in Group** | `person [INDEX] /list`                                                        | `p [INDEX] /l`
@@ -476,7 +476,7 @@ Action                 | Format                                         | Short 
 **Delete**             | `group (INDEX) /delete`                        | `g (INDEX) /d`
 **Note**               | `group (INDEX) /note`                          | `g (INDEX) /n`
 **Tag**                | `group (INDEX) /tag [t:TAG1,TAG2,...]`         | `g (INDEX) /t [t:TAG1,TAG2,...]`
-**Untag**              | `group (INDEX) /untag [t:TAG1,TAG2,...]`       | `g (INDEX) /u [t:TAG1,TAG2,...]`
+**Untag**              | `group (INDEX) /untag [t:TAG1,TAG2,...]`       | `g (INDEX) /ut [t:TAG1,TAG2,...]`
 **Clear Tags**         | `group (INDEX) /cleartags`                     | `g (INDEX) / ct`
 **List Groups**        | `group /list`                                  | `g /l`
 **List Out Subgroups** | `group (INDEX) /list`                          | `g (INDEX) /l`

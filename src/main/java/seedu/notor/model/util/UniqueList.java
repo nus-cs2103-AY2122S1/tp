@@ -110,7 +110,7 @@ public class UniqueList<T extends Unique<T>> implements Iterable<T> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if the list contains only unique T.
      */
     private boolean onlyContainsUnique(List<T> items) {
         for (int i = 0; i < items.size() - 1; i++) {

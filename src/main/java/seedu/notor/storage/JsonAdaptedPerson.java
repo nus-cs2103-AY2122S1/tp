@@ -113,7 +113,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Note.class.getSimpleName()));
         }
-        final Note modelNote = new Note(note, noteDate);
+        final Note modelNote = (note == "" && noteDate == "") ? Note.EMPTY_NOTE : new Note(note, noteDate);
 
         if (!superGroups.stream().allMatch(SuperGroup::isValidGroupName)) {
             throw new IllegalValueException(Group.MESSAGE_CONSTRAINTS);
