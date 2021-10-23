@@ -52,6 +52,7 @@ public class ModelManager implements Model {
         sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
         clientToView = new FilteredList<>(this.addressBook.getClientList());
+        clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
 
     public ModelManager() {
