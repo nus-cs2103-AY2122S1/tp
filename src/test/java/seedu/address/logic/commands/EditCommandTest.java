@@ -122,6 +122,14 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_nonexistentGroup_failure() {
+        EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withGroups("poqwepq").build();
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_NONEXISTENT_GROUP);
+    }
+
+    @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
         EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB).build();

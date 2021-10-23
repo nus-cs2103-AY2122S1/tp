@@ -112,12 +112,24 @@ Examples:
 * `add alloc -g T01A -n John Doe`
 * `add alloc -g T02A -i E0123456`
 
-### Adding an assessment: `add score`
+### Adding an assessment: `add assessment`
+
+Adds a new assessment into the database.
+
+Format: `add assessment -a <assessment_name`
+* Adds an assessment only if the assessment is not already in the database.
+* Assessment name can only be alphanumeric.
+
+Examples:
+* `add assessment -a P01`
+
+### Adding a score: `add score`
 
 Adds score of an existing assessment into the database.
 
 Format: `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>`
 * Adds student’s score for an existing assessment into the database.
+* Updates the student's score if the student already has a score for the assessment.
 * Students can be identified by their name or NUSNET ID.
 
 Examples:
@@ -146,6 +158,23 @@ Examples:
 * `search -i E0123456`
 * `search -g T02B R03C`
 * `search -t friends colleagues`
+
+### Editing a student: `edit`
+
+Edits the information of an existing student.
+
+Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...`
+
+* Edits the person at the specified index. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags and groups, the existing tags and groups of the person will be removed i.e adding of tags and groups are not cumulative.
+* You can remove all the person’s tags or groups by typing -t or -g without specifying any values after it.
+
+Examples:
+* `edit 1 -n John Doe`
+* `edit 1 -n John Doe -i E1234567 -g T01 -g R01`  
+* `edit 2 -t`
 
 
 ### Importing data: `import`
@@ -186,10 +215,23 @@ Clears all existing data.
 
 Format: `clear`
 
+### Closing the app: `exit`
 
-### Saving the data `[coming soon]`
+Exits the application.
 
-_Details coming soon ..._
+Format: `exit`
+
+### Saving the data
+
+SourceControl data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+### Editing the data file
+
+SourceControl data are saved as a JSON file `[JAR file location]/data/sourcecontrol.json`. Advanced users are welcome to update data directly by editing that data file.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If your changes to the data file makes its format invalid, SourceControl will discard all data and start with an empty data file at the next run.
+</div>
 
 ### Archiving data files `[coming soon]`
 
@@ -208,7 +250,10 @@ Action | Format, Examples
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 **Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
-**Add Assessment** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
+**Add Assessment** | `add assessment -a <assessment_name>` <br> e.g. `add assessment -a P01`
+**Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` <br> e.g. `search -n John Doe` , `search -g T02B R04D`
-**Import data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` <br> e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
-**Clear** | `clear data`
+**Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` <br> e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
+**Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` <br> e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
+**Clear Data** | `clear`
+**Exit App** | `exit`

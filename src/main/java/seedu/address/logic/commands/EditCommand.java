@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +50,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the address book.";
+    public static final String MESSAGE_NONEXISTENT_GROUP = "This group does not exist.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;
@@ -70,13 +71,18 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
+        List<Group> groupList = model.getAddressBook().getGroupList();
+
+        if (!groupList.containsAll(editStudentDescriptor.getGroups().orElse(new ArrayList<>()))) {
+            throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
+        }
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor);
+        Student editedStudent = createEditedStudent(studentToEdit, editStudentDescriptor, groupList);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -91,14 +97,21 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor,
+                                               List<Group> groups) {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         ID updatedId = editStudentDescriptor.getId().orElse(studentToEdit.getId());
 
+        // ensure that the groups added are the same as those in the group list
         List<Group> updatedGroups = editStudentDescriptor.getGroups().orElse(studentToEdit.getGroups());
-        Map<Assessment, Score> updatedScores = editStudentDescriptor.getScores().orElse(studentToEdit.getScores());
+        updatedGroups = updatedGroups.stream()
+                .map(group -> groups.get(groups.indexOf(group)))
+                .collect(Collectors.toList());
+
+        // it is not the job of the edit command to edit scores
+        Map<Assessment, Score> updatedScores = studentToEdit.getScores();
         Set<Tag> updatedTags = editStudentDescriptor.getTags().orElse(studentToEdit.getTags());
 
         return new Student(updatedName, updatedId, updatedGroups, updatedScores, updatedTags);
@@ -130,7 +143,6 @@ public class EditCommand extends Command {
         private Name name;
         private ID id;
         private List<Group> groups;
-        private Map<Assessment, Score> scores;
         private Set<Tag> tags;
 
         public EditStudentDescriptor() {}
@@ -143,7 +155,6 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setId(toCopy.id);
             setGroups(toCopy.groups);
-            setScores(toCopy.scores);
             setTags(toCopy.tags);
         }
 
@@ -151,7 +162,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, id, groups, scores, tags);
+            return CollectionUtil.isAnyNonNull(name, id, groups, tags);
         }
 
         public void setName(Name name) {
@@ -188,24 +199,6 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Sets {@code scores} to this object's {@code scores}.
-         * A defensive copy of {@code scores} is used internally.
-         */
-        public void setScores(Map<Assessment, Score> scores) {
-            this.scores = (scores != null) ? new HashMap<>(scores) : null;
-        }
-
-        /**
-         * Returns an unmodifiable score map, which throws {@code UnsupportedOperationException}
-         * if modification is attempted.
-         * Returns {@code Optional#empty()} if {@code scores} is null.
-         */
-        public Optional<Map<Assessment, Score>> getScores() {
-            return (scores != null) ? Optional.of(Collections.unmodifiableMap(scores)) : Optional.empty();
-        }
-
-
-        /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
          */
@@ -240,7 +233,6 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getId().equals(e.getId())
                     && getGroups().equals(e.getGroups())
-                    && getScores().equals(e.getScores())
                     && getTags().equals(e.getTags());
         }
     }
