@@ -17,10 +17,10 @@ public class RemoveParticipantFromEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": remove the Participant with specified index from an event with another specified index.\n"
-            + "Parameters: \n"
+            + "Parameters: "
             + "PARTICIPANT_INDEX "
-            + "EVENT_INDEX "
-            + "Example: " + COMMAND_WORD + "1 2";
+            + "EVENT_INDEX\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS =
             "Removed %1$s from %2$s successfully";

@@ -17,10 +17,10 @@ public class AddParticipantToEventCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": adds Participant with specified index to an event with another specified index.\n"
-            + "Parameters: \n"
+            + "Parameters: "
             + "PARTICIPANT_INDEX "
-            + "EVENT_INDEX "
-            + "Example: " + COMMAND_WORD + "1 2";
+            + "EVENT_INDEX\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS = "Added %1$s to %2$s successfully";
 
