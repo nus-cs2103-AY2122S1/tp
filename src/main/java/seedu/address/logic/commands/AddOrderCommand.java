@@ -46,7 +46,7 @@ public class AddOrderCommand extends Command {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof AddOrderCommand
-                && toAdd.equals(((AddOrderCommand) other).toAdd));
+                && toAdd.isSameOrder(((AddOrderCommand) other).toAdd));
     }
 
 }

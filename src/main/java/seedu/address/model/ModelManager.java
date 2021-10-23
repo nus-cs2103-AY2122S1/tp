@@ -163,7 +163,7 @@ public class ModelManager implements Model {
     }
 
     public void markTask(Task task) {
-        addressBook.markDone(task);
+        addressBook.markTask(task);
     }
 
 
