@@ -8,9 +8,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAJOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -21,11 +21,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.remark.Remark;
 
 
 /**

@@ -8,11 +8,11 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.interaction.Interaction;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.remark.Remark;
 
 /**
  * Represents a Person in ComputingConnection.

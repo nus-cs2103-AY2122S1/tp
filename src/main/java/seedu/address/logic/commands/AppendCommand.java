@@ -3,9 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -24,11 +24,11 @@ import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.remark.Remark;
 
 /**
  * Appends a new data field to the existing data fields of a person in ComputingConnection.

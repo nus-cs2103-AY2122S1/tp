@@ -13,11 +13,11 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.remark.Remark;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
