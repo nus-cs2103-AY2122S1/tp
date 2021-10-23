@@ -1,6 +1,8 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.programmer.logic.parser.CliSyntax.*;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.List;
 
@@ -18,7 +20,16 @@ public class EditLabCommand extends Command {
 
     public static final String COMMAND_WORD = "editlab";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "work in progress";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a lab for a student in the list. "
+            + "Parameters: "
+            + PREFIX_INDEX + "Index "
+            + PREFIX_LAB_TITLE + "Lab Title "
+            + PREFIX_LAB_TOTAL + "Total Score"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_INDEX + "1 "
+            + PREFIX_NAME + "1 "
+            + PREFIX_STUDENT_ID + "20";
+    ;
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Student Updated: %1$s";
 
