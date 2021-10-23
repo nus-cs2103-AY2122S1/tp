@@ -34,6 +34,7 @@ public class RejectionRateCommand extends Command {
      * Creates an RejectionRateCommand to get the specified rejection rate.
      */
     public RejectionRateCommand(Title positionTitle) {
+        requireNonNull(positionTitle);
         this.positionTitle = positionTitle;
     }
 
