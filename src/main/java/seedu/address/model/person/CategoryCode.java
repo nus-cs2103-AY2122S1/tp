@@ -16,7 +16,7 @@ public class CategoryCode {
 
     public static final String VALIDATION_REGEX = "[^\\s].*";
 
-    public static final List<String> CATEGORY_VALUES = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
+    private static final List<String> CATEGORY_VALUES = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
 
     private enum Category { ATT, FNB, COM, ACC, TPT, OTH }
 
