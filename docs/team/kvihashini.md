@@ -12,6 +12,7 @@ Given below are my contributions to the project.
 * **New Features**:
     * Added skeleton model for Groups. [\#48](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/48)
     * Added 'view student' command and wrote tests for the command. [\#47](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/47)
+    * Added 'delete group' command and wrote tests for the command. [\#89](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/89)
 * **Documentation**:
     * User Guide:
         * Added documentation for the features `delete task` and `assign task` [\#10](https://github.com/AY2122S1-CS2103T-W16-4/tp/issues/10)

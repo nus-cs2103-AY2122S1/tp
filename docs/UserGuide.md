@@ -234,19 +234,39 @@ Format: `student -de PERSON_INDEX EXAM_INDEX`
 </details>
 
 ### Grouping students
+<details markdown="1">
+<summary>
+Groups students by their names together.
+</summary>
 
-Groups students by their names together. This grouping helps to distinguish between various tuition groups.
-
-Format: `student -g GROUPNAME INDEX…​`
+Format: `student -ag INDEX…​ n/GROUPNAME`
 
 * Groups students into a group specified at `GROUPNAME`
-* `-g` refers to the group command
+* `-ag` refers to the add group command
 * You can specify as many index numbers as required.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `student -g Team2 1 3 5` creates a group "Team2" that includes students at index 1, 3 and 5.
+* `student -ag 1 3 5 n/Team2` creates a group "Team2" that includes students at index 1, 3 and 5.
+</details>
+
+### Deleting a group
+<details markdown="1">
+<summary>
+Deletes a group of students.
+</summary>
+
+Format: `student -dg INDEX`
+
+* Deletes a group of students specified at `INDEX`
+* `-dg` refers to delete group command.
+* The index refers to the index number shown in the displayed group list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `student -dg 5` deletes the group specified at the index 5.
+</details>
 
 ### Adding a task
 
