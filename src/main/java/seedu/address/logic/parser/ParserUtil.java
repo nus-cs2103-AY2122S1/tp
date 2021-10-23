@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -144,8 +143,7 @@ public class ParserUtil {
         } else if (!BirthDate.isValidBirthDate(trimmedBirthDate)) {
             throw new ParseException(BirthDate.MESSAGE_DATE_CONSTRAINTS);
         }
-        LocalDate localDate = LocalDate.parse(trimmedBirthDate);
-        return BirthDate.of(localDate);
+        return BirthDate.of(trimmedBirthDate);
     }
 
     /**

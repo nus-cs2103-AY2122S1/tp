@@ -28,7 +28,7 @@ import seedu.address.model.event.exceptions.EventNotFoundException;
 public class UniqueEventList implements Iterable<Event> {
     private final ObservableList<Event> internalList =
             FXCollections.observableList(
-                new ArrayList<>(), (Event e) -> new Observable[]{e.getParticipants(), e.getIsDone()});
+                    new ArrayList<>(), (Event e) -> new Observable[]{e.getParticipants(), e.getIsDone()});
     private final ObservableList<Event> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
