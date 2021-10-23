@@ -1,6 +1,5 @@
 ## User Guide
-contHACKS is a **desktop app for managing contacts, optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for **Teaching Assistants**, easing their workload to focus on the more important task - teaching.
-
+contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for **TAs**, easing their workload to focus on the more important task - teaching.
 
 ## Table of Contents
 * [Quick start](#quick-start)
@@ -37,11 +36,11 @@ contHACKS is a **desktop app for managing contacts, optimized for use via a Comm
 
 1. Ensure you have Java `11` or above installed in your computer
 
-1. Download the latest `contHACKS.jar` from here
+2. Download the latest `contHACKS.jar` from here
 
-1. Copy the file to the folder you want to use as the home folder
+3. Copy the file to the folder you want to use as the home folder
 
-1. Double-click the file to start the app. A GUI should appear in a few seconds
+4. Double-click the file to start the app. A GUI should appear in a few seconds
 
 <img src="images/MainApp.png" width="800px">
 
@@ -58,7 +57,7 @@ These are the key terms defined for usage of the commands:
 
 - **Telegram Handle**: Telegram username that should begin with an `@` <br> e.g. @BenIsHere, @Jerry321
 
-- **Index**: Refers to the number displayed next to the name in the displayed person list. <br> e.g. 1, 2, 3...
+- **Index**: Refers to the number displayed next to the name in the displayed contact list. <br> e.g. 1, 2, 3...
 
 - **Alias**: These are alternative words that you can use to perform the same command 
 
@@ -67,6 +66,9 @@ Refer to the image below for more information on the different components of Con
 <img src="images/Walkthrough.png" width="1000px">
 
 Notes about the command format:<br>
+
+* Command words are case insensitive <br>
+  e.g. `add`,`Add` and `ADD` can all be used to perform the same command
 
 * Words in `UPPER_CASE` are the parameters to be supplied by you<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
@@ -111,9 +113,9 @@ Command aliases: `man` `h`
 
 ***
 
-### Adding a person: `add` <a name="add"></a>
+### Adding a contact: `add` <a name="add"></a>
 
-Adds a person to the address book. 
+Adds a contact to the address book. 
 
 * Name, email and module code are **compulsory** 
 
@@ -134,9 +136,9 @@ Command alias: `a`
 
 ***
 
-### Listing all persons : `list` <a name="list"></a>
+### Listing all contacts : `list` <a name="list"></a>
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
 Format: `list`
 
@@ -169,17 +171,16 @@ Command alias: `f`
 
 Updates the information of a contact.
 
-Edits the person at the specified index in the currently viewed list.
-* At least one of the optional fields must be provided
+Edits the contact at the specified index in the currently viewed list.
+* At least one of the fields must be provided
 * Existing values will be updated to the input values
-* When editing module/remark, the existing module/remark of the person will be overwritten
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`
 
 Examples:
-* `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email address of the 1st person to be `91234567` and `ben321@gmail.com` respectively
-* `edit 2 n/John Doe m/CS2100 T09 B09`: Edits the name and module of the 2nd person to be `John Doe` and `CS2100 T09 B09` respectively
-* `edit 3 h/@BenWasHere r/Overseas`: Edits the telegram handle and remark of the 3rd person to be `@BenWasHere` and `Overseas` respectively
+* `edit 1 p/91234567 e/ben321@gmail.com`: Edits the phone number and email address of the 1st contact to be `91234567` and `ben321@gmail.com` respectively
+* `edit 2 n/John Doe m/CS2100 T09 B09`: Edits the name and module of the 2nd contact to be `John Doe` and `CS2100 T09 B09` respectively
+* `edit 3 h/@BenWasHere r/Overseas`: Edits the telegram handle and remark of the 3rd contact to be `@BenWasHere` and `Overseas` respectively
 
 Command aliases: `update` `e`
 
@@ -191,7 +192,7 @@ Command aliases: `update` `e`
 
 Delete the specified contact(s) from the address book. It can also be used to delete all contacts associated with a module code using `m/MODULE_CODE`.
 
-* Deletes the person at the specified index (inclusive)
+* Deletes the specified contact(s) at the specified index(es) (inclusive)
 * `INDEX_END` should be a positive integer greater than or equal to `INDEX_START`
 
 Format: `delete INDEX`/ `delete INDEX_START-INDEX_END` / `delete m/MODULE_CODE`
