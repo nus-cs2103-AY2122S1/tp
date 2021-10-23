@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.DayViewBase;
-import com.calendarfx.view.DetailedWeekView;
+import com.calendarfx.view.page.WeekPage;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class SchedulePanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
-    private final DetailedWeekView calendarView;
+    private final WeekPage calendarView;
 
     @FXML
     private StackPane scheduleView;
@@ -32,7 +32,7 @@ public class SchedulePanel extends UiPart<Region> {
      */
     public SchedulePanel(Calendar calendar) {
         super(FXML);
-        calendarView = new DetailedWeekView();
+        calendarView = new WeekPage();
         initialiseCalendar(calendar);
         createTimeThread();
     }
@@ -48,13 +48,12 @@ public class SchedulePanel extends UiPart<Region> {
         calendarView.getCalendarSources().addAll(calendarSource);
         calendarView.setStartTime(TimeRange.DAY_START);
         calendarView.setEndTime(TimeRange.DAY_END);
-        calendarView.setVisibleHours(15);
-        calendarView.setAdjustToFirstDayOfWeek(false);
-        calendarView.setShowScrollBar(false);
-        calendarView.setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT);
-        calendarView.setEarlyLateHoursStrategy(DayViewBase.EarlyLateHoursStrategy.HIDE);
+        calendarView.getDetailedWeekView().setVisibleHours(15);
+        calendarView.getDetailedWeekView().setAdjustToFirstDayOfWeek(false);
+        calendarView.getDetailedWeekView().setHoursLayoutStrategy(DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT);
+        calendarView.getDetailedWeekView().setEarlyLateHoursStrategy(DayViewBase.EarlyLateHoursStrategy.HIDE);
+        calendarView.getDetailedWeekView().getWeekView().setDisable(true);
         scheduleView.getChildren().setAll(calendarView);
-        scheduleView.setDisable(true);
     }
 
     /**
@@ -83,5 +82,17 @@ public class SchedulePanel extends UiPart<Region> {
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
+    }
+
+    public void goNext() {
+        calendarView.goForward();
+    }
+
+    public void goToday() {
+        calendarView.goToday();
+    }
+
+    public void goBack() {
+        calendarView.goBack();
     }
 }

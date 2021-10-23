@@ -37,12 +37,32 @@ public class CenterPanel extends UiPart<Region> {
         displayPersonListPanel();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    public boolean isShowingSchedule() {
+        return centerPanelPlaceholder.getChildren().contains(schedulePanel.getRoot());
     }
 
-    public SchedulePanel getSchedulePanel() {
-        return schedulePanel;
+    /**
+     * Shows the next week of the calendar.
+     */
+    public void goNext() {
+        displaySchedulePanel();
+        schedulePanel.goNext();
+    }
+
+    /**
+     * Shows the current week of the calendar.
+     */
+    public void goToday() {
+        displaySchedulePanel();
+        schedulePanel.goToday();
+    }
+
+    /**
+     * Shows the previous week of the calendar.
+     */
+    public void goBack() {
+        displaySchedulePanel();
+        schedulePanel.goBack();
     }
 
     /**

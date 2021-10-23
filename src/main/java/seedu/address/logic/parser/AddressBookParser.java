@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -17,9 +18,10 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.LessonDeleteCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -47,6 +49,7 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord.toLowerCase()) {
 
         case AddCommand.COMMAND_WORD:
@@ -79,8 +82,14 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ScheduleCommand.COMMAND_WORD:
-            return new ScheduleCommand();
+        case WeekCommand.COMMAND_WORD:
+            return new WeekCommand();
+
+        case NextCommand.COMMAND_WORD:
+            return new NextCommand();
+
+        case BackCommand.COMMAND_WORD:
+            return new BackCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

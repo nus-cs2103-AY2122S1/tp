@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
@@ -9,25 +9,25 @@ import java.util.Objects;
  */
 public class CommandResult {
 
+    public enum DisplayType {
+        HELP, // Help information should be shown to the user.
+        STUDENTS,
+        WEEK, // Weekly Schedule should be shown to the user.
+        NEXT, // Go forwards to the next week schedule.
+        BACK, // Go back to the previous week schedule.
+        EXIT // The application should exit.
+    }
+
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
-
-    /** Schedule should be shown to the user. */
-    private final boolean showSchedule;
-
-    /** The application should exit. */
-    private final boolean exit;
-
+    private final DisplayType displayType;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showSchedule, boolean exit) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.showSchedule = showSchedule;
-        this.exit = exit;
+    public CommandResult(String feedbackToUser, DisplayType displayType) {
+        requireAllNonNull(feedbackToUser, displayType);
+        this.feedbackToUser = feedbackToUser;
+        this.displayType = displayType;
     }
 
     /**
@@ -35,27 +35,23 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, DisplayType.STUDENTS);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
+    public DisplayType getDisplayType() {
+        return displayType;
+    }
+
     public boolean isShowHelp() {
-        return showHelp;
-    }
-
-    public boolean isShowSchedule() {
-        return showSchedule;
-    }
-
-    public boolean isShowStudentList() {
-        return !showSchedule;
+        return displayType == DisplayType.HELP;
     }
 
     public boolean isExit() {
-        return exit;
+        return displayType == DisplayType.EXIT;
     }
 
     @Override
@@ -71,19 +67,16 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && showSchedule == otherCommandResult.showSchedule
-                && exit == otherCommandResult.exit;
+                && displayType == otherCommandResult.displayType;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showSchedule, exit);
+        return Objects.hash(feedbackToUser, displayType);
     }
 
     @Override
     public String toString() {
-        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", showHelp = " + showHelp
-                + ", exit = " + exit;
+        return "CommandResult: feedbackToUser = " + feedbackToUser + '\'' + ", displayType = " + displayType.name();
     }
 }

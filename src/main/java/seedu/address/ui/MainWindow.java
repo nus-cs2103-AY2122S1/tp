@@ -19,7 +19,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.LessonAddCommand;
-import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.WeekCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -35,7 +35,7 @@ public class MainWindow extends UiPart<Stage> {
             + AddCommand.USER_TIP + "\n\n"
             + DeleteCommand.USER_TIP + "\n\n"
             + LessonAddCommand.USER_TIP + "\n\n"
-            + ScheduleCommand.USER_TIP + "\n\n"
+            + WeekCommand.USER_TIP + "\n\n"
             + ClearCommand.USER_TIP + "\n\n"
             + HelpCommand.USER_TIP + "\n\n"
             + "Have fun using TAB! \\ (๑ > ᴗ < ๑) / ♡";
@@ -183,7 +183,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleSchedule() {
-        centerPanel.displaySchedulePanel();
+        centerPanel.goToday();
+    }
+
+    private void handleNext() {
+        centerPanel.goNext();
+    }
+
+    private void handleBack() {
+        centerPanel.goBack();
     }
 
     private void handlePersonList() {
@@ -201,18 +209,34 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowHelp()) {
+            switch (commandResult.getDisplayType()) {
+
+            case HELP:
                 handleHelp();
-            }
+                break;
 
-            if (commandResult.isShowSchedule()) {
-                handleSchedule();
-            } else {
-                handlePersonList();
-            }
-
-            if (commandResult.isExit()) {
+            case EXIT:
                 handleExit();
+                break;
+
+            case WEEK:
+                handleSchedule();
+                break;
+
+            case STUDENTS:
+                handlePersonList();
+                break;
+
+            case NEXT:
+                handleNext();
+                break;
+
+            case BACK:
+                handleBack();
+                break;
+
+            default:
+                throw new AssertionError("Should not reach here.");
             }
 
             return commandResult;
