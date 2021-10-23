@@ -95,7 +95,7 @@ public class PersonTest {
         // different supergroups -> returns false
         editedAlice = new PersonBuilder(ALICE).withSuperGroups("[family friend, financial aid]").build();
         assertNotEquals(ALICE, editedAlice);
-        
+
         // different subgroups -> returns false
         Person editedBenson = new PersonBuilder(BENSON).withSubGroups("").build();
         assertNotEquals(BENSON, editedBenson);
