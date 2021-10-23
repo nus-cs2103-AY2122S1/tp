@@ -53,7 +53,7 @@ public class MainApp extends Application {
 
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     // TODO: Remove hardcoded password by end of v1.3b;
-    private static String INPUT_PASSWORD;
+    private String input_password;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
     protected Ui ui;
@@ -84,9 +84,9 @@ public class MainApp extends Application {
         initLogging(config);
 
         if (FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
-            ui = new LoginScreen(this, userPrefs);
+            ui = new LoginScreen(this, false);
         } else {
-            ui = new LoginScreen(this, null);
+            ui = new LoginScreen(this, true);
         }
     }
 
@@ -100,14 +100,7 @@ public class MainApp extends Application {
         ReadOnlyAddressBook initialData;
 
         try {
-            if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-                storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
-                FileUtil.createFile(userPrefs.getEncryptedFilePath());
-                cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
-            } else {
-                cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
-            }
+            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             addressBookOptional = storage.readAddressBook();
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
             FileUtil.deleteFile(storage.getAddressBookFilePath());
@@ -224,11 +217,21 @@ public class MainApp extends Application {
     }
 
     public void logIn(String input) throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        if (!FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
+            logger.info("Data file not found. Will be starting with a sample AddressBook");
+            try {
+                storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
+                FileUtil.createFile(userPrefs.getEncryptedFilePath());
+                cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
+            } catch (IOException | InvalidKeyException e) {
+                e.printStackTrace();
+            }
+        }
         try {
-            cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
             cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             FileUtil.deleteFile(storage.getAddressBookFilePath());
-            MainApp.INPUT_PASSWORD = input;
+            input_password = input;
             afterLogIn();
         } catch (InvalidAlgorithmParameterException e) {
             e.printStackTrace();
@@ -240,11 +243,15 @@ public class MainApp extends Application {
     }
 
     public void afterLogIn() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(INPUT_PASSWORD), CIPHER_TRANSFORMATION);
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input_password), CIPHER_TRANSFORMATION);
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         ui = new UiManager(logic);
         ui.start(stage);
+    }
+
+    public void setInputPassword(String password) {
+        input_password = password;
     }
 
     @Override

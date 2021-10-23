@@ -24,11 +24,11 @@ public class LoginScreen implements Ui {
     private Button sendButton;
     private Scene scene;
     private MainApp app;
-    private UserPrefs userPrefs;
+    private boolean isNew;
 
-    public LoginScreen(MainApp app, UserPrefs userPrefs) {
+    public LoginScreen(MainApp app, boolean isNew) {
         this.app = app;
-        this.userPrefs = userPrefs;
+        this.isNew = isNew;
     }
 
     @Override
@@ -81,13 +81,12 @@ public class LoginScreen implements Ui {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         userInput.setOnAction((event) ->  {
+            if (isNew) {
+                app.setInputPassword(userInput.getText());
+            }
             try {
                 app.logIn(userInput.getText());
-            } catch (UnsupportedPasswordException e) {
-                e.printStackTrace();
-            } catch (NoSuchPaddingException e) {
-                e.printStackTrace();
-            } catch (NoSuchAlgorithmException e) {
+            } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
             userInput.clear();
