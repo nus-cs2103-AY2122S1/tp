@@ -9,12 +9,14 @@ import java.util.Set;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.appointment.Duration;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
 import seedu.plannermd.model.person.BirthDate;
 import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
+import seedu.plannermd.model.person.Remark;
 import seedu.plannermd.model.tag.Tag;
 
 /**
@@ -140,7 +142,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String risk} into an {@code Risk}.
+     * Parses a {@code String risk} into a {@code Risk}.
      * Leading and trailing whitespaces will be trimmed.
      * Optional Risk field accepts an empty string as UNCLASSIFIED.
      *
@@ -156,5 +158,45 @@ public class ParserUtil {
             throw new ParseException(Risk.MESSAGE_CONSTRAINTS);
         }
         return new Risk(trimmedAndUpperCaseRisk);
+    }
+
+    /**
+     * Parses a {@code String remark} into a {@code Remark}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Optional Remark field accepts an empty string as an empty remark.
+     *
+     * @throws ParseException if the given {@code remark} is invalid.
+     */
+    public static Remark parseRemark(String remark) throws ParseException {
+        requireNonNull(remark);
+        String trimmedRemark = remark.trim();
+        if (trimmedRemark.isEmpty()) {
+            return Remark.getEmptyRemark();
+        }
+        return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String duration} into a {@code Duration}.
+     * Leading and trailing whitespaces will be trimmed.
+     * Optional Duration field accepts an empty string as a default duration of 10 minutes.
+     *
+     * @throws ParseException if the given {@code duration} is invalid.
+     */
+    public static Duration parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        String trimmedDuration = duration.trim();
+        if (trimmedDuration.isEmpty()) {
+            return Duration.getDefaultDuration();
+        }
+        try {
+            int trimmedDurationAsInt = Integer.parseInt(trimmedDuration);
+            if (!Duration.isValidDuration(trimmedDurationAsInt)) {
+                throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+            }
+            return new Duration(trimmedDurationAsInt);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+        }
     }
 }
