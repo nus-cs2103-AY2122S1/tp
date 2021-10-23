@@ -25,8 +25,8 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 
 3. Copy the file to the folder you want to use as the _home folder_ for your gitGud application.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+   ![Ui](images/ui-snapshots/startup.png)
 
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
@@ -50,7 +50,7 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `get --game GAME_NAME`, `GAME_NAME` is a parameter which can be used as `get --game CSGO`.
+  e.g. in `get --game GAME_ID`, `GAME_ID` is a parameter which can be used as `get --game CSGO`.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
@@ -76,6 +76,12 @@ Examples:
 * `friend --add tau_bar --name Taufiq` Adds a brand-new friend into the friends list with the identifier 'tau-bar' and
   has the real-life name 'Taufiq'.
 
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-add.png)
+
+<ins>gitGud after adding a friend.</ins>
+
 #### Deleting a friend: `friend --delete`
 
 Deletes a friend from gitGud’s friend’s list using gitGud’s unique friend identifier.
@@ -86,7 +92,13 @@ Format: `friend --delete FRIEND_ID`
 * The `FRIEND_ID` must currently exist in the database.
 
 Examples:
-* `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
+* `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database.
+
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-delete.png)
+
+<ins>gitGud after deleting a friend.</ins>
 
 #### Link games with a friend: `friend --link`
 
@@ -103,6 +115,12 @@ Examples:
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
   to the friend with the gitGud FRIEND_ID ‘Draco’.
 
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-link.png)
+
+<ins>gitGud after linking a friend to a game.</ins>
+
 #### Unlinking a game from a friend: `friend --unlink`
 
 Removes the link between a friend and a game.
@@ -115,19 +133,31 @@ Format: `friend --unlink FRIEND_ID --game GAME_ID`
 Examples:
 * `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_ID 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-unlink.png)
+
+<ins>gitGud after unlinking a friend from a game.</ins>
+
 #### Getting a single friend's complete data: `get --friend`
 
 Takes a look at a particular friend's complete data by searching their `FRIEND_ID`. A friend's complete data includes:
 * List of games the friend plays
 * In-game username for each game
 
-Format: `get [--friend] FRIEND_ID`
+Format: `friend --get FRIEND_ID`
 * The `FRIEND_ID` must currently exist in the database
 
 Examples:
-* `get --friend Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his username for each game
-* `get kev` Gets the complete data for friend "kev"
+* `friend --get Draco` Gets the complete data for friend "Draco", which includes the list of games he plays and his 
+  username for each game
+* `friend --get kev` Gets the complete data for friend "kev"
 
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-get.png)
+
+<ins>gitGud after getting a friend from gitGud.</ins>
 
 #### Listing multiple friends data: `friend --list`
 
@@ -144,7 +174,11 @@ Examples:
 * `friend --list` or  `friend --list` Lists all friends stored in gitGud
 * `friend --list ta` Lists all friends stored in gitGud that have `ta` in their name
 
-![result for 'game --list'](images/UiListFriend.png)
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-list.png)
+
+<ins>gitGud after listing friends with the keyword.</ins>
 
 #### Scheduling a friends: `friend --schedule`
 
@@ -171,6 +205,12 @@ Examples:
 * `friend --schedule Draco --period 1800 2200 2 --free 1` Schedules "Draco" as free from 1800 to 2200 on Tuesday.
 * `friend --schedule Draco --period 1200 0000 7 --free 0` Schedules "Draco" as busy from 1200 to 0000 (midnight) on Sunday.
 
+Snapshot:
+
+![Ui](images/ui-snapshots/friend-schedule.png)
+
+<ins>gitGud after scheduling a friend's availability.</ins>
+
 ### Game commands
 
 Commands that involve adding, editing, deleting or viewing of games in your gitGud friend list.
@@ -187,29 +227,47 @@ Format: `game --add GAME_ID`
 Examples:
 * `game --add Valorant` Adds a brand-new game into the game list with the unique GAME_ID 'Valorant'.
 
+Snapshot:
+
+![Ui](images/ui-snapshots/game-add.png)
+
+<ins>gitGud after adding a game.</ins>
+
 #### Deleting a game: `game --delete`
 
 Deletes a game from the gitGud game list.
 
-Format: `game --delete GAME_NAME`
+Format: `game --delete GAME_ID`
 
 Examples:
 * `game --delete Valorant` Deletes the game record ‘Valorant’ from the game list if it exists.
 
-#### Getting a single game's complete data: `get --game`
+Snapshot:
+
+![Ui](images/ui-snapshots/game-delete.png)
+
+<ins>gitGud after deleting a game.</ins>
+
+#### Getting a single game's complete data: `game --get`
 
 Gets all the relevant information for a game that was previously added, this includes:
 * All the friends (represented by their `FRIEND_ID`) that play the game
 
-Format: `get --game GAME_NAME`
-* The `GAME_NAME` must currently exist in the database
+Format: `game --get GAME_ID`
+* The `GAME_ID` must currently exist in the database
 
 Examples:
 * `get --game CSGO` Gets all the relevant information for the game "CSGO". This includes all the friends in your database that play the game
 
+Snapshot:
+
+![Ui](images/ui-snapshots/game-get.png)
+
+<ins>gitGud after getting a game.</ins>
+
 #### Listing multiple games data: `game --list`
 
-Lists all games stored in gitGud whose friend id contains any of the given keywords.
+Lists all games stored in gitGud whose game id contains any of the given keywords.
 
 Format: `game --list [KEYWORD]`
 
@@ -222,7 +280,11 @@ Examples:
 * `game --list` Lists all games stored in gitGud
 * `game --list Valo` Lists all friends stored in gitGud that have `Valo` in their name
 
-![result for 'game --list'](images/UiListGame.png)
+Snapshot:
+
+![Ui](images/ui-snapshots/game-list.png)
+
+<ins>gitGud after getting a game.</ins>
 
 ### Other commands
 
@@ -230,11 +292,15 @@ Miscellaneous useful commands for the user.
 
 #### Viewing help: `help`
 
-Shows a message explaning how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows a message explaining how to access the help page.
 
 Format: `help`
+
+Snapshot:
+
+![Ui](images/ui-snapshots/help.png)
+
+<ins>gitGud after running help command.</ins>
 
 #### Exiting the program : `exit`
 
