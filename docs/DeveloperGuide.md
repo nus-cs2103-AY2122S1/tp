@@ -239,7 +239,7 @@ _{more aspects and alternatives to be added}_
 #### Current Implementation
 {:.no_toc}
 
-An appointment with a client is currently represented by the `appointment` field under `Person`, 
+An appointment with a client is currently represented by the `appointment` field under `Person`,
 which is represented by an `Appointment` object.
 
 The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
