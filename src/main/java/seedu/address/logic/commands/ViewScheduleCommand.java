@@ -69,7 +69,7 @@ public class ViewScheduleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         if (index != -1) {
-
+            return executeIndex(model);
         }
 
 
