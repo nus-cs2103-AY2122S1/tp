@@ -39,7 +39,7 @@ public class ShowAssessmentCommand extends Command {
         requireNonNull(model);
 
         if (!model.hasAssessment(toDisplay)) {
-            throw new CommandException(String.format(MESSAGE_NONEXISTENT_ASSESSMENT, toDisplay.getValue()));
+            throw new CommandException(String.format(MESSAGE_NONEXISTENT_ASSESSMENT, toDisplay.getName()));
         }
 
         Assessment assessmentFound = model.getAssessment(toDisplay);
@@ -47,7 +47,7 @@ public class ShowAssessmentCommand extends Command {
 
         AssessmentStatistics statistics = new AssessmentStatistics(assessmentFound);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, assessmentFound.getValue()), statistics.toHistogram());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, assessmentFound.getName()), statistics.toHistogram());
     }
 
     @Override

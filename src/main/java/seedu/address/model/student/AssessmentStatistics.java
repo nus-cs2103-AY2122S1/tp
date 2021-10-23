@@ -85,7 +85,7 @@ public class AssessmentStatistics {
             }
         }
 
-        // Should not happen since a Score must be between the minimum and maximum value (inclusive)
+        // Should not happen since a Score must be between the minimum and maximum name (inclusive)
         assert false;
 
         return null;
@@ -119,7 +119,7 @@ public class AssessmentStatistics {
      * Returns a histogram representing the scores for the assessment.
      */
     public Chart toHistogram() {
-        return ChartUtil.createBarChart(assessment.getValue(), CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL,
+        return ChartUtil.createBarChart(assessment.getName(), CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL,
                 getScoreDistribution());
     }
 

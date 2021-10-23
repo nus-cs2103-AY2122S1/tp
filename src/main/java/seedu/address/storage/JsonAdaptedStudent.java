@@ -68,7 +68,7 @@ class JsonAdaptedStudent {
                 .map(group -> group.name)
                 .collect(Collectors.toList()));
         assessments.addAll(source.getScores().keySet().stream()
-                .map(Assessment::getValue)
+                .map(Assessment::getName)
                 .collect(Collectors.toList()));
     }
 
@@ -97,7 +97,7 @@ class JsonAdaptedStudent {
         final Map<Assessment, Score> modelScores = new HashMap<>();
 
         assessmentList.stream()
-                .filter(assessment -> assessments.contains(assessment.getValue()))
+                .filter(assessment -> assessments.contains(assessment.getName()))
                 .forEach(assessment -> modelScores.put(assessment, assessment.scores.get(modelId)));
 
         final List<Group> modelGroups = groupList.stream()

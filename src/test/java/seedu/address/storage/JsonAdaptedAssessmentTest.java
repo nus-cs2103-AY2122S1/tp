@@ -13,7 +13,7 @@ import seedu.address.model.student.Assessment;
 
 public class JsonAdaptedAssessmentTest {
     // TODO: Make TypicalAssessments, then test with those
-    private static final String VALID_ASSESSMENT = BENSON.getScores().keySet().iterator().next().value;
+    private static final String VALID_ASSESSMENT = BENSON.getScores().keySet().iterator().next().name;
     private static final String INVALID_ASSESSMENT = " ";
 
     @Test

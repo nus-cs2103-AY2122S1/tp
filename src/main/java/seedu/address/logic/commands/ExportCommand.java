@@ -89,7 +89,7 @@ public class ExportCommand extends Command {
 
     private void appendAssessmentHeaders(StringBuilder writeContent, List<Assessment> assessments) {
         for (Assessment assessment : assessments) {
-            writeContent.append(assessment.value).append(",");
+            writeContent.append(assessment.name).append(",");
         }
     }
 

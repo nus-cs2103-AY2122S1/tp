@@ -30,7 +30,7 @@ public class AssessmentBuilder {
      */
     public AssessmentBuilder(Assessment assessmentToCopy) {
         scores = assessmentToCopy.getScores();
-        value = assessmentToCopy.getValue();
+        value = assessmentToCopy.getName();
     }
 
     /**
