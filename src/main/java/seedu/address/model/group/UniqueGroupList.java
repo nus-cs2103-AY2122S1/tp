@@ -3,6 +3,7 @@ package seedu.address.model.group;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.id.UniqueId;
 
 
 /**
@@ -97,6 +99,21 @@ public class UniqueGroupList implements Iterable<Group> {
         }
 
         internalList.setAll(groups);
+    }
+
+    /**
+     * Removes the personId from all groups
+     * @param toRemove id to remove
+     */
+    public void cleanUpPersonId(UniqueId toRemove) {
+        List<Group> groups = new ArrayList<>(internalList);
+        for (int i = 0; i < groups.size(); i++) {
+            Group current = groups.get(i);
+            if (current.containsPersonId(toRemove)) {
+                Group withoutId = current.removePersonId(toRemove);
+                internalList.set(i , withoutId);
+            }
+        }
     }
 
     /**

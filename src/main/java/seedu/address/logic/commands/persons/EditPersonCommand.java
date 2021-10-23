@@ -111,9 +111,10 @@ public class EditPersonCommand extends Command {
         Set<UniqueId> updatedAssignedTaskIds = personToEdit.getAssignedTaskIds(); // not allowed to be edited here
         NoOverlapLessonList lessonList = personToEdit.getLessonsList();
         List<Exam> exams = personToEdit.getExams();
+        Set<UniqueId> assignedGroupIds = personToEdit.getAssignedGroupIds();
 
         Person newPerson = new Person(updatedName, updatedPhone, updatedEmail,
-                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList, exams);
+                updatedAddress, updatedTags, updatedAssignedTaskIds, lessonList, exams, assignedGroupIds);
         newPerson = editPersonDescriptor.updateLessons(newPerson);
         newPerson = editPersonDescriptor.updateExams(newPerson);
         return newPerson;

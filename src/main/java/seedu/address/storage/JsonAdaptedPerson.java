@@ -161,8 +161,10 @@ class JsonAdaptedPerson {
             modelExams.add(e.toModelType());
         }
 
+        // TODO add storage for groups....
+        Set<UniqueId> groups = new HashSet<>();
         return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, modelExams);
+                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, modelExams, groups);
     }
 
 }

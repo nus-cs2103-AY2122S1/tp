@@ -44,18 +44,26 @@ public class AddGroupCommand extends Command {
 
         List<Person> lastShownList = model.getFilteredPersonList();
         Set<UniqueId> personsId = new HashSet<>();
-
+        ArrayList<Person> personsToReplace = new ArrayList<>();
+        ArrayList<Person> personsWithGroupId = new ArrayList<>();
         for (Index index : personsIndex) {
             if (index.getZeroBased() >= lastShownList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
-            personsId.add(lastShownList.get(index.getZeroBased()).getId());
+            Person person = lastShownList.get(index.getZeroBased());
+            assert !person.hasGroupId(toAdd.getId()); // its a new group, there should not be an exisitng id!
+            personsId.add(person.getId());
+            personsToReplace.add(person);
+            personsWithGroupId.add(person.addGroupId(toAdd.getId()));
         }
 
         assert personsId.size() == personsIndex.size(); // all indexes are added with distinct ids.
-
+        // update persons
+        for (int i = 0; i < personsToReplace.size(); i++) {
+            model.setPerson(personsToReplace.get(i), personsWithGroupId.get(i));
+        }
+        // add group!
         Group withIds = toAdd.updateAssignedPersonIds(personsId);
-
         model.addGroup(withIds);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, withIds));

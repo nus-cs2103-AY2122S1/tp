@@ -84,6 +84,10 @@ public class Group implements HasUniqueId, TaskAssignable {
         return id;
     }
 
+    public Set<UniqueId> getAssignedPersonIds() {
+        return Collections.unmodifiableSet(assignedPersonIds);
+    }
+
     /**
      * Checks if this group contains the person id.
      *

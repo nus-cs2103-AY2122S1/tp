@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.id.UniqueId;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
@@ -109,10 +110,15 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
+     * Cleans up all references to this person.
+     *
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        UniqueId personId = key.getId();
         persons.remove(key);
+        assert !persons.contains(key); // assert removal first, before cleaning up.
+        groups.cleanUpPersonId(personId);
     }
 
     //// task-level operations
