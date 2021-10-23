@@ -1,5 +1,7 @@
 package seedu.address.commons.core.index;
 
+import java.util.Comparator;
+
 /**
  * Represents a zero-based or one-based index.
  *
@@ -32,6 +34,24 @@ public class Index {
     }
 
     /**
+     * Checks if current index is greater than the given index
+     * @param other to compare with
+     * @return true if this is greater than the other index
+     */
+    public boolean isGreaterThan(Index other) {
+        return zeroBasedIndex > other.getZeroBased();
+    }
+
+    /**
+     * Checks if current index is lesser than the given index
+     * @param other to compare with
+     * @return true if this is lesser than the other index
+     */
+    public boolean isLesserThan(Index other) {
+        return zeroBasedIndex < other.getZeroBased();
+    }
+
+    /**
      * Creates a new {@code Index} using a zero-based index.
      */
     public static Index fromZeroBased(int zeroBasedIndex) {
@@ -50,5 +70,22 @@ public class Index {
         return other == this // short circuit if same object
                 || (other instanceof Index // instanceof handles nulls
                 && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
+    }
+
+    /**
+     * Comparator class for sorting index in descending order
+     */
+    public static class SortDescending implements Comparator<Index> {
+
+        @Override
+        public int compare(Index first, Index second) {
+            if (first.isGreaterThan(second)) {
+                return -1;
+            } else if (first.isLesserThan(second)) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
     }
 }

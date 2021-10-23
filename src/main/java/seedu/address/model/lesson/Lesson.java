@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Represents a lessons that has a day, timing and subject to be taught
  */
-public class Lesson {
+public class Lesson implements Comparable<Lesson> {
 
     // Scheduling fields
     private final Timeslot timeslot;
@@ -18,7 +18,6 @@ public class Lesson {
 
     // Identity fields
     private final Subject subject;
-
     /**
      * Every field must be present and not null.
      */
@@ -48,7 +47,7 @@ public class Lesson {
      * @return true if lessons do overlap, false otherwise
      */
     public boolean doLessonsOverlap(Lesson other) {
-        if (!dayOfWeek.equals(other.dayOfWeek)) {
+        if (other == null || !dayOfWeek.equals(other.dayOfWeek)) {
             return false;
         }
 
@@ -93,4 +92,14 @@ public class Lesson {
     }
 
 
+    @Override
+    public int compareTo(Lesson o) {
+        if (dayOfWeek.compareTo(o.dayOfWeek) != 0) {
+            // if not same day, judge based on day
+            return dayOfWeek.compareTo(o.dayOfWeek);
+        } else {
+            // judge based on timeslot
+            return timeslot.compareTo(o.timeslot);
+        }
+    }
 }

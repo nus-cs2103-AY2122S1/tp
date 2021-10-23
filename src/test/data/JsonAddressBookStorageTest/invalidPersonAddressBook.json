@@ -1,8 +1,10 @@
 {
   "persons": [ {
+    "uniqueId": "a7026685-0405-4223-ba12-e434360de7c1",
     "name": "Person with invalid name field: Ha!ns Mu@ster",
     "phone": "9482424",
     "email": "hans@example.com",
     "address": "4th street"
-  } ]
+  } ],
+  "tasks" : []
 }

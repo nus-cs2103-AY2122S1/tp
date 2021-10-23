@@ -1,11 +1,15 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.group.Group;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -13,6 +17,12 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+
+    /** {@code Predicate} that always evaluate to true */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -84,4 +94,76 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a task with the same identity as {@code task} exists in the address book.
+     */
+    boolean hasTask(Task task);
+
+    /**
+     * Deletes the given task.
+     * The task must exist in the address book.
+     */
+    void deleteTask(Task target);
+
+    /**
+     * Adds the given task.
+     * {@code task} must not already exist in the address book.
+     */
+    void addTask(Task task);
+
+    /**
+     * Replaces the given task {@code target} with {@code editedTask}.
+     * {@code target} must exist in the address book.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
+     */
+    void setTask(Task target, Task editedTask);
+
+    /** Returns an unmodifiable view of the filtered task list */
+    ObservableList<Task> getFilteredTaskList();
+
+    /**
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     */
+    boolean hasGroup(Group group);
+
+    /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group group);
+
+    /**
+     * Adds the given group.
+     * {@code group} must not already exist in the address book.
+     */
+    void addGroup(Group group);
+
+    /**
+     * Replaces the given group {@code target} with {@code editedGroup}.
+     * {@code target} must exist in the address book.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the address book.
+     */
+    void setGroup(Group group, Group editedGroup);
+
+    /** Returns an unmodifiable view of the filtered group list */
+    ObservableList<Group> getFilteredGroupList();
+
+    /**
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Gets the sorted lessons with its corresponding attendees
+     * @return
+     */
+    List<LessonWithAttendees> getSortedLessonsWithAttendees();
 }

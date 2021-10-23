@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represent the subject or topic of a lesson
- * Guarantees: immutable, is properly formatted as declared in {@link #isValidName(String)}
+ * Guarantees: immutable, is properly formatted as declared in {@link #isValidSubject(String)}
  */
 public class Subject {
 
@@ -26,14 +26,18 @@ public class Subject {
      */
     public Subject(String subjectName) {
         requireNonNull(subjectName);
-        checkArgument(isValidName(subjectName), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidSubject(subjectName), MESSAGE_CONSTRAINTS);
         this.subjectName = subjectName;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidSubject(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 

@@ -4,36 +4,58 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.id.HasUniqueId;
+import seedu.address.model.id.UniqueId;
+
 /**
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task {
-    // Identity fields
-    private final Name name;
+public class Task implements HasUniqueId {
+    // The task description
+    private final Description description;
 
-    // Data fields
+    // The deadline of the task
     private final Deadline deadline;
+
+    // The id of the task
+    private final UniqueId id;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Deadline deadline) {
-        requireAllNonNull(name, deadline);
-        this.name = name;
+    public Task(Description description, Deadline deadline) {
+        this.id = UniqueId.generateId(this);
+        requireAllNonNull(description, deadline, id);
+        this.description = description;
         this.deadline = deadline;
     }
 
-    public Name getName() {
-        return name;
+    /**
+     * Every field must be present and not null.
+     */
+    public Task(Description description, Deadline deadline, UniqueId id) {
+        requireAllNonNull(description, deadline, id);
+        this.description = description;
+        this.deadline = deadline;
+        this.id = id;
+        id.setOwner(this);
+    }
+
+    public Description getDescription() {
+        return description;
     }
 
     public Deadline getDeadline() {
         return deadline;
     }
 
+    public UniqueId getId() {
+        return id;
+    }
+
     /**
-     * Returns true if both tasks have the same name.
+     * Returns true if both tasks have the same description and deadline.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameTask(Task otherTask) {
@@ -42,11 +64,12 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getName().equals(getName());
+                && otherTask.getDescription().equals(getDescription())
+                && otherTask.getDeadline().equals(getDeadline());
     }
 
     /**
-     * Returns true if both tasks have the same identity and data fields.
+     * Returns true if both tasks have the same id, description and deadline.
      * This defines a stronger notion of equality between two persons.
      */
     @Override
@@ -60,24 +83,19 @@ public class Task {
         }
 
         Task otherTask = (Task) other;
-        return otherTask.getName().equals(getName())
-                && otherTask.getDeadline().equals(getDeadline());
+        return otherTask.getId().equals(getId()) && isSameTask(otherTask);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, deadline);
+        return Objects.hash(description, deadline, id);
     }
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append("; Deadline: ")
-                .append(getDeadline())
-                .append("; Completion Status: ");
-
-        return builder.toString();
+        return getDescription()
+                + "; Deadline: "
+                + getDeadline();
     }
 }

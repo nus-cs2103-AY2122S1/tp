@@ -16,6 +16,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_DAY = new Prefix("d/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
 
+    /* Prefixes for tasks */
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("n/");
+    public static final Prefix PREFIX_DEADLINE = new Prefix("d/");
+
     public static final String MONDAY = "mon";
     public static final String TUESDAY = "tue";
     public static final String WEDNESDAY = "wed";
