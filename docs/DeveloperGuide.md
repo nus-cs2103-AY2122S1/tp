@@ -152,7 +152,7 @@ The `Storage` component,
 
 ### Encryption component
 
-**API** : `Encryption.java`
+**API** : [`Encryption.java`](https://github.com/AY2122S1-CS2103T-W13-2/tp/blob/master/src/main/java/seedu/address/encryption/Encryption.java)
 
 <img src="images/EncryptionClassDiagram.png" width="200" />
 
