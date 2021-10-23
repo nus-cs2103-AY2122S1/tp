@@ -38,7 +38,7 @@ public class LessonDeleteCommand extends UndoableCommand {
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson for student %2$s: %1$s.";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson for student %1$s:\n%2$s";
 
     private final Index index;
     private final Index lessonIndex;
