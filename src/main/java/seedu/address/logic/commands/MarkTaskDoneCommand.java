@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -46,7 +45,8 @@ public class MarkTaskDoneCommand extends Command {
 
             Task taskToMarkCompleted = lastShownList.get(targetIndex.getZeroBased());
             model.completeTask(taskToMarkCompleted);
-            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted));
+            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted))
+                    .append("\n");
         }
 
         return new CommandResult(result.toString());

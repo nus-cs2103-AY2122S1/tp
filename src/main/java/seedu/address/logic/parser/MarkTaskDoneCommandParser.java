@@ -20,7 +20,7 @@ public class MarkTaskDoneCommandParser {
      */
     public MarkTaskDoneCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        List<String> lst = List.of(args.split(" "));
+        List<String> lst = List.of(args.trim().split(" "));
         List<Index> taskIndexes = new ArrayList<>();
 
         try {
