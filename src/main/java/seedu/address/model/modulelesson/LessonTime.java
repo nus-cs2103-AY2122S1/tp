@@ -11,7 +11,7 @@ public class LessonTime {
     public static final String MESSAGE_CONSTRAINTS =
             "Time should only contain numbers in HH:MM format";
     public static final String VALIDATION_REGEX = "([01]?[0-9]|2[0-3]):[0-5][0-9]";
-    private final LocalTime value;
+    public final LocalTime value;
 
     /**
      * Represents a moduleLesson's time in the address book.

@@ -45,7 +45,9 @@ public class ModuleLessonCard extends UiPart<Region> {
         Set<LessonCode> lessonCodeSet = moduleLesson.getModuleCode().getLessonCodes();
         lessonCodeSet.forEach(lc -> this.lessonCodes.getChildren().add(new Label(lc.toString())));
         lessonDay.setText(moduleLesson.getDay().toString());
-        lessonTime.setText(moduleLesson.getTime().toString());
+        String formattedLessonTime = String.format("%s - %s", moduleLesson.getLessonStartTime().toString(),
+                moduleLesson.getLessonEndTime().toString());
+        lessonTime.setText(formattedLessonTime);
         remark.setText(moduleLesson.getRemark().value);
     }
 
