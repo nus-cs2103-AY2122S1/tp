@@ -16,7 +16,9 @@ import seedu.address.model.position.Title;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Position> PREDICATE_SHOW_ALL_POSITIONS = unused -> true;
     Predicate<Applicant> PREDICATE_SHOW_ALL_APPLICANTS = unused -> true;
@@ -47,11 +49,6 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
-     * Returns the user prefs' position book file path.
-     */
-    Path getPositionBookFilePath();
-
-    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
@@ -61,7 +58,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -76,12 +75,6 @@ public interface Model {
     void deletePerson(Person target);
 
     /**
-     * Deletes the given applicant.
-     * The applicant must exist in the address book.
-     */
-    void deleteApplicant(Applicant target);
-
-    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
@@ -90,6 +83,7 @@ public interface Model {
     /**
      * Adds a new applicant to MrTechRecruiter with the given particulars.
      * The intended applicant must not already exist in the applicant book.
+     *
      * @return the newly added applicant.
      */
     Applicant addApplicantWithParticulars(ApplicantParticulars applicantParticulars);
@@ -106,13 +100,16 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
+
     /**
-     * Replaces the given applicant {@code target} with {@code editedApplicant}.
-     * {@code target} must exist in MrTechRecruiter.
-     * The applicant identity of {@code editedApplicant} must not be the same as another existing applicant in
-     * MrTechRecruiter.
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
      */
-    void setApplicant(Applicant target, Applicant editedApplicant);
+    void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Position related methods =============================================================
 
     /**
      * Replaces the given position {@code target} with {@code editedPosition}.
@@ -122,53 +119,99 @@ public interface Model {
      */
     void setPosition(Position position, Position editedPosition);
 
-
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
-
-    /** Returns an unmodifiable view of the filtered applicant list */
+    /**
+     * Returns an unmodifiable view of the filtered applicant list
+     */
     ObservableList<Applicant> getFilteredApplicantList();
 
-    /** Returns an unmodifiable view of the filtered position list */
+    /**
+     * Returns an unmodifiable view of the filtered position list
+     */
     ObservableList<Position> getFilteredPositionList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
+     * Adds the given position.
+     * {@code position} must not already exist in the position book.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void addPosition(Position position);
 
     /**
-     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Deletes the given position.
+     * The position must exist in the position book.
      */
-    void updateFilteredApplicantList(Predicate<Applicant> predicate);
+    void deletePosition(Position position);
 
-    //=========== Filtered Position List Accessors =============================================================
     /**
-     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
+     * Returns the user prefs' position book file path.
      */
-    void updateFilteredPositionList(Predicate<Position> predicate);
+    Path getPositionBookFilePath();
 
     /**
      * Replaces position book data with the data in {@code positionBook}.
      */
     void setPositionBook(ReadOnlyPositionBook positionBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredPositionList(Predicate<Position> predicate);
+
+    //=========== Applicant related methods =============================================================
+    /**
+     * Replaces the given applicant {@code target} with {@code editedApplicant}.
+     * {@code target} must exist in MrTechRecruiter.
+     * The applicant identity of {@code editedApplicant} must not be the same as another existing person in
+     * MrTechRecruiter.
+     */
+    void setApplicant(Applicant target, Applicant editedApplicant);
+
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyPositionBook getPositionBook();
 
     // Position related methods
 
     boolean hasPosition(Position position);
 
+    // Position related methods
+
     boolean hasPositionWithTitle(Title title);
 
-    void addPosition(Position toAdd);
-
-    void deletePosition(Position positionToDelete);
+    /**
+     * Deletes the given applicant.
+     * The applicant must exist in the address book.
+     */
+    void deleteApplicant(Applicant target);
 
     // Applicant related methods ==============================================================================
     Path getApplicantBookFilePath();
+
+    /**
+     * Calculates the rejection rate of a given position.
+     * @param title The title of the position to be calculated.
+     * @return The rejection rate of the specified position.
+     */
+    float calculateRejectionRate(Title title);
+
+    /**
+     * Replaces position book data with the data in {@code positionBook}.
+     */
+    void setApplicantBook(ReadOnlyApplicantBook applicantBook);
+
+    /** Returns the ApplicantBook */
+    ReadOnlyApplicantBook getApplicantBook();
+
+    /**
+     * Updates the filter of the filtered position list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredApplicantList(Predicate<Applicant> predicateShowAllApplicants);
+
+    void updateApplicantsWithPosition(Position positionToEdit, Position editedPosition);
 }

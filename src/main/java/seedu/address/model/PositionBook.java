@@ -17,6 +17,13 @@ public class PositionBook implements ReadOnlyPositionBook {
 
     private final UniquePositionList positions;
 
+    /*
+     * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
+     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
+     *
+     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
+     *   among constructors.
+     */
     {
         positions = new UniquePositionList();
     }
@@ -75,9 +82,7 @@ public class PositionBook implements ReadOnlyPositionBook {
         positions.add(p);
     }
 
-    /**
-     * Searches for a position by its {@code title}.
-     */
+    @Override
     public Position getPositionByTitle(Title title) {
         requireNonNull(title);
         return positions.getPositionByTitle(title);
@@ -103,6 +108,7 @@ public class PositionBook implements ReadOnlyPositionBook {
         positions.remove(key);
     }
 
+
     //// util methods
 
     @Override
@@ -127,5 +133,4 @@ public class PositionBook implements ReadOnlyPositionBook {
     public int hashCode() {
         return positions.hashCode();
     }
-
 }

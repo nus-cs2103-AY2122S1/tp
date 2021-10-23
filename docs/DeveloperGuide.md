@@ -67,7 +67,7 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
-### UI component
+### UI component [need changes]
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
@@ -84,7 +84,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
-### Logic component
+### Logic component [need changes]
 
 **API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
@@ -153,6 +153,37 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Filter applicants feature
+
+#### Implementation
+
+The filter feature is achieved using the functionality of the `FilteredList` class built into JavaFX,
+which filters its contents based on a specified `Predicate`.  
+This `Predicate` is constructed from the filters specified whenever the `filter-applicant` command is called.
+
+Given below is an example usage scenario of the applicant filter feature.
+
+*{More to be added}*
+
+#### Rationale for implementation
+
+The `Descriptor` pattern (used similarly in features such as the editing of applicants) comes in handy whenever its corresponding command accepts a variable number of arguments & unspecified arguments are assumed to be ignored.
+For instance, the edit applicant feature accepts a variable number of fields to be edited, and leaves all unspecified fields untouched.  
+
+The filter feature fits in this category, as the user should be able to specify a variable number of filtering criteria,
+and unspecified criteria should be left out of the filter.
+Hence, the pattern is implemented here in `FilterApplicantDescriptor`, which is used to construct the `Predicate`.
+It is also used to in the validation of the filtering criteria.
+
+*{More to be added}*
+
+#### Alternatives considered
+
+- Use of the Java Streams API to filter the applicants using chained calls to `Stream#filter`
+  - Does not make good use of the in-built functionality of `FilteredList`
+
+*{More to be added}*
 
 ### \[Proposed\] Undo/redo feature
 
@@ -238,6 +269,14 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Finding applicants by name
+
+I will explain here how the feature to find applicants by name
+is implemented.
+
+But I am leaving this here first as a placeholder,
+and will update with the actual explanation soon.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -310,6 +349,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
+**Use case: Edit a new position** [coming soon]
 
 **Use case: Delete a new position**
 
@@ -319,7 +359,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2. MrTechRecruiter shows a list of positions
 3. User requests to delete a specific position in the list
 4. MrTechRecruiter deletes the position
- 
     Use case ends.
 
 **Extensions**
@@ -352,6 +391,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. MrTechRecruiter shows an error message.
 
       Use case resumes at step 1.
+
+**Use case: Edit a new applicant** [coming soon]
 
 **Use case: Delete an applicant**
 
@@ -447,6 +488,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 *{More to be added}*
+
+**Use case: Calculate the rejection rate for a position** [coming soon]
 
 ### Non-Functional Requirements
 

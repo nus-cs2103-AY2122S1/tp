@@ -33,6 +33,7 @@ public class Applicant {
         this(name, phone, email, address, new Application(position));
     }
 
+
     /**
      * Constructor for an applicant given the applicant's particulars.
      */
@@ -49,7 +50,7 @@ public class Applicant {
     /**
      * Internal constructor for a new Applicant object.
      */
-    private Applicant(Name name, Phone phone, Email email, Address address, Application application) {
+    public Applicant(Name name, Phone phone, Email email, Address address, Application application) {
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;

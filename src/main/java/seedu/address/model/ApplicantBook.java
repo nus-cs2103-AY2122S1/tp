@@ -40,7 +40,6 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     }
 
     //// list overwrite operations
-
     /**
      * Replaces the contents of the applicant list with {@code applicants}.
      * {@code applicants} must not contain duplicate applicants.
@@ -96,6 +95,11 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
 
     public void removeApplicantsUnderPosition(Position position) {
         applicants.removeIf(applicant -> applicant.isApplyingTo(position));
+    }
+
+    public void updateApplicantsWithPosition(Position positionToEdit,
+                                             Position editedPosition) {
+        applicants.updateApplicantsWithPosition(positionToEdit, editedPosition);
     }
 
     @Override

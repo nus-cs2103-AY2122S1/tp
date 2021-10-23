@@ -46,7 +46,6 @@ public class AddPositionCommand extends Command {
 
         model.addPosition(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-
     }
 
     @Override

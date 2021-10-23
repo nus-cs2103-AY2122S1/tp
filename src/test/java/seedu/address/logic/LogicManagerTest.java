@@ -30,6 +30,8 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.applicant.JsonApplicantBookStorage;
+import seedu.address.storage.position.JsonPositionBookStorage;
 import seedu.address.testutil.PersonBuilder;
 
 public class LogicManagerTest {
@@ -46,7 +48,12 @@ public class LogicManagerTest {
         JsonAddressBookStorage addressBookStorage =
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonPositionBookStorage positionBookStorage = new JsonPositionBookStorage(
+                temporaryFolder.resolve("positionBook.json"));
+        JsonApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(
+                temporaryFolder.resolve("applicantBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                applicantBookStorage, positionBookStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -75,7 +82,12 @@ public class LogicManagerTest {
                 new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        JsonPositionBookStorage positionBookStorage = new JsonPositionBookStorage(
+                temporaryFolder.resolve("positionBook.json"));
+        JsonApplicantBookStorage applicantBookStorage = new JsonApplicantBookStorage(
+                temporaryFolder.resolve("applicantBook.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
+                applicantBookStorage, positionBookStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -129,7 +141,7 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
             String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getPositionBook(), new UserPrefs());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 
