@@ -123,9 +123,13 @@ Schedules an existing friend by updating their schedule to indicate the time per
 * gitGud stores a weekly schedule for each friend, from Monday to Sunday, with each day having 24 blocks of hours that can be marked as free or busy.
 
 Format: `friend --schedule FRIEND_ID --period START_TIME END_TIME DAY --free IS_FREE`
+
 <div markdown="block" class="alert alert-info">
+
 **:information_source: Notes about the schedule:**<br>
+
 New friends start off which a schedule with all periods marked as busy.
+
 </div>  
 
 * `FRIEND_ID` must belong to an existing friend in gitGud
