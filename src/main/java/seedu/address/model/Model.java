@@ -64,8 +64,6 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
-    boolean hasModuleLesson(ModuleLesson lesson);
-
     /**
      * Returns true if a module lesson with the same information as {@code moduleLesson} exists in the address book.
      */

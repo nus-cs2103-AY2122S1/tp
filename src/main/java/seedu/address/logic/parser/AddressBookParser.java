@@ -81,9 +81,6 @@ public class AddressBookParser {
         case HELP:
             return new HelpCommand();
 
-        case REMARK_PERSON:
-            return new RemarkPersonCommandParser().parse(arguments);
-
         case ADD_MODULE_LESSON:
             return new AddModuleLessonCommandParser().parse(arguments);
 

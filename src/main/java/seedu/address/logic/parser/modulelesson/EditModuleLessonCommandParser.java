@@ -77,12 +77,12 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
 
         if (validArgumentMultimap.getValue(PREFIX_LESSON_DAY).isPresent()) {
             editLessonDescriptor.setLessonDay(
-                    ParserUtil.parseDay(validArgumentMultimap.getValue(PREFIX_LESSON_DAY).get()));
+                    ParserUtil.parseLessonDay(validArgumentMultimap.getValue(PREFIX_LESSON_DAY).get()));
         }
 
         if (validArgumentMultimap.getValue(PREFIX_LESSON_TIME).isPresent()) {
             editLessonDescriptor.setLessonTime(
-                    ParserUtil.parseTime(validArgumentMultimap.getValue(PREFIX_LESSON_TIME).get()));
+                    ParserUtil.parseLessonTime(validArgumentMultimap.getValue(PREFIX_LESSON_TIME).get()));
         }
 
         if (validArgumentMultimap.getValue(PREFIX_REMARK).isPresent()) {
