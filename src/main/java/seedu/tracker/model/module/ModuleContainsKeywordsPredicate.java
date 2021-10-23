@@ -1,52 +1,49 @@
 package seedu.tracker.model.module;
 
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_ACADEMIC_YEAR;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_CODE;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_MC;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_SEMESTER;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.tracker.logic.parser.CliSyntax.PREFIX_TITLE;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.tracker.commons.util.StringUtil;
+import seedu.tracker.logic.parser.Prefix;
 
 /**
  * Tests that a {@code Module} contains any of the keywords given.
  */
 public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
-    private final String optionalFilter;
+    private final List<Prefix> prefixList = new ArrayList<>(
+        Arrays.asList(PREFIX_CODE, PREFIX_TITLE, PREFIX_DESCRIPTION, PREFIX_MC, PREFIX_TAG, PREFIX_ACADEMIC_YEAR,
+            PREFIX_SEMESTER));
 
     /**
-     * Constructs a ModuleContainsKeywordsPredicate class and stores the first prefix as an optional filter.
+     * Constructs a ModuleContainsKeywordsPredicate class.
      *
      * @param keywords for finding the respective modules
      */
     public ModuleContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
-        optionalFilter = keywords.size() > 0 ? keywords.get(0) : "";
     }
 
+    /**
+     * Checks if the module's specified components contain any of the keywords provided by the user.
+     *
+     * @param module that is being searched
+     * @return true if the module contains the keyword(s)
+     */
     @Override
     public boolean test(Module module) {
-        switch (optionalFilter) {
-
-        case "code":
-            return (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword)));
-
-        case "title":
-            return (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword)));
-
-        case "description":
-            return (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword)));
-
-        case "mc":
-            return (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword)));
-
-        case "tag":
-            return (keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
-
-        default:
+        List<String> prefixesPresent = findPrefixesPresent(prefixList);
+        if (prefixesPresent.isEmpty()) {
             return (keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
                 || keywords.stream()
@@ -56,7 +53,14 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
                 || keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
                 || keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword))
+                || (module.hasAcademicCalendar())
+                && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                module.getAcademicCalendar().getAcademicYear().toString(), keyword))
+                || keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                module.getAcademicCalendar().getSemester().toString(), keyword)));
+        } else {
+            return doesModuleContainKeywords(prefixesPresent, module);
         }
     }
 
@@ -66,5 +70,94 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
                 || (other instanceof ModuleContainsKeywordsPredicate // instanceof handles nulls
                 && keywords.equals(((ModuleContainsKeywordsPredicate) other).keywords)); // state check
     }
+
+    /**
+     * Constructs a list of prefixes that the user has inputted
+     * and removes the prefix from the user input.
+     *
+     * @param prefixes the list of prefixes allowed for FindCommand
+     * @return a list of Strings containing prefixes that the user has inputted
+     */
+    private List<String> findPrefixesPresent(List<Prefix> prefixes) {
+        ArrayList<String> prefixesPresent = new ArrayList<>();
+        for (Prefix prefix : prefixes) {
+            if (keywords.contains(prefix.getPrefix())) {
+                keywords.remove(prefix.getPrefix());
+                prefixesPresent.add(prefix.getPrefix());
+            }
+        }
+        return prefixesPresent;
+    }
+
+    /**
+     * Checks the specific component in the {@code Module} for the given keywords.
+     *
+     * @param prefixesPresent the list of prefixes to specify which component to check
+     * @param module to be checked
+     * @return true if the keyword is found
+     */
+    private boolean doesModuleContainKeywords(List<String> prefixesPresent, Module module) {
+        boolean moduleContainsKeywords = false;
+        for (String prefix : prefixesPresent) {
+            switch (prefix) {
+
+            case "c/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword)));
+                break;
+
+            case "t/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword)));
+                break;
+
+            case "d/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword)));
+                break;
+
+            case "n/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword)));
+                break;
+
+            case "tag/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword)));
+                break;
+
+            case "y/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getAcademicCalendar()
+                        .getAcademicYear().toString(), keyword)));
+                break;
+
+            case "s/":
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getAcademicCalendar()
+                        .getSemester().toString(), keyword)));
+                break;
+
+            default:
+                moduleContainsKeywords = moduleContainsKeywords || (keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getCode().value, keyword))
+                    || keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTitle().value, keyword))
+                    || keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getDescription().value, keyword))
+                    || keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getMc().toString(), keyword))
+                    || keywords.stream()
+                    .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(module.getTags().toString(), keyword))
+                    || (module.hasAcademicCalendar())
+                    && keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    module.getAcademicCalendar().getAcademicYear().toString(), keyword))
+                    || keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(
+                    module.getAcademicCalendar().getSemester().toString(), keyword)));
+            }
+        }
+        return moduleContainsKeywords;
+    }
+
 
 }
