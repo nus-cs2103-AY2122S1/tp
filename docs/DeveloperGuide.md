@@ -265,6 +265,12 @@ When the `FindCommand#execute()` method is called,
         - Difficult for the application to differentiate between keywords and words for specifying a certain component.  
         - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).  
         - Is inconsistent with the format of other commands.
+- **Alternative 3:** Users specify what value to search for in each prefix ie `y/3`, `s/2`.
+    - Pros:
+        - Allows search result to be more specific.
+    - Cons:
+        - Might be tedious for user to manually specify each field to search for.
+        - Requires the user to know what to search for, which might be hard for users who do not have the specific details of the module.
 
 ### Clear modules feature
 

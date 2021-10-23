@@ -87,7 +87,7 @@ Examples:
 
 Shows a list of all the modules that contains the given keyword.
 
-Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] KEYWORDS`
+Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS`
 * **KEYWORDS** refers to the words that the application will search the modules by.
 * If no optional parameters are entered, the application will search within all the modules'
   components for matching **KEYWORDS**
