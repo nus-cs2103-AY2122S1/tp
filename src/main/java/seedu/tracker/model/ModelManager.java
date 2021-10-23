@@ -13,6 +13,7 @@ import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -51,6 +52,7 @@ public class ModelManager implements Model {
     public void setUserInfo(ReadOnlyUserInfo userInfo) {
         requireNonNull(userInfo);
         this.userInfo.resetData(userInfo);
+        updateMcProgress();
     }
 
     @Override
@@ -67,6 +69,7 @@ public class ModelManager implements Model {
     public void setCurrentSemester(AcademicCalendar currentSemester) {
         requireNonNull(currentSemester);
         this.userInfo.setCurrentSemester(currentSemester);
+        updateMcProgress();
     }
 
     @Override
@@ -77,6 +80,16 @@ public class ModelManager implements Model {
     public void setMcGoal(Mc mcGoal) {
         requireNonNull(mcGoal);
         this.userInfo.setMcGoal(mcGoal);
+    }
+
+    @Override
+    public ObservableList<McProgress> getMcProgressList() {
+        return moduleTracker.getMcProgressList();
+    }
+
+    @Override
+    public void updateMcProgress() {
+        moduleTracker.updateMcProgressList(this.userInfo);
     }
 
     //=========== UserPrefs ==================================================================================
