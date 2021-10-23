@@ -3,8 +3,12 @@ package seedu.address.model.student;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Represents a Student's assessment.
@@ -92,6 +96,102 @@ public class Assessment {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    public static class AssessmentStatistics {
+        public static final double DEFAULT_INTERVAL = 10.0;
+
+        public static class Bin {
+            private final Score binMinimum;
+            private final Score binMaximum;
+            private final boolean maxIsInclusive;
+
+            public Bin(Score binMinimum, Score binMaximum) {
+                this.binMinimum = binMinimum;
+                this.binMaximum = binMaximum;
+                maxIsInclusive = binMaximum.isMaxScore();
+            }
+
+            public boolean containsScore(Score score) {
+                return score.getNumericValue() >= binMinimum.getNumericValue() &&
+                        (maxIsInclusive
+                                ? score.getNumericValue() <= binMaximum.getNumericValue()
+                                : score.getNumericValue() < binMaximum.getNumericValue());
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) {
+                    return true;
+                }
+                if (o == null || getClass() != o.getClass()) {
+                    return false;
+                }
+                Bin otherBin = (Bin) o;
+                return binMinimum.equals(otherBin.binMinimum) && binMaximum.equals(otherBin.binMaximum);
+            }
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(binMinimum, binMaximum);
+            }
+        }
+
+        private List<Bin> bins;
+        private final Map<Bin, Integer> binCounts;
+
+        private AssessmentStatistics(Assessment assessment) {
+            this(assessment, DEFAULT_INTERVAL);
+        }
+
+        public AssessmentStatistics(Assessment assessment, double interval) {
+            requireNonNull(assessment);
+            requireNonNull(assessment.scores);
+
+            bins = createBins(interval);
+            binCounts = new HashMap<>();
+            for (Bin b : bins) {
+                binCounts.put(b, 0);
+            }
+
+            addScoresToBins(assessment.scores.values());
+        }
+
+        private List<Bin> createBins(double interval) {
+            List<Bin> bins = new ArrayList<>();
+
+            double binLowestValue = 0.0;
+
+            while (binLowestValue < Score.MAX_SCORE) {
+                Score binLowestScore = new Score(String.valueOf(binLowestValue));
+                double binHighestValue = Math.max(binLowestValue + interval, Score.MAX_SCORE);
+                Score binHighestScore = new Score(String.valueOf(binHighestValue));
+                bins.add(new Bin(binLowestScore, binHighestScore));
+                binLowestValue = binHighestValue;
+            }
+
+            return bins;
+        }
+
+        public Bin getBin(Score score) {
+            for (Bin b : bins) {
+                if (b.containsScore(score)) {
+                    return b;
+                }
+            }
+
+            // Should not happen since a Score must be between the minimum and maximum value (inclusive)
+            assert false;
+
+            return null;
+        }
+
+        public void addScoresToBins(Collection<Score> scores) {
+            for (Score score : scores) {
+                Bin binForScore = getBin(score);
+                binCounts.put(binForScore, binCounts.get(binForScore) + 1);
+            }
+        }
     }
 
 }
