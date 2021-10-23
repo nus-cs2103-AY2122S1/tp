@@ -19,7 +19,8 @@ public class LessonNameContainsSubstringsPredicate implements Predicate<Lesson> 
     @Override
     public boolean test(Lesson lesson) {
         return substrings.stream()
-                .anyMatch(substring -> StringUtil.containsSubstringIgnoreCase(lesson.getLessonName().lessonName, substring));
+                .anyMatch(substring ->
+                        StringUtil.containsSubstringIgnoreCase(lesson.getLessonName().lessonName, substring));
     }
 
 

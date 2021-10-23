@@ -19,7 +19,8 @@ public class NameContainsSubstringsPredicate implements Predicate<Student> {
     @Override
     public boolean test(Student student) {
         return substrings.stream()
-                .anyMatch(substring -> StringUtil.containsSubstringIgnoreCase(student.getStudentName().fullName, substring));
+                .anyMatch(substring ->
+                        StringUtil.containsSubstringIgnoreCase(student.getStudentName().fullName, substring));
     }
 
 

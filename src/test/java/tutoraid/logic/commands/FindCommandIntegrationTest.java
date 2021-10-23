@@ -4,6 +4,8 @@ import static tutoraid.commons.core.Messages.MESSAGE_LESSONS_LISTED_OVERVIEW;
 import static tutoraid.commons.core.Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW;
 import static tutoraid.logic.commands.CommandTestUtil.assertCommandSuccess;
 
+import java.util.Arrays;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +16,6 @@ import tutoraid.model.lesson.LessonNameContainsSubstringsPredicate;
 import tutoraid.model.student.NameContainsSubstringsPredicate;
 import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
-
-import java.util.Arrays;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

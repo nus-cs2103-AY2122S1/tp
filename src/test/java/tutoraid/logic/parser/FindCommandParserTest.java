@@ -1,8 +1,8 @@
 package tutoraid.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static tutoraid.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static tutoraid.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,9 +11,8 @@ import tutoraid.logic.commands.FindStudentCommand;
 import tutoraid.model.lesson.LessonNameContainsSubstringsPredicate;
 import tutoraid.model.student.NameContainsSubstringsPredicate;
 
-import java.util.Arrays;
-
 public class FindCommandParserTest {
+    private FindCommandParser parser = new FindCommandParser();
     /**
      * Parses {@code userInput} into a {@code NameContainsKeywordsPredicate}.
      */
@@ -27,8 +26,6 @@ public class FindCommandParserTest {
     private LessonNameContainsSubstringsPredicate prepareFindLessonPredicate(String userInput) {
         return new LessonNameContainsSubstringsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
-
-    private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parseCommand_find_student() throws Exception {
