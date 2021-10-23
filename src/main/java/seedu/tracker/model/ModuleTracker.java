@@ -6,10 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.tracker.model.calendar.AcademicCalendar;
-import seedu.tracker.model.calendar.AcademicYear;
-import seedu.tracker.model.calendar.Semester;
-import seedu.tracker.model.module.CompletedMcList;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
+import seedu.tracker.model.module.McProgressList;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.model.module.UniqueModuleList;
 
@@ -20,7 +19,7 @@ import seedu.tracker.model.module.UniqueModuleList;
 public class ModuleTracker implements ReadOnlyModuleTracker {
 
     private final UniqueModuleList modules;
-    private CompletedMcList completedMcList;
+    private McProgressList mcProgressList;
     private final UserInfo userInfo;
 
     /*
@@ -33,7 +32,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     {
         modules = new UniqueModuleList();
         userInfo = new UserInfo();
-        completedMcList = new CompletedMcList(userInfo.getCurrentSemester());
+        mcProgressList = new McProgressList(userInfo);
     }
 
     public ModuleTracker() {}
@@ -46,19 +45,19 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         resetData(toBeCopied);
     }
 
-    public ObservableList<Mc> getCompletedMcList() {
-        return completedMcList.getCompletedMcList();
+    public ObservableList<McProgress> getMcProgressList() {
+        return mcProgressList.getMcProgressList();
     }
 
-    public void updateCompletedMcList(AcademicCalendar academicCalendar) {
-        this.completedMcList.update(this.modules.asUnmodifiableObservableList(), academicCalendar);
+    public void updateMcProgressList(UserInfo userInfo) {
+        this.mcProgressList.update(this.modules.asUnmodifiableObservableList(), userInfo);
     }
 
     //// list overwrite operations
 
     public void setCurrentSemester(AcademicCalendar academicCalendar) {
         this.userInfo.setCurrentSemester(academicCalendar);
-        updateCompletedMcList(academicCalendar);
+        updateMcProgressList(userInfo);
     }
 
     public AcademicCalendar getCurrentSemester() {
@@ -87,7 +86,7 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
     public void resetData(ReadOnlyModuleTracker newData) {
         requireNonNull(newData);
         setModules(newData.getModuleList());
-        completedMcList.update(newData.getModuleList(), userInfo.getCurrentSemester());
+        mcProgressList.update(newData.getModuleList(), userInfo);
     }
 
     //// module-level operations

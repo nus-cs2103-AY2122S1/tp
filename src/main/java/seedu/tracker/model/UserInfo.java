@@ -7,7 +7,6 @@ import java.util.Objects;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
-import seedu.tracker.model.module.CompletedMcList;
 import seedu.tracker.model.module.Mc;
 
 /**

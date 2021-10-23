@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -21,44 +22,30 @@ public class McListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(ModuleListPanel.class);
 
     @FXML
-    private ListView<Mc> mcListView;
+    private ListView<McProgress> mcListView;
 
     /**
      * Creates a {@code ModuleListPanel} with the given {@code ObservableList}.
      */
-    public McListPanel(ObservableList<Mc> obsList) {
+    public McListPanel(ObservableList<McProgress> progressList) {
         super(FXML);
-//        ArrayList<Mc> mcList = createTempMcList();
-//        ObservableList<Mc> obsList = FXCollections.observableArrayList(mcList);
-        mcListView.setItems(obsList);
+        mcListView.setItems(progressList);
         mcListView.setCellFactory(listView -> new McListPanel.McListViewCell());
-    }
-
-    private ArrayList<Mc> createTempMcList() {
-        ArrayList<Mc> list = new ArrayList<Mc>();
-        list.add(new Mc(76));
-        list.add(new Mc(10));
-        list.add(new Mc(12));
-        list.add(new Mc(99));
-        list.add(new Mc(8));
-        list.add(new Mc(10));
-        list.add(new Mc(100));
-        return list;
     }
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Module} using a {@code ModuleCard}.
      */
-    class McListViewCell extends ListCell<Mc> {
+    class McListViewCell extends ListCell<McProgress> {
         @Override
-        protected void updateItem(Mc mc, boolean empty) {
-            super.updateItem(mc, empty);
+        protected void updateItem(McProgress progress, boolean empty) {
+            super.updateItem(progress, empty);
 
-            if (empty || mc == null) {
+            if (empty || progress == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new McCard(mc, getIndex()).getRoot());
+                setGraphic(new McCard(progress, getIndex()).getRoot());
             }
         }
     }

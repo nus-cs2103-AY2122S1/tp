@@ -13,6 +13,7 @@ import seedu.tracker.commons.core.GuiSettings;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -51,7 +52,7 @@ public class ModelManager implements Model {
     public void setUserInfo(ReadOnlyUserInfo userInfo) {
         requireNonNull(userInfo);
         this.userInfo.resetData(userInfo);
-        updateCompletedMcs();
+        updateMcProgress();
     }
 
     @Override
@@ -68,7 +69,7 @@ public class ModelManager implements Model {
     public void setCurrentSemester(AcademicCalendar currentSemester) {
         requireNonNull(currentSemester);
         this.userInfo.setCurrentSemester(currentSemester);
-        updateCompletedMcs();
+        updateMcProgress();
     }
 
     @Override
@@ -82,13 +83,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Mc> getCompletedMcList() {
-        return moduleTracker.getCompletedMcList();
+    public ObservableList<McProgress> getMcProgressList() {
+        return moduleTracker.getMcProgressList();
     }
 
     @Override
-    public void updateCompletedMcs() {
-        moduleTracker.updateCompletedMcList(this.userInfo.getCurrentSemester());
+    public void updateMcProgress() {
+        moduleTracker.updateMcProgressList(this.userInfo);
     }
 
     //=========== UserPrefs ==================================================================================

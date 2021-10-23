@@ -5,8 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.tracker.model.module.CompletedMcList;
 import seedu.tracker.model.module.Mc;
+import seedu.tracker.model.module.McProgress;
+import seedu.tracker.model.module.McProgressList;
 
 /**
  * An UI component that displays information of a {@code Module}.
@@ -39,43 +40,43 @@ public class McCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
      */
-    public McCard(Mc mc, int index) {
+    public McCard(McProgress progress, int index) {
         super(FXML);
-        this.mc = mc;
-        title.setText(getTitle(index));
+        this.mc = progress.getCompleted();
         currMc.setText(String.valueOf(mc.value));
 
-        int target = CompletedMcList.MC_REQUIREMENTS_LIST[index];
+        title.setText(getTitle(index));
+
+        int target = progress.getTarget().value;
         targetMc.setText(" / " + target + " MCs");
 
-        double progress = mc.value >= target ? 1 : (double) mc.value / target;
-        progressBar.setProgress(progress);
+        double ratio = progress.getCompletionRatio();
+        progressBar.setProgress(ratio);
 
-        customiseStyle(mc.value, target);
+        customiseStyle(progress);
     }
 
     private String getTitle(int index) {
         switch (index) {
-        case CompletedMcList.GE_INDEX:
+        case McProgressList.GE_INDEX:
             return "GE";
-        case CompletedMcList.UE_INDEX:
+        case McProgressList.UE_INDEX:
             return "UE";
-        case CompletedMcList.FOUNDATION_INDEX:
+        case McProgressList.FOUNDATION_INDEX:
             return "Foundation";
-        case CompletedMcList.BREADTH_DEPTH_INDEX:
+        case McProgressList.BREADTH_DEPTH_INDEX:
             return "Breath and Depth";
-        case CompletedMcList.PROFESSIONALISM_INDEX:
+        case McProgressList.PROFESSIONALISM_INDEX:
             return "IT Professionalism";
-        case CompletedMcList.MATH_SCIENCE_INDEX:
+        case McProgressList.MATH_SCIENCE_INDEX:
             return "Math and Science";
         default:
-            assert false; //should never reach here
-            return "Module";
+            return "Total";
         }
     }
 
-    private void customiseStyle(int mcValue, int target) {
-        if (mcValue < target) {
+    private void customiseStyle(McProgress progress) {
+        if (!progress.isCompleted()) {
             currMc.setStyle("-fx-text-fill: pink;");
             progressBar.setStyle("-fx-accent: pink;");
         } else {
