@@ -11,26 +11,26 @@ import seedu.address.model.person.Insurance;
  */
 class JsonAdaptedInsurance {
 
-    private final String insuranceName;
+    private final String insuranceType;
 
     /**
      * Constructs a {@code JsonAdaptedTag} with the given {@code tagName}.
      */
     @JsonCreator
-    public JsonAdaptedInsurance(String insuranceName) {
-        this.insuranceName = insuranceName;
+    public JsonAdaptedInsurance(String insuranceType) {
+        this.insuranceType = insuranceType;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
     public JsonAdaptedInsurance(Insurance source) {
-        insuranceName = source.getType().getTypeName();
+        insuranceType = source.getType().getTypeName();
     }
 
     @JsonValue
-    public String getInsuranceName() {
-        return insuranceName;
+    public String getinsuranceType() {
+        return insuranceType;
     }
 
     /**
@@ -39,7 +39,7 @@ class JsonAdaptedInsurance {
      * @throws IllegalValueException if there were any data constraints violated in the adapted tag.
      */
     public Insurance toModelType() throws IllegalValueException {
-        return Insurance.of(insuranceName);
+        return Insurance.of(insuranceType);
     }
 
 }
