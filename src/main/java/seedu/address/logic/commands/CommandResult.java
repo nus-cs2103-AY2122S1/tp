@@ -86,6 +86,7 @@ public class CommandResult {
         this.display = false;
         this.displaySummary = true;
         this.summary = summary;
+        this.showCommandSummary = false;
     }
 
     public String getFeedbackToUser() {
