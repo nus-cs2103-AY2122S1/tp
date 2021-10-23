@@ -22,9 +22,11 @@ public class GraphDisplay extends UiPart<Region> {
     }
 
     public void setChart(Chart chart) {
-        // Clear any existing charts
-        placeHolder.getChildren().clear();
-
+        clearCharts();
         placeHolder.getChildren().add(chart);
+    }
+
+    public void clearCharts() {
+        placeHolder.getChildren().clear();
     }
 }
