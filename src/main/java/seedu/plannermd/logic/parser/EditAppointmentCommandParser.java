@@ -81,7 +81,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
             LocalTime inputTime = LocalDateTime.parse(dateTime, formatter).toLocalTime();
             return inputTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         } catch (DateTimeParseException e) {
-            throw new ParseException(EditAppointmentCommand.MESSAGE_INVALID_SESSION);
+            throw new ParseException(EditAppointmentCommand.MESSAGE_INVALID_START);
         }
     }
 
@@ -91,7 +91,7 @@ public class EditAppointmentCommandParser implements Parser<EditAppointmentComma
             LocalDate inputDate = LocalDateTime.parse(dateTime, formatter).toLocalDate();
             return inputDate.format(DateTimeFormatter.ofPattern("d/M/yyyy"));
         } catch (DateTimeParseException e) {
-            throw new ParseException(EditAppointmentCommand.MESSAGE_INVALID_SESSION);
+            throw new ParseException(EditAppointmentCommand.MESSAGE_INVALID_START);
         }
     }
 }

@@ -4,11 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_BIRTH_DATE;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DOCTOR;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_RISK;
+import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
@@ -17,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.apptcommand.EditAppointmentCommand;
 import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
@@ -27,6 +32,7 @@ import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
+import seedu.plannermd.testutil.appointment.EditAppointmentDescriptorBuilder;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
 /**
@@ -84,6 +90,63 @@ public class CommandTestUtil {
     public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_AMY;
     public static final EditDoctorCommand.EditDoctorDescriptor DESC_DR_BOB;
 
+    public static final String VALID_APPT_DATE_THIRTY_MIN = "2/2/2022";
+    public static final String VALID_APPT_DATE_TWO_HOUR = "12/12/2022";
+    public static final String VALID_APPT_REMARK = "Patient wants a blood test";
+    public static final String ANOTHER_VALID_APPT_REMARK = "Patient wants a Covid test";
+    public static final int VALID_APPT_DURATION = 30;
+    public static final String VALID_APPT_TIME = "23:59";
+    public static final String VALID_APPT_TIME_THIRTY_MIN = "22:35";
+    public static final String VALID_APPT_TIME_TWO_HOUR = "12:35";
+    public static final int VALID_APPT_DEFAULT_DURATION = 10;
+    public static final int VALID_APPT_DURATION_THIRTY_MIN = 30;
+    public static final int VALID_APPT_DURATION_TWO_HOUR = 120;
+    public static final String VALID_APPT_DURATION_THIRTY_MIN_STR = "30";
+    public static final String VALID_APPT_DURATION_TWO_HOUR_STR = "120";
+    public static final String VALID_PATIENT_INDEX = "1";
+    public static final String ANOTHER_VALID_PATIENT_INDEX = "2";
+    public static final String VALID_DOCTOR_INDEX = "1";
+    public static final String ANOTHER_VALID_DOCTOR_INDEX = "2";
+
+    public static final String APPT_START_THIRTY_MIN_DESC = " " + PREFIX_START + VALID_APPT_DATE_THIRTY_MIN
+            + " " + VALID_APPT_TIME_THIRTY_MIN;
+    public static final String APPT_DURATION_THIRTY_MIN_DESC = " " + PREFIX_DURATION
+            + VALID_APPT_DURATION_THIRTY_MIN;
+    public static final String APPT_START_TWO_HOUR_DESC = " " + PREFIX_START + VALID_APPT_DATE_TWO_HOUR
+            + " " + VALID_APPT_TIME_TWO_HOUR;
+    public static final String APPT_DURATION_TWO_HOUR_DESC = " " + PREFIX_DURATION
+            + VALID_APPT_DURATION_TWO_HOUR;
+    public static final String APPT_PATIENT_INDEX_DESC = " " + PREFIX_PATIENT + VALID_PATIENT_INDEX;
+    public static final String APPT_ANOTHER_PATIENT_INDEX_DESC = " " + PREFIX_PATIENT + ANOTHER_VALID_PATIENT_INDEX;
+    public static final String APPT_DOCTOR_INDEX_DESC = " " + PREFIX_DOCTOR + VALID_DOCTOR_INDEX;
+    public static final String APPT_ANOTHER_DOCTOR_INDEX_DESC = " " + PREFIX_DOCTOR + ANOTHER_VALID_DOCTOR_INDEX;
+    public static final String APPT_REMARK_DESC = " " + PREFIX_REMARK + VALID_APPT_REMARK;
+    public static final String APPT_ANOTHER_REMARK_DESC = " " + PREFIX_REMARK + ANOTHER_VALID_APPT_REMARK;
+
+    public static final String INVALID_PATIENT_INDEX = "WAT";
+    public static final String INVALID_DOCTOR_INDEX = "!!!!";
+    public static final String INVALID_START_DATE = "2-2-2022";
+    public static final String INVALID_START_TIME = "1211";
+    public static final String INVALID_DURATION = "forty-five minutes";
+    public static final String INVALID_DURATION_THREE_HOURS = "180";
+    public static final String INVALID_START = "2-2-2022 1000";
+
+    public static final String INVALID_PATIENT_INDEX_DESC = " " + PREFIX_PATIENT + INVALID_PATIENT_INDEX;
+    public static final String INVALID_DOCTOR_INDEX_DESC = " " + PREFIX_DOCTOR + INVALID_DOCTOR_INDEX;
+
+    public static final String INVALID_START_DATE_DESC = " " + PREFIX_START + INVALID_START_DATE
+            + " " + VALID_APPT_TIME_TWO_HOUR;
+    public static final String INVALID_START_TIME_DESC = " " + PREFIX_START + VALID_APPT_DATE_THIRTY_MIN
+            + " " + INVALID_START_TIME;
+    public static final String INVALID_DURATION_DESC = " " + PREFIX_DURATION
+            + INVALID_DURATION;
+    public static final String INVALID_DURATION_THREE_HOURS_DESC = " " + PREFIX_DURATION + INVALID_DURATION_THREE_HOURS;
+    public static final String INVALID_START_DESC = " " + PREFIX_START + INVALID_START;
+
+    public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_EDIT_THIRTY_MIN_APPT;
+    public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_EDIT_TWO_HOUR_APPT;
+
+
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withBirthDate(VALID_BIRTH_DATE_AMY)
@@ -98,6 +161,15 @@ public class CommandTestUtil {
         DESC_DR_BOB = new EditDoctorDescriptorBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withBirthDate(VALID_BIRTH_DATE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        DESC_EDIT_THIRTY_MIN_APPT = new EditAppointmentDescriptorBuilder().withPatientIndex(VALID_PATIENT_INDEX)
+                .withDoctorIndex(VALID_DOCTOR_INDEX).withAppointmentDate(VALID_APPT_DATE_THIRTY_MIN)
+                .withStartTime(VALID_APPT_TIME_THIRTY_MIN).withDuration(VALID_APPT_DURATION_THIRTY_MIN_STR)
+                .withRemark(VALID_APPT_REMARK).build();
+        DESC_EDIT_TWO_HOUR_APPT = new EditAppointmentDescriptorBuilder().withPatientIndex(ANOTHER_VALID_PATIENT_INDEX)
+                .withDoctorIndex(ANOTHER_VALID_DOCTOR_INDEX).withAppointmentDate(VALID_APPT_DATE_TWO_HOUR)
+                .withStartTime(VALID_APPT_TIME_TWO_HOUR).withDuration(VALID_APPT_DURATION_TWO_HOUR_STR)
+                .withRemark(VALID_APPT_REMARK).build();
     }
 
     /**
@@ -107,7 +179,7 @@ public class CommandTestUtil {
      * - the {@code actualModel} matches {@code expectedModel}
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandResult expectedCommandResult,
-            Model expectedModel) {
+                                            Model expectedModel) {
         try {
             CommandResult result = command.execute(actualModel);
             assertEquals(expectedCommandResult, result);
@@ -123,7 +195,7 @@ public class CommandTestUtil {
      * takes a string {@code expectedMessage}.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
-            Model expectedModel) {
+                                            Model expectedModel) {
         CommandResult expectedCommandResult = new CommandResult(expectedMessage);
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
     }

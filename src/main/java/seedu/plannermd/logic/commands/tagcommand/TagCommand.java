@@ -28,7 +28,7 @@ public abstract class TagCommand extends Command {
                     + "Adds a tag to the person identified by the index number used in the displayed person list.\n"
                     + "Parameters: "
                     + "INDEX (must be a positive integer) " + PREFIX_TAG + "TAG\n"
-                    + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " " + "1 " + PREFIX_TAG + "healthy"
+                    + "Example: " + COMMAND_WORD + " " + FLAG_ADD + " " + "1 " + PREFIX_TAG + "healthy\n"
             + "tag -d: "
                     + "Deletes a tag to the person identified by the index number used in the displayed person list.\n"
                     + "Parameters: "

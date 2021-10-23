@@ -45,7 +45,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT = "This appointment already exists in the plannermd.";
     public static final String MESSAGE_CLASHING_APPOINTMENT = "This appointment clashes with an existing appointment.";
-    public static final String MESSAGE_INVALID_SESSION = "Sessions should be of the format DD/MM/YYYY HH:MM "
+    public static final String MESSAGE_INVALID_START = "Start date/time should be of the format DD/MM/YYYY HH:MM "
             + "and adhere to the following constraints:\n"
             + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
             + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
