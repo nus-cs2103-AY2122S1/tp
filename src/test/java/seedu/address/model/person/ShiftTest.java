@@ -34,8 +34,9 @@ public class ShiftTest {
 
     @Test
     public void isValidShiftTest() {
-        assertTrue(Shift.isValidShift("monday-morning"));
-        assertTrue(Shift.isValidShift("Monday-morning"));
+        assertTrue(Shift.isValidShift("monday-morning-10:00-12:00"));
+        assertTrue(Shift.isValidShift("Monday-morning-19:00-20:00"));
+        assertFalse(Shift.isValidShift("Monday-morning-9:00-10:00"));
         assertFalse(Shift.isValidShift("mon-morning"));
         assertFalse(Shift.isValidShift("monday-1"));
         assertFalse(Shift.isValidShift(""));

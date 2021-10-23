@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.Objects;
 
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
 
@@ -146,6 +147,22 @@ public class Schedule {
         }
         return result;
 
+    }
+
+    /**
+     * Set time for a shift a shift from a target staff's schedule.
+     * {@code target} must exist in the address book.
+     *
+     * @param dayOfWeek of the shift.
+     * @param slot of the shift.
+     * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
+     */
+    public void setTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+            throws InvalidShiftTimeException {
+        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new Shift(dayOfWeek, slot);
+        }
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()].setTime(startTime, endTime, slot.getOrder());
     }
 
     /**
