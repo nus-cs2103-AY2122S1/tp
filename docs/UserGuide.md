@@ -5,9 +5,11 @@ title: User Guide
 
 ![gitGud](images/gitgud.png)
 
-gitGud is a **desktop application for managing friends' gaming information**. gitGud uses a simple **Graphical User Interface 
-(GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. If you can 
-type fast enough, gitGud can get you contact management tasks done faster than traditional GUI-based applications.
+gitGud is a **desktop application for managing your friends' gaming information**. gitGud uses a gamer-themed **Graphical User Interface 
+(GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. 
+
+Keeping track of all of yours friends' gaming information and schedules is difficult and time-consuming.
+With gitGud, there is no need to get tilted(frustrated) by this anymore as **how fast you type determines how fast you manage your gaming contacts**.
 
 
 * Table of Contents
@@ -85,6 +87,33 @@ Format: `friend --delete FRIEND_ID`
 
 Examples:
 * `friend --delete Draco` Deletes friend with gitGud FRIEND_ID of Draco and all their data from the database
+
+#### Link games with a friend: `friend --link`
+
+Links game and the associated in-game username for the game to a friend with the provided FRIEND_ID.
+
+A link between a particular friend and game shows that the friend plays the game. This association is required for subsequent commands, e.g. for the application to display all games that a friend plays or to recommend a friend to play with based on a particular game.
+
+Format: `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`
+
+* Both FRIEND_ID and GAME_ID has to already be inside the database.
+
+Examples:
+* `friend --link Draco --game DOTA --user Draco995`
+  Links a single game, “DOTA” with the in-game username ‘Draco995’,
+  to the friend with the gitGud FRIEND_ID ‘Draco’.
+
+#### Unlinking a game from a friend: `friend --unlink`
+
+Removes the link between a friend and a game.
+
+Format: `friend --unlink FRIEND_ID --game GAME_ID`
+
+* FRIEND_ID has to already be inside the database.
+* The friend has to have a current association with the provided GAME_ID.
+
+Examples:
+* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_ID 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
 #### Getting a single friend's complete data: `get --friend`
 
@@ -195,35 +224,6 @@ Examples:
 
 ![result for 'game --list'](images/UiListGame.png)
 
-### Link commands
-
-Commands that involve linking friend and games.
-
-#### Link games with a friend: `friend --link`
-
-Links game and the associated in-game username for the game to a friend with the provided FRIEND_ID.
-
-Format: `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`
-
-* Both FRIEND_ID and GAME_NAME has to already be inside the database.
-
-Examples:
-* `friend --link Draco --game DOTA --user Draco995`
-  Links a single game, “DOTA” with the in-game username ‘Draco995’,
-  to the friend with the gitGud FRIEND_ID ‘Draco’.
-
-#### Unlinking a game from a friend: `friend --unlink`
-
-Removes the link between a friend and a game.
-
-Format: `friend --unlink FRIEND_ID --game GAME_NAME`
-
-* FRIEND_ID has to already be inside the database.
-* The friend has to have a current association with the provided GAME_NAME.
-
-Examples:
-* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with GAME_NAME 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
-
 ### Other commands
 
 Miscellaneous useful commands for the user.
@@ -263,12 +263,12 @@ Action | Format, Examples
 **Get friend** | `get --friend FRIEND_ID`<br> e.g., `get --friend Draco`
 **List Friend** | `friend --list [KEYWORD]`<br> e.g., `friend --list`, `friend --list Tau`
 **Schedule Friend** | `friend --schedule FRIEND_ID --period START_TIME END_TIME DAY --free IS_FREE`<br> e.g., `friend --schedule Draco --period 1800 2200 2 --free 1`
-**Add game** | `game --add GAME_NAME` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
-**Delete game** | `game --delete GAME_NAME` <br> e.g., `game --delete Valorant`
-**Get game** | `get --game GAME_NAME`<br> e.g., `get --game Valorant`
+**Add game** | `game --add GAME_ID` <br> e.g., `game --add Valorant`, `game --add ApexLegends` 
+**Delete game** | `game --delete GAME_ID` <br> e.g., `game --delete Valorant`
+**Get game** | `get --game GAME_ID`<br> e.g., `get --game Valorant`
 **List Games** | `game --list [KEYWORD]`<br> e.g., `game --list`, `game --list Valorant`
-**Link game and friend** | `friend --link FRIEND_ID --game GAME_NAME --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
-**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_NAME` <br> e.g., `friend --unlink Draco --game DOTA`
+**Link game and friend** | `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`<br> e.g., `friend --link Draco --game Valorant --user taufiq007`
+**Unlink game and friend** | `friend --unlink FRIEND_ID --game GAME_ID` <br> e.g., `friend --unlink Draco --game DOTA`
 **Viewing Help** | `help`
 **Exit program** | `exit`
 
