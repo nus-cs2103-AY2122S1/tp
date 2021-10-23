@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.task.Task;
 
 public class TypicalTasks {
@@ -32,12 +32,14 @@ public class TypicalTasks {
     /**
      * Returns an {@code AddressBook} with all the typical tasks added.
      */
-    public static AddressBook addTypicalTasksToAddressBook(AddressBook ab) {
+    public static TaskBook getTypicalTaskBook() {
+        TaskBook tl = new TaskBook();
         for (Task task : getTypicalTasks()) {
-            ab.addTask(task);
+            tl.addTask(task);
         }
-        return ab;
+        return tl;
     }
+
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(Arrays.asList(TASK1, TASK2, TASK3));
     }
