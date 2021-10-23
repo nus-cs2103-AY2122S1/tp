@@ -25,6 +25,9 @@ import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 import seedu.address.testutil.TypicalApplicants;
 
+/**
+ * Contains integration tests (interaction with the Model) and unit tests for {@code RejectionRateCommand}.
+ */
 public class RejectionRateCommandTest {
     private final Model model = new ModelManager(getTypicalPositionBook(), new UserPrefs());
 
