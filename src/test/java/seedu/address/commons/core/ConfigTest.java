@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Phone;
-
 import java.nio.file.Paths;
 import java.util.logging.Level;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.model.person.Phone;
 
 public class ConfigTest {
 
