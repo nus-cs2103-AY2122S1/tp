@@ -50,16 +50,11 @@ public class PersonNoteWindow extends NoteWindow {
     public void handleSave() throws CommandException {
         String paragraph = noteTextArea.getText();
         Person editedPerson;
-        if (!paragraph.isEmpty()) {
-            Note editedNote = new Note(paragraph, noteLastModified());
-            editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
-                    editedNote, person.getTags());
-        } else {
-            editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
-                    Note.EMPTY_NOTE, person.getTags());
-        }
-        person = editedPerson;
+        Note editedNote = Note.of(paragraph, noteLastModified());
+        editedPerson = new Person(person.getName(), person.getPhone(), person.getEmail(), editedNote);
+
         logic.executeSaveNote(person, editedPerson);
+        person = editedPerson;
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
     }
 

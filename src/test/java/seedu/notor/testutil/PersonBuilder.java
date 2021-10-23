@@ -37,7 +37,7 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        note = new Note(DEFAULT_NOTE, DEFAULT_NOTE_DATE);
+        note = Note.of(DEFAULT_NOTE, DEFAULT_NOTE_DATE);
         tags = new HashSet<>();
         superGroups = new HashSet<>();
         subGroups = new HashSet<>();
@@ -108,7 +108,7 @@ public class PersonBuilder {
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
     public PersonBuilder withNote(String note, String noteSavedDate) {
-        this.note = new Note(note, noteSavedDate);
+        this.note = Note.of(note, noteSavedDate);
         return this;
     }
 

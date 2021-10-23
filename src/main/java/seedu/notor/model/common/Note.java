@@ -20,11 +20,26 @@ public class Note {
      * Constructor for a Note instance.
      *
      * @param value Value of the note.
+     * @param savedDate Date that note is last saved.
      */
-    public Note(String value, String savedDate) {
+    private Note(String value, String savedDate) {
         requireNonNull(value);
         this.value = value;
         this.savedDate = savedDate;
+    }
+
+    /**
+     * Factory method to create Note.
+     *
+     * @param value Content of the note.
+     * @param savedDate Date that note is last saved.
+     * @return Instance of Note or EmptyNote.
+     */
+    public static Note of(String value, String savedDate) {
+        if (value.equals("")) {
+            return EMPTY_NOTE;
+        }
+        return new Note(value, savedDate);
     }
 
     /**

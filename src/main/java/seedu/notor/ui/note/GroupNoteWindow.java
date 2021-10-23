@@ -48,12 +48,8 @@ public class GroupNoteWindow extends NoteWindow {
     @Override
     public void handleSave() throws CommandException {
         String paragraph = noteTextArea.getText();
-        if (!paragraph.isEmpty()) {
-            Note editedNote = new Note(paragraph, noteLastModified());
-            group.setNote(editedNote);
-        } else {
-            group.setNote(Note.EMPTY_NOTE);
-        }
+        Note editedNote = Note.of(paragraph, noteLastModified());
+        group.setNote(editedNote);
         logic.executeSaveNote();
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
     }

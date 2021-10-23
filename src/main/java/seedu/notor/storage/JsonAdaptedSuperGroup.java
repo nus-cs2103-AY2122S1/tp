@@ -60,7 +60,7 @@ public class JsonAdaptedSuperGroup {
         if (noteDate == null) {
             throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
-        final Note modelNote = new Note(note, noteDate);
+        final Note modelNote = Note.of(note, noteDate);
         SuperGroup group = new SuperGroup(new Name(name), modelNote);
         for (JsonAdaptedSubGroup subGroup : this.subGroups) {
             group.addSubGroup(subGroup.toModelType());

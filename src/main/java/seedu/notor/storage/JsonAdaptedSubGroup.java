@@ -57,7 +57,7 @@ public class JsonAdaptedSubGroup {
         if (noteDate == null) {
             throw new IllegalValueException(MISSING_FIELD_MESSAGE_FORMAT);
         }
-        final Note modelNote = new Note(note, noteDate);
+        final Note modelNote = Note.of(note, noteDate);
         return new SubGroup(new Name(name), new HashSet<>(), parent, modelNote);
     }
 }

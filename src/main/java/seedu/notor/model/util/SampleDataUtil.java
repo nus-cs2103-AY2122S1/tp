@@ -17,7 +17,7 @@ import seedu.notor.model.tag.Tag;
  * Contains utility methods for populating {@code Notor} with sample data.
  */
 public class SampleDataUtil {
-    public static final Note EMPTY_NOTE = new Note("", "");
+    public static final Note EMPTY_NOTE = Note.of("", "");
 
     // @formatter:off
     public static Person[] getSamplePersons() {
