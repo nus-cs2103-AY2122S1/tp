@@ -63,6 +63,14 @@ public class PersonListPanel extends UiPart<Region> {
         selected.setPersonDetails();
     }
 
+    /**
+     * Displays the details of the specified contact in the selectedPersonPanel.
+     */
+    public void handleDisplay(Summary summary) {
+        selected.updateSummary(summary);
+        selected.setSummary();
+    }
+
     public void setSelectedPersonPanel() {
         selected.setPersonDetails();
     }

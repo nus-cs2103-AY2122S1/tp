@@ -1,10 +1,8 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -78,7 +76,6 @@ public class SelectedPersonCard extends UiPart<Region> {
     public void updatePerson(Person person) {
         this.person = person;
         logger.info("Updated SelectedPersonCard");
-        //setPersonDetails();
     }
 
     /**
@@ -116,21 +113,6 @@ public class SelectedPersonCard extends UiPart<Region> {
     }
 
     /**
-     * Sets the empty Selected Person details.
-     */
-    public void setEmptyPersonDetails() {
-        category.setText("Category: NIL");
-        name.setText("No contact selected.");
-        phone.setText("Phone: NIL");
-        address.setText("Address: NIL");
-        review.setText("Review: NIL");
-        email.setText("Email: NIL");
-        tags.getChildren().clear();
-        rating.setText("NIL" + "\u2B50");
-        logger.info("Empty person set");
-    }
-
-    /**
      * Sets the Summary of the AddressBook
      */
     public void setSummary() {
@@ -138,15 +120,15 @@ public class SelectedPersonCard extends UiPart<Region> {
 
         summaryHeader.setText("Your Contact List Statistics:");
 
-        ObservableList<PieChart.Data>pieChartCategoryData = summary.getPercentageCategoryGUI();
+        ObservableList<PieChart.Data> pieChartCategoryData = summary.getPercentageCategoryGui();
         pieChartCategory.setData(pieChartCategoryData);
         pieChartCategory.setTitle("Category");
 
-        ObservableList<PieChart.Data>pieChartRatingData = summary.getPercentageRatingsGUI();
+        ObservableList<PieChart.Data> pieChartRatingData = summary.getPercentageRatingsGui();
         pieChartRating.setData(pieChartRatingData);
         pieChartRating.setTitle("Rating");
 
-        totalContacts.setText(summary.getNumberOfContactsGUI());
+        totalContacts.setText(summary.getNumberOfContactsGui());
 
         logger.info("Summary Set");
     }

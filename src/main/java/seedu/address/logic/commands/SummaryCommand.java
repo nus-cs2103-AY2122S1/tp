@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import seedu.address.model.Model;
+import seedu.address.model.summary.Summary;
+
 
 /**
  * Format full help instructions for every command for display.
@@ -19,6 +20,7 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(MESSAGE_SUCCESS);
+        Summary summary = new Summary(model.getAddressBook());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, summary), summary);
     }
 }

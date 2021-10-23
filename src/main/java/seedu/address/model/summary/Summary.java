@@ -7,8 +7,7 @@ import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.CategoryCode;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 
@@ -23,11 +22,12 @@ public class Summary {
 
     private List<Person> personList;
 
+
     /**
      * Constructor to create a summary of the addressBook.
      * @param addressBook addressBook to summarise.
      */
-    public Summary(AddressBook addressBook) {
+    public Summary(ReadOnlyAddressBook addressBook) {
         this.personList = addressBook.getPersonList();
         numberOfContacts = setNumberOfContacts();
         percentageCategory = setNumberCategory();
@@ -68,19 +68,18 @@ public class Summary {
      * @return HashMap of total number of contacts in each category.
      */
     private HashMap<String, Integer> setNumberCategory() {
-        List<String> categoryValues = CategoryCode.CATEGORY_VALUES;
         HashMap<String, Integer> count = new HashMap<>();
-        
-
-        for (String categoryValue : categoryValues) {
-            count.put(categoryValue, 0);
-        }
 
         for (Person person : personList) {
             String categoryString = person.getCategoryCode().toString().toLowerCase();
-            int value = count.get(categoryString);
-            int newValue = value + 1;
-            count.replace(categoryString, newValue);
+            if (count.containsKey(categoryString)) {
+                int value = count.get(categoryString);
+                int newValue = value + 1;
+                count.replace(categoryString, newValue);
+            } else {
+                count.put(categoryString, 1);
+            }
+
         }
 
         return count;
@@ -93,19 +92,19 @@ public class Summary {
     public HashMap<String, Integer> getPercentageCategory() {
         return percentageCategory;
     }
-    
+
     public HashMap<String, Integer> getPercentageRatings() {
         return percentageRatings;
     }
 
     //=========== GUI ==================================================================================
 
-    public String getNumberOfContactsGUI() {
+    public String getNumberOfContactsGui() {
         String totalContacts = "Total Number of Contacts: ";
         return totalContacts + numberOfContacts;
     }
 
-    public ObservableList<PieChart.Data> getPercentageCategoryGUI() {
+    public ObservableList<PieChart.Data> getPercentageCategoryGui() {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Integer> entry : percentageCategory.entrySet()) {
@@ -116,7 +115,7 @@ public class Summary {
         return pieChartData;
     }
 
-    public ObservableList<PieChart.Data> getPercentageRatingsGUI() {
+    public ObservableList<PieChart.Data> getPercentageRatingsGui() {
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
 
         for (Map.Entry<String, Integer> entry : percentageRatings.entrySet()) {

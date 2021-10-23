@@ -218,8 +218,12 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
-            if (commandResult.isDisplay()) {
+            if (commandResult.isDisplayPerson()) {
                 personListPanel.handleDisplay(commandResult.getPersonToDisplay());
+            }
+
+            if (commandResult.isDisplaySummary()) {
+                personListPanel.handleDisplay(commandResult.getSummaryToDisplay());
             }
 
             return commandResult;

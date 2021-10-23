@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Objects;
 
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * Represents the result of a command execution.
@@ -22,7 +23,11 @@ public class CommandResult {
     /** The application should update display panel. */
     private final boolean display;
 
+    private final boolean displaySummary;
+
     private Person personToDisplay;
+
+    private Summary summary;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -32,6 +37,7 @@ public class CommandResult {
         this.showHelp = showHelp;
         this.exit = exit;
         this.display = false;
+        this.displaySummary = false;
         this.personToDisplay = null;
     }
 
@@ -52,7 +58,21 @@ public class CommandResult {
         this.showHelp = false;
         this.exit = false;
         this.display = true;
+        this.displaySummary = false;
         this.personToDisplay = personToDisplay;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     *  the specified {@code Summary} and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, Summary summary) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.display = false;
+        this.displaySummary = true;
+        this.summary = summary;
     }
 
     public String getFeedbackToUser() {
@@ -67,12 +87,20 @@ public class CommandResult {
         return exit;
     }
 
-    public boolean isDisplay() {
+    public boolean isDisplayPerson() {
         return display;
+    }
+
+    public boolean isDisplaySummary() {
+        return displaySummary;
     }
 
     public Person getPersonToDisplay() {
         return personToDisplay;
+    }
+
+    public Summary getSummaryToDisplay() {
+        return summary;
     }
 
     @Override
