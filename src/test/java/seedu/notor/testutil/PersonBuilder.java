@@ -112,6 +112,14 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building to the note given
+     */
+    public PersonBuilder withNote(Note note) {
+        this.note = note;
+        return this;
+    }
+
     public Person build() {
         return new Person(name, phone, email, note, tags, superGroups, subGroups);
     }

@@ -60,6 +60,7 @@ public class Note {
     public String toString() {
         return value;
     }
+
     private static final class EmptyNote extends Note {
         public EmptyNote() {
             super("", "");

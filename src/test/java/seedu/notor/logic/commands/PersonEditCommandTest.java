@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.notor.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.notor.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.notor.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.notor.logic.commands.CommandTestUtil.assertExecuteFailure;
@@ -18,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
+import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.person.PersonEditExecutor;
@@ -44,15 +46,18 @@ public class PersonEditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        // TODO: revise this test case so that it does not depend on hardcoded person
-        Person editedPerson = new PersonBuilder().withTags("friends").build();
+        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        PersonBuilder personInList = new PersonBuilder(firstPerson);
+        Person editedPerson =
+                personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         PersonEditDescriptor descriptor = new PersonEditDescriptorBuilder(editedPerson).build();
         PersonEditCommand personEditCommand = new PersonEditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
 
         Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPerson);
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }
 
@@ -72,19 +77,6 @@ public class PersonEditCommandTest {
 
         Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
         expectedModel.setPerson(lastPerson, editedPerson);
-
-        CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        PersonEditCommand
-                personEditCommand = new PersonEditCommand(INDEX_FIRST_PERSON, new PersonEditDescriptor());
-
-        String expectedMessage = String.format(PersonEditExecutor.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
-
-        Model expectedModel = new ModelManager(new Notor(model.getNotor()), new UserPrefs());
 
         CommandTestUtil.assertExecuteSuccess(personEditCommand, model, expectedMessage, expectedModel);
     }

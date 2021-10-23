@@ -27,6 +27,7 @@ import seedu.notor.model.Model;
 import seedu.notor.model.ModelManager;
 import seedu.notor.model.ReadOnlyNotor;
 import seedu.notor.model.UserPrefs;
+import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Person;
 import seedu.notor.storage.JsonNotorStorage;
 import seedu.notor.storage.JsonUserPrefsStorage;
@@ -86,7 +87,7 @@ public class LogicManagerTest {
         String addCommand =
                 PersonCommand.COMMAND_WORD + " " + VALID_NAME_AMY + " /" + PersonCreateCommand.COMMAND_WORD
                         + PHONE_DESC_AMY + EMAIL_DESC_AMY;
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
+        Person expectedPerson = new PersonBuilder(AMY).withNote(Note.EMPTY_NOTE).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.createPerson(expectedPerson);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

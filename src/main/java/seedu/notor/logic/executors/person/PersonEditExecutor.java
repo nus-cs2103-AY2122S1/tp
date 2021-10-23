@@ -10,7 +10,6 @@ import seedu.notor.commons.util.CollectionUtil;
 import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.model.common.Name;
-import seedu.notor.model.common.Note;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
@@ -45,7 +44,7 @@ public class PersonEditExecutor extends PersonExecutor {
         // checks that name has not been changed to that of another person in Notor
         if (!person.isSame(editedPerson) && model.hasPerson(editedPerson)) {
             throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
-        } 
+        }
 
         // check that fields are actually edited
         if (person.equals(editedPerson)) {
@@ -97,7 +96,6 @@ public class PersonEditExecutor extends PersonExecutor {
         private Name name;
         private Phone phone;
         private Email email;
-        private Note note;
 
         public PersonEditDescriptor() {
         }
@@ -110,7 +108,6 @@ public class PersonEditExecutor extends PersonExecutor {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setNote(toCopy.note);
         }
 
         /**
@@ -142,14 +139,6 @@ public class PersonEditExecutor extends PersonExecutor {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
-        }
-
-        public void setNote(Note note) {
-            this.note = note;
-        }
-
-        public Optional<Note> getNote() {
-            return Optional.ofNullable(note);
         }
 
         @Override

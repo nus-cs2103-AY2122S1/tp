@@ -38,7 +38,8 @@ public class PersonCreateCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() throws ParseException {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        // Default Bob has note but no tags; create can create tags but not note.
+        Person expectedPerson = new PersonBuilder(BOB).withNote(Note.EMPTY_NOTE).withTags(VALID_TAG_FRIEND).build();
 
         // multiple phones - last phone accepted
         String multiplePhones = String.format("person %s /create%s%s%s%s", VALID_NAME_BOB,
@@ -51,7 +52,8 @@ public class PersonCreateCommandParserTest {
         assertParseSuccess(notorParser.parseCommand(multipleEmails), new PersonCreateCommand(null, expectedPerson));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withNote(Note.EMPTY_NOTE).withTags(VALID_TAG_FRIEND,
+                VALID_TAG_HUSBAND)
                 .build();
         String multipleTags = String.format("person %s /create%s%s%s", VALID_NAME_BOB,
                 PHONE_DESC_BOB, EMAIL_DESC_BOB, TAG_MULTIPLE_TAGS);

@@ -26,7 +26,7 @@ public class NotorParserTest {
 
     @Test
     public void parseCommand_create() throws Exception {
-        Person person = new PersonBuilder().build();
+        Person person = new PersonBuilder().withNote(Note.EMPTY_NOTE).build();
         PersonCreateCommand command = (PersonCreateCommand) parser.parseCommand(PersonUtil.getCreateCommand(person));
         assertEquals(new PersonCreateCommand(null, person), command);
     }

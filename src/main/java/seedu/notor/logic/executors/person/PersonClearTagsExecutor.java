@@ -49,7 +49,7 @@ public class PersonClearTagsExecutor extends PersonExecutor {
             throw new ExecuteException(MESSAGE_TAGS_NOT_FOUND);
         }
 
-        WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE, 
+        WarningWindow warningWindow = new WarningWindow(String.format(CONFIRMATION_MESSAGE,
                 person.getTags().size(),
                 person.getName()));
         warningWindow.show();
