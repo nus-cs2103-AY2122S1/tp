@@ -74,7 +74,7 @@ class JsonSerializableNotor {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Note.class.getSimpleName()));
         }
-        final Note modelNote = new Note(note, noteDate);
+        final Note modelNote = Note.of(note, noteDate);
 
         Notor notor = new Notor(modelNote);
 

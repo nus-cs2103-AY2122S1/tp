@@ -50,10 +50,8 @@ public class GeneralNoteWindow extends NoteWindow {
     @Override
     public void handleSave() throws CommandException {
         String paragraph = noteTextArea.getText();
-        if (!paragraph.isEmpty()) {
-            Note editedNote = new Note(paragraph, noteLastModified());
-            notor.setNote(editedNote);
-        }
+        Note editedNote = Note.of(paragraph, noteLastModified());
+        notor.setNote(editedNote);
         logic.executeSaveNote(notor);
         resultDisplay.setFeedbackToUser(generateSuccessMessage(MESSAGE_SAVE_NOTE_SUCCESS));
     }

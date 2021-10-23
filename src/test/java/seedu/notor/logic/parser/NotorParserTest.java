@@ -91,7 +91,7 @@ public class NotorParserTest {
 
     @Test
     public void parseCommand_note() throws Exception {
-        final Note note = new Note("Test note", "");
+        final Note note = Note.of("Test note", "");
         PersonNoteCommand command = (PersonNoteCommand) parser.parseCommand("person 1 /note");
         assertEquals(new PersonNoteCommand(INDEX_FIRST_PERSON), command);
     }
