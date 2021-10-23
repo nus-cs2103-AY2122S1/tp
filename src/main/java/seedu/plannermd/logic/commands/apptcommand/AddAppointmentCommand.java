@@ -72,6 +72,7 @@ public class AddAppointmentCommand extends AppointmentCommand {
 
         List<Patient> patientList = model.getFilteredPatientList();
         List<Doctor> doctorList = model.getFilteredDoctorList();
+
         if (patientIndex.getZeroBased() >= patientList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
