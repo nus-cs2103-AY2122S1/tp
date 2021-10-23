@@ -66,7 +66,7 @@ public class LessonAddCommand extends UndoableCommand {
             + "Example (recurring lesson): "
             + COMMAND_EXAMPLE_RECURRING_LESSON;
 
-    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor student: %2$s";
+    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson for student %2$s: %1$s.";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
@@ -111,7 +111,7 @@ public class LessonAddCommand extends UndoableCommand {
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, personAfterLessonAdd),
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd),
                 personAfterLessonAdd);
     }
 

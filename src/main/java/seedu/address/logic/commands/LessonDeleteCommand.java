@@ -38,7 +38,7 @@ public class LessonDeleteCommand extends UndoableCommand {
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s\nfor student: %2$s";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson for student %2$s: %1$s.";
 
     private final Index index;
     private final Index lessonIndex;
@@ -78,7 +78,7 @@ public class LessonDeleteCommand extends UndoableCommand {
 
         model.setPerson(personBeforeLessonDelete, personAfterLessonDelete);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, toRemove, personAfterLessonDelete),
+        return new CommandResult(String.format(MESSAGE_DELETE_LESSON_SUCCESS, personAfterLessonDelete.getName(), toRemove),
                 personAfterLessonDelete);
     }
 

@@ -150,19 +150,19 @@ public abstract class Lesson implements Comparable<Lesson> {
         final StringBuilder builder = new StringBuilder();
         String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
         builder.append(typeOfLesson)
-            .append("\n")
+            .append(" ")
             .append(getDisplayDate())
-            .append("\nTime: ")
+            .append("; Time: ")
             .append(getTimeRange())
-            .append("\nSubject: ")
+            .append("; Subject: ")
             .append(getSubject())
-            .append("\nLesson Rates: ")
+            .append("; Lesson Rates: ")
             .append(getLessonRates());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
-            builder.append("\nHomework: ");
-            homework.forEach(builder::append);
+            builder.append("; Homework: ");
+            homework.forEach(x -> builder.append(x + "; "));
         }
         return builder.toString();
     }

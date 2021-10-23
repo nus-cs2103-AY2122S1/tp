@@ -59,7 +59,7 @@ public class LessonEditCommand extends UndoableCommand {
             + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson: %1$s\nto %2$s\nfor student: %3$s";
+    public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson for student %1$s:\n%2$s\nto %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
     public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!";
     public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE = "You cannot edit the type of a lesson. Please add another"
@@ -115,8 +115,8 @@ public class LessonEditCommand extends UndoableCommand {
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, toEdit,
-                editedLesson, personAfterLessonEdit), personAfterLessonEdit);
+        return new CommandResult(String.format(MESSAGE_EDIT_LESSON_SUCCESS, personAfterLessonEdit.getName(),
+                toEdit, editedLesson), personAfterLessonEdit);
     }
 
     /**
