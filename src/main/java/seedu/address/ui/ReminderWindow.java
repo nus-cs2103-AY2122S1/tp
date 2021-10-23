@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Entry;
@@ -23,6 +22,11 @@ public class ReminderWindow extends ExternalWindow {
     @FXML
     private ListView<Entry<Lesson>> lessonsList;
 
+    /**
+     * Constructs a reminder window with the list of upcoming lessons.
+     *
+     * @param lessons List of upcoming lessons to be shown.
+     */
     public ReminderWindow(ObservableList<Entry<Lesson>> lessons) {
         this(new Stage());
         lessonsList.setItems(lessons);
@@ -45,11 +49,6 @@ public class ReminderWindow extends ExternalWindow {
     public void show() {
         super.show();
         logger.fine("Showing the reminder of upcoming lessons.");
-    }
-
-    public ReminderWindow updateLessons(ObservableList<Entry<Lesson>> lessons) {
-        this.hide();
-        return new ReminderWindow(lessons);
     }
 
     /**
