@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -12,7 +11,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.friend.Friend;
-import seedu.address.model.friend.FriendGameFriendLinksContainsGamePredicate;
 import seedu.address.model.game.Game;
 import seedu.address.ui.util.SampleStyles;
 
@@ -46,10 +44,9 @@ public class GameMainCard extends UiPart<Region> {
     /**
      * Creates a {@code GameMainCard} with the given {@Code Game} and {@code ObservableList}.
      */
-    public GameMainCard(Game game, ObservableList<Friend> friendList) {
+    public GameMainCard(Game game, ObservableList<Friend> filteredFriendList) {
         super(FXML);
         gameTitle.setText(String.format(GAME_TITLE, game.getGameId()));
-        ObservableList<Friend> filteredFriendList = filterFriendsList(game, friendList);
         filteredFriendList.stream()
                 .sorted(Comparator.comparing(friend -> friend.getFriendId().value))
                 .forEach(friend -> {
@@ -58,15 +55,5 @@ public class GameMainCard extends UiPart<Region> {
                     friends.getChildren().add(label);
                 });
         this.currentGame = game;
-    }
-
-    private ObservableList<Friend> filterFriendsList(Game game, ObservableList<Friend> friendList) {
-        FilteredList<Friend> filteredFriends = new FilteredList<>(friendList);
-        filteredFriends.setPredicate(new FriendGameFriendLinksContainsGamePredicate(game));
-        return filteredFriends;
-    }
-
-    public Game getCurrentGame() {
-        return currentGame;
     }
 }

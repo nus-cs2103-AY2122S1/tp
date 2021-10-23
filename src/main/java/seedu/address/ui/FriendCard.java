@@ -63,10 +63,10 @@ public class FriendCard extends UiPart<Region> {
      * @return String with the friend's id and name.
      */
     private String formatFriendNameId(Friend friend) {
-        if (friend.getName().equals(FriendName.DEFAULT_FRIEND_NAME)) {
+        if (friend.getFriendName().equals(FriendName.DEFAULT_FRIEND_NAME)) {
             return friend.getFriendId().toString();
         } else {
-            return friend.getFriendId() + " (Name: " + friend.getName().fullName + ")";
+            return friend.getFriendId() + " (Name: " + friend.getFriendName().fullName + ")";
         }
     }
 

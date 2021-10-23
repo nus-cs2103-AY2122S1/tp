@@ -253,6 +253,8 @@ public class MainWindow extends UiPart<Stage> {
         showFriendList();
     }
 
+
+
     /**
      * Handles the mounting and dismounting of UI Regions when a {@Code game}
      * command is run.
