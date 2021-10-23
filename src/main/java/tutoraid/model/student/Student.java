@@ -88,7 +88,7 @@ public class Student {
      * Returns true if student has the lesson.
      */
     public boolean hasLesson(Lesson lesson) {
-        return this.lesson.equals(lesson);
+        return this.lessonList.contains(lesson);
     }
 
     /**
