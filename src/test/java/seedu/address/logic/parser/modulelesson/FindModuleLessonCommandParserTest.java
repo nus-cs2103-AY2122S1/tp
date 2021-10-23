@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_TUES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_11;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -28,7 +29,7 @@ public class FindModuleLessonCommandParserTest {
 
     @Test
     public void parse_emptyModule_throwsParseException() {
-        assertParseFailure(parser, "find m/",
+        assertParseFailure(parser, "find " + PREFIX_MODULE_CODE,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
     }
 
@@ -40,13 +41,13 @@ public class FindModuleLessonCommandParserTest {
                                 String.format("%s", VALID_MODULE_CODE_CS2040)
                         )
                 ));
-        String userInput = String.format(" m/%s", VALID_MODULE_CODE_CS2040);
+        String userInput = String.format(" %s%s", PREFIX_MODULE_CODE, VALID_MODULE_CODE_CS2040);
         assertParseSuccess(parser, userInput, expectedFindModuleLessonCommand);
     }
 
     @Test
     public void parse_emptyDay_throwsParseException() {
-        assertParseFailure(parser, "find d/",
+        assertParseFailure(parser, "find " + PREFIX_LESSON_DAY,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
     }
 
@@ -58,13 +59,13 @@ public class FindModuleLessonCommandParserTest {
                                 String.format("%s", VALID_LESSON_DAY_TUES)
                         )
                 ));
-        String userInput = String.format(" d/%s", VALID_LESSON_DAY_TUES);
+        String userInput = String.format(" %s%s", PREFIX_LESSON_DAY, VALID_LESSON_DAY_TUES);
         assertParseSuccess(parser, userInput, expectedFindModuleLessonCommand);
     }
 
     @Test
     public void parse_emptyTime_throwsParseException() {
-        assertParseFailure(parser, "find t/",
+        assertParseFailure(parser, "find " + PREFIX_LESSON_TIME,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_USAGE));
     }
 
@@ -76,25 +77,27 @@ public class FindModuleLessonCommandParserTest {
                                 String.format("%s", VALID_LESSON_TIME_11)
                         )
                 ));
-        String userInput = String.format(" t/%s", VALID_LESSON_TIME_11);
+        String userInput = String.format(" %s%s", PREFIX_LESSON_TIME, VALID_LESSON_TIME_11);
         assertParseSuccess(parser, userInput, expectedFindModuleLessonCommand);
     }
 
     @Test
     public void parse_twoPrefixesModuleAndDay_throwsParseException() {
-        assertParseFailure(parser, "find m/cs2100 d/2",
+        assertParseFailure(parser, String.format("find %scs2100 %s2", PREFIX_MODULE_CODE, PREFIX_LESSON_DAY),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
 
     @Test
     public void parse_twoPrefixesTimeAndDay_throwsParseException() {
-        assertParseFailure(parser, "find t/11:00 d/2",
+        assertParseFailure(parser, String.format("find %s11:00 %s2", PREFIX_LESSON_TIME, PREFIX_LESSON_DAY),
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
     }
 
     @Test
     public void parse_threePrefixesModuleAndTimeAndDay_throwsParseException() {
-        assertParseFailure(parser, "find m/cs2100 d/2 t/11:00",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH));
+        assertParseFailure(parser,
+                String.format("find %scs2100 %s2 %s11:00", PREFIX_MODULE_CODE, PREFIX_LESSON_DAY, PREFIX_LESSON_TIME),
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindModuleLessonCommand.MESSAGE_SINGLE_PREFIX_SEARCH)
+        );
     }
 }
