@@ -3,12 +3,37 @@ layout: page
 title: User Guide
 ---
 
-# User Guide
+### About RecruitIn
 
 RecruitIn is a desktop app for recruiters in Singapore to keep track of the plethora of clients with different skill sets, availability and experience. It is optimized for quick text-based inputs via a Command Line Interface (CLI) while still having the ease of use of a Graphical User Interface (GUI). This product will make recruiters’ lives easier through categorisation and filter features to easily access candidates they have in mind.
 
-* Table of Contents
-  {:toc}
+### About this guide
+
+This guide aims to help users get familiar with using RecruitIn's functions.
+* **New users** can get started by following the steps under [Quick start](#quick-start).
+* **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. You may also see a **summary** of existing features under [Command summary](#command-summary).
+* **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
+* Commonly addressed questions can be viewed under [FAQ](#faq). 
+
+### Table of Contents
+  * [Quick start](#quick-start)
+  * [Features](#features)
+    + [Viewing help : `help`](#viewing-help----help-)
+    + [Adding an applicant: `add`](#adding-an-applicant---add-)
+      - [Prefix Input Specifications ***{Advanced}***:](#prefix-input-specifications-----advanced-----)
+    + [Listing all applicants : `list`](#listing-all-applicants----list-)
+    + [Finding an applicant : `find`](#finding-an-applicant----find-)
+      - [Prefix Input Specifications ***{Advanced}***:](#prefix-input-specifications-----advanced------1)
+    + [Deleting an applicant : `delete`](#deleting-an-applicant----delete-)
+    + [Showing search terms : `show`](#showing-search-terms----show-)
+    + [Marking an applicant : `mark`](#marking-an-applicant----mark-)
+    + [Unmarking an applicant : `unmark`](#unmarking-an-applicant----unmark-)
+    + [Deleting marked applicants: `delete_marked`](#deleting-marked-applicants---delete-marked-)
+    + [Exiting the program : `exit`](#exiting-the-program----exit-)
+    + [Saving the data](#saving-the-data)
+    + [Editing the data file](#editing-the-data-file)
+  * [FAQ](#faq)
+  * [Command summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 
