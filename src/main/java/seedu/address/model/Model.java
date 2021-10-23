@@ -95,6 +95,8 @@ public interface Model {
      */
     boolean hasAssessment(Assessment assessment);
 
+    Assessment getAssessment(Assessment assessmentToMatch);
+
     /**
      * Adds the given assessment.
      * {@code assessment} must not already exist in the address book.

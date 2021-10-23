@@ -13,6 +13,8 @@ public class Score {
             "Score should be in percentage format, and it should have at most 2 decimal places";
     public static final String INTEGRAL_PART_REGEX = "\\d{1,2}";
     public static final String DECIMAL_PART_REGEX = "(\\.\\d{1,2})?";
+    public static final double MIN_SCORE = 0.0;
+    public static final double MAX_SCORE = 100.0;
     public static final String MAX_SCORE_REGEX = "|100.00|100.0|100";
     public static final String VALIDATION_REGEX = INTEGRAL_PART_REGEX + DECIMAL_PART_REGEX + MAX_SCORE_REGEX;
     public final String value;
@@ -46,6 +48,14 @@ public class Score {
         assert decimal.length() <= 2; // decimal part contains at most 2 digits
         decimal += "0".repeat(2 - decimal.length()); // add additional 0 as needed
         return integral + "." + decimal;
+    }
+
+    public double getNumericValue() {
+        return Double.parseDouble(value);
+    }
+
+    public boolean isMaxScore() {
+        return getNumericValue() == Score.MAX_SCORE;
     }
 
     public String getValue() {

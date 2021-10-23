@@ -4,12 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javafx.scene.chart.Chart;
+
 /**
  * Represents the result of a command execution.
  */
 public class CommandResult {
 
     private final String feedbackToUser;
+
+    private final Chart chart;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -20,8 +24,9 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, Chart chart, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.chart = chart;
         this.showHelp = showHelp;
         this.exit = exit;
     }
@@ -31,11 +36,27 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null, false, false);
+    }
+
+    public CommandResult(String feedbackToUser, Chart chart) {
+        this(feedbackToUser, chart, false, false);
+    }
+
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+        this(feedbackToUser, null, showHelp, exit);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Chart getChart() {
+        return chart;
+    }
+
+    public boolean hasChart() {
+        return chart != null;
     }
 
     public boolean isShowHelp() {

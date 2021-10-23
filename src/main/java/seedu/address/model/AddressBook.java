@@ -159,6 +159,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         return assessments.contains(assessment);
     }
 
+    public Assessment getAssessment(Assessment assessmentToMatch) {
+        requireNonNull(assessmentToMatch);
+
+        for (Assessment assessment : getAssessmentList()) {
+            if (assessment.equals(assessmentToMatch)) {
+                return assessment;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Adds an assessment to the address book.
      * The assessment must not already exist in the address book.
