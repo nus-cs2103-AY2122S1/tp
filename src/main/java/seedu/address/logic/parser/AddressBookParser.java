@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddAllocCommand;
+import seedu.address.logic.commands.AddAssessmentCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddScoreCommand;
@@ -15,6 +16,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ExportCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -79,6 +81,9 @@ public class AddressBookParser {
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
 
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommand();
+
         default:
             boolean isTwoWordCommand = arguments.length() > 0
                     && !arguments.startsWith(" -") && !Character.isDigit(arguments.charAt(1));
@@ -111,6 +116,9 @@ public class AddressBookParser {
 
         case ShowAssessmentCommand.COMMAND_WORD:
             return new ShowAssessmentCommandParser().parse(arguments);
+
+        case AddAssessmentCommand.COMMAND_WORD:
+            return new AddAssessmentCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

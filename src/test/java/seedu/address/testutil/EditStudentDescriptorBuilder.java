@@ -1,17 +1,14 @@
 package seedu.address.testutil;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditStudentDescriptor;
-import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
-import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
@@ -38,7 +35,6 @@ public class EditStudentDescriptorBuilder {
         descriptor.setName(student.getName());
         descriptor.setId(student.getId());
         descriptor.setGroups(student.getGroups());
-        // descriptor.setScore(student.getScores());
         descriptor.setTags(student.getTags());
     }
 
@@ -65,14 +61,6 @@ public class EditStudentDescriptorBuilder {
     public EditStudentDescriptorBuilder withGroups(String... groups) {
         List<Group> groupList = Stream.of(groups).map(Group::new).collect(Collectors.toList());
         descriptor.setGroups(groupList);
-        return this;
-    }
-
-    /**
-     * Sets the {@code scores} of the {@code EditStudentDescriptor} that we are building.
-     */
-    public EditStudentDescriptorBuilder withScores(Map<Assessment, Score> scores) {
-        descriptor.setScores(scores);
         return this;
     }
 

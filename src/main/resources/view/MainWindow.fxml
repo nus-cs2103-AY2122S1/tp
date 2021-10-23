@@ -33,7 +33,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
         </MenuBar>
-            <SplitPane dividerPositions="0.4" minWidth="680.0" prefWidth="680.0" VBox.vgrow="ALWAYS">
+            <SplitPane fx:id="splitPane" dividerPositions="0.4" minWidth="680.0" prefWidth="680.0" VBox.vgrow="ALWAYS">
                <items>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
                      <children>
