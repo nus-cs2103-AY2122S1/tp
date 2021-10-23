@@ -80,7 +80,7 @@ public class CategoryCode {
         case ATT:
             return "Attractions";
         case ACC:
-            return "Accomodation";
+            return "Accommodation";
         case FNB:
             return "Food & Beverages";
         case TPT:

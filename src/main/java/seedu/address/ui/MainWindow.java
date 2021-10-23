@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else opens the internal help window
+     * Opens the Online User Guide if possible, else opens the secondary internal help window
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
@@ -154,7 +154,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else opens the internal help window
+     * Opens the Command Summary if possible, else opens the secondary internal help window
      */
     public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
@@ -169,7 +169,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the secondary help window in that case that user's computer does not support Desktop operations
+     * Opens the secondary help window
      */
     @FXML
     public void handleBackUpHelp() {
