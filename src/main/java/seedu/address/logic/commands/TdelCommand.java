@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Name;
 import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
 import seedu.address.model.module.task.TaskList;
@@ -61,10 +62,11 @@ public class TdelCommand extends Command {
             throw new CommandException(MESSAGE_TASK_NOT_FOUND);
         }
         Task targetTask = tasks.get(targetTaskID.getZeroBased());
-        String deletedTaskName = targetTask.getTaskName();
+        Name deletedTaskName = targetTask.getName();
         model.deleteTask(targetMember, taskId);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName().toString(), deletedTaskName));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, targetMember.getName().toString(),
+                deletedTaskName.toString()));
     }
 
     @Override

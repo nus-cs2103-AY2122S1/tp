@@ -1,36 +1,31 @@
 package seedu.address.model.module.task;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.module.Module;
+import seedu.address.model.module.Name;
+
 /**
- * Represents a task in the Ail.
- * Guarantees: immutable; is valid as declared in {@link #isValidTaskName(String)}
+ * Represents a task in the Ailurus.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Task {
-    public static final String MESSAGE_CONSTRAINTS = "Task name can take any values, and it should not be blank";
-
-    /*
-     * The first character of the task name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String VALIDATION_REGEX = "[^\\s].*";
-
-    private final String taskName;
+public class Task extends Module {
+    // data fields
     private final boolean isDone;
+    private final TaskDeadline taskDeadline;
 
     /**
      * Constructs a {@code Task}.
      *
      * @param taskName A valid task name.
      */
-    public Task(String taskName) {
-        requireNonNull(taskName);
-        checkArgument(isValidTaskName(taskName), MESSAGE_CONSTRAINTS);
-        this.taskName = taskName;
+    public Task(Name taskName, TaskDeadline taskDeadline) {
+        super(taskName);
+        requireAllNonNull(taskDeadline);
         this.isDone = false;
+        this.taskDeadline = taskDeadline;
     }
 
     /**
@@ -39,35 +34,25 @@ public class Task {
      * @param taskName A valid task name.
      * @param isDone A boolean value.
      */
-    public Task(String taskName, boolean isDone) {
-        requireNonNull(taskName);
-        checkArgument(isValidTaskName(taskName), MESSAGE_CONSTRAINTS);
-        this.taskName = taskName;
+    public Task(Name taskName, boolean isDone, TaskDeadline taskDeadline) {
+        super(taskName);
+        requireAllNonNull(isDone, taskDeadline);
         this.isDone = isDone;
+        this.taskDeadline = taskDeadline;
     }
 
-    public String getTaskName() {
-        return taskName;
+    @Override
+    public boolean isSameType(Module module) {
+        return this.equals(module);
     }
 
     public boolean isDone() {
         return isDone;
     }
 
-    /**
-     * Returns true if a given string is a valid task name.
-     */
-    public static boolean isValidTaskName(String test) {
-        return test.matches(VALIDATION_REGEX);
+    public TaskDeadline getTaskDeadline() {
+        return taskDeadline;
     }
-
-    /**
-     * Returns true if both tasks are the same as defined
-     * This defines a weaker notion of equality between two tasks.
-     */
-    /*public boolean isSameTask(Task otherTask) {
-        return this.taskName.equals(otherTask.taskName);
-    }*/
 
     @Override
     public boolean equals(Object other) {
@@ -78,13 +63,14 @@ public class Task {
             return false;
         }
         Task task = (Task) other;
-        boolean result = isDone == task.isDone && taskName.equals(task.taskName);
+        boolean result = isDone == task.isDone && super.getName().equals(task.getName())
+                && this.getTaskDeadline().equals(task.getTaskDeadline());
         return result;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(taskName, isDone);
+        return Objects.hash(super.getName(), isDone);
     }
 
     private String getStatusIcon() {
@@ -93,6 +79,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return "(" + getStatusIcon() + ")" + taskName;
+        return "(" + getStatusIcon() + ")" + super.getName();
     }
 }

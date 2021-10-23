@@ -5,6 +5,7 @@ import static seedu.address.storage.JsonAdaptedMember.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalMembers.BENSON;
 import static seedu.address.testutil.TypicalMembers.JERRY;
+import static seedu.address.testutil.TypicalTasks.MEETING;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,14 @@ public class JsonAdaptedMemberTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_POSITION = "#friend";
     private static final String INVALID_TASK_NAME = " ";
+    private static final String INVALID_TASK_DEADLINE = "1973/01/01 00:00";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().get().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().get().toString();
+    private static final String VALID_TASK_NAME = MEETING.getName().toString();
+    private static final String VALID_TASK_DEADLINE = MEETING.getTaskDeadline().toString();
     private static final List<JsonAdaptedPosition> VALID_POSITIONS = BENSON.getPositions().stream()
             .map(JsonAdaptedPosition::new)
             .collect(Collectors.toList());
@@ -117,9 +121,18 @@ public class JsonAdaptedMemberTest {
     }
 
     @Test
-    public void toModelType_invalidTaskList_throwsIllegalValueException() {
+    public void toModelType_invalidTaskName_throwsIllegalValueException() {
         List<JsonAdaptedTask> invalidTaskList = new ArrayList<>(VALID_TASK_LIST);
-        invalidTaskList.add(new JsonAdaptedTask(INVALID_TASK_NAME, false));
+        invalidTaskList.add(new JsonAdaptedTask(INVALID_TASK_NAME, false, VALID_TASK_DEADLINE));
+        JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL,
+                VALID_ADDRESS, VALID_POSITIONS, invalidTaskList);
+        assertThrows(IllegalValueException.class, member::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidTaskDeadline_throwsIllegalValueException() {
+        List<JsonAdaptedTask> invalidTaskList = new ArrayList<>(VALID_TASK_LIST);
+        invalidTaskList.add(new JsonAdaptedTask(VALID_TASK_NAME, false, INVALID_TASK_DEADLINE));
         JsonAdaptedMember member = new JsonAdaptedMember(VALID_NAME, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_POSITIONS, invalidTaskList);
         assertThrows(IllegalValueException.class, member::toModelType);

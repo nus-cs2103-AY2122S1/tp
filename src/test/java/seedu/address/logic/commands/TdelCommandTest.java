@@ -28,6 +28,7 @@ import seedu.address.model.module.task.Task;
 import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 
 class TdelCommandTest {
@@ -40,7 +41,7 @@ class TdelCommandTest {
     public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
         Index validTaskID = Index.fromOneBased(1);
-        Task validTask = new Task("Do homework");
+        Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand tAddCommand = new TaddCommand(validMemberID, validTask);
@@ -48,7 +49,7 @@ class TdelCommandTest {
         tAddCommand.execute(modelStub);
         CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);
 
-        assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getTaskName()),
+        assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getName()),
                 commandResult.getFeedbackToUser());
     }
 

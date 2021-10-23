@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID_DEL;
@@ -40,7 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_POSITION_HUSBAND = "husband";
     public static final String VALID_POSITION_FRIEND = "friend";
-    public static final String VALID_TASK_NAME = "write a poem";
+    public static final String VALID_POEM_TASK_NAME = "write a poem";
+    public static final String VALID_POEM_TASK_DEADLINE = "25/10/2021 18:00";
     public static final String VALID_EVENT_NAME_CHESS = "Chess Competition";
     public static final String VALID_EVENT_NAME_BADMINTON = "Recreational badminton";
     public static final String VALID_EVENT_DATE_CHESS = "10/10/2030";
@@ -60,7 +62,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String POSITION_DESC_FRIEND = " " + PREFIX_POSITION + VALID_POSITION_FRIEND;
     public static final String POSITION_DESC_HUSBAND = " " + PREFIX_POSITION + VALID_POSITION_HUSBAND;
-    public static final String TASK_NAME_DESC_POEM = " " + CliSyntax.PREFIX_NAME + VALID_TASK_NAME;
+    public static final String TASK_NAME_DESC_POEM = " " + PREFIX_NAME + VALID_POEM_TASK_NAME;
+    public static final String TASK_DEADLINE_DESC_POEM = " " + PREFIX_DATE + VALID_POEM_TASK_DEADLINE;
     public static final String TASK_ID_DESC_ONE = " " + PREFIX_TASK_ID + VALID_TASK_ID;
     public static final String MEMBER_ID_DESC_ONE = " " + PREFIX_MEMBER_ID + VALID_MEMBER_ID;
     public static final String MEMBER_ID_DEL_DESC_ONE = " " + PREFIX_MEMBER_ID_DEL + VALID_MEMBER_ID;
