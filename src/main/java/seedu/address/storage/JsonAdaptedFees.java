@@ -32,7 +32,7 @@ public class JsonAdaptedFees {
      */
     public JsonAdaptedFees(OutstandingFees source) {
         value = source.value;
-        lastAdded = source.getLastAdded().lastAdded;
+        lastAdded = source.getLastAdded().lastAddedString;
 
     }
 

@@ -14,6 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.FeesCalculator;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 

@@ -34,6 +34,15 @@ public class LessonRates {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Get Lesson Rates in float type for total cost per lesson calculation.
+     */
+    public float getLessonRatesFloat() {
+        return Float.parseFloat(value);
+    }
+
+
+
     @Override
     public String toString() {
         return value;

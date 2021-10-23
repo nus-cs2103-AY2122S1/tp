@@ -118,7 +118,7 @@ public class OutstandingFees {
                 .toFormatter(Locale.ENGLISH)
                 .withResolverStyle(ResolverStyle.STRICT);
 
-        public final String lastAdded;
+        public final String lastAddedString;
         private final LocalDate lastAddedDate;
 
         /**
@@ -127,7 +127,7 @@ public class OutstandingFees {
          */
         private LastAddedDate() {
             lastAddedDate = LocalDate.now();
-            lastAdded = lastAddedDate.toString();
+            lastAddedString = lastAddedDate.toString();
         }
 
         /**
@@ -136,11 +136,15 @@ public class OutstandingFees {
          */
         public LastAddedDate(String lastAddedDate) {
             this.lastAddedDate = LocalDate.parse(lastAddedDate, FORMATTER);
-            lastAdded = lastAddedDate;
+            lastAddedString = lastAddedDate;
         }
 
         public static LastAddedDate of() {
             return new LastAddedDate();
+        }
+
+        public LocalDate getLastAddedDate() {
+            return lastAddedDate;
         }
 
         /**
@@ -161,19 +165,19 @@ public class OutstandingFees {
 
         @Override
         public String toString() {
-            return lastAdded;
+            return lastAddedString;
         }
 
         @Override
         public boolean equals(Object other) {
             return other == this // short circuit if same object
                     || (other instanceof LastAddedDate // instanceof handles nulls
-                    && lastAdded.equals(((LastAddedDate) other).lastAdded)); // state check
+                    && lastAddedString.equals(((LastAddedDate) other).lastAddedString)); // state check
         }
 
         @Override
         public int hashCode() {
-            return lastAdded.hashCode();
+            return lastAddedString.hashCode();
         }
     }
 }
