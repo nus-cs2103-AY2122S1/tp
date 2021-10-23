@@ -84,9 +84,6 @@ public class LoginScreen implements Ui {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         userInput.setOnAction((event) -> {
-            if (isNew) {
-                app.setInputPassword(userInput.getText());
-            }
             try {
                 app.logIn(userInput.getText());
             } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {

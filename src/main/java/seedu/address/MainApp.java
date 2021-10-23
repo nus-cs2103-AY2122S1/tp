@@ -59,7 +59,6 @@ public class MainApp extends Application {
     protected Config config;
     protected Encryption cryptor;
 
-    private String inputPassword;
     private Stage stage;
     private UserPrefs userPrefs;
 
@@ -79,12 +78,7 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
-
-        if (FileUtil.isFileExists(userPrefs.getEncryptedFilePath())) {
-            ui = new LoginScreen(this, false);
-        } else {
-            ui = new LoginScreen(this, true);
-        }
+        ui = new LoginScreen(this, !FileUtil.isFileExists(userPrefs.getEncryptedFilePath()));
     }
 
     /**
@@ -237,7 +231,6 @@ public class MainApp extends Application {
         try {
             cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
             FileUtil.deleteFile(storage.getAddressBookFilePath());
-            inputPassword = input;
             afterLogIn();
         } catch (InvalidAlgorithmParameterException | IOException | InvalidKeyException e) {
             e.printStackTrace();
@@ -253,15 +246,10 @@ public class MainApp extends Application {
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
      */
     public void afterLogIn() throws UnsupportedPasswordException, NoSuchPaddingException, NoSuchAlgorithmException {
-        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(inputPassword), CIPHER_TRANSFORMATION);
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         ui = new UiManager(logic);
         ui.start(stage);
-    }
-
-    public void setInputPassword(String password) {
-        inputPassword = password;
     }
 
     @Override
