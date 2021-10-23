@@ -93,6 +93,17 @@ public class NextMeeting implements OptionalNonStringBasedField {
         return test.matches(VALID_MEETING_STRING);
     }
 
+    public boolean isMeetingOver(LocalDate checkDate, LocalTime checkTime) {
+        if (date == null || endTime == null) {
+            return false;
+        }
+        return date.isBefore(checkDate) || date.isEqual(checkDate) && endTime.isBefore(checkTime);
+    }
+
+    public LastMet convertToLastMet() {
+        return new LastMet(dateInString);
+    }
+
     @Override
     public String toString() {
         if (date == null) {

@@ -136,6 +136,31 @@ public class EditCommand extends Command {
                 updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
     }
 
+    /**
+     * Creates and returns a {@code Client} with the {@code LastMet} date being replaced by
+     * the {@code NextMeeting} date and {@code NextMeeting} being set to {@code NullMeeting}
+     */
+    public static Client createEditedMeetingOverClient(Client clientToEdit) {
+        assert clientToEdit != null;
+
+        ClientId oldClientId = clientToEdit.getClientId();
+        Name oldName = clientToEdit.getName();
+        Email oldEmail = clientToEdit.getEmail();
+        Phone oldPhone = clientToEdit.getPhone();
+        Address oldAddress = clientToEdit.getAddress();
+        RiskAppetite oldRiskAppetite = clientToEdit.getRiskAppetite();
+        DisposableIncome oldDisposableIncome = clientToEdit.getDisposableIncome();
+        CurrentPlan oldCurrentPlan = clientToEdit.getCurrentPlan();
+        Set<Tag> oldTags = clientToEdit.getTags();
+
+        LastMet updatedLastMet = clientToEdit.getNextMeeting().convertToLastMet();
+        NextMeeting updatedNextMeeting = NextMeeting.NULL_MEETING;
+
+
+        return new Client(oldClientId, oldName, oldPhone, oldEmail, oldAddress, oldRiskAppetite,
+            oldDisposableIncome, oldCurrentPlan, updatedLastMet, updatedNextMeeting, oldTags);
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
