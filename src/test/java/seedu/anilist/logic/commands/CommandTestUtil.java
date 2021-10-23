@@ -36,10 +36,11 @@ public class CommandTestUtil {
     public static final String VALID_EPISODE_ONE = "1";
     public static final String VALID_EPISODE_TWO = "2";
     public static final String VALID_ACTION_ADD = "add";
-    public static final String VALID_ACTION_DELETE = "delete";
+    public static final String VALID_ACTION_DELETE_SHORT_FORM = "d";
     public static final String VALID_STATUS_TOWATCH = "towatch";
     public static final String VALID_STATUS_WATCHING = "watching";
 
+    public static final String INVALID_ACTION_EMPTY_STRING = "";
     public static final String INVALID_ACTION_NO_SUCH_ACTION = "dancing";
     public static final String INVALID_GENRE_NOT_IN_LIST = "tentacles";
 
@@ -52,7 +53,7 @@ public class CommandTestUtil {
     public static final String STATUS_DESC_TOWATCH = " " + PREFIX_STATUS + VALID_STATUS_TOWATCH;
     public static final String STATUS_DESC_WATCHING = " " + PREFIX_STATUS + VALID_STATUS_WATCHING;
     public static final String ACTION_DESC_ADD = " " + PREFIX_ACTION + VALID_ACTION_ADD;
-    public static final String ACTION_DESC_DELETE = " " + PREFIX_ACTION + VALID_ACTION_DELETE;
+    public static final String ACTION_DESC_DELETE = " " + PREFIX_ACTION + VALID_ACTION_DELETE_SHORT_FORM;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + " "; // cannot be blank
     public static final String INVALID_NAME_DESC_NONASCII = " " + PREFIX_NAME + "中文";

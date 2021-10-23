@@ -17,6 +17,8 @@ public enum Action {
      */
     public static boolean isValidAction(String test) {
         switch (test) {
+        case "a":
+        case "d":
         case "add" :
         case "delete" :
             return true;
@@ -32,8 +34,10 @@ public enum Action {
         assert actionString != null;
 
         switch (actionString) {
+        case "a":
         case "add" :
             return Action.ADD;
+        case "d":
         case "delete" :
             return Action.DELETE;
         default:
