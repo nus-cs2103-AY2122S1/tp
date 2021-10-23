@@ -3,12 +3,18 @@ package tutoraid.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tutoraid.commons.core.Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX;
 import static tutoraid.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static tutoraid.logic.commands.CommandTestUtil.CAPACITY_DESC_MATH;
+import static tutoraid.logic.commands.CommandTestUtil.LESSON_NAME_DESC_MATH;
 import static tutoraid.logic.commands.CommandTestUtil.PARENT_NAME_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.PARENT_PHONE_DESC_AMY;
+import static tutoraid.logic.commands.CommandTestUtil.PRICE_DESC_MATH;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_NAME_DESC_AMY;
 import static tutoraid.logic.commands.CommandTestUtil.STUDENT_PHONE_DESC_AMY;
+import static tutoraid.logic.commands.CommandTestUtil.TIMING_DESC_MATH;
+import static tutoraid.logic.commands.CommandTestUtil.VALID_ADD_LESSON_COMMAND;
 import static tutoraid.logic.commands.CommandTestUtil.VALID_ADD_STUDENT_COMMAND;
 import static tutoraid.testutil.Assert.assertThrows;
+import static tutoraid.testutil.TypicalLessons.MATHS_TWO;
 import static tutoraid.testutil.TypicalStudents.AMY;
 
 import java.io.IOException;
@@ -27,11 +33,13 @@ import tutoraid.model.ModelManager;
 import tutoraid.model.ReadOnlyLessonBook;
 import tutoraid.model.ReadOnlyStudentBook;
 import tutoraid.model.UserPrefs;
+import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Student;
 import tutoraid.storage.JsonTutorAidLessonStorage;
 import tutoraid.storage.JsonTutorAidStudentStorage;
 import tutoraid.storage.JsonUserPrefsStorage;
 import tutoraid.storage.StorageManager;
+import tutoraid.testutil.LessonBuilder;
 import tutoraid.testutil.StudentBuilder;
 
 public class LogicManagerTest {
@@ -84,7 +92,7 @@ public class LogicManagerTest {
         StorageManager storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
-        // Execute add command
+        // Execute add student command
         String addCommand = VALID_ADD_STUDENT_COMMAND + STUDENT_NAME_DESC_AMY + STUDENT_PHONE_DESC_AMY
                 + PARENT_NAME_DESC_AMY + PARENT_PHONE_DESC_AMY;
         Student expectedStudent = new StudentBuilder(AMY).build();
@@ -92,6 +100,29 @@ public class LogicManagerTest {
         expectedModel.addStudent(expectedStudent);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_lessonsStorageThrowsIoException_throwsCommandException() {
+        // Setup LogicManager with JsonTutorAidIoExceptionThrowingStub
+        JsonTutorAidStudentStorage studentBookStorage =
+                new JsonTutorAidStudentIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionStudentBook.json"));
+        JsonTutorAidLessonStorage lessonBookStorage =
+                new JsonTutorAidLessonIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionLessonBook.json"));
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
+        StorageManager storage = new StorageManager(studentBookStorage, lessonBookStorage, userPrefsStorage);
+        logic = new LogicManager(model, storage);
+
+        // Execute add lesson command
+        String addLessonCommand = VALID_ADD_LESSON_COMMAND + LESSON_NAME_DESC_MATH + CAPACITY_DESC_MATH
+                + PRICE_DESC_MATH + TIMING_DESC_MATH;
+        Lesson expectedLesson = new LessonBuilder(MATHS_TWO).build();
+        ModelManager expectedModel = new ModelManager();
+        expectedModel.addLesson(expectedLesson);
+        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        assertCommandFailure(addLessonCommand, CommandException.class, expectedMessage, expectedModel);
+
     }
 
     @Test
