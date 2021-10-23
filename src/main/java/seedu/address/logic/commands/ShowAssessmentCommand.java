@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Assessment;
+import seedu.address.model.student.AssessmentStatistics;
 
 public class ShowAssessmentCommand extends Command {
     public static final String COMMAND_WORD = "show assessment";
@@ -37,7 +38,7 @@ public class ShowAssessmentCommand extends Command {
         Assessment assessmentFound = model.getAssessment(toDisplay);
         assert assessmentFound != null;
 
-        Assessment.AssessmentStatistics statistics = new Assessment.AssessmentStatistics(assessmentFound);
+        AssessmentStatistics statistics = new AssessmentStatistics(assessmentFound);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, assessmentFound.getValue()), statistics.toBarChart());
     }
