@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.GuiSettings;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
@@ -68,7 +68,7 @@ public interface Model {
      * Shows the given student's lab results.
      * The student must exist in ProgrammerError.
      */
-    ObservableList<LabResult> showLabResultList(Student target);
+    ObservableList<Lab> showLabResultList(Student target);
 
     /**
      * Adds the given student.

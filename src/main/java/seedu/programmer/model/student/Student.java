@@ -3,7 +3,6 @@ package seedu.programmer.model.student;
 import static seedu.programmer.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +21,7 @@ public class Student {
     private final StudentId studentId;
     private final ClassId classId;
     private final Email email;
-    private LinkedHashMap<String,Lab> labResultList;
+    private ObservableList<Lab> labResultList;
 
 
     /**
@@ -34,7 +33,7 @@ public class Student {
         this.studentId = studentId;
         this.classId = classId;
         this.email = email;
-        //this.labResultList = FXCollections.observableArrayList();
+        this.labResultList = FXCollections.observableArrayList();
     }
 
     public Name getName() {
@@ -58,7 +57,7 @@ public class Student {
         return email;
     }
 
-    public LinkedHashMap<String, Lab> getLabResultList() {
+    public ObservableList<Lab> getLabResultList() {
         return labResultList;
     }
 
@@ -66,16 +65,14 @@ public class Student {
      * Add a lab result into the student's record
      * */
     public void addLabResult(Lab result) {
-        this.labResultList.put(result.getTitle(), result);
+        this.labResultList.add(result);
     }
 
     public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
             labResultRecord = new ArrayList<>();
         }
-        for(Lab labresult: labResultRecord) {
-            labResultList.put(labresult.getTitle(), labresult);
-        }
+        this.labResultList.addAll(labResultRecord);
     }
     /**
      * Returns true if both students have the same name.

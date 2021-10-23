@@ -8,7 +8,7 @@ import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.ReadOnlyProgrammerError;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
@@ -35,7 +35,7 @@ public interface Logic {
     ObservableList<Student> getFilteredStudentList();
 
     /** Returns an unmodifiable view of the lab scores of a student */
-    ObservableList<LabResult> getLabResultList(Student target);
+    ObservableList<Lab> getLabResultList(Student target);
 
     /**
      * Returns the user prefs' ProgrammerError file path.

@@ -19,7 +19,7 @@ import seedu.programmer.model.student.Lab;
  * Parses input arguments and creates a new CreateLabResultCommand object
  */
 //todo: for test of show feature only
-public class CreateLabResultCommandParser implements Parser<AddLabCommand> {
+public class AddLabCommandParser implements Parser<AddLabCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand

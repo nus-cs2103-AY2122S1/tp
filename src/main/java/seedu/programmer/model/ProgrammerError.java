@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.UniqueStudentList;
 
@@ -108,7 +108,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     }
 
     @Override
-    public ObservableList<LabResult> showLabResultList(Student target) {
+    public ObservableList<Lab> showLabResultList(Student target) {
         return target.getLabResultList();
     }
 

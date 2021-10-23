@@ -77,7 +77,7 @@ public class ProgrammerErrorParser {
             return new FillCommand();
 
         case AddLabCommand.COMMAND_WORD:
-            return new CreateLabResultCommandParser().parse(arguments);
+            return new AddLabCommandParser().parse(arguments);
 
         case ShowCommand.COMMAND_WORD:
             return new ShowCommandParser().parse(arguments);

@@ -16,7 +16,7 @@ import seedu.programmer.model.student.Student;
  */
 public class AddLabCommand extends Command {
 
-    public static final String COMMAND_WORD = "create";
+    public static final String COMMAND_WORD = "addlab";
 
     //todo: for test of show feature only
     public static final String MESSAGE_USAGE = COMMAND_WORD + "work in progress";
@@ -42,7 +42,9 @@ public class AddLabCommand extends Command {
         List<Student> lastShownList = model.getFilteredStudentList();
 
         for(Student std: lastShownList) {
-            std.addLabResult(this.result);
+            Student target = std;
+            target.addLabResult(this.result);
+            model.setStudent(target, std);
         }
 
 //        if (targetIndex.getZeroBased() >= lastShownList.size()) {
