@@ -24,6 +24,7 @@ import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.patient.PatientBuilder;
 
 public class AddPatientCommandTest {
@@ -84,18 +85,17 @@ public class AddPatientCommandTest {
     private class ModelStub implements Model {
         @Override
         public void setState(State state) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public State getState() {
-            return null;
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void toggleState() {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -160,8 +160,7 @@ public class AddPatientCommandTest {
 
         @Override
         public boolean hasDoctor(Doctor doctor) {
-            return false;
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -171,12 +170,12 @@ public class AddPatientCommandTest {
 
         @Override
         public void addDoctor(Doctor doctor) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void setDoctor(Doctor target, Doctor editedDoctor) {
-            //TODO
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -227,6 +226,16 @@ public class AddPatientCommandTest {
         @Override
         public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public <T extends Person> void deleteAppointmentsWithPerson(T person) {
+
+        }
+
+        @Override
+        public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
+
         }
     }
 

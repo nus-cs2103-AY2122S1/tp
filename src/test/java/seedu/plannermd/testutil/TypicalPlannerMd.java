@@ -24,8 +24,8 @@ public class TypicalPlannerMd {
             pm.addDoctor(doctor);
         }
 
-        for (Appointment appointment: getTypicalAppointments()){
-            pm.addAppointment(appointment);
+        for (Appointment appointment: getTypicalAppointments()) {
+
         }
         return pm;
     }

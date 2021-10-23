@@ -240,7 +240,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public <T extends Person> void deleteAppointmentsWithPerson(T  person) {
+    public <T extends Person> void deleteAppointmentsWithPerson(T person) {
         plannerMd.deleteAppointmentsWithPerson(person);
     }
 

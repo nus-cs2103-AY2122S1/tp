@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.model.appointment.Appointment;
@@ -202,7 +201,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
      * @param person person whose appointments should be deleted
      * @param <T> Subtype of Person
      */
-    public <T extends Person> void deleteAppointmentsWithPerson(T  person) {
+    public <T extends Person> void deleteAppointmentsWithPerson(T person) {
         appointments.deleteAppointmentsWithPerson(person);
     }
 

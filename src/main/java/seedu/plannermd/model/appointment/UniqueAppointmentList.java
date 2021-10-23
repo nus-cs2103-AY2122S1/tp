@@ -104,9 +104,10 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Iterates though list of {@code Appointments} and delete those with person
-     * @param person
-     * @param <T>
+     * Delete {@code Appointments} with {@code person} from appointment list
+     *
+     * @param person person whose appointments are to be deleted
+     * @param <T> subtype of Person
      */
     public <T extends Person> void deleteAppointmentsWithPerson(T person) {
         if (person instanceof Patient) {
@@ -116,6 +117,13 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
     }
 
+    /**
+     * Replace {@code person} with {@code editedPerson} for {@code Appointments} with {@code person}
+     *
+     * @param person person whose appointments are to be updated
+     * @param editedPerson person replacing {@code person}
+     * @param <T> subtype of Person
+     */
     public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
         if (person instanceof Patient) {
             editAppointmentsWithPatient((Patient) person, (Patient) editedPerson);
@@ -124,7 +132,12 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
     }
 
-    public void deleteAppointmentsWithPatient(Patient  patient) {
+    /**
+     * Iterates though list of {@code Appointments} and delete those with {@code patient}
+     *
+     * @param patient person whose appointments are to be deleted
+     */
+    public void deleteAppointmentsWithPatient(Patient patient) {
         for (Appointment appointment : internalList) {
             if (appointment.getPatient().isSamePerson(patient)) {
                 internalList.remove(patient);
@@ -132,6 +145,11 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
     }
 
+    /**
+     * Iterates though list of {@code Appointments} and delete those with {@code doctor}
+     *
+     * @param doctor person whose appointments are to be deleted
+     */
     public void deleteAppointmentsWithDoctor(Doctor doctor) {
         for (Appointment appointment : internalList) {
             if (appointment.getPatient().isSamePerson(doctor)) {
@@ -140,22 +158,34 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         }
     }
 
-    public void editAppointmentsWithPatient(Patient  patient, Patient editedPatient) {
+    /**
+     * Iterates though list of {@code Appointments} and update those with {@code patient} to {@code editedPatient}
+     *
+     * @param patient patient whose appointments are to be updated
+     * @param editedPatient patient replacing {@code patient}
+     */
+    public void editAppointmentsWithPatient(Patient patient, Patient editedPatient) {
         for (Appointment appointment : internalList) {
             if (appointment.getPatient().isSamePerson(patient)) {
-                Appointment editedAppointment
-                        = new Appointment(editedPatient, appointment.getDoctor(),
+                Appointment editedAppointment =
+                        new Appointment(editedPatient, appointment.getDoctor(),
                         appointment.getAppointmentDate(), appointment.getSession(), appointment.getRemark());
                 setAppointment(appointment, editedAppointment);
             }
         }
     }
 
+    /**
+     * Iterates though list of {@code Appointments} and update those with {@code doctor} to {@code editedDoctor}
+     *
+     * @param doctor doctor whose appointments are to be updated
+     * @param editedDoctor doctor replacing {@code doctor}
+     */
     public void editAppointmentsWithDoctor(Doctor doctor, Doctor editedDoctor) {
         for (Appointment appointment : internalList) {
             if (appointment.getDoctor().isSamePerson(doctor)) {
-                Appointment editedAppointment
-                        = new Appointment(appointment.getPatient(), editedDoctor,
+                Appointment editedAppointment =
+                        new Appointment(appointment.getPatient(), editedDoctor,
                         appointment.getAppointmentDate(), appointment.getSession(), appointment.getRemark());
                 setAppointment(appointment, editedAppointment);
             }

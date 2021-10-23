@@ -199,7 +199,7 @@ public interface Model {
      * @param person person whose appointments should be deleted
      * @param <T> Subtype of Person
      */
-    <T extends Person> void deleteAppointmentsWithPerson(T  person);
+    <T extends Person> void deleteAppointmentsWithPerson(T person);
 
     /**
      * Update appointments with {@code person} to {@code editedPerson} from the appointment list
