@@ -45,6 +45,8 @@ public class EditModuleLessonCommand extends Command {
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited Lesson: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS.";
     public static final String MESSAGE_NO_FIELD_PROVIDED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_NO_LESSON_CODE_PROVIDED = "Lesson code is compulsory.";
+    public static final String MESSAGE_MORE_THAN_ONE_LESSON_CODE = "One Lesson should only have one Lesson Code.";
 
     private final Index index;
     private final EditLessonDescriptor editLessonDescriptor;

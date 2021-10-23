@@ -3,6 +3,8 @@ package seedu.address.logic.parser.modulelesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX;
+import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_MORE_THAN_ONE_LESSON_CODE;
+import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_NO_LESSON_CODE_PROVIDED;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON_DAY;
@@ -26,6 +28,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.ModuleCode;
 
 /**
  * Parses input arguments and creates a new EditModuleLessonCommand object
@@ -61,6 +64,13 @@ public class EditModuleLessonCommandParser implements Parser<EditModuleLessonCom
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
         if (validArgumentMultimap.getValue(PREFIX_MODULE_CODE).isPresent()) {
+            ModuleCode moduleCode =
+                    ParserUtil.parseModuleCode(validArgumentMultimap.getValue(PREFIX_MODULE_CODE).get());
+            if (moduleCode.getLessonCodes().size() == 0){
+                throw new ParseException(MESSAGE_NO_LESSON_CODE_PROVIDED);
+            } else if (moduleCode.getLessonCodes().size() > 1) {
+                throw new ParseException(MESSAGE_MORE_THAN_ONE_LESSON_CODE);
+            }
             editLessonDescriptor.setModuleCode(
                     ParserUtil.parseModuleCode(validArgumentMultimap.getValue(PREFIX_MODULE_CODE).get()));
         }
