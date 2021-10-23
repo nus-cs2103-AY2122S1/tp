@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import java.util.Arrays;
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +23,7 @@ import seedu.address.model.Date;
 import seedu.address.model.order.Amount;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
+import seedu.address.model.task.Task;
 
 public class DeleteOrderCommandTest {
     private static final Order testOrder = new Order(new Customer("test customer"),
@@ -79,6 +81,11 @@ public class DeleteOrderCommandTest {
         public void deleteOrder(Order order) {
             requireNonNull(order);
             listWithOneOrder.remove(order);
+        }
+
+        @Override
+        public void deleteTaskIf(Predicate<Task> pred) {
+            return;
         }
 
         @Override
