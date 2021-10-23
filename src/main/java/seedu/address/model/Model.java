@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -107,34 +108,34 @@ public interface Model {
      */
     void setTask(Task target, Task editedTask);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
 
     void deleteTask(Task toDelete);
 
     void updateFilteredTaskList(Predicate<Task> predicate);
 
-    void markDone(Task task);
+    void markTask(Task toMark);
 
     //======================================== ORDER FUNCTIONALITIES =================================================
     /**
-     * Adds the given task.
+     * Adds the given order.
      */
     void addOrder(Order order);
 
     /**
-     * Returns true if a task with the same identity as {@code task} exists in the task list.
+     * Returns true if an order with the same identity as {@code order} exists in the order list.
      */
     boolean hasOrder(Order order);
 
     /**
-     * Replaces the given task {@code target} with {@code editedTask}.
-     * {@code target} must exist in the task list.
-     * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
+     * Replaces the given order {@code target} with {@code editedOrder}.
+     * {@code target} must exist in the order list.
+     * The order identity of {@code editedOrder} must not be the same as another existing order in the order list.
      */
     void setOrder(Order target, Order editedOrder);
 
-    /** Returns and unmodifiable view of the filtered task list */
+    /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
     void deleteOrder(Order toDelete);
@@ -142,4 +143,12 @@ public interface Model {
     void updateFilteredOrderList(Predicate<Order> predicate);
 
     void markOrder(Order order);
+
+    void sortOrderList(Comparator<Order> comparator);
+
+    /** Resets the order list to its regular ordering based on id */
+    void resetOrderView();
+
+    /** Returns an unmodifiable view of the list of ClientTotalOrders */
+    ObservableList<ClientTotalOrder> getClientTotalOrders();
 }

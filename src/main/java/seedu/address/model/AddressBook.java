@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -112,7 +113,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
     //// task-level operations
 
     public void addTask(Task toAdd) {
@@ -123,12 +123,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.remove(toDelete);
     }
 
-    public void markDone(Task task) {
-        tasks.markDone(task);
+    public void markTask(Task task) {
+        tasks.markTask(task);
     }
 
-    public void setTask(Task target, Task editedtask) {
-        tasks.setTask(target, editedtask);
+    public void setTask(Task target, Task editedTask) {
+        tasks.setTask(target, editedTask);
     }
 
     public boolean hasTask(Task task) {
@@ -157,13 +157,18 @@ public class AddressBook implements ReadOnlyAddressBook {
         return orders.hasOrder(order);
     }
 
+    public void sortOrders(Comparator<Order> comparator) {
+        orders.sort(comparator);
+    }
+
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return persons.asUnmodifiableObservableList().size() + " persons; "
+                + tasks.asUnmodifiableObservableList().size() + " tasks; "
+                + orders.asUnmodifiableObservableList().size() + " orders.";
     }
 
     @Override
