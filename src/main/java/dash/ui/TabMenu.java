@@ -3,6 +3,7 @@ package dash.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -48,6 +49,11 @@ public class TabMenu extends UiPart<Region> {
      */
     public TabMenu() {
         super(FXML);
+        tabMenu.addEventFilter(KeyEvent.ANY, event -> {
+            if (event.getCode().isArrowKey()) {
+                event.consume();
+            }
+        });
     }
 
     /**
