@@ -24,7 +24,7 @@ import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import org.junit.jupiter.api.Test;
 
@@ -96,7 +96,7 @@ public class EditModuleLessonCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         StringBuilder sb = new StringBuilder(targetIndex.getOneBased() + "");
         sb.append(MODULE_CODE_DESC_CS2030S_T12)
                 .append(LESSON_DAY_DESC_TUES)
@@ -115,7 +115,7 @@ public class EditModuleLessonCommandParserTest {
 
     @Test
     public void parse_someFieldsSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         StringBuilder sb = new StringBuilder(targetIndex.getOneBased() + "");
         sb.append(MODULE_CODE_DESC_CS2030S_T12)
                 .append(LESSON_DAY_DESC_TUES);
@@ -130,7 +130,7 @@ public class EditModuleLessonCommandParserTest {
 
     @Test
     public void parse_oneFieldSpecified_success() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String arg = targetIndex.getOneBased() + "";
         EditLessonDescriptor descriptor;
         EditModuleLessonCommand expectedCommand;
@@ -156,7 +156,7 @@ public class EditModuleLessonCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index ind = INDEX_FIRST_PERSON;
+        Index ind = INDEX_FIRST;
         StringBuilder sb = new StringBuilder(ind.getOneBased() + "");
         sb.append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_TUES)
                 .append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_TUES)
@@ -175,7 +175,7 @@ public class EditModuleLessonCommandParserTest {
 
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
-        Index ind = INDEX_FIRST_PERSON;
+        Index ind = INDEX_FIRST;
         String arg = ind.getOneBased() + "";
         EditLessonDescriptor descriptor;
         EditModuleLessonCommand expectedCommand;

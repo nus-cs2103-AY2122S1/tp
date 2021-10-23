@@ -12,8 +12,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showLessonAtIndex;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_DUPLICATE_LESSON;
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_EDIT_LESSON_SUCCESS;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -60,8 +60,8 @@ public class EditModuleLessonCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditModuleLessonCommand editModuleLessonCommand =
-                new EditModuleLessonCommand(INDEX_FIRST_PERSON, new EditLessonDescriptor());
-        ModuleLesson editedLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+                new EditModuleLessonCommand(INDEX_FIRST, new EditLessonDescriptor());
+        ModuleLesson editedLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
@@ -70,11 +70,11 @@ public class EditModuleLessonCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showLessonAtIndex(model, INDEX_FIRST_PERSON);
+        showLessonAtIndex(model, INDEX_FIRST);
 
-        ModuleLesson lessonInFilteredList = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ModuleLesson lessonInFilteredList = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
         ModuleLesson editedLesson = new ModuleLessonBuilder(lessonInFilteredList).withLessonDay("7").build();
-        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST_PERSON,
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST,
                 new EditLessonDescriptorBuilder().withLessonDay(new LessonDay("7")).build());
         String expectedMessage = String.format(MESSAGE_EDIT_LESSON_SUCCESS, editedLesson);
 
@@ -85,21 +85,21 @@ public class EditModuleLessonCommandTest {
 
     @Test
     public void execute_duplicateLessonUnfilteredList_failure() {
-        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(firstLesson).build();
-        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_SECOND_PERSON, descriptor);
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_DUPLICATE_LESSON);
     }
 
     @Test
     public void execute_duplicateLessonFilteredList_failure() {
-        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        ModuleLesson firstLesson = model.getFilteredModuleLessonList().get(INDEX_FIRST.getZeroBased());
 
-        showLessonAtIndex(model, INDEX_SECOND_PERSON);
+        showLessonAtIndex(model, INDEX_SECOND);
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder(firstLesson).build();
-        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST_PERSON, descriptor);
+        EditModuleLessonCommand command = new EditModuleLessonCommand(INDEX_FIRST, descriptor);
 
         assertCommandFailure(command, model, MESSAGE_DUPLICATE_LESSON);
     }
@@ -116,7 +116,7 @@ public class EditModuleLessonCommandTest {
 
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showLessonAtIndex(model, INDEX_FIRST_PERSON);
+        showLessonAtIndex(model, INDEX_FIRST);
         Index invalidIndex = Index.fromZeroBased(model.getFilteredModuleLessonList().size() + 1);
 
         // ensures that invalidIndex is still in bounds of address book list
@@ -131,11 +131,11 @@ public class EditModuleLessonCommandTest {
 
     @Test
     public void equals() {
-        final EditModuleLessonCommand standardCommand = new EditModuleLessonCommand(INDEX_FIRST_PERSON, DESC_CS2030S);
+        final EditModuleLessonCommand standardCommand = new EditModuleLessonCommand(INDEX_FIRST, DESC_CS2030S);
 
         // same values -> returns true
         EditLessonDescriptor copyDescriptor = new EditLessonDescriptor(DESC_CS2030S);
-        EditModuleLessonCommand cmdWithSameValues = new EditModuleLessonCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditModuleLessonCommand cmdWithSameValues = new EditModuleLessonCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(cmdWithSameValues));
 
         // same object -> returns true
@@ -148,10 +148,10 @@ public class EditModuleLessonCommandTest {
         assertFalse(standardCommand.equals(new ListModuleLessonCommandTest()));
 
         // different index -> return false;
-        assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_SECOND_PERSON, DESC_CS2030S)));
+        assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_SECOND, DESC_CS2030S)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_FIRST_PERSON, DESC_CS2040S)));
+        assertFalse(standardCommand.equals(new EditModuleLessonCommand(INDEX_FIRST, DESC_CS2040S)));
 
 
     }
