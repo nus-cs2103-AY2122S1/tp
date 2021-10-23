@@ -53,7 +53,7 @@ Staff’d helps food & beverage managers manage details and schedules of their s
 
 1. Remove Joe from Staff'd with the delete command. <br> `delete -n Joe`
 
-1. Refer to the [Features](#features) below for more details of each command.
+1. Refer to the [Features](#features) below for more details of each command. Images are provided for commands with significant output.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -242,8 +242,8 @@ Examples:
 `delete -r cashiers`  
 `delete -s fulltime`
 
-[comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
-[comment]: <> (* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.)
+
+![delete result](images/DeleteResult.png)
 
 #### Editing a staff : `edit`
 
@@ -269,10 +269,6 @@ Examples:
 
 Finds staff whose names contain any of the given keywords, or by their index in the staff list.
 
-Format:  
-`find -n KEYWORD [MORE_KEYWORDS]`
-`find -i INDEX`
-
 Name Search:
 
 * The search is case-insensitive. e.g `bob` will match `Bob`
@@ -285,14 +281,18 @@ Index Search:
 
 * If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
   be performed on the overall staff list.
-* The index must be within range (i.e. from 1 until the size of the Staff List, or trivially 0
-  if the Staff List is empty)
+* The index must be within range (i.e. from 1 until the size of the Staff List, if the list is empty, no input is accepted)
 * Only single search is supported, and this search will return only the specific Staff at that index
 
-Examples:
-* `find -n John` returns `john` and `John Doe`
-* `find -n alex david` returns `Alex Yeoh`, `David Li`
-* `find -i 3` returns the staff at the 3rd position on the list
+Format:  
+`find -n KEYWORD [MORE_KEYWORDS]`
+`find -i INDEX`
+
+
+Examples:  
+`find -n John`  
+`find -n alex david`  
+`find -i 3`
 
 List before using Find command:
 ![List before using the find command](images/findCommand/BeforeFindCommand.jpg)
