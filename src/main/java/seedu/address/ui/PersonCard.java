@@ -75,7 +75,11 @@ public class PersonCard extends UiPart<Region> {
         profileView.setImage(userGitHubProfilePicture);
 
         // set favBtn here based on isFavorite
-        favBtn.setImage(NOT_FAVORITE);
+        if (person.getIsFavourite()) {
+            favBtn.setImage(FAVORITE);
+        } else {
+            favBtn.setImage(NOT_FAVORITE);
+        }
     }
 
     @Override

@@ -33,15 +33,21 @@ public class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private boolean isFavourite;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("telegram") String telegram,
+    public JsonAdaptedPerson(
+            @JsonProperty("name") String name,
+            @JsonProperty("telegram") String telegram,
             @JsonProperty("github") String github,
-            @JsonProperty("phone") String phone, @JsonProperty("email") String email,
-            @JsonProperty("address") String address, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email,
+            @JsonProperty("address") String address,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+            @JsonProperty("isFavourite") boolean isFavourite) {
         this.name = name;
         this.telegram = telegram;
         this.github = github;
@@ -51,6 +57,7 @@ public class JsonAdaptedPerson {
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
+        this.isFavourite = isFavourite;
     }
 
     /**
@@ -66,6 +73,7 @@ public class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        isFavourite = source.getIsFavourite();
     }
 
     /**
@@ -130,8 +138,11 @@ public class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final boolean modelIsFavourite = isFavourite;
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelTelegram, modelGithub, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                modelEmail, modelAddress, modelTags, modelIsFavourite);
     }
 
 }
