@@ -27,6 +27,13 @@ public class StatsWindow extends UiPart<Stage> {
     private static final String LOW_PRIORITY_MESSAGE = "Keep it up! Focus on developing your client base to boost \n"
         + "your client portfolio!";
 
+    public static final String MESSAGE_USAGE = "Opens a new window with built-in statistics to provide "
+        + "you with an overview of your data.\n"
+        + "To view the statistics, simply click the \"Stats\" menu item on the top bar or press `F2`.\n"
+        + "Currently, FAST supports these statistics:\n"
+        + "* Priority Tag Chart\n"
+        + "* Insurance Plan Chart (Coming soon!)";
+
     private Fast fast;
 
     @FXML

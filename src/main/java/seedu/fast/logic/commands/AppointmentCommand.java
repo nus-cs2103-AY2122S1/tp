@@ -22,8 +22,8 @@ public class AppointmentCommand extends Command {
 
     public static final String COMMAND_WORD = "aa";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the person identified"
-            + " by the index number used in the last person listing.\n\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add appointment with the client identified"
+            + " by the index number used in the last client listing.\n\n"
             + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
             + PREFIX_APPOINTMENT + "DATE (must be yyyy-mm-dd), "
             + "[" + PREFIX_APPOINTMENT_TIME + "TIME] (must be hh:mm (24-hour format)), "
