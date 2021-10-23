@@ -303,11 +303,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parse_validVenueFormat_success() throws ParseException {
-        assertEquals(VALID_VENUE_INPUT, ParserUtil.parseVenueString(VALID_VENUE_INPUT));
-    }
-
-    @Test
     public void parse_invalidDateFormat_failure() {
         // wrong order
         assertThrows(ParseException.class, ()-> ParserUtil.parseDateString(INVALID_DATE_INPUT));
@@ -349,11 +344,6 @@ public class ParserUtilTest {
     @Test
     public void parse_appointmentMinuteOutOfBound_failure() {
         assertThrows(ParseException.class, ()-> ParserUtil.parseTimeString(INVALID_TIME_MINUTE_INPUT));
-    }
-
-    @Test
-    public void parse_invalidVenueInput_failure() {
-        assertThrows(ParseException.class, ()-> ParserUtil.parseVenueString(INVALID_VENUE_INPUT));
     }
 
     @Test
