@@ -185,7 +185,7 @@ Marks a specified staff(s) as not working for a specified date.
  * The salary for that date will be not included in calculation,
 depending on the staff's status. By default, the staff is recorded
 as present for all shifts.
- * The format of the input date is in: `YYYY-MM-DD`
+ * The format of the input date is in: `YYYY-MM-DD`.
 
 Format:  
 
@@ -208,7 +208,7 @@ Examples:
 
 Removes the period that was marked by the `mark` command.
 
-The format of the input date is in: `YYYY-MM-DD`
+The format of the input date is in: `YYYY-MM-DD`.
 
 Format:  
 `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
