@@ -192,7 +192,9 @@ public class CommandTestUtil {
 
         ModuleLesson lesson = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
         final String moduleCode = lesson.getModuleCode().getModuleCodeName();
-        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(moduleCode)));
+        model.updateFilteredModuleLessonList(
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(moduleCode))
+        );
         System.out.println(model.getFilteredModuleLessonList());
 
         assertEquals(1, model.getFilteredModuleLessonList().size());
