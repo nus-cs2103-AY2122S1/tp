@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.GuiSettings;
@@ -82,6 +85,10 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+
+        KeyCombination themeHotKey = new KeyCodeCombination(KeyCode.T,  KeyCombination.CONTROL_DOWN);
+        Runnable themeRunnable = this::setNextTheme;
+        primaryStage.getScene().getAccelerators().put(themeHotKey, themeRunnable);
 
         themeCss = logic.getThemeCss();
 
@@ -170,6 +177,21 @@ public class MainWindow extends UiPart<Stage> {
         ObservableList<String> styleSheets = scene.getStylesheets();
         styleSheets.remove(0);
         styleSheets.add(filepath);
+    }
+
+    private void setNextTheme() {
+        int index = 0;
+        while (index < themesArr.length) {
+            if (themesArr[index].equals(themeCss)) {
+                break;
+            }
+            index++;
+        }
+        if (index == themesArr.length - 1) {
+            setTheme(themesArr[0]);
+        } else {
+            setTheme(themesArr[index + 1]);
+        }
     }
 
     /**
