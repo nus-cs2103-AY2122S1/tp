@@ -21,7 +21,7 @@
         <Scene>
             <stylesheets>
                 <URL value="@Fonts.css"/>
-                <URL value="@ColoredTheme.css"/>
+                <URL value="@BookTheme.css"/>
                 <URL value="@Extensions.css"/>
             </stylesheets>
 
