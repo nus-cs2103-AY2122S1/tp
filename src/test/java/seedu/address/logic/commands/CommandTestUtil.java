@@ -94,12 +94,13 @@ public class CommandTestUtil {
     public static final String INVALID_WORK_ADDRESS_DESC = " " + PREFIX_WORK_ADDRESS;
     public static final String INVALID_QUARANTINE_ADDRESS_DESC = " " + PREFIX_QUARANTINE_ADDRESS;
     // end date earlier than start date not allowed for shn periods
-    public static final String INVALID_SHN_PERIOD = " " + PREFIX_SHN_PERIOD + "2020-02-02 2020-01-01";
-    public static final String INVALID_NEXT_OF_KIN_NAME = " " + PREFIX_NEXT_OF_KIN_NAME + "Frank!"; // '!' not allowed
+    public static final String INVALID_SHN_PERIOD_DESC = " " + PREFIX_SHN_PERIOD + "2020-02-02 2020-01-01";
+    // '!' not allowed
+    public static final String INVALID_NEXT_OF_KIN_NAME_DESC = " " + PREFIX_NEXT_OF_KIN_NAME + "Frank!";
     // inputs less than 3 digits not allowed for phones
-    public static final String INVALID_NEXT_OF_KIN_PHONE = " " + PREFIX_NEXT_OF_KIN_PHONE + "23";
+    public static final String INVALID_NEXT_OF_KIN_PHONE_DESC = " " + PREFIX_NEXT_OF_KIN_PHONE + "23";
     // first character whitespace not allowed for addresses
-    public static final String INVALID_NEXT_OF_KIN_ADDRESS = " " + PREFIX_NEXT_OF_KIN_ADDRESS + " ";
+    public static final String INVALID_NEXT_OF_KIN_ADDRESS_DESC = " " + PREFIX_NEXT_OF_KIN_ADDRESS + " ";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

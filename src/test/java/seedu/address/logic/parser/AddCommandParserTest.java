@@ -11,12 +11,12 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_CASE_NUMBER_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOME_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_ADDRESS;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_NAME;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_PHONE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUARANTINE_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHN_PERIOD;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHN_PERIOD_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_WORK_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
@@ -221,26 +221,26 @@ public class AddCommandParserTest {
         // invalid shn period
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB
                 + HOME_ADDRESS_DESC_BOB + WORK_ADDRESS_DESC_BOB + QUARANTINE_ADDRESS_DESC_BOB
-                + INVALID_SHN_PERIOD + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB
+                + INVALID_SHN_PERIOD_DESC + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB
                 + NEXT_OF_KIN_ADDRESS_DESC_BOB, ShnPeriod.MESSAGE_CONSTRAINTS);
 
         // invalid next-of-kin name
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB
                 + HOME_ADDRESS_DESC_BOB + WORK_ADDRESS_DESC_BOB + QUARANTINE_ADDRESS_DESC_BOB
-                + SHN_PERIOD_DESC_BOB + INVALID_NEXT_OF_KIN_NAME + NEXT_OF_KIN_PHONE_DESC_BOB
+                + SHN_PERIOD_DESC_BOB + INVALID_NEXT_OF_KIN_NAME_DESC + NEXT_OF_KIN_PHONE_DESC_BOB
                 + NEXT_OF_KIN_ADDRESS_DESC_BOB, Name.MESSAGE_CONSTRAINTS);
 
         // invalid next-of-kin phone
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB
                 + HOME_ADDRESS_DESC_BOB + WORK_ADDRESS_DESC_BOB + QUARANTINE_ADDRESS_DESC_BOB
-                + SHN_PERIOD_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + INVALID_NEXT_OF_KIN_PHONE
+                + SHN_PERIOD_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + INVALID_NEXT_OF_KIN_PHONE_DESC
                 + NEXT_OF_KIN_ADDRESS_DESC_BOB, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid next-of-kin address
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB
                 + HOME_ADDRESS_DESC_BOB + WORK_ADDRESS_DESC_BOB + QUARANTINE_ADDRESS_DESC_BOB
                 + SHN_PERIOD_DESC_BOB + NEXT_OF_KIN_NAME_DESC_BOB + NEXT_OF_KIN_PHONE_DESC_BOB
-                + INVALID_NEXT_OF_KIN_ADDRESS, Address.MESSAGE_CONSTRAINTS);
+                + INVALID_NEXT_OF_KIN_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + CASE_NUMBER_DESC_BOB
