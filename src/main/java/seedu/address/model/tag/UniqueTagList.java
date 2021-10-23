@@ -73,6 +73,9 @@ public class UniqueTagList {
      */
     public void addTagFromPersonList(List<Person> persons) {
         requireAllNonNull(persons);
+        tagCounter.clear();
+        internalList.clear();
+        internalUnmodifiableList.clear();
         for (Person person : persons) {
             addTagFromPerson(person);
         }

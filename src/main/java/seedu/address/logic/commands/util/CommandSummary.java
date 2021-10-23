@@ -15,6 +15,8 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.LessonDeleteCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ScheduleCommand;
+import seedu.address.logic.commands.TagCommand;
+import seedu.address.model.tag.Tag;
 
 /**
  * Wrapper class for command usage summary with the respective command action, format and example.
@@ -129,6 +131,7 @@ public class CommandSummary {
                         LessonDeleteCommand.COMMAND_EXAMPLE),
                 new CommandSummary(ClearCommand.COMMAND_ACTION, ClearCommand.COMMAND_WORD,
                         ClearCommand.COMMAND_WORD),
+                new CommandSummary(TagCommand.COMMAND_WORD, TagCommand.COMMAND_WORD, TagCommand.COMMAND_WORD),
                 new CommandSummary(ExitCommand.COMMAND_ACTION, ExitCommand.COMMAND_WORD,
                         ExitCommand.COMMAND_WORD));
     }
