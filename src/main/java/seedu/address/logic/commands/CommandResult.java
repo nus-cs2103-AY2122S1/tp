@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class CommandResult {
     public enum DisplayState {
-        CLIENT, TASK, ORDER
+        CLIENT, TASK, ORDER, UNIMPORTANT
     }
 
     private final String feedbackToUser;
