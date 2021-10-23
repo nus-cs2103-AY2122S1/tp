@@ -299,27 +299,30 @@ public class Participant {
                 .append("\nAddress: ")
                 .append(getAddress());
 
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("\nTags: ");
-            tags.forEach(builder::append);
-        }
-
         builder.append("\nDate of birth: ").append(getBirthDate());
 
-        Set<Note> notes = getNotes();
-        if (!notes.isEmpty()) {
-            builder.append("\nNotes: ");
-            notes.forEach(builder::append);
-        }
-
-        ArrayList<NextOfKin> nextOfKins = getNextOfKins();
         if (!nextOfKins.isEmpty()) {
             builder.append("\nNext Of Kins: ");
             nextOfKins.forEach(builder::append);
         }
 
+        if (!events.isEmpty()) {
+            builder.append("\n\nAttending events:\n").append(formEventsList());
+        }
+
+        return builder.toString();
+    }
+
+    private String formEventsList() {
+        int index = 1;
+        StringBuilder builder = new StringBuilder();
+        for (Event event : events) {
+            builder.append(index)
+                    .append(". ")
+                    .append(event.getNameString())
+                    .append("\n");
+            index++;
+        }
         return builder.toString();
     }
 }
