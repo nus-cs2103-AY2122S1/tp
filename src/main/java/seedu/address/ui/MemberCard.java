@@ -10,7 +10,6 @@ import javafx.scene.layout.Region;
 import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;
 import seedu.address.model.module.member.Member;
-import seedu.address.model.module.task.Task;
 
 /**
  * A UI component that displays information of a {@code Member}.
@@ -61,7 +60,7 @@ public class MemberCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(position -> position.positionName))
                 .forEach(position -> positions.getChildren().add(new Label(position.positionName)));
         member.getTaskList().asUnmodifiableObservableList().stream()
-                .sorted(Comparator.comparing(Task::toString)) // no idea why Task::getName can not work
+                .sorted(Comparator.comparing(task -> task.getName().toString()))
                 .forEach(task -> tasks.getChildren().add(new Label(task.getName().toString())));
     }
 

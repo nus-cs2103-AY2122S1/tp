@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MEMBER_ID_DESC;
-// import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MEMBER_ID_DESC_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_DEADLINE_DESC_POEM;
 import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_POEM;
