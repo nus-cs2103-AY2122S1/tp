@@ -19,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.notor.commons.core.Messages;
 import seedu.notor.commons.core.index.Index;
-import seedu.notor.logic.commands.person.PersonCommand;
 import seedu.notor.logic.commands.person.PersonEditCommand;
 import seedu.notor.logic.executors.Executor;
 import seedu.notor.logic.executors.person.PersonEditExecutor;

@@ -1,15 +1,10 @@
 package seedu.notor.testutil;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.notor.logic.executors.person.PersonEditExecutor.PersonEditDescriptor;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.person.Email;
 import seedu.notor.model.person.Person;
 import seedu.notor.model.person.Phone;
-import seedu.notor.model.tag.Tag;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
