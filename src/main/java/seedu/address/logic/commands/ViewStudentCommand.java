@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.ContainsStudentNamePredicate;
@@ -28,6 +29,11 @@ public class ViewStudentCommand extends Command {
         requireNonNull(model);
         ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(name);
         model.updateFilteredStudentList(predicate);
+
+        if (model.getFilteredStudentList().size() == 0) {
+            return new CommandResult(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, name));
+        }
+
         return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, name),
             false, false, true);
     }
