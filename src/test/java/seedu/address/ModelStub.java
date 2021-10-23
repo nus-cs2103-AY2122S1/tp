@@ -9,6 +9,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.ClientTotalOrder;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.order.Order;
 import seedu.address.model.person.Person;
@@ -95,6 +96,26 @@ public class ModelStub implements Model {
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public Path getTaskListFilePath() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTaskListFilePath(Path taskListFilePath) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setTaskBook(ReadOnlyTaskBook addressBook) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ReadOnlyTaskBook getTaskBook() {
         throw new AssertionError("This method should not be called.");
     }
 

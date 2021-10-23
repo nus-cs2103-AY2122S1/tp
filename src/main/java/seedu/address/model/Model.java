@@ -92,6 +92,25 @@ public interface Model {
 
     //======================================== TASK FUNCTIONALITIES =================================================
     /**
+     * Returns the user prefs' TaskList file path.
+     */
+    Path getTaskListFilePath();
+
+    /**
+     * Sets the user prefs' TaskList file path.
+     */
+    void setTaskListFilePath(Path taskListFilePath);
+
+    /**
+     * Replaces task book data with the data in {@code taskBook}.
+     */
+    void setTaskBook(ReadOnlyTaskBook addressBook);
+
+    /** Returns the TaskList */
+    ReadOnlyTaskBook getTaskBook();
+
+
+    /**
      * Adds the given task.
      */
     void addTask(Task task);
