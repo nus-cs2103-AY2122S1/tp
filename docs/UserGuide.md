@@ -156,11 +156,10 @@ Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, ema
  * For example, the query `-n Candice` will result in any Staff with the exact name __Candice__ and noone else.
 
 Format:  
-`view [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
+`view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 
 Examples:  
-`view -n Candice`  
-`view -i 123`  
+`view -n Candice`
 `view -t friends -t neighbours`
 
 #### Adding a staff - `add`
@@ -190,11 +189,10 @@ as present for all shifts.
 
 Format:  
 
-Marking a period:
+Marking a period:  
 
-`mark -i INDEX d/STARTDATE d/END_DATE`  
-`mark -n NAME d/STARTDATE d/END_DATE`  
-`mark -t TAG d/STARTDATE d/END_DATE`
+`mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`  
+
 
 Possible to mark a single date:
 
@@ -213,8 +211,7 @@ Removes the period that was marked by the `mark` command.
 The format of the input date is in: `YYYY-MM-DD`
 
 Format:  
-`unmark -n name d/startDate d/endDate`  
-`unmark -i index d/startDate d/endDate`  
+`unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 
 Examples:  
 `unmark -i 1 d/2020-01-03 d/2021-01-03`  
@@ -404,17 +401,17 @@ Demonstration:
 
 Action | Format, Examples
 --------|------------------
-**View** | `view -n name` <br> `view -i index`
+**View** | `view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r ROLE` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**View staff schedule** | `viewSchedlue -n name` <br> `viewSchedlue -i index`
+**View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 **Add staff to shift** | `addShift -n name d/fullDayName-shiftNumber` <br> `addShift -i index d/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteSchedule -n NAME d/fullDayName-shiftNumber` <br> `deleteSchedule -i INDEX d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -ti day-HH:mm`
-**Mark absent** | `mark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
-**Remove mark** | `unmark -i index d/startDate [d/endDate]` <br> `mark -n name d/startDate [d/endDate]`
+**Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
+**Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 **List** | `list`
 **Help** | `help`
 **Clear** | `clear`
