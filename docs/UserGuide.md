@@ -38,7 +38,6 @@ Managera is OS-independent meaning it will work on any operating system.
         * [Exiting the program: `exit`](#exiting-the-program--exit)
         * [Saving the data](#saving-the-data)
         * [Editing the data file](#editing-the-data-file)
-        * [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 - [**FAQ**](#faq)
 - [**Command summary**](#command-summary)
 
@@ -99,8 +98,6 @@ You can quickly jump to any of the sections by using the Table of Contents above
 * Items in square brackets are optional.<br>
   e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as `addEvent n/CS2103T Final d/2021-11-23`.
 
-* Items with `…`​ after them (e.g. `[tag/TAG]…`​) can be used multiple times including zero times.<br>
-
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 
@@ -120,11 +117,7 @@ The following commands deal with the handling of Participants in Managera. They 
 
 Adds a Participant to Managera.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE] [tag/TAG]…​`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A Participant can have any number of tags (including 0)
-</div>
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
@@ -148,18 +141,15 @@ Examples:
 
 Edits an existing Participant in Managera.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE] [tag/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
 
 * Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the Participant will be removed i.e. adding of tags is not cumulative.
-* You can remove all the Participant’s tags by typing `tag/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower tag/` - Edits the name of the 2nd Participant to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` - Edits the name of the 2nd Participant to be `Betsy Crower`.
 
 ### Locating Participants by name: `find`
 
@@ -389,10 +379,6 @@ Managera data are saved as a JSON file `[JAR file location]/data/addressbook.jso
 If your changes to the data file makes its format invalid, Managera will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -406,9 +392,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [tag/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 tag/friend tag/colleague`
+**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Delete Participant** | `delete INDEX`<br> e.g., `delete 3`
-**Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [tag/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Participant** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List Participants** | `list`
 **View Participant details** | `view INDEX` <br> e.g., `view 1`
