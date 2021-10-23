@@ -34,12 +34,12 @@ public class SocialHandleComparatorTest {
     public void test_compareSocialHandleComparator_returnsTrue() {
         Comparator<Person> comparator = new SocialHandleComparator();
 
-        Person p1 = new PersonBuilder().withSocialHandle("@Alice").build();
-        Person p2 = new PersonBuilder().withSocialHandle("@Alice").build();
-        Person p3 = new PersonBuilder().withSocialHandle("@Ben").build();
-        Person p4 = new PersonBuilder().withSocialHandle("@Carl").build();
-        Person p5 = new PersonBuilder().withSocialHandle("").build();
-        Person p6 = new PersonBuilder().withSocialHandle("").build();
+        Person p1 = new PersonBuilder().withSocialHandles("tg:Alice").build();
+        Person p2 = new PersonBuilder().withSocialHandles("tg:Alice").build();
+        Person p3 = new PersonBuilder().withSocialHandles("tg:Ben").build();
+        Person p4 = new PersonBuilder().withSocialHandles("tg:Carl").build();
+        Person p5 = new PersonBuilder().withSocialHandles("").build();
+        Person p6 = new PersonBuilder().withSocialHandles("").build();
 
         // If either person has null SocialHandle
         assertTrue(comparator.compare(p1, p6) > 0);

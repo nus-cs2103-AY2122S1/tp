@@ -98,7 +98,7 @@ public class Person {
         }
         return null;
     }
-    
+
     public Set<SocialHandle> getSocialHandles() {
         return Collections.unmodifiableSet(socialHandles);
     }

@@ -16,8 +16,10 @@ public class SocialHandleContainsKeywordsPredicate implements Predicate<Person> 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> person.getSocialHandle().value.toLowerCase()
-                        .contains(keyword.toLowerCase()));
+                .anyMatch(keyword -> person.getSocialHandles().stream()
+                        .anyMatch(handle -> handle.value.toLowerCase()
+                                .contains(keyword.toLowerCase()
+                                )));
     }
 
     @Override

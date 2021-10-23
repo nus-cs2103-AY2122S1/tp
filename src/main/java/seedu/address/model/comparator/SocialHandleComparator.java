@@ -8,16 +8,16 @@ public class SocialHandleComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        if (p1.getSocialHandle() == null) {
-            if (p2.getSocialHandle() == null) {
+        if (p1.getSocialHandles().isEmpty()) {
+            if (p2.getSocialHandles().isEmpty()) {
                 return 0;
             }
             return 1;
         }
-        if (p2.getSocialHandle() == null) {
+        if (p2.getSocialHandles().isEmpty()) {
             return -1;
         }
-        return p1.getSocialHandle().toString().compareTo(p2.getSocialHandle().toString());
+        return p1.getSocialHandles().toString().compareTo(p2.getSocialHandles().toString());
     }
 
     @Override

@@ -15,8 +15,8 @@ public class SocialHandleContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
-        List<String> firstPredicateKeywordList = Collections.singletonList("@first");
-        List<String> secondPredicateKeywordList = Arrays.asList("@first", "@second");
+        List<String> firstPredicateKeywordList = Collections.singletonList("tg:first");
+        List<String> secondPredicateKeywordList = Arrays.asList("tg:first", "tg:second");
 
         SocialHandleContainsKeywordsPredicate firstPredicate =
                 new SocialHandleContainsKeywordsPredicate(firstPredicateKeywordList);
@@ -45,16 +45,16 @@ public class SocialHandleContainsKeywordsPredicateTest {
     public void test_socialHandleContainsKeywords_returnsTrue() {
         // One keyword
         SocialHandleContainsKeywordsPredicate predicate =
-                new SocialHandleContainsKeywordsPredicate(Collections.singletonList("@Alice"));
-        assertTrue(predicate.test(new PersonBuilder().withSocialHandle("@Alice").build()));
+                new SocialHandleContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
 
         // Only one matching keyword
-        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("@Bob", "@Carol"));
-        assertTrue(predicate.test(new PersonBuilder().withSocialHandle("@Carol").build()));
+        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("Bob", "Carol"));
+        assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Carol").build()));
 
         // Mixed-case keywords
-        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("@aLIce", "@bOB"));
-        assertTrue(predicate.test(new PersonBuilder().withSocialHandle("@Alice").build()));
+        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        assertTrue(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
     }
 
     @Test
@@ -62,16 +62,16 @@ public class SocialHandleContainsKeywordsPredicateTest {
         // Zero keywords
         SocialHandleContainsKeywordsPredicate predicate =
                 new SocialHandleContainsKeywordsPredicate(Collections.emptyList());
-        assertFalse(predicate.test(new PersonBuilder().withSocialHandle("@Alice").build()));
+        assertFalse(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
 
         // Non-matching keyword
-        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("@Carol"));
-        assertFalse(predicate.test(new PersonBuilder().withSocialHandle("@Alice").build()));
+        predicate = new SocialHandleContainsKeywordsPredicate(Arrays.asList("tg:Carol"));
+        assertFalse(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").build()));
 
         // Keywords match phone, email and nationality, but does not match socialHandle
         predicate = new SocialHandleContainsKeywordsPredicate(
-                Arrays.asList("12345", "alice@email.com", "Malaysia", "@Bob"));
-        assertFalse(predicate.test(new PersonBuilder().withSocialHandle("@Alice").withPhone("12345")
+                Arrays.asList("12345", "alice@email.com", "Malaysia", "tg:Bob"));
+        assertFalse(predicate.test(new PersonBuilder().withSocialHandles("tg:Alice").withPhone("12345")
                 .withEmail("alice@email.com").withNationality("Malaysia").build()));
     }
 }
