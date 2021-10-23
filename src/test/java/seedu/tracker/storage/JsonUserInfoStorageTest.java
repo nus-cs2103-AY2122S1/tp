@@ -40,7 +40,7 @@ class JsonUserInfoStorageTest {
 
     @Test
     public void readUserInfo_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readUserInfo("NotJsonFormatUserinfo.json"));
+        assertThrows(DataConversionException.class, () -> readUserInfo("notJsonFormatUserinfo.json"));
     }
 
     private Optional<UserInfo> readUserInfo(String userInfoFileInTestDataFolder) throws DataConversionException {
