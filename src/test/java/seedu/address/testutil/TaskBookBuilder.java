@@ -4,9 +4,10 @@ import seedu.address.model.TaskBook;
 import seedu.address.model.task.Task;
 
 /**
- * A utility class to help with building Addressbook objects.
+ * A utility class to help with building TaskBook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code TaskBook tb = new TaskBookBuilder().ew TaskBuilder().withLabel("dummy").withDate("tmr")
+ *             .withTaskTag("tag").build();}
  */
 public class TaskBookBuilder {
 

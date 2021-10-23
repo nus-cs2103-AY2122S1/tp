@@ -126,7 +126,7 @@ public class ModelManager implements Model {
 
     @Override
     public Path getTaskListFilePath() {
-        return userPrefs.getTaskListFilePath();
+        return userPrefs.getTaskBookPath();
     }
 
     @Override
