@@ -10,8 +10,8 @@ public class FindOrderCommand extends Command {
 
     public static final String COMMAND_WORD = "findorder";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all orders whose customer, label or date contain"
-            + " any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all orders whose customer, label, date or id "
+            + "contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " 20th August John";
 
