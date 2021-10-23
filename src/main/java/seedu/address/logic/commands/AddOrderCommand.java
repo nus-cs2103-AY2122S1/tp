@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,6 +16,7 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order to the application. "
             + "Parameters: "
+            + PREFIX_LABEL + "LABEL "
             + PREFIX_CUSTOMER + "CUSTOMER "
             + PREFIX_AMOUNT + "AMOUNT "
             + PREFIX_DATE + "DATE\n"

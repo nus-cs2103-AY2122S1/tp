@@ -10,8 +10,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {

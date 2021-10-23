@@ -13,14 +13,11 @@ import seedu.address.ModelStub;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Date;
-import seedu.address.model.order.Amount;
-import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
+import seedu.address.testutil.OrderBuilder;
 
 class MarkOrderCommandTest {
-    private static final Order testOrder = new Order(new Customer("John"), new Date("20th august 2021"),
-            new Amount("100.25"));
+    private static final Order testOrder = new OrderBuilder().build();
 
     @Test
     public void execute_validIndexMarkOrder_success() throws Exception {

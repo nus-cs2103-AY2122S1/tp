@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.order.Amount;
 import seedu.address.model.order.Customer;
 import seedu.address.model.order.Order;
@@ -22,6 +23,7 @@ class JsonAdaptedOrder {
     private final String amount;
     private final String customer;
     private final String isComplete;
+    private final String label;
 
     /**
      * Constructs a {@code JsonAdaptedOrder} with the given order details.
@@ -29,12 +31,13 @@ class JsonAdaptedOrder {
     @JsonCreator
     public JsonAdaptedOrder(@JsonProperty("id") String id, @JsonProperty("date") String date,
                            @JsonProperty("amount") String amount, @JsonProperty("customer") String customer,
-                           @JsonProperty("isComplete") String isComplete) {
+                           @JsonProperty("isComplete") String isComplete, @JsonProperty("label") String label) {
         this.id = id;
         this.date = date;
         this.amount = amount;
         this.customer = customer;
         this.isComplete = isComplete;
+        this.label = label;
     }
 
     /**
@@ -45,8 +48,8 @@ class JsonAdaptedOrder {
         date = source.getDate().toString();
         amount = source.getAmount().toString();
         customer = source.getCustomer().toString();
-        isComplete = String.valueOf(source.getIsComplete());;
-
+        isComplete = String.valueOf(source.getIsComplete());
+        label = source.getLabel().toString();
     }
 
     /**
@@ -55,6 +58,13 @@ class JsonAdaptedOrder {
      * @throws IllegalValueException if there were any data constraints violated in the adapted order.
      */
     public Order toModelType() throws IllegalValueException {
+        if (label == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "label"));
+        }
+        if (!Label.isValidLabel(label)) {
+            throw new IllegalValueException(Label.MESSAGE_CONSTRAINTS);
+        }
+        final Label modelLabel = new Label(label);
 
         if (id == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "id"));
@@ -86,7 +96,7 @@ class JsonAdaptedOrder {
         }
         final Customer modelCustomer = new Customer(customer);
 
-        Order newOrder = new Order(modelCustomer, modelDate, modelAmount);
+        Order newOrder = new Order(modelLabel, modelCustomer, modelDate, modelAmount);
 
         newOrder.setId(modelId);
 
