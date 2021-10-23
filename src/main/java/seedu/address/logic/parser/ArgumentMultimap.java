@@ -58,6 +58,20 @@ public class ArgumentMultimap {
         return getValue(new Prefix("")).orElse("");
     }
 
+    /**
+     * Returns true if all {@code prefix} is / are present.
+     * @param prefix Prefix key with which the specified argument value is to be associated
+     * @return True if are {@code prefix} is / are present, false otherwise
+     */
+    public boolean isAllPresent(Prefix ...prefix) {
+        for (Prefix p : prefix) {
+            if (!argMultimap.containsKey(p)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this
