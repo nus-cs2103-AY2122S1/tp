@@ -33,15 +33,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private TaskListPanel taskListPanel;
     private GroupListPanel groupListPanel;
-    // private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -51,9 +50,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane studentListPanelPlaceholder;
-
-    //    @FXML
-    //    private StackPane resultDisplayPlaceholder;
 
     @FXML
     private ScrollPane scrollPane;
@@ -127,9 +123,6 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
-        //        resultDisplay = new ResultDisplay();
-        //        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -195,10 +188,6 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public StudentListPanel getStudentListPanel() {
-        return studentListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -208,8 +197,6 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
-            //            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -225,7 +212,6 @@ public class MainWindow extends UiPart<Stage> {
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
-            //            resultDisplay.setFeedbackToUser(e.getMessage());
             terminalContainer.getChildren().add(
                     new TerminalBox(commandText, e));
             throw e;

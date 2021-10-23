@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -8,6 +9,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showTaskAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_TASK;
 import static seedu.address.testutil.TypicalTasks.getTypicalAddressBookWithTasks;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -24,15 +27,16 @@ import seedu.address.model.task.Task;
  */
 public class MarkTaskDoneCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBookWithTasks(), new UserPrefs());
 
     // Pass
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Task taskToMarkAsDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(INDEX_FIRST_TASK);
+        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
-        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone);
+        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone)
+                + "\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.completeTask(taskToMarkAsDone);
@@ -44,7 +48,7 @@ public class MarkTaskDoneCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredTaskList().size() + 1);
-        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(outOfBoundIndex);
+        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(outOfBoundIndex));
 
         assertCommandFailure(markTaskDoneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
@@ -55,9 +59,10 @@ public class MarkTaskDoneCommandTest {
         showTaskAtIndex(model, INDEX_FIRST_TASK);
 
         Task taskToMarkAsDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
-        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(INDEX_FIRST_TASK);
+        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
-        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone);
+        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone)
+                + "\n";
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.completeTask(taskToMarkAsDone);
@@ -75,7 +80,7 @@ public class MarkTaskDoneCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getTaskList().size());
 
-        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(outOfBoundIndex);
+        MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(outOfBoundIndex));
 
         assertCommandFailure(markTaskDoneCommand, model, Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
     }
@@ -83,24 +88,24 @@ public class MarkTaskDoneCommandTest {
     // Pass
     @Test
     public void equals() {
-        MarkTaskDoneCommand markFirstTaskDoneCommand = new MarkTaskDoneCommand(INDEX_FIRST_TASK);
-        MarkTaskDoneCommand markSecondTaskDoneCommand = new MarkTaskDoneCommand(INDEX_SECOND_TASK);
+        MarkTaskDoneCommand markFirstTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
+        MarkTaskDoneCommand markSecondTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_SECOND_TASK));
 
         // same object -> returns true
-        assertTrue(markFirstTaskDoneCommand.equals(markFirstTaskDoneCommand));
+        assertEquals(markFirstTaskDoneCommand, markFirstTaskDoneCommand);
 
         // same values -> returns true
-        MarkTaskDoneCommand markFirstTaskDoneCommandCopy = new MarkTaskDoneCommand(INDEX_FIRST_TASK);
-        assertTrue(markFirstTaskDoneCommand.equals(markFirstTaskDoneCommandCopy));
+        MarkTaskDoneCommand markFirstTaskDoneCommandCopy = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
+        assertEquals(markFirstTaskDoneCommand, markFirstTaskDoneCommandCopy);
 
         // different types -> returns false
-        assertFalse(markFirstTaskDoneCommand.equals(1));
+        assertNotEquals(1, markFirstTaskDoneCommand);
 
         // null -> returns false
-        assertFalse(markFirstTaskDoneCommand.equals(null));
+        assertNotEquals(null, markFirstTaskDoneCommand);
 
         // different task -> returns false
-        assertFalse(markFirstTaskDoneCommand.equals(markSecondTaskDoneCommand));
+        assertNotEquals(markFirstTaskDoneCommand, markSecondTaskDoneCommand);
     }
 
     /**

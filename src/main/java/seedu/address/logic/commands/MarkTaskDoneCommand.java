@@ -21,36 +21,42 @@ public class MarkTaskDoneCommand extends Command {
 
     public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task Completed: %1$s";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndexList;
 
     /**
-     * Marks a task as completed
-     * @param targetIndex the index of the Task as displayed to the user
+     * Marks a list of tasks with the given indexes as complete.
+     * @param targetIndexList The list of indexes of tasks to be marked complete.
      */
-    public MarkTaskDoneCommand(Index targetIndex) {
-        requireNonNull(targetIndex);
-        this.targetIndex = targetIndex;
+    public MarkTaskDoneCommand(List<Index> targetIndexList) {
+        requireNonNull(targetIndexList);
+        this.targetIndexList = targetIndexList;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Task> lastShownList = model.getFilteredTaskList();
+        StringBuilder result = new StringBuilder();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        for (Index targetIndex : targetIndexList) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+
+            Task taskToMarkCompleted = lastShownList.get(targetIndex.getZeroBased());
+            model.completeTask(taskToMarkCompleted);
+            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted))
+                    .append("\n");
         }
 
-        Task taskToMarkCompleted = lastShownList.get(targetIndex.getZeroBased());
-        model.completeTask(taskToMarkCompleted);
-        return new CommandResult(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted));
+        return new CommandResult(result.toString());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MarkTaskDoneCommand // instanceof handles nulls
-                && targetIndex.equals(((MarkTaskDoneCommand) other).targetIndex)); // state check
+                && targetIndexList.equals(((MarkTaskDoneCommand) other).targetIndexList)); // state check
     }
 
 }

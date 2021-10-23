@@ -10,14 +10,13 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditStudentCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindGroupCommand;
 import seedu.address.logic.commands.FindStudentCommand;
@@ -60,10 +59,10 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_edit() throws Exception {
         Student student = new StudentBuilder().build();
-        EditCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        EditStudentCommand.EditStudentDescriptor descriptor = new EditStudentDescriptorBuilder(student).build();
+        EditStudentCommand command = (EditStudentCommand) parser.parseCommand(EditStudentCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_STUDENT.getOneBased() + " " + StudentUtil.getEditStudentDescriptorDetails(descriptor));
-        EditCommand temp = new EditCommand(INDEX_FIRST_STUDENT, descriptor);
+        EditStudentCommand temp = new EditStudentCommand(INDEX_FIRST_STUDENT, descriptor);
         assertEquals(temp, command);
     }
 
@@ -77,7 +76,7 @@ public class AddressBookParserTest {
     public void parseCommand_findStudent() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindStudentCommand command = (FindStudentCommand) parser.parseCommand(
-                FindStudentCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindStudentCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindStudentCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
@@ -85,7 +84,7 @@ public class AddressBookParserTest {
     public void parseCommand_findGroup() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindGroupCommand command = (FindGroupCommand) parser.parseCommand(
-                FindGroupCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+                FindGroupCommand.COMMAND_WORD + " " + String.join(" ", keywords));
         assertEquals(new FindGroupCommand(new GroupContainsKeywordsPredicate(keywords)), command);
     }
 

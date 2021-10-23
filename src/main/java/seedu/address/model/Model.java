@@ -10,7 +10,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskHistory;
 
 /**
  * The API of the Model component.
@@ -24,9 +23,6 @@ public interface Model {
 
     /** {@code Predicate} that always evaluate to true */
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
-
-    /** {@code Predicate} that always evaluate to true */
-    Predicate<TaskHistory> PREDICATE_SHOW_TASK_HISTORY = unused -> true;
 
     enum DisplayType {
         STUDENTS, TASKS, GROUPS, TASK_HISTORY
@@ -169,12 +165,6 @@ public interface Model {
      */
     void addGithubGroup(LinkYear year, RepoName repoName, Group group);
 
-    /**
-     * Updates the filter of the filtered task history list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredTaskHistoryList(Predicate<TaskHistory> predicate);
-
     /** Returns an unmodifiable view of the filtered group list */
     ObservableList<Group> getFilteredGroupList();
 
@@ -194,11 +184,6 @@ public interface Model {
      * The task must exist in the address book.
      */
     void deleteTask(Task target);
-
-    /**
-     * Adds the given task history.
-     */
-    void addTaskHistory (TaskHistory taskHistory);
 
     /**
      * Marks the given task as completed.

@@ -11,8 +11,6 @@ import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskHistory;
-import seedu.address.model.task.TaskHistoryList;
 import seedu.address.model.task.UniqueTaskList;
 
 /**
@@ -24,7 +22,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueStudentList students;
     private final UniqueTaskList tasks;
     private final UniqueGroupList groups;
-    private final TaskHistoryList taskHistoryList;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -37,7 +34,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         students = new UniqueStudentList();
         tasks = new UniqueTaskList();
         groups = new UniqueGroupList();
-        taskHistoryList = new TaskHistoryList();
     }
 
     public AddressBook() {}
@@ -113,13 +109,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addTask(Task t) {
         tasks.add(t);
-    }
-
-    /**
-     * Adds a task history to the address book.
-     */
-    public void addTaskHistory(TaskHistory t) {
-        taskHistoryList.add(t);
     }
 
     /**
@@ -235,11 +224,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return students.asUnmodifiableObservableList().size() + " students\n"
                + tasks.asUnmodifiableObservableList().size() + " tasks";
         // TODO: refine later
-    }
-
-    @Override
-    public ObservableList<TaskHistory> getTaskHistoryList() {
-        return taskHistoryList.asUnmodifiableObservableList();
     }
 
     @Override
