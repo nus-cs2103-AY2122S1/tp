@@ -87,35 +87,44 @@ public class EncryptionManager implements Encryption {
     @Override
     public void decrypt(Path encryptedSourceFilePath, Path destinationFilePath)
             throws InvalidAlgorithmParameterException, IOException, InvalidKeyException {
-        logger.fine("Decrypting content from: " + encryptedSourceFilePath);
-        FileUtil.writeToFile(destinationFilePath, decrypt(encryptedSourceFilePath));
-    }
-
-    private String decrypt(Path encryptedSourceFilePath)
-            throws IOException, InvalidAlgorithmParameterException, InvalidKeyException {
         requireNonNull(encryptedSourceFilePath);
         if (isIllegalFileFormat(encryptedSourceFilePath)) { // Guard clause
             throw new IOException();
         }
+        logger.fine("Decrypting content from: " + encryptedSourceFilePath);
 
         FileInputStream fileIn = new FileInputStream(encryptedSourceFilePath.toString());
         byte[] fileInitializationVector = new byte[16];
         fileIn.read(fileInitializationVector);
         cipher.init(Cipher.DECRYPT_MODE, secretKey, new IvParameterSpec(fileInitializationVector));
-        CipherInputStream cipherIn = new CipherInputStream(fileIn, cipher);
 
-        InputStreamReader inputReader = new InputStreamReader(cipherIn);
-        BufferedReader reader = new BufferedReader(inputReader);
-        StringBuilder sb = new StringBuilder();
-        String line;
+        FileUtil.writeToFile(destinationFilePath, decrypt(fileIn, cipher));
 
-        while ((line = reader.readLine()) != null) {
-            sb.append(line).append(System.lineSeparator());
+        logger.fine("Contents decrypted");
+    }
+
+    /**
+     * @param fileIn The encrypted file as an input stream
+     * @param cipher The matching cipher
+     * @return A decrypted string from the encrypted file
+     * @throws IOException If an IOException occurs while reading the file
+     */
+    private String decrypt(FileInputStream fileIn, Cipher cipher) throws IOException {
+        // Try with resources handles auto closing readers and input streams.
+        // The catch block can be omitted as exceptions are handled by the caller.
+        try (CipherInputStream cipherIn = new CipherInputStream(fileIn, cipher);
+             InputStreamReader inputReader = new InputStreamReader(cipherIn);
+             BufferedReader reader = new BufferedReader(inputReader)) {
+
+            StringBuilder sb = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append(System.lineSeparator());
+            }
+
+            return sb.toString();
         }
-
-        logger.fine("Content decrypted.");
-
-        return sb.toString();
     }
 
     /**
