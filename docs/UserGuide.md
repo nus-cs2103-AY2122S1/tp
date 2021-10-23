@@ -188,12 +188,16 @@ Examples:
 
 **Note**: Italicised word refers to a stored prefix value. e.g. ***Name*** could refer to the value `John` stored as a name in the application.
 * ##### NAME `n/`
+<details>
+  <summary>
   * A NAME is considered matching with a ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
   * All keywords provided as NAME input must comply with input specifications for add given [**here**](#name-n).
   * For example:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
-
+  </summary>
+  
+</details>
 
 * ##### CONTACT_NUMBER `p/`
   * A CONTACT_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
@@ -273,7 +277,7 @@ but not with *Role*s such as `Software` or `Software Developer`.
         * A `2021` input can match with applicants that have the *Interview* in year 2021.
         * A `20:21` input can match with applicants that have the *Interview* at time 20:21 on any date.
         * A `21` input can match with *Interviews* `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`. 
-
+  
 ### Deleting an applicant : `delete`
 
 Deletes applicants by their index from the list in RecruitIn.
