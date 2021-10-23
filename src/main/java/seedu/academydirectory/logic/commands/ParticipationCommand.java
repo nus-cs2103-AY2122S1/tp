@@ -15,14 +15,14 @@ import seedu.academydirectory.model.student.Student;
 
 public class ParticipationCommand extends Command {
 
-    public static final String COMMAND_WORD = "part";
+    public static final String COMMAND_WORD = "participation";
 
-    public static final String HELP_MESSAGE = "### Editing a student’s Studio participation: `part`\n"
+    public static final String HELP_MESSAGE = "### Editing a student’s Studio participation: `participation`\n"
             + "Avengers will be able to track the participation of their students during the relevant studios. "
             + "\n"
             + "We will be keeping track of Studio participation with a counter system which starts at 0 by default.\n"
             + "\n"
-            + "Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`\n"
+            + "Format: `participation INDEX... ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`\n"
             + "\n"
             + "* Edits the Studio participation of a student or multiple students based on their `INDEX`.\n"
             + "* Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown "
@@ -37,9 +37,9 @@ public class ParticipationCommand extends Command {
             + "the student will also be marked as having attended the Studio.\n"
             + "\n"
             + "Examples:\n"
-            + "* `part 1, 2, 3 ses/12 add/500`\n"
-            + "* `part 4, 6 ses/2 add/-300`\n"
-            + "* `part 4 ses/9 add/1`";
+            + "* `participation 1, 2, 3 ses/12 add/500`\n"
+            + "* `participation 4, 6 ses/2 add/-300`\n"
+            + "* `participation 4 ses/9 add/1`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the participation count of the student(s) identified "

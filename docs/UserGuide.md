@@ -197,11 +197,11 @@ Examples:
 * `attendance 1 ses/1 att/1`
 * `attendance 1, 2, 3 ses/12 k/Chan a/1 i/7`
 
-### Editing a student’s Studio participation: `part`
+### Editing a student’s Studio participation: `participation`
 
 Avengers will be able to track the participation of their students during the relevant studios. We will be keeping track of Studio participation with a counter system which starts at 0 by default.
 
-Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
+Format: `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 
 * Edits the Studio participation of a student or multiple students based on their `INDEX`.
 * Modifies the student(s) at the specified `INDEX`. The index refers to the index number shown in the displayed student list. The index **must be a positive integer** 1, 2, 3, …​
@@ -212,9 +212,9 @@ Format: `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`
 * If a student's `Attendance` is `false` and the Participation score to be added is greater than 0, the student will also be marked as having attended the Studio.
 
 Examples:
-* `part 1, 2, 3 ses/12 add/500`
-* `part 4, 6 ses/2 add/-300`
-* `part 4 ses/9 add/1`
+* `participation 1, 2, 3 ses/12 add/500`
+* `participation 4, 6 ses/2 add/-300`
+* `participation 4 ses/9 add/1`
 
 ### Adding grades for an assessment:  `grade`
 Avengers will be able to add a student’s grade for a particular assessment.
@@ -327,7 +327,7 @@ Action | Format, Examples
 [**Retrieve**](#retrieving-additional-information-of-students-retrieve) | `retrieve [p/PHONE_NUMBER] [e/EMAIL] [te/TELEGRAM] [n/NAME]` <br> e.g., `retrieve p/ e/ n/Alex Yeoh`
 [**Sort**](#sorting-the-list--sort) | `sort attr/ATTRIBUTE ord/ORDER`<br> e.g., `sort attr/average ord/asc`
 [**Attendance**](#editing-a-students-studio-attendance-attendance) | `attendance INDEX ses/STUDIO_SESSION att/ATTENDANCE_STATUS` <br> e.g., `attendance 1, 2 ses/1 att/1`
-[**Studio Participation**](#editing-a-students-studio-participation-part) | `part INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `part 1 ses/12 att/0`
+[**Studio Participation**](#editing-a-students-studio-participation-part) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `participation 1 ses/12 att/0`
 [**Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
 [**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` <br> e.g., `show RA1`
 [**Help**](#seeking-help--help) | `help`
