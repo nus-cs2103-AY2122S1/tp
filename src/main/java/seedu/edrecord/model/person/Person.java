@@ -3,10 +3,14 @@ package seedu.edrecord.model.person;
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.edrecord.model.assignment.Assignment;
+import seedu.edrecord.model.grade.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;
@@ -28,6 +32,7 @@ public class Person {
     private final Info info;
     private final ModuleGroupMap modules = new ModuleGroupMap();
     private final Set<Tag> tags = new HashSet<>();
+    private final HashMap<Assignment, Grade> grades = new HashMap<>();
 
     /**
      * Every field must be present and cannot be null.
@@ -75,6 +80,14 @@ public class Person {
     }
 
     /**
+     * Returns an immutable grades map, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Map<Assignment, Grade> getGrades() {
+        return Collections.unmodifiableMap(grades);
+    }
+
+    /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
      */
@@ -113,7 +126,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, info, modules, tags);
+        return Objects.hash(name, phone, email, info, modules, tags, grades);
     }
 
     @Override
@@ -133,6 +146,13 @@ public class Person {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
         }
+
+        Map<Assignment, Grade> grades = getGrades();
+        if (!grades.isEmpty()) {
+            builder.append("; Grades: ");
+            grades.forEach((asg, grade) -> builder.append(asg).append(": ").append(grade));
+        }
+
         return builder.toString();
     }
 
