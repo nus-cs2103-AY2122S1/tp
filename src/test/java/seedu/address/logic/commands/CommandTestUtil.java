@@ -149,8 +149,9 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
+     * Updates {@code model}'s filtered person list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
@@ -164,7 +165,7 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the persons at the given {@code targetIndex1} and
+     * Updates {@code model}'s filtered person list to show only the persons at the given {@code targetIndex1} and
      * {@code targetIndex2} in the {@code model}'s address book.
      */
     public static void showPersonAtMultipleIndex(Model model, Index targetIndex1, Index targetIndex2) {

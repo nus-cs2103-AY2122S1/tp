@@ -76,6 +76,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void sortAddressBook() {
         persons.sortList();
+        moduleLessons.sortList();
     }
 
     //// person-level operations
