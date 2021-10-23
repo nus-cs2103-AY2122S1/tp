@@ -15,6 +15,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -191,7 +192,7 @@ public class CommandTestUtil {
 
         ModuleLesson lesson = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
         final String moduleCode = lesson.getModuleCode().getModuleCodeName();
-        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(moduleCode));
+        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(moduleCode)));
         System.out.println(model.getFilteredModuleLessonList());
 
         assertEquals(1, model.getFilteredModuleLessonList().size());

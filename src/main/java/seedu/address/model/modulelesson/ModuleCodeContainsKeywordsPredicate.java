@@ -1,5 +1,6 @@
 package seedu.address.model.modulelesson;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -7,21 +8,22 @@ import java.util.function.Predicate;
  */
 public class ModuleCodeContainsKeywordsPredicate implements Predicate<ModuleLesson> {
 
-    private final String keyword;
+    private final List<String> keywords;
 
-    public ModuleCodeContainsKeywordsPredicate(String keyword) {
-        this.keyword = keyword;
+    public ModuleCodeContainsKeywordsPredicate(List<String> keywords) {
+        this.keywords = keywords;
     }
 
     @Override
     public boolean test(ModuleLesson moduleLesson) {
-        return moduleLesson.getModuleCode().getModuleCodeName().equalsIgnoreCase(keyword);
+        return keywords.stream()
+                .allMatch(keyword -> moduleLesson.getModuleCode().getModuleCodeName().equalsIgnoreCase(keyword));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ModuleCodeContainsKeywordsPredicate // instanceof handles nulls
-                && keyword.equals(((ModuleCodeContainsKeywordsPredicate) other).keyword)); // state check
+                && keywords.equals(((ModuleCodeContainsKeywordsPredicate) other).keywords)); // state check
     }
 }
