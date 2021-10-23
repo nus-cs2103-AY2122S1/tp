@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.CLEAR;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.CREATE_ADDRESSBOOK;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.DELETE_ADDRESSBOOK;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.EXIT;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.NORMAL;
 import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.SHOW_HELP;
@@ -55,10 +54,6 @@ public class CommandResult {
         return type.equals(CREATE_ADDRESSBOOK);
     }
 
-    public boolean isDeleteAddressBook() {
-        return type.equals(DELETE_ADDRESSBOOK);
-    }
-
     public boolean isClearing() {
         return type.equals(CLEAR);
     }
@@ -100,7 +95,5 @@ public class CommandResult {
         SWITCH_ADDRESSBOOK,
         /** The application is creating AddressBook **/
         CREATE_ADDRESSBOOK,
-        /** The application is deleting AddressBook **/
-        DELETE_ADDRESSBOOK
     }
 }

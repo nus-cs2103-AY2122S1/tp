@@ -301,12 +301,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<NextMeeting> getNextMeetingsList() {
         return meetings.asUnmodifiableObservableList();
-    };
+    }
 
     @Override
     public ObservableList<NextMeeting> getSortedNextMeetingsList() {
         return meetings.asSortedObservableList();
-    };
+    }
 
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();

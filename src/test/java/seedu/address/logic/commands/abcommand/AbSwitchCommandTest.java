@@ -79,7 +79,7 @@ public class AbSwitchCommandTest {
 
         // same values -> returns true
         AbSwitchCommand abSwitchCommandCopy = new AbSwitchCommand(addressBook1, path1);
-        assertTrue(abSwitchCommand1.equals(abSwitchCommand1));
+        assertTrue(abSwitchCommand1.equals(abSwitchCommandCopy));
 
         // different types -> returns false
         assertFalse(abSwitchCommand1.equals(1));

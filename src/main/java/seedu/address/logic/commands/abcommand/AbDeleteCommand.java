@@ -2,7 +2,6 @@ package seedu.address.logic.commands.abcommand;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.FileUtil.isFileExists;
-import static seedu.address.logic.commands.CommandResult.SpecialCommandResult.DELETE_ADDRESSBOOK;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -54,8 +53,7 @@ public class AbDeleteCommand extends AbCommand {
             throw new CommandException(String.format(MESSAGE_DELETE_ADDRESSBOOK_FAILURE, addressBookName));
         }
 
-        return new CommandResult(
-                String.format(MESSAGE_DELETE_ADDRESSBOOK_SUCCESS, addressBookName), DELETE_ADDRESSBOOK);
+        return new CommandResult(String.format(MESSAGE_DELETE_ADDRESSBOOK_SUCCESS, addressBookName));
     }
 
     @Override
