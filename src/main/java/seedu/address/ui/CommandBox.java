@@ -47,11 +47,11 @@ public class CommandBox extends UiPart<Region> {
         switch(keycode) {
         case UP:
             String recentInput = inputHistory.getPreviousInput();
-            setText(recentInput);
+            setTextAndCaret(recentInput);
             break;
         case DOWN:
             String nextInput = inputHistory.getNextInput();
-            setText(nextInput);
+            setTextAndCaret(nextInput);
             break;
         default:
             break;
@@ -102,7 +102,7 @@ public class CommandBox extends UiPart<Region> {
      * Sets the text of the command box to the given string and moves the caret to after the last char of the text.
      * @param text String to be shown on command box.
      */
-    private void setText(String text) {
+    private void setTextAndCaret(String text) {
         commandTextField.setText(text);
         commandTextField.end();
     }
