@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalTasks.PROJECT;
 
 import java.nio.file.Path;
 import java.util.Set;
@@ -20,12 +21,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 class TaddCommandTest {
 
@@ -37,7 +39,7 @@ class TaddCommandTest {
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
-        Task validTask = new Task("Do homework");
+        Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         ModelStubAcceptingTaskAdded modelStub = new ModelStubAcceptingTaskAdded(addressBook, validTask, validMemberID);
@@ -50,8 +52,8 @@ class TaddCommandTest {
     @Test
     public void equals() {
         Index validMemberID = Index.fromOneBased(1);
-        Task validTask1 = new Task("Do homework");
-        Task validTask2 = new Task("Write a poem");
+        Task validTask1 = new TaskBuilder().build();
+        Task validTask2 = new TaskBuilder(PROJECT).build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand addHomeworkCommand = new TaddCommand(validMemberID, validTask1);

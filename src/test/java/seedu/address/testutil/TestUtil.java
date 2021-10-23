@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.data.Data;
+import seedu.address.model.module.Module;
 
 /**
  * A utility class for test cases.
@@ -69,7 +69,7 @@ public class TestUtil {
      * Returns the data in the {@code model}'s member or event list at {@code index}
      * as specified.
      */
-    public static Data getData(Model model, Index index, String data) {
+    public static Module getData(Model model, Index index, String data) {
         switch (data) {
         case "member":
             return model.getFilteredMemberList().get(index.getZeroBased());

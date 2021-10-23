@@ -7,10 +7,10 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.event.UniqueEventList;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.data.member.UniqueMemberList;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.event.UniqueEventList;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.member.UniqueMemberList;
 
 /**
  * Wraps all data at the address-book level

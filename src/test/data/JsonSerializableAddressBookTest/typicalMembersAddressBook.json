@@ -8,19 +8,24 @@
     "attachedPosition" : [ "friends" ],
     "attachedTasks": [{
       "taskName": "team meeting",
-      "isDone": false
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
     }, {
       "taskName": "group project",
-      "isDone": false
+      "isDone": false,
+      "deadline": "21/10/2021 23:59"
     }, {
       "taskName": "check payment",
-      "isDone": false
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
     }, {
       "taskName": "check vaccination status",
-      "isDone": false
+      "isDone": false,
+      "deadline": "22/10/2021 08:00"
     }, {
       "taskName": "rehearse 2 times",
-      "isDone": false
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
     }]
   }, {
     "name" : "Benson Meier",
@@ -30,19 +35,24 @@
     "attachedPosition" : [ "owesMoney", "friends" ],
     "attachedTasks": [{
       "taskName": "team meeting",
-      "isDone": false
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
     }, {
       "taskName": "group project",
-      "isDone": false
+      "isDone": false,
+      "deadline": "21/10/2021 23:59"
     }, {
       "taskName": "check payment",
-      "isDone": false
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
     }, {
       "taskName": "check vaccination status",
-      "isDone": false
+      "isDone": false,
+      "deadline": "22/10/2021 08:00"
     }, {
       "taskName": "rehearse 2 times",
-      "isDone": false
+      "isDone": false,
+      "deadline": "27/10/2021 23:59"
     }]
   }, {
     "name" : "Carl Kurz",

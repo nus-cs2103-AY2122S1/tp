@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -9,8 +10,8 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 
 /**
  * Adds a task to the task list of a person.
@@ -21,9 +22,11 @@ public class TaddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member. "
             + "Parameters: "
             + PREFIX_NAME + " TASKNAME "
+            + PREFIX_DATE + " TASKDEADLINE "
             + PREFIX_MEMBER_ID + " MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + " Submit form "
+            + PREFIX_DATE + " 21/10/2021 23:59 "
             + PREFIX_MEMBER_ID + " 2";
 
     public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";

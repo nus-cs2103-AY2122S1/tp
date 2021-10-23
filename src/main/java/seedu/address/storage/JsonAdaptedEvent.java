@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.data.Name;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.event.EventDate;
-import seedu.address.model.data.member.Member;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.event.EventDate;
+import seedu.address.model.module.member.Member;
 
 /**
  * Jackson-friendly version of {@link Event}.
@@ -65,7 +65,7 @@ public class JsonAdaptedEvent {
         }
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, "NAME"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -73,7 +73,7 @@ public class JsonAdaptedEvent {
         final Name modelEventName = new Name(name);
 
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, "DATE"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_EVENT_FORMAT, "date"));
         }
         if (!EventDate.isValidEventDate(date)) {
             throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);

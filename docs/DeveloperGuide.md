@@ -259,24 +259,31 @@ This command will display all the tasks of the first member of the member list.
 
 The `Model` component,
 
-* stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object).
+* stores the address book data i.e., all `Member` objects (which are contained in a `UniqueMemberList` object), all `Event` objects (which are contained in a `UniqueEventList` object).
 * stores a `TaskList` reference that points to the `TaskList` object that contains all the `Task` objects of the currently 'selected' `Member` object (e.g. result of a 'tlist' command)
-* stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the module in the list change.
+* stores the currently 'selected' `Member`, `Event` and `Task` objects (e.g., results of a search query) as separate _filtered_ lists which are exposed to outsiders as an unmodifiable `ObservableList<Member>`, `ObservableList<Event>` and `ObservableList<Task>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own `Position` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Position` list in the `AddressBook`, which `Member` references. This allows `AddressBook` to only require one `Position` object per unique POSITION, instead of each `Member` needing their own set of `Position` objects.<br>
 
 
 <img src="images/BetterModelClassDiagram.png" width="450" />
 
 </div>
 
-#### Current Implementation of task
+#### Current Implementations
+
+The model that we implemented currently has `Event`, `Task` and `Member`. `Member` has a field with `TaskList` which contains
+`Task` belonging to the `Member`. `Event` has a `Name` field, `EventDate` field, and a field of a HashMap<Member, Boolean>
+to serve as a participant list with attendance. Event and Member both extend from the abstract class `Module` to reduce class duplication.
 
 The `Task` model we implemented currently has a task name and a state that represents it is done or not.
 
-#### Future Plan of task
+#### Future Plans
+
+The future plan for the model is to have `Task` extend from module. The search functions in regard to name will be greatly helped ny the `Module` class.
+We also plan to make the `Position` objects unique to reduce space cost, Each member would contain a reference to the `Position` object instead.
 
 * Make `Task` a subclass of `Module`, which involves adding `TaskName` class.
 * Add deadline field to `Task`
@@ -294,7 +301,15 @@ The `Storage` component,
 * depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 #### Current Implementation
+
 `JsonAdaptedTask` allows `Task` to be stored in a json format and `JsonAdaptedMember` allows `Member` to store an array of `Task`
+
+`JsonAdaptedEvent` allows `Event` to be stored in Json format. Ailurus can now store `Event`, enabling the saving and 
+loading of files with `Event` objects. The Map of participants of the `Event` are saved into Json format by splitting them into two separate lists of `JsonAdaptedMember` and `Boolean` respectively.
+
+#### Future Plans
+
+Storing `Position` in a unique list would reduce the amount of `Position` objects needed.
 
 ### Common classes
 
