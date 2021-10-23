@@ -87,7 +87,6 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
-        System.out.println(currentUserInputIndex);
 ;        if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
             if (currentUserInputIndex == 0) {
                 currentUserInputIndex--;
