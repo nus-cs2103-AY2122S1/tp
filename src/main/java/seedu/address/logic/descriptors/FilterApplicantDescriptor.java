@@ -28,9 +28,9 @@ public class FilterApplicantDescriptor {
     }
 
     /**
-     * Returns true if at least one field is edited.
+     * Returns true if at least one filter is present in the descriptor.
      */
-    public boolean isAnyFieldEdited() {
+    public boolean hasAnyFilter() {
         return CollectionUtil.isAnyNonNull(positionTitle, applicationStatus);
     }
 

@@ -50,7 +50,7 @@ public class FilterApplicantCommand extends Command {
 
         FilterApplicantDescriptor invalidFilterApplicantDescriptor =
                 createInvalidFilterApplicantDescriptor(model, filterApplicantDescriptor);
-        if (invalidFilterApplicantDescriptor.isAnyFieldEdited()) {
+        if (invalidFilterApplicantDescriptor.hasAnyFilter()) {
             throw new CommandException(String.format(MESSAGE_INVALID_FILTER, invalidFilterApplicantDescriptor));
         }
 

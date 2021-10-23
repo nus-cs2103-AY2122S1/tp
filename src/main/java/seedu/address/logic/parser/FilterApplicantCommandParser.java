@@ -32,7 +32,7 @@ public class FilterApplicantCommandParser implements Parser<FilterApplicantComma
                     ApplicantParserUtil.parseApplicationStatus(argMultimap.getValue(PREFIX_STATUS).get()));
         }
 
-        if (!filterApplicantDescriptor.isAnyFieldEdited()) {
+        if (!filterApplicantDescriptor.hasAnyFilter()) {
             throw new ParseException(FilterApplicantCommand.MESSAGE_NOT_FILTERED);
         }
 
