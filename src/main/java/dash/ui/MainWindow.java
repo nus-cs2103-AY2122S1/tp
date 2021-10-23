@@ -139,9 +139,9 @@ public class MainWindow extends UiPart<Stage> {
         helpListPanelGeneral = new HelpListPanel(helpPanel.initialiseHelpListGeneral());
         helpListPanelContact = new HelpListPanel(helpPanel.initialiseHelpListContact());
         helpListPanelTask = new HelpListPanel(helpPanel.initialiseHelpListTask());
-        helpPanel.getCommandContainer().add(helpListPanelGeneral.getRoot(), 0, 1);
-        helpPanel.getCommandContainer().add(helpListPanelContact.getRoot(), 0, 4);
-        helpPanel.getCommandContainer().add(helpListPanelTask.getRoot(), 0, 7);
+        helpPanel.getCommandContainer().add(helpListPanelGeneral.getRoot(), 0, 2);
+        helpPanel.getCommandContainer().add(helpListPanelContact.getRoot(), 0, 5);
+        helpPanel.getCommandContainer().add(helpListPanelTask.getRoot(), 0, 8);
         tabMenu.getHelpGridPane().add(helpPanel.getRoot(), 0, 1);
 
         CommandBox commandBox = new CommandBox(this::executeCommand);

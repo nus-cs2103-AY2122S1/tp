@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.GridPane;
@@ -23,6 +25,7 @@ public class HelpPanel extends UiPart<Region> {
     private static final String HELP_CONTENT = "Acceptable Date/Time formats:\n"
             + "Date: dd/MM/yyyy , dd-MM-yyyy , yyyy/MM/dd , yyyy-MM-dd, dd MMM yyyy\n"
             + "Time: HHmm , hh:mm a\n\n"
+            + "Icons and graphics taken from https://icons8.com/\n"
             + "For more detailed information,"
             + " visit our User Guide or Developer Guide by clicking the buttons below to copy \n"
             + "their URLs. \n\n";
@@ -89,6 +92,8 @@ public class HelpPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(HelpPanel.class);
 
+    private Image banner = new Image("/images/banner.png");
+
     private ResultDisplay resultDisplay;
 
     @FXML
@@ -96,6 +101,9 @@ public class HelpPanel extends UiPart<Region> {
 
     @FXML
     private Label helpContent;
+
+    @FXML
+    private Label bannerLabel;
 
     @FXML
     private GridPane commandContainer;
@@ -114,6 +122,9 @@ public class HelpPanel extends UiPart<Region> {
         super(FXML);
         this.resultDisplay = resultDisplay;
         helpContent.setText(HELP_CONTENT);
+        ImageView bannerImageView = new ImageView(banner);
+        bannerLabel.setText(" ");
+        bannerLabel.setGraphic(bannerImageView);
     }
 
     /**

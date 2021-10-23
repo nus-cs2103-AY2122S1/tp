@@ -30,8 +30,8 @@ public class TaskCard extends UiPart<Region> {
     public final Task task;
 
     private int cardIndex = 0;
-    private Image checkmarkOrange = new Image("/images/checkmark.png", 20, 20, false, true);
-    private Image checkmarkGrey = new Image("/images/checkmark_greyed.png", 20, 20, false, true);
+    private Image checkmarkDone = new Image("/images/checkmark.png", 20, 20, false, true);
+    private Image checkmarkNotDone = new Image("/images/checkmark_greyed.png", 20, 20, false, true);
     private Image tag = new Image("/images/tag.png", 20, 20, false, true);
     private Image tagGrey = new Image("/images/tag_greyed.png", 20, 20, false, true);
     private Image contact = new Image("/images/contact.png", 20, 20, false, true);
@@ -77,7 +77,7 @@ public class TaskCard extends UiPart<Region> {
         this.cardIndex = displayedIndex;
         desc.setText(task.getTaskDescription().description);
 
-        ImageView checkmark = new ImageView(checkmarkGrey);
+        ImageView checkmark = new ImageView(checkmarkNotDone);
         completionStatus.setText(" ");
         completionStatus.setGraphic(checkmark);
 
@@ -118,20 +118,14 @@ public class TaskCard extends UiPart<Region> {
     }
 
     public void setAsComplete() {
-        if (this.cardIndex % 2 == 0) {
-            this.cardPane.setStyle("-fx-background-color: #c7ab91;");
-        } else {
-            this.cardPane.setStyle("-fx-background-color: #e0c1a4;");
-        }
-
-        this.desc.setStyle("-fx-text-fill: #878787;");
-        this.id.setStyle("-fx-text-fill: #878787;");
-        ImageView checkmark = new ImageView(checkmarkOrange);
+        this.desc.setStyle("-fx-opacity:0.5;");
+        this.id.setStyle("-fx-opacity:0.5;");
+        ImageView checkmark = new ImageView(checkmarkDone);
         completionStatus.setText("");
         completionStatus.setGraphic(checkmark);
 
-        this.date.setStyle("-fx-text-fill: #878787;");
-        this.time.setStyle("-fx-text-fill: #878787;");
+        this.date.setStyle("-fx-opacity:0.5;");
+        this.time.setStyle("-fx-opacity:0.5;");
 
         this.tags.setStyle("-fx-opacity:0.5;");
         ImageView tagIconGrey = new ImageView(tagGrey);
