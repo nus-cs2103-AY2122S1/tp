@@ -17,7 +17,7 @@ public class Insurance {
             "Insurance type must be one of the following: "
             + String.join(", ", Arrays.stream(InsuranceType.values())
                     .map(InsuranceType::getTypeName)
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.joining()));
 
     private InsuranceType type;
     private String name;
