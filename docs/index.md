@@ -6,7 +6,7 @@ title: SalesNote
 [![CI Status](https://github.com/AY2122S1-CS2103T-W08-3/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2122S1-CS2103T-W08-3/tp/actions)
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W08-3/tp/branch/master/graph/badge.svg?token=05ON2OIR5Q)](https://codecov.io/gh/AY2122S1-CS2103T-W08-3/tp)
 
-![Ui](images/Ui.png)
+![Ui](images/Ui2.png)
 
 **SalesNote is a desktop application that helps tailors to manage sales and keep track of a smaller, but more recurrent group of clients.** 
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
