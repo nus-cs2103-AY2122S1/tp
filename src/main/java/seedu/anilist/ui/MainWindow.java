@@ -70,7 +70,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        animeListPanel = new AnimeListPanel(logic.getAnimeList(), logic.getFilteredAnimeList(),
+        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(),
                 logic.getCurrentTab(), this::executeCommand);
         animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
 
@@ -87,16 +87,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateStatsDisplay() {
-        int watchingCount = getAnimeListPanel().getWatchingCount();
-        int toWatchCount = getAnimeListPanel().getToWatchCount();
-        int finishedCount = getAnimeListPanel().getFinishedCount();
-        int total = watchingCount + toWatchCount + finishedCount;
+//        int watchingCount = getAnimeListPanel().getWatchingCount();
+//        int toWatchCount = getAnimeListPanel().getToWatchCount();
+//        int finishedCount = getAnimeListPanel().getFinishedCount();
+//        int total = watchingCount + toWatchCount + finishedCount;
 
-        statsDisplay.setAnimeListStats(
-                total,
-                watchingCount,
-                toWatchCount,
-                finishedCount);
+        statsDisplay.setAnimeListStats(logic.getStats());
     }
 
     /**

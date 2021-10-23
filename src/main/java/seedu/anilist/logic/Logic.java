@@ -9,6 +9,7 @@ import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.stats.Stats;
 import seedu.anilist.ui.TabOption;
 
 /**
@@ -58,4 +59,9 @@ public interface Logic {
      * Returns current tab.
      */
     TabOption getCurrentTab();
+
+    /**
+     * Returns the current user statistics.
+     */
+    Stats getStats();
 }

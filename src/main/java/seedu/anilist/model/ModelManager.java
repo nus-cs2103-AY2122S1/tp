@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.stats.Stats;
 import seedu.anilist.ui.TabOption;
 
 /**
@@ -24,6 +25,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Anime> filteredAnime;
     private final TabOption currentTab;
+    private Stats stats;
 
     /**
      * Initializes a ModelManager with the given animeList and userPrefs.
@@ -126,6 +128,15 @@ public class ModelManager implements Model {
         animeList.setAnime(target, editedAnime);
     }
 
+    @Override
+    public void updateUserStats() {
+        stats = animeList.fetchUserStats();
+    }
+
+    @Override
+    public Stats getUserStats() {
+        return stats;
+    }
     //=========== Filtered Anime List Accessors =============================================================
 
     /**

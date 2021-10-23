@@ -2,11 +2,15 @@ package seedu.anilist.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.anime.UniqueAnimeList;
+import seedu.anilist.model.genre.Genre;
+import seedu.anilist.model.stats.Stats;
 
 /**
  * Wraps all data at the anime list level
@@ -92,6 +96,33 @@ public class AnimeList implements ReadOnlyAnimeList {
     public void removeAnime(Anime key) {
         animeList.remove(key);
     }
+
+    public Stats fetchUserStats() {
+        //TODO refactor shitty code
+        int watchingCount = 0;
+        int toWatchCount = 0;
+        int finishedCount = 0;
+        int episodesCount = 0;
+        HashMap<Genre, Integer> userGenres = new HashMap<>();
+
+        for (Anime anime: animeList) {
+            episodesCount += anime.getEpisode().getValue();
+            for (Genre genre: anime.getGenres()) {
+                userGenres.merge(genre, 1, Integer::sum);
+            }
+            Status.WatchStatus watchStatus = anime.getStatus().status;
+            if (watchStatus.equals(Status.WatchStatus.WATCHING)) {
+                watchingCount += 1;
+            } else if (watchStatus.equals(Status.WatchStatus.TOWATCH)) {
+                toWatchCount += 1;
+            } else {
+                assert watchStatus.equals(Status.WatchStatus.FINISHED);
+                finishedCount += 1;
+            }
+        }
+        return new Stats(watchingCount, toWatchCount, finishedCount, episodesCount, userGenres);
+    }
+
 
     //// util methods
 

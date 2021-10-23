@@ -16,6 +16,7 @@ import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.stats.Stats;
 import seedu.anilist.storage.Storage;
 import seedu.anilist.ui.TabOption;
 
@@ -102,5 +103,10 @@ public class LogicManager implements Logic {
     @Override
     public TabOption getCurrentTab() {
         return model.getCurrentTab();
+    }
+
+    @Override
+    public Stats getStats() {
+        return model.getUserStats();
     }
 }

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.anilist.commons.core.GuiSettings;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.stats.Stats;
 import seedu.anilist.ui.TabOption;
 
 /**
@@ -85,6 +86,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimeList(Predicate<Anime> predicate);
+
+    /**
+     * Recalculates and updates the current user statistics.
+     */
+    void updateUserStats();
+
+    /**
+     * Returns the current user statistics.
+     */
+    Stats getUserStats();
 
     /**
      * Sets the current tab.

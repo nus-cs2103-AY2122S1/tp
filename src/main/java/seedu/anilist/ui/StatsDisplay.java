@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.LogsCenter;
+import seedu.anilist.model.stats.Stats;
 
 
 /**
@@ -21,6 +22,7 @@ import seedu.anilist.commons.core.LogsCenter;
  */
 public class StatsDisplay extends UiPart<Stage> {
     private static final String TOTAL_ANIMES_MSG = "You have %d anime(s) in AniList!";
+    private static final String EPISODES_WATCHED_MSG = "Episode(s) watched: %d";
     private static final String NUM_ANIMES_WATCHING_MSG = "Watching (%d)";
     private static final String NUM_ANIMES_TOWATCH_MSG  = "To Watch (%d)";
     private static final String NUM_ANIMES_FINISHED_MSG = "Finished (%d)";
@@ -94,14 +96,15 @@ public class StatsDisplay extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
-    public void setAnimeListStats(int totalAnimesCount, int watchingCount, int toWatchCount, int finishedCount) {
+    public void setAnimeListStats(Stats stats) {
         pieChart.getData().clear();
-        requireAllNonNull(totalAnimesCount, toWatchCount, watchingCount, finishedCount);
-        pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, totalAnimesCount));
+        requireAllNonNull(stats);
+        pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, stats.getTotalAnimesCount())
+        + "\n" + String.format(EPISODES_WATCHED_MSG, stats.getEpisodesCount()));
 
-        addToPieChart(NUM_ANIMES_WATCHING_MSG, watchingCount);
-        addToPieChart(NUM_ANIMES_TOWATCH_MSG, toWatchCount);
-        addToPieChart(NUM_ANIMES_FINISHED_MSG, finishedCount);
+        addToPieChart(NUM_ANIMES_WATCHING_MSG, stats.getWatchingCount());
+        addToPieChart(NUM_ANIMES_TOWATCH_MSG, stats.getToWatchCount());
+        addToPieChart(NUM_ANIMES_FINISHED_MSG, stats.getFinishedCount());
     }
 
 
