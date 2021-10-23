@@ -27,40 +27,36 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID);
 
         // Initializing all the arguments as null at the beginning.
-        String trimmedNameArg = null;
-        String trimmedSidArg = null;
-        String trimmedCidArg = null;
-
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            trimmedNameArg = argMultimap.getValue(PREFIX_NAME).get().trim();
-            if (trimmedNameArg.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-            }
-        }
-        if (argMultimap.getValue(PREFIX_STUDENT_ID).isPresent()) {
-            trimmedSidArg = argMultimap.getValue(PREFIX_STUDENT_ID).get().trim();
-            if (trimmedSidArg.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-            }
-        }
-        if (argMultimap.getValue(PREFIX_CLASS_ID).isPresent()) {
-            trimmedCidArg = argMultimap.getValue(PREFIX_CLASS_ID).get().trim();
-            if (trimmedCidArg.isEmpty()) {
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-            }
-        }
-
-        QueryStudentDescriptor queryStudentDescriptor =
-                new QueryStudentDescriptor(trimmedNameArg, trimmedSidArg, trimmedCidArg);
-
-        if (!queryStudentDescriptor.isAnyFieldToBeQueried()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
+        String trimmedNameArg = trimPredicateArg(argMultimap, PREFIX_NAME);
+        String trimmedSidArg = trimPredicateArg(argMultimap, PREFIX_STUDENT_ID);
+        String trimmedCidArg = trimPredicateArg(argMultimap, PREFIX_CLASS_ID);
+        QueryStudentDescriptor queryStudentDescriptor = getQueryStudentDescriptor(trimmedNameArg,
+                                                                                  trimmedSidArg,
+                                                                                  trimmedCidArg);
 
         return new FilterCommand(new StudentDetailContainsQueryPredicate(queryStudentDescriptor));
+    }
+
+    private String trimPredicateArg(ArgumentMultimap argMultimap, Prefix predicate) throws ParseException {
+        String trimmedPredicateArg = null;
+
+        if (argMultimap.getValue(predicate).isPresent()) {
+            trimmedPredicateArg = argMultimap.getValue(predicate).get().trim();
+            if (trimmedPredicateArg.isEmpty()) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+            }
+        }
+        return trimmedPredicateArg;
+    }
+
+    private QueryStudentDescriptor getQueryStudentDescriptor(String nameArg, String sidArg, String cidArg)
+            throws ParseException {
+        QueryStudentDescriptor queryStudentDescriptor =
+                new QueryStudentDescriptor(nameArg, sidArg, cidArg);
+
+        if (!queryStudentDescriptor.isAnyFieldToBeQueried()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
+        return queryStudentDescriptor;
     }
 }
