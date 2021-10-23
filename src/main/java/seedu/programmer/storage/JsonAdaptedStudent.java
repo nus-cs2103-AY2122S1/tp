@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.programmer.commons.exceptions.IllegalValueException;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -25,7 +25,7 @@ class JsonAdaptedStudent {
     private final String studentId;
     private final String classId;
     private final String email;
-    private List<LabResult> labResultList;
+    private List<Lab> labResultList;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.

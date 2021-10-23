@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 
 /**
  * An UI component that displays information of the lab result.
@@ -21,7 +21,7 @@ public class LabResultCard extends UiPart<Region> {
      *
      */
 
-    public final LabResult result;
+    public final Lab result;
 
     @FXML
     private HBox cardPane;
@@ -36,7 +36,7 @@ public class LabResultCard extends UiPart<Region> {
     /**
      * Creates a {@code labResultCode} with the given {@code labResult} and index to display.
      */
-    public LabResultCard(LabResult result, int displayedIndex) {
+    public LabResultCard(Lab result, int displayedIndex) {
         super(FXML);
         this.result = result;
         labTitle.setText(result.getTitle());

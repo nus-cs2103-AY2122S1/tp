@@ -18,7 +18,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.testutil.StudentBuilder;
@@ -98,7 +98,7 @@ public class ProgrammerErrorTest {
         }
 
         @Override
-        public ObservableList<LabResult> showLabResultList(Student target) {
+        public ObservableList<Lab> showLabResultList(Student target) {
             return null;
         }
     }

@@ -21,7 +21,7 @@ public class Student {
     private final StudentId studentId;
     private final ClassId classId;
     private final Email email;
-    private ObservableList<LabResult> labResultList;
+    private ObservableList<Lab> labResultList;
 
 
     /**
@@ -57,18 +57,34 @@ public class Student {
         return email;
     }
 
-    public ObservableList<LabResult> getLabResultList() {
+    public ObservableList<Lab> getLabResultList() {
         return labResultList;
     }
 
     /**
-     * Add a lab result into the student's record
+     * Adds a lab result to all the student records
      * */
-    public void addLabResult(LabResult result) {
+    public void addLabResult(Lab result) {
         this.labResultList.add(result);
     }
 
-    public void setLabResultRecord(List<LabResult> labResultRecord) {
+    /**
+     * Deletes a lab result from all the student records
+     * */
+    public void delLabResult(Lab result) {
+        this.labResultList.remove(result);
+    }
+
+    /**
+     * Updates a lab result for a student
+     * */
+    public void editLabResult(Lab result, Double value) {
+        int index = this.labResultList.indexOf(result);
+        Lab current = this.labResultList.get(index);
+        current.updateActualScore(value);
+    }
+
+    public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
             labResultRecord = new ArrayList<>();
         }

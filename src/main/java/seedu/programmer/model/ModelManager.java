@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 
@@ -131,7 +131,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<LabResult> showLabResultList(Student target) {
+    public ObservableList<Lab> showLabResultList(Student target) {
         return programmerError.showLabResultList(target);
     }
 

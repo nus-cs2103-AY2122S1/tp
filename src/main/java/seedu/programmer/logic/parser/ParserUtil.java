@@ -115,9 +115,7 @@ public class ParserUtil {
      * @param title the title of the lab assignment.
      * */
     public static String parseTitle(String title) {
-        if (title == null) {
-            return " ";
-        }
+        title = "lab" + title;
         return title.trim();
     }
 

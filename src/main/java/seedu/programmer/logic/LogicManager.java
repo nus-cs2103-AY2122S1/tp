@@ -14,7 +14,7 @@ import seedu.programmer.logic.parser.ProgrammerErrorParser;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.ReadOnlyProgrammerError;
-import seedu.programmer.model.student.LabResult;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.storage.Storage;
 
@@ -67,7 +67,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<LabResult> getLabResultList(Student target) {
+    public ObservableList<Lab> getLabResultList(Student target) {
         return model.showLabResultList(target);
     }
 
