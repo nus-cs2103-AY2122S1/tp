@@ -69,6 +69,8 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  
+* Sections with headings appended with ***{Advanced}*** are intended for the advanced user.
 
 </div>
 
@@ -90,11 +92,11 @@ Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21 20:00`
 
-#### Prefix Input Specifications:
+#### Prefix Input Specifications ***{Advanced}***:
 
 **Note**: **Alphanumeric** characters refers specifically to characters a-z, A-Z and 0-9.
 * ##### NAME `n/`
-  * A NAME should only contain **alphanumeric** characters. Spaces between words are allowed.
+  * A NAME should only contain alphanumeric characters. Spaces between words are allowed.
   * For example:
     * NAME inputs such as `John`, `Mary Sue` and `9ine 6ix` are acceptable.
     * NAME inputs such as `J@hn`, `Mary S^e` and `B{}b` are not acceptable.
@@ -123,7 +125,7 @@ Examples:
     * ROLE inputs such as `Softw@re Engin^^r` and `Day + Night Security Guard` are not acceptable.
 * ##### EMPLOYMENT_TYPE `et/`
   * An EMPLOYMENT_TYPE should be one of the following: `Full time`, `Part time`, `Temporary` or `Internship`.
-  * An EMPLOYMENT_TYPE is case-insensitive.
+  * An EMPLOYMENT_TYPE is **case-insensitive**.
   * For example:
     * EMPLOYMENT_TYPE inputs such as 'Full time` and `Internship` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `fUlL tiMe` and `iNtErnShIP` are acceptable.
@@ -136,18 +138,18 @@ Examples:
     * EXPECTED_SALARY inputs such as `-600` and `~350` are not acceptable.
 * ##### LEVEL_OF_EDUCATION `l/`
   * A LEVEL_OF_EDUCATION should be one of the following: `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` or `PhD`.
-  * A LEVEL_OF_EDUCATION is case-insensitive.
+  * A LEVEL_OF_EDUCATION is **case-insensitive**.
   * For example:
     * LEVEL_OF_EDUCATION inputs such as `Middle School` and `PhD` are acceptable.
     * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
     * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
 * ##### YEARS_OF_EXPERIENCE `y/`
-  * A YEARS_OF_EXPERIENCE should be a non-negative integer smaller than or equals to 67 (re-employment age in Singapore).
+  * A YEARS_OF_EXPERIENCE should be a **non-negative integer** smaller than or equals to **67** (re-employment age in Singapore).
   * For example:
     * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
     * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.5`, and `100` are not acceptable.
 * ##### TAG `t/`
-  * A TAG should only contain **alphanumeric** characters. Spaces between words are **not** allowed.
+  * A TAG should only contain alphanumeric characters. Spaces between words are **not** allowed.
   * For example:
     * TAG inputs such as `friends` and `colleagues` are allowed.
     * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
@@ -170,57 +172,58 @@ Finds applicants by specific prefixes.
 
 Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW]`
 
-* Find command must take at least 1 prefix input.
-* Find command can only take 1 input for each prefix.
-* If you input multiple of the same prefix, only the last prefix will be used for the search of that category.
-* Input for each prefix can contain multiple search terms separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
-* Inputs are **case-insensitive**
+* Find command must take **at least 1** prefix input.
+* If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
+* Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
+* Inputs for all prefixes are **case-insensitive**, except for LEVEL_OF_EDUCATION inputs.
 
-#### Prefix Input Specifications:
+Examples:
+* `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
+* `find n/John n/Mary` finds all applicants with only `Mary` as values for name prefix.
+* `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
+* `find n/John Mary t/friend colleague`
+* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2`
 
-***Note***: Italicised word refers to a stored prefix value. e.g. *Name* could refer to the value `John` stored as a name in the application.
-* ##### *Name* `n/`
-  * Each additional keyword for *Name* leads to a more **accommodating** search.
-  * A *Name* is considered matching if at least 1 keyword is equal to at least 1 word in the *Name*.
-  * NAME input must comply with input specifications for add given [**here**](#name-n).
+#### Prefix Input Specifications ***{Advanced}***:
+
+**Note**: Italicised word refers to a stored prefix value. e.g. ***Name*** could refer to the value `John` stored as a name in the application.
+* ##### NAME `n/`
+  * A NAME is considered matching with a ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
+  * All keywords provided as NAME input must comply with input specifications for add given [**here**](#name-n).
   * For example:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
 
 
-* ##### *Contact Number* `p/`
-  * Each additional keyword for *Contact Number* leads to a more **accommodating** search.
-  * A *Contact Number* is considered matching if at least 1 keyword is equal to at least 1 word in the *Contact Number*
-  * CONTACT_NUMBER input must comply with input specifications for add given [**here**](#contact_number-p).
+* ##### CONTACT_NUMBER `p/`
+  * A CONTACT_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
+  * All keywords provided as CONTACT_NUMBER input must comply with input specifications for add given [**here**](#contact_number-p).
   * For example:
     * A `99999999` input can only match with *Contact Number*s that are `99999999`.
     * A `99999999 88888888` input can only match with *Contact Number*s that are `99999999` and `88888888`.
 
 
-* ##### *Email* `e/`
-  * Each additional keyword for *Email* leads to a more **accommodating** search.
-  * An *Email* is considered matching if at least 1 keyword is equal to at least 1 word in the *Email*.
-  * EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#email_address-e).
+* ##### EMAIL_ADDRESS `e/`
+  * An EMAIL_ADDRESS is considered matching with an ***Email Address*** only if **at least 1** keyword is equal to **at least 1** word in the ***Email Address***.
+  * All keywords provided as EMAIL_ADDRESS input must comply with input specifications for add given [**here**](#email_address-e).
   * For example:
     * A `alexyeoh@example.com` input can match with *Email*s such as `alexyeoh@example.com`.
     * A `alexyeoh@example.com marysue@gmail.com` input can match with *Email*s such as `alexyeoh@example.com`
 and `marysue@gmail.com`.
 
 
-* ##### *Role* `r/`
-  * Each additional keyword for *Role* leads to a more **restrictive** search
-  * A *Role* is considered matching only if every single keyword is equal to at least 1 word in the *Role*.
-  * ROLE input must comply with input specifications for add given [**here**](#role-r).
+* ##### ROLE `r/`
+  * A ROLE is considered matching with a ***Role*** only if **each of every** provided keyword is equal to **at least 1** word in the ***Role***.
+  * All keywords provided as ROLE input must comply with input specifications for add given [**here**](#role-r).
   * For example:
     * A `Software` input can match with *Role*s such as `Software Engineer`, `Software` or `Software Developer`
     * A `Software Engineer` input can match with *Role*s such as `Software Engineer` or `Senior Software Engineer`
 but not with *Role*s such as `Software` or `Software Developer`.
 
 
-* ##### *Employment Type* `et/`
-  * Each additional keyword for Email leads to a more **accommodating** search, as long as all keywords are **valid**.
-  * A *Employment Type* is considered matching only if it starts with any of the keywords and all keywords are valid.
-  * EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employment_type-et).
+* ##### EMPLOYMENT_TYPE `et/`
+  * An EMPLOYMENT_TYPE is considered matching with an ***Employment Type*** only if it **starts with any** of the keywords in the ***Employment Type**.
+  * All keywords provided as EMPLOYMENT_TYPE input must comply with input specifications for add given [**here**](#employment_type-et).
   * For example:
     * A `Full time` or `full time` or `full` input will match only with *Employment Type*s that are ```Full time```
     * A ```Full part``` input will match with all *Employment Type*s that are ```Full time``` or ```Part time```
@@ -229,58 +232,47 @@ but not with *Role*s such as `Software` or `Software Developer`.
     with.
 
 
-* ##### *Expected Salary* `p/`
-    * Each additional keyword for *Expected Salary* leads to a more **accommodating** search.
-    * An *Expected Salary* is considered matching if at least 1 keyword is within `500` from at least 1 *Expected Salary*.
-    * EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
+* ##### EXPECTED_SALARY `p/`
+    * An EXPECTED_SALARY is considered matching with a ***Expected Salary*** only if **at least 1** keyword is within a range of `500` from **at least 1** keyword in the ***Expected Salary***.
+    * All keywords provided as EXPECTED_SALARY input must comply with input specifications for add given [**here**](#expected_salary-s).
     * For example:
         * A `3000` input can match with *Expected Salary*s that range from `2500` to `3500` inclusive.
         * A `2500 5000` input can match with *Expected Salary*s from the ranges `2000` to `3000` inclusive, and `4500` to `5500` inclusive.
 
 
-* ##### *Level of Education* `l/`
-  * Each additional keyword for *Level of Education* leads to a more **accommodating** search.
-  * *Level of Education* has a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
-  * A *Level of Education* is considered matching only if keyword is equal to at least 1 letter in the possible types of *Level of Education*
-  * LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
+* ##### LEVEL_OF_EDUCATION `l/`
+  * LEVEL_OF_EDUCATION can be a fixed number of levels, being `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` and `PhD`.
+  * A LEVEL_OF_EDUCATION is considered matching with a ***level of Education*** only if **at least 1** letter of a keyword is equal to **at least 1** letter in the ***Level of Education***
+  * All keywords provided as LEVEL_OF_EDUCATION input must comply with input specifications for add given [**here**](#level_of_education-l).
   * For example:
-    * A `H` input can match with *Level of Education*s such `High School`, but not with *Level of Education*s such as `PhD`
-    * A `High School` input can match with *Level of Education*s such as `High School`, but not with *Level of Education*s such as `Middle School`
+    * A `H` input can match with ***Level of Education***s such `High School`, but not with *Level of Education*s such as `PhD`
+    * A `High School` input can match with ***Level of Education***s such as `High School`, but not with *Level of Education*s such as `Middle School`
 
 
-* ##### *Years of Experience* `y/`
-    * Each additional keyword for *Year of Experience* leads to a more **accommodating** search.
-    * A *Year of Experience* is considered matching if the value is larger than or equal to the keyword.
-    * YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y).
+* ##### YEARS_OF_EXPERIENCE `y/`
+    * A YEARS_OF_EXPERIENCE is considered matching with a ***Years Of Experience*** only if the value represented by **at least 1** keyword is larger than or equal to the value represented by the ***Years Of Experience***.
+    * All keywords provided as YEARS_OF_EXPERIENCE input must comply with input specifications for add given [**here**](#years_of_experience-y).
     * For example:
-        * A `3` input can match with *Year of Experience*s that are higher than or equal to 3.
-        * A `2 3` input can match with *Year of Experience*s that are higher than or equal to 2.
+        * A `3` input can match with ***Year Of Experience***s that are higher than or equal to 3.
+        * A `2 3` input can match with ***Year Of Experience***s that are higher than or equal to 2.
 
 
-* ##### *Tag* `t/`
-    * Each additional keyword for *Tag* leads to a more **accommodating** search.
-    * A *Tag* is considered matching if at least 1 keyword is equals to at least 1 *Tag*.
-    * TAG input must comply with input specifications for add given [**here**](#tag-t).
+* ##### TAG `t/`
+    * Each applicant can have many stored tags, so ***Tags*** will be used to refer to each applicant's stored ***Tag***s.
+    * A TAG is considered matching with a ***Tags*** only if ***at least 1*** keyword is **exactly equals** to **at least 1** ***Tag*** within the ***Tags***..
+    * All keywords provided as TAG input must comply with input specifications for add given [**here**](#tag-t).
     * For example:
-        * An `old` input can match with applicants that have the *Tag* `old`
-        * An `experienced old` input can match with applicants that have the *Tag* `experienced`, or `old`, or both.
+        * An `old` input can match with applicants that have the ***Tag*** `old`
+        * An `experienced old` input can match with applicants that have the ***Tag*** `experienced`, or `old`, or both.
 
 
-* ##### *Interview* `i/`
-    * Each additional keyword for *Interview* leads to a more **accommodating** search.
-    * A *Interview* is considered matching if the time string contains the complete keyword.
-    * INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
+* ##### INTERVIEW `i/`
+    * An INTERVIEW is considered matching with a ***Interview*** only if the time string contains the complete keyword.
+    * All keywords provided as INTERVIEW input must comply with input specifications for add given [**here**](#interview-i).
     * For example:
         * A `2021` input can match with applicants that have the *Interview* in year 2021.
         * A `20:21` input can match with applicants that have the *Interview* at time 20:21 on any date.
         * A `21` input can match with *Interviews* `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`. 
-
-
-Examples:
-* `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
-* `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
-* `find n/John Mary t/friend colleague`
-* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2`
 
 ### Deleting an applicant : `delete`
 
