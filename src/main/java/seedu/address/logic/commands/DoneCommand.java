@@ -13,7 +13,7 @@ import seedu.address.model.event.Event;
 /**
  * Marks an Event identified using its displayed index as done.
  */
-public class DoneEventCommand extends Command {
+public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
 
@@ -28,11 +28,11 @@ public class DoneEventCommand extends Command {
     private final Index targetIndex;
 
     /**
-     * This is a constructor for DoneEventCommand.
+     * This is a constructor for DoneCommand.
      *
      * @param targetIndex The index of the event to be marked as done, as seen in the displayed event list.
      */
-    public DoneEventCommand(Index targetIndex) {
+    public DoneCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -56,7 +56,7 @@ public class DoneEventCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof DoneEventCommand
-                && targetIndex.equals(((DoneEventCommand) other).targetIndex));
+                || (other instanceof DoneCommand
+                && targetIndex.equals(((DoneCommand) other).targetIndex));
     }
 }
