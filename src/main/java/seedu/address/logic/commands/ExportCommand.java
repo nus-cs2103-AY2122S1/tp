@@ -143,4 +143,18 @@ public class ExportCommand extends Command {
         tries++;
         this.file = Path.of(path);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof ExportCommand
+                && this.file.equals(((ExportCommand) other).file));
+    }
+
+    /**
+     * For testing to not affect any existing save data
+     */
+    void setPath(Path path) {
+        this.file = path;
+    }
 }
