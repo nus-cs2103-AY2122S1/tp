@@ -56,7 +56,7 @@ public enum Slot {
     public int getOrder() {
         return order;
     }
-    
+
     /**
      * Checks if a specified timing is within the slot period.
      *
