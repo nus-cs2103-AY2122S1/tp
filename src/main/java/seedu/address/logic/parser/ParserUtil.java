@@ -1,10 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.assessment.Score.INVALID_ACTUAL_SCORE;
+import static seedu.address.model.assessment.Score.INVALID_TOTAL_SCORE;
+import static seedu.address.model.assessment.Score.SCORE_DELIMITER;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.Score;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
@@ -104,6 +109,50 @@ public class ParserUtil {
             throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String assessmentName} into a {@code AssessmentName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code assessmentName} is invalid.
+     */
+    public static AssessmentName parseAssessmentName(String assessmentName) throws ParseException {
+        requireNonNull(assessmentName);
+        String trimmedAssessmentName = assessmentName.trim();
+        if (!AssessmentName.isValidAssessmentName(trimmedAssessmentName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new AssessmentName(trimmedAssessmentName);
+    }
+
+    /**
+     * Parses a {@code String score} into a {@code Score}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code score} is invalid.
+     */
+    public static Score parseScore(String score) throws ParseException {
+        requireNonNull(score);
+        String trimmedAssessmentName = score.trim();
+
+        if (!Score.isValidScore(trimmedAssessmentName)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+
+        String[] scores = score.split(SCORE_DELIMITER);
+        String actualScore = scores[0];
+        String totalScore = scores[1];
+
+        if (!StringUtil.isNonNegativeUnsignedInteger(actualScore)) {
+            throw new ParseException(INVALID_ACTUAL_SCORE);
+        }
+
+        if (!StringUtil.isNonZeroUnsignedInteger(totalScore)) {
+            throw new ParseException(INVALID_TOTAL_SCORE);
+        }
+
+        return new Score(Integer.parseInt(actualScore), Integer.parseInt(totalScore));
     }
 
 }

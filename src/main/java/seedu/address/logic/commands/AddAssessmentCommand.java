@@ -5,6 +5,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
+import java.util.List;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assessment.Assessment;
@@ -29,43 +33,44 @@ public class AddAssessmentCommand extends Command {
     public static final String MESSAGE_STUDENT_NONEXISTENT =
             "The student indicated does not exist. Please add the student first.";
 
-    private final Student student;
-    private final Assessment toAdd;
+    private final Index index;
+    private final Assessment assessment;
 
     /**
      * Creates an AddAssessmentCommand to add the specified {@code Assessment} to the student.
      */
-    public AddAssessmentCommand(Student student, Assessment toAdd) {
-        requireNonNull(student);
-        requireNonNull(toAdd);
-        this.student = student;
-        this.toAdd = toAdd;
+    public AddAssessmentCommand(Index index, Assessment assessment) {
+        requireNonNull(index);
+        requireNonNull(assessment);
+        this.index = index;
+        this.assessment = assessment;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (!model.hasStudent(student)) {
-            throw new CommandException(MESSAGE_STUDENT_NONEXISTENT);
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
 
-        if (model.hasAssessment(student, toAdd)) {
+        Student student = lastShownList.get(index.getZeroBased());
+
+        if (model.hasAssessment(student, assessment)) {
             throw new CommandException(MESSAGE_DUPLICATE_ASSESSMENT);
         }
 
-        Assessment assessmentToAdd = new Assessment(toAdd.getAssessmentName(), toAdd.getScore());
-
-        // Add student with the group fetched from the data in the model
+        Assessment assessmentToAdd = new Assessment(assessment.getAssessmentName(), assessment.getScore());
         model.addAssessment(student, assessmentToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, student.getName(), assessment));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddAssessmentCommand // instanceof handles nulls
-                && student.equals(((AddAssessmentCommand) other).student)
-                && toAdd.equals(((AddAssessmentCommand) other).toAdd));
+                && index.equals(((AddAssessmentCommand) other).index)
+                && assessment.equals(((AddAssessmentCommand) other).assessment));
     }
 }

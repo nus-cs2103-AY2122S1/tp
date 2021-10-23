@@ -7,9 +7,20 @@ public class Score {
 
     public static final String MESSAGE_CONSTRAINTS = "Score should be of the format actual-score/total-score "
             + "and adhere to the following constraints:\n"
-            + "1. The actual-score should have a value greater than or equal to 0.\n"
-            + "2. The total-score should have a value greater than 0.\n"
+            + "1. The actual-score should have an integer greater than or equal to 0.\n"
+            + "2. The total-score should have an integer greater than 0.\n"
             + "3. The actual-score should be less than or equal to the total-score.";
+
+    public static final String INVALID_ACTUAL_SCORE = "Actual score should have a value greater than or equal to 0.";
+    public static final String INVALID_TOTAL_SCORE = "Total score should have a value greater than 0.";
+
+    public static final String SCORE_DELIMITER = "/";
+
+    /*
+     * The first character of the address must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "^\\d+" + SCORE_DELIMITER + "\\d+$";
 
     public static final int PASSING_THRESHOLD = 50;
 
@@ -41,9 +52,13 @@ public class Score {
         return testActualScore >= 0 && testTotalScore > 0 && testActualScore <= testTotalScore;
     }
 
+    public static boolean isValidScore(String test) {
+        return test.matches(VALIDATION_REGEX);
+    }
+
     @Override
     public String toString() {
-        return actualScore + "/" + totalScore;
+        return actualScore + SCORE_DELIMITER + totalScore;
     }
 
     @Override

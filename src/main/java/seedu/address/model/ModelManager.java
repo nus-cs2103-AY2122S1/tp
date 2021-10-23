@@ -17,6 +17,7 @@ import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -189,7 +190,6 @@ public class ModelManager implements Model {
     @Override
     public void addAssessment(Student student, Assessment assessment) {
         csBook.addAssessment(student, assessment);
-        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
     }
 
     //=========== Filtered Student List Accessors =============================================================
