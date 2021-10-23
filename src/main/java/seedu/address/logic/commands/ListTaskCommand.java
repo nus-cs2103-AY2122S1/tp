@@ -14,7 +14,6 @@ public class ListTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
 
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
