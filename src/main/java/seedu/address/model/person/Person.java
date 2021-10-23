@@ -105,7 +105,7 @@ public class Person implements Comparable<Person> {
      * Returns a boolean flag to tell whether the Person
      * is "Favourite" or not.
      */
-    public boolean getIsFavourite() {
+    public boolean isFavourite() {
         return isFavourite;
     }
 

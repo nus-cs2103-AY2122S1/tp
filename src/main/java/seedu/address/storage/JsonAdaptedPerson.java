@@ -73,7 +73,7 @@ public class JsonAdaptedPerson {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        isFavourite = source.getIsFavourite();
+        isFavourite = source.isFavourite();
     }
 
     /**

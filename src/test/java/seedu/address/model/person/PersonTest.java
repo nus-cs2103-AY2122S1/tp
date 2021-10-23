@@ -21,7 +21,7 @@ public class PersonTest {
 
     @Test
     public void getIsFavourite() {
-        assertFalse(ALICE.getIsFavourite());
+        assertFalse(ALICE.isFavourite());
     }
 
     @Test
