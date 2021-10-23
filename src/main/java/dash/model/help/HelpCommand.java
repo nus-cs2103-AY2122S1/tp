@@ -1,4 +1,4 @@
-package dash.model.helpCard;
+package dash.model.help;
 
 import dash.ui.HelpCard;
 
@@ -9,6 +9,12 @@ public class HelpCommand {
     private String header = "";
     private String content = "";
 
+    /**
+     * Constructor for a HelpCommand object.
+     *
+     * @param header The command string.
+     * @param content The explanation of what the command does.
+     */
     public HelpCommand(String header, String content) {
         this.header = header;
         this.content = content;

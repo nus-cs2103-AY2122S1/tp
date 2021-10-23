@@ -1,6 +1,6 @@
 package dash.ui;
 
-import dash.model.helpCard.HelpCommand;
+import dash.model.help.HelpCommand;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

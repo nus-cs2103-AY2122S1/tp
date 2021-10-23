@@ -3,7 +3,7 @@ package dash.ui;
 import java.util.logging.Logger;
 
 import dash.commons.core.LogsCenter;
-import dash.model.helpCard.HelpCommand;
+import dash.model.help.HelpCommand;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -39,8 +39,8 @@ public class HelpPanel extends UiPart<Region> {
     private static final String CONTACTS_ADD_HEADER = "add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]";
     private static final String CONTACTS_ADD_DESC = "Adds a contact with the specified fields.";
 
-    private static final String CONTACTS_EDIT_HEADER = "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] " +
-            "[t/TAG]";
+    private static final String CONTACTS_EDIT_HEADER = "edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] "
+            + "[t/TAG]";
     private static final String CONTACTS_EDIT_DESC = "Edits specified fields of a given contact.";
 
     private static final String CONTACTS_DELETE_HEADER = "delete INDEX";
@@ -67,8 +67,8 @@ public class HelpPanel extends UiPart<Region> {
     private static final String TASKS_DELETE_HEADER = "delete INDEX";
     private static final String TASKS_DELETE_DESC = "Deletes a task with the given index.";
 
-    private static final String TASKS_FIND_HEADER = "find [d/DESCRIPTION] [dt/DATE, TIME] [p/PERSON] [t/TAG] " +
-            "[c/COMPLETION STATUS (TRUE OR FALSE)] (at least one)";
+    private static final String TASKS_FIND_HEADER = "find [d/DESCRIPTION] [dt/DATE, TIME] [p/PERSON] [t/TAG] "
+            + "[c/COMPLETION STATUS (TRUE OR FALSE)] (at least one)";
     private static final String TASKS_FIND_DESC = "Finds a task with the given fields.";
 
     private static final String TASKS_CLEAR_HEADER = "clear";

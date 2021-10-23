@@ -3,7 +3,7 @@ package dash.ui;
 import java.util.logging.Logger;
 
 import dash.commons.core.LogsCenter;
-import dash.model.helpCard.HelpCommand;
+import dash.model.help.HelpCommand;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
