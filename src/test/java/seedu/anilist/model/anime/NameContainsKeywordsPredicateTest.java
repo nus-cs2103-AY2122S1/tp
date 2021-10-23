@@ -1,6 +1,7 @@
 package seedu.anilist.model.anime;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
@@ -9,12 +10,24 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.testutil.AnimeBuilder;
 
 public class NameContainsKeywordsPredicateTest {
 
     @Test
-    public void equals() {
+    public void constructor_invalidNameKeywords_throwsParseException() {
+        // Empty String
+        assertThrows(ParseException.class,
+            () -> new GenresContainedPredicate(Collections.singletonList("")));
+
+        // Non-ASCII
+        assertThrows(ParseException.class,
+            () -> new GenresContainedPredicate(Collections.singletonList("非ascii字符")));
+    }
+
+    @Test
+    public void equals() throws ParseException {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
@@ -34,12 +47,12 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different anime -> returns false
+        // different keyword -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 
     @Test
-    public void test_nameContainsKeywords_returnsTrue() {
+    public void test_nameContainsKeywords_returnsTrue() throws ParseException {
         // One keyword
         NameContainsKeywordsPredicate predicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("Attack"));
@@ -59,7 +72,7 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_nameDoesNotContainKeywords_returnsFalse() throws ParseException {
         // Zero keywords
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new AnimeBuilder().withName("Attack on Titan").build()));

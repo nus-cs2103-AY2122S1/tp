@@ -1,6 +1,8 @@
 package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_EPISODE;
@@ -15,6 +17,7 @@ import java.util.List;
 
 import seedu.anilist.commons.core.index.Index;
 import seedu.anilist.logic.commands.exceptions.CommandException;
+import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.AnimeList;
 import seedu.anilist.model.Model;
 import seedu.anilist.model.anime.Anime;
@@ -136,10 +139,15 @@ public class CommandTestUtil {
      */
     public static void showAnimeAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredAnimeList().size());
-
-        Anime anime = model.getFilteredAnimeList().get(targetIndex.getZeroBased());
-        final String[] splitName = anime.getName().fullName.split("\\s+");
-        model.updateFilteredAnimeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        try {
+            Anime anime = model.getFilteredAnimeList().get(targetIndex.getZeroBased());
+            final String[] splitName = anime.getName().fullName.split("\\s+");
+            assertTrue(splitName.length > 0);
+            assertNotNull(splitName[0]);
+            model.updateFilteredAnimeList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        } catch (ParseException pe) {
+            throw new AssertionError("Error should not happen.", pe);
+        }
 
         assertEquals(1, model.getFilteredAnimeList().size());
     }
