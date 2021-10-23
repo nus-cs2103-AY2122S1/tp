@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.List;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
@@ -145,6 +146,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public Calendar getCalendar() {
         // TODO: Make defensive
         return entries.getCalendar();
+    }
+
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return entries.getUpcomingLessons();
     }
 
     @Override

@@ -9,18 +9,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
 
-public class LessonCard extends UiPart<Region> {
+public class ReminderLessonCard extends UiPart<Region> {
 
-    private static final String FXML = "LessonListCard.fxml";
+    private static final String FXML = "ReminderLessonCard.fxml";
 
     public final Lesson lesson;
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label lessonId;
+    private Label lessonTitle;
     @FXML
-    private Label title;
+    private Label lessonId;
     @FXML
     private Label date;
     @FXML
@@ -33,11 +33,11 @@ public class LessonCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public LessonCard(Lesson lesson, int displayedIndex) {
+    public ReminderLessonCard(Lesson lesson, int displayedIndex, String lessonTitle) {
         super(FXML);
         this.lesson = lesson;
+        this.lessonTitle.setText(lessonTitle);
         lessonId.setText(displayedIndex + ". ");
-        title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
         date.setText("Date: " + lesson.getDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());

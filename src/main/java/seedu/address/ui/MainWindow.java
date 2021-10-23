@@ -49,6 +49,7 @@ public class MainWindow extends UiPart<Stage> {
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ReminderWindow reminderWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -87,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        reminderWindow = new ReminderWindow(logic.getUpcomingLessons());
     }
 
     public Stage getPrimaryStage() {
@@ -174,11 +176,11 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleRemind() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+    public void handleReminder() {
+        if (!reminderWindow.isShowing()) {
+            reminderWindow.show();
         } else {
-            helpWindow.focus();
+            reminderWindow.focus();
         }
     }
 
@@ -195,6 +197,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        reminderWindow.hide();
         primaryStage.hide();
     }
 
@@ -219,6 +222,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowReminder()) {
+                handleReminder();
             }
 
             if (commandResult.isShowSchedule()) {

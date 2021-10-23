@@ -32,7 +32,7 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
           <Menu mnemonicParsing="false" text="Remind">
-            <MenuItem fx:id="remindMenuItem" mnemonicParsing="false" onAction="#handleRemind" text="Upcoming Lessons" />
+            <MenuItem fx:id="remindMenuItem" mnemonicParsing="false" onAction="#handleReminder" text="Upcoming Lessons" />
           </Menu>
         </MenuBar>
 

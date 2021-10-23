@@ -6,16 +6,20 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 /**
  * A list of calendar entries of lessons that enforces no overlapping time ranges between its lessons,
@@ -31,7 +35,7 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
-    private static final long TWO_DAY_TIME_DIFF_SEC = 2880;
+    private static final long TWO_DAY_DIFF = 48;
 
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
@@ -180,22 +184,24 @@ public class CalendarEntryList {
     }
 
     /**
-     * Returns a hashmap of upcoming lessons with the name of the student within two days from current time.
+     * Returns an unmodifiable view of upcoming lessons within two days from current time.
      *
-     * @return Hashmap of upcoming lessons within two days.
+     * @return Unmodifiable observable list of upcoming lessons within two days.
      */
-    public HashMap<String, Lesson> getUpcomingLessons() {
-        HashMap<String, Lesson> upcomingLessons = new HashMap<>();
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        ObservableList<Entry<Lesson>> upcomingLessons = FXCollections.observableArrayList();
 
         for (Entry<Lesson> lessonEntry : entryList) {
-            long timeDiff = ChronoUnit.SECONDS.between(LocalDateTime.now(), lessonEntry.getEndAsLocalDateTime());
-            if (timeDiff > 0 && timeDiff < TWO_DAY_TIME_DIFF_SEC) {
-                String entryTitle = lessonEntry.getTitle();
-                String name = entryTitle.substring(1, entryTitle.length() - 1);
-                upcomingLessons.put(name, lessonEntry.getUserObject());
+            long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), lessonEntry.getEndAsLocalDateTime());
+            if (timeDiff > 0 && timeDiff < TWO_DAY_DIFF) {
+                upcomingLessons.add(lessonEntry);
             }
         }
-        return upcomingLessons;
+        List<Entry<Lesson>> sortedList = upcomingLessons.stream()
+                .sorted(Comparator.comparing(Entry::getEndAsLocalDateTime))
+                .collect(Collectors.toList());
+        upcomingLessons.setAll(sortedList);
+        return FXCollections.unmodifiableObservableList(upcomingLessons);
     }
 
     /**

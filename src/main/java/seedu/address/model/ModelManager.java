@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -131,6 +132,11 @@ public class ModelManager implements Model {
     @Override
     public Calendar getCalendar() {
         return addressBook.getCalendar();
+    }
+
+    @Override
+    public ObservableList<Entry<Lesson>> getUpcomingLessons() {
+        return addressBook.getUpcomingLessons();
     }
 
     //=========== Filtered Person List Accessors =============================================================
