@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import dash.model.AddressBook;
 import dash.model.ReadOnlyAddressBook;
+import dash.model.UserInputList;
 import dash.model.person.Address;
 import dash.model.person.Email;
 import dash.model.person.Name;
@@ -59,6 +60,10 @@ public class SampleDataUtil {
         };
     }
 
+    public static String[] getSampleUserInputs() {
+        return new String[] { "complete 3", "add d/CS2100 Tutorial 7", "contacts", "add n/Bob" };
+    }
+
     public static TaskList getSampleTaskList() {
         TaskList sampleTl = new TaskList();
         for (Task sampleTask : getSampleTasks()) {
@@ -73,6 +78,14 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static UserInputList getSampleUserInputList() {
+        UserInputList sampleUIL = new UserInputList();
+        for (String userInput : getSampleUserInputs()) {
+            sampleUIL.add(userInput);
+        }
+        return sampleUIL;
     }
 
     /**
