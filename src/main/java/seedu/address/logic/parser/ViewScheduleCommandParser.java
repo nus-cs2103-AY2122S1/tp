@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.logic.parser.ParserUtil.parseIndex;
 import static seedu.address.logic.parser.ParserUtil.testByAllFields;
 
 import seedu.address.logic.commands.ViewScheduleCommand;
@@ -37,6 +38,9 @@ public class ViewScheduleCommandParser implements Parser<ViewScheduleCommand> {
             throw new ParseException(ViewScheduleCommand.MESSAGE_USAGE);
         }
         PersonContainsFieldsPredicate predicate = testByAllFields(argMultimap);
+        if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
+            return new ViewScheduleCommand(predicate, parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get()));
+        }
         return new ViewScheduleCommand(predicate);
     }
 }
