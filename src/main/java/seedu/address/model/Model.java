@@ -61,14 +61,29 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
-     * Returns the user prefs' address book file path wrapped object.
+     * Returns the list of all address book file path.
      */
     ObservableValue<Path> getAddressBookFilePathObject();
+
+    /**
+     * Returns the user prefs' address book file path wrapped object.
+     */
+    ObservableList<Path> getAddressBookList();
 
     /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Adds {@code filePath} to address books list
+     */
+    void addAddressBookList(Path filePath);
+
+    /**
+     * Deletes {@code filePath} from address books list
+     */
+    void deleteAddressBookList(Path filePath);
 
     /**
      * Replaces address book data with the data in {@code addressBook}.

@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.FileUtil.isFileExists;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import seedu.address.logic.commands.CommandResult;
@@ -38,21 +40,22 @@ public class AbDeleteCommand extends AbCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (!isFileExists(filePath)) {
-            throw new CommandException(String.format(MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS, addressBookName));
-        }
-
         if (model.getAddressBookFilePath().equals(filePath)) {
             throw new CommandException(String.format(MESSAGE_ADDRESSBOOK_DELETE_CURRENT, addressBookName));
         }
 
-        File fileToDelete = filePath.toFile();
-        boolean isDeleted = fileToDelete.delete();
+        boolean isDeleted;
+        try {
+            isDeleted = Files.deleteIfExists(filePath);
+        } catch (IOException e) {
+            throw new CommandException(String.format(MESSAGE_ADDRESSBOOK_DOES_NOT_EXISTS, addressBookName));
+        }
 
         if (!isDeleted) {
             throw new CommandException(String.format(MESSAGE_DELETE_ADDRESSBOOK_FAILURE, addressBookName));
         }
 
+        model.deleteAddressBookList(filePath);
         return new CommandResult(String.format(MESSAGE_DELETE_ADDRESSBOOK_SUCCESS, addressBookName));
     }
 

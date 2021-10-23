@@ -38,33 +38,29 @@
                     <children>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border"
-                                           VBox.vgrow="NEVER">
+                                <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
                                     <padding>
-                                        <Insets bottom="5" left="10" right="10" top="5"/>
+                                        <Insets bottom="5" left="10" right="10" top="5" />
                                     </padding>
                                 </StackPane>
-                                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100"
-                                           prefHeight="100" styleClass="pane-with-border">
+                                <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border">
                                     <padding>
-                                        <Insets bottom="5" left="10" right="10" top="5"/>
+                                        <Insets bottom="5" left="10" right="10" top="5" />
                                     </padding>
                                 </StackPane>
-                                <VBox fx:id="clientList" minWidth="340" prefWidth="340" styleClass="pane-with-border"
-                                      VBox.vgrow="ALWAYS">
+                                <VBox fx:id="clientList" minWidth="340" prefWidth="340" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
                                     <padding>
-                                        <Insets bottom="10" left="10" right="10" top="10"/>
+                                        <Insets bottom="10" left="10" right="10" top="10" />
                                     </padding>
-                                    <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+                                    <StackPane fx:id="clientListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                                 </VBox>
                             </children>
                         </VBox>
-                        <StackPane fx:id="sideBarPlaceHolder" prefHeight="500.0" prefWidth="280.0"
-                                   styleClass="pane-with-border" HBox.hgrow="ALWAYS"/>
+                        <StackPane fx:id="sideBarPlaceHolder" prefHeight="500.0" prefWidth="280.0" styleClass="pane-with-border" HBox.hgrow="ALWAYS" />
                     </children>
                 </HBox>
 
-                <StackPane fx:id="statusBarPlaceholder" VBox.vgrow="NEVER"/>
+                <StackPane fx:id="statusBarPlaceholder" VBox.vgrow="NEVER" />
             </VBox>
         </Scene>
     </scene>

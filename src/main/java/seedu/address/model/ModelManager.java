@@ -21,6 +21,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
+import seedu.address.storage.AddressBookList;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -35,6 +36,7 @@ public class ModelManager implements Model {
     private final FilteredList<Client> clientToView;
     private final SortedList<NextMeeting> sortedNextMeetings;
     private final FilteredList<Tag> filteredTags;
+    private final AddressBookList addressBookList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -47,10 +49,14 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        addressBookList = new AddressBookList(userPrefs.getAddressBookDirectory());
+
         sortedClients = new SortedList<>(this.addressBook.getClientList());
         filteredClients = new FilteredList<>(sortedClients);
+
         sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
+
         clientToView = new FilteredList<>(this.addressBook.getClientList());
         clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
@@ -89,14 +95,29 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void setAddressBookFilePath(Path addressBookFilePath) {
+        requireNonNull(addressBookFilePath);
+        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
     public ObservableValue<Path> getAddressBookFilePathObject() {
         return userPrefs.getAddressBookFilePathObject();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public ObservableList<Path> getAddressBookList() {
+        return this.addressBookList.getAddressBookList();
+    }
+
+    @Override
+    public void addAddressBookList(Path filePath) {
+        this.addressBookList.addAddressBookPath(filePath);
+    }
+
+    @Override
+    public void deleteAddressBookList(Path filePath) {
+        this.addressBookList.deleteAddressBookPath(filePath);
     }
 
     //=========== AddressBook ================================================================================
