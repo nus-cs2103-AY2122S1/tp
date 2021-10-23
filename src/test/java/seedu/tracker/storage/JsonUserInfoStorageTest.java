@@ -34,7 +34,6 @@ class JsonUserInfoStorageTest {
 
     @Test
     public void readUserInfo_missingFile_emptyResult() throws DataConversionException {
-
         assertFalse(readUserInfo("NonExistentFile.json").isPresent());
     }
 
