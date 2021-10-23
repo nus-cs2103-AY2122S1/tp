@@ -49,18 +49,6 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
         commandTextField.setOnKeyPressed(event -> handleUpOrDownArrowKeyPressed(event.getCode()));
-
-        /* TODO: Fix this. Currently overrides the above behaviour as well.
-        // disables default behaviour of TextField, where up and down arrow keys move caret
-        commandTextField.addEventFilter(KeyEvent.ANY, keyEvent -> {
-            switch (keyEvent.getCode()) {
-            case UP:
-                // Fallthrough
-            case DOWN:
-                keyEvent.consume();
-            }
-        });
-        */
     }
 
     /**
@@ -87,7 +75,7 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
-;        if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
+        if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
             if (currentUserInputIndex == 0) {
                 currentUserInputIndex--;
                 commandTextField.setText("");
@@ -100,6 +88,7 @@ public class CommandBox extends UiPart<Region> {
             currentUserInputIndex++;
             commandTextField.setText(userInputList.get(currentUserInputIndex));
         }
+        commandTextField.end();
     }
 
     /**
