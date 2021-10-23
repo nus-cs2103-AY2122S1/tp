@@ -27,9 +27,9 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID);
 
         // Initializing all the arguments as null at the beginning.
-        String trimmedNameArg = trimPredicateArg(argMultimap, PREFIX_NAME);
-        String trimmedSidArg = trimPredicateArg(argMultimap, PREFIX_STUDENT_ID);
-        String trimmedCidArg = trimPredicateArg(argMultimap, PREFIX_CLASS_ID);
+        String trimmedNameArg = getTrimmedPredArg(argMultimap, PREFIX_NAME);
+        String trimmedSidArg = getTrimmedPredArg(argMultimap, PREFIX_STUDENT_ID);
+        String trimmedCidArg = getTrimmedPredArg(argMultimap, PREFIX_CLASS_ID);
         QueryStudentDescriptor queryStudentDescriptor = getQueryStudentDescriptor(trimmedNameArg,
                                                                                   trimmedSidArg,
                                                                                   trimmedCidArg);
@@ -37,7 +37,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         return new FilterCommand(new StudentDetailContainsQueryPredicate(queryStudentDescriptor));
     }
 
-    private String trimPredicateArg(ArgumentMultimap argMultimap, Prefix predicate) throws ParseException {
+    /**
+     * Retrieves the trimmed predicate argument from the argument Multimap.
+     *
+     * @param argMultimap the map to get the argument from
+     * @param predicate the specified predicate
+     * @return the trimmed predicate argument
+     * @throws ParseException if the trimmed predicate argument is empty
+     */
+    private String getTrimmedPredArg(ArgumentMultimap argMultimap, Prefix predicate) throws ParseException {
         String trimmedPredicateArg = null;
 
         if (argMultimap.getValue(predicate).isPresent()) {
@@ -49,6 +57,15 @@ public class FilterCommandParser implements Parser<FilterCommand> {
         return trimmedPredicateArg;
     }
 
+    /**
+     * Gets the query student descriptor based on the arguments specified.
+     *
+     * @param nameArg the name argument
+     * @param sidArg the student id argument
+     * @param cidArg the class id argument
+     * @return the QueryStudentDescriptor
+     * @throws ParseException if no field is specified to be queried
+     */
     private QueryStudentDescriptor getQueryStudentDescriptor(String nameArg, String sidArg, String cidArg)
             throws ParseException {
         QueryStudentDescriptor queryStudentDescriptor =
