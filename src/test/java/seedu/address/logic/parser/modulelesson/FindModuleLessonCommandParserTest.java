@@ -37,12 +37,9 @@ public class FindModuleLessonCommandParserTest {
 
     @Test
     public void parse_validModule_returnsFindCommand() {
-        FindModuleLessonCommand expectedFindModuleLessonCommand =
-                new FindModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(
-                        Arrays.asList(
-                                String.format("%s", VALID_MODULE_CODE_CS2040)
-                        )
-                ));
+        FindModuleLessonCommand expectedFindModuleLessonCommand = new FindModuleLessonCommand(
+                new ModuleCodeContainsKeywordsPredicate(Arrays.asList(String.format("%s", VALID_MODULE_CODE_CS2040)))
+        );
         String userInput = String.format(" %s%s", PREFIX_MODULE_CODE, VALID_MODULE_CODE_CS2040);
         assertParseSuccess(parser, userInput, expectedFindModuleLessonCommand);
     }

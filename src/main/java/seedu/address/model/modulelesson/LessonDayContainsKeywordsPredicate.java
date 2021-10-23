@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code ModuleLesson}'s {@code ModuleCode}s matches the keyword given.
+ * Tests that a {@code ModuleLesson}'s {@code LessonDay} matches the keyword given.
  */
 public class LessonDayContainsKeywordsPredicate implements Predicate<ModuleLesson> {
 

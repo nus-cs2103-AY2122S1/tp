@@ -27,7 +27,7 @@ public class FindModuleLessonCommand extends Command {
             + "2) search by lesson day(s) using the prefix " + PREFIX_LESSON_DAY
             + "find " + PREFIX_LESSON_DAY + "2\n"
             + "3) search by lesson start time(s) using the prefix " + PREFIX_LESSON_TIME
-            + "find " + PREFIX_LESSON_TIME + "CS2030S CS2100\n";
+            + "find " + PREFIX_LESSON_TIME + "14:00\n";
     public static final String MESSAGE_SINGLE_PREFIX_SEARCH = "You can only search with a single prefix.";
 
     private final Predicate<ModuleLesson> predicate;

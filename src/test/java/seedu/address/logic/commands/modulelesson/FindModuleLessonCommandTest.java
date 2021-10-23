@@ -57,7 +57,7 @@ public class FindModuleLessonCommandTest {
         // null -> returns false
         assertFalse(findFirstModuleCodeCommand.equals(null));
 
-        // different person -> returns false
+        // different lesson -> returns false
         assertFalse(findFirstModuleCodeCommand.equals(findSecondModuleCodeCommand));
 
         LessonDayContainsKeywordsPredicate firstLessonDayPredicate =
@@ -81,7 +81,7 @@ public class FindModuleLessonCommandTest {
         // null -> returns false
         assertFalse(findFirstLessonDayCommand.equals(null));
 
-        // different person -> returns false
+        // different lesson -> returns false
         assertFalse(findFirstLessonDayCommand.equals(findSecondLessonDayCommand));
 
         LessonTimeContainsKeywordsPredicate firstLessonTimePredicate =
@@ -105,7 +105,7 @@ public class FindModuleLessonCommandTest {
         // null -> returns false
         assertFalse(findFirstLessonTimeCommand.equals(null));
 
-        // different person -> returns false
+        // different lesson -> returns false
         assertFalse(findFirstLessonTimeCommand.equals(findSecondLessonTimeCommand));
     }
 

@@ -64,7 +64,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         return count;
     }
 
-    private FindModuleLessonCommand getFindModuleCommand (ArgumentMultimap argMultimap) throws ParseException {
+    private FindModuleLessonCommand getFindModuleCommand(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> searchInput = argMultimap.getValue(PREFIX_MODULE_CODE);
         String modules = searchInput.get().trim();
         if (modules.isEmpty()) {
@@ -78,7 +78,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         return new FindModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(moduleKeywordsList));
     }
 
-    private FindModuleLessonCommand getFindDayCommand (ArgumentMultimap argMultimap) throws ParseException {
+    private FindModuleLessonCommand getFindDayCommand(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> searchInput = argMultimap.getValue(PREFIX_LESSON_DAY);
         String days = searchInput.get().trim();
         if (days.isEmpty()) {
@@ -92,7 +92,7 @@ public class FindModuleLessonCommandParser implements Parser<FindModuleLessonCom
         return new FindModuleLessonCommand(new LessonDayContainsKeywordsPredicate(lessonDayKeywordsList));
     }
 
-    private FindModuleLessonCommand getFindTimeCommand (ArgumentMultimap argMultimap) throws ParseException {
+    private FindModuleLessonCommand getFindTimeCommand(ArgumentMultimap argMultimap) throws ParseException {
         Optional<String> searchInput = argMultimap.getValue(PREFIX_LESSON_TIME);
         String times = searchInput.get().trim();
         if (times.isEmpty()) {
