@@ -66,6 +66,7 @@ public class DeleteModuleLessonCommand extends Command {
     private String deleteAll(Model model) {
         int first = targetIndex.getZeroBased();
         int last = endIndex.getZeroBased();
+        int deletedPersons = last - first + 1;
         StringBuilder successMessage = new StringBuilder();
         while (first <= last) {
             ModuleLesson moduleLessonToDelete = model.getFilteredModuleLessonList().get(last);
@@ -73,7 +74,7 @@ public class DeleteModuleLessonCommand extends Command {
             model.deleteLesson(moduleLessonToDelete);
             last--;
         }
-        return String.format(MESSAGE_NUMBER_DELETED_LESSONS, last - first + 1) + successMessage;
+        return String.format(MESSAGE_NUMBER_DELETED_LESSONS, deletedPersons) + successMessage;
     }
 
     @Override
