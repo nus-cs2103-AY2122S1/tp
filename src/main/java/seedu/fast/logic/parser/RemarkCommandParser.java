@@ -26,7 +26,7 @@ public class RemarkCommandParser implements Parser<RemarkCommand> {
         }
 
         String remark = argMultimap.getValue(PREFIX_REMARK).orElse("");
-        if (remark.length() > ParserUtil.MAX_LENGTH_REMARK) {
+        if (!Remark.isValidRemark(remark)) {
             throw new ParseException(String.format(MESSAGE_INVALID_LENGTH,
                     RemarkCommand.MESSAGE_USAGE));
         }
