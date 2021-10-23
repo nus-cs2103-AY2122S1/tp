@@ -45,7 +45,7 @@ Managera is OS-independent meaning it will work on any operating system.
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this user guide
 
-If this is the first time you are using Managera, you are strongly advised to visit the Quick Start section to learn  how to set up Managera
+If this is the first time you are using Managera, you are strongly advised to visit the Quick Start section to learn how to set up Managera
 and get started.
 
 If there are any doubts on how certain commands are used, you can look for the description of the command in the Features
@@ -333,7 +333,7 @@ Adds a Participant with the first specified index to the Event with the second s
 Format: 
 `enroll INDEX_1 INDEX_2`
 
-* Adds the Participant at specified `INDEX_1` to the Event at specified index 'INDEX_2'.
+* Adds the Participant at specified `INDEX_1` to the Event at specified index `INDEX_2`.
 * The index refers to the index number shown in the displayed Participant/Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
@@ -346,7 +346,7 @@ Removes the Participant with the first specified index from the Event with the s
 
 Format: `expel INDEX_1 INDEX_2`
 
-* Removes the Participant at specified `INDEX_1` from the Event at specified index 'INDEX_2'.
+* Removes the Participant at specified `INDEX_1` from the Event at specified index `INDEX_2`.
 * The index refers to the index number shown in the displayed Participant/Event list.
 * The indexes **must be positive integers** 1, 2, 3, …​
 
