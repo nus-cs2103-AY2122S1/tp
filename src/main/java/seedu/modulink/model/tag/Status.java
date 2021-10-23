@@ -48,6 +48,7 @@ public enum Status {
      * @return the matching status
      */
     public static Status parseStatusFromString(String s) {
+        s = s.trim();
         if (s.equals("need group")) {
             return Status.NEED_GROUP;
         } else if (s.equals("need member")) {
