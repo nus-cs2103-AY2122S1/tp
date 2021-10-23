@@ -116,7 +116,7 @@ public class ModelManager implements Model {
     @Override
     public void setParticipant(Participant target, Participant editedParticipant) {
         requireAllNonNull(target, editedParticipant);
-
+        target.shiftEvents(editedParticipant);
         addressBook.setParticipant(target, editedParticipant);
     }
 

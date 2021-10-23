@@ -115,6 +115,17 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Replaces a Participant with an edited Participant.
+     *
+     * @param oldParticipant     An instance of an existing Participant in this Event that was edited.
+     * @param editedParticipant  The newly edited Participant to replace the existing Participant.
+     */
+    public void replaceParticipant(Participant oldParticipant, Participant editedParticipant) {
+        participants.remove(oldParticipant);
+        participants.add(editedParticipant);
+    }
+
+    /**
      * Adds the given participant to the list of participants.
      *
      * @param participant The participant to be added.
