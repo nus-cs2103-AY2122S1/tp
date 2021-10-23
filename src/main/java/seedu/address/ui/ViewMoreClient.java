@@ -47,7 +47,7 @@ public class ViewMoreClient extends UiPart<Region> implements SecondPanel {
         if (client.getAddress() != null) {
             address.setText("Address: " + client.getAddress().toString());
         }
-        if (client.getOrders() != null) {
+        if (!client.getOrders().isEmpty()) {
             String orderString = "";
             for (Order order : client.getOrders()) {
                 orderString += order.toString() + "\n";
