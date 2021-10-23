@@ -33,9 +33,9 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 
    * **`friend --list`** : Lists all friends.
 
-   * **`friend --add`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud **FRIEND_ID** of __Draco__ to the application.
+   * **`friend --add`**`Draco --name Marcus` : Adds a friend __Marcus__ with gitGud `FRIEND_ID` of __Draco__ to the application.
 
-   * **`friend --delete`**`Draco` : Deletes friend with gitGud **FRIEND_ID** of __Draco__.
+   * **`friend --delete`**`Draco` : Deletes friend with gitGud `FRIEND_ID` of __Draco__.
 
    * **`exit`** : Exits the app.
 
@@ -88,12 +88,12 @@ Deletes a friend from gitGud’s friend’s list using gitGud’s **unique** fri
 
 Format: `friend --delete FRIEND_ID`
 
-* Deletes the person with the specified **FRIEND_ID**.
-* The **FRIEND_ID** must currently exist in the database.
+* Deletes the person with the specified `FRIEND_ID`.
+* The `FRIEND_ID` must currently exist in the database.
 
 Examples:
 
-* `friend --delete Draco` Deletes friend with gitGud **FRIEND_ID** of Draco and all their data from the database
+* `friend --delete Draco` Deletes friend with gitGud `FRIEND_ID` of Draco and all their data from the database
 
 Snapshot:
 
@@ -103,18 +103,18 @@ Snapshot:
 
 #### Link games with a friend: `friend --link`
 
-Links game and the associated in-game username for the game to a friend with the provided **FRIEND_ID**.
+Links game and the associated in-game username for the game to a friend with the provided `FRIEND_ID`.
 
 A link between a particular friend and game shows that the friend plays the game. This association is required for subsequent commands, e.g. for the application to display all games that a friend plays or to recommend a friend to play with based on a particular game.
 
 Format: `friend --link FRIEND_ID --game GAME_ID --user IN_GAME_USERNAME`
 
-* Both **FRIEND_ID** and **GAME_ID** has to already be inside the database.
+* Both `FRIEND_ID` and `GAME_ID` has to already be inside the database.
 
 Examples:
 * `friend --link Draco --game DOTA --user Draco995`
   Links a single game, “DOTA” with the in-game username ‘Draco995’,
-  to the friend with the gitGud **FRIEND_ID** ‘Draco’.
+  to the friend with the gitGud `FRIEND_ID` ‘Draco’.
 
 Snapshot:
 
@@ -128,11 +128,11 @@ Removes the link between a friend and a game.
 
 Format: `friend --unlink FRIEND_ID --game GAME_ID`
 
-* **FRIEND_ID** has to already be inside the database.
-* The friend has to have a current association with the provided **GAME_ID**.
+* `FRIEND_ID` has to already be inside the database.
+* The friend has to have a current association with the provided `GAME_ID`.
 
 Examples:
-* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with **GAME_ID** 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
+* `friend --unlink Draco --game DOTA` Removes the link between the friend with FRIEND_D 'Draco' and the game with `GAME_ID` 'DOTA'. 'Draco' is now no longer associated with 'DOTA'.
 
 Snapshot:
 
@@ -143,7 +143,7 @@ Snapshot:
 
 #### Getting a single friend's complete data: `friend --get`
 
-Displays a particular friend's complete data using gitGud’s **unique** friend identifier **FRIEND_ID**.
+Displays a particular friend's complete data using gitGud’s **unique** friend identifier `FRIEND_ID`.
 
 A friend's complete data includes:
 * The weekly schedule of the friend
@@ -152,8 +152,8 @@ A friend's complete data includes:
 
 Format: `friend --get FRIEND_ID`
 
-* Gets the friend with the specified **FRIEND_ID**.
-* The **FRIEND_ID** must currently exist in the database
+* Gets the friend with the specified `FRIEND_ID`.
+* The `FRIEND_ID` must currently exist in the database
 
 Examples:
 * `friend --get Draco` Gets the complete data for friend "Draco"
@@ -173,7 +173,7 @@ Format: `friend --list [KEYWORD]`
 
 * If `KEYWORD` is left empty, all friends stored in gitGud will be listed
 * The filter keyword is case insensitive e.g `Tau_bar` will match `tau_bar`
-* Only the **FRIEND_ID** of friends is filtered
+* Only the `FRIEND_ID` of friends is filtered
 * Partial matches will be displayed e.g. `tau` will match `tau_bar`
 
 Examples:
@@ -201,7 +201,7 @@ New friends start off which a schedule with all periods marked as busy.
 
 </div>  
 
-* **FRIEND_ID** must belong to an existing friend in gitGud
+* `FRIEND_ID` must belong to an existing friend in gitGud
 * `START_HOUR` and `END_HOUR` are written in 24 Hour notation and must be whole hours (e.g. 0230 and 1201 are not accepted)
 * `END_HOUR` must be after `START_HOUR`, the only exception is if `END_HOUR` is `0000` where it is taken as midnight.
 * `DAY` must be an integer between 1 and 7 inclusive, with each day representing a day of the week from Monday to Sunday.
@@ -223,15 +223,15 @@ Commands that involve adding, deleting or viewing of games in your gitGud game l
 
 #### Adding a game: `game --add`
 
-Adds a game with the given **unique** **GAME_ID** into the gitGud game list.
+Adds a game with the given **unique** `GAME_ID` into the gitGud game list.
 
 Format: `game --add GAME_ID`
 
-* If the **GAME_ID** provided already exists, an error will be displayed. 
-* The **GAME_ID** provided must be a single word e.g. `ApexLegends` and not `Apex Legends`.
+* If the `GAME_ID` provided already exists, an error will be displayed. 
+* The `GAME_ID` provided must be a single word e.g. `ApexLegends` and not `Apex Legends`.
 
 Examples:
-* `game --add Valorant` Adds a brand-new game into the game list with the **unique** **GAME_ID** 'Valorant'.
+* `game --add Valorant` Adds a brand-new game into the game list with the **unique** `GAME_ID` 'Valorant'.
 
 Snapshot:
 
@@ -256,7 +256,7 @@ Snapshot:
 
 #### Getting a single game's complete data: `game --get`
 
-Displays a particular game's complete data using gitGud’s **unique** game identifier **GAME_ID**.
+Displays a particular game's complete data using gitGud’s **unique** game identifier `GAME_ID`.
 
 A game's complete data includes:
 * List of friends that play the game
@@ -264,8 +264,8 @@ A game's complete data includes:
 
 Format: `game --get GAME_ID`
 
-* Gets the game with the specified **GAME_ID**.
-* The **GAME_ID** must currently exist in the database
+* Gets the game with the specified `GAME_ID`.
+* The `GAME_ID` must currently exist in the database
 
 
 Examples:
@@ -285,7 +285,7 @@ Format: `game --list [KEYWORD]`
 
 * If `KEYWORD` is left empty, all games stored in gitGud will be listed
 * The filter keyword is case insensitive e.g `valorant` will match `Valorant`
-* Only the **GAME_ID** of games is filtered
+* Only the `GAME_ID` of games is filtered
 * Partial matches will be displayed e.g. `Valo` will match `Valorant`
 
 Examples:
