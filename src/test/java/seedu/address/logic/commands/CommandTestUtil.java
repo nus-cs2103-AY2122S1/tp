@@ -23,7 +23,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.AttributeContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -172,7 +172,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0]), NAMETYPE));
+        model.updateFilteredPersonList(new AttributeContainsKeywordsPredicate(Arrays.asList(splitName[0]), NAMETYPE));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
@@ -186,7 +186,7 @@ public class CommandTestUtil {
         for (int i = 0; i < persons.length; ++i) {
             queries[i] = persons[i].getName().fullName.split("\\s+")[0];
         }
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(queries), NAMETYPE));
+        model.updateFilteredPersonList(new AttributeContainsKeywordsPredicate(Arrays.asList(queries), NAMETYPE));
 
         assertEquals(persons.length, model.getFilteredPersonList().size());
     }

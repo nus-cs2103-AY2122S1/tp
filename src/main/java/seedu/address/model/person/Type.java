@@ -44,9 +44,17 @@ public class Type {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Type // instanceof handles nulls
-                && value.equals(((Type) other).value)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Type)) {
+            return false;
+        }
+
+        Type otherType = (Type) other;
+
+        return value.equals(otherType.value); // state check
     }
 
     @Override
