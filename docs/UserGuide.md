@@ -1,5 +1,5 @@
 ## User Guide
-contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for **TAs**, easing their workload to focus on the more important task - teaching.
+contHACKS is a **desktop app to help Teaching Assistants (TAs) in managing contacts. It is optimized for use via a Command Line Interface (CLI)** while still having the benefits of a Graphical User Interface (GUI). contHACKS **streamlines the creation, reading, updating and deleting operations of contacts** to make it fast and efficient for TAs, easing their workload to focus on the more important task - teaching.
 
 ## Table of Contents
 * [Quick start](#quick-start)
@@ -148,14 +148,14 @@ Command alias: `ls`
 
 ### Finding contacts by name / module code: `find` <a name="find"></a>
 
-Finds a name / module code.
-* The search is case-insensitive <br> e.g `hans` will match `Hans`
-* The order of the keywords does not matter <br> e.g. `Hans Bo` will match `Bo Hans`
-* Can only search by name or module code, but not both at once <br> e.g. You cannot perform `find n/Ben m/CS2040S` 
-* Partial words will also be matched <br> e.g. `Han` will match `Hans`
-* If multiple module codes are specified, only results matching all the module codes specified will be returned
+Finds a contact by specifying either the name/module code(s).
+* Can only search by name or module code(s), but not both at once <br> e.g. You cannot perform `find n/Ben m/CS2040S` 
+* The search is case-insensitive <br> e.g `ben` will match `Ben`
+* The order of the keywords does not matter <br> e.g. `Ben Tan` will match `Tan Ben`
+* Partial words will also be matched <br> e.g. `Ben` will match `Benjamin`
+* If multiple module codes are specified, only results matching all the module codes specified will be returned <br> e.g. `find m/CS2030S CS2040S` will only return contacts that have both `CS2030S` and `CS2040S` module codes
 
-Format: `find n/NAME`/`find m/MODULE_CODE`
+Format: `find n/NAME`/`find m/MODULE_CODE(S)`
 
 Examples:
 * `find n/Ben`
@@ -173,7 +173,7 @@ Updates the information of a contact.
 
 Edits the contact at the specified index in the currently viewed list.
 * At least one of the fields must be provided
-* Existing values will be updated to the input values
+* Existing values of the fields specified will be erased and updated to the input values
 
 Format: `edit INDEX [n/NAME] [e/EMAIL] [m/MODULE_CODE LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`
 
@@ -249,7 +249,7 @@ If your changes to the data file makes its format invalid, contHACKS will discar
 | `help` <br>`man` <br> `h`   | `help`                                                                                             | `help`                    |
 | `add` <br> `a`           | `add n/NAME e/EMAIL m/MODULE_CODE [LESSON_CODE(S)] [p/PHONE] [h/TELEGRAM_HANDLE] [r/REMARK]`          | `add n/Ben            e/ben123@gmail.com m/CS2103T T12 p/91238456 h/@BenIsHere r/Overseas`|
 | `list` <br> `ls`         | `list`                                                                                                | `list`                |
-| `find` <br> `f`          | `find n/NAME`<br>`find m/MODULE_CODE`                                                                 | `find n/Ben`<br>`find m/CS2103T` |
+| `find` <br> `f`          | `find n/NAME`<br>`find m/MODULE_CODE(S)`                                                              | `find n/Ben`<br>`find m/CS2103T` |
 | `edit` <br> `update`<br> `e` | `edit INDEX [n/NAME] [e/EMAIL] [p/PHONE] [h/TELEGRAM_HANDLE] [m/MODULE_CODE LESSON_CODE(S)] [r/REMARK]`       | `edit 1 p/91234567 e/ben321@gmail.com`|
 | `delete`<br> `del` <br> `rm` <br>`d`  | `delete INDEX`<br>`delete INDEX_START-INDEX_END`<br>`delete m/MODULE_CODE`               | `delete 2`<br>`delete 2-5`<br>`delete m/CS2103T`|
 | `clear` <br> `clr`       | `clear`                                                                                               | `clear`                    |
