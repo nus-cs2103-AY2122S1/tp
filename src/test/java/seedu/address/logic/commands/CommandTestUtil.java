@@ -52,8 +52,8 @@ public class CommandTestUtil {
     public static final String VALID_MODULE_CODE_CS2040S_B05 = "CS2040S B05";
     public static final String VALID_LESSON_DAY_TUES = "2";
     public static final String VALID_LESSON_DAY_WED = "3";
-    public static final String VALID_LESSON_TIME_11 = "11:00";
-    public static final String VALID_LESSON_TIME_12 = "12:00";
+    public static final String VALID_LESSON_TIME_11_12 = "11:00 12:00";
+    public static final String VALID_LESSON_TIME_12_13 = "12:00 13:00";
     public static final String VALID_MODULE_LESSON_REMARK = "COM1-130";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
@@ -70,8 +70,8 @@ public class CommandTestUtil {
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
     public static final String LESSON_DAY_DESC_TUES = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_TUES;
     public static final String LESSON_DAY_DESC_WED = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_WED;
-    public static final String LESSON_TIME_DESC_11 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11;
-    public static final String LESSON_TIME_DESC_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_12;
+    public static final String LESSON_TIME_DESC_11_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11_12;
+    public static final String LESSON_TIME_DESC_12_13 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_12_13;
     public static final String REMARK_DESC_MODULES = " " + PREFIX_REMARK + VALID_MODULE_LESSON_REMARK;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
@@ -102,9 +102,9 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
         DESC_CS2040S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2040S_B05))
-                .withLessonDay(new LessonDay("2")).withLessonTime(new LessonTime("10:00")).build();
+                .withLessonDay(new LessonDay("2")).withLessonStartTime(new LessonTime("10:00")).build();
         DESC_CS2030S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
-                .withLessonDay(new LessonDay("5")).withLessonTime(new LessonTime("13:30")).build();
+                .withLessonDay(new LessonDay("5")).withLessonStartTime(new LessonTime("13:30")).build();
     }
 
     /**
