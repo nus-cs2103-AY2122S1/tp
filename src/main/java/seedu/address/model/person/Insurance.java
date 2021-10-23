@@ -71,6 +71,14 @@ public class Insurance {
         return type.getTypeName();
     }
 
+    /**
+     * Returns the name of this Insurance
+     * @return This Insurance's name
+     */
+    public String getName() {
+        return name;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
