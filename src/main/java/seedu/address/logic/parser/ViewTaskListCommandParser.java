@@ -21,7 +21,6 @@ public class ViewTaskListCommandParser {
         args = args.trim();
         try {
             if (args.equals("-A")) {
-                System.out.println("HERE");
                 return new ViewTaskListCommand();
             } else {
                 Index index = ParserUtil.parseIndex(args);
