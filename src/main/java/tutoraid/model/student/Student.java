@@ -18,20 +18,20 @@ public class Student {
     private final Phone parentPhone;
 
     // Data fields
-    private final Progress progress;
+    private final ProgressList progressList;
     private final PaymentStatus paymentStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
-                   Progress progress, PaymentStatus paymentStatus) {
+                   ProgressList progressList, PaymentStatus paymentStatus) {
         CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
-        this.progress = progress;
+        this.progressList = progressList;
         this.paymentStatus = paymentStatus;
     }
 
@@ -51,12 +51,24 @@ public class Student {
         return parentPhone;
     }
 
-    public Progress getProgress() {
-        return progress;
+    public ProgressList getProgressList() {
+        return progressList;
+    }
+
+    public Progress getLatestProgress() {
+        return progressList.getLatestProgress();
     }
 
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
+    }
+
+    public void addProgress(Progress toAdd) {
+        progressList.addProgress(toAdd);
+    }
+
+    public Progress deleteLatestProgress() {
+        return progressList.deleteLatestProgress();
     }
 
     /**
@@ -98,14 +110,14 @@ public class Student {
                 && otherStudent.getStudentPhone().equals(getStudentPhone())
                 && otherStudent.getParentName().equals(getParentName())
                 && otherStudent.getParentPhone().equals(getParentPhone())
-                && otherStudent.getProgress().equals(getProgress())
+                && otherStudent.getProgressList().equals(getProgressList())
                 && otherStudent.getPaymentStatus().equals(getPaymentStatus());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progress, paymentStatus);
+        return Objects.hash(studentName, studentPhone, parentName, parentPhone, progressList, paymentStatus);
     }
 
     /**
@@ -140,7 +152,7 @@ public class Student {
         }
 
         builder.append("; Progress: ")
-                .append(getProgress())
+                .append(getLatestProgress())
                 .append("; Payment Status: ")
                 .append(getPaymentStatus());
 

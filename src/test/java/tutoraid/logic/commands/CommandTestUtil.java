@@ -36,8 +36,8 @@ public class CommandTestUtil {
     public static final String VALID_PARENT_PHONE_AMY = "33333333";
     public static final String VALID_PARENT_PHONE_BOB = "44444444";
 
-    public static final String VALID_PROGRESS_BOB = "No Progress";
-    public static final String VALID_PROGRESS_AMY = "No Progress";
+    public static final ArrayList<String> VALID_PROGRESS_LIST_BOB = new ArrayList<>();
+    public static final ArrayList<String> VALID_PROGRESS_LIST_AMY = new ArrayList<>();
     public static final boolean VALID_PAYMENT_STATUS_AMY = false;
     public static final boolean VALID_PAYMENT_STATUS_BOB = false;
 

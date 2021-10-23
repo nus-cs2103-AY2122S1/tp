@@ -1,0 +1,31 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":PaidCommand" as PaidCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+end box
+
+activate PaidCommand
+
+PaidCommand -> Model : setStudent(studentToEdit, editedStudent)
+activate Model
+Model --> PaidCommand
+deactivate Model
+
+PaidCommand -> Model : updateFilteredStudentList(true)
+activate Model
+Model --> PaidCommand
+deactivate Model
+
+create CommandResult
+PaidCommand -> CommandResult
+activate CommandResult
+CommandResult --> PaidCommand
+deactivate CommandResult
+
+@enduml
