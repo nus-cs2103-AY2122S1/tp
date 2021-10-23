@@ -3,11 +3,14 @@ package seedu.address.ui;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.util.InputHistory;
+
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -18,6 +21,7 @@ public class CommandBox extends UiPart<Region> {
     private static final String FXML = "CommandBox.fxml";
 
     private final CommandExecutor commandExecutor;
+    private final InputHistory inputHistory;
 
     @FXML
     private TextField commandTextField;
@@ -30,11 +34,28 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        inputHistory = InputHistory.getInstance();
     }
 
+    /**
+     * Handles up and down arrow button pressed event.
+     * @param key The key that is pressed when CommandBox is active.
+     */
     @FXML
     private void handleKeyPress(KeyEvent key) {
-        
+        KeyCode keycode = key.getCode();
+        switch(keycode) {
+        case UP:
+            String recentInput = inputHistory.getPreviousInput();
+            setText(recentInput);
+            break;
+        case DOWN:
+            String nextInput = inputHistory.getNextInput();
+            setText(nextInput);
+            break;
+        default:
+            break;
+        }
     }
 
     /**
@@ -52,6 +73,7 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         } finally {
+            inputHistory.addToHistory(commandTextField.getText());
             commandTextField.setText("");
         }
     }
@@ -74,6 +96,15 @@ public class CommandBox extends UiPart<Region> {
         }
 
         styleClass.add(ERROR_STYLE_CLASS);
+    }
+
+    /**
+     * Sets the text of the command box to the given string and moves the caret to after the last char of the text.
+     * @param text String to be shown on command box.
+     */
+    private void setText(String text) {
+        commandTextField.setText(text);
+        commandTextField.end();
     }
 
     /**
