@@ -28,6 +28,9 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Status fields
+    private boolean isFavourite;
+
     //Extra fields
     private Image profilePicture;
     private Thread parallelTask;
@@ -45,6 +48,28 @@ public class Person implements Comparable<Person> {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.isFavourite = false;
+        this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
+        this.parallelTask = new Thread(() -> {
+            profilePicture = GitHubUtil.getProfilePicture(github.value);
+        });
+        parallelTask.start();
+    }
+
+    /**
+     * Overloaded constructor used when loading contacts from Json file.
+     */
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite) {
+        requireAllNonNull(name, telegram, github, phone, email, address, tags);
+        this.name = name;
+        this.telegram = telegram;
+        this.github = github;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isFavourite = isFavourite;
         this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
         this.parallelTask = new Thread(() -> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
@@ -74,6 +99,14 @@ public class Person implements Comparable<Person> {
 
     public Address getAddress() {
         return address;
+    }
+
+    /**
+     * Returns a boolean flag to tell whether the Person
+     * is "Favourite" or not.
+     */
+    public boolean isFavourite() {
+        return isFavourite;
     }
 
     public Image getProfilePicture() {
