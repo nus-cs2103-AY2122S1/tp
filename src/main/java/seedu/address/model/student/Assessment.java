@@ -4,9 +4,6 @@ package seedu.address.model.student;
  * Stub for implementing Ui
  */
 public class Assessment {
-//    private String name;
-//    private Double totalScore;
-//    private Double actualScore;
 
     public Assessment() {}
 

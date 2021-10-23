@@ -3,7 +3,6 @@ package seedu.address.model.student;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-import java.util.Random;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

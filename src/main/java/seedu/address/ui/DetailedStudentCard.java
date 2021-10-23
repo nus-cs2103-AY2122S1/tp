@@ -32,6 +32,9 @@ public class DetailedStudentCard extends UiPart<Region> {
     @FXML
     private TextArea notes;
 
+    /**
+     * Creates a {@code DetailedStudentCard} with the given {@code Student}.
+     */
     public DetailedStudentCard(Student student) {
         super(FXML);
         this.student = student;

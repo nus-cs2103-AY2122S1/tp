@@ -17,7 +17,7 @@ public class ContainsStudentNamePredicate implements Predicate<Student> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-        || (other instanceof ContainsStudentNamePredicate) // instanceof handles nulls
-        && name.equals(((ContainsStudentNamePredicate) other).name);
+            || (other instanceof ContainsStudentNamePredicate) // instanceof handles nulls
+            && name.equals(((ContainsStudentNamePredicate) other).name);
     }
 }

@@ -17,8 +17,9 @@ public class ViewStudentCommand extends Command {
         + "Parameters: NAME (case-sensitive)\n"
         + "Example:" + COMMAND_WORD + " 2";
 
+    private static final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewing details of %1$s";
+
     private final Name name;
-    private final String MESSAGE_VIEW_STUDENT_SUCCESS = "Viewing details of %1$s";
 
     public ViewStudentCommand(Name name) {
         this.name = name;

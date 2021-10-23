@@ -13,6 +13,9 @@ public class AssessmentListPanel extends UiPart<Region> {
     @FXML
     private ListView<Assessment> assessmentListView;
 
+    /**
+     * Custom {@code ListCell} that displays the graphics of a {@code Assessment} using a {@code AssessmentCard}.
+     */
     public AssessmentListPanel(ObservableList<Assessment> assessments) {
         super(FXML);
         assessmentListView.setItems(assessments);

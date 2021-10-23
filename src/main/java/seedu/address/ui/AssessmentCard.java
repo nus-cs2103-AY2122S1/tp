@@ -28,6 +28,9 @@ public class AssessmentCard extends UiPart<Region> {
     @FXML
     private VBox assessmentCard;
 
+    /**
+     * Creates a {@code AssessmentCard} with the give {@code Assessment} and index to display.
+     */
     public AssessmentCard(Assessment assessment, int displayedIndex) {
         super(FXML);
         this.assessment = assessment;

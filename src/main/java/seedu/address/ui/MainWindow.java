@@ -226,7 +226,7 @@ public class MainWindow extends UiPart<Stage> {
             popup.getContent().add(label);
             popup.show(primaryStage);
             PauseTransition delay = new PauseTransition(Duration.seconds(5));
-            delay.setOnFinished( event -> popup.hide());
+            delay.setOnFinished(event -> popup.hide());
             delay.play();
 
             if (commandResult.isShowHelp()) {
