@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.model.person.Person;
 
 public class UserPrefsTest {
@@ -35,6 +36,10 @@ public class UserPrefsTest {
         assertNotEquals(userPrefs1, person);
     }
 
-    
-
+    @Test
+    public void hashCodeTest() {
+        UserPrefs userPrefs1 = new UserPrefs();
+        UserPrefs userPrefs2 = new UserPrefs();
+        assertEquals(userPrefs1.hashCode(), userPrefs2.hashCode());
+    }
 }
