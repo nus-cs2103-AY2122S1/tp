@@ -62,17 +62,26 @@ public class Student {
     }
 
     /**
-     * Add a lab result into the student's record
+     * Adds a lab result to all the student records
      * */
     public void addLabResult(Lab result) {
         this.labResultList.add(result);
     }
 
     /**
-     * Add a lab result into the student's record
+     * Deletes a lab result from all the student records
      * */
     public void delLabResult(Lab result) {
         this.labResultList.remove(result);
+    }
+
+    /**
+     * Updates a lab result for a student
+     * */
+    public void editLabResult(Lab result, Double value) {
+        int index = this.labResultList.indexOf(result);
+        Lab current = this.labResultList.get(index);
+        current.updateActualScore(value);
     }
 
     public void setLabResultRecord(List<Lab> labResultRecord) {

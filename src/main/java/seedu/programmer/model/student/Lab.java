@@ -47,6 +47,10 @@ public class Lab {
         return totalScore;
     }
 
+    public Double updateActualScore(Double value) {
+        return this.actualScore = value;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
