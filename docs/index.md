@@ -7,6 +7,7 @@ title: Dash
 [![codecov](https://codecov.io/gh/AY2122S1-CS2103T-W15-2/tp/branch/master/graph/badge.svg?token=KW5G0PDRBK)](https://codecov.io/gh/AY2122S1-CS2103T-W15-2/tp)
 
 ![Ui](images/Ui.png)
+![Banner](images/banner.png)
 
 Dash is a desktop application that acts as a *Dash*board for managing your contacts and tasks.  
 Dash is a GUI application, but is mainly CLI(Command Line Interface) based in order to emphasise speed.

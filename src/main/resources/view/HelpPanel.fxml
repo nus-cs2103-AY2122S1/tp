@@ -17,14 +17,15 @@
                     <Insets top="5" right="10" bottom="5" left="10"/>
                 </padding>
                 <children>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" text=" General " styleClass="helpHeader"></Label>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="2" text=" "></Label>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text=" Contacts " styleClass="helpHeader"></Label>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="5" text=" "></Label>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="6" text=" Tasks " styleClass="helpHeader"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="0" fx:id="bannerLabel"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="1" text=" General " styleClass="helpHeader"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="3" text=" "></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="4" text=" Contacts " styleClass="helpHeader"></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="6" text=" "></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="7" text=" Tasks " styleClass="helpHeader"></Label>
 
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="8" fx:id="helpContent" styleClass="label-bright"></Label>
-                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="9">
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="9" fx:id="helpContent" styleClass="label-bright"></Label>
+                    <HBox GridPane.columnIndex="0" GridPane.rowIndex="10">
                         <Button fx:id="copyUserGuideButton" mnemonicParsing="false" onAction="#copyUserGuideUrl" text="Copy User Guide URL">
                             <VBox.margin>
                                 <Insets left="5.0"/>
@@ -36,7 +37,7 @@
                             </VBox.margin>
                         </Button>
                     </HBox>
-                    <Label GridPane.columnIndex="0" GridPane.rowIndex="10" text=" "></Label>
+                    <Label GridPane.columnIndex="0" GridPane.rowIndex="11" text=" "></Label>
                 </children>
                 <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" percentWidth="100"/>
