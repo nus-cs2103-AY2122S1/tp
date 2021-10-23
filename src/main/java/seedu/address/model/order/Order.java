@@ -2,7 +2,7 @@ package seedu.address.model.order;
 
 import seedu.address.model.Date;
 
-public class Order {
+public class Order implements Comparable<Order> {
     private static final String idPrefix = "SO";
     private static int count = 1;
 
@@ -71,6 +71,30 @@ public class Order {
         return idPrefix + this.id;
     }
 
+    /**
+     * Returns the amount as a double.
+     *
+     * @return the double representation of the amount.
+     */
+    public double getAmountAsDouble() {
+        return Double.parseDouble(amount.toString());
+    }
+
+    /**
+     * Returns true if both orders have the same customer, date and amount.
+     * This defines a weaker notion of equality between two orders.
+     */
+    public boolean isSameOrder(Order otherOrder) {
+        if (otherOrder == this) {
+            return true;
+        }
+
+        return otherOrder != null
+                && otherOrder.getCustomer().equals(getCustomer())
+                && otherOrder.getDate().equals(getDate())
+                && otherOrder.getAmount().equals(getAmount());
+    }
+
     // Order string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
@@ -106,7 +130,14 @@ public class Order {
         Order otherOrder = (Order) other;
         return otherOrder.getCustomer().equals(getCustomer())
                 && otherOrder.getDate().equals(getDate())
-                && otherOrder.getAmount().equals(getAmount());
+                && otherOrder.getAmount().equals(getAmount())
+                && otherOrder.getId() == getId();
 
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        //Orders are compared using their id.
+        return Long.compare(this.id, o.id);
     }
 }

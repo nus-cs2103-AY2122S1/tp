@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -111,6 +112,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+
     /// order-level operations
 
     public void addOrder(Order toAdd) {
@@ -131,6 +133,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public boolean hasOrder(Order order) {
         return orders.hasOrder(order);
+    }
+
+    public void sortOrders(Comparator<Order> comparator) {
+        orders.sort(comparator);
     }
 
 

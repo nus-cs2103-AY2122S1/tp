@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -153,7 +154,6 @@ public interface Model {
      */
     void setOrder(Order target, Order editedOrder);
 
-
     /** Returns an unmodifiable view of the filtered order list */
     ObservableList<Order> getFilteredOrderList();
 
@@ -162,4 +162,12 @@ public interface Model {
     void updateFilteredOrderList(Predicate<Order> predicate);
 
     void markOrder(Order order);
+
+    void sortOrderList(Comparator<Order> comparator);
+
+    /** Resets the order list to its regular ordering based on id */
+    void resetOrderView();
+
+    /** Returns an unmodifiable view of the list of ClientTotalOrders */
+    ObservableList<ClientTotalOrder> getClientTotalOrders();
 }
