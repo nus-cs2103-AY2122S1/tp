@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalEvents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.getTypicalAddressBookCopy;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 
@@ -23,18 +23,17 @@ import seedu.address.model.event.Event;
  */
 class DoneEventCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
 
     @Test
     public void execute_validIndex_success() {
-        Event eventToMarkAsDone = model.getFilteredEventList()
-                .get(INDEX_SECOND_EVENT.getZeroBased());
-        DoneEventCommand doneCommand = new DoneEventCommand(INDEX_SECOND_EVENT);
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.markEventAsDone(eventToMarkAsDone);
+        DoneEventCommand doneCommand = new DoneEventCommand(INDEX_FIRST_EVENT);
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBookCopy(), new UserPrefs());
+        Event eventMarkedAsDone = expectedModel.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
+        eventMarkedAsDone.markAsDone();
 
         String expectedMessage = String.format(DoneEventCommand.MESSAGE_DONE_EVENT_SUCCESS,
-                eventToMarkAsDone);
+                eventMarkedAsDone);
 
         assertCommandSuccess(doneCommand, model, expectedMessage, expectedModel);
     }

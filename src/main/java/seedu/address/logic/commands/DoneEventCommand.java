@@ -23,6 +23,7 @@ public class DoneEventCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DONE_EVENT_SUCCESS = "Marked event as done:\n%1$s";
+    public static final String MESSAGE_EVENT_ALREADY_DONE = "This event is already marked as done!";
 
     private final Index targetIndex;
 
@@ -43,9 +44,11 @@ public class DoneEventCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
-
         Event eventToMarkDone = lastShownList.get(targetIndex.getZeroBased());
 
+        if (eventToMarkDone.getDoneValue()) {
+            throw new CommandException(MESSAGE_EVENT_ALREADY_DONE);
+        }
         model.markEventAsDone(eventToMarkDone);
         return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, eventToMarkDone));
     }
