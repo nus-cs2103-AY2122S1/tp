@@ -1,12 +1,13 @@
 package seedu.address.model.tuition;
-import static java.util.Objects.requireNonNull;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Represents the time slot the tuition class takes
@@ -24,36 +25,38 @@ public class Timeslot {
             put("Sat", 6);
             put("Sun", 7);
         }};
-    public final Date start;
-    public final Date end;
+
+    private Date day;
+    private LocalTime start;
+    private LocalTime end;
 
     /**
      * Constructor for timeslot.
      *
-     * @param start
-     * @param end
+     * @param day Day in the week in EEE format
+     * @param start Start time of class in HH:mm format
+     * @param end End time of class in HH:mm format
      */
-    public Timeslot(Date start, Date end) {
-        requireNonNull(start);
-        requireNonNull(end);
+    public Timeslot(Date day, LocalTime start, LocalTime end) {
         this.start = start;
         this.end = end;
+        this.day = day;
     }
 
     public String getDayString() {
         return (this.getTime().split(" "))[0];
     }
 
-    public Date getStart() {
+    public LocalTime getStart() {
         return this.start;
     }
 
-    public Date getEnd() {
+    public LocalTime getEnd() {
         return this.end;
     }
 
-    public int getDay() {
-        return start.getDay();
+    public Date getDay() {
+        return this.day;
     }
 
     /**
@@ -61,29 +64,14 @@ public class Timeslot {
      * @return true if conflict exist, false if no conflict
      */
     public boolean checkClassConflict(Timeslot otherSlot) {
-        Date otherStart = otherSlot.getStart();
-        Date otherEnd = otherSlot.getEnd();
-
-        if (otherStart.getDay() != start.getDay()) {
+        LocalTime otherStart = otherSlot.getStart();
+        LocalTime otherEnd = otherSlot.getEnd();
+        if (otherSlot.getDay().getDay() != day.getDay()) {
             return false;
         }
-        return Math.max(otherStart.getTime(), start.getTime())
-                < Math.min(otherEnd.getTime(), end.getTime());
-    }
-
-    /**
-     * Checks if current list of classes have this timselot already.
-     *
-     * @param classList
-     * @return
-     */
-    public boolean checkTimetableConflicts(List<TuitionClass> classList) {
-        for (TuitionClass tc: classList) {
-            if (this.checkClassConflict(tc.getTimeslot())) {
-                return true;
-            }
-        }
-        return false;
+        LocalTime max = otherStart.isAfter(start) ? otherStart : start;
+        LocalTime min = otherEnd.isBefore(end) ? otherEnd : end;
+        return min.isAfter(max);
     }
 
     @Override
@@ -93,9 +81,9 @@ public class Timeslot {
         }
         if (other instanceof Timeslot) {
             Timeslot otherSlot = ((Timeslot) other);
-            return getDay() == otherSlot.getDay()
-                    && otherSlot.getEnd().getTime() == end.getTime()
-                    && otherSlot.getStart().getTime() == start.getTime();
+            return day == otherSlot.getDay()
+                    && !(otherSlot.getEnd().isAfter(end) || otherSlot.getEnd().isBefore(end))
+                    && !(otherSlot.getStart().isAfter(start) || otherSlot.getStart().isBefore(start));
         }
         return false;
     }
@@ -104,13 +92,11 @@ public class Timeslot {
      * Returns String representation of timeslot.
      *
      */
-
     public String getTime() {
-        DateFormat timeFormat = new SimpleDateFormat("EEE HH:mm");
-        DateFormat timeOnly = new SimpleDateFormat("HH:mm");
-        return String.format("%s-%s", timeFormat.format(start), timeOnly.format(end));
+        DateFormat dayFormat = new SimpleDateFormat("EEE");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH);
+        return String.format("%s %s-%s", dayFormat.format(day), start.format(timeFormat), end.format(timeFormat));
     }
-
 
     /**
      * Returns a string representation of the object. In general, the
@@ -155,22 +141,42 @@ public class Timeslot {
      * @return
      */
     public static Timeslot parseString(String slot) {
-        String[] arr = slot.trim().split(" ", 2); //Splits day from timings
-        String startTime = String.format("%s %s", arr[0], arr[1].split("-")[0]); //Mon 10:00
-        String endTime = String.format("%s %s", arr[0], arr[1].split("-")[1]); //Mon 11:00
-        DateFormat sdf = new SimpleDateFormat("EEE HH:mm");
+        String[] arr = slot.trim().split(" ", 2); //Splits day from time
+        String[] times = arr.length == 2 ? arr[1].split("-", 2) : null;
+
+        if (arr.length < 2 || times == null || times.length < 2) {
+            return null;
+        }
         DateFormat dayFormat = new SimpleDateFormat("EEE");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm", Locale.ENGLISH);
         try {
-            Date start = sdf.parse(startTime);
-            Date end = sdf.parse(endTime);
-            int day = dayFormat.parse(startTime).getDay();
-            if (start.getTime() >= end.getTime() || start.getDay() != day || end.getDay() != day) {
+            Date day = dayFormat.parse(arr[0]);
+            LocalTime start = LocalTime.parse(times[0], timeFormat);
+            LocalTime end = LocalTime.parse(times[1], timeFormat);
+
+            if (!start.isBefore(end)) {
                 return null;
             }
-            return new Timeslot(start, end);
-        } catch (java.text.ParseException e) {
+            return new Timeslot(day, start, end);
+        } catch (DateTimeException | java.text.ParseException de) {
             return null;
         }
     }
+
+    /**
+     * Checks if current list of classes have this timselot already.
+     *
+     * @param classList
+     * @return
+     */
+    public boolean checkTimetableConflicts(List<TuitionClass> classList) {
+        for (TuitionClass tc: classList) {
+            if (this.checkClassConflict(tc.getTimeslot())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
 

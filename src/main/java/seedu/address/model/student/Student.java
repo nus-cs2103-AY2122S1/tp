@@ -9,6 +9,8 @@ import java.util.Set;
 
 import seedu.address.model.Nameable;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tuition.ClassName;
+import seedu.address.model.tuition.Timeslot;
 import seedu.address.model.tuition.TuitionClass;
 
 /**
@@ -106,7 +108,7 @@ public class Student implements Nameable {
         for (Integer id : classes.getClasses()) {
             if ((tuitionClass.getId()) == id) {
                 classes.removeClass(id);
-                removeTag(new Tag(tuitionClass.getName().getName() + " | " + tuitionClass.getTimeslot()));
+                removeTag(tuitionClass.getName(), tuitionClass.getTimeslot());
                 return this;
             }
         }
@@ -132,14 +134,32 @@ public class Student implements Nameable {
     }
 
     /**
-     * Removes tag from the student.
-     * @param tag tag to be removed
+     * Returns student's tags after removing a class tag.
+     *
+     * @param name
+     * @param slot
+     * @return
      */
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
+    public Set<Tag> removeTag(ClassName name, Timeslot slot) {
+        tags.remove(new Tag(String.format("%s | %s", name, slot)));
+        return tags;
     }
 
-
+    /**
+     * Updates the class tag with new name and timeslot.
+     *
+     * @param name
+     * @param slot
+     * @param name1
+     * @param slot1
+     * @return
+     */
+    public Student updateTag(ClassName name, Timeslot slot, ClassName name1, Timeslot slot1) {
+        Tag tag = new Tag(String.format("%s | %s", name.getName(), slot));
+        boolean b = this.tags.remove(tag);
+        this.tags.add(new Tag(String.format("%s | %s", name1.getName(), slot1)));
+        return this;
+    }
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.

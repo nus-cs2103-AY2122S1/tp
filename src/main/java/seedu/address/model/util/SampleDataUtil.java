@@ -98,7 +98,7 @@ public class SampleDataUtil {
 
     private static StudentList getSampleStudentList() {
         ArrayList<String> studentToAdd = new ArrayList<>();
-        studentToAdd.add("a");
+        studentToAdd.add("Alex Yeoh");
         StudentList students = new StudentList(studentToAdd);
         return students;
     }

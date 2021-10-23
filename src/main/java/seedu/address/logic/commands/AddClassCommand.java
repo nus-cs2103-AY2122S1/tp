@@ -60,7 +60,8 @@ public class AddClassCommand extends Command {
         for (Student person: validStudentsAsPerson) {
             Student studentToChange = person;
             person.addClass(tuitionClass);
-            person.addTag(new Tag(tuitionClass.getName().getName() + " | " + tuitionClass.getTimeslot()));
+            person.addTag(new Tag(String.format("%s | %s", tuitionClass.getName().getName(),
+                    tuitionClass.getTimeslot())));
             model.setStudent(studentToChange, person);
         }
     }

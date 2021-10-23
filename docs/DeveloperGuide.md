@@ -216,6 +216,35 @@ Step 2.2 The user may choose to click `Cancel` or exit the dialog box and the re
 Users are able to navigate through their previously entered String inputs from the Command Box in the UI, using the up and down arrow keys.
 This is facilitated by the `InputHistory` class.
 
+### [Developed] Editing Tuition Classes
+Users can edit tuition classes by editing the following fields: limit, name and timeslot of a class. 
+This is implemented using the `EditClassCommand`, `EditClassDescriptor` classes.
+
+The `EditClassCommand` receives an index that indicates the class to be edited and an 
+editable `EditClassDescriptor` class which consists of the updated fields of the class. 
+The tuition class is then updated with the help of the following operations: 
+
+* `TuitionClass#sameClassDetails()` - Checks if any field of the tuition class has been updated. 
+* `Timeslot#checkTimetableConflicts` - Checks if the updated time slot has been taken by another class.
+
+Given below is an example usage scenario and an `editclass` command is executed.
+
+Step 1: The user enters `editclass 1 l/5 ts/Mon 10:00-11:00` command.
+
+Step 1.1 The `EditClassCommand` class will first check if any field of the tuition class has been updated.
+If there are no changes, a `CommandException` will be thrown to alert the user that the class details are up-to-date.
+Otherwise, it proceeds to verify that the updated `limit` is at least equal to the current number of students.
+
+Step 2: Upon ensuring that the limit is valid, it checks for potential conflicts by comparing the updated `timeslot`
+against those of other classes using the `Timeslot#checkTimetableConflicts` method.
+If there are conflicts, a `CommandException` will be thrown to the user to alert the class that the slot has been taken.
+
+Step 3: It will proceed to update the class tag of the students enrolled in the class which shows the `ClassName` and 
+`Timeslot` of the updated class.
+
+Step 4 : Finally, it replaces the existing class with the updated class in the database.
+
+
 ### \[Developed\] Undo/redo feature
 
 The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:

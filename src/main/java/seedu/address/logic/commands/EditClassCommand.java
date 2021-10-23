@@ -7,12 +7,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIMESLOT;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 import seedu.address.model.tuition.ClassLimit;
 import seedu.address.model.tuition.ClassName;
 import seedu.address.model.tuition.Timeslot;
@@ -63,16 +66,29 @@ public class EditClassCommand extends Command {
         TuitionClass classToEdit = lastShownList.get(index.getZeroBased());
         TuitionClass editedClass = createEditedClass(classToEdit, editClassDescriptor);
         if (classToEdit.sameClassDetails(editedClass)) {
-            throw new CommandException(String.format(MESSAGE_NO_CLASS_CHANGES));
+            throw new CommandException(MESSAGE_NO_CLASS_CHANGES);
         }
         //check limit minimum limit of class = current number of students
         if (editedClass.getLimit().getLimit() < classToEdit.getStudentCount()) {
             throw new CommandException(String.format(MESSAGE_INVALID_CLASS_LIMIT, classToEdit.getStudentCount()));
         }
         //check if updated timeslot is taken
+        List<TuitionClass> otherClasses = lastShownList
+                .stream().filter(x -> x.getId() != editedClass.getId()).collect(Collectors.toList());
         if (!editedClass.getTimeslot().equals(classToEdit.getTimeslot())) {
-            if (editedClass.getTimeslot().checkTimetableConflicts(lastShownList)) {
+            if (editedClass.getTimeslot().checkTimetableConflicts(otherClasses)) {
                 throw new CommandException(MESSAGE_INVALID_CLASS_SLOT);
+            }
+        }
+        if (classToEdit.getStudentCount() > 0) {
+            List<String> currStudents = classToEdit.getStudentList().getStudents();
+            for (String name : currStudents) {
+                if (model.getSameNameStudent(new Student(new Name(name))) != null) {
+                    Student student = model.getSameNameStudent(new Student(new Name(name)));
+                    Student updatedStudent = student.updateTag(classToEdit.getName(), classToEdit.getTimeslot(),
+                            editedClass.getName(), editedClass.getTimeslot());
+                    model.setStudent(student, updatedStudent);
+                }
             }
         }
         model.setTuition(classToEdit, editedClass);
@@ -88,7 +104,7 @@ public class EditClassCommand extends Command {
         Timeslot updatedSlot = editClassDescriptor.getTimeslot().orElse(classToEdit.getTimeslot());
 
         return new TuitionClass(updatedName, updatedLimit, updatedSlot,
-                classToEdit.getStudentList(), classToEdit.getRemark());
+                classToEdit.getStudentList(), classToEdit.getRemark(), classToEdit.getId());
     }
 
     /**

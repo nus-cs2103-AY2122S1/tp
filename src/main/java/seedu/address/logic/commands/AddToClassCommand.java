@@ -178,8 +178,8 @@ public class AddToClassCommand extends Command {
                 logStudentName += ", ";
             }
             studentToAdd.addClass(modifiedClass);
-            studentToAdd.addTag(new Tag(modifiedClass.getName().getName() + " | "
-                    + modifiedClass.getTimeslot()));
+            studentToAdd.addTag(new Tag(String.format("%s | %s", modifiedClass.getName().getName(),
+                    modifiedClass.getTimeslot())));
             updateModel(model, tuitionClass, modifiedClass, studentToAdd, studentToChange);
         }
         logger.info("Add students [" + logStudentName + "] to class [" + tuitionClass.getName() + "]");
