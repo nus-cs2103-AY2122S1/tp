@@ -57,7 +57,6 @@ public class Toggle extends UiPart<Region> {
     @FXML
     private void handleClientsPressed() {
         personsToggler.run();
-        System.out.println(clients.isSelected());
     }
 
     /**
