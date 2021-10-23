@@ -73,7 +73,8 @@ public class SampleDataUtil {
 
     public static Order[] getSampleOrders() {
         return new Order[] {
-            new Order(new Customer("Alex Yeoh"), new Date("10th of October"), new Amount("10")),
+            new Order(new Label("Blue blazer"), new Customer("Alex Yeoh"),
+                    new Date("10th of October"), new Amount("10")),
         };
     }
 

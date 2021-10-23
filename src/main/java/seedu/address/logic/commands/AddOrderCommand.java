@@ -21,6 +21,7 @@ public class AddOrderCommand extends Command {
             + PREFIX_AMOUNT + "AMOUNT "
             + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_LABEL + "School uniform "
             + PREFIX_CUSTOMER + "Alice "
             + PREFIX_AMOUNT + "10.90 "
             + PREFIX_DATE + "20th August 2021";

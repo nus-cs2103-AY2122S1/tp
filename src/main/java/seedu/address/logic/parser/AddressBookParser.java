@@ -18,6 +18,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindOrderCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListTaskCommand;
@@ -58,6 +59,7 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
+        //======================================== PERSON COMMANDS ========================================
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
@@ -70,9 +72,6 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case SortOrdersByAmountCommand.COMMAND_WORD:
-            return new SortOrdersByAmountCommand();
-
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
@@ -84,6 +83,8 @@ public class AddressBookParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        //======================================== TASK COMMANDS ========================================
 
         case AddTaskCommand.COMMAND_WORD:
             return new AddTaskCommandParser().parse(arguments);
@@ -106,6 +107,8 @@ public class AddressBookParser {
         case ShowIncompleteTasks.COMMAND_WORD:
             return new ShowIncompleteTasks();
 
+        //======================================== ORDER COMMANDS ========================================
+
         case MarkOrderCommand.COMMAND_WORD:
             return new MarkOrderCommandParser().parse(arguments);
 
@@ -123,6 +126,12 @@ public class AddressBookParser {
 
         case TotalOrdersCommand.COMMAND_WORD:
             return new TotalOrdersCommand();
+
+        case SortOrdersByAmountCommand.COMMAND_WORD:
+            return new SortOrdersByAmountCommand();
+
+        case FindOrderCommand.COMMAND_WORD:
+            return new FindOrderCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
