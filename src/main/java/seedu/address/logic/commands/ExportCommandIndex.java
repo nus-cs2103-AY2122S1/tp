@@ -9,15 +9,16 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.storage.ExportStorage;
 
 /**
- * Deletes a contact identified using it's displayed index from the address book.
+ * Exports a contact identified using it's displayed index from the address book.
  */
-public class DeleteCommandIndex extends DeleteCommand {
+public class ExportCommandIndex extends ExportCommand {
 
     private final Index targetIndex;
 
-    public DeleteCommandIndex(Index targetIndex) {
+    public ExportCommandIndex(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -31,15 +32,16 @@ public class DeleteCommandIndex extends DeleteCommand {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Person personToExport = lastShownList.get(targetIndex.getZeroBased());
+        ExportStorage.clearStorage();
+        model.exportPerson(personToExport);
+        return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, personToExport));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommandIndex // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommandIndex) other).targetIndex)); // state check
+            || (other instanceof ExportCommandIndex // instanceof handles nulls
+            && targetIndex.equals(((ExportCommandIndex) other).targetIndex)); // state check
     }
 }

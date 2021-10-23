@@ -15,6 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path addressBookFilePath = Paths.get("data" , "addressbook.json");
+    private Path exportFilePath = Paths.get("data", "export.txt");
 
     /**
      * Creates a {@code UserPrefs} with default values.
@@ -36,6 +37,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAddressBookFilePath(newUserPrefs.getAddressBookFilePath());
+        setExportFilePath(newUserPrefs.getExportFilePath());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +58,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    public Path getExportFilePath() {
+        return exportFilePath;
+    }
+
+    public void setExportFilePath(Path exportFilePath) {
+        requireNonNull(exportFilePath);
+        this.exportFilePath = exportFilePath;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -68,12 +79,13 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return guiSettings.equals(o.guiSettings)
-                && addressBookFilePath.equals(o.addressBookFilePath);
+                && addressBookFilePath.equals(o.addressBookFilePath)
+                && exportFilePath.equals(o.exportFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, exportFilePath);
     }
 
     @Override
@@ -81,6 +93,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nExport file location : " + exportFilePath);
         return sb.toString();
     }
 

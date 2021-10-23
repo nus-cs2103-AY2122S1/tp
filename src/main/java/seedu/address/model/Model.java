@@ -59,7 +59,7 @@ public interface Model {
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * {@code person} must exist in the address book.
      */
     void deletePerson(Person target);
 
@@ -84,4 +84,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Exports the given person.
+     * {@code person} must exist in the address book.
+     */
+    void exportPerson(Person person);
 }
