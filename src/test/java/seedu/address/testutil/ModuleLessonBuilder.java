@@ -11,10 +11,9 @@ import seedu.address.model.person.Remark;
 public class ModuleLessonBuilder {
 
     public static final ModuleCode DEFAULT_MODULE_CODE = parseModuleCode("CS2103 T17");
-    public static final String DEFAULT_DAY = "2";
-    public static final String DEFAULT_START_TIME = "15:00";
-    public static final String DEFAULT_END_TIME = "16:00";
-    public static final String DEFAULT_REMARK = "Location: COM1 113";
+    public static final String DEFAULT_LESSON_DAY = "2";
+    public static final String DEFAULT_LESSON_START_TIME = "15:00";
+    public static final String DEFAULT_LESSON_END_TIME = "16:00";
 
     private ModuleCode moduleCode;
     private LessonDay lessonDay;
@@ -27,9 +26,9 @@ public class ModuleLessonBuilder {
      */
     public ModuleLessonBuilder() {
         moduleCode = DEFAULT_MODULE_CODE;
-        lessonDay = new LessonDay(DEFAULT_DAY);
-        lessonStartTime = new LessonTime(DEFAULT_START_TIME);
-        lessonEndTime = new LessonTime(DEFAULT_END_TIME);
+        lessonDay = new LessonDay(DEFAULT_LESSON_DAY);
+        lessonStartTime = new LessonTime(DEFAULT_LESSON_START_TIME);
+        lessonEndTime = new LessonTime(DEFAULT_LESSON_END_TIME);
         remark = new Remark("");
     }
 
