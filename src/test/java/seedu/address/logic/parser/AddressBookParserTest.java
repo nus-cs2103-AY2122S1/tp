@@ -32,6 +32,7 @@ import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
+import seedu.address.logic.commands.SortMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.alias.Alias;
@@ -219,6 +220,12 @@ public class AddressBookParserTest {
         String filePath = " src/test/data/ImportCommandParserTest/typicalImportFile.csv";
         assertTrue(parser
                 .parseCommand(ImportCommand.COMMAND_WORD + filePath, aliases) instanceof ImportCommand);
+    }
+
+    @Test
+    public void parseCommand_sortm() throws Exception {
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD, aliases) instanceof SortMemberCommand);
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " 3", aliases) instanceof SortMemberCommand);
     }
 
     @Test

@@ -3,6 +3,8 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -148,5 +150,13 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void resetMembers() {
         internalList.setAll();
+    }
+
+    /**
+     * Sorts the member list in alphabetical order.
+     */
+    public void sortMembers() {
+        Comparator<Person> personNameComparator = new PersonNameComparator();
+        Collections.sort(internalList, personNameComparator);
     }
 }

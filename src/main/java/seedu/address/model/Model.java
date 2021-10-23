@@ -149,6 +149,11 @@ public interface Model {
     Person getSamePerson(Person person);
 
     /**
+     * Sorts the member list in alphabetical order.
+     */
+    void sortMemberList();
+
+    /**
      * Clears the contents of the member list.
      */
     void resetMemberList();
