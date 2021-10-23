@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Predicate;
 
@@ -32,6 +33,14 @@ public interface Logic {
      * @see seedu.address.model.Model#getAddressBook()
      */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Saves the AddressBook
+     *
+     * @param addressBook the addressbook to save
+     * @throws IOException if file write error
+     */
+    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();

@@ -62,6 +62,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        storage.saveAddressBook(addressBook);
+    }
+
+    @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
