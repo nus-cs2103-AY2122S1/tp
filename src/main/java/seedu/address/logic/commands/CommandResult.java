@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.commands.ShowCommand.Info;
 
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -10,6 +12,8 @@ import java.util.Objects;
 public class CommandResult {
 
     private final String feedbackToUser;
+
+    private final Info info;
 
     /** Help information should be shown to the user. */
     private final boolean showHelp;
@@ -20,8 +24,9 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, Info info, boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.info = info;
         this.showHelp = showHelp;
         this.exit = exit;
     }
@@ -31,11 +36,23 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false);
+        this(feedbackToUser, null, false, false);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code info},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, Info info) {
+        this(feedbackToUser, info, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public Info getInfo() {
+        return info;
     }
 
     public boolean isShowHelp() {
