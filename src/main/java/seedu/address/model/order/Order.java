@@ -80,6 +80,21 @@ public class Order implements Comparable<Order> {
         return Double.parseDouble(amount.toString());
     }
 
+    /**
+     * Returns true if both orders have the same customer, date and amount.
+     * This defines a weaker notion of equality between two orders.
+     */
+    public boolean isSameOrder(Order otherOrder) {
+        if (otherOrder == this) {
+            return true;
+        }
+
+        return otherOrder != null
+                && otherOrder.getCustomer().equals(getCustomer())
+                && otherOrder.getDate().equals(getDate())
+                && otherOrder.getAmount().equals(getAmount());
+    }
+
     // Order string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
