@@ -1,34 +1,44 @@
 package seedu.anilist.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.anilist.logic.commands.FindCommand;
-import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
+import seedu.anilist.logic.parser.exceptions.ParseException;
 
 public class FindCommandParserTest {
 
     private FindCommandParser parser = new FindCommandParser();
 
-    @Test
-    public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    private static void assertIsFindCommand(Object o) {
+        assertNotNull(o);
+        assertTrue(o instanceof FindCommand);
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
-        // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Attack", "Black")));
-        assertParseSuccess(parser, "Attack Black", expectedFindCommand);
+    public void parse_invalidArg_throwsParseException() {
+        assertParseFailure(parser, "     ",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "n/",
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+    }
 
-        // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n Attack \n \t Black  \t", expectedFindCommand);
+    @Test
+    public void parse_validArgs_returnsFindCommand() throws ParseException {
+        // no leading and trailing whitespaces
+        FindCommand resultingCommand = parser.parse(" n/Attack n/Black");
+        assertIsFindCommand(resultingCommand);
+
+        resultingCommand = parser.parse(" g/Attack g/Black");
+        assertIsFindCommand(resultingCommand);
+
+        resultingCommand = parser.parse(" n/A n/B g/C g/D");
+        assertIsFindCommand(resultingCommand);
     }
 
 }
