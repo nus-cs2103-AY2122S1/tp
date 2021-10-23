@@ -78,7 +78,7 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new AddParticipantToEventParser().parse(" id/tom2 ev/M").execute(model).isShowHelp());
+        assertFalse(new AddParticipantToEventParser().parse(" 1 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -146,9 +146,9 @@ public class CommandResultTest {
         addEventCommand.execute(model);
         // hard coded test
         AddParticipantToEventCommand addParticipantToEventCommand = new AddParticipantToEventParser()
-                .parse(" id/tom8 ev/M");
+                .parse(" 1 1");
         addParticipantToEventCommand.execute(model);
-        assertFalse(new RemoveParticipantFromEventParser().parse(" id/tom8 ev/M").execute(model).isShowHelp());
+        assertFalse(new RemoveParticipantFromEventParser().parse(" 1 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -210,7 +210,7 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new AddParticipantToEventParser().parse(" id/tom4 ev/M").execute(model).isExit());
+        assertFalse(new AddParticipantToEventParser().parse(" 1 1").execute(model).isExit());
     }
 
     @Test
@@ -278,9 +278,9 @@ public class CommandResultTest {
         addEventCommand.execute(model);
         // hard coded test
         AddParticipantToEventCommand addParticipantToEventCommand = new AddParticipantToEventParser()
-                .parse(" id/tom9 ev/M");
+                .parse(" 1 1");
         addParticipantToEventCommand.execute(model);
-        assertFalse(new RemoveParticipantFromEventParser().parse(" id/tom9 ev/M").execute(model).isExit());
+        assertFalse(new RemoveParticipantFromEventParser().parse(" 1 1").execute(model).isExit());
     }
 
     @Test

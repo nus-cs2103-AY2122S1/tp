@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST;
-import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.AddParticipantToEventCommand.MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
@@ -37,7 +38,7 @@ class AddParticipantToEventCommandTest {
                 new ModelStubWithEventAndParticipant(validParticipant, new EventBuilder().build());
 
         CommandResult commandResult =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName).execute(modelStub);
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(1)).execute(modelStub);
 
         assertEquals(String.format(MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS,
                 validParticipant.getFullName(), eventName), commandResult.getFeedbackToUser());
@@ -46,32 +47,25 @@ class AddParticipantToEventCommandTest {
 
     @Test
     public void execute_participantNotInModel_throwsCommandException() {
-        Participant validParticipant = new ParticipantBuilder().build();
-        EventName eventName = SAMPLE_EVENT.getName();
-        ModelStubWithEventAndParticipant modelStub =
-                new ModelStubWithEventAndParticipant(ALEX, new EventBuilder().build());
+        ModelStubWithEvent modelStub = new ModelStubWithEvent(new EventBuilder().build());
 
         AddParticipantToEventCommand addParticipantToEventCommand =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_PARTICIPANT_NOT_FOUND, validParticipant.getIdValue(),
-                        ListCommand.COMMAND_WORD), () -> addParticipantToEventCommand.execute(modelStub));
+                MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX, () -> addParticipantToEventCommand.execute(modelStub));
     }
 
     @Test
     public void execute_eventNotInModel_throwsCommandException() {
         Participant validParticipant = new ParticipantBuilder().build();
-        EventName eventName = ANOTHER_EVENT.getName();
-        ModelStubWithEventAndParticipant modelStub =
-                new ModelStubWithEventAndParticipant(validParticipant, new EventBuilder().build());
+        ModelStubWithParticipant modelStub = new ModelStubWithParticipant(validParticipant);
 
         AddParticipantToEventCommand addParticipantToEventCommand =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
 
         assertThrows(CommandException.class,
-                String.format(MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST, eventName,
-                        ListEventCommand.COMMAND_WORD), () -> addParticipantToEventCommand.execute(modelStub));
+                MESSAGE_INVALID_EVENT_DISPLAYED_INDEX, () -> addParticipantToEventCommand.execute(modelStub));
     }
 
     @Test
@@ -79,13 +73,12 @@ class AddParticipantToEventCommandTest {
         Participant validParticipant = new ParticipantBuilder().build();
         EventBuilder eventBuilder = new EventBuilder();
         eventBuilder.addParticipant(validParticipant);
-        EventName eventName = SAMPLE_EVENT.getName();
 
         ModelStubWithEventAndParticipant modelStub =
                 new ModelStubWithEventAndParticipant(validParticipant, eventBuilder.build());
 
         AddParticipantToEventCommand addParticipantToEventCommand =
-                new AddParticipantToEventCommand(validParticipant.getParticipantId(), eventName);
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
 
         assertThrows(CommandException.class,
                 Messages.showParticipantExists(validParticipant.getFullName()), () ->
@@ -97,19 +90,19 @@ class AddParticipantToEventCommandTest {
         ParticipantId alexId = ALEX.getParticipantId();
         ParticipantId berniceId = BERNICE.getParticipantId();
         EventName sampleEventName = SAMPLE_EVENT.getName();
-        AddParticipantToEventCommand addAlexToSampleEvent =
-                new AddParticipantToEventCommand(alexId, sampleEventName);
-        AddParticipantToEventCommand addAlexToAnotherEvent =
-                new AddParticipantToEventCommand(alexId, ANOTHER_EVENT.getName());
-        AddParticipantToEventCommand addBerniceToSampleEvent =
-                new AddParticipantToEventCommand(berniceId, sampleEventName);
+        AddParticipantToEventCommandOld addAlexToSampleEvent =
+                new AddParticipantToEventCommandOld(alexId, sampleEventName);
+        AddParticipantToEventCommandOld addAlexToAnotherEvent =
+                new AddParticipantToEventCommandOld(alexId, ANOTHER_EVENT.getName());
+        AddParticipantToEventCommandOld addBerniceToSampleEvent =
+                new AddParticipantToEventCommandOld(berniceId, sampleEventName);
 
         // same object -> returns true
         assertTrue(addAlexToSampleEvent.equals(addAlexToSampleEvent));
 
         // same values -> returns true
-        AddParticipantToEventCommand addAlexToSampleEventCopy =
-                new AddParticipantToEventCommand(alexId, sampleEventName);
+        AddParticipantToEventCommandOld addAlexToSampleEventCopy =
+                new AddParticipantToEventCommandOld(alexId, sampleEventName);
         assertTrue(addAlexToSampleEvent.equals(addAlexToSampleEventCopy));
 
         // different types -> returns false
@@ -143,6 +136,54 @@ class AddParticipantToEventCommandTest {
             ObservableList<Participant> participants = FXCollections.observableArrayList();
             participants.add(participant);
             return participants;
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            ObservableList<Event> events = FXCollections.observableArrayList();
+            events.add(event);
+            return events;
+        }
+    }
+
+    /**
+     * A Model stub that contains a single Participant.
+     */
+    private class ModelStubWithParticipant extends DefaultModelStub {
+        private final Participant participant;
+
+        ModelStubWithParticipant(Participant participant) {
+            requireNonNull(participant);
+            this.participant = participant;
+        }
+
+        @Override
+        public ObservableList<Participant> getFilteredParticipantList() {
+            ObservableList<Participant> participants = FXCollections.observableArrayList();
+            participants.add(participant);
+            return participants;
+        }
+
+        @Override
+        public ObservableList<Event> getFilteredEventList() {
+            return FXCollections.observableArrayList();
+        }
+    }
+
+    /**
+     * A Model stub that contains a single Event.
+     */
+    private class ModelStubWithEvent extends DefaultModelStub {
+        private final Event event;
+
+        ModelStubWithEvent(Event event) {
+            requireNonNull(event);
+            this.event = event;
+        }
+
+        @Override
+        public ObservableList<Participant> getFilteredParticipantList() {
+            return FXCollections.observableArrayList();
         }
 
         @Override
