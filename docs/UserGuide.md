@@ -154,19 +154,19 @@ Examples:\
 Deletes the specified staff from the staff list.
 
 Formats:\
-`delete n/name`\
-`delete i/index`\
-`delete r/role`\
-`delete s/status`
+`delete -n NAME`\
+`delete -i INDEX`\
+`delete -r ROLE`\
+`delete -s STATUS`
 
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
 * The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
 
 Examples:\
-`delete n/Candice`\
-`delete i/12345678`\
-`delete r/cashiers`\
-`delete s/full-time`
+`delete -n Candice`\
+`delete -i 2`\
+`delete -r cashiers`\
+`delete -s fulltime`
 
 [comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
 [comment]: <> (* `find Betsy` followed by `delete 1` deletes the 1st staff in the results of the `find` command.)
@@ -273,12 +273,12 @@ Examples:\
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
 Formats:\
-`deleteSchedule n/name d/fullDayName-shiftNumber` \
-`deleteSchedule i/index d/fullDayName-shiftNumber`
+`deleteSchedule -n NAME d/fullDayName-shiftNumber` \
+`deleteSchedule -i INDEX d/fullDayName-shiftNumber`
 
 Examples:\
-`deleteSchedule n/Joe d/tuesday-2` \
-`deleteSchedule i/1278 d/friday-1`
+`deleteSchedule -n Joe d/tuesday-2` \
+`deleteSchedule -i 1278 d/friday-1`
 
 ### Editing a staff schedule: `editSchedule`
 Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
@@ -344,13 +344,13 @@ Action | Format, Examples
 -------|------------------
 **View** | `view -n NAME` <br> `view -i INDEX`
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS $/SALARY [s/STATUS] [r/ROLE]... [t/TAG]...`
-**Delete** | `delete n/NAME` <br> `delete i/INDEX` <br> `delete r/role` <br> `delete s/STATUS`
+**Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedlue -n NAME` <br> `viewSchedlue -i INDEX`
 **Add staff schedule** | `addShift n/name d/fullDayName-shiftNumber` <br> `addShift i/INDEX d/fullDayName-shiftNumber`
 **Edit staff schedule** | `editShift n/NAME old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/INDEX old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
-**Delete staff shift** | `deleteShift n/NAME d/fullDayName-shiftNumber` <br> `deleteShift i/INDEX d/fullDayName-shiftNumber`
+**Delete staff shift** | `deleteShift -n NAME d/fullDayName-shiftNumber` <br> `deleteShift -i INDEX d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
 **Mark absent** | `mark -i INDEX d/startDate [d/endDate]` <br> `mark -n NAME d/startDate [d/endDate]`
 **Remove mark** | `unmark -i INDEX d/startDate [d/endDate]` <br> `mark -n NAME d/startDate [d/endDate]`
