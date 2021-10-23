@@ -8,6 +8,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +27,7 @@ public class GitHubUtil {
     private static final Logger logger = LogsCenter.getLogger(GitHubUtil.class);
 
     private static final String GITHUB_URL_PREFIX = "https://github.com/";
-    private static final HttpClient httpClient = HttpClient.newHttpClient();
+    private static final HttpClient httpClient = HttpClient.newBuilder().priority(1).build();
 
     /**
      * Establishes a connection to the server, and
@@ -41,6 +42,11 @@ public class GitHubUtil {
                     .uri(URI.create(url))
                     .build();
             HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (httpResponse.statusCode() == 429) {
+                Thread.sleep(1000 + new Random().nextInt(500));
+                return establishConnectionForWebsite(extension);
+            }
 
             if (httpResponse.statusCode() != 200) {
                 logger.severe("Server responded with error code " + httpResponse.statusCode());
@@ -62,8 +68,9 @@ public class GitHubUtil {
      *
      * @param userName The name of the user.
      * @return An {@code Image} object with the users profile picture in it.
+     * @throws RuntimeException If invalid username.
      */
-    public static Image getProfilePicture(String userName) {
+    public static Image getProfilePicture(String userName) throws RuntimeException {
         assert userName != null && !userName.equals("") : "No UserName Found";
 
         if (!Github.isValidGithub(userName)) {
@@ -92,8 +99,9 @@ public class GitHubUtil {
      * on a person's Github
      * @param userName The name of the user.
      * @return a list of repository names
+     * @throws RuntimeException If invalid username or the server did not respond well.
      */
-    public static ArrayList<String> getRepoNames(String userName) {
+    public static ArrayList<String> getRepoNames(String userName) throws RuntimeException {
 
         if (!Github.isValidGithub(userName)) {
             throw new RuntimeException("Invalid GitHib Account");
@@ -107,7 +115,6 @@ public class GitHubUtil {
             Pattern p = Pattern.compile("(?<=codeRepository)(.*?)(?=</a>)");
             Matcher m = p.matcher(htmlString);
             ArrayList<String> repos = new ArrayList<>();
-
             while (m.find()) {
                 repos.add(StringUtil.clean(m.group(), ">"));
             }
@@ -126,7 +133,7 @@ public class GitHubUtil {
             logger.severe("Data could not be obtained.");
             return null;
         } else {
-            Pattern p = Pattern.compile("(?<=color-text-primary text-bold mr-1)(.*?)(?=</a>)");
+            Pattern p = Pattern.compile("(?<=text-bold mr-1)(.*?)(?=</a>)");
             Matcher m = p.matcher(htmlString);
             HashMap<String, Double> repoLanguages = new HashMap<>();
             while (m.find()) {
@@ -140,14 +147,14 @@ public class GitHubUtil {
     }
 
     private static void normalize(HashMap<String, Double> features) {
-        double sum = features.values().stream().parallel().mapToDouble(k -> k).sum();
-        features.keySet().stream().parallel().forEach(k -> {
+        double sum = features.values().parallelStream().mapToDouble(k -> k).sum();
+        features.keySet().parallelStream().forEach(k -> {
             features.replace(k, features.get(k) / sum);
         });
     }
 
     private static void updateLanguageStats(HashMap<String, Double> total, HashMap<String, Double> stats) {
-        stats.keySet().stream().parallel().forEach(k -> {
+        stats.keySet().parallelStream().forEach(k -> {
             if (total.containsKey(k)) {
                 total.replace(k, total.get(k) + stats.get(k));
             } else {
@@ -157,20 +164,20 @@ public class GitHubUtil {
     }
 
     /**
-     * Returns the % of contribution of every language that a person
-     * has made on Github to date
+     * Returns the % of contributions by language for a GitHub username in the given repositories
      *
      * @param userName The name of the user.
-     * @return An {@code HashMap} object mapping Languages to their % found on GitHub
+     * @param repoNames a list of repositories to parse
+     * @return the stats on the languages used
+     * @throws RuntimeException If invalid username or the server did not respond well.
      */
-    public static HashMap<String, Double> getLanguageStats(String userName) {
+    public static HashMap<String, Double> getLanguageStats(String userName, ArrayList<String> repoNames)
+            throws RuntimeException {
         if (!Github.isValidGithub(userName)) {
             throw new RuntimeException("Invalid GitHib Account");
         }
-
-        ArrayList<String> repoNames = getRepoNames(userName);
         HashMap<String, Double> languageStats = new HashMap<>();
-        repoNames.stream().parallel().forEach(repo -> {
+        repoNames.parallelStream().forEach(repo -> {
             HashMap<String, Double> tempStats = getRepoLanguages(userName, repo);
             if (tempStats != null) {
                 updateLanguageStats(languageStats, tempStats);
@@ -181,55 +188,19 @@ public class GitHubUtil {
     }
 
     /**
-     * Returns the total number of contributions a person on GitHub
-     * has made to date.
-     *
-     * @param userName The name of the user.
-     * @return The total contributions found on GitHub else -1, if any error occurred.
-     * @throws RuntimeException If the server did not respond well.
-     */
-    public static int getContributionsCount(String userName) throws RuntimeException {
-        if (!Github.isValidGithub(userName)) {
-            throw new RuntimeException("Invalid GitHib Account");
-        }
-        String htmlString = establishConnectionForWebsite(userName);
-
-        if (!Github.isValidGithub(userName)) {
-            throw new RuntimeException("Invalid GitHib Account");
-        }
-
-        if (htmlString == null) {
-            throw new RuntimeException("Data could not be obtained.");
-        } else {
-            Pattern p = Pattern.compile("(?<=<h2 class=f4 text-normal mb-2>)(.*?)(?=</h2>)");
-            Matcher m = p.matcher(htmlString);
-            String target = "";
-
-            while (m.find()) {
-                target = m.group();
-            }
-
-            return Integer.parseInt(target.strip().split("\\s+")[0]);
-        }
-    }
-
-    /**
-     * Returns the total number of repos a person on GitHub
+     * Returns the total number of repositories a person on GitHub
      * has made to date.
      *
      * @param userName The name of the user.
      * @return The total number of repos found on GitHub else -1, if any error occurred.
-     * @throws RuntimeException If the server did not respond well.
+     * @throws RuntimeException If invalid username or the server did not respond well.
      */
     public static int getRepoCount(String userName) throws RuntimeException {
         if (!Github.isValidGithub(userName)) {
             throw new RuntimeException("Invalid GitHib Account");
         }
-        String htmlString = establishConnectionForWebsite(userName);
 
-        if (!Github.isValidGithub(userName)) {
-            throw new RuntimeException("Invalid GitHib Account");
-        }
+        String htmlString = establishConnectionForWebsite(userName);
 
         if (htmlString == null) {
             throw new RuntimeException("Data could not be obtained.");
@@ -246,5 +217,23 @@ public class GitHubUtil {
             }
             return Integer.parseInt(target.split("class=Counter>")[1]);
         }
+    }
+
+    /**
+     * Returns a {@code HashMap} object with the stats of the user including
+     * % of language contributions and number of repositories.
+     * @param userName The name of the user.
+     * @return stats on the user
+     * @throws RuntimeException If invalid username or the server did not respond well.
+     */
+    public static HashMap<String, Double> getUserStats(String userName) throws RuntimeException {
+        if (!Github.isValidGithub(userName)) {
+            throw new RuntimeException("Invalid GitHib Account");
+        }
+
+        ArrayList<String> repos = getRepoNames(userName);
+        HashMap<String, Double> stats = getLanguageStats(userName, repos);
+        stats.put("repo-count", (double) getRepoCount(userName));
+        return stats;
     }
 }
