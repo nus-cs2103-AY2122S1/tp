@@ -9,10 +9,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PARTICIPANT_DI
 import static seedu.address.logic.commands.RemoveParticipantFromEventCommand
         .MESSAGE_REMOVE_PARTICIPANT_FROM_EVENT_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
-import static seedu.address.testutil.TypicalParticipants.ALEX;
-import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +20,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.participant.ParticipantId;
 import seedu.address.testutil.DefaultModelStub;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ParticipantBuilder;
@@ -73,35 +69,32 @@ class RemoveParticipantFromEventCommandTest {
 
     @Test
     public void equals() {
-        ParticipantId alexId = ALEX.getParticipantId();
-        ParticipantId berniceId = BERNICE.getParticipantId();
-        EventName sampleEventName = SAMPLE_EVENT.getName();
-        RemoveParticipantFromEventCommandOld removeAlexFromSampleEvent =
-                new RemoveParticipantFromEventCommandOld(alexId, sampleEventName);
-        RemoveParticipantFromEventCommandOld removeALexFromAnotherEvent =
-                new RemoveParticipantFromEventCommandOld(alexId, ANOTHER_EVENT.getName());
-        RemoveParticipantFromEventCommandOld removeBerniceFromSampleEvent =
-                new RemoveParticipantFromEventCommandOld(berniceId, sampleEventName);
+        RemoveParticipantFromEventCommand removeFirstParticipantFirstEvent =
+                new RemoveParticipantFromEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        RemoveParticipantFromEventCommand removeSecondParticipantFirstEvent =
+                new RemoveParticipantFromEventCommand(Index.fromOneBased(2), Index.fromOneBased(1));
+        RemoveParticipantFromEventCommand removeFirstParticipantSecondEvent =
+                new RemoveParticipantFromEventCommand(Index.fromOneBased(1), Index.fromOneBased(2));
 
         // same object -> returns true
-        assertTrue(removeAlexFromSampleEvent.equals(removeAlexFromSampleEvent));
+        assertTrue(removeFirstParticipantFirstEvent.equals(removeFirstParticipantFirstEvent));
 
         // same values -> returns true
-        RemoveParticipantFromEventCommandOld removeAlexFromSampleEventCopy =
-                new RemoveParticipantFromEventCommandOld(alexId, sampleEventName);
-        assertTrue(removeAlexFromSampleEvent.equals(removeAlexFromSampleEventCopy));
+        RemoveParticipantFromEventCommand removeFirstParticipantFirstEventCopy =
+                new RemoveParticipantFromEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertTrue(removeFirstParticipantFirstEvent.equals(removeFirstParticipantFirstEventCopy));
 
         // different types -> returns false
-        assertFalse(removeAlexFromSampleEvent.equals(1));
+        assertFalse(removeFirstParticipantFirstEvent.equals(1));
 
         // null -> returns false
-        assertFalse(removeAlexFromSampleEvent.equals(null));
+        assertFalse(removeFirstParticipantFirstEvent.equals(null));
 
         // different participant -> returns false
-        assertFalse(removeAlexFromSampleEvent.equals(removeBerniceFromSampleEvent));
+        assertFalse(removeFirstParticipantFirstEvent.equals(removeSecondParticipantFirstEvent));
 
         // different event -> returns false
-        assertFalse(removeAlexFromSampleEvent.equals(removeALexFromAnotherEvent));
+        assertFalse(removeFirstParticipantFirstEvent.equals(removeFirstParticipantSecondEvent));
     }
 
     /**

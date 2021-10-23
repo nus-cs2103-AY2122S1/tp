@@ -8,10 +8,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYE
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.AddParticipantToEventCommand.MESSAGE_ADD_PARTICIPANT_TO_EVENT_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
 import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
-import static seedu.address.testutil.TypicalParticipants.ALEX;
-import static seedu.address.testutil.TypicalParticipants.BERNICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +20,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.participant.ParticipantId;
 import seedu.address.testutil.DefaultModelStub;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ParticipantBuilder;
@@ -87,35 +83,32 @@ class AddParticipantToEventCommandTest {
 
     @Test
     public void equals() {
-        ParticipantId alexId = ALEX.getParticipantId();
-        ParticipantId berniceId = BERNICE.getParticipantId();
-        EventName sampleEventName = SAMPLE_EVENT.getName();
-        AddParticipantToEventCommandOld addAlexToSampleEvent =
-                new AddParticipantToEventCommandOld(alexId, sampleEventName);
-        AddParticipantToEventCommandOld addAlexToAnotherEvent =
-                new AddParticipantToEventCommandOld(alexId, ANOTHER_EVENT.getName());
-        AddParticipantToEventCommandOld addBerniceToSampleEvent =
-                new AddParticipantToEventCommandOld(berniceId, sampleEventName);
+        AddParticipantToEventCommand addFirstParticipantFirstEvent =
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        AddParticipantToEventCommand addSecondParticipantFirstEvent =
+                new AddParticipantToEventCommand(Index.fromOneBased(2), Index.fromOneBased(1));
+        AddParticipantToEventCommand addFirstParticipantSecondEvent =
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(2));
 
         // same object -> returns true
-        assertTrue(addAlexToSampleEvent.equals(addAlexToSampleEvent));
+        assertTrue(addFirstParticipantFirstEvent.equals(addFirstParticipantFirstEvent));
 
         // same values -> returns true
-        AddParticipantToEventCommandOld addAlexToSampleEventCopy =
-                new AddParticipantToEventCommandOld(alexId, sampleEventName);
-        assertTrue(addAlexToSampleEvent.equals(addAlexToSampleEventCopy));
+        AddParticipantToEventCommand addFirstParticipantFirstEventCopy =
+                new AddParticipantToEventCommand(Index.fromOneBased(1), Index.fromOneBased(1));
+        assertTrue(addFirstParticipantFirstEvent.equals(addFirstParticipantFirstEventCopy));
 
         // different types -> returns false
-        assertFalse(addAlexToSampleEvent.equals(1));
+        assertFalse(addFirstParticipantFirstEvent.equals(1));
 
         // null -> returns false
-        assertFalse(addAlexToSampleEvent.equals(null));
+        assertFalse(addFirstParticipantFirstEvent.equals(null));
 
         // different participant -> returns false
-        assertFalse(addAlexToSampleEvent.equals(addBerniceToSampleEvent));
+        assertFalse(addFirstParticipantFirstEvent.equals(addSecondParticipantFirstEvent));
 
         // different event -> returns false
-        assertFalse(addAlexToSampleEvent.equals(addAlexToAnotherEvent));
+        assertFalse(addFirstParticipantFirstEvent.equals(addFirstParticipantSecondEvent));
     }
 
     /**
