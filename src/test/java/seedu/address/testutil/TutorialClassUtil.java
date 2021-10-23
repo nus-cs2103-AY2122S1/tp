@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.model.tutorialclass.TutorialClass;
 
-import static seedu.address.logic.parser.CliSyntax.*;
-
-public class TutorialCLassUtil {
+public class TutorialClassUtil {
 
     /**
      * Returns an add class command string for adding the {@code TutorialClass}.
@@ -19,7 +21,7 @@ public class TutorialCLassUtil {
         sb.append(PREFIX_CLASSCODE + tutorialClass.getClassCode().value + " ");
         sb.append(PREFIX_SCHEDULE + tutorialClass.getSchedule().value + " ");
         tutorialClass.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }

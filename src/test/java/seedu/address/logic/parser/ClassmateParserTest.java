@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddClassCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -35,7 +34,7 @@ import seedu.address.testutil.EditStudentDescriptorBuilder;
 import seedu.address.testutil.StudentBuilder;
 import seedu.address.testutil.StudentUtil;
 import seedu.address.testutil.TutorialClassBuilder;
-import seedu.address.testutil.TutorialCLassUtil;
+import seedu.address.testutil.TutorialClassUtil;
 
 public class ClassmateParserTest {
 
@@ -52,7 +51,8 @@ public class ClassmateParserTest {
     @Test
     public void parseCommand_addTutorialClass() throws Exception {
         TutorialClass tutorialClass = new TutorialClassBuilder().build();
-        AddClassCommand command = (AddClassCommand) parser.parseCommand(TutorialCLassUtil.getAddClassCommand(tutorialClass));
+        AddClassCommand command = (AddClassCommand) parser.parseCommand(
+                TutorialClassUtil.getAddClassCommand(tutorialClass));
         assertEquals(new AddClassCommand(tutorialClass), command);
 
     }
