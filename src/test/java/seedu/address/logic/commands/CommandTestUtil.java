@@ -74,10 +74,8 @@ public class CommandTestUtil {
     // Module lesson description
     public static final String LESSON_DAY_DESC_TUES = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_TUES;
     public static final String LESSON_DAY_DESC_WED = " " + PREFIX_LESSON_DAY + VALID_LESSON_DAY_WED;
-    public static final String LESSON_TIME_DESC_10_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_10
-            + " " + VALID_LESSON_TIME_11;
-    public static final String LESSON_TIME_DESC_11_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11
-            + " " + VALID_LESSON_TIME_12;
+    public static final String LESSON_TIME_DESC_11_12 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_11_12;
+    public static final String LESSON_TIME_DESC_12_13 = " " + PREFIX_LESSON_TIME + VALID_LESSON_TIME_12_13;
     public static final String REMARK_DESC_MODULES = " " + PREFIX_REMARK + VALID_MODULE_LESSON_REMARK;
     public static final String REMARK_DESC_ONLINE = " " + PREFIX_REMARK + VALID_REMARK_ONLINE;
     // Both
@@ -112,9 +110,9 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB)
                 .build();
         DESC_CS2040S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2040S_B05))
-                .withLessonDay(new LessonDay("2")).withLessonTime(new LessonTime("10:00")).build();
+                .withLessonDay(new LessonDay("2")).withLessonStartTime(new LessonTime("10:00")).build();
         DESC_CS2030S = new EditLessonDescriptorBuilder().withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
-                .withLessonDay(new LessonDay("5")).withLessonTime(new LessonTime("13:30")).build();
+                .withLessonDay(new LessonDay("5")).withLessonStartTime(new LessonTime("13:30")).build();
     }
 
     /**

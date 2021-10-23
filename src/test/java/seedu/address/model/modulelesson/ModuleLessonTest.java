@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalModuleLessons.CS2100_LAB1;
-import static seedu.address.testutil.TypicalModuleLessons.CS2100_TUT1;
 import static seedu.address.testutil.TypicalModuleLessons.CS2103_TUT1;
 import static seedu.address.testutil.TypicalModuleLessons.CS2106_TUT1;
 
@@ -50,8 +49,8 @@ public class ModuleLessonTest {
         assertEquals(CS2100_LAB1.toString(),
                 "Module: CS2100 B31; Day: Tuesday; Start time: 15:00; End time: 16:00; Remark: COM1 0113");
 
-        assertEquals(CS2100_TUT1.toString(),
-                "Module: CS2100 T18; Day: Wednesday; Start time: 17:00; End time: 19:00; "
+        assertEquals(CS2106_TUT1.toString(),
+                "Module: CS2106 T18; Day: Wednesday; Start time: 17:00; End time: 19:00; "
                 + "Remark: COM1 01-20");
     }
 
