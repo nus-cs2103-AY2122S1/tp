@@ -7,6 +7,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ShnPeriod;
 
 /**
  * A utility class to help with building EditPersonDescriptor objects.
@@ -74,11 +75,61 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code HomeAddress} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withHomeAddress(String homeAddress) {
         descriptor.setHomeAddress(new Address(homeAddress));
         return this;
+    }
+
+    /**
+     * Sets the {@code WorkAddress} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withWorkAddress(String workAddress) {
+        descriptor.setWorkAddress(new Address(workAddress));
+        return this;
+    }
+
+    /**
+     * Sets the {@code QuarantineAddress} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withQuarantineAddress(String quarantineAddress) {
+        descriptor.setQuarantineAddress(new Address(quarantineAddress));
+        return this;
+    }
+
+    /**
+     * Sets the {@code ShnPeriod} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withShnPeriod(String shnPeriod) {
+        descriptor.setShnPeriod(new ShnPeriod(shnPeriod));
+        return this;
+    }
+
+    /**
+     * Sets the {@code NextOfKinName} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNextOfKinName(String nextOfKinName) {
+        descriptor.setNextOfKinName(new Name(nextOfKinName));
+        return this;
+    }
+
+    /**
+     * Sets the {@code NextOfKinPhone} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNextOfKinPhone(String nextOfKinPhone) {
+        descriptor.setNextOfKinPhone(new Phone(nextOfKinPhone));
+        return this;
+    }
+
+    /**
+     * Sets the {@code NextOfKinAddress} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withNextOfKinAddress(String nextOfKinAddress) {
+        {
+            descriptor.setNextOfKinAddress(new Address(nextOfKinAddress));
+            return this;
+        }
     }
 
     public EditPersonDescriptor build() {

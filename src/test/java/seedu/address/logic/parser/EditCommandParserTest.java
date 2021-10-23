@@ -11,10 +11,21 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_CASE_NUMBER_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_HOME_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NEXT_OF_KIN_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUARANTINE_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHN_PERIOD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_WORK_ADDRESS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NEXT_OF_KIN_ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NEXT_OF_KIN_NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.NEXT_OF_KIN_PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.QUARANTINE_ADDRESS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SHN_PERIOD_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CASE_NUMBER_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CASE_NUMBER_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -22,8 +33,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOME_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOME_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_NAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NEXT_OF_KIN_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUARANTINE_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SHN_PERIOD_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WORK_ADDRESS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.WORK_ADDRESS_DESC_AMY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -40,6 +58,7 @@ import seedu.address.model.person.CaseNumber;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.ShnPeriod;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -83,8 +102,20 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
         // invalid case number
         assertParseFailure(parser, "1" + INVALID_CASE_NUMBER_DESC, CaseNumber.MESSAGE_CONSTRAINTS);
-        // invalid address
+        // invalid homeAddress
         assertParseFailure(parser, "1" + INVALID_HOME_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
+        // invalid workAddress
+        assertParseFailure(parser, "1" + INVALID_WORK_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
+        // invalid quarantineAddress
+        assertParseFailure(parser, "1" + INVALID_QUARANTINE_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
+        // invalid shnPeriod
+        assertParseFailure(parser, "1" + INVALID_SHN_PERIOD_DESC, ShnPeriod.MESSAGE_CONSTRAINTS);
+        // invalid nextOfKinName
+        assertParseFailure(parser, "1" + INVALID_NEXT_OF_KIN_NAME_DESC, Name.MESSAGE_CONSTRAINTS);
+        // invalid nextOfKinPhone
+        assertParseFailure(parser, "1" + INVALID_NEXT_OF_KIN_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS);
+        // invalid nextOfKinAddress
+        assertParseFailure(parser, "1" + INVALID_NEXT_OF_KIN_ADDRESS_DESC, Address.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -102,11 +133,16 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
         String userInput = targetIndex.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + CASE_NUMBER_DESC_AMY + HOME_ADDRESS_DESC_AMY;
+                + CASE_NUMBER_DESC_AMY + HOME_ADDRESS_DESC_AMY + WORK_ADDRESS_DESC_AMY + QUARANTINE_ADDRESS_DESC_AMY
+                + SHN_PERIOD_DESC_AMY + NEXT_OF_KIN_NAME_DESC_AMY + NEXT_OF_KIN_PHONE_DESC_AMY
+                + NEXT_OF_KIN_ADDRESS_DESC_AMY;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withCaseNumber(VALID_CASE_NUMBER_AMY)
-                .withHomeAddress(VALID_HOME_ADDRESS_AMY).build();
+                .withHomeAddress(VALID_HOME_ADDRESS_AMY).withWorkAddress(VALID_WORK_ADDRESS_AMY)
+                .withQuarantineAddress(VALID_QUARANTINE_ADDRESS_AMY).withShnPeriod(VALID_SHN_PERIOD_AMY)
+                .withNextOfKinName(VALID_NEXT_OF_KIN_NAME_AMY).withNextOfKinPhone(VALID_NEXT_OF_KIN_PHONE_AMY)
+                .withNextOfKinAddress(VALID_NEXT_OF_KIN_ADDRESS_AMY).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -151,9 +187,45 @@ public class EditCommandParserTest {
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // address
+        // homeAddress
         userInput = targetIndex.getOneBased() + HOME_ADDRESS_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withHomeAddress(VALID_HOME_ADDRESS_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // workAddress
+        userInput = targetIndex.getOneBased() + WORK_ADDRESS_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withWorkAddress(VALID_WORK_ADDRESS_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // quarantineAddress
+        userInput = targetIndex.getOneBased() + QUARANTINE_ADDRESS_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withQuarantineAddress(VALID_QUARANTINE_ADDRESS_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shnPeriod
+        userInput = targetIndex.getOneBased() + SHN_PERIOD_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withShnPeriod(VALID_SHN_PERIOD_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // nextOfKinName
+        userInput = targetIndex.getOneBased() + NEXT_OF_KIN_NAME_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withNextOfKinName(VALID_NEXT_OF_KIN_NAME_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // nextOfKinPhone
+        userInput = targetIndex.getOneBased() + NEXT_OF_KIN_PHONE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withNextOfKinPhone(VALID_NEXT_OF_KIN_PHONE_AMY).build();
+        expectedCommand = new EditCommand(targetIndex, descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // nextOfKinAddress
+        userInput = targetIndex.getOneBased() + NEXT_OF_KIN_ADDRESS_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withNextOfKinAddress(VALID_NEXT_OF_KIN_ADDRESS_AMY).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
