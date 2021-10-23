@@ -19,7 +19,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.ClashingLessonException;
 import seedu.address.model.person.exceptions.LessonNotFoundException;
-import seedu.address.model.tag.Tag;
 
 /**
  * A list of calendar entries of lessons that enforces no overlapping time ranges between its lessons,
@@ -30,7 +29,7 @@ import seedu.address.model.tag.Tag;
  * However, the removal of a lesson uses Person#equals(Object) to ensure that the person with exactly the same fields
  * will be removed.
  *
- * @author Chesterwongz
+ * @author Chesterwongz, with addons from Xiaoyunnn.
  *
  * @see Lesson#isClashing(Lesson)
  */
@@ -39,6 +38,7 @@ public class CalendarEntryList {
 
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
+    private final ObservableList<Entry<Lesson>> upcomingLessons = FXCollections.observableArrayList();
 
     public Calendar getCalendar() {
         return calendar;
@@ -47,16 +47,23 @@ public class CalendarEntryList {
     private void add(Entry<Lesson> calendarEntry) {
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
+        if (isUpcoming(calendarEntry.getEndAsLocalDateTime())) {
+            upcomingLessons.add(calendarEntry);
+            sortUpcomingLessons();
+        }
     }
 
     private void remove(Entry<Lesson> calendarEntry) {
         calendar.removeEntry(calendarEntry);
         entryList.remove(calendarEntry);
+        upcomingLessons.remove(calendarEntry);
+        sortUpcomingLessons();
     }
 
     private void clear() {
         calendar.clear();
         entryList.clear();
+        upcomingLessons.clear();
     }
 
     /**
@@ -185,23 +192,34 @@ public class CalendarEntryList {
 
     /**
      * Returns an unmodifiable view of upcoming lessons within two days from current time.
+     * Lessons are sorted from the earliest date to the latest date.
      *
      * @return Unmodifiable observable list of upcoming lessons within two days.
      */
     public ObservableList<Entry<Lesson>> getUpcomingLessons() {
-        ObservableList<Entry<Lesson>> upcomingLessons = FXCollections.observableArrayList();
+        sortUpcomingLessons();
+        return FXCollections.unmodifiableObservableList(upcomingLessons);
+    }
 
-        for (Entry<Lesson> lessonEntry : entryList) {
-            long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), lessonEntry.getEndAsLocalDateTime());
-            if (timeDiff > 0 && timeDiff < TWO_DAY_DIFF) {
-                upcomingLessons.add(lessonEntry);
-            }
-        }
+    /**
+     * Returns true if the given date and time is within two days of current date time.
+     *
+     * @param endTime Date and time to be checked.
+     * @return True if the given date and time is within two days of current date time.
+     */
+    private boolean isUpcoming(LocalDateTime endTime) {
+        long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), endTime);
+        return timeDiff > 0 && timeDiff < TWO_DAY_DIFF;
+    }
+
+    /**
+     * Sorts the upcoming lessons from nearest to furthest date.
+     */
+    private void sortUpcomingLessons() {
         List<Entry<Lesson>> sortedList = upcomingLessons.stream()
                 .sorted(Comparator.comparing(Entry::getEndAsLocalDateTime))
                 .collect(Collectors.toList());
         upcomingLessons.setAll(sortedList);
-        return FXCollections.unmodifiableObservableList(upcomingLessons);
     }
 
     /**
