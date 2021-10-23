@@ -41,11 +41,15 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE);
         }
 
-        if (argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonEditCommand.MESSAGE_USAGE));
+        Index[] indices;
+
+        try {
+            indices = ParserUtil.parseIndices(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    LessonEditCommand.MESSAGE_USAGE), pe);
         }
 
-        Index[] indices = ParserUtil.parseIndices(argMultimap.getPreamble());
         assert indices.length == 2;
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
