@@ -22,7 +22,6 @@ public class GraphDisplay extends UiPart<Region> {
     }
 
     public void setChart(Chart chart) {
-        clearCharts();
         placeHolder.getChildren().add(chart);
     }
 
