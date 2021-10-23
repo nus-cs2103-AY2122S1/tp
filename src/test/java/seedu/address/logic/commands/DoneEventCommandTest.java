@@ -31,7 +31,7 @@ class DoneEventCommandTest {
                 .get(INDEX_SECOND_EVENT.getZeroBased());
         DoneEventCommand doneCommand = new DoneEventCommand(INDEX_SECOND_EVENT);
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.markEventAsDone(INDEX_SECOND_EVENT.getZeroBased());
+        expectedModel.markEventAsDone(eventToMarkAsDone);
 
         String expectedMessage = String.format(DoneEventCommand.MESSAGE_DONE_EVENT_SUCCESS,
                 eventToMarkAsDone);

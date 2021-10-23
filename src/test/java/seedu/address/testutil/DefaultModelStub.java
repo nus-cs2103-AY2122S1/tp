@@ -109,7 +109,7 @@ public class DefaultModelStub implements Model {
     }
 
     @Override
-    public String markEventAsDone(int index) {
+    public void markEventAsDone(Event target) {
         throw new AssertionError("This method should not be called.");
     }
 

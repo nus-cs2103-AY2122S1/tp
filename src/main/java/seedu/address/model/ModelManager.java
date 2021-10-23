@@ -207,10 +207,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public String markEventAsDone(int index) {
-        Event eventToMarkDone = this.filteredEvents.get(index);
-        eventToMarkDone.markAsDone();
-        return eventToMarkDone.toString();
+    public void markEventAsDone(Event target) {
+        target.markAsDone();
     }
 
     @Override

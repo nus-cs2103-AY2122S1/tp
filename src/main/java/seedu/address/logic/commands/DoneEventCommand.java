@@ -15,7 +15,7 @@ import seedu.address.model.event.Event;
  */
 public class DoneEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "doneEvent";
+    public static final String COMMAND_WORD = "done";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the event identified by the "
             + "index number used in the displayed event list as done.\n"
@@ -44,8 +44,10 @@ public class DoneEventCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        String eventToString = model.markEventAsDone(targetIndex.getZeroBased());
-        return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, eventToString));
+        Event eventToMarkDone = lastShownList.get(targetIndex.getZeroBased());
+
+        model.markEventAsDone(eventToMarkDone);
+        return new CommandResult(String.format(MESSAGE_DONE_EVENT_SUCCESS, eventToMarkDone));
     }
 
     @Override
