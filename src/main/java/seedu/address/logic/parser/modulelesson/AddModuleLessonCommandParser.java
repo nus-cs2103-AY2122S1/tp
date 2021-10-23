@@ -27,10 +27,10 @@ import seedu.address.model.person.Remark;
  */
 public class AddModuleLessonCommandParser implements Parser<AddModuleLessonCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddModuleLessonCommand
-     * and returns an AddModuleLessonCommand object for execution.
+     * Parses the given {@code String args} of arguments in the context of the {@code AddModuleLessonCommand}
+     * and returns an {@code AddModuleLessonCommand} object for execution.
      *
-     * @throws ParseException if {@code String} does not conform the expected format
+     * @throws ParseException if {@code String args} does not conform the expected format
      */
     @Override
     public AddModuleLessonCommand parse(String args) throws ParseException {

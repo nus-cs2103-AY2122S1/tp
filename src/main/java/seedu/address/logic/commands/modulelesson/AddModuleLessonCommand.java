@@ -13,11 +13,11 @@ import seedu.address.model.Model;
 import seedu.address.model.modulelesson.ModuleLesson;
 
 /**
- * Adds a module lesson to the address book.
+ * Adds a module lesson to contHACKS.
  */
 public class AddModuleLessonCommand extends Command {
 
-    public static final String MESSAGE_USAGE = "addc: Adds a lesson to the address book. "
+    public static final String MESSAGE_USAGE = "addc: Adds a lesson to contHACKS. "
             + "Parameters: "
             + PREFIX_MODULE_CODE + "MODULE_CODE LESSON_CODE "
             + PREFIX_LESSON_DAY + "LESSON_DAY "
@@ -30,7 +30,7 @@ public class AddModuleLessonCommand extends Command {
             + PREFIX_REMARK + "Midterms on 1 Oct\n";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in contHACKS";
 
     private final ModuleLesson toAdd;
 

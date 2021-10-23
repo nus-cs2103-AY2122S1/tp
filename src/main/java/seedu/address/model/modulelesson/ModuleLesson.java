@@ -29,7 +29,7 @@ public class ModuleLesson {
         requireAllNonNull(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
         assert lessonStartTime.value.isBefore(lessonEndTime.value) : "Start time should be before end time";
         assert moduleCode.getLessonCodes().size() == 1
-                : "ModuleCode in ModuleLesson should contain exactly 1 LessonCode";
+                : "Each ModuleCode should contain exactly 1 LessonCode";;
         this.moduleCode = moduleCode;
         this.lessonDay = lessonDay;
         this.lessonStartTime = lessonStartTime;

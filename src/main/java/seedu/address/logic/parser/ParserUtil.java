@@ -30,8 +30,9 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_LESSON_DURATION =
-            "Provide both start time and end time. Start time <= end time.";
-    public static final String MESSAGE_INVALID_MODULE_INFO = "Either the module code or lesson code is not provided.";
+            "Missing compulsory start time or end time. The start time should be before end time.";
+    public static final String MESSAGE_INVALID_MODULE_INFO =
+            "Missing either the module code or the lesson code. Both are compulsory.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -210,7 +211,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String lessonDay} into a {@code LessonDau}.
+     * Parses a {@code String lessonDay} into a {@code LessonDay}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code lessonDay} is invalid.
@@ -228,7 +229,7 @@ public class ParserUtil {
      * Parses a {@code String lessonTime} into a {@code List<LessonTime>}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {Wcode lessonTime} is invalid.
+     * @throws ParseException if the given {code lessonTime} is invalid.
      */
     public static List<LessonTime> parseLessonTime(String lessonTime) throws ParseException {
         requireNonNull(lessonTime);
