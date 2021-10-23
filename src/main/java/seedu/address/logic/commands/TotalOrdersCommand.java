@@ -17,6 +17,6 @@ public class TotalOrdersCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_TOTAL_ORDERS_MESSAGE, true, false, false);
+        return new CommandResult(SHOWING_TOTAL_ORDERS_MESSAGE, CommandResult.DisplayState.ORDER, true, false, false);
     }
 }

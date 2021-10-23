@@ -41,7 +41,8 @@ public class MarkOrderCommand extends Command {
 
         Order orderToMark = lastShownList.get(targetIndex.getZeroBased());
         model.markOrder(orderToMark);
-        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, orderToMark));
+        return new CommandResult(String.format(MESSAGE_MARK_ORDER_SUCCESS, orderToMark),
+                CommandResult.DisplayState.ORDER);
     }
 
     @Override

@@ -39,7 +39,7 @@ public class AddOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.addOrder(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.ORDER);
     }
 
     @Override

@@ -8,8 +8,13 @@ import java.util.Objects;
  * Represents the result of a command execution.
  */
 public class CommandResult {
+    public enum DisplayState {
+        CLIENT, TASK, ORDER
+    }
 
     private final String feedbackToUser;
+
+    private final DisplayState displayState;
 
     /** Total orders should be shown to the user. */
     private final boolean totalOrders;
@@ -23,8 +28,10 @@ public class CommandResult {
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean totalOrders, boolean showHelp, boolean exit) {
+    public CommandResult(String feedbackToUser, DisplayState displayState, boolean totalOrders,
+                         boolean showHelp, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.displayState = requireNonNull(displayState);
         this.totalOrders = totalOrders;
         this.showHelp = showHelp;
         this.exit = exit;
@@ -34,12 +41,16 @@ public class CommandResult {
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */
-    public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+    public CommandResult(String feedbackToUser, DisplayState displayState) {
+        this(feedbackToUser, displayState, false, false, false);
     }
 
     public String getFeedbackToUser() {
         return feedbackToUser;
+    }
+
+    public DisplayState getState() {
+        return displayState;
     }
 
     public boolean isShowTotalOrders() {

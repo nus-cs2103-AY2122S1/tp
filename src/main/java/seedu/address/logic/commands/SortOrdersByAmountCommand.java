@@ -26,7 +26,7 @@ public class SortOrdersByAmountCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortOrderList(COMPARATOR);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayState.ORDER);
     }
 
     @Override

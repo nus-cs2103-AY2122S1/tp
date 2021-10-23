@@ -22,7 +22,7 @@ public class ShowCompletedTasks extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredTaskList(PREDICATE_SHOW_COMPLETED_TASKS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayState.TASK);
     }
 
 }
