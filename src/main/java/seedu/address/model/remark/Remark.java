@@ -1,8 +1,6 @@
 package seedu.address.model.remark;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 /**
  * Represents a Remark in the address book.
  */

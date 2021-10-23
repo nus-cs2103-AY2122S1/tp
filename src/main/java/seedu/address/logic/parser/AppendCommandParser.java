@@ -2,7 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +36,8 @@ public class AppendCommandParser implements Parser<AppendCommand> {
     public AppendCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
+                ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_LANGUAGE,
+                        PREFIX_FRAMEWORK, PREFIX_TAG, PREFIX_REMARKS);
 
         Index index;
 
