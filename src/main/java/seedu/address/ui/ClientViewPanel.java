@@ -61,12 +61,7 @@ public class ClientViewPanel extends UiPart<Region> {
     public ClientViewPanel(ObservableList<Client> clientToView) {
         super(FXML);
 
-        clientToView.addListener(new ListChangeListener<Client>() {
-            @Override
-            public void onChanged(Change<? extends Client> c) {
-                updateView(clientToView);
-            }
-        });
+        clientToView.addListener((ListChangeListener<Client>) c -> updateView(clientToView));
     }
 
     /**
@@ -85,6 +80,17 @@ public class ClientViewPanel extends UiPart<Region> {
             nextMeeting.setText(client.getNextMeeting().toString());
             clientEmail.setText(client.getEmail().toString());
             clientPhoneNumber.setText(client.getPhone().toString());
+        } else {
+            clientName.setText(null);
+            clientId.setText(null);
+            clientCreatedAt.setText(null);
+            clientLastMet.setText(null);
+            clientRiskAppetite.setText(null);
+            clientCurrentPlans.setText(null);
+            clientDisposableIncome.setText(null);
+            nextMeeting.setText(null);
+            clientEmail.setText(null);
+            clientPhoneNumber.setText(null);
         }
     }
 }

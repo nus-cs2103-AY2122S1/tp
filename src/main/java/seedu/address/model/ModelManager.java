@@ -130,6 +130,7 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         this.addressBook.resetData(addressBook);
+        this.clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
 
     @Override
@@ -253,8 +254,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean isClientExistToView() {
-        return clientToView.size() == 1;
+    public boolean isClientExistToView(ClientId clientId) {
+        return this.addressBook.hasClientId(clientId);
     }
 
     @Override

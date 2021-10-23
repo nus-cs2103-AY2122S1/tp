@@ -227,7 +227,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean isClientExistToView() {
+        public boolean isClientExistToView(ClientId clientId) {
             throw new AssertionError("This method should not be called.");
         }
 

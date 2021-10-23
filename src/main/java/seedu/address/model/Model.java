@@ -210,9 +210,10 @@ public interface Model {
     ObservableList<Client> getClientToView();
 
     /**
-     * Checks and returns if there is client to view
+     * Checks and returns if there is client with {@code clientId} to view
+     * @param clientId
      */
-    boolean isClientExistToView();
+    boolean isClientExistToView(ClientId clientId);
 
     /**
      * Returns the name of the client to view
