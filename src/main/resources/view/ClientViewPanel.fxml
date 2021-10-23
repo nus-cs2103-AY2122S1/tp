@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="280.0" prefWidth="280.0" style="-fx-border-color: silver;" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="280.0" prefWidth="280.0" style="-fx-border-color: silver; -fx-border-radius: 10;" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox fx:id="clientInfoContainer" prefHeight="240.0" prefWidth="393.0" VBox.vgrow="ALWAYS">
          <children>
@@ -112,7 +112,7 @@
             <HBox prefHeight="20.0" prefWidth="363.0">
                <children>
                   <Label minHeight="-Infinity" minWidth="-Infinity" styleClass="label-view" text="Next Meeting:" />
-                  <Label minHeight="-Infinity" fx:id="nextMeeting" styleClass="label-view" wrapText="true">
+                  <Label fx:id="nextMeeting" minHeight="-Infinity" styleClass="label-view" wrapText="true">
                      <HBox.margin>
                         <Insets left="4.0" />
                      </HBox.margin>
@@ -167,6 +167,6 @@
       </VBox>
    </children>
    <padding>
-      <Insets bottom="4.0" right="8.0" top="4.0" />
+      <Insets bottom="4.0" right="4.0" top="4.0" />
    </padding>
 </VBox>
