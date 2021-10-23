@@ -306,8 +306,8 @@ Format: `findStudent KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find Joh@` returns `john` and `John Doe`
-* `find alex! davi` returns `Alex Yeoh`, `David Li`<br>
+* `findStudent Joh@` returns `john` and `John Doe`
+* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a task: `deleteTask INDEX`
@@ -342,6 +342,25 @@ Format: `doneTask INDEX`
 
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed.
+
+### Locating group by name: `findGroup`
+
+Find groups whose names contain any of the given keywords.
+
+Format: `findGroup KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `w14-4` will match `W14-4`
+* The order of the keywords does not matter. e.g. `w14 w15` will match `w15 w14`
+* Only the group name is searched.
+* Most special characters will be ignored e.g. `w14!` will match `w14` except dashes: `-`
+* Partial group names will be matched e.g. `w14` will match `w14-4`
+* Groups matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `w14 w15` will return `w14-4`, `w14-3`, `w15-1`
+
+Examples:
+* `findGroup w14` returns `W14-3` and `W14-4`
+* `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Clearing all entries from student list : `clearStudents`
 
