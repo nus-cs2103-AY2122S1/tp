@@ -262,8 +262,8 @@ When the `FindCommand#execute()` method is called,
     - Pros:
         - Greater flexibility for the user and more intuitive for the user.
     - Cons:
-        - Difficult for the application to differentiate between keywords and words for specifying a certain component.  
-        - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).  
+        - Difficult for the application to differentiate between keywords and words for specifying a certain component.
+        - Might be error prone (such as when the user wants to search the entire module with the keyword `title` but the program interprets it as searching inside the module title).
         - Is inconsistent with the format of other commands.
 
 ### Clear modules feature
@@ -296,7 +296,7 @@ When the `ClearCommand#execute()` method is called,
     - Pros:
       - Allow users to delete multiple modules conveniently.
       - User can replan the specific semester using clear command.
-    - Cons: 
+    - Cons:
       - User need to add all the modules again, if they want to use it later
 - **Alternative 3:** When a clear command is called, all modules in the module tracker list will be deleted.
     - Pros:
@@ -305,7 +305,6 @@ When the `ClearCommand#execute()` method is called,
       - All modules stored in the storage in advance will be deleted as well
       - User need to add all the modules again, once the clear command is called
       - It will be expensive, if the user accidentally use clear command
-    
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -429,7 +428,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                                         | see usage instructions                                  | refer to instructions when I forget how to use the App                 |
 | `* * *`  | CS student                                                   | view the compulsory core modules for my major           | keep track of the required module courses
 | `* * *`  | CS student                                                   | mark the module as done/selected for current sem        | 
-| `* * *`  | CS student                                                   | view the modules I'm currently taking                   | 
+| `* * *`  | CS student                                                   | view the modules I'm currently taking                   |
 | `* * *`  | CS student                                                   | delete modules                                          | remove module entries that I no longer need
 | `* * *`  | CS student                                                   | edit the module details                                 | modify information for any module entry
 | `* * *`  | CS student                                                   | add new modules                                         | keep track of my modules(such as GE/UE/Focus Area)
@@ -496,7 +495,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 * 5a. The module code given is invalid 
     * 5a1. Mod tracker shows an error message.
-
+      
       Use case ends.
 
 *{More to be added}*
