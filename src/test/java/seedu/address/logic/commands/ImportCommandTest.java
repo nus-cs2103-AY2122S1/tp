@@ -33,6 +33,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
                 Path.of(VALID_TYPICAL_PERSONS_CSV_PATH));
+        command.setPath(Path.of(VALID_TYPICAL_PERSONS_CSV_PATH));
 
         Model actualModel = new ModelManager();
         Model expectedModel = new ModelManager();
@@ -48,6 +49,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
                 Path.of(VALID_WRONG_CSV_PATH));
+        command.setPath(Path.of(VALID_WRONG_CSV_PATH));
 
         assertCommandFailure(command, new ModelManager(), ImportCommand.MESSAGE_OUT_OF_BOUNDS);
     }
@@ -59,6 +61,7 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
                 Path.of(VALID_NON_EXISTENT_PATH));
+        command.setPath(Path.of(VALID_NON_EXISTENT_PATH));
 
         assertCommandFailure(command, new ModelManager(), ImportCommand.MESSAGE_INVALID_FILE);
     }
@@ -70,47 +73,22 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
                 Path.of(String.format(PATH_FORMAT, "wrongAssessmentName")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "wrongAssessmentName")));
         assertCommandFailure(command, new ModelManager(), Assessment.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "wrongId")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "wrongId")));
         assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "wrongName")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "wrongName")));
         assertCommandFailure(command, new ModelManager(), Name.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "wrongGroup")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "wrongGroup")));
         assertCommandFailure(command, new ModelManager(), Group.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "wrongScore")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "wrongScore")));
         assertCommandFailure(command, new ModelManager(), Score.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "wrongTag")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "wrongTag")));
         assertCommandFailure(command, new ModelManager(), Tag.MESSAGE_CONSTRAINTS);
     }
 
@@ -121,23 +99,13 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
                 Path.of(String.format(PATH_FORMAT, "missingAssessmentName")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "missingAssessmentName")));
         assertCommandFailure(command, new ModelManager(), Assessment.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "missingId")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "missingId")));
         assertCommandFailure(command, new ModelManager(), ID.MESSAGE_CONSTRAINTS);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "missingName")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "missingName")));
         assertCommandFailure(command, new ModelManager(), Name.MESSAGE_CONSTRAINTS);
     }
 
@@ -148,15 +116,10 @@ public class ImportCommandTest {
                 VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
                 VALID_TYPICAL_PERSONS_TAG_COUNT,
                 Path.of(String.format(PATH_FORMAT, "duplicateAssessmentName")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "duplicateAssessmentName")));
         assertCommandFailure(command, new ModelManager(), ImportCommand.MESSAGE_DUPLICATE_ASSESSMENT);
 
-        command = new ImportCommand(
-                VALID_TYPICAL_PERSONS_GROUP_COUNT,
-                VALID_TYPICAL_PERSONS_ASSESSMENT_COUNT,
-                VALID_TYPICAL_PERSONS_TAG_COUNT,
-                Path.of(String.format(PATH_FORMAT, "duplicateId")));
-
+        command.setPath(Path.of(String.format(PATH_FORMAT, "duplicateId")));
         assertCommandFailure(command, new ModelManager(), ImportCommand.MESSAGE_DUPLICATE_ID);
     }
 }

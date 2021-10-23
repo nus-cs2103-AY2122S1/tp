@@ -53,7 +53,8 @@ public class ImportCommand extends Command {
     private final int groupCount;
     private final int assessmentCount;
     private final int tagCount;
-    private final Path file;
+    private final Path enclosingFolder;
+    private Path file;
 
     /**
      * Creates an ImportCommand to import data from the given {@code file}
@@ -62,7 +63,8 @@ public class ImportCommand extends Command {
         this.groupCount = groupCount;
         this.assessmentCount = assessmentCount;
         this.tagCount = tagCount;
-        this.file = file;
+        this.enclosingFolder = FileUtil.getAppEnclosingFolder();
+        this.file = generateNewPath(file);
     }
 
     @Override
@@ -195,6 +197,10 @@ public class ImportCommand extends Command {
         return new Tag(tagName);
     }
 
+    private Path generateNewPath(Path path) {
+        return enclosingFolder == null ? path : enclosingFolder.resolve(path);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this
@@ -203,6 +209,13 @@ public class ImportCommand extends Command {
                 && this.groupCount == ((ImportCommand) other).groupCount
                 && this.assessmentCount == ((ImportCommand) other).assessmentCount
                 && this.tagCount == ((ImportCommand) other).tagCount);
+    }
+
+    /**
+     * For testing to not affect any existing save data and not use the enclosing folder.
+     */
+    void setPath(Path path) {
+        this.file = path;
     }
 }
 
