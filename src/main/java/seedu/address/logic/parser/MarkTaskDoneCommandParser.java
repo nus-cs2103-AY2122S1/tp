@@ -5,13 +5,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkTaskDoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-public class MarkTaskDoneCommandParser {
+public class MarkTaskDoneCommandParser implements Parser<MarkTaskDoneCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
