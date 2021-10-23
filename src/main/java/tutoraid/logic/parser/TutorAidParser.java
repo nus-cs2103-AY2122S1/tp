@@ -10,6 +10,7 @@ import tutoraid.logic.commands.Command;
 import tutoraid.logic.commands.DeleteCommand;
 import tutoraid.logic.commands.EditStudentCommand;
 import tutoraid.logic.commands.ExitCommand;
+import tutoraid.logic.commands.FindCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.commands.ListCommand;
 import tutoraid.logic.commands.PaidCommand;
@@ -80,6 +81,8 @@ public class TutorAidParser {
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
 
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
         default:
             throw new ParseException(Messages.MESSAGE_UNKNOWN_COMMAND);
         }
