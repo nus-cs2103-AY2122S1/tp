@@ -16,14 +16,8 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Student> PREDICATE_SHOW_ALL_STUDENTS = unused -> true;
 
-    /** {@code Predicate} that always evaluate to false */
-    Predicate<Student> PREDICATE_SHOW_NO_STUDENTS = unused -> false;
-
     /** {@code Predicate} that always evaluate to true */
     Predicate<TutorialClass> PREDICATE_SHOW_ALL_CLASSES = unused -> true;
-
-    /** {@code Predicate} that always evaluate to false */
-    Predicate<TutorialClass> PREDICATE_SHOW_NO_CLASSES = unused -> false;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
