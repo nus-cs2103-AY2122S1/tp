@@ -8,6 +8,9 @@ import static java.util.Objects.requireNonNull;
  *  Guarantees: immutable; is always valid
  */
 public class Remark {
+    public static final int MAX_LENGTH_REMARK = 75;
+    public static final String MESSAGE_CONSTRAINTS = "Remarks have a character limit of 75 characters.";
+
     public final String value;
 
     /**
@@ -18,6 +21,11 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         this.value = remark;
+    }
+
+
+    public static boolean isValidRemark(String test) {
+        return test.length() <= MAX_LENGTH_REMARK;
     }
 
     @Override
