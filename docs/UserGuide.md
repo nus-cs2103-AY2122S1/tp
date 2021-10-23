@@ -15,6 +15,7 @@ title: User Guide
   - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
   - [Marking one visit as done](#marking-one-visit-as-done--done)
   - [Viewing help](#viewing-help--help)
+  - [Downloading data](#downloading-data--download)  
   - [Clearing all entries](#clearing-all-entries--clear)
   - [Exiting the app](#exiting-the-program--exit)
 - [FAQ](#faq)
@@ -218,6 +219,12 @@ Show a message linking users to the user guide.
 ![help message](images/helpMessage.png)
 
 Format: `help`
+
+### Downloading data : `download`
+
+Downloads elderly data onto user's computer.
+
+Format: `download`
 
 
 ### Clearing all entries : `clear`

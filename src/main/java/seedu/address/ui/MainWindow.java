@@ -263,9 +263,9 @@ public class MainWindow extends UiPart<Stage> {
     private JSONArray getData() throws IOException, JSONException {
         String dataFile = "data/addressbook.json";
         InputStream inputStream = new FileInputStream(dataFile);
-        String jsonTxt = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
-        JSONObject json = new JSONObject(jsonTxt);
-        return json.getJSONArray("persons");
+        String text = IOUtils.toString(inputStream, StandardCharsets.UTF_8);
+        JSONObject obj = new JSONObject(text);
+        return obj.getJSONArray("persons");
     }
 
     /**
@@ -277,8 +277,8 @@ public class MainWindow extends UiPart<Stage> {
      * @throws JSONException JSON error
      */
     private void writeToCsv(JSONArray data, File dest) throws JSONException, IOException {
-        String csv = CDL.toString(data);
-        FileUtils.writeStringToFile(dest, csv, Charset.defaultCharset());
+        String csvData = CDL.toString(data);
+        FileUtils.writeStringToFile(dest, csvData, Charset.defaultCharset());
     }
 
     /**
