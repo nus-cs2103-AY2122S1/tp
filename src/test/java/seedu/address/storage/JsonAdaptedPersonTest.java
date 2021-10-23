@@ -41,6 +41,7 @@ public class JsonAdaptedPersonTest {
             .collect(Collectors.toList());
     private static final String VALID_NOTE = BENSON.getNote().toString();
     private static final String VALID_MEETING = BENSON.getAppointment().toString();
+    private static final String VALID_BRAND = "NTUC";
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
@@ -128,7 +129,7 @@ public class JsonAdaptedPersonTest {
     @Test
     public void toModelType_invalidInsurances_throwsIllegalValueException() {
         List<JsonAdaptedInsurance> invalidInsurances = new ArrayList<>(VALID_INSURANCES);
-        invalidInsurances.add(new JsonAdaptedInsurance(INVALID_INSURANCE));
+        invalidInsurances.add(new JsonAdaptedInsurance(INVALID_INSURANCE, VALID_BRAND));
         JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_REVENUE,
                 VALID_ADDRESS, VALID_TAGS, invalidInsurances, VALID_NOTE, VALID_MEETING, VALID_CLAIMS);
         assertThrows(IllegalValueException.class, person::toModelType);
