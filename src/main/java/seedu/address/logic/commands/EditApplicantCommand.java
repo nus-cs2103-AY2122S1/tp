@@ -39,6 +39,7 @@ public class EditApplicantCommand extends Command {
     public static final String MESSAGE_EDIT_APPLICANT_SUCCESS = "Edited Applicant: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_APPLICANT = "This applicant already exists in the applicant book.";
+    public static final String MESSAGE_NO_SUCH_POSITION = "There is no such position in MrTechRecruiter";
 
     private final Index index;
     private final EditApplicantDescriptor editApplicantDescriptor;
@@ -64,8 +65,15 @@ public class EditApplicantCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_APPLICANT_DISPLAYED_INDEX);
         }
 
+        if (editApplicantDescriptor.getTitle().isPresent()
+                && !model.hasPositionWithTitle(editApplicantDescriptor.getTitle().get())) {
+            throw new CommandException(MESSAGE_NO_SUCH_POSITION);
+        }
+
         Applicant applicantToEdit = lastShownList.get(index.getZeroBased());
         Applicant editedApplicant = editApplicantDescriptor.createEditedApplicant(applicantToEdit, model);
+
+
 
         if (!applicantToEdit.isSameApplicant(editedApplicant) && model.hasApplicant(editedApplicant)) {
             throw new CommandException(MESSAGE_DUPLICATE_APPLICANT);

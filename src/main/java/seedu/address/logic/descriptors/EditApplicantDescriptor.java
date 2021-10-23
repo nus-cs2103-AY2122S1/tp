@@ -40,6 +40,7 @@ public class EditApplicantDescriptor {
         setEmail(toCopy.email);
         setAddress(toCopy.address);
         setApplication(toCopy.application);
+        setTitle(toCopy.title);
     }
 
     /**
