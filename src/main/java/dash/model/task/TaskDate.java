@@ -58,6 +58,26 @@ public class TaskDate {
     }
 
     /**
+     * Constructs a {@code TaskDate} specialised for editing a taskDate.
+     *
+     * @param taskDate A valid taskDate.
+     */
+    public TaskDate(String taskDate, boolean isForEditing) {
+        requireNonNull(taskDate);
+        checkArgument(isValidArgument(taskDate), MESSAGE_CONSTRAINTS);
+
+        if (detectedDateFormat != null) {
+            DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(detectedDateFormat);
+            this.date = Optional.of(LocalDate.parse(taskDateString, dateFormat));
+        }
+
+        if (detectedTimeFormat != null) {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern(detectedTimeFormat);
+            this.time = Optional.of(LocalTime.parse(taskTimeString, timeFormat));
+        }
+    }
+
+    /**
      * Constructs a {@code TaskDate} of empty Date and Time.
      */
     public TaskDate() {
@@ -211,7 +231,6 @@ public class TaskDate {
     }
 
     /**
-     *
      * @return String of Time in given format, empty string if no time is present.
      */
     public String toTimeString() {
@@ -246,9 +265,11 @@ public class TaskDate {
 
     @Override
     public String toString() {
-
-        if (hasTime()) {
+        if (hasTime() && hasDate()) {
             return String.format("%s, %s", toDateString(), toTimeString());
+        }
+        if (hasTime()) {
+            return String.format("%s", toTimeString());
         }
         if (hasDate()) {
             return String.format("%s", toDateString());
