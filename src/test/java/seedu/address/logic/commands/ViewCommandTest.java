@@ -32,7 +32,8 @@ class ViewCommandTest {
     public void execute_validIndexUnfilteredList_success() {
         assertCommandSuccess(prepareViewCommand(INDEX_FIRST_PERSON), model,
                 String.format(ViewCommand.MESSAGE_SUCCESS,
-                        expectedModel.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased())),
+                        expectedModel.getFilteredPersonList()
+                                .get(INDEX_FIRST_PERSON.getZeroBased()).getName()),
                 expectedModel);
     }
 

@@ -51,7 +51,6 @@ public class ViewCommand extends Command {
         Person studentToView = lastShownList.get(index.getZeroBased());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                model.getFilteredPersonList().get(index.getZeroBased())),
-                studentToView);
+                studentToView.getName()), studentToView);
     }
 }
