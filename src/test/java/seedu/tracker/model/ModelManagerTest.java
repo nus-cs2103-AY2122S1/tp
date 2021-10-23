@@ -30,7 +30,7 @@ public class ModelManagerTest {
         assertEquals(new GuiSettings(), modelManager.getGuiSettings());
         assertEquals(new UserInfo(), modelManager.getUserInfo());
         assertEquals(new AcademicCalendar(new AcademicYear(1), new Semester(1)), modelManager.getCurrentSemester());
-        assertEquals(new Mc(120), modelManager.getMcGoal());
+        assertEquals(new Mc(160), modelManager.getMcGoal());
         assertEquals(new ModuleTracker(), new ModuleTracker(modelManager.getModuleTracker()));
     }
 

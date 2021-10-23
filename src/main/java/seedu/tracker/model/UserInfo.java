@@ -14,7 +14,7 @@ import seedu.tracker.model.module.Mc;
  * Represents User's information.
  */
 public class UserInfo implements ReadOnlyUserInfo {
-    private AcademicCalendar currentSemester = new AcademicCalendar(new AcademicYear(1), new Semester(2));
+    private AcademicCalendar currentSemester = new AcademicCalendar(new AcademicYear(1), new Semester(1));
     private Mc mcGoal = new Mc(160);
 
     /**
