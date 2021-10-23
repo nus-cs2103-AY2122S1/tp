@@ -19,6 +19,7 @@ import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindOrderCommand;
+import seedu.address.logic.commands.FindTaskCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListOrderCommand;
@@ -107,6 +108,9 @@ public class AddressBookParser {
 
         case ShowIncompleteTasks.COMMAND_WORD:
             return new ShowIncompleteTasks();
+            
+        case FindTaskCommand.COMMAND_WORD:
+            return new FindTaskCommandParser().parse(arguments);
 
         //======================================== ORDER COMMANDS ========================================
 
