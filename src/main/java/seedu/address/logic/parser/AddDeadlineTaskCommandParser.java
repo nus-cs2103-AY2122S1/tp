@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -27,7 +28,8 @@ public class AddDeadlineTaskCommandParser {
      */
     public AddDeadlineTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE, PREFIX_TAG, PREFIX_DESCRIPTION);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DEADLINE, PREFIX_TAG,
+                        PREFIX_DESCRIPTION, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DEADLINE)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -38,6 +40,7 @@ public class AddDeadlineTaskCommandParser {
         TaskName name = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_NAME).get());
         TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DEADLINE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Task.Priority priority = ParserUtil.parsePriority(argMultimap.getPriorityUsingPrefix(PREFIX_PRIORITY).get());
         Description description;
 
         if (arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION)) {
@@ -46,8 +49,7 @@ public class AddDeadlineTaskCommandParser {
             description = Description.NO_DESCRIPTION;
         }
 
-        Task task = new DeadlineTask(name, tagList, false, taskDate, description);
-
+        Task task = new DeadlineTask(name, tagList, false, taskDate, description, priority);
         return new AddDeadlineTaskCommand(task);
     }
 

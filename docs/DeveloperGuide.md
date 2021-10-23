@@ -446,11 +446,36 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC7 - Add task with time**
+**Use case: UC7 - Add a todo task**
 
 **MSS**
 
-1.  User requests to create a task with the specified taskDate
+1.  User requests to create a todo task
+2.  tApp creates the todo and stores it in the task list
+3.  tApp displays the task that was just created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The task name is empty.
+
+    * 1a1. tApp displays an error message stating that the task name is invalid
+
+      Use case ends.
+
+* 1b. The command format is incorrect.
+
+    * 1b1. tApp displays an error message requesting the user to follow the correct format
+
+      Use case ends.
+
+
+**Use case: UC8 - Add a task with a specified taskDate**
+
+**MSS**
+
+1.  User requests to create a deadline or event task with the specified taskDate
 2.  tApp creates the task and stores it in the task list
 3.  tApp displays the task that was just created
 
@@ -458,19 +483,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The task list is empty.
+* 1a. The task name is empty.
 
     * 1a1. tApp displays an error message stating that the task name is invalid
 
       Use case ends.
 
-* 1b. The task list is empty.
+* 1b. The format of the taskDate is incorrect.
 
-    * 1b1. tApp displays an error message requesting the user to follow the correct format
+    * 1b1. tApp displays an error message requesting the user to follow the correct taskDate format
 
       Use case ends.
 
-**Use case: UC8 - Delete a task**
+**Use case: UC9 - Delete a task**
 
 **MSS**
 
@@ -493,7 +518,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC9 - Mark a task as done**
+**Use case: UC10 - Mark a task as done**
 
 **MSS**
 
@@ -515,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC10 - Mark student as participated**
+**Use case: UC11 - Mark student as participated**
 
 **MSS**
 
@@ -544,7 +569,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC11 - Clear student list**
+**Use case: UC12 - Clear student list**
 
 **MSS**
 
@@ -561,7 +586,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC12 - View group list**
+**Use case: UC13 - View group list**
 
 **MSS**
 
@@ -578,7 +603,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC13 - Add a group**
+**Use case: UC14 - Add a group**
 
 **MSS**
 
@@ -602,7 +627,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC14 - Delete a group**
+**Use case: UC15 - Delete a group**
 
 **MSS**
 
@@ -625,7 +650,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC15 - Add a student to a group**
+**Use case: UC16 - Add a student to a group**
 
 **MSS**
 
@@ -662,7 +687,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-**Use case: UC16 - Add a Github link to a group**
+**Use case: UC17 - Add a Github link to a group**
 
 **MSS**
 
@@ -692,6 +717,23 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3c1. tApp overwrites the link in the group with the one provided
 
   Use case ends.
+
+**Use case: UC17 - Find student contact by name**
+
+**MSS**
+
+1.  User requests to find student whose name is John
+2.  tApp displays all names containing 'john'
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The student list is empty.
+
+    * 2a1. tApp displays an empty list
+
+      Use case ends.
 
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.

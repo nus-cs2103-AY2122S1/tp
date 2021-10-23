@@ -25,6 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskHistory;
 import seedu.address.testutil.StudentBuilder;
 
 public class AddStudentCommandTest {
@@ -189,6 +190,11 @@ public class AddStudentCommandTest {
         }
 
         @Override
+        public void addTaskHistory(TaskHistory taskHistory) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void completeTask(Task target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -240,6 +246,11 @@ public class AddStudentCommandTest {
 
         @Override
         public void addGithubGroup(LinkYear year, RepoName repoName, Group group) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredTaskHistoryList(Predicate<TaskHistory> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

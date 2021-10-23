@@ -5,7 +5,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 public class DeadlineTask extends Task {
-    private final TaskDate dueDate;
+    private TaskDate dueDate;
 
     /**
      * Constructs a {@code Task}.
@@ -13,8 +13,9 @@ public class DeadlineTask extends Task {
      * @param name A valid TaskName.
      * @param tags A valid Set of Tags.
      */
-    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone, TaskDate dueDate, Description description) {
-        super(name, tags, isDone, description);
+    public DeadlineTask(TaskName name, Set<Tag> tags, boolean isDone,
+                        TaskDate dueDate, Description description, Priority priority) {
+        super(name, tags, isDone, description, priority);
         this.dueDate = dueDate;
     }
 
@@ -64,7 +65,9 @@ public class DeadlineTask extends Task {
                 .append("\nTaskDate: ")
                 .append(getDeadline().toString())
                 .append("\nStatus: ")
-                .append(getStatusString());
+                .append(getStatusString())
+                .append("\nPriority: ")
+                .append(getPriority().toString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -73,5 +76,12 @@ public class DeadlineTask extends Task {
         }
 
         return builder.toString();
+    }
+
+    @Override
+    public DeadlineTask clone() {
+        DeadlineTask clone = (DeadlineTask) super.clone();
+        clone.dueDate = dueDate;
+        return clone;
     }
 }

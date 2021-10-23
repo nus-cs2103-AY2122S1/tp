@@ -24,12 +24,13 @@ import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindStudentCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.ListStudentCommand;
 import seedu.address.logic.commands.ListTaskCommand;
+import seedu.address.logic.commands.ListTaskHistoryCommand;
 import seedu.address.logic.commands.MarkStudentAttCommand;
 import seedu.address.logic.commands.MarkStudentPartCommand;
 import seedu.address.logic.commands.MarkTaskDoneCommand;
@@ -89,8 +90,8 @@ public class AddressBookParser {
         case ClearStudentsCommand.COMMAND_WORD:
             return new ClearStudentsCommand();
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case FindStudentCommand.COMMAND_WORD:
+            return new FindStudentCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -139,6 +140,9 @@ public class AddressBookParser {
 
         case EditTaskCommand.COMMAND_WORD:
             return new EditTaskCommandParser().parse(arguments);
+
+        case ListTaskHistoryCommand.COMMAND_WORD:
+            return new ListTaskHistoryCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
