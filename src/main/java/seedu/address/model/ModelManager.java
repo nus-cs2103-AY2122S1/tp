@@ -133,6 +133,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Assessment getAssessment(Assessment assessmentToMatch) {
+        requireNonNull(assessmentToMatch);
+        return addressBook.getAssessment(assessmentToMatch);
+    }
+
+    @Override
     public void addAssessment(Assessment assessment) {
         addressBook.addAssessment(assessment);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

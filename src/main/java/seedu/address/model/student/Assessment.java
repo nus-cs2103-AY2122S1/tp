@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import javafx.scene.chart.Chart;
+import seedu.address.commons.util.ChartUtil;
+
 /**
  * Represents a Student's assessment.
  * Guarantees: immutable; is valid as declared in {@link #isValidAssessment(String)}
@@ -19,6 +22,7 @@ public class Assessment {
     public static final String MESSAGE_CONSTRAINTS =
             "Assessment names should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
 
     // Assessment score list
     public final Map<ID, Score> scores = new HashMap<>();
@@ -142,6 +146,10 @@ public class Assessment {
             }
         }
 
+        private static final String CHART_X_AXIS_LABEL = "Scores";
+        private static final String CHART_Y_AXIS_LABEL = "Number of Students";
+
+        private final Assessment assessment;
         private List<Bin> bins;
         public final Map<Bin, Integer> binCounts;
 
@@ -153,6 +161,7 @@ public class Assessment {
             requireNonNull(assessment);
             requireNonNull(assessment.scores);
 
+            this.assessment = assessment;
             bins = createBins(interval);
             binCounts = new HashMap<>();
             for (Bin b : bins) {
@@ -202,6 +211,11 @@ public class Assessment {
             Map<String, Number> distribution = new HashMap<>();
             binCounts.forEach((bin, count) -> distribution.put(bin.toString(), count));
             return distribution;
+        }
+
+        public Chart toBarChart() {
+            return ChartUtil.createBarChart(assessment.getValue(), CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL,
+                    getScoreDistribution());
         }
     }
 

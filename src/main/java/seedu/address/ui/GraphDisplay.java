@@ -1,13 +1,8 @@
 package seedu.address.ui;
 
-import java.util.Map;
 
 import javafx.fxml.FXML;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.Chart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
@@ -27,7 +22,9 @@ public class GraphDisplay extends UiPart<Region> {
     }
 
     public void setChart(Chart chart) {
+        // Clear any existing charts
+        placeHolder.getChildren().clear();
+
         placeHolder.getChildren().add(chart);
     }
-
 }
