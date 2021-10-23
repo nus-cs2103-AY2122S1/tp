@@ -136,29 +136,6 @@ public class MainWindow extends UiPart<Stage> {
 
         graphDisplay = new GraphDisplay();
         graphDisplayPlaceholder.getChildren().add(graphDisplay.getRoot());
-
-        final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String,Number> bc =
-                new BarChart<String,Number>(xAxis,yAxis);
-        bc.setTitle("Cohort Performance for Midterms");
-        xAxis.setLabel("Percentage");
-        yAxis.setLabel("Number of Students");
-        XYChart.Series series1 = new XYChart.Series();
-        series1.getData().add(new XYChart.Data("0-10", 12));
-        series1.getData().add(new XYChart.Data("10-20", 12));
-        series1.getData().add(new XYChart.Data("20-30", 20));
-        series1.getData().add(new XYChart.Data("30-40", 44));
-        series1.getData().add(new XYChart.Data("40-50", 76));
-        series1.getData().add(new XYChart.Data("50-60", 84));
-        series1.getData().add(new XYChart.Data("60-70", 104));
-        series1.getData().add(new XYChart.Data("70-80", 74));
-        series1.getData().add(new XYChart.Data("80-90", 55));
-        series1.getData().add(new XYChart.Data("90-100", 12));
-
-        bc.getData().add(series1);
-        bc.setLegendVisible(false);
-        graphDisplay.setChart(bc);
     }
 
     /**
@@ -215,6 +192,12 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.hasChart()) {
+                Chart chart = commandResult.getChart();
+                assert chart != null;
+                graphDisplay.setChart(chart);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

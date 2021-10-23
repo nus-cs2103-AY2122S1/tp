@@ -143,7 +143,7 @@ public class Assessment {
         }
 
         private List<Bin> bins;
-        private final Map<Bin, Integer> binCounts;
+        public final Map<Bin, Integer> binCounts;
 
         public AssessmentStatistics(Assessment assessment) {
             this(assessment, DEFAULT_INTERVAL);
@@ -178,7 +178,7 @@ public class Assessment {
             return bins;
         }
 
-        public Bin getBin(Score score) {
+        private Bin getBin(Score score) {
             for (Bin b : bins) {
                 if (b.containsScore(score)) {
                     return b;
@@ -191,11 +191,17 @@ public class Assessment {
             return null;
         }
 
-        public void addScoresToBins(Collection<Score> scores) {
+        private void addScoresToBins(Collection<Score> scores) {
             for (Score score : scores) {
                 Bin binForScore = getBin(score);
                 binCounts.put(binForScore, binCounts.get(binForScore) + 1);
             }
+        }
+
+        public Map<String, Number> getScoreDistribution() {
+            Map<String, Number> distribution = new HashMap<>();
+            binCounts.forEach((bin, count) -> distribution.put(bin.toString(), count));
+            return distribution;
         }
     }
 
