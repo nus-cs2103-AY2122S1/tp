@@ -1,5 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.Map;
+
 import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -10,10 +15,6 @@ import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
 
 public class ExportCommand extends Command {
     public static final String COMMAND_WORD = "export";
@@ -24,7 +25,8 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Exported to file: %1$s";
     public static final String MESSAGE_FAILURE = "Failed to export to file";
 
-    public final String BASE_PATH = "sourceControl%1$s.csv";
+    public static final String BASE_PATH = "sourceControl%1$s.csv";
+
     private int tries = 0;
     private int groupColumns;
     private int tagColumns;
