@@ -67,6 +67,7 @@ public class LogicManager implements Logic {
         }
 
         commandResult = command.execute(model);
+        model.addUserInput(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());

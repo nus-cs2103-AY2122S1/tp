@@ -168,6 +168,13 @@ public class ModelManager implements Model {
         taskList.setTask(target, editedTask);
     }
 
+    //=========== UserInputList ==============================================================================
+
+    @Override
+    public void addUserInput(String userInput) {
+        userInputList.add(userInput);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**

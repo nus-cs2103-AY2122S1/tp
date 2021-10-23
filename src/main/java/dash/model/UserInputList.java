@@ -35,11 +35,11 @@ public class UserInputList implements Iterable<String> {
     }
 
     /**
-     * Adds a user input String to the list.
+     * Adds a user input String to the start of the list.
      */
     public void add(String toAdd) {
         requireNonNull(toAdd);
-        internalList.add(toAdd);
+        internalList.add(0,toAdd);
     }
 
     /**

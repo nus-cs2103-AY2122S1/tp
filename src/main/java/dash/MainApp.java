@@ -107,7 +107,7 @@ public class MainApp extends Application {
         }
 
         // TODO: Replace with userInputList from storage
-        initialUserInputListData = new UserInputList();
+        initialUserInputListData = SampleDataUtil.getSampleUserInputList();
 
         return new ModelManager(initialAddressBookData, userPrefs, initialTaskListData, initialUserInputListData);
     }
