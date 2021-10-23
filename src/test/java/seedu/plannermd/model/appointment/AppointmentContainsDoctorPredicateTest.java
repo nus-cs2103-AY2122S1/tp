@@ -75,7 +75,7 @@ public class AppointmentContainsDoctorPredicateTest {
     }
 
     @Test
-    public void test_appointmentDoesNotContainDoctor_returnsTrue() {
+    public void test_appointmentDoesNotContainDoctor_returnsFalse() {
 
         // Zero keywords
         AppointmentContainsDoctorPredicate predicate =

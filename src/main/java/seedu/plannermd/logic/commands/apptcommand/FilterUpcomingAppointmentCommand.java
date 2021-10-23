@@ -11,7 +11,7 @@ public class FilterUpcomingAppointmentCommand extends FilterCommand {
     public static final String COMMAND_WORD = "appt -u";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filter all upcoming appointments according to the"
-            + "filters parameters given.\n"
+            + " filters parameters given.\n"
             + "Parameters: [" + PREFIX_PATIENT + "PATIENT NAME] [" + PREFIX_DOCTOR + "DOCTOR_NAME]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_PATIENT + "Alice " + PREFIX_DOCTOR + "Bob";
 
