@@ -71,9 +71,7 @@ public class EditCommandParser implements Parser<Command> {
             ));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-//        parseTasksForEdit(argMultimap.getAllValues(PREFIX_TASK)).ifPresent(editPersonDescriptor::setTasks);
-
+        
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
