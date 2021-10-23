@@ -1,4 +1,8 @@
-# ModuLink
+---
+layout: page
+title: ModuLink
+---
+
 ModuLink is a **desktop app for CS students to manage contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you are a CS student and you need a platform to connect with your peers and to find project groups, ModuLink is the choice for you.
 
 ## User Guide
@@ -149,22 +153,25 @@ Format: `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`
 
 Examples:
 * `addMod mod/CS2103T Need a member mod/CS1231S`
-* `addMod mod/CS2101`
+* `addMod mod/CS2220 mod/CS1231S`
   <br>
   <br>
-  (Insert screenshots here)
+  ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addMod.png)
+  
+  ![result for 'addMod mod/CS2220 mod/CS1231S'](images/screenshots/addModProfile.png)
+  
 
 #### 2.2 Edit the group status of existing modules on your profile : `editGroupStatus`
 
 Edits the group status of user-specified module(s).
 
-Format: `editGroupStatus mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION] [mod/MODULE [updateStatus/NEW_STATUS_DESCRIPTION]]...`
+Format: `editGroupStatus mod/MODULE [group/NEW_STATUS_DESCRIPTION] [mod/MODULE [group/NEW_STATUS_DESCRIPTION]]...`
 
 **:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
 
 Examples:
-* `editGroupStatus mod/CS2103T updateStatus/need member`
+* `editGroupStatus mod/CS2103T group/need member`
 * `editGroupStatus mod/CS2101`
   <br>
   <br>
@@ -178,10 +185,13 @@ Format: `remMod mod/MODULE [mod/MODULE]...`
 
 Examples:
 * `remMod mod/CS2103T`
-* `remMod mod/CS2100`
+* `remMod mod/CS2220`
   <br>
   <br>
-  (Insert screenshots here)
+  ![result for 'remMod mod/CS2220'](images/screenshots/remMod.png)
+  
+  ![result for 'remMod mod/CS2220'](images/screenshots/remModProfile.png)
+  
 
 ### 3. Manage favorites
 
@@ -193,10 +203,10 @@ Format: `addFav STUDENT_ID`
 
 Examples:
 * `addFav A0222594A`
-* `addFav A1234967R`
+* `addFav A1234568X`
   <br>
   <br>
-  ![result for 'addfav A1234967R'](images/screenshots/addfav.png)
+  ![result for 'addfav A1234967R'](images/screenshots/addFav.png)
 
 ### 3.2 Remove a profile from favourites list : `remFav`
 
@@ -206,10 +216,10 @@ Format: `remFav STUDENT_ID`
 
 Examples:
 * `remFav A0212345X`
-* `remFav A1234567R`
+* `remFav A1234568X`
   <br>
   <br>
-  ![result for 'remfav A1234567R'](images/screenshots/remfav.png)
+  ![result for 'remfav A1234567R'](images/screenshots/remFav.png)
 
 ### 4. Viewing options
 
@@ -229,7 +239,7 @@ Shows a list of all profiles that the user has added to their favourites list.
 Format: `listFav`
 <br>
 <br>
-![result for 'listFav'](images/screenshots/listfav.png)
+![result for 'listFav'](images/screenshots/listFav.png)
 
 #### 4.3 Find profiles by name : `find`
 
