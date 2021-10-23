@@ -33,6 +33,7 @@ public enum CommandWord {
     FIND_PERSON("find", "f"),
     LIST_PERSON("list", "ls"),
     REMARK_PERSON("remark"),
+    EDIT_MODULE_LESSON("editc", "ec"),
     LIST_MODULE_LESSON("listc", "lc"),
     CLEAR_MODULE_LESSON("clearc", "clrc", "cc"),
     DELETE_MODULE_LESSON("deletec", "delc", "rmc", "dc");
