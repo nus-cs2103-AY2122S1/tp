@@ -18,7 +18,7 @@ public class FavouriteCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Favourited Person: %1$s";
+    public static final String MESSAGE_FAVOURITE_PERSON_SUCCESS = "Favourited Person: %1$s";
 
     private final Index targetIndex;
 
@@ -37,7 +37,7 @@ public class FavouriteCommand extends Command {
 
         Person personToFavourite = lastShownList.get(targetIndex.getZeroBased());
         model.favouritePerson(personToFavourite);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToFavourite));
+        return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite));
     }
 
     @Override
