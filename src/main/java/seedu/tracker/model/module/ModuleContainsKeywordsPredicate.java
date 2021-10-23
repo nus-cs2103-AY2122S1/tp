@@ -124,7 +124,8 @@ public class ModuleContainsKeywordsPredicate implements Predicate<Module> {
      * @param module to be checked
      * @return true if the keyword is found
      */
-    private boolean doesModuleContainKeywords(List<String> prefixesPresent,List<String> keywordsPresent, Module module) {
+    private boolean doesModuleContainKeywords(List<String> prefixesPresent,
+                                              List<String> keywordsPresent, Module module) {
         boolean moduleContainsKeywords = false;
         for (String prefix : prefixesPresent) {
             switch (prefix) {

@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.UserInfo;
