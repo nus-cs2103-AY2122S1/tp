@@ -82,4 +82,11 @@ public class PersonListPanel extends UiPart<Region> {
             }
         }
     }
+
+    /**
+     * Refreshes the person list GUI
+     */
+    public void refreshPersonListUI() {
+        personListView.refresh();
+    }
 }

@@ -104,6 +104,7 @@ public class ModelManager implements Model {
     @Override
     public void favouritePerson(Person target) {
         addressBook.favouritePerson(target);
+        filteredPersons.setPredicate(filteredPersons.getPredicate());
     }
     @Override
     public void addPerson(Person person) {

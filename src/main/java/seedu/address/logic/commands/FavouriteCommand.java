@@ -37,6 +37,7 @@ public class FavouriteCommand extends Command {
 
         Person personToFavourite = lastShownList.get(targetIndex.getZeroBased());
         model.favouritePerson(personToFavourite);
+        model.getPersonListControl().refreshPersonListUI();
         return new CommandResult(String.format(MESSAGE_FAVOURITE_PERSON_SUCCESS, personToFavourite));
     }
 
