@@ -1,15 +1,17 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
-
 import javafx.fxml.FXML;
 import javafx.scene.chart.Chart;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
 public class GraphDisplay extends UiPart<Region> {
 
     private static final String FXML = "GraphDisplay.fxml";
+
+    @FXML
+    private StackPane placeHolder;
 
     @FXML
     private TextArea resultDisplay;
@@ -19,6 +21,6 @@ public class GraphDisplay extends UiPart<Region> {
     }
 
     public void setChart(Chart chart) {
-        resultDisplay.setText("Hello world");
+        placeHolder.getChildren().add(chart);
     }
 }
