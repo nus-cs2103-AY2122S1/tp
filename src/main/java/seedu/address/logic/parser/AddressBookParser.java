@@ -20,6 +20,7 @@ import seedu.address.logic.commands.ClearStudentsCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
+import seedu.address.logic.commands.DeleteStudentGroupCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
@@ -138,6 +139,9 @@ public class AddressBookParser {
 
         case AddStudentGroupCommand.COMMAND_WORD:
             return new AddStudentGroupCommandParser().parse(arguments);
+
+        case DeleteStudentGroupCommand.COMMAND_WORD:
+            return new DeleteStudentGroupCommandParser().parse(arguments);
 
         case AddGithubGroupCommand.COMMAND_WORD:
             return new AddGithubGroupCommandParser().parse(arguments);

@@ -57,7 +57,7 @@ class JsonAdaptedGroup {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        members.addAll(source.getMembersSet().stream()
+        members.addAll(source.getMembersList().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
         year = source.getYear().year;

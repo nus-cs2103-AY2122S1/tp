@@ -29,6 +29,8 @@ public class MemberCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
     private Label email;
@@ -43,6 +45,7 @@ public class MemberCard extends UiPart<Region> {
     public MemberCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         email.setText(student.getEmail().value);
         studentNumber.setText(student.getStudentNumber().toString());

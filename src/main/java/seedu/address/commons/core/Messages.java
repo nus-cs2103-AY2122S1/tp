@@ -15,5 +15,6 @@ public class Messages {
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_NAME = "The group name provided does not exist";
     public static final String MESSAGE_DUPLICATE_GROUP_MEMBER_INDEX = "This student is already in the group";
     public static final String MESSAGE_INVALID_GROUP_MEMBER_INDEX = "This student already has a group";
+    public static final String MESSAGE_INVALID_GROUP_MEMBER_REMOVAL_INDEX = "The member index provided is invalid";
 
 }

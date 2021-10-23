@@ -188,12 +188,7 @@ public class ModelManager implements Model {
         return target.getParticipation().checkPresent(week) == 1 ? "participated" : "not participated";
     }
 
-    /**
-     * Adds a student group.
-     *
-     * @param student student to add to group
-     * @param group student group to add student into
-     */
+    @Override
     public void addStudentGroup(Student student, Group group) {
         requireAllNonNull(student, group);
         Group newGroup = group;
@@ -201,6 +196,19 @@ public class ModelManager implements Model {
                 student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
                 student.getParticipation(), group.getName());
         newGroup.getMembers().addMember(updatedStudent);
+        addressBook.setStudent(student, updatedStudent);
+        addressBook.setGroup(group, newGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+    }
+
+    @Override
+    public void deleteStudentGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+        Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
+                student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
+                student.getParticipation(), new GroupName());
+        Group newGroup = group;
+        newGroup.getMembers().removeMember(student);
         addressBook.setStudent(student, updatedStudent);
         addressBook.setGroup(group, newGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
@@ -263,6 +271,7 @@ public class ModelManager implements Model {
                     student.getParticipation(), new GroupName());
             addressBook.setStudent(student, updatedStudent);
         }
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override

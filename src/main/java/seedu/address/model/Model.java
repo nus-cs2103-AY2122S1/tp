@@ -124,11 +124,18 @@ public interface Model {
     void markStudentParticipation(Student target, int week);
 
     /**
-     * Adds the given person {@code target} to a group of {@code name}.
+     * Adds the given student {@code target} to a group of {@code group}.
      * {@code target} must exist in the student list.
-     * A group of {@code name} must exist in the group list.
+     * A group of {@code group} must exist in the group list.
      */
     void addStudentGroup(Student target, Group group);
+
+    /**
+     * Removes the given member {@code target} from a group of {@code group}.
+     * A group of {@code group} must exist in the group list.
+     * {@code targe} must exist in the list of members of the group of  {@code group}.
+     */
+    void deleteStudentGroup(Student target, Group group);
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Student> getFilteredStudentList();
