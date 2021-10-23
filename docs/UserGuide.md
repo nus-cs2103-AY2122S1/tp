@@ -152,19 +152,16 @@ _Details coming soon ..._
 
 Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, email, address) of a staff or by index of the staff.
 
- * Does not allow for non specific lookup. Any fields entered must be an exact reference, it cannot be non exact.
+ * Does not allow for non-specific lookup. Any fields entered must be an exact reference.
  * For example, the query `-n Candice` will result in any Staff with the exact name __Candice__ and noone else.
 
 Format:  
-`view -n NAME`  
-`view -i INDEX`  
-`view -t TAG`  
-`view -r ROLE`
+`view [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 
 Examples:  
 `view -n Candice`  
 `view -i 123`  
-`view -t friends`
+`view -t friends -t neighbours`
 
 #### Adding a staff - `add`
 
@@ -336,8 +333,7 @@ Examples:
 Views a specific staff’s schedule.
 
 Formats:  
-`viewSchedule -n name`  
-`viewSchedule -i index`
+`viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 
 Examples:  
 `viewSchedule -n Candice`  
