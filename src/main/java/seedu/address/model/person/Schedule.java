@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Shift.isValidEmpty;
 import static seedu.address.model.person.Shift.isValidShift;
 
 import java.time.DayOfWeek;
@@ -59,6 +60,12 @@ public class Schedule {
         }
         String[] shiftArray = loadString.split(" ");
         for (String s : shiftArray) {
+            if (isValidShift(s)) {
+
+            }
+            if (isValidEmpty(s)) {
+
+            }
             String[] shiftString = s.split("-");
             String shiftDayString = shiftString[0].toUpperCase();
             DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
@@ -74,12 +81,18 @@ public class Schedule {
      * @param slot The slot of the shift located.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void addShift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate) throws DuplicateShiftException {
         Shift shift = new Shift(dayOfWeek, slot);
-        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null) {
+        Shift shift1 = shifts[dayOfWeek.getValue() - 1][slot.getOrder()];
+
+        if (shift1 == null) {
+            shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
+            return;
+        }
+        if (shift1.isWorking) {
             throw new DuplicateShiftException();
         }
-        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift1.activate(startDate);
     }
 
     /**
@@ -87,13 +100,15 @@ public class Schedule {
      *
      * @param dayOfWeek The day of the shift in a week.
      * @param slot The period of the shift.
+     * @param endDate The date the endDate is at.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
-        if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) throws NoShiftException {
+        Shift shift = shifts[dayOfWeek.getValue() - 1][slot.getOrder()];
+        if (shift == null || !shift.isWorking || shift.canRemove(endDate)) {
             throw new NoShiftException();
         }
-        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = null;
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift.remove(endDate);
     }
 
     /**
@@ -103,7 +118,7 @@ public class Schedule {
      * @param slot The period want to check.
      */
     public boolean isWorking(DayOfWeek dayOfWeek, Slot slot) {
-        return shifts[dayOfWeek.getValue() - 1][slot.getOrder()] != null;
+        return isWorking(dayOfWeek, slot.getOrder());
     }
 
     /**
@@ -114,7 +129,8 @@ public class Schedule {
      */
     public boolean isWorking(DayOfWeek dayOfWeek, int slotNum) {
         // TODO change from slots 0 and 1 to checking by a specific timing?
-        return shifts[dayOfWeek.getValue() - 1][slotNum] != null;
+        return shifts[dayOfWeek.getValue() - 1][slotNum] != null
+                && shifts[dayOfWeek.getValue() - 1][slotNum].isWorking;
     }
 
     /**
@@ -245,7 +261,7 @@ public class Schedule {
         }
         String[] shiftSplit = test.split(" ");
         for (String s : shiftSplit) {
-            if (!isValidShift(s)) {
+            if (!isValidShift(s) && !isValidEmpty(s)) {
                 return false;
             }
         }

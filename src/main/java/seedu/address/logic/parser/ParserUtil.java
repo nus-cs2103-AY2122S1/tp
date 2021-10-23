@@ -299,20 +299,26 @@ public class ParserUtil {
     public static Period parsePeriod(Collection<String> periods) throws ParseException {
         LocalDate start = LocalDate.MAX;
         LocalDate end = LocalDate.MIN;
-        try {
-            for (String periodName : periods) {
-                if (start.isAfter(LocalDate.parse(periodName))) {
-                    start = LocalDate.parse(periodName);
-                }
-                if (end.isBefore(LocalDate.parse(periodName))) {
-                    end = LocalDate.parse(periodName);
-                }
+        for (String periodName : periods) {
+            if (start.isAfter(LocalDate.parse(periodName))) {
+                start = parseLocalDate(periodName);
             }
-        } catch (DateTimeParseException e) {
+            if (end.isBefore(LocalDate.parse(periodName))) {
+                end = parseLocalDate(periodName);
+            }
+        }
+        return new Period(start, end);
+    }
+
+    /**
+     * Parses {@code String value} to a {@code LocalDate}.
+     */
+    public static LocalDate parseLocalDate(String value) throws ParseException {
+        try {
+            return LocalDate.parse(value);
+        } catch (DateTimeParseException dte) {
             throw new ParseException(Messages.MESSAGE_INVALID_DATE_PARSED);
         }
-
-        return new Period(start, end);
     }
 
 

@@ -7,11 +7,13 @@ import static seedu.address.model.person.PersonTestUtil.createPeriod;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 public class ScheduleTest {
+    private static final LocalDate START_DATE = LocalDate.of(1, 1 ,1);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -44,7 +46,7 @@ public class ScheduleTest {
         Schedule schedule = new Schedule();
         assertEquals(0, schedule.getTotalWorkingHour());
 
-        schedule.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON);
+        schedule.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
         assertEquals(4, schedule.getTotalWorkingHour());
     }
 
@@ -55,7 +57,7 @@ public class ScheduleTest {
         DayOfWeek toAdd = DayOfWeek.MONDAY;
         Period testPeriod = createPeriod(1, 7);
         for (int i = 1; i <= 7; i++) {
-            testSchedule.addShift(toAdd, Slot.MORNING);
+            testSchedule.addShift(toAdd, Slot.MORNING, START_DATE);
             int result = testSchedule.getTotalWorkingHour(testPeriod, List.of());
             assertEquals(i * Schedule.HOURS_PER_SLOT, result);
             toAdd = toAdd.plus(1);

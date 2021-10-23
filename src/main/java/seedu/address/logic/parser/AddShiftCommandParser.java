@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 
+import java.time.LocalDate;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -27,11 +29,13 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
     public AddShiftCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME);
+                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DATE,
+                        PREFIX_DASH_NAME, PREFIX_DAY_SHIFT);
 
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
+        LocalDate startDate = LocalDate.now();
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
@@ -43,17 +47,21 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
         }
 
         try {
+
             if (argMultimap.getValue(PREFIX_DASH_INDEX).isPresent()) {
                 index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_DASH_INDEX).get());
             }
             if (argMultimap.getValue(PREFIX_DASH_NAME).isPresent()) {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
+            if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
+                startDate = ParserUtil.parseLocalDate(argMultimap.getValue(PREFIX_DATE).get());
+            }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE), pe);
         }
-        return new AddShiftCommand(index, name, shiftDayAndSlot);
+        return new AddShiftCommand(index, name, shiftDayAndSlot, startDate);
     }
 
     /**

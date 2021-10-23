@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -44,17 +45,20 @@ public class DeleteShiftCommand extends Command {
     private final Name name;
     private final DayOfWeek dayOfWeek;
     private final Slot slot;
+    private final LocalDate endDate;
 
     /**
      * Creates a DeleteShiftCommand to add the specified {@code Shift} to a {@code Person}.
      */
-    public DeleteShiftCommand(Index index, Name name, String shiftDateAndSlot) {
+    public DeleteShiftCommand(Index index, Name name, String shiftDateAndSlot, LocalDate endDate) {
         requireNonNull(shiftDateAndSlot);
         this.index = index;
         this.name = name;
         String[] strings = shiftDateAndSlot.split("-");
         dayOfWeek = DayOfWeek.valueOf(strings[0].toUpperCase());
         slot = Slot.getSlotByOrder(strings[1]);
+        this.endDate = endDate;
+
     }
 
     @Override
@@ -82,7 +86,7 @@ public class DeleteShiftCommand extends Command {
         }
 
         try {
-            model.deleteShift(staffToEdit, dayOfWeek, slot);
+            model.deleteShift(staffToEdit, dayOfWeek, slot, endDate);
         } catch (NoShiftException e) {
             throw new CommandException(MESSAGE_SHIFT_DOESNT_EXIST);
         }
