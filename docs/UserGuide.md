@@ -508,8 +508,7 @@ to update your data directly, by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 **Be extremely careful when making any changes to the data file!**<br>
-If any of your changes to the data file causes FAST to be unable to read the data file, FAST **will discard all data** 
-and start with an empty data file on the next run!
+If any of your changes to the data file causes FAST to be unable to read the data file, FAST will start with an empty data file on the next run!
 </div>
 
 
@@ -520,10 +519,14 @@ and start with an empty data file on the next run!
 ## FAQs
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAST home folder.<br>
+**A**: Install the app in the other computer and move your previous FAST `data` folder into the new FAST home folder. The `data` folder is shown below. <br>
+
+![moveData](images/moveData.png)
+
 **Q**: How do I save my data?<br>
 **A**: You do not need to manually save any data, FAST automatically saves all your data for you when you exit the application.
-
+**Q**: I edited my data file, and now when I start FAST all my contacts are gone! What happened?
+**A**: It is likely that some of your changes to your data file caused FAST to be unable to read your data file. Double-check the changes you made, or revert them if necessary. If FAST is able to read the data file after you made the changes, all your saved contacts will appear on the next start.
 
 --------------------------------------------------------------------------------------------------------------------
 
