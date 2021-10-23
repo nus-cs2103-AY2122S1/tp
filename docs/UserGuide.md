@@ -93,17 +93,17 @@ Examples:
 Prefix Input Specifications:
 
 **Note**: **Alphanumeric** characters refers specifically to characters a-z, A-Z and 0-9.
-* ####NAME `n/`
+* #### NAME `n/`
   * A NAME should only contain **alphanumeric** characters. Spaces between words are allowed.
   * For example:
     * NAME inputs such as `John`, `Mary Sue` and `9ine 6ix` are acceptable.
     * NAME inputs such as `J@hn`, `Mary S^e` and `B{}b` are not acceptable.
-* ####CONTACT_NUMBER `p/`
+* #### CONTACT_NUMBER `p/`
   * A CONTACT_NUMBER should contain a minimum of 3 digits. No characters other than the digits 0-9 are allowed.
   * For example:
     * CONTACT_NUMBER inputs such as `99999999` and `999` are acceptable.
     * CONTACT_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
-* ####EMAIL_ADDRESS `e/`
+* #### EMAIL_ADDRESS `e/`
   * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by an `@` character.
   * The **local part**:
     * must contain **at least 1** alphanumeric character. 
@@ -116,42 +116,42 @@ Prefix Input Specifications:
   * For example:
     * EMAIL_ADDRESS inputs such as `PeterJack_1190@example.com` and `e1234567@u.nus.edu` are acceptable.
     * EMAIL_ADDRESS inputs such as `peterjack@example.c` and `peter..jack@example.com` are unacceptable.
-* ####ROLE `r/`
+* #### ROLE `r/`
   * A ROLE should only contain **alphanumeric** characters. Spaces between words are allowed.
   * For example:
     * ROLE inputs such as `Software Engineer` and `Sales Assistant` are acceptable.
     * ROLE inputs such as `Softw@re Engin^^r` and `Day + Night Security Guard` are not acceptable.
-* ####EMPLOYMENT_TYPE `et/`
+* #### EMPLOYMENT_TYPE `et/`
   * An EMPLOYMENT_TYPE should be one of the following: `Full time`, `Part time`, `Temporary` or `Internship`.
   * An EMPLOYMENT_TYPE is case-insensitive.
   * For example:
     * EMPLOYMENT_TYPE inputs such as 'Full time` and `Internship` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `fUlL tiMe` and `iNtErnShIP` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `Long term` are not acceptable.
-* ####EXPECTED_SALARY `s/`
+* #### EXPECTED_SALARY `s/`
   * An EXPECTED_SALARY should only represent non-negative integers.
     * Non-negative integers range from 0 to 2^(31) - 1 inclusive.
   * For example:
     * EXPECTED_SALARY inputs such as `0` and `3500` are acceptable.
     * EXPECTED_SALARY inputs such as `-600` and `~350` are not acceptable.
-* ####LEVEL_OF_EDUCATION `l/`
+* #### LEVEL_OF_EDUCATION `l/`
   * A LEVEL_OF_EDUCATION should be one of the following: `Elementary`, `Middle School`, `High School`, `University`, `Bachelors`, `Masters` or `PhD`.
   * A LEVEL_OF_EDUCATION is case-insensitive.
   * For example:
     * LEVEL_OF_EDUCATION inputs such as `Middle School` and `PhD` are acceptable.
     * LEVEL_OF_EDUCATION inputs such as `miDDlE scHoOL` and `phD` are acceptable.
     * LEVEL_OF_EDUCATION inputs such as `Kindergarten` are not acceptable.
-* ####YEARS_OF_EXPERIENCE `y/`
+* #### YEARS_OF_EXPERIENCE `y/`
   * A YEARS_OF_EXPERIENCE should be a non-negative integer smaller than or equals to 67 (re-employment age in Singapore).
   * For example:
     * YEARS_OF_EXPERIENCE inputs such as `0` and `10` are acceptable.
     * YEARS_OF_EXPERIENCE inputs such as `-1`, `3.5`, and `100` are not acceptable.
-* ####TAG `t/`
+* #### TAG `t/`
   * A TAG should only contain **alphanumeric** characters. Spaces between words are **not** allowed.
   * For example:
     * TAG inputs such as `friends` and `colleagues` are allowed.
     * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
-* ####Interview `i/`
+* #### Interview `i/`
   * An interview should follow the DateTime format `yyyy-MM-dd, H:mm`.
   * For example: 
     * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
