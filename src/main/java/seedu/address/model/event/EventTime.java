@@ -16,6 +16,7 @@ public class EventTime implements Comparable<EventTime> {
 
     public static final String MESSAGE_CONSTRAINTS = "Time should be in 2359 format.";
     private static final String TIME_FORMAT = "HHmm";
+    private static final String TIME_DISPLAY_FORMAT = "HH:mm";
 
     private final LocalTime time;
     private boolean hasTime;
@@ -58,6 +59,13 @@ public class EventTime implements Comparable<EventTime> {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns the String format of time using {@code TIME_DISPLAY_FORMAT}.
+     */
+    public String getTimeDisplayString() {
+        return hasTime ? time.format(DateTimeFormatter.ofPattern(TIME_DISPLAY_FORMAT)) : "";
     }
 
     @Override
