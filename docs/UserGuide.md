@@ -236,10 +236,10 @@ Formats:
 `delete -r ROLE`  
 `delete -s STATUS`  
 
-Examples:\
-`delete -n Candice`\
-`delete -i 2`\
-`delete -r cashiers`\
+Examples:  
+`delete -n Candice`  
+`delete -i 2`  
+`delete -r cashiers`  
 `delete -s fulltime`
 
 [comment]: <> (* `list` followed by `delete 2` deletes the 2nd staff in the staff list.)
@@ -343,7 +343,9 @@ Examples:
 `viewSchedule -n Candice`  
 `viewSchedule -i 123`
 
+The output will look like the following.
 
+![viewShedule](images/viewScheduleImage.png)
 
 
 #### Deleting a staff schedule: `deleteSchedule`
