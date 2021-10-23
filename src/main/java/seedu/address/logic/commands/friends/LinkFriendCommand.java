@@ -61,7 +61,6 @@ public class LinkFriendCommand extends Command {
 
         model.linkFriend(friendToEdit, gameFriendLink);
         model.updateFilteredFriendsList(Model.PREDICATE_SHOW_ALL_FRIENDS);
-
         return new CommandResult(generateSuccessMessage(friendToEdit), CommandType.FRIEND_LINK);
     }
 

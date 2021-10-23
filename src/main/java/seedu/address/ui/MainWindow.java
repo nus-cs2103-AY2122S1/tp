@@ -15,7 +15,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.CommandType;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -37,7 +36,6 @@ public class MainWindow extends UiPart<Stage> {
     private GameListPanel gameListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private FriendMainCard friendMainCard;
     private GameMainCard gameMainCard;
 
 
@@ -201,27 +199,11 @@ public class MainWindow extends UiPart<Stage> {
         gameBox.setManaged(true);
     }
 
-    private void removeFriendListPanelFromFriendsPlaceholder() {
-        friendsPlaceholder.getChildren().removeAll(friendListPanel.getRoot());
-    }
-
     private void addFriendListPanelToFriendsPlaceholder() {
         // only shows friend list if not already being shown
         if (!friendsPlaceholder.getChildren().contains(friendListPanel.getRoot())) {
             friendsPlaceholder.getChildren().add(friendListPanel.getRoot());
         }
-    }
-
-    private void removeFriendMainCardFromFriendsPlaceholder() {
-        if (friendMainCard != null) {
-            friendsPlaceholder.getChildren().removeAll(friendMainCard.getRoot());
-            friendMainCard = null;
-        }
-    }
-
-    private void addFriendMainCardToFriendsPlaceholder(CommandResult commandResult) {
-        friendMainCard = new FriendMainCard(commandResult.getFriendToGet(), logic.getFilteredGamesList());
-        friendsPlaceholder.getChildren().add(friendMainCard.getRoot());
     }
 
     private void removeGameListPanelFromGamesPlaceholder() {
@@ -234,11 +216,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void addGameMainCardToGamesPlaceholder(CommandResult commandResult) {
-        gameMainCard = new GameMainCard(commandResult.getGameToGet(), logic.getFilteredFriendsList());
-        gamesPlaceholder.getChildren().add(gameMainCard.getRoot());
-    }
-
     private void removeGameMainCardFromGamesPlaceholder() {
         if (gameMainCard != null) {
             gamesPlaceholder.getChildren().removeAll(gameMainCard.getRoot());
@@ -247,41 +224,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the {@Code FriendMainCard} when the {@Code get} command is run.
-     * @param commandResult The {@Code commandResult} from the get command.
-     */
-    private void handleShowFriendMainCard(CommandResult commandResult) {
-        // only mounts the friend main card if it is not already mounted or if friend different
-        removeFriendListPanelFromFriendsPlaceholder();
-        if (friendMainCard == null) {
-            addFriendMainCardToFriendsPlaceholder(commandResult);
-        } else if (!friendMainCard.getCurrentFriend().equals(commandResult.getFriendToGet())) {
-            removeFriendMainCardFromFriendsPlaceholder();
-            addFriendMainCardToFriendsPlaceholder(commandResult);
-        }
-    }
-
-    /**
-     * Shows the {@Code GameMainCard} when the {@Code get} command is run.
-     * @param commandResult The {@Code commandResult} from the get command.
-     */
-    private void handleShowGameMainCard(CommandResult commandResult) {
-        // only mounts the friend main card if it is not already mounted
-        removeGameListPanelFromGamesPlaceholder();
-        if (gameMainCard == null) {
-            addGameMainCardToGamesPlaceholder(commandResult);
-        } else if (!gameMainCard.getCurrentGame().equals(commandResult.getGameToGet())) {
-            removeGameMainCardFromGamesPlaceholder();
-            addGameMainCardToGamesPlaceholder(commandResult);
-        }
-    }
-
-    /**
      * Shows the {@Code friendListPanel} when the {@Code friend --list} command is run.
      */
     private void showFriendList() {
         // only shows friend list if not already being shown
-        removeFriendMainCardFromFriendsPlaceholder();
         addFriendListPanelToFriendsPlaceholder();
     }
 
@@ -299,26 +245,30 @@ public class MainWindow extends UiPart<Stage> {
         hideGameBox();
         showFriendBox();
         if (commandResult.isFriendGet()) {
-            handleShowFriendMainCard(commandResult);
+            friendListPanel.updateFriendMainCardWithFriend(commandResult.getFriendToGet(),
+                    logic.getFilteredGamesList());
         } else {
-            showFriendList();
+            friendListPanel.setFriendMainCardToDefault();
         }
+        showFriendList();
     }
+
+
 
     /**
      * Handles the mounting and dismounting of UI Regions when a {@Code game}
      * command is run.
      * @param commandResult The {@Code commandResult} from the {@Code game} command.
      */
-    // TODO: Handle the game command to list or get
     private void handleGameCommand(CommandResult commandResult) {
         hideFriendBox();
         showGameBox();
         if (commandResult.isGameGet()) {
-            handleShowGameMainCard(commandResult);
+            gameListPanel.updateGameMainCardWithGame(commandResult.getGameToGet(), logic.getFilteredFriendsList());
         } else {
-            showGameList();
+            gameListPanel.setGameMainCardToDefault();
         }
+        showGameList();
     }
 
     /**
@@ -339,6 +289,8 @@ public class MainWindow extends UiPart<Stage> {
             case FRIEND_EDIT:
             case FRIEND_ADD_GAME_SKILL:
             case FRIEND_LIST:
+            case CLEAR:
+            case FRIEND_LINK:
             case FRIEND_DELETE:
                 handleFriendCommand(commandResult);
                 break;
@@ -346,9 +298,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleGameCommand(commandResult);
                 break;
             case HELP:
-                // TODO temporarily invoke game list with "help" command
-                // handleHelp();
-                handleGameCommand(new CommandResult("sample feedback", CommandType.GAME_LIST));
+                handleHelp();
                 break;
             case EXIT:
                 handleExit();
