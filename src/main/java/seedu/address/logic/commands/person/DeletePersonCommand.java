@@ -3,6 +3,7 @@ package seedu.address.logic.commands.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -113,7 +114,8 @@ public class DeletePersonCommand extends Command {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
         } else if (isDeleteLessonCode()) {
-            return deleteLessonCode(model, model.getFilteredPersonList());
+            List<Person> listOfPersonsToDelete = listOfPersonToDeleteByLessonCode(model.getFilteredPersonList());
+            return deleteLessonCode(model, listOfPersonsToDelete);
         } else {
             return deleteByModuleCode(model, model.getFilteredPersonList());
         }
@@ -121,6 +123,19 @@ public class DeletePersonCommand extends Command {
 
     private boolean isDeleteLessonCode() {
         return moduleCode.getLessonCodes().size() > 0;
+    }
+
+    private List<Person> listOfPersonToDeleteByLessonCode(List<Person> filteredList) {
+        LessonCode lessonCodeToRemove = new LessonCode(
+                moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1));
+        List<Person> personsToDelete = new ArrayList<>();
+        for (int i = 0; i < filteredList.size(); i++) {
+            Person current = filteredList.get(i);
+            if (current.get(moduleCode).getLessonCodes().contains(lessonCodeToRemove)) {
+                personsToDelete.add(current);
+            }
+        }
+        return personsToDelete;
     }
 
     private String deleteLessonCode(Model model, List<Person> filteredList) {
