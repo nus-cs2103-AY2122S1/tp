@@ -118,6 +118,10 @@ class JsonAdaptedPerson {
         final VaccStatus modelVaccStatus = new VaccStatus(vaccStatus);
 
         // Faculty
+        if (faculty == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Faculty.class.getSimpleName()));
+        }
         if (!Faculty.isValidFaculty(faculty)) {
             throw new IllegalValueException(Faculty.MESSAGE_CONSTRAINTS);
         }
