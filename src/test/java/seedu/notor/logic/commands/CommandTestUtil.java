@@ -35,6 +35,7 @@ public class CommandTestUtil {
     public static final String VALID_NOTE_AMY = "Fri, Oct 22 2021 20:58\n\n\nLikes to ski. Wish that I could go to "
             + "sleep now";
     public static final String VALID_NOTE_BOB = "Favourite pastime: Eating";
+    public static final String VALID_NOTE_DATE = "Last Modified: (Fri, Oct 22 2021 20:59)";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

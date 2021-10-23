@@ -33,7 +33,7 @@ public class PersonClearTagsExecutor extends PersonExecutor {
         Person noTagsPerson = new Person(person.getName(), person.getPhone(), person.getEmail(),
                 person.getNote(), new HashSet<Tag>());
 
-        if (!person.isSame(noTagsPerson) && model.hasPerson(noTagsPerson)) {
+        if (person.equals(noTagsPerson) && model.hasPerson(noTagsPerson)) {
             throw new ExecuteException(MESSAGE_TAGS_NOT_FOUND);
         }
 

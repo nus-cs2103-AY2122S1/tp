@@ -228,7 +228,10 @@ public class Person implements Unique<Person>, Notable {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getNote().equals(getNote())
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getSuperGroups().equals(getSuperGroups())
+                && otherPerson.getDisplaySubGroups().equals(getDisplaySubGroups());
     }
 
     @Override

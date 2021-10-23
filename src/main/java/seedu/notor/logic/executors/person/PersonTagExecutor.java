@@ -17,7 +17,7 @@ import seedu.notor.model.tag.Tag;
  */
 public class PersonTagExecutor extends PersonExecutor {
     public static final String MESSAGE_TAG_PERSON_SUCCESS = "Added Tags to %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "The person already has these tags";
+    public static final String MESSAGE_ALL_TAGS_ADDED_DUPLICATES = "The person already has these tags";
 
     private final Set<Tag> tags;
 
@@ -38,8 +38,8 @@ public class PersonTagExecutor extends PersonExecutor {
         Person person = super.getPerson();
         Person taggedPerson = createTaggedPerson(person, tags);
 
-        if (!person.isSame(taggedPerson) && model.hasPerson(taggedPerson)) {
-            throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
+        if (person.equals(taggedPerson) && model.hasPerson(taggedPerson)) {
+            throw new ExecuteException(MESSAGE_ALL_TAGS_ADDED_DUPLICATES);
         }
 
         model.setPerson(person, taggedPerson);

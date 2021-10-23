@@ -73,7 +73,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code superGroups} into a {@code Set<String>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withSuperGroups(String... superGroups) {
         this.superGroups = new HashSet<>(Arrays.asList(superGroups));
@@ -81,7 +81,7 @@ public class PersonBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code subGroups} into a {@code Set<String>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withSubGroups(String... subGroups) {
         this.subGroups = new HashSet<>(Arrays.asList(subGroups));

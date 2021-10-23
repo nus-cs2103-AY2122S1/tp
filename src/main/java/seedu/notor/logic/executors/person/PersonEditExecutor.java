@@ -20,7 +20,7 @@ import seedu.notor.model.person.Phone;
  */
 public class PersonEditExecutor extends PersonExecutor {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_NO_CHANGES_MADE = "No changes were made to this person.";
 
     private final PersonEditDescriptor personEditDescriptor;
 
@@ -41,8 +41,8 @@ public class PersonEditExecutor extends PersonExecutor {
         Person person = super.getPerson();
         Person editedPerson = createEditedPerson(person, personEditDescriptor);
 
-        if (!person.isSame(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new ExecuteException(MESSAGE_DUPLICATE_PERSON);
+        if (person.equals(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new ExecuteException(MESSAGE_NO_CHANGES_MADE);
         }
 
         model.setPerson(person, editedPerson);

@@ -38,7 +38,7 @@ public class PersonUntagExecutor extends PersonExecutor {
         Person person = super.getPerson();
         Person taggedPerson = createTaggedPerson(person, tags);
 
-        if (!person.isSame(taggedPerson) && model.hasPerson(taggedPerson)) {
+        if (person.equals(taggedPerson) && model.hasPerson(taggedPerson)) {
             throw new ExecuteException(MESSAGE_TAGS_NOT_FOUND);
         }
 

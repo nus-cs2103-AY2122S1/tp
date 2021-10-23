@@ -12,7 +12,7 @@ import seedu.notor.logic.executors.person.PersonClearTagsExecutor;
 import seedu.notor.logic.executors.person.PersonExecutor;
 
 /**
- * Clears all tgs of a person in Notor.
+ * Clears all tags of a person in Notor.
  */
 public class PersonClearTagsCommand extends PersonCommand {
 
