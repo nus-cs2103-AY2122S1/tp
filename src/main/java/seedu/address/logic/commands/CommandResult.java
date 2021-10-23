@@ -17,6 +17,14 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean exit;
 
+    /** The command issued is to show a single person's task list */
+    private boolean displaySingleTaskList;
+
+    /** The command issued is to show every person's task list */
+    private boolean displayAllTaskList;
+
+    /** The command issued modifies/writes the application's data */
+    private boolean writeCommand;
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -24,6 +32,9 @@ public class CommandResult {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.exit = exit;
+        this.displayAllTaskList = false;
+        this.displaySingleTaskList = false;
+        this.writeCommand = false;
     }
 
     /**
@@ -32,6 +43,32 @@ public class CommandResult {
      */
     public CommandResult(String feedbackToUser) {
         this(feedbackToUser, false, false);
+    }
+
+    public void setDisplayAllTaskList() {
+        this.displayAllTaskList = true;
+        this.displaySingleTaskList = false;
+    }
+
+    public void setDisplaySingleTaskList() {
+        this.displaySingleTaskList = true;
+        this.displayAllTaskList = false;
+    }
+
+    public void setWriteCommand() {
+        writeCommand = true;
+    }
+
+    public boolean isDisplayAllTaskList() {
+        return displayAllTaskList;
+    }
+
+    public boolean isDisplaySingleTaskList() {
+        return displaySingleTaskList;
+    }
+
+    public boolean isWriteCommand() {
+        return writeCommand;
     }
 
     public String getFeedbackToUser() {

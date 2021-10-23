@@ -18,9 +18,15 @@ public class ViewTaskListCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ViewTaskListCommand parse(String args) throws ParseException {
+        args = args.trim();
         try {
-            Index index = ParserUtil.parseIndex(args);
-            return new ViewTaskListCommand(index);
+            if (args.equals("-A")) {
+                System.out.println("HERE");
+                return new ViewTaskListCommand();
+            } else {
+                Index index = ParserUtil.parseIndex(args);
+                return new ViewTaskListCommand(index);
+            }
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE), pe);
