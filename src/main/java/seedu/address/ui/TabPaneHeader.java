@@ -8,6 +8,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.address.logic.Logic;
 import seedu.address.model.Model;
+import seedu.address.model.person.IsFavouritePredicate;
 import seedu.address.model.person.RandomPersonGeneratorPredicate;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
@@ -42,7 +43,7 @@ public class TabPaneHeader extends UiPart<Region> {
             if (newValue.equals(contacts)) {
                 logic.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             } else if (newValue.equals(favorite)) {
-                logic.updateFilteredPersonList(new TagContainsKeywordsPredicate(Collections.singletonList("friends")));
+                logic.updateFilteredPersonList(new IsFavouritePredicate(true));
             } else if (newValue.equals(events)) {
                 logic.updateFilteredPersonList(
                         new TagContainsKeywordsPredicate(Collections.singletonList("colleagues")));
