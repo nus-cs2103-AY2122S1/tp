@@ -2,8 +2,12 @@ package seedu.address.ui;
 
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
@@ -22,7 +26,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label taskName;
+    private Label taskList;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -50,6 +54,10 @@ public class TaskCard extends UiPart<Region> {
         String taskVenue = task.getVenue() == null ? "" : task.getVenue().venue;
         String taskString = "Task: " + name
                 + "\nDate: " + taskDate + "; Time: " + taskTime + "; Venue: " + taskVenue;
-        taskName.setText(taskString);
+        if (task.getDone()) {
+            descriptionPane.setBackground(new Background(
+                    new BackgroundFill(javafx.scene.paint.Paint.valueOf("green"), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+        taskList.setText(taskString);
     }
 }

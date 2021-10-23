@@ -33,6 +33,7 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.DoneCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -255,6 +256,7 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(AddTaskCommand.COMMAND_WORD, this::handleAddTask);
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
         commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
+        commandTable.put(DoneCommand.COMMAND_WORD, this::handleDoneTask);
         commandTable.put("close", this::handleCloseWindow);
     }
 
@@ -344,6 +346,12 @@ public class HelpWindow extends AnchorPane {
         additionalInfo.setText("Format: edittask INDEX ti/TASK_INDEX [task/TASKNAME]\n"
                 + "Edits a task attached to the person (at the specified INDEX) according to the TASK_INDEX\n"
                 + "At least one of the optional fields must be provided.");
+    }
+
+    private void handleDoneTask() {
+        additionalInfo.setText("Format: donetask INDEX -ti TASK_INDEX\n"
+                + "Marks task(s) indicated by the TASK_INDEX "
+                + "of person indicated by INDEX as done.");
     }
 
     private void handleCloseWindow() {

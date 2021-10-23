@@ -56,6 +56,8 @@ public class EditTaskCommand extends Command {
     private final EditTaskDescriptor editTaskDescriptor;
 
     /**
+     * Constructor for EditTaskCommand to edit a person's task.
+     *
      * @param targetPersonIndex of the person in the filtered person list
      * @param targetTaskIndex of the task to edit
      */

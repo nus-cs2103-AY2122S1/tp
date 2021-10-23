@@ -72,7 +72,7 @@ public class PersonUtil {
             if (tasks.isEmpty()) {
                 sb.append(PREFIX_TASK_DESCRIPTION).append(" ");
             } else {
-                tasks.forEach(s -> sb.append(PREFIX_TASK_DESCRIPTION).append(s.taskName).append(" "));
+                tasks.forEach(s -> sb.append(PREFIX_TASK_DESCRIPTION).append(s.getTaskName().taskName).append(" "));
             }
         }
 

@@ -18,17 +18,20 @@ public class JsonAdaptedTask {
     private final String taskDate;
     private final String taskTime;
     private final String taskVenue;
+    private final String isDone;
 
     /**
      * Constructs a {@code JsonAdaptedTask} with the given {@code task}.
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("taskName") String taskName, @JsonProperty("taskDate") String taskDate,
-                           @JsonProperty("taskTime") String taskTime, @JsonProperty("taskVenue") String taskVenue) {
+                           @JsonProperty("taskTime") String taskTime, @JsonProperty("taskVenue") String taskVenue,
+                           @JsonProperty("isDone") String isDone) {
         this.taskName = taskName;
         this.taskDate = taskDate;
         this.taskTime = taskTime;
         this.taskVenue = taskVenue;
+        this.isDone = isDone;
     }
 
     /**
@@ -45,6 +48,7 @@ public class JsonAdaptedTask {
         this.taskVenue = source.getVenue() == null
                 ? null
                 : source.getVenue().venue;
+        this.isDone = String.valueOf(source.getDone());
     }
 
     /**
@@ -89,6 +93,13 @@ public class JsonAdaptedTask {
             }
         }
 
-        return new Task(modelName, modelDate, modelTime, modelVenue);
+        boolean modelIsDone = Boolean.parseBoolean(isDone);
+
+        Task newTask = new Task(modelName, modelDate, modelTime, modelVenue);
+        if (modelIsDone) {
+            newTask.setDone();
+        }
+
+        return newTask;
     };
 }

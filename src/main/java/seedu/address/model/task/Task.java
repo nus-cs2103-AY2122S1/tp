@@ -7,10 +7,11 @@ public class Task {
     public static final String MESSAGE_CONSTRAINTS =
             "Task should contain at least the task name.";
 
-    public final TaskName taskName;
-    public final TaskDate date;
-    public final TaskTime time;
-    public final Venue venue;
+    private final TaskName taskName;
+    private final TaskDate date;
+    private final TaskTime time;
+    private final Venue venue;
+    private boolean isDone = false;
 
     /**
      * Constructor for task. Creates a new task with the given a String name.
@@ -39,6 +40,14 @@ public class Task {
         return venue;
     }
 
+    public boolean getDone() {
+        return isDone;
+    }
+
+    public void setDone() {
+        isDone = true;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -60,6 +69,7 @@ public class Task {
                 ? venue == null
                 : otherTask.getVenue().equals(venue);
         return otherTask.getTaskName().equals(taskName)
+                && otherTask.isDone == isDone
                 && sameDate
                 && sameTime
                 && sameVenue;

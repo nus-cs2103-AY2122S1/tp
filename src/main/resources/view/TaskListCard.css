@@ -3,6 +3,8 @@
     -fx-min-width: 80.0;
 }
 
-#taskName {
+#taskList {
     -fx-wrap-text: true;
 }
+
+

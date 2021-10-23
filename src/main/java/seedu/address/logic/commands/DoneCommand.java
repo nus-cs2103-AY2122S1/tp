@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -17,34 +18,33 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
- * Deletes the task(s) identified using its displayed index in the task list.
+ * Marks task(s) identified using its displayed index in the task list as done.
  */
-public class DeleteTaskCommand extends Command {
+public class DoneCommand extends Command {
 
-    public static final String MESSAGE_SUCCESS = "Removed %1$d %2$s from %3$s";
-    public static final String COMMAND_WORD = "deletetask";
+    public static final String COMMAND_WORD = "donetask";
+    public static final String MESSAGE_SUCCESS = "Marked %1$d %2$s of %3$s as done.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task, specified by the TASKINDEX, from person"
+            + ": Marks the task, specified by the TASKINDEX, from person"
             + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_TASK_INDEX + "TaskIndex\n"
-            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + "2";
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
-    public static final String DESCRIPTION = "Deletes the task, specified by the TASK_INDEX, "
+    public static final String DESCRIPTION = "Marks the task(s), specified by the TASK_INDEX, "
             + "from person specified by the INDEX";
 
     private final Index targetPersonIndex;
     private final List<Index> targetTaskIndexes;
 
     /**
-     * Constructor for a DeleteTaskCommand to delete a task from a person.
+     * Constructor for a DoneCommand to mark a task of a person as done.
      *
      * @param targetPersonIndex The Index of the target person.
      * @param targetTaskIndexes The Index of the target Task that belongs to target person.
      */
-    public DeleteTaskCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
-        requireNonNull(targetPersonIndex);
-        requireNonNull(targetTaskIndexes);
+    public DoneCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
+        requireAllNonNull(targetPersonIndex, targetTaskIndexes);
         this.targetPersonIndex = targetPersonIndex;
         this.targetTaskIndexes = targetTaskIndexes;
     }
@@ -75,11 +75,9 @@ public class DeleteTaskCommand extends Command {
             }
         }
 
-        List<Task> tasksToRemove = new ArrayList<>();
         for (Index targetTaskIndex : copyOfIndexList) {
-            Task taskToRemove = tasks.get(targetTaskIndex.getZeroBased());
-            tasksToRemove.add(taskToRemove);
-            tasks.remove(targetTaskIndex.getZeroBased());
+            Task taskDone = tasks.get(targetTaskIndex.getZeroBased());
+            taskDone.setDone();
         }
 
         Person editedPerson = new Person(
@@ -89,7 +87,7 @@ public class DeleteTaskCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
+        return new CommandResult(generateSuccessMessage(editedPerson, targetTaskIndexes.size()));
     }
 
     public String getCommand() {
@@ -114,7 +112,8 @@ public class DeleteTaskCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
-                && targetPersonIndex.equals(((DeleteTaskCommand) other).targetPersonIndex)
-                && targetTaskIndexes.equals(((DeleteTaskCommand) other).targetTaskIndexes)); // state check
+                && targetPersonIndex.equals(((DoneCommand) other).targetPersonIndex)
+                && targetTaskIndexes.equals(((DoneCommand) other).targetTaskIndexes)); // state check
     }
+
 }
