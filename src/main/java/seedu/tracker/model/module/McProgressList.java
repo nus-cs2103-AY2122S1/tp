@@ -3,6 +3,7 @@ package seedu.tracker.model.module;
 import static java.util.Objects.requireNonNull;
 
 import java.util.stream.Collectors;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.tracker.model.UserInfo;
@@ -33,17 +34,21 @@ public class McProgressList {
     public static final String MATH_SCIENCE_TAG_TITLE = "MathScience";
 
     private static final int[] TAG_INDEXES_LIST = new int[] {GE_INDEX, UE_INDEX,
-            FOUNDATION_INDEX, BREADTH_DEPTH_INDEX, PROFESSIONALISM_INDEX, MATH_SCIENCE_INDEX};
+        FOUNDATION_INDEX, BREADTH_DEPTH_INDEX, PROFESSIONALISM_INDEX, MATH_SCIENCE_INDEX};
 
     private static final int[] MC_REQUIREMENTS_LIST = new int[] {GE_REQUIREMENT, UE_REQUIREMENT,
-            FOUNDATION_REQUIREMENT, BREADTH_DEPTH_REQUIREMENT, PROFESSIONALISM_REQUIREMENT, MATH_SCIENCE_REQUIREMENT};
+        FOUNDATION_REQUIREMENT, BREADTH_DEPTH_REQUIREMENT, PROFESSIONALISM_REQUIREMENT, MATH_SCIENCE_REQUIREMENT};
 
     private static final String[] TAGS_LIST = new String[] {GE_TAG_TITLE, UE_TAG_TITLE, FOUNDATION_TAG_TITLE,
-            BREADTH_DEPTH_TAG_TITLE, PROFESSIONALISM_TAG_TITLE, MATH_SCIENCE_TAG_TITLE};
+        BREADTH_DEPTH_TAG_TITLE, PROFESSIONALISM_TAG_TITLE, MATH_SCIENCE_TAG_TITLE};
 
     private ObservableList<McProgress> mcProgressList;
     private UserInfo userInfo;
 
+    /**
+     * Constructs a new McProgressList.
+     * @param userInfo information used to calculate the needed mcs and get the required mc targets.
+     */
     public McProgressList(UserInfo userInfo) {
         requireNonNull(userInfo);
         this.userInfo = userInfo;
@@ -65,6 +70,11 @@ public class McProgressList {
         this.mcProgressList = defaultProgressList;
     }
 
+    /**
+     * Updates the list of McProgress.
+     * @param modules module list to calculate completed mcs from.
+     * @param userInfo user information used to calculate completed mcs and get mc targets.
+     */
     public void update(ObservableList<Module> modules, UserInfo userInfo) {
         // update new user info
         this.userInfo = userInfo;
@@ -117,7 +127,8 @@ public class McProgressList {
         AcademicCalendar currentSemester = userInfo.getCurrentSemester();
 
         return modules.stream()
-                .filter(module -> module.hasAcademicCalendar() && module.getAcademicCalendar().isBefore(currentSemester))
+                .filter(module -> module.hasAcademicCalendar()
+                        && module.getAcademicCalendar().isBefore(currentSemester))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 

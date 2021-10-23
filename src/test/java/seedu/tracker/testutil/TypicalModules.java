@@ -64,8 +64,8 @@ public class TypicalModules {
 
     public static final Module CS2040S = new ModuleBuilder().withCode("CS2040S")
             .withTitle("Data Structures and Algorithms")
-            .withDescription("introduces students to the design and implementation of fundamental data structures " +
-                    "and algorithms")
+            .withDescription("introduces students to the design and implementation of fundamental data structures "
+                    + "and algorithms")
             .withTags("foundation")
             .withAcademicCalendar(1, 3).build();
 

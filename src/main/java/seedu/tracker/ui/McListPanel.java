@@ -1,18 +1,14 @@
 package seedu.tracker.ui;
 
-import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.tracker.commons.core.LogsCenter;
-import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.McProgress;
-import seedu.tracker.model.module.Module;
 
 /**
  * Panel containing the list of modules.

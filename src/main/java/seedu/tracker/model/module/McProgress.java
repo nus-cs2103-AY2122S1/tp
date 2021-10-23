@@ -11,6 +11,12 @@ public class McProgress {
     private Mc completed;
     private String tagName;
 
+    /**
+     * Constructs a McProgress.
+     * @param completed completed Mcs.
+     * @param target target Mcs.
+     * @param tagName tag tracked to calculate completed Mcs.
+     */
     public McProgress(Mc completed, Mc target, String tagName) {
         requireAllNonNull(completed, target, tagName);
         this.completed = completed;
@@ -18,6 +24,10 @@ public class McProgress {
         this.tagName = tagName;
     }
 
+    /**
+     * Constructs a McProgress copy from another McProgress object.
+     * @param toCopy McProgress object to be copied from.
+     */
     public McProgress(McProgress toCopy) {
         requireNonNull(toCopy);
         this.completed = toCopy.completed;

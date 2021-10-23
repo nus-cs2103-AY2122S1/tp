@@ -40,7 +40,7 @@ public class McProgressTest {
         McProgress completedProgress = new McProgress(mcProgress);
         completedProgress.setCompleted(new Mc(16));
         assertTrue(completedProgress.isCompleted());
-        
+
         //completed > target -> true
         McProgress overcompletedProgress = new McProgress(mcProgress);
         overcompletedProgress.setCompleted(new Mc(17));

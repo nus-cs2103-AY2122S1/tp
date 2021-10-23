@@ -29,7 +29,6 @@ import seedu.tracker.model.ModelManager;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.UserPrefs;
-import seedu.tracker.model.module.Mc;
 import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.JsonModuleTrackerStorage;
