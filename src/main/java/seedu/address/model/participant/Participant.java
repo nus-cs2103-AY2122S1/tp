@@ -167,7 +167,6 @@ public class Participant {
     }
 
     /**
-<<<<<<< HEAD
      * Adds a next of kin to the participant.
      *
      * @param nextOfKin next of kin to be added.

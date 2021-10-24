@@ -23,7 +23,7 @@ public class AddNextOfKinParser implements Parser<AddNextOfKinCommand> {
 
         String[] sections = args.split(" ");
 
-        if (sections.length != 5) {
+        if (sections.length < 5) {
             throw new ParseException(String.format(
                     MESSAGE_INVALID_COMMAND_FORMAT, AddNextOfKinCommand.MESSAGE_USAGE));
         }
