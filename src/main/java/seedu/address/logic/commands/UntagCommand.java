@@ -31,9 +31,8 @@ public class UntagCommand extends Command {
 
     public static final String COMMAND_WORD = "untag";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a tag from the "
-            + "details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Removes a tag from the details of the person "
+            + "identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
