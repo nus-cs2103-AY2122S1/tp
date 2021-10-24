@@ -2,15 +2,12 @@ package seedu.programmer.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.programmer.logic.parser.CliSyntax.*;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NEW_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
 import java.util.stream.Stream;
 
-import seedu.programmer.commons.core.index.Index;
-import seedu.programmer.logic.commands.AddCommand;
-import seedu.programmer.logic.commands.AddLabCommand;
-import seedu.programmer.logic.commands.EditCommand;
 import seedu.programmer.logic.commands.EditLabCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
@@ -36,8 +33,8 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_LAB_NEW_TITLE).isPresent() &&
-                argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
+        if (argMultimap.getValue(PREFIX_LAB_NEW_TITLE).isPresent()
+                && argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
             String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(null));
             String newTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NEW_TITLE).orElse(null));
             Double total = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));

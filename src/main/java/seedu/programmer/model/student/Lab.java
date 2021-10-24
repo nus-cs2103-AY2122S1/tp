@@ -51,12 +51,20 @@ public class Lab {
         this.actualScore = value;
     }
 
+    /**
+     * Updates the title of the lab
+     * @param newTitle
+     */
     public void updateTitle(String newTitle) {
         if (newTitle != null) {
             this.title = newTitle;
         }
     }
 
+    /**
+     * Updates the totalScore of the lab
+     * @param total
+     */
     public void updateTotal(Double total) {
         if (total != null) {
             this.totalScore = total;

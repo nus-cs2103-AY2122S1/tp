@@ -6,14 +6,11 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.List;
-import java.util.Optional;
 
-import seedu.programmer.commons.core.Messages;
-import seedu.programmer.commons.core.index.Index;
-import seedu.programmer.commons.util.CollectionUtil;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.Student;
 
 
 /**
@@ -43,7 +40,7 @@ public class EditLabCommand extends Command {
      * @param original the lab to be edited.
      * */
     public EditLabCommand(Lab original, String newTitle, Double total) {
-        this.original =original;
+        this.original = original;
         this.newTitle = newTitle;
         this.total = total;
     }
@@ -51,7 +48,7 @@ public class EditLabCommand extends Command {
      * @param original the lab to be edited.
      * */
     public EditLabCommand(Lab original, Double total) {
-        this.original =original;
+        this.original = original;
         this.total = total;
     }
 
@@ -59,7 +56,7 @@ public class EditLabCommand extends Command {
      * @param original the lab to be edited.
      * */
     public EditLabCommand(Lab original, String newTitle) {
-        this.original =original;
+        this.original = original;
         this.newTitle = newTitle;
     }
 
