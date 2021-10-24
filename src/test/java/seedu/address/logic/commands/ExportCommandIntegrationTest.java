@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.util.CsvWriter;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.Model;
-import seedu.address.testutil.ModelStubProvidingValidFilteredListAllFields;
 import seedu.address.testutil.ModelStubProvidingValidFilteredListNamesOnly;
 
 public class ExportCommandIntegrationTest {
@@ -24,16 +23,6 @@ public class ExportCommandIntegrationTest {
             + File.separator
             + "testedCsv.csv";
 
-    public static final String EXPECTED_FILE_PATH_ALL_FIELDS = "src"
-            + File.separator
-            + "test"
-            + File.separator
-            + "data"
-            + File.separator
-            + "ExportCommandIntegrationTest"
-            + File.separator
-            + "expectedCsvAllFields.csv";
-
     public static final String EXPECTED_FILE_PATH_NAMES_ONLY = "src"
             + File.separator
             + "test"
@@ -43,7 +32,7 @@ public class ExportCommandIntegrationTest {
             + "ExportCommandIntegrationTest"
             + File.separator
             + "expectedCsvNamesOnly.csv";
-    
+
     @Test
     public void execute_exportCommandNameOnly_success() throws Exception {
         ExportCommand command = new ExportCommand(TESTED_FILE_PATH, new CsvWriter());
