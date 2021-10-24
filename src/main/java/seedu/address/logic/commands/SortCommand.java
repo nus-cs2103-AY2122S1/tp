@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -53,7 +52,7 @@ public class SortCommand extends Command {
         public String toString() {
             return code;
         }
-    };
+    }
 
     private final List<Prefix> prefixes;
     private final List<Direction> directions;
@@ -106,14 +105,12 @@ public class SortCommand extends Command {
         requireAllNonNull(prefix, direction);
         assert SUPPORTED_PREFIXES.contains(prefix);
 
-        Function<Person, Comparable> keyFunction = prefix.equals(PREFIX_NAME)
-                ? Person::getName
+        Comparator<Person> comparator = prefix.equals(PREFIX_NAME)
+                ? Comparator.comparing(Person::getName)
                 : prefix.equals(PREFIX_CASE_NUMBER)
-                ? Person::getCaseNumber
+                ? Comparator.comparing(Person::getCaseNumber)
                 : null;
-        requireNonNull(keyFunction);
-
-        Comparator<Person> comparator = Comparator.comparing(keyFunction);
+        requireNonNull(comparator);
         return direction == Direction.ASCENDING ? comparator : comparator.reversed();
     }
 }
