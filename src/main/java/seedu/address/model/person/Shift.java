@@ -6,6 +6,7 @@ import static seedu.address.commons.util.TimeUtil.isValidTime;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 
 /**
@@ -155,6 +156,27 @@ public class Shift {
             resultBoolean &= isValidTime(endTimeString);
         }
         return resultBoolean;
+    }
+
+    /**
+     * Returns a string of staff names that work on a specified shift. Result string is numbered and
+     * has each staff in a new line.
+     *
+     * @param stafflist full list of staff in Staff'd.
+     * @param day day of shift to be compared to.
+     * @param time time of shift to be compared to.
+     */
+    public static String filterListByShift(ObservableList<Person> stafflist, DayOfWeek day, LocalTime time) {
+        StringBuilder result = new StringBuilder();
+        int counter = 1;
+        for (Person p : stafflist) {
+            boolean hasShift = p.isWorking(day, time);
+            if (hasShift) {
+                result.append(counter).append(". ").append(p.getName()).append("\n");
+                counter++;
+            }
+        }
+        return result.toString();
     }
 
     @Override
