@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
@@ -20,6 +21,7 @@ public class PersonBuilder {
     public static final String DEFAULT_ID = "A1234567Z";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_GITHUB_USERNAME = "amybee";
     public static final boolean DEFAULT_IS_FAVOURITE = false;
     public static final boolean DEFAULT_IS_MY_PROFILE = false;
 
@@ -27,6 +29,7 @@ public class PersonBuilder {
     private StudentId id;
     private Phone phone;
     private Email email;
+    private GitHubUsername gitHubUsername;
     private boolean isFavourite;
     private Set<Mod> mods;
     private boolean isMyProfile;
@@ -39,6 +42,7 @@ public class PersonBuilder {
         id = new StudentId(DEFAULT_ID);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        gitHubUsername = new GitHubUsername(DEFAULT_GITHUB_USERNAME);
         isFavourite = DEFAULT_IS_FAVOURITE;
         mods = new HashSet<>();
         isMyProfile = DEFAULT_IS_MY_PROFILE;
@@ -52,6 +56,7 @@ public class PersonBuilder {
         id = personToCopy.getStudentId();
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
+        gitHubUsername = personToCopy.getGithubUsername();
         isFavourite = personToCopy.getIsFavourite();
         mods = new HashSet<>(personToCopy.getMods());
         isMyProfile = personToCopy.getIsMyProfile();
@@ -98,6 +103,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code GitHubUsername} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withGitHubUsername(String gitHubUsername) {
+        this.gitHubUsername = new GitHubUsername(gitHubUsername);
+        return this;
+    }
+
+    /**
      * Sets the {@code isFavourite} of the {@code Person} that we are building.
      */
     public PersonBuilder withFavourite(boolean isFavourite) {
@@ -105,12 +118,22 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Builds a {@Code Person} object
+     *
+     */
     public Person build() {
-        return new Person(name, id, phone, email, isFavourite, mods, isMyProfile);
+        return new Person(name, id, phone, email,
+                gitHubUsername, isFavourite, mods, isMyProfile);
     }
 
+    /**
+     * Builds the user's {@Code Person} personal profile
+     *
+     */
     public Person buildProfile() {
-        return new Person(name, id, phone, email, isFavourite, mods, true);
+        return new Person(name, id, phone, email,
+                gitHubUsername, isFavourite, mods, true);
     }
 
 }

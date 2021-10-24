@@ -6,7 +6,7 @@ import static seedu.modulink.commons.util.AppUtil.checkArgument;
 public class StudentId {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Student ID should start with A, have 7 numbers and end with a letter";
+            "Student ID should start with A, have 7 numbers  end with a letter";
     public static final String VALIDATION_REGEX = "^[aA]\\d{7}[a-zA-z]$";
     public final String value;
 

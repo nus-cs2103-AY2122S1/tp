@@ -3,6 +3,7 @@ package seedu.modulink.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
@@ -34,6 +35,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
+    public static final String VALID_GITHUB_USERNAME_AMY = "amy_bee";
+    public static final String VALID_GITHUB_USERNAME_BOB = "bobChoo2000";
 
     public static final String VALID_TAG_CS2103T = "CS2103T";
     public static final String VALID_TAG_CS2100 = "CS2100";
@@ -46,6 +49,9 @@ public class CommandTestUtil {
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
+    public static final String GITHUB_USERNAME_DESC_AMY = " " + PREFIX_GITHUB_USERNAME + VALID_GITHUB_USERNAME_AMY;
+    public static final String GITHUB_USERNAME_DESC_BOB = " " + PREFIX_GITHUB_USERNAME + VALID_GITHUB_USERNAME_BOB;
+
     public static final String TAG_DESC_CS2100 = " " + PREFIX_MOD + VALID_TAG_CS2100;
     public static final String TAG_DESC_CS2103T = " " + PREFIX_MOD + VALID_TAG_CS2103T;
 
@@ -54,6 +60,8 @@ public class CommandTestUtil {
     public static final String INVALID_ID_DESC = " " + PREFIX_ID + "1234567A"; // needs to start with letter 'A'
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_MOD + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_GITHUB_USERNAME_DESC = " "
+            + PREFIX_GITHUB_USERNAME + "@bobchoo"; // @ not allowed in username
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -64,10 +72,12 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withStudentId(VALID_ID_AMY).withPhone(VALID_PHONE_AMY)
-                .withEmail(VALID_EMAIL_AMY).withTags(VALID_TAG_CS2100).build();
+                .withEmail(VALID_EMAIL_AMY).withGitHubUsername(VALID_GITHUB_USERNAME_AMY)
+                .withTags(VALID_TAG_CS2100).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withStudentId(VALID_ID_BOB).withPhone(VALID_PHONE_BOB)
-                .withEmail(VALID_EMAIL_BOB).withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100).build();
+                .withEmail(VALID_EMAIL_BOB).withGitHubUsername(VALID_GITHUB_USERNAME_BOB)
+                .withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100).build();
     }
 
     /**

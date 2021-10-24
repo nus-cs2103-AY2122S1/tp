@@ -100,7 +100,7 @@ Here is a reference guide to the features and potential uses of ModuLink.
 
 Creates your user profile. You can also choose to add modules and indicate your group status for each module. Note, in order to start using ModuLink, you area **required** to create a new profile should you not have one.
 
-Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/MODULE [GROUP_STATUS]]...`
+Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [mod/MODULE [GROUP_STATUS]]...`
 
 **:information_source: Notes:**
 * STUDENT_ID must be unique
@@ -110,7 +110,7 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/MODULE [GROUP_S
 * To indicate you are looking for a group, you can include the description 'need group'. The respective module will be displayed as a red tag.
 
 Examples:
-* `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2103T`
+* `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com github/johndoe mod/CS2103T`
 * `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com mod/CS2101 need group`
 * `create n/Alexa Tan id/A0012367N p/998877662 e/alexa.tan@example.com mod/CS2030S need member mod/CS2100`
     <br>
@@ -125,6 +125,7 @@ Format: `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`
 
 Examples:
 * `edit p/123321432 e/changedemail@example.com`
+* `edit github/alex_yeoh`  
     <br>
   <br>
 ![result for 'edit p/99881234'](images/screenshots/editProfile.png)
@@ -350,6 +351,7 @@ Prefix | Parameter
 **`id/`** | STUDENT ID
 **`p/`** | PHONE NUMBER
 **`e/`** | EMAIL
+**`github/`** | GITHUB USERNAME
 **`mod/`** | MODULE
 **`group/`** | GROUP STATUS
 
@@ -357,7 +359,7 @@ Prefix | Parameter
 
 Action | Format, Examples
 -------|-----------------
-**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
+**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
 **Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`, `edit p/123321432 e/changedemail@example.com`
 **View** | `view STUDENT_ID`, `view A1234567R`
 **Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T Need a member mod/CS1231S`

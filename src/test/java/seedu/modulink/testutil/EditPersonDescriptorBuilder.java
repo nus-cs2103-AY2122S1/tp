@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
@@ -36,6 +37,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setStudentId(person.getStudentId());
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
+        descriptor.setGitHubUsername(person.getGithubUsername());
         descriptor.setTags(person.getMods());
     }
 
@@ -68,6 +70,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
         descriptor.setEmail(new Email(email));
+        return this;
+    }
+
+    /**
+     * Sets the {@code GitHubUsername} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withGitHubUsername(String gitHubUsername) {
+        descriptor.setGitHubUsername(new GitHubUsername(gitHubUsername));
         return this;
     }
 

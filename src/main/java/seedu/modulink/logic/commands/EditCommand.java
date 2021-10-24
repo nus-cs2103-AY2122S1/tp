@@ -16,6 +16,7 @@ import seedu.modulink.commons.util.CollectionUtil;
 import seedu.modulink.logic.commands.exceptions.CommandException;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
@@ -84,9 +85,12 @@ public class EditCommand extends Command {
         StudentId updatedId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        GitHubUsername updatedGitHubUsername = editPersonDescriptor.getGitHubUsername()
+                .orElse(personToEdit.getGithubUsername());
         Set<Mod> updatedMods = personToEdit.getMods();
 
-        return new Person(updatedName, updatedId, updatedPhone, updatedEmail, false, updatedMods, true);
+        return new Person(updatedName, updatedId, updatedPhone, updatedEmail,
+                updatedGitHubUsername, false, updatedMods, true);
     }
 
     @Override
@@ -115,6 +119,7 @@ public class EditCommand extends Command {
         private StudentId id;
         private Phone phone;
         private Email email;
+        private GitHubUsername gitHubUsername;
         private Set<Mod> mods;
 
         public EditPersonDescriptor() {}
@@ -128,6 +133,7 @@ public class EditCommand extends Command {
             setStudentId(toCopy.id);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
+            setGitHubUsername(toCopy.gitHubUsername);
             setTags(toCopy.mods);
         }
 
@@ -136,7 +142,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, id, phone, email, mods);
+            return CollectionUtil.isAnyNonNull(name, id, phone, email, gitHubUsername, mods);
         }
 
         public void setName(Name name) {
@@ -169,6 +175,14 @@ public class EditCommand extends Command {
 
         public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setGitHubUsername(GitHubUsername gitHubUsername) {
+            this.gitHubUsername = gitHubUsername;
+        }
+
+        public Optional<GitHubUsername> getGitHubUsername() {
+            return Optional.ofNullable(gitHubUsername);
         }
 
         /**
@@ -207,6 +221,7 @@ public class EditCommand extends Command {
                     && getStudentId().equals(e.getStudentId())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
+                    && getGitHubUsername().equals(e.getGitHubUsername())
                     && getTags().equals(e.getTags());
         }
     }

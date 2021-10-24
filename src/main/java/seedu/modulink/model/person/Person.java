@@ -20,6 +20,7 @@ public class Person {
     private final StudentId id;
     private final Phone phone;
     private final Email email;
+    private final GitHubUsername gitHubUsername;
     private boolean isFavourite;
 
     // Data fields
@@ -29,13 +30,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, StudentId id, Phone phone, Email email,
+    public Person(Name name, StudentId id, Phone phone, Email email, GitHubUsername gitHubUsername,
                   boolean isFavourite, Set<Mod> mods, boolean isMyProfile) {
         requireAllNonNull(name, id, phone, email, mods);
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
+        this.gitHubUsername = gitHubUsername;
         this.isFavourite = isFavourite;
         this.mods.addAll(mods);
         this.isMyProfile = isMyProfile;
@@ -55,6 +57,10 @@ public class Person {
 
     public Email getEmail() {
         return email;
+    }
+
+    public GitHubUsername getGithubUsername() {
+        return gitHubUsername;
     }
 
     /**
@@ -118,6 +124,7 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getGithubUsername().equals(getGithubUsername())
                 && sameMods
                 && otherPerson.getIsFavourite() == getIsFavourite()
                 && otherPerson.getStudentId().equals(getStudentId());
@@ -126,7 +133,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, mods);
+        return Objects.hash(name, phone, email, gitHubUsername, mods);
     }
 
     @Override
@@ -139,6 +146,8 @@ public class Person {
                 .append(getPhone())
                 .append("; Email: ")
                 .append(getEmail())
+                .append("; GitHub username: ")
+                .append(getGithubUsername())
                 .append("; isFavourite: ")
                 .append(getIsFavourite());
 

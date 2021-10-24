@@ -1,6 +1,7 @@
 package seedu.modulink.testutil;
 
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
@@ -34,6 +35,7 @@ public class PersonUtil {
         sb.append(PREFIX_ID + person.getStudentId().value + " ");
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
+        sb.append(PREFIX_GITHUB_USERNAME + person.getGithubUsername().value + " ");
         person.getMods().stream().forEach(
             s -> sb.append(PREFIX_MOD + s.modName + " ")
         );
@@ -49,6 +51,8 @@ public class PersonUtil {
         descriptor.getStudentId().ifPresent(studentId -> sb.append(PREFIX_ID).append(studentId.value).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
+        descriptor.getGitHubUsername().ifPresent(gitHubUsername -> sb.append(PREFIX_GITHUB_USERNAME)
+                .append(gitHubUsername.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Mod> mods = descriptor.getTags().get();
             if (mods.isEmpty()) {
