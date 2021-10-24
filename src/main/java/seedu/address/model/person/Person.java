@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
 import seedu.address.model.tag.Tag;
@@ -129,6 +130,20 @@ public class Person {
         return new Person(name, phone, email, address,
                 roles, salary, status, tags, periods);
 
+    }
+
+    /**
+     * Set time for a shift from the staff's schedule.
+     *
+     * @param dayOfWeek of the shift.
+     * @param slot of the shift.
+     * @param startTime of the shift.
+     * @param endTime of the shift.
+     * @throws InvalidShiftTimeException throws when the timings of Shift are invalid.
+     */
+    public void setShiftTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+            throws InvalidShiftTimeException {
+        schedule.setTime(dayOfWeek, slot, startTime, endTime);
     }
 
 
