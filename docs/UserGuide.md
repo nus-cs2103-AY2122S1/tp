@@ -118,8 +118,8 @@ Format: `delete INDEX [MORE_INDICES]`
 
 * Deletes the contact(s) at the specified `INDEX`(s).
 * The index(s) **must be a positive integer** (e.g. 1, 2, 3, ..)
-* The index(s) **must be given in ascending order** (e.g. `delete 1 4 5`)
 * The index(s) **must not exceed the total number of contacts** in the address book
+* The index(s) **can be given in any order** (e.g. `delete 1 4 5`, `delete 5 1 4`)
 
 Examples:
 * `sort` followed by `delete 2` deletes the 2nd person in the contacts list when sorted by name. 
