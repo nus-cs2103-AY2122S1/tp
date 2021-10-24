@@ -246,26 +246,47 @@ Examples:
 * `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
 
 
-### 4.6 Deleting tasks : `delete` (coming soon)
+### 4.6 Deleting tasks : `delete`
 
-Delete a specific task that has been added to your app.
+Removes a specific task that has been added to your app.
 
-![delete_command](images/deleteCommand.jpeg)
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- <code> delete <i>task_id (task_id)</i> </code>
+
+</div>
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
+* Deletes the task corresponding to the <code><i>task_id</i></code>
+* Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
+* The index provided must be positive integer
+
+</div>
+
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
+
+* `delete 3` removes the third item in the task list
+* `delete 1 2` removes the first and second items in the task list
+
+</div>
+
+#### Demonstration:
+
+![delete_command](images/User%20Guide/deleteCommandBefore.png)
 
 After running the delete command, the task at that particular index gets deleted as shown below:
 
-![delete_command_after](images/deleteCommandAfter.jpeg)
+![delete_command_after](images/User%20Guide/deleteCommandAfter.png)
 
-Format:
-- <code> delete <i>task_id (task_id)</i> </code>
 
-Interpretation
-* Deletes the task corresponding to the <code><i>task_id</i></code>
-* Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
-
-Examples:
-* `delete 3` removes the third item in the task list
-* `delete 1 2` removes the first and second items in the task list
+<div style="page-break-after: always;"></div>
 
 ### 4.7 Deleting all tasks : `clear`
 
