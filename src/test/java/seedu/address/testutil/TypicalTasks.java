@@ -64,7 +64,7 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(BUY_SHAMPOO, WATCH_MONEY_HEIST,
+        return new ArrayList<>(Arrays.asList(
                 TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
     }
 }
