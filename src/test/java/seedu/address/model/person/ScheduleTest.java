@@ -32,7 +32,7 @@ public class ScheduleTest {
         assertFalse(Schedule.isValidSchedule("abcde")); // invalid string
 
         // valid addresses
-        assertTrue(Schedule.isValidSchedule("monday-morning tuesday-afternoon"));
+        assertTrue(Schedule.isValidSchedule("monday-morning-19:00-20:00 tuesday-afternoon-12:00-13:00"));
         assertTrue(Schedule.isValidSchedule("")); //empty schedule
     }
 

@@ -311,6 +311,7 @@ Format: `exit`
 
 Views the schedule of staff's that satisfy the query conditions.
 
+
 Formats:  
 `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 
@@ -321,6 +322,9 @@ Examples:
 The output will look like the following.
 
 ![viewShedule](images/viewScheduleImage.png)
+
+
+
 
 #### Viewing all the staff(s) working a shift : `viewShift`
 
@@ -350,6 +354,8 @@ Adds a time period where the staff is working to the staff’s schedule.
 
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
 * The `fulldayname` field required to specify shifts are not case sensitive.
+* The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
+  10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
 
 Formats:  
 `addShift -n name d/fullDayName-shiftNumber`  
@@ -360,7 +366,22 @@ Examples:
 `addShift -n Candice d/Monday-1`   
 `addShift -i 1234 d/tuesday-0`
 
+### Updating start time and end time for a shift
 
+Updates the start time and end time of a specific shift of a specific staff.
+
+Formats:\
+`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm`
+`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm`
+
+* Start time and end time must follow the format (hh:mm).
+* Start time must be earlier than end time.
+* Both start time and end time must be within the bound (10:00-16:00 for morning slot, 16:00-22:00 for afternoon slot).
+* If the shift does not exist in the staff's schedule, it will be created.
+
+Examples:\
+`setShiftTime -n Candice d/Monday-0 st/10:30-12:30`
+`setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
 
 
 #### Deleting a shift from a staff : `deleteShift`
@@ -384,18 +405,7 @@ Formats:
 
 Examples:  
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2`  
-`editSchedule n/12345678 old/wednesday-2 new/thursday-2`
-
-
-
-
-
---------------------------------------------------------------------------------------------------------------------
-
-## FAQ
-
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Staff'd home folder.
+`editSchedule n/12345678 old/wednesday-2 new/thursday-2`  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -410,6 +420,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 **Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER`
+**Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER` <br> `viewShift -ti DAY-HH:mm`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
@@ -418,3 +429,13 @@ Action | Format, Examples
 **Help** | `help`
 **Clear** | `clear`
 **Exit** | `exit`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## FAQ
+
+**Q**: How do I transfer my data to another Computer?<br>
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Staff'd home folder.
+
+**Q**: Where is the save file located?
+**A**: In the data folder.

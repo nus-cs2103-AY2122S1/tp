@@ -2,6 +2,7 @@ package seedu.address.stubs.model;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -117,5 +118,10 @@ public class ModelStub implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime) {
+        throw new AssertionError("This method should not be called");
     }
 }
