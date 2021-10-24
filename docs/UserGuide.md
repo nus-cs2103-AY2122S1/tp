@@ -213,7 +213,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-list.png)
-<br?<<ins>gitGud after listing friends with the keyword.</ins>
+<br><ins>gitGud after listing friends with the keyword.</ins>
 
 #### Scheduling a friend: `friend --schedule`
 
