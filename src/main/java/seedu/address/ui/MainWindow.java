@@ -182,7 +182,8 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleSchedule() {
+    private void handleWeek() {
+        centerPanel.showWeek();
         centerPanel.goToday();
     }
 
@@ -220,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
                 break;
 
             case WEEK:
-                handleSchedule();
+                handleWeek();
                 break;
 
             case STUDENTS:

@@ -37,8 +37,9 @@ public class CenterPanel extends UiPart<Region> {
         displayPersonListPanel();
     }
 
-    public boolean isShowingSchedule() {
-        return centerPanelPlaceholder.getChildren().contains(weekPanel.getRoot());
+    public void showWeek() {
+        displaySchedulePanel();
+        weekPanel.showWeek();
     }
 
     /**
