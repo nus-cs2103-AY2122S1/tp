@@ -76,6 +76,7 @@ public class Student {
     public ObservableList<Lab> getLabResultList() {
         return labResultList;
     }
+
     public Lab getLab(int index) {
         return labResultList.get(index);
     }
@@ -110,6 +111,7 @@ public class Student {
         }
         this.labResultList.addAll(labResultRecord);
     }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.

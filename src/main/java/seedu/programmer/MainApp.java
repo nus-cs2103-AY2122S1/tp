@@ -58,14 +58,11 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         ProgrammerErrorStorage programmerErrorStorage = new JsonProgrammerErrorStorage(
                 userPrefs.getProgrammerErrorFilePath());
+
         storage = new StorageManager(programmerErrorStorage, userPrefsStorage);
-
         initLogging(config);
-
         model = initModelManager(storage, userPrefs);
-
         logic = new LogicManager(model, storage);
-
         ui = new UiManager(logic);
     }
 
