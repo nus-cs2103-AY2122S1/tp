@@ -58,7 +58,7 @@ These links help you to quickly navigate this document.
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
 
-1. Refer to the [Features](#features) below for details of each command.
+Kindly refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
