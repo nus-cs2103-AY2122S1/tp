@@ -287,7 +287,54 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
   to Claim would need a corresponding change to EditClaimDescriptor. Instead, Claim and EditClaimDescriptor should
   both extend from an abstract class to ensure that any future modification would not lead to regressions.
 
+###  Schedule appointment feature
 
+#### Current Implementation
+{:.no_toc}
+
+An appointment with a client is currently represented by the `appointment` field under `Person`,
+which is represented by an `Appointment` object.
+
+The `Appointment` object contains a `LocalDateTime` field called `appointmentTime` which represents the time that
+the appointment with is scheduled for. An empty appointment is represented when `appointmentTime` is set to `null`.
+
+<img src="images/ScheduleAppointmentClassDiagram.png" width="400" />
+
+The processing of a schedule command from the user can be split into 2 general steps:
+1. Parsing the user input into a `ScheduleCommand`
+2. Executing the `ScheduleCommand`
+
+Each step will be described in the sections below.
+
+**Step 1:** Parsing of user input
+
+Parsing of the user input is primarily handled by the `ScheduleCommandParser` which calls other helper classes to
+parse the text into the data classes `Index` and `Appointment`.
+
+<img src="images/ScheduleCommandParserSequenceDiagram.png" width="800" />
+
+`ScheduleCommandParser` then creates a `ScheduleCommand` using the `Index` and `Appointment` objects created.
+
+**Step 2:** Executing the ScheduleCommand
+
+<img src="images/ScheduleCommandExecuteActivityDiagram.png" width="400" />
+
+There are 3 possible outcomes from the execution of a ScheduleCommand.
+1. Schedule a new appointment with the client
+2. Reschedule an appointment with the client
+3. Delete an existing appointment with the client
+
+#### Design considerations
+{:.no_toc}
+
+*Aspect*: User interface of adding, editing and deleting appointments
+
+* **Alternative 1 (Current choice):** One ‘schedule’ command adds, edits and deletes
+    * Pros: Fewer commands for the user to remember
+    * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
+* **Alternative 2:** Different commands for add, edit and delete
+    * Pros: Easier to implement
+    * Cons: User has to remember a lot of commands
 
 --------------------------------------------------------------------------------------------------------------------
 
