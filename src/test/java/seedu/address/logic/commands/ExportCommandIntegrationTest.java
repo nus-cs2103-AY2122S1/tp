@@ -43,17 +43,7 @@ public class ExportCommandIntegrationTest {
             + "ExportCommandIntegrationTest"
             + File.separator
             + "expectedCsvNamesOnly.csv";
-
-    @Test
-    public void execute_exportCommand_success() throws Exception {
-        ExportCommand command = new ExportCommand(TESTED_FILE_PATH, new CsvWriter());
-        Model model = new ModelStubProvidingValidFilteredListAllFields();
-        command.execute(model);
-        assertTrue(FileUtil.areFilesEqual(Paths.get(TESTED_FILE_PATH),
-                Paths.get(EXPECTED_FILE_PATH_ALL_FIELDS)));
-        FileUtil.deleteFile(Paths.get(TESTED_FILE_PATH));
-    }
-
+    
     @Test
     public void execute_exportCommandNameOnly_success() throws Exception {
         ExportCommand command = new ExportCommand(TESTED_FILE_PATH, new CsvWriter());
