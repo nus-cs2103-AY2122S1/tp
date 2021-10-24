@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="pane-with-border" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
-        <Insets bottom="10" left="10" right="10" top="10" />
+        <Insets bottom="10" left="2" right="7" top="10" />
     </padding>
-    <Label fx:id="lessonListTitle" styleClass="cell_medium_label" />
+   <VBox alignment="CENTER" styleClass="name_box" prefHeight="35.0" maxHeight="40" prefWidth="100.0" VBox.vgrow="ALWAYS">
+      <children>
+          <Label fx:id="lessonListTitle" styleClass="cell_medium_label" wrapText="true" VBox.vgrow="ALWAYS"/>
+      </children>
+   </VBox>
     <ListView fx:id="lessonListView" VBox.vgrow="ALWAYS">
         <placeholder>
             <Label fx:id="placeholder" wrapText="true" />
