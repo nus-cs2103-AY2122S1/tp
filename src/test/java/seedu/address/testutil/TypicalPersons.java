@@ -52,13 +52,13 @@ public class TypicalPersons {
             .withEmail("henry@example.com")
             .withPhone("94351853")
             .withRemark("He likes Pizza.")
-            .withModuleCodes("CS2100").build();
+            .withModuleCodes("CS2100 T12").build();
 
     public static final Person ISAAC = new PersonBuilder().withName("Isaac Tan")
             .withEmail("isaaac@example.com")
             .withPhone("94951253")
             .withRemark("He likes basketball")
-            .withModuleCodes("CS2100", "CS2106").build();
+            .withModuleCodes("CS2100 T10 L08", "CS2106 T12").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)

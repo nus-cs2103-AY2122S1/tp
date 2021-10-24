@@ -30,7 +30,6 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     public DeletePersonCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
-        System.out.println(moduleCodes);
 
         if (moduleCodes.size() >= 1) {
             try {
@@ -68,6 +67,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
         if (moduleCode.getLessonCodes().size() > 1) {
             throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_LESSON_CODE_USAGE);
         }
+        System.out.println(stringListOfModuleCodes);
         return new DeletePersonCommand(
                 new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
     }

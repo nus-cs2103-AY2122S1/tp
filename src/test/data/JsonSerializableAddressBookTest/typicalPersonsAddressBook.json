@@ -99,7 +99,7 @@
     "remark" : "He likes Pizza.",
     "moduleCodes": [ {
       "moduleCode" : "CS2100",
-      "tags" : [ ]
+      "tags" : [ "T12" ]
     } ]
   },  {
     "name" : "Isaac Tan",
@@ -109,10 +109,10 @@
     "remark" : "He likes basketball",
     "moduleCodes": [ {
       "moduleCode": "CS2100",
-      "tags" : [ ]
+      "tags" : [ "T10", "L08" ]
     }, {
       "moduleCode": "CS2106",
-      "tags" :[ ]
+      "tags" :[ "T12" ]
     } ]
   } ],
   "lessons": [ ]

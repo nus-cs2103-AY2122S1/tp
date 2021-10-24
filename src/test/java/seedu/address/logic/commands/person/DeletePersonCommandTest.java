@@ -17,6 +17,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,6 +26,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.lessoncode.LessonCode;
 import seedu.address.model.person.ModuleCode;
 import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -94,6 +96,69 @@ public class DeletePersonCommandTest {
     }
 
     @Test
+    public void execute_validLessonCodeUnfilteredList_success() {
+        Person person = model.getFilteredPersonList().get(INDEX_HENRY.getZeroBased());
+
+        Set<LessonCode> lessonCodeToDelete = new HashSet<>();
+        lessonCodeToDelete.add(new LessonCode("T12"));
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100 + " T12"))),
+                new ModuleCode(VALID_MODULE_CODE_CS2100, lessonCodeToDelete));
+
+        String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 1)
+                + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person)
+                + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 0);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(person);
+
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_editValidLessonCodeUnfilteredList_success() {
+        Person person = model.getFilteredPersonList().get(INDEX_ISAAC.getZeroBased());
+        Person newPerson = new PersonBuilder(person).withModuleCodes(VALID_MODULE_CODE_CS2100 + " T10 L08").build();
+
+        Set<LessonCode> lessonCodeToDelete = new HashSet<>();
+        lessonCodeToDelete.add(new LessonCode("T12"));
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106 + " T12"))),
+                new ModuleCode(VALID_MODULE_CODE_CS2106, lessonCodeToDelete));
+
+        String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
+                + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 1)
+                + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(person, newPerson);
+
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_removeOneLessonCodeTagUnfilteredList_success() {
+        Person person = model.getFilteredPersonList().get(INDEX_ISAAC.getZeroBased());
+        Person newPerson = new PersonBuilder(person)
+                .withModuleCodes(VALID_MODULE_CODE_CS2100 + " T10", VALID_MODULE_CODE_CS2106 + " T12").build();
+
+        Set<LessonCode> lessonCodeToDelete = new HashSet<>();
+        lessonCodeToDelete.add(new LessonCode("L08"));
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100 + " L08"))),
+                new ModuleCode(VALID_MODULE_CODE_CS2100, lessonCodeToDelete));
+
+        String expectedMessage = String.format(DeletePersonCommand.MESSAGE_NUMBER_DELETED_PERSON, 0)
+                + String.format(DeletePersonCommand.MESSAGE_NUMBER_EDITED_PERSON, 1)
+                + String.format(DeletePersonCommand.MESSAGE_DELETE_SUCCESS, person);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.setPerson(person, newPerson);
+
+        assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         DeletePersonCommand deletePersonCommand = new DeletePersonCommand(outOfBoundIndex);
@@ -118,6 +183,30 @@ public class DeletePersonCommandTest {
                 predicate, new ModuleCode("CS1231", new HashSet<>()));
 
         assertCommandFailure(deletePersonCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
+    }
+
+    @Test
+    public void execute_invalidMultipleModuleCodeUnfilteredList_throwsCommandException() {
+        ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[CS2040S CS2030S]")));
+        Set<LessonCode> lessonCodeSet = new HashSet<>();
+        lessonCodeSet.add(new LessonCode("CS2030S"));
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
+                new ModuleCode("CS2040S", lessonCodeSet));
+
+        assertCommandFailure(deletePersonCommand, model, DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE);
+    }
+
+    @Test
+    public void execute_invalidLessonCodeUnfilteredList_throwsCommandException() {
+        ModuleCodesContainsKeywordsPredicate predicate = new ModuleCodesContainsKeywordsPredicate(
+                Arrays.asList(String.format("[CS2030S T1]")));
+        Set<LessonCode> lessonCodeSet = new HashSet<>();
+        lessonCodeSet.add(new LessonCode("T1"));
+        DeletePersonCommand deletePersonCommand = new DeletePersonCommand(predicate,
+                new ModuleCode("CS2030S", lessonCodeSet));
+
+        assertCommandFailure(deletePersonCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_LESSON_CODE);
     }
 
     @Test
@@ -215,14 +304,14 @@ public class DeletePersonCommandTest {
         DeletePersonCommand deleteBatchCommand1 = new DeletePersonCommand(INDEX_FIRST, INDEX_SECOND);
         DeletePersonCommand deleteBatchCommand2 = new DeletePersonCommand(INDEX_FIRST, INDEX_THIRD);
 
-        ModuleCodesContainsKeywordsPredicate first_predicate = new ModuleCodesContainsKeywordsPredicate(
+        ModuleCodesContainsKeywordsPredicate firstPredicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2106)));
-        ModuleCodesContainsKeywordsPredicate second_predicate = new ModuleCodesContainsKeywordsPredicate(
+        ModuleCodesContainsKeywordsPredicate secondPredicate = new ModuleCodesContainsKeywordsPredicate(
                 Arrays.asList(String.format("[%s]", VALID_MODULE_CODE_CS2100)));
 
-        DeletePersonCommand deleteByModule1 = new DeletePersonCommand(first_predicate,
+        DeletePersonCommand deleteByModule1 = new DeletePersonCommand(firstPredicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
-        DeletePersonCommand deleteByModule2 = new DeletePersonCommand(second_predicate,
+        DeletePersonCommand deleteByModule2 = new DeletePersonCommand(secondPredicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2100, new HashSet<>()));
 
         // same object -> returns true
@@ -237,7 +326,7 @@ public class DeletePersonCommandTest {
         DeletePersonCommand deleteBatchCommandCopy = new DeletePersonCommand(INDEX_FIRST, INDEX_SECOND);
         assertTrue(deleteBatchCommand1.equals(deleteBatchCommandCopy));
 
-        DeletePersonCommand deleteByModuleCopy = new DeletePersonCommand(first_predicate,
+        DeletePersonCommand deleteByModuleCopy = new DeletePersonCommand(firstPredicate,
                 new ModuleCode(VALID_MODULE_CODE_CS2106, new HashSet<>()));
         assertTrue(deleteByModule1.equals(deleteByModuleCopy));
 
