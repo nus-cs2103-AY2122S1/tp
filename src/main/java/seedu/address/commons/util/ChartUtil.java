@@ -58,7 +58,8 @@ public class ChartUtil {
      * Creates a JavaFX LineChart with the given title, axis labels and data points.
      */
     public static LineChart<String, Number> createLineChart(String title, String xLabel, String yLabel,
-                                                          List<Map<String, Number>> dataSet) {
+                                                          Map<String, Number> data, Map<String, Number> mean,
+                                                            Map<String, Number> median) {
 
         // Defining axes
         final CategoryAxis xAxis = new CategoryAxis();
@@ -76,14 +77,24 @@ public class ChartUtil {
 
 //        double maxY = DEFAULT_TICK_UNIT;
 
-        for (Map<String, Number> data : dataSet) {
-            XYChart.Series<String, Number> series = new XYChart.Series<>();
-            for (Map.Entry<String, Number> entry : data.entrySet()) {
-                series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
-                //            maxY = Math.max(maxY, entry.getValue().doubleValue());
-            }
-            lineChart.getData().add(series);
+
+        XYChart.Series<String, Number> seriesScore = new XYChart.Series<>();
+        for (Map.Entry<String, Number> entry : data.entrySet()) {
+            seriesScore.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
         }
+
+        XYChart.Series<String, Number> seriesMean = new XYChart.Series<>();
+        for (Map.Entry<String, Number> entry : mean.entrySet()) {
+            seriesScore.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        XYChart.Series<String, Number> seriesMedian = new XYChart.Series<>();
+        for (Map.Entry<String, Number> entry : median.entrySet()) {
+            seriesScore.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+        }
+
+        lineChart.getData().addAll(seriesScore, seriesMean, seriesMedian);
+
 
 //        double yUpperBound = roundUpToNearestMultiple(maxY, (int) DEFAULT_TICK_UNIT);
 

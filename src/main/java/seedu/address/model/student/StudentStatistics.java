@@ -45,19 +45,15 @@ public class StudentStatistics {
         return distribution;
     }
 
-    //TODO: now uses mean not median
-    private Map<String, Number> getMedian(Assessment assessment) {
-        AssessmentStatistics statistics = new AssessmentStatistics(assessment);
-        Map<String, Number> distribution = new TreeMap<>();
-        distribution.put(assessment.getValue(), statistics.getMean());
-        return distribution;
-    }
-
-
-    private List<Map<String, Number>> getDataSet() {
-        ArrayList<Map<String, Number>> dataSet = new ArrayList<>();
-        dataSet.add(getScoreDistribution());
-        scoreMap.forEach((assessment, score) -> dataSet.add(getMedian(assessment)));
+    private Map<String, Number>[] getDataSet() {
+        Map<String, Number> mean = new TreeMap<>();
+        Map<String, Number> median = new TreeMap<>();
+        scoreMap.forEach((assessment, score) -> {
+            AssessmentStatistics statistics = new AssessmentStatistics(assessment);
+            mean.put(assessment.getValue(), statistics.getMean());
+            median.put(assessment.getValue(), statistics.getMedian());
+        });
+        Map<String, Number>[] dataSet = new Map[]{mean, median};
         return dataSet;
     }
 
@@ -65,7 +61,8 @@ public class StudentStatistics {
      * Returns a line chart representing the scores of student for each assessment.
      */
     public Chart toLineChart() {
+        Map<String, Number>[] dataSet = getDataSet();
         return ChartUtil.createLineChart(student.getName() + CHART_TITLE,
-                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getDataSet());
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution(), dataSet[0], dataSet[1]);
     }
 }
