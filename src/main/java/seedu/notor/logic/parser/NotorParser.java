@@ -10,6 +10,7 @@ import seedu.notor.logic.commands.ClearCommand;
 import seedu.notor.logic.commands.ClearNoteCommand;
 import seedu.notor.logic.commands.Command;
 import seedu.notor.logic.commands.ExitCommand;
+import seedu.notor.logic.commands.ExportCommand;
 import seedu.notor.logic.commands.HelpCommand;
 import seedu.notor.logic.commands.NoteCommand;
 import seedu.notor.logic.commands.group.GroupClearNoteCommand;
@@ -98,6 +99,9 @@ public class NotorParser {
             }
             if (ClearNoteCommand.COMMAND_WORDS.contains(commandWord)) {
                 return new ClearNoteCommand();
+            }
+            if (ExportCommand.COMMAND_WORDS.contains(commandWord)) {
+                return new ExportCommand();
             }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

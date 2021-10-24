@@ -52,7 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
-        superGroups = new HashSet<>(personToCopy.getSuperGroups());
+        superGroups = new HashSet<>(personToCopy.getDisplaySuperGroups());
         subGroups = new HashSet<>(personToCopy.getDisplaySubGroups());
     }
 

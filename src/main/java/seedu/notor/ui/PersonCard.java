@@ -72,7 +72,7 @@ public class PersonCard extends UiPart<Region> {
             note.setManaged(false);
             noteLastModified.setManaged(false);
         }
-        groups.setText(Arrays.toString(person.getSuperGroups().toArray()));
+        groups.setText(Arrays.toString(person.getDisplaySuperGroups().toArray()));
         subGroups.setText(Arrays.toString(person.getDisplaySubGroups().toArray()));
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
