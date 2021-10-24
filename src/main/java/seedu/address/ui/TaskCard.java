@@ -58,6 +58,15 @@ public class TaskCard extends UiPart<Region> {
             descriptionPane.setBackground(new Background(
                     new BackgroundFill(javafx.scene.paint.Paint.valueOf("green"), CornerRadii.EMPTY, Insets.EMPTY)));
         }
+        task.updateDueDate();
+        if (task.getIsDueSoon()) {
+            descriptionPane.setBackground(new Background(
+                    new BackgroundFill(javafx.scene.paint.Paint.valueOf("darkorange"), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+        if (task.getIsOverdue()) {
+            descriptionPane.setBackground(new Background(
+                    new BackgroundFill(javafx.scene.paint.Paint.valueOf("red"), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
         taskList.setText(taskString);
     }
 }

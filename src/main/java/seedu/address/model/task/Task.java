@@ -2,16 +2,23 @@ package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 public class Task {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Task should contain at least the task name.";
+    private static int dueSoonThreshold = 3;
 
     private final TaskName taskName;
     private final TaskDate date;
     private final TaskTime time;
     private final Venue venue;
     private boolean isDone = false;
+    private boolean isOverdue;
+    private boolean isDueSoon;
 
     /**
      * Constructor for task. Creates a new task with the given a String name.
@@ -22,6 +29,7 @@ public class Task {
         this.date = date;
         this.time = time;
         this.venue = venue;
+        updateDueDate();
     }
 
     public TaskName getTaskName() {
@@ -50,6 +58,35 @@ public class Task {
 
     public void setNotDone() {
         isDone = false;
+    }
+
+    public boolean getIsOverdue() {
+        return isOverdue;
+    }
+
+    public boolean getIsDueSoon() {
+        return isDueSoon;
+    }
+
+    public void updateDueDate() {
+        if (!isDone) {
+            LocalDate taskDate = date == null ? LocalDate.MAX : date.taskDate;
+            LocalTime taskTime = time == null ? LocalTime.MIDNIGHT : time.taskTime;
+            LocalDateTime taskDateTime = LocalDateTime.of(taskDate, taskTime);
+            if (taskDateTime.isBefore(LocalDateTime.now())) { // Overdue
+                isOverdue = true;
+                isDueSoon = false;
+            } else if (taskDateTime.isBefore(LocalDateTime.now().plusDays(dueSoonThreshold))) { // Due soon
+                isOverdue = false;
+                isDueSoon = true;
+            } else {
+                isDueSoon = false;
+                isOverdue = false;
+            }
+        } else {
+            isDueSoon = false;
+            isOverdue = false;
+        }
     }
 
     @Override
