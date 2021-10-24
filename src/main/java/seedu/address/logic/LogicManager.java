@@ -16,6 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.storage.JsonAdaptedPerson;
+import seedu.address.storage.JsonSerializableUserProfile;
 import seedu.address.storage.Storage;
 import seedu.address.ui.PersonListPanel;
 
@@ -56,6 +58,21 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+    @Override
+    public Person getUserProfile() {
+        return model.getUserProfile();
+    }
+
+    @Override
+    public boolean isProfilePresent() {
+        return model.isProfilePresent();
+    }
+
+    @Override
+    public void setUserProfile(Person p) throws IOException {
+        storage.saveUserProfile(new JsonSerializableUserProfile(new JsonAdaptedPerson(p)));
+        model.setUserProfile(p);
+    }
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return model.getAddressBook();

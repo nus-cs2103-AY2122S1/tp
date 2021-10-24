@@ -24,23 +24,44 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private PersonListPanel personList;
+    private Person userProfile;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Person userProfile) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs "
+                + userPrefs + " and user profile " + userProfile);
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
+        this.userProfile = userProfile;
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
+    /**
+     * Initializes a ModelManager with default values.
+     */
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), null);
+    }
+
+
+    //=========== UserProfile ==================================================================================
+    @Override
+    public Person getUserProfile() {
+        return userProfile;
+    }
+    @Override
+    public boolean isProfilePresent() {
+        return userProfile != null;
+    }
+    @Override
+    public void setUserProfile(Person userProfile) {
+        this.userProfile = userProfile;
     }
 
     //=========== UserPrefs ==================================================================================

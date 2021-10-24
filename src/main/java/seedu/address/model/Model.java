@@ -16,6 +16,21 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
+     * Returns the user profile.
+     */
+    Person getUserProfile();
+
+    /**
+     * Checks if user profile exists.
+     */
+    boolean isProfilePresent();
+
+    /**
+     * Replaces user profile data with the data in {@code userProfile}.
+     */
+    void setUserProfile(Person userProfile);
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
