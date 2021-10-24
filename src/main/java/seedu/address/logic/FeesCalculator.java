@@ -1,6 +1,5 @@
 package seedu.address.logic;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
@@ -35,7 +34,9 @@ public class FeesCalculator {
     private static final LocalDate currentDate = LocalDate.now();
     private final LastUpdatedDate lastUpdated;
 
-    public FeesCalculator(Model model, LastUpdatedDate lastUpdatedDate) {
+
+
+    public FeesCalculator(LastUpdatedDate lastUpdatedDate) {
         lastUpdated = lastUpdatedDate;
     }
 
@@ -51,6 +52,9 @@ public class FeesCalculator {
             Person targetPerson = personList.get(i);
             model.setPerson(targetPerson, createEditedPerson(targetPerson));
         }
+
+        model.setLastUpdatedDate();
+
 
         return model;
     }
@@ -86,8 +90,9 @@ public class FeesCalculator {
                 : new HashSet<>(lesson.getHomework());
 
         // update outstanding fees after calculation
-        OutstandingFees updatedOutstandingFees = getUpdatedOutstandingFees(copiedDate.getUpdateFeesDay(),
-                copiedTimRange, copiedLessonRates);
+        OutstandingFees updatedOutstandingFees = lesson.hasStarted()
+                ? getUpdatedOutstandingFees(copiedDate.getUpdateFeesDay(), copiedTimRange, copiedLessonRates)
+                : new OutstandingFees(lesson.getOutstandingFees().value);
 
         return lesson.isRecurring()
                 ? new RecurringLesson(copiedDate, copiedTimRange, copiedSubject,
@@ -127,7 +132,7 @@ public class FeesCalculator {
         LocalDate startDate = lastUpdated.getLastUpdatedDate().date;
         int numberOfWeeksBetween = (int) ChronoUnit.WEEKS.between(startDate, currentDate);
 
-        int updateDayOfWeek = startDate.getDayOfWeek().getValue();
+        int updateDayOfWeek = updateDay.getValue();
         int todayDayOfWeek = currentDate.getDayOfWeek().getValue();
 
         // If today is after the update day or if today is the update day, update the fees for this week's lesson.

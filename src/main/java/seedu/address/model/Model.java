@@ -104,4 +104,9 @@ public interface Model {
 
     /** Returns an immutable Last Updated Date object. */
     LastUpdatedDate getLastUpdatedDate();
+
+    /**
+     * Sets the last updated date to today.
+     */
+    void setLastUpdatedDate();
 }

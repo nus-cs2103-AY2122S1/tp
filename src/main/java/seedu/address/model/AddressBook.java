@@ -33,6 +33,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         entries = new CalendarEntryList();
+        lastUpdatedDate = new LastUpdatedDate();
     }
 
     public AddressBook() {}
@@ -63,6 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setLastUpdatedDate(newData.getLastUpdatedDate());
     }
 
     //// person-level operations
@@ -129,10 +131,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         entries.removeLessons(key);
     }
 
-    public void setLastUpdatedDate(LastUpdatedDate lastUpdatedDate) {
-        this.lastUpdatedDate = new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
-    }
-
     //// util methods
 
     @Override
@@ -152,6 +150,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         return new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
     }
 
+    public void setLastUpdatedDate(LastUpdatedDate lastUpdatedDate) {
+        this.lastUpdatedDate = new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
+    }
+
     public Calendar getCalendar() {
         // TODO: Make defensive
         return entries.getCalendar();
@@ -161,7 +163,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                && persons.equals(((AddressBook) other).persons))
+                && lastUpdatedDate.equals(((AddressBook) other).lastUpdatedDate);
     }
 
     @Override

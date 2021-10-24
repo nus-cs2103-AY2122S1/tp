@@ -37,8 +37,16 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
-        feesCalculator = new FeesCalculator(model, model.getLastUpdatedDate());
+        feesCalculator = new FeesCalculator(model.getLastUpdatedDate());
         this.model = feesCalculator.updateAllLessonOutstandingFees(model);
+
+        // After model is updated. Save model to storage.
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException io) {
+            logger.warning("SYSTEM WILL NOT SAVE LAST UPDATED DATE. PLEASE RESTART THE APPLICATION.");
+        }
+
         this.storage = storage;
         undoRedoStack = new UndoRedoStack();
         addressBookParser = new AddressBookParser();
@@ -62,6 +70,7 @@ public class LogicManager implements Logic {
 
         return commandResult;
     }
+
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {

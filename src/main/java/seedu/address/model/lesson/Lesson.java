@@ -65,6 +65,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return date.getDayOfWeek();
     }
 
+    public boolean hasStarted() {
+        return date.isOver();
+    }
+
     public Subject getSubject() {
         return subject;
     }

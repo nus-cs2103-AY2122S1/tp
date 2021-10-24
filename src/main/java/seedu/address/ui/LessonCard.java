@@ -28,6 +28,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label rates;
     @FXML
+    private Label outstandingFees;
+    @FXML
     private FlowPane homeworkList;
 
     /**
@@ -41,6 +43,7 @@ public class LessonCard extends UiPart<Region> {
         date.setText("Date: " + lesson.getDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());
+        outstandingFees.setText("Outstanding Fees: $" + lesson.getOutstandingFees().toString());
         lesson.getHomework().stream()
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()

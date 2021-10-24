@@ -26,7 +26,6 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private final LastUpdatedDate lastUpdatedDate;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,7 +39,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        lastUpdatedDate = this.addressBook.getLastUpdatedDate();
     }
 
     public ModelManager() {
@@ -156,7 +154,12 @@ public class ModelManager implements Model {
 
     @Override
     public LastUpdatedDate getLastUpdatedDate() {
-        return lastUpdatedDate;
+        return addressBook.getLastUpdatedDate();
+    }
+
+    @Override
+    public void setLastUpdatedDate() {
+        addressBook.setLastUpdatedDate(new LastUpdatedDate());
     }
 
     @Override
