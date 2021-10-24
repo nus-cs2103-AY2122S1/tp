@@ -361,6 +361,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
+**Use case: Find a person by name**
+
+**MSS**
+
+1.  User inputs the find command with keywords to search for
+2.  PB shows a list of persons whose names match the given keywords
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+    
 **Use case: Add appointment**
 
 **MSS**
