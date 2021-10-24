@@ -17,4 +17,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_NEXT_OF_KIN_NAME = new Prefix("kn/");
     public static final Prefix PREFIX_NEXT_OF_KIN_PHONE = new Prefix("kp/");
     public static final Prefix PREFIX_NEXT_OF_KIN_ADDRESS = new Prefix("ka/");
+    public static final Prefix PREFIX_SHN_PERIOD_START = new Prefix("sh/start:");
+    public static final Prefix PREFIX_SHN_PERIOD_END = new Prefix("sh/end:");
 }

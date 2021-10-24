@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.predicates;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -67,9 +67,11 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new PersonBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
-        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withHomeAddress("Main Street").build()));
+        // Keywords match phone, email, case number, address, shn period (start) and shn period (end), but not name
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "601110", "Main",
+                "Street", "2000-01-01", "01-02"));
+        assertFalse(predicate.test(new PersonBuilder().withName("Alice").withPhone("12345").withEmail("alice@email.com")
+                .withCaseNumber("601110").withHomeAddress("Main Street").withShnPeriod("2000-01-01 => 2000-01-02")
+                .build()));
     }
 }
