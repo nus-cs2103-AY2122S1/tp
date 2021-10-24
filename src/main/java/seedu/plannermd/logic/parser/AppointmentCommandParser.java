@@ -45,8 +45,7 @@ public class AppointmentCommandParser {
         System.out.println(flag);
         switch (flag) {
         case FLAG_ADD:
-//            return new AddAppointmentCommandParser();
-            return null;
+            return new EditAppointmentCommand();
         case FLAG_EDIT:
             return new EditAppointmentCommand();
 

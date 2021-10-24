@@ -16,7 +16,7 @@ import seedu.plannermd.model.appointment.Appointment;
  * from plannermd.
  */
 public class DeleteAppointmentCommand extends DeleteCommand {
-    public static final String COMMAND_WORD  = "appt -d";
+    public static final String COMMAND_WORD = "appt -d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the appointment identified by the index number used in the displayed appointment list.\n"

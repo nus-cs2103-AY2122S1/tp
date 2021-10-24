@@ -1,9 +1,9 @@
 package seedu.plannermd.model.appointment;
 
-import seedu.plannermd.commons.util.StringUtil;
-
 import java.util.List;
 import java.util.function.Predicate;
+
+import seedu.plannermd.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -27,7 +27,8 @@ public class AppointmentFieldsContainKeywordsPredicate implements Predicate<Appo
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate // instanceof handles nulls
+                || (other instanceof
+                seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate // instanceof handles nulls
                 && keywords.equals((
                         (seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate) other)
                             .keywords)); // state check
