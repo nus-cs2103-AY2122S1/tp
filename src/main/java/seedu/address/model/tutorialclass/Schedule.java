@@ -9,12 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Schedule {
     public static final String MESSAGE_CONSTRAINTS =
             "Schedules should follow the format 'day-of-the-week starttime to endtime', "
-                    + "with different classes seperated by commas. \n"
-                    + "only contain alphanumeric characters, spaces and -'s"
-                    + "between start and end time and should not be blank";
+                    + "and different days must be separated by commas. \n"
+                    + "e.g. tues 12:00pm to 2:00pm, friday 12:00pm to 2:00pm";
 
-    private static final String TIME_REGEX = "[^(1[0-2]|0?[1-9]):([0-5]?[0-9])(●?[AP]M)?$]";
-    private static final String VALIDATION_REGEX = "[\\p{Graph}\\p{Punct}].*";
+    private static final String VALIDATION_REGEX = "[,\n]";
 
     public final String value;
 
@@ -35,7 +33,7 @@ public class Schedule {
      * @return validity of input schedule string.
      */
     public static boolean isValidSchedule(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return (test.split(VALIDATION_REGEX).length == 2);
     }
 
     private String parseSchedule(String input) {
