@@ -11,12 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
-import java.util.Optional;
-
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Frequency;
-import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
 
 /**
@@ -77,10 +73,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_OPTIONAL_VISIT_FLAG);
         }
 
-        Optional<Frequency> frequency = toAdd.getFrequency();
-        Optional<Occurrence> occurrence = toAdd.getOccurrence();
-
-        if (occurrence.get().isMoreThan(1) && frequency.get().equals(Frequency.EMPTY)) {
+        if (toAdd.hasInvalidFrequency()) {
             throw new CommandException(MESSAGE_INVALID_OPTIONAL_FREQUENCY_FLAG);
         }
 
