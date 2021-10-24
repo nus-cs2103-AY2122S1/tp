@@ -43,23 +43,24 @@ public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_ADDRESS + "S712345 "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_EMAIL + "johnd@google.com "
             + PREFIX_PARENT_PHONE + "91234567 "
-            + PREFIX_PARENT_EMAIL + "jackd@example.com "
-            + PREFIX_SCHOOL + "Nan Chiau High School "
+            + PREFIX_PARENT_EMAIL + "jackd@google.com "
+            + PREFIX_SCHOOL + "SJI "
             + PREFIX_ACAD_STREAM + "Express "
             + PREFIX_ACAD_LEVEL + "S1 "
             + PREFIX_FEE + "50 "
-            + PREFIX_REMARK + "He owes me a dinner! "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "neighbour";
+            + PREFIX_REMARK + "weak in trigo "
+            + PREFIX_TAG + "cousin "
+            + PREFIX_TAG + "math";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TAB.\n"
-            + "Parameters: " + COMMAND_PARAMETERS + "\n"
-            + "Note: at least one contact field must be present. \n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "command parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
+
+    public static final String ERROR_MISSING_FIELDS =
+            "Name, address, and at least 1 contact field must be present and not empty!";
 
     public static final String USER_TIP = "Try adding a student using: \n"
             + COMMAND_WORD + " " + COMMAND_PARAMETERS + "\n"

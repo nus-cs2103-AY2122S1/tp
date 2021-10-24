@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 || !areAnyPrefixesPresent(
                         argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.ERROR_MISSING_FIELDS));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
@@ -88,9 +88,11 @@ public class AddCommandParser implements Parser<AddCommand> {
 
     /**
      * Returns true if at least one of the prefixes does not contain empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
+     * {@code ArgumentMultimap} and is not an empty string.
      */
     private static boolean areAnyPrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        return Stream.of(prefixes).anyMatch(prefix ->
+                argumentMultimap.getValue(prefix).isPresent() && !argumentMultimap.getValue(prefix).get().equals(""));
     }
+
 }
