@@ -2,12 +2,16 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Logger;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.FileUtil;
+import seedu.address.ui.UiManager;
 
 public class ExportStorage {
 
     private static ExportStorage current;
+    private static final Logger logger = LogsCenter.getLogger(UiManager.class);
 
     private Path exportFilePath;
 
@@ -35,9 +39,8 @@ public class ExportStorage {
         try {
             FileUtil.appendToFile(current.exportFilePath, personString);
         } catch (IOException ignored) {
-            System.out.println("");
+            logger.warning("Could not find export file.");
         }
-
     }
 
     /**
@@ -47,7 +50,7 @@ public class ExportStorage {
         try {
             FileUtil.clearFile(current.exportFilePath);
         } catch (IOException ignored) {
-            System.out.println("");
+            logger.warning("Could not find export file.");
         }
     }
 
