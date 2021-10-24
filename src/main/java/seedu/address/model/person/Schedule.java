@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.person.Shift.isValidEmpty;
 import static seedu.address.model.person.Shift.isValidShift;
 
 import java.time.DayOfWeek;
@@ -9,7 +8,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import seedu.address.model.person.exceptions.DuplicateShiftException;
@@ -38,7 +36,7 @@ public class Schedule {
             + "Saturday: %6$s\n"
             + "Sunday: %7$s\n";
 
-    private Shift[][] shifts = new Shift[7][2];
+    private Shift[][] shifts;
 
     /**
      * Initialize schedule object.
@@ -51,28 +49,40 @@ public class Schedule {
         }
     }
 
-    /**
-     * Alternate constructor for schedule object.
-     */
-    public Schedule(String loadString) {
-        if (!isValidSchedule(loadString)) {
-            throw new IllegalArgumentException("String does not match a valid schedule");
-        }
-        String[] shiftArray = loadString.split(" ");
-        for (String s : shiftArray) {
-            if (isValidShift(s)) {
-
-            }
-            if (isValidEmpty(s)) {
-
-            }
-            String[] shiftString = s.split("-");
-            String shiftDayString = shiftString[0].toUpperCase();
-            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
-            Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
-            shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
-        }
+    public Shift[][] getShifts() {
+        return this.shifts;
     }
+
+    public Schedule(Shift[][] shifts) {
+        assert shifts.length == DAY_OF_WEEK;
+        assert shifts[0].length == PERIOD_OF_DAY;
+        assert shifts[1].length == PERIOD_OF_DAY;
+        requireNonNull(shifts);
+        this.shifts = shifts;
+    }
+
+//    /**
+//     * Alternate constructor for schedule object.
+//     */
+//    public Schedule(String loadString) {
+//        if (!isValidSchedule(loadString)) {
+//            throw new IllegalArgumentException("String does not match a valid schedule");
+//        }
+//        String[] shiftArray = loadString.split(" ");
+//        for (String s : shiftArray) {
+//            if (isValidShift(s)) {
+//
+//            }
+//            if (isValidEmpty(s)) {
+//
+//            }
+//            String[] shiftString = s.split("-");
+//            String shiftDayString = shiftString[0].toUpperCase();
+//            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
+//            Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
+//            shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
+//        }
+//    }
 
     /**
      * Adds a new shift for a staff.
@@ -234,23 +244,6 @@ public class Schedule {
     }
 
 
-    /**
-     * Returns String representation of the schedule object.
-     *
-     * @return String representation of all existing shifts in the schedule, concatenated with a whitespace.
-     */
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        for (Shift[] innerArray : shifts) {
-            for (Shift s : innerArray) {
-                if (!Objects.isNull(s)) {
-                    builder.append(s.toSaveString());
-                }
-            }
-        }
-        return builder.toString();
-    }
 
     /**
      * Returns if a given string is a valid scheduleString.
@@ -261,7 +254,7 @@ public class Schedule {
         }
         String[] shiftSplit = test.split(" ");
         for (String s : shiftSplit) {
-            if (!isValidShift(s) && !isValidEmpty(s)) {
+            if (!isValidShift(s)) {
                 return false;
             }
         }

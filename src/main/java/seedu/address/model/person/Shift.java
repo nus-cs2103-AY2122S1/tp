@@ -1,59 +1,28 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
+
+import seedu.address.model.EmptyShift;
 
 /**
  * Represents a piece of work for a staff.
  */
 public class Shift {
-    private static final String WORKING_SHIFT_IDENTIFIER = "W";
-    private static final String EMPTY_SHIFT_IDENTIFIER = "E";
-    private static final String DELIMITER = "-";
-    private static final int NUM_OF_VALUES = 5;
-    private Slot slot;
-    private DayOfWeek dayOfWeek;
+    public static final String DELIMITER = "-";
+    private static final int NUM_OF_VALUES = 2;
     private LocalDate startDate;
-    private Period period;
-    protected List<Shift> history = new ArrayList<>();
+
+    protected Slot slot;
+    protected DayOfWeek dayOfWeek;
+    protected List<Period> history = new ArrayList<>();
     public boolean isWorking;
 
-    private class EmptyShift extends Shift {
 
-        public EmptyShift(DayOfWeek dayOfWeek, Slot slot, List<Shift> history) {
-            super(dayOfWeek, slot);
-            this.history.addAll(history);
-            isWorking = false;
-
-        }
-
-        @Override
-        public boolean isWorking(LocalTime time) {
-            return false;
-        }
-
-        @Override
-        public Shift activate(LocalDate startDate) {
-            return new Shift(dayOfWeek, slot, startDate, history);
-        }
-
-        @Override
-        public Shift remove(LocalDate endDate) {
-            throw new UnsupportedOperationException("This method should not be called.");
-        }
-
-        @Override
-        public String toSaveString() {
-            return EMPTY_SHIFT_IDENTIFIER + DELIMITER +  dayOfWeek.toString()
-                    + DELIMITER + slot.getValue() + DELIMITER + history;
-        }
-    }
 
 
     /**
@@ -73,13 +42,31 @@ public class Shift {
      * Creates a shift at {@code dayOfWeek} in {@code Slot slot} at {@code LocalDate startDate}
      * with a history of changes {@code Set<Shift> history}.
      */
-    public Shift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate, List<Shift> history) {
+    public Shift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate, List<Period> history) {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
         this.startDate = startDate;
         this.history.addAll(history);
         isWorking = true;
     }
+
+
+    public Slot getSlot() {
+        return this.slot;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return this.dayOfWeek;
+    }
+
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    public List<Period> getHistory() {
+        return Collections.unmodifiableList(history);
+    }
+
 
     public boolean canRemove(LocalDate endDate) {
         return this.startDate.isBefore(endDate)
@@ -114,21 +101,14 @@ public class Shift {
         return dayOfWeek.toString() + "-" + slot.getValue() + ": " + slot.toString();
     }
 
-    /**
-     * Returns a String representation of the shift that is suitable for json.
-     */
-    public String toSaveString() {
-        return WORKING_SHIFT_IDENTIFIER + DELIMITER + dayOfWeek.toString() + DELIMITER
-                + slot.getValue() + DELIMITER + this.startDate + DELIMITER + history;
-    }
 
     /**
      * Removes this shift by creating an {@code EmptyShift} in the place of it.
      */
     public Shift remove(LocalDate endDate) {
         assert endDate.isAfter(startDate);
-        this.period = new Period(startDate, endDate);
-        this.history.add(this);
+        Period period = new Period(startDate, endDate);
+        this.history.add(period);
         return new EmptyShift(dayOfWeek, slot, history);
 
     }
@@ -162,58 +142,17 @@ public class Shift {
             return false;
         }
         String[] stringSplit = test.split(DELIMITER);
-        if (!stringSplit[0].equals(WORKING_SHIFT_IDENTIFIER)) {
-            return false;
-        }
         if (stringSplit.length != NUM_OF_VALUES) {
             return false;
         }
-        String dayString = stringSplit[1];
-        String slotString = stringSplit[2];
+        String dayString = stringSplit[0];
+        String slotString = stringSplit[1];
         return isValidDayOfWeek(dayString)
                 && Slot.isValidSlot(slotString);
 
     }
 
-    /**
-     * Returns if a given string is a valid empty shift.
-     */
-    public static boolean isValidEmpty(String test) {
-        requireNonNull(test);
-        if (test.equals("")) {
-            return false;
-        }
-        String[] stringSplit = test.split(DELIMITER);
-        if (!stringSplit[0].equals(EMPTY_SHIFT_IDENTIFIER)) {
-            return false;
-        }
-        if (stringSplit.length != (NUM_OF_VALUES - 1)) {
-            return false;
-        }
-        String slotString = stringSplit[1];
-        return Slot.isValidSlot(slotString);
-    }
 
-
-    /**
-     * Translates the {@code input} into a shift.
-     */
-    public static Shift translateStringToShift(String input) {
-        requireNonNull(input);
-        assert isValidShift(input);
-        String[] splitString = input.split(DELIMITER);
-        DayOfWeek day = DayOfWeek.valueOf(splitString[1]);
-        Slot slot = Slot.translateStringToSlot(splitString[2]);
-
-    }
-
-    public static Shift translateStringToEmpty(String string) {
-
-    }
-
-    private static List<Shift> getHistory(String input) {
-
-    }
 
     @Override
     public boolean equals(Object other) {

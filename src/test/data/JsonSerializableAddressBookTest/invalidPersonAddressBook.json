@@ -8,6 +8,8 @@
     "salary": "900000",
     "status": "fulltime",
     "tagged": [ "friends" ],
-    "schedule": ""
+    "schedule": {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    }
   } ]
 }
