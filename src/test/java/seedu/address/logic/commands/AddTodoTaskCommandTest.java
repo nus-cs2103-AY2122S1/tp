@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -24,6 +24,7 @@ import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.DeadlineAndEventTaskBuilder;
+import seedu.address.testutil.TodoTaskBuilder;
 
 public class AddTodoTaskCommandTest {
 
@@ -32,23 +33,23 @@ public class AddTodoTaskCommandTest {
         assertThrows(NullPointerException.class, () -> new AddTodoTaskCommand(null));
     }
 
-    /*
+    
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
                 new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
-        Task validTask = new DeadlineAndEventTaskBuilder().build();
+        Task validTask = new TodoTaskBuilder().build();
 
         CommandResult commandResult = new AddTodoTaskCommand(validTask).execute(modelStub);
 
         assertEquals(String.format(AddTodoTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
-     */
+    
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        Task validTask = new DeadlineAndEventTaskBuilder().build();
+        Task validTask = new TodoTaskBuilder().build();
         AddTodoTaskCommand addTodoTaskCommand = new AddTodoTaskCommand(validTask);
         AddTodoTaskCommandTest.ModelStub modelStub = new AddTodoTaskCommandTest.ModelStubWithTask(validTask);
 
@@ -58,26 +59,32 @@ public class AddTodoTaskCommandTest {
 
     @Test
     public void equals() {
-        Task alice = new DeadlineAndEventTaskBuilder().withName("Alice").build();
-        Task bob = new DeadlineAndEventTaskBuilder().withName("Bob").build();
-        AddTodoTaskCommand addAliceCommand = new AddTodoTaskCommand(alice);
-        AddTodoTaskCommand addBobCommand = new AddTodoTaskCommand(bob);
+        Task todo_iP = new TodoTaskBuilder().withName("Complete iP").build();
+        Task todo_tP = new TodoTaskBuilder().withName("Complete tP").build();
+        Task todo_tP_final_feature = new TodoTaskBuilder().withName("Complete tP")
+                .withDescription("Implement the final feature").build();
+        AddTodoTaskCommand todoIPCommand = new AddTodoTaskCommand(todo_iP);
+        AddTodoTaskCommand todoTPCommand = new AddTodoTaskCommand(todo_tP);
+        AddTodoTaskCommand todoFinalFeature = new AddTodoTaskCommand(todo_tP_final_feature);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(todoIPCommand.equals(todoIPCommand));
 
         // same values -> returns true
-        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(todo_iP);
+        assertTrue(todoIPCommand.equals(addAliceCommandCopy));
+        
+        // tasks have different description -> returns false
+        assertFalse(todoFinalFeature.equals(todoTPCommand));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(todoIPCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(todoIPCommand.equals(null));
 
         // different task -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(todoIPCommand.equals(todoTPCommand));
     }
 
     /**

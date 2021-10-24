@@ -7,22 +7,42 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.task.Task;
 
+import static seedu.address.logic.commands.CommandTestUtil.*;
+
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
 public class TypicalTasks {
 
-    public static final Task TUTORIAL = new DeadlineAndEventTaskBuilder().withName("Do Tutorial").withDate("2000-02-02")
+
+    public static final Task BUY_SHAMPOO = new TodoTaskBuilder().withName("Buy Shampoo")
+            .withDescription("No more shampoo. Buy 3 in 1 if possible")
+            .build();
+    public static final Task WATCH_MONEY_HEIST =  new TodoTaskBuilder().withName("Watch Money Heist S3")
+            .build();
+    public static final Task TUTORIAL = new DeadlineAndEventTaskBuilder().withName("Do Tutorial")
+            .withDate("2000-02-02")
             .withTags("work").build();
     public static final Task MEETING = new DeadlineAndEventTaskBuilder().withName("Prepare for meeting")
             .withDate("2010-02-02")
             .withTags("work").build();
-    public static final Task DINNER = new DeadlineAndEventTaskBuilder().withName("Buy Dinner").withDate("2021-10-12")
+    public static final Task DINNER = new DeadlineAndEventTaskBuilder().withName("Buy Dinner")
+            .withDate("2021-10-12")
             .withTags("personal").build();
     public static final Task FRIEND_BIRTHDAY = new DeadlineAndEventTaskBuilder().withName("Plan Birthday")
             .withDate("2021-10-20")
             .withTags("friends").build();
-    public static final Task EXERCISE = new DeadlineAndEventTaskBuilder().withName("Run").withDate("2000-02-02")
+    public static final Task EXERCISE = new DeadlineAndEventTaskBuilder().withName("Run")
+            .withDate("2000-02-02")
+            .build();
+
+    public static final Task STUDY = new TodoTaskBuilder().withName(VALID_TASK_NAME_STUDY)
+            .withDescription(TASK_DESCRIPTION_DESC_STUDY)
+            .withTags(TASK_TAG_DESC_WORK)
+            .build();
+    public static final Task PLAY = new TodoTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+            .withDescription(VALID_TASK_DESCRIPTION_PLAY)
+            .withTags(VALID_TASK_TAG_EXERCISE)
             .build();
 
     private TypicalTasks() {}
@@ -39,6 +59,7 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
+        return new ArrayList<>(Arrays.asList(BUY_SHAMPOO, WATCH_MONEY_HEIST, 
+                TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
     }
 }

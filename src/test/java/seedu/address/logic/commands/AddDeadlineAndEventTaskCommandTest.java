@@ -27,7 +27,7 @@ import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
 import seedu.address.testutil.DeadlineAndEventTaskBuilder;
 
-public class AddTaskCommandTest {
+public class AddDeadlineAndEventTaskCommandTest {
 
     @Test
     public void constructor_nullTask_throwsNullPointerException() {
@@ -36,7 +36,7 @@ public class AddTaskCommandTest {
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        AddTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddTaskCommandTest.ModelStubAcceptingTaskAdded();
+        AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded();
         Task validTask = new DeadlineAndEventTaskBuilder().build();
 
         CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
@@ -49,7 +49,7 @@ public class AddTaskCommandTest {
     public void execute_duplicateTask_throwsCommandException() {
         Task validTask = new DeadlineAndEventTaskBuilder().build();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-        AddTaskCommandTest.ModelStub modelStub = new AddTaskCommandTest.ModelStubWithTask(validTask);
+        AddDeadlineAndEventTaskCommandTest.ModelStub modelStub = new AddDeadlineAndEventTaskCommandTest.ModelStubWithTask(validTask);
 
         assertThrows(CommandException.class,
                 AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(modelStub));
@@ -262,7 +262,7 @@ public class AddTaskCommandTest {
     /**
      * A Model stub that contains a single task.
      */
-    private class ModelStubWithTask extends AddTaskCommandTest.ModelStub {
+    private class ModelStubWithTask extends AddDeadlineAndEventTaskCommandTest.ModelStub {
         private final Task task;
 
         ModelStubWithTask(Task task) {
@@ -280,7 +280,7 @@ public class AddTaskCommandTest {
     /**
      * A Model stub that always accept the task being added.
      */
-    private class ModelStubAcceptingTaskAdded extends AddTaskCommandTest.ModelStub {
+    private class ModelStubAcceptingTaskAdded extends AddDeadlineAndEventTaskCommandTest.ModelStub {
         final ArrayList<Task> tasksAdded = new ArrayList<>();
 
         @Override
