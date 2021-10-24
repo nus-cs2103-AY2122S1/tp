@@ -22,8 +22,6 @@ import seedu.address.model.claim.Status;
 import seedu.address.model.claim.Title;
 import seedu.address.model.person.Person;
 
-import javax.swing.text.html.Option;
-
 public class ClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "claim";
