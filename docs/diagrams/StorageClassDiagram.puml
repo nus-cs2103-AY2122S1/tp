@@ -16,7 +16,7 @@ Interface Storage <<Interface>>
 Class StorageManager
 
 package "Track2Gather Storage" #F4F6F6{
-Interface ATrack2GatherStorage <<Interface>>
+Interface Track2GatherStorage <<Interface>>
 Class JsonTrack2GatherStorage
 Class JsonSerializableTrack2Gather
 Class JsonAdaptedPerson
