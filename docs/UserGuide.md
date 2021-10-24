@@ -70,6 +70,21 @@ v1.2 assumes that all inputs are valid, i.e. student id is in the correct format
 
 </div>
 
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+### Listing all persons : `list`
+
+Shows a list of all persons in the address book.
+
+Format: `list`
+
+
 ### Adding a student : `add student`
 
 Adds a student into the database.
@@ -176,6 +191,20 @@ Examples:
 * `edit 1 -n John Doe -i E1234567 -g T01 -g R01`  
 * `edit 2 -t`
 
+### Deleting a person : `delete`
+
+Deletes the specified person from the address book.
+
+Format: `delete <index>`
+
+* Deletes the person at the specified `<index>`.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …
+
+Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `search -n Alex` followed by `delete 1` deletes the 1st person in the results of the `search` command.
+
 
 ### Importing data: `import`
 
@@ -247,6 +276,8 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
+**List** | `list`
 **Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
 **Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
@@ -254,6 +285,7 @@ Action | Format, Examples
 **Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
 **Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` <br> e.g. `search -n John Doe` , `search -g T02B R04D`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` <br> e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
+**Delete Student** | `delete <index>` <br> e.g. `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` <br> e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
 **Clear Data** | `clear`
 **Exit App** | `exit`
