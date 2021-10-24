@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.model.appointment.Appointment;
@@ -97,9 +98,9 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     /**
      * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
      */
-    public boolean hasExactPatient(Patient patient) {
+    public Optional<Patient> getExactPatient(Patient patient) {
         requireNonNull(patient);
-        return patients.containsExact(patient);
+        return patients.getExactPerson(patient);
     }
 
     /**
@@ -142,9 +143,9 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     /**
      * Returns true if a doctor with the same equality as {@code patient} exists in the PlannerMD.
      */
-    public boolean hasExactDoctor(Doctor doctor) {
+    public Optional<Doctor> getExactDoctor(Doctor doctor) {
         requireNonNull(doctor);
-        return doctors.containsExact(doctor);
+        return doctors.getExactPerson(doctor);
     }
 
     /**

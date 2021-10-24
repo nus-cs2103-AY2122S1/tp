@@ -2,6 +2,7 @@ package seedu.plannermd.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -90,17 +91,23 @@ class JsonSerializablePlannerMd {
 
             // To be defensive here, we ensure that the exact patients and doctors specified
             // in the appointment does exist in PlannerMD
-            if (!plannerMd.hasExactPatient(appointment.getPatient())) {
+            Optional<Patient> appointmentPatient = plannerMd.getExactPatient(appointment.getPatient());
+            if (appointmentPatient.isEmpty()) {
                 throw new IllegalValueException(MESSAGE_MISSING_PATIENT_APPOINTMENT);
             }
-            if (!plannerMd.hasExactDoctor(appointment.getDoctor())) {
+            Optional<Doctor> appointmentDoctor = plannerMd.getExactDoctor(appointment.getDoctor());
+            if (appointmentDoctor.isEmpty()) {
                 throw new IllegalValueException(MESSAGE_MISSING_DOCTOR_APPOINTMENT);
             }
 
-            plannerMd.addAppointment(appointment);
-        }
+            // Create a new Appointment with the exact Patient and Doctor objects in PlannerMd
+            // This Appointment will then be added into PlannerMd
+            Appointment linkedAppointment = new Appointment(appointmentPatient.get(), appointmentDoctor.get(),
+                    appointment.getAppointmentDate(), appointment.getSession(),
+                    appointment.getRemark());
 
-        // To be defensive here
+            plannerMd.addAppointment(linkedAppointment);
+        }
 
         return plannerMd;
     }

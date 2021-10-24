@@ -67,18 +67,18 @@ public abstract class UniquePersonListTest<T extends Person> {
     }
 
     @Test
-    void containsExact_personNotInList_returnsFalse() {
-        assertFalse(personList.containsExact(alice));
+    void getExactPerson_personNotInList_returnsEmpty() {
+        assertTrue(personList.getExactPerson(alice).isEmpty());
     }
 
     @Test
-    public void containsExact_personInList_returnsTrue() {
+    public void getExactPerson_personInList_returnsPerson() {
         personList.add(alice);
-        assertTrue(personList.containsExact(alice));
+        assertTrue(personList.getExactPerson(alice).isPresent());
     }
 
     @Test
-    public void containsExact_personWithSameIdentityFieldsInList_returnsFalse() {
+    public void getExactPerson_personWithSameIdentityFieldsInList_returnsEmpty() {
         personList.add(alice);
         Person editedAlicePerson = new PersonBuilder(alice)
                 .withAddress(VALID_ADDRESS_BOB)
@@ -86,7 +86,7 @@ public abstract class UniquePersonListTest<T extends Person> {
                 .build();
         T editedAlice = samplePerson(editedAlicePerson);
 
-        assertFalse(personList.containsExact(editedAlice));
+        assertTrue(personList.getExactPerson(editedAlice).isEmpty());
     }
 
     @Test

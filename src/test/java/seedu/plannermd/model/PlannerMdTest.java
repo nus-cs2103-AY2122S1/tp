@@ -113,41 +113,41 @@ public class PlannerMdTest {
     }
 
     @Test
-    void hasExactPatient_patientNotInPlannerMd_returnsFalse() {
-        assertFalse(plannerMd.hasExactPatient(ALICE));
+    void hasExactPatient_patientNotInPlannerMd_returnsEmpty() {
+        assertTrue(plannerMd.getExactPatient(ALICE).isEmpty());
     }
 
     @Test
-    void hasExactPatient_patientInPlannerMd_returnsTrue() {
+    void hasExactPatient_patientInPlannerMd_returnsPatient() {
         plannerMd.addPatient(ALICE);
-        assertTrue(plannerMd.hasExactPatient(ALICE));
+        assertTrue(plannerMd.getExactPatient(ALICE).isPresent());
     }
 
     @Test
-    void hasExactPatient_patientWithSameIdentityFieldsInPlannerMd_returnsFalse() {
+    void hasExactPatient_patientWithSameIdentityFieldsInPlannerMd_returnsEmpty() {
         plannerMd.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertFalse(plannerMd.hasExactPatient(editedAlice));
+        assertTrue(plannerMd.getExactPatient(editedAlice).isEmpty());
     }
 
     @Test
-    void hasExactDoctor_doctorNotInPlannerMd_returnsFalse() {
-        assertFalse(plannerMd.hasExactDoctor(DR_ALICE));
+    void hasExactDoctor_doctorNotInPlannerMd_returnsEmpty() {
+        assertTrue(plannerMd.getExactDoctor(DR_ALICE).isEmpty());
     }
 
     @Test
-    void hasExactDoctor_doctorInPlannerMd_returnsTrue() {
+    void hasExactDoctor_doctorInPlannerMd_returnsDoctor() {
         plannerMd.addDoctor(DR_ALICE);
-        assertTrue(plannerMd.hasExactDoctor(DR_ALICE));
+        assertTrue(plannerMd.getExactDoctor(DR_ALICE).isPresent());
     }
 
     @Test
-    void hasExactDoctor_doctorWithSameIdentityFieldsInPlannerMd_returnsFalse() {
+    void hasExactDoctor_doctorWithSameIdentityFieldsInPlannerMd_returnsEmpty() {
         plannerMd.addDoctor(DR_ALICE);
         Doctor editedDoctor = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertFalse(plannerMd.hasExactDoctor(editedDoctor));
+        assertTrue(plannerMd.getExactDoctor(editedDoctor).isEmpty());
     }
 
     /**
