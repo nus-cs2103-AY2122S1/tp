@@ -293,20 +293,25 @@ public class AddressBook implements ReadOnlyAddressBook {
         return tags.removeByFields(predicates);
     }
 
+    public void updateLastMetDate() {
+        clients.updateLastMetDate();
+    }
+
     @Override
     public ObservableList<Client> getClientList() {
+        updateLastMetDate();
         return clients.asUnmodifiableObservableList();
     }
 
     @Override
     public ObservableList<NextMeeting> getNextMeetingsList() {
         return meetings.asUnmodifiableObservableList();
-    };
+    }
 
     @Override
     public ObservableList<NextMeeting> getSortedNextMeetingsList() {
         return meetings.asSortedObservableList();
-    };
+    }
 
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();

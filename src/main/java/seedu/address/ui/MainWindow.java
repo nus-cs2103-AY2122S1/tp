@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.Image;
@@ -39,9 +40,13 @@ public class MainWindow extends UiPart<Stage> {
     private SideBar sideBar;
     private HelpWindow helpWindow;
     private CommandBox commandBox;
+    private AddressBookListMenu addressBookListMenu;
 
     @FXML
     private StackPane commandBoxPlaceholder;
+
+    @FXML
+    private MenuBar menuBar;
 
     @FXML
     private MenuItem helpMenuItem;
@@ -137,6 +142,10 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
         sideBar = new SideBar(logic.getClientToView(), logic.getSortedNextMeetingList());
         sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
+
+        addressBookListMenu = new AddressBookListMenu(logic.getAddressBookList(),
+                logic.getAddressBookFilePathObject(), logic);
+        menuBar.getMenus().add(addressBookListMenu.getRoot());
     }
 
     /**
