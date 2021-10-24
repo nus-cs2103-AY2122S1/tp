@@ -28,9 +28,18 @@
                 </Label>
                 <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
             </HBox>
-            <Label fx:id="date" styleClass="cell_small_label" text="\$date" wrapText="true" />
-            <Label fx:id="time" styleClass="cell_small_label" text="\$time" wrapText="true" />
-            <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true" />
+            <HBox>
+                <Label fx:id="datePlaceholder" styleClass="cell_medium_label" text="Date: " wrapText="true" />
+                <Label fx:id="date" styleClass="cell_small_label" text="\$date" wrapText="true" />
+            </HBox>
+            <HBox>
+                <Label fx:id="timePlaceholder" styleClass="cell_medium_label" text="Time: " wrapText="true" />
+                <Label fx:id="time" styleClass="cell_small_label" text="\$time" wrapText="true" />
+            </HBox>
+            <HBox>
+                <Label fx:id="ratesPlaceholder" styleClass="cell_medium_label" text="Rates: " wrapText="true" />
+                <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true" />
+            </HBox>
             <VBox fx:id="homeworkList" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS" />
         </VBox>
       <rowConstraints>

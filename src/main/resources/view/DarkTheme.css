@@ -7,7 +7,6 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Open Sans Semibold";
     -fx-text-fill: #424874;
-    /*-fx-opacity: 0.9;*/
 }
 
 .label-bright {
@@ -54,14 +53,7 @@
 
 .table-view .column-header, .table-view .filler {
     -fx-size: 35;
-    /*-fx-border-width: 0 0 1 0;*/
     -fx-background-color: transparent;
-    /*-fx-border-color:*/
-    /*    transparent*/
-    /*    transparent*/
-    /*    derive(-fx-base, 80%)*/
-    /*    transparent;*/
-    /*-fx-border-insets: 0 10 1 0;*/
 }
 
 .table-view .column-header .label {
@@ -78,19 +70,16 @@
 
 .split-pane:horizontal .split-pane-divider {
     -fx-background-color: #F0F3FD;
-    /*-fx-border-color: transparent transparent transparent #4d4d4d;*/
 }
 
 .split-pane {
     -fx-border-radius: 1;
     -fx-border-width: 1;
-    /*-fx-background-color: derive(#1d1d1d, 20%);*/
     -fx-background-color: #F0F3FD;
 }
 
 .list-view {
     -fx-background-insets: 0;
-    /*-fx-background-color: derive(#1d1d1d, 20%);*/
     -fx-background-color: #d5daf2;
     -fx-padding: 5 0 5 0;
     -fx-background-radius: 15;
@@ -117,11 +106,6 @@
     -fx-background-color: #A6B1E165;
 }
 
-/*.list-cell:filled:selected #cardPane {*/
-/*    -fx-border-color: #3e7b91;*/
-/*    -fx-border-width: 1;*/
-/*}*/
-
 .list-cell .label {
     -fx-text-fill: #424874;
 }
@@ -132,10 +116,16 @@
     -fx-text-fill: #424874;
 }
 
-.cell_medium_label {
-    -fx-font-family: "Open Sans SemiBold";
+.cell_medium_large_label {
+    -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
     -fx-text-fill: white;
+}
+
+.cell_medium_label {
+    -fx-font-family: "Open Sans SemiBold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424874;
 }
 
 .cell_small_label {
@@ -145,17 +135,12 @@
 }
 
 .stack-pane {
-     /*-fx-background-color: derive(#1d1d1d, 20%);*/
     -fx-background-color: transparent;
     -fx-background-radius: 15;
 }
 
 .pane-with-border {
-     /*-fx-background-color: derive(#1d1d1d, 20%);*/
     -fx-background-color: #F0F3FD;
-
-     /*-fx-border-color: derive(#A6B1E160, 10%);*/
-     /*-fx-border-top-width: 1px;*/
 }
 
 .status-bar {
@@ -182,8 +167,6 @@
 
 .status-bar-with-border {
     -fx-background-color: #F0F3FD;
-    /*-fx-border-color: #A6B1E160;*/
-    /*-fx-border-width: 1px;*/
 }
 
 .status-bar-with-border .label {
@@ -192,8 +175,6 @@
 
 .grid-pane {
     -fx-background-color: #F0F3FD;
-    /*-fx-border-color: #A6B1E160;*/
-    /*-fx-border-width: 1px;*/
 }
 
 .grid-pane .stack-pane {
@@ -209,10 +190,10 @@
 }
 
 /*
-Set selection background color when user is not hovering over the menu item.
-Solution adapted from:
-https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
-*/
+ * Set selection background color when user is not hovering over the menu item.
+ * Solution adapted from:
+ * https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
+ */
 .menu-bar {
     -fx-background-color: #8390C9;
     -fx-selection-bar: #6172BE ;
@@ -258,8 +239,6 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
  */
 .button {
     -fx-padding: 5 22 5 22;
-    /*-fx-border-color: #e2e2e2;*/
-    /*-fx-border-width: 2;*/
     -fx-background-radius: 0;
     -fx-background-color: #F0F3FD;
     -fx-font-family: "Open Sans Regular";
@@ -279,11 +258,6 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
 
 .button:focused {
     -fx-background-color: #6172BE;
-    /*-fx-border-color: white, white;*/
-    /*-fx-border-width: 1, 1;*/
-    /*-fx-border-style: solid, segments(1, 1);*/
-    /*-fx-border-radius: 0, 0;*/
-    /*-fx-border-insets: 1 1 1 1, 0;*/
 }
 
 .button:disabled, .button:default:disabled {
@@ -320,7 +294,7 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
 }
 
 .dialog-pane:header *.header-panel *.label {
-    -fx-font-size: 18px;
+    -fx-font-size: 14px;
     -fx-font-style: italic;
     -fx-fill: #424874;
     -fx-text-fill: #424874;
@@ -398,6 +372,8 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
     -fx-font-size: 13pt;
     -fx-text-fill: #424874;
     -fx-prompt-text-fill: #424874AF;
+    -fx-highlight-fill: #A6B1E1F0;
+    -fx-highlight-text-fill: #424874;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -426,6 +402,7 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
     -fx-border-radius: 2;
     -fx-font-size: 12;
     -fx-padding: 3 12 3 12;
+    -fx-background-insets: 2 0 3 0;
     -fx-background-radius: 20;
 }
 
@@ -442,7 +419,6 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
     -fx-background-radius: 20;
     -fx-background-insets: 2 0 3 0;
     -fx-font-size: 12;
-    -fx-max-width: 130;
     -fx-wrap-text: true;
 }
 
@@ -473,3 +449,5 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
 #lessonListView {
     -fx-background-radius: 0 0 15 15;
 }
+
+
