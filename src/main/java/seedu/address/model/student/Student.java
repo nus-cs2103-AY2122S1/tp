@@ -2,11 +2,10 @@ package seedu.address.model.student;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -22,7 +21,7 @@ public class Student {
 
     // Data fields
     private final GroupName groupName;
-    private final Set<Assessment> assessments = new HashSet<>();
+    private final UniqueAssessmentList assessments = new UniqueAssessmentList();
 
     /**
      * Every field must be present and not null.
@@ -51,7 +50,7 @@ public class Student {
         return groupName;
     }
 
-    public Set<Assessment> getAssessments() {
+    public UniqueAssessmentList getAssessments() {
         return assessments;
     }
 

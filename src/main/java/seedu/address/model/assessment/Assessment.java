@@ -27,7 +27,7 @@ public class Assessment {
     }
 
     /**
-     * Returns true if both assessments have the same assessment name and score.
+     * Returns true if both assessments have the same assessment name.
      */
     public boolean isSameAssessment(Assessment otherAssessment) {
         if (otherAssessment == this) {
@@ -35,8 +35,7 @@ public class Assessment {
         }
 
         return otherAssessment != null
-                && otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getScore() == getScore();
+                && otherAssessment.getAssessmentName().equals(getAssessmentName());
     }
 
     @Override
@@ -62,7 +61,8 @@ public class Assessment {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getAssessmentName())
+        builder.append("Assessment: ")
+                .append(getAssessmentName())
                 .append("; Score: ")
                 .append(getScore());
 
