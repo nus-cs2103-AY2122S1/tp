@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import seedu.plannermd.model.appointment.exceptions.AppointmentNotFoundException;
+import seedu.plannermd.model.appointment.exceptions.ClashingAppointmentException;
 import seedu.plannermd.model.appointment.exceptions.DuplicateAppointmentException;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
@@ -42,6 +43,14 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
+     * Returns true if the given appointment clashes with any in the list.
+     */
+    public boolean isClash(Appointment toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isClash);
+    }
+
+    /**
      * Adds an appointment to the list.
      * The appointment must not already exist in the list.
      */
@@ -49,6 +58,9 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateAppointmentException();
+        }
+        if (isClash(toAdd)) {
+            throw new ClashingAppointmentException();
         }
         internalList.add(toAdd);
     }

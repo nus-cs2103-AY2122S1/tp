@@ -64,7 +64,7 @@ public class PlannerMdParser {
             return new ToggleCommand();
 
         case AppointmentCommand.COMMAND_WORD:
-            return new AppointmentCommandParser().parseAppointmentCommand(userInput);
+            return new AppointmentCommandParser().parseAppointmentCommand(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
