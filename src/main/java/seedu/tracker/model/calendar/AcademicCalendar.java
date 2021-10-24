@@ -37,6 +37,21 @@ public class AcademicCalendar implements Comparable<AcademicCalendar> {
     }
 
     /**
+     * Returns true if this academic calendar is chronologically before the other.
+     * @param other academic calendar to be compared to.
+     * @return true if this academic calendar is chronologically before the other
+     */
+    public boolean isBefore(AcademicCalendar other) {
+        if (getAcademicYear().value < other.getAcademicYear().value) {
+            return true;
+        } else if (getAcademicYear().value > other.getAcademicYear().value) {
+            return false;
+        } else {
+            return getSemester().value < other.getSemester().value;
+        }
+    }
+
+    /**
      * Returns true if a given int is a valid Academic calendar.
      */
     public static boolean isValidAcademicCalendar(int testYear, int testSem) {

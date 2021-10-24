@@ -9,7 +9,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.tracker.commons.core.LogsCenter;
 import seedu.tracker.model.ReadOnlyUserInfo;
-import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.module.Module;
 
 /**

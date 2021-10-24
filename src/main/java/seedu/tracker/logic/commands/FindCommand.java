@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.tracker.commons.core.Messages;
 import seedu.tracker.model.Model;
-import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.model.module.ModuleContainsKeywordsPredicate;
 
 /**
  * Finds and lists all modules in module tracker which contains any of the argument keywords.
@@ -19,9 +19,9 @@ public class FindCommand extends Command {
         + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
         + "Example: " + COMMAND_WORD + " 2103t";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final ModuleContainsKeywordsPredicate predicate;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
+    public FindCommand(ModuleContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 

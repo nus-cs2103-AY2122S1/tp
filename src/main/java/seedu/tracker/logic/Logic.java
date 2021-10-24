@@ -10,7 +10,7 @@ import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ReadOnlyModuleTracker;
 import seedu.tracker.model.ReadOnlyUserInfo;
-import seedu.tracker.model.UserInfo;
+import seedu.tracker.model.module.McProgress;
 import seedu.tracker.model.module.Module;
 
 /**
@@ -35,6 +35,13 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of modules */
     ObservableList<Module> getFilteredModuleList();
+
+    /**
+     * Returns the course completion progress list.
+     *
+     * @see Model#getMcProgressList()
+     */
+    ObservableList<McProgress> getMcProgressList();
 
     /**
      * Returns the user prefs' module tracker file path.

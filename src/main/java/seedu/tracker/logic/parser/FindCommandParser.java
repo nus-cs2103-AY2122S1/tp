@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.tracker.logic.commands.FindCommand;
 import seedu.tracker.logic.parser.exceptions.ParseException;
-import seedu.tracker.model.module.NameContainsKeywordsPredicate;
+import seedu.tracker.model.module.ModuleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -27,7 +27,7 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindCommand(new ModuleContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
 
 }

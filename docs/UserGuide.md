@@ -1,14 +1,39 @@
 ---
 layout: page
 title: User Guide
+* Table of Contents
+  {:toc}
 ---
+## Introduction
+![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
 NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their course completion.**
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
 
-* Table of Contents
-{:toc}
+### Main Features 
+
+Here is an overview of the main features that NUS Mod Tracker provides:
+* Keep track of your Modular Credits(MC).
+* Keep track of the modules that you have taken.  
+* Create your own academic plan.
+
+For more information about our features, you can head over to our [Features](#features) section. Better yet, 
+head over to our [Quick Start](#quick-start) and try it out for yourself!
+
+### How to use the user guide 
+
+We strongly recommend first time users of our application to read through the user guide in the order that it is written. Throughout 
+the user guide, we include links which will jump to the corresponding section of the user guide. 
+These links help you to quickly navigate this document.
+
+### Table of Contents
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +41,7 @@ Interface (GUI).
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `modtracker.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases/tag/v1.3.trial).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Mod Tracker.
 
@@ -28,12 +53,12 @@ Interface (GUI).
 
    * **`list`** : Lists all modules.
 
-   * `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core` : Adds a module named `CS2103T` to the Mod Tracker.
+   * **`add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core`** : Adds a module named `CS2103T` to the Mod Tracker.
 
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
 
-1. Refer to the [Features](#features) below for details of each command.
+Kindly refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -86,7 +111,7 @@ Examples:
 
 Shows a list of all the modules that contains the given keyword.
 
-Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] KEYWORDS`
+Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS`
 * **KEYWORDS** refers to the words that the application will search the modules by.
 * If no optional parameters are entered, the application will search within all the modules'
   components for matching **KEYWORDS**
@@ -151,9 +176,9 @@ Example:
 * `take 1 y/1 s/4` schedules the 1st module in the module tracker for year 1 special semester 2.
 
 
-### Remove the schedule from ("untake") a module : `untake`
+### Removing the schedule from ("untake") a module : `untake`
 
-Remove the schedule from a module in the module tracker.
+Removes the schedule from a module in the module tracker.
 
 Format: `untake INDEX`
 
@@ -214,6 +239,46 @@ Examples:
 * `view y/2 s/1` - see all the modules the user have taken in year 2 semester 1.
 * `view y/2 s/3` - see all the modules taken in year 2 special Term 1.
 
+
+### Track the course completion
+
+Tracks the number of Mcs completed in total, and for each course requirement. <br>
+The user's progress will be displayed in the panel on the right.
+
+![Mcs Display](images/mcsDisplay.png)
+
+The user's progress is displayed in the form of:
+* The number of Mcs completed for that category, over the number of required Mcs.
+* A progress bar filled according to the level of completion.
+
+**Total Mcs completed display:**
+
+![total Mcs Display](images/totalMcsCompletedDisplay.png)
+* Shows the total number of Mcs taken, over the user's set Mc goal.
+* The total number of Mcs taken is calculated from all modules taken before the current semester.
+  * For example: If the current semester is year 1 semester 2, the total number of Mcs will be calculated
+  from all modules taken in year 1 semester 1 only.
+
+**Course requirements display:**
+
+![requirements Mcs Display](images/courseRequirementsDisplay.png)
+* Shows the total number of Mcs taken for that requirement, over the number of Mcs needed to satisfy the requirement.
+* The total number of Mcs taken is calculated from modules taken before the current semester, which have been tagged with the specific tags.
+  * For example: Mcs for modules taken which are tagged with "ge" (`tag/ge`) will be counted into the total number of MCs taken for the GE requirement.
+* Modules with the following tags will be used in calculating the Mcs completed for the corresponding requirement:
+
+Requirement | Tag (not case sensitive)
+------------|-----------
+GE | "ge"
+UE | "ue"
+Foundation | "foundation"
+Breadth and Depth | "breadth and depth"
+IT Professionalism | "it professionalism"
+Math and Science | "math and science"
+
+Notes:
+* If the Mc requirement has been satisfied, the completed Mcs and progress bar will be coloured light blue.
+* If the Mc requirement is not satisfied, the completed Mcs and progress bar will be coloured pink.
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -231,7 +296,7 @@ Action | Format, Examples
 **Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
-**Find** | `find [code] [title] [description] [mc] [tag] KEYWORDS` <br> e.g. `find code CS2040S`
+**Find** | `find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
 **List** | `list`
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
