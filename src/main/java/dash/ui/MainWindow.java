@@ -133,7 +133,7 @@ public class MainWindow extends UiPart<Stage> {
         helpPanel = new HelpPanel(resultDisplay);
         tabMenu.getHelpGridPane().add(helpPanel.getRoot(), 0, 1);
 
-        CommandBox commandBox = new CommandBox(this::executeCommand, logic.getUserInputList());
+        CommandBox commandBox = new CommandBox(this::executeCommand, logic.getObservableUserInputList());
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());

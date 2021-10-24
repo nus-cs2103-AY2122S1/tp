@@ -131,6 +131,11 @@ public interface Model {
     void setTask(Task target, Task editedTask);
 
     /**
+     * Returns the UserInputList
+     */
+    UserInputList getUserInputList();
+
+    /**
      * Adds the given user input string to the start of the {@code UserInputList}
      */
     void addUserInput(String userInput);
@@ -162,5 +167,5 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the user input list
      */
-    ObservableList<String> getUserInputList();
+    ObservableList<String> getObservableUserInputList();
 }

@@ -27,6 +27,13 @@ public class UserInputList implements Iterable<String> {
     }
 
     /**
+     * Creates a UserInputList using a list of strings.
+     */
+    public UserInputList(List<String> userInputs) {
+        internalList.addAll(userInputs);
+    }
+
+    /**
      * Resets the existing data of this {@code UserInputList} with {@code newData}.
      */
     public void resetData(UserInputList newData) {

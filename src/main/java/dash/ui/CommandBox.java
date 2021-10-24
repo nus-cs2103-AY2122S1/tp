@@ -45,6 +45,8 @@ public class CommandBox extends UiPart<Region> {
         this.commandExecutor = commandExecutor;
         this.userInputList = userInputList;
 
+        System.out.println(userInputList);
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
 
@@ -83,12 +85,13 @@ public class CommandBox extends UiPart<Region> {
             }
             currentUserInputIndex--;
             commandTextField.setText(userInputList.get(currentUserInputIndex));
+            commandTextField.end();
         }
         if (keyCode == KeyCode.UP && currentUserInputIndex < userInputList.size() - 1) {
             currentUserInputIndex++;
             commandTextField.setText(userInputList.get(currentUserInputIndex));
+            commandTextField.end();
         }
-        commandTextField.end();
     }
 
     /**

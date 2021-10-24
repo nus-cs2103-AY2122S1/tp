@@ -7,16 +7,18 @@ import java.util.Optional;
 import dash.commons.exceptions.DataConversionException;
 import dash.model.ReadOnlyAddressBook;
 import dash.model.ReadOnlyUserPrefs;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.task.TaskList;
 import dash.storage.addressbook.AddressBookStorage;
 import dash.storage.tasklist.TaskListStorage;
+import dash.storage.userinputlist.UserInputListStorage;
 import dash.storage.userprefs.UserPrefsStorage;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, TaskListStorage {
+public interface Storage extends AddressBookStorage, UserPrefsStorage, TaskListStorage, UserInputListStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -41,4 +43,14 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, TaskListS
 
     @Override
     void saveTaskList(TaskList taskList) throws IOException;
+
+    @Override
+    Path getUserInputListFilePath();
+
+    @Override
+    Optional<UserInputList> readUserInputList() throws DataConversionException, IOException;
+
+    @Override
+    void saveUserInputList(UserInputList userInputList) throws IOException;
+
 }

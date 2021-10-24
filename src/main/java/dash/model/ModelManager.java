@@ -12,6 +12,7 @@ import dash.commons.util.CollectionUtil;
 import dash.model.person.Person;
 import dash.model.task.Task;
 import dash.model.task.TaskList;
+import dash.model.UserInputList;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -175,6 +176,9 @@ public class ModelManager implements Model {
         userInputList.add(userInput);
     }
 
+    @Override
+    public UserInputList getUserInputList() { return userInputList; }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -230,6 +234,9 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+    //=========== Observable User Input List Accessor =================================================================
+
     @Override
-    public ObservableList<String> getUserInputList() { return userInputList.getObservableUserInputList(); }
+    public ObservableList<String> getObservableUserInputList() { return userInputList.getObservableUserInputList(); }
+
 }

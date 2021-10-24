@@ -46,7 +46,7 @@ public interface Logic {
     /**
      * Returns an unmodifiable view of a list of previous valid user inputs.
      */
-    ObservableList<String> getUserInputList();
+    ObservableList<String> getObservableUserInputList();
 
     /**
      * Returns the user prefs' address book file path.

@@ -72,6 +72,7 @@ public class LogicManager implements Logic {
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveTaskList(model.getTaskList());
+            storage.saveUserInputList(model.getUserInputList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -95,7 +96,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<String> getUserInputList() { return model.getUserInputList(); }
+    public ObservableList<String> getObservableUserInputList() { return model.getObservableUserInputList(); }
 
     @Override
     public Path getAddressBookFilePath() {
