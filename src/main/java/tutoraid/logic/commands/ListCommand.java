@@ -2,6 +2,7 @@ package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import tutoraid.commons.core.Messages;
 import tutoraid.model.Model;
 
 /**
@@ -10,7 +11,6 @@ import tutoraid.model.Model;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-    public static final String MESSAGE_SUCCESS = "Listed all students";
 
     private final boolean viewAll;
 
@@ -36,6 +36,6 @@ public class ListCommand extends Command {
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(viewAll);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(Messages.MESSAGE_LIST_SUCCESS);
     }
 }
