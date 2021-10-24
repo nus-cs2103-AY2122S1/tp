@@ -32,6 +32,8 @@ Managera is OS-independent meaning it will work on any operating system.
     * [Interaction](#interaction)
         * [Add Participant to Event: `enroll`](#add-participant-to-event-enroll)
         * [Remove Participant from Event: `expel`](#remove-participant-from-event-expel)
+        * [Add Next of Kin to Participant: `addNok`](#add-next-of-kin-to-participant-addnok)
+        * [Remove Next of Kin from Participant: `deleteNok`](#remove-next-of-kin-from-participant-deletenok)
     * [Miscellaneous](#miscellaneous)
         * [Viewing help : `help`](#viewing-help--help)
         * [Clearing all Data: `clear`](#clearing-all-data--clear)
@@ -347,6 +349,35 @@ Format: `expel INDEX_1 INDEX_2`
 
 Example Usage:
 * `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event list.
+
+### Add Next of Kin to Participant: `addNok`
+
+Add Next of Kin to Participant at specified index.
+
+Format: `addNok INDEX n/NAME p/PHONE tag/TAG`
+
+* Add a Next of Kin to Participant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed Participant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* All fields including `n/NAME`, `p/PHONE`, and 'tag/TAG' must be provided.
+* Next of Kin with the same name cannot be assigned to the same Participant
+
+Example Usage:
+* `addNok 1 n/Jannette Yeo p/88734323 tag/Spouse` - adds Next of Kin whose name is Janette Yeo with contact number 
+  88734323 and with tag Spouse to the first Participant.
+
+### Remove Next of Kin from Participant: `deleteNok`
+
+Remove Next of Kin at specified index from a Participant at another specified index.
+
+Format: `removeNok INDEX_1 INDEX_2`
+
+* Removes the Next of Kin at specified `INDEX_1` from the Participant at specified index `INDEX_2`.
+* The index refers to the index number shown in the displayed Participant list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example Usage:
+* `deleteNok 1 2` - remove the 2nd Next of Kin from the 1st Participant
 
 ## Miscellaneous
 
