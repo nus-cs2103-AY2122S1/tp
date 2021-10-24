@@ -271,6 +271,62 @@ The following sequence diagram shows how the pin operation works:
 * **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
+    
+
+### Find feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
+
+Step 3. Connections displays any person whose name contains `David` **while also having** `friend` **and** 
+`football` tagged to them.
+
+#### Design considerations:
+
+**Aspect: How Find executes:**
+
+* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+    * Pros: Straightforward.
+    * Cons: Introduces additional and unnecessary complexities to ModelManager.
+
+* **Alternative 2 (current choice):** Create a FindPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of Find.
+    * Cons: More code.
+
+### FindOr feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindOrCommand#Execute`
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `findOr n/David n/Henry t/friend t/footnall` to search for a matching entry.
+
+Step 3. Connections displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
+tagged to **either** `friend` **or** `football`.
+
+#### Design considerations:
+
+**Aspect: How FindOr executes:**
+
+* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+    * Pros: Straightforward.
+    * Cons: Introduces additional and unnecessary complexities to ModelManager.
+
+* **Alternative 2 (current choice):** Create a FindOrPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of FindOr.
+    * Cons: More code.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -468,7 +524,7 @@ Future versions user stories
 
 1.  User chooses to look for an entry
 2.  Use provides the search term
-3.  Connections return all entries that matches the search term
+3.  Connections returns all entries that matches all search terms provided
 
     Use case ends.
 
@@ -480,11 +536,15 @@ Future versions user stories
     
       Use case ends.
 
-* 2a. No existing entries match the search term provided
+* 2b. No existing entries match the search term provided
     
-    * 2a1. Connections display a message to indicate no matching entries
+    * 2b1. Connections display a message to indicate no matching entries
     
       Use case resumes at step 2.
+    
+* 2c. FindOr command is used
+    
+    * 2c1. Connections return all entries that matches any of the search terms provided.
 
 **Use case: Find people via Tags**
 
