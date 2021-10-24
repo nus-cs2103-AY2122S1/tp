@@ -84,6 +84,10 @@ public class Applicant {
         return application;
     }
 
+    public Title getTitle() {
+        return application.getTitle();
+    }
+
     /**
      * Returns true if this applicant is applying to the given position.
      */
