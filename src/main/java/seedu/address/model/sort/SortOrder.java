@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.sort;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
@@ -31,14 +31,14 @@ public class SortOrder {
      * Returns true if given string is a valid sortOrder.
      */
     public static boolean isValidSortOrder(String test) {
-        return sortOrders.contains(test);
+        return sortOrders.contains(test.toLowerCase());
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof SortOrder // instance of handles nulls
-            && sortOrder.equals(((SortOrder) other).sortOrder)); // state check
+            && sortOrder.equalsIgnoreCase(((SortOrder) other).sortOrder)); // state check
     }
 
     @Override

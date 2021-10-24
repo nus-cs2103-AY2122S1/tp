@@ -42,6 +42,10 @@ public class TypicalPersons {
             .withPhone("8482424").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withPhone("8482131").build();
+    public static final Person CHOO = new PersonBuilder().withName("Choo")
+            .withPhone("90909090").build();
+    public static final Person DOO = new PersonBuilder().withName("Doo")
+            .withPhone("99889898").withTags("y3").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
@@ -58,7 +62,11 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-    public static List<Person> getTypicalPersonsUnsorted() {
+    public static List<Person> getTypicalPersonsUnsortedName() {
         return new ArrayList<>(Arrays.asList(GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE));
+    }
+
+    public static List<Person> getTypicalPersonsUnsortedTag() {
+        return new ArrayList<>(Arrays.asList(AMY, BOB, CHOO, DOO));
     }
 }

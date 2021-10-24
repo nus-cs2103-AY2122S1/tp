@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -51,6 +52,9 @@ public class CommandTestUtil {
     public static final String VALID_TIME_FIELD = "1330";
     public static final String VALID_CAPACITY_FIELD = "8";
 
+    public static final String VALID_SORT_ORDER_NAME = "name";
+    public static final String VALID_SORT_ORDER_TAG = "tag";
+
     public static final String NAME_DESC_COURT = " " + PREFIX_NAME + VALID_FACILITY_NAME_COURT;
     public static final String LOCATION_DESC_COURT = " " + PREFIX_LOCATION + VALID_LOCATION_COURT;
     public static final String TIME_DESC_COURT = " " + PREFIX_TIME + VALID_TIME_COURT;
@@ -75,9 +79,13 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // must be integers
     public static final String INVALID_AVAILABILITY_DESC = " " + PREFIX_AVAILABILITY + "one two three";
+    public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "aa bb cc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String SORT_ORDER_DESC_TAG = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_TAG;
+    public static final String SORT_ORDER_DESC_NAME = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_NAME;
 
     public static final EditMemberCommand.EditPersonDescriptor DESC_AMY;
     public static final EditMemberCommand.EditPersonDescriptor DESC_BOB;

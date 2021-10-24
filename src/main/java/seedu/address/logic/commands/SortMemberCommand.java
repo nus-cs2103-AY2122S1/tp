@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.model.Model;
-import seedu.address.model.SortOrder;
+import seedu.address.model.sort.SortOrder;
 
 /**
  * Sorts member list in a specified order.
@@ -34,5 +34,12 @@ public class SortMemberCommand extends Command {
         model.sortMemberList(sortOrder);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortOrder.toString()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SortMemberCommand // instanceof handles nulls
+                && sortOrder.equals(((SortMemberCommand) other).sortOrder)); // state check
     }
 }

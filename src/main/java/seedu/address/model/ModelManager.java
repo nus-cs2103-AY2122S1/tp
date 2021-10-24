@@ -17,6 +17,7 @@ import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortOrder;
 
 
 /**

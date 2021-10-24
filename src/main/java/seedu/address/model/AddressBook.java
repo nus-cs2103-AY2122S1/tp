@@ -60,10 +60,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.facilities.setFacilities(facilities);
     }
 
+    /**
+     * Sorts the member list by name.
+     */
     public void sortMemberListByName() {
         this.persons.sortMembersByName();
     }
 
+    /**
+     * Sorts the member list by tag.
+     */
     public void sortMemberListByTags() {
         this.persons.sortMembersByTags();
     }
