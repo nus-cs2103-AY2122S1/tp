@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.encryption.exceptions.UnsupportedPasswordException;
+import seedu.address.logic.parser.PasswordCommandParser;
 
 public class LoginScreen implements Ui {
 
@@ -21,8 +22,9 @@ public class LoginScreen implements Ui {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private MainApp app;
-    private boolean isNew;
+    private final MainApp app;
+    private final boolean isNew;
+    private boolean isWrongPasswordFormat;
 
     /**
      * Constructs a new LoginScreen.
@@ -33,6 +35,7 @@ public class LoginScreen implements Ui {
     public LoginScreen(MainApp app, boolean isNew) {
         this.app = app;
         this.isNew = isNew;
+        this.isWrongPasswordFormat = false;
     }
 
     @Override
@@ -84,10 +87,14 @@ public class LoginScreen implements Ui {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         userInput.setOnAction((event) -> {
-            try {
-                app.logIn(userInput.getText());
-            } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {
-                e.printStackTrace();
+            if (PasswordCommandParser.passwordValidation(userInput.getText())) {
+                try {
+                    app.logIn(userInput.getText());
+                } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                isWrongPasswordFormat = true; // will display the correct format for user.
             }
             userInput.clear();
         });

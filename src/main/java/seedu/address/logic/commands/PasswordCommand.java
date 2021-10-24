@@ -8,11 +8,21 @@ import seedu.address.model.Model;
 
 public class PasswordCommand extends Command {
     public static final String COMMAND_WORD = "password";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " oldpassword "
-            + PREFIX_NEW_PASSWORD + " newpassword";
 
-    private String oldPassword;
-    private String newPassword;
+    public static final int MIN_PASSWORD_LENGTH = 8;
+
+    public static final String CORRECT_PASSWORD_FORMAT
+            = "Password should contain LETTERS, SPECIAL CHARACTERS and NUMBERS "
+            + "at least length of "
+            + MIN_PASSWORD_LENGTH;
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " " + PREFIX_OLD_PASSWORD + " oldPassword "
+            + PREFIX_NEW_PASSWORD + " newPassword"
+            + System.lineSeparator()
+            + CORRECT_PASSWORD_FORMAT;
+
+    private final String oldPassword;
+    private final String newPassword;
 
     /**
      * Creates a Command with old and new passwords.
