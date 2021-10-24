@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
 
 /**
@@ -68,6 +69,13 @@ public class Task {
      */
     public TaskTag getTaskTag() {
         return taskTag;
+    }
+
+    /**
+     * Return the task tag id of the task
+     */
+    public long getTagId() {
+        return taskTag.getTagId();
     }
 
     /**

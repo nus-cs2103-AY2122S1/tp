@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.Label;
+
 class LabelTest {
     private final String tooLong = "0123456789012345678901234567890123456789012345678901234567890123456789"
             + "0123456789012345678901234567890";

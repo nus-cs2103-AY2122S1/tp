@@ -14,7 +14,7 @@ public class SortOrdersByAmountCommand extends Command {
 
     public static final String COMMAND_WORD = "sortorders";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all orders in address book by their amount "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all orders by their amount "
             + "in descending order and displays them as a list with index numbers.\n";
 
     public static final String MESSAGE_SUCCESS = "Sorted all orders";
@@ -26,7 +26,7 @@ public class SortOrdersByAmountCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.sortOrderList(COMPARATOR);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayState.ORDER);
     }
 
     @Override

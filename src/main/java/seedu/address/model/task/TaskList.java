@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,6 +45,14 @@ public class TaskList implements Iterable<Task> {
         if (!internalList.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+    }
+
+    /**
+     * Removes all tasks matching predicate from the list.
+     */
+    public void removeIf(Predicate<Task> pred) {
+        requireNonNull(pred);
+        internalList.removeIf(pred);
     }
 
     /**
