@@ -16,7 +16,7 @@
     "name": "Benson Meier",
     "phone": "98765432",
     "email": "johnd@example.com",
-    "caseNumber": "6",
+    "caseNumber": "1",
     "homeAddress": "311, Clementi Ave 2, #02-25",
     "workAddress": "29 Flora Rd #01-08",
     "quarantineAddress": "3 Temasek Boulevard #03-028C",
@@ -35,7 +35,7 @@
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
-    "caseNumber" : "8",
+    "caseNumber" : "200",
     "homeAddress" : "10th street"
   }, {
     "name" : "Elle Meyer",
@@ -47,7 +47,7 @@
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
-    "caseNumber" : "10",
+    "caseNumber" : "444442",
     "homeAddress" : "little tokyo"
   }, {
     "name" : "George Best",

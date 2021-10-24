@@ -38,6 +38,8 @@ Track2Gather is a **desktop app for contact tracing personnel at the [Ministry o
    
     * **`list`** : Shows a list of all persons.
 
+    * **`sort`** : Sorts all persons in the contacts list.
+
     * **`clear`** : Deletes all persons with SHN periods that are completed at time of command call.
     
     * **`help`** : Shows a message explaining how to access the help page.
@@ -137,8 +139,9 @@ Format: `delete INDEX [MORE_INDICES]`
 * The index(s) **must not exceed the total number of contacts** in the address book
 
 Examples:
-* `sort` followed by `delete 2` deletes the 2nd person in the contacts list when sorted by name. 
-* `sort` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the contacts list when sorted by name.
+* `sort n/` followed by `delete 2` deletes the 2nd person in the contacts list when sorted by name. 
+* `sort cn/` followed by `delete 1 4 5` deletes the 1st, 4th and 5th persons in the contacts list when sorted by case
+  number.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command, if any.
 
 ### Listing all persons : `list`
@@ -146,6 +149,19 @@ Examples:
 Shows a list of all persons.
 
 Format: `list`
+
+### Sorting all persons : `sort`
+
+Sorts the contacts list based on the specified prefixes.
+
+Format: `sort [n/] [cn/]`
+
+* Sorts the contacts list from the first to the last specified prefix.
+* At least one prefix must be specified.
+
+Examples:
+* `sort n/` sorts the contacts list by name.
+* `sort cn/ n/` sorts the contacts list by case number and then by name.
 
 ### Clearing all persons : `clear`
 
@@ -196,6 +212,7 @@ Action | Format, Examples
 **TShift** | `tshift [PLUS_MINUS_SIGN]DAYS`<br> e.g., `tshift 3`
 **Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **List** | `list`
+**Sort** | `sort [n/] [cn/]`<br> e.g., `sort n/` `sort cn/ n/`
 **Clear** | `clear`
 **Help** | `help`
 **Exit** | `exit`
