@@ -8,7 +8,7 @@ import seedu.plannermd.model.appointment.Session;
 import seedu.plannermd.model.person.Remark;
 
 /**
- * A utility class to help with building EditDoctorDescriptor objects.
+ * A utility class to help with building EditAppointmentDescriptor objects.
  */
 public class AddAppointmentDescriptorBuilder {
 
@@ -23,8 +23,8 @@ public class AddAppointmentDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditDoctorDescriptor} with fields containing
-     * {@code Doctor}'s details
+     * Returns an {@code EditAppointmentDescriptor} with fields containing
+     * {@code Appointment}'s details
      */
     public AddAppointmentDescriptorBuilder(Appointment appointment) {
         descriptor = new AddAppointmentCommand.AddAppointmentDescriptor();

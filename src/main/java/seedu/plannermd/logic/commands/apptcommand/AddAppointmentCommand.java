@@ -38,15 +38,13 @@ public class AddAppointmentCommand extends AppointmentCommand {
             "This appointment cannot be added due to a clash in timings";
     public static final String MESSAGE_DUPLICATE_APPOINTMENT =
             "This appointment already exists in PlannerMD";
-    public static final String MESSAGE_WRONG_DATE_TIME = "Sessions should be of  the format DD/MM/YYYY HH:MM "
+    public static final String MESSAGE_WRONG_DATE_TIME = "Sessions should be of the format DD/MM/YYYY HH:MM "
             + "and adhere to the following constraints:\n"
-            + "1. Must be a valid date (after now)\n"
-            + "2. Day must be between 1-31 (0 in front of single digit is optional)\n"
-            + "3. Month must be between 1-12 (0 in front of single digit is optional)\n"
-            + "4. Year must be 4 characters."
-            + "5. Must be a valid time (after now if the given date is the current date)\n"
-            + "6. Hour must be between 0-23 (0 in front of single digit is optional)\n"
-            + "7. Minute must be between 0-59 (0 in front of single digit is optional).";
+            + "1. Day must be between 1-31 (0 in front of single digit is optional)\n"
+            + "2. Month must be between 1-12 (0 in front of single digit is optional)\n"
+            + "3. Year must be 4 characters."
+            + "4. Hour must be between 0-23 (0 in front of single digit is optional)\n"
+            + "5. Minute must be between 0-59 (0 in front of single digit is optional).";
 
     private Index patientIndex;
     private Index doctorIndex;

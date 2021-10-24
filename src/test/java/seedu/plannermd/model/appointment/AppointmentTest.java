@@ -24,7 +24,7 @@ public class AppointmentTest {
         // same values -> returns true
         assertTrue(THIRTY_MIN_APPOINTMENT.equals(thirtyMinApptCopy));
 
-        // same object -> returns false
+        // same object -> returns true
         assertTrue(THIRTY_MIN_APPOINTMENT.equals(THIRTY_MIN_APPOINTMENT));
 
         // null -> returns true

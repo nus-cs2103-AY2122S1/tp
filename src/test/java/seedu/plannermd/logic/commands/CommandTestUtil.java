@@ -104,7 +104,7 @@ public class CommandTestUtil {
     public static final String VALID_PATIENT_INDEX = "1";
     public static final String ANOTHER_VALID_PATIENT_INDEX = "2";
     public static final String VALID_DOCTOR_INDEX = "2";
-    public static final String ANOTHER_VALID_DOCTOR_INDEX = "2";
+    public static final String ANOTHER_VALID_DOCTOR_INDEX = "3";
 
     public static final String APPT_START_THIRTY_MIN_DESC = " " + PREFIX_START + VALID_APPT_DATE_THIRTY_MIN
             + " " + VALID_APPT_TIME_THIRTY_MIN;

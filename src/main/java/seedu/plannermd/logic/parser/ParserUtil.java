@@ -165,7 +165,7 @@ public class ParserUtil {
      * Leading and trailing whitespaces will be trimmed.
      * Optional Remark field accepts an empty string as an empty remark.
      *
-     * @throws ParseException if the given {@code risk} is invalid.
+     * @throws ParseException if the given {@code remark} is invalid.
      */
     public static Remark parseRemark(String remark) throws ParseException {
         requireNonNull(remark);
@@ -179,9 +179,9 @@ public class ParserUtil {
     /**
      * Parses a {@code String duration} into a {@code Duration}.
      * Leading and trailing whitespaces will be trimmed.
-     * Optional Risk field accepts an empty string as a default duration of 10 minutes.
+     * Optional Duration field accepts an empty string as a default duration of 10 minutes.
      *
-     * @throws ParseException if the given {@code risk} is invalid.
+     * @throws ParseException if the given {@code duration} is invalid.
      */
     public static Duration parseDuration(String duration) throws ParseException {
         requireNonNull(duration);

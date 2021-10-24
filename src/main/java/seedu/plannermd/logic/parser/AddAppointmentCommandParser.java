@@ -31,7 +31,7 @@ public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand
             .toFormatter();
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FilterAppointmentCommand
+     * Parses the given {@code String} of arguments in the context of the AddAppointmentCommand
      * and returns a AddAppointmentCommand object for execution.
      *
      * @throws ParseException If the user input does not conform the expected format
