@@ -15,9 +15,9 @@ public class StudentId {
     /*
      * A student ID must start and end with an alphabet, and has exactly 7 numbers between the two letters
      */
-    public static final String VALIDATION_REGEX = "[A-Z][0-9]{7}[A-Z]";
+    private static final String VALIDATION_REGEX = "[A-Z][0-9]{7}[A-Z]";
 
-    public final String studentId;
+    private final String studentId;
 
     /**
      * Constructs a {@code StudentId}.

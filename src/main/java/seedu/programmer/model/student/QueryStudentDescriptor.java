@@ -59,9 +59,9 @@ public class QueryStudentDescriptor {
         StudentId studentSid = student.getStudentId();
         ClassId studentCid = student.getClassId();
 
-        return doesOptionalContainsField(nameToBeQueried, studentName.fullName)
-                && doesOptionalContainsField(sidToBeQueried, studentSid.studentId)
-                && doesOptionalContainsField(cidToBeQueried, studentCid.classId);
+        return doesOptionalContainsField(nameToBeQueried, studentName.toString())
+                && doesOptionalContainsField(sidToBeQueried, studentSid.toString())
+                && doesOptionalContainsField(cidToBeQueried, studentCid.toString());
     }
     /**
      * Checks if {@code str} character sequence matches any of the content of the {@code optional}.
