@@ -9,7 +9,10 @@
     "tutorialGroup": "T09",
     "socialHandle": "@alicep",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ "friends" ]
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    } ]
   }, {
     "name" : "Benson Meier",
     "gender": "M",
@@ -19,7 +22,13 @@
     "tutorialGroup": "W08",
     "socialHandle": "@bensonm",
     "remark" : "He can't take beer!",
-    "tagged" : [ "owesMoney", "friends" ]
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    }, {
+      "tagName" : "owesMoney",
+      "tagColour" : "#3e7b91"
+    } ]
   }, {
     "name" : "Carl Kurz",
     "gender": "M",
@@ -39,7 +48,10 @@
     "tutorialGroup": "T09",
     "socialHandle": "@danielm",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ "friends" ]
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    } ]
   }, {
     "name" : "Elle Meyer",
     "gender": "F",
