@@ -53,7 +53,7 @@ tasks done faster than traditional GUI apps.
 </div>
 
 
-### Module add task: `add task`
+### Adding new task to a module: `add task`
 
 Create a new task for a specific module
 Task name should only contain alphanumeric characters
@@ -74,19 +74,17 @@ Adds a new module to TAB
 Format: `add module m/<module name>`
 
 Examples:
-* `module add m/CS2103`: Adds module CS2103 to TAB
-* `module add m/CS2100`: Adds module CS2100 to TAB
+* `add module m/CS2103`: Adds module CS2103 to TAB
+* `add module m/CS2100`: Adds module CS2100 to TAB
 
-### Creating a new task for a specific module: `module add task`
+### Editing a module's name: `edit module`
 
-Adds a new task to the specified module
+Edits the name of the module
 
-Format: `add task m/<module name> ti/<task id> a/<task name> d/<task deadline>`
+Format: `edit module m/<old module name> mn/<new module name>`
 
 Examples:
-* `add task m/CS2103 ti/T1 a/practical exam d/12-11-2021`: Adds task 'practical exam' with deadline
-   on '12-11-2021' to module 'CS2103'
-* `add task m/CS2103 ti/T3 a/Lab1 d/21-10-2021`: Adds the task lab1 with deadline on 21-10-2021 to module CS2100
+* `edit module m/CS2103 mn/CS2105`: Renames the module "CS2103" to "CS2105"
 
 
 ### Add student to a specific module: `add student`
@@ -137,6 +135,17 @@ Examples:
 * `edit task m/CS2103 i/T10 a/Final exam d/20-11-2021`: Edits the name and deadline of the task with task id 'T10'
   to 'Final exam' and '20-11-2021' respectively
 * `edit task m/CS2103 i/T10 d/23-11-2021`: Edits only the deadline of the task with task id 'T10' to '20-11-2021'
+
+### Delete a task from a module: `delete task`
+
+Deletes the specified task from the specified module using the TaskID.
+Also deletes the task from all the students in that module.
+
+Format: `delete task m/<module name> ti/<task id>`
+
+Examples:
+* `delete task m/CS2103 ti/T1`: Deletes the task with task ID T1 from CS2103
+* `delete task m/CS2105 ti/T2`: Deletes the task with task ID t2 from CS2105
 
 ### Find a student: `find`
 
