@@ -44,7 +44,6 @@ import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.UploadCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.Model;
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
@@ -127,6 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(KeyCombination.valueOf("F1"), this::handleExit);
         setAccelerator(KeyCombination.valueOf("F2"), this::handleHelp);
         setAccelerator(KeyCombination.valueOf("F3"), this::handleDownload);
+        setAccelerator(KeyCombination.valueOf("F4"), this::handleUpload);
     }
 
     /**
@@ -216,7 +216,7 @@ public class MainWindow extends UiPart<Stage> {
      * Uploads CSV data into ProgrammerError's model storage.
      */
     @FXML
-    private void handleUpload(Model model) {
+    private void handleUpload() {
         File chosenFile = promptUserForCsvFile();
         List<Student> stuList;
         try {
@@ -233,8 +233,14 @@ public class MainWindow extends UiPart<Stage> {
 
         ProgrammerError newPE = new ProgrammerError();
         newPE.setStudents(stuList);
-        model.setProgrammerError(newPE);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        logic.getModel().setProgrammerError(newPE);
+        logic.getModel().updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        try {
+            logic.getStorage().saveProgrammerError(newPE);
+        } catch (IOException e) {
+            displayPopup("An unexpected error has occurred, please try again!");
+            return;
+        }
         logger.info("Uploaded CSV data successfully!");
     }
 
@@ -249,7 +255,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CSVReader reader = new CSVReader(new FileReader(chosenFile));
         String[] headers = reader.readNext();
-        if (headers.length != 4) {
+        int numberOfFields = 4;
+        if (headers.length != numberOfFields) {
             return null;
         }
 
@@ -410,9 +417,7 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
             } else if (commandResult instanceof UploadCommandResult) {
-                UploadCommandResult ucr = (UploadCommandResult) commandResult;
-                Model m = ucr.getModel();
-                handleUpload(m);
+                handleUpload();
             }
 
             return commandResult;
