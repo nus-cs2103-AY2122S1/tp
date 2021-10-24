@@ -15,6 +15,7 @@ import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.Model;
 import seedu.unify.model.ReadOnlyUniFy;
 import seedu.unify.model.task.Task;
+import seedu.unify.model.task.WeeklyTasks;
 import seedu.unify.storage.Storage;
 
 /**
@@ -65,8 +66,8 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Task> getWeeklyTaskList() {
-        return model.getWeeklyTaskList();
+    public WeeklyTasks getWeeklyTaskList() {
+        return model.getWeeklyTasks();
     }
 
     @Override
