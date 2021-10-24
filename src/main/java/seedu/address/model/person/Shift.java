@@ -20,7 +20,6 @@ import seedu.address.model.EmptyShift;
 public class Shift {
 
     public static final String DELIMITER = "-";
-    private static final int NUM_OF_VALUES = 2;
     private static final LocalTime DEFAULT_MORNING_START_TIME = LocalTime.parse("10:00", TIME_FORMATTER);
     private static final LocalTime DEFAULT_MORNING_END_TIME = LocalTime.parse("16:00", TIME_FORMATTER);
     private static final LocalTime DEFAULT_AFTERNOON_START_TIME = LocalTime.parse("16:00", TIME_FORMATTER);
@@ -34,14 +33,6 @@ public class Shift {
     private LocalTime startTime;
     private LocalTime endTime;
 
-
-
-
-
-
-
-
-
     /**
      * Constructor of Task given its weekday, time, and name.
      *
@@ -53,6 +44,7 @@ public class Shift {
         this.slot = slot;
         this.startDate = LocalDate.now();
         isWorking = true;
+        setDefaultTimings(slot.getOrder());
     }
 
     /**
@@ -64,11 +56,7 @@ public class Shift {
         this.slot = slot;
         this.startDate = startDate;
         this.history.addAll(history);
-        if (slot.equals(Slot.MORNING)) {
-            setDefaultTimings(0);
-        } else {
-            setDefaultTimings(1);
-        }
+        setDefaultTimings(slot.getOrder());
         isWorking = true;
     }
 
@@ -87,6 +75,14 @@ public class Shift {
 
     public List<Period> getHistory() {
         return Collections.unmodifiableList(history);
+    }
+
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return this.endTime;
     }
 
     /**

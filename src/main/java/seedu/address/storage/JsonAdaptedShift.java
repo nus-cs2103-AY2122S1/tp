@@ -1,9 +1,11 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.model.person.Slot.isValidSlot;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.EmptyShift;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Shift;
@@ -25,6 +28,8 @@ public class JsonAdaptedShift {
     private final String slot;
     private final String startDate;
     private final String isWorking;
+    private final String startTime;
+    private final String endTime;
     private final List<JsonAdaptedPeriod> history = new ArrayList<>();
 
     /**
@@ -33,7 +38,8 @@ public class JsonAdaptedShift {
     @JsonCreator
     public JsonAdaptedShift(@JsonProperty("dayOfWeek") String dayOfWeek, @JsonProperty("slot") String slot,
                             @JsonProperty("history") List<JsonAdaptedPeriod> history,
-                            @JsonProperty("startDate") String startDate, @JsonProperty("isWorking") String isWorking) {
+                            @JsonProperty("startDate") String startDate, @JsonProperty("isWorking") String isWorking,
+                            @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime) {
         this.slot = slot;
         this.dayOfWeek = dayOfWeek;
         if (history != null) {
@@ -41,6 +47,8 @@ public class JsonAdaptedShift {
         }
         this.startDate = startDate;
         this.isWorking = isWorking;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
@@ -57,6 +65,8 @@ public class JsonAdaptedShift {
                 .stream()
                 .map(JsonAdaptedPeriod::new)
                 .collect(Collectors.toList()));
+        this.startTime = shift.getStartTime().toString();
+        this.endTime = shift.getEndTime().toString();
 
 
     }
@@ -84,10 +94,20 @@ public class JsonAdaptedShift {
             //create empty
             return new EmptyShift(modelDayOfWeek, modelSlot, periods);
         }
+
         LocalDate startDate = LocalDate.parse(this.startDate);
-        return new Shift(modelDayOfWeek, modelSlot, startDate, periods);
-
-
+        Shift result = new Shift(modelDayOfWeek, modelSlot, startDate, periods);
+        if (startTime == null || endTime == null) {
+            return result;
+        }
+        try {
+            LocalTime modelStartTime = LocalTime.parse(startTime, TIME_FORMATTER);
+            LocalTime modelEndTime = LocalTime.parse(endTime, TIME_FORMATTER);
+            result.setTime(modelStartTime, modelEndTime, modelSlot.getOrder());
+        } catch (InvalidShiftTimeException e) {
+            throw new IllegalValueException(e.getMessage());
+        }
+        return result;
 
     }
 
