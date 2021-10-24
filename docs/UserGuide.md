@@ -2,10 +2,27 @@
 layout: page
 title: User Guide
 ---
+## Introduction
+![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
 NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their course completion.**
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
+
+# Main Features 
+
+Here is an overview of the main features that NUS Mod Tracker provides:
+* Keep track of your Modular Credits(MC).
+* Keep track of the modules that you have taken.  
+* Create your own academic plan.
+
+For more information about our features, you can head over to our [Features section](#features)
+
+# How to use the user guide 
+
+We strongly recommend first time users of our application to read through the user guide in the order that it is written. Throughout 
+the user guide, we include links which will jump to the corresponding section of the user guide. 
+These links allow you to quickly navigate this document.
 
 * Table of Contents
 {:toc}
