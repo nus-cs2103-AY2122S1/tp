@@ -2,13 +2,10 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 public class ExternalWindow extends UiPart<Stage> {
-    protected static final String TEXT_COLOR = "424874";
-
     private static final Logger logger = LogsCenter.getLogger(ExternalWindow.class);
 
     /**
