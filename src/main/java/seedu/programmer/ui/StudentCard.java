@@ -85,7 +85,7 @@ public class StudentCard extends UiPart<Region> {
      * Update the student particulars to be displayed.
      * */
     public void updateStudentInformation(Student student) {
-        name.setText(student.getFullName());
+        name.setText(student.getNameValue());
         studentId.setText("Student ID: " + student.getStudentIdValue());
         classId.setText("Class ID: " + student.getClassIdValue());
         email.setText("Email: " + student.getEmailValue());

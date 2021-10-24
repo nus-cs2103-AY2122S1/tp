@@ -53,7 +53,7 @@ public class Student {
         return name;
     }
 
-    public String getFullName() {
+    public String getNameValue() {
         return name.toString();
     }
 

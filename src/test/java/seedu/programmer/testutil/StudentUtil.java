@@ -26,7 +26,7 @@ public class StudentUtil {
      * Returns the part of command string for the given {@code student}'s details.
      */
     public static String getStudentDetails(Student student) {
-        return PREFIX_NAME + student.getFullName() + " "
+        return PREFIX_NAME + student.getNameValue() + " "
                 + PREFIX_STUDENT_ID + student.getStudentIdValue() + " "
                 + PREFIX_CLASS_ID + student.getClassIdValue() + " "
                 + PREFIX_EMAIL + student.getEmailValue() + " ";
