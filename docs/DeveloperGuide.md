@@ -163,7 +163,19 @@ This operation is exposed in the `Model` interface as `Model#importFile(Path fil
 The following sequence diagram shows how the import operation works:
 ![ImportSequenceDiagram](images/ImportSequenceDiagram.png)
 
-#### !TODO Export feature
+#### Export feature
+
+The export feature is facilitated by `ExportCommand`. It extends `Command` with a filepath where the exported contact list should be stored, stored internally as a `filePath`. It also overwrites the `execute` function to export the last searched contact list to a json file in the file path stored.
+
+The following sequence diagram shows how the export operation works:
+![Sequence of the Export command](images/ExportSequenceDiagram.png)
+
+#### ExportEmail feature
+
+The export feature is facilitated by `ExportEmailCommand`. It extends `Command` with a filepath where the exported contact list should be stored, stored internally as a `filePath`. It also overwrites the `execute` function to export the last searched contact list to a list of emails in the file path stored.
+
+The following sequence diagram shows how the export operation works:
+![Sequence of the ExportEmail command](images/ExportEmailSequenceDiagram.png)
 
 ### Address Book Management
 
@@ -184,6 +196,14 @@ Below is a sequence diagram for the deleting all shown Persons executed after th
 ![Sequence of the Delete All Shown command](images/DeleteAllShownSequenceDiagram.png)
 
 The `DeleteCommand` returned by `DeleteCommand#all()` uses `AddressBook#resetData()` exposed in the `Model` interface as `Model#setAddressBook()` to clear the address book by passing in an empty `AddressBook`. 
+
+
+#### Statistic Feature
+The export feature is facilitated by `StatCommand`. It overwrites the `execute` function to get a count of the various tags, types and tutorial ID of the last searched contact list.
+
+The following sequence diagram shows how the export operation works:
+![Sequence of the ExportEmail command](images/StatSequenceDiagram.png)
+
 
 ### Search features
 
@@ -260,6 +280,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 <img src="images/CommitActivityDiagram.png" width="250" />
 
+
+
 #### Design considerations:
 
 **Aspect: How undo & redo executes:**
@@ -324,6 +346,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | intermediate user                          | search a person with the given tag            | view all the contacts with the given tag                                            |
 | `* *`    | beginner user                              | find the user guide for the app on the app    | have an idea of the features of the app without having to leave the app             |
 | `* *`    | beginner user                              | export search the set of contacts with the given tag | locate a person easily                                                       |
+| `* *`    | user in a supervising position             | export name and email to a file               | send specific emails to a select few contacts
+| `* *`    | curious user                               | view statustics about the contacts that I have added | derive more information about my contacts
+
 
 
 *{More to be added}*
@@ -417,9 +442,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 2a. The list is empty.
+* 3a. The file directory is invalid
 
-  Use case ends.
+    * 3a1. AddressBook shows an error message.
+
+      Use case resumes at step 2.
+
+
+**Use case: Export emails of contacts**
+
+**MSS**
+
+1.  User requests to list/search persons
+2.  AddressBook shows a list of persons
+3.  User requests to export the emails of the list
+4.  AddressBook exports list of emails to JSON file
+
+    Use case ends.
+
+**Extensions**
 
 * 3a. The file directory is invalid
 
