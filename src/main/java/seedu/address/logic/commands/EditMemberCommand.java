@@ -21,6 +21,8 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TodayAttendance;
+import seedu.address.model.person.TotalAttendance;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -90,11 +92,15 @@ public class EditMemberCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        // edit command does not allow editing availability
+        // edit command does not allow editing availability, total attendance or today attendance
         Availability updatedAvailability = personToEdit.getAvailability();
+        TotalAttendance totalAttendance = personToEdit.getTotalAttendance();
+        TodayAttendance todayAttendance = personToEdit.getTodayAttendance();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedAvailability, updatedTags);
+
+        return new Person(updatedName, updatedPhone, updatedAvailability, todayAttendance,
+                totalAttendance, updatedTags);
     }
 
     @Override
