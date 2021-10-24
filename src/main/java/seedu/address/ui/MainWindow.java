@@ -179,7 +179,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchTab() {
-        tabPane.getSelectionModel().selectNext();
+        if (tabPane.getSelectionModel().isSelected(1)) {
+            tabPane.getSelectionModel().selectFirst();
+        } else {
+            tabPane.getSelectionModel().selectNext();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
