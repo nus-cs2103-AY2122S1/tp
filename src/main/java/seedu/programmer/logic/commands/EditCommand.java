@@ -3,12 +3,15 @@ package seedu.programmer.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.programmer.commons.core.Messages;
 import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.CollectionUtil;
@@ -16,6 +19,7 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -35,6 +39,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_STUDENT_ID + "STUDENT_ID] "
             + "[" + PREFIX_CLASS_ID + "CLASS_ID] "
             + "[" + PREFIX_EMAIL + "email] "
+            + "[" + PREFIX_EMAIL + "email] "
+            + "[" + PREFIX_LAB_TITLE + "Lab Title] "
+            + "[" + PREFIX_LAB_RESULT + "Score] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENT_ID + "A0121234H "
             + PREFIX_CLASS_ID + "B01";
@@ -88,9 +95,19 @@ public class EditCommand extends Command {
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());
         StudentId updateStudentId = editStudentDescriptor.getStudentId().orElse(studentToEdit.getStudentId());
         ClassId updatedClassId = editStudentDescriptor.getClassId().orElse(studentToEdit.getClassId());
-        Email updatedEmail = editStudentDescriptor.getemail().orElse(studentToEdit.getEmail());
+        Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Lab updatedLab = editStudentDescriptor.getLab().orElse(null);
+        Double updatedResult = editStudentDescriptor.getResult().orElse(null);
+        if (updatedLab != null && updatedResult != null) {
+            studentToEdit.editLabResult(updatedLab, updatedResult);
+            ObservableList<Lab> updatedList = studentToEdit.getLabResultList();
+            return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail, updatedList);
+        } else {
+            return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail,
+                    studentToEdit.getLabResultList());
+        }
 
-        return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail);
+
     }
 
     @Override
@@ -120,6 +137,8 @@ public class EditCommand extends Command {
         private StudentId studentId;
         private ClassId classId;
         private Email email;
+        private Double result;
+        private Lab lab;
 
         public EditStudentDescriptor() {}
 
@@ -131,14 +150,15 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setStudentId(toCopy.studentId);
             setClassId(toCopy.classId);
-            setemail(toCopy.email);
+            setEmail(toCopy.email);
+            setLab(toCopy.lab, toCopy.result);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, studentId, classId, email);
+            return CollectionUtil.isAnyNonNull(name, studentId, classId, email, lab);
         }
 
         public void setName(Name name) {
@@ -165,12 +185,25 @@ public class EditCommand extends Command {
             return Optional.ofNullable(classId);
         }
 
-        public void setemail(Email email) {
+        public void setEmail(Email email) {
             this.email = email;
         }
 
-        public Optional<Email> getemail() {
+        public Optional<Email> getEmail() {
             return Optional.ofNullable(email);
+        }
+
+        public void setLab(Lab lab, Double result) {
+            this.lab = lab;
+            this.result = result;
+        }
+
+        public Optional<Lab> getLab() {
+            return Optional.ofNullable(lab);
+        }
+
+        public Optional<Double> getResult() {
+            return Optional.ofNullable(result);
         }
 
         @Override
@@ -191,7 +224,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getStudentId().equals(e.getStudentId())
                     && getClassId().equals(e.getClassId())
-                    && getemail().equals(e.getemail());
+                    && getEmail().equals(e.getEmail());
         }
 
     }
