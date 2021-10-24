@@ -307,6 +307,26 @@
     -fx-padding: 8 1 8 1;
 }
 
+.axis {
+    -fx-font-size: 2.0em;
+    -fx-tick-label-fill: white;
+    -fx-tick-length: 20;
+    -fx-minor-tick-length: 10;
+}
+
+.axis-label {
+    -fx-text-fill: white;
+}
+
+
+.chart-title {
+    -fx-text-fill: white;
+}
+
+.chart-bar {
+    -fx-background-color: #3e7b91;
+}
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;
