@@ -3,10 +3,12 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.ClientTotalOrder;
@@ -33,6 +35,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     public TotalOrdersWindow(Logic logic) {
         super(FXML, new Stage());
         this.logic = logic;
+        formatTotalColumn();
     }
 
     /**
@@ -87,5 +90,22 @@ public class TotalOrdersWindow extends UiPart<Stage> {
         table.setItems(logic.getClientTotalOrders());
         clientCol.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         totalCol.setCellValueFactory(new PropertyValueFactory<>("totalOrder"));
+    }
+
+    /**
+     * Formats the total column to always display amount with 2 decimal places.
+     */
+    private void formatTotalColumn() {
+        totalCol.setCellFactory(tc -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double value, boolean empty) {
+                super.updateItem(value, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f", value));
+                }
+            }
+        });
     }
 }
