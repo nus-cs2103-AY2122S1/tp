@@ -28,6 +28,12 @@ public class Student {
     private final Map<Assessment, Score> scores = new HashMap<>();
     private final Set<Tag> tags = new HashSet<>();
 
+    public Student(Name name, ID id) {
+        requireAllNonNull(name, id);
+        this.name = name;
+        this.id = id;
+    }
+
     /**
      * Every field must be present and not null.
      */
@@ -91,6 +97,19 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getId().equals(getId());
+    }
+
+    /**
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameName(Student otherStudent) {
+        if (otherStudent == this) {
+            return true;
+        }
+
+        return otherStudent != null
+                && otherStudent.getName().equals(getName());
     }
 
     /**

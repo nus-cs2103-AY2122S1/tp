@@ -18,8 +18,8 @@ import seedu.address.commons.util.ChartUtil;
 public class StudentStatistics {
 
     private static final String CHART_TITLE = "'s Results";
-    private static final String CHART_X_AXIS_LABEL = "Scores";
-    private static final String CHART_Y_AXIS_LABEL = "Assessments";
+    private static final String CHART_X_AXIS_LABEL = "Assessments";
+    private static final String CHART_Y_AXIS_LABEL = "Scores";
 
     private final Student student;
     private final Map<Assessment, Score> scoreMap;
@@ -45,12 +45,27 @@ public class StudentStatistics {
         return distribution;
     }
 
+    //TODO: now uses mean not median
+    private Map<String, Number> getMedian(Assessment assessment) {
+        AssessmentStatistics statistics = new AssessmentStatistics(assessment);
+        Map<String, Number> distribution = new TreeMap<>();
+        distribution.put(assessment.getValue(), statistics.getMean());
+        return distribution;
+    }
+
+
+    private List<Map<String, Number>> getDataSet() {
+        ArrayList<Map<String, Number>> dataSet = new ArrayList<>();
+        dataSet.add(getScoreDistribution());
+        scoreMap.forEach((assessment, score) -> dataSet.add(getMedian(assessment)));
+        return dataSet;
+    }
 
     /**
      * Returns a line chart representing the scores of student for each assessment.
      */
     public Chart toLineChart() {
-        return ChartUtil.createBarChart(student.getName() + CHART_TITLE,
-                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution());
+        return ChartUtil.createLineChart(student.getName() + CHART_TITLE,
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getDataSet());
     }
 }

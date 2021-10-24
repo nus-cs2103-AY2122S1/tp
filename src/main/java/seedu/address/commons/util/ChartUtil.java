@@ -2,6 +2,8 @@ package seedu.address.commons.util;
 
 import java.util.Map;
 
+import java.util.*;
+
 import javafx.scene.*;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -56,7 +58,7 @@ public class ChartUtil {
      * Creates a JavaFX LineChart with the given title, axis labels and data points.
      */
     public static LineChart<String, Number> createLineChart(String title, String xLabel, String yLabel,
-                                                          Map<String, Number> data) {
+                                                          List<Map<String, Number>> dataSet) {
 
         // Defining axes
         final CategoryAxis xAxis = new CategoryAxis();
@@ -74,10 +76,13 @@ public class ChartUtil {
 
 //        double maxY = DEFAULT_TICK_UNIT;
 
-        XYChart.Series<String, Number> series = new XYChart.Series<>();
-        for (Map.Entry<String, Number> entry : data.entrySet()) {
-            series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
-//            maxY = Math.max(maxY, entry.getValue().doubleValue());
+        for (Map<String, Number> data : dataSet) {
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            for (Map.Entry<String, Number> entry : data.entrySet()) {
+                series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+                //            maxY = Math.max(maxY, entry.getValue().doubleValue());
+            }
+            lineChart.getData().add(series);
         }
 
 //        double yUpperBound = roundUpToNearestMultiple(maxY, (int) DEFAULT_TICK_UNIT);
@@ -86,8 +91,6 @@ public class ChartUtil {
 //        // the tick unit, the graph will look as if it is cut-off.
 //        yUpperBound += DEFAULT_TICK_UNIT;
 //        yAxis.setUpperBound(yUpperBound);
-
-        lineChart.getData().add(series);
         return lineChart;
     }
 

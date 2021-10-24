@@ -142,12 +142,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns student in address book with same identity as {@code studentToMatch} if exists.
+     * Returns student in address book with same name or ID as {@code studentToMatch} if exists.
      */
     public Student getStudent(Student studentToMatch) {
         requireNonNull(studentToMatch);
         for (Student student : getStudentList()) {
-            if (student.equals(studentToMatch)) {
+            if (student.isSameName(studentToMatch) || student.isSameStudent(studentToMatch)) {
                 return student;
             }
         }
