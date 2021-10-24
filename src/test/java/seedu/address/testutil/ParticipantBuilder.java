@@ -5,10 +5,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
@@ -33,7 +34,7 @@ public class ParticipantBuilder {
     private Email email;
     private Address address;
     private BirthDate birthDate;
-    private ArrayList<NextOfKin> nextOfKins;
+    private ObservableList<NextOfKin> nextOfKins;
 
     /**
      * Creates a {@code ParticipantBuilder} with the default details.
@@ -44,7 +45,7 @@ public class ParticipantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         birthDate = BirthDate.notSpecified();
-        nextOfKins = new ArrayList<>();
+        nextOfKins = FXCollections.observableArrayList();
     }
 
     /**
@@ -111,7 +112,7 @@ public class ParticipantBuilder {
      * Sets the {@code nextOfKins} of the {@code Participant} that we are building.
      */
     public ParticipantBuilder withNextOfKins(NextOfKin... nextOfKins) {
-        this.nextOfKins = new ArrayList<>(Arrays.stream(nextOfKins).collect(Collectors.toList()));
+        this.nextOfKins = FXCollections.observableArrayList(Arrays.stream(nextOfKins).collect(Collectors.toList()));
         return this;
     }
 

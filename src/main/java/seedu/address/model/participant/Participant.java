@@ -1,11 +1,14 @@
 package seedu.address.model.participant;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 
 /**
@@ -24,7 +27,7 @@ public class Participant {
     private final Address address;
     private final ParticipantId id;
     private final BirthDate birthDate;
-    private final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
+    private final ObservableList<NextOfKin> nextOfKins = FXCollections.observableArrayList();
 
     private final ArrayList<Event> events = new ArrayList<>();
 
@@ -124,7 +127,7 @@ public class Participant {
      *
      * @return this object's nextOfKins.
      */
-    public ArrayList<NextOfKin> getNextOfKins() {
+    public ObservableList<NextOfKin> getNextOfKins() {
         return nextOfKins;
     }
 
@@ -161,6 +164,44 @@ public class Participant {
      */
     public ArrayList<Event> getEvents() {
         return events;
+    }
+
+    /**
+     * Adds a next of kin to the participant.
+     *
+     * @param nextOfKin next of kin to be added.
+     */
+    public void addNextOfKin(NextOfKin nextOfKin) {
+        nextOfKins.add(nextOfKin);
+    }
+
+    /**
+     * Removes the next of kin from the participant.
+     *
+     * @param nextOfKin next of kin to be removed.
+     */
+    public void removeNextOfKin(NextOfKin nextOfKin) {
+        nextOfKins.remove(nextOfKin);
+    }
+
+    /**
+     * Returns a next of kin object at specified index.
+     *
+     * @param index index of next of kin to get.
+     * @return next of kin at specified index.
+     */
+    public NextOfKin getNextOfKin(int index) {
+        return nextOfKins.get(index);
+    }
+
+    /** Returns true if the given next of kin is already assigned to this participant.
+     *
+     * @param nextOfKin The given next of kin.
+     * @return True if the nextOfKin is assigned to this participant.
+     */
+    public boolean hasNextOfKin(NextOfKin nextOfKin) {
+        requireNonNull(nextOfKin);
+        return this.nextOfKins.stream().anyMatch(nok -> nok.isSameNextOfKin(nextOfKin));
     }
 
     /**
@@ -267,8 +308,8 @@ public class Participant {
         builder.append("\nDate of birth: ").append(getBirthDate());
 
         if (!nextOfKins.isEmpty()) {
-            builder.append("\nNext Of Kins: ");
-            nextOfKins.forEach(builder::append);
+            builder.append("\nNext Of Kins: \n");
+            nextOfKins.forEach(nok -> builder.append(nok).append("\n"));
         }
 
         if (!events.isEmpty()) {
