@@ -1,8 +1,8 @@
-package seedu.programmer.model.student.Comparator;
-
-import seedu.programmer.model.student.Lab;
+package seedu.programmer.model.student.comparator;
 
 import java.util.Comparator;
+
+import seedu.programmer.model.student.Lab;
 
 /**
  * A class to help sort Students in ascending order.

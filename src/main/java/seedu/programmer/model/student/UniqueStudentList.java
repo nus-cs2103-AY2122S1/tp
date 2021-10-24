@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.programmer.model.student.Comparator.SortByClass;
-import seedu.programmer.model.student.Comparator.SortByName;
+import seedu.programmer.model.student.comparator.SortByClass;
+import seedu.programmer.model.student.comparator.SortByName;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 
@@ -48,7 +48,8 @@ public class UniqueStudentList implements Iterable<Student> {
             throw new DuplicateStudentException();
         }
         internalList.add(toAdd);
-        internalList.sort(new SortByClass().thenComparing(new SortByName()));    }
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));
+    }
 
     /**
      * Get the student at the given index.
@@ -83,7 +84,8 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.set(index, editedStudent);
-        internalList.sort(new SortByClass().thenComparing(new SortByName()));    }
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));
+    }
 
     /**
      * Removes the equivalent student from the list.
