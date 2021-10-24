@@ -286,6 +286,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | slightly familiar user                 | list all my organisations               | have an overview of my populated organisations                                  |
 | `* *`  | slightly familiar user                 | edit information pertaining to a specific organisation               | stay updated with the new details of all my organisations and contacts within                                  |
 | `* *`  | slightly familiar user                 | view the details of a specific organisation                | reconnect with the organisation or the person related to it                             |
+| `* * `  | slightly familiar user                 | list all my interactions               | have an overview of my interactions with a particular contact                                  |
 | `* * *`  | slightly familiar user                                       | search for a specific contact          | can narrow down my contact book to the specific contact I am looking for |
 | `* * *`    | slightly familiar user                                       | edit information pertaining to a specific contact   | stay updated with the new details of all my contacts               |
 | `*`      | user with many persons in the address book | sort contacts by name           | locate a contact easily                                                 |
@@ -407,6 +408,22 @@ Use case ends.
     * 2a1. ComputingConnection shows an error message.
 
       Use case ends.
+
+**Use case: Add interactions to a specific contact**
+
+**MSS**
+
+1.  User requests to add an interaction to a contact
+2.  ComputingConnection adds the interaction to the specific contact
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The input tag formats are incorrect.
+    * 1a1. ComputingConnection shows an error message.
+
+  Use case ends.
 
 *{More to be added}*
 
