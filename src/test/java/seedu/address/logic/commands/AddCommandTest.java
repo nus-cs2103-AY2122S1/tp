@@ -188,7 +188,7 @@ public class AddCommandTest {
 
         @Override
         public List<Client> setClientByClientIds(List<ClientId> clientIds,
-            EditClientDescriptor editedClientDescriptor) {
+                                                 EditClientDescriptor editedClientDescriptor) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -202,6 +202,12 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Tag> getFilteredTagList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addNextMeeting(NextMeeting nextMeeting) {
 
         }

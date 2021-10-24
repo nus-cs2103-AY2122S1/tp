@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NextMeeting;
+import seedu.address.model.tag.Tag;
 
 /**
  * API of the Logic component
@@ -46,10 +47,14 @@ public interface Logic {
      */
     ObservableList<Client> getFilteredClientList();
 
-    /** Returns an unmodifiable view of the filtered meetings */
+    /**
+     * Returns an unmodifiable view of the filtered meetings
+     */
     ObservableList<NextMeeting> getSortedNextMeetingList();
 
-    /** Returns an unmodifiable view of the client to view */
+    /**
+     * Returns an unmodifiable view of the client to view
+     */
     ObservableList<Client> getClientToView();
 
     /**
@@ -86,13 +91,15 @@ public interface Logic {
 
     /**
      * Creates the AddressBook at the specified {@code Path filePath}
+     *
      * @throws CommandException If an error occurs during command execution.
      */
     void createAddressBook() throws CommandException;
-
 
     /**
      * Returns the list of all address book file path.
      */
     ObservableList<Path> getAddressBookList();
+
+    ObservableList<Tag> getFilteredTagList();
 }

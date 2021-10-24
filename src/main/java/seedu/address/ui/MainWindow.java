@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
+import java.nio.file.Path;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuBar;
@@ -11,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
@@ -41,6 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private CommandBox commandBox;
     private AddressBookListMenu addressBookListMenu;
+    private TagsPanel tagsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,6 +66,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusBarPlaceholder;
+
+    @FXML
+    private StackPane tagsPanelPlaceholder;
 
     @FXML
     private ImageView displayLogo;
@@ -140,11 +147,15 @@ public class MainWindow extends UiPart<Stage> {
 
         commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
         sideBar = new SideBar(logic.getClientToView(), logic.getSortedNextMeetingList());
         sideBarPlaceHolder.getChildren().add(sideBar.getRoot());
 
+        tagsPanel = new TagsPanel(logic.getFilteredTagList());
+        tagsPanelPlaceholder.getChildren().add(tagsPanel.getRoot());
+
         addressBookListMenu = new AddressBookListMenu(logic.getAddressBookList(),
-                logic.getAddressBookFilePathObject(), logic);
+            logic.getAddressBookFilePathObject(), logic);
         menuBar.getMenus().add(addressBookListMenu.getRoot());
     }
 

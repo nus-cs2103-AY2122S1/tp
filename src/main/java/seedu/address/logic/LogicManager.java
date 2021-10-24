@@ -24,6 +24,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.NextMeeting;
+import seedu.address.model.tag.Tag;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.Storage;
@@ -79,6 +80,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return model.getFilteredTagList();
+    }
+
+    @Override
     public ObservableList<Client> getFilteredClientList() {
         return model.getFilteredClientList();
     }
@@ -88,6 +94,7 @@ public class LogicManager implements Logic {
         return model.getClientToView();
     }
 
+    @Override
     public ObservableList<NextMeeting> getSortedNextMeetingList() {
         return model.getSortedNextMeetingList();
     }

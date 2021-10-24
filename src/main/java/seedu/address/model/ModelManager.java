@@ -51,14 +51,17 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         addressBookList = new AddressBookList(userPrefs.getAddressBookDirectory());
 
-        sortedClients = new SortedList<>(this.addressBook.getClientList());
+        ObservableList<Client> clientList = this.addressBook.getClientList();
+        sortedClients = new SortedList<>(clientList);
         filteredClients = new FilteredList<>(sortedClients);
 
-        sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
-        filteredTags = new FilteredList<>(this.addressBook.getTagList());
-
-        clientToView = new FilteredList<>(this.addressBook.getClientList());
+        clientToView = new FilteredList<>(clientList);
         clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
+
+        sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
+
+        // sortedTags = new SortedList<>(tagList);
+        filteredTags = new FilteredList<>(this.addressBook.getTagList());
     }
 
     public ModelManager() {
@@ -160,6 +163,7 @@ public class ModelManager implements Model {
         return addressBook.deleteClientByClientIds(clientIds);
     }
 
+    @Override
     public void deleteMeetingsByClients(List<Client> toDelete) {
         addressBook.deleteMeetingsByClients(toDelete);
     }
@@ -176,6 +180,7 @@ public class ModelManager implements Model {
         return addressBook.setClientByClientIds(clientIds, editedClientDescriptor);
     }
 
+    @Override
     public void addNextMeeting(NextMeeting nextMeeting) {
         addressBook.addNextMeeting(nextMeeting);
     }
@@ -209,6 +214,7 @@ public class ModelManager implements Model {
     public void updateFilteredTagList(Predicate<Tag> predicate) {
         requireNonNull(predicate);
         filteredTags.setPredicate(predicate);
+        addressBook.removeUnreferencedTags();
     }
 
     //=========== Filtered Client List Accessors =============================================================
@@ -222,6 +228,12 @@ public class ModelManager implements Model {
         return filteredClients;
     }
 
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return filteredTags;
+    }
+
+    @Override
     public ObservableList<NextMeeting> getSortedNextMeetingList() {
         return sortedNextMeetings;
     }

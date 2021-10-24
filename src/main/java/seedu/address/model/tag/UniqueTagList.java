@@ -10,6 +10,9 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.model.client.Client;
+import seedu.address.model.client.UniqueClientList;
+import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
@@ -50,6 +53,7 @@ public class UniqueTagList implements Iterable<Tag> {
         if (contains(toAdd)) {
             throw new DuplicateTagException();
         }
+
         internalList.add(toAdd);
     }
 
@@ -64,7 +68,13 @@ public class UniqueTagList implements Iterable<Tag> {
         if (filteredList.size() < 1) {
             throw new TagNotFoundException();
         } else {
-            filteredList.forEach(internalList::remove);
+            // filteredList.forEach((f) -> {
+            //         if (internalList.contains(f)) {
+            //             internalList.remove(f);
+            //         }
+            //     }
+            // );
+            internalList.removeAll(filteredList);
             return filteredList;
         }
     }
@@ -78,6 +88,33 @@ public class UniqueTagList implements Iterable<Tag> {
             throw new TagNotFoundException();
         }
         return tagInQuestion.get(0);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code tags}.
+     * {@code tags} must not contain duplicate tags.
+     */
+    public void setTags(List<Tag> tags) {
+        requireAllNonNull(tags);
+        if (!tagsAreUnique(tags)) {
+            throw new DuplicateTagException();
+        }
+
+        internalList.setAll(tags);
+    }
+
+    /**
+     * Returns true if {@code tags} contains only unique tags.
+     */
+    private boolean tagsAreUnique(List<Tag> tags) {
+        for (int i = 0; i < tags.size() - 1; i++) {
+            for (int j = i + 1; j < tags.size(); j++) {
+                if (tags.get(i).isSameTag(tags.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public ObservableList<Tag> asUnmodifiableObservableList() {

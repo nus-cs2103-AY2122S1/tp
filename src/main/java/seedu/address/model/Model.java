@@ -179,6 +179,13 @@ public interface Model {
     ObservableList<Client> getFilteredClientList();
 
     /**
+     * Returns an unmodifiable view of the filtered tag list.
+     *
+     * @return
+     */
+    ObservableList<Tag> getFilteredTagList();
+
+    /**
      * Adds a meeting to the current meeting list
      */
     void addNextMeeting(NextMeeting nextMeeting);
@@ -216,6 +223,7 @@ public interface Model {
 
     /**
      * Checks and returns if there is client with {@code clientId} to view
+     *
      * @param clientId
      */
     boolean isClientExistToView(ClientId clientId);

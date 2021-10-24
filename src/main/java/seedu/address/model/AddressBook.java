@@ -70,7 +70,12 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void setClients(List<Client> clients) {
         this.clients.setClients(clients);
-        removeUnreferencedTags();
+        // TODO: why is this needed?
+        // removeUnreferencedTags();
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags.setTags(tags);
     }
 
     /**
@@ -116,6 +121,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
         setClients(newData.getClientList());
+        setTags(newData.getTagList());
         setMeetings(newData.getNextMeetingsList());
         setClientCounter(newData.getClientCounter());
     }
@@ -155,7 +161,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeNextMeeting(NextMeeting key) {
         meetings.remove(key);
-        removeUnreferencedTags();
     }
 
     //// person-level operations
@@ -238,15 +243,19 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes tags that are unreferenced from the list.
      */
     public void removeUnreferencedTags() {
-        logger.info("Cleaning unreferenced tags...");
+        Predicate<Tag> predicate = new TagIsUnreferenced();
         ArrayList<Predicate<Tag>> predicatesToDelete = new ArrayList<>();
-        predicatesToDelete.add(new TagIsUnreferenced());
-        try {
-            FilteredList<Tag> removedTags = removeTagByFields(predicatesToDelete);
-            logger.info(removedTags.size() + " unreferenced tags are cleared.");
-        } catch (TagNotFoundException ignored) {
-            logger.info("0 unreferenced tags are cleared.");
+        predicatesToDelete.add(predicate);
+
+        FilteredList<Tag> filteredList = getTagList().filtered(predicate);
+
+        if (filteredList.size() < 1) {
+            return;
         }
+
+        logger.info("Cleaning unreferenced tags...");
+        FilteredList<Tag> removedTags = removeTagByFields(predicatesToDelete);
+        logger.info(removedTags.size() + " unreferenced tags are cleared.");
     }
 
     /**
@@ -313,6 +322,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return meetings.asSortedObservableList();
     }
 
+    @Override
     public ObservableList<Tag> getTagList() {
         return tags.asUnmodifiableObservableList();
     }

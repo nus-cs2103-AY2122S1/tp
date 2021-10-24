@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLIENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TAGS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalClients.ALICE;
 import static seedu.address.testutil.TypicalClients.BENSON;
@@ -162,6 +163,7 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
+        modelManager.updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
