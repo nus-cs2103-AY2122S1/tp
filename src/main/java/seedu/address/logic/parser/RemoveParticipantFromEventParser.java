@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ZERO_BASED_INDEX;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddParticipantToEventCommand;
 import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,7 +14,7 @@ public class RemoveParticipantFromEventParser implements Parser<RemoveParticipan
 
         if (sections.length != 3) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventCommand.MESSAGE_USAGE));
+                    MESSAGE_INVALID_COMMAND_FORMAT, RemoveParticipantFromEventCommand.MESSAGE_USAGE));
         }
 
         try {

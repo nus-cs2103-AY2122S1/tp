@@ -13,10 +13,10 @@ import seedu.address.model.participant.Participant;
 
 public class AddParticipantToEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "addParticipant";
+    public static final String COMMAND_WORD = "enroll";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": adds Participant with specified index to an event with another specified index.\n"
+            + ": Adds Participant with specified index to an event with another specified index.\n"
             + "Parameters: "
             + "PARTICIPANT_INDEX "
             + "EVENT_INDEX\n"

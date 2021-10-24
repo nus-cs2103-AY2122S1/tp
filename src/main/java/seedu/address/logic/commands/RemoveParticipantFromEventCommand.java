@@ -13,10 +13,10 @@ import seedu.address.model.participant.Participant;
 
 public class RemoveParticipantFromEventCommand extends Command {
 
-    public static final String COMMAND_WORD = "removeParticipant";
+    public static final String COMMAND_WORD = "expel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": remove the Participant with specified index from an event with another specified index.\n"
+            + ": Removes the Participant with specified index from an event with another specified index.\n"
             + "Parameters: "
             + "PARTICIPANT_INDEX "
             + "EVENT_INDEX\n"

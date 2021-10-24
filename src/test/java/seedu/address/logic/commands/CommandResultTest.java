@@ -144,7 +144,7 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        // hard coded test
+
         AddParticipantToEventCommand addParticipantToEventCommand = new AddParticipantToEventParser()
                 .parse(" 1 1");
         addParticipantToEventCommand.execute(model);
@@ -276,7 +276,7 @@ public class CommandResultTest {
         addCommand.execute(model);
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        // hard coded test
+
         AddParticipantToEventCommand addParticipantToEventCommand = new AddParticipantToEventParser()
                 .parse(" 1 1");
         addParticipantToEventCommand.execute(model);
