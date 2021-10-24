@@ -14,9 +14,13 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.Region;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.logic.commands.CommandResult;
+import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Status;
+
+import static seedu.anilist.logic.parser.CliSyntax.PREFIX_STATUS;
 
 /**
  * Panel containing the list of anime.
@@ -90,13 +94,16 @@ public class AnimeListPanel extends UiPart<Region> {
                     public void changed(ObservableValue<? extends Tab> observable, Tab oldValue, Tab newValue) {
                         try {
                             if (newValue.equals(allTab)) {
-                                commandExecutor.execute("list");
+                                commandExecutor.execute(ListCommand.COMMAND_WORD);
                             } else if (newValue.equals(watchingTab)) {
-                                commandExecutor.execute("list s/watching");
+                                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                                        PREFIX_STATUS + Status.VALID_STATUS_STRING[2]);
                             } else if (newValue.equals(toWatchTab)) {
-                                commandExecutor.execute("list s/towatch");
+                                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                                        PREFIX_STATUS + Status.VALID_STATUS_STRING[0]);
                             } else if (newValue.equals(finishedTab)) {
-                                commandExecutor.execute("list s/finished");
+                                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                                        PREFIX_STATUS + Status.VALID_STATUS_STRING[4]);
                             }
                         } catch (CommandException | ParseException e) {
                             logger.log(Level.WARNING, "Wrongly parsed tab commands");
@@ -127,19 +134,22 @@ public class AnimeListPanel extends UiPart<Region> {
         try {
             if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
                 animeListTabPane.getSelectionModel().select(watchingTab);
-                commandExecutor.execute("list s/watching");
+                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                        PREFIX_STATUS + Status.VALID_STATUS_STRING[2]);
             } else if (currentTab.getCurrentTab() == TabOption.TabOptions.TOWATCH) {
                 animeListTabPane.getSelectionModel().select(finishedTab);
-                commandExecutor.execute("list s/finished");
+                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                        PREFIX_STATUS + Status.VALID_STATUS_STRING[4]);
             } else if (currentTab.getCurrentTab() == TabOption.TabOptions.WATCHING) {
                 animeListTabPane.getSelectionModel().select(toWatchTab);
-                commandExecutor.execute("list s/towatch");
+                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                        PREFIX_STATUS + Status.VALID_STATUS_STRING[0]);
             } else if (currentTab.getCurrentTab() == TabOption.TabOptions.FINISHED) {
                 animeListTabPane.getSelectionModel().select(allTab);
-                commandExecutor.execute("list");
+                commandExecutor.execute(ListCommand.COMMAND_WORD);
             } else {
                 animeListTabPane.getSelectionModel().select(allTab);
-                commandExecutor.execute("list");
+                commandExecutor.execute(ListCommand.COMMAND_WORD);
             }
         } catch (CommandException | ParseException e) {
             logger.log(Level.WARNING, "Wrongly parsed tab commands, resetting to all Tab");
@@ -153,19 +163,22 @@ public class AnimeListPanel extends UiPart<Region> {
         try {
             if (currentTab.getCurrentTab() == TabOption.TabOptions.ALL) {
                 animeListTabPane.getSelectionModel().select(finishedTab);
-                commandExecutor.execute("list s/finished");
+                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                        PREFIX_STATUS + Status.VALID_STATUS_STRING[4]);
             } else if (currentTab.getCurrentTab() == TabOption.TabOptions.TOWATCH) {
                 animeListTabPane.getSelectionModel().select(watchingTab);
-                commandExecutor.execute("list s/watching");
+                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                        PREFIX_STATUS + Status.VALID_STATUS_STRING[2]);
             } else if (currentTab.getCurrentTab() == TabOption.TabOptions.WATCHING) {
                 animeListTabPane.getSelectionModel().select(allTab);
-                commandExecutor.execute("list");
+                commandExecutor.execute(ListCommand.COMMAND_WORD);
             } else if (currentTab.getCurrentTab() == TabOption.TabOptions.FINISHED) {
                 animeListTabPane.getSelectionModel().select(toWatchTab);
-                commandExecutor.execute("list s/towatch");
+                commandExecutor.execute(ListCommand.COMMAND_WORD + " " +
+                        PREFIX_STATUS + Status.VALID_STATUS_STRING[0]);
             } else {
                 animeListTabPane.getSelectionModel().select(allTab);
-                commandExecutor.execute("list");
+                commandExecutor.execute(ListCommand.COMMAND_WORD);
             }
         } catch (CommandException | ParseException e) {
             logger.log(Level.WARNING, "Wrongly parsed tab commands, resetting to all Tab");
