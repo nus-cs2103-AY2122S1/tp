@@ -272,9 +272,9 @@ Requirement | Tag (not case sensitive)
 GE | "ge"
 UE | "ue"
 Foundation | "foundation"
-Breadth and Depth | "breadthdepth"
-IT Professionalism | "itprofessionalism"
-Math and Science | "mathscience"
+Breadth and Depth | "breadth and depth"
+IT Professionalism | "it professionalism"
+Math and Science | "math and science"
 
 Notes:
 * If the Mc requirement has been satisfied, the completed Mcs and progress bar will be coloured light blue.
@@ -296,7 +296,7 @@ Action | Format, Examples
 **Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
-**Find** | `find [code] [title] [description] [mc] [tag] KEYWORDS` <br> e.g. `find code CS2040S`
+**Find** | `find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
 **List** | `list`
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
