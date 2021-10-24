@@ -438,7 +438,7 @@ objects associated with the `Group` has been removed, the `Group` itself is then
       `Student`s have a `Group`
 
 ---
-## Proposed Implementation
+## **Proposed Implementation**
 
 This section describes implementation details of new features that can be included in future versions of this application.
 
