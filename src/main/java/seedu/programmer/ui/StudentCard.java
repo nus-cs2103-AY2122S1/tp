@@ -3,21 +3,14 @@ package seedu.programmer.ui;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
-import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code student}.
