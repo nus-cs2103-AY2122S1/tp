@@ -59,7 +59,7 @@ public class TagTaskCommand extends Command {
         Task taskToTag = lastShownList.get(index.getZeroBased());
         Task tagsAddedTask = addTags(taskToTag, editTaskDescriptor);
 
-        model.setTask(taskToTag, tagsAddedTask);
+        model.setTask(index.getZeroBased(), tagsAddedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, tagsAddedTask));
     }

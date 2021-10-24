@@ -4,6 +4,7 @@ import static dash.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static dash.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static dash.logic.parser.CliSyntax.PREFIX_PERSON;
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
@@ -23,6 +24,7 @@ import dash.logic.parser.ParserUtil;
 import dash.logic.parser.exceptions.ParseException;
 import dash.model.person.Person;
 import dash.model.tag.Tag;
+import dash.model.task.TaskDate;
 import javafx.collections.ObservableList;
 
 /**
@@ -40,7 +42,7 @@ public class EditTaskCommandParser implements ParserRequiringPersonList<EditTask
     public EditTaskCommand parse(String args, ObservableList<Person> filteredPersonList) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_PERSON, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TASK_DESCRIPTION, PREFIX_PERSON, PREFIX_TAG, PREFIX_TASK_DATE);
 
         Index index;
 
@@ -56,6 +58,11 @@ public class EditTaskCommandParser implements ParserRequiringPersonList<EditTask
         if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
             editTaskDescriptor.setTaskDescription(ParserUtil
                     .parseTaskDescription(argMultimap.getValue(PREFIX_TASK_DESCRIPTION).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_TASK_DATE).isPresent()) {
+            TaskDate taskdate = ParserUtil.parseTaskDateToEdit(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            editTaskDescriptor.setTaskDate(taskdate);
         }
 
         if (argMultimap.getValue(PREFIX_PERSON).isPresent()) {
@@ -98,8 +105,4 @@ public class EditTaskCommandParser implements ParserRequiringPersonList<EditTask
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
-
-
-
 }

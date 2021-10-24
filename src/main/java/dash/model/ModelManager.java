@@ -163,10 +163,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTask(Task target, Task editedTask) {
-        CollectionUtil.requireAllNonNull(target, editedTask);
-
-        taskList.setTask(target, editedTask);
+    public void setTask(int index, Task editedTask) {
+        CollectionUtil.requireAllNonNull(editedTask);
+        taskList.setTask(index, editedTask);
     }
 
     //=========== UserInputList ==============================================================================

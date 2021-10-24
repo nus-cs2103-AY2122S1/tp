@@ -42,3 +42,8 @@
     font-family: "Open Sans SemiBold Italic";
     src: url("/fonts/open-sans/OpenSans-SemiBoldItalic.ttf");
 }
+
+@font-face {
+    font-family: "Consolas Bold";
+    src: url("/fonts/consolab.ttf");
+}

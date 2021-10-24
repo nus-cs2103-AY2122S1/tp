@@ -63,11 +63,11 @@
                     </HBox>
                 </children>
                 <columnConstraints>
-                    <ColumnConstraints hgrow="ALWAYS" percentWidth="100"/>
+                    <ColumnConstraints hgrow="ALWAYS" percentWidth="100" fillWidth="true"/>
                 </columnConstraints>
                 <rowConstraints>
                     <RowConstraints vgrow="ALWAYS" minHeight="21" maxHeight="21"/>
-                    <RowConstraints vgrow="ALWAYS" fillHeight="true"/>
+                    <RowConstraints vgrow="ALWAYS" percentHeight="100" fillHeight="true"/>
                 </rowConstraints>
             </GridPane>
         </Tab>

@@ -39,7 +39,7 @@ public class EditTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
                 new TaskList(model.getTaskList()), new UserInputList());
-        expectedModel.setTask(model.getFilteredTaskList().get(0), editedTask);
+        expectedModel.setTask(0, editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
@@ -63,7 +63,7 @@ public class EditTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
                 new TaskList(model.getTaskList()), new UserInputList());
-        expectedModel.setTask(lastTask, editedTask);
+        expectedModel.setTask(indexLastTask.getZeroBased(), editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
@@ -97,7 +97,7 @@ public class EditTaskCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
                 new TaskList(model.getTaskList()), new UserInputList());
-        expectedModel.setTask(model.getFilteredTaskList().get(0), editedTask);
+        expectedModel.setTask(0, editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
