@@ -242,8 +242,33 @@ If there are conflicts, a `CommandException` will be thrown to the user to alert
 Step 3: It will proceed to update the class tag of the students enrolled in the class which shows the `ClassName` and 
 `Timeslot` of the updated class.
 
-Step 4 : Finally, it replaces the existing class with the updated class in the database.
+Step 4: Finally, it replaces the existing class with the updated class in the database.
 
+### [Developed] Adding Students to Existing Tuition Classes
+
+Users can add students to existing tuition classes using student index or name.
+This is facilitated by the `AddToClassCommand` and `AddToClassCommandParser` classes.
+
+The `AddToClassCommandParser` class parses the input from user and decides whether student indexes or student names are indicated by the user.
+Students are added to the respective tuition class with the help of the following operations:
+
+* `AddToClassCommand#getStudent()` - Categorizes students into four types, namely students that are added successfully, students with invalid names, students with valid names but not added due to class size limit, and students already enrolled in the class. 
+* `AddToClassCommand#updateModel()` - Updates the capacity of the corresponding tuition class and updates the class tag of students who have been enrolled.
+
+Given below is an example usage scenario and how an `addtoclass` command is executed.
+
+Step 1: The user enters `addtoclass si/2 4 tc/1` command.
+
+Step 2: The `AddToClassCommandParser` will check and confirm that student indexes are used. An `AddToClassCommand` object with student indexes as parameter is constructed.
+
+Step 3: The `AddToClassCommand` is executed. Student indexes, namely 2 and 4, are converted to student names using the `UniqueStudentList`.
+
+Step 3.1: Student indexes that are not found in the `UniqueStudentList` would be regarded as invalid indexes. 
+
+Step 3.2: Valid students who are not added due to tuition class size limit or who have been enrolled in the same class previously are identified using the `AddToClassCommand#getStudent()` method.
+
+Step 4: `AddToClassCommand#updateModel()` is called to add the valid students to the tuition class and change the capacity of the class. It also updates the class tag of the students enrolled in the class which shows the `ClassName` and
+`Timeslot` of the class.
 
 ### \[Developed\] Undo/redo feature
 
