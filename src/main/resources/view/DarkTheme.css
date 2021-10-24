@@ -89,14 +89,20 @@
 
 .list-view {
     -fx-background-insets: 0;
-    -fx-padding: 0;
+    -fx-padding: 3px;
     -fx-background-color: derive(#1d1d1d, 20%);
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-padding: 2px;
+}
+
+.list-cell:empty {
+    -fx-padding: 2px;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
 }
 
 .list-cell:filled:even {
@@ -336,4 +342,22 @@
     -fx-background-color: transparent, #383838, transparent, #383838;
     -fx-background-radius: 0;
 }
+
+#notes .content{
+    -fx-background-color: #383838;
+    -fx-background-radius: 0;
+}
+
+#notes {
+    -fx-background-color: transparent;
+}
+
+#noteCard {
+    -fx-background-color: #383838;
+}
+
+#detailsCard {
+    -fx-background-color: #3c3e3f;
+}
+
 

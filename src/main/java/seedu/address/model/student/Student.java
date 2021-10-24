@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -18,6 +20,8 @@ public class Student {
     private final Email email;
 
     // Data fields
+    private ObservableList<Assessment> assessments = FXCollections.observableArrayList();
+    private final Note note = new Note();
     private final GroupName groupName;
 
     /**
@@ -45,6 +49,19 @@ public class Student {
 
     public GroupName getGroupName() {
         return groupName;
+    }
+
+    public ObservableList<Assessment> getAssessments() {
+        assessments.addAll(new Assessment(), new Assessment(), new Assessment());
+        return this.assessments;
+    }
+
+    public Note getNote() {
+        return this.note;
+    }
+
+    public boolean isWeak() {
+        return false;
     }
 
     /**

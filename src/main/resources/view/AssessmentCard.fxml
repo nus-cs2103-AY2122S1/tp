@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.control.Label?>
+
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox fx:id="assessmentCard" alignment="CENTER_LEFT" minHeight="105" prefWidth="400">
+        <padding>
+            <Insets top="5" right="5" bottom="5" left="15" />
+        </padding>
+        <HBox alignment="CENTER_LEFT">
+            <Label fx:id="id" styleClass="cell_big_label">
+                <minWidth>
+                    <Region fx:constant="USE_PREF_SIZE"/>
+                </minWidth>
+            </Label>
+            <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
+        </HBox>
+        <Label fx:id="grade" styleClass="cell_small_label" text="\$grade" />
+        <Label fx:id="percentage" styleClass="cell_small_label" text="\$percentage" />
+    </VBox>
+</HBox>
