@@ -1,5 +1,6 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -15,6 +16,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskName;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -25,7 +27,7 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends"), getTaskList("Play"), new Description("Bald")),
+                getTagSet("friends"), getTaskList("Play", "Eat"), new Description("Bald")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getTagSet("colleagues", "friends"), getTaskList("Play"), new Description("Know it all")),
@@ -66,9 +68,14 @@ public class SampleDataUtil {
      * Returns a task list containing the list of strings given.
      */
     public static List<Task> getTaskList(String... strings) {
-        return Arrays.stream(strings)
-                .map(Task::new)
-                .collect(Collectors.toList());
+        List<Task> tasks = new ArrayList<>();
+        for (String string : strings) {
+            TaskName taskName = new TaskName(string);
+            Task newTask = new Task(taskName, null, null, null);
+            tasks.add(newTask);
+        }
+
+        return tasks;
     }
 
 }
