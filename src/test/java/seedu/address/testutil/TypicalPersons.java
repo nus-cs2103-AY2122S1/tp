@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -66,6 +67,8 @@ public class TypicalPersons {
     public static final Task REPORT_1 = new TaskBuilder().withDescription("Report 1")
             .withDeadline("2021-10-10").build();
 
+    public static final Group GROUP_1 = new GroupBuilder().withName("Group 1").build();
+
     private TypicalPersons() {} // prevents instantiation
 
     /**
@@ -79,6 +82,9 @@ public class TypicalPersons {
         for (Task task : getTypicalTasks()) {
             ab.addTask(task);
         }
+        for (Group group : getTypicalGroups()) {
+
+        }
         return ab;
     }
 
@@ -88,5 +94,9 @@ public class TypicalPersons {
 
     public static List<Task> getTypicalTasks() {
         return new ArrayList<>(List.of(REPORT_1));
+    }
+
+    public static List<Group> getTypicalGroups() {
+        return new ArrayList<>(List.of(GROUP_1));
     }
 }
