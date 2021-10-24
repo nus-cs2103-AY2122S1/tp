@@ -2,7 +2,6 @@ package dash.storage.userinputlist;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -10,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import dash.commons.exceptions.IllegalValueException;
 import dash.model.UserInputList;
-import dash.model.task.Task;
-import dash.model.task.TaskList;
 
 /**
  * An Immutable UserInputList that is serializable to JSON format.

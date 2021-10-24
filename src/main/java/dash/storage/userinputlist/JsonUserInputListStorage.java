@@ -20,10 +20,14 @@ public class JsonUserInputListStorage implements UserInputListStorage {
 
     private Path filePath;
 
-    public JsonUserInputListStorage(Path filePath) { this.filePath = filePath; }
+    public JsonUserInputListStorage(Path filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
-    public Path getUserInputListFilePath() { return filePath; }
+    public Path getUserInputListFilePath() {
+        return filePath;
+    }
 
     @Override
     public Optional<UserInputList> readUserInputList() throws DataConversionException {

@@ -6,12 +6,10 @@ import dash.logic.Logic;
 import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
 import dash.logic.parser.exceptions.ParseException;
-import dash.model.UserInputList;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 
 /**

@@ -177,7 +177,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public UserInputList getUserInputList() { return userInputList; }
+    public UserInputList getUserInputList() {
+        return userInputList;
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
@@ -237,6 +239,8 @@ public class ModelManager implements Model {
     //=========== Observable User Input List Accessor =================================================================
 
     @Override
-    public ArrayList<String> getInternalUserInputList() { return userInputList.getInternalUserInputList(); }
+    public ArrayList<String> getInternalUserInputList() {
+        return userInputList.getInternalUserInputList();
+    }
 
 }

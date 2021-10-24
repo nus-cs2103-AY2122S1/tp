@@ -119,7 +119,9 @@ public class StorageManager implements Storage {
     // ================ UserInputList methods =========================
 
     @Override
-    public Path getUserInputListFilePath() { return userInputListStorage.getUserInputListFilePath(); }
+    public Path getUserInputListFilePath() {
+        return userInputListStorage.getUserInputListFilePath();
+    }
 
     @Override
     public Optional<UserInputList> readUserInputList() throws DataConversionException, IOException {

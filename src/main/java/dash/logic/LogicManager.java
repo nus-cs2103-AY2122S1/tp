@@ -97,7 +97,9 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ArrayList<String> getInternalUserInputList() { return model.getInternalUserInputList(); }
+    public ArrayList<String> getInternalUserInputList() {
+        return model.getInternalUserInputList();
+    }
 
     @Override
     public Path getAddressBookFilePath() {

@@ -50,7 +50,7 @@ public class UserInputList implements Iterable<String> {
      */
     public void add(String toAdd) {
         requireNonNull(toAdd);
-        internalList.add(0,toAdd);
+        internalList.add(0, toAdd);
         if (internalList.size() > LIST_MAX_LENGTH) {
             internalList.remove(LIST_MAX_LENGTH);
         }
@@ -85,6 +85,8 @@ public class UserInputList implements Iterable<String> {
     }
 
     @Override
-    public int hashCode() { return internalList.hashCode(); }
+    public int hashCode() {
+        return internalList.hashCode();
+    }
 
 }

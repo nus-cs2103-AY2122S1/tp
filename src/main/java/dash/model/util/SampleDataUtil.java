@@ -81,11 +81,11 @@ public class SampleDataUtil {
     }
 
     public static UserInputList getSampleUserInputList() {
-        UserInputList sampleUIL = new UserInputList();
+        UserInputList sampleUil = new UserInputList();
         for (String userInput : getSampleUserInputs()) {
-            sampleUIL.add(userInput);
+            sampleUil.add(userInput);
         }
-        return sampleUIL;
+        return sampleUil;
     }
 
     /**
