@@ -28,7 +28,7 @@ public class Date implements Comparable<Date> {
     Date strings should be formatted as d MMM uuuu, where d and uuuu are digits.
     and MMM are alphabets e.g. Jan, Mar, Nov, etc.
      */
-    public static final String VALIDATION_REGEX = "^[0-2]?[0-9]\\s[a-zA-Z]{3}\\s[0-9]{4}";
+    public static final String VALIDATION_REGEX = "^[0-3]?[0-9]\\s[a-zA-Z]{3}\\s[0-9]{4}";
     public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern("d MMM uuuu")

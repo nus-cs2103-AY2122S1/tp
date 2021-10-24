@@ -9,7 +9,6 @@ import seedu.address.model.person.Person;
 
 public class PersonGridPanel extends UiPart<Region> {
     private static final String FXML = "PersonGridPanel.fxml";
-    private static final String NO_EXISTING_LESSONS_MESSAGE = "This student has no lessons!";
 
     private PersonListPanel personListPanel;
     private LessonListPanel lessonListPanel;
@@ -36,9 +35,7 @@ public class PersonGridPanel extends UiPart<Region> {
      * @param lessons Lessons of the student.
      */
     public void fillListPanels(Person student, ObservableList<Lesson> lessons) {
-        lessonListPanel = lessons.isEmpty()
-                ? new LessonListPanel(lessons, student, NO_EXISTING_LESSONS_MESSAGE)
-                : new LessonListPanel(lessons, student);
+        lessonListPanel = new LessonListPanel(lessons, student);
     }
 
     /**

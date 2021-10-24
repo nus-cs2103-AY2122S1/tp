@@ -20,6 +20,7 @@ public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
     private static final String PLACEHOLDER_MESSAGE = "Type \"view INDEX\" to "
             + "view the lessons of the student identified by INDEX in the displayed list.";
+    private static final String NO_EXISTING_LESSONS_MESSAGE = "This student has no lessons!";
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
 
     @FXML
@@ -48,16 +49,10 @@ public class LessonListPanel extends UiPart<Region> {
         initialiseLessonListView(lessonList);
 
         lessonListTitle.setText(student.getName().fullName);
-    }
 
-
-    /**
-     * Creates a {@code LessonListPanel} with the given {@code ObservableList}.
-     */
-    public LessonListPanel(ObservableList<Lesson> lessonList, Person student, String message) {
-        this(lessonList, student);
-
-        placeholder.setText(message);
+        if (lessonList.isEmpty()) {
+            placeholder.setText(NO_EXISTING_LESSONS_MESSAGE);
+        }
     }
 
     private void initialiseLessonListView(ObservableList<Lesson> lessonList) {
