@@ -104,7 +104,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Delete {@code Appointments} with {@code person} from appointment list
+     * Deletes {@code Appointments} with {@code person} from appointment list
      *
      * @param person person whose appointments are to be deleted
      * @param <T> subtype of Person
@@ -118,7 +118,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Replace {@code person} with {@code editedPerson} for {@code Appointments} with {@code person}
+     * Replaces {@code person} with {@code editedPerson} for {@code Appointments} with {@code person}
      *
      * @param person person whose appointments are to be updated
      * @param editedPerson person replacing {@code person}
@@ -138,11 +138,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      * @param patient person whose appointments are to be deleted
      */
     public void deleteAppointmentsWithPatient(Patient patient) {
-        for (Appointment appointment : internalList) {
-            if (appointment.getPatient().isSamePerson(patient)) {
-                internalList.remove(patient);
-            }
-        }
+        internalList.removeIf(appointment -> appointment.getPatient().isSamePerson(patient));
     }
 
     /**
@@ -151,11 +147,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      * @param doctor person whose appointments are to be deleted
      */
     public void deleteAppointmentsWithDoctor(Doctor doctor) {
-        for (Appointment appointment : internalList) {
-            if (appointment.getDoctor().isSamePerson(doctor)) {
-                internalList.remove(doctor);
-            }
-        }
+        internalList.removeIf(appointment -> appointment.getDoctor().isSamePerson(doctor));
     }
 
     /**

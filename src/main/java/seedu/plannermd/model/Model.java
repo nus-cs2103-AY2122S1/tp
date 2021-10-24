@@ -202,7 +202,7 @@ public interface Model {
     <T extends Person> void deleteAppointmentsWithPerson(T person);
 
     /**
-     * Update appointments with {@code person} to {@code editedPerson} from the appointment list
+     * Updates appointments with {@code person} to {@code editedPerson} from the appointment list
      *
      * @param person person whose appointments should be updated
      * @param editedPerson the person to replace {@code person} in existing appointments

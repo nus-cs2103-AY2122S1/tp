@@ -206,7 +206,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     /**
-     * Update appointments with {@code person} to {@code editedPerson} from the appointment list
+     * Updates appointments with {@code person} to {@code editedPerson} from the appointment list
      *
      * @param person person whose appointments should be updated
      * @param editedPerson the person to replace {@code person} in existing appointments
@@ -244,7 +244,9 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         return other == this // short circuit if same object
                 || (other instanceof PlannerMd // instanceof handles nulls
                 && doctors.equals(((PlannerMd) other).doctors)
-                && patients.equals(((PlannerMd) other).patients));
+                && patients.equals(((PlannerMd) other).patients))
+                && appointments.equals(((PlannerMd) other).appointments);
+
     }
 
     @Override

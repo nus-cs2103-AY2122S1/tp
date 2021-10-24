@@ -17,6 +17,7 @@ import seedu.plannermd.logic.commands.deletecommand.DeleteDoctorCommand;
 import seedu.plannermd.logic.commands.deletecommand.DeletePatientCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
+import seedu.plannermd.model.PlannerMd;
 import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.patient.Patient;
 
@@ -35,8 +36,9 @@ public class DeletePatientCommandTest {
 
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getPlannerMd(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.deletePatient(patientToDelete);
+        expectedModel.deleteAppointmentsWithPerson(patientToDelete);
 
         assertCommandSuccess(deletePatientCommand, model, expectedMessage, expectedModel);
     }
@@ -59,6 +61,7 @@ public class DeletePatientCommandTest {
         String expectedMessage = String.format(DeletePatientCommand.MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete);
 
         Model expectedModel = new ModelManager(model.getPlannerMd(), new UserPrefs());
+        expectedModel.deleteAppointmentsWithPerson(patientToDelete);
         expectedModel.deletePatient(patientToDelete);
         showNoPatient(expectedModel);
 
