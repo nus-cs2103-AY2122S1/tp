@@ -2,17 +2,17 @@
 layout: page
 title: Developer Guide
 ---
+Welcome to the CSBook Developer Guide. CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via a Command Line Interface** (CLI) while still having the
+benefits of a Graphical User Interface (GUI). This guide is designed for developers that are interested to work
+on this app. It contains detailed information that will allow developers to maintain the app or
+alter and extend the app for their own use.
 
-- Table of Contents
+
+* Table of Contents
   {:toc}
 
 ---
 
-## **Acknowledgements**
-
-- {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
-
----
 
 ## **Setting up, getting started**
 
@@ -161,43 +161,59 @@ This section describes some noteworthy details on how certain features are imple
 
 ### Loading data
 
-Implementation
-
 The loading of data into CsBook is facilitated by `JsonCsBookStorage`, `JsonSerializableCsBook`, `JsonAdaptedGroup` and
 `JsonAdaptedStudent`. The relevant operations for loading CSBook data is as follows:
 
-- `JsonCsBookStorage#readCsBook()` — Reads the current CSBook data
-- `JsonSerializableCsBook#toModelType()` - Converts the JsonSerializableCsBook to a CsBook object
-- `JsonSerializableCsBook#addStudentsToCsBook(csBook)` - Adds all students to a given CsBook
-- `JsonSerializableCsBook#addGroupsToCsBook(csBook)` - Adds all groups to a given CsBook
-- `JsonSerializableCsBook#addStudentsToGroups(csBook)` - Adds all students to their corresponding Groups
-- `JsonAdaptedStudent#toModelType(groupList)` - Converts the JsonAdaptedStudent to a Student object
-- `JsonAdaptedGroup#toModelType()` - Converts the JsonAdaptedGroup to a Group object
+- `JsonCsBookStorage#readCsBook()`  —  Reads the current CSBook data
+- `JsonSerializableCsBook#toModelType()`  —  Converts the JsonSerializableCsBook to a CsBook object
+- `JsonSerializableCsBook#addStudentsToCsBook(csBook)`  —  Adds all students to a given CsBook
+- `JsonSerializableCsBook#addGroupsToCsBook(csBook)`  —  Adds all groups to a given CsBook
+- `JsonSerializableCsBook#addStudentsToGroups(csBook)`  —  Adds all students to their corresponding Groups
+- `JsonAdaptedStudent#toModelType(groupList)`  —  Converts the JsonAdaptedStudent to a Student object
+- `JsonAdaptedGroup#toModelType()`  —  Converts the JsonAdaptedGroup to a Group object
 
 Given below how loading data behaves at each step.
 
-Step 1. The user starts the app and an encrypted data file containing CsBook's information is present. The data
+**Step 1**. The user starts the app and an encrypted data file containing CsBook's information is present. The data
 is decrypted and a call to `JsonCsBookStorage#readCsBook()` is made. After this, a call to `JsonSerializableCsBook#toModelType()`
 is made to convert the data into a CsBook object.
 
 ![LoadSequence0](images/LoadSequence0.png)
 
-Step 2. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`.
+\
+&nbsp;
+\
+&nbsp;
+
+**Step 2**. First, we add the groups from the data into CsBook by calling `JsonSerializableCsBook#addGroupsToCsBook(csBook)`.
 Next, we add the students from the data into Csbook by calling `JsonAdaptedStudent#toModelType(groupList)`. `groupList` is
 required to add students to ensure that each student has a valid group.
 
 ![LoadSequence1](images/LoadSequence1.png)
 
-Step 3. Currently, each group does not have its lists of students, we would need to add it in using `JsonSerializableCsBook#addStudentsToGroups(csBook)`.
+\
+&nbsp;
+\
+&nbsp;
+
+**Step 3**. Currently, each group does not have its lists of students, we would need to add it in using `JsonSerializableCsBook#addStudentsToGroups(csBook)`.
 The group list is retrieved from `csBook`. For each group in the group list, we will filter the list of students by checking if the student belongs to the group,
 then add the students in by calling `Group#addAll(StudentsInGroup)`. This would return us a new group that contains the students, and we will update `csBook` by calling
 `CsBook#setGroup(group, groupWithStudentList)`.
 
 ![LoadSequence2](images/LoadSequence2.png)
+\
+&nbsp;
+\
+&nbsp;
 
 The following sequence diagram shows how the overall loading data operation works:
 
 ![LoadSequenceAll](images/LoadSequenceAll.png)
+\
+&nbsp;
+\
+&nbsp;
 
 #### Design considerations
 
@@ -216,71 +232,102 @@ The following sequence diagram shows how the overall loading data operation work
 
 ### JSON encryption feature
 
-#### Implementation
 
 The JSON encryption mechanism is facilitated by `JsonCsBookStorage`, `EncryptedJsonUtil`, `EncryptionUtil` and `FileUtil`.
 Java's `SealedObject` class is also used to encrypt and contain a `Serializable` object. The relevant operations for saving the
 CSBook data to an encrypted JSON file are as follows:
 
-- `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)` — Saves the current CSBook data
-- `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` — Saves the given data to a encrypted JSON file
-- `EncryptionUtil.encryptSerializableObject(Serializable)` — Encrypts a `Serializable` object
-- `FileUtil#writeToEncryptedFile(Path, SealedObject)` — Writes the encrypted object to a file
+- `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`  —  Saves the current CSBook data
+- `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)`  —  Saves the given data to a encrypted JSON file
+- `EncryptionUtil.encryptSerializableObject(Serializable)`  —  Encrypts a `Serializable` object
+- `FileUtil#writeToEncryptedFile(Path, SealedObject)`  —  Writes the encrypted object to a file
 
 Decrypting an encrypted JSON file goes through a similar process. The relevant operations for decrypting the
 encrypted JSON file to the CSBook are as follows:
 
-- `JsonCsBookStorage#readCsBook()` — Reads the CSBook data from the encrypted JSON file
-- `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` — Reads the data from a encrypted JSON file
-- `EncryptionUtil#decryptSealedObject(SealedObject)` — Decrypts a `SealedObject`
-- `FileUtil#readFromEncryptedFile(Path)` — Reads the encrypted object from a file
+- `JsonCsBookStorage#readCsBook()`  —  Reads the CSBook data from the encrypted JSON file
+- `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)`  —  Reads the data from a encrypted JSON file
+- `EncryptionUtil#decryptSealedObject(SealedObject)`  —  Decrypts a `SealedObject`
+- `FileUtil#readFromEncryptedFile(Path)`  —  Reads the encrypted object from a file
 
 Given below is an example usage scenario and how encryption/decryption behaves at each step.
 
-Step 1. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to
+**Step 1**. The user executes a command which causes the data in `csbook` of `ModelManager` to be altered. This prompts a call to
 `JsonCsBookStorage#saveCsBook(ReadOnlyCsBook)`, which creates a new `JsonSerializableCsBook` object. The CSBook data which is
 now in `Serializable` form is passed to `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` to be saved as an encrypted JSON file.
 
 ![EncryptSequence0](images/EncryptSequence0.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 2. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a `Serializable`,
+**Step 2**. `EncryptedJsonUtil#saveEncryptedJsonFile(T, Path)` uses the `JsonSerializableCsBook` object, which is a `Serializable`,
 and encrypts it using `EncryptionUtil.encryptSerializableObject(Serializable)`. The method returns a `SealedObject` object,
 which contains the encrypted JSON data.
 
 ![EncryptSequence1](images/EncryptSequence1.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 3. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file.
+**Step 3**. Now that the CSBook JSON data has been encrypted, the final step is to write the encrypted data to a file.
 `EncryptedJsonUtil` passes the `SealedObject` object to `FileUtil#writeToEncryptedFile(Path, SealedObject)` to be written to a file.
 
 ![EncryptSequence2](images/EncryptSequence2.png)
+\
+&nbsp;
+\
+&nbsp;
 
 The following sequence diagram shows how the overall encryption operation works:
 
 ![EncryptSequenceAll](images/EncryptSequenceAll.png)
+\
+&nbsp;
+\
+&nbsp;
 
 The decryption operation accomplishes the opposite of the encryption operation.
 
-Step 4. When a user launches the application for the first time, a call it made to `JsonCsBookStorage#readCsBook()`
+**Step 4**. When a user launches the application for the first time, a call it made to `JsonCsBookStorage#readCsBook()`
 to read the encrypted CSBook data, which then calls `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` to
 read the encrypted JSON file.
 
 ![DecryptSequence0](images/DecryptSequence0.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 5. `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` calls `FileUtil#readFromEncryptedFile(Path)` to
+**Step 5**. `EncryptedJsonUtil#readEncryptedJsonFile(Path, Class<T>)` calls `FileUtil#readFromEncryptedFile(Path)` to
 read the encrypted JSON file from the `filePath`. The method results in a `SealedObject` object containing the
 encrypted CSBook data.
 
 ![DecryptSequence1](images/DecryptSequence1.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 6. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
+**Step 6**. The `SealedObject` object is then passed to `EncryptionUtil#decryptSealedObject(SealedObject)` to be decrypted into a `Serializable`
 object, which is then converted to a JSON file using `EncryptedJsonUtil#fromJsonString(String, Class<T>)`. The resulting file is then
 transformed by `JsonCsBookStorage#readCsBook()` into a `ReadOnlyCsBook` that is used to populate the model.
 
 ![DecryptSequence2](images/DecryptSequence2.png)
+\
+&nbsp;
+\
+&nbsp;
 
 The following sequence diagram shows how the overall decryption operation works:
 
 ![DecryptSequenceAll](images/DecryptSequenceAll.png)
+\
+&nbsp;
+\
+&nbsp;
 
 #### Design considerations
 
@@ -294,12 +341,11 @@ The following sequence diagram shows how the overall decryption operation works:
 - **Alternative 2:** Encrypts individual fields.
 
     - Pros: Uses less storage by encrypting data and not fields.
-      (e.g. `name: Jun Wei` is encrypted to become `name: ????????????????????`)
+      (e.g. `name: Jun Wei` is encrypted to become `name: [ENCRYPTED]`)
     - Cons: Less secure compared to encrypting the entire JSON file.
 
 ### Student Group Management Feature
 
-#### Implementation
 
 The management of `Group` objects and `Student` objects is done by the `ModelManager`.
 While the choosing of operations to perform is determined by the user through the use of commands
@@ -319,35 +365,51 @@ The relevant operations for managing groups, with regard to `Group` operations a
 
 Given below is an example usage scenario and how the management of groups behaves at each step.
 
-Step 1. Starting with an empty model, the user will first have to create an empty `Group` to be able to add `Student`
+**Step 1**. Starting with an empty model, the user will first have to create an empty `Group` to be able to add `Student`
 objects to. The user executes a command that will create a new `Group` and add it to the model by calling
 `ModelManager#addGroup(Group)`.
 
 ![GroupManagementSequence0](images/GroupManagementSequence0.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 2. After the `Group` is added to the model, the user then executes a command to create a new `Student` that will
+**Step 2**. After the `Group` is added to the model, the user then executes a command to create a new `Student` that will
 be a part of an existing group. This command will then call `ModelManager#addStudent(Student)` with the created
 `Student` which adds the student to the model, and then finds the corresponding `Group` that the `Student` will be
 added to, and add a reference to the `Student` in the `Group`.
 
 ![GroupManagementSequence1](images/GroupManagementSequence1.png)
+\
+&nbsp;
+\
+&nbsp;
 
 (Optional steps) The user may manipulate the groups or individual students using any of the available commands, but
 these will not be discussed here as the focus is on how the grouping of students is done.
 
-Step 3. The user executes a command to delete a `Student` in order to, for example, remove a past student. The command
+**Step 3**. The user executes a command to delete a `Student` in order to, for example, remove a past student. The command
 then invokes `ModelManager#deleteStudent(Student)`, which will find the respective `Group` that the `Student` belongs to
 using the stored `Group` reference in the `Student` and remove the `Group`'s reference to the `Student`. Then, the
 `Student` itself is deleted from the model.
 
 ![GroupManagementSequence2](images/GroupManagementSequence2.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 4. The user executes a command to delete a `Group` in order to, for example, remove an entire group and its
+**Step 4**. The user executes a command to delete a `Group` in order to, for example, remove an entire group and its
 students after the user has finished teaching a module. The command invokes `ModelManager#deleteGroup(Group)`, which
 finds the `Group` in the model, and for each `Student` reference found, removes them from `csbook`. After all `Student`
 objects associated with the `Group` has been removed, the `Group` itself is then deleted.
 
 ![GroupManagementSequence3](images/GroupManagementSequence3.png)
+\
+&nbsp;
+\
+&nbsp;
 
 #### Design considerations
 
@@ -375,9 +437,13 @@ objects associated with the `Group` has been removed, the `Group` itself is then
     - Cons: When implemented as-is, allows `Student`s to not belong to any `Group`, violating our assumption that all
       `Student`s have a `Group`
 
-### \[Proposed\] Undo/redo feature
+---
+## Proposed Implementation
 
-#### Proposed Implementation
+This section describes implementation details of new features that can be included in future versions of this application.
+
+### Undo/redo feature
+
 
 The proposed undo/redo mechanism is facilitated by `VersionedCsBook`. It extends `CsBook` with an undo/redo history, stored internally as an `csBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
@@ -389,25 +455,41 @@ These operations are exposed in the `Model` interface as `Model#commitCsBook()`,
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedCsBook` will be initialized with the initial CS book state, and the `currentStatePointer` pointing to that single CS book state.
+**Step 1**. The user launches the application for the first time. The `VersionedCsBook` will be initialized with the initial CS book state, and the `currentStatePointer` pointing to that single CS book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 2. The user executes `delete 5` command to delete the 5th student in the CS book. The `delete` command calls `Model#commitCsBook()`, causing the modified state of the CS book after the `delete 5` command executes to be saved in the `csBookStateList`, and the `currentStatePointer` is shifted to the newly inserted CS book state.
+**Step 2**. The user executes `delete 5` command to delete the 5th student in the CS book. The `delete` command calls `Model#commitCsBook()`, causing the modified state of the CS book after the `delete 5` command executes to be saved in the `csBookStateList`, and the `currentStatePointer` is shifted to the newly inserted CS book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 3. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCsBook()`, causing another modified CS book state to be saved into the `csBookStateList`.
+**Step 3**. The user executes `add n/David …​` to add a new student. The `add` command also calls `Model#commitCsBook()`, causing another modified CS book state to be saved into the `csBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
+\
+&nbsp;
+\
+&nbsp;
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitCsBook()`, so the CS book state will not be saved into the `csBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCsBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CS book state, and restores the CS book to that state.
+**Step 4**. The user now decides that adding the student was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoCsBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous CS book state, and restores the CS book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
+\
+&nbsp;
+\
+&nbsp;
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial CsBook state, then there are no previous CsBook states to restore. The `undo` command uses `Model#canUndoCsBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
@@ -417,6 +499,10 @@ than attempting to perform the undo.
 The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
+\
+&nbsp;
+\
+&nbsp;
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
@@ -428,17 +514,30 @@ The `redo` command does the opposite — it calls `Model#redoCsBook()`, whic
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the CS book, such as `list`, will usually not call `Model#commitCsBook()`, `Model#undoCsBook()` or `Model#redoCsBook()`. Thus, the `csBookStateList` remains unchanged.
+**Step 5**. The user then decides to execute the command `list`. Commands that do not modify the CS book, such as `list`, will usually not call `Model#commitCsBook()`, `Model#undoCsBook()` or `Model#redoCsBook()`. Thus, the `csBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
+\
+&nbsp;
+\
+&nbsp;
 
-Step 6. The user executes `clear`, which calls `Model#commitCsBook()`. Since the `currentStatePointer` is not pointing at the end of the `csBookStateList`, all CS book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+**Step 6**. The user executes `clear`, which calls `Model#commitCsBook()`. Since the `currentStatePointer` is not pointing at the end of the `csBookStateList`, all CS book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
+\
+&nbsp;
+\
+&nbsp;
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
 <img src="images/CommitActivityDiagram.png" width="250" />
+
+\
+&nbsp;
+\
+&nbsp;
 
 #### Design considerations:
 
@@ -454,15 +553,12 @@ The following activity diagram summarizes what happens when a user executes a ne
   - Pros: Will use less memory (e.g. for `delete`, just save the student being deleted).
   - Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
+    
 ---
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Maintaining the application**
+
+This section contains links to additional guides that will help you maintain the code base of this application. 
 
 - [Documentation guide](Documentation.md)
 - [Testing guide](Testing.md)
@@ -618,6 +714,7 @@ _{More to be added}_
 
 - **Mainstream OS**: Windows, Linux, Unix, OS-X
 - **Student**: A student that is studying any specific module in university
+- **Group**: A group of students that the user chooses to group together
 - **Module**: An academic unit usually comprising lectures, tutorials and sometimes laboratory sessions. Teaching assistants may assist in teaching tutorial classes to a group of students
 - **Teaching Assistant (TA)**: The intended user of the application, in charge of teaching at least 1 module
 - **CSBook**: The name of the application
@@ -639,7 +736,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file Expected: Shows the GUI with a set of sample students and groups. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -647,8 +744,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
       Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+      
 
 ### Deleting a student
 
@@ -657,20 +753,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all students using the `list` command. Multiple students in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First student is deleted from the list. Details of the deleted student shown in the status message. Timestamp in the status bar is updated.
 
    1. Test case: `delete 0`<br>
       Expected: No student is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+      
 
-1. _{ more test cases …​ }_
 
-### Saving data
-
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
