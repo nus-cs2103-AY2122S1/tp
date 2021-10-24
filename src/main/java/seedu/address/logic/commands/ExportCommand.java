@@ -27,6 +27,7 @@ public class ExportCommand extends Command {
 
     public static final String BASE_PATH = "sourceControl%1$s.csv";
 
+    private final Path enclosingFolder;
     private int tries = 0;
     private int groupColumns;
     private int tagColumns;
@@ -36,6 +37,7 @@ public class ExportCommand extends Command {
      * Creates an ExportCommand to export data to a file. Ensures that a new file is created every time.
      */
     public ExportCommand() {
+        enclosingFolder = FileUtil.getAppEnclosingFolder();
         generateNewPath();
         while (FileUtil.isFileExists(file)) {
             generateNewPath();
@@ -45,7 +47,7 @@ public class ExportCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         try {
-            FileUtil.createFile(file);
+            FileUtil.createIfMissing(file);
         } catch (IOException e) {
             throw new CommandException(MESSAGE_FAILURE);
         }
@@ -143,7 +145,7 @@ public class ExportCommand extends Command {
     private void generateNewPath() {
         String path = String.format(BASE_PATH, tries == 0 ? "" : "(" + tries + ")");
         tries++;
-        this.file = Path.of(path);
+        this.file = enclosingFolder == null ? Path.of(path) : enclosingFolder.resolve(Path.of(path));
     }
 
     @Override
@@ -154,7 +156,7 @@ public class ExportCommand extends Command {
     }
 
     /**
-     * For testing to not affect any existing save data
+     * For testing to not affect any existing save data and not use the enclosing folder.
      */
     void setPath(Path path) {
         this.file = path;
