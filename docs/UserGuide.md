@@ -117,18 +117,18 @@ Example:
 
 Edits an existing member in Ailurus. 
 
-Format: `edit INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
+Format: `medit /m MEMBER_ID [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
-* `INDEX` **must be a positive integer** 1, 2, 3, …​
-* Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list.
+* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* Edits the member at the specified `MEMBER_ID`. The index refers to the index number shown in the displayed member list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing positions, the existing positions of the member will be removed i.e adding of positions is not cumulative.
 * You can remove all the member’s positions by typing `/t` without specifying any positions after it.
 
 Examples:
-* `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
+* `medit /m 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+* `medit /m 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
 #### Locating members by name: `mfind`
 
@@ -159,7 +159,7 @@ Format: `mdel /m MEMBER_ID`
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
 
 Examples:
-* `mdel /m 2` deletes the 2nd member in the address book.
+* `mdel /m 2` deletes the 2nd member in Ailurus.
 
 ### Task Commands
 
@@ -190,6 +190,33 @@ Format: `tlist /m MEMBER_ID`
 * `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
 * `MEMBER_ID` refers to the index number of the member of concern in the displayed member list.
 
+#### Mark a task as done : `tdone`
+Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
+
+Format: `tdone /t TASK_ID…​`
+
+* Can **only be used when task list has entries**.
+* Multiple tasks can be marked as done when there is more than one `TASK_ID` provided.
+* `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+* Marks the task specified by `TASK_ID`.
+* `TASK_ID` refers to the index number shown in the displayed task list.
+
+Example:
+* `tdone /t 3` deletes the 3rd task on the displayed task list in Ailurus.
+
+#### Editing a task: `tedit`
+Edits an existing task within Ailurus.
+
+Format: `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]`
+
+* `TASK_ID` **must be a positive integer** 1, 2, 3, …​
+* Edits the member at the specified `INDEX_ID`. The index refers to the index number shown in the displayed member list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+* `tedit /t 1 /n Vaccinate Myself` Edits the task name of the 1st task on task list to be `Vaccinate Myself`.
+* `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59` Edits the task name and deadline of the 2nd task on task list to be `Do OSA Quiz` and `21/10/2021 23:59` respectively.
 
 Example:
 * `tlist /m 2` lists all tasks of the member with index number 2.
@@ -209,20 +236,6 @@ Format: `tdel /t TASK_ID…​`
 Examples:
 * `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
 * `tdel /t 1 /t 2` deletes the 1st and 2nd task on the displayed task list in Ailurus.
-
-#### Mark a task as done : `tdone`
-Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
-
-Format: `tdone /t TASK_ID…​`
-
-* Can **only be used when task list has entries**.
-* Multiple tasks can be marked as done when there is more than one `TASK_ID` provided.
-* `TASK_ID` **must be a positive integer** 1, 2, 3, …​
-* Marks the task specified by `TASK_ID`.
-* `TASK_ID` refers to the index number shown in the displayed task list.
-
-Example:
-* `tdone /t 3` deletes the 3rd task on the displayed task list in Ailurus.
 
 ### Event Commands
 
@@ -250,16 +263,45 @@ Format: `elist [/m MEMBER_ID]`
 * If  `MEMBER_ID` is provided, list all events that the member is participating in.
 * `MEMBER_ID` refers to the index number shown in the displayed member list.
 
+#### Marking participants as attended : `emark`
+
+Marks participants as attended for a specific event.
+
+Format: `emark /e EVENT_ID [/m MEMBER_ID]…​`
+
+* `MEMBER_ID` and `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+* Multiple members under the event can be marked as attended when more than one `MEMBER_ID` is provided.
+* `emark` can only be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
+
+Examples:
+* `emark /e 1 /m 2 /m 3` marks the 2nd and 3rd person in the member list as attended. 
+
+#### Editing an event : `eedit`
+
+Edits an existing event in Ailurus.
+
+Format: `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID…​]`
+
+* `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
+* Edits the member at the specified `EVENT_ID`. `EVENT_ID` refers to the index number shown in the displayed event list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing members, the command must be done in `mlist`, where all the members are visible to the user.
+* You can remove all the members by typing `/m` without specifying any members after it.
+
+Examples:
+* `eedit /e 1 /n Freshman Orientation Project Discussion` edits the event name of the 1st event on the event list to be `Freshman Orientation Project Discussion`.
+* `eedit /e 2 /m 1 /m 2 /m 3` edits the participants in the event to be the 1st, 2nd and 3rd members on the member list.
+
 #### Deleting an event : `edel`
 
-Deletes the specified event from the address book.
+Deletes the specified event from Ailurus.
 
 Format: `edel /e EVENT_ID`
 
 * `EVENT_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the event at the specified `EVENT_ID`.
 * `EVENT_ID` refers to the index number shown in the displayed member list.
-
 
 Examples:
 * `edel /e 10` deletes the 10th event in Ailurus.
@@ -298,14 +340,17 @@ Action | Format, Examples
 **help** | `help`
 **madd** | `madd /n NAME /ph PHONE_NUMBER /em EMAIL /a ADDRESS [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_ID]` <br> e.g., `mlist /e 3`
-**medit** | `medit INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit 2 /n James Lee /em jameslee@example.com`
+**medit** | `medit /m MEMBER_ID [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit /m 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]`<br> e.g., `mfind James Jake`
 **mdel** | `mdel /m MEMBER_ID` <br> e.g., `mdel /m 6`
 **tadd** | `tadd /n TASKNAME /m MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /m 3`
 **tlist** | `tlist /m MEMBER_ID` <br> e.g., `tlist /m 2`
-**tdel** | `tdel /t TASK_ID` <br> e.g., `tdel /t 4`
 **tdone** | `tdone /t TASK_ID`<br> e.g. `tdone /t 3`
+**tedit** | `tedit /t TASK_ID [/n TASK_NAME] [/d TASK_DEADLINE]` <br> e.g. `tedit /t 2 /n Do OSA Quiz /d 21/10/2021 23:59`
+**tdel** | `tdel /t TASK_ID` <br> e.g., `tdel /t 4`
 **eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
 **elist** | `elist [/m MEMBER_ID]` <br> e.g., `elist /m 1`
+**emark** | `emark /e EVENT_ID [/m MEMBER_ID]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
+**eedit** | `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID…​]` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
 **edel** | `edel /e EVENT_ID` <br> e.g., `edel /e 7`
 **exit** | `exit`
