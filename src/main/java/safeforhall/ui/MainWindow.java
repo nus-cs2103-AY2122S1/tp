@@ -2,13 +2,21 @@ package safeforhall.ui;
 
 import java.util.logging.Logger;
 
-import javafx.event.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
@@ -25,13 +33,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
     // Hard-coded as loading from css doesn't work
-    private static final String BUTTON_STYLE = "-fx-width: 50;\n" +
-            "-fx-height: 50;\n" +
-            "-fx-border-width: 2;\n" +
-            "-fx-background-radius: 0;\n" +
-            "-fx-border-radius: 10;\n" +
-            "-fx-background-color: transparent;\n" +
-            "-fx-content-display: graphic-only;";
+    private static final String BUTTON_STYLE = "-fx-width: 50;\n"
+            + "-fx-height: 50;\n"
+            + "-fx-border-width: 2;\n"
+            + "-fx-background-radius: 0;\n"
+            + "-fx-border-radius: 10;\n"
+            + "-fx-background-color: transparent;\n"
+            + "-fx-content-display: graphic-only;";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -75,7 +83,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private TabPane tabPane;
-    
+
     @FXML
     private Tab residentsTab;
 
@@ -107,24 +115,24 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        
+
         residentsTab.setGraphic(new Label("Residents"));
         eventsTab.setGraphic(new Label("Events"));
-        
+
         Button helpButton = createTabButton("/images/help.png");
         helpButton.setOnAction(e -> handleHelp());
         helpButton.setStyle(BUTTON_STYLE);
         helpButton.setTooltip(new Tooltip("Help"));
         helpTab.setGraphic(helpButton);
         helpTab.setDisable(true);
-        
+
         Button exitButton = createTabButton("/images/exit.png");
         exitButton.setOnAction(e -> handleExit());
         exitButton.setStyle(BUTTON_STYLE);
         exitButton.setTooltip(new Tooltip("Exit"));
         exitTab.setGraphic(exitButton);
         exitTab.setDisable(true);
-        
+
         tabPane.setRotateGraphic(false);
     }
 
@@ -156,8 +164,6 @@ public class MainWindow extends UiPart<Stage> {
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(Button menuItem, KeyCombination keyCombination) {
-//        menuItem.setAccelerator(keyCombination);
-
         /*
          * TODO: the code below can be removed once the bug reported here
          * https://bugs.openjdk.java.net/browse/JDK-8131666
