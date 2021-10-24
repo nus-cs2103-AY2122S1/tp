@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.groups.DeleteGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.persons.GroupAddLessonParser;
 
@@ -42,6 +43,9 @@ public class GroupCommandsParser {
 
         case GroupAddLessonParser.COMMAND_WORD:
             return new GroupAddLessonParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

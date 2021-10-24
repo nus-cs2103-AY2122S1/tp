@@ -66,11 +66,20 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the task list with {@code tasks}.
-     * {@code tasks} must not contain duplicate persons.
+     * {@code tasks} must not contain duplicate tasks.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
+
+    /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -80,6 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTasks(newData.getTaskList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
@@ -211,7 +221,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
-                + tasks.asUnmodifiableObservableList().size() + " tasks";
+                + tasks.asUnmodifiableObservableList().size() + " tasks"
+                + groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
