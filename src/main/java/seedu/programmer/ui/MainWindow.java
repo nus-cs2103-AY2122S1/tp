@@ -20,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.opencsv.CSVReader;
+
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,9 +51,6 @@ import seedu.programmer.model.student.Email;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
-
-import com.opencsv.CSVReader;
-
 
 /**
  * The Main Window. Provides the basic application layout containing
