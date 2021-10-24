@@ -14,7 +14,7 @@ Notor is a desktop application for mentors to keep tabs on their mentees, **opti
 ### 1. Setup
 Ensure you have Java `11` or above installed in your computer. You can install Java `11` from [here](https://www.oracle.com/in/java/technologies/javase/jdk11-archive-downloads.html).
 ### 2. Installing the project
-Download the latest `notor.jar` [here](), and copy the file to the folder you want to use as the _home folder_ for your **Notor**.
+Download the latest `notor.jar` [here](https://github.com/AY2122S1-CS2103T-W08-1/tp/releases), and copy the file to the folder you want to use as the _home folder_ for your **Notor**.
 ### 3. Running the application
 Double-click the file to start the application. If you have set up Java `11` correctly, the application should open, and the GUI similar to below should appear in a few seconds.
 Note how the app contains some sample data. <br>
@@ -54,7 +54,6 @@ Refer to the [Features](#Features) below for details of each command.
   e.g `n:NAME [g:GROUP_NAME]` can be used as `n:Elton g:Orbital` or as `n:Elton`.
 * Items with `…`​ after them can be used multiple times including zero times, with a comma separating terms.<br>
   e.g. `[t/TAG…​]` can be used as ` ` (i.e. 0 times), `t:tag1, tag2, tag3` etc.
-[comment]: <> (Check if this is actually the correct format!!)
 * Parameters can be in any order.<br>
   e.g. if the command specifies `g:GROUP_NAME sg:SUBGROUP_NAME`, `sg:SUBGROUP_NAME g:GROUP_NAME` is also acceptable.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
@@ -163,7 +162,7 @@ Removes an existing person from a group.
 Format: `person (INDEX) /remove (g:GROUP_NAME)`<br>
 Advanced user Format:`p (INDEX) /r (g:GROUP_NAME)`
 
-* Removes an existing person with the `NAME` from a `GROUP_NAME`.
+* Removes an existing person at the given `INDEX` from a `GROUP_NAME`.
 
 Examples:
 * `person 1 /remove g:CS2103T`
@@ -176,7 +175,7 @@ Pops up a note window to take note for an existing person.
 Format: `person (INDEX) /note`<br>
 Advanced user Format:`p (INDEX) /n`
 
-* Pops up a note window for an existing person with the `NAME` to take note.
+* Pops up a note window for an existing person at the given `INDEX` to take note.
 
 Examples:
 
@@ -199,7 +198,10 @@ Examples:
 
 
 ## Working with groups/subgroups
-:warning: **These commands will work only will only work when groups or subgroups are listed.** :warning:
+<div markdown="block" class="alert alert-info">
+:warning: **These commands will work only when groups or subgroups are listed.** :warning:
+</div>
+
 ### Creating a group: `group (GROUP_NAME) /create`
 
 Creates a group.
@@ -235,7 +237,7 @@ Examples :
 Edits the name of an existing group.
 
 Format: `group (INDEX) /edit [n:NEW_NAME]`<br>
-Advanced user Format: `group (INDEX) /edit [n:NEW_NAME]`
+Advanced user Format: `group (INDEX) /e [n:NEW_NAME]`
 
 * Renames an existing group at the index specified to `NEW_NAME` .
 * The new group must not have a same name with other existing groups.
@@ -262,12 +264,12 @@ Examples :
 * `g 1 /create n:Artemis`
 
 
-### Adding notes on a group: `group (INDEX) /note`
+### Adding notes to a group: `group (INDEX) /note`
 
 Add notes on a group and saves the time when the note is added.
 
 Format: `group (INDEX) /note`<br>
-Advanced user Format: `group (INDEX) /note`
+Advanced user Format: `group (INDEX) /n`
 
 * Add notes on a group at the index specified.
 * Entering the command will lead to a popup window where the user can edit notes for group at that index`.
@@ -389,14 +391,14 @@ Advanced user Format:`p /f (n:QUERY)`
 Examples:
 
 * `person /find n:John`
-* `p 2 /f n:Mary`
+* `p /f n:Mary`
 
 ### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
 
 Find all the groups with the keyword specified. This can also be used to find all the subgroups with the group and subgroup name specified.
 
-Format:  `group /find g:KEYWORD`
-Advanced user Format: `g /find g:KEYWORD`
+Format:  `group /find g:KEYWORD`<br>
+Advanced user Format: `g /f g:KEYWORD`
 
 * Find all the group that matches the `KEYWORD`.
 * The keyword must not include backslash (`/`) or underscore (`_`).
