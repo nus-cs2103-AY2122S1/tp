@@ -22,6 +22,8 @@ import seedu.address.model.claim.Status;
 import seedu.address.model.claim.Title;
 import seedu.address.model.person.Person;
 
+import javax.swing.text.html.Option;
+
 public class ClaimCommand extends Command {
 
     public static final String COMMAND_WORD = "claim";
@@ -180,11 +182,11 @@ public class ClaimCommand extends Command {
         }
 
         public Optional<Description> getDescription() {
-            return this.description != null ? Optional.of(description) : Optional.empty();
+            return Optional.ofNullable(description);
         }
 
         public Optional<Status> getStatus() {
-            return this.status != null ? Optional.of(status) : Optional.empty();
+            return Optional.ofNullable(status);
         }
 
         public boolean isComplete() {
