@@ -142,9 +142,6 @@ Staff'd data are saved as a JSON file. Advanced users are welcome to update data
 If your changes to the data file makes its format invalid, Staff'd will discard all data and start with an empty data file at the next run.
 </div>
 
-#### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 ### Basic management of Staff Details
 
@@ -166,6 +163,7 @@ Examples:
 
 Adds a staff to the system. 
 
+ * Staff of the same name cannot be added.
  * The tags and information are optional and can be presented in any order.
  * Upon creation of a staff, the system creates an index for them which can be used to refer to them and access the system.
 
@@ -309,6 +307,43 @@ Format: `exit`
 
 ### Basic Management of Staff Schedules
 
+#### Viewing schedule of staff(s): `viewSchedule`
+
+Views the schedule of staff's that satisfy the query conditions.
+
+Formats:  
+`viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
+
+Examples:  
+`viewSchedule -n Candice`  
+`viewSchedule -i 123`
+
+The output will look like the following.
+
+![viewShedule](images/viewScheduleImage.png)
+
+#### Viewing all the staff(s) working a shift : `viewShift`
+
+Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
+
+* When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
+* The DAY entry is not case sensitive.
+
+Formats:  
+`viewShift -d DAY-shift_number`  
+`viewShift -ti DAY-HH:mm`
+
+Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
+
+Examples:  
+`viewShift -d monday-1`  
+`viewShift -d TUESDAY-0`  
+`viewShift -ti wednesday-12:00`  
+`viewShift -ti THURSDAY-16:30`
+
+Demonstration:  
+![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
+
 #### Adding a shift to a staff's schedule : `addShift`
 
 Adds a time period where the staff is working to the staff’s schedule.
@@ -325,20 +360,7 @@ Examples:
 `addShift -n Candice d/Monday-1`   
 `addShift -i 1234 d/tuesday-0`
 
-#### Viewing schedule of staff(s): `viewSchedule`
 
-Views the schedule of staff's that satisfy the query conditions.
-
-Formats:  
-`viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-
-Examples:  
-`viewSchedule -n Candice`  
-`viewSchedule -i 123`
-
-The output will look like the following.
-
-![viewShedule](images/viewScheduleImage.png)
 
 
 #### Deleting a shift from a staff : `deleteShift`
@@ -364,27 +386,7 @@ Examples:
 `editSchedule n/Candice old/tuesday-1 new/tuesday-2`  
 `editSchedule n/12345678 old/wednesday-2 new/thursday-2`
 
-#### Viewing all the staff(s) working a shift : `viewShift`
 
-Finds all the staff working at a particular shift. The shift can be specified either by detailing the day of the week and the time, or the day of the week and slot number.
-
- * When using the -ti flag, it is in 24-hour format. Example, for 4.pm on wednesday, we use <br> `wednesday-16:00`.
- * The DAY entry is not case sensitive.
-
-Formats:  
-`viewShift -d DAY-shift_number`  
-`viewShift -ti DAY-HH:mm`
-
-Note that day refers to the day of the week, and it is case-insensitive. However, it should be spelt in full (e.g. MONDAY instead of Mon).
-
-Examples:  
-`viewShift -d monday-1`  
-`viewShift -d TUESDAY-0`  
-`viewShift -ti wednesday-12:00`  
-`viewShift -ti THURSDAY-16:30`  
-
-Demonstration:  
-![Example of ViewShiftCommand](images/viewShiftCommand/viewShift.jpg)
 
 
 
