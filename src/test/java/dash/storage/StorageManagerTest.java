@@ -15,6 +15,7 @@ import dash.model.ReadOnlyAddressBook;
 import dash.model.UserPrefs;
 import dash.storage.addressbook.JsonAddressBookStorage;
 import dash.storage.tasklist.JsonTaskListStorage;
+import dash.storage.userinputlist.JsonUserInputListStorage;
 import dash.storage.userprefs.JsonUserPrefsStorage;
 import dash.testutil.TypicalPersons;
 
@@ -30,7 +31,9 @@ public class StorageManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonTaskListStorage taskListStorage = new JsonTaskListStorage(getTempFilePath("tl"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        JsonUserInputListStorage userInputListStorage = new JsonUserInputListStorage(getTempFilePath("prefs"));
+        storageManager = new StorageManager(addressBookStorage, taskListStorage, userInputListStorage,
+                userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {

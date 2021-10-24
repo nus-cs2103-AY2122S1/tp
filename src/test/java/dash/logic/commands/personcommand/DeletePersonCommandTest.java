@@ -11,6 +11,7 @@ import dash.commons.core.index.Index;
 import dash.logic.commands.CommandTestUtil;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.person.Person;
 import dash.model.task.TaskList;
@@ -23,7 +24,8 @@ import dash.testutil.TypicalPersons;
  */
 public class DeletePersonCommandTest {
 
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(), new TaskList());
+    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(), new TaskList(),
+            new UserInputList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -32,7 +34,8 @@ public class DeletePersonCommandTest {
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList(),
+                new UserInputList());
         expectedModel.deletePerson(personToDelete);
 
         assertCommandSuccess(deletePersonCommand, model, expectedMessage, expectedModel);
@@ -56,7 +59,8 @@ public class DeletePersonCommandTest {
 
         String expectedMessage = String.format(DeletePersonCommand.MESSAGE_DELETE_PERSON_SUCCESS, personToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList(),
+                new UserInputList());
         expectedModel.deletePerson(personToDelete);
         showNoPerson(expectedModel);
 

@@ -17,6 +17,7 @@ import dash.logic.commands.CommandResult;
 import dash.model.Model;
 import dash.model.ReadOnlyAddressBook;
 import dash.model.ReadOnlyUserPrefs;
+import dash.model.UserInputList;
 import dash.model.person.Person;
 import dash.model.task.Task;
 import dash.model.task.TaskList;
@@ -171,12 +172,27 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public UserInputList getUserInputList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addUserInput(String userInput) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<String> getInternalUserInputList() {
             throw new AssertionError("This method should not be called.");
         }
 

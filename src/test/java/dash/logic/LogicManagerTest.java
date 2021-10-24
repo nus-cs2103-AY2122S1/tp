@@ -20,12 +20,14 @@ import dash.logic.parser.exceptions.ParseException;
 import dash.model.Model;
 import dash.model.ModelManager;
 import dash.model.ReadOnlyAddressBook;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.person.Person;
 import dash.model.task.TaskList;
 import dash.storage.StorageManager;
 import dash.storage.addressbook.JsonAddressBookStorage;
 import dash.storage.tasklist.JsonTaskListStorage;
+import dash.storage.userinputlist.JsonUserInputListStorage;
 import dash.storage.userprefs.JsonUserPrefsStorage;
 import dash.testutil.Assert;
 import dash.testutil.PersonBuilder;
@@ -46,8 +48,12 @@ public class LogicManagerTest {
                 new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
         JsonTaskListStorage taskListStorage =
                 new JsonTaskListStorage(temporaryFolder.resolve("taskList.json"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
+        JsonUserInputListStorage userInputListStorage =
+                new JsonUserInputListStorage(temporaryFolder.resolve("userInputList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userInputListStorage,
+                userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -78,7 +84,10 @@ public class LogicManagerTest {
                 new JsonTaskListStorage(temporaryFolder.resolve("taskList.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        JsonUserInputListStorage userInputListStorage =
+                new JsonUserInputListStorage(temporaryFolder.resolve("userInputList.json"));
+        StorageManager storage = new StorageManager(addressBookStorage, taskListStorage, userInputListStorage,
+                userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -136,7 +145,8 @@ public class LogicManagerTest {
      */
     private void assertCommandFailure(String inputCommand, Class<? extends Throwable> expectedException,
                                       String expectedMessage) {
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList(),
+                new UserInputList());
         assertCommandFailure(inputCommand, expectedException, expectedMessage, expectedModel);
     }
 

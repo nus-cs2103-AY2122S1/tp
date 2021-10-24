@@ -12,6 +12,7 @@ import dash.logic.commands.CommandTestUtil;
 import dash.model.AddressBook;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.task.Task;
 import dash.testutil.TypicalIndexes;
@@ -19,7 +20,8 @@ import dash.testutil.TypicalTasks;
 
 class DeleteTaskCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalTasks.getTypicalTaskList());
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalTasks.getTypicalTaskList(),
+            new UserInputList());
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -28,7 +30,8 @@ class DeleteTaskCommandTest {
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
 
-        ModelManager expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getTaskList());
+        ModelManager expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getTaskList(),
+                new UserInputList());
         expectedModel.deleteTask(taskToDelete);
 
         assertCommandSuccess(deleteTaskCommand, model, expectedMessage, expectedModel);
@@ -52,7 +55,8 @@ class DeleteTaskCommandTest {
 
         String expectedMessage = String.format(DeleteTaskCommand.MESSAGE_DELETE_TASK_SUCCESS, taskToDelete);
 
-        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getTaskList());
+        Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getTaskList(),
+                new UserInputList());
         expectedModel.deleteTask(taskToDelete);
         showNoTask(expectedModel);
 
