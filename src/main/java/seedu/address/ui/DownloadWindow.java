@@ -13,7 +13,9 @@ import seedu.address.commons.core.LogsCenter;
  */
 public class DownloadWindow extends UiPart<Stage> {
 
-    public static final String DOWNLOAD_MESSAGE = "Data has been successfully downloaded!";
+    public static final String DOWNLOAD_MESSAGE_SUCCESS = "Data has been successfully downloaded!";
+    public static final String DOWNLOAD_MESSAGE_FAILURE = "There has been an error while downloading, check that "
+            + "addressbook.json is present.";
 
     private static final Logger logger = LogsCenter.getLogger(DownloadWindow.class);
     private static final String FXML = "DownloadWindow.fxml";
@@ -31,14 +33,18 @@ public class DownloadWindow extends UiPart<Stage> {
      */
     public DownloadWindow(Stage root) {
         super(FXML, root);
-        downloadMessage.setText(DOWNLOAD_MESSAGE);
     }
 
     /**
      * Creates a new DownloadWindow.
      */
-    public DownloadWindow() {
+    public DownloadWindow(boolean success) {
         this(new Stage());
+        if (success) {
+            downloadMessage.setText(DOWNLOAD_MESSAGE_SUCCESS);
+        } else {
+            downloadMessage.setText(DOWNLOAD_MESSAGE_FAILURE);
+        }
     }
 
     /**
