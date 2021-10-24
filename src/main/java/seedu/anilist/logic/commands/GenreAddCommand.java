@@ -16,6 +16,7 @@ import seedu.anilist.model.anime.Episode;
 import seedu.anilist.model.anime.Name;
 import seedu.anilist.model.anime.Status;
 import seedu.anilist.model.genre.Genre;
+import seedu.anilist.ui.TabOption;
 
 /**
  * Adds the provided genres to the specified anime.
@@ -32,6 +33,7 @@ public class GenreAddCommand extends GenreCommand {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Anime> lastShownList = model.getFilteredAnimeList();
+        model.setCurrentTab(TabOption.TabOptions.ALL);
 
         if (getIndex().getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
