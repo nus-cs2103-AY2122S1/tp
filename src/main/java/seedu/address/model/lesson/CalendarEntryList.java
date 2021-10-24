@@ -279,11 +279,7 @@ public class CalendarEntryList {
         // state check
         CalendarEntryList other = (CalendarEntryList) obj;
 
-        if (!upcomingLessons.equals(other.upcomingLessons)) {
-            return false;
-        }
-
-        if (entryList.size() != other.entryList.size()) {
+        if (entryList.size() != other.entryList.size() || upcomingLessons.size() != other.upcomingLessons.size()) {
             return false;
         }
 
@@ -293,6 +289,15 @@ public class CalendarEntryList {
                 return false;
             }
         }
+
+        for (int i = 0; i < upcomingLessons.size(); i++) {
+            boolean equalPair = upcomingLessons.get(i).getUserObject()
+                    .equals(other.upcomingLessons.get(i).getUserObject());
+            if (!equalPair) {
+                return false;
+            }
+        }
+
         return true;
         // Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
         // CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
