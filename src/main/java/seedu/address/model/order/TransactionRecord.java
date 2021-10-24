@@ -70,7 +70,16 @@ public class TransactionRecord {
     }
 
     /**
+     * Returns true if two {@code TransactionRecord} have the same list of items.
+     * This is a less strict notion of equivalence than {@code equals}.
+     */
+    public boolean hasSameItems(TransactionRecord other) {
+        return items.equals(other.items);
+    }
+
+    /**
      * Returns true if two transactions have the same id and timestamp.
+     * Current implementation does not compare item list as the id and timestamp pairs are assumed unique.
      */
     @Override
     public boolean equals(Object other) {
