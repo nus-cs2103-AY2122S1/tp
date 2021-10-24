@@ -228,6 +228,11 @@ class TaddCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
