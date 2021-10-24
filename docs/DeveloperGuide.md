@@ -274,6 +274,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user                                     | delete multiple contacts at once | more easily clean my contacts                                         |
 | `* *`    | user                                     | update contact's contact details and SHN periods | so that i do not have to re-enter existing data       |
 | `* *`    | user                                     | batch-update SHN periods       | extend or shorten the SHN end dates according to government mandates    |
+| `* *`    | user                                     | sort contacts by fields        | more easily browse through the contacts                                 |
 
 *{More to be added}*
 
@@ -428,6 +429,26 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case resumes from step 4.
 
+**Use case: UC08 - Sort contacts by name and case number**
+
+**MSS:**
+
+1. User requests to list persons.
+2. Track2Gather shows a list of persons.
+3. User identifies fields to be sorted and their respective sort orders.
+4. Track2Gather displays the new sorted list.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+* 3a. The given user input is invalid.
+  * 3a1. Track2Gather shows the correct format for sorting contacts.
+
+  Use case resumes from step 2.
 
 *{More to be added}*
 
@@ -562,6 +583,29 @@ testers are expected to do more *exploratory* testing.
 
    4. Test case: `tshift 91`<br>
       Expected: Unable to shift beyond the limit of `90` days. No person's SHN end dates will be shifted. Error details shown in the status message.
+
+2. _{ more test cases …​ }_
+
+### Sorting contacts
+
+1. Sorting a person while all persons are being shown
+
+    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `sort n/`<br>
+       Expected: The list of persons is sorted by name (in ascending order by default).
+
+    3. Test case: `sort n/dsc`<br>
+       Expected: The list of persons is sorted by name in descending order.
+
+    4. Test case: `sort n/ cs/asc`<br>
+       Expected: The list of persons is sorted by name (in ascending order by default), then by case number in descending order.
+
+    5. Test case: `sort`<br>
+       Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
+
+    5. Other incorrect sort commands to try: `sort n/as`, `sort p/` (since `p/` is an unsupported field prefix), `...` <br>
+       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
 

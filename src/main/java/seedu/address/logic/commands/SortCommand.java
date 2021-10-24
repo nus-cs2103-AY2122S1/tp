@@ -25,15 +25,15 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in the contact list. "
-            + "At least one prefix must be provided. Specifying the sort direction is optional.\n"
+            + "At least one field prefix must be provided. Specifying the sort direction is optional.\n"
             + "Direction \"" + Direction.ASCENDING + "\" indicates ascending order and \""
-            + Direction.DESCENDING + "\" indicates descending order. "
-            + "By default, prefixes are sorted in ascending order.\n"
+            + Direction.DESCENDING + "\" indicates descending order.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "DIRECTION] "
             + "[" + PREFIX_CASE_NUMBER + "DIRECTION]\n"
-            + "Examples: \"" + COMMAND_WORD + " " + PREFIX_NAME + Direction.DESCENDING + "\""
-            + ", \"" + COMMAND_WORD + " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING + "\"";
+            + "Examples: \"" + COMMAND_WORD + " " + PREFIX_NAME + "\""
+            + " \"" + COMMAND_WORD + " " + PREFIX_NAME + Direction.DESCENDING + "\""
+            + " \"" + COMMAND_WORD + " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING + "\"";
 
     public static final String MESSAGE_SUCCESS = "All persons sorted by %s";
 
