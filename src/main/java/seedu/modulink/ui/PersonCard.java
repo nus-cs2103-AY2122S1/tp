@@ -47,6 +47,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label gitHubUsername;
     @FXML
+    private Label telegramHandle;
+    @FXML
     private ImageView fav;
     @FXML
     private FlowPane mods;
@@ -69,6 +71,11 @@ public class PersonCard extends UiPart<Region> {
             gitHubUsername.setText("GitHub Account: www.github.com/" + person.getGithubUsername().value);
         } else {
             gitHubUsername.setText("No GitHub Account!");
+        }
+        if (!person.getTelegramHandle().isNull()) {
+            telegramHandle.setText("Telegram Chat: https://t.me/" + person.getTelegramHandle().value);
+        } else {
+            telegramHandle.setText("No Telegram Account!");
         }
         person.getMods().stream()
                 .sorted(Comparator.comparing(mod -> mod.modName))

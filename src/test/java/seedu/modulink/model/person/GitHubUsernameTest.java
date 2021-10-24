@@ -16,14 +16,14 @@ public class GitHubUsernameTest {
 
     @Test
     public void isValidGitHubUsername() {
-        // invalid GiHub username
+        // invalid GitHub username
         assertFalse(GitHubUsername.isValidUsername("")); // empty string
         assertFalse(GitHubUsername.isValidUsername(" ")); // spaces only
         assertFalse(GitHubUsername.isValidUsername("^")); // only non-alphanumeric characters
         assertFalse(GitHubUsername.isValidUsername("@peter")); // contains non-alphanumeric characters
         assertFalse(GitHubUsername.isValidUsername("alex yeoh")); // contains spaces
 
-        // valid name
+        // valid GitHub username
         assertTrue(GitHubUsername.isValidUsername("peterjack")); // alphabets only
         assertTrue(GitHubUsername.isValidUsername("12345")); // numbers only
         assertTrue(GitHubUsername.isValidUsername("peterthe2nd")); // alphanumeric characters

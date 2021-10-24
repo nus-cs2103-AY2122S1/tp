@@ -21,6 +21,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final GitHubUsername gitHubUsername;
+    private final TelegramHandle telegramHandle;
     private boolean isFavourite;
 
     // Data fields
@@ -31,13 +32,14 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, StudentId id, Phone phone, Email email, GitHubUsername gitHubUsername,
-                  boolean isFavourite, Set<Mod> mods, boolean isMyProfile) {
+                  TelegramHandle telegramHandle, boolean isFavourite, Set<Mod> mods, boolean isMyProfile) {
         requireAllNonNull(name, id, phone, email, mods);
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
         this.gitHubUsername = gitHubUsername;
+        this.telegramHandle = telegramHandle;
         this.isFavourite = isFavourite;
         this.mods.addAll(mods);
         this.isMyProfile = isMyProfile;
@@ -61,6 +63,10 @@ public class Person {
 
     public GitHubUsername getGithubUsername() {
         return gitHubUsername;
+    }
+
+    public TelegramHandle getTelegramHandle() {
+        return telegramHandle;
     }
 
     /**
@@ -125,6 +131,7 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getGithubUsername().equals(getGithubUsername())
+                && otherPerson.getTelegramHandle().equals(getTelegramHandle())
                 && sameMods
                 && otherPerson.getIsFavourite() == getIsFavourite()
                 && otherPerson.getStudentId().equals(getStudentId());
@@ -148,6 +155,8 @@ public class Person {
                 .append(getEmail())
                 .append("; GitHub username: ")
                 .append(getGithubUsername())
+                .append("; Telegram handle: ")
+                .append(getTelegramHandle())
                 .append("; isFavourite: ")
                 .append(getIsFavourite());
 

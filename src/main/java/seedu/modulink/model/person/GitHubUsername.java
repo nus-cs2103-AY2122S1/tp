@@ -16,9 +16,7 @@ public class GitHubUsername {
      * @param username A valid GitHub username.
      */
     public GitHubUsername(String username) {
-        if (username != null) {
-            checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
-        }
+        checkArgument(isValidUsername(username), MESSAGE_CONSTRAINTS);
         value = username;
     }
 

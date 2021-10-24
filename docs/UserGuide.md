@@ -100,10 +100,11 @@ Here is a reference guide to the features and potential uses of ModuLink.
 
 Creates your user profile. You can also choose to add modules and indicate your group status for each module. Note, in order to start using ModuLink, you area **required** to create a new profile should you not have one.
 
-Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [mod/MODULE [GROUP_STATUS]]...`
+Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP_STATUS]]...`
 
 **:information_source: Notes:**
 * STUDENT_ID must be unique
+* You can choose to input your telegram handle as either starting with '@' eg: (@teleHandle), or just the handle itself (eg: teleHandle)
 * The group statuses available are: Need member, Need group, Don't need group/Not looking for group.
 * The default status when a module is added without a description is 'Don't need group/Not looking for group'. The respective module will be displayed as a blue tag.
 * To indicate you need members for your group, you can include the description 'need member'. The respective module will be displayed as a yellow tag.
@@ -111,7 +112,7 @@ Format: `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERN
 
 Examples:
 * `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com github/johndoe mod/CS2103T`
-* `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com mod/CS2101 need group`
+* `create n/Jane Doe id/A0222594A p/87654321 e/jane_doe@example.com tele/@janedoe mod/CS2101 need group`
 * `create n/Alexa Tan id/A0012367N p/998877662 e/alexa.tan@example.com mod/CS2030S need member mod/CS2100`
     <br>
     <br>
@@ -352,6 +353,7 @@ Prefix | Parameter
 **`p/`** | PHONE NUMBER
 **`e/`** | EMAIL
 **`github/`** | GITHUB USERNAME
+**`tele/`** | TELEGRAM HANDLE
 **`mod/`** | MODULE
 **`group/`** | GROUP STATUS
 
@@ -359,7 +361,7 @@ Prefix | Parameter
 
 Action | Format, Examples
 -------|-----------------
-**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
+**Create** | `create n/NAME id/STUDENT_ID p/PHONE_NUMBER e/EMAIL [github/GITHUB_USERNAME] [tele/TELEGRAM_HANDLE] [mod/MODULE [GROUP STATUS]]...` <br> e.g., `create n/John Doe id/A0222594A p/12345678 e/john.doe@example.com mod/CS2100`
 **Edit** | `edit EDITED_ATTRIBUTE [MORE ATTRIBUTES]`, `edit p/123321432 e/changedemail@example.com`
 **View** | `view STUDENT_ID`, `view A1234567R`
 **Add module** | `addMod mod/MODULE [GROUP_STATUS] [mod/MODULE [GROUP_STATUS]]...`, `addMod mod/CS2103T Need a member mod/CS1231S`

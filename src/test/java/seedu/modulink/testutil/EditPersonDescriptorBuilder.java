@@ -11,6 +11,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 
 /**
@@ -38,6 +39,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setGitHubUsername(person.getGithubUsername());
+        descriptor.setTelegramHandle(person.getTelegramHandle());
         descriptor.setTags(person.getMods());
     }
 
@@ -78,6 +80,14 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withGitHubUsername(String gitHubUsername) {
         descriptor.setGitHubUsername(new GitHubUsername(gitHubUsername));
+        return this;
+    }
+
+    /**
+     * Sets the {@code TelegramHandle} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPersonDescriptorBuilder withTelegramHandle(String telegramHandle) {
+        descriptor.setTelegramHandle(new TelegramHandle(telegramHandle));
         return this;
     }
 

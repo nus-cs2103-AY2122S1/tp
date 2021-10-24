@@ -9,6 +9,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 import seedu.modulink.model.util.SampleDataUtil;
 
@@ -22,6 +23,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GITHUB_USERNAME = "amybee";
+    public static final String DEFAULT_TELEGRAM_HANDLE = "amybee22";
     public static final boolean DEFAULT_IS_FAVOURITE = false;
     public static final boolean DEFAULT_IS_MY_PROFILE = false;
 
@@ -30,6 +32,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private GitHubUsername gitHubUsername;
+    private TelegramHandle telegramHandle;
     private boolean isFavourite;
     private Set<Mod> mods;
     private boolean isMyProfile;
@@ -43,6 +46,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         gitHubUsername = new GitHubUsername(DEFAULT_GITHUB_USERNAME);
+        telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         isFavourite = DEFAULT_IS_FAVOURITE;
         mods = new HashSet<>();
         isMyProfile = DEFAULT_IS_MY_PROFILE;
@@ -57,6 +61,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         gitHubUsername = personToCopy.getGithubUsername();
+        telegramHandle = personToCopy.getTelegramHandle();
         isFavourite = personToCopy.getIsFavourite();
         mods = new HashSet<>(personToCopy.getMods());
         isMyProfile = personToCopy.getIsMyProfile();
@@ -111,6 +116,14 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets the {@code TelegramHandle} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTelegramHandle(String telegramHandle) {
+        this.telegramHandle = new TelegramHandle(telegramHandle);
+        return this;
+    }
+
+    /**
      * Sets the {@code isFavourite} of the {@code Person} that we are building.
      */
     public PersonBuilder withFavourite(boolean isFavourite) {
@@ -124,7 +137,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(name, id, phone, email,
-                gitHubUsername, isFavourite, mods, isMyProfile);
+                gitHubUsername, telegramHandle, isFavourite, mods, isMyProfile);
     }
 
     /**
@@ -133,7 +146,7 @@ public class PersonBuilder {
      */
     public Person buildProfile() {
         return new Person(name, id, phone, email,
-                gitHubUsername, isFavourite, mods, true);
+                gitHubUsername, telegramHandle, isFavourite, mods, true);
     }
 
 }

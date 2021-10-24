@@ -17,6 +17,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 
 public class RemoveModCommand extends Command {
@@ -77,6 +78,8 @@ public class RemoveModCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         GitHubUsername updatedGitHubUsername = editPersonDescriptor.getGitHubUsername()
                 .orElse(personToEdit.getGithubUsername());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Set<Mod> updatedMods = new HashSet<>(Collections.emptySet());
 
         for (Mod mod : personToEdit.getMods()) {
@@ -86,7 +89,7 @@ public class RemoveModCommand extends Command {
         }
 
         return new Person(updatedName, updatedId, updatedPhone, updatedEmail,
-                updatedGitHubUsername, false, updatedMods, true);
+                updatedGitHubUsername, updatedTelegramHandle, false, updatedMods, true);
     }
 
     @Override

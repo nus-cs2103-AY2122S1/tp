@@ -10,6 +10,7 @@ import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC
 import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.modulink.testutil.Assert.assertThrows;
 import static seedu.modulink.testutil.TypicalPersons.AMY;
 
@@ -103,7 +104,7 @@ public class LogicManagerTest {
 
         // Execute add command
         String addCommand = CreateCommand.COMMAND_WORD + NAME_DESC_AMY + ID_DESC_AMY
-                + PHONE_DESC_AMY + EMAIL_DESC_AMY + GITHUB_USERNAME_DESC_AMY;
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + GITHUB_USERNAME_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY;
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addPerson(expectedPerson);

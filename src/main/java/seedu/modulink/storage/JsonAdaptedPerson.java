@@ -16,6 +16,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 
 
@@ -31,6 +32,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String gitHubUsername;
+    private final String telegramHandle;
     private final boolean isFavourite;
     private final List<JsonAdaptedTag> modules = new ArrayList<>();
     private final boolean isMyProfile;
@@ -42,13 +44,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name,
             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("gitHubUsername") String gitHubUsername,
-            @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("telegramHandle") String telegramHandle, @JsonProperty("isFavourite") boolean isFavourite,
             @JsonProperty("modules") List<JsonAdaptedTag> modules, @JsonProperty("isMyProfile") boolean isMyProfile) {
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
         this.gitHubUsername = gitHubUsername;
+        this.telegramHandle = telegramHandle;
         this.isFavourite = isFavourite;
         if (modules != null) {
             this.modules.addAll(modules);
@@ -65,6 +68,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         gitHubUsername = source.getGithubUsername().value;
+        telegramHandle = source.getTelegramHandle().value;
         isFavourite = source.getIsFavourite();
         modules.addAll(source.getMods().stream()
                 .map(JsonAdaptedTag::new)
@@ -121,9 +125,14 @@ class JsonAdaptedPerson {
         }
         final GitHubUsername modelUsername = new GitHubUsername(gitHubUsername);
 
+        if (!TelegramHandle.isValidHandle(telegramHandle)) {
+            throw new IllegalValueException(TelegramHandle.MESSAGE_CONSTRAINTS);
+        }
+        final TelegramHandle modelHandle = new TelegramHandle(telegramHandle);
+
         final Set<Mod> modelMods = new HashSet<>(personMods);
         return new Person(modelName, modelId, modelPhone, modelEmail,
-                modelUsername, this.isFavourite, modelMods, this.isMyProfile);
+                modelUsername, modelHandle, this.isFavourite, modelMods, this.isMyProfile);
     }
 
 }

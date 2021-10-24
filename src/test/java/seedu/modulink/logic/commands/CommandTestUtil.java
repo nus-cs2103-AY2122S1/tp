@@ -8,6 +8,7 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 import static seedu.modulink.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_GITHUB_USERNAME_AMY = "amy_bee";
     public static final String VALID_GITHUB_USERNAME_BOB = "bobChoo2000";
+    public static final String VALID_TELEGRAM_HANDLE_AMY = "amy_bee";
+    public static final String VALID_TELEGRAM_HANDLE_BOB = "bobCh00";
 
     public static final String VALID_TAG_CS2103T = "CS2103T";
     public static final String VALID_TAG_CS2100 = "CS2100";
@@ -51,6 +54,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String GITHUB_USERNAME_DESC_AMY = " " + PREFIX_GITHUB_USERNAME + VALID_GITHUB_USERNAME_AMY;
     public static final String GITHUB_USERNAME_DESC_BOB = " " + PREFIX_GITHUB_USERNAME + VALID_GITHUB_USERNAME_BOB;
+    public static final String TELEGRAM_HANDLE_DESC_AMY = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_AMY;
+    public static final String TELEGRAM_HANDLE_DESC_BOB = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_BOB;
 
     public static final String TAG_DESC_CS2100 = " " + PREFIX_MOD + VALID_TAG_CS2100;
     public static final String TAG_DESC_CS2103T = " " + PREFIX_MOD + VALID_TAG_CS2103T;
@@ -62,6 +67,8 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_MOD + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_GITHUB_USERNAME_DESC = " "
             + PREFIX_GITHUB_USERNAME + "@bobchoo"; // @ not allowed in username
+    public static final String INVALID_TELEGRAM_HANDLE_DESC =
+            " " + PREFIX_TELEGRAM_HANDLE + "@bobchoo##"; // # not allowed in handle
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -73,11 +80,12 @@ public class CommandTestUtil {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withStudentId(VALID_ID_AMY).withPhone(VALID_PHONE_AMY)
                 .withEmail(VALID_EMAIL_AMY).withGitHubUsername(VALID_GITHUB_USERNAME_AMY)
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY)
                 .withTags(VALID_TAG_CS2100).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withStudentId(VALID_ID_BOB).withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withGitHubUsername(VALID_GITHUB_USERNAME_BOB)
-                .withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100).build();
+                .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100).build();
     }
 
     /**

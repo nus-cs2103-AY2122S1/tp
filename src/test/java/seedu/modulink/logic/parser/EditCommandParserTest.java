@@ -10,9 +10,11 @@ import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_GITHUB_USERN
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_TELEGRAM_HANDLE_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_GITHUB_USERNAME_AMY;
@@ -20,6 +22,7 @@ import static seedu.modulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.modulink.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -32,6 +35,7 @@ import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -62,7 +66,10 @@ public class EditCommandParserTest {
         assertParseFailure(parser, INVALID_ID_DESC, StudentId.MESSAGE_CONSTRAINTS); // invalid student ID
         assertParseFailure(parser, INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, INVALID_GITHUB_USERNAME_DESC, GitHubUsername.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_GITHUB_USERNAME_DESC,
+                GitHubUsername.MESSAGE_CONSTRAINTS); // invalid GitHub username
+        assertParseFailure(parser, INVALID_TELEGRAM_HANDLE_DESC,
+                TelegramHandle.MESSAGE_CONSTRAINTS); // invalid Telegram handle
 
         // invalid phone followed by valid email
         assertParseFailure(parser, INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -128,6 +135,12 @@ public class EditCommandParserTest {
         // GitHub username
         userInput = GITHUB_USERNAME_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withGitHubUsername(VALID_GITHUB_USERNAME_AMY).build();
+        expectedCommand = new EditCommand(descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // Telegram handle
+        userInput = TELEGRAM_HANDLE_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).build();
         expectedCommand = new EditCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
