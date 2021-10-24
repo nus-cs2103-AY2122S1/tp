@@ -327,6 +327,12 @@
     -fx-background-color: #3e7b91;
 }
 
+.default-color1.chart-series-line { -fx-stroke: transparent; }
+
+.default-color2.chart-series-line { -fx-stroke: transparent; }
+
+
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-width: 0;

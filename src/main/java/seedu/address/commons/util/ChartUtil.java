@@ -78,19 +78,22 @@ public class ChartUtil {
 //        double maxY = DEFAULT_TICK_UNIT;
 
 
-        XYChart.Series<String, Number> seriesScore = new XYChart.Series<>();
+        XYChart.Series seriesScore = new XYChart.Series();
+        seriesScore.setName("score");
         for (Map.Entry<String, Number> entry : data.entrySet()) {
-            seriesScore.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+            seriesScore.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
         }
 
-        XYChart.Series<String, Number> seriesMean = new XYChart.Series<>();
+        XYChart.Series seriesMean = new XYChart.Series();
+        seriesMean.setName("mean");
         for (Map.Entry<String, Number> entry : mean.entrySet()) {
-            seriesScore.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+            seriesMean.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
         }
 
-        XYChart.Series<String, Number> seriesMedian = new XYChart.Series<>();
+        XYChart.Series seriesMedian = new XYChart.Series();
+        seriesMedian.setName("median");
         for (Map.Entry<String, Number> entry : median.entrySet()) {
-            seriesScore.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+            seriesMedian.getData().add(new XYChart.Data(entry.getKey(), entry.getValue()));
         }
 
         lineChart.getData().addAll(seriesScore, seriesMean, seriesMedian);
