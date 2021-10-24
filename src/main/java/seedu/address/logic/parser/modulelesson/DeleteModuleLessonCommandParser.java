@@ -13,8 +13,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.modulelesson.ModuleLesson;
-import seedu.address.model.person.ModuleCode;
+import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 
 public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLessonCommand> {
     /**
@@ -27,6 +26,12 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     public DeleteModuleLessonCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
+        if (moduleCodes.size() == 1) {
+            List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
+                    .map(moduleCode -> moduleCode.toString())
+                    .collect(Collectors.toList());
+            return new DeleteModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(listOfModuleCode.get(0)));
+        }
         try {
             if (userInput.contains("-")) {
                 Index start = ParserUtil.parseIndex(userInput.substring(1, userInput.indexOf("-")));

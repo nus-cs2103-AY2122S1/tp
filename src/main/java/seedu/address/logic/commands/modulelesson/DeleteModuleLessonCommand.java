@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.modulelesson;
 
+import java.util.function.Predicate;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
@@ -21,6 +23,7 @@ public class DeleteModuleLessonCommand extends Command {
 
     private final Index targetIndex;
     private final Index endIndex;
+    private final Predicate predicate;
 
     /**
      * Creates a DeleteModuleLessonCommand to delete lesson at specified index
@@ -30,6 +33,7 @@ public class DeleteModuleLessonCommand extends Command {
     public DeleteModuleLessonCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         endIndex = targetIndex;
+        predicate = Model.PREDICATE_SHOW_ALL_LESSONS;
     }
 
     /**
@@ -41,6 +45,18 @@ public class DeleteModuleLessonCommand extends Command {
     public DeleteModuleLessonCommand(Index targetIndex, Index endIndex) {
         this.targetIndex = targetIndex;
         this.endIndex = endIndex;
+        predicate = Model.PREDICATE_SHOW_ALL_LESSONS;
+    }
+
+    /**
+     * Creates a DeleteModuleLessonCommand to delete lessons in a specified range
+     *
+     * @param predicate condition to delete lesson
+     */
+    public DeleteModuleLessonCommand(ModuleCodeContainsKeywordsPredicate predicate) {
+        targetIndex = Index.fromZeroBased(0);
+        endIndex = Index.fromZeroBased(0);
+        this.predicate = predicate;
     }
 
     /**
@@ -53,19 +69,20 @@ public class DeleteModuleLessonCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         int sizeOfModuleLessonList = model.getFilteredModuleLessonList().size();
-        if (targetIndex.getZeroBased() >= sizeOfModuleLessonList) {
+        String successMessage;
+        if (predicate != Model.PREDICATE_SHOW_ALL_LESSONS) {
+            model.updateFilteredModuleLessonList(predicate);
+            successMessage = deleteAll(model);
+            model.updateFilteredModuleLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
+        } else if (targetIndex.getZeroBased() >= sizeOfModuleLessonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-        }
-        if (targetIndex.getZeroBased() > endIndex.getZeroBased() || endIndex.getZeroBased() >= sizeOfModuleLessonList) {
+        } else if (targetIndex.getZeroBased() > endIndex.getZeroBased()
+                || endIndex.getZeroBased() >= sizeOfModuleLessonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
+        } else {
+            successMessage = deleteAll(model);
         }
-        String successMessage = deleteAll(model);
         return new CommandResult(successMessage);
-    }
-
-    private String deleteByModule(Model model) {
-
-        return "";
     }
 
     private String deleteAll(Model model) {
