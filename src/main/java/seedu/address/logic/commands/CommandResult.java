@@ -4,6 +4,8 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents the result of a command execution.
  */
@@ -11,7 +13,7 @@ public class CommandResult {
 
     public enum DisplayType {
         HELP, // Help information should be shown to the user.
-        STUDENTS,
+        STUDENTS, // Show the list of students to the user.
         WEEK, // Weekly Schedule should be shown to the user.
         MONTH, // Monthly Schedule should be shown to the user.
         NEXT, // Go forwards to the next week schedule.
@@ -22,13 +24,25 @@ public class CommandResult {
     private final String feedbackToUser;
 
     private final DisplayType displayType;
+
+    /** Lesson information of student should be shown to the user. */
+    private final Person student;
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, DisplayType displayType, Person student) {
+        requireAllNonNull(feedbackToUser, displayType);
+        this.feedbackToUser = feedbackToUser;
+        this.displayType = displayType;
+        this.student = student;
+    }
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, DisplayType displayType) {
-        requireAllNonNull(feedbackToUser, displayType);
-        this.feedbackToUser = feedbackToUser;
-        this.displayType = displayType;
+        this(feedbackToUser, displayType, null);
     }
 
     /**
@@ -36,7 +50,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, DisplayType.STUDENTS);
+        this(feedbackToUser, DisplayType.STUDENTS); // We show students by default
     }
 
     public String getFeedbackToUser() {
@@ -47,12 +61,12 @@ public class CommandResult {
         return displayType;
     }
 
-    public boolean isShowHelp() {
-        return displayType == DisplayType.HELP;
+    public boolean isDisplayStudent() {
+        return student != null;
     }
 
-    public boolean isExit() {
-        return displayType == DisplayType.EXIT;
+    public Person getStudent() {
+        return student;
     }
 
     @Override
