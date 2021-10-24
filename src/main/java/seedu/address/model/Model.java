@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * The API of the Model component.
@@ -90,4 +91,9 @@ public interface Model {
      * {@code person} must exist in the address book.
      */
     void exportPerson(Person person);
+
+    /**
+     * Returns summary of AddressBook.
+     */
+    Summary getSummary();
 }

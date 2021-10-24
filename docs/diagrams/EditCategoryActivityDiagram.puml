@@ -13,13 +13,13 @@ if () then ([valid command])
             :Create new Person Object with updated fields;
             :Replace old Person Object with new Person Object;
             :Save AddressBook;
-        else(else)
+        else([else])
             :Invalid Category Message shown on GUI;
             endif
-    else(else)
+    else([else])
         :Invalid Index Message shown on GUI;
     endif
-else (else)
+else ([else])
 :Invalid Command Message shown on GUI;
 endif
 stop

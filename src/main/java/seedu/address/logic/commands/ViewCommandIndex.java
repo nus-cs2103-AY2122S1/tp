@@ -9,16 +9,14 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.summary.Summary;
 
 /**
- * Deletes a contact identified using it's displayed index from the address book.
+ * Displays details of a person identified using it's displayed index or name on the side panel.
  */
-public class DeleteCommandIndex extends DeleteCommand {
-
+public class ViewCommandIndex extends ViewCommand {
     private final Index targetIndex;
 
-    public DeleteCommandIndex(Index targetIndex) {
+    public ViewCommandIndex(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -27,21 +25,20 @@ public class DeleteCommandIndex extends DeleteCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        // if index is greater than list size, notify user
+        // if index is greater than list size, show error message
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        Summary summary = new Summary(model.getAddressBook());
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete), summary);
+        Person selectedPerson = lastShownList.get(targetIndex.getZeroBased());
+        return new CommandResult(String.format(MESSAGE_VIEW_PERSON_SUCCESS, selectedPerson), selectedPerson);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommandIndex // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommandIndex) other).targetIndex)); // state check
+                || (other instanceof ViewCommandIndex // instanceof handles nulls
+                && targetIndex.equals(((ViewCommandIndex) other).targetIndex)); // state check
     }
+
 }

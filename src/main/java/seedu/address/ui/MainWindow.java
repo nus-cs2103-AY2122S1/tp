@@ -113,7 +113,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList(), logic.getSummary());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -139,7 +139,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Online User Guide if possible, else open the internal help window
+     * Opens the Online User Guide if possible, else opens the internal help window
      */
     public void handleHelp() {
         if (Desktop.isDesktopSupported()) {
@@ -154,9 +154,9 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the Command Summary if possible, else open the internal help window
+     * Opens the Command Summary if possible, else opens the internal help window
      */
-    public void openCommandSummary() {
+    public void handleCommandSummary() {
         if (Desktop.isDesktopSupported()) {
             try {
                 helpWindow.openCommandSummary();
@@ -210,12 +210,24 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowCommandSummary()) {
+                handleCommandSummary();
+            }
+
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isDisplayPerson()) {
+                personListPanel.handleDisplay(commandResult.getPersonToDisplay());
+            }
+
+            if (commandResult.isDisplaySummary()) {
+                personListPanel.handleDisplay(commandResult.getSummaryToDisplay());
             }
 
             return commandResult;

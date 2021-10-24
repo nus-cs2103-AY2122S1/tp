@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.summary.Summary;
 
 /**
  * Adds a person to the address book.
@@ -63,7 +64,8 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        Summary summary = new Summary(model.getAddressBook());
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), summary);
     }
 
     @Override

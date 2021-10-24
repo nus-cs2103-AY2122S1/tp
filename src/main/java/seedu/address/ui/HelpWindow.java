@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a help page
+ * Controller for the inbuilt help page
  */
 public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL =
