@@ -27,7 +27,7 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/ui-snapshots/startup.png)
-
+<br><ins>gitGud upon startup.</ins>
 5. Type the command in the command box and press `Enter` to execute it. e.g. typing **`help`** and pressing `Enter` will open the help window.<br>
    Some example commands you can try:
 
@@ -321,7 +321,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/game-list.png)
-<br><ins>gitGud after getting a game.</ins>
+<br><ins>gitGud after listing games with the keyword.</ins>
 
 ### Other commands
 
@@ -329,7 +329,7 @@ This section contains miscellaneous commands that may help improve your experien
 
 #### Viewing help: `help`
 
-Shows a message explaining how to access the help page.
+Shows a message providing a link to the User Guide page.
 
 Format: `help`
 
@@ -340,13 +340,13 @@ Snapshot:
 
 #### Clearing the friends and games lists : `clear`
 
-Clears the entire friends and games lists.
+Clears the all friends and games from gitGud.
 
 Format: `clear`
 
 #### Exiting the program : `exit`
 
-Exits the application.
+Exits gitGud.
 
 Format: `exit`
 
