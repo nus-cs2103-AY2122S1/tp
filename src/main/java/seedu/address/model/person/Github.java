@@ -15,7 +15,7 @@ public class Github {
                     + " cannot have multiple consecutive hyphens,"
                     + " cannot begin or end with a hyphen,"
                     + " and it should be between 4 to 39 characters long ";
-    public static final String VALIDATION_REGEX = "[a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38}";
+    public static final String VALIDATION_REGEX = "[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38}";
     public final String value;
 
     /**

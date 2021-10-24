@@ -66,6 +66,7 @@ public class Tag {
      * @return
      */
     public Type parseTagType(String tagName) {
+        assert(!tagName.isEmpty());
         if (tagName.indexOf("event-") == 0) {
             return Type.EVENT;
         } else if (tagName.indexOf("mod-") == 0) {

@@ -31,6 +31,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if user has not entered at least 1 tag to search for
      */
     public FindCommand parseFindGithubUsername(String trimmedArgs) throws ParseException {
+        assert(!trimmedArgs.isEmpty());
         String githubUsernames = trimmedArgs.substring(2).trim();
         if (githubUsernames.isEmpty()) {
             throw new ParseException(
@@ -47,6 +48,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if user has not entered at least 1 name to search for
      */
     public FindCommand parseFindName(String trimmedArgs) throws ParseException {
+        assert(!trimmedArgs.isEmpty());
         String[] nameKeywords = trimmedArgs.split("\\s+");
         return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
     }
@@ -59,6 +61,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if user has not entered at least 1 tag to search for
      */
     public FindCommand parseFindTag(String trimmedArgs) throws ParseException {
+        assert(!trimmedArgs.isEmpty());
         String tags = trimmedArgs.substring(2).trim();
         if (tags.isEmpty()) {
             throw new ParseException(
@@ -76,6 +79,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if user has not entered at least 1 telegram handle to search for
      */
     public FindCommand parseFindTelegramHandle(String trimmedArgs) throws ParseException {
+        assert(!trimmedArgs.isEmpty());
         String telegramHandles = trimmedArgs.substring(3).trim();
         if (telegramHandles.isEmpty()) {
             throw new ParseException(
@@ -86,6 +90,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 .asList(telegramHandleKeywords)));
     }
     private boolean isValidFormat(String trimmedArgs) {
+        assert(!trimmedArgs.isEmpty());
         boolean isTag = trimmedArgs.indexOf(tagIdentifier) == 0;
         boolean isTelegram = trimmedArgs.indexOf(telegramHandleIdentifier) == 0;
         boolean isGithub = trimmedArgs.indexOf(githubUsernameIdentifier) == 0;
@@ -100,12 +105,12 @@ public class FindCommandParser implements Parser<FindCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCommand parse(String args) throws ParseException {
+        assert(!args.contains(FindCommand.COMMAND_WORD));
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty() || !isValidFormat(trimmedArgs)) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-
         if (trimmedArgs.indexOf(tagIdentifier) == 0) {
             return parseFindTag(trimmedArgs);
         } else if (trimmedArgs.indexOf(telegramHandleIdentifier) == 0) {

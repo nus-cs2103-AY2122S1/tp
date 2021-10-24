@@ -37,6 +37,7 @@ public class GithubTest {
         assertTrue(Github.isValidGithub("a")); // one alphabet character
         assertTrue(Github.isValidGithub("0")); // one numeric character
         assertTrue(Github.isValidGithub("a-b")); // one hyphen
+        assertTrue(Github.isValidGithub("a-B")); // capital
         assertTrue(Github.isValidGithub("a-b-123")); // two separate hyphen
         assertTrue(Github.isValidGithub("a".repeat(39))); // 39 characters
     }

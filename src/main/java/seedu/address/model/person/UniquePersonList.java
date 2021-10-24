@@ -34,7 +34,7 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return internalList.stream().parallel().anyMatch(toCheck::isSamePerson);
     }
 
     /**
@@ -78,6 +78,24 @@ public class UniquePersonList implements Iterable<Person> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
+        }
+    }
+
+    /**
+     * Favourites the equivalent person from the list.
+     * The person must exist in the list.
+     */
+    public void favourite(Person toFavourite) {
+        requireNonNull(toFavourite);
+        if (!internalList.stream().anyMatch(x -> x.equals(toFavourite))) {
+            throw new PersonNotFoundException();
+        } else {
+            internalList.forEach(person -> {
+                if (person.equals(toFavourite)) {
+                    person.setIsFavourite();
+                }
+            }
+            );
         }
     }
 

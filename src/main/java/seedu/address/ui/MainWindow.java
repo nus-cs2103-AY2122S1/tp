@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
@@ -33,14 +34,13 @@ public class MainWindow extends UiPart<Stage> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private Stage primaryStage;
-    private Logic logic;
+    private final Stage primaryStage;
+    private final Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
-    private PersonDetails personDetails;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
+    private final HelpWindow helpWindow;
     private TabPaneHeader tabPaneHeader;
 
     @FXML
@@ -153,7 +153,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personDetails = new PersonDetails(null);
+        PersonDetails personDetails = new PersonDetails(null);
         personListPanel = new PersonListPanel(logic.getFilteredPersonList(), personDetails);
         logic.setPersonList(personListPanel);
 
@@ -209,6 +209,11 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
+        try {
+            logic.saveAddressBook(logic.getAddressBook());
+        } catch (IOException e) {
+            logger.severe("Unable to save Address Book to Memory");
+        }
         helpWindow.hide();
         primaryStage.hide();
     }
