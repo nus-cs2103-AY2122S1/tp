@@ -50,7 +50,7 @@ public class InputHistory {
      * @return String of the previous input
      */
     public String getPreviousInput() {
-        if (isEmpty()) {
+        if (isHistoryEmpty()) {
             return "";
         }
         if (isNotLeastRecentInput()) {
@@ -64,7 +64,7 @@ public class InputHistory {
      * @return String of the next input
      */
     public String getNextInput() {
-        if (isEmpty() || isLast() || !isNotMostRecentInput()) {
+        if (isHistoryEmpty() || isLast() || !isNotMostRecentInput()) {
             return "";
         }
         currentIndex += 1;
@@ -98,7 +98,7 @@ public class InputHistory {
      * Used to determine if history is empty
      * @return a Boolean on whether history is empty.
      */
-    private boolean isEmpty() {
+    private boolean isHistoryEmpty() {
         return history.isEmpty();
     }
 
