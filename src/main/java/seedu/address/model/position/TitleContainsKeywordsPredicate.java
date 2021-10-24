@@ -18,7 +18,7 @@ public class TitleContainsKeywordsPredicate implements Predicate<Position> {
     @Override
     public boolean test(Position position) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(position.getTitle().fullTitle, keyword));
+                .allMatch(keyword -> StringUtil.containsWordIgnoreCase(position.getTitle().fullTitle, keyword));
     }
 
 }
