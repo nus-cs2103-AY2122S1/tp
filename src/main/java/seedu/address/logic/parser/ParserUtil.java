@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
@@ -313,6 +314,28 @@ public class ParserUtil {
         }
 
         return new Period(start, end);
+    }
+
+    /**
+     * Parsers {@code String shiftTimes} to a {@code LocalTime[]} which contains the a start time and end time.
+     * @param shiftTimes The input string.
+     * @return A LocalTime array containing start time and end time of the shift.
+     * @throws ParseException throws when the input does not have the correct format.
+     */
+    public static LocalTime[] parseShiftTime(String shiftTimes) throws ParseException {
+        LocalTime startTime;
+        LocalTime endTime;
+        String[] separatedShiftTimes = shiftTimes.split("-");
+        if (separatedShiftTimes.length != 2) {
+            throw new ParseException(Messages.MESSAGE_INVALID_SHIFT_TIME);
+        }
+        try {
+            startTime = LocalTime.parse(separatedShiftTimes[0], TIME_FORMATTER);
+            endTime = LocalTime.parse(separatedShiftTimes[1], TIME_FORMATTER);
+        } catch (DateTimeParseException ite) {
+            throw new ParseException(Messages.MESSAGE_INVALID_TIME);
+        }
+        return new LocalTime[]{startTime, endTime};
     }
 
 
