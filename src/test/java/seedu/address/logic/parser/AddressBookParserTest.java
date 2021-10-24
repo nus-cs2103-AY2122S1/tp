@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortCommand.Direction;
 import seedu.address.logic.commands.TShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
@@ -99,9 +101,15 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_sort() throws Exception {
         List<Prefix> prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
-        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " "
-                + prefixes.stream().map(Object::toString).collect(Collectors.joining(" ")));
-        assertEquals(new SortCommand(prefixes), command);
+        List<Direction> directions = List.of(Direction.ASCENDING, Direction.DESCENDING);
+        assertTrue(prefixes.size() > 0);
+        assertTrue(prefixes.size() == directions.size());
+
+        String sortsString = IntStream.range(0, prefixes.size())
+                .mapToObj(i -> prefixes.get(i).toString() + directions.get(i))
+                .collect(Collectors.joining(" "));
+        SortCommand command = (SortCommand) parser.parseCommand(SortCommand.COMMAND_WORD + " " + sortsString);
+        assertEquals(new SortCommand(prefixes, directions), command);
     }
 
     @Test

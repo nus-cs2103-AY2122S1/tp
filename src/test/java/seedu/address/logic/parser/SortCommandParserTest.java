@@ -1,17 +1,10 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.SortCommand.SUPPORTED_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOME_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEXT_OF_KIN_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUARANTINE_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WORK_ADDRESS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -20,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortCommand.Direction;
 
 public class SortCommandParserTest {
 
@@ -50,27 +44,9 @@ public class SortCommandParserTest {
 
     @Test
     public void parse_invalidPrefix_failure() {
-        // unsupported sort by phone
-        assertParseFailure(parser, PREFIX_PHONE.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by email
-        assertParseFailure(parser, PREFIX_EMAIL.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by home address
-        assertParseFailure(parser, PREFIX_HOME_ADDRESS.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by work address
-        assertParseFailure(parser, PREFIX_WORK_ADDRESS.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by quarantine address
-        assertParseFailure(parser, PREFIX_QUARANTINE_ADDRESS.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by SHN period
-        assertParseFailure(parser, PREFIX_SHN_PERIOD.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by next of kin name
-        assertParseFailure(parser, PREFIX_NEXT_OF_KIN_NAME.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by next of kin phone
-        assertParseFailure(parser, PREFIX_NEXT_OF_KIN_PHONE.toString(), MESSAGE_INVALID_FORMAT);
-        // unsupported sort by next of kin address
-        assertParseFailure(parser, PREFIX_NEXT_OF_KIN_ADDRESS.toString(), MESSAGE_INVALID_FORMAT);
-
         // invalid prefix
         Prefix invalidPrefix = new Prefix("abc123/");
+        assertFalse(SUPPORTED_PREFIXES.contains(invalidPrefix));
         assertParseFailure(parser, invalidPrefix.toString(), MESSAGE_INVALID_FORMAT);
 
         // invalid prefix with other valid prefixes specified
@@ -81,51 +57,165 @@ public class SortCommandParserTest {
     }
 
     @Test
-    public void parse_onePrefixSpecified_success() {
+    public void parse_onePrefixWithoutDirection_success() {
         // name
-        String userInput = PREFIX_NAME.toString();
-        SortCommand expectedCommand = new SortCommand(List.of(PREFIX_NAME));
+        String userInput = " " + PREFIX_NAME;
+        SortCommand expectedCommand = new SortCommand(List.of(PREFIX_NAME), List.of(Direction.ASCENDING));
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // case number
-        userInput = PREFIX_CASE_NUMBER.toString();
-        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER));
+        userInput = " " + PREFIX_CASE_NUMBER;
+        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER), List.of(Direction.ASCENDING));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
-    public void parse_multiplePrefixesSpecified_success() {
+    public void parse_onePrefixWithDirection_success() {
+        // name ascending
+        String userInput = " " + PREFIX_NAME + Direction.ASCENDING;
+        SortCommand expectedCommand = new SortCommand(List.of(PREFIX_NAME), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // name descending
+        userInput = " " + PREFIX_NAME + Direction.DESCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_NAME), List.of(Direction.DESCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // case number ascending
+        userInput = " " + PREFIX_CASE_NUMBER + Direction.ASCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // case number descending
+        userInput = " " + PREFIX_CASE_NUMBER + Direction.DESCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER), List.of(Direction.DESCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multiplePrefixesWithoutDirection_success() {
+        List<Direction> directions = List.of(Direction.ASCENDING, Direction.ASCENDING);
+
         // name then case number
-        String userInput = PREFIX_NAME + " " + PREFIX_CASE_NUMBER;
-        SortCommand expectedCommand = new SortCommand(List.of(PREFIX_NAME, PREFIX_CASE_NUMBER));
+        List<Prefix> prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        String userInput = " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER;
+        SortCommand expectedCommand = new SortCommand(prefixes, directions);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // case number then name
-        userInput = PREFIX_CASE_NUMBER + " " + PREFIX_NAME;
-        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER, PREFIX_NAME));
+        prefixes = List.of(PREFIX_CASE_NUMBER, PREFIX_NAME);
+        userInput = " " + PREFIX_CASE_NUMBER + " " + PREFIX_NAME;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multiplePrefixesWithDirection_success() {
+        // name ascending then case number ascending
+        List<Prefix> prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        List<Direction> directions = List.of(Direction.ASCENDING, Direction.ASCENDING);
+        String userInput = " " + PREFIX_NAME + Direction.ASCENDING + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING;
+        SortCommand expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // name ascending then case number descending
+        prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        directions = List.of(Direction.ASCENDING, Direction.DESCENDING);
+        userInput = " " + PREFIX_NAME + Direction.ASCENDING + " " + PREFIX_CASE_NUMBER + Direction.DESCENDING;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // name descending then case number descending
+        prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        directions = List.of(Direction.DESCENDING, Direction.DESCENDING);
+        userInput = " " + PREFIX_NAME + Direction.DESCENDING + " " + PREFIX_CASE_NUMBER + Direction.DESCENDING;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_multiplePrefixesMixedWithDirection_success() {
+        // name then case number ascending
+        List<Prefix> prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        List<Direction> directions = List.of(Direction.ASCENDING, Direction.ASCENDING);
+        String userInput = " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING;
+        SortCommand expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // name ascending then case number
+        prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        directions = List.of(Direction.ASCENDING, Direction.ASCENDING);
+        userInput = " " + PREFIX_NAME + Direction.ASCENDING + " " + PREFIX_CASE_NUMBER;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // name then case number descending
+        prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        directions = List.of(Direction.ASCENDING, Direction.DESCENDING);
+        userInput = " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER + Direction.DESCENDING;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // name descending then case number
+        prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        directions = List.of(Direction.DESCENDING, Direction.ASCENDING);
+        userInput = " " + PREFIX_NAME + Direction.DESCENDING + " " + PREFIX_CASE_NUMBER;
+        expectedCommand = new SortCommand(prefixes, directions);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
     public void parse_multipleRepeatedPrefixes_acceptsLast() {
-        // same prefix repeated
-        String userInput = PREFIX_NAME + " " + PREFIX_NAME;
-        SortCommand expectedCommand = new SortCommand(List.of(PREFIX_NAME));
+        // single prefix repeated
+        List<Prefix> prefixes = List.of(PREFIX_NAME);
+        List<Direction> directions = List.of(Direction.ASCENDING);
+        String userInput = " " + PREFIX_NAME + " " + PREFIX_NAME;
+        SortCommand expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // same prefix repeated, accepting last occurrence
+        prefixes = List.of(PREFIX_NAME);
+        directions = List.of(Direction.DESCENDING);
+        userInput = " " + PREFIX_NAME + " " + PREFIX_NAME + Direction.DESCENDING;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        prefixes = List.of(PREFIX_NAME);
+        directions = List.of(Direction.ASCENDING);
+        userInput = " " + PREFIX_NAME + Direction.DESCENDING + " " + PREFIX_NAME + Direction.ASCENDING;
+        expectedCommand = new SortCommand(prefixes, directions);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        prefixes = List.of(PREFIX_NAME);
+        directions = List.of(Direction.ASCENDING);
+        userInput = " " + PREFIX_NAME + Direction.DESCENDING + " " + PREFIX_NAME;
+        expectedCommand = new SortCommand(prefixes, directions);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // single prefix repeated with rest of prefixes unique
-        userInput = PREFIX_CASE_NUMBER + " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER;
-        expectedCommand = new SortCommand(List.of(PREFIX_NAME, PREFIX_CASE_NUMBER));
+        prefixes = List.of(PREFIX_NAME, PREFIX_CASE_NUMBER);
+        directions = List.of(Direction.ASCENDING, Direction.ASCENDING);
+        userInput = " " + PREFIX_CASE_NUMBER + Direction.DESCENDING + " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER;
+        expectedCommand = new SortCommand(prefixes, directions);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        userInput = PREFIX_NAME + " " + PREFIX_CASE_NUMBER + " " + PREFIX_NAME;
-        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER, PREFIX_NAME));
+        prefixes = List.of(PREFIX_CASE_NUMBER, PREFIX_NAME);
+        directions = List.of(Direction.ASCENDING, Direction.ASCENDING);
+        userInput = " " + PREFIX_NAME + Direction.DESCENDING + " " + PREFIX_CASE_NUMBER + " " + PREFIX_NAME;
+        expectedCommand = new SortCommand(prefixes, directions);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // multiple prefix repeated
-        userInput = PREFIX_NAME + " " + PREFIX_CASE_NUMBER + " " + PREFIX_NAME + " " + PREFIX_NAME + " "
-                + PREFIX_CASE_NUMBER + " " + PREFIX_NAME;
-        expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER, PREFIX_NAME));
+        // multiple prefixes repeated
+        prefixes = List.of(PREFIX_CASE_NUMBER, PREFIX_NAME);
+        directions = List.of(Direction.ASCENDING, Direction.DESCENDING);
+        userInput = " " + PREFIX_NAME
+                + " " + PREFIX_CASE_NUMBER + Direction.DESCENDING
+                + " " + PREFIX_NAME + Direction.ASCENDING
+                + " " + PREFIX_NAME
+                + " " + PREFIX_CASE_NUMBER
+                + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING
+                + " " + PREFIX_NAME + Direction.DESCENDING;
+        expectedCommand = new SortCommand(prefixes, directions);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 

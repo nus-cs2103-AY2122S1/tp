@@ -1,13 +1,16 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
@@ -22,68 +25,95 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all persons in the contact list. "
-            + "At least one prefix must be provided.\n"
+            + "At least one prefix must be provided. Specifying the sort direction is optional.\n"
+            + "Direction \"" + Direction.ASCENDING + "\" indicates ascending order and \""
+            + Direction.DESCENDING + "\" indicates descending order. "
+            + "By default, prefixes are sorted in ascending order.\n"
             + "Parameters: "
-            + "[" + PREFIX_NAME + "] "
-            + "[" + PREFIX_CASE_NUMBER + "]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " "
-            + PREFIX_CASE_NUMBER;
+            + "[" + PREFIX_NAME + "DIRECTION] "
+            + "[" + PREFIX_CASE_NUMBER + "DIRECTION]\n"
+            + "Examples: \"" + COMMAND_WORD + " " + PREFIX_NAME + Direction.DESCENDING + "\""
+            + ", \"" + COMMAND_WORD + " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING + "\"";
 
     public static final String MESSAGE_SUCCESS = "All persons sorted by %s";
 
     public static final List<Prefix> SUPPORTED_PREFIXES = Arrays.asList(PREFIX_NAME, PREFIX_CASE_NUMBER);
 
+    public enum Direction {
+        ASCENDING("asc"),
+        DESCENDING("dsc");
+
+        final String code;
+
+        Direction(String code) {
+            this.code = code;
+        }
+
+        @Override
+        public String toString() {
+            return code;
+        }
+    };
+
     private final List<Prefix> prefixes;
+    private final List<Direction> directions;
 
     /**
      * Creates a SortCommand to sort by the specified fields in {@code args}
      */
-    public SortCommand(List<Prefix> prefixes) {
+    public SortCommand(List<Prefix> prefixes, List <Direction> directions) {
+        requireAllNonNull(prefixes);
+        requireAllNonNull(directions);
         assert prefixes.size() > 0; // prefixes is non-empty
+        assert prefixes.size() == prefixes.stream().distinct().count(); // prefixes are distinct
         assert SUPPORTED_PREFIXES.containsAll(prefixes); // all prefixes are supported
-        assert prefixes.size() == prefixes.stream().distinct().count(); // all prefixes are distinct
+        assert prefixes.size() == directions.size(); // prefixes and directions are of the same size
+
         this.prefixes = prefixes;
+        this.directions = directions;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        Stream<Comparator<Person>> sortComparators = prefixes.stream().map(SortCommand::convertPrefix);
-        Comparator<Person> comparator = sortComparators.reduce(Comparator.naturalOrder(), (
-            accComparator,
-            nextComparator
-        ) -> nextComparator.thenComparing(accComparator));
+        Comparator<Person> comparator = IntStream.range(0, prefixes.size())
+                .mapToObj(i -> buildComparator(prefixes.get(i), directions.get(i)))
+                .reduce(Comparator.naturalOrder(), (accComparator, nextComparator)
+                    -> nextComparator.thenComparing(accComparator));
         model.updateSortedPersonList(comparator);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, prefixes));
+        String sortsString = IntStream.range(0, prefixes.size())
+                .mapToObj(i -> prefixes.get(i).toString() + directions.get(i))
+                .collect(Collectors.joining(" "));
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sortsString));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof SortCommand // instanceof handles nulls
-                && prefixes.equals(((SortCommand) other).prefixes));
+                && prefixes.equals(((SortCommand) other).prefixes)
+                && directions.equals(((SortCommand) other).directions));
     }
 
     /**
-     * Converts {@code prefix} into a {@code Comparator<Person>} based on the natural order of
-     * the respective field.
+     * Builds a {@code Comparator<Person>} based on the natural order of the
+     * specified {@code prefix} and its respective {@code direction}.
      */
-    private static Comparator<Person> convertPrefix(Prefix prefix) {
-        requireNonNull(prefix);
+    private static Comparator<Person> buildComparator(Prefix prefix, Direction direction) {
+        requireAllNonNull(prefix, direction);
+        assert SUPPORTED_PREFIXES.contains(prefix);
 
-        if (!SUPPORTED_PREFIXES.contains(prefix)) {
-            throw new IllegalArgumentException(String.format("Sorting by prefix %s is not supported.", prefix));
-        }
+        Function<Person, Comparable> keyFunction = prefix.equals(PREFIX_NAME)
+                ? Person::getName
+                : prefix.equals(PREFIX_CASE_NUMBER)
+                ? Person::getCaseNumber
+                : null;
+        requireNonNull(keyFunction);
 
-        if (prefix.equals(PREFIX_NAME)) {
-            return Comparator.comparing(Person::getName);
-        } else if (prefix.equals(PREFIX_CASE_NUMBER)) {
-            return Comparator.comparing(Person::getCaseNumber);
-        }
-
-        throw new IllegalStateException(String.format("Prefix %s should match one of the supported prefixes.", prefix));
+        Comparator<Person> comparator = Comparator.comparing(keyFunction);
+        return direction == Direction.ASCENDING ? comparator : comparator.reversed();
     }
 }
