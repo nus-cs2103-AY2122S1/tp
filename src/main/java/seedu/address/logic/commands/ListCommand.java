@@ -57,4 +57,16 @@ public class ListCommand extends Command {
             return new CommandResult(String.format(MESSAGE_SUCCESS_INCOMING, "week"));
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ListCommand that = (ListCommand) o;
+
+        if (isIncoming != that.isIncoming) return false;
+        return isNextMonth == that.isNextMonth;
+    }
+
 }
