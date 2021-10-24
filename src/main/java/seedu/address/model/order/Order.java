@@ -1,6 +1,7 @@
 package seedu.address.model.order;
 
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 
 public class Order implements Comparable<Order> {
     private static final String idPrefix = "SO";
@@ -10,16 +11,18 @@ public class Order implements Comparable<Order> {
     private long id;
     private Amount amount;
     private Date date;
+    private Label label;
     private boolean isComplete;
 
     /**
      * Constructor creates an Order related to the customer, due on the given date, with the given amount.
      * isComplete flag is set to False initially, and the id is automatically assigned.
      */
-    public Order(Customer customer, Date date, Amount amount) {
+    public Order(Label label, Customer customer, Date date, Amount amount) {
         this.customer = customer;
         this.date = date;
         this.amount = amount;
+        this.label = label;
         this.id = Order.count;
         this.isComplete = false;
 
@@ -54,6 +57,14 @@ public class Order implements Comparable<Order> {
         return this.customer;
     }
 
+    public Label getLabel() {
+        return this.label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
     public long getId() {
         return this.id;
     }
@@ -80,6 +91,22 @@ public class Order implements Comparable<Order> {
         return Double.parseDouble(amount.toString());
     }
 
+    /**
+     * Returns true if both orders have the same customer, date and amount.
+     * This defines a weaker notion of equality between two orders.
+     */
+    public boolean isSameOrder(Order otherOrder) {
+        if (otherOrder == this) {
+            return true;
+        }
+
+        return otherOrder != null
+                && otherOrder.getCustomer().equals(getCustomer())
+                && otherOrder.getDate().equals(getDate())
+                && otherOrder.getAmount().equals(getAmount())
+                && otherOrder.getLabel().equals(getLabel());
+    }
+
     // Order string representation is temporary, change as necessary for UI.
     @Override
     public String toString() {
@@ -91,6 +118,8 @@ public class Order implements Comparable<Order> {
         }
         builder.append("ID: " + idPrefix)
                 .append(getId())
+                .append("; Label: ")
+                .append(getLabel())
                 .append("; Customer: ")
                 .append(getCustomer())
                 .append("; Amount: ")
@@ -115,7 +144,9 @@ public class Order implements Comparable<Order> {
         Order otherOrder = (Order) other;
         return otherOrder.getCustomer().equals(getCustomer())
                 && otherOrder.getDate().equals(getDate())
-                && otherOrder.getAmount().equals(getAmount());
+                && otherOrder.getAmount().equals(getAmount())
+                && otherOrder.getId() == getId()
+                && otherOrder.getLabel().equals(getLabel());
 
     }
 

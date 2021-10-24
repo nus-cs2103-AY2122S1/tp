@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CUSTOMER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LABEL;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,10 +16,12 @@ public class AddOrderCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an order to the application. "
             + "Parameters: "
+            + PREFIX_LABEL + "LABEL "
             + PREFIX_CUSTOMER + "CUSTOMER "
             + PREFIX_AMOUNT + "AMOUNT "
             + PREFIX_DATE + "DATE\n"
             + "Example: " + COMMAND_WORD + " "
+            + PREFIX_LABEL + "School uniform "
             + PREFIX_CUSTOMER + "Alice "
             + PREFIX_AMOUNT + "10.90 "
             + PREFIX_DATE + "20th August 2021";
@@ -39,14 +42,14 @@ public class AddOrderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.addOrder(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd), CommandResult.DisplayState.ORDER);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof AddOrderCommand
-                && toAdd.equals(((AddOrderCommand) other).toAdd));
+                && toAdd.isSameOrder(((AddOrderCommand) other).toAdd));
     }
 
 }

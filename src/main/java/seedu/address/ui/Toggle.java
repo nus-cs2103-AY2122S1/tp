@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Region;
 
 /**
@@ -10,6 +11,15 @@ import javafx.scene.layout.Region;
 public class Toggle extends UiPart<Region> {
 
     private static final String FXML = "Toggle.fxml";
+
+    @FXML
+    private ToggleButton clients;
+
+    @FXML
+    private ToggleButton tasks;
+
+    @FXML
+    private ToggleButton orders;
 
     private final Runnable personsToggler;
     private final Runnable tasksToggler;
@@ -27,6 +37,18 @@ public class Toggle extends UiPart<Region> {
         this.personsToggler = personsToggler;
         this.tasksToggler = tasksToggler;
         this.ordersToggler = ordersToggler;
+    }
+
+    public void selectClientTab() {
+        clients.setSelected(true);
+    }
+
+    public void selectTaskTab() {
+        tasks.setSelected(true);
+    }
+
+    public void selectOrderTab() {
+        orders.setSelected(true);
     }
 
     /**

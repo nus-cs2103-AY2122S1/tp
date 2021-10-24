@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,12 +62,27 @@ public class OrderList implements Iterable<Order> {
         internalList.set(index, editedOrder);
     }
 
+
+    public void setOrders(List<Order> orders) {
+        requireAllNonNull(orders);
+
+        internalList.setAll(orders);
+    }
+
     /**
      * Returns true if order is in the OrderList
      */
     public boolean hasOrder(Order order) {
         requireNonNull(order);
         return internalList.stream().anyMatch(order::equals);
+    }
+
+    /**
+     * Returns true if an order in the OrderList have the id
+     */
+    public boolean hasOrder(long id) {
+        System.out.println(id);
+        return internalList.stream().anyMatch(order -> order.getId() == id);
     }
 
     /**

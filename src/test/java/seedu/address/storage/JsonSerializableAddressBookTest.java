@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.testutil.TypicalPersons;
-import seedu.address.testutil.TypicalTasks;
 
 public class JsonSerializableAddressBookTest {
 
@@ -29,9 +28,7 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        AddressBook typicalPersonsAddressBookWithTask = TypicalTasks
-                .addTypicalTasksToAddressBook(typicalPersonsAddressBook);
-        assertEquals(addressBookFromFile, typicalPersonsAddressBookWithTask);
+        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
 
     }
 
@@ -42,12 +39,6 @@ public class JsonSerializableAddressBookTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
-    @Test
-    public void toModelType_invalidTaskFile_throwsIllegalValueException() throws Exception {
-        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(INVALID_TASK_FILE,
-                JsonSerializableAddressBook.class).get();
-        assertThrows(IllegalValueException.class, dataFromFile::toModelType);
-    }
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_PERSON_FILE,
