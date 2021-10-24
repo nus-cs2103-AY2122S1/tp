@@ -2,19 +2,16 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
-import de.jensd.fx.glyphs.GlyphsDude;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
+import com.gluonhq.charm.glisten.control.Icon;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
-import com.gluonhq.charm.glisten.control.Icon;
 
 /**
  * An UI component that displays the important information of a {@code Client}.

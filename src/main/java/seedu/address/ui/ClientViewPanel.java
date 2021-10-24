@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import com.gluonhq.charm.glisten.control.CardPane;
+
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,7 +10,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.client.Client;
-import com.gluonhq.charm.glisten.control.CardPane;
 
 /**
  * Panel that displays the full information of a {@code Client}.
