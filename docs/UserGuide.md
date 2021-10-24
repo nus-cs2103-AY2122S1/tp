@@ -436,7 +436,9 @@ timetable
 *A weekly view of all classes.*
 
 ### 3.11 View today's classes: `today` | `td`
-Displays an overview of all classes happening today.
+Displays an overview of all classes happening today. <br>
+Also, a reminder of classes happening today will be displayed
+when the TutAssistor is reopened.
 
 ![Today view](images/today_view.png)
 *A list of view of all classes happening today.*
