@@ -120,7 +120,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the application.
+Clears all entries (Clients, Tasks, SalesOrder) from the application.
 
 Format: `clear`
 
@@ -132,14 +132,25 @@ Format: `exit`
 
 ### Saving the data
 
-SalesNote data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SalesNote data is saved in the hard disk (As a JSON file) automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-SalesNote data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SalesNote saves each data in a different json file.
+- AddressBook (Clients information) : as a JSON file `[JAR file location]/data/addressbook.json`.
+- TaskBook (Tasks information)  : as a JSON file `[JAR file location]/data/taskBook.json`.
+- OrderBook (Sales order information) : as a JSON file `[JAR file location]/data/orderBook.json`.
+
+Advanced users are welcome to update data directly by editing that data file.
+
+_Example usage_  
+
+1. Open the JSON file in any of your favorite text editor.
+2. Edit the entities in the JSON file as you wish.
+3. Re-open SaleNote and changes should be reflected. 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, SalesNote will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, SalesNote will discard all data related with the incorrect formatted JSON file and start with an empty data file at the next run.
 </div>
 
 ### Listing all tasks: `listtask`
