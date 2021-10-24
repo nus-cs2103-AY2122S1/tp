@@ -51,4 +51,8 @@ public class CsvSerializableAddressBook {
         }
         return addressBook;
     }
+
+    public List<CsvAdaptedPerson> getPersons() {
+        return persons;
+    }
 }

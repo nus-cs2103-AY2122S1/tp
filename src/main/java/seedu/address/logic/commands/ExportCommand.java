@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.storage.CsvAddressBookStorage;
 import seedu.address.storage.JsonAddressBookStorage;
 
 /**
@@ -28,6 +30,8 @@ public class ExportCommand extends Command {
     public static final String MESSAGE_EXPORT_FAILURE = "File with name %s already exists!";
 
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
+
+    public static final String MESSAGE_IMPORT_FILE_WRONG_TYPE = "%s is in the wrong format!";
 
     private final String testPath;
     private final String fileName;
@@ -57,17 +61,38 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Path filePath = Path.of(testPath + fileName);
         ReadOnlyAddressBook currentAddressBook = model.getAddressBook();
-        JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
+
         try {
-            temporaryStorage.exportToJson(currentAddressBook);
+            executeByCase(currentAddressBook);
         } catch (FileAlreadyExistsException faee) {
             throw new CommandException(String.format(MESSAGE_EXPORT_FAILURE, fileName));
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
         return new CommandResult(String.format(MESSAGE_EXPORT_SUCCESS, fileName));
+    }
+
+    private void executeByCase(ReadOnlyAddressBook currentAddressBook) throws CommandException, IOException {
+        if (StringUtil.isJson(fileName)) {
+            exportAddressBookToJson(currentAddressBook);
+        } else if (StringUtil.isCsv(fileName)) {
+            exportAddressBookToCsv(currentAddressBook);
+        } else {
+            throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
+        }
+    }
+
+    private void exportAddressBookToJson(ReadOnlyAddressBook currentAddressBook) throws IOException {
+        Path filePath = Path.of(testPath + fileName);
+        JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
+        temporaryStorage.saveAddressBook(currentAddressBook, filePath);
+    }
+
+    private void exportAddressBookToCsv(ReadOnlyAddressBook currentAddressBook) throws IOException {
+        Path filePath = Path.of(testPath + fileName);
+        CsvAddressBookStorage temporaryStorage = new CsvAddressBookStorage(filePath);
+        temporaryStorage.saveAddressBook(currentAddressBook, filePath);
     }
 
     @Override

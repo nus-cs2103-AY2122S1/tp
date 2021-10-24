@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -19,6 +21,7 @@ import seedu.address.model.tag.Tag;
 /**
  * A Jackson-CSV-Friendly version of {@link Person}
  */
+@JsonPropertyOrder({"name", "github", "telegram", "address", "phone", "tags"}) // Ensures correct sequence in csv
 public class CsvAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -29,22 +32,20 @@ public class CsvAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<CsvAdaptedTag> tagged = new ArrayList<>();
+    private final String tagged;
 
     /**
      * Constructs a {@code CsvAdaptedPerson} with the given person details.
      */
     public CsvAdaptedPerson(String name, String telegram, String github, String phone,
-            String email, String address, List<CsvAdaptedTag> tagged) {
+            String email, String address, String tagged) {
         this.name = name;
         this.telegram = telegram;
         this.github = github;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (tagged != null) {
-            this.tagged.addAll(tagged);
-        }
+        this.tagged = tagged;
     }
 
     /**
@@ -57,9 +58,11 @@ public class CsvAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        tagged.addAll(source.getTags().stream()
-                .map(CsvAdaptedTag::new)
-                .collect(Collectors.toList()));
+        List<String> tagsString = source.getTags()
+                .stream()
+                .map(tag -> tag.tagName)
+                .collect(Collectors.toList());
+        tagged = String.join(" ", tagsString);
     }
 
     /**
@@ -68,9 +71,12 @@ public class CsvAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (CsvAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+        List<Tag> personTags = new ArrayList<>();
+        if (!tagged.equals("")) {
+            String[] stringTags = tagged.split(" ");
+            for (String tagString : stringTags) {
+                personTags.add(new Tag(tagString));
+            }
         }
 
         if (name == null) {
