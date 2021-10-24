@@ -38,7 +38,7 @@ public class ReminderLessonCard extends UiPart<Region> {
         this.lesson = lesson;
         this.lessonTitle.setText(lessonTitle);
         lessonId.setText(displayedIndex + ". ");
-        date.setText("Date: " + lesson.getDate().value);
+        date.setText("Date: " + lesson.getDisplayDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());
         lesson.getHomework().stream()

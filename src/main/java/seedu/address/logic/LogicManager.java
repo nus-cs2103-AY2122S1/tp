@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.Entry;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -70,6 +71,19 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return model.getFilteredPersonList();
+    }
+
+    @Override
+    public ObservableList<Lesson> getLessonList(Person student) {
+        ObservableList<Lesson> internalList = FXCollections.observableArrayList();
+        internalList.addAll(student.getLessons());
+        return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    @Override
+    public ObservableList<Lesson> getEmptyLessonList() {
+        ObservableList<Lesson> internalList = FXCollections.observableArrayList();
+        return FXCollections.unmodifiableObservableList(internalList);
     }
 
     @Override

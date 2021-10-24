@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents the result of a command execution.
  */
@@ -23,16 +25,28 @@ public class CommandResult {
     /** The application should exit. */
     private final boolean isExit;
 
+    /** Lesson information of student should be shown to the user. */
+    private final Person student;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isShowSchedule,
-                         boolean isShowReminder, boolean isExit) {
+    private CommandResult(String feedbackToUser, boolean isShowHelp, boolean isShowSchedule,
+                         boolean isShowReminder, boolean isExit, Person student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowHelp = isShowHelp;
         this.isShowSchedule = isShowSchedule;
         this.isShowReminder = isShowReminder;
         this.isExit = isExit;
+        this.student = student;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowHelp, boolean isShowSchedule, boolean isShowReminder,
+                         boolean isExit) {
+        this(feedbackToUser, isShowHelp, isShowSchedule, isShowReminder, isExit, null);
     }
 
     /**
@@ -40,7 +54,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, false);
+        this(feedbackToUser, false, false, false, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code student},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, Person student) {
+        this(feedbackToUser, false, false, false, false, student);
     }
 
     public String getFeedbackToUser() {
@@ -61,6 +83,14 @@ public class CommandResult {
 
     public boolean isShowReminder() {
         return isShowReminder;
+    }
+
+    public boolean isDisplayStudent() {
+        return student != null;
+    }
+
+    public Person getStudent() {
+        return student;
     }
 
     public boolean isExit() {
