@@ -8,7 +8,9 @@
     "salary": "900000",
     "status": "fulltime",
     "tagged": [ "friends" ],
-    "schedule": ""
+    "schedule": {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    }
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
@@ -17,6 +19,8 @@
     "role": [ "bartender" ],
     "salary": "850000",
     "status": "fulltime",
-    "schedule": ""
+    "schedule": {
+      "shifts" : [ [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ], [ null, null ] ]
+    }
   } ]
 }

@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -26,8 +27,9 @@ import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
-
+    private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
     private ModelManager modelManager = new ModelManager();
+
 
     @Test
     public void constructor() {
@@ -119,9 +121,9 @@ public class ModelManagerTest {
                 .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
-        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON);
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
         assertThrows(DuplicateShiftException.class, () ->
-                modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON));
+                modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE));
     }
 
     @Test
@@ -131,7 +133,7 @@ public class ModelManagerTest {
                 .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
-        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON);
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
         assertTrue(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON));
     }
 

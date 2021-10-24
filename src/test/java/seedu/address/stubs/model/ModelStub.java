@@ -2,6 +2,7 @@ package seedu.address.stubs.model;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -74,12 +75,13 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate startDate)
+            throws DuplicateShiftException {
         throw new AssertionError("This method should not be called");
     }
 
     @Override
-    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) {
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) {
         throw new AssertionError("This method should not be called");
     }
 

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -178,16 +179,18 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
+    public void addShift(Person target, DayOfWeek dayOfWeek,
+                         Slot slot, LocalDate startDate) throws DuplicateShiftException {
         requireAllNonNull(target, dayOfWeek, slot);
-        target.addShift(dayOfWeek, slot);
+        target.addShift(dayOfWeek, slot, startDate);
 
     }
 
     @Override
-    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
+    public void deleteShift(Person target, DayOfWeek dayOfWeek,
+                            Slot slot, LocalDate endDate) throws NoShiftException {
         requireAllNonNull(target, dayOfWeek, slot);
-        target.removeShift(dayOfWeek, slot);
+        target.removeShift(dayOfWeek, slot, endDate);
     }
 
     @Override

@@ -16,12 +16,14 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
+    private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -67,7 +69,7 @@ public class PersonTest {
                 .withTags("friends").build();
         assertEquals(0, alice.getTotalWeeklyWorkingHour());
 
-        alice.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON);
+        alice.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
         assertEquals(4, alice.getTotalWeeklyWorkingHour());
 
         Schedule newSchedule = new Schedule();

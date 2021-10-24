@@ -1,14 +1,29 @@
 package seedu.address.model.person;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import seedu.address.model.EmptyShift;
 
 /**
  * Represents a piece of work for a staff.
  */
 public class Shift {
-    private Slot slot;
-    private DayOfWeek dayOfWeek;
+    public static final String DELIMITER = "-";
+    private static final int NUM_OF_VALUES = 2;
+    private LocalDate startDate;
+
+    protected Slot slot;
+    protected DayOfWeek dayOfWeek;
+    protected List<Period> history = new ArrayList<>();
+    public boolean isWorking;
+
+
+
 
     /**
      * Constructor of Task given its weekday, time, and name.
@@ -19,7 +34,45 @@ public class Shift {
     public Shift(DayOfWeek dayOfWeek, Slot slot) {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
+        this.startDate = LocalDate.now();
+        isWorking = true;
     }
+
+    /**
+     * Creates a shift at {@code dayOfWeek} in {@code Slot slot} at {@code LocalDate startDate}
+     * with a history of changes {@code Set<Shift> history}.
+     */
+    public Shift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate, List<Period> history) {
+        this.dayOfWeek = dayOfWeek;
+        this.slot = slot;
+        this.startDate = startDate;
+        this.history.addAll(history);
+        isWorking = true;
+    }
+
+
+    public Slot getSlot() {
+        return this.slot;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return this.dayOfWeek;
+    }
+
+    public LocalDate getStartDate() {
+        return this.startDate;
+    }
+
+    public List<Period> getHistory() {
+        return Collections.unmodifiableList(history);
+    }
+
+
+    public boolean canRemove(LocalDate endDate) {
+        return this.startDate.isBefore(endDate)
+                || startDate.equals(endDate);
+    }
+
 
     /**
      * Returns whether the shift is happening in the morning.
@@ -48,12 +101,25 @@ public class Shift {
         return dayOfWeek.toString() + "-" + slot.getValue() + ": " + slot.toString();
     }
 
+
     /**
-     * Returns a String representation of the shift that is suitable for json.
+     * Removes this shift by creating an {@code EmptyShift} in the place of it.
      */
-    public String toSaveString() {
-        return dayOfWeek.toString() + "-" + slot.getValue() + " ";
+    public Shift remove(LocalDate endDate) {
+        assert endDate.isAfter(startDate);
+        Period period = new Period(startDate, endDate);
+        this.history.add(period);
+        return new EmptyShift(dayOfWeek, slot, history);
+
     }
+
+    /**
+     * Makes this shift a working shift
+     */
+    public Shift activate(LocalDate startDate) {
+        throw new UnsupportedOperationException("This method should not be called.");
+    }
+
 
     /**
      * Returns if a given string is a valid DayOfWeek.
@@ -67,23 +133,26 @@ public class Shift {
         return false;
     }
 
+
     /**
      * Returns if a given string is a valid shift.
      */
     public static boolean isValidShift(String test) {
-        boolean resultBoolean = false;
         if (test.equals("")) {
             return false;
         }
-        String[] stringSplit = test.split("-");
-        if (stringSplit.length == 2) {
-            String dayString = stringSplit[0];
-            String slotString = stringSplit[1];
-            resultBoolean = isValidDayOfWeek(dayString);
-            resultBoolean &= Slot.isValidSlot(slotString);
+        String[] stringSplit = test.split(DELIMITER);
+        if (stringSplit.length != NUM_OF_VALUES) {
+            return false;
         }
-        return resultBoolean;
+        String dayString = stringSplit[0];
+        String slotString = stringSplit[1];
+        return isValidDayOfWeek(dayString)
+                && Slot.isValidSlot(slotString);
+
     }
+
+
 
     @Override
     public boolean equals(Object other) {
@@ -96,4 +165,7 @@ public class Shift {
         Shift otherShift = (Shift) other;
         return slot.equals(otherShift.slot) && dayOfWeek.equals(otherShift.dayOfWeek);
     }
+
+
+
 }

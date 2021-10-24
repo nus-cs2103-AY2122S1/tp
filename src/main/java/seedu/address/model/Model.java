@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -104,9 +105,10 @@ public interface Model {
      * @param target The target staff.
      * @param dayOfWeek of the shift.
      * @param slot of the shift.
+     * @param startDate The startDate of the shift.
      * @throws DuplicateShiftException Throws when there is already a shift at the target slot.
      */
-    void addShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException;
+    void addShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate startDate) throws DuplicateShiftException;
 
     /**
      * Deletes a shift from a target staff's schedule.
@@ -115,9 +117,10 @@ public interface Model {
      * @param target The target staff.
      * @param dayOfWeek of the shift.
      * @param slot of the shift.
+     * @param endDate The date that the shift ends at.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot) throws NoShiftException;
+    void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) throws NoShiftException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

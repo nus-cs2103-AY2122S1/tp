@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.person.Field.addToFieldSet;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collections;
 import java.util.HashSet;
@@ -161,10 +162,11 @@ public class Person {
      *
      * @param dayOfWeek The day of the shift.
      * @param slot The time slot of the shift.
+     * @param startDate The date the shift starts at.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot) throws DuplicateShiftException {
-        schedule.addShift(dayOfWeek, slot);
+    public void addShift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate) throws DuplicateShiftException {
+        schedule.addShift(dayOfWeek, slot, startDate);
         totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
 
@@ -173,10 +175,11 @@ public class Person {
      *
      * @param dayOfWeek The day of the shift.
      * @param slot The time slot of the shift.
+     * @param endDate The date the shift ends at.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot) throws NoShiftException {
-        schedule.removeShift(dayOfWeek, slot);
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) throws NoShiftException {
+        schedule.removeShift(dayOfWeek, slot, endDate);
     }
 
     public void setSchedule(Schedule schedule) {

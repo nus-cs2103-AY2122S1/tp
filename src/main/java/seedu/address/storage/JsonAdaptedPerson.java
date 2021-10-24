@@ -37,7 +37,7 @@ class JsonAdaptedPerson {
     private final List<JsonAdaptedRole> roles = new ArrayList<>();
     private final String salary;
     private final String status;
-    private final String schedule;
+    private final JsonAdaptedSchedule schedule;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final List<JsonAdaptedPeriod> absentDates = new ArrayList<>();
 
@@ -49,7 +49,7 @@ class JsonAdaptedPerson {
             @JsonProperty("phone") String phone, @JsonProperty("email") String email,
             @JsonProperty("address") String address, @JsonProperty("role") List<JsonAdaptedRole> roles,
             @JsonProperty("salary") String salary, @JsonProperty("status") String status,
-            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") String schedule,
+            @JsonProperty("tagged") List<JsonAdaptedTag> tagged, @JsonProperty("schedule") JsonAdaptedSchedule schedule,
             @JsonProperty("absentDates") List<JsonAdaptedPeriod> absentDates) {
         this.name = name;
         this.phone = phone;
@@ -60,7 +60,11 @@ class JsonAdaptedPerson {
         }
         this.salary = salary;
         this.status = status;
-        this.schedule = schedule;
+        if (schedule != null) {
+            this.schedule = schedule;
+        } else {
+            this.schedule = new JsonAdaptedSchedule(new Schedule());
+        }
         if (tagged != null) {
             this.tagged.addAll(tagged);
         }
@@ -90,7 +94,7 @@ class JsonAdaptedPerson {
         absentDates.addAll(source.getAbsentDates().stream()
                 .map(JsonAdaptedPeriod::new)
                 .collect(Collectors.toList()));
-        schedule = source.getSchedule().toString();
+        schedule = new JsonAdaptedSchedule(source.getSchedule());
 
     }
 
@@ -174,18 +178,11 @@ class JsonAdaptedPerson {
                     Schedule.class.getSimpleName()));
         }
 
-        if (!Schedule.isValidSchedule(schedule.trim())) {
-            throw new IllegalValueException(Schedule.MESSAGE_CONSTRAINTS);
-        }
+
         Schedule modelSchedule;
-        if (schedule.trim().equals("")) {
-            modelSchedule = new Schedule();
-        } else {
-            modelSchedule = new Schedule(schedule.trim());
-        }
+        modelSchedule = schedule.toModelType();
         Person p = new Person(modelName, modelPhone, modelEmail,
                 modelAddress, modelRoles, modelSalary, modelStatus, modelTags, modelPeriods);
-
 
         p.setSchedule(modelSchedule);
         return p;

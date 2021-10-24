@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -26,17 +28,19 @@ public class AddShiftCommand extends Command {
     public static final String COMMAND_WORD = "addShift";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a shift to the staff identified "
-            + "by the index number used in the displayed staff list or the name of staff." + "\n\n"
+            + "by the index number used in the displayed staff list or the name of staff the start"
+            + "date for the shift is optional, without it current date is taken." + "\n\n"
             + "Parameters:\n"
             + PREFIX_DASH_INDEX + " INDEX or "
             + PREFIX_DASH_NAME + " NAME "
-             + PREFIX_DAY_SHIFT + "DAY_AND_SLOT\n\n"
+            + PREFIX_DAY_SHIFT + "DAY_AND_SLOT"
+            + PREFIX_DATE + "START_DATE\n\n"
             + "Example:\n" + COMMAND_WORD + " "
             + PREFIX_DASH_INDEX + " 1 "
             + PREFIX_DAY_SHIFT + "monday-1\n"
             + COMMAND_WORD + " "
             + PREFIX_DASH_NAME + " JOE "
-            + PREFIX_DAY_SHIFT + "TUESDAY-0";
+            + PREFIX_DAY_SHIFT + "TUESDAY-0 " + PREFIX_DATE + "2020-01-01";
 
     public static final String MESSAGE_ADD_SHIFT_SUCCESS = "New shift added to the schedule of %s: %s, %s.";
     public static final String MESSAGE_DUPLICATE_SHIFT = "This shift already exists in the staff's schedule.";
@@ -45,17 +49,19 @@ public class AddShiftCommand extends Command {
     private final Name name;
     private final DayOfWeek dayOfWeek;
     private final Slot slot;
+    private final LocalDate startDate;
 
     /**
      * Creates an AddShiftCommand to add the specified {@code Shift} to a {@code Person}.
      */
-    public AddShiftCommand(Index index, Name name, String shiftDateAndSlot) {
+    public AddShiftCommand(Index index, Name name, String shiftDateAndSlot, LocalDate startDate) {
         requireNonNull(shiftDateAndSlot);
         this.index = index;
         this.name = name;
         String[] strings = shiftDateAndSlot.split("-");
         dayOfWeek = DayOfWeek.valueOf(strings[0].toUpperCase());
         slot = Slot.getSlotByOrder(strings[1]);
+        this.startDate = startDate;
     }
 
     @Override
@@ -83,7 +89,7 @@ public class AddShiftCommand extends Command {
         }
 
         try {
-            model.addShift(staffToEdit, dayOfWeek, slot);
+            model.addShift(staffToEdit, dayOfWeek, slot, startDate);
         } catch (DuplicateShiftException de) {
             throw new CommandException(MESSAGE_DUPLICATE_SHIFT);
         }
