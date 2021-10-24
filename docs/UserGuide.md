@@ -269,14 +269,17 @@ If your changes to the data file make its format invalid, SalesNote will discard
 Shows the total orders for each person in the application. 
 
 <div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the persons.
-If the customer of an order cannot be found among the persons of the application, the order will not be shown.
+:information_source: The total orders displayed are based on the persons in the application.
+If the customer of an order cannot be found among the persons, the order will not be shown.
 </div>
 
-TODO Ui after formatting digits
+![TotalOrdersWindow](images/TotalOrdersWindow.png)
 
 Format: `totalorders`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Press the ESCAPE key to close the total orders window
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
