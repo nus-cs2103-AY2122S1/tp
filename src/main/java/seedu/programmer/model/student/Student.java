@@ -44,7 +44,6 @@ public class Student {
         return name.fullName;
     }
 
-
     public StudentId getStudentId() {
         return studentId;
     }

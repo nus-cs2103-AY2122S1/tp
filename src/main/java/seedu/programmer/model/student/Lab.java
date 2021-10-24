@@ -47,8 +47,8 @@ public class Lab {
         return totalScore;
     }
 
-    public Double updateActualScore(Double value) {
-        return this.actualScore = value;
+    public void updateActualScore(Double value) {
+        this.actualScore = value;
     }
 
     public boolean isMarked() {
