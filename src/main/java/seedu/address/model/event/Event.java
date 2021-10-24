@@ -91,6 +91,10 @@ public class Event implements Comparable<Event> {
         return eventTime.toString();
     }
 
+    public String getTimeDisplayString() {
+        return eventTime.getTimeDisplayString();
+    }
+
     public boolean getDoneValue() {
         return isDone.get();
     }
@@ -159,7 +163,6 @@ public class Event implements Comparable<Event> {
 
     /**
      * Marks the event as done.
-     *
      */
     public void markAsDone() {
         this.isDone.set(true);

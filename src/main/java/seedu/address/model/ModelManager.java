@@ -102,6 +102,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteParticipant(Participant target) {
+        target.deleteFromEvents();
         addressBook.removeParticipant(target);
     }
 

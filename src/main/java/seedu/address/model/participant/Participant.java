@@ -216,6 +216,11 @@ public class Participant {
         for (int i = 0; i < events.size(); i++) {
             events.get(i).replaceParticipant(this, editedParticipant);
         }
+        editedParticipant.getAllEvents(this.events);
+    }
+
+    private void getAllEvents(ArrayList<Event> events) {
+        this.events.addAll(events);
     }
 
     /**
