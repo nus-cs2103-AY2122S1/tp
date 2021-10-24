@@ -14,6 +14,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
+import seedu.address.model.person.ModuleCode;
 
 public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLessonCommand> {
     /**
@@ -26,11 +27,12 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     public DeleteModuleLessonCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput, PREFIX_MODULE_CODE);
         List<String> moduleCodes = argMultimap.getAllValues(PREFIX_MODULE_CODE);
-        if (moduleCodes.size() == 1) {
-            List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
-                    .map(moduleCode -> moduleCode.toString())
-                    .collect(Collectors.toList());
-            return new DeleteModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(listOfModuleCode.get(0)));
+        try {
+            if (!moduleCodes.isEmpty()) {
+                return parseDeleteByModuleCode(moduleCodes);
+            }
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, pe.getMessage()), pe);
         }
         try {
             if (userInput.contains("-")) {
@@ -46,7 +48,17 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
         }
     }
 
-    /*private DeleteModuleLessonCommand parseDeleteByModule(List<String> moduleCodes) throws ParseException {
-
-    }*/
+    private DeleteModuleLessonCommand parseDeleteByModuleCode(List<String> moduleCodes) throws ParseException {
+        List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
+                .map(ModuleCode::toString)
+                .collect(Collectors.toList());
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
+        if (moduleCodes.size() > 1) {
+            throw new ParseException(DeleteModuleLessonCommand.MESSAGE_DELETE_BY_MODULE_CODE_USAGE);
+        }
+        if (!moduleCode.getLessonCodes().isEmpty()) {
+            throw new ParseException(DeleteModuleLessonCommand.MESSAGE_USAGE);
+        }
+        return new DeleteModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(listOfModuleCode.get(0)));
+    }
 }
