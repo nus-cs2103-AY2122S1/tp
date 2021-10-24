@@ -36,16 +36,16 @@ public class GradeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Assigns a grade to the student."
             + "identified by the index number used in the displayed student list. \n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "ASSIGNMENT NAME] "
-            + "[" + PREFIX_SCORE + "SCORE] "
-            + "[" + PREFIX_STATUS + "STATUS] \n"
+            + PREFIX_NAME + "ASSIGNMENT NAME "
+            + PREFIX_SCORE + "SCORE "
+            + PREFIX_STATUS + "STATUS \n"
             + "Status has 3 possible inputs: Not submitted, Submitted or Graded. \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_NAME + "Assignment 2 "
             + PREFIX_SCORE + "73 "
             + PREFIX_STATUS + "Graded ";
 
-    public static final String MESSAGE_SUCCESS = "Graded student %s \nfor assignment %s \nwith grade %s";
+    public static final String MESSAGE_SUCCESS = "Graded student: %s \nfor assignment: %s \nwith grade: %s";
     public static final String MESSAGE_NO_MODULE_SELECTED = "No module selected. Please cd into a module first";
     public static final String MESSAGE_NO_SUCH_ASSIGNMENT = "There is no assignment with this name";
 

@@ -2,6 +2,7 @@ package seedu.edrecord.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.edrecord.logic.parser.AddCommandParser.arePrefixesPresent;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_STATUS;
@@ -29,6 +30,10 @@ public class GradeCommandParser implements Parser<GradeCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SCORE, PREFIX_STATUS);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_SCORE, PREFIX_STATUS)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradeCommand.MESSAGE_USAGE));
+        }
 
         Index index;
 
