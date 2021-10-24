@@ -249,11 +249,30 @@ Formats:\
 
 
 * There are two ways to identify the staff to add the time period to: by their `name` or by their staff `index`.
-* The `fulldayname` field required to specify shifts are not case sensitive.
+* The `fulldayname` field required to specify shifts are not case-sensitive.
+* The start time and end time will be set to the default one (If it's a morning slot, then the period of shift is from
+  10:00 to 16:00; If it's an afternoon slot, then the period of shift is 16:00 to 22:00).
 
 Examples:\
 `addShift -n Candice d/Monday-1` \
 `addShift -i 1234 d/tuesday-0`
+
+### Updating start time and end time for a shift
+
+Updates the start time and end time of a specific shift of a specific staff.
+
+Formats:\
+`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm`
+`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm`
+
+* Start time and end time must follow the format (hh:mm).
+* Start time must be earlier than end time.
+* Both start time and end time must be within the bound (10:00-16:00 for morning slot, 16:00-22:00 for afternoon slot).
+* If the shift does not exist in the staff's schedule, it will be created.
+
+Examples:\
+`setShiftTime -n Candice d/Monday-0 st/10:30-12:30`
+`setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
 
 ### View a staff schedule : `viewSchedule`
 
@@ -347,7 +366,8 @@ Action | Format, Examples
 **Delete** | `delete -n NAME` <br> `delete -i INDEX` <br> `delete -r role` <br> `delete -s STATUS`
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add staff schedule** | `addShift -n NAME d/fullDayName-shiftNumber` <br> `addShift -i INDEX d/fullDayName-shiftNumber`
+**Add staff shift** | `addShift -n NAME d/fullDayName-shiftNumber` <br> `addShift -i INDEX d/fullDayName-shiftNumber`
+**Set shift time** | `setShiftTime -n NAME d/fullDayName-shiftNumber st/hh:mm-hh:mm` <br> `setShiftTime -i INDEX d/fullDayName-shiftNumber st/hh:mm-hh:mm`
 **View staff schedule** | `viewSchedlue -n NAME` <br> `viewSchedlue -i INDEX`
 **Edit staff schedule** | `editShift n/NAME old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/INDEX old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift -n NAME d/fullDayName-shiftNumber` <br> `deleteShift -i INDEX d/fullDayName-shiftNumber`
