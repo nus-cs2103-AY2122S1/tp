@@ -55,7 +55,7 @@ This table below illustrates what each formatting means.
    ![find_command](images/UIUpdated.png)
 
 1. Type the command in the command box and press Enter to execute it.
-   * Refer to the [**Features**](#3-features) below for details of each command.
+   * Refer to the [**Features**](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -173,8 +173,8 @@ Examples:
 Set a task's priority.
 
 Format:
-- <code> <i> tag n/task_name (d/date) tg/level </i> </code>
-- <code> <i> tag task_id (d/date) tg/level </i> </code>
+- <code> tag  <i>n/task_name (d/date) tg/level </i> </code>
+- <code>  tag<i> task_id (d/date) tg/level </i> </code>
 
 Interpretation
 * If <code><i>n/task_name</i></code> field is provided:
