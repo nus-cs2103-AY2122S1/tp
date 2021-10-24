@@ -79,6 +79,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void saveProgrammerError(ProgrammerError pe) {
+        try {
+            storage.saveProgrammerError(pe);
+        } catch (IOException e) {
+            System.out.println("Unexpected error and ProgrammerError is not saved");
+        }
+    }
+
+
+    @Override
     public ReadOnlyProgrammerError getProgrammerError() {
         return model.getProgrammerError();
     }
