@@ -2,18 +2,23 @@ package seedu.address.testutil;
 
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDeadline;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.TaskName;
 
 
 public class TaskBuilder {
 
     public static final String DEFAULT_MODULE = "CS2103";
-    public static final String DEFAULT_NAME = "Assignment 1";
-    public static final String DEFAULT_DEADLINE = "2021-12-31";
+    public static final String DEFAULT_TASK_ID = "T1";
+    public static final String DEFAULT_TASK_NAME = "Assignment 1";
+    public static final String DEFAULT_TASK_DEADLINE = "2021-12-31";
     public static final Boolean DEFAULT_IS_COMPLETE = false;
 
     private ModuleName moduleName;
-    private String name;
-    private String deadline;
+    private TaskId taskId;
+    private TaskName taskName;
+    private TaskDeadline taskDeadline;
     private boolean isComplete;
 
     /**
@@ -21,8 +26,9 @@ public class TaskBuilder {
      */
     public TaskBuilder() {
         moduleName = new ModuleName(DEFAULT_MODULE);
-        name = DEFAULT_NAME;
-        deadline = DEFAULT_DEADLINE;
+        taskId = new TaskId(DEFAULT_TASK_ID);
+        taskName = new TaskName(DEFAULT_TASK_NAME);
+        taskDeadline = new TaskDeadline(DEFAULT_TASK_DEADLINE);
         isComplete = DEFAULT_IS_COMPLETE;
     }
 
@@ -30,9 +36,9 @@ public class TaskBuilder {
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
     public TaskBuilder(Task taskToCopy) {
-        moduleName = taskToCopy.getModuleName();
-        name = taskToCopy.getName();
-        deadline = taskToCopy.getDeadline();
+        moduleName = taskToCopy.getTaskModuleName();
+        taskName = taskToCopy.getTaskName();
+        taskDeadline = taskToCopy.getTaskDeadline();
         isComplete = taskToCopy.isComplete();
     }
 
@@ -45,18 +51,26 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code Id} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withId(String taskId) {
+        this.taskId = new TaskId(taskId);
+        return this;
+    }
+
+    /**
      * Sets the {@code Name} of the {@code Task} that we are building.
      */
-    public TaskBuilder withName(String name) {
-        this.name = name;
+    public TaskBuilder withName(String taskName) {
+        this.taskName = new TaskName(taskName);
         return this;
     }
 
     /**
      * Sets the {@code Deadline} of the {@code Task} that we are building.
      */
-    public TaskBuilder withDeadline(String deadline) {
-        this.deadline = deadline;
+    public TaskBuilder withDeadline(String taskDeadline) {
+        this.taskDeadline = new TaskDeadline(taskDeadline);
         return this;
     }
 
@@ -69,7 +83,7 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(moduleName, name, deadline);
+        return new Task(moduleName, taskId, taskName, taskDeadline);
     }
 
 }

@@ -27,11 +27,13 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
-    @FXML
     private Label id;
     @FXML
-    private Label deadline;
+    private Label taskId;
+    @FXML
+    private Label taskName;
+    @FXML
+    private Label taskDeadline;
     @FXML
     private Label isComplete;
 
@@ -42,8 +44,9 @@ public class TaskCard extends UiPart<Region> {
         super(FXML);
         this.task = task;
         id.setText(displayedIndex + ". ");
-        name.setText(task.getName());
-        deadline.setText(task.getDeadline());
+        taskId.setText(task.getTaskId().value);
+        taskName.setText(task.getTaskName().taskName);
+        taskDeadline.setText(task.getTaskDeadline().value);
         isComplete.setText(task.isComplete() ? "Completed" : "Incomplete");
     }
 
