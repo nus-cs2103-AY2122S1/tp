@@ -93,7 +93,7 @@
     /*-fx-background-color: derive(#1d1d1d, 20%);*/
     -fx-background-color: #d5daf2;
     -fx-padding: 5 0 5 0;
-    -fx-background-radius: 20;
+    -fx-background-radius: 15;
 
 }
 
@@ -147,7 +147,7 @@
 .stack-pane {
      /*-fx-background-color: derive(#1d1d1d, 20%);*/
     -fx-background-color: transparent;
-    -fx-background-radius: 20;
+    -fx-background-radius: 15;
 }
 
 .pane-with-border {
@@ -208,8 +208,16 @@
     -fx-text-fill: #424874;
 }
 
+/*
+Set selection background color when user is not hovering over the menu item.
+Solution adapted from:
+https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
+*/
 .menu-bar {
     -fx-background-color: #8390C9;
+    -fx-selection-bar: #6172BE ;
+    -fx-text-background-color: white ;
+    -fx-focused-text-base-color: white ;
 }
 
 .menu-bar .label {
@@ -231,18 +239,11 @@
 .menu-button:focused {
     -fx-background-color: #6172BE;
     -fx-cursor: hand;
-    -fx-focus-color: transparent;
-}
-
-.menu:hover {
-    -fx-background-color: #6172BE;
-    -fx-cursor: hand;
 }
 
 .menu:focused {
     -fx-background-color: #6172BE;
     -fx-cursor: hand;
-    -fx-focus-color: #6172BE;
 }
 
 .menu-item:hover {
@@ -390,7 +391,7 @@
     -fx-background-color: #A6B1E160;
     -fx-background-insets: 0;
     -fx-border-color: transparent;
-    -fx-background-radius: 20;
+    -fx-background-radius: 12;
     -fx-border-insets: 0;
     -fx-font-family: "Open Sans Light";
     -fx-padding: 7 15 7 15;
@@ -409,7 +410,7 @@
 
 .result-display {
     -fx-background-color: #d5daf2;
-    -fx-background-radius: 20;
+    -fx-background-radius: 15;
     -fx-padding: 5 5 3 5;
 }
 
@@ -464,10 +465,10 @@
 .name_box {
     -fx-background-color: #8390C9;
     -fx-text-fill: white;
-    -fx-background-radius: 20 20 0 0;
+    -fx-background-radius: 15 15 0 0;
     -fx-wrap-text: true;
 }
 
 #lessonListView {
-    -fx-background-radius: 0 0 20 20;
+    -fx-background-radius: 0 0 15 15;
 }

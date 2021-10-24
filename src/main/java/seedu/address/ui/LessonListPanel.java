@@ -18,7 +18,8 @@ import seedu.address.model.person.Person;
  */
 public class LessonListPanel extends UiPart<Region> {
     private static final String FXML = "LessonListPanel.fxml";
-    private static final String PLACEHOLDER_MESSAGE = "Type \"view INDEX\" to "
+    private static final String TITLE_PLACEHOLDER_MESSAGE = "Student Lessons";
+    private static final String LIST_PLACEHOLDER_MESSAGE = "Type \"view INDEX\" to "
             + "view the lessons of the student identified by INDEX in the displayed list.";
     private static final String NO_EXISTING_LESSONS_MESSAGE = "This student has no lessons!";
     private final Logger logger = LogsCenter.getLogger(LessonListPanel.class);
@@ -36,9 +37,10 @@ public class LessonListPanel extends UiPart<Region> {
     public LessonListPanel(ObservableList<Lesson> lessonList) {
         super(FXML);
         initialiseLessonListView(lessonList);
-
-        placeholder.setText(PLACEHOLDER_MESSAGE);
+        lessonListTitle.setText(TITLE_PLACEHOLDER_MESSAGE);
+        placeholder.setText(LIST_PLACEHOLDER_MESSAGE);
         placeholder.visibleProperty().bind(Bindings.isEmpty(lessonListView.getItems()));
+        placeholder.prefWidthProperty().bind(getRoot().widthProperty().multiply(0.65));
     }
 
     /**
