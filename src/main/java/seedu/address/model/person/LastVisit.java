@@ -36,21 +36,21 @@ public class LastVisit {
     /**
      * Returns true if the last visit date is within the last 7 days.
      */
-    public boolean isLastWeek() {
+    public boolean isLastSevenDays() {
         if (value.isEmpty()) {
             return false;
         }
-        return DateTimeUtil.isLastWeek(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
+        return DateTimeUtil.isLastSevenDays(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
     }
 
     /**
      * Returns true if the last visit date is within the last month.
      */
-    public boolean isLastMonth() {
+    public boolean isLastThirtyDays() {
         if (value.isEmpty()) {
             return false;
         }
-        return DateTimeUtil.isLastMonth(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
+        return DateTimeUtil.isLastThirtyDays(LocalDateTime.parse(value, DateTimeUtil.FORMATTER));
     }
 
     /**
