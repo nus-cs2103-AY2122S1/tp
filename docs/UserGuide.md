@@ -8,8 +8,8 @@ title: User Guide
 gitGud is a **desktop application for managing your friends' gaming information**. It uses a gamer-themed **Graphical User Interface 
 (GUI) combined with an optimized Command Line Interface (CLI)** to give you a smooth and efficient experience. 
 
-Keeping track of all of yours friends' gaming information and schedules is difficult and time-consuming.
-With gitGud, there is no need to get tilted(frustrated) by this anymore as **how fast you type determines how fast you manage your gaming contacts**.
+Keeping track of all of yours friends' gaming information and schedules can be difficult and time-consuming.
+With gitGud, there is no need to get tilted(frustrated) by this anymore as **how fast you type determines how fast you can manage your gaming contacts**.
 
 
 * Table of Contents
@@ -62,7 +62,8 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
 
 ### Friend commands  
 
-Commands that involve adding, editing, deleting or viewing of friends in your gitGud friend list.
+This section includes commands that help you manage information regarding the friends you play with, such as 
+adding, editing, deleting or viewing of friends in your gitGud friend list.
 
 #### Adding a friend: `friend --add`
 
@@ -115,7 +116,7 @@ Snapshot:
 
 #### Link games with a friend: `friend --link`
 
-Links game and the associated in-game username for the game to a friend with the provided `FRIEND_ID`.
+Links a game and the associated in-game username for the game to a friend with the provided `FRIEND_ID`.
 
 A link between a particular friend and game shows that the friend plays the game. This association is required for subsequent commands, e.g. for the application to display all games that a friend plays or to recommend a friend to play with based on a particular game.
 
@@ -246,7 +247,8 @@ Snapshot:
 
 ### Game commands
 
-Commands that involve adding, deleting or viewing of games in your gitGud game list.
+This section includes commands that help you manage the games you and your friends play, such as adding, deleting or 
+viewing of games in your gitGud game list.
 
 #### Adding a game: `game --add`
 
@@ -323,7 +325,7 @@ Snapshot:
 
 ### Other commands
 
-Miscellaneous useful commands for the user.
+This section contains miscellaneous commands that may help improve your experience with gitGud.
 
 #### Viewing help: `help`
 
