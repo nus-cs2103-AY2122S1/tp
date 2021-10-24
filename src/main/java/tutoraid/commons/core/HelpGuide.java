@@ -3,6 +3,8 @@ package tutoraid.commons.core;
 public class HelpGuide {
     public static final String EXAMPLE = "Example(s): ";
     public static final String FORMAT = "Format: ";
+    public static final String S_FLAG = "-s";
+    public static final String L_FLAG = "-l";
 
     public static final String USER_GUIDE_TITLE = "TutorAid Quick User Guide";
     public static final String OVERVIEW = "TutorAid is a desktop app for private tutors to match their students’ "
@@ -95,6 +97,17 @@ public class HelpGuide {
     public static final String UNPAID_COMMAND = "unpaid STUDENT_INDEX";
     public static final String UNPAID_EXAMPLE = "unpaid 3";
     public static final String UNPAID_EXAMPLE_DESC = " updates the 3rd student’s payment status to 'unpaid'.";
+
+    public static final String FIND_TITLE = "Locate students or lessons by name";
+    public static final String FIND_DESC1 = "A case-insensitive search is done to find student or lesson names " +
+            "which contain any of the given keywords. Use ";
+    public static final String FIND_DESC2 = " flag to search for students and ";
+    public static final String FIND_DESC3 = " to search for lessons.";
+    public static final String FIND_COMMAND = "find FLAG KEYWORD [MORE_KEYWORDS]";
+    public static final String FIND_S_EXAMPLE = "find -s John";
+    public static final String FIND_S_EXAMPLE_DESC = " returns students who have the word 'john' in their names. ";
+    public static final String FIND_L_EXAMPLE = "find -l Maths";
+    public static final String FIND_L_EXAMPLE_DESC = " returns lessons that have the word 'maths' in their names.";
 
     public static final String CLEAR_TITLE = "Clearing all entries";
     public static final String CLEAR_DESC = "Clears all entries from TutorAid.";

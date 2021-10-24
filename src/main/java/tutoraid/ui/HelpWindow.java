@@ -40,6 +40,15 @@ import static tutoraid.commons.core.HelpGuide.FAQ;
 import static tutoraid.commons.core.HelpGuide.FAQ_TITLE;
 import static tutoraid.commons.core.HelpGuide.FEATURES_NOTES;
 import static tutoraid.commons.core.HelpGuide.FEATURES_TITLE;
+import static tutoraid.commons.core.HelpGuide.FIND_COMMAND;
+import static tutoraid.commons.core.HelpGuide.FIND_DESC1;
+import static tutoraid.commons.core.HelpGuide.FIND_DESC2;
+import static tutoraid.commons.core.HelpGuide.FIND_DESC3;
+import static tutoraid.commons.core.HelpGuide.FIND_L_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.FIND_L_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.FIND_S_EXAMPLE;
+import static tutoraid.commons.core.HelpGuide.FIND_S_EXAMPLE_DESC;
+import static tutoraid.commons.core.HelpGuide.FIND_TITLE;
 import static tutoraid.commons.core.HelpGuide.FORMAT;
 import static tutoraid.commons.core.HelpGuide.FULL_USER_GUIDE;
 import static tutoraid.commons.core.HelpGuide.HELP_COMMAND;
@@ -52,6 +61,7 @@ import static tutoraid.commons.core.HelpGuide.LIST_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.LIST_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.LIST_GENERAL_COMMAND;
 import static tutoraid.commons.core.HelpGuide.LIST_TITLE;
+import static tutoraid.commons.core.HelpGuide.L_FLAG;
 import static tutoraid.commons.core.HelpGuide.OVERVIEW;
 import static tutoraid.commons.core.HelpGuide.PAID_COMMAND;
 import static tutoraid.commons.core.HelpGuide.PAID_DESC;
@@ -62,6 +72,7 @@ import static tutoraid.commons.core.HelpGuide.QUICK_START;
 import static tutoraid.commons.core.HelpGuide.QUICK_START_TITLE;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_DESC;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_TITLE;
+import static tutoraid.commons.core.HelpGuide.S_FLAG;
 import static tutoraid.commons.core.HelpGuide.UNPAID_COMMAND;
 import static tutoraid.commons.core.HelpGuide.UNPAID_DESC;
 import static tutoraid.commons.core.HelpGuide.UNPAID_EXAMPLE;
@@ -136,6 +147,8 @@ public class HelpWindow extends UiPart<Stage> {
     private Label format10;
     @FXML
     private Label format11;
+    @FXML
+    private Label format12;
 
     @FXML
     private Label example;
@@ -157,8 +170,11 @@ public class HelpWindow extends UiPart<Stage> {
     private Label example8;
     @FXML
     private Label example9;
+
     @FXML
-    private Label example10;
+    private Label sFlag;
+    @FXML
+    private Label lFlag;
 
     @FXML
     private Label helpTitle;
@@ -270,6 +286,24 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label unpaidExampleDesc;
 
+    @FXML
+    private Label findTitle;
+    @FXML
+    private Label findCommand;
+    @FXML
+    private Label findDesc1;
+    @FXML
+    private Label findDesc2;
+    @FXML
+    private Label findDesc3;
+    @FXML
+    private Label findSExample;
+    @FXML
+    private Label findSExampleDesc;
+    @FXML
+    private Label findLExample;
+    @FXML
+    private Label findLExampleDesc;
 
     @FXML
     private Label clearTitle;
@@ -337,6 +371,7 @@ public class HelpWindow extends UiPart<Stage> {
         unpaidFeature();
         clearFeature();
         exitFeature();
+        findFeature();
 
         //Setting up the end of the user guide
         savingData();
@@ -576,6 +611,26 @@ public class HelpWindow extends UiPart<Stage> {
         unpaidCommand.setText(UNPAID_COMMAND);
         unpaidExample.setText(UNPAID_EXAMPLE);
         unpaidExampleDesc.setText(UNPAID_EXAMPLE_DESC);
+    }
+
+    /**
+     * Creates the 'find feature' section.
+     */
+    public void findFeature() {
+        format12.setText(FORMAT);
+        example9.setText(EXAMPLE);
+        sFlag.setText(S_FLAG);
+        lFlag.setText(L_FLAG);
+
+        findTitle.setText(FIND_TITLE);
+        findDesc1.setText(FIND_DESC1);
+        findDesc2.setText(FIND_DESC2);
+        findDesc3.setText(FIND_DESC3);
+        findCommand.setText(FIND_COMMAND);
+        findSExample.setText(FIND_S_EXAMPLE);
+        findSExampleDesc.setText(FIND_S_EXAMPLE_DESC);
+        findLExample.setText(FIND_L_EXAMPLE);
+        findLExampleDesc.setText(FIND_L_EXAMPLE_DESC);
     }
 
     /**

@@ -25,7 +25,7 @@
 
 #quickStartTitle, #featuresTitle, #helpTitle, #addSTitle, #listTitle, #delSTitle, #editSTitle, #viewSTitle,
 #addPTitle, #delPTitle, #paidTitle, #unpaidTitle, #clearTitle, #exitTitle, #savingDataTitle, #editDataTitle,
-#faqTitle {
+#findTitle, #faqTitle {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 23;
@@ -41,14 +41,14 @@
 }
 
 #format, #format1, #format2, #format3, #format4, #format5, #format6, #format7, #format8, #format9,
-#format10, #format11 {
+#format10, #format11, #format12 {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
     -fx-label-padding: 2 2 2 2;
 }
 
-#example, #example1, #example2, #example3, #example4, #example5, #example6, #example7, #example8 {
+#example, #example1, #example2, #example3, #example4, #example5, #example6, #example7, #example8, #example9 {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -62,7 +62,7 @@
 }
 
 #listDesc, #addSDesc, #delSDesc, #helpDesc, #editSDesc,#viewSDesc, #addPDesc, #delPDesc, #paidDesc, #unpaidDesc,
-#clearDesc, #exitDesc, #savingDataDesc, #editDataDesc1, #editDataDesc2 {
+#clearDesc, #exitDesc, #savingDataDesc, #editDataDesc1, #editDataDesc2, #findDesc1, #findDesc2, #findDesc3 {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -70,7 +70,7 @@
 }
 
 #delSExampleDesc, #listExampleDesc, #listAExampleDesc, #editSExampleDesc, #viewSExampleDesc, #addPExampleDesc,
-#delPExampleDesc, #paidExampleDesc, #unpaidExampleDesc {
+#delPExampleDesc, #paidExampleDesc, #unpaidExampleDesc, #findSExampleDesc, #findLExampleDesc {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
@@ -93,7 +93,7 @@
 #helpCommand, #addSCommand, #addSExample, #delSCommand, #delSExample, #listGeneralCommand, #listExample,
 #listAExample, #editSCommand, #editSExample, #viewSCommand, #viewSExample, #addPCommand, #addPExample,
 #delPCommand, #delPExample, #paidCommand, #paidExample, #unpaidCommand, #unpaidExample, #clearCommand,
-#exitCommand, #editFilePath {
+#exitCommand, #findCommand, #findSExample, #findLExample, #editFilePath, #sFlag, #lFlag {
     -fx-alignment: top-left;
     -fx-background-color: lavender;
     -fx-font-family: "monospace";

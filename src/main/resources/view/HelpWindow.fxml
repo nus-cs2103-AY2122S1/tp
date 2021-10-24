@@ -154,6 +154,25 @@
                         <Label fx:id="unpaidExample" text="Label" wrapText="true"/>
                         <Label fx:id="unpaidExampleDesc" text="Label" wrapText="true"/>
                     </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="findTitle" text="Label" wrapText="true"/>
+                        <Label fx:id="findDesc1" text="Label" wrapText="true"/>
+                        <Label fx:id="sFlag" text="Label" wrapText="true"/>
+                        <Label fx:id="findDesc2" text="Label" wrapText="true"/>
+                        <Label fx:id="lFlag" text="Label" wrapText="true"/>
+                        <Label fx:id="findDesc3" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="format12" text="Format: " wrapText="true"/>
+                        <Label fx:id="findCommand" text="Label" wrapText="true"/>
+                    </TextFlow>
+                    <TextFlow>
+                        <Label fx:id="example9" text="Label" wrapText="true"/>
+                        <Label fx:id="findSExample" text="Label" wrapText="true"/>
+                        <Label fx:id="findSExampleDesc" text="Label" wrapText="true"/>
+                        <Label fx:id="findLExample" text="Label" wrapText="true"/>
+                        <Label fx:id="findLExampleDesc" text="Label" wrapText="true"/>
+                    </TextFlow>
 
                     <Label fx:id="clearTitle" text="Label" wrapText="true"/>
                     <Label fx:id="clearDesc" text="Label" wrapText="true"/>
