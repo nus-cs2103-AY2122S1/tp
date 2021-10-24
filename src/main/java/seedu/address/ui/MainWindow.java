@@ -166,17 +166,17 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public void fillMemberListPanel() {
+    private void fillMemberListPanel() {
         memberListPanel = new MemberListPanel(logic.getFilteredMemberList());
         memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
     }
 
-    public void fillEventListPanel() {
+    private void fillEventListPanel() {
         eventListPanel = new EventListPanel(logic.getFilteredEventList());
         eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
     }
 
-    public void fillTaskListPanel() {
+    private void fillTaskListPanel() {
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
     }
