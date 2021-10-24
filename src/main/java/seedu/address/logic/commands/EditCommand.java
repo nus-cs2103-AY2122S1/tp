@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -97,7 +99,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editParticipantDescriptor.getEmail().orElse(participantToEdit.getEmail());
         Address updatedAddress = editParticipantDescriptor.getAddress().orElse(participantToEdit.getAddress());
         BirthDate updatedBirthDate = editParticipantDescriptor.getBirthDate().orElse(participantToEdit.getBirthDate());
-        ArrayList<NextOfKin> updatedNextOfKins =
+        ObservableList<NextOfKin> updatedNextOfKins =
                 editParticipantDescriptor.getNextOfKins().orElse(participantToEdit.getNextOfKins());
 
         if (isIdUnchanged(participantToEdit.getName(), updatedName)) {
@@ -149,7 +151,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private BirthDate birthDate;
-        private ArrayList<NextOfKin> nextOfKins;
+        private ObservableList<NextOfKin> nextOfKins;
 
         public EditParticipantDescriptor() {
         }
@@ -213,12 +215,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(birthDate);
         }
 
-        public void setNextOfKins(ArrayList<NextOfKin> nextOfKins) {
-            this.nextOfKins = (nextOfKins != null) ? new ArrayList<>(nextOfKins) : null;
+        public void setNextOfKins(ObservableList<NextOfKin> nextOfKins) {
+            this.nextOfKins = (nextOfKins != null) ?  FXCollections.observableArrayList(nextOfKins) : null;
         }
 
-        public Optional<ArrayList<NextOfKin>> getNextOfKins() {
-            return (nextOfKins != null) ? Optional.of(new ArrayList<>((nextOfKins))) : Optional.empty();
+        public Optional<ObservableList<NextOfKin>> getNextOfKins() {
+            return (nextOfKins != null) ? Optional.of( FXCollections.observableArrayList((nextOfKins))) : Optional.empty();
 
         }
 

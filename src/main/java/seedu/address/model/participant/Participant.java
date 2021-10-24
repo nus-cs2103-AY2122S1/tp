@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 
 /**
@@ -25,7 +27,7 @@ public class Participant {
     private final Address address;
     private final ParticipantId id;
     private final BirthDate birthDate;
-    private final ArrayList<NextOfKin> nextOfKins = new ArrayList<>();
+    private final ObservableList<NextOfKin> nextOfKins = FXCollections.observableArrayList();
 
     private final ArrayList<Event> events = new ArrayList<>();
 
@@ -125,7 +127,7 @@ public class Participant {
      *
      * @return this object's nextOfKins.
      */
-    public ArrayList<NextOfKin> getNextOfKins() {
+    public ObservableList<NextOfKin> getNextOfKins() {
         return nextOfKins;
     }
 

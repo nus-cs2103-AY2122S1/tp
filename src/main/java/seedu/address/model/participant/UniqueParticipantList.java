@@ -3,11 +3,14 @@ package seedu.address.model.participant;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.participant.exceptions.DuplicateParticipantException;
 import seedu.address.model.participant.exceptions.ParticipantNotFoundException;
 
@@ -25,7 +28,8 @@ import seedu.address.model.participant.exceptions.ParticipantNotFoundException;
  */
 public class UniqueParticipantList implements Iterable<Participant> {
 
-    private final ObservableList<Participant> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Participant> internalList = FXCollections.observableList(
+            new ArrayList<>(), (Participant p) -> new Observable[]{p.getNextOfKins()});
     private final ObservableList<Participant> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
 
