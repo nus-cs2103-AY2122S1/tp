@@ -65,6 +65,7 @@ public class Student {
      * */
     public void addLabResult(Lab result) {
         this.labResultList.add(result);
+        labResultList.sort(new SortByLabName());
     }
 
     /**
