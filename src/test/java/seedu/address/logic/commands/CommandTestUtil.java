@@ -31,7 +31,7 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
 
-    public static final String VALID_GROUP_NAME = "CS2103T";
+    public static final String VALID_GROUP_NAME_CS2103T = "CS2103T";
     public static final String VALID_GROUP_NAME_CS1231S = "CS1231S";
     public static final String VALID_GROUP_NAME_CS1101S = "CS1101S";
     public static final String VALID_GROUP_NAME_CS2030S = "CS2030S";

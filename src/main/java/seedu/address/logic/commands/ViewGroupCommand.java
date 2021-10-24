@@ -19,8 +19,8 @@ public class ViewGroupCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds and displays details about a group that matches "
             + "the specified group name (case-sensitive).\n"
-            + "Parameters: GROUPNAME \n"
-            + "Example: " + COMMAND_WORD + " CS2103T";
+            + "Parameters: g/GROUPNAME \n"
+            + "Example: " + COMMAND_WORD + " g/CS2103T";
 
     private final ContainsGroupNamePredicate predicate;
 
