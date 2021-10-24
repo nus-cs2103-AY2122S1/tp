@@ -14,6 +14,27 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Quick Start
+
+1. Ensure you have Java `11` or above installed on your computer.
+You may install Java `11` from [here](https://www.oracle.com/java/technologies/downloads/#java11).
+2. Download the latest `SalesNote.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-3/tp/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for your SalesNote.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
+The app provides some sample data to help you get started.
+![Ui](images/UiFirstLaunch.png)
+5. Type the command in the command box and press Enter to execute it.
+e.g. typing `**listtask**` and pressing Enter will list all tasks.
+Some example commands you can try:
+   * `**list**`: List all clients.
+   * `**add** n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
+   * `**delete** 2`: Deletes the 2nd client shown in the current client list.
+   * `**clear**`: Deletes all clients.
+   * `**exit**`: Exits the app.
+6. Refer to the [Features](#features) below to learn more about the commands.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -120,6 +141,22 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Clearing all entries : `clear`
+
+Clears all entries (Clients, Tasks, SalesOrder) from the application.
+
+Format: `clear`
+
+### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+### Saving the data
+
+SalesNote data is saved in the hard disk (As a JSON file) automatically after any command that changes the data. There is no need to save manually.
+=======
 ## Task Commands
 
 <div markdown="block" class="alert alert-info">
@@ -210,7 +247,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the application.
+Clears all entries (Clients, Tasks, SalesOrder) from the application.
 
 Format: `clear`
 
@@ -222,15 +259,25 @@ Format: `exit`
 
 ### Saving the data
 
-SalesNote data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SalesNote data is saved in the hard disk (As a JSON file) automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-SalesNote data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SalesNote saves each data in a different json file.
+- AddressBook (Clients information) : as a JSON file `[JAR file location]/data/addressbook.json`.
+- TaskBook (Tasks information)  : as a JSON file `[JAR file location]/data/taskBook.json`.
+- OrderBook (Sales order information) : as a JSON file `[JAR file location]/data/orderBook.json`.
+
+Advanced users are welcome to update data directly by editing that data file.
+
+_Example usage_
+
+1. Open the JSON file in any of your favorite text editor.
+2. Edit the entities in the JSON file as you wish.
+3. Re-open SaleNote and changes should be reflected.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, SalesNote will discard all data and start with an empty data file at the next run.
-</div>
+If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
