@@ -141,7 +141,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-<<<<<<< HEAD
 ### Clearing all entries : `clear`
 
 Clears all entries (Clients, Tasks, SalesOrder) from the application.
@@ -278,9 +277,7 @@ _Example usage_
 3. Re-open SaleNote and changes should be reflected.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, SalesNote will discard all data related with the incorrect formatted JSON file and start with an empty data file at the next run.
-</div>
-ing that data file.
+If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
