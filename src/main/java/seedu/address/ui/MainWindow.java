@@ -33,6 +33,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private MemberListPanel memberListPanel;
     private EventListPanel eventListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane eventListPanelPlaceholder;
+
+    @FXML
+    private StackPane taskListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -114,20 +118,12 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        memberListPanel = new MemberListPanel(logic.getFilteredMemberList());
-        memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
-
-        eventListPanel = new EventListPanel(logic.getFilteredEventList());
-        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        fillMemberListPanel();
+        fillEventListPanel();
+        fillTaskListPanel();
+        fillResultDisplay();
+        fillStatusBarFooter();
+        fillCommandBox();
     }
 
     /**
@@ -170,12 +166,34 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public MemberListPanel getMemberListPanel() {
-        return memberListPanel;
+    public void fillMemberListPanel() {
+        memberListPanel = new MemberListPanel(logic.getFilteredMemberList());
+        memberListPanelPlaceholder.getChildren().add(memberListPanel.getRoot());
     }
 
-    public EventListPanel getEventListPanel() {
-        return eventListPanel;
+    public void fillEventListPanel() {
+        eventListPanel = new EventListPanel(logic.getFilteredEventList());
+        eventListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+    }
+
+    public void fillTaskListPanel() {
+        taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+    }
+
+    private void fillResultDisplay() {
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+    }
+
+    private void fillStatusBarFooter() {
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+    }
+
+    private void fillCommandBox() {
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     /**
