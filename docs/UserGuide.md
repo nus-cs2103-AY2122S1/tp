@@ -93,7 +93,7 @@ This User Guide will help you set up your contact list and familiarise yourself 
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-  
+
 *Duplicate contact names are not allowed
   e.g. if there exists a contact named ‘Marina Bay Sands’, adding or editing a contact with the name ‘Marina Bay Sands’ is not allowed.<br>
 
@@ -129,7 +129,7 @@ A contact can have a review
 
 Examples:
 * `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4`
-  
+
 Expected Outcome for `add c/att n/Singapore Flyers p/92345678 e/123@example.com a/30 Raffles Ave, Singapore 039803 ra/4` :
 ![Add](images/add.png)
 
@@ -156,7 +156,7 @@ Examples:
 *  `edit 1 p/92345678 e/Mandarin_Oriental@example.com` Edits the phone number and email address of the 1st contact to be `92345678` and `Mandarin_Oriental@example.com` respectively
 *  `edit 2 n/Marina Bay Sands t/` Edits the name of the 2nd contact to be `Marina Bay Sands` and clears all existing tags
 * `edit 3 ra/3` Edits the rating of the 3rd contact to be `3`
-  
+
 Expected Outcome for `edit 1 p/92345678 e/Mandarin_Oriental@example.com`:
 
 Before:
@@ -181,7 +181,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find hotel` returns `D’ Hotel` and `Shangri-La Hotels and Resorts`
 * `find bay` returns `Gardens by the Bay` and `Marina Bay Sands`
-  
+
 Expected Outcome for `find bay`:
 
 ![EditBefore](images/find.png)
@@ -238,7 +238,7 @@ Examples:
 * `filter c/acc c/fnb` returns Mandarin Oriental, Hotel81, and KFC (all accommodation and F&B contacts)
 * `filter ra/3` returns all contacts with 3-star rating from all categories
 * `filter c/fnb ra/3` returns all F&B contacts with 3-star rating
-  
+
 Expected Outcome for `filter c/fnb`:
 
 ![EditBefore](images/filter.png)
@@ -356,14 +356,14 @@ WhereTourGo data is saved as a JSON file `[JAR file location]/data/addressbook.j
 <div markdown="span" class="alert alert-warning">:exclamation: Caution:
 If your changes to the data file makes its format invalid, WhereTourGo will discard all data and start with an empty data file at the next run.
 </div>
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous WhereTourGo home folder.
- 
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
@@ -385,4 +385,3 @@ Action | Format, Examples
 **Command Summary** | `cmd`
 **Help** | `help`
 **Exit** | `exit`
- 
