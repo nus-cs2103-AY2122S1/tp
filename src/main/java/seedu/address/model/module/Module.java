@@ -166,7 +166,7 @@ public class Module {
     }
 
     public void deleteTask(Task task) {
-        tasks.remove(task);
+        taskList.remove(task);
     }
 
     /**

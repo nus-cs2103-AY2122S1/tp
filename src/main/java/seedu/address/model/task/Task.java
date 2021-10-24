@@ -66,8 +66,9 @@ public class Task {
         }
 
         return otherTask != null
-                && otherTask.getTaskName().equals(this.getTaskName())
-                && otherTask.getModuleNameString().equals(this.getModuleNameString());
+                //&& otherTask.getTaskName().equals(this.getTaskName())
+                && otherTask.getModuleNameString().equals(this.getModuleNameString())
+                && otherTask.getTaskId().equals(this.getTaskId());
     }
 
     /**
@@ -110,7 +111,8 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getModuleNameString().equals(getModuleNameString())
-                && otherTask.getTaskName().equals(getTaskName());
+                && otherTask.getTaskName().equals(getTaskName())
+                && otherTask.getTaskId().equals(getTaskId());
     }
 
     @Override
