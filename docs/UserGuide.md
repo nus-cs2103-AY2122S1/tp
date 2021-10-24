@@ -13,7 +13,7 @@ a Command Line Interface** (CLI) while still having the benefits of a Graphical 
 If you are faster at typing, CSBook can get your student management tasks done faster than traditional 
 GUI applications. 
 
-Some of the main features of our application include the storing of students in the database, 
+The main features of our application include the storing of students in the database, 
 creating groups and assigning students to groups, as well as the management of groups.
 
 * Table of Contents
@@ -66,7 +66,10 @@ creating groups and assigning students to groups, as well as the management of g
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME t/TELEGRAM_HANDLE`, `t/TELEGRAM_HANDLE n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* Optional parameters/fields will be indicated within square brackets.
+  e.g. if the command specifies `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUP_NAME]`, `edit 1 n/Jiaxian` or `edit 1 n/Jiaxian t/@albino_monkey e/e0540014X@u.nus.edu g/CS2103T` are both acceptable commands
+
+* If a parameter is expected only once in the command but if you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/albino_monkii t/albino_api`, only `t/albino_api` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
@@ -80,7 +83,7 @@ creating groups and assigning students to groups, as well as the management of g
 
 #### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -110,6 +113,9 @@ CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.
 </div>
 
+**:warning: Do not intentionally change the data file in order to restart CSBook afresh with an empty data file. You should use the 
+`clear` command instead if you want to clear all currently stored data.**
+
 ### Student management features
 
 **:information_source: Listed in this section are all the features and commands related to 
@@ -122,8 +128,8 @@ Adds a student to the CSBook.
 
 Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
 
-* Adds the student into CSBook as well as the group it is assigned
-* The group must exist before the student is created. Each student must never not belong to a group
+* Adds a new student into CSBook.
+* The group must exist before the student is created. Each student must belong to at least one group.
 
 Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
@@ -150,18 +156,18 @@ Examples:
 *  `edit 1 t/@albino_monkey e/e0540014X@u.nus.edu` Edits the telegram handle and email address of the 1st student to be `@albino_monkey` and `e0540014X@u.nus.edu` respectively.
 *  `edit 2 n/Jiaxian` Edits the name of the 2nd student to be `Jiaxian`.
 
-#### Locating students by name: `find`
+#### Finding students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. `Han` will not match `Hans`.
+* Students matching at least one keyword (if several were given) will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 * `find John` returns `john` and `John Doe`
@@ -188,13 +194,14 @@ Examples:
 
 **:information_source: Listed in this section are all the features and commands related to
 managing groups that students can be assigned to in CSBook. Groups allow you to put students
-that match some similar criteria into the same category for easier lookup and management.**<br>
+that match some similar criteria into the same category for easier lookup and management of students.**<br>
 
 **:bulb: You may use groups in any way that best suits your needs! You may split students by
 module/tutorial group if you're teaching more than one module/class. You may also split students
-within the same class into students who require little help vs those who need extra help.**
+within the same class into students who require little help vs those who need extra help to assist you
+in distributing your attention to these different groups of students.**
 
-#### View details of a group
+#### Viewing details of a group
 Finds and displays details about a group, including the group description,
 number of students and some details about each student in the group .
 
@@ -229,9 +236,9 @@ Format: `addgroup n/GROUPNAME d/DESCRIPTION`
 
 Examples:
 * `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod`
-where students can be added into.
+that students can be added into.
 
-#### Delete Group: deletegroup
+#### Deleting a group: `deletegroup`
 
 Deletes the group with the specified group name as well as all students associated with the group.
 
@@ -241,7 +248,7 @@ Format: `deletegroup GROUPNAME`
 * Use the `edit` command to change the group of a student if deleting the student is undesirable.
 
 Examples:
-* `deletegroup CS2103T` deletes the group CS2103T.
+* `deletegroup CS2103T` deletes the group `CS2103T`.
 
 ## Command summary
 
@@ -251,6 +258,7 @@ Action | Format, Examples
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUPNAME]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
+**Exit** | `exit`
 **List** | `list`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
