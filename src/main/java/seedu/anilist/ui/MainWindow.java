@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.GuiSettings;
@@ -79,9 +82,45 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
 
         // Configure the UI
         setWindowDefaultSize(logic.getGuiSettings());
+        initTheme();
+
+        // Configure Hotkeys for tab switching
+        KeyCombination nextTabHotKey = new KeyCodeCombination(KeyCode.D, KeyCombination.CONTROL_DOWN);
+        Runnable nextTabRunnable = () -> animeListPanel.setNextTab();
+        primaryStage.getScene().getAccelerators().put(nextTabHotKey, nextTabRunnable);
+        KeyCombination prevTabHotKey = new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN);
+        Runnable prevTabRunnable = () -> animeListPanel.setPrevTab();
+        primaryStage.getScene().getAccelerators().put(prevTabHotKey, prevTabRunnable);
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    /**
+     * Fills up all the placeholders of this window.
+     */
+    void fillInnerParts() {
+        animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
+
+        resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAnimeListFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    private void initTheme() {
+        KeyCombination themeHotKey = new KeyCodeCombination(KeyCode.T, KeyCombination.CONTROL_DOWN);
+        Runnable themeRunnable = this::setNextTheme;
+        primaryStage.getScene().getAccelerators().put(themeHotKey, themeRunnable);
 
         themeCss = logic.getThemeCss();
 
@@ -121,27 +160,6 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
-    /**
-     * Fills up all the placeholders of this window.
-     */
-    void fillInnerParts() {
-        animeListPanel = new AnimeListPanel(logic.getFilteredAnimeList(), logic.getCurrentTab(), this::executeCommand);
-        animeListPanelPlaceholder.getChildren().add(animeListPanel.getRoot());
-
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAnimeListFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
     private void setTheme(String themeCss) {
         this.themeCss = themeCss;
         switch(themeCss) {
@@ -170,6 +188,21 @@ public class MainWindow extends UiPart<Stage> {
         ObservableList<String> styleSheets = scene.getStylesheets();
         styleSheets.remove(0);
         styleSheets.add(filepath);
+    }
+
+    private void setNextTheme() {
+        int index = 0;
+        while (index < themesArr.length) {
+            if (themesArr[index].equals(themeCss)) {
+                break;
+            }
+            index++;
+        }
+        if (index == themesArr.length - 1) {
+            setTheme(themesArr[0]);
+        } else {
+            setTheme(themesArr[index + 1]);
+        }
     }
 
     /**
