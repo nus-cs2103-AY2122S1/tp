@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.programmer.model.student.comparator.SortByLabName;
 
 
 /**
@@ -62,6 +63,10 @@ public class Student {
 
     public ClassId getClassId() {
         return classId;
+    }
+
+    public String getClassIdValue() {
+        return classId.classId;
     }
 
     public Email getEmail() {

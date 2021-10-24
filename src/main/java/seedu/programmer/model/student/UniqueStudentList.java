@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.programmer.model.student.comparator.SortByClass;
+import seedu.programmer.model.student.comparator.SortByStudentName;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 
@@ -46,7 +48,7 @@ public class UniqueStudentList implements Iterable<Student> {
             throw new DuplicateStudentException();
         }
         internalList.add(toAdd);
-        internalList.sort(new SortByStudentName());
+        internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
     /**
@@ -82,7 +84,7 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.set(index, editedStudent);
-        internalList.sort(new SortByStudentName());
+        internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
     /**
@@ -94,13 +96,13 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
         }
-        internalList.sort(new SortByStudentName());
+        internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-        internalList.sort(new SortByStudentName());
+        internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
     /**
@@ -114,7 +116,7 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.setAll(students);
-        internalList.sort(new SortByStudentName());
+        internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
     /**

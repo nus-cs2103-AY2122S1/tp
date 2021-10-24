@@ -80,7 +80,7 @@ public class FilterCommandTest {
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredStudentList());
+        assertEquals(Arrays.asList(ALICE, ELLE, BENSON, DANIEL, CARL, FIONA, GEORGE), model.getFilteredStudentList());
     }
 
     @Test
