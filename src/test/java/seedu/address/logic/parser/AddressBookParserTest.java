@@ -34,6 +34,7 @@ import seedu.address.model.module.task.Task;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 import seedu.address.testutil.MemberBuilder;
 import seedu.address.testutil.MemberUtil;
+import seedu.address.testutil.TaskBuilder;
 import seedu.address.testutil.TaskUtil;
 
 public class AddressBookParserTest {
@@ -50,7 +51,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add_task() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
-        Task validTask = new Task("do homework");
+        Task validTask = new TaskBuilder().build();
         TaddCommand command = (TaddCommand) parser.parseCommand(TaskUtil.getTaddCommand(validTask, validMemberID));
         assertEquals(new TaddCommand(validMemberID, validTask), command);
     }

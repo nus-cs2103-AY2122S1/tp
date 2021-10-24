@@ -31,6 +31,7 @@ Class EventDate
 
 Class TaskList
 Class Task
+Class TaskDeadline
 
 }
 
@@ -69,4 +70,6 @@ Address -[hidden]right-> Email
 ModelManager -->"~* filtered" Member
 
 TaskList *--> "~*"Task
+Task .up.|> Module
+Task --> "1" TaskDeadline
 @enduml

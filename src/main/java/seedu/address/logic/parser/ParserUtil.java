@@ -15,7 +15,7 @@ import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;
 import seedu.address.model.module.member.Phone;
 import seedu.address.model.module.member.position.Position;
-import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskDeadline;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -168,17 +168,32 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String taskName} into a {@code Task}.
+     * Parses a {@code String name} into a {@code TaskName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code taskName} is invalid.
      */
-    public static Task parseTask(String taskName) throws ParseException {
-        requireNonNull(taskName);
-        String trimmedTaskName = taskName.trim();
-        if (!Task.isValidTaskName(trimmedTaskName)) {
-            throw new ParseException(Task.MESSAGE_CONSTRAINTS);
+    public static Name parseTaskName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
-        return new Task(trimmedTaskName);
+        return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String time} into an {@code TaskDeadline}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static TaskDeadline parseTaskDeadline(String time) throws ParseException {
+        requireNonNull(time);
+        String trimmedTime = time.trim();
+        if (!TaskDeadline.isValidTaskDeadline(trimmedTime)) {
+            throw new ParseException(TaskDeadline.MESSAGE_CONSTRAINTS);
+        }
+        return new TaskDeadline(trimmedTime);
     }
 }
