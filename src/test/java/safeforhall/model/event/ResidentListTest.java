@@ -26,11 +26,12 @@ public class ResidentListTest {
         assertThrows(NullPointerException.class, () -> ResidentList.isValidResidentList(null));
 
         // invalid name
+        assertFalse(ResidentList.isValidResidentList("")); // empty string
         assertFalse(ResidentList.isValidResidentList(" ")); // spaces only
         assertFalse(ResidentList.isValidResidentList("a213 b423")); // no comma between information
 
         // valid name
-        assertTrue(ResidentList.isValidResidentList("")); // empty string
+        assertTrue(ResidentList.isValidResidentList("None")); // default no residents string
         assertTrue(ResidentList.isValidResidentList("peter jack")); // alphabets only
         assertTrue(ResidentList.isValidResidentList("Capital Tan")); // with capital letters
         assertTrue(ResidentList.isValidResidentList("peter jack, Capital Tan")); // more than one name

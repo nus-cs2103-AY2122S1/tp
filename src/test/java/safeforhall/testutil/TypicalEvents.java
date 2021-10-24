@@ -15,7 +15,7 @@ public class TypicalEvents {
             .withEventDate("10-10-2021")
             .withVenue("basketball court")
             .withCapacity("5")
-            .withResidentList("")
+            .withResidentList("None")
             .build();
     public static final Event VOLLEYBALL = new EventBuilder().withEventName("volleyball")
             .withEventDate("12-10-2021")

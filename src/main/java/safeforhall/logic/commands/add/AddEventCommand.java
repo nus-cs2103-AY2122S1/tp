@@ -18,12 +18,14 @@ public class AddEventCommand extends Command {
             + CliSyntax.PREFIX_DATE + "DATE "
             + CliSyntax.PREFIX_VENUE + "VENUE "
             + CliSyntax.PREFIX_CAPACITY + "CAPACITY "
+            + CliSyntax.PREFIX_RESIDENTS + "RESIDENTS \n"
 
             + "Example: " + COMMAND_WORD + " "
             + CliSyntax.PREFIX_NAME + "Football "
             + CliSyntax.PREFIX_DATE + "03-01-2021 "
             + CliSyntax.PREFIX_VENUE + "NUS field "
-            + CliSyntax.PREFIX_CAPACITY + "5 ";
+            + CliSyntax.PREFIX_CAPACITY + "5 "
+            + CliSyntax.PREFIX_RESIDENTS + "Alex Yeoh ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book";

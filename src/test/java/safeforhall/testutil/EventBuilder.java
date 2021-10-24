@@ -15,7 +15,7 @@ public class EventBuilder {
     public static final String DEFAULT_EVENT_DATE = "20-10-2021";
     public static final String DEFAULT_VENUE = "Field";
     public static final String DEFAULT_CAPACITY = "20";
-    public static final String DEFAULT_RESIDENT_LIST = "";
+    public static final String DEFAULT_RESIDENT_LIST = "None";
 
     private EventName eventName;
     private EventDate eventDate;

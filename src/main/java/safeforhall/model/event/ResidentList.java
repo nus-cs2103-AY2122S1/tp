@@ -16,7 +16,8 @@ public class ResidentList {
     public static final String MESSAGE_CONSTRAINTS_ROOM_AND_NAME =
             "Arguments given should be all rooms or all names";
     public static final String DESC = "Residents: ";
-    public static final String DEFAULT_LIST = "";
+    public static final String DEFAULT_LIST = "None";
+    public static final String EMPTY_STRING = "";
 
     private final String residents;
     private final ArrayList<String> residentInformation;
@@ -72,17 +73,23 @@ public class ResidentList {
      * @return A String consisting of past and new residents for the event.
      */
     public String addResidentList(ArrayList<Person> current, ArrayList<Person> toAdd) {
-        StringBuilder newResidentList = new StringBuilder(residents);
+        StringBuilder newResidentList;
+        if (residents.equals(DEFAULT_LIST)) {
+            newResidentList = new StringBuilder(EMPTY_STRING);
+        } else {
+            newResidentList = new StringBuilder(residents);
+        }
+
         for (Person person : current) {
             if (!residentList.contains(person)) {
                 residentList.add(person);
             }
         }
         for (Person person : toAdd) {
-            if (!residentList.contains(person) && !newResidentList.toString().equals("")) {
+            if (!residentList.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
                 newResidentList.append(", ").append(person.getName());
                 residentList.add(person);
-            } else if (!residentList.contains(person) && newResidentList.toString().equals("")) {
+            } else if (!residentList.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
                 newResidentList.append(person.getName());
                 residentList.add(person);
             }
