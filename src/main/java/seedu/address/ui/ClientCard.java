@@ -16,6 +16,8 @@ import seedu.address.model.tag.Tag;
 public class ClientCard extends UiPart<Region> {
 
     private static final String FXML = "ClientListCard.fxml";
+
+    // Taken from https://unicode-table.com/en/emoji/
     private static final String EMAIL_ICON = "✉ ";
     private static final String PHONE_ICON = "☎ ";
     private static final String ADDRESS_ICON = "\uD83C\uDFE0 ";
@@ -34,7 +36,6 @@ public class ClientCard extends UiPart<Region> {
      */
 
     public final Client client;
-
 
     @FXML
     private HBox cardPane;
