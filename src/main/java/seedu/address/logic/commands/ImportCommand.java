@@ -113,7 +113,7 @@ public class ImportCommand extends Command {
             addressBookOptional = temporaryStorage.readAddressBook();
             fileData = addressBookOptional.orElseThrow();
         } catch (DataConversionException dce) {
-            logger.info("Import: Error while reading contacts from JSON file. File is likely to be wrongly formatted.");
+            logger.info("Import: Error while reading contacts from CSV file. File is likely to be wrongly formatted.");
             throw new CommandException(String.format(MESSAGE_IMPORT_FILE_WRONG_TYPE, fileName));
         }
         return fileData.getPersonList();
