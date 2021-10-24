@@ -8,13 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_MODULE_CODE_D
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_REMARK_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DAY_DESC_TUES;
 import static seedu.address.logic.commands.CommandTestUtil.LESSON_DAY_DESC_WED;
-import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC_11;
+import static seedu.address.logic.commands.CommandTestUtil.LESSON_TIME_DESC_11_12;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.MODULE_CODE_DESC_CS2040;
 import static seedu.address.logic.commands.CommandTestUtil.REMARK_DESC_MODULES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_TUES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_DAY_WED;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_11;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_TIME_11_12;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2030S_T12;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040S_B05;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_LESSON_REMARK;
@@ -22,6 +22,7 @@ import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.
 import static seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.MESSAGE_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.ParserUtil.parseLessonTime;
 import static seedu.address.model.util.SampleDataUtil.parseModuleCode;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -30,6 +31,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand;
 import seedu.address.logic.commands.modulelesson.EditModuleLessonCommand.EditLessonDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.modulelesson.LessonDay;
 import seedu.address.model.modulelesson.LessonTime;
 import seedu.address.model.person.ModuleCode;
@@ -94,18 +96,19 @@ public class EditModuleLessonCommandParserTest {
     }
 
     @Test
-    public void parse_allFieldsSpecified_success() {
+    public void parse_allFieldsSpecified_success() throws ParseException {
         Index targetIndex = INDEX_FIRST;
         StringBuilder sb = new StringBuilder(targetIndex.getOneBased() + "");
         sb.append(MODULE_CODE_DESC_CS2030S_T12)
                 .append(LESSON_DAY_DESC_TUES)
-                .append(LESSON_TIME_DESC_11)
+                .append(LESSON_TIME_DESC_11_12)
                 .append(REMARK_DESC_MODULES);
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
                 .withLessonDay(new LessonDay(VALID_LESSON_DAY_TUES))
-                .withLessonTime(new LessonTime(VALID_LESSON_TIME_11))
+                .withLessonStartTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(0))
+                .withLessonEndTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(1))
                 .withRemark(new Remark(VALID_MODULE_LESSON_REMARK)).build();
         EditModuleLessonCommand expectedCommand = new EditModuleLessonCommand(targetIndex, descriptor);
 
@@ -128,7 +131,7 @@ public class EditModuleLessonCommandParserTest {
     }
 
     @Test
-    public void parse_oneFieldSpecified_success() {
+    public void parse_oneFieldSpecified_success() throws ParseException {
         Index targetIndex = INDEX_FIRST;
         String arg = targetIndex.getOneBased() + "";
         EditLessonDescriptor descriptor;
@@ -148,24 +151,26 @@ public class EditModuleLessonCommandParserTest {
 
         // time
         descriptor = new EditLessonDescriptorBuilder()
-                .withLessonTime(new LessonTime(VALID_LESSON_TIME_11)).build();
+                .withLessonStartTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(0))
+                .withLessonEndTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(1)).build();
         expectedCommand = new EditModuleLessonCommand(targetIndex, descriptor);
-        assertParseSuccess(p, arg + LESSON_TIME_DESC_11, expectedCommand);
+        assertParseSuccess(p, arg + LESSON_TIME_DESC_11_12, expectedCommand);
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
+    public void parse_multipleRepeatedFields_acceptsLast() throws ParseException {
         Index ind = INDEX_FIRST;
         StringBuilder sb = new StringBuilder(ind.getOneBased() + "");
         sb.append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_TUES)
                 .append(MODULE_CODE_DESC_CS2040).append(LESSON_DAY_DESC_TUES)
                 .append(MODULE_CODE_DESC_CS2030S_T12).append(LESSON_DAY_DESC_WED)
-                .append(LESSON_TIME_DESC_11).append(REMARK_DESC_MODULES);
+                .append(LESSON_TIME_DESC_11_12).append(REMARK_DESC_MODULES);
 
         EditLessonDescriptor descriptor = new EditLessonDescriptorBuilder()
                 .withModuleCode(parseModuleCode(VALID_MODULE_CODE_CS2030S_T12))
                 .withLessonDay(new LessonDay(VALID_LESSON_DAY_WED))
-                .withLessonTime(new LessonTime(VALID_LESSON_TIME_11))
+                .withLessonStartTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(0))
+                .withLessonEndTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(1))
                 .withRemark(new Remark(VALID_MODULE_LESSON_REMARK)).build();
         EditModuleLessonCommand expectedCommand = new EditModuleLessonCommand(ind, descriptor);
 
@@ -173,7 +178,7 @@ public class EditModuleLessonCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValueFollowedByValidValue_success() {
+    public void parse_invalidValueFollowedByValidValue_success() throws ParseException {
         Index ind = INDEX_FIRST;
         String arg = ind.getOneBased() + "";
         EditLessonDescriptor descriptor;
@@ -186,9 +191,10 @@ public class EditModuleLessonCommandParserTest {
 
         // other valid values specified
         descriptor = new EditLessonDescriptorBuilder().withLessonDay(new LessonDay(VALID_LESSON_DAY_WED))
-                .withLessonTime(new LessonTime(VALID_LESSON_TIME_11)).build();
+                .withLessonStartTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(0))
+                .withLessonEndTime(parseLessonTime(VALID_LESSON_TIME_11_12).get(1)).build();
         expectedCommand = new EditModuleLessonCommand(ind, descriptor);
-        assertParseSuccess(p, arg + LESSON_TIME_DESC_11 + INVALID_LESSON_DAY_DESC + LESSON_DAY_DESC_WED,
+        assertParseSuccess(p, arg + LESSON_TIME_DESC_11_12 + INVALID_LESSON_DAY_DESC + LESSON_DAY_DESC_WED,
                 expectedCommand);
     }
 }

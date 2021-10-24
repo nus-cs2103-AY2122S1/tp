@@ -23,23 +23,23 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-               <FlowPane fx:id="moduleCodeContainer" />
+                <FlowPane fx:id="moduleCodeContainer" />
             </HBox>
             <FlowPane fx:id="lessonCodes">
                 <padding>
                     <Insets bottom="5.0" top="5.0" />
                 </padding>
-         </FlowPane>
-         <HBox>
-            <children>
-                  <Label fx:id="lessonDay" styleClass="cell_small_label" text="\$lessonDay">
-                      <padding>
-                          <Insets right="5.0" />
-                      </padding>
-               </Label>
-                  <Label fx:id="lessonTime" styleClass="cell_small_label" text="\$lessonTime" />
-            </children>
-         </HBox>
+            </FlowPane>
+            <HBox>
+                <children>
+                    <Label fx:id="lessonDay" styleClass="cell_small_label" text="\$lessonDay">
+                        <padding>
+                            <Insets right="5.0" />
+                        </padding>
+                    </Label>
+                    <Label fx:id="lessonTime" styleClass="cell_small_label" text="\$lessonTime" />
+                </children>
+            </HBox>
             <Label fx:id="remark" styleClass="cell_small_label" text="\$remark">
                 <padding>
                     <Insets top="3.0" />

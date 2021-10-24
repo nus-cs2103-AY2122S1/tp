@@ -95,10 +95,14 @@ public class EditModuleLessonCommand extends Command {
         ModuleCode updatedModuleCode = editLessonDescriptor.getModuleCode()
                 .orElse(moduleLessonToEdit.getModuleCode());
         LessonDay updatedLessonDay = editLessonDescriptor.getLessonDay().orElse(moduleLessonToEdit.getDay());
-        LessonTime updatedLessonTime = editLessonDescriptor.getLessonTime().orElse(moduleLessonToEdit.getTime());
+        LessonTime updatedLessonStartTime = editLessonDescriptor.getLessonStartTime()
+                .orElse(moduleLessonToEdit.getLessonStartTime());
+        LessonTime updatedLessonEndTime = editLessonDescriptor.getLessonEndTime()
+                .orElse(moduleLessonToEdit.getLessonEndTime());
         Remark updatedRemark = editLessonDescriptor.getRemark().orElse(moduleLessonToEdit.getRemark());
 
-        return new ModuleLesson(updatedModuleCode, updatedLessonDay, updatedLessonTime, updatedRemark);
+        return new ModuleLesson(updatedModuleCode, updatedLessonDay,
+                updatedLessonStartTime, updatedLessonEndTime, updatedRemark);
     }
 
     @Override
@@ -125,7 +129,8 @@ public class EditModuleLessonCommand extends Command {
     public static class EditLessonDescriptor {
         private ModuleCode code;
         private LessonDay day;
-        private LessonTime time;
+        private LessonTime startTime;
+        private LessonTime endTime;
         private Remark remark;
 
         public EditLessonDescriptor() {}
@@ -136,7 +141,8 @@ public class EditModuleLessonCommand extends Command {
         public EditLessonDescriptor(EditLessonDescriptor toCopy) {
             setModuleCode(toCopy.code);
             setLessonDay(toCopy.day);
-            setLessonTime(toCopy.time);
+            setLessonStartTime(toCopy.startTime);
+            setLessonEndTime(toCopy.endTime);
             setRemark(toCopy.remark);
         }
 
@@ -144,7 +150,7 @@ public class EditModuleLessonCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(code, day, time, remark);
+            return CollectionUtil.isAnyNonNull(code, day, startTime, endTime, remark);
         }
 
         public void setModuleCode(ModuleCode code) {
@@ -163,12 +169,20 @@ public class EditModuleLessonCommand extends Command {
             return Optional.ofNullable(day);
         }
 
-        public void setLessonTime(LessonTime time) {
-            this.time = time;
+        public void setLessonStartTime(LessonTime startTime) {
+            this.startTime = startTime;
         }
 
-        public Optional<LessonTime> getLessonTime() {
-            return Optional.ofNullable(time);
+        public Optional<LessonTime> getLessonStartTime() {
+            return Optional.ofNullable(startTime);
+        }
+
+        public void setLessonEndTime(LessonTime endTime) {
+            this.endTime = endTime;
+        }
+
+        public Optional<LessonTime> getLessonEndTime() {
+            return Optional.ofNullable(endTime);
         }
 
         public void setRemark(Remark remark) {
@@ -196,7 +210,8 @@ public class EditModuleLessonCommand extends Command {
 
             return getModuleCode().equals(e.getModuleCode())
                     && getLessonDay().equals(e.getLessonDay())
-                    && getLessonTime().equals(e.getLessonTime())
+                    && getLessonStartTime().equals(e.getLessonStartTime())
+                    && getLessonEndTime().equals(e.getLessonEndTime())
                     && getRemark().equals(e.getRemark());
         }
     }

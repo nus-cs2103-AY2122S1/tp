@@ -22,7 +22,8 @@ public class JsonAdaptedModuleLesson {
 
     private final String moduleCode;
     private final String lessonDay;
-    private final String lessonTime;
+    private final String lessonStartTime;
+    private final String lessonEndTime;
     private final String remark;
 
     /**
@@ -32,11 +33,13 @@ public class JsonAdaptedModuleLesson {
     @JsonCreator
     public JsonAdaptedModuleLesson(@JsonProperty("moduleCodes") String moduleCode,
                                    @JsonProperty("lessonDay") String lessonDay,
-                                   @JsonProperty("lessonTime") String lessonTime,
+                                   @JsonProperty("lessonStartTime") String lessonStartTime,
+                                   @JsonProperty("lessonEndTime") String lessonEndTime,
                                    @JsonProperty("remark") String remark) {
         this.moduleCode = moduleCode;
         this.lessonDay = lessonDay;
-        this.lessonTime = lessonTime;
+        this.lessonStartTime = lessonStartTime;
+        this.lessonEndTime = lessonEndTime;
         this.remark = remark;
     }
 
@@ -46,7 +49,8 @@ public class JsonAdaptedModuleLesson {
     public JsonAdaptedModuleLesson(ModuleLesson source) {
         moduleCode = source.getModuleCode().toString();
         lessonDay = source.getDay().getDayAsIntString();
-        lessonTime = source.getTime().toString();
+        lessonStartTime = source.getLessonStartTime().toString();
+        lessonEndTime = source.getLessonEndTime().toString();
         remark = source.getRemark().value;
     }
 
@@ -70,19 +74,22 @@ public class JsonAdaptedModuleLesson {
         }
         final LessonDay lessonDay = new LessonDay(this.lessonDay);
 
-        if (this.lessonTime == null) {
-            throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, LessonTime.class.getSimpleName())
-            );
+        if (this.lessonStartTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Lesson start time"));
         }
-        final LessonTime lessonTime = new LessonTime(this.lessonTime);
+        final LessonTime lessonStartTime = new LessonTime(this.lessonStartTime);
+
+        if (this.lessonEndTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Lesson end time"));
+        }
+        final LessonTime lessonEndTime = new LessonTime(this.lessonEndTime);
 
         if (this.remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
         }
         final Remark remark = new Remark(this.remark);
 
-        return new ModuleLesson(moduleCode, lessonDay, lessonTime, remark);
+        return new ModuleLesson(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
     }
 
 }

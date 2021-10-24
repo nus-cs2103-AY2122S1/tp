@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -27,6 +29,11 @@ import seedu.address.model.person.TeleHandle;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_MISSING_TIME = "Missing compulsory start time or end time.";
+    public static final String MESSAGE_INVALID_LESSON_DURATION =
+            "The start time should be before end time.";
+    public static final String MESSAGE_INVALID_MODULE_INFO =
+            "Missing either the module code or the lesson code. Both are compulsory.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -95,6 +102,29 @@ public class ParserUtil {
                 .map(LessonCode::new)
                 .collect(Collectors.toSet());
         return new ModuleCode(moduleCodeArr[0], lessonCodes);
+    }
+
+    /**
+     * Parses a {@code String moduleCode} into a {@code ModuleCode}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException If the given {@code moduleCode} is invalid.
+     */
+    public static ModuleCode parseModuleCodeForModuleLesson(String moduleCode) throws ParseException {
+        requireNonNull(moduleCode);
+        String trimmedModuleCode = moduleCode.trim();
+        String[] moduleCodeArr = trimmedModuleCode.split("\\s+");
+        if (moduleCodeArr.length < 2) {
+            throw new ParseException(MESSAGE_INVALID_MODULE_INFO);
+        }
+        if (!ModuleCode.isValidModuleCode(moduleCodeArr[0])) {
+            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+        }
+        if (!LessonCode.isValidLessonCode(moduleCodeArr[1])) {
+            throw new ParseException(LessonCode.MESSAGE_CONSTRAINTS);
+        }
+        Set<LessonCode> lessonCodeSet = Set.of(new LessonCode(moduleCodeArr[1]));
+        return new ModuleCode(moduleCodeArr[0], lessonCodeSet);
     }
 
     /**
@@ -182,30 +212,39 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code day} into a {@code LessonDay}.
+     * Parses a {@code String lessonDay} into a {@code LessonDay}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code day} is invalid.
+     * @throws ParseException if the given {@code lessonDay} is invalid.
      */
-    public static LessonDay parseDay(String day) throws ParseException {
-        requireNonNull(day);
-        String trimmedDay = day.trim();
-        if (!LessonDay.isValidDay(trimmedDay)) {
+    public static LessonDay parseLessonDay(String lessonDay) throws ParseException {
+        requireNonNull(lessonDay);
+        String trimmedLessonDay = lessonDay.trim();
+        if (!LessonDay.isValidDay(trimmedLessonDay)) {
             throw new ParseException(LessonDay.MESSAGE_CONSTRAINTS);
         }
-        return new LessonDay(trimmedDay);
+        return new LessonDay(trimmedLessonDay);
     }
 
     /**
-     * Parses a {@code time} into a {@code LessonTime}.
+     * Parses a {@code String lessonTime} into a {@code List<LessonTime>}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code time} is invalid.
+     * @throws ParseException if the given {code lessonTime} is invalid.
      */
-    public static LessonTime parseTime(String time) throws ParseException {
-        requireNonNull(time);
-        String trimmedTime = time.trim();
-        if (!LessonTime.isValidTime(trimmedTime)) {
+    public static List<LessonTime> parseLessonTime(String lessonTime) throws ParseException {
+        requireNonNull(lessonTime);
+        String trimmedLessonTime = lessonTime.trim();
+        String[] lessonTimeArr = trimmedLessonTime.split("\\s+");
+        if (lessonTimeArr.length != 2) {
+            throw new ParseException(MESSAGE_MISSING_TIME);
+        }
+        if (!LessonTime.isValidTime(lessonTimeArr[0]) || !LessonTime.isValidTime(lessonTimeArr[1])) {
             throw new ParseException(LessonTime.MESSAGE_CONSTRAINTS);
         }
-        return new LessonTime(trimmedTime);
+        if (!LocalTime.parse(lessonTimeArr[0]).isBefore(LocalTime.parse(lessonTimeArr[1]))) {
+            throw new ParseException(MESSAGE_INVALID_LESSON_DURATION);
+        }
+        return Arrays.stream(lessonTimeArr).map(LessonTime::new).collect(Collectors.toUnmodifiableList());
     }
 }

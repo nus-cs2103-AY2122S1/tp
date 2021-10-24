@@ -16,20 +16,24 @@ public class ModuleLesson {
     // Identity fields
     private final ModuleCode moduleCode;
     private final LessonDay lessonDay;
-    private final LessonTime lessonTime;
+    private final LessonTime lessonStartTime;
+    private final LessonTime lessonEndTime;
     private final Remark remark;
 
 
     /**
      * Every field must be present and not null.
      */
-    public ModuleLesson(ModuleCode moduleCode, LessonDay lessonDay, LessonTime lessonTime, Remark remark) {
-        requireAllNonNull(moduleCode, lessonDay, lessonTime, remark);
-        // ModuleCode in ModuleLesson should contain exactly 1 lesson code
-        assert moduleCode.getLessonCodes().size() == 1;
+    public ModuleLesson(ModuleCode moduleCode, LessonDay lessonDay, LessonTime lessonStartTime,
+                        LessonTime lessonEndTime, Remark remark) {
+        requireAllNonNull(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
+        assert lessonStartTime.value.isBefore(lessonEndTime.value) : "Start time should be before end time";
+        assert moduleCode.getLessonCodes().size() == 1
+                : "Each ModuleCode should contain exactly 1 LessonCode";;
         this.moduleCode = moduleCode;
         this.lessonDay = lessonDay;
-        this.lessonTime = lessonTime;
+        this.lessonStartTime = lessonStartTime;
+        this.lessonEndTime = lessonEndTime;
         this.remark = remark;
     }
 
@@ -41,8 +45,12 @@ public class ModuleLesson {
         return lessonDay;
     }
 
-    public LessonTime getTime() {
-        return lessonTime;
+    public LessonTime getLessonStartTime() {
+        return lessonStartTime;
+    }
+
+    public LessonTime getLessonEndTime() {
+        return lessonEndTime;
     }
 
     public Remark getRemark() {
@@ -60,8 +68,10 @@ public class ModuleLesson {
 
         return otherModuleLesson != null
                 && otherModuleLesson.getModuleCode().equals(getModuleCode())
+                && otherModuleLesson.getModuleCode().getLessonCodes().equals(getModuleCode().getLessonCodes())
                 && otherModuleLesson.getDay().equals(getDay())
-                && otherModuleLesson.getTime().equals(getTime());
+                && otherModuleLesson.getLessonStartTime().equals(getLessonStartTime())
+                && otherModuleLesson.getLessonEndTime().equals(getLessonEndTime());
     }
 
     /**
@@ -81,14 +91,15 @@ public class ModuleLesson {
         ModuleLesson otherModuleLesson = (ModuleLesson) other;
         return ((ModuleLesson) other).getModuleCode().equals(getModuleCode())
                 && otherModuleLesson.getDay().equals(getDay())
-                && otherModuleLesson.getTime().equals(getTime())
+                && otherModuleLesson.getLessonStartTime().equals(getLessonStartTime())
+                && otherModuleLesson.getLessonEndTime().equals(getLessonEndTime())
                 && otherModuleLesson.getRemark().equals(getRemark());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(moduleCode, lessonDay, lessonTime, remark);
+        return Objects.hash(moduleCode, lessonDay, lessonStartTime, lessonEndTime, remark);
     }
 
     @Override
@@ -98,8 +109,10 @@ public class ModuleLesson {
                 .append(getModuleCode().toString())
                 .append("; Day: ")
                 .append(getDay().toString())
-                .append("; Time: ")
-                .append(getTime().toString());
+                .append("; Start time: ")
+                .append(getLessonStartTime().toString())
+                .append("; End time: ")
+                .append(getLessonEndTime().toString());
         if (!remark.toString().trim().isEmpty()) {
             builder.append("; Remark: ");
             builder.append(getRemark());

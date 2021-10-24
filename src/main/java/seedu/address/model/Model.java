@@ -37,22 +37,22 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' contHACKS file path.
      */
     Path getAddressBookFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' contHACKS file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces contHACKS data with the data in {@code addressBook}.
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
-     * Sorts the contacts in the address book by alphabetical order.
+     * Sorts the contacts in contHACKS by alphabetical order.
      */
     void sortAddressBook();
 
@@ -60,47 +60,50 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in contHACKS.
      */
     boolean hasPerson(Person person);
 
-    boolean hasModuleLesson(ModuleLesson lesson);
+    /**
+     * Returns true if a module lesson with the same information as {@code moduleLesson} exists in contHACKS.
+     */
+    boolean hasModuleLesson(ModuleLesson moduleLesson);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in contHACKS.
      */
     void deletePerson(Person target);
 
     /**
      * Deletes the given lesson.
-     * The lesson must exist in the address book.
+     * The lesson must exist in contHACKS.
      */
     void deleteLesson(ModuleLesson target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in contHACKS.
      */
     void addPerson(Person person);
 
     /**
      * Adds the given lesson.
-     * {@code moduleLesson} must not already exist in the address book.
+     * {@code moduleLesson} must not already exist in contHACKS.
      */
     void addLesson(ModuleLesson moduleLesson);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in contHACKS.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in contHACKS.
      */
     void setPerson(Person target, Person editedPerson);
 
     /**
      * Replaces the given lesson {@code target} with {@code editedLesson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedLesson} must not be the same as another existing lesson in the address book.
+     * {@code target} must exist in contHACKS.
+     * The person identity of {@code editedLesson} must not be the same as another existing lesson in contHACKS.
      */
     void setModuleLesson(ModuleLesson target, ModuleLesson editedLesson);
 
