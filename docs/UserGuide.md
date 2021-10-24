@@ -377,7 +377,13 @@ If your changes to the data file makes its format invalid, Uni-Fy will discard a
 
 Shows the past commands run on **Uni-Fy**.
 
-Format: `history`
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+- `history`
+
+</div>
+
 
 <div markdown="span" class="alert alert-warning">:warning: **Caution:**
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
