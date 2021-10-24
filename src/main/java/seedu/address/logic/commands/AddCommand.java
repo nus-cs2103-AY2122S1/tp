@@ -18,7 +18,6 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Frequency;
 import seedu.address.model.person.Occurrence;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Visit;
 
 /**
  * Adds a person to the address book.
@@ -72,12 +71,15 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Optional<Visit> visit = toAdd.getVisit();
         Optional<Frequency> frequency = toAdd.getFrequency();
         Optional<Occurrence> occurrence = toAdd.getOccurrence();
 
-        if (!toAdd.hasVisit() && occurrence.get().isMoreThan(1) || !(frequency.get().equals(Frequency.EMPTY))) {
-            throw new CommandException(MESSAGE_INVALID_OPTIONAL_VISIT_FLAG);
+        // If visit field is not present, occurrence should not be more than one and frequency should be empty
+        // If not, throw CommandException
+        if (!toAdd.hasVisit()) {
+            if (occurrence.get().isMoreThan(1) || !(frequency.get().equals(Frequency.EMPTY))) {
+                throw new CommandException(MESSAGE_INVALID_OPTIONAL_VISIT_FLAG);
+            }
         }
 
         if (occurrence.get().isMoreThan(1) && frequency.get().equals(Frequency.EMPTY)) {
