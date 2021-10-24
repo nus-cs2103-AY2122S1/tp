@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import java.util.Optional;
 import java.util.Set;
@@ -48,6 +49,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        if (!areOptionalPrefixesValid(argMultimap)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Language language = ParserUtil.parseLanguage(argMultimap.getValue(PREFIX_LANGUAGE).get());
@@ -74,6 +79,17 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    private static boolean areOptionalPrefixesValid(ArgumentMultimap argumentMultimap) {
+        boolean isEitherTrue = arePrefixesPresent(argumentMultimap, PREFIX_FREQUENCY)
+                || arePrefixesPresent(argumentMultimap, PREFIX_OCCURRENCE);
+
+        if (arePrefixesPresent(argumentMultimap, PREFIX_FREQUENCY, PREFIX_OCCURRENCE)) {
+            return true;
+        } else {
+            return !isEitherTrue;
+        }
     }
 
 }
