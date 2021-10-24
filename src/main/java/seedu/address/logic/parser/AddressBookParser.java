@@ -30,7 +30,7 @@ import seedu.address.logic.commands.ShowCompletedOrders;
 import seedu.address.logic.commands.ShowCompletedTasks;
 import seedu.address.logic.commands.ShowIncompleteOrders;
 import seedu.address.logic.commands.ShowIncompleteTasks;
-import seedu.address.logic.commands.SortOrdersByAmountCommand;
+import seedu.address.logic.commands.SortOrdersCommand;
 import seedu.address.logic.commands.TotalOrdersCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -132,8 +132,8 @@ public class AddressBookParser {
         case TotalOrdersCommand.COMMAND_WORD:
             return new TotalOrdersCommand();
 
-        case SortOrdersByAmountCommand.COMMAND_WORD:
-            return new SortOrdersByAmountCommand();
+        case SortOrdersCommand.COMMAND_WORD:
+            return new SortOrdersCommandParser().parse(arguments);
 
         case FindOrderCommand.COMMAND_WORD:
             return new FindOrderCommandParser().parse(arguments);
