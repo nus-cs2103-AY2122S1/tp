@@ -280,17 +280,20 @@ Examples:\
 `deleteSchedule -n Joe d/tuesday-2` \
 `deleteSchedule -i 1278 d/friday-1`
 
-### Editing a staff schedule: `editSchedule`
-Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
+### Swapping shifts: `swapShift`
+Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
 
-Formats:\
-`editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber` \
-`editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
+Formats:  
+`swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number`  
+`swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
 
-Examples:\
+Examples:  
+`swapShift -n Candice -n Bob d/monday-0 d/tuesday-1`  
+`swapShift -n Candice d/monday-0 -n Bob d/tuesday-1`
 
-`editSchedule n/Candice old/tuesday-1 new/tuesday-2`\
-`editSchedule n/12345678 old/wednesday-2 new/thursday-2`
+Note:
+* The staff identified using the first name is associated with the first shift and the staff identified using the second name is associated with the second shift.
+* This means that you can permute the order of the parameters in any way but the rule mentioned right above will always be followed.
 
 ### View all the staff working a shift: `viewShift`
 
@@ -352,6 +355,7 @@ Action | Format, Examples
 **Edit staff schedule** | `editShift n/NAME old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/INDEX old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift -n NAME d/fullDayName-shiftNumber` <br> `deleteShift -i INDEX d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
+**Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
 **Mark absent** | `mark -i INDEX d/startDate [d/endDate]` <br> `mark -n NAME d/startDate [d/endDate]`
 **Remove mark** | `unmark -i INDEX d/startDate [d/endDate]` <br> `mark -n NAME d/startDate [d/endDate]`
 **List** | `list`
