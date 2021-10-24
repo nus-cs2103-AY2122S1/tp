@@ -44,7 +44,6 @@ public class Student {
         return name.fullName;
     }
 
-
     public StudentId getStudentId() {
         return studentId;
     }
@@ -52,6 +51,8 @@ public class Student {
     public ClassId getClassId() {
         return classId;
     }
+
+    public String getClassIdValue() { return classId.classId;}
 
     public Email getEmail() {
         return email;
