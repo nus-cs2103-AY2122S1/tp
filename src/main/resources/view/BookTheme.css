@@ -54,9 +54,31 @@
     -fx-opacity: 1;
 }
 
+.text-area,
 .text-field {
     -fx-font-size: 12pt;
     -fx-font-family: "Open Sans Semibold";
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/*.list-view .scroll-pane,*/
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/*.list-view .scroll-pane .viewport,*/
+.text-area .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/*.list-view .scroll-pane .content,*/
+.text-area .scroll-pane .content {
+    -fx-background-color: transparent;
+}
+
+.list-view .scroll-bar {
+    -fx-background-color: transparent;
 }
 
 .tab-pane {
@@ -115,21 +137,15 @@
 }
 
 .list-view {
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-background-color: derive(-fx-base1, 0%);
-    -fx-background-radius: 20;
+    -fx-padding: 0 0 0 8;
+    -fx-background-color: derive(-fx-base1, -10%);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 .list-cell {
-    -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap: 0;
-    -fx-padding: 0 0 0 0;
-}
-
-.list-cell,
-.list-cell::focused {
-    -fx-border-radius: 20;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 .list-cell:filled:even {
@@ -410,6 +426,8 @@
 
 #clientCardPane {
     -fx-background-color: derive(-fx-base3, -10%);
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
 }
 
 #commandTypeLabel {
@@ -435,7 +453,7 @@
 #resultDisplay .content {
     -fx-background-color: transparent, derive(-fx-base1, -10%), transparent,
         derive(-fx-base1, -10%);
-    -fx-background-radius: 0;
+    -fx-background-radius: 10;
 }
 
 #tags {
