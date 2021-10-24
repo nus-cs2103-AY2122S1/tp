@@ -18,7 +18,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to FAST. \n\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a client to FAST. \n\n"
             + "Parameters: \n"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "

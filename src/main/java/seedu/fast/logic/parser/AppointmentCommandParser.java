@@ -7,7 +7,6 @@ import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_TIME;
 import static seedu.fast.logic.parser.CliSyntax.PREFIX_APPOINTMENT_VENUE;
 import static seedu.fast.logic.parser.ParserUtil.parseDateString;
 import static seedu.fast.logic.parser.ParserUtil.parseTimeString;
-import static seedu.fast.logic.parser.ParserUtil.parseVenueString;
 
 import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.exceptions.IllegalValueException;
@@ -46,8 +45,17 @@ public class AppointmentCommandParser implements Parser<AppointmentCommand> {
         String parsedTime = parseTimeString(retrievedTime);
 
         String retrievedVenue = argMultimap.getValue(PREFIX_APPOINTMENT_VENUE).orElse(Appointment.NO_VENUE);
-        String parsedVenue = parseVenueString(retrievedVenue);
+        String parsedVenue = checkVenueLength(retrievedVenue);
 
         return new AppointmentCommand(index, new Appointment(parsedDate, parsedTime, parsedVenue));
+    }
+
+    private String checkVenueLength(String venue) throws ParseException {
+        if (!Appointment.isValidVenueFormat(venue)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    Appointment.INVALID_VENUE_INPUT));
+        }
+
+        return venue;
     }
 }

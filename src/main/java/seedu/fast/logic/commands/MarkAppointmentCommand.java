@@ -17,10 +17,10 @@ public class MarkAppointmentCommand extends Command {
     public static final String COMMAND_WORD = "ma";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Marks an appointment with the person identified as completed"
-            + " by the index number used in the last person listing.\n\n"
-            + "Parameters (to add an appointment): \nINDEX (must be a positive integer), "
-            + "Examples: \n" + COMMAND_WORD + " 1 ";
+            + ": Marks an appointment with the client identified as completed"
+            + " by the index number used in the last client listing.\n\n"
+            + "Parameters: \nINDEX (must be a positive integer)\n\n"
+            + "Example: \n" + COMMAND_WORD + " 1 ";
 
     public static final String MESSAGE_MARK_APPOINTMENT_SUCCESS = "Completed an appointment with "
             + "%1$s %2$s %3$s %4$s";

@@ -33,8 +33,10 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
-        "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment",
+        "Edit Appointment", "Delete Appointment", "Mark Appointment", "Clear", "Delete",
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Statistics", "Tag", "Investment Plan Tag",
+        "Priority Tag", "Misc"};
 
 
 
@@ -294,24 +296,6 @@ public class ParserUtil {
         }
 
         return time.trim();
-    }
-
-    /**
-     * Checks if the retrieved venue from user input is too long.
-     * The venue description should not be longer than 50 characters.
-     *
-     * If the retrieved venue if longer than 30 characters, the string will be truncated.
-     *
-     * @param venue Time String retrieved from user input
-     * @return A String representing the venue (no longer than 50 characters).
-     */
-    public static String parseVenueString(String venue) throws ParseException {
-        if (venue.length() > 30) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    Appointment.INVALID_VENUE_INPUT));
-        }
-
-        return venue;
     }
 
     /**
