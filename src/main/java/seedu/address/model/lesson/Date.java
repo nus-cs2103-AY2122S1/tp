@@ -28,7 +28,6 @@ public class Date implements Comparable<Date> {
     Date strings should be formatted as d MMM uuuu, where d and uuuu are digits.
     and MMM are alphabets e.g. Jan, Mar, Nov, etc.
      */
-    public static final String VALIDATION_REGEX = "^[0-3]?[0-9]\\s[a-zA-Z]{3}\\s[0-9]{4}";
     public static final DateTimeFormatter FORMATTER = new DateTimeFormatterBuilder()
             .parseCaseInsensitive()
             .appendPattern("d MMM uuuu")
@@ -56,9 +55,6 @@ public class Date implements Comparable<Date> {
      * @param test The string to be tested.
      */
     public static boolean isValidDate(String test) {
-        if (!test.matches(VALIDATION_REGEX)) {
-            return false;
-        }
         try {
             LocalDate.parse(test, FORMATTER);
             return true;
