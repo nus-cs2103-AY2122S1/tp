@@ -291,6 +291,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Position getPositionByTitle(Title title) {
+        return positionBook.getPositionByTitle(title);
+    }
+
+    @Override
     public void addPosition(Position position) {
         positionBook.addPosition(position);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -339,6 +344,18 @@ public class ModelManager implements Model {
     @Override
     public ReadOnlyApplicantBook getApplicantBook() {
         return applicantBook;
+    }
+
+    @Override
+    public boolean hasApplicant(Applicant applicant) {
+        requireNonNull(applicant);
+        return applicantBook.hasApplicant(applicant);
+    }
+
+    @Override
+    public void addApplicant(Applicant applicant) {
+        applicantBook.addApplicant(applicant);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override

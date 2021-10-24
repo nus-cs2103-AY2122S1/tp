@@ -3,6 +3,7 @@ package seedu.address.model.application;
 import java.util.Objects;
 
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * Represents an application to a specific job position.
@@ -44,6 +45,10 @@ public class Application {
 
     public Position getPosition() {
         return position;
+    }
+
+    public Title getTitle() {
+        return position.getTitle();
     }
 
     public ApplicationStatus getStatus() {
