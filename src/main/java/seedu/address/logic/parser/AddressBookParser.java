@@ -27,6 +27,7 @@ import seedu.address.logic.commands.ListMemberCommand;
 import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
+import seedu.address.logic.commands.SortMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
 import seedu.address.logic.commands.UnmarkAttendanceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -123,6 +124,9 @@ public class AddressBookParser {
 
         case ShowAliasesCommand.COMMAND_WORD:
             return new ShowAliasesCommand();
+
+        case SortMemberCommand.COMMAND_WORD:
+            return new SortMemberCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page 
+title: User Guide
 ---
 
 ### *Welcome to the SportsPA User Guide!*
@@ -14,9 +15,8 @@ the commands available. If this is your first time using SportsPA, we also provi
 the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
-
 ## Table of Contents
-
+* Table of Contents
 {:toc}
 
 _____________________________________________________________________________________________________________
@@ -144,7 +144,7 @@ Format: `listf`
 
 ### Finding a facility : `findf`
 
-Only want to see facilities you are looking for? `findf` lets you finds and filter facilities whose location contains
+If you want to see specific facilities you are looking for, `findf` lets you find and filter facilities whose location contains
 any of the given keywords.
 
 Format: `findf KEYWORD [MORE_KEYWORDS]`
@@ -260,7 +260,7 @@ Format: `sortm`
 
 ### Finding a member `findm`
 
-Only want to see members you are looking for? `findm` lets you find and filter members whose name contains any of the
+If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
 given keywords.
 
 Format: `findm KEYWORD [MORE_KEYWORDS]`
@@ -368,8 +368,11 @@ Format: `split DAY`
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 
 Examples:
+* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
+  user
 
-<<<<<<< HEAD
+[Back to Table of Contents](#table-of-contents)
+  
 ### Marking attendance of members : `mark`
 
 Marks attendance of members listed as present.
@@ -380,6 +383,8 @@ Format: `mark INDEX/INDICES`
 * `INDEX` refers to the index number/position of the member in the displayed members list.
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+[Back to Table of Contents](#table-of-contents)
 
 ### Unmarking attendance of members: `unmark`
 
@@ -392,17 +397,49 @@ Format `unmark INDEX/INDICES`
 * `INDICES` **must be positive integers** 1, 2, …​
 * `INDICES` **must be separated only by whitespaces** 1 2 3 …​
 
+[Back to Table of Contents](#table-of-contents)
+
 ###Clearing all attendance for today: `cleara`
 
 Clears all member's attendance for today.
 
 Format: `cleara`
 
-### Clearing all entries in facility list: `clearf`
-=======
-* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
-  user
->>>>>>> master
+[Back to Table of Contents](#table-of-contents)
+
+###Clearing all entries in facility list: `clearf`
+
+Clears all entries in facility list.
+
+Format: `clearf`
+
+
+[Back to Table of Contents](#table-of-contents)
+
+### Importing multiple members using a CSV file: `import`
+
+When you need to add or update the details of multiple members, you can import data from a comma-seperated values
+file using `import`.
+
+Format: `import CSV_FILE_PATH`
+
+* Data imported from the CSV file **must** have 4 headers in this order:
+   1) Name
+   2) Phone number
+   3) Availability
+   4) Tags
+* When filling in the details of each member in the CSV file, the Names and Phone fields must be filled 
+  while Availability and Tagsfields are optional.
+* `CSV_FILE_PATH` should be relative to the JAR file location.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** The details imported from the CSV file will overwrite any existing details of the members.
+</div>
+
+Examples: 
+
+* `import myFile.csv` imports member data from the CSV file in `[JAR_file_location]/myFile.csv`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -492,9 +529,6 @@ the data of your previous SportsPA home folder.
 Action | Format, Examples
 --------|------------------
 **Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
-**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAYS]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/Mon`
-**Clear attendance**|`cleara`
-**Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
 **Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
 **Clear facilities**|`clearf`
 **Clear member**| `clearm`
@@ -512,6 +546,7 @@ Action | Format, Examples
 **Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
 **Split members**| `split d/DAY` <br> eg. `split d/1`
+**Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
 **Creates alias**| `alias s/SHORTCUT cw/COMMAND_WORD` <br> eg. `alias s/lf cw/listf`
 **List aliases**| `aliases`
 **Deletes alias**| `unalias SHORTCUT` <br> eg. `unalias lf`
