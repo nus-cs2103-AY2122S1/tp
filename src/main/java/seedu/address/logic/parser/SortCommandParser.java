@@ -3,12 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.SortCommand.SUPPORTED_PREFIXES;
 
-import java.util.Comparator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.SortCommand.Direction;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -22,28 +22,28 @@ public class SortCommandParser implements Parser<SortCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
-        List<String> tokens = Stream.of(args.split("\\s+"))
-                .filter(str -> !str.isBlank())
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, SUPPORTED_PREFIXES.toArray(new Prefix[0]));
+        List<Prefix> prefixes = argMultimap.getPrefixes().stream()
+                .filter(prefix -> !prefix.toString().isEmpty())
                 .collect(Collectors.toList());
-        if (tokens.isEmpty()) {
+
+        if (prefixes.size() == 0 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
 
-        List<Prefix> prefixes = tokens.stream().map(Prefix::new).collect(Collectors.toList());
-        if (!prefixes.stream().allMatch(SUPPORTED_PREFIXES::contains)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        List<Direction> directions = new ArrayList<>();
+        for (Prefix prefix : prefixes) {
+            String value = argMultimap.getValue(prefix).get();
+
+            if (value.isEmpty() || value.equals(Direction.ASCENDING.toString())) {
+                directions.add(Direction.ASCENDING);
+            } else if (value.equals(Direction.DESCENDING.toString())) {
+                directions.add(Direction.DESCENDING);
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+            }
         }
 
-        return new SortCommand(filterLastPrefixOccurrence(prefixes));
-    }
-
-    /**
-     * Returns a list of distinct prefixes in {@code prefixes} in the order of the last occurrences
-     * of each prefix.
-     */
-    private static List<Prefix> filterLastPrefixOccurrence(List<Prefix> prefixes) {
-        return prefixes.stream().distinct()
-                .sorted(Comparator.comparingInt(prefixes::lastIndexOf))
-                .collect(Collectors.toList());
+        return new SortCommand(prefixes, directions);
     }
 }
