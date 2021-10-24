@@ -358,7 +358,7 @@ tagged to **either** `friend` **or** `football`.
     * Cons: More code.
 
 
-### \[Work in progress\] Help feature
+### Help feature
 
 #### Implementation
 
@@ -722,13 +722,18 @@ Future versions user stories
 
 **Extensions**
 
-* 2a. Command was not provided
-  * 2a1. Connections show all available commands
+* 2a. Keyword `more` was provided
+    * 2a1. CONNECTIONS shows a pop-up with a link to the UserGuide
 
       Use case ends.
 
-* 2b. Command provided is invalid
-  * 2a1. Connections display an error message followed by a list of valid commands
+* 2b. Command was not provided
+  * 2b1. Connections show all available commands
+
+      Use case ends.
+
+* 2c. Command provided is invalid
+  * 2c1. Connections display an error message followed by a list of valid commands
 
   Use case ends.
     
