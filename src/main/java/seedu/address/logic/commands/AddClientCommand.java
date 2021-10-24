@@ -62,8 +62,7 @@ public class AddClientCommand extends Command {
         }
 
         model.addClient(clientToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd),
-                CommandType.ADD, null, true);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, clientToAdd), CommandType.ADD, clientToAdd, true);
     }
 
     /**
