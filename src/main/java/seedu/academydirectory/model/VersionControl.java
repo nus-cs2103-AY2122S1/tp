@@ -1,22 +1,21 @@
 package seedu.academydirectory.model;
 
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import seedu.academydirectory.commons.util.FileUtil;
-import seedu.academydirectory.versioncontrol.controllers.CommitController;
-import seedu.academydirectory.versioncontrol.controllers.LabelController;
-import seedu.academydirectory.versioncontrol.controllers.TreeController;
+import seedu.academydirectory.storage.VersionControlReader;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
 import seedu.academydirectory.versioncontrol.objects.Tree;
 import seedu.academydirectory.versioncontrol.objects.VcObject;
-import seedu.academydirectory.versioncontrol.storage.CommitStorageManager;
-import seedu.academydirectory.versioncontrol.storage.LabelStorageManager;
-import seedu.academydirectory.versioncontrol.storage.TreeStorageManager;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
@@ -26,24 +25,14 @@ public class VersionControl {
     private static final String headLabelString = "HEAD";
     private static final String oldLabelString = "temp_LATEST";
 
-    private final TreeController treeController;
-    private final CommitController commitController;
-    private final LabelController labelController;
+    private final VersionControlReader versionControlReader;
 
     private final Path storagePath;
     private List<VcObject> stageArea = List.of(headCommit);
 
     public VersionControl(HashMethod hashMethod, Path vcPath, Path storagePath) {
-        HashGenerator generator = new HashGenerator(HashMethod.SHA1);
-        // Create storage managers
-        TreeStorageManager treeStorageManager = new TreeStorageManager(vcPath);
-        this.treeController = new TreeController(generator, treeStorageManager);
-
-        CommitStorageManager commitStorageManager = new CommitStorageManager(vcPath, treeStorageManager);
-        this.commitController = new CommitController(generator, commitStorageManager);
-
-        LabelStorageManager labelStorageManager = new LabelStorageManager(vcPath, commitStorageManager);
-        this.labelController = new LabelController(generator, labelStorageManager);
+        this.versionControlReader = new VersionControlReader(hashMethod, vcPath);
+        HashGenerator generator = new HashGenerator(hashMethod);
 
         this.storagePath = storagePath;
         // Make versionControlled path if not exist
@@ -66,9 +55,9 @@ public class VersionControl {
     public boolean commit(String message) {
         Commit parentCommit = this.headCommit;
         // Make VcObjects
-        Tree blobTree = treeController.createNewTree(storagePath);
-        this.headCommit = commitController.createNewCommit(message, () -> blobTree, () -> parentCommit);
-        Label headLabel = labelController.createNewLabel(headLabelString, headCommit);
+        Tree blobTree = versionControlReader.createNewTree(storagePath);
+        this.headCommit = versionControlReader.createNewCommit(message, () -> blobTree, () -> parentCommit);
+        Label headLabel = versionControlReader.createNewLabel(headLabelString, headCommit);
 
         this.resetStage();
         stage(headLabel);
@@ -81,17 +70,18 @@ public class VersionControl {
         Commit mainCommit = fetchCommitByLabel(oldLabelString);
         assert mainCommit.equals(this.headCommit);
 
-        Commit relevantCommit = commitController.fetchCommitByHash(fiveCharHash);
+        Commit relevantCommit = versionControlReader.fetchCommitByHash(fiveCharHash);
         if (relevantCommit.equals(Commit.NULL)) {
             return Commit.NULL;
         }
 
         Tree relevantTree = relevantCommit.getTreeSupplier().get();
-        treeController.regenerateBlobs(relevantTree);
         this.headCommit = relevantCommit;
 
-        Label oldLabel = labelController.createNewLabel(oldLabelString, mainCommit);
-        Label headLabel = labelController.createNewLabel(headLabelString, headCommit);
+        Label oldLabel = versionControlReader.createNewLabel(oldLabelString, mainCommit);
+        Label headLabel = versionControlReader.createNewLabel(headLabelString, headCommit);
+
+        regenerateBlobs(relevantTree);
 
         resetStage();
         stage(oldLabel);
@@ -116,6 +106,16 @@ public class VersionControl {
     }
 
     public Commit fetchCommitByLabel(String labelName) {
-        return labelController.fetchLabelByName(labelName).getCommitSupplier().get();
+        return versionControlReader.fetchLabelByName(labelName).getCommitSupplier().get();
+    }
+
+    private void regenerateBlobs(Tree tree) throws IOException {
+        HashMap<String, String> hashMap = tree.getHashMap();
+        for (String vcFilename : hashMap.keySet()) {
+            String actualFilename = hashMap.get(vcFilename);
+            Path actualFilepath = Paths.get(actualFilename);
+            Path vcFilepath = Paths.get(vcFilename);
+            Files.copy(vcFilepath, actualFilepath, REPLACE_EXISTING);
+        }
     }
 }
