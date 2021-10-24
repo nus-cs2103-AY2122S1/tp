@@ -71,5 +71,13 @@ public interface Logic {
      */
     void updateProgrammerError(ProgrammerError pe);
 
+    /**
+     * Update FilteredStudents to the specified one.
+     */
     void updateFilteredStudents(Predicate<Student> predicate);
+
+    /**
+     * Save ProgrammerError to the storage.
+     */
+    void saveProgrammerError(ProgrammerError pe);
 }

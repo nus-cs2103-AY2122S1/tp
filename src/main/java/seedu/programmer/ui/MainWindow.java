@@ -235,12 +235,8 @@ public class MainWindow extends UiPart<Stage> {
         newPE.setStudents(stuList);
         logic.updateProgrammerError(newPE);
         logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
-        try {
-            logic.getStorage().saveProgrammerError(newPE);
-        } catch (IOException e) {
-            displayPopup("An unexpected error has occurred, please try again!");
-            return;
-        }
+        logic.saveProgrammerError(newPE);
+
         logger.info("Uploaded CSV data successfully!");
     }
 
