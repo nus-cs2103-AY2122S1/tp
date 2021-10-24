@@ -30,7 +30,7 @@ public class TaskMatchesKeywordPredicate implements Predicate<Task> {
         requireNonNull(task);
         requireNonNull(keywords);
 
-        String preppedName = task.taskName.toLowerCase();
+        String preppedName = task.getTaskName().taskName.toLowerCase();
         return StringUtil.containsWordsInOrderIgnoreCase(preppedName, keywords);
     }
 }
