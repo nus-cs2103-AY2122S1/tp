@@ -109,7 +109,7 @@ public class MainWindow extends UiPart<Stage> {
             }
         });
     }
-
+    
     /**
      * Fills up all the placeholders of this window.
      */
