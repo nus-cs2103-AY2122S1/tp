@@ -111,8 +111,49 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        CommandResult expectedCommandResult;
+
+        if (isFacilityCommand(command)) {
+            expectedCommandResult = new CommandResult(expectedMessage, false,
+                    true, false);
+        } else if (isMemberCommand(command)) {
+            expectedCommandResult = new CommandResult(expectedMessage, false,
+                    false, true);
+        } else {
+            expectedCommandResult = new CommandResult(expectedMessage);
+        }
+
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Checks if the given command should select the Facility Tab.
+     */
+    private static boolean isFacilityCommand(Command command) {
+        return command instanceof AddFacilityCommand
+                || command instanceof ClearFacilitiesCommand
+                || command instanceof DeleteFacilityCommand
+                || command instanceof EditFacilityCommand
+                || command instanceof FindFacilityCommand
+                || command instanceof ListFacilityCommand
+                || command instanceof SplitCommand;
+    }
+
+    /**
+     * Checks if the given command should select the Member Tab.
+     */
+    private static boolean isMemberCommand(Command command) {
+        return command instanceof AddMemberCommand
+                || command instanceof ClearMembersCommand
+                || command instanceof DeleteMemberCommand
+                || command instanceof EditMemberCommand
+                || command instanceof FindMemberCommand
+                || command instanceof ListMemberCommand
+                || command instanceof SetMemberAvailabilityCommand
+                || command instanceof SortMemberCommand
+                || command instanceof ClearAttendanceCommand
+                || command instanceof MarkAttendanceCommand
+                || command instanceof UnmarkAttendanceCommand;
     }
 
     /**

@@ -42,7 +42,7 @@ public class UnmarkAttendanceCommand extends Command {
         }
 
         model.unmarkMembersAttendance(indices);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
 
     @Override

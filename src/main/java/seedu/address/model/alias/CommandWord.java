@@ -9,6 +9,7 @@ import java.util.List;
 import seedu.address.logic.commands.AddAliasCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.commands.ClearAttendanceCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteAliasCommand;
@@ -22,10 +23,12 @@ import seedu.address.logic.commands.FindMemberCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListFacilityCommand;
 import seedu.address.logic.commands.ListMemberCommand;
+import seedu.address.logic.commands.MarkAttendanceCommand;
 import seedu.address.logic.commands.SetMemberAvailabilityCommand;
 import seedu.address.logic.commands.ShowAliasesCommand;
 import seedu.address.logic.commands.SortMemberCommand;
 import seedu.address.logic.commands.SplitCommand;
+import seedu.address.logic.commands.UnmarkAttendanceCommand;
 
 /**
  * Represents a CommandWord for an alias in user pref.
@@ -43,7 +46,8 @@ public class CommandWord implements Serializable {
             ClearFacilitiesCommand.COMMAND_WORD, FindMemberCommand.COMMAND_WORD,
             ListMemberCommand.COMMAND_WORD, ListFacilityCommand.COMMAND_WORD, ExitCommand.COMMAND_WORD,
             HelpCommand.COMMAND_WORD, FindFacilityCommand.COMMAND_WORD, AddFacilityCommand.COMMAND_WORD,
-            SetMemberAvailabilityCommand.COMMAND_WORD, SplitCommand.COMMAND_WORD, SortMemberCommand.COMMAND_WORD,
+            SetMemberAvailabilityCommand.COMMAND_WORD, SplitCommand.COMMAND_WORD, MarkAttendanceCommand.COMMAND_WORD,
+            UnmarkAttendanceCommand.COMMAND_WORD, ClearAttendanceCommand.COMMAND_WORD, SortMemberCommand.COMMAND_WORD,
             AddAliasCommand.COMMAND_WORD, DeleteAliasCommand.COMMAND_WORD, ShowAliasesCommand.COMMAND_WORD);
 
     private String commandWord;
