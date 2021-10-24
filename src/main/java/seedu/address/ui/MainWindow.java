@@ -22,6 +22,7 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -128,7 +129,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList());
+        centerPanel = new CenterPanel(logic.getCalendar(),
+                logic.getFilteredPersonList(), logic.getEmptyLessonList());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -186,8 +188,12 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.displaySchedulePanel();
     }
 
-    private void handlePersonList() {
-        centerPanel.displayPersonListPanel();
+    private void handlePersonGridPanel() {
+        centerPanel.displayPersonGridPanel(logic.getFilteredPersonList(), logic.getEmptyLessonList());
+    }
+
+    private void handlePersonGridPanel(Person student) {
+        centerPanel.displayPersonGridPanel(student, logic.getLessonList(student));
     }
 
     /**
@@ -205,10 +211,13 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isShowSchedule()) {
+            if (commandResult.isDisplayStudent()) {
+                Person student = commandResult.getStudent();
+                handlePersonGridPanel(student);
+            } else if (commandResult.isShowSchedule()) {
                 handleSchedule();
             } else {
-                handlePersonList();
+                handlePersonGridPanel();
             }
 
             if (commandResult.isExit()) {
