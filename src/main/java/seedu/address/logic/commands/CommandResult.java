@@ -46,6 +46,13 @@ public class CommandResult {
     }
 
     /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, Person student) {
+        this(feedbackToUser, DisplayType.STUDENTS, student);
+    }
+
+    /**
      * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
      * and other fields set to their default value.
      */

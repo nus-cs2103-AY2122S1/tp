@@ -14,7 +14,7 @@ public class WeekCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_help_success() {
+    public void execute_week_success() {
         CommandResult expectedCommandResult =
                 new CommandResult(SHOWING_WEEK_MESSAGE, WEEK);
         assertCommandSuccess(new WeekCommand(), model, expectedCommandResult, expectedModel);

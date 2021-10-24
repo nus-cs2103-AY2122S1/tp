@@ -246,6 +246,7 @@ public class MainWindow extends UiPart<Stage> {
                 } else {
                     handlePersonGridPanel();
                 }
+                break;
 
             case NEXT:
                 handleNext();
