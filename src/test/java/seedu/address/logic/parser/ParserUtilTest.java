@@ -281,6 +281,11 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseNextMeeting_emptyString_returnsNullMeeting() throws Exception {
+        assertEquals(NextMeeting.getNullMeeting(), ParserUtil.parseNextMeeting(""));
+    }
+
+    @Test
     public void parseNextMeeting_validValueWithoutWhitespace_returnsNextMeeting() throws Exception {
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
             "Starbucks @ UTown", "");

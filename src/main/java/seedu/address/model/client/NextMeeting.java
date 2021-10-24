@@ -18,7 +18,7 @@ public class NextMeeting implements OptionalNonStringBasedField {
     public static final String TIME_MESSAGE_CONSTRAINTS = "Next meeting time should be in the 24-hour format, "
             + "where Hour and Minutes should be numerical values.";
     public static final String MESSAGE_INVALID_MEETING_STRING = "String representation of Next Meeting is not correct";
-    public static final String NO_NEXT_MEETING = "No meeting planned.";
+    public static final String NO_NEXT_MEETING = "No meeting planned";
     public static final NextMeeting NULL_MEETING = new NextMeeting(null, null, null,
         null, null);
 

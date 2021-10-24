@@ -144,7 +144,7 @@ public class ParserUtil {
     public static NextMeeting parseNextMeeting(String nextMeeting) throws ParseException {
         requireNonNull(nextMeeting);
         String trimmedNextMeeting = nextMeeting.trim();
-        if (trimmedNextMeeting.equals(NextMeeting.NO_NEXT_MEETING)) {
+        if (trimmedNextMeeting.equals(NextMeeting.NO_NEXT_MEETING) || trimmedNextMeeting.isEmpty()) {
             return NextMeeting.NULL_MEETING;
         }
 
