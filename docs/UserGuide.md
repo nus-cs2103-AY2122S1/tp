@@ -22,7 +22,7 @@ Interested to know more? Take a look at our Quick Start guide. Enjoy!
 
 The following is the GUI of our application:
 
-![UI Preview](images/User%20Guide/1.2.1%20UI%20Preview.png)
+![UI Preview](images/userguide/1.2.1%20UI%20Preview.png)
 - Note that Daily Panel is in red only for visibility purposes
 
 GUI Components:
@@ -178,11 +178,11 @@ After running the add command the task gets added to the task list as shown belo
 
 Find tasks with matching keywords and show them in the task list.
 
-![find_command](images/findCommand.jpeg)
+![find_command](images/userguide/findCommandBefore.png)
 
 After running the find command, the tasks having the mentioned keyword are displayed as shown below:
 
-![find_command_after](images/findCommandAfter.jpeg)
+![find_command_after](images/userguide/findCommandAfter.png)
 
 <div markdown="block" class="alert alert-primary">
 
@@ -313,11 +313,11 @@ Removes a specific task that has been added to your app.
 
 #### Demonstration:
 
-![delete_command](images/User%20Guide/deleteCommandBefore.png)
+![delete_command](images/userguide/deleteCommandBefore.png)
 
 After running the delete command, the task at that particular index gets deleted as shown below:
 
-![delete_command_after](images/User%20Guide/deleteCommandAfter.png)
+![delete_command_after](images/userguide/deleteCommandAfter.png)
 
 
 <div style="page-break-after: always;"></div>
