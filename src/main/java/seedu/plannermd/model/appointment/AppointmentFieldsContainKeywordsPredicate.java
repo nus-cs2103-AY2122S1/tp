@@ -27,8 +27,8 @@ public class AppointmentFieldsContainKeywordsPredicate implements Predicate<Appo
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof
-                seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate // instanceof handles nulls
+                || (other instanceof seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate
+                // instanceof handles nulls
                 && keywords.equals((
                         (seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate) other)
                             .keywords)); // state check
