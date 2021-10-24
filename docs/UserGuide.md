@@ -38,6 +38,7 @@ Managera is OS-independent meaning it will work on any operating system.
         * [Exiting the program: `exit`](#exiting-the-program--exit)
         * [Saving the data](#saving-the-data)
         * [Editing the data file](#editing-the-data-file)
+- [**Glossary**](#glossary)
 - [**FAQ**](#faq)
 - [**Command summary**](#command-summary)
 
@@ -50,6 +51,8 @@ and get started.
 If there are any doubts on how certain commands are used, you can look for the description of the command in the [Features](#features)
 section or have a brief overview in the [Command Summary](#command-summary) section.
 
+If there are any terms used in this user guide you are unclear of or do not understand, their definitions may be found in the [Glossary](#glossary).
+
 For any other questions about Managera, you may refer to the [FAQ](#faq) section.
 
 You can quickly jump to any of the sections by using the [Table of Contents](#table-of-contents) above.
@@ -58,13 +61,13 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 
 1. [Ensure](https://twallet.telangana.gov.in/TABiometric/data/Java%20Check.pdf) you have Java `11` or above installed in your Computer.
 
-2. If your Computer do not have Java `11`, obtain the installation package from [here](https://www.oracle.com/java/technologies/downloads/#java11) and follow the instructions [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html).
+2. If your computer does not have Java `11`, obtain the installation package from [here](https://www.oracle.com/java/technologies/downloads/#java11) and follow the instructions [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html).
 
-3. Download the latest `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
+3. Download the latest release `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
 
-4. Copy the Managera.jar to a new folder and that will be the _home folder_ for Managera.
+4. Copy `managera.jar` to a new folder which will act as the _home folder_ for Managera.
 
-5. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+5. Double-click `managera.jar` to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. <br>
@@ -158,7 +161,7 @@ Examples:
 
 ### Locating Participants by name: `find`
 
-Finds Participant whose names contain any of the given keywords.
+Finds Participants whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -223,7 +226,7 @@ Example Usage:
 
 ### Editing an event : `editEvent`
 
-Edits an existing event in Managera.
+Edits an existing Event in Managera.
 
 Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 
@@ -232,7 +235,7 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You can remove the time of event by typing `t/` and leaving blank after it.
+* You can remove the time of Event by typing `t/` and leaving blank after it.
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event to be `241Km Marathon`.
@@ -374,11 +377,11 @@ Format: `exit`
 
 ### Saving the data
 
-Managera data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Managera saves data in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-Managera data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Managera's data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, Managera will discard all data and start with an empty data file at the next run.
@@ -386,10 +389,35 @@ If your changes to the data file makes its format invalid, Managera will discard
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary
+
+**Participant**: A person that is participating in or attending some given event.<br>
+
+**Event**: An event that will be conducted in real life e.g., a competition, meeting, social activity etc.<br>
+
+**Command**: A command is a specific instruction that you give to Managera to perform a certain action, like adding a new Participant to the list.
+Commands will be the primary way that you will interact with Managera.<br>
+
+**Parameter**: Parameters are pieces of data that must be passed to certain commands to tell Managera which actions to perform. For example, 
+the `done` command requires a single integer as a parameter so that it knows which event to mark as done.<br>
+
+**Prefix**: Prefixes are unique identifiers in front of parameters so that Managera understands what kind of values they are. For example, 
+the prefix "n/" lets Managera know that a name is expected to follow behind it, while the prefix "d/" lets Managera know that a date is expected.<br>
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Managera home folder.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install and run Managera in the other computer. Then overwrite the empty save file it creates with the save file from your previous computer. The save file of 
+Managera is found in `[JAR file location]/data/addressbook.json`.
+
+**Q**: Does Managera have a mobile version?<br>
+**A**: Managera currently does not operate on any other platform other than desktop.
+
+**Q**: I accidentally exited Managera by closing the window rather than using the given `exit` command, what do I do?<br>
+**A**: Since Managera automatically saves your data to the hard disk after each change, it should not reverse any changes you have made in the session. Your changes are 
+likely to still be there after restarting Managera.
 
 --------------------------------------------------------------------------------------------------------------------
 
