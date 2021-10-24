@@ -11,7 +11,6 @@ import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddShiftCommand;
 import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
@@ -39,7 +38,7 @@ public class SetShiftTimeCommandParser implements Parser<SetShiftTimeCommand> {
                 && !arePrefixesPresent(argMultimap, PREFIX_DASH_NAME))
                 || (arePrefixesPresent(argMultimap, PREFIX_DASH_INDEX)
                 && arePrefixesPresent(argMultimap, PREFIX_DASH_NAME))) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetShiftTimeCommand.MESSAGE_USAGE));
         }
 
         try {
