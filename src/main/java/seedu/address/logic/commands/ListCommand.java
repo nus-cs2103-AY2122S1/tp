@@ -3,11 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.function.Predicate;
+
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Visit;
-
-import java.util.function.Predicate;
 
 /**
  * Lists all persons in the address book to the user.
