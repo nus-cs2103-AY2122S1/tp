@@ -239,7 +239,7 @@ Format: `completedtasks`
 
 List all the incomplete tasks.
 
-Format: `completedtasks`
+Format: `incompletetasks`
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -253,7 +253,7 @@ Format: `completedorders`
 
 List all the incomplete orders.
 
-Format: `completedorders`
+Format: `incompleteorders`
 
 ### Sorting orders by amount: `sortorders`
 
@@ -312,11 +312,11 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 Action | Format, Examples
 --------|------------------
-**ListPerson** | `list`
-**AddPerson** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
-**DeletePerson** | `delete INDEX`<br> e.g., `delete 3`
-**EditPerson** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**FindPerson** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**ListClient** | `list`
+**AddClient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
+**DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
+**EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**FindClient** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
 ###Task Commands
 
@@ -335,7 +335,7 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **ListOrders** | `listorder`
-**AddOrder** | `addorder l/LABEL d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
+**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
 **DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
 **MarkOrder** | `markorder INDEX` e.g. `markorder 2`
 **CompletedOrders** | `completedorders`
