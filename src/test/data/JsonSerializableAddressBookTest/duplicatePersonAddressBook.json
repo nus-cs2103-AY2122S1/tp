@@ -8,7 +8,10 @@
     "tutorialGroup": "T09",
     "socialHandle": "@valid",
     "remark": "likes coding",
-    "tagged": [ "friends" ]
+    "tagged" : [ {
+      "tagName" : "friend",
+      "tagColour" : "#3e7b91"
+    } ]
   }, {
     "name": "Alice Pauline",
     "gender": "F",

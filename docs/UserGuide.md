@@ -42,7 +42,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
-1. *Double-click* the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
+1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
 
    ![Ui](images/Ui.png)
 
@@ -104,14 +104,15 @@ Format: **`help`**
 
 Adds a person to the address book.
 
-Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
+Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​
 [r/REMARK] [t/TAG]…​`
 
 * Only `n/NAME` field is *compulsory*, while other fields are *optional*.
 * The order of the fields does not matter
+* The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name (e.g. `ig` for Instagram, `tg` for Telegram) and `HANDLENAME` is the the identifying username for that platform.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0) and social handles (including 0)
 </div>
 
 Examples:
@@ -119,7 +120,8 @@ Examples:
 * **`add`** `n/Dwight Halpert`
 * **`add`** `n/John Doe p/98765432 e/johnd@example.com g/M`
 * **`add`** `n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 tg/07`
-* **`add`** `n/Tan Ah Gao nat/Singapore h/@TanAhCow r/Funny Guy`
+* **`add`** `n/Tan Ah Gao nat/Singapore h/tg:TanAhCow r/Funny Guy`
+* **`add`** `n/Alex h/tg:alex3324 h/ig:alexxx`
 
 ### Importing contacts from a file `import`
 
@@ -140,14 +142,24 @@ Format: **`list`**
 
 Edits an existing person in the address book.
 
-Format: **`edit`** `INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
-[r/REMARK] [t/TAG]…​`
+Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
+
+* `FIELD_PREFIX/VALUE` can be any of the following: 
+     * `n/NAME`
+     * `g/GENDER`
+     * `p/PHONE`
+     * `e/EMAIL`
+     * `nat/NATIONALITY`
+     * `tg/TUTORIAL_GROUP`
+     * `h/SOCIAL_HANDLE`
+     * `r/REMARK`
+     * `t/TAG`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* If duplicated field are given, only the latest one will be taken (except for `h/SOCIAL_HANDLE` and `t/TAG`)
+* When editing tags, the existing tags of the person will be removed (i.e adding of tags is not cumulative).
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
@@ -158,17 +170,28 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds a person or a list of persons using `KEYWORD`.
 
-Format: **`find`** `KEYWORD [MORE_KEYWORDS]`
+Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Socius is capable of searching for keywords of all properties. e.g. `SocialHandle`, `Nationality`, etc.
-* Only full words will be matched e.g. `Han` will not match `Hans`add
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will
-  return `Hans Gruber`
-  , `Bo Yang`
+* `FIELD_PREFIX/KEYWORD` can be any of the following: 
+     * `n/NAME`
+     * `g/GENDER`
+     * `p/PHONE`
+     * `e/EMAIL`
+     * `nat/NATIONALITY`
+     * `tg/TUTORIAL_GROUP`
+     * `h/SOCIAL_HANDLE`
+     * `r/REMARK`
+     * `t/TAG`
+* The search is case-insensitive. (e.g `hans` will match `Hans`)
+* As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
+* Persons matching at least one keyword will be returned (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
+  return `Hans Gruber`, `Bo Yang`)
+  
+ <!--- * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Socius is capable of searching for keywords of all properties. e.g. `SocialHandle`, `Nationality`, etc. 
+* Only full words will be matched e.g. `Han` will not match `Hans`add --->
 
 Examples:
 
@@ -250,10 +273,10 @@ the data of your previous Socius home folder.
 
 |Action | Format | Examples|
 |--------|------------------|------------------------------------|
-|**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
+|**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/tg:friendlyjames r/Friendly t/colleague`|
 |**Clear** | **`clear`** | **`clear`** |
 |**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
-|**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
-|**Find** | **`find`** `KEYWORD [MORE_KEYWORDS]` | **`find`** `g/F tg/07` |
-|**List** | **`list`** | **`list`** |
+|**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
+|**Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
 |**Help** | **`help`** | **`help`** |
+|**List** | **`list`** | **`list`** |
