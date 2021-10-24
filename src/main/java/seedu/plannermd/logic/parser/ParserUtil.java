@@ -166,45 +166,4 @@ public class ParserUtil {
         }
         return new Risk(trimmedAndUpperCaseRisk);
     }
-
-    /**
-     * Parses a {@code String remark} into an {@code Remark}.
-     * Leading and trailing whitespaces will be trimmed.
-     * Optional Risk field accepts an empty string as UNCLASSIFIED.
-     *
-     * @throws ParseException if the given {@code risk} is invalid.
-     */
-    public static Remark parseRemark(String remark) throws ParseException {
-        requireNonNull(remark);
-        String trimmedRemark = remark.trim();
-        if (trimmedRemark.isEmpty()) {
-            return Remark.getEmptyRemark();
-        }
-        return new Remark(trimmedRemark);
-    }
-
-//    public static AppointmentDate parseStartDate(String startDate) throws ParseException {
-//        requireNonNull(startDate);
-//        String trimmedStartDate = startDate.trim();
-//        if (!AppointmentDate.isValidAppointmentDate(trimmedStartDate)) {
-//            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
-//        }
-//        return new AppointmentDate(trimmedStartDate);
-//    }
-
-    public static Duration parseDuration(String duration) throws ParseException {
-        requireNonNull(duration);
-        String trimmedDuration = duration.trim();
-        if (trimmedDuration.isEmpty()) {
-            return Duration.getDefaultDuration();
-        }
-        try {
-            if (!Duration.isValidDuration(trimmedDuration)) {
-                throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
-            }
-            return new Duration(trimmedDuration);
-        } catch (NumberFormatException e) {
-            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
-        }
-    }
 }
