@@ -79,7 +79,6 @@ public class TransactionRecord {
 
     /**
      * Returns true if two transactions have the same id and timestamp.
-     * Current implementation does not compare item list as the id and timestamp pairs are assumed unique.
      */
     @Override
     public boolean equals(Object other) {
@@ -89,7 +88,7 @@ public class TransactionRecord {
 
         if (other instanceof TransactionRecord) {
             TransactionRecord temp = (TransactionRecord) other;
-            return temp.id.equals(id) && temp.timestamp.equals(timestamp);
+            return temp.id.equals(id) && temp.timestamp.equals(timestamp) && hasSameItems(temp);
         } else {
             return false;
         }
