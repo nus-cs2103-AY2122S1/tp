@@ -42,8 +42,8 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
     }
 
     /**
-     * Adds a tutorial class to the list.
-     * The tutorial class must not already exist in the list.
+     * Sorts the tutorial class list.
+     * Sorts by ClassCode, followed by GroupType and then GroupName.
      */
     public void sort() {
         Comparator<TutorialGroup> compareByName = Comparator

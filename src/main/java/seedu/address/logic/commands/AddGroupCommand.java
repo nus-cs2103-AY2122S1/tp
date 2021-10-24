@@ -54,6 +54,8 @@ public class AddGroupCommand extends Command {
         }
 
         model.addTutorialGroup(toAdd);
+
+        // rearrange tutorial groups in order after adding
         model.sortTutorialGroups();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

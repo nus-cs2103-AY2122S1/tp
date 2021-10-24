@@ -63,6 +63,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void sortTutorialGroups() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setClassmate(ReadOnlyClassmate newData) {
         throw new AssertionError("This method should not be called.");
     }

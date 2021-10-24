@@ -2,6 +2,8 @@ package seedu.address.model.student;
 
 import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 
 /**
  * Represents a Student's classcode in the ClassMATE.
@@ -24,7 +26,6 @@ public class ClassCode implements Comparable<ClassCode> {
         requireNonNull(classCode);
         value = classCode;
     }
-
 
     @Override
     public String toString() {
