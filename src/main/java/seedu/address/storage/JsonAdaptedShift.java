@@ -27,6 +27,9 @@ public class JsonAdaptedShift {
     private final String isWorking;
     private final List<JsonAdaptedPeriod> history = new ArrayList<>();
 
+    /**
+     * Constructs a {@code JsonAdaptedRole} with the given Shift details.
+     */
     @JsonCreator
     public JsonAdaptedShift(@JsonProperty("dayOfWeek") String dayOfWeek, @JsonProperty("slot") String slot,
                             @JsonProperty("history") List<JsonAdaptedPeriod> history,
@@ -58,6 +61,11 @@ public class JsonAdaptedShift {
 
     }
 
+    /**
+     * Converts this Jackson-friendly adapted role object into the model's {@code Shift} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted role.
+     */
     public Shift toModelType() throws IllegalValueException {
         if (!isValidSlot(slot)) {
             throw new IllegalValueException(Slot.MESSAGE_CONSTRAINTS);
@@ -65,7 +73,7 @@ public class JsonAdaptedShift {
         Slot modelSlot = Slot.translateStringToSlot(slot);
         DayOfWeek modelDayOfWeek = DayOfWeek.valueOf(dayOfWeek);
         List<Period> periods = new ArrayList<>();
-        for (JsonAdaptedPeriod period :  history) {
+        for (JsonAdaptedPeriod period : history) {
             periods.add(period.toModelType());
         }
         if (!isWorking.equals("true") && !isWorking.equals("false")) {

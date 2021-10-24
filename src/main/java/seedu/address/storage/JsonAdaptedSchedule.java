@@ -20,7 +20,9 @@ public class JsonAdaptedSchedule {
         this.shifts = shifts;
     }
 
-
+    /**
+     * Constructs a {@code JsonAdaptedSchedule} with the given {@code Schedule} source.
+     */
     public JsonAdaptedSchedule(Schedule schedule) {
         Shift[][] shifts = schedule.getShifts();
         this.shifts = new JsonAdaptedShift[DAY_OF_WEEK][PERIOD_OF_DAY];
@@ -34,6 +36,11 @@ public class JsonAdaptedSchedule {
         }
     }
 
+    /**
+     * Converts this Jackson-friendly adapted role object into the model's {@code Schedule} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted role.
+     */
     public Schedule toModelType() throws IllegalValueException {
         Shift[][] modelShifts = new Shift[DAY_OF_WEEK][PERIOD_OF_DAY];
         for (int i = 0; i < PERIOD_OF_DAY; i++) {

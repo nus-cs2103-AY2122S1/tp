@@ -13,8 +13,9 @@ import seedu.address.logic.commands.AddShiftCommand;
 import seedu.address.model.person.Name;
 
 public class AddShiftCommandParserTest {
-    private AddShiftCommandParser parser = new AddShiftCommandParser();
     private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
+    private AddShiftCommandParser parser = new AddShiftCommandParser();
+
 
     @Test
     public void parse_emptyArg_throwsParseException() {

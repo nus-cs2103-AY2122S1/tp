@@ -13,17 +13,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class ScheduleTest {
-    private static final LocalDate START_DATE = LocalDate.of(1, 1 ,1);
+    private static final LocalDate START_DATE = LocalDate.of(1, 1 , 1);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new Schedule(null));
-    }
-
-    @Test
-    public void constructor_invalidSchedule_throwsIllegalArgumentException() {
-        String invalidSchedule = "";
-//        assertThrows(IllegalArgumentException.class, () -> new Schedule(invalidSchedule));
     }
 
     @Test

@@ -147,13 +147,13 @@ public class PersonBuilder {
         return this;
     }
 
-//    /**
-//     * Sets the {@code Schedule} of the {@code Person} that we are building.
-//     */
-//    public PersonBuilder withSchedule(String schedule) {
-//        this.schedule = new Schedule(schedule);
-//        return this;
-//    }
+    /**
+     * Sets the {@code Schedule} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSchedule(ScheduleBuilder builder) {
+        this.schedule = new Schedule();
+        return this;
+    }
 
     /**
      * Returns a new Person object with the fields set in this PersonBuilder object.
