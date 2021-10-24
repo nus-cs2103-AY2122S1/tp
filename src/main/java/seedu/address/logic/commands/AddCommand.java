@@ -56,8 +56,9 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_TAG + "cousin "
             + PREFIX_TAG + "math";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + " command parameters: " + COMMAND_PARAMETERS + "\n"
-            + "Note: Name, address, and at least 1 contact field must be present and not empty!\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TAB.\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Note: at least one contact field must be present and not empty. \n"
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String USER_TIP = "Try adding a student using: \n"
