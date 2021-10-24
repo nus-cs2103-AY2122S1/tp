@@ -20,7 +20,7 @@ public class ResidentList {
     public static final String EMPTY_STRING = "";
 
     private final String residents;
-    private final ArrayList<String> residentInformation;
+    private final ArrayList<String> stringResidentList;
     private final boolean isEmpty;
     private final ArrayList<Person> residentList = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class ResidentList {
         requireNonNull(residents);
         this.isEmpty = residents.equals(DEFAULT_LIST);
         this.residents = residents;
-        residentInformation = new ArrayList<>(Arrays.asList(this.residents.split("\\s*,\\s*")));
+        stringResidentList = new ArrayList<>(Arrays.asList(this.residents.split("\\s*,\\s*")));
     }
 
     /**
@@ -116,8 +116,8 @@ public class ResidentList {
         return residents;
     }
 
-    public ArrayList<String> getResidentInformation() {
-        return this.residentInformation;
+    public ArrayList<String> getStringResidentList() {
+        return this.stringResidentList;
     }
 
     public String getResidents() {
