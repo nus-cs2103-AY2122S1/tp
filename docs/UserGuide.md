@@ -216,7 +216,7 @@ Examples:
 * `edittask 1 l/order cloth d/19th September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
 * `edittask 2 t/General` edits the tag of the 2nd task to be `General`
 
-### Mark a task as done : `marktask`
+### Marking a task as done : `marktask`
 
 Marks a specified task from the application as done.
 
