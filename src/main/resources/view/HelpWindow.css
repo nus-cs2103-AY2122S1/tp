@@ -34,11 +34,10 @@
     -fx-text-fill: #d2691e;
 }
 
-#quickStartStep1, #quickStartStep2, #quickStartStep3 {
+#quickStart {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
-    -fx-label-padding: 2 2 2 2;
 }
 
 #format, #format1, #format2, #format3, #format4, #format5, #format6, #format7, #format8, #format9,
@@ -56,11 +55,10 @@
     -fx-label-padding: 2 2 2 2;
 }
 
-#featuresPoint1, #featuresPoint2, #featuresPoint3, #featuresPoint4, #featuresPoint5 {
+#featuresNotes {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
-    -fx-label-padding: 2 2 2 2;
 }
 
 #listDesc, #addSDesc, #delSDesc, #helpDesc, #editSDesc,#viewSDesc, #addPDesc, #delPDesc, #paidDesc, #unpaidDesc,
@@ -86,11 +84,10 @@
     -fx-label-padding: 2 2 2 2;
 }
 
-#faqQ, #faqA {
+#faq {
     -fx-alignment: top-left;
     -fx-font-family: "Arial";
     -fx-font-size: 16;
-    -fx-label-padding: 2 2 2 2;
 }
 
 #helpCommand, #addSCommand, #addSExample, #delSCommand, #delSExample, #listGeneralCommand, #listExample,

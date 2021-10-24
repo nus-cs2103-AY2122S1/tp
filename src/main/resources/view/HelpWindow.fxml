@@ -32,17 +32,12 @@
                         <Label fx:id="fullUserGuide" text="Label" wrapText="true"/>
                         <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL"/>
                     </TextFlow>
+
                     <Label fx:id="quickStartTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="quickStartStep1" text="Label" wrapText="true"/>
-                    <Label fx:id="quickStartStep2" text="Label" wrapText="true"/>
-                    <Label fx:id="quickStartStep3" text="Label" wrapText="true"/>
+                    <Label fx:id="quickStart" text="Label" wrapText="true"/>
 
                     <Label fx:id="featuresTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="featuresPoint1" text="Label" wrapText="true"/>
-                    <Label fx:id="featuresPoint2" text="Label" wrapText="true"/>
-                    <Label fx:id="featuresPoint3" text="Label" wrapText="true"/>
-                    <Label fx:id="featuresPoint4" text="Label" wrapText="true"/>
-                    <Label fx:id="featuresPoint5" text="Label" wrapText="true"/>
+                    <Label fx:id="featuresNotes" text="Label" wrapText="true"/>
 
                     <Label fx:id="helpTitle" text="Label" wrapText="true"/>
                     <Label fx:id="helpDesc" text="Label" wrapText="true"/>
@@ -182,12 +177,11 @@
                         <Label fx:id="editDataDesc1" text="Label" wrapText="true"/>
                         <Label fx:id="editFilePath" text="Label" wrapText="true"/>
                     </TextFlow>
-                        <Label fx:id="editDataDesc2" text="Label" wrapText="true"/>
+                    <Label fx:id="editDataDesc2" text="Label" wrapText="true"/>
                     <Label fx:id="editCaution" text="Label" wrapText="true"/>
 
                     <Label fx:id="faqTitle" text="Label" wrapText="true"/>
-                    <Label fx:id="faqQ" text="Label" wrapText="true"/>
-                    <Label fx:id="faqA" text="Label" wrapText="true"/>
+                    <Label fx:id="faq" text="Label" wrapText="true"/>
                 </children>
                 <opaqueInsets>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />

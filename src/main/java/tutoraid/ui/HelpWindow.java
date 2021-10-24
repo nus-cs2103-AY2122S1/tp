@@ -36,14 +36,9 @@ import static tutoraid.commons.core.HelpGuide.EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.EXIT_COMMAND;
 import static tutoraid.commons.core.HelpGuide.EXIT_DESC;
 import static tutoraid.commons.core.HelpGuide.EXIT_TITLE;
-import static tutoraid.commons.core.HelpGuide.FAQ_A;
-import static tutoraid.commons.core.HelpGuide.FAQ_Q;
+import static tutoraid.commons.core.HelpGuide.FAQ;
 import static tutoraid.commons.core.HelpGuide.FAQ_TITLE;
-import static tutoraid.commons.core.HelpGuide.FEATURES_POINT1;
-import static tutoraid.commons.core.HelpGuide.FEATURES_POINT2;
-import static tutoraid.commons.core.HelpGuide.FEATURES_POINT3;
-import static tutoraid.commons.core.HelpGuide.FEATURES_POINT4;
-import static tutoraid.commons.core.HelpGuide.FEATURES_POINT5;
+import static tutoraid.commons.core.HelpGuide.FEATURES_NOTES;
 import static tutoraid.commons.core.HelpGuide.FEATURES_TITLE;
 import static tutoraid.commons.core.HelpGuide.FORMAT;
 import static tutoraid.commons.core.HelpGuide.FULL_USER_GUIDE;
@@ -63,9 +58,7 @@ import static tutoraid.commons.core.HelpGuide.PAID_DESC;
 import static tutoraid.commons.core.HelpGuide.PAID_EXAMPLE;
 import static tutoraid.commons.core.HelpGuide.PAID_EXAMPLE_DESC;
 import static tutoraid.commons.core.HelpGuide.PAID_TITLE;
-import static tutoraid.commons.core.HelpGuide.QUICK_START_STEP1;
-import static tutoraid.commons.core.HelpGuide.QUICK_START_STEP2;
-import static tutoraid.commons.core.HelpGuide.QUICK_START_STEP3;
+import static tutoraid.commons.core.HelpGuide.QUICK_START;
 import static tutoraid.commons.core.HelpGuide.QUICK_START_TITLE;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_DESC;
 import static tutoraid.commons.core.HelpGuide.SAVING_DATA_TITLE;
@@ -112,24 +105,12 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label quickStartTitle;
     @FXML
-    private Label quickStartStep1;
-    @FXML
-    private Label quickStartStep2;
-    @FXML
-    private Label quickStartStep3;
+    private Label quickStart;
 
     @FXML
     private Label featuresTitle;
     @FXML
-    private Label featuresPoint1;
-    @FXML
-    private Label featuresPoint2;
-    @FXML
-    private Label featuresPoint3;
-    @FXML
-    private Label featuresPoint4;
-    @FXML
-    private Label featuresPoint5;
+    private Label featuresNotes;
 
     @FXML
     private Label format;
@@ -323,9 +304,7 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private Label faqTitle;
     @FXML
-    private Label faqQ;
-    @FXML
-    private Label faqA;
+    private Label faq;
 
     @FXML
     private VBox helpWindow;
@@ -448,9 +427,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void quickStart() {
         quickStartTitle.setText(QUICK_START_TITLE);
-        quickStartStep1.setText(QUICK_START_STEP1);
-        quickStartStep2.setText(QUICK_START_STEP2);
-        quickStartStep3.setText(QUICK_START_STEP3);
+        quickStart.setText(QUICK_START);
+        quickStart.setLineSpacing(2.0);
     }
 
     /**
@@ -458,11 +436,8 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void featureNotes() {
         featuresTitle.setText(FEATURES_TITLE);
-        featuresPoint1.setText(FEATURES_POINT1);
-        featuresPoint2.setText(FEATURES_POINT2);
-        featuresPoint3.setText(FEATURES_POINT3);
-        featuresPoint4.setText(FEATURES_POINT4);
-        featuresPoint5.setText(FEATURES_POINT5);
+        featuresNotes.setText(FEATURES_NOTES);
+        featuresNotes.setLineSpacing(2.0);
     }
 
     /**
@@ -649,7 +624,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void faq() {
         faqTitle.setText(FAQ_TITLE);
-        faqQ.setText(FAQ_Q);
-        faqA.setText(FAQ_A);
+        faq.setText(FAQ);
+        faq.setLineSpacing(2.0);
     }
 }

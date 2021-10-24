@@ -13,20 +13,18 @@ public class HelpGuide {
             + "https://ay2122s1-cs2103t-w16-3.github.io/tp/UserGuide.html   ";
 
     public static final String QUICK_START_TITLE = "Quick Start";
-    public static final String QUICK_START_STEP1 = "1. Ensure you have Java 11 or above installed in your Computer.";
-    public static final String QUICK_START_STEP2 = "2. Once you have opened tutoraid.jar, type the command in the "
-            + "command box and press Enter to execute.";
-    public static final String QUICK_START_STEP3 = "3. Refer to the Features below for details of each command.";
+    public static final String QUICK_START = "1. Ensure you have Java 11 or above installed in your Computer.\n" +
+            "2. Once you have opened tutoraid.jar, type the command in the command box and press Enter to execute.\n" +
+            "3. Refer to the Features below for details of each command.";
 
     public static final String FEATURES_TITLE = "Features";
-    public static final String FEATURES_POINT1 = "1. Words in UPPER_CASE are the parameters to be supplied by the "
-            + "user and can contain spaces.";
-    public static final String FEATURES_POINT2 = "2. Items in square brackets are optional.";
-    public static final String FEATURES_POINT3 = "3. Parameters can be in any order.";
-    public static final String FEATURES_POINT4 = "4. If a parameter is expected only once in the command but if you "
-            + "specify it multiple times, only the last occurrence of the parameter will be taken.";
-    public static final String FEATURES_POINT5 = "5. Extraneous parameters for commands that do not take in "
-            + "parameters will be ignored.";
+    public static final String FEATURES_NOTES = "1. Words in UPPER_CASE are the parameters to be supplied by the " +
+            "user and can contain spaces.\n" +
+            "2. Items in square brackets are optional.\n" +
+            "3. Parameters can be in any order.\n" +
+            "4. If a parameter is expected only once in the command but if you specify it multiple times, only the " +
+            "last occurrence of the parameter will be taken.\n" +
+            "5. Extraneous parameters for commands that do not take in parameters will be ignored.";
 
     public static final String HELP_TITLE = "Viewing help";
     public static final String HELP_COMMAND = "help";
@@ -119,8 +117,7 @@ public class HelpGuide {
             + "TutorAid will discard all data and start with an empty data file at the next run.";
 
     public static final String FAQ_TITLE = "FAQ";
-    public static final String FAQ_Q = "Q: How do I transfer my data to another Computer?";
-    public static final String FAQ_A = "A: Install the app in the other computer and overwrite the empty data file "
-            + "it creates with the file that contains the data of your previous TutorAid home folder.";
-
+    public static final String FAQ = "Q: How do I transfer my data to another Computer?\n" +
+            "A: Install the app in the other computer and overwrite the empty data file " +
+            "it creates with the file that contains the data of your previous TutorAid home folder.";
 }
