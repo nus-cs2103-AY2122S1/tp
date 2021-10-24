@@ -44,10 +44,12 @@ public class CommandTestUtil {
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_BESTCLASS = "BestClass";
     public static final String VALID_TAG_MORNING = "Morning";
-    public static final String VALID_CLASSCODE_G101 = "G101";
-    public static final String VALID_CLASSCODE_G102 = "G102";
-    public static final String VALID_SCHEDULE_G101 = "Monday 10am to 12pm, Thursday 10am to 12pm";
-    public static final String VALID_SCHEDULE_G102 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
+    public static final String VALID_CLASSCODE_G01 = "G01";
+    public static final String VALID_CLASSCODE_G02 = "G02";
+    public static final String VALID_CLASSCODE_G06 = "G06";
+    public static final String VALID_SCHEDULE_G01 = "Monday 10am to 12pm, Thursday 10am to 12pm";
+    public static final String VALID_SCHEDULE_G02 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
+    public static final String VALID_SCHEDULE_G06 = "Tuesday 12pm to 2pm, Friday 12pm to 2pm";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -63,10 +65,12 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String TAG_DESC_BESTCLASS = " " + PREFIX_TAG + VALID_TAG_BESTCLASS;
     public static final String TAG_DESC_MORNING = " " + PREFIX_TAG + VALID_TAG_MORNING;
-    public static final String CLASSCODE_DESC_G101 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G101;
-    public static final String CLASSCODE_DESC_G102 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G102;
-    public static final String SCHEDULE_DESC_G1O1 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G101;
-    public static final String SCHEDULE_DESC_G1O2 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G102;
+    public static final String CLASSCODE_DESC_G01 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G01;
+    public static final String CLASSCODE_DESC_G02 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G02;
+    public static final String CLASSCODE_DESC_G06 = " " + PREFIX_CLASSCODE + VALID_CLASSCODE_G06;
+    public static final String SCHEDULE_DESC_GO1 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G01;
+    public static final String SCHEDULE_DESC_GO2 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G02;
+    public static final String SCHEDULE_DESC_G06 = " " + PREFIX_SCHEDULE + VALID_SCHEDULE_G06;
 
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names

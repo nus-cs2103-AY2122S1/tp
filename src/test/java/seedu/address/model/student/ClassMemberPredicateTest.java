@@ -9,28 +9,28 @@ import seedu.address.testutil.StudentBuilder;
 
 class ClassMemberPredicateTest {
 
-    private final ClassCode test1 = new ClassCode("G101");
-    private final ClassCode test2 = new ClassCode("G102");
+    private final ClassCode test1 = new ClassCode("G01");
+    private final ClassCode test2 = new ClassCode("G02");
 
     @Test
     public void test_classCodeContainsKeywords_returnsTrue() {
         // matching classcode
         ClassMemberPredicate predicate = new ClassMemberPredicate(test1);
-        assertTrue(predicate.test(new StudentBuilder().withClassCode("G101").build()));
+        assertTrue(predicate.test(new StudentBuilder().withClassCode("G01").build()));
 
         predicate = new ClassMemberPredicate(test2);
-        assertTrue(predicate.test(new StudentBuilder().withClassCode("G102").build()));
+        assertTrue(predicate.test(new StudentBuilder().withClassCode("G02").build()));
     }
 
     @Test
     public void test_classCodeDoesNotContainKeywords_returnsFalse() {
         // non-matching classCode
         ClassMemberPredicate predicate = new ClassMemberPredicate(test1);
-        assertFalse(predicate.test(new StudentBuilder().withClassCode("G102").build()));
+        assertFalse(predicate.test(new StudentBuilder().withClassCode("G02").build()));
 
         // class code of tutorial class match phone, name and address, but does not match class code of student
-        assertFalse(predicate.test(new StudentBuilder().withName("G101").withPhone("101")
-                .withAddress("G101").build()));
+        assertFalse(predicate.test(new StudentBuilder().withName("G01").withPhone("01")
+                .withAddress("G01").build()));
 
     }
 

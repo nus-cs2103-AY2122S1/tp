@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalClassmate;
+import static seedu.address.testutil.TypicalClassmate.getTypicalClassmate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.student.Student;
+import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.testutil.StudentBuilder;
+import seedu.address.testutil.TutorialClassBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -28,7 +30,7 @@ public class AddStudentCommandIntegrationTest {
     @Test
     public void execute_newStudent_success() {
         Student validStudent = new StudentBuilder().build();
-
+        
         Model expectedModel = new ModelManager(model.getClassmate(), new UserPrefs());
         expectedModel.addStudent(validStudent);
 
