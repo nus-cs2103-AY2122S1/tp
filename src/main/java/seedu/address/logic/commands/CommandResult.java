@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.model.person.Person;
 
@@ -68,12 +69,8 @@ public class CommandResult {
         return displayType;
     }
 
-    public boolean isDisplayStudent() {
-        return student != null;
-    }
-
-    public Person getStudent() {
-        return student;
+    public Optional<Person> getStudent() {
+        return Optional.ofNullable(student);
     }
 
     @Override
