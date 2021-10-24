@@ -43,7 +43,7 @@ public interface Logic {
     ObservableList<Event> getFilteredEventList();
 
     /**
-     * Returns an unmodifiable view of the filtered list of events
+     * Returns an unmodifiable view of the filtered list of tasks.
      */
     ObservableList<Task> getFilteredTaskList();
 
