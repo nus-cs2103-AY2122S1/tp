@@ -5,11 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tracker.commons.core.Messages.MESSAGE_MODULES_LISTED_OVERVIEW;
 import static seedu.tracker.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tracker.testutil.TypicalModules.CP2106;
 import static seedu.tracker.testutil.TypicalModules.CS1231S;
 import static seedu.tracker.testutil.TypicalModules.CS2030S;
+import static seedu.tracker.testutil.TypicalModules.CS2040S;
 import static seedu.tracker.testutil.TypicalModules.CS2101;
+import static seedu.tracker.testutil.TypicalModules.CS2102;
 import static seedu.tracker.testutil.TypicalModules.CS2103T;
+import static seedu.tracker.testutil.TypicalModules.GEA1000;
 import static seedu.tracker.testutil.TypicalModules.GEQ1000;
+import static seedu.tracker.testutil.TypicalModules.IS1103;
+import static seedu.tracker.testutil.TypicalModules.MA1101R;
 import static seedu.tracker.testutil.TypicalModules.MA1521;
 import static seedu.tracker.testutil.TypicalModules.getTypicalModuleTracker;
 
@@ -70,62 +76,62 @@ public class FindCommandTest {
 
     @Test
     public void execute_codePredicate_multipleModulesFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 4);
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 6);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("c/ CS");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T, CS2101, CS1231S, CS2030S), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(CS2103T, CS2101, CS1231S, CS2030S, CS2102, CS2040S), model.getFilteredModuleList());
     }
 
     @Test
     public void execute_titlePredicate_multipleModulesFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 3);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("t/ on");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2101, GEQ1000), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(CS2101, GEQ1000, GEA1000), model.getFilteredModuleList());
     }
 
     @Test
     public void execute_descriptionPredicate_multipleModulesFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 4);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("d/ the");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CS2103T, CS2101), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(CS2103T, CS2101, IS1103, CS2040S), model.getFilteredModuleList());
     }
 
     @Test
     public void execute_academicYearPredicate_multipleModulesFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 5);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("y/ 1");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MA1521, CS1231S, CS2030S), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(MA1521, CS1231S, CS2030S, CS2040S, CP2106), model.getFilteredModuleList());
     }
 
     @Test
     public void execute_semesterPredicate_multipleModulesFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 6);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("s/ 1");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(MA1521, CS1231S), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(MA1521, CS1231S, MA1101R, CS2102, IS1103, GEA1000), model.getFilteredModuleList());
     }
 
     @Test
     public void execute_tagPredicate_oneModuleFound() {
-        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 1);
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
         ModuleContainsKeywordsPredicate predicate = preparePredicate("tag/ ge");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(GEQ1000), model.getFilteredModuleList());
+        assertEquals(Arrays.asList(GEQ1000, GEA1000), model.getFilteredModuleList());
     }
 
     @Test
