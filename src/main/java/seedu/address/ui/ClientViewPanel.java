@@ -97,7 +97,7 @@ public class ClientViewPanel extends UiPart<Region> {
             clientRiskAppetite.setText(null);
             clientCurrentPlans.setText(null);
             clientDisposableIncome.setText(null);
-            nextMeeting.setText(null);
+            clientNextMeeting.setText(null);
             clientEmail.setText(null);
             clientPhoneNumber.setText(null);
         }
