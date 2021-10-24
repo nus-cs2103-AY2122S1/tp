@@ -28,21 +28,21 @@ public class TeditCommand extends Command {
     public static final String COMMAND_WORD = "tedit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the detail of the task identified"
-            + "by the index number used in the displayed task list of the member identified"
+            + "by the index number used in the displayed task list of the member identified\n"
             + "by the index number used in the displayed member list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: " + PREFIX_TASK_ID + "TASK_ID (must be a positive integer) "
             + "[" + PREFIX_NAME + "TASK_NAME] "
             + "[" + PREFIX_STATUS + "TASK_STATUS] "
             + "[" + PREFIX_DATE + "TASK_DEADLINE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD
+            + PREFIX_TASK_ID + " 1 "
             + PREFIX_NAME + "group meeting "
             + PREFIX_DATE + "24/10/2021 23:59";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";
-    public static final String MESSAGE_MEMBER_NOT_FOUND = "This member does not exist in the member list";
 
     private final Index targetTaskIndex;
     private final EditTaskDescriptor editTaskDescriptor;

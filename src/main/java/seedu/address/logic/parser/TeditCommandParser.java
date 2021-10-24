@@ -27,7 +27,7 @@ public class TeditCommandParser implements Parser<TeditCommand> {
         ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(
                 userInput, PREFIX_TASK_ID, PREFIX_NAME, PREFIX_STATUS, PREFIX_DATE);
 
-        if (!arePrefixesPresent(argumentMultimap, PREFIX_TASK_ID, PREFIX_NAME, PREFIX_STATUS, PREFIX_DATE)
+        if (!arePrefixesPresent(argumentMultimap, PREFIX_TASK_ID)
                 || !argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TeditCommand.MESSAGE_USAGE));
         }
