@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
@@ -30,6 +31,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -60,6 +62,10 @@ public class LogicManagerTest {
     private static final Path IO_EXCEPTION_PREF_FILE_PATH = IO_EXCEPTION_TEST_PATH.resolve(USER_PREFERENCE_FILENAME);
 
     private static final Model MODEL = new ModelManager();
+    private static final AddressBook ADDRESS_BOOK = new AddressBook();
+    private static final UserPrefs USER_PREFS = new UserPrefs();
+    private static final Model MODEL_WITH_CONTENT = new ModelManager(ADDRESS_BOOK, USER_PREFS);
+    private static final LogicManager LOGIC_MANAGER = new LogicManager(MODEL_WITH_CONTENT, null, null, null);
 
     private Logic logic;
     private Encryption cryptor;
@@ -126,6 +132,26 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getAddressBookReturns_true() {
+        assertTrue(LOGIC_MANAGER.getAddressBook().equals(MODEL_WITH_CONTENT.getAddressBook()));
+    }
+
+    @Test
+    public void getSelectedPersonList_true() {
+        assertTrue(LOGIC_MANAGER.getSelectedPersonList().equals(MODEL_WITH_CONTENT.getSelectedPersonList()));
+    }
+
+    @Test
+    public void getAddressBookFilePath_true() {
+        assertTrue(LOGIC_MANAGER.getAddressBookFilePath().equals(MODEL_WITH_CONTENT.getAddressBookFilePath()));
+    }
+
+    @Test
+    public void getGuiSetting_true() {
+        assertTrue(LOGIC_MANAGER.getGuiSettings().equals(MODEL_WITH_CONTENT.getGuiSettings()));
     }
 
     /**
