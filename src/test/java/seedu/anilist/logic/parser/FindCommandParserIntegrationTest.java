@@ -9,7 +9,6 @@ import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.anilist.testutil.TypicalAnimes.AOT;
 import static seedu.anilist.testutil.TypicalAnimes.BRS;
 import static seedu.anilist.testutil.TypicalAnimes.CSM;
 import static seedu.anilist.testutil.TypicalAnimes.DBZ;
@@ -70,7 +69,7 @@ public class FindCommandParserIntegrationTest {
         FindCommand command = parser.parse(" g/action g/horror");
         expectedModel.updateFilteredAnimeList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(AOT, BRS, DBZ), model.getFilteredAnimeList());
+        assertEquals(Arrays.asList(BRS, DBZ), model.getFilteredAnimeList());
     }
 
     @Test

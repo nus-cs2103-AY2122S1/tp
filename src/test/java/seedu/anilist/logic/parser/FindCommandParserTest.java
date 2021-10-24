@@ -33,10 +33,10 @@ public class FindCommandParserTest {
         FindCommand resultingCommand = parser.parse(" n/Attack n/Black");
         assertIsFindCommand(resultingCommand);
 
-        resultingCommand = parser.parse(" g/Attack g/Black");
+        resultingCommand = parser.parse(" g/supernatural g/horror");
         assertIsFindCommand(resultingCommand);
 
-        resultingCommand = parser.parse(" n/A n/B g/C g/D");
+        resultingCommand = parser.parse(" n/A n/B g/sci fi g/fantasy");
         assertIsFindCommand(resultingCommand);
     }
 

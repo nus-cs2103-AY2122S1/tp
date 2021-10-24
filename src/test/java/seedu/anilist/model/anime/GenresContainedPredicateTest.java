@@ -17,8 +17,8 @@ public class GenresContainedPredicateTest {
 
     @Test
     public void equals() throws ParseException {
-        List<String> firstGenreKeywordList = Collections.singletonList("first");
-        List<String> secondGenreKeywordList = Arrays.asList("first", "second");
+        List<String> firstGenreKeywordList = Collections.singletonList("action");
+        List<String> secondGenreKeywordList = Arrays.asList("supernatural", "horror");
         GenresContainedPredicate firstPredicate = new GenresContainedPredicate(firstGenreKeywordList);
         GenresContainedPredicate secondPredicate = new GenresContainedPredicate(secondGenreKeywordList);
 
@@ -63,7 +63,7 @@ public class GenresContainedPredicateTest {
         assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
 
         // Only one matching keyword
-        predicate = new GenresContainedPredicate(Arrays.asList("comedy", "shonen"));
+        predicate = new GenresContainedPredicate(Arrays.asList("comedy", "fantasy"));
         assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
     }
 
@@ -81,7 +81,7 @@ public class GenresContainedPredicateTest {
         assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
 
         // Only one matching keyword
-        predicate = new GenresContainedPredicate(Arrays.asList("coMeDy", "ShoNen"));
+        predicate = new GenresContainedPredicate(Arrays.asList("coMeDy", "SupERnaTUrAl"));
         assertTrue(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
     }
 
@@ -94,11 +94,11 @@ public class GenresContainedPredicateTest {
         assertFalse(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
 
         // Non-matching keyword
-        predicate = new GenresContainedPredicate(Arrays.asList("shonen"));
+        predicate = new GenresContainedPredicate(Arrays.asList("supernatural"));
         assertFalse(predicate.test(new AnimeBuilder().withGenres("horror", "comedy").build()));
 
         // Keywords match names, but does not match genre
-        predicate = new GenresContainedPredicate(Arrays.asList("attack on titan", "adventure"));
+        predicate = new GenresContainedPredicate(Arrays.asList("sci fi", "fantasy"));
         assertFalse(predicate.test(new AnimeBuilder().withName("attack on titan")
             .withGenres("horror", "comedy").build()));
     }
