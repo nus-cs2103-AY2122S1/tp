@@ -2,6 +2,7 @@ package seedu.programmer.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -13,6 +14,7 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.ProgrammerErrorParser;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.Model;
+import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
@@ -64,6 +66,16 @@ public class LogicManager implements Logic {
     @Override
     public Storage getStorage() {
         return storage;
+    }
+
+    @Override
+    public void updateProgrammerError(ProgrammerError pe) {
+        model.setProgrammerError(pe);
+    }
+
+    @Override
+    public void updateFilteredStudents(Predicate<Student> predicate) {
+        model.updateFilteredStudentList(predicate);
     }
 
     @Override
