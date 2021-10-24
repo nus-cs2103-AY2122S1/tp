@@ -24,6 +24,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
+import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
 import seedu.programmer.logic.commands.HelpCommandResult;
 import seedu.programmer.logic.commands.ShowCommandResult;
@@ -247,23 +248,15 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Displays the pop-up message on the UI.
+     * Displays a popup message at the top-center with respect to the primaryStage.
      *
-     * @param message message to show user
+     * @param popup Popup object to be displayed on the primaryStage
      */
     private void displayPopup(String message) {
         // We should not need to display an empty popup
         assert (message != null);
         Popup popup = createPopup(message);
-        showPopupMessage(popup);
-    }
 
-    /**
-     * Displays a popup message at the top-center with respect to the primaryStage.
-     *
-     * @param popup Popup object to be displayed on the primaryStage
-     */
-    private void showPopupMessage(Popup popup) {
         // Add some left padding according to primaryStage's width
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
 
@@ -351,6 +344,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleDownload();
             } else if (commandResult instanceof UploadCommandResult) {
                 handleUpload();
+            } else if (commandResult instanceof EditCommandResult) {
+                EditCommandResult editCommandResult = (EditCommandResult) commandResult;
+                handleShowResult(editCommandResult.getEditedStudent());
             }
 
             return commandResult;
