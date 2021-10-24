@@ -45,7 +45,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
         if (passwordValidation(oldPassword) && passwordValidation(newPassword)) {
             return new PasswordCommand(oldPassword, newPassword);
         } else {
-            throw new ParseException(String.format(MESSAGE_INVALID_PASSWORD + PasswordCommand.CORRECT_PASSWORD_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_PASSWORD, PasswordCommand.CORRECT_PASSWORD_FORMAT,
                     PasswordCommand.MESSAGE_USAGE));
         }
 

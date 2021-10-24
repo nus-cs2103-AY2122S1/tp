@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 public class PasswordCommand extends Command {
@@ -20,6 +19,10 @@ public class PasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + " newPassword"
             + System.lineSeparator()
             + CORRECT_PASSWORD_FORMAT;
+
+    public static final String MESSAGE_SUCCESS = "Password updated!";
+    public static final String MESSAGE_WRONG_PASSWORD = "Password updated!";
+    public static final String MESSAGE_FAIL = "Something went wrong. Please try again!";
 
     private final String oldPassword;
     private final String newPassword;
@@ -44,7 +47,15 @@ public class PasswordCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
-        return new CommandResult("Password updated!");
+    public CommandResult execute(Model model) {
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof PasswordCommand // instanceof handles nulls
+                && oldPassword.equals(((PasswordCommand) other).getOldPassword())
+                && newPassword.equals(((PasswordCommand) other).getNewPassword()));
     }
 }

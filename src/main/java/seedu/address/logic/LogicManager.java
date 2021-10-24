@@ -71,9 +71,9 @@ public class LogicManager implements Logic {
                 FileUtil.deleteFile(storage.getAddressBookFilePath());
             } catch (NoSuchPaddingException | InvalidAlgorithmParameterException
                     | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
-                return new CommandResult("Something went wrong. Please try again!");
+                return new CommandResult(PasswordCommand.MESSAGE_FAIL);
             } catch (IOException e) {
-                return new CommandResult("Wrong password. Please try again!");
+                return new CommandResult(PasswordCommand.MESSAGE_WRONG_PASSWORD);
             }
         }
         commandResult = command.execute(model);
