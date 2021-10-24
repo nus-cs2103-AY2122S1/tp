@@ -3,7 +3,6 @@ layout: page
 title: Developer Guide
 ---
 * Table of Contents
-  
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
@@ -418,7 +417,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. ContactSH shows an error message.
 
       Use case resumes at step 2.
-    
+
 **Use case: Delete a contact**
 
 **MSS**
@@ -441,7 +440,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. ContactSH shows an error message.
 
       Use case resumes at step 2.
-    
+
 **Use case: Find contact(s) by a criterion**
 
 **MSS**
@@ -465,7 +464,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. ContactSH returns message stating no contact found.
 
       Use case ends.
-    
+
 **Use case: Find command and its usage**
 
 **MSS**
