@@ -113,7 +113,7 @@
     </GridPane>
     <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="card_side_pane">
         <children>
-            <Label layoutX="5.0" layoutY="11.0" text="Next Meeting:"/>
+            <Label layoutX="5.0" layoutY="11.0" styleClass="cell_big_label" text="Next Meeting:"/>
             <Label fx:id="nextMeeting" layoutX="5.0" layoutY="60.0" prefWidth="200.0" styleClass="cell_small_label"
                    wrapText="true"/>
         </children>
