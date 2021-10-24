@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.model.person.Person;
 
@@ -85,12 +86,8 @@ public class CommandResult {
         return isShowReminder;
     }
 
-    public boolean isDisplayStudent() {
-        return student != null;
-    }
-
-    public Person getStudent() {
-        return student;
+    public Optional<Person> getStudent() {
+        return Optional.ofNullable(student);
     }
 
     public boolean isExit() {
