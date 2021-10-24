@@ -156,8 +156,8 @@ Format:
 `view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 
 Examples:  
-`view -n Candice`
-`view -t friends -t neighbours`
+`view -n Candice`  
+`view -t friends -t neighbours`  
 
 #### Adding a staff : `add`
 
