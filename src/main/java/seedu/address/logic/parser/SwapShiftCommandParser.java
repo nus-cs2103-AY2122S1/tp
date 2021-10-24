@@ -5,8 +5,12 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 
 /**
  * Parses input arguments and creates a new SwapShiftCommand object.
@@ -30,6 +34,29 @@ public class SwapShiftCommandParser implements Parser<SwapShiftCommand> {
                 || argMultimap.getAllValues(PREFIX_DAY_SHIFT).size() != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwapShiftCommand.MESSAGE_USAGE));
         }
-        return null;
+
+        // Checks if the 2 names provided are unique
+        if (argMultimap.getAllValues(PREFIX_DASH_NAME).get(0).equals(
+                argMultimap.getAllValues(PREFIX_DASH_NAME).get(1))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwapShiftCommand.NON_UNIQUE_NAMES));
+        }
+
+        // Checks if the 2 shifts provided are unique
+        if (argMultimap.getAllValues(PREFIX_DAY_SHIFT).get(0).equals(
+                argMultimap.getAllValues(PREFIX_DAY_SHIFT).get(1))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SwapShiftCommand.NON_UNIQUE_SHIFTS));
+        }
+
+        List<Name> nameList = new ArrayList<>();
+        for (String name : argMultimap.getAllValues(PREFIX_DASH_NAME)) {
+            nameList.add(ParserUtil.parseName(name));
+        }
+
+        List<String> shiftList = new ArrayList<>();
+        for (String shift : argMultimap.getAllValues(PREFIX_DAY_SHIFT)) {
+            shiftList.add(ParserUtil.parseDayOfWeekAndSlot(shift));
+        }
+
+        return new SwapShiftCommand(nameList, shiftList);
     }
 }
