@@ -121,7 +121,7 @@ public class ParserUtil {
         requireNonNull(assessmentName);
         String trimmedAssessmentName = assessmentName.trim();
         if (!AssessmentName.isValidAssessmentName(trimmedAssessmentName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(AssessmentName.MESSAGE_CONSTRAINTS);
         }
         return new AssessmentName(trimmedAssessmentName);
     }
@@ -141,18 +141,25 @@ public class ParserUtil {
         }
 
         String[] scores = score.split(SCORE_DELIMITER);
-        String actualScore = scores[0];
-        String totalScore = scores[1];
+        String actualScoreString = scores[0];
+        String totalScoreString = scores[1];
 
-        if (!StringUtil.isNonNegativeUnsignedInteger(actualScore)) {
+        if (!StringUtil.isNonNegativeUnsignedInteger(actualScoreString)) {
             throw new ParseException(INVALID_ACTUAL_SCORE);
         }
 
-        if (!StringUtil.isNonZeroUnsignedInteger(totalScore)) {
+        if (!StringUtil.isNonZeroUnsignedInteger(totalScoreString)) {
             throw new ParseException(INVALID_TOTAL_SCORE);
         }
 
-        return new Score(Integer.parseInt(actualScore), Integer.parseInt(totalScore));
+        int actualScore = Integer.parseInt(actualScoreString);
+        int totalScore = Integer.parseInt(totalScoreString);
+
+        if (!Score.isValidScore(actualScore, totalScore)) {
+            throw new ParseException(Score.MESSAGE_CONSTRAINTS);
+        }
+
+        return new Score(actualScore, totalScore);
     }
 
 }
