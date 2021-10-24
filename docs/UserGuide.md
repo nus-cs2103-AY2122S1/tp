@@ -79,7 +79,9 @@ creating groups and assigning students to groups, as well as the management of g
 
 ### General features
 
+<div markdown="block" class="alert alert-info">
 **:information_source: Listed in this section are general features and commands to use and manage CSBook.**<br>
+</div>
 
 #### Viewing help : `help`
 
@@ -114,14 +116,19 @@ data through the commands provided.
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.
 </div>
 
-**:warning: Do not intentionally change the data file in order to restart CSBook afresh with an empty data file. You should use the 
-`clear` command instead if you want to clear all currently stored data.**
+
+<div markdown="span" class="alert alert-warning">
+:warning: **Warning**: Do not intentionally change the data file in order to restart CSBook afresh with an empty data file. You should use the 
+`clear` command instead if you want to clear all currently stored data.
+</div>
 
 ### Student management features
 
-**:information_source: Listed in this section are all the features and commands related to 
+<div markdown="block" class="alert alert-info">
+:information_source: **Note**: Listed in this section are all the features and commands related to 
 managing and tracking student information in CSBook. Stored student information helps you keep track
-of all the information related to each of your students in one collated entry.**<br>
+of all the information related to each of your students in one collated entry.<br>
+</div>
 
 #### Adding a student: `add`
 
@@ -195,16 +202,19 @@ Examples:
 
 ### Group management features
 
-**:information_source: Listed in this section are all the features and commands related to
-managing groups that students can be assigned to in CSBook. Groups allow you to put students
-that match some similar criteria into the same category for easier lookup and management of students.**<br>
+<div markdown="block" class="alert alert-info">
 
-**:bulb: You may use groups in any way that best suits your needs! You may split students by
+:information_source: **Note**: Listed in this section are all the features and commands related to
+managing groups that students can be assigned to in CSBook. Groups allow you to put students
+that match some similar criteria into the same category for easier lookup and management of students.<br>
+
+:bulb: **Use cases**: You may use groups in any way that best suits your needs! You may split students by
 module/tutorial group if you're teaching more than one module/class. You may also split students
 within the same class into students who require little help vs those who need extra help to assist you
-in distributing your attention to these different groups of students.**
+in distributing your attention to these different groups of students.
+</div>
 
-#### Viewing details of a group
+#### Viewing details of a group: `viewgroup`
 Finds and displays details about a group, including the group description,
 number of students and some details about each student in the group .
 
