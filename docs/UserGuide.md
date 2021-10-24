@@ -282,3 +282,4 @@ Action | Format, Examples
 **clear** | `clear`
 **exit** | `exit`
 **help** | `help`
+**download** | `download`
