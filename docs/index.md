@@ -8,14 +8,15 @@ title: Track2Gather
 
 ![Ui](images/Ui.png)
 
-* Track2Gather is an app that will manage up to a few thousand contacts, providing basic features for contact tracing
-  personnel to organise and search through them via:
+* Track2Gather is an app that provides basic features for contact tracing personnel to track the following details for 
+  up to a few thousand persons:
     * personal information (limited to English names and Singaporean contact numbers and addresses)
-    * case contacts
-    * quarantine period
+    * case number
+    * Stay-Home-Notice period
+    * next-of-kin information
 
-* If you are interested in using Track2Gather, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing Track2Gather, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+* If you are interested in using Track2Gather, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.md#quick-start).
+* If you are interested about developing Track2Gather, the [**Developer Guide**](DeveloperGuide.md) is a good place to start.
 
 
 **Acknowledgements**
