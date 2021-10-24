@@ -29,7 +29,8 @@ public class AddAssessmentCommand extends Command {
             + PREFIX_SCORE + "60" + SCORE_DELIMITER + "100 ";
 
     public static final String MESSAGE_SUCCESS = "New assessment added to %1$s: %2$s";
-    public static final String MESSAGE_DUPLICATE_ASSESSMENT = "This assessment already exists in %1$s assessments";
+    public static final String MESSAGE_DUPLICATE_ASSESSMENT =
+            "This assessment already exists in %1$s's assessments list";
     public static final String MESSAGE_STUDENT_NONEXISTENT =
             "The student indicated does not exist. Please add the student first.";
 
@@ -58,7 +59,7 @@ public class AddAssessmentCommand extends Command {
         Student student = lastShownList.get(index.getZeroBased());
 
         if (model.hasAssessment(student, assessment)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ASSESSMENT);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_ASSESSMENT, student.getName()));
         }
 
         Assessment assessmentToAdd = new Assessment(assessment.getAssessmentName(), assessment.getScore());
