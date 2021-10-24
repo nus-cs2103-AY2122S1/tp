@@ -163,10 +163,11 @@ Interpretation
 * The task is added for that date only at the given time
   * Useful if it is an event or for marking dates for exams
 
+<div markdown="block" class="alert alert-success">
 
-Examples:
+:green_book: **Examples:**
 * `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
-
+</div>
 
 ### 4.3 Locating a task by name: `find`
 
@@ -189,14 +190,16 @@ Interpretation:
 * Only tasks containing all keywords will be shown
 * if `d/date` field is provided:
   * Only tasks due on that date is searched.
-
-Examples:
+  
+<div markdown="block" class="alert alert-success">
+:green_book: **Examples:**
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
 * `find Quiz GEQ1000` returns GEQ1000 Quiz 1,  GEQ1000 Quiz 2
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
+</div>
 
+### 5.4 Showing Tasks: `show` (coming soon)
 
-### 4.4 Showing Tasks: `show` (coming soon)
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -240,11 +243,11 @@ Interpretation
 
 * If <code><i>task_id</i></code> is provided:
 
-
-Examples:
+<div markdown="block" class="alert alert-success">
+:green_book: **Examples:**
 * `tag 5 tg/Urgent` sets the priority of task 5 in the task list to `Urgent`
 * `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
-
+</div>
 
 ### 4.6 Deleting tasks : `delete`
 
@@ -320,7 +323,7 @@ Format: `exit`
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:warning: **Caution:**
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
@@ -330,7 +333,7 @@ Shows the past commands run on **Uni-Fy**.
 
 Format: `history`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+<div markdown="span" class="alert alert-warning">:warning: **Caution:**
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
 </div>
 
