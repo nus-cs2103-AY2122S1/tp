@@ -3,8 +3,18 @@ layout: page
 title: User Guide
 ---
 
-CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via a Command Line Interface** (CLI) while still having the
-benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can get your student management tasks done faster than traditional GUI apps.
+Welcome to the CSBook User Guide. This user guide serves as a guide to new users on how to quickly get 
+started on using the application through the "Quick Start" section, while also serving as a reference to 
+more experienced users of all available commands and how best to use them to make the most utility of our 
+application in the "Feature List" section. 
+
+CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via 
+a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
+If you are faster at typing, CSBook can get your student management tasks done faster than traditional 
+GUI applications. 
+
+Some of the main features of our application include the storing of students in the database, 
+creating groups and assigning students to groups, as well as the management of groups.
 
 * Table of Contents
 {:toc}
@@ -14,32 +24,37 @@ benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can g
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
+   1. Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
+   2. You may run the `java -version` command on your respective OS's terminal window.
+   3. Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
 
-1. Download the latest `CSBook.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-3/tp/releases).
+2. Download the latest `CSBook.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-3/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for CSBook.
+3. Copy the file to the folder you want to use as the _home folder_ for CSBook.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all students.
+    * **`list`** : Lists all students currently stored.
+   
+    * **`addgroup`**`g/CS2101 d/Effective Communication for professionals` : Adds a group named `CS2101` with a simple description to CSBook
 
-   * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T` : Adds a student named `Jia Xian` to CSBook
+    * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T` : Adds a student named `Jia Xian` to CSBook
 
-   * **`delete`**`3` : Deletes the 3rd student shown in the current list.
+    * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
-   * **`clear`** : Deletes all students.
+    * **`clear`** : Deletes all students and groups.
 
-   * **`exit`** : Exits the app.
+    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Feature List
 
 <div markdown="block" class="alert alert-info">
 
@@ -59,7 +74,11 @@ benefits of a Graphical User Interface (GUI). If you can type fast, CSBook can g
 
 </div>
 
-### Viewing help : `help`
+### General features
+
+**:information_source: Listed in this section are general features and commands to use and manage CSBook.**<br>
+
+#### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -67,8 +86,37 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+#### Clearing all entries : `clear`
 
-### Adding a student: `add`
+Clears all entries from CSBook.
+
+Format: `clear`
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
+
+#### Saving the data
+
+CSBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
+#### Editing the data file
+
+CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are highly advised to not edit the data file directly.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.
+</div>
+
+### Student management features
+
+**:information_source: Listed in this section are all the features and commands related to 
+managing and tracking student information in CSBook. Stored student information helps you keep track
+of all the information related to each of your students in one collated entry.**<br>
+
+#### Adding a student: `add`
 
 Adds a student to the CSBook.
 
@@ -81,13 +129,13 @@ Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 * `add n/Jun Wei t/@albino_api e/albinoape@u.nus.edu g/CS2101`
 
-### Listing all students : `list`
+#### Listing all students : `list`
 
 Shows a list of all students in the CSBook.
 
 Format: `list`
 
-### Editing a student : `edit`
+#### Editing a student : `edit`
 
 Edits an existing student in the CSBook.
 
@@ -102,7 +150,7 @@ Examples:
 *  `edit 1 t/@albino_monkey e/e0540014X@u.nus.edu` Edits the telegram handle and email address of the 1st student to be `@albino_monkey` and `e0540014X@u.nus.edu` respectively.
 *  `edit 2 n/Jiaxian` Edits the name of the 2nd student to be `Jiaxian`.
 
-### Locating students by name: `find`
+#### Locating students by name: `find`
 
 Finds students whose names contain any of the given keywords.
 
@@ -122,7 +170,7 @@ Examples:
 
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a student : `delete`
+#### Deleting a student : `delete`
 
 Deletes the specified student from CSBook.
 
@@ -136,7 +184,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in CSBook.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
-### View details of a group
+### Group management features
+
+**:information_source: Listed in this section are all the features and commands related to
+managing groups that students can be assigned to in CSBook. Groups allow you to put students
+that match some similar criteria into the same category for easier lookup and management.**<br>
+
+**:bulb: You may use groups in any way that best suits your needs! You may split students by
+module/tutorial group if you're teaching more than one module/class. You may also split students
+within the same class into students who require little help vs those who need extra help.**
+
+#### View details of a group
 Finds and displays details about a group, including the group description,
 number of students and some details about each student in the group .
 
@@ -149,7 +207,7 @@ Examples:
   ![result for `viewgroup CS2103T`](images/viewGroupCS2103T.png)
 
 
-### Listing all groups : `listgroups`
+#### Listing all groups : `listgroups`
 
 Shows a list of all groups in the CSBook.
 
@@ -161,13 +219,7 @@ Examples:
 
   ![result for `listgroups`](images/listGroups.png)
 
-### Clearing all entries : `clear`
-
-Clears all entries from CSBook.
-
-Format: `clear`
-
-### Creating a group: `addgroup`
+#### Creating a group: `addgroup`
 
 Creates a group with the given group name and given description so that students can be added into it.
 
@@ -179,7 +231,7 @@ Examples:
 * `addgroup n/CS2103T d/Software engineering mod` creates a group called `CS2103T` and the description `Software engineering mod`
 where students can be added into.
 
-### Delete Group: deletegroup
+#### Delete Group: deletegroup
 
 Deletes the group with the specified group name as well as all students associated with the group.
 
@@ -190,25 +242,6 @@ Format: `deletegroup GROUPNAME`
 
 Examples:
 * `deletegroup CS2103T` deletes the group CS2103T.
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-CSBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
-
-### Editing the data file
-
-CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are highly advised to not edit the data file directly.
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file at the next run.
-</div>
-
 
 ## Command summary
 
