@@ -48,7 +48,6 @@ public class TransactionRecordTest {
     public void equals_sameItems_returnFalse() {
         TransactionRecord transaction1 = new TransactionRecord(TypicalItems.getTypicalItems());
         TransactionRecord transaction2 = new TransactionRecord(TypicalItems.getTypicalItems());
-
         assertNotEquals(transaction1, transaction2);
     }
 
