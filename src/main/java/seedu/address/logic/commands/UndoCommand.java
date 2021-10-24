@@ -20,7 +20,7 @@ import seedu.address.model.task.Task;
 /**
  * Marks task(s) identified using its displayed index in the task list as not done.
  */
-public class UndoCommand extends Command{
+public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undotask";
     public static final String MESSAGE_SUCCESS = "Marked %1$d %2$s of %3$s as not done.";
