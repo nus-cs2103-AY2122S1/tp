@@ -48,6 +48,13 @@ public class CommandTestUtil {
     public static final String VALID_GROUP_NAME_BOB = "CS2103T"; // TODO change back later @albino monke
     public static final String VALID_DESC_BOB = "hi";
 
+    public static final String VALID_ASSESSMENT_NAME_QUIZ1 = "Quiz 1";
+    public static final String VALID_ASSESSMENT_NAME_LAB5 = "Lab 5";
+    public static final int VALID_ACTUAL_SCORE_QUIZ1 = 20;
+    public static final int VALID_ACTUAL_SCORE_LAB5 = 5;
+    public static final int VALID_TOTAL_SCORE_QUIZ1 = 100;
+    public static final int VALID_TOTAL_SCORE_LAB5 = 10;
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String TELEGRAM_HANDLE_DESC_AMY = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_AMY;
