@@ -279,18 +279,16 @@ The following activity diagram summarizes the actions taken when LogicManager ex
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How and when the new applicant instance is created:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-    * Pros: Easy to implement.
-    * Cons: May have performance issues in terms of memory usage.
+* **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
+    * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
+    * Cons: May have lead to greater coupling among classes.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-    * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
+* **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
+    calls.
+    * Pros: Will reduce the usage of a new class, thereby reducing coupling.
+    * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
 
 
 --------------------------------------------------------------------------------------------------------------------
