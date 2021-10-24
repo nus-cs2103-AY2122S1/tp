@@ -49,6 +49,7 @@ public class AddTaskCommand extends AddCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+        System.out.println("hi");
 
         if (!model.hasModuleName(moduleName)) {
             throw new CommandException(MESSAGE_MODULE_NOT_FOUND);

@@ -106,7 +106,8 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getModuleNameString().equals(getModuleNameString())
-                && otherTask.getName().equals(getName());
+                && otherTask.getName().equals(getName())
+                && otherTask.getDeadline().equals(getDeadline());
     }
 
     @Override
