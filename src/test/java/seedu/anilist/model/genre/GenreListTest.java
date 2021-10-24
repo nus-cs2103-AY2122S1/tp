@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_NOT_IN_LIST;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
+import static seedu.anilist.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 
@@ -44,6 +45,8 @@ public class GenreListTest {
      */
     @Test
     public void contains() {
+        // null input
+        assertThrows(NullPointerException.class, () -> GenreList.contains(null));
         // Valid Genre
         assertTrue(GenreList.contains(VALID_GENRE_ACTION));
         // Invalid Genre

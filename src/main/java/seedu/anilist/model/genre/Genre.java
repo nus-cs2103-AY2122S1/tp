@@ -4,8 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.anilist.commons.util.AppUtil.checkArgument;
 import static seedu.anilist.logic.parser.CliSyntax.PREFIX_ACTION;
 
-import java.util.Locale;
-
 /**
  * Represents a Genre of an Anime in the anime list.
  * Guarantees: immutable; name is valid as declared in {@link #isValidGenreName(String)}
@@ -34,7 +32,7 @@ public class Genre {
      */
     public static boolean isValidGenreName(String test) {
         requireNonNull(test);
-        return GenreList.contains(test.toLowerCase(Locale.ROOT));
+        return GenreList.contains(test.toLowerCase());
     }
 
     @Override

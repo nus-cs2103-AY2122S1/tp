@@ -1,5 +1,7 @@
 package seedu.anilist.model.genre;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashSet;
 
 /**
@@ -58,6 +60,7 @@ public class GenreList {
      * @return string of the list of all supported commands
      */
     public static boolean contains(String genreString) {
+        requireNonNull(genreString);
         return LIST_OF_GENRES.contains(genreString);
     }
 }
