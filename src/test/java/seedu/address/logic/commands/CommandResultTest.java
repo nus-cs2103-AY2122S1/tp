@@ -48,7 +48,46 @@ public class CommandResultTest {
         // different showHelp value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true, false, false).hashCode());
 
+        // different showDownload value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, true, false).hashCode());
+
         // different exit value -> returns different hashcode
         assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, false, false, true).hashCode());
+    }
+
+    @Test
+    public void isShowSummary() {
+        CommandResult positiveCommandResult = new CommandResult("feedback", true, false, false, false);
+        CommandResult negativeCommandResult = new CommandResult("feedback", false, false, false, false);
+
+        assertTrue(positiveCommandResult.isShowSummary());
+        assertFalse(negativeCommandResult.isShowSummary());
+    }
+
+    @Test
+    public void isShowHelp() {
+        CommandResult positiveCommandResult = new CommandResult("feedback", false, true, false, false);
+        CommandResult negativeCommandResult = new CommandResult("feedback", false, false, false, false);
+
+        assertTrue(positiveCommandResult.isShowHelp());
+        assertFalse(negativeCommandResult.isShowHelp());
+    }
+
+    @Test
+    public void isShowDownload() {
+        CommandResult positiveCommandResult = new CommandResult("feedback", false, false, true, false);
+        CommandResult negativeCommandResult = new CommandResult("feedback", false, false, false, false);
+
+        assertTrue(positiveCommandResult.isShowDownload());
+        assertFalse(negativeCommandResult.isShowDownload());
+    }
+
+    @Test
+    public void isExit() {
+        CommandResult positiveCommandResult = new CommandResult("feedback", false, false, false, true);
+        CommandResult negativeCommandResult = new CommandResult("feedback", false, false, false, false);
+
+        assertTrue(positiveCommandResult.isExit());
+        assertFalse(negativeCommandResult.isExit());
     }
 }
