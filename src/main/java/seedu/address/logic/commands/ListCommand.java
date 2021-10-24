@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
+
+import java.util.function.Predicate;
 
 /**
  * Lists all persons in the address book to the user.
@@ -12,13 +16,46 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+    public static final String MESSAGE_SUCCESS_ALL = "Listed all persons";
+    public static final String MESSAGE_SUCCESS_INCOMING = "Listed all persons with existing visits in next %1$s.";
 
+    public static final Predicate<Person> PREDICATE_HAS_VISIT_THIS_MONTH = (Person::hasVisitThisMonth);
+    public static final Predicate<Person> PREDICATE_HAS_VISIT_THIS_WEEK = (Person::hasVisitThisWeek);
+
+    // TODO
+    public static final String MESSAGE_USAGE = "All or incoming";
+
+    private final boolean isIncoming;
+    private final boolean isNextMonth;
+
+    /**
+     * @param isIncoming whether to display all or only those with incoming visits
+     * @param isNextMonth whether the incoming duration is next month or next week, given {@Code isIncoming} is true.
+     */
+    public ListCommand(boolean isIncoming, boolean isNextMonth) {
+        this.isIncoming = isIncoming;
+        this.isNextMonth = isNextMonth;
+    }
+
+    /**
+     * Overloaded constructor for default case.
+     */
+    public ListCommand() {
+        this(false, false);
+    }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (!isIncoming) {
+            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+            return new CommandResult(MESSAGE_SUCCESS_ALL);
+        } else if (isNextMonth) {
+            model.updateFilteredPersonList(Person::hasVisitThisMonth);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_INCOMING, "month"));
+        } else {
+            model.updateFilteredPersonList(Person::hasVisitThisWeek);
+            return new CommandResult(String.format(MESSAGE_SUCCESS_INCOMING, "week"));
+        }
     }
 }
