@@ -23,6 +23,7 @@ import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.exceptions.CommandException;
+import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
 import safeforhall.model.Model;
@@ -79,9 +80,17 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() throws Exception {
+    public void execute_validSingleViewPersonCommand_success() throws Exception {
         String viewCommand = ViewPersonCommand.COMMAND_WORD;
-        assertCommandSuccess(viewCommand, ViewPersonCommand.MESSAGE_SUCCESS, model, true);
+        logic.getSinglePerson();
+        assertCommandSuccess(viewCommand, ViewPersonCommand.MESSAGE_ALL_RESIDENTS_SHOWN, model, true);
+    }
+
+    @Test
+    public void execute_validSingleViewEventCommand_success() throws Exception {
+        String viewCommand = ViewEventCommand.COMMAND_WORD;
+        logic.getSingleEvent();
+        assertCommandSuccess(viewCommand, ViewEventCommand.MESSAGE_ALL_EVENTS_SHOWN, model, false);
     }
 
     @Test
@@ -115,6 +124,11 @@ public class LogicManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getFilteredEventList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredEventList().remove(0));
     }
 
     /**
