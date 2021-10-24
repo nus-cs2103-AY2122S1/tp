@@ -99,6 +99,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -270,19 +271,26 @@ public class MainWindow extends UiPart<Stage> {
             CommandType commandType = commandResult.getCommandType();
             Boolean isClient = commandResult.getIsClientCommand();
 
-            switch(commandType) {
+            switch (commandType) {
             case HELP:
                 handleHelp();
                 break;
+
             case EXIT:
                 handleExit();
                 break;
-            case STAT:
-                handleStat();
+
+            case CLEAR:
                 break;
+
             case VIEW:
                 handleView(tpb, selectedTab, category);
                 break;
+
+            case STAT:
+                handleStat();
+                break;
+
             default:
                 handleChangeTab(tpb, selectedTab, isClient);
                 break;
