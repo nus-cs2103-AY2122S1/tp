@@ -23,7 +23,7 @@ public class AddAppointmentDescriptorBuilder {
     }
 
     /**
-     * Returns an {@code EditAppointmentDescriptor} with fields containing
+     * Returns an {@code AddAppointmentDescriptor} with fields containing
      * {@code Appointment}'s details
      */
     public AddAppointmentDescriptorBuilder(Appointment appointment) {
@@ -52,7 +52,7 @@ public class AddAppointmentDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code remark} of the {@code EditDoctorDescriptor} that we are
+     * Sets the {@code remark} of the {@code AddAppointmentDescriptor} that we are
      * building.
      */
     public seedu.plannermd.testutil.appointment.AddAppointmentDescriptorBuilder withRemark(String remark) {
