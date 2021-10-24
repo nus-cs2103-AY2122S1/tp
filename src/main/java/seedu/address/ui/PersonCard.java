@@ -37,7 +37,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label availability;
     @FXML
+    private Label todayAttendance;
+    @FXML
+    private Label totalAttendance;
+    @FXML
     private FlowPane tags;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -48,6 +53,8 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
+        todayAttendance.setText(person.getTodayAttendance().toString());
+        totalAttendance.setText(person.getTotalAttendance().toString());
         availability.setText(person.getAvailability().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

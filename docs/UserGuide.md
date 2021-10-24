@@ -368,9 +368,51 @@ Format: `split DAY`
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 
 Examples:
-
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user
+
+[Back to Table of Contents](#table-of-contents)
+  
+### Marking attendance of members : `mark`
+
+Marks attendance of members listed as present.
+
+Format: `mark INDEX/INDICES`
+
+* Marks the members at the specified `INDEX/INDICES` in the members list as present.
+* `INDEX` refers to the index number/position of the member in the displayed members list.
+* `INDICES` **must be positive integers** 1, 2, …​
+* `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+[Back to Table of Contents](#table-of-contents)
+
+### Unmarking attendance of members: `unmark`
+
+Unmarks attendance of members marked as present.
+
+Format `unmark INDEX/INDICES`
+
+*Unmarks the members at the specified `INDEX/INDICES` in the members list as absent.
+* `INDEX` refers to the index number/position of the member in the displayed members list.
+* `INDICES` **must be positive integers** 1, 2, …​
+* `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+[Back to Table of Contents](#table-of-contents)
+
+###Clearing all attendance for today: `cleara`
+
+Clears all member's attendance for today.
+
+Format: `cleara`
+
+[Back to Table of Contents](#table-of-contents)
+
+###Clearing all entries in facility list: `clearf`
+
+Clears all entries in facility list.
+
+Format: `clearf`
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -498,6 +540,10 @@ Action | Format, Examples
 **Help**| `help`
 **List members**| `listm`
 **List facilities**| `listf`
+**Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
+**Split members**| `split DAY` <br> eg. `split Mon`
+**Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
 **Split members**| `split d/DAY` <br> eg. `split d/1`
 **Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
