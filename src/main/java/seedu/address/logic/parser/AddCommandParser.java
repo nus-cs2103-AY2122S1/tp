@@ -50,11 +50,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                         PREFIX_SCHOOL, PREFIX_ACAD_STREAM, PREFIX_ACAD_LEVEL,
                         PREFIX_FEE, PREFIX_REMARK, PREFIX_TAG);
 
-        if (!areAllPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS)
+        if (!argMultimap.getPreamble().isEmpty()
+                || !areAllPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS)
                 || !areAnyPrefixesPresent(
-                        argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.ERROR_MISSING_FIELDS));
+                        argMultimap, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_PARENT_PHONE, PREFIX_PARENT_EMAIL)) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
