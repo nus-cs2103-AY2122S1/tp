@@ -261,15 +261,15 @@ public class ModelManager implements VersionedModel {
         Commit headCommit = head;
         Commit latestCommit = latestLabel.getCommitSupplier().get();
 
-        Commit lca = commitController.findLca(headCommit, latestCommit);
+        Commit lca = headCommit.findLca(latestCommit);
 
-        Commit latestAncestor = commitController.getHighestAncestor(latestCommit, lca);
-        Commit headAncestor = commitController.getHighestAncestor(headCommit, lca);
+        Commit latestAncestor = latestCommit.getHighestAncestor(lca);
+        Commit headAncestor = headCommit.getHighestAncestor(lca);
         assert !headAncestor.equals(latestAncestor); // Violates LCA definition
 
-        List<Commit> earlyHistory = commitController.retrieveCommitHistory(lca);
-        List<Commit> latestToEarly = commitController.retrieveCommitHistory(latestCommit, lca);
-        List<Commit> headToEarly = commitController.retrieveCommitHistory(headCommit, lca);
+        List<Commit> earlyHistory = lca.getHistory();
+        List<Commit> latestToEarly = latestCommit.getHistory(lca);
+        List<Commit> headToEarly = headCommit.getHistory(lca);
 
         List<Commit> sortedBranch = Stream.concat(latestToEarly.stream(), headToEarly.stream())
                 .sorted(Comparator.comparing(Commit::getDate)).collect(Collectors.toList());
