@@ -1,15 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
 
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.PersonContainsFieldsPredicate;
@@ -24,18 +23,17 @@ public class ViewCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Displays a filtered list of staff that have the "
             + "input parameters.\n\n"
             + "Parameters:\n"
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_INDEX + "INDEX] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_SALARY + "SALARY] "
-            + "[" + PREFIX_STATUS + "STATUS] "
-            + "[" + PREFIX_ROLE + "ROLE]... "
-            + "[" + PREFIX_TAG + "TAG]...\n\n"
+            + "[" + PREFIX_DASH_NAME + "NAME] "
+            + "[" + PREFIX_DASH_PHONE + "PHONE] "
+            + "[" + PREFIX_DASH_EMAIL + "EMAIL] "
+            + "[" + PREFIX_DASH_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_DASH_SALARY + "SALARY] "
+            + "[" + PREFIX_DASH_STATUS + "STATUS] "
+            + "[" + PREFIX_DASH_ROLE + "ROLE]... "
+            + "[" + PREFIX_DASH_TAG + "TAG]...\n\n"
             + "Example:\n" + COMMAND_WORD + " "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_DASH_PHONE + "91234567 "
+            + PREFIX_DASH_PHONE + "johndoe@example.com";
 
     public static final String DEFAULT_COMMAND = "Staff(s) displayed: %1$s";
     private PersonContainsFieldsPredicate testCondition;

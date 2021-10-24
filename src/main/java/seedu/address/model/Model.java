@@ -2,10 +2,12 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
@@ -130,5 +132,19 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Set time for a shift from a target staff's schedule.
+     * {@code target} must exist in the address book.
+     *
+     * @param target The target staff.
+     * @param dayOfWeek of the shift.
+     * @param slot of the shift.
+     * @param startTime The start time of the shift.
+     * @param endTime The end time of the shift.
+     * @throws InvalidShiftTimeException throws when the timings of Shift are invalid.
+     */
+    void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+            throws InvalidShiftTimeException;
 
 }
