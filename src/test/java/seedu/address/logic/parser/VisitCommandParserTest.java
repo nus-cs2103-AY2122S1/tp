@@ -21,7 +21,7 @@ import seedu.address.model.person.Visit;
 import seedu.address.testutil.DateTimeUtil;
 
 public class VisitCommandParserTest {
-    private static final String VALID_VISIT_DATETIME = DateTimeUtil.getValidVisitString();
+    private static final String VALID_VISIT_DATETIME = DateTimeUtil.getInputStringSevenDaysFromNow();
 
     private VisitCommandParser parser = new VisitCommandParser();
 

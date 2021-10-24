@@ -48,7 +48,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_visit() throws Exception {
-        String date = DateTimeUtil.getValidVisitString();
+        String date = DateTimeUtil.getInputStringSevenDaysFromNow();
         final Visit visit = new Visit(date);
         VisitCommand command = (VisitCommand) parser.parseCommand(VisitCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_DATE + visit.value);

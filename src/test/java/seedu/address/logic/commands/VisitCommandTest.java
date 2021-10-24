@@ -34,7 +34,7 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class VisitCommandTest {
 
-    private static final String VISIT_STUB = DateTimeUtil.getValidVisitString();
+    private static final String VISIT_STUB = DateTimeUtil.getInputStringSevenDaysFromNow();
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

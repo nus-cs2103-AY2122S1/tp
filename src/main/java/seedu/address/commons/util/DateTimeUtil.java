@@ -3,7 +3,6 @@ package seedu.address.commons.util;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
-import java.time.temporal.ChronoUnit;
 
 /**
  * Helper functions for handling datetime
@@ -51,7 +50,7 @@ public class DateTimeUtil {
      */
     public static boolean isNextSevenDays(LocalDateTime test) {
         return !test.isBefore(LocalDateTime.now())
-                   && !test.isAfter(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).plusDays(7));
+                   && !test.isAfter(LocalDateTime.now().plusDays(7));
     }
 
     /**
@@ -59,7 +58,7 @@ public class DateTimeUtil {
      */
     public static boolean isNextThirtyDays(LocalDateTime test) {
         return !test.isBefore(LocalDateTime.now())
-                   && test.isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).plusDays(30));
+                   && !test.isAfter(LocalDateTime.now().plusDays(30));
     }
 
     /**
@@ -67,7 +66,7 @@ public class DateTimeUtil {
      */
     public static boolean isLastSevenDays(LocalDateTime test) {
         return !test.isAfter(LocalDateTime.now())
-                   && !test.isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).minusDays(7));
+                   && !test.isBefore(LocalDateTime.now().minusDays(7));
     }
 
     /**
@@ -75,7 +74,7 @@ public class DateTimeUtil {
      */
     public static boolean isLastThirtyDays(LocalDateTime test) {
         return !test.isAfter(LocalDateTime.now())
-                   && !test.isBefore(LocalDateTime.now().truncatedTo(ChronoUnit.DAYS).minusDays(30));
+                   && !test.isBefore(LocalDateTime.now().minusDays(30));
     }
 
 }
