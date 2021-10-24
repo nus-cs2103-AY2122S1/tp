@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
@@ -52,7 +51,7 @@ public class ExportCommandIntegrationTest {
         command.execute(model);
         assertTrue(FileUtil.areFilesEqual(Paths.get(TESTED_FILE_PATH),
                 Paths.get(EXPECTED_FILE_PATH_ALL_FIELDS)));
-        Files.deleteIfExists(Paths.get(TESTED_FILE_PATH));
+        FileUtil.deleteFile(Paths.get(TESTED_FILE_PATH));
     }
 
     @Test
@@ -62,6 +61,6 @@ public class ExportCommandIntegrationTest {
         command.execute(model);
         assertTrue(FileUtil.areFilesEqual(Paths.get(TESTED_FILE_PATH),
                 Paths.get(EXPECTED_FILE_PATH_NAMES_ONLY)));
-        Files.deleteIfExists(Paths.get(TESTED_FILE_PATH));
+        FileUtil.deleteFile(Paths.get(TESTED_FILE_PATH));
     }
 }
