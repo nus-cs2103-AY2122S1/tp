@@ -93,7 +93,7 @@ public class PersonCard extends UiPart<Region> {
                     tags.getChildren().add(l);
                 });
     }
-    
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
