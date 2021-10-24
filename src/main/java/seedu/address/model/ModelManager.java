@@ -145,11 +145,13 @@ public class ModelManager implements Model {
     public Student getStudentByName(Name studentName) {
         updateFilteredStudentList(new NameContainsKeywordsPredicate(List.of(studentName.toString())));
 
-        // return null if the group is not found
+        // return null if the student is not found
         if (getFilteredStudentList().isEmpty()) {
             updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
             return null;
         }
+
+        assert getFilteredStudentList().size() == 1 : "Students name should be unique";
 
         Student retrievedStudent = getFilteredStudentList().get(0);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);

@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Name;
@@ -29,11 +28,6 @@ public class ChangeGroupCommand extends Command {
             "The student does not exist. Please choose a student that exists.";
     public static final String MESSAGE_GROUP_NONEXISTENT =
             "The group indicated does not exist. Please create it first.";
-
-    private static final String PLACEHOLDER = "placeholder";
-    // TODO: may need to change this once change to groupname for student constructor
-    // Placeholder group for construction of student to find student.
-    private static final Group PLACEHOLDER_GROUP = new Group(new GroupName(PLACEHOLDER), new Description(PLACEHOLDER));
 
     private final Name studentName;
     private final GroupName newGroupName;
