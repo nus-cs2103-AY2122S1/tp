@@ -320,13 +320,25 @@
     -fx-text-fill: white;
 }
 
-
 .chart-title {
     -fx-text-fill: white;
 }
 
 .chart-bar {
     -fx-background-color: #3e7b91;
+}
+
+.chart-title {
+    -fx-padding: 0 0 0 56;
+}
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 0 73;
+}
+
+.chart-legend-item{
+    -fx-text-fill: white;
 }
 
 .default-color1.chart-series-line {

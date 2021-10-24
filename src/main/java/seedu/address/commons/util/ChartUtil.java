@@ -67,17 +67,15 @@ public class ChartUtil {
         final NumberAxis yAxis = new NumberAxis();
         yAxis.setLabel(yLabel);
 
-//        // Disable auto-ranging so that we can configure our own tick units
-//        yAxis.setAutoRanging(false);
-//        yAxis.setTickUnit(DEFAULT_TICK_UNIT);
+        yAxis.setAutoRanging(false);
+        yAxis.setLowerBound(0);
+        yAxis.setUpperBound(104);
+        yAxis.setTickUnit(10);
 
         final LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
         lineChart.setTitle(title);
-//        lineChart.setLegendVisible(false);
 
-//        double maxY = DEFAULT_TICK_UNIT;
-
-
+        // Input data points: score, mean, median
         XYChart.Series seriesScore = new XYChart.Series();
         seriesScore.setName("score");
         for (Map.Entry<String, Number> entry : data.entrySet()) {
@@ -98,19 +96,8 @@ public class ChartUtil {
 
         lineChart.getData().addAll(seriesScore, seriesMean, seriesMedian);
 
-
-//        double yUpperBound = roundUpToNearestMultiple(maxY, (int) DEFAULT_TICK_UNIT);
-
-//        // Add another tick unit as padding, else if there is a data point having a value which is a multiple of
-//        // the tick unit, the graph will look as if it is cut-off.
-//        yUpperBound += DEFAULT_TICK_UNIT;
-//        yAxis.setUpperBound(yUpperBound);
         return lineChart;
     }
-
-
-
-
 
     private static double roundUpToNearestMultiple(double val, int multiple) {
         return Math.round(val / multiple) * multiple;
