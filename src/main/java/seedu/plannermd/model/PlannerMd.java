@@ -229,7 +229,8 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     @Override
     public String toString() {
         return patients.asUnmodifiableObservableList().size() + " patients\n"
-                + doctors.asUnmodifiableObservableList().size() + " doctors";
+                + doctors.asUnmodifiableObservableList().size() + " doctors\n"
+                + appointments.asUnmodifiableObservableList().size() + " appointments";
     }
 
     @Override
