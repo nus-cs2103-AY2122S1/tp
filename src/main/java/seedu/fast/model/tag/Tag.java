@@ -11,8 +11,9 @@ import seedu.fast.commons.util.TagUtil;
 public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric "
-            + "and not more than 20 characters long, or follow the specified \n"
-            + "format for a PriorityTag (low, med or high) or InvestmentPlanTag ()";
+            + "and not more than 20 characters long,\nor follow the specified"
+            + "format for a PriorityTag (\"pr/\" followed by low, med or high)\nor a InvestmentPlanTag " +
+            "(\"ip/\" followed by health, invest, life, motor, property, save, travel)";
 
 
     public static final String MESSAGE_USAGE = "tag: label a client with a keyword or term. \n"
@@ -54,8 +55,11 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagTerm(String test) {
-        return (test.matches(VALIDATION_REGEX) || test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX))
-                && isValidTagLength(test);
+        boolean isNormalTag = test.matches(VALIDATION_REGEX);
+        boolean isPriorityTag = test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        boolean isInvestmentPlanTag = test.matches(InvestmentPlanTag.INVESTMENT_PLAN_VALIDATION_REGEX);
+        boolean isValidLength = isValidTagLength(test);
+        return (isNormalTag || isPriorityTag || isInvestmentPlanTag) && isValidLength;
     }
 
     /**
