@@ -160,15 +160,16 @@ public class Person {
                 .append("; Tutorial Group: ").append(getTutorialGroup())
                 .append("; Remark: ").append(getRemark());
 
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
         Set<SocialHandle> socialHandles = getSocialHandles();
         if (!socialHandles.isEmpty()) {
             builder.append("; Social Handles: ");
             socialHandles.forEach(builder::append);
+        }
+
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
         }
 
         return builder.toString();
