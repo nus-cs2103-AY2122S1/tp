@@ -150,10 +150,14 @@ After running the add command the task gets added to the task list as shown belo
 
 ![add_command_after](images/addCommandAfter.jpeg)
 
-Format:
+<div markdown="block" class="alert alert-primary">
+**:clipboard: Format:**<br>
 - <code> add <i>n/task_name t/time d/date tg/level </i> </code>
+</div>
 
-Interpretation
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
 * Adds task with the name <code><i>n/task_name</i></code>
 * Adds task with the time <code><i>t/time</i></code> 
   * The format should be as follows <code><i>t/hh:mm</i></code>
@@ -162,6 +166,7 @@ Interpretation
 * Add task with the tag <code><i>tg/level</i></code>
 * The task is added for that date only at the given time
   * Useful if it is an event or for marking dates for exams
+</div>
 
 <div markdown="block" class="alert alert-success">
 
@@ -179,10 +184,15 @@ After running the find command, the tasks having the mentioned keyword are displ
 
 ![find_command_after](images/findCommandAfter.jpeg)
 
-Format: 
-- `find keyword (more_keywords) (d/date)`
+<div markdown="block" class="alert alert-primary">
 
-Interpretation:
+**:clipboard: Format:**<br>
+- `find keyword (more_keywords) (d/date)`
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
 * The search is case-insensitive.
 * The order of the keywords does not matter.
 * Only the name of the task is searched.
@@ -190,6 +200,8 @@ Interpretation:
 * Only tasks containing all keywords will be shown
 * if `d/date` field is provided:
   * Only tasks due on that date is searched.
+
+</div>
   
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
@@ -205,31 +217,47 @@ Show all tasks that have been added to the app in a specific week.
 
 ![show_command](images/showCommand41.jpeg)
 
-Format:
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
 - <code> show <i>week_number</i> </code>
 - <code> show <i>d/date</i> </code>
 
-Interpretation
+</div>
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
 * If <code><i>week_number</i></code> field is provided:
   * Searches for the task with the given date and show it on the GUI
   * Useful in cases where user wants to show all tasks in the given week
 * If <code><i>d/date</i></code> field is provided:
   * Show tasks matching the given the date
+</div>
 
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
 Examples:
 * `show 1` displays tasks in week `1`
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
-
+</div>
 
 ### 4.5 Setting Priority Level for Tasks: `tag` (coming soon)
 
 Set a task's priority.
 
-Format:
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
 - <code> tag  <i>n/task_name (d/date) tg/level </i> </code>
 - <code>  tag<i> task_id (d/date) tg/level </i> </code>
+</div>
 
-Interpretation
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
 * If <code><i>n/task_name</i></code> field is provided:
   * Depending on the <code><i>tg/level </i></code> provided it sets priority of the task with the name exactly matching the <code><i>n/task_name </i></code> or <code><i>task_id</i></code> to
     * Urgent
@@ -242,6 +270,9 @@ Interpretation
   * If <code><i>d/date</i></code> field is not provided, it sets priority for every occurrence of tasks matching the given name
 
 * If <code><i>task_id</i></code> is provided:
+
+</div>
+
 
 <div markdown="block" class="alert alert-success">
 :green_book: **Examples:**
@@ -301,19 +332,34 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 ![clear_command_after](images/clearCommandAfter.jpeg)
 
-Format: `clear`
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+ `clear`
+
+</div>
 
 ### 4.8 Undoing the previous command : `undo` `[coming in v1.3]`
 
 Reverts your previous command which modified the task list of Uni-Fy.
 
-Format: `undo`
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+`undo`
+
+</div>
 
 ### 4.9 Exiting the program : `exit`
 
 Exits the program.
 
-Format: `exit`
+<div markdown="block" class="alert alert-primary">
+
+**:clipboard: Format:**<br>
+`exit`
+
+</div>
 
 ### 4.10 Saving the data
 
