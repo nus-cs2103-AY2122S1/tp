@@ -31,6 +31,7 @@ import seedu.address.model.product.Product;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private int stats = 0;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -43,9 +44,11 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private PieChartView pieChartView;
+    private PieChartSalesView salesView;
     private HelpMessage helpMessage;
     private ViewMoreClient viewMoreClient;
     private ViewMoreProduct viewMoreProduct;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -170,6 +173,8 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
+            secondPanelPlaceholder.getChildren().clear();
+            secondPanelPlaceholder.getChildren().add(helpMessage.getRoot());
         } else {
             helpWindow.focus();
         }
@@ -194,8 +199,15 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleStat() {
         pieChartView = new PieChartView(logic.getFilteredClientList(), logic.getFilteredProductList());
+        salesView = new PieChartSalesView(logic.getFilteredClientList(), logic.getFilteredProductList());
         secondPanelPlaceholder.getChildren().clear();
-        secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
+        if (stats == 0) {
+            secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
+            stats++;
+        } else {
+            secondPanelPlaceholder.getChildren().add(salesView.getRoot());
+            stats--;
+        }
 
     }
 
