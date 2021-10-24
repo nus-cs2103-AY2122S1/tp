@@ -64,15 +64,14 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 </div>
 
-### Give a list of instructions : `help`
+### Show a window with instructions : `help`
 
-Shows the user a list of instructions that can be used to navigate the app.
+Shows the user another window which has a table of instructions that can be used to navigate the app.
 
-Format: `help [COMMAND_NAME]`
-
-* If no command-name is entered, the user will see the list of all the keywords for each command
-
-* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and taskName of the command.
+Format: 
+* (From the main window) `help`
+* (From the help window) `help [COMMAND_NAME]`
+* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and an example use of the command.
 
 Examples:
 * `help`
