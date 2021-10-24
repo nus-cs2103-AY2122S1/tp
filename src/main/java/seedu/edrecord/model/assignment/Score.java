@@ -1,32 +1,26 @@
-package seedu.edrecord.model.grade;
+package seedu.edrecord.model.assignment;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.edrecord.commons.util.AppUtil.checkArgument;
 
-import seedu.edrecord.model.assignment.MaxScore;
-
 /**
- * Represents a student's score for an assignment in EdRecord.
+ * Represents the score of an Assignment.
  * Guarantees: immutable; is valid as declared in {@link #isValidScore(String)}
  */
 public class Score {
-    public static final String MESSAGE_CONSTRAINTS = "Student's score should be a non-negative integer less than "
-            + "the maximum score for the assignment";
+    public static final String MESSAGE_CONSTRAINTS = "Assignment score should be a non-negative integer";
 
-    private final Double score;
-    private final MaxScore maxScore;
+    public final Double score;
 
     /**
      * Constructs a {@code Weightage} object.
      *
-     * @param score    Student's score.
-     * @param maxScore Maximum score of the assignment.
+     * @param score The score.
      */
-    public Score(String score, MaxScore maxScore) {
+    public Score(String score) {
         requireNonNull(score);
         checkArgument(isValidScore(score), MESSAGE_CONSTRAINTS);
-        this.score = Double.parseDouble(score);
-        this.maxScore = maxScore;
+        this.score = Double.valueOf(score);
     }
 
     /**
@@ -34,10 +28,10 @@ public class Score {
      *
      * @param test The string to test.
      */
-    public boolean isValidScore(String test) {
+    public static boolean isValidScore(String test) {
         try {
             double d = Double.parseDouble(test);
-            return d >= 0 && d <= maxScore.maxScore;
+            return d >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -59,4 +53,5 @@ public class Score {
     public int hashCode() {
         return score.hashCode();
     }
+
 }

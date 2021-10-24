@@ -2,6 +2,10 @@ package seedu.edrecord.model.grade;
 
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Objects;
+
+import seedu.edrecord.model.assignment.Score;
+
 /**
  * Represents an Grade under a Student in EdRecord.
  * Guarantees: immutable, details are present and not null.
@@ -41,9 +45,8 @@ public class Grade {
                 && status.equals(((Grade) other).status)); // state check
     }
 
-    // TODO change to unique ID
     @Override
     public int hashCode() {
-        return score.hashCode();
+        return Objects.hash(score, status);
     }
 }
