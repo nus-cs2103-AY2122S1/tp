@@ -68,6 +68,9 @@ public class Task {
         return isDueSoon;
     }
 
+    /**
+     * Updates if the task is overdue or due soon.
+     */
     public void updateDueDate() {
         if (!isDone) {
             LocalDate taskDate = date == null ? LocalDate.MAX : date.taskDate;
