@@ -121,6 +121,23 @@ public class Person {
     }
 
     /**
+     * Returns true if visit is empty with nonempty frequency or occurrence more than 1.
+     */
+    public boolean hasInvalidFrequencyOccurrence() {
+        boolean isEitherTrue = this.occurrence.get().isMoreThan(1)
+                || !(this.frequency.get().equals(Frequency.EMPTY));
+        return !this.hasVisit() && isEitherTrue;
+    }
+
+    /**
+     * Returns true if visit is empty with nonempty frequency or occurrence more than 1.
+     */
+    public boolean hasInvalidFrequency() {
+        return occurrence.get().isMoreThan(1) && frequency.get().equals(Frequency.EMPTY);
+    }
+
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

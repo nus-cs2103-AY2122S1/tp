@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VISIT_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -50,6 +52,28 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_addInvalidFrequencyFilteredList_throwCommandException() {
+
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person invalidPerson = new PersonBuilder(BOB).withVisit(VALID_VISIT_BOB).withOccurrence(2)
+                .withFrequency("").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INVALID_OPTIONAL_FREQUENCY_FLAG, ()
+            -> addCommand.execute(modelStub));
+    }
+
+    @Test
+    public void execute_addInvalidVisitFilteredList_throwCommandException() {
+
+        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+        Person invalidPerson = new PersonBuilder(BOB).withVisit("").withOccurrence(2)
+                .withFrequency("").build();
+        AddCommand addCommand = new AddCommand(invalidPerson);
+        assertThrows(CommandException.class, AddCommand.MESSAGE_INVALID_OPTIONAL_VISIT_FLAG, ()
+            -> addCommand.execute(modelStub));
     }
 
     @Test

@@ -93,7 +93,7 @@ title: User Guide
 
 Adds an elderly and all relevant details into SeniorLove.
 
-Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [h/HEALTH_CONDITION]`
+Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [f/FREQUENCY o/OCCURRENCE] [h/HEALTH_CONDITION]`
 
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`, `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
 * `NAME` is the elderly’s name. **This must be included.**
@@ -102,11 +102,17 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `ADDRESS` is the elderly’s address to be visited. **This must be included.**
 * `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
 * `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
+* `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include**
+* The `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
+* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
+* `OCCURRENCE` is a **strictly positive integer**.
+* `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include**
 * `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
 
 Examples:
-* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`.
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`, without `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 f/weekly o/3 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE` .
 
 
 ### Delete an elderly or corresponding visit : `delete`
