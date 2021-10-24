@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.programmer.model.student.Comparator.SortByClass;
+import seedu.programmer.model.student.Comparator.SortByName;
 import seedu.programmer.model.student.exceptions.DuplicateStudentException;
 import seedu.programmer.model.student.exceptions.StudentNotFoundException;
 

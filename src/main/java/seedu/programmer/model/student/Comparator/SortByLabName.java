@@ -1,4 +1,6 @@
-package seedu.programmer.model.student;
+package seedu.programmer.model.student.Comparator;
+
+import seedu.programmer.model.student.Lab;
 
 import java.util.Comparator;
 
