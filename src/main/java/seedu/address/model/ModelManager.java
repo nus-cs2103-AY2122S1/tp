@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import seedu.address.model.order.TransactionTimeComparator;
  * Represents the in-memory model of BogoBogo data.
  */
 public class ModelManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private static final String TRANSACTION_LOGGING_MSG = "Transacted successfully: ";
 
@@ -35,6 +37,8 @@ public class ModelManager implements Model {
     private final FilteredList<Item> filteredItems;
     private Optional<Order> optionalOrder;
     private Set<TransactionRecord> transactions;
+
+    private DisplayMode currentDisplay = DISPLAY_INVENTORY;
 
     /**
      * Initializes a ModelManager with the given inventory and userPrefs.
@@ -123,7 +127,8 @@ public class ModelManager implements Model {
     @Override
     public void addItem(Item item) {
         inventory.addItem(item);
-        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        updateFilteredItemList(DisplayMode.DISPLAY_INVENTORY,
+                PREDICATE_SHOW_ALL_ITEMS);
     }
 
     @Override
@@ -163,9 +168,28 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateFilteredItemList(Predicate<Item> predicate) {
+    public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
         requireNonNull(predicate);
+
+        // Switch display mode if needed
+        if (currentDisplay != mode) {
+            switch(mode) {
+            case DISPLAY_INVENTORY:
+                filteredItems.setAll(this.inventory.getItemList());
+                break;
+            case DISPLAY_OPEN_ORDER:
+                filteredItems.setAll(this.optionalOrder.get().getOrderItems());
+            }
+            currentDisplay = mode;
+        }
+
+        // Update predicate
         filteredItems.setPredicate(predicate);
+    }
+
+    @Override
+    public DisplayMode getDisplayMode() {
+        return currentDisplay;
     }
 
     @Override

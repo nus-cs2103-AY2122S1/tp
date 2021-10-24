@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALESPRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
 
@@ -77,7 +78,7 @@ public class AddCommand extends Command {
 
         // Check that only 1 item fit the description
         if (matchingItems.size() > 1) {
-            model.updateFilteredItemList(toAddDescriptor::isMatch);
+            model.updateFilteredItemList(DISPLAY_INVENTORY, toAddDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
 

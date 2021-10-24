@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class RemoveCommand extends Command {
 
         // Check that only 1 item fit the description
         if (matchingItems.size() > 1) {
-            model.updateFilteredItemList(toRemoveDescriptor::isMatch);
+            model.updateFilteredItemList(DISPLAY_INVENTORY, toRemoveDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
 

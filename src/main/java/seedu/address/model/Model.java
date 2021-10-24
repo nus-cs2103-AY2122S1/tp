@@ -21,6 +21,14 @@ public interface Model {
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
 
     /**
+     * Enumeration to categorise which list of items is on display.
+     */
+    public enum DisplayMode {
+        DISPLAY_INVENTORY,
+        DISPLAY_OPEN_ORDER
+    }
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
@@ -153,5 +161,12 @@ public interface Model {
      *
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredItemList(Predicate<Item> predicate);
+    void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate);
+
+    /**
+     * Returns the model's current {@code DisplayMode}.
+     *
+     * @see Model.DisplayMode
+     */
+    DisplayMode getDisplayMode();
 }
