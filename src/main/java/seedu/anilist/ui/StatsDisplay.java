@@ -3,17 +3,20 @@ package seedu.anilist.ui;
 import static seedu.anilist.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.awt.datatransfer.Clipboard;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
 import javafx.scene.Scene;
-import javafx.scene.chart.PieChart;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.LogsCenter;
+import seedu.anilist.model.genre.Genre;
 import seedu.anilist.model.stats.Stats;
 
 
@@ -33,6 +36,9 @@ public class StatsDisplay extends UiPart<Stage> {
 
     @FXML
     private PieChart pieChart;
+
+    @FXML
+    private BarChart<String, Number> barChart;
 
     /**
      * Creates a StatsDisplay UI component.
@@ -105,6 +111,33 @@ public class StatsDisplay extends UiPart<Stage> {
         addToPieChart(NUM_ANIMES_WATCHING_MSG, stats.getWatchingCount());
         addToPieChart(NUM_ANIMES_TOWATCH_MSG, stats.getToWatchCount());
         addToPieChart(NUM_ANIMES_FINISHED_MSG, stats.getFinishedCount());
+
+        setGenreStats(stats.getTopGenres());
+    }
+
+    private void setGenreStats(HashMap<Genre, Integer> genreStats) {
+        barChart.setTitle("Here are your top anime genres.");
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        BarChart<String, Number> tempGenreStats = new BarChart<>(xAxis, yAxis);
+        tempGenreStats.getData().add(getBarChartData(genreStats));
+        barChart.setData(tempGenreStats.getData());
+    }
+
+    /**
+     * Get stats for genres
+     * @param genreStats The genre statistics
+     * @return data for bar chart
+     */
+    public XYChart.Series<String, Number> getBarChartData(HashMap<Genre, Integer> genreStats) {
+        XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
+        for (Map.Entry<Genre, Integer> genreCountPair : genreStats.entrySet()) {
+            String genreName = genreCountPair.getKey().genreName;
+            int genreCount = genreCountPair.getValue();
+            barChartData.getData().add(new XYChart.Data<>(
+                    genreName, genreCount));
+        }
+        return barChartData;
     }
 
 

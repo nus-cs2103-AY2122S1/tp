@@ -7,17 +7,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 <fx:root resizable="false" title="Statistics" type="javafx.stage.Stage" minHeight="400.0" minWidth="250.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <icons>
         <Image url="@/images/stats_icon.png" />
     </icons>
     <scene>
         <Scene>
-            <HBox alignment="CENTER">
+            <HBox>
+            <VBox alignment="CENTER">
                 <PieChart id="pieChartMain" fx:id="pieChart" stylesheets="@AnimeTheme.css"  />
                 <opaqueInsets>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
@@ -25,6 +32,19 @@
                 <padding>
                     <Insets bottom="0" left="0" right="0" top="0" />
                 </padding>
+            </VBox>
+            <VBox alignment="CENTER">
+                <children>
+                    <BarChart fx:id="barChart" stylesheets="@AnimeTheme.css">
+                        <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                        </xAxis>
+                        <yAxis>
+                            <NumberAxis side="LEFT" />
+                        </yAxis>
+                    </BarChart>
+                </children>
+            </VBox>
             </HBox>
         </Scene>
     </scene>

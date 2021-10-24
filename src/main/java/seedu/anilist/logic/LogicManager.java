@@ -54,7 +54,7 @@ public class LogicManager implements Logic {
             commandResult = command.execute(model);
             this.lastCmd = Optional.of(command);
         } else {
-            //command present and requires confirmation
+            //last command present and requires confirmation
             Command command = animeListParser.parseConfirmationCommand(this.lastCmd.get(), commandText);
             assert command != null;
             commandResult = command.execute(model);

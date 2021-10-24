@@ -47,4 +47,8 @@ public class Stats {
     public int getEpisodesCount() {
         return this.episodesCount;
     }
+
+    public HashMap<Genre, Integer> getTopGenres() {
+        return this.topGenres;
+    }
 }

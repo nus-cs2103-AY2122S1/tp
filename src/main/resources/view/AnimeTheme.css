@@ -485,6 +485,7 @@ chart-pie-label-line {
     -fx-text-fill: #ffffff;
     -fx-font-size: 1em;
 }
+
 .chart-legend {
     -fx-background: transparent;
     -fx-alignment: CENTER;

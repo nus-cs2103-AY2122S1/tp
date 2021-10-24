@@ -87,11 +87,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void updateStatsDisplay() {
-//        int watchingCount = getAnimeListPanel().getWatchingCount();
-//        int toWatchCount = getAnimeListPanel().getToWatchCount();
-//        int finishedCount = getAnimeListPanel().getFinishedCount();
-//        int total = watchingCount + toWatchCount + finishedCount;
-
         statsDisplay.setAnimeListStats(logic.getStats());
     }
 
