@@ -15,7 +15,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.CollectionUtil;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
@@ -97,11 +96,10 @@ public class EditStudentCommand extends Command {
         Phone updatedParentPhone = editStudentDescriptor.getParentPhone().orElse(studentToEdit.getParentPhone());
 
         ProgressList studentProgress = studentToEdit.getProgressList();
-        Lessons lessons = studentToEdit.getLessons();
         PaymentStatus paymentStatus = studentToEdit.getPaymentStatus();
 
         return new Student(updatedStudentName, updatedStudentPhone, updatedParentName, updatedParentPhone,
-                studentProgress, lessons, paymentStatus);
+                studentProgress, paymentStatus);
     }
 
     @Override

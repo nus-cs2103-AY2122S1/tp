@@ -2,16 +2,8 @@ package tutoraid.logic.parser;
 
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
-import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.commands.AddStudentsToLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
-import tutoraid.model.student.ParentName;
-import tutoraid.model.student.PaymentStatus;
-import tutoraid.model.student.Phone;
-import tutoraid.model.student.Progress;
-import tutoraid.model.student.ProgressList;
-import tutoraid.model.student.Student;
-import tutoraid.model.student.StudentName;
 
 import java.util.ArrayList;
 

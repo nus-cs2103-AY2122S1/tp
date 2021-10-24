@@ -53,7 +53,7 @@ public class UnpaidCommand extends Command {
 
         Student editedStudent = new Student(
                 studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
-                studentToEdit.getParentPhone(), studentToEdit.getProgressList(), studentToEdit.getLessons(),
+                studentToEdit.getParentPhone(), studentToEdit.getProgressList(),
                 new PaymentStatus(false));
 
         model.setStudent(studentToEdit, editedStudent);

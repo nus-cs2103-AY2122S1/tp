@@ -61,7 +61,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         requireNonNull(lesson);
         for (Student student : students) {
             requireNonNull(student);
-            if (student.attendsLesson(lesson)) {
+            if (lesson.containsStudent(student)) {
                 return true;
             }
         }
@@ -100,7 +100,6 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         requireNonNull(lesson);
         for (Student student : students) {
             requireNonNull(student);
-            student.attendsLesson(lesson);
             lesson.addStudent(student);
         }
     }

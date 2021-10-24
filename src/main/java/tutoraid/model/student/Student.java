@@ -3,7 +3,6 @@ package tutoraid.model.student;
 import java.util.Objects;
 
 import tutoraid.commons.util.CollectionUtil;
-import tutoraid.model.lesson.Lesson;
 
 /**
  * Represents a Student in the TutorAid.
@@ -19,21 +18,19 @@ public class Student {
 
     // Data fields
     private final ProgressList progressList;
-    private final Lessons lessons;
     private final PaymentStatus paymentStatus;
 
     /**
      * Every field must be present and not null.
      */
     public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
-                   ProgressList progressList, Lessons lessons, PaymentStatus paymentStatus) {
+                   ProgressList progressList, PaymentStatus paymentStatus) {
         CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.progressList = progressList;
-        this.lessons = lessons;
         this.paymentStatus = paymentStatus;
     }
 
@@ -61,10 +58,6 @@ public class Student {
         return progressList.getLatestProgress();
     }
 
-    public Lessons getLessons() {
-        return lessons;
-    }
-
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
@@ -75,34 +68,6 @@ public class Student {
 
     public Progress deleteLatestProgress() {
         return progressList.deleteLatestProgress();
-    }
-
-    /**
-     * Checks if this student is attending a lesson.
-     *
-     * @param lesson lesson to be checked
-     * @return true if the student is in this lesson, false otherwise
-     */
-    public boolean attendsLesson(Lesson lesson) {
-        return lessons.containsLesson(lesson);
-    }
-
-    /**
-     * Adds a lesson to this student's list of lessons.
-     *
-     * @param lesson lesson to be added
-     */
-    public void addLesson(Lesson lesson) {
-        lessons.addLesson(lesson);
-    }
-
-    /**
-     * Removes this student from a lesson.
-     *
-     * @param lesson lesson the student is to be removed from
-     */
-    public void removeLesson(Lesson lesson) {
-        lessons.removeLesson(lesson);
     }
 
     /**

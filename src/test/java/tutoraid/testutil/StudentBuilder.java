@@ -3,7 +3,6 @@ package tutoraid.testutil;
 import java.util.ArrayList;
 
 import tutoraid.model.lesson.Lesson;
-import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
@@ -28,7 +27,6 @@ public class StudentBuilder {
     private ParentName parentName;
     private Phone parentPhone;
     private ProgressList progressList;
-    private Lessons lessons;
     private PaymentStatus paymentStatus;
 
     /**
@@ -40,7 +38,6 @@ public class StudentBuilder {
         parentName = new ParentName(DEFAULT_PARENT_NAME);
         parentPhone = new Phone(DEFAULT_PARENT_PHONE);
         progressList = new ProgressList(DEFAULT_PROGRESS_LIST);
-        lessons = new Lessons(DEFAULT_STUDENT_LESSONS);
         paymentStatus = new PaymentStatus(DEFAULT_PAYMENT_STATUS);
     }
 
@@ -53,7 +50,6 @@ public class StudentBuilder {
         parentName = studentToCopy.getParentName();
         parentPhone = studentToCopy.getParentPhone();
         progressList = studentToCopy.getProgressList();
-        lessons = studentToCopy.getLessons();
         paymentStatus = studentToCopy.getPaymentStatus();
     }
 
@@ -106,6 +102,6 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(studentName, studentPhone, parentName, parentPhone, progressList, lessons, paymentStatus);
+        return new Student(studentName, studentPhone, parentName, parentPhone, progressList, paymentStatus);
     }
 }

@@ -52,7 +52,7 @@ public class PaidCommand extends Command {
 
         Student editedStudent = new Student(
                 studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
-                studentToEdit.getParentPhone(), studentToEdit.getProgressList(), studentToEdit.getLessons(),
+                studentToEdit.getParentPhone(), studentToEdit.getProgressList(),
                 new PaymentStatus(true));
 
         model.setStudent(studentToEdit, editedStudent);

@@ -39,7 +39,7 @@ public class ParserUtil {
      * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
      */
     public static ArrayList<Index> parseMultipleIndexes(String multipleOneBasedIndexes) throws ParseException {
-        String[] trimmedMultipleIndexes = multipleOneBasedIndexes.trim().split("");
+        String[] trimmedMultipleIndexes = multipleOneBasedIndexes.trim().split(" ");
         ArrayList<Index> indexesToReturn = new ArrayList<>();
 
         for (String indexInString : trimmedMultipleIndexes) {
