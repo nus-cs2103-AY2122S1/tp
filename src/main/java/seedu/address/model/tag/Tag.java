@@ -12,6 +12,7 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tag names should be alphanumeric";
     public static final String MESSAGE_CONSTRAINTS_COLOURS = "Tag Colour should follow the Colour Code format."
             + " E.g. Blue = #0000FF";
+    public static final String DEFAULT_COLOUR_CODE = "3e7b91";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
     public static final String COLOUR_VALIDATION_REGEX = "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$";
 
@@ -28,7 +29,7 @@ public class Tag {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
         this.tagName = tagName;
-        this.tagColour = "#3e7b91";
+        this.tagColour = DEFAULT_COLOUR_CODE;
         String assertTagColour = tagColour;
         assert assertTagColour == "#3e7b91" : "Default tag colour code should be #3e7b91";
     }
