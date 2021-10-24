@@ -173,8 +173,8 @@ Examples:
 Set a task's priority.
 
 Format:
-- <code> <i> tag n/task_name (d/date) tg/level </i> </code>
-- <code> <i> tag task_id (d/date) tg/level </i> </code>
+- <code> tag  <i>n/task_name (d/date) tg/level </i> </code>
+- <code>  tag<i> task_id (d/date) tg/level </i> </code>
 
 Interpretation
 * If <code><i>n/task_name</i></code> field is provided:
