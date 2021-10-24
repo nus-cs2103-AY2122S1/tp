@@ -93,6 +93,7 @@ public class EditPersonCommand extends Command {
         }
 
         model.setPerson(personToEdit, editedPerson);
+        model.updateLessonWithAttendeesList();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(successMsg, editedPerson));
     }

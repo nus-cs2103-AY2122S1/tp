@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
@@ -15,6 +16,7 @@ import seedu.address.model.lesson.Attendee;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -214,6 +216,11 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public UniqueIdMapper<Group> getGroupMapper() {
         return groups;
+    }
+
+    public PersonWithDetails getPersonWithDetails(Person person) {
+        Set<Group> groupsPersonIsIn = groups.getFromUniqueIds(person.getAssignedGroupIds());
+        return new PersonWithDetails(person, groupsPersonIsIn);
     }
 
     //// util methods
