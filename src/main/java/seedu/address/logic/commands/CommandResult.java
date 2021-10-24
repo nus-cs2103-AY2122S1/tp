@@ -52,7 +52,7 @@ public class CommandResult {
     }
 
     /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code student},
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser, Person student) {
@@ -77,10 +77,6 @@ public class CommandResult {
 
     public Person getStudent() {
         return student;
-    }
-
-    public boolean isShowStudentList() {
-        return !showSchedule && !isDisplayStudent();
     }
 
     public boolean isExit() {
