@@ -14,4 +14,8 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    /**
+     * Returns the date when the system was updated.
+     */
+    LastUpdatedDate getLastUpdatedDate();
 }

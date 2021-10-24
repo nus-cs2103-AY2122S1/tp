@@ -14,6 +14,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
@@ -30,12 +31,14 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final UndoRedoStack undoRedoStack;
     private final AddressBookParser addressBookParser;
+    private final FeesCalculator feesCalculator;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
-        this.model = model;
+        feesCalculator = new FeesCalculator(model, model.getLastUpdatedDate());
+        this.model = feesCalculator.updateAllLessonOutstandingFees(model);
         this.storage = storage;
         undoRedoStack = new UndoRedoStack();
         addressBookParser = new AddressBookParser();
@@ -90,7 +93,8 @@ public class LogicManager implements Logic {
         model.setGuiSettings(guiSettings);
     }
 
-    public void updateAllLessonsOutstandingFields(FeesCalculator feesCalculator) {
-
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return model.getLastUpdatedDate();
     }
 }

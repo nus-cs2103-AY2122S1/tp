@@ -32,7 +32,7 @@ class JsonAdaptedLesson {
     private final String subject;
     private final String lessonRates;
     private final boolean isRecurring;
-    private final JsonAdaptedFees outstandingFees;
+    private final String outstandingFees;
     private final List<JsonAdaptedHomework> homework = new ArrayList<>();
 
     /**
@@ -44,7 +44,7 @@ class JsonAdaptedLesson {
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework,
                              @JsonProperty("lessonRates") String lessonRates,
-                             @JsonProperty("outstandingFees") JsonAdaptedFees outstandingFees) {
+                             @JsonProperty("outstandingFees") String outstandingFees) {
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
@@ -64,7 +64,7 @@ class JsonAdaptedLesson {
         timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
         lessonRates = source.getLessonRates().value;
-        outstandingFees = new JsonAdaptedFees(source.getOutstandingFees());
+        outstandingFees = source.getOutstandingFees().value;
         homework.addAll(source.getHomework().stream()
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
@@ -121,7 +121,10 @@ class JsonAdaptedLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     OutstandingFees.class.getSimpleName()));
         }
-        final OutstandingFees modelOutstandingFees = outstandingFees.toModelType();
+        if (!OutstandingFees.isValidOutstandingFee(outstandingFees)) {
+            throw new IllegalValueException(OutstandingFees.MESSAGE_CONSTRAINTS);
+        }
+        final OutstandingFees modelOutstandingFees = new OutstandingFees(outstandingFees);
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
         return isRecurring

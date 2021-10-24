@@ -1,22 +1,29 @@
 package seedu.address.logic;
 
+import seedu.address.model.AddressBook;
+import seedu.address.model.LastUpdatedDate;
+import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.OutstandingFees;
-import seedu.address.model.lesson.OutstandingFees.LastAddedDate;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
+import seedu.address.model.person.Person;
+import seedu.address.model.util.PersonUtil;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 /**
  * Responsible for the automated updates and calculation of each lesson's fees.
@@ -26,6 +33,41 @@ public class FeesCalculator {
 
     private static final float numberOfMinutesInAnHour = 60.00F;
     private static final LocalDate currentDate = LocalDate.now();
+    private final LastUpdatedDate lastUpdated;
+
+    public FeesCalculator(Model model, LastUpdatedDate lastUpdatedDate) {
+        lastUpdated = lastUpdatedDate;
+    }
+
+    public Model updateAllLessonOutstandingFees(Model model) {
+        // if last updated day is today, no need to update lessons again.
+        if (lastUpdated.date.equals(LocalDate.now())) {
+            return model;
+        }
+
+        List<Person> personList = model.getFilteredPersonList();
+
+        for (int i = 0; i < personList.size(); i++) {
+            Person targetPerson = personList.get(i);
+            model.setPerson(targetPerson, createEditedPerson(targetPerson));
+        }
+
+        return model;
+    }
+
+    public Person createEditedPerson(Person personToEdit) {
+        assert personToEdit != null;
+
+       List<Lesson> lessonList = personToEdit.getLessons()
+               .stream()
+               .collect(Collectors.toList());
+
+        for (int i = 0; i < lessonList.size(); i++) {
+            lessonList.set(i, updateLessonOutstandingFeesField(lessonList.get(i)));
+        }
+
+        return PersonUtil.createdEditedPerson(personToEdit, new TreeSet<>(lessonList));
+    }
 
     /**
      * Automated updates the specific lesson's outstanding fees.
@@ -44,8 +86,8 @@ public class FeesCalculator {
                 : new HashSet<>(lesson.getHomework());
 
         // update outstanding fees after calculation
-        OutstandingFees updatedOutstandingFees = getUpdatedOutstandingFees(lesson.getOutstandingFees(),
-                copiedDate.getUpdateFeesDay(), copiedTimRange, copiedLessonRates);
+        OutstandingFees updatedOutstandingFees = getUpdatedOutstandingFees(copiedDate.getUpdateFeesDay(),
+                copiedTimRange, copiedLessonRates);
 
         return lesson.isRecurring()
                 ? new RecurringLesson(copiedDate, copiedTimRange, copiedSubject,
@@ -57,24 +99,20 @@ public class FeesCalculator {
     /**
      * Updates the Outstanding Fees field to most recent value and modify the lastAdded date.
      *
-     * @param outstandingFees Outstanding Fee object to be updated.
      * @param updateDay Day of Week for lesson fees to be updated.
      * @param timeRange Duration per lesson.
      * @param lessonRates Cost per hour for the lesson.
      * @return Updated Outstanding Fees object.
      */
-    public OutstandingFees getUpdatedOutstandingFees(OutstandingFees outstandingFees, DayOfWeek updateDay,
-            TimeRange timeRange, LessonRates lessonRates) {
+    public OutstandingFees getUpdatedOutstandingFees(DayOfWeek updateDay, TimeRange timeRange,
+                                                     LessonRates lessonRates) {
 
         // updated fee values
-        int numberOfLessons = numberOfLessonsSinceLastAdded(outstandingFees.getLastAdded(), updateDay);
+        int numberOfLessons = numOfLessonsSinceLastUpdate(updateDay);
         float costPerLesson = getCostPerLesson(timeRange, lessonRates);
         double updatedFees = costPerLesson * numberOfLessons;
 
-        // update last added date
-        LastAddedDate updatedLastAdded = new LastAddedDate(currentDate.toString());
-
-        return new OutstandingFees(Double.toString(updatedFees), updatedLastAdded);
+        return new OutstandingFees(Double.toString(updatedFees));
     }
 
     public static float getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
@@ -84,9 +122,9 @@ public class FeesCalculator {
         return costPerLesson;
     }
 
-    public int numberOfLessonsSinceLastAdded(LastAddedDate lastAddedDate, DayOfWeek updateDay) {
+    public int numOfLessonsSinceLastUpdate(DayOfWeek updateDay) {
         // get the number of weeks past since lastAdded date
-        LocalDate startDate = lastAddedDate.getLastAddedDate();
+        LocalDate startDate = lastUpdated.getLastUpdatedDate().date;
         int numberOfWeeksBetween = (int) ChronoUnit.WEEKS.between(startDate, currentDate);
 
         int updateDayOfWeek = startDate.getDayOfWeek().getValue();

@@ -1,15 +1,11 @@
 package seedu.address.model.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
-
-import seedu.address.model.lesson.OutstandingFees.LastAddedDate;
 
 class OutstandingFeesTest {
 
@@ -17,8 +13,6 @@ class OutstandingFeesTest {
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
                 new OutstandingFees(null));
-        assertThrows(NullPointerException.class, () ->
-                new OutstandingFees(null, null));
     }
 
     @Test
@@ -27,7 +21,7 @@ class OutstandingFeesTest {
 
         assertThrows(IllegalArgumentException.class, () -> new OutstandingFees(invalidOutstandingFees));
         assertThrows(IllegalArgumentException.class, () ->
-                new OutstandingFees(invalidOutstandingFees, new LastAddedDate("2021-10-23")));
+                new OutstandingFees(invalidOutstandingFees));
     }
 
 
@@ -61,33 +55,5 @@ class OutstandingFeesTest {
         assertTrue(OutstandingFees.isValidOutstandingFee("99999.99")); // dollars and cents to 2 decimal places
         assertTrue(OutstandingFees.isValidOutstandingFee("00123.45")); // leading zeroes
         assertTrue(OutstandingFees.isValidOutstandingFee("124293842033123.99")); // large fee
-    }
-
-    @Test
-    public void lastAddedDate_constructorNull_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new LastAddedDate(null));
-    }
-
-    @Test
-    public void lastAdded_factoryMethod() {
-        String testDate = LocalDate.now().toString();
-        LastAddedDate expectedLastAdded = new LastAddedDate(testDate);
-        assertEquals(expectedLastAdded, LastAddedDate.of());
-    }
-
-    @Test
-    public void isValidLastAddedDate() {
-        // null date
-        assertThrows(NullPointerException.class, () -> LastAddedDate.isValidLastAddedDate(null));
-
-        // invalid date
-        assertFalse(LastAddedDate.isValidLastAddedDate("")); // empty string
-        assertFalse(LastAddedDate.isValidLastAddedDate(" ")); // spaced only
-        assertFalse(LastAddedDate.isValidLastAddedDate("2021-02-31")); // no such date
-        assertFalse(LastAddedDate.isValidLastAddedDate("2021-13-23")); // invalid month
-
-        //valid date
-        assertTrue(LastAddedDate.isValidLastAddedDate("2020-02-29")); // leap year
-        assertTrue(LastAddedDate.isValidLastAddedDate("2021-10-23"));;
     }
 }

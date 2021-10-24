@@ -22,6 +22,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final CalendarEntryList entries;
+    private LastUpdatedDate lastUpdatedDate;
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -128,6 +129,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         entries.removeLessons(key);
     }
 
+    public void setLastUpdatedDate(LastUpdatedDate lastUpdatedDate) {
+        this.lastUpdatedDate = new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
+    }
+
     //// util methods
 
     @Override
@@ -140,6 +145,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public LastUpdatedDate getLastUpdatedDate() {
+        return new LastUpdatedDate(lastUpdatedDate.getLastUpdatedDate().value);
     }
 
     public Calendar getCalendar() {

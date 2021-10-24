@@ -9,7 +9,6 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.OutstandingFees;
-import seedu.address.model.lesson.OutstandingFees.LastAddedDate;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -93,15 +92,6 @@ public class LessonBuilder {
      */
     public LessonBuilder withOutstandingFees(String fees) {
         this.outstandingFees = new OutstandingFees(fees);
-        return this;
-    }
-
-    /**
-     * Sets the {@code OutstandingFees} of the {@code Lesson} that we are building.
-     * The lastAdded field would be the current date.
-     */
-    public LessonBuilder withOutstandingFees_customLastAdded(String fees, LastAddedDate date) {
-        this.outstandingFees = new OutstandingFees(fees, date);
         return this;
     }
 

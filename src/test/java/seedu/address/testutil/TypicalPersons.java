@@ -22,6 +22,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.LastUpdatedDateUtil.getTypicalLastUpdatedDate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -140,6 +141,7 @@ public class TypicalPersons {
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
+        ab.setLastUpdatedDate(getTypicalLastUpdatedDate());
         return ab;
     }
 

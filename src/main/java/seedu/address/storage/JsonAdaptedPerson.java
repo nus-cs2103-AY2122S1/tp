@@ -52,8 +52,7 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email, @JsonProperty("parent phone") String parentPhone,
                              @JsonProperty("parent email") String parentEmail, @JsonProperty("address") String address,
                              @JsonProperty("school") String school, @JsonProperty("acadStream") String acadStream,
-                             @JsonProperty("acadLevel") String acadLevel,
-                             @JsonProperty("remark") String remark,
+                             @JsonProperty("acadLevel") String acadLevel, @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
                              @JsonProperty("lessons") List<JsonAdaptedLesson> lessons) {
         this.name = name;
