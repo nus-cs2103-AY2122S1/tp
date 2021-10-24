@@ -106,8 +106,6 @@ public class EditCommand extends Command {
             return new Student(updatedName, updateStudentId, updatedClassId, updatedEmail,
                     studentToEdit.getLabResultList());
         }
-
-
     }
 
     @Override

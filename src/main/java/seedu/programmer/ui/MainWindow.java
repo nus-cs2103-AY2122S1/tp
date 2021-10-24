@@ -411,9 +411,8 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
             } else if (commandResult instanceof UploadCommandResult) {
-                UploadCommandResult ucr = (UploadCommandResult) commandResult;
-                Model m = ucr.getModel();
-                handleUpload(m);
+                UploadCommandResult uploadCommandResult = (UploadCommandResult) commandResult;
+                handleUpload(uploadCommandResult.getModel());
             } else if (commandResult instanceof EditCommandResult) {
                 EditCommandResult editCommandResult = (EditCommandResult) commandResult;
                 handleShowResult(editCommandResult.getEditedStudent());
