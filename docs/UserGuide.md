@@ -12,11 +12,14 @@ title: Uni-Fy User Guide
 
 ### 1.1 Overview
 
-Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) 
+Welcome to the Uni-Fy User Guide!
+
+Uni-Fy is a **desktop app for managing your university workload** and it is designed **by university students for university students**. 
+This application is optimized for use via a **Command Line Interface** (CLI) 
 while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
 
-Interested to know more? Take a look at our Quick Start guide. Enjoy!
+Interested to jump right in? Take a look at [**3. Getting started**](#3-getting-started). Enjoy!
 
 ### 1.2 Preview
 
@@ -36,11 +39,9 @@ GUI Components:
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this document
 
-Welcome to the Uni-Fy User Guide!
-
-The aim of this document is to help new users like you, to get started with **Uni-Fy** in no time.
+The aim of this document is to help new users, to get started with **Uni-Fy** in no time.
 This includes providing you with all the basic knowledge you need to use Uni-Fy properly, in a simple and concise format.
-This guide will introduce all **Uni-Fy** features, command syntax, interpretations and provide you with specific examples.
+This guide will introduce all **Uni-Fy** features, command syntax, interpretations and also includes example usage.
 
 ### 2.1 Navigation
 
@@ -48,9 +49,9 @@ To help facilitate the navigation within this document, we have included numbers
 The headers will also be linked to their respective content through the table of contents or when they are referenced in this guide.
 
 Additionally, here are the relevant places you can go to if you would like to seek clarification on more specific parts:
-* If you would like to get started on using **Uni-Fy**, head over to [4. Getting started](#4-getting-started).
-* If you would like to view the features available for **Uni-Fy**, head over to [5. Features](#5-features).
-* If you would like a quick summary of the available commands for **Uni-Fy**, head over to [7. Command summary](#7-command-summary).
+* If you would like to get started on using **Uni-Fy**, head over to [**3. Getting started**](#3-getting-started).
+* If you would like to view the features available for **Uni-Fy**, head over to [**4. Features**](#4-features).
+* If you would like a quick summary of the available commands for **Uni-Fy**, head over to [**6. Command summary**](#6-command-summary).
 
 
 ### 2.2 Formatting
@@ -96,15 +97,15 @@ Here is a table of commonly used terms in this document along with their meaning
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `Uni-Fy.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
+1. Download the latest `Uni-Fy.jar` from [**here**](https://github.com/AY2122S1-CS2103T-W17-4/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your app.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![find_command](images/UIUpdated.png)
+   ![Ui](images/UIUpdated.png)
 
 1. Type the command in the command box and press Enter to execute it.
-   * Refer to the [**Features**](#5-features) below for details of each command.
+   * Refer to the [**4. Features**](#4-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -424,10 +425,10 @@ Action | Format, Examples
 **Add** | <code>add <i>n/task_name t/time d/date tg/level</i></code> <br>e.g `add n/CS3243_Assignment t/13:00 d/2021-12-12 tg/Important`
 **Delete** | <code>delete <i>task_id (task_id)</i></code> <br> e.g. <code>delete 1 2 3 </code>
 **Show** | `show week_number `
-**Edit** | `TODO`
+**Edit** | :warning:`WORK_IN_PROGRESS`
 **Find** | <code>find <i>keyword (more_keywords) (d/date)</i></code> <br> e.g. `find Quiz GEQ1000 d/2021-10-10`
-**Tag** | `TODO`
+**Tag** | :warning:`WORK_IN_PROGRESS`
 **Help** | `help`
 **Retrieve past Commands** | `history`
 **Clear** | `clear`
-**Undo** | `TODO`
+**Undo** | :warning:`WORK_IN_PROGRESS`
