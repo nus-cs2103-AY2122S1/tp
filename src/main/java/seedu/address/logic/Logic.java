@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 
 /**
  * API of the Logic component
@@ -38,6 +39,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of events */
     ObservableList<Event> getFilteredEventList();
+
+    /** Returns an unmodifiable view of the filtered list of events */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Returns the user prefs' address book file path.
