@@ -61,14 +61,39 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Returns the list of all address book file path.
+     */
+    ObservableList<Path> getAddressBookList();
+
+    /**
      * Returns the user prefs' address book file path wrapped object.
      */
     ObservableValue<Path> getAddressBookFilePathObject();
 
     /**
+     * Returns the user prefs' address book directory.
+     */
+    Path getAddressBookDirectory();
+
+    /**
      * Sets the user prefs' address book file path.
      */
     void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
+     * Adds {@code filePath} to address books list
+     */
+    void addAddressBookList(Path filePath);
+
+    /**
+     * Deletes {@code filePath} from address books list
+     */
+    void deleteAddressBookList(Path filePath);
+
+    /**
+     * Returns string representation of all address book list
+     */
+    String getAddressBookListString();
 
     /**
      * Replaces address book data with the data in {@code addressBook}.
@@ -190,9 +215,10 @@ public interface Model {
     ObservableList<Client> getClientToView();
 
     /**
-     * Checks and returns if there is client to view
+     * Checks and returns if there is client with {@code clientId} to view
+     * @param clientId
      */
-    boolean isClientExistToView();
+    boolean isClientExistToView(ClientId clientId);
 
     /**
      * Returns the name of the client to view
@@ -212,5 +238,4 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateClientToView(Predicate<Client> predicate);
-
 }
