@@ -3,9 +3,11 @@ layout: page
 title: User Guide
 ---
 
-Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming events and the details of their participants**. It does not handle communication between the event organiser and the participants.
+Managera is a **desktop app that provides event organisers with a convenient method of keeping track of upcoming events 
+and the details of their participants**. It does not handle communication between the event organiser and the 
+participants.
 
-Managera is OS-independent meaning it will work on any operating system.
+Managera is OS-independent meaning it will work on any operating system. (Windows, MacOS, Linux)
 
 ## Table of Contents
 - [**How to use this user guide**](#how-to-use-this-user-guide)
@@ -45,37 +47,47 @@ Managera is OS-independent meaning it will work on any operating system.
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this user guide
 
-If this is the first time you are using Managera, you are strongly advised to visit the [Quick Start](#quick-start) section to learn how to set up Managera
+If this is the first time you are using Managera, you are strongly advised to visit the [Quick Start](#quick-start) 
+section to learn how to set up Managera
 and get started.
 
-If there are any doubts on how certain commands are used, you can look for the description of the command in the [Features](#features)
-section or have a brief overview in the [Command Summary](#command-summary) section.
+If there are any doubts on how certain commands are used, you can look for the description of the command in the 
+[Features](#features) section or have a brief overview in the [Command Summary](#command-summary) section.
 
-If there are any terms used in this user guide you are unclear of or do not understand, their definitions may be found in the [Glossary](#glossary).
+If there are any terms used in this user guide you are unclear of or do not understand, their definitions may be found 
+in the [Glossary](#glossary).
 
 For any other questions about Managera, you may refer to the [FAQ](#faq) section.
 
 You can quickly jump to any of the sections by using the [Table of Contents](#table-of-contents) above.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Quick start
 
-1. [Ensure](https://twallet.telangana.gov.in/TABiometric/data/Java%20Check.pdf) you have Java `11` or above installed in your Computer.
+1. [Ensure](https://twallet.telangana.gov.in/TABiometric/data/Java%20Check.pdf) you have Java `11` or 
+   above installed in your Computer.
 
-2. If your computer does not have Java `11`, obtain the installation package from [here](https://www.oracle.com/java/technologies/downloads/#java11) and follow the instructions [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html).
+2. If your computer does not have Java `11`, obtain the installation package from 
+   [here](https://www.oracle.com/java/technologies/downloads/#java11) and follow the instructions 
+   [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html).
 
 3. Download the latest release `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
 
 4. Copy `managera.jar` to a new folder which will act as the _home folder_ for Managera.
 
-5. Double-click `managera.jar` to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+5. Double-click `managera.jar` to start the app. The GUI similar to the below should appear in a few seconds. Note how 
+   the app contains some sample data.<br>
    ![Ui](images/Ui_labelled.png)
 
-6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. <br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will 
+   open the help window. <br>
    Some example commands you can try:
 
    * **`list`** : Lists all Participants.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Participant named `John Doe` to Managera.
+   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a Participant 
+     named `John Doe` to Managera.
 
    * **`delete`**`3` : Deletes the 3rd Participant shown in the current list.
 
@@ -98,28 +110,34 @@ You can quickly jump to any of the sections by using the [Table of Contents](#ta
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `addEvent n/NAME d/DATE`, `n/NAME` and `d/DATE` are parameters which can be used as `addEvent n/CS2103T Final d/2021-11-23`.
+  e.g. in `addEvent n/NAME d/DATE`, `n/NAME` and `d/DATE` are parameters which can be used as 
+  `addEvent n/CS2103T Final d/2021-11-23`.
 
 * Items in square brackets are optional.<br>
-  e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as `addEvent n/CS2103T Final d/2021-11-23`.
+  e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as 
+  `addEvent n/CS2103T Final d/2021-11-23`.
 
 * Parameters with prefixes can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
 
 * Parameters without prefixes needs to be followed strictly.<br>
-  e.g. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]` INDEX must strictly be the first parameter while the others with prefix can be in any order after that.
+  e.g. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]` INDEX must strictly be the first parameter 
+  while the others with prefix can be in any order after that.
 
-* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of 
+  the parameter will be taken.<br>
   e.g. if you specify `t/1700 t/1800`, only `t/1800` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (namely `help`, `list`, `clear`, `sortEvents` and `exit`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (namely `help`, `list`, `clear`, `sortEvents` and 
+  `exit`) will be ignored.<br>
   e.g. if the command specifies `sortEvents 123`, it will be interpreted as `sortEvents`.
 
 </div>
 
 ## Participant
 
-The following commands deal with the handling of Participants in Managera. They can help you add Participants, delete Participants, view their details etc.
+The following commands deal with the handling of Participants in Managera. They can help you add Participants, 
+delete Participants, view their details etc.
 
 ### Adding a Participant: `add`
 
@@ -130,6 +148,8 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
+
+<br>![result for 'add n/Betsy Crowe ...'](images/addBetsyResult.png)
 
 ### Deleting a Participant : `delete`
 
@@ -151,12 +171,14 @@ Edits an existing Participant in Managera.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]`
 
-* Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed Participant list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the Participant at the specified `INDEX`. The index refers to the index number shown in the displayed 
+  Participant list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st Participant to be 
+   `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` - Edits the name of the 2nd Participant to be `Betsy Crower`.
 
 ### Locating Participants by name: `find`
@@ -175,7 +197,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+<br>![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Listing all Participants : `list`
 
@@ -196,9 +219,12 @@ Format: `view INDEX`
 Example Usage:
 * `view 1` - Displays the details of the 1st Participant in the current list.
 
+<br>![result for 'view 1'](images/viewFirstResult.png)
+
 ## Event
 
-The following commands deal with the handling of Events in Managera. They can help you add Events, delete Events, mark Events as done etc.
+The following commands deal with the handling of Events in Managera. They can help you add Events, delete Events, 
+mark Events as done etc.
 
 ### Adding an event: `addEvent`
 
@@ -222,7 +248,8 @@ Format: `deleteEvent INDEX`
 
 Example Usage:
 * `listEvents` followed by `deleteEvent 2` deletes the 2nd Event on the current list.
-* `filterEvents d/2021-09-18` followed by `deleteEvent 1` deletes the 1st Event in the results of the `filterEvents` command.
+* `filterEvents d/2021-09-18` followed by `deleteEvent 1` deletes the 1st Event in the results of the `filterEvents` 
+  command.
 
 ### Editing an event : `editEvent`
 
@@ -239,7 +266,10 @@ Format: `editEvent INDEX [n/EVENTNAME] [d/EVENTDATE] [t/EVENTTIME]`
 
 Example Usage:
 * `editEvent 1 n/241Km Marathon` - Edits the event name of the 1st Event to be `241Km Marathon`.
-* `editEvent 2 n/2103T milestone v1.3 d/2021-10-21 t/2359` - Edits the event name, event date and event time of the 2nd Event to be `2103T milestone v1.3`, `2021-10-21` and `2359` respectively.
+* `editEvent 2 n/2103T milestone d/2021-10-21 t/2359` - Edits the event name, event date and event time of the 
+  2nd Event to be `2103T milestone`, `2021-10-21` and `2359` respectively.
+
+<br>![result for 'editEvent 2 n/2103T milestone ...'](images/editEventSecondResult.png)
 
 ### Mark an Event as done: `done`
 
@@ -253,7 +283,8 @@ Format: `done INDEX`
 
 Example Usage:
 * `listEvents` followed by `done 2` marks the 2nd Event in the current list as done.
-* `filterEvents d/2021-09-18` followed by `done 1` marks the 1st Event in the results of the `filterEvents` command as done.
+* `filterEvents d/2021-09-18` followed by `done 1` marks the 1st Event in the results of the `filterEvents` command 
+  as done.
 
 ### Locating Events by name: `findEvent`
 
@@ -280,11 +311,15 @@ Format: `filterEvents d/DATE [t/TIME]`
 
 Example Usage:
 * `filterEvents d/2021-09-18` - Filters the list of events to show only events occurring on 18th September 2021.
-* `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 18th September 2021 9am.
+* `filterEvents d/2021-09-18 t/0900` - Filters the list of events to show only events occurring on 
+  18th September 2021 9am.
 
 ### Sort Events: `sortEvents`
 
-Sorts the current list of events in chronological order with the earlier events at the top and later events at the bottom.
+Sorts the current list of events in chronological order with the earlier events at the top and later events 
+at the bottom.
+
+<br>![result for 'sortEvents'](images/sortEventsResult.png)
 
 Format: `sortEvents`
 
@@ -320,9 +355,12 @@ Format: `showParticipants INDEX`
 Example Usage:
 * `showParticipants 4` - Displays the list of participants of the 4th Event in the current list.
 
+<br>![result for 'showParticipants 4'](images/showParticipantsFourthResult.png)
+
 ## Interaction
 
-The following commands deal with the handling of Events and Participants in Managera. They can help you add Participants to Events or remove Participants from Events.
+The following commands deal with the handling of Events and Participants in Managera. 
+They can help you add Participants to Events or remove Participants from Events.
 
 ### Add Participant to Event: `enroll`
 
@@ -336,7 +374,10 @@ Format:
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Example Usage:
-* `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event list.
+* `enroll 1 2` - Adds the 1st Participant in the displayed Participant list to the 2nd Event in the displayed Event 
+  list.
+
+<br>![result for 'enroll 1 2'](images/enrollFirstSecondResult.png)
 
 ### Remove Participant from Event: `expel`
 
@@ -349,7 +390,8 @@ Format: `expel INDEX_1 INDEX_2`
 * The indexes **must be positive integers** 1, 2, 3, …​
 
 Example Usage:
-* `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event list.
+* `expel 3 1` - Removes the 3rd Participant in the displayed Participant list from the 1st Event in the displayed Event 
+  list.
 
 ## Miscellaneous
 
@@ -369,6 +411,8 @@ Clears all Events and Participants from Managera.
 
 Format: `clear`
 
+<br>![result for 'clear'](images/clearResult.png)
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -377,14 +421,17 @@ Format: `exit`
 
 ### Saving the data
 
-Managera saves data in the hard disk automatically after any command that changes the data. There is no need to save manually.
+Managera saves data in the hard disk automatically after any command that changes the data. 
+There is no need to save manually.
 
 ### Editing the data file
 
-Managera's data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+Managera's data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to 
+update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, Managera will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, Managera will discard all data and start with an empty data 
+file at the next run.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -395,29 +442,32 @@ If your changes to the data file makes its format invalid, Managera will discard
 
 **Event**: An event that will be conducted in real life e.g., a competition, meeting, social activity etc.<br>
 
-**Command**: A command is a specific instruction that you give to Managera to perform a certain action, like adding a new Participant to the list.
-Commands will be the primary way that you will interact with Managera.<br>
+**Command**: A command is a specific instruction that you give to Managera to perform a certain action, like adding a 
+new Participant to the list. Commands will be the primary way that you will interact with Managera.<br>
 
-**Parameter**: Parameters are pieces of data that must be passed to certain commands to tell Managera which actions to perform. For example, 
-the `done` command requires a single integer as a parameter so that it knows which event to mark as done.<br>
+**Parameter**: Parameters are pieces of data that must be passed to certain commands to tell Managera which actions to 
+perform. For example, the `done` command requires a single integer as a parameter so that it knows which event to mark 
+as done.<br>
 
-**Prefix**: Prefixes are unique identifiers in front of parameters so that Managera understands what kind of values they are. For example, 
-the prefix "n/" lets Managera know that a name is expected to follow behind it, while the prefix "d/" lets Managera know that a date is expected.<br>
+**Prefix**: Prefixes are unique identifiers in front of parameters so that Managera understands what kind of values 
+they are. For example, the prefix "n/" lets Managera know that a name is expected to follow behind it, while the 
+prefix "d/" lets Managera know that a date is expected.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install and run Managera in the other computer. Then overwrite the empty save file it creates with the save file from your previous computer. The save file of 
-Managera is found in `[JAR file location]/data/addressbook.json`.
+**A**: Install and run Managera in the other computer. Then overwrite the empty save file it creates with the save file 
+from your previous computer. The save file of Managera is found in `[JAR file location]/data/addressbook.json`.
 
 **Q**: Does Managera have a mobile version?<br>
 **A**: Managera currently does not operate on any other platform other than desktop.
 
-**Q**: I accidentally exited Managera by closing the window rather than using the given `exit` command, what do I do?<br>
-**A**: Since Managera automatically saves your data to the hard disk after each change, it should not reverse any changes you have made in the session. Your changes are 
-likely to still be there after restarting Managera.
+**Q**: I accidentally exited Managera by closing the window rather than using the given `exit` command, what do I 
+do?<br>
+**A**: Since Managera automatically saves your data to the hard disk after each change, it should not reverse any 
+changes you have made in the session. Your changes are likely to still be there after restarting Managera.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -425,7 +475,7 @@ likely to still be there after restarting Managera.
 
 Action | Format, Examples
 --------|------------------
-**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665`
+**Add Participant** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` <br>e.g., `add n/James Ho p/22224444e/jamesho@example.com a/123, Clementi Rd, 1234665`
 **Delete Participant** | `delete INDEX`<br> e.g., `delete 3`
 **Edit Participant** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find Participant** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
