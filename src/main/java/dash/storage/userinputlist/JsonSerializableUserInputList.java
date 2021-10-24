@@ -35,7 +35,7 @@ class JsonSerializableUserInputList {
      * @param source future changes to this will not affect the created {@code JsonSerializableTaskList}.
      */
     public JsonSerializableUserInputList(UserInputList source) {
-        userInputs.addAll(source.getObservableUserInputList());
+        userInputs.addAll(source.getInternalUserInputList());
     }
 
     /**

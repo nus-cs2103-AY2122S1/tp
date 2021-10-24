@@ -2,6 +2,7 @@ package dash.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import dash.commons.core.GuiSettings;
@@ -96,7 +97,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<String> getObservableUserInputList() { return model.getObservableUserInputList(); }
+    public ArrayList<String> getInternalUserInputList() { return model.getInternalUserInputList(); }
 
     @Override
     public Path getAddressBookFilePath() {

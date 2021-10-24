@@ -2,18 +2,22 @@ package dash.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import dash.commons.util.CollectionUtil;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
+/**
+ * A list of user input strings with maximum length 10.
+ * <p>
+ * Supports a minimal set of list operations.
+ */
 public class UserInputList implements Iterable<String> {
 
-    private final ObservableList<String> internalList = FXCollections.observableArrayList();
-    private final ObservableList<String> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+    private static final int LIST_MAX_LENGTH = 10;
+
+    private final ArrayList<String> internalList = new ArrayList<>();
 
     public UserInputList() {
     }
@@ -38,7 +42,7 @@ public class UserInputList implements Iterable<String> {
      */
     public void resetData(UserInputList newData) {
         requireNonNull(newData);
-        setUserInputs(newData.getObservableUserInputList());
+        setUserInputs(newData.getInternalUserInputList());
     }
 
     /**
@@ -47,6 +51,9 @@ public class UserInputList implements Iterable<String> {
     public void add(String toAdd) {
         requireNonNull(toAdd);
         internalList.add(0,toAdd);
+        if (internalList.size() > LIST_MAX_LENGTH) {
+            internalList.remove(LIST_MAX_LENGTH);
+        }
     }
 
     /**
@@ -54,14 +61,15 @@ public class UserInputList implements Iterable<String> {
      */
     public void setUserInputs(List<String> userInputs) {
         CollectionUtil.requireAllNonNull(userInputs);
-        internalList.setAll(userInputs);
+        internalList.clear();
+        internalList.addAll(userInputs);
     }
 
     /**
-     * Returns the backing list as an unmodifiable {@code ObservableList}.
+     * Returns the internal list of user inputs.
      */
-    public ObservableList<String> getObservableUserInputList() {
-        return internalUnmodifiableList;
+    public ArrayList<String> getInternalUserInputList() {
+        return internalList;
     }
 
     @Override

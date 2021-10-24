@@ -3,6 +3,7 @@ package dash.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,7 +13,6 @@ import dash.commons.util.CollectionUtil;
 import dash.model.person.Person;
 import dash.model.task.Task;
 import dash.model.task.TaskList;
-import dash.model.UserInputList;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
@@ -237,6 +237,6 @@ public class ModelManager implements Model {
     //=========== Observable User Input List Accessor =================================================================
 
     @Override
-    public ObservableList<String> getObservableUserInputList() { return userInputList.getObservableUserInputList(); }
+    public ArrayList<String> getInternalUserInputList() { return userInputList.getInternalUserInputList(); }
 
 }

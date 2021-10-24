@@ -1,6 +1,7 @@
 package dash.logic;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import dash.commons.core.GuiSettings;
 import dash.logic.commands.CommandResult;
@@ -45,8 +46,9 @@ public interface Logic {
 
     /**
      * Returns an unmodifiable view of a list of previous valid user inputs.
+     * @return
      */
-    ObservableList<String> getObservableUserInputList();
+    ArrayList<String> getInternalUserInputList();
 
     /**
      * Returns the user prefs' address book file path.

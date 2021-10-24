@@ -1,6 +1,7 @@
 package dash.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import dash.commons.core.GuiSettings;
@@ -166,6 +167,7 @@ public interface Model {
 
     /**
      * Returns an unmodifiable view of the user input list
+     * @return
      */
-    ObservableList<String> getObservableUserInputList();
+    ArrayList<String> getInternalUserInputList();
 }

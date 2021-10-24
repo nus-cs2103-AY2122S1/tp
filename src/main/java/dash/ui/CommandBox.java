@@ -1,5 +1,7 @@
 package dash.ui;
 
+import java.util.ArrayList;
+
 import dash.logic.Logic;
 import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
@@ -25,7 +27,7 @@ public class CommandBox extends UiPart<Region> {
     /**
      * A list of valid user inputs ordered from most recent to oldest.
      */
-    private final ObservableList<String> userInputList;
+    private final ArrayList<String> userInputList;
 
     /**
      * The position of the current text set in the command box in the user input list.
@@ -40,7 +42,7 @@ public class CommandBox extends UiPart<Region> {
      * Creates a {@code CommandBox} with the given {@code CommandExecutor},
      * as well as the given user input list.
      */
-    public CommandBox(CommandExecutor commandExecutor, ObservableList<String> userInputList) {
+    public CommandBox(CommandExecutor commandExecutor, ArrayList<String> userInputList) {
         super(FXML);
         this.commandExecutor = commandExecutor;
         this.userInputList = userInputList;
