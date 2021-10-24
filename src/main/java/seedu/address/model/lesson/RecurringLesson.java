@@ -15,14 +15,15 @@ public class RecurringLesson extends Lesson {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
+     * @param rates Cost per lesson for the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, Set<Date> cancelledDates) {
-        super(date, timeRange, subject, homework, cancelledDates);
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates, Set<Date> cancelledDates) {
+        super(date, timeRange, subject, homework, rates, cancelledDates);
     }
 
     @Override
     public Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates) {
-        return new RecurringLesson(getDate(), getTimeRange(), getSubject(),getHomework(),  updatedCancelledDates);
+        return new RecurringLesson(getStartDate(), getTimeRange(), getSubject(),getHomework(), getLessonRates(), updatedCancelledDates);
     }
 
     /**
@@ -33,6 +34,17 @@ public class RecurringLesson extends Lesson {
     @Override
     public boolean isRecurring() {
         return true;
+    }
+
+    /**
+     * Get the upcoming date of the lesson to display to user.
+     *
+     * @return The upcoming date on the same day of week if start date
+     * has passed or start date if it has yet to pass.
+     */
+    @Override
+    public Date getDisplayDate() {
+        return getStartDate().updateDate();
     }
 
     /**
@@ -55,7 +67,7 @@ public class RecurringLesson extends Lesson {
 
     @Override
     public boolean hasLessonOnDate(Date otherDate) {
-        Date startDate = getDate();
+        Date startDate = getStartDate();
         if (startDate.isAfter(otherDate)) {
             return false; // other date is before lesson start date
         }

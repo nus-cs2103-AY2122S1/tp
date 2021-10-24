@@ -17,14 +17,16 @@ public class MakeUpLesson extends Lesson {
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
+     * @param rates Cost per lesson for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework,  Set<Date> cancelledDates) {
-        super(date, timeRange, subject, homework, cancelledDates);
+
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates, Set<Date> cancelledDates) {
+        super(date, timeRange, subject, homework, rates, cancelledDates);
     }
 
     @Override
     public Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates) {
-        return new MakeUpLesson(getDate(), getTimeRange(), getSubject(),getHomework(),  updatedCancelledDates);
+        return new MakeUpLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(), getLessonRates(), updatedCancelledDates);
     }
 
     /**
@@ -34,6 +36,17 @@ public class MakeUpLesson extends Lesson {
      */
     public boolean isRecurring() {
         return false;
+    }
+
+    /**
+     * Get the date of the makeup lesson to display.
+     * Date will be start date since a makeup lesson only has one date.
+     *
+     * @return startDate Start date of the makeup lesson.
+     */
+    @Override
+    public Date getDisplayDate() {
+        return getStartDate();
     }
 
     /**
@@ -56,7 +69,7 @@ public class MakeUpLesson extends Lesson {
 
     @Override
     public boolean hasLessonOnDate(Date otherDate) {
-        return getDate().equals(otherDate) ; // is the same day
+        return getStartDate().equals(otherDate) ; // is the same day
     }
 }
 

@@ -79,6 +79,22 @@ public class UndoRedoStack {
         undoStack.push(toRedo);
         return toRedo;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UndoRedoStack)) {
+            return false;
+        }
+
+        UndoRedoStack stack = (UndoRedoStack) other;
+
+        return undoStack.equals(stack.undoStack)
+                && redoStack.equals(stack.redoStack);
+    }
 }
 //@@author Zhiyuan-Amos-reused
 

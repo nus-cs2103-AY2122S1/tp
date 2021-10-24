@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
@@ -19,6 +20,7 @@ import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
+
 public class LessonAddCommand extends UndoableCommand {
 
     public static final String COMMAND_ACTION = "Add Lesson";
@@ -29,6 +31,7 @@ public class LessonAddCommand extends UndoableCommand {
             + "[" + PREFIX_RECURRING + "] "
             + PREFIX_DATE + "dd MMM yyyy "
             + PREFIX_TIME + "HHmm-HHmm "
+            + PREFIX_RATES + "RATES "
             + PREFIX_SUBJECT + "SUBJECT "
             + "[" + PREFIX_HOMEWORK + "HOMEWORK]...";
 
@@ -38,12 +41,14 @@ public class LessonAddCommand extends UndoableCommand {
             + PREFIX_RECURRING + " "
             + PREFIX_DATE + "09 Dec 2021 "
             + PREFIX_TIME + "1030-1230 "
+            + PREFIX_RATES + "37.50 "
             + PREFIX_SUBJECT + "Math "
             + PREFIX_HOMEWORK + "TYS Page 2";
 
     public static final String COMMAND_EXAMPLE_MAKEUP_LESSON = COMMAND_WORD + " 1 "
             + PREFIX_DATE + "10 Oct 2021 "
             + PREFIX_TIME + "1430-1600 "
+            + PREFIX_RATES + "37.50 "
             + PREFIX_SUBJECT + "Science "
             + PREFIX_HOMEWORK + "TYS Page 2 "
             + PREFIX_HOMEWORK + "Textbook Page 52";
@@ -61,7 +66,7 @@ public class LessonAddCommand extends UndoableCommand {
             + "Example (recurring lesson): "
             + COMMAND_EXAMPLE_RECURRING_LESSON;
 
-    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson: %1$s\nfor student: %2$s";
+    public static final String MESSAGE_ADD_LESSON_SUCCESS = "Added new lesson for student %1$s:\n%2$s";
     public static final String MESSAGE_CLASHING_LESSON = "This lesson clashes with an existing lesson.";
 
     private final Index index;
@@ -106,7 +111,8 @@ public class LessonAddCommand extends UndoableCommand {
 
         model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, toAdd, personAfterLessonAdd));
+        return new CommandResult(String.format(MESSAGE_ADD_LESSON_SUCCESS, personAfterLessonAdd.getName(), toAdd),
+                personAfterLessonAdd);
     }
 
     @Override

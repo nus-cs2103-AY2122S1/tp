@@ -100,7 +100,7 @@ public class LessonCancelCommand extends UndoableCommand {
     }
 
     private Lesson createCancelledLesson(Lesson lessonToCancel) throws CommandException {
-        Date date = cancelledDate.orElse(lessonToCancel.getDate()); // todo: change to getStartDate
+        Date date = cancelledDate.orElse(lessonToCancel.getStartDate()); // todo: change to getStartDate
         // check if date is correct
         if (!lessonToCancel.hasLessonOnDate(date)) {
             throw new CommandException(MESSAGE_INVALID_LESSON_DATE);
