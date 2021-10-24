@@ -6,9 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.function.Supplier;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
@@ -81,89 +79,6 @@ public class CommitController extends Controller<Commit> {
         // Pick first match
         Path filePath = matchingFiles[0].toPath();
         return commitStorageManager.read(String.valueOf(filePath.getFileName()));
-    }
-
-    /**
-     * Retrieve all the ancestors of a given Commit object
-     * @param commit Commit object
-     * @return ancestors of given commit object, including the given Commit object
-     */
-    public List<Commit> retrieveCommitHistory(Commit commit) {
-        return retrieveCommitHistory(commit, Commit.NULL);
-    }
-
-    /**
-     * Retrieve all the ancestors of a given Commit object, up to an end Commit object. If end Commit object is an
-     * ancestor, then all Commit objects up to but excluding the end Commit object will be included. Otherwise,
-     * all ancestor Commit objects are returned.
-     * @param commit Commit object
-     * @param endExclusive end Commit object
-     * @return ancestors of given commit object, including the given Commit object but excluding the end Commit
-     */
-    public List<Commit> retrieveCommitHistory(Commit commit, Commit endExclusive) {
-        List<Commit> history = new ArrayList<>();
-        if (commit.equals(endExclusive) || commit.equals(Commit.NULL)) {
-            return new ArrayList<>();
-        }
-
-        history.add(commit);
-        Supplier<Commit> parentCommitSupplier = commit.getParentSupplier();
-        while (!parentCommitSupplier.get().equals(endExclusive)) {
-            commit = parentCommitSupplier.get();
-            history.add(commit);
-            parentCommitSupplier = commit.getParentSupplier();
-        }
-        return history;
-    }
-
-    /**
-     * Return the lowest common ancestor of two given commit objects.
-     * @param commitA First Commit object
-     * @param commitB Second Commit object
-     * @return Lowest common ancestor of both commit objects.
-     */
-    public Commit findLca(Commit commitA, Commit commitB) {
-        requireNonNull(commitA);
-        requireNonNull(commitB);
-
-        if (commitA.equals(Commit.NULL) || commitB.equals(Commit.NULL)) {
-            return Commit.NULL;
-        }
-
-        List<Commit> fromA = retrieveCommitHistory(commitA);
-        List<Commit> fromB = retrieveCommitHistory(commitB);
-
-        int shiftDepth = Math.abs(fromA.size() - fromB.size());
-        Commit toMove = fromA.size() > fromB.size() ? commitA : commitB;
-        Commit notMoved = fromA.size() > fromB.size() ? commitB : commitA;
-        Commit afterMove = move(toMove, shiftDepth);
-
-        while (!notMoved.equals(afterMove)) {
-            notMoved = move(notMoved, 1);
-            afterMove = move(afterMove, 1);
-        }
-        assert notMoved.equals(afterMove);
-        return notMoved;
-    }
-
-    /**
-     * Return the ancestor that is the furthest away from the queried Commit object, limited by the given end Commit.
-     * @param queriedCommit Commit object whose highest ancestor is sought out
-     * @param endExclusive Commit object which limits the search
-     * @return furthest ancestor of queriedCommit but is child of endExclusive
-     */
-    public Commit getHighestAncestor(Commit queriedCommit, Commit endExclusive) {
-        if (queriedCommit.equals(Commit.NULL) || queriedCommit.getParentSupplier().get().equals(endExclusive)) {
-            return queriedCommit;
-        }
-        return getHighestAncestor(queriedCommit.getParentSupplier().get(), endExclusive);
-    }
-
-    private Commit move(Commit start, int numStep) {
-        if (start.equals(Commit.NULL) || numStep == 0) {
-            return start;
-        }
-        return move(start.getParentSupplier().get(), numStep - 1);
     }
 
     public void write(Commit commit) throws IOException {
