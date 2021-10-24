@@ -100,7 +100,7 @@
 }
 
 .list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
+    -fx-background-color: #515658;
 }
 
 .list-cell:filled:odd {
@@ -359,6 +359,7 @@
     -fx-border-radius: 2;
     -fx-background-radius: 2;
     -fx-font-size: 11;
+}
 
 .mc_progress {
     -fx-text-box-border: transparent;

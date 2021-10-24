@@ -55,18 +55,18 @@ public class ModuleCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         code.setText(module.getCode().value);
         title.setText(module.getTitle().value);
-        mc.setText(String.valueOf(module.getMc().value));
+        mc.setText("(" + String.valueOf(module.getMc().value) + "MC)");
         description.setText(module.getDescription().value);
 
-        cardPane.setStyle("-fx-background-color:rgba(0, 0, 0, 1);");
+        cardPane.setStyle("-fx-background-color:#434343ff;");
         if (module.hasAcademicCalendar()) {
             academicCalendar.getChildren().add(new Label(getFormattedAcademicCalendar(module)));
             if (module.getAcademicCalendar().compareTo(currentSemester) < 0) {
-                cardPane.setStyle("-fx-background-color:rgba(0, 0, 255, 0.1);"); //module has been finished
+                cardPane.setStyle("-fx-background-color:#64bc2666;"); //module has been finished
             } else if (module.getAcademicCalendar().compareTo(currentSemester) > 0) {
-                cardPane.setStyle("-fx-background-color:rgba(0, 255, 0, 0.1);"); //module planned to take
+                cardPane.setStyle("-fx-background-color:#ea160166;"); //module planned to take
             } else {
-                cardPane.setStyle("-fx-background-color:rgba(100, 100, 0, 0.5);"); //module being taken
+                cardPane.setStyle("-fx-background-color:#fad20266;"); //module taking
             }
         }
 

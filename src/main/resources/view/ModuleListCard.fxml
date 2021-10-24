@@ -26,11 +26,11 @@
                     </minWidth>
                 </Label>
                 <Label fx:id="code" text="\$first" styleClass="cell_big_label" />
+                <Label fx:id="title" styleClass="cell_small_label" text="\$title" />
+                <Label fx:id="mc" styleClass="cell_small_label" text="\$mc" />
+                <FlowPane fx:id="academicCalendar" />
             </HBox>
             <FlowPane fx:id="tags" />
-            <FlowPane fx:id="academicCalendar" />
-            <Label fx:id="title" styleClass="cell_small_label" text="\$title" />
-            <Label fx:id="mc" styleClass="cell_small_label" text="\$mc" />
             <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
         </VBox>
     </GridPane>
