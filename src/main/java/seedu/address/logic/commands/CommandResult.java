@@ -10,14 +10,10 @@ import seedu.address.model.Category;
  * Represents the result of a command execution.
  */
 public class CommandResult {
-
     private final String feedbackToUser;
-
     private final CommandType commandType;
-
     private final Category info;
-
-    private boolean isClientCommand;
+    private final boolean isClientCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
@@ -41,6 +37,13 @@ public class CommandResult {
         this(feedbackToUser, null, null, false);
     }
 
+    /**
+     * Constructs a {@code CommandResult} by copying from the provided {@code copyFrom}.
+     */
+    public CommandResult(CommandResult copyFrom) {
+        this(copyFrom.feedbackToUser, copyFrom.commandType, copyFrom.info, copyFrom.isClientCommand);
+    }
+
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -58,20 +61,21 @@ public class CommandResult {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (other == this) {
+    public boolean equals(Object obj) {
+        if (obj == this) {
             return true;
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CommandResult)) {
+        if (!(obj instanceof CommandResult)) {
             return false;
         }
 
-        CommandResult otherCommandResult = (CommandResult) other;
-        return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && commandType == otherCommandResult.commandType
-                && info == otherCommandResult.info;
+        CommandResult other = (CommandResult) obj;
+        return feedbackToUser.equals(other.feedbackToUser)
+                && commandType == other.commandType
+                && Objects.equals(info, other.info)
+                && isClientCommand == other.isClientCommand;
     }
 
     @Override
