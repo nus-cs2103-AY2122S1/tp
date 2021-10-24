@@ -99,7 +99,7 @@ Snapshot:
 
 #### Deleting a friend: `friend --delete`
 
-Deletes a friend from gitGud’s friend’s list with the given `FRIEND_ID`.
+Deletes a friend from gitGud’s friends list with the given `FRIEND_ID`.
 
 Format: `friend --delete FRIEND_ID`
 
