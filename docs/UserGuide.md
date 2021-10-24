@@ -104,14 +104,15 @@ Format: **`help`**
 
 Adds a person to the address book.
 
-Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
+Format: **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​
 [r/REMARK] [t/TAG]…​`
 
 * Only `n/NAME` field is *compulsory*, while other fields are *optional*.
 * The order of the fields does not matter
+* The format of `SOCIALHANDLE` is `PLATFORM:HANDLENAME` where `PLATFORM` is a two letter shorthand for the platform name (e.g. `ig` for Instagram, `tg` for Telegram) and `HANDLENAME` is the the identifying username for that platform.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0) and social handles (including 0)
 </div>
 
 Examples:
@@ -119,7 +120,8 @@ Examples:
 * **`add`** `n/Dwight Halpert`
 * **`add`** `n/John Doe p/98765432 e/johnd@example.com g/M`
 * **`add`** `n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 tg/07`
-* **`add`** `n/Tan Ah Gao nat/Singapore h/@TanAhCow r/Funny Guy`
+* **`add`** `n/Tan Ah Gao nat/Singapore h/tg:TanAhCow r/Funny Guy`
+* **`add`** `n/Alex h/tg:alex3324 h/ig:alexxx`
 
 ### Importing contacts from a file `import`
 
@@ -140,7 +142,7 @@ Format: **`list`**
 
 Edits an existing person in the address book.
 
-Format: **`edit`** `FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
+Format: **`edit`** `INDEX FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
 * `FIELD_PREFIX/VALUE` can be any of the following: 
      * `n/NAME`
@@ -152,11 +154,12 @@ Format: **`edit`** `FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
      * `h/SOCIAL_HANDLE`
      * `r/REMARK`
      * `t/TAG`
+
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* If duplicated field are given, only the latest one will be taken (except for `h/SOCIAL_HANDLE` and `t/TAG`)
+* When editing tags, the existing tags of the person will be removed (i.e adding of tags is not cumulative).
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
@@ -270,10 +273,10 @@ the data of your previous Socius home folder.
 
 |Action | Format | Examples|
 |--------|------------------|------------------------------------|
-|**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/@friendlyjames r/Friendly t/colleague`|
+|**Add** | **`add`** `n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​`| **`add`** `n/James Ho p/22224444 e/jamesho@example.com g/M tg/12 h/tg:friendlyjames r/Friendly t/colleague`|
 |**Clear** | **`clear`** | **`clear`** |
 |**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
-|**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
+|**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/SOCIALHANDLE]…​ [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
 |**Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
-|**List** | **`list`** | **`list`** |
 |**Help** | **`help`** | **`help`** |
+|**List** | **`list`** | **`list`** |
