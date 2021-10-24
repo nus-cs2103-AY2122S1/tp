@@ -122,6 +122,13 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
+#### Changing tabs : `tab`
+
+Switches from the tabs, staff view and schedule.
+
+Format: `tab`
+
+
 #### Listing all persons : `list`
 
 Shows a list of all staffs in the staff view.
@@ -133,6 +140,7 @@ Format: `list`
 #### Saving the data
 
 Staff'd data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 #### Editing the data file
 
