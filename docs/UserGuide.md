@@ -146,6 +146,8 @@ If your changes to the data file makes its format invalid, SalesNote will discar
 
 Shows a list of all tasks in the application.
 
+Format: `listtask`
+
 ### Adding a task: `addtask`
 
 Adds a task to the application.
@@ -194,7 +196,37 @@ Format: `deletetask INDEX`
 Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
 
+### Listing completed tasks: `completedtasks`
+
+List all the completed tasks.
+
+Format: `completedtasks`
+
+### Listing incomplete tasks: `incompletetasks`
+
+List all the incomplete tasks.
+
+Format: `completedtasks`
+
 --------------------------------------------------------------------------------------------------------------------
+
+### Listing completed orders: `completedorders`
+
+List all the completed orders.
+
+Format: `completedorders`
+
+### Listing incomplete orders: `incompleteorders`
+
+List all the incomplete orders.
+
+Format: `completedorders`
+
+### Sorting orders by amount: `sortorders`
+
+Sorts all orders by their amount and lists them in descending order.
+
+Format: `sortorders`
 
 ## FAQ
 
@@ -205,6 +237,8 @@ Examples:
 
 ## Command summary
 
+###Client Commands
+
 Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
@@ -213,10 +247,34 @@ Action | Format, Examples
 **Edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
-**Help** | `help`
+
+###Task Commands
+
+Action | Format, Examples
+--------|------------------
 **ListTask** | `listtask`
 **AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
 **DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
 **EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19th September 2021`
 **MarkDone** | `markdone INDEX` e.g. `markdone 2`
+**CompletedTasks** | `completedtasks`
+**IncompleteTasks** | `incompletetasks`
 
+###Order Commands
+
+Action | Format, Examples
+--------|------------------
+**ListOrder** | `listorder`
+**AddOrder** | `addorder l/LABEL d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
+**DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
+**MarkOrder** | `markorder INDEX` e.g. `markorder 2`
+**CompletedOrders** | `completedorders`
+**IncompleteOrders** | `incompleteorders`
+**SortOrders** | `sortorders`
+
+###General Commands
+
+Action | Format
+--------|------------------
+**Clear** | `clear`
+**Help** | `help`

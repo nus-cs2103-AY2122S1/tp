@@ -22,7 +22,7 @@ title: Developer Guide
         - [Glossary](#glossary)
     - [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
         - [Launch and shutdown](#launch-and-shutdown)
-        - [Deleting a person](#deleting-a-client)
+        - [Deleting a client](#deleting-a-client)
         - [Saving data](#saving-data)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -468,7 +468,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Client**: A customer in the database, identified by their name. 
+* **Order**: A sales order from a customer scheduled for a target date.
+* **Task**: A task for the user that has a due date and a completion status.
 
 --------------------------------------------------------------------------------------------------------------------
 
