@@ -167,8 +167,8 @@ public class Student {
      * @return a copy of the Student
      * */
     public Student copy() {
-        Student clone = new Student(name, studentId, classId, email);
-        clone.setLabResultRecord(labResultList);
-        return clone;
+        Student studentCopy = new Student(name, studentId, classId, email);
+        studentCopy.setLabResultRecord(labResultList);
+        return studentCopy;
     }
 }
