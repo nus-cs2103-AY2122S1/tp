@@ -3,7 +3,6 @@ package seedu.academydirectory.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Optional;
 
 import seedu.academydirectory.commons.exceptions.DataConversionException;
@@ -47,15 +46,17 @@ public class RevertCommand extends Command {
         try {
             Commit relevantCommit = model.revert(this.fiveDigitHash);
             if (relevantCommit.equals(Commit.NULL)) {
-                throw new CommandException(REVERT_REQUEST_REJECTED);
+                throw new CommandException(REVERT_REQUEST_REJECTED + "Hash value correct (and not current state) ?");
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             throw new CommandException(REVERT_REQUEST_REJECTED, e);
         }
 
         AcademyDirectoryStorage academyDirectoryStorage =
                 new JsonAcademyDirectoryStorage(model.getAcademyDirectoryFilePath());
-        StorageManager storage = new StorageManager(academyDirectoryStorage, null);
+        StorageManager storage = new StorageManager(academyDirectoryStorage,
+                null,
+                model.getUserPrefs().getVersionControlPath());
         Optional<ReadOnlyAcademyDirectory> academyDirectoryOptional;
         ReadOnlyAcademyDirectory initialData;
 

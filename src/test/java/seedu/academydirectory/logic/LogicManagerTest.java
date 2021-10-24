@@ -47,7 +47,7 @@ public class LogicManagerTest {
         JsonAcademyDirectoryStorage academyDirectoryStorage =
                 new JsonAcademyDirectoryStorage(temporaryFolder.resolve("academyDirectory.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(academyDirectoryStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(academyDirectoryStorage, userPrefsStorage, temporaryFolder.resolve("vc"));
         logic = new LogicManager(model, storage);
     }
 
@@ -77,7 +77,7 @@ public class LogicManagerTest {
                         temporaryFolder.resolve("ioExceptionAcademyDirectory.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(academyDirectoryStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(academyDirectoryStorage, userPrefsStorage, temporaryFolder.resolve("vc"));
         logic = new LogicManager(model, storage);
 
         // Execute add command

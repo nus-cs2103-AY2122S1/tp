@@ -30,6 +30,11 @@ public class VersionControlReader {
     private final Path vcPath;
     private final HashGenerator hashGenerator;
 
+    /**
+     * Constructs a VersionControlReader which can load version control files in disk for use programmatically
+     * @param hashMethod Hash function to be used to construct version control objects
+     * @param vcPath Path to load version control files from
+     */
     public VersionControlReader(HashMethod hashMethod, Path vcPath) {
         this.hashGenerator = new HashGenerator(hashMethod);
         this.vcPath = vcPath;
@@ -89,7 +94,7 @@ public class VersionControlReader {
             labelStorageManager.write(labelFileName, temp);
 
             String labelHash = hashGenerator.generateHashFromFile(labelPath);
-            boolean deletedSuccessfully = labelPath.toFile().delete();
+            assert labelPath.toFile().delete();
 
             return new Label(labelHash, name, () -> commit);
         } catch (IOException e) {
@@ -133,7 +138,7 @@ public class VersionControlReader {
 
             // Delete temporarily created Tree
             String treeHash = hashGenerator.generateHashFromFile(treePath);
-            boolean deletedSuccessfully = treePath.toFile().delete();
+            assert treePath.toFile().delete();
 
             // Return final tree
             return new Tree(treeHash,

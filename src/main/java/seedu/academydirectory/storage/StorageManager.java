@@ -2,8 +2,6 @@ package seedu.academydirectory.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -12,8 +10,7 @@ import seedu.academydirectory.commons.exceptions.DataConversionException;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.UserPrefs;
-import seedu.academydirectory.versioncontrol.objects.VcObject;
-import seedu.academydirectory.versioncontrol.utils.HashMethod;
+import seedu.academydirectory.versioncontrol.objects.StageArea;
 
 /**
  * Manages storage of AcademyDirectory data in local storage.
@@ -21,18 +18,19 @@ import seedu.academydirectory.versioncontrol.utils.HashMethod;
 public class StorageManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AcademyDirectoryStorage academyDirectoryStorage;
-    private UserPrefsStorage userPrefsStorage;
-    private StageAreaStorage stageAreaStorage;
+    private final AcademyDirectoryStorage academyDirectoryStorage;
+    private final UserPrefsStorage userPrefsStorage;
+    private final StageAreaStorage stageAreaStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AcademyDirectoryStorage} and {@code UserPrefStorage}.
      */
-    public StorageManager(AcademyDirectoryStorage academyDirectoryStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AcademyDirectoryStorage academyDirectoryStorage, UserPrefsStorage userPrefsStorage,
+                          Path versionControlPath) {
         super();
         this.academyDirectoryStorage = academyDirectoryStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.stageAreaStorage = new StageAreaStorage(HashMethod.SHA1, Paths.get("vc"));
+        this.stageAreaStorage = new StageAreaStorage(versionControlPath);
     }
 
     // ================ UserPrefs methods ==============================
@@ -84,9 +82,8 @@ public class StorageManager implements Storage {
     }
 
     @Override
-    public void saveStageArea(List<VcObject> stageArea) throws IOException {
+    public void saveStageArea(StageArea stageArea) throws IOException {
         logger.fine("Attempt to write stage area to file: ");
         stageAreaStorage.saveStageArea(stageArea);
     }
-
 }

@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.model.VersionControl;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 
@@ -18,15 +19,14 @@ import seedu.academydirectory.versioncontrol.objects.Commit;
  * Lists all commands used in the academy directory to the user.
  */
 public class HistoryCommand extends Command {
-    private static final SimpleDateFormat DF = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
-
     public static final String COMMAND_WORD = "history";
-
     public static final String HELP_MESSAGE = "### Listing all history : `history`\n"
             + "\n"
             + "Shows a list of all command history in the academy directory.\n"
             + "\n"
             + "Format: `history`";
+
+    private static final SimpleDateFormat DF = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
 
     @Override
     public CommandResult execute(VersionedModel model) throws CommandException {
@@ -36,7 +36,7 @@ public class HistoryCommand extends Command {
 
     private List<String> retrieveHistory(VersionedModel model) {
         Commit headCommit = model.getHeadCommit();;
-        Commit latestCommit = model.fetchCommitByLabel("temp_LATEST");
+        Commit latestCommit = model.fetchCommitByLabel(VersionControl.OLD_LABEL_STRING);
 
         Commit lca = headCommit.findLca(latestCommit);
 
@@ -70,7 +70,7 @@ public class HistoryCommand extends Command {
         for (Commit commit : sortedBranch) {
             if (latestToEarly.contains(commit)) {
                 result.add("| | " + getPresentableHistory(commit, 1, ""));
-                result.add("* | " + getPresentableHistory(commit, 0, commit.equals(latestCommit) ? "(prior)" : ""));
+                result.add("* | " + getPresentableHistory(commit, 0, commit.equals(latestCommit) ? "(PRIOR)" : ""));
             } else {
                 result.add("| | " + getPresentableHistory(commit, 1, ""));
                 result.add("| * " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));

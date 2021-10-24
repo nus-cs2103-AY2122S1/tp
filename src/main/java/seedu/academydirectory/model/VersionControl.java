@@ -1,35 +1,39 @@
 package seedu.academydirectory.model;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import seedu.academydirectory.commons.util.FileUtil;
 import seedu.academydirectory.storage.VersionControlReader;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
+import seedu.academydirectory.versioncontrol.objects.StageArea;
 import seedu.academydirectory.versioncontrol.objects.Tree;
-import seedu.academydirectory.versioncontrol.objects.VcObject;
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
 public class VersionControl {
+    public static final String HEAD_LABEL_STRING = "HEAD";
+    public static final String OLD_LABEL_STRING = "temp_LATEST";
+
     private Commit headCommit = Commit.NULL;
 
-    private static final String headLabelString = "HEAD";
-    private static final String oldLabelString = "temp_LATEST";
-
-    private final VersionControlReader versionControlReader;
-
     private final Path storagePath;
-    private List<VcObject> stageArea = List.of(headCommit);
+    private final VersionControlReader versionControlReader;
+    private final StageArea stageArea = new StageArea(headCommit);
 
+    /**
+     * Models the internal version control system in memory
+     * @param hashMethod Which hash function to use
+     * @param vcPath Path to save version control related files
+     * @param storagePath Path to file to be version controlled
+     */
     public VersionControl(HashMethod hashMethod, Path vcPath, Path storagePath) {
         this.versionControlReader = new VersionControlReader(hashMethod, vcPath);
         HashGenerator generator = new HashGenerator(hashMethod);
@@ -37,68 +41,69 @@ public class VersionControl {
         this.storagePath = storagePath;
         // Make versionControlled path if not exist
         try {
-            Path headPath = vcPath.resolve(Paths.get(headLabelString));
-            FileUtil.createIfMissing(headPath);
+            Path headPath = vcPath.resolve(Paths.get(HEAD_LABEL_STRING));
+            FileUtil.createParentDirsOfFile(headPath);
             if (FileUtil.isFileExists(headPath)) {
-                this.headCommit = fetchCommitByLabel(headLabelString);
+                this.headCommit = fetchCommitByLabel(HEAD_LABEL_STRING);
             } else {
                 // Create initial commit
                 this.headCommit = Commit.NULL;
-                boolean isSuccessful = this.commit("Initial Commit");
-                assert isSuccessful;
+                this.commit("Initial Commit");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean commit(String message) {
+    /**
+     * Commits current state to memory to be version controlled
+     * @param message Commit message to be used
+     */
+    public void commit(String message) {
+        requireNonNull(message);
         Commit parentCommit = this.headCommit;
-        // Make VcObjects
+
         Tree blobTree = versionControlReader.createNewTree(storagePath);
         this.headCommit = versionControlReader.createNewCommit(message, () -> blobTree, () -> parentCommit);
-        Label headLabel = versionControlReader.createNewLabel(headLabelString, headCommit);
+        Label headLabel = versionControlReader.createNewLabel(HEAD_LABEL_STRING, headCommit);
 
-        this.resetStage();
-        stage(headLabel);
-        stage(this.headCommit);
-        stage(blobTree);
-        return true;
+        stageArea.resetStage();
+        stageArea.stage(headLabel);
+        stageArea.stage(this.headCommit);
+        stageArea.stage(blobTree);
     }
 
+    /**
+     * Reverts state according to the given hash
+     * @param fiveCharHash Hash of the commit to be reverted to
+     * @return Commit whose hash is equal to the hash given
+     * @throws IOException Unable to restore state correctly
+     */
     public Commit revert(String fiveCharHash) throws IOException {
-        Commit mainCommit = fetchCommitByLabel(oldLabelString);
-        assert mainCommit.equals(this.headCommit);
-
         Commit relevantCommit = versionControlReader.fetchCommitByHash(fiveCharHash);
         if (relevantCommit.equals(Commit.NULL)) {
             return Commit.NULL;
+        } else if (relevantCommit.equals(headCommit)) {
+            return Commit.NULL;
         }
 
+        // Regenerate files
         Tree relevantTree = relevantCommit.getTreeSupplier().get();
-        this.headCommit = relevantCommit;
-
-        Label oldLabel = versionControlReader.createNewLabel(oldLabelString, mainCommit);
-        Label headLabel = versionControlReader.createNewLabel(headLabelString, headCommit);
-
         regenerateBlobs(relevantTree);
 
-        resetStage();
-        stage(oldLabel);
-        stage(headLabel);
+        Label oldLabel = versionControlReader.createNewLabel(OLD_LABEL_STRING, headCommit);
+
+        this.headCommit = relevantCommit;
+        Label headLabel = versionControlReader.createNewLabel(HEAD_LABEL_STRING, headCommit);
+
+        stageArea.resetStage();
+        stageArea.stage(oldLabel);
+        stageArea.stage(headLabel);
         return relevantCommit;
     }
 
-    public List<VcObject> getStageArea() {
+    public StageArea getStageArea() {
         return stageArea;
-    }
-
-    private void stage(VcObject vcObject) {
-        stageArea.add(vcObject);
-    }
-
-    private void resetStage() {
-        stageArea = new ArrayList<>();
     }
 
     public Commit getHeadCommit() {

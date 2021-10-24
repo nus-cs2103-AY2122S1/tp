@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -27,7 +26,7 @@ import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.testutil.StudentBuilder;
 import seedu.academydirectory.versioncontrol.objects.Commit;
-import seedu.academydirectory.versioncontrol.objects.VcObject;
+import seedu.academydirectory.versioncontrol.objects.StageArea;
 
 public class AddCommandTest {
 
@@ -160,18 +159,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean commit(String message) {
-            return true;
+        public void commit(String message) {
         }
 
         @Override
-        public Commit revert(String fiveCharHash) throws IOException, ParseException {
+        public Commit revert(String fiveCharHash) throws IOException {
             return Commit.NULL;
         }
 
         @Override
-        public List<VcObject> getStageArea() {
-            return new ArrayList<>();
+        public StageArea getStageArea() {
+            return new StageArea();
         }
 
         @Override
@@ -183,6 +181,7 @@ public class AddCommandTest {
         public Commit fetchCommitByLabel(String temp_latest) {
             return null;
         }
+
     }
 
     /**

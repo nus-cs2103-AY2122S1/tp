@@ -58,7 +58,7 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AcademyDirectoryStorage academyDirectoryStorage =
                 new JsonAcademyDirectoryStorage(userPrefs.getAcademyDirectoryFilePath());
-        storage = new StorageManager(academyDirectoryStorage, userPrefsStorage);
+        storage = new StorageManager(academyDirectoryStorage, userPrefsStorage, userPrefs.getVersionControlPath());
 
         initLogging(config);
 
@@ -81,7 +81,7 @@ public class MainApp extends Application {
         ReadOnlyAcademyDirectory initialData;
         try {
             academyDirectoryOptional = storage.readAcademyDirectory();
-            if (!academyDirectoryOptional.isPresent()) {
+            if (academyDirectoryOptional.isEmpty()) {
                 logger.info("Data file not found. Will be starting with a sample AcademyDirectory");
             }
             initialData = academyDirectoryOptional.orElseGet(SampleDataUtil::getSampleAcademyDirectory);
@@ -153,6 +153,7 @@ public class MainApp extends Application {
         try {
             Optional<UserPrefs> prefsOptional = storage.readUserPrefs();
             initializedPrefs = prefsOptional.orElse(new UserPrefs());
+            logger.info(String.valueOf(initializedPrefs.getVersionControlPath()));
         } catch (DataConversionException e) {
             logger.warning("UserPrefs file at " + prefsFilePath + " is not in the correct format. "
                     + "Using default user prefs");

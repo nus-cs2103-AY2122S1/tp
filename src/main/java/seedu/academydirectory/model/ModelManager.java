@@ -5,8 +5,6 @@ import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNu
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -19,7 +17,7 @@ import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.versioncontrol.objects.Commit;
-import seedu.academydirectory.versioncontrol.objects.VcObject;
+import seedu.academydirectory.versioncontrol.objects.StageArea;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
 /**
@@ -27,14 +25,12 @@ import seedu.academydirectory.versioncontrol.utils.HashMethod;
  */
 public class ModelManager implements VersionedModel {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-    private static final Path vcPath = Paths.get("vc");
 
     private final AcademyDirectory academyDirectory;
     private final UserPrefs userPrefs;
     private final FilteredList<Student> filteredStudents;
 
-    private VersionControl versionControl;
-    private final Path storagePath;
+    private final VersionControl versionControl;
 
     /**
      * Initializes a ModelManager with the given academyDirectory and userPrefs.
@@ -49,8 +45,9 @@ public class ModelManager implements VersionedModel {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredStudents = new FilteredList<>(this.academyDirectory.getStudentList());
 
-        this.storagePath = userPrefs.getAcademyDirectoryFilePath();
-        this.versionControl = new VersionControl(HashMethod.SHA1, vcPath, this.storagePath);
+        this.versionControl = new VersionControl(HashMethod.SHA1,
+                userPrefs.getVersionControlPath(),
+                userPrefs.getAcademyDirectoryFilePath());
     }
 
     public ModelManager() {
@@ -178,11 +175,10 @@ public class ModelManager implements VersionedModel {
     /**
      * Commits a particular command
      * @param message Message attached to the Commit for a readable explanation
-     * @return whether commit is successful
      */
     @Override
-    public boolean commit(String message) {
-        return versionControl.commit(message);
+    public void commit(String message) {
+        versionControl.commit(message);
     }
 
     @Override
@@ -191,7 +187,7 @@ public class ModelManager implements VersionedModel {
     }
 
     @Override
-    public List<VcObject> getStageArea() {
+    public StageArea getStageArea() {
         return versionControl.getStageArea();
     }
 
