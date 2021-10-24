@@ -90,9 +90,9 @@ public class StringUtil {
     }
 
     /**
-     * Generates a random alphanumeric string with default random seed 10.
+     * Generates a random alphanumeric string with default random seed as system time.
      */
     public static String generateRandomString() {
-        return generateRandomString(DEFAULT_RANDOM_SEED);
+        return generateRandomString(new Random().nextInt());
     }
 }

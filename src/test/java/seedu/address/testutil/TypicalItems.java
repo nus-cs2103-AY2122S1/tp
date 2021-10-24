@@ -19,6 +19,7 @@ import java.util.List;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.Inventory;
 import seedu.address.model.item.Item;
+import seedu.address.model.order.TransactionRecord;
 
 /**
  * A utility class containing a list of {@code Item} objects to be used in tests.
@@ -103,9 +104,19 @@ public class TypicalItems {
         return typicalInventory;
     }
 
+    /**
+     * Returns a list of typical items.
+     */
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(Arrays.asList(APPLE_PIE, BANANA_MUFFIN, CHOCOCHIP,
                 DALGONA_COFFEE, EGGNOG, FOREST_CAKE, GRANOLA_BAR));
+    }
+
+    /**
+     * Returns a list of transaction containing all typical items in {@code getTypicalItems()}
+     */
+    public static TransactionRecord getTypicalTransaction() {
+        return new TransactionRecord(getTypicalItems());
     }
 
     /**

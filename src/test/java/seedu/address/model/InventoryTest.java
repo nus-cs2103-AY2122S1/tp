@@ -27,6 +27,7 @@ import seedu.address.model.item.ItemDescriptor;
 import seedu.address.model.item.exceptions.DuplicateItemException;
 import seedu.address.model.item.exceptions.ItemNotFoundException;
 import seedu.address.model.order.Order;
+import seedu.address.model.order.TransactionRecord;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.ItemDescriptorBuilder;
 import seedu.address.testutil.TypicalItems;
@@ -240,6 +241,18 @@ public class InventoryTest {
         Inventory expectedInventory = TypicalItems.getTypicalInventory();
 
         assertEquals(typicalInventory.getItemList(), expectedInventory.getItemList());
+    }
+
+    @Test
+    public void transactOrder_typicalOrder_getRightTransactionRecord() {
+        Inventory typicalInventory = TypicalItems.getTypicalInventory();
+        Order order = TypicalOrders.getTypicalOrder();
+        TransactionRecord transaction = typicalInventory.transactOrder(order);
+
+        TransactionRecord expectedTransaction = new TransactionRecord(TypicalItems.getTypicalItems());
+
+        // Use hasSameItems() to get equivalence of internal list of items only.
+        assertTrue(transaction.hasSameItems(expectedTransaction));
     }
 
     /**
