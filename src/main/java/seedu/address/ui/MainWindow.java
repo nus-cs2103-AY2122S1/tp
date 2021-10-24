@@ -212,7 +212,10 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isDisplayStudent()) {
-                Person student = commandResult.getStudent();
+                Person student = commandResult.getStudent()
+                    .orElse(logic.getFilteredPersonList().get(0));
+                // default is first person if no student in command result
+                // unlikely since condition accounts for it
                 handlePersonGridPanel(student);
             } else if (commandResult.isShowSchedule()) {
                 handleSchedule();
