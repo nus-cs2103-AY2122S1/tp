@@ -36,6 +36,15 @@ public class Student {
         this.labResultList = FXCollections.observableArrayList();
     }
 
+    public Student(Name name, StudentId studentId, ClassId classId, Email email, ObservableList<Lab> list) {
+        requireAllNonNull(name, studentId, classId, email);
+        this.name = name;
+        this.studentId = studentId;
+        this.classId = classId;
+        this.email = email;
+        this.labResultList = list;
+    }
+
     public Name getName() {
         return name;
     }
@@ -58,6 +67,9 @@ public class Student {
 
     public ObservableList<Lab> getLabResultList() {
         return labResultList;
+    }
+    public Lab getLab(int index) {
+        return labResultList.get(index);
     }
 
     /**
