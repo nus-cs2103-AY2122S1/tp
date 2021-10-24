@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents an amount associated with a Order.
  */
-public class Amount {
+public class Amount implements Comparable<Amount> {
     public static final String MESSAGE_CONSTRAINTS =
             "Sales order amount should only contain numbers, and optionally, at most one block starting with a dot"
             + "followed by between one or or two numbers";
@@ -43,5 +43,11 @@ public class Amount {
     @Override
     public int hashCode() {
         return amount.hashCode();
+    }
+
+
+    @Override
+    public int compareTo(Amount a) {
+        return Float.valueOf(amount).compareTo(Float.valueOf(a.amount));
     }
 }

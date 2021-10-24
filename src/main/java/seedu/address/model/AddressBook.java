@@ -5,12 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.order.Order;
-import seedu.address.model.order.OrderList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskList;
+
 
 
 /**
@@ -20,8 +17,7 @@ import seedu.address.model.task.TaskList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    private final TaskList tasks;
-    private final OrderList orders;
+
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -32,8 +28,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
-        tasks = new TaskList();
-        orders = new OrderList();
     }
 
     public AddressBook() {}
@@ -56,13 +50,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
-    /**
-     * Replaces the contents of the tasks list with {@code tasks}.
-     * {@code tasks} must not contain duplicate tasks.
-     */
-    public void setTasks(List<Task> tasks) {
-        this.tasks.setTasks(tasks);
-    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -71,7 +58,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-        setTasks(newData.getTaskList());
 
     }
 
@@ -112,58 +98,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
-    //// task-level operations
-
-    public void addTask(Task toAdd) {
-        tasks.add(toAdd);
-    }
-
-    public void deleteTask(Task toDelete) {
-        tasks.remove(toDelete);
-    }
-
-    public void markDone(Task task) {
-        tasks.markDone(task);
-    }
-
-    public void setTask(Task target, Task editedtask) {
-        tasks.setTask(target, editedtask);
-    }
-
-    public boolean hasTask(Task task) {
-        return tasks.hasTask(task);
-    }
-
-    /// order-level operations
-
-    public void addOrder(Order toAdd) {
-        orders.add(toAdd);
-    }
-
-    public void deleteOrder(Order toDelete) {
-        orders.remove(toDelete);
-    }
-
-    public void markOrder(Order order) {
-        orders.markComplete(order);
-    }
-
-    public void setOrder(Order target, Order editedOrder) {
-        orders.setOrder(target, editedOrder);
-    }
-
-    public boolean hasOrder(Order order) {
-        return orders.hasOrder(order);
-    }
-
-
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return persons.asUnmodifiableObservableList().size() + " persons; ";
     }
 
     @Override
@@ -171,15 +110,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-    @Override
-    public ObservableList<Task> getTaskList() {
-        return tasks.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Order> getOrderList() {
-        return orders.asUnmodifiableObservableList();
-    }
 
     @Override
     public boolean equals(Object other) {
