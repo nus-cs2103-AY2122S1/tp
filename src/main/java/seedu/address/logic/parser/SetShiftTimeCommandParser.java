@@ -5,41 +5,40 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT_TIME;
 
+import java.time.LocalTime;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddShiftCommand;
+import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 
-/**
- * Parses input arguments and creates a new AddShiftCommand object.
- */
-public class AddShiftCommandParser implements Parser<AddShiftCommand> {
-
+public class SetShiftTimeCommandParser implements Parser<SetShiftTimeCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddShiftCommand
-     * and returns an AddShiftCommand object for execution.
+     * and returns an SetShiftTimeCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format.
      */
-    public AddShiftCommand parse(String args) throws ParseException {
+    public SetShiftTimeCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DASH_INDEX, PREFIX_DAY_SHIFT, PREFIX_DASH_NAME);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_DASH_INDEX, PREFIX_DASH_NAME, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME);
 
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
+        LocalTime[] shiftTimes;
 
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_INDEX and PREFIX_NAME must exist.
-        if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT, PREFIX_SHIFT_TIME)
                 || !argMultimap.getPreamble().isEmpty() || (!arePrefixesPresent(argMultimap, PREFIX_DASH_INDEX)
                 && !arePrefixesPresent(argMultimap, PREFIX_DASH_NAME))
                 || (arePrefixesPresent(argMultimap, PREFIX_DASH_INDEX)
-                        && arePrefixesPresent(argMultimap, PREFIX_DASH_NAME))) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
+                && arePrefixesPresent(argMultimap, PREFIX_DASH_NAME))) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetShiftTimeCommand.MESSAGE_USAGE));
         }
 
         try {
@@ -50,10 +49,12 @@ public class AddShiftCommandParser implements Parser<AddShiftCommand> {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
+            shiftTimes = ParserUtil.parseShiftTime(argMultimap.getValue(PREFIX_SHIFT_TIME).get());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SetShiftTimeCommand.MESSAGE_USAGE), pe);
         }
-        return new AddShiftCommand(index, name, shiftDayAndSlot);
+        return new SetShiftTimeCommand(index, name, shiftDayAndSlot, shiftTimes);
     }
 
     /**
