@@ -11,7 +11,7 @@ import seedu.address.model.item.ItemCountComparator;
 import seedu.address.model.item.ItemNameComparator;
 
 /**
- * Sorts the items in inventory in a given order.
+ * Sorts the currently displayed items in a given order.
  */
 public class SortCommand extends Command {
 
