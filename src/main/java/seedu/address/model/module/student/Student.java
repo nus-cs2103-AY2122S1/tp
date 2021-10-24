@@ -99,7 +99,7 @@ public class Student {
     }
 
     /**
-     * Removes the specified {@Code Task} from the student's task list.
+     * Removes the specified {@Code task} from the student's task list.
      */
     public void removeTask(Task task) {
         taskList.remove(task);

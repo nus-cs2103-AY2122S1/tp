@@ -145,7 +145,7 @@ Format: `delete task m/<module name> ti/<task id>`
 
 Examples:
 * `delete task m/CS2103 ti/T1`: Deletes the task with task ID T1 from CS2103
-* `delete task m/CS2105 ti/T2`: Deletes the task with task ID t2 from CS2105
+* `delete task m/CS2105 ti/T2`: Deletes the task with task ID T2 from CS2105
 
 ### Find a student: `find`
 

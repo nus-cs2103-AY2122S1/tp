@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
@@ -25,7 +26,7 @@ public class DeleteTaskCommand extends DeleteCommand {
     public static final String COMMAND_WORD = "delete task";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task from the module identified by the index number used in the displayed task list.\n"
+            + ": Deletes the task from the module identified by the task ID used in the displayed task list.\n"
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
             + PREFIX_TASK_ID + "TASK ID\n"
@@ -43,6 +44,7 @@ public class DeleteTaskCommand extends DeleteCommand {
      *
      */
     public DeleteTaskCommand(TaskId targetTaskId, ModuleName moduleName) {
+        requireAllNonNull(targetTaskId, moduleName);
         this.targetTaskId = targetTaskId;
         this.moduleName = moduleName;
     }
@@ -59,7 +61,7 @@ public class DeleteTaskCommand extends DeleteCommand {
                     for (Task task : taskList) {
                         if (task.getTaskId().equals(targetTaskId)) {
                             Task taskToDelete = task;
-                            logger.log(Level.INFO, "deleting task from module taskList: " + task.getTaskId());
+                            logger.log(Level.INFO, "deleting task from student's taskList: " + task.getTaskId());
                             student.removeTask(taskToDelete);
                         }
                     }
