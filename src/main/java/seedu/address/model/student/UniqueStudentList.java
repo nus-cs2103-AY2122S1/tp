@@ -98,6 +98,19 @@ public class UniqueStudentList implements Iterable<Student> {
     }
 
     /**
+     * Returns the target Student from the list
+     */
+    public Student getStudent(Student target) {
+        requireNonNull(target);
+        Student foundStudent = internalList
+                .stream().filter(student -> student.isSameStudent(target)).findFirst().get();
+        if (foundStudent == null) {
+            throw new StudentNotFoundException();
+        }
+        return foundStudent;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Student> asUnmodifiableObservableList() {
