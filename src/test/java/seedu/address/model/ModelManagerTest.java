@@ -10,13 +10,16 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.ContainsKeywordsPredicate;
 import seedu.address.model.person.ContainsKeywordsPredicate.PersonField;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -92,6 +95,14 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void getSelectedPersonList_modifyList_returnsTrue() {
+        List<Person> persons = new ArrayList<>();
+        persons.add(ALICE);
+        modelManager.addSelected(persons);
+        assertTrue(modelManager.getSelectedPersonList().contains(ALICE));
     }
 
     @Test

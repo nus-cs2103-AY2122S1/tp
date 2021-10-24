@@ -17,8 +17,11 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose fields contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: FLAG KEYWORDS [MORE_FLAGS]\n" + "Example: " + COMMAND_WORD + " -n alex -a serangoon";
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers."
+            + System.lineSeparator()
+            + "Parameters: FLAG KEYWORDS [MORE_FLAGS]"
+            + System.lineSeparator()
+            + "Example: " + COMMAND_WORD + " -n alex -a serangoon";
 
     private final Predicate<Person> predicate;
 
@@ -36,7 +39,10 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         assert(predicate.toString() != "");
-        return new CommandResult("Showing results for: " + '\n' + predicate + '\n'
+        return new CommandResult("Showing results for: "
+                + System.lineSeparator()
+                + predicate
+                + System.lineSeparator()
                 + String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 

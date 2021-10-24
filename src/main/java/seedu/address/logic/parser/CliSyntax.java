@@ -18,4 +18,8 @@ public class CliSyntax {
     public static final Prefix LONG_PREFIX_ADDRESS = new Prefix("--address");
     public static final Prefix LONG_PREFIX_TAG = new Prefix("--tag");
 
+    public static final Prefix PREFIX_ALL = new Prefix("-a");
+    public static final Prefix PREFIX_EXCLUDE = new Prefix("-e");
+    public static final Prefix PREFIX_INCLUDE = new Prefix("-i");
+
 }
