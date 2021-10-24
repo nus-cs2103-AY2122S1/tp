@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -29,6 +30,8 @@ public class LessonListPanel extends UiPart<Region> {
     @FXML
     private ListView<Lesson> lessonListView;
     @FXML
+    private HBox titleBox;
+    @FXML
     private Label lessonListTitle;
     @FXML
     private Label placeholder;
@@ -40,6 +43,7 @@ public class LessonListPanel extends UiPart<Region> {
         super(FXML);
         initialiseLessonListView(lessonList);
         lessonListTitle.setText(TITLE_PLACEHOLDER_MESSAGE);
+        titleBox.minHeightProperty().bind(lessonListTitle.heightProperty().multiply(1.1));
         placeholder.setText(LIST_PLACEHOLDER_MESSAGE);
         placeholder.visibleProperty().bind(Bindings.isEmpty(lessonListView.getItems()));
         placeholder.prefWidthProperty().bind(getRoot().widthProperty().multiply(0.65));
@@ -53,6 +57,7 @@ public class LessonListPanel extends UiPart<Region> {
         initialiseLessonListView(lessonList);
 
         lessonListTitle.setText(student.getName().fullName);
+        titleBox.minHeightProperty().bind(lessonListTitle.heightProperty().multiply(1.1));
         if (lessonList.isEmpty()) {
             placeholder.setText(NO_EXISTING_LESSONS_MESSAGE);
             placeholder.prefWidthProperty().bind(getRoot().widthProperty().multiply(0.7));

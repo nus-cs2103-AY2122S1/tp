@@ -10,7 +10,7 @@
     <padding>
         <Insets bottom="10" left="2" right="7" top="10" />
     </padding>
-   <HBox fx:id="titleBox" alignment="CENTER" prefWidth="100.0" styleClass="name_box">
+   <HBox fx:id="titleBox" alignment="CENTER" prefWidth="100.0" styleClass="name_box" VBox.vgrow="ALWAYS">
       <children>
           <Label fx:id="lessonListTitle" alignment="CENTER" styleClass="cell_medium_label" wrapText="true">
             <padding>
