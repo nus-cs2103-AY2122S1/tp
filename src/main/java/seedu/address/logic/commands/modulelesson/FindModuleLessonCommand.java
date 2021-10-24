@@ -22,7 +22,7 @@ import seedu.address.model.modulelesson.ModuleLesson;
 public class FindModuleLessonCommand extends Command {
 
     public static final String COMMAND_WORD = getAliasList(FIND_MODULE_LESSON).get(0);
-    public static final String MESSAGE_USAGE = "find: Finds all lesson whose details contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all lesson whose details contain "
             + "any of the specified keywords (case-insensitive).\n"
             + "You can choose one of three ways to search:\n"
             + "1) search by module code(s) using the prefix '" + PREFIX_MODULE_CODE
