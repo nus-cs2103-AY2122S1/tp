@@ -288,6 +288,7 @@ public class ParserUtilTest {
     @Test
     public void parseNextMeeting_noMeetingString_returnsNullMeeting() throws Exception {
         assertEquals(NextMeeting.getNullMeeting(), ParserUtil.parseNextMeeting(NextMeeting.NO_NEXT_MEETING));
+        assertEquals(NextMeeting.getNullMeeting(), ParserUtil.parseNextMeeting("no meeting planned"));
     }
 
     @Test
