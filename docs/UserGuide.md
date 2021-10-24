@@ -244,13 +244,13 @@ Clears all entries from ContactSH.
    Format: `cat INDEX`
 
    * Displays the list of tasks attached to the person at the specified `INDEX`.
-   * The index refers to the index number shown in the displayed person list. 
+   * The index refers to the index number shown in the displayed person list.
    * The index **must be a positive integer** 1, 2, 3, ...
 
    Examples:
 
    * `list` followed by delete 2 deletes the 2nd person in the address book.
-   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.<br> 
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. 
 
 2. Shows the user the task list of every single person in ContactSh.
 
