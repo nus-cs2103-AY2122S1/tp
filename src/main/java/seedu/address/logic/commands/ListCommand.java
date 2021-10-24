@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOMING_MONTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOMING_WEEK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.function.Predicate;
@@ -33,9 +31,6 @@ public class ListCommand extends Command {
 
     public static final Predicate<Person> PREDICATE_HAS_VISIT_THIS_MONTH = (Person::hasVisitThisMonth);
     public static final Predicate<Person> PREDICATE_HAS_VISIT_THIS_WEEK = (Person::hasVisitThisWeek);
-
-    // TODO
-
 
     private final boolean isIncoming;
     private final boolean isNextMonth;
@@ -73,12 +68,18 @@ public class ListCommand extends Command {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ListCommand that = (ListCommand) o;
 
-        if (isIncoming != that.isIncoming) return false;
+        if (isIncoming != that.isIncoming) {
+            return false;
+        }
         return isNextMonth == that.isNextMonth;
     }
 
