@@ -171,7 +171,8 @@ public class ModelManagerTest {
         expected.add(ALICE);
         expected.add(BENSON);
 
-        ResidentList list = new ResidentList("Alice Pauline, Benson Meier");
+        ResidentList list = new ResidentList("Alice Pauline, Benson Meier",
+                ALICE.toString() + ", " + BENSON.toString());
         ArrayList<Person> personList = modelManager.getCurrentEventResidents(list);
         assertEquals(personList, expected);
     }

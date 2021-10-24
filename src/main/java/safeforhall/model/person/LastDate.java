@@ -69,4 +69,9 @@ public class LastDate {
                 || (other instanceof LastDate // instanceof handles nulls
                 && date.equals(((LastDate) other).date)); // state check
     }
+
+    @Override
+    public String toString() {
+        return this.date;
+    }
 }

@@ -106,6 +106,10 @@ public class ModelManager implements Model {
         ArrayList<String> residentInformation = residentList.getStringResidentList();
         ArrayList<Person> personList = new ArrayList<>();
 
+        if (residentList.isEmpty()) {
+            return personList;
+        }
+
         for (String information : residentInformation) {
             Optional<Person> personFound;
             personFound = addressBook.findPerson(information);
@@ -129,14 +133,17 @@ public class ModelManager implements Model {
         if (residentList.isEmpty()) {
             return personList;
         }
-        String[] residentInformation = residentList.getResidents().split("\\s*,\\s*");
+        System.out.println(residentList.getResidentsStorage() + "  dsfdsf");
+        String[] residentInformation = residentList.getResidentsStorage().split("\\s*,\\s*");
 
         for (String information : residentInformation) {
+            String[] informationList = information.split("\\s*;\\s*");
             Optional<Person> personFound;
-            personFound = addressBook.findPerson(information);
+            System.out.println(informationList[0]);
+            personFound = addressBook.findPerson(informationList[0]);
 
             if (personFound.isEmpty()) {
-                throw new CommandException("No event with this " + information + " could be found");
+                throw new CommandException("No event with this information '" + information + "' could be found");
             } else {
                 personList.add(personFound.get());
             }

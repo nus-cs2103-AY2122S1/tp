@@ -72,8 +72,12 @@ public class Event {
                 && otherEvent.getCapacity().equals(getCapacity());
     }
 
-    public String addResidentsToEvent(ArrayList<Person> current, ArrayList<Person> toAdd) {
-        return residents.addResidentList(current, toAdd);
+    public String getCombinedStorageString(ArrayList<Person> current, ArrayList<Person> toAdd) {
+        return residents.getCombinedStorageString(current, toAdd);
+    }
+
+    public String getCombinedDisplayString(ArrayList<Person> current, ArrayList<Person> toAdd) {
+        return residents.getCombinedDisplayString(current, toAdd);
     }
 
     /**
