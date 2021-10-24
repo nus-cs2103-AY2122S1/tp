@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -45,7 +47,8 @@ public class MarkStudentAttCommandTest {
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
 
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -70,7 +73,8 @@ public class MarkStudentAttCommandTest {
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withAttendance(MARK_ATTENDANCE_ABSENT_EXPECTED).build();
 
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -97,7 +101,8 @@ public class MarkStudentAttCommandTest {
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withAttendance(MARK_ATTENDANCE_PRESENT_EXPECTED).build();
 
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -124,7 +129,8 @@ public class MarkStudentAttCommandTest {
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withAttendance(MARK_ATTENDANCE_ABSENT_EXPECTED).build();
 
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentAttCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -138,7 +144,8 @@ public class MarkStudentAttCommandTest {
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(outOfBoundIndex, FIRST_WEEK);
+        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
+                Collections.singletonList(outOfBoundIndex), FIRST_WEEK);
 
         assertCommandFailure(markStudentAttCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
@@ -154,14 +161,16 @@ public class MarkStudentAttCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
 
-        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(outOfBoundIndex, FIRST_WEEK);
+        MarkStudentAttCommand markStudentAttCommand = new MarkStudentAttCommand(
+                Collections.singletonList(outOfBoundIndex), FIRST_WEEK);
 
         assertCommandFailure(markStudentAttCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final MarkStudentAttCommand standardCommand = new MarkStudentAttCommand(INDEX_FIRST_STUDENT, FIRST_WEEK);
+        final MarkStudentAttCommand standardCommand = new MarkStudentAttCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK);
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));

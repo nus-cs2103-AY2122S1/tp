@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -45,7 +47,8 @@ public class MarkStudentPartCommandTest {
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withParticipation(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
 
-        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -70,7 +73,8 @@ public class MarkStudentPartCommandTest {
         Student markedStudent = new StudentBuilder(studentToMark)
                 .withParticipation(MARK_PARTICIPATION_ABSENT_EXPECTED).build();
 
-        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -97,7 +101,8 @@ public class MarkStudentPartCommandTest {
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withParticipation(MARK_PARTICIPATION_PRESENT_EXPECTED).build();
 
-        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -124,7 +129,8 @@ public class MarkStudentPartCommandTest {
         Student markedStudent = new StudentBuilder(studentInFilteredList)
                 .withParticipation(MARK_PARTICIPATION_ABSENT_EXPECTED).build();
 
-        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(INDEX_FIRST_STUDENT, FIRST_WEEK - 1);
+        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK - 1);
 
         String expectedMessage = String.format(MarkStudentPartCommand.MESSAGE_MARK_STUDENT_SUCCESS,
                 markedStudent.getName(), type, FIRST_WEEK);
@@ -138,7 +144,8 @@ public class MarkStudentPartCommandTest {
     @Test
     public void execute_invalidStudentIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(outOfBoundIndex, FIRST_WEEK);
+        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
+                Collections.singletonList(outOfBoundIndex), FIRST_WEEK);
 
         assertCommandFailure(markStudentPartCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
@@ -154,14 +161,16 @@ public class MarkStudentPartCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getStudentList().size());
 
-        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(outOfBoundIndex, FIRST_WEEK);
+        MarkStudentPartCommand markStudentPartCommand = new MarkStudentPartCommand(
+                Collections.singletonList(outOfBoundIndex), FIRST_WEEK);
 
         assertCommandFailure(markStudentPartCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        final MarkStudentPartCommand standardCommand = new MarkStudentPartCommand(INDEX_FIRST_STUDENT, FIRST_WEEK);
+        final MarkStudentPartCommand standardCommand = new MarkStudentPartCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), FIRST_WEEK);
 
         // same object -> returns true
         assertTrue(standardCommand.equals(standardCommand));

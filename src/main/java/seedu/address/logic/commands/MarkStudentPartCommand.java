@@ -19,28 +19,29 @@ public class MarkStudentPartCommand extends Command {
 
     public static final String COMMAND_WORD = "markp";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the participation of the student identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks the participation of the student(s) identified "
             + "by the index number used in the displayed student list.\n"
             + "Marking a student will change his participation status to 1.\n"
             + "Marking a student again will change his participation status to 0.\n"
-            + "Parameters: INDEX (must be a positive integer)"
+            + "Parameters: INDEX [MORE_INDEXES] (must be positive integers)"
             + " [" + PREFIX_WEEK + "WEEK]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 2 3 "
             + PREFIX_WEEK + "1";
 
-    public static final String MESSAGE_MARK_STUDENT_SUCCESS = "Student: %1$s is marked as %2$s for week %3$s!";
+    public static final String MESSAGE_MARK_STUDENT_SUCCESS = "Student: %1$s is marked as %2$s for week %3$s!\n";
 
-    private final Index index;
+    private final List<Index> targetIndexList;
     private final int week;
 
     /**
-     * @param index of the student in the filtered student list to mark participation
+     * Marks student(s) participation (participated/not participated)
+     * @param targetIndexList of the student in the filtered student list to mark participation
      */
-    public MarkStudentPartCommand(Index index, int week) {
-        requireNonNull(index);
+    public MarkStudentPartCommand(List<Index> targetIndexList, int week) {
+        requireNonNull(targetIndexList);
         requireNonNull(week);
 
-        this.index = index;
+        this.targetIndexList = targetIndexList;
         this.week = week;
     }
 
@@ -48,18 +49,21 @@ public class MarkStudentPartCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
+        StringBuilder result = new StringBuilder();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        for (Index targetIndex : targetIndexList) {
+            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+            }
+            Student studentToUpdate = lastShownList.get(targetIndex.getZeroBased());
+
+            model.markStudentParticipation(studentToUpdate, week);
+            String type = model.getStudentParticipation(studentToUpdate, week);
+            model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+            result.append(String.format(MESSAGE_MARK_STUDENT_SUCCESS,
+                    studentToUpdate.getName(), type, week + 1));
         }
-
-        Student studentToUpdate = lastShownList.get(index.getZeroBased());
-
-        model.markStudentParticipation(studentToUpdate, week);
-        String type = model.getStudentParticipation(studentToUpdate, week);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_MARK_STUDENT_SUCCESS,
-                studentToUpdate.getName(), type, week + 1));
+        return new CommandResult(result.toString());
     }
 
     @Override
@@ -76,6 +80,6 @@ public class MarkStudentPartCommand extends Command {
 
         // state check
         MarkStudentPartCommand e = (MarkStudentPartCommand) other;
-        return index.equals(e.index);
+        return targetIndexList.equals(e.targetIndexList);
     }
 }
