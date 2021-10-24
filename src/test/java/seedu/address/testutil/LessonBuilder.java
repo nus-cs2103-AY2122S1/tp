@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.lesson.Date;
@@ -23,6 +25,7 @@ public class LessonBuilder {
     private TimeRange timeRange;
     private Subject subject;
     private Set<Homework> homeworkSet;
+    private Set<Date> cancelledDatesSet;
 
     /**
      * Creates a {@code LessonBuilder} with the default details.
@@ -32,6 +35,7 @@ public class LessonBuilder {
         timeRange = new TimeRange(DEFAULT_TIME_RANGE);
         subject = new Subject(DEFAULT_SUBJECT);
         homeworkSet = new HashSet<>();
+        cancelledDatesSet = new HashSet<>();
     }
 
     /**
@@ -78,13 +82,18 @@ public class LessonBuilder {
         return this;
     }
 
+    public LessonBuilder withCancelledDatesSet(String ... cancelledDates) {
+        cancelledDatesSet = SampleDataUtil.getCancelledDateSet(cancelledDates);
+        return this;
+    }
+
     /**
      * Builds a recurring lesson with the specified information.
      *
      * @return {@code RecurringLesson} containing the information given.
      */
-    public Lesson buildRecurring() {
-        return new RecurringLesson(date, timeRange, subject, homeworkSet);
+    public RecurringLesson buildRecurring() {
+        return new RecurringLesson(date, timeRange, subject, homeworkSet, cancelledDatesSet);
     }
 
     /**
@@ -94,6 +103,6 @@ public class LessonBuilder {
      * @return {@code MakeUpLesson} containing the information given.
      */
     public Lesson build() {
-        return new MakeUpLesson(date, timeRange, subject, homeworkSet);
+        return new MakeUpLesson(date, timeRange, subject, homeworkSet, cancelledDatesSet);
     }
 }

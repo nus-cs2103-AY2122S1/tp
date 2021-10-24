@@ -8,11 +8,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
@@ -20,6 +23,7 @@ import seedu.address.logic.commands.LessonAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
+import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
@@ -58,13 +62,16 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         Set<Homework> homework = parseHomeworkForLessonAdd(argMultimap.getAllValues(PREFIX_HOMEWORK))
                 .orElse(new HashSet<>());
 
+        // create recurring lessons with no cancelled dates.
+        Set<Date> cancelledDates = new HashSet<>();
+
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework);
+            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework, cancelledDates);
             return new LessonAddCommand(index, lesson);
         }
 
-        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework);
+        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework, cancelledDates);
         return new LessonAddCommand(index, lesson);
     }
 

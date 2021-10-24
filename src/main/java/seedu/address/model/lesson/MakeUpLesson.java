@@ -1,6 +1,9 @@
 package seedu.address.model.lesson;
 
+import java.util.List;
 import java.util.Set;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Make Up Lesson in the address book.
@@ -15,8 +18,13 @@ public class MakeUpLesson extends Lesson {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework,  Set<Date> cancelledDates) {
+        super(date, timeRange, subject, homework, cancelledDates);
+    }
+
+    @Override
+    public Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates) {
+        return new MakeUpLesson(getDate(), getTimeRange(), getSubject(),getHomework(),  updatedCancelledDates);
     }
 
     /**
@@ -44,6 +52,11 @@ public class MakeUpLesson extends Lesson {
             return getLocalDate().equals(otherLesson.getLocalDate())
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
+    }
+
+    @Override
+    public boolean hasLessonOnDate(Date otherDate) {
+        return getDate().equals(otherDate) ; // is the same day
     }
 }
 

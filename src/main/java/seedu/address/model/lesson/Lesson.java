@@ -5,10 +5,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Lesson in the address book.
@@ -27,6 +31,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     // Data fields
     private final Subject subject;
     private final Set<Homework> homework = new HashSet<>();
+    private final Set<Date> cancelledDates = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -36,12 +41,13 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
+    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, Set<Date> cancelledDates) {
         requireAllNonNull(date, timeRange, subject, homework);
         this.date = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
+        this.cancelledDates.addAll(cancelledDates);
     }
 
     public Date getDate() {
@@ -84,15 +90,21 @@ public abstract class Lesson implements Comparable<Lesson> {
         return Collections.unmodifiableSet(homework);
     }
 
+    public Set<Date> getCancelledDates() {
+        return Collections.unmodifiableSet(cancelledDates);
+    }
+
+    public abstract Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates);
+
     /**
-     * Check if the Lesson object is recurring.
+     * Checks if the Lesson object is recurring.
      *
      * @return True if it is a recurring lesson, false otherwise.
      */
     public abstract boolean isRecurring();
 
     /**
-     * Returns true both lessons clash.
+     * Returns true if both lessons clash.
      *
      * @param otherLesson The other lesson to be compared with.
      * @return True if and only if lessons clash.
@@ -100,7 +112,15 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isClashing(Lesson otherLesson);
 
     /**
-     * Check if both lessons have the same data fields.
+     * Checks if this lesson occurs on a given date.
+     *
+     * @param date The lesson date to check.
+     * @return True if this lesson
+     */
+    public abstract boolean hasLessonOnDate(Date date);
+
+    /**
+     * Checks if both lessons have the same data fields.
      * This defines a stronger notion of equality between two lessons.
      *
      * @param other The other object to compare.
@@ -118,10 +138,11 @@ public abstract class Lesson implements Comparable<Lesson> {
 
         Lesson otherLesson = (Lesson) other;
         return otherLesson.getDate().equals(getDate())
-            && otherLesson.getTimeRange().equals(getTimeRange())
-            && otherLesson.getSubject().equals(getSubject())
-            && otherLesson.getHomework().equals(getHomework())
-            && otherLesson.isRecurring() == isRecurring();
+                && otherLesson.getTimeRange().equals(getTimeRange())
+                && otherLesson.getSubject().equals(getSubject())
+                && otherLesson.getHomework().equals(getHomework())
+                && otherLesson.getCancelledDates().equals(getCancelledDates())
+                && otherLesson.isRecurring() == isRecurring();
     }
 
     @Override
@@ -145,6 +166,14 @@ public abstract class Lesson implements Comparable<Lesson> {
         if (!homework.isEmpty()) {
             builder.append("\nHomework: ");
             homework.forEach(builder::append);
+        }
+
+        List<Date> dates = new ArrayList<>(getCancelledDates());
+        Collections.sort(dates, Collections.reverseOrder()); // display dates from latest to earliest
+
+        if (!dates.isEmpty()) {
+            builder.append("\nCancelled Dates: ");
+            dates.forEach(date -> builder.append(date + ", "));
         }
         return builder.toString();
     }

@@ -1,5 +1,6 @@
 package seedu.address.model.lesson;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -15,8 +16,13 @@ public class RecurringLesson extends Lesson {
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework) {
-        super(date, timeRange, subject, homework);
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, Set<Date> cancelledDates) {
+        super(date, timeRange, subject, homework, cancelledDates);
+    }
+
+    @Override
+    public Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates) {
+        return new RecurringLesson(getDate(), getTimeRange(), getSubject(),getHomework(),  updatedCancelledDates);
     }
 
     /**
@@ -46,4 +52,23 @@ public class RecurringLesson extends Lesson {
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
     }
+
+    @Override
+    public boolean hasLessonOnDate(Date otherDate) {
+        Date startDate = getDate();
+        if (startDate.isAfter(otherDate)) {
+            return false; // other date is before lesson start date
+        }
+
+        if (!startDate.isSameDayOfWeek(otherDate)) {
+            return false; // not same day of week
+        }
+
+        if (getCancelledDates().contains(otherDate)) {
+            return false; // lesson has been cancelled on the date
+        }
+
+        return true;
+    }
+
 }

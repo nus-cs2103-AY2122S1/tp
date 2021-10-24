@@ -1,12 +1,14 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.AcadLevel;
@@ -99,5 +101,11 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
             .map(Homework::new)
             .collect(Collectors.toSet());
+    }
+
+    public static Set<Date> getCancelledDateSet(String... strings) {
+        return Arrays.stream(strings)
+                .map(Date::new)
+                .collect(Collectors.toSet());
     }
 }

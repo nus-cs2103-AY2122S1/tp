@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.RecurringLesson;
 
 public class LessonCard extends UiPart<Region> {
 
@@ -26,6 +27,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label time;
     @FXML
+    private Label cancelledDates;
+    @FXML
     private FlowPane homeworkList;
 
     /**
@@ -42,5 +45,11 @@ public class LessonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(homework -> homework.description))
                 .forEach(homework -> homeworkList.getChildren()
                         .add(new Label(homework + "\n")));
+        cancelledDates.setText("");
+        if (lesson.isRecurring()){
+            cancelledDates.setText("Cancelled Dates: " + String.join("," + lesson.getCancelledDates()));
+        } else if (lesson.getCancelledDates().size() > 0) {
+            cancelledDates.setText("Cancelled!");
+        }
     }
 }

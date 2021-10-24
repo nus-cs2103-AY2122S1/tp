@@ -85,6 +85,14 @@ public class Date implements Comparable<Date> {
         return getLocalDate().isBefore(LocalDate.now());
     }
 
+    public boolean isAfter(Date other) {
+        return localDate.isAfter(other.localDate);
+    }
+
+    public boolean isSameDayOfWeek(Date other) {
+        return localDate.getDayOfWeek().equals(other.getDayOfWeek());
+    }
+
     @Override
     public String toString() {
         return value;
