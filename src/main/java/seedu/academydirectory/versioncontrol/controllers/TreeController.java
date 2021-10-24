@@ -123,8 +123,4 @@ public class TreeController extends Controller<Tree> {
             Files.copy(vcFilepath, actualFilepath, REPLACE_EXISTING);
         }
     }
-
-    public void write(Tree tree) throws IOException {
-        treeStorageManager.write(tree.getHash(), tree);
-    }
 }

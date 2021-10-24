@@ -165,11 +165,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<String> retrieveHistory() {
-            return List.of("");
-        }
-
-        @Override
         public Commit revert(String fiveCharHash) throws IOException, ParseException {
             return Commit.NULL;
         }
@@ -177,6 +172,16 @@ public class AddCommandTest {
         @Override
         public List<VcObject> getStageArea() {
             return new ArrayList<>();
+        }
+
+        @Override
+        public Commit getHeadCommit() {
+            return null;
+        }
+
+        @Override
+        public Commit fetchCommitByLabel(String temp_latest) {
+            return null;
         }
     }
 

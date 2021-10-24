@@ -80,8 +80,4 @@ public class CommitController extends Controller<Commit> {
         Path filePath = matchingFiles[0].toPath();
         return commitStorageManager.read(String.valueOf(filePath.getFileName()));
     }
-
-    public void write(Commit commit) throws IOException {
-        commitStorageManager.write(commit.getHash(), commit);
-    }
 }

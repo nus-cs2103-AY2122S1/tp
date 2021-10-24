@@ -68,8 +68,4 @@ public class LabelController extends Controller<Label> {
         Path labelPath = matchingFiles[0].toPath();
         return labelStorageManager.read(String.valueOf(labelPath.getFileName()));
     }
-
-    public void write(Label label) throws IOException {
-        labelStorageManager.write(label.getName(), label);
-    }
 }

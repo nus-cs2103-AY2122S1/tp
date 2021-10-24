@@ -186,11 +186,6 @@ public class ModelManager implements VersionedModel {
     }
 
     @Override
-    public List<String> retrieveHistory() {
-        return versionControl.retrieveHistory();
-    }
-
-    @Override
     public Commit revert(String fiveCharHash) throws IOException {
         return versionControl.revert(fiveCharHash);
     }
@@ -198,5 +193,14 @@ public class ModelManager implements VersionedModel {
     @Override
     public List<VcObject> getStageArea() {
         return versionControl.getStageArea();
+    }
+
+    @Override
+    public Commit getHeadCommit() {
+        return versionControl.getHeadCommit();
+    }
+
+    public Commit fetchCommitByLabel(String labelName) {
+        return versionControl.fetchCommitByLabel(labelName);
     }
 }

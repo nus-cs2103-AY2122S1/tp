@@ -14,9 +14,11 @@ public interface VersionedModel extends Model {
      */
     boolean commit(String message);
 
-    List<String> retrieveHistory();
-
     Commit revert(String fiveCharHash) throws IOException, ParseException;
 
     List<VcObject> getStageArea();
+
+    Commit getHeadCommit();
+
+    Commit fetchCommitByLabel(String temp_latest);
 }

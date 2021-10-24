@@ -109,66 +109,11 @@ public class VersionControl {
         this.headCommit = commitController.createNewCommit(message, () -> this.blobTree, () -> parentCommit);
         this.headLabel = labelController.createNewLabel(headLabelString, headCommit);
 
-        // Move HEAD pointer
-        // moveHead(this.headCommit);
-
-        // Write VcObjects to disk
-        // treeController.write(this.blobTree);
-        // commitController.write(this.headCommit);
-
         this.resetStage();
         stage(this.headLabel);
         stage(this.headCommit);
         stage(this.blobTree);
         return true;
-    }
-
-    public List<String> retrieveHistory() {
-        Label latestLabel = labelController.fetchLabelByName(oldLabelString);
-
-        Commit headCommit = this.headCommit;
-        Commit latestCommit = latestLabel.getCommitSupplier().get();
-
-        Commit lca = headCommit.findLca(latestCommit);
-
-        Commit latestAncestor = latestCommit.getHighestAncestor(lca);
-        Commit headAncestor = headCommit.getHighestAncestor(lca);
-        assert !headAncestor.equals(latestAncestor); // Violates LCA definition
-
-        List<Commit> earlyHistory = lca.getHistory();
-        List<Commit> latestToEarly = latestCommit.getHistory(lca);
-        List<Commit> headToEarly = headCommit.getHistory(lca);
-
-        List<Commit> sortedBranch = Stream.concat(latestToEarly.stream(), headToEarly.stream())
-                .sorted(Comparator.comparing(Commit::getDate)).collect(Collectors.toList());
-        List<Commit> sortedEarlyHistory = earlyHistory.stream().sorted(Comparator.comparing(Commit::getDate))
-                .collect(Collectors.toList());
-
-        List<String> result = new ArrayList<>();
-        for (Commit commit : sortedEarlyHistory) {
-            result.add("| " + getPresentableHistory(commit, 1, ""));
-            result.add("* " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));
-        }
-
-        if (sortedBranch.size() == 0) {
-            Collections.reverse(result);
-            return result;
-        }
-
-        result.add("|/"); // Separates early history from branch
-
-        // Latest on left lane
-        for (Commit commit : sortedBranch) {
-            if (latestToEarly.contains(commit)) {
-                result.add("| | " + getPresentableHistory(commit, 1, ""));
-                result.add("* | " + getPresentableHistory(commit, 0, commit.equals(latestCommit) ? "(prior)" : ""));
-            } else {
-                result.add("| | " + getPresentableHistory(commit, 1, ""));
-                result.add("| * " + getPresentableHistory(commit, 0, commit.equals(headCommit) ? "(HEAD)" : ""));
-            }
-        }
-        Collections.reverse(result);
-        return result;
     }
 
     public Commit revert(String fiveCharHash) throws IOException {
@@ -183,8 +128,6 @@ public class VersionControl {
 
         Tree relevantTree = relevantCommit.getTreeSupplier().get();
         treeController.regenerateBlobs(relevantTree);
-        // labelController.write(latest);
-        // moveHead(relevantCommit);
         this.headCommit = relevantCommit;
 
         resetStage();
@@ -206,12 +149,20 @@ public class VersionControl {
         stageArea = new ArrayList<>();
     }
 
-    private String getPresentableHistory(Commit commit, int num, String label) {
-        assert num == 0 || num == 1;
-        if (num == 0) {
-            return commit.getHash().substring(0, 5) + " - " + DF.format(commit.getDate()) + " " + label;
-        } else {
-            return "\t\t" + commit.getMessage();
-        }
+    public Commit getHeadCommit() {
+        return headCommit;
     }
+
+    public Commit fetchCommitByLabel(String labelName) {
+        return labelController.fetchLabelByName(labelName).getCommitSupplier().get();
+    }
+
+//    private String getPresentableHistory(Commit commit, int num, String label) {
+//        assert num == 0 || num == 1;
+//        if (num == 0) {
+//            return commit.getHash().substring(0, 5) + " - " + DF.format(commit.getDate()) + " " + label;
+//        } else {
+//            return "\t\t" + commit.getMessage();
+//        }
+//    }
 }
