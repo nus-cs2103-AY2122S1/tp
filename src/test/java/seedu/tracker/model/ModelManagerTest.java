@@ -167,7 +167,7 @@ public class ModelManagerTest {
 
         // different filteredList -> returns false
         /*String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredModuleList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        modelManager.updateFilteredModuleList(new ModuleContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(moduleTracker, userPrefs)));*/
 
         // resets modelManager to initial state for upcoming tests

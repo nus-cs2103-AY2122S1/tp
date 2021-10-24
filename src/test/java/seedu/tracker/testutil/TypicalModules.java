@@ -21,7 +21,7 @@ public class TypicalModules {
             .build();
     public static final Module GEQ1000 = new ModuleBuilder().withCode("GEQ1000")
             .withTitle("Asking Questions")
-            .withDescription("introduces six dominant modes of questioning").build();
+            .withDescription("introduces six dominant modes of questioning").withTags("GE").build();
 
     public static final Module MA1521 = new ModuleBuilder().withCode("MA1521")
             .withTitle("Calculus")
