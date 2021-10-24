@@ -283,11 +283,7 @@ public class MainWindow extends UiPart<Stage> {
         if (dest != null) {
             String csvData = CDL.toString(data);
             FileUtils.writeStringToFile(dest, csvData, Charset.defaultCharset());
-            if (!downloadWindowSuccess.isShowing()) {
-                downloadWindowSuccess.show();
-            } else {
-                downloadWindowSuccess.focus();
-            }
+            showDownloadWindow(downloadWindowSuccess);
         }
     }
 
@@ -316,11 +312,20 @@ public class MainWindow extends UiPart<Stage> {
             File dest = userChooseDestination();
             writeToCsv(data, dest);
         } catch (IOException | JSONException e) {
-            if (!downloadWindowFailure.isShowing()) {
-                downloadWindowFailure.show();
-            } else {
-                downloadWindowFailure.focus();
-            }
+            showDownloadWindow(downloadWindowFailure);
+        }
+    }
+
+    /**
+     * Shows relevant download window.
+     *
+     * @param window Download window to be shown
+     */
+    private void showDownloadWindow(DownloadWindow window) {
+        if (!window.isShowing()) {
+            window.show();
+        } else {
+            window.focus();
         }
     }
 }
