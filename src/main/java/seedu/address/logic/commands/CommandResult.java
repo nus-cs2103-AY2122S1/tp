@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.summary.Summary;
 
@@ -31,6 +32,39 @@ public class CommandResult {
     private Person personToDisplay;
 
     private Summary summary;
+
+    private boolean isSorted;
+
+    private String sortBy;
+
+    public String getSortBy() {
+        return sortBy;
+    }
+
+    public boolean isShowSortedList() {
+        return isSorted;
+    }
+
+    public CommandResult(String feedbackToUser, boolean isSorted) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.display = false;
+        this.displaySummary = false;
+        this.isSorted = isSorted;
+        this.showCommandSummary = false;
+    }
+
+    public CommandResult(String feedbackToUser, String sortBy) {
+        this.feedbackToUser = requireNonNull(feedbackToUser);
+        this.showHelp = false;
+        this.exit = false;
+        this.display = false;
+        this.displaySummary = false;
+        this.isSorted = true;
+        this.sortBy = sortBy;
+        this.showCommandSummary = false;
+    }
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.

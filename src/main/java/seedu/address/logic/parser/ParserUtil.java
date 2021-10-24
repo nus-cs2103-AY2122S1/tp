@@ -81,6 +81,12 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    public static String parseSortCommand(String cmd) throws ParseException {
+        requireNonNull(cmd);
+        String trimmedCmd = cmd.trim();
+        return trimmedCmd;
+    }
+
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.

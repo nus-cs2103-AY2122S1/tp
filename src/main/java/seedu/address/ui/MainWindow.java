@@ -210,6 +210,12 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (commandResult.isShowSortedList()) {
+                personListPanel.sortDisplay(commandResult.getSortBy());
+            } else {
+                personListPanel.resetDisplay();
+            }
+
             if (commandResult.isShowCommandSummary()) {
                 handleCommandSummary();
             }

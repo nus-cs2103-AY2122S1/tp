@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -24,6 +28,8 @@ public class PersonListPanel extends UiPart<Region> {
 
     private SelectedPersonCard selected = new SelectedPersonCard();
 
+    private ObservableList<Person> personList;
+
     @FXML
     private ListView<Person> personListView;
 
@@ -37,6 +43,7 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList, Summary summary) {
         super(FXML);
+        this.personList = personList;
         selected.updateSummary(summary);
         setSelectedPersonPanel();
         selectedPersonPanelPlaceholder.setContent(selected.getRoot());
@@ -69,6 +76,25 @@ public class PersonListPanel extends UiPart<Region> {
     public void handleDisplay(Summary summary) {
         selected.updateSummary(summary);
         selected.setSummary();
+    }
+
+    public void resetDisplay() {
+        personListView.setItems(personList);
+        personListView.setCellFactory(listView -> new PersonListViewCell());
+    }
+
+    public void sortDisplay(String sortBy) {
+        Comparator<Person> compare = null;
+        if (sortBy == "name") {
+            compare = Comparator.comparing(Person::getName);
+        } else if (sortBy == "rating") {
+            compare = Comparator.comparing(Person::getRating).reversed();
+        }
+        List<Person> modifiableList = new ArrayList<>(personList);
+        modifiableList.sort(compare);
+        personListView.setItems(FXCollections.observableList(modifiableList).filtered(unused -> true));
+        personListView.setCellFactory(listView -> new PersonListViewCell());
+
     }
 
     public void setSelectedPersonPanel() {
