@@ -106,7 +106,6 @@ public class ShowCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_ASSESSMENT);
         }
 
-        matchedAssessment.setStatistics();
         Info info = new Info(matchedAssessment);
         AssessmentStatistics statistics = matchedAssessment.getStatistics();
         return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
