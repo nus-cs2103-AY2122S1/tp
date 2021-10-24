@@ -12,10 +12,6 @@ import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_F
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalIndexes.INDEX_FIRST_ANIME;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.anilist.logic.commands.AbortClearCommand;
@@ -32,7 +28,6 @@ import seedu.anilist.logic.commands.HelpCommand;
 import seedu.anilist.logic.commands.ListCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.testutil.AnimeUtil;
 import seedu.anilist.testutil.GenresDescriptorBuilder;
@@ -69,10 +64,8 @@ public class AnimeListParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        String input = FindCommand.COMMAND_WORD + " n/foo n/bar g/baz";
+        assertTrue(parser.parseCommand(input) instanceof FindCommand);
     }
 
     @Test

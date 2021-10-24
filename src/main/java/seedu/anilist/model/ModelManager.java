@@ -24,6 +24,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Anime> filteredAnime;
     private final TabOption currentTab;
+    private Predicate<Anime> tabOptionFilter;
 
     /**
      * Initializes a ModelManager with the given animeList and userPrefs.
@@ -38,6 +39,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredAnime = new FilteredList<>(this.animeList.getAnimeList());
         currentTab = new TabOption("all");
+        tabOptionFilter = PREDICATE_SHOW_ALL_ANIME;
     }
 
     public ModelManager() {
@@ -151,6 +153,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredAnimeList(Predicate<Anime> predicate) {
         requireNonNull(predicate);
+        filteredAnime.setPredicate(predicate.and(tabOptionFilter));
+    }
+
+    @Override
+    public void updateTabOptionsAnimeList(Predicate<Anime> predicate) {
+        requireNonNull(predicate);
+        tabOptionFilter = predicate;
         filteredAnime.setPredicate(predicate);
     }
 
