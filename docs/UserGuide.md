@@ -94,7 +94,7 @@ Examples:
 * `friend --edit Draco --name Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
 
 Snapshot: 
-![img.png](images/ui-snapshots/friend-edit.png)
+![Ui](images/ui-snapshots/friend-edit.png)
 <br><ins>gitGud after editing an existing friend's name</ins> 
 
 #### Deleting a friend: `friend --delete`
