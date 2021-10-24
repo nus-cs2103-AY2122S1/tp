@@ -14,9 +14,9 @@ Staff’d helps food & beverage managers manage details and schedules of their s
 
 ### Firing up Staff'd
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have _Java 11_ or above installed in your Computer.
 
-1. Download the latest __staffd.jar__ from [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/releases).
+1. Download the latest _staffd.jar_ from [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Staff’d.
 
