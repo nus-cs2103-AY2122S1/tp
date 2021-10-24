@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.*;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_PASSWORD;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PASSWORD;
+import static seedu.address.commons.core.Messages.MESSAGE_TOO_MANY_FLAGS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 
@@ -40,19 +42,24 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
         String oldPassword = oldInput.get();
         String newPassword = newInput.get();
 
-        if (validatePassword(oldPassword) && validatePassword(newPassword)) {
+        if (passwordValidation(oldPassword) && passwordValidation(newPassword)) {
             return new PasswordCommand(oldPassword, newPassword);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_PASSWORD + PasswordCommand.CORRECT_PASSWORD_FORMAT,
+                    PasswordCommand.MESSAGE_USAGE));
         }
-        throw new ParseException(String.format(MESSAGE_INVALID_PASSWORD + PasswordCommand.CORRECT_PASSWORD_FORMAT
-                , PasswordCommand.MESSAGE_USAGE));
+
     }
 
-    private boolean validatePassword(String password) {
-        return passwordValidation(password);
-    }
-
+    /**
+     * Checks if the given password satisfies the requirements.
+     * Returns true if the password meets the requirements, false otherwise.
+     *
+     * @param password the input password from user.
+     * @return Boolean value of the check result.
+     */
     public static boolean passwordValidation(String password) {
-        if(password.length()>=PasswordCommand.MIN_PASSWORD_LENGTH) {
+        if (password.length() >= PasswordCommand.MIN_PASSWORD_LENGTH) {
             Pattern letter = Pattern.compile("[a-zA-z]");
             Pattern digit = Pattern.compile("[0-9]");
             Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");

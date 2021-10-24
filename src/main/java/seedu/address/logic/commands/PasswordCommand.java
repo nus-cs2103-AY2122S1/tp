@@ -11,8 +11,8 @@ public class PasswordCommand extends Command {
 
     public static final int MIN_PASSWORD_LENGTH = 8;
 
-    public static final String CORRECT_PASSWORD_FORMAT
-            = "Password should contain LETTERS, SPECIAL CHARACTERS and NUMBERS "
+    public static final String CORRECT_PASSWORD_FORMAT =
+            "Password should contain LETTERS, SPECIAL CHARACTERS and NUMBERS "
             + "at least length of "
             + MIN_PASSWORD_LENGTH;
 
