@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
@@ -21,7 +22,7 @@ public class Student {
 
     // Data fields
     private final GroupName groupName;
-    private final UniqueAssessmentList assessments = new UniqueAssessmentList();
+    private final UniqueAssessmentList assessments;
 
     /**
      * Every field must be present and not null.
@@ -32,6 +33,7 @@ public class Student {
         this.telegramHandle = telegramHandle;
         this.email = email;
         this.groupName = groupName;
+        this.assessments = new UniqueAssessmentList();
     }
 
     public Name getName() {
@@ -50,8 +52,8 @@ public class Student {
         return groupName;
     }
 
-    public UniqueAssessmentList getAssessments() {
-        return assessments;
+    public ObservableList<Assessment> getAssessmentList() {
+        return assessments.asUnmodifiableObservableList();
     }
 
     public boolean hasAssessment(Assessment assessment) {

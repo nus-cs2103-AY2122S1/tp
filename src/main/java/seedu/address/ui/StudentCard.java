@@ -49,7 +49,7 @@ public class StudentCard extends UiPart<Region> {
         groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
-        assessments.setText(student.getAssessments().toString());
+        assessments.setText(student.getAssessmentList().toString());
     }
 
     @Override
