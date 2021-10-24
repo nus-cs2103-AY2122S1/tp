@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.modulink.commons.exceptions.IllegalValueException;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
@@ -29,6 +30,7 @@ class JsonAdaptedPerson {
     private final String id;
     private final String phone;
     private final String email;
+    private final String gitHubUsername;
     private final boolean isFavourite;
     private final List<JsonAdaptedTag> modules = new ArrayList<>();
     private final boolean isMyProfile;
@@ -38,13 +40,15 @@ class JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name,
-                             @JsonProperty("id") String id, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("id") String id, @JsonProperty("phone") String phone,
+            @JsonProperty("email") String email, @JsonProperty("gitHubUsername") String gitHubUsername,
+            @JsonProperty("isFavourite") boolean isFavourite,
             @JsonProperty("modules") List<JsonAdaptedTag> modules, @JsonProperty("isMyProfile") boolean isMyProfile) {
         this.name = name;
         this.id = id;
         this.phone = phone;
         this.email = email;
+        this.gitHubUsername = gitHubUsername;
         this.isFavourite = isFavourite;
         if (modules != null) {
             this.modules.addAll(modules);
@@ -60,6 +64,7 @@ class JsonAdaptedPerson {
         id = source.getStudentId().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        gitHubUsername = source.getGithubUsername().value;
         isFavourite = source.getIsFavourite();
         modules.addAll(source.getMods().stream()
                 .map(JsonAdaptedTag::new)
@@ -111,8 +116,14 @@ class JsonAdaptedPerson {
         }
         final Email modelEmail = new Email(email);
 
+        if (!GitHubUsername.isValidUsername(gitHubUsername)) {
+            throw new IllegalValueException(GitHubUsername.MESSAGE_CONSTRAINTS);
+        }
+        final GitHubUsername modelUsername = new GitHubUsername(gitHubUsername);
+
         final Set<Mod> modelMods = new HashSet<>(personMods);
-        return new Person(modelName, modelId, modelPhone, modelEmail, this.isFavourite, modelMods, this.isMyProfile);
+        return new Person(modelName, modelId, modelPhone, modelEmail,
+                modelUsername, this.isFavourite, modelMods, this.isMyProfile);
     }
 
 }

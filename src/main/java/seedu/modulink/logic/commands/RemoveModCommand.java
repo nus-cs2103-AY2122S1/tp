@@ -12,6 +12,7 @@ import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.logic.commands.exceptions.CommandException;
 import seedu.modulink.model.Model;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
@@ -74,6 +75,8 @@ public class RemoveModCommand extends Command {
         StudentId updatedId = editPersonDescriptor.getStudentId().orElse(personToEdit.getStudentId());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        GitHubUsername updatedGitHubUsername = editPersonDescriptor.getGitHubUsername()
+                .orElse(personToEdit.getGithubUsername());
         Set<Mod> updatedMods = new HashSet<>(Collections.emptySet());
 
         for (Mod mod : personToEdit.getMods()) {
@@ -82,7 +85,8 @@ public class RemoveModCommand extends Command {
             }
         }
 
-        return new Person(updatedName, updatedId, updatedPhone, updatedEmail, false, updatedMods, true);
+        return new Person(updatedName, updatedId, updatedPhone, updatedEmail,
+                updatedGitHubUsername, false, updatedMods, true);
     }
 
     @Override

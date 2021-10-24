@@ -3,7 +3,11 @@ package seedu.modulink.logic.parser;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_GITHUB_USERNAME_DESC;
+import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -11,6 +15,8 @@ import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.modulink.logic.commands.CommandTestUtil.VALID_GITHUB_USERNAME_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
@@ -22,8 +28,10 @@ import org.junit.jupiter.api.Test;
 import seedu.modulink.logic.commands.EditCommand;
 import seedu.modulink.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Phone;
+import seedu.modulink.model.person.StudentId;
 import seedu.modulink.testutil.EditPersonDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -51,8 +59,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(parser, INVALID_ID_DESC, StudentId.MESSAGE_CONSTRAINTS); // invalid student ID
         assertParseFailure(parser, INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, INVALID_GITHUB_USERNAME_DESC, GitHubUsername.MESSAGE_CONSTRAINTS);
 
         // invalid phone followed by valid email
         assertParseFailure(parser, INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
@@ -97,6 +107,12 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // student ID
+        userInput = ID_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withStudentId(VALID_ID_AMY).build();
+        expectedCommand = new EditCommand(descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // phone
         userInput = PHONE_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_AMY).build();
@@ -106,6 +122,12 @@ public class EditCommandParserTest {
         // email
         userInput = EMAIL_DESC_AMY;
         descriptor = new EditPersonDescriptorBuilder().withEmail(VALID_EMAIL_AMY).build();
+        expectedCommand = new EditCommand(descriptor);
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // GitHub username
+        userInput = GITHUB_USERNAME_DESC_AMY;
+        descriptor = new EditPersonDescriptorBuilder().withGitHubUsername(VALID_GITHUB_USERNAME_AMY).build();
         expectedCommand = new EditCommand(descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

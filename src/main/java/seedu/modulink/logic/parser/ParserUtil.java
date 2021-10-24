@@ -10,6 +10,7 @@ import seedu.modulink.commons.core.index.Index;
 import seedu.modulink.commons.util.StringUtil;
 import seedu.modulink.logic.parser.exceptions.ParseException;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
@@ -83,6 +84,24 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String gitHubUsername} into a {@code GitHubUsername}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gitHubUsername} is invalid.
+     */
+    public static GitHubUsername parseGithubUsername(String gitHubUsername) throws ParseException {
+        if (gitHubUsername != null) {
+            String trimmedUsername = gitHubUsername.trim();
+            if (!GitHubUsername.isValidUsername(gitHubUsername)) {
+                throw new ParseException(GitHubUsername.MESSAGE_CONSTRAINTS);
+            }
+            return new GitHubUsername(trimmedUsername);
+        } else {
+            return new GitHubUsername(null);
+        }
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -110,18 +129,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String StudentId} into a {@code StudentId}.
+     * Parses a {@code String studentId} into a {@code StudentId}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code StudentId} is invalid.
      */
     public static StudentId parseStudentId(String studentId) throws ParseException {
         requireNonNull(studentId);
-        String trimmedID = studentId.trim();
+        String trimmedId = studentId.trim();
         if (!StudentId.isValidId(studentId)) {
             throw new ParseException(StudentId.MESSAGE_CONSTRAINTS);
         }
-        return new StudentId(trimmedID);
+        return new StudentId(trimmedId);
     }
 
     /**

@@ -45,6 +45,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label gitHubUsername;
+    @FXML
     private ImageView fav;
     @FXML
     private FlowPane mods;
@@ -63,6 +65,11 @@ public class PersonCard extends UiPart<Region> {
         studentId.setText(person.getStudentId().value);
         phone.setText(person.getPhone().value);
         email.setText(person.getEmail().value);
+        if (!person.getGithubUsername().isNull()) {
+            gitHubUsername.setText("GitHub Account: www.github.com/" + person.getGithubUsername().value);
+        } else {
+            gitHubUsername.setText("No GitHub Account!");
+        }
         person.getMods().stream()
                 .sorted(Comparator.comparing(mod -> mod.modName))
                 .forEach(mod -> {

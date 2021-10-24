@@ -2,6 +2,7 @@ package seedu.modulink.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
@@ -24,12 +25,14 @@ public class CreateCommand extends Command {
             + PREFIX_ID + "STUDENT ID "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
+            + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
             + "[" + PREFIX_MOD + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_ID + "A1234567Z "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_GITHUB_USERNAME + "johnd "
             + PREFIX_MOD + "CS2100 "
             + PREFIX_MOD + "CS2101";
 

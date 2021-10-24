@@ -3,9 +3,12 @@ package seedu.modulink.logic.parser;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.GITHUB_USERNAME_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.ID_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_GITHUB_USERNAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
@@ -33,6 +36,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.model.person.Email;
+import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
@@ -49,33 +53,38 @@ public class CreateCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple student IDs - last student ID accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY
-                + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_AMY + EMAIL_DESC_BOB
+                + EMAIL_DESC_AMY + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
+                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
+
+        // multiple GitHub usernames - last username accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_AMY + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_CS2100, VALID_TAG_CS2103T)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + TAG_DESC_CS2103T
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TAG_DESC_CS2103T
                 + TAG_DESC_CS2100, new CreateCommand(expectedPersonMultipleTags));
     }
 
@@ -84,7 +93,7 @@ public class CreateCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY,
+                + EMAIL_DESC_AMY + GITHUB_USERNAME_DESC_AMY,
                 new CreateCommand(expectedPerson));
     }
 
@@ -120,23 +129,28 @@ public class CreateCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + ID_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2103T + TAG_DESC_CS2100, Name.MESSAGE_CONSTRAINTS);
 
         // invalid student ID
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_ID_DESC
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2103T + TAG_DESC_CS2100, StudentId.MESSAGE_CONSTRAINTS);
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + INVALID_PHONE_DESC + EMAIL_DESC_BOB
+                + INVALID_PHONE_DESC + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2103T + TAG_DESC_CS2100, Phone.MESSAGE_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_BOB + INVALID_EMAIL_DESC
+                + PHONE_DESC_BOB + INVALID_EMAIL_DESC + GITHUB_USERNAME_DESC_BOB
                 + TAG_DESC_CS2103T + TAG_DESC_CS2100, Email.MESSAGE_CONSTRAINTS);
+
+        // invalid GitHub username
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_GITHUB_USERNAME_DESC
+                + TAG_DESC_CS2103T + TAG_DESC_CS2100, GitHubUsername.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

@@ -3,6 +3,7 @@ package seedu.modulink.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.modulink.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_GITHUB_USERNAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -31,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
-                        PREFIX_EMAIL);
+                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME);
 
         String trimmedArgs = args.trim();
         String preamble = argMultimap.getPreamble();
@@ -52,6 +53,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
+        }
+
+        if (argMultimap.getValue(PREFIX_GITHUB_USERNAME).isPresent()) {
+            editPersonDescriptor.setGitHubUsername(ParserUtil.parseGithubUsername
+                    (argMultimap.getValue(PREFIX_GITHUB_USERNAME).get()));
         }
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
