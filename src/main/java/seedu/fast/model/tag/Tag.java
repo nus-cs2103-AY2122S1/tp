@@ -12,8 +12,8 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric "
             + "and not more than 20 characters long,\nor follow the specified"
-            + "format for a PriorityTag (\"pr/\" followed by low, med or high)\nor a InvestmentPlanTag " +
-            "(\"ip/\" followed by health, invest, life, motor, property, save or travel)";
+            + "format for a PriorityTag (\"pr/\" followed by low, med or high)\nor a InvestmentPlanTag "
+            + "(\"ip/\" followed by health, invest, life, motor, property, save or travel)";
 
 
     public static final String MESSAGE_USAGE = "tag: label a client with a keyword or term. \n"
