@@ -1,7 +1,7 @@
 package seedu.anilist.testutil;
 
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_AKIRA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 
@@ -16,7 +16,7 @@ import seedu.anilist.model.anime.Anime;
  * A utility class containing a list of {@code Anime} objects to be used in tests.
  */
 public class TypicalAnimes {
-    public static final String FIRST_ANIME_GENRE = "action";
+    public static final String FIRST_ANIME_GENRE = "fantasy";
     public static final Anime AOT = new AnimeBuilder()
             .withName("Attack on Titan: The Final Season")
             .withEpisode("2")
@@ -59,7 +59,7 @@ public class TypicalAnimes {
     public static final Anime AKIRA = new AnimeBuilder().withName(VALID_NAME_AKIRA)
             .withGenres(VALID_GENRE_SCIENCE_FICTION).build();
     public static final Anime BNHA = new AnimeBuilder().withName(VALID_NAME_BNHA)
-            .withGenres(VALID_GENRE_SHOUNEN, VALID_GENRE_SCIENCE_FICTION).build();
+            .withGenres(VALID_GENRE_ACTION, VALID_GENRE_SCIENCE_FICTION).build();
 
     public static final String KEYWORD_MATCHING_HUNTER = "Hunter"; // A keyword that matches HUNTER
 

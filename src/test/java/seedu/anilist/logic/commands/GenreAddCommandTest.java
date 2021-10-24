@@ -2,9 +2,9 @@ package seedu.anilist.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.DESC_GENRE_SHOUNEN;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.anilist.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.anilist.logic.commands.CommandTestUtil.showAnimeAtIndex;
@@ -35,9 +35,9 @@ public class GenreAddCommandTest {
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
-                .withGenres(ANIME_ONE_GENRE, VALID_GENRE_SHOUNEN)
+                .withGenres(ANIME_ONE_GENRE, VALID_GENRE_ACTION)
                 .build();
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
 
 
         GenreAddCommand genreAddCommand = new GenreAddCommand(INDEX_FIRST_ANIME, descriptor);
@@ -72,10 +72,10 @@ public class GenreAddCommandTest {
     @Test
     public void execute_unfilteredListValidGenreWithDuplicateGenre_success() {
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
-                .withGenres(ANIME_ONE_GENRE, VALID_GENRE_SHOUNEN)
+                .withGenres(ANIME_ONE_GENRE, VALID_GENRE_ACTION)
                 .build();
         GenreAddCommand.GenresDescriptor descriptor = new GenresDescriptorBuilder()
-                .withGenre(ANIME_ONE_GENRE, VALID_GENRE_SHOUNEN)
+                .withGenre(ANIME_ONE_GENRE, VALID_GENRE_ACTION)
                 .build();
 
         GenreAddCommand genreAddCommand = new GenreAddCommand(INDEX_FIRST_ANIME, descriptor);
@@ -93,9 +93,9 @@ public class GenreAddCommandTest {
         showAnimeAtIndex(model, INDEX_FIRST_ANIME);
 
         Anime updatedAnime = new AnimeBuilder(model.getFilteredAnimeList().get(INDEX_FIRST_ANIME.getZeroBased()))
-                .withGenres(ANIME_ONE_GENRE, VALID_GENRE_SHOUNEN)
+                .withGenres(ANIME_ONE_GENRE, VALID_GENRE_ACTION)
                 .build();
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
 
 
         GenreAddCommand genreAddCommand = new GenreAddCommand(INDEX_FIRST_ANIME, descriptor);
@@ -111,7 +111,7 @@ public class GenreAddCommandTest {
     @Test
     public void execute_invalidAnimeIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredAnimeList().size() + 1);
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
         GenreAddCommand genreAddCommand = new GenreAddCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(genreAddCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
@@ -127,7 +127,7 @@ public class GenreAddCommandTest {
         Index outOfBoundIndex = INDEX_SECOND_ANIME;
         // ensures that outOfBoundIndex is still in bounds of anime list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAnimeList().getAnimeList().size());
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
         GenreAddCommand genreAddCommand = new GenreAddCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(genreAddCommand, model, Messages.MESSAGE_INVALID_ANIME_DISPLAYED_INDEX);
@@ -135,7 +135,7 @@ public class GenreAddCommandTest {
 
     @Test
     public void equals() {
-        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_SHOUNEN;
+        GenreAddCommand.GenresDescriptor descriptor = DESC_GENRE_ACTION;
         final GenreAddCommand standardCommand = new GenreAddCommand(INDEX_FIRST_ANIME, descriptor);
 
         // same values -> returns true
