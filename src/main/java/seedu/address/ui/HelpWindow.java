@@ -40,6 +40,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Description;
 import seedu.address.model.person.Email;
@@ -223,9 +224,10 @@ public class HelpWindow extends AnchorPane {
                 new EditCommand(Index.fromZeroBased(0), descriptor), new FindCommand(null),
                 new ListCommand(), new ExitCommand(), new SortCommand(false),
                 new AddTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-
                 new DeleteTaskCommand(Index.fromZeroBased(0), new ArrayList<>()),
-                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), taskDescriptor)
+                new EditTaskCommand(Index.fromZeroBased(0), Index.fromZeroBased(0), taskDescriptor),
+                new DoneCommand(Index.fromZeroBased(0), new ArrayList<>()),
+                new UndoCommand(Index.fromZeroBased(0), new ArrayList<>())
         );
 
         tableView.setItems(data);
@@ -257,6 +259,7 @@ public class HelpWindow extends AnchorPane {
         commandTable.put(DeleteTaskCommand.COMMAND_WORD, this::handleDelTask);
         commandTable.put(EditTaskCommand.COMMAND_WORD, this::handleEditTask);
         commandTable.put(DoneCommand.COMMAND_WORD, this::handleDoneTask);
+        commandTable.put(UndoCommand.COMMAND_WORD, this::handleUndoTask);
         commandTable.put("close", this::handleCloseWindow);
     }
 
@@ -352,6 +355,12 @@ public class HelpWindow extends AnchorPane {
         additionalInfo.setText("Format: donetask INDEX -ti TASK_INDEX\n"
                 + "Marks task(s) indicated by the TASK_INDEX "
                 + "of person indicated by INDEX as done.");
+    }
+
+    private void handleUndoTask() {
+        additionalInfo.setText("Format: undotask INDEX -ti TASK_INDEX\n"
+                + "Marks task(s) indicated by the TASK_INDEX "
+                + "of person indicated by INDEX as not done.");
     }
 
     private void handleCloseWindow() {

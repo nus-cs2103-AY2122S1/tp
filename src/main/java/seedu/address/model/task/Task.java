@@ -48,6 +48,10 @@ public class Task {
         isDone = true;
     }
 
+    public void setNotDone() {
+        isDone = false;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

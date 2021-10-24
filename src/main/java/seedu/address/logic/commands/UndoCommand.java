@@ -18,21 +18,21 @@ import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
 /**
- * Marks task(s) identified using its displayed index in the task list as done.
+ * Marks task(s) identified using its displayed index in the task list as not done.
  */
-public class DoneCommand extends Command {
+public class UndoCommand extends Command{
 
-    public static final String COMMAND_WORD = "donetask";
-    public static final String MESSAGE_SUCCESS = "Marked %1$d %2$s of %3$s as done.";
+    public static final String COMMAND_WORD = "undotask";
+    public static final String MESSAGE_SUCCESS = "Marked %1$d %2$s of %3$s as not done.";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Marks the task, specified by the TASKINDEX, from person"
-            + "identified by the index number used in the displayed person list as done.\n"
+            + "identified by the index number used in the displayed person list as not done.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + PREFIX_TASK_INDEX + "TaskIndex\n"
             + "Example: " + COMMAND_WORD + " 1 " + PREFIX_TASK_INDEX + " 2";
 
     public static final String DESCRIPTION = "Marks the task(s), specified by the TASK_INDEX, "
-            + "from person specified by the INDEX as done";
+            + "from person specified by the INDEX as not done";
 
     private final Index targetPersonIndex;
     private final List<Index> targetTaskIndexes;
@@ -43,7 +43,7 @@ public class DoneCommand extends Command {
      * @param targetPersonIndex The Index of the target person.
      * @param targetTaskIndexes The Index of the target Task that belongs to target person.
      */
-    public DoneCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
+    public UndoCommand(Index targetPersonIndex, List<Index> targetTaskIndexes) {
         requireAllNonNull(targetPersonIndex, targetTaskIndexes);
         this.targetPersonIndex = targetPersonIndex;
         this.targetTaskIndexes = targetTaskIndexes;
@@ -77,7 +77,7 @@ public class DoneCommand extends Command {
 
         for (Index targetTaskIndex : copyOfIndexList) {
             Task taskDone = tasks.get(targetTaskIndex.getZeroBased());
-            taskDone.setDone();
+            taskDone.setNotDone();
         }
 
         Person editedPerson = new Person(
@@ -111,9 +111,9 @@ public class DoneCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DoneCommand // instanceof handles nulls
-                && targetPersonIndex.equals(((DoneCommand) other).targetPersonIndex)
-                && targetTaskIndexes.equals(((DoneCommand) other).targetTaskIndexes)); // state check
+                || (other instanceof UndoCommand // instanceof handles nulls
+                && targetPersonIndex.equals(((UndoCommand) other).targetPersonIndex)
+                && targetTaskIndexes.equals(((UndoCommand) other).targetTaskIndexes)); // state check
     }
 
 }

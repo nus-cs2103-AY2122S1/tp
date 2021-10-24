@@ -8,19 +8,19 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DoneCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DoneCommand object
+ * Parses input arguments and creates a new Undo object
  */
-public class DoneCommandParser {
+public class UndoCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the DoneCommand
-     * and returns a DoneCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteTaskCommand
+     * and returns a UndoCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DoneCommand parse(String args) throws ParseException {
+    public UndoCommand parse(String args) throws ParseException {
         try {
             ArgumentMultimap argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX);
@@ -30,10 +30,10 @@ public class DoneCommandParser {
             List<Index> taskIndex = new ArrayList<>();
             taskIndex.addAll(taskIndexSet);
 
-            return new DoneCommand(index, taskIndex);
+            return new UndoCommand(index, taskIndex);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE), pe);
         }
     }
 }
