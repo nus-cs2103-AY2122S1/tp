@@ -9,12 +9,15 @@ import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.AddStudentCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
+import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
+
+import java.util.ArrayList;
 
 
 /**
@@ -49,10 +52,11 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Phone parentPhone = ParserUtil.parsePhone(
                 argMultimap.getValue(PREFIX_PARENT_PHONE).orElse(""));
         ProgressList progressList = new ProgressList();
+        Lessons lessons = new Lessons(new ArrayList<>());
         PaymentStatus paymentStatus = new PaymentStatus(false);
 
         Student student = new Student(studentName, studentPhone, parentName, parentPhone,
-                progressList, paymentStatus);
+                progressList, lessons, paymentStatus);
 
         return new AddStudentCommand(student);
     }

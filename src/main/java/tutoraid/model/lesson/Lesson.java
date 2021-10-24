@@ -1,5 +1,7 @@
 package tutoraid.model.lesson;
 
+import tutoraid.model.student.Student;
+
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
@@ -52,6 +54,34 @@ public class Lesson {
     }
 
     /**
+     * Checks if a student is in this lesson.
+     *
+     * @param student student to be checked
+     * @return true if the student is in this lesson, false otherwise
+     */
+    public boolean containsStudent(Student student) {
+        return students.containsStudent(student);
+    }
+
+    /**
+     * Adds a student to this lesson.
+     *
+     * @param student student to be added
+     */
+    public void addStudent(Student student) {
+        students.addStudent(student);
+    }
+
+    /**
+     * Removes a student from this lesson.
+     *
+     * @param student student to be removed
+     */
+    public void removeStudent(Student student) {
+        students.removeStudent(student);
+    }
+
+    /**
      * Returns true if both lessons have the same name.
      * This defines a weaker notion of equality between two lessons.
      */
@@ -62,6 +92,15 @@ public class Lesson {
 
         return otherLesson != null
                 && otherLesson.getLessonName().equals(this.getLessonName());
+    }
+
+    /**
+     * Returns the name of the lesson in a string form
+     *
+     * @return The name of the lesson in a String
+     */
+    public String toNameString() {
+        return this.getLessonName().toString();
     }
 
     /**

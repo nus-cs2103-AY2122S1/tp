@@ -3,6 +3,7 @@ package tutoraid.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +11,7 @@ import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.Phone;
 import tutoraid.testutil.Assert;
+import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class JsonAdaptedStudentTest {
@@ -22,6 +24,9 @@ public class JsonAdaptedStudentTest {
     private static final String VALID_PARENT_PHONE = TypicalStudents.BENSON.getParentPhone().toString();
     private static final ArrayList<String> VALID_PROGRESS_LIST =
             TypicalStudents.BENSON.getProgressList().getAllProgressAsStringArrayList();
+    private static final ArrayList<JsonAdaptedLesson> VALID_STUDENT_LESSONS =
+            (ArrayList<JsonAdaptedLesson>) TypicalStudents.AMY.getLessons().lessons.stream()
+                    .map(JsonAdaptedLesson::new).collect(Collectors.toList());
     private static final boolean VALID_PAYMENT_STATUS = TypicalStudents.BENSON.getPaymentStatus().hasPaid;
 
     @Test
@@ -34,7 +39,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_invalidStudentName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(INVALID_NAME, VALID_STUDENT_PHONE,
                         VALID_PARENT_NAME, VALID_PARENT_PHONE,
-                        VALID_PROGRESS_LIST, VALID_PAYMENT_STATUS);
+                        VALID_PROGRESS_LIST, VALID_STUDENT_LESSONS, VALID_PAYMENT_STATUS);
 
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
@@ -44,7 +49,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullStudentName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(null, VALID_STUDENT_PHONE,
                 VALID_PARENT_NAME, VALID_PARENT_PHONE,
-                VALID_PROGRESS_LIST, VALID_PAYMENT_STATUS);
+                VALID_PROGRESS_LIST, VALID_STUDENT_LESSONS, VALID_PAYMENT_STATUS);
 
         String expectedMessage = String.format(
                 JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
@@ -55,7 +60,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_invalidStudentPhone_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_STUDENT_NAME, INVALID_PHONE,
                 VALID_PARENT_NAME, VALID_PARENT_PHONE,
-                VALID_PROGRESS_LIST, VALID_PAYMENT_STATUS);
+                VALID_PROGRESS_LIST, VALID_STUDENT_LESSONS, VALID_PAYMENT_STATUS);
 
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
@@ -65,7 +70,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_invalidParentName_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_STUDENT_NAME, VALID_STUDENT_PHONE,
                 INVALID_NAME, VALID_PARENT_PHONE,
-                VALID_PROGRESS_LIST, VALID_PAYMENT_STATUS);
+                VALID_PROGRESS_LIST, VALID_STUDENT_LESSONS, VALID_PAYMENT_STATUS);
         String expectedMessage = Name.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }
@@ -74,7 +79,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_invalidParentPhone_throwsIllegalValueException() {
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_STUDENT_NAME, INVALID_PHONE,
                 VALID_PARENT_NAME, INVALID_PHONE,
-                VALID_PROGRESS_LIST, VALID_PAYMENT_STATUS);
+                VALID_PROGRESS_LIST, VALID_STUDENT_LESSONS, VALID_PAYMENT_STATUS);
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
     }

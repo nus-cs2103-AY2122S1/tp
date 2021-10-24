@@ -6,6 +6,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutoraid.commons.exceptions.IllegalValueException;
+import tutoraid.model.lesson.Lesson;
+import tutoraid.model.lesson.Students;
+import tutoraid.model.student.Lessons;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
@@ -27,6 +30,7 @@ class JsonAdaptedStudent {
     private final String parentName;
     private final String parentPhone;
     private final ArrayList<String> progressList;
+    private final ArrayList<JsonAdaptedLesson> lessons;
     private final boolean hasPaid;
 
     /**
@@ -37,6 +41,7 @@ class JsonAdaptedStudent {
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
             @JsonProperty("progressList") ArrayList<String> progressList,
+            @JsonProperty("lessons") ArrayList<JsonAdaptedLesson> lessons,
             @JsonProperty("paymentStatus") boolean hasPaid) {
 
         this.studentName = studentName;
@@ -44,6 +49,7 @@ class JsonAdaptedStudent {
         this.parentName = parentName;
         this.parentPhone = parentPhone;
         this.progressList = progressList;
+        this.lessons = lessons;
         this.hasPaid = hasPaid;
     }
 
@@ -56,6 +62,11 @@ class JsonAdaptedStudent {
         parentName = source.getParentName().fullName;
         parentPhone = source.getParentPhone().value;
         progressList = source.getProgressList().getAllProgressAsStringArrayList();
+        ArrayList<JsonAdaptedLesson> jsonAdaptedLessons = new ArrayList<>();
+        for (Lesson lesson : source.getLessons().lessons) {
+            jsonAdaptedLessons.add(new JsonAdaptedLesson(lesson));
+        }
+        lessons = jsonAdaptedLessons;
         hasPaid = source.getPaymentStatus().hasPaid;
     }
 
@@ -97,10 +108,16 @@ class JsonAdaptedStudent {
         }
         final ProgressList modelProgress = new ProgressList(progressList);
 
+        ArrayList<Lesson> studentLessons = new ArrayList<>();
+        for (JsonAdaptedLesson jsonAdaptedLesson : lessons) {
+            studentLessons.add(jsonAdaptedLesson.toModelType());
+        }
+        final Lessons modelStudentLessons = new Lessons(studentLessons);
+
         final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
 
         return new Student(modelStudentName, modelStudentPhone, modelParentName, modelParentPhone,
-                modelProgress, modelPaymentStatus);
+                modelProgress, modelStudentLessons, modelPaymentStatus);
     }
 
 }

@@ -11,6 +11,8 @@ import tutoraid.model.student.Phone;
 import tutoraid.model.student.Progress;
 import tutoraid.model.student.StudentName;
 
+import java.util.ArrayList;
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -29,6 +31,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses multiple {@code oneBasedIndex} into an arraylist of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
+     */
+    public static ArrayList<Index> parseMultipleIndexes(String multipleOneBasedIndexes) throws ParseException {
+        String[] trimmedMultipleIndexes = multipleOneBasedIndexes.trim().split("");
+        ArrayList<Index> indexesToReturn = new ArrayList<>();
+
+        for (String indexInString : trimmedMultipleIndexes) {
+            Index index = parseIndex(indexInString);
+            indexesToReturn.add(index);
+        }
+
+        return indexesToReturn;
     }
 
     /**
