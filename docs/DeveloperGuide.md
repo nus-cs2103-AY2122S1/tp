@@ -2,14 +2,18 @@
 layout: page
 title: Developer Guide
 ---
+
+Ailurus is a **desktop app** that helps to organise committees account for details of their members. It provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
+
+The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecure and the different components, as well as their implementations in various commands. It also informs developers of the requirements and instructions for manual testing for the Ailurus product.
+
 * Table of Contents
 {:toc}
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -89,7 +93,7 @@ The `UI` component,
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Member` and `Event` object residing in the `Model`.
 
-#### Current Implementations 
+#### Current Implementations of UI
 
 The GUI currently reflects the entered events and members recorded in Ailurus. Currently, there are two main windows 
 that reflect the `Event` and `Member` objects that are residing in the `Model`. Directly adding or removing `Event` 
@@ -102,7 +106,7 @@ some difficulty in updating the `MemberCard` when a `Task` object is being creat
 removed. Similarly, the same problem also lies in `EventCard` not updating when a `Member` object associated with 
 the `Event` object is being removed.
 
-#### Future Plans
+#### Future Plans for UI
 
 To address the above-mentioned bug where the `EventCard` and `MemberCard` are not updated spontaneously, we decided 
 to implement a third column featuring `Task` objects. As such, we are able to totally remove the `Member` and `Task` 
@@ -144,7 +148,7 @@ Here is the Activity Diagram for a User when choosing the module and command to 
 
 ![Activity Diagram for User Commands](images/CommandActivityDiagram.jpg)
 
-#### Current Implementation
+#### Current Implementation of Event
 
 New feature: Events
 * Events can be added and deleted from event list via `eadd` and `edelete` commands
@@ -156,7 +160,7 @@ minimise commands required to add them individually. The format is similar to `d
 for familiarity with similar commands for other modules.
 
 
-#### Future Plans
+#### Future Plans for Event
 
 Future plans for Events
 * Include adding and deleting of participants, as well as marking whether a participant has attended the event.
@@ -169,7 +173,7 @@ Future plans for Events
 
 ### Add a task feature for a member or several members
 
-#### Current Implementation
+#### Current Implementation for adding tasks
 
 The proposed feature is achieved by getting the member(s) from the filtered member list
 and use API from the model manager to add the task with given task name to each of the members.
@@ -184,7 +188,7 @@ This command will add the task "take attendance" to the first and second member 
 
 ### Delete a task feature for a member
 
-#### Current Implementation
+#### Current Implementation for deleting tasks
 
 The proposed feature is achieved by getting the member(s) from the filtered member list
 and use API from the model manager to delete the task with given task id from the member with given member id.
@@ -199,7 +203,7 @@ This command will delete the first task from the task list of the first member o
 
 ### List tasks feature for a member
 
-#### Current Implementation
+#### Current Implementation for lists
 
 The proposed feature is achieved by getting the member with given member id from the filtered member list
 and use API from the model manager to list all the tasks of the member.
@@ -211,7 +215,6 @@ Given below is an example usage scenario:
 The user executes `tlist /m 1`. The parser will be called upon to create a TlistCommandParser.
 The parser will then parse the input to create a TlistCommand with member id as 1.
 This command will display all the tasks of the first member of the member list.
-=======
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-T15-2/tp/tree/master/src/main/java/seedu/address/model/Model.java)
