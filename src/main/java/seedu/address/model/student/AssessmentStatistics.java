@@ -18,6 +18,7 @@ import seedu.address.commons.util.ChartUtil;
 public class AssessmentStatistics {
     public static final double DEFAULT_BIN_SIZE = 10.0;
 
+    private static final String CHART_TITLE = "Cohort Performance for %1$s";
     private static final String CHART_X_AXIS_LABEL = "Scores";
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
 
@@ -119,8 +120,8 @@ public class AssessmentStatistics {
      * Returns a histogram representing the scores for the assessment.
      */
     public Chart toHistogram() {
-        return ChartUtil.createBarChart(assessment.getValue(), CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL,
-                getScoreDistribution());
+        return ChartUtil.createBarChart(String.format(CHART_TITLE, assessment.getValue()),
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution());
     }
 
     /**
