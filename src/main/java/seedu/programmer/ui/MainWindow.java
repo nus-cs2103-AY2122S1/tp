@@ -38,6 +38,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
+import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
 import seedu.programmer.logic.commands.HelpCommandResult;
 import seedu.programmer.logic.commands.ShowCommandResult;
@@ -413,6 +414,9 @@ public class MainWindow extends UiPart<Stage> {
                 UploadCommandResult ucr = (UploadCommandResult) commandResult;
                 Model m = ucr.getModel();
                 handleUpload(m);
+            } else if (commandResult instanceof EditCommandResult) {
+                EditCommandResult editCommandResult = (EditCommandResult) commandResult;
+                handleShowResult(editCommandResult.getEditedStudent());
             }
 
             return commandResult;
