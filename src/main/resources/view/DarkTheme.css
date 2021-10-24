@@ -440,6 +440,7 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
     -fx-background-color: #F2A861;
     -fx-padding: 3 12 3 12;
     -fx-background-radius: 20;
+    -fx-background-insets: 2 0 3 0;
     -fx-font-size: 12;
     -fx-max-width: 130;
     -fx-wrap-text: true;

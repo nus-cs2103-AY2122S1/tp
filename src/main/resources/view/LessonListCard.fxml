@@ -26,12 +26,12 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true"/>
+                <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true" />
             </HBox>
-            <Label fx:id="date" styleClass="cell_small_label" text="\$date" wrapText="true"/>
-            <Label fx:id="time" styleClass="cell_small_label" text="\$time" wrapText="true"/>
-            <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true"/>
-            <FlowPane fx:id="homeworkList" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" />
+            <Label fx:id="date" styleClass="cell_small_label" text="\$date" wrapText="true" />
+            <Label fx:id="time" styleClass="cell_small_label" text="\$time" wrapText="true" />
+            <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true" />
+            <VBox fx:id="homeworkList" HBox.hgrow="NEVER" VBox.vgrow="ALWAYS" />
         </VBox>
       <rowConstraints>
          <RowConstraints />

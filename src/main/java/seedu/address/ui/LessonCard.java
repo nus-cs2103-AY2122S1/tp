@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.lesson.Lesson;
 
 public class LessonCard extends UiPart<Region> {
@@ -28,7 +29,7 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label rates;
     @FXML
-    private FlowPane homeworkList;
+    private VBox homeworkList;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -52,7 +53,7 @@ public class LessonCard extends UiPart<Region> {
     private Label createHomeworkLabel(String homework) {
         Label label = new Label(homework);
         label.setWrapText(true);
-        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.7));
+        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.8));
         return label;
     }
 }

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.person.Person;
 
 /**
@@ -128,6 +129,8 @@ public class PersonCard extends UiPart<Region> {
                     .forEach(tag -> tags.getChildren().add(createTagLabel(tag.tagName)));
         }
         setAllLabelsMaxWidth();
+        tags.setPrefWrapLength(100);
+        tags.setPrefWrapLength(100);
     }
 
     private Label createTagLabel(String tag) {
@@ -138,7 +141,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     private void setLabelMaxWidth(Label label) {
-        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.7));
+        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.9));
     }
 
     private void setAllLabelsMaxWidth() {
