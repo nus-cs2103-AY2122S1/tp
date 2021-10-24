@@ -9,7 +9,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Appointment}'s has a starting time after the start dateTime given.
+ * Tests that a {@code Appointment} has a starting time after the start dateTime given.
  */
 public class AppointmentIsAfterPredicate implements Predicate<Appointment> {
 

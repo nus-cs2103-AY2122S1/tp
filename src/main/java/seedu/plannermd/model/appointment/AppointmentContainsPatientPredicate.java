@@ -9,7 +9,7 @@ import java.util.function.Predicate;
 import seedu.plannermd.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Appointment}'s has a patient whose name matches any of the keywords given.
+ * Tests that a {@code Appointment} has a patient whose name matches any of the keywords given.
  */
 public class AppointmentContainsPatientPredicate implements Predicate<Appointment> {
 

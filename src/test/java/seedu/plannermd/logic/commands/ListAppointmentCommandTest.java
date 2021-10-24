@@ -31,7 +31,10 @@ public class ListAppointmentCommandTest {
             .withSession("18:00", 10).build();
 
     private final Appointment nextDayAppointment = new AppointmentBuilder(todayAppointment)
-            .withDate(LocalDate.now().minusDays(5).format(AppointmentDate.DATE_FORMATTER)).build();
+            .withDate(LocalDate.now().plusDays(1).format(AppointmentDate.DATE_FORMATTER)).build();
+
+    private final Appointment yesterdayAppointment = new AppointmentBuilder(todayAppointment)
+            .withDate(LocalDate.now().minusDays(1).format(AppointmentDate.DATE_FORMATTER)).build();
 
     @BeforeEach
     public void setUp() {
@@ -39,6 +42,7 @@ public class ListAppointmentCommandTest {
         expectedModel = new ModelManager(new PlannerMd(), new UserPrefs());
         model.addAppointment(todayAppointment);
         model.addAppointment(nextDayAppointment);
+        model.addAppointment(yesterdayAppointment);
         expectedModel.addAppointment(todayAppointment);
     }
 

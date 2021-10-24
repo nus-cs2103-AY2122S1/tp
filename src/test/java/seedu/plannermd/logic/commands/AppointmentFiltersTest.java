@@ -29,25 +29,25 @@ class AppointmentFiltersTest {
                 .withEndDate(FILTER_VALID_END_DATE).withPatientKeywords(Collections.singletonList("Alice"))
                 .withDoctorKeywords(Collections.singletonList("Bob")).build();
 
-        // same values -> returns true
+        // same values -> equals
         AppointmentFilters copiedFilter = new AppointmentFiltersBuilder(sampleFilter).build();
         assertEquals(copiedFilter, sampleFilter);
         assertEquals(AppointmentFilters.allAppointmentsFilter(), AppointmentFilters.allAppointmentsFilter());
 
-        // Same object -> returns true
+        // Same object -> equals
         assertEquals(sampleFilter, sampleFilter);
 
-        // null -> returns false
+        // null -> not equals
         assertNotEquals(sampleFilter, null);
 
-        // Different types -> return false
+        // Different types -> not equals
         assertNotEquals(sampleFilter, "test");
 
-        // Filter all appointments vs filter upcoming appointments -> returns false
+        // Filter all appointments vs filter upcoming appointments -> not equals
         assertNotEquals(AppointmentFilters.allAppointmentsFilter(), AppointmentFilters.upcomingAppointmentsFilter());
 
         // AppointmentFilter with all default values vs appointment
-        // Different patient keywords -> returns false
+        // Different patient keywords -> not equals
         copiedFilter = new AppointmentFiltersBuilder(sampleFilter)
                 .withPatientKeywords(Arrays.asList("Peter", "Steve")).build();
         assertNotEquals(sampleFilter, copiedFilter);
@@ -58,7 +58,7 @@ class AppointmentFiltersTest {
                 .withPatientKeywords(Collections.singletonList("Bob")).build();
         assertNotEquals(sampleFilter, copiedFilter);
 
-        // Different doctor keywords -> returns false
+        // Different doctor keywords -> not equals
         copiedFilter = new AppointmentFiltersBuilder(sampleFilter)
                 .withDoctorKeywords(Arrays.asList("Peter", "Steve")).build();
         assertNotEquals(sampleFilter, copiedFilter);
@@ -69,17 +69,17 @@ class AppointmentFiltersTest {
                 .withDoctorKeywords(Collections.singletonList("Alice")).build();
         assertNotEquals(sampleFilter, copiedFilter);
 
-        // Different start dates
+        // Different start dates -> not equals
         copiedFilter = new AppointmentFiltersBuilder(sampleFilter).withStartDate(FILTER_VALID_END_DATE).build();
         assertNotEquals(sampleFilter, copiedFilter);
         copiedFilter = new AppointmentFiltersBuilder(sampleFilter).withStartDateTime(LocalDateTime.now()).build();
         assertNotEquals(sampleFilter, copiedFilter);
 
-        // Different end dates
+        // Different end dates -> not equals
         copiedFilter = new AppointmentFiltersBuilder(sampleFilter).withEndDate(FILTER_VALID_START_DATE).build();
         assertNotEquals(sampleFilter, copiedFilter);
 
-        // Same start date, default values for the rest
+        // Same start date, default values for the rest -> equals
         assertEquals(new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE).build(),
                 new AppointmentFiltersBuilder().withStartDate(FILTER_VALID_START_DATE).build());
     }

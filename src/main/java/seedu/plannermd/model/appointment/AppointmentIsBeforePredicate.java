@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Appointment}'s has a starting time that is before the endDate given.
+ * Tests that a {@code Appointment} has a starting time that is before the endDate given.
  */
 public class AppointmentIsBeforePredicate implements Predicate<Appointment> {
 

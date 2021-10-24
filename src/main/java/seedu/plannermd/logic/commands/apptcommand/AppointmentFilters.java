@@ -2,6 +2,7 @@ package seedu.plannermd.logic.commands.apptcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +57,16 @@ public class AppointmentFilters {
     public static AppointmentFilters upcomingAppointmentsFilter() {
         AppointmentFilters filter = new AppointmentFilters();
         filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDateTime.now()));
+        return filter;
+    }
+
+    /**
+     * Initialises a {@code AppointmentFilters} that only shows appointments for the current day.
+     */
+    public static AppointmentFilters todayAppointmentFilter() {
+        AppointmentFilters filter = new AppointmentFilters();
+        filter.setStartAfter(new AppointmentIsAfterPredicate(LocalDate.now()));
+        filter.setStartBefore(new AppointmentIsBeforePredicate(LocalDate.now()));
         return filter;
     }
 
@@ -137,11 +148,6 @@ public class AppointmentFilters {
         AppointmentFilters filters = (AppointmentFilters) o;
         return Objects.equals(startAfter, filters.startAfter) && Objects.equals(startBefore, filters.startBefore)
                 && Objects.equals(hasPatient, filters.hasPatient) && Objects.equals(hasDoctor, filters.hasDoctor);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(startAfter, startBefore, hasPatient, hasDoctor);
     }
 
 }

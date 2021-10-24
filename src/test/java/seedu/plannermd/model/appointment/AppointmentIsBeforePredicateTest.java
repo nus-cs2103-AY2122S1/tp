@@ -24,22 +24,22 @@ public class AppointmentIsBeforePredicateTest {
         AppointmentIsBeforePredicate secondPredicate =
                 new AppointmentIsBeforePredicate(secondDate);
 
-        // same object -> returns true
+        // same object -> equals
         assertEquals(firstPredicate, firstPredicate);
 
-        // Same values -> return true
+        // Same values -> equals
         AppointmentIsBeforePredicate firstPredicateCopy =
                 new AppointmentIsBeforePredicate(firstDate);
         assertEquals(firstPredicate, firstPredicateCopy);
 
-        // Different values -> return false
+        // Different values -> not equals
         assertNotEquals(firstPredicate, secondPredicate);
 
-        // Different types -> return false
+        // Different types -> not equals
         assertNotEquals(firstPredicate, firstDate);
         assertNotEquals(firstPredicate, new AppointmentIsAfterPredicate(firstDate));
 
-        // Null -> returns false
+        // Null -> not equals
         assertNotEquals(firstDate, null);
     }
 

@@ -28,22 +28,22 @@ public class AppointmentContainsPatientPredicateTest {
         AppointmentContainsPatientPredicate secondPredicate =
                 new AppointmentContainsPatientPredicate(secondPredicateKeywordList);
 
-        // same object -> returns true
+        // same object -> equals
         assertEquals(firstPredicate, firstPredicate);
 
-        // same values -> returns true
+        // same values -> equals
         AppointmentContainsPatientPredicate firstPredicateCopy =
                 new AppointmentContainsPatientPredicate(firstPredicateKeywordList);
         assertEquals(firstPredicateCopy, firstPredicate);
 
-        // different types -> returns false
+        // different types -> not equals
         assertNotEquals(firstPredicate, 1);
         assertNotEquals(new AppointmentContainsDoctorPredicate(firstPredicateKeywordList), firstPredicate);
 
-        // null -> returns false
+        // null -> not equals
         assertNotEquals(firstPredicate, null);
 
-        // different person -> returns false
+        // different person -> not equals
         assertNotEquals(firstPredicate, secondPredicate);
     }
 

@@ -1,13 +1,8 @@
 package seedu.plannermd.logic.commands.apptcommand;
 
-import java.time.LocalDate;
-import java.util.function.Predicate;
-
 import seedu.plannermd.logic.commands.CommandResult;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
-import seedu.plannermd.model.appointment.Appointment;
-import seedu.plannermd.model.appointment.AppointmentIsAfterPredicate;
 
 /**
  * Sets the appointment tab in the plannermd to display its default layout
@@ -20,9 +15,7 @@ public class ListAppointmentCommand extends AppointmentCommand {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        Predicate<Appointment> isTodayAppt = new AppointmentIsAfterPredicate(LocalDate.now());
-        model.updateFilteredAppointmentList(isTodayAppt);
-
+        model.updateFilteredAppointmentList(AppointmentFilters.todayAppointmentFilter().collectAllFilters());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

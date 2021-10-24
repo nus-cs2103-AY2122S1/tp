@@ -132,21 +132,21 @@ public class FilterUpcomingAppointmentCommandTest {
         FilterUpcomingAppointmentCommand firstCommand = new FilterUpcomingAppointmentCommand(firstFilter);
         FilterUpcomingAppointmentCommand secondCommand = new FilterUpcomingAppointmentCommand(secondFilter);
 
-        // same object -> returns true
+        // same object -> equals
         assertEquals(firstCommand, firstCommand);
 
-        // same values -> returns true
+        // same values -> equals
         FilterUpcomingAppointmentCommand firstCommandCopy = new FilterUpcomingAppointmentCommand(firstFilter);
         assertEquals(firstCommandCopy, firstCommand);
 
-        // different types -> returns false
+        // different types -> not equals
         assertNotEquals(firstCommand, 1);
         assertNotEquals(firstCommand, new FilterAppointmentCommand(AppointmentFilters.allAppointmentsFilter()));
 
-        // null -> returns false
+        // null -> not equals
         assertNotEquals(firstCommand, null);
 
-        // different person -> returns false
+        // different person -> not equals
         assertNotEquals(secondCommand, firstCommand);
     }
 }
