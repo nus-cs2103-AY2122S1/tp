@@ -17,7 +17,6 @@ import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupContainsKeywordsPredicate;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**

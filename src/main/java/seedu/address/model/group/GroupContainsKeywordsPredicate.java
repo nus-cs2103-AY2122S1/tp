@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Student}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Group}'s {@code GroupName} matches any of the keywords given.
  */
 public class GroupContainsKeywordsPredicate implements Predicate<Group> {
     private final List<String> keywords;

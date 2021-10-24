@@ -1,10 +1,13 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
@@ -23,6 +26,7 @@ public class Student {
     // Data fields
     private final GroupName groupName;
     private final UniqueAssessmentList assessments;
+    private final FilteredList<Assessment> filteredAssessments;
 
     /**
      * Every field must be present and not null.
@@ -34,6 +38,7 @@ public class Student {
         this.email = email;
         this.groupName = groupName;
         this.assessments = new UniqueAssessmentList();
+        this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
     }
 
     public Name getName() {
@@ -52,16 +57,33 @@ public class Student {
         return groupName;
     }
 
-    public ObservableList<Assessment> getAssessmentList() {
-        return assessments.asUnmodifiableObservableList();
-    }
-
     public boolean hasAssessment(Assessment assessment) {
         return assessments.contains(assessment);
     }
 
     public void addAssessment(Assessment assessment) {
         assessments.add(assessment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Student}.
+     * {@code key} must exist in the student's assessment list.
+     */
+    public void deleteAssessment(Assessment key) {
+        assessments.remove(key);
+    }
+
+    public ObservableList<Assessment> getAssessmentList() {
+        return assessments.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Assessment> getFilteredAssessmentList() {
+        return filteredAssessments;
+    }
+
+    public void updateFilteredAssessmentList(Predicate<Assessment> predicate) {
+        requireNonNull(predicate);
+        filteredAssessments.setPredicate(predicate);
     }
 
     /**
