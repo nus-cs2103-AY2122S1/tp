@@ -44,7 +44,6 @@ public class Student {
         return name.fullName;
     }
 
-
     public StudentId getStudentId() {
         return studentId;
     }
@@ -66,6 +65,7 @@ public class Student {
      * */
     public void addLabResult(Lab result) {
         this.labResultList.add(result);
+        labResultList.sort(new SortByLabName());
     }
 
     /**
@@ -142,4 +142,13 @@ public class Student {
                 + getEmail();
     }
 
+    /**
+     * Create a new Student Object with the same fields.
+     * @return a copy of the Student
+     * */
+    public Student clone() {
+        Student clone = new Student(name, studentId, classId, email);
+        clone.setLabResultRecord(labResultList);
+        return clone;
+    }
 }

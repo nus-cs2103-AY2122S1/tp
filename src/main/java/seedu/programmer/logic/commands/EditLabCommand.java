@@ -56,7 +56,7 @@ public class EditLabCommand extends Command {
         }
 
         Student target = lastShownList.get(targetIndex.getZeroBased());
-        Student replacement = target;
+        Student replacement = target.clone();
         replacement.editLabResult(result, score);
 
         model.setStudent(target, replacement);
