@@ -1,6 +1,6 @@
 # ContactSh - User Guide
 
-![](file://C:\Users\Chu Heng 2\Desktop\tp\tp\docs\images\ContactSh_logo.png)
+![Logo](images\ContactSh_logo.png)
 
 ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
 
@@ -41,7 +41,7 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 3. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](file://C:\Users\Chu Heng 2\Desktop\tp\tp\docs\images\Ui.png)
+   ![Ui](images\Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -220,24 +220,23 @@ Examples:
 
 - `edittask 3 ti/2 task/Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
 
-### Viewing tasks: `cat`
+### Viewing tasks: `cat`  
 
-1. Shows the user a list of tasks that has been attached to a specific person. <p>&nbsp;</p>
-   
-    Format: `cat INDEX` <p>&nbsp;</p>
-   
+1. Shows the user a list of tasks that has been attached to a specific person. 
+    Format: `cat INDEX` 
+
    * Displays the list of tasks attached to the person at the specified `INDEX`.
    * The index refers to the index number shown in the displayed person list. 
-   * The index **must be a positive integer** 1, 2, 3, ... <p>&nbsp;</p>
+   * The index **must be a positive integer** 1, 2, 3, ... 
    
-   Examples: <p>&nbsp;</p>
-   
-   * `list` followed by delete 2 deletes the 2nd person in the address book.
-   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. <p>&nbsp;</p>
+   Examples: 
 
-2. Shows the user the task list of every single person in ContactSh. <p>&nbsp;</p>
-   
-   Format: `cat -A`
+   * `list` followed by delete 2 deletes the 2nd person in the address book.
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.  
+
+2. Shows the user the task list of every single person in ContactSh. 
+
+   Format: `cat -A`  
 
 ### Sorting persons by name: `sort`
 
@@ -250,23 +249,23 @@ Format: `sort [-r]`
 
 ### Clearing all entries : `clear`
 
-Clears all entries from ContactSH.
+- Clears all entries from ContactSH.
 
-Format: `clear`
+- Format: `clear`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+- Exits the program.
 
-Format: `exit`
+- Format: `exit`
 
 ### Saving the data
 
-ContactSH data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+- ContactSH data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-ContactSH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+- ContactSH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ContactSH will discard all data and start with an empty data file at the next run.
