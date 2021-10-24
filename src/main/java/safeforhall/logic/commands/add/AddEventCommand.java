@@ -16,12 +16,14 @@ public class AddEventCommand extends Command {
             + "Parameters: "
             + CliSyntax.PREFIX_NAME + "NAME "
             + CliSyntax.PREFIX_DATE + "DATE "
+            + CliSyntax.PREFIX_TIME + "TIME "
             + CliSyntax.PREFIX_VENUE + "VENUE "
             + CliSyntax.PREFIX_CAPACITY + "CAPACITY "
 
             + "Example: " + COMMAND_WORD + " "
-            + CliSyntax.PREFIX_NAME + "Football "
+            + CliSyntax.PREFIX_NAME + "Football Training "
             + CliSyntax.PREFIX_DATE + "03-01-2021 "
+            + CliSyntax.PREFIX_TIME + "0830 "
             + CliSyntax.PREFIX_VENUE + "NUS field "
             + CliSyntax.PREFIX_CAPACITY + "5 ";
 

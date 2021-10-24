@@ -8,6 +8,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
@@ -16,10 +17,11 @@ import safeforhall.model.event.Venue;
  */
 class JsonAdaptedEvent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Event's %s field is missing!";
 
     private final String eventName;
     private final String eventDate;
+    private final String eventTime;
     private final String venue;
     private final String capacity;
     private final String residents;
@@ -30,11 +32,13 @@ class JsonAdaptedEvent {
     @JsonCreator
     public JsonAdaptedEvent(@JsonProperty("eventName") String eventName,
                              @JsonProperty("eventDate") String eventDate,
+                             @JsonProperty("eventTime") String eventTime,
                              @JsonProperty("venue") String venue,
                              @JsonProperty("capacity") String capacity,
                             @JsonProperty("residents") String residents) {
         this.eventName = eventName;
         this.eventDate = eventDate;
+        this.eventTime = eventTime;
         this.venue = venue;
         this.capacity = capacity;
         this.residents = residents;
@@ -46,6 +50,7 @@ class JsonAdaptedEvent {
     public JsonAdaptedEvent(Event source) {
         eventName = source.getEventName().eventName;
         eventDate = source.getEventDate().eventDate;
+        eventTime = source.getEventTime().eventTime;
         venue = source.getVenue().venue;
         capacity = source.getCapacity().capacity;
         residents = source.getResidents().getResidents();
@@ -77,6 +82,17 @@ class JsonAdaptedEvent {
             throw new IllegalValueException(EventDate.MESSAGE_CONSTRAINTS);
         }
         final EventDate modelEventDate = new EventDate(eventDate);
+
+        // EventTime
+
+        if (eventTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventTime.class.getSimpleName()));
+        }
+        if (!EventTime.isValidEventTime(eventTime)) {
+            throw new IllegalValueException(EventTime.MESSAGE_CONSTRAINTS);
+        }
+        final EventTime modelEventTime = new EventTime(eventTime);
 
         // Venue
 
@@ -110,7 +126,8 @@ class JsonAdaptedEvent {
         }
         final ResidentList modelResidentList = new ResidentList(residents);
 
-        return new Event(modelEventName, modelEventDate, modelVenue, modelCapacity, modelResidentList);
+        return new Event(modelEventName, modelEventDate, modelEventTime,
+                modelVenue, modelCapacity, modelResidentList);
     }
 
 }

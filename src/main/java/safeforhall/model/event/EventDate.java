@@ -12,8 +12,6 @@ public class EventDate {
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    private static final int LASTDATE_DEADLINE = 1;
-
     public final String eventDate;
 
     /**

@@ -15,6 +15,7 @@ public class Event {
     // Identity fields
     private final EventName eventName;
     private final EventDate eventDate;
+    private final EventTime eventTime;
     private final Venue venue;
     private final Capacity capacity;
     private final ResidentList residents;
@@ -22,11 +23,12 @@ public class Event {
     /**
      * Every field must be present
      */
-    public Event(EventName eventName, EventDate eventDate, Venue venue, Capacity capacity,
+    public Event(EventName eventName, EventDate eventDate, EventTime eventTime, Venue venue, Capacity capacity,
                  ResidentList residents) {
         requireAllNonNull(eventName, eventDate, venue, capacity);
         this.eventName = eventName;
         this.eventDate = eventDate;
+        this.eventTime = eventTime;
         this.venue = venue;
         this.capacity = capacity;
         this.residents = residents;
@@ -52,9 +54,13 @@ public class Event {
         return residents;
     }
 
+    public EventTime getEventTime() {
+        return eventTime;
+    }
+
     /**
-     * Returns true if both events have the same name, date, venue and capacity.
-     * This defines a weaker notion of equality between two events.
+     * Returns true if both events have the same name, date, venue, capacity and time.
+     * This defines a notion of equality between two events.
      */
     public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
@@ -64,6 +70,7 @@ public class Event {
         return otherEvent != null
                 && otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getEventTime().equals(getEventTime())
                 && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getCapacity().equals(getCapacity());
     }
@@ -96,6 +103,7 @@ public class Event {
         Event otherEvent = (Event) other;
         return otherEvent.getEventName().equals(getEventName())
                 && otherEvent.getEventDate().equals(getEventDate())
+                && otherEvent.getEventTime().equals(getEventTime())
                 && otherEvent.getVenue().equals(getVenue())
                 && otherEvent.getCapacity().equals(getCapacity());
     }
@@ -103,7 +111,7 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(eventName, eventDate, venue, capacity);
+        return Objects.hash(eventName, eventDate, eventTime, venue, capacity);
     }
 
     @Override
@@ -112,6 +120,8 @@ public class Event {
         builder.append(getEventName())
                 .append("; Date: ")
                 .append(getEventDate())
+                .append("; Time: ")
+                .append(getEventTime())
                 .append("; Venue: ")
                 .append(getVenue())
                 .append("; Capacity: ")

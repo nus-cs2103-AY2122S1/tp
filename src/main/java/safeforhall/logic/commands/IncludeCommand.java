@@ -83,8 +83,8 @@ public class IncludeCommand extends Command {
         checkForDuplicates(toAdd, currentResidents);
 
         String newResidents = event.addResidentsToEvent(currentResidents, toAdd);
-        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getVenue(),
-                event.getCapacity(), new ResidentList(newResidents));
+        Event editedEvent = new Event(event.getEventName(), event.getEventDate(), event.getEventTime(),
+                event.getVenue(), event.getCapacity(), new ResidentList(newResidents));
         model.setEvent(event, editedEvent);
 
         model.updateFilteredEventList(Model.PREDICATE_SHOW_ALL_EVENTS);

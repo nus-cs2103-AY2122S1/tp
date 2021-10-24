@@ -4,6 +4,7 @@ import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
 import safeforhall.model.event.EventName;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
@@ -13,12 +14,14 @@ import safeforhall.model.event.Venue;
 public class EventBuilder {
     public static final String DEFAULT_EVENT_NAME = "Football Training";
     public static final String DEFAULT_EVENT_DATE = "20-10-2021";
+    public static final String DEFAULT_EVENT_TIME = "0800";
     public static final String DEFAULT_VENUE = "Field";
     public static final String DEFAULT_CAPACITY = "20";
     public static final String DEFAULT_RESIDENT_LIST = "";
 
     private EventName eventName;
     private EventDate eventDate;
+    private EventTime eventTime;
     private Venue venue;
     private Capacity capacity;
     private ResidentList residents;
@@ -29,6 +32,7 @@ public class EventBuilder {
     public EventBuilder() {
         eventName = new EventName(DEFAULT_EVENT_NAME);
         eventDate = new EventDate(DEFAULT_EVENT_DATE);
+        eventTime = new EventTime(DEFAULT_EVENT_TIME);
         venue = new Venue(DEFAULT_VENUE);
         capacity = new Capacity(DEFAULT_CAPACITY);
         residents = new ResidentList(DEFAULT_RESIDENT_LIST);
@@ -40,6 +44,7 @@ public class EventBuilder {
     public EventBuilder(Event eventToCopy) {
         eventName = eventToCopy.getEventName();
         eventDate = eventToCopy.getEventDate();
+        eventTime = eventToCopy.getEventTime();
         venue = eventToCopy.getVenue();
         capacity = eventToCopy.getCapacity();
         residents = eventToCopy.getResidents();
@@ -58,6 +63,14 @@ public class EventBuilder {
      */
     public EventBuilder withEventDate(String eventDate) {
         this.eventDate = new EventDate(eventDate);
+        return this;
+    }
+
+    /**
+     * Sets the {@code EventTime} of the {@code Event} that we are building.
+     */
+    public EventBuilder withEventTime(String eventTime) {
+        this.eventTime = new EventTime(eventTime);
         return this;
     }
 
@@ -86,6 +99,6 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(eventName, eventDate, venue, capacity, residents);
+        return new Event(eventName, eventDate, eventTime, venue, capacity, residents);
     }
 }

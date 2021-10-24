@@ -7,6 +7,7 @@ import javafx.scene.layout.Region;
 import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
+import safeforhall.model.event.EventTime;
 import safeforhall.model.event.ResidentList;
 import safeforhall.model.event.Venue;
 
@@ -36,6 +37,8 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label time;
+    @FXML
     private Label venue;
     @FXML
     private Label capacity;
@@ -51,6 +54,7 @@ public class EventCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(event.getEventName().eventName);
         date.setText(EventDate.DESC + event.getEventDate().eventDate);
+        time.setText(EventTime.DESC + event.getEventTime().eventTime);
         venue.setText(Venue.DESC + event.getVenue().venue);
         capacity.setText(Capacity.DESC + event.getCapacity().capacity);
         residents.setText(ResidentList.DESC + event.getResidents().getResidents());

@@ -21,5 +21,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_VENUE = new Prefix("l/");
     public static final Prefix PREFIX_CAPACITY = new Prefix("c/");
     public static final Prefix PREFIX_RESIDENTS = new Prefix("r/");
-
+    public static final Prefix PREFIX_TIME = new Prefix("t/");
 }
