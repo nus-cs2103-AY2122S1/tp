@@ -8,7 +8,6 @@ import static seedu.academydirectory.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Function;
@@ -178,7 +177,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public Commit fetchCommitByLabel(String temp_latest) {
+        public Commit fetchCommitByLabel(String labelName) {
             return null;
         }
 

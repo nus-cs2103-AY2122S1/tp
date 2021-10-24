@@ -3,7 +3,6 @@ package seedu.academydirectory.storage;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.academydirectory.testutil.TypicalCommits.COMMIT1;
@@ -19,17 +18,17 @@ import java.util.HashMap;
 import java.util.function.Supplier;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.Label;
 import seedu.academydirectory.versioncontrol.objects.Tree;
-
 import seedu.academydirectory.versioncontrol.utils.HashGenerator;
 import seedu.academydirectory.versioncontrol.utils.HashMethod;
 
 public class VersionControlReaderTest {
     private static final Path DATA_DIR = Paths.get("src", "test",
             "data", "VersionControlTest");
-    private static final Path BLOB_DIR = DATA_DIR.resolve(Paths.get( "BlobStorage"));
+    private static final Path BLOB_DIR = DATA_DIR.resolve(Paths.get("BlobStorage"));
     private static final Path TESTING_DIR = Paths.get("src", "test", "temp");
     private static final HashMethod hashMethod = HashMethod.SHA1;
     private static final HashGenerator hashGenerator = new HashGenerator(hashMethod);
