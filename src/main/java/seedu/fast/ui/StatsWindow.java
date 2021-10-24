@@ -1,5 +1,7 @@
 package seedu.fast.ui;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
@@ -35,7 +37,6 @@ public class StatsWindow extends UiPart<Stage> {
         + "your client portfolio!";
 
 
-
     private Fast fast;
 
     @FXML
@@ -60,12 +61,13 @@ public class StatsWindow extends UiPart<Stage> {
         // Since StatsWindow receives a Fast instance, it is safe to typecast it
         this.fast = (Fast) fast;
         populatePriorityPieChart();
-        labelPriorityPieChart();
+        addCountsToPieChart(priorityPieChart);
         populateInvestmentPlanPieChart();
-        //labelInvestmentPlanPieChart();
+        addCountsToPieChart(investmentPlanPieChart);
         priorityPieChart.setLegendVisible(false);
         investmentPlanPieChart.setLegendVisible(false);
     }
+
 
 
     /**
@@ -142,35 +144,20 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public void populateInvestmentPlanPieChart() {
         investmentPlanPieChart.getData().clear(); //Ensure that PieChart is blank.
+        InvestmentPlanData data = getInvestmentPlanData();
+        addInvestmentPlanPieChartAnalysis(data);
+        addInvestmentPlanPieChartData(data);
 
-        // Gets the respective counts
-        int lifeInsuranceCount = this.fast.getLifeInsuranceCount();
-        int motorInsuranceCount = this.fast.getMotorInsuranceCount();
-        int travelInsuranceCount = this.fast.getTravelInsuranceCount();
-        int healthInsuranceCount = this.fast.getHealthInsuranceCount();
-        int propertyInsuranceCount = this.fast.getPropertyInsuranceCount();
-        int investmentCount = this.fast.getInvestmentCount();
-        int savingsCount = this.fast.getSavingsCount();
+    }
 
-        // Assert statements to verify that the input data is correct
-        assert lifeInsuranceCount >= 0 : "lifeInsuranceCount must be positive";
-        assert motorInsuranceCount >= 0 : "motorInsuranceCount must be positive";
-        assert travelInsuranceCount >= 0 : "travelInsuranceCount must be positive";
-        assert healthInsuranceCount >= 0 : "healthInsuranceCount must be positive";
-        assert propertyInsuranceCount >= 0 : "propertyInsuranceCount must be positive";
-        assert investmentCount >= 0 : "investmentCount must be positive";
-        assert savingsCount >= 0 : "savingsCount must be positive";
-//
-//        addPriorityPieChartDesc(highPriorityCount, mediumPriorityCount, lowPriorityCount);
-//
-        addPieChartData(InvestmentPlanTag.LifeInsurance.NAME, lifeInsuranceCount, this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.MotorInsurance.NAME, motorInsuranceCount, this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.TravelInsurance.NAME, travelInsuranceCount, this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.HealthInsurance.NAME, healthInsuranceCount, this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.PropertyInsurance.NAME, propertyInsuranceCount, this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.Investment.NAME, investmentCount, this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.Savings.NAME, savingsCount, this.investmentPlanPieChart);
-
+    private void addInvestmentPlanPieChartData(InvestmentPlanData data) {
+        addPieChartData(InvestmentPlanTag.LifeInsurance.NAME, data.getLifeCount(), this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.MotorInsurance.NAME, data.getMotorCount(), this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.TravelInsurance.NAME, data.getTravelCount(), this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.HealthInsurance.NAME, data.getHealthCount(), this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.PropertyInsurance.NAME, data.getPropertyCount(), this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.Investment.NAME, data.getInvestmentCount(), this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.Savings.NAME, data.getSavingsCount(), this.investmentPlanPieChart);
     }
 
     /**
@@ -178,12 +165,12 @@ public class StatsWindow extends UiPart<Stage> {
      * Adapted from: https://stackoverflow.com/questions/35479375/display-additional-values-in-pie-chart
      * Credit: jewelsea
      */
-    public void labelPriorityPieChart() {
-        priorityPieChart.getData().forEach(data ->
+    public void addCountsToPieChart(PieChart pieChart) {
+        pieChart.getData().forEach(data ->
             data.nameProperty().bind(
                 Bindings.concat(
                     data.getName(), ":\n", (int) data.getPieValue(), (data.getPieValue() == 1)
-                        ? " person" : " people" // check plural or singular
+                        ? " client" : " clients" // check plural or singular
                 )
             ));
     }
@@ -199,7 +186,7 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Adds a brief analysis of the client base to the PieChart.
+     * Adds a brief analysis of the client base's Priority Tags to the PieChart.
      */
     public void addPriorityPieChartAnalysis(int highCount, int medCount, int lowCount) {
         int totalCount = highCount + medCount + lowCount;
@@ -227,20 +214,122 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Sets the text of the label.
+     * Adds a brief analysis of the client base's Investment Plan Tags to the PieChart.
+     */
+    public void addInvestmentPlanPieChartAnalysis(InvestmentPlanData investmentPlanData) {
+        int totalCount = investmentPlanData.getTotalCount();
+
+        String totalClientCount = totalCount + " Clients!";
+
+        // Gets the max out of the values
+        int maxCount = investmentPlanData.getMax();
+
+
+    }
+
+    /**
+     * Sets the text of the analysis.
      */
     private void setPriorityPieChartLabel(String totalClientCount, String text) {
         priorityPieChartDesc.setText(PRIORITY_CHART_MESSAGE_INTRO + totalClientCount + "\n\n" + text);
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the stats window.
      */
     public void focus() {
         assert getRoot() != null : "StatsWindow is not initialised";
         populatePriorityPieChart();
-        labelPriorityPieChart();
+        addCountsToPieChart(priorityPieChart);
+        populateInvestmentPlanPieChart();
+        addCountsToPieChart(investmentPlanPieChart);
         getRoot().requestFocus();
+    }
+
+    /**
+     * Gets the investment plan tag data from FAST.
+     */
+    public InvestmentPlanData getInvestmentPlanData() {
+        // Gets the respective counts
+        int lifeInsuranceCount = this.fast.getLifeInsuranceCount();
+        int motorInsuranceCount = this.fast.getMotorInsuranceCount();
+        int travelInsuranceCount = this.fast.getTravelInsuranceCount();
+        int healthInsuranceCount = this.fast.getHealthInsuranceCount();
+        int propertyInsuranceCount = this.fast.getPropertyInsuranceCount();
+        int investmentCount = this.fast.getInvestmentCount();
+        int savingsCount = this.fast.getSavingsCount();
+
+        // Assert statements to verify that the input data is correct
+        assert lifeInsuranceCount >= 0 : "lifeInsuranceCount must be positive";
+        assert motorInsuranceCount >= 0 : "motorInsuranceCount must be positive";
+        assert travelInsuranceCount >= 0 : "travelInsuranceCount must be positive";
+        assert healthInsuranceCount >= 0 : "healthInsuranceCount must be positive";
+        assert propertyInsuranceCount >= 0 : "propertyInsuranceCount must be positive";
+        assert investmentCount >= 0 : "investmentCount must be positive";
+        assert savingsCount >= 0 : "savingsCount must be positive";
+
+        return new InvestmentPlanData(lifeInsuranceCount, motorInsuranceCount,
+            travelInsuranceCount, healthInsuranceCount, propertyInsuranceCount, investmentCount, savingsCount);
+    }
+
+    /**
+     * Encapsulates the data of the investment plan tags.
+     */
+    private class InvestmentPlanData {
+
+        private ArrayList<Integer> counts = new ArrayList<>();
+
+        private InvestmentPlanData(int lifeCount, int motorCount, int travelCount, int healthCount,
+                                   int propertyCount, int investmentCount, int savingsCount) {
+
+            counts.add(lifeCount);
+            counts.add(motorCount);
+            counts.add(travelCount);
+            counts.add(healthCount);
+            counts.add(propertyCount);
+            counts.add(investmentCount);
+            counts.add(savingsCount);
+        }
+
+        private int getMax() {
+            return Collections.max(counts);
+        }
+
+        private int getTotalCount() {
+            return counts.stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        }
+
+        private int getLifeCount() {
+            return counts.get(0);
+        }
+
+        private int getMotorCount() {
+            return counts.get(1);
+        }
+
+        private int getTravelCount() {
+            return counts.get(2);
+        }
+
+        private int getHealthCount() {
+            return counts.get(3);
+        }
+
+        private int getPropertyCount() {
+            return counts.get(4);
+        }
+
+        private int getInvestmentCount() {
+            return counts.get(5);
+        }
+
+        private int getSavingsCount() {
+            return counts.get(6);
+        }
+
+
     }
 
 
