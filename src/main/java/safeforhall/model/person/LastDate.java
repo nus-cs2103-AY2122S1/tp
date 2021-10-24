@@ -1,6 +1,7 @@
 package safeforhall.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +26,7 @@ public class LastDate {
      */
     public LastDate(String date) {
         requireNonNull(date);
+        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
         this.date = date;
     }
 
