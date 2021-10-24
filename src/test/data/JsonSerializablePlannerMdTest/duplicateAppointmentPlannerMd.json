@@ -32,7 +32,7 @@
         "birthDate": "12/12/1922",
         "remark": "Awaiting PCR test result",
         "tagged": [ "friends" ],
-        "risk": "HIGH"
+        "risk": "LOW"
       },
       "doctor": {
         "name": "Alice Pauline",
@@ -59,7 +59,7 @@
         "birthDate": "12/12/1922",
         "remark": "Awaiting PCR test result",
         "tagged": [ "friends" ],
-        "risk": "HIGH"
+        "risk": "LOW"
       },
       "doctor": {
         "name": "Alice Pauline",

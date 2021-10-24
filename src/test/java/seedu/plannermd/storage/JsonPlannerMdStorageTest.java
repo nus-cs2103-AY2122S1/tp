@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
-import static seedu.plannermd.testutil.patient.TypicalPatients.ALICE;
+import static seedu.plannermd.testutil.patient.TypicalPatients.DANIEL;
 import static seedu.plannermd.testutil.patient.TypicalPatients.HOON;
 import static seedu.plannermd.testutil.patient.TypicalPatients.IDA;
 
@@ -73,7 +73,7 @@ public class JsonPlannerMdStorageTest {
 
         // Modify data, overwrite exiting file, and read back
         original.addPatient(HOON);
-        original.removePatient(ALICE);
+        original.removePatient(DANIEL);
         jsonPlannerMdStorage.savePlannerMd(original, filePath);
         readBack = jsonPlannerMdStorage.readPlannerMd(filePath).get();
         assertEquals(original, new PlannerMd(readBack));

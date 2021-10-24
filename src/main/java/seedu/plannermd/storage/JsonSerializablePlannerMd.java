@@ -25,6 +25,10 @@ class JsonSerializablePlannerMd {
     public static final String MESSAGE_DUPLICATE_DOCTOR = "Doctors list contains duplicate doctor(s).";
     public static final String MESSAGE_DUPLICATE_APPOINTMENTS = "Appointments list contains duplicate appointment(s).";
     public static final String MESSAGE_CLASHING_APPOINTMENTS = "Appointments list contains clashing appointment(s).";
+    public static final String MESSAGE_MISSING_PATIENT_APPOINTMENT =
+            "Appointments list contains patient(s) which do not exist.";
+    public static final String MESSAGE_MISSING_DOCTOR_APPOINTMENT =
+            "Appointments list contains doctor(s) which do not exist.";
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
     private final List<JsonAdaptedDoctor> doctors = new ArrayList<>();
@@ -83,8 +87,21 @@ class JsonSerializablePlannerMd {
             if (plannerMd.isClashAppointment(appointment)) {
                 throw new IllegalValueException(MESSAGE_CLASHING_APPOINTMENTS);
             }
+
+            // To be defensive here, we ensure that the exact patients and doctors specified
+            // in the appointment does exist in PlannerMD
+            if (!plannerMd.hasExactPatient(appointment.getPatient())) {
+                throw new IllegalValueException(MESSAGE_MISSING_PATIENT_APPOINTMENT);
+            }
+            if (!plannerMd.hasExactDoctor(appointment.getDoctor())) {
+                throw new IllegalValueException(MESSAGE_MISSING_DOCTOR_APPOINTMENT);
+            }
+
             plannerMd.addAppointment(appointment);
         }
+
+        // To be defensive here
+
         return plannerMd;
     }
 }

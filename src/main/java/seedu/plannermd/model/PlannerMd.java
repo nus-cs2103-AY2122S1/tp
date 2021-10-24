@@ -95,6 +95,14 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     /**
+     * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
+     */
+    public boolean hasExactPatient(Patient patient) {
+        requireNonNull(patient);
+        return patients.containsExact(patient);
+    }
+
+    /**
      * Adds a patient to the PlannerMD.
      * The patient must not already exist in the PlannerMD.
      */
@@ -129,6 +137,14 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     public boolean hasDoctor(Doctor doctor) {
         requireNonNull(doctor);
         return doctors.contains(doctor);
+    }
+
+    /**
+     * Returns true if a doctor with the same equality as {@code patient} exists in the PlannerMD.
+     */
+    public boolean hasExactDoctor(Doctor doctor) {
+        requireNonNull(doctor);
+        return doctors.containsExact(doctor);
     }
 
     /**

@@ -112,6 +112,44 @@ public class PlannerMdTest {
         assertThrows(UnsupportedOperationException.class, () -> plannerMd.getDoctorList().remove(0));
     }
 
+    @Test
+    void hasExactPatient_patientNotInPlannerMd_returnsFalse() {
+        assertFalse(plannerMd.hasExactPatient(ALICE));
+    }
+
+    @Test
+    void hasExactPatient_patientInPlannerMd_returnsTrue() {
+        plannerMd.addPatient(ALICE);
+        assertTrue(plannerMd.hasExactPatient(ALICE));
+    }
+
+    @Test
+    void hasExactPatient_patientWithSameIdentityFieldsInPlannerMd_returnsFalse() {
+        plannerMd.addPatient(ALICE);
+        Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertFalse(plannerMd.hasExactPatient(editedAlice));
+    }
+
+    @Test
+    void hasExactDoctor_doctorNotInPlannerMd_returnsFalse() {
+        assertFalse(plannerMd.hasExactDoctor(DR_ALICE));
+    }
+
+    @Test
+    void hasExactDoctor_doctorInPlannerMd_returnsTrue() {
+        plannerMd.addDoctor(DR_ALICE);
+        assertTrue(plannerMd.hasExactDoctor(DR_ALICE));
+    }
+
+    @Test
+    void hasExactDoctor_doctorWithSameIdentityFieldsInPlannerMd_returnsFalse() {
+        plannerMd.addDoctor(DR_ALICE);
+        Doctor editedDoctor = new DoctorBuilder(DR_ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertFalse(plannerMd.hasExactDoctor(editedDoctor));
+    }
+
     /**
      * A stub ReadOnlyPlannerMd whose persons list can violate interface constraints.
      */

@@ -37,6 +37,15 @@ public class UniquePersonList<T extends Person> implements Iterable<T> {
     }
 
     /**
+     * Returns true if the list contains the exact person as the given argument.
+     */
+    public boolean containsExact(T toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */
