@@ -6,6 +6,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
 
 public class DeleteModuleLessonCommand extends Command {
@@ -60,6 +61,11 @@ public class DeleteModuleLessonCommand extends Command {
         }
         String successMessage = deleteAll(model);
         return new CommandResult(successMessage);
+    }
+
+    private String deleteByModule(Model model) {
+
+        return "";
     }
 
     private String deleteAll(Model model) {
