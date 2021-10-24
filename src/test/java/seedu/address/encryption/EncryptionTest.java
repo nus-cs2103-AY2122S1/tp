@@ -41,7 +41,7 @@ public class EncryptionTest {
     @Disabled
     public void whenEncryptingJsonIntoFile_andDecryptingFileAgain_theOriginalContentIsReturned()
             throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
-            InvalidAlgorithmParameterException{
+            InvalidAlgorithmParameterException {
         SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
         Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
