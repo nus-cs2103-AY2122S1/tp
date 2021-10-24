@@ -32,9 +32,9 @@ public class FilterCommandTest {
 
     @Test
     public void test_equals_returnsCorrectly() {
-        QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor("first", null, null);
-        QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor("second", "A123", "B01");
-        QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor("second", "A123", null);
+        QueryStudentDescriptor firstQueryFields = new QueryStudentDescriptor("first", null, null, null);
+        QueryStudentDescriptor secondQueryFields = new QueryStudentDescriptor("second", "A123", "B01", null);
+        QueryStudentDescriptor thirdQueryFields = new QueryStudentDescriptor("second", "A123", null, null);
 
         // firstPredicate contains query field(s) : name
         StudentDetailContainsQueryPredicate firstPredicate =
@@ -76,7 +76,7 @@ public class FilterCommandTest {
     @Test
     public void execute_zeroQueryArg_allStudentFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 7);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, null);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -86,7 +86,7 @@ public class FilterCommandTest {
     @Test
     public void execute_singleNameQueryArg_oneStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate("Elle", null, null);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate("Elle", null, null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -96,7 +96,7 @@ public class FilterCommandTest {
     @Test
     public void execute_singleCidQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "B01");
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, null, "B01", null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -106,7 +106,7 @@ public class FilterCommandTest {
     @Test
     public void execute_singleSidQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "a021", null);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "a021", null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -116,7 +116,8 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleQueryArg_oneStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 1);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate("Pauline", "A0212425H", null);
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(
+                "Pauline", "A0212425H", null, null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -126,7 +127,8 @@ public class FilterCommandTest {
     @Test
     public void execute_multipleQueryArg_multipleStudentsFound() {
         String expectedMessage = String.format(MESSAGE_STUDENTS_LISTED_OVERVIEW, 2);
-        StudentDetailContainsQueryPredicate predicate = preparePredicate(null, "A02", "B0");
+        StudentDetailContainsQueryPredicate predicate = preparePredicate(
+                null, "A02", "B0", null);
         FilterCommand command = new FilterCommand(predicate);
         expectedModel.updateFilteredStudentList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -136,8 +138,9 @@ public class FilterCommandTest {
     /**
      * Parses {@code name}, {@code classId} and {@code studentId} into a {@code StudentDetailContainsQueryPredicate}.
      */
-    private StudentDetailContainsQueryPredicate preparePredicate(String name, String studentId, String classId) {
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor(name, studentId, classId);
+    private StudentDetailContainsQueryPredicate preparePredicate(
+            String name, String studentId, String classId, String email) {
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor(name, studentId, classId, email);
         return new StudentDetailContainsQueryPredicate(queryFields);
     }
 }

@@ -2,6 +2,7 @@ package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -22,7 +23,8 @@ public class FilterCommand extends Command {
             + "Parameters: [" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_STUDENT_ID + "STUDENTID] "
             + "[" + PREFIX_CLASS_ID + "CLASSID] "
-            + "Example: " + COMMAND_WORD + " -n alice -cid B01 -sid A1234567X";
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "Example: " + COMMAND_WORD + " -n alice -cid B01 -sid A1234567X -email e0123456@u.nus.edu";
 
     private final StudentDetailContainsQueryPredicate predicate;
 

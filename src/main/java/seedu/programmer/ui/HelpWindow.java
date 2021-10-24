@@ -96,7 +96,7 @@ public class HelpWindow extends UiPart<Stage> {
                 "add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <email>",
                 "Create records of individual students");
         FeatureTableItem view = new FeatureTableItem("Filter",
-                "filter -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-grade <GRADE>",
+                "filter -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <EMAIL>",
                 "Filter the list with the specified parameters. Multiple fields can be used as the filter criteria");
         FeatureTableItem edit = new FeatureTableItem("Edit",
                 "edit <INDEX_IN_LIST> -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <email>",

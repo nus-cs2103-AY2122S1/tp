@@ -237,7 +237,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Proposed Implementation
 
-The proposed filter mechanism is facilitated by the `QueryStudentDescriptor` and the `StudentDetailContainsQueryPredicate`.
+The proposed filter mechanism is facilitated by the `QueryStudentDescriptor` and the 
+`StudentDetailContainsQueryPredicate`.
 The `StudentDetailContainsQueryPredicate` extends `Predicate<Student>` and contains a private field of type
 `QueryStudentDescriptor` that will be used to test if a given student to the predicate matches all the query fields in
 the `QueryStudentDescriptor`.
@@ -281,12 +282,13 @@ The following UML activity diagram summarizes what happens when a user executes 
 
 * **Alternative 1 (current choice):** Design a `QueryStudentDescriptor` class that abstracts the handling of the input query parameters.
     * Pros: Need not explicitly handle the different argument combinations at the higher-level abstractions
-  (e.g. `FilterCommandParser` class)
+  (e.g. `FilterCommandParser` class). Code is more maintainable.
     * Cons: Was more difficult to implement.
 
 * **Alternative 2:** Handle the different argument combinations in the `FilterCommandParser` class.
-    * Pros: Easier to handle empty argument cases with explicit conditional checking.
-    * Cons: Bad use of abstraction, SLAP violated and long nested conditional statements.
+    * Pros: Easier to handle empty argument cases with explicit conditional checking. 
+    * Cons: Bad use of abstraction, SLAP violated and long nested conditional statements. 
+    Code made harder for future extension.
 
 **Aspect: Naming the function**
 

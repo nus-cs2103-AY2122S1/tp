@@ -17,10 +17,11 @@ Class ReadOnlyUserPrefs
 
 
 Class UniqueStudentList
+Class Name
 Class Student
 Class StudentId
 Class ClassId
-Class Grade
+Class Email
 
 }
 
@@ -42,11 +43,11 @@ UniqueStudentList --> "~* all" Student
 Student *--> Name
 Student *--> StudentId
 Student *--> ClassId
-Student *--> Grade
+Student *--> Email
 
 Name -[hidden]right-> StudentId
 StudentId -[hidden]right-> ClassId
-ClassId -[hidden]right-> Grade
+ClassId -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Student
 @enduml
