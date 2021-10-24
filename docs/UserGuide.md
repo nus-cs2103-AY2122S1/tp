@@ -61,6 +61,8 @@ Some example commands you can try:
 
 </div>
 
+## Person Commands
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -139,9 +141,97 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+## Task Commands
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the task commands:**<br>
+
+* The task tags should either be 'General' or have prefix `SO` followed by at least 1 digit.
+* The number after the 'SO' prefix should correspond to the id of an existing order.
+
+</div>
+
+### Listing all tasks : `listtask`
+
+Shows a list of all tasks in the application.
+
+Format: `listtask`
+
+### Adding a task : `addtask`
+
+Adds a task to the application.
+
+Format: `addtask l/LABEL d/DATE [t/TASKTAG]`
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+The new task will automatically be assigned the 'General' tag if the task tag parameter is not supplied.
+</div>
+
+Examples:
+* `addtask l/sew buttons onto blazer d/20th August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
+
+### Deleting a task : `deletetask`
+
+Deletes the specified task from the application.
+
+Format: `deletetask INDEX`
+
+* Deletes the task at the specified `INDEX`.
+* The index refers to the index number shown in the displayed task list on the **Tasks**'s tab.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listtask` followed by `deletetask 2` deletes the 2nd task in the application.
+* `findtask sew` followed by `deletetask 1` deletes the 1st task in the results of the `findtask` command.
+
+### Finding a task: `findtask`
+
+Finds tasks whose label, date or task tag contain any of the given keywords.
+
+Format: `findtask KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g. `orders` will match `Orders`
+* The order of the keywords does not matter. e.g. `Cloth Orders` will match `Orders Cloth`
+* Only full words will be matched. e.g. `Order` will not match `Orders`
+* Tasks matching at least one keyword will be returned (i.e. OR search). e.g. `Order clothes` will return `Order scissors`, `Sew clothes`.
+
+Examples:
+* `findtask buttons` returns `order buttons` and `deliver red buttons`
+* `findtask SO1` returns order with id of `SO1`
+
+![result for 'findtask SO1'](images/findtaskSO1.png)
+
+### Editing a task : `edittask`
+
+Edits an existing task in the application.
+
+Format: `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]`
+
+* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list on the **Tasks**'s tab. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+
+Examples:
+* `edittask 1 l/order cloth d/19th September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
+* `edittask 2 t/General` edits the tag of the 2nd task to be `General`
+
+### Marking a task as done : `marktask`
+
+Marks a specified task from the application as done.
+
+Format: `marktask INDEX`
+
+* Marks the task at the specified `INDEX` as done.
+* The index refers to the index number shown in the displayed task list on the **Tasks**'s tab.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `listtask` followed by `marktask 2` marks the 2nd task in the application as done.
+
 ### Clearing all entries : `clear`
 
-Clears all entries from the application.
+Clears all entries (Clients, Tasks, SalesOrder) from the application.
 
 Format: `clear`
 
@@ -153,67 +243,25 @@ Format: `exit`
 
 ### Saving the data
 
-SalesNote data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SalesNote data is saved in the hard disk (As a JSON file) automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-SalesNote data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SalesNote saves each data in a different json file.
+- AddressBook (Clients information) : as a JSON file `[JAR file location]/data/addressbook.json`.
+- TaskBook (Tasks information)  : as a JSON file `[JAR file location]/data/taskBook.json`.
+- OrderBook (Sales order information) : as a JSON file `[JAR file location]/data/orderBook.json`.
+
+Advanced users are welcome to update data directly by editing that data file.
+
+_Example usage_
+
+1. Open the JSON file in any of your favorite text editor.
+2. Edit the entities in the JSON file as you wish.
+3. Re-open SaleNote and changes should be reflected.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, SalesNote will discard all data and start with an empty data file at the next run.
-</div>
-
-### Listing all tasks: `listtask`
-
-Shows a list of all tasks in the application.
-
-### Adding a task: `addtask`
-
-Adds a task to the application.
-
-Format: `addtask l/LABEL d/DATE`
-
-Examples:
-* `addtask l/sew buttons onto blazer d/20th August 2021`
-
-### Deleting a task : `deletetask`
-
-Deletes the specified task from the application.
-
-Format: `deletetask INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
-
-### Editing a task : `edittask`
-
-Edits an existing task in the application.
-
-Format: `edittask INDEX l/LABEL d/DATE`
-
-* Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed task list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-
-Examples:
-*  `edittask 1 l/order cloth d/19th September 2021` Edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
-
-### Mark a task as done: `markdone`
-
-Marks a specified task from the application as complete.
-
-Format: `deletetask INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Examples:
-* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
+If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
