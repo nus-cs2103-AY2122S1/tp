@@ -57,17 +57,10 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Replaces the task {@code target} in the list with {@code editedTask}.
-     * {@code target} must exist in the list.
+     * Replaces the task at index {@code index} in the list with {@code editedTask}.
      */
-    public void setTask(Task target, Task editedTask) {
-        CollectionUtil.requireAllNonNull(target, editedTask);
-
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new TaskNotFoundException();
-        }
-
+    public void setTask(int index, Task editedTask) {
+        CollectionUtil.requireAllNonNull(editedTask);
         internalList.set(index, editedTask);
     }
 

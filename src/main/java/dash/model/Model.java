@@ -126,10 +126,9 @@ public interface Model {
     void addTask(Task task);
 
     /**
-     * Replaces the given task {@code target} with {@code editedTask}.
-     * {@code target} must exist in the address book.
+     * Replaces the given task at index {@code index} with {@code editedTask}.
      */
-    void setTask(Task target, Task editedTask);
+    void setTask(int index, Task editedTask);
 
     /**
      * Returns the UserInputList

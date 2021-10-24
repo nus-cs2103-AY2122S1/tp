@@ -1,6 +1,7 @@
 package dash.logic.commands.taskcommand;
 
 import static dash.logic.parser.CliSyntax.PREFIX_TAG;
+import static dash.logic.parser.CliSyntax.PREFIX_TASK_DATE;
 import static dash.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
 import static java.util.Objects.requireNonNull;
 
@@ -39,6 +40,7 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_TASK_DESCRIPTION + "Watch ST2334 Lecture 9"
+            + PREFIX_TASK_DATE + "10/10/2021, 1400"
             + PREFIX_TAG + "lecture";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
@@ -71,7 +73,7 @@ public class EditTaskCommand extends Command {
         Task taskToEdit = lastShownList.get(index.getZeroBased());
         Task editedTask = createEditedTask(taskToEdit, editTaskDescriptor);
 
-        model.setTask(taskToEdit, editedTask);
+        model.setTask(index.getZeroBased(), editedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
     }
@@ -87,11 +89,33 @@ public class EditTaskCommand extends Command {
                 .orElse(taskToEdit.getTaskDescription());
         CompletionStatus updatedCompletionStatus = editTaskDescriptor.getCompletionStatus()
                 .orElse(taskToEdit.getCompletionStatus());
+
+        TaskDate updatedTaskDate = getUpdatedTaskDate(editTaskDescriptor.getTaskDate(), taskToEdit.getTaskDate());
+
         Set<Person> updatedPeople = editTaskDescriptor.getPeople().orElse(taskToEdit.getPeople());
         Set<Tag> updatedTags = editTaskDescriptor.getTags().orElse(taskToEdit.getTags());
 
         return new Task(updatedDescription, updatedCompletionStatus,
-                new TaskDate(), updatedPeople, updatedTags);
+                updatedTaskDate, updatedPeople, updatedTags);
+    }
+
+    private static TaskDate getUpdatedTaskDate(Optional<TaskDate> taskDate, TaskDate taskDateToEdit) {
+        if (taskDate.isEmpty()) {
+            return taskDateToEdit;
+        }
+        TaskDate editTaskDate = taskDate.get();
+        if (!editTaskDate.hasDate()) {
+            if (taskDateToEdit.hasDate()) {
+                return new TaskDate(taskDateToEdit.toDateString() + "," + editTaskDate.toTimeString());
+            }
+        }
+        if (!editTaskDate.hasTime()) {
+            if (taskDateToEdit.hasDate() && taskDateToEdit.hasTime()) {
+                return new TaskDate(editTaskDate.toDateString() + "," + taskDateToEdit.toTimeString());
+            }
+        }
+
+        return new TaskDate(editTaskDate.toString());
     }
 
     @Override
@@ -121,6 +145,7 @@ public class EditTaskCommand extends Command {
         private Set<Person> people;
         private Set<Tag> tags;
         private CompletionStatus completionStatus;
+        private TaskDate taskDate;
 
         public EditTaskDescriptor() {
         }
@@ -134,15 +159,20 @@ public class EditTaskCommand extends Command {
             setPeople(toCopy.people);
             setTags(toCopy.tags);
             setCompletionStatus(toCopy.completionStatus);
+            setTaskDate(toCopy.taskDate);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(taskDescription, completionStatus, people, tags);
+            return CollectionUtil.isAnyNonNull(taskDescription, completionStatus, people, taskDate, tags);
         }
 
+        /**
+         * Sets {@code description} to this object's {@code description}.
+         * A defensive copy of {@code people} is used internally.
+         */
         public void setTaskDescription(TaskDescription description) {
             this.taskDescription = description;
         }
@@ -160,14 +190,6 @@ public class EditTaskCommand extends Command {
         }
 
         /**
-         * Sets {@code tags} to this object's {@code tags}.
-         * A defensive copy of {@code tags} is used internally.
-         */
-        public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null) ? new HashSet<>(tags) : null;
-        }
-
-        /**
          * Returns an unmodifiable people set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code people} is null.
@@ -175,6 +197,15 @@ public class EditTaskCommand extends Command {
         public Optional<Set<Person>> getPeople() {
             return (people != null) ? Optional.of(Collections.unmodifiableSet(people)) : Optional.empty();
         }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTags(Set<Tag> tags) {
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
 
         /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
@@ -185,12 +216,38 @@ public class EditTaskCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code completionStatus} to this object's {@code completionStatus}.
+         * A defensive copy of {@code completionStatus} is used internally.
+         */
         public void setCompletionStatus(CompletionStatus completionStatus) {
             this.completionStatus = completionStatus;
         }
 
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code completionStatus} is null.
+         */
         public Optional<CompletionStatus> getCompletionStatus() {
             return Optional.ofNullable(completionStatus);
+        }
+
+        /**
+         * Sets {@code taskDate} to this object's {@code taskDate}.
+         * A defensive copy of {@code taskDate} is used internally.
+         */
+        public void setTaskDate(TaskDate taskDate) {
+            this.taskDate = taskDate;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code taskDate} is null.
+         */
+        public Optional<TaskDate> getTaskDate() {
+            return Optional.ofNullable(taskDate);
         }
 
         @Override
@@ -211,7 +268,8 @@ public class EditTaskCommand extends Command {
             return getTaskDescription().equals(e.getTaskDescription())
                     && getCompletionStatus().equals(e.getCompletionStatus())
                     && getPeople().equals(e.getPeople())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getTaskDate().equals(e.getTaskDate());
         }
     }
 }

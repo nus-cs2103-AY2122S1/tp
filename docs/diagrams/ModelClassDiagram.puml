@@ -15,19 +15,39 @@ Class ModelManager
 Class UserPrefs
 Class ReadOnlyUserPrefs
 
-
+package Person {
 Class UniquePersonList
 Class Person
 Class Address
 Class Email
 Class Name
 Class Phone
-Class Tag
-
 }
 
-Class HiddenOutside #FFFFFF
-HiddenOutside ..> Model
+package Task {
+Class Task
+Class TaskList
+Class TaskDescription
+Class TaskDate
+Class CompletionStatus
+}
+
+package Tag {
+Class Tag
+}
+
+package Help {
+Class HelpCommand
+}
+}
+
+Task *--> "1" TaskDescription
+Task *-> "*" Tag
+TaskList -> "~* all" Task
+
+Task *--> "0..1" TaskDate
+Task *--> "1" CompletionStatus
+Task *--> "~* people" Person
 
 AddressBook .up.|> ReadOnlyAddressBook
 
@@ -35,20 +55,24 @@ ModelManager .up.|> Model
 Model .right.> ReadOnlyUserPrefs
 Model .left.> ReadOnlyAddressBook
 ModelManager -left-> "1" AddressBook
+ModelManager ->"1" TaskList
 ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
 UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
+Person *-> Name
+Person *-> Phone
+Person *-> Email
 Person *--> Address
-Person *--> "*" Tag
+Person *-> "*" Tag
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
+TaskDescription -[hidden]down-> Tag
+
+Name -[hidden]left-> Phone
+Phone -[hidden]left-> Address
 Address -[hidden]right-> Email
 
 ModelManager -->"~* filtered" Person
+ModelManager --->"~* filtered" Task
 @enduml

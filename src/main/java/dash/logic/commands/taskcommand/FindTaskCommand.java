@@ -18,6 +18,7 @@ import dash.model.task.DescriptionContainsKeywordsPredicate;
 import dash.model.task.PersonContainsKeywordsPredicate;
 import dash.model.task.TagTaskContainsKeywordsPredicate;
 import dash.model.task.Task;
+import dash.model.task.TaskDate;
 
 
 /**
@@ -106,7 +107,7 @@ public class FindTaskCommand extends Command {
             return Optional.ofNullable(tagPredicate);
         }
 
-        public void setDate(List<String> datePredicate) {
+        public void setDate(TaskDate datePredicate) {
             this.datePredicate = new DateContainsKeywordsPredicate(datePredicate);
         }
 

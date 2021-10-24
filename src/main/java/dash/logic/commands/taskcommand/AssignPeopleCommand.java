@@ -60,7 +60,7 @@ public class AssignPeopleCommand extends Command {
         Task taskToAssign = lastShownList.get(index.getZeroBased());
         Task peopleAssignedTask = assignPeople(taskToAssign, editTaskDescriptor);
 
-        model.setTask(taskToAssign, peopleAssignedTask);
+        model.setTask(index.getZeroBased(), peopleAssignedTask);
         model.updateFilteredTaskList(Model.PREDICATE_SHOW_ALL_TASKS);
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, peopleAssignedTask));
     }
