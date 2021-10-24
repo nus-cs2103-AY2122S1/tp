@@ -71,16 +71,14 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Optional<Frequency> frequency = toAdd.getFrequency();
-        Optional<Occurrence> occurrence = toAdd.getOccurrence();
-
         // If visit field is not present, occurrence should not be more than one and frequency should be empty
         // If not, throw CommandException
-        if (!toAdd.hasVisit()) {
-            if (occurrence.get().isMoreThan(1) || !(frequency.get().equals(Frequency.EMPTY))) {
-                throw new CommandException(MESSAGE_INVALID_OPTIONAL_VISIT_FLAG);
-            }
+        if (toAdd.hasInvalidFrequencyOccurrence()) {
+            throw new CommandException(MESSAGE_INVALID_OPTIONAL_VISIT_FLAG);
         }
+
+        Optional<Frequency> frequency = toAdd.getFrequency();
+        Optional<Occurrence> occurrence = toAdd.getOccurrence();
 
         if (occurrence.get().isMoreThan(1) && frequency.get().equals(Frequency.EMPTY)) {
             throw new CommandException(MESSAGE_INVALID_OPTIONAL_FREQUENCY_FLAG);
