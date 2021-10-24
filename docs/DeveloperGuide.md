@@ -248,13 +248,34 @@ Title of Position Applying to), parsed straight from the user input.
 The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
 applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
 `positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
-`applicantBook`.
+`applicantBook`, using the `Model#addApplicantWithParticulars` method.
 
 Given below is an example usage scenario and how the add applicant feature behaves at each step.
 Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
 exist.
 
-Step 1. 
+Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, 
+block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
+`applicantParticulars` object, and return the `AddApplicantCommand` instance.
+
+The following sequence diagram shows the method invokation in this step.
+
+
+Step 2. LogicManager will execute this command instance. This will invoke the `Model#addApplicantWithParticulars`
+method.
+
+Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
+input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then 
+we will add it to the `applicantBook`. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If any of the guard clauses fail, i.e. the
+applicant already exist, or the position does not exist, an appropriate exception will be thrown and the applicant
+will not be created.
+
+</div>
+
+The following sequence diagram shows how the add-applicant operation works:
+
 
 
 
