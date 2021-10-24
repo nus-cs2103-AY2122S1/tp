@@ -167,14 +167,19 @@ Examples:
 
 Adds a task to a member in Ailurus.
 
-Format: `tadd /n TASKNAME /m MEMBER_ID`
+Format: `tadd /n TASKNAME /m MEMBER_ID…​`
 
 <div markdown="span" class="alert alert-primary">
 :bulb: Note: A task must be assigned to a member.
 </div>
 
+* `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* Tasks can be added to multiple members if there is more than one `MEMBER_ID` provided.
+* `MEMBER_ID` refers to the index number shown in the displayed member list.
+
 Examples:
-* `tadd /n Collect payment from members /m 3`
+* `tadd /n Collect payment from members /m 3` adds task `Collect payment from members` to the third member on the  member list.
+* `tadd /n Collect dogtag /m 1 /m 2 /m 3` adds task `Collect dogtag` to the first three members on the member list.
 
 #### Listing all tasks of a member : `tlist`
 
@@ -193,22 +198,25 @@ Example:
 
 Deletes the specified task of a specified member from Ailurus. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
-Format: `tdel /t TASK_ID`
+Format: `tdel /t TASK_ID…​`
 
 * Can **only be used when task list has entries**.
+* Multiple tasks can be deleted when there are more than one `TASK_ID` provided.
 * `TASK_ID` **must be a positive integer** 1, 2, 3, …​
 * Deletes the task according to the specified `TASK_ID`.
 * `TASK_ID` refers to the index number shown in the displayed task list.
 
 Examples:
 * `tdel /t 3` deletes the 3rd task on the displayed task list in Ailurus.
+* `tdel /t 1 /t 2` deletes the 1st and 2nd task on the displayed task list in Ailurus.
 
 #### Mark a task as done : `tdone`
 Marks the specified task of the specified member as done. Only can be used when the task list has entries (accessible via `tlist /m MEMBER_ID`).
 
-Format: `tdone /t TASK_ID`
+Format: `tdone /t TASK_ID…​`
 
 * Can **only be used when task list has entries**.
+* Multiple tasks can be marked as done when there is more than one `TASK_ID` provided.
 * `TASK_ID` **must be a positive integer** 1, 2, 3, …​
 * Marks the task specified by `TASK_ID`.
 * `TASK_ID` refers to the index number shown in the displayed task list.
