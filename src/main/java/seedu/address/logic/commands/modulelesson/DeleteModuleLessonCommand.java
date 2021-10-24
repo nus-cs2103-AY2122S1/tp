@@ -9,7 +9,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.person.DeletePersonCommand;
 import seedu.address.model.Model;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
@@ -19,7 +18,7 @@ public class DeleteModuleLessonCommand extends Command {
     public static final String MESSAGE_USAGE = "deletec: "
             + "Deletes the Lesson identified by the index number used in the displayed Lesson list "
             + "or by module code \n"
-            + "Parameters: INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer), "
             + PREFIX_MODULE_CODE + "MODULE CODE\n"
             + "Example: deletec 1, deletec 1-3, deletec m/CS2040";
 
@@ -28,6 +27,7 @@ public class DeleteModuleLessonCommand extends Command {
     public static final String MESSAGE_DELETE_BY_MODULE_CODE_USAGE = "deletec: "
             + "Delete only accepts one batch delete by Module Code at a time\n"
             + "Example: deletec " + PREFIX_MODULE_CODE + "CS2040S";
+    public static final String MESSAGE_NO_SUCH_MODULE_CODE = "No such Module Code";
 
     private final Index targetIndex;
     private final Index endIndex;
@@ -57,7 +57,7 @@ public class DeleteModuleLessonCommand extends Command {
     }
 
     /**
-     * Creates a DeleteModuleLessonCommand to delete lessons in a specified range
+     * Creates a DeleteModuleLessonCommand to delete lessons with the specified predicate
      *
      * @param predicate condition to delete lesson
      */
@@ -83,7 +83,7 @@ public class DeleteModuleLessonCommand extends Command {
             successMessage = deleteByModuleCode(model);
             model.updateFilteredModuleLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         } else if (targetIndex.getZeroBased() >= sizeOfModuleLessonList) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
         } else if (targetIndex.getZeroBased() > endIndex.getZeroBased()
                 || endIndex.getZeroBased() >= sizeOfModuleLessonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
@@ -96,13 +96,13 @@ public class DeleteModuleLessonCommand extends Command {
     private String deleteByModuleCode(Model model) throws CommandException {
         if (model.getFilteredModuleLessonList().isEmpty()) {
             model.updateFilteredModuleLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
-            throw new CommandException(DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
+            throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
         }
         return deleteAll(model, 0, model.getFilteredModuleLessonList().size() - 1);
     }
 
     private String deleteAll(Model model, int first, int last) {
-        int deletedPersons = last - first + 1;
+        int deletedLessons = last - first + 1;
         StringBuilder successMessage = new StringBuilder();
         while (first <= last) {
             ModuleLesson moduleLessonToDelete = model.getFilteredModuleLessonList().get(last);
@@ -110,7 +110,7 @@ public class DeleteModuleLessonCommand extends Command {
             model.deleteLesson(moduleLessonToDelete);
             last--;
         }
-        return String.format(MESSAGE_NUMBER_DELETED_LESSONS, deletedPersons) + successMessage;
+        return String.format(MESSAGE_NUMBER_DELETED_LESSONS, deletedLessons) + successMessage;
     }
 
     @Override

@@ -76,7 +76,7 @@ public class DeleteModuleLessonCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleLessonList().size() + 1);
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -96,7 +96,7 @@ public class DeleteModuleLessonCommandTest {
     }
 
     @Test
-    public void execute_invalidModuleCodeUnfilteredList_throwsCommandException() {
+    public void execute_moduleCodeNotInUnfilteredList_throwsCommandException() {
         ModuleCodeContainsKeywordsPredicate predicate = new ModuleCodeContainsKeywordsPredicate("CS2030S");
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(predicate);
 

@@ -65,4 +65,10 @@ public class DeleteModuleLessonCommandParserTest {
         assertParseFailure(parser, " m/CS2030S T09",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleLessonCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_invalidModuleCode_throwsParseException() {
+        assertParseFailure(parser, " m/CS2030S CS2040",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteModuleLessonCommand.MESSAGE_USAGE));
+    }
 }

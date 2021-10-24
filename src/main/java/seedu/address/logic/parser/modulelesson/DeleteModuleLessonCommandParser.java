@@ -20,7 +20,6 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     /**
      * Parses {@code userInput} into a command and returns it.
      *
-     * @param userInput
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
@@ -49,17 +48,15 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
     }
 
     private DeleteModuleLessonCommand parseDeleteByModuleCode(List<String> moduleCodes) throws ParseException {
-        List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
-                .map(ModuleCode::toString)
-                .collect(Collectors.toList());
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
         if (moduleCodes.size() > 1) {
             throw new ParseException(DeleteModuleLessonCommand.MESSAGE_DELETE_BY_MODULE_CODE_USAGE);
         }
-        if (!moduleCode.getLessonCodes().isEmpty()) {
+        if (!ModuleCode.isValidModuleCode(moduleCodes.get(0))) {
             throw new ParseException(DeleteModuleLessonCommand.MESSAGE_USAGE);
         }
-        System.out.println(listOfModuleCode.get(0));
+        List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
+                .map(ModuleCode::toString)
+                .collect(Collectors.toList());
         return new DeleteModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(listOfModuleCode.get(0)));
     }
 }
