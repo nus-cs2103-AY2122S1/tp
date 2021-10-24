@@ -182,7 +182,7 @@ public class AssessmentStatistics {
      * Returns a histogram representing the scores for the assessment.
      */
     public Chart toHistogram() {
-        return ChartUtil.createBarChart(String.format(CHART_TITLE, assessment.getValue()),
+        return ChartUtil.createBarChart(String.format(CHART_TITLE, assessment.getName()),
                 CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution());
     }
 
