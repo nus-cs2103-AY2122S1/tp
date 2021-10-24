@@ -27,30 +27,8 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>
-<!--        <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">-->
-<!--          <Menu mnemonicParsing="false" text="File">-->
-<!--            <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />-->
-<!--          </Menu>-->
-<!--          <Menu mnemonicParsing="false" text="Help">-->
-<!--            <MenuItem fx:id="helpMenuItemOld" mnemonicParsing="false" onAction="#handleHelp" text="Help" />-->
-<!--          </Menu>-->
-<!--        </MenuBar>-->
-          
+      <VBox>          
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-            <VBox minHeight="0.0" prefHeight="190.0" prefWidth="190.0" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-
-                <Label fx:id="date" styleClass="cell_small_label" text="\$Residents" />
-                <Label fx:id="venue" styleClass="cell_small_label" text="\$Events" />
-                <Label fx:id="capacity" styleClass="cell_small_label" text="\$Help" />
-                <Button fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
-                <Label fx:id="residents" styleClass="cell_small_label" text="\$Exit" />
-                <AnchorPane fx:id="anchor">
-                    <Label fx:id="capaci2ty" styleClass="cell_small_label" text="\$Help" />
-                </AnchorPane>
-                <Button mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-                
-            </VBox>
 
         <!-- Method isResidentTab of `MainWindow.java` is dependent on this ordering. -->
             <TabPane fx:id="tabPane" nodeOrientation="LEFT_TO_RIGHT" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
@@ -107,8 +85,10 @@
                         </items>
                     </SplitPane>
                 </Tab>
-                <Tab fx:id="helpTab"></Tab>
-                <Tab fx:id="exitTab"></Tab>
+                
+                <Tab fx:id="helpTab" styleClass="tab-inactive" ></Tab>
+<!--                <AnchorPane HBox.hgrow="ALWAYS" /></AnchorPane>-->
+                <Tab fx:id="exitTab" styleClass="tab-inactive" ></Tab>
             </TabPane>
 
         </HBox>

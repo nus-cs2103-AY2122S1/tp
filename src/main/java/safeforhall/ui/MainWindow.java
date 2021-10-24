@@ -2,7 +2,7 @@ package safeforhall.ui;
 
 import java.util.logging.Logger;
 
-import javafx.event.ActionEvent;
+import javafx.event.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
@@ -24,6 +24,14 @@ import safeforhall.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    // Hard-coded as loading from css doesn't work
+    private static final String BUTTON_STYLE = "-fx-width: 50;\n" +
+            "-fx-height: 50;\n" +
+            "-fx-border-width: 2;\n" +
+            "-fx-background-radius: 0;\n" +
+            "-fx-border-radius: 10;\n" +
+            "-fx-background-color: transparent;\n" +
+            "-fx-content-display: graphic-only;";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -102,53 +110,28 @@ public class MainWindow extends UiPart<Stage> {
         
         residentsTab.setGraphic(new Label("Residents"));
         eventsTab.setGraphic(new Label("Events"));
-        Button helpButton = createTabButton("/images/exit.png");
+        
+        Button helpButton = createTabButton("/images/help.png");
+        helpButton.setOnAction(e -> handleHelp());
+        helpButton.setStyle(BUTTON_STYLE);
+        helpButton.setTooltip(new Tooltip("Help"));
         helpTab.setGraphic(helpButton);
         helpTab.setDisable(true);
-//        exitTab.setGraphic(new Label("Exit"));
+        
         Button exitButton = createTabButton("/images/exit.png");
-//        exitButton.setOnAction(handleExit(););
+        exitButton.setOnAction(e -> handleExit());
+        exitButton.setStyle(BUTTON_STYLE);
+        exitButton.setTooltip(new Tooltip("Exit"));
         exitTab.setGraphic(exitButton);
         exitTab.setDisable(true);
+        
         tabPane.setRotateGraphic(false);
-
-//        Tab helpTab = new Tab("Help");
-//        Tab exitTab = new Tab("Exit");
-//
-//        tabPane.getTabs().add(help);
-//        tabPane.getTabs().add(exit);
-
-//        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
-//
-//        // HBox of control buttons
-//        HBox hbox = new HBox();
-//        hbox.getChildren().addAll(createTabButton("clock.png"), createTabButton("clock.png"));
-//
-//        // Anchor the controls
-//        anchor.getChildren().addAll(tabPane, hbox);
-//        AnchorPane.setTopAnchor(hbox, 3.0);
-//        AnchorPane.setRightAnchor(hbox, 5.0);
-//        AnchorPane.setTopAnchor(tabPane, 1.0);
-//        AnchorPane.setRightAnchor(tabPane, 1.0);
-//        AnchorPane.setLeftAnchor(tabPane, 1.0);
-//        AnchorPane.setBottomAnchor(tabPane, 1.0);
-//
-//        // Create some tabs
-//        Tab tab = new Tab("Files");
-//        tab.setGraphic(createTabButton("clock.png"));
-//        ((Button) tab.getGraphic()).setOnAction(e -> System.out.println("I'll show the list of files!"));
-//        tabPane.getTabs().add(tab);
-//
-//        tab = new Tab("Network");
-//        tab.setGraphic(createTabButton("clock.png"));
-//        ((Button) tab.getGraphic()).setOnAction(e -> System.out.println("I'll show the network!"));
-//        tabPane.getTabs().add(tab);
     }
 
     private Button createTabButton(String iconName) {
         Button button = new Button();
         ImageView imageView = new ImageView(new Image(getClass().getResource(iconName).toExternalForm(),
-                16, 16, false, true));
+                36, 36, true, true));
         button.setGraphic(imageView);
         button.getStyleClass().add("tab-button");
         return button;
