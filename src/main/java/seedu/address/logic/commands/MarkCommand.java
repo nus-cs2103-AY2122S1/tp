@@ -1,8 +1,14 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.RemoveMarkCommand.listToString;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
 
 import java.util.List;
@@ -25,10 +31,16 @@ public class MarkCommand extends Command {
     public static final String COMMAND_WORD = "mark";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Used to mark someone as absent.\n\n"
             + "Parameters:\n"
-            + PREFIX_DASH_INDEX + "INDEX or "
-            + PREFIX_DASH_NAME + "NAME "
+            + "[" + PREFIX_DASH_INDEX + " INDEX] "
+            + "[" + PREFIX_DASH_NAME + " NAME] "
+            + "[" + PREFIX_DASH_PHONE + " PHONE] "
+            + "[" + PREFIX_DASH_EMAIL + " EMAIL] "
+            + "[" + PREFIX_DASH_ADDRESS + " ADDRESS] "
+            + "[" + PREFIX_DASH_SALARY + " SALARY] "
+            + "[" + PREFIX_DASH_STATUS + " STATUS] "
+            + "[" + PREFIX_DASH_ROLE + " ROLE]... "
             + PREFIX_DAY_SHIFT + "DATE "
-            + "[" + PREFIX_DASH_INDEX + "END DATE]\n\n"
+            + "[" + PREFIX_DAY_SHIFT + "END DATE]\n\n"
             + "Examples:\n"
             + COMMAND_WORD + " " + PREFIX_DASH_INDEX + "1"
             + " " + PREFIX_DAY_SHIFT + "2021-11-18\n"
