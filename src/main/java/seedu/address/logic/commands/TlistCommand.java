@@ -7,7 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.data.member.Member;
+import seedu.address.model.module.member.Member;
 
 /**
  * Lists all tasks of the user in the address book.

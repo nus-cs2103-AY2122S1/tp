@@ -8,15 +8,15 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.data.Name;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.event.EventDate;
-import seedu.address.model.data.member.Address;
-import seedu.address.model.data.member.Email;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.data.member.Phone;
-import seedu.address.model.position.Position;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.event.EventDate;
+import seedu.address.model.module.member.Address;
+import seedu.address.model.module.member.Email;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.member.Phone;
+import seedu.address.model.module.member.position.Position;
+import seedu.address.model.module.task.Task;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -24,27 +24,27 @@ import seedu.address.model.task.Task;
 public class SampleDataUtil {
     public static Member[] getSampleMembers() {
         return new Member[] {
-            new Member(new seedu.address.model.data.Name("Alex Yeoh"), new Phone("87438807"),
+            new Member(new seedu.address.model.module.Name("Alex Yeoh"), new Phone("87438807"),
                 new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getPositionSet("friends")),
-            new Member(new seedu.address.model.data.Name("Bernice Yu"), new Phone("99272758"),
+            new Member(new seedu.address.model.module.Name("Bernice Yu"), new Phone("99272758"),
                 new Email("berniceyu@example.com"),
                 new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                 getPositionSet("colleagues", "friends")),
-            new Member(new seedu.address.model.data.Name("Charlotte Oliveiro"), new Phone("93210283"),
+            new Member(new seedu.address.model.module.Name("Charlotte Oliveiro"), new Phone("93210283"),
                 new Email("charlotte@example.com"),
                 new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
                 getPositionSet("neighbours")),
-            new Member(new seedu.address.model.data.Name("David Li"), new Phone("91031282"),
+            new Member(new seedu.address.model.module.Name("David Li"), new Phone("91031282"),
                 new Email("lidavid@example.com"),
                 new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
                 getPositionSet("family")),
-            new Member(new seedu.address.model.data.Name("Irfan Ibrahim"), new Phone("92492021"),
+            new Member(new seedu.address.model.module.Name("Irfan Ibrahim"), new Phone("92492021"),
                 new Email("irfan@example.com"),
                 new Address("Blk 47 Tampines Street 20, #17-35"),
                 getPositionSet("classmates")),
-            new Member(new seedu.address.model.data.Name("Roy Balakrishnan"), new Phone("92624417"),
+            new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
                 new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getPositionSet("colleagues"))
@@ -57,7 +57,7 @@ public class SampleDataUtil {
             sampleAb.addMember(sampleMember);
         }
         Set<Member> set = new HashSet<>();
-        set.add(new Member(new seedu.address.model.data.Name("Roy Balakrishnan"), new Phone("92624417"),
+        set.add(new Member(new seedu.address.model.module.Name("Roy Balakrishnan"), new Phone("92624417"),
                         new Email("royb@example.com"),
                         new Address("Blk 45 Aljunied Street 85, #11-31"),
                         getPositionSet("colleagues")));
@@ -73,6 +73,13 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
                 .map(Position::new)
                 .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns a set containing the list of members given.
+     */
+    public static Set<Member> getMemberSet(Member... members) {
+        return Arrays.stream(members).collect(Collectors.toSet());
     }
 
     /**

@@ -11,9 +11,9 @@ import java.util.stream.Stream;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EaddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.data.Name;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.event.EventDate;
+import seedu.address.model.module.Name;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.event.EventDate;
 
 /**
  * Parses input arguments and creates a new EaddCommand object

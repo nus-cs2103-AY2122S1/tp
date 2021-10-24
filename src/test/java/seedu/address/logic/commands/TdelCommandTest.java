@@ -22,12 +22,13 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
-import seedu.address.model.TaskListManager;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
+import seedu.address.model.module.task.TaskList;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
+import seedu.address.testutil.TaskBuilder;
 
 
 class TdelCommandTest {
@@ -40,7 +41,7 @@ class TdelCommandTest {
     public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
         Index validMemberID = Index.fromOneBased(1);
         Index validTaskID = Index.fromOneBased(1);
-        Task validTask = new Task("Do homework");
+        Task validTask = new TaskBuilder().build();
         Member validMember = new MemberBuilder().build();
         AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
         TaddCommand tAddCommand = new TaddCommand(validMemberID, validTask);
@@ -48,7 +49,7 @@ class TdelCommandTest {
         tAddCommand.execute(modelStub);
         CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);
 
-        assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getTaskName()),
+        assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getName()),
                 commandResult.getFeedbackToUser());
     }
 
@@ -245,6 +246,11 @@ class TdelCommandTest {
         }
 
         @Override
+        public ObservableList<Task> getFilteredTaskList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -257,7 +263,7 @@ class TdelCommandTest {
         private final AddressBook addressBook;
         private final Member member;
         private final Task task;
-        private final TaskListManager taskListManager;
+        private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
         ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
@@ -267,7 +273,7 @@ class TdelCommandTest {
             this.member = filteredMembers.get(memberID.getZeroBased());
             requireNonNull(task);
             this.task = task;
-            this.taskListManager = new TaskListManager();
+            this.taskListManager = new TaskList();
         }
 
         @Override
@@ -278,14 +284,14 @@ class TdelCommandTest {
         @Override
         public boolean hasTask(Member member, Task task) {
             loadTaskList(member);
-            return taskListManager.hasTask(task);
+            return taskListManager.contains(task);
         }
 
         @Override
         public void addTask(Member member, Task task) {
             requireNonNull(member);
             loadTaskList(member);
-            taskListManager.addTask(task);
+            taskListManager.add(task);
         }
 
         @Override
@@ -296,13 +302,15 @@ class TdelCommandTest {
         @Override
         public void loadTaskList(Member member) {
             requireNonNull(member);
-            taskListManager.loadTaskList(member.getTaskList());
+            if (this.taskListManager != member.getTaskList()) {
+                this.taskListManager = member.getTaskList();
+            }
         }
 
         @Override
         public void deleteTask(Member member, int index) {
             loadTaskList(member);
-            taskListManager.removeTask(index);
+            taskListManager.remove(index);
         }
     }
 
@@ -312,7 +320,7 @@ class TdelCommandTest {
     private class ModelStubWithoutTask extends ModelStub {
         private final AddressBook addressBook;
         private final Member member;
-        private final TaskListManager taskListManager;
+        private TaskList taskListManager;
         private final FilteredList<Member> filteredMembers;
 
         ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberID) {
@@ -320,7 +328,7 @@ class TdelCommandTest {
             requireNonNull(memberID);
             this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
             this.member = filteredMembers.get(memberID.getZeroBased());
-            this.taskListManager = new TaskListManager();
+            this.taskListManager = new TaskList();
         }
 
         @Override
@@ -331,14 +339,14 @@ class TdelCommandTest {
         @Override
         public boolean hasTask(Member member, Task task) {
             loadTaskList(member);
-            return taskListManager.hasTask(task);
+            return taskListManager.contains(task);
         }
 
         @Override
         public void addTask(Member member, Task task) {
             requireNonNull(member);
             loadTaskList(member);
-            taskListManager.addTask(task);
+            taskListManager.add(task);
         }
 
         @Override
@@ -349,13 +357,15 @@ class TdelCommandTest {
         @Override
         public void loadTaskList(Member member) {
             requireNonNull(member);
-            taskListManager.loadTaskList(member.getTaskList());
+            if (this.taskListManager != member.getTaskList()) {
+                this.taskListManager = member.getTaskList();
+            }
         }
 
         @Override
         public void deleteTask(Member member, int index) {
             loadTaskList(member);
-            taskListManager.removeTask(index);
+            taskListManager.remove(index);
         }
     }
 }

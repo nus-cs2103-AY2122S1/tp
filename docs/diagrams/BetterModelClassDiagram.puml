@@ -14,8 +14,17 @@ UniqueMemberList -right-> Member
 
 Member -up-> "*" Position
 
-Member *--> Name
 Member *--> Phone
 Member *--> Email
 Member *--> Address
+
+AddressBook *--> "1" UniqueEventList
+UniqueEventList --> "~*" Event
+Event .up.|> Module
+Module *--> Name
+Event *--> EventDate
+Event --> "~*" Member
+
+
+Member .right.|>Module
 @enduml

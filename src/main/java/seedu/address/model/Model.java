@@ -6,9 +6,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.data.event.Event;
-import seedu.address.model.data.member.Member;
-import seedu.address.model.task.Task;
+import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
+import seedu.address.model.module.task.Task;
 
 /**
  * The API of the Model component.
@@ -177,6 +177,12 @@ public interface Model {
      * Returns an unmodifiable view of the filtered task list of the given {@code member}.
      */
     ObservableList<Task> getFilteredTaskList(Member member);
+
+    /**
+     * Returns an unmodifiable view of the filtered task list of the previously selected member.
+     * If no member has been selected before, return an empty list.
+     */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Updates the filter of the filtered task list of the given {@code member}
