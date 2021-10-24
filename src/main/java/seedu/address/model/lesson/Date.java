@@ -56,13 +56,14 @@ public class Date implements Comparable<Date> {
      * @param test The string to be tested.
      */
     public static boolean isValidDate(String test) {
-        boolean isValid = true;
+        if (!test.matches(VALIDATION_REGEX)) {
+            return false;
+        }
         try {
             LocalDate.parse(test, FORMATTER);
+            return true;
         } catch (DateTimeParseException e) {
-            isValid = false;
-        } finally {
-            return test.matches(VALIDATION_REGEX) && isValid;
+            return false;
         }
     }
 
