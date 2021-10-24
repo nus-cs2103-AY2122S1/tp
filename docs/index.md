@@ -10,10 +10,20 @@ title: TutorAid
 
 **TutorAid is a desktop application for private tutors to track their students' contacts.** While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface).
 
-* If you are interested in using TutorAid, head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start).
-* If you are interested about developing TutorAid, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+Want to download and start using TutorAid? Head over to the [_Quick Start_ section of the **User Guide**](UserGuide.html#quick-start) to start your TutorAid experience!
 
+### About Us
 
-**Acknowledgements**
+To learn more about our team, head over to the [**About Us**](AboutUs.html) page.
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+### User Guide
+
+If you are interested in using TutorAid, refer to the [**User Guide**](UserGuide.html).
+
+### Developer Guide
+
+If you are interested about developing TutorAid, the [**Developer Guide**](DeveloperGuide.html) is a good place to start.
+
+### Acknowledgements
+
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
