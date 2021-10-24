@@ -361,9 +361,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 3a. User details were given in the wrong format.
-  * 3a1. Track2Gather shows the correct format for adding contacts.
-    
-    Use case resumes from step 2.
+    * 3a1. Track2Gather shows the correct format for adding contacts.  
+      Use case resumes from step 2.
 
 **Use case: UC05 - Delete person(s)**
 
@@ -518,16 +517,23 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `edit 1 n/John Doe`<br>
-      Expected: First person in the list has their name edited to `John Doe`. Details of the edited person shown in the status message.
+      Expected: First person in the list has their name edited to `John Doe`. Details of the edited person shown in the
+      status message.
 
    3. Test case: `edit 1 n/John Doe cn/12`<br>
-      Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`. Details of the edited person shown in the status message.
+      Expected: First person in the list has their name edited to `John Doe` and their case number edited to `12`.
+      Details of the edited person shown in the status message.
 
    4. Test case: `edit 1`<br>
-      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
+      remains the same.
 
    5. Test case: `edit 1 INVALID_PREFIX/EXAMPLE`<br>
-      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar remains the same.
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
+      remains the same.
+   6. Test case: `edit 1 VALID_PREFIX/INVALID_INPUT`<br>
+      Expected: No persons' contact details will be edited. Error details shown in the status message. Status bar
+      remains the same.
 
 2. _{ more test cases …​ }_
 
@@ -562,7 +568,9 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
+    2. Test case: Empty JSON file.  
+       Expected: Sample Track2Gather person list will be generated with sample persons' information.
+    3. Test case: Corrupted JSON file.  
+       Expected: Sample Track2Gather person list will be generated with sample persons' information.
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
