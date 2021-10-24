@@ -111,6 +111,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-text-fill: white;
 }
 
 .list-cell:filled:even {
@@ -319,6 +320,18 @@
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
     -fx-padding: 8 1 8 1;
+}
+
+.slotCard {
+    -fx-background-color: grey;
+    -fx-border-width: 2;
+    -fx-border-color: white;
+}
+
+.big_label_white {
+    -fx-font-family: "Open Sans Semibold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #ffffff;
 }
 
 #cardPane {

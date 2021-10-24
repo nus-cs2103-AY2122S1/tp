@@ -33,7 +33,7 @@ public class AddShiftCommandParserTest {
 
     @Test
     public void prefix_duplicate_throwsParseException() {
-        assertParseFailure(parser, "addShift -i 1 n/testingName d/monday-1",
+        assertParseFailure(parser, "addShift -i 1 -n testingName d/monday-1",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddShiftCommand.MESSAGE_USAGE));
     }
 

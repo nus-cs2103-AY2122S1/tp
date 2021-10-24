@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.nio.file.Path;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
@@ -184,6 +186,12 @@ public class ModelManager implements Model {
         requireAllNonNull(target, dayOfWeek, slot);
         target.addShift(dayOfWeek, slot, startDate);
 
+    }
+
+    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+            throws InvalidShiftTimeException {
+        requireAllNonNull(target, dayOfWeek, slot, startTime, endTime);
+        target.setShiftTime(dayOfWeek, slot, startTime, endTime);
     }
 
     @Override
