@@ -30,7 +30,6 @@
             <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
           </Menu>
             <Menu mnemonicParsing="false" text="Help">
-                <MenuItem mnemonicParsing="false" onAction="#handleStats" text="Stats" />
             </Menu>
         </MenuBar>
 

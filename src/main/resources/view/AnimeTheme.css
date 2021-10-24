@@ -500,3 +500,31 @@ chart-pie-label-line {
     -fx-text-fill: white;
     -fx-alignment: CENTER;
 }
+
+.bar-chart {
+    -fx-alternative-row-visible: false;
+    -fx-alternative-column-visible: false;
+    -fx-horizontal-grid-lines-visible: false;
+    -fx-vertical-grid-lines-visible:false;
+    -fx-horizontal-zero-line-visible: false;
+    -fx-vertical-zero-line-visible: false;
+    -fx-legend-visible: false;
+}
+
+.chart-plot-background {
+    -fx-background-color: transparent;
+}
+
+.axis {
+    -fx-font-size: 1.4em;
+    -fx-tick-label-fill: white;
+    -fx-font-family: Tahoma;
+    -fx-tick-length: 20;
+    -fx-minor-tick-visible: false;
+}
+
+.axis-label {
+   -fx-text-fill: white;
+   -fx-font-size: 11pt;
+   -fx-font-family: "Open Sans Semibold";
+}
