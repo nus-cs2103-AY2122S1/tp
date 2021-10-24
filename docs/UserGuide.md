@@ -1,14 +1,39 @@
 ---
 layout: page
 title: User Guide
+* Table of Contents
+  {:toc}
 ---
+## Introduction
+![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
 NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their course completion.**
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
 
-* Table of Contents
-{:toc}
+### Main Features 
+
+Here is an overview of the main features that NUS Mod Tracker provides:
+* Keep track of your Modular Credits(MC).
+* Keep track of the modules that you have taken.  
+* Create your own academic plan.
+
+For more information about our features, you can head over to our [Features](#features) section. Better yet, 
+head over to our [Quick Start](#quick-start) and try it out for yourself!
+
+### How to use the user guide 
+
+We strongly recommend first time users of our application to read through the user guide in the order that it is written. Throughout 
+the user guide, we include links which will jump to the corresponding section of the user guide. 
+These links help you to quickly navigate this document.
+
+### Table of Contents
+
+* [Quick Start](#quick-start)
+* [Features](#features)
+* [FAQ](#faq)
+* [Command Summary](#command-summary)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +41,7 @@ Interface (GUI).
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `modtracker.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `modtracker.jar` from [here](https://github.com/AY2122S1-CS2103T-W17-2/tp/releases/tag/v1.3.trial).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Mod Tracker.
 
@@ -33,7 +58,7 @@ Interface (GUI).
    * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
 
-1. Refer to the [Features](#features) below for details of each command.
+Kindly refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -247,9 +272,9 @@ Requirement | Tag (not case sensitive)
 GE | "ge"
 UE | "ue"
 Foundation | "foundation"
-Breadth and Depth | "breadthdepth"
-IT Professionalism | "itprofessionalism"
-Math and Science | "mathscience"
+Breadth and Depth | "breadth and depth"
+IT Professionalism | "it professionalism"
+Math and Science | "math and science"
 
 Notes:
 * If the Mc requirement has been satisfied, the completed Mcs and progress bar will be coloured light blue.
@@ -271,7 +296,7 @@ Action | Format, Examples
 **Clear** | `clear y/YEAR s/SEMESTER` <br> e.g. `clear y/1 s/1`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Edit** | `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]` <br> e.g `edit 2 c/CS2103T t/Software Engineering`
-**Find** | `find [code] [title] [description] [mc] [tag] KEYWORDS` <br> e.g. `find code CS2040S`
+**Find** | `find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS` <br> e.g. `find c/ CS2040S`
 **List** | `list`
 **Take** | `take INDEX y/YEAR s/SEMESTER` <br> e.g. `take 2 y/2 s/1`
 **Untake** | `untake INDEX` <br> e.g. `untake 1`
