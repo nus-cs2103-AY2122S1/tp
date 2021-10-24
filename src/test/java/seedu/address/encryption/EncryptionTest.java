@@ -24,8 +24,8 @@ import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 public class EncryptionTest {
     private static final String ENCRYPTION_ALGORITHM = "AES";
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
-    private static final String PASSWORD_ONE = "password_one";
-    private static final String PASSWORD_TWO = "password_two";
+    private static final String PASSWORD_ONE = "password_1!";
+    private static final String PASSWORD_TWO = "password_2!";
     private static final String TOO_LONG_PASSWORD = "1111111111111111111111111111111111";
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "EncryptionTest");
@@ -39,9 +39,10 @@ public class EncryptionTest {
     @Test
     public void whenEncryptingJsonIntoFile_andDecryptingFileAgain_theOriginalContentIsReturned()
             throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
-            InvalidAlgorithmParameterException {
-        SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
+            InvalidAlgorithmParameterException, UnsupportedPasswordException {
+        //SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
+        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator
+                .generateKey(PASSWORD_ONE), CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
@@ -57,9 +58,10 @@ public class EncryptionTest {
     @Test
     public void ableToEncrypt_decrypt_writeJsonToDestination()
             throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, InvalidKeyException,
-            InvalidAlgorithmParameterException {
-        SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
+            InvalidAlgorithmParameterException, UnsupportedPasswordException {
+        //SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
+        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator
+                .generateKey(PASSWORD_ONE), CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);

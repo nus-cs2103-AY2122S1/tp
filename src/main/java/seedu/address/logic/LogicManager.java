@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 import java.util.logging.Logger;
 import javax.crypto.NoSuchPaddingException;
 
@@ -53,12 +54,13 @@ public class LogicManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
-    @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-
-        CommandResult commandResult;
-        Command command = addressBookParser.parseCommand(commandText);
+    /**
+     * Executes if the command is a PasswordCommand.
+     *
+     * @param command The command from user.
+     * @return An Optional CommandResult.
+     */
+    public Optional<CommandResult> executePasswordCommand(Command command) {
         if (command instanceof PasswordCommand) {
             try {
                 Encryption temp = new EncryptionManager(EncryptionKeyGenerator
@@ -71,12 +73,24 @@ public class LogicManager implements Logic {
                 FileUtil.deleteFile(storage.getAddressBookFilePath());
             } catch (NoSuchPaddingException | InvalidAlgorithmParameterException
                     | UnsupportedPasswordException | InvalidKeyException | NoSuchAlgorithmException e) {
-                return new CommandResult(PasswordCommand.MESSAGE_FAIL);
+                return Optional.of(new CommandResult(PasswordCommand.MESSAGE_FAIL));
             } catch (IOException e) {
-                return new CommandResult(PasswordCommand.MESSAGE_WRONG_PASSWORD);
+                return Optional.of(new CommandResult(PasswordCommand.MESSAGE_WRONG_PASSWORD));
             }
         }
-        commandResult = command.execute(model);
+        return Optional.empty();
+    }
+
+    @Override
+    public CommandResult execute(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[USER COMMAND][" + commandText + "]");
+
+        CommandResult commandResult;
+        Command command = addressBookParser.parseCommand(commandText);
+
+        Optional<CommandResult> temp = executePasswordCommand(command);
+
+        commandResult = temp.orElse(command.execute(model));
         try { // decrypt -> modify -> encrypt -> delete subroutine
             cryptor.decrypt(encryptedFilePath, storage.getAddressBookFilePath());
             storage.saveAddressBook(model.getAddressBook());
