@@ -14,6 +14,8 @@ import seedu.tracker.logic.parser.ModuleTrackerParser;
 import seedu.tracker.logic.parser.exceptions.ParseException;
 import seedu.tracker.model.Model;
 import seedu.tracker.model.ReadOnlyModuleTracker;
+import seedu.tracker.model.ReadOnlyUserInfo;
+import seedu.tracker.model.UserInfo;
 import seedu.tracker.model.module.Module;
 import seedu.tracker.storage.Storage;
 
@@ -77,5 +79,10 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public ReadOnlyUserInfo getUserInfo() {
+        return model.getUserInfo();
     }
 }

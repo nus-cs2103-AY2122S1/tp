@@ -53,4 +53,22 @@ class AcademicYearTest {
         assertEquals(false, test1.equals(test2));
     }
 
+    @Test
+    public void compareToTest() {
+        AcademicYear academicYear2 = new AcademicYear(2);
+        AcademicYear academicYear3 = new AcademicYear(3);
+
+        // left < right -> negative
+        int result = academicYear2.compareTo(academicYear3);
+        assertEquals(true, result < 0);
+
+        // left > right -> positive
+        result = academicYear3.compareTo(academicYear2);
+        assertEquals(true, result > 0);
+
+        // left = right -> 0
+        result = academicYear2.compareTo(academicYear2);
+        assertEquals(true, result == 0);
+    }
+
 }

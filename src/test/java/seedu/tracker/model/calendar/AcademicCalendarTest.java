@@ -59,4 +59,23 @@ class AcademicCalendarTest {
         assertEquals(true, academicCalendar1.hashCode() == academicCalendar2.hashCode());
     }
 
+    @Test
+    public void compareToTest() {
+        AcademicCalendar academicCalendarY2S1 = new AcademicCalendar(new AcademicYear(2), new Semester(1));
+        AcademicCalendar academicCalendarY1S1 = new AcademicCalendar(new AcademicYear(1), new Semester(1));
+
+        // left < right -> negative
+        int result = academicCalendarY1S1.compareTo(academicCalendarY2S1);
+        assertEquals(true, result < 0);
+
+        // left > right -> positive
+        result = academicCalendarY2S1.compareTo(academicCalendarY1S1);
+        assertEquals(true, result > 0);
+
+        // left = right -> 0
+        AcademicCalendar anotherAcademicCalendarY2S1 = new AcademicCalendar(new AcademicYear(2), new Semester(1));
+        result = anotherAcademicCalendarY2S1.compareTo(academicCalendarY2S1);
+        assertEquals(true, result == 0);
+    }
+
 }

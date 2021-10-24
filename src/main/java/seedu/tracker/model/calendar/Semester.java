@@ -5,7 +5,7 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
-public class Semester {
+public class Semester implements Comparable<Semester> {
 
     public static final String MESSAGE_CONSTRAINTS =
             "Semester should only contain numbers from 1 to 4, and it should not be blank";
@@ -52,5 +52,10 @@ public class Semester {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(Semester semester) {
+        return this.value - semester.value;
     }
 }

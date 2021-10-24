@@ -3,10 +3,10 @@ package seedu.tracker.ui;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import seedu.tracker.model.calendar.AcademicCalendar;
 import seedu.tracker.model.calendar.AcademicYear;
 import seedu.tracker.model.calendar.Semester;
@@ -49,7 +49,7 @@ public class ModuleCard extends UiPart<Region> {
     /**
      * Creates a {@code ModuleCard} with the given {@code Module} and index to display.
      */
-    public ModuleCard(Module module, int displayedIndex) {
+    public ModuleCard(Module module, int displayedIndex, AcademicCalendar currentSemester) {
         super(FXML);
         this.module = module;
         id.setText(displayedIndex + ". ");
@@ -58,8 +58,16 @@ public class ModuleCard extends UiPart<Region> {
         mc.setText(String.valueOf(module.getMc().value));
         description.setText(module.getDescription().value);
 
+        cardPane.setStyle("-fx-background-color:rgba(0, 0, 0, 1);");
         if (module.hasAcademicCalendar()) {
             academicCalendar.getChildren().add(new Label(getFormattedAcademicCalendar(module)));
+            if (module.getAcademicCalendar().compareTo(currentSemester) < 0) {
+                cardPane.setStyle("-fx-background-color:rgba(0, 0, 255, 0.1);"); //module has been finished
+            } else if (module.getAcademicCalendar().compareTo(currentSemester) > 0) {
+                cardPane.setStyle("-fx-background-color:rgba(0, 255, 0, 0.1);"); //module planned to take
+            } else {
+                cardPane.setStyle("-fx-background-color:rgba(100, 100, 0, 0.5);"); //module being taken
+            }
         }
 
         module.getTags().stream()
@@ -71,7 +79,7 @@ public class ModuleCard extends UiPart<Region> {
         AcademicCalendar academicCalendar = module.getAcademicCalendar();
         AcademicYear year = academicCalendar.getAcademicYear();
         Semester semester = academicCalendar.getSemester();
-        return String.format("y%ss%s", year, semester);
+        return String.format("year%s sem%s", year, semester);
     }
 
     @Override

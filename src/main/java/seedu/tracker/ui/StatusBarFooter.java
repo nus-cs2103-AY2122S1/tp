@@ -5,7 +5,10 @@ import java.nio.file.Paths;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import seedu.tracker.model.ReadOnlyUserInfo;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -17,12 +20,30 @@ public class StatusBarFooter extends UiPart<Region> {
     @FXML
     private Label saveLocationStatus;
 
+    @FXML
+    private Label currentSemester;
+
+    @FXML
+    private Label mcGoal;
+
+    @FXML
+    private Region blankRegion;
+
+    @FXML
+    private HBox footerContainer;
+
     /**
      * Creates a {@code StatusBarFooter} with the given {@code Path}.
      */
-    public StatusBarFooter(Path saveLocation) {
+    public StatusBarFooter(Path saveLocation, ReadOnlyUserInfo userInformation) {
         super(FXML);
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
+
+        currentSemester.setText(userInformation.getCurrentSemester().toString());
+
+        mcGoal.setText("MC goal : " + userInformation.getMcGoal().toString());
+
+        footerContainer.setHgrow(blankRegion, Priority.ALWAYS);
     }
 
 }
