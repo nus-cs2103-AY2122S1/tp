@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -46,7 +45,7 @@ public class ParticipantBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         birthDate = BirthDate.notSpecified();
-        nextOfKins =  FXCollections.observableArrayList();
+        nextOfKins = FXCollections.observableArrayList();
     }
 
     /**
@@ -113,7 +112,7 @@ public class ParticipantBuilder {
      * Sets the {@code nextOfKins} of the {@code Participant} that we are building.
      */
     public ParticipantBuilder withNextOfKins(NextOfKin... nextOfKins) {
-        this.nextOfKins =  FXCollections.observableArrayList(Arrays.stream(nextOfKins).collect(Collectors.toList()));
+        this.nextOfKins = FXCollections.observableArrayList(Arrays.stream(nextOfKins).collect(Collectors.toList()));
         return this;
     }
 

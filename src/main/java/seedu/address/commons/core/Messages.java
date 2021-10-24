@@ -47,8 +47,8 @@ public class Messages {
      * @param nextOfKinName The name of the next of kin.
      * @return a message that states that the next of kin is already assigned to a participant.
      */
-    public static String showNextOfKinExists(String nextOfKinName, String pariticpantName) {
-        return  nextOfKinName + " is already next of kin of " + pariticpantName + "!";
+    public static String showNextOfKinExists(String nextOfKinName, String participantName) {
+        return nextOfKinName + " is already next of kin of " + participantName + "!";
     }
 
 }

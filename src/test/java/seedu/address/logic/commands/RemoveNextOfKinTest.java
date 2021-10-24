@@ -9,9 +9,10 @@ import static seedu.address.logic.commands.RemoveNextOfKinCommand.MESSAGE_SUCCES
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalParticipants.ALEX;
 
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.participant.NextOfKin;
@@ -26,7 +27,7 @@ public class RemoveNextOfKinTest {
         ModelStubWithParticipant modelStub =
                 new ModelStubWithParticipant(validParticipant);
 
-        NextOfKin nextOfKinToRemove =  validParticipant.getNextOfKin(0);
+        NextOfKin nextOfKinToRemove = validParticipant.getNextOfKin(0);
 
         CommandResult commandResult =
                 new RemoveNextOfKinCommand(Index.fromOneBased(1), Index.fromOneBased(1)).execute(modelStub);
@@ -45,13 +46,13 @@ public class RemoveNextOfKinTest {
 
         assertThrows(CommandException.class,
                 String.format(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX,
-                        RemoveNextOfKinCommand.COMMAND_WORD),
-                () -> new RemoveNextOfKinCommand(Index.fromOneBased(2), Index.fromOneBased(1)).execute(modelStub));
+                        RemoveNextOfKinCommand.COMMAND_WORD), () ->
+                        new RemoveNextOfKinCommand(Index.fromOneBased(2), Index.fromOneBased(1)).execute(modelStub));
 
         assertThrows(CommandException.class,
                 String.format(MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX,
-                        RemoveNextOfKinCommand.COMMAND_WORD),
-                () -> new RemoveNextOfKinCommand(Index.fromOneBased(1), Index.fromOneBased(2)).execute(modelStub));
+                        RemoveNextOfKinCommand.COMMAND_WORD), () ->
+                        new RemoveNextOfKinCommand(Index.fromOneBased(1), Index.fromOneBased(2)).execute(modelStub));
     }
 
     @Test
@@ -63,9 +64,9 @@ public class RemoveNextOfKinTest {
                 new RemoveNextOfKinCommand(firstIndex, firstIndex);
         RemoveNextOfKinCommand removeFirstFromFirst =
                 new RemoveNextOfKinCommand(firstIndex, firstIndex);
-        RemoveNextOfKinCommand RemoveFirstFromSecond =
+        RemoveNextOfKinCommand removeFirstFromSecond =
                 new RemoveNextOfKinCommand(firstIndex, secondIndex);
-        RemoveNextOfKinCommand RemoveSecondfromSecond =
+        RemoveNextOfKinCommand removeSecondfromSecond =
                 new RemoveNextOfKinCommand(secondIndex, secondIndex);
 
         // same object -> returns true
@@ -81,10 +82,10 @@ public class RemoveNextOfKinTest {
         assertFalse(removeFirstFromFirst.equals(null));
 
         // different index -> returns false
-        assertFalse(removeFirstFromFirst.equals(RemoveFirstFromSecond));
-        assertFalse(RemoveFirstFromSecond.equals(RemoveSecondfromSecond));
+        assertFalse(removeFirstFromFirst.equals(removeFirstFromSecond));
+        assertFalse(removeFirstFromSecond.equals(removeSecondfromSecond));
 
-        assertFalse(removeFirstFromFirst.equals(RemoveSecondfromSecond));
+        assertFalse(removeFirstFromFirst.equals(removeSecondfromSecond));
     }
 
     /**

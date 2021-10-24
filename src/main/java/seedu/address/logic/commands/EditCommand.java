@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -216,12 +215,12 @@ public class EditCommand extends Command {
         }
 
         public void setNextOfKins(ObservableList<NextOfKin> nextOfKins) {
-            this.nextOfKins = (nextOfKins != null) ?  FXCollections.observableArrayList(nextOfKins) : null;
+            this.nextOfKins = (nextOfKins != null) ? FXCollections.observableArrayList(nextOfKins) : null;
         }
 
         public Optional<ObservableList<NextOfKin>> getNextOfKins() {
-            return (nextOfKins != null) ? Optional.of( FXCollections.observableArrayList((nextOfKins))) : Optional.empty();
-
+            return (nextOfKins != null) ? Optional.of( FXCollections.observableArrayList((nextOfKins)))
+                    : Optional.empty();
         }
 
         @Override

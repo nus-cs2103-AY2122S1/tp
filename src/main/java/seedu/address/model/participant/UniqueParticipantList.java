@@ -10,7 +10,6 @@ import java.util.List;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
 import seedu.address.model.participant.exceptions.DuplicateParticipantException;
 import seedu.address.model.participant.exceptions.ParticipantNotFoundException;
 

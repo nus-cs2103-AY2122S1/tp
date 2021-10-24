@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ZERO_BASED_IND
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddParticipantToEventByIndexCommand;
 import seedu.address.logic.commands.RemoveNextOfKinCommand;
-import seedu.address.logic.commands.RemoveParticipantFromEventByIndexCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class RemoveNextOfKinParser implements Parser<RemoveNextOfKinCommand> {
