@@ -1,53 +1,88 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
- * Deletes a student identified using it's displayed index from the address book.
+ * Deletes a task identified using it's displayed index from the address book.
  */
-public class DeleteTaskCommand extends Command {
+public class DeleteTaskCommand extends DeleteCommand {
 
     public static final String COMMAND_WORD = "delete task";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the student identified by the index number used in the displayed student list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the task from the module identified by the task ID used in the displayed task list.\n"
+            + "Parameters: "
+            + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_TASK_ID + "TASK ID\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE_NAME + "CS2103 "
+            + PREFIX_TASK_ID + "T1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    private final Index targetIndex;
+    private static Logger logger = Logger.getLogger("Delete Task Logger");
 
-    public DeleteTaskCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    private final TaskId targetTaskId;
+    private final ModuleName moduleName;
+
+    /**
+     *
+     */
+    public DeleteTaskCommand(TaskId targetTaskId, ModuleName moduleName) {
+        requireAllNonNull(targetTaskId, moduleName);
+        this.targetTaskId = targetTaskId;
+        this.moduleName = moduleName;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Student> lastShownList = model.getFilteredStudentList();
-
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        List<Module> lastShownList = model.getFilteredModuleList();
+        for (Module module : lastShownList) {
+            if (module.getName().equals(moduleName)) {
+                List<Task> taskList = module.getTaskList().asModifiableObservableList();
+                List<Student> studentList = module.getStudentList();
+                for (Student student : studentList) {
+                    for (Task task : taskList) {
+                        if (task.getTaskId().equals(targetTaskId)) {
+                            Task taskToDelete = task;
+                            logger.log(Level.INFO, "deleting task from student's taskList: " + task.getTaskId());
+                            student.removeTask(taskToDelete);
+                        }
+                    }
+                }
+                for (Task task : taskList) {
+                    if (task.getTaskId().equals(targetTaskId)) {
+                        Task taskToDelete = task;
+                        logger.log(Level.INFO, "deleting task from module taskList: " + task.getTaskId());
+                        module.deleteTask(taskToDelete);
+                        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+                    }
+                }
+            }
         }
-
-        Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteStudent(studentToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, studentToDelete));
+        throw new CommandException(Messages.MESSAGE_MODULE_NAME_NOT_FOUND);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteTaskCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteTaskCommand) other).targetIndex)); // state check
+                && targetTaskId.equals(((DeleteTaskCommand) other).targetTaskId)); // state check
     }
 }

@@ -241,7 +241,20 @@ This section describes some noteworthy details on how certain features are imple
 9. The `Model` will look for the `Task` with the specified task id, `T1` in this case, for every `Student` in the `Module` specified by
    the module name, `CS2103` in this case, and replacing the old editable fields of (such as task name, task deadline) 
    of that `Task` using any optionally provided new fields.
-11. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+10. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+
+### Delete Task
+
+1. When the `Logic` is called upon to execute `delete task m/CS2103 ti/T1`, it uses the `TeachingAssistantBuddyParser` class to parse the user command.
+2. The `TeachingAssistantBuddyParser` parses the first command word `delete`, and pass the rest of the input to a `DeleteCommandParser`.
+3. The `DeleteTaskCommandParser` then figures out the type of object to delete, in this case a `Task` object as indicated by `task`.
+4. The `DeleteStudentCommandParser` will wrap the module name in a `ModuleName` object and the task ID in a `TaskId` object and pass them into a `DeleteTaskCommand`.
+5. This results in a `DeleteTaskCommand` object (which is a subclass of `DeleteCommand`), which is executed by the `Logic Manager`.
+6. The `DeleteTaskCommand` communicates with the `Model` when it is executed.
+7. The `Model` will look for a `Module` with the specified `ModuleName`.
+8. The `Module` with the specified `ModuleName` will then look for the task with the specified `TaskId` and delete the task.
+9. The `Module` will also iterate through its `Student` list and delete the specified `Task` from all the students.
+10. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
 
 ### \[Proposed\] Undo/redo feature
 
