@@ -224,7 +224,7 @@ public class MainWindow extends UiPart<Stage> {
                 handlePersonGridPanel(student);
             } else if (commandResult.isShowSchedule()) {
                 handleSchedule();
-            } else if (commandResult.isShowTagList()){
+            } else if (commandResult.isShowTagList()) {
                 handleShowTagList();
             } else {
                 handlePersonGridPanel();
