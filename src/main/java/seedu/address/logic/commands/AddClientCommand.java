@@ -78,7 +78,7 @@ public class AddClientCommand extends Command {
         Address address = addClientDescriptor.getAddress();
         Set<Order> orders = addClientDescriptor.getOrders()
                 .stream()
-                .filter(Order::isValidOrder)
+                .filter(Order::isPositiveQuantity)
                 .collect(Collectors.toSet());
         return new Client(name, phoneNumber, email, address, orders);
     }
