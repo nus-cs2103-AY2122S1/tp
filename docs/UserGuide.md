@@ -52,19 +52,8 @@ Additionally, here are the relevant places you can go to if you would like to se
 * If you would like to view the features available for **Uni-Fy**, head over to [5. Features](#5-features).
 * If you would like a quick summary of the available commands for **Uni-Fy**, head over to [7. Command summary](#7-command-summary).
 
-### 2.2. Glossary
 
-Here is a table of common terms used in this document along with their meaning and interpretation.
-
-|Term |Explanation |
-|-----|------------|
-|GUI | A GUI (graphical user interface) is a system of interactive visual components for the user interacts with. |
-|index | The position of a task in the list. Indexes start from 1. |
-|parameter| Specific information for a command. |
-
---------------------------------------------------------------------------------------------------------------------
-
-### 2.3. Formatting
+### 2.2. Formatting
 
 The Uni-Fy user guide contains different formatting used throughout the document which is used to convey different meanings.
 This table below illustrates what each formatting means. 
@@ -77,7 +66,7 @@ This table below illustrates what each formatting means.
 | <code>multiple...</code> | Words with `…` after them| Parameters that can be input multiple times including 0 times|`keywords...`|
 | [**Blue underline**](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
 
-### 2.4. Icons
+### 2.3. Icons
 
 The Uni-Fy user guide uses icons to differentiate the type of information presented. 
 Here are the meanings behind the icons used in this document.
@@ -88,6 +77,16 @@ Here are the meanings behind the icons used in this document.
 |:green_book: | Example(s) |
 |:information_source: | Important information to take note |
 |:warning: | Warning about the usage of a command |
+
+### 2.4. Glossary
+
+Here is a table of commonly used terms in this document along with their meaning and interpretation.
+
+|Term |Explanation |
+|-----|------------|
+|GUI | A GUI (graphical user interface) is a system of interactive visual components for the user interacts with. |
+|index | The position of a task in the list. Indexes start from 1. |
+|parameter| Specific information for a command. |
 
 
 --------------------------------------------------------------------------------------------------------------------
