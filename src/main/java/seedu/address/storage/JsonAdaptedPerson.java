@@ -33,7 +33,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String nationality;
     private final String tutorialGroup;
-    private final String socialHandle = "";
     private final String gender;
     private final String remark;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
@@ -48,7 +47,6 @@ class JsonAdaptedPerson {
                              @JsonProperty("email") String email,
                              @JsonProperty("nationality") String nationality,
                              @JsonProperty("tutorialGroup") String tutorialGroup,
-                             //@JsonProperty("socialHandle") String socialHandle, //Deprecated
                              @JsonProperty("gender") String gender,
                              @JsonProperty("remark") String remark,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
