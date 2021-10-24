@@ -8,7 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
@@ -51,9 +53,9 @@ public class LessonListPanel extends UiPart<Region> {
         initialiseLessonListView(lessonList);
 
         lessonListTitle.setText(student.getName().fullName);
-
         if (lessonList.isEmpty()) {
             placeholder.setText(NO_EXISTING_LESSONS_MESSAGE);
+            placeholder.prefWidthProperty().bind(getRoot().widthProperty().multiply(0.7));
         }
     }
 

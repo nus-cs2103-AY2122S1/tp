@@ -441,6 +441,7 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
     -fx-padding: 3 12 3 12;
     -fx-background-radius: 20;
     -fx-font-size: 12;
+    -fx-max-width: 130;
     -fx-wrap-text: true;
 }
 
@@ -466,7 +467,6 @@ https://stackoverflow.com/questions/49567454/menu-color-changes-on-mouse-leave
     -fx-background-color: #8390C9;
     -fx-text-fill: white;
     -fx-background-radius: 15 15 0 0;
-    -fx-wrap-text: true;
 }
 
 #lessonListView {

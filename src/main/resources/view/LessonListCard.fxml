@@ -19,19 +19,19 @@
             <padding>
                 <Insets bottom="5" left="15" right="5" top="5" />
             </padding>
-            <HBox alignment="CENTER_LEFT" spacing="5">
+            <HBox spacing="5">
                 <Label fx:id="lessonId" styleClass="cell_medium_label">
                     <minWidth>
                         <!-- Ensures that the label text is never truncated -->
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="title" styleClass="cell_big_label" text="\$first" />
+                <Label fx:id="title" styleClass="cell_big_label" text="\$first" wrapText="true"/>
             </HBox>
-            <Label fx:id="date" styleClass="cell_small_label" text="\$date" />
-            <Label fx:id="time" styleClass="cell_small_label" text="\$time" />
-            <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" />
-            <FlowPane fx:id="homeworkList" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="date" styleClass="cell_small_label" text="\$date" wrapText="true"/>
+            <Label fx:id="time" styleClass="cell_small_label" text="\$time" wrapText="true"/>
+            <Label fx:id="rates" styleClass="cell_small_label" text="\$rates" wrapText="true"/>
+            <FlowPane fx:id="homeworkList" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" />
         </VBox>
       <rowConstraints>
          <RowConstraints />

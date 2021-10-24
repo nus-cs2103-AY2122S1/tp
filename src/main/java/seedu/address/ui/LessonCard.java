@@ -45,11 +45,13 @@ public class LessonCard extends UiPart<Region> {
             .sorted(Comparator.comparing(homework -> homework.description))
             .forEach(homework -> homeworkList.getChildren()
                 .add(homeworkLabel(homework.toString())));
+        title.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.75));
     }
 
     private Label homeworkLabel(String homework) {
         Label label = new Label(homework);
         label.setWrapText(true);
+        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.7));
         return label;
     }
 }

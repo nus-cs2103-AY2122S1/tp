@@ -12,32 +12,32 @@
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" percentWidth="50" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
     </columnConstraints>
-    <VBox alignment="TOP_LEFT" minHeight="105" GridPane.columnIndex="0">
+    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
       <padding>
         <Insets top="5" right="5" bottom="5" left="15" />
       </padding>
-      <HBox spacing="5" alignment="CENTER_LEFT">
+      <HBox spacing="5">
         <Label fx:id="id" styleClass="cell_big_label">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" maxWidth="130" wrapText="true"/>
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <Label fx:id="parentPhone" styleClass="cell_small_label" text="\$parentPhone" />
-      <Label fx:id="parentEmail" styleClass="cell_small_label" text="\$parentEmail" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="school" styleClass="cell_small_label" text="\$school" />
-      <Label fx:id="acadStream" styleClass="cell_small_label" text="\$acadStream" />
-      <Label fx:id="acadLevel" styleClass="cell_small_label" text="\$acadLevel" />
-      <Label fx:id="outstandingFee" styleClass="cell_small_label" text="\$outstandingFee" />
-      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" maxWidth="130" wrapText="true"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" maxWidth="130" wrapText="true"/>
+      <Label fx:id="parentPhone" styleClass="cell_small_label" text="\$parentPhone" maxWidth="130" wrapText="true"/>
+      <Label fx:id="parentEmail" styleClass="cell_small_label" text="\$parentEmail" maxWidth="130" wrapText="true"/>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" maxWidth="130" wrapText="true"/>
+      <Label fx:id="school" styleClass="cell_small_label" text="\$school" maxWidth="130" wrapText="true"/>
+      <Label fx:id="acadStream" styleClass="cell_small_label" text="\$acadStream" maxWidth="130" wrapText="true"/>
+      <Label fx:id="acadLevel" styleClass="cell_small_label" text="\$acadLevel" maxWidth="130" wrapText="true"/>
+      <Label fx:id="outstandingFee" styleClass="cell_small_label" text="\$outstandingFee" maxWidth="130" wrapText="true"/>
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" maxWidth="130" wrapText="true"/>
     </VBox>
   </GridPane>
 </HBox>
