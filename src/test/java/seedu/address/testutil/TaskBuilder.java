@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 /**
@@ -12,7 +12,7 @@ public class TaskBuilder {
 
     public static final String DEFAULT_LABEL = "Get new cloth";
     public static final String DEFAULT_DATE = "20th September 2021";
-    public static final String DEFAULT_TASKTAG = "SO007";
+    public static final String DEFAULT_TASKTAG = "General";
     public static final boolean DEFAULT_IS_DONE = false;
 
 

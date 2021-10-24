@@ -6,14 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.Date;
 import seedu.address.model.order.exceptions.OrderNotFoundException;
+import seedu.address.testutil.OrderBuilder;
 
 class OrderListTest {
     private final OrderList orderList = new OrderList();
     // project checkstyle blocks me from naming this in all caps as per normal convention
-    private final Order testorder = new Order(new Customer("John"), new Date("20th august 2021"),
-            new Amount("100.25"));
+    private final Order testorder = new OrderBuilder().build();
 
     @Test
     public void hasOrder_nullOrder_throwsNullPointerException() {

@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,6 +48,14 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Removes all tasks matching predicate from the list.
+     */
+    public void removeIf(Predicate<Task> pred) {
+        requireNonNull(pred);
+        internalList.removeIf(pred);
+    }
+
+    /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
      * {@code target} must exist in the task list.
      * The task identity of {@code editedTask} must not be the same as another existing task in the task list.
@@ -69,7 +78,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Marks a task as done.
      */
-    public void markTask(Task toMark) {
+    public void markDone(Task toMark) {
         requireNonNull(toMark);
         if (!hasTask(toMark)) {
             throw new TaskNotFoundException();

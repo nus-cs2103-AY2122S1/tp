@@ -3,8 +3,8 @@ package seedu.address.testutil;
 import seedu.address.logic.commands.EditTaskCommand;
 import seedu.address.logic.commands.EditTaskCommand.EditTaskDescriptor;
 import seedu.address.model.Date;
+import seedu.address.model.Label;
 import seedu.address.model.tag.TaskTag;
-import seedu.address.model.task.Label;
 import seedu.address.model.task.Task;
 
 /**

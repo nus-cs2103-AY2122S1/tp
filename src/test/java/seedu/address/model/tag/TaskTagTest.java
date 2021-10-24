@@ -1,5 +1,6 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -17,6 +18,18 @@ public class TaskTagTest {
     public void constructor_invalidTagName_throwsIllegalArgumentException() {
         String invalidTagName = "";
         assertThrows(IllegalArgumentException.class, () -> new TaskTag(invalidTagName));
+    }
+
+    @Test
+    public void getTagId() {
+        TaskTag taskTag = new TaskTag("SO100");
+        assertEquals(taskTag.getTagId(), 100);
+
+        taskTag = new TaskTag("SO398");
+        assertEquals(taskTag.getTagId(), 398);
+
+        taskTag = new TaskTag("General");
+        assertEquals(taskTag.getTagId(), -1);
     }
 
     @Test
