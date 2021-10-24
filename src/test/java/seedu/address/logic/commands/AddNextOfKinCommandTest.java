@@ -4,15 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_EVENT_NOT_FOUND_IN_FILTERED_LIST;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PARTICIPANT_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_PARTICIPANT_NOT_FOUND;
 import static seedu.address.logic.commands.AddNextOfKinCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalEvents.ANOTHER_EVENT;
-import static seedu.address.testutil.TypicalEvents.SAMPLE_EVENT;
-import static seedu.address.testutil.TypicalParticipants.ALEX;
-import static seedu.address.testutil.TypicalParticipants.BERNICE;
 import static seedu.address.testutil.TypicalNextOfKins.SARAH;
 import static seedu.address.testutil.TypicalNextOfKins.KEN;
 
@@ -22,13 +16,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.model.event.EventName;
-import seedu.address.model.participant.NextOfKin;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.participant.ParticipantId;
 import seedu.address.testutil.DefaultModelStub;
-import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.ParticipantBuilder;
 
 public class AddNextOfKinCommandTest {
@@ -111,7 +100,7 @@ public class AddNextOfKinCommandTest {
     /**
      * A Model stub that contains a single Event and single Participant.
      */
-    private class ModelStubWithParticipant extends DefaultModelStub {
+    private static class ModelStubWithParticipant extends DefaultModelStub {
         private final Participant participant;
 
         ModelStubWithParticipant(Participant participant) {
