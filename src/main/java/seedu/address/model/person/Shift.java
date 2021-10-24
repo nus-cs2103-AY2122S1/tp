@@ -15,12 +15,13 @@ import seedu.address.model.EmptyShift;
 public class Shift {
     public static final String DELIMITER = "-";
     private static final int NUM_OF_VALUES = 2;
-    private LocalDate startDate;
 
+
+    protected boolean isWorking;
     protected Slot slot;
     protected DayOfWeek dayOfWeek;
     protected List<Period> history = new ArrayList<>();
-    public boolean isWorking;
+    private LocalDate startDate;
 
 
 
@@ -67,7 +68,18 @@ public class Shift {
         return Collections.unmodifiableList(history);
     }
 
+    /**
+     * Returns if this is an empty shift.
+     *
+     */
+    public boolean isEmpty() {
+        return !isWorking;
+    }
 
+
+    /**
+     * Returns true if the input {@code endDate} can end this Shift.
+     */
     public boolean canRemove(LocalDate endDate) {
         return this.startDate.isBefore(endDate)
                 || startDate.equals(endDate);

@@ -40,12 +40,15 @@ public class JsonAdaptedShift {
         this.isWorking = isWorking;
     }
 
+    /**
+     * Constructs a {@code JsonAdaptedShift} with the given Shift source.
+     */
     public JsonAdaptedShift(Shift shift) {
         assert shift != null;
         this.dayOfWeek = shift.getDayOfWeek().toString();
         this.slot = shift.getSlot().getValue();
         this.startDate = shift.getStartDate().toString();
-        this.isWorking = String.valueOf(shift.isWorking);
+        this.isWorking = String.valueOf(!shift.isEmpty());
         List<Period> history = shift.getHistory();
         this.history.addAll(history
                 .stream()

@@ -49,10 +49,10 @@ public class Schedule {
         }
     }
 
-    public Shift[][] getShifts() {
-        return this.shifts;
-    }
-
+    /**
+     * Creates a {@code Schedule} from {@code Shift[][] shifts}.
+     *
+     */
     public Schedule(Shift[][] shifts) {
         assert shifts.length == DAY_OF_WEEK;
         assert shifts[0].length == PERIOD_OF_DAY;
@@ -61,28 +61,12 @@ public class Schedule {
         this.shifts = shifts;
     }
 
-//    /**
-//     * Alternate constructor for schedule object.
-//     */
-//    public Schedule(String loadString) {
-//        if (!isValidSchedule(loadString)) {
-//            throw new IllegalArgumentException("String does not match a valid schedule");
-//        }
-//        String[] shiftArray = loadString.split(" ");
-//        for (String s : shiftArray) {
-//            if (isValidShift(s)) {
-//
-//            }
-//            if (isValidEmpty(s)) {
-//
-//            }
-//            String[] shiftString = s.split("-");
-//            String shiftDayString = shiftString[0].toUpperCase();
-//            DayOfWeek shiftDay = DayOfWeek.valueOf(shiftDayString);
-//            Slot shiftSlot = Slot.translateStringToSlot(shiftString[1]);
-//            shifts[shiftDay.getValue() - 1][shiftSlot.getOrder()] = new Shift(shiftDay, shiftSlot);
-//        }
-//    }
+    public Shift[][] getShifts() {
+        return this.shifts;
+    }
+
+
+
 
     /**
      * Adds a new shift for a staff.
