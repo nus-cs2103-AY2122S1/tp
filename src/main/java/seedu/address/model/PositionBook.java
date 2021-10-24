@@ -133,5 +133,4 @@ public class PositionBook implements ReadOnlyPositionBook {
     public int hashCode() {
         return positions.hashCode();
     }
-
 }

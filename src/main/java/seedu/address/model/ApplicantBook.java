@@ -40,7 +40,6 @@ public class ApplicantBook implements ReadOnlyApplicantBook {
     }
 
     //// list overwrite operations
-
     /**
      * Replaces the contents of the applicant list with {@code applicants}.
      * {@code applicants} must not contain duplicate applicants.

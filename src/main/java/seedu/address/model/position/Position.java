@@ -15,8 +15,6 @@ public class Position {
 
     private final Description description;
 
-    // Data field is empty
-
     /**
      * Every field must be present and not null.
      */
