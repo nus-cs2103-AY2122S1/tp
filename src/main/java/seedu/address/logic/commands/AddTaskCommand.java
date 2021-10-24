@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_NAME;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -20,16 +24,20 @@ public class AddTaskCommand extends AddCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to a module. "
             + "Parameters: "
             + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_TASK_ID + "TASK ID "
             + PREFIX_TASK_NAME + "TASK NAME "
             + PREFIX_TASK_DEADLINE + "TASK DEADLINE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_NAME + "CS2103 "
+            + PREFIX_TASK_ID + "T1 "
             + PREFIX_TASK_NAME + "assignment1 "
             + PREFIX_TASK_DEADLINE + "20/10/2021";
 
     public static final String MESSAGE_ADD_TASK_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the module.";
     public static final String MESSAGE_MODULE_NOT_FOUND = "This module is not found.";
+
+    private static Logger logger = Logger.getLogger("Add Task Logger");
 
     private final Task toAdd;
     private final ModuleName moduleName;
@@ -59,6 +67,8 @@ public class AddTaskCommand extends AddCommand {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
 
+        logger.log(Level.INFO, "adding task: " + toAdd.getTaskName()
+                + "into module: " + toAdd.getModuleNameString());
         model.addTask(moduleName, toAdd);
         return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, toAdd));
     }

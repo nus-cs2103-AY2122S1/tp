@@ -22,7 +22,7 @@ public class Module {
 
     private final UniqueStudentList students;
     private final FilteredList<Student> filteredStudents;
-    private final UniqueTaskList tasks;
+    private UniqueTaskList taskList;
     // Identity fields
     private final ModuleName moduleName;
 
@@ -34,7 +34,7 @@ public class Module {
         this.moduleName = moduleName;
         students = new UniqueStudentList();
         filteredStudents = new FilteredList<>(this.getStudentList());
-        tasks = new UniqueTaskList();
+        taskList = new UniqueTaskList();
     }
 
     public ModuleName getName() {
@@ -144,7 +144,7 @@ public class Module {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
-        tasks.add(task);
+        taskList.add(task);
         students.forEach(s -> studentAddTask(s, task));
     }
 
@@ -162,7 +162,7 @@ public class Module {
      */
     public boolean hasTask(Task task) {
         requireNonNull(task);
-        return tasks.contains(task);
+        return taskList.contains(task);
     }
 
     /**
@@ -170,7 +170,15 @@ public class Module {
      * @return UniqueTaskList containing the tasks for this module.
      */
     public UniqueTaskList getTaskList() {
-        return this.tasks;
+        return this.taskList;
+    }
+
+    /**
+     * Sets the UniqueTaskList of this Student to be the input {@code taskList} taskList.
+     * @param taskList the taskList to set this Student's UniqueTaskList to.
+     */
+    public void setTaskList(UniqueTaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -178,7 +186,7 @@ public class Module {
      * {@code tasks} must not contain duplicate tasks.
      */
     public void setTasks(List<Task> tasks) {
-        this.tasks.setTasks(tasks);
+        this.taskList.setTasks(tasks);
     }
 
     @Override
