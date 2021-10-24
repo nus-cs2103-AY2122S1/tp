@@ -170,6 +170,19 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Index> parseTaskIndexes(Collection<String> taskIndexes) throws ParseException {
+        requireNonNull(taskIndexes);
+        final Set<Index> taskIndexList = new HashSet<>();
+        for (String taskName : taskIndexes) {
+            taskIndexList.add(parseIndex(taskName));
+        }
+        return taskIndexList;
+    }
+
+
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
