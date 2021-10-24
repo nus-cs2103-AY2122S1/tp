@@ -8,6 +8,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,7 +37,6 @@ public class MainWindow extends UiPart<Stage> {
     private GameListPanel gameListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private GameMainCard gameMainCard;
 
 
     @FXML
@@ -62,6 +62,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private HBox mainCard;
+
+    @FXML
+    private VBox leftMainCard;
+
+    @FXML
+    private VBox rightMainCard;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -128,6 +137,7 @@ public class MainWindow extends UiPart<Stage> {
         showFriendList();
 
         gameListPanel = new GameListPanel(logic.getFilteredGamesList());
+        showGameList();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -137,6 +147,8 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        showFriendBox();
+        showGameBox();
     }
 
     /**
@@ -189,11 +201,6 @@ public class MainWindow extends UiPart<Stage> {
         friendBox.setManaged(true);
     }
 
-    private void hideGameBox() {
-        gameBox.setVisible(false);
-        gameBox.setManaged(false);
-    }
-
     private void showGameBox() {
         gameBox.setVisible(true);
         gameBox.setManaged(true);
@@ -205,21 +212,9 @@ public class MainWindow extends UiPart<Stage> {
             friendsPlaceholder.getChildren().add(friendListPanel.getRoot());
         }
     }
-
-    private void removeGameListPanelFromGamesPlaceholder() {
-        gamesPlaceholder.getChildren().removeAll(gameListPanel.getRoot());
-    }
-
     private void addGameListPanelToGamesPlaceholder() {
         if (!gamesPlaceholder.getChildren().contains(gameListPanel.getRoot())) {
             gamesPlaceholder.getChildren().add(gameListPanel.getRoot());
-        }
-    }
-
-    private void removeGameMainCardFromGamesPlaceholder() {
-        if (gameMainCard != null) {
-            gamesPlaceholder.getChildren().removeAll(gameMainCard.getRoot());
-            gameMainCard = null;
         }
     }
 
@@ -232,7 +227,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void showGameList() {
-        removeGameMainCardFromGamesPlaceholder();
         addGameListPanelToGamesPlaceholder();
     }
 
@@ -242,15 +236,6 @@ public class MainWindow extends UiPart<Stage> {
      * @param commandResult The {@Code commandResult} from the {@Code friend} command.
      */
     private void handleFriendCommand(CommandResult commandResult) {
-        hideGameBox();
-        showFriendBox();
-        if (commandResult.isFriendGet()) {
-            friendListPanel.updateFriendMainCardWithFriend(commandResult.getFriendToGet(),
-                    logic.getFilteredGamesList());
-        } else {
-            friendListPanel.setFriendMainCardToDefault();
-        }
-        showFriendList();
     }
 
 
@@ -261,14 +246,6 @@ public class MainWindow extends UiPart<Stage> {
      * @param commandResult The {@Code commandResult} from the {@Code game} command.
      */
     private void handleGameCommand(CommandResult commandResult) {
-        hideFriendBox();
-        showGameBox();
-        if (commandResult.isGameGet()) {
-            gameListPanel.updateGameMainCardWithGame(commandResult.getGameToGet(), logic.getFilteredFriendsList());
-        } else {
-            gameListPanel.setGameMainCardToDefault();
-        }
-        showGameList();
     }
 
     /**

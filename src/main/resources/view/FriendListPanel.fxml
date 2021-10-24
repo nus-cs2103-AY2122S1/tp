@@ -2,10 +2,7 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 
-<HBox xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" prefHeight="440.0">
+<HBox prefHeight="440.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <ListView fx:id="personListView" styleClass="items-list" HBox.hgrow="ALWAYS" />
-    <StackPane fx:id="friendMainCardPlaceholder" alignment="TOP_RIGHT" nodeOrientation="INHERIT" prefHeight="440.0"
-               prefWidth="282.0" />
 </HBox>
