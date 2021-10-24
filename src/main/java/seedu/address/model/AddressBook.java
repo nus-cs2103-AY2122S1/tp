@@ -22,7 +22,6 @@ import seedu.address.model.client.UniqueNextMeetingList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagIsUnreferenced;
 import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Wraps all data at the address-book level

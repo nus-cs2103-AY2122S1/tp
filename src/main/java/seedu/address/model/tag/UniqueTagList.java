@@ -10,9 +10,6 @@ import java.util.function.Predicate;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.model.client.Client;
-import seedu.address.model.client.UniqueClientList;
-import seedu.address.model.client.exceptions.DuplicateClientException;
 import seedu.address.model.tag.exceptions.DuplicateTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
