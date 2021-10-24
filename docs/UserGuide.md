@@ -1,42 +1,62 @@
+# ContactSh - User Guide
+
+![](file://C:\Users\Chu Heng 2\Desktop\tp\tp\docs\images\ContactSh_logo.png)
+
+ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
+
+## Table of Contents
+
+[Quick Start](#quick-start)  
+[Features](#features)
+
+- [Give a list of instructions : `help`](#give-a-list-of-instructions--help)
+- [Adding a person: `add`](#adding-a-person-add)
+- [Listing all persons : `list`](#listing-all-persons-list)
+- [Editing a person : `edit`](#editing-a-person-edit)
+- [Locating persons by name: `find`](#locating-persons-by-name-find)
+- [Deleting a person : `delete`](#deleting-a-person-delete)
+- [Add task:](#add-task)
+- [Delete task:](#delete-task)
+- [Edit task:](#edit-task)
+- [Viewing tasks:`cat`](viewing-tasks)
+- [Clearing all entries : `clear`](#clearing-all-entries)
+- [Exiting the program:](#exiting-the-program)
+- [Sorting persons by name: `sort`](#sorting-persons-by-name)
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
+- [Archiving data files `[coming in v2.0]`](#archiving-data-files)
+- 
+
+[FAQ](#faq)  
+[Command Summary](#command-summary)
+
 ---
-layout: page
-title: User Guide
----
-
-ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, contactSH can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `contactSH.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-1/tp/releases).
+2. Download the latest `ContactSH.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
+3. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](file://C:\Users\Chu Heng 2\Desktop\tp\tp\docs\images\Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
+- **`list`** : Lists all contacts.
 
-   * **`list`** : Lists all contacts.
+- **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ContactSH.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to ContactSH.
+- **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
+- **`clear`** : Deletes all contacts.
 
-   * **`clear`** : Deletes all contacts.
+- **`exit`** : Exits the app.
+6. Refer to the [Features](#features) below for details of each command.
 
-   * **`exit`** : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -44,22 +64,22 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+- Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
-* Items in square brackets are optional.<br>
+- Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+- Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+- Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+- If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -70,9 +90,9 @@ Shows the user a list of instructions that can be used to navigate the app.
 
 Format: help [“command-name”]
 
-* If no command-name is entered, the user will see the list of all the keywords for each command
+- If no command-name is entered, the user will see the list of all the keywords for each command
 
-* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and description of the command.
+- If the user enters a valid command-name, the user will see the full details of that command, which includes the format and description of the command.
 
 Sample outcome (User typed “help sort”):
 
@@ -83,7 +103,6 @@ Format: sort [-r]
 ```
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -96,8 +115,9 @@ A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 -d Bald t/criminal` 
+
+- `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+- `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 -d Bald t/criminal`
 
 ### Listing all persons : `list`
 
@@ -111,16 +131,17 @@ Edits an existing person in ContactSH.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [-d DESCRIPTION] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+- Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+- At least one of the optional fields must be provided.
+- Existing values will be updated to the input values.
+- When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+- You can remove all the person’s tags by typing `t/` without
+  specifying any tags after it.
 
 Examples:
-* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+- `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+- `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
 ### Locating persons by name: `find`
 
@@ -128,17 +149,18 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+- `find John` returns `john` and `John Doe`
+- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](file://C:\Users\Chu Heng 2\Desktop\tp\tp\docs\images\findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -146,13 +168,14 @@ Deletes the specified person from ContactSH.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+- Deletes the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in ContactSH.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+- `list` followed by `delete 2` deletes the 2nd person in ContactSH.
+- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Add task:
 
@@ -160,24 +183,27 @@ Add a task to the current list of tasks attached to a person.
 
 Format: `addtask INDEX task/TASKNAME...`
 
-* Adds a task to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
-* The name of the task is specified by the TASKNAME.
+- Adds a task to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+- The name of the task is specified by the TASKNAME.
 
 Examples:
-* `addtask 1 task/call for meeting task/do homework` Adds the task "call for meeting" and "do homework" to the list of task of the person in 1st person.
+
+- `addtask 1 task/call for meeting task/do homework` Adds the task "call for meeting" and "do homework" to the list of task of the person in 1st person.
+
 ### Delete task:
 
 Deletes a task from the specified person.
 
 Format: `deletetask INDEX ti/TASK_INDEX...`
 
-* Deletes a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
-* The task deleted is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
-* If the same TASK_INDEX is specified more than once, it will be deleted once. 
+- Deletes a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+- The task deleted is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
+- If the same TASK_INDEX is specified more than once, it will be deleted once.
 
 Examples:
-* `deletetask 2 ti/2 ti/2` Deletes the 2nd task attached to the 2nd person.
-* `deletetask 1 ti/2 ti/3` Deletes the 2nd and 3rd task attached to the 1st person.
+
+- `deletetask 2 ti/2 ti/2` Deletes the 2nd task attached to the 2nd person.
+- `deletetask 1 ti/2 ti/3` Deletes the 2nd and 3rd task attached to the 1st person.
 
 ### Edit task:
 
@@ -185,13 +211,42 @@ Edit an existing task in ContactSH.
 
 Format: `edittask INDEX ti/TASK_INDEX [task/TASKNAME]`
 
-* Edits a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
-* The task edited  is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
-* Existing values will be updated to the input value.
-* At least one of the optional fields must be provided.
+- Edits a task attached to the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+- The task edited is specified by the TASK_INDEX. The task_index refers to the index number displayed in the tasklist of said person. The index must be a positive integer 1, 2, 3, …​
+- Existing values will be updated to the input value.
+- At least one of the optional fields must be provided.
 
 Examples:
-* `edittask 3 ti/2 task/Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
+
+- `edittask 3 ti/2 task/Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
+
+### Viewing tasks: `cat`
+
+1. Shows the user a list of tasks that has been attached to a specific person. <p>&nbsp;</p>
+   
+    Format: `cat INDEX` <p>&nbsp;</p>
+   
+   * Displays the list of tasks attached to the person at the specified `INDEX`.
+   * The index refers to the index number shown in the displayed person list. 
+   * The index **must be a positive integer** 1, 2, 3, ... <p>&nbsp;</p>
+   
+   Examples: <p>&nbsp;</p>
+   
+   * `list` followed by delete 2 deletes the 2nd person in the address book.
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. <p>&nbsp;</p>
+
+2. Shows the user the task list of every single person in ContactSh. <p>&nbsp;</p>
+   
+   Format: `cat -A`
+
+### Sorting persons by name: `sort`
+
+Sort persons by the alphabetical order of their name.
+
+Format: `sort [-r]`
+
+- The default sort with no options provided displays a list of persons sorted in ascending ASCII alphabetical order of their name.
+- If the optional -r flag is provided, a list of persons sorted in reverse order is displayed.
 
 ### Clearing all entries : `clear`
 
@@ -204,30 +259,6 @@ Format: `clear`
 Exits the program.
 
 Format: `exit`
-
-### Viewing list of tasks of a person: `viewtask`
-
-Shows the user a list of tasks that has been attached to a specific person.
-
-Format: `viewtask INDEX`
-
-* Displays the list of tasks attached to the person at the specified`INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-* `list` followed by delete 2 deletes the 2nd person in the address book.
-* `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`
-command.
-
-### Sorting persons by name: `sort`
-
-Sort persons by the alphabetical order of their name.
-
-Format: `sort [-r]`
-
-* The default sort with no options provided displays a list of persons sorted in ascending ASCII alphabetical order of their name.
-* If the optional -r flag is provided, a list of persons sorted in reverse order is displayed.
 
 ### Saving the data
 
@@ -245,26 +276,22 @@ If your changes to the data file makes its format invalid, ContactSH will discar
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactSH home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [-d Description] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 -d Rich t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [-d Description] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Sort** | `sort [-r]`
-**Help** | `help`
-**Add Task** | `addtask INDEX task/TASKNAME` <br> e.g., `addtask 2 task/celebrate $1 million revenue task/Contact Professor to get help`
-**Delete Task** | `deltask INDEX ti/TASK_INDEX` <br> e.g., `deletetask 2 ti/2 ti/3`
+| Command   | Format, Examples                                                                                                                                                                                          |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **add**   | format:<br>`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [-d Description] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 -d Rich t/friend t/colleague` |
+| **clear** | `clear`                                                                                                                                                                                                   |
+| **rm**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                       |
+| **edit**  | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [-d Description] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                              |
+| **find**  | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                                |
+| **cat**   | `cat INDEX`<br>e.g., `cat 2`<br><br>`cat -A`                                                                                                                                                              |
