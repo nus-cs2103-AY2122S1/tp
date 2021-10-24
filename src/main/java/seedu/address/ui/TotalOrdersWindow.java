@@ -103,7 +103,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
                 if (empty) {
                     setText(null);
                 } else {
-                    setText(String.format("%.2f", value));
+                    setText(String.format("%.2f ", value));
                 }
             }
         });
