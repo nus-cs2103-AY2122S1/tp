@@ -128,7 +128,6 @@ public class UniqueApplicantList implements Iterable<Applicant> {
         }
 
         //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
-
     }
 
     public void setApplicants(UniqueApplicantList replacement) {
