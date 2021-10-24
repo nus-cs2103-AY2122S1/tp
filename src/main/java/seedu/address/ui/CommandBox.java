@@ -73,7 +73,11 @@ public class CommandBox extends UiPart<Region> {
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         } finally {
-            inputHistory.addToHistory(commandTextField.getText());
+            String text = commandTextField.getText();
+            boolean isNotSpaces = !text.trim().equals("");
+            if (isNotSpaces) {
+                inputHistory.addToHistory(text);
+            }
             commandTextField.setText("");
         }
     }
