@@ -80,7 +80,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-add.png)
-<ins>gitGud after adding a friend.</ins>
+<br><ins>gitGud after adding a friend.</ins>
 
 #### Editing a friend: `friend --edit` 
 
@@ -91,11 +91,11 @@ Format: `friend --edit FRIEND_ID --name NEW_NAME`
 * The `FRIEND_ID` must currently exist in the friends list.
 
 Examples: 
-* `friend --edit Draco --name Kevin` Sets the name of existing friend with given `FRIEND_ID` to "Kevin".
+* `friend --edit Draco --name Kevin` Sets the name of existing friend with the `FRIEND_ID` "Draco" to "Kevin".
 
 Snapshot: 
 ![img.png](images/ui-snapshots/friend-edit.png)
-<ins>gitGud after editing an existing friend's name</ins> 
+<br><ins>gitGud after editing an existing friend's name</ins> 
 
 #### Deleting a friend: `friend --delete`
 
@@ -112,7 +112,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-delete.png)
-<ins>gitGud after deleting a friend.</ins>
+<br><ins>gitGud after deleting a friend.</ins>
 
 #### Link games with a friend: `friend --link`
 
@@ -132,7 +132,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-link.png)
-<ins>gitGud after linking a friend to a game.</ins>
+<br><ins>gitGud after linking a friend to a game.</ins>
 
 #### Unlinking a game from a friend: `friend --unlink`
 
@@ -149,9 +149,9 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-unlink.png)
-<ins>gitGud after unlinking a friend from a game.</ins>
+<br><ins>gitGud after unlinking a friend from a game.</ins>
 
-#### Assigning a skill value for a linked game : 'friend --skill'
+#### Assigning a skill value for a linked game : `friend --skill`
 
 Assigns and stores the perceived skill value for the specified game with the given `GAME_ID` linked to a friend with
 the given `FRIEND_ID`. 
@@ -170,7 +170,7 @@ Examples:
 Snapshot:
 
 ![Ui after assigning skill value](images/ui-snapshots/friend-skill-success.png)
-<ins>gitGud after assigning skill value to game linked to friend</ins>
+<br><ins>gitGud after assigning skill value to game linked to friend</ins>
 
 #### Getting a single friend's complete data: `friend --get`
 
@@ -192,7 +192,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-get.png)
-<ins>gitGud after getting a friend from friends list.</ins>
+<br><ins>gitGud after getting a friend from friends list.</ins>
 
 
 #### Listing multiple friends data: `friend --list`
@@ -213,7 +213,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-list.png)
-<ins>gitGud after listing friends with the keyword.</ins>
+<br?<<ins>gitGud after listing friends with the keyword.</ins>
 
 #### Scheduling a friend: `friend --schedule`
 
@@ -243,7 +243,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/friend-schedule.png)
-<ins>gitGud after scheduling a friend's availability.</ins>
+<br><ins>gitGud after scheduling a friend's availability.</ins>
 
 ### Game commands
 
@@ -265,7 +265,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/game-add.png)
-<ins>gitGud after adding a game.</ins>
+<br><ins>gitGud after adding a game.</ins>
 
 #### Deleting a game: `game --delete`
 
@@ -279,7 +279,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/game-delete.png)
-<ins>gitGud after deleting a game.</ins>
+<br><ins>gitGud after deleting a game.</ins>
 
 #### Getting a single game's complete data: `game --get`
 
@@ -301,7 +301,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/game-get.png)
-<ins>gitGud after getting a game.</ins>
+<br><ins>gitGud after getting a game.</ins>
 
 #### Listing multiple games data: `game --list`
 
@@ -321,7 +321,7 @@ Examples:
 Snapshot:
 
 ![Ui](images/ui-snapshots/game-list.png)
-<ins>gitGud after getting a game.</ins>
+<br><ins>gitGud after getting a game.</ins>
 
 ### Other commands
 
@@ -336,7 +336,7 @@ Format: `help`
 Snapshot:
 
 ![Ui](images/ui-snapshots/help.png)
-<ins>gitGud after running help command.</ins>
+<br><ins>gitGud after running help command.</ins>
 
 #### Clearing the friends and games lists : `clear`
 
