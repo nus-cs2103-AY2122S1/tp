@@ -352,7 +352,6 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Add staff schedule** | `addShift -n NAME d/fullDayName-shiftNumber` <br> `addShift -i INDEX d/fullDayName-shiftNumber`
 **View staff schedule** | `viewSchedlue -n NAME` <br> `viewSchedlue -i INDEX`
-**Edit staff schedule** | `editShift n/NAME old/fullDayName-shiftNumber new/fullDayName-shiftNumber` <br> `editShift i/INDEX old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
 **Delete staff shift** | `deleteShift -n NAME d/fullDayName-shiftNumber` <br> `deleteShift -i INDEX d/fullDayName-shiftNumber`
 **View shift** | `viewShift -d day-shift_number` <br> `viewShift -t day-HH:mm`
 **Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
