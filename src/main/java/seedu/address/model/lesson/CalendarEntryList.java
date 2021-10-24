@@ -3,10 +3,13 @@ package seedu.address.model.lesson;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,12 +32,12 @@ import seedu.address.model.person.exceptions.LessonNotFoundException;
  * However, the removal of a lesson uses Person#equals(Object) to ensure that the person with exactly the same fields
  * will be removed.
  *
- * @author Chesterwongz, with addons from Xiaoyunnn.
+ * @author Chesterwongz, with add-ons from Xiaoyunnn.
  *
  * @see Lesson#isClashing(Lesson)
  */
 public class CalendarEntryList {
-    private static final long TWO_DAY_DIFF = 48;
+    private static final long TWO_DAY_DIFF = 2;
 
     private final Calendar calendar = new Calendar();
     private final List<Entry<Lesson>> entryList = new ArrayList<>();
@@ -47,7 +50,7 @@ public class CalendarEntryList {
     private void add(Entry<Lesson> calendarEntry) {
         calendar.addEntry(calendarEntry);
         entryList.add(calendarEntry);
-        if (isUpcoming(calendarEntry.getEndAsLocalDateTime())) {
+        if (isUpcoming(calendarEntry.getUserObject().getDisplayLocalDate())) {
             upcomingLessons.add(calendarEntry);
             sortUpcomingLessons();
         }
@@ -103,8 +106,8 @@ public class CalendarEntryList {
     public boolean hasClashes(Lesson toCheck, Lesson toIgnore) {
         requireNonNull(toCheck);
         requireNonNull(toIgnore);
-        return entryList.stream().anyMatch(entry-> entry.getUserObject()
-                .equals(toIgnore) ? false : entry.getUserObject().isClashing(toCheck));
+        return entryList.stream().anyMatch(entry-> !entry.getUserObject().equals(toIgnore) &&
+                entry.getUserObject().isClashing(toCheck));
     }
 
     /**
@@ -219,12 +222,12 @@ public class CalendarEntryList {
     /**
      * Returns true if the given date and time is within two days of current date time.
      *
-     * @param endTime Date and time to be checked.
+     * @param endDate Date and time to be checked.
      * @return True if the given date and time is within two days of current date time.
      */
-    private boolean isUpcoming(LocalDateTime endTime) {
-        long timeDiff = ChronoUnit.HOURS.between(LocalDateTime.now(), endTime);
-        return timeDiff > 0 && timeDiff < TWO_DAY_DIFF;
+    private boolean isUpcoming(LocalDate endDate) {
+        long timeDiff = ChronoUnit.DAYS.between(LocalDate.now(), endDate);
+        return timeDiff >= 0 && timeDiff < TWO_DAY_DIFF;
     }
 
     /**
@@ -275,6 +278,10 @@ public class CalendarEntryList {
 
         // state check
         CalendarEntryList other = (CalendarEntryList) obj;
+
+        if (!upcomingLessons.equals(other.upcomingLessons)) {
+            return false;
+        }
 
         if (entryList.size() != other.entryList.size()) {
             return false;

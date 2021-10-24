@@ -78,10 +78,6 @@ public class CommandResult {
         return isShowSchedule;
     }
 
-    public boolean isShowStudentList() {
-        return !isShowSchedule;
-    }
-
     public boolean isShowReminder() {
         return isShowReminder;
     }

@@ -94,16 +94,23 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
     /**
-     * Check if the Lesson object is recurring.
+     * Checks if the Lesson object is recurring.
      *
      * @return True if it is a recurring lesson, false otherwise.
      */
     public abstract boolean isRecurring();
 
     /**
-     * Get the date of the lesson to display to the user.
+     * Gets the date of the lesson to display to the user.
      */
     public abstract Date getDisplayDate();
+
+    /**
+     * Gets the local date of the lesson to display to the user.
+     */
+    public LocalDate getDisplayLocalDate() {
+        return getDisplayDate().getLocalDate();
+    }
 
     /**
      * Returns true both lessons clash.
