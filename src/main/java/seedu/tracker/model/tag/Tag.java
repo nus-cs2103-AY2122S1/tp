@@ -11,6 +11,12 @@ public class Tag {
 
     public static final String MESSAGE_CONSTRAINTS = "Tags names should not be empty";
 
+    /*
+     * The first character of the tag must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String VALIDATION_REGEX = "[A-Za-z0-9][A-Za-z0-9 _]*";
+
     public final String tagName;
 
     /**
@@ -28,7 +34,7 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return !test.isEmpty();
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

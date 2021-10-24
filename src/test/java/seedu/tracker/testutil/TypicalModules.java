@@ -41,19 +41,19 @@ public class TypicalModules {
     public static final Module MA1101R = new ModuleBuilder().withCode("MA1101R")
             .withTitle("Linear Algebra")
             .withDescription("introduction to linear algebra")
-            .withTags("mathscience")
+            .withTags("math science")
             .withAcademicCalendar(2, 1).build();
 
     public static final Module CS2102 = new ModuleBuilder().withCode("CS2102")
             .withTitle("Database Systems")
             .withDescription("introduction to relational algebra, database design")
-            .withTags("breadthdepth")
+            .withTags("breadth depth")
             .withAcademicCalendar(2, 1).build();
 
     public static final Module IS1103 = new ModuleBuilder().withCode("IS1103")
             .withTitle("Ethics in Computing")
             .withDescription("introduction to ethics in the computing domain")
-            .withTags("itprofessionalism")
+            .withTags("it professionalism")
             .withAcademicCalendar(2, 1).build();
 
     public static final Module GEA1000 = new ModuleBuilder().withCode("GEA1000")
