@@ -19,8 +19,8 @@ import seedu.address.model.UserPrefs;
 
 public class ExportEmailCommandTest {
 
-    private Path testOutput = Paths.get("src/test/data/ExportEmailTest/testEmailOutput.json");
-    private Path expectedOutput = Paths.get("src/test/data/ExportEmailTest/expectedEmailOutput.json");
+    private Path testOutput = Paths.get("src/test/data/ExportEmailTest/testEmailOutput.txt");
+    private Path expectedOutput = Paths.get("src/test/data/ExportEmailTest/expectedEmailOutput.txt");
     private Model model;
     private Model expectedModel;
 
