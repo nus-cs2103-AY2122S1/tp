@@ -34,16 +34,6 @@ public class CsvWriterTest {
             + File.separator
             + "expectedCsvAllFields.csv";
 
-    public static final String EXPECTED_FILE_PATH_NAMES_ONLY = "src"
-            + File.separator
-            + "test"
-            + File.separator
-            + "data"
-            + File.separator
-            + "CsvWriterTest"
-            + File.separator
-            + "expectedCsvNamesOnly.csv";
-
     private Map<String, List<String>> data;
     private final String[] fieldHeaders = new String[]{"name", "phone", "email", "address", "tags"};
 
