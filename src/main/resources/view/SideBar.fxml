@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.TextFlow?>
+
 <StackPane alignment="TOP_CENTER" styleClass="pane-with-border" xmlns="http://javafx.com/javafx/11"
            xmlns:fx="http://javafx.com/fxml/1">
     <children>
