@@ -241,7 +241,7 @@ _{more aspects and alternatives to be added}_
 
 The processing of a claim command from the user can be split into 2 general steps:
 1. Parsing the user input into a `ClaimCommand`
-3. Executing the `ClaimCommand`
+2. Executing the `ClaimCommand`
 Each step will be described in the sections below.
 
 **Step 1:** Parsing of user input
@@ -273,7 +273,7 @@ There are 3 possible outcomes from the execution of a ClaimCommand.
 *Aspect*: User interface of adding, editing and deleting claims
 
 * **Alternative 1 (Current choice):** One ‘claim’ command adds, edits and deletes
-    * Pros: Less commands for the user to remember
+    * Pros: Fewer commands for the user to remember
     * Cons: It is difficult to give proper error messages since we are not sure of the user intentions
 * **Alternative 2:** Different commands for add, edit and delete
     * Pros: Easier to implement
