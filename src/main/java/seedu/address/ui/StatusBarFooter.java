@@ -27,7 +27,7 @@ public class StatusBarFooter extends UiPart<Region> {
         saveLocationStatus.setText(Paths.get(".").resolve(saveLocation).toString());
     }
 
-    public void updateNumPersonsDisplayed(int numPersonsDisplayed) {
-        numPersonsStatus.setText(String.format("%d persons displayed.", numPersonsDisplayed));
+    public void updateNumPersons(int numPersonsDisplayed, int numPersonsTotal) {
+        numPersonsStatus.setText(String.format("%d/%d persons displayed.", numPersonsDisplayed, numPersonsTotal));
     }
 }

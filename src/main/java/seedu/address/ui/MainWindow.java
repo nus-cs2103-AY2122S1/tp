@@ -118,7 +118,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusBarFooter.updateNumPersonsDisplayed(logic.getFilteredPersonList().size());
+        statusBarFooter.updateNumPersons(logic.getFilteredPersonList().size(), logic.getNumPersonsTotal());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
@@ -179,7 +179,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            statusBarFooter.updateNumPersonsDisplayed(logic.getFilteredPersonList().size());
+            statusBarFooter.updateNumPersons(logic.getFilteredPersonList().size(), logic.getNumPersonsTotal());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();

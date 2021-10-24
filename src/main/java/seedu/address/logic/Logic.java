@@ -38,6 +38,9 @@ public interface Logic {
      */
     Path getAddressBookFilePath();
 
+    /** Returns the total number of contacts in the address book. */
+    int getNumPersonsTotal();
+
     /**
      * Returns the user prefs' GUI settings.
      */
