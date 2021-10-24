@@ -524,8 +524,8 @@ If any of your changes to the data file causes FAST to be unable to read the dat
 ![moveData](images/moveData.png)
 
 **Q**: How do I save my data?<br>
-**A**: You do not need to manually save any data, FAST automatically saves all your data for you when you exit the application.
-**Q**: I edited my data file, and now when I start FAST all my contacts are gone! What happened?
+**A**: You do not need to manually save any data, FAST automatically saves all your data for you when you exit the application.<br>
+**Q**: I edited my data file, and now when I start FAST all my contacts are gone! What happened?<br>
 **A**: It is likely that some of your changes to your data file caused FAST to be unable to read your data file. Double-check the changes you made, or revert them if necessary. If FAST is able to read the data file after you made the changes, all your saved contacts will appear on the next start.
 
 --------------------------------------------------------------------------------------------------------------------
