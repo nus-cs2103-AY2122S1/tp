@@ -192,6 +192,7 @@ public class Lesson {
             if (students.get(idx).isSameStudent(oldStudent)) {
                 students.set(idx, newStudent);
                 newStudent.addLesson(this);
+                removeStudent(oldStudent);
                 return;
             }
         }

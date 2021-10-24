@@ -111,6 +111,22 @@ public class LessonTest {
     }
 
     @Test
+    public void updateStudent() {
+        StudentBuilder sb = new StudentBuilder().withGrade(defaultLesson.getGrade().value);
+        Student student = sb.build();
+        defaultLesson.enrollStudent(student);
+
+        // mock we edit a student details (i.e. name)
+        Student editedStudent = sb.withName("Edited Name Here").build();
+        defaultLesson.updateStudent(student, editedStudent);
+        assertTrue(editedStudent.containsLesson(defaultLesson));
+        assertFalse(student.containsLesson(defaultLesson));
+
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertEquals(defaultLesson.getStudents().get(0), editedStudent);
+    }
+
+    @Test
     public void removeStudent() {
         Student toRemove = new StudentBuilder().build();
         // student not present
