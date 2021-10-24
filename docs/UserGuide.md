@@ -42,7 +42,7 @@ The aim of this document is to help new users like you, to get started with **Un
 This includes providing you with all the basic knowledge you need to use Uni-Fy properly, in a simple and concise format.
 This guide will introduce all **Uni-Fy** features, command syntax, interpretations and provide you with specific examples.
 
-### 2.1. Navigation
+### 2.1 Navigation
 
 To help facilitate the navigation within this document, we have included numbers for each header.
 The headers will also be linked to their respective content through the table of contents or when they are referenced in this guide.
@@ -53,7 +53,7 @@ Additionally, here are the relevant places you can go to if you would like to se
 * If you would like a quick summary of the available commands for **Uni-Fy**, head over to [7. Command summary](#7-command-summary).
 
 
-### 2.2. Formatting
+### 2.2 Formatting
 
 The Uni-Fy user guide contains different formatting used throughout the document which is used to convey different meanings.
 This table below illustrates what each formatting means. 
@@ -66,7 +66,7 @@ This table below illustrates what each formatting means.
 | <code>multiple...</code> | Words with `…` after them| Parameters that can be input multiple times including 0 times|`keywords...`|
 | [**Blue underline**](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
 
-### 2.3. Icons
+### 2.3 Icons
 
 The Uni-Fy user guide uses icons to differentiate the type of information presented. 
 Here are the meanings behind the icons used in this document.
@@ -78,7 +78,7 @@ Here are the meanings behind the icons used in this document.
 |:information_source: | Important information to take note |
 |:warning: | Warning about the usage of a command |
 
-### 2.4. Glossary
+### 2.4 Glossary
 
 Here is a table of commonly used terms in this document along with their meaning and interpretation.
 
@@ -92,7 +92,7 @@ Here is a table of commonly used terms in this document along with their meaning
 --------------------------------------------------------------------------------------------------------------------
 
 
-## 4. Getting started
+## 3. Getting started
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -108,7 +108,7 @@ Here is a table of commonly used terms in this document along with their meaning
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 5. Features
+## 4. Features
 
 <div markdown="block" class="alert alert-info">
 
@@ -131,7 +131,7 @@ This section highlights all the commands that Uni-Fy supports. These include det
     * Time is represented in HH:MM format
 </div>
 
-### 5.1 Viewing help : `help`
+### 4.1 Viewing help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -140,7 +140,7 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### 5.2 Adding a task: `add` 
+### 4.2 Adding a task: `add` 
 
 Add a task to the task list.
 
@@ -169,7 +169,7 @@ Interpretation
 * `add n/CS2103 test t/16:30 d/2021-12-01 tg/Important ` adds the `CS2103 test` task on `2021-12-01`, scheduled for `16:30` with the priority set as `Important`
 </div>
 
-### 5.3 Locating a task by name: `find`
+### 4.3 Locating a task by name: `find`
 
 Find tasks with matching keywords and show them in the task list.
 
@@ -196,9 +196,10 @@ Interpretation:
 * `find quiz` returns CS2103 Quiz, GEQ1000 Quiz 1, GEQ1000 Quiz 2
 * `find Quiz GEQ1000` returns GEQ1000 Quiz 1,  GEQ1000 Quiz 2
 * `find Quiz GEQ1000 d/2021-10-10` returns all the GEQ1000 Quiz that is due by 2021-10-10
-
 </div>
+
 ### 5.4 Showing Tasks: `show` (coming soon)
+
 
 Show all tasks that have been added to the app in a specific week.
 
@@ -220,7 +221,7 @@ Examples:
 * `show d/2021-10-10` displays the tasks in the week of `2021-10-10`
 
 
-### 5.5 Setting Priority Level for Tasks: `tag` (coming soon)
+### 4.5 Setting Priority Level for Tasks: `tag` (coming soon)
 
 Set a task's priority.
 
@@ -248,28 +249,49 @@ Interpretation
 * `tag n/quiz d/2021-10-10 tg/Important` sets priority of the quiz task on 2021-10-10 to `Important`
 </div>
 
-### 5.6 Deleting tasks : `delete` (coming soon)
+### 4.6 Deleting tasks : `delete`
 
-Delete a specific task that has been added to your app.
+Removes a specific task that has been added to your app.
 
-![delete_command](images/deleteCommand.jpeg)
+<div markdown="block" class="alert alert-primary">
 
-After running the delete command, the task at that particular index gets deleted as shown below:
-
-![delete_command_after](images/deleteCommandAfter.jpeg)
-
-Format:
+**:clipboard: Format:**<br>
 - <code> delete <i>task_id (task_id)</i> </code>
 
-Interpretation
+</div>
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Interpretation:**<br>
 * Deletes the task corresponding to the <code><i>task_id</i></code>
 * Deletes the tasks corresponding to the <code><i>task_ids</i></code> provided if multiple are provided
+* The index provided must be positive integer
 
-Examples:
+</div>
+
+
+<div markdown="block" class="alert alert-success">
+
+**:green_book: Examples:**
+
 * `delete 3` removes the third item in the task list
 * `delete 1 2` removes the first and second items in the task list
 
-### 5.7 Deleting all tasks : `clear`
+</div>
+
+#### Demonstration:
+
+![delete_command](images/User%20Guide/deleteCommandBefore.png)
+
+After running the delete command, the task at that particular index gets deleted as shown below:
+
+![delete_command_after](images/User%20Guide/deleteCommandAfter.png)
+
+
+<div style="page-break-after: always;"></div>
+
+### 4.7 Deleting all tasks : `clear`
 
 Clears all entries from the Uni-Fy app.
 
@@ -281,23 +303,23 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 
 Format: `clear`
 
-### 5.8 Undoing the previous command : `undo` `[coming in v1.3]`
+### 4.8 Undoing the previous command : `undo` `[coming in v1.3]`
 
 Reverts your previous command which modified the task list of Uni-Fy.
 
 Format: `undo`
 
-### 5.9 Exiting the program : `exit`
+### 4.9 Exiting the program : `exit`
 
 Exits the program.
 
 Format: `exit`
 
-### 5.10 Saving the data
+### 4.10 Saving the data
 
 **Uni-Fy** data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### 5.11 Editing the data file
+### 4.11 Editing the data file
 
 **Uni-Fy** data are saved as a JSON file `[JAR file location]/data/unify.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -305,7 +327,7 @@ Format: `exit`
 If your changes to the data file makes its format invalid, Uni-Fy will discard all data and start with an empty data file at the next run.
 </div>
 
-### 5.12 Retrieving past commands `[coming in v1.3]`
+### 4.12 Retrieving past commands `[coming in v1.3]`
 
 Shows the past commands run on **Uni-Fy**.
 
@@ -315,7 +337,7 @@ Format: `history`
 Your history is erased when you close and reopen the app. Do not close the app if you have anything in the history that you need to refer to later.
 </div>
 
-### 5.13 Archiving data files `[coming in v2.0]`
+### 4.13 Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
@@ -323,7 +345,7 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 6. FAQ
+## 5. FAQ
 
 **Q**: What are the minimum system requirements for this application?<br>
 **A**: If your computer runs any of the Operating Systems found [here](https://www.oracle.com/java/technologies/javase/products-doc-jdk11certconfig.html), you will be able to run **Uni-Fy**.
@@ -344,7 +366,7 @@ _Details coming soon ..._
 --------------------------------------------------------------------------------------------------------------------
 
 
-## 7. Command summary
+## 6. Command summary
 
 Action | Format, Examples
 --------|------------------
