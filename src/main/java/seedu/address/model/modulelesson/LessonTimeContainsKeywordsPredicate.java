@@ -17,7 +17,7 @@ public class LessonTimeContainsKeywordsPredicate implements Predicate<ModuleLess
     @Override
     public boolean test(ModuleLesson moduleLesson) {
         return keywords.stream()
-                .anyMatch(keyword -> moduleLesson.getTime().toString().equals(keyword));
+                .anyMatch(keyword -> moduleLesson.getLessonStartTime().toString().equals(keyword));
     }
 
     @Override
