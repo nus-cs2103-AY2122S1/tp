@@ -27,7 +27,7 @@ public class AppointmentTest {
         // same object -> returns true
         assertTrue(THIRTY_MIN_APPOINTMENT.equals(THIRTY_MIN_APPOINTMENT));
 
-        // null -> returns true
+        // null -> returns false
         assertFalse(THIRTY_MIN_APPOINTMENT.equals(null));
 
         // different type -> returns false
