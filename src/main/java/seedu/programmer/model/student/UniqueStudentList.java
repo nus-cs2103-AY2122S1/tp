@@ -46,8 +46,7 @@ public class UniqueStudentList implements Iterable<Student> {
             throw new DuplicateStudentException();
         }
         internalList.add(toAdd);
-        internalList.sort(new SortByName());
-    }
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));    }
 
     /**
      * Get the student at the given index.
@@ -82,8 +81,7 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.set(index, editedStudent);
-        internalList.sort(new SortByName());
-    }
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));    }
 
     /**
      * Removes the equivalent student from the list.
@@ -94,13 +92,13 @@ public class UniqueStudentList implements Iterable<Student> {
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
         }
-        internalList.sort(new SortByName());
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));
     }
 
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
-        internalList.sort(new SortByName());
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));
     }
 
     /**
@@ -114,7 +112,7 @@ public class UniqueStudentList implements Iterable<Student> {
         }
 
         internalList.setAll(students);
-        internalList.sort(new SortByName());
+        internalList.sort(new SortByClass().thenComparing(new SortByName()));
     }
 
     /**

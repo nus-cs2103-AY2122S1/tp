@@ -53,6 +53,8 @@ public class Student {
         return classId;
     }
 
+    public String getClassIdValue() { return classId.classId;}
+
     public Email getEmail() {
         return email;
     }
