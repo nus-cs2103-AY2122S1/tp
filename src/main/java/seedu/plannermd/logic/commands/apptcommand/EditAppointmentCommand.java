@@ -57,7 +57,7 @@ public class EditAppointmentCommand extends AppointmentCommand {
     private final EditAppointmentDescriptor editAppointmentDescriptor;
 
     /**
-     * @param index                     of the appointment in the filtered appointment list to edit
+     * @param index of the appointment in the filtered appointment list to edit
      * @param editAppointmentDescriptor details to edit the appointment with
      */
     public EditAppointmentCommand(Index index, EditAppointmentDescriptor editAppointmentDescriptor) {
