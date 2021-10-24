@@ -28,21 +28,21 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Developer
 * Responsibilities: Backend
 
-### Johnny Doe
+### Srinivasan Neharikha
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/neha-5678.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Neha-5678)] [[portfolio](team/Neha-5678.md)]
 
 * Role: Developer
-* Responsibilities: Data
+* Responsibilities: Scheduling and tracking
 
-### Jean Doe
+### Le Quoc Huy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/jeremy-7007.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/jeremy-7007)]
+[[portfolio](team/jeremy-7007.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading

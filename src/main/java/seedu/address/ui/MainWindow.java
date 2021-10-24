@@ -32,8 +32,12 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
+    private TaskListPanel taskListPanel;
+    private GroupListPanel groupListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private ViewingPanelManager viewingPanelManager;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -43,6 +47,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane taskListPanelPlaceholder;
+
+    @FXML
+    private StackPane groupListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -113,8 +123,15 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
+        taskListPanel = new TaskListPanel(logic.getAddressBook().getTaskList());
+        taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+
+        groupListPanel = new GroupListPanel(logic.getAddressBook().getGroupList());
+        groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        viewingPanelManager = new ViewingPanelManager(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -167,6 +184,14 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
+    public TaskListPanel getTaskListPanel() {
+        return taskListPanel;
+    }
+
+    public GroupListPanel getGroupListPanel() {
+        return groupListPanel;
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -177,7 +202,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
+            viewingPanelManager.setViewingPanel(resultDisplayPlaceholder, commandResult.getViewType(), logic);
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }

@@ -1,8 +1,14 @@
 {
   "persons": [ {
+    "uniqueId": "1fa10824-5708-490b-973d-96d78d47d720",
     "name": "Hans Muster",
     "phone": "9482424",
     "email": "invalid@email!3e",
     "address": "4th street"
+  } ],
+  "tasks" : [ {
+    "name" : "Report 1",
+    "deadline" : "2021-10-10",
+    "uniqueId" : "f31648db-5619-4bad-99d2-87367a2b5f28"
   } ]
 }

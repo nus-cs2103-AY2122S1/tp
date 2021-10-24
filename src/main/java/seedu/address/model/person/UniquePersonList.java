@@ -3,11 +3,16 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
+import seedu.address.model.id.exceptions.IdNotFoundException;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
@@ -22,7 +27,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  *
  * @see Person#isSamePerson(Person)
  */
-public class UniquePersonList implements Iterable<Person> {
+public class UniquePersonList implements Iterable<Person>, UniqueIdMapper<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
@@ -64,7 +69,6 @@ public class UniquePersonList implements Iterable<Person> {
         if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
             throw new DuplicatePersonException();
         }
-
         internalList.set(index, editedPerson);
     }
 
@@ -133,5 +137,16 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    @Override
+    public Set<Person> getFromUniqueIds(Set<UniqueId> ids) {
+        Set<Person> toReturn = new HashSet<>();
+        for (UniqueId id : ids) {
+            toReturn.add(internalList.stream().filter(person -> id.equals(person.getId()))
+                    .findFirst()
+                    .orElseThrow(() -> new IdNotFoundException(id)));
+        }
+        return toReturn;
     }
 }
