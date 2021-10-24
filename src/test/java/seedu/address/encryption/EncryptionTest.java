@@ -37,7 +37,6 @@ public class EncryptionTest {
     private static final Path ENCRYPTED_FILEPATH_JSON_TWO = TEST_DATA_FOLDER.resolve("testJsonTwo.enc");
     private static final Path ILLEGAL_ENCRYPTED_FORMAT = TEST_DATA_FOLDER.resolve("illegal.txt");
 
-    @Disabled
     @Test
     public void whenEncryptingJsonIntoFile_andDecryptingFileAgain_theOriginalContentIsReturned()
             throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
@@ -56,7 +55,6 @@ public class EncryptionTest {
         FileUtil.deleteFile(ENCRYPTED_FILEPATH_JSON); // Cleanup
     }
 
-    @Disabled
     @Test
     public void ableToEncrypt_decrypt_writeJsonToDestination()
             throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, InvalidKeyException,

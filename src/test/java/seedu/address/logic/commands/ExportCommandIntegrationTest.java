@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.util.CsvWriter;
@@ -17,6 +18,7 @@ import seedu.address.testutil.ModelStubProvidingValidFilteredListNamesOnly;
 
 public class ExportCommandIntegrationTest {
 
+    @Disabled
     @Test
     public void execute_exportCommand_success() throws Exception {
         ExportCommand command = new ExportCommand(CsvWriterTest.TESTED_FILE_PATH, new CsvWriter());
@@ -26,6 +28,7 @@ public class ExportCommandIntegrationTest {
                 Paths.get(CsvWriterTest.EXPECTED_FILE_PATH_ALL_FIELDS)));
     }
 
+    @Disabled
     @Test
     public void execute_exportCommandNameOnly_success() throws Exception {
         ExportCommand command = new ExportCommand(CsvWriterTest.TESTED_FILE_PATH, new CsvWriter());
@@ -35,9 +38,10 @@ public class ExportCommandIntegrationTest {
                 Paths.get(CsvWriterTest.EXPECTED_FILE_PATH_NAMES_ONLY)));
     }
 
+    /*
     @AfterEach
     public void deleteTestCsv() throws Exception {
         Files.deleteIfExists(Paths.get(CsvWriterTest.TESTED_FILE_PATH));
     }
-
+    */
 }
