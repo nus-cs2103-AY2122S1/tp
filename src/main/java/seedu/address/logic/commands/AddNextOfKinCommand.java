@@ -19,8 +19,9 @@ public class AddNextOfKinCommand extends Command {
     public static final String COMMAND_WORD = "addNok";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a next of kin to a participant with specified "
-            + "index\n"
+            + "index.\n"
             + "Parameters: "
+            + "PARTICIPANT_INDEX"
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_TAG + "TAG"
@@ -29,7 +30,7 @@ public class AddNextOfKinCommand extends Command {
             + PREFIX_PHONE + "98234532 "
             + PREFIX_TAG + "Spouse ";
 
-    public static final String MESSAGE_SUCCESS = "Added next of kin:\n%1$s \nto %2$s successfully";
+    public static final String MESSAGE_SUCCESS = "Added \n%1$s \nto %2$s successfully";
 
     private final Index participantIndex;
     private final NextOfKin nextOfKin;
@@ -37,12 +38,13 @@ public class AddNextOfKinCommand extends Command {
     /**
      * This is a constructor for AddNextOfKinCommand.
      *
+     * @param participantIndex index of participant.
      * @param nextOfKin to be added.
      */
-    public AddNextOfKinCommand(Index ParticipantIndex, NextOfKin nextOfKin) {
-        requireNonNull(ParticipantIndex);
+    public AddNextOfKinCommand(Index participantIndex, NextOfKin nextOfKin) {
+        requireNonNull(participantIndex);
         requireNonNull(nextOfKin);
-        this.participantIndex = ParticipantIndex;
+        this.participantIndex = participantIndex;
         this.nextOfKin = nextOfKin;
     }
 

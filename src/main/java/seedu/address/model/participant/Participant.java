@@ -188,12 +188,31 @@ public class Participant {
     }
 
     /**
-     * Adds a NextOfKin to the participant.
+     * Adds a next of kin to the participant.
      *
-     * @param nextOfKin NextOfKin to be added.
+     * @param nextOfKin next of kin to be added.
      */
     public void addNextOfKin(NextOfKin nextOfKin) {
         nextOfKins.add(nextOfKin);
+    }
+
+    /**
+     * Removes the next of kin from the participant.
+     *
+     * @param nextOfKin next of kin to be removed.
+     */
+    public void removeNextOfKin(NextOfKin nextOfKin) {
+        nextOfKins.remove(nextOfKin);
+    }
+
+    /**
+     * Returns a next of kin object at specified index.
+     *
+     * @param index index of next of kin to get.
+     * @return next of kin at specified index.
+     */
+    public NextOfKin getNextOfKin(int index) {
+        return nextOfKins.get(index);
     }
 
     /** Returns true if the given next of kin is already assigned to this participant.
@@ -325,8 +344,8 @@ public class Participant {
 
         ArrayList<NextOfKin> nextOfKins = getNextOfKins();
         if (!nextOfKins.isEmpty()) {
-            builder.append("\nNext Of Kins: ");
-            nextOfKins.forEach(builder::append);
+            builder.append("\nNext Of Kins: \n");
+            nextOfKins.forEach(nok -> builder.append(nok).append("\n"));
         }
 
         return builder.toString();

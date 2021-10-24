@@ -6,31 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.AddEventCommand;
-import seedu.address.logic.commands.AddNextOfKinCommand;
-import seedu.address.logic.commands.AddParticipantToEventByIndexCommand;
-import seedu.address.logic.commands.AddParticipantToEventCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.DoneEventCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditEventCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FilterEventCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindEventCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.ListEventCommand;
-import seedu.address.logic.commands.RemoveEventCommand;
-import seedu.address.logic.commands.RemoveParticipantFromEventByIndexCommand;
-import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
-import seedu.address.logic.commands.ShowEventDetailsCommand;
-import seedu.address.logic.commands.ShowEventParticipantsCommand;
-import seedu.address.logic.commands.SortEventCommand;
-import seedu.address.logic.commands.ViewCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -118,6 +94,9 @@ public class AddressBookParser {
 
         case AddNextOfKinCommand.COMMAND_WORD:
             return new AddNextOfKinParser().parse(arguments);
+
+        case RemoveNextOfKinCommand.COMMAND_WORD:
+            return new RemoveNextOfKinParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
