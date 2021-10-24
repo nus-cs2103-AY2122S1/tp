@@ -23,8 +23,8 @@ public class TypicalAssessments {
             .withScore(90, 100).build();
 
     // Manually added - Assessment's details found in {@code CommandTestUtil}
-    public static final Assessment Quiz1 = new AssessmentBuilder().withAssesmentName(VALID_ASSESSMENT_NAME_QUIZ1)
+    public static final Assessment QUIZ1 = new AssessmentBuilder().withAssesmentName(VALID_ASSESSMENT_NAME_QUIZ1)
             .withScore(VALID_ACTUAL_SCORE_QUIZ1, VALID_TOTAL_SCORE_QUIZ1).build();
-    public static final Assessment Lab5 = new AssessmentBuilder().withAssesmentName(VALID_ASSESSMENT_NAME_LAB5)
+    public static final Assessment LAB5 = new AssessmentBuilder().withAssesmentName(VALID_ASSESSMENT_NAME_LAB5)
             .withScore(VALID_ACTUAL_SCORE_LAB5, VALID_TOTAL_SCORE_LAB5).build();
 }
