@@ -2,13 +2,19 @@ package seedu.address.ui;
 
 import java.util.Comparator;
 
+import de.jensd.fx.glyphs.GlyphsDude;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcons;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import seedu.address.model.client.Client;
 import seedu.address.model.tag.Tag;
+import com.gluonhq.charm.glisten.control.Icon;
 
 /**
  * An UI component that displays the important information of a {@code Client}.
@@ -27,6 +33,8 @@ public class ClientCard extends UiPart<Region> {
 
     public final Client client;
 
+    @FXML
+    private Icon icon;
     @FXML
     private HBox cardPane;
     @FXML
@@ -51,12 +59,37 @@ public class ClientCard extends UiPart<Region> {
     private Label nextMeeting;
     @FXML
     private FlowPane tags;
+    @FXML
+    private BorderPane phoneIconPane;
+    @FXML
+    private BorderPane addressIconPane;
+    @FXML
+    private BorderPane emailIconPane;
+    @FXML
+    private BorderPane riskIconPane;
+    @FXML
+    private BorderPane incomeIconPane;
+    @FXML
+    private BorderPane planIconPane;
+    @FXML
+    private BorderPane lastMetIconPane;
+
+    // TODO: implement icons later. don't know why this won't work
+    // private static final Text PHONE_ICON = GlyphsDude.createIcon(FontAwesomeIcons.PHONE, "10px");
+    // private static final Text HOME_ICON = GlyphsDude.createIcon(FontAwesomeIcons.HOME, "10px");
+    // private static final Text MAIL_FORWARD_ICON = GlyphsDude.createIcon(FontAwesomeIcons.MAIL_FORWARD, "10px");
+    // private static final Text LINE_CHART_ICON = GlyphsDude.createIcon(FontAwesomeIcons.LINE_CHART, "10px");
+    // private static final Text MONEY_ICON = GlyphsDude.createIcon(FontAwesomeIcons.MONEY, "10px");
+    // private static final Text DOLLAR_ICON = GlyphsDude.createIcon(FontAwesomeIcons.DOLLAR, "10px");
+    // private static final Text HAND_ALT_DOWN_ICON = GlyphsDude.createIcon(FontAwesomeIcons.HAND_ALT_DOWN, "10px");
+
 
     /**
      * Creates a {@code ClientCode}.
      */
     public ClientCard(Client client) {
         super(FXML);
+
         this.client = client;
         id.setText(client.getClientId().value + ". ");
         name.setText(client.getName().fullName);
@@ -69,8 +102,17 @@ public class ClientCard extends UiPart<Region> {
         lastMet.setText(client.getLastMet().toString());
         nextMeeting.setText(client.getNextMeeting().toString());
         client.getTags().stream()
-                .sorted(Comparator.comparing(Tag::getName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));
+            .sorted(Comparator.comparing(Tag::getName))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));
+
+        // TODO: fix later
+        // phoneIconPane.setCenter(PHONE_ICON);
+        // addressIconPane.setCenter(HOME_ICON);
+        // emailIconPane.setCenter(MAIL_FORWARD_ICON);
+        // riskIconPane.setCenter(LINE_CHART_ICON);
+        // incomeIconPane.setCenter(MONEY_ICON);
+        // planIconPane.setCenter(DOLLAR_ICON);
+        // lastMetIconPane.setCenter(HAND_ALT_DOWN_ICON);
     }
 
     @Override
@@ -88,6 +130,6 @@ public class ClientCard extends UiPart<Region> {
         // state check
         ClientCard card = (ClientCard) other;
         return id.getText().equals(card.id.getText())
-                && client.equals(card.client);
+            && client.equals(card.client);
     }
 }

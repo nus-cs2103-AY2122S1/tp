@@ -199,6 +199,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switches the Address Book.
      */
     private void handleSwitchAddressBook() {
+        // TODO: either this.logic or logic
         this.logic.switchAddressBook();
     }
 

@@ -4,9 +4,11 @@ import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.model.client.Client;
+import com.gluonhq.charm.glisten.control.CardPane;
 
 /**
  * Panel that displays the full information of a {@code Client}.
@@ -14,6 +16,9 @@ import seedu.address.model.client.Client;
 public class ClientViewPanel extends UiPart<Region> {
 
     private static final String FXML = "ClientViewPanel.fxml";
+
+    @FXML
+    private CardPane<HBox> cardPane;
 
     @FXML
     private VBox clientInfoContainer;
@@ -43,7 +48,7 @@ public class ClientViewPanel extends UiPart<Region> {
     private Label clientDisposableIncome;
 
     @FXML
-    private Label nextMeeting;
+    private Label clientNextMeeting;
 
     @FXML
     private VBox contactInfoContainer;
@@ -53,6 +58,9 @@ public class ClientViewPanel extends UiPart<Region> {
 
     @FXML
     private Label clientPhoneNumber;
+
+    @FXML
+    private Label clientAddress;
 
     /**
      * Creates a {@code ClientViewPanel} with listeners initiated to listen to updates
@@ -72,7 +80,7 @@ public class ClientViewPanel extends UiPart<Region> {
     /**
      * Updates the {@code ClientViewPanel} with information from the client to be viewed.
      */
-    public void updateView(ObservableList<Client> clientToView) {
+    private void updateView(ObservableList<Client> clientToView) {
         if (clientToView.size() == 1 && clientToView.get(0) != null) {
             Client client = clientToView.get(0);
             clientName.setText(client.getName().toString());
@@ -82,9 +90,10 @@ public class ClientViewPanel extends UiPart<Region> {
             clientRiskAppetite.setText(client.getRiskAppetite().toString());
             clientCurrentPlans.setText(client.getCurrentPlan().toString());
             clientDisposableIncome.setText(client.getDisposableIncome().toString());
-            nextMeeting.setText(client.getNextMeeting().toString());
+            clientNextMeeting.setText(client.getNextMeeting().toString());
             clientEmail.setText(client.getEmail().toString());
             clientPhoneNumber.setText(client.getPhone().toString());
+            clientAddress.setText(client.getAddress().toString());
         }
     }
 }
