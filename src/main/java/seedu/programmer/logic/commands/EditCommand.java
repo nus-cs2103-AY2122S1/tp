@@ -20,10 +20,6 @@ import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
 
-
-
-
-
 /**
  * Edits the details of an existing student in ProgrammerError.
  */

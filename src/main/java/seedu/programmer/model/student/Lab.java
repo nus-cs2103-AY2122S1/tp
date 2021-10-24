@@ -1,9 +1,8 @@
 package seedu.programmer.model.student;
 
-//todo: for testing show feature only
 public class Lab {
     private String title;
-    private Double actualScore = 0.0;
+    private Double actualScore;
     private Double totalScore;
 
     /**
@@ -23,6 +22,7 @@ public class Lab {
      * */
     public Lab(String title, Double totalScore) {
         this.title = title;
+        this.actualScore = Double.NaN;
         this.totalScore = totalScore;
     }
 
@@ -49,6 +49,10 @@ public class Lab {
 
     public Double updateActualScore(Double value) {
         return this.actualScore = value;
+    }
+
+    public boolean isMarked() {
+        return !actualScore.equals(Double.NaN);
     }
 
     @Override

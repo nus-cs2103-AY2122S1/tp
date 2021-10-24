@@ -142,4 +142,13 @@ public class Student {
                 + getEmail();
     }
 
+    /**
+     * Create a new Student Object with the same fields.
+     * @return a copy of the Student
+     * */
+    public Student clone() {
+        Student clone =  new Student(name,studentId,classId,email);
+        clone.setLabResultRecord(labResultList);
+        return clone;
+    }
 }

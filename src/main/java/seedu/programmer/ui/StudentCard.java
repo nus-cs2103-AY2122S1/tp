@@ -1,12 +1,23 @@
 package seedu.programmer.ui;
 
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+
+import java.util.Comparator;
 
 /**
  * An UI component that displays information of a {@code student}.
@@ -36,6 +47,8 @@ public class StudentCard extends UiPart<Region> {
     private Label classId;
     @FXML
     private Label email;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code studentCode} with the given {@code student} and index to display.
@@ -48,11 +61,12 @@ public class StudentCard extends UiPart<Region> {
     }
 
     /**
-     * Creates a student particular card to display
+     * Creates a student particular card to display on the side panel.
      */
     public StudentCard(Student student) {
         super(FXML);
         this.student = student;
+        id.setText(">");
         updateStudentInformation(student);
     }
 
@@ -82,10 +96,15 @@ public class StudentCard extends UiPart<Region> {
         studentId.setText("Student ID: " + student.getStudentId().studentId);
         classId.setText("Class ID: " + student.getClassId().classId);
         email.setText("Email: " + student.getEmail().email);
-
-        name.setTextFill(Color.WHITE);
-        studentId.setTextFill(Color.WHITE);
-        classId.setTextFill(Color.WHITE);
-        email.setTextFill(Color.WHITE);
+        ObservableList<Lab> labResults = student.getLabResultList();
+        for (Lab lab : labResults) {
+            Label labLabel = new Label(lab.getTitle());
+            Background background;
+            labLabel.setStyle(" -fx-background-color: red;");
+            if (lab.isMarked()) {
+                labLabel.setStyle(" -fx-background-color: green;");
+            }
+            tags.getChildren().add(labLabel);
+        }
     }
 }
