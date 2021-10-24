@@ -28,7 +28,7 @@ public class ModelManager implements Model {
     private final FilteredList<Member> filteredMembers;
     private final FilteredList<Event> filteredEvents;
     private TaskList taskListManager;
-    private FilteredList<Task> filteredTasks;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -188,7 +188,6 @@ public class ModelManager implements Model {
         requireNonNull(member);
         if (this.taskListManager != member.getTaskList()) {
             this.taskListManager = member.getTaskList();
-            this.filteredTasks = new FilteredList<>(this.taskListManager.asUnmodifiableObservableList());
         }
     }
 
@@ -211,7 +210,6 @@ public class ModelManager implements Model {
     public void addTask(Member member, Task task) {
         loadTaskList(member);
         taskListManager.add(task);
-        updateFilteredTaskList(member, PREDICATE_SHOW_ALL_TASKS);
     }
 
     /**
