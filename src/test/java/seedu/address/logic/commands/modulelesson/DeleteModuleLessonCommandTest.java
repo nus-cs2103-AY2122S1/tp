@@ -2,6 +2,7 @@ package seedu.address.logic.commands.modulelesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2040;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2106;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -109,9 +110,18 @@ public class DeleteModuleLessonCommandTest {
         DeleteModuleLessonCommand deleteBatchCommand1 = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_SECOND);
         DeleteModuleLessonCommand deleteBatchCommand2 = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_THIRD);
 
+        ModuleCodeContainsKeywordsPredicate firstPredicate =
+                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2106);
+        ModuleCodeContainsKeywordsPredicate secondPredicate =
+                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2040);
+
+        DeleteModuleLessonCommand deleteModuleCommand1 = new DeleteModuleLessonCommand(firstPredicate);
+        DeleteModuleLessonCommand deleteModuleCommand2 = new DeleteModuleLessonCommand(secondPredicate);
+
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
         assertTrue(deleteBatchCommand1.equals(deleteBatchCommand1));
+        assertTrue(deleteModuleCommand1.equals(deleteModuleCommand1));
 
         // same values -> returns true
         DeleteModuleLessonCommand deleteFirstCommandCopy = new DeleteModuleLessonCommand(INDEX_FIRST);
@@ -119,6 +129,9 @@ public class DeleteModuleLessonCommandTest {
 
         DeleteModuleLessonCommand deleteBatchCommandCopy = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_SECOND);
         assertTrue(deleteBatchCommand1.equals(deleteBatchCommandCopy));
+
+        DeleteModuleLessonCommand deleteModuleCommandCopy = new DeleteModuleLessonCommand(firstPredicate);
+        assertTrue(deleteModuleCommand1.equals(deleteModuleCommandCopy));
 
         // different types -> returns false
         assertFalse(deleteFirstCommand.equals(1));
@@ -130,5 +143,7 @@ public class DeleteModuleLessonCommandTest {
         assertFalse(deleteFirstCommand.equals(deleteSecondCommand));
 
         assertFalse(deleteBatchCommand1.equals(deleteBatchCommand2));
+
+        assertFalse(deleteModuleCommand1.equals(deleteModuleCommand2));
     }
 }

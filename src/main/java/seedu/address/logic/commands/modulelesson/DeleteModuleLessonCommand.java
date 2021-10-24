@@ -118,6 +118,7 @@ public class DeleteModuleLessonCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteModuleLessonCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteModuleLessonCommand) other).targetIndex)
-                && endIndex.equals(((DeleteModuleLessonCommand) other).endIndex)); // state check
+                && endIndex.equals(((DeleteModuleLessonCommand) other).endIndex)
+                && predicate.equals(((DeleteModuleLessonCommand) other).predicate)); // state check
     }
 }
