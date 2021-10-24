@@ -2,53 +2,18 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  - [**Acknowledgements**](#acknowledgements)
-  - [**Setting up, getting started**](#setting-up-getting-started)
-  - [Design](#design)
-  - [Architecture](#architecture)
-    - [UI component](#ui-component)
-      - [Current Implementation of UI](#current-implementations-of-ui)
-      - [Future Plans for UI](#future-plans-for-ui)
-    - [Logic component](#logic-component)
-      - [Current Implementation of event](#current-implementation-of-event)
-      - [Future plans for event](#future-plans-for-event)
-      - [Current Implementation for adding tasks](#current-implementation-for-adding-tasks)
-      - [Current Implementation for deleting tasks](#current-implementation-for-deleting-tasks)
-      - [Current Implementation for lists](#current-implementation-for-lists)
-    - [Model component](#model-component)
-      - [Current Implementation of task](#current-implementation-of-task)
-      - [Future Plan of task](#future-plan-of-task)
-    - [Storage component](#storage-component)
-      - [Current Implementation](#current-implementation-4)
-    - [Common classes](#common-classes)
-  - [**Implementation**](#implementation)
-    - [\[Proposed\] Undo/redo feature](#proposed-undoredo-feature)
-      - [Proposed Implementation](#proposed-implementation)
-      - [Design considerations:](#design-considerations)
-    - [\[Proposed\] Data archiving](#proposed-data-archiving)
-  - [**Documentation, logging, testing, configuration, dev-ops**](#documentation-logging-testing-configuration-dev-ops)
-  - [**Appendix: Requirements**](#appendix-requirements)
-    - [Product scope](#product-scope)
-    - [User stories](#user-stories)
-      - [Member-related Functions](#member-related-functions)
-      - [Task Functions](#task-functions)
-      - [Storage Functions](#storage-functions)
-      - [Event Functions](#event-functions)
-      - [Other miscellaneous Functions](#other-miscellaneous-functions)
-    - [Use cases](#use-cases)
-    - [Non-Functional Requirements](#non-functional-requirements)
-    - [Glossary](#glossary)
-  - [**Appendix: Instructions for manual testing**](#appendix-instructions-for-manual-testing)
-    - [Launch and shutdown](#launch-and-shutdown)
-    - [Deleting a member](#deleting-a-member)
-    - [Saving data](#saving-data)
 
+Ailurus is a **desktop app** that helps to organise committees account for details of their members. It provides users with convenient viewing and editing access to all information, thus providing much convenience in their work.
+
+The Developer Guide seeks to provide detailed documentation for developers to set up their environment, and understand the architecure and the different components, as well as their implementations in various commands. It also informs developers of the requirements and instructions for manual testing for the Ailurus product.
+
+* Table of Contents
+{:toc}
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+* [SE-EDU AddressBook Level-3](https://se-education.org/addressbook-level3/)
 
 --------------------------------------------------------------------------------------------------------------------
 
