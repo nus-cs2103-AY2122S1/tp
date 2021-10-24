@@ -30,7 +30,7 @@ class TagCommandTest {
     }
 
     /**
-     * Generates a {@code ListCommand}.
+     * Generates a {@code TagCommand}.
      */
     private TagCommand prepareTagCommand() {
         TagCommand tagCommand = new TagCommand();
