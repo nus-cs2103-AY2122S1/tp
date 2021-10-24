@@ -4,7 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.*;
+import seedu.address.model.task.DeadlineTask;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -86,7 +90,7 @@ public class DeadlineTaskBuilder {
         } else if (description.contains("M") || description.contains("m")) {
             this.priority = Task.Priority.MEDIUM;
         } else {
-            this.priority = Task.Priority.LOW;    
+            this.priority = Task.Priority.LOW;
         }
         return this;
     }

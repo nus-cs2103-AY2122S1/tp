@@ -36,7 +36,8 @@ public class AddDeadlineAndEventTaskCommandTest {
 
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
-        AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded();
+        AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
+                new AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded();
         Task validTask = new DeadlineTaskBuilder().build();
 
         CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
@@ -49,7 +50,8 @@ public class AddDeadlineAndEventTaskCommandTest {
     public void execute_duplicateTask_throwsCommandException() {
         Task validTask = new DeadlineTaskBuilder().build();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
-        AddDeadlineAndEventTaskCommandTest.ModelStub modelStub = new AddDeadlineAndEventTaskCommandTest.ModelStubWithTask(validTask);
+        AddDeadlineAndEventTaskCommandTest.ModelStub modelStub =
+                new AddDeadlineAndEventTaskCommandTest.ModelStubWithTask(validTask);
 
         assertThrows(CommandException.class,
                 AddTaskCommand.MESSAGE_DUPLICATE_TASK, () -> addTaskCommand.execute(modelStub));

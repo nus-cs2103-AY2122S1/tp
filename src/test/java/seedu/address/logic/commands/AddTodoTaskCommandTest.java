@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -32,7 +34,7 @@ public class AddTodoTaskCommandTest {
         assertThrows(NullPointerException.class, () -> new AddTodoTaskCommand(null));
     }
 
-    
+
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
@@ -44,7 +46,7 @@ public class AddTodoTaskCommandTest {
         assertEquals(String.format(AddTodoTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
-    
+
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
@@ -58,32 +60,32 @@ public class AddTodoTaskCommandTest {
 
     @Test
     public void equals() {
-        Task todo_iP = new TodoTaskBuilder().withName("Complete iP").build();
-        Task todo_tP = new TodoTaskBuilder().withName("Complete tP").build();
-        Task todo_tP_final_feature = new TodoTaskBuilder().withName("Complete tP")
+        Task todoIp = new TodoTaskBuilder().withName("Complete iP").build();
+        Task todoTp = new TodoTaskBuilder().withName("Complete tP").build();
+        Task todoTpFinalFeature = new TodoTaskBuilder().withName("Complete tP")
                 .withDescription("Implement the final feature").build();
-        AddTodoTaskCommand todoIPCommand = new AddTodoTaskCommand(todo_iP);
-        AddTodoTaskCommand todoTPCommand = new AddTodoTaskCommand(todo_tP);
-        AddTodoTaskCommand todoFinalFeature = new AddTodoTaskCommand(todo_tP_final_feature);
+        AddTodoTaskCommand todoIpCommand = new AddTodoTaskCommand(todoIp);
+        AddTodoTaskCommand todoTpCommand = new AddTodoTaskCommand(todoTp);
+        AddTodoTaskCommand todoFinalFeature = new AddTodoTaskCommand(todoTpFinalFeature);
 
         // same object -> returns true
-        assertTrue(todoIPCommand.equals(todoIPCommand));
+        assertTrue(todoIpCommand.equals(todoIpCommand));
 
         // same values -> returns true
-        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(todo_iP);
-        assertTrue(todoIPCommand.equals(addAliceCommandCopy));
-        
+        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(todoIp);
+        assertTrue(todoIpCommand.equals(addAliceCommandCopy));
+
         // tasks have different description -> returns false
-        assertFalse(todoFinalFeature.equals(todoTPCommand));
+        assertFalse(todoFinalFeature.equals(todoTpCommand));
 
         // different types -> returns false
-        assertFalse(todoIPCommand.equals(1));
+        assertFalse(todoIpCommand.equals(1));
 
         // null -> returns false
-        assertFalse(todoIPCommand.equals(null));
+        assertFalse(todoIpCommand.equals(null));
 
         // different task -> returns false
-        assertFalse(todoIPCommand.equals(todoTPCommand));
+        assertFalse(todoIpCommand.equals(todoTpCommand));
     }
 
     /**

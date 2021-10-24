@@ -1,18 +1,34 @@
 package seedu.address.logic.parser;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.logic.commands.AddDeadlineTaskCommand;
-import seedu.address.logic.commands.AddEventTaskCommand;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.*;
-import seedu.address.testutil.DeadlineTaskBuilder;
-import seedu.address.testutil.EventTaskBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_DEADLINE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_EVENTDATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TASK_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DESCRIPTION_DESC_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_EVENTDATE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_NAME_DESC_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_TAG_DESC_EXERCISE;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_TAG_DESC_FUN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DATE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TAG_EXERCISE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TAG_FUN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TAG_STUDY;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
+import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.commands.AddEventTaskCommand;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
+import seedu.address.testutil.EventTaskBuilder;
 
 public class AddEventTaskCommandParserTest {
     private AddEventTaskCommandParser parser = new AddEventTaskCommandParser();
@@ -49,8 +65,8 @@ public class AddEventTaskCommandParserTest {
         EventTask expectedTaskWithoutTagsAndDescription = new EventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();
-        
-        assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_EVENTDATE_DESC, 
+
+        assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_EVENTDATE_DESC,
                 new AddEventTaskCommand(expectedTaskWithoutTagsAndDescription));
 
         // zero tags
@@ -78,11 +94,11 @@ public class AddEventTaskCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name 
+        // invalid name
         assertParseFailure(parser, PREAMBLE_WHITESPACE + INVALID_NAME_DESC
                 + TASK_EVENTDATE_DESC, TaskName.MESSAGE_CONSTRAINTS);
 
-        // invalid date 
+        // invalid date
         assertParseFailure(parser, PREAMBLE_WHITESPACE + TASK_NAME_DESC_PLAY
                 + INVALID_TASK_EVENTDATE_DESC, TaskDate.MESSAGE_CONSTRAINTS);
 

@@ -1,14 +1,18 @@
 package seedu.address.testutil;
 
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.*;
-import seedu.address.model.util.SampleDataUtil;
-
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Description;
+import seedu.address.model.task.EventTask;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.util.SampleDataUtil;
+
 public class EventTaskBuilder {
-    
+
     public static final String DEFAULT_TASK_NAME = "Do CS2103 tP";
     public static final String DEFAULT_TASK_DATE = "2021-10-10";
 

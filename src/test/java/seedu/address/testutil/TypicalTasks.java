@@ -1,13 +1,18 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.TASK_DESCRIPTION_DESC_STUDY;
+import static seedu.address.logic.commands.CommandTestUtil.TASK_TAG_DESC_WORK;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_DESCRIPTION_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_PLAY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_STUDY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_TAG_EXERCISE;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.task.Task;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
 
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
@@ -18,7 +23,7 @@ public class TypicalTasks {
     public static final Task BUY_SHAMPOO = new TodoTaskBuilder().withName("Buy Shampoo")
             .withDescription("No more shampoo. Buy 3 in 1 if possible")
             .build();
-    public static final Task WATCH_MONEY_HEIST =  new TodoTaskBuilder().withName("Watch Money Heist S3")
+    public static final Task WATCH_MONEY_HEIST = new TodoTaskBuilder().withName("Watch Money Heist S3")
             .build();
     public static final Task TUTORIAL = new DeadlineTaskBuilder().withName("Do Tutorial")
             .withDate("2000-02-02")
@@ -59,7 +64,7 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(BUY_SHAMPOO, WATCH_MONEY_HEIST, 
+        return new ArrayList<>(Arrays.asList(BUY_SHAMPOO, WATCH_MONEY_HEIST,
                 TUTORIAL, MEETING, DINNER, FRIEND_BIRTHDAY, EXERCISE));
     }
 }
