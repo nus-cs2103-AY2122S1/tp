@@ -85,10 +85,10 @@ public class StudentCard extends UiPart<Region> {
      * Update the student particulars to be displayed.
      * */
     public void updateStudentInformation(Student student) {
-        name.setText(student.getName().fullName);
-        studentId.setText("Student ID: " + student.getStudentId().studentId);
-        classId.setText("Class ID: " + student.getClassId().classId);
-        email.setText("Email: " + student.getEmail().email);
+        name.setText(student.getFullName());
+        studentId.setText("Student ID: " + student.getStudentIdValue());
+        classId.setText("Class ID: " + student.getClassIdValue());
+        email.setText("Email: " + student.getEmailValue());
         ObservableList<Lab> labResults = student.getLabResultList();
         for (Lab lab : labResults) {
             Label labLabel = new Label(lab.getTitle());

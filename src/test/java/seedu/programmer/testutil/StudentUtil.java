@@ -26,10 +26,10 @@ public class StudentUtil {
      * Returns the part of command string for the given {@code student}'s details.
      */
     public static String getStudentDetails(Student student) {
-        return PREFIX_NAME + student.getName().fullName + " "
-                + PREFIX_STUDENT_ID + student.getStudentId().studentId + " "
-                + PREFIX_CLASS_ID + student.getClassId().classId + " "
-                + PREFIX_EMAIL + student.getEmail().email + " ";
+        return PREFIX_NAME + student.getFullName() + " "
+                + PREFIX_STUDENT_ID + student.getStudentIdValue() + " "
+                + PREFIX_CLASS_ID + student.getClassIdValue() + " "
+                + PREFIX_EMAIL + student.getEmailValue() + " ";
     }
 
     /**
@@ -37,11 +37,11 @@ public class StudentUtil {
      */
     public static String getEditStudentDescriptorDetails(EditStudentDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.toString()).append(" "));
         descriptor.getStudentId().ifPresent(studentId ->
-                sb.append(PREFIX_STUDENT_ID).append(studentId.studentId).append(" "));
-        descriptor.getClassId().ifPresent(classId -> sb.append(PREFIX_CLASS_ID).append(classId.classId).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.email).append(" "));
+                sb.append(PREFIX_STUDENT_ID).append(studentId.toString()).append(" "));
+        descriptor.getClassId().ifPresent(classId -> sb.append(PREFIX_CLASS_ID).append(classId.toString()).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.toString()).append(" "));
 
         return sb.toString();
     }

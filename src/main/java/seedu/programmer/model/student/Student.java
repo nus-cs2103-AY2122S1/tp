@@ -54,11 +54,15 @@ public class Student {
     }
 
     public String getFullName() {
-        return name.fullName;
+        return name.toString();
     }
 
     public StudentId getStudentId() {
         return studentId;
+    }
+
+    public String getStudentIdValue() {
+        return studentId.toString();
     }
 
     public ClassId getClassId() {
@@ -66,11 +70,15 @@ public class Student {
     }
 
     public String getClassIdValue() {
-        return classId.classId;
+        return classId.toString();
     }
 
     public Email getEmail() {
         return email;
+    }
+
+    public String getEmailValue() {
+        return email.toString();
     }
 
     public ObservableList<Lab> getLabResultList() {
