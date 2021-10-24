@@ -119,15 +119,18 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public void populatePriorityPieChart() {
         priorityPieChart.getData().clear();  //Ensure that PieChart is blank.
+
+        // Gets the respective counts
         int highPriorityCount = this.fast.getHighPriorityCount();
         int mediumPriorityCount = this.fast.getMediumPriorityCount();
         int lowPriorityCount = this.fast.getLowPriorityCount();
 
+        // Assert statements to verify that the input data is correct
         assert highPriorityCount >= 0 : "highPriorityCount must be positive";
         assert mediumPriorityCount >= 0 : "mediumPriorityCount must be positive";
         assert lowPriorityCount >= 0 : "lowPriorityCount must be positive";
 
-        addPriorityPieChartDesc(highPriorityCount, mediumPriorityCount, lowPriorityCount);
+        addPriorityPieChartAnalysis(highPriorityCount, mediumPriorityCount, lowPriorityCount);
 
         addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
         addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
@@ -139,6 +142,8 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public void populateInvestmentPlanPieChart() {
         investmentPlanPieChart.getData().clear(); //Ensure that PieChart is blank.
+
+        // Gets the respective counts
         int lifeInsuranceCount = this.fast.getLifeInsuranceCount();
         int motorInsuranceCount = this.fast.getMotorInsuranceCount();
         int travelInsuranceCount = this.fast.getTravelInsuranceCount();
@@ -147,18 +152,25 @@ public class StatsWindow extends UiPart<Stage> {
         int investmentCount = this.fast.getInvestmentCount();
         int savingsCount = this.fast.getSavingsCount();
 
-
-
-
-//        assert highPriorityCount >= 0 : "highPriorityCount must be positive";
-//        assert mediumPriorityCount >= 0 : "mediumPriorityCount must be positive";
-//        assert lowPriorityCount >= 0 : "lowPriorityCount must be positive";
+        // Assert statements to verify that the input data is correct
+        assert lifeInsuranceCount >= 0 : "lifeInsuranceCount must be positive";
+        assert motorInsuranceCount >= 0 : "motorInsuranceCount must be positive";
+        assert travelInsuranceCount >= 0 : "travelInsuranceCount must be positive";
+        assert healthInsuranceCount >= 0 : "healthInsuranceCount must be positive";
+        assert propertyInsuranceCount >= 0 : "propertyInsuranceCount must be positive";
+        assert investmentCount >= 0 : "investmentCount must be positive";
+        assert savingsCount >= 0 : "savingsCount must be positive";
 //
 //        addPriorityPieChartDesc(highPriorityCount, mediumPriorityCount, lowPriorityCount);
 //
-//        addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
-//        addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
-//        addPieChartData(PriorityTag.LowPriority.NAME, lowPriorityCount, this.priorityPieChart);
+        addPieChartData(InvestmentPlanTag.LifeInsurance.NAME, lifeInsuranceCount, this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.MotorInsurance.NAME, motorInsuranceCount, this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.TravelInsurance.NAME, travelInsuranceCount, this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.HealthInsurance.NAME, healthInsuranceCount, this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.PropertyInsurance.NAME, propertyInsuranceCount, this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.Investment.NAME, investmentCount, this.investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.Savings.NAME, savingsCount, this.investmentPlanPieChart);
+
     }
 
     /**
@@ -189,7 +201,7 @@ public class StatsWindow extends UiPart<Stage> {
     /**
      * Adds a brief analysis of the client base to the PieChart.
      */
-    public void addPriorityPieChartDesc(int highCount, int medCount, int lowCount) {
+    public void addPriorityPieChartAnalysis(int highCount, int medCount, int lowCount) {
         int totalCount = highCount + medCount + lowCount;
         String totalClientCount = totalCount + " Clients!";
 
