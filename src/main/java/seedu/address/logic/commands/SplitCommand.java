@@ -40,7 +40,8 @@ public class SplitCommand extends Command {
         PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(dayNumber);
         model.split(predicate);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault())));
+                DayOfWeek.of(dayNumber).getDisplayName(TextStyle.FULL, Locale.getDefault())),
+                false, true, false);
     }
 
     @Override
