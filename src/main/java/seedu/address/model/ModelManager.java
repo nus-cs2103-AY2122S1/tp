@@ -116,6 +116,11 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
+    @Override
+    public void exportPerson(Person person) {
+        addressBook.exportPerson(person);
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
