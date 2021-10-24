@@ -8,13 +8,16 @@ participant ":AddApplicantCommandParser" as AddApplicantCommandParser LOGIC_COLO
 participant "a:AddApplicantCommand" as AddApplicantCommand LOGIC_COLOR
 end box
 
-LogicManager -> MrTechRecruiterParser : parseCommand(add-applicant ...)
-note left
+[-> LogicManager : execute(add-applicant ...)
+activate LogicManager
+note right
     The full command string
     is shortened for brevity.
     You can assume that the
     arguments are valid.
 end note
+LogicManager -> MrTechRecruiterParser : parseCommand(add-applicant ...)
+
 activate MrTechRecruiterParser
 
 create AddApplicantCommandParser
@@ -40,4 +43,7 @@ activate AddApplicantCommand
 
 AddApplicantCommand --> MrTechRecruiterParser
 deactivate AddApplicantCommand
+
+[<--LogicManager
+deactivate LogicManager
 @enduml

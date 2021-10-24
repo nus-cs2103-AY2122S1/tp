@@ -258,11 +258,11 @@ Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd
 block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
 `applicantParticulars` object, and return the `AddApplicantCommand` instance.
 
-The following sequence diagram shows the method invokation in this step.
+The following sequence diagram shows the method invocation in this step.
+![AddApplicantSequenceDiagram1](images/AddApplicantSequenceDiagram1.png)
 
-
-Step 2. LogicManager will execute this command instance. This will invoke the `Model#addApplicantWithParticulars`
-method.
+Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the 
+`Model#addApplicantWithParticulars` method.
 
 Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
 input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then 
@@ -274,9 +274,23 @@ will not be created.
 
 </div>
 
-The following sequence diagram shows how the add-applicant operation works:
+The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
+![AddApplicantActivityDiagram1](images/AddApplicantActivityDiagram1.png)
 
+#### Design considerations:
 
+**Aspect: How undo & redo executes:**
+
+* **Alternative 1 (current choice):** Saves the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Individual command knows how to undo/redo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+_{more aspects and alternatives to be added}_
 
 
 --------------------------------------------------------------------------------------------------------------------
