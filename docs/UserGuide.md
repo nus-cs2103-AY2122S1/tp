@@ -44,28 +44,30 @@ Managera is OS-independent meaning it will work on any operating system.
 --------------------------------------------------------------------------------------------------------------------
 ## How to use this user guide
 
-If this is the first time you are using Managera, you are strongly advised to visit the Quick Start section to learn how to set up Managera
+If this is the first time you are using Managera, you are strongly advised to visit the [Quick Start](#quick-start) section to learn how to set up Managera
 and get started.
 
-If there are any doubts on how certain commands are used, you can look for the description of the command in the Features
-section or have a brief overview in the Command Summary section.
+If there are any doubts on how certain commands are used, you can look for the description of the command in the [Features](#features)
+section or have a brief overview in the [Command Summary](#command-summary) section.
 
-For any other questions about Managera, you may refer to the FAQ section.
+For any other questions about Managera, you may refer to the [FAQ](#faq) section.
 
-You can quickly jump to any of the sections by using the Table of Contents above.
+You can quickly jump to any of the sections by using the [Table of Contents](#table-of-contents) above.
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. [Ensure](https://twallet.telangana.gov.in/TABiometric/data/Java%20Check.pdf) you have Java `11` or above installed in your Computer.
 
-2. Download the latest `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
+2. If your Computer do not have Java `11`, obtain the installation package from [here](https://www.oracle.com/java/technologies/downloads/#java11) and follow the instructions [here](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html).
 
-3. Copy the file to the folder you want to use as the _home folder_ for Managera.
+3. Download the latest `managera.jar` from [here](https://github.com/AY2122S1-CS2103T-T10-2/tp/releases).
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Copy the Managera.jar to a new folder and that will be the _home folder_ for Managera.
+
+5. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. <br>
+6. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window. <br>
    Some example commands you can try:
 
    * **`list`** : Lists all Participants.
@@ -75,14 +77,14 @@ You can quickly jump to any of the sections by using the Table of Contents above
    * **`delete`**`3` : Deletes the 3rd Participant shown in the current list.
 
    * **`clear`** : Deletes all Participants and Events.
-
-   * **`exit`** : Exits the app.
      
    * **`addEvent n/My First Event d/2021-01-01`** : Adds a new Event to the list called 'My First Event'.
      
    * **`sortEvents`** : Sorts the current list of Events in chronological order.
 
-6. Refer to the [Features](#features) below for details of each command.
+   * **`exit`** : Exits the app.
+
+7. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -98,8 +100,11 @@ You can quickly jump to any of the sections by using the Table of Contents above
 * Items in square brackets are optional.<br>
   e.g. `addEvent n/NAME d/DATE [t/TIME]` can be used as `addEvent n/CS2103T Final d/2021-11-23 t/1700` or as `addEvent n/CS2103T Final d/2021-11-23`.
 
-* Parameters can be in any order.<br>
+* Parameters with prefixes can be in any order.<br>
   e.g. if the command specifies `n/NAME d/DATE`, `d/DATE n/NAME` is also acceptable.
+
+* Parameters without prefixes needs to be followed strictly.<br>
+  e.g. `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [d/BIRTHDATE]` INDEX must strictly be the first parameter while the others with prefix can be in any order after that.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `t/1700 t/1800`, only `t/1800` will be taken.
@@ -121,7 +126,7 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [d/BIRTHDATE]`
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
 ### Deleting a Participant : `delete`
 
