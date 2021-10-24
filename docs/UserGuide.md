@@ -73,14 +73,13 @@ CONNECTIONS is a **desktop app for managing contacts, optimized for use via a Co
 
 ### Viewing help : `help`
 
-Shows a message explaining how to access the help page.
-
-![help message](images/helpMessage.png)
+Shows help message explaining each command.
 
 #### Format:
 * `help` - List out all available commands
 * `help COMMAND` - Shows help message for the command
-* `help d/` - Opens link to documentation
+* `help more` - Opens link to documentation
+![help message](images/helpMessage.png)
 
 **Sample Usage:**
 
