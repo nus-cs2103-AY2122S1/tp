@@ -10,12 +10,28 @@ title: Uni-Fy User Guide
 
 ## 1. Introduction
 
+### 1.1 Overview
+
 Uni-Fy is a **desktop app for managing tasks, optimized for use via a Command Line Interface** (CLI) 
 while still having the benefits of a Graphical User Interface (GUI). 
 If you can type fast, Uni-Fy can get your tasks to display faster than traditional GUI apps.
 
 Interested to know more? Take a look at our Quick Start guide. Enjoy!
 
+### 1.2 Preview
+
+The following is the GUI of our application:
+
+![UI Preview](images/User%20Guide/1.2.1%20UI%20Preview.png)
+- Note that Daily Panel is in red only for visibility purposes
+
+GUI Components:
+1. **Task List Panel**: Displays all your tasks
+2. **Command Box**: Where you enter your commands
+3. **Result Box**: Displays the result of your commands
+4. **Status Bar Footer**: Displays the file which your data is saved at
+5. **Weekly Panel**: Represents the specified week, holding that week's daily panels
+6. **Daily Panel**: Represents a day in the specified week, displaying the tasks in that day 
 
 --------------------------------------------------------------------------------------------------------------------
 ## 2. About this document
@@ -129,7 +145,8 @@ After running the find command, the tasks having the mentioned keyword are displ
 
 ![find_command_after](images/findCommandAfter.jpeg)
 
-Format: `find keyword (more_keywords) (d/date)`
+Format: 
+- `find keyword (more_keywords) (d/date)`
 
 Interpretation:
 * The search is case-insensitive.
