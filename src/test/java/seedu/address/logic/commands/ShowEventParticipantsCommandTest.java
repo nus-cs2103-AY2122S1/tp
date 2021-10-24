@@ -12,12 +12,12 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.EventNamePredicate;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.testutil.DefaultModelStub;
 import seedu.address.testutil.ParticipantBuilder;
@@ -29,7 +29,7 @@ import seedu.address.testutil.TypicalEvents;
 public class ShowEventParticipantsCommandTest {
 
     private final Event sampleEvent = TypicalEvents.SAMPLE_EVENT_SPECIFIED_TIME_AND_COMPLETION;
-    private final EventNamePredicate samplePredicate = preparePredicate(sampleEvent.getNameString());
+    private final Index sampleIndex = Index.fromOneBased(1);
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -40,20 +40,20 @@ public class ShowEventParticipantsCommandTest {
 
     @Test
     public void equals() {
-        EventNamePredicate firstPredicate = new EventNamePredicate("first");
-        EventNamePredicate secondPredicate = new EventNamePredicate("second");
+        Index indexOne = Index.fromOneBased(1);
+        Index indexTwo = Index.fromOneBased(2);
 
         ShowEventParticipantsCommand showEventParticipantsFirstCommand =
-                new ShowEventParticipantsCommand(firstPredicate);
+                new ShowEventParticipantsCommand(indexOne);
         ShowEventParticipantsCommand showEventParticipantsSecondCommand =
-                new ShowEventParticipantsCommand(secondPredicate);
+                new ShowEventParticipantsCommand(indexTwo);
 
         // same object -> returns true
         assertTrue(showEventParticipantsFirstCommand.equals(showEventParticipantsFirstCommand));
 
         // same values -> returns true
         ShowEventParticipantsCommand showEventParticipantsFirstCommandCopy =
-                new ShowEventParticipantsCommand(firstPredicate);
+                new ShowEventParticipantsCommand(indexOne);
         assertTrue(showEventParticipantsFirstCommand.equals(showEventParticipantsFirstCommandCopy));
 
         // different types -> returns false
@@ -73,8 +73,8 @@ public class ShowEventParticipantsCommandTest {
 
     @Test
     public void execute_eventNotInList_throwsCommandException() {
-        EventNamePredicate predicate = preparePredicate(" ");
-        ShowEventParticipantsCommand command = new ShowEventParticipantsCommand(predicate);
+        Index index = Index.fromOneBased(200);
+        ShowEventParticipantsCommand command = new ShowEventParticipantsCommand(index);
         assertThrows(CommandException.class, MESSAGE_EVENT_NOT_FOUND, () -> command.execute(model));
     }
 
@@ -85,7 +85,7 @@ public class ShowEventParticipantsCommandTest {
      */
     @Test
     public void execute_eventInList_noUiChangeSuccessful() throws CommandException {
-        CommandResult commandResult = new ShowEventParticipantsCommand(samplePredicate).execute(model);
+        CommandResult commandResult = new ShowEventParticipantsCommand(sampleIndex).execute(model);
         assertEquals(model.getFilteredEventList(), expectedModel.getFilteredEventList());
     }
 
@@ -96,7 +96,7 @@ public class ShowEventParticipantsCommandTest {
      */
     @Test
     public void execute_eventWithSingleParticipantInList_showDetailsSuccessful() throws CommandException {
-        CommandResult commandResult = new ShowEventParticipantsCommand(samplePredicate).execute(model);
+        CommandResult commandResult = new ShowEventParticipantsCommand(sampleIndex).execute(model);
         String expectedOutput = String.format("Event Name: %s\nNumber of participants: %d\nParticipant list:\n1. %s\n",
                 sampleEvent.getNameString(),
                 sampleEvent.getParticipants().size(),
@@ -112,8 +112,7 @@ public class ShowEventParticipantsCommandTest {
     @Test
     public void execute_eventWithSingleParticipantInListUsingModelStub_showDetailsSuccessful() throws CommandException {
         ModelStubWithEventWithParticipant modelStub = new ModelStubWithEventWithParticipant(sampleEvent);
-        EventNamePredicate predicate = preparePredicate(sampleEvent.getNameString());
-        CommandResult commandResult = new ShowEventParticipantsCommand(predicate).execute(modelStub);
+        CommandResult commandResult = new ShowEventParticipantsCommand(sampleIndex).execute(modelStub);
         String expectedOutput = String.format("Event Name: %s\nNumber of participants: %d\nParticipant list:\n1. %s\n",
                 sampleEvent.getNameString(),
                 sampleEvent.getParticipants().size(),
@@ -138,12 +137,5 @@ public class ShowEventParticipantsCommandTest {
             eventList.add(event);
             return new FilteredList<>(eventList.asUnmodifiableObservableList());
         }
-    }
-
-    /**
-     * Parses {@code userInput} into a {@code EventNamePredicate}.
-     */
-    private EventNamePredicate preparePredicate(String userInput) {
-        return new EventNamePredicate(userInput.trim().replaceAll("\\s+", " "));
     }
 }

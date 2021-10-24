@@ -156,7 +156,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventDetailsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventDetailsCommandParser().parse(" M").execute(model).isShowHelp());
+        assertFalse(new ShowEventDetailsCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -164,7 +164,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventParticipantsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventParticipantsCommandParser().parse(" M").execute(model).isShowHelp());
+        assertFalse(new ShowEventParticipantsCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -288,7 +288,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventDetailsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventDetailsCommandParser().parse(" M").execute(model).isExit());
+        assertFalse(new ShowEventDetailsCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test
@@ -296,7 +296,7 @@ public class CommandResultTest {
         // CommandResult from ShowEventParticipantsCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new ShowEventParticipantsCommandParser().parse(" M").execute(model).isExit());
+        assertFalse(new ShowEventParticipantsCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test
