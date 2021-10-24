@@ -1,5 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_G1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_G2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REPONAME_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REPONAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_G1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_YEAR_G2;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 import static seedu.address.testutil.TypicalStudents.CARL;
 import static seedu.address.testutil.TypicalStudents.DANIEL;
@@ -23,9 +30,10 @@ import seedu.address.model.student.Student;
  */
 public class TypicalGroups {
 
-    public static final Group GROUP1 = new GroupBuilder().withName("w14-4").withMembers(BENSON, CARL, DANIEL).build();
-    public static final Group GROUP2 = new GroupBuilder().withName("w15-5").withMembers(ELLE, FIONA).withRepo("tp")
-            .withYear("AY20212022").withTags("nottApp").build();
+    public static final Group GROUP1 = new GroupBuilder().withName(VALID_GROUPNAME_G1).withYear(VALID_YEAR_G1)
+            .withRepo(VALID_REPONAME_AMY).withMembers(BENSON, CARL, DANIEL).build();
+    public static final Group GROUP2 = new GroupBuilder().withName(VALID_GROUPNAME_G2).withMembers(ELLE, FIONA)
+            .withRepo(VALID_REPONAME_BOB).withYear(VALID_YEAR_G2).withTags(VALID_TAG_HUSBAND).build();
     public static final Group GROUP3 = new GroupBuilder().withName("m16-6").withRepo("ip").withYear("AY20192020")
             .build();
 

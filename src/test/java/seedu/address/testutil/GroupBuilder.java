@@ -72,7 +72,7 @@ public class GroupBuilder {
         for (Student student : students) {
             studentList.add(new StudentBuilder(student).build());
         }
-        this.members = new Members(studentList);
+        members = new Members(studentList);
         return this;
     }
 
@@ -88,12 +88,12 @@ public class GroupBuilder {
      * Sets the {@code RepoName} of the {@code Group} that we are building.
      */
     public GroupBuilder withRepo(String name) {
-        this.repoName = new RepoName(name);
+        repoName = new RepoName(name);
         return this;
     }
 
     public Group build() {
-        return new Group(groupName, tags);
+        return new Group(groupName, members, year, repoName, tags);
     }
 
 }
