@@ -37,7 +37,7 @@ public class EventCard extends UiPart<Region> {
         name.setText(event.getNameString());
         isDone.setText(event.getDoneValue() ? Event.COMPLETED : Event.UNCOMPLETED);
         date.setText(event.getDateString());
-        time.setText(event.getTimeString());
+        time.setText(event.getTimeDisplayString());
         int noOfParticipants = event.getParticipants().size();
         if (noOfParticipants <= 1) {
             numberOfParticipants.setText(String.format("%d participant", noOfParticipants));

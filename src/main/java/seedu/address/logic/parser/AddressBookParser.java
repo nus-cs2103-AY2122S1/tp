@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AddNextOfKinCommand;
 import seedu.address.logic.commands.AddParticipantToEventCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ListEventCommand;
 import seedu.address.logic.commands.RemoveEventCommand;
+import seedu.address.logic.commands.RemoveNextOfKinCommand;
 import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
 import seedu.address.logic.commands.ShowEventDetailsCommand;
 import seedu.address.logic.commands.ShowEventParticipantsCommand;
@@ -106,6 +108,12 @@ public class AddressBookParser {
 
         case RemoveParticipantFromEventCommand.COMMAND_WORD:
             return new RemoveParticipantFromEventParser().parse(arguments);
+
+        case AddNextOfKinCommand.COMMAND_WORD:
+            return new AddNextOfKinParser().parse(arguments);
+
+        case RemoveNextOfKinCommand.COMMAND_WORD:
+            return new RemoveNextOfKinParser().parse(arguments);
 
         case ViewCommand.COMMAND_WORD:
             return new ViewCommandParser().parse(arguments);
