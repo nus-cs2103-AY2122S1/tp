@@ -57,6 +57,16 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public Model getModel() {
+        return model;
+    }
+
+    @Override
+    public Storage getStorage() {
+        return storage;
+    }
+
+    @Override
     public ReadOnlyProgrammerError getProgrammerError() {
         return model.getProgrammerError();
     }
