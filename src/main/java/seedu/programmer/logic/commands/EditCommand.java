@@ -3,10 +3,10 @@ package seedu.programmer.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +17,12 @@ import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.commons.util.CollectionUtil;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
-import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
 
 /**
  * Edits the details of an existing student in ProgrammerError.

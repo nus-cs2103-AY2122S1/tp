@@ -36,6 +36,9 @@ public class Student {
         this.labResultList = FXCollections.observableArrayList();
     }
 
+    /**
+     * Constructor for all fields including list of all the labs.
+     */
     public Student(Name name, StudentId studentId, ClassId classId, Email email, ObservableList<Lab> list) {
         requireAllNonNull(name, studentId, classId, email);
         this.name = name;
