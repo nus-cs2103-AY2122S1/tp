@@ -14,10 +14,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new {@code ViewTaskListCommand} object.
  */
-public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand>{
-    private final static String VALID_INPUT_WITHOUT_FLAGS_REGEX = "[0-9]+";
-
-    private final static String VALID_INPUT_WITH_FLAGS_REGEX = "[0-9]\\s-f\\s[\\w\\s]+";
+public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand> {
+    private static final String VALID_INPUT_WITH_FLAGS_REGEX = "[0-9]\\s-f\\s[\\w\\s]+";
+    private static final String VALID_INPUT_WITHOUT_FLAGS_REGEX = "[0-9]+";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
