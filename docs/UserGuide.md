@@ -14,6 +14,27 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Quick Start
+
+1. Ensure you have Java `11` or above installed on your computer.
+You may install Java `11` from [here](https://www.oracle.com/java/technologies/downloads/#java11).
+2. Download the latest `SalesNote.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-3/tp/releases).
+3. Copy the file to the folder you want to use as the _home folder_ for your SalesNote.
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. 
+The app provides some sample data to help you get started.
+![Ui](images/UiFirstLaunch.png)
+5. Type the command in the command box and press Enter to execute it.
+e.g. typing `**listtask**` and pressing Enter will list all tasks.
+Some example commands you can try:
+   * `**list**`: List all clients.
+   * `**add** n/John Doe g/Male p/98765432 e/johnd@example.com m/170_80_100 a/311, Clementi Ave 2, #02-25 r/loves blue t/friends t/owesMoney`: Adds a client named `John Doe`.
+   * `**delete** 2`: Deletes the 2nd client shown in the current client list.
+   * `**clear**`: Deletes all clients.
+   * `**exit**`: Exits the app.
+6. Refer to the [Features](#features) below to learn more about the commands.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
 <div markdown="block" class="alert alert-info">
