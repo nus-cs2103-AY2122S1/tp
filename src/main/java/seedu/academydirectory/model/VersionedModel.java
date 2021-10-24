@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.util.List;
 
 import seedu.academydirectory.versioncontrol.objects.Commit;
+import seedu.academydirectory.versioncontrol.objects.VcObject;
 
 public interface VersionedModel extends Model {
     /**
@@ -16,4 +17,6 @@ public interface VersionedModel extends Model {
     List<String> retrieveHistory();
 
     Commit revert(String fiveCharHash) throws IOException, ParseException;
+
+    List<VcObject> getStageArea();
 }

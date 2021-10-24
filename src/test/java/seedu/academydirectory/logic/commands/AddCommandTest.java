@@ -27,6 +27,7 @@ import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.testutil.StudentBuilder;
 import seedu.academydirectory.versioncontrol.objects.Commit;
+import seedu.academydirectory.versioncontrol.objects.VcObject;
 
 public class AddCommandTest {
 
@@ -171,6 +172,11 @@ public class AddCommandTest {
         @Override
         public Commit revert(String fiveCharHash) throws IOException, ParseException {
             return Commit.NULL;
+        }
+
+        @Override
+        public List<VcObject> getStageArea() {
+            return new ArrayList<>();
         }
     }
 
