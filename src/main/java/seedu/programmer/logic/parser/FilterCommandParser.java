@@ -3,6 +3,7 @@ package seedu.programmer.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -24,15 +25,17 @@ public class FilterCommandParser implements Parser<FilterCommand> {
     public FilterCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL);
 
         // Initializing all the arguments as null at the beginning.
-        String trimmedNameArg = getTrimmedPredArg(argMultimap, PREFIX_NAME);
-        String trimmedSidArg = getTrimmedPredArg(argMultimap, PREFIX_STUDENT_ID);
-        String trimmedCidArg = getTrimmedPredArg(argMultimap, PREFIX_CLASS_ID);
+        String trimmedNameArg = getTrimmedPredicateArg(argMultimap, PREFIX_NAME);
+        String trimmedSidArg = getTrimmedPredicateArg(argMultimap, PREFIX_STUDENT_ID);
+        String trimmedCidArg = getTrimmedPredicateArg(argMultimap, PREFIX_CLASS_ID);
+        String trimmedEmailArg = getTrimmedPredicateArg(argMultimap, PREFIX_EMAIL);
         QueryStudentDescriptor queryStudentDescriptor = getQueryStudentDescriptor(trimmedNameArg,
                                                                                   trimmedSidArg,
-                                                                                  trimmedCidArg);
+                                                                                  trimmedCidArg,
+                                                                                  trimmedEmailArg);
 
         return new FilterCommand(new StudentDetailContainsQueryPredicate(queryStudentDescriptor));
     }
@@ -45,7 +48,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @return the trimmed predicate argument
      * @throws ParseException if the trimmed predicate argument is empty
      */
-    private String getTrimmedPredArg(ArgumentMultimap argMultimap, Prefix predicate) throws ParseException {
+    private String getTrimmedPredicateArg(ArgumentMultimap argMultimap, Prefix predicate) throws ParseException {
         String trimmedPredicateArg = null;
 
         if (argMultimap.getValue(predicate).isPresent()) {
@@ -63,13 +66,14 @@ public class FilterCommandParser implements Parser<FilterCommand> {
      * @param nameArg the name argument
      * @param sidArg the student id argument
      * @param cidArg the class id argument
+     * @param emailArg the email argument
      * @return the QueryStudentDescriptor
      * @throws ParseException if no field is specified to be queried
      */
-    private QueryStudentDescriptor getQueryStudentDescriptor(String nameArg, String sidArg, String cidArg)
-            throws ParseException {
+    private QueryStudentDescriptor getQueryStudentDescriptor(
+            String nameArg, String sidArg, String cidArg, String emailArg) throws ParseException {
         QueryStudentDescriptor queryStudentDescriptor =
-                new QueryStudentDescriptor(nameArg, sidArg, cidArg);
+                new QueryStudentDescriptor(nameArg, sidArg, cidArg, emailArg);
 
         if (!queryStudentDescriptor.isAnyFieldToBeQueried()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));

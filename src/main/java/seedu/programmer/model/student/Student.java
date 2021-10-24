@@ -61,6 +61,10 @@ public class Student {
         return studentId;
     }
 
+    public String getStudentIdValue() {
+        return studentId.studentId;
+    }
+
     public ClassId getClassId() {
         return classId;
     }
@@ -71,6 +75,10 @@ public class Student {
 
     public Email getEmail() {
         return email;
+    }
+
+    public String getEmailValue() {
+        return email.email;
     }
 
     public ObservableList<Lab> getLabResultList() {

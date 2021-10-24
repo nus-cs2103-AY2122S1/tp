@@ -118,7 +118,8 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredStudentList().size());
 
         Student student = model.getFilteredStudentList().get(targetIndex.getZeroBased());
-        QueryStudentDescriptor descriptor = new QueryStudentDescriptor(student.getName().fullName, null, null);
+        QueryStudentDescriptor descriptor = new QueryStudentDescriptor(
+                student.getFullName(), student.getStudentIdValue(), null, null);
 
         model.updateFilteredStudentList(new StudentDetailContainsQueryPredicate(descriptor));
 
