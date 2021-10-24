@@ -14,9 +14,9 @@ Staff’d helps food & beverage managers manage details and schedules of their s
 
 ### Firing up Staff'd
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have _Java 11_ or above installed in your Computer.
 
-1. Download the latest __staffd.jar__ from [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/releases).
+1. Download the latest _staffd.jar_ from [here](https://github.com/AY2122S1-CS2103T-W11-2/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Staff’d.
 
@@ -118,9 +118,16 @@ Flags|Name
 
 Shows a message explaning how to access the help page.
 
+Format: `help`
+
 ![help message](images/helpMessage.png)
 
-Format: `help`
+#### Changing tabs : `tab`
+
+Switches between the tabs: staff view and schedule.
+
+Format: `tab`
+
 
 #### Listing all persons : `list`
 
@@ -133,6 +140,7 @@ Format: `list`
 #### Saving the data
 
 Staff'd data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+
 
 #### Editing the data file
 
@@ -150,7 +158,7 @@ If your changes to the data file makes its format invalid, Staff'd will discard 
 Displays a staff by a specific lookup of the fields (e.g. name, tags, roles, email, address) of a staff or by index of the staff.
 
  * Does not allow for a non-specific lookup. Any fields entered must be an exact reference.
- * For example, the query `-n Candice` will result in any Staff with the exact name __Candice__ and no-one else.
+ * For example, the query `-n Candice` will result in any Staff with the exact name "Candice" and no-one else.
 
 Format:  
 `view [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
@@ -217,10 +225,10 @@ Examples:
 
 #### Deleting a Staff : `delete`
 
-Deletes the specified staff from the staff list.
+Deletes the specified staff `Staff'd`.
 
 * Deletes the staff(s) with the specified `NAME`, `ROLE`, `STATUS`, `INDEX`.
-* The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, …​
+* The index refers to the index number shown in the displayed staff list. It **must be a positive integer** 1, 2, 3, within the range of the staff view.
 
 Formats:  
 `delete -n NAME`  
@@ -246,8 +254,8 @@ Formats:
 `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 
 
-* Edits the staff of the specified `NAME`, `INDEX`
-The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the staff of the specified `NAME`, `INDEX`.
+The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, … within the range of staff list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
@@ -273,7 +281,8 @@ Index Search:
 
 * If previous searches have been made, the search is conducted on the displayed list. Otherwise, it will
   be performed on the overall staff list.
-* The index must be within range. (i.e. from 1 until the size of the Staff List, if the list is empty, no input is accepted)
+* The index must be within range. (i.e. from 1 until the size of the Staff List)
+* If the list is empty, no input is accepted.
 * Only single search is supported, and this search will return only the specific Staff at that index.
 
 Format:  
@@ -437,5 +446,5 @@ Action | Format, Examples
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Staff'd home folder.
 
-**Q**: Where is the save file located?
-**A**: In the data folder.
+**Q**: Where is the save file located?<br>
+**A**: In the data folder in the _home folder_ called _addressbook.json_.
