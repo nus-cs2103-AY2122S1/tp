@@ -84,6 +84,7 @@ public class Student {
     public ObservableList<Lab> getLabResultList() {
         return labResultList;
     }
+
     public Lab getLab(int index) {
         return labResultList.get(index);
     }
@@ -118,6 +119,7 @@ public class Student {
         }
         this.labResultList.addAll(labResultRecord);
     }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
@@ -174,9 +176,9 @@ public class Student {
      * Create a new Student Object with the same fields.
      * @return a copy of the Student
      * */
-    public Student clone() {
-        Student clone = new Student(name, studentId, classId, email);
-        clone.setLabResultRecord(labResultList);
-        return clone;
+    public Student copy() {
+        Student studentCopy = new Student(name, studentId, classId, email);
+        studentCopy.setLabResultRecord(labResultList);
+        return studentCopy;
     }
 }

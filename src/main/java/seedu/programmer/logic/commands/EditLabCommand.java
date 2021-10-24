@@ -56,7 +56,7 @@ public class EditLabCommand extends Command {
         }
 
         Student target = lastShownList.get(targetIndex.getZeroBased());
-        Student replacement = target.clone();
+        Student replacement = target.copy();
         replacement.editLabResult(result, score);
 
         model.setStudent(target, replacement);
@@ -67,7 +67,7 @@ public class EditLabCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditLabCommand// instanceof handles nulls
-                && result.equals(((EditLabCommand) other).targetIndex)
+                && targetIndex.equals(((EditLabCommand) other).targetIndex)
                 && result.equals(((EditLabCommand) other).result)); // state check
     }
 }

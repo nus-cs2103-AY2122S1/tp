@@ -301,19 +301,16 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    private void displayPopup(String message) {
-        // We should not need to display an empty popup
-        assert (message != null);
-        Popup popup = createPopup(message);
-        showPopupMessage(popup);
-    }
-
     /**
      * Displays a popup message at the top-center with respect to the primaryStage.
      *
      * @param popup Popup object to be displayed on the primaryStage
      */
-    private void showPopupMessage(Popup popup) {
+    private void displayPopup(String message) {
+        // We should not need to display an empty popup
+        assert (message != null);
+        Popup popup = createPopup(message);
+
         // Add some left padding according to primaryStage's width
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
 
