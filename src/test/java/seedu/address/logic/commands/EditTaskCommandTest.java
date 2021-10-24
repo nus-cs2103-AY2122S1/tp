@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_PLAY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_STUDY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_PLAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TASK_NAME_STUDY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -23,7 +21,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.DeadlineAndEventTaskBuilder;
+import seedu.address.testutil.DeadlineTaskBuilder;
 import seedu.address.testutil.EditTaskDescriptorBuilder;
 
 
@@ -36,7 +34,7 @@ public class EditTaskCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Task editedTask = new DeadlineAndEventTaskBuilder().build();
+        Task editedTask = new DeadlineTaskBuilder().build();
         EditTaskCommand.EditTaskDescriptor descriptor = new EditTaskDescriptorBuilder(editedTask).build();
         EditTaskCommand editTaskCommand = new EditTaskCommand(INDEX_FIRST_TASK, descriptor);
 

@@ -108,7 +108,7 @@ public class CommandTestUtil {
     public static final String INVALID_TASK_DESCRIPTION_DESC = " " + PREFIX_DESCRIPTION + "&"; // '&' not allowed in desc
     public static final String INVALID_TASK_TAG_DESC = " " + PREFIX_TAG + "fun*"; // '*' not allowed in tags
     public static final String INVALID_TASK_DEADLINE_DESC = " " + PREFIX_DEADLINE + "2020-02-02$"; // '$' not allowed in tags
-//    public static final String INVALID_TASK_EVENTDATE_DESC = " " + PREFIX_DEADLINE + "20-02-2000"; // '*' not allowed in tags
+    public static final String INVALID_TASK_EVENTDATE_DESC = " " + PREFIX_EVENT + "2020-02-02$"; // '*' not allowed in tags
     
     
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

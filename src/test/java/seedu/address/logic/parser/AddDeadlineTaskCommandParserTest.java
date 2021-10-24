@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddDeadlineTaskCommand;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.*;
-import seedu.address.testutil.DeadlineAndEventTaskBuilder;
+import seedu.address.testutil.DeadlineTaskBuilder;
 
 public class AddDeadlineTaskCommandParserTest {
     
@@ -17,7 +17,7 @@ public class AddDeadlineTaskCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        DeadlineTask expectedTask = new DeadlineAndEventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        DeadlineTask expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE)
                 .withDate(VALID_TASK_DATE)
@@ -29,7 +29,7 @@ public class AddDeadlineTaskCommandParserTest {
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_DEADLINE_DESC
                 + TASK_DESCRIPTION_DESC_PLAY + TASK_TAG_DESC_EXERCISE, new AddDeadlineTaskCommand(expectedTask));
 
-        Task expectedTaskWithMultipleTags = new  DeadlineAndEventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        Task expectedTaskWithMultipleTags = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDescription(VALID_TASK_DESCRIPTION_PLAY)
                 .withTags(VALID_TASK_TAG_EXERCISE, VALID_TASK_TAG_FUN)
                 .withDate(VALID_TASK_DATE)
@@ -44,7 +44,7 @@ public class AddDeadlineTaskCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        DeadlineTask expectedTask = new DeadlineAndEventTaskBuilder().withName(VALID_TASK_NAME_PLAY)
+        DeadlineTask expectedTask = new DeadlineTaskBuilder().withName(VALID_TASK_NAME_PLAY)
                 .withDate(VALID_TASK_DATE)
                 .build();
         assertParseSuccess(parser, TASK_NAME_DESC_PLAY + TASK_DEADLINE_DESC

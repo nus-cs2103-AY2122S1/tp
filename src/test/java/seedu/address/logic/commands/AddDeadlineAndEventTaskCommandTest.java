@@ -25,7 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.DeadlineAndEventTaskBuilder;
+import seedu.address.testutil.DeadlineTaskBuilder;
 
 public class AddDeadlineAndEventTaskCommandTest {
 
@@ -37,7 +37,7 @@ public class AddDeadlineAndEventTaskCommandTest {
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded modelStub = new AddDeadlineAndEventTaskCommandTest.ModelStubAcceptingTaskAdded();
-        Task validTask = new DeadlineAndEventTaskBuilder().build();
+        Task validTask = new DeadlineTaskBuilder().build();
 
         CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub);
 
@@ -47,7 +47,7 @@ public class AddDeadlineAndEventTaskCommandTest {
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        Task validTask = new DeadlineAndEventTaskBuilder().build();
+        Task validTask = new DeadlineTaskBuilder().build();
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
         AddDeadlineAndEventTaskCommandTest.ModelStub modelStub = new AddDeadlineAndEventTaskCommandTest.ModelStubWithTask(validTask);
 
@@ -57,8 +57,8 @@ public class AddDeadlineAndEventTaskCommandTest {
 
     @Test
     public void equals() {
-        Task alice = new DeadlineAndEventTaskBuilder().withName("Alice").build();
-        Task bob = new DeadlineAndEventTaskBuilder().withName("Bob").build();
+        Task alice = new DeadlineTaskBuilder().withName("Alice").build();
+        Task bob = new DeadlineTaskBuilder().withName("Bob").build();
         AddTaskCommand addAliceCommand = new AddTaskCommand(alice);
         AddTaskCommand addBobCommand = new AddTaskCommand(bob);
 

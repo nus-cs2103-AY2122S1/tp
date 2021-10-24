@@ -23,7 +23,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.DeadlineAndEventTaskBuilder;
 import seedu.address.testutil.TodoTaskBuilder;
 
 public class AddTodoTaskCommandTest {
