@@ -5,17 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -98,6 +102,20 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredFacilityList().remove(0));
     }
 
+    @Test
+    public void isWithinListIndex_validIndicies_returnsFalse() {
+        Person toAdd = ALICE;
+        modelManager.addPerson(toAdd);
+        List<Index> indices = Arrays.asList(INDEX_FIRST);
+        assertTrue(modelManager.isWithinListIndex(indices));
+    }
+
+    @Test
+    public void isWithinListIndex_invalidIndices_returnsTrue() {
+        Index outOfBoundsIndex = Index.fromOneBased(modelManager.getFilteredPersonList().size() + 1);
+        List<Index> indices = Arrays.asList(outOfBoundsIndex);
+        assertFalse(modelManager.isWithinListIndex(indices));
+    }
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();

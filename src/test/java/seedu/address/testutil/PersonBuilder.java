@@ -10,6 +10,8 @@ import seedu.address.model.person.Availability;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TodayAttendance;
+import seedu.address.model.person.TotalAttendance;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -20,11 +22,15 @@ public class PersonBuilder {
 
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
+    public static final Boolean DEFAULT_TODAY_ATTENDANCE = false;
+    public static final Integer DEFAULT_TOTAL_ATTENDANCE = 0;
     public static final List<DayOfWeek> DEFAULT_AVAILABILITY = new ArrayList<>();
 
     private Name name;
     private Phone phone;
     private Availability availability;
+    private TotalAttendance totalAttendance;
+    private TodayAttendance todayAttendance;
     private Set<Tag> tags;
 
     /**
@@ -34,6 +40,8 @@ public class PersonBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         availability = new Availability(DEFAULT_AVAILABILITY);
+        totalAttendance = new TotalAttendance(DEFAULT_TOTAL_ATTENDANCE);
+        todayAttendance = new TodayAttendance(DEFAULT_TODAY_ATTENDANCE);
         tags = new HashSet<>();
     }
 
@@ -44,6 +52,8 @@ public class PersonBuilder {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
         availability = personToCopy.getAvailability();
+        todayAttendance = personToCopy.getTodayAttendance();
+        totalAttendance = personToCopy.getTotalAttendance();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -85,6 +95,22 @@ public class PersonBuilder {
     }
 
     /**
+     * Sets {@code TodayAttendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTodayAttendance(Boolean attendance) {
+        this.todayAttendance = new TodayAttendance(attendance);
+        return this;
+    }
+
+    /**
+     * Sets {@code TotalAttendance} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTotalAttendance(Integer attendance) {
+        this.totalAttendance = new TotalAttendance(attendance);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
      */
     public PersonBuilder withTags(String ... tags) {
@@ -93,7 +119,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, availability, tags);
+        return new Person(name, phone, availability, todayAttendance, totalAttendance, tags);
     }
 
 }

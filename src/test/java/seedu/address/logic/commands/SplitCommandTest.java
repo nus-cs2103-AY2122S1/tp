@@ -12,6 +12,7 @@ import java.util.Locale;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -20,8 +21,8 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class SplitCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
     @Test
     public void execute_validDay_success() {
