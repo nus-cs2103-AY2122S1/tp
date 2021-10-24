@@ -11,9 +11,11 @@ title: User Guide
   - [Adding elderly details](#add-elderly-details--add)
   - [Deleting an elderly or corresponding visit](#delete-an-elderly-or-corresponding-visit--delete)
   - [Listing all elderly](#listing-all-persons--list)
+  - [Sorting elderly by visit](#sort-elderly-by-visit--sort)
   - [Locating elderly by attribute](#locating-elderly-by-attribute--find)
   - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
   - [Marking one visit as done](#marking-one-visit-as-done--done)
+  - [Viewing summary statistics](#viewing-summary-statistics--summary)
   - [Viewing help](#viewing-help--help)
   - [Downloading data](#downloading-data--download)  
   - [Clearing all entries](#clearing-all-entries--clear)
@@ -60,6 +62,7 @@ title: User Guide
 * Find an elderly
 * Schedule a visit to an elderly
 * Mark the current scheduled visit as done (update the last visited date and delete the current visit)
+* View a summary of overdue, upcoming and recent visit statistics
 * View help
 
 
@@ -156,7 +159,7 @@ Shows a list of all the elderly and their associated details in SeniorLove addre
 
 Format: `list`
 
-### Sort elderly by visit: `sort`
+### Sort elderly by visit : `sort`
 
 Shows a sorted list of elderly and their associated details in SeniorLove either by `last visit` date (the latest first) or by next `visit` date (the earliest first).
 
@@ -217,6 +220,12 @@ Format: `done INDEX`
 Examples:
 * `done 1` marks the visit to the first elderly as done, assuming there was a scheduled visit for the elderly before running this command.
 
+
+### Viewing summary statistics : `summary`
+
+Shows a summary of the overdue visits, upcoming visits and recent last visits statistics.
+
+Format: `summary`
 
 ### Viewing help : `help`
 
@@ -285,6 +294,7 @@ Action | Format, Examples
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
 **list** | `list`
 **sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
+**summary** | `summary`
 **clear** | `clear`
 **exit** | `exit`
 **help** | `help`
