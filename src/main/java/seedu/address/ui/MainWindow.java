@@ -218,7 +218,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private void handleView(TabPaneBehavior tpb, int selectedTab, Category category) {
         if (category instanceof Client) {
-            logger.info("View client's details: " + category.toString());
+            logger.info("View client's details: " + category);
             viewMoreClient = new ViewMoreClient();
             viewMoreClient.setClientDetails((Client) category);
             secondPanelPlaceholder.getChildren().clear();
@@ -229,10 +229,8 @@ public class MainWindow extends UiPart<Stage> {
                 tpb.selectNextTab();
                 tabPane.setDisable(false);
             }
-        }
-
-        if (category instanceof Product) {
-            logger.info("View product's details: " + category.toString());
+        } else if (category instanceof Product) {
+            logger.info("View product's details: " + category);
             viewMoreProduct = new ViewMoreProduct();
             viewMoreProduct.setProductDetails((Product) category);
             secondPanelPlaceholder.getChildren().clear();
@@ -264,12 +262,13 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
             int selectedTab = tabPane.getSelectionModel().getSelectedIndex();
             TabPaneBehavior tpb = new TabPaneBehavior(tabPane);
-            Category category = commandResult.getInfo();
 
+            Category category = commandResult.getInfo();
             CommandType commandType = commandResult.getCommandType();
-            Boolean isClient = commandResult.getIsClientCommand();
+            boolean isClient = commandResult.getIsClientCommand();
 
             switch (commandType) {
             case HELP:
@@ -280,15 +279,17 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
 
+            case STAT:
+                handleStat();
+                break;
+
             case CLEAR:
                 break;
 
+            case ADD:
+            case EDIT:
             case VIEW:
                 handleView(tpb, selectedTab, category);
-                break;
-
-            case STAT:
-                handleStat();
                 break;
 
             default:

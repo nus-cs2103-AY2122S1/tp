@@ -44,7 +44,7 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_CLIENT, descriptor);
 
         String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedClient, true);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setClient(clientToEdit, editedClient);
@@ -70,7 +70,7 @@ public class EditClientCommandTest {
         EditClientCommand editClientCommand = new EditClientCommand(indexLastClient, descriptor);
 
         String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedClient, true);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setClient(lastClient, editedClient);
@@ -84,7 +84,7 @@ public class EditClientCommandTest {
         Client editedClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
 
         String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedClient, true);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
@@ -101,36 +101,13 @@ public class EditClientCommandTest {
                 new EditClientDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditClientCommand.MESSAGE_EDIT_CLIENT_SUCCESS, editedClient);
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, true);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, editedClient, true);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setClient(model.getFilteredClientList().get(0), editedClient);
 
         assertCommandSuccess(editClientCommand, model, expectedCommandResult, expectedModel);
     }
-
-    /*
-    @Test
-    public void execute_duplicateClientUnfilteredList_failure() {
-        Client firstClient = model.getFilteredClientList().get(INDEX_FIRST_CLIENT.getZeroBased());
-        EditClientDescriptor descriptor = new EditClientDescriptorBuilder(firstClient).build();
-        EditClientCommand editClientCommand = new EditClientCommand(INDEX_SECOND_CLIENT, descriptor);
-
-        assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_DUPLICATE_CLIENT);
-    }
-
-    @Test
-    public void execute_duplicateClientFilteredList_failure() {
-        showClientAtIndex(model, INDEX_FIRST_CLIENT);
-
-        // edit client in filtered list into a duplicate in address book
-        Client clientInList = model.getAddressBook().getClientList().get(INDEX_SECOND_CLIENT.getZeroBased());
-        EditClientCommand editClientCommand = new EditClientCommand(INDEX_FIRST_CLIENT,
-                new EditClientDescriptorBuilder(clientInList).build());
-
-        assertCommandFailure(editClientCommand, model, EditClientCommand.MESSAGE_DUPLICATE_CLIENT);
-    }
-    */
 
     @Test
     public void execute_invalidClientIndexUnfilteredList_failure() {
