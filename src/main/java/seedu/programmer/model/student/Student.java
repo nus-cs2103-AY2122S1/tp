@@ -99,6 +99,16 @@ public class Student {
         current.updateActualScore(value);
     }
 
+    /**
+     * Updates a lab result for a student
+     * */
+    public void editLabInfo(Lab result, String newTitle, Double total) {
+        int index = this.labResultList.indexOf(result);
+        Lab current = this.labResultList.get(index);
+        current.updateTitle(newTitle);
+        current.updateTotal(total);
+    }
+
     public void setLabResultRecord(List<Lab> labResultRecord) {
         if (labResultRecord == null) {
             labResultRecord = new ArrayList<>();

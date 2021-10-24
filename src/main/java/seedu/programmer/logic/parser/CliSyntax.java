@@ -13,6 +13,7 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_INDEX = new Prefix("-i ");
     public static final Prefix PREFIX_LAB_TITLE = new Prefix("-t ");
+    public static final Prefix PREFIX_LAB_NEW_TITLE = new Prefix("-nt ");
     public static final Prefix PREFIX_LAB_RESULT = new Prefix("-s ");
     public static final Prefix PREFIX_LAB_TOTAL = new Prefix("-ts ");
 }

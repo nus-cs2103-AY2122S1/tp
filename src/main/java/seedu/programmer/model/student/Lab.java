@@ -51,6 +51,18 @@ public class Lab {
         this.actualScore = value;
     }
 
+    public void updateTitle(String newTitle) {
+        if (newTitle != null) {
+            this.title = newTitle;
+        }
+    }
+
+    public void updateTotal(Double total) {
+        if (total != null) {
+            this.totalScore = total;
+        }
+    }
+
     public boolean isMarked() {
         return !actualScore.equals(Double.NaN);
     }
