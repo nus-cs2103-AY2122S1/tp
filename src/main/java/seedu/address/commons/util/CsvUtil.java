@@ -23,6 +23,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.storage.CsvAdaptedPerson;
 import seedu.address.storage.CsvSerializableAddressBook;
 
+/**
+ * A class for reading from and writing between CSV Files and CsvSerializableAddressBook, using the Jackson library.
+ */
 public class CsvUtil {
 
     private static final Logger logger = LogsCenter.getLogger(CsvUtil.class);
