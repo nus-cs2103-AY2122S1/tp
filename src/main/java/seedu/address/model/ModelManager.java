@@ -127,6 +127,13 @@ public class ModelManager implements Model {
         addressBook.favouritePerson(target);
         filteredPersons.setPredicate(filteredPersons.getPredicate());
     }
+
+    @Override
+    public void unfavouritePerson(Person target) {
+        addressBook.unfavouritePerson(target);
+        filteredPersons.setPredicate(filteredPersons.getPredicate());
+    }
+
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
