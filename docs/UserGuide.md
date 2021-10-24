@@ -1,12 +1,12 @@
 # ContactSh - User Guide
 
-![Logo](images\ContactSh_logo.png)
+![Logo](images/ContactSh_logo.png)
 
 ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
 
 ## Table of Contents
 
-[Quick Start](#quick-start)  
+[Quick Start](#quick-start)<br>
 [Features](#features)
 
 - [Give a list of instructions : `help`](#give-a-list-of-instructions--help)
@@ -25,9 +25,8 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
 - [Archiving data files `[coming in v2.0]`](#archiving-data-files)
-- 
 
-[FAQ](#faq)  
+[FAQ](#faq)<br>
 [Command Summary](#command-summary)
 
 ---
@@ -41,7 +40,7 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 3. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images\Ui.png)
+   ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -160,7 +159,7 @@ Examples:
 
 - `find John` returns `john` and `John Doe`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](file://C:\Users\Chu Heng 2\Desktop\tp\tp\docs\images\findAlexDavidResult.png)
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a person : `delete`
 
@@ -220,23 +219,24 @@ Examples:
 
 - `edittask 3 ti/2 task/Group Project Meeting` Changes the description of the 2nd task attached to the 3rd person in the list to `Group Project Meeting`.
 
-### Viewing tasks: `cat`  
+### Viewing tasks: `cat`
 
-1. Shows the user a list of tasks that has been attached to a specific person. 
-    Format: `cat INDEX` 
+1. Shows the user a list of tasks that has been attached to a specific person.
+
+   Format: `cat INDEX`
 
    * Displays the list of tasks attached to the person at the specified `INDEX`.
    * The index refers to the index number shown in the displayed person list. 
-   * The index **must be a positive integer** 1, 2, 3, ... 
-   
-   Examples: 
+   * The index **must be a positive integer** 1, 2, 3, ...
+
+   Examples:
 
    * `list` followed by delete 2 deletes the 2nd person in the address book.
-   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.  
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command.<br> 
 
-2. Shows the user the task list of every single person in ContactSh. 
+2. Shows the user the task list of every single person in ContactSh.
 
-   Format: `cat -A`  
+   Format: `cat -A`
 
 ### Sorting persons by name: `sort`
 
