@@ -9,8 +9,11 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 
 import seedu.address.model.lesson.Lesson;
 
+/**
+ * A utility class containing a list of {@code Lesson} objects to be used in tests.
+ * All lessons clash with each other and are used to test for clashing logic
+ */
 public class TypicalLessons {
-    // all lessons clash with each other and are used to test for clashing logic
     // all fields present
     public static final Lesson RECURRING_LESSON = new LessonBuilder().withDate("12 Jan 2000")
             .withTimeRange("1400-1900").withSubject("Science")
