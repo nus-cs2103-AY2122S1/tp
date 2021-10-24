@@ -43,10 +43,10 @@ class JsonAdaptedStudent {
      * Converts a given {@code student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        name = source.getName().fullName;
-        studentId = source.getStudentId().studentId;
-        classId = source.getClassId().classId;
-        email = source.getEmail().email;
+        name = source.getNameValue();
+        studentId = source.getStudentIdValue();
+        classId = source.getClassIdValue();
+        email = source.getEmailValue();
         //todo: for test of show feature only
         if (source.getLabResultList() != null) {
             labResultList = new ArrayList<>();

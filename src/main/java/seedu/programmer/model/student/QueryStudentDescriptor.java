@@ -63,7 +63,7 @@ public class QueryStudentDescriptor {
         Optional<String> cidToBeQueried = getClassId();
         Optional<String> emailToBeQueried = getEmail();
 
-        String studentName = student.getFullName();
+        String studentName = student.getNameValue();
         String studentSid = student.getStudentIdValue();
         String studentCid = student.getClassIdValue();
         String studentEmail = student.getEmailValue();

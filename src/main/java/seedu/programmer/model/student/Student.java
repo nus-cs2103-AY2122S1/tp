@@ -53,8 +53,8 @@ public class Student {
         return name;
     }
 
-    public String getFullName() {
-        return name.fullName;
+    public String getNameValue() {
+        return name.toString();
     }
 
     public StudentId getStudentId() {
@@ -62,7 +62,7 @@ public class Student {
     }
 
     public String getStudentIdValue() {
-        return studentId.studentId;
+        return studentId.toString();
     }
 
     public ClassId getClassId() {
@@ -70,7 +70,7 @@ public class Student {
     }
 
     public String getClassIdValue() {
-        return classId.classId;
+        return classId.toString();
     }
 
     public Email getEmail() {
@@ -78,7 +78,7 @@ public class Student {
     }
 
     public String getEmailValue() {
-        return email.email;
+        return email.toString();
     }
 
     public ObservableList<Lab> getLabResultList() {
