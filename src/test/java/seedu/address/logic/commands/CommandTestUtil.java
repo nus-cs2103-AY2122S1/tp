@@ -10,7 +10,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SOCIAL_HANDLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG_COLOUR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TUTORIAL_GROUP;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -31,6 +30,7 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String TAG_COLOUR_DELIMITER = ":";
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_GENDER_AMY = "F";
@@ -68,7 +68,7 @@ public class CommandTestUtil {
     public static final String SOCIAL_HANDLE_DESC_BOB = " " + PREFIX_SOCIAL_HANDLE + VALID_SOCIAL_HANDLE_BOB;
     public static final String REMARK_DESC_AMY = " " + PREFIX_REMARK + VALID_REMARK_AMY;
     public static final String REMARK_DESC_BOB = " " + PREFIX_REMARK + VALID_REMARK_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND + PREFIX_TAG_COLOUR
+    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND + TAG_COLOUR_DELIMITER
             + VALID_TAG_COLOUR;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -81,8 +81,8 @@ public class CommandTestUtil {
     public static final String INVALID_SOCIAL_HANDLE_DESC = " "
             + PREFIX_SOCIAL_HANDLE + "@fef fef"; // space not allowed in social handle
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-    public static final String INVALID_TAG_COLOUR_DESC = " " + PREFIX_TAG + "hubby" + PREFIX_TAG_COLOUR
-            + "blue"; // '*' not allowed in tags
+    public static final String INVALID_TAG_COLOUR_DESC = " " + PREFIX_TAG + "hubby" + TAG_COLOUR_DELIMITER
+            + "blue"; // invalid colour code not allowed
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
