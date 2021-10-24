@@ -101,7 +101,7 @@ public class EditEventCommand extends Command {
         EventTime updatedEventTime = editEventDescriptor.getEventTime().orElse(eventToEdit.getTime());
 
         return new Event(updatedEventName, updatedEventDate,
-                updatedEventTime, eventToEdit.getIsDone(), eventToEdit.getParticipants());
+                updatedEventTime, eventToEdit.getDoneValue(), eventToEdit.getParticipants());
     }
 
     /**

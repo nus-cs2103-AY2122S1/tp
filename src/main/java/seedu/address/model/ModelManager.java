@@ -102,6 +102,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteParticipant(Participant target) {
+        target.deleteFromEvents();
         addressBook.removeParticipant(target);
     }
 
@@ -116,7 +117,7 @@ public class ModelManager implements Model {
     @Override
     public void setParticipant(Participant target, Participant editedParticipant) {
         requireAllNonNull(target, editedParticipant);
-
+        target.shiftEvents(editedParticipant);
         addressBook.setParticipant(target, editedParticipant);
     }
 
@@ -202,13 +203,13 @@ public class ModelManager implements Model {
     @Override
     public void setEvent(Event target, Event editedEvent) {
         requireNonNull(target);
+        target.shiftParticipants(editedEvent);
         addressBook.setEvent(target, editedEvent);
     }
 
     @Override
     public void markEventAsDone(Event target) {
-        requireNonNull(target);
-        addressBook.markEventAsDone(target);
+        target.markAsDone();
     }
 
     @Override
@@ -227,7 +228,8 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredParticipants.equals(other.filteredParticipants);
+                && filteredParticipants.equals(other.filteredParticipants)
+                && filteredEvents.equals(other.filteredEvents);
     }
 
 }

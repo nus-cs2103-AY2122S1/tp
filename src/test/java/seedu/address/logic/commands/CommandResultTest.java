@@ -12,7 +12,7 @@ import seedu.address.logic.parser.AddCommandParser;
 import seedu.address.logic.parser.AddEventCommandParser;
 import seedu.address.logic.parser.AddParticipantToEventParser;
 import seedu.address.logic.parser.DeleteCommandParser;
-import seedu.address.logic.parser.DoneEventCommandParser;
+import seedu.address.logic.parser.DoneCommandParser;
 import seedu.address.logic.parser.EditCommandParser;
 import seedu.address.logic.parser.FilterEventCommandParser;
 import seedu.address.logic.parser.FindCommandParser;
@@ -91,10 +91,10 @@ public class CommandResultTest {
 
     @Test
     public void isShowHelp_doneEventCommand_returnsFalse() throws Exception {
-        // CommandResult from DoneEventCommand
+        // CommandResult from DoneCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new DoneEventCommandParser().parse(" 1").execute(model).isShowHelp());
+        assertFalse(new DoneCommandParser().parse(" 1").execute(model).isShowHelp());
     }
 
     @Test
@@ -223,10 +223,10 @@ public class CommandResultTest {
 
     @Test
     public void isExit_doneEventCommand_returnsFalse() throws Exception {
-        // CommandResult from DoneEventCommand
+        // CommandResult from DoneCommand
         AddEventCommand addEventCommand = new AddEventCommandParser().parse(" n/M d/2021-11-11");
         addEventCommand.execute(model);
-        assertFalse(new DoneEventCommandParser().parse(" 1").execute(model).isExit());
+        assertFalse(new DoneCommandParser().parse(" 1").execute(model).isExit());
     }
 
     @Test

@@ -6,7 +6,32 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddEventCommand;
+import seedu.address.logic.commands.AddNextOfKinCommand;
+import seedu.address.logic.commands.AddParticipantToEventByIndexCommand;
+import seedu.address.logic.commands.AddParticipantToEventCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DoneCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditEventCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterEventCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindEventCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListEventCommand;
+import seedu.address.logic.commands.RemoveEventCommand;
+import seedu.address.logic.commands.RemoveNextOfKinCommand;
+import seedu.address.logic.commands.RemoveParticipantFromEventByIndexCommand;
+import seedu.address.logic.commands.RemoveParticipantFromEventCommand;
+import seedu.address.logic.commands.ShowEventDetailsCommand;
+import seedu.address.logic.commands.ShowEventParticipantsCommand;
+import seedu.address.logic.commands.SortEventCommand;
+import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -68,8 +93,8 @@ public class AddressBookParser {
         case RemoveEventCommand.COMMAND_WORD:
             return new RemoveEventCommandParser().parse(arguments);
 
-        case DoneEventCommand.COMMAND_WORD:
-            return new DoneEventCommandParser().parse(arguments);
+        case DoneCommand.COMMAND_WORD:
+            return new DoneCommandParser().parse(arguments);
 
         case SortEventCommand.COMMAND_WORD:
             return new SortEventCommand();

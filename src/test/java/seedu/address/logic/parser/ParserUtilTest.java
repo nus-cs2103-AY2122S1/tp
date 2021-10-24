@@ -7,7 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PARTICIPANT;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,7 +21,6 @@ import seedu.address.model.participant.Address;
 import seedu.address.model.participant.BirthDate;
 import seedu.address.model.participant.Email;
 import seedu.address.model.participant.Name;
-import seedu.address.model.participant.Note;
 import seedu.address.model.participant.ParticipantId;
 import seedu.address.model.participant.Phone;
 import seedu.address.model.tag.Tag;
@@ -40,10 +38,6 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
-    private static final String VALID_NOTE_1 = "VERY_HIGH:Vegetarian";
-    private static final String VALID_NOTE_2 = "MEDIUM:Fever";
-    private static final String VALID_NOTE_3 = "LOW:Male";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -226,85 +220,6 @@ public class ParserUtilTest {
         BirthDate expectedBirthDate = BirthDate.of(2020, 11, 30);
         BirthDate actualBirthDate = ParserUtil.parseBirthDate("2020-11-30");
         assertEquals(expectedBirthDate, actualBirthDate);
-    }
-
-    @Test
-    public void parseImportance_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseImportance(null));
-    }
-
-    @Test
-    public void parseImportance_validImportance_returnsImportance() throws Exception {
-        // very high
-        Note.Importance veryHigh = ParserUtil.parseImportance("VERY_HIGH");
-        assertEquals(veryHigh, Note.Importance.VERY_HIGH);
-
-        // high
-        Note.Importance high = ParserUtil.parseImportance("HIGH");
-        assertEquals(high, Note.Importance.HIGH);
-
-        // medium
-        Note.Importance medium = ParserUtil.parseImportance("MEDIUM");
-        assertEquals(medium, Note.Importance.MEDIUM);
-
-        // low
-        Note.Importance low = ParserUtil.parseImportance("LOW");
-        assertEquals(low, Note.Importance.LOW);
-
-        // very low
-        Note.Importance veryLow = ParserUtil.parseImportance("VERY_LOW");
-        assertEquals(veryLow, Note.Importance.VERY_LOW);
-    }
-
-    @Test
-    public void parseImportance_invalidImportance_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseImportance("Priority"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseImportance("1234"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseImportance("!@#!$!@"));
-        assertThrows(ParseException.class, () -> ParserUtil.parseImportance(".-12-3pdax12e"));
-    }
-
-    @Test
-    public void parseNote_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseNote(null));
-    }
-
-    @Test
-    public void parseNote_validNote_returnNote() throws Exception {
-        Note expectedNote = new Note("Vegetarian", Note.Importance.VERY_HIGH);
-        Note actualNote = ParserUtil.parseNote(VALID_NOTE_1);
-        assertEquals(expectedNote, actualNote);
-    }
-
-    @Test
-    public void parseNote_invalidNote_throwsParseException() {
-        // missing content and importance
-        assertThrows(ParseException.class, () -> ParserUtil.parseNote(":"));
-
-        // missing content
-        assertThrows(ParseException.class, () -> ParserUtil.parseNote("VERY_HIGH:"));
-
-        // missing semicolon
-        assertThrows(ParseException.class, () -> ParserUtil.parseNote("VERY_HIGH"));
-
-        // invalid Importance
-        assertThrows(ParseException.class, () -> ParserUtil.parseNote("VERY_HIGHER:Vegetarian"));
-    }
-
-    @Test
-    public void parseNotes_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseNotes(null));
-    }
-
-    @Test
-    public void parseNotes_validNotes_returnSetOfNotes() throws Exception {
-        Collection<String> notes = Arrays.asList(VALID_NOTE_1, VALID_NOTE_2, VALID_NOTE_3);
-        Set<Note> actualSetOfNotes = ParserUtil.parseNotes(notes);
-        Set<Note> expectedSetOfNotes = new HashSet<>();
-        expectedSetOfNotes.add(ParserUtil.parseNote(VALID_NOTE_1));
-        expectedSetOfNotes.add(ParserUtil.parseNote(VALID_NOTE_2));
-        expectedSetOfNotes.add(ParserUtil.parseNote(VALID_NOTE_3));
-        assertEquals(expectedSetOfNotes, actualSetOfNotes);
     }
 
     @Test

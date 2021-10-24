@@ -105,7 +105,7 @@ public class ShowEventDetailsCommandTest {
                 sampleEventWithTimeAndCompletion.getNameString(),
                 sampleEventWithTimeAndCompletion.getDateString(),
                 sampleEventWithTimeAndCompletion.getTimeString(),
-                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithTimeAndCompletion.getParticipants().size()
                 );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -126,7 +126,7 @@ public class ShowEventDetailsCommandTest {
                 sampleEventWithoutTimeAndCompletion.getNameString(),
                 sampleEventWithoutTimeAndCompletion.getDateString(),
                 sampleEventWithoutTimeAndCompletion.getTimeString(),
-                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithoutTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithoutTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -149,7 +149,7 @@ public class ShowEventDetailsCommandTest {
                 sampleEventWithTimeAndCompletion.getNameString(),
                 sampleEventWithTimeAndCompletion.getDateString(),
                 sampleEventWithTimeAndCompletion.getTimeString(),
-                sampleEventWithTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);
@@ -172,7 +172,7 @@ public class ShowEventDetailsCommandTest {
                 sampleEventWithoutTimeAndCompletion.getNameString(),
                 sampleEventWithoutTimeAndCompletion.getDateString(),
                 sampleEventWithoutTimeAndCompletion.getTimeString(),
-                sampleEventWithoutTimeAndCompletion.getIsDone() ? "Completed" : "Uncompleted",
+                sampleEventWithoutTimeAndCompletion.getDoneValue() ? "Completed" : "Uncompleted",
                 sampleEventWithoutTimeAndCompletion.getParticipants().size()
         );
         assertEquals(commandResult.getFeedbackToUser(), expectedOutput);

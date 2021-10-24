@@ -1,16 +1,12 @@
 package seedu.address.ui;
 
-import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.participant.Note;
 import seedu.address.model.participant.Participant;
-import seedu.address.model.tag.Tag;
 
 /**
  * An UI component that displays information of a {@code Participant}.
@@ -42,13 +38,7 @@ public class ParticipantCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
-    @FXML
-    private Label participantId;
-    @FXML
     private Label birthDate;
-    @FXML
-    private FlowPane notes;
     @FXML
     private Label nextOfKins;
 
@@ -63,54 +53,10 @@ public class ParticipantCard extends UiPart<Region> {
         phone.setText(participant.getPhoneValue());
         address.setText(participant.getAddressValue());
         email.setText(participant.getEmailValue());
-        participant.getTags().stream()
-                .sorted(Comparator.comparing(Tag::getTagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.getTagName())));
-
-        participantId.setText(participant.getParticipantIdValue());
         birthDate.setText(participant.getBirthDateString());
-        participant.getNotes().stream()
-                .sorted(Comparator.comparing(Note::toString))
-                .forEach(note -> notes.getChildren().add(noteLabel(note)));
         nextOfKins.setText(participant.getNextOfKins().stream().map(i -> i.toString() + "\n")
                 .collect(Collectors.joining()));
 
-    }
-
-    /**
-     * Creates a custom Label for Notes with colour based on Note Importance.
-     * @param note note to make a Label for.
-     * @return a Label representing the Note.
-     */
-    public Label noteLabel(Note note) {
-        Label label = new Label();
-        label.setText(note.getContent());
-
-        switch(note.getImportance()) {
-        case VERY_HIGH:
-            label.setStyle("-fx-background-color: #ff0000; -fx-text-fill: white; -fx-padding: 1 3 1 3; "
-                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
-            break;
-        case HIGH:
-            label.setStyle("-fx-background-color: #ffa600; -fx-text-fill: black; -fx-padding: 1 3 1 3; "
-                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
-            break;
-        case MEDIUM:
-            label.setStyle("-fx-background-color: #ffff00; -fx-text-fill: black; -fx-padding: 1 3 1 3; "
-                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
-            break;
-        case LOW:
-            label.setStyle("-fx-background-color: #00ff00; -fx-text-fill: black; -fx-padding: 1 3 1 3; "
-                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
-            break;
-        case VERY_LOW:
-            label.setStyle("-fx-background-color: #0000ff; -fx-text-fill: white; -fx-padding: 1 3 1 3; "
-                    + "-fx-border-radius: 2; -fx-background-radius: 2; -fx-font-size: 11;");
-            break;
-        default:
-        }
-
-        return label;
     }
 
     @Override
