@@ -4,10 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Description;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.TaskDate;
-import seedu.address.model.task.TaskName;
+import seedu.address.model.task.*;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -40,8 +37,9 @@ public class DeadlineAndEventTaskBuilder {
     /**
      * Initializes the TaskBuilder with the data of {@code taskToCopy}.
      */
-    public DeadlineAndEventTaskBuilder(Task taskToCopy) {
+    public DeadlineAndEventTaskBuilder(DeadlineTask taskToCopy) {
         this.taskName = taskToCopy.getName();
+        this.taskDate = new TaskDate(taskToCopy.getDeadline().toString());
         this.tags = new HashSet<>(taskToCopy.getTags());
         this.isDone = taskToCopy.checkIsDone();
         this.description = new Description(taskToCopy.getDescription());
@@ -83,12 +81,18 @@ public class DeadlineAndEventTaskBuilder {
      * Parses the {@code description} into a {@code Task} and set it to the {@code Task} that we are building.
      */
     public DeadlineAndEventTaskBuilder withPriority(String description) {
-        this.priority = Task.Priority.LOW;
+        if (description.contains("H") || description.contains("h")) {
+            this.priority = Task.Priority.HIGH;
+        } else if (description.contains("M") || description.contains("m")) {
+            this.priority = Task.Priority.MEDIUM;
+        } else {
+            this.priority = Task.Priority.LOW;    
+        }
         return this;
     }
 
-    public Task build() {
-        return new Task(taskName, tags, false, description, priority);
+    public DeadlineTask build() {
+        return new DeadlineTask(taskName, tags, false, taskDate, description, priority);
     }
 
 }
