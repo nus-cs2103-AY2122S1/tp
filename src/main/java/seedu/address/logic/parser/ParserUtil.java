@@ -196,4 +196,20 @@ public class ParserUtil {
         }
         return new TaskDeadline(trimmedTime);
     }
+
+    /**
+     * Parses a {@code String status} into an {@code Boolean}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code time} is invalid.
+     */
+    public static Boolean parseTaskStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toLowerCase();
+        if (trimmedStatus != "done" || trimmedStatus != "undone") {
+            throw new ParseException("Invalid status, can only be done or undone");
+        }
+        Boolean isDone = trimmedStatus == "done" ? Boolean.TRUE : Boolean.FALSE;
+        return isDone;
+    }
 }

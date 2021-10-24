@@ -240,8 +240,7 @@ public class ModelManager implements Model {
      * The member identity of {@code editedTask} must not be the same as another existing task in the task list.
      */
     @Override
-    public void setTask(Member member, Task target, Task editedTask) {
-        loadTaskList(member);
+    public void setTask(Task target, Task editedTask) {
         taskListManager.setTask(target, editedTask);
     }
 
@@ -249,8 +248,7 @@ public class ModelManager implements Model {
      * Replaces the task specified by {@code index} with {@code editedTask} in the given {@code member}'s task list.
      */
     @Override
-    public void setTask(Member member, int index, Task editedTask) {
-        loadTaskList(member);
+    public void setTask(int index, Task editedTask) {
         taskListManager.setTask(index, editedTask);
     }
 
@@ -281,6 +279,11 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredTaskList(Member member, Predicate<Task> predicate) {
         loadTaskList(member);
+        filteredTasks.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         filteredTasks.setPredicate(predicate);
     }
 
