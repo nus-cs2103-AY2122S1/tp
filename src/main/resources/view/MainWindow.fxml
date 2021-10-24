@@ -27,7 +27,7 @@
         <URL value="@Extensions.css" />
       </stylesheets>
 
-      <VBox>          
+      <VBox>
         <HBox HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
 
         <!-- Method isResidentTab of `MainWindow.java` is dependent on this ordering. -->
@@ -85,7 +85,7 @@
                         </items>
                     </SplitPane>
                 </Tab>
-                
+
                 <Tab fx:id="helpTab" styleClass="tab-inactive" ></Tab>
 <!--                <AnchorPane HBox.hgrow="ALWAYS" /></AnchorPane>-->
                 <Tab fx:id="exitTab" styleClass="tab-inactive" ></Tab>
