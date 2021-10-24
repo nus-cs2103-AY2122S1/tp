@@ -194,6 +194,21 @@ Format: `deletetask INDEX`
 Examples:
 * `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
 
+
+### Viewing total orders: `totalorders`
+
+Shows the total orders for each person in the application. 
+
+<div markdown="block" class="alert alert-info">
+The total orders displayed are based on the persons.
+If the customer of an order cannot be found among the persons of the application, the order will not be shown.
+</div>
+
+TODO Ui after formatting digits
+
+Format: `totalorders`
+
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
