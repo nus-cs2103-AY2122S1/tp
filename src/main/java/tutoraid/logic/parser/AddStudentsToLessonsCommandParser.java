@@ -1,16 +1,15 @@
 package tutoraid.logic.parser;
 
+import static java.util.Objects.requireNonNull;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
+
+import java.util.ArrayList;
+
 import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.AddStudentsToLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
-
-import java.util.ArrayList;
-
-import static java.util.Objects.requireNonNull;
-import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
-import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
-
 
 /**
  * Parses input arguments and creates a new PaidCommand object

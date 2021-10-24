@@ -2,6 +2,8 @@ package tutoraid.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+
 import tutoraid.commons.core.index.Index;
 import tutoraid.commons.util.StringUtil;
 import tutoraid.logic.parser.exceptions.ParseException;
@@ -10,8 +12,6 @@ import tutoraid.model.student.ParentName;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.Progress;
 import tutoraid.model.student.StudentName;
-
-import java.util.ArrayList;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.

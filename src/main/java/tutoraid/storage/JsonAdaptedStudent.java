@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import tutoraid.commons.exceptions.IllegalValueException;
-import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;

@@ -1,8 +1,8 @@
 package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
 import static tutoraid.logic.parser.CliSyntax.PREFIX_LESSON;
+import static tutoraid.logic.parser.CliSyntax.PREFIX_STUDENT;
 
 import java.util.ArrayList;
 import java.util.List;

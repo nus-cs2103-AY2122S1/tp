@@ -16,9 +16,6 @@ import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
-import java.util.ArrayList;
-
-
 /**
  * Parses input arguments and creates a new AddStudentCommand object
  */

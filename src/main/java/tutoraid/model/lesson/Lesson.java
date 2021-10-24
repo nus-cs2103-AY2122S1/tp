@@ -1,10 +1,10 @@
 package tutoraid.model.lesson;
 
-import tutoraid.model.student.Student;
-
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+
+import tutoraid.model.student.Student;
 
 /**
  * Represents a Lesson in the TutorAid.

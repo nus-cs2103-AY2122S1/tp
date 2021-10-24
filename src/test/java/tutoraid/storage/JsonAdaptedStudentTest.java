@@ -3,7 +3,6 @@ package tutoraid.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +10,6 @@ import tutoraid.commons.exceptions.IllegalValueException;
 import tutoraid.model.student.Name;
 import tutoraid.model.student.Phone;
 import tutoraid.testutil.Assert;
-import tutoraid.testutil.TypicalLessons;
 import tutoraid.testutil.TypicalStudents;
 
 public class JsonAdaptedStudentTest {

@@ -41,8 +41,8 @@ public class StudentsTest {
     @Test
     public void add_duplicateStudent_throwsDuplicateStudentException() {
         studentList.addStudent(TypicalStudents.ALICE);
-        Assert.assertThrows(DuplicateStudentInLessonException.class,
-                () -> studentList.addStudent(TypicalStudents.ALICE));
+        Assert.assertThrows(DuplicateStudentInLessonException.class, () -> studentList.addStudent(
+                TypicalStudents.ALICE));
     }
 
     @Test
@@ -52,8 +52,8 @@ public class StudentsTest {
 
     @Test
     public void remove_studentDoesNotExist_throwsStudentNotFoundException() {
-        Assert.assertThrows(StudentNotFoundInLessonException.class,
-                () -> studentList.removeStudent(TypicalStudents.ALICE));
+        Assert.assertThrows(StudentNotFoundInLessonException.class, () -> studentList.removeStudent(
+                TypicalStudents.ALICE));
     }
 
     @Test
