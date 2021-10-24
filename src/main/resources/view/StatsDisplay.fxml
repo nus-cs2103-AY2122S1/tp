@@ -37,10 +37,10 @@
                 <children>
                     <BarChart fx:id="barChart" stylesheets="@AnimeTheme.css">
                         <xAxis>
-                            <CategoryAxis side="BOTTOM" />
+                            <NumberAxis side="LEFT" />
                         </xAxis>
                         <yAxis>
-                            <NumberAxis side="LEFT" />
+                            <CategoryAxis side="BOTTOM" />
                         </yAxis>
                     </BarChart>
                 </children>

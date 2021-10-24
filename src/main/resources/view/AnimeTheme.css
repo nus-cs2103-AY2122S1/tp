@@ -519,7 +519,6 @@ chart-pie-label-line {
     -fx-font-size: 1.4em;
     -fx-tick-label-fill: white;
     -fx-font-family: Tahoma;
-    -fx-tick-length: 20;
     -fx-minor-tick-visible: false;
 }
 

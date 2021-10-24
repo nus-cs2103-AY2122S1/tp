@@ -38,7 +38,7 @@ public class StatsDisplay extends UiPart<Stage> {
     private PieChart pieChart;
 
     @FXML
-    private BarChart<String, Number> barChart;
+    private BarChart<Number, String> barChart;
 
     /**
      * Creates a StatsDisplay UI component.
@@ -117,11 +117,12 @@ public class StatsDisplay extends UiPart<Stage> {
 
     private void setGenreStats(HashMap<Genre, Integer> genreStats) {
         barChart.setTitle("Here are your top anime genres.");
-        CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        BarChart<String, Number> tempGenreStats = new BarChart<>(xAxis, yAxis);
+        CategoryAxis yAxis = new CategoryAxis();
+        NumberAxis xAxis = new NumberAxis();
+        BarChart<Number, String> tempGenreStats = new BarChart<>(xAxis, yAxis);
         tempGenreStats.getData().add(getBarChartData(genreStats));
         barChart.setData(tempGenreStats.getData());
+        barChart.getYAxis().setTickMarkVisible(false);
     }
 
     /**
@@ -129,13 +130,13 @@ public class StatsDisplay extends UiPart<Stage> {
      * @param genreStats The genre statistics
      * @return data for bar chart
      */
-    public XYChart.Series<String, Number> getBarChartData(HashMap<Genre, Integer> genreStats) {
-        XYChart.Series<String, Number> barChartData = new XYChart.Series<>();
+    public XYChart.Series<Number, String> getBarChartData(HashMap<Genre, Integer> genreStats) {
+        XYChart.Series<Number, String> barChartData = new XYChart.Series<>();
         for (Map.Entry<Genre, Integer> genreCountPair : genreStats.entrySet()) {
             String genreName = genreCountPair.getKey().genreName;
             int genreCount = genreCountPair.getValue();
             barChartData.getData().add(new XYChart.Data<>(
-                    genreName, genreCount));
+                    genreCount, genreName));
         }
         return barChartData;
     }
