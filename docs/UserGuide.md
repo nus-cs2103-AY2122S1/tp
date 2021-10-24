@@ -107,7 +107,8 @@ CSBook data are saved in the hard disk automatically after any command that chan
 
 #### Editing the data file
 
-CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are highly advised to not edit the data file directly.
+CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook`. Users are thus highly advised to not try editing the data file directly and only manipulate
+data through the commands provided.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.
@@ -129,7 +130,9 @@ Adds a student to the CSBook.
 Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
 
 * Adds a new student into CSBook.
-* The group must exist before the student is created. Each student must belong to at least one group.
+* The group name must correspond to that of a group that has been added to CSBook before the student is created. Each student must belong to at least one group.
+
+**:information_source: Refer to Group management features for more details on how you may use groups to enhance the way you track students.**
 
 Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
