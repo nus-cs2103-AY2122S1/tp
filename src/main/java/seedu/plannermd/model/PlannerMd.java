@@ -168,6 +168,19 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     /**
+     * Returns true if an existing appointment clashes with {@code appointment} in the PlannerMD.
+     */
+    public boolean isClashAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        for (Appointment existingAppointment : appointments) {
+            if (appointment.isClash(existingAppointment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an appointment to the PlannerMD.
      * The appointment must not already exist in the PlannerMD.
      */

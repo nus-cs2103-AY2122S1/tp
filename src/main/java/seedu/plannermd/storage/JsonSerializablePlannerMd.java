@@ -24,6 +24,7 @@ class JsonSerializablePlannerMd {
     public static final String MESSAGE_DUPLICATE_PATIENT = "Patients list contains duplicate patient(s).";
     public static final String MESSAGE_DUPLICATE_DOCTOR = "Doctors list contains duplicate doctor(s).";
     public static final String MESSAGE_DUPLICATE_APPOINTMENTS = "Appointments list contains duplicate appointment(s).";
+    public static final String MESSAGE_CLASHING_APPOINTMENTS = "Appointments list contains clashing appointment(s).";
 
     private final List<JsonAdaptedPatient> patients = new ArrayList<>();
     private final List<JsonAdaptedDoctor> doctors = new ArrayList<>();
@@ -78,6 +79,9 @@ class JsonSerializablePlannerMd {
             Appointment appointment = jsonAdaptedAppointment.toModelType();
             if (plannerMd.hasAppointment(appointment)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_APPOINTMENTS);
+            }
+            if (plannerMd.isClashAppointment(appointment)) {
+                throw new IllegalValueException(MESSAGE_CLASHING_APPOINTMENTS);
             }
             plannerMd.addAppointment(appointment);
         }

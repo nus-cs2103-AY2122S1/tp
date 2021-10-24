@@ -28,6 +28,10 @@ public class JsonSerializablePlannerMdTest {
     private static final Path INVALID_APPOINTMENTS_FILE = TEST_DATA_FOLDER.resolve("invalidAppointmentPlannerMd.json");
     private static final Path DUPLICATE_APPOINTMENTS_FILE = TEST_DATA_FOLDER.resolve(
             "duplicateAppointmentPlannerMd.json");
+    private static final Path CLASHING_PATIENT_APPOINTMENTS_FILE = TEST_DATA_FOLDER.resolve(
+            "clashingPatientAppointmentPlannerMd.json");
+    private static final Path CLASHING_DOCTOR_APPOINTMENTS_FILE = TEST_DATA_FOLDER.resolve(
+            "clashingDoctorAppointmentPlannerMd.json");
 
     @Test
     public void toModelType_typicalPlannerMdFile_success() throws Exception {
@@ -107,6 +111,22 @@ public class JsonSerializablePlannerMdTest {
         JsonSerializablePlannerMd dataFromFile = JsonUtil
                 .readJsonFile(DUPLICATE_APPOINTMENTS_FILE, JsonSerializablePlannerMd.class).get();
         assertThrows(IllegalValueException.class, JsonSerializablePlannerMd.MESSAGE_DUPLICATE_APPOINTMENTS,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_clashingPatientAppointments_throwsIllegalValueException() throws Exception {
+        JsonSerializablePlannerMd dataFromFile = JsonUtil
+                .readJsonFile(CLASHING_PATIENT_APPOINTMENTS_FILE, JsonSerializablePlannerMd.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializablePlannerMd.MESSAGE_CLASHING_APPOINTMENTS,
+                dataFromFile::toModelType);
+    }
+
+    @Test
+    public void toModelType_clashingDoctorAppointments_throwsIllegalValueException() throws Exception {
+        JsonSerializablePlannerMd dataFromFile = JsonUtil
+                .readJsonFile(CLASHING_DOCTOR_APPOINTMENTS_FILE, JsonSerializablePlannerMd.class).get();
+        assertThrows(IllegalValueException.class, JsonSerializablePlannerMd.MESSAGE_CLASHING_APPOINTMENTS,
                 dataFromFile::toModelType);
     }
 }
