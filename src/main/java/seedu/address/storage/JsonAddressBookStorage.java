@@ -77,12 +77,4 @@ public class JsonAddressBookStorage implements AddressBookStorage {
         FileUtil.createIfMissing(filePath);
         JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
     }
-
-    @Override
-    public void exportToJson(ReadOnlyAddressBook addressBook) throws IOException {
-        if (FileUtil.isFileExists(filePath)) {
-            throw new FileAlreadyExistsException("File exists");
-        }
-        saveAddressBook(addressBook, filePath);
-    }
 }

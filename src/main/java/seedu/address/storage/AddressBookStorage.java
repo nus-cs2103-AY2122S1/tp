@@ -41,6 +41,4 @@ public interface AddressBookStorage {
      * @see #saveAddressBook(ReadOnlyAddressBook)
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
-
-    void exportToJson(ReadOnlyAddressBook addressBook) throws IOException;
 }

@@ -13,7 +13,6 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
@@ -61,13 +60,12 @@ public class CsvAddressBookStorage implements AddressBookStorage {
         }
     }
 
-    /** WRONG **/
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, filePath);
     }
 
-    /** WRONG, to be implemented
+    /**
      * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
      *
      * @param filePath location of the data. Cannot be null.
@@ -77,15 +75,6 @@ public class CsvAddressBookStorage implements AddressBookStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
-    }
-
-    /** WRONG **/
-    @Override
-    public void exportToJson(ReadOnlyAddressBook addressBook) throws IOException {
-        if (FileUtil.isFileExists(filePath)) {
-            throw new FileAlreadyExistsException("File exists");
-        }
-        saveAddressBook(addressBook, filePath);
+        CsvUtil.saveCsvFile(new CsvSerializableAddressBook(addressBook), filePath);
     }
 }
