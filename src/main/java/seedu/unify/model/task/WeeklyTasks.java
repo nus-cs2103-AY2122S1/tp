@@ -38,7 +38,7 @@ public class WeeklyTasks implements Iterable<Task> {
      * For the given week of the YEAR.
      *
      * @param taskList A valid task list.
-     * @param week A valid week of the year.
+     * @param week     A valid week of the year.
      */
     public WeeklyTasks(ObservableList<Task> taskList, Integer week) {
         weeklyTaskList = FXCollections.observableArrayList();
@@ -51,39 +51,53 @@ public class WeeklyTasks implements Iterable<Task> {
         updateWeeklyList();
     }
 
-    /** Returns a list of daily task list for the week */
+    /**
+     * Returns a list of daily task list for the week
+     */
     public ObservableList<FilteredList<Task>> getWeeklyList() {
         return weeklyTaskList;
     }
 
-    /** Returns a task list filtered by the day of week */
+    /**
+     * Returns a task list filtered by the day of week
+     */
     public ObservableList<Task> getDailyTaskList(Integer dayOfWeek) {
         return weeklyTaskList.get(dayOfWeek);
     }
 
-    /** Returns the local date of the first day of the week */
+    /**
+     * Returns the local date of the first day of the week
+     */
     public LocalDate getFirstDayOfWeek() {
         LocalDate firstDay = LocalDate.ofYearDay(YEAR, getWeekNumber() * DAYS_IN_WEEK - YEAR_OFFSET);
         return firstDay;
     }
 
-    /** Returns an integer value of the week number */
+    /**
+     * Returns an integer value of the week number
+     */
     public Integer getWeekNumber() {
         return weekNumber.getValue();
     }
 
-    /** Returns an observable value of the week number */
+    /**
+     * Returns an observable value of the week number
+     */
     public SimpleIntegerProperty getObservableWeekNumber() {
         return weekNumber;
     }
 
-    /** Set the week number of the year */
+    /**
+     * Sets the week number of the year
+     */
     public void setWeek(Integer week) {
         weekNumber.set(week);
         updateWeeklyList();
     }
 
-    /** Update the filtered list to the week set */
+    /**
+     * Updates the filtered list to the week set
+     */
     private void updateWeeklyList() {
         for (int i = 0; i < DAYS_IN_WEEK; i++) {
             weeklyTaskList.get(i).setPredicate(new TaskContainsDatePredicate(getFirstDayOfWeek().plusDays(i)));
