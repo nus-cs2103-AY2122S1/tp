@@ -59,7 +59,7 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
     private DeletePersonCommand deleteByModuleCode(List<String> moduleCodes) throws ParseException {
         List<String> stringListOfModuleCodes = ParserUtil.parseModuleCodes(moduleCodes).stream()
                 .map(moduleCode -> moduleCode.toString())
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
         ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodes.get(0));
         if (moduleCodes.size() > 1) {
             throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_MODULE_USAGE);
@@ -67,7 +67,6 @@ public class DeletePersonCommandParser implements Parser<DeletePersonCommand> {
         if (moduleCode.getLessonCodes().size() > 1) {
             throw new ParseException(DeletePersonCommand.MESSAGE_DELETE_BY_LESSON_CODE_USAGE);
         }
-        System.out.println(stringListOfModuleCodes);
         return new DeletePersonCommand(
                 new ModuleCodesContainsKeywordsPredicate(stringListOfModuleCodes), moduleCode);
     }
