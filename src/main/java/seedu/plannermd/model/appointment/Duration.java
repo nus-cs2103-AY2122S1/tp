@@ -1,8 +1,7 @@
 package seedu.plannermd.model.appointment;
 
-import seedu.plannermd.logic.parser.exceptions.ParseException;
-
 import static java.util.Objects.requireNonNull;
+
 import static seedu.plannermd.commons.util.AppUtil.checkArgument;
 
 /**
