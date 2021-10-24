@@ -211,7 +211,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
             }
 
-            if (commandResult.isDisplayStudent()) {
+            if (commandResult.getStudent().isPresent()) {
                 Person student = commandResult.getStudent()
                     .orElse(logic.getFilteredPersonList().get(0));
                 // default is first person if no student in command result

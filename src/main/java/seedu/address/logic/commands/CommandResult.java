@@ -72,10 +72,6 @@ public class CommandResult {
         return showSchedule;
     }
 
-    public boolean isDisplayStudent() {
-        return student != null;
-    }
-
     public Optional<Person> getStudent() {
         return Optional.ofNullable(student);
     }
