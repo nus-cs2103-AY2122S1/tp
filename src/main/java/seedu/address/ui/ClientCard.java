@@ -16,6 +16,14 @@ import seedu.address.model.tag.Tag;
 public class ClientCard extends UiPart<Region> {
 
     private static final String FXML = "ClientListCard.fxml";
+    private static final String EMAIL_ICON = "✉ ";
+    private static final String PHONE_ICON = "☎ ";
+    private static final String ADDRESS_ICON = "\uD83C\uDFE0 ";
+    private static final String RA_ICON = "\uD83D\uDCC8 ";
+    private static final String INCOME_ICON = "\uD83D\uDCB0 ";
+    private static final String PLAN_ICON = "\uD83C\uDFE6 ";
+    private static final String LASTMET_ICON = "\uD83E\uDD1D ";
+    private static final String NEXTMEETING_ICON = "\uD83D\uDC4B ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -26,6 +34,7 @@ public class ClientCard extends UiPart<Region> {
      */
 
     public final Client client;
+
 
     @FXML
     private HBox cardPane;
@@ -52,32 +61,6 @@ public class ClientCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    // TODO: do later
-    // @FXML
-    // private BorderPane phoneIconPane;
-    // @FXML
-    // private BorderPane addressIconPane;
-    // @FXML
-    // private BorderPane emailIconPane;
-    // @FXML
-    // private BorderPane riskIconPane;
-    // @FXML
-    // private BorderPane incomeIconPane;
-    // @FXML
-    // private BorderPane planIconPane;
-    // @FXML
-    // private BorderPane lastMetIconPane;
-
-    // TODO: do later
-    // private static final Text PHONE_ICON = GlyphsDude.createIcon(FontAwesomeIcons.PHONE, "10px");
-    // private static final Text HOME_ICON = GlyphsDude.createIcon(FontAwesomeIcons.HOME, "10px");
-    // private static final Text MAIL_FORWARD_ICON = GlyphsDude.createIcon(FontAwesomeIcons.MAIL_FORWARD, "10px");
-    // private static final Text LINE_CHART_ICON = GlyphsDude.createIcon(FontAwesomeIcons.LINE_CHART, "10px");
-    // private static final Text MONEY_ICON = GlyphsDude.createIcon(FontAwesomeIcons.MONEY, "10px");
-    // private static final Text DOLLAR_ICON = GlyphsDude.createIcon(FontAwesomeIcons.DOLLAR, "10px");
-    // private static final Text HAND_ALT_DOWN_ICON = GlyphsDude.createIcon(FontAwesomeIcons.HAND_ALT_DOWN, "10px");
-
-
     /**
      * Creates a {@code ClientCode}.
      */
@@ -87,26 +70,17 @@ public class ClientCard extends UiPart<Region> {
         this.client = client;
         id.setText(client.getClientId().value + ". ");
         name.setText(client.getName().fullName);
-        email.setText(client.getEmail().value);
-        phone.setText(client.getPhone().value);
-        address.setText(client.getAddress().value);
-        riskAppetite.setText(client.getRiskAppetite().value);
-        disposableIncome.setText(client.getDisposableIncome().value);
-        currentPlan.setText(client.getCurrentPlan().toString());
-        lastMet.setText(client.getLastMet().toString());
-        nextMeeting.setText(client.getNextMeeting().toString());
+        email.setText(EMAIL_ICON + client.getEmail().value);
+        phone.setText(PHONE_ICON + client.getPhone().value);
+        address.setText(ADDRESS_ICON + client.getAddress().value);
+        riskAppetite.setText(RA_ICON + client.getRiskAppetite().value);
+        disposableIncome.setText(INCOME_ICON + client.getDisposableIncome().value);
+        currentPlan.setText(PLAN_ICON + client.getCurrentPlan().toString());
+        lastMet.setText(LASTMET_ICON + client.getLastMet().toString());
+        nextMeeting.setText(NEXTMEETING_ICON + client.getNextMeeting().toString());
         client.getTags().stream()
             .sorted(Comparator.comparing(Tag::getName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));
-
-        // TODO: do later
-        // phoneIconPane.setCenter(PHONE_ICON);
-        // addressIconPane.setCenter(HOME_ICON);
-        // emailIconPane.setCenter(MAIL_FORWARD_ICON);
-        // riskIconPane.setCenter(LINE_CHART_ICON);
-        // incomeIconPane.setCenter(MONEY_ICON);
-        // planIconPane.setCenter(DOLLAR_ICON);
-        // lastMetIconPane.setCenter(HAND_ALT_DOWN_ICON);
     }
 
     @Override
