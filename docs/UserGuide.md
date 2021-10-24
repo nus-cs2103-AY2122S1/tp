@@ -74,7 +74,7 @@ Name (**Compulsory**) | String | n/
 Email (**Compulsory**)| String (email address)| e/
 Contact number | Integer (8 digits long)| p/
 Risk appetite | Integer from 1-5, <br>where 1 is very low risk tolerance and 5 is very high risk tolerance| r/
-Last met/contacted | Date | l/
+Last met | Date | l/
 Next Meeting | Composite (More information below table) | m/
 Current financial plans | List of Strings | c/
 Disposable Income | Integer | d/
@@ -95,6 +95,12 @@ where
 For example, a valid NextMeeting is:
 
 `m/25-12-2021 (00:00~23:59), Santa's Workshop`
+
+Furthermore, when the NextMeeting is over, the NextMeeting will automatically be set to null.
+This happens whenever the changes are made to the client list or when the address book is opened/loaded.
+
+### LastMet
+Similar to NextMeeting, the LastMet is automatically updated from a NextMeeting that is over.
 
 --------------------------------------------------------------------------------------------------------------------
 
