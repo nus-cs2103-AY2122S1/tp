@@ -42,7 +42,7 @@ public class EditCommandParser implements Parser<Command> {
 
         Index index;
 
-        if (argMultimap.getValue(PREFIX_TASK).isPresent()) {
+        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
             return new EditTaskCommandParser().parse(args);
         }
 
