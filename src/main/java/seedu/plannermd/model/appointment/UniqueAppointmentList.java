@@ -152,7 +152,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
      */
     public void deleteAppointmentsWithDoctor(Doctor doctor) {
         for (Appointment appointment : internalList) {
-            if (appointment.getPatient().isSamePerson(doctor)) {
+            if (appointment.getDoctor().isSamePerson(doctor)) {
                 internalList.remove(doctor);
             }
         }
