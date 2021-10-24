@@ -307,6 +307,8 @@
     -fx-padding: 8 1 8 1;
 }
 
+/* Graph */
+
 .axis {
     -fx-font-size: 2.0em;
     -fx-tick-label-fill: white;
@@ -327,9 +329,14 @@
     -fx-background-color: #3e7b91;
 }
 
-.default-color1.chart-series-line { -fx-stroke: transparent; }
+.default-color1.chart-series-line {
+    -fx-stroke: transparent;
+}
 
-.default-color2.chart-series-line { -fx-stroke: transparent; }
+.default-color2.chart-series-line {
+    -fx-stroke: transparent;
+}
+
 
 
 
