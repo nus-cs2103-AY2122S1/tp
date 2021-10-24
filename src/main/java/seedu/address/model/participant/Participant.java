@@ -1,5 +1,6 @@
 package seedu.address.model.participant;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -184,6 +185,25 @@ public class Participant {
      */
     public ArrayList<Event> getEvents() {
         return events;
+    }
+
+    /**
+     * Adds a NextOfKin to the participant.
+     *
+     * @param nextOfKin NextOfKin to be added.
+     */
+    public void addNextOfKin(NextOfKin nextOfKin) {
+        nextOfKins.add(nextOfKin);
+    }
+
+    /** Returns true if the given next of kin is already assigned to this participant.
+     *
+     * @param nextOfKin The given next of kin.
+     * @return True if the nextOfKin is assigned to this participant.
+     */
+    public boolean hasNextOfKin(NextOfKin nextOfKin) {
+        requireNonNull(nextOfKin);
+        return this.nextOfKins.stream().anyMatch(nok -> nok.isSameNextOfKin(nextOfKin));
     }
 
     /**
