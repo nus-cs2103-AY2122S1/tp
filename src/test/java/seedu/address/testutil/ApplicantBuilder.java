@@ -14,13 +14,14 @@ public class ApplicantBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final Position DEFAULT_POSITION = new Position(new Title("software engineer"),
+            new Description("This is a placeholder description"));
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private Position position = new Position(new Title("software engineer"), new Description("This is a "
-            + "placeholder description"));
+    private Position position;
 
     /**
      * Creates a {@code ApplicantBuilder} with the default details.
@@ -40,6 +41,7 @@ public class ApplicantBuilder {
         phone = applicantToCopy.getPhone();
         email = applicantToCopy.getEmail();
         address = applicantToCopy.getAddress();
+        position = applicantToCopy.getApplication().getPosition();
     }
 
     /**
@@ -71,6 +73,14 @@ public class ApplicantBuilder {
      */
     public ApplicantBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Position} of the {@code Applicant} that we are building.
+     */
+    public ApplicantBuilder withPosition(Position position) {
+        this.position = position;
         return this;
     }
 
