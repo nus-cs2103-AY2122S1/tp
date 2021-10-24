@@ -1,8 +1,8 @@
 package seedu.address.model.student;
 
-import java.util.Locale;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.Locale;
 
 /**
  * Represents a Student's classcode in the ClassMATE.

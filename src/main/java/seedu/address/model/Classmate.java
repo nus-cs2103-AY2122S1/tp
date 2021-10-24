@@ -2,15 +2,12 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 import seedu.address.model.tutorialclass.UniqueTutorialClassList;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -22,10 +19,11 @@ import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
  */
 public class Classmate implements ReadOnlyClassmate {
 
+    public static final ClassCode DEFAULT_CLASSCODE = new ClassCode("G00");
+
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
     private final UniqueTutorialGroupList tutorialGroups;
-    public static final ClassCode DEFAULT_CLASSCODE = new ClassCode("G00");
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication

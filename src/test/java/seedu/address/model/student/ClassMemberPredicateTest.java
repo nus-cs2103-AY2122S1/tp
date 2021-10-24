@@ -29,7 +29,7 @@ class ClassMemberPredicateTest {
         assertFalse(predicate.test(new StudentBuilder().withClassCode("G02").build()));
 
         // class code of tutorial class match phone, name and address, but does not match class code of student
-        assertFalse(predicate.test(new StudentBuilder().withName("G01").withPhone("01")
+        assertFalse(predicate.test(new StudentBuilder().withName("G01").withPhone("101")
                 .withAddress("G01").build()));
 
     }

@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Student;
@@ -15,7 +17,6 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialclass.TutorialClass;
 
-import java.util.HashSet;
 
 /**
  * Adds a student to the ClassMATE.
@@ -43,8 +44,8 @@ public class AddStudentCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE";
-    public static final String MESSAGE_CLASS_NOT_EXIST = "The classCode is invalid as the tutorial class " +
-            "has not been created yet.";
+    public static final String MESSAGE_CLASS_NOT_EXIST = "The classCode is invalid as the tutorial class "
+            + "has not been created yet.";
 
     private final Student toAdd;
 
@@ -65,7 +66,8 @@ public class AddStudentCommand extends Command {
         }
 
         // Check tutorial class has been created before the classCode is assigned.
-        TutorialClass toCheckTutorialClass = new TutorialClass(toAdd.getClassCode(), new Schedule("dummy"), new HashSet<Tag>());
+        TutorialClass toCheckTutorialClass = new TutorialClass(toAdd.getClassCode(),
+                new Schedule("dummy"), new HashSet<Tag>());
         if (!model.hasTutorialClass(toCheckTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }

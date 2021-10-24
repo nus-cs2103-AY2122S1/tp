@@ -1,18 +1,20 @@
 package seedu.address.testutil;
 
+import java.util.List;
+
 import seedu.address.model.Classmate;
 import seedu.address.model.student.Student;
 import seedu.address.model.tutorialclass.TutorialClass;
 
-import java.util.List;
 
 /**
  * A utility class containing a list of {@code TutorialClass} objects to be used in tests.
  */
 public class TypicalClassmate {
 
-    private static List<TutorialClass> TYPICAL_TUTORIAL_CLASS_LIST = TypicalTutorialClasses.getTypicalTutorialClasses();
-    private static List<Student> TYPICAL_STUDENT_LIST = TypicalStudents.getTypicalStudents();
+    private static final List<TutorialClass> TYPICAL_TUTORIAL_CLASS_LIST =
+            TypicalTutorialClasses.getTypicalTutorialClasses();
+    private static final List<Student> TYPICAL_STUDENT_LIST = TypicalStudents.getTypicalStudents();
 
     // Prevent instantiation
     private TypicalClassmate() {}
