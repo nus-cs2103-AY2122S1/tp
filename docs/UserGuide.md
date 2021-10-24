@@ -113,7 +113,7 @@ CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook
 data through the commands provided.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/>
+If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/><br/>
 
 :warning: **Warning**: Do not intentionally change the data file in order to restart CSBook afresh with an empty data file. You should use the 
 `clear` command instead if you want to clear all currently stored data.
