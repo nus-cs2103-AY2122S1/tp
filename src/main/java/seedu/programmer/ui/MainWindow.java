@@ -219,7 +219,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleUpload(Model model) {
         File chosenFile = promptUserForCsvFile();
-        List<Student> stuList = getStudentsFromCsv(chosenFile);
+        List<Student> stuList;
+        try {
+            stuList = getStudentsFromCsv(chosenFile);
+        } catch (IllegalArgumentException | IOException e) {
+            displayPopup("Your CSV seems to be invalid. It should only have studentId, classId, name and email!");
+            return;
+        }
+
         if (stuList == null) {
             displayPopup("Incorrect number of columns!");
             return;
@@ -238,23 +245,20 @@ public class MainWindow extends UiPart<Stage> {
         return fileChooser.showOpenDialog(primaryStage);
     }
 
-    private List<Student> getStudentsFromCsv(File chosenFile) {
+    private List<Student> getStudentsFromCsv(File chosenFile) throws IllegalArgumentException, IOException {
         List<Student> stuList = new ArrayList<>();
 
-        try {
-            CSVReader reader = new CSVReader(new FileReader(chosenFile));
-            String[] headers = reader.readNext();
-            if (headers.length != 4) {
-                return null;
-            }
-
-            String [] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                addStudentFromCsvLine(stuList, nextLine);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        CSVReader reader = new CSVReader(new FileReader(chosenFile));
+        String[] headers = reader.readNext();
+        if (headers.length != 4) {
+            return null;
         }
+
+        String [] nextLine;
+        while ((nextLine = reader.readNext()) != null) {
+            addStudentFromCsvLine(stuList, nextLine);
+        }
+
         return stuList;
     }
 
