@@ -92,7 +92,8 @@ public class JsonAddressBookStorageTest {
                     readBack.getClientList().get(i).getName(),
                     readBack.getClientList().get(i).getPhoneNumber(),
                     readBack.getClientList().get(i).getEmail(),
-                    readBack.getClientList().get(i).getAddress()
+                    readBack.getClientList().get(i).getAddress(),
+                    readBack.getClientList().get(i).getOrders()
             ));
         }
         assertEquals(original, compare);
@@ -109,7 +110,8 @@ public class JsonAddressBookStorageTest {
                     readBack.getClientList().get(i).getName(),
                     readBack.getClientList().get(i).getPhoneNumber(),
                     readBack.getClientList().get(i).getEmail(),
-                    readBack.getClientList().get(i).getAddress()
+                    readBack.getClientList().get(i).getAddress(),
+                    readBack.getClientList().get(i).getOrders()
             ));
         }
         assertEquals(original, compare);
@@ -125,7 +127,8 @@ public class JsonAddressBookStorageTest {
                     readBack.getClientList().get(i).getName(),
                     readBack.getClientList().get(i).getPhoneNumber(),
                     readBack.getClientList().get(i).getEmail(),
-                    readBack.getClientList().get(i).getAddress()
+                    readBack.getClientList().get(i).getAddress(),
+                    readBack.getClientList().get(i).getOrders()
             ));
         }
         assertEquals(original, compare);

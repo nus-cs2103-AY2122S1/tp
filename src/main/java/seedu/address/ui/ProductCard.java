@@ -50,12 +50,6 @@ public class ProductCard extends UiPart<Region> {
         if (product.getUnitPrice() != null) {
             unitPrice.setText("Price: $" + product.getUnitPrice().value);
         }
-//        if (product.getQuantity() != null) {
-//            quantity.setText("Quantity: " + product.getQuantity().quantity);
-//        }
-        //        person.getTags().stream()
-        //                .sorted(Comparator.comparing(tag -> tag.tagName))
-        //                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

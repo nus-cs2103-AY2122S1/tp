@@ -43,11 +43,12 @@ public class EditProductCommandTest {
         EditProductCommand editProductCommand = new EditProductCommand(INDEX_FIRST_PRODUCT, descriptor);
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setProduct(productToEdit, editedProduct);
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -68,11 +69,12 @@ public class EditProductCommandTest {
         EditProductCommand editProductCommand = new EditProductCommand(indexLastProduct, descriptor);
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setProduct(lastProduct, editedProduct);
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -82,10 +84,11 @@ public class EditProductCommandTest {
         Product editedProduct = model.getFilteredProductList().get(INDEX_FIRST_PRODUCT.getZeroBased());
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test
@@ -98,11 +101,12 @@ public class EditProductCommandTest {
                 new EditProductDescriptorBuilder().withName(VALID_NAME_DAISY).build());
 
         String expectedMessage = String.format(EditProductCommand.MESSAGE_EDIT_PRODUCT_SUCCESS, editedProduct);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandType.EDIT, null, false);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setProduct(model.getFilteredProductList().get(0), editedProduct);
 
-        assertCommandSuccess(editProductCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(editProductCommand, model, expectedCommandResult, expectedModel);
     }
 
     /*

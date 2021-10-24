@@ -13,25 +13,24 @@ public class CommandResult {
 
     private final String feedbackToUser;
 
-    /** Help information should be shown to the user. */
-    private final boolean showHelp;
-
-    /** The application should exit. */
-    private final boolean exit;
-
-    private final boolean viewMore;
+    private final CommandType commandType;
 
     private final Category info;
+
+    private boolean isClientCommand;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean viewMore, Category info) {
+    public CommandResult(String feedbackToUser, CommandType commandType, Category info, boolean isClientCommand) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = showHelp;
-        this.exit = exit;
-        this.viewMore = viewMore;
+        this.commandType = commandType;
         this.info = info;
+        this.isClientCommand = isClientCommand;
+    }
+
+    public CommandResult(String feedbackToUser, CommandType commandType) {
+        this(feedbackToUser, commandType, null, false);
     }
 
     /**
@@ -39,7 +38,7 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false, null);
+        this(feedbackToUser, null, null, false);
     }
 
     public String getFeedbackToUser() {
@@ -50,16 +49,12 @@ public class CommandResult {
         return info;
     }
 
-    public boolean isShowHelp() {
-        return showHelp;
+    public CommandType getCommandType() {
+        return commandType;
     }
 
-    public boolean isExit() {
-        return exit;
-    }
-
-    public boolean isViewMore() {
-        return viewMore;
+    public boolean getIsClientCommand() {
+        return isClientCommand;
     }
 
     @Override
@@ -75,13 +70,13 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+                && commandType == otherCommandResult.commandType
+                && info == otherCommandResult.info;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit, viewMore, info);
+        return Objects.hash(feedbackToUser, commandType, info);
     }
 
 }

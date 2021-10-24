@@ -30,9 +30,9 @@ public class ViewClientCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Client client1 = new Client(new Name("Test1"), new PhoneNumber("1"), null, null);
-        Client client2 = new Client(new Name("Test2"), new PhoneNumber("2"), null, null);
-        Client client3 = new Client(new Name("Test3"), new PhoneNumber("3"), null, null);
+        Client client1 = new Client(new Name("Test1"), new PhoneNumber("1"), null, null, null);
+        Client client2 = new Client(new Name("Test2"), new PhoneNumber("2"), null, null, null);
+        Client client3 = new Client(new Name("Test3"), new PhoneNumber("3"), null, null, null);
         model.addClient(client1);
         model.addClient(client2);
         model.addClient(client3);

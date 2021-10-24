@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ORDER_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_NUMBER_BOB;
 
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,10 @@ public class EditClientDescriptorTest {
 
         // different address -> returns false
         editedAmy = new EditClientDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        assertFalse(DESC_AMY.equals(editedAmy));
+
+        // different order -> returns false
+        editedAmy = new EditClientDescriptorBuilder(DESC_AMY).withOrders(VALID_ORDER_TWO).build();
         assertFalse(DESC_AMY.equals(editedAmy));
     }
 }

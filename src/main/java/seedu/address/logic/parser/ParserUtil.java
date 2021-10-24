@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,13 +13,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
 import seedu.address.model.client.Address;
 import seedu.address.model.client.Email;
 import seedu.address.model.client.PhoneNumber;
+import seedu.address.model.commons.ID;
 import seedu.address.model.commons.Name;
+import seedu.address.model.order.Order;
 import seedu.address.model.product.Quantity;
 import seedu.address.model.product.UnitPrice;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -68,6 +74,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String email} into an {@code Email}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code email} is invalid.
+     */
+    public static Email parseEmail(String email) throws ParseException {
+        requireNonNull(email);
+        String trimmedEmail = email.trim();
+        if (!Email.isValidEmail(trimmedEmail)) {
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+        }
+        return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static Address parseAddress(String address) throws ParseException {
+        requireNonNull(address);
+        String trimmedAddress = address.trim();
+        if (!Address.isValidAddress(trimmedAddress)) {
+            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+        }
+        return new Address(trimmedAddress);
+    }
+
+    /**
      * Parses a {@code String unitPrice} into a {@code UnitPrice}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -99,75 +135,62 @@ public class ParserUtil {
         return new Quantity(trimmedQuantity);
     }
 
-//    /**
-//     * Parses a {@code String phone} into a {@code Phone}.
-//     * Leading and trailing whitespaces will be trimmed.
-//     *
-//     * @throws ParseException if the given {@code phone} is invalid.
-//     */
-//    public static Phone parsePhone(String phone) throws ParseException {
-//        requireNonNull(phone);
-//        String trimmedPhone = phone.trim();
-//        if (!Phone.isValidPhone(trimmedPhone)) {
-//            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
-//        }
-//        return new Phone(trimmedPhone);
-//    }
-
     /**
-     * Parses a {@code String address} into an {@code Address}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code address} is invalid.
+     * Parses {@code Collection<String> orders} into a {@code Set<Order>}.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Set<Order> parseOrders(Collection<String> orders, Model model) throws ParseException {
+        requireNonNull(orders);
+        final Set<Order> orderSet = new HashSet<>();
+        for (String order : orders) {
+            orderSet.add(parseOrder(order, model));
         }
-        return new Address(trimmedAddress);
+        return orderSet;
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String order} into a {@code Order}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code order} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static Order parseOrder(String order, Model model) throws ParseException {
+        requireNonNull(order);
+
+        String trimmedOrder = order.trim();
+        if (!trimmedOrder.matches(Order.REGEX)) {
+            throw new ParseException(Order.MESSAGE_CONSTRAINTS);
         }
-        return new Email(trimmedEmail);
+
+        String[] args = trimmedOrder.split(" ");
+        ID productId = new ID(args[0]);
+        Quantity quantity = new Quantity(args[1]);
+        LocalDate time = getDate(args[2]);
+
+        Order orderToAdd;
+        try {
+            orderToAdd = new Order(productId, quantity, time, model);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+
+        return orderToAdd;
     }
 
-    /**
-     * Parses a {@code String tag} into a {@code Tag}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code tag} is invalid.
-     */
-    public static Tag parseTag(String tag) throws ParseException {
-        requireNonNull(tag);
-        String trimmedTag = tag.trim();
-        if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+    private static LocalDate getDate(String timeStr) throws ParseException {
+        if (timeStr.length() <= 5) {
+            int year = Calendar.getInstance().get(Calendar.YEAR);
+            timeStr = String.format("%d/%s", year, timeStr);
         }
-        return new Tag(trimmedTag);
-    }
 
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
-     */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
-        final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/M/d");
+        LocalDate time;
+
+        try {
+            time = LocalDate.parse(timeStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(Order.MESSAGE_CONSTRAINTS);
         }
-        return tagSet;
+
+        return time;
     }
 }

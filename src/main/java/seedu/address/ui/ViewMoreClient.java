@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import seedu.address.model.client.Client;
+import seedu.address.model.order.Order;
 
 /**
  * Second panel containing the details of client/product.
@@ -26,6 +27,9 @@ public class ViewMoreClient extends UiPart<Region> implements SecondPanel {
     @FXML
     private Label address;
 
+    @FXML
+    private Label orders;
+
     /**
      * Constructor for the ViewMore
      */
@@ -37,8 +41,19 @@ public class ViewMoreClient extends UiPart<Region> implements SecondPanel {
         id.setText("ID: " + client.getId().toString());
         name.setText("Name: " + client.getName().toString());
         phoneNumber.setText("Phone Number: " + client.getPhoneNumber().toString());
-        email.setText("Email: " + client.getEmail().toString());
-        address.setText("Address: " + client.getAddress().toString());
+        if (client.getEmail() != null) {
+            email.setText("Email: " + client.getEmail().toString());
+        }
+        if (client.getAddress() != null) {
+            address.setText("Address: " + client.getAddress().toString());
+        }
+        if (!client.getOrders().isEmpty()) {
+            String orderString = "";
+            for (Order order : client.getOrders()) {
+                orderString += order.toString() + "\n";
+            }
+            orders.setText("Orders: " + orderString);
+        }
     }
 
 

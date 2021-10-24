@@ -5,17 +5,31 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE_NUMBER;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditClientCommand;
 import seedu.address.logic.commands.EditClientCommand.EditClientDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.order.Order;
 
 /**
  * Parses input arguments and creates a new EditClientCommand object
  */
 public class EditClientCommandParser implements Parser<EditClientCommand> {
+    private Model model;
+
+    public EditClientCommandParser(Model model) {
+        this.model = model;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the EditClientCommand
      * and returns an EditClientCommand object for execution.
@@ -24,8 +38,8 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
      */
     public EditClientCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE_NUMBER, PREFIX_EMAIL,
-                PREFIX_ADDRESS);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE_NUMBER,
+                PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_ORDER);
 
         Index index;
         try {
@@ -53,10 +67,28 @@ public class EditClientCommandParser implements Parser<EditClientCommand> {
             editClientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
 
+        parseOrdersForEdit(argMultimap.getAllValues(PREFIX_ORDER), model).ifPresent(editClientDescriptor::setOrders);
+
         if (!editClientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditClientCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditClientCommand(index, editClientDescriptor);
+    }
+
+    /**
+     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
+     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Tag>} containing zero tags.
+     */
+    private Optional<Set<Order>> parseOrdersForEdit(Collection<String> orders, Model model) throws ParseException {
+        assert orders != null;
+
+        if (orders.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Collection<String> orderSet = orders.size() == 1 && orders.contains("") ? Collections.emptySet() : orders;
+        return Optional.of(ParserUtil.parseOrders(orderSet, model));
     }
 }

@@ -51,7 +51,8 @@ public class AddProductCommand extends Command {
         }
 
         model.addProduct(productToAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, productToAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, productToAdd),
+                CommandType.ADD, null, false);
     }
 
     /**

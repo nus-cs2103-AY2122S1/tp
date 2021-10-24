@@ -34,7 +34,9 @@ public class ViewMoreProduct extends UiPart<Region> implements SecondPanel {
         id.setText("ID: " + product.getId().toString());
         name.setText("Name: " + product.getName().toString());
         unitPrice.setText("Unit Price: " + product.getUnitPrice().toString());
-        quantity.setText("Quantity: " + product.getQuantity().toString());
+        if (product.getQuantity() != null) {
+            quantity.setText("Quantity: " + product.getQuantity().toString());
+        }
     }
 
 

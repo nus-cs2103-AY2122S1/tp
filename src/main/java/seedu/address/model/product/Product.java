@@ -3,6 +3,7 @@ package seedu.address.model.product;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 import seedu.address.model.Category;
 import seedu.address.model.commons.ID;
@@ -22,7 +23,7 @@ public class Product implements Category {
     private final Quantity quantity;
 
     public Product(Name name, UnitPrice unitPrice, Quantity quantity) {
-        this(new ID(), name, unitPrice, quantity);
+        this(ID.getNewProductID(), name, unitPrice, quantity);
     }
 
     private Product(ID id, Name name, UnitPrice unitPrice, Quantity quantity) {
@@ -32,6 +33,8 @@ public class Product implements Category {
         this.name = name;
         this.unitPrice = unitPrice;
         this.quantity = quantity;
+        Logger logger = Logger.getLogger("create product object");
+        logger.info("new product created");
     }
 
     public ID getId() {
@@ -71,6 +74,20 @@ public class Product implements Category {
     }
 
     /**
+     * Checks if this product has enough stock.
+     *
+     * @param quantity Amount required.
+     * @return true if this quantity <= product.quantity; false otherwise.
+     */
+    public boolean hasEnoughStock(Quantity quantity) {
+        if (this.quantity == null) {
+            return false;
+        }
+
+        return quantity.lessThan(this.quantity) || quantity.equals(this.quantity);
+    }
+
+    /**
      * Returns true if both products have the same id.
      * This defines a weaker notion of equality between two products.
      *
@@ -102,9 +119,9 @@ public class Product implements Category {
 
         Product otherProduct = (Product) other;
         return id.equals(otherProduct.id)
-                       && name.equals(otherProduct.name)
-                       && unitPrice.equals(otherProduct.unitPrice)
-                       && quantity.equals(otherProduct.quantity);
+                && name.equals(otherProduct.name)
+                && unitPrice.equals(otherProduct.unitPrice)
+                && quantity.equals(otherProduct.quantity);
     }
 
     @Override
@@ -116,12 +133,9 @@ public class Product implements Category {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("ID: ")
-                .append(id)
-                .append("; Name: ")
-                .append(name)
-                .append("; Unit Price: ")
-                .append(unitPrice);
+        builder.append("ID: ").append(id)
+                .append("; Name: ").append(name)
+                .append("; Unit Price: ").append(unitPrice);
 
         if (quantity != null) {
             builder.append("; Quantity: ").append(quantity);

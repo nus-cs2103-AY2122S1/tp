@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.client.Client;
+import seedu.address.model.commons.ID;
 import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
@@ -100,6 +101,11 @@ public interface Model {
     boolean hasProduct(Product product);
 
     /**
+     * Returns true if a product has the identity {@code productId} exists in the address book.
+     */
+    boolean hasProduct(ID productId);
+
+    /**
      * Deletes the given product.
      * The product must exist in the address book.
      */
@@ -118,6 +124,11 @@ public interface Model {
      * book.
      */
     void setProduct(Product target, Product editedProduct);
+
+    /**
+     * Given {@code productId} of a product, returns the product.
+     */
+    Product getProductById(ID productId);
 
     /** Returns an unmodifiable view of the filtered product list */
     ObservableList<Product> getFilteredProductList();
