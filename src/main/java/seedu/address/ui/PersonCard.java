@@ -125,8 +125,34 @@ public class PersonCard extends UiPart<Region> {
         } else {
             person.getTags().stream()
                     .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                    .forEach(tag -> tags.getChildren().add(createTagLabel(tag.tagName)));
         }
+        setAllLabelsMaxWidth();
+    }
+
+    private Label createTagLabel(String tag) {
+        Label label = new Label(tag);
+        label.setWrapText(true);
+        setLabelMaxWidth(label);
+        return label;
+    }
+
+    private void setLabelMaxWidth(Label label) {
+        label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.7));
+    }
+
+    private void setAllLabelsMaxWidth() {
+        setLabelMaxWidth(name);
+        setLabelMaxWidth(phone);
+        setLabelMaxWidth(email);
+        setLabelMaxWidth(parentPhone);
+        setLabelMaxWidth(parentEmail);
+        setLabelMaxWidth(address);
+        setLabelMaxWidth(outstandingFee);
+        setLabelMaxWidth(school);
+        setLabelMaxWidth(acadStream);
+        setLabelMaxWidth(acadLevel);
+        setLabelMaxWidth(remark);
     }
 
     @Override

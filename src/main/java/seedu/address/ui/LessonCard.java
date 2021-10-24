@@ -44,11 +44,12 @@ public class LessonCard extends UiPart<Region> {
         lesson.getHomework().stream()
             .sorted(Comparator.comparing(homework -> homework.description))
             .forEach(homework -> homeworkList.getChildren()
-                .add(homeworkLabel(homework.toString())));
+                .add(createHomeworkLabel(homework.toString())));
         title.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.75));
+        rates.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.75));
     }
 
-    private Label homeworkLabel(String homework) {
+    private Label createHomeworkLabel(String homework) {
         Label label = new Label(homework);
         label.setWrapText(true);
         label.maxWidthProperty().bind(getRoot().widthProperty().multiply(0.7));

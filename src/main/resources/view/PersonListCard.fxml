@@ -25,19 +25,19 @@
             <Region fx:constant="USE_PREF_SIZE" />
           </minWidth>
         </Label>
-        <Label fx:id="name" text="\$first" styleClass="cell_big_label" maxWidth="130" wrapText="true"/>
+        <Label fx:id="name" text="\$first" styleClass="cell_big_label" wrapText="true"/>
       </HBox>
       <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" maxWidth="130" wrapText="true"/>
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" maxWidth="130" wrapText="true"/>
-      <Label fx:id="parentPhone" styleClass="cell_small_label" text="\$parentPhone" maxWidth="130" wrapText="true"/>
-      <Label fx:id="parentEmail" styleClass="cell_small_label" text="\$parentEmail" maxWidth="130" wrapText="true"/>
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" maxWidth="130" wrapText="true"/>
-      <Label fx:id="school" styleClass="cell_small_label" text="\$school" maxWidth="130" wrapText="true"/>
-      <Label fx:id="acadStream" styleClass="cell_small_label" text="\$acadStream" maxWidth="130" wrapText="true"/>
-      <Label fx:id="acadLevel" styleClass="cell_small_label" text="\$acadLevel" maxWidth="130" wrapText="true"/>
-      <Label fx:id="outstandingFee" styleClass="cell_small_label" text="\$outstandingFee" maxWidth="130" wrapText="true"/>
-      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" maxWidth="130" wrapText="true"/>
+      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" wrapText="true"/>
+      <Label fx:id="email" styleClass="cell_small_label" text="\$email" wrapText="true"/>
+      <Label fx:id="parentPhone" styleClass="cell_small_label" text="\$parentPhone" wrapText="true"/>
+      <Label fx:id="parentEmail" styleClass="cell_small_label" text="\$parentEmail" wrapText="true"/>
+      <Label fx:id="address" styleClass="cell_small_label" text="\$address" wrapText="true"/>
+      <Label fx:id="school" styleClass="cell_small_label" text="\$school" wrapText="true"/>
+      <Label fx:id="acadStream" styleClass="cell_small_label" text="\$acadStream" wrapText="true"/>
+      <Label fx:id="acadLevel" styleClass="cell_small_label" text="\$acadLevel" wrapText="true"/>
+      <Label fx:id="outstandingFee" styleClass="cell_small_label" text="\$outstandingFee" wrapText="true"/>
+      <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" wrapText="true"/>
     </VBox>
   </GridPane>
 </HBox>
