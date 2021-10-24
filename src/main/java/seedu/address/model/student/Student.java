@@ -21,16 +21,17 @@ public class Student {
 
     // Data fields
     private ObservableList<Assessment> assessments = FXCollections.observableArrayList();
-    private final Note note = new Note();
+    private final Note note;
     private final GroupName groupName;
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, TelegramHandle telegramHandle, Email email, GroupName groupName) {
+    public Student(Name name, TelegramHandle telegramHandle, Email email, Note note, GroupName groupName) {
         requireAllNonNull(name, telegramHandle, email, groupName);
         this.name = name;
         this.telegramHandle = telegramHandle;
+        this.note = note;
         this.email = email;
         this.groupName = groupName;
     }

@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
@@ -96,13 +97,14 @@ public class EditCommand extends Command {
         TelegramHandle updatedTelegramHandle = editStudentDescriptor.getTelegramHandle()
             .orElse(studentToEdit.getTelegramHandle());
         Email updatedEmail = editStudentDescriptor.getEmail().orElse(studentToEdit.getEmail());
+        Note note = studentToEdit.getNote(); // we don't allow editing of notes from EditCommand;
         GroupName updatedGroupName = editStudentDescriptor.getGroupName().orElse(studentToEdit.getGroupName());
 
         if (!model.hasGroup(updatedGroupName)) {
             throw new CommandException(MESSAGE_GROUP_NONEXISTENT);
         }
 
-        return new Student(updatedName, updatedTelegramHandle, updatedEmail, updatedGroupName);
+        return new Student(updatedName, updatedTelegramHandle, updatedEmail, note, updatedGroupName);
     }
 
     @Override

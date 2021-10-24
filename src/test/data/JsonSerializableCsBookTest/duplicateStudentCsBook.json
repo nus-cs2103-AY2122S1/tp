@@ -3,11 +3,13 @@
     "name": "Alice Pauline",
     "telegramHandle": "@alice_pauline",
     "email": "alice@example.com",
+    "note": "",
     "groupName": "CS2103T"
   }, {
     "name": "Alice Pauline",
     "telegramHandle": "@alice_pauline",
     "email": "pauline@example.com",
+    "note": "",
     "groupName": "CS2103T"
   } ],
   "groups" : [ {

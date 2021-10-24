@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.TelegramHandle;
 
@@ -14,12 +15,13 @@ public class StudentBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_TELEGRAM_HANDLE = "@amy_bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
+    public static final String DEFAULT_NOTE = "Weak in environment model.";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
-    public static final String DEFAULT_DESCRIPTION = "software eng mod";
 
     private Name name;
     private TelegramHandle telegramHandle;
     private Email email;
+    private Note note;
     private GroupName groupName;
 
     /**
@@ -29,6 +31,7 @@ public class StudentBuilder {
         name = new Name(DEFAULT_NAME);
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
+        note = new Note(DEFAULT_NOTE);
         groupName = new GroupName(DEFAULT_GROUP_NAME);
     }
 
@@ -39,6 +42,7 @@ public class StudentBuilder {
         name = studentToCopy.getName();
         telegramHandle = studentToCopy.getTelegramHandle();
         email = studentToCopy.getEmail();
+        note = studentToCopy.getNote();
         groupName = studentToCopy.getGroupName();
     }
 
@@ -67,6 +71,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Sets the {@code Note} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withNote(String note) {
+        this.note = new Note(note);
+        return this;
+    }
+
+    /**
      * Sets the {@code GroupName} of the {@code Student} that we are building.
      */
     public StudentBuilder withGroupName(String groupName) {
@@ -87,7 +99,7 @@ public class StudentBuilder {
      * @return built student
      */
     public Student build() {
-        return new Student(name, telegramHandle, email, groupName);
+        return new Student(name, telegramHandle, email, note, groupName);
     }
 
 }

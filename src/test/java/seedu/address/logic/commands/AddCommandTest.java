@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Note;
 import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -141,6 +142,11 @@ public class AddCommandTest {
 
         @Override
         public void changeStudentGroup(Student student, Group newGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateStudentNote(Student student, Note note) {
             throw new AssertionError("This method should not be called.");
         }
 

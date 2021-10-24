@@ -25,10 +25,10 @@ import seedu.address.model.student.Student;
 public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@example.com")
-            .withTelegramHandle("@alice_pauline")
+            .withTelegramHandle("@alice_pauline").withNote("Is a cs god.")
             .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withEmail("johnd@example.com")
-            .withTelegramHandle("@benson_meier")
+            .withTelegramHandle("@benson_meier").withNote("He is bad at UML diagrams")
             .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
             .withTelegramHandle("@carl_kurz")
