@@ -19,7 +19,6 @@ public class SummaryTest {
 
     @Test
     public void setStatistics_null_throwsNullPointerException() {
-        // null address book
         assertThrows(NullPointerException.class, () -> new Summary(null));
     }
 
@@ -53,7 +52,6 @@ public class SummaryTest {
                 .withPerson(personWithLastVisitPastThirtyDays).build();
         Summary summary = new Summary(addressBook);
 
-        // valid address book with included statistics
         assertEquals(summary.getTotalElderly(), addressBook.getPersonList().size());
         assertEquals(1, summary.getOverdueVisits());
         assertEquals(1, summary.getVisitsLastWeek());
@@ -75,7 +73,6 @@ public class SummaryTest {
                 .withPerson(personWithLastVisitBeforeThirtyDays).build();
         Summary summary = new Summary(addressBook);
 
-        // valid address book with excluded statistics
         assertEquals(summary.getTotalElderly(), addressBook.getPersonList().size());
         assertEquals(0, summary.getOverdueVisits());
         assertEquals(0, summary.getVisitsLastWeek());
