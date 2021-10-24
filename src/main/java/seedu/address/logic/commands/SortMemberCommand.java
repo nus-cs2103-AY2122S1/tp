@@ -33,7 +33,7 @@ public class SortMemberCommand extends Command {
         requireNonNull(model);
         model.sortMemberList(sortOrder);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, sortOrder.toString()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, sortOrder));
     }
 
     @Override

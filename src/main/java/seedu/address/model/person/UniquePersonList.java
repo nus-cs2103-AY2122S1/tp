@@ -158,8 +158,14 @@ public class UniquePersonList implements Iterable<Person> {
      * Sorts the member list in alphabetical order.
      */
     public void sortMembersByName() {
-        Comparator<Person> personNameComparator = new PersonNameComparator();
-        Collections.sort(internalList, personNameComparator);
+        Collections.sort(internalList, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                String name1 = o1.getName().toString();
+                String name2 = o2.getName().toString();
+                return name1.compareToIgnoreCase(name2);
+            }
+        });
     }
 
     /**
