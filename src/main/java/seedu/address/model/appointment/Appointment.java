@@ -11,11 +11,11 @@ import java.time.format.DateTimeParseException;
  * Represents a scheduled appointment with an individual.
  * If appointment does not exist, appointment field is null.
  */
-public class Appointment {
+public class Appointment implements Comparable<Appointment> {
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting should be in the following format: dd-MMM-yyyy HH:mm "
                     + "where only first alphabet of the month is capitalised.";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
 
     private final LocalDateTime appointmentTime;
@@ -50,6 +50,17 @@ public class Appointment {
                 || (other instanceof Appointment // instanceof handles nulls
                     && (appointmentTime == null && ((Appointment) other).appointmentTime == null // both no apptmt
                         || appointmentTime.equals(((Appointment) other).appointmentTime))); // state check
+    }
+
+    /**
+     * Compares this appointment to another appointment based on the time
+     *
+     * @param other the other appointment to compare to
+     * @return negative is this appointment is earlier, positive if it is later and 0 if they are at the same time.
+     */
+    @Override
+    public int compareTo(Appointment other) {
+        return this.appointmentTime.compareTo(other.appointmentTime);
     }
 
     /**
@@ -88,4 +99,13 @@ public class Appointment {
         return this.appointmentTime.format(FORMATTER);
     }
 
+    /**
+     * Returns true if the date and time contained in this appointment is happening in the future.
+     */
+    public boolean isUpcoming() {
+        if (appointmentTime == null) {
+            return false;
+        }
+        return this.appointmentTime.compareTo(LocalDateTime.now()) > 0;
+    }
 }
