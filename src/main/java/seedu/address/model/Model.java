@@ -109,6 +109,11 @@ public interface Model {
     void addTutorialGroup(TutorialGroup tutorialGroup);
 
     /**
+     * Sorts the tutorial groups.
+     */
+    void sortTutorialGroups();
+
+    /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the ClassMATE.
      * The student identity of {@code editedStudent} must not be the same as another existing student in ClassMATE.

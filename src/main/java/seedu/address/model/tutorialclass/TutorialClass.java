@@ -31,6 +31,15 @@ public class TutorialClass {
         this.tags.addAll(tags);
     }
 
+    /**
+     * Creates a dummy tutorial class for checking.
+     * @param classCode ClassCode of TutorialClass for checking.
+     * @return The TutorialClass with a ClassCode.
+     */
+    public static TutorialClass createTestTutorialClass(ClassCode classCode) {
+        return new TutorialClass(classCode, new Schedule("dummy"), new HashSet<Tag>());
+    }
+
     public ClassCode getClassCode() {
         return classCode;
     }

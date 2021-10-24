@@ -1,9 +1,10 @@
 package seedu.address.model.tutorialgroup;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class GroupType {
+public class GroupType implements Comparable<GroupType> {
 
     public static final String MESSAGE_CONSTRAINTS = "GroupType can only either be OP1 or OP2";
 
@@ -42,4 +43,16 @@ public class GroupType {
     public int hashCode() {
         return value.hashCode();
     }
+
+    @Override
+    public int compareTo(GroupType groupType) {
+        if (parseInt(this.value.substring(2)) > parseInt(groupType.value.substring(2))) {
+            return 1;
+        } else if (parseInt(this.value.substring(2)) < parseInt(groupType.value.substring(2))) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+
 }

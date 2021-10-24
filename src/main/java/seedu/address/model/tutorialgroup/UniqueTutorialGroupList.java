@@ -4,8 +4,10 @@ package seedu.address.model.tutorialgroup;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,6 +39,18 @@ public class UniqueTutorialGroupList implements Iterable<TutorialGroup> {
             throw new DuplicateTutorialGroupException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Adds a tutorial class to the list.
+     * The tutorial class must not already exist in the list.
+     */
+    public void sort() {
+        Comparator<TutorialGroup> compareByName = Comparator
+                .comparing(TutorialGroup::getClassCode)
+                .thenComparing(TutorialGroup::getGroupType)
+                .thenComparing(TutorialGroup::getGroupName);
+        internalList.sort(compareByName);
     }
 
     /**

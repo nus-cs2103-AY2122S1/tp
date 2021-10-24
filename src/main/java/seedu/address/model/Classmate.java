@@ -64,6 +64,14 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
+     * Replaces the contents of the tutorial class list with {@code tutorialClasses}.
+     * {@code tutorialClasses} must not contain duplicate students.
+     */
+    public void setTutorialGroups(List<TutorialGroup> tutorialGroups) {
+        this.tutorialGroups.setTutorialGroups(tutorialGroups);
+    }
+
+    /**
      * Resets the existing data of this {@code Classmate} with {@code newData}.
      */
     public void resetData(ReadOnlyClassmate newData) {
@@ -71,6 +79,7 @@ public class Classmate implements ReadOnlyClassmate {
 
         setStudents(newData.getStudentList());
         setTutorialClasses(newData.getTutorialClassList());
+        setTutorialGroups(newData.getTutorialGroupList());
     }
 
     //// student-level operations
@@ -162,6 +171,13 @@ public class Classmate implements ReadOnlyClassmate {
      */
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
         tutorialGroups.add(tutorialGroup);
+    }
+
+    /**
+     * Sorts the tutorial groups in ClassMATE.
+     */
+    public void sortTutorialGroups() {
+        tutorialGroups.sort();
     }
 
     /**

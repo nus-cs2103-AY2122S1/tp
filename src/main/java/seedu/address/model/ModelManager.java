@@ -136,13 +136,16 @@ public class ModelManager implements Model {
     @Override
     public void addTutorialClass(TutorialClass tutorialClass) {
         classmate.addTutorialClass(tutorialClass);
-
     }
 
     @Override
     public void addTutorialGroup(TutorialGroup tutorialGroup) {
         classmate.addTutorialGroup(tutorialGroup);
+    }
 
+    @Override
+    public void sortTutorialGroups() {
+        classmate.sortTutorialGroups();
     }
 
     @Override

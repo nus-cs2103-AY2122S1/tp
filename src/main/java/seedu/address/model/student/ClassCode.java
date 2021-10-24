@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -7,7 +8,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable.
  */
 
-public class ClassCode {
+public class ClassCode implements Comparable<ClassCode> {
 
     public static final String MESSAGE_CONSTRAINTS = "ClassCode can take any values, and it should not be blank";
 
@@ -42,4 +43,14 @@ public class ClassCode {
         return value.hashCode();
     }
 
+    @Override
+    public int compareTo(ClassCode classCode) {
+        if (parseInt(this.value.substring(1)) > parseInt(classCode.value.substring(1))) {
+            return 1;
+        } else if (parseInt(this.value.substring(1)) < parseInt(classCode.value.substring(1))) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
 }

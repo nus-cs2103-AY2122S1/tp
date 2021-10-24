@@ -133,6 +133,9 @@ public class ParserUtil {
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
         String trimmedGroupName = groupName.trim();
+        if (!GroupName.isValidGroupName(groupName)) {
+            throw new ParseException(GroupName.MESSAGE_CONSTRAINTS);
+        }
         return new GroupName(trimmedGroupName);
     }
 
