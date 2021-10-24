@@ -200,7 +200,7 @@ Examples:
 Shows the total orders for each person in the application. 
 
 <div markdown="block" class="alert alert-info">
-The total orders displayed are based on the persons.
+:information_source: The total orders displayed are based on the persons.
 If the customer of an order cannot be found among the persons of the application, the order will not be shown.
 </div>
 
