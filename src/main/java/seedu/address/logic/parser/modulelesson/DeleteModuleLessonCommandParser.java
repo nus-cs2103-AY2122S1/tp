@@ -59,6 +59,7 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
         if (!moduleCode.getLessonCodes().isEmpty()) {
             throw new ParseException(DeleteModuleLessonCommand.MESSAGE_USAGE);
         }
+        System.out.println(listOfModuleCode.get(0));
         return new DeleteModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(listOfModuleCode.get(0)));
     }
 }

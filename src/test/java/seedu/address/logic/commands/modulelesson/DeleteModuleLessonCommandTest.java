@@ -2,6 +2,7 @@ package seedu.address.logic.commands.modulelesson;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE_CS2106;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -13,9 +14,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.person.DeletePersonCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
 
 public class DeleteModuleLessonCommandTest {
@@ -54,6 +57,20 @@ public class DeleteModuleLessonCommandTest {
     }
 
     @Test
+    public void execute_validModuleCodeUnfilteredList_success() {
+        ModuleCodeContainsKeywordsPredicate predicate =
+                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2106);
+        ModuleLesson lessonToDelete = model.getFilteredModuleLessonList().get(INDEX_THIRD.getZeroBased());
+        DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(predicate);
+
+        String expectedMessage = String.format(DeleteModuleLessonCommand.MESSAGE_NUMBER_DELETED_LESSONS, 1)
+                + String.format(DeleteModuleLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
+
+        expectedModel.deleteLesson(lessonToDelete);
+        assertCommandSuccess(deleteModuleLessonCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleLessonList().size() + 1);
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(outOfBoundIndex);
@@ -75,6 +92,14 @@ public class DeleteModuleLessonCommandTest {
                 new DeleteModuleLessonCommand(INDEX_SECOND, outOfBoundIndex);
 
         assertCommandFailure(deleteModuleLessonCommand, model, Messages.MESSAGE_INVALID_RANGE);
+    }
+
+    @Test
+    public void execute_invalidModuleCodeUnfilteredList_throwsCommandException() {
+        ModuleCodeContainsKeywordsPredicate predicate = new ModuleCodeContainsKeywordsPredicate("CS2030S");
+        DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(predicate);
+
+        assertCommandFailure(deleteModuleLessonCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
     }
 
     @Test

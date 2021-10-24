@@ -88,7 +88,7 @@ public class DeleteModuleLessonCommand extends Command {
                 || endIndex.getZeroBased() >= sizeOfModuleLessonList) {
             throw new CommandException(Messages.MESSAGE_INVALID_RANGE);
         } else {
-            successMessage = deleteAll(model);
+            successMessage = deleteAll(model, targetIndex.getZeroBased(), endIndex.getZeroBased());
         }
         return new CommandResult(successMessage);
     }
@@ -98,12 +98,10 @@ public class DeleteModuleLessonCommand extends Command {
             model.updateFilteredModuleLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
             throw new CommandException(DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
         }
-        return deleteAll(model);
+        return deleteAll(model, 0, model.getFilteredModuleLessonList().size() - 1);
     }
 
-    private String deleteAll(Model model) {
-        int first = targetIndex.getZeroBased();
-        int last = endIndex.getZeroBased();
+    private String deleteAll(Model model, int first, int last) {
         int deletedPersons = last - first + 1;
         StringBuilder successMessage = new StringBuilder();
         while (first <= last) {
