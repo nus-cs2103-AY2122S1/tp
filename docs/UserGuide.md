@@ -22,23 +22,57 @@ Interested to know more? Take a look at our Quick Start guide. Enjoy!
 
 Welcome to the Uni-Fy User Guide!
 
-If you are new to Uni-Fy, this user guide will get you up and running in no time! It equips you with the basic 
-knowledge you need to use Uni-Fy properly. 
+The aim of this document is to help new users like you, to get started with **Uni-Fy** in no time.
+This includes providing you with all the basic knowledge you need to use Uni-Fy properly, in a simple and concise format.
+This guide will introduce all **Uni-Fy** features, command syntax, interpretations and provide you with specific examples.
+
+### 2.1. Navigation
+
+To help facilitate the navigation within this document, we have included numbers for each header.
+The headers will also be linked to their respective content through the table of contents or when they are referenced in this guide.
+
+Additionally, here are the relevant places you can go to if you would like to seek clarification on more specific parts:
+* If you would like to get started on using **Uni-Fy**, head over to [4. Getting started](#4-getting-started).
+* If you would like to view the features available for **Uni-Fy**, head over to [5. Features](#5-features).
+* If you would like a quick summary of the available commands for **Uni-Fy**, head over to [7. Command summary](#7-command-summary).
+
+### 2.2. Glossary
+
+Here is a table of common terms used in this document along with their meaning and interpretation.
+
+|Term |Explanation |
+|-----|------------|
+|GUI | A GUI (graphical user interface) is a system of interactive visual components for the user interacts with. |
+|index | The position of a task in the list. Indexes start from 1. |
+|parameter| Specific information for a command. |
 
 --------------------------------------------------------------------------------------------------------------------
 
-## 3. Formatting
+### 2.3. Formatting
 
 The Uni-Fy user guide contains different formatting used throughout the document which is used to convey different meanings.
 This table below illustrates what each formatting means. 
 
 | Formatting    | What                            | Meaning   | Example                     |
 | ----------    |-------------------------------------|-----------|--------------------------|
-| `add`      | Words in light-blue highlight, also known as a mark-up| A command that can be typed into Uni-Fy|`help`|
-| `n/TASK_NAME` | Words in UPPER_CASE | A parameter to be supplied by the user |`n/CS3243`|
-| `n/TASK_NAME [tg/TAG_LEVEL]` | Words in square brackets| Optional parameter |`n/CS3243` or <br> `n/CS3243 tg/Important` |
-| `[tg/TAG_LEVEL]…` | Words with `…` after them| Parameters that can be input multiple times including 0 times|`tg/Important tg/Assignment` or `tg/Urgent `|
+| `mark-up`      | Words in light-blue highlight, also known as a mark-up| A command that can be typed into Uni-Fy|`help`|
+| <code><i>italic</i></code> | Words in <i>italic</i> | A parameter to be supplied by the user |<code><i>n/task_name</i></code>|
+| `(brackets)` | Words in round brackets| Optional parameter |<code><i>(d/date)</i></code> or <br> <code><i>(task_id)</i></code> |
+| <code>multiple...</code> | Words with `…` after them| Parameters that can be input multiple times including 0 times|`keywords...`|
 | [**Blue underline**](#2-about-this-document)| Bold blue words that show underline on mouse-over| A clickable hyperlink, to either an external webpage or other parts of this User Guide|[**1. Introduction**](#1-introduction)|
+
+### 2.4. Icons
+
+The Uni-Fy user guide uses icons to differentiate the type of information presented. 
+Here are the meanings behind the icons used in this document.
+
+|Icons | Explanation |
+ |--------------|-------------|
+|:bulb: | Tips |
+|:green_book: | Example(s) |
+|:information_source: | Important information to take note |
+|:warning: | Warning about the usage of a command |
+
 
 --------------------------------------------------------------------------------------------------------------------
 
