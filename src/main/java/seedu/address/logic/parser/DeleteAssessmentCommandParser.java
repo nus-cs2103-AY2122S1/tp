@@ -21,8 +21,7 @@ public class DeleteAssessmentCommandParser implements Parser<DeleteAssessmentCom
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_NAME)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_NAME)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteAssessmentCommand.MESSAGE_USAGE));
         }

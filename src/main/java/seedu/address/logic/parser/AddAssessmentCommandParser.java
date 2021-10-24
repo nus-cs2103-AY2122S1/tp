@@ -24,8 +24,7 @@ public class AddAssessmentCommandParser implements Parser<AddAssessmentCommand> 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT_NAME, PREFIX_SCORE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_NAME, PREFIX_SCORE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_NAME, PREFIX_SCORE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssessmentCommand.MESSAGE_USAGE));
         }
 
