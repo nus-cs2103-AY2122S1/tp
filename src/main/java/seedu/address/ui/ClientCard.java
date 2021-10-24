@@ -31,8 +31,6 @@ public class ClientCard extends UiPart<Region> {
     public final Client client;
 
     @FXML
-    private Icon icon;
-    @FXML
     private HBox cardPane;
     @FXML
     private Label name;
@@ -56,22 +54,24 @@ public class ClientCard extends UiPart<Region> {
     private Label nextMeeting;
     @FXML
     private FlowPane tags;
-    @FXML
-    private BorderPane phoneIconPane;
-    @FXML
-    private BorderPane addressIconPane;
-    @FXML
-    private BorderPane emailIconPane;
-    @FXML
-    private BorderPane riskIconPane;
-    @FXML
-    private BorderPane incomeIconPane;
-    @FXML
-    private BorderPane planIconPane;
-    @FXML
-    private BorderPane lastMetIconPane;
 
-    // TODO: implement icons later. don't know why this won't work
+    // TODO: do later
+    // @FXML
+    // private BorderPane phoneIconPane;
+    // @FXML
+    // private BorderPane addressIconPane;
+    // @FXML
+    // private BorderPane emailIconPane;
+    // @FXML
+    // private BorderPane riskIconPane;
+    // @FXML
+    // private BorderPane incomeIconPane;
+    // @FXML
+    // private BorderPane planIconPane;
+    // @FXML
+    // private BorderPane lastMetIconPane;
+
+    // TODO: do later
     // private static final Text PHONE_ICON = GlyphsDude.createIcon(FontAwesomeIcons.PHONE, "10px");
     // private static final Text HOME_ICON = GlyphsDude.createIcon(FontAwesomeIcons.HOME, "10px");
     // private static final Text MAIL_FORWARD_ICON = GlyphsDude.createIcon(FontAwesomeIcons.MAIL_FORWARD, "10px");
@@ -102,7 +102,7 @@ public class ClientCard extends UiPart<Region> {
             .sorted(Comparator.comparing(Tag::getName))
             .forEach(tag -> tags.getChildren().add(new Label(tag.getName())));
 
-        // TODO: fix later
+        // TODO: do later
         // phoneIconPane.setCenter(PHONE_ICON);
         // addressIconPane.setCenter(HOME_ICON);
         // emailIconPane.setCenter(MAIL_FORWARD_ICON);
