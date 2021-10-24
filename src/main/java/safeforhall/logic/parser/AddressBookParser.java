@@ -29,6 +29,8 @@ import safeforhall.logic.parser.delete.DeletePersonCommandParser;
 import safeforhall.logic.parser.edit.EditEventCommandParser;
 import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.logic.parser.view.ViewEventCommandParser;
+import safeforhall.logic.parser.view.ViewPersonCommandParser;
 
 /**
  * Parses user input.
@@ -106,7 +108,7 @@ public class AddressBookParser {
             return new ListCommandParser().parse(arguments);
 
         case ViewPersonCommand.COMMAND_WORD:
-            return new ViewPersonCommand();
+            return new ViewPersonCommandParser().parse(arguments);
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
@@ -137,7 +139,7 @@ public class AddressBookParser {
             return new EditEventCommandParser().parse(arguments);
 
         case ViewEventCommand.COMMAND_WORD:
-            return new ViewEventCommand();
+            return new ViewEventCommandParser().parse(arguments);
 
         case IncludeCommand.COMMAND_WORD:
             return new IncludeCommandParser().parse(arguments);

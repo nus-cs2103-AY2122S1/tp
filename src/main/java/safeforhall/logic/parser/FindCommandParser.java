@@ -30,6 +30,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                         CliSyntax.PREFIX_FACULTY);
 
         FindCommand.FindCompositePredicate findCompositePredicate = new FindCommand.FindCompositePredicate();
+
         if (argMultimap.getValue(CliSyntax.PREFIX_NAME).isPresent()) {
             findCompositePredicate.setName(ParserUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME)
                     .get()));
