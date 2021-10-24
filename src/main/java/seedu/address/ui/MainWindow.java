@@ -226,7 +226,6 @@ public class MainWindow extends UiPart<Stage> {
             case HELP:
                 handleHelp();
                 break;
-            
 
             case EXIT:
                 handleExit();
