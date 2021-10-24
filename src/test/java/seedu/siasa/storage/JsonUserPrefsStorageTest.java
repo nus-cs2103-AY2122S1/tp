@@ -49,15 +49,12 @@ public class JsonUserPrefsStorageTest {
                 : null;
     }
 
-    /*
-    TODO: Fix this test after refactoring storage.
     @Test
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
         assertEquals(expected, actual);
     }
-     */
 
     @Test
     public void readUserPrefs_valuesMissingFromFile_defaultValuesUsed() throws DataConversionException {
@@ -65,8 +62,6 @@ public class JsonUserPrefsStorageTest {
         assertEquals(new UserPrefs(), actual);
     }
 
-    /*
-    TODO: Fix this test after refactoring storage.
     @Test
     public void readUserPrefs_extraValuesInFile_extraValuesIgnored() throws DataConversionException {
         UserPrefs expected = getTypicalUserPrefs();
@@ -74,12 +69,11 @@ public class JsonUserPrefsStorageTest {
 
         assertEquals(expected, actual);
     }
-     */
 
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(new GuiSettings(1000, 500, 300, 100));
-        userPrefs.setSiasaFilePath(Paths.get("siasa.json"));
+        userPrefs.setSiasaFilePath(Paths.get("data\\siasa.json"));
         return userPrefs;
     }
 

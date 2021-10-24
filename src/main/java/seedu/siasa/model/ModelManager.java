@@ -100,6 +100,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasSimilarPerson(Person person) {
+        requireNonNull(person);
+        return siasa.hasSimilarPerson(person);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         siasa.removePersonAndAssociatedPolicies(target);
     }
@@ -120,9 +126,15 @@ public class ModelManager implements Model {
     //=========== Policy CRUD ================================================================================
 
     @Override
-    public boolean hasPolicy(Policy person) {
-        requireNonNull(person);
-        return siasa.hasPolicy(person);
+    public boolean hasPolicy(Policy policy) {
+        requireNonNull(policy);
+        return siasa.hasPolicy(policy);
+    }
+
+    @Override
+    public boolean hasSimilarPolicy(Policy policy) {
+        requireNonNull(policy);
+        return siasa.hasSimilarPolicy(policy);
     }
 
     @Override

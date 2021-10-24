@@ -1,7 +1,6 @@
 package seedu.siasa.model.policy;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 
@@ -18,15 +17,14 @@ public class ExpiryDate {
      */
     public ExpiryDate(LocalDate expiryDate) {
         requireNonNull(expiryDate);
-        checkArgument(isValidExpiryDate(expiryDate), MESSAGE_CONSTRAINTS);
         value = expiryDate;
     }
 
     /**
-     * Returns true if a given date is a valid expiry date.
+     * Returns true if expiry date is in the past.
      */
-    public static boolean isValidExpiryDate(LocalDate expiryDate) {
-        return expiryDate.isAfter(LocalDate.now());
+    public boolean isFutureExpiryDate() {
+        return value.isAfter(LocalDate.now());
     }
 
     @Override

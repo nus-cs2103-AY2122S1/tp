@@ -15,6 +15,7 @@ import seedu.siasa.commons.core.index.Index;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
+import seedu.siasa.logic.commands.warnings.Warning;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 import seedu.siasa.model.policy.Commission;
@@ -47,6 +48,8 @@ public class AddPolicyCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New policy added: %1$s";
     public static final String MESSAGE_DUPLICATE_POLICY = "This policy already exists for the specified user";
+    public static final String MESSAGE_PAST_EXPIRY_DATE = "Expiry Date is in the past.";
+    public static final String MESSAGE_SIMILAR_POLICY = "A similar policy already exists in the address book.";
 
     private final Title title;
     private final Price price;
@@ -76,6 +79,13 @@ public class AddPolicyCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        if (!expiryDate.isFutureExpiryDate()) {
+            boolean response = Warning.warnUser(MESSAGE_PAST_EXPIRY_DATE);
+            if (!response) {
+                return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
+            }
+        }
+
         Person owner = lastShownList.get(index.getZeroBased());
 
         Policy toAdd = new Policy(title, price, expiryDate, commission, owner);
@@ -84,8 +94,17 @@ public class AddPolicyCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_POLICY);
         }
 
+        if (model.hasSimilarPolicy(toAdd)) {
+            boolean response = Warning.warnUser(MESSAGE_SIMILAR_POLICY);
+            if (!response) {
+                return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
+            }
+        }
+
         model.addPolicy(toAdd);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+
     }
 
     @Override

@@ -2,6 +2,7 @@ package seedu.siasa.commons.util;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
+import static seedu.siasa.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -64,5 +65,65 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if {@code a} and {@code b} have an edit distance of one, i.e. One operation is needed
+     * to transform {@code a} to {@code b}. Otherwise, return false.
+     * @throws NullPointerException if {@code a} or {@code b} is null.
+     */
+    public static boolean isEditDistanceOne(String a, String b) {
+        requireAllNonNull(a, b);
+
+        int lenA = a.length();
+        int lenB = b.length();
+        int lenDiff = Math.abs(lenA - lenB);
+
+        int countEdits = 0;
+        int idxA = 0;
+        int idxB = 0;
+
+        if (lenDiff > 1) {
+            return false;
+        }
+        while (idxA < lenA && idxB < lenB) {
+            if (a.charAt(idxA) != b.charAt(idxB)) {
+                if (countEdits == 1) {
+                    return false;
+                } else if (lenA > lenB) {
+                    idxA++;
+                } else if (lenA < lenB) {
+                    idxB++;
+                } else {
+                    idxA++;
+                    idxB++;
+                }
+                countEdits++;
+            } else {
+                idxA++;
+                idxB++;
+            }
+        }
+
+        if (idxA < lenA || idxB < lenB) {
+            countEdits++;
+        }
+
+        return countEdits == 1;
+    }
+
+    /**
+     * Returns true if two strings are similar, defined as the strings
+     * having an edit distance of zero or one (case insensitive).
+     */
+    public static boolean isSimilar(String a, String b) {
+        if (a.equals(b)) {
+            return false;
+        }
+        String uppercaseA = a.toUpperCase();
+        String uppercaseB = b.toUpperCase();
+        return uppercaseA.equals(uppercaseB)
+                || isEditDistanceOne(uppercaseA, uppercaseB);
+
     }
 }

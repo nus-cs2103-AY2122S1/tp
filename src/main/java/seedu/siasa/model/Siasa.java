@@ -74,6 +74,16 @@ public class Siasa implements ReadOnlySiasa {
     }
 
     /**
+     * Returns true if a person with a similar full name as {@code person}
+     * exists in SIASA. Similar is defined as full names having an edit distance of zero
+     * or one (case insensitive).
+     */
+    public boolean hasSimilarPerson(Person person) {
+        requireNonNull(person);
+        return persons.containsSimilar(person);
+    }
+
+    /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
      */
@@ -124,6 +134,16 @@ public class Siasa implements ReadOnlySiasa {
     public boolean hasPolicy(Policy policy) {
         requireNonNull(policy);
         return policies.contains(policy);
+    }
+
+    /**
+     * Returns true if a policy with similar title and the same owner as {@code policy}
+     * exists in the SIASA. Similar titles are defined as having edit distance of zero or
+     * one (case insensitive).
+     */
+    public boolean hasSimilarPolicy(Policy policy) {
+        requireNonNull(policy);
+        return policies.containsSimilar(policy);
     }
 
     public void removePolicy(Policy target) {

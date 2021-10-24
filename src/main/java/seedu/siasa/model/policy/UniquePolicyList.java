@@ -27,6 +27,16 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
+     * Returns true if the list contains a policy with a similar title and same
+     * owner as {@code toCheck}. Similar is defined as the policy titles having an
+     * edit distance of zero or one (case insensitive).
+     */
+    public boolean containsSimilar(Policy toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSimilarPolicy);
+    }
+
+    /**
      * Adds a policy to the list.
      * The policy must not already exist in the list.
      */

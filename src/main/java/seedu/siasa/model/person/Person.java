@@ -74,6 +74,15 @@ public class Person {
     }
 
     /**
+     * Returns true if both persons have full names with
+     * an edit distance of zero or one (case insensitive).
+     */
+    public boolean isSimilarPerson(Person otherPerson) {
+        return otherPerson != null
+                && this.name.isSimilarTo(otherPerson.name);
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */

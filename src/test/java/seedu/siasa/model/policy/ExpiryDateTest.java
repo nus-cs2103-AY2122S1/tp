@@ -15,22 +15,24 @@ class ExpiryDateTest {
         assertThrows(NullPointerException.class, () -> new ExpiryDate(null));
     }
 
+    /*
     @Test
     public void constructor_invalidExpiryDate_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, () -> new ExpiryDate(INVALID_POLICY_EXPIRY_DATE_PAST));
         assertThrows(IllegalArgumentException.class, () -> new ExpiryDate(INVALID_POLICY_EXPIRY_DATE_TODAY));
     }
+    */
 
     @Test
-    public void isValidExpiryDate() {
-        // null address
-        assertThrows(NullPointerException.class, () -> ExpiryDate.isValidExpiryDate(null));
-
-        // invalid addresses
-        assertFalse(ExpiryDate.isValidExpiryDate(INVALID_POLICY_EXPIRY_DATE_PAST));
-        assertFalse(ExpiryDate.isValidExpiryDate(INVALID_POLICY_EXPIRY_DATE_TODAY));
-
+    public void isPastExpiryDate() {
         // valid addresses
-        assertTrue(ExpiryDate.isValidExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL));
+        ExpiryDate validExpiryDate = new ExpiryDate(VALID_POLICY_EXPIRY_DATE_CRITICAL);
+        assertTrue(validExpiryDate.isFutureExpiryDate());
+
+        // invalid address
+        ExpiryDate invalidExpiryDatePast = new ExpiryDate(INVALID_POLICY_EXPIRY_DATE_PAST);
+        ExpiryDate invalidExpiryDateNow = new ExpiryDate(INVALID_POLICY_EXPIRY_DATE_TODAY);
+        assertFalse(invalidExpiryDatePast.isFutureExpiryDate());
+        assertFalse(invalidExpiryDateNow.isFutureExpiryDate());
     }
 }

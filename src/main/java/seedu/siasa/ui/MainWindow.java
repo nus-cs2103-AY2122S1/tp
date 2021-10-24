@@ -154,6 +154,17 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Displays a warning with the given {@code description}. Returns a boolean
+     * value of the user's response of whether to proceed with action.
+     */
+    public static boolean showWarning(String description) {
+        WarningWindow warningWindow = new WarningWindow(new Stage(), description);
+        warningWindow.display();
+        boolean userResponse = warningWindow.getUserResponse();
+        return userResponse;
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -196,6 +207,7 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
+
 
             return commandResult;
         } catch (CommandException | ParseException e) {

@@ -37,6 +37,16 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns true if the list contains a person with a similar full name as {@code toCheck}.
+     * Similar is defined as full names having an edit distance of zero
+     * or one (case insensitive).
+     */
+    public boolean containsSimilar(Person toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSimilarPerson);
+    }
+
+    /**
      * Adds a person to the list.
      * The person must not already exist in the list.
      */

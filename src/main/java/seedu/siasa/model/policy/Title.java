@@ -3,6 +3,8 @@ package seedu.siasa.model.policy;
 import static java.util.Objects.requireNonNull;
 import static seedu.siasa.commons.util.AppUtil.checkArgument;
 
+import seedu.siasa.commons.util.StringUtil;
+
 public class Title {
 
     public static final String MESSAGE_CONSTRAINTS =
@@ -27,8 +29,18 @@ public class Title {
         value = title;
     }
 
+    /**
+     * Returns true if the given string is a valid title.
+     */
     public static boolean isValidTitle(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if policy titles have edit distance of zero or one (case insensitive).
+     */
+    public boolean isSimilarTo(Title other) {
+        return StringUtil.isSimilar(this.value, other.value);
     }
 
 

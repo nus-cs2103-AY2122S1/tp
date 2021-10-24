@@ -7,9 +7,11 @@ import static seedu.siasa.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.siasa.logic.parser.CliSyntax.PREFIX_TAG;
 
+import seedu.siasa.commons.core.Messages;
 import seedu.siasa.logic.commands.Command;
 import seedu.siasa.logic.commands.CommandResult;
 import seedu.siasa.logic.commands.exceptions.CommandException;
+import seedu.siasa.logic.commands.warnings.Warning;
 import seedu.siasa.model.Model;
 import seedu.siasa.model.person.Person;
 
@@ -37,6 +39,7 @@ public class AddClientCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SIMILAR_PERSON = "A similar person already exists in the address book.";
 
     private final Person toAdd;
 
@@ -54,6 +57,13 @@ public class AddClientCommand extends Command {
 
         if (model.hasPerson(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+
+        if (model.hasSimilarPerson(toAdd)) {
+            boolean response = Warning.warnUser(MESSAGE_SIMILAR_PERSON);
+            if (!response) {
+                return new CommandResult(Messages.MESSAGE_CANCELLED_COMMAND);
+            }
         }
 
         model.addPerson(toAdd);

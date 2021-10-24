@@ -130,6 +130,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasSimilarPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -151,6 +156,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPolicy(Policy policy) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasSimilarPolicy(Policy policy) {
             throw new AssertionError("This method should not be called.");
         }
 
