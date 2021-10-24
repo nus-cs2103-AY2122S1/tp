@@ -2,31 +2,29 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddAssessmentCommand;
+import seedu.address.logic.commands.DeleteAssessmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.AssessmentName;
-import seedu.address.model.assessment.Score;
 
-public class AddAssessmentCommandParser implements Parser<AddAssessmentCommand> {
+public class DeleteAssessmentCommandParser implements Parser<DeleteAssessmentCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddAssessmentCommand parse(String args) throws ParseException {
+    public DeleteAssessmentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT_NAME, PREFIX_SCORE);
+                ArgumentTokenizer.tokenize(args, PREFIX_ASSESSMENT_NAME);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_NAME, PREFIX_SCORE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ASSESSMENT_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssessmentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteAssessmentCommand.MESSAGE_USAGE));
         }
 
         Index index;
@@ -35,16 +33,13 @@ public class AddAssessmentCommandParser implements Parser<AddAssessmentCommand> 
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddAssessmentCommand.MESSAGE_USAGE), pe);
+                    DeleteAssessmentCommand.MESSAGE_USAGE), pe);
         }
 
         AssessmentName assessmentName = ParserUtil
                 .parseAssessmentName(argMultimap.getValue(PREFIX_ASSESSMENT_NAME).get());
-        Score score = ParserUtil.parseScore(argMultimap.getValue(PREFIX_SCORE).get());
 
-        Assessment assessment = new Assessment(assessmentName, score);
-
-        return new AddAssessmentCommand(index, assessment);
+        return new DeleteAssessmentCommand(index, assessmentName);
     }
 
     /**
