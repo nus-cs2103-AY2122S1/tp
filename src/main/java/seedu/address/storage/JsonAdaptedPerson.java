@@ -144,7 +144,6 @@ class JsonAdaptedPerson {
         for (JsonAdaptedLesson l : lessonsList) {
             modelLessonsList.add(l.toModelType());
         }
-
         if (NoOverlapLessonList.doAnyLessonsOverlap(modelLessonsList)) {
             throw new IllegalValueException(NoOverlapLessonList.LESSON_OVERLAP);
         }
@@ -162,8 +161,10 @@ class JsonAdaptedPerson {
             modelExams.add(e.toModelType());
         }
 
+        // TODO add storage for groups....
+        Set<UniqueId> groups = new HashSet<>();
         return new Person(modelUniqueId, modelName, modelPhone, modelEmail,
-                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, modelExams);
+                modelAddress, modelTags, modelAssignedTaskIds, lessonsList, modelExams, groups);
     }
 
 }

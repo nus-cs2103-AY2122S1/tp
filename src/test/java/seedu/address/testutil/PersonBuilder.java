@@ -36,6 +36,7 @@ public class PersonBuilder {
     private Set<UniqueId> assignedTaskIds;
     private NoOverlapLessonList lessonsList;
     private List<Exam> exams;
+    private Set<UniqueId> assignedGroupIds;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -50,6 +51,7 @@ public class PersonBuilder {
         assignedTaskIds = new HashSet<>();
         lessonsList = new NoOverlapLessonList();
         exams = new ArrayList<>();
+        assignedGroupIds = new HashSet<>();
     }
 
     /**
@@ -65,6 +67,7 @@ public class PersonBuilder {
         assignedTaskIds = new HashSet<>(personToCopy.getAssignedTaskIds());
         lessonsList = personToCopy.getLessonsList();
         exams = new ArrayList<>(personToCopy.getExams());
+        assignedGroupIds = new HashSet<>(personToCopy.getAssignedGroupIds());
     }
 
     /**
@@ -145,7 +148,7 @@ public class PersonBuilder {
      * @return A {@code Person} object.
      */
     public Person build() {
-        return new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams);
+        return new Person(id, name, phone, email, address, tags, assignedTaskIds, lessonsList, exams, assignedGroupIds);
     }
 
 }

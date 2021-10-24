@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.id.UniqueIdMapper;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -215,6 +218,23 @@ public class ModelManager implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+    }
+
+    //=========== mapper accessors =========================================================================
+
+    @Override
+    public UniqueIdMapper<Person> getPersonMapper() {
+        return addressBook.getPersonMapper();
+    }
+
+    @Override
+    public UniqueIdMapper<Group> getGroupMapper() {
+        return addressBook.getGroupMapper();
+    }
+
+    @Override
+    public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
+        return addressBook.getSortedLessonsWithAttendees();
     }
 
     @Override

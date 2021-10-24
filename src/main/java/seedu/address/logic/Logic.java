@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
@@ -8,6 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 
 /**
@@ -32,6 +34,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
+
+    /** Returns a list of lessons with the corresponding attendees */
+    List<LessonWithAttendees> getSortedLessonsWithAttendees();
 
     /**
      * Returns the user prefs' address book file path.

@@ -9,7 +9,11 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
+import seedu.address.model.id.UniqueId;
+import seedu.address.model.id.UniqueIdMapper;
+import seedu.address.model.lesson.Attendee;
 import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.task.Task;
@@ -62,11 +66,20 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the contents of the task list with {@code tasks}.
-     * {@code tasks} must not contain duplicate persons.
+     * {@code tasks} must not contain duplicate tasks.
      */
     public void setTasks(List<Task> tasks) {
         this.tasks.setTasks(tasks);
     }
+
+    /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -76,6 +89,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTasks(newData.getTaskList());
+        setGroups(newData.getGroupList());
     }
 
     //// person-level operations
@@ -109,10 +123,15 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Removes {@code key} from this {@code AddressBook}.
+     * Cleans up all references to this person.
+     *
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        UniqueId personId = key.getId();
         persons.remove(key);
+        assert !persons.contains(key); // assert removal first, before cleaning up.
+        groups.cleanUpPersonId(personId);
     }
 
     //// task-level operations
@@ -189,12 +208,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.remove(key);
     }
 
+    public UniqueIdMapper<Person> getPersonMapper() {
+        return persons;
+    }
+
+    public UniqueIdMapper<Group> getGroupMapper() {
+        return groups;
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
-                + tasks.asUnmodifiableObservableList().size() + " tasks";
+                + tasks.asUnmodifiableObservableList().size() + " tasks"
+                + groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
@@ -214,12 +242,22 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public List<Lesson> getSortedLessons() {
-        List<Lesson> lessons = new ArrayList<>();
-        for (Person p : persons) {
-            lessons.addAll(p.getLessonsList().getLessons());
+    public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
+        List<LessonWithAttendees> lessons = new ArrayList<>();
+        for (Person person : persons) {
+            List<Attendee> newList = new ArrayList<>();
+            newList.add(person);
+            for (Lesson lesson : person.getLessons()) {
+                lessons.add(new LessonWithAttendees(lesson, newList));
+            }
         }
-        Collections.sort(lessons);
+        for (Group group : groups) {
+            List<Attendee> newList = new ArrayList<>(persons.getFromUniqueIds(group.getAssignedPersonIds()));
+            for (Lesson lesson : group.getLessons()) {
+                lessons.add(new LessonWithAttendees(lesson, newList));
+            }
+        }
+        Collections.sort(lessons, new LessonWithAttendees.SortByLesson());
         return lessons;
     }
 
