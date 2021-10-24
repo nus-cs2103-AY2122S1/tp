@@ -1,6 +1,5 @@
 package seedu.address.model.lesson;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 /**

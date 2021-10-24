@@ -4,12 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -106,8 +103,8 @@ public class CalendarEntryList {
     public boolean hasClashes(Lesson toCheck, Lesson toIgnore) {
         requireNonNull(toCheck);
         requireNonNull(toIgnore);
-        return entryList.stream().anyMatch(entry-> !entry.getUserObject().equals(toIgnore) &&
-                entry.getUserObject().isClashing(toCheck));
+        return entryList.stream().anyMatch(entry-> !entry.getUserObject().equals(toIgnore)
+                && entry.getUserObject().isClashing(toCheck));
     }
 
     /**
@@ -264,6 +261,15 @@ public class CalendarEntryList {
         return entry;
     }
 
+    /**
+     * Returns true if the compared object is an equivalent {@code CalendarEntryList}.
+     * Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
+     * CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
+     * which we do not set, so we should not use it.
+     *
+     * @param obj Object to be compared.
+     * @return True if the compared object is an equivalent {@code CalendarEntryList}.
+     */
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -299,9 +305,6 @@ public class CalendarEntryList {
         }
 
         return true;
-        // Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
-        // CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
-        // which we do not set, so we should not use it.
     }
 
     @Override
