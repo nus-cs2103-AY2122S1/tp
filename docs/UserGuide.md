@@ -173,7 +173,7 @@ Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]...
 
 Examples:
 * `edit 1 -n John Doe`
-* `edit 1 -n John Doe -i E1234567 -g T01 -g R01`  
+* `edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 * `edit 2 -t`
 
 
