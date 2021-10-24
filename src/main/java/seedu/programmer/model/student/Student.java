@@ -166,7 +166,7 @@ public class Student {
      * Create a new Student Object with the same fields.
      * @return a copy of the Student
      * */
-    public Student clone() {
+    public Student copy() {
         Student clone = new Student(name, studentId, classId, email);
         clone.setLabResultRecord(labResultList);
         return clone;
