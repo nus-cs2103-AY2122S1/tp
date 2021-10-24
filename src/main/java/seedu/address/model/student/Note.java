@@ -1,5 +1,6 @@
 package seedu.address.model.student;
 
+<<<<<<< Updated upstream
 /**
  * Stub for implementing Ui
  */
@@ -17,5 +18,39 @@ public class Note {
             + "odio euismod. Praesent condimentum tristique quam, id viverra massa. Etiam at tristique sapien. "
             + "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "
             + "Nulla facilisi.";
+=======
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Represents the notes of a student in the CSBook.
+ * Guarantee: immutable; is always valid
+ */
+public class Note {
+    public final String value;
+
+    /**
+     * Constructor to create a note
+     */
+    public Note(String note) {
+        requireNonNull(note);
+        value = note;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Note
+                && value.equals(((Note) other).value));
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
+>>>>>>> Stashed changes
     }
 }
