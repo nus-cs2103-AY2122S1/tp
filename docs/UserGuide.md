@@ -141,22 +141,6 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the application.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
-
-Clears all entries (Clients, Tasks, SalesOrder) from the application.
-
-Format: `clear`
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-### Saving the data
-
-SalesNote data is saved in the hard disk (As a JSON file) automatically after any command that changes the data. There is no need to save manually.
-=======
 ## Task Commands
 
 <div markdown="block" class="alert alert-info">
@@ -232,7 +216,7 @@ Examples:
 * `edittask 1 l/order cloth d/19th September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
 * `edittask 2 t/General` edits the tag of the 2nd task to be `General`
 
-### Mark a task as done : `marktask`
+### Marking a task as done : `marktask`
 
 Marks a specified task from the application as done.
 
