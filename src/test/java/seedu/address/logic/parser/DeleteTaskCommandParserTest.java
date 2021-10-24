@@ -27,11 +27,11 @@ class DeleteTaskCommandParserTest {
         List<Index> indexList2 = new ArrayList<>();
         indexList2.add(taskIndex1);
         indexList2.add(taskIndex2);
-        assertParseSuccess(parser, "1 ti/2", new DeleteTaskCommand(INDEX_FIRST_PERSON,
+        assertParseSuccess(parser, "1 -ti 2", new DeleteTaskCommand(INDEX_FIRST_PERSON,
                 indexList1));
-        assertParseSuccess(parser, "1 ti/2 ti/2 ti/2", new DeleteTaskCommand(INDEX_FIRST_PERSON,
+        assertParseSuccess(parser, "1 -ti 2 -ti 2 -ti 2", new DeleteTaskCommand(INDEX_FIRST_PERSON,
                 indexList1));
-        assertParseSuccess(parser, "1 ti/2 ti/1", new DeleteTaskCommand(INDEX_FIRST_PERSON,
+        assertParseSuccess(parser, "1 -ti 2 -ti 1", new DeleteTaskCommand(INDEX_FIRST_PERSON,
                 indexList2));
     }
 
