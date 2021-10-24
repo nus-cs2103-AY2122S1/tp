@@ -297,6 +297,8 @@ _Example usage_
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -310,18 +312,17 @@ If your changes to the data file make its format invalid, SalesNote will discard
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
+**ListPerson** | `list`
+**AddPerson** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
+**DeletePerson** | `delete INDEX`<br> e.g., `delete 3`
+**EditPerson** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**FindPerson** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 
 ###Task Commands
 
 Action | Format, Examples
 --------|------------------
-**ListTask** | `listtask`
+**ListTasks** | `listtask`
 **AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
 **DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
 **EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19th September 2021`
@@ -333,7 +334,7 @@ Action | Format, Examples
 
 Action | Format, Examples
 --------|------------------
-**ListOrder** | `listorder`
+**ListOrders** | `listorder`
 **AddOrder** | `addorder l/LABEL d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
 **DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
 **MarkOrder** | `markorder INDEX` e.g. `markorder 2`
