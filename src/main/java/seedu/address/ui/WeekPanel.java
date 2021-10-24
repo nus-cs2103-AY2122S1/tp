@@ -3,7 +3,6 @@ package seedu.address.ui;
 import static com.calendarfx.view.DayViewBase.EarlyLateHoursStrategy.HIDE;
 import static com.calendarfx.view.DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.logging.Logger;
@@ -11,10 +10,7 @@ import java.util.logging.Logger;
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.view.CalendarView;
-import com.calendarfx.view.DateControl;
-import com.calendarfx.view.DayViewBase;
 import com.calendarfx.view.page.DayPage;
-import com.calendarfx.view.page.WeekPage;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -29,7 +25,6 @@ public class WeekPanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(this.getClass());
 
-//    private final WeekPage calendarView;
     private final CalendarView calendarView;
     @FXML
     private StackPane weekView;
@@ -39,7 +34,6 @@ public class WeekPanel extends UiPart<Region> {
      */
     public WeekPanel(Calendar calendar) {
         super(FXML);
-//        calendarView = new WeekPage();
         calendarView = new CalendarView();
         initialiseCalendar(calendar);
         createTimeThread();
