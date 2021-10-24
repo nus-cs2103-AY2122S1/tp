@@ -2,18 +2,23 @@ package seedu.anilist.ui;
 
 import static seedu.anilist.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.awt.datatransfer.Clipboard;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
-import javafx.scene.Scene;
-import javafx.scene.chart.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.genre.Genre;
@@ -29,9 +34,10 @@ public class StatsDisplay extends UiPart<Stage> {
     private static final String NUM_ANIMES_WATCHING_MSG = "Watching (%d)";
     private static final String NUM_ANIMES_TOWATCH_MSG  = "To Watch (%d)";
     private static final String NUM_ANIMES_FINISHED_MSG = "Finished (%d)";
+    private static final String GENRES_MSG = "You have tagged animes with %d unique genre(s) in total.\n"
+                                            + "Here are your top anime genres.";
 
     private static final Logger logger = LogsCenter.getLogger(StatsDisplay.class);
-    //TODO add more stats eg top genres
     private static final String FXML = "StatsDisplay.fxml";
 
     @FXML
@@ -46,7 +52,6 @@ public class StatsDisplay extends UiPart<Stage> {
     public StatsDisplay(Stage root) {
         super(FXML, root);
         pieChart.setLabelsVisible(false);
-        //pieChart.setAnimated(false);
         pieChart.setLegendSide(Side.RIGHT);
     }
 
@@ -103,32 +108,47 @@ public class StatsDisplay extends UiPart<Stage> {
     }
 
     public void setAnimeListStats(Stats stats) {
-        pieChart.getData().clear();
         requireAllNonNull(stats);
+        setAnimeStats(stats);
+        setGenreStats(stats.getTopGenres(), stats.getNumUniqueGenres());
+    }
+
+    private void setAnimeStats(Stats stats) {
+        pieChart.getData().clear();
+        barChart.getData().clear();
         pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, stats.getTotalAnimesCount())
-        + "\n" + String.format(EPISODES_WATCHED_MSG, stats.getEpisodesCount()));
+                + "\n" + String.format(EPISODES_WATCHED_MSG, stats.getEpisodesCount()));
 
         addToPieChart(NUM_ANIMES_WATCHING_MSG, stats.getWatchingCount());
         addToPieChart(NUM_ANIMES_TOWATCH_MSG, stats.getToWatchCount());
         addToPieChart(NUM_ANIMES_FINISHED_MSG, stats.getFinishedCount());
-
-        setGenreStats(stats.getTopGenres());
     }
 
-    private void setGenreStats(HashMap<Genre, Integer> genreStats) {
-        barChart.setTitle("Here are your top anime genres.");
+    private void setGenreStats(HashMap<Genre, Integer> genreStats, int uniqueGenresCount) {
+        barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
+
+        //Set horizontal labelling to be integer values
+        xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
+            @Override
+            public String toString(Number object) {
+                return String.format("%1$s:00", object);
+            }
+        });
         BarChart<Number, String> tempGenreStats = new BarChart<>(xAxis, yAxis);
         tempGenreStats.getData().add(getBarChartData(genreStats));
         barChart.setData(tempGenreStats.getData());
         barChart.getYAxis().setTickMarkVisible(false);
+        barChart.getXAxis().setTickMarkVisible(false);
     }
 
     /**
-     * Get stats for genres
+     * Determine top five genres based on the number of animes tagged with the genre
+     * and creates a bar graph accordingly.
+     *
      * @param genreStats The genre statistics
-     * @return data for bar chart
+     * @return data for the bar chart featuring the top five genres
      */
     public XYChart.Series<Number, String> getBarChartData(HashMap<Genre, Integer> genreStats) {
         XYChart.Series<Number, String> barChartData = new XYChart.Series<>();
@@ -140,7 +160,6 @@ public class StatsDisplay extends UiPart<Stage> {
         }
         return barChartData;
     }
-
 
     private void addToPieChart(String displayMsg, int count) {
         pieChart.getData().add(new PieChart.Data(String.format(displayMsg, count), count));

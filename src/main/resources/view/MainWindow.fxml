@@ -32,7 +32,6 @@
             <Menu mnemonicParsing="false" text="Help">
             </Menu>
         </MenuBar>
-
               <VBox fx:id="animeList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
           <padding>
             <Insets bottom="10" left="10" right="10" top="10" />

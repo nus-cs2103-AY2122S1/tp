@@ -82,8 +82,6 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand, animeListPanel);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-
-        //updateStatsDisplay();
     }
 
     private void updateStatsDisplay() {
