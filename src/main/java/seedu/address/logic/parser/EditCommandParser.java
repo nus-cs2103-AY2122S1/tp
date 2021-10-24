@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
@@ -18,6 +19,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.healthcondition.HealthCondition;
+import seedu.address.model.person.LastVisit;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -33,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE,
-                        PREFIX_LANGUAGE, PREFIX_ADDRESS, PREFIX_HEALTH_CONDITION);
+                        PREFIX_LANGUAGE, PREFIX_ADDRESS, PREFIX_HEALTH_CONDITION, PREFIX_LAST_VISIT);
 
         Index index;
 
@@ -56,6 +58,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
+        if (argMultimap.getValue(PREFIX_LAST_VISIT).isPresent()) {
+            LastVisit lastVisit = ParserUtil.parseLastVisit(argMultimap.getValue(PREFIX_LAST_VISIT).get()).get();
+            editPersonDescriptor.setLastVisit(lastVisit);
+        }
+
         parseHealthConditionsForEdit(argMultimap.getAllValues(PREFIX_HEALTH_CONDITION))
                 .ifPresent(editPersonDescriptor::setHealthConditions);
 

@@ -3,10 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FREQUENCY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEALTH_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LAST_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCURRENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -41,6 +43,10 @@ public class CommandTestUtil {
     public static final String VALID_LAST_VISIT_BOB = "2021-01-02 13:00";
     public static final String VALID_VISIT_AMY = DateTimeUtil.getValidVisitString();
     public static final String VALID_VISIT_BOB = DateTimeUtil.getValidVisitString2();
+    public static final String VALID_FREQUENCY_AMY = "Weekly";
+    public static final String VALID_FREQUENCY_BOB = "Monthly";
+    public static final String VALID_OCCURRENCE_AMY = "2";
+    public static final String VALID_OCCURRENCE_BOB = "4";
     public static final String VALID_HEALTH_CONDITION_DIABETES = "diabetes";
     public static final String VALID_HEALTH_CONDITION_DEMENTIA = "dementia";
 
@@ -56,6 +62,10 @@ public class CommandTestUtil {
     public static final String VISIT_DESC_BOB = " " + PREFIX_VISIT + VALID_VISIT_BOB;
     public static final String LAST_VISIT_DESC_AMY = " " + PREFIX_LAST_VISIT + VALID_LAST_VISIT_AMY;
     public static final String LAST_VISIT_DESC_BOB = " " + PREFIX_LAST_VISIT + VALID_LAST_VISIT_BOB;
+    public static final String FREQUENCY_DESC_AMY = " " + PREFIX_FREQUENCY + VALID_FREQUENCY_AMY;
+    public static final String FREQUENCY_DESC_BOB = " " + PREFIX_FREQUENCY + VALID_FREQUENCY_BOB;
+    public static final String OCCURRENCE_DESC_AMY = " " + PREFIX_OCCURRENCE + VALID_OCCURRENCE_AMY;
+    public static final String OCCURRENCE_DESC_BOB = " " + PREFIX_OCCURRENCE + VALID_OCCURRENCE_BOB;
     public static final String HEALTH_CONDITION_DESC_DIABETES = " " + PREFIX_HEALTH_CONDITION
             + VALID_HEALTH_CONDITION_DIABETES;
     public static final String HEALTH_CONDITION_DESC_DEMENTIA = " " + PREFIX_HEALTH_CONDITION
@@ -67,6 +77,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     // '*' not allowed in healthConditions
     public static final String INVALID_HEALTH_CONDITION_DESC = " " + PREFIX_HEALTH_CONDITION + "heartCondition*";
+    public static final String INVALID_LAST_VISIT_DESC = " " + PREFIX_LAST_VISIT + "2000"; //wrong datetime format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -77,7 +88,7 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withLanguage(VALID_LANGUAGE_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withHealthConditions(VALID_HEALTH_CONDITION_DIABETES).build();
+                .withHealthConditions(VALID_HEALTH_CONDITION_DIABETES).withLastVisit(VALID_LAST_VISIT_AMY).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withLanguage(VALID_LANGUAGE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withHealthConditions(VALID_HEALTH_CONDITION_DEMENTIA, VALID_HEALTH_CONDITION_DIABETES).build();

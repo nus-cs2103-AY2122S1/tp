@@ -15,6 +15,7 @@ title: User Guide
   - [Scheduling a visit to an elderly](#scheduling-a-visit-to-an-elderly--visit)
   - [Marking one visit as done](#marking-one-visit-as-done--done)
   - [Viewing help](#viewing-help--help)
+  - [Downloading data](#downloading-data--download)  
   - [Clearing all entries](#clearing-all-entries--clear)
   - [Exiting the app](#exiting-the-program--exit)
 - [FAQ](#faq)
@@ -55,6 +56,7 @@ title: User Guide
 * Add elderly with contact details
 * Delete elderly or deadline
 * List elderly details
+* Sort elderly by visit
 * Find an elderly
 * Schedule a visit to an elderly
 * Mark the current scheduled visit as done (update the last visited date and delete the current visit)
@@ -91,7 +93,7 @@ title: User Guide
 
 Adds an elderly and all relevant details into SeniorLove.
 
-Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [h/HEALTH_CONDITION]`
+Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [f/FREQUENCY o/OCCURRENCE] [h/HEALTH_CONDITION]`
 
 * Adds a new elderly with the following information: `NAME`, `PHONE_NUMBER`, `LANGUAGE`, `ADDRESS`, `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION` may be optionally included.
 * `NAME` is the elderly’s name. **This must be included.**
@@ -100,17 +102,17 @@ Format: `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT
 * `ADDRESS` is the elderly’s address to be visited. **This must be included.**
 * `LAST_VISIT` is the last datetime that the user has visited the elderly. **This is optional to include.**
 * `VISIT` is the next scheduled datetime for the elderly’s visit. **This is optional to include.**
+* `FREQUENCY` is the frequency of the next scheduled visit for the elderly. **This is optional to include**
+* The `FREQUENCY` and `OCCURRENCE` must both be included or excluded. `VISIT` must be included for `FREQUENCY` and `OCCURRENCE` to be included.
+* `FREQUENCY` has to take on one of the following values: `Daily`, `Weekly`, `Biweekly`, `Monthly` and `Quarterly`.
+* `OCCURRENCE` is a **strictly positive integer**.
+* `OCCURRENCE` is the occurrence of the next scheduled visit for the elderly. **This is optional to include**
 * `HEALTH_CONDITION` is the elderly's health condition. **This is optional to include.**
 
 Examples:
-* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`.
-* `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31 17:00 h/dementia` adds an elderly and details without the `VISIT`.
-* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31 09:00 h/dementia` adds an elderly and details without the `LAST_VISITED`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 10:00 v/2021-10-31 16:00` adds an elderly and details without the `HEALTH_CONDITION`.
-* `add n/Johnny p/87654321 l/Malay a/200 Toa Payoh Avenue 53  lv/2021-09-31 17:00` adds an elderly and details without the `VISIT` and `HEALTH_CONDITION`.
-* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 v/2021-10-31 09:00` adds an elderly and details without the `LAST_VISITED` and `HEALTH_CONDITION`.
-* `add n/Janet p/54860332 l/Tamil a/200 Toa Payoh Avenue 26 h/diabetes` adds an elderly and details without the `VISIT` and `LAST_VISITED`.
-* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-31 10:00 v/2021-10-31 16:00 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`.
+* `add n/John p/12345678 l/English a/College Avenue East 18, New College` adds an elderly and details without the `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT` and `HEALTH_CONDITION`, without `FREQUENCY` and `OCCURRENCE`.
+* `add n/Jane p/54867392 l/Chinese a/200 Toa Payoh Avenue 56  lv/2021-09-30 10:00 v/2021-10-31 16:00 f/weekly o/3 h/dementia` adds an elderly and details with `LAST_VISITED`, `VISIT`, `HEALTH_CONDITION`, `FREQUENCY` and `OCCURRENCE` .
 
 
 ### Delete an elderly or corresponding visit : `delete`
@@ -129,9 +131,9 @@ Examples:
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing elderly's attributes in SeniorLove.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [l/LANGUAGE] [a/ADDRESS] [lv/LAST_VISIT] [h/HEALTH_CONDITION]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -139,18 +141,33 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION
 * When editing health conditions, the existing health conditions of the person will be removed i.e adding of health conditions is not cumulative.
 * You can remove all the person’s health conditions by typing `h/` without
     specifying any health conditions after it.
+* You can remove the person's last visit by typing `lv/` without specifying any datetime after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions.
+*  `edit 1 p/91234567 l/English` Edits the phone number and language of the 1st person to be `91234567` and `English` respectively. All other attributes are not modified.
+*  `edit 2 n/Betsy Crower h/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing health conditions. All other attributes are not modified.
+*  `edit 1 lv/2021-10-10 13:00` Edits the last visit of the 1st person to be `10 Oct 2021 13:00`. All other attributes are not modified.
+*  `edit 1 lv/` Removes the last visit for the 1st person. All other attributes are not modified.
 
 
 ### Listing all persons : `list`
 
-Shows a list of all the elderly and their associated details in the address book.
+Shows a list of all the elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
 Format: `list`
 
+### Sort elderly by visit: `sort`
+
+Shows a sorted list of elderly and their associated details in SeniorLove either by `last visit` date (the latest first) or by next `visit` date (the earliest first).
+
+Format: `sort [FIELD_TO_BE_SORTED]`
+
+* `sort lv/` sorts elderly in descending order of their `last visit` date (the latest first).
+* `sort v/` sorts elderly in ascending order of their next `visit` date (the earliest first).
+* There should be exactly one `FIELD_TO_BE_SORTED` at any time.
+* Currently, `sort` only supports fields of `last visit` or `visit`.
+
+Example: `sort lv/` sorts the person list in descending order of `last visit` date.
 
 ### Locating elderly by attribute : `find`
 
@@ -209,6 +226,12 @@ Show a message linking users to the user guide.
 
 Format: `help`
 
+### Downloading data : `download`
+
+Downloads elderly data onto user's computer.
+
+Format: `download`
+
 
 ### Clearing all entries : `clear`
 
@@ -226,15 +249,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+SeniorLove data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 
 ### Editing the data file
 
-AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+SeniorLove data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file makes its format invalid, SeniorLove will discard all data and start with an empty data file at the next run.
 </div>
 
 
@@ -247,7 +270,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous SeniorLove home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -255,12 +278,14 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 18:00 v/2021-11-08 17:00`
+**add** | `add n/NAME p/PHONE_NUMBER l/LANGUAGE a/ADDRESS [lv/LAST_VISIT] [v/VISIT] [h/HEALTH_CONDITION]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 lv/1900-11-08 18:00 v/2021-11-08 17:00`
 **delete** | `delete [v/] INDEX`<br> e.g., `delete 3` (delete the third senior) <br> e.g., `delete v/2` (delete the scheduled visit of the second senior)
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/1900-11-08 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
 **list** | `list`
+**sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **clear** | `clear`
 **exit** | `exit`
 **help** | `help`
+**download** | `download`

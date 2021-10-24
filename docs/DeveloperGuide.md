@@ -239,7 +239,7 @@ Given below is an example usage scenario:
 1. User inputs the delete command, specifying the visit flag and the index of the elderly to be removed visit from. (If user wants to remove the entry of the elderly entirely instead of only removing the visit, she/he only needs to specify the index without the visit flag.)
 2. After successfully parsing the user input, the `DeleteCommand#execute(Model model)` method is called.
 3. The person which the user wants to delete visit from will be replaced by a new entry of a copy of person without the existing next visit.
-4Upon successfully deleting the visit from the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
+4. Upon successfully deleting the visit from the corresponding elderly, a `CommandResult` object is instantiated and returned to `LogicManager`.
 
 #### Design choices
 
@@ -255,7 +255,7 @@ Given below is an example usage scenario:
 ### Done Command
 
 #### Implementation details
-The done command is used to mark a person's existing visit as done, and update the person's `LastVisit` datetime value with that of the completed `Visit`. 
+The done command is used to mark a person's existing visit as done, and update the person's `LastVisit` datetime value with that of the completed `Visit`.
 The `Visit` field will also be updated or deleted depending on the `Occurrence` field's value.
 It makes use of polymorphism and interfaces, and is similar in implementation to other commands in SeniorLove:
 - `DoneCommand` extends `Command`

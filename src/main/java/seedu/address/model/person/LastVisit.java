@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.logic.parser.ParserUtil;
@@ -79,5 +80,19 @@ public class LastVisit {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    /**
+     * Get the local date time of last visit.
+     * @return the LocalDateTime of this last visit.
+     */
+    public LocalDateTime getDateTime() {
+        LocalDateTime visitTime;
+        try {
+            visitTime = LocalDateTime.parse(value, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            return LocalDateTime.MIN;
+        }
+        return visitTime;
     }
 }

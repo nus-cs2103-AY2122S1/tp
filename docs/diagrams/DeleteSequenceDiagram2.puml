@@ -50,8 +50,6 @@ alt no visit flag "v/" is present
     LogicManager -> DeleteCommand : execute()
     activate DeleteCommand
 
-    DeleteCommand -> DeleteCommand : deletePerson(1)
-    activate DeleteCommand
 
     DeleteCommand -> Model : deletePerson(1)
     activate Model
@@ -71,9 +69,6 @@ alt no visit flag "v/" is present
 
 else visit flag "v/" is present
     LogicManager -> DeleteCommand : execute()
-    activate DeleteCommand
-
-    DeleteCommand -> DeleteCommand : deleteVisit(1)
     activate DeleteCommand
 
     create Person

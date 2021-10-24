@@ -109,4 +109,18 @@ public class Visit {
     public int hashCode() {
         return value.hashCode();
     }
+
+    /**
+     * Get the local date time of visit.
+     * @return the LocalDateTime of this visit.
+     */
+    public LocalDateTime getDateTime() {
+        LocalDateTime visitTime;
+        try {
+            visitTime = LocalDateTime.parse(value, DateTimeUtil.FORMATTER);
+        } catch (DateTimeParseException e) {
+            return LocalDateTime.MAX;
+        }
+        return visitTime;
+    }
 }
