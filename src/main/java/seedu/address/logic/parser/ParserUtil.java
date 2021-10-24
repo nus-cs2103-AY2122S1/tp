@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.lang.IllegalArgumentException;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +16,7 @@ import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
+import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialgroup.GroupName;
@@ -67,6 +70,23 @@ public class ParserUtil {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String mark} into a {@code StudentMark}.
+     *
+     * @throws ParseException if the given {@code mark} is invalid.
+     */
+    public static StudentMark parseMark(String mark) throws ParseException {
+        requireNonNull(mark);
+        String trimmedMark = mark.trim();
+        StudentMark newMark;
+        try {
+            newMark = StudentMark.valueOf(trimmedMark);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(StudentMark.MESSAGE_CONSTRAINTS);
+        }
+        return newMark;
     }
 
     /**

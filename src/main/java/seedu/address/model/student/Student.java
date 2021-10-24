@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,19 +24,21 @@ public class Student {
     // Data fields
     private final Address address;
     private final ClassCode classCode;
+    private final List<StudentMark> marks;
     private final Set<Tag> tags = new HashSet<>();
-    //private final List<StudentMark> marks = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Student(Name name, Phone phone, Email email, Address address, ClassCode classCode, Set<Tag> tags) {
+    public Student(Name name, Phone phone, Email email, Address address, ClassCode classCode, Set<Tag> tags,
+                   List<StudentMark> marks) {
         requireAllNonNull(name, phone, email, address, classCode, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.classCode = classCode;
+        this.marks = marks;
         this.tags.addAll(tags);
     }
 
@@ -65,6 +68,14 @@ public class Student {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable list, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public List<StudentMark> getMarks() {
+        return Collections.unmodifiableList(marks);
     }
 
     /**
@@ -125,6 +136,12 @@ public class Student {
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");
             tags.forEach(builder::append);
+        }
+
+        List<StudentMark> studentMarks = getMarks();
+        if (!studentMarks.isEmpty()) {
+            builder.append("; Marks: ");
+            studentMarks.forEach(builder::append);
         }
         return builder.toString();
     }
