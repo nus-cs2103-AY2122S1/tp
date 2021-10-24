@@ -152,7 +152,7 @@ public class PersonBuilder {
      */
     public PersonBuilder withClaim(ClaimBuilder ... claims) {
         this.claims = Arrays.stream(claims)
-                .map(claim -> claim.build())
+                .map(claim -> claim.buildClaim())
                 .collect(Collectors.toSet());
         return this;
     }
