@@ -118,9 +118,9 @@ Flags|Name
 
 Shows a message explaning how to access the help page.
 
-![help message](images/helpMessage.png)
-
 Format: `help`
+
+![help message](images/helpMessage.png)
 
 #### Listing all persons : `list`
 
@@ -246,8 +246,8 @@ Formats:
 `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 
 
-* Edits the staff of the specified `NAME`, `INDEX`
-The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the staff of the specified `NAME`, `INDEX`.
+The index refers to the index number shown in the displayed staff list. The index **must be a positive integer** 1, 2, 3, … within the range of staff list.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
