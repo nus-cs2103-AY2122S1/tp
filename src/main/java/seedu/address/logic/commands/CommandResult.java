@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import seedu.address.model.person.Person;
 
@@ -27,7 +28,6 @@ public class CommandResult {
 
     /** The application should exit. */
     private final boolean isExit;
-
 
     /** Lesson information of student should be shown to the user. */
     private final Person student;
@@ -70,34 +70,56 @@ public class CommandResult {
         this(feedbackToUser, true, false, false, false, false, student);
     }
 
+    /**
+     * Returns the feedback to user from command execution.
+     *
+     * @return Feedback to user from command execution.
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
 
-    public boolean isShowPersonList() {
-        return isShowPersonList;
-    }
-
+    /**
+     * Returns true if the command is a help command.
+     *
+     * @return True if the command is a help command.
+     */
     public boolean isShowHelp() {
         return isShowHelp;
     }
 
+    /**
+     * Returns true if the command is a tag command.
+     *
+     * @return True if the command is a tag command.
+     */
     public boolean isShowTagList() {
         return isShowTagList;
     }
 
+    /**
+     * Returns true if the command is a schedule command.
+     *
+     * @return True if the command is a schedule command.
+     */
     public boolean isShowSchedule() {
         return isShowSchedule;
     }
 
-    public boolean isDisplayStudent() {
-        return student != null;
+    /**
+     * Returns an Optional of student.
+     *
+     * @return Optional of student.
+     */
+    public Optional<Person> getStudent() {
+        return Optional.ofNullable(student);
     }
 
-    public Person getStudent() {
-        return student;
-    }
-
+    /**
+     * Returns true if the command is an exit command.
+     *
+     * @return True if the command is an exit command.
+     */
     public boolean isExit() {
         return isExit;
     }
