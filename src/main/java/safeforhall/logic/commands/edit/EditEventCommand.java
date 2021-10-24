@@ -172,7 +172,9 @@ public class EditEventCommand extends Command {
             this.time = time;
         }
 
-        public Optional<EventTime> getTime() { return Optional.ofNullable(time); }
+        public Optional<EventTime> getTime() {
+            return Optional.ofNullable(time);
+        }
 
         public void setVenue(Venue venue) {
             this.venue = venue;
