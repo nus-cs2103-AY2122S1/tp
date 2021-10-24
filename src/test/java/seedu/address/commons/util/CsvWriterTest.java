@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.TypicalPersons;
@@ -49,13 +47,9 @@ public class CsvWriterTest {
     private Map<String, List<String>> data;
     private final String[] fieldHeaders = new String[]{"name", "phone", "email", "address", "tags"};
 
-    @BeforeEach
-    public void setUp() {
-        data = new HashMap<>();
-    }
-
     @Test
     public void write_allColumns_success() throws Exception {
+        data = new HashMap<>();
         data.put("name", TypicalPersons.getTypicalNamesStringForm());
         data.put("phone", TypicalPersons.getTypicalPhonesStringForm());
         data.put("email", TypicalPersons.getTypicalEmailsStringForm());
@@ -65,10 +59,7 @@ public class CsvWriterTest {
         CsvWriter writer = new CsvWriter();
         writer.write(TESTED_FILE_PATH, fieldHeaders, data);
         assertTrue(FileUtil.areFilesEqual(Paths.get(TESTED_FILE_PATH), Paths.get(EXPECTED_FILE_PATH_ALL_FIELDS)));
-    }
-
-    @AfterEach
-    public void deleteTestCsv() throws Exception {
         Files.deleteIfExists(Paths.get(TESTED_FILE_PATH));
     }
+
 }
