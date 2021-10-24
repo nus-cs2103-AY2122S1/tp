@@ -49,7 +49,8 @@ public class MainWindow extends UiPart<Stage> {
     private SummaryPanel summaryPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private DownloadWindow downloadWindow;
+    private DownloadWindow downloadWindowSuccess;
+    private DownloadWindow downloadWindowFailure;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -85,7 +86,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        downloadWindow = new DownloadWindow();
+        downloadWindowSuccess = new DownloadWindow(true);
+        downloadWindowFailure = new DownloadWindow(false);
     }
 
     public Stage getPrimaryStage() {
@@ -208,7 +210,8 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
-        downloadWindow.hide();
+        downloadWindowSuccess.hide();
+        downloadWindowFailure.hide();
         primaryStage.hide();
     }
 
@@ -280,11 +283,7 @@ public class MainWindow extends UiPart<Stage> {
         if (dest != null) {
             String csvData = CDL.toString(data);
             FileUtils.writeStringToFile(dest, csvData, Charset.defaultCharset());
-            if (!downloadWindow.isShowing()) {
-                downloadWindow.show();
-            } else {
-                downloadWindow.focus();
-            }
+            showDownloadWindow(downloadWindowSuccess);
         }
     }
 
@@ -312,8 +311,21 @@ public class MainWindow extends UiPart<Stage> {
             JSONArray data = getData();
             File dest = userChooseDestination();
             writeToCsv(data, dest);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | JSONException e) {
+            showDownloadWindow(downloadWindowFailure);
+        }
+    }
+
+    /**
+     * Shows relevant download window.
+     *
+     * @param window Download window to be shown
+     */
+    private void showDownloadWindow(DownloadWindow window) {
+        if (!window.isShowing()) {
+            window.show();
+        } else {
+            window.focus();
         }
     }
 }
