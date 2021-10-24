@@ -36,10 +36,6 @@ public class AddCommandParserTest {
         assertParseFailure(parser, VALID_NAME_BOB + TIME_DESC_BOB + DATE_DESC_BOB,
                 expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_TIME_BOB + DATE_DESC_BOB,
-                expectedMessage);
-
         // missing date prefix
         assertParseFailure(parser, NAME_DESC_BOB + TIME_DESC_BOB + VALID_DATE_BOB,
                 expectedMessage);
