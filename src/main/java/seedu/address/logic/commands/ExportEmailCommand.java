@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -39,7 +38,7 @@ public class ExportEmailCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<String> emailList = new ArrayList<String>();
 
-        for(Person p : lastShownList){
+        for (Person p : lastShownList) {
             emailList.add(p.getEmail().toString());
         }
 
@@ -55,5 +54,15 @@ public class ExportEmailCommand extends Command {
             String.format(MESSAGE_SUCCESS + " to " + filePath));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof ExportEmailCommand)) {
+            return false;
+        }
+        ExportEmailCommand e = (ExportEmailCommand) other;
+        return filePath.equals(e.filePath);
+    }
 }
-
