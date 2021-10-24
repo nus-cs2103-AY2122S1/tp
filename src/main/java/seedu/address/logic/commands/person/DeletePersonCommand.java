@@ -46,6 +46,7 @@ public class DeletePersonCommand extends Command {
     public static final String MESSAGE_NUMBER_EDITED_PERSON = "\n%d Edited Persons: \n";
     public static final String MESSAGE_DELETE_SUCCESS = "%1$s \n";
     public static final String MESSAGE_NO_SUCH_MODULE_CODE = "No such Module Code";
+    public static final String MESSAGE_NO_SUCH_LESSON_CODE = "No such Lesson Code";
 
     private final Index targetIndex;
     private final Index endIndex;
@@ -114,7 +115,7 @@ public class DeletePersonCommand extends Command {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
             throw new CommandException(MESSAGE_NO_SUCH_MODULE_CODE);
         } else if (isDeleteLessonCode()) {
-            List<Person> listOfPersonsToDelete = listOfPersonToDeleteByLessonCode(model.getFilteredPersonList());
+            List<Person> listOfPersonsToDelete = listOfPersonToDeleteByLessonCode(model, model.getFilteredPersonList());
             return deleteLessonCode(model, listOfPersonsToDelete);
         } else {
             return deleteByModuleCode(model, model.getFilteredPersonList());
@@ -125,15 +126,23 @@ public class DeletePersonCommand extends Command {
         return moduleCode.getLessonCodes().size() > 0;
     }
 
-    private List<Person> listOfPersonToDeleteByLessonCode(List<Person> filteredList) {
+    private List<Person> listOfPersonToDeleteByLessonCode(Model model, List<Person> list) throws CommandException {
         LessonCode lessonCodeToRemove = new LessonCode(
                 moduleCode.toString().substring(moduleCode.toString().indexOf(" ") + 1));
         List<Person> personsToDelete = new ArrayList<>();
-        for (int i = 0; i < filteredList.size(); i++) {
-            Person current = filteredList.get(i);
+
+        for (Person current : list) {
+            if (!current.getModuleCodes().contains(moduleCode)) {
+                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+                throw new CommandException(MESSAGE_DELETE_BY_MODULE_USAGE);
+            }
             if (current.get(moduleCode).getLessonCodes().contains(lessonCodeToRemove)) {
                 personsToDelete.add(current);
             }
+        }
+        if (personsToDelete.isEmpty()) {
+            model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+            throw new CommandException(MESSAGE_NO_SUCH_LESSON_CODE);
         }
         return personsToDelete;
     }
