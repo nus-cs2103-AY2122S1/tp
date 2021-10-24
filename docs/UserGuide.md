@@ -124,7 +124,7 @@ Format: `help`
 
 #### Changing tabs : `tab`
 
-Switches from the tabs, staff view and schedule.
+Switches between the tabs: staff view and schedule.
 
 Format: `tab`
 
