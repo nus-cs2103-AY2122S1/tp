@@ -16,7 +16,7 @@ This project is based on the AB3 project created by the [SE-EDU initiative](http
 
 ## Quick Start
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed on your computer.
 You may install Java `11` from [here](https://www.oracle.com/java/technologies/downloads/#java11).
 2. Download the latest `SalesNote.jar` from [here](https://github.com/AY2122S1-CS2103T-W08-3/tp/releases).
 3. Copy the file to the folder you want to use as the _home folder_ for your SalesNote.
