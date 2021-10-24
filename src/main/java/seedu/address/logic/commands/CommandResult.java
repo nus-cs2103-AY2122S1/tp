@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.person.Person;
+
 /**
  * Represents the result of a command execution.
  */
@@ -27,17 +29,29 @@ public class CommandResult {
     private final boolean isExit;
 
 
+    /** Lesson information of student should be shown to the user. */
+    private final Person student;
+
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean isShowPersonList, boolean isShowHelp,
-                         boolean isShowTagList, boolean isShowSchedule, boolean isExit) {
+    private CommandResult(String feedbackToUser, boolean isShowPersonList, boolean isShowHelp,
+                         boolean isShowTagList, boolean isShowSchedule, boolean isExit, Person student) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.isShowPersonList = isShowPersonList;
         this.isShowHelp = isShowHelp;
         this.isExit = isExit;
         this.isShowTagList = isShowTagList;
         this.isShowSchedule = isShowSchedule;
+        this.student = student;
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified fields.
+     */
+    public CommandResult(String feedbackToUser, boolean isShowPersonList, boolean isShowHelp,
+                         boolean isShowTagList, boolean isShowSchedule, boolean isExit) {
+        this(feedbackToUser, isShowPersonList, isShowHelp, isShowTagList, isShowSchedule, isExit, null);
     }
 
     /**
@@ -45,7 +59,15 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, true, false, false, false, false);
+        this(feedbackToUser, true, false, false, false, false, null);
+    }
+
+    /**
+     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser} and {@code student},
+     * and other fields set to their default value.
+     */
+    public CommandResult(String feedbackToUser, Person student) {
+        this(feedbackToUser, true, false, false, false, false, student);
     }
 
     public String getFeedbackToUser() {
@@ -66,6 +88,14 @@ public class CommandResult {
 
     public boolean isShowSchedule() {
         return isShowSchedule;
+    }
+
+    public boolean isDisplayStudent() {
+        return student != null;
+    }
+
+    public Person getStudent() {
+        return student;
     }
 
     public boolean isExit() {
