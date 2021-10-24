@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.edrecord.commons.core.index.Index;
 import seedu.edrecord.commons.util.StringUtil;
 import seedu.edrecord.logic.parser.exceptions.ParseException;
+import seedu.edrecord.model.assignment.Grade;
+import seedu.edrecord.model.assignment.Grade.GradeStatus;
 import seedu.edrecord.model.assignment.Score;
 import seedu.edrecord.model.assignment.Weightage;
 import seedu.edrecord.model.group.Group;
@@ -189,5 +191,26 @@ public class ParserUtil {
             throw new ParseException(Score.MESSAGE_CONSTRAINTS);
         }
         return new Score(trimmedScore);
+    }
+
+    /**
+     * Parses a {@code String status} into a {@code GradeStatus}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code status} is invalid.
+     */
+    public static GradeStatus parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim().toUpperCase();
+        switch (trimmedStatus) {
+        case "NOT SUBMITTED":
+            return GradeStatus.NOT_SUBMITTED;
+        case "SUBMITTED":
+            return GradeStatus.SUBMITTED;
+        case "GRADED":
+            return GradeStatus.GRADED;
+        default:
+            throw new ParseException(Grade.MESSAGE_CONSTRAINTS);
+        }
     }
 }

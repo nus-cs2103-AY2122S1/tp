@@ -1,8 +1,8 @@
 package seedu.edrecord.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_WEIGHTAGE;
 
 import seedu.edrecord.logic.commands.exceptions.CommandException;

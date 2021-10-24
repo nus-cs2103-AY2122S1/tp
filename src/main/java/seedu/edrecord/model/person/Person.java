@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.grade.Grade;
+import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.module.ModuleGroupMap;

@@ -1,10 +1,8 @@
-package seedu.edrecord.model.grade;
+package seedu.edrecord.model.assignment;
 
 import static seedu.edrecord.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-
-import seedu.edrecord.model.assignment.Score;
 
 /**
  * Represents an Grade under a Student in EdRecord.
@@ -12,6 +10,7 @@ import seedu.edrecord.model.assignment.Score;
  */
 public class Grade {
     public enum GradeStatus { NOT_SUBMITTED, SUBMITTED, GRADED }
+    public static final String MESSAGE_CONSTRAINTS = "Status should be not submitted, submitted or graded.";
 
     private final Score score;
     private final GradeStatus status;

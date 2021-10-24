@@ -11,6 +11,7 @@ import static seedu.edrecord.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.edrecord.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ import seedu.edrecord.commons.util.CollectionUtil;
 import seedu.edrecord.logic.commands.exceptions.CommandException;
 import seedu.edrecord.model.Model;
 import seedu.edrecord.model.assignment.Assignment;
-import seedu.edrecord.model.grade.Grade;
+import seedu.edrecord.model.assignment.Grade;
 import seedu.edrecord.model.group.Group;
 import seedu.edrecord.model.module.Module;
 import seedu.edrecord.model.name.Name;
@@ -34,7 +35,7 @@ import seedu.edrecord.model.person.Phone;
 import seedu.edrecord.model.tag.Tag;
 
 /**
- * Edits the details of an existing person in edrecord.
+ * Edits the details of an existing person in EdRecord.
  */
 public class EditCommand extends Command {
 
@@ -57,7 +58,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in edrecord.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in EdRecord.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -141,6 +142,7 @@ public class EditCommand extends Command {
         private Email email;
         private Info info;
         private Set<Tag> tags;
+        private Map<Assignment, Grade> grades;
 
         public EditPersonDescriptor() {
         }
@@ -155,13 +157,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setInfo(toCopy.info);
             setTags(toCopy.tags);
+            setGrades(toCopy.grades);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, info, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, info, tags, grades);
         }
 
         public void setName(Name name) {
@@ -213,6 +216,23 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code grades} to this object's {@code grades}.
+         * A defensive copy of {@code grades} is used internally.
+         */
+        public void setGrades(Map<Assignment, Grade> grades) {
+            this.grades = (grades != null) ? new HashMap<>(grades) : null;
+        }
+
+        /**
+         * Returns an unmodifiable grades map, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code grades} is null.
+         */
+        public Optional<Map<Assignment, Grade>> getGrades() {
+            return (grades != null) ? Optional.of(Collections.unmodifiableMap(grades)) : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -233,6 +253,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getInfo().equals(e.getInfo())
                     && getTags().equals(e.getTags());
+                    && getGrades().equals(e.getGrades());
         }
     }
 }
