@@ -3,8 +3,8 @@ package safeforhall.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import safeforhall.logic.commands.*;
-import safeforhall.logic.parser.exceptions.*;
+import safeforhall.logic.commands.ImportCommand;
+import safeforhall.logic.parser.exceptions.ParseException;
 
 public class ImportCommandParser implements Parser<ImportCommand> {
 

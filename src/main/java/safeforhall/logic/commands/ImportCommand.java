@@ -2,7 +2,8 @@ package safeforhall.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.*;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import com.opencsv.exceptions.CsvException;
 import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
-import safeforhall.model.event.*;
+import safeforhall.model.event.Event;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -62,9 +63,9 @@ public class ImportCommand extends Command {
         AddressBook importedData = readCsv();
         List<Event> eventList = model.getAddressBook().getEventList();
         for (Event event: eventList) {
-//            event.clearResidentList();
+            // event.clearResidentList();
         }
-        importedData.setEvents(eventList);        
+        importedData.setEvents(eventList);
         model.setAddressBook(importedData);
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -111,7 +112,7 @@ public class ImportCommand extends Command {
         if (row.length != 8) {
             throw new IllegalArgumentException(MESSAGE_INCORRECT_FIELDS);
         }
-    
+
         Name name = new Name(row[0]);
         Room room = new Room(row[1]);
         Phone phone = new Phone(row[2]);
