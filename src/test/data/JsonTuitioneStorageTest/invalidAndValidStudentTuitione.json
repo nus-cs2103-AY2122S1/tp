@@ -3,11 +3,18 @@
     "name": "Valid Student",
     "phone": "9482424",
     "email": "hans@example.com",
-    "address": "4th street"
+    "address": "4th street",
+    "grade" : "S1",
+    "remarked": [ "friends" ],
+    "lessonCodes" : [ ]
   }, {
     "name": "Student With Invalid Phone Field",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "address": "4th street"
-  } ]
+    "address": "4th street",
+    "grade" : "S1",
+    "remarked": [ "friends" ],
+    "lessonCodes" : [ ]
+  } ],
+  "lessons": [ ]
 }
