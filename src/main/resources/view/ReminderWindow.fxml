@@ -2,6 +2,7 @@
 
 <?import java.net.URL?>
 <?import javafx.scene.Scene?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
@@ -13,9 +14,10 @@
                 <URL value="@Fonts.css" />
                 <URL value="@ReminderWindow.css" />
             </stylesheets>
-            <VBox minHeight="600.0" minWidth="550.0">
+            <VBox alignment="CENTER" minHeight="600.0" minWidth="550.0" style="-fx-background-color: A6B1E160;">
             <children>
-               <ListView fx:id="lessonsList" prefHeight="500.0" prefWidth="350.0" VBox.vgrow="ALWAYS"/>
+               <ListView fx:id="lessonsList" prefHeight="500.0" prefWidth="350.0" VBox.vgrow="ALWAYS" />
+                <Label fx:id="placeholder" alignment="CENTER" contentDisplay="CENTER" styleClass="placeholder_label" text="\$placeholder" wrapText="true" VBox.vgrow="ALWAYS" />
             </children>
             </VBox>
         </Scene>

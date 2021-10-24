@@ -19,7 +19,6 @@ public class ExternalWindow extends UiPart<Stage> {
      */
     public ExternalWindow(String fxmlFileName, Stage root) {
         super(fxmlFileName, root);
-        root.getScene().setFill(Color.web(TEXT_COLOR));
     }
 
     /**

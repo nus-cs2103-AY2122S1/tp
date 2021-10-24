@@ -4,8 +4,10 @@ import java.util.logging.Logger;
 
 import com.calendarfx.model.Entry;
 
+import javafx.beans.binding.Bindings;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
@@ -18,9 +20,13 @@ import seedu.address.model.lesson.Lesson;
 public class ReminderWindow extends ExternalWindow {
     private static final String FXML = "ReminderWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(ReminderWindow.class);
+    private static final String PLACEHOLDER_MESSAGE = "There is no upcoming lessons.";
 
     @FXML
     private ListView<Entry<Lesson>> lessonsList;
+
+    @FXML
+    private Label placeholder;
 
     /**
      * Constructs a reminder window with the list of upcoming lessons.
@@ -31,6 +37,10 @@ public class ReminderWindow extends ExternalWindow {
         this(new Stage());
         lessonsList.setItems(lessons);
         lessonsList.setCellFactory(listView -> new ReminderWindow.LessonListViewCell());
+        lessonsList.managedProperty().bind(Bindings.isNotEmpty(lessonsList.getItems()));
+        placeholder.managedProperty().bind(Bindings.isEmpty(lessonsList.getItems()));
+        placeholder.visibleProperty().bind(Bindings.isEmpty(lessonsList.getItems()));
+        placeholder.setText(PLACEHOLDER_MESSAGE);
     }
 
     /**
