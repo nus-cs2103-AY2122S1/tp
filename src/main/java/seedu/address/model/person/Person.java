@@ -86,6 +86,13 @@ public class Person {
         return Collections.unmodifiableSet(tags);
     }
 
+    public Tag getFirstTag() {
+        if (!tags.isEmpty()) {
+            return tags.iterator().next();
+        }
+        return null;
+    }
+
 
     /**
      * Returns true if both persons have the same name.
