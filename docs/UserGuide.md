@@ -98,7 +98,7 @@ A person can have any number of labels (including 0)
 
 Examples:
 * `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`
-* `add -n Betsy Crowe -l friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -d Bald -l criminal` 
+* `add -n Betsy Crowe -l friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -d Bald -l criminal`
 
 ### Listing all persons : `list`
 
@@ -177,7 +177,7 @@ Format: `deletetask INDEX -ti TASK_INDEX…​`
 
 * Deletes a task attached to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The task deleted is specified by the `TASK_INDEX`. The task_index refers to the index number displayed in the tasklist of said person. The index **must be a positive integer** 1, 2, 3, …​
-* If the same `TASK_INDEX` is specified more than once, it will only be deleted once. 
+* If the same `TASK_INDEX` is specified more than once, it will only be deleted once.
 
 Examples:
 * `deletetask 2 -ti 2 -ti 2` Deletes the 2nd task attached to the 2nd person.
@@ -191,7 +191,7 @@ Format: `edittask INDEX -ti TASK_INDEX [-tn TASKNAME] [-td TASK_DATE] [-tt TASK_
 
 * Edits tasks attached to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * The tasks edited  is specified by the `TASK_INDEX`. The task_index refers to the index number displayed in the tasklist of said person. The index **must be a positive integer** 1, 2, 3, …​
-* Multiple tasks of one person can be edited in one command. All fields provided after a given `TASK_INDEX` are taken to be updated fields for the task at that index. 
+* Multiple tasks of one person can be edited in one command. All fields provided after a given `TASK_INDEX` are taken to be updated fields for the task at that index.
 * Existing values will be updated to the input value.
 * At least one of the optional fields must be provided per `TASK_INDEX` provided.
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
