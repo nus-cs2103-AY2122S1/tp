@@ -150,7 +150,10 @@ public class CommandTestUtil {
                 || command instanceof FindMemberCommand
                 || command instanceof ListMemberCommand
                 || command instanceof SetMemberAvailabilityCommand
-                || command instanceof SortMemberCommand;
+                || command instanceof SortMemberCommand
+                || command instanceof ClearAttendanceCommand
+                || command instanceof MarkAttendanceCommand
+                || command instanceof UnmarkAttendanceCommand;
     }
 
     /**

@@ -42,7 +42,7 @@ public class MarkAttendanceCommand extends Command {
         }
 
         model.markMembersAttendance(indices);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
 
     @Override
