@@ -18,7 +18,7 @@ import seedu.address.model.person.ModuleCodesContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new FindPersonCommand object
  */
 public class FindPersonCommandParser implements Parser<FindPersonCommand> {
 
