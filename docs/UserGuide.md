@@ -438,4 +438,4 @@ Action | Format, Examples
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Staff'd home folder.
 
 **Q**: Where is the save file located?<br>
-**A**: In the data folder.
+**A**: In the data folder in the _home folder_ called addressbook.json
