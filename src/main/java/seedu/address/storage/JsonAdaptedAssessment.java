@@ -28,7 +28,7 @@ public class JsonAdaptedAssessment {
     }
 
     /**
-     * Converts a given {@code Student} into this class for Jackson use.
+     * Converts a given {@code Assessment} into this class for Jackson use.
      */
     public JsonAdaptedAssessment(Assessment source) {
         assessmentName = source.getAssessmentName().toString();

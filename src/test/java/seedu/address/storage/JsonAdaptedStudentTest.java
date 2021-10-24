@@ -6,6 +6,8 @@ import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FOR
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalStudents.BENSON;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
