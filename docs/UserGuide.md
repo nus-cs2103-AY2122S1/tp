@@ -80,7 +80,7 @@ creating groups and assigning students to groups, as well as the management of g
 ### General features
 
 <div markdown="block" class="alert alert-info">
-**:information_source: Listed in this section are general features and commands to use and manage CSBook.**<br>
+:information_source: **Note**: Listed in this section are general features and commands to use and manage CSBook.
 </div>
 
 #### Viewing help : `help`
@@ -113,11 +113,8 @@ CSBook data are saved as an encrypted JSON file `[JAR file location]/data/csbook
 data through the commands provided.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.
-</div>
+If there are changes to the data file that makes its format invalid, CSBook will discard all data and start with an empty data file on the next run.<br/>
 
-
-<div markdown="span" class="alert alert-warning">
 :warning: **Warning**: Do not intentionally change the data file in order to restart CSBook afresh with an empty data file. You should use the 
 `clear` command instead if you want to clear all currently stored data.
 </div>
@@ -127,7 +124,7 @@ If there are changes to the data file that makes its format invalid, CSBook will
 <div markdown="block" class="alert alert-info">
 :information_source: **Note**: Listed in this section are all the features and commands related to 
 managing and tracking student information in CSBook. Stored student information helps you keep track
-of all the information related to each of your students in one collated entry.<br>
+of all the information related to each of your students in one collated entry.
 </div>
 
 #### Adding a student: `add`
@@ -139,7 +136,9 @@ Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
 * Adds a new student into CSBook.
 * The group name must correspond to that of a group that has been added to CSBook before the student is created. Each student must belong to at least one group.
 
-**:information_source: Refer to Group management features for more details on how you may use groups to enhance the way you track students.**
+<div markdown="block" class="alert alert-info">
+:information_source: **Note on groups**: Refer to the "Group management features" section for more details on how you may use groups to enhance the way you track students.**
+</div>
 
 Examples:
 * `add n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
@@ -203,7 +202,6 @@ Examples:
 ### Group management features
 
 <div markdown="block" class="alert alert-info">
-
 :information_source: **Note**: Listed in this section are all the features and commands related to
 managing groups that students can be assigned to in CSBook. Groups allow you to put students
 that match some similar criteria into the same category for easier lookup and management of students.<br>
