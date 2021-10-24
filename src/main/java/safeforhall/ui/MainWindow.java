@@ -4,12 +4,11 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextInputControl;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import safeforhall.commons.core.GuiSettings;
 import safeforhall.commons.core.LogsCenter;
@@ -43,7 +42,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
-    private MenuItem helpMenuItem;
+    private SplitPane splitpane1;
+
+    @FXML
+    private Button helpMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -65,6 +67,21 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private TabPane tabPane;
+    
+    @FXML
+    private Tab residentsTab;
+
+    @FXML
+    private Tab eventsTab;
+
+    @FXML
+    private Tab helpTab;
+
+    @FXML
+    private Tab exitTab;
+
+    @FXML
+    private AnchorPane anchor;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -82,6 +99,59 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        
+        residentsTab.setGraphic(new Label("Residents"));
+        eventsTab.setGraphic(new Label("Events"));
+        Button helpButton = createTabButton("/images/exit.png");
+        helpTab.setGraphic(helpButton);
+        helpTab.setDisable(true);
+//        exitTab.setGraphic(new Label("Exit"));
+        Button exitButton = createTabButton("/images/exit.png");
+//        exitButton.setOnAction(handleExit(););
+        exitTab.setGraphic(exitButton);
+        exitTab.setDisable(true);
+        tabPane.setRotateGraphic(false);
+
+//        Tab helpTab = new Tab("Help");
+//        Tab exitTab = new Tab("Exit");
+//
+//        tabPane.getTabs().add(help);
+//        tabPane.getTabs().add(exit);
+
+//        tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
+//
+//        // HBox of control buttons
+//        HBox hbox = new HBox();
+//        hbox.getChildren().addAll(createTabButton("clock.png"), createTabButton("clock.png"));
+//
+//        // Anchor the controls
+//        anchor.getChildren().addAll(tabPane, hbox);
+//        AnchorPane.setTopAnchor(hbox, 3.0);
+//        AnchorPane.setRightAnchor(hbox, 5.0);
+//        AnchorPane.setTopAnchor(tabPane, 1.0);
+//        AnchorPane.setRightAnchor(tabPane, 1.0);
+//        AnchorPane.setLeftAnchor(tabPane, 1.0);
+//        AnchorPane.setBottomAnchor(tabPane, 1.0);
+//
+//        // Create some tabs
+//        Tab tab = new Tab("Files");
+//        tab.setGraphic(createTabButton("clock.png"));
+//        ((Button) tab.getGraphic()).setOnAction(e -> System.out.println("I'll show the list of files!"));
+//        tabPane.getTabs().add(tab);
+//
+//        tab = new Tab("Network");
+//        tab.setGraphic(createTabButton("clock.png"));
+//        ((Button) tab.getGraphic()).setOnAction(e -> System.out.println("I'll show the network!"));
+//        tabPane.getTabs().add(tab);
+    }
+
+    private Button createTabButton(String iconName) {
+        Button button = new Button();
+        ImageView imageView = new ImageView(new Image(getClass().getResource(iconName).toExternalForm(),
+                16, 16, false, true));
+        button.setGraphic(imageView);
+        button.getStyleClass().add("tab-button");
+        return button;
     }
 
     public Stage getPrimaryStage() {
@@ -102,8 +172,8 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the accelerator of a MenuItem.
      * @param keyCombination the KeyCombination value of the accelerator
      */
-    private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
-        menuItem.setAccelerator(keyCombination);
+    private void setAccelerator(Button menuItem, KeyCombination keyCombination) {
+//        menuItem.setAccelerator(keyCombination);
 
         /*
          * TODO: the code below can be removed once the bug reported here
