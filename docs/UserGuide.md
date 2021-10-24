@@ -335,7 +335,7 @@ When you run the clear command, all the tasks in the task list of Uni-Fy get del
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
- `clear`
+ - `clear`
 
 </div>
 
@@ -346,7 +346,7 @@ Reverts your previous command which modified the task list of Uni-Fy.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-`undo`
+- `undo`
 
 </div>
 
@@ -357,7 +357,7 @@ Exits the program.
 <div markdown="block" class="alert alert-primary">
 
 **:clipboard: Format:**<br>
-`exit`
+- `exit`
 
 </div>
 
