@@ -85,7 +85,7 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleGenres_multipleAnimesFound() throws ParseException {
-        String expectedMessage = String.format(MESSAGE_ANIME_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(MESSAGE_ANIME_LISTED_OVERVIEW, 2);
         Predicate<Anime> predicate = preparePredicate(
             null, Arrays.asList("action", "horror"));
         FindCommand command = new FindCommand(predicate);
