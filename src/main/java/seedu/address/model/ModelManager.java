@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -217,6 +218,18 @@ public class ModelManager implements Model {
     public void updateFilteredGroupList(Predicate<Group> predicate) {
         requireNonNull(predicate);
         filteredGroups.setPredicate(predicate);
+    }
+
+    //=========== mapper accessors =========================================================================
+
+    @Override
+    public UniqueIdMapper<Person> getPersonMapper() {
+        return addressBook.getPersonMapper();
+    }
+
+    @Override
+    public UniqueIdMapper<Group> getGroupMapper() {
+        return addressBook.getGroupMapper();
     }
 
     @Override

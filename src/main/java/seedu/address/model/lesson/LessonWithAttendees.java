@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Lesson that wraps around a Lesson and its corresponding List of attendees
+ * Use for transporting the association between a lesson and its attendees
  */
 public class LessonWithAttendees {
     private Lesson lesson;

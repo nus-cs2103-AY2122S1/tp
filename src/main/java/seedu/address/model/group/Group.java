@@ -15,12 +15,17 @@ import seedu.address.model.id.HasUniqueId;
 import seedu.address.model.id.UniqueId;
 import seedu.address.model.id.exceptions.DuplicateIdException;
 import seedu.address.model.id.exceptions.IdNotFoundException;
+import seedu.address.model.lesson.Lesson;
+import seedu.address.model.lesson.LessonAssignable;
+import seedu.address.model.lesson.NoOverlapLessonList;
+import seedu.address.model.lesson.exceptions.CannotAssignException;
+import seedu.address.model.lesson.exceptions.OverlappingLessonsException;
 
 /**
  * Represents a Group in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Group implements HasUniqueId, TaskAssignable {
+public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
 
     // Identity fields
     private final GroupName name;
@@ -34,6 +39,9 @@ public class Group implements HasUniqueId, TaskAssignable {
     // the id of persons assigned to this group.
     private final Set<UniqueId> assignedPersonIds = new HashSet<>();
 
+    // lessons belonging to this group.
+    private final NoOverlapLessonList lessonList;
+
     /**
      * Every field must be present and not null.
      */
@@ -41,6 +49,7 @@ public class Group implements HasUniqueId, TaskAssignable {
         this.id = UniqueId.generateId(this);
         requireAllNonNull(name);
         this.name = name;
+        this.lessonList = new NoOverlapLessonList();
     }
 
     /**
@@ -51,17 +60,20 @@ public class Group implements HasUniqueId, TaskAssignable {
         this.id = id;
         this.name = name;
         id.setOwner(this);
+        this.lessonList = new NoOverlapLessonList();
     }
 
     /**
      * Every field must be present and not null.
      */
-    public Group(GroupName name, UniqueId id, Set<UniqueId> assignedTaskIds, Set<UniqueId> assignedPersonIds) {
+    public Group(GroupName name, UniqueId id, Set<UniqueId> assignedTaskIds, Set<UniqueId> assignedPersonIds,
+                 NoOverlapLessonList lessonList) {
         requireAllNonNull(name, id, assignedTaskIds, assignedPersonIds);
         this.id = id;
         this.name = name;
         this.assignedTaskIds.addAll(assignedTaskIds);
         this.assignedPersonIds.addAll(assignedPersonIds);
+        this.lessonList = lessonList;
         id.setOwner(this);
     }
 
@@ -74,6 +86,7 @@ public class Group implements HasUniqueId, TaskAssignable {
         this.name = toCopy.name;
         this.assignedTaskIds.addAll(toCopy.assignedTaskIds);
         this.assignedPersonIds.addAll(toCopy.assignedPersonIds);
+        this.lessonList = toCopy.lessonList;
     }
 
     public GroupName getName() {
@@ -146,7 +159,7 @@ public class Group implements HasUniqueId, TaskAssignable {
      */
     public Group updateAssignedTaskIds(Set<UniqueId> newAssignedTaskIds) {
         requireNonNull(newAssignedTaskIds);
-        return new Group(name, id, newAssignedTaskIds, assignedPersonIds);
+        return new Group(name, id, newAssignedTaskIds, assignedPersonIds, lessonList);
     }
 
     /**
@@ -157,7 +170,7 @@ public class Group implements HasUniqueId, TaskAssignable {
      */
     public Group updateAssignedPersonIds(Set<UniqueId> ids) {
         requireNonNull(ids);
-        return new Group(name, id, assignedTaskIds, ids);
+        return new Group(name, id, assignedTaskIds, ids, lessonList);
     }
 
     public List<Group> getFilteredListFromModel(Model model) {
@@ -175,6 +188,43 @@ public class Group implements HasUniqueId, TaskAssignable {
 
         return otherGroup != null
                 && otherGroup.getName().equals(getName());
+    }
+
+
+    @Override
+    public boolean canAssignLesson(Lesson lesson) {
+        return !lesson.doLessonsOverlap(lesson);
+    }
+
+    @Override
+    public Group assignLesson(Lesson lesson) throws CannotAssignException {
+        NoOverlapLessonList newList;
+        try {
+            newList = lessonList.addLesson(lesson);
+        } catch (OverlappingLessonsException e) {
+            throw new CannotAssignException(e.getMessage());
+        }
+        return new Group(name, id, assignedTaskIds, assignedPersonIds, newList);
+    }
+
+    @Override
+    public Group unassignLesson(int index) throws IndexOutOfBoundsException {
+        NoOverlapLessonList newList = lessonList.removeLesson(index);
+        return new Group(name, id, assignedTaskIds, assignedPersonIds, newList);
+    }
+
+    @Override
+    public List<Lesson> getLessons() {
+        return Collections.unmodifiableList(lessonList.getLessons());
+    }
+
+    @Override
+    public Group setLessons(List<Lesson> lessons) throws CannotAssignException {
+        if (NoOverlapLessonList.doAnyLessonsOverlap(lessons)) {
+            throw new CannotAssignException(OverlappingLessonsException.MESSAGE);
+        }
+        NoOverlapLessonList newList = NoOverlapLessonList.of(lessons);
+        return new Group(name, id, assignedTaskIds, assignedPersonIds, newList);
     }
 
     /**

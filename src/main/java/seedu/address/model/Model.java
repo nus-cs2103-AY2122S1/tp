@@ -7,6 +7,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
+import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -166,4 +167,16 @@ public interface Model {
      * @return
      */
     List<LessonWithAttendees> getSortedLessonsWithAttendees();
+
+    /**
+     * Returns a mapper that can convert unique Ids to persons
+     * @return the UniqueIdMapper
+     */
+    UniqueIdMapper<Person> getPersonMapper();
+
+    /**
+     * Returns a mapper that can convert unique Ids to groups
+     * @return the UniqueIdMapper
+     */
+    UniqueIdMapper<Group> getGroupMapper();
 }

@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.group.Group;
+import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
@@ -154,6 +155,16 @@ public class ModelStub implements Model {
 
     @Override
     public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public UniqueIdMapper<Person> getPersonMapper() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public UniqueIdMapper<Group> getGroupMapper() {
         throw new AssertionError("This method should not be called.");
     }
 
