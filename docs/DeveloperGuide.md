@@ -509,10 +509,13 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 1 2`<br>
       Expected: First and second persons are deleted from the list. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
 
-   4. Test case: `delete 0`<br>
+   4. Test case: `delete 3 1 2`<br>
+      Expected: First, second and third persons are deleted from the list. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+
+   5. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   5. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a b` (where a and b are in descending order), `...` <br>
+   6. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `...` <br>
       Expected: Similar to previous.
 
 2. Deleting a person while search results are being shown
@@ -524,10 +527,13 @@ testers are expected to do more *exploratory* testing.
    3. Test case: `delete 1 2`<br>
       Expected: First and second persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
 
-   4. Test case: `delete 0`<br>
+   4. Test case: `delete 3 1 2`<br>
+      Expected: First, second and third persons displayed in the search results are deleted from the application. Details of the deleted persons shown in the status message. Timestamp in the status bar is updated.
+
+   5. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   5. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `delete a b` (where a and b are in descending order), `...` <br>
+   6. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size), `...` <br>
       Expected: Similar to previous.
 
 2. _{ more test cases …​ }_
