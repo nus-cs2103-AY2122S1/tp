@@ -1,0 +1,48 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":TutorAidParser" as TutorAidParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":AddStudentCommandParser" as AddStudentCommandParser LOGIC_COLOR
+participant ":AddStudentCommand" as AddStudentCommand LOGIC_COLOR
+end box
+
+[-> LogicManager : execute("add -s sn/John...")
+activate LogicManager
+
+LogicManager -> TutorAidParser : parseCommand("-s sn/John...")
+activate TutorAidParser
+
+create AddCommandParser
+TutorAidParser -> AddCommandParser : parse("-s sn/John...")
+activate AddCommandParser
+
+create AddStudentCommandParser
+AddCommandParser -> AddStudentCommandParser : parse("sn/John...")
+activate AddStudentCommandParser
+
+create AddStudentCommand
+AddStudentCommandParser -> AddStudentCommand : AddStudentCommand(student)
+activate AddStudentCommand
+
+AddStudentCommand --> AddStudentCommandParser
+deactivate AddStudentCommand
+
+AddStudentCommandParser --> AddCommandParser
+deactivate AddStudentCommandParser
+
+AddCommandParser --> TutorAidParser
+deactivate AddCommandParser
+
+TutorAidParser --> LogicManager
+deactivate TutorAidParser
+
+deactivate LogicManager
+
+destroy AddStudentCommandParser
+
+destroy AddCommandParser
+
+@enduml

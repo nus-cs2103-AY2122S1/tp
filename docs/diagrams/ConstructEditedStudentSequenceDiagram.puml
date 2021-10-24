@@ -1,0 +1,39 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":PaidCommand" as PaidCommand LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "model:Model" as Model MODEL_COLOR
+participant "lastShownList:List<Student>" as List MODEL_COLOR
+participant "editedStudent:Student" as Student MODEL_COLOR
+end box
+
+activate LogicManager
+
+LogicManager -> PaidCommand : execute(model)
+activate PaidCommand
+
+PaidCommand -> Model : getFilteredStudentList()
+activate Model
+
+Model --> PaidCommand : lastShownList
+deactivate Model
+
+PaidCommand -> List : get(1)
+activate List
+
+List --> PaidCommand : studentToEdit
+deactivate List
+
+create Student
+PaidCommand -> Student
+activate Student
+
+Student --> PaidCommand
+deactivate Student
+
+@enduml

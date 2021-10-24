@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Initial state
+
+package State {
+    class State1 as ":ModelManager"
+}
+
+class Pointer as "Current State" #FFFFFF
+Pointer -up-> State1
+@end

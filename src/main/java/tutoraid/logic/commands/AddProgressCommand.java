@@ -51,11 +51,8 @@ public class AddProgressCommand extends AddCommand {
         }
 
         Student studentToEdit = lastShownList.get(targetIndex.getZeroBased());
-        Student editedStudent = new Student(
-                studentToEdit.getStudentName(), studentToEdit.getStudentPhone(), studentToEdit.getParentName(),
-                studentToEdit.getParentPhone(), this.progress, studentToEdit.getPaymentStatus());
+        studentToEdit.addProgress(this.progress);
 
-        model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, progress, studentToEdit));

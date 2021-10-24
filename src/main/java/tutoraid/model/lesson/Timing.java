@@ -10,8 +10,8 @@ import static tutoraid.commons.util.AppUtil.checkArgument;
 public class Timing {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Timing should only contain a pair of 4 numbers each separated by a dash";
-    public static final String VALIDATION_REGEX = "\\d{4}-\\d{4}";
+            "Timing must not be empty and can include alphanumeric, forward slash, hyphen and space";
+    public static final String VALIDATION_REGEX = "^[a-zA-Z\\d-\\s/]+$";
     public final String timing;
 
     /**

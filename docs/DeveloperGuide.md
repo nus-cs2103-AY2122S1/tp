@@ -13,16 +13,22 @@ title: Developer Guide
    - [Storage component](#storage-component)
    - [Common classes](#common-classes)
 5. [Implementation](#implementation)
+   - [Add progress feature](#add-progress-feature)
+   - [Add student feature](#add-student-feature)
+   - [Delete student feature](#delete-student-feature)
+   - [View student/lesson feature](#view-studentlesson-feature)
+   - [Card-like UI Elements](#card-like-ui-elements)
+   - [Set/Unset payment made feature](#setunset-payment-made-feature)
    - [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
    - [[Proposed] Data archiving](#proposed-data-archiving)
-6. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
-7. [Appendix: Requirements](#appendix-requirements)
+7. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+8. [Appendix: Requirements](#appendix-requirements)
    - [Product Scope](#product-scope)
    - [User stories](#user-stories)
    - [Use cases](#use-cases)
    - [Non-Functional Requirements](#non-functional-requirements)
    - [Glossary](#glossary)
-8. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+9. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
    - [Launch and shutdown](#launch-and-shutdown)
    - [Deleting a person](#deleting-a-person)
    - [Saving data](#saving-data)
@@ -170,11 +176,282 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add progress feature
+
+#### Implementation
+
+The add progress feature adds a progress to an existing student's progress list in TutorAid. Each student can have up
+to 10 progress entries. Adding a new entry to a student with 10 entries will result in the deletion of the oldest entry.
+
+This feature implements the following operations:
+* `AddProgressCommand#execute()` —Creates a Progress object and adds it to a ProgressList object of a Student object
+in TutorAid.
+
+It is also facilitated by the methods below:
+* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a progress.
+* `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a progress.
+* `AddProgressCommandParser#parse()` — Parses the individual arguments to create a Progress object.
+
+When a Student object is created, a ProgressList object is created for this Student object. This ProgressList object
+stores an ArrayList of type Progress that keeps track of a maximum of 10 Progress objects. We implement `ProgressList`
+as a field in `Student`.
+
+![ProgressListClass](images/StudentWithProgressListClassDiagram.png)
+
+Given below is an example of what happens when the user attempts to add a progress entry to a student in TutorAid
+by entering a command:
+
+`add -p 2 Did Homework​`
+
+1. `LogicManager#execute()` is executed, where the above user input is passed into `TutorAidParser#parseCommand()`.
+
+2. `TutorAidParser#parseCommand()` then extracts the first keyword of every command. Since the keyword `add` would be
+   extracted, the remaining arguments of the command (`-p 2 Did Homework​`) are then passed into
+   `AddCommandParser#parse()`.
+
+3. `AddCommandParser#parse()` extracts the command flag `-p` at the start of its argument, which denotes the addition
+   of a progress. Thus, the remaining (`2 Did Homework​`) is then passed into `AddProgressCommandParser#parse()`.
+
+4. The remaining (`2 Did Homework​`) is then parsed into index `2` and progress description `Did Homework`, which
+   are then used to construct an `AddProgressCommand` object. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+At this point, if `AddProgressCommandParser#parse()` detects that invalid input has been supplied, the command will fail 
+its execution and `ParseException` will be thrown.</div>
+
+Below is the sequence diagram that depicts the parsing of the `add -p` command:
+![ParseAddProgress](images/ParseAddProgressSequenceDiagram.png)
+
+5. `LogicManager#execute()` then calls upon `AddProgressCommand#execute()`. It communicates with the `Model` to get the
+   index-specified `Student` instance.
+
+Below is the sequence diagram that depicts how `AddProgressCommand` gets the student to edit:
+![GetStudentToAddProgress](images/GetStudentToAddProgressSequenceDiagram.png)
+
+6. `AddProgressCommand` calls the `Student#addProgress()` to add the new progress to the specified student.
+
+7. `AddProgressCommand` then calls the `Model#updateFilteredStudentList()` to update the data in the system with
+   regard to this change.
+
+8. The result of the `AddProgressCommand` execution is then encapsulated as a `CommandResult` object, which is
+   returned to `LogicManager`.
+
+Below is the sequence diagram that depicts the process of the adding a progress to a student:
+![AddProgressToStudent](images/AddProgressToStudentSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to keep track of all the progress (maximum 10) of a student:**
+
+* **Alternative 1 (current choice):** Implements a ProgressList class.
+    * Pros: Abstracts away the management of progress from the Student class.
+    * Cons: Potentially more dependency.
+
+* **Alternative 2:** Implements an ArrayList of type Progress in the Student class.
+    * Pros: Easier to implement.
+    * Cons: Student class may have too many responsibilities.
+
+### Add student feature
+
+#### Implementation
+
+The 'add student' feature adds a student contact to TutorAid. A student contact consists of the student's name, 
+student's contact number, the parent's name and parent's contact number. 
+
+The feature is mainly implemented by the following methods:
+* `AddStudentCommand::execute()` — Adds a `Student` object to TutorAid.
+  
+It is also additionally facilitated by the methods below:
+* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the addition of a student 
+  contact.
+* `AddCommandParser#parse()` — Checks for the command flag that specifies the addition of a student contact.
+* `AddStudentCommandParser#parse()` — Parses the individual arguments to create a `Student` object.
+* `ModelManager#addStudent()` — Represents the in-memory model of TutorAid's student book data.
+* `StudentBook#addStudent()` — Adds a student to TutorAid's student book.
+
+Given below is an example of what happens when the user attempts to add a student contact to TutorAid by entering 
+a command `add -s sn/John Doe …​`:
+
+1. The command is first passed into `TutorAidParser#parseCommand()`, which extracts the first keyword of every command. 
+   Since the keyword `add` would be extracted, the remaining arguments of the command (`-s sn/John Doe …​`) are passed 
+   then into `AddCommandParser#parse()`.
+
+2. `AddCommandParser#parse()` extracts the command flag `-s` at the start of its argument, which denotes the addition 
+   of a student contact. Thus, the remaining (`sn/John Doe …​`) is passed into `AddStudentCommandParser#parse`.
+
+3. Each of the different arguments of student contact, such as the student name, student contact number, parent name 
+   and parent number, is parsed by `AddStudentCommandParser#parse()` based on the given input. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+At this point, if `AddStudentCommandParser#parse()` detects that no student name has been supplied, the command will fail 
+its execution and `ParseException` will be thrown.
+</div>
+
+4. For optional parameters, which are all parameters other the student's name, if the argument is not supplied by the
+   user, a default argument (`""`) is instead supplied by the `AddStudentCommandParser#parse()`.
+
+Below is the sequence diagram that depicts the parsing of the `add -s` command:
+![ParseAddStudentCommand](images/ParseAddStudentCommandSequenceDiagram.png)
+
+5. The individual arguments for the student contact are then passed into `Model#Student()` to create a `Student` object. 
+
+6. The `AddStudentCommand#execute()` is then called upon to add the student into TutorAid. This in turn calls on 
+   `ModelManager#addStudent()` and `StudentBook#addStudent()` to store the details of the new student contact in memory. 
+   
+7. Lastly, a `CommandResult` object is returned to notify the user that the student has been successfully added.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** 
+If the student object created appears to be a duplicate of an existing contact (a contact is said to be a duplicate if 
+all of its fields are the same as that of an existing contact), the new student object will not be stored in 
+TutorAid and user will be alerted of the duplicate instead. 
+</div>
+
+Below is the sequence diagram that depicts an overview of a student contact being successfully added to TutorAid:
+![AddStudent](images/AddStudentSequenceDiagram.png)
+
+### Design considerations:
+
+**Aspect: How to differentiate the `add -s` command from other `add` commands:**
+
+* **Alternative 1 (current choice):** The `add` command word and `-s` command flag 
+  are parsed one after another, in two different classes. 
+    * Pros: Better use of abstraction and increases cohesion, where one class only extracts the command word and 
+      another class extracts the command flag.
+    * Cons: Time taken to execute the command may increase as more classes and methods are required to execute it.
+
+* **Alternative 2:** The `add` command word and `-s` command flag are parsed in the same class, by the same method. 
+    * Pros: Command can be executed quickly as only one method is required to parse the command.
+    * Cons: Having a single parse method may result in the method having multiple responsibilities to parse various 
+      parts of a command, such as the command word, command flag and arguments.
+    
+
+### Delete student feature
+
+#### Implementation
+
+The delete feature deletes a student contact from TutorAid. 
+
+The feature is mainly implemented by the following methods:
+* `DeleteStudentCommand#execute()` in `DeleteStudentCommand` class: Deletes a student from TutorAid
+
+It is also additionally facilitated by these methods:
+* `TutorAidParser#parseCommand()` — Checks for the command word that is required for the deletion of a student.
+* `DeleteCommandParser#parse()` — Checks for the command flag that specifies the deletion of a student.
+* `DeleteStudentCommandParser#parse()` — Parses the student index specified.
+
+### View student/lesson feature
+
+#### Implementation
+
+The proposed view student/lesson mechanism is facilitated by `ModelManager`. It implements `Model`, stored internally as a `modelManagerStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+
+* `ModelManager#viewStudent()` — Updates student panel with the student of interest and lesson panel with the lessons the student of interest is in.
+* `ModelManager#viewLesson()` — Updates lesson panel with the lesson of interest and student panel with the students that are in this lesson of interest.
+
+This operation is exposed in the `Model` interface as `Model#viewStudent()` and `Model#viewLesson()`.
+
+Given below is an example usage scenario and how the view student mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `ModelManager` will be initialized with the initial model manager state, and the `currentStatePointer` pointing to that single model manager state.
+
+![ViewStudentState0](images/ViewStudentState0.png)
+
+Step 2. The user executes `view -s 1` command to view the 1st student in TutorAid. The `view -s` command calls `Model#viewStudent()`, causing the modified state of model manager after the `view -s 1` command executes to be saved in the `modelManagerStateList`, and the `currentStatePointer` pointing to that model manager state.
+
+The following sequence diagram shows how the view student operation works:
+
+![ViewStudentSequenceDiagram](images/ViewStudentSequenceDiagram.png)
+
+A similar execution scenario can be expected for view lesson mechanism.
+
+#### Design considerations
+
+**Aspect: How view student/lesson executes:**
+
+* **Alternative 1 (current choice):** Filters and updates view panel on command.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+* **Alternative 2:** Filter list beforehand and update view panel on command.
+    * Pros: Will use less memory (e.g. for `view -s`, just load the pre-generated student panel).
+    * Cons: We must ensure that all possible view panels combinations are covered and this might cause slower application initialization.
+    
+### Card-like UI Elements
+
+Card-like UI elements are objects that are shown to the user in their respective list panels, such as `StudentCard` which is displayed in the `StudentListPanel`. These cards come in two flavours: a fully-detailed variant and a minimally-detailed variant. The fully-detailed variant shows all properties while the minimally-detailed variant keeps the list compact and allows the user to view more entries. 
+
+These UI elements inherit the `Card` class, which in turn inherits `UiPart<Region>`. 
+
+![CardClassDiagram](images/CardClassDiagram.png)
+
+At all times, the `LessonListPanel` and `StudentListPanel` in the `MainWindow` will display Lessons and Students from the model using either the fully-detailed or minimal `Card` objects. The variant being displayed depends on the user command: `list -a` will cause both panels to display all details while `list` will cause both panels to display only minimal details. Most other commands that affect the `Model` will cause all information to be displayed.
+
+There are thus two static instances of `StudentListPanel` and `LessonListPanel` each - one for each variant. Every time the `Model` is updated, `MainWindow#fillStudentCard` and `MainWindow#fillLessonCard` will be called to ensure that the correct variant is displayed in the `MainWindow`. The sequence diagram below shows how this works:
+
+![CardUiSequence](images/CardUiSequence.png)
+
+When `fillStudentCard(true)` or `fillLessonCard(true)` are called, the `studentListPanelPlaceholder` and `lessonListPanelPlaceholder` in `MainWindow` are cleared of its nodes to prepare them to accept new nodes (panels). Then, the correct `studentListPanel` and `lessonListPanel` with all details are inserted, thus displaying the fully-detailed panels to the user.
+
+Conversely, if a user chooses to hide the details, `UiManager#hideViewWindow()` will be called instead, which will call `fillStudentCard(false)` and `fillLessonCard(false)` and hide the details.
+
+The above applies to the scenario when the user inputs a command which calls a method that changes the detail visibility of the cards. In contrast, during the application launch, `MainApp` calls the `start` method of `UiManager` which calls `MainWindow#fillInnerParts`. The details are shown below:
+
+![CardUiSequenceLaunch](images/CardUiSequenceLaunch.png)
+
+The panels default to the minimal panels for the application launch.
+
+
+### Set/Unset payment made feature
+
+#### Implementation
+
+The purpose of the set/unset payment made feature is for tutors to modify a student's payment status.
+
+This feature implements the following operations:
+
+* `PaidCommand#execute()` - Updates the payment status of the student to `paid`.
+* `UnpaidCommand#execute()` - Updates the payment status of the student to `unpaid`.
+
+This feature is facilitated by the following operations:
+
+* `TutorAidParser#parseCommand()` - Calls `PaidCommandParser#parse()` or `UnpaidCommandParser#parse()` with the specified student index, depending on the command word in the user input.
+* `PaidCommandParser#parse()` - Returns an instance of `PaidCommand`.
+* `UnpaidCommandParser#parse()` - Returns an instance of `UnpaidCommand`.
+
+To represent a student's payment status, a `PaymentStatus` class is introduced. It stores an immutable instance variable `hasPaid`, of boolean type. We then work with the `Student` model, and implement `PaymentStatus` as a field in `Student`.
+
+<img src="images/StudentWithPaymentStatusClassDiagram.png" width="150" />
+
+Given below is an example usage scenario for setting a student's payment status as `paid`, and how the command is executed.
+
+1. The user executes `paid 2` command to set the payment status of the 2nd student in the address book. `LogicManager#execute()` is executed, where the user input is passed into `TutorAidParser#parseCommand()`. This in turn calls `PaidCommandParser#parse()`, which returns a `PaidCommand` instance if the index is valid.
+
+<img src="images/ParsePaidCommandSequenceDiagram.png" width="650" />
+
+2. `LogicManager#execute()` then calls upon `PaidCommand#execute()`. It communicates with the `Model` to get the index-specified `Student` instance.
+
+3. A `PaymentStatus` instance with the `hasPaid` variable set to `true` is created. This is then passed into the constructor of `Student`, along with the values of the other existing fields of the index-specified student, to create a new `Student` instance.
+
+The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 2 and 3.
+
+<img src="images/ConstructEditedStudentSequenceDiagram.png" width="800" height="275" />
+
+4. `Model#setStudent()` is then called upon to replace the existing `Student` instance in the `StudentBook` with the newly created instance. 
+
+5. The result of the `PaidCommand` execution is then encapsulated as a `CommandResult` object, which is returned to `LogicManager`.
+
+The sequence diagram below illustrates the interactions happening within the `Logic` and `Model` components in Steps 4 and 5.
+
+<img src="images/SetEditedStudentSequenceDiagram.png" width="500" />
+
+A similar execution scenario can be expected for setting a student's payment status as `unpaid`.
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -256,10 +533,10 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -376,7 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Steps 1a1-1a2 are repeated until the command entered is correct.
 
       Use case resumes from step 2.
-      
+    
 * 4a. TutorAid detects an error in the command to delete a student.
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
@@ -644,7 +921,7 @@ Preconditions: There is at least one student added to TutorAid.
 * 4a. TutorAid detects an error in the reset payment command
 
     * 4a1. TutorAid displays an error message and requests the tutor to re-enter the command.
-  
+    
     * 4a2. Tutor re-enters the command.
 
       Steps 4a1-4a2 are repeated until the data entered are correct.
@@ -808,7 +1085,7 @@ Preconditions: The students of the class have been added to TutorAid, and the cl
       Steps 4a1-4a2 are repeated until the command entered is correct.
 
       Use case resumes from step 5.
-      
+    
 * 7a. TutorAid detects an error in the command to remove a student from a class.
 
     * 7a1. TutorAid displays an error message and requests the tutor to re-enter the command.

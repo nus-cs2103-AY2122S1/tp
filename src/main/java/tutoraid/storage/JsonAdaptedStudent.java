@@ -1,5 +1,7 @@
 package tutoraid.storage;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,6 +11,7 @@ import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
 import tutoraid.model.student.Phone;
 import tutoraid.model.student.Progress;
+import tutoraid.model.student.ProgressList;
 import tutoraid.model.student.Student;
 import tutoraid.model.student.StudentName;
 
@@ -23,7 +26,7 @@ class JsonAdaptedStudent {
     private final String studentPhone;
     private final String parentName;
     private final String parentPhone;
-    private final String progress;
+    private final ArrayList<String> progressList;
     private final boolean hasPaid;
 
     /**
@@ -33,13 +36,14 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(
             @JsonProperty("studentName") String studentName, @JsonProperty("studentPhone") String studentPhone,
             @JsonProperty("parentName") String parentName, @JsonProperty("parentPhone") String parentPhone,
-            @JsonProperty("progress") String progress, @JsonProperty("paymentStatus") boolean hasPaid) {
+            @JsonProperty("progressList") ArrayList<String> progressList,
+            @JsonProperty("paymentStatus") boolean hasPaid) {
 
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
-        this.progress = progress;
+        this.progressList = progressList;
         this.hasPaid = hasPaid;
     }
 
@@ -51,7 +55,7 @@ class JsonAdaptedStudent {
         studentPhone = source.getStudentPhone().value;
         parentName = source.getParentName().fullName;
         parentPhone = source.getParentPhone().value;
-        progress = source.getProgress().progress;
+        progressList = source.getProgressList().getAllProgressAsStringArrayList();
         hasPaid = source.getPaymentStatus().hasPaid;
     }
 
@@ -84,14 +88,14 @@ class JsonAdaptedStudent {
         }
         final Phone modelParentPhone = new Phone(parentPhone);
 
-        if (progress == null) {
+        if (progressList == null) {
             throw new IllegalValueException(
-                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Progress.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, ProgressList.class.getSimpleName()));
         }
-        if (!Progress.isValidProgress(progress)) {
+        if (!ProgressList.isValidProgressList(progressList)) {
             throw new IllegalValueException(Progress.MESSAGE_CONSTRAINTS);
         }
-        final Progress modelProgress = new Progress(progress);
+        final ProgressList modelProgress = new ProgressList(progressList);
 
         final PaymentStatus modelPaymentStatus = new PaymentStatus(hasPaid);
 
