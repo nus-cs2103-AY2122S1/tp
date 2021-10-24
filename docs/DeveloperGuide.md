@@ -9,7 +9,7 @@ alter and extend the app for their own use.
 
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 ---
 
