@@ -219,20 +219,20 @@ Examples:
   which is to be completed by the given date with LOW Priority.
 
 
-### Marking a student as present: `marka`
+### Marking a student's attendance: `marka`
 
-Marks the specified student in the student list as present or absent.
+Marks the specified student(s) in the student list as present or absent.
 
-Format: `marka INDEX /wWEEK NUMBER`
+Format: `marka INDEX [MORE_INDEXES] /wWEEK NUMBER`
 
-* Marks the person as present in the specified `INDEX`.
+* Marks the person(s) as present in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the displayed students list.
 * The index and week number must be a positive number: 1, 2, 3…
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `marka 1 /w1` marks the 1st person in the students list as present in week 1.
+* `students` followed by `marka 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as present in week 1.
 * Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
 
 Sample Usage:
@@ -247,18 +247,18 @@ Sample Usage:
 
 ### Marking a student's participation: `markp`
 
-Marks the specified student in the student list as participated or not participated.
+Marks the specified student(s) in the student list as participated or not participated.
 
-Format: `markp INDEX /wWEEK NUMBER`
+Format: `markp INDEX [MORE_INDEXES] /wWEEK NUMBER`
 
-* Marks the person as present in the specified `INDEX`.
+* Marks the person(s) as present in the specified `INDEX`.
 * The index must refer to the index number shown in the displayed students list.
 * The index and week number must be a positive number: 1, 2, 3…
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `markp 1 /w1` marks the 1st person in the students list as participated in week 1.
+* `students` followed by `markp 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
 * Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
 
 Sample Usage:
