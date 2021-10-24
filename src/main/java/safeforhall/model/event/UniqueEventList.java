@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import safeforhall.model.event.exceptions.DuplicateEventException;
 import safeforhall.model.event.exceptions.EventNotFoundException;
-import safeforhall.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
@@ -63,7 +62,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         if (!target.isSameEvent(editedEvent) && contains(editedEvent)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateEventException();
         }
 
         internalList.set(index, editedEvent);
