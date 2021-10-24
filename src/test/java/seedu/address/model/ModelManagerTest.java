@@ -95,6 +95,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredTaskList_withoutSelectedMember_returnsEmptyList() {
+        assertTrue(modelManager.getFilteredTaskList().isEmpty());
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withMember(ALICE).withMember(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();

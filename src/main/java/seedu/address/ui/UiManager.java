@@ -52,6 +52,7 @@ public class UiManager implements Ui {
     }
 
     private Image getImage(String imagePath) {
+        assert MainApp.class.getResourceAsStream(imagePath) != null;
         return new Image(MainApp.class.getResourceAsStream(imagePath));
     }
 

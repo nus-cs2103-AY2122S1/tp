@@ -262,6 +262,15 @@ public class ModelManager implements Model {
     }
 
     /**
+     * Returns an unmodifiable view of the filtered task list of the previously selected member.
+     * If no member has been selected before, return an empty list.
+     */
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return taskListManager.asUnmodifiableObservableList();
+    }
+
+    /**
      * Updates the filter of the filtered task list of the given {@code member}
      * to filter by the given {@code predicate}.
      *
