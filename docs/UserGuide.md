@@ -42,7 +42,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
-1. *Double-click* the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
+1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
 
    ![Ui](images/Ui.png)
 
@@ -140,9 +140,18 @@ Format: **`list`**
 
 Edits an existing person in the address book.
 
-Format: **`edit`** `INDEX  n/NAME [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE]
-[r/REMARK] [t/TAG]…​`
+Format: **`edit`** `FIELD_PREFIX/VALUE [FIELD_PREFIX/VALUE]…​`
 
+* `FIELD_PREFIX/VALUE` can be any of the following: 
+     * `n/NAME`
+     * `g/GENDER`
+     * `p/PHONE`
+     * `e/EMAIL`
+     * `nat/NATIONALITY`
+     * `tg/TUTORIAL_GROUP`
+     * `h/SOCIAL_HANDLE`
+     * `r/REMARK`
+     * `t/TAG`
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list.
   The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -158,17 +167,28 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds a person or a list of persons using `KEYWORD`.
 
-Format: **`find`** `KEYWORD [MORE_KEYWORDS]`
+Format: **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Socius is capable of searching for keywords of all properties. e.g. `SocialHandle`, `Nationality`, etc.
-* Only full words will be matched e.g. `Han` will not match `Hans`add
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `n/Hans n/Bo` will
-  return `Hans Gruber`
-  , `Bo Yang`
+* `FIELD_PREFIX/KEYWORD` can be any of the following: 
+     * `n/NAME`
+     * `g/GENDER`
+     * `p/PHONE`
+     * `e/EMAIL`
+     * `nat/NATIONALITY`
+     * `tg/TUTORIAL_GROUP`
+     * `h/SOCIAL_HANDLE`
+     * `r/REMARK`
+     * `t/TAG`
+* The search is case-insensitive. (e.g `hans` will match `Hans`)
+* As long as `KEYWORD` is part of the actual value, it will be matched. (e.g. `A` will match `Alex`, and `la` will match `Alan`)
+* Persons matching at least one keyword will be returned (i.e. `OR` search). (e.g. `n/Hans n/Bo` will
+  return `Hans Gruber`, `Bo Yang`)
+  
+ <!--- * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Socius is capable of searching for keywords of all properties. e.g. `SocialHandle`, `Nationality`, etc. 
+* Only full words will be matched e.g. `Han` will not match `Hans`add --->
 
 Examples:
 
@@ -254,6 +274,6 @@ the data of your previous Socius home folder.
 |**Clear** | **`clear`** | **`clear`** |
 |**Delete** | **`delete`** `INDEX` | **`delete`** `3`|
 |**Edit** | **`edit`** `INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [nat/NATIONALITY] [g/GENDER] [tg/TUTORIAL GROUP] [h/@SOCIALHANDLE] [r/REMARK] [t/TAG]…​` | **`edit`** `2 n/James Lee e/jameslee@example.com` |
-|**Find** | **`find`** `KEYWORD [MORE_KEYWORDS]` | **`find`** `g/F tg/07` |
+|**Find** | **`find`** `FIELD_PREFIX/KEYWORD [FIELD_PREFIX/KEYWORD]…​` | **`find`** `g/F tg/07` |
 |**List** | **`list`** | **`list`** |
 |**Help** | **`help`** | **`help`** |
