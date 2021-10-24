@@ -313,7 +313,7 @@ To find students without the `unpaid` tag and whose school is not `NYJC`, you ma
 ### Managing Lessons
 
 This section guides you on how to use the commands for managing the lessons of your students in TAB.
-A lesson **must** have the following fields: a start date, a time range and a subject.
+A lesson **must** have the following fields: a start date, a time range, a lesson rate and a subject.
 
 A lesson can be categorised into 2 types: 
 1. A **weekly** recurring lesson
@@ -343,7 +343,7 @@ An optional field for a lesson is:
 
 Adds a lesson to the specified student in TAB.
 
-Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT [hw/HOMEWORK]…​`
+Format: `ladd INDEX [recurring/] date/dd MMM yyyy time/HHmm-HHmm subject/SUBJECT rates/LESSON_RATES [hw/HOMEWORK]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 You can add multiple pieces of homework to a lesson in TAB.
@@ -355,14 +355,35 @@ You can add multiple pieces of homework to a lesson in TAB.
 
 Examples:
 
-* `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math`
+* `list` followed by `ladd 1 recurring/ date/30 jan 2022 time/0900-1100 subject/Math rates/37.50`
   adds the recurring lesson to the 1st student in the displayed student list.
 
-* `list` followed by `ladd 4 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report`
+* `list` followed by `ladd 4 date/16 Sep 2021 time/1530-1730 subject/Science hw/TYS p2 Q2 hw/Exercise 3 hw/Lab report rates/40`
   adds the makeup lesson to the 4th student in the displayed student list.
 
-* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1`
+* `find n/john` followed by `ladd 1 date/30 MAR 2021 time/1630-1745 subject/Physics hw/Worksheet 1 rates/25.00`
   adds the makeup lesson to the 1st student in the results of the `find` command.
+
+#### Editing a lesson : `ledit`
+
+Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
+
+Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [rates/RATE] [subject/SUBJECT] [hw/HOMEWORK]…​`
+
+* Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
+
+* You can edit all fields of a lesson except the start date.
+
+* You cannot change the lesson's type (i.e. recurring and makeup).
+
+* The index must be a valid index number shown in the displayed student list.
+
+* The lesson index must be a valid index number shown in the lesson list of the student.
+
+Examples:
+* `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
+* `ledit 2 3 rates/35.85 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
+* `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
 
 #### Deleting a lesson : `ldelete`
 
@@ -381,28 +402,24 @@ Examples:
   
 * `find n/Betsy` followed by `ldelete 1 1` deletes the 1st lesson for the 1st student in the results 
   of the `find` command.
+  
+#### Viewing lessons : `view`
 
+Views all the lessons for the specified student in TAB.
 
-#### Editing a lesson : `ledit`
+Format: `view INDEX`
 
-Edits the specified lesson of the specified student in TAB with the indicated changes for specified fields.
-
-Format: `ledit INDEX LESSON_INDEX [time/TIMERANGE] [subject/SUBJECT] [hw/HOMEWORK]…​`
-
-* Edits the lesson of specified `LESSON_INDEX` for the student at the specified `INDEX`.
-
-* You can edit all fields of a lesson except the start date.
-
-* You cannot change the lesson's type (i.e. recurring and makeup).
+* Views the list of lessons belonging to the student of the specified `INDEX`.
 
 * The index must be a valid index number shown in the displayed student list.
 
-* The lesson index must be a valid index number shown in the lesson list of the student.
 
 Examples:
-* `ledit 1 1 time/1100-1200` Edits the time range of the 1st lesson of the 1st student to be `1100-1200`.
-* `ledit 2 3 subject/Chinese hw/` Edits the subject of the 3rd lesson of the 2nd student to be `Chinese` and clears all existing homework.
-* `ledit 3 1 hw/Textbook hw/Exercise 5` Edits the homework list of 1st lesson of the 3rd student to contain `Textbook` and `Exercise 5` only.
+
+* `view 2` Displays the list of lessons for the 2nd student in the displayed student list.
+
+* `find n/Betsy` followed by `view 1` displays the list of lessons for the 1st student in the results of the `find` command.
+
 
 <div style="page-break-after: always;"></div>
 
