@@ -41,7 +41,7 @@ public class StudentUtil {
         descriptor.getStudentId().ifPresent(studentId ->
                 sb.append(PREFIX_STUDENT_ID).append(studentId.studentId).append(" "));
         descriptor.getClassId().ifPresent(classId -> sb.append(PREFIX_CLASS_ID).append(classId.classId).append(" "));
-        descriptor.getemail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.email).append(" "));
+        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.email).append(" "));
 
         return sb.toString();
     }
