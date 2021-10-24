@@ -39,10 +39,9 @@ public class EncryptionTest {
     @Test
     public void whenEncryptingJsonIntoFile_andDecryptingFileAgain_theOriginalContentIsReturned()
             throws IOException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
-            InvalidAlgorithmParameterException, UnsupportedPasswordException {
-        //SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator
-                .generateKey(PASSWORD_ONE), CIPHER_TRANSFORMATION);
+            InvalidAlgorithmParameterException{
+        SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
+        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
@@ -58,10 +57,9 @@ public class EncryptionTest {
     @Test
     public void ableToEncrypt_decrypt_writeJsonToDestination()
             throws NoSuchAlgorithmException, NoSuchPaddingException, IOException, InvalidKeyException,
-            InvalidAlgorithmParameterException, UnsupportedPasswordException {
-        //SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
-        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator
-                .generateKey(PASSWORD_ONE), CIPHER_TRANSFORMATION);
+            InvalidAlgorithmParameterException {
+        SecretKey secretKey = KeyGenerator.getInstance(ENCRYPTION_ALGORITHM).generateKey();
+        Encryption cryptor = new EncryptionManager(secretKey, CIPHER_TRANSFORMATION);
 
         String content = FileUtil.readFromFile(DECRYPTED_FILEPATH_JSON);
         cryptor.encrypt(DECRYPTED_FILEPATH_JSON, ENCRYPTED_FILEPATH_JSON);
