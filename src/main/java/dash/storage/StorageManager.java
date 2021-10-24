@@ -9,10 +9,12 @@ import dash.commons.core.LogsCenter;
 import dash.commons.exceptions.DataConversionException;
 import dash.model.ReadOnlyAddressBook;
 import dash.model.ReadOnlyUserPrefs;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.task.TaskList;
 import dash.storage.addressbook.AddressBookStorage;
 import dash.storage.tasklist.TaskListStorage;
+import dash.storage.userinputlist.UserInputListStorage;
 import dash.storage.userprefs.UserPrefsStorage;
 
 /**
@@ -23,16 +25,18 @@ public class StorageManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private TaskListStorage taskListStorage;
+    private UserInputListStorage userInputListStorage;
     private UserPrefsStorage userPrefsStorage;
 
     /**
      * Creates a {@code StorageManager} with the given {@code AddressBookStorage} and {@code UserPrefStorage}.
      */
     public StorageManager(AddressBookStorage addressBookStorage, TaskListStorage taskListStorage,
-                          UserPrefsStorage userPrefsStorage) {
+                          UserInputListStorage userInputListStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.taskListStorage = taskListStorage;
+        this.userInputListStorage = userInputListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -110,6 +114,35 @@ public class StorageManager implements Storage {
     public void saveTaskList(TaskList taskList, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         taskListStorage.saveTaskList(taskList, filePath);
+    }
+
+    // ================ UserInputList methods =========================
+
+    @Override
+    public Path getUserInputListFilePath() {
+        return userInputListStorage.getUserInputListFilePath();
+    }
+
+    @Override
+    public Optional<UserInputList> readUserInputList() throws DataConversionException, IOException {
+        return readUserInputList(userInputListStorage.getUserInputListFilePath());
+    }
+
+    @Override
+    public Optional<UserInputList> readUserInputList(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return userInputListStorage.readUserInputList(filePath);
+    }
+
+    @Override
+    public void saveUserInputList(UserInputList userInputList) throws IOException {
+        userInputListStorage.saveUserInputList(userInputList, userInputListStorage.getUserInputListFilePath());
+    }
+
+    @Override
+    public void saveUserInputList(UserInputList userInputList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        userInputListStorage.saveUserInputList(userInputList, filePath);
     }
 
 }

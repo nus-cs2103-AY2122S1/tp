@@ -1,5 +1,7 @@
 package dash.ui;
 
+import java.util.ArrayList;
+
 import dash.logic.Logic;
 import dash.logic.commands.CommandResult;
 import dash.logic.commands.exceptions.CommandException;
@@ -7,6 +9,7 @@ import dash.logic.parser.exceptions.ParseException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Region;
 
 /**
@@ -19,17 +22,35 @@ public class CommandBox extends UiPart<Region> {
 
     private final CommandExecutor commandExecutor;
 
+    /**
+     * A list of valid user inputs ordered from most recent to oldest.
+     */
+    private final ArrayList<String> userInputList;
+
+    /**
+     * The position of the current text set in the command box in the user input list.
+     * When this is negative, then no input is set.
+     */
+    private int currentUserInputIndex = -1;
+
     @FXML
     private TextField commandTextField;
 
     /**
-     * Creates a {@code CommandBox} with the given {@code CommandExecutor}.
+     * Creates a {@code CommandBox} with the given {@code CommandExecutor},
+     * as well as the given user input list.
      */
-    public CommandBox(CommandExecutor commandExecutor) {
+    public CommandBox(CommandExecutor commandExecutor, ArrayList<String> userInputList) {
         super(FXML);
         this.commandExecutor = commandExecutor;
+        this.userInputList = userInputList;
+
+        System.out.println(userInputList);
+
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+
+        commandTextField.setOnKeyPressed(event -> handleUpOrDownArrowKeyPressed(event.getCode()));
     }
 
     /**
@@ -45,8 +66,31 @@ public class CommandBox extends UiPart<Region> {
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");
+            currentUserInputIndex = -1;
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
+        }
+    }
+
+    /**
+     * Handles the Up/Down arrow key pressed event.
+     */
+    @FXML
+    public void handleUpOrDownArrowKeyPressed(KeyCode keyCode) {
+        if (keyCode == KeyCode.DOWN && currentUserInputIndex >= 0) {
+            if (currentUserInputIndex == 0) {
+                currentUserInputIndex--;
+                commandTextField.setText("");
+                return;
+            }
+            currentUserInputIndex--;
+            commandTextField.setText(userInputList.get(currentUserInputIndex));
+            commandTextField.end();
+        }
+        if (keyCode == KeyCode.UP && currentUserInputIndex < userInputList.size() - 1) {
+            currentUserInputIndex++;
+            commandTextField.setText(userInputList.get(currentUserInputIndex));
+            commandTextField.end();
         }
     }
 

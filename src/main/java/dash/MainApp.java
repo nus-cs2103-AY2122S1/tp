@@ -18,6 +18,7 @@ import dash.model.Model;
 import dash.model.ModelManager;
 import dash.model.ReadOnlyAddressBook;
 import dash.model.ReadOnlyUserPrefs;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.task.TaskList;
 import dash.model.util.SampleDataUtil;
@@ -27,6 +28,8 @@ import dash.storage.addressbook.AddressBookStorage;
 import dash.storage.addressbook.JsonAddressBookStorage;
 import dash.storage.tasklist.JsonTaskListStorage;
 import dash.storage.tasklist.TaskListStorage;
+import dash.storage.userinputlist.JsonUserInputListStorage;
+import dash.storage.userinputlist.UserInputListStorage;
 import dash.storage.userprefs.JsonUserPrefsStorage;
 import dash.storage.userprefs.UserPrefsStorage;
 import dash.ui.Ui;
@@ -61,7 +64,8 @@ public class MainApp extends Application {
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         TaskListStorage taskListStorage = new JsonTaskListStorage(userPrefs.getTaskListFilePath());
-        storage = new StorageManager(addressBookStorage, taskListStorage, userPrefsStorage);
+        UserInputListStorage userInputListStorage = new JsonUserInputListStorage(userPrefs.getUserInputListFilePath());
+        storage = new StorageManager(addressBookStorage, taskListStorage, userInputListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -80,8 +84,10 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<TaskList> taskListOptional;
+        Optional<UserInputList> userInputListOptional;
         ReadOnlyAddressBook initialAddressBookData;
         TaskList initialTaskListData;
+        UserInputList initialUserInputListData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -110,7 +116,21 @@ public class MainApp extends Application {
             initialTaskListData = new TaskList();
         }
 
-        return new ModelManager(initialAddressBookData, userPrefs, initialTaskListData);
+        try {
+            userInputListOptional = storage.readUserInputList();
+            if (userInputListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample UserInputList");
+            }
+            initialUserInputListData = userInputListOptional.orElseGet(SampleDataUtil::getSampleUserInputList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty UserInputList");
+            initialUserInputListData = new UserInputList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty UserInputList");
+            initialUserInputListData = new UserInputList();
+        }
+
+        return new ModelManager(initialAddressBookData, userPrefs, initialTaskListData, initialUserInputListData);
     }
 
     private void initLogging(Config config) {

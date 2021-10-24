@@ -3,6 +3,7 @@ package dash.model;
 import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,13 +25,15 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final TaskList taskList;
     private final UserPrefs userPrefs;
+    private final UserInputList userInputList;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs and taskList.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, TaskList taskList) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyUserPrefs userPrefs, TaskList taskList, UserInputList userInputList) {
         super();
         CollectionUtil.requireAllNonNull(addressBook, userPrefs, taskList);
 
@@ -40,12 +43,13 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.taskList = new TaskList(taskList);
+        this.userInputList = new UserInputList(userInputList);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.taskList.getObservableTaskList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs(), new TaskList());
+        this(new AddressBook(), new UserPrefs(), new TaskList(), new UserInputList());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -164,6 +168,18 @@ public class ModelManager implements Model {
         taskList.setTask(index, editedTask);
     }
 
+    //=========== UserInputList ==============================================================================
+
+    @Override
+    public void addUserInput(String userInput) {
+        userInputList.add(userInput);
+    }
+
+    @Override
+    public UserInputList getUserInputList() {
+        return userInputList;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -219,5 +235,11 @@ public class ModelManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
+    //=========== Observable User Input List Accessor =================================================================
+
+    @Override
+    public ArrayList<String> getInternalUserInputList() {
+        return userInputList.getInternalUserInputList();
+    }
 
 }

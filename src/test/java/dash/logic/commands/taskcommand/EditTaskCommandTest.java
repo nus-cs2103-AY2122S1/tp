@@ -12,6 +12,7 @@ import dash.logic.commands.CommandTestUtil;
 import dash.model.AddressBook;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.task.Task;
 import dash.model.task.TaskList;
@@ -25,7 +26,8 @@ import dash.testutil.TypicalTasks;
  */
 public class EditTaskCommandTest {
 
-    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalTasks.getTypicalTaskList());
+    private Model model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalTasks.getTypicalTaskList(),
+            new UserInputList());
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
@@ -36,7 +38,7 @@ public class EditTaskCommandTest {
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
-                new TaskList(model.getTaskList()));
+                new TaskList(model.getTaskList()), new UserInputList());
         expectedModel.setTask(0, editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
@@ -60,7 +62,7 @@ public class EditTaskCommandTest {
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
-                new TaskList(model.getTaskList()));
+                new TaskList(model.getTaskList()), new UserInputList());
         expectedModel.setTask(indexLastTask.getZeroBased(), editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
@@ -75,7 +77,7 @@ public class EditTaskCommandTest {
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
-                new TaskList(model.getTaskList()));
+                new TaskList(model.getTaskList()), new UserInputList());
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);
     }
@@ -94,7 +96,7 @@ public class EditTaskCommandTest {
         String expectedMessage = String.format(EditTaskCommand.MESSAGE_EDIT_TASK_SUCCESS, editedTask);
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
-                new TaskList(model.getTaskList()));
+                new TaskList(model.getTaskList()), new UserInputList());
         expectedModel.setTask(0, editedTask);
 
         assertCommandSuccess(editTaskCommand, model, expectedMessage, expectedModel);

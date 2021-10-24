@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import dash.logic.commands.CommandTestUtil;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.person.Person;
 import dash.model.task.TaskList;
@@ -21,14 +22,16 @@ public class AddPersonCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(), new TaskList());
+        model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(), new TaskList(),
+                new UserInputList());
     }
 
     @Test
     public void execute_newPerson_success() {
         Person validPerson = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList());
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new TaskList(),
+                new UserInputList());
         expectedModel.addPerson(validPerson);
 
         CommandTestUtil.assertCommandSuccess(new AddPersonCommand(validPerson), model,

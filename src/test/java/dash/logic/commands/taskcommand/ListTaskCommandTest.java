@@ -9,6 +9,7 @@ import dash.logic.commands.CommandTestUtil;
 import dash.model.AddressBook;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.testutil.TypicalIndexes;
 import dash.testutil.TypicalTasks;
@@ -20,8 +21,9 @@ class ListTaskCommandTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalTasks.getTypicalTaskList());
-        expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getTaskList());
+        model = new ModelManager(new AddressBook(), new UserPrefs(), TypicalTasks.getTypicalTaskList(),
+                new UserInputList());
+        expectedModel = new ModelManager(new AddressBook(), new UserPrefs(), model.getTaskList(), new UserInputList());
     }
 
     @Test

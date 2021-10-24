@@ -101,8 +101,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs, new TaskList());
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, new TaskList());
+        modelManager = new ModelManager(addressBook, userPrefs, new TaskList(), new UserInputList());
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, new TaskList(), new UserInputList());
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -115,12 +115,13 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new TaskList())));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new TaskList(),
+                new UserInputList())));
 
         // different filteredList -> returns false
         String[] keywords = TypicalPersons.ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new TaskList())));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new TaskList(), new UserInputList())));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -128,6 +129,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new TaskList())));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new TaskList(),
+                new UserInputList())));
     }
 }

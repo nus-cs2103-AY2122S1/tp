@@ -2,6 +2,7 @@ package dash.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import dash.commons.core.GuiSettings;
@@ -67,10 +68,12 @@ public class LogicManager implements Logic {
         }
 
         commandResult = command.execute(model);
+        model.addUserInput(commandText);
 
         try {
             storage.saveAddressBook(model.getAddressBook());
             storage.saveTaskList(model.getTaskList());
+            storage.saveUserInputList(model.getUserInputList());
         } catch (IOException ioe) {
             throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
         }
@@ -91,6 +94,11 @@ public class LogicManager implements Logic {
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return model.getFilteredTaskList();
+    }
+
+    @Override
+    public ArrayList<String> getInternalUserInputList() {
+        return model.getInternalUserInputList();
     }
 
     @Override

@@ -14,6 +14,7 @@ import dash.commons.core.Messages;
 import dash.logic.commands.personcommand.FindPersonCommand.FindPersonDescriptor;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.person.AddressContainsKeywordsPredicate;
 import dash.model.person.EmailContainsKeywordsPredicate;
@@ -27,9 +28,10 @@ import dash.testutil.TypicalPersons;
  * Contains integration tests (interaction with the Model) for {@code FindPersonCommand}.
  */
 public class FindPersonCommandTest {
-    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(), new TaskList());
+    private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(),
+            new TaskList(), new UserInputList());
     private Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(),
-            new TaskList());
+            new TaskList(), new UserInputList());
 
     @Test
     public void equals() {

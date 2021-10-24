@@ -14,6 +14,7 @@ import dash.commons.core.Messages;
 import dash.logic.commands.taskcommand.FindTaskCommand.FindTaskDescriptor;
 import dash.model.Model;
 import dash.model.ModelManager;
+import dash.model.UserInputList;
 import dash.model.UserPrefs;
 import dash.model.task.DescriptionContainsKeywordsPredicate;
 import dash.model.task.TagTaskContainsKeywordsPredicate;
@@ -25,9 +26,9 @@ import dash.testutil.TypicalTasks;
  */
 public class FindTaskCommandTest {
     private Model model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(),
-            TypicalTasks.getTypicalTaskList());
+            TypicalTasks.getTypicalTaskList(), new UserInputList());
     private Model expectedModel = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs(),
-            TypicalTasks.getTypicalTaskList());
+            TypicalTasks.getTypicalTaskList(), new UserInputList());
 
     @Test
     public void equals() {

@@ -1,6 +1,7 @@
 package dash.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import dash.commons.core.GuiSettings;
@@ -130,6 +131,16 @@ public interface Model {
     void setTask(int index, Task editedTask);
 
     /**
+     * Returns the UserInputList
+     */
+    UserInputList getUserInputList();
+
+    /**
+     * Adds the given user input string to the start of the {@code UserInputList}
+     */
+    void addUserInput(String userInput);
+
+    /**
      * Returns an unmodifiable view of the filtered person list
      */
     ObservableList<Person> getFilteredPersonList();
@@ -152,4 +163,10 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredTaskList(Predicate<Task> predicate);
+
+    /**
+     * Returns an unmodifiable view of the user input list
+     * @return
+     */
+    ArrayList<String> getInternalUserInputList();
 }
