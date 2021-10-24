@@ -8,7 +8,6 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 [Quick Start](#quick-start)<br>
 [Features](#features)
-
 - [Give a list of instructions : `help`](#give-a-list-of-instructions--help)
 - [Adding a person: `add`](#adding-a-person-add)
 - [Listing all persons : `list`](#listing-all-persons-list)
@@ -18,14 +17,13 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 - [Add task:](#add-task)
 - [Delete task:](#delete-task)
 - [Edit task:](#edit-task)
-- [Viewing tasks:`cat`](viewing-tasks)
+- [Viewing tasks:`cat`](viewing-tasks-cat)
 - [Clearing all entries : `clear`](#clearing-all-entries)
 - [Exiting the program:](#exiting-the-program)
 - [Sorting persons by name: `sort`](#sorting-persons-by-name)
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
 - [Archiving data files `[coming in v2.0]`](#archiving-data-files)
-
 [FAQ](#faq)<br>
 [Command Summary](#command-summary)
 
