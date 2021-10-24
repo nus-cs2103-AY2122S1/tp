@@ -35,9 +35,9 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
 
-    private static final String EMPTY = "";
+    public static final String MORE = "more";
 
-    private static final String MORE = "more";
+    public static final String EMPTY = "";
 
     private final String commandWord;
 
@@ -102,5 +102,22 @@ public class HelpCommand extends Command {
             String message = MESSAGE_UNKNOWN_COMMAND + ": " + commandWord + "\n" + HELP_MESSAGE;
             throw new CommandException(message);
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof HelpCommand)) {
+            return false;
+        }
+
+        // state check
+        HelpCommand e = (HelpCommand) other;
+        return commandWord.equals(e.commandWord);
     }
 }
