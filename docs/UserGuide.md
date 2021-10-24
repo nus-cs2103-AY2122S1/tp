@@ -68,10 +68,10 @@ This section highlights all the commands that Uni-Fy supports. These include det
 **:information_source: Notes about the command format:**<br>
 
 * Italicised words represent parameters that are meant to be supplied by the user
-   * e.g. in <code>add *n/task_name d/date*</code>, the <code>*task_name*</code> keyword represents a task and the *date* keyword represents a date, both to be inputted by the user
+   * e.g. in <code>add <i>n/task_name d/date</i></code>, the <code><i>task_name</i></code> keyword represents a task and the *date* keyword represents a date, both to be inputted by the user
 
 * Items inside round brackets are optional
-   * e.g. in <code>delete *n/task_name (d/date)*</code>, a user can choose to include the date for the task if there are multiples of it
+   * e.g. in <code>delete <i>n/task_name (d/date)</i></code>, a user can choose to include the date for the task if there are multiples of it
 
 * In user inputted commands:
    * Items with <code>n/</code> before them represent the exact name of the task
