@@ -2,11 +2,7 @@ package seedu.address.model.student;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.TreeMap;
 
 import javafx.scene.chart.Chart;
@@ -23,8 +19,6 @@ public class StudentStatistics {
 
     private final Student student;
     private final Map<Assessment, Score> scoreMap;
-//    private int numScores = 0;
-//    private double sumOfScores = 0.0;
 
     /**
      * Constructs a {@code studentStatistics} with the specified {@code student}.

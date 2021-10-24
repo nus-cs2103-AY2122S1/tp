@@ -2,9 +2,6 @@ package seedu.address.commons.util;
 
 import java.util.Map;
 
-import java.util.*;
-
-import javafx.scene.*;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;

@@ -28,6 +28,9 @@ public class Student {
     private final Map<Assessment, Score> scores = new HashMap<>();
     private final Set<Tag> tags = new HashSet<>();
 
+    /**
+     * Constructs a {@code Student} object.
+     */
     public Student(Name name, ID id) {
         requireAllNonNull(name, id);
         this.name = name;
@@ -35,6 +38,7 @@ public class Student {
     }
 
     /**
+     * Constructs a {@code Student} object.
      * Every field must be present and not null.
      */
     public Student(Name name, ID id, List<Group> groups, Map<Assessment, Score> scores, Set<Tag> tags) {
