@@ -55,7 +55,7 @@ This table below illustrates what each formatting means.
    ![find_command](images/UIUpdated.png)
 
 1. Type the command in the command box and press Enter to execute it.
-   * Refer to the [**Features**](#3-features) below for details of each command.
+   * Refer to the [**Features**](#5-features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
