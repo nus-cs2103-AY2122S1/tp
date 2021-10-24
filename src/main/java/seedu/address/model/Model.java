@@ -92,5 +92,7 @@ public interface Model {
     /** Displays {@code person}'s task list on the GUI. */
     void displayPersonTaskList(Person person);
 
+    void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate);
+
     void updateSortedPersonList(boolean isReverseOrder);
 }

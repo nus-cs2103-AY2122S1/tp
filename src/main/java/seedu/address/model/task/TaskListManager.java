@@ -83,7 +83,7 @@ public class TaskListManager {
         taskListArchive.put(name.toString(), taskList);
 
         if (name.equals(nameOfChosenPerson)) {
-            setToDisplayTaskList(name);
+            setToDisplayTaskList(name, false);
         }
     }
 
@@ -104,7 +104,7 @@ public class TaskListManager {
      * @param name The {@code Name} of the {@code Person} whose task list you want to
      *             display on the GUI.
      */
-    public void setToDisplayTaskList(Name name) {
+    public void setToDisplayTaskList(Name name, boolean isSet) {
         requireNonNull(name);
 
         String logMessage = name.toString() + ": task list set to be displayed.";
@@ -119,7 +119,9 @@ public class TaskListManager {
         assert(taskList != null);
 
         observableTaskList.setAll(taskList);
-        filteredTasks.setPredicate(task -> true);
+        if (!isSet) {
+            filteredTasks.setPredicate(task -> true);
+        }
     }
 
     /**
