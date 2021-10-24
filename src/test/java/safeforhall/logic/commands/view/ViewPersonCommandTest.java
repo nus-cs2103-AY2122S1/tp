@@ -28,12 +28,14 @@ public class ViewPersonCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ViewPersonCommand(), model, ViewPersonCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewPersonCommand(), model,
+                ViewPersonCommand.MESSAGE_ALL_RESIDENTS_SHOWN, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, TypicalIndexes.INDEX_FIRST_PERSON);
-        assertCommandSuccess(new ViewPersonCommand(), model, ViewPersonCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewPersonCommand(), model,
+                ViewPersonCommand.MESSAGE_ALL_RESIDENTS_SHOWN, expectedModel);
     }
 }

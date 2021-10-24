@@ -126,12 +126,6 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
 
 ### Storage component
 
@@ -176,7 +170,28 @@ The workflow of the Add command is shown in the Activity diagram illustrated bel
   * Pros: Makes add command more user-friendly as the command is more succinct
   * Cons: User has to go through a two-step process of `add` and `edit` to initialise a residents information 
 
+### Delete Command
 
+This command allows the user to delete residents or events to the SafeFor(H)All applicaiton depending on the currently active tab.
+
+The workflow of the Delete command is shown in the Activity diagram illustrated below.
+
+![AddActivityDiagram](images/logic/commands/deletecommand/DeleteActivityDiagram.png)
+
+### Design considerations:
+
+**Aspect: Delete the correct resident/event:**
+
+* **Alternative 1 (current choice):** `Index` field
+    * Pros: No need to type out the full name of the resident/event, and risk typos. `Index` is also unique, which prevents the user
+      from deleting the wrong resident/event.
+    * Cons: The user needs to scroll through the GUI to find the index of the resident/event to be deleted.
+
+* **Alternative 2:** `Name` and `eventName` fields for Resident and Event respectively.
+    * Pros: The user does not need to scroll through the GUI to find the index of the resident/event to be deleted.
+    * Cons: There is a higher risk of erroneous user input, as a `Name`/`eventName` field will inevitably be longer than
+    an index.
+    
 ### Find Command
 
 This command allows searching for residents subjected to 1 or more filters for the different available parameters.
