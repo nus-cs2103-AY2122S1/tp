@@ -39,7 +39,7 @@ public class AssessmentStatistics {
      */
     public AssessmentStatistics(Assessment assessment, double binSize) {
         requireNonNull(assessment);
-        requireNonNull(assessment.scores);
+        requireNonNull(assessment.getScores());
 
         this.assessment = assessment;
 

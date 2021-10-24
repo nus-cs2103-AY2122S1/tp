@@ -97,6 +97,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Student getStudent(Student studentToMatch) {
+        requireNonNull(studentToMatch);
+        return addressBook.getStudent(studentToMatch);
+    }
+
+    @Override
     public void deleteStudent(Student target) {
         addressBook.removeStudent(target);
     }
