@@ -10,7 +10,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.fast.model.person.Person;
 import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.person.UniquePersonList;
+import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 
 /**
@@ -29,13 +31,13 @@ public class Fast implements ReadOnlyFast {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         filteredPersons = new FilteredList<>(this.getPersonList());
     }
 
-    public Fast() {}
+    public Fast() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -131,6 +133,45 @@ public class Fast implements ReadOnlyFast {
         return getPriorityCount(PriorityTag.LowPriority.TERM);
     }
 
+    /**
+     * Returns the number of persons tagged with the respective PriorityTag.
+     */
+    public int getInvestmentPlanCount(String term) {
+        String[] investmentPlan = {term};
+        TagMatchesKeywordPredicate predicate = new TagMatchesKeywordPredicate(Arrays.asList(investmentPlan));
+        filteredPersons.setPredicate(predicate);
+        return filteredPersons.size();
+    }
+
+    public int getLifeInsuranceCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.LifeInsurance.NAME);
+    }
+
+    public int getMotorInsuranceCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.MotorInsurance.NAME);
+    }
+
+    public int getHealthInsuranceCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.HealthInsurance.NAME);
+    }
+
+    public int getTravelInsuranceCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.TravelInsurance.NAME);
+    }
+
+    public int getPropertyInsuranceCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.PropertyInsurance.NAME);
+    }
+
+    public int getInvestmentCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.Investment.NAME);
+    }
+
+    public int getSavingsCount() {
+        return getInvestmentPlanCount(InvestmentPlanTag.Savings.NAME);
+    }
+
+
     //// util methods
 
     @Override
@@ -147,8 +188,8 @@ public class Fast implements ReadOnlyFast {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Fast // instanceof handles nulls
-                && persons.equals(((Fast) other).persons));
+            || (other instanceof Fast // instanceof handles nulls
+            && persons.equals(((Fast) other).persons));
     }
 
     @Override

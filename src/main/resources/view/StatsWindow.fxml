@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.stage.*?>
 
-<fx:root resizable="false" title="Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11"
+<fx:root resizable="false" title="Statistics" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1"
          xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/statsIcon.png"/>
@@ -30,8 +30,11 @@
         </padding>
         <children>
           <PieChart fx:id="priorityPieChart" title="Priority Count"/>
-          <Label fx:id="priorityPieChartDesc" maxWidth="150.0" minWidth="150.0" prefWidth="150.0" text="Label"
-                 wrapText="true" styleClass="label-bright"/>
+          <Label fx:id="priorityPieChartDesc" maxWidth="150.0" minWidth="150.0" prefWidth="150.0"
+                 styleClass="label-bright" text="Label" wrapText="true"/>
+          <PieChart fx:id="investmentPlanPieChart" title="Investment plans count"/>
+          <Label fx:id="investmentPlanPieChartDesc" maxWidth="150.0" minWidth="150.0" prefWidth="150.0"
+                 styleClass="label-bright" text="Label" wrapText="true"/>
         </children>
       </HBox>
     </Scene>

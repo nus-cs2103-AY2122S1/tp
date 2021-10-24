@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import seedu.fast.commons.core.LogsCenter;
 import seedu.fast.model.Fast;
 import seedu.fast.model.ReadOnlyFast;
+import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 
 /**
@@ -22,7 +23,7 @@ public class StatsWindow extends UiPart<Stage> {
         + "To view the statistics, simply click the \"Stats\" menu item on the top bar or press `F2`.\n"
         + "Currently, FAST supports these statistics:\n"
         + "* Priority Tag Chart\n"
-        + "* Insurance Plan Chart (Coming soon!)";
+        + "* Insurance Plan Chart";
     private static final Logger logger = LogsCenter.getLogger(StatsWindow.class);
     private static final String FXML = "StatsWindow.fxml";
     private static final String PRIORITY_CHART_MESSAGE_INTRO = "You currently have a total of: ";
@@ -38,7 +39,13 @@ public class StatsWindow extends UiPart<Stage> {
     private Fast fast;
 
     @FXML
+    private PieChart investmentPlanPieChart;
+
+    @FXML
     private PieChart priorityPieChart;
+
+    @FXML
+    private Label investmentPlanPieChartDesc;
 
     @FXML
     private Label priorityPieChartDesc;
@@ -54,7 +61,10 @@ public class StatsWindow extends UiPart<Stage> {
         this.fast = (Fast) fast;
         populatePriorityPieChart();
         labelPriorityPieChart();
+        populateInvestmentPlanPieChart();
+        //labelInvestmentPlanPieChart();
         priorityPieChart.setLegendVisible(false);
+        investmentPlanPieChart.setLegendVisible(false);
     }
 
 
@@ -108,7 +118,7 @@ public class StatsWindow extends UiPart<Stage> {
      * Adds the data from Fast into the PieChart.
      */
     public void populatePriorityPieChart() {
-        priorityPieChart.getData().clear();
+        priorityPieChart.getData().clear();  //Ensure that PieChart is blank.
         int highPriorityCount = this.fast.getHighPriorityCount();
         int mediumPriorityCount = this.fast.getMediumPriorityCount();
         int lowPriorityCount = this.fast.getLowPriorityCount();
@@ -122,6 +132,33 @@ public class StatsWindow extends UiPart<Stage> {
         addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
         addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
         addPieChartData(PriorityTag.LowPriority.NAME, lowPriorityCount, this.priorityPieChart);
+    }
+
+    /**
+     * Adds the data from Fast into the PieChart.
+     */
+    public void populateInvestmentPlanPieChart() {
+        investmentPlanPieChart.getData().clear(); //Ensure that PieChart is blank.
+        int lifeInsuranceCount = this.fast.getLifeInsuranceCount();
+        int motorInsuranceCount = this.fast.getMotorInsuranceCount();
+        int travelInsuranceCount = this.fast.getTravelInsuranceCount();
+        int healthInsuranceCount = this.fast.getHealthInsuranceCount();
+        int propertyInsuranceCount = this.fast.getPropertyInsuranceCount();
+        int investmentCount = this.fast.getInvestmentCount();
+        int savingsCount = this.fast.getSavingsCount();
+
+
+
+
+//        assert highPriorityCount >= 0 : "highPriorityCount must be positive";
+//        assert mediumPriorityCount >= 0 : "mediumPriorityCount must be positive";
+//        assert lowPriorityCount >= 0 : "lowPriorityCount must be positive";
+//
+//        addPriorityPieChartDesc(highPriorityCount, mediumPriorityCount, lowPriorityCount);
+//
+//        addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
+//        addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
+//        addPieChartData(PriorityTag.LowPriority.NAME, lowPriorityCount, this.priorityPieChart);
     }
 
     /**
