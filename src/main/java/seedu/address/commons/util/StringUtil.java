@@ -94,6 +94,6 @@ public class StringUtil {
      * Generates a random alphanumeric string with default random seed as system time.
      */
     public static String generateRandomString() {
-        return generateRandomString(Instant.now().getNano());
+        return generateRandomString(new Random().nextInt());
     }
 }
