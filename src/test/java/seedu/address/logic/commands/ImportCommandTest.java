@@ -84,5 +84,4 @@ public class ImportCommandTest {
         assertThrows(CommandException.class,
                 String.format(ImportCommand.MESSAGE_FILE_NOT_FOUND, testFilePath), () -> importCommand.execute(model));
     }
-
 }
