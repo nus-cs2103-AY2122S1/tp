@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import org.junit.jupiter.api.Test;
@@ -22,7 +23,7 @@ class PersonRemoveLessonParserTest {
     @Test
     public void parse_validArgs_returnsCorrectCommand() {
         EditPersonCommand.EditPersonDescriptor editPersonDesc = new EditPersonCommand.EditPersonDescriptor();
-        editPersonDesc.removeLesson(INDEX_FIRST_PERSON);
+        editPersonDesc.removeLesson(INDEX_FIRST_LESSON);
         assertParseSuccess(parser, "1 1", new EditPersonCommand(INDEX_FIRST_PERSON, editPersonDesc,
                 PersonRemoveLessonParser.MESSAGE_SUCCESS));
     }
