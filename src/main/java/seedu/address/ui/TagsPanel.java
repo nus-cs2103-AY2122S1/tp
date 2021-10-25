@@ -55,6 +55,12 @@ public class TagsPanel extends UiPart<Region> {
                 } else if (change.wasUpdated()) {
                     // TODO: update client count
                     // System.out.println("Items from " + change.getFrom() + " to " + change.getTo() + " changed");
+                    // for (int i = change.getFrom(); i < change.getTo(); i++) {
+                    //     Tag tag = change.getList().get(i);
+                    //     Label label = new Label(tag.toString());
+                    //     tags.getChildren().set(i, label);
+                    //     tagLabels.replace(tag, label);
+                    // }
                 }
             }
         });

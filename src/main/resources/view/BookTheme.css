@@ -172,6 +172,10 @@
     -fx-border-width: 3;
 }
 
+.list-cell:selected {
+    -fx-border-width: 5;
+}
+
 .list-cell .label {
     -fx-text-fill: derive(-fx-base1, -50%);
 }
