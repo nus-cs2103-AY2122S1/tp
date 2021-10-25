@@ -15,7 +15,7 @@ import seedu.address.model.person.customer.Customer;
  */
 public class DeleteCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "deletecustomer";
+    public static final String COMMAND_WORD = "deletec";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the customer identified by the index number used in the displayed customer list.\n"

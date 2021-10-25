@@ -36,7 +36,7 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-T17-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -110,8 +110,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddSupplierCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddSupplierCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddSupplierCommandParser`, `DeleteSupplierCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
@@ -121,8 +121,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Customer`, `Employee`, `Supplier` and `Reservation` objects (which are contained in a `UniqueCustomerList`, `UniqueEmployeeList`, `UniqueSupplierList` and `UniqueReservationList` object respectively).
+* stores the currently 'selected' `Customer`/`Employee`/`Supplier`/`Reservation` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Customer>`/`ObservableList<Employee>`/`ObservableList<Supplier>`/`ObservableList<Reservation>` respectively that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -153,6 +153,55 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Customer
+
+### Proposed alternative considerations
+
+* `CustomerList` is always sorted by date and time
+
+### Employee
+
+### Proposed alternative considerations
+
+* `EmployeeList` is always sorted by date and time
+
+### Supplier
+
+### Proposed alternative considerations
+
+* `SupplierList` is always sorted by date and time
+
+### Reserve Command
+
+#### Implementation
+
+#### Proposed alternative considerations
+
+* `ReservationList` is always sorted by date and time
+
+* `ReservationList` checks for time crash before adding a new `Reservation`
+
+### Set Tables Command
+
+#### Implementation
+
+- Set Tables command `[settables]` takes in a list of numbers as arguments and creates a TableList that is stored in the ModelManager
+
+- The input integers have to be comma separated and each integer is taken as the size of one new table. 
+
+- Input is checked to be valid and exception is thrown if the input are not positive-integers
+
+- Input integers can also be formatted as `[size of table]x[number of tables with this size]`
+  - This allows the user to quickly add large number of tables with the same table size at once instead of typing out the entire list
+  - (eg. Instead of typing `settables 10,10,10,10,10,6,6,6,6,1`, the user can type `settables 10x5,6x4,1` which help in efficiency as a keyboard-preferred user)
+
+- There is no add/remove/edit table or table list
+  - This is because reservations are linked to the tables themselves and if the user alters the list of tables, the reservations will not be in sync.
+
+- Everytime user uses this command, the entire list of tables will be replaced, and ALL reservations will be deleted.
+  - Again, this is to prevent the reservations and previously-linked table id not being in sync
+
 
 ### \[Proposed\] Undo/redo feature
 
@@ -594,6 +643,7 @@ Use case ends.
 * **Employment type** : Used to distinguish the different categories of employees (Part-time, Full-time etc.)
 * **Shift**: Time slot that employee is supposed to be working
 * **Supplier**: One of the types of contact, used to represent a supplier of the restaurant
+* **Table**: Contains a size and a table ID, and is used to ensure that each reservation has an available table
 * **Reservation**: Reservations can be made by customers for a specific timeslot in the restaurant
 * **Waiting list**: List of customers who are unable to get a reservation due to maxed-out reservations
 
@@ -636,6 +686,21 @@ testers are expected to do more *exploratory* testing.
 
    1. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+      
+### Deleting a customer/employee/supplier
+
+1. Deleting a customer/employee/supplier while all customers/employees/suppliers are being shown
+
+   1. Prerequisites: List all persons using the `customer`/`employee`/`supplier` command. Multiple people of that person type will be shown in the list.
+
+   1. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `delete 0`<br>
+      Expected: Nobody is deleted. Error details shown in the status message. Status bar remains the same.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.

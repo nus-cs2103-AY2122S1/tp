@@ -18,16 +18,18 @@ public class Employee extends Person {
     private Leaves leaves;
     private Salary salary;
     private JobTitle jobTitle;
+    private final Set<Shift> shifts;
 
     /**
      * Constructor of the Employee class.
      */
     public Employee(Name name, Phone phone, Email email, Address address, Set<Tag> tags, Leaves leaves,
-                    Salary salary, JobTitle jobTitle) {
+                    Salary salary, JobTitle jobTitle, Set<Shift> shifts) {
         super(name, phone, email, address, tags);
         this.leaves = leaves;
         this.salary = salary;
         this.jobTitle = jobTitle;
+        this.shifts = shifts;
     }
 
     public JobTitle getJobTitle() {
@@ -56,6 +58,10 @@ public class Employee extends Person {
 
     public Address getAddress() {
         return super.getAddress();
+    }
+
+    public Set<Shift> getShifts() {
+        return shifts;
     }
 
     /**
@@ -101,13 +107,14 @@ public class Employee extends Person {
                 && otherEmployee.getLeaves().equals(getLeaves())
                 && otherEmployee.getSalary().equals(getSalary())
                 && otherEmployee.getJobTitle().equals(getJobTitle())
-                && otherEmployee.getTags().equals(getTags());
+                && otherEmployee.getTags().equals(getTags())
+                && otherEmployee.getShifts().equals(getShifts());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return super.hashCode() + Objects.hash(leaves, salary, jobTitle);
+        return super.hashCode() + Objects.hash(leaves, salary, jobTitle, shifts);
     }
 
     @Override
@@ -127,6 +134,11 @@ public class Employee extends Person {
                 .append("; Job Title: ")
                 .append(getJobTitle());
 
+        Set<Shift> shifts = getShifts();
+        if (!shifts.isEmpty()) {
+            builder.append("; Shifts: ");
+            shifts.forEach(builder::append);
+        }
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
             builder.append("; Tags: ");

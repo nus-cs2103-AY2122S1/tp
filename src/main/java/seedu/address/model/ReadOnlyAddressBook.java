@@ -5,11 +5,14 @@ import seedu.address.model.person.customer.Customer;
 import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 
 /**
  * Unmodifiable view of an address book
  */
 public interface ReadOnlyAddressBook {
+
+    ObservableList<Table> getTableList();
 
     ObservableList<Reservation> getReservationList();
 

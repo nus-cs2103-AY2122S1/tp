@@ -32,7 +32,8 @@
             <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
             <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
             <Label fx:id="supplyType" styleClass="cell_small_label" text="\$supplyType" />
-            <Label fx:id="deliveryDetails" styleClass="cell_small_label" text="\$deliveryDetails" />
+            <Label fx:id="deliveryDetails" styleClass="cell_small_label" text="\$deliveryDetails"
+                   style="-fx-text-fill: IndianRed" />
         </VBox>
     </GridPane>
 </HBox>

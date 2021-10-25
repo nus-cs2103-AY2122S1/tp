@@ -12,6 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_LEAVES_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SALARY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_SHIFT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.JOBTITLE_DESC_BOB;
@@ -25,6 +26,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.SHIFTS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
@@ -34,6 +37,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_LEAVES_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SALARY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_SHIFTS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -52,6 +57,7 @@ import seedu.address.model.person.employee.Employee;
 import seedu.address.model.person.employee.JobTitle;
 import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
+import seedu.address.model.person.employee.Shift;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EmployeeBuilder;
 
@@ -61,45 +67,52 @@ public class AddEmployeeCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         Employee expectedEmployee = new EmployeeBuilder(BOB_EMPLOYEE).withTags(VALID_TAG_FRIEND).build();
-
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + LEAVES_DESC_BOB + SALARY_DESC_BOB
+                 + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + LEAVES_DESC_BOB + SALARY_DESC_BOB
+                 + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + LEAVES_DESC_BOB + SALARY_DESC_BOB
+                + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + LEAVES_DESC_BOB + SALARY_DESC_BOB
+                + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
                 + ADDRESS_DESC_BOB + LEAVES_DESC_BOB + SALARY_DESC_BOB
+                + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple leaves - last leaves accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + LEAVES_DESC_AMY + LEAVES_DESC_BOB + SALARY_DESC_BOB
+                + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple salaries - last salary accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + LEAVES_DESC_BOB + SALARY_DESC_AMY + SALARY_DESC_BOB
+                + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple job titles - last job title accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_AMY
+                + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + JOBTITLE_DESC_BOB + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployee));
 
         // multiple tags - all accepted
@@ -107,8 +120,16 @@ public class AddEmployeeCommandParserTest {
                 .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_BOB
+                + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_BOB + SHIFTS_DESC_BOB + SHIFTS_DESC_AMY
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddEmployeeCommand(expectedEmployeeMultipleTags));
+
+        // multiple shifts - all accepted
+        Employee expectedEmployeeMultipleShifts = new EmployeeBuilder(BOB_EMPLOYEE)
+                .withShifts(VALID_SHIFTS_BOB, VALID_SHIFTS_AMY)
+                .build();
+        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_BOB + SHIFTS_DESC_AMY + SHIFTS_DESC_BOB
+                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, new AddEmployeeCommand(expectedEmployeeMultipleShifts));
     }
 
     @Test
@@ -116,7 +137,13 @@ public class AddEmployeeCommandParserTest {
         // zero tags
         Employee expectedEmployee = new EmployeeBuilder(AMY_EMPLOYEE).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
-                + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY,
+                + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + SHIFTS_DESC_AMY,
+                new AddEmployeeCommand(expectedEmployee));
+
+        // zero shifts
+        expectedEmployee = new EmployeeBuilder(AMY_EMPLOYEE).withShifts().build();
+        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
+                + LEAVES_DESC_AMY + SALARY_DESC_AMY + JOBTITLE_DESC_AMY + TAG_DESC_FRIEND,
                 new AddEmployeeCommand(expectedEmployee));
     }
 
@@ -206,6 +233,11 @@ public class AddEmployeeCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                 + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid shift
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
+                + LEAVES_DESC_BOB + SALARY_DESC_BOB + JOBTITLE_DESC_BOB
+                + INVALID_SHIFT_DESC, Shift.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC

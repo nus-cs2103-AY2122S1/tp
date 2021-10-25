@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.enums.EnumTypeOfCheck;
 import seedu.address.model.person.Phone;
+import seedu.address.model.table.Table;
 
 class ListContainsReservationPredicateTest {
     private LocalDate date1 = LocalDate.parse("2021-01-01", DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -20,6 +21,7 @@ class ListContainsReservationPredicateTest {
     private EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
     private Phone phone = new Phone("98765432");
     private int numberOfPeople = 5;
+    private Table table = new Table(numberOfPeople, 10);
 
     @Test
     void testEquals() {
@@ -47,7 +49,7 @@ class ListContainsReservationPredicateTest {
     @Test
     void test_reservationDateTimeMatch_returnsTrue() {
         Reservation reservation = new Reservation(phone, numberOfPeople,
-                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")), table);
         ListContainsReservationPredicate predicate;
 
         // Matching date and time in query containing both date and time
@@ -64,7 +66,7 @@ class ListContainsReservationPredicateTest {
     @Test
     void test_reservationDateTimeNoMatch_returnsFalse() {
         Reservation reservation = new Reservation(phone, numberOfPeople,
-                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")));
+                LocalDateTime.parse("2021-01-01 1900", DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")), table);
         ListContainsReservationPredicate predicate;
 
         // Not matching date and time in query containing both date and time

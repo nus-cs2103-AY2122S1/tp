@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.exceptions.CustomerNotFoundException;
 import seedu.address.model.person.exceptions.DuplicateCustomerException;
 
@@ -35,6 +36,14 @@ public class UniqueCustomerList implements Iterable<Customer> {
     public boolean contains(Customer toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameCustomer);
+    }
+
+    /**
+     * Returns true if the list contains a customer with an equivalent phone number as the given argument.
+     */
+    public boolean containsCustomerWithPhone(Phone phone) {
+        requireNonNull(phone);
+        return internalList.stream().anyMatch(customer -> customer.getPhone().equals(phone));
     }
 
     /**

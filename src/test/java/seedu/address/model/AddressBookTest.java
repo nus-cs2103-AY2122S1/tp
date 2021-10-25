@@ -31,6 +31,7 @@ import seedu.address.model.person.exceptions.DuplicateEmployeeException;
 import seedu.address.model.person.exceptions.DuplicateSupplierException;
 import seedu.address.model.person.supplier.Supplier;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 import seedu.address.testutil.CustomerBuilder;
 import seedu.address.testutil.EmployeeBuilder;
 import seedu.address.testutil.SupplierBuilder;
@@ -254,6 +255,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Supplier> getSupplierList() {
             return suppliers;
+        }
+
+        @Override
+        public ObservableList<Table> getTableList() {
+            return null;
         }
 
         @Override

@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private CustomerListPanel customerListPanel;
     private EmployeeListPanel employeeListPanel;
     private SupplierListPanel supplierListPanel;
+    private ReservationListPanel reservationListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -118,12 +119,13 @@ public class MainWindow extends UiPart<Stage> {
         customerListPanel = new CustomerListPanel(logic.getFilteredCustomerList());
         employeeListPanel = new EmployeeListPanel(logic.getFilteredEmployeeList());
         supplierListPanel = new SupplierListPanel(logic.getFilteredSupplierList());
-        personListPanelPlaceholder.getChildren().add(supplierListPanel.getRoot());
+        reservationListPanel = new ReservationListPanel(logic.getFilteredReservations());
+        personListPanelPlaceholder.getChildren().add(customerListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        PersonType personType = new PersonType("Supplier");
+        PersonType personType = new PersonType("Customer");
         personTypePlaceholder.getChildren().add(personType.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
@@ -190,6 +192,17 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(employeeListPanel.getRoot());
     }
 
+    /**
+     * Displays the Reservation list
+     */
+    @FXML
+    public void handleShowReservation() {
+        personListPanelPlaceholder.getChildren().clear();
+        PersonType personType = new PersonType("Reservation");
+        personTypePlaceholder.getChildren().add(personType.getRoot());
+        personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -229,8 +242,20 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isShowCustomer()) {
+                handleShowCustomer();
+            }
+
+            if (commandResult.isShowEmployee()) {
+                handleShowEmployee();
+            }
+
             if (commandResult.isShowSupplier()) {
                 handleShowSupplier();
+            }
+
+            if (commandResult.isShowReservation()) {
+                handleShowReservation();
             }
 
             return commandResult;

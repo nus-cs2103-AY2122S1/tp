@@ -13,17 +13,20 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.exception.ReservationNotFoundException;
+import seedu.address.model.table.Table;
 
 class ReservationListTest {
     public static final Reservation DUMMY_RESERVATION = new Reservation(
             new Phone("98765432"),
             5,
-            LocalDateTime.parse("2021-11-11T20:00")
+            LocalDateTime.parse("2021-11-11T20:00"),
+            new Table(2, 10)
     );
     public static final Reservation RESERVATION_NOT_IN_LIST = new Reservation(
             new Phone("12345678"),
             2,
-            LocalDateTime.parse("2021-11-11T20:00")
+            LocalDateTime.parse("2021-11-11T20:00"),
+            new Table(1, 11)
     );
 
     private ReservationList reservationList = new ReservationList();

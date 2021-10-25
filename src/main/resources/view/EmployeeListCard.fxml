@@ -32,6 +32,10 @@
             <Label fx:id="leaves" styleClass="cell_small_label" text="\$leaves" />
             <Label fx:id="salary" styleClass="cell_small_label" text="\$salary" />
             <Label fx:id="jobTitle" styleClass="cell_small_label" text="\$jobTitle" />
+            <HBox>
+                <Label text="Shifts: " styleClass="cell_small_label"/>
+                <FlowPane fx:id="shifts" />
+            </HBox>
         </VBox>
     </GridPane>
 </HBox>

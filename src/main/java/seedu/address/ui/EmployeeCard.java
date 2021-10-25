@@ -45,6 +45,8 @@ public class EmployeeCard extends UiPart<Region> {
     private Label jobTitle;
     @FXML
     private FlowPane tags;
+    @FXML
+    private FlowPane shifts;
 
     /**
      * Creates a {@code EmployeeCode} with the given {@code Employee} and index to display.
@@ -54,12 +56,15 @@ public class EmployeeCard extends UiPart<Region> {
         this.employee = employee;
         id.setText(displayedIndex + ". ");
         name.setText(employee.getName().fullName);
-        phone.setText(employee.getPhone().value);
-        address.setText(employee.getAddress().value);
-        email.setText(employee.getEmail().value);
-        leaves.setText(employee.getLeaves().currentLeaves);
-        salary.setText(employee.getSalary().currentSalary);
-        jobTitle.setText(employee.getJobTitle().jobTitle);
+        phone.setText("Phone: " + employee.getPhone().value);
+        address.setText("Address: " + employee.getAddress().value);
+        email.setText("Email: " + employee.getEmail().value);
+        leaves.setText("Leaves: " + employee.getLeaves().currentLeaves + " days");
+        salary.setText("Salary: S$" + employee.getSalary().currentSalary);
+        jobTitle.setText("Job Title: " + employee.getJobTitle().jobTitle);
+        employee.getShifts().stream()
+                .sorted(Comparator.comparing(shift -> shift.shiftString))
+                .forEach(shift -> shifts.getChildren().add(new Label(shift.shiftString)));
         employee.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

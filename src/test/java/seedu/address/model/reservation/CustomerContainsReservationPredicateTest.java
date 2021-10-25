@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
+import seedu.address.model.table.Table;
 import seedu.address.testutil.CustomerBuilder;
 
 class CustomerContainsReservationPredicateTest {
@@ -20,14 +21,16 @@ class CustomerContainsReservationPredicateTest {
         LocalDateTime dateTime = LocalDateTime.parse("2020-10-10T19:00");
 
         Phone phone1 = new Phone("99999999");
-        Reservation reservation1 = new Reservation(phone1, numberOfCustomer, dateTime);
+        Table table1 = new Table(5, 10);
+        Reservation reservation1 = new Reservation(phone1, numberOfCustomer, dateTime, table1);
         ReservationList reservationList1 = new ReservationList();
         reservationList1.add(reservation1);
         FilteredList<Reservation> filteredList1 = new FilteredList<>(reservationList1.asUnmodifiableObservableList());
         CustomerContainsReservationPredicate predicate1 = new CustomerContainsReservationPredicate(filteredList1);
 
         Phone phone2 = new Phone("88888888");
-        Reservation reservation2 = new Reservation(phone2, numberOfCustomer, dateTime);
+        Table table2 = new Table(5, 11);
+        Reservation reservation2 = new Reservation(phone2, numberOfCustomer, dateTime, table2);
         ReservationList reservationList2 = new ReservationList();
         reservationList2.add(reservation2);
         FilteredList<Reservation> filteredList2 = new FilteredList<>(reservationList2.asUnmodifiableObservableList());
@@ -58,7 +61,8 @@ class CustomerContainsReservationPredicateTest {
         LocalDateTime dateTime = LocalDateTime.parse("2020-10-10T19:00");
 
         Phone phone = new Phone("99999999");
-        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime);
+        Table table = new Table(5, 10);
+        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table);
         ReservationList reservationList = new ReservationList();
         reservationList.add(reservation);
         FilteredList<Reservation> filteredList = new FilteredList<>(reservationList.asUnmodifiableObservableList());
@@ -76,7 +80,8 @@ class CustomerContainsReservationPredicateTest {
         LocalDateTime dateTime = LocalDateTime.parse("2020-10-10T19:00");
 
         Phone phone = new Phone("99999999");
-        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime);
+        Table table = new Table(5, 10);
+        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table);
         ReservationList reservationList = new ReservationList();
         reservationList.add(reservation);
         FilteredList<Reservation> filteredList = new FilteredList<>(reservationList.asUnmodifiableObservableList());

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 
 /**
  * Jackson-friendly version of {@link seedu.address.model.reservation.Reservation}
@@ -17,10 +18,12 @@ public class JsonAdaptedReservation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reservation's %s field is missing";
     public static final String NUMBER_OF_PEOPLE_CONSTRAINT = "Number of people should be a non-zero unsigned integer";
     public static final String DATE_TIME_CONSTRAINT = "Wrong date time format";
+    public static final String TABLE_ID_CONSTRAINT = "Table ID should be a non-zero unsigned integer";
 
     private final String phone;
     private final Integer numberOfPeople;
     private final String time;
+    private final Integer tableId;
 
     /**
      * Constructs {@code JsonAdaptedReservation with the given values}
@@ -28,11 +31,12 @@ public class JsonAdaptedReservation {
     @JsonCreator
     public JsonAdaptedReservation(
             @JsonProperty("phone") String phone, @JsonProperty("numberOfPeople") int numberOfPeople,
-            @JsonProperty("time") String time
+            @JsonProperty("time") String time, @JsonProperty("tableId") int tableId
     ) {
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
         this.time = time;
+        this.tableId = tableId;
     }
 
     /**
@@ -42,6 +46,7 @@ public class JsonAdaptedReservation {
         phone = source.getPhone().value;
         numberOfPeople = source.getNumberOfPeople();
         time = source.getDateTime().toString();
+        tableId = source.getTableId();
     }
 
     /**
@@ -81,7 +86,16 @@ public class JsonAdaptedReservation {
         }
         LocalDateTime modelTime = LocalDateTime.parse(time);
 
-        return new Reservation(modelPhone, numberOfPeople, modelTime);
-    }
+        if (tableId == null) {
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, "table")
+            );
+        }
+        if (tableId <= 0) {
+            throw new IllegalValueException(TABLE_ID_CONSTRAINT);
+        }
+        final Table modelTable = new Table(numberOfPeople, tableId);
 
+        return new Reservation(modelPhone, numberOfPeople, modelTime, modelTable);
+    }
 }

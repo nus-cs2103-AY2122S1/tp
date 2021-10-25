@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate;
+import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -12,17 +12,17 @@ import seedu.address.model.person.customer.CustomerNameContainsKeywordsPredicate
  */
 public class FindCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_WORD = "findc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers whose names contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all customers that contain "
             + "any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "Example: " + COMMAND_WORD + " alice 97381281 charlie";
 
-    private final CustomerNameContainsKeywordsPredicate predicate;
+    private final CustomerClassContainsKeywordsPredicate predicate;
 
-    public FindCustomerCommand(CustomerNameContainsKeywordsPredicate predicate) {
+    public FindCustomerCommand(CustomerClassContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -32,7 +32,8 @@ public class FindCustomerCommand extends Command {
         model.updateFilteredCustomerList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW,
-                        model.getFilteredCustomerList().size()), false, false, true, false, false, false);
+                        model.getFilteredCustomerList().size()),
+                false, false, true, false, false, false);
     }
 
     @Override

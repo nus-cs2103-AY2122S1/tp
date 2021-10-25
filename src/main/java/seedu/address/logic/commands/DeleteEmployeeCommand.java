@@ -14,7 +14,8 @@ import seedu.address.model.person.employee.Employee;
  * Deletes an employee identified using it's displayed index from the address book.
  */
 public class DeleteEmployeeCommand extends Command {
-    public static final String COMMAND_WORD = "deleteemployee";
+
+    public static final String COMMAND_WORD = "deletee";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the employee identified by the index number used in the displayed person list.\n"

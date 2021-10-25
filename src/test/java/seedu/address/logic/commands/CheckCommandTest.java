@@ -25,6 +25,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.reservation.CustomerContainsReservationPredicate;
 import seedu.address.model.reservation.ListContainsReservationPredicate;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.table.Table;
 
 class CheckCommandTest {
     private LocalDate date1 = LocalDate.parse("2021-01-01", DATE_FORMATTER);
@@ -33,8 +34,12 @@ class CheckCommandTest {
     private EnumTypeOfCheck typeOfCheck = EnumTypeOfCheck.DateTime;
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model resultModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Reservation reservation1 = new Reservation(CUSTOMER_ALICE.getPhone(), 5, LocalDateTime.of(date1, time));
-    private Reservation reservation2 = new Reservation(CUSTOMER_BOB.getPhone(), 10, LocalDateTime.of(date2, time));
+    private Table table1 = new Table(5, 10);
+    private Table table2 = new Table(10, 11);
+    private Reservation reservation1 =
+            new Reservation(CUSTOMER_ALICE.getPhone(), 5, LocalDateTime.of(date1, time), table1);
+    private Reservation reservation2 =
+            new Reservation(CUSTOMER_BOB.getPhone(), 10, LocalDateTime.of(date2, time), table2);
 
     @Test
     void execute_validDateTime_success() {
