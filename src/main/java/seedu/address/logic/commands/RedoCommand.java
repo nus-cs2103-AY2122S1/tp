@@ -20,7 +20,7 @@ public class RedoCommand extends Command {
         if (model.isRedoable()) {
             model.redo();
             Summary summary = new Summary(model.getAddressBook());
-            return new CommandResult(MESSAGE_REDO_SUCCESS);
+            return new CommandResult(MESSAGE_REDO_SUCCESS, summary);
         } else {
             return new CommandResult(Messages.MESSAGE_INVALID_REDO_STATE);
         }

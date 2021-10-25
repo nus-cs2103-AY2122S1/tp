@@ -20,7 +20,7 @@ public class UndoCommand extends Command {
         if (model.isUndoable()) {
             model.undo();
             Summary summary = new Summary(model.getAddressBook());
-            return new CommandResult(MESSAGE_UNDO_SUCCESS);
+            return new CommandResult(MESSAGE_UNDO_SUCCESS, summary);
         } else {
             return new CommandResult(Messages.MESSAGE_INVALID_UNDO_STATE);
         }
