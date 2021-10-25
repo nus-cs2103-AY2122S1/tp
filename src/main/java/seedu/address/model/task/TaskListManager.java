@@ -3,8 +3,7 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -13,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -23,6 +23,10 @@ import seedu.address.model.person.Person;
  */
 public class TaskListManager {
     private static final Logger logger = LogsCenter.getLogger(TaskListManager.class);
+
+    private static final String PIE_CHART_LABEL_FORMAT = "%s\n[%.0f]";
+
+    private String[] pieChartLabelNames = {"Done", "In Progress", "Overdue", "Due soon"};
 
     /** Stores every Person's taskList reference. */
     private final HashMap<String, List<Task>> taskListArchive;
@@ -38,6 +42,8 @@ public class TaskListManager {
     /** The taskList to be displayed on the GUI. */
     private FilteredList<Task> filteredTasks;
 
+    /** Task's statistics that will be displayed */
+    private ObservableList<PieChart.Data> statList;
 
     /** Constructor for TaskListManager */
     public TaskListManager() {
@@ -45,10 +51,18 @@ public class TaskListManager {
         isPersonSelected = false;
         observableTaskList = FXCollections.observableArrayList(Task.extractor());
         filteredTasks = new FilteredList<>(observableTaskList);
+        statList = FXCollections.observableArrayList();
+
+        for (int i = 0; i < 4; i++) {
+            statList.add(new PieChart.Data(
+                    String.format(PIE_CHART_LABEL_FORMAT, pieChartLabelNames[i], 0.0), 0));
+        }
+
+        updateStatistics();
     }
 
     /**
-     * Sets up the archive with all stored person's taskList upon application startup.
+     * Sets up the archive with all stored {@code Person}'s taskList upon application startup.
      */
     public void initialiseArchive(ObservableList<Person> observablePersonList) {
         logger.fine("taskListArchive is loaded with storage memory.");
@@ -137,10 +151,22 @@ public class TaskListManager {
         updateEntryTaskList(person.getName(), person.getTasks());
     }
 
+    /**
+     * Returns an unmodifiable {@code ObservableList} for
+     * defensive programming.
+     */
     public ObservableList<Task> getFilteredTasks() {
         assert(filteredTasks != null);
 
         return filteredTasks;
+    }
+
+    /**
+     * Returns an unmodifiable {@code ObservableList} for
+     * defensive programming.
+     */
+    public ObservableList<PieChart.Data> getStatList() {
+        return FXCollections.unmodifiableObservableList(statList);
     }
 
     /**
@@ -153,6 +179,36 @@ public class TaskListManager {
         filteredTasks.setPredicate(predicate);
     }
 
+    /**
+     * Updates {@code statList}'s values.
+     */
+    public void updateStatistics() {
+        double[] statValueList = calculateStatistics();
+
+        for (int i = 0; i < 4; i++) {
+            statList.get(i).setName(
+                    String.format(PIE_CHART_LABEL_FORMAT, pieChartLabelNames[i], statValueList[i]));
+            statList.get(i).setPieValue(statValueList[i]);
+        }
+    }
+
+    /**
+     * Iterates through all {@Task}s and updates their status.
+     */
+    public void updateAllTaskStatus() {
+        taskListArchive.values().stream()
+                .flatMap(Collection::stream)
+                .forEach(Task::updateDueDate);
+    }
+
+    /**
+     * Calculates the following statistics:
+     * <br>
+     * 1. {@code Task}s that are done
+     * 2. {@code Task}s that are not done yet (In progress)
+     * 3. {@code Task}s that are over due
+     * 4. {@code Task}s that are due soon
+     */
     public double[] calculateStatistics() {
         double totalTask = 0.0;
         double taskDone = 0.0;

@@ -1,15 +1,15 @@
 package seedu.address.model.task;
 
-import javafx.beans.Observable;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.util.Callback;
-
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.util.Callback;
 
 public class Task {
 
@@ -28,7 +28,7 @@ public class Task {
     /**
      * Constructor for task. Creates a new task with the given a String name.
      */
-    public Task (TaskName taskName, TaskDate date, TaskTime time, Venue venue) {
+    public Task(TaskName taskName, TaskDate date, TaskTime time, Venue venue) {
         requireNonNull(taskName);
 
         this.isDone = new SimpleBooleanProperty(false);
@@ -42,7 +42,22 @@ public class Task {
         updateDueDate();
     }
 
+    /**
+     * Creates a "dummy" {@code Task} for viewing all tasks.
+     */
+    public Task(String taskName) {
+        requireNonNull(taskName);
 
+        this.taskName = new TaskName(taskName);
+        this.date = new TaskDate("2021-12-12");
+        this.time = new TaskTime("23:59");
+        this.venue = new Venue("dummy");
+    }
+
+    /**
+     * {@code extractor} used for listView to detect changes in
+     * {@code isOverdue} and {@code isDueSoon} variables of {@code Task}s.
+     */
     public static Callback<Task, Observable[]> extractor() {
         return (Task t) -> new Observable[]{t.isOverdue, t.isDueSoon};
     }
@@ -105,11 +120,6 @@ public class Task {
             isDueSoon.setValue(false);
             isOverdue.setValue(false);
         }
-    }
-
-
-    public static void setDueSoonThreshold(int threshold) {
-
     }
 
     @Override

@@ -1,11 +1,20 @@
 .chart-pie-label-line {
-    -fx-stroke: #8b4513;
-    -fx-fill: #8b4513;
+    -fx-stroke: lime;
+    -fx-fill: lime;
 }
 
 .chart-pie-label {
-    -fx-fill: "limegreen";
-    -fx-font-size: 15;
+    -fx-fill: Cornsilk;
+    -fx-font-size: 14;
+}
+
+.chart-legend {
+    -fx-max-width: 150;
+    -fx-wrap-text: true;
+}
+
+.chart-legend-item {
+    -fx-wrap-text: true;
 }
 
 .default-color0.chart-pie {
@@ -19,4 +28,8 @@
 }
 .default-color3.chart-pie {
     -fx-pie-color: orange;
+}
+
+#pieChart {
+    -fx-legend-side: left;
 }

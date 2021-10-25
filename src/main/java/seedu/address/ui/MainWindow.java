@@ -11,7 +11,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -171,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
         setAnchorProperties(resultDisplayPlaceholder);
 
-        statisticsDisplay = new StatisticsDisplay();
+        statisticsDisplay = new StatisticsDisplay(logic.getStatistics());
         statisticsDisplayPlaceholder.getChildren().add(statisticsDisplay.getRoot());
         setAnchorProperties(statisticsDisplayPlaceholder);
 
@@ -249,7 +248,6 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
-                statisticsDisplay.updateStatistics(new double[]{10, 20, 5, 7});
             }
             if (commandResult.isExit()) {
                 handleExit();

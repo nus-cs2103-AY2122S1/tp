@@ -1,48 +1,41 @@
 package seedu.address.model.util;
 
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.task.Task;
-
 import java.awt.Toolkit;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.application.Platform;
+import seedu.address.model.task.TaskListManager;
+
 /**
- * Checks the status of the tasks at regular intervals. Any changes detected
+ * Checks the status of all tasks periodically. Any changes detected
  * would be reflected to the statistics.
  */
 public class TaskStatusChecker {
-    Toolkit toolkit;
-    Timer timer;
-    Model model;
+    private Toolkit toolkit;
+    private Timer timer;
+    private TaskListManager taskListManager;
 
     /**
      * Constructor for TaskStatusChecker
      */
-    public TaskStatusChecker(Model model) {
-        this.model = model;
-        toolkit = Toolkit.getDefaultToolkit();
+    public TaskStatusChecker(TaskListManager taskListManager) {
+        this.taskListManager = taskListManager;
+        //toolkit = Toolkit.getDefaultToolkit();
         timer = new Timer();
         timer.schedule(new UpdateStatusTask(), 0, 5 * 1000);
-        
     }
 
     /**
      * Updates the status of all tasks by comparing the system date and time with
-     * the tasks' date and time.
+     * all tasks' date and time.
      */
     class UpdateStatusTask extends TimerTask {
         public void run() {
-            // TODO: get a unfiltered list.
             Platform.runLater(() -> {
-                    ObservableList<Person> personList = model.getAddressBook().getPersonList();
-                    personList.stream()
-                            .flatMap(person -> person.getTasks().stream())
-                            .forEach(Task::updateDueDate);
-                    });
+                taskListManager.updateAllTaskStatus();
+                taskListManager.updateStatistics();
+            });
         }
     }
 }

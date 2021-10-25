@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,6 +11,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskListManager;
 
 /**
  * API of the Logic component
@@ -55,4 +57,8 @@ public interface Logic {
     /** Displays {@code person}'s task list on the GUI. */
     void displayPersonTaskList(Person person);
 
+    /** Gets important statistics information relating to tasks. */
+    ObservableList<PieChart.Data> getStatistics();
+
+    public TaskListManager getTaskListManager();
 }
