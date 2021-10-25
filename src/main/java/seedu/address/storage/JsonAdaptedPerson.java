@@ -76,9 +76,7 @@ class JsonAdaptedPerson {
         socialHandle = source.getSocialHandle().value;
         gender = source.getGender().gender;
         remark = source.getRemark().value;
-        tagged.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        tagged.addAll(source.getTags().stream().map(JsonAdaptedTag::new).collect(Collectors.toList()));
     }
 
     /**

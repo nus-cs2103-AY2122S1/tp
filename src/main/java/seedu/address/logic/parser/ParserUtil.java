@@ -29,6 +29,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -168,10 +169,25 @@ public class ParserUtil {
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
+        String colour;
+        if (trimmedTag.contains(":")) {
+            int colonIndex = trimmedTag.indexOf(":");
+            colour = trimmedTag.substring(colonIndex + 1);
+            trimmedTag = trimmedTag.substring(0, colonIndex);
+            if (!Tag.isValidTagColour(colour)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS_COLOURS);
+            }
+            if (!Tag.isValidTagName(trimmedTag)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+            return new Tag(trimmedTag, colour);
+        }
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+
+
     }
 
     /**

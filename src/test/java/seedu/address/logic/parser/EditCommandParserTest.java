@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SOCIAL_HANDLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_COLOUR_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TUTORIAL_GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -108,6 +109,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser,
                 "1" + INVALID_SOCIAL_HANDLE_DESC, SocialHandle.MESSAGE_CONSTRAINTS); // invalid social handle
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(parser, "1" + INVALID_TAG_COLOUR_DESC,
+                Tag.MESSAGE_CONSTRAINTS_COLOURS); // invalid tag colour
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);

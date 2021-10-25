@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_GENDER_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_SOCIAL_HANDLE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_COLOUR_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TUTORIAL_GROUP_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
@@ -279,6 +280,11 @@ public class AddCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
                 + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND + GENDER_DESC_BOB, Tag.MESSAGE_CONSTRAINTS);
+
+        // invalid tag colour
+        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + NATIONALITY_DESC_BOB
+                + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + REMARK_DESC_BOB
+                + INVALID_TAG_COLOUR_DESC + VALID_TAG_FRIEND + GENDER_DESC_BOB, Tag.MESSAGE_CONSTRAINTS_COLOURS);
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB

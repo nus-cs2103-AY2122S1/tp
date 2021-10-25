@@ -209,6 +209,7 @@ This section describes some noteworthy details on how certain features are imple
 The features mentioned are:
 - [Adding contacts with optional arguments](#add-contacts-with-optional-arguments)
 - [Deleting multiple contacts by keywords](#delete-by-keywords)
+- [Importing a JSON file](#import-json-file)
 - [Undoing / redoing command](#proposed-undoredo-feature)
 - {and so on...}
 
@@ -305,6 +306,47 @@ The following sequence diagram shows how the Delete By Keywords mechanism works:
     * Pros: Less overlapping and easier to debug. It also uses less memory and thus may run faster.
     * Cons: Reduced flexibility for users when deleting contacts as they can only input one single keyword.
 
+### Import JSON file
+
+#### Implementation
+
+The import JSON file will import an external addressbook and add all the entries to the current addressbook in the user's device.
+
+It works by utilizing the same mechanism that is used by AB3 when first initializing the addressbook with existing JSON data.
+
+#### Usage
+
+The following activity diagram briefly summarizes what happens when a user executes the `Import` to import a JSON addressbook file:
+
+[insert diagram]
+
+Given below is an example usage scenario and how the Import mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `import t35.json` command to import a file located in `data/t35.json`.
+
+Step 3. This will call `ImportCommandParser#parse` which will then parse the argument provided.
+
+Step 4. A new `ImportCommand` object will be created with its `importedFileName` set to the one parsed in the previous step.
+
+Step 5. `ImportCommand#execute` will create a mock `Storage` that takes in a mock `AddressBookStorage` with the `filePath` set to `data/importedFileName`.
+
+Step 6. It will then call `Model#importAddressBook` which will take in the imported `ReadOnlyAddressBook` returned from `Storage#readAddressBook`.
+
+Step 7. Finally, it will return a `CommandResult` if the operation is successful.
+
+#### Design considerations:
+
+**Aspect: File directory:**
+
+* **Alternative 1 (current choice):** Only allow to-be-imported files to be located in the `data` directory 
+    * Pros: Every file used in the application will live under a single `data` directory.
+    * Cons: Less flexibility for the user.
+
+* **Alternative 2:** Allow to-be-imported files to be located anywhere
+    * Pros: Gives user the flexibility to put the file wherever they want.
+    * Cons: Different OSes have different file paths convention.
 
 
 ### \[Proposed\] Undo/redo feature
@@ -402,11 +444,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
 
-_{Explain here how the data archiving feature will be implemented}_
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
