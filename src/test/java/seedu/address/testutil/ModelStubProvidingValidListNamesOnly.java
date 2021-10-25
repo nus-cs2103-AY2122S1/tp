@@ -5,11 +5,16 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
 /**
- * A Model stub that provide a valid filteredList
+ * A Model stub that provides a valid filteredList and selectedList with names only
  */
-public class ModelStubProvidingValidFilteredListNamesOnly extends ModelStub {
+public class ModelStubProvidingValidListNamesOnly extends ModelStub {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
+        return FXCollections.observableArrayList(TypicalPersons.getTypicalPersonsNameOnly());
+    }
+
+    @Override
+    public ObservableList<Person> getSelectedPersonList() {
         return FXCollections.observableArrayList(TypicalPersons.getTypicalPersonsNameOnly());
     }
 }

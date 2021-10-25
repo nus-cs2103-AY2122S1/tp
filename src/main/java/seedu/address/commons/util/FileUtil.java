@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -117,5 +118,15 @@ public class FileUtil {
      */
     public static void deleteFile(Path filePath) {
         filePath.toFile().delete();
+    }
+
+    /**
+     * Copies the source to the target if the target is missing.
+     */
+    public static void copyFileIfMissing(InputStream src, Path target) throws IOException {
+        if (isFileExists(target)) {
+            return;
+        }
+        Files.copy(src, target);
     }
 }

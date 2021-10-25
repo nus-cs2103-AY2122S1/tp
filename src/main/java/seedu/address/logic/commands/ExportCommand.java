@@ -29,6 +29,7 @@ public class ExportCommand extends Command {
             + "Example: " + COMMAND_WORD + " myContacts.csv";
     public static final String MESSAGE_SUCCESS = "Contacts exported successfully";
     public static final String MSG_FILE_WRITE_ERROR = "File cannot be written to";
+    public static final String MSG_NO_CONTACTS = "No contacts are selected";
 
     private final String[] fieldHeaders = new String[]{"name", "phone", "email", "address", "tags"};
     private final Map<String, List<String>> data = new HashMap<>();
@@ -54,7 +55,10 @@ public class ExportCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        List<Person> personList = model.getFilteredPersonList();
+        List<Person> personList = model.getSelectedPersonList();
+        if (personList.isEmpty()) {
+            throw new CommandException(MSG_NO_CONTACTS);
+        }
         convertFieldsToString(personList);
         populateDataToExport();
 

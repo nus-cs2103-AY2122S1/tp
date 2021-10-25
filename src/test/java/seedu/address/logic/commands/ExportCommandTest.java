@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.util.CsvWriter;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.testutil.ModelStubProvidingValidFilteredListAllFields;
+import seedu.address.testutil.ModelStubProvidingValidListAllFields;
 
 public class ExportCommandTest {
     public static final String VALID_FILE_PATH = "src"
@@ -38,8 +38,8 @@ public class ExportCommandTest {
     @Test
     public void execute_csvWriterIoException_throwsCommandException() {
         ExportCommand command = new ExportCommand(VALID_FILE_PATH, new CsvWriterStubThrowsIoException());
-        Model model = new ModelStubProvidingValidFilteredListAllFields();
-        assertThrows(CommandException.class, () -> command.execute(model));
+        Model model = new ModelStubProvidingValidListAllFields();
+        assertThrows(CommandException.class, ExportCommand.MSG_FILE_WRITE_ERROR, () -> command.execute(model));
     }
 
     private static class CsvWriterStubDoesNothing extends CsvWriter {
