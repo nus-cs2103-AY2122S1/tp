@@ -20,12 +20,4 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate products.
      */
     ObservableList<Product> getProductList();
-
-    // todo remove later
-
-    /**
-     * Returns an unmodifiable view of the persons list.
-     * This list will not contain any duplicate persons.
-     */
-    ObservableList<Person> getPersonList();
 }
