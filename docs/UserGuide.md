@@ -120,7 +120,15 @@ Format: ```find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
 * The search is case-insensitive. e.g hans@gmail.com will match Hans@gmail.com
 * The order of the keywords does not matter. e.g. a/tampines 123 will match Blk 123 Tampines.
-* Contacts matching all keywords will be returned (i.e. AND search). e.g. “find p/86235343 t/CS2101” will return only contacts who both have the given phone number AND the tag CS2101. It will not return contacts with different phone numbers, even if they contain the tag CS2101.
+* Contacts matching all keywords will be returned (i.e. AND search). e.g. ```find p/86235343 t/CS2101``` will return 
+  only contacts who both have the given phone number AND the tag CS2101. 
+  It will not return contacts with different phone numbers, even if they contain the tag CS2101.
+  
+#### Listing all contacts: [list]
+
+Clears the search results of a find command, showing all contacts.
+
+Format: ```list```
 
 #### Clearing all contacts: [clear]
 
@@ -134,29 +142,61 @@ Format: ```clear```
 
 Adds a task to the task list. Only task description is compulsory during creation.
 
-Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [t/TAG]...```
+Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
-An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+* An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+* Assigning people to a task uses the current index of the person on the contacts list, which is shown
+on the side bar to the right.
 
 #### Editing task details [edit]
 
 Replaces the details of the task at the given index with the new details.
 
-Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [t/TAG]...```
+Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
 * Edits the specified task fields at the specified INDEX
 * The index refers to the index number shown in the task list
 * The index must be a positive integer i.e. 1, 2, 3, …
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
+* You can remove all the task’s tags by typing t/ without specifying any tags after it.
+* An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+* Assigning people to a task uses the current index of the person on the contacts list, which is shown
+  on the side bar to the right.
+  
+#### Tagging a task: [tag]
 
-An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+Adds extra tags to a task without wiping the old tags.
 
-#### Deleting a task [delete]
+Format: ```tag [t/TAG]...```
+
+#### Assigning people to a task: [assign]
+
+Assigns extra people to a task without wiping people already assigned.
+
+Format: ```assign [p/PERSON INDEX]...```
+
+* Assigning people to a task uses the current index of the person on the contacts list, which is shown
+  on the side bar to the right.
+
+#### Completing a task: [complete]
+
+Completes the task at the chosen index.
+
+Format: ```complete INDEX```
+
+* Completes the task at the specified INDEX
+* The index refers to the index number shown in the task list
+* The index must be a positive integer i.e. 1, 2, 3, …
+
+#### Deleting a task: [delete]
 
 Deletes the task at the chosen index.
 
 Format: ```delete INDEX```
 
-* Deletes the person at the specified INDEX
+* Deletes the task at the specified INDEX
 * The index refers to the index number shown in the task list
 * The index must be a positive integer i.e. 1, 2, 3, …
 
@@ -169,7 +209,34 @@ Format: ```find DESCRIPTION```
 * The search is case-insensitive. e.g job will match Job
 * The order of the keywords does not matter. e.g. home work will match work home
 * Only the description field is searched.
-* Task descriptions matching all keywords will be returned (i.e. AND search). e.g. Do this will return only Do this and Do this (very important!!!). It will not return Do maybe? or This doesn’t matter
+* Task descriptions matching all keywords will be returned (i.e. AND search). 
+  e.g. ```Do this``` will return only ```Do this``` and ```Do this (very important!!!)```. 
+  It will not return ```Do maybe?``` or ```This doesn’t matter```
+
+#### Finding task through searching a specific field: [find]
+
+Finds all tasks whose parameter (date/time, people, etc) matches the search term.
+
+Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
+
+* The search is case-insensitive. e.g HOMEWORK will match homework
+* Tasks matching all keywords will be returned (i.e. AND search). e.g. ```find dt/1900 t/homework``` will return
+  only tasks who both have time 1900 AND the tag homework.
+  It will not return contacts with different times, even if they contain the tag homework.
+  
+#### Find all upcoming tasks: [upcoming]
+
+Finds all tasks whose date/time are after the current date/time.
+
+Format: ```upcoming```
+
+* An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+
+#### Listing all tasks: [list]
+
+Clears the search results of a find/upcoming command, showing all tasks.
+
+Format: ```list```
 
 #### Clearing all tasks: [clear]
 
