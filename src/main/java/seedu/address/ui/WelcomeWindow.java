@@ -19,7 +19,7 @@ import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 
 /**
- * Controller for a welcome page
+ * Controller for the Welcome Window
  */
 public class WelcomeWindow extends UiPart<Stage> {
 
