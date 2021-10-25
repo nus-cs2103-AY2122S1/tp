@@ -102,7 +102,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void updateFilteredItemList(Predicate<Item> predicate) {
+    public void updateFilteredItemList(DisplayMode mode, Predicate<Item> predicate) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public DisplayMode getDisplayMode() {
         throw new AssertionError("This method should not be called.");
     }
 

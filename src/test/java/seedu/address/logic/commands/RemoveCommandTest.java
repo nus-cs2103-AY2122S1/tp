@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.BAGEL;
 import static seedu.address.testutil.TypicalItems.DONUT;
@@ -120,7 +121,7 @@ public class RemoveCommandTest {
         String expectedMessage = RemoveCommand.MESSAGE_MULTIPLE_MATCHES;
 
         Model expectedModel = new ModelManager(model.getInventory(), model.getUserPrefs());
-        expectedModel.updateFilteredItemList(x-> x.equals(BAGEL) || x.equals(DONUT));
+        expectedModel.updateFilteredItemList(DISPLAY_INVENTORY, x-> x.equals(BAGEL) || x.equals(DONUT));
 
         assertCommandFailure(removeCommand, model, expectedModel, expectedMessage);
     }
