@@ -155,7 +155,75 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Locating folders by name: `find -folders`
+### Create a folder: `mkdir`
+
+#### Implementation
+
+Folders are saved in a `UniqueFolderList` in `AddressBook`.
+
+The following diagram shows how `mkdir` works:
+
+![CreateFolderSequenceDiagram](images/CreateFolderSequenceDiagram.png)
+
+#### Design considerations
+
+* **Alternative 1 (current choice)**: Folders hold references to contacts
+  * Pros: Easier management of folders
+  * Cons: More difficult to implement
+
+Diagram:
+
+![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
+
+* **Alternative 2**: Contacts hold references to folders
+    * Pros: Easy to implement
+    * Cons: More complex management of folders, Similar to tags which is already implemented
+
+Diagram:
+
+![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
+
+### View list of folders: `ls -folders`
+
+#### Implementation
+
+In our GUI, we would like to display the list of folders that users can create to organize
+their contacts into different classes. The implementation is very similar to `PersonListCard` and
+`PersonListPanel` for viewing list of contacts.
+
+#### Design considerations
+
+* Alternative 1: 2-row layout
+    * Pros: Ability to see additional details of folders and contacts with a small-sized GUI.
+    * Cons: Extra effort to scroll down the GUI to look into the details of contacts.
+* Alternative 2: 2-column layout
+    * Pros: Ability to see both folders and contacts data at a glance without initial scrolling needed
+    * Cons: Truncated details of folders and contacts will be displayed due to the small-sized GUI.
+
+Alternative 1 is selected, implemented using additional`StackPane` on top of the existing `StackPane`
+for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
+component in `MainWindow`.
+
+### Add contacts to folder: `echo index1 ... indexN >> Folder`
+
+#### Implementation
+Contacts are added by updating the `ObservableList` in `UniqueFolderList`.
+A new `Folder` object is created containing the new `Person` and replaces the old folder in the `UniqueFolderList`.
+
+#### Design considerations
+
+* Alternative 1: If there is an invalid index, allow adding of contact for the remaining valid index
+    * Pros: Easier to implement.
+    * Cons: Difficult for user to know which contacts have been added into the folder
+* Alternative 2: Only allow adding of contacts when all indexes are valid
+    * Pros: Easier for user to know which contacts have been added into the folder
+    * Cons: Requires more code and effort to ensure all indexes are valid before adding them to folder
+
+Alternative 2 is selected, as it is more user-friendly and intuitive.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Locate folders by name: `find -folders`
 
 #### Implementation
 
@@ -178,119 +246,7 @@ However, one use case we wanted to cater to was students who group their contact
 
 Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
 
-### \[Proposed\] Undo/redo feature
-
-#### Proposed Implementation
-
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-![UndoRedoState0](images/UndoRedoState0.png)
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-![UndoRedoState1](images/UndoRedoState1.png)
-
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-![UndoRedoState2](images/UndoRedoState2.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</div>
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-![UndoRedoState3](images/UndoRedoState3.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</div>
-
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-### Create folder feature
-
-#### Implementation
-
-Folders are saved in a `UniqueFolderList` in `AddressBook`.
-
-The following diagram shows how `mkdir` works:
-
-![CreateFolderSequenceDiagram](images/CreateFolderSequenceDiagram.png)
-
-#### Design considerations:
-
-* **Alternative 1 (current choice)**: Folders hold references to contacts
-  * Pros: Easier management of folders
-  * Cons: More difficult to implement
-
-Diagram:
-
-![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
-
-* **Alternative 2**: Contacts hold references to folders
-    * Pros: Easy to implement
-    * Cons: More complex management of folders, Similar to tags which is already implemented
-
-Diagram:
-
-![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
-
-### Edit folder name feature: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
+### Edit folder name: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
 
 #### Implementation
 
@@ -311,46 +267,6 @@ The following diagram shows how `mv` works:
 * **Alternative 1 (current choice)**: Old folder and new folder name are separated by the pipe operator `|`.
     * Pros: Easy to distinguish between the folder to be replaced and the new incoming folder name considering how folder name can have blank spaces in between
     * Cons: More difficult to implement
-
-### Viewing list of folders: `ls -folders`
-
-#### Implementation
-
-In our GUI, we would like to display the list of folders that users can create to organize
-their contacts into different classes. The implementation is very similar to `PersonListCard` and
-`PersonListPanel` for viewing list of contacts.
-
-#### Design considerations
-
-* Alternative 1: 2-row layout
-    * Pros: Ability to see additional details of folders and contacts with a small-sized GUI.
-    * Cons: Extra effort to scroll down the GUI to look into the details of contacts.
-* Alternative 2: 2-column layout
-    * Pros: Ability to see both folders and contacts data at a glance without initial scrolling needed
-    * Cons: Truncated details of folders and contacts will be displayed due to the small-sized GUI.
-
-Alternative 1 is selected, implemented using additional`StackPane` on top of the existing `StackPane`
-for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
-component in `MainWindow`.
-
-### Adding contacts to folder : `echo index1 ... indexN >> Folder`
-
-###Implementation
-Contacts are added by updating the `ObservableList` in `UniqueFolderList`.
-A new `Folder` object is created containing the new `Person` and replaces the old folder in the `UniqueFolderList`.
-
-#### Design considerations
-
-* Alternative 1: If there is an invalid index, allow adding of contact for the remaining valid index
-    * Pros: Easier to implement.
-    * Cons: Difficult for user to know which contacts have been added into the folder
-* Alternative 2: Only allow adding of contacts when all indexes are valid
-    * Pros: Easier for user to know which contacts have been added into the folder
-    * Cons: Requires more code and effort to ensure all indexes are valid before adding them to folder
-
-Alternative 2 is selected, as it is more user-friendly and intuitive.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
