@@ -20,6 +20,7 @@ import seedu.address.model.CsBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyCsBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Student;
@@ -185,6 +186,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredGroupList(Predicate<Group> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAssessment(Student student, Assessment assessment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAssessment(Student student, Assessment assessment) {
             throw new AssertionError("This method should not be called.");
         }
     }
