@@ -41,7 +41,6 @@ public class LessonListPanel extends UiPart<Region> {
         super(FXML);
         initialiseLessonListView(lessonList);
         lessonListTitle.setText(TITLE_PLACEHOLDER_MESSAGE);
-        titleBox.minHeightProperty().bind(lessonListTitle.heightProperty().multiply(1.1));
         placeholder.setText(LIST_PLACEHOLDER_MESSAGE);
         placeholder.visibleProperty().bind(Bindings.isEmpty(lessonListView.getItems()));
         placeholder.prefWidthProperty().bind(getRoot().widthProperty().multiply(0.65));

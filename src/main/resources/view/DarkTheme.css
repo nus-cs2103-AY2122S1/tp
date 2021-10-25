@@ -83,7 +83,6 @@
     -fx-background-color: #d5daf2;
     -fx-padding: 5 0 5 0;
     -fx-background-radius: 15;
-
 }
 
 .list-cell {
@@ -313,7 +312,7 @@
 .scroll-bar:vertical .track,
 .scroll-bar:vertical .track-background {
     -fx-background-color: transparent;
-    -fx-padding: 10 0 0 0;
+    -fx-padding: 2 0 0 0;
     -fx-pref-width: 12;
 }
 
@@ -450,4 +449,12 @@
     -fx-background-radius: 0 0 15 15;
 }
 
+#personListView {
+    -fx-background-radius: 0 0 15 15;
+}
 
+.student_title_box {
+    -fx-background-color: #8390C9;
+    -fx-text-fill: white;
+    -fx-background-radius: 15 15 0 0;
+}
