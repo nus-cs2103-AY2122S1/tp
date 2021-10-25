@@ -6,6 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.util.StringUtil;
+
 public class NameTest {
 
     @Test
@@ -36,5 +38,22 @@ public class NameTest {
         assertTrue(Name.isValidName("100 plus")); // alphanumeric characters
         assertTrue(Name.isValidName("Butter Biscuit")); // with capital letters
         assertTrue(Name.isValidName("Butter Butter Butter Butter Butter Biscuit")); // long names
+    }
+
+    @Test
+    public void hasSameLower_sameLowerCaseName_returnTrue() {
+        String randString = StringUtil.generateRandomString();
+        Name lower = new Name(randString.toLowerCase());
+        Name upper = new Name(randString.toUpperCase());
+
+        assertTrue(lower.hasSameLower(upper));
+    }
+
+    @Test
+    public void hasSameLower_differentLowerCaseName_returnFalse() {
+        Name lower = new Name(StringUtil.generateRandomString().toLowerCase());
+        Name upper = new Name(StringUtil.generateRandomString().toUpperCase());
+
+        assertFalse(lower.hasSameLower(upper));
     }
 }

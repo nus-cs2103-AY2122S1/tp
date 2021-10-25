@@ -107,4 +107,13 @@ public class ItemDescriptorTest {
                 .withTags(VALID_TAG_POPULAR).build();
         assertFalse(pieDescriptor.equals(editedPie));
     }
+
+    @Test
+    public void isMatch() {
+        // Test Name matching case sensitivity
+        ItemDescriptor descriptorUpperName = new ItemDescriptorBuilder(APPLE_PIE).build();
+        descriptorUpperName.setName(new Name("APPLE PIE"));
+
+        assertTrue(descriptorUpperName.isMatch(APPLE_PIE));
+    }
 }
