@@ -18,7 +18,7 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Sorts the displayed person lists either by increasing order of next visit using flag " + PREFIX_VISIT
-            + " or by decreasing order of last visit using flag " + PREFIX_LAST_VISIT
+            + " or by decreasing order of last visit using flag " + PREFIX_LAST_VISIT + "\n"
             + "Parameters: [" + PREFIX_VISIT + "] or [" + PREFIX_LAST_VISIT + "]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VISIT + " or " + COMMAND_WORD + " " + PREFIX_LAST_VISIT;
 
