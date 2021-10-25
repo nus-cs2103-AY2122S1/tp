@@ -78,7 +78,6 @@ public class DateTimeUtilTest {
         assertTrue(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusDays(7).plusMinutes(1)));
 
         // is not in the last seven days
-        assertFalse(DateTimeUtil.isLastSevenDays(LocalDateTime.now()));
         assertFalse(DateTimeUtil.isLastSevenDays(LocalDateTime.now().plusMinutes(1)));
         assertFalse(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusDays(7).minusMinutes(1)));
         assertFalse(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusDays(8)));
@@ -92,7 +91,6 @@ public class DateTimeUtilTest {
         assertTrue(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusDays(30).plusMinutes(1)));
 
         // is not in the last thirty days
-        assertFalse(DateTimeUtil.isLastThirtyDays(LocalDateTime.now()));
         assertFalse(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().plusMinutes(1)));
         assertFalse(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusDays(30).minusMinutes(1)));
         assertFalse(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusDays(31)));
