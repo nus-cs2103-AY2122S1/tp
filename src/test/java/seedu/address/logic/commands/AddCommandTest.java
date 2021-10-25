@@ -163,6 +163,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public ObservableList<Task> getDisplayTaskList() {
             throw new AssertionError("This method should not be called");
         }
@@ -178,7 +183,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addCommand(String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public TaskListManager getTaskListManager() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getBefore() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getAfter() {
             throw new AssertionError("This method should not be called.");
         }
     }

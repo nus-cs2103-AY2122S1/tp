@@ -108,11 +108,11 @@ public class HelpWindow extends AnchorPane {
             e.printStackTrace();
         }
 
+        fillCommandTable();
         helpMessage.setText(HELP_MESSAGE);
         additionalInfo.setText("");
         userGuideMessage.setText(USER_GUIDE_MESSAGE);
         copyButton.setText("Copy URL");
-        fillCommandTable();
     }
 
     public static HelpWindow getWindow() {

@@ -11,6 +11,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddressBookInternalParser;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -30,6 +31,7 @@ public class LogicManager implements Logic {
     private final Model model;
     private final Storage storage;
     private final AddressBookParser addressBookParser;
+    private final AddressBookInternalParser addressBookInternalParser;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -38,6 +40,7 @@ public class LogicManager implements Logic {
         this.model = model;
         this.storage = storage;
         addressBookParser = new AddressBookParser();
+        addressBookInternalParser = new AddressBookInternalParser();
     }
 
     @Override
@@ -45,7 +48,25 @@ public class LogicManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
 
         CommandResult commandResult;
+        model.addCommand(commandText);
         Command command = addressBookParser.parseCommand(commandText);
+        commandResult = command.execute(model);
+
+        try {
+            storage.saveAddressBook(model.getAddressBook());
+        } catch (IOException ioe) {
+            throw new CommandException(FILE_OPS_ERROR_MESSAGE + ioe, ioe);
+        }
+
+        return commandResult;
+    }
+
+    @Override
+    public CommandResult executeInternal(String commandText) throws CommandException, ParseException {
+        logger.info("----------------[INTERNAL COMMAND][" + commandText + "]");
+
+        CommandResult commandResult;
+        Command command = addressBookInternalParser.parseCommand(commandText);
         commandResult = command.execute(model);
 
         try {
