@@ -135,15 +135,4 @@ public interface Model {
      * @return Whether the task is done or not.
      */
     boolean isDone(ModuleName moduleName, StudentId studentId, TaskId taskId);
-
-    /**
-     * Set the given task as done.
-     */
-    void setTaskDone(ModuleName moduleName, StudentId studentId, TaskId taskId);
-
-    /**
-     * Set the given task as undone.
-     */
-    void setTaskUndone(ModuleName moduleName, StudentId studentId, TaskId taskId);
-    //todo later versions: deleteModule
 }

@@ -157,18 +157,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setTaskDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
-        requireAllNonNull(moduleName, studentId, taskId);
-        teachingAssistantBuddy.setTaskDone(moduleName, studentId, taskId);
-    }
-
-    @Override
-    public void setTaskUndone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
-        requireAllNonNull(moduleName, studentId, taskId);
-        teachingAssistantBuddy.setTaskUndone(moduleName, studentId, taskId);
-    }
-
-    @Override
     public boolean hasModule(Module module) {
         requireNonNull(module);
         return teachingAssistantBuddy.hasModule(module);

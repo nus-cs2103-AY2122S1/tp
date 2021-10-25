@@ -6,11 +6,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_ID;
 
+import java.util.List;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
+import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDeadline;
 import seedu.address.model.task.TaskId;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Marks a task of a student as done.
@@ -56,8 +64,33 @@ public class MarkTaskDoneCommand extends MarkTaskCommand {
             throw new CommandException(MESSAGE_IS_ALREADY_DONE);
         }
 
-        model.setTaskDone(moduleName, studentId, taskId);
+        List<Module> lastShownList = model.getFilteredModuleList();
+
+        for (Module module : lastShownList) {
+            if (module.getName().equals(moduleName)) {
+                List<Student> studentList = module.getFilteredStudentList();
+                for (Student student : studentList) {
+                    if (student.getStudentId().equals(studentId)) {
+                        setTaskIsComplete(student, taskId);
+                    }
+                }
+            }
+        }
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskId, studentId));
+    }
+
+    public void setTaskIsComplete(Student student, TaskId taskId) {
+        UniqueTaskList taskList = student.getTaskList();
+        for (Task t : taskList) {
+            if (t.getTaskId().equals(taskId)) {
+                ModuleName moduleName = t.getTaskModuleName();
+                TaskName taskName = t.getTaskName();
+                TaskDeadline taskDeadline = t.getTaskDeadline();
+                Task newTask = new Task(moduleName, taskId, taskName, taskDeadline, true);
+                taskList.setTask(t, newTask);
+            }
+        }
     }
 
     @Override
