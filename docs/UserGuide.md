@@ -60,7 +60,7 @@ This guide aims to help users get familiar with using RecruitIn's features.
 
     * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
-    * **`show`**`n/` : Displays a list of all unique applicant names.
+    * **`show`**`n/` : Displays all unique applicant names in RecruitIn.
 
     * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done.
 
