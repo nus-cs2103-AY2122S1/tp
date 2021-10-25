@@ -9,16 +9,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Score {
 
-    public static final String MESSAGE_CONSTRAINTS = "Score should be of the format actual-score/total-score "
-            + "and adhere to the following constraints:\n"
+    public static final String SCORE_DELIMITER = "/";
+
+    public static final String MESSAGE_CONSTRAINTS = "Score should be of the format actual-score" + SCORE_DELIMITER
+            + "total-score and adhere to the following constraints:\n"
             + "1. The actual-score should be an integer greater than or equal to 0.\n"
             + "2. The total-score should be an integer greater than 0.\n"
             + "3. The actual-score should be less than or equal to the total-score.";
 
     public static final String INVALID_ACTUAL_SCORE = "Actual score should have a value greater than or equal to 0.";
     public static final String INVALID_TOTAL_SCORE = "Total score should have a value greater than 0.";
-
-    public static final String SCORE_DELIMITER = "/";
 
     /*
      * The first character of the address must not be a whitespace,
