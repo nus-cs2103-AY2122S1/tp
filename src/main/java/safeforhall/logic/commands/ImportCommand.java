@@ -1,10 +1,6 @@
 package safeforhall.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
-import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,15 +12,11 @@ import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
-import safeforhall.commons.core.index.*;
-import safeforhall.logic.commands.edit.EditEventCommand;
-import safeforhall.logic.commands.edit.EditEventCommand.EditEventDescriptor;
 import safeforhall.logic.commands.exceptions.CommandException;
-import safeforhall.logic.parser.*;
-import safeforhall.logic.parser.exceptions.*;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
-import safeforhall.model.event.*;
+import safeforhall.model.event.Event;
+import safeforhall.model.event.ResidentList;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -60,10 +52,27 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_INCORRECT_FIELDS = "8 fields of comma separated values not found";
     public static final String DEFAULT_FILENAME = "safeforhall";
 
+    private final Path filepath;
     private final String filename;
 
+    /**
+     * Constructs an ImportCommand.
+     *
+     * @param filename filename of csv to be read
+     */
     public ImportCommand(String filename) {
         this.filename = filename;
+        this.filepath = Paths.get("data" + filename + ".csv");
+    }
+
+    /**
+     * Constructs an ImportCommand.
+     *
+     * @param path path of csv to be read
+     */
+    public ImportCommand(Path path) {
+        this.filename = "DEFAULT";
+        this.filepath = path;
     }
 
     @Override
@@ -79,6 +88,7 @@ public class ImportCommand extends Command {
         }
         importedData.setEvents(eventListRemovedResidents);
         model.setAddressBook(importedData);
+        System.out.println("sucess");
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -90,8 +100,7 @@ public class ImportCommand extends Command {
      */
     private AddressBook readCsv() throws CommandException {
         ArrayList<Person> persons = new ArrayList<Person>();
-        Path what = Paths.get("data" , this.filename + ".csv");
-        try (CSVReader reader = new CSVReader(new FileReader(what.toString()))) {
+        try (CSVReader reader = new CSVReader(new FileReader(this.filepath.toString()))) {
             List<String[]> rows = reader.readAll();
             // Remove column headings row
             rows.remove(0);

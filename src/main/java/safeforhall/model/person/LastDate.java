@@ -66,6 +66,11 @@ public class LastDate {
     }
 
     @Override
+    public String toString() {
+        return date;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LastDate // instanceof handles nulls

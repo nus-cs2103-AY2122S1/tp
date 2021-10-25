@@ -17,15 +17,17 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
-//import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
+import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand;
+import safeforhall.logic.commands.edit.EditPersonCommand.EditPersonDescriptor;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -34,7 +36,7 @@ import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Name;
 import safeforhall.model.person.Person;
 import safeforhall.model.person.VaccStatus;
-//import safeforhall.testutil.EditPersonDescriptorBuilder;
+import safeforhall.testutil.EditPersonDescriptorBuilder;
 import safeforhall.testutil.PersonBuilder;
 import safeforhall.testutil.PersonUtil;
 
@@ -65,13 +67,22 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_import() throws Exception {
+        ImportCommand command = (ImportCommand) parser.parseCommand(
+                ImportCommand.COMMAND_WORD + " safeforhall", true);
+        assertEquals(new ImportCommand("safeforhall"), command);
+    }
+
+    @Test
     public void parseCommand_edit() throws Exception {
-        // TODO : Fix after edit command is done
-        /*Person person = new PersonBuilder().build();
-        EditCommand.EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);*/
+        Person person = new PersonBuilder().build();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        EditPersonCommand command = (EditPersonCommand) parser.parseCommand(EditPersonCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " "
+                + PersonUtil.getEditPersonDescriptorDetails(descriptor), true);
+        ArrayList<Index> list = new ArrayList<>();
+        list.add(INDEX_FIRST_PERSON);
+        assertEquals(new EditPersonCommand(list, descriptor), command);
     }
 
     @Test
