@@ -254,7 +254,7 @@ specific client. To return to the full client list, you can use the [list](#list
 **Format 1**: `find QUERY [MORE_QUERIES]` <br>
 **Format 2**: `find pr/PRIORITY [MORE_PRIORITIES]`<br>
 **Format 3**: `find t/TAG [MORE TAGS]`<br>
-**Format 3**: `find r/REMARK [MORE REMARKS]`<br>
+**Format 4**: `find r/REMARK [MORE REMARKS]`<br>
 
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
