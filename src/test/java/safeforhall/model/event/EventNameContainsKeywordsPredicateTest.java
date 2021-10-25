@@ -11,24 +11,24 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.testutil.EventBuilder;
 
-public class NameContainsEventKeywordsPredicateTest {
+public class EventNameContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        NameContainsEventKeywordsPredicate firstPredicate =
-                new NameContainsEventKeywordsPredicate(firstPredicateKeywordList);
-        NameContainsEventKeywordsPredicate secondPredicate =
-                new NameContainsEventKeywordsPredicate(secondPredicateKeywordList);
+        EventNameContainsKeywordsPredicate firstPredicate =
+                new EventNameContainsKeywordsPredicate(firstPredicateKeywordList);
+        EventNameContainsKeywordsPredicate secondPredicate =
+                new EventNameContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        NameContainsEventKeywordsPredicate firstPredicateCopy =
-                new NameContainsEventKeywordsPredicate(firstPredicateKeywordList);
+        EventNameContainsKeywordsPredicate firstPredicateCopy =
+                new EventNameContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -45,20 +45,20 @@ public class NameContainsEventKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        NameContainsEventKeywordsPredicate predicate =
-                new NameContainsEventKeywordsPredicate(Collections.singletonList("Football"));
+        EventNameContainsKeywordsPredicate predicate =
+                new EventNameContainsKeywordsPredicate(Collections.singletonList("Football"));
         assertTrue(predicate.test(new EventBuilder().withEventName("Football").build()));
 
         // Multiple keywords
-        predicate = new NameContainsEventKeywordsPredicate(Arrays.asList("Football", "Swim"));
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Football", "Swim"));
         assertTrue(predicate.test(new EventBuilder().withEventName("Football Swim").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsEventKeywordsPredicate(Arrays.asList("Football", "Basketball"));
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Football", "Basketball"));
         assertTrue(predicate.test(new EventBuilder().withEventName("Football Swim").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsEventKeywordsPredicate(Arrays.asList("fooTbAll", "swIM"));
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("fooTbAll", "swIM"));
         assertTrue(predicate.test(new EventBuilder().withEventName("Football Swim").build()));
     }
 
@@ -66,15 +66,15 @@ public class NameContainsEventKeywordsPredicateTest {
     @Test
     public void test_nameDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        NameContainsEventKeywordsPredicate predicate = new NameContainsEventKeywordsPredicate(Collections.emptyList());
+        EventNameContainsKeywordsPredicate predicate = new EventNameContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new EventBuilder().withEventName("Football").build()));
 
         // Non-matching keyword
-        predicate = new NameContainsEventKeywordsPredicate(Arrays.asList("Swim"));
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("Swim"));
         assertFalse(predicate.test(new EventBuilder().withEventName("Football Basketball").build()));
 
         // Keywords match phone, email, but does not match name
-        predicate = new NameContainsEventKeywordsPredicate(Arrays.asList("20-10-2021", "Field", "20"));
+        predicate = new EventNameContainsKeywordsPredicate(Arrays.asList("20-10-2021", "Field", "20"));
         assertFalse(predicate.test(new EventBuilder().withEventName("Football Training").withEventDate("20-10-2021")
                 .withVenue("Field").withCapacity("20").build()));
     }
