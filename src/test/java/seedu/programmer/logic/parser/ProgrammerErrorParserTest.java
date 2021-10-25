@@ -29,7 +29,7 @@ class ProgrammerErrorParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Student student = new StudentBuilder().build();
+        Student student = new StudentBuilder().build_noLab();
         AddCommand command = (AddCommand) parser.parseCommand(StudentUtil.getAddCommand(student));
         assertEquals(new AddCommand(student), command);
     }

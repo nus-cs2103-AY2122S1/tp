@@ -65,6 +65,12 @@ public interface Model {
     void deleteStudent(Student target);
 
     /**
+     * Deletes the given Lab.
+     * The Lab must exist in ProgrammerError.
+     */
+    void deleteLab(Lab target);
+
+    /**
      * Shows the given student's lab results.
      * The student must exist in ProgrammerError.
      */

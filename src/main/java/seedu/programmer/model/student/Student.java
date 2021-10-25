@@ -100,8 +100,8 @@ public class Student {
     /**
      * Deletes a lab result from all the student records
      * */
-    public void delLabResult(Lab result) {
-        this.labResultList.remove(result);
+    public boolean delLabResult(Lab result) {
+        return this.labResultList.remove(result);
     }
 
     /**
@@ -128,6 +128,10 @@ public class Student {
             labResultRecord = new ArrayList<>();
         }
         this.labResultList.addAll(labResultRecord);
+    }
+
+    public void setLabResultList(ObservableList<Lab> labResultList) {
+        this.labResultList = labResultList;
     }
 
     /**

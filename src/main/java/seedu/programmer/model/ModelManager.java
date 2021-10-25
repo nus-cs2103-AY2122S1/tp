@@ -102,6 +102,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void deleteLab(Lab target) {
+        programmerError.removeLab(target);
+    }
+
+    @Override
     public void addStudent(Student student) {
         programmerError.addStudent(student);
         updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
