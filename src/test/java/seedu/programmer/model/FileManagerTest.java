@@ -1,6 +1,8 @@
 package seedu.programmer.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static seedu.programmer.testutil.Assert.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,7 +16,7 @@ import seedu.programmer.model.student.Student;
 
 class FileManagerTest {
     private FileManager fm;
-    int DEFAULT_NUM_OF_STUDENTS = 36;
+    private final int defaultNumOfStudents = 36;
 
     @BeforeEach
     public void setUpTests() {
@@ -24,7 +26,7 @@ class FileManagerTest {
     @Test
     public void getJsonData_validJson_returnsCorrectNumberOfElements() {
         JSONArray result = fm.getJsonData("src/test/data/FileManagerTest/programmerError.json");
-        assertEquals(result.length(), DEFAULT_NUM_OF_STUDENTS);
+        assertEquals(result.length(), defaultNumOfStudents);
     }
 
     @Test
@@ -37,7 +39,7 @@ class FileManagerTest {
     public void getStudentsFromCsv_validCsv_returnsCorrectNumberOfStudents() throws IOException {
         File testFile = new File("src/test/data/FileManagerTest/PE.csv");
         List<Student> stuList = fm.getStudentsFromCsv(testFile);
-        assertEquals(stuList.size(), DEFAULT_NUM_OF_STUDENTS);
+        assertEquals(stuList.size(), defaultNumOfStudents);
     }
 
     @Test
@@ -48,7 +50,7 @@ class FileManagerTest {
     }
 
     @Test
-    public void getStudentsFromCsv_invalidField_throwsIllegalArgumentException()  {
+    public void getStudentsFromCsv_invalidField_throwsIllegalArgumentException() {
         File testFile = new File("src/test/data/FileManagerTest/invalidStudentIdPE.csv");
         assertThrows(IllegalArgumentException.class, () -> {
             fm.getStudentsFromCsv(testFile);
