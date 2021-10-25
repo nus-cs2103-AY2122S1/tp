@@ -23,8 +23,10 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SwapShiftCommand;
 import seedu.address.logic.commands.SwitchTabCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -53,6 +55,15 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + PREFIX_DASH_INDEX + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_swapShift() throws Exception {
+        String userinput = SwapShiftCommand.COMMAND_WORD + " -n Alex Yeoh -n David Li d/monday-0 d/tuesday-1";
+        List<Name> nameList = Arrays.asList(new Name("Alex Yeoh"), new Name("David Li"));
+        List<String> shiftList = Arrays.asList("monday-0", "tuesday-1");
+        SwapShiftCommand command = (SwapShiftCommand) parser.parseCommand(userinput);
+        assertEquals(new SwapShiftCommand(nameList, shiftList), command);
     }
 
     @Test

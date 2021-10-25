@@ -108,4 +108,18 @@ public class SwapShiftCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_SWAP_SHIFT_SUCCESS, firstStaff, secondStaff));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        SwapShiftCommand that = (SwapShiftCommand) o;
+        return firstStaff.equals(that.firstStaff) && secondStaff.equals(that.secondStaff)
+                && firstDayOfWeek == that.firstDayOfWeek && firstSlot == that.firstSlot
+                && secondDayOfWeek == that.secondDayOfWeek && secondSlot == that.secondSlot;
+    }
 }
