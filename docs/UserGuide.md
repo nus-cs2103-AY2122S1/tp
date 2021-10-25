@@ -4,9 +4,9 @@ title: User Guide
 ---
 
 Welcome to the CSBook User Guide. This user guide serves as a guide to new users on how to quickly get 
-started on using the application through the "Quick Start" section, while also serving as a reference to 
-more experienced users of all available commands and how best to use them to make the most utility of our 
-application in the "Feature List" section. 
+started on using the application through the [Quick Start](#quick-start) section, while also serving as a reference to 
+more experienced users of all available commands and how best to make use of our application in the 
+[Feature List](#feature-list) section. 
 
 CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via 
 a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
@@ -21,12 +21,24 @@ creating groups and assigning students to groups, as well as the management of g
 
 --------------------------------------------------------------------------------------------------------------------
 
+## How-to-use
+
+rationale as to why the commands are listed in that order?
+1st step is to import all students from luminus? but what if they make mistake
+
+## Glossary
+
+Add terms
+
+Add symbol table
+
+
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-   1. Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
-   2. You may run the `java -version` command on your respective OS's terminal window.
-   3. Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
+   * Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible 
+   * You may run the `java -version` command on your respective OS's terminal window. 
+   * Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
 
 2. Download the latest `CSBook.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-3/tp/releases).
 
@@ -42,7 +54,7 @@ creating groups and assigning students to groups, as well as the management of g
    
     * **`addgroup`**`g/CS2101 d/Effective Communication for professionals` : Adds a group named `CS2101` with a simple description to CSBook
 
-    * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2103T` : Adds a student named `Jia Xian` to CSBook
+    * **`add`**`n/Jia Xian t/@albino_monkii e/albinomonkey@u.nus.edu g/CS2101` : Adds a student named `Jia Xian` to CSBook
 
     * **`delete`**`3` : Deletes the 3rd student shown in the current list.
 
@@ -50,7 +62,7 @@ creating groups and assigning students to groups, as well as the management of g
 
     * **`exit`** : Exits the app.
 
-7. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Feature list](#feature-list) below for the full details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -137,7 +149,7 @@ Format: `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUP_NAME`
 * The group name must correspond to that of a group that has been added to CSBook before the student is created. Each student must belong to at least one group.
 
 <div markdown="block" class="alert alert-info">
-:information_source: **Note on groups**: Refer to the "Group management features" section for more details on how you may use groups to enhance the way you track students.**
+:information_source: **Note on groups**: Refer to the "Group management features" section for more details on how you may use groups to enhance the way you track students.
 </div>
 
 Examples:
@@ -277,3 +289,7 @@ Action | Format, Examples
 **View Group** | `viewgroup GROUPNAME`
 **List Groups** | `listgroups`
 **Help** | `help`
+
+## FAQ
+
+Insert common questions, and what if user did something wrong
