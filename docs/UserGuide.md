@@ -286,7 +286,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting a member : `deletem`
+#### Deleting a member : `deletem`
 
 Deletes a member from your member list
 
