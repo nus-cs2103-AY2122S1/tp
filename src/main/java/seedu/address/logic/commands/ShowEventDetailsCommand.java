@@ -18,9 +18,9 @@ public class ShowEventDetailsCommand extends Command {
     public static final String COMMAND_WORD = "showDetails";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the details of the event matching the given name.\n"
-            + "Parameters: EVENT_NAME \n"
-            + "Example: " + COMMAND_WORD + " CS2103T Finals ";
+            + ": Displays the details of the event at the specified index.\n"
+            + "Parameters: INDEX \n"
+            + "Example: " + COMMAND_WORD + " 1 ";
 
     private final Index index;
 
