@@ -232,7 +232,7 @@ public class EditCommand extends Command {
          * Returns true if {@code nextMeeting} is edited
          */
         public boolean isNextMeetingEdited() {
-            return CollectionUtil.isAnyNonNull(nextMeeting);
+            return nextMeeting == null ? false : !nextMeeting.isNullMeeting();
         }
 
         public void setName(Name name) {
