@@ -73,8 +73,12 @@ public class AddGroupCommand extends Command {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !(o instanceof AddGroupCommand)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof AddGroupCommand)) {
+            return false;
+        }
         AddGroupCommand that = (AddGroupCommand) o;
         return toAdd.isSameGroup(that.toAdd) && Objects.equals(personsIndex, that.personsIndex);
     }
