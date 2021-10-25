@@ -2,25 +2,32 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Base64;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.ext.NioPathDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.PixelFormat;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 
@@ -39,8 +46,10 @@ public class JsonUtil {
             .registerModule(new SimpleModule("SimpleModule")
                     .addSerializer(Level.class, new ToStringSerializer())
                     .addSerializer(Path.class, new ToStringSerializer())
+                    .addSerializer(Image.class, new ImageSerializer())
                     .addDeserializer(Level.class, new LevelDeserializer(Level.class))
-                    .addDeserializer(Path.class, new NioPathDeserializer()));
+                    .addDeserializer(Path.class, new NioPathDeserializer())
+                    .addDeserializer(Image.class, new ImageDeserializer(Image.class)));
 
     static <T> void serializeObjectToJsonFile(Path filePath, T objectToSerialize) throws IOException {
         FileUtil.writeToFile(filePath, toJsonString(objectToSerialize));
@@ -140,6 +149,57 @@ public class JsonUtil {
         @Override
         public Class<Level> handledType() {
             return Level.class;
+        }
+    }
+
+    /**
+     * Contains methods that retrieve logging level from serialized string.
+     */
+    private static class ImageDeserializer extends FromStringDeserializer<Image> {
+
+        protected ImageDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        protected Image _deserialize(String value, DeserializationContext ctxt) {
+            return getImage(value);
+        }
+
+        /**
+         * Gets the logging level that matches loggingLevelString
+         * <p>
+         * Returns null if there are no matches
+         *
+         */
+        private Image getImage(String imageString) {
+            byte[] decodedBytes = Base64
+                    .getDecoder()
+                    .decode(imageString);
+
+            return new Image(new ByteArrayInputStream(decodedBytes));
+        }
+
+        @Override
+        public Class<Image> handledType() {
+            return Image.class;
+        }
+    }
+
+    /**
+     * Contains methods that retrieve logging level from serialized string.
+     */
+    private static class ImageSerializer extends JsonSerializer<Image> {
+        @Override
+        public void serialize(Image value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            int w = (int) value.getWidth();
+            int h = (int) value.getHeight();
+
+            byte[] buf = new byte[w * h * 4];
+
+            value.getPixelReader().getPixels(0, 0, w, h, PixelFormat.getByteBgraInstance(), buf, 0, w * 4);
+
+            gen.writeString(Base64.getEncoder().encodeToString(buf));
         }
     }
 

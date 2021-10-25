@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.scene.image.Image;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -34,6 +35,7 @@ public class JsonAdaptedPerson {
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private boolean isFavourite;
+    private final Image image;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +49,8 @@ public class JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("isFavourite") boolean isFavourite) {
+            @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("image") Image image) {
         this.name = name;
         this.telegram = telegram;
         this.github = github;
@@ -58,6 +61,7 @@ public class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.isFavourite = isFavourite;
+        this.image = image;
     }
 
     /**
@@ -74,6 +78,7 @@ public class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         isFavourite = source.isFavourite();
+        image = source.getProfilePicture();
     }
 
     /**
@@ -142,7 +147,7 @@ public class JsonAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelTelegram, modelGithub, modelPhone,
-                modelEmail, modelAddress, modelTags, modelIsFavourite);
+                modelEmail, modelAddress, modelTags, modelIsFavourite, image);
     }
 
 }
