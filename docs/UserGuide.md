@@ -334,6 +334,26 @@ Examples:
 
 ### Editing an appointment: `appt -e`
 
+Edits an existing appointment in the appointment list.
+
+Format: `appt -e INDEX [p/PATIENT_INDEX] [d/DOCTOR_INDEX] [s/START_DATE_TIME] [dur/MINUTES] [r/REMARK]`
+
+* Edits the appointment at the specified `INDEX`. The index refers to the index number shown in the displayed appointment list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* `PATIENT_INDEX` refers to the index of the patient in the displayed patient list.
+* `DOCTOR_INDEX` refers to the index of the doctor in the displayed doctor list.
+* `START_DATE_TIME` accepts a format of `DD/MM/YYYY HH:MM`.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor tab using the `toggle` command.
+</div>
+
+Examples:
+*  `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
+*  `appt -e 2 s/30/12/2021 10:30 dur/20` Edits the starting date/time and duration of the 2nd appointment to be `30/12/2021 10:30` and `20 minutes` respectively.
+
 ### Deleting an appointment: `appt -d`
 
 ### Filtering all appointments: `appt -f`
