@@ -1,4 +1,4 @@
-package safeforhall.logic.commands;
+package safeforhall.logic.commands.find;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,6 +10,8 @@ import java.util.function.Predicate;
 
 import safeforhall.commons.core.Messages;
 import safeforhall.commons.util.CollectionUtil;
+import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.parser.CliSyntax;
 import safeforhall.model.Model;
 import safeforhall.model.person.Email;
@@ -25,7 +27,7 @@ import safeforhall.model.person.VaccStatus;
  * Finds and lists all persons in address book whose parameters matched any of the provided argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindCommand extends Command {
+public class FindPersonCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
@@ -50,7 +52,7 @@ public class FindCommand extends Command {
 
     private final FindCompositePredicate predicate;
 
-    public FindCommand(FindCompositePredicate predicate) {
+    public FindPersonCommand(FindCompositePredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -65,8 +67,8 @@ public class FindCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                || (other instanceof FindPersonCommand // instanceof handles nulls
+                && predicate.equals(((FindPersonCommand) other).predicate)); // state check
     }
 
     /**
