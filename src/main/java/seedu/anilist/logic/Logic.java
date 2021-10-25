@@ -64,4 +64,14 @@ public interface Logic {
      * Returns the current user statistics.
      */
     Stats getStats();
+
+    /**
+     * Returns theme css file name as a string.
+     */
+    String getThemeCss();
+
+    /**
+     * Sets the theme css file.
+     */
+    void setThemeCss(String themeCss);
 }

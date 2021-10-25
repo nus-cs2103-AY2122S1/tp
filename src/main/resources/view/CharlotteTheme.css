@@ -467,6 +467,7 @@
 @font-face {
     font-family: "Open Sans SemiBold Italic";
     src: url("/fonts/open-sans/OpenSans-SemiBoldItalic.ttf");
+<<<<<<< HEAD:src/main/resources/view/AnimeTheme.css
 }
 
 /* Graph CSS Design */
@@ -528,4 +529,6 @@ chart-pie-label-line {
    -fx-text-fill: white;
    -fx-font-size: 11pt;
    -fx-font-family: "Open Sans Regular";
+=======
+>>>>>>> master:src/main/resources/view/CharlotteTheme.css
 }

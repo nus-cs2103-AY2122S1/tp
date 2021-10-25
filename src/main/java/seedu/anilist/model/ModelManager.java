@@ -26,6 +26,7 @@ public class ModelManager implements Model {
     private final FilteredList<Anime> filteredAnime;
     private final TabOption currentTab;
     private Stats stats;
+    private Predicate<Anime> tabOptionFilter;
 
     /**
      * Initializes a ModelManager with the given animeList and userPrefs.
@@ -40,6 +41,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredAnime = new FilteredList<>(this.animeList.getAnimeList());
         currentTab = new TabOption("all");
+        tabOptionFilter = PREDICATE_SHOW_ALL_ANIME;
     }
 
     public ModelManager() {
@@ -68,6 +70,17 @@ public class ModelManager implements Model {
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
         userPrefs.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public String getThemeCss() {
+        return userPrefs.getThemeCss();
+    }
+
+    @Override
+    public void setThemeCss(String themeCss) {
+        requireNonNull(themeCss);
+        userPrefs.setThemeCss(themeCss);
     }
 
     @Override
@@ -151,6 +164,13 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredAnimeList(Predicate<Anime> predicate) {
         requireNonNull(predicate);
+        filteredAnime.setPredicate(predicate.and(tabOptionFilter));
+    }
+
+    @Override
+    public void updateTabOptionsAnimeList(Predicate<Anime> predicate) {
+        requireNonNull(predicate);
+        tabOptionFilter = predicate;
         filteredAnime.setPredicate(predicate);
     }
 
@@ -165,6 +185,7 @@ public class ModelManager implements Model {
         if (!(obj instanceof ModelManager)) {
             return false;
         }
+
 
         // state check
         ModelManager other = (ModelManager) obj;

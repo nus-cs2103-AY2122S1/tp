@@ -1,5 +1,7 @@
 package seedu.anilist.logic;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -108,5 +110,16 @@ public class LogicManager implements Logic {
     @Override
     public Stats getStats() {
         return model.getUserStats();
+    }
+
+    @Override
+    public String getThemeCss() {
+        return model.getThemeCss();
+    }
+
+    @Override
+    public void setThemeCss(String themeCss) {
+        requireNonNull(themeCss);
+        model.setThemeCss(themeCss);
     }
 }

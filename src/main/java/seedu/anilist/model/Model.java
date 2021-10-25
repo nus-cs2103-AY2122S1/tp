@@ -82,7 +82,8 @@ public interface Model {
     ObservableList<Anime> getFilteredAnimeList();
 
     /**
-     * Updates the filter of the filtered anime list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered anime list to filter by the given {@code predicate}
+     * corresponding to some query.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredAnimeList(Predicate<Anime> predicate);
@@ -98,6 +99,13 @@ public interface Model {
     Stats getUserStats();
 
     /**
+     * Updates the filter of the filtered anime list to filter by the given {@code predicate} corresponding
+     * to some tab option.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateTabOptionsAnimeList(Predicate<Anime> predicate);
+
+    /**
      * Sets the current tab.
      */
     void setCurrentTab(TabOption.TabOptions currentTab);
@@ -106,4 +114,14 @@ public interface Model {
      * Returns current tab.
      */
     TabOption getCurrentTab();
+
+    /**
+     * Returns theme css file name as a string.
+     */
+    String getThemeCss();
+
+    /**
+     * Sets the theme css file.
+     */
+    void setThemeCss(String themeCss);
 }
