@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListReservationCommand extends Command {
 
-    public static final String COMMAND_WORD = "listR";
+    public static final String COMMAND_WORD = "listr";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to reservation view and shows all "
             + "reservations.\n"

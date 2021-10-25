@@ -15,7 +15,7 @@ import seedu.address.model.reservation.Reservation;
  */
 public class DeleteReservationCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteR";
+    public static final String COMMAND_WORD = "deleter";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the reservation identified by the index number used in the displayed reservation list.\n"

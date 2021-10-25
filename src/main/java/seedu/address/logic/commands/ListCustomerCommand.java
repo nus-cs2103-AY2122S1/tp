@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "listC";
+    public static final String COMMAND_WORD = "listc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to customer view and shows all customers.\n"
             + "Example: " + COMMAND_WORD;

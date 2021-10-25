@@ -12,7 +12,7 @@ import seedu.address.model.person.customer.CustomerContainsPhonePredicate;
 import seedu.address.model.reservation.Reservation;
 
 public class GetCustomerReservingCommand extends Command {
-    public static final String COMMAND_WORD = "getC";
+    public static final String COMMAND_WORD = "getc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gets the customer who made the reservation "
             + "specified by the given index.\n"

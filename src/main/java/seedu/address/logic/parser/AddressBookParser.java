@@ -51,16 +51,15 @@ public class AddressBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
-        String formattedUserInput = formatUserInput(userInput);
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(formattedUserInput);
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
+        switch (commandWord) {
         case AddCustomerCommand.COMMAND_WORD:
             return new AddCustomerCommandParser().parse(arguments);
 
@@ -137,18 +136,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
-    /**
-     * Formats the user input so that it is not case-sensitive.
-     * @param userInput String that the user enters into the GUI
-     * @return A formatted string where all the letters in the string are in lower case except the last letter.
-     * uppercase
-     */
-    private String formatUserInput(String userInput) {
-        int strLength = userInput.length();
-        String lastLetter = userInput.substring(strLength - 1);
-        String remainingLetters = userInput.substring(0, strLength - 1);
-        return remainingLetters.toLowerCase() + lastLetter.toUpperCase();
-    }
-
 }

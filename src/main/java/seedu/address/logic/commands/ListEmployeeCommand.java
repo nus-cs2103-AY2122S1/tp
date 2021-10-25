@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListEmployeeCommand extends Command {
 
-    public static final String COMMAND_WORD = "listE";
+    public static final String COMMAND_WORD = "liste";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to employee view and shows all employees.\n"
             + "Example: " + COMMAND_WORD;
