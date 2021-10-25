@@ -25,6 +25,8 @@ public class Person {
 
     // Data fields
     private final Availability availability;
+    private final TodayAttendance todayAttendance;
+    private final TotalAttendance totalAttendance;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -35,9 +37,50 @@ public class Person {
         this.name = name;
         this.phone = phone;
         this.availability = availability;
+        this.todayAttendance = new TodayAttendance(false);
+        this.totalAttendance = new TotalAttendance(0);
         this.tags.addAll(tags);
     }
 
+    /**
+     * Constructor with all fields of a member.
+     * @param name Name of member.
+     * @param phone Phone number of member.
+     * @param availability Availability of member.
+     * @param todayAttendance Today's attendance of member.
+     * @param totalAttendance Total attendance of member.
+     * @param tags Tags associated with member.
+     */
+    public Person(Name name, Phone phone, Availability availability,
+                  TodayAttendance todayAttendance, TotalAttendance totalAttendance,
+                  Set<Tag> tags) {
+        requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance, tags);
+        this.name = name;
+        this.phone = phone;
+        this.availability = availability;
+        this.totalAttendance = totalAttendance;
+        this.todayAttendance = todayAttendance;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Constructor that creates person object with attendance.
+     *
+     * @param name Name of member
+     * @param phone Phone number of member
+     * @param availability availability of member
+     * @param todayAttendance Today's attendance of member.
+     * @param totalAttendance Total attendance of member.
+     */
+    public Person(Name name, Phone phone, Availability availability,
+                  TodayAttendance todayAttendance, TotalAttendance totalAttendance) {
+        requireAllNonNull(name, phone, availability, todayAttendance, totalAttendance);
+        this.name = name;
+        this.phone = phone;
+        this.availability = availability;
+        this.totalAttendance = totalAttendance;
+        this.todayAttendance = todayAttendance;
+    }
 
     public Name getName() {
         return name;
@@ -49,6 +92,14 @@ public class Person {
 
     public Availability getAvailability() {
         return availability;
+    }
+
+    public TotalAttendance getTotalAttendance() {
+        return totalAttendance;
+    }
+
+    public TodayAttendance getTodayAttendance() {
+        return todayAttendance;
     }
 
     /**
@@ -72,12 +123,55 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
+    /**
+     * Returns true if person is available on specified day. Otherwise,
+     * false is returned.
+     *
+     * @param dayNumber Day to be checked if person is available.
+     * @return Boolean value if person is available on day.
+     */
     public boolean isAvailableOnDay(int dayNumber) {
         return availability.contains(DayOfWeek.of(dayNumber));
     }
 
-    public void setDays(List<String> days) {
-        this.days = days;
+
+    /**
+     * Sets the member as present today.
+     */
+    public void setPresent() {
+        if (!isMarkedPresent()) {
+            todayAttendance.setPresent();
+            totalAttendance.incrementAttendance();
+        }
+    }
+
+    /**
+     * Sets member as not present today.
+     */
+    public void setNotPresent() {
+        if (isMarkedPresent()) {
+            todayAttendance.setNotPresent();
+            totalAttendance.decrementAttendance();
+        }
+    }
+
+    /**
+     * Clears today's attendance.
+     */
+    public void clearTodayAttendance() {
+        if (isMarkedPresent()) {
+            todayAttendance.setNotPresent();
+        }
+    }
+
+    /**
+     * Returns true if person has been marked present. Otherwise,
+     * false is returned.
+     *
+     * @return Boolean value if person is marked present.
+     */
+    public boolean isMarkedPresent() {
+        return todayAttendance.isPresentToday();
     }
 
     /**
@@ -98,6 +192,8 @@ public class Person {
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getAvailability().equals(getAvailability())
+                && otherPerson.getTodayAttendance().equals(getTodayAttendance())
+                && otherPerson.getTotalAttendance().equals(getTotalAttendance())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -112,7 +208,12 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append("; Phone: ")
-                .append(getPhone());
+                .append(getPhone())
+                .append(" ")
+                .append(getTodayAttendance())
+                .append(" ")
+                .append(getTotalAttendance());
+
         Availability availability = getAvailability();
         if (!availability.isEmpty()) {
             builder.append("; Availability: ");

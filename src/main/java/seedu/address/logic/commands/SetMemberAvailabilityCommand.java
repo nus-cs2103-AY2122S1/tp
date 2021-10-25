@@ -65,7 +65,8 @@ public class SetMemberAvailabilityCommand extends Command {
             names.append(", ");
         }
 
-        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability));
+        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability),
+                false, false, true);
     }
 
     @Override

@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_ORDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -54,6 +55,9 @@ public class CommandTestUtil {
     public static final String VALID_TIME_FIELD = "1330";
     public static final String VALID_CAPACITY_FIELD = "8";
 
+    public static final String VALID_SORT_ORDER_NAME = "name";
+    public static final String VALID_SORT_ORDER_TAG = "tag";
+
     public static final String NAME_DESC_COURT = " " + PREFIX_NAME + VALID_FACILITY_NAME_COURT;
     public static final String LOCATION_DESC_COURT = " " + PREFIX_LOCATION + VALID_LOCATION_COURT;
     public static final String TIME_DESC_COURT = " " + PREFIX_TIME + VALID_TIME_COURT;
@@ -78,9 +82,13 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     // must be integers
     public static final String INVALID_AVAILABILITY_DESC = " " + PREFIX_AVAILABILITY + "one two three";
+    public static final String INVALID_SORT_ORDER_DESC = " " + PREFIX_SORT_ORDER + "aa bb cc";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    public static final String SORT_ORDER_DESC_TAG = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_TAG;
+    public static final String SORT_ORDER_DESC_NAME = " " + PREFIX_SORT_ORDER + VALID_SORT_ORDER_NAME;
 
     public static final EditMemberCommand.EditPersonDescriptor DESC_AMY;
     public static final EditMemberCommand.EditPersonDescriptor DESC_BOB;
@@ -114,8 +122,49 @@ public class CommandTestUtil {
      */
     public static void assertCommandSuccess(Command command, Model actualModel, String expectedMessage,
             Model expectedModel) {
-        CommandResult expectedCommandResult = new CommandResult(expectedMessage);
+        CommandResult expectedCommandResult;
+
+        if (isFacilityCommand(command)) {
+            expectedCommandResult = new CommandResult(expectedMessage, false,
+                    true, false);
+        } else if (isMemberCommand(command)) {
+            expectedCommandResult = new CommandResult(expectedMessage, false,
+                    false, true);
+        } else {
+            expectedCommandResult = new CommandResult(expectedMessage);
+        }
+
         assertCommandSuccess(command, actualModel, expectedCommandResult, expectedModel);
+    }
+
+    /**
+     * Checks if the given command should select the Facility Tab.
+     */
+    private static boolean isFacilityCommand(Command command) {
+        return command instanceof AddFacilityCommand
+                || command instanceof ClearFacilitiesCommand
+                || command instanceof DeleteFacilityCommand
+                || command instanceof EditFacilityCommand
+                || command instanceof FindFacilityCommand
+                || command instanceof ListFacilityCommand
+                || command instanceof SplitCommand;
+    }
+
+    /**
+     * Checks if the given command should select the Member Tab.
+     */
+    private static boolean isMemberCommand(Command command) {
+        return command instanceof AddMemberCommand
+                || command instanceof ClearMembersCommand
+                || command instanceof DeleteMemberCommand
+                || command instanceof EditMemberCommand
+                || command instanceof FindMemberCommand
+                || command instanceof ListMemberCommand
+                || command instanceof SetMemberAvailabilityCommand
+                || command instanceof SortMemberCommand
+                || command instanceof ClearAttendanceCommand
+                || command instanceof MarkAttendanceCommand
+                || command instanceof UnmarkAttendanceCommand;
     }
 
     /**

@@ -9,12 +9,14 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -26,6 +28,7 @@ import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortOrder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddMemberCommandTest {
@@ -140,7 +143,7 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public void split(Predicate<Person> person) {
+        public int split(Predicate<Person> person) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -185,6 +188,36 @@ public class AddMemberCommandTest {
         }
 
         @Override
+        public void resetTodayAttendance() {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void markMembersAttendance(List<Index> indices) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void markOneMemberAttendance(Person person) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void unmarkMembersAttendance(List<Index> indices) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void unmarkOneMemberAttendance(Person person) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public boolean isWithinListIndex(List<Index> indices) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -210,7 +243,7 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public void sortMemberList() {
+        public void sortMemberList(SortOrder sortOrder) {
             throw new AssertionError("This method should not be called");
         }
 

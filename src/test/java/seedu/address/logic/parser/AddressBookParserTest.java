@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddAliasCommand;
 import seedu.address.logic.commands.AddFacilityCommand;
 import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.commands.ClearAttendanceCommand;
 import seedu.address.logic.commands.ClearFacilitiesCommand;
 import seedu.address.logic.commands.ClearMembersCommand;
 import seedu.address.logic.commands.DeleteAliasCommand;
@@ -80,6 +81,13 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD, aliases) instanceof ClearMembersCommand);
         assertTrue(parser.parseCommand(ClearMembersCommand.COMMAND_WORD + " 3", aliases)
                 instanceof ClearMembersCommand);
+    }
+
+    @Test
+    public void parseCommand_cleara() throws ParseException {
+        assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD, aliases) instanceof ClearAttendanceCommand);
+        assertTrue(parser.parseCommand(ClearAttendanceCommand.COMMAND_WORD
+                + " 1", aliases) instanceof ClearAttendanceCommand);
     }
 
     @Test
@@ -224,8 +232,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sortm() throws Exception {
-        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD, aliases) instanceof SortMemberCommand);
-        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " 3", aliases) instanceof SortMemberCommand);
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " by/name", aliases)
+                instanceof SortMemberCommand);
     }
 
     @Test

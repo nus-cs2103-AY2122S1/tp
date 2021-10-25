@@ -1,16 +1,19 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.alias.Alias;
 import seedu.address.model.alias.AliasMap;
 import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortOrder;
 
 
 /**
@@ -90,6 +93,36 @@ public interface Model {
     boolean hasFacility(Facility facility);
 
     /**
+     * Returns true if all {@code indices} is within the member list.
+     */
+    boolean isWithinListIndex(List<Index> indices);
+
+    /**
+     * Marks attendance of members at specified {@code indices} as present.
+     */
+    void markMembersAttendance(List<Index> indices);
+
+    /**
+     * Marks attendance of specified {@code member} as present.
+     */
+    void markOneMemberAttendance(Person member);
+
+    /**
+     * Unmarks attendance of members at specified {@code indices} as absent.
+     */
+    void unmarkMembersAttendance(List<Index> indices);
+
+    /**
+     * Unmarks attendance of specified {@code member} as absent.
+     */
+    void unmarkOneMemberAttendance(Person member);
+
+    /**
+     * Resets today's attendance for all members.
+     */
+    void resetTodayAttendance();
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -114,7 +147,13 @@ public interface Model {
      */
     void addFacility(Facility facility);
 
-    void split(Predicate<Person> predicate);
+    /**
+     * Allocates members into facilities.
+     *
+     * @param predicate the condition in which specifies the members to allocate.
+     * @return number of members left unallocated, -1 if zero members to allocate.
+     */
+    int split(Predicate<Person> predicate);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
@@ -149,9 +188,9 @@ public interface Model {
     Person getSamePerson(Person person);
 
     /**
-     * Sorts the member list in alphabetical order.
+     * Sorts the member list in the specified order.
      */
-    void sortMemberList();
+    void sortMemberList(SortOrder sortOrder);
 
     /**
      * Clears the contents of the member list.
