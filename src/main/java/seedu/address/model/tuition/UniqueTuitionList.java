@@ -205,7 +205,7 @@ public class UniqueTuitionList implements Iterable<TuitionClass> {
             case DESCENDING:
                 return o2.getName().getName().compareTo(o1.getName().getName());
             case TIME:
-                //return o1.getTimeslot().compareTimeOrder(o2.getTimeslot().getTime());
+                return o1.getTimeslot().compareTimeOrder(o2.getTimeslot());
             default:
                 return 0;
             }

@@ -1,4 +1,5 @@
 package seedu.address.model.tuition;
+import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
@@ -176,6 +177,25 @@ public class Timeslot {
             }
         }
         return false;
+    }
+
+    /**
+     * Compares two timeslots.
+     * @param timeslot the timeslot to be compared to.
+     * @return an integer indicating the relative size of two timeslots compared to each other.
+     */
+    public int compareTimeOrder(Timeslot timeslot) {
+        Date thisDay = this.getDay();
+        Date otherDay = timeslot.getDay();
+        int compareDay = thisDay.compareTo(otherDay);
+        if (compareDay != 0) {
+            return compareDay;
+        }
+        int compareStart = this.getStart().compareTo(timeslot.getStart());
+        if (compareStart != 0) {
+            return compareStart;
+        }
+        return this.getEnd().compareTo(timeslot.getEnd());
     }
 }
 
