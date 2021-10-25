@@ -79,7 +79,7 @@ public class ParserUtil {
      */
     public static StudentMark parseMark(String mark) throws ParseException {
         requireNonNull(mark);
-        String trimmedMark = mark.trim();
+        String trimmedMark = mark.trim().toUpperCase();
         StudentMark newMark;
         try {
             newMark = StudentMark.valueOf(trimmedMark);
