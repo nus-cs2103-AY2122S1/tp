@@ -4,12 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import safeforhall.model.event.Capacity;
 import safeforhall.model.event.Event;
 import safeforhall.model.event.EventDate;
-import safeforhall.model.event.EventTime;
-import safeforhall.model.event.ResidentList;
-import safeforhall.model.event.Venue;
 
 /**
  * An UI component that displays information of a {@code Event}.
