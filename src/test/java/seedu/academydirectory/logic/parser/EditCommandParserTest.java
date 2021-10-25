@@ -19,7 +19,6 @@ import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_AMY;
 import static seedu.academydirectory.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.academydirectory.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.academydirectory.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
