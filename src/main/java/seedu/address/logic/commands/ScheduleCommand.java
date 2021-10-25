@@ -30,7 +30,7 @@ public class ScheduleCommand extends Command {
             + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_MEETING + "MEETING (format: dd-MMM-yyyy HH:mm, only first alphabet of month is capital)\n"
+            + PREFIX_MEETING + "MEETING (format: dd-MMM-yyyy HH:mm)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_MEETING + "05-Feb-2022 15:00 \n";
 
