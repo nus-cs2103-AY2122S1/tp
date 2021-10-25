@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.summary.Summary;
 
 /**
  * Redoes the last change undone by the undo command.
@@ -18,6 +19,7 @@ public class RedoCommand extends Command {
     public CommandResult execute(Model model) {
         if (model.isRedoable()) {
             model.redo();
+            Summary summary = new Summary(model.getAddressBook());
             return new CommandResult(MESSAGE_REDO_SUCCESS);
         } else {
             return new CommandResult(Messages.MESSAGE_INVALID_REDO_STATE);

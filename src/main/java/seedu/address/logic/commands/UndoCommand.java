@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.summary.Summary;
 
 /**
  * Undoes the last changes made to contact list.
@@ -18,6 +19,7 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model) {
         if (model.isUndoable()) {
             model.undo();
+            Summary summary = new Summary(model.getAddressBook());
             return new CommandResult(MESSAGE_UNDO_SUCCESS);
         } else {
             return new CommandResult(Messages.MESSAGE_INVALID_UNDO_STATE);
