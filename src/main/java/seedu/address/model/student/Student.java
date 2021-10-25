@@ -117,7 +117,8 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getTelegramHandle().equals(getTelegramHandle())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getGroupName().equals(getGroupName());
+                && otherStudent.getGroupName().equals(getGroupName())
+                && otherStudent.getAssessmentList().equals(getAssessmentList());
     }
 
     @Override
