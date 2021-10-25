@@ -21,7 +21,7 @@ public class RosterCommand extends Command {
     public static final String COMMAND_WORD = "roster";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": displays the list of students who are"
-            + "enrolled in a specific lesson registered in TuitiONE.\n"
+            + " enrolled in a specific lesson registered in TuitiONE.\n"
             + "Parameters: "
             + "LESSON_INDEX"
             + "\nExample: " + COMMAND_WORD + " 1";
