@@ -5,7 +5,6 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -77,10 +76,5 @@ public class ApplicantBuilder {
 
     public Applicant build() {
         return new Applicant(name, phone, email, address, position);
-    }
-
-    public static ApplicantParticulars getApplicantParticulars(Applicant applicant, Title positionTitle) {
-        return new ApplicantParticulars(applicant.getName(), applicant.getPhone(), applicant.getEmail(),
-                applicant.getAddress(), positionTitle);
     }
 }

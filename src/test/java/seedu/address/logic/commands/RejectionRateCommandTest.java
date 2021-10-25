@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_NO_CURRENT_APPLICANTS;
 import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_SUCCESS;
+import static seedu.address.model.applicant.Application.ApplicationStatus.REJECTED;
 import static seedu.address.testutil.TypicalPositions.DATASCIENTIST;
 import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 
@@ -16,7 +17,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
 import seedu.address.testutil.ApplicantBuilder;
@@ -81,7 +81,7 @@ public class RejectionRateCommandTest {
 
         float initialRejectionRate = model.calculateRejectionRate(position.getTitle()); // currently 0.0%
 
-        Applicant newApplicant = applicant.markAs(ApplicationStatus.REJECTED);
+        Applicant newApplicant = applicant.markAs(REJECTED);
 
         model.setApplicant(applicant, newApplicant);
 
@@ -105,7 +105,7 @@ public class RejectionRateCommandTest {
 
         model.addPosition(position);
 
-        Applicant newApplicant = applicant.markAs(ApplicationStatus.REJECTED);
+        Applicant newApplicant = applicant.markAs(REJECTED);
 
         model.setApplicant(applicant, newApplicant);
 
@@ -139,7 +139,7 @@ public class RejectionRateCommandTest {
 
         model.setApplicantBook(applicantBook);
 
-        Applicant newApplicant = applicant.markAs(ApplicationStatus.REJECTED);
+        Applicant newApplicant = applicant.markAs(REJECTED);
 
         // Create Alice
         Applicant otherApplicant = new ApplicantBuilder().withName("Alice").build();
