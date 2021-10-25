@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("ds/");
     public static final Prefix PREFIX_INDEXES = new Prefix("id/");
+    public static final Prefix PREFIX_APP_INDEX = new Prefix("ai/");
 
 }
