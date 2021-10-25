@@ -33,20 +33,15 @@ public class TypicalStudents {
             .withTelegramHandle("@benson_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
             .withAssessment(MIDTERMS).withAssessment(QUIZ1).build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
-            .withTelegramHandle("@carl_kurz").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withTelegramHandle("@carl_kurz").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@example.com")
-            .withTelegramHandle("@daniel_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withTelegramHandle("@daniel_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withTelegramHandle("@elle_meyer")
-            .withEmail("werner@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withEmail("werner@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withTelegramHandle("@fiona_kunz")
-            .withEmail("lydia@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withEmail("lydia@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withTelegramHandle("@george_best")
-            .withEmail("anna@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withEmail("anna@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withTelegramHandle("@hoon_meier")
@@ -57,12 +52,10 @@ public class TypicalStudents {
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withEmail(VALID_EMAIL_AMY)
-            .withGroupName(VALID_GROUP_NAME_AMY).withAssessment(MIDTERMS)
-            .build();
+            .withGroupName(VALID_GROUP_NAME_AMY).build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withGroupName(VALID_GROUP_NAME_BOB).withAssessment(MIDTERMS)
-            .build();
+            .withGroupName(VALID_GROUP_NAME_BOB).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

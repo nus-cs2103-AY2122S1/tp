@@ -53,9 +53,9 @@ public class CommandTestUtil {
 
     public static final String VALID_ASSESSMENT_NAME_QUIZ1 = "Quiz 1";
     public static final String VALID_ASSESSMENT_NAME_LAB5 = "Lab 5";
-    public static final int VALID_ACTUAL_SCORE_QUIZ1 = 20;
+    public static final int VALID_ACTUAL_SCORE_QUIZ1 = 40;
     public static final int VALID_ACTUAL_SCORE_LAB5 = 5;
-    public static final int VALID_TOTAL_SCORE_QUIZ1 = 100;
+    public static final int VALID_TOTAL_SCORE_QUIZ1 = 50;
     public static final int VALID_TOTAL_SCORE_LAB5 = 10;
     public static final String VALID_SCORE_QUIZ1 = VALID_ACTUAL_SCORE_QUIZ1 + SCORE_DELIMITER + VALID_TOTAL_SCORE_QUIZ1;
     public static final String VALID_SCORE_LAB5 = VALID_ACTUAL_SCORE_LAB5 + SCORE_DELIMITER + VALID_TOTAL_SCORE_LAB5;
