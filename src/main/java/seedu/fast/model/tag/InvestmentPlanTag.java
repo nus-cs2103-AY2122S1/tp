@@ -120,7 +120,7 @@ public class InvestmentPlanTag extends Tag {
      * Class containing relevant fields for a Investment Tag.
      */
     public class Investment {
-        public static final String NAME = "investment";
+        public static final String NAME = "Investment";
 
         public static final String TERM = "invest";
 
