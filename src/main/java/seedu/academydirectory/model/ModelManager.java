@@ -206,10 +206,13 @@ public class ModelManager implements VersionedModel {
     }
 
     //=========== Additional Information View =============================================================
-
     @Override
     public void setAdditionalViewType(AdditionalViewType additionalViewType) {
         this.additionalViewModel.setAdditionalViewType(additionalViewType);
+    }
+    @Override
+    public void setAdditionalInfo(AdditionalInfo<? extends Object> additionalInfo) {
+        this.additionalViewModel.setAdditionalInfo(additionalInfo);
     }
 
     @Override

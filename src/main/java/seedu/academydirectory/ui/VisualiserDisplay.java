@@ -13,29 +13,17 @@ import seedu.academydirectory.ui.creator.ViewCreator;
  * A ui for the visualiser bar that is displayed at bottom right of the app.
  */
 public class VisualiserDisplay extends UiPart<Region> {
-    private static final String FXML = "VisualiserDisplay.fxml";
+    private static final String FXML = "VisualizeDisplay.fxml";
 
     @FXML
     private StackPane placeHolder;
 
-    /**
-     *
-     * @param additionalViewModel
-     */
-    public VisualiserDisplay(AdditionalViewModel additionalViewModel) {
+    public VisualiserDisplay() {
         super(FXML);
-        Creator creator = parseCreator(additionalViewModel);
-        placeHolder.getChildren().add(creator.create(additionalViewModel.getAdditionalInfo()));
     }
 
-    private Creator parseCreator(AdditionalViewModel additionalViewModel) {
-        switch (additionalViewModel.getAdditionalViewType()) {
-        case VIEW:
-            return new ViewCreator();
-        case VISUALISE:
-            return new GraphCreator();
-        default:
-            return new DefaultCreator();
-        }
+    public void setVisualizer(Creator creator) {
+        placeHolder.getChildren().clear();
+        placeHolder.getChildren().add(creator.create());
     }
 }

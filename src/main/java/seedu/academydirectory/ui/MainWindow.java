@@ -17,6 +17,10 @@ import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.model.AdditionalViewModel;
+import seedu.academydirectory.ui.creator.DefaultCreator;
+import seedu.academydirectory.ui.creator.GraphCreator;
+import seedu.academydirectory.ui.creator.ViewCreator;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private VisualiserDisplay visualiserDisplay;
+    private VisualiserDisplay visualizerDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -121,7 +125,8 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        visualiserDisplay = new VisualiserDisplay(logic.getAdditionalViewModel());
+        visualizerDisplay = new VisualiserDisplay();
+        visualiserDisplayPlaceholder.getChildren().add(visualizerDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAcademyDirectoryFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -183,6 +188,17 @@ public class MainWindow extends UiPart<Stage> {
         return studentListPanel;
     }
 
+    private void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
+        switch (additionalViewModel.getAdditionalViewType()) {
+        case VIEW:
+            visualizerDisplay.setVisualizer(new ViewCreator(additionalViewModel));
+        case VISUALISE:
+            visualizerDisplay.setVisualizer(new GraphCreator(additionalViewModel));
+        default:
+            visualizerDisplay.setVisualizer(new DefaultCreator(additionalViewModel));
+        }
+    }
+
     /**
      * Executes the command and returns the result.
      *
@@ -193,6 +209,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            handleAdditionalInfo(logic.getAdditionalViewModel());
 
             if (commandResult.isShowHelp()) {
                 showHelpFrom(commandResult.getHelpContent());

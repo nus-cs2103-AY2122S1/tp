@@ -7,7 +7,9 @@ import java.util.Optional;
 
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
+import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
 
@@ -45,6 +47,8 @@ public class ViewCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
         Student studentToView = studentList.get(index.getZeroBased());
+        model.setAdditionalViewType(AdditionalViewType.VIEW);
+        model.setAdditionalInfo(AdditionalInfo.of(studentToView));
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentToView));
     }
 

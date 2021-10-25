@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.academydirectory.commons.core.Messages;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.VersionedModel;
 
@@ -50,6 +51,7 @@ public class HelpCommand extends Command {
         if (this.commandWord == null || this.helpMessage == null) {
             throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
         }
+        model.setAdditionalViewType(AdditionalViewType.HELP);
         if (isGeneralHelp) {
             return new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, this.helpMessage);
         } else {

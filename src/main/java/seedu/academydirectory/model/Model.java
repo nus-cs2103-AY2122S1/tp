@@ -97,4 +97,6 @@ public interface Model {
     AdditionalViewModel getAdditionalViewModel();
 
     void setAdditionalViewType(AdditionalViewType additionalViewType);
+
+    void setAdditionalInfo(AdditionalInfo<? extends Object> additionalInfo);
 }
