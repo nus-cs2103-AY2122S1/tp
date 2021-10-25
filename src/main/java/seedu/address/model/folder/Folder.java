@@ -65,7 +65,7 @@ public class Folder {
 
     /**
      * Removes index of contact from the folder.
-     * @param targetIndex Index of contact to be removed.
+     * @param personToRemove contact to be removed.
      */
     public void removePerson(Person personToRemove) {
         this.getContacts().remove(personToRemove);
