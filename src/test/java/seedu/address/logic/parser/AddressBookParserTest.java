@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -106,7 +107,8 @@ public class AddressBookParserTest {
         MarkStudentAttCommand command = (MarkStudentAttCommand) parser.parseCommand(
                 MarkStudentAttCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_WEEK + validWeek);
-        assertEquals(new MarkStudentAttCommand(INDEX_FIRST_STUDENT, validWeek), command);
+        assertEquals(new MarkStudentAttCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), validWeek), command);
     }
 
     @Test
@@ -115,7 +117,8 @@ public class AddressBookParserTest {
         MarkStudentPartCommand command = (MarkStudentPartCommand) parser.parseCommand(
                 MarkStudentPartCommand.COMMAND_WORD + " " + INDEX_FIRST_STUDENT.getOneBased() + " "
                         + PREFIX_WEEK + validWeek);
-        assertEquals(new MarkStudentPartCommand(INDEX_FIRST_STUDENT, validWeek), command);
+        assertEquals(new MarkStudentPartCommand(
+                Collections.singletonList(INDEX_FIRST_STUDENT), validWeek), command);
     }
 
     @Test

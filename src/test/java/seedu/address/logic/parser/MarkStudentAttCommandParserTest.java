@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -28,7 +30,8 @@ public class MarkStudentAttCommandParserTest {
         String userInput = targetIndex.getOneBased() + VALID_WEEK;
 
         assertParseSuccess(parser, userInput,
-                new MarkStudentAttCommand(INDEX_FIRST_STUDENT, 1));
+                new MarkStudentAttCommand(
+                        Collections.singletonList(INDEX_FIRST_STUDENT), 1));
     }
 
     @Test
