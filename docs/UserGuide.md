@@ -15,6 +15,7 @@ Spam is a desktop app for managing contacts **targeted at marketers who require 
   - [Locating persons by name: `find`](#locating-persons-find)
   - [Deleting a person: `delete`](#deleting-a-person-delete)
   - [Clearing all entries: `clear`](#clearing-all-entries-clear)
+  - [Exporting address book: `export`](#exporting-address-book)
   - [Exiting the program: `exit`](#exiting-the-program-exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
@@ -208,6 +209,15 @@ Examples:
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Exporting address book: `export`
+
+Exports all selected contacts to a _csv_ file. Generated file can be found in a folder named _exports_ located in the _home folder_.
+
+Format: `export "[FILENAME]"`
+
+Example:
+- `export myContacts` exports all currently selected contacts to the file _myContacts.csv_
 
 ### Exiting the program: `exit`
 
