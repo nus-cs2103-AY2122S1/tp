@@ -1,6 +1,6 @@
 package seedu.programmer.testutil;
 
-import seedu.programmer.model.student.*;
+import seedu.programmer.model.student.Lab;
 
 public class LabBuilder {
     public static final String DEFAULT_TITLE = "1";

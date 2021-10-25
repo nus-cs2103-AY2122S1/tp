@@ -1,10 +1,17 @@
 package seedu.programmer.testutil;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.programmer.model.student.*;
 
 import static seedu.programmer.testutil.TypicalLabs.getTypicalLabList;
+
+import javafx.collections.ObservableList;
+import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Lab;
+import seedu.programmer.model.student.Name;
+import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.StudentId;
+
+
 
 /**
  * A utility class to help with building student objects.
@@ -77,6 +84,11 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code LabList} of the {@code student} that we are building.
+     * @param labList
+     * @return
+     */
     public StudentBuilder withLabList(ObservableList<Lab> labList) {
         this.labResultList = labList;
         return this;
