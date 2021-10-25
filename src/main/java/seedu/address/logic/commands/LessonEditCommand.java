@@ -4,6 +4,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -42,28 +43,37 @@ public class LessonEditCommand extends UndoableCommand {
 
     public static final String COMMAND_WORD = "ledit";
 
-    public static final String COMMAND_PARAMETERS =
-            "INDEX (must be a positive integer) " + "LESSON_INDEX (must be a positive integer)\n" + "[" + PREFIX_DATE +
-                    "DATE]..." + "[" + PREFIX_TIME + "HHmm-HHmm] " + "[" + PREFIX_SUBJECT + "SUBJECT] " + "[" +
-                    PREFIX_RATES + "RATE] " + "[" + PREFIX_HOMEWORK + "HOMEWORK]... " + "[" + PREFIX_CANCEL +
-                    "CANCEL_DATE]... " + "[" + PREFIX_UNCANCEL + "UNCANCEL_DATE]...";
+    public static final String COMMAND_PARAMETERS = "INDEX (must be a positive integer) "
+            + "LESSON_INDEX (must be a positive integer)\n"
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_TIME + "HHmm-HHmm] "
+            + "[" + PREFIX_SUBJECT + "SUBJECT] "
+            + "[" + PREFIX_RATES + "RATE] "
+            + "[" + PREFIX_HOMEWORK + "HOMEWORK]... "
+            + "[" + PREFIX_CANCEL + "CANCEL_DATE]... "
+            + "[" + PREFIX_UNCANCEL + "UNCANCEL_DATE]...";
 
-    public static final String COMMAND_EXAMPLE =
-            COMMAND_WORD + " 1 1 " + PREFIX_HOMEWORK + "Textbook Pg2 " + PREFIX_SUBJECT + "Biology";
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " 1 1 "
+            + PREFIX_HOMEWORK + "Textbook Pg2 "
+            + PREFIX_SUBJECT + "Biology "
+            + PREFIX_CANCEL + "5 oct 2021 "
+            + PREFIX_UNCANCEL + "12 oct 2021";
+
 
     public static final String COMMAND_FORMAT = COMMAND_WORD + " " + COMMAND_PARAMETERS;
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index" +
-            " of the student identified by the index number used in the displayed student list.\n" +
-            "All fields of a lesson can be edited, with the exception of the start date.\n" +
-            "Existing values will be overwritten by the input values.\n" + "Parameters: " + COMMAND_PARAMETERS + "\n" +
-            "Example: " + COMMAND_EXAMPLE;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
+            + " of the student identified by the index number used in the displayed student list.\n"
+            + "All fields of a lesson can be edited, with the exception of the start date.\n"
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson for student %1$s:\n%2$s\nto %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
     public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!";
-    public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE =
-            "You cannot edit the type of a lesson. Please add another" + " lesson if you wish to do so.";
+    public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE = "You cannot edit the type of a lesson. Please add another"
+            + " lesson if you wish to do so.";
     public static final String MESSAGE_INVALID_CANCEL_DATE =
             "Cannot cancel! This lesson does not occur on the given date."; // todo
     public static final String MESSAGE_INVALID_UNCANCEL_DATE =
@@ -150,7 +160,7 @@ public class LessonEditCommand extends UndoableCommand {
             validCancelledDates.add(date);
         }
 
-        // Process uncancelled dates
+        // Check uncancelled dates
         for (Date date : datesToUncancel) {
             // check if date is an existing lesson date
             if (!validCancelledDates.contains(date)) {
