@@ -14,7 +14,7 @@
     -fx-background-color: #414141;
 }
 
-#message {
+#errorMessage {
     -fx-fill: red;
 }
 

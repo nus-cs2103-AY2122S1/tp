@@ -52,7 +52,7 @@
                             <VBox.margin>
                                 <Insets bottom="7.0" />
                             </VBox.margin>
-                            <Text fx:id="message"/>
+                            <Text fx:id="errorMessage"/>
                         </VBox>
                     </VBox>
                 </children>

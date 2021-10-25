@@ -2,16 +2,12 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
-
-import javafx.event.ActionEvent;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Github;
@@ -24,6 +20,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
+/**
+ * Controller for the Profile Window.
+ */
 public class ProfileWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(ProfileWindow.class);
@@ -44,7 +43,7 @@ public class ProfileWindow extends UiPart<Stage> {
     private Text welcomeMessage;
 
     @FXML
-    private Text message;
+    private Text errorMessage;
 
     @FXML
     private TextField name;
@@ -55,6 +54,13 @@ public class ProfileWindow extends UiPart<Stage> {
     @FXML
     private TextField github;
 
+    /**
+     * Creates a new {@code ProfileWindow}.
+     *
+     * @param stage Stage to use as the root of the {@code ProfileWindow}.
+     * @param mainWindow To be able to interact with the {@code MainWindow}.
+     * @param logic To be able to save and check if the user profile exists.
+     */
     public ProfileWindow(Stage stage, MainWindow mainWindow, Logic logic) {
         super(FXML, stage);
         this.mainWindow = mainWindow;
@@ -62,9 +68,14 @@ public class ProfileWindow extends UiPart<Stage> {
         welcomeMessage.setText(WELCOME_MESSAGE);
     }
 
+    /**
+     * Launches the {@code MainWindow} if the User Profile
+     * is present or else the {@code ProfileWindow} is launched to
+     * obtain user credentials.
+     */
     public void start() {
         if (logic.isProfilePresent()) {
-            logger.info("User Profile Found");
+            logger.info("User Profile Found, Launching Main Window");
             mainWindow.start();
         } else {
             logger.info("No User Profile Found, Launching Profile Window");
@@ -72,12 +83,19 @@ public class ProfileWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Closes the {@code ProfileWindow}.
+     */
     public void close() {
         logger.info("Closing Profile Window");
         getRoot().close();
     }
 
-    public void submit(ActionEvent event) {
+    /**
+     * Creates the user profile, if all credentials are
+     * valid, and launches the {@code MainWindow} afterwards.
+     */
+    public void submit() {
         String userGithub = github.getText();
         String userName = name.getText();
         String userTelegram = telegram.getText();
@@ -116,27 +134,32 @@ public class ProfileWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Returns true if all the credentials entered by the
+     * user are valid.
+     *
+     * @return true, if all the credentials entered by the user are valid.
+     */
     public boolean areUserCredentialsValid() {
         String userGithub = github.getText();
         String userName = name.getText();
         String userTelegram = telegram.getText();
 
-
         if (!Name.isValidName(userName)) {
             logger.info("Invalid Name Detected");
-            message.setText(INVALID_NAME_MESSAGE);
+            errorMessage.setText(INVALID_NAME_MESSAGE);
             return false;
         }
 
         if (!Telegram.isValidTelegram(userTelegram)) {
             logger.info("Invalid Telegram Handle Detected");
-            message.setText(INVALID_TELEGRAM_MESSAGE);
+            errorMessage.setText(INVALID_TELEGRAM_MESSAGE);
             return false;
         }
 
         if (!Github.isValidGithub(userGithub)) {
             logger.info("Invalid GitHub Username Detected");
-            message.setText(INVALID_GITHUB_MESSAGE);
+            errorMessage.setText(INVALID_GITHUB_MESSAGE);
             return false;
         }
 
