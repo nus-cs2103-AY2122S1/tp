@@ -12,8 +12,8 @@ public abstract class PopupWindow extends UiPart<Stage> {
      *
      * @param root Stage to use as the root of the HelpWindow.
      */
-    public PopupWindow(String FXML, Stage root) {
-        super(FXML, root);
+    public PopupWindow(String fxml, Stage root) {
+        super(fxml, root);
     }
 
     /**

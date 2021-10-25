@@ -3,16 +3,12 @@ package seedu.programmer.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 
 /**
- * Controller for a help page
+ * Dashboard window of student data.
  */
 public class DashboardWindow extends PopupWindow {
 
