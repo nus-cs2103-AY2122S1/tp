@@ -92,10 +92,10 @@ public class Student {
     /**
      * Adds a lab result to all the student records
      * */
-    public Boolean addLabResult(Lab result) {
-        int index = this.labResultList.indexOf(result);
+    public Boolean addLabResult(Lab lab) {
+        int index = this.labResultList.indexOf(lab);
         if (index == -1) {
-            this.labResultList.add(result);
+            this.labResultList.add(lab);
             //labResultList.sort(new SortByLabName());
             return true;
         } else {
@@ -106,8 +106,8 @@ public class Student {
     /**
      * Deletes a lab result from all the student records
      * */
-    public boolean delLabResult(Lab result) {
-        return this.labResultList.remove(result);
+    public boolean delLabResult(Lab lab) {
+        return this.labResultList.remove(lab);
     }
 
     /**
