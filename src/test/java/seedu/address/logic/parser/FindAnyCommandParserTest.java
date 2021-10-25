@@ -8,16 +8,16 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.FindAnyCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindOrCommand;
-import seedu.address.model.person.FindOrPredicate;
+import seedu.address.model.person.FindAnyPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 
-public class FindOrCommandParserTest {
+public class FindAnyCommandParserTest {
 
-    private FindOrCommandParser parser = new FindOrCommandParser();
+    private FindAnyCommandParser parser = new FindAnyCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
@@ -28,72 +28,72 @@ public class FindOrCommandParserTest {
     public void parse_oneName_returnsFindOrCommand() {
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of();
-        FindOrCommand expectedFindOrCommand =
-                new FindOrCommand(new FindOrPredicate(nameList, tagList));
-        assertParseSuccess(parser, " n/Alice", expectedFindOrCommand);
+        FindAnyCommand expectedFindAnyCommand =
+                new FindAnyCommand(new FindAnyPredicate(nameList, tagList));
+        assertParseSuccess(parser, " n/Alice", expectedFindAnyCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t  \t", expectedFindOrCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t  \t", expectedFindAnyCommand);
     }
 
     @Test
     public void parse_multipleNames_returnsFindOrCommand() {
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of();
-        FindOrCommand expectedFindOrCommand =
-                new FindOrCommand(new FindOrPredicate(nameList, tagList));
-        assertParseSuccess(parser, " n/Alice n/Bob", expectedFindOrCommand);
+        FindAnyCommand expectedFindAnyCommand =
+                new FindAnyCommand(new FindAnyPredicate(nameList, tagList));
+        assertParseSuccess(parser, " n/Alice n/Bob", expectedFindAnyCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t", expectedFindOrCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t", expectedFindAnyCommand);
     }
 
     @Test
     public void parse_oneTag_returnsFindOrCommand() {
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("friends"));
-        FindOrCommand expectedFindOrCommand =
-                new FindOrCommand(new FindOrPredicate(nameList, tagList));
-        assertParseSuccess(parser, " t/friends", expectedFindOrCommand);
+        FindAnyCommand expectedFindAnyCommand =
+                new FindAnyCommand(new FindAnyPredicate(nameList, tagList));
+        assertParseSuccess(parser, " t/friends", expectedFindAnyCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n \n \t  \t t/friends", expectedFindOrCommand);
+        assertParseSuccess(parser, " \n \n \t  \t t/friends", expectedFindAnyCommand);
     }
 
     @Test
     public void parse_multipleTags_returnsFindOrCommand() {
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
-        FindOrCommand expectedFindOrCommand =
-                new FindOrCommand(new FindOrPredicate(nameList, tagList));
-        assertParseSuccess(parser, " t/friends t/colleagues", expectedFindOrCommand);
+        FindAnyCommand expectedFindAnyCommand =
+                new FindAnyCommand(new FindAnyPredicate(nameList, tagList));
+        assertParseSuccess(parser, " t/friends t/colleagues", expectedFindAnyCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n t/friends \n \t  \t t/colleagues", expectedFindOrCommand);
+        assertParseSuccess(parser, " \n t/friends \n \t  \t t/colleagues", expectedFindAnyCommand);
     }
 
     @Test
     public void parse_oneNameAndTag_returnsFindOrCommand() {
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of(new Tag("friends"));
-        FindOrCommand expectedFindOrCommand =
-                new FindOrCommand(new FindOrPredicate(nameList, tagList));
-        assertParseSuccess(parser, " n/Alice t/friends", expectedFindOrCommand);
+        FindAnyCommand expectedFindAnyCommand =
+                new FindAnyCommand(new FindAnyPredicate(nameList, tagList));
+        assertParseSuccess(parser, " n/Alice t/friends", expectedFindAnyCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t  \t t/friends", expectedFindOrCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t  \t t/friends", expectedFindAnyCommand);
     }
 
     @Test
     public void parse_multipleNamesAndTags_returnsFindOrCommand() {
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
-        FindOrCommand expectedFindOrCommand =
-                new FindOrCommand(new FindOrPredicate(nameList, tagList));
-        assertParseSuccess(parser, " n/Alice n/Bob t/friends t/colleagues", expectedFindOrCommand);
+        FindAnyCommand expectedFindAnyCommand =
+                new FindAnyCommand(new FindAnyPredicate(nameList, tagList));
+        assertParseSuccess(parser, " n/Alice n/Bob t/friends t/colleagues", expectedFindAnyCommand);
 
         // multiple whitespaces between keywords
-        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t t/friends t/colleagues", expectedFindOrCommand);
+        assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t t/friends t/colleagues", expectedFindAnyCommand);
     }
 
 }

@@ -24,13 +24,13 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.FindOrPredicate;
+import seedu.address.model.person.FindAnyPredicate;
 import seedu.address.model.person.FindPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 
-public class FindOrCommandTest {
+public class FindAnyCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
@@ -40,17 +40,17 @@ public class FindOrCommandTest {
         List<Tag> firstTagList = List.of(new Tag("football"), new Tag("friends"));
         List<Name> secondNameList = List.of(new Name(ELLE.getFullName()));
         List<Tag> secondTagList = List.of(new Tag("colleagues"));
-        FindOrPredicate firstPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrPredicate secondPredicate = new FindOrPredicate(secondNameList, secondTagList);
+        FindAnyPredicate firstPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyPredicate secondPredicate = new FindAnyPredicate(secondNameList, secondTagList);
 
-        FindOrCommand findFirstCommand = new FindOrCommand(firstPredicate);
-        FindOrCommand findSecondCommand = new FindOrCommand(secondPredicate);
+        FindAnyCommand findFirstCommand = new FindAnyCommand(firstPredicate);
+        FindAnyCommand findSecondCommand = new FindAnyCommand(secondPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
 
         // same values -> returns true
-        FindOrCommand findFirstCommandCopy = new FindOrCommand(firstPredicate);
+        FindAnyCommand findFirstCommandCopy = new FindAnyCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
 
         // different types -> returns false
@@ -68,9 +68,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         List<Name> firstNameList = List.of(new Name("zeke"));
         List<Tag> firstTagList = List.of();
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -80,9 +80,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         List<Name> firstNameList = List.of(new Name("benson"));
         List<Tag> firstTagList = List.of();
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
     }
@@ -92,9 +92,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         List<Name> firstNameList = List.of(new Name("hannah"));
         List<Tag> firstTagList = List.of();
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(HANNAH, HANNAH_NO_BIRTHDAY), model.getFilteredPersonList());
     }
@@ -104,9 +104,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         List<Name> firstNameList = List.of(new Name("alice"), new Name("benson"));
         List<Tag> firstTagList = List.of();
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON), model.getFilteredPersonList());
     }
@@ -116,9 +116,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         List<Name> firstNameList = List.of();
         List<Tag> firstTagList = List.of(new Tag("Chef"));
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
@@ -128,9 +128,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         List<Name> firstNameList = List.of();
         List<Tag> firstTagList = List.of(new Tag("football"));
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(GEORGE), model.getFilteredPersonList());
     }
@@ -140,9 +140,9 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         List<Name> firstNameList = List.of();
         List<Tag> firstTagList = List.of(new Tag("friends"));
-        FindOrPredicate findOrPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findOrPredicate);
-        expectedModel.updateFilteredPersonList(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findAnyPredicate);
+        expectedModel.updateFilteredPersonList(findAnyPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
     }
@@ -152,8 +152,8 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         List<Name> firstNameList = List.of();
         List<Tag> firstTagList = List.of(new Tag("friends"), new Tag("owesMoney"));
-        FindOrPredicate findPredicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(findPredicate);
+        FindAnyPredicate findPredicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(findPredicate);
         expectedModel.updateFilteredPersonList(findPredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
@@ -176,8 +176,8 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
         List<Name> firstNameList = List.of(new Name("carl"), new Name("benson"));
         List<Tag> firstTagList = List.of(new Tag("friends"));
-        FindOrPredicate predicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(predicate);
+        FindAnyPredicate predicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL), model.getFilteredPersonList());
@@ -188,8 +188,8 @@ public class FindOrCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 4);
         List<Name> firstNameList = List.of(new Name("cArL"), new Name("bEnsOn"));
         List<Tag> firstTagList = List.of(new Tag("friENDs"));
-        FindOrPredicate predicate = new FindOrPredicate(firstNameList, firstTagList);
-        FindOrCommand command = new FindOrCommand(predicate);
+        FindAnyPredicate predicate = new FindAnyPredicate(firstNameList, firstTagList);
+        FindAnyCommand command = new FindAnyCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL), model.getFilteredPersonList());

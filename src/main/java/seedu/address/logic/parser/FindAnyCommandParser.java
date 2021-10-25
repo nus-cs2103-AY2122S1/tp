@@ -7,24 +7,24 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.address.logic.commands.FindAnyCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FindOrPredicate;
+import seedu.address.model.person.FindAnyPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
  */
-public class FindOrCommandParser implements Parser<FindOrCommand> {
+public class FindAnyCommandParser implements Parser<FindAnyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindOrCommand
-     * and returns a FindOrCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindAnyCommand
+     * and returns a FindAnyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public FindOrCommand parse(String args) throws ParseException {
+    public FindAnyCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
 
         if (trimmedArgs.isEmpty()) {
@@ -46,8 +46,8 @@ public class FindOrCommandParser implements Parser<FindOrCommand> {
             throw new ParseException(e.getMessage());
         }
 
-        FindOrPredicate findOrPredicate = new FindOrPredicate(nameKeywords, tagList);
-        return new FindOrCommand(findOrPredicate);
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(nameKeywords, tagList);
+        return new FindAnyCommand(findAnyPredicate);
     }
 
 }

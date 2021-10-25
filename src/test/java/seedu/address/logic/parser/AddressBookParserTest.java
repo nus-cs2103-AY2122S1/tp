@@ -26,8 +26,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteMultipleCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindAnyCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.FindOrCommand;
 import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -35,7 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.FindOrPredicate;
+import seedu.address.model.person.FindAnyPredicate;
 import seedu.address.model.person.FindPredicate;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -159,12 +159,12 @@ public class AddressBookParserTest {
         List<String> tagStringList = List.of();
         List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
         List<Tag> tagList = List.of();
-        FindOrPredicate findOrPredicate = new FindOrPredicate(nameList, tagList);
-        FindOrCommand command = (FindOrCommand) parser.parseCommand(
-                FindOrCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(nameList, tagList);
+        FindAnyCommand command = (FindAnyCommand) parser.parseCommand(
+                FindAnyCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
                         .collect(Collectors.joining(" "))
                         + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
-        assertEquals(new FindOrCommand(findOrPredicate), command);
+        assertEquals(new FindAnyCommand(findAnyPredicate), command);
     }
 
     @Test
@@ -173,12 +173,12 @@ public class AddressBookParserTest {
         List<String> tagStringList = List.of("football", "friends");
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
-        FindOrPredicate findOrPredicate = new FindOrPredicate(nameList, tagList);
-        FindOrCommand command = (FindOrCommand) parser.parseCommand(
-                FindOrCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(nameList, tagList);
+        FindAnyCommand command = (FindAnyCommand) parser.parseCommand(
+                FindAnyCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
                         .collect(Collectors.joining(" "))
                         + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
-        assertEquals(new FindOrCommand(findOrPredicate), command);
+        assertEquals(new FindAnyCommand(findAnyPredicate), command);
     }
 
     @Test
@@ -187,12 +187,12 @@ public class AddressBookParserTest {
         List<String> tagStringList = List.of("football", "friends");
         List<Name> nameList = List.of(new Name("Alan"), new Name("Bob"), new Name("Chris"));
         List<Tag> tagList = List.of(new Tag("football"), new Tag("friends"));
-        FindOrPredicate findOrPredicate = new FindOrPredicate(nameList, tagList);
-        FindOrCommand command = (FindOrCommand) parser.parseCommand(
-                FindOrCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
+        FindAnyPredicate findAnyPredicate = new FindAnyPredicate(nameList, tagList);
+        FindAnyCommand command = (FindAnyCommand) parser.parseCommand(
+                FindAnyCommand.COMMAND_WORD + " " + nameStringList.stream().map(x -> PREFIX_NAME + x)
                         .collect(Collectors.joining(" "))
                         + " " + tagStringList.stream().map(x -> PREFIX_TAG + x).collect(Collectors.joining(" ")));
-        assertEquals(new FindOrCommand(findOrPredicate), command);
+        assertEquals(new FindAnyCommand(findAnyPredicate), command);
     }
 
     @Test
