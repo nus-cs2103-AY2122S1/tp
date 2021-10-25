@@ -18,15 +18,20 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddToOrderCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EndAndTransactOrderCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RemoveCommand;
+import seedu.address.logic.commands.RemoveFromOrderCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.StartOrderCommand;
+import seedu.address.logic.commands.ViewOrderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.ItemDescriptor;
@@ -124,6 +129,41 @@ public class AddressBookParserTest {
         final String helpMessage = "Refer to the user guide: " + userGuide;
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, helpMessage), (
             ) -> parser.parseCommand(""));
+    }
+
+    @Test
+    public void parseCommand_startOrder() throws Exception {
+        assertTrue(parser.parseCommand(StartOrderCommand.COMMAND_WORD) instanceof StartOrderCommand);
+    }
+
+    @Test
+    public void parseCommand_addToOrder() throws Exception {
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        AddToOrderCommand command = (AddToOrderCommand) parser.parseCommand(
+                AddToOrderCommand.COMMAND_WORD + " " + VALID_NAME_BAGEL);
+
+        descriptor.setCount(1); // Parser should set descriptor count to 1
+        assertEquals(new AddToOrderCommand(descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_removeFromOrder() throws Exception {
+        ItemDescriptor descriptor = new ItemDescriptorBuilder().withName(VALID_NAME_BAGEL).build();
+        RemoveFromOrderCommand command = (RemoveFromOrderCommand) parser.parseCommand(
+                RemoveFromOrderCommand.COMMAND_WORD + " " + VALID_NAME_BAGEL);
+
+        descriptor.setCount(1); // Parser should set descriptor count to 1
+        assertEquals(new RemoveFromOrderCommand(descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_viewOrder() throws Exception {
+        assertTrue(parser.parseCommand(ViewOrderCommand.COMMAND_WORD) instanceof ViewOrderCommand);
+    }
+
+    @Test
+    public void parseCommand_endAndTransactOrder() throws Exception {
+        assertTrue(parser.parseCommand(EndAndTransactOrderCommand.COMMAND_WORD) instanceof EndAndTransactOrderCommand);
     }
 
     @Test

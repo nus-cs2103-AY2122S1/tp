@@ -107,7 +107,15 @@ public class HelpCommandParserTest {
     }
 
     @Test
-    public void parse_validEmptyArgs_returnsHelpCommand() {
+    public void parse_validViewOrderArgs_returnsHelpCommand() {
+        // asking help for list command
+        final String message = "view order";
+        HelpCommand expectedHelpCommand = new HelpCommand(message);
+        assertParseSuccess(parser, "help vieworder", expectedHelpCommand);
+    }
+
+    @Test
+    public void parse_validEmptyArgs_success() {
         // asking help for list command
         final String message = "";
         HelpCommand expectedHelpCommand = new HelpCommand(message);

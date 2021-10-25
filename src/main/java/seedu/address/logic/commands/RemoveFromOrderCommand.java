@@ -70,8 +70,6 @@ public class RemoveFromOrderCommand extends Command {
 
         // Check that only 1 item fit the description
         if (matchingItems.size() > 1) {
-            // TODO: ensure compatible with the View Order update
-            //model.updateFilteredItemList(toRemoveDescriptor::isMatch);
             throw new CommandException(MESSAGE_MULTIPLE_MATCHES);
         }
 

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -10,7 +11,7 @@ import seedu.address.model.item.ItemCountComparator;
 import seedu.address.model.item.ItemNameComparator;
 
 /**
- * Sorts the items in inventory in a given order.
+ * Sorts the currently displayed items in a given order.
  */
 public class SortCommand extends Command {
 
@@ -27,6 +28,8 @@ public class SortCommand extends Command {
             + PREFIX_COUNT;
 
     public static final String MESSAGE_SUCCESS = "Listed items sorted by %s";
+    public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
+            "Can't sort if not in inventory mode. Please use \"list\" first";
 
     private SortOrder order;
 
@@ -41,6 +44,10 @@ public class SortCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getDisplayMode() != DISPLAY_INVENTORY) {
+            throw new CommandException(MESSAGE_INVENTORY_NOT_DISPLAYED);
+        }
 
         switch (order) {
         case BY_NAME:

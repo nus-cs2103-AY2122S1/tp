@@ -2,7 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 
@@ -47,6 +50,16 @@ public class SortCommandTest {
         expectedModel.sortItems(new ItemCountComparator());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_displayOrderMode_failure() {
+        SortCommand command = new SortCommand(SortCommand.SortOrder.BY_COUNT);
+
+        model.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        String expectedMessage = SortCommand.MESSAGE_INVENTORY_NOT_DISPLAYED;
+
+        assertCommandFailure(command, model, expectedMessage);
     }
 
     public void equals() {
