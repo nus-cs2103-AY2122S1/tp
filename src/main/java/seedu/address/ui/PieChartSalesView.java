@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.Region;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.client.Client;
 import seedu.address.model.commons.Name;
 import seedu.address.model.order.Order;
@@ -45,7 +46,7 @@ public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
 
         for (Map.Entry<Name, Integer> product : table.entrySet()) {
             pieChartData.add(new PieChart.Data("Product: "
-                                                        + product.getKey().toString()
+                                                        + product.getKey().toString() + "\n"
                                                         + " Sold: "
                                                         + product.getValue().toString(),
                     product.getValue()));

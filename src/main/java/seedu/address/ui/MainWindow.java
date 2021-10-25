@@ -43,7 +43,6 @@ public class MainWindow extends UiPart<Stage> {
     private ProductListPanel productListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
-    private PieChartView pieChartView;
     private PieChartSalesView salesView;
     private HelpMessage helpMessage;
     private ViewMoreClient viewMoreClient;
@@ -199,17 +198,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private void handleStat() {
-        pieChartView = new PieChartView(logic.getFilteredClientList(), logic.getFilteredProductList());
         salesView = new PieChartSalesView(logic.getFilteredClientList(), logic.getFilteredProductList());
         secondPanelPlaceholder.getChildren().clear();
-        if (stats == 0) {
-            secondPanelPlaceholder.getChildren().add(pieChartView.getRoot());
-            stats++;
-        } else {
-            secondPanelPlaceholder.getChildren().add(salesView.getRoot());
-            stats--;
-        }
-
+        secondPanelPlaceholder.getChildren().add(salesView.getRoot());
     }
 
     private void handleChangeTab(TabPaneBehavior tpb, int selectedTab, boolean isClient) {
