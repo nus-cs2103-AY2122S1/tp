@@ -6,6 +6,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.model.ReadOnlyProgrammerError;
+import seedu.programmer.model.student.ClassId;
 
 /**
  * Dashboard window of student data.
@@ -41,7 +42,7 @@ public class DashboardWindow extends PopupWindow {
     private void fillOverallStats() {
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         int numStudents = readOnlyPE.getStudentList().size();
-        int numClasses = 30;
+        int numClasses = ClassId.getNumClasses();
         int numLabs = 10;
         String overallStats = "";
         overallStats += "No. of students: " + numStudents + "\n";
