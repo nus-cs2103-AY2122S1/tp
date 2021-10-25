@@ -71,12 +71,19 @@ public class Appointment {
 
     /**
      * Remove a given person from the client list of this {@code Appointment}.
-     * @param personToRemove the given person to be removed
+     * @param personToRemove the given person to be removed.
      */
     public void removeClient(Person personToRemove) {
         this.clients.remove(personToRemove);
     }
 
+    /**
+     * Add a given person to the client list of this {@Code Appointment}.
+     * @param personToAdd the given person to be added.
+     */
+    public void addClient(Person personToAdd) {
+        this.clients.add(personToAdd);
+    }
     /**
      * Returns true if both Appointments have the same fields.
      */

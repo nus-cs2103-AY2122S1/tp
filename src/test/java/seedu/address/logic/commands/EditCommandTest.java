@@ -10,11 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalAppointment.getTypicalSchedule;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -25,6 +24,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.schedule.Appointment;
+import seedu.address.model.schedule.Schedule;
+import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.AppointmentBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
@@ -33,7 +37,27 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), getTypicalSchedule());
+    private UniquePersonList editTestPersonList = new UniquePersonList();
+
+    private Model model;
+
+    @BeforeEach
+    public void setUp() {
+        Person client1 = new PersonBuilder().withName("Client1").build();
+        Person client2 = new PersonBuilder().withName("Client2").build();
+
+        AddressBook testAb = new AddressBookBuilder().build();
+        testAb.addPerson(client1);
+        testAb.addPerson(client2);
+
+        Appointment appointment1 = new AppointmentBuilder().addClient(client1).build();
+        Appointment appointment2 = new AppointmentBuilder().addClient(client1).addClient(client2).build();
+
+        Schedule testSchedule = new Schedule();
+        testSchedule.addAppointment(appointment1);
+        testSchedule.addAppointment(appointment2);
+        model = new ModelManager(testAb, new UserPrefs(), testSchedule);
+    }
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {

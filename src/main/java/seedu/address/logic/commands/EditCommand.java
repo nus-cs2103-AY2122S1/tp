@@ -24,6 +24,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.schedule.Appointment;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -83,6 +84,11 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        List<Appointment> relatedAppointments = model.getRelatedAppointments(personToEdit);
+        for (Appointment appointment : relatedAppointments) {
+            appointment.removeClient(personToEdit);
+            appointment.addClient(editedPerson);
+        }
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
