@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -146,6 +147,21 @@ public class ModelManager implements Model {
         StringBuilder stringBuilder = new StringBuilder();
         List<Appointment> relatedAppointment = getRelatedAppointments(client);
         for (Appointment appointment : relatedAppointment) {
+            stringBuilder.append(appointment + "\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public String getAppointmentsThatOnlyHaveThisClientAsString(Person client) {
+        List<Appointment> appointmentsThatOnlyHaveThisClient = new ArrayList<>();
+        for (Appointment appointment : getRelatedAppointments(client)) {
+            if (appointment.hasClient(client) && appointment.getClientList().size() == 1) {
+                appointmentsThatOnlyHaveThisClient.add(appointment);
+            }
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Appointment appointment : appointmentsThatOnlyHaveThisClient) {
             stringBuilder.append(appointment + "\n");
         }
         return stringBuilder.toString();
