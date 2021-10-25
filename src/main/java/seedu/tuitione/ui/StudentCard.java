@@ -18,11 +18,11 @@ public class StudentCard extends UiPart<Region> {
 
     private static final String FXML = "StudentListCard.fxml";
     private static final String STRING_FORMAT_PARENT_CONTACT = "☎\tParent's Contact: \t%s";
-    private static final String STRING_FORMAT_ADDRESS = "🏠\tAddress: \t\t%s";
-    private static final String STRING_FORMAT_EMAIL = "📧\tEmail Address: \t%s";
-    private static final String STRING_FORMAT_GRADE = "🔢\tGrade: \t\t\t%s";
-    private static final String STRING_FORMAT_LESSON = "🎒\tLesson(s): \t";
-    private static final String STRING_FORMAT_SUBSCRIPTION = "💵\tSubscription: \t" + Price.CURRENCY + " %.2f";
+    private static final String STRING_FORMAT_ADDRESS = "🏠\tAddress: \t\t\t%s";
+    private static final String STRING_FORMAT_EMAIL = "📧\tEmail Address: \t\t%s";
+    private static final String STRING_FORMAT_GRADE = "🔢\tGrade: \t\t\t\t%s";
+    private static final String STRING_FORMAT_LESSON = "🎒\tLesson(s): \t\t";
+    private static final String STRING_FORMAT_SUBSCRIPTION = "💵\tSubscription: \t\t" + Price.CURRENCY + " %.2f";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

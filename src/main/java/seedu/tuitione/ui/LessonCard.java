@@ -16,11 +16,11 @@ public class LessonCard extends UiPart<Region> {
 
     private static final String FXML = "LessonListCard.fxml";
     private static final String STRING_FORMAT_SUBJECT = "📖\tSubject: \t%s";
-    private static final String STRING_FORMAT_GRADE = "🔢\tGrade: \t%s";
-    private static final String STRING_FORMAT_DAY = "📅\tDay: \t%s";
-    private static final String STRING_FORMAT_TIME = "⏲\tTime: \t%s - %s";
-    private static final String STRING_FORMAT_PRICE = "💱\tPrice: \t%s";
-    private static final String STRING_FORMAT_SIZE = "😀\tSize: \t%d";
+    private static final String STRING_FORMAT_GRADE = "🔢\tGrade: \t\t%s";
+    private static final String STRING_FORMAT_DAY = "📅\tDay: \t\t%s";
+    private static final String STRING_FORMAT_TIME = "⏲\tTime: \t\t%s - %s";
+    private static final String STRING_FORMAT_PRICE = "💱\tPrice: \t\t%s";
+    private static final String STRING_FORMAT_SIZE = "😀\tSize: \t\t%d";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.

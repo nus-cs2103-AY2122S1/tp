@@ -10,7 +10,7 @@
 <StackPane styleClass="stack-pane" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <HBox>
       <TextField fx:id="commandTextField" onAction="#handleCommandEntered" promptText="➡ Please enter your command here..." HBox.hgrow="ALWAYS" />
-      <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleCommandEntered" text="Send ▶">
+      <Button fx:id="sendButton" mnemonicParsing="false" onAction="#handleCommandEntered" text="Send ⬆">
         <padding>
           <Insets bottom="5" left="10" right="10" top="5" />
         </padding>
