@@ -22,7 +22,7 @@ public class AddLabCommand extends Command {
             + "Parameters: "
             + PREFIX_LAB_TITLE + "Lab Title "
             + PREFIX_LAB_TOTAL + "Total Score"
-            + "Example: " + COMMAND_WORD + " "
+            + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_LAB_TITLE + "1 "
             + PREFIX_LAB_TOTAL + "20";
 
