@@ -3,7 +3,7 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -53,7 +53,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label nextOfKinAddress;
     @FXML
-    private FlowPane tags;
+    private Label numFailedCalls;
     @FXML
     private HBox phoneHBox;
     @FXML
@@ -67,13 +67,19 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox shnPeriodHBox;
     @FXML
-    private VBox nextOfKinBlock;
-    @FXML
     private HBox nextOfKinNameHBox;
     @FXML
     private HBox nextOfKinPhoneHBox;
     @FXML
     private HBox nextOfKinAddressHBox;
+    @FXML
+    private VBox nextOfKinBlock;
+    @FXML
+    private VBox callStatusBlock;
+    @FXML
+    private ImageView callStatusTick;
+    @FXML
+    private ImageView callStatusCross;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -106,11 +112,19 @@ public class PersonCard extends UiPart<Region> {
         person.getNextOfKinAddress().map(Object::toString).ifPresentOrElse(
             text -> nextOfKinAddress.setText(text), () -> hideNode(nextOfKinAddressHBox));
 
-        if (!person.getNextOfKinName().isPresent()
-                && !person.getNextOfKinAddress().isPresent()
-                && !person.getNextOfKinAddress().isPresent()) {
+        if (person.getNextOfKinName().isEmpty()
+                && person.getNextOfKinAddress().isEmpty()
+                && person.getNextOfKinAddress().isEmpty()) {
             hideNode(nextOfKinBlock);
         }
+
+        if (person.getCallStatus().isCalledInCurrentSession()) {
+            hideNode(callStatusCross);
+        } else {
+            hideNode(callStatusTick);
+        }
+
+        numFailedCalls.setText(String.format("Failed: %s time(s)", person.getCallStatus().getNumFailedCalls()));
     }
 
     /**
