@@ -298,6 +298,23 @@ Sorts all orders by their amount and lists them in descending order.
 
 Format: `sortorders`
 
+### Viewing total orders: `totalorders`
+
+Shows the total orders for each person in the application.
+
+<div markdown="block" class="alert alert-info">
+:information_source: The total orders displayed are based on the persons in the application.
+If the customer of an order cannot be found among the persons, the order will not be shown.
+</div>
+
+![TotalOrdersWindow](images/TotalOrdersWindow.png)
+
+Format: `totalorders`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Press the ESCAPE key to close the total orders window
+</div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
@@ -333,24 +350,6 @@ _Example usage_
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, SalesNote will discard all data related to the incorrectly formatted JSON file and start with an empty data file at the next run.</div>
-
-
-### Viewing total orders: `totalorders`
-
-Shows the total orders for each person in the application. 
-
-<div markdown="block" class="alert alert-info">
-:information_source: The total orders displayed are based on the persons in the application.
-If the customer of an order cannot be found among the persons, the order will not be shown.
-</div>
-
-![TotalOrdersWindow](images/TotalOrdersWindow.png)
-
-Format: `totalorders`
-
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-Press the ESCAPE key to close the total orders window
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
