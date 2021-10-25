@@ -45,7 +45,7 @@ public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
 
         for (Map.Entry<Name, Integer> product : table.entrySet()) {
             pieChartData.add(new PieChart.Data("Product: "
-                                                        + product.getKey().toString()
+                                                        + product.getKey().toString() + "\n"
                                                         + " Sold: "
                                                         + product.getValue().toString(),
                     product.getValue()));
