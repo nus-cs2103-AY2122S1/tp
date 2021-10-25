@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Set;
 
 /**
@@ -40,6 +42,17 @@ public class MakeUpLesson extends Lesson {
     @Override
     public Date getDisplayDate() {
         return getStartDate();
+    }
+
+    /**
+     * To check if fees for this lesson should be updated.
+     * If lesson has passed and the date for update has passed.
+     * @return
+     */
+    @Override
+    public boolean hasEnded() {
+        LocalDate updateDate = LocalDate.now().plus(1, ChronoUnit.DAYS);
+        return getStartDate().getLocalDate().isBefore(updateDate);
     }
 
     /**

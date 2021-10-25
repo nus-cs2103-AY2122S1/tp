@@ -34,6 +34,7 @@ public class Person {
     private final Remark remark;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Lesson> lessons = new TreeSet<>();
+    private final Fee outstandingFees;
 
     /**
      * Every field must be present and not null.
@@ -46,11 +47,7 @@ public class Person {
      * @param address The address of this person.
      * @param school The school of this person.
      * @param acadStream The academic stream of this person.
-<<<<<<< HEAD
-=======
      * @param acadLevel The academic level of this person.
-     * @param outstandingFee The outstanding fees of this person.
->>>>>>> d4aee599491eab3acc7b0ef9e585cf946cb8f76e
      * @param remark Any remarks on this person.
      * @param tags Tags that categorise this person.
      * @param lessons The Set of Lessons objects that this person will become owner of.
@@ -72,6 +69,7 @@ public class Person {
         this.remark = remark;
         this.tags.addAll(tags);
         this.lessons.addAll(lessons);
+        outstandingFees = new Fee(lessons);
     }
     public Name getName() {
         return name;
@@ -151,6 +149,10 @@ public class Person {
         return Collections.unmodifiableSet(lessons);
     }
 
+    public Fee getOutstandingFees() {
+        return outstandingFees;
+    }
+
     /**
      * Returns true if both persons have the same name.
      * This defines a weaker notion of equality between two persons.
@@ -197,7 +199,8 @@ public class Person {
                 && otherPerson.getAcadLevel().equals(getAcadLevel())
                 && otherPerson.getRemark().equals(getRemark())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getLessons().equals(getLessons());
+                && otherPerson.getLessons().equals(getLessons())
+                && otherPerson.getOutstandingFees().equals(getOutstandingFees());
     }
 
     @Override
@@ -210,7 +213,11 @@ public class Person {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName()).append("; Address: ").append(getAddress());
+        builder.append(getName())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Outstanding Fees: ")
+                .append(getOutstandingFees());
 
         if (!getPhone().isEmpty()) {
             builder.append("; Phone: ").append(getPhone());

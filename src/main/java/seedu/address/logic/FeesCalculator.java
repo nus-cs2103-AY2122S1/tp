@@ -18,28 +18,27 @@ import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 /**
  * Responsible for the automated updates and calculation of each lesson's fees.
  * Many lessons to 1 FeeCalculator.
  */
-public class FeesCalculator {
+public class FeesCalculator implements Calculator {
 
     private static final float numberOfMinutesInAnHour = 60.00F;
     private static final LocalDate currentDate = LocalDate.now();
     private final LastUpdatedDate lastUpdated;
 
-
-
     public FeesCalculator(LastUpdatedDate lastUpdatedDate) {
         lastUpdated = lastUpdatedDate;
     }
 
+    @Override
     public Model updateAllLessonOutstandingFees(Model model) {
         // if last updated day is today, no need to update lessons again.
         if (lastUpdated.date.equals(LocalDate.now())) {
@@ -59,12 +58,10 @@ public class FeesCalculator {
         return model;
     }
 
-    public Person createEditedPerson(Person personToEdit) {
+    private Person createEditedPerson(Person personToEdit) {
         assert personToEdit != null;
 
-       List<Lesson> lessonList = personToEdit.getLessons()
-               .stream()
-               .collect(Collectors.toList());
+       List<Lesson> lessonList = new ArrayList<>(personToEdit.getLessons());
 
         for (int i = 0; i < lessonList.size(); i++) {
             lessonList.set(i, updateLessonOutstandingFeesField(lessonList.get(i)));
@@ -90,7 +87,7 @@ public class FeesCalculator {
                 : new HashSet<>(lesson.getHomework());
 
         // update outstanding fees after calculation
-        OutstandingFees updatedOutstandingFees = lesson.hasStarted()
+        OutstandingFees updatedOutstandingFees = lesson.hasStarted() && !lesson.hasEnded()
                 ? getUpdatedOutstandingFees(copiedDate.getUpdateFeesDay(), copiedTimRange, copiedLessonRates)
                 : new OutstandingFees(lesson.getOutstandingFees().value);
 
@@ -120,14 +117,14 @@ public class FeesCalculator {
         return new OutstandingFees(Double.toString(updatedFees));
     }
 
-    public static float getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
+    private float getCostPerLesson(TimeRange timeRange, LessonRates lessonRates) {
         Duration duration = timeRange.getDuration();
         float durationInHour = duration.toMinutes() / numberOfMinutesInAnHour;
-        float costPerLesson = durationInHour * lessonRates.getLessonRatesFloat();
+        float costPerLesson = durationInHour * lessonRates.getMonetaryValueInFloat();
         return costPerLesson;
     }
 
-    public int numOfLessonsSinceLastUpdate(DayOfWeek updateDay) {
+    private int numOfLessonsSinceLastUpdate(DayOfWeek updateDay) {
         // get the number of weeks past since lastAdded date
         LocalDate startDate = lastUpdated.getLastUpdatedDate().date;
         int numberOfWeeksBetween = (int) ChronoUnit.WEEKS.between(startDate, currentDate);
@@ -143,13 +140,5 @@ public class FeesCalculator {
         // isCancelled deduction logic goes here
 
         return numberOfWeeksBetween;
-    }
-
-    /**
-     * For reminding when the fees are due. In cycles of 4 lessons.
-     */
-    public static float getThreshold(float costPerLesson) {
-        float threshold = costPerLesson * 4;
-        return threshold;
     }
 }

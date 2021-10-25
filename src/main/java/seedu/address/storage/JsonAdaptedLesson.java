@@ -113,7 +113,7 @@ class JsonAdaptedLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     LessonRates.class.getSimpleName()));
         }
-        if (!LessonRates.isValidLessonRates(lessonRates)) {
+        if (!LessonRates.isValidMonetaryField(lessonRates)) {
             throw new IllegalValueException(LessonRates.MESSAGE_CONSTRAINTS);
         }
         final LessonRates modelLessonRates = new LessonRates(lessonRates);
@@ -122,7 +122,7 @@ class JsonAdaptedLesson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     OutstandingFees.class.getSimpleName()));
         }
-        if (!OutstandingFees.isValidOutstandingFee(outstandingFees)) {
+        if (!OutstandingFees.isValidMonetaryField(outstandingFees)) {
             throw new IllegalValueException(OutstandingFees.MESSAGE_CONSTRAINTS);
         }
         final OutstandingFees modelOutstandingFees = new OutstandingFees(outstandingFees);

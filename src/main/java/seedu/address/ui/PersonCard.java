@@ -65,6 +65,7 @@ public class PersonCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         address.setText("Address: " + person.getAddress().value);
+        outstandingFee.setText("Outstanding Fees: " + person.getOutstandingFees().toString());
 
         if (person.getPhone().isEmpty()) {
             phone.setManaged(false);

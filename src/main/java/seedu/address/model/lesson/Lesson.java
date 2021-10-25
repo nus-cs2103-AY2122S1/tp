@@ -69,6 +69,10 @@ public abstract class Lesson implements Comparable<Lesson> {
         return startDate.isOver();
     }
 
+    public boolean hasEnded() {
+        return false;
+    }
+
     public Subject getSubject() {
         return subject;
     }

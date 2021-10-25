@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FIND_CONDITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAID_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -113,6 +114,7 @@ public class CommandTestUtil {
     public static final String VALID_OUTSTANDING_FEES = "100.00";
     public static final String VALID_HOMEWORK_TEXTBOOK = "Textbook pg 21-26";
     public static final String VALID_HOMEWORK_POETRY = "Poetry draft";
+    public static final String VALID_PAYMENT = "20.00";
 
     public static final String PAST_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_PAST;
     public static final String FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_FUTURE;
@@ -124,6 +126,7 @@ public class CommandTestUtil {
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
     public static final String HOMEWORK_DESC_TEXTBOOK = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_TEXTBOOK;
     public static final String HOMEWORK_DESC_POETRY = " " + PREFIX_HOMEWORK + VALID_HOMEWORK_POETRY;
+    public static final String PAYMENT_DESC = " " + PREFIX_PAID_AMOUNT + VALID_PAYMENT;
 
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "32 Dec 2001"; // No such date
     public static final String INVALID_TIME_RANGE_DESC = " " + PREFIX_TIME + "0100-0300"; // Not between 0000h - 0800h
@@ -135,6 +138,7 @@ public class CommandTestUtil {
     public static final String INVALID_HOMEWORK_DESC =
             " " + PREFIX_HOMEWORK + "Homework cannot be more than fifty characters long,"
             + " including whitespaces";
+    public static final String INVALID_PAYMENT_DESC = " " + PREFIX_PAID_AMOUNT + "$20.00";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

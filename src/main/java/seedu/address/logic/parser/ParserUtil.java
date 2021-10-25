@@ -17,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.LessonRates;
+import seedu.address.model.lesson.Money;
 import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
@@ -359,11 +360,8 @@ public class ParserUtil {
      */
     public static LessonRates parseLessonRates(String lessonRates) throws ParseException {
         requireNonNull(lessonRates);
-        String strippedRates = lessonRates.strip();
-        if (!LessonRates.isValidLessonRates(strippedRates)) {
-            throw new ParseException(LessonRates.MESSAGE_CONSTRAINTS);
-        }
-        return new LessonRates(lessonRates);
+        String strippedRates = parseMoney(lessonRates).value;
+        return new LessonRates(strippedRates);
     }
 
     /**
@@ -374,10 +372,21 @@ public class ParserUtil {
      */
     public static OutstandingFees parseOutstandingFees(String fees) throws ParseException {
         requireNonNull(fees);
-        String strippedRates = fees.strip();
-        if (!OutstandingFees.isValidOutstandingFee(strippedRates)) {
-            throw new ParseException(OutstandingFees.MESSAGE_CONSTRAINTS);
+        String strippedFees = parseMoney(fees).value;
+        return new OutstandingFees(strippedFees);
+    }
+
+    /**
+     * Parses a {@code String amount} into {@code Money}.
+     * Leading and trailing whitespaces will be stripped.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static Money parseMoney(String amount) throws ParseException {
+        String strippedAmount = amount.strip();
+        if (!Money.isValidMonetaryField(strippedAmount)) {
+            throw new ParseException(Money.MESSAGE_CONSTRAINTS);
         }
-        return new OutstandingFees(fees);
+        return new Money(strippedAmount);
     }
 }
