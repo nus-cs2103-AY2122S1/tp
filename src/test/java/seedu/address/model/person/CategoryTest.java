@@ -19,6 +19,16 @@ public class CategoryTest {
     }
 
     @Test
+    public void getFullCodeTest() {
+        assertTrue(new CategoryCode("att").getFullCode().equals("Attractions")); // attraction category
+        assertTrue(new CategoryCode("acc").getFullCode().equals("Accommodation")); // accommodation category
+        assertTrue(new CategoryCode("com").getFullCode().equals("Commerce")); // commerce category
+        assertTrue(new CategoryCode("fnb").getFullCode().equals("Food & Beverage")); // food and beverage category
+        assertTrue(new CategoryCode("tpt").getFullCode().equals("Transport")); // transport category
+        assertTrue(new CategoryCode("oth").getFullCode().equals("Others")); // others category
+    }
+
+    @Test
     public void isValidCategoryTest() {
         // null category
         assertThrows(NullPointerException.class, () -> CategoryCode.isValidCategory(null));
@@ -28,6 +38,9 @@ public class CategoryTest {
         assertFalse(CategoryCode.isValidCategory("other")); // not category code
         assertFalse(CategoryCode.isValidCategory("ATTraction")); // not category code
         assertFalse(CategoryCode.isValidCategory(" ")); // spaces
+        assertFalse(CategoryCode.isValidCategory("a tt")); // spaces in between code
+        assertFalse(CategoryCode.isValidCategory("oTh ")); // trailing space
+        assertFalse(CategoryCode.isValidCategory(" oTh")); // leading space
 
         // valid categories
         assertTrue(CategoryCode.isValidCategory("att")); // attraction category

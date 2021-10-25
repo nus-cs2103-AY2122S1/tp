@@ -18,15 +18,14 @@ public class CategoryCode {
 
     private static final List<String> CATEGORY_VALUES = Arrays.asList("att", "fnb", "com", "acc", "tpt", "oth");
 
-    private enum Category { ATT, FNB, COM, ACC, TPT, OTH }
+    private enum Category { ATT, FNB, COM, ACC, TPT, OTH, ERR }
 
 
-    //TODO(HK): Re-look at VALIDATION_REGEX
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    private Category category;
+    private final Category category;
     /**
      * Constructs a {@code CategoryCode}.
      *
@@ -66,8 +65,7 @@ public class CategoryCode {
         } else if (category == 5) {
             return Category.OTH;
         } else {
-            // Remove this portion in next iteration
-            throw new RuntimeException("PROBLEM WITH CATEGORY CODES");
+            return Category.ERR;
         }
     }
 
@@ -82,13 +80,15 @@ public class CategoryCode {
         case ACC:
             return "Accommodation";
         case FNB:
-            return "Food & Beverages";
+            return "Food & Beverage";
         case TPT:
             return "Transport";
         case COM:
             return "Commerce";
-        default:
+        case OTH:
             return "Others";
+        default:
+            return "ERROR";
         }
     }
 
