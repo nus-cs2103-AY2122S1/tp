@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -72,6 +73,10 @@ public class CsvAddressBookStorage implements AddressBookStorage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
+
+        if (FileUtil.isFileExists(filePath)) {
+            throw new FileAlreadyExistsException("File exists");
+        }
 
         FileUtil.createIfMissing(filePath);
         CsvUtil.saveCsvFile(new CsvSerializableAddressBook(addressBook), filePath);
