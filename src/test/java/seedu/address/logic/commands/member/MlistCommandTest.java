@@ -28,12 +28,14 @@ public class MlistCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new MlistCommand(), model, MlistCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new MlistCommand(), model,
+                String.format(MlistCommand.MESSAGE_SUCCESS, model.getFilteredMemberList().size(), ""), expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
-        assertCommandSuccess(new MlistCommand(), model, MlistCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new MlistCommand(), model,
+                String.format(MlistCommand.MESSAGE_SUCCESS, 1, ""), expectedModel);
     }
 }
