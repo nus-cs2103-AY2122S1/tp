@@ -101,6 +101,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         for (Student student : students) {
             requireNonNull(student);
             lesson.addStudent(student);
+            student.attendsLesson(lesson);
         }
     }
 
