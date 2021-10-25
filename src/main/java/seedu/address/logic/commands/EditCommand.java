@@ -108,9 +108,10 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
         List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
+        boolean updatedisImportant = editPersonDescriptor.getImportance().orElse(personToEdit.isImportant());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
-                updatedDescription);
+                updatedDescription, updatedisImportant);
     }
 
     @Override
@@ -151,6 +152,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Description description;
         private List<Task> tasks;
+        private boolean isImportant;
 
         public EditPersonDescriptor() {}
 
@@ -166,13 +168,14 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             setDescription(toCopy.description);
             setTasks(toCopy.tasks);
+            setImportance(toCopy.isImportant);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, tasks, description, isImportant);
         }
 
         public void setName(Name name) {
@@ -221,7 +224,14 @@ public class EditCommand extends Command {
 
         public Optional<List<Task>> getTasks() {
             return Optional.ofNullable(tasks);
+        }
 
+        public void setImportance(boolean isImportant) {
+            this.isImportant = isImportant;
+        }
+
+        public Optional<Boolean> getImportance() {
+            return Optional.ofNullable(isImportant);
         }
 
         /**
