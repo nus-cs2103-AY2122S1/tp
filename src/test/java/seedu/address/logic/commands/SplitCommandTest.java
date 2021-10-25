@@ -25,14 +25,9 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.FacilityBuilder;
 
 public class SplitCommandTest {
-    private Model model;
-    private Model expectedModel;
+    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+    private Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
 
-    @BeforeEach
-    public void setup() {
-        model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-        expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-    }
     @Test
     public void execute_validDay_success() {
         SplitCommand command = new SplitCommand(1);
