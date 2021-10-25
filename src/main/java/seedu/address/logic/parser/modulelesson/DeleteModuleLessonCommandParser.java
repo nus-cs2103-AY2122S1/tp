@@ -2,6 +2,7 @@ package seedu.address.logic.parser.modulelesson;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,6 +58,8 @@ public class DeleteModuleLessonCommandParser implements Parser<DeleteModuleLesso
         List<String> listOfModuleCode = ParserUtil.parseModuleCodes(moduleCodes).stream()
                 .map(ModuleCode::toString)
                 .collect(Collectors.toList());
-        return new DeleteModuleLessonCommand(new ModuleCodeContainsKeywordsPredicate(listOfModuleCode.get(0)));
+        return new DeleteModuleLessonCommand(
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(listOfModuleCode.get(0)))
+        );
     }
 }
