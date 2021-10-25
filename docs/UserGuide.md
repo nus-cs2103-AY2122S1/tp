@@ -35,21 +35,21 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. _Note how the app contains some sample data_.<br>
 
-  ![Ui](images/Ui.png)
+![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
   Some example commands you can try:
 
-     * **`list`** : Lists all students and lessons.
+  * **`list`** : Lists all students and lessons.
 
-     * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
+  * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
 
-     * **`delete`**`3` : Deletes the 3rd student shown in the student list.
+  * **`delete`**`3` : Deletes the 3rd student shown in the student list.
 
   * **`clear`** : Deletes all data (students and lessons).
 
-     * **`exit`** : Exits the app.
+  * **`exit`** : Exits the app.
 
 Refer to the [Features](#features) below for details of each command.
 
