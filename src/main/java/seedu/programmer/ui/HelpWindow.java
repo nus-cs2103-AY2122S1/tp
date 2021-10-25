@@ -96,7 +96,7 @@ public class HelpWindow extends UiPart<Stage> {
                 "add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <email>",
                 "Create records of individual students");
         FeatureTableItem view = new FeatureTableItem("Filter",
-                "filter -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-grade <GRADE>",
+                "filter -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <EMAIL>",
                 "Filter the list with the specified parameters. Multiple fields can be used as the filter criteria");
         FeatureTableItem edit = new FeatureTableItem("Edit",
                 "edit <INDEX_IN_LIST> -n <NAME>/-sid <STUDENT_ID>/-cid <CLASS_ID>/-email <email>",
@@ -107,11 +107,30 @@ public class HelpWindow extends UiPart<Stage> {
         FeatureTableItem show = new FeatureTableItem("Show",
                 "show <INDEX_IN_LIST>",
                 "Show the lab results of the chosen student");
+        FeatureTableItem exit = new FeatureTableItem("Exit",
+                "exit/press Exit button/press F1",
+                "Exit ProgrammerError");
+        FeatureTableItem help = new FeatureTableItem("Help",
+                "help/press Help button/press F2",
+                "Open this Help Window");
         FeatureTableItem download = new FeatureTableItem("Download",
-                "NA, can be accessed by clicking File -> Download in the menu",
+                "Press Download Button/press F3",
                 "Download the database as a csv file");
+        FeatureTableItem upload = new FeatureTableItem("Upload",
+                "Press Upload Button/press F4",
+                "Upload a csv containing students' details to ProgrammerError's database");
+        FeatureTableItem addLab = new FeatureTableItem("AddLab",
+                "addlab -t <LAB_NUMBER> -ts <TOTAL_SCORE>",
+                "Create a lab record for all students in the database");
+        FeatureTableItem delLab = new FeatureTableItem("DeleteLab",
+                "dellab -t <LAB_NUMBER>",
+                "Remove the lab with the selected number from ProgrammerError");
+        FeatureTableItem editLab = new FeatureTableItem("EditLab",
+                "editlab -i<INDEX_IN_LIST> -t <LAB_NUMBER> -s <ACTUAL_SCORE>",
+                "Assign an actual score to the student specified by the index");
         featureTableItems = FXCollections.observableArrayList();
-        featureTableItems.addAll(list, purge, fill, add, view, edit, delete, show, download);
+        featureTableItems.addAll(list, purge, fill, add, view, edit, delete, show,
+                addLab, editLab, delLab, exit, help, download, upload);
     }
 
 

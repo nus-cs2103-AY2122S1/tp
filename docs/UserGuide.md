@@ -99,16 +99,18 @@ Examples:
 
 ### <a name="filter-student"></a>6. Filter List: `filter`
 
-Filter the students in ProgrammerError based on the specified arguments provided (name, student ID or class ID).
-Of the three arguments, at least one has to be provided. Arguments can be provided in any order.
+Filter the students in ProgrammerError based on the specified arguments provided (name, student ID, class ID and email).
+Of the three arguments, at least one has to be provided. Arguments can be provided in any order and
+it is case-insensitive.
 ProgrammerError will display the filtered list of students whose details matches all the specified arguments.
 
-Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
 - `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
+- `filter -email e1234567` Lists all students whose email contains the character sequence `e1234567`.
 - `filter -n Sherwin -cid B01` Lists all students whose name contains the character sequence `Sherwin` and
   belongs to a class with the class ID containing the character sequence `B01`.
 
@@ -157,6 +159,6 @@ Command | Format & Examples
 **Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Exit** | `exit`
 **Fill** | `fill`
-**Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
+**Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Help** | `help`
 **Purge** | `purge`

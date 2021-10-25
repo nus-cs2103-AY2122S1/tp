@@ -3,24 +3,11 @@ package seedu.programmer.ui;
 import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-import org.json.CDL;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.opencsv.CSVReader;
 
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -30,7 +17,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import seedu.programmer.commons.core.GuiSettings;
@@ -38,19 +24,16 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
+import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
 import seedu.programmer.logic.commands.HelpCommandResult;
 import seedu.programmer.logic.commands.ShowCommandResult;
 import seedu.programmer.logic.commands.UploadCommandResult;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.logic.parser.exceptions.ParseException;
-import seedu.programmer.model.Model;
+import seedu.programmer.model.FileManager;
 import seedu.programmer.model.ProgrammerError;
-import seedu.programmer.model.student.ClassId;
-import seedu.programmer.model.student.Email;
-import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
-import seedu.programmer.model.student.StudentId;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -127,6 +110,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerator(KeyCombination.valueOf("F1"), this::handleExit);
         setAccelerator(KeyCombination.valueOf("F2"), this::handleHelp);
         setAccelerator(KeyCombination.valueOf("F3"), this::handleDownload);
+        setAccelerator(KeyCombination.valueOf("F4"), this::handleUpload);
     }
 
     /**
@@ -216,11 +200,12 @@ public class MainWindow extends UiPart<Stage> {
      * Uploads CSV data into ProgrammerError's model storage.
      */
     @FXML
-    private void handleUpload(Model model) {
+    private void handleUpload() {
+        FileManager fm = new FileManager();
         File chosenFile = promptUserForCsvFile();
         List<Student> stuList;
         try {
-            stuList = getStudentsFromCsv(chosenFile);
+            stuList = fm.getStudentsFromCsv(chosenFile);
         } catch (IllegalArgumentException | IOException e) {
             displayPopup("Your CSV seems to be invalid. It should only have studentId, classId, name and email!");
             return;
@@ -233,47 +218,11 @@ public class MainWindow extends UiPart<Stage> {
 
         ProgrammerError newPE = new ProgrammerError();
         newPE.setStudents(stuList);
-        model.setProgrammerError(newPE);
-        model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+        logic.updateProgrammerError(newPE);
+        logic.updateFilteredStudents(PREDICATE_SHOW_ALL_STUDENTS);
+        logic.saveProgrammerError(newPE);
+
         logger.info("Uploaded CSV data successfully!");
-    }
-
-    private File promptUserForCsvFile() {
-        FileChooser fileChooser = new FileChooser();
-        configureFileChooser(fileChooser);
-        return fileChooser.showOpenDialog(primaryStage);
-    }
-
-    private List<Student> getStudentsFromCsv(File chosenFile) throws IllegalArgumentException, IOException {
-        List<Student> stuList = new ArrayList<>();
-
-        CSVReader reader = new CSVReader(new FileReader(chosenFile));
-        String[] headers = reader.readNext();
-        if (headers.length != 4) {
-            return null;
-        }
-
-        String [] nextLine;
-        while ((nextLine = reader.readNext()) != null) {
-            addStudentFromCsvLine(stuList, nextLine);
-        }
-
-        return stuList;
-    }
-
-    private void addStudentFromCsvLine(List<Student> stuList, String[] nextLine) {
-        StudentId sid = new StudentId(nextLine[0]);
-        ClassId cid = new ClassId(nextLine[1]);
-        Name name = new Name(nextLine[2]);
-        Email email = new Email(nextLine[3]);
-        Student s = new Student(name, sid, cid, email);
-        stuList.add(s);
-    }
-
-    private static void configureFileChooser(final FileChooser fileChooser) {
-        fileChooser.setTitle("Select CSV file");
-        ExtensionFilter csvFilter = new ExtensionFilter("All CSVs", "*.csv");
-        fileChooser.getExtensionFilters().add(csvFilter);
     }
 
     /**
@@ -281,7 +230,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleDownload() {
-        JSONArray jsonData = getJsonData();
+        FileManager fm = new FileManager();
+        JSONArray jsonData = fm.getJsonData();
         assert (jsonData != null);
 
         if (jsonData.length() == 0) {
@@ -291,25 +241,22 @@ public class MainWindow extends UiPart<Stage> {
 
         File destinationFile = promptUserForDestination();
         if (destinationFile != null) {
-            writeJsonToCsv(jsonData, destinationFile);
+            fm.writeJsonToCsv(jsonData, destinationFile);
             displayPopup("Your data has been downloaded to " + destinationFile + "!");
             logger.info("Data successfully downloaded as CSV.");
         }
     }
 
+    /**
+     * Displays a popup message at the top-center with respect to the primaryStage.
+     *
+     * @param message to be displayed in the popup object on the primaryStage
+     */
     private void displayPopup(String message) {
         // We should not need to display an empty popup
         assert (message != null);
         Popup popup = createPopup(message);
-        showPopupMessage(popup);
-    }
 
-    /**
-     * Displays a popup message at the top-center with respect to the primaryStage.
-     *
-     * @param popup Popup object to be displayed on the primaryStage
-     */
-    private void showPopupMessage(Popup popup) {
         // Add some left padding according to primaryStage's width
         popup.setX(primaryStage.getX() + primaryStage.getWidth() * 0.04);
 
@@ -341,21 +288,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Writes JSON data to a CSV file.
+     * Shows user a dialog to choose a CSV file.
      *
-     * @param jsonData JSONArray of data
-     * @param destinationFile File object to write to
+     * @return chosen CSV file
      */
-    private void writeJsonToCsv(JSONArray jsonData, File destinationFile) {
-        // If there were no data, we should not even be trying to write anything
-        assert (jsonData.length() > 0);
-        try {
-            String csv = CDL.toString(jsonData);
-            FileUtils.writeStringToFile(destinationFile, csv, Charset.defaultCharset());
-            logger.info("The following data was written:\n" + csv);
-        } catch (IOException | JSONException e) {
-            logger.severe("Unexpected error: " + e);
-        }
+    public File promptUserForCsvFile() {
+        FileChooser fileChooser = new FileChooser();
+        configureFileChooser(fileChooser);
+        return fileChooser.showOpenDialog(primaryStage);
     }
 
     /**
@@ -363,7 +303,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @return File object with a file name appended to the chosen directory
      */
-    private File promptUserForDestination() {
+    public File promptUserForDestination() {
         String destFileName = "programmerError.csv";
         DirectoryChooser dirChooser = new DirectoryChooser();
         File chosenDir = dirChooser.showDialog(primaryStage);
@@ -371,21 +311,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Retrieves students' JSON data stored in ProgrammerError.
+     * Configures file chooser to accept only CSV files.
      *
-     * @return JSONArray of student's data
+     * @param fileChooser FileChooser object
      */
-    private JSONArray getJsonData() {
-        String resourceName = "data/programmerError.json";
-        try {
-            InputStream is = new FileInputStream(resourceName);
-            String jsonTxt = IOUtils.toString(is, StandardCharsets.UTF_8);
-            JSONObject json = new JSONObject(jsonTxt);
-            return json.getJSONArray("students");
-        } catch (IOException | JSONException e) {
-            logger.severe("Error with the file!");
-            return null;
-        }
+    private static void configureFileChooser(final FileChooser fileChooser) {
+        fileChooser.setTitle("Select CSV file");
+        FileChooser.ExtensionFilter csvFilter = new FileChooser.ExtensionFilter("All CSVs", "*.csv");
+        fileChooser.getExtensionFilters().add(csvFilter);
     }
 
     /**
@@ -410,9 +343,10 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof DownloadCommandResult) {
                 handleDownload();
             } else if (commandResult instanceof UploadCommandResult) {
-                UploadCommandResult ucr = (UploadCommandResult) commandResult;
-                Model m = ucr.getModel();
-                handleUpload(m);
+                handleUpload();
+            } else if (commandResult instanceof EditCommandResult) {
+                EditCommandResult editCommandResult = (EditCommandResult) commandResult;
+                handleShowResult(editCommandResult.getEditedStudent());
             }
 
             return commandResult;

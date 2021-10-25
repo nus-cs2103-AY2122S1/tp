@@ -13,24 +13,27 @@ public class QueryStudentDescriptor {
     private String name;
     private String studentId;
     private String classId;
+    private String email;
 
     /**
      * Constructor with the query parameters.
      * @param name the name to be queried.
      * @param sid the student ID to be queried.
      * @param cid the class ID to be queried.
+     * @param email the email to be queried.
      */
-    public QueryStudentDescriptor(String name, String sid, String cid) {
+    public QueryStudentDescriptor(String name, String sid, String cid, String email) {
         this.name = name;
         this.studentId = sid;
         this.classId = cid;
+        this.email = email;
     }
 
     /**
      * Returns true if at least one field is edited.
      */
     public boolean isAnyFieldToBeQueried() {
-        return CollectionUtil.isAnyNonNull(name, studentId, classId);
+        return CollectionUtil.isAnyNonNull(name, studentId, classId, email);
     }
 
     private Optional<String> getName() {
@@ -45,6 +48,10 @@ public class QueryStudentDescriptor {
         return Optional.ofNullable(classId);
     }
 
+    private Optional<String> getEmail() {
+        return Optional.ofNullable(email);
+    }
+
     /**
      * Returns true if {@code student} fields matches that given in {@code QueryStudentDescriptor}.
      * @param student to be tested to ascertain if the fields matches..
@@ -54,14 +61,17 @@ public class QueryStudentDescriptor {
         Optional<String> nameToBeQueried = getName();
         Optional<String> sidToBeQueried = getStudentId();
         Optional<String> cidToBeQueried = getClassId();
+        Optional<String> emailToBeQueried = getEmail();
 
-        Name studentName = student.getName();
-        StudentId studentSid = student.getStudentId();
-        ClassId studentCid = student.getClassId();
+        String studentName = student.getNameValue();
+        String studentSid = student.getStudentIdValue();
+        String studentCid = student.getClassIdValue();
+        String studentEmail = student.getEmailValue();
 
-        return doesOptionalContainsField(nameToBeQueried, studentName.fullName)
-                && doesOptionalContainsField(sidToBeQueried, studentSid.studentId)
-                && doesOptionalContainsField(cidToBeQueried, studentCid.classId);
+        return doesOptionalContainsField(nameToBeQueried, studentName)
+                && doesOptionalContainsField(sidToBeQueried, studentSid)
+                && doesOptionalContainsField(cidToBeQueried, studentCid)
+                && doesOptionalContainsField(emailToBeQueried, studentEmail);
     }
     /**
      * Checks if {@code str} character sequence matches any of the content of the {@code optional}.
@@ -94,6 +104,7 @@ public class QueryStudentDescriptor {
 
         return getName().equals(e.getName())
                 && getStudentId().equals(e.getStudentId())
-                && getClassId().equals(e.getClassId());
+                && getClassId().equals(e.getClassId())
+                && getEmail().equals(e.getEmail());
     }
 }

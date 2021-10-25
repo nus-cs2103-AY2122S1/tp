@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.programmer.model.student.comparator.SortByLabName;
 
 
 /**
@@ -52,25 +53,38 @@ public class Student {
         return name;
     }
 
-    public String getFullName() {
-        return name.fullName;
+    public String getNameValue() {
+        return name.toString();
     }
 
     public StudentId getStudentId() {
         return studentId;
     }
 
+    public String getStudentIdValue() {
+        return studentId.toString();
+    }
+
     public ClassId getClassId() {
         return classId;
+    }
+
+    public String getClassIdValue() {
+        return classId.toString();
     }
 
     public Email getEmail() {
         return email;
     }
 
+    public String getEmailValue() {
+        return email.toString();
+    }
+
     public ObservableList<Lab> getLabResultList() {
         return labResultList;
     }
+
     public Lab getLab(int index) {
         return labResultList.get(index);
     }
@@ -115,6 +129,7 @@ public class Student {
         }
         this.labResultList.addAll(labResultRecord);
     }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.
@@ -171,9 +186,9 @@ public class Student {
      * Create a new Student Object with the same fields.
      * @return a copy of the Student
      * */
-    public Student clone() {
-        Student clone = new Student(name, studentId, classId, email);
-        clone.setLabResultRecord(labResultList);
-        return clone;
+    public Student copy() {
+        Student studentCopy = new Student(name, studentId, classId, email);
+        studentCopy.setLabResultRecord(labResultList);
+        return studentCopy;
     }
 }

@@ -66,17 +66,32 @@ public class FilterCommandParserTest {
     }
 
     @Test
+    public void parse_emptyEmailArg_throwsParseException() {
+        // no trailing whitespace
+        assertParseFailure(parser, " -email",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+
+        // single trailing whitespace
+        assertParseFailure(parser, " -email ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+
+        // multiple trailing whitespace
+        assertParseFailure(parser, " -email   ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+    }
+
+    @Test
     public void parse_multipleEmptyArgs_throwsParseException() {
         // no trailing whitespace
-        assertParseFailure(parser, " -n -sid -cid",
+        assertParseFailure(parser, " -n -sid -cid -email",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
 
         // single trailing whitespace
-        assertParseFailure(parser, " -n  -sid  -cid ",
+        assertParseFailure(parser, " -n  -sid  -cid -email ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
 
         // single trailing whitespace
-        assertParseFailure(parser, " -n    -sid    -cid   ",
+        assertParseFailure(parser, " -n    -sid    -cid   -email      ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
     }
 
@@ -100,7 +115,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_validSingleArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor("Alice", null, null);
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor("Alice", null, null, null);
         StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
         FilterCommand expectedFilterCommand =
                 new FilterCommand(queryPredicate);
@@ -113,7 +128,7 @@ public class FilterCommandParserTest {
     @Test
     public void parse_validMultipleArgs_returnsFilterCommand() {
         // no leading and trailing whitespaces
-        QueryStudentDescriptor queryFields = new QueryStudentDescriptor("Alice", "A1234567X", "B01");
+        QueryStudentDescriptor queryFields = new QueryStudentDescriptor("Alice", "A1234567X", "B01", null);
         StudentDetailContainsQueryPredicate queryPredicate = new StudentDetailContainsQueryPredicate(queryFields);
         FilterCommand expectedFilterCommand =
                 new FilterCommand(queryPredicate);

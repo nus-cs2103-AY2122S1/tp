@@ -12,7 +12,7 @@ public class ExitCommand extends Command {
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting ProgrammerError as requested ...";
 
     @Override
-    public CommandResult execute(Model model) {
+    public ExitCommandResult execute(Model model) {
         return new ExitCommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 

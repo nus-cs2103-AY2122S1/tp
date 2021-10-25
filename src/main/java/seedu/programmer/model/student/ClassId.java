@@ -15,9 +15,9 @@ public class ClassId {
     /*
      * A class ID must start with an alphabet followed by two numbers.
      */
-    public static final String VALIDATION_REGEX = "[B][0-9]{2}";
+    private static final String VALIDATION_REGEX = "[B][0-9]{2}";
 
-    public final String classId;
+    private final String classId;
 
     /**
      * Constructs a {@code classID}.
