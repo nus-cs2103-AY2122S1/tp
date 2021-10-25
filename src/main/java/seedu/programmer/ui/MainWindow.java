@@ -105,7 +105,6 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        dashboardWindow = new DashboardWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -203,15 +202,8 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleDashboard() {
-        try {
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/DashboardWindow.fxml")));
-            primaryStage.getScene().setRoot(root);
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-        } catch (IOException e) {
-            logger.severe("DASHBOARD ERROR： " + e);
-        }
+        dashboardWindow = new DashboardWindow(new Stage());
+        dashboardWindow.show();
     }
 
     /**
