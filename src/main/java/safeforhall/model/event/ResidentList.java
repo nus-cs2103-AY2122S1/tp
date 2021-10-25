@@ -124,16 +124,13 @@ public class ResidentList {
     }
 
     /**
-     * Returns a string consisting of past and new residents for the event.
+     * Returns a string of person details, consisting of past and new residents for the event.
      *
-     * @param current  A string of current residents of the event.
      * @param toAdd    A string of residents to add to the event.
      *
      * @return A String consisting of past and new residents for the event.
      */
-    public String getCombinedStorageString(ArrayList<Person> current, ArrayList<Person> toAdd) {
-        ArrayList<Person> temp = new ArrayList<>();
-        residentList.addAll(temp);
+    public String getCombinedStorageString(ArrayList<Person> toAdd) {
         StringBuilder newResidentList;
 
         if (residentsStorage.equals(DEFAULT_LIST)) {
@@ -142,20 +139,14 @@ public class ResidentList {
             newResidentList = new StringBuilder(residentsStorage);
         }
 
-        for (Person person : current) {
-            if (!temp.contains(person)) {
-                temp.add(person);
-            }
-        }
         for (Person person : toAdd) {
-            if (!temp.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+            if (!newResidentList.toString().equals(EMPTY_STRING)) {
                 newResidentList.append(", ").append(person);
-                temp.add(person);
-            } else if (!temp.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+            } else {
                 newResidentList.append(person);
-                temp.add(person);
             }
         }
+
         if (newResidentList.toString().equals(EMPTY_STRING)) {
             return DEFAULT_LIST;
         } else {
@@ -164,16 +155,13 @@ public class ResidentList {
     }
 
     /**
-     * Returns a string consisting of past and new residents for the event.
+     * Returns a string of names, consisting of past and new residents for the event.
      *
-     * @param current  A string of current residents of the event.
      * @param toAdd    A string of residents to add to the event.
      *
      * @return A String consisting of past and new residents for the event.
      */
-    public String getCombinedDisplayString(ArrayList<Person> current, ArrayList<Person> toAdd) {
-        ArrayList<Person> temp = new ArrayList<>();
-        residentList.addAll(temp);
+    public String getCombinedDisplayString(ArrayList<Person> toAdd) {
         StringBuilder newResidentList;
 
         if (residentsDisplay.equals(DEFAULT_LIST)) {
@@ -182,21 +170,69 @@ public class ResidentList {
             newResidentList = new StringBuilder(residentsDisplay);
         }
 
-        for (Person person : current) {
-            if (!temp.contains(person)) {
-                temp.add(person);
-            }
-        }
         for (Person person : toAdd) {
-            if (!temp.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+            if (!newResidentList.toString().equals(EMPTY_STRING)) {
                 newResidentList.append(", ").append(person.getName());
-                temp.add(person);
-            } else if (!temp.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+            } else {
                 newResidentList.append(person.getName());
-                temp.add(person);
             }
         }
-        return newResidentList.toString();
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
+     * Returns a string of person details, consisting of the remaining residents for the event.
+     *
+     * @param toRemove    A string of residents to add to the event.
+     *
+     * @return A String consisting of past and new residents for the event.
+     */
+    public String getRemovedStorageString(ArrayList<Person> toRemove) {
+        StringBuilder newResidentList = new StringBuilder("");
+
+        for (Person person : residentList) {
+            if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person);
+            } else if (!toRemove.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(person);
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
+    }
+
+    /**
+     * Returns a string of names, consisting of the remaining residents for the event.
+     *
+     * @param toRemove    A string of residents to remove from the event.
+     *
+     * @return A String consisting of the remaining residents for the event.
+     */
+    public String getRemovedDisplayString(ArrayList<Person> toRemove) {
+        StringBuilder newResidentList = new StringBuilder("");
+
+        for (Person person : residentList) {
+            if (!toRemove.contains(person) && !newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(", ").append(person.getName());
+            } else if (!toRemove.contains(person) && newResidentList.toString().equals(EMPTY_STRING)) {
+                newResidentList.append(person.getName());
+            }
+        }
+
+        if (newResidentList.toString().equals(EMPTY_STRING)) {
+            return DEFAULT_LIST;
+        } else {
+            return newResidentList.toString();
+        }
     }
 
     /**

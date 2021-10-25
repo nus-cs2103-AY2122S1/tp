@@ -80,8 +80,8 @@ public class EventBuilder {
     /**
      * Sets the {@code ResidentList} of the {@code Event} that we are building.
      */
-    public EventBuilder withResidentList(String residents) {
-        this.residents = new ResidentList(residents);
+    public EventBuilder withResidentList(String residentsDisplay, String residentStorage) {
+        this.residents = new ResidentList(residentsDisplay, residentStorage);
         return this;
     }
 

@@ -60,7 +60,7 @@ public class AddEventCommand extends Command {
         }
 
         ArrayList<Person> personList = model.toPersonList(toAdd.getResidents());
-        String combinedStorageString = toAdd.getCombinedStorageString(new ArrayList<>(), personList);
+        String combinedStorageString = toAdd.getCombinedStorageString(personList);
         Event editedEvent = new Event(toAdd.getEventName(), toAdd.getEventDate(), toAdd.getVenue(),
                 toAdd.getCapacity(), new ResidentList(personListToString(personList), combinedStorageString));
         model.addEvent(editedEvent);

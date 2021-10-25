@@ -6,6 +6,7 @@ import java.util.List;
 
 import safeforhall.model.AddressBook;
 import safeforhall.model.event.Event;
+import safeforhall.model.event.ResidentList;
 
 /**
  * A utility class containing a list of {@code Event} objects to be used in tests.
@@ -15,43 +16,56 @@ public class TypicalEvents {
             .withEventDate("10-10-2021")
             .withVenue("basketball court")
             .withCapacity("5")
-            .withResidentList("None")
+            .withResidentList(ResidentList.DEFAULT_LIST, ResidentList.DEFAULT_LIST)
             .build();
     public static final Event VOLLEYBALL = new EventBuilder().withEventName("volleyball")
             .withEventDate("12-10-2021")
             .withVenue("volleyball court")
             .withCapacity("6")
-            .withResidentList("Daniel Meier")
+            .withResidentList(TypicalPersons.DANIEL.getName().toString(), TypicalPersons.DANIEL.toString())
             .build();
     public static final Event POWERLIFTING = new EventBuilder().withEventName("powerlifting")
             .withEventDate("15-10-2021")
             .withVenue("gym")
             .withCapacity("7")
-            .withResidentList("Elle Meyer, Fiona Kunz, George Best")
+            .withResidentList(TypicalPersons.ELLE.getName().toString()
+                    + ", " + TypicalPersons.FIONA.getName().toString()
+                    + ", " + TypicalPersons.GEORGE.getName().toString(),
+                    TypicalPersons.ELLE.toString()
+                            + ", " + TypicalPersons.FIONA.toString()
+                            + ", " + TypicalPersons.GEORGE.toString())
             .build();
     public static final Event SWIM = new EventBuilder().withEventName("swim")
             .withEventDate("10-09-2021")
             .withVenue("swimming pool")
             .withCapacity("8")
-            .withResidentList("George Best")
+            .withResidentList(TypicalPersons.GEORGE.getName().toString(), TypicalPersons.GEORGE.toString())
             .build();
     public static final Event BAND = new EventBuilder().withEventName("band")
             .withEventDate("10-11-2021")
             .withVenue("band room")
             .withCapacity("9")
-            .withResidentList("Carl Kurz, Benson Meier")
+            .withResidentList(TypicalPersons.CARL.getName().toString()
+                            + ", " + TypicalPersons.BENSON.getName().toString(),
+                    TypicalPersons.CARL.toString()
+                            + ", " + TypicalPersons.BENSON.toString())
             .build();
     public static final Event ROAD_RELAY = new EventBuilder().withEventName("road relay")
             .withEventDate("12-12-2021")
             .withVenue("track")
             .withCapacity("10")
-            .withResidentList("George Best")
+            .withResidentList(TypicalPersons.GEORGE.getName().toString(), TypicalPersons.GEORGE.toString())
             .build();
     public static final Event DANCE = new EventBuilder().withEventName("dance")
             .withEventDate("01-11-2021")
             .withVenue("studio")
             .withCapacity("11")
-            .withResidentList("George Best, Carl Kurz, Benson Meier")
+            .withResidentList(TypicalPersons.GEORGE.getName().toString()
+                            + ", " + TypicalPersons.CARL.getName().toString()
+                            + ", " + TypicalPersons.BENSON.getName().toString(),
+                    TypicalPersons.GEORGE.toString()
+                            + ", " + TypicalPersons.CARL.toString()
+                            + ", " + TypicalPersons.BENSON.toString())
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

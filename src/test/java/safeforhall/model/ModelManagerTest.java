@@ -29,7 +29,6 @@ import safeforhall.model.person.Person;
 import safeforhall.testutil.AddressBookBuilder;
 import safeforhall.testutil.EventBuilder;
 
-
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
@@ -248,7 +247,7 @@ public class ModelManagerTest {
         modelManager = new ModelManager(addressBook, userPrefs);
 
         EventBuilder eventBuilder = new EventBuilder();
-        Event event = eventBuilder.withResidentList("Alice Pauline").build();
+        Event event = eventBuilder.withResidentList(ALICE.getName().toString(), ALICE.toString()).build();
         String result = modelManager.getInvalidResident(event);
         assertEquals(result, "");
     }
@@ -261,7 +260,11 @@ public class ModelManagerTest {
         modelManager = new ModelManager(addressBook, userPrefs);
 
         EventBuilder eventBuilder = new EventBuilder();
-        Event event = eventBuilder.withResidentList("John").build();
+        Event event = eventBuilder.withResidentList("John", "John; "
+                + "Room: C111; Phone: 91031280; "
+                + "Email: lijohn@example.com; Vaccinated: T; "
+                + "Faculty: SDE; Last Fet Date: 02-10-2021; "
+                + "Last Collection Date: 01-10-2021").build();
         String result = modelManager.getInvalidResident(event);
         assertEquals(result, "John");
     }

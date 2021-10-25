@@ -137,13 +137,11 @@ public class ModelManager implements Model {
         if (residentList.isEmpty()) {
             return personList;
         }
-        System.out.println(residentList.getResidentsStorage() + "  dsfdsf");
         String[] residentInformation = residentList.getResidentsStorage().split("\\s*,\\s*");
 
         for (String information : residentInformation) {
             String[] informationList = information.split("\\s*;\\s*");
             Optional<Person> personFound;
-            System.out.println(informationList[0]);
             personFound = addressBook.findPerson(informationList[0]);
 
             if (personFound.isEmpty()) {
