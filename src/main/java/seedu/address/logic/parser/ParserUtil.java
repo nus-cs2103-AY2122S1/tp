@@ -217,6 +217,9 @@ public class ParserUtil {
         return new Date(strippedDate);
     }
 
+    /**
+     * Parses {@code Collection<String> dates} into a {@code Set<Date>}.
+     */
     public static Set<Date> parseDates(Collection<String> dates) throws ParseException {
         requireNonNull(dates);
         final Set<Date> dateSet = new HashSet<>();

@@ -54,13 +54,14 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         }
 
         assert indices.length == 2;
+        Index studentIndex = indices[0];
+        Index lessonIndex = indices[1];
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editLessonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {
             editLessonDescriptor.setTimeRange(ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get()));
         }
@@ -73,10 +74,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         if (argMultimap.getValue(PREFIX_RATES).isPresent()) {
             editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
         }
-
         parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_CANCEL))
                 .ifPresent(editLessonDescriptor::setCancelledDates);
-
         parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_UNCANCEL))
                 .ifPresent(editLessonDescriptor::setUncancelledDates);
 
@@ -84,10 +83,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             throw new ParseException(LessonEditCommand.MESSAGE_NOT_EDITED);
         }
 
-        /*
-        First index identifies the student; second identifies the lesson of the student to be edited.
-         */
-        return new LessonEditCommand(indices[0], indices[1], editLessonDescriptor);
+        return new LessonEditCommand(studentIndex, lessonIndex, editLessonDescriptor);
     }
 
     /**

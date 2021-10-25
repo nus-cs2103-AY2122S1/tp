@@ -1,10 +1,27 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
@@ -16,26 +33,8 @@ import seedu.address.model.lesson.TimeRange;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.PersonUtil;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing lesson in the address book.
  */
 public class LessonEditCommand extends UndoableCommand {
 
@@ -65,111 +64,40 @@ public class LessonEditCommand extends UndoableCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the lesson identified by lesson index"
             + " of the student identified by the index number used in the displayed student list.\n"
             + "All fields of a lesson can be edited, with the exception of the start date.\n"
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: " + COMMAND_PARAMETERS + "\n"
+            + "Existing values will be overwritten by the input values.\n" + "Parameters: " + COMMAND_PARAMETERS + "\n"
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_EDIT_LESSON_SUCCESS = "Edited lesson for student %1$s:\n%2$s\nto %3$s";
     public static final String MESSAGE_CLASHING_LESSON = "This edit will result in clashes with an existing lesson.";
     public static final String MESSAGE_NOT_EDITED = "You must be provide at least one field to edit!";
-    public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE = "You cannot edit the type of a lesson. Please add another"
-            + " lesson if you wish to do so.";
+    public static final String MESSAGE_ATTEMPT_TO_EDIT_TYPE =
+            "You cannot edit the type of a lesson. Please add another" + " lesson if you wish to do so.";
+
     public static final String MESSAGE_INVALID_CANCEL_DATE =
-            "Cannot cancel! This lesson does not occur on the given date."; // todo
+            "Failed to cancel lesson! This lesson does not occur on %1$s.";
     public static final String MESSAGE_INVALID_UNCANCEL_DATE =
-            "Cannot uncancel! This lesson does not have cancelled dates that occur on the given date."; // todo
-    private final Index personIndex;
+            "Failed to uncancel lesson! This lesson does not have a cancelled lesson on %1$s.";
+
+
+    private final Index index;
     private final Index lessonIndex;
     private final EditLessonDescriptor editLessonDescriptor;
     private Person personBeforeLessonEdit;
     private Person personAfterLessonEdit;
 
     /**
-     * @param personIndex of the person in the filtered person list to edit.
+     * Creates a LessonEditCommand to edit the lesson at the specified lesson index.
+     *
+     * @param index       of the person in the filtered person list to edit.
      * @param lessonIndex to edit.
      */
-    public LessonEditCommand(Index personIndex, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
-        requireNonNull(personIndex);
+    public LessonEditCommand(Index index, Index lessonIndex, EditLessonDescriptor editLessonDescriptor) {
+        requireNonNull(index);
         requireNonNull(lessonIndex);
 
-        this.personIndex = personIndex;
+        this.index = index;
         this.lessonIndex = lessonIndex;
         this.editLessonDescriptor = editLessonDescriptor;
-    }
-
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, Set<Lesson> updatedLessons) {
-        assert personToEdit != null;
-
-        return PersonUtil.createdEditedPerson(personToEdit, updatedLessons);
-    }
-
-    /**
-     * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor)
-            throws CommandException {
-        assert lessonToEdit != null;
-        Date startDate = lessonToEdit.getStartDate();
-        Date updatedDate = editLessonDescriptor.getDate().orElse(startDate);
-        // update start date -> reset cancelled date list
-        // get cancelled dates and filter only relevant ones
-
-        TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
-        Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
-        Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
-        LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
-
-        // filter out dates after start date
-        Set<Date> cancelledDates = lessonToEdit.getCancelledDates().stream().filter(
-                date -> updatedDate.isSameDayOfWeek(startDate) && !updatedDate.isAfter(date)).collect(
-                Collectors.toSet());
-
-        Lesson lessonBeforeUpdateCancelledDates = lessonToEdit.isRecurring() ? new RecurringLesson(updatedDate,
-                updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate, cancelledDates) : new MakeUpLesson(
-                updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate, cancelledDates);
-        Set<Date> updatedCancelledDates = createEditedCancelledDates(lessonBeforeUpdateCancelledDates,
-                editLessonDescriptor);
-        return lessonBeforeUpdateCancelledDates.createUpdatedCancelledDatesLesson(updatedCancelledDates);
-    }
-
-    private static Set<Date> createEditedCancelledDates(Lesson lesson, EditLessonDescriptor editLessonDescriptor)
-            throws CommandException {
-        Set<Date> validCancelledDates = new HashSet<>(lesson.getCancelledDates());
-
-        Set<Date> datesToCancel = new HashSet<>(editLessonDescriptor.getCancelledDates().orElse(new HashSet<>()));
-        Set<Date> datesToUncancel = new HashSet<>(editLessonDescriptor.getUncancelledDates().orElse(new HashSet<>()));
-
-        // remove dates that appear in both cancelled and uncancelled input
-        Set<Date> duplicates = new HashSet<>(datesToCancel);
-        duplicates.retainAll(datesToUncancel);
-        datesToCancel.removeAll(duplicates);
-        datesToUncancel.removeAll(duplicates);
-
-        // Process cancelled dates
-        for (Date date : datesToCancel) {
-            // check if date is an existing lesson date
-            if (!lesson.hasLessonOnDate(date)) {
-                throw new CommandException(MESSAGE_INVALID_CANCEL_DATE);
-            }
-            // Add to cancelled dates
-            validCancelledDates.add(date);
-        }
-
-        // Check uncancelled dates
-        for (Date date : datesToUncancel) {
-            // check if date is an existing lesson date
-            if (!validCancelledDates.contains(date)) {
-                throw new CommandException(MESSAGE_INVALID_UNCANCEL_DATE);
-            }
-            // Remove from cancelled dates
-            validCancelledDates.remove(date);
-        }
-        return validCancelledDates;
     }
 
     @Override
@@ -177,14 +105,14 @@ public class LessonEditCommand extends UndoableCommand {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        personBeforeLessonEdit = getPerson(lastShownList);
+        personBeforeLessonEdit = CommandUtil.getPerson(lastShownList, index);
 
         List<Lesson> lessonList = personBeforeLessonEdit.getLessons().stream().sorted().collect(Collectors.toList());
-        Lesson lessonToEdit = getLesson(lessonList);
+        Lesson lessonToEdit = CommandUtil.getLesson(lessonList, lessonIndex);
         Lesson editedLesson = createEditedLesson(lessonToEdit, editLessonDescriptor);
-        Set<Lesson> updatedLessons = createUpdatedLessons(lessonList, editedLesson, lessonToEdit);
 
-        personAfterLessonEdit = createEditedPerson(personBeforeLessonEdit, updatedLessons);
+        Set<Lesson> updatedLessons = createUpdatedLessons(lessonList, editedLesson, lessonToEdit);
+        personAfterLessonEdit = PersonUtil.createdEditedPerson(personBeforeLessonEdit, updatedLessons);
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -193,35 +121,121 @@ public class LessonEditCommand extends UndoableCommand {
                 personAfterLessonEdit);
     }
 
-    private Person getPerson(List<Person> personList) throws CommandException {
-        if (personIndex.getZeroBased() >= personList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
+    /**
+     * Creates and returns a {@code Lesson} with the details of {@code lessonToEdit}
+     * edited with {@code editPersonDescriptor}.
+     */
+    public Lesson createEditedLesson(Lesson lessonToEdit, EditLessonDescriptor editLessonDescriptor)
+            throws CommandException {
+        assert lessonToEdit != null;
+        Date updatedDate = editLessonDescriptor.getDate().orElse(lessonToEdit.getStartDate());
+        TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange().orElse(lessonToEdit.getTimeRange());
+        Subject updatedSubject = editLessonDescriptor.getSubject().orElse(lessonToEdit.getSubject());
+        Set<Homework> updatedHomeworkSet = editLessonDescriptor.getHomeworkSet().orElse(lessonToEdit.getHomework());
+        LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
+        // filter out dates after start date
+        Set<Date> filteredCancelledDates = lessonToEdit.getCancelledDates().stream()
+                .filter(date -> date.isOnRecurringDate(updatedDate)).collect(Collectors.toSet());
 
-        return personList.get(personIndex.getZeroBased());
+        // lesson before handling cancel and uncancel of dates
+        Lesson lessonBeforeUpdateCancelledDates = lessonToEdit.isRecurring()
+                ? new RecurringLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate,
+                        filteredCancelledDates)
+                : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate,
+                        filteredCancelledDates);
+
+        if (!editLessonDescriptor.isCancelledDatesEdited()) {
+            return lessonBeforeUpdateCancelledDates;
+        }
+        Set<Date> datesToCancel = new HashSet<>(editLessonDescriptor.getCancelledDates().orElse(new HashSet<>()));
+        Set<Date> datesToUncancel = new HashSet<>(editLessonDescriptor.getUncancelledDates().orElse(new HashSet<>()));
+
+        Set<Date> updatedCancelledDates = createUpdatedCancelledDates(lessonBeforeUpdateCancelledDates, datesToCancel,
+                datesToUncancel);
+        return lessonBeforeUpdateCancelledDates.updateCancelledDates(updatedCancelledDates);
     }
 
-    private Lesson getLesson(List<Lesson> lessonList) throws CommandException {
-        if (lessonIndex.getZeroBased() >= lessonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
-        }
+    /**
+     * Creates and returns a set of cancelled dates edited with {@code datesToCancel} and {@code datesToUncancel}.
+     *
+     * @param lesson Lesson with the cancelled dates.
+     * @param datesToCancel A set of lesson dates to add to cancelled dates.
+     * @param datesToUncancel A set of lesson dates to remove from cancelled dates.
+     * @return A set of updated cancelled dates.
+     * @throws CommandException
+     */
+    private static Set<Date> createUpdatedCancelledDates(Lesson lesson, Set<Date> datesToCancel,
+                                                         Set<Date> datesToUncancel) throws CommandException {
+        Set<Date> updatedCancelledDates = new HashSet<>(lesson.getCancelledDates());
 
-        return lessonList.get(lessonIndex.getZeroBased());
+        // remove dates that appear in both cancelled and uncancelled input
+        Set<Date> duplicates = new HashSet<>(datesToCancel);
+        duplicates.retainAll(datesToUncancel);
+        datesToCancel.removeAll(duplicates);
+        datesToUncancel.removeAll(duplicates);
+
+        validateCancelledDates(lesson, datesToCancel);
+        validateUncancelledDates(updatedCancelledDates, datesToUncancel);
+        updatedCancelledDates.addAll(datesToCancel);
+        updatedCancelledDates.removeAll(datesToUncancel);
+
+        return updatedCancelledDates;
     }
 
+
+    /**
+     * Checks if {@code datesToCancel} are valid lesson dates.
+     *
+     * @param lesson Lesson to cancel.
+     * @param datesToCancel A set of dates to cancel.
+     * @throws CommandException If the date to cancel is invalid.
+     */
+    private static void validateCancelledDates(Lesson lesson, Set<Date> datesToCancel) throws CommandException {
+        for (Date date : datesToCancel) {
+            // check if date is a lesson date
+            if (!lesson.hasLessonOnDate(date)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_CANCEL_DATE, date));
+            }
+        }
+    }
+
+    /**
+     * Checks if {@code datesToUncancel} are valid cancelled lesson dates.
+     *
+     * @param cancelledDates A set of cancelled dates.
+     * @param datesToUncancel A set of dates to remove from cancelled dates.
+     * @throws CommandException If the date to uncancel is invalid.
+     */
+    private static void validateUncancelledDates(Set<Date> cancelledDates, Set<Date> datesToUncancel)
+            throws CommandException {
+        for (Date date : datesToUncancel) {
+            // check if date is a cancelled date
+            if (!cancelledDates.contains(date)) {
+                throw new CommandException(String.format(MESSAGE_INVALID_UNCANCEL_DATE, date));
+            }
+        }
+    }
+
+    /**
+     * Replaces lesson {@code toEdit} with lesson {@code edited} in {@code lessonList}.
+     *
+     * @param lessonList A list of lessons to update.
+     * @param edited The edited lesson.
+     * @param toEdit The original lesson to be edited.
+     * @return A set of updated lessons with the lesson edited.
+     * @throws CommandException If the edited lesson results in a clash.
+     */
     private Set<Lesson> createUpdatedLessons(List<Lesson> lessonList, Lesson edited, Lesson toEdit)
             throws CommandException {
-        /*
-        Check if the edited lesson clashes with any existing lessons apart from the one to be
-        edited.
-         */
+        // Checks if the edited lesson clashes with any existing lessons apart from the one to be edited.
         if (model.hasClashingLesson(edited, toEdit)) {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
-        Set<Lesson> updatedLessons = new TreeSet<>(
-                lessonList.stream().map(lesson -> lesson.equals(toEdit) ? edited : lesson).collect(Collectors.toSet()));
+        lessonList.remove(toEdit);
+        lessonList.add(edited);
+        Set<Lesson> updatedLessonSet = new TreeSet<>(lessonList);
 
-        return updatedLessons;
+        return updatedLessonSet;
     }
 
     @Override
@@ -257,8 +271,9 @@ public class LessonEditCommand extends UndoableCommand {
 
         // state check
         LessonEditCommand e = (LessonEditCommand) other;
-        return personIndex.equals(e.personIndex) && lessonIndex.equals(lessonIndex) && editLessonDescriptor.equals(
-                e.editLessonDescriptor);
+        return index.equals(e.index)
+                && lessonIndex.equals(lessonIndex)
+                && editLessonDescriptor.equals(e.editLessonDescriptor);
     }
 
     /**
@@ -278,8 +293,7 @@ public class LessonEditCommand extends UndoableCommand {
 
         // Absence of isRecurring boolean field as changes to type of lesson is disallowed.
 
-        public EditLessonDescriptor() {
-        }
+        public EditLessonDescriptor() {}
 
         /**
          * Copy constructor.
@@ -301,6 +315,10 @@ public class LessonEditCommand extends UndoableCommand {
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate, cancelledDates,
                     uncancelledDates);
+        }
+
+        public boolean isCancelledDatesEdited() {
+            return CollectionUtil.isAnyNonNull(cancelledDates, uncancelledDates);
         }
 
         public Optional<Date> getDate() {
@@ -332,7 +350,9 @@ public class LessonEditCommand extends UndoableCommand {
          * A defensive copy of {@code homeworkSet} is used internally.
          */
         public Optional<Set<Homework>> getHomeworkSet() {
-            return (homeworkSet != null) ? Optional.of(Collections.unmodifiableSet(homeworkSet)) : Optional.empty();
+            return (homeworkSet != null)
+                    ? Optional.of(Collections.unmodifiableSet(homeworkSet))
+                    : Optional.empty();
         }
 
         /**
@@ -353,8 +373,9 @@ public class LessonEditCommand extends UndoableCommand {
         }
 
         public Optional<Set<Date>> getCancelledDates() {
-            return (cancelledDates != null) ? Optional.of(Collections.unmodifiableSet(cancelledDates)) :
-                    Optional.empty();
+            return (cancelledDates != null)
+                    ? Optional.of(Collections.unmodifiableSet(cancelledDates))
+                    : Optional.empty();
         }
 
         public void setCancelledDates(Set<Date> cancelledDates) {
@@ -362,8 +383,9 @@ public class LessonEditCommand extends UndoableCommand {
         }
 
         public Optional<Set<Date>> getUncancelledDates() {
-            return (uncancelledDates != null) ? Optional.of(Collections.unmodifiableSet(uncancelledDates)) :
-                    Optional.empty();
+            return (uncancelledDates != null)
+                    ? Optional.of(Collections.unmodifiableSet(uncancelledDates))
+                    : Optional.empty();
         }
 
         public void setUncancelledDates(Set<Date> uncancelledDates) {
@@ -385,10 +407,13 @@ public class LessonEditCommand extends UndoableCommand {
             // state check
             EditLessonDescriptor e = (EditLessonDescriptor) other;
 
-            return getDate().equals(e.getDate()) && getTimeRange().equals(e.getTimeRange()) && getSubject().equals(
-                    e.getSubject()) && getHomeworkSet().equals(e.getHomeworkSet()) && getRate().equals(e.getRate()) &&
-                    getUncancelledDates().equals(e.getUncancelledDates()) && getCancelledDates().equals(
-                    e.getCancelledDates());
+            return getDate().equals(e.getDate())
+                    && getTimeRange().equals(e.getTimeRange())
+                    && getSubject().equals(e.getSubject())
+                    && getHomeworkSet().equals(e.getHomeworkSet())
+                    && getRate().equals(e.getRate())
+                    && getUncancelledDates().equals(e.getUncancelledDates())
+                    && getCancelledDates().equals(e.getCancelledDates());
         }
     }
 }

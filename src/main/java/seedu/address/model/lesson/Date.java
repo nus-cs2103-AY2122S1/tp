@@ -111,6 +111,22 @@ public class Date implements Comparable<Date> {
         return localDate.getDayOfWeek().equals(other.getDayOfWeek());
     }
 
+    /**
+     * Checks is this date clashes with a recurring date.
+     *
+     * @param recurringStartDate
+     * @return
+     */
+    public boolean isOnRecurringDate(Date recurringStartDate) {
+        if (recurringStartDate.isAfter(this)) {
+            return false;
+        }
+        if (!recurringStartDate.isSameDayOfWeek(this)) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return value;

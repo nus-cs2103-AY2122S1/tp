@@ -1,22 +1,22 @@
 package seedu.address.model.lesson;
 
-import com.calendarfx.model.Calendar;
-import com.calendarfx.model.Entry;
-import com.calendarfx.model.Interval;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.ClashingLessonException;
-import seedu.address.model.person.exceptions.LessonNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.Entry;
+import com.calendarfx.model.Interval;
+
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.ClashingLessonException;
+import seedu.address.model.person.exceptions.LessonNotFoundException;
 
 /**
  * A list of calendar entries of lessons that enforces no overlapping time ranges between its lessons,
@@ -124,8 +124,11 @@ public class CalendarEntryList {
             throw new ClashingLessonException();
         }
         if (!toAdd.isRecurring()) {
-            Optional<Entry<Lesson>> entry = convertMakeUpLessonToEntry(editedPerson, toAdd);
-            entry.ifPresent(e -> add(e));
+            // makeup lesson is not cancelled
+            if (!toAdd.getCancelledDates().contains(toAdd.getStartDate())) {
+                Entry<Lesson> entry = convertToEntry(editedPerson, toAdd);
+                add(entry);
+            }
             return;
         }
 
@@ -143,6 +146,11 @@ public class CalendarEntryList {
      */
     public void removeLesson(Lesson toRemove) {
         requireNonNull(toRemove);
+        if (toRemove.isCancelled()) {
+            // fully cancelled lessons have no associated calendar entries
+            return;
+        }
+
         List<Entry<Lesson>> entriesToRemove = getEntries(toRemove);
         for (Entry<Lesson> entry : entriesToRemove) {
             remove(entry);
@@ -203,79 +211,85 @@ public class CalendarEntryList {
         }
     }
 
-    public Optional<Entry<Lesson>> convertMakeUpLessonToEntry(Person owner, Lesson lesson) {
-        if (lesson.getCancelledDates().size() != 0) {
-            return Optional.empty();
-        }
-        return Optional.of(convertToEntry(owner, lesson));
-    }
-
-
-        public List<Entry<Lesson>> convertRecurringLessonToEntries(Person owner, Lesson lesson) {
+    /**
+     * Converts a lesson to a {@code List<Entry<Lesson>>} split by cancelled dates.
+     *
+     * @param owner  The person with the lesson.
+     * @param lesson The
+     * @return
+     */
+    public List<Entry<Lesson>> convertRecurringLessonToEntries(Person owner, Lesson lesson) {
         List<Entry<Lesson>> entryList = new ArrayList<>();
         List<Date> cancelledDates = lesson.getCancelledDates().stream().sorted().collect(Collectors.toList());
 
-        LocalDateTime start = lesson.getStartDateTime();
-        LocalDateTime end = lesson.getEndDateTime();
+        Interval interval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
+        LocalDate startDate = lesson.getLocalDate(); // Start date of recurring entry
 
+        // Split lesson by cancelled dates
         while (cancelledDates.size() > 0) {
             Date cancelledDate = cancelledDates.remove(0);
-            if (cancelledDate.getLocalDate().isAfter(start.toLocalDate())) {
-                // end date is 1 week before cancelledDate
+            if (cancelledDate.getLocalDate().isAfter(startDate)) {
+                // end date of this recurring entry is 1 week before cancelledDate
                 LocalDate endDate = cancelledDate.getLocalDate().minusWeeks(1);
-
-                Entry<Lesson> entry = convertToRecurringEntry(owner, lesson, start, end, Optional.of(endDate));
+                Entry<Lesson> entry = convertToEntry(owner, lesson, interval, Optional.of(endDate));
                 entryList.add(entry);
             }
-            start = LocalDateTime.of(cancelledDate.getLocalDate().plusWeeks(1), lesson.getTimeRange().getStart());
-            end = LocalDateTime.of(start.toLocalDate(), lesson.getTimeRange().getEnd());
+            // update start date of next recurring entry to be 1 week after cancelledDate
+            startDate = cancelledDate.getLocalDate().plusWeeks(1);
+            interval = interval.withDates(startDate, startDate);
+
         }
-        entryList.add(convertToRecurringEntry(owner, lesson, start, end, Optional.empty()));
+        entryList.add(convertToEntry(owner, lesson, interval, Optional.empty()));
 
         return entryList;
     }
 
     /**
      * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
-     * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
      *
+     * @param owner  The person with the lesson.
      * @param lesson The lesson to be converted to a calendar entry.
      * @return The calendar entry that also contains this lesson.
      */
-    public Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
-        requireNonNull(lesson);
-
-        Entry<Lesson> entry = new Entry<>();
-        entry.setUserObject(lesson);
-        Interval entryInterval = new Interval(lesson.getStartDateTime(), lesson.getEndDateTime());
-        entry.setInterval(entryInterval);
-        StringBuilder entryTitle = new StringBuilder(owner.getName().toString());
-        entryTitle.append(" (").append(lesson.getSubject().toString()).append(")");
-        entry.setTitle(entryTitle.toString());
-        return entry;
+    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson) {
+        return convertToEntry(owner, lesson, new Interval(lesson.getStartDateTime(), lesson.getEndDateTime()),
+                Optional.empty());
     }
 
-    private Entry<Lesson> convertToRecurringEntry(Person owner, Lesson lesson, LocalDateTime startDateTime,
-                                                  LocalDateTime endDateTime, Optional<LocalDate> untilDate) {
+    /**
+     * Converts a {@code Lesson} to a calendar {@code Entry} for CalendarFX.
+     * Adapted from CalendarFX API example: https://dlsc.com/wp-content/html/calendarfx/apidocs/index.html
+     *
+     * @param owner         The person with the lesson.
+     * @param lesson        The lesson to be converted to a calendar entry.
+     * @param entryInterval The interval of this entry.
+     * @param untilDate     An optional end date of the entry if it is recurring.
+     * @return Then calendar entry of the lesson.
+     */
+    private Entry<Lesson> convertToEntry(Person owner, Lesson lesson, Interval entryInterval,
+                                         Optional<LocalDate> untilDate) {
         requireNonNull(lesson);
         Entry<Lesson> entry = new Entry<>();
         entry.setUserObject(lesson);
-        Interval entryInterval = new Interval(startDateTime, endDateTime);
         entry.setInterval(entryInterval);
         StringBuilder entryTitle = new StringBuilder(owner.getName().toString());
         entryTitle.append(" (").append(lesson.getSubject().toString()).append(")");
+
+        // Non recurring
+        if (!lesson.isRecurring()) {
+            entry.setTitle(entryTitle.toString());
+            return entry;
+        }
+
+        // Recurring
+        entryTitle.append("(Recurring)");
+        entry.setTitle(entryTitle.toString());
+
         String recurrenceRule = "RRULE:FREQ=WEEKLY";
         if (untilDate.isPresent()) {
             recurrenceRule += ";UNTIL=" + untilDate.get().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         }
         entry.setRecurrenceRule(recurrenceRule);
-        entryTitle.append("(Recurring)");
-        entry.setTitle(entryTitle.toString());
         return entry;
     }
-
-//    private Entry<Lesson> getBaseEntry(Person owner, Lesson lesson, LocalDateTime startDateTime,
-//                                       LocalDateTime endDateTime) {
-//
-//    }
 }

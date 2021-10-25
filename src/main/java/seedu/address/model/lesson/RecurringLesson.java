@@ -1,6 +1,5 @@
 package seedu.address.model.lesson;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,19 +10,22 @@ public class RecurringLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
-     * @param date Date of lesson.
-     * @param timeRange Time range of the lesson.
-     * @param subject Subject of the lesson.
-     * @param homework Homework for the lesson.
-     * @param rates Cost per lesson for the lesson.
+     * @param date           Date of lesson.
+     * @param timeRange      Time range of the lesson.
+     * @param subject        Subject of the lesson.
+     * @param homework       Homework for the lesson.
+     * @param rates          Cost per lesson for the lesson.
+     * @param cancelledDates Cancelled dates of the lesson.
      */
-    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates, Set<Date> cancelledDates) {
+    public RecurringLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
+                           Set<Date> cancelledDates) {
         super(date, timeRange, subject, homework, rates, cancelledDates);
     }
 
     @Override
-    public Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates) {
-        return new RecurringLesson(getStartDate(), getTimeRange(), getSubject(),getHomework(), getLessonRates(), updatedCancelledDates);
+    public Lesson updateCancelledDates(Set<Date> updatedCancelledDates) {
+        return new RecurringLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(), getLessonRates(),
+            updatedCancelledDates);
     }
 
     /**
@@ -59,34 +61,22 @@ public class RecurringLesson extends Lesson {
             return getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         } else {
-            // makeup lesson is cancelled
-            if (otherLesson.getCancelledDates().contains(otherLesson.getStartDate())) {
-                return false;
-            }
-
-            return getLocalDate().compareTo(otherLesson.getLocalDate()) <= 0 // same date or before
-                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
-                    && !getCancelledDates().contains(otherLesson.getStartDate())
+            return !otherLesson.isCancelled() // other makeup lesson is not cancelled
+                    && hasLessonOnDate(otherLesson.getStartDate())
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
     }
 
     @Override
+    public boolean isCancelled() {
+        // recurring lesson does not terminate, hence it is never fully cancelled.
+        return false;
+    }
+
+    @Override
     public boolean hasLessonOnDate(Date otherDate) {
-        Date startDate = getStartDate();
-        if (startDate.isAfter(otherDate)) {
-            return false; // other date is before lesson start date
-        }
-
-        if (!startDate.isSameDayOfWeek(otherDate)) {
-            return false; // not same day of week
-        }
-
-        if (getCancelledDates().contains(otherDate)) {
-            return false; // lesson has been cancelled on the date
-        }
-
-        return true;
+        return otherDate.isOnRecurringDate(getStartDate()) // other date lies on a recurring lesson date
+                && !getCancelledDates().contains(otherDate); // other date is not a cancelled date
     }
 
 }

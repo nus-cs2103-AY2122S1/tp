@@ -1,7 +1,14 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.lesson.Date;
@@ -12,12 +19,6 @@ import seedu.address.model.lesson.MakeUpLesson;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
 import seedu.address.model.lesson.TimeRange;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Jackson-friendly version of {@link Lesson}.
@@ -71,7 +72,9 @@ class JsonAdaptedLesson {
                 .map(JsonAdaptedHomework::new)
                 .collect(Collectors.toList()));
         isRecurring = source.isRecurring();
-        cancelledDates.addAll(source.getCancelledDates().stream().map(JsonAdaptedDate::new).collect(Collectors.toList()));
+        cancelledDates.addAll(source.getCancelledDates().stream()
+                .map(JsonAdaptedDate::new)
+                .collect(Collectors.toList()));
     }
 
 
@@ -126,8 +129,10 @@ class JsonAdaptedLesson {
 
         // lesson used to check if cancelled dates are valid
         Lesson lessonWithoutCancelledDates = isRecurring
-                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates, modelCancelledDates)
-                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates, modelCancelledDates);
+                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
+                        modelCancelledDates)
+                : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates,
+                        modelCancelledDates);
 
         final List<Date> dates = new ArrayList<>();
 
@@ -140,6 +145,6 @@ class JsonAdaptedLesson {
         }
         modelCancelledDates = new HashSet<>(dates);
 
-        return lessonWithoutCancelledDates.createUpdatedCancelledDatesLesson(modelCancelledDates);
+        return lessonWithoutCancelledDates.updateCancelledDates(modelCancelledDates);
     }
 }

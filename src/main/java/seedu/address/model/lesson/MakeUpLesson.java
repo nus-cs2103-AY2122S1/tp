@@ -1,9 +1,6 @@
 package seedu.address.model.lesson;
 
-import java.util.List;
 import java.util.Set;
-
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Make Up Lesson in the address book.
@@ -13,20 +10,22 @@ public class MakeUpLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
-     * @param date Date of lesson.
-     * @param timeRange Time range of the lesson.
-     * @param subject Subject of the lesson.
-     * @param homework Homework for the lesson.
-     * @param rates Cost per lesson for the lesson.
+     * @param date           Date of lesson.
+     * @param timeRange      Time range of the lesson.
+     * @param subject        Subject of the lesson.
+     * @param homework       Homework for the lesson.
+     * @param rates          Cost per lesson for the lesson.
+     * @param cancelledDates Cancelled dates of the lesson.
      */
-
-    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates, Set<Date> cancelledDates) {
+    public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates,
+                        Set<Date> cancelledDates) {
         super(date, timeRange, subject, homework, rates, cancelledDates);
     }
 
     @Override
-    public Lesson createUpdatedCancelledDatesLesson(Set<Date> updatedCancelledDates) {
-        return new MakeUpLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(), getLessonRates(), updatedCancelledDates);
+    public Lesson updateCancelledDates(Set<Date> updatedCancelledDates) {
+        return new MakeUpLesson(getStartDate(), getTimeRange(), getSubject(), getHomework(), getLessonRates(),
+            updatedCancelledDates);
     }
 
     /**
@@ -34,6 +33,7 @@ public class MakeUpLesson extends Lesson {
      *
      * @return False
      */
+    @Override
     public boolean isRecurring() {
         return false;
     }
@@ -57,28 +57,40 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public boolean isClashing(Lesson otherLesson) {
-        // makeup lesson is cancelled
+//        // makeup lesson is cancelled
+//        if (getCancelledDates().contains(getStartDate())) {
+//            return false;
+//        }
+//        if (otherLesson.isRecurring()) {
+//            return getLocalDate().compareTo(otherLesson.getLocalDate()) >= 0 // same date or after
+//                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+//                    && getTimeRange().isClashing(otherLesson.getTimeRange())
+//                    && otherLesson.hasLessonOnDate() // recurring cancelled dates
+//        } else {
+//            // other makeup lesson is cancelled
+//            if (otherLesson.getCancelledDates().contains(otherLesson.getStartDate())) {
+//                return false;
+//            }
+//            return getLocalDate().equals(otherLesson.getLocalDate())
+//                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+//        }
+        // this makeup lesson is cancelled
         if (getCancelledDates().contains(getStartDate())) {
             return false;
         }
-        if (otherLesson.isRecurring()) {
-            return getLocalDate().compareTo(otherLesson.getLocalDate()) >= 0 // same date or after
-                    && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
-                    && getTimeRange().isClashing(otherLesson.getTimeRange())
-                    && !otherLesson.getCancelledDates().contains(getStartDate()); // recurring cancelled dates
-        } else {
-            // other makeup lesson is cancelled
-            if (otherLesson.getCancelledDates().contains(otherLesson.getStartDate())) {
-                return false;
-            }
-            return getLocalDate().equals(otherLesson.getLocalDate())
-                    && getTimeRange().isClashing(otherLesson.getTimeRange());
-        }
+        return !isCancelled()
+                && otherLesson.hasLessonOnDate(getStartDate())
+                && getTimeRange().isClashing(otherLesson.getTimeRange());
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return getCancelledDates().contains(getStartDate());
     }
 
     @Override
     public boolean hasLessonOnDate(Date otherDate) {
-        return getStartDate().equals(otherDate) ; // is the same day
+        return getStartDate().equals(otherDate) && !isCancelled();
     }
 }
 

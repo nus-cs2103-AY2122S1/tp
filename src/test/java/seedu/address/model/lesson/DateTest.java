@@ -88,26 +88,26 @@ public class DateTest {
         assertTrue(Date.isValidDate("29 Feb 2020")); // leap year
     }
 
-    @Test
-    public void updateDate() {
-        // At least 1 week has passed
-        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
-        Date dateOneWeekAgo = new Date(oneWeekAgo.format(Date.FORMATTER));
-        assertEquals(LocalDate.now(), dateOneWeekAgo.updateDate().getLocalDate());
-
-        /*
-        Less than a week has passed but the date is over.
-         */
-        long daysBefore = 2;
-        long daysInAWeek = 7;
-        LocalDate lessThanOneWeekAgo = LocalDate.now().minusDays(daysBefore);
-        Date dateLessThanOneWeekAgo = new Date(lessThanOneWeekAgo.format(Date.FORMATTER));
-        assertEquals(LocalDate.now().plusDays(daysInAWeek - daysBefore),
-            dateLessThanOneWeekAgo.updateDate().getLocalDate());
-
-        // Current date (date is not over yet)
-        Date today = new Date(LocalDate.now().format(Date.FORMATTER));
-        assertEquals(LocalDate.now(), today.updateDate().getLocalDate());
-    }
+//    @Test
+//    public void updateDate() {
+//        // At least 1 week has passed
+//        LocalDate oneWeekAgo = LocalDate.now().minusWeeks(1);
+//        Date dateOneWeekAgo = new Date(oneWeekAgo.format(Date.FORMATTER));
+//        assertEquals(LocalDate.now(), dateOneWeekAgo.updateDate().getLocalDate());
+//
+//        /*
+//        Less than a week has passed but the date is over.
+//         */
+//        long daysBefore = 2;
+//        long daysInAWeek = 7;
+//        LocalDate lessThanOneWeekAgo = LocalDate.now().minusDays(daysBefore);
+//        Date dateLessThanOneWeekAgo = new Date(lessThanOneWeekAgo.format(Date.FORMATTER));
+//        assertEquals(LocalDate.now().plusDays(daysInAWeek - daysBefore),
+//            dateLessThanOneWeekAgo.updateDate().getLocalDate());
+//
+//        // Current date (date is not over yet)
+//        Date today = new Date(LocalDate.now().format(Date.FORMATTER));
+//        assertEquals(LocalDate.now(), today.updateDate().getLocalDate());
+//    }
 }
 
