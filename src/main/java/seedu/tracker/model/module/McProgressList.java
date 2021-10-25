@@ -29,9 +29,9 @@ public class McProgressList {
     public static final String GE_TAG_TITLE = "GE";
     public static final String UE_TAG_TITLE = "UE";
     public static final String FOUNDATION_TAG_TITLE = "Foundation";
-    public static final String BREADTH_DEPTH_TAG_TITLE = "Breadth Depth";
+    public static final String BREADTH_DEPTH_TAG_TITLE = "Breadth and Depth";
     public static final String PROFESSIONALISM_TAG_TITLE = "IT Professionalism";
-    public static final String MATH_SCIENCE_TAG_TITLE = "Math Science";
+    public static final String MATH_SCIENCE_TAG_TITLE = "Math and Science";
 
     private static final int[] TAG_INDEXES_LIST = new int[] {GE_INDEX, UE_INDEX,
         FOUNDATION_INDEX, BREADTH_DEPTH_INDEX, PROFESSIONALISM_INDEX, MATH_SCIENCE_INDEX};
