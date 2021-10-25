@@ -114,7 +114,6 @@ public class StatsDisplay extends UiPart<Stage> {
 
     private void setAnimeStats(Stats stats) {
         pieChart.getData().clear();
-        barChart.getData().clear();
         pieChart.setTitle(String.format(TOTAL_ANIMES_MSG, stats.getTotalAnimesCount())
                 + "\n" + String.format(EPISODES_WATCHED_MSG, stats.getEpisodesCount()));
 
@@ -124,6 +123,8 @@ public class StatsDisplay extends UiPart<Stage> {
     }
 
     private void setGenreStats(HashMap<Genre, Integer> genreStats, int uniqueGenresCount) {
+        barChart.getData().clear();
+        barChart.layout();
         barChart.setTitle(String.format(GENRES_MSG, uniqueGenresCount));
         CategoryAxis yAxis = new CategoryAxis();
         NumberAxis xAxis = new NumberAxis();
