@@ -1,14 +1,12 @@
 package seedu.academydirectory.model;
 
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.logic.AdditionalViewType;
-import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.model.student.Student;
 
 /**

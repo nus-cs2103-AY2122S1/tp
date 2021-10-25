@@ -17,8 +17,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
 import seedu.academydirectory.logic.AdditionalViewType;
-import seedu.academydirectory.logic.commands.Command;
-import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.StageArea;
