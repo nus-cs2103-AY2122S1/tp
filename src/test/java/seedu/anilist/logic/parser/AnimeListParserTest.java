@@ -64,7 +64,7 @@ public class AnimeListParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        String input = FindCommand.COMMAND_WORD + " n/foo n/bar g/baz";
+        String input = FindCommand.COMMAND_WORD + " n/foo n/bar g/sci fi";
         assertTrue(parser.parseCommand(input) instanceof FindCommand);
     }
 
