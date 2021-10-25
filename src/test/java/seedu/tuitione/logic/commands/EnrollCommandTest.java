@@ -83,11 +83,15 @@ public class EnrollCommandTest {
     }
 
     @Test
-    public void execute_invalidEnrollmentWrongIndex_failure() {
+    public void execute_invalidIndex_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredStudentList().size() + 1);
-        EnrollCommand enrollCommand = new EnrollCommand(outOfBoundIndex, INDEX_SECOND_LESSON);
+        EnrollCommand invalidStudentEnrollment = new EnrollCommand(outOfBoundIndex, INDEX_SECOND_LESSON);
+        EnrollCommand invalidLessonEnrollment = new EnrollCommand(INDEX_FIRST_STUDENT, outOfBoundIndex);
+        EnrollCommand invalidIndexEnrollment = new EnrollCommand(outOfBoundIndex, outOfBoundIndex);
 
-        assertCommandFailure(enrollCommand, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(invalidStudentEnrollment, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        assertCommandFailure(invalidLessonEnrollment, model, Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
+        assertCommandFailure(invalidIndexEnrollment, model, Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
     }
 
     @Test
