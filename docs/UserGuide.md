@@ -340,7 +340,7 @@ Snapshot:
 
 #### Clearing the friends and games lists : `clear`
 
-Clears the all friends and games from gitGud.
+Clears all friends and games from gitGud.
 
 Format: `clear`
 
