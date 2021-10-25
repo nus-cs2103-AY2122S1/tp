@@ -1,9 +1,12 @@
 package seedu.programmer.model.util;
 
+import java.util.Random;
+
 import seedu.programmer.model.ProgrammerError;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
 import seedu.programmer.model.student.Email;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Name;
 import seedu.programmer.model.student.Student;
 import seedu.programmer.model.student.StudentId;
@@ -90,10 +93,37 @@ public class SampleDataUtil {
         };
     }
 
+    public static Lab[] getSampleLab() {
+        return new Lab[]{
+            new Lab("Lab 1", 10.0),
+            new Lab("Lab 2", 20.0),
+            new Lab("Lab 3", 24.0),
+            new Lab("Lab 4", 30.0),
+            new Lab("Lab 5", 15.0)
+        };
+    }
+
+    public static double getRandomLabScore (Lab lab) {
+        Random r = new Random();
+        double minScore = 0;
+        double maxScore = lab.getTotalScore();
+        double score = minScore + (maxScore - minScore) * r.nextDouble();
+        int dp = (int) Math.pow(10, 1);
+        return (double) Math.round(score * dp) / dp;
+    }
 
     public static ReadOnlyProgrammerError getSampleProgrammerError() {
         ProgrammerError sampleAb = new ProgrammerError();
         for (Student sampleStudent : getSampleStudents()) {
+            Lab[] sampleLabs = getSampleLab();
+            for (int i = 0; i < sampleLabs.length; i++) {
+                Lab sampleLab = sampleLabs[i];
+                if (i < 3) { // only add random scores to 2 labs
+                    double randomLabScore = getRandomLabScore(sampleLab);
+                    sampleLab.updateActualScore(randomLabScore);
+                }
+                sampleStudent.addLabResult(sampleLab);
+            }
             sampleAb.addStudent(sampleStudent);
         }
         return sampleAb;

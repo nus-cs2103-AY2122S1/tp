@@ -113,17 +113,17 @@ public class Student {
     /**
      * Updates a lab result for a student
      * */
-    public void editLabResult(Lab result, Double value) {
-        int index = this.labResultList.indexOf(result);
+    public void editLabResult(Lab lab , Double score) {
+        int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
-        current.updateActualScore(value);
+        current.updateActualScore(score);
     }
 
     /**
      * Updates a lab result for a student
      * */
-    public void editLabInfo(Lab result, String newTitle, Double total) {
-        int index = this.labResultList.indexOf(result);
+    public void editLabInfo(Lab lab, String newTitle, Double total) {
+        int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
         current.updateTitle(newTitle);
         current.updateTotal(total);
