@@ -37,6 +37,8 @@ import seedu.address.model.tag.Tag;
  */
 public class AddCommandParser implements Parser<AddCommand> {
 
+    private static final String EMPTY = "";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -70,8 +72,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         Experience experience = ParserUtil.parseExperience(argMultimap.getValue(PREFIX_EXPERIENCE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Optional<Interview> interview = ParserUtil.parseInterview(
-                argMultimap.getValue(PREFIX_INTERVIEW).orElse(""));
-        Optional<Notes> notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).orElse(""));
+                argMultimap.getValue(PREFIX_INTERVIEW).orElse(EMPTY));
+        Optional<Notes> notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).orElse(EMPTY));
 
         Person person = new Person(name, phone, email, role, employmentType,
                 expectedSalary, levelOfEducation, experience, tagList, interview, notes);
