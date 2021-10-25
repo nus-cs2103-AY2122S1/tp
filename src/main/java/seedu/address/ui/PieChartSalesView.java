@@ -31,7 +31,7 @@ public class PieChartSalesView extends UiPart<Region> implements SecondPanel {
             Set<Order> currOrders = client.getOrders();
             for (Order order : currOrders) {
                 int id = order.id.getId();
-                Name productName = products.get(id).getName();
+                Name productName = products.get(id - 1).getName();
                 int quantity = Integer.parseInt(order.quantity.value);
                 if (table.containsKey(productName)) {
                     table.put(productName, table.get(productName) + quantity);
