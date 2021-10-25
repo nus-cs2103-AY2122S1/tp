@@ -85,11 +85,12 @@ public class DeleteTaskCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
+        CommandResult commandResult = new CommandResult(generateSuccessMessage(editedPerson, tasksToRemove.size()));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     public String getCommand() {

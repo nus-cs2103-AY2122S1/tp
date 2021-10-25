@@ -15,7 +15,7 @@ import seedu.address.model.person.Person;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_WORD = "rm";
 
     public static final String DESCRIPTION = "Deletes the person identified by the index number used in "
             + "the displayed person list.";
@@ -82,7 +82,11 @@ public class DeleteCommand extends Command {
 
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+
+        CommandResult commandResult = new CommandResult(
+                String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     /**

@@ -39,6 +39,8 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AllTaskListPanel allTaskListPanel;
+    private CommandBox commandBox;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -158,6 +160,7 @@ public class MainWindow extends UiPart<Stage> {
         setAnchorProperties(personListSplitPanel);
 
         taskListPanel = new TaskListPanel(logic.getDisplayTaskList());
+        allTaskListPanel = new AllTaskListPanel(logic.getFilteredPersonList());
         taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
         setAnchorProperties(taskListSplitPanel);
 
@@ -167,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
+        commandBox = new CommandBox(this::executeCommand, this::executeInternalCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -211,8 +214,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    @FXML
+    private void handleDisplayAllTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(allTaskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
+    }
+
+    @FXML
+    private void handleDisplaySingleTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
     }
 
     /**
@@ -229,9 +242,40 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isExit()) {
                 handleExit();
+            }
+            if (commandResult.isDisplayAllTaskList()) {
+                handleDisplayAllTaskList();
+            }
+            if (commandResult.isDisplaySingleTaskList()) {
+                handleDisplaySingleTaskList();
+            }
+            if (commandResult.isWriteCommand()) {
+                allTaskListPanel.updateRootNode(logic.getFilteredPersonList());
+            }
+
+            return commandResult;
+        } catch (CommandException | ParseException e) {
+            logger.info("Invalid command: " + commandText);
+            resultDisplay.setFeedbackToUser(e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
+     * Executes the command and returns the result.
+     *
+     * @see seedu.address.logic.Logic#executeInternal(String)
+     */
+    private CommandResult executeInternalCommand(String commandText) throws CommandException, ParseException {
+        try {
+            CommandResult commandResult = logic.executeInternal(commandText);
+            logger.info("Result: " + commandResult.getFeedbackToUser());
+            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (commandResult.isChangeCommandBox()) {
+                commandBox.setText(commandResult.getAdditionalText());
             }
 
             return commandResult;

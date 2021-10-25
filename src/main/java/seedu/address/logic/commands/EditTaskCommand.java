@@ -47,7 +47,7 @@ public class EditTaskCommand extends Command {
     public static final String DESCRIPTION = "Edits the details of the task identified";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s ";
-    public static final String MESSAGE_TASK_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_TASK_NOT_EDITED = "At least one field of task to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "Task already exists.";
     public static final String MESSAGE_INVALID_TASK = "The size of %1$s's task list is not that big";
 
@@ -94,15 +94,17 @@ public class EditTaskCommand extends Command {
         if (taskToEdit.equals(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
         tasks.set(targetTaskIndex.getZeroBased(), editedTask);
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask.toString()));
+
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {
