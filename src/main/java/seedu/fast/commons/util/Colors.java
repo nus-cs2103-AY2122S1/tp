@@ -15,6 +15,8 @@ public class Colors {
     public static final String TEAL = "-fx-background-color: #28EFFF;";
     public static final String LIME = "-fx-background-color: #a8ff33;";
     public static final String PINK = "-fx-background-color: #f3a5ff;";
-    public static final String BEIGE = "-fx-background-color: #ffcebe;";
+    public static final String CRIMSON = "-fx-background-color: #df2121;";
     public static final String MAGENTA = "-fx-background-color: #c33ade;";
+    public static final String DARK_BLUE = "-fx-background-color: #0039E7;";
+
 }
