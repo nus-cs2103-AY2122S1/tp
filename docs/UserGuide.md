@@ -1,32 +1,33 @@
 ---
 layout: page
 title: User Guide
----
-
-## **About this document**
-
-**TuitiONE** is a _desktop app for managing contacts, optimized for use via a Command Line Interface_ (CLI) while still having the benefits of a Graphical User Interface (GUI).
-If you can type fast, TuitiONE can get your contact management tasks done faster than traditional GUI apps.
-
-This document serves as a guide to help you get started on how you can set up and use **TuitiONE**. To start, you explore the [Quick start](#quick-start) section to set up Tuitione and test out some recommended commands. For each command specifically, you can view them in the relevant sections (such as in [Managing Students](#managing-students) and [Managing Lessons](#managing-lessons)) to learn more in detail. The [Command summary](#command-summary) lists a table with all the commands present and their syntax. If there are any doubts on the terms and usage of this app, you can refer to the [Glossary](#glossary) and [FAQ](#faq) located at the end of the document.
-
-Here are the interpretations of symbols and formatting used in this document: 
-
-* `highlights` represents code.
-* :information_source: indicates additional information.
-* :bulb: indicates tips.
-* :exclamation: indicates that you should take caution.
-
 --------------------------------------------------------------------------------------------------------------------
 
 * Table of Contents
-{:toc}
+  {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## **Introduction**
+
+Welcome to the User Guide of **TuitiONE**! <br>
+
+**TuitiONE** is a Command Line Interface (CLI) based application that aims to **simplify the work of Customer Servicing Officers (CSO) in a tuition centre**.
+The application also incorporates the benefits of a Graphical User Interface (GUI).
+**TuitiONE** allows CSOs to input the details of students and parents through simple and intuitive commands. With our application, a CSO's work would be reduced and efficient.
+
+If you can type fast, **TuitiONE** can get your contact management tasks done faster than most other GUI apps. The GUI application would allow you to interact with the application
+through graphical icons (such as buttons).
+
+However you do not have to worry even if you are new to CLI / GUI applications. **TuitiONE** uses easy to learn and simple CLI commands that usually fall under one sentence.
+Moreover, this User Guide will take you through every feature of **TuitiONE**, providing you with the easiest and best user experience possible.
+
+If you are interested, jump to [Quick start](#quick-start) to learn how to start up **TuitiONE** in a simple and quick manner.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Quick start**
 
-1. Ensure you have Java `11` or above installed in your work station.
+1. Ensure you have Java 11 or above installed in your Computer. You may follow the instructions and install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 1. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
 
@@ -34,23 +35,65 @@ Here are the interpretations of symbols and formatting used in this document:
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. _Note how the app contains some sample data_.<br>
 
-   ![Ui](images/Ui.png)
+  ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
-   Some example commands you can try:
+  Some example commands you can try:
 
-   * **`list`** : Lists all students and lessons.
+     * **`list`** : Lists all students and lessons.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
+     * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 g/S3 r/friends r/owesMoney` : Adds a student named `John Doe` to the TuitiONE app.
 
-   * **`delete`**`3` : Deletes the 3rd student shown in the student list.
+     * **`delete`**`3` : Deletes the 3rd student shown in the student list.
 
-   * **`clear`** : Deletes all data (students and lessons).
+  * **`clear`** : Deletes all data (students and lessons).
 
-   * **`exit`** : Exits the app.
+     * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## **About this document**
+
+### Structure of this document
+
+This document serves as a guide to help you get started on how you can set up and use **TuitiONE**. This User Guide has been structured to help you find what you require in a quick and simple manner.
+Here are several useful tips on how to read and intrepret this guide.
+
+### Reading the User Guide
+
+This section introduces you to the technical terms, symbols and syntax that are used inside this User Guide. 
+This would be useful for you should they be unclear to you.
+
+#### Technical terms
+
+The table below are the interpretations of a few technical terms that you may encounter in this User Guide.
+
+| Technical term  | What it means |
+| ------------- | ------------- |
+| CLI | The Command Line Interface (CLI) is the interface that accepts text input to execute the functions of **TuitiONE**. |
+| GUI  | The Graphical User Interface (GUI) is the user interface which has graphical indicator representations that the user may interact with. |
+| Parameter  | Parameter refers to the user input required after the user is prompted by the TuitiONE GUI  |
+
+#### General Symbols and Syntax
+
+The table below are the interpretations of symbols and formatting used in this document.
+
+| Syntax  | What it means |
+| ------------- | ------------- |
+| `highlights`  | 	A grey highlighted block represents an executable command, or possible parameters that can be entered into the CLI.  |
+| :information_source:  | Indicates additional information  |
+| :bulb:  | Indicates tips  |
+| :exclamation:  | Indicates that you should take caution  |
+
+There are multiple examples provided for you in the section below [Features](#features). Each simulated scenario include expeced outputs by the **TuitiONE** application.
+
+If there are still any doubts on the terms and usage of this app, you can refer to the [Glossary](#glossary) and [FAQ](#faq) located at the end of the document.
+
+For each command specifically, you can view them in the relevant sections (such as in [Managing Students](#managing-students) and [Managing Lessons](#managing-lessons)) to learn more in detail.
+The [Command summary](#command-summary) lists a table with all the commands present and their syntax.
 
 --------------------------------------------------------------------------------------------------------------------
 
