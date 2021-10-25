@@ -168,6 +168,21 @@ public class AddCommandTest {
         public void updateSortedPersonList(boolean isReverseOrder) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addCommand(String command) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getBefore() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getAfter() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

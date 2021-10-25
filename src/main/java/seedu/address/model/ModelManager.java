@@ -27,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> onlyFilteredPersons;
     private final SortedList<Person> filteredPersons;
+    private final UserCommandCache userCommandCache;
 
     private final TaskListManager taskListManager;
 
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.taskListManager = new TaskListManager();
+        this.userCommandCache = UserCommandCache.getInstance();
 
         taskListManager.initialiseArchive(this.getAddressBook().getPersonList());
 
@@ -184,5 +186,21 @@ public class ModelManager implements Model {
     @Override
     public void displayPersonTaskList(Person person) {
         taskListManager.setToDisplayTaskList(person.getName());
+    }
+
+    //=========== cache operation =============================================================
+    /** Get the next input command in the cache */
+    public String getAfter() {
+        return userCommandCache.getAfter();
+    }
+
+    /** Get the previous input command in the cache */
+    public String getBefore() {
+        return userCommandCache.getBefore();
+    }
+
+    /** Add a command to the cache */
+    public void addCommand(String command) {
+        userCommandCache.addCommand(command);
     }
 }

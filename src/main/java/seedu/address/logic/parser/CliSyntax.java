@@ -17,4 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TASK_DATE = new Prefix("-td");
     public static final Prefix PREFIX_TASK_TIME = new Prefix("-tt");
     public static final Prefix PREFIX_TASK_VENUE = new Prefix("-ta");
+
+    /* Internal Prefix definitions */
+    public static final Prefix PREFIX_KEY_DIRECTION = new Prefix("-qq");
+
 }
