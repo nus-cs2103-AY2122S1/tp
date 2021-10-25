@@ -1,11 +1,10 @@
 package seedu.address.ui;
 
-import static com.calendarfx.view.DayViewBase.EarlyLateHoursStrategy.HIDE;
+import static com.calendarfx.view.DayViewBase.EarlyLateHoursStrategy.SHOW_COMPRESSED;
 import static com.calendarfx.view.DayViewBase.HoursLayoutStrategy.FIXED_HOUR_COUNT;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarSource;
@@ -16,23 +15,21 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.lesson.TimeRange;
 
-public class WeekPanel extends UiPart<Region> {
+public class SchedulePanel extends UiPart<Region> {
 
-    private static final String FXML = "WeekPanel.fxml";
-
-    private final Logger logger = LogsCenter.getLogger(this.getClass());
+    private static final String FXML = "SchedulePanel.fxml";
 
     private final CalendarView calendarView;
+
     @FXML
-    private StackPane weekView;
+    private StackPane scheduleView;
 
     /**
-     * Creates a {@code WeekPanel} with the given {@code Calendar}.
+     * Creates a {@code SchedulePanel} with the given {@code Calendar}.
      */
-    public WeekPanel(Calendar calendar) {
+    public SchedulePanel(Calendar calendar) {
         super(FXML);
         calendarView = new CalendarView();
         initialiseCalendar(calendar);
@@ -45,11 +42,18 @@ public class WeekPanel extends UiPart<Region> {
      * http://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start
      */
     private void initialiseCalendar(Calendar calendar) {
-        calendar.setReadOnly(true);
+        calendar.setReadOnly(true); // !!! Disables editing entries in calendar interface
         CalendarSource calendarSource = new CalendarSource();
         calendarSource.getCalendars().addAll(calendar);
-
         calendarView.getCalendarSources().addAll(calendarSource);
+
+        // Disable callbacks
+        calendarView.setEntryFactory(param -> null); // !!! Important! Disables creating new entry on double click
+        calendarView.setEntryDetailsCallback(param -> null);
+        calendarView.setEntryContextMenuCallback(null);
+        calendarView.setContextMenuCallback(null);
+
+        // Custom display settings
         calendarView.setStartTime(TimeRange.DAY_START);
         calendarView.setEndTime(TimeRange.DAY_END);
         calendarView.setShowPrintButton(false);
@@ -59,37 +63,31 @@ public class WeekPanel extends UiPart<Region> {
 
         initialiseDayPage();
         initialiseWeekPage();
-        initialiseMonthPage();
         initialiseYearPage();
 
-        weekView.getChildren().setAll(calendarView);
+        scheduleView.getChildren().setAll(calendarView);
     }
 
     private void initialiseDayPage() {
-        calendarView.getDayPage().setDayPageLayout(DayPage.DayPageLayout.DAY_ONLY);
-        calendarView.getDayPage().setStartTime(TimeRange.DAY_START);
+        calendarView.getDayPage().setDayPageLayout(DayPage.DayPageLayout.STANDARD);
+
+        calendarView.getDayPage().getYearMonthView().setShowWeekNumbers(false);
 
         calendarView.getDayPage().getDetailedDayView().setVisibleHours(15);
+        calendarView.getDayPage().getDetailedDayView().setEarlyLateHoursStrategy(SHOW_COMPRESSED);
         calendarView.getDayPage().getDetailedDayView().setHoursLayoutStrategy(FIXED_HOUR_COUNT);
-        calendarView.getDayPage().getDetailedDayView().getDayView().setDisable(true);
     }
 
     private void initialiseWeekPage() {
         calendarView.getWeekPage().getDetailedWeekView().setVisibleHours(15);
         calendarView.getWeekPage().getDetailedWeekView().setHoursLayoutStrategy(FIXED_HOUR_COUNT);
-        calendarView.getWeekPage().getDetailedWeekView().setEarlyLateHoursStrategy(HIDE);
-        calendarView.getWeekPage().getDetailedWeekView().setShowScrollBar(false);
-
-        calendarView.getWeekPage().getDetailedWeekView().getWeekView().setDisable(true);
-    }
-
-    private void initialiseMonthPage() {
-        calendarView.getMonthPage().getMonthView().setDisable(true);
+        calendarView.getWeekPage().getDetailedWeekView().setEarlyLateHoursStrategy(SHOW_COMPRESSED);
     }
 
     private void initialiseYearPage() {
-        calendarView.getYearPage().getMonthSheetView().setDisable(true);
+        calendarView.getYearPage().getMonthSheetView().setShowWeekNumber(false);
     }
+
 
     /**
      * Adapted from CalendarFX developer manual.
