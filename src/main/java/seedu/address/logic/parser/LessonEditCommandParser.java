@@ -55,6 +55,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
                 .orElse(Date.MAX_DATE);
             editLessonDescriptor.setEndDate(endDate);
+            editLessonDescriptor.setRecurring(true);
         }
 
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
