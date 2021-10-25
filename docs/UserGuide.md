@@ -170,7 +170,7 @@ The new task will automatically be assigned the 'General' tag if the task tag pa
 </div>
 
 Examples:
-* `addtask l/sew buttons onto blazer d/20th August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
+* `addtask l/sew buttons onto blazer d/20 August 2021 t/SO1` adds the task to the application if there is an order with the id of SO1.
 
 ### Deleting a task : `deletetask`
 
@@ -214,7 +214,7 @@ Format: `edittask INDEX [l/LABEL] [d/DATE] [t/TASKTAG]`
 * Existing values will be updated to the input values.
 
 Examples:
-* `edittask 1 l/order cloth d/19th September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
+* `edittask 1 l/order cloth d/19 September 2021` edits the label and date of the 1st task to be `order cloth` and `19th September 2021` respectively.
 * `edittask 2 t/General` edits the tag of the 2nd task to be `General`
 
 ### Marking a task as done : `marktask`
@@ -257,8 +257,8 @@ Adds an order to the application.
 Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
 
 Examples:
-* `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
-* `addorder l/school uniform c/John a/15.00 d/15th October 2021`
+* `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
+* `addorder l/school uniform c/John a/15.00 d/15 October 2021`
 
 ### Deleting an order: `deleteorder`
 
@@ -304,7 +304,6 @@ Format: `sortorders f/FIELD o/ORDERING`
 * The direction of the sorting depends on the `ORDERING`, which is either:
   * Ascending order, identified with an "asc" or "ascending".
   * Descending order, identified with a "desc" or "descending".
-
 
 Examples:
 * `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
@@ -390,9 +389,9 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **ListTasks** | `listtask`
-**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
+**AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20 August 2021`
 **DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
-**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19th September 2021`
+**EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19 September 2021`
 **MarkDone** | `markdone INDEX` e.g. `markdone 2`
 **CompletedTasks** | `completedtasks`
 **IncompleteTasks** | `incompletetasks`
@@ -402,7 +401,7 @@ Action | Format, Examples
 Action | Format, Examples
 --------|------------------
 **ListOrders** | `listorder`
-**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
+**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20 August 2021`
 **DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
 **MarkOrder** | `markorder INDEX` e.g. `markorder 2`
 **CompletedOrders** | `completedorders`
