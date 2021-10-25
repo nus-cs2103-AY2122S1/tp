@@ -68,7 +68,7 @@ public class AddLabCommandTest {
         Lab labToAdd = sampleLabA;
         AddLabCommand addLabCommand = sampleCommandA;
 
-        String expectedMessage = String.format(DeleteLabCommand.MESSAGE_DEL_LAB_SUCCESS, labToAdd);
+        String expectedMessage = String.format(AddLabCommand.MESSAGE_ADD_LAB_SUCCESS, labToAdd);
 
         Model expectedModel = new ModelManager(new ProgrammerError(model.getProgrammerError()), new UserPrefs());
         //expectedModel.addLab(labToAdd);
