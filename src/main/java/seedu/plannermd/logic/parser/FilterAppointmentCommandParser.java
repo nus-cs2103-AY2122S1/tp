@@ -81,7 +81,7 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
         if (string.trim().isEmpty()) {
             throw new ParseException(NO_ARGUMENTS_MESSAGE);
         }
-        String[] nameKeywords = string.trim().split("\\s+");
+        String[] nameKeywords = string.trim().split("\\s+"); // Splits the string based on 1 or more whitespace
         return Arrays.asList(nameKeywords);
     }
 
