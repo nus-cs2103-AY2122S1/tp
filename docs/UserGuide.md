@@ -167,17 +167,25 @@ Examples:
 
 Edits the group status of user-specified module(s).
 
-Format: `editGroupStatus mod/MODULE [group/NEW_STATUS_DESCRIPTION] [mod/MODULE [group/NEW_STATUS_DESCRIPTION]]...`
+Format: `editGroupStatus mod/MODULE [NEW_STATUS_DESCRIPTION] [mod/MODULE [NEW_STATUS_DESCRIPTION]]...`
 
 **:information_source: Notes:**
 * If no updated status description is given, the group status is set to the default 'Don't need group/Not looking for group'.
 
 Examples:
-* `editGroupStatus mod/CS2103T group/need member`
-* `editGroupStatus mod/CS2101`
+* `editGroupStatus mod/CS2103T`
+* `editGroupStatus mod/CS2103T mod/CS2101 need member mod/CS1101S`
+* `editGroupStatus mod/CS2100 need member mod/CS2101T need group`
   <br>
   <br>
-  (Insert screenshots here)
+  Original profile:
+  ![result for 'original'](images/screenshots/originalForegsc.png)
+
+  Updated profile:
+  ![result for 'original'](images/screenshots/egsc.png)
+
+  ![result for 'original'](images/screenshots/editedGroupStatus.png)
+
 
 #### 2.3 Remove modules from your profile : `remMod`
 
