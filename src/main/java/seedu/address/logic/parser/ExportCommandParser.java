@@ -17,7 +17,8 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             + File.separator
             + "exports";
 
-    private static final String REGEX = "^[a-zA-Z0-9._ -]+\\.(csv)$";
+    private static final String REGEX = "^[a-zA-Z0-9._ -]+$";
+    public static final String CSV_EXTENSION = ".csv";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
@@ -28,7 +29,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         if (!args.matches(REGEX)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
-        String filePath = EXPORTS_DIRECTORY_PATH + File.separator + args;
+        String filePath = EXPORTS_DIRECTORY_PATH + File.separator + args + CSV_EXTENSION;
         return new ExportCommand(filePath, new CsvWriter());
     }
 }

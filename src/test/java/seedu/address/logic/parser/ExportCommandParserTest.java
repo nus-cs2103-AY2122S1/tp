@@ -18,25 +18,17 @@ public class ExportCommandParserTest {
             + "exports";
 
     @Test
-    public void parse_nonCsvFile_throwsParseException() {
-        ExportCommandParser parser = new ExportCommandParser();
-        assertThrows(ParseException.class,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), (
-                ) -> parser.parse("test.txt"));
-    }
-
-    @Test
     public void parse_invalidFileName_throwsParseException() {
         ExportCommandParser parser = new ExportCommandParser();
         assertThrows(ParseException.class,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE), (
-                ) -> parser.parse("test@export.csv"));
+                ) -> parser.parse("test@export"));
     }
 
     @Test
     public void parse_valid_success() throws Exception {
         ExportCommandParser parser = new ExportCommandParser();
-        ExportCommand producedCommand = parser.parse("test.csv");
+        ExportCommand producedCommand = parser.parse("test");
         assertEquals(producedCommand,
                 new ExportCommand(EXPORTS_DIRECTORY_PATH + File.separator + "test.csv",
                 new CsvWriter()));
