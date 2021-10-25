@@ -173,9 +173,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleViewStudent() {
-        Student studentToView = logic.getFilteredStudentList().get(0);
-
+    private void handleViewStudent(Student studentToView) {
         detailedStudentCard = new DetailedStudentCard(studentToView);
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(detailedStudentCard.getRoot());
@@ -238,7 +236,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isViewStudent()) {
-                handleViewStudent();
+                handleViewStudent(commandResult.getStudentToView());
             } else {
                 showAllStudentsAndGroups();
             }

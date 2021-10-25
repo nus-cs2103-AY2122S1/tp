@@ -7,6 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.ContainsStudentNamePredicate;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.Student;
 
 public class ViewStudentCommand extends Command {
 
@@ -30,13 +31,14 @@ public class ViewStudentCommand extends Command {
         requireNonNull(model);
         ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(name);
         model.updateFilteredStudentList(predicate);
+        Student studentToView = model.getFilteredStudentList().get(0);
 
         if (model.getFilteredStudentList().size() == 0) {
-            model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, name));
         }
 
+        model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, name),
-            false, false, true);
+            false, false, studentToView);
     }
 }
