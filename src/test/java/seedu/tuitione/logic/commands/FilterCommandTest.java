@@ -75,7 +75,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_gradeNotFoundInTuitione_noStudentFoundnoLessonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
+        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 0)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
         Grade grade = new Grade("S3");
@@ -89,7 +89,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_subjectNotFoundInTuitione_noLessonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
+        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 0);
         Subject subject = new Subject("Chemistry");
         FilterCommand command = new FilterCommand(null, subject);
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
@@ -99,7 +99,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_gradeFoundInTuitione_studentFoundLessonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
+        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 2);
         Grade grade = new Grade("S2");
@@ -116,7 +116,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_subjectFoundInTuitione_lessonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
+        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
         Subject subject = new Subject("Science");
         FilterCommand command = new FilterCommand(null, subject);
         expectedModel.updateFilteredLessonList(new LessonIsOfSpecifiedSubject(subject));
@@ -126,7 +126,7 @@ public class FilterCommandTest {
 
     @Test
     public void execute_gradeFoundSubjectFoundInTuitione_studentFoundLessonFound() {
-        String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
+        String expectedMessage = String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW, 1)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, 1);
         Grade grade = new Grade("S2");
