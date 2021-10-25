@@ -9,6 +9,7 @@ import dash.model.Model;
 public class SwitchTabContactsCommand extends Command {
 
     public static final String COMMAND_WORD = "contacts";
+    public static final String COMMAND_WORD_ALTERNATE = "c";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to the Contacts tab.\n"
             + "Example: " + COMMAND_WORD;
