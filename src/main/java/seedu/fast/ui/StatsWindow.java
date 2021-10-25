@@ -181,7 +181,7 @@ public class StatsWindow extends UiPart<Stage> {
         String totalClientCount = totalCount + " Clients!";
 
         // Gets the max out of 3 values
-        int maxCount = priorityData.getMax();
+        int maxCount = priorityData.getMaxValue();
 
         // Prioritise higher Priorities first,
         // e.g. if the counts are equal for all, HIGH_PRIORITY_MESSAGE will be used
@@ -210,7 +210,7 @@ public class StatsWindow extends UiPart<Stage> {
         String totalClientCount = totalCount + " Clients!";
 
         // Gets the max out of the values
-        int maxCount = investmentPlanData.getMax();
+        int maxCount = investmentPlanData.getMaxValue();
     }
 
     /**

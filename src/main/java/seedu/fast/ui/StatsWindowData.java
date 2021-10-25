@@ -1,67 +1,82 @@
 package seedu.fast.ui;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import seedu.fast.model.tag.InvestmentPlanTag;
+import seedu.fast.model.tag.PriorityTag;
 
 public abstract class StatsWindowData {
 
-    private ArrayList<Integer> counts = new ArrayList<>();
+    private HashMap<String, Integer> counts;
 
-    public int getMax() {
-        return Collections.max(counts);
-    }
+    public abstract String getMaxName();
 
-    public int getTotalCount() {
-        return counts.stream()
-            .mapToInt(Integer::intValue)
-            .sum();
-    }
+    public abstract int getMaxValue();
+
+    public abstract int getTotalCount();
 
     /**
      * Encapsulates the data of the investment plan tags.
      */
     static class InvestmentPlanData extends StatsWindowData {
 
-        private ArrayList<Integer> counts = new ArrayList<>();
+        private HashMap<String, Integer> counts = new HashMap<>();
 
         public InvestmentPlanData(int lifeCount, int motorCount, int travelCount, int healthCount,
                            int propertyCount, int investmentCount, int savingsCount) {
 
-            counts.add(lifeCount);
-            counts.add(motorCount);
-            counts.add(travelCount);
-            counts.add(healthCount);
-            counts.add(propertyCount);
-            counts.add(investmentCount);
-            counts.add(savingsCount);
+            counts.put(InvestmentPlanTag.LifeInsurance.NAME, lifeCount);
+            counts.put(InvestmentPlanTag.MotorInsurance.NAME, motorCount);
+            counts.put(InvestmentPlanTag.TravelInsurance.NAME, travelCount);
+            counts.put(InvestmentPlanTag.HealthInsurance.NAME, healthCount);
+            counts.put(InvestmentPlanTag.PropertyInsurance.NAME, propertyCount);
+            counts.put(InvestmentPlanTag.Investment.NAME, investmentCount);
+            counts.put(InvestmentPlanTag.Savings.NAME, savingsCount);
+
+        }
+
+        public String getMaxName() {
+            return Collections.max(counts.entrySet(), HashMap.Entry.comparingByValue()).getKey();
+        }
+
+        public int getMaxValue() {
+            return Collections.max(counts.entrySet(), HashMap.Entry.comparingByValue()).getValue();
+        }
+
+        public int getTotalCount() {
+            int sum = 0;
+            for (int i : counts.values()) {
+                sum += i;
+            }
+            return sum;
         }
 
         public int getLifeCount() {
-            return counts.get(0);
+            return counts.get(InvestmentPlanTag.LifeInsurance.NAME);
         }
 
         public int getMotorCount() {
-            return counts.get(1);
+            return counts.get(InvestmentPlanTag.MotorInsurance.NAME);
         }
 
         public int getTravelCount() {
-            return counts.get(2);
+            return counts.get(InvestmentPlanTag.TravelInsurance.NAME);
         }
 
         public int getHealthCount() {
-            return counts.get(3);
+            return counts.get(InvestmentPlanTag.HealthInsurance.NAME);
         }
 
         public int getPropertyCount() {
-            return counts.get(4);
+            return counts.get(InvestmentPlanTag.PropertyInsurance.NAME);
         }
 
         public int getInvestmentCount() {
-            return counts.get(5);
+            return counts.get(InvestmentPlanTag.Investment.NAME);
         }
 
         public int getSavingsCount() {
-            return counts.get(6);
+            return counts.get(InvestmentPlanTag.Savings.NAME);
         }
     }
 
@@ -71,26 +86,41 @@ public abstract class StatsWindowData {
      */
     static class PriorityData extends StatsWindowData {
 
-        private ArrayList<Integer> counts = new ArrayList<>();
+        private HashMap<String, Integer> counts = new HashMap<>();
 
         public PriorityData(int highCount, int mediumCount, int lowCount) {
 
-            counts.add(highCount);
-            counts.add(mediumCount);
-            counts.add(lowCount);
+            counts.put(PriorityTag.HighPriority.NAME, highCount);
+            counts.put(PriorityTag.MediumPriority.NAME, mediumCount);
+            counts.put(PriorityTag.LowPriority.NAME, lowCount);
+        }
 
+        public String getMaxName() {
+            return Collections.max(counts.entrySet(), HashMap.Entry.comparingByValue()).getKey();
+        }
+
+        public int getMaxValue() {
+            return Collections.max(counts.entrySet(), HashMap.Entry.comparingByValue()).getValue();
+        }
+
+        public int getTotalCount() {
+            int sum = 0;
+            for (int i : counts.values()) {
+                sum += i;
+            }
+            return sum;
         }
 
         public int getHighCount() {
-            return counts.get(0);
+            return counts.get(PriorityTag.HighPriority.NAME);
         }
 
         public int getMediumCount() {
-            return counts.get(1);
+            return counts.get(PriorityTag.MediumPriority.NAME);
         }
 
         public int getLowCount() {
-            return counts.get(2);
+            return counts.get(PriorityTag.LowPriority.NAME);
         }
     }
 
