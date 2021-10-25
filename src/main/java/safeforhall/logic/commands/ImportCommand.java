@@ -71,14 +71,14 @@ public class ImportCommand extends Command {
      * @param path path of csv to be read
      */
     public ImportCommand(Path path) {
-        this.filename = "DEFAULT";
+        this.filename = DEFAULT_FILENAME;
         this.filepath = path;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        AddressBook importedData = readCsv();
+        AddressBook newAddressBook = readCsv();
         List<Event> eventList = model.getAddressBook().getEventList();
         ArrayList<Event> eventListRemovedResidents = new ArrayList<>();
         for (Event event: eventList) {
@@ -86,9 +86,8 @@ public class ImportCommand extends Command {
                     event.getCapacity(), new ResidentList(ResidentList.DEFAULT_LIST));
             eventListRemovedResidents.add(newEvent);
         }
-        importedData.setEvents(eventListRemovedResidents);
-        model.setAddressBook(importedData);
-        System.out.println("sucess");
+        newAddressBook.setEvents(eventListRemovedResidents);
+        model.setAddressBook(newAddressBook);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
