@@ -316,7 +316,7 @@ deleted, the data **cannot be recovered**!
 
 Format: `clear`
 
-Expected Output: ![Ui](images/UIClearCommand.png)
+Expected Output: ![Ui](images/UiClearCommand.png)
 
 ---
 ## 5. FAQ
