@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-tApp is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI). If you are a TA that is looking for an app that integrates different tools into a centralised platform and tracks your TA tasks, tApp is the app for you.
+tApp is a **desktop app for managing tutorial groups and tasks, optimized for use via a Command Line Interface** (CLI). If you are a TA that is looking for an app that integrates different tools into a centralised platform and tracks your TA tasks, tApp is the app for you.
 
 * Table of Contents
 {:toc}
@@ -26,11 +26,11 @@ tApp is a **desktop app for managing contacts, optimized for use via a Command L
 
    * **`students`** : Lists all students.
 
-   * **`add`**`Tom Lim` : Adds a student named `Tom Lim` to the student list.
+   * **`addStudent`**`n/Tom Lim e/tom@u.nus.edu s/a0123456b` : Adds a student named `Tom Lim` to the student list.
 
    * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
 
-   * **`clear`** : Deletes all contacts.
+   * **`clearStudents`** : Deletes all students.
 
    * **`exit`** : Exits the app.
 
@@ -45,7 +45,7 @@ tApp is a **desktop app for managing contacts, optimized for use via a Command L
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add NAME`, `NAME` is a parameter which can be used as `add John Doe`.
+  e.g. in `addStudent n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -59,7 +59,7 @@ tApp is a **desktop app for managing contacts, optimized for use via a Command L
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `students`, `exit` and `clearStudents`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
@@ -142,6 +142,19 @@ Format: `addSG INDEX g/GROUP`
 Examples:
 * `addSG 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output
   that the student has been added to the group
+
+### Delete a student from a group: `deleteSG`
+
+Deletes the specified group from the group list.
+
+Format: `deleteSG GROUP_INDEX STUDENT_INDEX`
+
+* Deletes the person at the specified `STUDENT_INDEX` in the group at the specified `GROUP_INDEX`.
+* The index refers to the index number shown in the respective displayed group list and group member list.
+* The index must be a positive integer 1, 2, 3, …​
+
+Examples:
+* `deleteSG 1 2` deletes the member with index 2 in the group member list of the  group with index 1 in group list and displays a confirmation output with the affected group member and group name.
 
 
 ### Add a Github link to a group: `addGG`
@@ -450,6 +463,7 @@ Action | Format, Examples
 **Add (Student) Group** | `addGroup g/NAME` <br> e.g., `addGroup g/W14-4 t/tApp`
 **Delete (Student) Group** | `deleteGroup INDEX`<br> e.g., `deleteGroup 1`
 **Add Student to Group** | `addSG INDEX g/GROUP`<br> e.g., `addSG 1 g/W14-4`
+**Delete Student from Group** | `deleteSG GROUP_INDEX STUDENT_INDEX` <br> e.g., `deleteSG 2 1`
 **Add Github Link to Group** | `addGG INDEX y/YEAR r/REPO NAME`<br> e.g., `addGG 1 y/AY20212022 r/tp`
 **Add Todo Task** | `todo n/TASK_NAME [t/TAG]…​` <br> e.g., `todo n/study t/W14-4`
 **Add Event Task** | `event n/TASK_NAME by/DATE [t/TAG]…​` <br> e.g., `event n/study on/2021-10-31 t/W14-4`
