@@ -34,9 +34,9 @@ Whether you're using Windows or MacOS, the steps for installation are the same.
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-* **`contacts`** : Switches to the contacts tab.
+* **`contacts`** : Switches to the contacts tab, where you can view and manage your contacts.
 
-* **`tasks`** : Switches to the tasks tab.
+* **`tasks`** : Switches to the tasks tab, where you can view and manage your tasks.
 
 * **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`** : Adds a contact with specified details.
 
@@ -273,8 +273,8 @@ Format: ```find DESCRIPTION```
 * The order of the keywords does not matter. e.g. home work will match work home
 * Only the description field is searched.
 * Task descriptions matching all keywords will be returned (i.e. AND search). 
-  e.g. ```Do this``` will return only ```Do this``` and ```Do this (very important!!!)```. 
-  It will not return ```Do maybe?``` or ```This doesn’t matter```
+  e.g. ```Math Quiz``` will return only ```Math Quiz``` and ```Math Quiz 8```. 
+  It will not return ```Math Assignment```, ```GEQ Quiz```, or ```This doesn't matter```.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -295,7 +295,7 @@ Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG].
 ![Finding upcoming Tasks](images/UG-13.png)
 #### Find all upcoming tasks: [upcoming]
 
-Finds all tasks whose date/time are after the current date/time.
+Finds all tasks whose Date/Time are after the current Date/Time.
 
 Format: ```upcoming```
 
@@ -323,7 +323,7 @@ Format: ```clear```
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about specifying date and time:**<br>
-A task can have Date only or both Date and Time.
+A task can optionally have a Date, or both a Date and a Time.
 
 `add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
 
