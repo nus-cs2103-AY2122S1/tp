@@ -251,8 +251,11 @@ Finds clients by their name, [priority](#tags), [tags](#tags) or
 [remarks](#adding-a-remark-rmk). This is useful if your have many clients in FAST and wish to quickly find a
 specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
 
-**Format**: `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]`
-OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`
+**Format 1**: `find QUERY [MORE_QUERIES]` <br>
+**Format 2**: `find pr/PRIORITY [MORE_PRIORITIES]`<br>
+**Format 3**: `find t/TAG [MORE TAGS]`<br>
+**Format 3**: `find r/REMARK [MORE REMARKS]`<br>
+
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the queries does not matter. e.g. `Hans Bo` will match `Bo Hans`
@@ -290,18 +293,19 @@ You can delete the specified client from FAST. This is useful when a client has 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 Can be used to delete up to **10** contacts in a single `del` command by supplying more `INDEX`.
 
-**Format** 1: `del INDEX INDEX [INDEX]...`
+**Format** 1: `del INDEX INDEX [INDEX]...` <br>
 **Format** 2: `del INDEX-INDEX`
 
 <div markdown="span" class="alert alert-primary">:exclamation: Reminder:
-If *Format 1* is used, there should be a space in between each `INDEX`.
+If *Format 1* is used, there should be a space in between each `INDEX`. <br>
 If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
+</div>
 </div>
 
 **Examples**:
 * `del 2 4 6 8 10` deletes the 2nd, 4th, 6th, 8th and 10th person in FAST.
 * `del 3-5` deletes the 3rd, 4th and 5th person in FAST.
-</div>
+
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This CANNOT be undone!</div>
@@ -410,7 +414,7 @@ This also allows you to keep track of the number of completed appointments with 
 
 ### Sorting all clients: `sort`
 
-You can sort all existing client by the given condition. 
+You can sort all existing clients by the given condition. 
 Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tags). 
 This allows you to keep your clients list orderly and well-organised.
 It can also be used to quickly sieve through large client lists.
