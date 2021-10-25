@@ -37,8 +37,8 @@ public class CommandResultTest {
 
     @Test
     public void exitAndHelp() {
-        String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Address Book as requested";
-        CommandResult exitAndHelpCommand = new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT, false, true);
+        String message = "Exiting Address Book as requested";
+        CommandResult exitAndHelpCommand = new CommandResult(message, false, true);
         assertTrue(exitAndHelpCommand.isExit());
         assertFalse(exitAndHelpCommand.isShowHelp());
     }

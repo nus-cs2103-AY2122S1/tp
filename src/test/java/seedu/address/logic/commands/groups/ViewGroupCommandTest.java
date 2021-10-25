@@ -34,7 +34,7 @@ public class ViewGroupCommandTest {
         String expectedMessage = String.format(ViewGroupCommand.MESSAGE_VIEW_GROUP_SUCCESS, groupToView);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-
+        expectedModel.setGroupToView(groupToView);
         assertCommandSuccess(viewGroupCommand, model, expectedMessage, expectedModel);
     }
 
