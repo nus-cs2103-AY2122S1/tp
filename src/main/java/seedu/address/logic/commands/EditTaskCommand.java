@@ -47,7 +47,7 @@ public class EditTaskCommand extends Command {
     public static final String DESCRIPTION = "Edits the details of the task identified";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s ";
-    public static final String MESSAGE_TASK_NOT_EDITED = "At least one field to edit must be provided.";
+    public static final String MESSAGE_TASK_NOT_EDITED = "At least one field of task to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_TASK = "Task already exists.";
     public static final String MESSAGE_INVALID_TASK = "The size of %1$s's task list is not that big";
 
