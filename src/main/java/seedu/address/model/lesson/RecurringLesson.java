@@ -33,6 +33,17 @@ public class RecurringLesson extends Lesson {
     }
 
     /**
+     * Get the upcoming date of the lesson to display to user.
+     *
+     * @return The upcoming date on the same day of week if start date
+     * has passed or start date if it has yet to pass.
+     */
+    @Override
+    public Date getDisplayDate() {
+        return getStartDate().updateDate();
+    }
+
+    /**
      * Returns true if this {@code RecurringLesson} clashes with the given {@code Lesson}.
      *
      * @param otherLesson The other lesson to be compared with.
@@ -49,4 +60,5 @@ public class RecurringLesson extends Lesson {
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
     }
+
 }

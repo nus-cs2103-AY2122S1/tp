@@ -81,7 +81,7 @@ public class FeesCalculator {
     public Lesson updateLessonOutstandingFeesField(Lesson lesson) {
 
         // make a copy of untouched fields
-        Date copiedDate = new Date(lesson.getDate().value);
+        Date copiedDate = new Date(lesson.getStartDate().value);
         TimeRange copiedTimRange = new TimeRange(lesson.getTimeRange().value);
         Subject copiedSubject = new Subject(lesson.getSubject().subject);
         LessonRates copiedLessonRates = new LessonRates(lesson.getLessonRates().value);

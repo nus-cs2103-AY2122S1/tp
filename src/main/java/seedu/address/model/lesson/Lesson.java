@@ -21,7 +21,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     private static final String MAKEUP = "Makeup";
 
     // Time fields
-    private final Date date;
+    private final Date startDate;
     private final TimeRange timeRange;
 
     // Data fields
@@ -43,9 +43,9 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param fees Outstanding fees that student has not paid for this lesson.
      */
     public Lesson(Date date, TimeRange timeRange, Subject subject,
-                  Set<Homework> homework, LessonRates rates, OutstandingFees fees) {
-        requireAllNonNull(date, timeRange, subject, homework, rates, fees);
-        this.date = date;
+                Set<Homework> homework, LessonRates rates, OutstandingFees fees) {
+        requireAllNonNull(date, timeRange, subject, homework);
+        this.startDate = date;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
@@ -53,20 +53,20 @@ public abstract class Lesson implements Comparable<Lesson> {
         this.outstandingFees = fees;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getStartDate() {
+        return startDate;
     }
 
     public LocalDate getLocalDate() {
-        return date.getLocalDate();
+        return startDate.getLocalDate();
     }
 
     public DayOfWeek getDayOfWeek() {
-        return date.getDayOfWeek();
+        return startDate.getDayOfWeek();
     }
 
     public boolean hasStarted() {
-        return date.isOver();
+        return startDate.isOver();
     }
 
     public Subject getSubject() {
@@ -78,11 +78,11 @@ public abstract class Lesson implements Comparable<Lesson> {
     }
 
     public LocalDateTime getStartDateTime() {
-        return timeRange.getStart().atDate(date.getLocalDate());
+        return timeRange.getStart().atDate(startDate.getLocalDate());
     }
 
     public LocalDateTime getEndDateTime() {
-        return timeRange.getEnd().atDate(date.getLocalDate());
+        return timeRange.getEnd().atDate(startDate.getLocalDate());
     }
 
     public String getTypeOfLesson() {
@@ -113,6 +113,11 @@ public abstract class Lesson implements Comparable<Lesson> {
     public abstract boolean isRecurring();
 
     /**
+     * Get the date of the lesson to display to the user.
+     */
+    public abstract Date getDisplayDate();
+
+    /**
      * Returns true both lessons clash.
      *
      * @param otherLesson The other lesson to be compared with.
@@ -138,7 +143,7 @@ public abstract class Lesson implements Comparable<Lesson> {
         }
 
         Lesson otherLesson = (Lesson) other;
-        return otherLesson.getDate().equals(getDate())
+        return otherLesson.getStartDate().equals(getStartDate())
             && otherLesson.getTimeRange().equals(getTimeRange())
             && otherLesson.getSubject().equals(getSubject())
             && otherLesson.getHomework().equals(getHomework())
@@ -149,7 +154,8 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, timeRange, subject, homework, lessonRates, outstandingFees);
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(startDate, timeRange, subject, homework, lessonRates, outstandingFees);
     }
 
     @Override
@@ -157,21 +163,21 @@ public abstract class Lesson implements Comparable<Lesson> {
         final StringBuilder builder = new StringBuilder();
         String typeOfLesson = isRecurring() ? RECURRING : MAKEUP;
         builder.append(typeOfLesson)
-            .append("\n")
-            .append(getDate())
-            .append("\nTime: ")
+            .append(" ")
+            .append(getDisplayDate())
+            .append("; Time: ")
             .append(getTimeRange())
-            .append("\nSubject: ")
+            .append("; Subject: ")
             .append(getSubject())
-            .append("\nOutstanding Fees: ")
+            .append("; Outstanding Fees: ")
             .append(getOutstandingFees())
-            .append("\nLesson Rates: ")
+            .append("; Lesson Rates: ")
             .append(getLessonRates());
 
         Set<Homework> homework = getHomework();
         if (!homework.isEmpty()) {
-            builder.append("\nHomework: ");
-            homework.forEach(builder::append);
+            builder.append("; Homework: ");
+            homework.forEach(x -> builder.append(x + "; "));
         }
         return builder.toString();
     }
@@ -184,7 +190,12 @@ public abstract class Lesson implements Comparable<Lesson> {
      */
     @Override
     public int compareTo(Lesson other) {
-        int compareDate = getDate().compareTo(other.getDate());
+        /*
+        Date represents the date of this lesson that is relevant to the comparison.
+        i.e. The upcoming date for recurring lessons; or the start date for makeup lessons
+        (since makeup lesson is a one-time event).
+         */
+        int compareDate = getDisplayDate().compareTo(other.getDisplayDate());
         int compareTime = getTimeRange().compareTo(other.getTimeRange());
         // Compare time if date is equal
         return compareDate == 0 ? compareTime : compareDate;

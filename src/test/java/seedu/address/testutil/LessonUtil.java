@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.commands.LessonAddCommand;
+import seedu.address.logic.commands.LessonDeleteCommand;
+import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.model.lesson.Lesson;
 
 /**
@@ -24,6 +26,21 @@ public class LessonUtil {
     }
 
     /**
+     * Returns a delete command string for deleting the {@code lesson}.
+     */
+    public static String getLessonDeleteCommand(int index, int indexToDelete) {
+        return LessonDeleteCommand.COMMAND_WORD + " " + index + " " + indexToDelete;
+    }
+
+    /**
+     * Returns an edit command string for editing the {@code lesson}.
+     */
+    public static String getLessonEditCommand(int index, int indexToEdit, Lesson lesson) {
+        return LessonEditCommand.COMMAND_WORD + " " + index + " " + indexToEdit + " "
+            + getLessonDetailsWithoutRecurrence(lesson);
+    }
+
+    /**
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getLessonDetails(Lesson lesson) {
@@ -31,14 +48,28 @@ public class LessonUtil {
         if (lesson.isRecurring()) {
             sb.append(PREFIX_RECURRING + " ");
         }
-        sb.append(PREFIX_DATE + lesson.getDate().toString() + " ");
-        sb.append(PREFIX_TIME + lesson.getTimeRange().value + " ");
-        sb.append(PREFIX_RATES + lesson.getLessonRates().value + " ");
-        sb.append(PREFIX_OUTSTANDING_FEES + lesson.getOutstandingFees().value + " ");
+
+        sb.append(getLessonDetailsWithoutRecurrence(lesson));
+        return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code person}'s details.
+     */
+    public static String getLessonDetailsWithoutRecurrence(Lesson lesson) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
+        sb.append(PREFIX_TIME + lesson.getTimeRange().toString() + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
+        sb.append(PREFIX_RATES + lesson.getLessonRates().toString() + " ");
+        sb.append(PREFIX_OUTSTANDING_FEES + lesson.getOutstandingFees().value + " ");
+
         lesson.getHomework().stream().forEach(
             s -> sb.append(PREFIX_HOMEWORK + s.description + " ")
         );
         return sb.toString();
     }
+
+
 }

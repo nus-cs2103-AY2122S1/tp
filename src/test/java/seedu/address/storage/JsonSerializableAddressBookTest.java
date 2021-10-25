@@ -22,6 +22,7 @@ public class JsonSerializableAddressBookTest {
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.json");
     private static final Path EMPTY_LAST_UPDATED_FILE = TEST_DATA_FOLDER.resolve("emptyLastUpdatedAddressBook.json");
     private static final Path INVALID_LAST_UPDATED_FILE = TEST_DATA_FOLDER.resolve("invalidLastUpdatedAddressBook.json");
+    private static final Path CLASHING_LESSON_FILE = TEST_DATA_FOLDER.resolve("clashingLessonAddressBook.json");
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -61,5 +62,11 @@ public class JsonSerializableAddressBookTest {
                 JsonSerializableAddressBook.class).get();
         assertThrows(IllegalValueException.class, LastUpdatedDate.MESSAGE_CONSTRAINTS,
                 dateFromFile::toModelType);
+    }
+    public void toModelType_clashingLessons_throwsIllegalValueException() throws Exception {
+        JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(CLASHING_LESSON_FILE,
+                JsonSerializableAddressBook.class).get();
+        assertThrows(IllegalValueException.class, JsonAdaptedPerson.MESSAGE_CLASHING_LESSON,
+                dataFromFile::toModelType);
     }
 }

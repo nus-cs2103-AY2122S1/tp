@@ -40,13 +40,14 @@ public class LessonBuilder {
         subject = new Subject(DEFAULT_SUBJECT);
         homeworkSet = new HashSet<>();
         outstandingFees = new OutstandingFees(DEFAULT_OUTSTANDING_FEES); //default lastAdded = LocalDate.now()
+        homeworkSet.add(new Homework(DEFAULT_HOMEWORK));
     }
 
     /**
      * Initializes the LessonBuilder with the data of {@code lessonToCopy}.
      */
     public LessonBuilder(Lesson lessonToCopy) {
-        date = lessonToCopy.getDate();
+        date = lessonToCopy.getStartDate();
         timeRange = lessonToCopy.getTimeRange();
         lessonRates = lessonToCopy.getLessonRates();
         subject = lessonToCopy.getSubject();

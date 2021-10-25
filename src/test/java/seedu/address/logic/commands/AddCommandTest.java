@@ -161,6 +161,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
@@ -187,6 +192,11 @@ public class AddCommandTest {
 
         @Override
         public LastUpdatedDate getLastUpdatedDate() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLastUpdatedDate() {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -86,6 +86,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns true if a person that has clashing lesson with {@code person} exists in the address book.
+     */
+    public boolean hasClashingLesson(Lesson lesson, Lesson lessonToIgnore) {
+        requireNonNull(lesson);
+        return entries.hasClashes(lesson, lessonToIgnore);
+    }
+
+    /**
      * Returns true if any of the specified lessons clashes with existing lesson in the address book.
      */
     public boolean hasClashingLesson(Iterable<Lesson> lessons) {
@@ -164,6 +172,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
                 && persons.equals(((AddressBook) other).persons))
+                && entries.equals(((AddressBook) other).entries)
                 && lastUpdatedDate.equals(((AddressBook) other).lastUpdatedDate);
     }
 

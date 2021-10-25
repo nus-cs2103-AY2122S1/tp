@@ -26,12 +26,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalLessons.PAST_MAKEUP_LESSON;
+import static seedu.address.testutil.TypicalLessons.PAST_RECURRING_LESSON;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,10 +50,11 @@ import seedu.address.testutil.LessonBuilder;
 public class LessonAddCommandParserTest {
 
     private static final int FIRST_PERSON = INDEX_FIRST_PERSON.getOneBased();
+    private static final String RECURRENCE_FLAG = " " + PREFIX_RECURRING;
     private LessonAddCommandParser parser = new LessonAddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresentMakeUpLesson_success() {
         Lesson expectedLesson = new LessonBuilder(PAST_MAKEUP_LESSON)
                 .withHomeworkSet(VALID_HOMEWORK_POETRY).build();
 
@@ -101,8 +104,58 @@ public class LessonAddCommandParserTest {
         assertParseSuccess(parser, " " + FIRST_PERSON + PAST_DATE_DESC
                 + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC + OUTSTANDING_FEES_DESC
                 + HOMEWORK_DESC_POETRY + HOMEWORK_DESC_TEXTBOOK,
-                new LessonAddCommand(INDEX_FIRST_PERSON, expectedLessonMultipleHomework));
+            new LessonAddCommand(INDEX_FIRST_PERSON, expectedLessonMultipleHomework));
+    }
 
+    @Test
+    public void parse_allFieldsPresentRecurringLesson_success() {
+        Lesson expectedLesson = new LessonBuilder(PAST_RECURRING_LESSON)
+            .withHomeworkSet(VALID_HOMEWORK_POETRY).buildRecurring();
+
+        // whitespace only preamble
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + FIRST_PERSON + LESSON_RATES_DESC
+            + RECURRENCE_FLAG + PAST_DATE_DESC + TIME_RANGE_DESC + SUBJECT_DESC + OUTSTANDING_FEES_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple date - last date accepted
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG
+            + FUTURE_DATE_DESC + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC
+            + PAST_DATE_DESC + TIME_RANGE_DESC + SUBJECT_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple subject - last subject accepted
+        String testSubject = " " + PREFIX_SUBJECT + "Testing";
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+            + TIME_RANGE_DESC + testSubject + SUBJECT_DESC + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple time ranges - last time range accepted
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+            + TIME_RANGE_DESC + TIME_RANGE_DESC + SUBJECT_DESC + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC
+            + HOMEWORK_DESC_POETRY, new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        // multiple homework - all accepted
+        Lesson expectedLessonMultipleHomework = new LessonBuilder(PAST_RECURRING_LESSON)
+            .withHomeworkSet(VALID_HOMEWORK_POETRY, VALID_HOMEWORK_TEXTBOOK).buildRecurring();
+
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+                + TIME_RANGE_DESC + SUBJECT_DESC + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC
+                + HOMEWORK_DESC_POETRY + HOMEWORK_DESC_TEXTBOOK,
+            new LessonAddCommand(INDEX_FIRST_PERSON, expectedLessonMultipleHomework));
+
+        // multiple lesson rates - last rate accepted
+        String testLessonRates = " " + PREFIX_RATES + 60.00;
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+                + TIME_RANGE_DESC + SUBJECT_DESC + testLessonRates + LESSON_RATES_DESC
+                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY,
+                new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
+
+        //multiple outstanding fee - last outstanding fees accepted
+        String testOutstandingFees = " " + PREFIX_OUTSTANDING_FEES + 99.99;
+        assertParseSuccess(parser, " " + FIRST_PERSON + RECURRENCE_FLAG + PAST_DATE_DESC
+                + TIME_RANGE_DESC + LESSON_RATES_DESC + SUBJECT_DESC + testOutstandingFees
+                + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY,
+                new LessonAddCommand(INDEX_FIRST_PERSON, expectedLesson));
     }
 
     @Test
@@ -124,42 +177,42 @@ public class LessonAddCommandParserTest {
 
         // missing date
         assertParseFailure(parser, " " + FIRST_PERSON + TIME_RANGE_DESC + SUBJECT_DESC
-                + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + LESSON_RATES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing time range
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + SUBJECT_DESC
-                + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + LESSON_RATES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing subject
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
-                + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + LESSON_RATES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing lesson rates
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
-                + SUBJECT_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + SUBJECT_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing all fields
         assertParseFailure(parser, " " + FIRST_PERSON, expectedMessage);
 
         // missing date prefix
         assertParseFailure(parser, " " + FIRST_PERSON + VALID_DATE_FUTURE + TIME_RANGE_DESC
-                + SUBJECT_DESC + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + SUBJECT_DESC + LESSON_RATES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing time range prefix
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + VALID_TIME_RANGE
-                + SUBJECT_DESC + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + SUBJECT_DESC + LESSON_RATES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing subject prefix
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
-                + VALID_SUBJECT + LESSON_RATES_DESC + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + VALID_SUBJECT + LESSON_RATES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // missing lesson rates prefix
         assertParseFailure(parser, " " + FIRST_PERSON + FUTURE_DATE_DESC + TIME_RANGE_DESC
-                + SUBJECT_DESC + VALID_LESSON_RATES + OUTSTANDING_FEES_DESC + HOMEWORK_DESC_POETRY, expectedMessage);
+                + SUBJECT_DESC + VALID_LESSON_RATES + HOMEWORK_DESC_POETRY, expectedMessage);
 
         // all prefixes missing
         assertParseFailure(parser, " " + FIRST_PERSON + VALID_DATE_FUTURE + VALID_TIME_RANGE
-                + VALID_LESSON_RATES + VALID_SUBJECT + VALID_OUTSTANDING_FEES, expectedMessage);
+                + VALID_LESSON_RATES + VALID_SUBJECT, expectedMessage);
     }
 
     @Test

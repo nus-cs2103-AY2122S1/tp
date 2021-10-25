@@ -10,6 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 
 import seedu.address.model.lesson.Lesson;
 
+/**
+ * A utility class containing a list of {@code Lesson} objects to be used in tests.
+ * All lessons clash with each other and are used to test for clashing logic
+ */
 public class TypicalLessons {
     // all fields present
     public static final Lesson RECURRING_LESSON = new LessonBuilder().withDate("12 Jan 2000")
@@ -48,7 +52,7 @@ public class TypicalLessons {
     public static final Lesson PAST_RECURRING_LESSON = new LessonBuilder().withDate(VALID_DATE_PAST)
             .withTimeRange(VALID_TIME_RANGE).withSubject(VALID_SUBJECT)
             .withHomeworkSet(VALID_HOMEWORK_POETRY).withLessonRates(VALID_LESSON_RATES)
-            .buildRecurring();
+            .withOutstandingFees("100.00").buildRecurring();
 
     public static final Lesson PAST_MAKEUP_LESSON = new LessonBuilder().withDate(VALID_DATE_PAST)
             .withTimeRange(VALID_TIME_RANGE).withSubject(VALID_SUBJECT)
@@ -58,10 +62,10 @@ public class TypicalLessons {
     public static final Lesson FUTURE_RECURRING_LESSON = new LessonBuilder().withDate(VALID_DATE_FUTURE)
             .withTimeRange(VALID_TIME_RANGE).withSubject(VALID_SUBJECT)
             .withHomeworkSet(VALID_HOMEWORK_POETRY).withLessonRates(VALID_LESSON_RATES)
-            .buildRecurring();
+            .withOutstandingFees("100.00").buildRecurring();
 
     public static final Lesson FUTURE_MAKEUP_LESSON = new LessonBuilder().withDate(VALID_DATE_FUTURE)
             .withTimeRange(VALID_TIME_RANGE).withSubject(VALID_SUBJECT)
             .withHomeworkSet(VALID_HOMEWORK_POETRY).withLessonRates(VALID_LESSON_RATES)
-            .build();
+            .withOutstandingFees("100.00").build();
 }

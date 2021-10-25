@@ -105,6 +105,8 @@ public class CommandTestUtil {
     public static final String VALID_DATE_PAST = "15 May 1988";
     public static final String VALID_DATE_FUTURE = "07 Apr 2103";
     public static final String VALID_TIME_RANGE = "1234-1345";
+    public static final String VALID_CLASHING_TIME_RANGE = "1300-1355";
+    public static final String VALID_NON_CLASHING_TIME_RANGE = "1600-1855";
     public static final String VALID_LESSON_RATES = "50.50";
     public static final String VALID_SUBJECT = "Language Arts";
     public static final String VALID_OUTSTANDING_FEES = "100.00";
@@ -114,6 +116,8 @@ public class CommandTestUtil {
     public static final String PAST_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_PAST;
     public static final String FUTURE_DATE_DESC = " " + PREFIX_DATE + VALID_DATE_FUTURE;
     public static final String TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_TIME_RANGE;
+    public static final String CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_CLASHING_TIME_RANGE;
+    public static final String NON_CLASHING_TIME_RANGE_DESC = " " + PREFIX_TIME + VALID_NON_CLASHING_TIME_RANGE;
     public static final String LESSON_RATES_DESC = " " + PREFIX_RATES + VALID_LESSON_RATES;
     public static final String OUTSTANDING_FEES_DESC = " " + PREFIX_OUTSTANDING_FEES + VALID_OUTSTANDING_FEES;
     public static final String SUBJECT_DESC = " " + PREFIX_SUBJECT + VALID_SUBJECT;
