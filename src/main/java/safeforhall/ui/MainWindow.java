@@ -180,6 +180,12 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    @FXML
+    private void handleSwitch() {
+        int index = tabPane.getSelectionModel().getSelectedIndex() ^ 1;
+        tabPane.getSelectionModel().select(index);
+    }
+
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
@@ -201,6 +207,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isSwitchTab()) {
+                handleSwitch();
             }
 
             return commandResult;
