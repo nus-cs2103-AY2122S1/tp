@@ -25,15 +25,15 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`ls -contacts`** : Lists all contacts.
+   * **`ls -contacts`**: Lists all contacts.
 
-   * **`touch`**`-n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`touch`**`-n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`: Adds a contact named `John Doe` to the Address Book.
 
-   * **`rm`**`3` : Deletes the 3rd contact shown in the current list.
+   * **`rm`**`3`: Deletes the 3rd contact shown in the current list.
 
-   * **`rm -contacts`** : Deletes all contacts.
+   * **`rm -contacts`**: Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+   * **`exit`**: Exits the app.
 
 1. Refer to the [Features](#features) below for details of each command.
 
@@ -65,7 +65,7 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 
 </div>
 
-### Viewing help : `help`
+### Viewing help: `help`
 
 Shows a message explaining how to access the help page.
 
@@ -73,8 +73,9 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+### Managing people
 
-### Adding a person: `touch`
+#### Adding a person: `touch`
 
 Adds a person to the address book.
 
@@ -88,13 +89,13 @@ Examples:
 * `touch -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`
 * `touch -n Betsy Crowe -t friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -t criminal`
 
-### Listing all persons : `ls -contacts`
+#### Listing all persons: `ls -contacts`
 
 Shows a list of all persons in the address book.
 
 Format: `ls -contacts`
 
-### Editing a person : `vim`
+#### Editing a person: `vim`
 
 Edits an existing person in the address book.
 
@@ -110,7 +111,7 @@ Examples:
 *  `vim 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `vim 2 -n Betsy Crower -t ` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+#### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
 
@@ -128,7 +129,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `rm`
+#### Deleting a person: `rm`
 
 Deletes the specified person from the address book.
 
@@ -142,19 +143,15 @@ Examples:
 * `ls -contacts` followed by `rm 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `rm 1` deletes the 1st person in the results of the `find` command.
 
-### Clearing all entries : `rm -contacts`
+#### Clearing all people: `rm -contacts`
 
 Clears all entries from the address book.
 
 Format: `rm -contacts`
 
-### Exiting the program : `exit`
+### Managing folders
 
-Exits the program.
-
-Format: `exit`
-
-### Creating a folder: `mkdir`
+#### Adding a folder: `mkdir`
 
 Creates a folder for contacts to be added into.
 
@@ -166,31 +163,27 @@ Examples:
 
 * `mkdir CS2103` creates a folder with the name `CS2103`.
 
-### Removing a folder: `rmdir`
+#### Adding contacts to a folder: `echo`
 
-Deletes a specified folder
+To organize and group contacts into an arbitrary folder
+Format: `echo CONTACT_INDEX >> FOLDER_NAME`
+- `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
+- `FOLDER_NAME` must be an existing folder
+    - Command fails if there is no existing folder with that name
 
-Format `rmdir FOLDER_NAME`
-
-* Deletes folder with the name `FOLDER_NAME`.
-
-Examples:
-
-* `rmdir CS1010` deletes a folder with the name `CS1010`.
-
-### Editing names of folders: `mv`
-
-Replaces the old folder name with the new folder name
-
-Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
-
-### Viewing list of folders: `ls -folders`
+#### Listing all folders: `ls -folders`
 
 Retrieve list of all folders created
 
 Format: `ls -folders`
 
-### Locating folders by name: `find -folders`
+#### Editing a folder name: `mv`
+
+Replaces the old folder name with the new folder name
+
+Format: `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME`
+
+#### Locating folders by name: `find -folders`
 
 Finds folders whose names contain any of the given keywords.
 
@@ -207,13 +200,25 @@ Examples:
 * `find -folders CS` returns `CS2103` and `CS2101`
 * `find -folders CS2103 Team Project` returns `CS2103`, `Team Project`
 
-### Adding contacts to folder: `echo`
+#### Deleting a folder: `rmdir`
 
-To organize and group contacts into an arbitrary folder
-Format: `echo CONTACT_INDEX >> FOLDER_NAME`
-- `CONTACT_INDEX` must be a positive integer 1, 2, 3, ...
-- `FOLDER_NAME` must be an existing folder
-    - Command fails if there is no existing folder with that name
+Deletes a specified folder
+
+Format `rmdir FOLDER_NAME`
+
+* Deletes folder with the name `FOLDER_NAME`.
+
+Examples:
+
+* `rmdir CS1010` deletes a folder with the name `CS1010`.
+
+### Exiting the program: `exit`
+
+Exits the program.
+
+Format: `exit`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Saving the data
 
@@ -227,12 +232,6 @@ AddressBook data are saved as a JSON file `[JAR file location]/data/addressbook.
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -244,16 +243,16 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
+**Help** | `help`
 **Add new contact** | `touch -n NAME -p PHONE_NUMBER -e EMAIL -a ADDRESS [-t TAG]` <br> e.g., `touch -n James Ho -p 22224444 -e jamesho@example.com -a 123, Clementi Rd, 1234665 -t friend -t colleague`
-**Clear contacts** | `rm -contacts`
-**Delete contact** | `rm INDEX`<br> e.g., `rm 3`
+**List contacts** | `ls -contacts`
 **Edit contact** | `vim INDEX [-n NAME] [-p PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-t TAG]` <br> e.g., `vim 2 -n James Lee -e jameslee@example.com`
 **Find contact** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List contacts** | `ls -contacts`
-**Help** | `help`
-**Create folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
-**Edit folder Name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` e.g. `mv CS2103` &#124; `CS2102`
-**Delete folder** | `rmdir FOLDER_NAME` e.g. `rmdir CS1010`
+**Delete contact** | `rm INDEX`<br> e.g., `rm 3`
+**Clear contacts** | `rm -contacts`
+**Add new folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
-**Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103`
 **List folders** | `ls -folders`
+**Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` e.g. `mv CS2103` &#124; `CS2102
+**Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103``
+**Delete folder** | `rmdir FOLDER_NAME` e.g. `rmdir CS1010`
