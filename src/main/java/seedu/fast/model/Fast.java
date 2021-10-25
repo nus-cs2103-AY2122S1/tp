@@ -14,6 +14,9 @@ import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.person.UniquePersonList;
 import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
+import seedu.fast.ui.StatsWindowData.InvestmentPlanData;
+import seedu.fast.ui.StatsWindowData.PriorityData;
+
 
 /**
  * Wraps all data at the FAST level
@@ -31,7 +34,8 @@ public class Fast implements ReadOnlyFast {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */ {
+     */
+    {
         persons = new UniquePersonList();
         filteredPersons = new FilteredList<>(this.getPersonList());
     }
@@ -121,6 +125,13 @@ public class Fast implements ReadOnlyFast {
         return filteredPersons.size();
     }
 
+    /**
+     * Returns the PriorityData containing all the priority data.
+     */
+    public PriorityData getPriorityData() {
+        return new PriorityData(getHighPriorityCount(), getMediumPriorityCount(), getLowPriorityCount());
+    }
+
     public int getHighPriorityCount() {
         return getPriorityCount(PriorityTag.HighPriority.TERM);
     }
@@ -141,6 +152,15 @@ public class Fast implements ReadOnlyFast {
         TagMatchesKeywordPredicate predicate = new TagMatchesKeywordPredicate(Arrays.asList(investmentPlan));
         filteredPersons.setPredicate(predicate);
         return filteredPersons.size();
+    }
+
+    /**
+     * Returns the InvestmentPlanData containing all the investment plan data.
+     */
+    public InvestmentPlanData getInvestmentPlanData() {
+        return new InvestmentPlanData(getLifeInsuranceCount(), getMotorInsuranceCount(),
+            getTravelInsuranceCount(), getHealthInsuranceCount(), getPropertyInsuranceCount(), getInvestmentCount(),
+            getSavingsCount());
     }
 
     public int getLifeInsuranceCount() {
@@ -176,7 +196,7 @@ public class Fast implements ReadOnlyFast {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return persons.asUnmodifiableObservableList().size() + " clients";
         // TODO: refine later
     }
 

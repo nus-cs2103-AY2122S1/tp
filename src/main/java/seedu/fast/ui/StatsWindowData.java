@@ -2,6 +2,7 @@ package seedu.fast.ui;
 
 import java.util.Collections;
 import java.util.HashMap;
+
 import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 
@@ -18,10 +19,13 @@ public abstract class StatsWindowData {
     /**
      * Encapsulates the data of the investment plan tags.
      */
-    static class InvestmentPlanData extends StatsWindowData {
+    public static class InvestmentPlanData extends StatsWindowData {
 
         private HashMap<String, Integer> counts = new HashMap<>();
 
+        /**
+         * Constructs a new InvestmentPlanData.
+         */
         public InvestmentPlanData(int lifeCount, int motorCount, int travelCount, int healthCount,
                            int propertyCount, int investmentCount, int savingsCount) {
 
@@ -84,10 +88,13 @@ public abstract class StatsWindowData {
     /**
      * Encapsulates the data of the priority tags.
      */
-    static class PriorityData extends StatsWindowData {
+    public static class PriorityData extends StatsWindowData {
 
         private HashMap<String, Integer> counts = new HashMap<>();
 
+        /**
+         * Constructs a new PriorityData.
+         */
         public PriorityData(int highCount, int mediumCount, int lowCount) {
 
             counts.put(PriorityTag.HighPriority.NAME, highCount);
