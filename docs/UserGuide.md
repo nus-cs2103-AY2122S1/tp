@@ -10,13 +10,15 @@ RecruitIn is a desktop app for recruiters in Singapore to keep track of the plet
 ### About this guide
 
 This guide aims to help users get familiar with using RecruitIn's features.
-* **New users** can get started by following the steps under [Quick start](#quick-start).
+* **New users** can get started by following the steps under [Quick start](#quick-start). New users may also view
+descriptions of the usage of each component in RecruitIn under [Usages](#usages)
 * **Existing users** can view existing features under [Features](#features) or refer to the [Table of Contents](#table-of-contents) below to view specific features. A **summary** of existing features can also be viewed under [Command summary](#command-summary).
 * **Advanced users** can view in-depth usage of RecruitIn's features by visiting links marked with ***{Advanced}*** under the [Table of Contents](#table-of-contents).
 * Commonly addressed questions can be viewed under [FAQ](#faq). 
 
 ### Table of Contents
   * [Quick start](#quick-start)
+  * [Usages](#usages)
   * [Features](#features)
     + [Viewing help : `help`](#viewing-help--help)
     + [Adding an applicant: `add`](#adding-an-applicant-add)
@@ -68,6 +70,12 @@ This guide aims to help users get familiar with using RecruitIn's features.
     * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Usages
+
+![Parts of RecruitIn](images/description.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
