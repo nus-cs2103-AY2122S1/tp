@@ -16,7 +16,7 @@ import safeforhall.model.event.Event;
 public class EventListPanel extends UiPart<Region> {
     private static final String FXML = "EventListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
-//test
+
     @FXML
     private ListView<Event> eventListView;
 
