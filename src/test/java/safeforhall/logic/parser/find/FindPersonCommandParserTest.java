@@ -1,4 +1,4 @@
-package safeforhall.logic.parser;
+package safeforhall.logic.parser.find;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static safeforhall.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -26,8 +26,10 @@ import static safeforhall.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 import org.junit.jupiter.api.Test;
 
-import safeforhall.logic.commands.FindCommand;
-import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
+import safeforhall.logic.commands.find.FindPersonCommand;
+import safeforhall.logic.commands.find.FindPersonCommand.FindCompositePredicate;
+import safeforhall.logic.parser.CliSyntax;
+import safeforhall.logic.parser.CommandParserTestUtil;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.Name;
@@ -35,10 +37,10 @@ import safeforhall.model.person.Phone;
 import safeforhall.model.person.Room;
 import safeforhall.model.person.VaccStatus;
 
-public class FindCommandParserTest {
+public class FindPersonCommandParserTest {
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE);
 
     private static final String INVALID_ROOM_FOR_FIND1 = "AA";
     private static final String INVALID_ROOM_FOR_FIND2 = "A12";
@@ -56,27 +58,27 @@ public class FindCommandParserTest {
     private static final String VALID_ROOM_DESC2 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND2;
     private static final String VALID_ROOM_DESC3 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND3;
 
-    private FindCommandParser parser = new FindCommandParser();
+    private FindPersonCommandParser parser = new FindPersonCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, " ",
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindPersonCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        FindCommand expectedFindCommand =
-                new FindCommand(new FindCommand.FindCompositePredicate(preparePredicate("Alice Bob",
+        FindPersonCommand expectedFindPersonCommand =
+                new FindPersonCommand(new FindPersonCommand.FindCompositePredicate(preparePredicate("Alice Bob",
                         null, null, null, null, null)));
         CommandParserTestUtil.assertParseSuccess(parser,
-                FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME + "Alice Bob", expectedFindCommand);
+                FindPersonCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME + "Alice Bob", expectedFindPersonCommand);
 
         // multiple whitespaces between keywords
         CommandParserTestUtil.assertParseSuccess(parser,
-                FindCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME + "  Alice   Bob  ",
-                expectedFindCommand);
+                FindPersonCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_NAME + "  Alice   Bob  ",
+                expectedFindPersonCommand);
     }
 
     @Test
@@ -85,16 +87,16 @@ public class FindCommandParserTest {
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, "1", FindCommand.MESSAGE_NOT_FILTERED);
+        assertParseFailure(parser, "1", FindPersonCommand.MESSAGE_NOT_FILTERED);
     }
 
     @Test
     public void parse_invalidPreamble_failure() {
         // invalid arguments
-        assertParseFailure(parser, "some random string", FindCommand.MESSAGE_NOT_FILTERED);
+        assertParseFailure(parser, "some random string", FindPersonCommand.MESSAGE_NOT_FILTERED);
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "i/ string", FindCommand.MESSAGE_NOT_FILTERED);
+        assertParseFailure(parser, "i/ string", FindPersonCommand.MESSAGE_NOT_FILTERED);
     }
 
     @Test
@@ -120,7 +122,7 @@ public class FindCommandParserTest {
         String userInput = NAME_DESC_AMY + ROOM_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_AMY + VACCSTATUS_DESC_AMY
                 + FACULTY_DESC_AMY;
 
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
         predicate.setRoom(VALID_ROOM_AMY);
         predicate.setPhone(new Phone(VALID_PHONE_BOB));
@@ -128,7 +130,7 @@ public class FindCommandParserTest {
         predicate.setFaculty(new Faculty(VALID_FACULTY_AMY));
         predicate.setVaccStatus(new VaccStatus(VALID_VACCSTATUS_AMY));
 
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -137,12 +139,12 @@ public class FindCommandParserTest {
     public void parse_someFieldsSpecified_success() {
         String userInput = NAME_DESC_AMY + ROOM_DESC_AMY + VACCSTATUS_DESC_AMY;
 
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
         predicate.setRoom(VALID_ROOM_AMY);
         predicate.setVaccStatus(new VaccStatus(VALID_VACCSTATUS_AMY));
 
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -151,25 +153,25 @@ public class FindCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // name
         String userInput = NAME_DESC_AMY;
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // room
         userInput = ROOM_DESC_AMY;
-        predicate = new FindCommand.FindCompositePredicate();
+        predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setRoom(VALID_ROOM_AMY);
-        expectedCommand = new FindCommand(predicate);
+        expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // vaccination
         userInput = VACCSTATUS_DESC_AMY;
-        predicate = new FindCommand.FindCompositePredicate();
+        predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setVaccStatus(new VaccStatus(VALID_VACCSTATUS_AMY));
-        expectedCommand = new FindCommand(predicate);
+        expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -179,12 +181,12 @@ public class FindCommandParserTest {
     public void parse_multipleRepeatedFields_acceptsLast() {
         String userInput = NAME_DESC_AMY + ROOM_DESC_AMY + VACCSTATUS_DESC_AMY + ROOM_DESC_BOB;
 
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setName(new Name(VALID_NAME_AMY));
         predicate.setRoom(VALID_ROOM_BOB);
         predicate.setVaccStatus(new VaccStatus(VALID_VACCSTATUS_AMY));
 
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -192,7 +194,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRoom1_fail() {
         try {
-            FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+            FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
             predicate.setRoom(INVALID_ROOM_FOR_FIND1);
 
             assertParseFailure(parser, INVALID_ROOM_DESC1, Room.MESSAGE_CONSTRAINTS_FOR_FIND);
@@ -204,7 +206,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRoom2_fail() {
         try {
-            FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+            FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
             predicate.setRoom(INVALID_ROOM_FOR_FIND2);
 
             assertParseFailure(parser, INVALID_ROOM_DESC2, Room.MESSAGE_CONSTRAINTS_FOR_FIND);
@@ -216,7 +218,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_invalidRoom3_fail() {
         try {
-            FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+            FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
             predicate.setRoom(INVALID_ROOM_FOR_FIND3);
 
             assertParseFailure(parser, INVALID_ROOM_DESC3, Room.MESSAGE_CONSTRAINTS_FOR_FIND);
@@ -227,30 +229,30 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_validRoomBlock_success() {
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setRoom(VALID_ROOM_FOR_FIND1);
 
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, VALID_ROOM_DESC1, expectedCommand);
     }
 
     @Test
     public void parse_validRoomBlockLevel_success() {
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setRoom(VALID_ROOM_FOR_FIND2);
 
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, VALID_ROOM_DESC2, expectedCommand);
     }
 
     @Test
     public void parse_validRoom_success() {
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setRoom(VALID_ROOM_FOR_FIND3);
 
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, VALID_ROOM_DESC3, expectedCommand);
     }
@@ -260,9 +262,9 @@ public class FindCommandParserTest {
         // no other valid values specified
         String userInput = INVALID_PHONE_DESC + PHONE_DESC_BOB;
 
-        FindCommand.FindCompositePredicate predicate = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate predicate = new FindPersonCommand.FindCompositePredicate();
         predicate.setPhone(new Phone(VALID_PHONE_BOB));
-        FindCommand expectedCommand = new FindCommand(predicate);
+        FindPersonCommand expectedCommand = new FindPersonCommand(predicate);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -272,7 +274,7 @@ public class FindCommandParserTest {
      */
     private FindCompositePredicate preparePredicate(String name, String room , String phone, String email,
                                                                 String vaccStatus, String faculty) {
-        FindCommand.FindCompositePredicate f = new FindCommand.FindCompositePredicate();
+        FindPersonCommand.FindCompositePredicate f = new FindPersonCommand.FindCompositePredicate();
 
         if (name != null) {
             f.setName(new Name(name));

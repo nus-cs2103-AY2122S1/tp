@@ -126,6 +126,24 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
+    /** Adds the selected resident into the filtered resident list */
+    void setSinglePerson(Person person);
+
+    /** Set an empty person list */
+    void setNoPerson();
+
+    /** Returns an unmodifiable view of the selected resident */
+    ObservableList<Person> getSinglePerson();
+
+    /** Adds the selected event into the filtered event list */
+    void setSingleEvent(Event event);
+
+    /** Set an empty event list */
+    void setNoEvent();
+
+    /** Returns an unmodifiable view of the selected event */
+    ObservableList<Event> getSingleEvent();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

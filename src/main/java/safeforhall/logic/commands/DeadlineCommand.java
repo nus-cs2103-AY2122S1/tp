@@ -17,12 +17,12 @@ import safeforhall.model.person.Person;
  * Lists all persons whose ART Collection or FET tests are due on the given date if one day is given or due within a
  * range of 2 dates if 2 dates are given.
  */
-public class ListCommand extends Command {
+public class DeadlineCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "deadline";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists residents whose ART collection or"
-            + "FET tests are due within the range of the given date or the range of the 2 dates given. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists residents whose ART collection or "
+            + "FET tests are due within the range of the given date or the range of the 2 dates given.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_KEYWORD + "KEYWORD "
             + CliSyntax.PREFIX_DATE1 + "DATE "
@@ -33,7 +33,7 @@ public class ListCommand extends Command {
             + CliSyntax.PREFIX_DATE2 + "05-10-2021";
 
     public static final String MESSAGE_USAGE_LATE = COMMAND_WORD + ": Lists residents whose ART collection or"
-            + "FET tests are due before the given date. "
+            + "FET tests are due before the given date.\n"
             + "Parameters: "
             + CliSyntax.PREFIX_KEYWORD + "KEYWORD "
             + CliSyntax.PREFIX_DATE1 + "DATE \n"
@@ -63,9 +63,9 @@ public class ListCommand extends Command {
     private final Predicate<Person> predicate;
 
     /**
-     * Creates an ListCommand to add the specified {@code String}
+     * Creates an DeadlineCommand to add the specified {@code String}
      */
-    public ListCommand(String keyword, LastDate date1) {
+    public DeadlineCommand(String keyword, LastDate date1) {
         requireNonNull(keyword);
         this.keyword = keyword;
         this.date1 = date1;
@@ -82,7 +82,7 @@ public class ListCommand extends Command {
     /**
      * Creates an ListCommand to add the specified {@code String, LastDate}
      */
-    public ListCommand(String keyword, LastDate date1, LastDate date2) {
+    public DeadlineCommand(String keyword, LastDate date1, LastDate date2) {
         requireNonNull(keyword);
         requireNonNull(date1);
         requireNonNull(date2);
@@ -117,8 +117,8 @@ public class ListCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ListCommand // instanceof handles nulls
-                && date1.equals(((ListCommand) other).date1)
-                && date2.equals(((ListCommand) other).date2)); // state check
+                || (other instanceof DeadlineCommand // instanceof handles nulls
+                && date1.equals(((DeadlineCommand) other).date1)
+                && date2.equals(((DeadlineCommand) other).date2)); // state check
     }
 }
