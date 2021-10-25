@@ -155,7 +155,75 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Locating folders by name: `find -folders`
+### Create a folder: `mkdir`
+
+#### Implementation
+
+Folders are saved in a `UniqueFolderList` in `AddressBook`.
+
+The following diagram shows how `mkdir` works:
+
+![CreateFolderSequenceDiagram](images/CreateFolderSequenceDiagram.png)
+
+#### Design considerations
+
+* **Alternative 1 (current choice)**: Folders hold references to contacts
+  * Pros: Easier management of folders
+  * Cons: More difficult to implement
+
+Diagram:
+
+![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
+
+* **Alternative 2**: Contacts hold references to folders
+    * Pros: Easy to implement
+    * Cons: More complex management of folders, Similar to tags which is already implemented
+
+Diagram:
+
+![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
+
+### View list of folders: `ls -folders`
+
+#### Implementation
+
+In our GUI, we would like to display the list of folders that users can create to organize
+their contacts into different classes. The implementation is very similar to `PersonListCard` and
+`PersonListPanel` for viewing list of contacts.
+
+#### Design considerations
+
+* Alternative 1: 2-row layout
+    * Pros: Ability to see additional details of folders and contacts with a small-sized GUI.
+    * Cons: Extra effort to scroll down the GUI to look into the details of contacts.
+* Alternative 2: 2-column layout
+    * Pros: Ability to see both folders and contacts data at a glance without initial scrolling needed
+    * Cons: Truncated details of folders and contacts will be displayed due to the small-sized GUI.
+
+Alternative 1 is selected, implemented using additional`StackPane` on top of the existing `StackPane`
+for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
+component in `MainWindow`.
+
+### Add contacts to folder: `echo index1 ... indexN >> Folder`
+
+#### Implementation
+Contacts are added by updating the `ObservableList` in `UniqueFolderList`.
+A new `Folder` object is created containing the new `Person` and replaces the old folder in the `UniqueFolderList`.
+
+#### Design considerations
+
+* Alternative 1: If there is an invalid index, allow adding of contact for the remaining valid index
+    * Pros: Easier to implement.
+    * Cons: Difficult for user to know which contacts have been added into the folder
+* Alternative 2: Only allow adding of contacts when all indexes are valid
+    * Pros: Easier for user to know which contacts have been added into the folder
+    * Cons: Requires more code and effort to ensure all indexes are valid before adding them to folder
+
+Alternative 2 is selected, as it is more user-friendly and intuitive.
+
+--------------------------------------------------------------------------------------------------------------------
+
+### Locate folders by name: `find -folders`
 
 #### Implementation
 
@@ -178,35 +246,7 @@ However, one use case we wanted to cater to was students who group their contact
 
 Alternative 1 was chosen, and the new method is under `StringUtil.containsTextIgnoreCase`.
 
-### Create folder feature
-
-#### Implementation
-
-Folders are saved in a `UniqueFolderList` in `AddressBook`.
-
-The following diagram shows how `mkdir` works:
-
-![CreateFolderSequenceDiagram](images/CreateFolderSequenceDiagram.png)
-
-#### Design considerations:
-
-* **Alternative 1 (current choice)**: Folders hold references to contacts
-  * Pros: Easier management of folders
-  * Cons: More difficult to implement
-
-Diagram:
-
-![CreateFolderAlternative1](images/CreateFolderAlternative1.png)
-
-* **Alternative 2**: Contacts hold references to folders
-    * Pros: Easy to implement
-    * Cons: More complex management of folders, Similar to tags which is already implemented
-
-Diagram:
-
-![CreateFolderAlternative2](images/CreateFolderAlternative2.png)
-
-### Edit folder name feature: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
+### Edit folder name: `mv OLD_FOLDER_NAME | NEW_FOLDER_NAME`
 
 #### Implementation
 
@@ -227,46 +267,6 @@ The following diagram shows how `mv` works:
 * **Alternative 1 (current choice)**: Old folder and new folder name are separated by the pipe operator `|`.
     * Pros: Easy to distinguish between the folder to be replaced and the new incoming folder name considering how folder name can have blank spaces in between
     * Cons: More difficult to implement
-
-### Viewing list of folders: `ls -folders`
-
-#### Implementation
-
-In our GUI, we would like to display the list of folders that users can create to organize
-their contacts into different classes. The implementation is very similar to `PersonListCard` and
-`PersonListPanel` for viewing list of contacts.
-
-#### Design considerations
-
-* Alternative 1: 2-row layout
-    * Pros: Ability to see additional details of folders and contacts with a small-sized GUI.
-    * Cons: Extra effort to scroll down the GUI to look into the details of contacts.
-* Alternative 2: 2-column layout
-    * Pros: Ability to see both folders and contacts data at a glance without initial scrolling needed
-    * Cons: Truncated details of folders and contacts will be displayed due to the small-sized GUI.
-
-Alternative 1 is selected, implemented using additional`StackPane` on top of the existing `StackPane`
-for the list of contacts placed vertically. This additional `StackPane` is placed under a `VBox`
-component in `MainWindow`.
-
-### Adding contacts to folder : `echo index1 ... indexN >> Folder`
-
-###Implementation
-Contacts are added by updating the `ObservableList` in `UniqueFolderList`.
-A new `Folder` object is created containing the new `Person` and replaces the old folder in the `UniqueFolderList`.
-
-#### Design considerations
-
-* Alternative 1: If there is an invalid index, allow adding of contact for the remaining valid index
-    * Pros: Easier to implement.
-    * Cons: Difficult for user to know which contacts have been added into the folder
-* Alternative 2: Only allow adding of contacts when all indexes are valid
-    * Pros: Easier for user to know which contacts have been added into the folder
-    * Cons: Requires more code and effort to ensure all indexes are valid before adding them to folder
-
-Alternative 2 is selected, as it is more user-friendly and intuitive.
-
---------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
