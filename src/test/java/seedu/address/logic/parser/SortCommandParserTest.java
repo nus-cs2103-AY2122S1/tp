@@ -108,7 +108,17 @@ public class SortCommandParserTest {
         expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_START), List.of(Direction.ASCENDING));
         assertParseSuccess(parser, userInput, expectedCommand);
 
+        // shn period start descending
+        userInput = " " + PREFIX_SHN_PERIOD_START + Direction.DESCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_START), List.of(Direction.DESCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
         // shn period end ascending
+        userInput = " " + PREFIX_SHN_PERIOD_END + Direction.ASCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_END), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period end descending
         userInput = " " + PREFIX_SHN_PERIOD_END + Direction.DESCENDING;
         expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_END), List.of(Direction.DESCENDING));
         assertParseSuccess(parser, userInput, expectedCommand);
