@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -12,12 +13,13 @@ import seedu.address.ui.ThemeType;
  * A class wrapping the different {@code ThemeType} that can be switched to.
  */
 public class ThemeList {
-    public static final ThemeType DEFAULT_THEME = new ThemeType("BookTheme");
+    public static final ThemeType DEFAULT_THEME = ThemeType.of("BookTheme").get();
     // New Themes Name to be added to this list
     private static final List<String> THEMES = List.of("BookTheme", "ColoredTheme", "RandomTheme", "DarkTheme");
-    public static final List<ThemeType> THEME_LIST = THEMES
-            .stream()
-            .map(ThemeType::new)
+    public static final List<ThemeType> THEME_LIST = THEMES.stream()
+            .map(ThemeType::of)
+            .filter(Optional::isPresent)
+            .map(Optional::get)
             .collect(Collectors.toList());
 
     private final FilteredList<ThemeType> currentTheme;

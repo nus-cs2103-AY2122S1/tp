@@ -34,7 +34,7 @@ public class ThemeListMenu extends UiPart<Menu> {
 
         ObservableList<ThemeType> themeList = logic.getThemeList();
         Function<ThemeType, MenuItem> menuItemFunction = theme -> {
-            MenuItem temp = new MenuItem(theme.toString());
+            MenuItem temp = new MenuItem(theme.getThemeName());
             temp.setOnAction(x -> {
                 String filePathName = logic.getTheme().getFilePathName();
                 int index = styleSheets.indexOf(filePathName);
@@ -53,7 +53,7 @@ public class ThemeListMenu extends UiPart<Menu> {
                 menuItemFunction.andThen(Optional::ofNullable).apply(theme).ifPresent(menuItems::add);
 
         Consumer<ThemeType> removedConsumer = theme -> {
-            Predicate<MenuItem> matchMenuItem = menuItem -> menuItem.getText().equals(theme.toString());
+            Predicate<MenuItem> matchMenuItem = menuItem -> menuItem.getText().equals(theme.getThemeName());
             ObservableList<MenuItem> temp = menuItems.filtered(matchMenuItem);
             if (temp.isEmpty()) {
                 return;

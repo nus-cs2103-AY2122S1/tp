@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static java.util.Objects.requireNonNull;
+import java.util.Optional;
 
 import seedu.address.MainApp;
 
@@ -10,17 +10,40 @@ import seedu.address.MainApp;
 public class ThemeType {
     private final String themeName;
 
+    private final String filePathName;
+
     /**
      * Create a {@code ThemeType} with the given {@code themeName}.
      */
-    public ThemeType(String themeName) {
+    private ThemeType(String themeName, String filePathName) {
         this.themeName = themeName;
-        requireNonNull(getFilePathName());
+        this.filePathName = filePathName;
     }
 
     public String getFilePathName() {
+        return this.filePathName;
+    }
+
+    public String getThemeName() {
+        return this.themeName;
+    }
+
+
+    /**
+     * Returns an {@code String} of the name  of the file path for
+     * the given {@code themeName} wrapped by an {@code Optional}.
+     */
+    public static Optional<String> themeToFilePathName(String themeName) {
         String cssFileName = String.format("/view/%s.css", themeName);
-        return MainApp.class.getResource(cssFileName).toString();
+        return Optional.ofNullable(MainApp.class.getResource(cssFileName)).map(Object::toString);
+    }
+
+    /**
+     * Returns an {@code ThemeType} wrapped by an {@code Optional} for the given {@code themeName}.
+     */
+    public static Optional<ThemeType> of(String themeName) {
+        Optional<String> filePathName = themeToFilePathName(themeName);
+        return filePathName.map(x -> new ThemeType(themeName, x));
     }
 
     @Override

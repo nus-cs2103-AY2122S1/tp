@@ -60,7 +60,7 @@ class JsonSerializableUserPrefs {
         userPrefs.setGuiSettings(Optional.ofNullable(this.guiSettings).orElseGet(GuiSettings::new));
         userPrefs.setAddressBookDirectory(
                 Optional.ofNullable(this.fileDirectory).orElse(DEFAULT_ADDRESSBOOK_DIRECTORY));
-        userPrefs.setTheme(Optional.ofNullable(this.themeName).map(ThemeType::new).orElse(ThemeList.DEFAULT_THEME));
+        userPrefs.setTheme(Optional.ofNullable(this.themeName).flatMap(ThemeType::of).orElse(ThemeList.DEFAULT_THEME));
         return userPrefs;
     }
 
