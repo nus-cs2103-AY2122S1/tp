@@ -90,7 +90,7 @@ public class AssessmentStatistics {
             }
         }
 
-        // Should not happen since a Score must be between the minimum and maximum name (inclusive)
+        // Should not happen since a Score must be between the minimum and maximum value (inclusive)
         assert false;
 
         return null;
