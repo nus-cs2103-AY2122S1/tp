@@ -77,6 +77,28 @@ public class Person implements Comparable<Person> {
         parallelTask.start();
     }
 
+    /**
+     * Overloaded constructor used when loading contacts from Json file.
+     */
+    public Person(Name name, Telegram telegram, Github github,
+                  Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite, Image image) {
+        requireAllNonNull(name, telegram, github, phone, email, address, tags);
+        this.name = name;
+        this.telegram = telegram;
+        this.github = github;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.isFavourite = isFavourite;
+        this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
+        this.parallelTask = new Thread(() -> {
+            profilePicture = GitHubUtil.getProfilePicture(github.value);
+        });
+        parallelTask.start();
+        this.profilePicture = image;
+    }
+
     public Name getName() {
         return name;
     }

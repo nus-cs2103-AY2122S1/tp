@@ -18,8 +18,8 @@ CohortConnect is a desktop application for CS students to network, optimized for
 
 Our app makes it easy to connect with like minded students in your module. Our **Find A Buddy** feature matches you with students who have similar interests by leveraging Github’s metadata using a proprietary algorithm.
 
-
 ## Table of Contents
+ - [Purpose](#Purpose)
  - [Quick Start](#QuickStart)
  - [Features](#Features)
     - [Adding a new Student - add](#Add)
@@ -33,18 +33,26 @@ Our app makes it easy to connect with like minded students in your module. Our *
   - [FAQ](#FAQ)
   - [Command Summary](#CommandSummary)
 
+<h2 id = "Purpose"> </h2>
+
+## Purpose
+
+This document is the User Guide of CohortConnect. It is intended to provide all the necessary information to use this software.
 
 <h2 id = "QuickStart"> </h2>
 
 ## Quick Start
 
 1. Ensure you have Java 11 or above installed in your computer.
-2. Download the latest `addressbook.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
-3. Place `addressbook.jar` in an empty folder.
-4. Using Terminal or Command Line, navigate to the folder containing `addressbook.jar`.
-5. Execute `java -jar addressbook.jar`
+2. Download the latest `CohortConnect.jar`  release from [here](https://github.com/AY2122S1-CS2103T-T10-1/tp/releases).
+3. Place `CohortConnect.jar` in an empty folder.
+4. Double click the jar file to start the program.
+5. The UI would look like this:
 
-
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Ui.png?raw=true">
+</p>
+  
 <h2 id = "Features"> </h2>
 
 ## Features
