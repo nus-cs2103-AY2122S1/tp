@@ -5,7 +5,6 @@ import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNu
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -53,7 +52,7 @@ public class ModelManager implements VersionedModel {
                 userPrefs.getVersionControlPath(),
                 userPrefs.getAcademyDirectoryFilePath());
 
-        this.additionalViewModel = new AdditionalViewModel(Optional.empty(), AdditionalInfo.empty());
+        this.additionalViewModel = new AdditionalViewModel(AdditionalViewType.DEFAULT, AdditionalInfo.empty());
     }
 
     public ModelManager() {
@@ -207,13 +206,14 @@ public class ModelManager implements VersionedModel {
     }
 
     //=========== Additional Information View =============================================================
+
     @Override
-    public AdditionalViewType getAdditionalViewType() {
-        return this.additionalViewModel.getAdditionalViewType();
+    public void setAdditionalViewType(AdditionalViewType additionalViewType) {
+        this.additionalViewModel.setAdditionalViewType(additionalViewType);
     }
 
     @Override
-    public AdditionalInfo<? extends Object> getAdditionalInfo() {
-        return this.additionalViewModel.getAdditionalInfo();
+    public AdditionalViewModel getAdditionalViewModel() {
+        return this.additionalViewModel;
     }
 }

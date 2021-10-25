@@ -2,6 +2,7 @@ package seedu.academydirectory.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -12,7 +13,7 @@ import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.AcademyDirectoryParser;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.AdditionalInfo;
+import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Student;
@@ -45,6 +46,7 @@ public class LogicManager implements Logic {
 
         Command command = academyDirectoryParser.parseCommand(commandText);
         CommandResult commandResult = command.execute(model);
+        model.setAdditionalViewType(AdditionalViewType.parse(command));
 
         try {
             storage.saveAcademyDirectory(model.getAcademyDirectory());
@@ -86,12 +88,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public AdditionalViewType getAdditionalViewType() {
-        return model.getAdditionalViewType();
-    }
-
-    @Override
-    public AdditionalInfo<? extends Object> getAdditionalInfo() {
-        return model.getAdditionalInfo();
+    public AdditionalViewModel getAdditionalViewModel() {
+        return model.getAdditionalViewModel();
     }
 }

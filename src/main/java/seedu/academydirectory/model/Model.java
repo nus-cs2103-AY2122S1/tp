@@ -94,7 +94,7 @@ public interface Model {
      */
     <T> ObservableList<T> getFilteredStudentListView(Function<? super Student, ? extends T> function);
 
-    AdditionalViewType getAdditionalViewType();
+    AdditionalViewModel getAdditionalViewModel();
 
-    AdditionalInfo<? extends Object> getAdditionalInfo();
+    void setAdditionalViewType(AdditionalViewType additionalViewType);
 }

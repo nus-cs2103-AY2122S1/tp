@@ -1,45 +1,27 @@
 package seedu.academydirectory.model;
 
-import java.util.Optional;
-
 import seedu.academydirectory.logic.AdditionalViewType;
-import seedu.academydirectory.logic.commands.ViewCommand;
-import seedu.academydirectory.logic.commands.VisualiseCommand;
 
 
 public class AdditionalViewModel {
-    private Optional<String> lastCommandWord;
+    private AdditionalViewType additionalViewType;
     private AdditionalInfo<? extends Object> additionalInfo;
 
     /**
-     * @param lastCommandWord the Command Word of the last command
+     * @param additionalViewType the AdditionalViewType of the last command
      * @param additionalInfo the Additional Information that the last command presents
      */
-    public AdditionalViewModel(Optional<String> lastCommandWord, AdditionalInfo<? extends Object> additionalInfo) {
-        this.lastCommandWord = lastCommandWord;
+    public AdditionalViewModel(AdditionalViewType additionalViewType, AdditionalInfo<? extends Object> additionalInfo) {
+        this.additionalViewType = additionalViewType;
         this.additionalInfo = additionalInfo;
     }
 
-    public Optional<String> getLastCommand() {
-        return lastCommandWord;
-    }
+    public void setAdditionalViewType(AdditionalViewType additionalViewType) {
+        this.additionalViewType = additionalViewType;
 
-    public void setLastCommand(Optional<String> lastCommandWord) {
-        this.lastCommandWord = lastCommandWord;
-    }
-
-    public AdditionalInfo<? extends Object> getAdditionalInfo() {
-        //Ugly hack
-        if (this.lastCommandWord.isEmpty()) {
+        //Reset AdditionalViewType if it's default command
+        if (this.additionalViewType.equals(AdditionalViewType.DEFAULT)) {
             this.additionalInfo = AdditionalInfo.empty();
-        }
-        switch (lastCommandWord.get()) {
-        case ViewCommand.COMMAND_WORD:
-            return this.additionalInfo;
-        case VisualiseCommand.COMMAND_WORD:
-            return this.additionalInfo;
-        default:
-            return AdditionalInfo.empty();
         }
     }
 
@@ -47,17 +29,11 @@ public class AdditionalViewModel {
         this.additionalInfo = additionalInfo;
     }
 
+    public AdditionalInfo<? extends Object> getAdditionalInfo() {
+        return additionalInfo;
+    }
+
     public AdditionalViewType getAdditionalViewType() {
-        if (this.lastCommandWord.isEmpty()) {
-            return AdditionalViewType.DEFAULT;
-        }
-        switch (lastCommandWord.get()) {
-        case ViewCommand.COMMAND_WORD:
-            return AdditionalViewType.VIEW;
-        case VisualiseCommand.COMMAND_WORD:
-            return AdditionalViewType.VISUALISE;
-        default:
-            return AdditionalViewType.DEFAULT;
-        }
+        return additionalViewType;
     }
 }
