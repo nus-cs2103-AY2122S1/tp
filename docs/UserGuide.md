@@ -39,17 +39,20 @@ ________________________________________________________________________________
 
 ## Using SportsPA's Interface
 
-While SportsPA has a GUI (Graphical User Interface), you interact with the user mainly on the Command Line Interface(
-CLI). The figure below provides an overview on the key components of our interface. <br><br>
+While SportsPA has a GUI (Graphical User Interface), you interact with the user mainly on the Command Line Interface (CLI). The figure below provides an overview on the key components of our interface. <br><br>
 ![Gui](images/Gui.png)
 
-Typically, to execute a command, you type the relevant command into the **Command Window** and press **Enter** on your
-keyboard. *e.g. typing **`help`** and pressing Enter will open the help window*. The results of the command (or any
-warning messages generated) are displayed in the **Result Window**. Any changes made to the data will be reflected
-accordingly in the **List Window**. SportsPA stores two lists - **Members** and **Facilities**, which you can freely
-switch between by clicking on the respective **Tabs**.
+Typically, to execute a command, this is how you interact with the interface:
+
+1. Type the relevant command into the **Command Window** and press **Enter** on your keyboard.
+2. The results of the command (or any warning messages generated) are displayed in the **Result Window**. 
+3. Any changes made to the data will be reflected accordingly in the **List Window**. 
+
+SportsPA stores two lists - **Members** and **Facilities**, which you can freely switch between by clicking on the respective **Tabs**. Alternatively, whenever you execute a member-specific or facility-specific command, SportsPA automatically switches to the relevant tab for you.
 
 Here are some example commands you can try:
+
+* **`help`** : Displays help window.
 
 * **`listf`** : Lists all facilities.
 
@@ -69,7 +72,7 @@ Here are some example commands you can try:
 ## Features
 
 This section documents all the commands available in SportsPA, guiding you through its function, format, example usages
-and any other noteworthy tips. For a summary of all the commands, refer to [Command Summary](#command-summary). If this
+and any other noteworthy tips. For a summary of all the commands, refer to the [Command Summary](#command-summary). If this
 is your first read, do go through the following notes about the command format to help you better understand the
 documentation.
 
@@ -104,120 +107,9 @@ documentation.
 
 </div>
 
-### Getting help: `help`
+### Member-Specific Features
 
-Shows message explaining how you can access our help page.
-
-Format: `help`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Adding a facility: `addf`
-
-Adds a facility to your facility list.
-
-Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
-
-* `TIME` specifies the start time and is to be inputted in the format HH:MM
-* `CAPACITY` specifies the maximum allowed people in the facility
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** You will not be able to add facilities with the same `NAME` and `LOCATION` into the list
-as they are considered duplicates.
-</div>
-
-Examples:
-
-* `addf n/Court 1 l/University Sports Hall t/15:00 c/5` adds Court 1 at University Sports Hall at 3pm with a capacity of
-  5
-
-[Back to Table of Contents](#table-of-contents)
-
-### Listing all facilities : `listf`
-
-Shows a list of all your facilities.
-
-Format: `listf`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Finding a facility : `findf`
-
-If you want to see specific facilities you are looking for, `findf` lets you find and filter facilities whose location contains
-any of the given keywords.
-
-Format: `findf KEYWORD [MORE_KEYWORDS]`
-
-* `KEYWORD` is case-insensitive. Eg. `Utown` will match `utown`
-* Only the location is searched
-* Only full words will be matched eg. `Utown` will not match `town`
-* Facilities matching at least one keyword will be returned (i.e. OR search) e.g `Utown Redhill` will
-  return `Utown Field` and `Redhill Sports Complex`
-
-Examples:
-
-* `findf redhill` returns `Redhill Sports Complex` and `Redhill Field`
-* `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Deleting a facility : `deletef`
-
-Removes a facility from your facility list.
-
-Format: `deletef INDEX`
-
-* Deletes the facility at the specified `INDEX`
-* `INDEX` refers to the index number shown in the currently displayed facility list
-* `INDEX` **must be a positive integer** 1, 2, 3…
-
-Examples:
-
-* `listf` followed by `deletef 2` deletes the 2nd facility in the facility list
-* `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the `findf` command
-
-[Back to Table of Contents](#table-of-contents)
-
-### Editing a facility: `editf`
-
-Edits an existing facility from your facility list.
-
-Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]
-
-* Edits the facility at the specified `INDEX`
-* `INDEX` refers to the index number shown in the displayed facility list
-* `INDEX` **must be a positive integer** 1, 2, 3…
-* At least one of the optional fields must be provided
-* Existing values will be updated to the input values
-
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Note:** You will not be able to edit the facility if it has the same `NAME` and `LOCATION` as
-another existing facility as they are considered duplicates.
-</div>
-
-Examples:
-
-* `editf 1 n/Court 5` edits the name of the 1st facility to be `Court 5`
-* `editf 2 n/Court 20 l/University Sports Hall` edits the name and location of the 2nd facility to be `Court 20`
-  and `University Sports Hall` respectively
-
-[Back to Table of Contents](#table-of-contents)
-
-### Clearing all entries in facility list: `clearf`
-
-Clears all facilities from your facility list.
-
-Format: `clearf`
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All facility data will be removed immediately after this command is executed. This action is undoable. 
-</div>
-
-[Back to Table of Contents](#table-of-contents)
-
-### Adding a member: `addm`
+#### Adding a member: `addm`
 
 Adds a member to your members list.
 
@@ -244,7 +136,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Listing all members: `listm`
+#### Listing all members: `listm`
 
 Shows a list of your members.
 
@@ -252,32 +144,7 @@ Format: `listm`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Sorting member list: `sortm`
-
-Shows a list of all members, sorted alphabetically
-
-Format: `sortm`
-
-### Finding a member `findm`
-
-If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
-given keywords.
-
-Format: `findm KEYWORD [MORE_KEYWORDS]`
-
-* `KEYWORD` is case-insensitive. Eg. `John` will match `john`
-* Only the name of the member is searched
-* Only full words will be matched eg. `Johnny` will not match `John`
-* Names matching at least one keyword will be returned (i.e. OR search) e.g `John Henry` will return `John, Henry`
-
-Examples:
-
-* `findm Bob` returns `bob` and `Bob Doe`
-* `findm john bobby` returns `John Lee`, `Bobby Tan`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Deleting a member : `deletem`
+#### Deleting a member : `deletem`
 
 Deletes a member from your member list
 
@@ -294,7 +161,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Editing a member: `editm`
+#### Editing a member: `editm`
 
 Edits an existing member from your member list.
 
@@ -320,7 +187,34 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Setting member availability: `setm`
+#### Finding a member `findm`
+
+If you want to see specific members you are looking for,`findm` lets you find and filter members whose name contains any of the
+given keywords.
+
+Format: `findm KEYWORD [MORE_KEYWORDS]`
+
+* `KEYWORD` is case-insensitive. Eg. `John` will match `john`
+* Only the name of the member is searched
+* Only full words will be matched eg. `Johnny` will not match `John`
+* Names matching at least one keyword will be returned (i.e. OR search) e.g `John Henry` will return `John, Henry`
+
+Examples:
+
+* `findm Bob` returns `bob` and `Bob Doe`
+* `findm john bobby` returns `John Lee`, `Bobby Tan`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Sorting member list: `sortm`
+
+Shows a list of all members, sorted alphabetically
+
+Format: `sortm`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Setting member availability: `setm`
 
 We know that the availability of your members can change frequently. Thus, instead of having to individually edit your
 members' availability, use
@@ -345,35 +239,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Clearing all entries in member list: `clearm`
-
-Clears all members from the member list.
-
-Format: `clearm`
-
-<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-All member data will be removed immediately after this command is executed. This action is undoable. 
-</div>
-
-[Back to Table of Contents](#table-of-contents)
-
-### Splitting members into facilities : `split`
-
-Organise your next training session seamlessly by splitting members into the facilities based on its capacity and
-members' availability using `split`.
-
-Format: `split DAY`
-
-* Allocate members available at the specified `DAY` to each facility
-* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
-
-Examples:
-* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
-  user
-
-[Back to Table of Contents](#table-of-contents)
-  
-### Marking attendance of members : `mark`
+#### Marking attendance of members : `mark`
 
 Marks attendance of members listed as present.
 
@@ -386,7 +252,7 @@ Format: `mark INDEX/INDICES`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Unmarking attendance of members: `unmark`
+#### Unmarking attendance of members: `unmark`
 
 Unmarks attendance of members marked as present.
 
@@ -399,7 +265,7 @@ Format `unmark INDEX/INDICES`
 
 [Back to Table of Contents](#table-of-contents)
 
-###Clearing all attendance for today: `cleara`
+#### Clearing all attendance for today: `cleara`
 
 Clears all member's attendance for today.
 
@@ -407,16 +273,7 @@ Format: `cleara`
 
 [Back to Table of Contents](#table-of-contents)
 
-###Clearing all entries in facility list: `clearf`
-
-Clears all entries in facility list.
-
-Format: `clearf`
-
-
-[Back to Table of Contents](#table-of-contents)
-
-### Importing multiple members using a CSV file: `import`
+#### Importing multiple members using a CSV file: `import`
 
 When you need to add or update the details of multiple members, you can import data from a comma-seperated values
 file using `import`.
@@ -443,7 +300,152 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Creating an alias: `alias`
+#### Clearing all entries in member list: `clearm`
+
+Clears all members from your member list.
+
+Format: `clearm`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All member data will be removed immediately after this command is executed. This action is undoable. 
+</div> <br>
+
+[Back to Table of Contents](#table-of-contents)
+
+### Facility-Specific Features
+
+#### Adding a facility: `addf`
+
+Adds a facility to your facility list.
+
+Format: `addf n/NAME l/LOCATION t/TIME c/CAPACITY`
+
+* `TIME` specifies the start time and is to be inputted in the format HH:MM
+* `CAPACITY` specifies the maximum allowed people in the facility
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** You will not be able to add facilities with the same `NAME` and `LOCATION` into the list
+as they are considered duplicates.
+</div>
+
+Examples:
+
+* `addf n/Court 1 l/University Sports Hall t/15:00 c/5` adds Court 1 at University Sports Hall at 3pm with a capacity of
+  5
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Listing all facilities : `listf`
+
+Shows a list of all your facilities.
+
+Format: `listf`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Deleting a facility : `deletef`
+
+Removes a facility from your facility list.
+
+Format: `deletef INDEX`
+
+* Deletes the facility at the specified `INDEX`
+* `INDEX` refers to the index number shown in the currently displayed facility list
+* `INDEX` **must be a positive integer** 1, 2, 3…
+
+Examples:
+
+* `listf` followed by `deletef 2` deletes the 2nd facility in the facility list
+* `findf Court 1` followed by `deletef 1` deletes the 1st facility in the results of the `findf` command
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Editing a facility: `editf`
+
+Edits an existing facility from your facility list.
+
+Format: `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]
+
+* Edits the facility at the specified `INDEX`
+* `INDEX` refers to the index number shown in the displayed facility list
+* `INDEX` **must be a positive integer** 1, 2, 3…
+* At least one of the optional fields must be provided
+* Existing values will be updated to the input values
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** You will not be able to edit the facility if it has the same `NAME` and `LOCATION` as
+another existing facility as they are considered duplicates.
+</div>
+
+Examples:
+
+* `editf 1 n/Court 5` edits the name of the 1st facility to be `Court 5`
+* `editf 2 n/Court 20 l/University Sports Hall` edits the name and location of the 2nd facility to be `Court 20`
+  and `University Sports Hall` respectively
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Finding a facility : `findf`
+
+If you want to see specific facilities you are looking for, `findf` lets you find and filter facilities whose location contains
+any of the given keywords.
+
+Format: `findf KEYWORD [MORE_KEYWORDS]`
+
+* `KEYWORD` is case-insensitive. Eg. `Utown` will match `utown`
+* Only the location is searched
+* Only full words will be matched eg. `Utown` will not match `town`
+* Facilities matching at least one keyword will be returned (i.e. OR search) e.g `Utown Redhill` will
+  return `Utown Field` and `Redhill Sports Complex`
+
+Examples:
+
+* `findf redhill` returns `Redhill Sports Complex` and `Redhill Field`
+* `findf utown redhill` returns `Utown Field`, `Redhill Sports Complex` and `Redhill Field`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Splitting members into facilities : `split`
+
+Organise your next training session seamlessly by splitting members into the facilities based on its capacity and
+members' availability using `split`.
+
+Format: `split DAY`
+
+* Allocate members available at the specified `DAY` to each facility
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+
+Examples:
+* `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
+  user
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Clearing all entries in facility list: `clearf`
+
+Clears all facilities from your facility list.
+
+Format: `clearf`
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+All facility data will be removed immediately after this command is executed. This action is undoable. 
+</div> <br>
+
+[Back to Table of Contents](#table-of-contents)
+
+### General Features
+
+#### Getting help: `help`
+
+Shows message explaining how you can access our help page.
+
+Format: `help`
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Creating an alias: `alias`
 
 Some of our commands' names may be not be to your liking. Hence, SportsPA offers you the flexibility of personalising
 the commands you use. With `alias`, `you can create a shortcut name for any command.
@@ -467,7 +469,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Listing all aliases: `aliases`
+#### Listing all aliases: `aliases`
 
 Shows a list of your created aliases in the **Result Window**.
 
@@ -475,7 +477,7 @@ Format: `aliases`
 
 [Back to Table of Contents](#table-of-contents)
 
-### Deleting an alias: `unalias`
+#### Deleting an alias: `unalias`
 
 Deletes an alias you have created.
 
@@ -489,15 +491,7 @@ Examples:
 
 [Back to Table of Contents](#table-of-contents)
 
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
-
-[Back to Table of Contents](#table-of-contents)
-
-### Saving the data
+#### Saving the data
 
 Your SportsPA data is saved in the hard disk automatically after any command that changes the data. They are saved as a
 JSON file `[JAR file location]/data/sportspa.json`. Though **not recommended**, if you are familiar with JSON, you can
@@ -505,7 +499,15 @@ directly change the contents, *e.g a member's name*, in the data file, which wil
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If changes made to the data file makes its format invalid, SportsPA will discard all data and start with an empty data file at the next run.
-</div>
+</div> <br>
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Exiting the program : `exit`
+
+Exits the program.
+
+Format: `exit`
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -526,29 +528,46 @@ the data of your previous SportsPA home folder.
 
 ## Command summary
 
+### Member-Specific Commands
+
+Action | Format, Examples
+--------|------------------
+**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
+**List members**| `listm`
+**Delete member**| `deletem INDEX` <br> eg. `deletem 1`
+**Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]` <br> eg. `editm 1 n/Jonathan p/93837283`
+**Find member**| `findm KEYWORD` <br> eg. `findm John`, `findm John Bob`
+**Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
+**Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
+**Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
+**Clear member**| `clearm`
+
+[Back to Table of Contents](#table-of-contents)
+
+### Facility-Specific Commands
+
 Action | Format, Examples
 --------|------------------
 **Add facility**| `addf n/NAME l/LOCATION t/TIME c/CAPACITY` <br> eg. `addf n/Court 1 l/University Sports Hall t/1500 c/5`
-**Add member**| `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]` <br> eg. `addm n/John Doe p/91111111`, `addm n/John Doe p/91111111 d/1 3 5`, `addm n/John Doe p/91111111 d/1 3 5 t/exco`
-**Clear facilities**|`clearf`
-**Clear member**| `clearm`
-**Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
-**Delete member**| `deletem INDEX` <br> eg. `deletem 1`
-**Exit**| `exit`
-**Find member**| `findm KEYWORD` <br> eg. `findm John`, `findm John Bob`
-**Find facility**| `findf KEYWORD` <br> eg. `findf Clementi`, `findf Utown`
-**Help**| `help`
-**List members**| `listm`
 **List facilities**| `listf`
-**Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
-**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
-**Split members**| `split DAY` <br> eg. `split Mon`
-**Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`
-**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
-**Split members**| `split d/DAY` <br> eg. `split d/1`
-**Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
+**Delete facility**| `deletef INDEX` <br> eg. `deletef 4`
+**Edit facility**| `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> eg. `editf 2 n/Court 20 l/University Sports Hall`
+**Find facility**| `findf KEYWORD` <br> eg. `findf Clementi`, `findf Utown`
+**Split members into facilities**| `split DAY` <br> eg. `split Mon`
+**Clear facilities**|`clearf`
+
+[Back to Table of Contents](#table-of-contents)
+
+### General Commands
+
+Action | Format, Examples
+--------|------------------
+**Help**| `help`
 **Creates alias**| `alias s/SHORTCUT cw/COMMAND_WORD` <br> eg. `alias s/lf cw/listf`
 **List aliases**| `aliases`
 **Deletes alias**| `unalias SHORTCUT` <br> eg. `unalias lf`
+**Exit**| `exit`
 
 [Back to Table of Contents](#table-of-contents)
