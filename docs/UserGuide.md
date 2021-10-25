@@ -406,37 +406,77 @@ Examples:
 
 <div style="page-break-after: always;"></div>
 
-### Viewing your Schedule
+### Viewing your Calendar
 
-This section guides you on how to use TAB's scheduling feature.
+This section guides you on how to use TAB's calendar interface. Typing any of the commands in this section will bring you to the calendar interface. Any other command, such as `list` or `tag`, will bring you right out.
+
+[New GUI screenshots coming soon...]
 
 --------------------------------------------------------------------------------------------------------------------
 
-#### Viewing your weekly schedule: `week`
+#### Switching to the calendar interface: `calendar`
 
-Displays a read-only schedule of your upcoming week.
+Brings you to TAB's calendar interface for you to see all your scheduled lessons.
+
+Format: `calendar`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You don't always have to type `calendar` to switch to the calendar interface. All the other calendar commands in this section act as a shortcut that opens the calendar as well! 
+</div>
+
+[New GUI screenshots coming soon...]
+
+#### Viewing your daily calendar: `day`
+
+Displays the daily calendar, which shows your scheduled lessons for the day.
+
+Format: `day`
+
+[New GUI screenshots coming soon...]
+
+#### Viewing your weekly calendar: `week`
+
+Shows the weekly calendar for you to see all the lessons you have for the week
 
 Format: `week`
 
 [New GUI screenshots coming soon...]
 
-<div class="caption">Weekly view of the schedule.</div>
+#### Viewing your monthly calendar: `month`
 
-* Typing `list`, or any valid [miscellaneous commands](miscellaneous-commands) or [managing lesson](managing-lessons) commands in the command box will bring you back out of the calendar interface.
+Displays the monthly calendar, allowing you to visualise your lessons for the month.
 
-<div style="page-break-after: always;"></div>
+Format: `month`
 
-#### Navigating forward in the schedule: `next`
+[New GUI screenshots coming soon...]
 
-Simply type `next` in the command box to go forwards in the calendar interface.
+#### Viewing your weekly calendar: `year`
+
+Shows the yearly calendar. You can see which days of the year you have lessons in this view.
+
+Format: `year`
+
+[New GUI screenshots coming soon...]
+
+#### Navigating forward in the calendar: `next`
+
+Goes to the next day/week/month/year in the calendar interface.
 
 Format: `next`
 
-#### Navigating backwards in the schedule: `back`
+#### Navigating backwards in the calendar: `back`
 
-Go backwards in the calendar interface using this command.
+Goes to the previous day/week/month/year in the calendar.
 
 Format: `back`
+
+#### Navigate to today in the calendar: `today`
+
+Jumps to the current day in the calendar.
+
+Format: `today`
+
+<div style="page-break-after: always;"></div>
 
 ### Managing Data
 
