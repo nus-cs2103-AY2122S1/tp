@@ -44,8 +44,7 @@ public class AppointmentCommandParser {
         final String arguments = matcher.group("arguments");
         switch (flag) {
         case FLAG_ADD:
-            return new AddAppointmentCommandParser().parse(arguments);
-
+            return new EditAppointmentCommand();
         case FLAG_EDIT:
             return new EditAppointmentCommand();
 

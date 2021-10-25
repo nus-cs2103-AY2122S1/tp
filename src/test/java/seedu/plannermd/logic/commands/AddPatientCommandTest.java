@@ -180,12 +180,12 @@ public class AddPatientCommandTest {
         }
 
         @Override
-        public boolean hasAppointment(Appointment appointment) {
+        public boolean isClashAppointment(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean isClashAppointment(Appointment appointment) {
+        public boolean hasAppointment(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
 
