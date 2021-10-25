@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -21,8 +23,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.modulelesson.ModuleLesson;
-
-import java.util.Collections;
 
 public class DeleteModuleLessonCommandTest {
 

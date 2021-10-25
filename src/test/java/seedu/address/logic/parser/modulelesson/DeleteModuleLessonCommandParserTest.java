@@ -7,12 +7,12 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.modulelesson.DeleteModuleLessonCommand;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
-
-import java.util.Collections;
 
 public class DeleteModuleLessonCommandParserTest {
 
