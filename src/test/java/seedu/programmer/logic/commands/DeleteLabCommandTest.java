@@ -12,8 +12,7 @@ import seedu.programmer.model.student.Student;
 import static org.junit.jupiter.api.Assertions.*;
 import static seedu.programmer.logic.commands.CommandTestUtil.*;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
-import static seedu.programmer.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
+import static seedu.programmer.testutil.TypicalIndexes.*;
 import static seedu.programmer.testutil.TypicalLabs.LAB6;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 import static seedu.programmer.testutil.TypicalLabs.getTypicalLabList;
@@ -28,7 +27,7 @@ public class DeleteLabCommandTest {
 
     @Test
     public void execute_validTitle_success() {
-        Lab labToDelete = getTypicalLabList().get(NUMBER_FIRST_LAB);
+        Lab labToDelete = getTypicalLabList().get(NUMBER_SECOND_LAB);
         DeleteLabCommand deleteLabCommand = new DeleteLabCommand(labToDelete);
 
         String expectedMessage = String.format(DeleteLabCommand.MESSAGE_DEL_LAB_SUCCESS, labToDelete);
