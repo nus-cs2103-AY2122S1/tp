@@ -83,9 +83,9 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
         if (indexes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> IndexesOfLanguages = indexes.size() == 1 && indexes.contains("")
+        Collection<String> indexesOfLanguages = indexes.size() == 1 && indexes.contains("")
                 ? Collections.emptySet() : indexes;
-        return Optional.of(ParserUtil.parseIndexes(IndexesOfLanguages));
+        return Optional.of(ParserUtil.parseIndexes(indexesOfLanguages));
     }
 
     /**
@@ -99,9 +99,9 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
         if (indexes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> IndexesOfFrameworks = indexes.size() == 1 && indexes.contains("")
+        Collection<String> indexesOfFrameworks = indexes.size() == 1 && indexes.contains("")
                 ? Collections.emptySet() : indexes;
-        return Optional.of(ParserUtil.parseIndexes(IndexesOfFrameworks));
+        return Optional.of(ParserUtil.parseIndexes(indexesOfFrameworks));
     }
 
     /**
@@ -115,8 +115,8 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
         if (indexes.isEmpty()) {
             return Optional.empty();
         }
-        Collection<String> IndexesOfTags = indexes.size() == 1 && indexes.contains("")
+        Collection<String> indexesOfTags = indexes.size() == 1 && indexes.contains("")
                 ? Collections.emptySet() : indexes;
-        return Optional.of(ParserUtil.parseIndexes(IndexesOfTags));
+        return Optional.of(ParserUtil.parseIndexes(indexesOfTags));
     }
 }

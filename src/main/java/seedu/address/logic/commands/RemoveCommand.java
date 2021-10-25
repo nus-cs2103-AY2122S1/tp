@@ -92,7 +92,7 @@ public class RemoveCommand extends Command {
     }
 
     private static Person createRemovePerson(Person personToRemoveFrom, RemovePersonDescriptor
-    removePersonDescriptor) throws CommandException {
+            removePersonDescriptor) throws CommandException {
         assert personToRemoveFrom != null;
 
         Name previousName = personToRemoveFrom.getName();
@@ -124,7 +124,8 @@ public class RemoveCommand extends Command {
                 updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
     }
 
-    private static Set<Skill> removeFromSkills(Set<Index> indexesToRemove, Set<Skill> previousSkills) throws CommandException {
+    private static Set<Skill> removeFromSkills(Set<Index> indexesToRemove, Set<Skill> previousSkills)
+            throws CommandException {
         // Arrange previous skills in an array
         Skill[] skillArray = previousSkills.toArray(new Skill[0]);
         Arrays.sort(skillArray, Comparator.comparing(skill -> skill.skillName));
@@ -132,7 +133,7 @@ public class RemoveCommand extends Command {
         // Convert the set of Indexes to an array of integers
         Index[] indexesArray = indexesToRemove.toArray(new Index[0]);
         int[] intIndexesArray = new int[indexesArray.length];
-        for (int i = 0; i < indexesArray.length; i ++) {
+        for (int i = 0; i < indexesArray.length; i++) {
             intIndexesArray[i] = indexesArray[i].getZeroBased();
         }
 
@@ -140,7 +141,7 @@ public class RemoveCommand extends Command {
         Arrays.sort(intIndexesArray);
 
         // For each specified index, remove corresponding skill in skillArray
-        for (int j = intIndexesArray.length; j >= 1; j --) {
+        for (int j = intIndexesArray.length; j >= 1; j--) {
             int indexOfSkillToRemove = intIndexesArray[j - 1];
             if (indexOfSkillToRemove > skillArray.length - 1) {
                 throw new CommandException(MESSAGE_INVALID_FIELD);
@@ -168,7 +169,7 @@ public class RemoveCommand extends Command {
         // Convert the set of Indexes to an array of integers
         Index[] indexesArray = indexesToRemove.toArray(new Index[0]);
         int[] intIndexesArray = new int[indexesArray.length];
-        for (int i = 0; i < indexesArray.length; i ++) {
+        for (int i = 0; i < indexesArray.length; i++) {
             intIndexesArray[i] = indexesArray[i].getZeroBased();
         }
 
@@ -176,7 +177,7 @@ public class RemoveCommand extends Command {
         Arrays.sort(intIndexesArray);
 
         // For each specified index, remove corresponding language in languageArray
-        for (int j = intIndexesArray.length; j >= 1; j --) {
+        for (int j = intIndexesArray.length; j >= 1; j--) {
             int indexOfLanguageToRemove = intIndexesArray[j - 1];
             if (indexOfLanguageToRemove > languageArray.length - 1) {
                 throw new CommandException(MESSAGE_INVALID_FIELD);
@@ -195,7 +196,8 @@ public class RemoveCommand extends Command {
         return updatedLanguages;
     }
 
-    private static Set<Framework> removeFromFrameworks(Set<Index> indexesToRemove, Set<Framework> previousFrameworks) throws CommandException {
+    private static Set<Framework> removeFromFrameworks(Set<Index> indexesToRemove, Set<Framework>
+            previousFrameworks) throws CommandException {
         // Arrange previous frameworks in an array
         Framework[] frameworkArray = previousFrameworks.toArray(new Framework[0]);
         Arrays.sort(frameworkArray, Comparator.comparing(framework -> framework.frameworkName));
@@ -203,7 +205,7 @@ public class RemoveCommand extends Command {
         // Convert the set of Indexes to an array of integers
         Index[] indexesArray = indexesToRemove.toArray(new Index[0]);
         int[] intIndexesArray = new int[indexesArray.length];
-        for (int i = 0; i < indexesArray.length; i ++) {
+        for (int i = 0; i < indexesArray.length; i++) {
             intIndexesArray[i] = indexesArray[i].getZeroBased();
         }
 
@@ -211,7 +213,7 @@ public class RemoveCommand extends Command {
         Arrays.sort(intIndexesArray);
 
         // For each specified index, remove corresponding framework in frameworkArray
-        for (int j = intIndexesArray.length; j >= 1; j --) {
+        for (int j = intIndexesArray.length; j >= 1; j--) {
             int indexOfFrameworkToRemove = intIndexesArray[j - 1];
             if (indexOfFrameworkToRemove > frameworkArray.length - 1) {
                 throw new CommandException(MESSAGE_INVALID_FIELD);
@@ -238,7 +240,7 @@ public class RemoveCommand extends Command {
         // Convert the set of Indexes to an array of integers
         Index[] indexesArray = indexesToRemove.toArray(new Index[0]);
         int[] intIndexesArray = new int[indexesArray.length];
-        for (int i = 0; i < indexesArray.length; i ++) {
+        for (int i = 0; i < indexesArray.length; i++) {
             intIndexesArray[i] = indexesArray[i].getZeroBased();
         }
 
@@ -246,7 +248,7 @@ public class RemoveCommand extends Command {
         Arrays.sort(intIndexesArray);
 
         // For each specified index, remove corresponding tag in tagArray
-        for (int j = intIndexesArray.length; j >= 1; j --) {
+        for (int j = intIndexesArray.length; j >= 1; j--) {
             int indexOfTagToRemove = intIndexesArray[j - 1];
             if (indexOfTagToRemove > tagArray.length - 1) {
                 throw new CommandException(MESSAGE_INVALID_FIELD);
@@ -345,7 +347,9 @@ public class RemoveCommand extends Command {
          * Returns {@code Optional#empty()} if {@code languages} is null.
          */
         public Optional<Set<Index>> getLanguageIndexes() {
-            return (languageIndexes != null) ? Optional.of(Collections.unmodifiableSet(languageIndexes)) : Optional.empty();
+            return (languageIndexes != null)
+                    ? Optional.of(Collections.unmodifiableSet(languageIndexes))
+                    : Optional.empty();
         }
 
         /**
@@ -362,7 +366,9 @@ public class RemoveCommand extends Command {
          * Returns {@code Optional#empty()} if {@code frameworks} is null.
          */
         public Optional<Set<Index>> getFrameworkIndexes() {
-            return (frameworkIndexes != null) ? Optional.of(Collections.unmodifiableSet(frameworkIndexes)) : Optional.empty();
+            return (frameworkIndexes != null)
+                    ? Optional.of(Collections.unmodifiableSet(frameworkIndexes))
+                    : Optional.empty();
         }
 
         /**
