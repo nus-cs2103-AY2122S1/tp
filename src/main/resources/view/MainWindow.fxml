@@ -31,6 +31,11 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Menu">
+            <MenuItem fx:id="studentMenuItem" mnemonicParsing="false" onAction="#handlePersonGridPanel" text="Students" />
+            <MenuItem fx:id="calendarMenuItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
+            <MenuItem fx:id="tagMenuItem" mnemonicParsing="false" onAction="#handleShowTagList" text="Tags" />
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">

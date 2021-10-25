@@ -127,6 +127,10 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Fills up all the placeholders of this window.
      */
@@ -170,10 +174,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     /**
      * Closes the application.
      */
@@ -186,7 +186,7 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-
+    @FXML
     private void handleCalendar() {
         centerPanel.displaySchedulePanel();
     }
@@ -219,6 +219,7 @@ public class MainWindow extends UiPart<Stage> {
         centerPanel.goBack();
     }
 
+    @FXML
     private void handlePersonGridPanel() {
         centerPanel.displayPersonGridPanel(logic.getFilteredPersonList(), logic.getEmptyLessonList());
     }
@@ -230,7 +231,8 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Displays tag list instead of the default person list.
      */
-    public void handleShowTagList() {
+    @FXML
+    private void handleShowTagList() {
         centerPanel.displayTagListPanel();
     }
 
