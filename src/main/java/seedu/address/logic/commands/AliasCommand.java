@@ -1,0 +1,54 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CommandAliases;
+import seedu.address.model.Model;
+
+
+public class AliasCommand extends Command{
+
+    public static final String COMMAND_WORD = "alias";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Creates a shortcut name for a command.\n"
+            + "Parameters: "
+            + PREFIX_ALIAS + "ALIAS "
+            + PREFIX_COMMAND + "COMMAND ";
+
+    public static final String MESSAGE_SUCCESS = "Alias successfully added.";
+
+    private final String alias;
+    private final Command command;
+
+    /**
+     * Creates an AddCommand to add the specified {@code Person}
+     */
+    public AliasCommand(String alias, Command command) {
+        requireNonNull(alias);
+        requireNonNull(command);
+
+        this.alias = alias;
+        this.command = command;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        CommandAliases.put(alias, command);
+
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AliasCommand // instanceof handles nulls
+                && alias.equals(((AliasCommand) other).alias)
+                && command.equals(((AliasCommand) other).command));
+    }
+}
