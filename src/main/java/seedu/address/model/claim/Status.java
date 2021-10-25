@@ -3,6 +3,8 @@ package seedu.address.model.claim;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents a Claim's status in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidStatus(String)}
@@ -51,4 +53,8 @@ public class Status {
                 && this.status.equalsIgnoreCase(((Status) other).status)); // state check
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(status.toUpperCase());
+    }
 }

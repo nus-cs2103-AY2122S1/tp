@@ -149,6 +149,13 @@ public class Person {
     }
 
     /**
+     * Returns true if the appointment scheduled with this person is happening in the future.
+     */
+    public boolean hasUpcomingAppointment() {
+        return this.appointment.isUpcoming();
+    }
+
+    /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -171,12 +178,13 @@ public class Person {
                 && otherPerson.getTags().equals(getTags())
                 && otherPerson.getClaims().equals(getClaims())
                 && otherPerson.getInsurances().equals(getInsurances())
-                && otherPerson.getNote().equals(getNote());
+                && otherPerson.getNote().equals(getNote())
+                && otherPerson.getAppointment().equals(getAppointment());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note, claims);
+        return Objects.hash(name, phone, email, revenue, address, tags, insurances, note, claims, appointment);
     }
 
     @Override
