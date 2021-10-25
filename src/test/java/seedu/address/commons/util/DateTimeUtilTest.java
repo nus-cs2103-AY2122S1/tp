@@ -40,7 +40,6 @@ public class DateTimeUtilTest {
         assertTrue(DateTimeUtil.isPast(LocalDateTime.now().minusDays(1)));
 
         // is not in past
-        assertFalse(DateTimeUtil.isPast(LocalDateTime.now()));
         assertFalse(DateTimeUtil.isPast(LocalDateTime.now().plusMinutes(1)));
         assertFalse(DateTimeUtil.isPast(LocalDateTime.now().plusDays(1)));
     }
@@ -48,7 +47,6 @@ public class DateTimeUtilTest {
     @Test
     public void isNextSevenDays() {
         // is in the next seven days
-        assertTrue(DateTimeUtil.isNextSevenDays(LocalDateTime.now()));
         assertTrue(DateTimeUtil.isNextSevenDays(LocalDateTime.now().plusMinutes(1)));
         assertTrue(DateTimeUtil.isNextSevenDays(LocalDateTime.now().plusDays(7)));
 
@@ -62,7 +60,6 @@ public class DateTimeUtilTest {
     @Test
     public void isNextThirtyDays() {
         // is in the next thirty days
-        assertTrue(DateTimeUtil.isNextThirtyDays(LocalDateTime.now()));
         assertTrue(DateTimeUtil.isNextThirtyDays(LocalDateTime.now().plusMinutes(1)));
         assertTrue(DateTimeUtil.isNextThirtyDays(LocalDateTime.now().plusDays(30)));
 
@@ -78,7 +75,7 @@ public class DateTimeUtilTest {
         // is in the last seven days
         assertTrue(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusMinutes(1)));
         assertTrue(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusDays(1)));
-        assertTrue(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusDays(7)));
+        assertTrue(DateTimeUtil.isLastSevenDays(LocalDateTime.now().minusDays(7).plusMinutes(1)));
 
         // is not in the last seven days
         assertFalse(DateTimeUtil.isLastSevenDays(LocalDateTime.now()));
@@ -92,7 +89,7 @@ public class DateTimeUtilTest {
         // is in the last thirty days
         assertTrue(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusMinutes(1)));
         assertTrue(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusDays(1)));
-        assertTrue(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusDays(30)));
+        assertTrue(DateTimeUtil.isLastThirtyDays(LocalDateTime.now().minusDays(30).plusMinutes(1)));
 
         // is not in the last thirty days
         assertFalse(DateTimeUtil.isLastThirtyDays(LocalDateTime.now()));
