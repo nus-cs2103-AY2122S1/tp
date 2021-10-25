@@ -37,8 +37,6 @@ type fast, Socius can get your contact management tasks done faster than traditi
      8. Computing statistics of a tutorial group : `stats`
      9. Clearing all entries `clear`
      10. Exiting the program `exit`
-     11. Saving the data
-     12. Editing the data file
 3. FAQ
 4. Command Summary
 --->
@@ -53,7 +51,7 @@ type fast, Socius can get your contact management tasks done faster than traditi
 
 1. Move the file (`Socius.jar`) to a folder you want to use as the _home folder_ for your Socius Application.
 
-1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds.
+1. Double-click the file to start the app. You should see the following screen similar to the one below appear within a few seconds. Alternatively for Mac users, you can try going to the terminal and typing in `java -jar Socius.jar` in case double-clicking does not work.
 
    ![Ui](images/Ui.png)
 
