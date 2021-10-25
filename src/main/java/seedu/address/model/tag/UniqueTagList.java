@@ -16,6 +16,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 public class UniqueTagList implements Iterable<Tag> {
 
+    // TODO: fix bug where update event not fired
     private final ObservableList<Tag> internalList =
             FXCollections.observableArrayList(tag -> new Observable[] {tag.getClients()});
     private final ObservableList<Tag> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
