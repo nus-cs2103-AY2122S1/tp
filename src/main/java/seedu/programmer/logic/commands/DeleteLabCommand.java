@@ -4,7 +4,6 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.List;
 
-import seedu.programmer.commons.core.Messages;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;

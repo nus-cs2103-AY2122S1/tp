@@ -33,7 +33,7 @@ public class DeleteLabCommandTest {
         String expectedMessage = String.format(DeleteLabCommand.MESSAGE_DEL_LAB_SUCCESS, labToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getProgrammerError(), new UserPrefs());
-        expectedModel.deleteLab(labToDelete);
+        //expectedModel.deleteLab(labToDelete);
 
         assertCommandSuccess(deleteLabCommand, model, expectedMessage, expectedModel);
     }
