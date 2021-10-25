@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
@@ -27,9 +30,12 @@ public class AddTaskCommand extends Command {
             + ": Add to the task list of the person identified "
             + "by the index number used in the last person listing.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_TASK + "[TASKNAME]\n"
+            + PREFIX_TASK_DESCRIPTION + " TASK_NAME "
+            + "[" + PREFIX_TASK_DATE + " TASK_DATE] "
+            + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
+            + "[" + PREFIX_TASK_VENUE + " TASK_VENUE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK + "Likes to swim.";
+            + PREFIX_TASK_DESCRIPTION + "Likes to swim.";
 
     public static final String DESCRIPTION = "Add to the task list of the person specified by INDEX";
 

@@ -89,7 +89,7 @@ Format: `help [COMMAND_NAME]`
 
 - If no command-name is entered, the user will see the list of all the keywords for each command
 
-- If the user enters a valid command-name, the user will see the full details of that command, which includes the format and description of the command.
+* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and taskName of the command.
 
 Examples:
 * `help`
