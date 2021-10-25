@@ -71,7 +71,7 @@ public class PersonTest {
         assertEquals(0, alice.getTotalWeeklyWorkingHour());
 
         alice.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
-        assertEquals(4, alice.getTotalWeeklyWorkingHour());
+        assertEquals(6, alice.getTotalWeeklyWorkingHour());
 
         Schedule newSchedule = new Schedule();
         alice.setSchedule(newSchedule);

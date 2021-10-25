@@ -29,11 +29,13 @@ import seedu.address.testutil.PersonBuilder;
 
 
 public class SetShiftTimeCommandTest {
+
+
     public static final LocalTime[] TIMES = new LocalTime[]{LocalTime.of(18, 0), LocalTime.of(19,
             0)};
-
     private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
     private static final LocalDate END_DATE = START_DATE.plusDays(7);
+
 
     @Test
     public void equals() {

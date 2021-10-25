@@ -20,7 +20,7 @@ import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
 
 public class ViewShiftCommandTest {
 
-    private final Period TEST_PERIOD = createPeriod(1, 5);
+    private static final Period TEST_PERIOD = createPeriod(1, 5);
 
     private final ViewShiftCommand firstCommand = new ViewShiftCommand(DayOfWeek.MONDAY,
             ViewShiftCommand.INVALID_SLOT_NUMBER, LocalTime.NOON, TEST_PERIOD);

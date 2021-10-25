@@ -389,7 +389,7 @@ public class ParserUtil {
         if (dates.size() == 2) {
             dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
             dateArray[1] = ParserUtil.parseLocalDate(dates.get(1));
-        } else if (dates.size() == 1){
+        } else if (dates.size() == 1) {
             dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
             dateArray[1] = dateArray[0].plusDays(7);
         } else {

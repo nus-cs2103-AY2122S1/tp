@@ -247,7 +247,7 @@ public class Schedule {
 
             totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()]
                     .getWorkingHour(new Period(date));
-            if(shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()] == null) {
+            if (shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()] == null) {
                 continue;
             }
             totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()]

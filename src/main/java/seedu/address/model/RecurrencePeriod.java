@@ -94,6 +94,10 @@ public class RecurrencePeriod extends Period {
     }
 
 
+    /**
+     * Removes the input period from {@code this}, while retaining the information
+     * of the recurring shift.
+     */
     public Collection<RecurrencePeriod> complementWithInformation(Period period) {
         Collection<Period> periods = super.complement(period);
         return periods.stream()

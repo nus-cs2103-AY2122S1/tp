@@ -40,6 +40,24 @@ public class Period {
 
     }
 
+    /**
+     * Constructs a {@code Period} with the same data as
+     * {@code period}.
+     */
+    public Period(Period period) {
+        this.startDate = period.startDate;
+        this.endDate = period.endDate;
+    }
+
+    /**
+     * Constructs a {@code Period} with a single {@code date}.
+     */
+    public Period(LocalDate date) {
+        this.startDate = date;
+        this.endDate = date;
+    }
+
+
 
     /**
      * Returns true if any dates within {@code period} is within
@@ -50,23 +68,8 @@ public class Period {
                 || this.contains(period.endDate);
     }
 
-    /**
-     * Constructs a {@code Period} with the same data as
-     * {@code period}.
-     */
-    public Period(Period period) {
-        this.startDate = period.startDate;
-        this.endDate = period.endDate;
-    }
 
 
-    /**
-     * Constructs a {@code Period} with a single {@code date}.
-     */
-    public Period(LocalDate date) {
-        this.startDate = date;
-        this.endDate = date;
-    }
 
     /**
      * Obtains a {@code Period} representing the period across the month of the input date.

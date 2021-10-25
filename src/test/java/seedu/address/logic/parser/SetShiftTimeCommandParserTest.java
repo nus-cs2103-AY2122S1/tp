@@ -14,9 +14,10 @@ import seedu.address.logic.commands.SetShiftTimeCommand;
 import seedu.address.model.person.Name;
 
 public class SetShiftTimeCommandParserTest {
-    private SetShiftTimeCommandParser parser = new SetShiftTimeCommandParser();
+
     private static final LocalDate START_DATE = LocalDate.now();
     private static final LocalDate END_DATE = START_DATE.plusDays(7);
+    private SetShiftTimeCommandParser parser = new SetShiftTimeCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {

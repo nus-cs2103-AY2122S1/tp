@@ -96,14 +96,40 @@ public class Shift {
     }
 
     /**
-     * Returns whether the staff is working during this time
-     *
+     * Returns whether the staff is working during this {@code LocalTime time}
+     * Within {@code Period period.}
      */
     public boolean isWorking(LocalTime time, Period period) {
+        List<LocalDate> dates = period.toList()
+                .stream()
+                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
+                .collect(Collectors.toList());
         long numOfRecurrences = recurrences.stream()
                 .filter(p -> period.isWithin(p))
+                .filter(p -> dates.stream().filter(date -> p.contains(date)).count() != 0)
                 .filter(p -> p.isWithinSlotPeriod(time))
                 .count();
+        return numOfRecurrences != 0;
+    }
+
+    /**
+     * Returns whether the shift
+     * represents that it is working during {@code period}.
+     */
+    public boolean isWorking(Period period) {
+        List<LocalDate> dates = period.toList()
+                .stream()
+                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
+                .collect(Collectors.toList());
+
+        long numOfRecurrences = recurrences.stream()
+                .filter(p ->
+                        0 != dates.stream()
+                                .filter(date -> p.contains(date)) //find any date within the period
+                                .count() //that is in recurrence
+                )
+                .count();
+
         return numOfRecurrences != 0;
     }
 
@@ -115,8 +141,8 @@ public class Shift {
         return recurrences.stream()
                 .filter(p ->
                         0 != dates.stream()
-                                .filter(date -> p.contains(date)) //find any date within the period that is in recurrence
-                                .count()
+                                .filter(date -> p.contains(date)) //find any date within the period
+                                .count() //that is in recurrence
                 )
                 .mapToLong(p -> p.getWorkingHour())
                 .sum();
@@ -124,22 +150,7 @@ public class Shift {
 
     }
 
-    public boolean isWorking(Period period) {
-        List<LocalDate> dates = period.toList()
-                .stream()
-                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
-                .collect(Collectors.toList());
 
-        long numOfRecurrences = recurrences.stream()
-                .filter(p ->
-                    0 != dates.stream()
-                            .filter(date -> p.contains(date)) //find any date within the period that is in recurrence
-                            .count()
-                )
-                .count();
-
-        return numOfRecurrences != 0;
-    }
 
 
 

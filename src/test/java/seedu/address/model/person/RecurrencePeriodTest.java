@@ -14,7 +14,7 @@ import seedu.address.model.RecurrencePeriod;
 public class RecurrencePeriodTest {
 
     @Test
-    public void test_union_by_duration() {
+    public void test_unionBy_duration() {
         RecurrencePeriod test = createRecurrencePeriod(4, 4);
         Collection<RecurrencePeriod> periods =
                 List.of(createRecurrencePeriod(1, 3), createRecurrencePeriod(5, 6));
