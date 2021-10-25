@@ -121,8 +121,7 @@ public class AssessmentStatistics {
         Optional<Double> min = scores.stream()
                 .map(Score::getNumericValue)
                 .min(Comparator.naturalOrder());
-        assert min.isPresent();
-        return min.get();
+        return min.orElse(0.0);
     }
 
     /**
@@ -133,8 +132,7 @@ public class AssessmentStatistics {
         Optional<Double> max = scores.stream()
                 .map(Score::getNumericValue)
                 .max(Comparator.naturalOrder());
-        assert max.isPresent();
-        return max.get();
+        return max.orElse(0.0);
     }
 
     /**
@@ -146,9 +144,13 @@ public class AssessmentStatistics {
                 .map(Score::getNumericValue)
                 .sorted().collect(Collectors.toList());
 
+        if (sorted.isEmpty()) {
+            return 0;
+        }
+
         long size = sorted.size();
         if (size % 2 == 1) { // odd number of scores
-            return sorted.get((int) (size + 1) / 2 - 1);
+            return sorted.get((int) ((size + 1) / 2 - 1));
         } else { // even number of scores
             long half = size / 2;
             return (sorted.get((int) half - 1)
