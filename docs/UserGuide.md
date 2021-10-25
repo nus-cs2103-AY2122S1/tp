@@ -41,8 +41,6 @@ Source Control is a **desktop app for CS1101S professors to manage the performan
 
 ## Features
 
-v1.2 assumes that all inputs are valid, i.e. student id is in the correct format, and the groups which the student belongs to exists.
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
@@ -131,7 +129,7 @@ Examples:
 
 Adds a new assessment into the database.
 
-Format: `add assessment -a <assessment_name`
+Format: `add assessment -a <assessment_name>`
 * Adds an assessment only if the assessment is not already in the database.
 * Assessment name can only be alphanumeric.
 
