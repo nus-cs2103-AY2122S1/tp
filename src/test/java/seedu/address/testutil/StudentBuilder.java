@@ -102,6 +102,14 @@ public class StudentBuilder {
     }
 
     /**
+     * Add an {@code Assessment} to the {@code UniqueAssessmentList} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssessment(Assessment assessment) {
+        this.assessments.add(assessment);
+        return this;
+    }
+
+    /**
      * Sets the {@code UniqueAssessmentList} of the {@code Student} that we are building.
      */
     public StudentBuilder withAssessments(UniqueAssessmentList assessments) {

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE_LAB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TOTAL_SCORE_QUIZ1;
 
 import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 
 public class TypicalAssessments {
 

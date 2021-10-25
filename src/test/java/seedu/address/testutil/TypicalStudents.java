@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.CsBook;
-import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.Group;
 import seedu.address.model.student.Student;
 
@@ -28,40 +27,40 @@ public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@example.com")
             .withTelegramHandle("@alice_pauline").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .build();
+            .withAssessment(MIDTERMS).build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withEmail("johnd@example.com")
-            .withTelegramHandle("@benson_meier")
-            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withTelegramHandle("@benson_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withAssessment(MIDTERMS).build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
-            .withTelegramHandle("@carl_kurz")
-            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withTelegramHandle("@carl_kurz").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withAssessment(MIDTERMS).build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withEmail("cornelia@example.com")
-            .withTelegramHandle("@daniel_meier")
-            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withTelegramHandle("@daniel_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withAssessment(MIDTERMS).build();
     public static final Student ELLE = new StudentBuilder().withName("Elle Meyer").withTelegramHandle("@elle_meyer")
-            .withEmail("werner@example.com")
-            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withEmail("werner@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withAssessment(MIDTERMS).build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withTelegramHandle("@fiona_kunz")
-            .withEmail("lydia@example.com")
-            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withEmail("lydia@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withAssessment(MIDTERMS).build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withTelegramHandle("@george_best")
-            .withEmail("anna@example.com")
-            .withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withEmail("anna@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
+            .withAssessment(MIDTERMS).build();
 
     // Manually added
     public static final Student HOON = new StudentBuilder().withName("Hoon Meier").withTelegramHandle("@hoon_meier")
-            .withEmail("stefan@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withEmail("stefan@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).withAssessment(MIDTERMS).build();
     public static final Student IDA = new StudentBuilder().withName("Ida Mueller").withTelegramHandle("@ida_mueller")
-            .withEmail("hans@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).build();
+            .withEmail("hans@example.com").withGroupName(TYPICAL_GROUP_CS2103T_NAME).withAssessment(MIDTERMS).build();
 
     // Manually added - Student's details found in {@code CommandTestUtil}
     public static final Student AMY = new StudentBuilder().withName(VALID_NAME_AMY)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withEmail(VALID_EMAIL_AMY)
-            .withGroupName(VALID_GROUP_NAME_AMY)
+            .withGroupName(VALID_GROUP_NAME_AMY).withAssessment(MIDTERMS)
             .build();
     public static final Student BOB = new StudentBuilder().withName(VALID_NAME_BOB)
             .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withEmail(VALID_EMAIL_BOB)
-            .withGroupName(VALID_GROUP_NAME_BOB)
+            .withGroupName(VALID_GROUP_NAME_BOB).withAssessment(MIDTERMS)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
