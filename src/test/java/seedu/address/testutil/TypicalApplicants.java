@@ -67,5 +67,4 @@ public class TypicalApplicants {
     public static List<Applicant> getTypicalApplicants() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
-
 }

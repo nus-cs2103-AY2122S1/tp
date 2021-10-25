@@ -77,5 +77,4 @@ public class ApplicantBuilder {
     public Applicant build() {
         return new Applicant(name, phone, email, address, position);
     }
-
 }

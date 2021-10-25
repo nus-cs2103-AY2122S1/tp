@@ -34,6 +34,7 @@ public class RejectionRateCommand extends Command {
      * Creates an RejectionRateCommand to get the specified rejection rate.
      */
     public RejectionRateCommand(Title positionTitle) {
+        requireNonNull(positionTitle);
         this.positionTitle = positionTitle;
     }
 
@@ -45,12 +46,19 @@ public class RejectionRateCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_POSITION);
         }
 
-        float rejectionRate = model.calculateRejectionRate(positionTitle);
+        double rejectionRate = model.calculateRejectionRate(positionTitle);
 
         if (rejectionRate == Calculator.INVALID_REJECTION_RATE) {
             return new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, positionTitle, rejectionRate));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RejectionRateCommand // instanceof handles nulls
+                && positionTitle.equals(((RejectionRateCommand) other).positionTitle));
     }
 }

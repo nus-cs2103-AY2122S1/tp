@@ -6,6 +6,8 @@ package seedu.address.model;
 public class Calculator {
     public static final int INVALID_REJECTION_RATE = -1;
 
+    public static final int TO_PERCENTAGE = 100;
+
     private Calculator() {}
 
     /**
@@ -18,6 +20,6 @@ public class Calculator {
         if (totalApplied == 0) {
             return INVALID_REJECTION_RATE;
         }
-        return (float) totalRejected / totalApplied;
+        return (float) totalRejected / totalApplied * TO_PERCENTAGE;
     }
 }

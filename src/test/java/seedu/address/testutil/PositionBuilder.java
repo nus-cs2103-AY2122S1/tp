@@ -50,4 +50,7 @@ public class PositionBuilder {
         return new Position(title, description);
     }
 
+    public Title getTitle() {
+        return title;
+    }
 }
