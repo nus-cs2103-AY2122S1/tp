@@ -79,6 +79,15 @@ public class InfoDisplay extends UiPart<Region> {
         info5.setText("75th percentile: " + statistics.getXPercentile(75));
     }
 
+    public void clearInfo() {
+        name.setText(null);
+        info1.setText(null);
+        info2.setText(null);
+        info3.setText(null);
+        info4.setText(null);
+        info5.setText(null);
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object

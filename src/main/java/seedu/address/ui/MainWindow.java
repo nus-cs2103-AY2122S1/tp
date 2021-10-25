@@ -201,7 +201,8 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            // Clear any old charts
+            // Clear any old info or charts
+            infoDisplay.clearInfo();
             graphDisplay.clearCharts();
 
             if (commandResult.hasInfo()) {
