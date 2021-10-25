@@ -53,10 +53,7 @@ With gitGud, there is no need to get tilted(frustrated) by this anymore as **how
   e.g. in `get --game GAME_ID`, `GAME_ID` is a parameter which can be used as `get --game CSGO`.
 
 * If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
-  e.g. if you specify `--name “Marcus Tang” --name Taufiq`, only `--name Taufiq` will be taken.
-
-* If a name provided has spaces in-between, use double quotation marks to wrap the name in the command e.g. wrap the name
-  'Apex Legends' as `"Apex Legends"`.
+  e.g. if you specify `--name Marcus Tang --name Taufiq`, only `--name Taufiq` will be taken.
 
 </div>
 
@@ -153,7 +150,7 @@ Snapshot:
 
 #### Assigning a skill value for a linked game : `friend --skill`
 
-Assigns and stores the perceived skill value for the specified game with the given `GAME_ID` linked to a friend with
+Assigns and stores the provided skill value for the specified game with the given `GAME_ID` linked to a friend with
 the given `FRIEND_ID`. 
 
 Format: `friend --skill FRIEND_ID --game GAME_ID --value SKILL_VALUE`
