@@ -224,6 +224,11 @@ public class AddAppCommandTest {
         public List<Appointment> getRelatedAppointments(Person client) {
             return new ArrayList<>();
         }
+
+        @Override
+        public String getAppointmentsThatOnlyHaveThisClientAsString(Person client) {
+            return "";
+        }
     }
 
     /**
