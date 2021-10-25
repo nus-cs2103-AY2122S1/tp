@@ -75,11 +75,21 @@ Adds a resident and their information to the application.
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL r/ROOM v/VACCINATION_STATUS f/FACULTY [fd/LAST_FET_DATE] [cd/LAST_COLLECTION_DATE]`
 
-* `NAME` has to be unique
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Parameter constraints:**<br>
+* `NAME` has to be unique.
+* `PHONE` is at least 3 digits long.
 * `ROOM` is of the form `BLOCK` + `LEVEL` + `NUMBER`, where `BLOCK` is an alphabet, `LEVEL` and `NUMBER` make up 3 digits. e.g. `A100`
-* `VACCINATION_STATUS` can be `T` or `F` (case insensitive)
-* `FACULTY` has to be a single alphabetical word
-* The dates inputted for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` has to be in dd-mm-yyyy format
+* `VACCINATION_STATUS` can be `T` or `F` (case insensitive).
+* `FACULTY` has to be a single alphabetical word.
+* The dates inputted for `LAST_FET_DATE` and `LAST_COLLECTION_DATE` has to be in dd-mm-yyyy format.
+
+</div>
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+`LAST_FET_DATE` and `LAST_COLLECTION_DATE` are optional parameters.
+</div>
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
@@ -191,7 +201,6 @@ Format: `add n/EVENT_NAME v/VENUE c/CAPACITY d/DATE [r/RESIDENTS]`
 
 [TODO]
 * The combination of the 4 required parameters should be unique
-* `FACULTY` has to be a single alphabetical word
 * `FACULTY` has to be a single alphabetical word
 
 Examples:
