@@ -3,12 +3,16 @@ package seedu.address.model.assessment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Assessment's score in a student's assessment list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidScore(String)} and {@link #isValidScore(int, int)}
+ */
 public class Score {
 
     public static final String MESSAGE_CONSTRAINTS = "Score should be of the format actual-score/total-score "
             + "and adhere to the following constraints:\n"
-            + "1. The actual-score should have an integer greater than or equal to 0.\n"
-            + "2. The total-score should have an integer greater than 0.\n"
+            + "1. The actual-score should be an integer greater than or equal to 0.\n"
+            + "2. The total-score should be an integer greater than 0.\n"
             + "3. The actual-score should be less than or equal to the total-score.";
 
     public static final String INVALID_ACTUAL_SCORE = "Actual score should have a value greater than or equal to 0.";

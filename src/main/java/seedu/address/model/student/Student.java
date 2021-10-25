@@ -81,6 +81,10 @@ public class Student {
         return filteredAssessments;
     }
 
+    /**
+     * Updates the filter of the filtered assessment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     public void updateFilteredAssessmentList(Predicate<Assessment> predicate) {
         requireNonNull(predicate);
         filteredAssessments.setPredicate(predicate);

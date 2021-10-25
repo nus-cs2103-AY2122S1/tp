@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
@@ -129,9 +130,9 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullAssessments_throwsIllegalValueException() {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, INVALID_EMAIL,
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
                 VALID_GROUP_NAME, null);
-        String expectedMessage = Email.MESSAGE_CONSTRAINTS; // TODO: What happens?
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Assessment.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
 

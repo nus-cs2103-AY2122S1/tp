@@ -10,6 +10,9 @@ import seedu.address.model.assessment.AssessmentName;
 import seedu.address.model.assessment.Score;
 import seedu.address.model.student.Name;
 
+/**
+ * Jackson-friendly version of {@link Assessment}.
+ */
 public class JsonAdaptedAssessment {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Assessments's %s field is missing!";
@@ -18,7 +21,7 @@ public class JsonAdaptedAssessment {
     private final String score;
 
     /**
-     * Constructs a {@code JsonAdaptedStudent} with the given student details.
+     * Constructs a {@code JsonAdaptedAssessment} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedAssessment(@JsonProperty("assessmentName") String assessmentName,
@@ -54,7 +57,7 @@ public class JsonAdaptedAssessment {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Score.class.getSimpleName()));
         }
-        final Score modelScore = ParserUtil.parseScore(score); // TODO: Better way to do it?
+        final Score modelScore = ParserUtil.parseScore(score);
 
         return new Assessment(modelAssessmentName, modelScore);
     }

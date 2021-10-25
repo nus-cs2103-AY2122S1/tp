@@ -10,6 +10,9 @@ import seedu.address.logic.commands.DeleteAssessmentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.assessment.AssessmentName;
 
+/**
+ * Parses input arguments and creates a new DeleteAssessmentCommand object
+ */
 public class DeleteAssessmentCommandParser implements Parser<DeleteAssessmentCommand> {
 
     /**

@@ -13,6 +13,9 @@ import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.AssessmentName;
 import seedu.address.model.assessment.Score;
 
+/**
+ * Parses input arguments and creates a new AddAssessmentCommand object
+ */
 public class AddAssessmentCommandParser implements Parser<AddAssessmentCommand> {
 
     /**

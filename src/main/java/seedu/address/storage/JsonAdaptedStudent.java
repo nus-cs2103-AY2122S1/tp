@@ -109,6 +109,10 @@ class JsonAdaptedStudent {
 
         Student student = new Student(modelName, modelTelegramHandle, modelEmail, modelGroupName);
 
+        if (assessments == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Assessment.class.getSimpleName()));
+        }
         for (JsonAdaptedAssessment jsonAdaptedAssessment : assessments) {
             Assessment assessment = jsonAdaptedAssessment.toModelType();
             if (student.hasAssessment(assessment)) {

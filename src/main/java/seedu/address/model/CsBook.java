@@ -147,18 +147,29 @@ public class CsBook implements ReadOnlyCsBook {
         groups.setGroup(target, editedGroup);
     }
 
+    /**
+     * Returns true if a student with the same identity as {@code assessment} exists in the student's assessment list.
+     */
     public boolean hasAssessment(Student student, Assessment assessment) {
         requireNonNull(student);
         requireNonNull(assessment);
         return student.hasAssessment(assessment);
     }
 
+    /**
+     * Adds an assessment to a student.
+     * The assessment must not already exist in the student's assessment list.
+     */
     public void addAssessment(Student student, Assessment assessment) {
         requireNonNull(student);
         requireNonNull(assessment);
         student.addAssessment(assessment);
     }
 
+    /**
+     * Removes {@code assessment} from the {@code student}.
+     * {@code assessment} must exist in the student's assessment list.
+     */
     public void deleteAssessment(Student student, Assessment assessment) {
         requireNonNull(student);
         requireNonNull(assessment);

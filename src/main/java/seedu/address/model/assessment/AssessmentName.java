@@ -3,6 +3,10 @@ package seedu.address.model.assessment;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents an Assessment's name in a student's assessment list.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAssessmentName(String)}
+ */
 public class AssessmentName {
 
     public static final String MESSAGE_CONSTRAINTS =
