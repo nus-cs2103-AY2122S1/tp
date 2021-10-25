@@ -21,9 +21,20 @@ public class Task {
     private boolean isDueSoon;
 
     /**
+     * Dummy constructor.
+     */
+    public Task(String name) {
+        requireNonNull(name);
+        this.taskName = new TaskName(name);
+        date = new TaskDate("2021-10-10");
+        time = new TaskTime("23:59");
+        this.venue = new Venue("dummy");
+    }
+
+    /**
      * Constructor for task. Creates a new task with the given a String name.
      */
-    public Task (TaskName taskName, TaskDate date, TaskTime time, Venue venue) {
+    public Task(TaskName taskName, TaskDate date, TaskTime time, Venue venue) {
         requireNonNull(taskName);
         this.taskName = taskName;
         this.date = date;

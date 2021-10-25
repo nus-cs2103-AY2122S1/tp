@@ -48,7 +48,7 @@ public class TaskListPanel extends UiPart<Region> {
                 setText(null);
             } else {
                 TaskCard tc = new TaskCard(task, getIndex() + 1);
-                tc.initialise(this);
+                tc.initialise(vbox, 120);
                 setGraphic(tc.getRoot());
             }
         }
