@@ -13,8 +13,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Appointment {
     public static final String MESSAGE_CONSTRAINTS =
-            "Meeting should be in the following format: dd-MMM-yyyy HH:mm "
-                    + "where only first alphabet of the month is capitalised.";
+            "Meeting should be in the following format: dd-MMM-yyyy HH:mm ";
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
 
@@ -63,7 +62,7 @@ public class Appointment {
             return true;
         }
         try {
-            LocalDateTime.parse(meetingDateTime, FORMATTER);
+            LocalDateTime.parse(convertMonthToFormat(meetingDateTime), FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -78,7 +77,21 @@ public class Appointment {
      */
     private static LocalDateTime parseString(String dateTimeString) {
         requireNonNull(dateTimeString);
-        return LocalDateTime.parse(dateTimeString, FORMATTER);
+
+        return LocalDateTime.parse(convertMonthToFormat(dateTimeString), FORMATTER);
+    }
+
+    /**
+     * Converts the first letter of the input month to uppercase
+     *
+     * @param dateTimeString date input by the user.
+     * @return String with the first letter for the month in capital letters.
+     */
+    private static String convertMonthToFormat(String dateTimeString) {
+        String convertedDate = dateTimeString.substring(0, 3) + dateTimeString.substring(3,4).toUpperCase()
+                + dateTimeString.substring(4, 6).toLowerCase() + dateTimeString.substring(6,17);
+
+        return convertedDate;
     }
 
     public String getValue() {
