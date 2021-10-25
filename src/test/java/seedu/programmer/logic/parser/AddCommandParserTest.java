@@ -31,7 +31,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         //System.out.println(NAME_DESC_BOB);
-        Student expectedStudent = new StudentBuilder(BOB).build();
+        Student expectedStudent = new StudentBuilder(BOB).build_noLab();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + STUDENT_ID_DESC_BOB + CLASS_ID_DESC_BOB
@@ -46,7 +46,7 @@ public class AddCommandParserTest {
     @Test
     public void parse_optionalFieldsMissing_success() {
         // zero tags
-        Student expectedStudent = new StudentBuilder(AMY).build();
+        Student expectedStudent = new StudentBuilder(AMY).build_noLab();
         assertParseSuccess(parser, NAME_DESC_AMY + STUDENT_ID_DESC_AMY + CLASS_ID_DESC_AMY + EMAIL_DESC_AMY,
                 new AddCommand(expectedStudent));
     }

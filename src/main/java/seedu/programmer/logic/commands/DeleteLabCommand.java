@@ -4,7 +4,6 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.List;
 
-import seedu.programmer.commons.core.Messages;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;
@@ -39,7 +38,7 @@ public class DeleteLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-        Boolean exists = true;
+        boolean exists = true;
         for (Student std : lastShownList) {
             Student target = std;
             if (!target.delLabResult(this.result)) {
