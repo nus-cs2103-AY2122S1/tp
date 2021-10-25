@@ -24,27 +24,49 @@ public class ViewTaskListCommand extends Command {
 
     public static final String MESSAGE_VIEW_TASKS_SUCCESS = "Viewing %1$s's tasks";
 
+    public static final String MESSAGE_VIEW_TASKS_ALL_SUCCESS = "Viewing all task list.";
+
     private final Index targetIndex;
 
-    /** Constructor for ViewTaskListCommand. */
+    private final boolean isDisplayAll;
+
+    /** Constructor used if user wants to view all task lists. */
+    public ViewTaskListCommand() {
+        isDisplayAll = true;
+        targetIndex = Index.fromOneBased(1);
+    }
+
+    /** Constructor used if user wants to view a specific {@code Person}'s task list . */
     public ViewTaskListCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        isDisplayAll = false;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (isDisplayAll) {
+            CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
+            cr.setDisplayAllTaskList();
+            return cr;
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if ((targetIndex.getZeroBased() >= lastShownList.size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
 
         model.displayPersonTaskList(personToView);
-        return new CommandResult(String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
+
+        CommandResult commandResult = new CommandResult(
+                String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
+        commandResult.setDisplaySingleTaskList();
+
+        return commandResult;
     }
 
     @Override

@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private StatisticsDisplay statisticsDisplay;
+    private AllTaskListPanel allTaskListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -162,6 +163,7 @@ public class MainWindow extends UiPart<Stage> {
         setAnchorProperties(personListSplitPanel);
 
         taskListPanel = new TaskListPanel(logic.getDisplayTaskList());
+        allTaskListPanel = new AllTaskListPanel(logic.getFilteredPersonList());
         taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
         setAnchorProperties(taskListSplitPanel);
 
@@ -220,8 +222,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    @FXML
+    private void handleDisplayAllTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(allTaskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
+    }
+
+    @FXML
+    private void handleDisplaySingleTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
     }
 
     /**
@@ -239,9 +251,17 @@ public class MainWindow extends UiPart<Stage> {
                 handleHelp();
                 statisticsDisplay.updateStatistics(new double[]{10, 20, 5, 7});
             }
-
             if (commandResult.isExit()) {
                 handleExit();
+            }
+            if (commandResult.isDisplayAllTaskList()) {
+                handleDisplayAllTaskList();
+            }
+            if (commandResult.isDisplaySingleTaskList()) {
+                handleDisplaySingleTaskList();
+            }
+            if (commandResult.isWriteCommand()) {
+                allTaskListPanel.updateRootNode(logic.getFilteredPersonList());
             }
 
             return commandResult;

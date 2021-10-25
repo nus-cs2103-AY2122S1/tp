@@ -38,6 +38,7 @@ public class TaskListManager {
     /** The taskList to be displayed on the GUI. */
     private FilteredList<Task> filteredTasks;
 
+
     /** Constructor for TaskListManager */
     public TaskListManager() {
         taskListArchive = new HashMap<>();
@@ -56,6 +57,7 @@ public class TaskListManager {
 
         for (Person person : observablePersonList) {
             createNewEntry(person);
+            ObservableList<Task> tmp = FXCollections.observableArrayList(person.getTasks());
         }
     }
 

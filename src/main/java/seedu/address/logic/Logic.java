@@ -54,4 +54,5 @@ public interface Logic {
 
     /** Displays {@code person}'s task list on the GUI. */
     void displayPersonTaskList(Person person);
+
 }
