@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -23,6 +26,7 @@ public class StudentBuilder {
     private Email email;
     private Note note;
     private GroupName groupName;
+    private UniqueAssessmentList assessments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -33,6 +37,7 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         note = new Note(DEFAULT_NOTE);
         groupName = new GroupName(DEFAULT_GROUP_NAME);
+        assessments = new UniqueAssessmentList();
     }
 
     /**
@@ -44,6 +49,12 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         note = studentToCopy.getNote();
         groupName = studentToCopy.getGroupName();
+        assessments = new UniqueAssessmentList();
+
+        ObservableList<Assessment> assessmentList = studentToCopy.getAssessmentList();
+        for (int i = 0; i < assessmentList.size(); i++) {
+            assessments.add(assessmentList.get(i));
+        }
     }
 
     /**
@@ -95,11 +106,32 @@ public class StudentBuilder {
     }
 
     /**
+     * Add an {@code Assessment} to the {@code UniqueAssessmentList} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssessment(Assessment assessment) {
+        this.assessments.add(assessment);
+        return this;
+    }
+
+    /**
+     * Sets the {@code UniqueAssessmentList} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssessments(UniqueAssessmentList assessments) {
+        this.assessments = assessments;
+        return this;
+    }
+
+    /**
      * Builds a student
      * @return built student
      */
     public Student build() {
-        return new Student(name, telegramHandle, email, note, groupName);
+        Student student = new Student(name, telegramHandle, email, note, groupName);
+        ObservableList<Assessment> unmodifiableAssessments = assessments.asUnmodifiableObservableList();
+        for (int i = 0; i < unmodifiableAssessments.size(); i++) {
+            student.addAssessment(unmodifiableAssessments.get(i));
+        }
+        return student;
     }
 
 }

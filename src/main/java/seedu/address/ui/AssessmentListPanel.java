@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
-import seedu.address.model.student.Assessment;
+import seedu.address.model.assessment.Assessment;
 
 public class AssessmentListPanel extends UiPart<Region> {
     private static final String FXML = "AssessmentListPanel.fxml";

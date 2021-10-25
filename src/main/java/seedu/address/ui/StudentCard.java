@@ -38,6 +38,8 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private Label groupName;
     @FXML
+    private Label assessments;
+    @FXML
     private VBox studentCard;
 
     /**
@@ -55,6 +57,7 @@ public class StudentCard extends UiPart<Region> {
         groupName.setText(student.getGroupName().toString());
         telegramHandle.setText(student.getTelegramHandle().value);
         email.setText(student.getEmail().value);
+        assessments.setText(student.getAssessmentList().toString());
     }
 
     @Override

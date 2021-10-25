@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.group.GroupNameContainsKeywordPredicate;
@@ -241,6 +242,23 @@ public class ModelManager implements Model {
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
 
         return retrievedGroup;
+    }
+
+    @Override
+    public boolean hasAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        return csBook.hasAssessment(student, assessment);
+    }
+
+    @Override
+    public void addAssessment(Student student, Assessment assessment) {
+        csBook.addAssessment(student, assessment);
+    }
+
+    @Override
+    public void deleteAssessment(Student student, Assessment assessment) {
+        csBook.deleteAssessment(student, assessment);
     }
 
     //=========== Filtered Student List Accessors =============================================================

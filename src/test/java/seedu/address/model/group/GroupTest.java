@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_DESCRIPTION_CS1101S;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS1101S;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS2103T;
 import static seedu.address.testutil.TypicalGroup.CS1231S;
 import static seedu.address.testutil.TypicalGroup.DEFAULT_GROUP;
 
@@ -30,11 +30,11 @@ public class GroupTest {
 
         // name differs in case, all other attributes same -> returns false
         editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP)
-                .withGroupName(VALID_GROUP_NAME.toLowerCase()).build();
+                .withGroupName(VALID_GROUP_NAME_CS2103T.toLowerCase()).build();
         assertFalse(DEFAULT_GROUP.isSameGroup(editedDefaultGroup));
 
         // name has trailing spaces, all other attributes same -> returns false
-        String nameWithTrailingSpaces = VALID_GROUP_NAME + " ";
+        String nameWithTrailingSpaces = VALID_GROUP_NAME_CS2103T + " ";
         editedDefaultGroup = new GroupBuilder(DEFAULT_GROUP).withGroupName(nameWithTrailingSpaces).build();
         assertFalse(DEFAULT_GROUP.isSameGroup(editedDefaultGroup));
     }
