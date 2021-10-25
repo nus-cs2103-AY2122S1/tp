@@ -19,6 +19,10 @@
     -fx-text-fill: black;
 }
 
-.overdue {
+.overdue-card {
+    -fx-background-color: #FFB4B4 !important;
+}
+
+.overdue-visit {
     -fx-text-fill: #FF0000 !important;
 }
