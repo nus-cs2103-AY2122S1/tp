@@ -76,12 +76,18 @@ public class ContactsTabParser {
             return new ExitCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
+
+        case SwitchTabContactsCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabContactsCommand(0);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
+
+        case SwitchTabTasksCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabTasksCommand(0);
 
         case SwitchTabHelpCommand.COMMAND_WORD:
+
+        case SwitchTabHelpCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabHelpCommand(0);
 
         default:

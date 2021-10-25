@@ -9,6 +9,7 @@ import dash.model.Model;
 public class SwitchTabHelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
+    public static final String COMMAND_WORD_ALTERNATE = "h";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to the Help tab.\n"
             + "Example: " + COMMAND_WORD;
