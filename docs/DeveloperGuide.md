@@ -437,14 +437,27 @@ Since social workers need to contact many different elderly every day, we create
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                 | I want to …​                             | So that I can…​                                                     |
-| -------- | ------------------------------------------ | ------------------------------------------- | ---------------------------------------------------------------------- |
-| `* * *`  | social worker                              | add entries                                 | keep track of new elderly who come under my care                       |
-| `* * *`  | social worker                              | delete entries                              | keep track of elderly who are no longer under my care                  |
-| `* * *`  | social worker                              | see elderlies' contacts and home address    | know how to contact them                                               |
-| `* * *`  | social worker                              | add deadlines to contact a elderly          | remember to check in on them                                           |
-| `* * *`  | social worker                              | add an ‘until’ date for recurring deadlines | know when to stop visiting a elderly on a recurring basis              |
-| `* * *`  | social worker                              | see data from my previous session           | save time spent importing entries each session                         |
+| Priority | As a …​                                 | I want to …​                                                                               | So that I can…​                                                     |
+| -------- | ------------------------------------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| `* * *`  | social worker                              | add entries                                                                                   | keep track of new elderly who come under my care                       |
+| `* * *`  | social worker                              | delete entries                                                                                | keep track of elderly who are no longer under my care                  |
+| `* * *`  | social worker                              | see elderlies' contacts and home address                                                      | know how to contact them                                               |
+| `* * *`  | social worker                              | add deadlines to contact a elderly                                                            | remember to check in on them                                           |
+| `* * *`  | social worker                              | add an ‘until’ date for recurring deadlines                                                   | know when to stop visiting a elderly on a recurring basis              |
+| `* * *`  | social worker                              | see data from my previous session                                                             | save time spent importing entries each session                         |
+| `* * *`  | social worker                              | find elderly by their name, phone, language and address                                       | find the elderly I am looking for                                      |
+| `* * *`  | social worker                              | find elderly by their health conditions                                                       | know who needs more care                                               |
+| `* * *`  | social worker                              | find elderly by their visits                                                                  | know who I need to visit on a given day                                |
+| `* * *`  | social worker                              | find elderly by their last visits                                                             | know which elderly I have last visited on a given day                  |
+| `* * *`  | social worker                              | view elderly's health conditions                                                              | know how well they are doing                                           |
+| `* * *`  | social worker                              | view overdue visits                                                                           | know I need to clear them up                                           |
+| `* * *`  | social worker                              | view the elderly's visitation frequency                                                       | know how frequently I should visit them                                |
+| `* * *`  | social worker                              | view the elderly's recurring occurrence                                                       | know how many times I should visit them regularly                      |
+| `* * *`  | social worker                              | sort the elderly by the last visit date in descending chronological order                     | know whom I visited recently                                           |
+| `* * *`  | social worker                              | sort the elderly by next contact date in ascending chronological order                        | know whom I need to visit next                                         |
+| `* * *`  | social worker                              | list the upcoming visits in the next week/next month                                          | not miss out upcoming visits                                           |
+| `* *`    | social worker                              | download elderly data                                                                         | access it on my computer at any time                                   |
+| `* *`    | social worker                              | view the summary statistics of the overdue visits, recent visits and upcoming visits          |  better gauge whether all elderly have been cared for                  |
 
 *{More to be added}*
 
