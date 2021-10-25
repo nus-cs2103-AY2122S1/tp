@@ -128,10 +128,10 @@ Format: `help`
 
 Adds an applicant to RecruitIn.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​`
 
 Examples:
-* `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21 20:00`
+* `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21, 20:00 nt/This applicant has the credentials needed for this job.`
 
 #### Prefix Input Specifications ***{Advanced}***:
 
@@ -195,10 +195,14 @@ Examples:
     * TAG inputs such as `friends` and `colleagues` are allowed.
     * TAG inputs such as `best friends`, `old colleagues` and `seni@r` are not allowed.
 * ##### INTERVIEW `i/`
-  * An interview should follow the DateTime format `yyyy-MM-dd, H:mm`.
+  * An INTERVIEW should follow the DateTime format `yyyy-MM-dd, H:mm`.
   * For example: 
     * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
-    * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable.  
+    * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable. 
+* ##### NOTES `nt/`
+    * A NOTES can contain any character, number or symbol as there are no restrictions in place.
+    * For example:
+        * NOTES inputs such as `This candidate is good!` and `@Applicant123 is suitab13 for th3 job!` are acceptable.
 
 ### Listing all applicants : `list`
 
@@ -210,19 +214,19 @@ Format: `list`
 
 Finds applicants by specific prefixes.
 
-Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW]`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW] [nt/NOTES]`
 
 * Find command must take **at least 1** prefix input.
 * If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
 * Input for each prefix can contain multiple **keywords** separated by whitespace, e.g. `n/John Mary`, `t/friend colleague`
-* Inputs for all prefixes are **case-insensitive**, except for LEVEL_OF_EDUCATION inputs.
+* Inputs for all prefixes are **case-insensitive**.
 
 Examples:
 * `find n/John Mary` finds all applicants with either `John` or `Mary` as values for name prefix.
 * `find n/John n/Mary` finds all applicants with only `Mary` as values for name prefix.
 * `find t/friend colleague` finds all applicants with `friend` or `colleague` as values for tag prefix.
 * `find n/John Mary t/friend colleague`
-* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2`
+* `find n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 nt/has the credentials`
 
 #### Prefix Input Specifications ***{Advanced}***:
 
@@ -310,8 +314,8 @@ but not with *Role*s such as `Software` or `Software Developer`.
     * For example:
         * A `2021` input can match with applicants that have the *Interview* in year 2021.
         * A `20:21` input can match with applicants that have the *Interview* at time 20:21 on any date.
-        * A `21` input can match with *Interviews* `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`. 
-  
+        * A `21` input can match with *Interviews* `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`.
+
 ### Deleting an applicant : `delete`
 
 Deletes applicants by their index from the list in RecruitIn.
@@ -420,6 +424,7 @@ Example of format of data for one applicant in applicants:
       "experience" : "2",
       "tagged" : [],
       "interview" : "-",
+      "notes" : "This applicant is a suitable candidate for the job!",
       "done": "Not Done"
     }
   ]
@@ -442,10 +447,11 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW] [nt/NOTES]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00 nt/This applicant is a good candidate for the job!`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]` <br> e.g., `edit 1 p/90909090 s/4500`
 **List** | `list`
 **Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
-**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
+**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW] [nt/NOTES]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
