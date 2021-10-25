@@ -8,12 +8,14 @@ import static seedu.address.commons.util.EditUtil.EditPersonDescriptor;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.DeleteMultipleCommand.INDEX_SPLITTER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_EIGHTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
@@ -29,6 +31,7 @@ import seedu.address.logic.commands.FindTagCaseInsensitiveCommand;
 import seedu.address.logic.commands.FindTagCaseSensitiveCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.MailingListCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UntagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -44,6 +47,22 @@ import seedu.address.testutil.PersonUtil;
 public class AddressBookParserTest {
 
     private final AddressBookParser parser = new AddressBookParser();
+
+    @Test
+    public void parseCommand_mailingListNoArg() throws Exception {
+        MailingListCommand command = (MailingListCommand) parser.parseCommand(
+                MailingListCommand.COMMAND_WORD + " ");
+
+        assertEquals(new MailingListCommand(MailingListCommandParser.DEFAULT_PREFIXES), command);
+    }
+
+    @Test
+    public void parseCommand_mailingListArg() throws Exception {
+        MailingListCommand command = (MailingListCommand) parser.parseCommand(
+                MailingListCommand.COMMAND_WORD + " " + PREFIX_PHONE.getPrefix());
+
+        assertEquals(new MailingListCommand(Set.of(PREFIX_PHONE)), command);
+    }
 
     @Test
     public void parseCommand_add() throws Exception {

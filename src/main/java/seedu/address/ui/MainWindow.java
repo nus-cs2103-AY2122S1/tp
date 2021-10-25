@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,16 +18,15 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CsvUtil;
-import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.CommandResultExport;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LIST;
+
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -41,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
-    public FileChooser fileChooser;
+    private FileChooser fileChooser;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
@@ -74,7 +72,7 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         this.fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("csv","*.csv");
+        FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("csv", "*.csv");
         fileChooser.getExtensionFilters().addAll(filter);
         fileChooser.setInitialDirectory(new File("./"));
         fileChooser.setSelectedExtensionFilter(filter);
@@ -185,22 +183,24 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Closes the application.
+     * Handles the exporting of mailing list.
+     * receives a List of Person objects and calls the serializer
+     * then writes the file
      */
     @FXML
     private void handleMailingList(CommandResultExport commandResult) {
-        File file =  fileChooser.showSaveDialog(primaryStage);
+        File file = fileChooser.showSaveDialog(primaryStage);
         String pathStr = file.getPath();
         if (!pathStr.endsWith(".csv")) {
             pathStr += ".csv";
         }
         Path path = Path.of(pathStr);
 
-        List<Person> personList =  commandResult.getPersonList();
+        List<Person> personList = commandResult.getPersonList();
         List<Prefix> prefixList = commandResult.getPrefixes();
 
         try {
-            CsvUtil.modelToCsv(personList,path,prefixList);
+            CsvUtil.modelToCsv(personList, path, prefixList);
         } catch (IOException e) {
             logger.info("writing csv failed" + e.getMessage());
             resultDisplay.setFeedbackToUser(e.getMessage());
@@ -232,7 +232,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isChooseFile()) {
-                handleMailingList( (CommandResultExport) commandResult);
+                handleMailingList((CommandResultExport) commandResult);
             }
 
             return commandResult;
