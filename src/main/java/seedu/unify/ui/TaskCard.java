@@ -34,6 +34,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label state;
+    @FXML
     private Label tag;
 
 
@@ -48,6 +50,9 @@ public class TaskCard extends UiPart<Region> {
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
         tag.setText(task.getTag().tagTaskName);
+        String styleClass = "state-" + task.getState().toString();
+        state.getStyleClass().add(styleClass);
+        state.setText(task.getState().toString());
     }
 
     @Override

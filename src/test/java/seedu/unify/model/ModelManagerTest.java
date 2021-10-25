@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.unify.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalTasks.ALICE;
-import static seedu.unify.testutil.TypicalTasks.BENSON;
+import static seedu.unify.testutil.TypicalTasks.MATH_ASSIGNMENT;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -95,7 +95,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        UniFy uniFy = new UniFyBuilder().withTask(ALICE).withTask(BENSON).build();
+        UniFy uniFy = new UniFyBuilder().withTask(ALICE).withTask(MATH_ASSIGNMENT).build();
         UniFy differentUniFy = new UniFy();
         UserPrefs userPrefs = new UserPrefs();
 
