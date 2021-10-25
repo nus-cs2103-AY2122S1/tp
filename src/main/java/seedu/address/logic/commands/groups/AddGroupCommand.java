@@ -3,6 +3,7 @@ package seedu.address.logic.commands.groups;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -28,7 +29,8 @@ public class AddGroupCommand extends Command {
 
     /**
      * Constructs a {@code AddGroupCommand} with the given parameters
-     * @param toAdd Group to add
+     *
+     * @param toAdd        Group to add
      * @param personsIndex List of indexes of persons to add
      */
     public AddGroupCommand(Group toAdd, List<Index> personsIndex) {
@@ -68,4 +70,22 @@ public class AddGroupCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, withIds));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || !(o instanceof AddGroupCommand)) {
+            return false;
+        }
+        AddGroupCommand that = (AddGroupCommand) o;
+        return toAdd.isSameGroup(that.toAdd) && Objects.equals(personsIndex, that.personsIndex);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(toAdd, personsIndex);
+    }
+
 }
