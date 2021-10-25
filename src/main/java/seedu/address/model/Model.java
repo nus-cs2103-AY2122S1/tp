@@ -86,6 +86,12 @@ public interface Model {
     void favouritePerson(Person target);
 
     /**
+     * Favourites the given person.
+     * The person must exist in the address book.
+     */
+    void unfavouritePerson(Person target);
+
+    /**
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
