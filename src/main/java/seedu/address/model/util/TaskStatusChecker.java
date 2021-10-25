@@ -17,7 +17,7 @@ public class TaskStatusChecker {
     private TaskListManager taskListManager;
 
     /**
-     * Constructor for TaskStatusChecker
+     * Constructor for TaskStatusChecker.
      */
     public TaskStatusChecker(TaskListManager taskListManager) {
         this.taskListManager = taskListManager;
