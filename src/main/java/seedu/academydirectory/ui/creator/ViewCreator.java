@@ -51,9 +51,9 @@ public class ViewCreator extends Creator {
         super(additionalInfo, FXML);
         this.student = (Student) additionalInfo.get();
         name.setText(student.getName().fullName);
-        phone.setText("Phone number: " + student.getPhone().value);
-        email.setText("Email address: " + student.getEmail().value);
-        telegram.setText("Telegram handle: " + student.getTelegram().value);
+        phone.setText("- Phone number: " + student.getPhone().value);
+        email.setText("- Email address: " + student.getEmail().value);
+        telegram.setText("- Telegram handle: " + student.getTelegram().value);
         Set<Tag> tags = student.getTags();
         for (Tag tag : tags) {
             CheckBox checkBox = new CheckBox(tag.toString());

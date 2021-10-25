@@ -69,6 +69,14 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    public void execute(String commandText) {
+        try {
+            commandExecutor.execute(commandText);
+        } catch (CommandException | ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Represents a function that can execute commands.
      */

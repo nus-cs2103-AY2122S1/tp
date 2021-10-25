@@ -50,16 +50,19 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+    private int displayedIndex;
     private Label temp;
+    private CommandBox commandBox;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
      * @param student student to be displayed
      * @param displayedIndex index of the student
      */
-    public StudentCard(Student student, int displayedIndex) {
+    public StudentCard(Student student, int displayedIndex, CommandBox commandBox) {
         super(FXML);
         this.student = student;
+        this.displayedIndex = displayedIndex;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         phone.setText(student.getPhone().value);
@@ -71,6 +74,7 @@ public class StudentCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         temp = new Label("Clicked");
+        this.commandBox = commandBox;
     }
 
     @Override
@@ -97,8 +101,7 @@ public class StudentCard extends UiPart<Region> {
     @FXML
     public void viewFullInformation() {
         logger.info("Item selected");
-        container.getChildren().remove(temp);
-        temp.setText("Clicked");
-        container.getChildren().add(temp);
+        String commandEquivalent = "view " + this.displayedIndex;
+        commandBox.execute(commandEquivalent);
     }
 }

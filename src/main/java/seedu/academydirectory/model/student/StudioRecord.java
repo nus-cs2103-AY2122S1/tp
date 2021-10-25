@@ -87,10 +87,10 @@ public class StudioRecord implements Information {
             boolean hasAttendedSession = attendance.getAttendanceFromSession(sessionNumber);
             int participationScore = participation.getParticipationScoreFrom(sessionNumber);
             if (hasAttendedSession) {
-                displayedInfo += "- Session " + sessionNumber + " attended. ";
+                displayedInfo += "- Session " + (sessionNumber + 1) + " attended. ";
                 displayedInfo += "Participation mark is " + participationScore + "\n";
             } else {
-                displayedInfo += "- Session " + sessionNumber + " not attended.\n";
+                displayedInfo += "- Session " + (sessionNumber + 1) + " not attended.\n";
             }
         }
         return displayedInfo;
