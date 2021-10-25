@@ -1,8 +1,11 @@
 package seedu.anilist.model.anime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.testutil.Assert.assertThrows;
 import static seedu.anilist.testutil.TypicalAnimes.AOT;
@@ -30,7 +33,7 @@ public class AnimeTest {
 
         // same name, all other attributes different -> returns true
         Anime editedAot = new AnimeBuilder(AOT)
-                .withGenres(VALID_GENRE_SHOUNEN).build();
+                .withGenres(VALID_GENRE_ACTION).build();
         assertTrue(AOT.isSameAnime(editedAot));
 
         // different name, all other attributes same -> returns false
@@ -51,26 +54,26 @@ public class AnimeTest {
     public void equals() {
         // same values -> returns true
         Anime aotCopy = new AnimeBuilder(AOT).build();
-        assertTrue(AOT.equals(aotCopy));
+        assertEquals(AOT, aotCopy);
 
         // same object -> returns true
-        assertTrue(AOT.equals(AOT));
+        assertEquals(AOT, AOT);
 
         // null -> returns false
-        assertFalse(AOT.equals(null));
+        assertNotEquals(null, AOT);
 
         // different type -> returns false
-        assertFalse(AOT.equals(5));
+        assertNotEquals(5, AOT);
 
         // different anime -> returns false
-        assertFalse(AOT.equals(BNHA));
+        assertNotEquals(AOT, BNHA);
 
         // different name -> returns false
         Anime editedAot = new AnimeBuilder(AOT).withName(VALID_NAME_BNHA).build();
-        assertFalse(AOT.equals(editedAot));
+        assertNotEquals(AOT, editedAot);
 
         // different genres -> returns false
-        editedAot = new AnimeBuilder(AOT).withGenres(VALID_GENRE_SHOUNEN).build();
-        assertFalse(AOT.equals(editedAot));
+        editedAot = new AnimeBuilder(AOT).withGenres(VALID_GENRE_SCIENCE_FICTION).build();
+        assertNotEquals(AOT, editedAot);
     }
 }

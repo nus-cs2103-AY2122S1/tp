@@ -16,7 +16,8 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = "These are the commands we currently support: \n"
             + CommandsList.getListOfCommandsAsString() + "\n"
-            + "For more information, try inputting each command, or check out our user guide at:\n"
+            + "For more information of each command, try entering them in the command line, "
+            + "or check out our user guide at:\n"
             + USER_GUIDE_LINK;
 
     @Override

@@ -41,10 +41,11 @@ public class CommandsListTest {
     private String listOfCommandsToString(String[] listOfCommands) {
         String result = "";
         for (int i = 0; i < listOfCommands.length; i++) {
+            result += "    - ";
             result += listOfCommands[i];
-            result += ", ";
+            result += "\n";
         }
-        result = result.substring(0, result.length() - 2);
+        result = result.substring(0, result.length() - 1);
         return result;
     }
 }

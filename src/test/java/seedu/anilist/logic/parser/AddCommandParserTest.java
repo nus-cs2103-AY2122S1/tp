@@ -2,8 +2,8 @@ package seedu.anilist.logic.parser;
 
 import static seedu.anilist.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.anilist.logic.commands.CommandTestUtil.EPISODE_DESC_EPISODE_TWO;
+import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.GENRE_DESC_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_EPISODE_DESC_DECIMAL;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_GENRE_DESC;
 import static seedu.anilist.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -14,8 +14,8 @@ import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.anilist.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.anilist.logic.commands.CommandTestUtil.STATUS_DESC_TOWATCH;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_EPISODE_TWO;
+import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_ACTION;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SCIENCE_FICTION;
-import static seedu.anilist.logic.commands.CommandTestUtil.VALID_GENRE_SHOUNEN;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_NAME_BNHA;
 import static seedu.anilist.logic.commands.CommandTestUtil.VALID_STATUS_TOWATCH;
 import static seedu.anilist.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -57,10 +57,10 @@ public class AddCommandParserTest {
         Anime expectedAnimeMultipleGenres = new AnimeBuilder(BNHA)
                 .withEpisode(VALID_EPISODE_TWO)
                 .withStatus(VALID_STATUS_TOWATCH)
-                .withGenres(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_SHOUNEN)
+                .withGenres(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_ACTION)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BNHA + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION, new AddCommand(expectedAnimeMultipleGenres));
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, new AddCommand(expectedAnimeMultipleGenres));
     }
 
     @Test
@@ -68,19 +68,19 @@ public class AddCommandParserTest {
         // zero episode
         Anime expectedAnimeZeroEpisode = new AnimeBuilder(AKIRA)
                 .withStatus(VALID_STATUS_TOWATCH)
-                .withGenres(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_SHOUNEN)
+                .withGenres(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_ACTION)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AKIRA + STATUS_DESC_TOWATCH
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION,
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION,
                 new AddCommand(expectedAnimeZeroEpisode));
 
         // zero status
         Anime expectedAnimeZeroStatus = new AnimeBuilder(AKIRA)
                 .withEpisode(VALID_EPISODE_TWO)
-                .withGenres(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_SHOUNEN)
+                .withGenres(VALID_GENRE_SCIENCE_FICTION, VALID_GENRE_ACTION)
                 .build();
         assertParseSuccess(parser, NAME_DESC_AKIRA + EPISODE_DESC_EPISODE_TWO
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION,
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION,
                 new AddCommand(expectedAnimeZeroStatus));
 
         // zero genre
@@ -112,15 +112,15 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid name
         assertParseFailure(parser, INVALID_NAME_DESC + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION, Name.MESSAGE_CONSTRAINTS);
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, Name.MESSAGE_CONSTRAINTS);
 
         // invalid episode
         assertParseFailure(parser, NAME_DESC_BNHA + INVALID_EPISODE_DESC_DECIMAL + STATUS_DESC_TOWATCH
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION, Episode.MESSAGE_CONSTRAINTS);
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, Episode.MESSAGE_CONSTRAINTS);
 
         // invalid status
         assertParseFailure(parser, NAME_DESC_BNHA + EPISODE_DESC_EPISODE_TWO + INVALID_STATUS_DESC_ALPHA
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION, Status.MESSAGE_CONSTRAINTS);
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION, Status.MESSAGE_CONSTRAINTS);
 
         // invalid genres
         assertParseFailure(parser, NAME_DESC_BNHA + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
@@ -129,7 +129,7 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BNHA
                 + EPISODE_DESC_EPISODE_TWO + STATUS_DESC_TOWATCH
-                + GENRE_DESC_SHOUNEN + GENRE_DESC_SCIENCE_FICTION,
+                + GENRE_DESC_ACTION + GENRE_DESC_SCIENCE_FICTION,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }

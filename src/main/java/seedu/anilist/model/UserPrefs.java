@@ -15,7 +15,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     private GuiSettings guiSettings = new GuiSettings();
     private Path animeListFilePath = Paths.get("data" , "anilist.json");
-
+    private String themeCss = "CharlotteTheme.css";
     /**
      * Creates a {@code UserPrefs} with default values.
      */
@@ -36,6 +36,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         requireNonNull(newUserPrefs);
         setGuiSettings(newUserPrefs.getGuiSettings());
         setAnimeListFilePath(newUserPrefs.getAnimeListFilePath());
+        setThemeCss(newUserPrefs.getThemeCss());
     }
 
     public GuiSettings getGuiSettings() {
@@ -56,6 +57,15 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         this.animeListFilePath = animeListFilePath;
     }
 
+    public void setThemeCss(String themeCss) {
+        requireNonNull(themeCss);
+        this.themeCss = themeCss;
+    }
+
+    public String getThemeCss() {
+        return themeCss;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -73,7 +83,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, animeListFilePath);
+        return Objects.hash(guiSettings, animeListFilePath, themeCss);
     }
 
     @Override
@@ -81,6 +91,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings);
         sb.append("\nLocal data file location : " + animeListFilePath);
+        sb.append("\nTheme : " + themeCss);
         return sb.toString();
     }
 

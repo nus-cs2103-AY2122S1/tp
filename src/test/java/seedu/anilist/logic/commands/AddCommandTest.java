@@ -161,6 +161,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateTabOptionsAnimeList(Predicate<Anime> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setCurrentTab(TabOption.TabOptions currentTab) {
             throw new AssertionError("This method should not be called.");
         }
@@ -169,6 +174,16 @@ public class AddCommandTest {
         public TabOption getCurrentTab() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getThemeCss() {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public void setThemeCss(String themeCss) {
+            throw new AssertionError("This method should not be called.");
+        };
 
 
     }

@@ -42,7 +42,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredAnimeList(predicate);
+        model.updateTabOptionsAnimeList(predicate);
         if (statusToMatch == null) {
             model.setCurrentTab(TabOption.TabOptions.ALL);
         } else if (statusToMatch.toString().equals("towatch")) {

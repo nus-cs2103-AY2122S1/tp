@@ -15,6 +15,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.anilist.commons.core.GuiSettings;
+import seedu.anilist.logic.parser.exceptions.ParseException;
 import seedu.anilist.model.anime.NameContainsKeywordsPredicate;
 import seedu.anilist.testutil.AnimeListBuilder;
 import seedu.anilist.ui.TabOption;
@@ -109,7 +110,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void equals() {
+    public void equals() throws ParseException {
         AnimeList animeList = new AnimeListBuilder().withAnime(AOT).withAnime(BRS).build();
         AnimeList differentAnimeList = new AnimeList();
         UserPrefs userPrefs = new UserPrefs();

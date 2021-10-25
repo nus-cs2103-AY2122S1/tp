@@ -12,9 +12,8 @@ public class GenreTest {
     private static final String INVALID_GENRE_START_WITH_SPACE = " bad";
     private static final String INVALID_GENRE_WITH_DOUBLE_SPACE = "three  word  genres";
 
-    private static final String VALID_GENRE_ONE_WORD = "OneWordGenre";
-    private static final String VALID_GENRE_MULTIPLE_WORDS = "Multiple Word Genres";
-    private static final String VALID_GENRE_WITH_NUMBERS = "123fant123asy123";
+    private static final String VALID_GENRE_LOWER_CASE = "fantasy";
+    private static final String VALID_GENRE_MIXED_CASE = "supERNatuRAl";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -41,11 +40,9 @@ public class GenreTest {
         assertFalse(Genre.isValidGenreName(INVALID_GENRE_WITH_DOUBLE_SPACE));
 
         // valid genres
-        // genre with one word
-        assertTrue(Genre.isValidGenreName(VALID_GENRE_ONE_WORD));
-        // genre with multiple words
-        assertTrue(Genre.isValidGenreName(VALID_GENRE_MULTIPLE_WORDS));
-        // genre with numbers
-        assertTrue(Genre.isValidGenreName(VALID_GENRE_WITH_NUMBERS));
+        // genre with lower case
+        assertTrue(Genre.isValidGenreName(VALID_GENRE_LOWER_CASE));
+        // genre with mixed case
+        assertTrue(Genre.isValidGenreName(VALID_GENRE_MIXED_CASE));
     }
 }
