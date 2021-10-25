@@ -18,6 +18,7 @@ public class JsonAdaptedReservation {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reservation's %s field is missing";
     public static final String NUMBER_OF_PEOPLE_CONSTRAINT = "Number of people should be a non-zero unsigned integer";
     public static final String DATE_TIME_CONSTRAINT = "Wrong date time format";
+    public static final String TIME_ON_THE_HOUR_CONSTRAINT = "Minutes of time is not 00";
     public static final String TABLE_ID_CONSTRAINT = "Table ID should be a non-zero unsigned integer";
 
     private final String phone;
@@ -85,6 +86,10 @@ public class JsonAdaptedReservation {
             throw new IllegalValueException(DATE_TIME_CONSTRAINT);
         }
         LocalDateTime modelTime = LocalDateTime.parse(time);
+
+        if (modelTime.getMinute() != 0) {
+            throw new IllegalValueException(TIME_ON_THE_HOUR_CONSTRAINT);
+        }
 
         if (tableId == null) {
             throw new IllegalValueException(
