@@ -88,6 +88,8 @@ public class EditCommand extends Command {
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
+     * @param targetTaskIndex of the person in the filtered person list
+     * @param editTaskDescriptor details to edit the task with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor,
                        Index targetTaskIndex, EditTaskCommand.EditTaskDescriptor editTaskDescriptor) {
@@ -99,6 +101,10 @@ public class EditCommand extends Command {
         this.editTaskDescriptor = editTaskDescriptor;
     }
 
+    /**
+     * @param index of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
+     */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
