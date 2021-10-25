@@ -10,7 +10,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import safeforhall.logic.Logic;
 import safeforhall.logic.commands.ClearCommand;
-import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.CommandResult;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
@@ -127,14 +126,13 @@ public class CommandBox extends UiPart<Region> {
                 }
                 event.consume();
                 commandTextField.setText(newText);
-                commandTextField.end();
             }
         });
     }
 
     private void handleInput() {
         getRoot().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+            if (event.getCode().isLetterKey() || event.getCode().isDigitKey() || event.getCode().isWhitespaceKey()) {
                 currentString += event.getText();
                 event.consume();
             } else if (event.getCode() == KeyCode.BACK_SPACE && currentString.length() > 0) {
@@ -147,7 +145,7 @@ public class CommandBox extends UiPart<Region> {
             }
         });
         getRoot().addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            String suggestion = mapSuggestion(currentString, true);
+            String suggestion = mapSuggestion(currentString.trim(), true);
             if (!suggestion.equals("")) {
                 String output = currentString + " " + suggestion;
                 commandTextField.setText(output);
@@ -179,8 +177,6 @@ public class CommandBox extends UiPart<Region> {
                 return FindCommand.PARAMETERS;
             case HelpCommand.COMMAND_WORD:
                 return HelpCommand.PARAMETERS;
-            case IncludeCommand.COMMAND_WORD:
-                return IncludeCommand.PARAMETERS;
             case ListCommand.COMMAND_WORD:
                 return ListCommand.PARAMETERS;
             default:
@@ -206,8 +202,6 @@ public class CommandBox extends UiPart<Region> {
                 return HelpCommand.PARAMETERS;
             case IncludeCommand.COMMAND_WORD:
                 return IncludeCommand.PARAMETERS;
-            case ListCommand.COMMAND_WORD:
-                return ListCommand.PARAMETERS;
             default:
                 return "";
             }
