@@ -5,6 +5,7 @@ import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNu
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,6 +16,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.logic.AdditionalViewType;
+import seedu.academydirectory.logic.commands.Command;
+import seedu.academydirectory.logic.commands.ViewCommand;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.StageArea;
@@ -32,6 +36,8 @@ public class ModelManager implements VersionedModel {
 
     private final VersionControl versionControl;
 
+    private final AdditionalViewModel additionalViewModel;
+
     /**
      * Initializes a ModelManager with the given academyDirectory and userPrefs.
      */
@@ -48,6 +54,8 @@ public class ModelManager implements VersionedModel {
         this.versionControl = new VersionControl(HashMethod.SHA1,
                 userPrefs.getVersionControlPath(),
                 userPrefs.getAcademyDirectoryFilePath());
+
+        this.additionalViewModel = new AdditionalViewModel(Optional.empty(), AdditionalInfo.empty());
     }
 
     public ModelManager() {
@@ -198,5 +206,16 @@ public class ModelManager implements VersionedModel {
 
     public Commit fetchCommitByLabel(String labelName) {
         return versionControl.fetchCommitByLabel(labelName);
+    }
+
+    //=========== Additional Information View =============================================================
+    @Override
+    public AdditionalViewType getAdditionalViewType() {
+        return this.additionalViewModel.getAdditionalViewType();
+    }
+
+    @Override
+    public AdditionalInfo<? extends Object> getAdditionalInfo() {
+        return this.additionalViewModel.getAdditionalInfo();
     }
 }
