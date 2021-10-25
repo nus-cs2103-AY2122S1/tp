@@ -284,6 +284,31 @@ Examples:
 - `unpaid 3` updates the 3rd student's payment status to `Has not paid for the current month`.
 <hr>
 
+### Adding a lesson: `add -l`
+
+Adds a new lesson to TutorAid.
+
+Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`
+
+* The lesson name should only contain alphanumeric characters and spaces.
+* If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
+* If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
+
+Examples:
+* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+
+> :bulb: The lesson's capacity, pricing and timing are optional details for tutors to include.
+
+### Deleting a lesson : `del -l`
+
+Deletes the specified lesson with the given lesson index from TutorAid.
+
+Format: `del -l LESSON_INDEX`
+
+* Deletes the lesson at the specified `LESSON_INDEX`.
+* `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+* `LESSON_INDEX` must be a **positive integer** 1,2,3, …​
+
 ### Locating students or lessons by name: `find -s` / `find -l`
 
 Finds students or lessons whose names contain any of the given keywords. Use `-s` flag to search for students and
