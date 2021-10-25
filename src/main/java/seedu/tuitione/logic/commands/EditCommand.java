@@ -53,7 +53,8 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "✔\tSuccess:\n\nEdited Student: %1$s";
     public static final String MESSAGE_NOT_EDITED = "⚠\tAlert:\n\nAt least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
+    public static final String MESSAGE_DUPLICATE_STUDENT =
+            "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
 
     private final Index index;
     private final EditStudentDescriptor editStudentDescriptor;

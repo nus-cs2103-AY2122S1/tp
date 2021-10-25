@@ -38,7 +38,8 @@ public class AddCommand extends Command {
             + PREFIX_REMARK + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nNew student added:\n%1$s";
-    public static final String MESSAGE_DUPLICATE_STUDENT = "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
+    public static final String MESSAGE_DUPLICATE_STUDENT =
+            "⚠\tAlert:\n\nThis student already exists in the TuitiONE book.";
 
     private final Student toAdd;
 

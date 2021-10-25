@@ -28,8 +28,10 @@ public class UnenrollCommand extends Command {
             + "l/LESSON_INDEX\n"
             + "Example: " + "unenroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "✔\tSuccess:\n\nUnenrolled Student:\n%1$s from lesson: %2$s";
-    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = "⚠\tAlert:\n\n%1$s is not currently enrolled in the lesson: %2$s";
+    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS =
+            "✔\tSuccess:\n\nUnenrolled Student:\n%1$s from lesson: %2$s";
+    public static final String MESSAGE_STUDENT_NOT_IN_LESSON =
+            "⚠\tAlert:\n\n%1$s is not currently enrolled in the lesson: %2$s";
 
     private final Index indexStudent;
 
