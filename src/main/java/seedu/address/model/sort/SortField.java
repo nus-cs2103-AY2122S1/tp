@@ -29,8 +29,8 @@ public class SortField {
      * Returns true if a given string is a valid field.
      */
     public static boolean isValidSortField(String test) {
-        String gender = test.toLowerCase();
-        return gender.equals("d") || gender.equals("date") || gender.equals("a") || gender.equals("amount");
+        String sortField = test.toLowerCase();
+        return sortField.equals("d") || sortField.equals("date") || sortField.equals("a") || sortField.equals("amount");
     }
 
     private SortFieldType getSortFieldType(String input) {
