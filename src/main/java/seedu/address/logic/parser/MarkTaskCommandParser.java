@@ -7,10 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.MarkTaskCommand;
 import seedu.address.logic.commands.MarkTaskDoneCommand;
 import seedu.address.logic.commands.MarkTaskUndoneCommand;
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
