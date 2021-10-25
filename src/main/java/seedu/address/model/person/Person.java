@@ -177,6 +177,6 @@ public class Person implements Comparable<Person> {
 
     @Override
     public int compareTo(Person otherPerson) {
-        return getName().compareTo(otherPerson.getName());
+        return getCaseNumber().compareTo(otherPerson.getCaseNumber());
     }
 }

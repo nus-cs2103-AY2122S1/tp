@@ -30,17 +30,17 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline").withPhone("94351253")
-            .withEmail("alice@example.com").withCaseNumber("5").withHomeAddress("123, Jurong West Ave 6, #08-111")
+            .withEmail("alice@example.com").withCaseNumber("4").withHomeAddress("123, Jurong West Ave 6, #08-111")
             .withWorkAddress("1 Brooke Rd #B1-11 Katong Plaza").withQuarantineAddress("448 Hougang Ave 10 #B1-529")
             .withShnPeriod("2020-09-23 => 2020-10-07").withNextOfKinName("Anthony Reed").withNextOfKinPhone("92456234")
             .withNextOfKinAddress("4 Jalan Besut").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier").withPhone("98765432")
-            .withEmail("johnd@example.com").withCaseNumber("1").withHomeAddress("311, Clementi Ave 2, #02-25")
+            .withEmail("johnd@example.com").withCaseNumber("5").withHomeAddress("311, Clementi Ave 2, #02-25")
             .withWorkAddress("29 Flora Rd #01-08").withQuarantineAddress("3 Temasek Boulevard #03-028C")
             .withShnPeriod("2020-04-13 => 2020-04-27").withNextOfKinName("John Green").withNextOfKinPhone("84515153")
             .withNextOfKinAddress("120 Hillview Avenue #06-02").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withEmail("heinz@example.com").withCaseNumber("7").withHomeAddress("wall street")
+            .withEmail("heinz@example.com").withCaseNumber("6").withHomeAddress("wall street")
             .withShnPeriod("2020-04-13 => 2021-04-27").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withCaseNumber("200").withHomeAddress("10th street").build();
