@@ -28,12 +28,15 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Lab Added: %1$s";
 
+    public static final String MESSAGE_LAB_ALREADY_EXISTS = "Lab Already Exists: %1$s";
+
     private final Lab result;
 
     /**
      * @param result the lab result to be added.
      * */
     public AddLabCommand(Lab result) {
+        requireNonNull(result);
         this.result = result;
     }
 
@@ -42,13 +45,19 @@ public class AddLabCommand extends Command {
         requireNonNull(model);
         // Gets the last filtered list displayed
         List<Student> lastShownList = model.getFilteredStudentList();
-
+        boolean exists = false;
         for (Student std: lastShownList) {
             Student target = std;
-            target.addLabResult(this.result);
+            if (!target.addLabResult(this.result)) {
+                exists = true;
+            }
             model.setStudent(target, std);
         }
-        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
+        if (exists) {
+            throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));
+        } else {
+            return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
+        }
     }
 
     @Override

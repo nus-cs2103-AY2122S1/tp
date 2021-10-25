@@ -113,6 +113,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addLab(Lab target) {
+        programmerError.addLab(target);
+    }
+
+    @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         programmerError.setStudent(target, editedStudent);
