@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatisticsDisplay statisticsDisplay;
     private AllTaskListPanel allTaskListPanel;
     private CommandBox commandBox;
 
@@ -52,8 +53,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private AnchorPane resultDisplayPlaceholder;
 
+    @FXML
+    private AnchorPane statisticsDisplayPlaceholder;
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -166,6 +169,11 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        setAnchorProperties(resultDisplayPlaceholder);
+
+        statisticsDisplay = new StatisticsDisplay(logic.getStatistics());
+        statisticsDisplayPlaceholder.getChildren().add(statisticsDisplay.getRoot());
+        setAnchorProperties(statisticsDisplayPlaceholder);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
