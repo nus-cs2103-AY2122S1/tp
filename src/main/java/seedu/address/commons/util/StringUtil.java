@@ -76,4 +76,34 @@ public class StringUtil {
     public static String clean(String s, String toRemove) {
         return clean(s).replaceAll(toRemove, "").strip();
     }
+
+    /**
+     * Checks if the given filename is a JSON file.
+     *
+     * @param fileName Name of the specified file.
+     * @return True if the file is a JSON file, false otherwise.
+     */
+    public static boolean isJson(String fileName) {
+        int length = fileName.length();
+        if (length <= 5) {
+            return false;
+        }
+        String lastFiveChars = fileName.substring(length - 5);
+        return lastFiveChars.equalsIgnoreCase(".json");
+    }
+
+    /**
+     * Checks if the given filename is a CSV file.
+     *
+     * @param fileName Name of the specified file.
+     * @return True if the file is a CSV file, false otherwise.
+     */
+    public static boolean isCsv(String fileName) {
+        int length = fileName.length();
+        if (length <= 4) {
+            return false;
+        }
+        String lastFiveChars = fileName.substring(length - 4);
+        return lastFiveChars.equalsIgnoreCase(".csv");
+    }
 }

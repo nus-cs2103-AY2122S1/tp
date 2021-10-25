@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
+import com.fasterxml.jackson.databind.ext.NioPathDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
@@ -37,10 +38,12 @@ public class JsonUtil {
             .setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
             .registerModule(new SimpleModule("SimpleModule")
                     .addSerializer(Level.class, new ToStringSerializer())
-                    .addDeserializer(Level.class, new LevelDeserializer(Level.class)));
+                    .addSerializer(Path.class, new ToStringSerializer())
+                    .addDeserializer(Level.class, new LevelDeserializer(Level.class))
+                    .addDeserializer(Path.class, new NioPathDeserializer()));
 
-    static <T> void serializeObjectToJsonFile(Path jsonFile, T objectToSerialize) throws IOException {
-        FileUtil.writeToFile(jsonFile, toJsonString(objectToSerialize));
+    static <T> void serializeObjectToJsonFile(Path filePath, T objectToSerialize) throws IOException {
+        FileUtil.writeToFile(filePath, toJsonString(objectToSerialize));
     }
 
     static <T> T deserializeObjectFromJsonFile(Path jsonFile, Class<T> classOfObjectToDeserialize)

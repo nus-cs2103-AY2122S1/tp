@@ -38,7 +38,4 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, UserProfi
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
-
-    @Override
-    void exportToJson(ReadOnlyAddressBook addressBook) throws IOException;
 }
