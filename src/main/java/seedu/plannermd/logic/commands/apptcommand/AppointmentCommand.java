@@ -20,8 +20,6 @@ public abstract class AppointmentCommand extends Command {
                     + PREFIX_START + "DATE_AND_TIME" + "[" + PREFIX_DURATION + "DURATION" + "]" + "["
                     + PREFIX_REMARK + " REMARK" + "]\n"
                     + FLAG_DELETE + "INDEX_OF_PATIENT\n";
-
-
             //EDIT
             //DELETE
             //FILTER
