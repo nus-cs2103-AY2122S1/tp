@@ -71,7 +71,7 @@ public class ExportCommand extends Command {
     }
 
     private void convertFieldsToString(List<Person> personList) {
-        for (Person p: personList) {
+        for (Person p : personList) {
             names.add(p.getName().toString());
             phones.add(p.getPhone().toString());
             emails.add(p.getEmail().toString());
