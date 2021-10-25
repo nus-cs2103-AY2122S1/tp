@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -167,12 +168,12 @@ public class ShowCommand extends Command {
 
         // state check
         ShowCommand toCompare = (ShowCommand) other;
-        boolean isNameEquals = (name != null && name.equals(toCompare.name)) || name == toCompare.name;
-        boolean isIdEquals = (id != null && id.equals(toCompare.id)) || id == toCompare.id;
-        boolean isAssessmentEquals = (assessment != null && assessment.equals(toCompare.assessment))
-                || assessment == toCompare.assessment;
+        boolean isIndexEquals = Objects.equals(index, toCompare.index);
+        boolean isNameEquals = Objects.equals(name, toCompare.name);
+        boolean isIdEquals = Objects.equals(id, toCompare.id);
+        boolean isAssessmentEquals = Objects.equals(assessment, toCompare.assessment);
 
-        return isNameEquals && isIdEquals && isAssessmentEquals;
+        return isIndexEquals && isNameEquals && isIdEquals && isAssessmentEquals;
     }
 
     public void setIndex(Index index) {
