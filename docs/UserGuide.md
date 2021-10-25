@@ -64,6 +64,7 @@ title: User Guide
 * Mark the current scheduled visit as done (update the last visited date and delete the current visit)
 * View a summary of overdue, upcoming and recent visit statistics
 * View help
+* Download elderly data
 
 
 ## Notes about command format:
