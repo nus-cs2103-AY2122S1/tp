@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_NO_EXISTING_VISIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 import java.util.Optional;
@@ -84,7 +85,7 @@ public class DeleteCommand extends Command {
                 personToDelete.getAddress(), personToDelete.getLastVisit(), EMPTY_VISIT, Optional.of(Frequency.EMPTY),
                         Optional.of(new Occurrence(1)), personToDelete.getHealthConditions());
         model.setPerson(personToDelete, editedPerson);
-
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_DELETE_VISIT_SUCCESS, personToDelete));
     }
 
