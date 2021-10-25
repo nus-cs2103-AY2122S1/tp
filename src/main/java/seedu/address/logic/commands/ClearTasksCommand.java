@@ -7,7 +7,7 @@ import seedu.address.model.Model;
 /**
  * Clears the address book.
  */
-public class ClearAllTasksCommand extends Command {
+public class ClearTasksCommand extends Command {
 
     public static final String COMMAND_WORD = "clearTasks";
     public static final String MESSAGE_SUCCESS = "Task list has been cleared!";
