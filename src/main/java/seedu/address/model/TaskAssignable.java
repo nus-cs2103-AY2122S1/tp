@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.id.UniqueId;
