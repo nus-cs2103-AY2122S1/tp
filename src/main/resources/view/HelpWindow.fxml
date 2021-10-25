@@ -36,7 +36,10 @@
                                 <Insets right="5.0" />
                             </HBox.margin>
                         </Label>
-                        <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL" />
+                        <Button fx:id="copyButton" mnemonicParsing="false" onAction="#copyUrl" text="Copy URL">
+                        <font>
+                           <Font name="Montserrat Medium" size="12.0" />
+                        </font></Button>
                     </children>
                     <padding>
                         <Insets top="5.0" />
