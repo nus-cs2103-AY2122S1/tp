@@ -307,8 +307,8 @@ Action | Format, Examples
 **List students** | `liststu [c/CLASS_CODE]`<br> e.g., `liststu c/G06`
 **Add class** | `addc c/CLASS_CODE s/SCHEDULE [t/TAG]…​`<br> e.g., `addc c/G06 s/Tuesdays and Fridays 2-4pm`
 **Delete class** | `deletec INDEX`<br> e.g., `listc` followed by `deletec 2`
-**View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3
-`**List all classes** | `liststu`
+**View class** | `viewc INDEX`<br> e.g., `listc` followed by `viewc 3`
+**List all classes** | `liststu`
 **Find class** | `findc KEYWORD [MORE_KEYWORDS]`<br> e.g., `findc A02`
 **Clear all students** | `clear`
 **Exit ClassMATE** | `exit`
