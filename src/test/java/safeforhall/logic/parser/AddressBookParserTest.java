@@ -17,13 +17,13 @@ import org.junit.jupiter.api.Test;
 
 import safeforhall.commons.core.index.Index;
 import safeforhall.logic.commands.ClearCommand;
+import safeforhall.logic.commands.DeadlineCommand;
 //import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.IncludeCommand;
-import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
 import safeforhall.logic.commands.view.ViewEventCommand;
@@ -106,9 +106,9 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        ListCommand command = (ListCommand) parser.parseCommand(
-                ListCommand.COMMAND_WORD + " k/c d1/10-10-2021", true);
-        assertEquals(new ListCommand("c", new LastDate("10-10-2021")), command);
+        DeadlineCommand command = (DeadlineCommand) parser.parseCommand(
+                DeadlineCommand.COMMAND_WORD + " k/c d1/10-10-2021", true);
+        assertEquals(new DeadlineCommand("c", new LastDate("10-10-2021")), command);
     }
 
     @Test
