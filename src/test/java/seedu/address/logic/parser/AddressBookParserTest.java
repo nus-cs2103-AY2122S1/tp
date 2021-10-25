@@ -70,8 +70,8 @@ public class AddressBookParserTest {
 //        EditClientCommand.EditClientDescriptor descriptor = new EditClientDescriptorBuilder(client).build();
 //        EditClientCommand expectedCommand =
 //                (EditClientCommand) parser.parseCommand(EditClientCommand.COMMAND_WORD + " " +
-//                        INDEX_FIRST_CLIENT.getOneBased() + " " + ClientUtil.getEditClientDescriptorDetails(descriptor),
-//                        model);
+//                        INDEX_FIRST_CLIENT.getOneBased() + " " +
+//                                ClientUtil.getEditClientDescriptorDetails(descriptor), model);
 //        EditClientCommand actualCommand = new EditClientCommand(INDEX_FIRST_CLIENT, descriptor);
 //        String expectedOutput = expectedCommand.execute(model).getFeedbackToUser();
 //        String actualOutput = actualCommand.execute(model).getFeedbackToUser();
@@ -81,11 +81,12 @@ public class AddressBookParserTest {
 //    @Test
 //    public void parseCommand_editProduct() throws Exception {
 //        Product product = new ProductBuilder().build();
-//        EditProductCommand.EditProductDescriptor descriptor = new EditProductCommand.EditProductDescriptor(product).build();
+//        EditProductCommand.EditProductDescriptor descriptor =
+//                new EditProductCommand.EditProductDescriptor(product).build();
 //        EditProductCommand expectedCommand =
 //                (EditProductCommand) parser.parseCommand(EditProductCommand.COMMAND_WORD + " " +
-//                                INDEX_FIRST_PRODUCT.getOneBased() + " " + ProductUtil.getEditProductDescriptorDetails(descriptor),
-//                        model);
+//                                INDEX_FIRST_PRODUCT.getOneBased() + " " +
+//                                ProductUtil.getEditProductDescriptorDetails(descriptor), model);
 //        EditProductCommand actualCommand = new EditProductCommand(INDEX_FIRST_PRODUCT, descriptor);
 //        String expectedOutput = expectedCommand.execute(model).getFeedbackToUser();
 //        String actualOutput = actualCommand.execute(model).getFeedbackToUser();
