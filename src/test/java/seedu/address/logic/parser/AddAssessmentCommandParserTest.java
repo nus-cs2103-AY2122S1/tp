@@ -33,7 +33,7 @@ public class AddAssessmentCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddAssessmentCommand.MESSAGE_USAGE);
 
-    private EditCommandParser parser = new EditCommandParser();
+    private AddAssessmentCommandParser parser = new AddAssessmentCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
@@ -56,10 +56,10 @@ public class AddAssessmentCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // negative index
-        assertParseFailure(parser, "-5" + VALID_ASSESSMENT_NAME_QUIZ1, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "-5" + VALID_ASSESSMENT_NAME_QUIZ1 + VALID_SCORE_QUIZ1, MESSAGE_INVALID_FORMAT);
 
         // zero index
-        assertParseFailure(parser, "0" + VALID_ASSESSMENT_NAME_QUIZ1, MESSAGE_INVALID_FORMAT);
+        assertParseFailure(parser, "0" + VALID_ASSESSMENT_NAME_QUIZ1 + VALID_SCORE_QUIZ1, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -72,6 +72,7 @@ public class AddAssessmentCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid assessment name
         assertParseFailure(parser, "1" + INVALID_ASSESSMENT_NAME_DESC, AssessmentName.MESSAGE_CONSTRAINTS);
+
         // invalid score
         assertParseFailure(parser, "1" + INVALID_SCORE_DESC, Score.MESSAGE_CONSTRAINTS);
 
@@ -83,6 +84,7 @@ public class AddAssessmentCommandParserTest {
         assertParseFailure(parser, "1" + VALID_ASSESSMENT_NAME_QUIZ1 + INVALID_SCORE_DESC,
                 Score.MESSAGE_CONSTRAINTS);
 
+        // invalid assessment name and invalid score
         assertParseFailure(parser, "1" + INVALID_ASSESSMENT_NAME_DESC + INVALID_SCORE_DESC,
                 AssessmentName.MESSAGE_CONSTRAINTS);
     }
