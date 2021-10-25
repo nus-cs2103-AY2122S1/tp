@@ -3,6 +3,11 @@ layout: page
 title: User Guide
 ---
 ![Banner](images/Banner.png)
+* Table of Contents
+{:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## <u>Quick start</u>
 
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
@@ -27,7 +32,7 @@ title: User Guide
 
 * **`exit`** : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,17 +73,17 @@ Format: ```contacts or tasks or help```
 
 Change tabs using shortcuts to save time:
 
-Format ```c or t or h```
-<br />
-<br />
+Format: ```c or t or h```
+
+--------------------------------------------------------------------------------------------------------------------
 
 #### Exiting the program: [exit]
 
 Exits the program.
 
 Format: ```exit```
-<br />
-<br />
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### <u>Contacts</u>
 
@@ -88,6 +93,8 @@ Format: ```exit```
 Adds a contact to the address book. Only name is compulsory during creation.
 
 Format: ```add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Editing a Contact](images/UG-04.png)
 #### Editing contact details: [edit]
@@ -102,6 +109,8 @@ Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...``
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing t/ without specifying any tags after it.
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### Deleting a contact: [delete]
 
 Deletes the contact at the chosen index.
@@ -111,6 +120,8 @@ Format: ```delete INDEX```
 * Deletes the person at the specified INDEX.
 * The index refers to the index number shown in the contact list.
 * The index must be a positive integer i.e. 1, 2, 3, …
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Finding a Contact](images/UG-09.png)
 #### Finding contact through searching name: [find]
@@ -122,7 +133,10 @@ Format: ```find NAME```
 * The search is case-insensitive. e.g hans will match Hans
 * The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
 * Only the name is searched.
-* Persons matching all keywords will be returned (i.e. AND search). e.g. Hans Bo will return only Hans Bo and Hans Bo the Second. It will not return Hans Gruber, Bo Yang
+* Persons matching all keywords will be returned (i.e. AND search). e.g. 
+  Hans Bo will return only Hans Bo and Hans Bo the Second. It will not return Hans Gruber, Bo Yang
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Finding a Contact](images/UG-06.png)
 #### Finding contact through searching a specific field: [find]
@@ -136,18 +150,24 @@ Format: ```find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 * Contacts matching all keywords will be returned (i.e. AND search). e.g. ```find p/86235343 t/CS2101``` will return 
   only contacts who both have the given phone number AND the tag CS2101. 
   It will not return contacts with different phone numbers, even if they contain the tag CS2101.
-  
+
+--------------------------------------------------------------------------------------------------------------------
+
 #### Listing all contacts: [list]
 
 Clears the search results of a find command, showing all contacts.
 
 Format: ```list```
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### Clearing all contacts: [clear]
 
 Deletes all contacts.
 
 Format: ```clear```
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### <u>Tasks (When on tasks tab)</u>
 
@@ -161,6 +181,8 @@ Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX
 * An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
 on the side bar to the right.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Editing a Task](images/UG-05.png)
 #### Editing task details: [edit]
@@ -180,12 +202,16 @@ Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PER
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
   on the side bar to the right.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ![Tagging a Task](images/UG-10.png)
 #### Tagging a task: [tag]
 
 Adds extra tags to a task without wiping the old tags.
 
 Format: ```tag INDEX [t/TAG]...```
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Assigning people to a Task](images/UG-11.png)
 #### Assigning people to a task: [assign]
@@ -196,6 +222,8 @@ Format: ```assign INDEX [p/PERSON INDEX]...```
 
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
   on the side bar to the right.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Completing a Task](images/UG-12.png)
 #### Completing a task: [complete]
@@ -208,6 +236,8 @@ Format: ```complete INDEX```
 * The index refers to the index number shown in the task list
 * The index must be a positive integer i.e. 1, 2, 3, …
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### Deleting a task: [delete]
 
 Deletes the task at the chosen index.
@@ -217,6 +247,8 @@ Format: ```delete INDEX```
 * Deletes the task at the specified INDEX
 * The index refers to the index number shown in the task list
 * The index must be a positive integer i.e. 1, 2, 3, …
+
+--------------------------------------------------------------------------------------------------------------------
 
 ![Finding a Task](images/UG-08.png)
 #### Finding task through task description: [find]
@@ -232,6 +264,8 @@ Format: ```find DESCRIPTION```
   e.g. ```Do this``` will return only ```Do this``` and ```Do this (very important!!!)```. 
   It will not return ```Do maybe?``` or ```This doesn’t matter```
 
+--------------------------------------------------------------------------------------------------------------------
+
 ![Finding a Task](images/UG-07.png)
 #### Finding task through searching a specific field: [find]
 
@@ -244,6 +278,8 @@ Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG].
   only tasks who both have time 1900 AND the tag homework.
   It will not return contacts with different times, even if they contain the tag homework.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ![Finding upcoming Tasks](images/UG-13.png)
 #### Find all upcoming tasks: [upcoming]
 
@@ -253,17 +289,23 @@ Format: ```upcoming```
 
 * An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### Listing all tasks: [list]
 
 Clears the search results of a find/upcoming command, showing all tasks.
 
 Format: ```list```
 
+--------------------------------------------------------------------------------------------------------------------
+
 #### Clearing all tasks: [clear]
 
 Deletes all tasks.
 
 Format: ```clear```
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### <u>Handling Date and Time of tasks</u>
 
@@ -284,7 +326,7 @@ A task can have Date only or both Date and Time.
 * When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
 </div>
 
-### Date Formats
+#### Date Formats
 
 Format | Example
 --------|------------------
@@ -294,7 +336,7 @@ Format | Example
 **yyyy-MM-dd** | `2021-10-02`
 **dd MMM yyyy** | `02 Oct 2021`
 
-### Time Formats
+#### Time Formats
 
 Format | Example
 --------|------------------
