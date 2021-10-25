@@ -31,8 +31,6 @@ public class AddAssessmentCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New assessment added to %1$s: %2$s";
     public static final String MESSAGE_DUPLICATE_ASSESSMENT =
             "This assessment already exists in %1$s's assessments list";
-    public static final String MESSAGE_STUDENT_NONEXISTENT =
-            "The student indicated does not exist. Please add the student first.";
 
     private final Index index;
     private final Assessment assessment;
