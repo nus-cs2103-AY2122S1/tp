@@ -98,7 +98,6 @@ public class AnimeList implements ReadOnlyAnimeList {
     }
 
     public Stats fetchUserStats() {
-        //TODO refactor shitty code
         int watchingCount = 0;
         int toWatchCount = 0;
         int finishedCount = 0;
