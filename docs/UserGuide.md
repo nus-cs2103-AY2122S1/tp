@@ -255,7 +255,7 @@ Format: `del -p STUDENT_INDEX`
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
 
-### Set payment made: `paid`
+### Setting payment made: `paid`
 
 Sets the payment status of the specified student to `Paid for the current month`.
 
@@ -269,7 +269,7 @@ Example:
 
 - `paid 3` updates the 3rd student's payment status to `Paid for the current month`.
 
-### Unset payment made: `unpaid`
+### Unsetting payment made: `unpaid`
 
 Sets the payment status of the specified student to `Has not paid for the current month`.
 
