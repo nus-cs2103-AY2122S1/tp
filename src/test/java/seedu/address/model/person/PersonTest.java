@@ -20,7 +20,21 @@ import seedu.address.testutil.PersonBuilder;
 public class PersonTest {
 
     @Test
-    public void getIsFavourite() {
+    public void isFavourite_defaultAlice() {
+        ALICE.setIsNotFavourite();
+        assertFalse(ALICE.isFavourite());
+    }
+
+    @Test
+    public void isFavourite_modifyAliceOnce() {
+        ALICE.setIsFavourite();
+        assertTrue(ALICE.isFavourite());
+    }
+
+    @Test
+    public void isFavourite_modifyAliceTwice() {
+        ALICE.setIsFavourite();
+        ALICE.setIsNotFavourite();
         assertFalse(ALICE.isFavourite());
     }
 
