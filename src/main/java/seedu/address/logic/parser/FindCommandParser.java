@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_SENSITIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -30,6 +31,11 @@ public class FindCommandParser implements Parser<FindCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
+        boolean isCaseSensitive = false;
+        if (trimmedArgs.contains(PREFIX_CASE_SENSITIVE.toString())) {
+            isCaseSensitive = true;
+        }
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TAG);
         List<String> nameStringList = argMultimap.getAllValues(PREFIX_NAME);
@@ -44,7 +50,7 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(e.getMessage());
         }
 
-        FindPredicate findpredicate = new FindPredicate(nameKeywords, tagList);
+        FindPredicate findpredicate = new FindPredicate(nameKeywords, tagList, isCaseSensitive);
 
         return new FindCommand(findpredicate);
     }

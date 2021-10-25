@@ -27,7 +27,7 @@ public class FindCommandParserTest {
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of();
         FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
+                new FindCommand(new FindPredicate(nameList, tagList, false));
         assertParseSuccess(parser, " n/Alice", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -39,7 +39,7 @@ public class FindCommandParserTest {
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of();
         FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
+                new FindCommand(new FindPredicate(nameList, tagList, false));
         assertParseSuccess(parser, " n/Alice n/Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -47,11 +47,11 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_oneTag_returnsFindCommand() {
+    public void parse_oneTagCaseInsensitive_returnsFindCommand() {
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("friends"));
         FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
+                new FindCommand(new FindPredicate(nameList, tagList, false));
         assertParseSuccess(parser, " t/friends", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -59,23 +59,48 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_multipleTags_returnsFindCommand() {
+    public void parse_oneTagCaseSensitive_returnsFindCommand() {
+        List<Name> nameList = List.of();
+        List<Tag> tagList = List.of(new Tag("frIends"));
+        FindCommand expectedFindCommand =
+                new FindCommand(new FindPredicate(nameList, tagList, true));
+        assertParseSuccess(parser, " c/ t/frIends", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " c/\n \n \t  \t t/frIends", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_multipleTagsCaseInsensitive_returnsFindCommand() {
         List<Name> nameList = List.of();
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
         FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
+                new FindCommand(new FindPredicate(nameList, tagList, false));
         assertParseSuccess(parser, " t/friends t/colleagues", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n \n \t  t/friends \t t/colleagues", expectedFindCommand);
     }
 
+
     @Test
-    public void parse_oneNamesAndTag_returnsFindCommand() {
+    public void parse_multipleTagsCaseSensitive_returnsFindCommand() {
+        List<Name> nameList = List.of();
+        List<Tag> tagList = List.of(new Tag("friENds"), new Tag("colleagues"));
+        FindCommand expectedFindCommand =
+                new FindCommand(new FindPredicate(nameList, tagList, true));
+        assertParseSuccess(parser, " c/ t/friENds t/colleagues", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " c/\n \n \t  t/friENds \t t/colleagues", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_oneNamesAndTagCaseInsensitive_returnsFindCommand() {
         List<Name> nameList = List.of(new Name("Alice"));
         List<Tag> tagList = List.of(new Tag("friends"));
         FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
+                new FindCommand(new FindPredicate(nameList, tagList, false));
         assertParseSuccess(parser, " n/Alice t/friends", expectedFindCommand);
 
         // multiple whitespaces between keywords
@@ -83,15 +108,39 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_multipleNamesAndTags_returnsFindCommand() {
+    public void parse_oneNamesAndTagCaseSensitive_returnsFindCommand() {
+        List<Name> nameList = List.of(new Name("Alice"));
+        List<Tag> tagList = List.of(new Tag("FRIENDS"));
+        FindCommand expectedFindCommand =
+                new FindCommand(new FindPredicate(nameList, tagList, true));
+        assertParseSuccess(parser, " c/ n/Alice t/FRIENDS", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " c/\n n/Alice \n \t  \t t/FRIENDS", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_multipleNamesAndTagsCaseInsensitive_returnsFindCommand() {
         List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
         List<Tag> tagList = List.of(new Tag("friends"), new Tag("colleagues"));
         FindCommand expectedFindCommand =
-                new FindCommand(new FindPredicate(nameList, tagList));
+                new FindCommand(new FindPredicate(nameList, tagList, false));
         assertParseSuccess(parser, " n/Alice n/Bob t/friends t/colleagues", expectedFindCommand);
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n n/Alice \n \t n/Bob  \t t/friends t/colleagues", expectedFindCommand);
+    }
+
+    @Test
+    public void parse_multipleNamesAndTagsCaseSensitive_returnsFindCommand() {
+        List<Name> nameList = List.of(new Name("Alice"), new Name("Bob"));
+        List<Tag> tagList = List.of(new Tag("FRiends"), new Tag("colleagues"));
+        FindCommand expectedFindCommand =
+                new FindCommand(new FindPredicate(nameList, tagList, true));
+        assertParseSuccess(parser, " c/ n/Alice n/Bob t/FRiends t/colleagues", expectedFindCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " c/\n n/Alice \n \t n/Bob  \t t/FRiends t/colleagues", expectedFindCommand);
     }
 
 }
