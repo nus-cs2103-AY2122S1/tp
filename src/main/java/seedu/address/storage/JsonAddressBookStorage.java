@@ -76,9 +76,12 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}, but checks if the save is an export.
      *
-     * @param filePath location of the data. Cannot be null.
+     * @param addressBook Address Book to save.
+     * @param filePath Location of where to save to. Cannot be null.
+     * @param isExport Whether the save is an export or regular saving of CohortConnect's data
+     * @throws IOException If there is an error while saving to file.
      */
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath, boolean isExport) throws IOException {
         requireNonNull(addressBook);
