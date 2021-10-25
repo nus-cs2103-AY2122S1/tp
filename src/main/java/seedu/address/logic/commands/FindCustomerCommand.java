@@ -32,7 +32,8 @@ public class FindCustomerCommand extends Command {
         model.updateFilteredCustomerList(predicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_CUSTOMERS_LISTED_OVERVIEW,
-                        model.getFilteredCustomerList().size()), false, false, true, false, false, false);
+                        model.getFilteredCustomerList().size()),
+                false, false, true, false, false, false);
     }
 
     @Override

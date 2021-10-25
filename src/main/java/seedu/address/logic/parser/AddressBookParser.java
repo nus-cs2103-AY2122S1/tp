@@ -25,6 +25,7 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCustomerCommand;
 import seedu.address.logic.commands.FindEmployeeCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
+import seedu.address.logic.commands.GetCustomerReservingCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ReservationCommand;
 import seedu.address.logic.commands.ReserveCommand;
@@ -103,6 +104,9 @@ public class AddressBookParser {
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+
+        case GetCustomerReservingCommand.COMMAND_WORD:
+            return new GetCustomerReservingCommandParser().parse(arguments);
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
