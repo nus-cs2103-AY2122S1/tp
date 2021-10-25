@@ -171,6 +171,66 @@ The workflow of the Add command is shown in the Activity diagram illustrated bel
   * Cons: User has to go through a two-step process of `add` and `edit` to initialise a residents information 
 
 
+### Edit Command
+
+This command allows the user to edit residents or events to the SafeFor(H)All application depending on the currently active tab.
+
+The workflow of the Edit command is shown in the Activity diagram illustrated below.
+
+![EditActivityDiagram](images/logic/commands/editcommand/EditActivityDiagram.png)
+
+Note:
+- Mass operations can be carried out by inputting multiple indexes after the command `edit`, each separated by a whitespace.
+- `Residents` field in `Event` is not editable by `edit` command
+
+#### Design considerations:
+
+**Aspect: Edit parameters:**
+
+* **Alternative 1 (current choice):** Excluding `Residents` parameter for Events.
+    * Pros:
+        - Simpler implementation as there are less `EditDescriptors` to maintain.
+        - `include` and `exclude` commands exist to enhance the updating of the `Residents` field.
+          `edit` currently replaces the specified fields with the user input, which will not be user-friendly for the `Residents` field. 
+          It might also cause confusion of possible overlapping functionality on the user's side.
+    * Cons: Increases the number of commands the user has to remember.
+
+* **Alternative 2:** `edit` is used to edit the residents involved in an event
+    * Pros: More instinctive, and less commands for the user to remember.
+    * Cons: Users will have to rewrite the entire list of residents involved in the event whenever they want to modify the list of residents involved.
+
+
+### View Command
+
+This command allows the user to view the additional details of a specific resident or event in the sidebar.
+
+How it works:
+1. When the app is started, the `Ui` component calls on `Logic` to get the `Model` to be displayed in the sidebar. `Model` is first set to an empty list.
+2. When a `ViewCommand` with a valid index is executed, the `Model` is updated to contain only the specified resident or event.
+3. When the `ViewCommand` is executed without index parameters, the main panel will show all residents or events, and the sidebar will be cleared.
+4. If the command is run in the `ResidentTab`, the details of the resident with the corresponding index being displayed in the sidebar. Vice versa for `EventTab`.
+
+The following sequence diagram demonstrates what happens when the `ViewCommand` is executed:
+
+![ViewCommandSequenceDiagram](images/logic/commands/viewcommand/ViewCommandSequenceDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How to reference residents/ events in the CLI:**
+
+* **Alternative 1 (current choice):** Reference by `Index`.
+    * Pros: 
+      - Easy to reference and no need to type out the whole `residentName`/ `eventName`.
+      - `Index` is unique.
+    * Cons: Need to first determine the `Index` of the resident/ event in the UI. `View` could become a two-step process if the database is large.
+
+* **Alternative 2:** Reference by `residentName`/ `eventName`.
+    * Pros: Do not have to first determine the `Index` of the resident/ event.
+    * Cons: 
+      - Hard to type when the `residentName`/ `eventName` is long.
+      - `eventName` is not unique, which might cause issues.
+
+
 ### Find Command
 
 This command allows searching for residents subjected to 1 or more filters for the different available parameters.
@@ -227,7 +287,6 @@ Most variables are checked against using it's respective `equals` method except 
     * Cons:
         - The user is unable to search for an exact fet/collection date alongside other filters.
 
-**Aspect: Filtering parameters:**
 
 ### Include Command
 
