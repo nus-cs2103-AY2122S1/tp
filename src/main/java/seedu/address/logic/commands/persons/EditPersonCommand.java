@@ -149,8 +149,6 @@ public class EditPersonCommand extends Command {
     public static class EditPersonDescriptor {
 
         public static final String CANNOT_ASSIGN_LESSON_GROUP = "lesson conflicts with lessons in group: ";
-        public static final String INVALID_LESSON_INDEX = "Lesson index provided is invalid!";
-        public static final String INVALID_EXAM_INDEX = "Exam index provided is invalid!";
 
         private Name name;
         private Phone phone;
@@ -330,7 +328,7 @@ public class EditPersonCommand extends Command {
             try {
                 personToEdit = removeLessons(personToEdit, lessonsToRemove);
             } catch (IndexOutOfBoundsException index) {
-                throw new CommandException(INVALID_LESSON_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_LESSON_INDEX);
             }
             // adding lessons
             try {
@@ -363,7 +361,7 @@ public class EditPersonCommand extends Command {
                     personToEdit = personToEdit.removeExam(i.getZeroBased());
                 }
             } catch (IndexOutOfBoundsException index) {
-                throw new CommandException(INVALID_EXAM_INDEX);
+                throw new CommandException(Messages.MESSAGE_INVALID_EXAM_INDEX);
             }
             for (Exam e : examsToAdd) {
                 personToEdit = personToEdit.addExam(e);

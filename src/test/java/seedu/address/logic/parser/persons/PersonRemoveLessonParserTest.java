@@ -31,10 +31,10 @@ class PersonRemoveLessonParserTest {
     public void parse_invalidArgs_throwsParseException() {
         // all wrong
         assertParseFailure(parser, "abcdefgh", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PersonAddLessonParser.MESSAGE_USAGE));
+                PersonRemoveLessonParser.MESSAGE_USAGE));
 
         // half right :)
         assertParseFailure(parser, "1 abc", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                PersonAddLessonParser.MESSAGE_USAGE));
+                PersonRemoveLessonParser.MESSAGE_USAGE));
     }
 }
