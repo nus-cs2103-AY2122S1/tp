@@ -31,7 +31,7 @@ public class TypicalPersons {
             .withEmail("alice@example.com")
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withTags("friends")
-            .withTasks("eat", "sleep", "study")
+            .withTasks("eat| | | ", "sleep| | | ", "study| | | ")
             .withDescription("Owner of Lunta Inc")
             .build();
     public static final Person BENSON = new PersonBuilder()
@@ -40,7 +40,7 @@ public class TypicalPersons {
             .withEmail("johnd@example.com")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withTags("owesMoney", "friends")
-            .withTasks("a", "b", "c")
+            .withTasks("a| | | ", "b| | | ", "c| | | ")
             .withDescription("HR in Sarimba")
             .build();
     public static final Person BENJAMIN = new PersonBuilder()
@@ -49,7 +49,7 @@ public class TypicalPersons {
             .withEmail("benwe@example.com")
             .withAddress("23, Coleman Street, #05-30")
             .withTags("cousin")
-            .withTasks("work", "play", "sleep")
+            .withTasks("work| | | ", "play| | | ", "sleep| | | ")
             .withDescription("")
             .build();
     public static final Person CARL = new PersonBuilder()
@@ -65,7 +65,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
             .withTags("friends")
-            .withTasks("c", "d", "e")
+            .withTasks("c| | | ", "d| | | ", "e| | | ")
             .withDescription("Potential Client?")
             .build();
     public static final Person ELLE = new PersonBuilder()
@@ -73,7 +73,7 @@ public class TypicalPersons {
             .withPhone("9482224")
             .withEmail("werner@example.com")
             .withAddress("michegan ave")
-            .withTasks("consult prof Damith about project iteration v1.3")
+            .withTasks("consult prof Damith about project iteration v1.3| | | ")
             .withDescription("CS2103/T Teammate")
             .build();
     public static final Person FIONA = new PersonBuilder()
@@ -81,7 +81,7 @@ public class TypicalPersons {
             .withPhone("9482427")
             .withEmail("lydia@example.com")
             .withAddress("little tokyo")
-            .withTasks("a")
+            .withTasks("a| | | ")
             .withDescription("b")
             .build();
     public static final Person GEORGE = new PersonBuilder()
@@ -89,7 +89,7 @@ public class TypicalPersons {
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
-            .withTasks("a", "bbb", "ccccc", "ddddd", "eeeeeeeeeeeee")
+            .withTasks("a| | | ", "bbb| | | ", "ccccc| | | ", "ddddd| | | ", "eeeeeeeeeeeee| | | ")
             .withDescription("fffffffffffffff")
             .build();
 

@@ -43,7 +43,7 @@ public class TasksContainKeywordsPredicateTest {
 
     @Test
     public void test_tasksContainKeywords_returnsTrue() {
-        Person samplePerson = new PersonBuilder().withTasks("eat", "sleep", "think").build();
+        Person samplePerson = new PersonBuilder().withTasks("eat| | | ", "sleep| | | ", "think| | | ").build();
         // One keyword
         TasksContainKeywordsPredicate predicate = new TasksContainKeywordsPredicate(new ArrayList<>(List.of("eat")));
         assertTrue(predicate.test(samplePerson));
