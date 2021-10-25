@@ -55,7 +55,9 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         sampleAb.addEvent(new Event(new EventName("Powerlifting"), new EventDate("03-01-2021"),
-                new Venue("Gym"), new Capacity("5"), new ResidentList("Alex Yeoh")));
+                new Venue("Gym"), new Capacity("5"), new ResidentList("Alex Yeoh",
+                "David Li; Room: C112; Phone: 91031282; Email: lidavid@example.com; Vaccinated: T;"
+                        + " Faculty: SDE; Last Fet Date: 02-10-2021; Last Collection Date: 01-10-2021")));
         return sampleAb;
     }
 
