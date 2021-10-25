@@ -45,9 +45,20 @@ public class Score {
         this.totalScore = totalScore;
     }
 
-    public boolean isPassing() {
-        return actualScore / totalScore * 100 >= PASSING_THRESHOLD;
+    /**
+     * Returns the score percentage as calculated from actual score/total score
+     */
+    public int getPercentage() {
+        return actualScore / totalScore * 100;
     }
+
+    /**
+     * Returns true if the score percentage is less than the passing threshold.
+     */
+    public boolean isFail() {
+        return getPercentage() * 100 < PASSING_THRESHOLD;
+    }
+
 
     /**
      * Returns true if the given score and total score are valid

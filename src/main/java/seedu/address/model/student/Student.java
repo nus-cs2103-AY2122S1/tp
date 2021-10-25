@@ -24,6 +24,7 @@ public class Student {
     private final Email email;
 
     // Data fields
+    private final Note note = new Note();
     private final GroupName groupName;
     private final UniqueAssessmentList assessments;
     private final FilteredList<Assessment> filteredAssessments;
@@ -88,6 +89,14 @@ public class Student {
     public void updateFilteredAssessmentList(Predicate<Assessment> predicate) {
         requireNonNull(predicate);
         filteredAssessments.setPredicate(predicate);
+    }
+
+    public Note getNote() {
+        return this.note;
+    }
+
+    public boolean isWeak() {
+        return false;
     }
 
     /**

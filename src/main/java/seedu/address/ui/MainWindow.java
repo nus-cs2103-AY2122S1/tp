@@ -2,20 +2,25 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.student.Student;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -33,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private StudentListPanel studentListPanel;
     private GroupListPanel groupListPanel;
+    private AssessmentListPanel assessmentListPanel;
+    private DetailedStudentCard detailedStudentCard;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
@@ -43,10 +50,10 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane listPanelPlaceholder;
+    private StackPane leftPanelPlaceholder;
 
     @FXML
-    private StackPane groupListPanelPlaceholder;
+    private StackPane rightPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -110,16 +117,11 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    private void showStudents() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
-        listPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
-    }
-
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        showStudents();
+        showAllStudentsAndGroups();
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -171,9 +173,26 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    private void handleShowGroups() {
+    private void handleViewStudent() {
+        Student studentToView = logic.getFilteredStudentList().get(0);
+
+        detailedStudentCard = new DetailedStudentCard(studentToView);
+        leftPanelPlaceholder.getChildren().clear();
+        leftPanelPlaceholder.getChildren().add(detailedStudentCard.getRoot());
+
+        assessmentListPanel = new AssessmentListPanel(studentToView.getAssessmentList());
+        rightPanelPlaceholder.getChildren().clear();
+        rightPanelPlaceholder.getChildren().add(assessmentListPanel.getRoot());
+    }
+
+    private void showAllStudentsAndGroups() {
+        leftPanelPlaceholder.getChildren().clear();
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        leftPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+
+        rightPanelPlaceholder.getChildren().clear();
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
-        listPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        rightPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
     public StudentListPanel getStudentListPanel() {
@@ -194,12 +213,21 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            // create a label
+            Label label = new Label(commandResult.getFeedbackToUser());
 
-            if (commandResult.isShowGroups()) {
-                handleShowGroups();
-            } else {
-                showStudents();
-            }
+            // create a popup
+            Popup popup = new Popup();
+
+            // set background
+            label.setStyle(" -fx-background-color: white;");
+
+            // add the label
+            popup.getContent().add(label);
+            popup.show(primaryStage);
+            PauseTransition delay = new PauseTransition(Duration.seconds(5));
+            delay.setOnFinished(event -> popup.hide());
+            delay.play();
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -207,6 +235,12 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isExit()) {
                 handleExit();
+            }
+
+            if (commandResult.isViewStudent()) {
+                handleViewStudent();
+            } else {
+                showAllStudentsAndGroups();
             }
 
             return commandResult;

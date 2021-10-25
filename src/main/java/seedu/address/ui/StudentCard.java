@@ -1,9 +1,11 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
 /**
@@ -37,6 +39,8 @@ public class StudentCard extends UiPart<Region> {
     private Label groupName;
     @FXML
     private Label assessments;
+    @FXML
+    private VBox studentCard;
 
     /**
      * Creates a {@code StudentCard} with the given {@code Student} and index to display.
@@ -44,6 +48,10 @@ public class StudentCard extends UiPart<Region> {
     public StudentCard(Student student, int displayedIndex) {
         super(FXML);
         this.student = student;
+        if (student.isWeak()) {
+            ObservableList<String> styleClass = studentCard.getStyleClass();
+            styleClass.add("flag");
+        }
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
         groupName.setText(student.getGroupName().toString());

@@ -8,6 +8,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -62,6 +63,11 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
+     * Returns the target student from the CS book.
+     */
+    void changeStudentGroup(Student student, Group newGroup);
+
+    /**
      * Deletes the given student.
      * The student must exist in the model.
      */
@@ -72,6 +78,11 @@ public interface Model {
      * {@code student} must not already exist in the model.
      */
     void addStudent(Student student);
+
+    /**
+     * Retrieves a student by their name
+     */
+    Student getStudentByName(Name studentName);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
@@ -100,6 +111,12 @@ public interface Model {
      * Returns true if a group with the same groupName as {@code groupName} exists in the model.
      */
     boolean hasGroup(GroupName groupName);
+
+    /**
+     * Adds a student to a new group as well as removing the old reference of the student from the old group.
+     */
+    //TODO: Junwei might need to change this to student name
+    void updateGroupStudent(Group group, Student student);
 
     /**
      * Deletes the given group.
