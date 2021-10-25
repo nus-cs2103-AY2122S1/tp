@@ -3,9 +3,7 @@ package seedu.tuitione.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tuitione.testutil.TypicalTuition.ALICE;
 import static seedu.tuitione.testutil.TypicalTuition.BENSON;
 import static seedu.tuitione.testutil.TypicalTuition.MATH_S2;
 import static seedu.tuitione.testutil.TypicalTuition.PHYSICS_S2;
@@ -18,7 +16,6 @@ import java.util.Collections;
 import org.junit.jupiter.api.Test;
 
 import seedu.tuitione.commons.core.Messages;
-import seedu.tuitione.commons.core.index.Index;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.ModelManager;
 import seedu.tuitione.model.UserPrefs;

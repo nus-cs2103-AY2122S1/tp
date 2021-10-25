@@ -33,7 +33,7 @@ public class TypicalTuition {
         List<Student> students = getTypicalStudents();
         List<Lesson> lessons = getTypicalLessons();
         lessons.get(INDEX_SECOND_LESSON.getZeroBased())
-                .enrollStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased())); //BENSON enrolled in MATH_S2 lesson
+                .enrollStudent(students.get(INDEX_SECOND_STUDENT.getZeroBased())); // BENSON enrolled in MATH_S2 lesson
 
         for (Student student : students) {
             tuitione.addStudent(student);
