@@ -8,11 +8,11 @@ import java.util.regex.Pattern;
 
 import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
+import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExitCommand;
 import safeforhall.logic.commands.FindCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.IncludeCommand;
-import safeforhall.logic.commands.ListCommand;
 import safeforhall.logic.commands.SwitchCommand;
 import safeforhall.logic.commands.add.AddEventCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
@@ -29,6 +29,8 @@ import safeforhall.logic.parser.delete.DeletePersonCommandParser;
 import safeforhall.logic.parser.edit.EditEventCommandParser;
 import safeforhall.logic.parser.edit.EditPersonCommandParser;
 import safeforhall.logic.parser.exceptions.ParseException;
+import safeforhall.logic.parser.view.ViewEventCommandParser;
+import safeforhall.logic.parser.view.ViewPersonCommandParser;
 
 /**
  * Parses user input.
@@ -105,11 +107,11 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommandParser().parse(arguments);
+        case DeadlineCommand.COMMAND_WORD:
+            return new DeadlineCommandParser().parse(arguments);
 
         case ViewPersonCommand.COMMAND_WORD:
-            return new ViewPersonCommand();
+            return new ViewPersonCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -137,7 +139,7 @@ public class AddressBookParser {
             return new EditEventCommandParser().parse(arguments);
 
         case ViewEventCommand.COMMAND_WORD:
-            return new ViewEventCommand();
+            return new ViewEventCommandParser().parse(arguments);
 
         case IncludeCommand.COMMAND_WORD:
             return new IncludeCommandParser().parse(arguments);

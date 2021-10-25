@@ -28,12 +28,12 @@ public class ViewEventCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ViewEventCommand(), model, ViewEventCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewEventCommand(), model, ViewEventCommand.MESSAGE_ALL_EVENTS_SHOWN, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showEventAtIndex(model, TypicalIndexes.INDEX_FIRST_EVENT);
-        assertCommandSuccess(new ViewEventCommand(), model, ViewEventCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ViewEventCommand(), model, ViewEventCommand.MESSAGE_ALL_EVENTS_SHOWN, expectedModel);
     }
 }

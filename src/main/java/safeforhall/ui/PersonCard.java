@@ -1,7 +1,5 @@
 package safeforhall.ui;
 
-import static safeforhall.model.person.LastDate.DEFAULT_DATE;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -10,12 +8,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
-import safeforhall.model.person.Email;
-import safeforhall.model.person.Faculty;
-import safeforhall.model.person.LastDate;
 import safeforhall.model.person.Person;
-import safeforhall.model.person.Phone;
-import safeforhall.model.person.Room;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -41,14 +34,6 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label room;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label email;
-    @FXML
-    private Label faculty;
-    @FXML
     private Rectangle status;
     @FXML
     private HBox informationContainer;
@@ -56,10 +41,6 @@ public class PersonCard extends UiPart<Region> {
     private VBox deadlineContainer;
     @FXML
     private VBox statusContainer;
-    @FXML
-    private VBox labelBox;
-    @FXML
-    private VBox labelBoxInterior;
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -69,35 +50,9 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        room.setText(Room.DESC + person.getRoom().room);
-        phone.setText(Phone.DESC + person.getPhone().value);
-        email.setText(Email.DESC + person.getEmail().value);
-        faculty.setText(Faculty.DESC + person.getFaculty().faculty);
-
-        if (person.getLastFetDate().date != DEFAULT_DATE) {
-            Label textBox = new Label(LastDate.FET_DESC + person.getLastFetDate().date);
-            textBox.getStyleClass().add("cell_small_label");
-            labelBoxInterior.getChildren().add(textBox);
-        }
-
-        if (person.getLastCollectionDate().date != DEFAULT_DATE) {
-            Label textBox = new Label(LastDate.COLLECTION_DESC + person.getLastCollectionDate().date);
-            textBox.getStyleClass().add("cell_small_label");
-            labelBoxInterior.getChildren().add(textBox);
-        }
 
         if (person.hasMissedDeadline()) {
             this.getRoot().setStyle("-fx-background-color: #8B0000;");
-            Label textBox = new Label("Late by:");
-            int missedDates = person.getMissedDates();
-            Label date;
-            if (missedDates > 1) {
-                date = new Label(missedDates + " days");
-            } else {
-                date = new Label(missedDates + " day");
-            }
-            deadlineContainer.getChildren().add(textBox);
-            deadlineContainer.getChildren().add(date);
         }
 
         if (person.getVaccStatus().vaccinated) {
