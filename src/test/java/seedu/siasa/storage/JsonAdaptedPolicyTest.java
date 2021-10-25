@@ -65,6 +65,8 @@ public class JsonAdaptedPolicyTest {
         assertThrows(IllegalValueException.class, expectedMessage, () -> policy.toModelType(ALICE));
     }
 
+    /*
+    TODO: Change test since past expiry date is not considered invalid.
     @Test
     public void toModelType_invalidExpiryDate_throwsIllegalValueException() {
         JsonAdaptedPolicy policy =
@@ -72,6 +74,7 @@ public class JsonAdaptedPolicyTest {
         String expectedMessage = ExpiryDate.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, () -> policy.toModelType(ALICE));
     }
+    */
 
     @Test
     public void toModelType_nullExpiryDate_throwsIllegalValueException() {

@@ -47,6 +47,7 @@ public class CommandTestUtil {
     public static final int INVALID_PRICE_NEGATIVE = -10;
     public static final LocalDate INVALID_POLICY_EXPIRY_DATE_PAST = LocalDate.now().minusDays(100);
     public static final LocalDate INVALID_POLICY_EXPIRY_DATE_TODAY = LocalDate.now();
+    public static final LocalDate INVALID_POLICY_EXPIRY_DATE_CONST = LocalDate.of(2020, 10, 20);
     public static final int INVALID_POLICY_COMMISSION_OVER = 110;
 
     public static final int INVALID_POLICY_COMMISSION_UNDER = 110;
