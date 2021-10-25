@@ -160,7 +160,7 @@ public class ParserUtil {
     public static Insurance parseInsurance(String insurance) throws ParseException {
         requireNonNull(insurance);
         String trimmedInsurance = insurance.trim();
-        String[] insuranceTokens = trimmedInsurance.split(" ", 2);
+        String[] insuranceTokens = trimmedInsurance.split("\\s+", 2);
         String insuranceType = insuranceTokens.length > 0 ? insuranceTokens[0] : "";
         String insuranceName = insuranceTokens.length > 1 ? insuranceTokens[1] : "";
         try {
