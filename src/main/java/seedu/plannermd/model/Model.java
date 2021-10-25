@@ -144,6 +144,7 @@ public interface Model {
      * Returns true if an existing appointment clashes with {@code appointment} in the PlannerMD.
      */
     boolean isClashAppointment(Appointment appointment);
+
     /**
      * Deletes the given appointment.
      * The appointment must exist in the PlannerMD.
