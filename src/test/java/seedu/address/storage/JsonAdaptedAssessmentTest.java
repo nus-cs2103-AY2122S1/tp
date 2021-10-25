@@ -12,7 +12,7 @@ import seedu.address.model.assessment.Score;
 
 
 public class JsonAdaptedAssessmentTest {
-    private static final String INVALID_ASSESSMENT_NAME = "R@chel";
+    private static final String INVALID_ASSESSMENT_NAME = "Fin@ls";
     private static final String INVALID_SCORE = "101/100";
 
     private static final String VALID_ASSESSMENT_NAME = MIDTERMS.getAssessmentName().toString();
