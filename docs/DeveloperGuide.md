@@ -177,57 +177,139 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Schedule feature
+### Lesson Management
 
-Users can view a calendar that contains all existing lessons to visualise their schedule and plan ahead.
+Lessons refer to the recurring or makeup lessons added by the user to TAB. These lessons can be added to any particular
+in TAB. Added lessons can also be edited and deleted.
 
-#### Current Implementation
+**_[Coming soon]_** Chosen dates of recurring lessons can be marked as cancelled. User will be able to specify an end date to their recurring
+lessons to be able to add another recurring lessons in the same timeslot without having to delete the previous one. This is
+for the sake of keeping records of past lessons.
 
-TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its schedule view.
-Each lesson stored in the `Model` component is also converted to a CalendarFX `Entry` and maintained in the `CalendarEntryList` of `AddressBook`. 
-The `Ui` component shows this list of entries in the `SchedulePanel` using CalendarFX's `DetailedWeekView`.
+A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, a `TimeRange` for the
+`Lesson`, a `Subject` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
+represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.
 
-The following code snippet shows how `SchedulePanel` is initialised from the `Model` component's `Calendar`.
+![LessonClassDiagram](images/LessonClassDiagram.png)
+
+*Figure I.3.1: Class Diagram of Lessons*
+
+The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
+objects with overlapping time ranges.
+
+Operations on lessons can be done using the `LessonAddCommand`, `LessonEditCommand` and `LessonDeleteCommand` commands.
+The class diagram given below shows how these commands are part of the `Logic` Component.
+
+![LessonLogicDiagram](images/LessonLogic.png)
+
+*Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*
+
+These commands are described in greater detail in the sections below.
+
+#### Adding Lessons
+The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
+
+The figure below shows the sequence diagram for adding a lesson to a student.
+
+![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
+
+*Figure I.3.3: Sequence Diagram of Lesson Add Command*
+
+The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in
+the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd`
+will not be added if there is an existing lesson with a clashing date and timeslot.
 
 ```java
-public class SchedulePanel extends UiPart<Region> {
+public class LessonAddCommand extends UndoableCommand {
+    @Override
+    public CommandResult executeUndoableCommand() throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
 
-    private static final String FXML = "SchedulePanel.fxml"; // The corresponding .fxml file for this UiPart
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+        if (model.hasClashingLesson(toAdd)) {
+            throw new CommandException(MESSAGE_CLASHING_LESSON);
+        }
+        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
+        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
 
-    private final DetailedWeekView calendarView;
-
-    // other fields...
-    
-    /**
-     * Creates a {@code SchedulePanel} with the given {@code Calendar}.
-     */
-    public SchedulePanel(Calendar calendar) {
-        super(FXML);
-        calendarView = new DetailedWeekView();
-        initialiseCalendar(calendar);
-        createTimeThread(); // Starts a thread to keep track of the current time
-    }
-
-    /**
-     * Sets up CalendarFX.
-     */
-    public void initialiseCalendar(Calendar calendar) {
-        CalendarSource calendarSource = new CalendarSource();
-        calendarSource.getCalendars().addAll(calendar);
-        calendarView.getCalendarSources().addAll(calendarSource);
+        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
         
-        calendarView.setStartTime(TimeRange.DAY_START);
-        calendarView.setEndTime(TimeRange.DAY_END);
-        // other settings...
-        
+        // ... display updated TAB and command result message
     }
-    
-    // other methods...
 }
 ```
-When `SchedulePanel` is initialised, it sets up a `DetailedWeekView` with our custom display settings, and a thread that allows us to display the current time on the calendar interface. The way we initialise the calendar is adapted from CalendarFX's [Quick Start Guide](https://dlsc.com/wp-content/html/calendarfx/manual.html#_quick_start).
 
-Any changes made to the `Calendar` in `Model` will automatically update the `DetailedWeekView` in the `SchedulePanel` through CalendarFX's internal implementation (see how in the [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)). 
+The lesson added will be displayed in the `LessonListPanel` in TAB.
+
+#### Editing Lessons
+The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
+with this lesson. The lesson will be edited per the given information input by the user.
+
+The figure below shows the sequence diagram for editing a lesson.
+
+![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
+
+*Figure I.3.4: Sequence Diagram of Lesson Edit Command*
+
+In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
+the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
+object to create the `editedLesson` object.
+
+The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
+The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect
+the changes made to the specified lesson.
+
+#### Deleting Lessons
+The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the
+student with this lesson.
+
+The figure below shows the sequence diagram for deleting a lesson.
+
+![LessonDeleteSequenceDiagram](images/LessonDeleteSequenceDiagram.png)
+
+*Figure I.3.5: Sequence Diagram of Lesson Delete Command*
+
+The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
+
+#### Storing Lessons
+The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
+to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the
+`Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
+into `model`-friendly `Lesson` objects.
+
+#### Displaying Lessons in GUI
+A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
+the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
+The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
+list of lessons to view.
+
+#### Design considerations:
+
+**Aspect: Data Structures to support lesson operations**
+
+* **Alternative 1 (current choice):** Store the `Lesson` objects in a set referenced by a `Person` object.
+    * Pros: Easy to implement.
+    * Cons: Operations have to be done with respect to the `Person` with the set containing the target lesson.
+
+* **Alternative 2:** Store a `UniqueLessonList` containing the lessons of all the students in TAB.
+    * Pros: No need to edit `Person` for `Lesson` operations.
+    * Cons: Operations are done with respect to the full list of lessons in the application, which means user cannot
+      isolate the list of lessons of a student of choice to operate on.
+
+<br />
+
+### Schedule feature
+
+This feature allows users to view a calendar that contains all existing lessons to visualise their schedule and plan ahead.
+
+TAB uses the [CalendarFX](https://dlsc.com/products/calendarfx/) library to implement its calendar interface.
+Each lesson stored in the `Model` component is also converted to a CalendarFX `Entry`and maintained in the `CalendarEntryList` of `AddressBook` (see also: [`Model` component](#model-component)). 
+The `Ui` component shows this list of entries in the `SchedulePanel` using CalendarFX's `CalendarView` with our custom display settings.
+
+Any changes made to the `Calendar` in `Model` will automatically update the `CalendarView` through CalendarFX's internal implementation (see how in their [manual](http://dlsc.com/wp-content/html/calendarfx/manual.html)). 
 
 #### CenterPanel
 
@@ -244,10 +326,10 @@ Switching back is similarly achieved by calling the `displayPersonListPanel()` m
 
 #### Design considerations
 
-**Aspect: How schedule is implemented:**
+**Aspect: How the calendar interface is implemented:**
 
 * **Alternative 1:**  Create a calendar view using JavaFX.
-    * Pros: More customisable as we are not limited by CalendarFX's API.
+    * Pros: More customisable as we are not limited by CalendarFX's _API_.
     * Cons: Much more difficult to implement.
 
 * **Alternative 2 (current implementation):** Use CalendarFX to display entries while storing entry data locally.
@@ -255,6 +337,18 @@ Switching back is similarly achieved by calling the `displayPersonListPanel()` m
     * Cons: There is the initial difficulty in picking up and learning CalendarFX's API, and a risk that it might not work out the way we want it to. We will also be limited to the features of CalendarFX, and any bug or issues will be inevitably find its way into our system as well.
 
 We chose alternative 2 and integrated CalendarFX into our app as the possibility of introducing bugs seems small due to it being a well-used and well-tested library. Furthermore, the schedule feature will be much more robust and can be implemented much faster as compared with alternative 1.
+
+**Aspect: How to implement different calendar views such as week view and month view:**
+
+* **Alternative 1 (current implementation):**  Use CalendarFX's `CalendarView` which is a complete calendar interface.
+    * Pros: Very easy to implement, as most things are done internally by CalendarFX. We also benefit from additional features such as their search bar, buttons for navigation, and fancy animations and transitions. 
+    * Cons: Each page becomes very small in our GUI, limiting its usefulness for users with smaller screens. Furthermore, we have no choice but to display all four of the default calendarFX pages (i.e., day, week, month and year pages), even if we do not want to.
+
+* **Alternative 2:**  Create our own JavaFX panels for each page for displaying week and month.
+    * Pros: Month view will be slightly bigger, increasing the number of entries that can be seen by a small amount. Bugs and inconsistencies in other pages can be avoided as we will have better control what we want to display.
+    * Cons: Much harder to implement, no more fancy transitions or inbuilt buttons, and GUI improvements seem marginal at best.
+
+Alternative 1 is our preferred choice as its pros and cons seem much better than alternative 2, especially due to its easy of implementation. The main difficulty of alternative 1 becoming familiar with the CalendarFX _API_, but this difficulty is also present in alternative 2.
 
 ### Undo/redo feature
 
@@ -371,132 +465,7 @@ The redo does the exact opposite (pops from `redoStack`, push to `undoStack`, an
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-
-### Lesson Management
-
-#### Current Implementation
-
-Lessons refer to the recurring or makeup lessons added by the user to TAB. These lessons can be added to any particular
-in TAB. Added lessons can also be edited and deleted.
-
-**_[Coming soon]_** Chosen dates of recurring lessons can be marked as cancelled. User will be able to specify an end date to their recurring
-lessons to be able to add another recurring lessons in the same timeslot without having to delete the previous one. This is
-for the sake of keeping records of past lessons.
-
-A `Lesson` is represented in the application as shown in the figure below. It contains a start `Date`, a `TimeRange` for the
-`Lesson`, a `Subject` and `Homework` fields. There are 2 types of `Lesson` – `RecurringLesson` and `MakeUpLesson`. `RecurringLesson`
-represents a **weekly** recurring lesson. `MakeUpLesson` represents a one-off lesson outside the regular schedule.
-
-![LessonClassDiagram](images/LessonClassDiagram.png)
-
-*Figure I.3.1: Class Diagram of Lessons*
-
-The model checks for clashing lessons to ensure that TAB does not contain any duplicate `Lesson` objects as well as `Lesson`
-objects with overlapping time ranges.
-
-Operations on lessons can be done using the `LessonAddCommand`, `LessonEditCommand` and `LessonDeleteCommand` commands.
-The class diagram given below shows how these commands are part of the `Logic` Component.
-
-![LessonLogicDiagram](images/LessonLogic.png)
-
-*Figure I.3.2: Class Diagram of Logic Component with Lesson implementation details*
-
-These commands are described in greater detail in the sections below.
-
-#### Adding Lessons
-The `LessonAddCommand` adds a lesson to the list of lessons of a student in TAB.
-
-The figure below shows the sequence diagram for adding a lesson to a student.
-
-![LessonAddSequenceDiagram](images/LessonAddSequenceDiagram.png)
-
-*Figure I.3.3: Sequence Diagram of Lesson Add Command*
-
-The following snippet shows how the `LessonAddCommand#executeUndoableCommand()` method updates the `Lesson` objects in 
-the `Person` in the `UniquePersonList`by adding `toAdd` to the list of lessons the student currently has. Note that `toAdd`
-will not be added if there is an existing lesson with a clashing date and timeslot.
-
-```java
-public class LessonAddCommand extends UndoableCommand {
-    @Override
-    public CommandResult executeUndoableCommand() throws CommandException {
-        requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
-
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
-        }
-        if (model.hasClashingLesson(toAdd)) {
-            throw new CommandException(MESSAGE_CLASHING_LESSON);
-        }
-        personBeforeLessonAdd = lastShownList.get(index.getZeroBased());
-        personAfterLessonAdd = createEditedPerson(personBeforeLessonAdd, toAdd);
-
-        model.setPerson(personBeforeLessonAdd, personAfterLessonAdd);
-        
-        // ... display updated TAB and command result message
-    }
-}
-```
-
-The lesson added will be displayed in the `LessonListPanel` in TAB.
-
-#### Editing Lessons
-The `LessonEditCommand` edits the lesson identified by its index in the displayed list of lessons with respect to the student
-with this lesson. The lesson will be edited per the given information input by the user.
-
-The figure below shows the sequence diagram for editing a lesson.
-
-![LessonEditSequenceDiagram](images/LessonEditSequenceDiagram.png)
-
-*Figure I.3.4: Sequence Diagram of Lesson Edit Command*
-
-In the `LessonEditCommand` class, a new class called `EditLessonDescriptor` is defined to create `Lesson` objects that will store
-the new values for the fields that have been specified to be edited. The `createEditedLesson()` method uses the `EditLessonDescriptor`
-object to create the `editedLesson` object.
-
-The `executeUndoableCommand()` method of the `LessonEditCommand` uses this `editedLesson` object to update the `model` of TAB.
-The new lesson is stored in TAB in place of the old lesson. The student's list of lessons will be updated to reflect 
-the changes made to the specified lesson.
-
-#### Deleting Lessons
-The `LessonDeleteCommand` deletes the lesson specified by its lesson index in the displayed list of lessons with respect to the 
-student with this lesson. 
-
-The figure below shows the sequence diagram for deleting a lesson.
-
-![LessonDeleteSequenceDiagram](images/LessonDeleteSequenceDiagram.png)
-
-*Figure I.3.5: Sequence Diagram of Lesson Delete Command*
-
-The specified `Lesson` object will be deleted from the `model` of TAB, and the updated list of lessons of the student will be displayed.
-
-#### Storing Lessons
-The set of `Lesson` objects are stored within the `Person` who is referencing these `Lesson` objects. The `JsonAdaptedLesson` is used
-to convert the `Lesson` objects to Jackson-friendly `JsonAdaptedLesson` objects that can be stored in the `.json` file, where all the 
-`Person` objects in TAB is stored. When the application starts up, this class is also used to convert the `JsonAdaptedLesson` objects
-into `model`-friendly `Lesson` objects.
-
-#### Displaying Lessons in GUI
-A single `Lesson` is displayed using a `LessonCard`. All `Lesson` objects belonging to a student is displayed in a list using
-the `LessonListPanel`, which contains a `ListView` of multiple `LessonCard`s.
-The list of lessons is displayed side by side the list of students. The `ViewCommand` is used to specify which student's
-list of lessons to view.
-
-#### Design considerations:
-
-**Aspect: Data Structures to support lesson operations**
-
-* **Alternative 1 (current choice):** Store the `Lesson` objects in a set referenced by a `Person` object.
-    * Pros: Easy to implement.
-    * Cons: Operations have to be done with respect to the `Person` with the set containing the target lesson.
-
-* **Alternative 2:** Store a `UniqueLessonList` containing the lessons of all the students in TAB.
-    * Pros: No need to edit `Person` for `Lesson` operations.
-    * Cons: Operations are done with respect to the full list of lessons in the application, which means user cannot
-    isolate the list of lessons of a student of choice to operate on.
-
+  
 ### Viewing Tags
 Viewing tag is facilitated by `UniqueTagList`. 
 - `UniqueTagList` stores a list of alphabetically sorted unique unmodifiable tags with case-insensitive tag names.
