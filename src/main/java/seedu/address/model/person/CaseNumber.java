@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class CaseNumber implements Comparable<CaseNumber> {
     public static final String MESSAGE_CONSTRAINTS =
-        "Case number should be a positive integer with no leading zeros";
+            "Case number should be a positive integer with no leading zeros and at most 6 digits";
     public static final String VALIDATION_REGEX = "^[1-9]\\d{0,5}$";
     public final String value;
 

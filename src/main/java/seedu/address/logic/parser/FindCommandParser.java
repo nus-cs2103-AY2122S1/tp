@@ -14,11 +14,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicates.CaseNumberContainsKeywordsPredicate;
+import seedu.address.model.person.CaseNumber;
+import seedu.address.model.person.ShnPeriod;
+import seedu.address.model.person.predicates.CaseNumberEqualsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.ShnPeriodEndContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.ShnPeriodStartContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PhoneStartsWithKeywordsPredicate;
+import seedu.address.model.person.predicates.ShnPeriodEndEqualsKeywordsPredicate;
+import seedu.address.model.person.predicates.ShnPeriodStartEqualsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -58,19 +60,31 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            return new FindCommand(new PhoneContainsKeywordsPredicate(keywordList));
+            return new FindCommand(new PhoneStartsWithKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_CASE_NUMBER).isPresent()) {
-            return new FindCommand(new CaseNumberContainsKeywordsPredicate(keywordList));
+            boolean areValidCaseNumbers = keywordList.stream().allMatch(CaseNumber::isValidCaseNumber);
+            if (!areValidCaseNumbers) {
+                throw new ParseException(CaseNumber.MESSAGE_CONSTRAINTS);
+            }
+            return new FindCommand(new CaseNumberEqualsKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_SHN_PERIOD_START).isPresent()) {
-            return new FindCommand(new ShnPeriodStartContainsKeywordsPredicate(keywordList));
+            boolean areValidDates = keywordList.stream().allMatch(ShnPeriod::isValidDate);
+            if (!areValidDates) {
+                throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+            }
+            return new FindCommand(new ShnPeriodStartEqualsKeywordsPredicate(keywordList));
         }
 
         if (argMultimap.getValue(PREFIX_SHN_PERIOD_END).isPresent()) {
-            return new FindCommand(new ShnPeriodEndContainsKeywordsPredicate(keywordList));
+            boolean areValidDates = keywordList.stream().allMatch(ShnPeriod::isValidDate);
+            if (!areValidDates) {
+                throw new ParseException(ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+            }
+            return new FindCommand(new ShnPeriodEndEqualsKeywordsPredicate(keywordList));
         }
 
         throw new ParseException(
@@ -78,12 +92,10 @@ public class FindCommandParser implements Parser<FindCommand> {
     }
 
     /**
-     * Returns a list of prefixes with non-empty arguments.
+     * Returns a list of prefixes with values.
      */
     private List<Prefix> getPrefixesWithValue(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        List<Prefix> prefixesWithNonEmptyArguments = Stream.of(prefixes)
-                .filter(prefix -> argumentMultimap.getValue(prefix).isPresent())
+        return Stream.of(prefixes).filter(prefix -> argumentMultimap.getValue(prefix).isPresent())
                 .collect(Collectors.toList());
-        return prefixesWithNonEmptyArguments;
     }
 }

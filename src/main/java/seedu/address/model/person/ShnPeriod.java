@@ -16,6 +16,8 @@ public class ShnPeriod {
             "SHN period should be of two dates in the ISO-8601 format (i.e. yyyy-MM-dd), "
             + "separated by a space. Start date should be keyed before the end date, "
             + "and must occur earlier than the end date by at least 1 second.";
+    public static final String MESSAGE_CONSTRAINTS_DATE =
+            "Date should be in the ISO-8601 format (i.e. yyyy-MM-dd)";
 
     public final LocalDate startDate;
     public final LocalDate endDate;
@@ -78,6 +80,19 @@ public class ShnPeriod {
 
     public LocalDate getEndDate() {
         return endDate;
+    }
+
+    /**
+     * Returns true if a given SHN period date is in the valid format.
+     */
+    public static boolean isValidDate(String date) {
+        requireNonNull(date);
+        try {
+            LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     /**

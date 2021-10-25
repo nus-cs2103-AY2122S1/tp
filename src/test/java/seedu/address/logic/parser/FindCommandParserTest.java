@@ -14,12 +14,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.predicates.CaseNumberContainsKeywordsPredicate;
+import seedu.address.model.person.CaseNumber;
+import seedu.address.model.person.ShnPeriod;
+import seedu.address.model.person.predicates.CaseNumberEqualsKeywordsPredicate;
 import seedu.address.model.person.predicates.NameContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.PhoneContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.ShnPeriodEndContainsKeywordsPredicate;
-import seedu.address.model.person.predicates.ShnPeriodStartContainsKeywordsPredicate;
+import seedu.address.model.person.predicates.PhoneStartsWithKeywordsPredicate;
+import seedu.address.model.person.predicates.ShnPeriodEndEqualsKeywordsPredicate;
+import seedu.address.model.person.predicates.ShnPeriodStartEqualsKeywordsPredicate;
 
 public class FindCommandParserTest {
 
@@ -69,7 +70,7 @@ public class FindCommandParserTest {
     public void parse_validPhoneArgs_returnsFindCommand() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
-                new FindCommand(new PhoneContainsKeywordsPredicate(Arrays.asList("111", "222")));
+                new FindCommand(new PhoneStartsWithKeywordsPredicate(Arrays.asList("111", "222")));
 
         String testInput = " " + PREFIX_PHONE + "111 222";
         assertParseSuccess(parser, testInput, expectedFindCommand);
@@ -80,10 +81,10 @@ public class FindCommandParserTest {
     }
 
     @Test
-    public void parse_validCaseNumberArgs_returnsFindCommand() throws ParseException {
+    public void parse_validCaseNumberArgs_returnsFindCommand() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
-                new FindCommand(new CaseNumberContainsKeywordsPredicate(Arrays.asList("111", "222")));
+                new FindCommand(new CaseNumberEqualsKeywordsPredicate(Arrays.asList("111", "222")));
 
         String testInput = " " + PREFIX_CASE_NUMBER + "111 222";
         assertParseSuccess(parser, testInput, expectedFindCommand);
@@ -94,10 +95,21 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidCaseNumberArgs_returnsFindCommand() {
+        // One invalid keyword
+        String invalidKeyword = " " + PREFIX_CASE_NUMBER + "-1";
+        assertParseFailure(parser, invalidKeyword, CaseNumber.MESSAGE_CONSTRAINTS);
+
+        // One valid and one invalid keyword
+        String invalidTestInput = " " + PREFIX_CASE_NUMBER + "1 -1";
+        assertParseFailure(parser, invalidTestInput, CaseNumber.MESSAGE_CONSTRAINTS);
+    }
+
+    @Test
     public void parse_validShnPeriodStartArgs_returnsFindCommand() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
-                new FindCommand(new ShnPeriodStartContainsKeywordsPredicate(Arrays.asList("2000-01-01",
+                new FindCommand(new ShnPeriodStartEqualsKeywordsPredicate(Arrays.asList("2000-01-01",
                         "2000-01-10")));
 
         String testInput = " " + PREFIX_SHN_PERIOD_START + "2000-01-01 2000-01-10";
@@ -110,10 +122,21 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_invalidShnPeriodStartArgs_returnsFindCommand() {
+        // One invalid keyword
+        String invalidKeyword = " " + PREFIX_SHN_PERIOD_START + "2000/01/01";
+        assertParseFailure(parser, invalidKeyword, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+
+        // One valid and one invalid keyword
+        String invalidTestInput = " " + PREFIX_SHN_PERIOD_START + "2000-01-01 2000/01/01";
+        assertParseFailure(parser, invalidTestInput, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+    }
+
+    @Test
     public void parse_validShnPeriodEndArgs_returnsFindCommand() {
         // no leading and trailing whitespaces after prefix
         FindCommand expectedFindCommand =
-                new FindCommand(new ShnPeriodEndContainsKeywordsPredicate(Arrays.asList("2000-01-01",
+                new FindCommand(new ShnPeriodEndEqualsKeywordsPredicate(Arrays.asList("2000-01-01",
                         "2000-01-10")));
 
         String testInput = " " + PREFIX_SHN_PERIOD_END + "2000-01-01 2000-01-10";
@@ -125,4 +148,14 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, testInputWithWhiteSpaces, expectedFindCommand);
     }
 
+    @Test
+    public void parse_invalidShnPeriodEndArgs_returnsFindCommand() {
+        // One invalid keyword
+        String invalidKeyword = " " + PREFIX_SHN_PERIOD_END + "2000/01/02";
+        assertParseFailure(parser, invalidKeyword, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+
+        // One valid and one invalid keyword
+        String invalidTestInput = " " + PREFIX_SHN_PERIOD_END + "2000-01-02 2000/01/02";
+        assertParseFailure(parser, invalidTestInput, ShnPeriod.MESSAGE_CONSTRAINTS_DATE);
+    }
 }
