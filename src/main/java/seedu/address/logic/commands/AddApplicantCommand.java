@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
+import seedu.address.model.applicant.ApplicantParticulars;
 
 /**
  * Adds an applicant to the address book.

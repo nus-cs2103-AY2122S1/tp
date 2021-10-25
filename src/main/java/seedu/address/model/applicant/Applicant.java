@@ -1,13 +1,13 @@
 package seedu.address.model.applicant;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
-import seedu.address.model.application.Application;
-import seedu.address.model.application.Application.ApplicationStatus;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
+import seedu.address.model.position.Title;
 
 /**
  * Represents an Applicant in the address book.
@@ -84,11 +84,32 @@ public class Applicant {
         return application;
     }
 
+    public Title getTitle() {
+        return application.getTitle();
+    }
+
     /**
      * Returns true if this applicant is applying to the given position.
      */
     public boolean isApplyingTo(Position position) {
+        requireNonNull(position);
         return application.getPosition().equals(position);
+    }
+
+    /**
+     * Returns true if this applicant is applying to a position with the given title.
+     */
+    public boolean isApplyingToPositionWithTitle(Title positionTitle) {
+        requireNonNull(positionTitle);
+        return application.getPosition().getTitle().equals(positionTitle);
+    }
+
+    /**
+     * Returns true if this applicant has the given application status.
+     */
+    public boolean hasApplicationStatus(ApplicationStatus applicationStatus) {
+        requireNonNull(applicationStatus);
+        return application.getStatus().equals(applicationStatus);
     }
 
     /**

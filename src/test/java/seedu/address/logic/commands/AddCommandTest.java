@@ -23,8 +23,8 @@ import seedu.address.model.ReadOnlyApplicantBook;
 import seedu.address.model.ReadOnlyPositionBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Name;
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -171,6 +171,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addApplicant(Applicant applicant) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setApplicant(Applicant target, Applicant editedApplicant) {
             throw new AssertionError("This method should not be called.");
         }
@@ -207,6 +217,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasPositionWithTitle(Title toCheck) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Position getPositionByTitle(Title title) {
             throw new AssertionError("This method should not be called.");
         }
 

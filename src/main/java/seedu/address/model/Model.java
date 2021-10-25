@@ -6,8 +6,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
 import seedu.address.model.applicant.Name;
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -120,8 +120,21 @@ public interface Model {
     void setPosition(Position position, Position editedPosition);
 
     /**
-     * Returns an unmodifiable view of the filtered applicant list
+     * Returns true if a position with the same identity as {@code position} exists in the position book
      */
+    boolean hasPosition(Position position);
+
+    /**
+     * Returns true if a position with {@code title} exists in the position book
+     */
+    boolean hasPositionWithTitle(Title title);
+
+    /**
+     * Returns the position with {@code title}
+     */
+    Position getPositionByTitle(Title title);
+
+    /** Returns an unmodifiable view of the filtered applicant list */
     ObservableList<Applicant> getFilteredApplicantList();
 
     /**
@@ -155,6 +168,11 @@ public interface Model {
     void setPositionBook(ReadOnlyPositionBook positionBook);
 
     /**
+     * Returns the PositionBook
+     */
+    ReadOnlyPositionBook getPositionBook();
+
+    /**
      * Updates the filter of the filtered position list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
@@ -171,17 +189,16 @@ public interface Model {
     void setApplicant(Applicant target, Applicant editedApplicant);
 
     /**
-     * Returns the AddressBook
+     * Adds the given applicant.
+     * {@code applicant} must not already exist in the applicant book.
      */
-    ReadOnlyPositionBook getPositionBook();
+    void addApplicant(Applicant applicant);
 
-    // Position related methods
+    /**
+     * Returns true if {@code applicant} exists in MrTechRecruiter.
+     */
+    boolean hasApplicant(Applicant applicant);
 
-    boolean hasPosition(Position position);
-
-    // Position related methods
-
-    boolean hasPositionWithTitle(Title title);
 
     /**
      * Deletes the given applicant.

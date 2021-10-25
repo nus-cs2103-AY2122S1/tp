@@ -14,9 +14,11 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteApplicantCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeletePositionCommand;
+import seedu.address.logic.commands.EditApplicantCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditPositionCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FilterApplicantCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListApplicantCommand;
@@ -28,7 +30,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class MrTechRecruiterParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -80,10 +82,13 @@ public class AddressBookParser {
             return new AddApplicantCommandParser().parse(arguments);
 
         case DeleteApplicantCommand.COMMAND_WORD:
-            return new DeleteApplicantParser().parse(arguments);
+            return new DeleteApplicantCommandParser().parse(arguments);
 
         case ListApplicantCommand.COMMAND_WORD:
             return new ListApplicantCommand();
+
+        case FilterApplicantCommand.COMMAND_WORD:
+            return new FilterApplicantCommandParser().parse(arguments);
 
         case AddPositionCommand.COMMAND_WORD:
             return new AddPositionCommandParser().parse(arguments);
@@ -100,6 +105,8 @@ public class AddressBookParser {
         case EditPositionCommand.COMMAND_WORD:
             return new EditPositionCommandParser().parse(arguments);
 
+        case EditApplicantCommand.COMMAND_WORD:
+            return new EditApplicantCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
