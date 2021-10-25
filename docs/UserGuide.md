@@ -148,7 +148,7 @@ Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
 on the side bar to the right.
 
-#### Editing task details [edit]
+#### Editing task details: [edit]
 
 Replaces the details of the task at the given index with the new details.
 
@@ -275,7 +275,7 @@ Format | Example
 
 Format | Example
 --------|------------------
-**HHmm** | `1300` (10:00 PM in 24-hour notation)
+**HHmm** | `1300` (01:00 PM in 24-hour notation)
 **hh:mm a** | `10:00 PM`, `02:00 AM`
 
 
