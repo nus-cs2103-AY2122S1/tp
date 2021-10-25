@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, contactSH can get your contact management tasks done faster than traditional GUI apps.
+ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, contactSH can get your contact management tasks done faster than traditional GUI apps. 
+
+ContactSH is specially designed for NUS student entrepreneurs who are proficient in Unix CLI and have a need to properly keep track of task associated with different contacts. This user guide will explain many of the features in ContactSH that are available for you to use at any time and provide sample examples of how to use them.
 
 * Table of Contents
 {:toc}
@@ -223,8 +225,9 @@ Format: `cat INDEX [-f KEYWORDS]`
 
 Examples:
 * `cat 1` Displays the list of tasks attached to the 1st person.
-  ![result for 'cat 1'](images/cat1Result.png)
+![result for 'cat 1'](images/cat1Result.png)
 * `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
+![result for 'cat 1 -f work'](images/cat1-fworkResult.png)
 
 ### Sorting persons by name: `sort`
 
