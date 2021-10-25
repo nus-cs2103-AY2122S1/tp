@@ -233,5 +233,4 @@ public class PlannerMdTest {
             return appointments;
         }
     }
-
 }
