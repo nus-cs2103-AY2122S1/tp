@@ -59,6 +59,7 @@ public class CommandTestUtil {
     public static final String VALID_DEADLINE_QUIZ2 = "2021-11-20";
     public static final String VALID_DATE_TIME_1 = "2021-02-03 10:00";
     public static final String VALID_DATE_TIME_2 = "2021-12-20 23:43";
+    public static final String VALID_GROUP_TUTORIAL = "Tutorial";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -82,6 +83,7 @@ public class CommandTestUtil {
     public static final String DAY_TUE = " " + PREFIX_DAY + VALID_DAY_TUE;
     public static final String DATE_TIME_DESC1 = " " + PREFIX_DAY + VALID_DATE_TIME_1;
     public static final String DATE_TIME_DESC2 = " " + PREFIX_DAY + VALID_DATE_TIME_2;
+    public static final String GROUP_DESC_TUTORIAL = " " + PREFIX_NAME + VALID_GROUP_TUTORIAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
@@ -93,6 +95,7 @@ public class CommandTestUtil {
             + " 0001";
     public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "Tuesday";
     public static final String INVALID_DATE_TIME_DESC = " " + PREFIX_DAY + "1999/19/10";
+    public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "!@#AD";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

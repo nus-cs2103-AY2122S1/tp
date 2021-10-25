@@ -22,12 +22,13 @@ import seedu.address.model.lesson.Subject;
 import seedu.address.model.person.Exam;
 
 class PersonAddExamParserTest {
-    private PersonAddExamParser parser = new PersonAddExamParser();
 
     private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             PersonAddExamParser.MESSAGE_USAGE);
 
     private static final String VALID_INDEX = "1";
+
+    private PersonAddExamParser parser = new PersonAddExamParser();
 
     @Test
     public void parse_validFields_success() throws ParseException {

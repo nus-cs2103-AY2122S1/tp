@@ -57,4 +57,12 @@ public class IndexTest {
         // different index -> returns false
         assertFalse(fifthPersonIndex.equals(Index.fromOneBased(1)));
     }
+
+    @Test
+    public void hashCode_sameNumber_sameHashCode() {
+        Index oneIndex1 = Index.fromOneBased(1);
+        Index oneIndex2 = Index.fromOneBased(1);
+
+        assertEquals(oneIndex1.hashCode(), oneIndex2.hashCode());
+    }
 }
