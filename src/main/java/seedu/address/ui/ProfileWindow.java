@@ -9,8 +9,13 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Github;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.person.Telegram;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -62,7 +67,6 @@ public class ProfileWindow extends UiPart<Stage> {
         super(FXML, stage);
         this.mainWindow = mainWindow;
         this.logic = logic;
-        //submit.setOnAction(event());
     }
 
     public void start() {
@@ -80,18 +84,7 @@ public class ProfileWindow extends UiPart<Stage> {
         getRoot().close();
     }
 
-    private EventHandler<ActionEvent> event() {
-        return new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                // CHECK EVERYTHING IS VALID
-                System.out.println("Checking");
-            }
-        };
-    }
-
     public void submit(ActionEvent event) {
-        //event.consume();
         System.out.println("Checking submit");
 
         String userAddress = address.getText();
@@ -133,8 +126,6 @@ public class ProfileWindow extends UiPart<Stage> {
             close();
             mainWindow.start();
         }
-
-        //message.setText("Submitted!");
     }
 
     public boolean areUserCredentialsValid() {
