@@ -25,7 +25,7 @@
 }
 
 .text-field {
-    -fx-font-size: 12pt;
+    -fx-font-size: 14pt;
     -fx-font-family: "Open Sans Semibold";
 }
 
@@ -95,8 +95,9 @@
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
-    -fx-graphic-text-gap : 0;
-    -fx-padding: 0 0 0 0;
+    -fx-background-radius: 20;
+    -fx-background-insets: 3;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 0);
 }
 
 .list-cell:filled:even {
@@ -104,7 +105,7 @@
 }
 
 .list-cell:filled:odd {
-    -fx-background-color: #edf0f5;
+    -fx-background-color: #ffffff;
 }
 
 .list-cell:filled:selected {
@@ -112,7 +113,6 @@
 }
 
 .list-cell:filled:selected #cardPane {
-    -fx-border-color: #cce3eb;
     -fx-border-width: 1;
 }
 
@@ -286,7 +286,7 @@
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#f0f0f0, 50%);
+    -fx-background-color: derive(#666666, 50%);
     -fx-background-insets: 3;
 }
 
@@ -320,7 +320,7 @@
 #commandTextField {
     -fx-background-color: transparent #ffffff transparent #ffffff;
     -fx-background-insets: 0;
-    -fx-border-color: #ffffff #ffffff #000000 #ffffff;
+    -fx-border-color: transparent transparent #000000 transparent;
     -fx-border-insets: 0;
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
@@ -363,7 +363,7 @@
 
 .summary-body {
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-text-fill: black;
 }
 

@@ -22,6 +22,9 @@ public class PersonCard extends UiPart<Region> {
     private static final String DISPLAY_LAST_VISIT = "Last visit: ";
     private static final String DISPLAY_NEXT_VISIT = "Next visit: ";
 
+    private static final String ADDRESS = "\ud83c\udfe0  ";
+    private static final String PHONE = "\ud83d\udcde  ";
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -59,8 +62,8 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
+        phone.setText(PHONE + person.getPhone().value);
+        address.setText(ADDRESS + person.getAddress().value);
         language.setText(person.getLanguage().value);
         lastVisit.setText(DISPLAY_LAST_VISIT + person.getLastVisit().orElse(new LastVisit("")).getFormatted());
         visit.setText(DISPLAY_NEXT_VISIT + person.getFormattedVisit());
