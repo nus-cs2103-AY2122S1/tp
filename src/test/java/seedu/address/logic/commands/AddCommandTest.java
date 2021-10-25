@@ -79,6 +79,11 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void setAll(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
             throw new AssertionError("This method should not be called.");
         }
@@ -150,6 +155,16 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int undo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int redo() {
             throw new AssertionError("This method should not be called.");
         }
     }
