@@ -56,7 +56,7 @@ public class SwapShiftCommand extends Command {
      * @param nameList List containing the names of 2 staffs
      * @param shiftList List containing the shifts of 2 staffs
      */
-    public SwapShiftCommand(List<Name> nameList, List<String> shiftList, LocalDate startDate,LocalDate endDate) {
+    public SwapShiftCommand(List<Name> nameList, List<String> shiftList, LocalDate startDate, LocalDate endDate) {
         firstStaff = nameList.get(0);
         secondStaff = nameList.get(1);
 
