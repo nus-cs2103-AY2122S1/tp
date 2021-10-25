@@ -31,7 +31,7 @@ public class StudentStatistics {
     }
 
     /**
-     * Returns a distribution of scores for the assessment, with the bins in their string representations.
+     * Returns a distribution of student's scores for the assessment.
      */
     private Map<String, Number> getScoreDistribution() {
         Map<String, Number> distribution = new TreeMap<>();
@@ -39,6 +39,12 @@ public class StudentStatistics {
         return distribution;
     }
 
+    /**
+     * Returns a distribution of cohort mean and median for the assessment.
+     *
+     * @return array of {@code Map<String, Number>} where the first element contains the mean distribution,
+     * and the second element contains the median distribution.
+     */
     private Map<String, Number>[] getDataSet() {
         Map<String, Number> mean = new TreeMap<>();
         Map<String, Number> median = new TreeMap<>();
