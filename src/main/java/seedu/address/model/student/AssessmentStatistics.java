@@ -20,9 +20,9 @@ import seedu.address.commons.util.ChartUtil;
  * Represents statistics about an assessment and the students' performance.
  */
 public class AssessmentStatistics {
-    public static final double DEFAULT_BIN_SIZE = 10.0;
-
     private static final String CHART_TITLE = "Cohort Performance for %1$s";
+
+    public static final double DEFAULT_BIN_SIZE = 10.0;
     private static final String CHART_X_AXIS_LABEL = "Scores";
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
 
@@ -121,7 +121,7 @@ public class AssessmentStatistics {
         Optional<Double> min = scores.stream()
                 .map(Score::getNumericValue)
                 .min(Comparator.naturalOrder());
-        return min.orElse(0.0);
+        return min.orElse(Score.MIN_SCORE);
     }
 
     /**
@@ -132,7 +132,7 @@ public class AssessmentStatistics {
         Optional<Double> max = scores.stream()
                 .map(Score::getNumericValue)
                 .max(Comparator.naturalOrder());
-        return max.orElse(0.0);
+        return max.orElse(Score.MIN_SCORE);
     }
 
     /**
@@ -145,16 +145,18 @@ public class AssessmentStatistics {
                 .sorted().collect(Collectors.toList());
 
         if (sorted.isEmpty()) {
-            return 0;
+            return Score.MIN_SCORE;
         }
 
         long size = sorted.size();
+        int midPos; // middle position of the sorted list
         if (size % 2 == 1) { // odd number of scores
-            return sorted.get((int) ((size + 1) / 2 - 1));
+            midPos = (int) ((size + 1) / 2.0 - 1);
+            return sorted.get(midPos);
         } else { // even number of scores
-            long half = size / 2;
-            return (sorted.get((int) half - 1)
-                + sorted.get((int) half)) / 2;
+            midPos = (int) (size / 2.0);
+            return (sorted.get(midPos - 1)
+                + sorted.get(midPos)) / 2.0;
         }
     }
 
@@ -162,7 +164,7 @@ public class AssessmentStatistics {
      * Returns the mean score for the {@code Assessment}.
      */
     public double getMean() {
-        return sumOfScores / numScores;
+        return numScores == 0 ? Score.MIN_SCORE : sumOfScores / numScores;
     }
 
     /**
@@ -176,8 +178,13 @@ public class AssessmentStatistics {
                 .map(Score::getNumericValue)
                 .sorted().collect(Collectors.toList());
 
+        if (sorted.isEmpty()) {
+            return Score.MIN_SCORE;
+        }
+
         long size = sorted.size();
-        return sorted.get(((int) Math.ceil(x / 100.0 * size)) - 1);
+        int xPercentilePos = (int) Math.ceil(x / 100.0 * size);
+        return sorted.get(xPercentilePos - 1); // list indexing starts at 0
     }
 
     /**
