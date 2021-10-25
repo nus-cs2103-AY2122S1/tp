@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -71,7 +72,7 @@ public class TaskDateTest {
 
         TaskDate taskDateTime2 = new TaskDate("07:00 AM");
         Optional<LocalTime> time2 = Optional.of(LocalTime.parse(("07:00 AM"),
-                DateTimeFormatter.ofPattern("hh:mm a")));
+                DateTimeFormatter.ofPattern("hh:mm a", Locale.US)));
 
         assertEquals(taskDateTime1.getTime(), time1);
         assertEquals(taskDateTime2.getTime(), time2);
