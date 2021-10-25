@@ -1,31 +1,32 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.index.Index;
+import static java.util.Objects.requireNonNull;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-import seedu.address.model.task.Task;
-
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class AccessCacheCommand extends Command {
 
-    private final ;
+    public static final String COMMAND_WORD = "accesscache";
+
+    public final String key;
 
     /**
-     * @param index of the person in the filtered person list to edit the task List of
-     * @param newTasks to add to the person's task list
+     * @param key The key pressed.
      */
-    public AddTaskCommand(Index index, List<Task> newTasks) {
-        requireAllNonNull(index, newTasks);
-        th
+    public AccessCacheCommand(String key) {
+        requireNonNull(key);
+        this.key = key;
     }
-
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        ;
+        if (key.equals("UP")) {
+            return new CommandResult("", false, false, true, model.getBefore());
+        } else if (key.equals("DOWN")) {
+            return new CommandResult("", false, false, true, model.getAfter());
+        } else {
+            throw new CommandException("Unknown Error in AccessCacheCommand#Execute!");
+        }
     }
 }

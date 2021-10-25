@@ -9,6 +9,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.UserCommandCache;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -76,16 +77,5 @@ public class StorageManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
-    }
-
-    // ================ UserCommandCache methods ==============================
-    /** Get the next input command in the cache */
-    public String getAfter() {
-        return userCommandCache.getAfter();
-    }
-
-    /** Get the previous input command in the cache */
-    public String getBefore() {
-        return userCommandCache.getBefore();
     }
 }

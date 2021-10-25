@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
@@ -59,6 +59,9 @@ public class UserCommandCache {
      * @return Last entered command String
      */
     public String getBefore() {
+        if (commandCache.size() == 0) {
+            return "";
+        }
         String lastCommand = commandCache.get(index);
         index = Math.max(0, index - 1);
         return lastCommand;
@@ -70,13 +73,17 @@ public class UserCommandCache {
      * @return Last entered command String
      */
     public String getAfter() {
-        index = Math.min(commandCache.size(), index + 1);
+        if (commandCache.size() == 0) {
+            return "";
+        }
+        index += 1;
         String lastCommand;
         if (index == commandCache.size()) {
             lastCommand = "";
         } else {
             lastCommand = commandCache.get(index);
         }
+        index = Math.min(commandCache.size() - 1, index);
         return lastCommand;
     }
 }
