@@ -52,13 +52,6 @@ public class CommandTestUtil {
     public static final String VALID_QUANTITY_CANNON = "1";
     public static final String VALID_QUANTITY_DAISY = "456";
 
-    // todo remove later
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
-    // todo till here
-
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_NUMBER_DESC_AMY = " " + PREFIX_PHONE_NUMBER + VALID_PHONE_NUMBER_AMY;
@@ -148,17 +141,20 @@ public class CommandTestUtil {
      * Executes the given {@code command}, confirms that <br>
      * - a {@code CommandException} is thrown <br>
      * - the CommandException message matches {@code expectedMessage} <br>
-     * - the address book, filtered person list and selected person in {@code actualModel} remain unchanged
+     * - the address book, filtered client list and selected client in {@code actualModel} remain unchanged
+     * - the address book, filtered product list and selected product in {@code actualModel} remain unchanged
      */
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        List<Client> expectedFilteredClientList = new ArrayList<>(actualModel.getFilteredClientList());
+        List<Product> expectedFilteredProductList = new ArrayList<>(actualModel.getFilteredProductList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
-        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+        assertEquals(expectedFilteredClientList, actualModel.getFilteredClientList());
+        assertEquals(expectedFilteredProductList, actualModel.getFilteredProductList());
     }
 
     /**
