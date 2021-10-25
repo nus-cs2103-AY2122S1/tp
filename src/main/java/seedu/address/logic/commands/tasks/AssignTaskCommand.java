@@ -21,19 +21,15 @@ public abstract class AssignTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "-ass";
 
-    public static final String MESSAGE_USAGE = String.format(
-            COMMAND_WORD
+    public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Assigns a task to the %1$s identified "
             + "by the index numbers used in the displayed %1$s list and the displayed task list. "
             + "Parameters: %2$s INDEX (must be a positive integer) "
-            + "TASK INDEX (must be a positive integer) ",
-            getAssigneeName(false), getAssigneeName(true));
+            + "TASK INDEX (must be a positive integer) ";
 
-    public static final String OVERLAPPING_TASK = String.format(
-            "Task is already assigned to this %s!", getAssigneeName(false));
-    public static final String MESSAGE_DUPLICATE_TASK_ASSIGNABLE = String.format(
-            "This %s already exists in the address book", getAssigneeName(false));
-    public static final String MESSAGE_SUCCESS = "Task %1$s assigned to student %2$s";
+    public static final String OVERLAPPING_TASK = "Task is already assigned to this %s!";
+    public static final String MESSAGE_DUPLICATE_TASK_ASSIGNABLE = "This %s already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "Task %1$s assigned to %3$s %2$s";
 
     private final Index assigneeIndex;
     private final Index taskIndex;
@@ -51,10 +47,6 @@ public abstract class AssignTaskCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    public static String getAssigneeName(boolean isCapitalized) {
-        return isCapitalized ? "object".toUpperCase() : "object";
-    }
-
     protected abstract String invalidDisplayedIndexMessage();
 
     /**
@@ -70,16 +62,18 @@ public abstract class AssignTaskCommand extends Command {
      *
      * @param model The model to be modified.
      */
-    protected abstract void updateModel(Model model);
+    protected abstract void updateModel(Model model, TaskAssignable taskAssignableToEdit, TaskAssignable
+            newTaskAssignable);
 
     /**
-     * Executes the command on the given two lists.
+     * Executes the command on the given model.
      *
      * @param model The model we want to apply the command on.
+     * @param assigneeType The type of the assignee, e.g., student, group, ...
      * @return Feedback message of the operation result for display.
      * @throws CommandException If an error occurs during command execution.
      */
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult executeWithGivenMessage(Model model, String assigneeType) throws CommandException {
         requireNonNull(model);
         List<? extends TaskAssignable> assigneeList = getTaskAssignableListFromModel(model);
         List<Task> taskList = model.getFilteredTaskList();
@@ -98,7 +92,7 @@ public abstract class AssignTaskCommand extends Command {
         UniqueId taskId = taskToAssign.getId();
 
         if (previousAssignedTaskSet.contains(taskId)) {
-            throw new CommandException(OVERLAPPING_TASK);
+            throw new CommandException(String.format(OVERLAPPING_TASK, assigneeType));
         }
         Set<UniqueId> newAssignedTaskSet = new HashSet<>(previousAssignedTaskSet);
         newAssignedTaskSet.add(taskId);
@@ -106,12 +100,12 @@ public abstract class AssignTaskCommand extends Command {
 
         if (!taskAssignableToEdit.isSameTaskAssignable(newTaskAssignable)
                 && newTaskAssignable.isInModel(model)) {
-            throw new CommandException(MESSAGE_DUPLICATE_TASK_ASSIGNABLE);
+            throw new CommandException(String.format(MESSAGE_DUPLICATE_TASK_ASSIGNABLE, assigneeType));
         }
 
-        updateModel(model);
+        updateModel(model, taskAssignableToEdit, newTaskAssignable);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToAssign.getDescription(),
-                newTaskAssignable.getNameInString()));
+                newTaskAssignable.getNameInString(), assigneeType));
     }
 }
