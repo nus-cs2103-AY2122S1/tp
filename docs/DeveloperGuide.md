@@ -337,7 +337,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: UC2 - View student list/Enter student directory**
+**Use case: UC2 - View student list**
 
 **MSS**
 
@@ -471,7 +471,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case ends.
 
 
-**Use case: UC8 - Add a task with a specified taskDate**
+**Use case: UC8 - Add a task with a specified deadliine**
 
 **MSS**
 
@@ -495,7 +495,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC9 - Delete a task**
+**Use case: UC9 - Add a task with a specified taskDate**
+
+**MSS**
+
+1.  User requests to create an event with the specified taskDate
+2.  tApp creates the task and stores it in the task list
+3.  tApp displays the task that was just created
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The task name is empty.
+
+    * 1a1. tApp displays an error message stating that the task name is invalid
+
+      Use case ends.
+
+* 1b. The format of the taskDate is incorrect.
+
+    * 1b1. tApp displays an error message requesting the user to follow the correct taskDate format
+
+      Use case ends.
+
+**Use case: UC10 - Delete a task**
 
 **MSS**
 
@@ -518,7 +542,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC10 - Mark a task as done**
+**Use case: UC11 - Mark a task as done**
 
 **MSS**
 
@@ -540,7 +564,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-**Use case: UC11 - Mark student as participated**
+**Use case: UC12 - Mark student as participated**
 
 **MSS**
 
@@ -569,7 +593,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-**Use case: UC12 - Clear student list**
+**Use case: UC13 - Clear student list**
 
 **MSS**
 
