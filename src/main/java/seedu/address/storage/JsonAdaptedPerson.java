@@ -94,7 +94,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         interview = source.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime;
-        notes = source.getNotes().orElse(new Notes("")).information;
+        notes = source.getNotes().orElse(Notes.EMPTY_NOTES).information;
         done = source.getDone().getDoneStatus();
     }
 

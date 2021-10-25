@@ -77,7 +77,7 @@ public class PersonUtil {
         descriptor.getInterview().ifPresent(interview ->
                 sb.append(PREFIX_INTERVIEW).append(interview.orElse(Interview.EMPTY_INTERVIEW).parseTime).append(" "));
         descriptor.getNotes().ifPresent(notes ->
-                sb.append(PREFIX_NOTES).append(notes.orElse(new Notes("")).information).append(" "));
+                sb.append(PREFIX_NOTES).append(notes.orElse(Notes.EMPTY_NOTES).information).append(" "));
 
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

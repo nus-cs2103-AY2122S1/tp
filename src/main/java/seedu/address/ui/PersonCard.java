@@ -77,7 +77,7 @@ public class PersonCard extends UiPart<Region> {
         levelOfEducation.setText("Level of Education: " + person.getLevelOfEducation().levelOfEducation);
         experience.setText("Years of Experience: " + person.getExperience().value);
         interview.setText("Interview Time: " + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime);
-        notes.setText("Notes: " + person.getNotes().orElse(new Notes("")).information);
+        notes.setText("Notes: " + person.getNotes().orElse(Notes.EMPTY_NOTES).information);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
