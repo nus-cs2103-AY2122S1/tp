@@ -243,7 +243,7 @@ Example Usage:
 
 Remove Next of Kin at specified index from a Participant at another specified index.
 
-Format: `removeNok INDEX_1 INDEX_2`
+Format: `deleteNok INDEX_1 INDEX_2`
 
 * Removes the Next of Kin at specified `INDEX_1` from the Participant at specified index `INDEX_2`.
 * The index refers to the index number shown in the displayed Participant list.
