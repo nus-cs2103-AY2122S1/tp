@@ -15,10 +15,13 @@ public class CommandResult {
     public enum DisplayType {
         HELP, // Help information should be shown to the user.
         STUDENTS, // Show the list of students to the user.
+        DAY, // Daily Schedule should be shown to the user.
         WEEK, // Weekly Schedule should be shown to the user.
         MONTH, // Monthly Schedule should be shown to the user.
-        NEXT, // Go forwards to the next week schedule.
-        BACK, // Go back to the previous week schedule.
+        YEAR, // yearly Schedule should be shown to the user.
+        NEXT, // Go forwards in the calendar.
+        TODAY, // Jump to today in the calendar.
+        BACK, // Go back in the calendar.
         EXIT // The application should exit.
     }
 

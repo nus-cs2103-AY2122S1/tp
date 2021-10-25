@@ -184,18 +184,28 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    private void handleDay() {
+        centerPanel.showDay();
+    }
+
     private void handleWeek() {
         centerPanel.showWeek();
-        centerPanel.goToday();
     }
 
     private void handleMonth() {
         centerPanel.showMonth();
-        centerPanel.goToday();
+    }
+
+    private void handleYear() {
+        centerPanel.showYear();
     }
 
     private void handleNext() {
         centerPanel.goNext();
+    }
+
+    private void handleToday() {
+        centerPanel.goToday();
     }
 
     private void handleBack() {
@@ -231,14 +241,6 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
                 break;
 
-            case WEEK:
-                handleWeek();
-                break;
-
-            case MONTH:
-                handleMonth();
-                break;
-
             case STUDENTS:
                 if (commandResult.getStudent().isPresent()) {
                     Person student = commandResult.getStudent().get();
@@ -248,8 +250,28 @@ public class MainWindow extends UiPart<Stage> {
                 }
                 break;
 
+            case DAY:
+                handleDay();
+                break;
+
+            case WEEK:
+                handleWeek();
+                break;
+
+            case MONTH:
+                handleMonth();
+                break;
+
+            case YEAR:
+                handleYear();
+                break;
+
             case NEXT:
                 handleNext();
+                break;
+
+            case TODAY:
+                handleToday();
                 break;
 
             case BACK:

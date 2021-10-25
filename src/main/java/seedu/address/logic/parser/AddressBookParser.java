@@ -10,6 +10,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DayCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -22,9 +23,11 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.MonthCommand;
 import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.TodayCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.WeekCommand;
+import seedu.address.logic.commands.YearCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -91,11 +94,20 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case DayCommand.COMMAND_WORD:
+            return new DayCommand();
+
         case WeekCommand.COMMAND_WORD:
             return new WeekCommand();
 
         case MonthCommand.COMMAND_WORD:
             return new MonthCommand();
+
+        case YearCommand.COMMAND_WORD:
+            return new YearCommand();
+
+        case TodayCommand.COMMAND_WORD:
+            return new TodayCommand();
 
         case NextCommand.COMMAND_WORD:
             return new NextCommand();

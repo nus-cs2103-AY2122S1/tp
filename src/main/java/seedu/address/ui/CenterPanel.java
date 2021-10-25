@@ -39,6 +39,14 @@ public class CenterPanel extends UiPart<Region> {
     }
 
     /**
+     * Display the day page of the calendar interface
+     */
+    public void showDay() {
+        displaySchedulePanel();
+        schedulePanel.showDay();
+    }
+
+    /**
      * Display the week page of the calendar interface
      */
     public void showWeek() {
@@ -52,6 +60,14 @@ public class CenterPanel extends UiPart<Region> {
     public void showMonth() {
         displaySchedulePanel();
         schedulePanel.showMonth();
+    }
+
+    /**
+     * Display the year page of the calendar interface
+     */
+    public void showYear() {
+        displaySchedulePanel();
+        schedulePanel.showYear();
     }
 
     /**

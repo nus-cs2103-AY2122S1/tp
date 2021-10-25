@@ -18,9 +18,7 @@ public class NextCommand extends Command {
 
     public static final String NEXT_MESSAGE = "Went forward in the calendar."
             + " You can jump back to today by typing \""
-            + WeekCommand.COMMAND_WORD
-            + "\" or \""
-            + MonthCommand.COMMAND_WORD
+            + TodayCommand.COMMAND_WORD
             + "\" or navigate backwards using \""
             + BackCommand.COMMAND_WORD
             + "\".";
