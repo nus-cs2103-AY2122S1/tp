@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 /**
- * Displays details of a person identified using it's displayed index or name on the side panel.
+ * Sorts the contact list either by name in alphabetical order or by rating in descending order.
  */
 public abstract class SortCommand extends Command {
 
@@ -13,10 +13,9 @@ public abstract class SortCommand extends Command {
             + "Parameters: 'name' or 'rating'\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_VIEW_PERSON_SUCCESS = "Displayed contact: %1$s";
+    public static final String MESSAGE_SORT_CONTACT_SUCCESS = "Sorted contacts %s";
 
-    public SortCommand() {
-    }
+    public SortCommand() {}
 
     @Override
     public boolean equals(Object other) {

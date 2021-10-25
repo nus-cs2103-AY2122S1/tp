@@ -36,8 +36,6 @@ public class PersonListPanel extends UiPart<Region> {
     @FXML
     private ScrollPane selectedPersonPanelPlaceholder;
 
-
-
     /**
      * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
      */
@@ -78,11 +76,17 @@ public class PersonListPanel extends UiPart<Region> {
         selected.setSummary();
     }
 
+    /**
+     * Resets the display of the sorted contact list to the original order.
+     */
     public void resetDisplay() {
         personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
+    /**
+     * Sorts the display of the contact list according to the parameter.
+     * @param sortBy The parameter the comparator compares the contacts by.
+     */
     public void sortDisplay(String sortBy) {
         Comparator<Person> compare = null;
         if (sortBy == "name") {
@@ -93,8 +97,6 @@ public class PersonListPanel extends UiPart<Region> {
         List<Person> modifiableList = new ArrayList<>(personList);
         modifiableList.sort(compare);
         personListView.setItems(FXCollections.observableList(modifiableList).filtered(unused -> true));
-        personListView.setCellFactory(listView -> new PersonListViewCell());
-
     }
 
     public void setSelectedPersonPanel() {

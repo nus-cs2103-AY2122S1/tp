@@ -7,10 +7,17 @@ import seedu.address.logic.commands.SortCommandName;
 import seedu.address.logic.commands.SortCommandRating;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses input arguments and create a new SortCommand object.
+ */
 public class SortCommandParser implements Parser<SortCommand> {
-    public SortCommand parse(String args) throws ParseException {
-        ParseException pe;
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the SortCommand
+     * and returns a SortCommand object for execution.
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    public SortCommand parse(String args) throws ParseException {
         String commandWord = ParserUtil.parseSortCommand(args);
 
         switch(commandWord) {

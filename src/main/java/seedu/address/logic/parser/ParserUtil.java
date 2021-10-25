@@ -81,12 +81,6 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-    public static String parseSortCommand(String cmd) throws ParseException {
-        requireNonNull(cmd);
-        String trimmedCmd = cmd.trim();
-        return trimmedCmd;
-    }
-
     /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
@@ -190,5 +184,15 @@ public class ParserUtil {
             throw new ParseException(Rating.MESSAGE_CONSTRAINTS);
         }
         return new Rating(trimmedRating);
+    }
+
+    /**
+     * Parses a {@code String command} into a {@code String}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parseSortCommand(String command) {
+        requireNonNull(command);
+        String trimmedCmd = command.trim();
+        return trimmedCmd;
     }
 }
