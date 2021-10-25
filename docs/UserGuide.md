@@ -62,7 +62,7 @@ This guide aims to help users get familiar with using RecruitIn's features.
 
     * **`show`**`n/` : Displays a list of all unique applicant names.
 
-    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants.
+    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done.
 
     * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
 
