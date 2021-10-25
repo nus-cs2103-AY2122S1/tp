@@ -37,7 +37,7 @@ public class GroupAddLessonCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Group> groupList = model.getFilteredGroupList();
         if (groupIndex.getZeroBased() >= groupList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
         }
         Group group = groupList.get(groupIndex.getZeroBased());
         Group groupWithLesson;
@@ -57,6 +57,7 @@ public class GroupAddLessonCommand extends Command {
         }
 
         model.setGroup(group, groupWithLesson);
+        model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(ADD_LESSON_SUCCESS, lessonToAdd));
     }
 }

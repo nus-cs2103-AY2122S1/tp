@@ -208,6 +208,11 @@ public class Group implements HasUniqueId, TaskAssignable, LessonAssignable {
     }
 
     @Override
+    public boolean isValidLessonIndex(int index) {
+        return lessonList.isValidIndex(index);
+    }
+
+    @Override
     public Group unassignLesson(int index) throws IndexOutOfBoundsException {
         NoOverlapLessonList newList = lessonList.removeLesson(index);
         return new Group(name, id, assignedTaskIds, assignedPersonIds, newList);
