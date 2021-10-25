@@ -337,26 +337,35 @@ Currently, `UpcomingTaskCommand` returns upcoming tasks in the same order that t
     Implementing the proposed extension of sorting upcoming tasks would better address the issue. Additionally, having unnecessarily longer syntax would decrease the speed at which the user would be able to operate, which goes against Dash's primary design goal of prioritizing speed.
     
 
-### \[Proposed\] Using the Up/Down Arrow Keys to Select Previous User Inputs
+### \[Implemented\] Using the Up/Down Arrow Keys to Select Previous User Inputs (Joshua)
 
-A proposed improvement to the text-based input method is to allow users to easily reenter previously inputted commands 
-by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle feature which 
-will improve the usability of the app. 
+An implemented improvement to the text-based input method is to allow users to easily reenter previously inputted 
+commands by retrieving their past inputs to the CLI using the up and down arrow keys. We feel that this is a subtle 
+feature which greatly improves the speed and usability of the app.
 
-An example use case would be when a user wants to add two tasks with description "CS2100 Tutorial 7" and "CS2100 
+An example use case would be when a user wants to add two tasks with descriptions "CS2100 Tutorial 7" and "CS2100 
 Tutorial 8" to their task List. Instead of typing out a near-identical command for the second task, they could press 
 the up arrow key, access their previously entered commmand and change '7' to '8'.
 
+Another example use case would be when a user accidentally deletes an entry in Dash by entering the wrong index. As 
+long as the entry was added within the past 10 commands, the user can press the up arrow key until the command that 
+corresponds to adding that entry is set in the command box. The user can then simply press enter to add the entry again.
+
 #### Implementation
 
-The proposed implementation involves adding a new class `PreviousUserInputList` to `Model`. This class will encapsulate 
-a list of Strings, which will be used to set the text in the `CommandBox`. This list will be updated in `LogicManager` 
-if the user input results in a valid command execution. There will be an equivalent class in `Storage` to store this 
-list.
+The implementation involves adding a new class `UserInputList` to `Model`. When a user enters an input in the command 
+box, the `UserInputList` is updated in `LogicManager` if this user input results in a valid command execution. On app 
+startup and after any successful command execution, the `CommandBox` is reinitialised with an updated list of user 
+input strings from the `Model`.
 
-In order to facilitate selection of previous user inputs with the arrow keys, we must keep track of the index of the 
-above list. This index will be located in the `CommandBox` and will be used to select the appropriate user input to 
-set as the text in the text box.
+In order to allow the user to scroll through their past inputs to select a particular one, we must keep track of which 
+input string the CLI is currently displaying. This is implemented in `CommandBox` by keeping track of the index of the 
+string being displayed within the list of input strings. When the up or down arrow keys are pressed, `CommandBox` 
+increments or decrements the index, retrieves the new string corresponding to it, and displays it. 
+
+The storage of the `UserInputList` works similarly to the storage of the `TaskList` and `AddressBook`. When the app is 
+started, a `UserInputList` is constructed using the `userinputlist.json` file in the `data` folder. Conversely, when 
+the app is closed, the `userinputlist.json` file is updated using the `UserInputList`.
 
 #### Design considerations
 
@@ -370,14 +379,21 @@ tabs.
 - Storing the index of the list in `Model`
 
 Due to the fact that the index should reset between uses of the app, we decided that there is not need to store the 
-index of the currently in-focus user input in `Model` or the `Storage`. The index can safely be reset to 0 upon input 
-of a command or upon opening the app. 
+index of the currently in-focus user input in `Model` or `Storage`. The index can safely be reset to 0 upon input of a 
+command or upon opening the app. 
   
 - Storing user inputs that are invalid
 
 We decided not to store user inputs that are invalid due to the current behaviour of the text box: when an invalid 
 input is entered, the input remains in the text box with a red font. In the case of a typo, since the user can easily 
 modify this previous input, there seems to be no need to store it.
+
+- Storing more user inputs
+
+The current implementation only stores 10 past user inputs. We decided to put a cap on the number of inputs stored due 
+to concerns about performance when the user input list is updated. This cap is set in `UserInputList` as 
+`LIST_MAX_LENGTH`. If, in testing, we find that a higher cap could be more convenient for users, this value can easily 
+be changed.
 
 --------------------------------------------------------------------------------------------------------------------
 
