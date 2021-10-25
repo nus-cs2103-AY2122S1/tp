@@ -36,7 +36,6 @@ public class MarkTaskDoneCommandTest {
         MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
         String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone);
-//                + "\n";
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.completeTask(taskToMarkAsDone);
@@ -61,8 +60,7 @@ public class MarkTaskDoneCommandTest {
         Task taskToMarkAsDone = model.getFilteredTaskList().get(INDEX_FIRST_TASK.getZeroBased());
         MarkTaskDoneCommand markTaskDoneCommand = new MarkTaskDoneCommand(List.of(INDEX_FIRST_TASK));
 
-        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone)
-                + "\n";
+        String expectedMessage = String.format(MarkTaskDoneCommand.MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkAsDone);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.completeTask(taskToMarkAsDone);
