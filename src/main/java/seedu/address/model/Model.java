@@ -12,7 +12,9 @@ import seedu.address.model.task.Task;
  * The API of the Model component.
  */
 public interface Model {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
@@ -50,7 +52,9 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
     /**
@@ -77,20 +81,44 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /**
+     * Returns an unmodifiable view of the filtered person list
+     */
     ObservableList<Person> getFilteredPersonList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    /** Returns an unmodifiable view of the task list to be displayed on the GUI. */
+    /**
+     * Returns an unmodifiable view of the task list to be displayed on the GUI.
+     */
     ObservableList<Task> getDisplayTaskList();
 
-    /** Displays {@code person}'s task list on the GUI. */
+    /**
+     * Displays {@code person}'s task list on the GUI.
+     */
     void displayPersonTaskList(Person person);
 
+    void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate);
+
     void updateSortedPersonList(boolean isReverseOrder);
+
+    /**
+     * Get the next input command in the cache.
+     */
+    String getAfter();
+
+    /**
+     * Get the previous input command in the cache.
+     */
+    String getBefore();
+
+    /**
+     * Add a command to cache
+     */
+    void addCommand(String command);
 }

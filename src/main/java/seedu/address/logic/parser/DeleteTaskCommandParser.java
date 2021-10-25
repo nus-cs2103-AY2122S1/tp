@@ -11,7 +11,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+/**
+ * Parses input arguments and creates a new DeleteTaskCommand object
+ */
 public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteTaskCommand
@@ -24,7 +26,6 @@ public class DeleteTaskCommandParser implements Parser<DeleteTaskCommand> {
                     ArgumentTokenizer.tokenize(args, PREFIX_TASK_INDEX);
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
-            //
             Set<Index> taskIndexSet = ParserUtil.parseTaskIndexes(argMultimap.getAllValues(PREFIX_TASK_INDEX));
             List<Index> taskIndex = new ArrayList<>();
             taskIndex.addAll(taskIndexSet);

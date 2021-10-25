@@ -113,7 +113,7 @@ public class ModelManagerTest {
     public void displayPersonTaskList_success() {
         modelManager = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        Person validPerson = new PersonBuilder().withTasks("1", "2", "3").build();
+        Person validPerson = new PersonBuilder().withTasks("1| | | ", "2| | | ", "3| | | ").build();
         List<Task> taskList = validPerson.getTasks();
 
         modelManager.addPerson(validPerson);
@@ -166,8 +166,8 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different TaskListManager -> returns false
-        Person firstPerson = new PersonBuilder().withTasks("transfer $100", "transfer $101").build();
-        Person secondPerson = new PersonBuilder().withTasks("transfer $101", "transfer 100").build();
+        Person firstPerson = new PersonBuilder().withTasks("transfer $100| | | ", "transfer $101| | | ").build();
+        Person secondPerson = new PersonBuilder().withTasks("transfer $101| | | ", "transfer 100| | | ").build();
         ModelManager mockModelManager = new ModelManager(addressBook, userPrefs);
         mockModelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         mockModelManager.addPerson(firstPerson);

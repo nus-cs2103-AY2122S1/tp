@@ -16,6 +16,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
+/**
+ * Deletes the task(s) identified using its displayed index in the task list.
+ */
 public class DeleteTaskCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Removed %1$d %2$s from %3$s";
@@ -35,6 +38,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Constructor for a DeleteTaskCommand to delete a task from a person.
+     *
      * @param targetPersonIndex The Index of the target person.
      * @param targetTaskIndexes The Index of the target Task that belongs to target person.
      */
