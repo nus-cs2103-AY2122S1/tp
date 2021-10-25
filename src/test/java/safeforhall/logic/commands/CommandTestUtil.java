@@ -29,7 +29,7 @@ import safeforhall.logic.commands.exceptions.CommandException;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
 import safeforhall.model.event.Event;
-import safeforhall.model.event.NameContainsEventKeywordsPredicate;
+import safeforhall.model.event.EventNameContainsKeywordsPredicate;
 import safeforhall.model.person.NameContainsKeywordsPredicate;
 import safeforhall.model.person.Person;
 import safeforhall.testutil.EditEventDescriptorBuilder;
@@ -217,7 +217,7 @@ public class CommandTestUtil {
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getEventName().eventName.split("\\s+");
-        model.updateFilteredEventList(new NameContainsEventKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredEventList(new EventNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
     }

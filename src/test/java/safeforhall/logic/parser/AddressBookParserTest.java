@@ -20,12 +20,12 @@ import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.DeadlineCommand;
 //import safeforhall.logic.commands.EditCommand;
 import safeforhall.logic.commands.ExitCommand;
-import safeforhall.logic.commands.FindCommand;
-import safeforhall.logic.commands.FindCommand.FindCompositePredicate;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.IncludeCommand;
 import safeforhall.logic.commands.add.AddPersonCommand;
 import safeforhall.logic.commands.delete.DeletePersonCommand;
+import safeforhall.logic.commands.find.FindPersonCommand;
+import safeforhall.logic.commands.find.FindPersonCommand.FindCompositePredicate;
 import safeforhall.logic.commands.view.ViewEventCommand;
 import safeforhall.logic.commands.view.ViewPersonCommand;
 import safeforhall.logic.parser.exceptions.ParseException;
@@ -84,8 +84,8 @@ public class AddressBookParserTest {
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         String joint = keywords.stream().collect(Collectors.joining(" "));
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " "
+        FindPersonCommand command = (FindPersonCommand) parser.parseCommand(
+                FindPersonCommand.COMMAND_WORD + " "
                         + CliSyntax.PREFIX_NAME + joint + " "
                         + CliSyntax.PREFIX_ROOM + "A100" + " "
                         + CliSyntax.PREFIX_VACCSTATUS + "T", true);
@@ -95,7 +95,7 @@ public class AddressBookParserTest {
         predicate.setRoom("A100");
         predicate.setVaccStatus(new VaccStatus("T"));
 
-        assertEquals(new FindCommand(predicate), command);
+        assertEquals(new FindPersonCommand(predicate), command);
     }
 
     @Test
