@@ -1,12 +1,8 @@
 package seedu.address.ui;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
-import java.util.logging.SimpleFormatter;
 
-import javax.swing.text.DateFormatter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -62,7 +58,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
         DeadlineTask deadlineTask = (DeadlineTask) task;
         status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
-        priorityLabel.setText("priority: "+ task.getPriorityAsString());
+        priorityLabel.setText("priority: " + task.getPriorityAsString());
         taskType.setText("Deadline");
 
         taskDate.setText("Date: " + deadlineTask.getDeadline().getDeadline().format(formatter));

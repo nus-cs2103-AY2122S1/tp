@@ -169,12 +169,18 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     *
+     * A command cell class.
      */
     public static class CommandCell {
         public final String commandWord;
         public final String usage;
 
+        /**
+         * Creates a command cell with the given string parameters.
+         *
+         * @param commandWord The command word of the command.
+         * @param usage The String usage message.
+         */
         public CommandCell(String commandWord, String usage) {
             this.commandWord = commandWord;
             this.usage = usage;

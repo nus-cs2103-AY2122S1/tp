@@ -176,7 +176,7 @@ public class Task implements Comparable<Task>, Cloneable {
     @Override
     public int compareTo(Task otherTask) {
         if (this.isDone) {
-            return otherTask.isDone? 0 : 1;
+            return otherTask.isDone ? 0 : 1;
         } else if (otherTask.isDone) {
             return -1;
         }
