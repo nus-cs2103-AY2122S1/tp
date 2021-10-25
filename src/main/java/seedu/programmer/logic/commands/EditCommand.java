@@ -137,6 +137,7 @@ public class EditCommand extends Command {
         private Email email;
         private Double result;
         private Lab lab;
+        private ObservableList<Lab> labList;
 
         public EditStudentDescriptor() {}
 
@@ -194,6 +195,10 @@ public class EditCommand extends Command {
         public void setLab(Lab lab, Double result) {
             this.lab = lab;
             this.result = result;
+        }
+
+        public void setLabList(ObservableList<Lab> labList) {
+            this.labList = labList;
         }
 
         public Optional<Lab> getLab() {
