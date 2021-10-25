@@ -48,6 +48,7 @@ public class EditDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(0), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(0), editedDoctor);
 
         assertCommandSuccess(editDoctorCommand, model, expectedMessage, expectedModel);
     }
@@ -69,6 +70,7 @@ public class EditDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(lastDoctor, editedDoctor);
+        expectedModel.editAppointmentsWithPerson(lastDoctor, editedDoctor);
 
         assertCommandSuccess(editDoctorCommand, model, expectedMessage, expectedModel);
     }
@@ -99,6 +101,7 @@ public class EditDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(0), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(0), editedDoctor);
 
         assertCommandSuccess(editDoctorCommand, model, expectedMessage, expectedModel);
     }
