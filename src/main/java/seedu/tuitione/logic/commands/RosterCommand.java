@@ -18,7 +18,7 @@ import seedu.tuitione.model.student.StudentIsOfSpecifiedLessonCode;
  */
 public class RosterCommand extends Command {
 
-    public static final String COMMAND_WORD = "roster-l";
+    public static final String COMMAND_WORD = "roster";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": displays the list of students who are"
             + "enrolled in a specific lesson registered in TuitiONE.\n"
