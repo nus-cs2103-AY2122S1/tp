@@ -26,7 +26,7 @@ public class GenreDeleteCommand extends GenreCommand {
             + "%2$s";
     public static final String MESSAGE_GENRE_NOT_PRESENT = "Genres %1$s are not present in anime.\n"
             + "%2$s";
-    public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s added.\n"
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s deleted.\n"
             + "Genres %2$s are not present in anime.\n"
             + "%3$s";
 
