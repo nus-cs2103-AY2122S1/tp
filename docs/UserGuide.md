@@ -71,6 +71,7 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
+## Person Commands
 
 ### Adding a person: `add`
 
@@ -227,7 +228,77 @@ Format: `marktask INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `listtask` followed by `marktask 2` marks the 2nd task in the application as done.
+* `listtask` followed by `deletetask 2` deletes the 2nd person in the application.
+
+### Listing completed tasks: `completedtasks`
+
+List all the completed tasks.
+
+Format: `completedtasks`
+
+### Listing incomplete tasks: `incompletetasks`
+
+List all the incomplete tasks.
+
+Format: `incompletetasks`
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Order Commands
+
+### Listing all orders: `listorder`
+
+Shows a list of all orders in the application.
+
+### Adding an order: `addorder`
+
+Adds an order to the application.
+
+Format: `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE`
+
+Examples:
+* `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
+* `addorder l/school uniform c/John a/15.00 d/15th October 2021`
+
+### Deleting an order: `deleteorder`
+
+Deletes an order from the application.
+
+Format: `deleteorder INDEX`
+
+* Deletes the order at the specified `INDEX`
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+Note that this will also delete all tasks tagged to the deleted order.
+
+### Marking an order as complete: `markorder`
+
+Format: `markorder INDEX`
+* Marks the order at the specified `INDEX` as completed
+* The index refers to the index number shown in the displayed order list.
+* The index must be a positive integer 1, 2, 3
+
+
+### Listing completed orders: `completedorders`
+
+List all the completed orders.
+
+Format: `completedorders`
+
+### Listing incomplete orders: `incompleteorders`
+
+List all the incomplete orders.
+
+Format: `incompleteorders`
+
+### Sorting orders by amount: `sortorders`
+
+Sorts all orders by their amount and lists them in descending order.
+
+Format: `sortorders`
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### Clearing all entries : `clear`
 
@@ -292,18 +363,43 @@ Press the ESCAPE key to close the total orders window
 
 ## Command summary
 
+###Client Commands
+
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
-**ListTask** | `listtask`
+**ListClient** | `list`
+**AddClient** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/John street Blk 92 g/M m/170_100_40 t/friend`
+**DeleteClient** | `delete INDEX`<br> e.g., `delete 3`
+**EditClient** | `edit INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS m/MEASUREMENT g/GENDER [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**FindClient** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+
+###Task Commands
+
+Action | Format, Examples
+--------|------------------
+**ListTasks** | `listtask`
 **AddTask** | `addtask l/LABEL d/DATE` e.g. `addtask l/sew buttons onto blazer d/20th August 2021`
 **DeleteTask** | `deletetask INDEX` e.g. `deletetask 1`
 **EditTask** | `edittask INDEX l/LABEL d/DATE` e.g. `edittask 1 l/order cloth d/19th September 2021`
 **MarkDone** | `markdone INDEX` e.g. `markdone 2`
+**CompletedTasks** | `completedtasks`
+**IncompleteTasks** | `incompletetasks`
 
+###Order Commands
+
+Action | Format, Examples
+--------|------------------
+**ListOrders** | `listorder`
+**AddOrder** | `addorder l/LABEL c/CUSTOMER a/AMOUNT d/DATE` e.g. `addorder l/blue blouse c/Alice a/21.90 d/20th August 2021`
+**DeleteOrder** | `deleteorder INDEX` e.g. `deleteorder 1`
+**MarkOrder** | `markorder INDEX` e.g. `markorder 2`
+**CompletedOrders** | `completedorders`
+**IncompleteOrders** | `incompleteorders`
+**SortOrders** | `sortorders`
+
+###General Commands
+
+Action | Format
+--------|------------------
+**Clear** | `clear`
+**Help** | `help`
