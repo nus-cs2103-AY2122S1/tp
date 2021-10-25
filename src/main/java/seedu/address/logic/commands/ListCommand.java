@@ -10,7 +10,7 @@ import seedu.address.model.Model;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "ls";
 
     public static final String DESCRIPTION = "Lists all current persons in the address book.";
 

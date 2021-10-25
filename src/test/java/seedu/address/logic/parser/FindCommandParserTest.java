@@ -51,8 +51,8 @@ public class FindCommandParserTest {
         assertParseSuccess(parser, "-p 88", expectedPhoneFindCommand);
         assertParseSuccess(parser, "-e alice", expectedEmailFindCommand);
         assertParseSuccess(parser, "-a 10th", expectedAddressFindCommand);
-        assertParseSuccess(parser, "-tg owes", expectedTagFindCommand);
-        assertParseSuccess(parser, "-tk study", expectedTasksFindCommand);
+        assertParseSuccess(parser, "-l owes", expectedTagFindCommand);
+        assertParseSuccess(parser, "-tn study", expectedTasksFindCommand);
     }
 
     @Test
