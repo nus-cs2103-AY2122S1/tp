@@ -79,13 +79,13 @@ public class EditCustomerCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Customer> lastShownCustomerList = model.getFilteredCustomerList();
+        List<Customer> lastShownList = model.getFilteredCustomerList();
 
-        if (index.getZeroBased() >= lastShownCustomerList.size()) {
+        if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_CUSTOMER_DISPLAYED_INDEX);
         }
 
-        Customer customerToEdit = lastShownCustomerList.get(index.getZeroBased());
+        Customer customerToEdit = lastShownList.get(index.getZeroBased());
         Customer editedCustomer = createEditedCustomer(customerToEdit, editCustomerDescriptor);
 
         if (!customerToEdit.isSameCustomer(editedCustomer) && model.hasCustomer(editedCustomer)) {
@@ -94,7 +94,8 @@ public class EditCustomerCommand extends Command {
 
         model.setCustomer(customerToEdit, editedCustomer);
         model.updateFilteredCustomerList(PREDICATE_SHOW_ALL_CUSTOMERS);
-        return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer));
+        return new CommandResult(String.format(MESSAGE_EDIT_CUSTOMER_SUCCESS, editedCustomer),
+                false, false, true, false, false, false);
     }
 
     /**
