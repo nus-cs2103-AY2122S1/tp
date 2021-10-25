@@ -1,15 +1,66 @@
 # PlannerMD User Guide
 
-PlannerMD is an easy-to-use command-line application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
+PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
+* [What is Command-line Interface (CLI)?](#what-is-cli)
 * [Quick start](#quick-start)
 * [Features](#features)
+  * [General](#general)
+    * [help](#help)
+    * [toggle](#toggle) 
+    * [clear](#clear)
+    * [exit](#exit)
+  * [Managing Patients](#managing-patients)
+    * [add](#add-patient)
+    * [list](#list-patient)
+    * [edit](#edit-patient)
+    * [remark](#remark-patient)
+    * [find](#find-patient)
+    * [delete](#delete-patient)
+    * [Managing Tags](#managing-patient-tag)
+        * [add](#add-patient-tag)
+        * [delete](#delete-patient-tag)
+  * [Managing Doctors](#managing-doctors)
+      * [add](#add-doctor)
+      * [list](#list-doctor)
+      * [edit](#edit-doctor)
+      * [remark](#remark-doctor)
+      * [find](#find-doctor)
+      * [delete](#delete-doctor)
+      * [Managing Tags](#managing-doctor-tag)
+          * [add](#add-doctor-tag)
+          * [delete](#delete-doctor-tag)
+  * [Managing Appointments](#managing-appointments)
+    * [add](#add-appointment)
+    * [edit](#edit-appointment)
+    * [delete](#delete-appointment)
+    * [find](#find-appointments)
+    * [find upcoming](#upcoming-appointments)
+    * [list](#list-appointments)
 * [FAQs](#faq)
 * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
+## What is Command-line Interface (CLI?)
+A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
+you would type the command in text in the command box, and the programme will execute your command.
 
-## Quick start
+### Why CLI? 
+We want to give you an experience that is as similar as writing with pen-and-paper, to help you clinic receptions adapt easily. With a CLI,
+you can imagine the keyboard as your pen, and a command box as your paper. To clinic receptionists who are already using a different application
+with a Graphical User Interface (GUI), our application removes the need to constantly access your mouse and speed up your arduous process of managing
+patients, doctors and appointments.
+
+### How to use a CLI?
+Just type your command in the command box with the format we have provided. Simple as that!
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can type the command keyword and leave the details blank and click enter to access the teamplte so you don't have to remember
+all the details!<br>
+
+![get format](images/user-guide/tipGetFormat.png)
+--------------------------------------------------------------------------------------------------------------------
+
+## Quick start <a href="quick-start"/>
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -41,11 +92,12 @@ PlannerMD is an easy-to-use command-line application that helps clinic reception
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Features <a href="features"/>
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format**<br>
+* `Format:` shows the format to type the respective commands
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -67,28 +119,46 @@ PlannerMD is an easy-to-use command-line application that helps clinic reception
 
 </div>
 
-### Viewing help : `help`
+### Viewing help : `help` <a href="help"/>
 
-Shows a message explaining how to access the help page.
+Shows a message explaining how to access the help page. You can click on the help button on the top left 
+corner of the application.
 
-![help message](images/helpMessage.png)
+![help message](images/user-guide/helpMessage.png)
+![help button](images/user-guide/helpButton.png)
 
 Format: `help`
 
 ---
 
-### Toggling between tabs: `toggle`
+### Toggling between tabs: `toggle` <a href="toggle"/>
 
 Toggles between `Patients` tab and `Doctors` tab.<br>
 Commands entered while the `Patients` tab is displayed will only affect patients whereas commands entered while the `Doctors` tab is displayed will only affect doctors.
 
 Format: `toggle`
 
+
+### Clearing all entries : `clear` <a href="clear"/>
+
+Clears all patient/doctor entries.
+
+Format: `clear`
+
+Examples:
+Typing `clear` in the patients tab removes all patient entries.
+
+### Exiting the program : `exit` <a href="exit"/>
+
+Exits the program.
+
+Format: `exit`
+
 ---
 
-## Managing Patients
+## Managing Patients <a href="managing-patients"/>
 
-### Adding a patient: `add`
+### Adding a patient: `add` <a href="add-patient"/>
 
 Adds a patient to the patient records. 
 
@@ -104,13 +174,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 dob/20/07/1964 t/COVID risk/HIGH` 
 
-### Listing all patients : `list`
+### Listing all patients : `list` <a href="list-patient"/>
 
 Shows a list of all patients in the patient records.
 
 Format: `list`
 
-### Editing a patient's information : `edit`
+### Editing a patient's information : `edit` <a href="edit-patient"/>
 
 Edits an existing patient in the patient records.
 
@@ -129,7 +199,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd patient to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 
-### Adding a remark to a patient's information : `remark`
+### Adding a remark to a patient's information : `remark` <a href="remark-patient"/>
 
 Adds a remark to an existing patient in the patient records.
 
@@ -143,7 +213,7 @@ Examples:
 *  `remark 1 r/` Edits the remark of the 1st patient to be blank.
 *  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
 
-### Locating patients by name: `find`
+### Locating patients by name: `find` <a href="find-patient"/>
 
 Finds patients whose names contain any of the given keywords
 
@@ -162,7 +232,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a patient : `delete`
+### Deleting a patient : `delete` <a href="delete-patient"/>
 
 Deletes a patient record from the list.
 
@@ -176,9 +246,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient records.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
-### Managing Tags `tag`
+### Managing Tags `tag` <a href="managing-patient-tag"/>
 
-### Adding tags to a patient: `tag -a`
+### Adding tags to a patient: `tag -a` <a href="add-patient-tag"/>
 
 Adds a new tag to a patient’s record.
 
@@ -193,7 +263,7 @@ Format: `tag -a INDEX t/TAG`
 Examples:
 `tag -a 1 t/Covid` tags the first patient with a *Covid* tag.
 
-### Deleting a patient's tags : `tag -d`
+### Deleting a patient's tags : `tag -d` <a href="delete-patient-tag"/>
 
 Deletes a tag from a patient's record.
 
@@ -209,9 +279,9 @@ Examples:
 
 ---
 
-## Managing Doctors
+## Managing Doctors <a href="managing-doctors"/>
 
-### Adding a doctor: `add`
+### Adding a doctor: `add` <a href="add-doctor"/>
 
 Adds a doctor to the doctor records.
 
@@ -225,13 +295,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 dob/20/07/1964 t/COVID`
 
-### Listing all doctors : `list`
+### Listing all doctors : `list` <a href="list-doctor"/>
 
 Shows a list of all doctors in the doctor records.
 
 Format: `list`
 
-### Editing a doctor's information : `edit`
+### Editing a doctor's information : `edit` <a href="edit-doctor"/>
 
 Edits an existing doctor in the doctor records.
 
@@ -249,7 +319,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 
-### Adding a remark to a doctor's information : `remark`
+### Adding a remark to a doctor's information : `remark` <a href="remark-doctor"/>
 
 Adds a remark to an existing doctor in the doctor records.
 
@@ -263,7 +333,7 @@ Examples:
 *  `remark 1 r/` Edits the remark of the 1st doctor to be blank.
 *  `remark 2 r/Comes at 8am` Edits the remark of the 2nd doctor to be `Comes at 8am`.
 
-### Locating doctors by name: `find`
+### Locating doctors by name: `find` <a href="find-doctor"/>
 
 Finds doctors whose names contain any of the given keywords
 
@@ -281,7 +351,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-### Deleting a doctor : `delete`
+### Deleting a doctor : `delete` <a href="delete-doctor"/>
 
 Deletes a doctor record from the list.
 
@@ -295,9 +365,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd doctor in the doctor records.
 * `find Betsy` followed by `delete 1` deletes the 1st doctor in the results of the `find` command.
 
-### Managing Tags `tag`
+### Managing Tags `tag` <a href="managing-doctor-tag"/>
 
-### Adding tags to a doctor: `tag -a`
+### Adding tags to a doctor: `tag -a` <a href="add-doctor-tag"/>
 
 Adds a new tag to a doctor’s record.
 
@@ -312,7 +382,7 @@ Format: `tag -a INDEX t/TAG`
 Examples:
 `tag -a 1 t/Pediatrician` tags the first doctor with a *Pediatrician* tag.
 
-### Deleting a doctor's tags : `tag -d`
+### Deleting a doctor's tags : `tag -d` <a href="delete-doctor-tag"/>
 
 Deletes a tag from a doctor's record.
 
@@ -328,36 +398,21 @@ Examples:
 
 ---
 
-## Managing Appointments `appt`
+## Managing Appointments `appt` <a href="managing-appointments"/>
 
-### Adding an appointment: `appt -a`
+### Adding an appointment: `appt -a` <a href="add-appointment"/>
 
-### Editing an appointment: `appt -e`
+### Editing an appointment: `appt -e` <a href="edit-appointment"/>
 
-### Deleting an appointment: `appt -d`
+### Deleting an appointment: `appt -d` <a href="delete-appointment"/>
 
-### Filtering all appointments: `appt -f`
+### Filtering all appointments: `appt -f` <a href="find-appointments"/>
 
-### Filtering upcoming appointments: `appt -u`
+### Filtering upcoming appointments: `appt -u` <a href="upcoming-appointments"/>
 
-### Listing appointments today: `appt -l`
+### Listing appointments today: `appt -l` <a href="list-appointments"/>
 
 ---
-
-### Clearing all entries : `clear`
-
-Clears all patient/doctor entries.
-
-Format: `clear`
-
-Examples:
-Typing `clear` in the patients tab removes all patient entries.
-
-### Exiting the program : `exit`
-
-Exits the program.
-
-Format: `exit`
 
 ### Saving the data
 
@@ -377,14 +432,14 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## FAQ <a href="faq"/>
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command summary <a href="command-summary"/>
 
 Action | Format, Examples
 --------|------------------
