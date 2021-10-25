@@ -4,14 +4,14 @@
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "classCode": "G04",
+    "classCode": "",
     "tagged": [ "friends" ]
   }, {
     "name": "Alice Pauline",
     "phone": "94351253",
     "email": "alice@example.com",
     "address": "123, Jurong West Ave 6, #08-111",
-    "classCode": "G04",
+    "classCode": "",
     "tagged": [ "friends" ]
   } ],
   "tutorialClasses": [ {

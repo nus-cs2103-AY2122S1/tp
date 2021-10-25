@@ -5,49 +5,49 @@
     "phone" : "94351253",
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "classCode": "G06",
+    "classCode": "",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "classCode": "G04",
+    "classCode": "",
     "tagged" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
-    "classCode": "G02",
+    "classCode": "",
     "tagged" : [ ]
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
-    "classCode": "G00",
+    "classCode": "",
     "tagged" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
-    "classCode": "G06",
+    "classCode": "",
     "tagged" : [ ]
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
-    "classCode": "G02",
+    "classCode": "",
     "tagged" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
-    "classCode": "G02",
+    "classCode": "",
     "tagged" : [ ]
   } ],
   "tutorialClasses": [{
@@ -61,7 +61,7 @@
       "tagged": [ ]
     },
     {
-      "classCode": "G02",
+      "classCode": "A02",
       "schedule": "Wed 10:00 to 12:00, Fri 10:00 to 12:00",
       "tagged": [ ]
     }
