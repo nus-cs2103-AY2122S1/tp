@@ -80,14 +80,14 @@ public class AddressBookParser {
         case MarkStudentAttCommand.COMMAND_WORD:
             return new MarkStudentAttCommandParser().parse(arguments);
 
+        case MarkStudentPartCommand.COMMAND_WORD:
+            return new MarkStudentPartCommandParser().parse(arguments);
+
         case ClearAllCommand.COMMAND_WORD:
             return new ClearAllCommand();
 
         case ClearAllTasksCommand.COMMAND_WORD:
             return new ClearAllTasksCommand();
-
-        case MarkStudentPartCommand.COMMAND_WORD:
-            return new MarkStudentPartCommandParser().parse(arguments);
 
         case ClearStudentsCommand.COMMAND_WORD:
             return new ClearStudentsCommand();
