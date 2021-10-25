@@ -43,13 +43,11 @@
               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
             </padding>
             <VBox fx:id="studentListLabel" styleClass="pane-with-no-border">
-              <Text fill="WHITE" text="Student List">
+                     <Text fill="WHITE" text="👨👩 Student List">
                         <font>
                            <Font name="Montserrat Medium" size="22.0" />
                         </font>
-                        <VBox.margin>
-                           <Insets bottom="5.0" left="12.0" />
-                        </VBox.margin></Text>
+                     </Text>
             </VBox>
             <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
@@ -59,7 +57,7 @@
               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
             </padding>
             <VBox fx:id="lessonListLabel" styleClass="pane-with-no-border">
-              <Text fill="WHITE" text="Lesson List">
+              <Text fill="WHITE" text="📚 Lesson List">
                         <font>
                            <Font name="Montserrat Medium" size="22.0" />
                         </font>
