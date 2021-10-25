@@ -198,6 +198,11 @@ public class AddCommandTest {
         public void addAssessment(Student student, Assessment assessment) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void deleteAssessment(Student student, Assessment assessment) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

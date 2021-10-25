@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 import static seedu.address.testutil.TypicalAssessments.MIDTERMS;
+import static seedu.address.testutil.TypicalAssessments.QUIZ1;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2101;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T;
 import static seedu.address.testutil.TypicalGroups.TYPICAL_GROUP_CS2103T_NAME;
@@ -27,10 +28,10 @@ public class TypicalStudents {
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline").withEmail("alice@example.com")
             .withTelegramHandle("@alice_pauline").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withAssessment(MIDTERMS).withAssessment(QUIZ1).build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier").withEmail("johnd@example.com")
             .withTelegramHandle("@benson_meier").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
-            .withAssessment(MIDTERMS).build();
+            .withAssessment(MIDTERMS).withAssessment(QUIZ1).build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withEmail("heinz@example.com")
             .withTelegramHandle("@carl_kurz").withGroupName(TYPICAL_GROUP_CS2103T_NAME)
             .withAssessment(MIDTERMS).build();

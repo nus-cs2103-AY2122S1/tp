@@ -25,7 +25,7 @@ import seedu.address.model.student.Student;
 import seedu.address.testutil.StudentBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for AddAssessmentCommand.
  */
 public class AddAssessmentCommandTest {
 

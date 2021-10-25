@@ -191,6 +191,11 @@ public class ModelManager implements Model {
         csBook.addAssessment(student, assessment);
     }
 
+    @Override
+    public void deleteAssessment(Student student, Assessment assessment) {
+        csBook.deleteAssessment(student, assessment);
+    }
+
     //=========== Filtered Student List Accessors =============================================================
 
     /**

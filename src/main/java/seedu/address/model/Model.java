@@ -146,4 +146,10 @@ public interface Model {
      * {@code assessment} must not already exist in the student's.
      */
     void addAssessment(Student student, Assessment assessment);
+
+    /**
+     * Deletes the given assessment from the given student.
+     * {@code assessment} must exist in the student's assessment list.
+     */
+    void deleteAssessment(Student student, Assessment assessment);
 }

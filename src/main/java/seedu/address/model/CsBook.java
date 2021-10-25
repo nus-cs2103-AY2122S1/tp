@@ -159,6 +159,12 @@ public class CsBook implements ReadOnlyCsBook {
         student.addAssessment(assessment);
     }
 
+    public void deleteAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        student.deleteAssessment(assessment);
+    }
+
     //// util methods
 
     @Override
