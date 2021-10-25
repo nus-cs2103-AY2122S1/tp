@@ -8,10 +8,11 @@ public enum StudentMark {
     HIGH(4),
     EXCELLENT(5);
 
+    public static final String MESSAGE_CONSTRAINTS = "Mark can only be within range:\n"
+            + "Poor, Low, Avg, Good, High, Excellent";
+
     private final int mark;
 
-    public static final String MESSAGE_CONSTRAINTS = "Mark can only be within range:\n"
-                                                    + "Poor, Low, Avg, Good, High, Excellent";
 
     StudentMark(int mark) {
         this.mark = mark;

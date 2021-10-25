@@ -8,8 +8,8 @@ import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
-import static seedu.address.testutil.TypicalStudents.getTypicalClassmate;
 import static seedu.address.testutil.TypicalStudents.ALICE;
+import static seedu.address.testutil.TypicalStudents.getTypicalClassmate;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +32,8 @@ public class DeleteLastMarkCommandTest {
         DeleteLastMarkCommand deleteLastMarkCommand = new DeleteLastMarkCommand(INDEX_FIRST_STUDENT);
         Student editedStudent = new StudentBuilder(ALICE).withMarks("LOW").build();
 
-        String expectedMessage = String.format(DeleteLastMarkCommand.MESSAGE_DELETE_MARK_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage =
+                String.format(DeleteLastMarkCommand.MESSAGE_DELETE_MARK_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new Classmate(model.getClassmate()), new UserPrefs());
 
@@ -47,7 +48,8 @@ public class DeleteLastMarkCommandTest {
         Student editedStudent = new StudentBuilder(studentInFilteredList).withMarks("LOW").build();
         DeleteLastMarkCommand deleteLastMarkCommand = new DeleteLastMarkCommand(INDEX_FIRST_STUDENT);
 
-        String expectedMessage = String.format(DeleteLastMarkCommand.MESSAGE_DELETE_MARK_STUDENT_SUCCESS, editedStudent);
+        String expectedMessage =
+                String.format(DeleteLastMarkCommand.MESSAGE_DELETE_MARK_STUDENT_SUCCESS, editedStudent);
 
         Model expectedModel = new ModelManager(new Classmate(model.getClassmate()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);

@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.commands.AddGroupCommand;
-import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.AddLastMarkCommand;
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteClassCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
-import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.DeleteLastMarkCommand;
+import seedu.address.logic.commands.DeleteStudentCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindClassCommand;
