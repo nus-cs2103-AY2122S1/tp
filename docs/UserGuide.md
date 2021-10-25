@@ -11,10 +11,10 @@ title: User Guide
 
 Welcome to the User Guide of **TuitiONE**! <br>
 
-**TuitiONE** is a Command Line Interface (CLI) based application that aims to **simplify the work of Customer Servicing Officers (CSO)**. 
-The application allows users to input the details of students and parents through simple and intuitive commands. With our application, a CSO's work would be reduced and efficient.
+**TuitiONE** is a Command Line Interface (CLI) based application that aims to **simplify the work of Customer Servicing Officers (CSO) in a tuition centre**.
+The application also incorporates the benefits of a Graphical User Interface (GUI).
+**TuitiONE** allows CSOs to input the details of students and parents through simple and intuitive commands. With our application, a CSO's work would be reduced and efficient.
 
-**TuitiONE** is a desktop app for managing contacts, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
 If you can type fast, **TuitiONE** can get your contact management tasks done faster than most other GUI apps. The GUI application would allow you to interact with the application
 through graphical icons (such as buttons).
 
@@ -27,7 +27,7 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
 ## **Quick start**
 
-1. Ensure you have Java 11 or above installed in your Computer. You may install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
+1. Ensure you have Java 11 or above installed in your Computer. You may follow the instructions and install it [here](https://www.oracle.com/java/technologies/downloads/#java11).
 
 1. Download the latest `TuitiONE.jar` from [here](https://github.com/AY2122S1-CS2103T-F13-4/tp/releases).
 
