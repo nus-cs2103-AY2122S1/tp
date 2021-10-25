@@ -183,6 +183,11 @@ public class AddCommandTest {
         public void updateFilteredPolicyList(Predicate<Policy> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int getTotalCommission() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

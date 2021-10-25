@@ -112,6 +112,11 @@ public interface Model {
     void setPolicy(Policy target, Policy editedPolicy);
 
     /**
+     * Returns the total commission of the policy list.
+     */
+    int getTotalCommission();
+
+    /**
      * Removes all policies belonging to the given person {@code target}.
      * {@code target} must exist in the SIASA.
      */

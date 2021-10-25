@@ -118,6 +118,8 @@ public class Siasa implements ReadOnlySiasa {
         policies.removeBelongingTo(key);
     }
 
+    /// policy-level operations
+
     /**
      * Returns true if a policy with the same identity as {@code policy} exists in SIASA.
      */
@@ -155,6 +157,9 @@ public class Siasa implements ReadOnlySiasa {
         this.policies.setPolicies(policies);
     }
 
+    public int getTotalCommission() {
+        return policies.getTotalCommission();
+    }
 
     //// util methods
 

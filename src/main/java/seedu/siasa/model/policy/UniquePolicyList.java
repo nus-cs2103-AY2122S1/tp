@@ -100,6 +100,18 @@ public class UniquePolicyList implements Iterable<Policy> {
     }
 
     /**
+     * Returns the total commission from the policy list.
+     */
+    public int getTotalCommission() {
+        float total = 0;
+        for (Policy policy : internalList) {
+            total = total + ((float) policy.getCommission().commissionPercentage / 100)
+                    * policy.getPrice().priceInCents;
+        }
+        return (int) total;
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Policy> asUnmodifiableObservableList() {

@@ -148,6 +148,11 @@ public class ModelManager implements Model {
         siasa.removePoliciesBelongingTo(target);
     }
 
+    @Override
+    public int getTotalCommission() {
+        return siasa.getTotalCommission();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
