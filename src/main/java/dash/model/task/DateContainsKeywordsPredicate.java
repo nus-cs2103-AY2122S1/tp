@@ -14,9 +14,9 @@ public class DateContainsKeywordsPredicate implements Predicate<Task> {
 
     @Override
     public boolean test(Task task) {
+        TaskDate taskDate = task.getTaskDate();
         boolean dateEqual = task.getTaskDate().hasDate();
         boolean timeEqual = task.getTaskDate().hasTime();
-        System.out.println(task.getTaskDate().hasTime() && this.taskDate.hasTime());
         if (task.getTaskDate().hasDate() && this.taskDate.hasDate()) {
             dateEqual = task.getTaskDate().toDateString().equals(this.taskDate.toDateString());
         } else if (!task.getTaskDate().hasDate() && !this.taskDate.hasDate()) {
@@ -27,8 +27,11 @@ public class DateContainsKeywordsPredicate implements Predicate<Task> {
         } else if (!task.getTaskDate().hasTime() && !this.taskDate.hasTime()) {
             timeEqual = true;
         }
-
-        return dateEqual && timeEqual;
+        if (!taskDate.hasDate() && this.taskDate.hasDate() && this.taskDate.hasTime()) {
+            return taskDate.toTimeString().equals(this.taskDate.toTimeString());
+        } else {
+            return dateEqual && timeEqual;
+        }
     }
 
     @Override

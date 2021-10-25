@@ -37,6 +37,7 @@ public class FindTaskCommand extends Command {
             + "[" + CliSyntax.PREFIX_TAG + "TAG]... (at least 1)\n"
             + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE]\n"
             + "[" + CliSyntax.PREFIX_TASK_DATE + "TIME]\n"
+            + "[" + CliSyntax.PREFIX_TASK_DATE + "DATE, TIME]\n"
             + "[" + CliSyntax.PREFIX_PERSON + "PERSON]\n"
             + "[" + CliSyntax.PREFIX_COMPLETION_STATUS + "TRUE/FALSE]\n"
             + "Example 1: " + COMMAND_WORD + " CS2103T Homework\n"
@@ -172,7 +173,9 @@ public class FindTaskCommand extends Command {
             FindTaskDescriptor f = (FindTaskDescriptor) other;
 
             return getDesc().equals(f.getDesc())
-                    && getTags().equals(f.getTags());
+                    && getTags().equals(f.getTags())
+                    && getCompletionStatus().equals(getCompletionStatus())
+                    && getDate().equals(getDate());
         }
     }
 }

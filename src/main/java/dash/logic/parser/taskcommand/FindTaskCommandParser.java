@@ -64,7 +64,7 @@ public class FindTaskCommandParser implements Parser<FindTaskCommand> {
             if (argMultimap.getValue(PREFIX_TASK_DATE).get().isEmpty()) {
                 throw new ParseException("Arguments cannot be empty");
             }
-            TaskDate taskDateArg = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_TASK_DATE).get());
+            TaskDate taskDateArg = ParserUtil.parseTaskDateToEdit(argMultimap.getValue(PREFIX_TASK_DATE).get());
             findTaskDescriptor.setDate(taskDateArg);
         }
         if (tagPresent) {
