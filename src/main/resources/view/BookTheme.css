@@ -168,9 +168,8 @@
     -fx-background-color: derive(-fx-base3, -15%);
 }
 
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: transparent;
-    -fx-border-width: 1;
+.list-cell:hover {
+    -fx-border-width: 3;
 }
 
 .list-cell .label {
