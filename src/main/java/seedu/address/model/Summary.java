@@ -46,16 +46,16 @@ public class Summary implements ReadOnlySummary {
             if (visit.isOverdue()) {
                 overdueVisits++;
             }
-            if (visit.isThisWeek()) {
+            if (visit.isNextSevenDays()) {
                 visitsNextWeek++;
             }
-            if (visit.isThisMonth()) {
+            if (visit.isNextThirtyDays()) {
                 visitsNextMonth++;
             }
-            if (lastVisit.isLastWeek()) {
+            if (lastVisit.isLastSevenDays()) {
                 visitsLastWeek++;
             }
-            if (lastVisit.isLastMonth()) {
+            if (lastVisit.isLastThirtyDays()) {
                 visitsLastMonth++;
             }
         }

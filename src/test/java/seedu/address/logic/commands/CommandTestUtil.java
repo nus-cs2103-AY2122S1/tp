@@ -41,8 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_LAST_VISIT_AMY = "2021-01-01 12:00";
     public static final String VALID_LAST_VISIT_BOB = "2021-01-02 13:00";
-    public static final String VALID_VISIT_AMY = DateTimeUtil.getValidVisitString();
-    public static final String VALID_VISIT_BOB = DateTimeUtil.getValidVisitString2();
+    public static final String VALID_VISIT_AMY = DateTimeUtil.getInputStringSevenDaysFromNow();
+    public static final String VALID_VISIT_BOB = DateTimeUtil.getInputStringEightDaysFromNow();
     public static final String VALID_FREQUENCY_AMY = "Weekly";
     public static final String VALID_FREQUENCY_BOB = "Monthly";
     public static final String VALID_OCCURRENCE_AMY = "2";

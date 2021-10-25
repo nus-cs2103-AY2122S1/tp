@@ -47,8 +47,8 @@ public class ParserUtilTest {
     private static final String VALID_LANGUAGE = "English";
     private static final String VALID_HEALTH_CONDITION_1 = "high blood pressure";
     private static final String VALID_HEALTH_CONDITION_2 = "dementia";
-    private static final String VALID_VISIT_DATETIME = DateTimeUtil.getValidVisitString();
-    private static final String VALID_LAST_VISIT_DATETIME = DateTimeUtil.getValidLastVisitString();
+    private static final String VALID_VISIT_DATETIME = DateTimeUtil.getInputStringSevenDaysFromNow();
+    private static final String VALID_LAST_VISIT_DATETIME = DateTimeUtil.getInputStringSevenDaysBeforeNow();
 
     private static final String WHITESPACE = " \t\r\n";
 

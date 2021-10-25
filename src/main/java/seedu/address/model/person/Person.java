@@ -217,7 +217,7 @@ public class Person {
             return false;
         }
 
-        return this.visit.get().isThisWeek();
+        return this.visit.get().isNextSevenDays();
     }
 
     /**
@@ -228,6 +228,6 @@ public class Person {
             return false;
         }
 
-        return this.visit.get().isThisMonth();
+        return this.visit.get().isNextThirtyDays();
     }
 }
