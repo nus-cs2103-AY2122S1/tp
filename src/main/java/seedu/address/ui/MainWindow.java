@@ -31,7 +31,6 @@ import seedu.address.model.product.Product;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    private int stats = 0;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
