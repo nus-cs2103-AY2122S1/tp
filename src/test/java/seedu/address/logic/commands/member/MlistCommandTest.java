@@ -36,6 +36,7 @@ public class MlistCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showMemberAtIndex(model, INDEX_FIRST_MEMBER);
         assertCommandSuccess(new MlistCommand(), model,
-                String.format(MlistCommand.MESSAGE_SUCCESS, 1, ""), expectedModel);
+                String.format(MlistCommand.MESSAGE_SUCCESS, expectedModel.getFilteredMemberList().size(), ""),
+                expectedModel);
     }
 }
