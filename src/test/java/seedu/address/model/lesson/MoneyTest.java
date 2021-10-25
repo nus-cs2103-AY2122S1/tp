@@ -36,6 +36,7 @@ class MoneyTest {
         assertFalse(Money.isValidMonetaryField("10+10")); // non-numeric, non-period within digits
         assertFalse(Money.isValidMonetaryField("$50.05")); // starting with dollar sign
         assertFalse(Money.isValidMonetaryField("99 999")); // spaces within digits
+        assertFalse(Money.isValidMonetaryField("-100.00")); // negative value
 
         // valid fees
         assertTrue(Money.isValidMonetaryField("")); // empty string

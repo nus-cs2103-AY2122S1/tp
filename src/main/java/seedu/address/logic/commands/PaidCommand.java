@@ -47,7 +47,6 @@ public class PaidCommand extends UndoableCommand {
             + "Example: " + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_PAID_LESSON_SUCCESS = "Paid Lesson for student %1$s:\n%2$s";
-    public static final String MESSAGE_PAYMENT_NOT_SPECIFIED = "You must provide an amount to pay.";
 
     private final Index index;
     private final Index indexToEdit;
