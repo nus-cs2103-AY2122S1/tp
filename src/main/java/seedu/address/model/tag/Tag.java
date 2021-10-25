@@ -3,10 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
 
 /**
@@ -20,7 +18,7 @@ public class Tag {
 
     // TODO: tag color + FXML
     private final String tagName;
-    private final Set<Client> clients = new HashSet<>();
+    private final ObservableList<Client> clients = FXCollections.observableArrayList();
 
     /**
      * Constructs a {@code Tag}.
@@ -38,25 +36,6 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
-    }
-
-
-    /**
-     * Returns a list of clients that have this tag.
-     *
-     * @return A list of clients that have this tag.
-     */
-    public Set<Client> getClients() {
-        return Collections.unmodifiableSet(clients);
-    }
-
-    /**
-     * Returns the name of this tag.
-     *
-     * @return The name of this tag.
-     */
-    public String getName() {
-        return tagName;
     }
 
     /**
@@ -90,11 +69,22 @@ public class Tag {
         return otherTag != null && otherTag.getName().equals(getName());
     }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Tag // instanceof handles nulls
-                && tagName.equals(((Tag) other).tagName)); // state check
+    /**
+     * Returns the name of this tag.
+     *
+     * @return The name of this tag.
+     */
+    public String getName() {
+        return tagName;
+    }
+
+    /**
+     * Returns a list of clients that have this tag.
+     *
+     * @return A list of clients that have this tag.
+     */
+    public ObservableList<Client> getClients() {
+        return FXCollections.unmodifiableObservableList(clients);
     }
 
     @Override
@@ -102,11 +92,18 @@ public class Tag {
         return tagName.hashCode();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Tag // instanceof handles nulls
+                && tagName.equals(((Tag) other).tagName)); // state check
+    }
+
     /**
      * Format state as text for viewing.
      */
     @Override
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName + " (" + getClients().size() + ")";
     }
 }

@@ -35,7 +35,7 @@ public class TagsPanel extends UiPart<Region> {
         tagList.stream()
                 .sorted(Comparator.comparing(Tag::getName))
                 .forEach(tag -> {
-                    Label tagLabel = new Label(tag.getName());
+                    Label tagLabel = new Label(tag.toString());
                     tags.getChildren().add(tagLabel);
                     tagLabels.put(tag, tagLabel);
                 });
@@ -44,7 +44,7 @@ public class TagsPanel extends UiPart<Region> {
             while (change.next()) {
                 if (change.wasAdded()) {
                     Tag tag = change.getAddedSubList().get(0);
-                    Label tagLabel = new Label(tag.getName());
+                    Label tagLabel = new Label(tag.toString());
                     logger.fine(tag.getName() + "was added to the list!");
                     tags.getChildren().add(tagLabel);
                     tagLabels.put(tag, tagLabel);
@@ -52,6 +52,9 @@ public class TagsPanel extends UiPart<Region> {
                     Tag tag = change.getRemoved().get(0);
                     logger.fine(tag.getName() + "was removed from the list!");
                     tags.getChildren().remove(tagLabels.remove(change.getRemoved().get(0)));
+                } else if (change.wasUpdated()) {
+                    // TODO: update client count
+                    // System.out.println("Items from " + change.getFrom() + " to " + change.getTo() + " changed");
                 }
             }
         });

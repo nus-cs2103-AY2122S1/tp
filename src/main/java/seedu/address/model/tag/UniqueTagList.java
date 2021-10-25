@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,7 +16,8 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 public class UniqueTagList implements Iterable<Tag> {
 
-    private final ObservableList<Tag> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Tag> internalList =
+            FXCollections.observableArrayList(tag -> new Observable[] {tag.getClients()});
     private final ObservableList<Tag> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**
@@ -125,8 +127,8 @@ public class UniqueTagList implements Iterable<Tag> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof UniqueTagList // instanceof handles nulls
-            && internalList.equals(((UniqueTagList) other).internalList));
+                || (other instanceof UniqueTagList // instanceof handles nulls
+                && internalList.equals(((UniqueTagList) other).internalList));
     }
 
 }
