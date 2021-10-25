@@ -196,6 +196,25 @@ Example(s):
 * `list` followed by `delete 2` deletes the student indexed `2` in the TuitiONE.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+#### Editing a student : `edit`
+
+Deletes a student from the TuitiONE.
+
+Command Format: `edit INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK]...`
+
+* Edits the student at the specified `INDEX` based on the fields given.
+* You can edit any number of fields.
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** `1`, `2`, `3`, …
+* Entering the command `edit r/` will remove all remarks that is currently attached to the student
+* **Note that if you change a student's grade, TuitiONE will unenroll the student from all the classes he or she was previously taking in the previous grade**.
+
+Example(s):
+
+* `edit 2 p/98765432` changes the parent contact number information of the second student in the student list.
+* `edit 2 g/S2` changes the grade of the second student in the student list from its current grade to `S2`, and he or she will be unenrolled from all classes in his or her previous grade.
+* `edit 2 n/Ben Lim e/benlim@gmail.com` changes the name and email of the second student in the student list.
+
 #### Enrolling a student from lesson: `enroll`
 
 Enroll a specified student to a given TuitiONE lesson.
@@ -357,7 +376,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PARENT_PHONE_NUMBER e/EMAIL a/ADDRESS g/GRADE [r/REMARK]…` <br> e.g. `add n/Betsy Crowe p/91234567 e/bc@gmail.com a/Bleecker street, block 123, #01-01 g/S5 r/foreign student`
 **Add lesson** | `add-l s/SUBJECT g/GRADE d/DAY_OF_WEEK t/TIME_START c/COST` <br> e.g. `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK]` <br> e.g. `add-l s/Science g/P5 d/Wed t/1230 c/12.0`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [g/GRADE] [r/REMARK]` <br> e.g. `edit 2 n/Ben Lim e/benlim@gmail.com`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g. `delete 3`
 **Delete lesson** | `delete-l INDEX`<br> e.g. `delete-l 1`
