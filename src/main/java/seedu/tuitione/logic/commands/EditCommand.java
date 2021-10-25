@@ -29,7 +29,6 @@ import seedu.tuitione.model.student.Name;
 import seedu.tuitione.model.student.ParentContact;
 import seedu.tuitione.model.student.Student;
 
-
 /**
  * Edits the details of an existing student in the tuitione book.
  */
@@ -70,7 +69,6 @@ public class EditCommand extends Command {
         if (editStudentDescriptor.gradeIsEdited) {
             this.editStudentDescriptor.setGradeIsEdited(true);
         }
-
     }
 
     @Override
@@ -90,18 +88,15 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
-        if (editStudentDescriptor.gradeIsEdited) {
-            while (!studentLessons.isEmpty()) {
-                Lesson lesson = studentLessons.get(0);
+        while (!studentLessons.isEmpty()) {
+            Lesson lesson = studentLessons.get(0);
+            if (editStudentDescriptor.gradeIsEdited) {
                 lesson.unenrollStudent(studentToEdit);
-                model.setLesson(lesson, lesson);
-            }
-        } else {
-            // grade is not modified, hence must be updated in lessons
-            for (Lesson lesson : studentLessons) {
+            } else {
+                // grade is not modified, hence must be updated in lessons
                 lesson.updateStudent(studentToEdit, editedStudent);
-                model.setLesson(lesson, lesson);
             }
+            model.setLesson(lesson, lesson);
         }
 
         model.setStudent(studentToEdit, editedStudent);

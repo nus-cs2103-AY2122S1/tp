@@ -1,14 +1,12 @@
 package seedu.tuitione.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.UniqueLessonList;
-import seedu.tuitione.model.lesson.exceptions.DuplicateLessonException;
 import seedu.tuitione.model.student.Student;
 import seedu.tuitione.model.student.UniqueStudentList;
 
@@ -108,13 +106,7 @@ public class Tuitione implements ReadOnlyTuitione {
      */
     public boolean hasLesson(Lesson lesson) {
         requireNonNull(lesson);
-        for (Lesson l : lessons) {
-            // weak equality check
-            if (l.isSameLesson(lesson)) {
-                return true;
-            }
-        }
-        return false;
+        return lessons.contains(lesson);
     }
 
     /**
@@ -138,30 +130,12 @@ public class Tuitione implements ReadOnlyTuitione {
      * {@code lesson} must not contain duplicate lessons.
      */
     public void setLessons(List<Lesson> lessons) {
-        requireAllNonNull(lessons);
-        if (!lessonsAreUnique(lessons)) {
-            throw new DuplicateLessonException();
-        }
         this.lessons.setLessons(lessons);
     }
 
     public void setLesson(Lesson target, Lesson editedLesson) {
         requireNonNull(editedLesson);
         lessons.setLesson(target, editedLesson);
-    }
-
-    /**
-     * Returns true if {@code lessons} contains only unique lessons.
-     */
-    public boolean lessonsAreUnique(List<Lesson> lessons) {
-        for (int i = 0; i < lessons.size() - 1; i++) {
-            for (int j = i + 1; j < lessons.size(); j++) {
-                if (lessons.get(i).isSameLesson(lessons.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     //// util methods

@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.tuitione.model.lesson.Lesson.ENROLLMENT_MESSAGE_CONSTRAINT;
+import static seedu.tuitione.model.lesson.Lesson.STUDENT_NOT_ENROLLED;
 import static seedu.tuitione.testutil.Assert.assertThrows;
 
 import java.time.DayOfWeek;
@@ -111,10 +113,52 @@ public class LessonTest {
     }
 
     @Test
+    public void updateStudent_previouslyEnrolledStudent() {
+        StudentBuilder sb = new StudentBuilder().withGrade(defaultLesson.getGrade().value);
+        Student student = sb.build();
+        defaultLesson.enrollStudent(student);
+
+        // mock we edit a student details (i.e. name)
+        Student editedStudent = sb.withName("Edited Name Here").build();
+        defaultLesson.updateStudent(student, editedStudent);
+        assertTrue(editedStudent.containsLesson(defaultLesson));
+        assertFalse(student.containsLesson(defaultLesson));
+
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertEquals(defaultLesson.getStudents().get(0), editedStudent);
+    }
+
+    @Test
+    public void updateStudent_notPreviouslyEnrolledStudent_throwsIllegalArgumentException() {
+        StudentBuilder sb = new StudentBuilder().withGrade(defaultLesson.getGrade().value);
+        Student student = sb.build();
+        defaultLesson.enrollStudent(student);
+
+        // we edit a student who has not been enrolled at all
+        Student unrelatedStudent = sb.withName("Edited Name Here").build();
+        String expectedMessage = String.format(STUDENT_NOT_ENROLLED, unrelatedStudent.getName(), defaultLesson);
+        assertThrows(IllegalArgumentException.class, expectedMessage, () ->
+                defaultLesson.updateStudent(unrelatedStudent, unrelatedStudent));
+    }
+
+    @Test
+    public void updateStudent_differentGradeStudent_throwsIllegalArgumentException() {
+        StudentBuilder sb = new StudentBuilder().withGrade(defaultLesson.getGrade().value);
+        Student student = sb.build();
+        defaultLesson.enrollStudent(student);
+
+        // we edit a student to have a different grade
+        Student wrongGradeStudent = sb.withGrade("P5").build();
+        String expectedMessage = String.format(ENROLLMENT_MESSAGE_CONSTRAINT, wrongGradeStudent.getName());
+        assertThrows(IllegalArgumentException.class, expectedMessage, () ->
+                defaultLesson.updateStudent(student, wrongGradeStudent));
+    }
+
+    @Test
     public void removeStudent() {
         Student toRemove = new StudentBuilder().build();
         // student not present
-        String notPresentMessage = String.format(Lesson.STUDENT_NOT_ENROLLED, toRemove.getName(), defaultLesson);
+        String notPresentMessage = String.format(STUDENT_NOT_ENROLLED, toRemove.getName(), defaultLesson);
         assertThrows(IllegalArgumentException.class, notPresentMessage, () -> defaultLesson.unenrollStudent(toRemove));
         assertEquals(0, defaultLesson.getLessonSize());
 
