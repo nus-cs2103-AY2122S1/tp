@@ -152,13 +152,11 @@ public class ParserUtil {
     public static Set<Remark> parseRemarks(Collection<String> remarks) throws ParseException {
         requireNonNull(remarks);
         final Set<Remark> remarkSet = new HashSet<>();
-        int i = 0;
         for (String remarkName : remarks) {
-            if (i == LIMIT_REMARK) {
+            if (remarkSet.size() == LIMIT_REMARK) {
                 break;
             }
             remarkSet.add(parseRemark(remarkName));
-            i++;
         }
         return remarkSet;
     }
