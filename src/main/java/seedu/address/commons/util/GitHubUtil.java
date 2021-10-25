@@ -42,8 +42,18 @@ public class GitHubUtil {
                     .build();
             HttpResponse<String> httpResponse = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
 
+            if (httpResponse.statusCode() == 403) {
+                logger.severe("Call Limit Reached: " + httpResponse.statusCode());
+                return null;
+            }
+
+            if (httpResponse.statusCode() == 404) {
+                logger.severe("User Not Found: " + httpResponse.statusCode());
+                return null;
+            }
+
             if (httpResponse.statusCode() != 200) {
-                logger.severe("Server responded with error code " + httpResponse.statusCode());
+                logger.severe("Server responded with Error Code: " + httpResponse.statusCode());
                 return null;
             }
 
