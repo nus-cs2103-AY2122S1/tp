@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_ZERO_BASED_INDEX;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddParticipantToEventByIndexCommand;
 import seedu.address.logic.commands.RemoveNextOfKinCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,7 +14,7 @@ public class RemoveNextOfKinParser implements Parser<RemoveNextOfKinCommand> {
 
         if (sections.length != 3) {
             throw new ParseException(String.format(
-                    MESSAGE_INVALID_COMMAND_FORMAT, AddParticipantToEventByIndexCommand.MESSAGE_USAGE));
+                    MESSAGE_INVALID_COMMAND_FORMAT, RemoveNextOfKinCommand.MESSAGE_USAGE));
         }
 
         try {
