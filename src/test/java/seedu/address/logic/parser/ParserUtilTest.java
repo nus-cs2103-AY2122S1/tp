@@ -54,7 +54,7 @@ public class ParserUtilTest {
     private static final String INVALID_TASK_TAG = "SG100";
 
     private static final String VALID_LABEL = "Order cloth";
-    private static final String VALID_DATE = "19 September 2021";
+    private static final String VALID_DATE = "2021-09-19";
     private static final String VALID_TASK_TAG = "SO100";
 
     private static final String INVALID_CUSTOMER = "";

@@ -41,7 +41,7 @@ class AddTaskCommandTest {
         modelStub = new ModelStubAcceptingTaskAdded();
         modelStub.addOrder(validOrder);
         validTask = new Task(new Label("test label"),
-                new Date("test date"), new TaskTag("SO" + validOrder.getId()));
+                new Date("1918-10-12"), new TaskTag("SO" + validOrder.getId()));
         commandResult = new AddTaskCommand(validTask).execute(modelStub);
 
         assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
@@ -51,7 +51,7 @@ class AddTaskCommandTest {
 
     @Test
     public void execute_taskDeclinedByModel_throwsCommandException() {
-        Task validTask = new Task(new Label("test label"), new Date("test date"), new TaskTag("SO1"));
+        Task validTask = new Task(new Label("test label"), new Date("1918-10-12"), new TaskTag("SO1"));
         AddTaskCommand addTaskCommand = new AddTaskCommand(validTask);
         ModelStub modelStub = new ModelStubAcceptingTaskAdded();
 

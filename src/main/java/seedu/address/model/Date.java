@@ -4,25 +4,36 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
-import seedu.address.logic.parser.exceptions.ParseException;
 
 public class Date implements Comparable<Date> {
     public static final String MESSAGE_CONSTRAINTS =
             "The date should be specified in the yyyy-mm-dd format";
 
-    public final String parsedDate;
+    public final String dateString;
+    public final LocalDate date;
 
     /**
      * Constructs a {@code Date}
      *
-     * @param date A valid date for a task.
+     * @param dateString A valid dateString for a task.
      */
-    public Date(String date) {
-        requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_CONSTRAINTS);
-        parsedDate = date;
+    public Date(String dateString) {
+        requireNonNull(dateString);
+        checkArgument(isValidDate(dateString), MESSAGE_CONSTRAINTS);
+        this.dateString = dateString;
+        this.date = parseDate(dateString);
+    }
+
+    /**
+     * Parses the given dateString String.
+     *
+     * @return LocalDate object corresponding to the given time.
+     * @throws DateTimeParseException if the dateString is incorrectly formatted.
+     */
+    public static LocalDate parseDate(String dateString) {
+        return LocalDate.parse(dateString);
     }
 
     /**
@@ -40,39 +51,35 @@ public class Date implements Comparable<Date> {
         }
     }
 
+    /**
+     * Formats LocalDate date into the "MMM d yyyy" format
+     *
+     * @param date LocalDate to be formatted.
+     * @return String formatted LocalDate.
+     */
+    public static String getFormattedDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+    }
+
     @Override
     public String toString() {
-        return parsedDate;
+        return getFormattedDate(date);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Date
-                && parsedDate.equals(((Date) other).parsedDate));
-    }
-
-    /**
-     * Parse the given date.
-     *
-     * @return LocalDate object corresponding to the given time.
-     * @throws DateTimeParseException if the date is incorrectly formatted.
-     */
-    public static LocalDate parseDate(String date) throws ParseException {
-        try {
-            return LocalDate.parse(date);
-        } catch (DateTimeParseException e) {
-            throw new ParseException(".");
-        }
+                && dateString.equals(((Date) other).dateString));
     }
 
     @Override
     public int hashCode() {
-        return parsedDate.hashCode();
+        return dateString.hashCode();
     }
 
     @Override
     public int compareTo(Date o) {
-        return LocalDate.parse(parsedDate).compareTo(LocalDate.parse(o.parsedDate));
+        return date.compareTo(LocalDate.parse(o.dateString));
     }
 }
