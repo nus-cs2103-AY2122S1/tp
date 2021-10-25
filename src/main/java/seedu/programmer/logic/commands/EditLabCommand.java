@@ -7,12 +7,11 @@ import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 
 import java.util.List;
 
-import seedu.programmer.commons.core.Messages;
-import seedu.programmer.commons.core.index.Index;
 import seedu.programmer.logic.commands.exceptions.CommandException;
 import seedu.programmer.model.Model;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+
 
 /**
  * Adds a lab with total score and default score for all the students in the list.
@@ -33,17 +32,34 @@ public class EditLabCommand extends Command {
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Student Updated: %1$s";
 
-    private final Index targetIndex;
-    private final Double score;
-    private final Lab result;
+    private final String newTitle;
+    private final Double total;
+    private final Lab original;
 
     /**
-     * @param result the lab result to be added.
+     * @param original the lab to be edited.
      * */
-    public EditLabCommand(Index targetIndex, Lab result, Double score) {
-        this.targetIndex = targetIndex;
-        this.result = result;
-        this.score = score;
+    public EditLabCommand(Lab original, String newTitle, Double total) {
+        this.original = original;
+        this.newTitle = newTitle;
+        this.total = total;
+    }
+    /**
+     * @param original the lab to be edited.
+     * */
+    public EditLabCommand(Lab original, Double total) {
+        this.original = original;
+        this.total = total;
+        this.newTitle = null;
+    }
+
+    /**
+     * @param original the lab to be edited.
+     * */
+    public EditLabCommand(Lab original, String newTitle) {
+        this.original = original;
+        this.newTitle = newTitle;
+        this.total = null;
     }
 
     @Override
@@ -51,24 +67,22 @@ public class EditLabCommand extends Command {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        for (Student std : lastShownList) {
+            Student target = std;
+            target.editLabInfo(original, newTitle, total);
+            model.setStudent(target, std);
         }
 
-        Student target = lastShownList.get(targetIndex.getZeroBased());
-        Student replacement = target.copy();
-        replacement.editLabResult(result, score);
-
-        model.setStudent(target, replacement);
-        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
+        return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, original));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EditLabCommand// instanceof handles nulls
-                && targetIndex.equals(((EditLabCommand) other).targetIndex)
-                && result.equals(((EditLabCommand) other).result)); // state check
+                && original.equals(((EditLabCommand) other).original)); // state check
     }
+
+
 }
 
