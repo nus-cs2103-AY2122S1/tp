@@ -14,8 +14,9 @@ import safeforhall.model.Model;
 import safeforhall.model.event.Event;
 
 public class DeleteEventCommand extends Command {
-    public static final String COMMAND_WORD = "delete";
 
+    public static final String COMMAND_WORD = "delete";
+    public static final String PARAMETERS = "INDEXES ";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the events identified by the index number used in the displayed event list.\n"
             + "Parameters: INDEXES (positive integers, separated by a space)\n"

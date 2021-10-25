@@ -25,8 +25,9 @@ import safeforhall.model.event.Venue;
  * Edits the details of an existing event in the address book.
  */
 public class EditEventCommand extends Command {
-    public static final String COMMAND_WORD = "edit";
 
+    public static final String COMMAND_WORD = "edit";
+    public static final String PARAMETERS = "INDEX (positive integers only) [n/NAME] [d/DATE] [v/VENUE] [c/CAPACITY]";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed events list. "
             + "Existing values will be overwritten by the input values.\n"

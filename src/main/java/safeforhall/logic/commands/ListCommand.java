@@ -20,7 +20,7 @@ import safeforhall.model.person.Person;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
+    public static final String PARAMETERS = "k/KEYWORD d1/DATE d2/DATE";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists residents whose ART collection or "
             + "FET tests are due within the range of the given date or the range of the 2 dates given.\n"
             + "Parameters: "
