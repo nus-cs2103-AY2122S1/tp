@@ -97,11 +97,28 @@ public interface Model {
      */
     Summary getSummary();
 
+    /**
+     * Updates the address book history with the latest address book.
+     */
+    void commit();
+
+    /**
+     * Returns true if undo operation is possible.
+     */
     boolean isUndoable();
 
+    /**
+     * Returns true if redo operation is possible.
+     */
     boolean isRedoable();
 
+    /**
+     * Undoes the last changes made to the contact list.
+     */
     void undo();
 
+    /**
+     * Redoes the last changes undid by the undo command.
+     */
     void redo();
 }
