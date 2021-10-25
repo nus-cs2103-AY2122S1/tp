@@ -19,6 +19,7 @@ public class ListCommandParserTest {
 
         // no prefix means list all
         assertParseSuccess(parser, "", listCommandAll);
+        assertParseSuccess(parser, "abc", listCommandAll);
     }
 
     @Test
@@ -28,6 +29,11 @@ public class ListCommandParserTest {
 
         assertParseSuccess(parser, String.format(" %s", PREFIX_INCOMING_MONTH), listCommandNextMonth);
         assertParseSuccess(parser, String.format(" %s", PREFIX_INCOMING_WEEK), listCommandNextWeek);
+
+        // with extra strings that follow -> accept
+        assertParseSuccess(parser, String.format(" %s 123", PREFIX_INCOMING_MONTH), listCommandNextMonth);
+        assertParseSuccess(parser, String.format("abc %s", PREFIX_INCOMING_WEEK), listCommandNextWeek);
+
     }
 
     @Test
@@ -37,15 +43,5 @@ public class ListCommandParserTest {
         // both flag -> invalid
         assertParseFailure(parser,
                 String.format(" %s %s", PREFIX_INCOMING_MONTH, PREFIX_INCOMING_WEEK), expectedMessage);
-    }
-
-    @Test
-    public void parser_extraArgs_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
-
-        String argsTrailingExtra = String.format(" %s123", PREFIX_INCOMING_WEEK);
-        String argsPrecedingExtra = String.format("abc %s", PREFIX_INCOMING_WEEK);
-        assertParseFailure(parser, argsTrailingExtra, expectedMessage);
-        assertParseFailure(parser, argsPrecedingExtra, expectedMessage);
     }
 }
