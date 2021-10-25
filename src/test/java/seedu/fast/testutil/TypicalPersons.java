@@ -97,6 +97,11 @@ public class TypicalPersons {
             .withTags(PriorityTag.LowPriority.NAME).withRemark("What's DN?")
             .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).withAppointmentCount(INITIAL_COUNT).build();
 
+    public static final Person CAVE = new PersonBuilder().withName("CAVE JOHNSON")
+        .withPhone("92292299").withEmail("cave@johnson.com").withAddress("Badwater")
+        .withTags(PriorityTag.MediumPriority.NAME).withRemark("Heavy")
+        .withAppointment(NO_APPT, NO_APPT_TIME, NO_APPT_VENUE).withAppointmentCount(INITIAL_COUNT).build();
+
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalPersons() {} // prevents instantiation

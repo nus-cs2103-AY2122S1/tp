@@ -27,7 +27,7 @@ public abstract class StatsWindowData {
          * Constructs a new InvestmentPlanData.
          */
         public InvestmentPlanData(int lifeCount, int motorCount, int travelCount, int healthCount,
-                           int propertyCount, int investmentCount, int savingsCount) {
+                                  int propertyCount, int investmentCount, int savingsCount) {
 
             counts.put(InvestmentPlanTag.LifeInsurance.NAME, lifeCount);
             counts.put(InvestmentPlanTag.MotorInsurance.NAME, motorCount);
@@ -39,6 +39,7 @@ public abstract class StatsWindowData {
 
         }
 
+        // For tie-breakers, the max name is not fixed
         public String getMaxName() {
             return Collections.max(counts.entrySet(), HashMap.Entry.comparingByValue()).getKey();
         }
@@ -102,8 +103,20 @@ public abstract class StatsWindowData {
             counts.put(PriorityTag.LowPriority.NAME, lowCount);
         }
 
+        // Priorities High > Medium > Low
         public String getMaxName() {
-            return Collections.max(counts.entrySet(), HashMap.Entry.comparingByValue()).getKey();
+            int maxValue = this.getMaxValue();
+            if (this.getHighCount() == maxValue) {
+                return PriorityTag.HighPriority.NAME;
+            }
+            if (this.getMediumCount() == maxValue) {
+                return PriorityTag.MediumPriority.NAME;
+            }
+            if (this.getLowCount() == maxValue) {
+                return PriorityTag.LowPriority.NAME;
+            } else {
+                return "";
+            }
         }
 
         public int getMaxValue() {
