@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Lesson;
 
 public class LessonCard extends UiPart<Region> {
@@ -24,6 +25,8 @@ public class LessonCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label endDate;
+    @FXML
     private Label time;
     @FXML
     private Label rates;
@@ -38,11 +41,15 @@ public class LessonCard extends UiPart<Region> {
         this.lesson = lesson;
         lessonId.setText(displayedIndex + ". ");
         title.setText(lesson.getSubject() + " (" + lesson.getTypeOfLesson() + ")");
-        date.setText("Date: " + lesson.getDisplayDate().value);
+        date.setText("Date: " + lesson.getDisplayDate().toString());
+        if (lesson.getEndDate().equals(Date.MAX_DATE)) {
+            endDate.setManaged(false);
+        }
+        endDate.setText("Ends on: " + lesson.getEndDate().toString());
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());
         lesson.getHomework().stream()
-            .sorted(Comparator.comparing(homework -> homework.description))
+            .sorted(Comparator.comparing(homework -> homework.toString()))
             .forEach(homework -> homeworkList.getChildren()
                 .add(homeworkLabel(homework.toString())));
     }
