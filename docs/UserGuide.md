@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-![Banner](images/Banner.png)
+![Banner](images/banner.png)
 
 Dash is a personal planner app which offers unparalleled speed using text-based input. It supports both management of
 tasks and contacts. Dash is tailored to the needs of students, who must keep track of a slew of different deadlines and
