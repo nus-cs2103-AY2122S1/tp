@@ -8,9 +8,9 @@ import seedu.address.model.Model;
 /**
  * Switches to the customer view in the application.
  */
-public class CustomerCommand extends Command {
+public class ListCustomerCommand extends Command {
 
-    public static final String COMMAND_WORD = "customer";
+    public static final String COMMAND_WORD = "listc";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to customer view and shows all customers.\n"
             + "Example: " + COMMAND_WORD;

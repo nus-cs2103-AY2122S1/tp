@@ -359,7 +359,7 @@
 
 #allergies .label {
     -fx-text-fill: white;
-    -fx-background-color: #FF0000;
+    -fx-background-color: #CD5C5C;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
@@ -368,7 +368,7 @@
 
 #specialRequests .label {
     -fx-text-fill: white;
-    -fx-background-color: #006400;
+    -fx-background-color: #2E8B57;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
@@ -377,7 +377,7 @@
 
 #shifts .label {
     -fx-text-fill: white;
-    -fx-background-color: #008AC4;
+    -fx-background-color: #A0522D;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;
@@ -387,7 +387,7 @@
 
 #tags .label {
     -fx-text-fill: white;
-    -fx-background-color: #00008B;
+    -fx-background-color: #4682B4;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

@@ -38,7 +38,7 @@ public class SupplierUtil {
         sb.append(PREFIX_ADDRESS + supplier.getAddress().value + " ");
         supplier.getTags().stream().forEach(s -> sb.append(PREFIX_TAG + s.tagName + " "));
         sb.append(PREFIX_SUPPLY_TYPE + supplier.getSupplyType().supplyType + " ");
-        sb.append(PREFIX_DELIVERY_DETAILS + supplier.getDeliveryDetails().toString() + " ");
+        sb.append(PREFIX_DELIVERY_DETAILS + supplier.getDeliveryDetails().getUnformattedDeliveryDetailsString());
         return sb.toString();
     }
 
@@ -54,7 +54,7 @@ public class SupplierUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                sb.append(PREFIX_TAG).append(" ");
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
@@ -62,7 +62,7 @@ public class SupplierUtil {
         descriptor.getSupplyType().ifPresent(st ->
                 sb.append(PREFIX_SUPPLY_TYPE).append(st.supplyType).append(" "));
         descriptor.getDeliveryDetails().ifPresent(dd ->
-                sb.append(PREFIX_DELIVERY_DETAILS).append(dd.toString()).append(" "));
+                sb.append(PREFIX_DELIVERY_DETAILS).append(dd.getUnformattedDeliveryDetailsString()).append(" "));
         return sb.toString();
     }
 }

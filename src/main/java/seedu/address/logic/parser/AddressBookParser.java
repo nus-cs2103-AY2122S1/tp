@@ -12,7 +12,6 @@ import seedu.address.logic.commands.AddSupplierCommand;
 import seedu.address.logic.commands.CheckCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CustomerCommand;
 import seedu.address.logic.commands.DeleteCustomerCommand;
 import seedu.address.logic.commands.DeleteEmployeeCommand;
 import seedu.address.logic.commands.DeleteReservationCommand;
@@ -20,17 +19,18 @@ import seedu.address.logic.commands.DeleteSupplierCommand;
 import seedu.address.logic.commands.EditCustomerCommand;
 import seedu.address.logic.commands.EditEmployeeCommand;
 import seedu.address.logic.commands.EditSupplierCommand;
-import seedu.address.logic.commands.EmployeeCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCustomerCommand;
 import seedu.address.logic.commands.FindEmployeeCommand;
 import seedu.address.logic.commands.FindSupplierCommand;
 import seedu.address.logic.commands.GetCustomerReservingCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ReservationCommand;
+import seedu.address.logic.commands.ListCustomerCommand;
+import seedu.address.logic.commands.ListEmployeeCommand;
+import seedu.address.logic.commands.ListReservationCommand;
+import seedu.address.logic.commands.ListSupplierCommand;
 import seedu.address.logic.commands.ReserveCommand;
 import seedu.address.logic.commands.SetTablesCommand;
-import seedu.address.logic.commands.SupplierCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -56,10 +56,10 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
+        switch (commandWord) {
         case AddCustomerCommand.COMMAND_WORD:
             return new AddCustomerCommandParser().parse(arguments);
 
@@ -114,17 +114,17 @@ public class AddressBookParser {
         case SetTablesCommand.COMMAND_WORD:
             return new SetTablesCommandParser().parse(arguments);
 
-        case CustomerCommand.COMMAND_WORD:
-            return new CustomerCommand();
+        case ListCustomerCommand.COMMAND_WORD:
+            return new ListCustomerCommand();
 
-        case EmployeeCommand.COMMAND_WORD:
-            return new EmployeeCommand();
+        case ListEmployeeCommand.COMMAND_WORD:
+            return new ListEmployeeCommand();
 
-        case SupplierCommand.COMMAND_WORD:
-            return new SupplierCommand();
+        case ListSupplierCommand.COMMAND_WORD:
+            return new ListSupplierCommand();
 
-        case ReservationCommand.COMMAND_WORD:
-            return new ReservationCommand();
+        case ListReservationCommand.COMMAND_WORD:
+            return new ListReservationCommand();
 
         case ReserveCommand.COMMAND_WORD:
             return new ReserveCommandParser().parse(arguments);
@@ -136,5 +136,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

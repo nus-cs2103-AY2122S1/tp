@@ -8,9 +8,9 @@ import seedu.address.model.Model;
 /**
  * Switches to the supplier view in the application.
  */
-public class SupplierCommand extends Command {
+public class ListSupplierCommand extends Command {
 
-    public static final String COMMAND_WORD = "supplier";
+    public static final String COMMAND_WORD = "lists";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to supplier view and shows all suppliers.\n"
             + "Example: " + COMMAND_WORD;
