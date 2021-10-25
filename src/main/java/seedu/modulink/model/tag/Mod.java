@@ -52,6 +52,18 @@ public class Mod {
                 && modName.equals(((Mod) other).modName)); // state check
     }
 
+    /**
+     * Checks if the statuses of two {@Code Mod} objects are the same.
+     *
+     * @param other Other object to compare
+     * @return boolean to indicate if statuses are the same or not.
+     */
+    public boolean equalsStatus(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Mod // instanceof handles nulls
+                && status.equals(((Mod) other).status)); // state check
+    }
+
     @Override
     public int hashCode() {
         return modName.hashCode();

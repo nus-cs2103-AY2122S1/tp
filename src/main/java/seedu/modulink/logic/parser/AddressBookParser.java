@@ -13,6 +13,7 @@ import seedu.modulink.logic.commands.Command;
 import seedu.modulink.logic.commands.CreateCommand;
 import seedu.modulink.logic.commands.DeleteCommand;
 import seedu.modulink.logic.commands.EditCommand;
+import seedu.modulink.logic.commands.EditGroupStatusCommand;
 import seedu.modulink.logic.commands.ExitCommand;
 import seedu.modulink.logic.commands.FilterCommand;
 import seedu.modulink.logic.commands.FindCommand;
@@ -89,6 +90,9 @@ public class AddressBookParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case EditGroupStatusCommand.COMMAND_WORD:
+            return new EditGroupStatusCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
