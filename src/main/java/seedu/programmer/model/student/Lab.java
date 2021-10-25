@@ -1,14 +1,14 @@
 package seedu.programmer.model.student;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.commons.util.AppUtil.checkArgument;
 
 public class Lab {
+
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
+
     private String title;
     private Double actualScore;
     private Double totalScore;
-
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
 
     /**
      * @param title the title of the lab
@@ -16,7 +16,6 @@ public class Lab {
      * @param totalScore the total score
      * */
     public Lab(String title, Double actualScore, Double totalScore) {
-        requireNonNull(actualScore);
         requireNonNull(totalScore);
         this.title = title;
         this.actualScore = actualScore;

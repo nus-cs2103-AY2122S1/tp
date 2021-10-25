@@ -18,14 +18,14 @@ import seedu.programmer.logic.commands.exceptions.CommandException;
  */
 public class Student {
 
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
+
     // Identity fields
     private final Name name;
     private final StudentId studentId;
     private final ClassId classId;
     private final Email email;
     private ObservableList<Lab> labResultList;
-
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
 
     /**
      * Every field must be present and not null.
