@@ -205,7 +205,8 @@ Format: `tag -d INDEX t/TAG`
 
 
 Examples:
-`tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
+* `tag -d 1 t/Covid` deletes the *Covid* tag from first patient.
+![deletePatientTag](images/deletePatientTag.png)
 
 ---
 
@@ -246,8 +247,10 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [dob/DATE_OF_BIRTH]
   specifying any tags after it.
 
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
+* `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower dob/20/07/1964 t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
+* After executing `edit 2 n/Betsy Crower dob/20/07/1964 t/`:
+![editDoctor](images/editDoctor.png)
 
 ### Adding a remark to a doctor's information : `remark`
 
@@ -351,8 +354,9 @@ You can find the PATIENT_INDEX or DOCTOR_INDEX by toggling to the patient/doctor
 </div>
 
 Examples:
-*  `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
-*  `appt -e 2 s/30/12/2021 10:30 dur/20` Edits the starting date/time and duration of the 2nd appointment to be `30/12/2021 10:30` and `20 minutes` respectively.
+* `appt -e 1 p/2 r/Blood test` Edits the patient and remark of the 1st appointment to be the `second patient` in the patient list and `Blood test` respectively.
+
+![editAppointment](images/editAppointment.png)
 
 ### Deleting an appointment: `appt -d`
 
