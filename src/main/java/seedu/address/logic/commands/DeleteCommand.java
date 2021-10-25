@@ -9,6 +9,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Appointment;
 import seedu.address.ui.UiManager;
 
 /**
@@ -49,6 +50,10 @@ public class DeleteCommand extends Command {
 
         if (UiManager.showDeleteDialogAndWait(relatedAppointment)) {
             model.deletePerson(personToDelete);
+            List<Appointment> affectedAppointments = model.getRelatedAppointments(personToDelete);
+            for (Appointment appointment : affectedAppointments) {
+                appointment.removeClient(personToDelete);
+            }
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         } else {
             return new CommandResult("No person deleted.");

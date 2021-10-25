@@ -62,6 +62,14 @@ public class Appointment {
     }
 
     /**
+     * Remove a given person from the client list of this {@code Appointment}.
+     * @param personToRemove the given person to be removed
+     */
+    public void removeClient(Person personToRemove) {
+        this.clients.remove(personToRemove);
+    }
+
+    /**
      * Returns true if both Appointments have the same fields.
      */
     @Override

@@ -154,7 +154,8 @@ public class ModelManager implements Model {
     /**
      * Returns the Observablelist of {@Code Appointment} that is related to the {@Code Person}
      */
-    private List<Appointment> getRelatedAppointments(Person client) {
+    @Override
+    public List<Appointment> getRelatedAppointments(Person client) {
         return schedule.getRelatedAppointments(client);
     }
 
