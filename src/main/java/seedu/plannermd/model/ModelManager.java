@@ -48,7 +48,6 @@ public class ModelManager implements Model {
         // Wrap the FilteredList over a SortedList such that list is always sorted
         // UniqueAppointmentList is sorted using its natural ordering as per Appointment#compareTo
         filteredAppointments = new FilteredList<>(this.plannerMd.getAppointmentList().sorted());
-        updateFilteredAppointmentList(PREDICATE_SHOW_TODAY_APPOINTMENT);
     }
 
     public ModelManager() {
@@ -193,7 +192,6 @@ public class ModelManager implements Model {
     @Override
     public void addAppointment(Appointment appointment) {
         plannerMd.addAppointment(appointment);
-        updateFilteredAppointmentList(PREDICATE_SHOW_TODAY_APPOINTMENT);
     }
 
     @Override

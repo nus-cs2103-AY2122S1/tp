@@ -13,7 +13,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.plannermd.logic.commands.apptcommand.AppointmentCommand;
-import seedu.plannermd.logic.commands.apptcommand.DeleteAppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.ListAppointmentCommand;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
 

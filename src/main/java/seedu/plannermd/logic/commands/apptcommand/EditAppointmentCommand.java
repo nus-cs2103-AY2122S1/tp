@@ -7,7 +7,6 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_PATIENT;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
-import static seedu.plannermd.model.Model.PREDICATE_SHOW_ALL_APPOINTMENTS;
 
 import java.util.List;
 import java.util.Optional;
@@ -89,7 +88,6 @@ public class EditAppointmentCommand extends AppointmentCommand {
         }
 
         model.setAppointment(appointmentToEdit, editedAppointment);
-        model.updateFilteredAppointmentList(PREDICATE_SHOW_ALL_APPOINTMENTS);
         return new CommandResult(String.format(MESSAGE_EDIT_APPOINTMENT_SUCCESS, editedAppointment));
     }
 
