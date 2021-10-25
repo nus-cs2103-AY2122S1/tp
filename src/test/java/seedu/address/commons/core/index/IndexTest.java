@@ -83,4 +83,11 @@ public class IndexTest {
         assertEquals(1, sortDescending.compare(firstIndex, secondIndex));
         assertEquals(0, sortDescending.compare(firstIndex, firstIndex));
     }
+    
+    public void hashCode_sameNumber_sameHashCode() {
+        Index oneIndex1 = Index.fromOneBased(1);
+        Index oneIndex2 = Index.fromOneBased(1);
+
+        assertEquals(oneIndex1.hashCode(), oneIndex2.hashCode());
+    }
 }
