@@ -2,17 +2,17 @@
 layout: page
 title: User Guide
 ---
+![Banner](images/Banner.png)
+## <u>Quick start</u>
 
-## Quick start
-
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
 1. Download the latest `dash.jar` from here (not available yet).
 
 1. Copy the file to the folder you want to use as the _home folder_ for Dash.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
-   ![Ui](images/Ui.png)
+   ![Ui](images/UG-00.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -21,17 +21,17 @@ title: User Guide
 
 * **`tasks`** : Switches to the tasks tab.
 
-* **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`**`3` : Adds a contact with specified details.
+* **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`** : Adds a contact with specified details.
 
 * **`clear`** : Deletes all contacts.
 
 * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## <u>Features</u>
 
 <div markdown="block" class="alert alert-info">
 
@@ -57,28 +57,35 @@ title: User Guide
 
 </div>
 
-### General
+### <u>General</u>
 
+![Switching Tabs](images/UG-01.png)
 #### Switch Tabs: [contacts] or [tasks] or [help]
 
 Switches to another specified tab.
 
 Format: ```contacts or tasks or help```
+<br />
+<br />
 
 #### Exiting the program: [exit]
 
 Exits the program.
 
 Format: ```exit```
+<br />
+<br />
 
-### Contacts
+### <u>Contacts</u>
 
+![Adding a Contact](images/UG-02.png)
 #### Adding contact details of a person: [add]
 
 Adds a contact to the address book. Only name is compulsory during creation.
 
 Format: ```add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
+![Editing a Contact](images/UG-04.png)
 #### Editing contact details: [edit]
 
 Replaces the contact details of the contact at the chosen index with the new details.
@@ -101,6 +108,7 @@ Format: ```delete INDEX```
 * The index refers to the index number shown in the contact list.
 * The index must be a positive integer i.e. 1, 2, 3, …
 
+![Finding a Contact](images/UG-09.png)
 #### Finding contact through searching name: [find]
 
 Finds all contacts whose name matches the search term.
@@ -112,6 +120,7 @@ Format: ```find NAME```
 * Only the name is searched.
 * Persons matching all keywords will be returned (i.e. AND search). e.g. Hans Bo will return only Hans Bo and Hans Bo the Second. It will not return Hans Gruber, Bo Yang
 
+![Finding a Contact](images/UG-06.png)
 #### Finding contact through searching a specific field: [find]
 
 Finds all contacts whose parameter (number, email, etc) matches the search term.
@@ -136,8 +145,9 @@ Deletes all contacts.
 
 Format: ```clear```
 
-### Tasks (When on tasks tab)
+### <u>Tasks (When on tasks tab)</u>
 
+![Adding a Task](images/UG-03.png)
 #### Adding a task: [add]
 
 Adds a task to the task list. Only task description is compulsory during creation.
@@ -148,6 +158,7 @@ Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
 on the side bar to the right.
 
+![Editing a Task](images/UG-05.png)
 #### Editing task details: [edit]
 
 Replaces the details of the task at the given index with the new details.
@@ -164,22 +175,25 @@ Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PER
 * An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
   on the side bar to the right.
-  
+
+![Tagging a Task](images/UG-10.png)
 #### Tagging a task: [tag]
 
 Adds extra tags to a task without wiping the old tags.
 
-Format: ```tag [t/TAG]...```
+Format: ```tag INDEX [t/TAG]...```
 
+![Assigning people to a Task](images/UG-11.png)
 #### Assigning people to a task: [assign]
 
 Assigns extra people to a task without wiping people already assigned.
 
-Format: ```assign [p/PERSON INDEX]...```
+Format: ```assign INDEX [p/PERSON INDEX]...```
 
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
   on the side bar to the right.
 
+![Completing a Task](images/UG-12.png)
 #### Completing a task: [complete]
 
 Completes the task at the chosen index.
@@ -200,6 +214,7 @@ Format: ```delete INDEX```
 * The index refers to the index number shown in the task list
 * The index must be a positive integer i.e. 1, 2, 3, …
 
+![Finding a Task](images/UG-08.png)
 #### Finding task through task description: [find]
 
 Finds all tasks with descriptions that match the search term.
@@ -213,6 +228,7 @@ Format: ```find DESCRIPTION```
   e.g. ```Do this``` will return only ```Do this``` and ```Do this (very important!!!)```. 
   It will not return ```Do maybe?``` or ```This doesn’t matter```
 
+![Finding a Task](images/UG-07.png)
 #### Finding task through searching a specific field: [find]
 
 Finds all tasks whose parameter (date/time, people, etc) matches the search term.
@@ -223,7 +239,8 @@ Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG].
 * Tasks matching all keywords will be returned (i.e. AND search). e.g. ```find dt/1900 t/homework``` will return
   only tasks who both have time 1900 AND the tag homework.
   It will not return contacts with different times, even if they contain the tag homework.
-  
+
+![Finding upcoming Tasks](images/UG-13.png)
 #### Find all upcoming tasks: [upcoming]
 
 Finds all tasks whose date/time are after the current date/time.
@@ -244,8 +261,10 @@ Deletes all tasks.
 
 Format: ```clear```
 
-### Handling Date and Time of tasks
+### <u>Handling Date and Time of tasks</u>
 
+<div markdown="block" class="alert alert-info">
+**:information_source: Notes about specifying date and time:**<br>
 A task can have Date only or both Date and Time.
 
 `add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
@@ -259,7 +278,7 @@ A task can have Date only or both Date and Time.
 * When only Date is specified in the `edit` command, a task will only have its Date changed to the specified Date.
 * When only Time is specified in the `edit` command, a task will only have its Time changed to the specified Time.
 * When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
-
+</div>
 
 ### Date Formats
 
@@ -279,7 +298,7 @@ Format | Example
 **hh:mm a** | `10:00 PM`, `02:00 AM`
 
 
-## Command summary
+## <u>Command summary</u>
 
 ### General
 
@@ -287,32 +306,32 @@ Action | Format
 --------|------------------
 **Contacts** | `contacts`
 **Tasks** | `tasks`
-**Exit** | `exit`
 **Help** | `help`
+**Exit** | `exit`
 
 ### Contact Tab
 
 Action | Format
 --------|------------------
-**Add** | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]`
+**Add** | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...`
 **Delete** | `delete INDEX`
 **Find** | `find NAME`
 **Find** | `find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
+**List** | `list`
 **Clear** | `clear`
 
 ### Tasks Tab
 
 Action | Format
 --------|------------------
-**Add** | `add d/DESCRIPTION [t/TAG]`
-**Edit** | `edit INDEX [d/DESCRIPTION] [t/TAG]`
+**Add** | `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
+**Edit** | `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
 **Delete** | `delete INDEX`
+**Tag** | `tag INDEX [t/TAG]...`
+**Assign** | `assign INDEX [p/PERSON INDEX]...`
+**Complete** | `complete INDEX`
 **Find** | `find DESCRIPTION`
-**Find** | `find [t/TAG]`
+**Find** | `find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
 **Clear** | `clear`
-
-## UI Mockup
-![Ui01](images/Mockup01.png)
-
-![Ui02](images/Mockup02.png)
+**Upcoming** | `upcoming`
