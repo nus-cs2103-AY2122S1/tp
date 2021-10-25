@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.task;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
@@ -6,7 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MEMBER_ID;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.TlistCommand;
+import seedu.address.logic.commands.task.TlistCommand;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class TlistCommandParser implements Parser<TlistCommand> {

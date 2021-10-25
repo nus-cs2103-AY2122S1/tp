@@ -6,23 +6,31 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EaddCommand;
-import seedu.address.logic.commands.EdeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ElistCommand;
+import seedu.address.logic.commands.member.DeleteCommand;
+import seedu.address.logic.commands.event.EaddCommand;
+import seedu.address.logic.commands.event.EdeleteCommand;
+import seedu.address.logic.commands.member.EditCommand;
+import seedu.address.logic.commands.event.ElistCommand;
 import seedu.address.logic.commands.ElistmCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.member.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.PaddCommand;
-import seedu.address.logic.commands.TaddCommand;
-import seedu.address.logic.commands.TdelCommand;
-import seedu.address.logic.commands.TlistCommand;
+import seedu.address.logic.commands.member.ListCommand;
+import seedu.address.logic.commands.member.PaddCommand;
+import seedu.address.logic.commands.task.TaddCommand;
+import seedu.address.logic.commands.task.TdelCommand;
+import seedu.address.logic.commands.task.TlistCommand;
+import seedu.address.logic.parser.event.EaddCommandParser;
+import seedu.address.logic.parser.event.EdeleteCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.member.DeleteCommandParser;
+import seedu.address.logic.parser.member.EditCommandParser;
+import seedu.address.logic.parser.member.FindCommandParser;
+import seedu.address.logic.parser.member.PaddCommandParser;
+import seedu.address.logic.parser.task.TaddCommandParser;
+import seedu.address.logic.parser.task.TdelCommandParser;
+import seedu.address.logic.parser.task.TlistCommandParser;
 
 /**
  * Parses user input.
@@ -59,9 +67,6 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);

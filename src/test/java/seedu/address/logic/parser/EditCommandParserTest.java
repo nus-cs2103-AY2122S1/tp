@@ -34,8 +34,9 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_MEMBER;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.EditCommand;
+import seedu.address.logic.commands.member.EditCommand.EditMemberDescriptor;
+import seedu.address.logic.parser.member.EditCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;
