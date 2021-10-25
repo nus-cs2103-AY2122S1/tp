@@ -88,6 +88,9 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
+* Words that are ***bold & Italicised*** refers to a stored prefix value. 
+  e.g. ***Name*** could refer to the value `John` stored as a name in the application.
+
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
@@ -104,6 +107,10 @@ descriptions of the usage of each component in RecruitIn under [Usages](#usages)
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
   
 * Sections with headings appended with ***{Advanced}*** are intended for the advanced user.
+
+* Duplicate applicants are not allowed. For two applicants to be duplicate, 
+they must have the same ***Contact Number*** and ***Email***. An error message will show if you attempt to
+`add` or `edit` applicants in a manner that will lead to duplicate stored applicants.
 
 </div>
 
@@ -192,7 +199,6 @@ Examples:
     * INTERVIEW inputs such as `2021-10-22, 13:00` and `2022-01-30, 3:00` are acceptable.
     * INTERVIEW inputs such as `morning`, `2021.10.21` and `2021-10-22 13:00` are not acceptable.  
 
-
 ### Listing all applicants : `list`
 
 Shows a list of all applicants in RecruitIn.
@@ -219,7 +225,6 @@ Examples:
 
 #### Prefix Input Specifications ***{Advanced}***:
 
-**Note**: Italicised word refers to a stored prefix value. e.g. ***Name*** could refer to the value `John` stored as a name in the application.
 * ##### NAME `n/`
   * A NAME is considered matching with a ***Name*** only if **at least 1** keyword is equal to **at least 1** word in the ***Name***.
   * All keywords provided as NAME input must comply with input specifications for add given [**here**](#name-n).
