@@ -22,6 +22,7 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     // Time fields
     private final Date startDate;
+    private final Date endDate;
     private final TimeRange timeRange;
 
     // Data fields
@@ -40,9 +41,10 @@ public abstract class Lesson implements Comparable<Lesson> {
      * @param homework Homework for the lesson.
      * @param rates Cost per hour for the lesson.
      */
-    public Lesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
+    public Lesson(Date date, Date endDate, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
         requireAllNonNull(date, timeRange, subject, homework);
         this.startDate = date;
+        this.endDate = endDate;
         this.timeRange = timeRange;
         this.subject = subject;
         this.homework.addAll(homework);
@@ -51,6 +53,10 @@ public abstract class Lesson implements Comparable<Lesson> {
 
     public Date getStartDate() {
         return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     public LocalDate getLocalDate() {
@@ -132,6 +138,7 @@ public abstract class Lesson implements Comparable<Lesson> {
 
         Lesson otherLesson = (Lesson) other;
         return otherLesson.getStartDate().equals(getStartDate())
+            && otherLesson.getEndDate().equals(getEndDate())
             && otherLesson.getTimeRange().equals(getTimeRange())
             && otherLesson.getSubject().equals(getSubject())
             && otherLesson.getHomework().equals(getHomework())
@@ -142,7 +149,7 @@ public abstract class Lesson implements Comparable<Lesson> {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(startDate, timeRange, subject, homework);
+        return Objects.hash(startDate, endDate, timeRange, subject, homework);
     }
 
     @Override

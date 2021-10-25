@@ -10,14 +10,14 @@ public class MakeUpLesson extends Lesson {
     /**
      * Every field must be present and not null.
      *
-     * @param date Date of lesson.
+     * @param date Start and end Date of lesson.
      * @param timeRange Time range of the lesson.
      * @param subject Subject of the lesson.
      * @param homework Homework for the lesson.
      * @param rates Cost per lesson for the lesson.
      */
     public MakeUpLesson(Date date, TimeRange timeRange, Subject subject, Set<Homework> homework, LessonRates rates) {
-        super(date, timeRange, subject, homework, rates);
+        super(date, date, timeRange, subject, homework, rates);
     }
 
     /**

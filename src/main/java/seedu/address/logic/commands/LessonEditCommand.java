@@ -111,6 +111,11 @@ public class LessonEditCommand extends UndoableCommand {
             throw new CommandException(MESSAGE_CLASHING_LESSON);
         }
 
+        // Check if user attempted to edit type of lesson
+        if (editedLesson.isRecurring() != toEdit.isRecurring()) {
+            throw new CommandException(MESSAGE_ATTEMPT_TO_EDIT_TYPE);
+        }
+
         personAfterLessonEdit = createEditedPerson(personBeforeLessonEdit, toEdit, editedLesson);
 
         model.setPerson(personBeforeLessonEdit, personAfterLessonEdit);
@@ -142,6 +147,8 @@ public class LessonEditCommand extends UndoableCommand {
 
         Date updatedDate = editLessonDescriptor.getDate()
                 .orElse(lessonToEdit.getStartDate());
+        Date updatedEndDate = editLessonDescriptor.getEndDate()
+                .orElse(lessonToEdit.getEndDate());
         TimeRange updatedTimeRange = editLessonDescriptor.getTimeRange()
                 .orElse(lessonToEdit.getTimeRange());
         Subject updatedSubject = editLessonDescriptor.getSubject()
@@ -151,7 +158,8 @@ public class LessonEditCommand extends UndoableCommand {
         LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
 
         return lessonToEdit.isRecurring()
-                ? new RecurringLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate)
+                ? new RecurringLesson(updatedDate, updatedEndDate, updatedTimeRange, updatedSubject,
+                        updatedHomeworkSet, updatedRate)
                 : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate);
     }
 
@@ -200,12 +208,13 @@ public class LessonEditCommand extends UndoableCommand {
     public static class EditLessonDescriptor {
 
         private Date date;
+        private Date endDate;
         private TimeRange timeRange;
         private Subject subject;
         private Set<Homework> homeworkSet;
         private LessonRates rate;
 
-        // Absence of isRecurring boolean field as changes to type of lesson is disallowed.
+        private boolean isRecurring;
 
         public EditLessonDescriptor() {}
 
@@ -234,6 +243,14 @@ public class LessonEditCommand extends UndoableCommand {
 
         public void setDate(Date date) {
             this.date = date;
+        }
+
+        public Optional<Date> getEndDate() {
+            return Optional.ofNullable(endDate);
+        }
+
+        public void setEndDate(Date date) {
+            this.endDate = date;
         }
 
         public Optional<TimeRange> getTimeRange() {
@@ -277,6 +294,14 @@ public class LessonEditCommand extends UndoableCommand {
 
         public void setRate(LessonRates rate) {
             this.rate = rate;
+        }
+
+        public boolean getIsRecurring() {
+            return isRecurring;
+        }
+
+        public void setRecurring(boolean bool) {
+            isRecurring = bool;
         }
 
         @Override

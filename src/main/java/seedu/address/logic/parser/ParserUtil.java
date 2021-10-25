@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -206,15 +207,19 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
-    public static Date parseDate(String date) throws ParseException {
-        requireNonNull(date);
+    public static Optional<Date> parseDate(String date) throws ParseException {
+
+        if (date == null || date.strip().isEmpty()) {
+            return Optional.empty();
+        }
         String strippedDate = date.strip();
+        assert date != null;
         // remove leading zeroes
         strippedDate = StringUtil.stripLeadingZeroes(strippedDate);
         if (!Date.isValidDate(strippedDate)) {
             throw new ParseException(Date.MESSAGE_CONSTRAINTS);
         }
-        return new Date(strippedDate);
+        return Optional.ofNullable(new Date(strippedDate));
     }
 
     /**

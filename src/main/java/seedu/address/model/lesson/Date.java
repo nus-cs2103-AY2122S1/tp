@@ -17,7 +17,6 @@ import java.util.Locale;
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class Date implements Comparable<Date> {
-
     public static final String MESSAGE_CONSTRAINTS = "Dates should be of the format dd MMM yyyy "
             + "and adhere to the following constraints:\n"
             + "1. dd and yyyy are numerical characters.\n"
@@ -33,6 +32,8 @@ public class Date implements Comparable<Date> {
             .appendPattern("d MMM uuuu")
             .toFormatter(Locale.ENGLISH)
             .withResolverStyle(ResolverStyle.STRICT);
+
+    public static final Date MAX_DATE = new Date(LocalDate.MAX.format(Date.FORMATTER));
 
     public final String value;
 
@@ -83,7 +84,8 @@ public class Date implements Comparable<Date> {
      * @return newDate The date of the same day on the week that has yet to pass.
      */
     public Date updateDate() {
-        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+        LocalDate laterDate = getLocalDate().isAfter(LocalDate.now()) ? getLocalDate() : LocalDate.now();
+        LocalDate updatedDate = laterDate.with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
         Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }

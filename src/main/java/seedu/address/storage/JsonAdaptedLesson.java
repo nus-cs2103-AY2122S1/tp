@@ -28,6 +28,7 @@ class JsonAdaptedLesson {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Lesson's %s field is missing!";
 
     private final String date;
+    private final String endDate;
     private final String timeRange;
     private final String subject;
     private final String lessonRates;
@@ -38,12 +39,13 @@ class JsonAdaptedLesson {
      * Constructs a {@code JsonAdaptedLesson} with the given Lesson details.
      */
     @JsonCreator
-    public JsonAdaptedLesson(@JsonProperty("date") String date,
+    public JsonAdaptedLesson(@JsonProperty("date") String date, @JsonProperty("endDate") String endDate,
                              @JsonProperty("timeRange") String timeRange,
                              @JsonProperty("subject") String subject,
                              @JsonProperty("homework") List<JsonAdaptedHomework> homework,
                              @JsonProperty("lessonRates") String lessonRates) {
         this.date = date;
+        this.endDate = endDate;
         this.timeRange = timeRange;
         this.subject = subject;
         this.lessonRates = lessonRates;
@@ -58,6 +60,7 @@ class JsonAdaptedLesson {
      */
     public JsonAdaptedLesson(Lesson source) {
         date = source.getStartDate().value;
+        endDate = source.getEndDate().value;
         timeRange = source.getTimeRange().value;
         subject = source.getSubject().subject;
         lessonRates = source.getLessonRates().value;
@@ -79,13 +82,14 @@ class JsonAdaptedLesson {
             lessonHomework.add(hw.toModelType());
         }
 
-        if (date == null) {
+        if (date == null || endDate == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Date.isValidDate(date)) {
+        if (!Date.isValidDate(date) || !Date.isValidDate(endDate)) {
             throw new IllegalValueException(Date.MESSAGE_CONSTRAINTS);
         }
         final Date modelDate = new Date(StringUtil.stripLeadingZeroes(date));
+        final Date modelEndDate = new Date(StringUtil.stripLeadingZeroes(endDate));
 
         if (timeRange == null) {
             throw new IllegalValueException(
@@ -115,7 +119,7 @@ class JsonAdaptedLesson {
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
         return isRecurring
-                ? new RecurringLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates)
+                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates)
                 : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates);
     }
 }

@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 
 /**
@@ -36,11 +38,6 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
                 PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
 
-        // don't allow changes to type of lesson
-        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            throw new ParseException(LessonEditCommand.MESSAGE_ATTEMPT_TO_EDIT_TYPE);
-        }
-
         Index[] indices;
 
         try {
@@ -54,8 +51,18 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
 
         EditLessonDescriptor editLessonDescriptor = new EditLessonDescriptor();
 
+        if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
+            Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
+                .orElse(Date.MAX_DATE);
+            editLessonDescriptor.setEndDate(endDate);
+        }
+
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editLessonDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+            if (date.isEmpty()) {
+                throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+            }
+            editLessonDescriptor.setDate(date.get());
         }
 
         if (argMultimap.getValue(PREFIX_TIME).isPresent()) {

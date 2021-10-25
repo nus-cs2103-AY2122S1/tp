@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -50,7 +52,11 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LessonAddCommand.MESSAGE_USAGE), pe);
         }
 
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Optional<Date> date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        if (date.isEmpty()) {
+            throw new ParseException(Date.MESSAGE_CONSTRAINTS);
+        }
+
         TimeRange timeRange = ParserUtil.parseTimeRange(argMultimap.getValue(PREFIX_TIME).get());
         Subject subject = ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get());
         Set<Homework> homework = ParserUtil.parseHomeworkList(argMultimap.getAllValues(PREFIX_HOMEWORK));
@@ -58,11 +64,15 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
 
         // Is a recurring lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
-            RecurringLesson lesson = new RecurringLesson(date, timeRange, subject, homework, lessonRates);
+            // If no date is specified, use max date
+            Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
+                .orElse(Date.MAX_DATE);
+
+            RecurringLesson lesson = new RecurringLesson(date.get(), endDate, timeRange, subject, homework, lessonRates);
             return new LessonAddCommand(index, lesson);
         }
 
-        MakeUpLesson lesson = new MakeUpLesson(date, timeRange, subject, homework, lessonRates);
+        MakeUpLesson lesson = new MakeUpLesson(date.get(), timeRange, subject, homework, lessonRates);
         return new LessonAddCommand(index, lesson);
     }
 

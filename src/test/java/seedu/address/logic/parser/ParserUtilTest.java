@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -264,8 +265,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDate_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate((String) null));
+    public void parseDate_null_doesNotThrowNullPointerException() {
+        assertDoesNotThrow(() -> ParserUtil.parseDate((String) null));
     }
 
     @Test
@@ -276,14 +277,14 @@ public class ParserUtilTest {
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
         Date expectedDate = new Date(VALID_DATE);
-        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE).orElse(Date.MAX_DATE));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
         Date expectedDate = new Date(VALID_DATE);
-        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace).orElse(Date.MAX_DATE));
     }
 
     @Test
