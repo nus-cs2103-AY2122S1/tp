@@ -18,7 +18,6 @@ public class PersonComparator implements Comparator<Person> {
 
     @Override
     public int compare(Person p1, Person p2) {
-        System.out.print(prefix + " " + p1.getName() + " " + p2.getName() + " " + p1.compare(p2, prefix) + "\n");
         return p1.compare(p2, prefix);
     }
 }
