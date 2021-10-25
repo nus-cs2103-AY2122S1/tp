@@ -15,7 +15,6 @@ import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.item.Item;
@@ -34,7 +33,7 @@ public class ModelManager implements Model {
 
     private final Inventory inventory;
     private final UserPrefs userPrefs;
-    private final FilteredList<Item> filteredItems;
+    private final DisplayList displayList;
     private Optional<Order> optionalOrder;
     private Set<TransactionRecord> transactions;
 
@@ -51,7 +50,7 @@ public class ModelManager implements Model {
 
         this.inventory = new Inventory(inventory);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredItems = new FilteredList<>(this.inventory.getItemList());
+        displayList = new DisplayList(this.inventory.getItemList());
         optionalOrder = Optional.empty();
         transactions = new HashSet<>();
     }
@@ -164,7 +163,7 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Item> getFilteredItemList() {
-        return filteredItems;
+        return displayList.getFilteredItemList();
     }
 
     @Override
@@ -175,16 +174,17 @@ public class ModelManager implements Model {
         if (currentDisplay != mode) {
             switch(mode) {
             case DISPLAY_INVENTORY:
-                filteredItems.setAll(this.inventory.getItemList());
+                displayList.setItems(this.inventory.getItemList());
                 break;
             case DISPLAY_OPEN_ORDER:
-                filteredItems.setAll(this.optionalOrder.get().getOrderItems());
+                displayList.setItems(this.optionalOrder.get().getOrderItems());
+                break;
             }
             currentDisplay = mode;
         }
 
         // Update predicate
-        filteredItems.setPredicate(predicate);
+        displayList.setPredicate(predicate);
     }
 
     @Override
@@ -208,7 +208,7 @@ public class ModelManager implements Model {
         ModelManager other = (ModelManager) obj;
         return inventory.equals(other.inventory)
                 && userPrefs.equals(other.userPrefs)
-                && filteredItems.equals(other.filteredItems);
+                && displayList.equals(other.displayList);
     }
 
     // ============== Order related methods ========================
