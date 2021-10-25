@@ -118,7 +118,7 @@ public class ItemDescriptor {
      */
     public boolean isMatch(Item item) {
         // Return true if name matches
-        if (name != null && name.equals(item.getName())) {
+        if (name != null && name.hasSameLower(item.getName())) {
             return true;
         }
         // Return true if id matches

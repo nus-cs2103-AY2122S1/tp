@@ -44,6 +44,13 @@ public class Name {
         return fullName;
     }
 
+    /**
+     * Returns true if the other name has the same lower case string as own lowercase string.
+     */
+    public boolean hasSameLower(Name other) {
+        return fullName.toLowerCase().equals(other.fullName.toLowerCase());
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
