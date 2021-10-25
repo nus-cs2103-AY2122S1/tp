@@ -25,12 +25,10 @@ public class TagLabel extends UiPart<Region> {
         super(FXML);
 
         label.setText(value);
-        label.setOnMouseClicked(
-                event -> {
-                    commandBox.setCommand(
-                            FilterCommand.COMMAND_WORD + " " + PREFIX_TAG.getPrefix() + tag.getName()
-                    );
-                }
+        label.setOnMouseClicked(event -> {
+                commandBox.setCommand(FilterCommand.COMMAND_WORD + " " + PREFIX_TAG.getPrefix() + tag.getName()
+                );
+            }
         );
     }
 }
