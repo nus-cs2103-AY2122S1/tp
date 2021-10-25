@@ -62,7 +62,7 @@ public class ImportCommand extends Command {
      */
     public ImportCommand(String filename) {
         this.filename = filename;
-        this.filepath = Paths.get("data" + filename + ".csv");
+        this.filepath = Paths.get("data", filename + ".csv");
     }
 
     /**
