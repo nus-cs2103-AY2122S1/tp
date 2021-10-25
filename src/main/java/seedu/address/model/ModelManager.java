@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.exceptions.OperationException;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +24,8 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+
+    private final OperationManager operations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        this.operations = new OperationManager(this);
     }
 
     public ModelManager() {
@@ -47,7 +51,7 @@ public class ModelManager implements Model {
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+        runOperation(() -> this.userPrefs.resetData(userPrefs));
     }
 
     @Override
@@ -63,7 +67,7 @@ public class ModelManager implements Model {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         requireNonNull(guiSettings);
-        userPrefs.setGuiSettings(guiSettings);
+        runOperation(() -> userPrefs.setGuiSettings(guiSettings));
     }
 
     @Override
@@ -74,14 +78,14 @@ public class ModelManager implements Model {
     @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        runOperation(() -> userPrefs.setAddressBookFilePath(addressBookFilePath));
     }
 
     //=========== AddressBook ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+        runOperation(() -> this.addressBook.resetData(addressBook));
     }
 
     @Override
@@ -97,19 +101,21 @@ public class ModelManager implements Model {
 
     @Override
     public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+        runOperation(() -> addressBook.removePerson(target));
     }
 
     @Override
     public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        runOperation(() -> {
+            addressBook.addPerson(person);
+            updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        });
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-        addressBook.setPerson(target, editedPerson);
+        runOperation(() -> addressBook.setPerson(target, editedPerson));
     }
 
     @Override
@@ -117,6 +123,25 @@ public class ModelManager implements Model {
         requireNonNull(filePath);
         addressBook.mergeFile(filePath);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void undo() throws OperationException {
+        operations.undo();
+    }
+
+    @Override
+    public void redo() throws OperationException {
+        operations.redo();
+    }
+
+    /**
+     * Convenience method that runs operations through the OperationManager
+     * to allow for undoing and redoing.
+     * @param op operation to be executed
+     */
+    private void runOperation(Runnable op) {
+        operations.run(op);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -133,17 +158,7 @@ public class ModelManager implements Model {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
-    }
-
-    @Override
-    public boolean undo() {
-        return false;
-    }
-
-    @Override
-    public boolean redo() {
-        return false;
+        runOperation(() -> filteredPersons.setPredicate(predicate));
     }
 
     @Override
@@ -164,5 +179,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

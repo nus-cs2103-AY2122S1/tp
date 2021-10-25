@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.exceptions.OperationException;
 import seedu.address.model.person.Person;
 
 /**
@@ -91,10 +92,10 @@ public interface Model {
     /**
      * Undoes the last command executed. Returns true if undo was executed successfully.
      */
-    boolean undo();
+    void undo() throws OperationException;
 
     /**
      * Redoes the last command undid, if available.  Returns true if redo was executed successfully.
      */
-    boolean redo();
+    void redo() throws OperationException;
 }

@@ -1,20 +1,26 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.exceptions.OperationException;
 
+/**
+ * Reverses the last command that modified data
+ */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
-    private static final String MESSAGE_UNDO_SUCCESS = "Last command undid";
+    private static final String MESSAGE_UNDO_SUCCESS = "Undo successful";
     private static final String MESSAGE_UNDO_FAILURE = "No commands to undo";
 
     @Override
-    public CommandResult execute(Model model) throws CommandException, DataConversionException {
-        boolean isSuccessful = model.undo();
+    public CommandResult execute(Model model) {
+        try {
+            model.undo();
+        } catch (OperationException e) {
+            return new CommandResult(MESSAGE_UNDO_FAILURE);
+        }
 
-        return new CommandResult(isSuccessful ? MESSAGE_UNDO_SUCCESS : MESSAGE_UNDO_FAILURE);
+        return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 }
