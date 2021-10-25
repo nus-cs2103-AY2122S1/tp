@@ -330,17 +330,17 @@ Step 3. Connections displays any person whose name contains `David` **while also
     * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of Find.
     * Cons: More code.
 
-### FindOr feature
+### FindAny feature
 
 #### Implementation
 
-The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindOrCommand#Execute`
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindAnyCommand#Execute`
 
-Given below is an example usage scenario and how the Find mechanism behaves at each step.
+Given below is an example usage scenario and how the FindAny mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
 
-Step 2. The user executes `findOr n/David n/Henry t/friend t/footnall` to search for a matching entry.
+Step 2. The user executes `findAny n/David n/Henry t/friend t/footnall` to search for a matching entry.
 
 Step 3. Connections displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
 tagged to **either** `friend` **or** `football`.
@@ -353,8 +353,8 @@ tagged to **either** `friend` **or** `football`.
     * Pros: Straightforward.
     * Cons: Introduces additional and unnecessary complexities to ModelManager.
 
-* **Alternative 2 (current choice):** Create a FindOrPredicate to store Name(s) and Tag(s)
-    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of FindOr.
+* **Alternative 2 (current choice):** Create a FindAnyPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of FindAny.
     * Cons: More code.
 
 
@@ -606,7 +606,7 @@ Future versions user stories
     
       Use case resumes at step 2.
     
-* 2c. FindOr command is used
+* 2c. FindAny command is used
     
     * 2c1. Connections return all entries that matches any of the search terms provided.
 
