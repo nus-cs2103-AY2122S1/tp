@@ -22,7 +22,7 @@ import seedu.address.model.PositionBook;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
-import seedu.address.model.position.TitleContainsKeywordsPredicate;
+import seedu.address.model.position.TitleContainsAllKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditPositionDescriptorBuilder;
 
@@ -174,7 +174,7 @@ public class CommandTestUtil {
         Position position = model.getFilteredPositionList().get(targetIndex.getZeroBased());
         final String[] splitName = position.getTitle().fullTitle.split("\\s+");
 
-        model.updateFilteredPositionList(new TitleContainsKeywordsPredicate(Arrays.asList(splitName)));
+        model.updateFilteredPositionList(new TitleContainsAllKeywordsPredicate(Arrays.asList(splitName)));
 
         assertEquals(1, model.getFilteredPositionList().size());
     }

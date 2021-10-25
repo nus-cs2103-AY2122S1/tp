@@ -5,17 +5,15 @@ import seedu.address.model.applicant.Applicant;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.position.Description;
 import seedu.address.model.position.Position;
-import seedu.address.model.position.Title;
+
 
 public class ApplicantBuilder {
     public static final String DEFAULT_NAME = "Amy Bee";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Position DEFAULT_POSITION = new Position(new Title("software engineer"),
-            new Description("This is a placeholder description"));
+    public static final Position DEFAULT_POSITION = new PositionBuilder().build();
 
     private Name name;
     private Phone phone;

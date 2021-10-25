@@ -8,10 +8,10 @@ import seedu.address.commons.util.StringUtil;
 /**
  * Tests that a {@code Position}'s {@code Name} matches any of the keywords given.
  */
-public class TitleContainsKeywordsPredicate implements Predicate<Position> {
+public class TitleContainsAllKeywordsPredicate implements Predicate<Position> {
     private final List<String> keywords;
 
-    public TitleContainsKeywordsPredicate(List<String> keywords) {
+    public TitleContainsAllKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
