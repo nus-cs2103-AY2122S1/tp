@@ -224,7 +224,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_sortm() throws Exception {
-        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " by/name", aliases) instanceof SortMemberCommand);
+        assertTrue(parser.parseCommand(SortMemberCommand.COMMAND_WORD + " by/name", aliases)
+                instanceof SortMemberCommand);
     }
 
     @Test
