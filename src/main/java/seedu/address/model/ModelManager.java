@@ -22,6 +22,8 @@ import seedu.address.model.client.ClientId;
 import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.AddressBookList;
+import seedu.address.storage.ThemeList;
+import seedu.address.ui.ThemeType;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -37,6 +39,7 @@ public class ModelManager implements Model {
     private final SortedList<NextMeeting> sortedNextMeetings;
     private final FilteredList<Tag> filteredTags;
     private final AddressBookList addressBookList;
+    private final ThemeList themeList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -49,7 +52,8 @@ public class ModelManager implements Model {
 
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        addressBookList = new AddressBookList(userPrefs.getAddressBookDirectory());
+        this.addressBookList = new AddressBookList(userPrefs.getAddressBookDirectory());
+        this.themeList = new ThemeList(userPrefs.getThemeType());
 
         sortedClients = new SortedList<>(this.addressBook.getClientList());
         filteredClients = new FilteredList<>(sortedClients);
@@ -113,6 +117,22 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Path> getAddressBookList() {
         return this.addressBookList.getAddressBookList();
+    }
+
+    @Override
+    public ObservableList<ThemeType> getThemeList() {
+        return this.themeList.getThemeList();
+    }
+
+    @Override
+    public void setTheme(ThemeType theme) {
+        this.userPrefs.setTheme(theme);
+        this.themeList.setTheme(theme);
+    }
+
+    @Override
+    public ThemeType getTheme() {
+        return this.themeList.getTheme();
     }
 
     @Override

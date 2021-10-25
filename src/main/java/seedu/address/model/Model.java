@@ -14,6 +14,7 @@ import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
 import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
+import seedu.address.ui.ThemeType;
 
 /**
  * The API of the Model component.
@@ -64,6 +65,22 @@ public interface Model {
      * Returns the list of all address book file path.
      */
     ObservableList<Path> getAddressBookList();
+
+    /**
+     * Returns the current filtered list of theme.
+     */
+    ObservableList<ThemeType> getThemeList();
+
+    /**
+     * Sets the theme of the GUI.
+     */
+    void setTheme(ThemeType theme);
+
+
+    /**
+     * Returns the current theme for the GUI.
+     */
+    ThemeType getTheme();
 
     /**
      * Returns the user prefs' address book file path wrapped object.
