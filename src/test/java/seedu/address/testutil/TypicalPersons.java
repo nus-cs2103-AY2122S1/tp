@@ -41,7 +41,7 @@ public class TypicalPersons {
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
             .withPhone("8482424").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
-            .withPhone("8482131").build();
+            .withPhone("8482131").withTodayAttendance(false).withTotalAttendance(0).build();
     public static final Person CHOO = new PersonBuilder().withName("Choo")
             .withPhone("90909090").build();
     public static final Person DOO = new PersonBuilder().withName("Doo")

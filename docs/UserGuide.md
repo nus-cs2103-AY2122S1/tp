@@ -254,9 +254,18 @@ Format: `listm`
 
 ### Sorting member list: `sortm`
 
-Shows a list of all members, sorted alphabetically
+Shows a list of your members, sorted in your specified order.
 
-Format: `sortm`
+Format: `sortm by/SORT_ORDER`
+
+* `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
+
+* `SORT_ORDER` is case-insensitive. Eg. `Name` will match `name`
+* Valid `SORT_ORDER`: `name` ,`tag`
+
+Examples:
+* `sortm by/name` returns a member list sorted by name.
+* `sortm by/tag` returns a member list sorted by number of tags, in descending order.
 
 ### Finding a member `findm`
 
@@ -539,6 +548,7 @@ Action | Format, Examples
 **Find facility**| `findf KEYWORD` <br> eg. `findf Clementi`, `findf Utown`
 **Help**| `help`
 **List members**| `listm`
+**Sort members**| `sortm by/SORT_ORDER` <br> eg. `sortm by/name`, `sortm by/tag`
 **List facilities**| `listf`
 **Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
