@@ -5,8 +5,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
+import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.person.Person;
 
 /**
@@ -115,6 +117,14 @@ public interface Model {
      * The contact must not already exist in the Folder.
      */
     public void addContactToFolder(Person target, FolderName name);
+
+    /**
+     * Deletes a contact from its Folder.
+     * The contact must already exist in the Folder amd
+     * Folder must already exist as well.
+     */
+    public void deletePersonFromFolder(Index index, Folder folder) throws
+            ContactIndexOutOfBoundsInFolderException;
 
     /**
      * Checks and returns true if folder already exists

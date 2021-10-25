@@ -30,8 +30,8 @@ public class EditFolderNameCommand extends Command {
 
     /**
      * Creates a EditFolderNameCommand to update
-     * the specified {@code folderToRename} to the
-     * {@code folderToReplace} name.
+     * the specified {@code oldFolder} to the
+     * {@code newFolder} name.
      * @param oldFolder folder name to be changed.
      * @param newFolder new folder to replace old folder.
      */
