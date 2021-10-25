@@ -46,7 +46,7 @@ import seedu.plannermd.model.person.Email;
 import seedu.plannermd.model.person.Name;
 import seedu.plannermd.model.person.Phone;
 import seedu.plannermd.model.tag.Tag;
-import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
+import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 
 public class EditDoctorCommandParserTest {
 
