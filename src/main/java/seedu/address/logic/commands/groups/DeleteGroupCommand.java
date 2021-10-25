@@ -43,6 +43,7 @@ public class DeleteGroupCommand extends Command {
         }
         Group groupToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteGroup(groupToDelete);
+        model.updateLessonWithAttendeesList();
         return new CommandResult(String.format(MESSAGE_DELETE_GROUP_SUCCESS, groupToDelete));
     }
 

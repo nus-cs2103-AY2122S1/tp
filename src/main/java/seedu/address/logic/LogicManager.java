@@ -2,9 +2,9 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -15,9 +15,11 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.task.Task;
 import seedu.address.storage.Storage;
 
@@ -68,7 +70,6 @@ public class LogicManager implements Logic {
         return model.getFilteredPersonList();
     }
 
-    @Override
     public ObservableList<Task> getFilteredTaskList() {
         return model.getFilteredTaskList();
     }
@@ -79,8 +80,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
+    public ObservableList<LessonWithAttendees> getSortedLessonsWithAttendees() {
         return model.getSortedLessonsWithAttendees();
+    }
+
+    @Override
+    public ObservableValue<ViewingType> getViewingType() {
+        return model.getViewingType();
+    }
+
+    @Override
+    public ObservableValue<PersonWithDetails> getViewingPersonWithDetails() {
+        return model.getViewingPersonWithDetails();
     }
 
     @Override

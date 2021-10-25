@@ -55,8 +55,8 @@ public class GroupAddLessonCommand extends Command {
                 throw new CommandException(person.getAttendeeDetails() + CANNOT_ASSIGN_MESSAGE);
             }
         }
-
         model.setGroup(group, groupWithLesson);
+        model.updateLessonWithAttendeesList();
         model.updateFilteredGroupList(Model.PREDICATE_SHOW_ALL_GROUPS);
         return new CommandResult(String.format(ADD_LESSON_SUCCESS, lessonToAdd));
     }
