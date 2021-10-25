@@ -168,6 +168,20 @@ public class ModelManager implements Model {
     }
 
     /**
+     * When a person is edited, update all the appointments in the appointment list that contains this person
+     * by replacing the {@Code personToEdit} with the new {@Code editedPerson} instance.
+     * @param personToEdit The person to be edited.
+     * @param editedPerson The new person instance created.
+     */
+    @Override
+    public void updateEditedClientInAppointments(Person personToEdit, Person editedPerson) {
+        List<Appointment> relatedAppointments = getRelatedAppointments(personToEdit);
+        for (Appointment appointment : relatedAppointments) {
+            appointment.removeClient(personToEdit);
+            appointment.addClient(editedPerson);
+        }
+    }
+    /**
      * Returns the Observablelist of {@Code Appointment} that is related to the {@Code Person}
      */
     @Override

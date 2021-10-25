@@ -138,4 +138,6 @@ public interface Model {
      * @return the String representation of the list of appointments that only have this client in its client list.
      */
     String getAppointmentsThatOnlyHaveThisClientAsString(Person client);
+
+    void updateEditedClientInAppointments(Person personToEdit, Person editedPerson);
 }

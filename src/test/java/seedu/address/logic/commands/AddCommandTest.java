@@ -196,6 +196,10 @@ public class AddCommandTest {
         public String getAppointmentsThatOnlyHaveThisClientAsString(Person client) {
             return "";
         }
+
+        @Override
+        public void updateEditedClientInAppointments(Person personToEdit, Person editedPerson) {
+        }
     }
 
     /**
