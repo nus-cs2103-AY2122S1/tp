@@ -89,7 +89,7 @@ public class EditCommand extends Command {
         }
 
         TutorialClass toCheckTutorialClass = new TutorialClass(editedStudent.getClassCode(),
-                new Schedule("dummy"), new HashSet<Tag>());
+                new Schedule("dummy, dummy"), new HashSet<Tag>());
         if (!model.hasTutorialClass(toCheckTutorialClass)) {
             throw new CommandException(MESSAGE_CLASS_NOT_EXIST);
         }
