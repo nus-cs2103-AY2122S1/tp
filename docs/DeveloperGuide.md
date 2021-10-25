@@ -202,7 +202,7 @@ The workflow of the Edit command is shown in the Activity diagram illustrated be
 ![EditActivityDiagram](images/logic/commands/editcommand/EditActivityDiagram.png)
 
 Note:
-- Mass operations can be carried out by inputting multiple indexes after the command `edit`, each separated by a whitespace.
+- Mass operations for residents can be carried out by inputting multiple indexes after the command `edit`, each separated by a whitespace.
 - `Residents` field in `Event` is not editable by `edit` command
 
 #### Design considerations:
