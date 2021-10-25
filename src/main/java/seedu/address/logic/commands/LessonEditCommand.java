@@ -157,7 +157,7 @@ public class LessonEditCommand extends UndoableCommand {
                 .orElse(lessonToEdit.getHomework());
         LessonRates updatedRate = editLessonDescriptor.getRate().orElse(lessonToEdit.getLessonRates());
 
-        return lessonToEdit.isRecurring()
+        return editLessonDescriptor.getIsRecurring()
                 ? new RecurringLesson(updatedDate, updatedEndDate, updatedTimeRange, updatedSubject,
                         updatedHomeworkSet, updatedRate)
                 : new MakeUpLesson(updatedDate, updatedTimeRange, updatedSubject, updatedHomeworkSet, updatedRate);
@@ -234,7 +234,7 @@ public class LessonEditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate);
+            return isRecurring || CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate);
         }
 
         public Optional<Date> getDate() {
