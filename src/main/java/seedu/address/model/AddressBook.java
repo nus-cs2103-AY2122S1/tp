@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 import java.util.Objects;
@@ -64,8 +65,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.tasks.setTasks(tasks);
     }
 
-
-
     /**
      * Replaces the contents of the group list with {@code groups}.
      * {@code groups} must not contain duplicate groups.
@@ -75,11 +74,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the contents of the group list with {@code groups}.
+     * Clears all student data from {@code groups}.
      * {@code groups} must not contain duplicate groups.
      */
-    public void emptyGroups(List<Group> groups) {
-        this.groups.emptyGroups(groups);
+    public void clearStudentsInGroups(List<Group> groups) {
+        this.groups.clearStudentsInGroups(groups);
     }
 
     /**
@@ -175,7 +174,37 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removeStudent(Student key) {
+        requireNonNull(key);
+
         students.remove(key);
+    }
+
+    /**
+     * Removes {@code key} from the {@code group} in the {@code AddressBook}.
+     * {@code key} and {@code group} must exist in the address book.
+     */
+    public void removeStudentFromGroup(Student key, Group group) {
+        requireAllNonNull(key, group);
+        groups.removeStudentFromGroup(key, group);
+    }
+
+    /**
+     * Removes the current group to {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void removeGroupFromStudent(Student key) {
+        requireNonNull(key);
+
+        students.removeGroupFromStudent(key);
+    }
+
+    /**
+     * Removes all groupNames from list of students.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void clearGroupFromStudents(List<Student> students) {
+        requireNonNull(students);
+        this.students.clearGroupFromStudents(students);
     }
 
     //// group-level operations

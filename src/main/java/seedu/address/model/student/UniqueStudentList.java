@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.student.exceptions.DuplicateStudentException;
 import seedu.address.model.student.exceptions.StudentNotFoundException;
 
@@ -76,6 +77,30 @@ public class UniqueStudentList implements Iterable<Student> {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new StudentNotFoundException();
+        }
+    }
+
+    /**
+     * Removes the groupName from the specified {@code student}.
+     * {@code student} must not be null.
+     */
+    public void removeGroupFromStudent(Student student) {
+        requireNonNull(student);
+        Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
+                student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
+                student.getParticipation(), new GroupName());
+
+        setStudent(student, updatedStudent);
+    }
+
+    /**
+     * Clears all groupName fields from {@code students}.
+     * {@code students} students must not contain nulls.
+     */
+    public void clearGroupFromStudents(List<Student> students) {
+        requireAllNonNull(students);
+        for (Student student : students) {
+            removeGroupFromStudent(student);
         }
     }
 

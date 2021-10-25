@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.student.Student;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
@@ -98,15 +99,37 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Replaces the contents of this list with {@code groups}.
-     * {@code groups} must not contain duplicate groups.
+     * Removes all students from all {@code groups}.
+     * {@code groups} must exist in tApp.
      */
-    public void emptyGroups(List<Group> groups) {
+    public void clearStudentsInGroups(List<Group> groups) {
         requireAllNonNull(groups);
         for (Group group : groups) {
             group.removeAllMembers();
         }
         internalList.setAll(groups);
+    }
+
+    /**
+     * Removes a {@code student} from a {@code group}.
+     * {@code student} and {@code group} must exist in the address book.
+     */
+    public void removeStudentFromGroup(Student student, Group group) {
+        requireAllNonNull(student, group);
+
+        int index = internalList.indexOf(group);
+        if (index == -1) {
+            throw new GroupNotFoundException();
+        }
+
+        Group updatedGroup = group;
+        updatedGroup.removeMember(student);
+
+        if (!group.isSameGroup(updatedGroup) && contains(updatedGroup)) {
+            throw new DuplicateGroupException();
+        }
+
+        internalList.set(index, updatedGroup);
     }
 
     /**
