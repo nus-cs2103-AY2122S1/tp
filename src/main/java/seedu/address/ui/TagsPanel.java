@@ -33,14 +33,12 @@ public class TagsPanel extends UiPart<Region> {
         super(FXML);
 
         tagList.stream()
-            .sorted(Comparator.comparing(Tag::getName))
-            .forEach(tag ->
-                {
+                .sorted(Comparator.comparing(Tag::getName))
+                .forEach(tag -> {
                     Label tagLabel = new Label(tag.getName());
                     tags.getChildren().add(tagLabel);
                     tagLabels.put(tag, tagLabel);
-                }
-            );
+                });
 
         tagList.addListener((ListChangeListener<Tag>) change -> {
             while (change.next()) {

@@ -101,5 +101,8 @@ public interface Logic {
      */
     ObservableList<Path> getAddressBookList();
 
+    /**
+     * Returns an unmodifiable view of the filtered list of tags
+     */
     ObservableList<Tag> getFilteredTagList();
 }

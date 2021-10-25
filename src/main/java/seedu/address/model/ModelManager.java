@@ -195,20 +195,12 @@ public class ModelManager implements Model {
     @Override
     public void addTag(Tag tag) {
         addressBook.addTag(tag);
-        // updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
     public Tag getTag(String tagName) {
         requireNonNull(tagName);
         return addressBook.getTag(tagName);
-    }
-
-    @Override
-    public void updateFilteredTagList(Predicate<Tag> predicate) {
-        requireNonNull(predicate);
-        filteredTags.setPredicate(predicate);
-        addressBook.removeUnreferencedTags();
     }
 
     /**
@@ -305,9 +297,9 @@ public class ModelManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return addressBook.equals(other.addressBook)
-            && userPrefs.equals(other.userPrefs)
-            && filteredClients.equals(other.filteredClients)
-            && filteredTags.equals(other.filteredTags)
-            && clientToView.equals(other.clientToView);
+                && userPrefs.equals(other.userPrefs)
+                && filteredClients.equals(other.filteredClients)
+                && filteredTags.equals(other.filteredTags)
+                && clientToView.equals(other.clientToView);
     }
 }

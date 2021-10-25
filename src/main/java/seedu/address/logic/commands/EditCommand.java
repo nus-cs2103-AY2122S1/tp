@@ -47,25 +47,25 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the client identified "
-        + "by the client's ID. "
-        + "Existing values will be overwritten by the input values.\n"
-        + "Parameters: " + " CLIENT ID (must be a positive integer) "
-        + PREFIX_NAME + "NAME "
-        + PREFIX_PHONE + "PHONE "
-        + PREFIX_EMAIL + "EMAIL "
-        + PREFIX_ADDRESS + "ADDRESS "
-        + PREFIX_LASTMET + "LAST MET "
-        + PREFIX_NEXTMEETING + "NEXT MEETING "
-        + PREFIX_CURRENTPLAN + "CURRENTPLAN "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " " + " 1 "
-        + PREFIX_PHONE + "91234567 "
-        + PREFIX_EMAIL + "johndoe@example.com";
+            + "by the client's ID. "
+            + "Existing values will be overwritten by the input values.\n"
+            + "Parameters: " + " CLIENT ID (must be a positive integer) "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_LASTMET + "LAST MET "
+            + PREFIX_NEXTMEETING + "NEXT MEETING "
+            + PREFIX_CURRENTPLAN + "CURRENTPLAN "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " " + " 1 "
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_CLIENT_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_CLIENT = "This operation will result in a"
-        + " duplicate in the address book.";
+            + " duplicate in the address book.";
     public static final String MESSAGE_CHANGE_CLIENTID = "Client's ID cannot be changed.";
 
     private final List<ClientId> clientIds;
@@ -96,9 +96,9 @@ public class EditCommand extends Command {
         Phone updatedPhone = editClientDescriptor.getPhone().orElse(clientToEdit.getPhone());
         Address updatedAddress = editClientDescriptor.getAddress().orElse(clientToEdit.getAddress());
         RiskAppetite updateRiskAppetite = editClientDescriptor.getRiskAppetite()
-            .orElse(clientToEdit.getRiskAppetite());
+                .orElse(clientToEdit.getRiskAppetite());
         DisposableIncome updatedDisposableIncome = editClientDescriptor.getDisposableIncome()
-            .orElse(clientToEdit.getDisposableIncome());
+                .orElse(clientToEdit.getDisposableIncome());
         CurrentPlan updatedCurrentPlan = editClientDescriptor.getCurrentPlan().orElse(clientToEdit.getCurrentPlan());
         LastMet updatedLastMet = editClientDescriptor.getLastMet().orElse(clientToEdit.getLastMet());
         NextMeeting updatedNextMeeting = editClientDescriptor.getNextMeeting().orElse(clientToEdit.getNextMeeting());
@@ -106,7 +106,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editClientDescriptor.getTags().orElse(clientToEdit.getTags());
 
         return new Client(oldClientId, updatedName, updatedPhone, updatedEmail, updatedAddress, updateRiskAppetite,
-            updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
+                updatedDisposableIncome, updatedCurrentPlan, updatedLastMet, updatedNextMeeting, updatedTags);
     }
 
     /**
@@ -127,13 +127,13 @@ public class EditCommand extends Command {
         Set<Tag> oldTags = clientToEdit.getTags();
 
         LastMet updatedLastMet = clientToEdit.getLastMet().getLaterLastMet(
-            clientToEdit.getNextMeeting().convertToLastMet()
+                clientToEdit.getNextMeeting().convertToLastMet()
         );
         NextMeeting updatedNextMeeting = NextMeeting.NULL_MEETING;
 
 
         return new Client(oldClientId, oldName, oldPhone, oldEmail, oldAddress, oldRiskAppetite,
-            oldDisposableIncome, oldCurrentPlan, updatedLastMet, updatedNextMeeting, oldTags);
+                oldDisposableIncome, oldCurrentPlan, updatedLastMet, updatedNextMeeting, oldTags);
     }
 
     @Override
@@ -142,8 +142,8 @@ public class EditCommand extends Command {
 
         List<ClientId> distinctClientIds = clientIds.stream().distinct().collect(Collectors.toList());
         List<ClientId> invalidClientIds = distinctClientIds.stream()
-            .filter(c -> !model.hasClientId(c))
-            .collect(Collectors.toList());
+                .filter(c -> !model.hasClientId(c))
+                .collect(Collectors.toList());
 
         if (!invalidClientIds.isEmpty()) {
             String invalidClientIdsString = joinListToString(invalidClientIds, CLIENTID_DELIMITER);
@@ -178,7 +178,7 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return clientIds.equals(e.clientIds)
-            && editClientDescriptor.equals(e.editClientDescriptor);
+                && editClientDescriptor.equals(e.editClientDescriptor);
     }
 
     /**
@@ -224,7 +224,7 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, riskAppetite, disposableIncome,
-                currentPlan, lastMet, nextMeeting, tags);
+                    currentPlan, lastMet, nextMeeting, tags);
         }
 
         @Override
@@ -243,16 +243,16 @@ public class EditCommand extends Command {
             EditClientDescriptor e = (EditClientDescriptor) other;
 
             return getName().equals(e.getName())
-                && getPhone().equals(e.getPhone())
-                && getEmail().equals(e.getEmail())
-                && getAddress().equals(e.getAddress())
-                && getLastMet().equals(e.getLastMet())
-                && getNextMeeting().equals(e.getNextMeeting())
-                && getCurrentPlan().equals(e.getCurrentPlan())
-                && getDisposableIncome().equals(e.getDisposableIncome())
-                && getRiskAppetite().equals(e.getRiskAppetite())
-                && getNextMeeting().equals(e.getNextMeeting())
-                && getTags().equals(e.getTags());
+                    && getPhone().equals(e.getPhone())
+                    && getEmail().equals(e.getEmail())
+                    && getAddress().equals(e.getAddress())
+                    && getLastMet().equals(e.getLastMet())
+                    && getNextMeeting().equals(e.getNextMeeting())
+                    && getCurrentPlan().equals(e.getCurrentPlan())
+                    && getDisposableIncome().equals(e.getDisposableIncome())
+                    && getRiskAppetite().equals(e.getRiskAppetite())
+                    && getNextMeeting().equals(e.getNextMeeting())
+                    && getTags().equals(e.getTags());
         }
 
         public Optional<Name> getName() {

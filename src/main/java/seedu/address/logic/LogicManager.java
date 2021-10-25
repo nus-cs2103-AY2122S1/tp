@@ -80,23 +80,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Tag> getFilteredTagList() {
-        return model.getFilteredTagList();
-    }
-
-    @Override
     public ObservableList<Client> getFilteredClientList() {
         return model.getFilteredClientList();
     }
 
     @Override
-    public ObservableList<Client> getClientToView() {
-        return model.getClientToView();
+    public ObservableList<NextMeeting> getSortedNextMeetingList() {
+        return model.getSortedNextMeetingList();
     }
 
     @Override
-    public ObservableList<NextMeeting> getSortedNextMeetingList() {
-        return model.getSortedNextMeetingList();
+    public ObservableList<Client> getClientToView() {
+        return model.getClientToView();
     }
 
     @Override
@@ -110,11 +105,6 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Path> getAddressBookList() {
-        return model.getAddressBookList();
-    }
-
-    @Override
     public GuiSettings getGuiSettings() {
         return model.getGuiSettings();
     }
@@ -122,12 +112,6 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
-    }
-
-    @Override
-    public void switchAddressBook(Path filePath) {
-        this.model.setAddressBookFilePath(filePath);
-        this.switchAddressBook();
     }
 
     @Override
@@ -151,6 +135,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public void switchAddressBook(Path filePath) {
+        this.model.setAddressBookFilePath(filePath);
+        this.switchAddressBook();
+    }
+
+    @Override
     public void createAddressBook() throws CommandException {
         Path filePath = getAddressBookFilePath();
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(filePath);
@@ -162,6 +152,15 @@ public class LogicManager implements Logic {
         saveAddressBook();
     }
 
+    @Override
+    public ObservableList<Path> getAddressBookList() {
+        return model.getAddressBookList();
+    }
+
+    @Override
+    public ObservableList<Tag> getFilteredTagList() {
+        return model.getFilteredTagList();
+    }
 
     /**
      * Saves the current Address Book.

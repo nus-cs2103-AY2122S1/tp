@@ -165,14 +165,6 @@ public interface Model {
     Tag getTag(String tagName);
 
     /**
-     * Updates the filter of the filtered tag list to filter by the given {@code predicate}.
-     *
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredTagList(Predicate<Tag> predicate);
-
-
-    /**
      * Returns an unmodifiable view of the filtered client list
      */
     ObservableList<Client> getFilteredClientList();

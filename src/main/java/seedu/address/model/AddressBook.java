@@ -210,7 +210,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeClient(Client key) {
         clients.remove(key);
-        // removeUnreferencedTags();
     }
 
     public void addTag(Tag tag) {
@@ -336,8 +335,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof AddressBook // instanceof handles nulls
-            && clients.equals(((AddressBook) other).clients));
+                || (other instanceof AddressBook // instanceof handles nulls
+                && clients.equals(((AddressBook) other).clients));
     }
 
     @Override

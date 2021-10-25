@@ -89,8 +89,8 @@ class JsonAdaptedClient {
         lastMet = source.getLastMet().dateInString;
         nextMeeting = source.getNextMeeting().toString();
         tagged.addAll(source.getTags().stream()
-            .map(JsonAdaptedTag::new)
-            .collect(Collectors.toList()));
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -137,14 +137,14 @@ class JsonAdaptedClient {
 
         if (nextMeeting == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                NextMeeting.class.getSimpleName()));
+                    NextMeeting.class.getSimpleName()));
         }
         final NextMeeting modelNextMeeting = ParserUtil.parseNextMeeting(nextMeeting);
         modelNextMeeting.setWithWho(modelName);
 
         if (currentPlan == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                CurrentPlan.class.getSimpleName()));
+                    CurrentPlan.class.getSimpleName()));
         }
         final CurrentPlan modelCurrentPlan = new CurrentPlan(currentPlan);
 
@@ -170,7 +170,7 @@ class JsonAdaptedClient {
 
         if (riskAppetite == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                RiskAppetite.class.getSimpleName()));
+                    RiskAppetite.class.getSimpleName()));
         }
 
         if (!RiskAppetite.isValidRiskAppetite(riskAppetite)) {
@@ -181,7 +181,7 @@ class JsonAdaptedClient {
 
         if (disposableIncome == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                DisposableIncome.class.getSimpleName()));
+                    DisposableIncome.class.getSimpleName()));
         }
 
         if (!DisposableIncome.isValidDisposableIncome(disposableIncome)) {
@@ -192,7 +192,7 @@ class JsonAdaptedClient {
 
         final Set<Tag> modelTags = new HashSet<>(clientTags);
         return new Client(modelClientId, modelName, modelPhone, modelEmail, modelAddress, modelRiskAppetite,
-            modelDisposableIncome, modelCurrentPlan, modelLastMet, modelNextMeeting, modelTags);
+                modelDisposableIncome, modelCurrentPlan, modelLastMet, modelNextMeeting, modelTags);
     }
 
 }
