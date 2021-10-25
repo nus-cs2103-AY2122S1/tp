@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -66,9 +65,10 @@ public class LessonAddCommandParser implements Parser<LessonAddCommand> {
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
             // If no date is specified, use max date
             Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
-                .orElse(Date.MAX_DATE);
+                    .orElse(Date.MAX_DATE);
 
-            RecurringLesson lesson = new RecurringLesson(date.get(), endDate, timeRange, subject, homework, lessonRates);
+            RecurringLesson lesson = new RecurringLesson(date.get(), endDate,
+                    timeRange, subject, homework, lessonRates);
             return new LessonAddCommand(index, lesson);
         }
 

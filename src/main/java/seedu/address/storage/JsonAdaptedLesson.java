@@ -119,7 +119,8 @@ class JsonAdaptedLesson {
 
         final Set<Homework> modelHomework = new HashSet<>(lessonHomework);
         return isRecurring
-                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates)
+                ? new RecurringLesson(modelDate, modelEndDate, modelTimeRange,
+                        modelSubject, modelHomework, modelLessonRates)
                 : new MakeUpLesson(modelDate, modelTimeRange, modelSubject, modelHomework, modelLessonRates);
     }
 }

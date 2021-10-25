@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Optional;
@@ -35,8 +34,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
     public LessonEditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-                PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
+                ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
+                        PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
 
         Index[] indices;
 
@@ -53,7 +52,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
 
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
             Date endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_RECURRING).get())
-                .orElse(Date.MAX_DATE);
+                    .orElse(Date.MAX_DATE);
             editLessonDescriptor.setEndDate(endDate);
             editLessonDescriptor.setRecurring(true);
         }
@@ -73,7 +72,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setSubject(ParserUtil.parseSubject(argMultimap.getValue(PREFIX_SUBJECT).get()));
         }
         parseHomeworkForLessonEdit(argMultimap.getAllValues(PREFIX_HOMEWORK))
-            .ifPresent(editLessonDescriptor::setHomeworkSet);
+                .ifPresent(editLessonDescriptor::setHomeworkSet);
 
         if (argMultimap.getValue(PREFIX_RATES).isPresent()) {
             editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
@@ -101,8 +100,8 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             return Optional.empty();
         }
         Collection<String> homeworkSet = homework.size() == 1 && homework.contains("")
-            ? Collections.emptySet()
-            : homework;
+                ? Collections.emptySet()
+                : homework;
         return Optional.of(ParserUtil.parseHomeworkList(homeworkSet));
     }
 }
