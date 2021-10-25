@@ -12,7 +12,7 @@ import seedu.plannermd.model.Model;
 import seedu.plannermd.model.appointment.Appointment;
 
 /**
- * Deletes a doctor from the doctor records as identified using it's displayed index
+ * Deletes a appointment from the appointment records as identified using it's displayed index
  * from plannermd.
  */
 public class DeleteAppointmentCommand extends DeleteCommand {
