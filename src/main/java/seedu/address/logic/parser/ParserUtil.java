@@ -206,4 +206,17 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses {@code Collection<String> indexes} into a {@code Set<Index>}.
+     */
+    public static Set<Index> parseIndexes(Collection<String> indexes) throws ParseException {
+        requireNonNull(indexes);
+        final Set<Index> indexSet = new HashSet<>();
+        for (String index : indexes) {
+            System.out.println(index);
+            indexSet.add(parseIndex(index));
+        }
+        return indexSet;
+    }
 }
