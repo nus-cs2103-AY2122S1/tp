@@ -7,11 +7,8 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalPersons.ALICE;
-import static seedu.fast.testutil.TypicalPersons.CAVE;
-import static seedu.fast.testutil.TypicalPersons.GRABAHAN;
-import static seedu.fast.testutil.TypicalPersons.JOE;
-import static seedu.fast.testutil.TypicalPersons.SUGON;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
+import static seedu.fast.testutil.TypicalPersons.getTypicalFastSetTwo;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,6 +26,7 @@ import seedu.fast.testutil.PersonBuilder;
 public class FastTest {
 
     private final Fast fast = new Fast();
+    private final Fast fastSetTwo = getTypicalFastSetTwo();
 
     @Test
     public void constructor() {
@@ -87,61 +85,57 @@ public class FastTest {
         assertThrows(UnsupportedOperationException.class, () -> fast.getPersonList().remove(0));
     }
 
+
+
+
     @Test
     void getHighPriorityCount_success() {
-        fast.addPerson(GRABAHAN);
-        fast.addPerson(JOE);
-        fast.addPerson(SUGON);
-        fast.addPerson(CAVE);
-        assertEquals(fast.getHighPriorityCount(), 1);
+        assertEquals(fastSetTwo.getHighPriorityCount(), 2);
     }
 
     @Test
     void getMediumPriorityCount_success() {
-        fast.addPerson(GRABAHAN);
-        fast.addPerson(JOE);
-        fast.addPerson(SUGON);
-        fast.addPerson(CAVE);
-        assertEquals(fast.getMediumPriorityCount(), 1);
+        assertEquals(fastSetTwo.getMediumPriorityCount(), 2);
     }
 
     @Test
     void getLowPriorityCount_success() {
-        fast.addPerson(GRABAHAN);
-        fast.addPerson(JOE);
-        fast.addPerson(CAVE);
-        assertEquals(fast.getLowPriorityCount(), 1);
-        fast.addPerson(SUGON);
-        assertEquals(fast.getLowPriorityCount(), 2);
+        assertEquals(fastSetTwo.getLowPriorityCount(), 4);
     }
 
-    //todo add test cases for insurance plan.
     @Test
     void getLifeInsuranceCount() {
+        assertEquals(fastSetTwo.getLifeInsuranceCount(), 2);
     }
 
     @Test
     void getMotorInsuranceCount() {
+        assertEquals(fastSetTwo.getMotorInsuranceCount(), 2);
     }
 
     @Test
     void getHealthInsuranceCount() {
+        assertEquals(fastSetTwo.getHealthInsuranceCount(), 1);
     }
 
     @Test
     void getTravelInsuranceCount() {
+        assertEquals(fastSetTwo.getTravelInsuranceCount(), 4);
     }
 
     @Test
     void getPropertyInsuranceCount() {
+        assertEquals(fastSetTwo.getPropertyInsuranceCount(), 1);
     }
 
     @Test
     void getInvestmentCount() {
+        assertEquals(fastSetTwo.getInvestmentCount(), 3);
     }
 
     @Test
     void getSavingsCount() {
+        assertEquals(fastSetTwo.getSavingsCount(), 8);
     }
 
 
