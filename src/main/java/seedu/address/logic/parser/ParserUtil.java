@@ -213,7 +213,7 @@ public class ParserUtil {
             return Optional.empty();
         }
         String strippedDate = date.strip();
-        assert date != null;
+        assert strippedDate != null;
         // remove leading zeroes
         strippedDate = StringUtil.stripLeadingZeroes(strippedDate);
         if (!Date.isValidDate(strippedDate)) {

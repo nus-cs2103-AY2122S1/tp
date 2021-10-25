@@ -36,6 +36,7 @@ public class EditLessonDescriptorBuilder {
         descriptor.setSubject(lesson.getSubject());
         descriptor.setHomeworkSet(lesson.getHomework());
         descriptor.setRate(lesson.getLessonRates());
+        descriptor.setRecurring(lesson.isRecurring());
     }
 
     /**
