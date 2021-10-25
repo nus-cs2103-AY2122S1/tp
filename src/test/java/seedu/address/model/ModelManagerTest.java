@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BAGEL;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_DONUT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BAGEL;
 import static seedu.address.model.Model.DisplayMode.DISPLAY_INVENTORY;
+import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalItems.APPLE_PIE;
@@ -154,43 +155,6 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredItemList().remove(0));
     }
 
-    @Test
-    public void equals() {
-        Inventory inventory = new InventoryBuilder().withItem(APPLE_PIE).withItem(BANANA_MUFFIN).build();
-        Inventory differentInventory = new Inventory();
-        UserPrefs userPrefs = new UserPrefs();
-
-        // same values -> returns true
-        modelManager = new ModelManager(inventory, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(inventory, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
-
-        // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
-
-        // null -> returns false
-        assertFalse(modelManager.equals(null));
-
-        // different types -> returns false
-        assertFalse(modelManager.equals(5));
-
-        // different inventory -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs)));
-
-        // different filteredList -> returns false
-        String[] keywords = APPLE_PIE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredItemList(DISPLAY_INVENTORY,
-                new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(inventory, userPrefs)));
-
-        // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
-
-        // different userPrefs -> returns false
-        UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
-        assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs)));
-    }
 
     // ========= order related methods tests ==========
 
@@ -230,4 +194,82 @@ public class ModelManagerTest {
         assertFalse(model.hasUnclosedOrder());
         assertEquals(model.getInventory(), new Inventory());
     }
+
+    @Test
+    public void updateFilteredItemList_switchDisplayMode_success() {
+        modelManager.setInventory(TypicalItems.getTypicalInventory());
+        modelManager.setOrder(new Order());
+
+        // Switch display to order mode
+        modelManager.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        assertEquals(modelManager.getDisplayMode(), DISPLAY_OPEN_ORDER);
+        assertTrue(modelManager.getFilteredItemList().size() == 0);
+
+        // Switch display back to inventory mode
+        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        assertEquals(modelManager.getDisplayMode(), DISPLAY_INVENTORY);
+        assertEquals(modelManager.getFilteredItemList(), TypicalItems.getTypicalInventory().getItemList());
+    }
+
+    @Test
+    public void updateFilteredItemList_sameDisplayMode_success() {
+        modelManager.setInventory(TypicalItems.getTypicalInventory());
+        modelManager.setOrder(new Order());
+
+        // Switch display back to inventory mode
+        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+        assertEquals(modelManager.getDisplayMode(), DISPLAY_INVENTORY);
+        assertEquals(modelManager.getFilteredItemList(), TypicalItems.getTypicalInventory().getItemList());
+
+        // Order mode to order mode
+        modelManager.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        modelManager.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        assertEquals(modelManager.getDisplayMode(), DISPLAY_OPEN_ORDER);
+        assertTrue(modelManager.getFilteredItemList().size() == 0);
+    }
+
+    @Test
+    public void equals() {
+        Inventory inventory = new InventoryBuilder().withItem(APPLE_PIE).withItem(BANANA_MUFFIN).build();
+        Inventory differentInventory = new Inventory();
+        UserPrefs userPrefs = new UserPrefs();
+
+        // same values -> returns true
+        modelManager = new ModelManager(inventory, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(inventory, userPrefs);
+        assertTrue(modelManager.equals(modelManagerCopy));
+
+        // same object -> returns true
+        assertTrue(modelManager.equals(modelManager));
+
+        // null -> returns false
+        assertFalse(modelManager.equals(null));
+
+        // different types -> returns false
+        assertFalse(modelManager.equals(5));
+
+        // different inventory -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentInventory, userPrefs)));
+
+        // different filteredList -> returns false
+        String[] keywords = APPLE_PIE.getName().fullName.split("\\s+");
+        modelManager.updateFilteredItemList(DISPLAY_INVENTORY,
+                new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(inventory, userPrefs)));
+
+        // resets modelManager to initial state for upcoming tests
+        modelManager.updateFilteredItemList(DISPLAY_INVENTORY, PREDICATE_SHOW_ALL_ITEMS);
+
+        // different userPrefs -> returns false
+        UserPrefs differentUserPrefs = new UserPrefs();
+        differentUserPrefs.setInventoryFilePath(Paths.get("differentFilePath"));
+        assertFalse(modelManager.equals(new ModelManager(inventory, differentUserPrefs)));
+
+        // different display mode / list -> returns false
+        ModelManager other = new ModelManager(inventory, userPrefs);
+        other.updateFilteredItemList(DISPLAY_OPEN_ORDER, PREDICATE_SHOW_ALL_ITEMS);
+        assertFalse(modelManager.equals(other));
+
+    }
+
 }
