@@ -67,13 +67,16 @@ public class ProfileWindow extends UiPart<Stage> {
 
     public void start() {
         if (logic.isProfilePresent()) {
+            logger.info("User Profile Found");
             mainWindow.start();
         } else {
+            logger.info("No User Profile Found, Launching Profile Window");
             getRoot().show();
         }
     }
 
     public void close() {
+        logger.info("Closing Profile Window");
         getRoot().close();
     }
 
@@ -122,6 +125,7 @@ public class ProfileWindow extends UiPart<Stage> {
 
             try {
                 logic.setUserProfile(user);
+                logger.info("User Data Set");
             } catch (IOException e) {
                 logger.severe("Could Not Set User Data.");
             }
@@ -142,35 +146,42 @@ public class ProfileWindow extends UiPart<Stage> {
         String userTelegram = telegram.getText();
 
         if (!Address.isValidAddress(userAddress)) {
+            logger.info("Invalid Address Detected");
             message.setText(INVALID_ADDRESS_MESSAGE);
             return false;
         }
 
         if (!Email.isValidEmail(userEmail)) {
+            logger.info("Invalid Email Detected");
             message.setText(INVALID_EMAIL_MESSAGE);
             return false;
         }
 
         if (!Github.isValidGithub(userGithub)) {
+            logger.info("Invalid GitHub Username Detected");
             message.setText(INVALID_GITHUB_MESSAGE);
             return false;
         }
 
         if (!Name.isValidName(userName)) {
+            logger.info("Invalid Name Detected");
             message.setText(INVALID_NAME_MESSAGE);
             return false;
         }
 
         if (!Phone.isValidPhone(userPhone)) {
+            logger.info("Invalid Phone Number Detected");
             message.setText(INVALID_PHONE_MESSAGE);
             return false;
         }
 
         if (!Telegram.isValidTelegram(userTelegram)) {
+            logger.info("Invalid Telegram Handle Detected");
             message.setText(INVALID_TELEGRAM_MESSAGE);
             return false;
         }
 
+        logger.info("User Credentials Valid.");
         return true;
     }
 }
