@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.GuiSettings;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.model.student.Student;
 
 /**
@@ -92,4 +93,8 @@ public interface Model {
      * @throws NullPointerException if {@code function} is null.
      */
     <T> ObservableList<T> getFilteredStudentListView(Function<? super Student, ? extends T> function);
+
+    AdditionalViewModel getAdditionalViewModel();
+
+    void setAdditionalViewType(AdditionalViewType additionalViewType);
 }
