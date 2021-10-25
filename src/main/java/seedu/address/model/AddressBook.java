@@ -98,7 +98,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
-
     //// util methods
 
     @Override

@@ -191,6 +191,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public boolean hasOrder(long id) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void setOrder(Order target, Order editedOrder) {
         throw new AssertionError("This method should not be called.");
     }
