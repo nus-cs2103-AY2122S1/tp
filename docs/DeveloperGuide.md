@@ -601,16 +601,16 @@ testers are expected to do more *exploratory* testing.
     2. Test case: `sort n/`<br>
        Expected: The list of persons is sorted by name (in ascending order by default).
 
-    3. Test case: `sort n/dsc`<br>
-       Expected: The list of persons is sorted by name in descending order.
+    3. Test case: `sort sh/start:dsc`<br>
+       Expected: The list of persons is sorted by start date of SHN Period in descending order.
 
-    4. Test case: `sort n/ cs/asc`<br>
-       Expected: The list of persons is sorted by name (in ascending order by default), then by case number in descending order.
+    4. Test case: `sort sh/end: cn/asc`<br>
+       Expected: The list of persons is sorted by end date of SHN period (in ascending order by default), then by case number in ascending order.
 
     5. Test case: `sort`<br>
        Expected: The list is unchanged. Error details shown in the status message. Status bar remains the same.
 
-    5. Other incorrect sort commands to try: `sort n/as`, `sort p/` (since `p/` is an unsupported field prefix), `...` <br>
+    5. Other incorrect sort commands to try: `sort shn/start`, `sort p/` (since `p/` is an unsupported field prefix), `...` <br>
        Expected: Similar to previous.
 
 2. _{ more test cases …​ }_

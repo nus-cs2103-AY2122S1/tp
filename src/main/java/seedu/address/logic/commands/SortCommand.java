@@ -4,7 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_START;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -15,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.ShnPeriod;
 
 /**
  * Sorts all persons in the address book based on specified fields.
@@ -29,14 +33,24 @@ public class SortCommand extends Command {
             + Direction.DESCENDING + "\" indicates descending order.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "DIRECTION] "
-            + "[" + PREFIX_CASE_NUMBER + "DIRECTION]\n"
+            + "[" + PREFIX_CASE_NUMBER + "DIRECTION] "
+            + "[" + PREFIX_SHN_PERIOD_START + "DIRECTION] "
+            + "[" + PREFIX_SHN_PERIOD_END + "DIRECTION]\n"
             + "Examples: \"" + COMMAND_WORD + " " + PREFIX_NAME + "\""
-            + " \"" + COMMAND_WORD + " " + PREFIX_NAME + Direction.DESCENDING + "\""
-            + " \"" + COMMAND_WORD + " " + PREFIX_NAME + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING + "\"";
+            + " \"" + COMMAND_WORD + " " + PREFIX_SHN_PERIOD_END + Direction.DESCENDING + "\""
+            + " \"" + COMMAND_WORD + " " + PREFIX_SHN_PERIOD_START + " " + PREFIX_CASE_NUMBER + Direction.ASCENDING
+            + "\"";
 
     public static final String MESSAGE_SUCCESS = "All persons sorted by %s";
 
-    public static final List<Prefix> SUPPORTED_PREFIXES = Arrays.asList(PREFIX_NAME, PREFIX_CASE_NUMBER);
+    public static final List<Prefix> SUPPORTED_PREFIXES = Arrays.asList(PREFIX_NAME, PREFIX_CASE_NUMBER,
+            PREFIX_SHN_PERIOD_START, PREFIX_SHN_PERIOD_END);
+    public static final Comparator<Person> COMPARATOR_PERSON_NAME = Comparator.comparing(Person::getName);
+    public static final Comparator<Person> COMPARATOR_PERSON_CASE_NUMBER = Comparator.comparing(Person::getCaseNumber);
+    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_START = Comparator.comparing(person ->
+        person.getShnPeriod().map(ShnPeriod::getStartDate).orElse(LocalDate.MAX));
+    public static final Comparator<Person> COMPARATOR_PERSON_SHN_PERIOD_END = Comparator.comparing(person ->
+            person.getShnPeriod().map(ShnPeriod::getEndDate).orElse(LocalDate.MAX));
 
     public enum Direction {
         ASCENDING("asc"),
@@ -105,12 +119,19 @@ public class SortCommand extends Command {
         requireAllNonNull(prefix, direction);
         assert SUPPORTED_PREFIXES.contains(prefix);
 
-        Comparator<Person> comparator = prefix.equals(PREFIX_NAME)
-                ? Comparator.comparing(Person::getName)
-                : prefix.equals(PREFIX_CASE_NUMBER)
-                ? Comparator.comparing(Person::getCaseNumber)
-                : null;
-        requireNonNull(comparator);
+        Comparator<Person> comparator;
+        if (prefix.equals(PREFIX_NAME)) {
+            comparator = COMPARATOR_PERSON_NAME;
+        } else if (prefix.equals(PREFIX_CASE_NUMBER)) {
+            comparator = COMPARATOR_PERSON_CASE_NUMBER;
+        } else if (prefix.equals(PREFIX_SHN_PERIOD_START)) {
+            comparator = COMPARATOR_PERSON_SHN_PERIOD_START;
+        } else if (prefix.equals(PREFIX_SHN_PERIOD_END)) {
+            comparator = COMPARATOR_PERSON_SHN_PERIOD_END;
+        } else {
+            throw new IllegalStateException("Prefix %s is not supported.");
+        }
+
         return direction == Direction.ASCENDING ? comparator : comparator.reversed();
     }
 }

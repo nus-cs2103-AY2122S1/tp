@@ -5,6 +5,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.SortCommand.SUPPORTED_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CASE_NUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_END;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SHN_PERIOD_START;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -67,6 +69,16 @@ public class SortCommandParserTest {
         userInput = " " + PREFIX_CASE_NUMBER;
         expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER), List.of(Direction.ASCENDING));
         assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period start
+        userInput = " " + PREFIX_SHN_PERIOD_START;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_START), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period end
+        userInput = " " + PREFIX_SHN_PERIOD_END;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_END), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
@@ -89,6 +101,26 @@ public class SortCommandParserTest {
         // case number descending
         userInput = " " + PREFIX_CASE_NUMBER + Direction.DESCENDING;
         expectedCommand = new SortCommand(List.of(PREFIX_CASE_NUMBER), List.of(Direction.DESCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period start ascending
+        userInput = " " + PREFIX_SHN_PERIOD_START + Direction.ASCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_START), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period start descending
+        userInput = " " + PREFIX_SHN_PERIOD_START + Direction.DESCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_START), List.of(Direction.DESCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period end ascending
+        userInput = " " + PREFIX_SHN_PERIOD_END + Direction.ASCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_END), List.of(Direction.ASCENDING));
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // shn period end descending
+        userInput = " " + PREFIX_SHN_PERIOD_END + Direction.DESCENDING;
+        expectedCommand = new SortCommand(List.of(PREFIX_SHN_PERIOD_END), List.of(Direction.DESCENDING));
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
@@ -206,9 +238,9 @@ public class SortCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // multiple prefixes repeated
-        prefixes = List.of(PREFIX_CASE_NUMBER, PREFIX_NAME);
-        directions = List.of(Direction.ASCENDING, Direction.DESCENDING);
-        userInput = " " + PREFIX_NAME
+        prefixes = List.of(PREFIX_SHN_PERIOD_END, PREFIX_CASE_NUMBER, PREFIX_NAME);
+        directions = List.of(Direction.ASCENDING, Direction.ASCENDING, Direction.DESCENDING);
+        userInput = " " + PREFIX_SHN_PERIOD_END
                 + " " + PREFIX_CASE_NUMBER + Direction.DESCENDING
                 + " " + PREFIX_NAME + Direction.ASCENDING
                 + " " + PREFIX_NAME
