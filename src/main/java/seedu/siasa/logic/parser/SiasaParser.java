@@ -20,6 +20,7 @@ import seedu.siasa.logic.commands.client.ListClientPolicyCommand;
 import seedu.siasa.logic.commands.policy.AddPolicyCommand;
 import seedu.siasa.logic.commands.policy.DeletePolicyCommand;
 import seedu.siasa.logic.commands.policy.ListPolicyCommand;
+import seedu.siasa.logic.commands.policy.ShowExpiredPolicyCommand;
 import seedu.siasa.logic.parser.client.AddClientCommandParser;
 import seedu.siasa.logic.parser.client.ClearClientPolicyCommandParser;
 import seedu.siasa.logic.parser.client.DeleteClientCommandParser;
@@ -93,6 +94,9 @@ public class SiasaParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ShowExpiredPolicyCommand.COMMAND_WORD:
+            return new ShowExpiredPolicyCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
