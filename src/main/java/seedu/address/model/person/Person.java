@@ -42,7 +42,6 @@ public class Person {
         this.tags.addAll(tags);
     }
 
-
     /**
      * Constructor with all fields of a member.
      * @param name Name of member.

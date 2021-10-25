@@ -216,6 +216,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public Person getSamePerson(Person toFind) {
+        requireNonNull(toFind);
+        return addressBook.getPersonList()
+                .stream()
+                .filter(person -> person.isSamePerson(toFind))
+                .findAny()
+                .orElse(null);
+    }
+
+    @Override
     public void sortMemberList(SortOrder sortOrder) {
         requireNonNull(sortOrder);
         String order = sortOrder.toString();

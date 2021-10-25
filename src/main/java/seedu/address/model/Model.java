@@ -180,6 +180,14 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
+     * Returns a person from the address book that has the same name as the given {@code person}.
+     *
+     * @param person the given person
+     * @return a person that has the same name.
+     */
+    Person getSamePerson(Person person);
+
+    /**
      * Sorts the member list in the specified order.
      */
     void sortMemberList(SortOrder sortOrder);
