@@ -77,10 +77,6 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.add(p);
     }
 
-    public void addLab(Lab l) {
-        labs.add(l);
-    }
-
     @Override
     public ObservableList<Lab> getLabList() {
         return labs.asUnmodifiableObservableList();
@@ -104,6 +100,22 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+    }
+
+    /**
+     * Removes {@code lab} from this {@code ProgrammerError}.
+     * {@code lab} must exist in ProgrammerError.
+     */
+    public void removeLab(Lab lab) {
+        students.removeLab(lab);
+    }
+
+    /**
+     * Adds {@code lab} from this {@code ProgrammerError}.
+     * {@code lab} must not exist in ProgrammerError.
+     */
+    public void addLab(Lab lab) {
+        students.addLab(lab);
     }
 
     //// util methods

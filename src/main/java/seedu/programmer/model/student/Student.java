@@ -8,7 +8,8 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.programmer.model.student.comparator.SortByLabName;
+import seedu.programmer.logic.commands.exceptions.CommandException;
+//import seedu.programmer.model.student.comparator.SortByLabName;
 
 
 /**
@@ -17,13 +18,14 @@ import seedu.programmer.model.student.comparator.SortByLabName;
  */
 public class Student {
 
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
+
     // Identity fields
     private final Name name;
     private final StudentId studentId;
     private final ClassId classId;
     private final Email email;
     private ObservableList<Lab> labResultList;
-
 
     /**
      * Every field must be present and not null.
@@ -89,35 +91,49 @@ public class Student {
         return labResultList.get(index);
     }
 
+    //todo check comment out
     /**
      * Adds a lab result to all the student records
      * */
-    public void addLabResult(Lab result) {
-        this.labResultList.add(result);
-        labResultList.sort(new SortByLabName());
+    public Boolean addLabResult(Lab lab) {
+        int index = this.labResultList.indexOf(lab);
+        if (index == -1) {
+            this.labResultList.add(lab);
+            //labResultList.sort(new SortByLabName());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
      * Deletes a lab result from all the student records
      * */
-    public void delLabResult(Lab result) {
-        this.labResultList.remove(result);
+    public boolean delLabResult(Lab lab) {
+        return this.labResultList.remove(lab);
     }
 
     /**
      * Updates a lab result for a student
      * */
-    public void editLabResult(Lab result, Double value) {
-        int index = this.labResultList.indexOf(result);
+    public void editLabResult(Lab lab , Double score) throws CommandException {
+        if (score <= 0 || score <= lab.getTotalScore()) {
+            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        }
+        int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
-        current.updateActualScore(value);
+
+        current.updateActualScore(score);
     }
 
     /**
      * Updates a lab result for a student
      * */
-    public void editLabInfo(Lab result, String newTitle, Double total) {
-        int index = this.labResultList.indexOf(result);
+    public void editLabInfo(Lab lab, String newTitle, Double total) throws CommandException {
+        if (total <= 0 || total <= lab.getTotalScore()) {
+            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        }
+        int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
         current.updateTitle(newTitle);
         current.updateTotal(total);
@@ -128,6 +144,10 @@ public class Student {
             labResultRecord = new ArrayList<>();
         }
         this.labResultList.addAll(labResultRecord);
+    }
+
+    public void setLabResultList(ObservableList<Lab> labResultList) {
+        this.labResultList = labResultList;
     }
 
     /**

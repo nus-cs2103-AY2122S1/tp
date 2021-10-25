@@ -367,7 +367,6 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof DashboardCommandResult) {
                 handleDashboard();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

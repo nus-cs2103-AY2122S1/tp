@@ -1,6 +1,6 @@
 package seedu.programmer.logic.commands;
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 
 import java.util.List;
 
@@ -18,11 +18,12 @@ public class DeleteLabCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a lab from all the students in the list. "
             + "Parameters: "
-            + PREFIX_LAB_TITLE + "Lab Title "
+            + PREFIX_LAB_NUM + "Lab Title "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_LAB_TITLE + "1 ";
+            + PREFIX_LAB_NUM + "1 ";
 
     public static final String MESSAGE_DEL_LAB_SUCCESS = "Lab Deleted: %1$s";
+    public static final String MESSAGE_LAB_DOES_NOT_EXIST = "Lab doesn't exist: %1$s";
 
     private final Lab result;
 
@@ -37,14 +38,19 @@ public class DeleteLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-
+        boolean exists = true;
         for (Student std : lastShownList) {
             Student target = std;
-            target.delLabResult(this.result);
+            if (!target.delLabResult(this.result)) {
+                exists = false;
+            }
             model.setStudent(target, std);
         }
-
-        return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
+        if (exists) {
+            return new CommandResult(String.format(MESSAGE_DEL_LAB_SUCCESS, result));
+        } else {
+            throw new CommandException(String.format(MESSAGE_LAB_DOES_NOT_EXIST, result));
+        }
     }
 
     @Override

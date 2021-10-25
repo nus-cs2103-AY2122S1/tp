@@ -65,6 +65,18 @@ public interface Model {
     void deleteStudent(Student target);
 
     /**
+     * Deletes the given Lab.
+     * The Lab must exist in ProgrammerError.
+     */
+    void deleteLab(Lab target);
+
+    /**
+     * Adds the given Lab.
+     * The Lab must not exist in ProgrammerError.
+     */
+    void addLab(Lab target);
+
+    /**
      * Shows the given student's lab results.
      * The student must exist in ProgrammerError.
      */
@@ -75,8 +87,6 @@ public interface Model {
      * {@code student} must not already exist in the ProgrammerError.
      * */
     void addStudent(Student student);
-
-    void addLab(Lab lab);
 
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
