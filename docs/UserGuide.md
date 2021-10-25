@@ -313,9 +313,9 @@ Format: `delete INDEX...`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `delete 1` deletes the 1st applicant listed in RecruitIn.
-* `find n/John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
-* `list` followed by `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+* After using the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After using the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After using the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
 ### Showing search terms : `show`
 
@@ -347,9 +347,9 @@ Format: `mark INDEX…​`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
-* `find n/John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
-* `list` followed by `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
+* After using the command `find n/John`, `mark 1` marks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 
 ### Unmarking an applicant : `unmark`
 
@@ -365,9 +365,9 @@ Format: `unmark INDEX…​`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
-* `find n/John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
-* `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 
 ### Deleting marked applicants: `delete_marked`
 
