@@ -1,7 +1,7 @@
 package seedu.academydirectory.ui.creator;
 
-import javafx.scene.control.TextArea;
 import javafx.scene.control.Control;
+import javafx.scene.control.TextArea;
 import seedu.academydirectory.model.AdditionalInfo;
 
 public class GraphCreator implements Creator {
