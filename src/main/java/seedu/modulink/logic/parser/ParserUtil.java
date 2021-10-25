@@ -14,6 +14,7 @@ import seedu.modulink.model.person.GitHubUsername;
 import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 import seedu.modulink.model.tag.Status;
 
@@ -158,6 +159,29 @@ public class ParserUtil {
             return Status.parseStatusForFilter(trimmedStatus);
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Parses a {@code String telegramHandle} into a {@code TelegramHandle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code telegramHandle} is invalid.
+     */
+    public static TelegramHandle parseTelegramHandle(String telegramHandle) throws ParseException {
+        if (telegramHandle != null) {
+            String trimmedHandle = telegramHandle.trim();
+
+            if (trimmedHandle.startsWith("@")) {
+                trimmedHandle = trimmedHandle.substring(1);
+            }
+
+            if (!TelegramHandle.isValidHandle(telegramHandle)) {
+                throw new ParseException(TelegramHandle.MESSAGE_CONSTRAINTS);
+            }
+            return new TelegramHandle(trimmedHandle);
+        } else {
+            return new TelegramHandle(null);
         }
     }
 }

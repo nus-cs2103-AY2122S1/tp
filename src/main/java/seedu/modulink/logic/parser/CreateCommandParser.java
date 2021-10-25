@@ -7,6 +7,7 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -19,6 +20,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 
 
@@ -35,7 +37,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
     public CreateCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE,
-                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_MOD);
+                        PREFIX_EMAIL, PREFIX_GITHUB_USERNAME, PREFIX_TELEGRAM_HANDLE, PREFIX_MOD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,9 +50,12 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         GitHubUsername gitHubUsername =
                 ParserUtil.parseGithubUsername(argMultimap.getValue(PREFIX_GITHUB_USERNAME).orElse(null));
+        TelegramHandle telegramHandle =
+                ParserUtil.parseTelegramHandle(argMultimap.getValue(PREFIX_TELEGRAM_HANDLE).orElse(null));
         Set<Mod> modList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_MOD));
 
-        Person person = new Person(name, id, phone, email, gitHubUsername, false, modList, true);
+        Person person = new Person(name, id, phone, email, gitHubUsername,
+                telegramHandle, false, modList, true);
 
         return new CreateCommand(person);
     }

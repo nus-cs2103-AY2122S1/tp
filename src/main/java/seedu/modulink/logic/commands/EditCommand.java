@@ -21,6 +21,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 
 
@@ -87,10 +88,12 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         GitHubUsername updatedGitHubUsername = editPersonDescriptor.getGitHubUsername()
                 .orElse(personToEdit.getGithubUsername());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Set<Mod> updatedMods = personToEdit.getMods();
 
         return new Person(updatedName, updatedId, updatedPhone, updatedEmail,
-                updatedGitHubUsername, false, updatedMods, true);
+                updatedGitHubUsername, updatedTelegramHandle, false, updatedMods, true);
     }
 
     @Override
@@ -120,6 +123,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private GitHubUsername gitHubUsername;
+        private TelegramHandle telegramHandle;
         private Set<Mod> mods;
 
         public EditPersonDescriptor() {}
@@ -134,6 +138,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setGitHubUsername(toCopy.gitHubUsername);
+            setTelegramHandle(toCopy.telegramHandle);
             setTags(toCopy.mods);
         }
 
@@ -142,7 +147,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, id, phone, email, gitHubUsername, mods);
+            return CollectionUtil.isAnyNonNull(name, id, phone, email, gitHubUsername, telegramHandle, mods);
         }
 
         public void setName(Name name) {
@@ -185,6 +190,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(gitHubUsername);
         }
 
+        public void setTelegramHandle(TelegramHandle telegramHandle) {
+            this.telegramHandle = telegramHandle;
+        }
+
+        public Optional<TelegramHandle> getTelegramHandle() {
+            return Optional.ofNullable(telegramHandle);
+        }
+
         /**
          * Sets {@code mods} to this object's {@code mods}.
          * A defensive copy of {@code mods} is used internally.
@@ -222,6 +235,7 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getGitHubUsername().equals(e.getGitHubUsername())
+                    && getTelegramHandle().equals(e.getTelegramHandle())
                     && getTags().equals(e.getTags());
         }
     }

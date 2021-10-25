@@ -17,6 +17,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 
 public class AddModCommand extends Command {
@@ -80,12 +81,14 @@ public class AddModCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         GitHubUsername updatedGitHubUsername = editPersonDescriptor.getGitHubUsername()
                 .orElse(personToEdit.getGithubUsername());
+        TelegramHandle updatedTelegramHandle = editPersonDescriptor.getTelegramHandle()
+                .orElse(personToEdit.getTelegramHandle());
         Set<Mod> updatedMods = new HashSet<>(Collections.emptySet());
         updatedMods.addAll(personToEdit.getMods());
         updatedMods.addAll(editPersonDescriptor.getTags().get());
 
         return new Person(updatedName, updatedId, updatedPhone, updatedEmail,
-                updatedGitHubUsername, false, updatedMods, true);
+                updatedGitHubUsername, updatedTelegramHandle, false, updatedMods, true);
     }
 
     @Override

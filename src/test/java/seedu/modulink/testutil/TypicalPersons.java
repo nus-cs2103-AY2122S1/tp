@@ -12,6 +12,8 @@ import static seedu.modulink.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TAG_CS2103T;
+import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.VALID_TELEGRAM_HANDLE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,7 @@ public class TypicalPersons {
             .withStudentId("A1234567A")
             .withEmail("alice@example.com")
             .withGitHubUsername("alicepauline")
+            .withTelegramHandle("@alicepauline_99")
             .withPhone("94351253")
             .withFavourite(true)
             .withTags("CS2100").build();
@@ -42,7 +45,7 @@ public class TypicalPersons {
             .withEmail("heinz@example.com").withGitHubUsername("carl_kurz")
             .withFavourite(true).build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withStudentId("A1234567D").withEmail("cornelia@example.com")
+            .withStudentId("A1234567D").withEmail("cornelia@example.com").withTelegramHandle("@danielmeierr")
             .withFavourite(false).withTags("CS2103T").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withStudentId("A1234567E").withFavourite(false).build();
@@ -64,11 +67,11 @@ public class TypicalPersons {
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withStudentId(VALID_ID_AMY)
             .withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withGitHubUsername(VALID_GITHUB_USERNAME_AMY)
-            .withTags(VALID_TAG_CS2100).build();
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_AMY).withTags(VALID_TAG_CS2100).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withStudentId(VALID_ID_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withGitHubUsername(VALID_GITHUB_USERNAME_BOB)
-            .withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100)
+            .withTelegramHandle(VALID_TELEGRAM_HANDLE_BOB).withTags(VALID_TAG_CS2103T, VALID_TAG_CS2100)
             .build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER

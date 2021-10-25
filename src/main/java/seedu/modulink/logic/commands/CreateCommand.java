@@ -7,6 +7,7 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import seedu.modulink.logic.commands.exceptions.CommandException;
 import seedu.modulink.model.Model;
@@ -26,6 +27,7 @@ public class CreateCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + "[" + PREFIX_GITHUB_USERNAME + "GITHUB USERNAME] "
+            + "[" + PREFIX_TELEGRAM_HANDLE + "TELEGRAM HANDLE] "
             + "[" + PREFIX_MOD + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
@@ -33,6 +35,7 @@ public class CreateCommand extends Command {
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_GITHUB_USERNAME + "johnd "
+            + PREFIX_TELEGRAM_HANDLE + "@johndoe "
             + PREFIX_MOD + "CS2100 "
             + PREFIX_MOD + "CS2101";
 

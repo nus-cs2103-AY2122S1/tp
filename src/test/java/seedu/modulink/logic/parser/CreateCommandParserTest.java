@@ -13,6 +13,7 @@ import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_ID_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.modulink.logic.commands.CommandTestUtil.INVALID_TELEGRAM_HANDLE_DESC;
 import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.modulink.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -21,6 +22,8 @@ import static seedu.modulink.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.modulink.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2100;
 import static seedu.modulink.logic.commands.CommandTestUtil.TAG_DESC_CS2103T;
+import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_AMY;
+import static seedu.modulink.logic.commands.CommandTestUtil.TELEGRAM_HANDLE_DESC_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.modulink.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -41,6 +44,7 @@ import seedu.modulink.model.person.Name;
 import seedu.modulink.model.person.Person;
 import seedu.modulink.model.person.Phone;
 import seedu.modulink.model.person.StudentId;
+import seedu.modulink.model.person.TelegramHandle;
 import seedu.modulink.model.tag.Mod;
 import seedu.modulink.testutil.PersonBuilder;
 
@@ -53,38 +57,45 @@ public class CreateCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple student IDs - last student ID accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_AMY
-                + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
+                + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
+                + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_AMY + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
+                + EMAIL_DESC_AMY + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple GitHub usernames - last username accepted
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_AMY + GITHUB_USERNAME_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_AMY + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_BOB
+                + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
+
+        // multiple Telegram handles - last handle accepted
+        assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB
+                + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TELEGRAM_HANDLE_DESC_AMY + TELEGRAM_HANDLE_DESC_BOB
                 + TAG_DESC_CS2100, new CreateCommand(expectedPerson));
 
         // multiple tags - all accepted
         Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_CS2100, VALID_TAG_CS2103T)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + ID_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + TAG_DESC_CS2103T
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB
+                + TELEGRAM_HANDLE_DESC_BOB + TAG_DESC_CS2103T
                 + TAG_DESC_CS2100, new CreateCommand(expectedPersonMultipleTags));
     }
 
@@ -93,7 +104,7 @@ public class CreateCommandParserTest {
         // zero tags
         Person expectedPerson = new PersonBuilder(AMY).withTags().build();
         assertParseSuccess(parser, NAME_DESC_AMY + ID_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + GITHUB_USERNAME_DESC_AMY,
+                + EMAIL_DESC_AMY + GITHUB_USERNAME_DESC_AMY + TELEGRAM_HANDLE_DESC_AMY,
                 new CreateCommand(expectedPerson));
     }
 
@@ -151,6 +162,11 @@ public class CreateCommandParserTest {
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_GITHUB_USERNAME_DESC
                 + TAG_DESC_CS2103T + TAG_DESC_CS2100, GitHubUsername.MESSAGE_CONSTRAINTS);
+
+        // invalid Telegram handle
+        assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + GITHUB_USERNAME_DESC_BOB + INVALID_TELEGRAM_HANDLE_DESC
+                + TAG_DESC_CS2103T + TAG_DESC_CS2100, TelegramHandle.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + ID_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

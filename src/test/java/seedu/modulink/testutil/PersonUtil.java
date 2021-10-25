@@ -6,6 +6,7 @@ import static seedu.modulink.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_MOD;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.modulink.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.modulink.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
 
 import java.util.Set;
 
@@ -36,6 +37,7 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
         sb.append(PREFIX_GITHUB_USERNAME + person.getGithubUsername().value + " ");
+        sb.append(PREFIX_TELEGRAM_HANDLE + person.getTelegramHandle().value + " ");
         person.getMods().stream().forEach(
             s -> sb.append(PREFIX_MOD + s.modName + " ")
         );
@@ -53,6 +55,8 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.value).append(" "));
         descriptor.getGitHubUsername().ifPresent(gitHubUsername -> sb.append(PREFIX_GITHUB_USERNAME)
                 .append(gitHubUsername.value).append(" "));
+        descriptor.getTelegramHandle().ifPresent(telegramHandle -> sb.append(PREFIX_TELEGRAM_HANDLE)
+                .append(telegramHandle.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Mod> mods = descriptor.getTags().get();
             if (mods.isEmpty()) {
