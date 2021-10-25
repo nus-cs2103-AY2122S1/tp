@@ -12,7 +12,7 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Clears the content of FAST (Deletes all your data!)\n\n"
+            + ": Clears the content of FAST (Deletes all your data!) This command CANNOT be undone!\n\n"
             + "Example: " + COMMAND_WORD;
     public static final String MESSAGE_SUCCESS = "FAST has been cleared!";
 

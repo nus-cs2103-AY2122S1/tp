@@ -10,29 +10,31 @@ public class InvestmentPlanTag extends Tag {
 
     public static final String INVESTMENT_PLAN_TAG_PREFIX = "ip/";
 
-    public static final String MESSAGE_USAGE = "Investment Plan tag: label a person with a investment plan. "
-            + "The investment plans available are: \n"
-            + "Health insurance, Investment, Life Insurance, Motor insurance, Property insurance,\n"
-            + "Savings, and Travel insurance.\n"
-            + "Similar to tag, to apply an Investment Plan Tag, you have to use Add, Edit, or Tag command.\n\n"
-            + "Parameters (using Edit): \n"
-            + "edit INDEX t/ ip/INVESTMENT_PLAN\n\n"
-            + "Example: \n"
-            + "edit 1 t/ ip/life\n"
-            + "edit 3 t/ ip/motor\n\n"
-            + "Parameters (using Tag): \n"
-            + "tag INDEX t/ a/ ip/INVESTMENT_PLAN d/ ip/INVESTMENT_PLAN\n\n"
-            + "Example: \n"
-            + "t/ a/ ip/save d/ ip/property";
+    public static final String MESSAGE_USAGE = "Investment Plan tag: label a client with their Investment plan "
+        + "purchased. \n"
+        + "The investment plans include insurance plans: \n"
+        + " * Health, Life, Motor, Property and Travel\n"
+        + "as well as Investment plan, and Savings plan.\n"
+        + "Similar to tag, to apply an Investment Plan Tag, you have to use Add, Edit, or Tag command.\n\n"
+        + "Parameters (using Edit): \n"
+        + "edit INDEX t/ ip/INVESTMENT_PLAN\n\n"
+        + "Example: \n"
+        + "edit 3 t/ ip/motor\n\n"
+        + "Parameters (using Tag): \n"
+        + "tag INDEX t/ a/ ip/INVESTMENT_PLAN d/ ip/INVESTMENT_PLAN\n\n"
+        + "Example: \n"
+        + "t/ a/ ip/save d/ ip/property";
     public static final String INVESTMENT_PLAN_VALIDATION_REGEX = LifeInsurance.COMMAND + "|"
-            + MotorInsurance.COMMAND + "|"
-            + HealthInsurance.COMMAND + "|"
-            + TravelInsurance.COMMAND + "|"
-            + PropertyInsurance.COMMAND + "|"
-            + Investment.COMMAND + "|"
-            + Savings.COMMAND;
+        + MotorInsurance.COMMAND + "|"
+        + HealthInsurance.COMMAND + "|"
+        + TravelInsurance.COMMAND + "|"
+        + PropertyInsurance.COMMAND + "|"
+        + Investment.COMMAND + "|"
+        + Savings.COMMAND;
+
     /**
      * Constructs a {@code PriorityTag}.
+     *
      * @param tagName A valid tag name.
      */
     public InvestmentPlanTag(String tagName) {

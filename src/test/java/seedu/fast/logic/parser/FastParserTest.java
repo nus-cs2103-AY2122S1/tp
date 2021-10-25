@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.fast.commons.core.index.Index;
 import seedu.fast.commons.util.sort.SortByName;
 import seedu.fast.logic.commands.AddCommand;
 import seedu.fast.logic.commands.AppointmentCommand;
@@ -65,7 +66,7 @@ public class FastParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        assertEquals(new DeleteCommand(new Index[] {INDEX_FIRST_PERSON}), command);
     }
 
     @Test
@@ -129,7 +130,7 @@ public class FastParserTest {
         final Appointment appt = new Appointment(dateString, Appointment.NO_TIME, Appointment.NO_VENUE);
         AppointmentCommand command = (AppointmentCommand) parser.parseCommand(
                 AppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_APPOINTMENT + "2021-10-10");
+                        + PREFIX_APPOINTMENT + "2021-10-10");
         assertEquals(new AppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 
@@ -162,7 +163,7 @@ public class FastParserTest {
 
         EditAppointmentCommand command = (EditAppointmentCommand) parser.parseCommand(
                 EditAppointmentCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + " "
-                + PREFIX_APPOINTMENT + "2021-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
+                        + PREFIX_APPOINTMENT + "2021-10-10" + " " + PREFIX_APPOINTMENT_VENUE + venue);
         assertEquals(new EditAppointmentCommand(INDEX_FIRST_PERSON, appt), command);
     }
 

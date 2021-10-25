@@ -15,11 +15,11 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
     public static final String MESSAGE_USAGE = COMMAND_WORD
 
-            + ": Sorts the people in FAST by the given keyword \n"
-            + "Keyword: 'name', 'appointment', 'priority' \n"
+            + ": Sorts the client in FAST by the given keyword \n\n"
+            + "Keyword: 'name', 'appointment', 'priority' \n\n"
             + "Example: " + COMMAND_WORD + " name";
 
-    public static final String MESSAGE_SUCCESS = "Sorted all persons by %1$s";
+    public static final String MESSAGE_SUCCESS = "Sorted all clients by %1$s";
 
     private final Comparator<Person> comparator;
     private final String keyword;

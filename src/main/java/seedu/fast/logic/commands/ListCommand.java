@@ -12,9 +12,10 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays all your clients saved in FAST\n\n"
-            + "Example: \n" + COMMAND_WORD;
-    public static final String MESSAGE_SUCCESS = "Listed all persons";
+        + ": Displays all your clients saved in FAST. This command can be used to return to the whole client "
+        + "list after a 'find' or 'sort'. \n\n"
+        + "Example: \n" + COMMAND_WORD;
+    public static final String MESSAGE_SUCCESS = "Listed all clients";
 
 
     @Override

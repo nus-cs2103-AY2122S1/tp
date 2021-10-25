@@ -17,6 +17,12 @@ import seedu.fast.model.tag.PriorityTag;
  */
 public class StatsWindow extends UiPart<Stage> {
 
+    public static final String MESSAGE_USAGE = "Opens a new window with built-in statistics to provide "
+        + "you with an overview of your data.\n\n"
+        + "To view the statistics, simply click the \"Stats\" menu item on the top bar or press `F2`.\n"
+        + "Currently, FAST supports these statistics:\n"
+        + "* Priority Tag Chart\n"
+        + "* Insurance Plan Chart (Coming soon!)";
     private static final Logger logger = LogsCenter.getLogger(StatsWindow.class);
     private static final String FXML = "StatsWindow.fxml";
     private static final String PRIORITY_CHART_MESSAGE_INTRO = "You currently have a total of: ";
@@ -26,6 +32,8 @@ public class StatsWindow extends UiPart<Stage> {
         + "This is a great base for your portfolio!";
     private static final String LOW_PRIORITY_MESSAGE = "Keep it up! Focus on developing your client base to boost \n"
         + "your client portfolio!";
+
+
 
     private Fast fast;
 
@@ -42,7 +50,6 @@ public class StatsWindow extends UiPart<Stage> {
      */
     public StatsWindow(Stage root, ReadOnlyFast fast) {
         super(FXML, root);
-
         // Since StatsWindow receives a Fast instance, it is safe to typecast it
         this.fast = (Fast) fast;
         populatePriorityPieChart();
@@ -106,6 +113,10 @@ public class StatsWindow extends UiPart<Stage> {
         int mediumPriorityCount = this.fast.getMediumPriorityCount();
         int lowPriorityCount = this.fast.getLowPriorityCount();
 
+        assert highPriorityCount >= 0 : "highPriorityCount must be positive";
+        assert mediumPriorityCount >= 0 : "mediumPriorityCount must be positive";
+        assert lowPriorityCount >= 0 : "lowPriorityCount must be positive";
+
         addPriorityPieChartDesc(highPriorityCount, mediumPriorityCount, lowPriorityCount);
 
         addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
@@ -162,6 +173,8 @@ public class StatsWindow extends UiPart<Stage> {
             setPriorityPieChartLabel(totalClientCount, LOW_PRIORITY_MESSAGE);
             return;
         }
+        // The code should NOT reach here
+        assert false;
     }
 
     /**
@@ -175,6 +188,7 @@ public class StatsWindow extends UiPart<Stage> {
      * Focuses on the help window.
      */
     public void focus() {
+        assert getRoot() != null : "StatsWindow is not initialised";
         populatePriorityPieChart();
         labelPriorityPieChart();
         getRoot().requestFocus();
