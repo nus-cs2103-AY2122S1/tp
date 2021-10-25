@@ -340,7 +340,7 @@ Step 7. Finally, it will return a `CommandResult` if the operation is successful
 
 **Aspect: File directory:**
 
-* **Alternative 1 (current choice):** Only allow to-be-imported files to be located in the `data` directory 
+* **Alternative 1 (current choice):** Only allow to-be-imported files to be located in the `data` directory
     * Pros: Every file used in the application will live under a single `data` directory.
     * Cons: Less flexibility for the user.
 
