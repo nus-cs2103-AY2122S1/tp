@@ -127,7 +127,7 @@ Examples:
 
 Shows a list of all orders in the application.
 
-### Adding a order: `addorder`
+### Adding an order: `addorder`
 
 Adds an order to the application.
 
