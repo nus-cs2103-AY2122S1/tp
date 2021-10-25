@@ -26,7 +26,7 @@ This User Guide will help you set up your contact list and familiarise yourself 
     * [Editing a contact: `edit`](#editing-a-contact-edit)
     * [Locating contacts: `find`](#locating-contacts-find)
     * [Deleting a contact: `delete`](#deleting-a-contact-delete)
-    * [Filtering by category: `filter`](#filtering-by-category-filter)
+    * [Filtering by category: `filter`](#filtering-contacts-filter)
     * [Undoing operations : `undo`](#undoing-operations-undo)
     * [Redoing operations : `redo`](#redoing-operations-redo)
     * [Sorting contacts: `sort`](#sorting-the-contacts-sort)
