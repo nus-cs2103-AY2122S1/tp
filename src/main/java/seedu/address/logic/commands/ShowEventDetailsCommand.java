@@ -2,10 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
+import java.util.List;
 
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
@@ -18,38 +18,37 @@ public class ShowEventDetailsCommand extends Command {
     public static final String COMMAND_WORD = "showDetails";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Displays the details of the event matching the given name.\n"
-            + "Parameters: EVENT_NAME \n"
-            + "Example: " + COMMAND_WORD + " CS2103T Finals ";
+            + ": Displays the details of the event at the specified index.\n"
+            + "Parameters: INDEX \n"
+            + "Example: " + COMMAND_WORD + " 1 ";
 
-    private final Predicate<Event> eventName;
+    private final Index index;
 
     /**
      * Creates a ShowEventDetailsCommand for the Event with the specified {@code eventName}
      */
-    public ShowEventDetailsCommand(Predicate<Event> eventName) {
-        requireNonNull(eventName);
-        this.eventName = eventName;
+    public ShowEventDetailsCommand(Index index) {
+        requireNonNull(index);
+        this.index = index;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        FilteredList<Event> filteredEventList = model.getFilteredEventList().filtered(eventName);
+        List<Event> lastShownEventList = model.getFilteredEventList();
 
-        if (filteredEventList.size() == 0) {
+        if (lastShownEventList.size() == 0 || lastShownEventList.size() < index.getOneBased()) {
             throw new CommandException(Messages.MESSAGE_EVENT_NOT_FOUND);
         }
 
-        Event desiredEvent = filteredEventList.get(0);
+        Event desiredEvent = lastShownEventList.get(index.getZeroBased());
         return new CommandResult(desiredEvent.toString());
-
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ShowEventDetailsCommand // instanceof handles nulls
-                && eventName.equals(((ShowEventDetailsCommand) other).eventName)); // state check
+                && index.equals(((ShowEventDetailsCommand) other).index)); // state check
     }
 }

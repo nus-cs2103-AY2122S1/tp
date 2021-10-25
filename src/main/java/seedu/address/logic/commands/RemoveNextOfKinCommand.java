@@ -19,8 +19,8 @@ public class RemoveNextOfKinCommand extends Command {
             + "participant with another specified index.\n"
             + "Parameters: \n"
             + "PARTICIPANT_INDEX "
-            + "NOK_INDEX "
-            + "Example: " + COMMAND_WORD + "1 2";
+            + "NOK_INDEX\n"
+            + "Example: " + COMMAND_WORD + " 1 2";
 
     public static final String MESSAGE_SUCCESS = "Removed \n%1$s \nfrom %2$s successfully";
 
