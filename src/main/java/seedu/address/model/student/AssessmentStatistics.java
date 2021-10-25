@@ -90,7 +90,7 @@ public class AssessmentStatistics {
             }
         }
 
-        // Should not happen since a Score must be between the minimum and maximum value (inclusive)
+        // Should not happen since a Score must be between the minimum and maximum name (inclusive)
         assert false;
 
         return null;
@@ -209,8 +209,8 @@ public class AssessmentStatistics {
         public boolean includesScore(Score score) {
             return score.getNumericValue() >= binMinimum.getNumericValue()
                     && (maxIsInclusive
-                            ? score.getNumericValue() <= binMaximum.getNumericValue()
-                            : score.getNumericValue() < binMaximum.getNumericValue());
+                    ? score.getNumericValue() <= binMaximum.getNumericValue()
+                    : score.getNumericValue() < binMaximum.getNumericValue());
         }
 
         @Override
