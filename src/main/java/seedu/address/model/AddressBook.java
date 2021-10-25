@@ -129,6 +129,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeStudent(Student key) {
         students.remove(key);
+        groups.removeStudent(key);
+        assessments.removeStudent(key);
     }
 
     //// group-level operations
