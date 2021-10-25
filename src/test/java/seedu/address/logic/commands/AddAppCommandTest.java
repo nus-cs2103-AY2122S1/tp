@@ -233,6 +233,10 @@ public class AddAppCommandTest {
         @Override
         public void updateEditedClientInAppointments(Person personToEdit, Person editedPerson) {
         }
+
+        @Override
+        public void removePersonFromAppointments(Person personToDelete) {
+        }
     }
 
     /**

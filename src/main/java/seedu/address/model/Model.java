@@ -139,5 +139,17 @@ public interface Model {
      */
     String getAppointmentsThatOnlyHaveThisClientAsString(Person client);
 
+    /**
+     * Replace the client in the client list of the appointments by a new edited client.
+     * @param personToEdit the previous client.
+     * @param editedPerson the new client that created when edit person information.
+     */
     void updateEditedClientInAppointments(Person personToEdit, Person editedPerson);
+
+    /**
+     * Remove the given person from the client list of the appointments,
+     * if the appointment has no client after the deletion, the appointment will be removed from schedule.
+     * @param personToDelete the given person to delete.
+     */
+    void removePersonFromAppointments(Person personToDelete);
 }

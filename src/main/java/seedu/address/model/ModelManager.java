@@ -181,6 +181,22 @@ public class ModelManager implements Model {
             appointment.addClient(editedPerson);
         }
     }
+
+    /**
+     * Remove the given person from the client list of the appointments,
+     * if the appointment has no client after the deletion, the appointment will be removed from schedule.
+     * @param personToDelete the given person to delete.
+     */
+    @Override
+    public void removePersonFromAppointments(Person personToDelete) {
+        List<Appointment> relatedAppointments = getRelatedAppointments(personToDelete);
+        for (Appointment appointment : relatedAppointments) {
+            appointment.removeClient(personToDelete);
+            if (appointment.isClientListEmpty()) {
+                schedule.deleteAppointment(appointment);
+            }
+        }
+    }
     /**
      * Returns the Observablelist of {@Code Appointment} that is related to the {@Code Person}
      */
