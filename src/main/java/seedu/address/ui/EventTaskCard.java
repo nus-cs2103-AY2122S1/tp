@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import seedu.address.model.task.Task;
 public class EventTaskCard extends UiPart<Region> {
 
     private static final String FXML = "EventTaskListCard.fxml";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +26,7 @@ public class EventTaskCard extends UiPart<Region> {
 
     public final Task task;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label id;
@@ -51,13 +53,13 @@ public class EventTaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
-        EventTask deadlineTask = (EventTask) task;
-        status.setText(task.getStatusString());
+        EventTask eventTask = (EventTask) task;
+        status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
         priorityLabel.setText(task.getPriorityAsString());
-        taskType.setText("EVENT");
+        taskType.setText("Event");
 
-        taskDate.setText(deadlineTask.getTaskDate().toString());
+        taskDate.setText("Date: " + eventTask.getTaskDate().getDeadline().format(formatter));
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

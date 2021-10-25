@@ -51,10 +51,10 @@ public class ToDoTaskCard extends UiPart<Region> {
         this.task = task;
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
-        status.setText(task.getStatusString());
+        status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
         priorityLabel.setText(task.getPriorityAsString());
-        taskType.setText("TODO");
+        taskType.setText("Todo");
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

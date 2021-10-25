@@ -1,7 +1,12 @@
 package seedu.address.ui;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.logging.SimpleFormatter;
 
+import javax.swing.text.DateFormatter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
@@ -13,6 +18,7 @@ import seedu.address.model.task.Task;
 public class DeadlineTaskCard extends UiPart<Region> {
 
     private static final String FXML = "DeadlineTaskListCard.fxml";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -54,12 +60,12 @@ public class DeadlineTaskCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
         DeadlineTask deadlineTask = (DeadlineTask) task;
-        status.setText(task.getStatusString());
+        status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
         priorityLabel.setText(task.getPriorityAsString());
-        taskType.setText("DEADLINE");
+        taskType.setText("Deadline");
 
-        taskDate.setText(deadlineTask.getDeadline().toString());
+        taskDate.setText("Date: " + deadlineTask.getDeadline().getDeadline().format(formatter));
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
