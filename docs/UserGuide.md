@@ -10,30 +10,43 @@ ClassMATE is a **desktop app for managing student contacts, optimized for use vi
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## How to use this User Guide
+
+This User Guide has been created to help users, old and new alike, familiarize themselves with ClassMATE, its features, commands and uses!
+
+* Use the Quick Start [below](#Quick-Start) :arrow_down_small: to setup ClassMATE on your Computer.
+* You may view the entire list of ClassMATE's Features by clicking [here](#features).
+* Alternatively, you can refer to the Command Summary Table at the bottom, or by clicking [here](#Command-Summary).
+* A list of frequently-asked questions (FAQs) is maintained [here](#FAQ)
+
+Throughout the User Guide,
+
+**:information_source: Notes** will be used to give additional points regarding features
+
+**:bulb:Tips** will be used to provide quick information bits about features
+
+We hope you find this User Guide helpful in using ClassMATE!
+
+------
+
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-
 1. Download the latest `classmate.jar` from [here](https://github.com/AY2122S1-CS2103T-W15-1/tp/releases).
-
 1. Copy the file to the folder you want to use as the _home folder_ for your ClassMATE.
-
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
-
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   ![Ui](images/Ui-annotated.png)
+1. Type the command in the **Command-Line Input** and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
-
    * **`liststu`** : Lists all students.
-
-   * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06 atd/1 as/OP1` : Adds a student named `John Doe` to ClassMATE.
-
-   * `deletestu 3` : Deletes the 3rd student shown in the current list.
-
+   
+   * **`addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 c/G06 atd/1 as/OP1` **: Adds a student named `John Doe` to ClassMATE.
+   
+   * **`deletestu 3` **: Deletes the 3rd student shown in the current list.
+   
    * **`clear`** : Deletes all students.
-
+   
    * **`exit`** : Exits the app.
-
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -41,7 +54,6 @@ ClassMATE is a **desktop app for managing student contacts, optimized for use vi
 ## Features
 
 <div markdown="block" class="alert alert-info">
-
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
@@ -105,7 +117,9 @@ Examples:
 
 ### Viewing a student : `viewstu`
 
-View a student's details in ClassMATE
+<img src="D:\Documents\Programming\2103T\tp\docs\images\viewstu.png" style="zoom:75%;" />
+
+View a student's details in ClassMATE, as shown in the picture above
 
 Format: `viewstu INDEX`
 
@@ -185,7 +199,13 @@ Examples:
 
 ### Viewing a class
 
-Views a class in ClassMATE
+<img src="D:\Documents\Programming\2103T\tp\docs\images\viewc.png" style="zoom:80%;" />
+
+Views a class in ClassMATE, as shown above
+
+**:information_source: Note:**<br>
+
+viewc highlights the class chosen, and filters out only students in the class!
 
 Format: `viewc INDEX`
 
@@ -263,7 +283,9 @@ Examples:
 
 ### Clearing all students : `clear`
 
-Clears all students from memory.
+Clears all students from memory. Results in the following window
+
+<img src="D:\Documents\Programming\2103T\tp\docs\images\clear.png" style="zoom:80%;" />
 
 Format: `clear`
 
@@ -294,7 +316,7 @@ If your changes to the data file makes its format invalid, ClassMATE will discar
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format, Examples
 --------|------------------

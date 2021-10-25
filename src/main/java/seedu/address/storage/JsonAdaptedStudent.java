@@ -16,6 +16,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ class JsonAdaptedStudent {
     private final String address;
     private final String classCode;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
+    private final List<JsonAdaptedMark> marks = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -39,7 +41,8 @@ class JsonAdaptedStudent {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
                               @JsonProperty("email") String email, @JsonProperty("address") String address,
                               @JsonProperty("classCode") String classCode,
-                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
+                              @JsonProperty("marks") List<JsonAdaptedMark> marks) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -47,6 +50,9 @@ class JsonAdaptedStudent {
         this.classCode = classCode;
         if (tagged != null) {
             this.tagged.addAll(tagged);
+        }
+        if (marks != null) {
+            this.marks.addAll(marks);
         }
     }
 
@@ -62,6 +68,9 @@ class JsonAdaptedStudent {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
+        marks.addAll(source.getMarks().stream()
+                .map(JsonAdaptedMark::new)
+                .collect(Collectors.toList()));
     }
 
     /**
@@ -73,6 +82,11 @@ class JsonAdaptedStudent {
         final List<Tag> studentTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             studentTags.add(tag.toModelType());
+        }
+
+        final List<StudentMark> studentMarks = new ArrayList<>();
+        for (JsonAdaptedMark mark : marks) {
+            studentMarks.add(mark.toModelType());
         }
 
         if (name == null) {
@@ -114,7 +128,9 @@ class JsonAdaptedStudent {
         final ClassCode modelClassCode = new ClassCode(classCode);
 
         final Set<Tag> modelTags = new HashSet<>(studentTags);
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelClassCode, modelTags);
+        final List<StudentMark> modelMarks = new ArrayList<>(studentMarks);
+
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelClassCode, modelTags, modelMarks);
     }
 
 }

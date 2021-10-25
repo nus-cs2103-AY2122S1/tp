@@ -41,7 +41,8 @@ public class AddGroupCommand extends Command {
         requireNonNull(tutorialGroup);
         toAdd = tutorialGroup;
         // new class with the same class code created to check whether it already exists in ClassMATE
-        toAddTutorialClass = new TutorialClass(tutorialGroup.getClassCode(), new Schedule("dummy"), new HashSet<Tag>());
+        toAddTutorialClass = new TutorialClass(tutorialGroup.getClassCode(),
+                new Schedule("dummy, dummy"), new HashSet<Tag>());
     }
 
     @Override
