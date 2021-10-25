@@ -19,7 +19,7 @@ import seedu.address.model.tag.TaskTag;
 import seedu.address.model.task.Task;
 
 class MarkTaskCommandTest {
-    private static String TEST_DATE = "1918-04-12";
+    private static String TEST_DATE = "4 July 2020";
 
     private static final Task testTask = new Task(new Label("test label"),
             new Date(TEST_DATE), new TaskTag("SO100"));
