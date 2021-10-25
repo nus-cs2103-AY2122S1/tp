@@ -115,7 +115,7 @@ public class Classmate implements ReadOnlyClassmate {
     //// tutorialclass-level operations
 
     /**
-     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the ClassMATE.
+     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the address book.
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
@@ -126,8 +126,8 @@ public class Classmate implements ReadOnlyClassmate {
     }
 
     /**
-     * Adds a tutorialClass to the ClassMATE.
-     * The tutorialClass must not already exist in the ClassMATE.
+     * Adds a tutorialClass to the address book.
+     * The tutorialClass must not already exist in the address book.
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
