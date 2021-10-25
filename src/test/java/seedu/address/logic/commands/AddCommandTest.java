@@ -187,8 +187,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Client> setAll(List<ClientId> clientIds,
-                                   EditClientDescriptor editedClientDescriptor) {
+        public List<Client> setAllClients(List<ClientId> clientIds,
+                                          EditClientDescriptor editedClientDescriptor) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -303,12 +303,6 @@ public class AddCommandTest {
         final ArrayList<Client> clientsAdded = new ArrayList<>();
 
         @Override
-        public void addClient(Client client) {
-            requireNonNull(client);
-            clientsAdded.add(client);
-        }
-
-        @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
         }
@@ -317,6 +311,12 @@ public class AddCommandTest {
         public boolean hasClient(Client client) {
             requireNonNull(client);
             return clientsAdded.stream().anyMatch(client::isSameClient);
+        }
+
+        @Override
+        public void addClient(Client client) {
+            requireNonNull(client);
+            clientsAdded.add(client);
         }
     }
 }

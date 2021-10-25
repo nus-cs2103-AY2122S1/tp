@@ -135,7 +135,7 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
-    List<Client> setAll(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor);
+    List<Client> setAllClients(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor);
 
     /**
      * Returns client with corresponding clientId.
