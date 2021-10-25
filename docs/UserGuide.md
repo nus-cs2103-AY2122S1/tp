@@ -2,6 +2,11 @@
 
 PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
+If you are new, this guide is meant to introduce you to PlannerMD as well as guide you through our features and how to use them. If you are already 
+experienced with PlannerMD, we hope that our comprehensive user guide will help clarify any that you have! Refer to our [table of contents](#toc) to see what
+we have to offer!
+
+Table Of Contents <a href="toc"></a>
 * [What is Command-line Interface (CLI)?](#what-is-cli)
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -43,10 +48,12 @@ PlannerMD is an easy-to-use command-line interface (CLI) application that helps 
 --------------------------------------------------------------------------------------------------------------------
 ## What is Command-line Interface (CLI?)
 A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
-you would type the command in text in the command box, and the programme will execute your command.
+you would type the command in text in the command box, and the programme will execute your command, and reflect its response in the response box.
+
+![get format](images/user-guide/commandBox.png)
 
 ### Why CLI? 
-We want to give you an experience that is as similar as writing with pen-and-paper, to help you clinic receptions adapt easily. With a CLI,
+We want to give you an experience that is as similar as writing with pen-and-paper, to help you clinic receptionists adapt easily. With a CLI,
 you can imagine the keyboard as your pen, and a command box as your paper. To clinic receptionists who are already using a different application
 with a Graphical User Interface (GUI), our application removes the need to constantly access your mouse and speed up your arduous process of managing
 patients, doctors and appointments.
