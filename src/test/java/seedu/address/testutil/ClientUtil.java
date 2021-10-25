@@ -27,7 +27,7 @@ public class ClientUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code client}'s details.
      */
     public static String getClientDetails(Client client) {
         StringBuilder sb = new StringBuilder();
@@ -50,7 +50,7 @@ public class ClientUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditClientDescriptor}'s details.
      */
     public static String getEditClientDescriptorDetails(EditClientCommand.EditClientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
