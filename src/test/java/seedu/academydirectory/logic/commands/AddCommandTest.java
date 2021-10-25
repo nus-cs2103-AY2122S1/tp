@@ -17,8 +17,10 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.GuiSettings;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.model.AcademyDirectory;
+import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.ReadOnlyUserPrefs;
 import seedu.academydirectory.model.VersionedModel;
@@ -181,6 +183,15 @@ public class AddCommandTest {
             return null;
         }
 
+        @Override
+        public AdditionalViewModel getAdditionalViewModel() {
+            return null;
+        }
+
+        @Override
+        public void setAdditionalViewType(AdditionalViewType additionalViewType) {
+
+        }
     }
 
     /**

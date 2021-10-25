@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.commons.core.LogsCenter;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.StageArea;
@@ -32,6 +33,8 @@ public class ModelManager implements VersionedModel {
 
     private final VersionControl versionControl;
 
+    private final AdditionalViewModel additionalViewModel;
+
     /**
      * Initializes a ModelManager with the given academyDirectory and userPrefs.
      */
@@ -48,6 +51,8 @@ public class ModelManager implements VersionedModel {
         this.versionControl = new VersionControl(HashMethod.SHA1,
                 userPrefs.getVersionControlPath(),
                 userPrefs.getAcademyDirectoryFilePath());
+
+        this.additionalViewModel = new AdditionalViewModel(AdditionalViewType.DEFAULT, AdditionalInfo.empty());
     }
 
     public ModelManager() {
@@ -198,5 +203,17 @@ public class ModelManager implements VersionedModel {
 
     public Commit fetchCommitByLabel(String labelName) {
         return versionControl.fetchCommitByLabel(labelName);
+    }
+
+    //=========== Additional Information View =============================================================
+
+    @Override
+    public void setAdditionalViewType(AdditionalViewType additionalViewType) {
+        this.additionalViewModel.setAdditionalViewType(additionalViewType);
+    }
+
+    @Override
+    public AdditionalViewModel getAdditionalViewModel() {
+        return this.additionalViewModel;
     }
 }
