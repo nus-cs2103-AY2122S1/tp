@@ -7,9 +7,7 @@ public class Lab {
     private String title;
     private Double actualScore;
     private Double totalScore;
-
-    public static final String LAB_TITLE_MESSAGE_CONSTRAINTS = "Lab number takes in two string value "
-            + "in the format XX.";
+    
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
 
     /**
