@@ -1,5 +1,6 @@
 ---
-layout: page title: User Guide
+layout: page
+title: User Guide
 ---
 
 # User Guide for Sellah
@@ -8,38 +9,40 @@ layout: page title: User Guide
 
 1. [Introduction](#1-introduction) <br>
 2. [Quick start](#2-quick-start) <br>
-3. [About](#3-about) <br>
-   3.1. [Structure of this Document](#31-structure-of-the-document) <br>
-   3.2. [Reading this Document](#32-reading-this-document) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 3.2.1. [Technical terms](#321-technical-terms) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 3.2.2. [General Symbols and Syntax](#322-general-symbols-and-syntax) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 3.2.3. [Defining Client and Product](#323-defining-client-and-product) <br>
-4. [Features](#4-features)  <br>
-   4.1. [Getting Help](#41-getting-help)<br>
-   4.2. [Add](#42-add) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.2.1. [Adding a Client](#421-adding-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.2.2. [Adding a Product](#422-adding-a-product) <br>
-   4.3. [Delete](#43-delete) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.3.1. [Deleting a Client](#431-deleting-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.3.2. [Deleting a Product](#432-deleting-a-product) <br>
-   4.4. [Edit](#44-edit) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.4.1. [Editing a Client](#441-editing-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.4.2. [Editing a Product](#442-editing-a-product) <br>
-   4.5. [Find](#45-find) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.5.1. [Finding a Client](#451-finding-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.5.2. [Finding a Product](#452-finding-a-product) <br>
-   4.6. [List](#46-list) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.6.1. [Listing all Clients](#461-listing-all-clients) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.6.2. [Listing all Products](#462-listing-all-products) <br>
-   4.7. [View](#47-view) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.7.1. [Viewing a Client](#471-viewing-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.7.2. [Viewing a Product](#472-viewing-a-product) <br>
-   4.8. [Clearing the all Data](#48-clearing-all-data) <br>
-   4.9. [Navigating the Command History](#49-navigating-the-command-history) <br>
-   4.10. [Viewing Statistics](#410-viewing-statistics) <br>
-   4.11. [Exiting Sellah](#411-exiting-sellah) <br>
-   4.12. [Saving Data](#412-saving-data) <br>
-   4.13. [Editing the Data file](#413-editing-the-data-file) <br>
+3. <details><summary><a href="#3-about">About</a></summary>
+      3.1. <a href="#31-structure-of-the-document">Structure of this Document</a><br>
+      3.2. <a href="#32-reading-this-document">Reading this Document</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 3.2.1. <a href="#321-technical-terms">Technical terms</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 3.2.2. <a href="#322-general-symbols-and-syntax">General Symbols and Syntax</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 3.2.3. <a href="#323-defining-client-and-product">Defining Client and Product</a><br>
+   </details>
+4. <details><summary><a href="#4-features">Features</a></summary>
+      4.1. <a href="#41-getting-help">Getting Help</a><br>
+      4.2. <a href="#42-add">Add</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.2.1. <a href="#421-adding-a-client">Adding a Client</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.2.2. <a href="#422-adding-a-product">Adding a Product</a><br>
+      4.3. <a href="#43-delete">Delete</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.3.1. <a href="#431-deleting-a-client">Deleting a Client</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.3.2. <a href="#432-deleting-a-product">Deleting a Product</a><br>
+      4.4. <a href="#44-edit">Edit</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.4.1. <a href="#441-editing-a-client">Editing a Client</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.4.2. <a href="#442-editing-a-product">Editing a Product</a><br>
+      4.5. <a href="#45-find">Find</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.5.1. <a href="#451-finding-a-client">Finding a Client</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.5.2. <a href="#452-finding-a-product">Finding a Product</a><br>
+      4.6. <a href="#46-list">List</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.6.1. <a href="#461-listing-all-clients">Listing all Clients</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.6.2. <a href="#462-listing-all-products">Listing all Products</a><br>
+      4.7. <a href="#47-view">View</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.7.1. <a href="#471-viewing-a-client">Viewing a Client</a><br>
+      &nbsp;&nbsp;&nbsp;&nbsp; 4.7.2. <a href="#472-viewing-a-product">Viewing a Product</a><br>
+      4.8. <a href="#48-clearing-all-data">Clearing the all Data</a><br>
+      4.9. <a href="#49-navigating-the-command-history">Navigating the Command History</a><br>
+      4.10. <a href="#410-viewing-statistics">Viewing Statistics</a><br>
+      4.11. <a href="#411-exiting-sellah">Exiting Sellah</a><br>
+      4.12. <a href="#412-saving-data">Saving Data</a><br>
+      4.13. <a href="#413-editing-the-data-file">Editing the Data file</a><br>
+   </details>
 5. [FAQ](#5-faq) <br>
 6. [Command summary](#6-command-summary) <br>
 
