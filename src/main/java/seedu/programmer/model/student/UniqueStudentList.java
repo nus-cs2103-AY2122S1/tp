@@ -99,6 +99,18 @@ public class UniqueStudentList implements Iterable<Student> {
         internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
     }
 
+    /**
+     * Removes the equivalent lab from the list.
+     * The lab must exist in the list.
+     */
+    public void removeLab(Lab toRemove) {
+        requireNonNull(toRemove);
+        for (Student std : internalList) {
+            std.delLabResult(toRemove);
+        }
+        //internalList.sort(new SortByClass().thenComparing(new SortByStudentName()));
+    }
+
     public void setStudents(UniqueStudentList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);

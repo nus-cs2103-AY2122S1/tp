@@ -94,6 +94,14 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.remove(key);
     }
 
+    /**
+     * Removes {@code lab} from this {@code ProgrammerError}.
+     * {@code lab} must exist in ProgrammerError.
+     */
+    public void removeLab(Lab lab) {
+        students.removeLab(lab);
+    }
+
     //// util methods
 
     @Override

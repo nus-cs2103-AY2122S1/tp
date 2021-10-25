@@ -8,6 +8,7 @@ import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_AMY;
 import static seedu.programmer.logic.commands.CommandTestUtil.VALID_STUDENT_ID_BOB;
+import static seedu.programmer.testutil.TypicalLabs.getTypicalLabList;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +21,7 @@ import seedu.programmer.model.student.Student;
  * A utility class containing a list of {@code student} objects to be used in tests.
  */
 public class TypicalStudents {
+
 
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withStudentId("A0212425H").withClassId("B01")
@@ -68,6 +70,7 @@ public class TypicalStudents {
     public static ProgrammerError getTypicalProgrammerError() {
         ProgrammerError ab = new ProgrammerError();
         for (Student student : getTypicalStudents()) {
+            student.setLabResultList(getTypicalLabList());
             ab.addStudent(student);
         }
         return ab;
