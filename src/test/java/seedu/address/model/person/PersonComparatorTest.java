@@ -1,10 +1,11 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
+
 import seedu.address.logic.parser.Prefix;
 import seedu.address.testutil.PersonBuilder;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PersonComparatorTest {
 
@@ -22,7 +23,7 @@ public class PersonComparatorTest {
             .build();
 
     private Person carol = new PersonBuilder()
-            .withName("George Best")
+            .withName("Carol Heinz")
             .withPhone("97897897")
             .withEmail("e0000009@u.nus.edu")
             .withAddress("wall street")
@@ -36,7 +37,7 @@ public class PersonComparatorTest {
     @Test
     public void compare_prefixName_lessThan() {
         PersonComparator comparator = new PersonComparator(new Prefix("n/"));
-        assertTrue(comparator.compare(carol, alex) < 0);
+        assertTrue(comparator.compare(alex, carol) < 0);
     }
 
     @Test

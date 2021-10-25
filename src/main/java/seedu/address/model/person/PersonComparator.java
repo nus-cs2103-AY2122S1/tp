@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import seedu.address.logic.parser.Prefix;
-
 import java.util.Comparator;
+
+import seedu.address.logic.parser.Prefix;
 
 /**
  * Compares Person Objects by the given {@code Prefix}
