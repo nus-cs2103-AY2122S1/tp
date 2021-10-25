@@ -2,7 +2,6 @@ package tutoraid.testutil;
 
 import java.util.ArrayList;
 
-import tutoraid.model.lesson.Lesson;
 import tutoraid.model.student.Lessons;
 import tutoraid.model.student.ParentName;
 import tutoraid.model.student.PaymentStatus;
@@ -113,6 +112,11 @@ public class StudentBuilder {
         return this;
     }
 
+    /**
+     * Builds the student.
+     *
+     * @return the Student object that is built
+     */
     public Student build() {
         return new Student(studentName, studentPhone, parentName, parentPhone,
                 progressList, paymentStatus, lessons);

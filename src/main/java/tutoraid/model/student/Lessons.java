@@ -8,7 +8,6 @@ import tutoraid.commons.util.AppUtil;
 import tutoraid.model.lesson.Lesson;
 import tutoraid.model.lesson.LessonName;
 import tutoraid.model.student.exceptions.DuplicateStudentLessonsException;
-import tutoraid.model.student.exceptions.EmptyProgressListException;
 import tutoraid.model.student.exceptions.StudentLessonsNotFoundException;
 
 /**
