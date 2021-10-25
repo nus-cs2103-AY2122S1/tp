@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.SimpleListProperty;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -14,6 +15,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.GuiSettings.Theme;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -33,12 +35,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Theme theme;
 
     // Independent Ui parts residing in this Ui container
     private PersonListPanel personListPanel;
     private PersonListPanel selectedListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private SettingsWindow settingsWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -72,11 +76,14 @@ public class MainWindow extends UiPart<Stage> {
         this.logic = logic;
 
         // Configure the UI
-        setWindowDefaultSize(logic.getGuiSettings());
+        GuiSettings guiSettings = logic.getGuiSettings();
+        setWindowDefaultSize(guiSettings);
+        setTheme(guiSettings.getTheme());
 
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        settingsWindow = new SettingsWindow(this, guiSettings);
     }
 
     public Stage getPrimaryStage() {
@@ -153,6 +160,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    public void setTheme(Theme theme) {
+        ObservableList<String> stylesheets = getPrimaryStage().getScene().getStylesheets();
+        if (this.theme != null) {
+            stylesheets.remove(this.theme.getUrl());
+        }
+        stylesheets.add(theme.getUrl());
+        this.theme = theme;
+    }
+
     /**
      * Opens the help window or focuses on it if it's already opened.
      */
@@ -175,10 +191,23 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+                (int) primaryStage.getX(), (int) primaryStage.getY(), theme);
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        settingsWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens settings window.
+     */
+    @FXML
+    private void handleSettings() {
+        if (!settingsWindow.isShowing()) {
+            settingsWindow.show();
+        } else {
+            settingsWindow.focus();
+        }
     }
 
     public PersonListPanel getPersonListPanel() {
