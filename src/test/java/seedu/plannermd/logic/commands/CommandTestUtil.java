@@ -28,6 +28,8 @@ import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.PlannerMd;
+import seedu.plannermd.model.appointment.Appointment;
+import seedu.plannermd.model.appointment.AppointmentFieldsContainKeywordsPredicate;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
@@ -255,6 +257,21 @@ public class CommandTestUtil {
         model.updateFilteredDoctorList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredDoctorList().size());
+    }
+
+    /**
+     * Updates {@code model}'s appointment filtered list to show only the appointment at the given
+     * {@code targetIndex} in the {@code model}'s plannermd.
+     */
+    public static void showAppointmentAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredAppointmentList().size());
+
+        Appointment appointment = model.getFilteredAppointmentList().get(targetIndex.getZeroBased());
+        final String[] splitPatientName = appointment.getPatient().getName().fullName.split("\\s+");
+        model.updateFilteredAppointmentList(
+                new AppointmentFieldsContainKeywordsPredicate(Arrays.asList(splitPatientName[0])));
+        System.out.println(model.getFilteredAppointmentList());
+        assertEquals(1, model.getFilteredAppointmentList().size());
     }
 
 }
