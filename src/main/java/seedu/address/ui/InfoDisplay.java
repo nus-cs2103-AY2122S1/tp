@@ -77,7 +77,7 @@ public class InfoDisplay extends UiPart<Region> {
     public void setAssessmentInfo(Assessment assessment) {
         name.setText(assessment.getName());
 
-        AssessmentStatistics statistics = assessment.getStatistics();
+        AssessmentStatistics statistics = new AssessmentStatistics(assessment);
         info1.setText("Grade range: " + statistics.getMin() + "-" + statistics.getMax());
         info2.setText("Median: " + statistics.getMedian());
         info3.setText("Mean: " + statistics.getMean());

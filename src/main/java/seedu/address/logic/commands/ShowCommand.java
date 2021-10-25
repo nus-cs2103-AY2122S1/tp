@@ -107,7 +107,7 @@ public class ShowCommand extends Command {
         }
 
         Info info = new Info(matchedAssessment);
-        AssessmentStatistics statistics = matchedAssessment.getStatistics();
+        AssessmentStatistics statistics = new AssessmentStatistics(matchedAssessment);
         return new CommandResult(MESSAGE_SUCCESS, info, statistics.toHistogram());
     }
 

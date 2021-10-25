@@ -22,9 +22,6 @@ public class Assessment {
     // Assessment name
     public final String name;
 
-    // Assessment statistics
-    private AssessmentStatistics statistics;
-
     /**
      * Constructs an {@code Assessment}.
      *
@@ -51,21 +48,12 @@ public class Assessment {
         return scores;
     }
 
-    public AssessmentStatistics getStatistics() {
-        setStatistics();
-        return statistics;
-    }
-
     public void setScore(ID id, Score score) {
         scores.put(id, score);
     }
 
     public void setScores(Map<ID, Score> scores) {
         this.scores.putAll(scores);
-    }
-
-    public void setStatistics() {
-        this.statistics = new AssessmentStatistics(this);
     }
 
     /**
