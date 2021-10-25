@@ -132,9 +132,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Splits members into different facilities.
      *
      * @param membersFilteredList List of filtered members to be allocated.
+     * @return number of members left unallocated, -1 if zero members provided.
      */
-    public void split(FilteredList<Person> membersFilteredList) {
+    public int split(FilteredList<Person> membersFilteredList) {
+        int memberCount = membersFilteredList.size();
+        int facilityCap = facilities.getTotalCapacity();
+        // No members available
+        if (memberCount == 0) {
+            return -1;
+        }
+        // Insufficient capacity
+        if (memberCount > facilityCap) {
+            return memberCount - facilityCap;
+        }
+
         facilities.allocateMembersToFacilities(membersFilteredList);
+        return 0;
     }
 
     /**
