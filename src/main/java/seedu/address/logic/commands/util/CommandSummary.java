@@ -134,7 +134,7 @@ public class CommandSummary {
                         LessonDeleteCommand.COMMAND_EXAMPLE),
                 new CommandSummary(ViewCommand.COMMAND_ACTION, ViewCommand.COMMAND_FORMAT,
                         ViewCommand.COMMAND_EXAMPLE),
-                new CommandSummary(RemindCommand.COMMAND_ACTION, RemindCommand.COMMAND_ACTION,
+                new CommandSummary(RemindCommand.COMMAND_ACTION, RemindCommand.COMMAND_WORD,
                         RemindCommand.COMMAND_WORD),
                 new CommandSummary(ClearCommand.COMMAND_ACTION, ClearCommand.COMMAND_WORD,
                         ClearCommand.COMMAND_WORD),
