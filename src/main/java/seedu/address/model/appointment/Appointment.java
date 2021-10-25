@@ -99,8 +99,8 @@ public class Appointment implements Comparable<Appointment> {
      * @return String with the first letter for the month in capital letters.
      */
     private static String convertMonthToFormat(String dateTimeString) {
-        String convertedDate = dateTimeString.substring(0, 3) + dateTimeString.substring(3,4).toUpperCase()
-                + dateTimeString.substring(4, 6).toLowerCase() + dateTimeString.substring(6,17);
+        String convertedDate = dateTimeString.substring(0, 3) + dateTimeString.substring(3, 4).toUpperCase()
+                + dateTimeString.substring(4, 6).toLowerCase() + dateTimeString.substring(6, 17);
 
         return convertedDate;
     }
