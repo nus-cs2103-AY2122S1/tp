@@ -54,6 +54,7 @@ public class ParserUtil {
 
             indexList.add(Index.fromOneBased(Integer.parseInt(trimmedIndex)));
         }
+
         return indexList;
     }
 

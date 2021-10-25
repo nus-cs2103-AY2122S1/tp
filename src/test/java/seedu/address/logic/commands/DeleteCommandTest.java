@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -39,6 +40,66 @@ public class DeleteCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndicesUnfilteredListInAscendingOrder_success() {
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        ArrayList<Index> indicesMultiplePersons = new ArrayList<>();
+        indicesMultiplePersons.add(INDEX_FIRST_PERSON);
+        indicesMultiplePersons.add(INDEX_SECOND_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(indicesMultiplePersons);
+
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "; "
+                + secondPersonToDelete;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(firstPersonToDelete);
+        expectedModel.deletePerson(secondPersonToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndicesUnfilteredListInDescendingOrder_success() {
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        ArrayList<Index> indicesMultiplePersons = new ArrayList<>();
+        indicesMultiplePersons.add(INDEX_SECOND_PERSON);
+        indicesMultiplePersons.add(INDEX_FIRST_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(indicesMultiplePersons);
+
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "; "
+                + secondPersonToDelete;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(firstPersonToDelete);
+        expectedModel.deletePerson(secondPersonToDelete);
+
+        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndicesUnfilteredListInMixedOrder_success() {
+        Person firstPersonToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person secondPersonToDelete = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Person thirdPersonToDelete = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
+        ArrayList<Index> indicesMultiplePersons = new ArrayList<>();
+        indicesMultiplePersons.add(INDEX_THIRD_PERSON);
+        indicesMultiplePersons.add(INDEX_FIRST_PERSON);
+        indicesMultiplePersons.add(INDEX_SECOND_PERSON);
+        DeleteCommand deleteCommand = new DeleteCommand(indicesMultiplePersons);
+
+        String expectedMessage = DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS + firstPersonToDelete + "; "
+                + secondPersonToDelete + "; " + thirdPersonToDelete;
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(firstPersonToDelete);
+        expectedModel.deletePerson(secondPersonToDelete);
+        expectedModel.deletePerson(thirdPersonToDelete);
 
         assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
     }
