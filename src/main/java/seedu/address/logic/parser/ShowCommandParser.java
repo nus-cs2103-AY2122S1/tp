@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ShowCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -24,8 +25,31 @@ public class ShowCommandParser implements Parser<ShowCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT);
 
-        if (areRedundantPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT)
-                || !argMultimap.getPreamble().isEmpty()) {
+        return argMultimap.getPreamble().isEmpty()
+                ? parseByPrefixes(argMultimap)
+                : parseByIndex(argMultimap);
+    }
+
+    /**
+     * Handles parsing by {@code Index}.
+     */
+    public ShowCommand parseByIndex(ArgumentMultimap argMultimap) throws ParseException {
+        Index index;
+
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
+        }
+
+        return new ShowCommand(index);
+    }
+
+    /**
+     * Handles parsing by prefixes.
+     */
+    public ShowCommand parseByPrefixes(ArgumentMultimap argMultimap) throws ParseException {
+        if (areRedundantPrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ID, PREFIX_ASSESSMENT)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ShowCommand.MESSAGE_USAGE));
         }
 
