@@ -138,7 +138,7 @@ This section lists the types of commands that TutorAid can execute. For more inf
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
