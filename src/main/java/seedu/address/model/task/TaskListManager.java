@@ -3,6 +3,8 @@ package seedu.address.model.task;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -40,7 +42,7 @@ public class TaskListManager {
     public TaskListManager() {
         taskListArchive = new HashMap<>();
         isPersonSelected = false;
-        observableTaskList = FXCollections.observableArrayList();
+        observableTaskList = FXCollections.observableArrayList(Task.extractor());
         filteredTasks = new FilteredList<>(observableTaskList);
     }
 
@@ -147,6 +149,31 @@ public class TaskListManager {
         requireNonNull(predicate);
 
         filteredTasks.setPredicate(predicate);
+    }
+
+    public double[] calculateStatistics() {
+        double totalTask = 0.0;
+        double taskDone = 0.0;
+        double taskNotDone = 0.0;
+        double taskOverdue = 0.0;
+        double taskDueSoon = 0.0;
+
+        for (List<Task> taskList : taskListArchive.values()) {
+            for (Task task : taskList) {
+                if (task.getIsDueSoon()) {
+                    taskDueSoon++;
+                } else if (task.getIsOverdue()) {
+                    taskOverdue++;
+                } else if (task.getDone()) {
+                    taskDone++;
+                } else {
+                    // Task is not done yet.
+                    taskNotDone++;
+                }
+                totalTask++;
+            }
+        }
+        return new double[]{taskDone, taskNotDone, taskOverdue, taskDueSoon, totalTask};
     }
 
     @Override

@@ -1,0 +1,22 @@
+.chart-pie-label-line {
+    -fx-stroke: #8b4513;
+    -fx-fill: #8b4513;
+}
+
+.chart-pie-label {
+    -fx-fill: "limegreen";
+    -fx-font-size: 15;
+}
+
+.default-color0.chart-pie {
+    -fx-pie-color: #00FF00
+}
+.default-color1.chart-pie {
+    -fx-pie-color: lightblue;
+}
+.default-color2.chart-pie {
+    -fx-pie-color: red;
+}
+.default-color3.chart-pie {
+    -fx-pie-color: orange;
+}

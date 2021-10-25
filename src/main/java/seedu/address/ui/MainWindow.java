@@ -11,6 +11,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -39,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private StatisticsDisplay statisticsDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,8 +52,10 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane resultDisplayPlaceholder;
+    private AnchorPane resultDisplayPlaceholder;
 
+    @FXML
+    private AnchorPane statisticsDisplayPlaceholder;
     @FXML
     private StackPane statusbarPlaceholder;
 
@@ -163,6 +167,11 @@ public class MainWindow extends UiPart<Stage> {
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        setAnchorProperties(resultDisplayPlaceholder);
+
+        statisticsDisplay = new StatisticsDisplay();
+        statisticsDisplayPlaceholder.getChildren().add(statisticsDisplay.getRoot());
+        setAnchorProperties(statisticsDisplayPlaceholder);
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -228,6 +237,7 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
+                statisticsDisplay.updateStatistics(new double[]{10, 20, 5, 7});
             }
 
             if (commandResult.isExit()) {

@@ -41,6 +41,7 @@ public class TaskListPanel extends UiPart<Region> {
     class TaskListViewCell extends ListCell<Task> {
         @Override
         protected void updateItem(Task task, boolean empty) {
+            System.out.println("TESSSSTTTTTTTTTTTTTTTTTTT");
             super.updateItem(task, empty);
 
             if (empty || task == null) {

@@ -93,4 +93,7 @@ public interface Model {
     void displayPersonTaskList(Person person);
 
     void updateSortedPersonList(boolean isReverseOrder);
+
+    /** Gets important statistics information relating to tasks. */
+    double[] getStatistics();
 }

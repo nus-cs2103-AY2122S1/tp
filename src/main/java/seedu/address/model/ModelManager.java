@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskListManager;
+import seedu.address.model.util.TaskStatusChecker;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -29,7 +30,7 @@ public class ModelManager implements Model {
     private final SortedList<Person> filteredPersons;
 
     private final TaskListManager taskListManager;
-
+    private final TaskStatusChecker taskStatusChecker;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -42,6 +43,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         this.taskListManager = new TaskListManager();
+        this.taskStatusChecker = new TaskStatusChecker(this);
 
         taskListManager.initialiseArchive(this.getAddressBook().getPersonList());
 
@@ -184,5 +186,12 @@ public class ModelManager implements Model {
     @Override
     public void displayPersonTaskList(Person person) {
         taskListManager.setToDisplayTaskList(person.getName());
+    }
+
+    //=========== statistics Assessors =====================================================================
+
+    @Override
+    public double[] getStatistics() {
+        return taskListManager.calculateStatistics();
     }
 }

@@ -1,5 +1,10 @@
 package seedu.address.model.task;
 
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.util.Callback;
+
 import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDate;
@@ -16,20 +21,30 @@ public class Task {
     private final TaskDate date;
     private final TaskTime time;
     private final Venue venue;
-    private boolean isDone = false;
-    private boolean isOverdue;
-    private boolean isDueSoon;
+    private BooleanProperty isDone;
+    private BooleanProperty isOverdue;
+    private BooleanProperty isDueSoon;
 
     /**
      * Constructor for task. Creates a new task with the given a String name.
      */
     public Task (TaskName taskName, TaskDate date, TaskTime time, Venue venue) {
         requireNonNull(taskName);
+
+        this.isDone = new SimpleBooleanProperty(false);
+        this.isOverdue = new SimpleBooleanProperty();
+        this.isDueSoon = new SimpleBooleanProperty();
+
         this.taskName = taskName;
         this.date = date;
         this.time = time;
         this.venue = venue;
         updateDueDate();
+    }
+
+
+    public static Callback<Task, Observable[]> extractor() {
+        return (Task t) -> new Observable[]{t.isOverdue, t.isDueSoon};
     }
 
     public TaskName getTaskName() {
@@ -49,47 +64,52 @@ public class Task {
     }
 
     public boolean getDone() {
-        return isDone;
+        return isDone.getValue();
     }
 
     public void setDone() {
-        isDone = true;
+        isDone.setValue(true);
     }
 
     public void setNotDone() {
-        isDone = false;
+        isDone.setValue(false);
     }
 
     public boolean getIsOverdue() {
-        return isOverdue;
+        return isOverdue.getValue();
     }
 
     public boolean getIsDueSoon() {
-        return isDueSoon;
+        return isDueSoon.getValue();
     }
 
     /**
      * Updates if the task is overdue or due soon.
      */
     public void updateDueDate() {
-        if (!isDone) {
+        if (!isDone.getValue()) {
             LocalDate taskDate = date == null ? LocalDate.MAX : date.taskDate;
             LocalTime taskTime = time == null ? LocalTime.MIDNIGHT : time.taskTime;
             LocalDateTime taskDateTime = LocalDateTime.of(taskDate, taskTime);
             if (taskDateTime.isBefore(LocalDateTime.now())) { // Overdue
-                isOverdue = true;
-                isDueSoon = false;
+                isOverdue.setValue(true);
+                isDueSoon.setValue(false);
             } else if (taskDateTime.isBefore(LocalDateTime.now().plusDays(dueSoonThreshold))) { // Due soon
-                isOverdue = false;
-                isDueSoon = true;
+                isOverdue.setValue(false);
+                isDueSoon.setValue(true);
             } else {
-                isDueSoon = false;
-                isOverdue = false;
+                isDueSoon.setValue(false);
+                isOverdue.setValue(false);
             }
         } else {
-            isDueSoon = false;
-            isOverdue = false;
+            isDueSoon.setValue(false);
+            isOverdue.setValue(false);
         }
+    }
+
+
+    public static void setDueSoonThreshold(int threshold) {
+
     }
 
     @Override
@@ -113,7 +133,7 @@ public class Task {
                 ? venue == null
                 : otherTask.getVenue().equals(venue);
         return otherTask.getTaskName().equals(taskName)
-                && otherTask.isDone == isDone
+                && otherTask.isDone.getValue() == isDone.getValue()
                 && sameDate
                 && sameTime
                 && sameVenue;
