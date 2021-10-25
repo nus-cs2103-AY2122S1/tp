@@ -178,7 +178,7 @@ The workflow of the Delete command is shown in the Activity diagram illustrated 
 
 ![AddActivityDiagram](images/logic/commands/deletecommand/DeleteActivityDiagram.png)
 
-### Design considerations:
+#### Design considerations:
 
 **Aspect: Delete the correct resident/event:**
 
