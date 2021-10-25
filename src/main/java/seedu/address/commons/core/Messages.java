@@ -11,6 +11,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_CLASS_DISPLAYED_INDEX = "The class index provided is invalid";
     public static final String MESSAGE_INVALID_GROUP_DISPLAYED_INDEX = "The group index provided is invalid";
     public static final String MESSAGE_STUDENTS_LISTED_OVERVIEW = "%1$d students listed!";
-    public static final String MESSAGE_TUTORIAL_CLASSES_LISTED_OVERVIEW = "%1$d classes listed!";
+    public static final String MESSAGE_TUTORIAL_CLASSES_LISTED_OVERVIEW = "%1$d tutorial classes listed!";
+    public static final String MESSAGE_TUTORIAL_GROUPS_LISTED_OVERVIEW = "%1$d tutorial groups listed!";
 
 }
