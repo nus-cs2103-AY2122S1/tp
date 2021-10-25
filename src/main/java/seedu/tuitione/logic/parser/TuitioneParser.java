@@ -19,6 +19,7 @@ import seedu.tuitione.logic.commands.FilterCommand;
 import seedu.tuitione.logic.commands.FindCommand;
 import seedu.tuitione.logic.commands.HelpCommand;
 import seedu.tuitione.logic.commands.ListCommand;
+import seedu.tuitione.logic.commands.RosterCommand;
 import seedu.tuitione.logic.commands.UnenrollCommand;
 import seedu.tuitione.logic.parser.exceptions.ParseException;
 
@@ -88,6 +89,9 @@ public class TuitioneParser {
 
         case FilterCommand.COMMAND_WORD:
             return new FilterCommandParser().parse(arguments);
+
+        case RosterCommand.COMMAND_WORD:
+            return new RosterCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
