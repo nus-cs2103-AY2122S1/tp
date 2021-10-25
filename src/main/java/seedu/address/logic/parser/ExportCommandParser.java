@@ -18,7 +18,7 @@ public class ExportCommandParser implements Parser<ExportCommand> {
             + "exports";
 
     private static final String REGEX = "^[a-zA-Z0-9._ -]+$";
-    public static final String CSV_EXTENSION = ".csv";
+    private static final String CSV_EXTENSION = ".csv";
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
