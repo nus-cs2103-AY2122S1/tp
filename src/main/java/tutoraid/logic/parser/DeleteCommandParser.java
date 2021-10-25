@@ -7,6 +7,7 @@ import tutoraid.commons.core.Messages;
 import tutoraid.logic.commands.DeleteCommand;
 import tutoraid.logic.commands.DeleteProgressCommand;
 import tutoraid.logic.commands.DeleteStudentCommand;
+import tutoraid.logic.commands.DeleteStudentsFromLessonsCommand;
 import tutoraid.logic.commands.HelpCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
@@ -47,6 +48,9 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
 
         case DeleteProgressCommand.COMMAND_FLAG:
             return new DeleteProgressCommandParser().parse(arguments);
+
+        case DeleteStudentsFromLessonsCommand.COMMAND_FLAG:
+            return new DeleteStudentsFromLessonsCommandParser().parse(arguments);
 
         default:
             throw new ParseException(Messages.MESSAGE_INVALID_DELETE_COMMAND);
