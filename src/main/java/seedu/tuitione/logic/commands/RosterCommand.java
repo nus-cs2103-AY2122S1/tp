@@ -1,7 +1,6 @@
 package seedu.tuitione.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import java.util.List;
 
@@ -24,11 +23,11 @@ public class RosterCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": displays the list of students who are"
             + "enrolled in a specific lesson registered in TuitiONE.\n"
             + "Parameters: "
-            + "[" + PREFIX_LESSON + "LESSON_INDEX] "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_LESSON + "1";
+            + "LESSON_INDEX"
+            + "\nExample: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ROSTER_LESSON_SUCCESS = "Roster of Lesson : %1$s is successfully displayed.\n"
-            + "A total of %d student(s) found.";
+    public static final String MESSAGE_ROSTER_LESSON_SUCCESS = "Roster of \"%s\" is successfully displayed.\n"
+            + "A total of %s student(s) found.";
 
     private final Index targetIndex;
 
@@ -57,7 +56,7 @@ public class RosterCommand extends Command {
             model.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lessonCodeToUse));
             model.updateFilteredStudentList(new StudentsIsOfSpecifiedLessonCode(lessonCodeToUse));
             output = String.format(MESSAGE_ROSTER_LESSON_SUCCESS,
-                    lessonCodeToUse.toString(),
+                    lessonCodeToUse,
                     model.getFilteredStudentList().size());
         }
 
