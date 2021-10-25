@@ -23,33 +23,36 @@ import seedu.address.model.person.Person;
 public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
-            .withPhone("94351253").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("94351253").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
-            .withPhone("98765432").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("98765432").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
-            .withPhone("95352563").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("95352563").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier")
-            .withPhone("87652533").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("87652533").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
-            .withPhone("9482224").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("9482224").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz")
-            .withPhone("9482427").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("9482427").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best")
-            .withPhone("9482442").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("9482442").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier")
-            .withPhone("8482424").withTodayAttendance(false).withTotalAttendance(0).build();
+            .withPhone("8482424").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller")
             .withPhone("8482131").withTodayAttendance(false).withTotalAttendance(0).build();
+    public static final Person CHOO = new PersonBuilder().withName("Choo")
+            .withPhone("90909090").build();
+    public static final Person DOO = new PersonBuilder().withName("Doo")
+            .withPhone("99889898").withTags("y3").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY)
-            .withPhone(VALID_PHONE_AMY).withAvailability(VALID_AVAILABILITY_AMY)
-            .withTodayAttendance(false).withTotalAttendance(0).withTags(VALID_TAG_Y2).build();
+            .withPhone(VALID_PHONE_AMY).withAvailability(VALID_AVAILABILITY_AMY).withTags(VALID_TAG_Y2).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB).withAvailability(VALID_AVAILABILITY_BOB)
-            .withTodayAttendance(false).withTotalAttendance(0).withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build();
+            .withTags(VALID_TAG_EXCO, VALID_TAG_Y2).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -59,7 +62,11 @@ public class TypicalPersons {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
-    public static List<Person> getTypicalPersonsUnsorted() {
+    public static List<Person> getTypicalPersonsUnsortedName() {
         return new ArrayList<>(Arrays.asList(GEORGE, FIONA, ELLE, DANIEL, CARL, BENSON, ALICE));
+    }
+
+    public static List<Person> getTypicalPersonsUnsortedTag() {
+        return new ArrayList<>(Arrays.asList(AMY, BOB, CHOO, DOO));
     }
 }

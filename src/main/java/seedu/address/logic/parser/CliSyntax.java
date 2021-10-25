@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_AVAILABILITY = new Prefix("d/");
     public static final Prefix PREFIX_SHORTCUT = new Prefix("s/");
     public static final Prefix PREFIX_COMMAND_WORD = new Prefix("cw/");
+    public static final Prefix PREFIX_SORT_ORDER = new Prefix("by/");
 }

@@ -19,6 +19,7 @@ import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortOrder;
 
 
 /**
@@ -215,8 +216,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortMemberList() {
-        addressBook.sortMemberList();
+    public void sortMemberList(SortOrder sortOrder) {
+        requireNonNull(sortOrder);
+        String order = sortOrder.toString();
+        switch (order) {
+        case "name":
+            sortMemberListByName();
+            break;
+        case "tag":
+            sortMemberListByTags();
+            break;
+        default:
+        }
+    }
+
+    private void sortMemberListByName() {
+        addressBook.sortMemberListByName();
+    }
+
+
+    private void sortMemberListByTags() {
+        addressBook.sortMemberListByTags();
     }
 
     @Override
