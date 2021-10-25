@@ -144,6 +144,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        // Add listeners
+        centerPanel.getPersonListView().getSelectionModel().selectedItemProperty()
+                .addListener((obs, oldVal, newVal) -> handlePersonGridPanel(newVal));
     }
 
     /**
@@ -191,7 +195,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handlePersonGridPanel() {
-        centerPanel.displayPersonGridPanel(logic.getFilteredPersonList(), logic.getEmptyLessonList());
+        centerPanel.displayPersonGridPanel(logic.getEmptyLessonList());
     }
 
     private void handlePersonGridPanel(Person student) {
