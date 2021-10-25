@@ -8,10 +8,10 @@ import safeforhall.commons.util.StringUtil;
 /**
  * Tests that a {@code Event}'s {@code Name} matches any of the keywords given.
  */
-public class NameContainsEventKeywordsPredicate implements Predicate<Event> {
+public class EventNameContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;
 
-    public NameContainsEventKeywordsPredicate(List<String> keywords) {
+    public EventNameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
@@ -24,8 +24,8 @@ public class NameContainsEventKeywordsPredicate implements Predicate<Event> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof NameContainsEventKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((NameContainsEventKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof EventNameContainsKeywordsPredicate // instanceof handles nulls
+                && keywords.equals(((EventNameContainsKeywordsPredicate) other).keywords)); // state check
     }
 
 }
