@@ -6,8 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_VISIT;
 
 import java.util.Comparator;
 
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.SortComparator;
 import seedu.address.model.Model;
+import seedu.address.model.person.LastVisit;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Visit;
 
 /*
  * Sorts all persons in the address book to the user.
@@ -22,7 +27,7 @@ public class SortCommand extends Command {
             + "Parameters: [" + PREFIX_VISIT + "] or [" + PREFIX_LAST_VISIT + "]\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_VISIT + " or " + COMMAND_WORD + " " + PREFIX_LAST_VISIT;
 
-    public static final String MESSAGE_SUCCESS = "Sorted listed persons successfully";
+    public static final String MESSAGE_SUCCESS = "Sorted listed persons successfully by %1$s";
 
     private final Comparator<Person> comparator;
     private final boolean isAscending;
@@ -37,10 +42,20 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.sortFilteredPersonList(comparator, isAscending);
-        return new CommandResult(MESSAGE_SUCCESS);
+
+        if (comparator.equals(SortComparator.SORT_BY_NEXT_VISIT)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, Visit.class.getSimpleName()));
+
+        } else if (comparator.equals(SortComparator.SORT_BY_LAST_VISIT)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, LastVisit.class.getSimpleName()));
+
+        } else {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        }
+
     }
 
     @Override
