@@ -3,6 +3,9 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 
+/**
+ * Undoes the last changes made to contact list.
+ */
 public class UndoCommand extends Command {
     public static final String COMMAND_WORD = "undo";
 
