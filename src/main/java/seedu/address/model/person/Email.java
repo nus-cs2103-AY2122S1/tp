@@ -31,6 +31,13 @@ public class Email {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another Email's value using Java's compareTo function
+     */
+    public int compareTo(Email e) {
+        return value.compareTo(e.value);
+    }
+
     @Override
     public String toString() {
         return value;

@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
 /**
@@ -87,4 +88,11 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    /**
+     * Sorts the filtered person list by the given {@code prefix}
+     * @param prefix
+     */
+    void sortFilteredPersonList(Prefix prefix);
 }

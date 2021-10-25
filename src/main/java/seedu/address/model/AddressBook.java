@@ -7,6 +7,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.storage.JsonAddressBookStorage;
@@ -105,6 +106,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Sorts {@code UniquePersonList} by the given prefix
+     */
+    public void sortList(Prefix prefix) {
+        persons.sort(prefix);
     }
 
     /**

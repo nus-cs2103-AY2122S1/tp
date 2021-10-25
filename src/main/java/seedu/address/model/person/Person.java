@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,6 +103,56 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Compares two persons depending on the prefix given using Java compareTo functions
+     * Note: Comparison of Tags will use the number of Tags attached to the person
+     *
+     */
+    public int compare(Person p, Prefix prefix) {
+        String comparePrefix = prefix.getPrefix();
+        int comparison;
+        switch (comparePrefix) {
+        case "n/":
+            comparison = name.compareTo(p.name);
+            break;
+        case "p/":
+            comparison = phone.compareTo(p.phone);
+            break;
+        case "e/":
+            comparison = email.compareTo(p.email);
+            break;
+        case "a/":
+            comparison = address.compareTo(p.address);
+            break;
+        case "t/":
+            comparison = Integer.compare(tags.size(), p.tags.size());
+            break;
+        case "s/":
+            comparison = studentId.compareTo(p.studentId);
+            break;
+        case "g/":
+            comparison = gitHubId.compareTo(p.gitHubId);
+            break;
+        case "T/":
+            comparison = tutorialId.compareTo(p.tutorialId);
+            break;
+        case "r/" :
+            comparison = type.compareTo(p.type);
+            break;
+        case "N/":
+            comparison = nusNetworkId.compareTo(p.nusNetworkId);
+            break;
+        default:
+            comparison = 0;
+        }
+
+        if (comparison == 0) {
+            comparison = name.compareTo(p.name);
+        }
+
+        return comparison;
     }
 
     /**

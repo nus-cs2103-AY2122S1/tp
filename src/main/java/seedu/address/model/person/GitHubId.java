@@ -36,6 +36,13 @@ public class GitHubId {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Compares this value with another GitHubId's value using Java's compareTo function
+     */
+    public int compareTo(GitHubId g) {
+        return value.compareTo(g.value);
+    }
+
     @Override
     public String toString() {
         return value;
