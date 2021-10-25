@@ -29,9 +29,6 @@ This user guide will bring you through how to quickly start using our applicatio
 section, while also serving as a reference to more experienced users in the [Feature List](#feature-list)
 section, where notes and tips on how best to make use of our application will also be given.
 
-// rationale as to why the commands are listed in that order?
-// 1st step is to import all students from luminus? but what if they make mistake
-
 If you face any difficult while following the user guide, do refer to the FAQ section to see if your 
 issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ
 section, feel free to reach out to our team lead at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
@@ -70,19 +67,19 @@ section, feel free to reach out to our team lead at [e0559779@u.nus.edu](mailto:
 
 ## Glossary of terms
 
-Term | Meaning
+Term | Definition
 --------|------------------
-**Command Line Interface (CLI)** |
-**Graphical User Interface (GUI)** |
-**Java** |
-**Operating System (OS)** |
-**Terminal window** |
-**Teaching Assistant**|
-**Module**|
-**Student**|
-**Group**|
+**Command-Line Interface (CLI)** |An interface that accepts and parses text input from the user in order to execute some command.
+**Graphical User Interface (GUI)** |A visual interface that allows the user to interact with the program through graphical icons and buttons.
+**Group**|Any user-defined grouping in CSBook. They may indicate that students belonging to the group are from a certain module, tutorial, remedial or require additional help for example.
+**Java** |The programming language used to create CSBook. It may also refer to the Java Runtime Environment, which allows Java applicaitons like CSBook to be run.
+**Module**|A unit of study that makes up a part of a course taught in university.
+**Operating System (OS)** |The system software that is running on the computer. E.g. Microsoft Windows, macOS, Linux.
+**Student**|A student in any module that a TA is teaching.
+**Terminal window**|A simple CLI-based program that allows the user to run some system commands.
+**Teaching Assistant (TA)**|A student teacher that has been hired to assist in teaching a tutorial/lab session for a module.
 
-## Glosary of icons
+## Glossary of icons
 
 These icons will appear within coloured boxes to indicate
 
