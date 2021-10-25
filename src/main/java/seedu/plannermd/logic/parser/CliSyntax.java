@@ -32,4 +32,5 @@ public class CliSyntax {
 
     /* Appointment Flag definitions */
     public static final String FLAG_FILTER_UPCOMING = "-u";
+
 }
