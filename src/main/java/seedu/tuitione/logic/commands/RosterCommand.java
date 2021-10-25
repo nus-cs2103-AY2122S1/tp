@@ -1,13 +1,13 @@
 package seedu.tuitione.logic.commands;
 
-import java.util.List;
-
 import static java.util.Objects.requireNonNull;
-import seedu.tuitione.commons.core.index.Index;
-import seedu.tuitione.logic.commands.exceptions.CommandException;
 import static seedu.tuitione.logic.parser.CliSyntax.PREFIX_LESSON;
 
+import java.util.List;
+
 import seedu.tuitione.commons.core.Messages;
+import seedu.tuitione.commons.core.index.Index;
+import seedu.tuitione.logic.commands.exceptions.CommandException;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
@@ -61,7 +61,8 @@ public class RosterCommand extends Command {
                     model.getFilteredStudentList().size());
         }
 
-        return new CommandResult(output);   // output should never be empty string
+        return new CommandResult(output); // output should never be empty string
+
     }
 
     @Override
