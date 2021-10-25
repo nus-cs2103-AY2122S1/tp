@@ -35,7 +35,6 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_ID + "ID] "
-            + "[" + PREFIX_COUNT + "COUNT] "
             + "[" + PREFIX_COSTPRICE + "COSTPRICE] "
             + "[" + PREFIX_SALESPRICE + "SALESPRICE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -45,6 +44,8 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the inventory.";
+    public static final String MESSAGE_INVENTORY_NOT_DISPLAYED =
+            "Can't edit if not in inventory mode. Please use \"list\" first";
 
     private final Index index;
     private final ItemDescriptor itemDescriptor;
@@ -64,6 +65,11 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getDisplayMode() != DISPLAY_INVENTORY) {
+            throw new CommandException(MESSAGE_INVENTORY_NOT_DISPLAYED);
+        }
+
         List<Item> lastShownList = model.getFilteredItemList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
