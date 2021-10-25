@@ -6,8 +6,6 @@ import static seedu.plannermd.commons.core.Messages.MESSAGE_APPOINTMENTS_LISTED_
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.testutil.TypicalPlannerMd.getTypicalPlannerMd;
 import static seedu.plannermd.testutil.appointment.TypicalAppointments.getTypicalAppointments;
-import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_CARL;
-import static seedu.plannermd.testutil.patient.TypicalPatients.FIONA;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -24,6 +22,8 @@ import seedu.plannermd.model.UserPrefs;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.testutil.appointment.AppointmentBuilder;
 import seedu.plannermd.testutil.appointment.AppointmentFiltersBuilder;
+import seedu.plannermd.testutil.doctor.DoctorBuilder;
+import seedu.plannermd.testutil.patient.PatientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for FilterAppointmentCommand.
@@ -32,8 +32,12 @@ public class FilterAppointmentCommandTest {
 
     private final String startDateString = "20/12/2024";
     private final LocalDate sampleStartDate = LocalDate.of(2024, 12, 20);
-    private final Appointment sampleAppointment = new AppointmentBuilder().withPatient(FIONA)
-            .withDoctor(DR_CARL).withDate(startDateString).withSession("18:00", 10).build();
+    // Test appointment should have a different patient name and doctor than those in typical appointments
+    // Test appointment should also have a later starting date than those in typical appointments
+    private final Appointment testAppointment = new AppointmentBuilder()
+            .withPatient(new PatientBuilder().withName("George").build())
+            .withDoctor(new DoctorBuilder().withName("Pete").build())
+            .withDate(startDateString).withSession("18:00", 10).build();
 
     private Model model;
     private Model expectedModel;
@@ -42,8 +46,8 @@ public class FilterAppointmentCommandTest {
         model = new ModelManager(getTypicalPlannerMd(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalPlannerMd(), new UserPrefs());
 
-        model.addAppointment(sampleAppointment);
-        expectedModel.addAppointment(sampleAppointment);
+        model.addAppointment(testAppointment);
+        expectedModel.addAppointment(testAppointment);
     }
 
     @Test
@@ -61,15 +65,15 @@ public class FilterAppointmentCommandTest {
     public void execute_allParameterSpecified_successfullyFiltered() {
         reinitialiseModel();
 
-        // Results found match sample appointments
+        // Results found match test appointment
         AppointmentFilters filter = new AppointmentFiltersBuilder().withStartDate(sampleStartDate)
-                .withEndDate(sampleStartDate.plusDays(2)).withPatientKeywords("Fiona")
-                .withDoctorKeywords("Carl").build();
+                .withEndDate(sampleStartDate.plusDays(2)).withPatientKeywords("George")
+                .withDoctorKeywords("Pete").build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
         FilterAppointmentCommand command = new FilterAppointmentCommand(filter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(sampleAppointment), model.getFilteredAppointmentList());
+        assertEquals(Collections.singletonList(testAppointment), model.getFilteredAppointmentList());
 
         // No results found (starting dates do not match)
         filter = new AppointmentFiltersBuilder(filter).withStartDate(sampleStartDate.plusDays(1)).build();
@@ -84,13 +88,13 @@ public class FilterAppointmentCommandTest {
     public void execute_patientKeywordSpecified_successfullyFiltered() {
         reinitialiseModel();
 
-        // Results found match sample appointment
-        AppointmentFilters filter = new AppointmentFiltersBuilder().withPatientKeywords("Fiona").build();
+        // Results found match test appointment
+        AppointmentFilters filter = new AppointmentFiltersBuilder().withPatientKeywords("George").build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
         FilterAppointmentCommand command = new FilterAppointmentCommand(filter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(sampleAppointment), model.getFilteredAppointmentList());
+        assertEquals(Collections.singletonList(testAppointment), model.getFilteredAppointmentList());
 
         // No results found
         filter = new AppointmentFiltersBuilder(filter).withPatientKeywords("Bruce").build();
@@ -105,16 +109,16 @@ public class FilterAppointmentCommandTest {
     public void execute_doctorKeywordSpecified_successfullyFiltered() {
         reinitialiseModel();
 
-        // Results found match sample appointment
-        AppointmentFilters filter = new AppointmentFiltersBuilder().withDoctorKeywords("carl").build();
+        // Results found match test appointment
+        AppointmentFilters filter = new AppointmentFiltersBuilder().withDoctorKeywords("pete").build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
         FilterAppointmentCommand command = new FilterAppointmentCommand(filter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(sampleAppointment), model.getFilteredAppointmentList());
+        assertEquals(Collections.singletonList(testAppointment), model.getFilteredAppointmentList());
 
         // No results found
-        filter = new AppointmentFiltersBuilder(filter).withDoctorKeywords("Karl").build();
+        filter = new AppointmentFiltersBuilder(filter).withDoctorKeywords("Peter").build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 0);
         command = new FilterAppointmentCommand(filter);
@@ -126,16 +130,16 @@ public class FilterAppointmentCommandTest {
     public void execute_startDateSpecified_successfullyFiltered() {
         reinitialiseModel();
 
-        // Start date is after typical appointments but before sample appointment
+        // Start date is after typical appointments but before test appointment
         AppointmentFilters filter = new AppointmentFiltersBuilder()
                 .withStartDate(sampleStartDate.minusDays(1)).build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
         FilterAppointmentCommand command = new FilterAppointmentCommand(filter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(sampleAppointment), model.getFilteredAppointmentList());
+        assertEquals(Collections.singletonList(testAppointment), model.getFilteredAppointmentList());
 
-        // // Start date is after typical appointments and sample appointment
+        // // Start date is after typical appointments and test appointment
         filter = new AppointmentFiltersBuilder(filter)
                 .withStartDateTime(sampleStartDate.atTime(20, 30)).build(); // With date time
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
@@ -154,7 +158,7 @@ public class FilterAppointmentCommandTest {
     public void execute_endDateSpecified_successfullyFiltered() {
         reinitialiseModel();
 
-        // End date is after sample appointment and typical appointments
+        // End date is after test appointment and typical appointments
         AppointmentFilters filter = new AppointmentFiltersBuilder()
                 .withEndDate(sampleStartDate).build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
@@ -163,10 +167,10 @@ public class FilterAppointmentCommandTest {
         FilterAppointmentCommand command = new FilterAppointmentCommand(filter);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         List<Appointment> expectedFilteredList = getTypicalAppointments();
-        expectedFilteredList.add(sampleAppointment);
+        expectedFilteredList.add(testAppointment);
         assertEquals(expectedFilteredList, model.getFilteredAppointmentList());
 
-        // End date is before sample appointment but after typical appointment
+        // End date is before test appointment but after typical appointment
         filter = new AppointmentFiltersBuilder(filter)
                 .withEndDate(sampleStartDate.minusDays(1)).build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
