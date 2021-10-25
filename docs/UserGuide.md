@@ -147,6 +147,31 @@ Examples:
 * `delete task m/CS2103 ti/T1`: Deletes the task with task ID T1 from CS2103
 * `delete task m/CS2105 ti/T2`: Deletes the task with task ID T2 from CS2105
 
+### Mark a task as done: `mark done`
+
+Mark the specified task from the specified module under the specified student as done.
+This means that this student has completed this task of this module.
+
+Format: `mark done m/<module name> i/<student id> ti<task id>`
+
+Examples:
+* `mark done m/CS2103 i/A1234567A ti/T1`:
+  * Mark the task with ID T1 under student with ID A1234567A of module CS2103 as done.
+  * Student A1234567A has completed task T1 of module CS2103.
+
+### Mark a task as undone: `mark undone`
+
+Mark the specified task from the specified module under the specified student as undone.
+This means that this student has not completed this task of this module, possibly to correct a mistake by the TA.
+
+Format: `mark undone m/<module name> i/<student id> ti<task id>`
+
+Examples:
+* `mark undone m/CS2103 i/A1234567A ti/T1`:
+    * Mark the task with ID T1 under student with ID A1234567A of module CS2103 as undone.
+    * Student A1234567A has not completed task T1 of module CS2103 yet.
+    * But for some reason (eg. human error) the task is marked as done.
+
 ### Find a student: `find`
 
 Find the student in the module specified along with the student's information
