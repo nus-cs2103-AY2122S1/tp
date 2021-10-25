@@ -50,7 +50,7 @@ public class Assessment {
 
         Assessment otherAssessment = (Assessment) other;
         return otherAssessment.getAssessmentName().equals(getAssessmentName())
-                && otherAssessment.getScore() == getScore();
+                && otherAssessment.getScore().equals(getScore());
     }
 
     @Override

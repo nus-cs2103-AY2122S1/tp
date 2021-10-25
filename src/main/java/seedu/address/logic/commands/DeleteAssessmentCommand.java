@@ -11,7 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.AssessmentName;
-import seedu.address.model.assessment.AssessmentNameContainsKeywordsPredicate;
+import seedu.address.model.assessment.AssessmentNameMatchesKeywordPredicate;
 import seedu.address.model.student.Student;
 
 /**
@@ -57,7 +57,7 @@ public class DeleteAssessmentCommand extends Command {
 
         // Get the assessment that we want to delete, indicated by the given assessment name
         student.updateFilteredAssessmentList(
-                new AssessmentNameContainsKeywordsPredicate(List.of(assessmentName.toString())));
+                new AssessmentNameMatchesKeywordPredicate(assessmentName.toString()));
 
         if (student.getFilteredAssessmentList().size() == 0) {
             throw new CommandException(MESSAGE_ASSESSMENT_NOT_FOUND);

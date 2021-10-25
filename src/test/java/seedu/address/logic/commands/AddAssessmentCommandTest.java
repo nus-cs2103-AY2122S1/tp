@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showStudentAtIndex;
@@ -38,16 +37,17 @@ public class AddAssessmentCommandTest {
 
     @Test
     public void execute_unfilteredList_success() throws Exception {
-        Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-
+        Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(studentInFilteredList).withAssessment(FINALS).build();
         AddAssessmentCommand addAssessmentCommand = new AddAssessmentCommand(INDEX_FIRST_STUDENT, FINALS);
 
-        String expectedMessage = String.format(AddAssessmentCommand.MESSAGE_SUCCESS, firstStudent.getName(), FINALS);
+        String expectedMessage = String.format(AddAssessmentCommand.MESSAGE_SUCCESS, editedStudent.getName(), FINALS);
 
         Model expectedModel = new ModelManager(new CsBook(model.getCsBook()), new UserPrefs());
-        expectedModel.addAssessment(firstStudent, FINALS);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(addAssessmentCommand, model, expectedMessage, expectedModel);
+        studentInFilteredList.deleteAssessment(FINALS); // remove assessment from student to not affect other test cases
     }
 
     @Test
@@ -55,16 +55,17 @@ public class AddAssessmentCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         Student studentInFilteredList = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
-        Student editedStudent = new StudentBuilder(studentInFilteredList).withName(VALID_NAME_BOB).build();
-        AddAssessmentCommand addAssessmentCommand = new AddAssessmentCommand(INDEX_FIRST_STUDENT,
-                MIDTERMS);
+        Student editedStudent = new StudentBuilder(studentInFilteredList).withAssessment(FINALS).build();
+        AddAssessmentCommand addAssessmentCommand = new AddAssessmentCommand(INDEX_FIRST_STUDENT, FINALS);
 
-        String expectedMessage = String.format(AddAssessmentCommand.MESSAGE_SUCCESS, editedStudent.getName(), MIDTERMS);
+        String expectedMessage = String.format(AddAssessmentCommand.MESSAGE_SUCCESS, editedStudent.getName(), FINALS);
 
         Model expectedModel = new ModelManager(new CsBook(model.getCsBook()), new UserPrefs());
         expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
 
         assertCommandSuccess(addAssessmentCommand, model, expectedMessage, expectedModel);
+        studentInFilteredList.deleteAssessment(FINALS); // remove assessment from student to not affect other test cases
     }
 
     @Test
@@ -72,8 +73,10 @@ public class AddAssessmentCommandTest {
         Student firstStudent = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
 
         AddAssessmentCommand addAssessmentCommand = new AddAssessmentCommand(INDEX_FIRST_STUDENT, MIDTERMS);
+        String expectedMessage = String.format(AddAssessmentCommand.MESSAGE_DUPLICATE_ASSESSMENT,
+                firstStudent.getName());
 
-        assertCommandFailure(addAssessmentCommand, model, AddAssessmentCommand.MESSAGE_DUPLICATE_ASSESSMENT);
+        assertCommandFailure(addAssessmentCommand, model, expectedMessage);
     }
 
     @Test

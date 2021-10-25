@@ -2,8 +2,6 @@ package seedu.address.testutil;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.assessment.Assessment;
-import seedu.address.model.assessment.AssessmentName;
-import seedu.address.model.assessment.Score;
 import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
@@ -20,9 +18,6 @@ public class StudentBuilder {
     public static final String DEFAULT_TELEGRAM_HANDLE = "@amy_bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
-    public static final String DEFAULT_ASSESSMENT_NAME = "Midterms";
-    public static final int DEFAULT_ACTUAL_SCORE = 60;
-    public static final int DEFAULT_TOTAL_SCORE = 100;
 
     private Name name;
     private TelegramHandle telegramHandle;
@@ -38,11 +33,7 @@ public class StudentBuilder {
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
         groupName = new GroupName(DEFAULT_GROUP_NAME);
-
         assessments = new UniqueAssessmentList();
-        Assessment assessment = new Assessment(new AssessmentName(DEFAULT_ASSESSMENT_NAME),
-                new Score(DEFAULT_ACTUAL_SCORE, DEFAULT_TOTAL_SCORE));
-        assessments.add(assessment);
     }
 
     /**
@@ -57,7 +48,7 @@ public class StudentBuilder {
 
         ObservableList<Assessment> assessmentList = studentToCopy.getAssessmentList();
         for (int i = 0; i < assessmentList.size(); i++) {
-            assessmentList.add(assessmentList.get(i));
+            assessments.add(assessmentList.get(i));
         }
     }
 
@@ -122,7 +113,12 @@ public class StudentBuilder {
      * @return built student
      */
     public Student build() {
-        return new Student(name, telegramHandle, email, groupName);
+        Student student = new Student(name, telegramHandle, email, groupName);
+        ObservableList<Assessment> unmodifiableAssessments = assessments.asUnmodifiableObservableList();
+        for (int i = 0; i < unmodifiableAssessments.size(); i++) {
+            student.addAssessment(unmodifiableAssessments.get(i));
+        }
+        return student;
     }
 
 }

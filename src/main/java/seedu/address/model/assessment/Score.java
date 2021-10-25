@@ -66,7 +66,7 @@ public class Score {
         return other == this // short circuit if same object
                 || (other instanceof Score // instanceof handles nulls
                 && actualScore == ((Score) other).actualScore // state check
-                && actualScore == ((Score) other).totalScore);
+                && totalScore == ((Score) other).totalScore);
     }
 
     @Override

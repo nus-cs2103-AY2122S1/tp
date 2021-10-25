@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-import static seedu.address.storage.JsonAdaptedStudent.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.JsonAdaptedAssessment.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalAssessments.MIDTERMS;
 
@@ -29,7 +29,8 @@ public class JsonAdaptedAssessmentTest {
     @Test
     public void toModelType_nullAssessmentName_throwsIllegalValueException() {
         JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(null, VALID_SCORE);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, AssessmentName.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                AssessmentName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> assessment.toModelType());
     }
 
@@ -44,7 +45,8 @@ public class JsonAdaptedAssessmentTest {
     @Test
     public void toModelType_nullScore_throwsIllegalValueException() {
         JsonAdaptedAssessment assessment = new JsonAdaptedAssessment(VALID_ASSESSMENT_NAME, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Score.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Score.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> assessment.toModelType());
     }
 

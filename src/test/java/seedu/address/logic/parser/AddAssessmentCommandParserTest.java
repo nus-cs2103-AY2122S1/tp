@@ -70,18 +70,12 @@ public class AddAssessmentCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid assessment name
-        assertParseFailure(parser, "1" + INVALID_ASSESSMENT_NAME_DESC, AssessmentName.MESSAGE_CONSTRAINTS);
-
-        // invalid score
-        assertParseFailure(parser, "1" + INVALID_SCORE_DESC, Score.MESSAGE_CONSTRAINTS);
-
         // invalid assessment name followed by valid score
-        assertParseFailure(parser, "1" + INVALID_ASSESSMENT_NAME_DESC + VALID_SCORE_QUIZ1,
+        assertParseFailure(parser, "1" + INVALID_ASSESSMENT_NAME_DESC + SCORE_DESC_QUIZ1,
                 AssessmentName.MESSAGE_CONSTRAINTS);
 
         // valid assessment name followed by invalid score
-        assertParseFailure(parser, "1" + VALID_ASSESSMENT_NAME_QUIZ1 + INVALID_SCORE_DESC,
+        assertParseFailure(parser, "1" + ASSESSMENT_NAME_DESC_QUIZ1 + INVALID_SCORE_DESC,
                 Score.MESSAGE_CONSTRAINTS);
 
         // invalid assessment name and invalid score

@@ -19,8 +19,11 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.assessment.AssessmentName;
+import seedu.address.model.assessment.AssessmentNameMatchesKeywordPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.testutil.StudentBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -42,17 +45,28 @@ public class DeleteAssessmentCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(student).build();
+
+        // Delete the assessment from the edited student
+        editedStudent.updateFilteredAssessmentList(
+                new AssessmentNameMatchesKeywordPredicate(VALID_ASSESSMENT_NAME_QUIZ1));
+
+        // check to ensure the assessment exists
+        assertFalse(editedStudent.getFilteredAssessmentList().size() == 0);
+        Assessment assessmentToDelete = editedStudent.getFilteredAssessmentList().get(0);
+        editedStudent.deleteAssessment(assessmentToDelete);
+
         AssessmentName assessmentNameToDelete = new AssessmentName(VALID_ASSESSMENT_NAME_QUIZ1);
         DeleteAssessmentCommand deleteAssessmentCommand = new DeleteAssessmentCommand(INDEX_FIRST_STUDENT,
                 assessmentNameToDelete);
-
         String expectedMessage = String.format(DeleteAssessmentCommand.MESSAGE_DELETE_ASSESSMENT_SUCCESS,
                 assessmentNameToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
-        expectedModel.deleteAssessment(student, QUIZ1);
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
 
         assertCommandSuccess(deleteAssessmentCommand, model, expectedMessage, expectedModel);
+        student.addAssessment(QUIZ1); // Add back the deleted assessment for future tests
     }
 
     @Test
@@ -69,18 +83,29 @@ public class DeleteAssessmentCommandTest {
         showStudentAtIndex(model, INDEX_FIRST_STUDENT);
 
         Student student = model.getFilteredStudentList().get(INDEX_FIRST_STUDENT.getZeroBased());
+        Student editedStudent = new StudentBuilder(student).build();
+
+        // Delete the assessment from the edited student
+        editedStudent.updateFilteredAssessmentList(
+                new AssessmentNameMatchesKeywordPredicate(VALID_ASSESSMENT_NAME_QUIZ1));
+
+        // check to ensure the assessment exists
+        assertFalse(editedStudent.getFilteredAssessmentList().size() == 0);
+        Assessment assessmentToDelete = editedStudent.getFilteredAssessmentList().get(0);
+        editedStudent.deleteAssessment(assessmentToDelete);
+
         AssessmentName assessmentNameToDelete = new AssessmentName(VALID_ASSESSMENT_NAME_QUIZ1);
         DeleteAssessmentCommand deleteAssessmentCommand = new DeleteAssessmentCommand(INDEX_FIRST_STUDENT,
                 assessmentNameToDelete);
-
         String expectedMessage = String.format(DeleteAssessmentCommand.MESSAGE_DELETE_ASSESSMENT_SUCCESS,
                 assessmentNameToDelete);
 
-        Model expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
-        expectedModel.deleteAssessment(student, QUIZ1);
-        showNoStudent(expectedModel);
+        ModelManager expectedModel = new ModelManager(model.getCsBook(), new UserPrefs());
+        expectedModel.setStudent(model.getFilteredStudentList().get(0), editedStudent);
+        showStudentAtIndex(expectedModel, INDEX_FIRST_STUDENT);
 
         assertCommandSuccess(deleteAssessmentCommand, model, expectedMessage, expectedModel);
+        student.addAssessment(QUIZ1); // Add back the deleted assessment for future tests
     }
 
     @Test
