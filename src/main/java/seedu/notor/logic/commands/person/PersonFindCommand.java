@@ -9,7 +9,7 @@ import seedu.notor.logic.commands.CommandResult;
 import seedu.notor.logic.executors.exceptions.ExecuteException;
 import seedu.notor.logic.executors.person.PersonExecutor;
 import seedu.notor.logic.executors.person.PersonFindExecutor;
-import seedu.notor.model.person.NameContainsSubstringPredicate;
+import seedu.notor.model.person.NameContainsPredicate;
 
 /**
  * Finds a person via searching their name for a given query
@@ -22,18 +22,18 @@ public class PersonFindCommand extends PersonCommand {
             ": Finds a person via searching their name for a given query, and returns the person list filtered by "
                     + "those who match the query\n";
 
-    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + COMMAND_WORD
+    public static final String MESSAGE_USAGE = PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + " "
             + COMMAND_DESCRIPTION
-            + "Parameters: QUERY"
+            + "Parameters: n:NAME_QUERY t:TAG_1, TAG_2 \n"
             + "Example: "
-            + PersonCommand.COMMAND_WORD + COMMAND_WORD + "Alex";
+            + PersonCommand.COMMAND_WORD + " /" + COMMAND_WORD + "n:Alex t:graduated, engineering";
 
     private final PersonExecutor executor;
 
     /**
      * Constructor for a PersonFindCommand.
      */
-    public PersonFindCommand(NameContainsSubstringPredicate predicate) {
+    public PersonFindCommand(NameContainsPredicate predicate) {
         super(null);
         requireNonNull(predicate);
         this.executor = new PersonFindExecutor(predicate);
