@@ -2,7 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERACTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -20,11 +22,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.interaction.Interaction;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Faculty;
 import seedu.address.model.person.Major;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.remark.Remark;
 import seedu.address.model.skill.Framework;
 import seedu.address.model.skill.Language;
 import seedu.address.model.skill.Skill;
@@ -46,7 +50,9 @@ public class RemoveCommand extends Command {
             + "[" + PREFIX_SKILL + "INDEX] "
             + "[" + PREFIX_LANGUAGE + "INDEX] "
             + "[" + PREFIX_FRAMEWORK + "INDEX] "
-            + "[" + PREFIX_TAG + "INDEX]...\n"
+            + "[" + PREFIX_TAG + "INDEX]"
+            + "[" + PREFIX_REMARKS + "INDEX]...\n"
+            + "[" + PREFIX_INTERACTION + "INDEX]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_LANGUAGE + "3";
 
@@ -120,8 +126,20 @@ public class RemoveCommand extends Command {
         Set<Tag> previousTags = personToRemoveFrom.getTags();
         Set<Tag> updatedTags = removeFromTags(indexesOfTagsToRemove, previousTags);
 
+        //Convert Set of Remarks to an alphabetically sorted Array
+        Set<Index> indexesOfRemarksToRemove = removePersonDescriptor.getRemarkIndexes().orElse(Set.of());
+        Set<Remark> previousRemarks = personToRemoveFrom.getRemarks();
+        Set<Remark> updatedRemarks = removeFromRemarks(indexesOfRemarksToRemove, previousRemarks);
+
+        //Convert Set of Interactions to an alphabetically sorted Array
+        Set<Index> indexesOfInteractionsToRemove = removePersonDescriptor.getInteractionIndexes().orElse(Set.of());
+        Set<Interaction> previousInteractions = personToRemoveFrom.getInteractions();
+        Set<Interaction> updatedInteractions = removeFromInteractions(indexesOfInteractionsToRemove,
+                previousInteractions);
+
         return new Person(previousName, previousEmail, previousFaculty, previousMajor,
-                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
+                updatedSkills, updatedLanguages, updatedFrameworks, updatedTags,
+                updatedRemarks, updatedInteractions);
     }
 
     private static Set<Skill> removeFromSkills(Set<Index> indexesToRemove, Set<Skill> previousSkills)
@@ -267,6 +285,80 @@ public class RemoveCommand extends Command {
         return updatedTags;
     }
 
+    private static Set<Remark> removeFromRemarks(Set<Index> indexesToRemove, Set<Remark> previousRemarks)
+            throws CommandException {
+        // Arrange previous tags in an array
+        Remark[] remarkArray = previousRemarks.toArray(new Remark[0]);
+        Arrays.sort(remarkArray, Comparator.comparing(remark -> remark.remarkDetail));
+        //TODO: Either sort GUI alphabetically, or append an index when creating a remark, then update this method.
+
+        // Convert the set of Indexes to an array of integers
+        Index[] indexesArray = indexesToRemove.toArray(new Index[0]);
+        int[] intIndexesArray = new int[indexesArray.length];
+        for (int i = 0; i < indexesArray.length; i++) {
+            intIndexesArray[i] = indexesArray[i].getZeroBased();
+        }
+
+        // Sort indexes of data fields to remove in ascending order.
+        Arrays.sort(intIndexesArray);
+
+        // For each specified index, remove corresponding remark in remarkArray
+        for (int j = intIndexesArray.length; j >= 1; j--) {
+            int indexOfRemarkToRemove = intIndexesArray[j - 1];
+            if (indexOfRemarkToRemove > remarkArray.length - 1) {
+                throw new CommandException(MESSAGE_INVALID_FIELD);
+            }
+            remarkArray[indexOfRemarkToRemove] = null;
+        }
+
+        //Convert remarkArray to Set<Remark> again
+        Set<Remark> updatedRemarks = new HashSet<>();
+        for (Remark s : remarkArray) {
+            if (s != null) {
+                updatedRemarks.add(s);
+            }
+        }
+
+        return updatedRemarks;
+    }
+
+    private static Set<Interaction> removeFromInteractions(Set<Index> indexesToRemove, Set<Interaction>
+            previousInteractions) throws CommandException {
+        // Arrange previous interactions in an array
+        Interaction[] interactionArray = previousInteractions.toArray(new Interaction[0]);
+        Arrays.sort(interactionArray, Comparator.comparing(interaction -> interaction.description));
+        //TODO: Either sort GUI alphabetically, or sort by date, then update this method.
+
+        // Convert the set of Indexes to an array of integers
+        Index[] indexesArray = indexesToRemove.toArray(new Index[0]);
+        int[] intIndexesArray = new int[indexesArray.length];
+        for (int i = 0; i < indexesArray.length; i++) {
+            intIndexesArray[i] = indexesArray[i].getZeroBased();
+        }
+
+        // Sort indexes of data fields to remove in ascending order.
+        Arrays.sort(intIndexesArray);
+
+        // For each specified index, remove corresponding interaction in interactionArray
+        for (int j = intIndexesArray.length; j >= 1; j--) {
+            int indexOfInteractionToRemove = intIndexesArray[j - 1];
+            if (indexOfInteractionToRemove > interactionArray.length - 1) {
+                throw new CommandException(MESSAGE_INVALID_FIELD);
+            }
+            interactionArray[indexOfInteractionToRemove] = null;
+        }
+
+        //Convert interactionArray to Set<Interaction> again
+        Set<Interaction> updatedInteractions = new HashSet<>();
+        for (Interaction s : interactionArray) {
+            if (s != null) {
+                updatedInteractions.add(s);
+            }
+        }
+
+        return updatedInteractions;
+    }
+
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -295,6 +387,8 @@ public class RemoveCommand extends Command {
         private Set<Index> languageIndexes;
         private Set<Index> frameworkIndexes;
         private Set<Index> tagIndexes;
+        private Set<Index> remarkIndexes;
+        private Set<Index> interactionIndexes;
 
         public RemovePersonDescriptor() {}
 
@@ -307,13 +401,17 @@ public class RemoveCommand extends Command {
             setLanguageIndexes(toCopy.languageIndexes);
             setFrameworkIndexes(toCopy.frameworkIndexes);
             setTagIndexes(toCopy.tagIndexes);
+            setRemarkIndexes(toCopy.remarkIndexes);
+            setInteractionIndexes(toCopy.interactionIndexes);
+
         }
 
         /**
          * Returns true if at least one field has been removed.
          */
         public boolean isAnyFieldRemoved() {
-            return CollectionUtil.isAnyNonNull(skillIndexes, languageIndexes, frameworkIndexes, tagIndexes);
+            return CollectionUtil.isAnyNonNull(skillIndexes, languageIndexes, frameworkIndexes, tagIndexes,
+                    remarkIndexes, interactionIndexes);
         }
 
         /**
@@ -388,6 +486,44 @@ public class RemoveCommand extends Command {
             return (tagIndexes != null) ? Optional.of(Collections.unmodifiableSet(tagIndexes)) : Optional.empty();
         }
 
+        /**
+         * Sets {@code remark} to this object's {@code remarks}.
+         * A defensive copy of {@code remark} is used internally.
+         */
+        public void setRemarkIndexes(Set<Index> remarkIndexes) {
+            this.remarkIndexes = (remarkIndexes != null) ? new HashSet<>(remarkIndexes) : null;
+        }
+
+        /**
+         * Returns an unmodifiable remark set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code remarks} is null.
+         */
+        public Optional<Set<Index>> getRemarkIndexes() {
+            return (remarkIndexes != null) ? Optional.of(Collections.unmodifiableSet(remarkIndexes)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code interaction} to this object's {@code interactions}.
+         * A defensive copy of {@code interaction} is used internally.
+         */
+        public void setInteractionIndexes(Set<Index> interactionIndexes) {
+            this.interactionIndexes = (interactionIndexes != null)
+                    ? new HashSet<>(interactionIndexes)
+                    : null;
+        }
+
+        /**
+         * Returns an unmodifiable interaction set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code interactions} is null.
+         */
+        public Optional<Set<Index>> getInteractionIndexes() {
+            return (interactionIndexes != null)
+                    ? Optional.of(Collections.unmodifiableSet(interactionIndexes))
+                    : Optional.empty();
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -405,7 +541,9 @@ public class RemoveCommand extends Command {
             return getSkillIndexes().equals(e.getSkillIndexes())
                     && getLanguageIndexes().equals(e.getLanguageIndexes())
                     && getFrameworkIndexes().equals(e.getFrameworkIndexes())
-                    && getTagIndexes().equals(e.getTagIndexes());
+                    && getTagIndexes().equals(e.getTagIndexes())
+                    && getRemarkIndexes().equals(e.getRemarkIndexes())
+                    && getInteractionIndexes().equals(e.getInteractionIndexes());
         }
     }
 }

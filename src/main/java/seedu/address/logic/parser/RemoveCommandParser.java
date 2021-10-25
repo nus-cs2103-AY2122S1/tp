@@ -3,7 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FRAMEWORK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERACTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LANGUAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -27,7 +29,8 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
     public RemoveCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_SKILL, PREFIX_LANGUAGE, PREFIX_FRAMEWORK, PREFIX_TAG,
+                        PREFIX_REMARKS, PREFIX_INTERACTION);
 
         Index index;
 
@@ -47,6 +50,10 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
                 .ifPresent(removePersonDescriptor::setFrameworkIndexes);
         parseTagIndexesForRemove(argMultimap.getAllValues(PREFIX_TAG))
                 .ifPresent(removePersonDescriptor::setTagIndexes);
+        parseRemarkIndexesForRemove(argMultimap.getAllValues(PREFIX_REMARKS))
+                .ifPresent(removePersonDescriptor::setRemarkIndexes);
+        parseInteractionIndexesForRemove(argMultimap.getAllValues(PREFIX_INTERACTION))
+                .ifPresent(removePersonDescriptor::setInteractionIndexes);
 
         if (!removePersonDescriptor.isAnyFieldRemoved()) {
             throw new ParseException(RemoveCommand.MESSAGE_NOT_REMOVED);
@@ -118,5 +125,37 @@ public class RemoveCommandParser implements Parser<RemoveCommand> {
         Collection<String> indexesOfTags = indexes.size() == 1 && indexes.contains("")
                 ? Collections.emptySet() : indexes;
         return Optional.of(ParserUtil.parseIndexes(indexesOfTags));
+    }
+
+    /**
+     * Parses {@code Collection<String> remarks} into a {@code Set<Index>} if {@code remarks} is non-empty.
+     * If {@code indexes} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Index>} containing zero indexes.
+     */
+    private Optional<Set<Index>> parseRemarkIndexesForRemove(Collection<String> indexes) throws ParseException {
+        assert indexes != null;
+
+        if (indexes.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> indexesOfRemarks = indexes.size() == 1 && indexes.contains("")
+                ? Collections.emptySet() : indexes;
+        return Optional.of(ParserUtil.parseIndexes(indexesOfRemarks));
+    }
+
+    /**
+     * Parses {@code Collection<String> interactions} into a {@code Set<Index>} if {@code interactions} is non-empty.
+     * If {@code indexes} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Index>} containing zero indexes.
+     */
+    private Optional<Set<Index>> parseInteractionIndexesForRemove(Collection<String> indexes) throws ParseException {
+        assert indexes != null;
+
+        if (indexes.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> indexesOfInteractions = indexes.size() == 1 && indexes.contains("")
+                ? Collections.emptySet() : indexes;
+        return Optional.of(ParserUtil.parseIndexes(indexesOfInteractions));
     }
 }
