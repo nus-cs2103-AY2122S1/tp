@@ -78,11 +78,19 @@ public class InfoDisplay extends UiPart<Region> {
         name.setText(assessment.getName());
 
         AssessmentStatistics statistics = new AssessmentStatistics(assessment);
-        info1.setText("Grade range: " + statistics.getMin() + "-" + statistics.getMax());
-        info2.setText("Median: " + statistics.getMedian());
-        info3.setText("Mean: " + statistics.getMean());
-        info4.setText("25th percentile: " + statistics.getXPercentile(25));
-        info5.setText("75th percentile: " + statistics.getXPercentile(75));
+
+        String min = reformatStats(statistics.getMin());
+        String max = reformatStats(statistics.getMax());
+        String median = reformatStats(statistics.getMedian());
+        String mean = reformatStats(statistics.getMean());
+        String percentile25 = reformatStats(statistics.getXPercentile(25));
+        String percentile75 = reformatStats(statistics.getXPercentile(75));
+
+        info1.setText("Grade range: " + min + "-" + max);
+        info2.setText("Median: " + median);
+        info3.setText("Mean: " + mean);
+        info4.setText("25th percentile: " + percentile25);
+        info5.setText("75th percentile: " + percentile75);
     }
 
     /**
@@ -95,6 +103,13 @@ public class InfoDisplay extends UiPart<Region> {
         info3.setText(null);
         info4.setText(null);
         info5.setText(null);
+    }
+
+    /**
+     * Reformats numeric values to two decimal places.
+     */
+    private static String reformatStats(double stats) {
+        return String.format("%.2f", stats);
     }
 
     @Override
