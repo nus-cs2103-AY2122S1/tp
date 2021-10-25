@@ -1,7 +1,5 @@
 package seedu.fast.logic.parser;
 
-import seedu.fast.model.tag.InvestmentPlanTag;
-
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
