@@ -170,6 +170,28 @@ The workflow of the Add command is shown in the Activity diagram illustrated bel
   * Pros: Makes add command more user-friendly as the command is more succinct
   * Cons: User has to go through a two-step process of `add` and `edit` to initialise a residents information 
 
+### Delete Command
+
+This command allows the user to delete residents or events to the SafeFor(H)All application depending on the currently active tab.
+
+The workflow of the Delete command is shown in the Activity diagram illustrated below.
+
+![AddActivityDiagram](images/logic/commands/deletecommand/DeleteActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: Delete the correct resident/event:**
+
+* **Alternative 1 (current choice):** `Index` field
+    * Pros: No need to type out the full name of the resident/event, and risk typos. `Index` is also unique, which prevents the user
+      from deleting the wrong resident/event.
+    * Cons: The user needs to scroll through the GUI to find the index of the resident/event to be deleted.
+
+* **Alternative 2:** `Name` and `eventName` fields for Resident and Event respectively.
+    * Pros: The user does not need to scroll through the GUI to find the index of the resident/event to be deleted.
+    * Cons: There is a higher risk of erroneous user input, as a `Name`/`eventName` field will inevitably be longer than
+      an index.
+
 
 ### Edit Command
 
@@ -202,7 +224,7 @@ Note:
 
 ### View Command
 
-This command allows the user to view the additional details of a specific resident or event in the sidebar.
+This command allows the user to view the additional details of a specific resident or event in the sidebar, depending on the currently active tab.
 
 How it works:
 1. When the app is started, the `Ui` component calls on `Logic` to get the `Model` to be displayed in the sidebar. `Model` is first set to an empty list.
@@ -229,7 +251,7 @@ The following sequence diagram demonstrates what happens when the `ViewCommand` 
     * Cons: 
       - Hard to type when the `residentName`/ `eventName` is long.
       - `eventName` is not unique, which might cause issues.
-
+    
 
 ### Find Command
 
