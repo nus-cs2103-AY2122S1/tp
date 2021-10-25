@@ -130,7 +130,7 @@ public class UniqueAppointmentList implements Iterable<Appointment> {
     }
 
     /**
-     * Replaces {@code person} with {@code editedPerson} for {@code Appointments} with {@code person}
+     * Replaces {@code person} with {@code editedPerson} for {@code Appointments} with {@code person}.
      *
      * @param person person whose appointments are to be updated
      * @param editedPerson person replacing {@code person}
