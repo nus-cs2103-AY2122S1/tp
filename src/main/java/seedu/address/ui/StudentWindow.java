@@ -20,7 +20,7 @@ import seedu.address.model.student.StudentMark;
 public class StudentWindow extends UiPart<Stage> {
 
     public static final String VIEW_MESSAGE = "Currently viewing: ";
-    public static final String WEEK_LABEL = "Week ";
+    public static final String SESSION_LABEL = "Session ";
     public static final String SPACE = " ";
 
     private static final Logger logger = LogsCenter.getLogger(StudentWindow.class);
@@ -104,7 +104,7 @@ public class StudentWindow extends UiPart<Stage> {
         int marksCount = studentMarkList.size();
         for (int i = marksCount; i > 0; i--) {
             StudentMark mark = studentMarkList.get(i - 1);
-            Label markToAdd = new Label(WEEK_LABEL + i + SPACE + mark.name() + SPACE);
+            Label markToAdd = new Label(SESSION_LABEL + i + SPACE + mark.name() + SPACE);
             marks.getChildren().add(markToAdd);
         }
         getRoot().show();
