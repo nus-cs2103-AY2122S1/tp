@@ -8,22 +8,22 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 [Quick Start](#quick-start)<br>
 [Features](#features)
-- [Give a list of instructions : `help`](#give-a-list-of-instructions--help)
+- [Give a list of instructions : `help`](#give-a-list-of-instructions-help)
 - [Adding a person: `add`](#adding-a-person-add)
-- [Listing all persons : `list`](#listing-all-persons-list)
-- [Editing a person : `edit`](#editing-a-person-edit)
+- [Listing all persons: `list`](#listing-all-persons-list)
+- [Editing a person: `edit`](#editing-a-person-edit)
 - [Locating persons by name: `find`](#locating-persons-by-name-find)
-- [Deleting a person : `delete`](#deleting-a-person-delete)
+- [Deleting a person: `delete`](#deleting-a-person-delete)
 - [Add task:](#add-task)
 - [Delete task:](#delete-task)
 - [Edit task:](#edit-task)
-- [Viewing tasks:`cat`](viewing-tasks-cat)
-- [Clearing all entries : `clear`](#clearing-all-entries)
-- [Exiting the program:](#exiting-the-program)
-- [Sorting persons by name: `sort`](#sorting-persons-by-name)
+- [Mark task as done:](#mark-task-as-done)
+- [Clearing all entries: `clear`](#clearing-all-entries-clear)
+- [Viewing tasks: `cat`](#viewing-tasks-cat)
+- [Sorting persons by name: `sort`](#sorting-persons-by-name-sort)
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
-- [Archiving data files `[coming in v2.0]`](#archiving-data-files)
+- [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
 
 [FAQ](#faq)<br>
 [Command Summary](#command-summary)
@@ -82,7 +82,7 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 </div>
 
-### Give a list of instructions : `help`
+### Give a list of instructions: `help`
 
 Shows the user a list of instructions that can be used to navigate the app.
 
@@ -117,13 +117,13 @@ Examples:
 * `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`
 * `add -n Betsy Crowe -l friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -d Bald -l criminal`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in ContactSH.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in ContactSH.
 
@@ -159,7 +159,7 @@ Examples:
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from ContactSH.
 
@@ -232,7 +232,7 @@ Format: `donetask INDEX -ti TASK_INDEX…​`
 Examples:
 * `donetask 4 -ti 1 -ti 5` Marks the 1st and 5th task of the 4th person in the list as done.
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from ContactSH.
 
