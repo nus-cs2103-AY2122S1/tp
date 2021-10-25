@@ -2,8 +2,10 @@ package seedu.address.model.person;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.model.person.PersonTestUtil.createPeriod;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -40,5 +42,14 @@ public class ShiftTest {
         assertFalse(Shift.isValidShift("mon-morning"));
         assertFalse(Shift.isValidShift("monday-1"));
         assertFalse(Shift.isValidShift(""));
+    }
+
+    @Test
+    public void isWorkingShiftTest() {
+        Shift toTest = firstShift.add(LocalDate.of(1, 1, 1),
+                LocalDate.of(1, 1, 7));
+        assertTrue(toTest.isWorking(createPeriod(1, 7)));
+
+
     }
 }
