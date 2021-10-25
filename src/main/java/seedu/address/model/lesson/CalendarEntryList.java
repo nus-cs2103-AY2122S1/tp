@@ -118,7 +118,7 @@ public class CalendarEntryList {
      * @param editedPerson the person we added the lesson to.
      * @param toAdd        The lesson to add
      */
-    public void addLesson(Person editedPerson, Lesson toAdd) {
+    private void addLesson(Person editedPerson, Lesson toAdd) {
         requireAllNonNull(editedPerson, toAdd);
         if (hasClashes(toAdd)) {
             throw new ClashingLessonException();
@@ -144,7 +144,7 @@ public class CalendarEntryList {
      *
      * @param toRemove The lesson to remove.
      */
-    public void removeLesson(Lesson toRemove) {
+    private void removeLesson(Lesson toRemove) {
         requireNonNull(toRemove);
         if (toRemove.isCancelled()) {
             // fully cancelled lessons have no associated calendar entries
@@ -291,5 +291,41 @@ public class CalendarEntryList {
         }
         entry.setRecurrenceRule(recurrenceRule);
         return entry;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof CalendarEntryList)) {
+            return false;
+        }
+
+        // state check
+        CalendarEntryList other = (CalendarEntryList) obj;
+
+        if (entryList.size() != other.entryList.size()) {
+            return false;
+        }
+
+        for (int i = 0; i < entryList.size(); i++) {
+            boolean equalPair = entryList.get(i).getUserObject().equals(other.entryList.get(i).getUserObject());
+            if (!equalPair) {
+                return false;
+            }
+        }
+        return true;
+        // Note that we don't use ArrayList#equals(Object) as we want to check if lessons are equal, not entries.
+        // CalendarFX Entry#equals(Object) method does not check equality of the user object, and only checks Entry.id,
+        // which we do not set, so we should not use it.
+    }
+
+    @Override
+    public int hashCode() {
+        return calendar.hashCode();
     }
 }
