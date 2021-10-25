@@ -370,16 +370,32 @@ Formats:
 `addShift -n name d/fullDayName-shiftNumber`  
 `addShift -i index d/fullDayName-shiftNumber`
 
-
 Examples:  
 `addShift -n Candice d/Monday-1`   
 `addShift -i 1234 d/tuesday-0`
 
-### Updating start time and end time for a shift
+
+#### Swapping shifts: `swapShift`
+Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
+
+Formats:  
+`swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number`  
+`swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
+
+Examples:  
+`swapShift -n Candice -n Bob d/monday-0 d/tuesday-1`  
+`swapShift -n Candice d/monday-0 -n Bob d/tuesday-1`
+
+Note:
+* The staff identified using the first name is associated with the first shift and the staff identified using the second name is associated with the second shift.
+* This means that you can permute the order of the parameters in any way but the rule mentioned right above will always be followed.
+
+
+#### Updating the start time and end time for a shift : `setShiftTime`
 
 Updates the start time and end time of a specific shift of a specific staff.
 
-Formats:\
+Formats:  
 `setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm`
 `setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm`
 
@@ -388,7 +404,7 @@ Formats:\
 * Both start time and end time must be within the bound (10:00-16:00 for morning slot, 16:00-22:00 for afternoon slot).
 * If the shift does not exist in the staff's schedule, it will be created.
 
-Examples:\
+Examples:  
 `setShiftTime -n Candice d/Monday-0 st/10:30-12:30`
 `setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
 
@@ -429,6 +445,7 @@ Action | Format, Examples
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
 **Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER`
+**Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
 **Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm`
 **Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER`
 **View shift** | `viewShift -d DAY-SHIFTNUMBER` <br> `viewShift -ti DAY-HH:mm`
