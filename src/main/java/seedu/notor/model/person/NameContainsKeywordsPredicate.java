@@ -7,7 +7,10 @@ import seedu.notor.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
+ * Deprecated because substring search was deemed preferable. May decide to support both
+ * options in the future
  */
+@Deprecated
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 

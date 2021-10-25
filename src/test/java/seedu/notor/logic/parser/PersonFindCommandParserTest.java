@@ -1,8 +1,10 @@
 package seedu.notor.logic.parser;
 
-public class FindCommandParserTest {
+// import seedu.notor.logic.parser.person.PersonFindCommandParser;
 
-    private final FindCommandParser parser = new FindCommandParser();
+public class PersonFindCommandParserTest {
+
+//    private final PersonFindCommandParser parser = new PersonFindCommandParser();
 
 
     // TODO: After find command is created
