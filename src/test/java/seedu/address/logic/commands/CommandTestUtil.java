@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.applicant.Application.ApplicationStatus;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.descriptors.EditPositionDescriptor;
+import seedu.address.logic.descriptors.FilterApplicantDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.PositionBook;
@@ -25,6 +27,7 @@ import seedu.address.model.position.Position;
 import seedu.address.model.position.TitleContainsAllKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.EditPositionDescriptorBuilder;
+import seedu.address.testutil.FilterApplicantDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -67,6 +70,8 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String INVALID_FILTER_TITLE_DATAMINER = "Data Miner";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -75,6 +80,9 @@ public class CommandTestUtil {
 
     public static final EditPositionDescriptor DESC_DATA_ENGINEER;
     public static final EditPositionDescriptor DESC_DATA_SCIENTIST;
+
+    public static final FilterApplicantDescriptor FILTER_DESC_FULL;
+    public static final FilterApplicantDescriptor FILTER_DESC_PARTIAL;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -88,6 +96,13 @@ public class CommandTestUtil {
                 .withDescription(VALID_DESCRIPTION_DATAENGINEER).build();
         DESC_DATA_SCIENTIST = new EditPositionDescriptorBuilder().withTitle(VALID_TITLE_DATASCIENTIST)
                 .withDescription(VALID_DESCRIPTION_DATASCIENTIST).build();
+        FILTER_DESC_FULL = new FilterApplicantDescriptorBuilder()
+                .withPositionTitle(VALID_TITLE_DATASCIENTIST)
+                .withApplicationStatus(ApplicationStatus.PENDING)
+                .build();
+        FILTER_DESC_PARTIAL = new FilterApplicantDescriptorBuilder()
+                .withPositionTitle(VALID_TITLE_DATASCIENTIST)
+                .build();
     }
 
     /**

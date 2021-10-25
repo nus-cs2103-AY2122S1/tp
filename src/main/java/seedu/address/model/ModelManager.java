@@ -12,9 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.applicant.Applicant;
+import seedu.address.model.applicant.ApplicantParticulars;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.applicant.Name;
-import seedu.address.model.applicant.applicantparticulars.ApplicantParticulars;
-import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -244,6 +244,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    // needs to update
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object

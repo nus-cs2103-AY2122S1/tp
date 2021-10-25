@@ -3,8 +3,8 @@ package seedu.address.logic.descriptors;
 import java.util.Optional;
 
 import seedu.address.commons.util.CollectionUtil;
-import seedu.address.model.application.Application;
-import seedu.address.model.application.Application.ApplicationStatus;
+import seedu.address.model.applicant.Application;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 
 public class EditApplicationDescriptor {
