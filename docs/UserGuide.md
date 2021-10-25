@@ -134,27 +134,21 @@ Format: ```clear```
 
 Adds a task to the task list. Only task description is compulsory during creation.
 
-Format: ```add d/DESCRIPTION [t/TAG]...```
+Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [t/TAG]...```
 
-#### Editing
-
-Replaces the details of the task at the given index with the new details.
-
-Format: ```edit INDEX [d/DESCRIPTION] [t/TAG]...```
-
-* Edits the specified task fields at the specified INDEX
-* The index refers to the index number shown in the task list
-* The index must be a positive integer i.e. 1, 2, 3, …
+An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
 
 #### Editing task details [edit]
 
 Replaces the details of the task at the given index with the new details.
 
-Format: ```edit INDEX [d/DESCRIPTION] [t/TAG]...```
+Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [t/TAG]...```
 
 * Edits the specified task fields at the specified INDEX
 * The index refers to the index number shown in the task list
 * The index must be a positive integer i.e. 1, 2, 3, …
+
+An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
 
 #### Deleting a task [delete]
 
@@ -182,6 +176,41 @@ Format: ```find DESCRIPTION```
 Deletes all tasks.
 
 Format: ```clear```
+
+### Handling Date and Time of tasks
+
+A task can have Date only or both Date and Time.
+
+`add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
+
+* When only Date is specified in the `add` command, a task will only have the specified Date.
+* When only Time is specified in the `add` command, a task will have today's Date and the specified Time.
+* When both Date and Time are specified in the `add` command, a task will have both of the specified Date and Time.
+
+`edit [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
+
+* When only Date is specified in the `edit` command, a task will only have its Date changed to the specified Date.
+* When only Time is specified in the `edit` command, a task will only have its Time changed to the specified Time.
+* When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
+
+
+### Date Formats
+
+Format | Example
+--------|------------------
+**dd/MM/yyyy** | `02/10/2021`
+**dd-MM-yyyy** | `02-10-2021`
+**yyyy/MM/dd** | `2021/10/02`
+**yyyy-MM-dd** | `2021-10-02`
+**dd MMM yyyy** | `02 Oct 2021`
+
+### Time Formats
+
+Format | Example
+--------|------------------
+**HHmm** | `1300` (10:00 PM in 24-hour notation)
+**hh:mm a** | `10:00 PM`, `02:00 AM`
+
 
 ## Command summary
 
