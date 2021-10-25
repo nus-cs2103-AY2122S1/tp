@@ -75,10 +75,14 @@ public class Session {
         LocalTime otherStartTime = otherSession.start;
         LocalTime otherEndTime = otherSession.end;
 
-        boolean isThisStartTimeBetweenOtherSession = isTimeBetween(thisStartTime, otherStartTime, otherEndTime);
-        boolean isThisEndTimeBetweenOtherSession = isTimeBetween(thisEndTime, otherStartTime, otherEndTime);
-        boolean isOtherStartTimeBetweenThisSession = isTimeBetween(otherStartTime, thisStartTime, thisEndTime);
-        boolean isOtherEndTimeBetweenThisSession = isTimeBetween(otherEndTime, thisStartTime, thisEndTime);
+        boolean isThisStartTimeBetweenOtherSession =
+                isTimeBetweenExclusiveEnd(thisStartTime, otherStartTime, otherEndTime);
+        boolean isThisEndTimeBetweenOtherSession =
+                isTimeBetweenExclusiveStart(thisEndTime, otherStartTime, otherEndTime);
+        boolean isOtherStartTimeBetweenThisSession =
+                isTimeBetweenExclusiveEnd(otherStartTime, thisStartTime, thisEndTime);
+        boolean isOtherEndTimeBetweenThisSession =
+                isTimeBetweenExclusiveStart(otherEndTime, thisStartTime, thisEndTime);
 
         return isThisStartTimeBetweenOtherSession || isThisEndTimeBetweenOtherSession
                 || isOtherStartTimeBetweenThisSession || isOtherEndTimeBetweenThisSession;
@@ -97,15 +101,27 @@ public class Session {
     }
 
     /**
-     * Checks if the given time is between the start and the end (inclusive).
+     * Checks if the given time is between the start (exclusive) and the end (inclusive).
      *
      * @param time  Given time to be checked.
      * @param start Start time.
      * @param end   End time.
      * @return True if the given time is between the start and end times, false otherwise.
      */
-    private static boolean isTimeBetween(LocalTime time, LocalTime start, LocalTime end) {
-        return !(time.isBefore(start) || time.isAfter(end));
+    private static boolean isTimeBetweenExclusiveStart(LocalTime time, LocalTime start, LocalTime end) {
+        return time.isAfter(start) && !time.isAfter(end);
+    }
+
+    /**
+     * Checks if the given time is between the start (inclusive) and the end (exclusive).
+     *
+     * @param time  Given time to be checked.
+     * @param start Start time.
+     * @param end   End time.
+     * @return True if the given time is between the start and end times, false otherwise.
+     */
+    private static boolean isTimeBetweenExclusiveEnd(LocalTime time, LocalTime start, LocalTime end) {
+        return !time.isBefore(start) && time.isBefore(end);
     }
 
     /**
@@ -121,6 +137,21 @@ public class Session {
     public String getFormattedEndTime() {
         return end.format(DISPLAYED_TIME_FORMATTER);
     }
+
+    /**
+     * Returns the number of minutes in this Session.
+     */
+    public Integer getMinutes() {
+        return duration.getMinutes();
+    }
+
+    /**
+     * Returns the start time in input format.
+     */
+    public String toInputStringFormat() {
+        return start.format(TIME_FORMATTER);
+    }
+
 
     @Override
     public String toString() {

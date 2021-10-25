@@ -20,7 +20,6 @@ public class AppointmentFieldsContainKeywordsPredicate implements Predicate<Appo
         return keywords.stream()
                 .anyMatch(keyword ->
                         StringUtil.containsWordIgnoreCase(appointment.getPatient().getName().fullName, keyword)
-                        || StringUtil.containsWordIgnoreCase(appointment.getDoctor().getName().fullName, keyword)
                 );
     }
 

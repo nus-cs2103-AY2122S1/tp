@@ -20,7 +20,9 @@ Given below are my contributions to the project.
   * Added command to add doctor
   * Added test cases for adding doctor
   * Added Appointment class test builders to be used for testing the Appointment class and its features
+  * Added test cases for Appointment class
   * Added command to add appointment
+  * Added test cases for adding appointment
 
 * **Documentation**:
   * User Guide:
