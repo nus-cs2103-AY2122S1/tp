@@ -184,6 +184,11 @@ public class AddPatientCommandTest {
         }
 
         @Override
+        public boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAppointment(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }

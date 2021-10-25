@@ -185,6 +185,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isClashAppointmentForEdited(Appointment editedAppointment, Appointment oldAppointment) {
+        requireAllNonNull(editedAppointment, oldAppointment);
+        return plannerMd.isClashAppointmentForEdited(editedAppointment, oldAppointment);
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         plannerMd.removeAppointment(target);
     }
