@@ -105,6 +105,13 @@ public class AddToFolderCommandTest {
         }
 
         @Override
+        public void deletePersonFromFolder(
+                Index targetIndex,
+                Folder targetFolder) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyUserPrefs getUserPrefs() {
             throw new AssertionError("This method should not be called.");
         }

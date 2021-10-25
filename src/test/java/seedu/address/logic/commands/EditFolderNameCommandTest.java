@@ -16,39 +16,39 @@ import seedu.address.model.folder.FolderName;
 public class EditFolderNameCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Folder TestFolder1 = new Folder(new FolderName("TestFolder1"));
-    private Folder TestFolder2 = new Folder(new FolderName("TestFolder2"));
-    private Folder TestFolder3 = new Folder(new FolderName("TestFolder3"));
-    private Folder TestFolder4 = new Folder(new FolderName("TestFolder4"));
+    private Folder testFolder1 = new Folder(new FolderName("TestFolder1"));
+    private Folder testFolder2 = new Folder(new FolderName("TestFolder2"));
+    private Folder testFolder3 = new Folder(new FolderName("TestFolder3"));
+    private Folder testFolder4 = new Folder(new FolderName("TestFolder4"));
 
     @Test
     public void execute_renameNonExistingFolder_failure() {
-        model.addFolder(TestFolder1);
-        model.addFolder(TestFolder2);
-        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(TestFolder3, TestFolder4);
+        model.addFolder(testFolder1);
+        model.addFolder(testFolder2);
+        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(testFolder3, testFolder4);
         assertThrows(CommandException.class, () -> editFolderNameCommand.execute(model));
     }
 
     @Test
     public void execute_renameExistingFolderToAnotherExistingFolder_failure() {
-        model.addFolder(TestFolder1);
-        model.addFolder(TestFolder2);
-        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(TestFolder1, TestFolder2);
+        model.addFolder(testFolder1);
+        model.addFolder(testFolder2);
+        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(testFolder1, testFolder2);
         assertThrows(CommandException.class, () -> editFolderNameCommand.execute(model));
     }
 
     @Test
-    public void execute_renameExistingFolderToNewFolder_success() throws CommandException {
-        model.addFolder(TestFolder1);
-        model.addFolder(TestFolder2);
-        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(TestFolder1,
-                TestFolder3);
+    public void execute_renameExistingFolderToNewFolder_success() {
+        model.addFolder(testFolder1);
+        model.addFolder(testFolder2);
+        EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(testFolder1,
+                testFolder3);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         String expectedMessage = String.format(EditFolderNameCommand
-                .MESSAGE_SUCCESS_EDIT_FOLDER_NAME, TestFolder3);
-        expectedModel.addFolder(TestFolder3);
-        expectedModel.addFolder(TestFolder2);
+                .MESSAGE_SUCCESS_EDIT_FOLDER_NAME, testFolder3);
+        expectedModel.addFolder(testFolder3);
+        expectedModel.addFolder(testFolder2);
 
         assertCommandSuccess(editFolderNameCommand, model,
                 expectedMessage, expectedModel);
