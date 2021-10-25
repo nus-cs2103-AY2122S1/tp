@@ -153,7 +153,7 @@ Examples:
   * An EMPLOYMENT_TYPE should be one of the following: `Full time`, `Part time`, `Temporary` or `Internship`.
   * An EMPLOYMENT_TYPE is **case-insensitive**.
   * For example:
-    * EMPLOYMENT_TYPE inputs such as 'Full time` and `Internship` are acceptable.
+    * EMPLOYMENT_TYPE inputs such as `Full time` and `Internship` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `fUlL tiMe` and `iNtErnShIP` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `Long term` are not acceptable.
 * ##### EXPECTED_SALARY `s/`
