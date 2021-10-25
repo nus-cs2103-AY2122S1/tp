@@ -1,6 +1,10 @@
 package seedu.address.model.application;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -86,5 +90,26 @@ public class Application {
     /**
      * The status of a job application.
      */
-    public enum ApplicationStatus { PENDING, ACCEPTED, REJECTED }
+    public enum ApplicationStatus {
+        PENDING, ACCEPTED, REJECTED;
+
+        public static final String MESSAGE_CONSTRAINTS;
+
+        static {
+            Stream<String> messageConstraints = Stream.of(values())
+                    .map(applicationStatus -> applicationStatus.toString().toLowerCase());
+            MESSAGE_CONSTRAINTS = messageConstraints.collect(
+                    Collectors.joining(", ", "Application status must be one of: ", "."));
+        }
+
+        /**
+         * Parses the given string into an ApplicationStatus.
+         * Case-insensitive. Input must match exactly with the enum name.
+         */
+        public static ApplicationStatus fromString(String inputString) {
+            requireNonNull(inputString);
+            return valueOf(inputString.toUpperCase());
+        }
+
+    }
 }

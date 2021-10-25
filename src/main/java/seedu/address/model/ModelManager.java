@@ -244,6 +244,7 @@ public class ModelManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    // needs to update
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
