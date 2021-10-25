@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.customer.CustomerClassContainsKeywordsPredicate;
 import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicate;
-import seedu.address.model.person.supplier.SupplierNameContainsKeywordsPredicate;
+import seedu.address.model.person.supplier.SupplierClassContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -214,7 +214,7 @@ public class ModelManagerTest {
         // different filteredList for suppliers -> returns false
         String[] supplierKeywords = AMY.getName().fullName.split("\\s+");
         modelManager.updateFilteredSupplierList(
-                new SupplierNameContainsKeywordsPredicate(Arrays.asList(supplierKeywords)));
+                new SupplierClassContainsKeywordsPredicate(Arrays.asList(supplierKeywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // different filteredList for reservations -> returns false

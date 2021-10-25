@@ -52,17 +52,17 @@ public class SampleDataUtil {
 
     public static Supplier[] getSampleSuppliers() {
         return new Supplier[] {
-            new Supplier(new Name("Supplier1"), new Phone("87438807"), new Email("alexyeoh@example.com"),
+            new Supplier(new Name("Supplier1"), new Phone("87438807"), new Email("alexyeoh@hotmail.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"), getTagSet("friends"),
                     new SupplyType("Chicken"), new DeliveryDetails("2021-10-19 14:00")),
-            new Supplier(new Name("Supplier2"), new Phone("99272758"), new Email("berniceyu@example.com"),
+            new Supplier(new Name("Supplier2"), new Phone("99272758"), new Email("berniceyu@gmail.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
                     getTagSet("colleagues", "friends"), new SupplyType("Rice"),
                     new DeliveryDetails("12:00 2021-05-19")),
-            new Supplier(new Name("Supplier3"), new Phone("92492021"), new Email("irfan@example.com"),
+            new Supplier(new Name("Supplier3"), new Phone("92492021"), new Email("irfan@yahoo.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"), getTagSet("classmates"),
                     new SupplyType("Potatoes"), new DeliveryDetails("19-10-2021 10:00")),
-            new Supplier(new Name("Supplier4"), new Phone("92624417"), new Email("royb@example.com"),
+            new Supplier(new Name("Supplier4"), new Phone("92624417"), new Email("royb@outlook.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"), getTagSet("colleagues"),
                     new SupplyType("Flour"), new DeliveryDetails("10:00 15-10-2021"))
         };
