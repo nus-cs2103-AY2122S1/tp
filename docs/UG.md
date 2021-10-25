@@ -64,7 +64,7 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
    contains some sample data. You can use the [`clear`](#413-clearing-all-data) command to purge all data.<br>
-   ![Ui](images/UIHelpCommand.png)
+   ![Ui](images/UiHelpCommand.png)
 
 5. Refer to the [Features](#4-features) below for details of each command.
 ---
@@ -142,7 +142,7 @@ with each feature into the CLI.
 ### 4.1 Getting help
 Displays a help message.
 Format: `help`
-Expected Output: ![Ui](images/UIHelpCommand.png)
+Expected Output: ![Ui](images/UiHelpCommand.png)
 
 ### 4.2 Add
 Adds a new client or product to Sellah with an automatically generated ID. An error message will be 
