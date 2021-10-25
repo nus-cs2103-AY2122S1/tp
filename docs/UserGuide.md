@@ -14,7 +14,7 @@ need to get started. If you're an intermediate user looking to get more out of D
 below.
 
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
