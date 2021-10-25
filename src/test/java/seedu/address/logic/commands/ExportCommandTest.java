@@ -21,8 +21,8 @@ public class ExportCommandTest {
     private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/FolderWithJson/";
     private static final String TEST_FILE_NAME = "testFile";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
 
     @Test
     public void equals() {

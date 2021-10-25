@@ -28,6 +28,21 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /**
+     * Returns the user profile.
+     */
+    Person getUserProfile();
+
+    /**
+     * Checks if the user profile is present.
+     */
+    boolean isProfilePresent();
+
+    /**
+     * Set the data in user profile.
+     */
+    void setUserProfile(Person p) throws IOException;
+
+    /**
      * Returns the AddressBook.
      *
      * @see seedu.address.model.Model#getAddressBook()
