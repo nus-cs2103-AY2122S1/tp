@@ -1,8 +1,5 @@
 package seedu.programmer.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.programmer.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.programmer.testutil.Assert.assertThrows;
@@ -10,24 +7,15 @@ import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
 import static seedu.programmer.testutil.TypicalLabs.getTypicalLabList;
 import static seedu.programmer.testutil.TypicalStudents.getTypicalProgrammerError;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
-import seedu.programmer.commons.core.GuiSettings;
-import seedu.programmer.logic.commands.exceptions.CommandException;
-import seedu.programmer.model.*;
+import seedu.programmer.model.Model;
+import seedu.programmer.model.ModelManager;
+import seedu.programmer.model.ProgrammerError;
+import seedu.programmer.model.UserPrefs;
 import seedu.programmer.model.student.Lab;
-import seedu.programmer.model.student.Student;
 import seedu.programmer.testutil.LabBuilder;
-import seedu.programmer.testutil.StudentBuilder;
-
-import static seedu.programmer.testutil.TypicalIndexes.NUMBER_FIRST_LAB;
 
 public class AddLabCommandTest {
     private static Lab validLab;

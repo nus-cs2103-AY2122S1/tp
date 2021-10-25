@@ -45,15 +45,15 @@ public class AddLabCommand extends Command {
         requireNonNull(model);
         // Gets the last filtered list displayed
         List<Student> lastShownList = model.getFilteredStudentList();
-        Boolean Exists = false;
+        boolean exists = false;
         for (Student std: lastShownList) {
             Student target = std;
-            if(!target.addLabResult(this.result)) {
-                Exists = true;
+            if (!target.addLabResult(this.result)) {
+                exists = true;
             }
             model.setStudent(target, std);
         }
-        if (Exists) {
+        if (exists) {
             throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));
         } else {
             return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
