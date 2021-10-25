@@ -25,6 +25,7 @@ import seedu.address.logic.commands.MonthCommand;
 import seedu.address.logic.commands.NextCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.TodayCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ViewCommand;
 import seedu.address.logic.commands.WeekCommand;
@@ -118,6 +119,9 @@ public class AddressBookParser {
 
         case BackCommand.COMMAND_WORD:
             return new BackCommand();
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommand();
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();

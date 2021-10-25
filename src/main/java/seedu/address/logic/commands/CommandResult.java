@@ -14,6 +14,7 @@ public class CommandResult {
 
     public enum DisplayType {
         HELP, // Help information should be shown to the user.
+        TAGS, // Show the list of tags to the user.
         STUDENTS, // Show the list of students to the user.
         CALENDAR, // Switch to calendar view.
         DAY, // Daily Schedule should be shown to the user.
@@ -65,6 +66,11 @@ public class CommandResult {
         this(feedbackToUser, DisplayType.STUDENTS); // We show students by default
     }
 
+    /**
+     * Returns the feedback to user from command execution.
+     *
+     * @return Feedback to user from command execution.
+     */
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -73,6 +79,11 @@ public class CommandResult {
         return displayType;
     }
 
+    /**
+     * Returns an Optional of student.
+     *
+     * @return Optional of student.
+     */
     public Optional<Person> getStudent() {
         return Optional.ofNullable(student);
     }

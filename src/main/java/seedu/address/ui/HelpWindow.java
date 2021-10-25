@@ -34,6 +34,9 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final double ACTION_WIDTH = 0.23;
+    private static final double FORMAT_WIDTH = 0.4;
+    private static final double EXAMPLE_WIDTH = 0.38;
 
     private final ObservableList<CommandSummary> list = CommandSummary.getCommandSummaryList();
 
@@ -69,16 +72,17 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        action.setCellFactory(getTableColumnTableCellCallback(format));
         action.setCellValueFactory(new PropertyValueFactory<>("action"));
-        action.prefWidthProperty().bind(table.widthProperty().multiply(0.23));
+        action.prefWidthProperty().bind(table.widthProperty().multiply(ACTION_WIDTH));
 
         format.setCellFactory(getTableColumnTableCellCallback(format));
         format.setCellValueFactory(new PropertyValueFactory<>("format"));
-        format.prefWidthProperty().bind(table.widthProperty().multiply(0.4));
+        format.prefWidthProperty().bind(table.widthProperty().multiply(FORMAT_WIDTH));
 
         example.setCellFactory(getTableColumnTableCellCallback(example));
         example.setCellValueFactory(new PropertyValueFactory<>("example"));
-        example.prefWidthProperty().bind(table.widthProperty().multiply(0.4));
+        example.prefWidthProperty().bind(table.widthProperty().multiply(EXAMPLE_WIDTH));
         table.setItems(list);
         table.setColumnResizePolicy(p -> true);
 

@@ -47,6 +47,8 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
+    private PersonListPanel personListPanel;
+    private TagListPanel tagListPanel;
     private CenterPanel centerPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
@@ -129,8 +131,8 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        centerPanel = new CenterPanel(logic.getCalendar(),
-                logic.getFilteredPersonList(), logic.getEmptyLessonList());
+        centerPanel = new CenterPanel(logic.getCalendar(), logic.getFilteredPersonList(), logic.getEmptyLessonList(),
+                logic.getObservableTagList(), logic.getTagCounter());
         centerPanelPlaceholder.getChildren().add(centerPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
@@ -226,6 +228,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Displays tag list instead of the default person list.
+     */
+    public void handleShowTagList() {
+        centerPanel.displayTagListPanel();
+    }
+
+    /**
      * Executes the command and returns the result.
      *
      * @see seedu.address.logic.Logic#execute(String)
@@ -255,6 +264,10 @@ public class MainWindow extends UiPart<Stage> {
                 }
                 break;
 
+            case TAGS:
+                handleShowTagList();
+                break;
+                
             case CALENDAR:
                 handleCalendar();
                 break;
