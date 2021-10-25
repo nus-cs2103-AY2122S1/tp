@@ -1,5 +1,5 @@
 ---
-layout: page 
+layout: page
 title: UNIon - Manage your wide range of college contacts easily
 ---
 
@@ -8,7 +8,7 @@ title: UNIon - Manage your wide range of college contacts easily
 
 ![Ui](images/Ui.png)
 
-**UNIon is a desktop app for organizing various types of contacts in college**, optimized for use for the vast majority of computing students. 
+**UNIon is a desktop app for organizing various types of contacts in college**, optimized for use for the vast majority of computing students.
 While it has a GUI, most of the user interactions happen using a CLI (Command Line Interface) based on **Unix**.
 
 * If you are interested in using UNIon, head over to the [_Quick Start_ section of the **User

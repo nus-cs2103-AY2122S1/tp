@@ -13,16 +13,16 @@ import seedu.address.model.folder.FolderName;
 
 public class EditFolderNameCommandParserTest {
 
-    private Folder TestFolder1 = new Folder(new FolderName("TestFolder1"));
-    private Folder TestFolder2 = new Folder(new FolderName("TestFolder2"));
-    private Folder TestFolder3 = new Folder(new FolderName("TestFolder3"));
-    private Folder TestFolder4 = new Folder(new FolderName("TestFolder4"));
+    private Folder testFolder1 = new Folder(new FolderName("TestFolder1"));
+    private Folder testFolder2 = new Folder(new FolderName("TestFolder2"));
+    private Folder testFolder3 = new Folder(new FolderName("TestFolder3"));
+    private Folder testFolder4 = new Folder(new FolderName("TestFolder4"));
 
     @Test
     public void parse_properFolderInput_success() {
         String successStringInput = " TestFolder1 | TestFolder2";
         EditFolderNameCommand expectedEditFolderNameCommand = new EditFolderNameCommand(
-                TestFolder1, TestFolder2);
+                testFolder1, testFolder2);
         EditFolderNameCommandParser editFolderNameCommandParser = new EditFolderNameCommandParser();
         assertParseSuccess(
                 editFolderNameCommandParser,
