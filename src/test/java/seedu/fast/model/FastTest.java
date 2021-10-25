@@ -7,10 +7,10 @@ import static seedu.fast.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.fast.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.fast.testutil.Assert.assertThrows;
 import static seedu.fast.testutil.TypicalPersons.ALICE;
+import static seedu.fast.testutil.TypicalPersons.CAVE;
 import static seedu.fast.testutil.TypicalPersons.GRABAHAN;
 import static seedu.fast.testutil.TypicalPersons.JOE;
 import static seedu.fast.testutil.TypicalPersons.SUGON;
-import static seedu.fast.testutil.TypicalPersons.CAVE;
 import static seedu.fast.testutil.TypicalPersons.getTypicalFast;
 
 import java.util.Arrays;
