@@ -177,9 +177,9 @@ In the help window, you can access all the command usages using the dropdown men
 
 ![help window](images/helpWindow.png)
 
-Format: `help [COMMAND]`
+**Format**: `help [COMMAND]`
 
-Examples:
+**Examples**:
 * `help` will just open the default help window
 * `help add` will open the help window and directly navigate to the `Add` command help page.
 
@@ -192,13 +192,13 @@ The help window can also be quickly accessed by entering using the F1 key on you
 
 Adds a client to FAST.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+**Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0)
 </div>
 
-Examples:
+**Examples**:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` will add a new client called 
   `John Doe`, who has phone number of `98765432`, has an email address `johnd@example.com` and stays at 
   `John street, block 123, #01-01`.
@@ -211,14 +211,14 @@ Examples:
 Shows a list of all your clients in FAST. This command is useful to return to viewing your full client list
 after a [find](#searching-for-clients-find) command has been executed.
 
-Format: `list` 
+**Format**: `list` 
 
 ### Editing a client: `edit`
 
 Edits an existing client in FAST. This can be used if the client's information has changed, or if you
 entered an incorrect entry previously.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+**Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
 * At least one of the optional fields must be provided.
@@ -227,7 +227,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * You can remove all the client’s tags by typing `t/` without specifying any tags after it.
 * For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
 
-Examples:
+**Examples**:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
 
@@ -237,7 +237,7 @@ Finds clients by their name, [priority](#tags), [tags](#tags) or
 [remarks](#adding-a-remark-rmk). This is useful if your have many clients in FAST and wish to quickly find a
 specific client. To return to the full client list, you can use the [list](#listing-all-clients-list) command
 
-Format: `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]`
+**Format**: `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]`
 OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`
 
 * The search is case-insensitive. e.g. `hans` will match `Hans`
@@ -246,10 +246,10 @@ OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`
 * Names with words starting with the query will match. e.g. `Han` will match `Solo Hans`.
 * For priority searches, there are 3 priorities, `pr/low`, `pr/med`, or `pr/high`.
 * Any remarks containing the searched remark will match. e.g. `r/piz` will match `likes pizza`.
-* clients matching at least one search query will be returned (i.e. `OR` search).
+* Clients matching at least one search query will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
-Examples:
+**Examples**:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
@@ -264,27 +264,27 @@ When searching for remarks, use more specific queries for better results.
 
 Deletes the specified client from the address book. This is useful when a client has stopped using your services.
 
-Format: `del INDEX`
+**Format**: `del INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
 
-Examples:
+**Examples**:
 * `list` followed by `del 2` deletes the second clients in FAST.
 * `find Betsy` followed by `del 1` deletes the first client in the results of the `find` command.
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 Can be used to delete up to **10** contacts in a single `del` command by supplying more `INDEX`.
 
-Format 1: `del INDEX INDEX [INDEX]...`
-Format 2: `del INDEX-INDEX`
+**Format** 1: `del INDEX INDEX [INDEX]...`
+**Format** 2: `del INDEX-INDEX`
 
 <div markdown="span" class="alert alert-primary">:exclamation: Reminder:
 If *Format 1* is used, there should be a space in between each `INDEX`.
 If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
 </div>
 
-Examples:
+**Examples**:
 * `del 2 4 6 8 10` deletes the 2nd, 4th, 6th, 8th and 10th person in FAST.
 * `del 3-5` deletes the 3rd, 4th and 5th person in FAST.
 </div>
@@ -297,7 +297,7 @@ This CANNOT be undone!</div>
 Adds a remark to an existing client in FAST. This is useful for adding additional client information such 
 as their preferred meeting timing, allowing you to better keep track of your clients' preferences and habits.
 
-Format: `rmk INDEX [r/REMARK]`
+**Format**: `rmk INDEX [r/REMARK]`
 
 * Adds a remark to the client at the specified `INDEX`.
 * Remarks have a character limit of 100 characters.
@@ -307,7 +307,7 @@ Format: `rmk INDEX [r/REMARK]`
    which should mostly be one or two words.<br>
    </div>
 
-Examples:
+**Examples**:
 * `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first client.
 ![result for `rmk 1 r/loves to eat`](images/remarkResult.png)
 * `rmk 1` removes the remark from the first client.<br>
@@ -324,7 +324,7 @@ FAST is capable of storing and keeping track of appointments for your clients. Y
 
 #### Adding an appointment: `aa`
 
-Format: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
+**Format**: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
 Adds a scheduled appointment with the client. An appointment includes a date, time and venue. This allows you to keep
 track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-ea),
@@ -334,7 +334,7 @@ track of all your clients' appointment dates all within the same app. You can al
 
 * The `DATE` of the appointment must at least be specified.
 
-Examples:
+**Examples**:
 * `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
 ![result for `appt 1 d/2021-03-27`](images/appointment.png)
 * `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
@@ -350,13 +350,13 @@ Examples:
 Edits a scheduled [appointment](#appointments) with the client. This command is useful when your appointment has been rescheduled or 
 has a change in location.
 
-Format: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
+**Format**: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
 
 * Edits a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be updated with the input data.
 * At least **one** of the optional fields must be present.
 
-Examples:
+**Examples**:
 * `ea 1 d/2021-03-27` edits the appointment date to be `27 Mar 2021` of the first client.
 * `ea 3 v/  t/18:00` edits the appointment time to be `1800hrs` and clears the appointment venue of the third client.
 
@@ -365,12 +365,12 @@ Examples:
 Deletes a scheduled [appointment](#appointments) with the client. This command should be used when 
 the appointment has been cancelled with a client.
 
-Format: `da INDEX`
+**Format**: `da INDEX`
 
 * Deletes a scheduled appointment with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
 
-Examples:
+**Examples**:
 * `da 1` deletes the appointment of the first client.
 * `find Ben` followed by `da 3` deletes the appointment the third client in the result of the `find` command.
 
@@ -381,13 +381,14 @@ track of the number of completed appointments with your client.
 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
 
-Format: `ma INDEX`
+**Format**: `ma INDEX`
 * Increment the completed appointment count with the client at the specified `INDEX` if the appointment exist.
 * Existing details will be deleted.
 
-Examples:
+**Examples**:
 
 * `ma 1` updates the completed appointment counter of the first client.
+
 ![result for `done 1`](images/appointmentDone.png)
 * `find Matthew` followed by `ma 3` updates the completed appointment counter of the third client in the result of 
   the `find` command.
@@ -398,13 +399,13 @@ Sorts all existing client by the given condition. Currently, you can sort by nam
 and [priority tag](#tags). This allows you to keep your clients list orderly and well-organised.
 It can also be used to quickly sieve through large client lists.
 
-Format: `sort KEYWORD`
+**Format**: `sort KEYWORD`
 * There are only 3 values for `KEYWORD`: `name`, `appointment`, `priority`.
 * `name` will sort all clients in alphabetical order from A to Z.
 * `appointment` will sort all client by appointment date from the earliest date to latest.
 * `priority` will sort all client by priority tag from the highest to the lowest priority.
 
-Examples:
+**Example**:
 * `sort priority` Sorts all existing clients by their priority tag, from the highest priority to the lowest priority.
 
 ### Tags
@@ -450,14 +451,14 @@ More examples of how to use these will be given in the following section.
 
 Modifies the tags of a specified client. 
 
-Format: `tag INDEX [a/TAG] [d/TAG]`
+**Format**: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
 * Does not affect any unmentioned tags, unlike `edit`.
 * Delete operations are performed first before add operations, regardless of their order in the input.
 * Tags have a maximum length of 20 characters, and may only contain alphanumeric characters.
 
 
-Example: 
+**Examples**: 
 * `tag 1 a/family d/friend` will delete the `friend` tag before adding the `family` tag.
 
 ![tagExample1](images/tagExample1.png)
@@ -484,7 +485,7 @@ Currently, FAST supports these statistics:
 
 Clears all entries from FAST. This command is useful to remove the default sample data in FAST.
 
-Format: `clear`
+**Format**: `clear`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 This CANNOT be undone! 
@@ -494,7 +495,7 @@ This CANNOT be undone!
 
 Exits the program.
 
-Format: `exit`
+**Format**: `exit`
 
 ### Saving the data
 
@@ -532,20 +533,41 @@ If any of your changes to the data file causes FAST to be unable to read the dat
 
 ## Command summary
 
+### Contact Management
 Action | Format, Examples
 --------|------------------
-**Appointment** | **Add appointment**<br>`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br><br>**Delete Appointment**<br> `da INDEX`<br> e.g. `da 1`<br><br>**Edit Appointment**<br> `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br><br>**Update Completed Appointment**<br> `ma INDEX`<br> e.g. `ma 5`
 **Add Contact** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
 **Delete Contact** | `del INDEX`<br> e.g. `del 3`
 **Edit Contact** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Add Remark** | `rmk INDEX [r/REMARK]`
 **Edit Remark** | `rmk INDEX r/REMARK` OR `rmk INDEX`<br> e.g. `rmk 1 r/likes dogs`
+
+### Appointment
+Action | Format, Examples
+--------|------------------
+**Add appointment** |`aa INDEX d/DATE [t/TIME] [v/VENUE]`<br> e.g. `aa 3 d/2021-03-27 t/18:00 v/Clementi Park`<br>
+**Delete Appointment** | `da INDEX`<br> e.g. `da 1`<br>
+**Edit Appointment** | `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`<br> e.g. `ea 3 v/Clementi Town d/2021-03-27 t/18:00`<br>
+**Update Completed Appointment** | `ma INDEX`<br> e.g. `ma 5`
+
+### Tags
+Action | Format, Examples
+--------|------------------
+**Edit Tag** |`tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`
+**Investment Plan Tag** | Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>
+**Priority Tag** | Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
+
+### Navigation
+Action | Format, Examples
+--------|------------------
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
-**Help** | `help [COMMAND]` <br> e.g. `help add`
-**List** | `list`
-**Remark** | `rmk INDEX [r/REMARK]`
 **Sort** | `sort KEYWORD`
-**Tag** | **Edit Tag**<br> `tag INDEX a/[TAG] d/[TAG]` <br> e.g. `tag 1 a/friend d/ip/life`<br><br>**Investment Plan Tag**<br>Health Insurance: `ip/health`<br>Investment: `ip/invest`<br>Life Insurance: `ip/life`<br>Motor Insurance: `ip/motor`<br>Property Insurance: `ip/property`<br>Savings: `ip/save`<br>Travel Insurance: `ip/travel`<br><br>**Priority Tag**<br>Low Priority: `pr/low`<br>Medium Priority: `pr/med`<br>High Priority: `pr/high`
+**List** | `list`
 
 
-
+### Others
+Action | Format, Examples
+--------|------------------
+**Help** | `help [COMMAND]` <br> e.g. `help add`
+**Clear** | `clear`
+**Exit** | `exit`
