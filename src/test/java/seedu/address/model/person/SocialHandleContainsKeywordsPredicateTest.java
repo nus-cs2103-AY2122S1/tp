@@ -70,8 +70,8 @@ public class SocialHandleContainsKeywordsPredicateTest {
 
         // Keywords match phone, email and nationality, but does not match socialHandle
         predicate = new SocialHandleContainsKeywordsPredicate(
-                Arrays.asList("12345", "alice@email.com", "Malaysia", "@Bob"));
+                Arrays.asList("12345", "alice@email.com", "Malaysian", "@Bob"));
         assertFalse(predicate.test(new PersonBuilder().withSocialHandle("@Alice").withPhone("12345")
-                .withEmail("alice@email.com").withNationality("Malaysia").build()));
+                .withEmail("alice@email.com").withNationality("Malaysian").build()));
     }
 }

@@ -69,6 +69,6 @@ public class GenderContainsKeywordsPredicateTest {
         // Keywords match phone, email and nationality, but does not match gender
         predicate = new GenderContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Malaysia", "O"));
         assertFalse(predicate.test(new PersonBuilder().withGender("F").withPhone("12345")
-                .withEmail("alice@email.com").withNationality("Malaysia").build()));
+                .withEmail("alice@email.com").withNationality("Malaysian").build()));
     }
 }

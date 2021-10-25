@@ -73,8 +73,8 @@ public class RemarkContainsKeywordsPredicateTest {
 
         // Keywords match phone, email and nationality, but does not match remark
         predicate = new RemarkContainsKeywordsPredicate(
-                Arrays.asList("12345", "alice@email.com", "Malaysia", "dislikes eating"));
+                Arrays.asList("12345", "alice@email.com", "Malaysian", "dislikes eating"));
         assertFalse(predicate.test(new PersonBuilder().withRemark("She likes coding").withPhone("12345")
-                .withEmail("alice@email.com").withNationality("Malaysia").build()));
+                .withEmail("alice@email.com").withNationality("Malaysian").build()));
     }
 }

@@ -40,7 +40,6 @@ public class Nationality {
     public Nationality(String nationality) {
         requireNonNull(nationality);
         checkArgument(isValidNationality(nationality), MESSAGE_CONSTRAINTS);
-        readValidNationalities();
 
         value = nationality;
     }
@@ -53,8 +52,13 @@ public class Nationality {
         if (test.isEmpty()) {
             return true;
         }
+
+        if (validNationalities.size() == 0) {
+            readValidNationalities();
+        }
+
         return validNationalities.size() > 0
-                ? validNationalities.contains(test.toLowerCase())
+                ? validNationalities.contains(test.trim().toLowerCase())
                 : test.matches(VALIDATION_REGEX);
     }
 
