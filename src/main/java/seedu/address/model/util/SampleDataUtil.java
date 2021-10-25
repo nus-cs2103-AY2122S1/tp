@@ -71,8 +71,7 @@ public class SampleDataUtil {
     }
 
     public static Set<Lesson> getLessonSet(Lesson... lessons) {
-        return Arrays.stream(lessons)
-            .collect(Collectors.toSet());
+        return Arrays.stream(lessons).collect(Collectors.toSet());
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {

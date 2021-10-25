@@ -19,12 +19,23 @@ class RecurringLessonTest {
     private static final Set<Homework> HOMEWORK = new HashSet<>();
 
     @Test
+    public void getNextDate_dateIsOver_sameDate() {
+        LocalDate currDate = LocalDate.now();
+        LocalDate dateOneWeekAgo = LocalDate.of(currDate.getYear(), currDate.getMonth(), currDate.getDayOfMonth());
+        Lesson lesson = new RecurringLesson(new Date(dateOneWeekAgo.format(Date.FORMATTER)),
+                new TimeRange(TIME_RANGE),
+                new Subject(SUBJECT), HOMEWORK,
+                new LessonRates(VALID_LESSON_RATES));
+        assertEquals(currDate, lesson.getDisplayLocalDate());
+    }
+
+    @Test
     public void getNextDate_dateNotOver_sameDate() {
         Lesson lesson = new RecurringLesson(new Date(LocalDate.now().format(Date.FORMATTER)),
             new TimeRange(TIME_RANGE),
             new Subject(SUBJECT), HOMEWORK,
             new LessonRates(VALID_LESSON_RATES));
-        assertEquals(LocalDate.now(), lesson.getDisplayDate().getLocalDate());
+        assertEquals(LocalDate.now(), lesson.getDisplayLocalDate());
     }
 
 
