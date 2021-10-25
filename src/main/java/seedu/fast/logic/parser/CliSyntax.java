@@ -1,5 +1,7 @@
 package seedu.fast.logic.parser;
 
+import seedu.fast.model.tag.InvestmentPlanTag;
+
 /**
  * Contains Command Line Interface (CLI) syntax definitions common to multiple commands
  */
@@ -17,5 +19,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_APPOINTMENT_VENUE = new Prefix("v/");
     public static final Prefix PREFIX_ADD_TAG = new Prefix("a/");
     public static final Prefix PREFIX_DELETE_TAG = new Prefix("d/");
+    public static final Prefix PREFIX_INVESTMENT_PLAN_TAG = new Prefix("ip/");
+    public static final Prefix PREFIX_PRIORITY_TAG = new Prefix("pr/");
 
 }

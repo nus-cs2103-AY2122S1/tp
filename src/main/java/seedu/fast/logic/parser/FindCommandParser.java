@@ -1,6 +1,7 @@
 package seedu.fast.logic.parser;
 
 import static seedu.fast.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.fast.logic.parser.CliSyntax.PREFIX_PRIORITY_TAG;
 
 import java.util.Arrays;
 
@@ -29,9 +30,9 @@ public class FindCommandParser implements Parser<FindCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
-        if (trimmedArgs.startsWith(PriorityTag.PRIORITY_TAG_PREFIX)) {
+        if (trimmedArgs.startsWith(PREFIX_PRIORITY_TAG.getPrefix())) {
             String tokenizedArgs = trimmedArgs.substring(
-                    PriorityTag.PRIORITY_TAG_PREFIX.length());
+                    PREFIX_PRIORITY_TAG.getPrefix().length());
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
             for (String tag : tags) {
