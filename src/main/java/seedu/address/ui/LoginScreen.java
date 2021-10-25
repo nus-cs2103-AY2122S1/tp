@@ -25,6 +25,7 @@ public class LoginScreen implements Ui {
     private final MainApp app;
     private final boolean isNew;
     private boolean isWrongPasswordFormat;
+    private boolean isWrongPassword;
 
     /**
      * Constructs a new LoginScreen.
@@ -36,6 +37,7 @@ public class LoginScreen implements Ui {
         this.app = app;
         this.isNew = isNew;
         this.isWrongPasswordFormat = false;
+        this.isWrongPassword = false;
     }
 
     @Override
@@ -91,7 +93,7 @@ public class LoginScreen implements Ui {
                 try {
                     app.logIn(userInput.getText());
                 } catch (UnsupportedPasswordException | NoSuchPaddingException | NoSuchAlgorithmException e) {
-                    e.printStackTrace();
+                    isWrongPassword = true;
                 }
             } else {
                 isWrongPasswordFormat = true; // will display the correct format for user.
