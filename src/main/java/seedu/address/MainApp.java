@@ -41,7 +41,6 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.ui.LoginScreen;
-import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
 /**
@@ -52,7 +51,6 @@ public class MainApp extends Application {
     public static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -77,7 +75,6 @@ public class MainApp extends Application {
         storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
         initLogging(config);
-        ui = new LoginScreen(this, !FileUtil.isFileExists(userPrefs.getEncryptedFilePath()));
     }
 
     /**
@@ -232,8 +229,7 @@ public class MainApp extends Application {
             FileUtil.deleteFile(storage.getAddressBookFilePath());
             model = initModelManager(storage, userPrefs, cryptor);
             logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
-            ui = new UiManager(logic);
-            ui.start(stage);
+            new UiManager(logic).start(stage);
         } catch (InvalidAlgorithmParameterException | IOException | InvalidKeyException e) {
             e.printStackTrace();
         }
@@ -243,7 +239,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         this.stage = primaryStage;
-        ui.start(primaryStage);
+        new LoginScreen(this, !FileUtil.isFileExists(userPrefs.getEncryptedFilePath()), primaryStage).show();
     }
 
     @Override
