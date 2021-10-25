@@ -79,5 +79,6 @@
       "risk": "HIGH"
     }
   ],
-  "doctors": []
+  "doctors": [],
+  "appointments": []
 }

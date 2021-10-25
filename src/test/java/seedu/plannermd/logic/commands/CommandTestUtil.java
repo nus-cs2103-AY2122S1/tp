@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.plannermd.commons.core.index.Index;
+import seedu.plannermd.logic.commands.apptcommand.AddAppointmentCommand;
 import seedu.plannermd.logic.commands.apptcommand.EditAppointmentCommand;
 import seedu.plannermd.logic.commands.editcommand.EditDoctorCommand;
 import seedu.plannermd.logic.commands.editcommand.EditPatientCommand;
@@ -31,8 +32,9 @@ import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 import seedu.plannermd.model.person.Person;
-import seedu.plannermd.testutil.EditDoctorDescriptorBuilder;
+import seedu.plannermd.testutil.appointment.AddAppointmentDescriptorBuilder;
 import seedu.plannermd.testutil.appointment.EditAppointmentDescriptorBuilder;
+import seedu.plannermd.testutil.doctor.EditDoctorDescriptorBuilder;
 import seedu.plannermd.testutil.patient.EditPatientDescriptorBuilder;
 
 /**
@@ -74,6 +76,7 @@ public class CommandTestUtil {
     public static final String RISK_DESC_AMY = " " + PREFIX_RISK + VALID_RISK_AMY;
     public static final String RISK_DESC_BOB = " " + PREFIX_RISK + VALID_RISK_BOB;
 
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
@@ -105,8 +108,8 @@ public class CommandTestUtil {
     public static final String VALID_APPT_DURATION_TWO_HOUR_STR = "120";
     public static final String VALID_PATIENT_INDEX = "1";
     public static final String ANOTHER_VALID_PATIENT_INDEX = "2";
-    public static final String VALID_DOCTOR_INDEX = "1";
-    public static final String ANOTHER_VALID_DOCTOR_INDEX = "2";
+    public static final String VALID_DOCTOR_INDEX = "2";
+    public static final String ANOTHER_VALID_DOCTOR_INDEX = "3";
 
     public static final String APPT_START_THIRTY_MIN_DESC = " " + PREFIX_START + VALID_APPT_DATE_THIRTY_MIN
             + " " + VALID_APPT_TIME_THIRTY_MIN;
@@ -146,6 +149,8 @@ public class CommandTestUtil {
     public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_EDIT_THIRTY_MIN_APPT;
     public static final EditAppointmentCommand.EditAppointmentDescriptor DESC_EDIT_TWO_HOUR_APPT;
 
+    public static final AddAppointmentCommand.AddAppointmentDescriptor DESC_THIRTY_MIN_APPT;
+    public static final AddAppointmentCommand.AddAppointmentDescriptor DESC_TWO_HOUR_APPT;
 
     static {
         DESC_AMY = new EditPatientDescriptorBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
@@ -169,6 +174,12 @@ public class CommandTestUtil {
         DESC_EDIT_TWO_HOUR_APPT = new EditAppointmentDescriptorBuilder().withPatientIndex(ANOTHER_VALID_PATIENT_INDEX)
                 .withDoctorIndex(ANOTHER_VALID_DOCTOR_INDEX).withAppointmentDate(VALID_APPT_DATE_TWO_HOUR)
                 .withStartTime(VALID_APPT_TIME_TWO_HOUR).withDuration(VALID_APPT_DURATION_TWO_HOUR_STR)
+                .withRemark(VALID_APPT_REMARK).build();
+        DESC_THIRTY_MIN_APPT = new AddAppointmentDescriptorBuilder().withAppointmentDate(VALID_APPT_DATE_THIRTY_MIN)
+                .withSession(VALID_APPT_TIME_THIRTY_MIN, VALID_APPT_DURATION_THIRTY_MIN)
+                .withRemark(VALID_APPT_REMARK).build();
+        DESC_TWO_HOUR_APPT = new AddAppointmentDescriptorBuilder().withAppointmentDate(VALID_APPT_DATE_TWO_HOUR)
+                .withSession(VALID_APPT_TIME_TWO_HOUR, VALID_APPT_DURATION_TWO_HOUR)
                 .withRemark(VALID_APPT_REMARK).build();
     }
 

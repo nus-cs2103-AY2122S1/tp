@@ -1,4 +1,4 @@
-package seedu.plannermd.testutil;
+package seedu.plannermd.testutil.doctor;
 
 import java.util.Set;
 import java.util.stream.Collectors;
