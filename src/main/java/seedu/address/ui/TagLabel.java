@@ -27,9 +27,10 @@ public class TagLabel extends UiPart<Region> {
         label.setText(value);
         label.setOnMouseClicked(
                 event -> {
-                    commandBox.setCommand(FilterCommand.COMMAND_WORD + " " + PREFIX_TAG.getPrefix() + tag.getName());
+                    commandBox.setCommand(
+                            FilterCommand.COMMAND_WORD + " " + PREFIX_TAG.getPrefix() + tag.getName()
+                    );
                 }
-
         );
     }
 }
