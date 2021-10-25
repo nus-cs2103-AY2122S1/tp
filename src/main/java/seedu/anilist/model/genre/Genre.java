@@ -32,7 +32,7 @@ public class Genre {
      */
     public static boolean isValidGenreName(String test) {
         requireNonNull(test);
-        return GenreList.contains(test.toLowerCase());
+        return GenreList.contains(test.toLowerCase().trim());
     }
 
     @Override
