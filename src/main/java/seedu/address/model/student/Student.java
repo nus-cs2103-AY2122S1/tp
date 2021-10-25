@@ -24,7 +24,6 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private ObservableList<Assessment> assessments = FXCollections.observableArrayList();
     private final Note note;
     private final GroupName groupName;
     private final UniqueAssessmentList assessments;

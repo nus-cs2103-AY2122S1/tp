@@ -112,7 +112,7 @@ public class JsonAdaptedStudentTest {
     public void toModelType_nullGroupName_throwsIllegalValueException() {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
-        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL, 
+        JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
                 VALID_NOTE, null, VALID_ASSESSMENTS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupName.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
@@ -132,7 +132,7 @@ public class JsonAdaptedStudentTest {
         ObservableList<Group> groupList = FXCollections.observableArrayList();
         groupList.add(new Group(new GroupName(VALID_GROUP_NAME), new Description(VALID_DESCRIPTION)));
         JsonAdaptedStudent student = new JsonAdaptedStudent(VALID_NAME, VALID_TELEGRAM_HANDLE, VALID_EMAIL,
-                VALID_GROUP_NAME, null);
+                VALID_NOTE, VALID_GROUP_NAME, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Assessment.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, () -> student.toModelType(groupList));
     }
