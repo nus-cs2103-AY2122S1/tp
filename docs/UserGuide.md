@@ -3,42 +3,44 @@ layout: page
 title: User Guide
 ---
 
-Welcome to the CSBook User Guide. This user guide serves as a guide to new users on how to quickly get 
-started on using the application through the [Quick Start](#quick-start) section, while also serving as a reference to 
-more experienced users of all available commands and how best to make use of our application in the 
-[Feature List](#feature-list) section. 
+Welcome to the CSBook User Guide. **CSBook is a desktop app for teaching assistants (TAs) to manage their students, optimized for use via
+a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
+If you are faster at typing, CSBook can get your student management tasks done faster than traditional
+GUI applications.
 
-CSBook is a **desktop app for teaching assistants (TAs) to manage their students, optimized for use via 
-a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). 
-If you are faster at typing, CSBook can get your student management tasks done faster than traditional 
-GUI applications. 
+**CSBook aims to help lessen your workload** of having to create separate spreadsheets or notes to
+track your students' academic progress. With CSBook, **your students may be organised in a more intuitive 
+manner in custom groups** and **track them and their academic progress in assignments more efficiently**, 
+saving time and letting you get back to your students quicker.
 
-The main features of our application include the storing of students in the database, 
-creating groups and assigning students to groups, as well as the management of groups.
+If this is your first time using CSBook, we recommend that you first look at the [How to use](#how-to-use)
+section of the user guide.
+
+## Table of Contents
 
 * Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
-## How-to-use
+## How to use
 
-rationale as to why the commands are listed in that order?
-1st step is to import all students from luminus? but what if they make mistake
+This user guide will bring you through how to quickly start using our application through the [Quick Start](#quick-start)
+section, while also serving as a reference to more experienced users in the [Feature List](#feature-list)
+section, where notes and tips on how best to make use of our application will also be given.
 
-## Glossary
+// rationale as to why the commands are listed in that order?
+// 1st step is to import all students from luminus? but what if they make mistake
 
-Add terms
+If you face any difficult while following the user guide, do refer to the FAQ section to see if your 
+issue has been addressed there. If the solution provided or your query has yet to be answered in the FAQ
+section, feel free to reach out to our team lead at [e0559779@u.nus.edu](mailto:e0559779@u.nus.edu) through email.
 
-Add symbol table
-
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
-1. Ensure you have Java `11` or above installed in your Computer.
-   * Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible 
-   * You may run the `java -version` command on your respective OS's terminal window. 
-   * Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
+1. Ensure you have Java `11` or above installed in your Computer (See also: [FAQ](#faq)). 
 
 2. Download the latest `CSBook.jar` from [here](https://github.com/AY2122S1-CS2103T-T09-3/tp/releases).
 
@@ -66,6 +68,33 @@ Add symbol table
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Glossary of terms
+
+Term | Meaning
+--------|------------------
+**Command Line Interface (CLI)** |
+**Graphical User Interface (GUI)** |
+**Java** |
+**Operating System (OS)** |
+**Terminal window** |
+**Teaching Assistant**|
+**Module**|
+**Student**|
+**Group**|
+
+## Glosary of icons
+
+These icons will appear within coloured boxes to indicate
+
+Icon | Meaning | Box colour
+--------|------------------|----
+:information_source:**Note**|This icon serves to give an additional note or remark about the current feature|Blue
+:bulb:**Tip**|This icon serves to give a quick recommendation about how to use the feature in the most beneficial way|Blue
+:exclamation:**Caution**|This icon serves to give a note on behaviour of the application that could be unexpected to you|Yellow 
+:warning:**Warning**|This icon serves to warn against using a feature in some unintended manner| Yellow
+
+
+
 ## Feature List
 
 <div markdown="block" class="alert alert-info">
@@ -88,6 +117,8 @@ Add symbol table
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
+
+--------------------------------------------------------------------------------------------------------------------
 
 ### General features
 
@@ -291,5 +322,10 @@ Action | Format, Examples
 **Help** | `help`
 
 ## FAQ
+
+1. How do I check that I have Java `11` or above installed on my computer?
+    * You may run the `java -version` command on your respective operating system's (OS) terminal window.
+    * Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
+    * Note: Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
 
 Insert common questions, and what if user did something wrong
