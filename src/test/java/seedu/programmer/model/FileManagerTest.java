@@ -15,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.model.student.Student;
 
 class FileManagerTest {
-    private FileManager fm;
     private static final int DEFAULT_NUM_OF_STUDENTS = 36;
     private static final String VALID_JSON = "src/test/data/FileManagerTest/programmerError.json";
     private static final String INVALID_JSON = "src/test/data/FileManagerTest/invalidProgrammerError.json";
@@ -23,6 +22,7 @@ class FileManagerTest {
     private static final String WRONG_NUM_COLS_CSV = "src/test/data/FileManagerTest/programmerError.csv";
     private static final String INVALID_FIELD_CSV = "src/test/data/FileManagerTest/invalidStudentIdPE.csv";
     private static final String MISSING_FIELD_CSV = "src/test/data/FileManagerTest/missingClassIdPE.csv";
+    private FileManager fm;
 
     @BeforeEach
     public void setUpTests() {
@@ -49,7 +49,7 @@ class FileManagerTest {
     }
 
     @Test
-    public void getStudentsFromCsv_WrongNumberOfColumns_returnsNull() throws IOException {
+    public void getStudentsFromCsv_wrongNumberOfColumns_returnsNull() throws IOException {
         File testFile = new File(WRONG_NUM_COLS_CSV);
         List<Student> stuList = fm.getStudentsFromCsv(testFile);
         assertNull(stuList);
