@@ -125,7 +125,7 @@ public class ModelManager implements Model {
         Group retrievedGroup = getGroupByGroupName(groupName);
 
         // Remove reference to student from the group that the student belonged to
-        retrievedGroup.removeStudent(target);
+        retrievedGroup.removeStudentName(target.getName());
 
         csBook.removeStudent(target);
     }
@@ -137,7 +137,7 @@ public class ModelManager implements Model {
         Group retrievedGroup = getGroupByGroupName(groupName);
 
         // Add reference to student into the group
-        retrievedGroup.addStudent(student);
+        retrievedGroup.addStudentName(student.getName());
 
         csBook.addStudent(student);
     }
@@ -187,27 +187,29 @@ public class ModelManager implements Model {
         Group oldGroup = getGroupByGroupName(oldGroupName);
 
         // remove reference to student in old group
-        oldGroup.removeStudent(student);
+        oldGroup.removeStudentName(student.getName());
 
         // get new group
         GroupName newGroupName = group.getGroupName();
         Group newGroup = getGroupByGroupName(newGroupName);
 
-        //TODO: junwei might need to change to student name below
-
         // add reference to student in new group
-        newGroup.addStudent(student);
+        newGroup.addStudentName(student.getName());
     }
 
     @Override
     public void deleteGroup(Group target) {
-        Set<Student> studentsToDelete = target.getStudents();
+        Set<Name> namesOfStudentsToDelete = target.getStudentNames();
 
         // Delete all students associated with the group
-        for (Student student : studentsToDelete) {
-            csBook.removeStudent(student);
+        for (Name studentName : namesOfStudentsToDelete) {
+            updateFilteredStudentList((student -> student.getName().equals(studentName)));
+            // Should have only 1 student found since we cant have students with same name
+            assert(filteredStudents.size() == 1);
+            csBook.removeStudent(filteredStudents.get(0));
         }
-
+        //Resets filtered student list to show all students
+        updateFilteredStudentList(student -> true);
         csBook.removeGroup(target);
     }
 

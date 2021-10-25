@@ -5,10 +5,12 @@ import static seedu.address.testutil.TypicalStudents.getTypicalStudents;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,7 +24,7 @@ public class GroupBuilder {
 
     private GroupName groupName;
     private Description description;
-    private Set<Student> students;
+    private Set<Name> studentNames;
 
     /**
      * Creates a {@code GroupBuilder} with the default details.
@@ -30,7 +32,7 @@ public class GroupBuilder {
     public GroupBuilder() {
         groupName = new GroupName(DEFAULT_GROUPNAME);
         description = new Description(DEFAULT_DESCRIPTION);
-        students = new HashSet<>();
+        studentNames = new HashSet<>();
     }
 
     /**
@@ -39,7 +41,7 @@ public class GroupBuilder {
     public GroupBuilder(Group groupToCopy) {
         groupName = groupToCopy.getGroupName();
         description = groupToCopy.getDescription();
-        students = groupToCopy.getStudents();
+        studentNames = groupToCopy.getStudentNames();
     }
 
     /**
@@ -61,8 +63,8 @@ public class GroupBuilder {
     /**
      * Adds a reference of the {@code Student} that belongs to this group
      */
-    public GroupBuilder withStudent(Student student) {
-        students.add(student);
+    public GroupBuilder withStudent(Name studentName) {
+        studentNames.add(studentName);
         return this;
     }
 
@@ -71,7 +73,8 @@ public class GroupBuilder {
      * with typical students.
      */
     public GroupBuilder withTypicalStudents() {
-        students.addAll(getTypicalStudents());
+        studentNames.addAll(getTypicalStudents().stream().map(student -> student.getName())
+                .collect(Collectors.toList()));
         return this;
     }
 
@@ -81,9 +84,11 @@ public class GroupBuilder {
      */
     public GroupBuilder withSampleStudents() {
         Student[] studentsArray = SampleDataUtil.getSampleStudents();
-        HashSet<Student> students = new HashSet<>();
-        students.addAll(Arrays.asList(studentsArray));
-        this.students = students;
+        HashSet<Name> studentNames = new HashSet<>();
+        studentNames.addAll(Arrays.asList(studentsArray).stream()
+                .map(student -> student.getName())
+                .collect(Collectors.toList()));
+        this.studentNames = studentNames;
         return this;
     }
 
@@ -93,8 +98,8 @@ public class GroupBuilder {
      */
     public Group build() {
         Group group = new Group(groupName, description);
-        for (Student student : students) {
-            group.addStudent(student);
+        for (Name studentName : studentNames) {
+            group.addStudentName(studentName);
         }
         return group;
     }

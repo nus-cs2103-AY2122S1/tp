@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.CsBook;
 import seedu.address.model.ReadOnlyCsBook;
 import seedu.address.model.group.Group;
+import seedu.address.model.student.Name;
 import seedu.address.model.student.Student;
 
 /**
@@ -87,12 +88,13 @@ class JsonSerializableCsBook {
     public void addStudentsToGroups(CsBook csBook) {
         ObservableList<Group> groupList = csBook.getGroupList();
         for (Group groupWithoutStudentList : groupList) {
-            List<Student> studentsInGroup = csBook.getStudentList().stream()
+            List<Name> namesOfStudentsInGroup = csBook.getStudentList().stream()
                     .filter(student -> student.getGroupName().equals(groupWithoutStudentList.getGroupName()))
+                    .map(student -> student.getName())
                     .collect(Collectors.toList());
             Group groupWithStudentList = new Group(groupWithoutStudentList.getGroupName(),
                     groupWithoutStudentList.getDescription());
-            groupWithStudentList.addAllStudents(studentsInGroup);
+            groupWithStudentList.addAllStudentNames(namesOfStudentsInGroup);
             csBook.setGroup(groupWithoutStudentList, groupWithStudentList);
         }
     }
