@@ -22,7 +22,6 @@ import seedu.programmer.commons.core.LogsCenter;
  */
 public class DashboardWindow extends PopupWindow {
 
-    private static final Logger logger = LogsCenter.getLogger(DashboardWindow.class);
     private static final String FXML = "DashboardWindow.fxml";
 
 

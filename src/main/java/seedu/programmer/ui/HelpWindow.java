@@ -1,7 +1,5 @@
 package seedu.programmer.ui;
 
-import java.util.logging.Logger;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.stage.Stage;
-import seedu.programmer.commons.core.LogsCenter;
 
 /**
  * Controller for a help page
@@ -26,7 +23,6 @@ public class HelpWindow extends PopupWindow {
     public static final String HELP_MESSAGE = "Full user guide: " + USERGUIDE_URL;
     private static final String INSTRUCTION = "Here is the feature list of ProgrammerError:";
 
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
 
     private ObservableList<FeatureTableItem> featureTableItems;
