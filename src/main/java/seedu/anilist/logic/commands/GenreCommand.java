@@ -182,6 +182,8 @@ public abstract class GenreCommand extends Command {
          * @return a String listing the items inside the set
          */
         private static String genresSetToString(Set<Genre> genresSet) {
+            assert genresSet != null;
+
             String genresString = Arrays.toString(genresSet.toArray());
             return genresString.substring(1, genresString.length() - 1);
         }
