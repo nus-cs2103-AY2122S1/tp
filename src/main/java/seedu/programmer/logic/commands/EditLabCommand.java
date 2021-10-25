@@ -32,8 +32,6 @@ public class EditLabCommand extends Command {
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Student Updated: %1$s";
 
-    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
-
     private final String newTitle;
     private final Double total;
     private final Lab original;
@@ -68,9 +66,6 @@ public class EditLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-        if (original.getActualScore() <= 0 && original.getActualScore() <= original.getTotalScore()) {
-            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
-        }
         for (Student std : lastShownList) {
             Student target = std;
             target.editLabInfo(original, newTitle, total);

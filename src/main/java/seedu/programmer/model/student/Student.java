@@ -116,7 +116,10 @@ public class Student {
     /**
      * Updates a lab result for a student
      * */
-    public void editLabResult(Lab lab , Double score) {
+    public void editLabResult(Lab lab , Double score) throws CommandException {
+        if (score <= 0 || score <= lab.getTotalScore()) {
+            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        }
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
 
@@ -126,7 +129,10 @@ public class Student {
     /**
      * Updates a lab result for a student
      * */
-    public void editLabInfo(Lab lab, String newTitle, Double total) {
+    public void editLabInfo(Lab lab, String newTitle, Double total) throws CommandException {
+        if (total <= 0 || total <= lab.getTotalScore()) {
+            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        }
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
         current.updateTitle(newTitle);
