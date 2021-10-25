@@ -1,5 +1,8 @@
 package seedu.address.testutil;
 
+import javafx.collections.ObservableList;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
@@ -15,12 +18,12 @@ public class StudentBuilder {
     public static final String DEFAULT_TELEGRAM_HANDLE = "@amy_bee";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_GROUP_NAME = "CS2103T";
-    public static final String DEFAULT_DESCRIPTION = "software eng mod";
 
     private Name name;
     private TelegramHandle telegramHandle;
     private Email email;
     private GroupName groupName;
+    private UniqueAssessmentList assessments;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -30,6 +33,7 @@ public class StudentBuilder {
         telegramHandle = new TelegramHandle(DEFAULT_TELEGRAM_HANDLE);
         email = new Email(DEFAULT_EMAIL);
         groupName = new GroupName(DEFAULT_GROUP_NAME);
+        assessments = new UniqueAssessmentList();
     }
 
     /**
@@ -40,6 +44,12 @@ public class StudentBuilder {
         telegramHandle = studentToCopy.getTelegramHandle();
         email = studentToCopy.getEmail();
         groupName = studentToCopy.getGroupName();
+        assessments = new UniqueAssessmentList();
+
+        ObservableList<Assessment> assessmentList = studentToCopy.getAssessmentList();
+        for (int i = 0; i < assessmentList.size(); i++) {
+            assessments.add(assessmentList.get(i));
+        }
     }
 
     /**
@@ -83,11 +93,32 @@ public class StudentBuilder {
     }
 
     /**
+     * Add an {@code Assessment} to the {@code UniqueAssessmentList} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssessment(Assessment assessment) {
+        this.assessments.add(assessment);
+        return this;
+    }
+
+    /**
+     * Sets the {@code UniqueAssessmentList} of the {@code Student} that we are building.
+     */
+    public StudentBuilder withAssessments(UniqueAssessmentList assessments) {
+        this.assessments = assessments;
+        return this;
+    }
+
+    /**
      * Builds a student
      * @return built student
      */
     public Student build() {
-        return new Student(name, telegramHandle, email, groupName);
+        Student student = new Student(name, telegramHandle, email, groupName);
+        ObservableList<Assessment> unmodifiableAssessments = assessments.asUnmodifiableObservableList();
+        for (int i = 0; i < unmodifiableAssessments.size(); i++) {
+            student.addAssessment(unmodifiableAssessments.get(i));
+        }
+        return student;
     }
 
 }

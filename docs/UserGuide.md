@@ -239,6 +239,42 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd student in CSBook.
 * `find Betsy` followed by `delete 1` deletes the 1st student in the results of the `find` command.
 
+#### Adding an assessment: `addassessment`
+
+Adds an assessment for a student.
+
+Format: `addassessment INDEX a/ASSESSMENT_NAME S/SCORE`
+
+* Adds a new assessment to the student at the specified INDEX
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The assessment name must be unique in the student's assessment list.
+* The assessment name should only contain alphanumeric characters and spaces, and it should not be blank
+* The score consists of two components: an *actual score* and a *total score*.
+  * The *actual score* should be an integer greater than or equal to 0
+  + The *total score* should be an integer greater than 0.
+  + The *actual score* should be less than or equal to the *total score*.
+
+Examples:
+* `addassessment 1 a/Midterms s/60/100`
+* `addassessment 5 a/Lab5 s/1/5`
+
+#### Deleting an assessment: `deleteassessment`
+
+Deletes an assessment from a student.
+
+Format: `deleteassessment INDEX a/ASSESSMENT_NAME`
+
+* Deletes an assessment from the student at the specified INDEX
+* The index refers to the index number shown in the displayed student list.
+* The index **must be a positive integer** 1, 2, 3, …​
+* The assessment name must be found in the student's assessment list. The search is case-sensitive. e.g. `Midterms` will not match `midterms`.
+* The assessment name should only contain alphanumeric characters and spaces, and it should not be blank
+
+Examples:
+* `deleteassessment 1 a/Midterms`
+* `deleteassessment 5 a/Lab5`
+
 ### Group management features
 
 <div markdown="block" class="alert alert-info">
@@ -305,18 +341,20 @@ Examples:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
+**Help** | `help`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUPNAME]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **Exit** | `exit`
+**Add** | `add n/NAME t/TELEGRAM_HANDLE e/NUS_EMAIL g/GROUPNAME` <br> e.g., `add n/Jia Xian t/albino_monkii e/albinomonkey@u.nus.edu g/CS2103T`
 **List** | `list`
+**Edit** | `edit INDEX [n/NAME] [t/TELEGRAM_HANDLE] [e/NUS_EMAIL] [g/GROUPNAME]`<br> e.g.,`edit 1 t/@albino_monkey e/e0540014X@u.nus.edu`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
-**Delete Group** | `deletegroup GROUPNAME`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**AddAssessment** | `addassessment INDEX a/ASSESSMENT_NAME S/SCORE`
+**DeleteAssessment** | `deleteassessment INDEX a/ASSESSMENT_NAME`
 **View Group** | `viewgroup GROUPNAME`
 **List Groups** | `listgroups`
-**Help** | `help`
+**Add Group** | `addgroup [g/GROUPNAME] [d/DESCRIPTION]`
+**Delete Group** | `deletegroup GROUPNAME`
 
 ## FAQ
 

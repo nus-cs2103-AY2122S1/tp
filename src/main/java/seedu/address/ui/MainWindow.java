@@ -180,7 +180,7 @@ public class MainWindow extends UiPart<Stage> {
         leftPanelPlaceholder.getChildren().clear();
         leftPanelPlaceholder.getChildren().add(detailedStudentCard.getRoot());
 
-        assessmentListPanel = new AssessmentListPanel(studentToView.getAssessments());
+        assessmentListPanel = new AssessmentListPanel(studentToView.getAssessmentList());
         rightPanelPlaceholder.getChildren().clear();
         rightPanelPlaceholder.getChildren().add(assessmentListPanel.getRoot());
     }

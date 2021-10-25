@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.student.Student;
@@ -144,6 +145,35 @@ public class CsBook implements ReadOnlyCsBook {
         requireNonNull(editedGroup);
 
         groups.setGroup(target, editedGroup);
+    }
+
+    /**
+     * Returns true if a student with the same identity as {@code assessment} exists in the student's assessment list.
+     */
+    public boolean hasAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        return student.hasAssessment(assessment);
+    }
+
+    /**
+     * Adds an assessment to a student.
+     * The assessment must not already exist in the student's assessment list.
+     */
+    public void addAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        student.addAssessment(assessment);
+    }
+
+    /**
+     * Removes {@code assessment} from the {@code student}.
+     * {@code assessment} must exist in the student's assessment list.
+     */
+    public void deleteAssessment(Student student, Assessment assessment) {
+        requireNonNull(student);
+        requireNonNull(assessment);
+        student.deleteAssessment(assessment);
     }
 
     //// util methods

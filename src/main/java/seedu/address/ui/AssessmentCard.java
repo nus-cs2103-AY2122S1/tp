@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import seedu.address.model.student.Assessment;
+import seedu.address.model.assessment.Assessment;
 
 public class AssessmentCard extends UiPart<Region> {
 
@@ -34,14 +34,14 @@ public class AssessmentCard extends UiPart<Region> {
     public AssessmentCard(Assessment assessment, int displayedIndex) {
         super(FXML);
         this.assessment = assessment;
-        if (assessment.isFail()) {
+        if (assessment.getScore().isFail()) {
             ObservableList<String> styleClass = assessmentCard.getStyleClass();
             styleClass.add("flag");
         }
         id.setText(displayedIndex + ". ");
-        name.setText(assessment.getName());
-        grade.setText(assessment.getActualScore() + "/" + assessment.getTotalScore());
-        percentage.setText(assessment.getPercentage().toString());
+        name.setText(assessment.getAssessmentName().toString());
+        grade.setText(assessment.getScore().toString());
+        percentage.setText(assessment.getScore().getPercentage() + "%");
     }
 
     @Override

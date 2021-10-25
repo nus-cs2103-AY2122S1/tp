@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalStudents.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.testutil.StudentBuilder;
 
 public class StudentTest {
@@ -69,6 +70,10 @@ public class StudentTest {
 
         // different email -> returns false
         editedAlice = new StudentBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
+        assertFalse(ALICE.equals(editedAlice));
+
+        // different assessments -> returns false
+        editedAlice = new StudentBuilder(ALICE).withAssessments(new UniqueAssessmentList()).build();
         assertFalse(ALICE.equals(editedAlice));
     }
 }

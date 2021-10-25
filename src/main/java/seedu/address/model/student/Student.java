@@ -1,11 +1,15 @@
 package seedu.address.model.student;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.function.Predicate;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import seedu.address.model.assessment.Assessment;
+import seedu.address.model.assessment.UniqueAssessmentList;
 import seedu.address.model.group.GroupName;
 
 /**
@@ -20,9 +24,10 @@ public class Student {
     private final Email email;
 
     // Data fields
-    private ObservableList<Assessment> assessments = FXCollections.observableArrayList();
     private final Note note = new Note();
     private final GroupName groupName;
+    private final UniqueAssessmentList assessments;
+    private final FilteredList<Assessment> filteredAssessments;
 
     /**
      * Every field must be present and not null.
@@ -33,6 +38,8 @@ public class Student {
         this.telegramHandle = telegramHandle;
         this.email = email;
         this.groupName = groupName;
+        this.assessments = new UniqueAssessmentList();
+        this.filteredAssessments = new FilteredList<>(this.getAssessmentList());
     }
 
     public Name getName() {
@@ -51,9 +58,37 @@ public class Student {
         return groupName;
     }
 
-    public ObservableList<Assessment> getAssessments() {
-        assessments.addAll(new Assessment(), new Assessment(), new Assessment());
-        return this.assessments;
+    public boolean hasAssessment(Assessment assessment) {
+        return assessments.contains(assessment);
+    }
+
+    public void addAssessment(Assessment assessment) {
+        assessments.add(assessment);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Student}.
+     * {@code key} must exist in the student's assessment list.
+     */
+    public void deleteAssessment(Assessment key) {
+        assessments.remove(key);
+    }
+
+    public ObservableList<Assessment> getAssessmentList() {
+        return assessments.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Assessment> getFilteredAssessmentList() {
+        return filteredAssessments;
+    }
+
+    /**
+     * Updates the filter of the filtered assessment list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    public void updateFilteredAssessmentList(Predicate<Assessment> predicate) {
+        requireNonNull(predicate);
+        filteredAssessments.setPredicate(predicate);
     }
 
     public Note getNote() {
@@ -95,7 +130,8 @@ public class Student {
         return otherStudent.getName().equals(getName())
                 && otherStudent.getTelegramHandle().equals(getTelegramHandle())
                 && otherStudent.getEmail().equals(getEmail())
-                && otherStudent.getGroupName().equals(getGroupName());
+                && otherStudent.getGroupName().equals(getGroupName())
+                && otherStudent.getAssessmentList().equals(getAssessmentList());
     }
 
     @Override

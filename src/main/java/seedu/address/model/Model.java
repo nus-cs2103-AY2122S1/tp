@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.assessment.Assessment;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.student.Name;
@@ -150,4 +151,22 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredGroupList(Predicate<Group> predicate);
+
+    /**
+     * Returns true if a student with the same identity as {@code student} in the CS Book has the same assessment with
+     * the same identity as {@code assessment}
+     */
+    boolean hasAssessment(Student student, Assessment assessment);
+
+    /**
+     * Adds the given assessment to the given student.
+     * {@code assessment} must not already exist in the student's.
+     */
+    void addAssessment(Student student, Assessment assessment);
+
+    /**
+     * Deletes the given assessment from the given student.
+     * {@code assessment} must exist in the student's assessment list.
+     */
+    void deleteAssessment(Student student, Assessment assessment);
 }
