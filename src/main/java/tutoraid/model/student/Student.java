@@ -85,13 +85,6 @@ public class Student {
     }
 
     /**
-     * Returns true if student has the lesson.
-     */
-    public boolean hasLesson(Lesson lesson) {
-        return this.lessonList.contains(lesson);
-    }
-
-    /**
      * Returns true if both students have the same identity and data fields.
      * This defines a stronger notion of equality between two students.
      */

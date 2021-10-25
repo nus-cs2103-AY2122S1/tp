@@ -2,6 +2,7 @@ package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.List;
 
 import tutoraid.commons.core.Messages;
@@ -9,6 +10,7 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
+import tutoraid.model.student.NameContainsKeywordsPredicate;
 
 /**
  * List all details for a lesson in TutorAid to the user.
@@ -41,6 +43,7 @@ public class ViewLessonCommand extends ViewCommand {
 
         Lesson lessonToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewLesson(lessonToView);
+        model.updateFilteredStudentList(new NameContainsKeywordsPredicate(lessonToView.getStudents()));
         return new CommandResult(MESSAGE_VIEW_LESSON_SUCCESS);
     }
 
