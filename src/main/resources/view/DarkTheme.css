@@ -1,12 +1,9 @@
-.background {
-    -fx-background-color: derive(#1d1d1d, 20%);
-    background-color: #383838; /* Used in the default.html file */
-}
+
 
 .label {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";
-    -fx-text-fill: #555555;
+    -fx-text-fill: #efb200;
     -fx-opacity: 0.9;
 }
 
@@ -81,76 +78,80 @@
     -fx-border-color: transparent transparent transparent #4d4d4d;
 }
 
-.split-pane {
-    -fx-border-radius: 1;
-    -fx-border-width: 1;
-    -fx-background-color: derive(#1d1d1d, 20%);
-}
+
 
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color:  #EF7C00;
 }
 
 .list-cell {
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-}
-
-.list-cell:filled:even {
-    -fx-background-color: #3c3e3f;
-}
-
-.list-cell:filled:odd {
-    -fx-background-color: #515658;
-}
-
-.list-cell:filled:selected {
-    -fx-background-color: #424d5f;
-}
-
-.list-cell:filled:selected #cardPane {
-    -fx-border-color: #3e7b91;
-    -fx-border-width: 1;
-}
-
-.list-cell .label {
-    -fx-text-fill: white;
+    -fx-background-color:  #EF7C00;
 }
 
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
     -fx-font-size: 16px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: white;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 13px;
-    -fx-text-fill: #010504;
+    -fx-text-fill: black;
 }
 
-.stack-pane {
-     -fx-background-color: derive(#1d1d1d, 20%);
+.command-box {
+     -fx-background-color: white;
 }
 
 .pane-with-border {
-     -fx-background-color: derive(#1d1d1d, 20%);
-     -fx-border-color: derive(#1d1d1d, 10%);
+     -fx-background-color: #EF7C00;
+     -fx-border-color: #EF7C00;
      -fx-border-top-width: 1px;
 }
 
+.main-window {
+     -fx-background-color: #EF7C00;
+     -fx-border-color: white;
+     -fx-border-top-width: 1px;
+}
+
+.module-card {
+     -fx-background-color:   #EF7C00;
+     -fx-border-color: white;
+     -fx-border-width: 2px;
+     -fx-border-radius: 5;
+}
+
+.student-card {
+     -fx-background-color:   #EF7C00;
+     -fx-border-color: white;
+     -fx-border-width: 2px;
+     -fx-border-radius: 5;
+}
+
+.task-card {
+     -fx-background-color: #EF7C00;
+     -fx-border-color: white;
+     -fx-border-bottom-width: 1px;
+     -fx-border-radius: 5;
+}
+
+
 .status-bar {
-    -fx-background-color: derive(#1d1d1d, 30%);
+    -fx-background-color: #003D7C;
 }
 
 .result-display {
     -fx-background-color: transparent;
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .result-display .label {
@@ -180,27 +181,26 @@
     -fx-border-width: 1px;
 }
 
-.grid-pane .stack-pane {
-    -fx-background-color: derive(#1d1d1d, 30%);
-}
-
+/*
+ * Drop down menu
+ */
 .context-menu {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: #EF7C00;
 }
 
 .context-menu .label {
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 .menu-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #003D7C;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Open Sans Light";
     -fx-text-fill: white;
-    -fx-opacity: 0.9;
+    -fx-opacity: 1;
 }
 
 .menu .left-container {
@@ -220,7 +220,7 @@
     -fx-background-color: #1d1d1d;
     -fx-font-family: "Open Sans Regular";
     -fx-font-size: 11pt;
-    -fx-text-fill: #d8d8d8;
+        -fx-text-fill: #d8d8d8;
     -fx-background-insets: 0 0 0 0, 0, 1, 2;
 }
 
@@ -282,11 +282,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#1d1d1d, 20%);
+    -fx-background-color: #003D7C;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#1d1d1d, 50%);
+    -fx-background-color: derive(#003D7C, 50%);
     -fx-background-insets: 3;
 }
 
@@ -300,11 +300,11 @@
 }
 
 .scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
-    -fx-padding: 1 8 1 8;
+    -fx-padding: 1 5 1 5;
 }
 
 .scroll-bar:horizontal .increment-arrow, .scroll-bar:horizontal .decrement-arrow {
-    -fx-padding: 8 1 8 1;
+    -fx-padding: 5 5 5 5;
 }
 
 #cardPane {
@@ -325,7 +325,7 @@
     -fx-border-width: 1;
     -fx-font-family: "Open Sans Light";
     -fx-font-size: 13pt;
-    -fx-text-fill: white;
+    -fx-text-fill: black;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -333,7 +333,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #383838;
+    -fx-background-color: white;
     -fx-background-radius: 0;
 }
 
