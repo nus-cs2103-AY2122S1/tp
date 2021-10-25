@@ -272,18 +272,18 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Help** | `help`
-**List** | `list`
-**Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` <br> e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
-**Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` <br> e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
-**Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` <br> e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
-**Add Assessment** | `add assessment -a <assessment_name>` <br> e.g. `add assessment -a P01`
-**Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` <br> e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
-**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` <br> e.g. `search -n John Doe` , `search -g T02B R04D`
-**Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` <br> e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
-**Delete Student** | `delete <index>` <br> e.g. `delete 2`
-**Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` <br> e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
-**Clear Data** | `clear`
-**Exit App** | `exit`
+Action | Format | Examples
+--------|--------|----------
+**Help** | `help` |
+**List** | `list` |
+**Add Student** | `add student -n <student_name> -i <student_id>  [-g <group_name>]...` | e.g. `add student -n Jane Doe -i E0123456 -g T01A -g R01A`
+**Add Group** | `add group -g <group_name> [(-n <student_name> | -i <student_id>)]...` | e.g. `add group -g FG1`, `add group -g FG1 -n John Doe -i E0123456`
+**Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
+**Add Assessment** | `add assessment -a <assessment_name>` | e.g. `add assessment -a P01`
+**Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
+**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe` , `search -g T02B R04D`
+**Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
+**Delete Student** | `delete <index>` | e.g. `delete 2`
+**Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | e.g. `import -f student_data.csv -g 2 -a 10 -t 1`
+**Clear Data** | `clear` |
+**Exit App** | `exit` |
