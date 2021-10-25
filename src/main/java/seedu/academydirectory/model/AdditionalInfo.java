@@ -24,11 +24,11 @@ public final class AdditionalInfo<T> {
     }
 
     /**
-     * If a value is  not present, returns {@code true}, otherwise
-     * {@code false}.
+     * Returns an empty {@code AdditionalInfo} instance.  No value is present for this
+     * {@code AdditionalInfo}.
      *
-     * @return  {@code true} if a value is not present, otherwise {@code false}
-     * @since   11
+     * @param <T> The type of the non-existent value
+     * @return an empty {@code AdditionalInfo}
      */
     public static<T> AdditionalInfo<T> empty() {
         @SuppressWarnings("unchecked")
@@ -93,9 +93,22 @@ public final class AdditionalInfo<T> {
      * {@code false}.
      *
      * @return  {@code true} if a value is not present, otherwise {@code false}
-     * @since   11
      */
     public boolean isEmpty() {
         return value == null;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(obj instanceof AdditionalInfo)) {
+            return false;
+        }
+
+        AdditionalInfo<?> other = (AdditionalInfo<?>) obj;
+        return Objects.equals(value, other.value);
     }
 }
