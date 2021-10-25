@@ -74,10 +74,7 @@ public class CommandBox extends UiPart<Region> {
             setStyleToIndicateCommandFailure();
         } finally {
             String text = commandTextField.getText();
-            boolean isNotSpaces = !text.trim().equals("");
-            if (isNotSpaces) {
-                inputHistory.addToHistory(text);
-            }
+            inputHistory.addToHistory(text);
             commandTextField.setText("");
         }
     }

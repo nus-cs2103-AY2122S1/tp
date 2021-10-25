@@ -34,7 +34,11 @@ public class InputHistory {
      * @param inputCommand the String to be saved in the list.
      */
     public void addToHistory(String inputCommand) {
-        history.add(inputCommand);
+        String command = inputCommand.trim();
+        boolean isNotJustSpaces = !command.equals("");
+        if (isNotJustSpaces) {
+            history.add(inputCommand);
+        }
         resetRecentIndex();
     }
 
@@ -108,5 +112,19 @@ public class InputHistory {
      */
     private boolean isLast() {
         return currentIndex == history.size();
+    }
+
+    public static void resetSingleton() {
+        inputHistory = null;
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < history.size(); i++) {
+            result += history.get(i) + ";";
+        }
+        result += currentIndex;
+        return result;
     }
 }
