@@ -10,6 +10,7 @@ public class UnfavouriteCommandParser implements Parser<UnfavouriteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the UnfavouriteCommand
      * and returns a UnfavouriteCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public UnfavouriteCommand parse(String args) throws ParseException {
