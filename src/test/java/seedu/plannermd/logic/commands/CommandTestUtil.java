@@ -16,6 +16,7 @@ import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_START;
 import static seedu.plannermd.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.plannermd.testutil.Assert.assertThrows;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,6 +77,10 @@ public class CommandTestUtil {
     public static final String RISK_DESC_AMY = " " + PREFIX_RISK + VALID_RISK_AMY;
     public static final String RISK_DESC_BOB = " " + PREFIX_RISK + VALID_RISK_BOB;
 
+    public static final LocalDate FILTER_VALID_START_DATE = LocalDate.of(2020, 10, 20);
+    public static final LocalDate FILTER_VALID_END_DATE = LocalDate.of(2020, 11, 20);
+    public static final String VALID_STRING_START_DATE = "20/10/2020";
+    public static final String VALID_STRING_END_DATE = "20/11/2020";
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
