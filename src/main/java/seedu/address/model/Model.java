@@ -103,6 +103,8 @@ public interface Model {
      */
     void displayPersonTaskList(Person person);
 
+    void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate);
+
     void updateSortedPersonList(boolean isReverseOrder);
 
     /**

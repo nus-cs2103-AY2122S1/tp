@@ -185,7 +185,13 @@ public class ModelManager implements Model {
 
     @Override
     public void displayPersonTaskList(Person person) {
-        taskListManager.setToDisplayTaskList(person.getName());
+        taskListManager.setToDisplayTaskList(person.getName(), false);
+    }
+
+    @Override
+    public void displayFilteredPersonTaskList(Person person, Predicate<Task> predicate) {
+        taskListManager.setFilteredTasksPredicate(predicate);
+        taskListManager.setToDisplayTaskList(person.getName(), true);
     }
 
     //=========== cache operation =============================================================
