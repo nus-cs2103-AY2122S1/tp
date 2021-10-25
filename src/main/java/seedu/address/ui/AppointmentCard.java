@@ -3,8 +3,13 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Appointment;
 
@@ -14,6 +19,10 @@ import seedu.address.model.schedule.Appointment;
 public class AppointmentCard extends UiPart<Region> {
 
     private static final String FXML = "AppointmentListCard.fxml";
+
+    private static final BackgroundFill RED = new BackgroundFill(Color.RED.deriveColor(0, 1, 1, 0.1), null, null);
+    private static final BackgroundFill YELLOW = new BackgroundFill(Color.ORANGE.deriveColor(0, 1, 1, 0.12), null, null);
+    private static final BackgroundFill GREEN = new BackgroundFill(Color.GREEN.deriveColor(0, 1, 1, 0.12), null, null);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -27,6 +36,8 @@ public class AppointmentCard extends UiPart<Region> {
 
     @FXML
     private HBox appointmentCardPane;
+    @FXML
+    private GridPane appointmentColorPane;
     @FXML
     private Label description;
     @FXML
@@ -57,6 +68,21 @@ public class AppointmentCard extends UiPart<Region> {
 
         clientsPane.setText(clientNames);
         clientsPane.setContent(clientsDetail.getRoot());
+
+        this.setUrgencyDisplay();
+    }
+
+    private void setUrgencyDisplay() {
+        switch (appointment.getUrgency()) {
+            case HIGH:
+                appointmentColorPane.setBackground(new Background(RED));
+                break;
+            case MEDIUM:
+                appointmentColorPane.setBackground(new Background(YELLOW));
+                break;
+            case LOW:
+                appointmentColorPane.setBackground(new Background(GREEN));
+        }
     }
 
     @Override

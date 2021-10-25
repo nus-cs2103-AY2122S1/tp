@@ -53,6 +53,21 @@ public class Appointment {
     }
 
     /**
+     * Returns the urgency of this appointment.
+     * Returns HIGH if appointment is in 2 days, MEDIUM if it is in a week and LOW otherwise
+     * @return the urgency of this appointment.
+     */
+    public Urgency getUrgency() {
+        if (LocalDate.now().plusDays(2).isAfter(date)) {
+            return Urgency.HIGH;
+        } else if (LocalDate.now().plusDays(8).isAfter(date)) {
+            return Urgency.MEDIUM;
+        } else {
+            return Urgency.LOW;
+        }
+    }
+
+    /**
      * Checks if this appointment is related to the client.
      * @param person the client to check with.
      * @return true if the client is related and false otherwise.
