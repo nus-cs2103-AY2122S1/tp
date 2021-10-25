@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static final ClassCode CLASS_CODE = new ClassCode("");
+    public static final ClassCode CLASS_CODE = new ClassCode("G00");
 
     public static Student[] getSampleStudents() {
         return new Student[] {
