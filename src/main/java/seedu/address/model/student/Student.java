@@ -29,6 +29,16 @@ public class Student {
     private final Set<Tag> tags = new HashSet<>();
 
     /**
+     * Constructs a {@code Student} object.
+     */
+    public Student(Name name, ID id) {
+        requireAllNonNull(name, id);
+        this.name = name;
+        this.id = id;
+    }
+
+    /**
+     * Constructs a {@code Student} object.
      * Every field must be present and not null.
      */
     public Student(Name name, ID id, List<Group> groups, Map<Assessment, Score> scores, Set<Tag> tags) {
@@ -91,6 +101,19 @@ public class Student {
 
         return otherStudent != null
                 && otherStudent.getId().equals(getId());
+    }
+
+    /**
+     * Returns true if both students have the same name.
+     * This defines a weaker notion of equality between two students.
+     */
+    public boolean isSameName(Student otherStudent) {
+        if (otherStudent == this) {
+            return true;
+        }
+
+        return otherStudent != null
+                && otherStudent.getName().equals(getName());
     }
 
     /**

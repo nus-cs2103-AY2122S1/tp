@@ -142,6 +142,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Returns student in address book with same name or ID as {@code studentToMatch} if exists.
+     */
+    public Student getStudent(Student studentToMatch) {
+        requireNonNull(studentToMatch);
+        for (Student student : getStudentList()) {
+            if (student.isSameName(studentToMatch) || student.isSameStudent(studentToMatch)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    /**
      * Adds a group to the address book.
      * The group must not already exist in the address book.
      */
@@ -159,15 +172,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         return assessments.contains(assessment);
     }
 
+    /**
+     * Returns assessment in address book with same identity as {@code assessmentToMatch} if exists.
+     */
     public Assessment getAssessment(Assessment assessmentToMatch) {
         requireNonNull(assessmentToMatch);
-
         for (Assessment assessment : getAssessmentList()) {
             if (assessment.equals(assessmentToMatch)) {
                 return assessment;
             }
         }
-
         return null;
     }
 
