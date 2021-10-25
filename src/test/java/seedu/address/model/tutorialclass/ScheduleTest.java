@@ -26,9 +26,10 @@ class ScheduleTest {
         // invalid schedules
         assertFalse(Schedule.isValidSchedule(""));
         assertFalse(Schedule.isValidSchedule("  "));
+        assertFalse(Schedule.isValidSchedule("Tues 10am-12pm"));
+        assertFalse(Schedule.isValidSchedule("Tues 10am-12pm,"));
 
         // valid schedule
-        assertTrue(Schedule.isValidSchedule("Tues 10am-12pm"));
         assertTrue(Schedule.isValidSchedule("Tues 10am-12pm, Fri 10am-12pm"));
         assertTrue(Schedule.isValidSchedule("Mon 12pm - 2pm, Thurs 12pm - 2pm"));
 

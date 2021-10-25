@@ -50,8 +50,12 @@ public class AddClassCommandTest {
 
     @Test
     public void equals() {
-        TutorialClass a = new TutorialClassBuilder().withClassCode("a").build();
-        TutorialClass b = new TutorialClassBuilder().withClassCode("b").build();
+        TutorialClass a = new TutorialClassBuilder()
+                                .withClassCode("a")
+                                .build();
+        TutorialClass b = new TutorialClassBuilder()
+                                .withClassCode("b")
+                                .build();
 
         AddClassCommand addACommand = new AddClassCommand(a);
         AddClassCommand addBCommand = new AddClassCommand(b);
