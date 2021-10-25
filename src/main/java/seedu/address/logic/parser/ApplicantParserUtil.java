@@ -6,10 +6,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.applicant.Address;
+import seedu.address.model.applicant.Application.ApplicationStatus;
 import seedu.address.model.applicant.Email;
 import seedu.address.model.applicant.Name;
 import seedu.address.model.applicant.Phone;
-import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Description;
 import seedu.address.model.position.Title;
 
