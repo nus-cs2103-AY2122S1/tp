@@ -43,6 +43,10 @@ public class ViewCreator extends Creator {
     @FXML
     private Label telegram;
 
+    /**
+     * View Creator for Student Detailed Information
+     * @param additionalInfo information to be passed in
+     */
     public ViewCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
         this.student = (Student) additionalInfo.get();

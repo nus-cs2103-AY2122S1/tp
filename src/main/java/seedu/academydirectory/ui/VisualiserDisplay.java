@@ -27,6 +27,10 @@ public class VisualiserDisplay extends UiPart<Region> {
         placeHolder.getChildren().add(creator.create());
     }
 
+    /**
+     * Handle type of AdditionalView being passed inside AD
+     * @param additionalViewModel additional View model
+     */
     public void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
         switch (additionalViewModel.getAdditionalViewType()) {
         case VIEW:

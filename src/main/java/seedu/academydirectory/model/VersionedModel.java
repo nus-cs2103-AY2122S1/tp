@@ -2,7 +2,6 @@ package seedu.academydirectory.model;
 
 import java.io.IOException;
 
-import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.versioncontrol.objects.Commit;
 import seedu.academydirectory.versioncontrol.objects.StageArea;
 

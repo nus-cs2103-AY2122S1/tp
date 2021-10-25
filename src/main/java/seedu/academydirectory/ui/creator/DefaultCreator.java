@@ -1,7 +1,6 @@
 package seedu.academydirectory.ui.creator;
 
 import javafx.scene.Node;
-import javafx.scene.control.TextArea;
 import seedu.academydirectory.model.AdditionalInfo;
 
 public class DefaultCreator extends Creator {
@@ -10,6 +9,10 @@ public class DefaultCreator extends Creator {
 
     private final AdditionalInfo<?> additionalInfo;
 
+    /**
+     * Constructor of Default Creator
+     * @param additionalInfo information
+     */
     public DefaultCreator(AdditionalInfo<?> additionalInfo) {
         super(additionalInfo, FXML);
         this.additionalInfo = additionalInfo;

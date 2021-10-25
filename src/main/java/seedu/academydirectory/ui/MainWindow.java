@@ -17,10 +17,6 @@ import seedu.academydirectory.logic.Logic;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.AdditionalViewModel;
-import seedu.academydirectory.ui.creator.DefaultCreator;
-import seedu.academydirectory.ui.creator.GraphCreator;
-import seedu.academydirectory.ui.creator.ViewCreator;
 
 /**
  * The Main Window. Provides the basic application layout containing
