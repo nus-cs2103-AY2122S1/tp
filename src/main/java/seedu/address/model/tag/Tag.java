@@ -62,6 +62,7 @@ public class Tag {
 
     /**
      * Parses the tag type based on the given tag description.
+     *
      * @param tagDescription A valid tag description.
      * @return Type of tag represented by tag description.
      */
@@ -78,6 +79,7 @@ public class Tag {
 
     /**
      * Parses the tag name based on the given tag type and description.
+     *
      * @param tagDescription A valid tag description.
      * @param tagType Type of tag.
      * @return Name of tag represented by tag description.
