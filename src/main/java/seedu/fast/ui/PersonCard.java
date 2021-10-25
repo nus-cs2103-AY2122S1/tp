@@ -1,9 +1,13 @@
 package seedu.fast.ui;
 
 import static seedu.fast.ui.UiUtil.ADDRESS_IMAGE;
+import static seedu.fast.ui.UiUtil.DATE_IMAGE;
 import static seedu.fast.ui.UiUtil.EMAIL_IMAGE;
 import static seedu.fast.ui.UiUtil.PHONE_IMAGE;
 import static seedu.fast.ui.UiUtil.TAG_IMAGE;
+import static seedu.fast.ui.UiUtil.TIME_IMAGE;
+import static seedu.fast.ui.UiUtil.VENUE_IMAGE;
+
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -49,9 +53,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label appointmentHeader;
     @FXML
-    private Label appointmentDate;
+    private VBox appointmentDate;
     @FXML
-    private Label appointmentTime;
+    private VBox appointmentTime;
     @FXML
     private Label appointmentVenue;
     @FXML
@@ -70,10 +74,13 @@ public class PersonCard extends UiPart<Region> {
         email.getChildren().add(new ItemComponent(person.getEmail().value, EMAIL_IMAGE));
         remark.setText(person.getRemark().value);
         tags.getChildren().add(new TagComponent(person.getTags(), TAG_IMAGE));
-
-        appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
-        appointmentTime.setText(checkTimeVenueAndAddHeader(person.getAppointment().getTimeFormatted(), "Time",
-                person.getAppointment().getDate()));
+        appointmentDate.getChildren().add(new ItemComponent(checkDateAndAddHeader(person.getAppointment().getDate()),
+                DATE_IMAGE));
+//        appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
+        appointmentTime.getChildren().add(new ItemComponent(
+                checkTimeVenueAndAddHeader(
+                        person.getAppointment().getTimeFormatted(), "Time", person.getAppointment().getDate()),
+                TIME_IMAGE));
         appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
                 person.getAppointment().getDate()));
         appointmentCount.setText("Appointment: " + person.getCount());
