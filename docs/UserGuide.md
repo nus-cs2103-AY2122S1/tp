@@ -5,22 +5,22 @@ title: User Guide
 ![Banner](images/Banner.png)
 
 Dash is a personal planner app which offers unparalleled speed using text-based input. It supports both management of
-tasks and contacts. Dash is tailored to the needs of students, who must keep track of a slew of different deadlines and 
-commitments. So long as you're a fast typist, with its keyboard-optimised navigability, Dash provides a blisteringly 
+tasks and contacts. Dash is tailored to the needs of students, who must keep track of a slew of different deadlines and
+commitments. So long as you're a fast typist, with its keyboard-optimised navigability, Dash provides a blisteringly
 quick way to stay on top of your responsibilities.
 
-You can navigate this guide by clicking the table of contents. If you're a new user, the Quick Start guide has all you 
-need to get started. If you're an intermediate user looking to get more out of Dash, all supported commands are listed 
+You can navigate this guide by clicking the table of contents. If you're a new user, the Quick Start guide has all you
+need to get started. If you're an intermediate user looking to get more out of Dash, all supported commands are listed
 below.
 
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## <u>Quick start</u>
 
-Whether you're using Windows or MacOS, the steps for installation are the same.
+Whether you're using Windows or macOS, the steps for installation are the same.
 
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
@@ -58,7 +58,7 @@ Whether you're using Windows or MacOS, the steps for installation are the same.
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -66,7 +66,7 @@ Whether you're using Windows or MacOS, the steps for installation are the same.
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
+* If a parameter is expected only once in the command, but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `p/12341234 p/56785678`, only `p/56785678` will be taken.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `contacts`, `tasks` and `clear`) will be ignored.<br>
@@ -76,14 +76,16 @@ Whether you're using Windows or MacOS, the steps for installation are the same.
 
 ### <u>General</u>
 
+Dash uses **tabs** to help you compartmentalize between contacts and tasks.
+
 ![Switching Tabs](images/UG-01.png)
 #### Switch Tabs: [contacts] or [tasks] or [help]
 
-Switches to another specified tab.
+Switches to the specified tab.
 
 Format: ```contacts or tasks or help```
 
-Change tabs using shortcuts to save time:
+Alternatively, you can switch tabs using shortcuts to save time:
 
 Format: ```c or t or h```
 
@@ -97,7 +99,7 @@ Format: ```exit```
 
 --------------------------------------------------------------------------------------------------------------------
 
-### <u>Contacts</u>
+### <u>Contacts (When on contacts tab)</u>
 
 ![Adding a Contact](images/UG-02.png)
 #### Adding contact details of a person: [add]
@@ -115,11 +117,23 @@ Replaces the contact details of the contact at the chosen index with the new det
 
 Format: ```edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...```
 
-* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed contact list. The index must be a positive integer 1, 2, 3, …​
+* Edits the contact at the specified `INDEX`.
+  * The `INDEX` refers to the index number shown in the displayed contact list.
+  * The `INDEX` must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+* When editing tags, the existing tags of the contact will be removed i.e. adding of tags is not cumulative.
+  * To add tags without removing existing tags, refer to the Tag command in the [next section.](#tagging-a-contact-tag)
+* You can remove all the contact’s tags by typing `t/` without specifying any tags after it.
+
+--------------------------------------------------------------------------------------------------------------------
+
+#### Tagging a contact: [tag]
+
+Adds extra tags to a contact without wiping the old tags.
+
+Format: ```tag INDEX [t/TAG]...```
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -129,9 +143,9 @@ Deletes the contact at the chosen index.
 
 Format: ```delete INDEX```
 
-* Deletes the person at the specified INDEX.
-* The index refers to the index number shown in the contact list.
-* The index must be a positive integer i.e. 1, 2, 3, …
+* Deletes the person at the specified `INDEX`.
+  * The `INDEX` refers to the index number shown in the contact list.
+  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -142,11 +156,11 @@ Finds all contacts whose name matches the search term.
 
 Format: ```find NAME```
 
-* The search is case-insensitive. e.g hans will match Hans
-* The order of the keywords does not matter. e.g. Hans Bo will match Bo Hans
+* The search is case-insensitive. e.g. `find hans` will match `Hans`.
+* The order of the keywords does not matter. e.g. `find Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Persons matching all keywords will be returned (i.e. AND search). e.g. 
-  Hans Bo will return only Hans Bo and Hans Bo the Second. It will not return Hans Gruber, Bo Yang
+* Contacts matching all keywords will be returned (i.e. AND search). e.g.
+  `find Hans Bo` will return only `Hans Bo` and `Hans Bo the Second`. It will not return `Hans Gruber` or `Bo Yang`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -157,11 +171,11 @@ Finds all contacts whose parameter (number, email, etc) matches the search term.
 
 Format: ```find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...```
 
-* The search is case-insensitive. e.g hans@gmail.com will match Hans@gmail.com
-* The order of the keywords does not matter. e.g. a/tampines 123 will match Blk 123 Tampines.
-* Contacts matching all keywords will be returned (i.e. AND search). e.g. ```find p/86235343 t/CS2101``` will return 
-  only contacts who both have the given phone number AND the tag CS2101. 
-  It will not return contacts with different phone numbers, even if they contain the tag CS2101.
+* The search is case-insensitive. e.g. `find e/hans@gmail.com` will match `Hans@gmail.com`.
+* The order of the keywords does not matter. e.g. `find a/tampines 123` will match Blk 123 Tampines.
+* Contacts matching all keywords will be returned (i.e. AND search). e.g. ```find p/86235343 t/CS2101``` will return
+  only contacts who both have the given phone number AND the tag `CS2101`.
+  It will not return contacts with different phone numbers, even if they both contain the tag `CS2101`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -186,33 +200,34 @@ Format: ```clear```
 ![Adding a Task](images/UG-03.png)
 #### Adding a task: [add]
 
-Adds a task to the task list. Only task description is compulsory during creation.
+Adds a task to the task list. Only task `DESCRIPTION` is compulsory during creation.
 
 Format: ```add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
-* An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+* An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
-on the side bar to the right.
+  on the side panel to the right.
 
 --------------------------------------------------------------------------------------------------------------------
 
 ![Editing a Task](images/UG-05.png)
 #### Editing task details: [edit]
 
-Replaces the details of the task at the given index with the new details.
+Replaces the details of the task at the given `INDEX` with the new details.
 
 Format: ```edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
-* Edits the specified task fields at the specified INDEX
-* The index refers to the index number shown in the task list
-* The index must be a positive integer i.e. 1, 2, 3, …
+* Edits the specified task fields at the specified `INDEX`
+  * The `INDEX` refers to the index number shown in the task list
+  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the task will be removed i.e adding of tags is not cumulative.
-* You can remove all the task’s tags by typing t/ without specifying any tags after it.
-* An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+* When editing tags, the existing tags of the task will be removed i.e. adding of tags is not cumulative.
+  * To add tags without removing existing tags, refer to the Tag command in the [next section.](#tagging-a-task-tag)
+* You can remove all the task’s tags by typing `t/` without specifying any tags after it.
+* An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
 * Assigning people to a task uses the current index of the person on the contacts list, which is shown
-  on the side bar to the right.
+  on the side panel to the right.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -232,8 +247,8 @@ Assigns extra people to a task without wiping people already assigned.
 
 Format: ```assign INDEX [p/PERSON INDEX]...```
 
-* Assigning people to a task uses the current index of the person on the contacts list, which is shown
-  on the side bar to the right.
+* Assigning people to a task uses the current `INDEX` of the person on the contacts list, which is shown
+  on the side panel to the right.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -244,9 +259,9 @@ Completes the task at the chosen index.
 
 Format: ```complete INDEX```
 
-* Completes the task at the specified INDEX
-* The index refers to the index number shown in the task list
-* The index must be a positive integer i.e. 1, 2, 3, …
+* Completes the task at the specified `INDEX`.
+  * The `INDEX` refers to the index number shown in the task list.
+  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -256,9 +271,9 @@ Deletes the task at the chosen index.
 
 Format: ```delete INDEX```
 
-* Deletes the task at the specified INDEX
-* The index refers to the index number shown in the task list
-* The index must be a positive integer i.e. 1, 2, 3, …
+* Deletes the task at the specified `INDEX`.
+  * The `INDEX` refers to the index number shown in the task list.
+  * The `INDEX` must be a positive integer i.e. 1, 2, 3, …
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -269,11 +284,11 @@ Finds all tasks with descriptions that match the search term.
 
 Format: ```find DESCRIPTION```
 
-* The search is case-insensitive. e.g job will match Job
-* The order of the keywords does not matter. e.g. home work will match work home
+* The search is case-insensitive. e.g. `find job` will match `Job`.
+* The order of the keywords does not matter. e.g. `find home work` will match `work home`
 * Only the description field is searched.
-* Task descriptions matching all keywords will be returned (i.e. AND search). 
-  e.g. ```Math Quiz``` will return only ```Math Quiz``` and ```Math Quiz 8```. 
+* Task descriptions matching all keywords will be returned (i.e. AND search).
+  e.g. ```Math Quiz``` will return only ```Math Quiz``` and ```Math Quiz 8```.
   It will not return ```Math Assignment```, ```GEQ Quiz```, or ```This doesn't matter```.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -285,10 +300,10 @@ Finds all tasks whose parameter (date/time, people, etc) matches the search term
 
 Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...```
 
-* The search is case-insensitive. e.g HOMEWORK will match homework
+* The search is case-insensitive. e.g `find t/HOMEWORK` will match the `homework` tag.
 * Tasks matching all keywords will be returned (i.e. AND search). e.g. ```find dt/1900 t/homework``` will return
-  only tasks who both have time 1900 AND the tag homework.
-  It will not return contacts with different times, even if they contain the tag homework.
+  only tasks which both have time `1900` AND the tag `homework`.
+  It will not return contacts with different times, even if they both contain the tag `homework`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -299,7 +314,7 @@ Finds all tasks whose Date/Time are after the current Date/Time.
 
 Format: ```upcoming```
 
-* An explanation of how Date and Time formats work can be found [here](#handling-date-and-time-of-tasks)
+* An explanation of how Date and Time formats work can be found [here.](#handling-date-and-time-of-tasks)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -373,6 +388,7 @@ Action | Format
 --------|------------------
 **Add** | `add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL a/ADDRESS] [t/TAG]...`
+**Tag** | `tag INDEX [t/TAG]...`
 **Delete** | `delete INDEX`
 **Find** | `find NAME`
 **Find** | `find [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]`
@@ -385,11 +401,13 @@ Action | Format
 --------|------------------
 **Add** | `add d/DESCRIPTION [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
 **Edit** | `edit INDEX [d/DESCRIPTION] [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
-**Delete** | `delete INDEX`
 **Tag** | `tag INDEX [t/TAG]...`
 **Assign** | `assign INDEX [p/PERSON INDEX]...`
 **Complete** | `complete INDEX`
+**Delete** | `delete INDEX`
 **Find** | `find DESCRIPTION`
 **Find** | `find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG]...`
-**Clear** | `clear`
 **Upcoming** | `upcoming`
+**List** | `list`
+**Clear** | `clear`
+
