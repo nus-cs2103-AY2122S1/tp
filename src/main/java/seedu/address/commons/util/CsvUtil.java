@@ -1,123 +1,138 @@
 package seedu.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.io.StringWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.Optional;
+import java.util.logging.Logger;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.MappingIterator;
+import com.fasterxml.jackson.databind.SequenceWriter;
+import com.fasterxml.jackson.dataformat.csv.CsvMapper;
+import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.storage.CsvAdaptedPerson;
+import seedu.address.storage.CsvSerializableAddressBook;
+
+/**
+ * A class for reading from and writing between CSV Files and CsvSerializableAddressBook, using the Jackson library.
+ */
 public class CsvUtil {
 
-    @JsonRootName(value = "addressbook")
-    private static class PersonWrapper<T> {
-        private final List<T> persons = new ArrayList<>();
-        /**
-         * Constructs a {@code JsonSerializableAddressBook} with the given persons.
-         */
-        @JsonCreator
-        public PersonWrapper(@JsonProperty("persons") List<T> persons) {
-            this.persons.addAll(persons);
+    private static final Logger logger = LogsCenter.getLogger(CsvUtil.class);
+
+    /**
+     * Jackson Class which helps to read {@code Csv} files.
+     */
+    private static final CsvMapper csvMapper = new CsvMapper();
+
+    /**
+     * Reads a {@code Csv} file and returns it as an Optional of {@link CsvSerializableAddressBook}.
+     *
+     * @param filePath Path to {@code Csv} file.
+     * @return Optional of {@link CsvSerializableAddressBook}.
+     * @throws DataConversionException If there is an error reading from {@code Csv} file.
+     */
+    public static Optional<CsvSerializableAddressBook> readCsvFile(Path filePath) throws DataConversionException {
+        requireNonNull(filePath);
+        if (!FileUtil.isFileExists(filePath)) {
+            logger.info("Json file " + filePath + " not found");
+            return Optional.empty();
         }
+
+        CsvSerializableAddressBook csvSerializableAddressBook;
+
+        try {
+            csvSerializableAddressBook = deserializeAddressBookFromCsvFile(filePath);
+        } catch (IOException | IllegalValueException e) {
+            logger.warning("Error reading from jsonFile file " + filePath + ": " + e);
+            throw new DataConversionException(e);
+        }
+        return Optional.of(csvSerializableAddressBook);
     }
 
     /**
-     * Converst CSV File to JSON File
+     * Converts a {@code Csv} file into a {@link CsvSerializableAddressBook}.
+     * This method assumes that the file exists.
      *
-     * @param constructorOfObjectToDeserialize The constructor for T object
-     * @param filePath path of CSV file
-     * @param <T> The generic type to create an instance of
-     * @throws IOException if there was an error reading file
+     * @param filePath Path to the {@code Csv} file.
+     * @return {@link CsvSerializableAddressBook}
+     * @throws IOException If there is an error reading from {@code Csv} file.
      */
-    public static <T> ArrayList<T> csvToPersonData(Constructor<T> constructorOfObjectToDeserialize, Path filePath)
-            throws IOException {
-        ArrayList<String[]> csvData = readCsv(filePath);
-        String[] headers = csvData.get(0);
-        HashMap<String, Integer> headerIndex = new HashMap<>();
-        for (int i = 0; i < headers.length; i++) {
-            headerIndex.put(headers[i], i);
-        }
+    private static CsvSerializableAddressBook deserializeAddressBookFromCsvFile(Path filePath)
+            throws IOException, IllegalValueException {
+        // Assumes file exists
+        assert FileUtil.isFileExists(filePath);
 
-        ArrayList<T> list = new ArrayList<T>();
-        for (int i = 1; i < csvData.size(); i++) {
-            String[] fields = csvData.get(i);
-            T temp;
-            try {
-                String name = fields[headerIndex.get("Name")];
-                String tele = StringUtil.clean(fields[headerIndex.get("Telegram")], "@");
-                String github = StringUtil.clean(fields[headerIndex.get("Github")], "@");
-                String phone = fields[headerIndex.get("Phone Number")];
-                String email = fields[headerIndex.get("Email")];
-                String address = StringUtil.clean(fields[headerIndex.get("Address")], "\"");
-                List<String> tags = Arrays.asList(fields[headerIndex.get("Tags")].split(" "));
-                temp = constructorOfObjectToDeserialize.newInstance(name, tele, github, phone, email, address, tags);
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                temp = null;
+        CsvSchema csvSchema = CsvSchema.emptySchema().withHeader();
+        MappingIterator<Map<String, String>> iterator = csvMapper.readerFor(Map.class)
+                .with(csvSchema)
+                .readValues(filePath.toFile());
+
+        ArrayList<CsvAdaptedPerson> csvAdaptedPersons = new ArrayList<>();
+        while (iterator.hasNext()) {
+            Map<String, String> row = iterator.next();
+            String name = row.get("name");
+            String github = row.get("github");
+            String telegram = row.get("telegram");
+            String email = row.get("email");
+            String address = row.get("address");
+            String phone = row.get("phone");
+            String tagged = row.get("tagged");
+            if (name == null | github == null | telegram == null | email == null
+                    | address == null | phone == null | tagged == null) {
+                throw new IllegalValueException("Missing header");
             }
-            list.add(temp);
+            CsvAdaptedPerson person = new CsvAdaptedPerson(name, telegram, github, phone, email, address, tagged);
+            csvAdaptedPersons.add(person);
         }
-        return list;
+        return new CsvSerializableAddressBook(csvAdaptedPersons);
     }
 
     /**
-     * Converts Data in CSV file to a JSON String
+     * Saves a CsvSerializableAddressBook into a specified Csv file.
+     * Assumes that the file exists.
      *
-     * @param constructorOfObjectToDeserialize The constructor for T object
-     * @param filePath path of CSV file
-     * @param <T> The generic type to create an instance of
-     * @return a JSON String
-     * @throws IOException if there was an error reading file
+     * @param csvSerializableAddressBook Address Book to be saved.
+     * @param filePath Path of specified Csv file.
+     * @throws IOException If there is an error while writing to the file.
      */
-    public static <T> String csvToJsonString(Constructor<T> constructorOfObjectToDeserialize, Path filePath)
+    public static void saveCsvFile(CsvSerializableAddressBook csvSerializableAddressBook, Path filePath)
             throws IOException {
-        PersonWrapper<T> data = new PersonWrapper<>(csvToPersonData(constructorOfObjectToDeserialize, filePath));
-        return JsonUtil.toJsonString(data);
+        requireNonNull(csvSerializableAddressBook);
+        requireNonNull(filePath);
+        assert FileUtil.isFileExists(filePath);
+
+        serializeObjectToCsvFile(csvSerializableAddressBook, filePath);
     }
 
-    /***
-     * Reads data in CSV file
-     *
-     * @param filePath path of CSV file to read
-     * @return an ArrayList of String Array containing data split by comma
-     * @throws IOException if there was an error reading file
-     */
-    public static ArrayList<String[]> readCsv(Path filePath) throws IOException {
-        String file = FileUtil.readFromFile(filePath);
-        String regex = ",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)";
-        return Arrays.stream(file.split("\n"))
-                .map(s1 -> Arrays.stream(s1.split(regex)).sequential()
-                        .map(StringUtil::clean)
-                        .collect(Collectors.toList()).toArray(new String [0]))
-                .collect(Collectors.toCollection(ArrayList::new));
+    private static void serializeObjectToCsvFile(CsvSerializableAddressBook csvSerializableAddressBook, Path csvFile)
+            throws IOException {
+        FileUtil.writeToFile(csvFile, toCsvString(csvSerializableAddressBook));
     }
 
-    /**
-     * Converts a CSV File to a JSON File
-     * @param constructorOfObjectToDeserialize The constructor for T object
-     * @param csvFilePath path of CSV file
-     * @param jsonFilePath path of JSON file
-     * @param <T> The generic type to create an instance of
-     * @throws IOException if there was an error reading file
-     */
-    public static <T> void csvToJson(Constructor<T> constructorOfObjectToDeserialize,
-                                     Path csvFilePath, Path jsonFilePath) throws IOException {
-        saveToJson(csvToJsonString(constructorOfObjectToDeserialize, csvFilePath), jsonFilePath);
-    }
-
-    /**
-     * Saves to JSON File
-     * @param jsonString String of JSON Object
-     * @param targetFilePath path of JSON file
-     * @throws IOException if there was an error reading file
-     */
-    private static void saveToJson(String jsonString, Path targetFilePath) throws IOException {
-        FileUtil.writeToFile(targetFilePath, jsonString);
+    private static String toCsvString(CsvSerializableAddressBook csvSerializableAddressBook) throws IOException {
+        csvMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
+        CsvSchema csvSchema = csvMapper.schemaFor(CsvAdaptedPerson.class).withHeader();
+        StringWriter stringWriter = new StringWriter();
+        SequenceWriter sequenceWriter = csvMapper
+                .writer(csvSchema)
+                .writeValues(stringWriter);
+        for (CsvAdaptedPerson person : csvSerializableAddressBook.getPersons()) {
+            sequenceWriter.write(person);
+        }
+        String csvString = stringWriter.toString();
+        sequenceWriter.close();
+        stringWriter.close();
+        return csvString;
     }
 }

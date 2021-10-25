@@ -11,20 +11,20 @@ import java.util.logging.Logger;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.CsvUtil;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * A class to access AddressBook data stored as a json file on the hard disk.
+ * A class to access AddressBook data stored as a csv file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class CsvAddressBookStorage implements AddressBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(CsvAddressBookStorage.class);
 
     private final Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public CsvAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
@@ -46,14 +46,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (jsonAddressBook.isEmpty()) {
+        Optional<CsvSerializableAddressBook> csvSerializableAddressBook = CsvUtil.readCsvFile(filePath);
+
+        if (csvSerializableAddressBook.isEmpty()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(csvSerializableAddressBook.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -71,26 +71,14 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      */
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        saveAddressBook(addressBook, filePath, false);
-    }
-
-    /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}, but checks if the save is an export.
-     *
-     * @param addressBook Address Book to save.
-     * @param filePath Location of where to save to. Cannot be null.
-     * @param isExport Whether the save is an export or regular saving of CohortConnect's data
-     * @throws IOException If there is an error while saving to file.
-     */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath, boolean isExport) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
-        if (isExport && FileUtil.isFileExists(filePath)) {
+        if (FileUtil.isFileExists(filePath)) {
             throw new FileAlreadyExistsException("File exists");
         }
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        CsvUtil.saveCsvFile(new CsvSerializableAddressBook(addressBook), filePath);
     }
 }

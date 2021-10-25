@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.ExportCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -26,13 +28,16 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         }
 
         String[] fileNameKeywords = trimmedArgs.split("\\s+");
-
         if (fileNameKeywords.length > 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
         }
 
         String fileName = fileNameKeywords[0];
+        if (!(StringUtil.isJson(fileName) || StringUtil.isCsv(fileName))) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE));
+        }
 
         return new ExportCommand(fileName);
     }
