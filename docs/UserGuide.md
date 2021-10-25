@@ -362,15 +362,27 @@ Examples:
 * `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Clearing all entries from student list : `clearStudents`
+### Clearing all entries from student list: `clearStudents`
 
 Clears all entries from the student list.
 
 Format: `clearStudents`
 
-### Clearing all entries from task list : `clearTasks`
+### Clearing all entries from task list: `clearGroups`
+
+Clears all entries from the group list.
+
+Format: `clearGroups`
+
+### Clearing all entries from task list: `clearTasks`
 
 Clears all entries from the task list.
+
+Format: `clearTasks`
+
+### Clearing all entries from tApp: `clear`
+
+Clears all entries from tApp.
 
 Format: `clear`
 

@@ -739,6 +739,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Similar to UC17 (Find student by name), except we are finding groups.
 
+**Use case: UC19 - Clear group list**
+
+Similar to UC12 (Clear student list), except we are clearing the group list.
+
+**Use case: UC20 - Clear task list**
+
+Similar to UC12 (Clear student list), except we are clearing the task list.
+
+**Use case: UC21 - Clear all entries in tApp**
+
+Similar to UC12 (Clear student list), except we are clearing the whole address book.
+
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 * Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.

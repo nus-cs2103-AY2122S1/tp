@@ -8,10 +8,10 @@ import seedu.address.model.Model;
 /**
  * Clears the address book.
  */
-public class ClearStudentsCommand extends Command {
+public class ClearGroupsCommand extends Command {
 
-    public static final String COMMAND_WORD = "clearStudents";
-    public static final String MESSAGE_SUCCESS = "Student list has been cleared!";
+    public static final String COMMAND_WORD = "clearGroups";
+    public static final String MESSAGE_SUCCESS = "Group list has been cleared!";
 
     @Override
     public CommandResult execute(Model model) {
@@ -19,7 +19,8 @@ public class ClearStudentsCommand extends Command {
 
         AddressBook newAddressBook = new AddressBook();
         newAddressBook.setTasks(model.getFilteredTaskList());
-        newAddressBook.clearStudentsInGroups(model.getFilteredGroupList());
+        newAddressBook.setStudents(model.getFilteredStudentList());
+        newAddressBook.clearGroupFromStudents(model.getFilteredStudentList());
 
         model.setAddressBook(newAddressBook);
         return new CommandResult(MESSAGE_SUCCESS);
