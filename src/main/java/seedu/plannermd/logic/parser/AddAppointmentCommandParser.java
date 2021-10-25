@@ -14,6 +14,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.stream.Stream;
 
 import seedu.plannermd.commons.core.index.Index;
@@ -26,9 +27,9 @@ import seedu.plannermd.model.person.Remark;
 
 public class AddAppointmentCommandParser implements Parser<AddAppointmentCommand> {
     private final DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-            .appendPattern("d/M/yyyy")
+            .appendPattern("d/M/uuuu")
             .appendPattern(" HH:mm")
-            .toFormatter();
+            .toFormatter().withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddAppointmentCommand

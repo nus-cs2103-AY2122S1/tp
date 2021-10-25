@@ -72,7 +72,6 @@ public class AddAppointmentCommandIntegrationTest {
         }
         for (Doctor dr : model.getPlannerMd().getDoctorList()) {
             if (dr.equals(doctor)) {
-                System.out.println(dr);
                 doctorIndex = Index.fromZeroBased(model.getPlannerMd().getDoctorList().indexOf(dr));
                 break;
             }
