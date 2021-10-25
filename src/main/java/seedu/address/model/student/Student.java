@@ -141,7 +141,7 @@ public class Student {
         List<StudentMark> studentMarks = getMarks();
         if (!studentMarks.isEmpty()) {
             builder.append("; Marks: ");
-            studentMarks.forEach(builder::append);
+            studentMarks.forEach(mark -> builder.append(mark).append(" "));
         }
         return builder.toString();
     }

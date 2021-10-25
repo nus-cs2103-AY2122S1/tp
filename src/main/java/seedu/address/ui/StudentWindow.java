@@ -45,6 +45,9 @@ public class StudentWindow extends UiPart<Stage> {
     @FXML
     private FlowPane tags;
 
+    @FXML
+    private FlowPane marks;
+
     /**
      * Creates a new StudentWindow.
      *
@@ -91,6 +94,8 @@ public class StudentWindow extends UiPart<Stage> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        student.getMarks()
+                .forEach(mark -> marks.getChildren().add(new Label(mark.name() + " ")));
         getRoot().show();
         getRoot().centerOnScreen();
     }

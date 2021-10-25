@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root title="Student View" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Student View" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <scene>
         <Scene>
             <stylesheets>
@@ -39,6 +39,7 @@
                         <Label fx:id="phone" styleClass="student_view_small_label" />
                         <Label fx:id="address" styleClass="student_view_small_label" />
                         <Label fx:id="email" styleClass="student_view_small_label" />
+                  <FlowPane fx:id="marks" hgap="5" layoutX="26.0" layoutY="99.0" />
                     </VBox>
                <rowConstraints>
                   <RowConstraints />
