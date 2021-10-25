@@ -128,15 +128,15 @@ public class ProfileWindow extends UiPart<Stage> {
             return false;
         }
 
-        if (!Github.isValidGithub(userGithub)) {
-            logger.info("Invalid GitHub Username Detected");
-            message.setText(INVALID_GITHUB_MESSAGE);
-            return false;
-        }
-
         if (!Telegram.isValidTelegram(userTelegram)) {
             logger.info("Invalid Telegram Handle Detected");
             message.setText(INVALID_TELEGRAM_MESSAGE);
+            return false;
+        }
+
+        if (!Github.isValidGithub(userGithub)) {
+            logger.info("Invalid GitHub Username Detected");
+            message.setText(INVALID_GITHUB_MESSAGE);
             return false;
         }
 
