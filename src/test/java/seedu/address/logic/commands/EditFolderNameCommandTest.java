@@ -38,7 +38,7 @@ public class EditFolderNameCommandTest {
     }
 
     @Test
-    public void execute_renameExistingFolderToNewFolder_success() throws CommandException {
+    public void execute_renameExistingFolderToNewFolder_success() {
         model.addFolder(TestFolder1);
         model.addFolder(TestFolder2);
         EditFolderNameCommand editFolderNameCommand = new EditFolderNameCommand(TestFolder1,

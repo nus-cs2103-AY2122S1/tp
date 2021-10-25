@@ -13,6 +13,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateFolderCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteFolderCommand;
+import seedu.address.logic.commands.DeletePersonFromFolderCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditFolderNameCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -59,7 +60,11 @@ public class AddressBookParser {
             return new EditCommandParser().parse(arguments);
         } else if (userInput.startsWith(ClearCommand.COMMAND_WORD)) {
             return new ClearCommand();
-        } else if (userInput.startsWith(DeleteCommand.COMMAND_WORD)) {
+        } else if (userInput.startsWith(DeleteCommand.COMMAND_WORD)
+                || userInput.startsWith(DeletePersonFromFolderCommand.COMMAND_WORD)) {
+            if (arguments.contains(DeletePersonFromFolderCommand.COMMAND_IDENTIFIER)) {
+                return new DeletePersonFromFolderCommandParser().parse(arguments);
+            }
             return new DeleteCommandParser().parse(arguments);
         } else if (userInput.startsWith(FindFoldersCommand.COMMAND_WORD)) {
             return new FindFoldersCommandParser().parse(arguments);

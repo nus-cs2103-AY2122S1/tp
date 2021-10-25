@@ -9,6 +9,8 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
+import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.folder.exceptions.DuplicateFolderException;
 import seedu.address.model.folder.exceptions.DuplicatePersonInFolderException;
 import seedu.address.model.folder.exceptions.FolderNotFoundException;
@@ -121,6 +123,28 @@ public class UniqueFolderList implements Iterable<Folder> {
 
         editedFolder.setAll(internalList.get(index));
         internalList.set(index, editedFolder);
+    }
+
+    /**
+     * Deletes contact from the specified folder.
+     * @param targetIndex index of contact in folder.
+     * @param targetFolder folder in which contact is removed from.
+     * @throws ContactIndexOutOfBoundsInFolderException if index of
+     * contact specified is invalid.
+     */
+    public void removeFromFolderIndex(
+            Index targetIndex,
+            Folder targetFolder) throws ContactIndexOutOfBoundsInFolderException {
+        int indexOfFolder = internalList.indexOf(targetFolder);
+
+        if (indexOfFolder == -1) {
+            throw new FolderNotFoundException();
+        }
+
+        Folder actualFolder = internalList.get(indexOfFolder);
+        actualFolder.removePersonOfIndex(targetIndex);
+        targetFolder.setAll(actualFolder);
+        internalList.set(indexOfFolder, targetFolder);
     }
 
     /**

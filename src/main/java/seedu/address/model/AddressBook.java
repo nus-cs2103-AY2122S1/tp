@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.index.Index;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.folder.UniqueFolderList;
+import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -179,6 +181,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         folders.addContact(target, folderName);
     }
 
+    /**
+     * Removes contact of specified index.
+     * Contact index and folder must exist.
+     * @param targetIndex index of contact to be removed.
+     * @param targetFolder folder from which contact is to be removed.
+     */
+    public void deletePersonFromIndex(
+            Index targetIndex,
+            Folder targetFolder) throws ContactIndexOutOfBoundsInFolderException {
+        folders.removeFromFolderIndex(targetIndex, targetFolder);
+    }
 
     /**
      * Deletes a folder in the address book.

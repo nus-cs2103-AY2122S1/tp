@@ -11,8 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
+import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.person.Person;
 
 /**
@@ -142,6 +144,14 @@ public class ModelManager implements Model {
     public boolean hasFolder(Folder folder) {
         requireNonNull(folder);
         return addressBook.hasFolder(folder);
+    }
+
+    @Override
+    public void deletePersonFromFolder(
+            Index targetIndex,
+            Folder targetFolder) throws ContactIndexOutOfBoundsInFolderException {
+        requireAllNonNull(targetIndex, targetFolder);
+        addressBook.deletePersonFromIndex(targetIndex, targetFolder);
     }
 
     @Override
