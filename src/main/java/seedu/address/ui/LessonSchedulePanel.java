@@ -1,8 +1,8 @@
 package seedu.address.ui;
 
-import java.util.List;
 import java.util.logging.Logger;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -23,9 +23,9 @@ public class LessonSchedulePanel extends UiPart<Region> {
     /**
      * Creates a {@code LessonSchedulePanel} with the given {@code List}.
      */
-    public LessonSchedulePanel(List<LessonWithAttendees> lessonWithAttendees) {
+    public LessonSchedulePanel(ObservableList<LessonWithAttendees> lessonWithAttendees) {
         super(FXML);
-        lessonScheduleView.getItems().addAll(lessonWithAttendees);
+        lessonScheduleView.setItems(lessonWithAttendees);
 
         //lessonScheduleView.setItems(lessonWithAttendees);
         lessonScheduleView.setCellFactory(listView -> new LessonListCellView());

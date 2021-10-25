@@ -4,17 +4,22 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.group.Group;
+import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.task.Task;
 
 /**
@@ -28,6 +33,10 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Task> filteredTasks;
     private final FilteredList<Group> filteredGroups;
+
+    private final ObservableList<LessonWithAttendees> lessonWithAttendees;
+    private final ObjectProperty<PersonWithDetails> personWithDetails;
+    private final ObjectProperty<ViewingType> viewType;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +52,9 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         filteredTasks = new FilteredList<>(this.addressBook.getTaskList());
         filteredGroups = new FilteredList<>(this.addressBook.getGroupList());
+        lessonWithAttendees = FXCollections.observableArrayList(this.addressBook.getSortedLessonsWithAttendees());
+        viewType = new SimpleObjectProperty<>(ViewingType.SCHEDULE);
+        personWithDetails = new SimpleObjectProperty<>(null);
     }
 
     public ModelManager() {
@@ -219,9 +231,46 @@ public class ModelManager implements Model {
         filteredGroups.setPredicate(predicate);
     }
 
+    //=========== mapper accessors =========================================================================
+
     @Override
-    public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
-        return addressBook.getSortedLessonsWithAttendees();
+    public UniqueIdMapper<Person> getPersonMapper() {
+        return addressBook.getPersonMapper();
+    }
+
+    @Override
+    public UniqueIdMapper<Group> getGroupMapper() {
+        return addressBook.getGroupMapper();
+    }
+
+    @Override
+    public ObservableList<LessonWithAttendees> getSortedLessonsWithAttendees() {
+        return lessonWithAttendees;
+    }
+
+    @Override
+    public void updateLessonWithAttendeesList() {
+        lessonWithAttendees.setAll(addressBook.getSortedLessonsWithAttendees());
+    }
+
+    @Override
+    public ObservableValue<ViewingType> getViewingType() {
+        return viewType;
+    }
+
+    @Override
+    public void setViewingType(ViewingType type) {
+        viewType.set(type);
+    }
+
+    @Override
+    public ObservableValue<PersonWithDetails> getViewingPersonWithDetails() {
+        return personWithDetails;
+    }
+
+    @Override
+    public void setPersonToView(Person person) {
+        personWithDetails.set(addressBook.getPersonWithDetails(person));
     }
 
     @Override

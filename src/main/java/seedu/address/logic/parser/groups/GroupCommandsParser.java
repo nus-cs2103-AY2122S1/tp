@@ -40,6 +40,12 @@ public class GroupCommandsParser {
         case AddGroupCommandParser.COMMAND_WORD:
             return new AddGroupCommandParser().parse(arguments);
 
+        case GroupAddLessonParser.COMMAND_WORD:
+            return new GroupAddLessonParser().parse(arguments);
+
+        case GroupRemoveLessonParser.COMMAND_WORD:
+            return new GroupRemoveLessonParser().parse(arguments);
+
         case DeleteGroupCommand.COMMAND_WORD:
             return new DeleteGroupCommandParser().parse(arguments);
 
