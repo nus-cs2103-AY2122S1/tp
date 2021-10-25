@@ -27,8 +27,6 @@ public class ViewStudentCommandTest {
 
     @Test
     public void execute_validStudent_success() {
-        ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(ALICE.getName());
-        expectedModel.updateFilteredStudentList(predicate);
         String successMsg = String.format("Viewing details of %1$s", ALICE.getName());
         assertCommandSuccess(new ViewStudentCommand(ALICE.getName()), model, successMsg, expectedModel);
     }
@@ -36,6 +34,8 @@ public class ViewStudentCommandTest {
     @Test
     public void execute_invalidStudent_throwsCommandException() {
         Name nonExistentStudentName = new Name("abcde");
+        ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(nonExistentStudentName);
+        expectedModel.updateFilteredStudentList(predicate);
         String expectedMsg = String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, nonExistentStudentName);
         assertCommandSuccess(new ViewStudentCommand(nonExistentStudentName), model, expectedMsg, expectedModel);
     }

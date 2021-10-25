@@ -31,12 +31,13 @@ public class ViewStudentCommand extends Command {
         requireNonNull(model);
         ContainsStudentNamePredicate predicate = new ContainsStudentNamePredicate(name);
         model.updateFilteredStudentList(predicate);
-        Student studentToView = model.getFilteredStudentList().get(0);
 
         if (model.getFilteredStudentList().size() == 0) {
+            model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
             return new CommandResult(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, name));
         }
 
+        Student studentToView = model.getFilteredStudentList().get(0);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
         return new CommandResult(String.format(MESSAGE_VIEW_STUDENT_SUCCESS, name),
             false, false, studentToView);
