@@ -65,6 +65,10 @@ title: User Guide
 Switches to another specified tab.
 
 Format: ```contacts or tasks or help```
+
+Change tabs using shortcuts to save time:
+
+Format ```c or t or h```
 <br />
 <br />
 
@@ -304,9 +308,9 @@ Format | Example
 
 Action | Format
 --------|------------------
-**Contacts** | `contacts`
-**Tasks** | `tasks`
-**Help** | `help`
+**Contacts** | `contacts` or `c`
+**Tasks** | `tasks` or `t`
+**Help** | `help` or `h`
 **Exit** | `exit`
 
 ### Contact Tab
