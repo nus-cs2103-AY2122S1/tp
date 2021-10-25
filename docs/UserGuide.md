@@ -59,6 +59,17 @@ Some example commands you can try:
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+* Date inputs should follow one of the formats below
+
+  Format | Example
+  --------|------------------
+  **dd mmmm yyyy** | `08 November 2001`
+  **dd mmm yyyy** | `08 Nov 2021`
+  **yyyy mm dd** | `2021 11 08`
+  **dd-mm-yyyy** | `08-11-2021`
+  **yyyy/mm/dd** | `2021/11/08`
+  **dd/mm/yyyy** | `08/11/2021`
+
 </div>
 
 ## Person Commands
