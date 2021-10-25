@@ -326,7 +326,7 @@ A task can have Date only or both Date and Time.
 * When both Date and Time are specified in the `edit` command, a task will have both of its Date and Time changed to the specified Date and Time.
 </div>
 
-### Date Formats
+#### Date Formats
 
 Format | Example
 --------|------------------
@@ -336,7 +336,7 @@ Format | Example
 **yyyy-MM-dd** | `2021-10-02`
 **dd MMM yyyy** | `02 Oct 2021`
 
-### Time Formats
+#### Time Formats
 
 Format | Example
 --------|------------------
