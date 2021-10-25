@@ -6,7 +6,13 @@ import static seedu.siasa.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.siasa.logic.commands.*;
+import seedu.siasa.logic.commands.ClearCommand;
+import seedu.siasa.logic.commands.Command;
+import seedu.siasa.logic.commands.DownloadCommand;
+import seedu.siasa.logic.commands.EditCommand;
+import seedu.siasa.logic.commands.ExitCommand;
+import seedu.siasa.logic.commands.FindCommand;
+import seedu.siasa.logic.commands.HelpCommand;
 import seedu.siasa.logic.commands.client.AddClientCommand;
 import seedu.siasa.logic.commands.client.ClearClientPolicyCommand;
 import seedu.siasa.logic.commands.client.DeleteClientCommand;
