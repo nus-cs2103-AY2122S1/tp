@@ -3,7 +3,7 @@ package seedu.programmer.model.student;
 import java.util.function.Predicate;
 
 /**
- * Tests that a {@code Student}'s {@code Name}, {@code ClassId}, {@code StudentId} matches any of the query given.
+ * Tests if a {@code Student}'s fields matches all of the query fields in {@code QueryStudentDescriptor}.
  */
 
 public class StudentDetailContainsQueryPredicate implements Predicate<Student> {

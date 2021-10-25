@@ -304,7 +304,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Displays a popup message at the top-center with respect to the primaryStage.
      *
-     * @param popup Popup object to be displayed on the primaryStage
+     * @param message to be displayed in the popup object on the primaryStage
      */
     private void displayPopup(String message) {
         // We should not need to display an empty popup
