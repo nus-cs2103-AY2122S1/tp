@@ -133,9 +133,10 @@ public class StatsDisplay extends UiPart<Stage> {
         xAxis.setTickLabelFormatter(new NumberAxis.DefaultFormatter(xAxis) {
             @Override
             public String toString(Number object) {
-                return String.format("%1$s:00", object);
+                return Integer.toString(Math.round(object.intValue()));
             }
         });
+
         BarChart<Number, String> tempGenreStats = new BarChart<>(xAxis, yAxis);
         tempGenreStats.getData().add(getBarChartData(genreStats));
         barChart.setData(tempGenreStats.getData());

@@ -111,8 +111,6 @@ public class AnimeListPanel extends UiPart<Region> {
             animeListTabPane.getSelectionModel().select(watchingTab);
         } else if (currentTab.getCurrentTab() == TabOption.TabOptions.FINISHED) {
             animeListTabPane.getSelectionModel().select(finishedTab);
-        } else if (currentTab.getCurrentTab() == TabOption.TabOptions.STATS) {
-            animeListTabPane.getSelectionModel().select(statsTab);
         } else {
             animeListTabPane.getSelectionModel().select(allTab);
         }
