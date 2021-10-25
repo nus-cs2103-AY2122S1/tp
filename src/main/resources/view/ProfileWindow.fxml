@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.Image?>
+<?import java.net.URL?>
+<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+    <icons>
+        <!--
+        // Add icon if have
+        <Image url="@/images/help_icon.png" />
+        -->
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@UserProfile.css" />
+
+            </stylesheets>
+
+            <AnchorPane prefHeight="500" prefWidth="300">
+                <TextField fx:id="name" promptText="Name" style="-fx-background-color: #121212#121212;" />
+                <TextField fx:id="telegram" promptText="Telegram" style="-fx-background-color: #121212#121212;" />
+                <TextField fx:id="github" promptText="GitHub" style="-fx-background-color: #121212#121212;" />
+                <TextField fx:id="phone" promptText="Phone Number" style="-fx-background-color: #121212#121212;" />
+                <TextField fx:id="email" promptText="Email" style="-fx-background-color: #121212#121212;" />
+                <TextField fx:id="address" promptText="Address" style="-fx-background-color: #121212#121212;" />
+                <TextField fx:id="tag" promptText="Tag(s)" style="-fx-background-color: #121212#121212;" />
+                <Button fx:id="submit" onAction="#submit" mnemonicParsing="false" text="Submit" />
+            </AnchorPane>
+        </Scene>
+    </scene>
+</fx:root>
