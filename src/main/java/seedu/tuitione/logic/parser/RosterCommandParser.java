@@ -25,5 +25,5 @@ public class RosterCommandParser implements Parser<RosterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RosterCommand.MESSAGE_USAGE), pe);
         }
     }
-    
+
 }
