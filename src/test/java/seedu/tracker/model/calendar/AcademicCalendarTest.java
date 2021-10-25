@@ -87,20 +87,20 @@ class AcademicCalendarTest {
 
     @Test
     public void compareToTest() {
-        AcademicCalendar academicCalendarY2S1 = new AcademicCalendar(new AcademicYear(2), new Semester(1));
+        AcademicCalendar academicCalendarY1S2 = new AcademicCalendar(new AcademicYear(1), new Semester(2));
         AcademicCalendar academicCalendarY1S1 = new AcademicCalendar(new AcademicYear(1), new Semester(1));
 
         // left < right -> negative
-        int result = academicCalendarY1S1.compareTo(academicCalendarY2S1);
+        int result = academicCalendarY1S1.compareTo(academicCalendarY1S2);
         assertEquals(true, result < 0);
 
         // left > right -> positive
-        result = academicCalendarY2S1.compareTo(academicCalendarY1S1);
+        result = academicCalendarY1S2.compareTo(academicCalendarY1S1);
         assertEquals(true, result > 0);
 
         // left = right -> 0
-        AcademicCalendar anotherAcademicCalendarY2S1 = new AcademicCalendar(new AcademicYear(2), new Semester(1));
-        result = anotherAcademicCalendarY2S1.compareTo(academicCalendarY2S1);
+        AcademicCalendar anotherAcademicCalendarY1S2 = new AcademicCalendar(new AcademicYear(1), new Semester(2));
+        result = anotherAcademicCalendarY1S2.compareTo(academicCalendarY1S2);
         assertEquals(true, result == 0);
     }
 

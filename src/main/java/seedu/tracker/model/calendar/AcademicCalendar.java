@@ -94,7 +94,7 @@ public class AcademicCalendar implements Comparable<AcademicCalendar> {
     @Override
     public int compareTo(AcademicCalendar academicCalendar) {
         if (this.year.compareTo(academicCalendar.year) == 0) {
-            return academicCalendar.semester.compareTo(this.semester);
+            return this.semester.compareTo(academicCalendar.semester);
         }
         return this.year.compareTo(academicCalendar.year);
     }
