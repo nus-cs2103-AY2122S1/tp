@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.modulelesson.DeleteModuleLessonCommand;
 import seedu.address.model.modulelesson.ModuleCodeContainsKeywordsPredicate;
 
+import java.util.Collections;
+
 public class DeleteModuleLessonCommandParserTest {
 
     private DeleteModuleLessonCommandParser parser = new DeleteModuleLessonCommandParser();
@@ -30,7 +32,7 @@ public class DeleteModuleLessonCommandParserTest {
     public void parse_validModuleCode_returnsDeleteModuleLessonCommand() {
         String userInput = String.format(" m/%s", VALID_MODULE_CODE_CS2040);
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(
-                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2040));
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(VALID_MODULE_CODE_CS2040)));
 
         assertParseSuccess(parser, userInput, deleteModuleLessonCommand);
     }
