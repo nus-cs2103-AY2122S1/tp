@@ -1,27 +1,47 @@
+# ContactSh - User Guide
+
+![Logo](images/ContactSh_Ug_logo.png)
+
+ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, ContactSH can get your contact management tasks done faster than traditional GUI apps.
+
+## Table of Contents
+
+[Quick Start](#quick-start)<br>
+[Features](#features)
+- [Give a list of instructions : `help`](#give-a-list-of-instructions-help)
+- [Adding a person: `add`](#adding-a-person-add)
+- [Listing all persons: `list`](#listing-all-persons-list)
+- [Editing a person: `edit`](#editing-a-person-edit)
+- [Locating persons by name: `find`](#locating-persons-by-name-find)
+- [Deleting a person: `delete`](#deleting-a-person-delete)
+- [Add task:](#add-task)
+- [Delete task:](#delete-task)
+- [Edit task:](#edit-task)
+- [Mark task as done:](#mark-task-as-done)
+- [Clearing all entries: `clear`](#clearing-all-entries-clear)
+- [Viewing tasks: `cat`](#viewing-tasks-cat)
+- [Sorting persons by name: `sort`](#sorting-persons-by-name-sort)
+- [Saving the data](#saving-the-data)
+- [Editing the data file](#editing-the-data-file)
+- [Archiving data files `[coming in v2.0]`](#archiving-data-files-coming-in-v20)
+
+[FAQ](#faq)<br>
+[Command Summary](#command-summary)
+
 ---
-layout: page
-title: User Guide
----
-
-ContactSH is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, contactSH can get your contact management tasks done faster than traditional GUI apps.
-
-* Table of Contents
-{:toc}
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `contactSH.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-1/tp/releases).
+2. Download the latest `ContactSH.jar` from [here](https://github.com/AY2122S1-CS2103T-W10-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
+3. Copy the file to the folder you want to use as the _home folder_ for your ContactSH.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all contacts.
@@ -32,11 +52,9 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
    * **`clear`** : Deletes all contacts.
 
-   * **`exit`** : Exits the app.
+6. Refer to the [Features](#features) below for details of each command.
 
-1. Refer to the [Features](#features) below for details of each command.
-
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Features
 
@@ -59,18 +77,18 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `-p 12341234 -p 56785678`, only `-p 56785678` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+- Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
-### Give a list of instructions : `help`
+### Give a list of instructions: `help`
 
 Shows the user a list of instructions that can be used to navigate the app.
 
 Format: `help [COMMAND_NAME]`
 
-* If no command-name is entered, the user will see the list of all the keywords for each command
+- If no command-name is entered, the user will see the list of all the keywords for each command
 
 * If the user enters a valid command-name, the user will see the full details of that command, which includes the format and taskName of the command.
 
@@ -84,7 +102,6 @@ Sort persons by the alphabetical order of their name
 Format: sort [-r]
 -r returns a sorted list in reverse order
 ```
-
 
 ### Adding a person: `add`
 
@@ -100,13 +117,13 @@ Examples:
 * `add -n John Doe -p 98765432 -e johnd@example.com -a John street, block 123, #01-01`
 * `add -n Betsy Crowe -l friend -e betsycrowe@example.com -a Newgate Prison -p 1234567 -d Bald -l criminal`
 
-### Listing all persons : `list`
+### Listing all persons: `list`
 
 Shows a list of all persons in ContactSH.
 
 Format: `list`
 
-### Editing a person : `edit`
+### Editing a person: `edit`
 
 Edits an existing person in ContactSH.
 
@@ -129,31 +146,33 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+- The search is case-insensitive. e.g `hans` will match `Hans`
+- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+- Only the name is searched.
+- Only full words will be matched e.g. `Han` will not match `Hans`
+- Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+
+- `find John` returns `john` and `John Doe`
+- `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a person : `delete`
+### Deleting a person: `delete`
 
 Deletes the specified person from ContactSH.
 
 Format: `delete INDEX`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+- Deletes the person at the specified `INDEX`.
+- The index refers to the index number shown in the displayed person list.
+- The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in ContactSH.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+- `list` followed by `delete 2` deletes the 2nd person in ContactSH.
+- `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Add task:
 
@@ -164,7 +183,6 @@ Format: `addtask INDEX -tn TASKNAME [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_AD
 * Adds a task to the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * `TASK_DATE` should follow the format of `YYYY-MM-DD`.
 * `TASK_TIME` should follow the format of `HH:MM`.
-
 
 Examples:
 * `addtask 1 -tn call for meeting -td 2021-12-03 -tt 14:30` Adds the task `call for meeting` with date `2021-12-03` and time `14:30` to the list of task of the person in 1st person.
@@ -214,33 +232,28 @@ Format: `donetask INDEX -ti TASK_INDEX…​`
 Examples:
 * `donetask 4 -ti 1 -ti 5` Marks the 1st and 5th task of the 4th person in the list as done.
 
-
-### Clearing all entries : `clear`
+### Clearing all entries: `clear`
 
 Clears all entries from ContactSH.
 
-Format: `clear`
+### Viewing tasks: `cat`
 
-### Exiting the program : `exit`
+1. Shows the user a list of tasks that has been attached to a specific person.
 
-Exits the program.
+   Format: `cat INDEX`
 
-Format: `exit`
+   * Displays the list of tasks attached to the person at the specified `INDEX`.
+   * The index refers to the index number shown in the displayed person list.
+   * The index **must be a positive integer** 1, 2, 3, ...
 
-### Viewing list of tasks of a person: `viewtask`
+   Examples:
 
-Shows the user a list of tasks that has been attached to a specific person.
+   * `list` followed by delete 2 deletes the 2nd person in the address book.
+   * `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`command. 
 
-Format: `viewtask INDEX`
+2. Shows the user the task list of every single person in ContactSh.
 
-* Displays the list of tasks attached to the person at the specified`INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, ...
-
-Examples:
-* `list` followed by delete 2 deletes the 2nd person in the address book.
-* `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`
-command.
+   Format: `cat -A`
 
 ### Sorting persons by name: `sort`
 
@@ -253,11 +266,11 @@ Format: `sort [-r]`
 
 ### Saving the data
 
-ContactSH data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+- ContactSH data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-ContactSH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+- ContactSH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, ContactSH will discard all data and start with an empty data file at the next run.
@@ -267,14 +280,14 @@ If your changes to the data file makes its format invalid, ContactSH will discar
 
 _Details coming soon ..._
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ContactSH home folder.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## Command summary
 
@@ -292,3 +305,4 @@ Action | Format, Examples
 **Delete Task** | `deltask INDEX -ti TASK_INDEX` <br> e.g., `deletetask 2 -ti 2 -ti 3`
 **Edit Task** | `edittask INDEX -ti TASK_INDEX [-tn TASK_NAME] [-td TASK_DATE] [-tt TASK_TIME] [-ta TASK_ADDRESS]…​` <br> e.g., `edittask 1 -ti 2 -tn Internship Interview -tt 15:45 -ti 4 -td 2022-09-20`
 **Done Task** | `donetask INDEX -ti TASK_INDEX…​` <br> e.g., `donetask 3 -ti 2 -ti 5`
+**View Task** | `cat INDEX`<br>e.g.,`cat 4`<br><br>`cat -A`

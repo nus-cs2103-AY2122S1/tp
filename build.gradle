@@ -72,6 +72,10 @@ dependencies {
 
 shadowJar {
     archiveName = 'ContactSh.jar'
+
+    manifest {
+        attributes 'Main-Class': 'seedu.address.Main'
+    }
 }
 
 run {
