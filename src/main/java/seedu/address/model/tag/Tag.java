@@ -24,13 +24,13 @@ public class Tag {
     /**
      * Constructs a {@code Tag}.
      *
-     * @param tagName A valid tag name.
+     * @param tagDescription A valid tag description.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName));
-        this.type = parseTagType(tagName);
-        this.tagName = parseTagName(type, tagName);
+    public Tag(String tagDescription) {
+        requireNonNull(tagDescription);
+        checkArgument(isValidTagName(tagDescription));
+        this.type = parseTagType(tagDescription);
+        this.tagName = parseTagName(type, tagDescription);
     }
 
     /**
@@ -61,11 +61,11 @@ public class Tag {
     }
 
     /**
-     *
-     * @param tagName
-     * @return
+     * Parses the tag type based on the given tag description.
+     * @param tagDescription A valid tag description.
+     * @return Type of tag represented by tag description.
      */
-    public Type parseTagType(String tagName) {
+    public Type parseTagType(String tagDescription) {
         assert(!tagName.isEmpty());
         if (tagName.indexOf("event-") == 0) {
             return Type.EVENT;
@@ -77,12 +77,12 @@ public class Tag {
     }
 
     /**
-     *
-     * @param tagName
-     * @param tagType
-     * @return
+     * Parses the tag name based on the given tag type and description.
+     * @param tagDescription A valid tag description.
+     * @param tagType Type of tag.
+     * @return Name of tag represented by tag description.
      */
-    public String parseTagName(Type tagType, String tagName) {
+    public String parseTagName(Type tagType, String tagDescription) {
         if (tagType == Type.GENERAL) {
             return tagName;
         } else if (tagType == Type.EVENT) {
