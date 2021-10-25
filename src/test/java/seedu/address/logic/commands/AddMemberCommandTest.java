@@ -142,7 +142,7 @@ public class AddMemberCommandTest {
         }
 
         @Override
-        public void split(Predicate<Person> person) {
+        public int split(Predicate<Person> person) {
             throw new AssertionError("This method should not be called.");
         }
 
