@@ -48,7 +48,7 @@ public class WelcomeWindow extends UiPart<Stage> {
      */
     public void start(MainWindow mainWindow) {
         // To show the welcome window
-        logger.fine("Showing welcome window (App has started)");
+        logger.fine("Showing Welcome Window (App has started)");
         getRoot().initStyle(StageStyle.UNDECORATED);
         getRoot().show();
         getRoot().centerOnScreen();
