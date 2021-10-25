@@ -1,0 +1,66 @@
+{
+  "persons" : [ {
+    "name" : "Adam Oh",
+    "telegram" : "adam_oh",
+    "github" : "moreTriangles",
+    "phone" : "91031282",
+    "email" : "adam@example.com",
+    "address" : "Blk 436 Serangoon Gardens Street 26, #16-43",
+    "tagged" : [ "friends" ],
+    "isFavourite" : false
+  }, {
+    "name" : "Aishwarya Radhakrishnan Nair",
+    "telegram" : "aishwarya",
+    "github" : "aishh12",
+    "phone" : "87438807",
+    "email" : "aishwarya@example.com",
+    "address" : "Blk 30 Geylang Street 29, #06-40",
+    "tagged" : [ "friends" ],
+    "isFavourite" : false
+  }, {
+    "name" : "Atin Sakkeer Hussain",
+    "telegram" : "crypto_code",
+    "github" : "crypto-code",
+    "phone" : "99272758",
+    "email" : "atinsakkeer@example.com",
+    "address" : "Blk 30 Lorong 3 Serangoon Gardens, #07-18",
+    "tagged" : [ "colleagues", "friends" ],
+    "isFavourite" : false
+  }, {
+    "name" : "Cheong Yee Ming",
+    "telegram" : "yee_ming",
+    "github" : "CheongYeeMing",
+    "phone" : "93210283",
+    "email" : "yeeming@example.com",
+    "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
+    "tagged" : [ "neighbours" ],
+    "isFavourite" : false
+  }, {
+    "name" : "Damith C. Rajapakse",
+    "telegram" : "damith_c",
+    "github" : "damithc",
+    "phone" : "93432011",
+    "email" : "damith@example.com",
+    "address" : "Blk 48 Tampines Street 20, #10-32",
+    "tagged" : [ "colleagues" ],
+    "isFavourite" : true
+  }, {
+    "name" : "Jai Lulla",
+    "telegram" : "jai_lulla",
+    "github" : "Jai2501",
+    "phone" : "92492021",
+    "email" : "jai@example.com",
+    "address" : "Blk 47 Tampines Street 20, #17-35",
+    "tagged" : [ "classmates" ],
+    "isFavourite" : false
+  }, {
+    "name" : "Siraj Raval",
+    "telegram" : "siraj_r",
+    "github" : "llSourcell",
+    "phone" : "92624417",
+    "email" : "siraj@example.com",
+    "address" : "Blk 45 Aljunied Street 85, #11-31",
+    "tagged" : [ "colleagues" ],
+    "isFavourite" : true
+  } ]
+}

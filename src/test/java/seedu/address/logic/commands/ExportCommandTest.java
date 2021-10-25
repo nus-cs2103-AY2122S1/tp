@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_CSV;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -46,12 +47,12 @@ public class ExportCommandTest {
     }
 
     /**
-     * Export command creates a file when there is no existing file with the given name.
+     * Tests if ExportCommand creates a new JSON file.
      * Test file is deleted after creation.
      * Test occurs in src/test/data/ExportImportCommandTest/EmptyFolder.
      */
     @Test
-    public void execute_fileName_fileCreated() {
+    public void execute_fileNameJson_fileCreated() {
         String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, VALID_FILENAME_JSON);
 
         ExportCommand exportCommand = new ExportCommand(PATH_EMPTY_FOLDER, VALID_FILENAME_JSON);
@@ -64,8 +65,26 @@ public class ExportCommandTest {
     }
 
     /**
+     * Tests if ExportCommand creates a new CSV file.
+     * Test file is deleted after creation.
+     * Test occurs in src/test/data/ExportImportCommandTest/EmptyFolder.
+     */
+    @Test
+    public void execute_fileNameCsv_fileCreated() {
+        String expectedMessage = String.format(ExportCommand.MESSAGE_EXPORT_SUCCESS, VALID_FILENAME_CSV);
+
+        ExportCommand exportCommand = new ExportCommand(PATH_EMPTY_FOLDER, VALID_FILENAME_CSV);
+        assertCommandSuccess(exportCommand, model, expectedMessage, expectedModel);
+        try {
+            FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_CSV));
+        } catch (IOException ioe) {
+            System.out.println("Error deleting ImportNewPerson.csv");
+        }
+    }
+
+    /**
      * Export command fails when there is an existing file with the given name.
-     * Test occurs in src/test/data/ExportImportCommandTest/FolderWithJson.
+     * Test occurs in src/test/data/ExportImportCommandTest/TestFiles.
      */
     @Test
     public void execute_fileName_fileExists() {

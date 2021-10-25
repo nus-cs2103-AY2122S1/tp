@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_CSV;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FILENAME_JSON;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -46,14 +47,27 @@ public class ImportCommandTest {
 
     /**
      * Imports the JSON file with the filename provided.
-     * Test occurs in src/test/data/ExportImportCommandTest/FolderWithJson.
+     * Test occurs in src/test/data/ExportImportCommandTest/TestFiles.
      */
     @Test
-    public void execute_fileName_importSuccess() {
+    public void execute_fileNameJson_importSuccess() {
         Person newPerson = new PersonBuilder().build();
         expectedModel.addPerson(newPerson);
         ImportCommand importNewPerson = new ImportCommand(PATH_FOLDER_WITH_JSON, VALID_FILENAME_JSON);
         String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, VALID_FILENAME_JSON);
+        assertCommandSuccess(importNewPerson, model, expectedMessage, expectedModel);
+    }
+
+    /**
+     * Imports the CSV file with the filename provided.
+     * Test occurs in src/test/data/ExportImportCommandTest/TestFiles.
+     */
+    @Test
+    public void execute_fileNameCsv_importSuccess() {
+        Person newPerson = new PersonBuilder().build();
+        expectedModel.addPerson(newPerson);
+        ImportCommand importNewPerson = new ImportCommand(PATH_FOLDER_WITH_JSON, VALID_FILENAME_CSV);
+        String expectedMessage = String.format(ImportCommand.MESSAGE_IMPORT_SUCCESS, VALID_FILENAME_CSV);
         assertCommandSuccess(importNewPerson, model, expectedMessage, expectedModel);
     }
 
