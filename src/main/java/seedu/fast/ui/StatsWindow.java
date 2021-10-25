@@ -1,7 +1,5 @@
 package seedu.fast.ui;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Logger;
 
 import javafx.beans.binding.Bindings;
@@ -14,6 +12,8 @@ import seedu.fast.model.Fast;
 import seedu.fast.model.ReadOnlyFast;
 import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
+import seedu.fast.ui.StatsWindowData.InvestmentPlanData;
+import seedu.fast.ui.StatsWindowData.PriorityData;
 
 /**
  * Controller for a stats page
@@ -68,8 +68,6 @@ public class StatsWindow extends UiPart<Stage> {
         investmentPlanPieChart.setLegendVisible(false);
     }
 
-
-
     /**
      * Creates a new HelpWindow.
      */
@@ -103,6 +101,18 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
     /**
+     * Focuses on the stats window.
+     */
+    public void focus() {
+        assert getRoot() != null : "StatsWindow is not initialised";
+        populatePriorityPieChart();
+        addCountsToPieChart(priorityPieChart);
+        populateInvestmentPlanPieChart();
+        addCountsToPieChart(investmentPlanPieChart);
+        getRoot().requestFocus();
+    }
+
+    /**
      * Returns true if the stats window is currently being shown.
      */
     public boolean isShowing() {
@@ -116,49 +126,27 @@ public class StatsWindow extends UiPart<Stage> {
         getRoot().hide();
     }
 
+
     /**
-     * Adds the data from Fast into the PieChart.
+     * Adds the priority data from Fast and analysis of data into the PieChart.
      */
     public void populatePriorityPieChart() {
         priorityPieChart.getData().clear();  //Ensure that PieChart is blank.
-
-        // Gets the respective counts
-        int highPriorityCount = this.fast.getHighPriorityCount();
-        int mediumPriorityCount = this.fast.getMediumPriorityCount();
-        int lowPriorityCount = this.fast.getLowPriorityCount();
-
-        // Assert statements to verify that the input data is correct
-        assert highPriorityCount >= 0 : "highPriorityCount must be positive";
-        assert mediumPriorityCount >= 0 : "mediumPriorityCount must be positive";
-        assert lowPriorityCount >= 0 : "lowPriorityCount must be positive";
-
-        addPriorityPieChartAnalysis(highPriorityCount, mediumPriorityCount, lowPriorityCount);
-
-        addPieChartData(PriorityTag.HighPriority.NAME, highPriorityCount, this.priorityPieChart);
-        addPieChartData(PriorityTag.MediumPriority.NAME, mediumPriorityCount, this.priorityPieChart);
-        addPieChartData(PriorityTag.LowPriority.NAME, lowPriorityCount, this.priorityPieChart);
+        PriorityData pData = getPriorityData();
+        addPriorityPieChartAnalysis(pData);
+        addPriorityPieChartData(pData);
     }
 
     /**
-     * Adds the data from Fast into the PieChart.
+     * Adds the investment plan data from Fast and analysis of data into the PieChart.
      */
     public void populateInvestmentPlanPieChart() {
         investmentPlanPieChart.getData().clear(); //Ensure that PieChart is blank.
-        InvestmentPlanData data = getInvestmentPlanData();
-        addInvestmentPlanPieChartAnalysis(data);
-        addInvestmentPlanPieChartData(data);
-
+        InvestmentPlanData iData = getInvestmentPlanData();
+        addInvestmentPlanPieChartAnalysis(iData);
+        addInvestmentPlanPieChartData(iData);
     }
 
-    private void addInvestmentPlanPieChartData(InvestmentPlanData data) {
-        addPieChartData(InvestmentPlanTag.LifeInsurance.NAME, data.getLifeCount(), this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.MotorInsurance.NAME, data.getMotorCount(), this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.TravelInsurance.NAME, data.getTravelCount(), this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.HealthInsurance.NAME, data.getHealthCount(), this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.PropertyInsurance.NAME, data.getPropertyCount(), this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.Investment.NAME, data.getInvestmentCount(), this.investmentPlanPieChart);
-        addPieChartData(InvestmentPlanTag.Savings.NAME, data.getSavingsCount(), this.investmentPlanPieChart);
-    }
 
     /**
      * Adds the counts to the labels of the PieChart.
@@ -188,24 +176,24 @@ public class StatsWindow extends UiPart<Stage> {
     /**
      * Adds a brief analysis of the client base's Priority Tags to the PieChart.
      */
-    public void addPriorityPieChartAnalysis(int highCount, int medCount, int lowCount) {
-        int totalCount = highCount + medCount + lowCount;
+    public void addPriorityPieChartAnalysis(PriorityData priorityData) {
+        int totalCount = priorityData.getTotalCount();
         String totalClientCount = totalCount + " Clients!";
 
         // Gets the max out of 3 values
-        int maxCount = Math.max(highCount, Math.max(medCount, lowCount));
+        int maxCount = priorityData.getMax();
 
         // Prioritise higher Priorities first,
         // e.g. if the counts are equal for all, HIGH_PRIORITY_MESSAGE will be used
-        if (highCount == maxCount) {
+        if (priorityData.getHighCount() == maxCount) {
             setPriorityPieChartLabel(totalClientCount, HIGH_PRIORITY_MESSAGE);
             return; //return to prevent fallthrough
         }
-        if (medCount == maxCount) {
+        if (priorityData.getMediumCount() == maxCount) {
             setPriorityPieChartLabel(totalClientCount, MEDIUM_PRIORITY_MESSAGE);
             return; //return to prevent fallthrough
         }
-        if (lowCount == maxCount) {
+        if (priorityData.getLowCount() == maxCount) {
             setPriorityPieChartLabel(totalClientCount, LOW_PRIORITY_MESSAGE);
             return;
         }
@@ -223,8 +211,6 @@ public class StatsWindow extends UiPart<Stage> {
 
         // Gets the max out of the values
         int maxCount = investmentPlanData.getMax();
-
-
     }
 
     /**
@@ -235,29 +221,17 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Focuses on the stats window.
-     */
-    public void focus() {
-        assert getRoot() != null : "StatsWindow is not initialised";
-        populatePriorityPieChart();
-        addCountsToPieChart(priorityPieChart);
-        populateInvestmentPlanPieChart();
-        addCountsToPieChart(investmentPlanPieChart);
-        getRoot().requestFocus();
-    }
-
-    /**
      * Gets the investment plan tag data from FAST.
      */
     public InvestmentPlanData getInvestmentPlanData() {
         // Gets the respective counts
-        int lifeInsuranceCount = this.fast.getLifeInsuranceCount();
-        int motorInsuranceCount = this.fast.getMotorInsuranceCount();
-        int travelInsuranceCount = this.fast.getTravelInsuranceCount();
-        int healthInsuranceCount = this.fast.getHealthInsuranceCount();
-        int propertyInsuranceCount = this.fast.getPropertyInsuranceCount();
-        int investmentCount = this.fast.getInvestmentCount();
-        int savingsCount = this.fast.getSavingsCount();
+        int lifeInsuranceCount = fast.getLifeInsuranceCount();
+        int motorInsuranceCount = fast.getMotorInsuranceCount();
+        int travelInsuranceCount = fast.getTravelInsuranceCount();
+        int healthInsuranceCount = fast.getHealthInsuranceCount();
+        int propertyInsuranceCount = fast.getPropertyInsuranceCount();
+        int investmentCount = fast.getInvestmentCount();
+        int savingsCount = fast.getSavingsCount();
 
         // Assert statements to verify that the input data is correct
         assert lifeInsuranceCount >= 0 : "lifeInsuranceCount must be positive";
@@ -273,64 +247,41 @@ public class StatsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Encapsulates the data of the investment plan tags.
+     * Gets the priority tag data from FAST.
      */
-    private class InvestmentPlanData {
+    public PriorityData getPriorityData() {
+        // Gets the respective counts
+        int highPriorityCount = fast.getHighPriorityCount();
+        int mediumPriorityCount = fast.getMediumPriorityCount();
+        int lowPriorityCount = fast.getLowPriorityCount();
 
-        private ArrayList<Integer> counts = new ArrayList<>();
+        // Assert statements to verify that the input data is correct
+        assert highPriorityCount >= 0 : "highPriorityCount must be positive";
+        assert mediumPriorityCount >= 0 : "mediumPriorityCount must be positive";
+        assert lowPriorityCount >= 0 : "lowPriorityCount must be positive";
 
-        private InvestmentPlanData(int lifeCount, int motorCount, int travelCount, int healthCount,
-                                   int propertyCount, int investmentCount, int savingsCount) {
-
-            counts.add(lifeCount);
-            counts.add(motorCount);
-            counts.add(travelCount);
-            counts.add(healthCount);
-            counts.add(propertyCount);
-            counts.add(investmentCount);
-            counts.add(savingsCount);
-        }
-
-        private int getMax() {
-            return Collections.max(counts);
-        }
-
-        private int getTotalCount() {
-            return counts.stream()
-                .mapToInt(Integer::intValue)
-                .sum();
-        }
-
-        private int getLifeCount() {
-            return counts.get(0);
-        }
-
-        private int getMotorCount() {
-            return counts.get(1);
-        }
-
-        private int getTravelCount() {
-            return counts.get(2);
-        }
-
-        private int getHealthCount() {
-            return counts.get(3);
-        }
-
-        private int getPropertyCount() {
-            return counts.get(4);
-        }
-
-        private int getInvestmentCount() {
-            return counts.get(5);
-        }
-
-        private int getSavingsCount() {
-            return counts.get(6);
-        }
-
-
+        return new PriorityData(highPriorityCount, mediumPriorityCount, lowPriorityCount);
     }
 
+    /**
+     * Adds the investment plan data elements into the PieChart i.e. fills the PieChart with data
+     */
+    private void addInvestmentPlanPieChartData(InvestmentPlanData iData) {
+        addPieChartData(InvestmentPlanTag.LifeInsurance.NAME, iData.getLifeCount(), investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.MotorInsurance.NAME, iData.getMotorCount(), investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.TravelInsurance.NAME, iData.getTravelCount(), investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.HealthInsurance.NAME, iData.getHealthCount(), investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.PropertyInsurance.NAME, iData.getPropertyCount(), investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.Investment.NAME, iData.getInvestmentCount(), investmentPlanPieChart);
+        addPieChartData(InvestmentPlanTag.Savings.NAME, iData.getSavingsCount(), investmentPlanPieChart);
+    }
 
+    /**
+     * Adds the priority data elements into the PieChart i.e. fills the PieChart with data
+     */
+    private void addPriorityPieChartData(PriorityData pData) {
+        addPieChartData(PriorityTag.HighPriority.NAME, pData.getHighCount(), priorityPieChart);
+        addPieChartData(PriorityTag.MediumPriority.NAME, pData.getMediumCount(), priorityPieChart);
+        addPieChartData(PriorityTag.LowPriority.NAME, pData.getLowCount(), priorityPieChart);
+    }
 }
