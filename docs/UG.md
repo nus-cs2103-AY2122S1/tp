@@ -1,3 +1,8 @@
+---
+layout: page
+title: User Guide
+---
+
 # User Guide for Sellah
 
 ## Table of Contents
@@ -30,12 +35,12 @@
    4.7. [List](#47-list) <br>
    &nbsp;&nbsp;&nbsp;&nbsp; 4.7.1. [Listing all Clients](#471-listing-all-clients) <br>
    &nbsp;&nbsp;&nbsp;&nbsp; 4.7.2. [Listing all Products](#472-listing-all-products) <br>
-   4.8.[Navigating the Command History](#48-navigating-the-command-history) <br>
-   4.9. [Viewing Statistics](#49-viewing-statistics) <br>
-   4.10. [Exiting Sellah](#410-exiting-sellah) <br>
-   4.11. [Saving Data](#411-saving-data) <br>
-   4.12. [Editing the Data file](#412-editing-the-data-file) <br>
-   4.13. [Clearing the all Data](#413-clearing-all-data) <br>
+   4.8. [Clearing the all Data](#48-clearing-all-data) <br>
+   4.9. [Navigating the Command History](#49-navigating-the-command-history) <br>
+   4.10. [Viewing Statistics](#410-viewing-statistics) <br>
+   4.11. [Exiting Sellah](#411-exiting-sellah) <br>
+   4.12. [Saving Data](#412-saving-data) <br>
+   4.13. [Editing the Data file](#413-editing-the-data-file) <br>
 5. [FAQ](#5-faq) <br>
 6. [Command summary](#6-command-summary) <br>
 
@@ -45,9 +50,9 @@
 
 Welcome to the User Guide of **Sellah**!
 
-**Sellah** is a desktop application optimized for online sellers who prefer using a Command Line Interface (CLI)
-over the Graphical User Interface (GUI). It is used to keep track of the contact information of your clients and details
-of the products in your inventory.
+**Sellah** is a desktop application optimized for online sellers who prefer using a Command Line Interface (CLI) over
+the Graphical User Interface (GUI). It is used to keep track of the contact information of your clients and details of
+the products in your inventory.
 
 **Sellah** uses CLI; this means that you operate the application by typing commands into a Command Box. If your typing
 speed is fast, you can operate the application faster than other GUI applications; GUI applications allow users to
@@ -67,7 +72,7 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 3. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
 
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app
-   contains some sample data. You can use the [`clear`](#413-clearing-all-data) command to purge all data.<br>
+   contains some sample data. You can use the [`clear`](#48-clearing-all-data) command to purge all data. <br>
    ![Ui](images/UiHelpCommand.png)
 
 5. Refer to the [Features](#4-features) below for details of each command.
@@ -326,39 +331,7 @@ Example : `list -p` Shows a list of all products in the application.
 
 ![Ui](images/UIListProductCommand.png)
 
-### 4.8 Navigating the Command History
-
-You may press the `↑` and `↓` keys to navigate to previous commands that you have used within the same session.
-Pressing `↑` when the first command is currently displayed will do nothing. `↓` when the last command is currently
-displayed clears the command input field. Subsequent `↓` will do nothing.
-
-### 4.9 Viewing Statistics
-
-Shows the current stock of each product in your inventory. If there are no products in your inventory with a valid
-quantity specified, an error message would be shown. The stock would be displayed as a pie chart in the secondary panel
-on the right. Each label would contain the product name with the quantity associated with it.
-
-Format : `stat`
-![Ui](images/UIStatCommand.png)
-
-### 4.10 Exiting Sellah
-
-Exits Sellah.
-
-Format : `exit`
-
-### 4.11 Saving Data
-
-Sellah's data are saved in the hard disk automatically after any command that changes the data. There is no need to save
-manually.
-
-### 4.12 Editing the Data file
-
-Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. You are welcome to update data directly by
-editing this file. However, if your changes to the file make its format invalid, Sellah will start with an data file on
-its next run.
-
-### 4.13 Clearing all Data
+### 4.8 Clearing all Data
 
 Deletes all client and product data from Sellah. Please be very careful when using this command as once deleted, the
 data **cannot be recovered**!
@@ -367,13 +340,45 @@ Format: `clear`
 
 Expected Output: ![Ui](images/UiClearCommand.png)
 
+### 4.9 Navigating the Command History
+
+You may press the `↑` and `↓` keys to navigate to previous commands that you have used within the same session.
+Pressing `↑` when the first command is currently displayed will do nothing. `↓` when the last command is currently
+displayed clears the command input field. Subsequent `↓` will do nothing.
+
+### 4.10 Viewing Statistics
+
+Shows the current stock of each product in your inventory. If there are no products in your inventory with a valid
+quantity specified, an error message would be shown. The stock would be displayed as a pie chart in the secondary panel
+on the right. Each label would contain the product name with the quantity associated with it.
+
+Format : `stat`
+![Ui](images/UIStatCommand.png)
+
+### 4.11 Exiting Sellah
+
+Exits Sellah.
+
+Format : `exit`
+
+### 4.12 Saving Data
+
+Sellah's data are saved in the hard disk automatically after any command that changes the data. There is no need to save
+manually.
+
+### 4.13 Editing the Data file
+
+Sellah data are saved as a JSON file `[JAR file location]/data/sellah.json`. You are welcome to update data directly by
+editing this file. However, if your changes to the file make its format invalid, Sellah will start with an data file on
+its next run.
+
 ---
 
 ## 5. FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another Computer? <br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains
-the data of your previous Sellah home folder.<br>
+the data of your previous Sellah home folder. <br>
 
 ---
 
@@ -382,13 +387,13 @@ the data of your previous Sellah home folder.<br>
 Action | Format
 --- | ---
 [Help](#41-getting-help) | `help`
-[Exit](#410-exiting-sellah) | `exit`
-[Add](#42-add) | Client : `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`<br> Product : `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
-[Delete](#44-delete) | Client : `delete -c INDEX` <br> Product : `delete -p INDEX`
-[Clear](#413-clearing-all-data) | `clear`
-[Edit](#43-edit) | Client : `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product : `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
-[Find](#46-find) | Client : `find -c NAME` <br> Product : `find -p NAME`
-[List](#47-list) | Client : `list -c` <br> Product : `list -p`
-[View](#45-view) | Client :`view -c INDEX` <br> Product : `view -c INDEX`
-[Command History](#48-navigating-the-command-history) | Previous : `↑` <br> Next : `↓`
-[Statistics](#49-viewing-statistics) | `stat`
+[Exit](#411-exiting-sellah) | `exit`
+[Add](#42-add) | Client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
+[Delete](#44-delete) | Client: `delete -c INDEX` <br> Product: `delete -p INDEX`
+[Clear](#48-clearing-all-data) | `clear`
+[Edit](#43-edit) | Client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
+[Find](#46-find) | Client: `find -c NAME` <br> Product: `find -p NAME`
+[List](#47-list) | Client: `list -c` <br> Product: `list -p`
+[View](#45-view) | Client:`view -c INDEX` <br> Product: `view -c INDEX`
+[Command History](#49-navigating-the-command-history) | Previous: `↑` <br> Next: `↓`
+[Statistics](#410-viewing-statistics) | `stat`
