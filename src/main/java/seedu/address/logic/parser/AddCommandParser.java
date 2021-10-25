@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPERIENCE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LEVEL_OF_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,6 +20,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -45,7 +47,8 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args,
                         PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ROLE,
                         PREFIX_EMPLOYMENT_TYPE, PREFIX_EXPECTED_SALARY,
-                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG, PREFIX_INTERVIEW);
+                        PREFIX_LEVEL_OF_EDUCATION, PREFIX_EXPERIENCE, PREFIX_TAG,
+                        PREFIX_INTERVIEW, PREFIX_NOTES);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE,
                 PREFIX_EMAIL, PREFIX_ROLE, PREFIX_EMPLOYMENT_TYPE,
@@ -68,9 +71,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Optional<Interview> interview = ParserUtil.parseInterview(
                 argMultimap.getValue(PREFIX_INTERVIEW).orElse(""));
+        Optional<Notes> notes = ParserUtil.parseNotes(argMultimap.getValue(PREFIX_NOTES).orElse(""));
 
         Person person = new Person(name, phone, email, role, employmentType,
-                expectedSalary, levelOfEducation, experience, tagList, interview);
+                expectedSalary, levelOfEducation, experience, tagList, interview, notes);
         return new AddCommand(person);
     }
 
