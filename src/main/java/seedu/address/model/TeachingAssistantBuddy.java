@@ -10,8 +10,11 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
 import seedu.address.model.module.student.UniqueStudentList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
+import seedu.address.model.task.UniqueTaskList;
 
 /**
  * Wraps all data at the TAB level.
@@ -124,6 +127,73 @@ public class TeachingAssistantBuddy implements ReadOnlyTeachingAssistantBuddy {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns true if the given task is marked as complete, else false.
+     */
+    public boolean isDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        for (Module m : modules) {
+            if (m.getName().equals(moduleName)) {
+                UniqueStudentList students = m.getUniqueStudentList();
+                for (Student s : students) {
+                    if (s.getStudentId().equals(studentId)) {
+                        UniqueTaskList tasks = s.getTaskList();
+                        for (Task t : tasks) {
+                            if (t.getTaskId().equals(taskId)) {
+                                return t.isComplete();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Set the given task as done.
+     */
+    public void setTaskDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        for (Module m : modules) {
+            if (m.getName().equals(moduleName)) {
+                UniqueStudentList students = m.getUniqueStudentList();
+                for (Student s : students) {
+                    if (s.getStudentId().equals(studentId)) {
+                        UniqueTaskList tasks = s.getTaskList();
+                        for (Task t : tasks) {
+                            if (t.getTaskId().equals(taskId)) {
+                                t.setComplete();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Set the given task as undone.
+     */
+    public void setTaskUndone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        for (Module m : modules) {
+            if (m.getName().equals(moduleName)) {
+                UniqueStudentList students = m.getUniqueStudentList();
+                for (Student s : students) {
+                    if (s.getStudentId().equals(studentId)) {
+                        UniqueTaskList tasks = s.getTaskList();
+                        for (Task t : tasks) {
+                            if (t.getTaskId().equals(taskId)) {
+                                t.setIncomplete();
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**

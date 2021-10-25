@@ -14,7 +14,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -146,6 +148,24 @@ public class ModelManager implements Model {
     public boolean hasTask(ModuleName moduleName, Task task) {
         requireAllNonNull(moduleName, task);
         return teachingAssistantBuddy.hasTask(moduleName, task);
+    }
+
+    @Override
+    public boolean isDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        return teachingAssistantBuddy.isDone(moduleName, studentId, taskId);
+    }
+
+    @Override
+    public void setTaskDone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        teachingAssistantBuddy.setTaskDone(moduleName, studentId, taskId);
+    }
+
+    @Override
+    public void setTaskUndone(ModuleName moduleName, StudentId studentId, TaskId taskId) {
+        requireAllNonNull(moduleName, studentId, taskId);
+        teachingAssistantBuddy.setTaskUndone(moduleName, studentId, taskId);
     }
 
     @Override

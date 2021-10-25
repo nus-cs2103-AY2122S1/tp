@@ -8,7 +8,9 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.student.Student;
+import seedu.address.model.module.student.StudentId;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskId;
 
 /**
  * The API of the Model component.
@@ -125,5 +127,23 @@ public interface Model {
 
     void setModule(Module target, Module moduleToEdit);
 
+    /**
+     * Checks if the given task is done.
+     * @param moduleName The name of the module of the given task.
+     * @param studentId The ID of the student the given task belongs to.
+     * @param taskId The ID of the given task.
+     * @return Whether the task is done or not.
+     */
+    boolean isDone(ModuleName moduleName, StudentId studentId, TaskId taskId);
+
+    /**
+     * Set the given task as done.
+     */
+    void setTaskDone(ModuleName moduleName, StudentId studentId, TaskId taskId);
+
+    /**
+     * Set the given task as undone.
+     */
+    void setTaskUndone(ModuleName moduleName, StudentId studentId, TaskId taskId);
     //todo later versions: deleteModule
 }
