@@ -23,7 +23,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 import seedu.address.model.product.ProductContainsKeywordsPredicate;
 import seedu.address.testutil.EditClientDescriptorBuilder;

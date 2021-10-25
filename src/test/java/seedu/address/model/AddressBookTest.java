@@ -73,8 +73,8 @@ public class AddressBookTest {
     public void resetData_withDuplicateProducts_throwsDuplicateProductException() {
         // Two products with the same identity fields
         List<Client> newClients = Arrays.asList(ALICE);
-        Product editedIPHONE = new ProductBuilder(IPHONE).build();
-        List<Product> newProducts = Arrays.asList(IPHONE, editedIPHONE);
+        Product editedIphone = new ProductBuilder(IPHONE).build();
+        List<Product> newProducts = Arrays.asList(IPHONE, editedIphone);
         AddressBookStub newData = new AddressBookStub(newClients, newProducts);
 
         assertThrows(DuplicateProductException.class, () -> addressBook.resetData(newData));

@@ -13,7 +13,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.client.Client;
 import seedu.address.model.commons.ID;
-import seedu.address.model.person.Person;
 import seedu.address.model.product.Product;
 
 /**
@@ -27,9 +26,6 @@ public class ModelManager implements Model {
 
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Product> filteredProducts;
-
-    // todo remove later
-//    private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
