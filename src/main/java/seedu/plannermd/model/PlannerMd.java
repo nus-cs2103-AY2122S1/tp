@@ -11,6 +11,7 @@ import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.appointment.UniqueAppointmentList;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.UniquePersonList;
 
 /**
@@ -224,6 +225,27 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         appointments.remove(key);
     }
 
+    /**
+     * Deletes appointments with {@code person} from the appointment list
+     *
+     * @param person person whose appointments should be deleted
+     * @param <T> Subtype of Person
+     */
+    public <T extends Person> void deleteAppointmentsWithPerson(T person) {
+        appointments.deleteAppointmentsWithPerson(person);
+    }
+
+    /**
+     * Updates appointments with {@code person} to {@code editedPerson} from the appointment list
+     *
+     * @param person person whose appointments should be updated
+     * @param editedPerson the person to replace {@code person} in existing appointments
+     * @param <T> Subtype of Person
+     */
+    public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
+        appointments.editAppointmentsWithPerson(person, editedPerson);
+    }
+
     //// util methods
 
     @Override
@@ -255,6 +277,7 @@ public class PlannerMd implements ReadOnlyPlannerMd {
                 && doctors.equals(((PlannerMd) other).doctors)
                 && patients.equals(((PlannerMd) other).patients))
                 && appointments.equals(((PlannerMd) other).appointments);
+
     }
 
     @Override

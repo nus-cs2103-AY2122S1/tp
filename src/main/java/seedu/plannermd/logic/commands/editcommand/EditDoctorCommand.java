@@ -80,6 +80,7 @@ public class EditDoctorCommand extends EditCommand {
 
         model.setDoctor(doctorToEdit, editedDoctor);
         model.updateFilteredDoctorList(PREDICATE_SHOW_ALL_PERSONS);
+        model.editAppointmentsWithPerson(doctorToEdit, editedDoctor);
         return new CommandResult(String.format(MESSAGE_EDIT_DOCTOR_SUCCESS, editedDoctor));
     }
 

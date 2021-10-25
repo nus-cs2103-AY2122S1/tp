@@ -36,6 +36,7 @@ public class DeleteDoctorCommandTest {
         String expectedMessage = String.format(DeleteDoctorCommand.MESSAGE_DELETE_DOCTOR_SUCCESS, doctorToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getPlannerMd(), new UserPrefs());
+        expectedModel.deleteAppointmentsWithPerson(doctorToDelete);
         expectedModel.deleteDoctor(doctorToDelete);
 
         assertCommandSuccess(deleteDoctorCommand, model, expectedMessage, expectedModel);
@@ -59,6 +60,7 @@ public class DeleteDoctorCommandTest {
         String expectedMessage = String.format(DeleteDoctorCommand.MESSAGE_DELETE_DOCTOR_SUCCESS, doctorToDelete);
 
         Model expectedModel = new ModelManager(model.getPlannerMd(), new UserPrefs());
+        expectedModel.deleteAppointmentsWithPerson(doctorToDelete);
         expectedModel.deleteDoctor(doctorToDelete);
         showNoDoctor(expectedModel);
 

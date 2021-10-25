@@ -40,7 +40,9 @@ public class DeleteDoctorCommand extends DeleteCommand {
         }
 
         Doctor doctorToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteAppointmentsWithPerson(doctorToDelete);
         model.deleteDoctor(doctorToDelete);
+
         return new CommandResult(String.format(MESSAGE_DELETE_DOCTOR_SUCCESS, doctorToDelete));
     }
 

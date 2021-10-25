@@ -51,6 +51,8 @@ class DeletePatientTagCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPatient);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased()),
+                editedPatient);
 
         assertCommandSuccess(deletePatientTagCommand, model, expectedMessage, expectedModel);
     }
@@ -73,6 +75,8 @@ class DeletePatientTagCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setPatient(model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased()), editedPatient);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredPatientList().get(INDEX_FIRST_PERSON.getZeroBased()),
+                editedPatient);
 
         assertCommandSuccess(deletePatientTagCommand, model, expectedMessage, expectedModel);
     }

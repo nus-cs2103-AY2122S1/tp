@@ -46,6 +46,8 @@ public class RemarkDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(INDEX_FIRST_PERSON.getZeroBased()), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(INDEX_FIRST_PERSON.getZeroBased()),
+                editedDoctor);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
     }
@@ -66,6 +68,8 @@ public class RemarkDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(indexLastDoctor.getZeroBased()), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(indexLastDoctor.getZeroBased()),
+                editedDoctor);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
     }
@@ -84,6 +88,7 @@ public class RemarkDoctorCommandTest {
 
         Model expectedModel = new ModelManager(new PlannerMd(model.getPlannerMd()), new UserPrefs());
         expectedModel.setDoctor(model.getFilteredDoctorList().get(0), editedDoctor);
+        expectedModel.editAppointmentsWithPerson(model.getFilteredDoctorList().get(0), editedDoctor);
 
         assertCommandSuccess(remarkCommand, model, expectedMessage, expectedModel);
     }
