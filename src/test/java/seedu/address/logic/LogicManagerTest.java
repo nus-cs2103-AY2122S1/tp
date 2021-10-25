@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -14,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.NoSuchPaddingException;
 
@@ -29,6 +31,7 @@ import seedu.address.encryption.exceptions.UnsupportedPasswordException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.AddressBook;
@@ -45,6 +48,7 @@ import seedu.address.testutil.PersonBuilder;
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
     private static final String PASSWORD = "password1234";
+    private static final String WRONG_PASSWORD = "password123";
     private static final String CIPHER_TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String ADDRESS_BOOK_ENCRYPTED_FILENAME = "addressBook.enc";
     private static final String ADDRESS_BOOK_JSON_FILENAME = "addressBook.json";
@@ -127,6 +131,21 @@ public class LogicManagerTest {
 
         FileUtil.deleteFile(IO_EXCEPTION_ENCRYPTED_FILE_PATH); // Cleanup
         FileUtil.deleteFile(IO_EXCEPTION_JSON_FILE_PATH); // Cleanup
+    }
+
+    @Test
+    public void execute_correctPasswordCommand_returnsEmptyOptional() throws IOException, InvalidKeyException {
+        FileUtil.createFile(MAIN_JSON_FILE_PATH);
+        cryptor.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
+        assertTrue(logic.executePasswordCommand(new PasswordCommand(PASSWORD, WRONG_PASSWORD)).isEmpty());
+    }
+
+    @Test
+    public void execute_incorrectPasswordCommand_returnsOptionalCommandResult() throws IOException,
+            InvalidKeyException {
+        FileUtil.createFile(MAIN_JSON_FILE_PATH);
+        cryptor.encrypt(MAIN_JSON_FILE_PATH, MAIN_ENCRYPTED_FILE_PATH);
+        assertFalse(logic.executePasswordCommand(new PasswordCommand(WRONG_PASSWORD, WRONG_PASSWORD)).isEmpty());
     }
 
     @Test
