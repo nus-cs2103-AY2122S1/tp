@@ -167,6 +167,7 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.focus();
             return;
         }
+        logger.fine("Showing help window about the application.");
         helpWindow.show();
     }
 
@@ -207,6 +208,7 @@ public class MainWindow extends UiPart<Stage> {
             dashboardWindow.focus();
             return;
         }
+        logger.fine("Showing dashboard window...");
         dashboardWindow.show();
     }
 

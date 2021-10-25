@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 /**
  * Controller for a help page
  */
-public class PopupWindow extends UiPart<Stage> {
+public abstract class PopupWindow extends UiPart<Stage> {
 
     /**
      * Creates a new HelpWindow.
@@ -15,14 +15,6 @@ public class PopupWindow extends UiPart<Stage> {
     public PopupWindow(String FXML, Stage root) {
         super(FXML, root);
     }
-
-    /**
-     * Creates a new HelpWindow.
-     */
-    public PopupWindow(String FXML) {
-        super(FXML, new Stage());
-    }
-
 
     /**
      * Shows the help window.
