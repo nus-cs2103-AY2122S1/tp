@@ -10,6 +10,12 @@
     -fx-opacity: 0.9;
 }
 
+.label-padded {
+    -fx-font-size: 9pt;
+    -fx-padding: 1 7 1 7;
+    -fx-background-radius: 3;
+}
+
 .label-bright {
     -fx-font-size: 11pt;
     -fx-font-family: "Open Sans Semibold";

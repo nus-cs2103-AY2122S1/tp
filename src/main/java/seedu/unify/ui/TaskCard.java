@@ -34,6 +34,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label date;
     @FXML
+    private Label state;
+    @FXML
     private Label tag;
 
 
@@ -48,6 +50,10 @@ public class TaskCard extends UiPart<Region> {
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
         tag.setText(task.getTag().tagTaskName);
+        state.setStyle(task.getState().isMarkedDone()
+                ? "-fx-background-color: #00649e"
+                : "-fx-background-color: #009e3a");
+        state.setText(task.getState().toString());
     }
 
     @Override

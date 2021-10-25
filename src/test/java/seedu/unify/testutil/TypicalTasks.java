@@ -24,10 +24,11 @@ public class TypicalTasks {
             .withDate("2021-12-11")
             .withTime("12:45")
             .withTag("friends").build();
-    public static final Task BENSON = new TaskBuilder().withName("Benson Meier")
+    public static final Task MATH_ASSIGNMENT = new TaskBuilder().withName("Math Assignment 1")
             .withDate("2021-11-23")
             .withTime("23:41")
-            .withTag("friends").build();
+            .withTag("Important")
+            .withState("TODO").build();
     public static final Task CARL = new TaskBuilder().withName("Carl Kurz").withTime("23:41")
             .withDate("2021-10-25").build();
     public static final Task DANIEL = new TaskBuilder().withName("Daniel Meier").withTime("07:24")
@@ -68,6 +69,6 @@ public class TypicalTasks {
     }
 
     public static List<Task> getTypicalTasks() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, MATH_ASSIGNMENT, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

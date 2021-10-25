@@ -2,6 +2,7 @@ package seedu.unify.testutil;
 
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.State;
 import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -15,12 +16,14 @@ public class TaskBuilder {
     public static final String DEFAULT_TIME = "16:40";
     public static final String DEFAULT_DATE = "2021-12-11";
     public static final String DEFAULT_TAG = "Important";
+    public static final String DEFAULT_STATE = "TODO";
 
     private Name name;
     private Time time;
 
     private Date date;
     private Tag tag;
+    private State state;
 
     /**
      * Creates a {@code TaskBuilder} with the default details.
@@ -30,6 +33,7 @@ public class TaskBuilder {
         time = new Time(DEFAULT_TIME);
         date = new Date(DEFAULT_DATE);
         tag = new Tag(DEFAULT_TAG);
+        state = new State(DEFAULT_STATE);
     }
 
     /**
@@ -40,6 +44,7 @@ public class TaskBuilder {
         time = taskToCopy.getTime();
         date = taskToCopy.getDate();
         tag = taskToCopy.getTag();
+        state = taskToCopy.getState();
     }
 
     /**
@@ -68,6 +73,14 @@ public class TaskBuilder {
     }
 
     /**
+     * Sets the {@code State} of the {@code Task} that we are building.
+     */
+    public TaskBuilder withState(String state) {
+        this.state = new State(state);
+        return this;
+    }
+
+    /**
      * Sets the {@code Time} of the {@code Task} that we are building.
      */
     public TaskBuilder withTime(String time) {
@@ -76,6 +89,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, time, date, tag);
+        return new Task(name, time, date, tag, state);
     }
 }

@@ -12,11 +12,12 @@ public class Task {
 
     // Identity fields
     private final Name name;
-    private final Time time;
 
     // Data fields
+    private final Time time;
     private final Date date;
     private final Tag tag;
+    private final State state;
 
     /**
      * Every field must be present and not null.
@@ -27,6 +28,16 @@ public class Task {
         this.time = time;
         this.date = date;
         this.tag = tag;
+        this.state = new State();
+    }
+
+    public Task(Name name, Time time, Date date, Tag tag, State state) {
+        requireAllNonNull(name, time, date, tag);
+        this.name = name;
+        this.time = time;
+        this.date = date;
+        this.tag = tag;
+        this.state = state;
     }
 
     public Name getName() {
@@ -43,6 +54,10 @@ public class Task {
 
     public Tag getTag() {
         return tag;
+    }
+
+    public State getState() {
+        return state;
     }
 
     /**
@@ -94,7 +109,9 @@ public class Task {
                 .append("; Date: ")
                 .append(getDate())
                 .append("; Tag: ")
-                .append(getTag());
+                .append(getTag())
+                .append("; State: ")
+                .append(getState());
 
         return builder.toString();
     }

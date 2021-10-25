@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.unify.commons.exceptions.IllegalValueException;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
+import seedu.unify.model.task.State;
 import seedu.unify.model.task.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
@@ -20,6 +21,7 @@ class JsonAdaptedTask {
     private final String name;
     private final String time;
     private final String date;
+    private final String state;
     private final String tag;
 
     /**
@@ -27,10 +29,11 @@ class JsonAdaptedTask {
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("time") String time,
-            @JsonProperty("date") String date, @JsonProperty("tag") String tag) {
+            @JsonProperty("date") String date, @JsonProperty("state") String state, @JsonProperty("tag") String tag) {
         this.name = name;
         this.time = time;
         this.date = date;
+        this.state = state;
         this.tag = tag;
     }
 
@@ -41,6 +44,7 @@ class JsonAdaptedTask {
         name = source.getName().taskName;
         time = source.getTime().value;
         date = source.getDate().value;
+        state = source.getState().toString();
         tag = source.getTag().tagTaskName;
     }
 
@@ -74,6 +78,14 @@ class JsonAdaptedTask {
         }
         final Date modelDate = new Date(date);
 
+        if (state == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, State.class.getSimpleName()));
+        }
+        if (!State.isValidState(state)) {
+            throw new IllegalValueException(State.MESSAGE_CONSTRAINTS);
+        }
+        final State modelState = new State(state);
+
         if (tag == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
         }
@@ -81,7 +93,7 @@ class JsonAdaptedTask {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
         final Tag modelTag = new Tag(tag);
-        return new Task(modelName, modelTime, modelDate, modelTag);
+        return new Task(modelName, modelTime, modelDate, modelTag, modelState);
     }
 
 }
