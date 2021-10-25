@@ -32,12 +32,16 @@ public class ProfileWindow extends UiPart<Stage> {
     private static final String INVALID_NAME_MESSAGE = "The Name Entered is Invalid";
     private static final String INVALID_PHONE_MESSAGE = "The Phone Number Entered is Invalid";
     private static final String INVALID_TELEGRAM_MESSAGE = "The Telegram Handle Entered is Invalid";
+    private static final String WELCOME_MESSAGE = "Welcome To CohortConnect!";
 
     private Logic logic;
     private MainWindow mainWindow;
 
     @FXML
     private Button submit;
+
+    @FXML
+    private Text welcomeMessage;
 
     @FXML
     private Text message;
@@ -67,6 +71,7 @@ public class ProfileWindow extends UiPart<Stage> {
         super(FXML, stage);
         this.mainWindow = mainWindow;
         this.logic = logic;
+        welcomeMessage.setText(WELCOME_MESSAGE);
     }
 
     public void start() {
@@ -85,7 +90,7 @@ public class ProfileWindow extends UiPart<Stage> {
     }
 
     public void submit(ActionEvent event) {
-        System.out.println("Checking submit");
+        //System.out.println("Checking submit");
 
         String userAddress = address.getText();
         String userEmail = email.getText();

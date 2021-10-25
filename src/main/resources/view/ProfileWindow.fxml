@@ -12,30 +12,27 @@
 <?import javafx.scene.text.Text?>
 <fx:root resizable="false" title="User Profile" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <icons>
-        <!--
-        // Add icon if have
-        <Image url="@/images/help_icon.png" />
-        -->
+        <Image url="@/images/User_Avatar.png" />
     </icons>
     <scene>
         <Scene>
             <stylesheets>
-                <URL value="@UserProfile.css" />
+                <URL value="@ProfileWindow.css" />
             </stylesheets>
 
             <GridPane prefHeight="500" prefWidth="300" alignment="center" hgap="10" vgap="10">
                 <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
 
-                <Text text = "Welcome To CohortConnect!" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                <Text fx:id="welcomeMessage" GridPane.columnIndex="0" GridPane.rowIndex="0"
                       GridPane.columnSpan="2"/>
 
-                <TextField fx:id="name" promptText="Name" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
-                <TextField fx:id="telegram" promptText="Telegram" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
-                <TextField fx:id="github" promptText="GitHub" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
-                <TextField fx:id="phone" promptText="Phone Number" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
-                <TextField fx:id="email" promptText="Email" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="5"/>
-                <TextField fx:id="address" promptText="Address" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="6"/>
-                <TextField fx:id="tag" promptText="Tag(s)" style="-fx-background-color: #121212#121212;" GridPane.columnSpan="2" GridPane.rowIndex="7"/>
+                <TextField fx:id="name" promptText="Name" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+                <TextField fx:id="telegram" promptText="Telegram" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                <TextField fx:id="github" promptText="GitHub" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+                <TextField fx:id="phone" promptText="Phone Number" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
+                <TextField fx:id="email" promptText="Email" GridPane.columnSpan="2" GridPane.rowIndex="5"/>
+                <TextField fx:id="address" promptText="Address" GridPane.columnSpan="2" GridPane.rowIndex="6"/>
+                <TextField fx:id="tag" promptText="Tag(s)" GridPane.columnSpan="2" GridPane.rowIndex="7"/>
 
                 <HBox spacing="10" alignment="bottom_center"
                       GridPane.columnSpan="2" GridPane.rowIndex="8">

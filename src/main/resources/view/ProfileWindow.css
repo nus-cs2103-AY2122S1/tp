@@ -1,0 +1,23 @@
+.root {
+     -fx-background-color: #121212;
+     -fx-font-family: "Open Sans";
+}
+
+#name, #telegram, #github, #phone,#email, #address, #tag {
+    -fx-background-color: #383838;
+    -fx-text-fill: white;
+}
+
+#submit {
+    -fx-text-fill: white;
+    -fx-background-color: #414141;
+}
+
+#message {
+    -fx-fill: red;
+}
+
+#welcomeMessage {
+    -fx-font-size: 42px;
+    -fx-fill: white;
+}
