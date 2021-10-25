@@ -23,7 +23,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
-import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
