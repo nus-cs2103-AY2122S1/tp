@@ -25,7 +25,7 @@ public class FilterCommand extends Command {
             + "Parameters: "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
-            + "Example: " + COMMAND_WORD + " " + PREFIX_GRADE + "S2 " + PREFIX_SUBJECT + "English";
+            + "\nExample: " + COMMAND_WORD + " " + PREFIX_GRADE + "S2 " + PREFIX_SUBJECT + "English";
 
     private final Grade grade;
     private final Subject subject;
