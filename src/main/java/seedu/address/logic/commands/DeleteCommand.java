@@ -53,6 +53,9 @@ public class DeleteCommand extends Command {
             List<Appointment> affectedAppointments = model.getRelatedAppointments(personToDelete);
             for (Appointment appointment : affectedAppointments) {
                 appointment.removeClient(personToDelete);
+                if (appointment.isClientListEmpty()) {
+                    model.deleteAppointment(appointment);
+                }
             }
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
         } else {

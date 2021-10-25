@@ -62,6 +62,14 @@ public class Appointment {
     }
 
     /**
+     * Checks whether this {@Code Appointment}'s client list is empty.
+     * @return A boolean value indicating whether the client list is empty.
+     */
+    public boolean isClientListEmpty() {
+        return this.clients.isEmpty();
+    }
+
+    /**
      * Remove a given person from the client list of this {@code Appointment}.
      * @param personToRemove the given person to be removed
      */
