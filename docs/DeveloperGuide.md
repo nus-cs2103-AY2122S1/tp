@@ -316,13 +316,57 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Finding applicants by name
+### Add applicant feature
 
-I will explain here how the feature to find applicants by name
-is implemented.
+The implementation of the add applicant feature is achieved by the `AddApplicantCommand` class. Just like all other
+commands in MTR, it extends the Command class. The most important attribute that it has, is the `ApplicantParticulars`
+attribute, which contains all the details of the applicant (Name, Phone, Email, Address, 
+Title of Position Applying to), parsed straight from the user input.
 
-But I am leaving this here first as a placeholder,
-and will update with the actual explanation soon.
+The `AddApplicantCommand#execute(Model model)` method will use guard clauses to check whether there is a duplicate
+applicant, and whether the position (that this applicant is applying to) input by the user actually exists in
+`positionBook`. If all parameters are valid, the `ApplicantParticulars` will then be passed to Model to add to
+`applicantBook`, using the `Model#addApplicantWithParticulars` method.
+
+Given below is an example usage scenario and how the add applicant feature behaves at each step.
+Preconditions: The app is already launched and the appropriate position that the new applicant is applying to already
+exist.
+
+Step 1. The user inputs the command `add-applicant n/John Doe p/98765432 e/johnd@example.com a/John street, 
+block 123, #01-01 pos/software engineer`. The app parser will store all the user-input parameters into an
+`applicantParticulars` object, and return the `AddApplicantCommand` instance.
+
+The following sequence diagram shows the method invocation in this step.
+![AddApplicantSequenceDiagram1](images/AddApplicantSequenceDiagram1.png)
+
+Step 2. LogicManager will execute this `AddApplicantCommand` instance. This will invoke the 
+`Model#addApplicantWithParticulars` method.
+
+Step 3. Here, we will retrieve the `position` object from `positionBook`, using the `positionTitle` that the user
+input as argument, and create a new applicant instance using the `applicantParticulars` and `position` object. Then 
+we will add it to the `applicantBook`. 
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If any of the guard clauses fail, i.e. the
+applicant already exist, or the position does not exist, an appropriate exception will be thrown and the applicant
+will not be created.
+
+</div>
+
+The following activity diagram summarizes the actions taken when LogicManager executes the AddApplicantCommand:
+![AddApplicantActivityDiagram1](images/AddApplicantActivityDiagram1.png)
+
+#### Design considerations:
+
+**Aspect: How and when the new applicant instance is created:**
+
+* **Alternative 1 (current choice):** Saves all the user input as an applicantParticulars object.
+    * Pros: Avoids the unnecessary clutter of passing multiple parameters to multiple method calls.
+    * Cons: May have lead to greater coupling among classes.
+
+* **Alternative 2:** Each user input parameter (e.g. Name, Address, PositionTitle etc.) are passed to multiple method
+    calls.
+    * Pros: Will reduce the usage of a new class, thereby reducing coupling.
+    * Cons: This could lead to longer method signatures, longer code, and possibly a less OOP approach.
 
 
 --------------------------------------------------------------------------------------------------------------------
