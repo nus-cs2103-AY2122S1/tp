@@ -3,6 +3,16 @@ layout: page
 title: User Guide
 ---
 ![Banner](images/Banner.png)
+
+Dash is a personal planner app which offers unparalleled speed using text-based input. It supports both management of
+tasks and contacts. Dash is tailored to the needs of students, who must keep track of a slew of different deadlines and 
+commitments. So long as you're a fast typist, with its keyboard-optimised navigability, Dash provides a blisteringly 
+quick way to stay on top of your responsibilities.
+
+You can navigate this guide by clicking the table of contents. If you're a new user, the Quick Start guide has all you 
+need to get started. If you're an intermediate user looking to get more out of Dash, all supported commands are listed 
+below.
+
 * Table of Contents
 {:toc}
 
@@ -10,21 +20,23 @@ title: User Guide
 
 ## <u>Quick start</u>
 
+Whether you're using Windows or MacOS, the steps for installation are the same.
+
 1. Ensure you have Java `11` or above installed in your Computer. [Not sure what Java is? Click here!](https://java.com/en/download/help/download_options.html)
 
-1. Download the latest `dash.jar` from here (not available yet).
+2. Download the latest `dash.jar` from here (not available yet).
 
-1. Copy the file to the folder you want to use as the _home folder_ for Dash.
+3. Copy the file to the folder you want to use as the _home folder_ for Dash, which is where your data is stored.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
+4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds.<br>
    ![Ui](images/UG-00.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-* **`contacts`** : Switches to the contacts tab.
+* **`contacts`** : Switches to the contacts tab, where you can view and manage your contacts.
 
-* **`tasks`** : Switches to the tasks tab.
+* **`tasks`** : Switches to the tasks tab, where you can view and manage your tasks.
 
 * **`add n/NAME [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...`** : Adds a contact with specified details.
 
@@ -32,7 +44,7 @@ title: User Guide
 
 * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -261,8 +273,8 @@ Format: ```find DESCRIPTION```
 * The order of the keywords does not matter. e.g. home work will match work home
 * Only the description field is searched.
 * Task descriptions matching all keywords will be returned (i.e. AND search). 
-  e.g. ```Do this``` will return only ```Do this``` and ```Do this (very important!!!)```. 
-  It will not return ```Do maybe?``` or ```This doesn’t matter```
+  e.g. ```Math Quiz``` will return only ```Math Quiz``` and ```Math Quiz 8```. 
+  It will not return ```Math Assignment```, ```GEQ Quiz```, or ```This doesn't matter```.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -283,7 +295,7 @@ Format: ```find [dt/DATE] [dt/TIME] [dt/DATE, TIME] [p/PERSON INDEX]... [t/TAG].
 ![Finding upcoming Tasks](images/UG-13.png)
 #### Find all upcoming tasks: [upcoming]
 
-Finds all tasks whose date/time are after the current date/time.
+Finds all tasks whose Date/Time are after the current Date/Time.
 
 Format: ```upcoming```
 
@@ -311,7 +323,7 @@ Format: ```clear```
 
 <div markdown="block" class="alert alert-info">
 **:information_source: Notes about specifying date and time:**<br>
-A task can have Date only or both Date and Time.
+A task can optionally have a Date, or both a Date and a Time.
 
 `add [dt/DATE] [dt/TIME] [dt/DATE, TIME]`
 
