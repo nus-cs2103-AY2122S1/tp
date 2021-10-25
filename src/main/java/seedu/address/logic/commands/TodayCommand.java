@@ -9,7 +9,7 @@ public class TodayCommand extends Command {
 
     public static final String COMMAND_WORD = "today";
 
-    public static final String COMMAND_ACTION = "Jump to today in the calendar.";
+    public static final String COMMAND_ACTION = "Go To Today In Calendar";
 
     public static final String USER_TIP = "To go to the current date on the calendar, type: " + COMMAND_WORD;
 

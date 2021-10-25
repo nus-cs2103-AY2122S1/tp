@@ -267,7 +267,7 @@ public class MainWindow extends UiPart<Stage> {
             case TAGS:
                 handleShowTagList();
                 break;
-                
+
             case CALENDAR:
                 handleCalendar();
                 break;

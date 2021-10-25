@@ -9,7 +9,7 @@ public class BackCommand extends Command {
 
     public static final String COMMAND_WORD = "back";
 
-    public static final String COMMAND_ACTION = "Navigate backwards the calendar.";
+    public static final String COMMAND_ACTION = "Go Back In Calendar";
 
     public static final String USER_TIP = "To navigate backward in the calendar, type: " + COMMAND_WORD;
 

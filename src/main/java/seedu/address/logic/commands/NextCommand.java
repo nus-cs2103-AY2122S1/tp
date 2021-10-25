@@ -9,7 +9,7 @@ public class NextCommand extends Command {
 
     public static final String COMMAND_WORD = "next";
 
-    public static final String COMMAND_ACTION = "Navigate forward the calendar.";
+    public static final String COMMAND_ACTION = "Go Forwards In Calendar";
 
     public static final String USER_TIP = "To navigate forward in the calendar, type: " + COMMAND_WORD;
 

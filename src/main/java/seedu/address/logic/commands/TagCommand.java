@@ -9,10 +9,10 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Displayed all tags! \n"
             + "To view student list, type: \"list\".\n"
-            + "To view schedule, type: \"schedule\".";
+            + "To view calendar, type: \"calendar\".";
 
     @Override
     public CommandResult execute() throws CommandException {
-        return new CommandResult(MESSAGE_SUCCESS, false, false, true, false, false);
+        return new CommandResult(MESSAGE_SUCCESS, CommandResult.DisplayType.TAGS);
     }
 }

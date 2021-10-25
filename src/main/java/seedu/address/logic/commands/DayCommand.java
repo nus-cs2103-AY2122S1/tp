@@ -9,7 +9,7 @@ public class DayCommand extends Command {
 
     public static final String COMMAND_WORD = "day";
 
-    public static final String COMMAND_ACTION = "View daily Schedule";
+    public static final String COMMAND_ACTION = "View Daily Schedule";
 
     public static final String USER_TIP = "To view your daily schedule, type: " + COMMAND_WORD;
 
