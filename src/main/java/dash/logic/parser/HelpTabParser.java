@@ -43,12 +43,18 @@ public class HelpTabParser {
             return new ExitCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
+
+        case SwitchTabContactsCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabContactsCommand(2);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
+
+        case SwitchTabTasksCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabTasksCommand(2);
 
         case SwitchTabHelpCommand.COMMAND_WORD:
+
+        case SwitchTabHelpCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabHelpCommand(2);
 
         default:

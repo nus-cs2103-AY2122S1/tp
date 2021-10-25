@@ -65,6 +65,10 @@ Switches to another specified tab.
 
 Format: ```contacts or tasks or help```
 
+Change tabs using shortcuts to save time:
+
+Format ```c or t or h```
+
 #### Exiting the program: [exit]
 
 Exits the program.

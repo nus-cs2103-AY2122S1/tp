@@ -92,12 +92,18 @@ public class TaskTabParser {
             return new UpcomingTaskCommand();
 
         case SwitchTabContactsCommand.COMMAND_WORD:
+
+        case SwitchTabContactsCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabContactsCommand(1);
 
         case SwitchTabTasksCommand.COMMAND_WORD:
+
+        case SwitchTabTasksCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabTasksCommand(1);
 
         case SwitchTabHelpCommand.COMMAND_WORD:
+
+        case SwitchTabHelpCommand.COMMAND_WORD_ALTERNATE:
             return new SwitchTabHelpCommand(1);
 
         default:
