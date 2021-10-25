@@ -297,7 +297,7 @@ Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIM
 Examples:
 * `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
 
-> :bulb: The lesson's capacity, pricing and timing are optional details for tutors to include.
+> :bulb: The lesson's capacity, price and timing are optional details for tutors to include.
 
 ### Deleting a lesson : `del -l`
 
