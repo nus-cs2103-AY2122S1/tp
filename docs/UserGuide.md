@@ -15,7 +15,7 @@ Spam is a desktop app for managing contacts **targeted at marketers who require 
   - [Locating persons by name: `find`](#locating-persons-find)
   - [Deleting a person: `delete`](#deleting-a-person-delete)
   - [Clearing all entries: `clear`](#clearing-all-entries-clear)
-  - [Exporting address book: `export`](#exporting-address-book)
+  - [Exporting address book: `export`](#exporting-address-book-export)
   - [Exiting the program: `exit`](#exiting-the-program-exit)
   - [Saving the data](#saving-the-data)
   - [Editing the data file](#editing-the-data-file)
