@@ -38,7 +38,7 @@ public class PersonCreateExecutor extends PersonExecutor {
         model.createPerson(person);
 
         if (index != null) {
-            if (model.getFilteredGroupList().size() > index.getOneBased()) {
+            if (model.getFilteredGroupList().size() >= index.getOneBased()) {
                 Group group = model.getFilteredGroupList().get(index.getZeroBased());
                 group.addPerson(person);
                 person.addGroup(group);

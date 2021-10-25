@@ -28,7 +28,7 @@ public class SubGroupCreateExecutor extends GroupExecutor {
 
     @Override public CommandResult execute() throws ExecuteException {
         try {
-            if (model.getFilteredGroupList().size() > index.getOneBased()) {
+            if (model.getFilteredGroupList().size() >= index.getOneBased()) {
                 Group group = model.getFilteredGroupList().get(index.getZeroBased());
                 // TODO: Guard clause for if group is a SubGroup instead.
                 // Make it return its own type of error.

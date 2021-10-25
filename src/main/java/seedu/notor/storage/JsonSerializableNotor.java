@@ -90,7 +90,7 @@ class JsonSerializableNotor {
             if (notor.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            for (String superGroup : person.getSuperGroups()) {
+            for (String superGroup : person.getDisplaySuperGroups()) {
                 notor.findSuperGroup(superGroup).addPerson(person);
             }
             for (String subGroup : person.getDisplaySubGroups()) {

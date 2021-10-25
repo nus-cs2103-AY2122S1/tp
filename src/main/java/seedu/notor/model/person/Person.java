@@ -8,6 +8,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 
+import com.opencsv.bean.CsvBindAndSplitByName;
+import com.opencsv.bean.CsvBindByName;
+
 import seedu.notor.model.Notable;
 import seedu.notor.model.common.Name;
 import seedu.notor.model.common.Note;
@@ -26,15 +29,27 @@ import seedu.notor.model.util.Unique;
 public class Person implements Unique<Person>, Notable {
 
     // Identity fields
+    @CsvBindByName(column = "Name")
     private final Name name;
+    @CsvBindByName(column = "Phone")
     private final Phone phone;
+    @CsvBindByName(column = "Email")
     private final Email email;
 
     // Data fields
+    @CsvBindAndSplitByName(column = "Tags", elementType = Tag.class, collectionType = HashSet.class,
+            writeDelimiter = ", ")
     private final Set<Tag> tags = new HashSet<>();
+
+    @CsvBindByName(column = "Note")
     private Note note = Note.EMPTY_NOTE;
-    private HashSet<String> superGroups = new HashSet<>();
-    private HashSet<String> subGroups = new HashSet<>();
+
+    @CsvBindAndSplitByName(column = "SuperGroups", elementType = String.class, collectionType = HashSet.class,
+                            writeDelimiter = ", ")
+    private HashSet<String> displaySuperGroups = new HashSet<>();
+    @CsvBindAndSplitByName(column = "SubGroups", elementType = String.class, collectionType = HashSet.class,
+                            writeDelimiter = ", ")
+    private HashSet<String> displaySubGroups = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -70,8 +85,8 @@ public class Person implements Unique<Person>, Notable {
         this.email = email;
         this.note = note;
         this.tags.addAll(tags);
-        this.superGroups = superGroups;
-        this.subGroups = subGroups;
+        this.displaySuperGroups = superGroups;
+        this.displaySubGroups = subGroups;
     }
 
     public Name getName() {
@@ -117,10 +132,10 @@ public class Person implements Unique<Person>, Notable {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSuperGroup(SuperGroup superGroup) throws DuplicateItemException {
-        if (superGroups.contains(superGroup.toString())) {
+        if (displaySuperGroups.contains(superGroup.toString())) {
             throw new DuplicateItemException();
         }
-        superGroups.add(superGroup.toString());
+        displaySuperGroups.add(superGroup.toString());
     }
 
     /**
@@ -130,10 +145,10 @@ public class Person implements Unique<Person>, Notable {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSuperGroup(String superGroup) throws DuplicateItemException {
-        if (superGroups.contains(superGroup)) {
+        if (displaySuperGroups.contains(superGroup)) {
             throw new DuplicateItemException();
         }
-        superGroups.add(superGroup);
+        displaySuperGroups.add(superGroup);
     }
 
     /**
@@ -143,10 +158,10 @@ public class Person implements Unique<Person>, Notable {
      * @throws DuplicateItemException if person is already in the group.
      */
     public void addSubGroup(SubGroup subGroup) {
-        if (subGroups.contains(subGroup.toString())) {
+        if (displaySubGroups.contains(subGroup.toString())) {
             throw new DuplicateItemException();
         }
-        subGroups.add(subGroup.toString());
+        displaySubGroups.add(subGroup.toString());
     }
 
     /**
@@ -156,11 +171,11 @@ public class Person implements Unique<Person>, Notable {
      * @throws ItemNotFoundException if person is not in in the group.
      */
     public void removeSuperGroup(String superGroup) throws ItemNotFoundException {
-        if (!superGroups.contains(superGroup)) {
+        if (!displaySuperGroups.contains(superGroup)) {
             throw new ItemNotFoundException();
         }
-        subGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
-        superGroups.remove(superGroup);
+        displaySubGroups.removeIf(subGroup -> subGroup.split("_")[0].equals(superGroup));
+        displaySuperGroups.remove(superGroup);
     }
 
     /**
@@ -170,18 +185,18 @@ public class Person implements Unique<Person>, Notable {
      * @throws ItemNotFoundException if SubGroup is not found.
      */
     public void removeSubGroup(SubGroup subGroup) throws ItemNotFoundException {
-        if (!subGroups.contains(subGroup.toString())) {
+        if (!displaySubGroups.contains(subGroup.toString())) {
             throw new ItemNotFoundException();
         }
-        subGroups.remove(subGroup.toString());
+        displaySubGroups.remove(subGroup.toString());
     }
 
-    public HashSet<String> getSuperGroups() {
-        return superGroups;
+    public HashSet<String> getDisplaySuperGroups() {
+        return displaySuperGroups;
     }
 
     public HashSet<String> getDisplaySubGroups() {
-        return subGroups;
+        return displaySubGroups;
     }
 
     /**
@@ -230,7 +245,7 @@ public class Person implements Unique<Person>, Notable {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getNote().equals(getNote())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getSuperGroups().equals(getSuperGroups())
+                && otherPerson.getDisplaySuperGroups().equals(getDisplaySuperGroups())
                 && otherPerson.getDisplaySubGroups().equals(getDisplaySubGroups());
     }
 
