@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -172,14 +173,18 @@ public class ModelManager implements Model {
 
         // Switch display mode if needed
         if (currentDisplay != mode) {
-            switch(mode) {
-            case DISPLAY_INVENTORY:
+            if (mode == DISPLAY_INVENTORY) {
+                // Display inventory items
                 displayList.setItems(this.inventory.getItemList());
-                break;
-            case DISPLAY_OPEN_ORDER:
-                displayList.setItems(this.optionalOrder.get().getOrderItems());
-                break;
+            } else {
+                // Display unopened order items
+                displayList.setItems(
+                    this.optionalOrder
+                        .map(Order::getOrderItems)
+                        .orElse(FXCollections.observableArrayList())
+                );
             }
+
             currentDisplay = mode;
         }
 

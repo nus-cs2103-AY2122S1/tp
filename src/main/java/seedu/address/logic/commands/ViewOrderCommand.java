@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.DisplayMode.DISPLAY_OPEN_ORDER;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 
 /**
  * Lists all items in the current order to the user.

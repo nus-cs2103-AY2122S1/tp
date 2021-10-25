@@ -1,15 +1,19 @@
 package seedu.address.model;
 
 import java.util.function.Predicate;
+
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.model.item.Item;
 
-import javafx.collections.ListChangeListener;
-
 /**
+ * Manages the list of items that is to be displayed by the UI.
+ * Linked to a {@code ObservableList} source such that
+ * any changes to the source will be propagated to the displayed list.
  *
+ * Needed by BogoBogo as the source to the displayed list can be switched at runtime.
  */
 public class DisplayList {
 
@@ -19,6 +23,9 @@ public class DisplayList {
 
     private ListChangeListener<Item> listener;
 
+    /**
+     * Constructs a {@code DisplayList} that uses {@code items} as it source.
+     */
     public DisplayList(ObservableList<Item> items) {
         source = items;
         displayedItems = FXCollections.observableArrayList(items);
@@ -28,6 +35,10 @@ public class DisplayList {
         source.addListener(listener);
     }
 
+
+    /**
+     * Set {@code items} as the new source.
+     */
     public void setItems(ObservableList<Item> items) {
         // Remove listener from old source
         source.removeListener(listener);
@@ -41,10 +52,16 @@ public class DisplayList {
         source.addListener(listener);
     }
 
+    /**
+     * Filters the displayed list with the given {@code predicate}.
+     */
     public void setPredicate(Predicate<Item> predicate) {
         filteredItems.setPredicate(predicate);
     }
 
+    /**
+     * Returns the filtered displayed list.
+     */
     public FilteredList<Item> getFilteredItemList() {
         return filteredItems;
     }
