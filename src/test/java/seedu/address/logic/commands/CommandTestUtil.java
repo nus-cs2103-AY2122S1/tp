@@ -187,9 +187,7 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showGroupAtIndex(Model model, Index targetIndex) {
-
         assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
-
         Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
         final String[] splitName = group.getName().name.split("\\s+");
         model.updateFilteredGroupList(new GroupNameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
