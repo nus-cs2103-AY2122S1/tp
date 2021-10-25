@@ -2,6 +2,10 @@ package seedu.plannermd.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -9,6 +13,7 @@ import java.util.Set;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.commons.util.StringUtil;
 import seedu.plannermd.logic.parser.exceptions.ParseException;
+import seedu.plannermd.model.appointment.AppointmentDate;
 import seedu.plannermd.model.appointment.Duration;
 import seedu.plannermd.model.patient.Risk;
 import seedu.plannermd.model.person.Address;
@@ -25,6 +30,8 @@ import seedu.plannermd.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static final DateTimeFormatter DATE_FILTER_FORMATTER = DateTimeFormatter.ofPattern("d/M/uuuu")
+            .withResolverStyle(ResolverStyle.STRICT);
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -158,6 +165,26 @@ public class ParserUtil {
             throw new ParseException(Risk.MESSAGE_CONSTRAINTS);
         }
         return new Risk(trimmedAndUpperCaseRisk);
+    }
+
+    /**
+     * Parses a {@code String string} into an {@code LocalDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException If the given {@code risk} is invalid or empty.
+     */
+    public static LocalDate stringToDate(String string) throws ParseException {
+        requireNonNull(string);
+        if (string.trim().isEmpty()) {
+            throw new ParseException(FilterAppointmentCommandParser.NO_ARGUMENTS_MESSAGE);
+        }
+
+        try {
+            return LocalDate.parse(string.trim(), DATE_FILTER_FORMATTER);
+        } catch (DateTimeParseException e) {
+            throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS);
+
+        }
     }
 
     /**
