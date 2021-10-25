@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
 public class Appointment implements Comparable<Appointment> {
     public static final String MESSAGE_CONSTRAINTS =
             "Meeting should be in the following format: dd-MMM-yyyy HH:mm ";
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter
             .ofPattern("dd-MMM-yyyy HH:mm"); // Specific format as described in argument.
 
     private final LocalDateTime appointmentTime;
@@ -76,6 +76,8 @@ public class Appointment implements Comparable<Appointment> {
             LocalDateTime.parse(convertMonthToFormat(meetingDateTime), FORMATTER);
             return true;
         } catch (DateTimeParseException e) {
+            return false;
+        } catch (StringIndexOutOfBoundsException error) {
             return false;
         }
     }
