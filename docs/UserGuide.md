@@ -64,26 +64,11 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 
 </div>
 
-### Show a window with instructions : `help`
+### Viewing instructions : `man`
 
-Shows the user another window which has a table of instructions that can be used to navigate the app.
+Shows you a table of instructions that can be used to navigate the app.
 
-Format: 
-* (From the main window) `help`
-* (From the help window) `help [COMMAND_NAME]`
-* If the user enters a valid command-name, the user will see the full details of that command, which includes the format and an example use of the command.
-
-Examples:
-* `help`
-* `help sort`
-
-Sample outcome (User typed `help sort`):
-```
-Sort persons by the alphabetical order of their name
-Format: sort [-r]
--r returns a sorted list in reverse order
-```
-
+Format: `man`
 
 ### Adding a person: `add`
 
@@ -122,23 +107,22 @@ Examples:
 * `edit 1 -p 91234567 -e johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 -n Betsy Crower -l ` Edits the name of the 2nd person to be `Betsy Crower` and clears their existing labels.
 
-### Locating persons by name: `find`
+### Locating persons: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose attribute (specified by the flag given) matches any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]…​`
+Format: `find [FLAG] KEYWORD [MORE_KEYWORDS]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords matters. e.g. `Hans Bo` will not match `Bo Hans`
+* Only the specified attribute is searched.
+* Abbreviations will be matched e.g. `Han` will match `Hans`
+* Persons matching all the keywords will be returned.
+  e.g. `A Y` will return `Alex Yeoh`, `Alexandra Yee`
 
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+Example:
+* `find [-n] Alex` Finds all people whose name matches the keyword "Alex".
+![result for 'find [-n] Alex'](images/findAlexResult.png)
 
 ### Deleting a person : `delete`
 
@@ -226,20 +210,21 @@ Exits the program.
 
 Format: `exit`
 
-### Viewing list of tasks of a person: `viewtask`
+### Viewing list of tasks of a person: `cat`
 
-Shows the user a list of tasks that has been attached to a specific person.
+Shows you a list of tasks that has been attached to a specific person.
 
-Format: `viewtask INDEX`
+Format: `cat INDEX [-f KEYWORDS]`
 
 * Displays the list of tasks attached to the person at the specified`INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, ...
+* If you give the optional arguments, you can see tasks in the task list that match the given keyword(s).
 
 Examples:
-* `list` followed by delete 2 deletes the 2nd person in the address book.
-* `find` Betsy followed by `delete 1` deletes the 1st person in the results of the `find`
-command.
+* `cat 1` Displays the list of tasks attached to the 1st person.
+  ![result for 'cat 1'](images/cat1Result.png)
+* `cat 1 -f work` Displays the list of tasks attached to the 1st person that match the given keywords(s).
 
 ### Sorting persons by name: `sort`
 
