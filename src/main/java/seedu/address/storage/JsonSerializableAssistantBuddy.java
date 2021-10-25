@@ -19,16 +19,16 @@ import seedu.address.model.module.student.Student;
 @JsonRootName(value = "assistantbuddy")
 class JsonSerializableAssistantBuddy {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate student(s).";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "Student list contains duplicate student(s).";
 
-    private final List<JsonAdaptedPerson> persons = new ArrayList<>();
+    private final List<JsonAdaptedStudent> students = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonSerializableAssistantBuddy} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAssistantBuddy(@JsonProperty("persons") List<JsonAdaptedPerson> persons) {
-        this.persons.addAll(persons);
+    public JsonSerializableAssistantBuddy(@JsonProperty("students") List<JsonAdaptedStudent> students) {
+        this.students.addAll(students);
     }
 
     /**
@@ -37,20 +37,23 @@ class JsonSerializableAssistantBuddy {
      * @param source future changes to this will not affect the created {@code JsonSerializableAssistantBuddy}.
      */
     public JsonSerializableAssistantBuddy(ReadOnlyTeachingAssistantBuddy source) {
-        persons.addAll(source.getStudentList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        students.addAll(source.getStudentList().stream().map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this address book into the model's {@code TeachingAssistantBuddy} object.
      *
      * @throws IllegalValueException if there were any data constraints violated.
+     * todo add modules to JSON, and when converting to TAB object need to add both students and modules to TAB,
+     * todo as well as adding students to the module
+     * todo as well as adding tasks to modules with their done/undone status
      */
     public TeachingAssistantBuddy toModelType() throws IllegalValueException {
         TeachingAssistantBuddy teachingAssistantBuddy = new TeachingAssistantBuddy();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Student student = jsonAdaptedPerson.toModelType();
+        for (JsonAdaptedStudent jsonAdaptedStudent : students) {
+            Student student = jsonAdaptedStudent.toModelType();
             if (teachingAssistantBuddy.hasStudent(student)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_STUDENT);
             }
             teachingAssistantBuddy.addStudent(student);
         }
