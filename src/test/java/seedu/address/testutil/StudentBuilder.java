@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.student.Address;
@@ -9,6 +11,7 @@ import seedu.address.model.student.Email;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.Phone;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +32,7 @@ public class StudentBuilder {
     private Address address;
     private ClassCode classCode;
     private Set<Tag> tags;
+    private List<StudentMark> marks;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -40,6 +44,7 @@ public class StudentBuilder {
         address = new Address(DEFAULT_ADDRESS);
         classCode = new ClassCode(DEFAULT_CLASSCODE);
         tags = new HashSet<>();
+        marks = new ArrayList<>();
     }
 
     /**
@@ -52,6 +57,7 @@ public class StudentBuilder {
         address = studentToCopy.getAddress();
         classCode = studentToCopy.getClassCode();
         tags = new HashSet<>(studentToCopy.getTags());
+        marks = new ArrayList<>(studentToCopy.getMarks());
     }
 
     /**
@@ -67,6 +73,14 @@ public class StudentBuilder {
      */
     public StudentBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code marks} into a {@code List<StudentMark>} and set it to the {@code Student} that we are building.
+     */
+    public StudentBuilder withMarks(String ... marks) {
+        this.marks = SampleDataUtil.getMarkList(marks);
         return this;
     }
 
@@ -103,7 +117,7 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        return new Student(name, phone, email, address, classCode, tags);
+        return new Student(name, phone, email, address, classCode, tags, marks);
     }
 
 }

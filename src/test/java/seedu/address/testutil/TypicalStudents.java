@@ -28,11 +28,11 @@ public class TypicalStudents {
     public static final Student ALICE = new StudentBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253").withClassCode("G01")
-            .withTags("friends").build();
+            .withTags("friends").withMarks("LOW", "HIGH").build();
     public static final Student BENSON = new StudentBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withClassCode("G01")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends").withMarks("EXCELLENT").build();
     public static final Student CARL = new StudentBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withClassCode("G01").build();
     public static final Student DANIEL = new StudentBuilder().withName("Daniel Meier").withPhone("87652533")
@@ -42,7 +42,7 @@ public class TypicalStudents {
             .withEmail("werner@example.com").withAddress("michegan ave")
             .withClassCode("G01").build();
     public static final Student FIONA = new StudentBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withEmail("lydia@example.com").withAddress("little tokyo").withClassCode("G02").build();
+            .withEmail("lydia@example.com").withAddress("little tokyo").withClassCode("G02").withMarks("HIGH").build();
     public static final Student GEORGE = new StudentBuilder().withName("George Best").withPhone("9482442")
             .withEmail("anna@example.com").withAddress("4th street").withClassCode("G01").build();
 
