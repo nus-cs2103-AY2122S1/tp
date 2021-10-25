@@ -70,7 +70,6 @@ public class ModelManager implements Model {
         requireNonNull(currentSemester);
         this.userInfo.setCurrentSemester(currentSemester);
         updateMcProgress();
-        updateModuleTrackerUserInfo();
     }
 
     @Override
@@ -91,10 +90,6 @@ public class ModelManager implements Model {
     @Override
     public void updateMcProgress() {
         moduleTracker.updateMcProgressList(this.userInfo);
-    }
-
-    public void updateModuleTrackerUserInfo() {
-        moduleTracker.updateUserInfo(this.userInfo);
     }
 
     //=========== UserPrefs ==================================================================================
