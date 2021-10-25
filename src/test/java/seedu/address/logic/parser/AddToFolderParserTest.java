@@ -4,11 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_FOLDER_NAME_CCA;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddToFolderCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.folder.FolderName;
+
 
 class AddToFolderParserTest {
 
@@ -17,7 +22,9 @@ class AddToFolderParserTest {
     @Test
     public void parse_allFieldsPresent_success() {
         FolderName expectedFolder = new FolderName(VALID_FOLDER_NAME_CCA);
-        AddToFolderCommand expectedAddToFolderCommand = new AddToFolderCommand(INDEX_FIRST_PERSON,
+        List<Index> indexList = new ArrayList<Index>();
+        indexList.add(INDEX_FIRST_PERSON);
+        AddToFolderCommand expectedAddToFolderCommand = new AddToFolderCommand(indexList,
                 expectedFolder);
         CommandParserTestUtil.assertParseSuccess(parser,
                 " 1 >> " + VALID_FOLDER_NAME_CCA,
@@ -27,7 +34,9 @@ class AddToFolderParserTest {
     @Test
     public void parse_folderNameWithWhitespace_success() {
         FolderName expectedFolder = new FolderName(VALID_FOLDER_NAME_CCA + " " + VALID_FOLDER_NAME_CCA);
-        AddToFolderCommand expectedAddToFolderCommand = new AddToFolderCommand(INDEX_FIRST_PERSON,
+        List<Index> indexList = new ArrayList<Index>();
+        indexList.add(INDEX_FIRST_PERSON);
+        AddToFolderCommand expectedAddToFolderCommand = new AddToFolderCommand(indexList,
                 expectedFolder);
         CommandParserTestUtil.assertParseSuccess(parser,
                 " 1 >> " + VALID_FOLDER_NAME_CCA + " " + VALID_FOLDER_NAME_CCA,
