@@ -5,7 +5,7 @@ import static seedu.tracker.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
-public class AcademicYear {
+public class AcademicYear implements Comparable<AcademicYear> {
     public static final String MESSAGE_CONSTRAINTS =
             "Academic Year should only contain numbers from 1 to 6, and it should not be blank";
 
@@ -52,5 +52,10 @@ public class AcademicYear {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    @Override
+    public int compareTo(AcademicYear academicYear) {
+        return this.value - academicYear.value;
     }
 }

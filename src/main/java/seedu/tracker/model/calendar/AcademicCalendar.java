@@ -4,7 +4,7 @@ import static seedu.tracker.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-public class AcademicCalendar {
+public class AcademicCalendar implements Comparable<AcademicCalendar> {
     public static final String MESSAGE_CONSTRAINTS = "Academic Year should only contain numbers from 1 to 6, and "
             + "semester should only contain numbers from 1 to 4. Both of them should not be blank.";
     private final AcademicYear year;
@@ -84,12 +84,19 @@ public class AcademicCalendar {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("year: ")
+        builder.append("year ")
                 .append(getAcademicYear())
-                .append(" ;")
-                .append("semester: ")
+                .append(",   semester ")
                 .append(getSemester());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(AcademicCalendar academicCalendar) {
+        if (this.year.compareTo(academicCalendar.year) == 0) {
+            return academicCalendar.semester.compareTo(this.semester);
+        }
+        return this.year.compareTo(academicCalendar.year);
     }
 
 }

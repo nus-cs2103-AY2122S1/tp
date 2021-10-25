@@ -56,4 +56,22 @@ class SemesterTest {
         assertEquals(false, test1.equals(test2));
     }
 
+    @Test
+    public void compareToTest() {
+        Semester semester1 = new Semester(1);
+        Semester semester4 = new Semester(4);
+
+        // left < right -> negative
+        int result = semester1.compareTo(semester4);
+        assertEquals(true, result < 0);
+
+        // left > right -> positive
+        result = semester4.compareTo(semester1);
+        assertEquals(true, result > 0);
+
+        // left = right -> 0
+        result = semester1.compareTo(semester1);
+        assertEquals(true, result == 0);
+    }
+
 }
