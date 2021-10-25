@@ -20,7 +20,7 @@ import seedu.programmer.commons.core.LogsCenter;
 /**
  * Controller for a help page
  */
-public class DashboardWindow extends UiPart<Stage> {
+public class DashboardWindow extends PopupWindow {
 
     private static final Logger logger = LogsCenter.getLogger(DashboardWindow.class);
     private static final String FXML = "DashboardWindow.fxml";
@@ -40,51 +40,5 @@ public class DashboardWindow extends UiPart<Stage> {
      */
     public DashboardWindow() {
         this(new Stage());
-    }
-
-
-    /**
-     * Shows the help window.
-     * @throws IllegalStateException
-     * <ul>
-     *     <li>
-     *         if this method is called on a thread other than the JavaFX Application Thread.
-     *     </li>
-     *     <li>
-     *         if this method is called during animation or layout processing.
-     *     </li>
-     *     <li>
-     *         if this method is called on the primary stage.
-     *     </li>
-     *     <li>
-     *         if {@code dialogStage} is already showing.
-     *     </li>
-     * </ul>
-     */
-    public void show() {
-        logger.fine("Showing help page about the application.");
-        getRoot().show();
-        getRoot().centerOnScreen();
-    }
-
-    /**
-     * Returns true if the help window is currently being shown.
-     */
-    public boolean isShowing() {
-        return getRoot().isShowing();
-    }
-
-    /**
-     * Hides the help window.
-     */
-    public void hide() {
-        getRoot().hide();
-    }
-
-    /**
-     * Focuses on the help window.
-     */
-    public void focus() {
-        getRoot().requestFocus();
     }
 }
