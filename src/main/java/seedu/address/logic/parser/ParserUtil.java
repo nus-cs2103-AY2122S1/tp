@@ -83,9 +83,9 @@ public class ParserUtil {
             String exceptionMessage = Nationality.MESSAGE_CONSTRAINTS;
 
             // Check for suggestions
-            if (Nationality.validNationalities.size() > 0) {
+            if (Nationality.VALID_NATIONALITIES.size() > 0) {
                 WordSuggestion nationalitiesSuggestion = new WordSuggestion(trimmedNationality,
-                        Nationality.validNationalities);
+                        Nationality.VALID_NATIONALITIES);
 
                 exceptionMessage = nationalitiesSuggestion.getSuggestedWords();
             }

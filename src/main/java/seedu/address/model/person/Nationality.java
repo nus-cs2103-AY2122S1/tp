@@ -6,14 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Scanner;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 /**
  * Represents a Person's nationality in the address book.
@@ -21,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class Nationality {
 
-    public static final List<String> validNationalities = new ArrayList<>();
+    public static final List<String> VALID_NATIONALITIES = new ArrayList<>();
     public static final String MESSAGE_CONSTRAINTS = "Nationality can take any values, and it should not be blank";
 
     /*
@@ -53,12 +47,12 @@ public class Nationality {
             return true;
         }
 
-        if (validNationalities.size() == 0) {
+        if (VALID_NATIONALITIES.size() == 0) {
             readValidNationalities();
         }
 
-        return validNationalities.size() > 0
-                ? validNationalities.contains(test.trim().toLowerCase())
+        return VALID_NATIONALITIES.size() > 0
+                ? VALID_NATIONALITIES.contains(test.trim().toLowerCase())
                 : test.matches(VALIDATION_REGEX);
     }
 
@@ -71,7 +65,7 @@ public class Nationality {
             Scanner sc = new Scanner(new File("data/nationalities.txt"));
 
             while (sc.hasNext()) {
-                validNationalities.add(sc.nextLine().toLowerCase());
+                VALID_NATIONALITIES.add(sc.nextLine().toLowerCase());
             }
 
             sc.close();

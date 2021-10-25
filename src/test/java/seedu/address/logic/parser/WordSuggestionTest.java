@@ -2,14 +2,13 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 public class WordSuggestionTest {
-    List<String> validWords = Arrays.asList("Singapore", "Indonesia", "Malaysia", "Philippines");
+    private final List<String> validWords = Arrays.asList("Singapore", "Indonesia", "Malaysia", "Philippines");
 
     @Test
     public void computeSingleLevenshteinDistance_validInput_success() {
