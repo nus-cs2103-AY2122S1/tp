@@ -163,7 +163,7 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredClientList(PREDICATE_SHOW_ALL_CLIENTS);
-        modelManager.updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+        // modelManager.updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
 
         // different userPrefs -> returns false
         UserPrefs differentUserPrefs = new UserPrefs();

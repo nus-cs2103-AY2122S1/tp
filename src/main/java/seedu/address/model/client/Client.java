@@ -51,62 +51,6 @@ public class Client {
         addTags(tags);
     }
 
-    public void delete() {
-        this.tags.forEach(t -> t.removeClient(this));
-    }
-
-    public ClientId getClientId() {
-        return clientId;
-    }
-
-    public Name getName() {
-        return name;
-    }
-
-    public Phone getPhone() {
-        return phone;
-    }
-
-    public Email getEmail() {
-        return email;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public LastMet getLastMet() {
-        return lastMet;
-    }
-
-    public NextMeeting getNextMeeting() {
-        return nextMeeting;
-    }
-
-    public CurrentPlan getCurrentPlan() {
-        return currentPlan;
-    }
-
-    public RiskAppetite getRiskAppetite() {
-        return riskAppetite;
-    }
-
-    public DisposableIncome getDisposableIncome() {
-        return disposableIncome;
-    }
-
-    public boolean hasNextMeeting() {
-        return !nextMeeting.isNullMeeting();
-    }
-
-    /**
-     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Tag> getTags() {
-        return Collections.unmodifiableSet(tags);
-    }
-
     /**
      * Assigns {@code tags} to the {@code Client}.
      *
@@ -115,6 +59,23 @@ public class Client {
     public void addTags(Set<Tag> tags) {
         this.tags.addAll(tags);
         this.tags.forEach(t -> t.addClient(this));
+    }
+
+    /**
+     * Removes lingering references to this client.
+     * Invokes this when the client is no longer referenced.
+     */
+    public void delete() {
+        tags.forEach(t -> t.removeClient(this));
+    }
+
+    /**
+     * Returns true if the client has next meeting.
+     *
+     * @return true if the client has next meeting.
+     */
+    public boolean hasNextMeeting() {
+        return !nextMeeting.isNullMeeting();
     }
 
     /**
@@ -132,11 +93,25 @@ public class Client {
         }
 
         return otherClient.getName().equals(getName())
-                || otherClient.getEmail().equals(getEmail());
+            || otherClient.getEmail().equals(getEmail());
+    }
+
+    public Name getName() {
+        return name;
+    }
+
+    public Email getEmail() {
+        return email;
     }
 
     public LocalDate getNextMeetingDate() {
         return nextMeeting.getDate();
+    }
+
+    @Override
+    public int hashCode() {
+        // use this method for custom fields hashing instead of implementing your own
+        return Objects.hash(name, phone, email, address, lastMet, currentPlan, tags);
     }
 
     /**
@@ -155,47 +130,77 @@ public class Client {
 
         Client otherClient = (Client) other;
         return otherClient.getClientId().equals(getClientId())
-                && otherClient.getName().equals(getName())
-                && otherClient.getPhone().equals(getPhone())
-                && otherClient.getEmail().equals(getEmail())
-                && otherClient.getAddress().equals(getAddress())
-                && otherClient.getRiskAppetite().equals(getRiskAppetite())
-                && otherClient.getDisposableIncome().equals(getDisposableIncome())
-                && otherClient.getCurrentPlan().equals(getCurrentPlan())
-                && otherClient.getLastMet().equals(getLastMet())
-                && otherClient.getTags().equals(getTags());
+            && otherClient.getName().equals(getName())
+            && otherClient.getPhone().equals(getPhone())
+            && otherClient.getEmail().equals(getEmail())
+            && otherClient.getAddress().equals(getAddress())
+            && otherClient.getRiskAppetite().equals(getRiskAppetite())
+            && otherClient.getDisposableIncome().equals(getDisposableIncome())
+            && otherClient.getCurrentPlan().equals(getCurrentPlan())
+            && otherClient.getLastMet().equals(getLastMet())
+            && otherClient.getTags().equals(getTags());
 
     }
 
-    @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, lastMet, currentPlan, tags);
+    public ClientId getClientId() {
+        return clientId;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public RiskAppetite getRiskAppetite() {
+        return riskAppetite;
+    }
+
+    public DisposableIncome getDisposableIncome() {
+        return disposableIncome;
+    }
+
+    public CurrentPlan getCurrentPlan() {
+        return currentPlan;
+    }
+
+    public LastMet getLastMet() {
+        return lastMet;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Tag> getTags() {
+        return Collections.unmodifiableSet(tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Client ID: ")
-                .append(getClientId())
-                .append("; Name: ")
-                .append(getName())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Risk Appetite: ")
-                .append(getRiskAppetite())
-                .append("; Disposable Income: ")
-                .append(getDisposableIncome())
-                .append("; current plans: ")
-                .append(getCurrentPlan())
-                .append("; Last Met: ")
-                .append(getLastMet())
-                .append("; Next Meeting: ")
-                .append(getNextMeeting());
+            .append(getClientId())
+            .append("; Name: ")
+            .append(getName())
+            .append("; Email: ")
+            .append(getEmail())
+            .append("; Phone: ")
+            .append(getPhone())
+            .append("; Address: ")
+            .append(getAddress())
+            .append("; Risk Appetite: ")
+            .append(getRiskAppetite())
+            .append("; Disposable Income: ")
+            .append(getDisposableIncome())
+            .append("; current plans: ")
+            .append(getCurrentPlan())
+            .append("; Last Met: ")
+            .append(getLastMet())
+            .append("; Next Meeting: ")
+            .append(getNextMeeting());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {
@@ -203,5 +208,9 @@ public class Client {
             tags.forEach(builder::append);
         }
         return builder.toString();
+    }
+
+    public NextMeeting getNextMeeting() {
+        return nextMeeting;
     }
 }

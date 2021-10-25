@@ -19,17 +19,6 @@ public class UniqueTagList implements Iterable<Tag> {
     private final ObservableList<Tag> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains {@code toCheck}.
-     *
-     * @param toCheck Tag to be checked.
-     * @return true if the list contains {@code toCheck}.
-     */
-    public boolean contains(Tag toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameTag);
-    }
-
-    /**
      * Returns true if a tag with the given tagName exists.
      *
      * @param tagName name of the tag
@@ -55,6 +44,17 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Returns true if the list contains {@code toCheck}.
+     *
+     * @param toCheck Tag to be checked.
+     * @return true if the list contains {@code toCheck}.
+     */
+    public boolean contains(Tag toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameTag);
+    }
+
+    /**
      * Removes the tags based on predicates from the list.
      * The tags must exist in the list.
      */
@@ -65,12 +65,6 @@ public class UniqueTagList implements Iterable<Tag> {
         if (filteredList.size() < 1) {
             throw new TagNotFoundException();
         } else {
-            // filteredList.forEach((f) -> {
-            //         if (internalList.contains(f)) {
-            //             internalList.remove(f);
-            //         }
-            //     }
-            // );
             internalList.removeAll(filteredList);
             return filteredList;
         }
@@ -124,15 +118,15 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     @Override
+    public int hashCode() {
+        return internalList.hashCode();
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof UniqueTagList // instanceof handles nulls
             && internalList.equals(((UniqueTagList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
     }
 
 }

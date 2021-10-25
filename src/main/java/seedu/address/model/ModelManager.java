@@ -38,6 +38,10 @@ public class ModelManager implements Model {
     private final FilteredList<Tag> filteredTags;
     private final AddressBookList addressBookList;
 
+    public ModelManager() {
+        this(new AddressBook(), new UserPrefs());
+    }
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -60,25 +64,21 @@ public class ModelManager implements Model {
 
         sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
 
-        // sortedTags = new SortedList<>(tagList);
+        // TODO: filter by colors, etc
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
-    }
-
-    public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
-        requireNonNull(userPrefs);
-        this.userPrefs.resetData(userPrefs);
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
+    public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        requireNonNull(userPrefs);
+        this.userPrefs.resetData(userPrefs);
     }
 
     @Override
@@ -98,14 +98,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookDirectory() {
-        return userPrefs.getAddressBookDirectory();
-    }
-
-    @Override
     public void setAddressBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
         userPrefs.setAddressBookFilePath(addressBookFilePath);
+    }
+
+    @Override
+    public ObservableList<Path> getAddressBookList() {
+        return this.addressBookList.getAddressBookList();
     }
 
     @Override
@@ -114,8 +114,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ObservableList<Path> getAddressBookList() {
-        return this.addressBookList.getAddressBookList();
+    public Path getAddressBookDirectory() {
+        return userPrefs.getAddressBookDirectory();
     }
 
     @Override
@@ -136,14 +136,14 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-        this.clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
+    public ReadOnlyAddressBook getAddressBook() {
+        return addressBook;
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        this.addressBook.resetData(addressBook);
+        this.clientToView.setPredicate(PREDICATE_SHOW_ALL_CLIENTS.negate());
     }
 
     @Override
@@ -159,8 +159,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Client> deleteClientByClientIds(List<ClientId> clientIds) {
-        return addressBook.deleteClientByClientIds(clientIds);
+    public List<Client> removeAll(List<ClientId> clientIds) {
+        return addressBook.removeAll(clientIds);
     }
 
     @Override
@@ -175,14 +175,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public List<Client> setClientByClientIds(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
+    public List<Client> setAll(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireAllNonNull(clientIds, editedClientDescriptor);
-        return addressBook.setClientByClientIds(clientIds, editedClientDescriptor);
-    }
-
-    @Override
-    public void addNextMeeting(NextMeeting nextMeeting) {
-        addressBook.addNextMeeting(nextMeeting);
+        return addressBook.setAll(clientIds, editedClientDescriptor);
     }
 
     @Override
@@ -200,7 +195,7 @@ public class ModelManager implements Model {
     @Override
     public void addTag(Tag tag) {
         addressBook.addTag(tag);
-        updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
+        // updateFilteredTagList(PREDICATE_SHOW_ALL_TAGS);
     }
 
     @Override
@@ -209,15 +204,12 @@ public class ModelManager implements Model {
         return addressBook.getTag(tagName);
     }
 
-    // TODO: divider here
     @Override
     public void updateFilteredTagList(Predicate<Tag> predicate) {
         requireNonNull(predicate);
         filteredTags.setPredicate(predicate);
         addressBook.removeUnreferencedTags();
     }
-
-    //=========== Filtered Client List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Client} backed by the internal list of
@@ -228,9 +220,16 @@ public class ModelManager implements Model {
         return filteredClients;
     }
 
+    //=========== Filtered Client List Accessors =============================================================
+
     @Override
     public ObservableList<Tag> getFilteredTagList() {
         return filteredTags;
+    }
+
+    @Override
+    public void addNextMeeting(NextMeeting nextMeeting) {
+        addressBook.addNextMeeting(nextMeeting);
     }
 
     @Override
@@ -281,14 +280,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void updateClientToView(Predicate<Client> predicate) {
-        requireNonNull(predicate);
-        clientToView.setPredicate(predicate);
+    public List<Client> retrieveSchedule(LocalDate date) {
+        return addressBook.retrieveLastMeetings(date);
     }
 
     @Override
-    public List<Client> retrieveSchedule(LocalDate date) {
-        return addressBook.retrieveLastMeetings(date);
+    public void updateClientToView(Predicate<Client> predicate) {
+        requireNonNull(predicate);
+        clientToView.setPredicate(predicate);
     }
 
     @Override

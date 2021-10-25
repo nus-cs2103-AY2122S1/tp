@@ -34,16 +34,15 @@ public interface Model {
      */
     Predicate<Tag> PREDICATE_SHOW_ALL_TAGS = unused -> true;
 
+    /**
+     * Returns the user prefs.
+     */
+    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
-
-    /**
-     * Returns the user prefs.
-     */
-    ReadOnlyUserPrefs getUserPrefs();
 
     /**
      * Returns the user prefs' GUI settings.
@@ -61,6 +60,11 @@ public interface Model {
     Path getAddressBookFilePath();
 
     /**
+     * Sets the user prefs' address book file path.
+     */
+    void setAddressBookFilePath(Path addressBookFilePath);
+
+    /**
      * Returns the list of all address book file path.
      */
     ObservableList<Path> getAddressBookList();
@@ -74,11 +78,6 @@ public interface Model {
      * Returns the user prefs' address book directory.
      */
     Path getAddressBookDirectory();
-
-    /**
-     * Sets the user prefs' address book file path.
-     */
-    void setAddressBookFilePath(Path addressBookFilePath);
 
     /**
      * Adds {@code filePath} to address books list
@@ -96,14 +95,14 @@ public interface Model {
     String getAddressBookListString();
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
-     */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
-
-    /**
      * Returns the AddressBook
      */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * Replaces address book data with the data in {@code addressBook}.
+     */
+    void setAddressBook(ReadOnlyAddressBook addressBook);
 
     /**
      * Returns true if a client with the same identity as {@code client} exists in the address book.
@@ -118,7 +117,7 @@ public interface Model {
     /**
      * Deletes the client with the matching Client ID and Email and returns the deleted client
      */
-    List<Client> deleteClientByClientIds(List<ClientId> clientIds);
+    List<Client> removeAll(List<ClientId> clientIds);
 
     /**
      * Deletes the meetings from the belonging to the deleted persons
@@ -136,7 +135,7 @@ public interface Model {
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
      */
-    List<Client> setClientByClientIds(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor);
+    List<Client> setAll(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor);
 
     /**
      * Returns client with corresponding clientId.

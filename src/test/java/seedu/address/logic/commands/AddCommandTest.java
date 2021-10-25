@@ -177,7 +177,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Client> deleteClientByClientIds(List<ClientId> clientIds) {
+        public List<Client> removeAll(List<ClientId> clientIds) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -187,8 +187,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public List<Client> setClientByClientIds(List<ClientId> clientIds,
-                                                 EditClientDescriptor editedClientDescriptor) {
+        public List<Client> setAll(List<ClientId> clientIds,
+                                   EditClientDescriptor editedClientDescriptor) {
             throw new AssertionError("This method should not be called.");
         }
 
