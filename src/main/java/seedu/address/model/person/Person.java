@@ -174,6 +174,11 @@ public class Person implements HasUniqueId, Attendee,
     }
 
     @Override
+    public boolean isValidLessonIndex(int index) {
+        return lessonsList.isValidIndex(index);
+    }
+
+    @Override
     public Person unassignLesson(int index) throws IndexOutOfBoundsException {
         NoOverlapLessonList newList = lessonsList.removeLesson(index);
         return new Person(id, name, phone, email, address, tags, assignedTaskIds, newList, exams, assignedGroupIds);

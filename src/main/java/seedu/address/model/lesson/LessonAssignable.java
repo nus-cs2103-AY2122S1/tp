@@ -23,6 +23,13 @@ public interface LessonAssignable {
     LessonAssignable assignLesson(Lesson lesson) throws CannotAssignException;
 
     /**
+     * Checks if the index is valid, meaning that it exists.
+     * @param index of lesson to check.
+     * @return true if index is a valid lesson.
+     */
+    boolean isValidLessonIndex(int index);
+
+    /**
      * Immutable way of removing a lesson
      * @param index of lesson to remove
      * @return LessonAssignable with removed lesson
