@@ -41,7 +41,10 @@ public class RecurringLesson extends Lesson {
      */
     @Override
     public Date getDisplayDate() {
-        return getStartDate().updateDate();
+        Date updatedDate = getStartDate().updateDate();
+        return getEndDate().compareTo(updatedDate) < 0 // end date earlier than updated date
+                ? getEndDate().getPreviousDate(updatedDate.getDayOfWeek())
+                : updatedDate;
     }
 
     private boolean checkOverlapping(Lesson other) {

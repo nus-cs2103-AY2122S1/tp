@@ -78,7 +78,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Update the lesson date to the same day on the most recent week
+     * Updates the  date to the same day on the most recent week
      * that has yet to be pass.
      *
      * @return newDate The date of the same day on the week that has yet to pass.
@@ -91,7 +91,19 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Check if the date has passed.
+     * Returns the latest date on the given day of week before or equal to the date.
+     *
+     * @return prevDate The latest passed date on the given day on the week.
+     */
+    public Date getPreviousDate(DayOfWeek dayOfWeek) {
+        LocalDate earlierDate = getLocalDate().isAfter(LocalDate.now()) ? LocalDate.now() : getLocalDate();
+        LocalDate updatedDate = earlierDate.with(TemporalAdjusters.previousOrSame(dayOfWeek));
+        Date prevDate = new Date(updatedDate.format(FORMATTER));
+        return prevDate;
+    }
+
+    /**
+     * Checks if the date has passed.
      *
      * @return true if date is earlier than now.
      */
