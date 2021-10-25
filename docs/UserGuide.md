@@ -6,7 +6,7 @@ If you are new, this guide is meant to introduce you to PlannerMD as well as gui
 experienced with PlannerMD, we hope that our comprehensive user guide will help clarify any that you have! Refer to our [table of contents](#toc) to see what
 we have to offer!
 
-##Table Of Contents <a name="toc"></a>
+## Table Of Contents <a name="toc"></a>
 * [What is Command-line Interface (CLI)?](#what-is-cli)
 * [Quick start](#quick-start)
 * [Features](#features)
@@ -42,6 +42,8 @@ we have to offer!
     * [find](#find-appointments)
     * [find upcoming](#upcoming-appointments)
     * [list](#list-appointments)
+* [Save data](#save-data)
+* [Edit data](#edit-data)
 * [FAQs](#faq)
 * [Command Summary](#command-summary)
 
@@ -67,7 +69,7 @@ all the details!<br>
 ![get format](images/user-guide/tipGetFormat.png)
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start <a name="quick-start"/>
+## Quick start <a name="quick-start"></a>
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -99,7 +101,7 @@ all the details!<br>
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features <name="features"/>
+## Features <a name="features"/>
 
 <div markdown="block" class="alert alert-info">
 
@@ -126,7 +128,7 @@ all the details!<br>
 
 </div>
 
-### Viewing help : `help` <name="help"/>
+### Viewing help : `help` <a name="help"/>
 
 Shows a message explaining how to access the help page. You can click on the help button on the top left 
 corner of the application.
@@ -138,7 +140,7 @@ Format: `help`
 
 ---
 
-### Toggling between tabs: `toggle` <name="toggle"/>
+### Toggling between tabs: `toggle` <a name="toggle"/>
 
 Toggles between `Patients` tab and `Doctors` tab.<br>
 Commands entered while the `Patients` tab is displayed will only affect patients whereas commands entered while the `Doctors` tab is displayed will only affect doctors.
@@ -146,7 +148,7 @@ Commands entered while the `Patients` tab is displayed will only affect patients
 Format: `toggle`
 
 
-### Clearing all entries : `clear` <name="clear"/>
+### Clearing all entries : `clear` <a name="clear"/>
 
 Clears all patient/doctor entries.
 
@@ -155,7 +157,7 @@ Format: `clear`
 Examples:
 Typing `clear` in the patients tab removes all patient entries.
 
-### Exiting the program : `exit` <name="exit"/>
+### Exiting the program : `exit` <a name="exit"/>
 
 Exits the program.
 
@@ -163,9 +165,9 @@ Format: `exit`
 
 ---
 
-## Managing Patients <name="managing-patients"/>
+## Managing Patients <a name="managing-patients"/>
 
-### Adding a patient: `add` <name="add-patient"/>
+### Adding a patient: `add` <a name="add-patient"/>
 
 Adds a patient to the patient records. 
 
@@ -181,13 +183,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 dob/20/07/1964 t/COVID risk/HIGH` 
 
-### Listing all patients : `list` <name="list-patient"/>
+### Listing all patients : `list` <a name="list-patient"/>
 
 Shows a list of all patients in the patient records.
 
 Format: `list`
 
-### Editing a patient's information : `edit` <name="edit-patient"/>
+### Editing a patient's information : `edit` <a name="edit-patient"/>
 
 Edits an existing patient in the patient records.
 
@@ -206,7 +208,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd patient to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 
-### Adding a remark to a patient's information : `remark` <name="remark-patient"/>
+### Adding a remark to a patient's information : `remark` <a name="remark-patient"/>
 
 Adds a remark to an existing patient in the patient records.
 
@@ -220,7 +222,7 @@ Examples:
 *  `remark 1 r/` Edits the remark of the 1st patient to be blank.
 *  `remark 2 r/Chronic diabetic, monthly insulin pick up` Edits the remark of the 2nd patient to be `Chronic diabetic, monthly insulin pick up`.
 
-### Locating patients by name: `find` <name="find-patient"/>
+### Locating patients by name: `find` <a name="find-patient"/>
 
 Finds patients whose names contain any of the given keywords
 
@@ -239,7 +241,7 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a patient : `delete` <name="delete-patient"/>
+### Deleting a patient : `delete` <a name="delete-patient"/>
 
 Deletes a patient record from the list.
 
@@ -253,9 +255,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd patient in the patient records.
 * `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
 
-### Managing Tags `tag` <name="managing-patient-tag"/>
+### Managing Tags `tag` <a name="managing-patient-tag"/>
 
-### Adding tags to a patient: `tag -a` <name="add-patient-tag"/>
+### Adding tags to a patient: `tag -a` <a name="add-patient-tag"/>
 
 Adds a new tag to a patient’s record.
 
@@ -270,7 +272,7 @@ Format: `tag -a INDEX t/TAG`
 Examples:
 `tag -a 1 t/Covid` tags the first patient with a *Covid* tag.
 
-### Deleting a patient's tags : `tag -d` <name="delete-patient-tag"/>
+### Deleting a patient's tags : `tag -d` <a name="delete-patient-tag"/>
 
 Deletes a tag from a patient's record.
 
@@ -286,9 +288,9 @@ Examples:
 
 ---
 
-## Managing Doctors <name="managing-doctors"/>
+## Managing Doctors <a name="managing-doctors"/>
 
-### Adding a doctor: `add` <name="add-doctor"/>
+### Adding a doctor: `add` <a name="add-doctor"/>
 
 Adds a doctor to the doctor records.
 
@@ -302,13 +304,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dob/20/07/1964`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Bukit Merah p/1234567 dob/20/07/1964 t/COVID`
 
-### Listing all doctors : `list` <name="list-doctor"/>
+### Listing all doctors : `list` <a name="list-doctor"/>
 
 Shows a list of all doctors in the doctor records.
 
 Format: `list`
 
-### Editing a doctor's information : `edit` <name="edit-doctor"/>
+### Editing a doctor's information : `edit` <a name="edit-doctor"/>
 
 Edits an existing doctor in the doctor records.
 
@@ -326,7 +328,7 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st doctor to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy dob/20/07/1964 Crower t/` Edits the name and date of birth of the 2nd doctor to be `Betsy Crower` and `20/07/1964` respectively, and clears all existing tags.
 
-### Adding a remark to a doctor's information : `remark` <name="remark-doctor"/>
+### Adding a remark to a doctor's information : `remark` <a name="remark-doctor"/>
 
 Adds a remark to an existing doctor in the doctor records.
 
@@ -340,7 +342,7 @@ Examples:
 *  `remark 1 r/` Edits the remark of the 1st doctor to be blank.
 *  `remark 2 r/Comes at 8am` Edits the remark of the 2nd doctor to be `Comes at 8am`.
 
-### Locating doctors by name: `find` <name="find-doctor"/>
+### Locating doctors by name: `find` <a name="find-doctor"/>
 
 Finds doctors whose names contain any of the given keywords
 
@@ -358,7 +360,7 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
 
-### Deleting a doctor : `delete` <name="delete-doctor"/>
+### Deleting a doctor : `delete` <a name="delete-doctor"/>
 
 Deletes a doctor record from the list.
 
@@ -372,9 +374,9 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd doctor in the doctor records.
 * `find Betsy` followed by `delete 1` deletes the 1st doctor in the results of the `find` command.
 
-### Managing Tags `tag` <name="managing-doctor-tag"/>
+### Managing Tags `tag` <a name="managing-doctor-tag"/>
 
-### Adding tags to a doctor: `tag -a` <name="add-doctor-tag"/>
+### Adding tags to a doctor: `tag -a` <a name="add-doctor-tag"/>
 
 Adds a new tag to a doctor’s record.
 
@@ -389,7 +391,7 @@ Format: `tag -a INDEX t/TAG`
 Examples:
 `tag -a 1 t/Pediatrician` tags the first doctor with a *Pediatrician* tag.
 
-### Deleting a doctor's tags : `tag -d` <name="delete-doctor-tag"/>
+### Deleting a doctor's tags : `tag -d` <a name="delete-doctor-tag"/>
 
 Deletes a tag from a doctor's record.
 
@@ -405,27 +407,27 @@ Examples:
 
 ---
 
-## Managing Appointments `appt` <name="managing-appointments"/>
+## Managing Appointments `appt` <a name="managing-appointments"/>
 
-### Adding an appointment: `appt -a` <name="add-appointment"/>
+### Adding an appointment: `appt -a` <a name="add-appointment"/>
 
-### Editing an appointment: `appt -e` <name="edit-appointment"/>
+### Editing an appointment: `appt -e` <a name="edit-appointment"/>
 
-### Deleting an appointment: `appt -d` <name="delete-appointment"/>
+### Deleting an appointment: `appt -d` <a name="delete-appointment"/>
 
-### Filtering all appointments: `appt -f` <name="find-appointments"/>
+### Filtering all appointments: `appt -f` <a name="find-appointments"/>
 
-### Filtering upcoming appointments: `appt -u` <name="upcoming-appointments"/>
+### Filtering upcoming appointments: `appt -u` <a name="upcoming-appointments"/>
 
-### Listing appointments today: `appt -l` <name="list-appointments"/>
+### Listing appointments today: `appt -l` <a name="list-appointments"/>
 
 ---
 
-### Saving the data
+### Saving the data <a name="save-data"/>
 
 PlannerMD data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### Editing the data file
+### Editing the data file <a name="edit-data"/>
 
 PlannerMD data are saved as a JSON file `[JAR file location]/data/plannermd.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -439,14 +441,14 @@ _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ <name="faq"/>
+## FAQ <a name="faq"/>
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary <name="command-summary"/>
+## Command summary <a name="command-summary"/>
 
 Action | Format, Examples
 --------|------------------
