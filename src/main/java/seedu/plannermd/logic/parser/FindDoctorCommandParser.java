@@ -9,6 +9,7 @@ import seedu.plannermd.logic.parser.exceptions.ParseException;
 import seedu.plannermd.model.person.NameContainsKeywordsPredicate;
 
 public class FindDoctorCommandParser implements Parser<FindDoctorCommand> {
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindDoctorCommand
      * and returns a FindPatientCommand object for execution.

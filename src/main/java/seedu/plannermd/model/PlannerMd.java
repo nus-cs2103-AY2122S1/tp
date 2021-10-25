@@ -4,12 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.appointment.UniqueAppointmentList;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 import seedu.plannermd.model.person.UniquePersonList;
 
 /**
@@ -95,6 +97,14 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     /**
+     * Returns true if a patient with the same identity as {@code patient} exists in the PlannerMD.
+     */
+    public Optional<Patient> getExactPatient(Patient patient) {
+        requireNonNull(patient);
+        return patients.getExactPerson(patient);
+    }
+
+    /**
      * Adds a patient to the PlannerMD.
      * The patient must not already exist in the PlannerMD.
      */
@@ -129,6 +139,14 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     public boolean hasDoctor(Doctor doctor) {
         requireNonNull(doctor);
         return doctors.contains(doctor);
+    }
+
+    /**
+     * Returns true if a doctor with the same equality as {@code patient} exists in the PlannerMD.
+     */
+    public Optional<Doctor> getExactDoctor(Doctor doctor) {
+        requireNonNull(doctor);
+        return doctors.getExactPerson(doctor);
     }
 
     /**
@@ -168,6 +186,19 @@ public class PlannerMd implements ReadOnlyPlannerMd {
     }
 
     /**
+     * Returns true if an existing appointment clashes with {@code appointment} in the PlannerMD.
+     */
+    public boolean isClashAppointment(Appointment appointment) {
+        requireNonNull(appointment);
+        for (Appointment existingAppointment : appointments) {
+            if (appointment.isClash(existingAppointment)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an appointment to the PlannerMD.
      * The appointment must not already exist in the PlannerMD.
      */
@@ -194,12 +225,34 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         appointments.remove(key);
     }
 
+    /**
+     * Deletes appointments with {@code person} from the appointment list
+     *
+     * @param person person whose appointments should be deleted
+     * @param <T> Subtype of Person
+     */
+    public <T extends Person> void deleteAppointmentsWithPerson(T person) {
+        appointments.deleteAppointmentsWithPerson(person);
+    }
+
+    /**
+     * Updates appointments with {@code person} to {@code editedPerson} from the appointment list
+     *
+     * @param person person whose appointments should be updated
+     * @param editedPerson the person to replace {@code person} in existing appointments
+     * @param <T> Subtype of Person
+     */
+    public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
+        appointments.editAppointmentsWithPerson(person, editedPerson);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return patients.asUnmodifiableObservableList().size() + " patients\n"
-                + doctors.asUnmodifiableObservableList().size() + " doctors";
+                + doctors.asUnmodifiableObservableList().size() + " doctors\n"
+                + appointments.asUnmodifiableObservableList().size() + " appointments";
     }
 
     @Override
@@ -222,7 +275,9 @@ public class PlannerMd implements ReadOnlyPlannerMd {
         return other == this // short circuit if same object
                 || (other instanceof PlannerMd // instanceof handles nulls
                 && doctors.equals(((PlannerMd) other).doctors)
-                && patients.equals(((PlannerMd) other).patients));
+                && patients.equals(((PlannerMd) other).patients))
+                && appointments.equals(((PlannerMd) other).appointments);
+
     }
 
     @Override

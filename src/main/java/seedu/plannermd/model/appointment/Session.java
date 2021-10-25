@@ -138,6 +138,21 @@ public class Session {
         return end.format(DISPLAYED_TIME_FORMATTER);
     }
 
+    /**
+     * Returns the number of minutes in this Session.
+     */
+    public Integer getMinutes() {
+        return duration.getMinutes();
+    }
+
+    /**
+     * Returns the start time in input format.
+     */
+    public String toInputStringFormat() {
+        return start.format(TIME_FORMATTER);
+    }
+
+
     @Override
     public String toString() {
         return "Start: " + getFormattedStartTime() + "; End: " + getFormattedEndTime();

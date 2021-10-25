@@ -24,6 +24,7 @@ import seedu.plannermd.model.ReadOnlyUserPrefs;
 import seedu.plannermd.model.appointment.Appointment;
 import seedu.plannermd.model.doctor.Doctor;
 import seedu.plannermd.model.patient.Patient;
+import seedu.plannermd.model.person.Person;
 import seedu.plannermd.testutil.doctor.DoctorBuilder;
 
 public class AddDoctorCommandTest {
@@ -179,6 +180,11 @@ public class AddDoctorCommandTest {
         }
 
         @Override
+        public boolean isClashAppointment(Appointment appointment) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAppointment(Appointment appointment) {
             throw new AssertionError("This method should not be called.");
         }
@@ -225,6 +231,16 @@ public class AddDoctorCommandTest {
 
         @Override
         public void updateFilteredAppointmentList(Predicate<? super Appointment> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public <T extends Person> void deleteAppointmentsWithPerson(T person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public <T extends Person> void editAppointmentsWithPerson(T person, T editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
     }
