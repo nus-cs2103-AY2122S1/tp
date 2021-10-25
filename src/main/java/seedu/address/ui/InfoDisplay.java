@@ -59,6 +59,9 @@ public class InfoDisplay extends UiPart<Region> {
         }
     }
 
+    /**
+     * Displays info of a {@code student}.
+     */
     public void setStudentInfo(Student student) {
         name.setText(student.getName().fullName);
         info1.setText("ID: " + student.getId().value);
@@ -68,6 +71,9 @@ public class InfoDisplay extends UiPart<Region> {
         info2.setText("Groups: " + groupsString);
     }
 
+    /**
+     * Displays info of an {@code assessment}.
+     */
     public void setAssessmentInfo(Assessment assessment) {
         name.setText(assessment.getName());
 
@@ -79,6 +85,9 @@ public class InfoDisplay extends UiPart<Region> {
         info5.setText("75th percentile: " + statistics.getXPercentile(75));
     }
 
+    /**
+     * Clears any existing info.
+     */
     public void clearInfo() {
         name.setText(null);
         info1.setText(null);
