@@ -1,15 +1,16 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
-import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.task.Task;
 
 /**
@@ -166,7 +167,39 @@ public interface Model {
      * Gets the sorted lessons with its corresponding attendees
      * @return
      */
-    List<LessonWithAttendees> getSortedLessonsWithAttendees();
+    ObservableList<LessonWithAttendees> getSortedLessonsWithAttendees();
+
+    /**
+     * Forces an update of the lesson with attendees list
+     */
+    void updateLessonWithAttendeesList();
+
+    /**
+     * Gets the current viewing type of the model.
+     * Viewing type is used to determine what the user is viewing in the panel.
+     * @return
+     */
+    ObservableValue<ViewingType> getViewingType();
+
+    /**
+     * Sets the viewing type of the model.
+     * @param type to set to.
+     */
+    void setViewingType(ViewingType type);
+
+    /**
+     * Gets the current person to be viewed by the user.
+     * @return PersonWithDetails of the person to be viewed.
+     */
+    ObservableValue<PersonWithDetails> getViewingPersonWithDetails();
+
+    /**
+     * Sets the current viewing of the Person.
+     * It is the model's responsibility to figure out the person's details.
+     *
+     * @param person to set the PersonWithDetails
+     */
+    void setPersonToView(Person person);
 
     /**
      * Returns a mapper that can convert unique Ids to persons

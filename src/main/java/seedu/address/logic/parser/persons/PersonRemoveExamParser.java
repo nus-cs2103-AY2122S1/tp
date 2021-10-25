@@ -33,7 +33,7 @@ public class PersonRemoveExamParser implements Parser<EditPersonCommand> {
             indexes = ParserUtil.parseAllIndex(userInput);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    PersonAddLessonParser.MESSAGE_USAGE), pe);
+                    MESSAGE_USAGE), pe);
         }
         EditPersonCommand.EditPersonDescriptor editPersonDescriptor = new EditPersonCommand.EditPersonDescriptor();
         editPersonDescriptor.removeExam(indexes.get(1));

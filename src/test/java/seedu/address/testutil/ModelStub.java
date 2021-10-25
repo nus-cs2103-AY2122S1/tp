@@ -4,19 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.ViewingType;
 import seedu.address.model.group.Group;
 import seedu.address.model.id.UniqueIdMapper;
 import seedu.address.model.lesson.LessonWithAttendees;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonWithDetails;
 import seedu.address.model.task.Task;
 
 /**
@@ -154,7 +156,32 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public List<LessonWithAttendees> getSortedLessonsWithAttendees() {
+    public ObservableList<LessonWithAttendees> getSortedLessonsWithAttendees() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void updateLessonWithAttendeesList() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableValue<ViewingType> getViewingType() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setViewingType(ViewingType type) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public ObservableValue<PersonWithDetails> getViewingPersonWithDetails() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void setPersonToView(Person person) {
         throw new AssertionError("This method should not be called.");
     }
 
