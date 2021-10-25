@@ -68,8 +68,9 @@ public class RecurringLesson extends Lesson {
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         } else {
-            return getLocalDate().compareTo(otherLesson.getLocalDate()) <= 0 // same date or before
+            return getLocalDate().compareTo(otherLesson.getLocalDate()) <= 0 // same start date or before
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+                    && !getEndDate().getLocalDate().isBefore(otherLesson.getLocalDate()) // end after other start
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
     }

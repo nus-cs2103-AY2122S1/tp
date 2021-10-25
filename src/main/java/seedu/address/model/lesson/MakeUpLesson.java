@@ -51,6 +51,7 @@ public class MakeUpLesson extends Lesson {
         if (otherLesson.isRecurring()) {
             return getLocalDate().compareTo(otherLesson.getLocalDate()) >= 0 // same date or after
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+                    && !getLocalDate().isAfter(otherLesson.getEndDate().getLocalDate()) // within date range
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         } else {
             return getLocalDate().equals(otherLesson.getLocalDate())
