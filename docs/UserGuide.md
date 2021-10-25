@@ -284,6 +284,26 @@ Examples:
 - `unpaid 3` updates the 3rd student's payment status to "unpaid".
 <hr>
 
+### Locating students or lessons by name: `find -s` / `find -l`
+
+Finds students or lessons whose names contain any of the given keywords. Use `-s` flag to search for students and
+`-l` to search for lessons.
+
+Format: `find FLAG KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Partial keywords will be matched e.g. `Han` will match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find -s John` returns `john`, `John Doe` and `Johnny Liu`
+* `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
+* `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
+
+
 # 5. FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
@@ -304,4 +324,6 @@ Action | Format, Examples
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 **View** | `view STUDENT_INDEX`<br> e.g., `view 2`
+**Find student** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
+**Find lesson** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 **Exit** | `exit`
