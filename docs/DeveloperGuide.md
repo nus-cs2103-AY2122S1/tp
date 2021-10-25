@@ -374,6 +374,20 @@ The Sequence Diagram below illustrates the interactions within the `Logic` compo
   	- More troublesome for the user as user has to search for the csv file's absolute path.
   	- File could also not exist or be in the wrong format. Would require additional exception handling.
 
+### Batch Export
+
+#### Implementation
+
+The export feature is implemented with the following classes:
+
+- `ExportCommandParser` — Ensures argument provided for the export command is a valid filename.
+- `ExportCommand` — Handles communication with `Model` to extract the `selectedPersonList` and converts each field of `Person` into its String representation before handing the data to the `CsvWriter`.
+- `CsvWriter` — A utility class that handles the task of writing to _csv_ files. `CsvWriter#write()` takes in a filepath, an array of headers and the data mapped to aforementioned headers via a `java.util.HashMap`. The data is then written to a _csv_ file located at the provided filepath.
+
+The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("export filepath")` API call.
+
+![Interactions Inside the Logic Component for the `export` Command](images/ExportSequenceDiagram.png)
+
 ### Encryption
 
 **Specifications:**
