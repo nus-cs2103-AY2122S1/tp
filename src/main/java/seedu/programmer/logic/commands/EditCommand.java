@@ -3,8 +3,8 @@ package seedu.programmer.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_CLASS_ID + "CLASS_ID] "
             + "[" + PREFIX_EMAIL + "email] "
             + "[" + PREFIX_EMAIL + "email] "
-            + "[" + PREFIX_LAB_TITLE + "Lab Title] "
+            + "[" + PREFIX_LAB_NUM + "Lab Title] "
             + "[" + PREFIX_LAB_RESULT + "Score] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_STUDENT_ID + "A0121234H "
@@ -89,7 +89,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Student} with the details of {@code studentToEdit}
      * edited with {@code editStudentDescriptor}.
      */
-    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor) {
+    private static Student createEditedStudent(Student studentToEdit, EditStudentDescriptor editStudentDescriptor)
+            throws CommandException {
         assert studentToEdit != null;
 
         Name updatedName = editStudentDescriptor.getName().orElse(studentToEdit.getName());

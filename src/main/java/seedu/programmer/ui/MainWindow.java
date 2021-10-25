@@ -348,7 +348,6 @@ public class MainWindow extends UiPart<Stage> {
                 EditCommandResult editCommandResult = (EditCommandResult) commandResult;
                 handleShowResult(editCommandResult.getEditedStudent());
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

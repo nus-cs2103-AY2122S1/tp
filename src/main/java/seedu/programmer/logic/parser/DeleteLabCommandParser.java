@@ -1,7 +1,7 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 
 import java.util.stream.Stream;
 
@@ -23,15 +23,15 @@ public class DeleteLabCommandParser implements Parser<DeleteLabCommand> {
      */
     public DeleteLabCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LAB_TITLE);
+                ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_LAB_TITLE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteLabCommand.MESSAGE_USAGE));
         }
 
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(""));
+        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(""));
         Lab labResult = new Lab(title);
 
         return new DeleteLabCommand(labResult);
