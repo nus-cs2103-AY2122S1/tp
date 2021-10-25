@@ -56,7 +56,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane studentListPanelPlaceholder;
 
     @FXML
-    private ScrollPane scrollPane;
+    private ScrollPane terminalScrollPane;
 
     @FXML
     private VBox terminalContainer;
@@ -169,7 +169,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(terminalContainer.heightProperty());
+        terminalScrollPane.vvalueProperty().bind(terminalContainer.heightProperty());
     }
 
     /**

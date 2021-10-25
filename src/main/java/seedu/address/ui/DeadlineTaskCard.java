@@ -62,7 +62,7 @@ public class DeadlineTaskCard extends UiPart<Region> {
         DeadlineTask deadlineTask = (DeadlineTask) task;
         status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
-        priorityLabel.setText(task.getPriorityAsString());
+        priorityLabel.setText("priority: "+ task.getPriorityAsString());
         taskType.setText("Deadline");
 
         taskDate.setText("Date: " + deadlineTask.getDeadline().getDeadline().format(formatter));

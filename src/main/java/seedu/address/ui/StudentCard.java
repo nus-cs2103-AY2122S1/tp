@@ -43,6 +43,8 @@ public class StudentCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox studentValuesContainer;
+    @FXML
+    private FlowPane studentGroupContainer;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -54,6 +56,9 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText("Email: " + student.getEmail().value);
         studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
+        if (!student.getGroupName().toString().contentEquals("-")) {
+            studentGroupContainer.getChildren().add(new Label(student.getGroupName().toString()));
+        }
 
         studentValuesContainer.getChildren().addAll(
                 new StudentValuesBox(StudentValuesBox.ATTENDANCE_HEADER, student.getAttendance()),

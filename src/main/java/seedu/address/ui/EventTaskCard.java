@@ -56,7 +56,7 @@ public class EventTaskCard extends UiPart<Region> {
         EventTask eventTask = (EventTask) task;
         status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
-        priorityLabel.setText(task.getPriorityAsString());
+        priorityLabel.setText("priority: "+ task.getPriorityAsString());
         taskType.setText("Event");
 
         taskDate.setText("Date: " + eventTask.getTaskDate().getDeadline().format(formatter));
