@@ -14,10 +14,10 @@ public class SummaryPanel extends UiPart<Region> {
     private static final String FXML = "SummaryPanel.fxml";
     private static final String DISPLAY_TOTAL_ELDERLY = "Total number of elderly: ";
     private static final String DISPLAY_OVERDUE_VISITS = "Number of overdue visits: ";
-    private static final String DISPLAY_VISITS_NEXT_WEEK = "Number of scheduled visits next week: ";
-    private static final String DISPLAY_VISITS_NEXT_MONTH = "Number of scheduled visits next month: ";
-    private static final String DISPLAY_VISITS_LAST_WEEK = "Number of last visits in the last week: ";
-    private static final String DISPLAY_VISITS_LAST_MONTH = "Number of last visits in last month: ";
+    private static final String DISPLAY_VISITS_NEXT_WEEK = "Number of scheduled visits in the next 7 days: ";
+    private static final String DISPLAY_VISITS_NEXT_MONTH = "Number of scheduled visits in the next 30 days: ";
+    private static final String DISPLAY_VISITS_LAST_WEEK = "Number of last visits in the past 7 days: ";
+    private static final String DISPLAY_VISITS_LAST_MONTH = "Number of last visits in the past 30 days: ";
 
     public final ReadOnlySummary summary;
 
