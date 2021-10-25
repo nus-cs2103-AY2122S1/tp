@@ -185,7 +185,7 @@ Take note that for all the commands listed below, we follow these notations and 
 
 ### Viewing help: `help`
 
-Opens a new window that contains command usage, and a quick start guide.
+You can use the `help` command to open a new window that contains the command usage, and a quick start guide.
 In the help window, you can access all the command usages using the dropdown menu.
 
 ![help window](images/helpWindow.png)
@@ -203,7 +203,7 @@ The help window can also be quickly accessed by entering using the F1 key on you
 
 ### Adding a client: `add`
 
-Adds a client to FAST.
+You can add a client to FAST.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
@@ -221,15 +221,16 @@ A client can have any number of tags (including 0)
 
 ### Listing all clients: `list`
 
-Shows a list of all your clients in FAST. This command is useful to return to viewing your full client list
-after a [find](#searching-for-clients-find) command has been executed.
+Shows you the list of all your clients in FAST. 
+This command is useful to return to viewing your full client list after a 
+[find](#searching-for-clients-find) command has been executed.
 
 **Format**: `list` 
 
 ### Editing a client: `edit`
 
-Edits an existing client in FAST. This can be used if the client's information has changed, or if you
-entered an incorrect entry previously.
+You can edit an existing client in FAST. 
+This can be used if the client's information has changed, or if you entered an incorrect entry previously.
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -275,7 +276,7 @@ When searching for remarks, use more specific queries for better results.
 
 ### Deleting a client: `del`
 
-Deletes the specified client from the address book. This is useful when a client has stopped using your services.
+You can delete the specified client from FAST. This is useful when a client has stopped using your services.
 
 **Format**: `del INDEX`
 
@@ -307,7 +308,7 @@ This CANNOT be undone!</div>
 
 ### Adding a remark: `rmk`
 
-Adds a remark to an existing client in FAST. This is useful for adding additional client information such 
+You can add a remark to an existing client in FAST. This is useful for adding additional client information such 
 as their preferred meeting timing, allowing you to better keep track of your clients' preferences and habits.
 
 **Format**: `rmk INDEX [r/REMARK]`
@@ -339,9 +340,10 @@ FAST is capable of storing and keeping track of appointments for your clients. Y
 
 **Format**: `aa INDEX d/DATE [t/TIME] [v/VENUE]`
 
-Adds a scheduled appointment with the client. An appointment includes a date, time and venue. This allows you to keep
-track of all your clients' appointment dates all within the same app. You can also [edit](#editing-an-appointment-ea),
-[delete](#deleting-an-appointment-da), or [mark as completed](#updating-completed-appointment-ma) an appointment.
+You can add a scheduled appointment with the client. An appointment includes a date, time and venue.
+This allows you to keep track of all your clients' appointment dates all within the same app.
+You can also [edit](#editing-an-appointment-ea),[delete](#deleting-an-appointment-da), 
+or [mark as completed](#updating-completed-appointment-ma) an appointment.
 
 ![Appointment](images/UG-Screenshots/AppointmentUGScreenshot.PNG)
 
@@ -360,8 +362,8 @@ track of all your clients' appointment dates all within the same app. You can al
    
 #### Editing an appointment: `ea`
 
-Edits a scheduled [appointment](#appointments) with the client. This command is useful when your appointment has been rescheduled or 
-has a change in location.
+You can edit a scheduled [appointment](#appointments) with the client. 
+This command is useful when your appointment has been rescheduled or has a change in location.
 
 **Format**: `ea INDEX [d/DATE] [t/TIME] [v/VENUE]`
 
@@ -375,8 +377,8 @@ has a change in location.
 
 #### Deleting an appointment: `da`
 
-Deletes a scheduled [appointment](#appointments) with the client. This command should be used when 
-the appointment has been cancelled with a client.
+You can delete a scheduled [appointment](#appointments) with the client. 
+This command should be used when the appointment has been cancelled with a client.
 
 **Format**: `da INDEX`
 
@@ -389,8 +391,8 @@ the appointment has been cancelled with a client.
 
 #### Updating completed appointment: `ma`
 
-Marks the appointment [appointment](#adding-an-appointment-aa) with the client as completed. This also allows you to keep 
-track of the number of completed appointments with your client.
+You can mark the appointment [appointment](#adding-an-appointment-aa) with the client as completed.
+This also allows you to keep track of the number of completed appointments with your client.
 
 ![markAppointment](images/UG-Screenshots/MarkAppointmentUGScreenshot.PNG)
 
@@ -408,8 +410,9 @@ track of the number of completed appointments with your client.
 
 ### Sorting all clients: `sort`
 
-Sorts all existing client by the given condition. Currently, you can sort by name, [appointment date](#appointments),
-and [priority tag](#tags). This allows you to keep your clients list orderly and well-organised.
+You can sort all existing client by the given condition. 
+Currently, you can sort by name, [appointment date](#appointments), and [priority tag](#tags). 
+This allows you to keep your clients list orderly and well-organised.
 It can also be used to quickly sieve through large client lists.
 
 **Format**: `sort KEYWORD`
@@ -423,7 +426,8 @@ It can also be used to quickly sieve through large client lists.
 
 ### Tags
 
-Tags are a quick way for you to organise your contacts, and recall their key characteristics. In FAST, we have three main types of tags:
+Tags are a quick way for you to organise your contacts, and recall their key characteristics.
+In FAST, we have three main types of tags:
 
 ![tagOverview](images/tags_overview.png)
 
@@ -462,7 +466,7 @@ More examples of how to use these will be given in the following section.
 
 #### Editing a tag: `tag`
 
-Modifies the tags of a specified client. 
+You can modify the tags of a specified client. 
 
 **Format**: `tag INDEX [a/TAG] [d/TAG]`
 * Use `a/` to add a tag, and `d/` to delete a tag.
@@ -496,7 +500,7 @@ Currently, FAST supports these statistics:
 
 ### Clearing all entries: `clear`
 
-Clears all entries from FAST. This command is useful to remove the default sample data in FAST.
+You can clear all entries from FAST. This command is useful to remove the default sample data in FAST.
 
 **Format**: `clear`
 
@@ -506,23 +510,25 @@ This CANNOT be undone!
 
 ### Exiting the program: `exit`
 
-Exits the program.
+You can exit the program.
 
 **Format**: `exit`
 
 ### Saving the data
 
-FAST data are saved in the hard disk automatically after any command that changes the data. There is no need to 
-save manually.
+FAST data is saved in the hard disk automatically after any command that changes the data.
+There is no need to save manually.
 
 ### Editing the data file
 
-FAST data is saved as a JSON file. It can be found at `[JAR file location]/data/fast.json`. If you are an advanced user, feel free 
-to update your data directly, by editing that data file.
+FAST data is saved as a JSON file. 
+It can be found at `[JAR file location]/data/fast.json`. 
+If you are an advanced user, feel free to update your data directly, by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 **Be extremely careful when making any changes to the data file!**<br>
-If any of your changes to the data file causes FAST to be unable to read the data file, FAST will start with an empty data file on the next run!
+If any of your changes to the data file causes FAST to be unable to read the data file, 
+FAST will start with an empty data file on the next run!
 </div>
 
 
@@ -576,7 +582,6 @@ Action | Format, Examples
 **Find** | `find QUERY [MORE_QUERIES]` OR `find pr/PRIORITY [MORE_PRIORITIES]` OR `find t/TAG [MORE TAGS]` OR `find r/REMARK [MORE REMARKS]`<br> e.g. `find James Jake`
 **Sort** | `sort KEYWORD`
 **List** | `list`
-
 
 ### Others
 Action | Format, Examples
