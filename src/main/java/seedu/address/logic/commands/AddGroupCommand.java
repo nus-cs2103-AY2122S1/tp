@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.equalsIgnoreOrder;
+import static seedu.address.commons.util.SameNameConflictUtil.showStudentsWithNameConflicts;
 import static seedu.address.logic.commands.AddAllocCommand.AllocDescriptor;
 import static seedu.address.logic.commands.AddAllocCommand.createEditedStudent;
 import static seedu.address.logic.commands.AddAllocCommand.getAllocStudents;
@@ -80,6 +81,7 @@ public class AddGroupCommand extends Command {
             Student studentToEdit = matchedStudents.get(0);
 
             if (matchedStudents.size() > 1) {
+                showStudentsWithNameConflicts(model, matchedStudents);
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, studentToEdit.getName()));
             }
 

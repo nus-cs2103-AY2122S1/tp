@@ -9,8 +9,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -126,7 +130,11 @@ public class AddAllocCommandTest {
 
         String expectedMessage = AddAllocCommand.MESSAGE_DUPLICATE_STUDENT_NAME;
 
-        assertCommandFailure(addAllocCommand, model, expectedMessage);
+        List<Student> expectedList = new ArrayList<>();
+        expectedList.add(simpleAmy);
+        expectedList.add(duplicateAmy);
+
+        assertCommandFailureWithFilteredListChange(addAllocCommand, model, expectedMessage, expectedList);
     }
 
     @Test

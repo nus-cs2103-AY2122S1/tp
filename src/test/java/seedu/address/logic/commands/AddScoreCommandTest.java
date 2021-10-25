@@ -10,9 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -147,7 +150,11 @@ public class AddScoreCommandTest {
 
         String expectedMessage = AddScoreCommand.MESSAGE_DUPLICATE_STUDENT_NAME;
 
-        assertCommandFailure(addScoreCommand, model, expectedMessage);
+        List<Student> expectedList = new ArrayList<>();
+        expectedList.add(simpleAmy);
+        expectedList.add(duplicateAmy);
+
+        assertCommandFailureWithFilteredListChange(addScoreCommand, model, expectedMessage, expectedList);
     }
 
     @Test

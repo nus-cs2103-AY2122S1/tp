@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.SameNameConflictUtil.showStudentsWithNameConflicts;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -79,6 +80,7 @@ public class AddScoreCommand extends Command {
         }
 
         if (studentsToEdit.size() > 1) {
+            showStudentsWithNameConflicts(model, studentsToEdit);
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_NAME);
         }
 

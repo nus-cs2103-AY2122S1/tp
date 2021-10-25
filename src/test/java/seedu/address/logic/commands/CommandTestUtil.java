@@ -173,6 +173,27 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getAddressBook());
         assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
     }
+
+    /**
+     * Executes the given command, confirms that CommandException is thrown, and the CommandException
+     * message matches the expected Message. The address book, and selected student in actualModel remains unchanged.
+     * Filtered student list changes and thus this method checks if actual filtered list matches that of the
+     * expectedFilteredList.
+     * @param command command to be executed.
+     * @param actualModel actual state of the model.
+     * @param expectedMessage expected error message.
+     * @param expectedList expected filteredList after executing command.
+     */
+    public static void assertCommandFailureWithFilteredListChange(Command command, Model actualModel,
+                                                                  String expectedMessage, List<Student> expectedList) {
+        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        List<Student> expectedFilteredList = expectedList;
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedAddressBook, actualModel.getAddressBook());
+        assertEquals(expectedFilteredList, actualModel.getFilteredStudentList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the student at the given {@code targetIndex} in the
      * {@code model}'s address book.
