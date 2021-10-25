@@ -73,7 +73,9 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ListPanelPlaceholder`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+
+The `ListPanel` is in turn made up of other parts e.g. `StudentListPanel`, `TaskListPanel`, `GroupListPanel`.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -81,8 +83,17 @@ The `UI` component,
 
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands and to determine the type of object to display in the `ListPanelPlaceholder`.
+* depends on some classes in the `Model` component, as it displays either a `Person`, `Group`, or `Task` object residing in the `Model`.
+
+#### ListPanel Component
+
+The `ListPanel` consists of either a `StudentListPanel`, `TaskListPanel` or `GroupListPanel`.
+
+Each of these `ListPanels` consists of their own `Card` components which make up the final GUI.
+
+The layout of these `ListPanels` are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+
 
 ### Logic component
 
@@ -121,8 +132,8 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Student`, `Group` or `Task` objects (which are contained in a `UniqueStudentList`, `UniqueGroupList`, `UniqueTaskList` object respectively).
+* stores the currently 'selected' objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
@@ -750,6 +761,10 @@ Similar to UC12 (Clear student list), except we are clearing the task list.
 **Use case: UC21 - Clear all entries in tApp**
 
 Similar to UC12 (Clear student list), except we are clearing the whole address book.
+
+**Use case: UC22 - Delete a student from a group**
+
+Similar to UC16 (Add student to group), except we are deleting the student from the group, and group index and member list index is used instead of group name and student list index.
 
 ### Non-Functional Requirements
 * Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
