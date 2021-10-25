@@ -21,6 +21,7 @@ import seedu.anilist.model.Model;
 import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.ReadOnlyUserPrefs;
 import seedu.anilist.model.anime.Anime;
+import seedu.anilist.model.anime.Status;
 import seedu.anilist.testutil.AnimeBuilder;
 import seedu.anilist.ui.TabOption;
 
@@ -185,7 +186,7 @@ public class AddCommandTest {
         ModelStubWithAnime(Anime anime) {
             requireNonNull(anime);
             this.anime = anime;
-            currentTab = new TabOption("all");
+            currentTab = new TabOption(Status.DEFAULT_STATUS);
         }
 
         @Override
@@ -233,7 +234,7 @@ public class AddCommandTest {
         private final TabOption currentTab;
 
         ModelStubAcceptingAnimeAddedWithTabOption() {
-            currentTab = new TabOption("all");
+            currentTab = new TabOption(Status.DEFAULT_STATUS);
         }
 
         @Override
