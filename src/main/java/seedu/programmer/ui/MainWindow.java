@@ -5,14 +5,11 @@ import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.json.JSONArray;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -105,7 +102,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        dashboardWindow = new DashboardWindow();
+        dashboardWindow = new DashboardWindow(logic);
     }
 
     public Stage getPrimaryStage() {

@@ -3,7 +3,7 @@ package seedu.programmer.logic.commands;
 import seedu.programmer.model.Model;
 
 /**
- * Format full help instructions for every command for display.
+ * Dashboard command for user to see statistics.
  */
 public class DashboardCommand extends Command {
 

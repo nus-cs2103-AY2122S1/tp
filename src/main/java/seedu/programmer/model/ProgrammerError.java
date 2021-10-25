@@ -38,6 +38,10 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         resetData(toBeCopied);
     }
 
+    public int getTotalNumOfStudents() {
+        return students.getNumStudents();
+    }
+
     //// list overwrite operations
 
     /**
