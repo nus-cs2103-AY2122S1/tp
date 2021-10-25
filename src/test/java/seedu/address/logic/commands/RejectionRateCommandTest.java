@@ -11,14 +11,11 @@ import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.descriptors.EditApplicantDescriptor;
-import seedu.address.logic.descriptors.EditApplicationDescriptor;
 import seedu.address.model.ApplicantBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.applicant.Applicant;
-import seedu.address.model.application.Application;
 import seedu.address.model.application.Application.ApplicationStatus;
 import seedu.address.model.position.Position;
 import seedu.address.model.position.Title;
@@ -84,17 +81,7 @@ public class RejectionRateCommandTest {
 
         float initialRejectionRate = model.calculateRejectionRate(position.getTitle()); // currently 0.0%
 
-        EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
-        editApplicationDescriptor.setPosition(position);
-        editApplicationDescriptor.setStatus(ApplicationStatus.REJECTED);
-
-        Application updatedApplication = editApplicationDescriptor.createEditedApplication(
-                applicant.getApplication());
-
-        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
-        editApplicantDescriptor.setApplication(updatedApplication);
-
-        Applicant newApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
+        Applicant newApplicant = applicant.markAs(ApplicationStatus.REJECTED);
 
         model.setApplicant(applicant, newApplicant);
 
@@ -118,17 +105,7 @@ public class RejectionRateCommandTest {
 
         model.addPosition(position);
 
-        EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
-        editApplicationDescriptor.setPosition(position);
-        editApplicationDescriptor.setStatus(ApplicationStatus.REJECTED);
-
-        Application updatedApplication = editApplicationDescriptor.createEditedApplication(
-                applicant.getApplication());
-
-        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
-        editApplicantDescriptor.setApplication(updatedApplication);
-
-        Applicant newApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
+        Applicant newApplicant = applicant.markAs(ApplicationStatus.REJECTED);
 
         model.setApplicant(applicant, newApplicant);
 
@@ -162,17 +139,7 @@ public class RejectionRateCommandTest {
 
         model.setApplicantBook(applicantBook);
 
-        EditApplicationDescriptor editApplicationDescriptor = new EditApplicationDescriptor();
-        editApplicationDescriptor.setPosition(position);
-        editApplicationDescriptor.setStatus(ApplicationStatus.REJECTED);
-
-        Application updatedApplication = editApplicationDescriptor.createEditedApplication(
-                applicant.getApplication());
-
-        EditApplicantDescriptor editApplicantDescriptor = new EditApplicantDescriptor();
-        editApplicantDescriptor.setApplication(updatedApplication);
-
-        Applicant newApplicant = editApplicantDescriptor.createEditedApplicant(applicant);
+        Applicant newApplicant = applicant.markAs(ApplicationStatus.REJECTED);
 
         // Create Alice
         Applicant otherApplicant = new ApplicantBuilder().withName("Alice").build();
@@ -181,7 +148,6 @@ public class RejectionRateCommandTest {
         applicantBook.addApplicant(otherApplicant);
 
         model.setApplicantBook(applicantBook);
-
 
         float oldRejectionRate = model.calculateRejectionRate(position.getTitle()); // 50%
 
