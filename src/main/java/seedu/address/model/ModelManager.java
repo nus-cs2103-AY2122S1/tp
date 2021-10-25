@@ -17,7 +17,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.GroupName;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
@@ -118,19 +117,17 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteStudent(Student target) {
+    public void removeStudent(Student target) {
+        requireNonNull(target);
         addressBook.removeStudent(target);
-        if (!(target.getGroupName().isNull())) {
+        if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group group = groupList.stream()
                                           .filter(g -> g.getName().equals(target.getGroupName()))
                                           .findAny()
                                           .orElse(null);
-            Group updatedGroup = group;
-            updatedGroup.getMembers().removeMember(target);
-            addressBook.setGroup(group, updatedGroup);
+            addressBook.removeStudentFromGroup(target, group);
         }
-
     }
 
     @Override
@@ -142,13 +139,13 @@ public class ModelManager implements Model {
     @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
-        if (!(target.getGroupName().isNull())) {
+        if (target.hasGroupName()) {
             List<Group> groupList = getFilteredGroupList();
             Group updatedGroup = groupList.stream()
                     .filter(g -> g.getName().equals(target.getGroupName()))
                     .findAny()
                     .orElse(null);
-            updatedGroup.getMembers().updateMember(target, editedStudent);
+            updatedGroup.updateMember(target, editedStudent);
         }
 
         addressBook.setStudent(target, editedStudent);
@@ -200,13 +197,9 @@ public class ModelManager implements Model {
     @Override
     public void deleteStudentGroup(Student student, Group group) {
         requireAllNonNull(student, group);
-        Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
-                student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
-                student.getParticipation(), new GroupName());
-        Group newGroup = group;
-        newGroup.getMembers().removeMember(student);
-        addressBook.setStudent(student, updatedStudent);
-        addressBook.setGroup(group, newGroup);
+        addressBook.removeStudentFromGroup(student, group);
+        addressBook.removeGroupFromStudent(student);
+
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
@@ -255,13 +248,10 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteGroup(Group target) {
+        requireNonNull(target);
+        List<Student> students = target.getMembersList();
+        addressBook.clearGroupFromStudents(students);
         addressBook.removeGroup(target);
-        for (Student student : target.getMembers().studentList) {
-            Student updatedStudent = new Student(student.getName(), student.getEmail(), student.getStudentNumber(),
-                    student.getUserName(), student.getRepoName(), student.getTags(), student.getAttendance(),
-                    student.getParticipation(), new GroupName());
-            addressBook.setStudent(student, updatedStudent);
-        }
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 

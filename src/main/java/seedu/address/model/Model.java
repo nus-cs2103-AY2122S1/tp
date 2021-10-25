@@ -63,8 +63,6 @@ public interface Model {
      */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    public void clearTasks();
-
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
@@ -79,7 +77,7 @@ public interface Model {
      * Deletes the given student.
      * The student must exist in the address book.
      */
-    void deleteStudent(Student target);
+    void removeStudent(Student target);
 
     /**
      * Adds the given student.
@@ -210,6 +208,11 @@ public interface Model {
      * The task identity of {@code editedTask} must not be the same as another existing task in the address book.
      */
     void setTask(Task target, Task editedTask);
+
+    /**
+     * Clears all tasks in tApp.
+     */
+    void clearTasks();
 
     /** Returns an unmodifiable view of the filtered student list */
     ObservableList<Task> getFilteredTaskList();

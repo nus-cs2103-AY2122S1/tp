@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalStudents.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalGroups.getTypicalAddressBookWithGroups;
+import static seedu.address.testutil.TypicalStudentsWithoutGroups.getTypicalAddressBookWithoutGroups;
 
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +23,12 @@ public class ClearGroupsCommandTest {
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
-        Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+        Model model = new ModelManager(getTypicalAddressBookWithGroups(), new UserPrefs());
+        Model expectedModel = new ModelManager(getTypicalAddressBookWithoutGroups(), new UserPrefs());
+
+        AddressBook expectedAddressBook = new AddressBook();
+        expectedAddressBook.setStudents(expectedModel.getFilteredStudentList());
+        expectedModel.setAddressBook(expectedAddressBook);
 
         assertCommandSuccess(new ClearGroupsCommand(), model, ClearGroupsCommand.MESSAGE_SUCCESS, expectedModel);
     }
