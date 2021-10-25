@@ -31,7 +31,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
             + "s/ 1 9 11 "
             + "l/ 2 5 4 ";
 
-    public static final String MESSAGE_SUCCESS = "Added students: %1$s\nTo these lessons: %2$s";
+    public static final String MESSAGE_SUCCESS = "Added students:\n%1$s\nTo these lessons:\n%2$s";
 
     private final ArrayList<Index> targetIndexesForStudents;
     private final ArrayList<Index> targetIndexesForLessons;
@@ -105,16 +105,16 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         }
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
-
-        List<Student> lastShownStudentList = model.getFilteredStudentList();
-        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
+    /**
+     * Returns an arraylist of students to be added to lessons.
+     *
+     * @param lastShownStudentList the last list that was shown to the user
+     * @param targetIndexesForStudents indexes of students to be added
+     */
+    public ArrayList<Student> getStudentsToEdit (
+            List<Student> lastShownStudentList, ArrayList<Index> targetIndexesForStudents) throws CommandException {
 
         ArrayList<Student> studentsToEdit = new ArrayList<>();
-        ArrayList<Lesson> lessonsToEdit = new ArrayList<>();
-
         for (Index index : targetIndexesForStudents) {
             requireNonNull(index);
             if (index.getZeroBased() >= lastShownStudentList.size()) {
@@ -124,6 +124,19 @@ public class AddStudentsToLessonsCommand extends AddCommand {
             studentsToEdit.add(studentToEdit);
         }
 
+        return studentsToEdit;
+    }
+
+    /**
+     * Returns an arraylist of lessons to have students added.
+     *
+     * @param lastShownLessonList the last list that was shown to the user
+     * @param targetIndexesForLessons indexes of lessons to have students added
+     */
+    public ArrayList<Lesson> getLessonsToEdit (
+            List<Lesson> lastShownLessonList, ArrayList<Index> targetIndexesForLessons) throws CommandException {
+
+        ArrayList<Lesson> lessonsToEdit = new ArrayList<>();
         for (Index index : targetIndexesForLessons) {
             requireNonNull(index);
             if (index.getZeroBased() >= lastShownLessonList.size()) {
@@ -132,6 +145,20 @@ public class AddStudentsToLessonsCommand extends AddCommand {
             Lesson lessonToEdit = lastShownLessonList.get(index.getZeroBased());
             lessonsToEdit.add(lessonToEdit);
         }
+
+        return lessonsToEdit;
+    }
+
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+
+        List<Student> lastShownStudentList = model.getFilteredStudentList();
+        List<Lesson> lastShownLessonList = model.getFilteredLessonList();
+
+        ArrayList<Student> studentsToEdit = getStudentsToEdit(lastShownStudentList, targetIndexesForStudents);
+        ArrayList<Lesson> lessonsToEdit = getLessonsToEdit(lastShownLessonList, targetIndexesForLessons);
 
         if (isAnyOfTheseStudentsAttendingAnyOfTheseLessons(studentsToEdit, lessonsToEdit)) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_ALREADY_ATTEND_LESSON);
