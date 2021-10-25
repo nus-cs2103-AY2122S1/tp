@@ -1,6 +1,10 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_BOB;
@@ -8,22 +12,19 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.ALICE_ADDRESS;
 import static seedu.address.testutil.TypicalPersons.ALICE_EMAIL;
 import static seedu.address.testutil.TypicalPersons.ALICE_GITHUB;
-import static seedu.address.testutil.TypicalPersons.ALICE_PHONE;
 import static seedu.address.testutil.TypicalPersons.ALICE_NAME;
-import static seedu.address.testutil.TypicalPersons.ALICE_TELEGRAM;
+import static seedu.address.testutil.TypicalPersons.ALICE_PHONE;
 import static seedu.address.testutil.TypicalPersons.ALICE_TAG_1;
+import static seedu.address.testutil.TypicalPersons.ALICE_TELEGRAM;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.Objects;
 
 public class PersonTest {
 
