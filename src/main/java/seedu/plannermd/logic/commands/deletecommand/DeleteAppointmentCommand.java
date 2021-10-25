@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.plannermd.commons.core.Messages;
 import seedu.plannermd.commons.core.index.Index;
 import seedu.plannermd.logic.commands.CommandResult;
+import seedu.plannermd.logic.commands.apptcommand.AppointmentCommand;
 import seedu.plannermd.logic.commands.exceptions.CommandException;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.appointment.Appointment;
@@ -15,7 +16,7 @@ import seedu.plannermd.model.appointment.Appointment;
  * Deletes a appointment from the appointment records as identified using it's displayed index
  * from plannermd.
  */
-public class DeleteAppointmentCommand extends DeleteCommand {
+public class DeleteAppointmentCommand extends AppointmentCommand {
     public static final String COMMAND_WORD = "appt -d";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

@@ -42,12 +42,13 @@ public class AppointmentCommandParser {
         final String arguments = matcher.group("arguments");
         switch (flag) {
         case FLAG_ADD:
-            return new EditAppointmentCommand();
+            return new AddAppointmentCommandParser().parse(arguments);
+
         case FLAG_EDIT:
             return new EditAppointmentCommand();
 
         case FLAG_DELETE:
-            return new DeleteAppointmentCommand();
+            return new DeleteAppointmentCommandParser().parse(arguments);
 
         case FLAG_FILTER:
             return new FilterAppointmentCommandParser().parse(arguments);

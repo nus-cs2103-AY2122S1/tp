@@ -1,5 +1,6 @@
 package seedu.plannermd.model.util;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -100,12 +101,14 @@ public class SampleDataUtil {
     }
 
     public static Appointment[] getSampleAppointments() {
+        LocalDate todayDate = LocalDate.now();
         return new Appointment[]{
-            new Appointment(AARON, DR_IRFAN, new AppointmentDate("25/12/2021"),
+            new Appointment(AARON, DR_IRFAN, new AppointmentDate(todayDate.format(AppointmentDate.DATE_FORMATTER)),
                     new Session("11:30", new Duration(30)), EMPTY_REMARK),
-            new Appointment(DUKE, DR_IRFAN, new AppointmentDate("25/12/2021"),
+            new Appointment(DUKE, DR_IRFAN, new AppointmentDate(todayDate.format(AppointmentDate.DATE_FORMATTER)),
                     new Session("12:00", new Duration(30)), EMPTY_REMARK),
-            new Appointment(DUKE, DR_ROY, new AppointmentDate("26/12/2021"),
+            new Appointment(DUKE, DR_ROY,
+                    new AppointmentDate(todayDate.plusDays(1).format(AppointmentDate.DATE_FORMATTER)),
                     new Session("12:00", new Duration(30)), EMPTY_REMARK)
         };
     }
