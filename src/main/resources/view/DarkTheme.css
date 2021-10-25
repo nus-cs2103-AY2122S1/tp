@@ -90,7 +90,15 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
-    -fx-background-color:  #EF7C00;
+    -fx-background-color: derive(#EF7C00, 50%);
+}
+
+.list-cell:filled:even {
+    -fx-background-color: derive(#EF7C00, 30%);
+}
+
+.list-cell:filled:odd {
+    -fx-background-color: derive(#EF7C00, 50%);
 }
 
 .cell_big_label {
@@ -119,20 +127,6 @@
      -fx-background-color: #EF7C00;
      -fx-border-color: white;
      -fx-border-top-width: 1px;
-}
-
-.module-card {
-     -fx-background-color:   #EF7C00;
-     -fx-border-color: white;
-     -fx-border-width: 2px;
-     -fx-border-radius: 5;
-}
-
-.student-card {
-     -fx-background-color:   #EF7C00;
-     -fx-border-color: white;
-     -fx-border-width: 2px;
-     -fx-border-radius: 5;
 }
 
 .task-card {
@@ -282,11 +276,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: #003D7C;
+    -fx-background-color: white;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#003D7C, 50%);
+    -fx-background-color: gray;
     -fx-background-insets: 3;
 }
 
