@@ -16,7 +16,13 @@ import seedu.programmer.model.student.Student;
 
 class FileManagerTest {
     private FileManager fm;
-    private final int DEFAULT_NUM_OF_STUDENTS = 36;
+    private static final int DEFAULT_NUM_OF_STUDENTS = 36;
+    private static final String VALID_JSON = "src/test/data/FileManagerTest/programmerError.json";
+    private static final String INVALID_JSON = "src/test/data/FileManagerTest/invalidProgrammerError.json";
+    private static final String VALID_CSV = "src/test/data/FileManagerTest/PE.csv";
+    private static final String WRONG_NUM_COLS_CSV = "src/test/data/FileManagerTest/programmerError.csv";
+    private static final String INVALID_FIELD_CSV = "src/test/data/FileManagerTest/invalidStudentIdPE.csv";
+    private static final String MISSING_FIELD_CSV = "src/test/data/FileManagerTest/missingClassIdPE.csv";
 
     @BeforeEach
     public void setUpTests() {
@@ -25,33 +31,33 @@ class FileManagerTest {
 
     @Test
     public void getJsonData_validJson_returnsCorrectNumberOfElements() {
-        JSONArray result = fm.getJsonData("src/test/data/FileManagerTest/programmerError.json");
+        JSONArray result = fm.getJsonData(VALID_JSON);
         assertEquals(result.length(), DEFAULT_NUM_OF_STUDENTS);
     }
 
     @Test
     public void getJsonData_invalidJson_returnsNull() {
-        JSONArray result = fm.getJsonData("src/test/data/FileManagerTest/invalidProgrammerError.json");
+        JSONArray result = fm.getJsonData(INVALID_JSON);
         assertNull(result);
     }
 
     @Test
     public void getStudentsFromCsv_validCsv_returnsCorrectNumberOfStudents() throws IOException {
-        File testFile = new File("src/test/data/FileManagerTest/PE.csv");
+        File testFile = new File(VALID_CSV);
         List<Student> stuList = fm.getStudentsFromCsv(testFile);
         assertEquals(stuList.size(), DEFAULT_NUM_OF_STUDENTS);
     }
 
     @Test
-    public void getStudentsFromCsv_incorrectNumberOfColumns_returnsNull() throws IOException {
-        File testFile = new File("src/test/data/FileManagerTest/programmerError.csv");
+    public void getStudentsFromCsv_WrongNumberOfColumns_returnsNull() throws IOException {
+        File testFile = new File(WRONG_NUM_COLS_CSV);
         List<Student> stuList = fm.getStudentsFromCsv(testFile);
         assertNull(stuList);
     }
 
     @Test
     public void getStudentsFromCsv_invalidField_throwsIllegalArgumentException() {
-        File testFile = new File("src/test/data/FileManagerTest/invalidStudentIdPE.csv");
+        File testFile = new File(INVALID_FIELD_CSV);
         assertThrows(IllegalArgumentException.class, () -> {
             fm.getStudentsFromCsv(testFile);
         });
@@ -59,7 +65,7 @@ class FileManagerTest {
 
     @Test
     public void getStudentsFromCsv_missingField_throwsIllegalArgumentException() {
-        File testFile = new File("src/test/data/FileManagerTest/missingClassIdPE.csv");
+        File testFile = new File(MISSING_FIELD_CSV);
         assertThrows(IllegalArgumentException.class, () -> {
             fm.getStudentsFromCsv(testFile);
         });
