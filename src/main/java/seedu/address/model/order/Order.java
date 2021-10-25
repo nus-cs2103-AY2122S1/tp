@@ -61,7 +61,7 @@ public class Order {
         return product.hasEnoughStock(quantity);
     }
 
-    public boolean isValidOrder() {
+    public boolean isPositiveQuantity() {
         return quantity.moreThan(QUANTITY_ZERO);
     }
 
@@ -76,7 +76,7 @@ public class Order {
         }
 
         Order otherOrder = (Order) other;
-        return id.equals(otherOrder.id);
+        return id.equals(otherOrder.id) && quantity.equals(otherOrder.quantity) && time.equals(otherOrder.time);
     }
 
     @Override
