@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.student.ClassCode;
 import seedu.address.model.student.Student;
 import seedu.address.model.student.UniqueStudentList;
 import seedu.address.model.tutorialclass.TutorialClass;
@@ -17,6 +18,8 @@ import seedu.address.model.tutorialgroup.UniqueTutorialGroupList;
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class Classmate implements ReadOnlyClassmate {
+
+    public static final ClassCode DEFAULT_CLASSCODE = new ClassCode("G00");
 
     private final UniqueStudentList students;
     private final UniqueTutorialClassList tutorialClasses;
@@ -98,7 +101,6 @@ public class Classmate implements ReadOnlyClassmate {
      */
     public void setStudent(Student target, Student editedStudent) {
         requireNonNull(editedStudent);
-
         students.setStudent(target, editedStudent);
     }
 
@@ -113,16 +115,19 @@ public class Classmate implements ReadOnlyClassmate {
     //// tutorialclass-level operations
 
     /**
-     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the ClassMATE.
+     * Returns true if a tutorialClass with the same identity as {@code tutorialClass} exists in the address book.
      */
     public boolean hasTutorialClass(TutorialClass tutorialClass) {
         requireNonNull(tutorialClass);
+        if (tutorialClass.getClassCode().equals(DEFAULT_CLASSCODE)) {
+            return true;
+        }
         return tutorialClasses.contains(tutorialClass);
     }
 
     /**
-     * Adds a tutorialClass to the ClassMATE.
-     * The tutorialClass must not already exist in the ClassMATE.
+     * Adds a tutorialClass to the address book.
+     * The tutorialClass must not already exist in the address book.
      */
     public void addTutorialClass(TutorialClass c) {
         tutorialClasses.add(c);
