@@ -20,6 +20,7 @@ import seedu.address.model.student.IdContainsKeywordsPredicate;
 import seedu.address.model.student.Name;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentStatistics;
 
 /**
  * Shows information of a student or an assessment.
@@ -91,8 +92,10 @@ public class ShowCommand extends Command {
         }
 
         Student matchedStudent = matchedStudents.get(0);
+
         Info info = new Info(matchedStudent);
-        return new CommandResult(MESSAGE_SUCCESS, info);
+        StudentStatistics statistics = new StudentStatistics(matchedStudent);
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
     }
 
     /**
