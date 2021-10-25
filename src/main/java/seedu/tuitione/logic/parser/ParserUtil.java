@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import seedu.tuitione.commons.core.index.Index;
@@ -198,8 +199,8 @@ public class ParserUtil {
 
         try {
             indexLesson = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON).get().trim());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), pe);
+        } catch (ParseException | NoSuchElementException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnenrollCommand.MESSAGE_USAGE), e);
         }
 
         return new UnenrollCommand(indexStudent, indexLesson);
@@ -224,8 +225,8 @@ public class ParserUtil {
 
         try {
             indexLesson = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_LESSON).get().trim());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE), pe);
+        } catch (ParseException | NoSuchElementException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EnrollCommand.MESSAGE_USAGE), e);
         }
 
         return new EnrollCommand(indexStudent, indexLesson);
