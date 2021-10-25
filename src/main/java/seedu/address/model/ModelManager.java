@@ -225,9 +225,6 @@ public class ModelManager implements Model {
         addressBook.setPerson(target, editedPerson);
     }
 
-
-
-
     //=========== Filtered Person List Accessors =============================================================
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
@@ -324,8 +321,6 @@ public class ModelManager implements Model {
 
 
     //=========== Applicant and ApplicantBook =============================================================
-
-
     public void setApplicantBook(ReadOnlyApplicantBook applicantBook) {
         this.applicantBook.resetData(applicantBook);
     }
@@ -366,7 +361,6 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Applicant> getFilteredApplicantList() {
         return filteredApplicants;
-
     }
 
     //========== Rejection rates =======================================
