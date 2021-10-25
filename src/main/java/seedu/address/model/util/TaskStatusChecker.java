@@ -21,7 +21,7 @@ public class TaskStatusChecker {
      */
     public TaskStatusChecker(TaskListManager taskListManager) {
         this.taskListManager = taskListManager;
-        //toolkit = Toolkit.getDefaultToolkit();
+        toolkit = Toolkit.getDefaultToolkit();
         timer = new Timer();
         timer.schedule(new UpdateStatusTask(), 0, 5 * 1000);
     }
