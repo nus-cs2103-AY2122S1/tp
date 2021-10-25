@@ -53,6 +53,9 @@ public class CommandBox extends UiPart<Region> {
         }
     }
 
+    /**
+     * Handles the keystroke pressed event.
+     */
     @FXML
     private void handleKeyStroke(KeyEvent event) {
         if (event.getCode().equals(KeyCode.UP)) {

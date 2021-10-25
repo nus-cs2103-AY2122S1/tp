@@ -7,13 +7,13 @@ public class CommandHistory {
 
     private static final List<String> commandHistory = new ArrayList<>();
     private static final int DEFAULT_INDEX = -1;
-    private static final String DEFAULT_COMMAND = "";
+    private static final String EMPTY_COMMAND = "";
     private static int index = DEFAULT_INDEX;
 
     private CommandHistory() {}
 
     /**
-     * Adds the last command executed into the command history.
+     * Adds the last {@code Command} executed into the command history.
      * @param command Last command executed
      */
     public static void addCommand(String command) {
@@ -21,9 +21,13 @@ public class CommandHistory {
         resetIndex();
     }
 
+    /**
+     * Returns the previous {@code Command} executed.
+     * @return Previous command executed
+     */
     public static String getPreviousCommand() {
         if (hasNoHistory()) {
-            return DEFAULT_COMMAND;
+            return EMPTY_COMMAND;
         }
         if (hasPreviousCommand()) {
             index++;
@@ -31,13 +35,17 @@ public class CommandHistory {
         return commandHistory.get(index);
     }
 
+    /**
+     * Returns the next {@code Command} executed.
+     * @return Next command executed
+     */
     public static String getNextCommand() {
         if (hasNoHistory()) {
-            return DEFAULT_COMMAND;
+            return EMPTY_COMMAND;
         }
         if (!hasNextCommand()) {
             resetIndex();
-            return DEFAULT_COMMAND;
+            return EMPTY_COMMAND;
         }
         index--;
         return commandHistory.get(index);
