@@ -324,4 +324,3 @@ Action | Format, Examples
     * You may run the `java -version` command on your respective operating system's (OS) terminal window.
     * Alternatively, if the above does not work, you may follow [this guide](https://www.java.com/en/download/help/version_manual.html) to determine the version of Java installed on your Computer
     * Note: Either versions of Java released by [Oracle](https://www.oracle.com/java/) or [OpenJDK](https://openjdk.java.net/) are compatible
-    * 
