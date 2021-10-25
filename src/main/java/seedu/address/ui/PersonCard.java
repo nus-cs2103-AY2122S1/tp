@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Person;
 
 /**
@@ -49,9 +50,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label experience;
     @FXML
+    private FlowPane tags;
+    @FXML
     private Label interview;
     @FXML
-    private FlowPane tags;
+    private Label notes;
     @FXML
     private FlowPane done;
     @FXML
@@ -74,6 +77,7 @@ public class PersonCard extends UiPart<Region> {
         levelOfEducation.setText("Level of Education: " + person.getLevelOfEducation().levelOfEducation);
         experience.setText("Years of Experience: " + person.getExperience().value);
         interview.setText("Interview Time: " + person.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime);
+        notes.setText("Notes: " + person.getNotes().orElse(new Notes("")).information);
 
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
