@@ -24,6 +24,7 @@ ContactSH is a **desktop app for managing contacts, optimized for use via a Comm
 - [Saving the data](#saving-the-data)
 - [Editing the data file](#editing-the-data-file)
 - [Archiving data files `[coming in v2.0]`](#archiving-data-files)
+
 [FAQ](#faq)<br>
 [Command Summary](#command-summary)
 
