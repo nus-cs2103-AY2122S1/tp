@@ -31,8 +31,11 @@ public class Task {
         this.state = new State();
     }
 
+    /**
+     * Every field must be present and not null.
+     */
     public Task(Name name, Time time, Date date, Tag tag, State state) {
-        requireAllNonNull(name, time, date, tag);
+        requireAllNonNull(name, time, date, tag, state);
         this.name = name;
         this.time = time;
         this.date = date;
