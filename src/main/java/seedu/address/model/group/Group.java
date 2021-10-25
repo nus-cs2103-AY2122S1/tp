@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -75,8 +76,8 @@ public class Group {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Student> getMembersSet() {
-        return Collections.unmodifiableSet(members.studentList);
+    public List<Student> getMembersList() {
+        return Collections.unmodifiableList(members.studentList);
     }
 
     public LinkYear getYear() {
@@ -153,7 +154,7 @@ public class Group {
 
         Group otherGroup = (Group) other;
         return otherGroup.getName().equals(getName())
-                && otherGroup.getMembers().equals(getMembers())
+                && otherGroup.getMembersList().equals(getMembersList())
                 && otherGroup.getGroupGithubLink().equals(getGroupGithubLink())
                 && otherGroup.getTags().equals(getTags());
     }

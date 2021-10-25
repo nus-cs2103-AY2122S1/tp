@@ -57,7 +57,7 @@ class JsonAdaptedGroup {
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        members.addAll(source.getMembersSet().stream()
+        members.addAll(source.getMembersList().stream()
                 .map(JsonAdaptedStudent::new)
                 .collect(Collectors.toList()));
         year = source.getYear().year;
@@ -95,11 +95,17 @@ class JsonAdaptedGroup {
         if (year == null) {
             modelYear = new LinkYear();
         } else {
+            if (!LinkYear.isValidYear(year)) {
+                throw new IllegalValueException(LinkYear.MESSAGE_CONSTRAINTS);
+            }
             modelYear = new LinkYear(year);
         }
         if (repoName == null) {
             modelRepoName = new RepoName();
         } else {
+            if (!RepoName.isValidRepoName(repoName)) {
+                throw new IllegalValueException(RepoName.MESSAGE_CONSTRAINTS);
+            }
             modelRepoName = new RepoName(repoName);
         }
 

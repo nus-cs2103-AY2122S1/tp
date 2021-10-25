@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_GROUP;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -13,6 +15,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.commons.RepoName;
 import seedu.address.model.group.GroupName;
@@ -60,6 +63,32 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_STUDENT, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseMultipleIndex_invalidInput_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseMultipleIndex("10 a"));
+    }
+
+    @Test
+    public void parseMultipleIndex_outOfRangeInput_throwsParseException() {
+        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, () -> ParserUtil.parseMultipleIndex(
+                Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseMultipleIndex_validInput_success() throws Exception {
+        ArrayList<Index> expectedIndexArray = new ArrayList<>();
+        expectedIndexArray.add(INDEX_FIRST_STUDENT);
+        expectedIndexArray.add(INDEX_THIRD_GROUP);
+        // 1 whitespace
+        assertEquals(expectedIndexArray, ParserUtil.parseMultipleIndex("1 3"));
+
+        // Leading and trailing whitespaces
+        assertEquals(expectedIndexArray, ParserUtil.parseMultipleIndex("  1 3  "));
+
+        // Multiple whitespaces
+        assertEquals(expectedIndexArray, ParserUtil.parseMultipleIndex("1    3"));
     }
 
     @Test
