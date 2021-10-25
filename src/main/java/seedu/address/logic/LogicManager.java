@@ -65,6 +65,11 @@ public class LogicManager implements Logic {
     }
 
     @Override
+    public int getNumPersonsTotal() {
+        return model.getAddressBook().getPersonList().size();
+    }
+
+    @Override
     public Path getAddressBookFilePath() {
         return model.getAddressBookFilePath();
     }
