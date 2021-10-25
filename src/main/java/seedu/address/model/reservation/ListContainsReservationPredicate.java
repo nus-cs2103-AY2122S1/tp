@@ -21,6 +21,7 @@ public class ListContainsReservationPredicate implements Predicate<Reservation> 
      * @param typeOfCheck enum specifying if user is checking for date, time or both
      */
     public ListContainsReservationPredicate(LocalDate date, LocalTime time, EnumTypeOfCheck typeOfCheck) {
+        assert time.getMinute() == 0;
         this.date = date;
         this.time = time;
         this.typeOfCheck = typeOfCheck;

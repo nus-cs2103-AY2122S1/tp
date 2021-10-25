@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_RESERVATION_MINUTES;
 import static seedu.address.logic.parser.ParserUtil.DATE_FORMATTER;
 import static seedu.address.logic.parser.ParserUtil.TIME_FORMATTER;
 
@@ -47,6 +48,9 @@ public class CheckCommandParser implements Parser<CheckCommand> {
         }
 
         parseArgs(splitTrimmedArgs);
+        if (time.getMinute() != 0) {
+            throw new ParseException(MESSAGE_INVALID_RESERVATION_MINUTES);
+        }
         return new CheckCommand(new ListContainsReservationPredicate(date, time, typeOfCheck));
     }
 
