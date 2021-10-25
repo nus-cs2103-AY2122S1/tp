@@ -1,6 +1,10 @@
 package safeforhall.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_CAPACITY;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_DATE;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_NAME;
+import static safeforhall.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,10 +16,15 @@ import java.util.List;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
+import safeforhall.commons.core.index.*;
+import safeforhall.logic.commands.edit.EditEventCommand;
+import safeforhall.logic.commands.edit.EditEventCommand.EditEventDescriptor;
 import safeforhall.logic.commands.exceptions.CommandException;
+import safeforhall.logic.parser.*;
+import safeforhall.logic.parser.exceptions.*;
 import safeforhall.model.AddressBook;
 import safeforhall.model.Model;
-import safeforhall.model.event.Event;
+import safeforhall.model.event.*;
 import safeforhall.model.person.Email;
 import safeforhall.model.person.Faculty;
 import safeforhall.model.person.LastDate;
@@ -62,10 +71,13 @@ public class ImportCommand extends Command {
         requireNonNull(model);
         AddressBook importedData = readCsv();
         List<Event> eventList = model.getAddressBook().getEventList();
+        ArrayList<Event> eventListRemovedResidents = new ArrayList<>();
         for (Event event: eventList) {
-            // event.clearResidentList();
+            Event newEvent = new Event(event.getEventName(), event.getEventDate(), event.getVenue(),
+                    event.getCapacity(), new ResidentList(ResidentList.DEFAULT_LIST));
+            eventListRemovedResidents.add(newEvent);
         }
-        importedData.setEvents(eventList);
+        importedData.setEvents(eventListRemovedResidents);
         model.setAddressBook(importedData);
         return new CommandResult(MESSAGE_SUCCESS);
     }
@@ -80,16 +92,20 @@ public class ImportCommand extends Command {
         ArrayList<Person> persons = new ArrayList<Person>();
         Path what = Paths.get("data" , this.filename + ".csv");
         try (CSVReader reader = new CSVReader(new FileReader(what.toString()))) {
-            List<String[]> r = reader.readAll();
+            List<String[]> rows = reader.readAll();
             // Remove column headings row
-            r.remove(0);
-            for (String[] x: r) {
+            rows.remove(0);
+            for (String[] row: rows) {
                 Person personToAdd;
                 try {
-                    personToAdd = createPerson(x);
+                    // Skip empty rows
+                    if (row.length == 1) {
+                        continue;
+                    }
+                    personToAdd = createPerson(row);
                 } catch (IllegalArgumentException e) {
                     // Index + 2 to account for discarded first row and zero-indexing
-                    throw new CommandException(String.format(MESSAGE_ERROR_READING, r.indexOf(x) + 2)
+                    throw new CommandException(String.format(MESSAGE_ERROR_READING, rows.indexOf(row) + 2)
                         + e.getMessage());
                 }
                 persons.add(personToAdd);
@@ -131,5 +147,12 @@ public class ImportCommand extends Command {
         return new Person(name, room, phone, email, vaccStatus, faculty,
                 lastFet == null ? defaultDate : lastFet,
                 lastCollection == null ? defaultDate : lastCollection);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ImportCommand // instanceof handles nulls
+                && this.filename.equals(((ImportCommand) other).filename)); // state check
     }
 }
