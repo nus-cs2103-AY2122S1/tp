@@ -190,12 +190,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the given client {@code target} in the list with {@code editedClient}.
      * {@code target} must exist in the address book.
      * The client identity of {@code editedClient} must not be the same as another existing client in the address book.
+     * If the given client's next meeting is edited, {@code meetings} will be updated with the new NextMeeting
      *
      * @return
      */
     public List<Client> setClientByClientIds(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireNonNull(clientIds);
         requireNonNull(editedClientDescriptor);
+        List<Name> clientNames = clients.getClientNames(clientIds);
+        meetings.editClientNextMeeting(clientNames, editedClientDescriptor);
         return clients.setClientByClientIds(clientIds, editedClientDescriptor);
     }
 

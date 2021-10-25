@@ -11,6 +11,7 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.model.client.exceptions.DuplicateNextMeetingException;
 import seedu.address.model.client.exceptions.MeetingNotFoundException;
 
@@ -37,6 +38,28 @@ public class UniqueNextMeetingList implements Iterable<NextMeeting> {
     public boolean contains(NextMeeting toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::equals);
+    }
+
+    /**
+     * Returns true if the list contains an equivalent meeting with the same client as the given argument.
+     */
+    public boolean hasClient(Name toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(nextMeeting -> nextMeeting.getWithWho().equals(toCheck));
+    }
+
+    /**
+     * Returns true if the list contains an equivalent meeting as the given argument.
+     */
+    public boolean removeByName(Name toRemove) {
+        requireNonNull(toRemove);
+        NextMeeting tempNextMeeting = this.getNextMeeting(toRemove);
+        try {
+            this.remove(tempNextMeeting);
+        } catch (MeetingNotFoundException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -86,6 +109,32 @@ public class UniqueNextMeetingList implements Iterable<NextMeeting> {
         }
 
         internalList.setAll(meetings);
+    }
+
+    /**
+     * Replaces the contents of this list with {@code meetings}.
+     * {@code meetings} must not contain duplicate nextMeetings.
+     * @param clientNames
+     * @param editedClientDescriptor
+     */
+    public void editClientNextMeeting(List<Name> clientNames,
+        EditCommand.EditClientDescriptor editedClientDescriptor) {
+        requireNonNull(clientNames);
+        requireNonNull(editedClientDescriptor);
+        NextMeeting tempNextMeeting = editedClientDescriptor.getNextMeeting().get();
+
+        clientNames.stream().forEach(name -> {
+            //Removes old meeting
+            if (this.hasClient(name)) {
+                this.removeByName(name);
+            }
+            if (!tempNextMeeting.isNullMeeting()) {
+                NextMeeting copyNextMeeting = tempNextMeeting.copyNextMeeting();
+                copyNextMeeting.setWithWho(name);
+                this.add(copyNextMeeting);
+            }
+        });
+
     }
 
     /**

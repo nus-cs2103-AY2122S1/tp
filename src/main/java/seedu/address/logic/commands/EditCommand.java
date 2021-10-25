@@ -228,6 +228,13 @@ public class EditCommand extends Command {
                     currentPlan, lastMet, nextMeeting, tags);
         }
 
+        /**
+         * Returns true if {@code nextMeeting} is edited
+         */
+        public boolean isNextMeetingEdited() {
+            return CollectionUtil.isAnyNonNull(nextMeeting);
+        }
+
         public void setName(Name name) {
             this.name = name;
         }
