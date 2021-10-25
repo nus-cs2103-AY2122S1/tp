@@ -9,6 +9,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK_VENUE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -38,11 +42,16 @@ public class EditCommandParser implements Parser<Command> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
-                        PREFIX_TASK_DESCRIPTION, PREFIX_DESCRIPTION);
+                        PREFIX_DESCRIPTION, PREFIX_TASK_DESCRIPTION, PREFIX_TASK_INDEX, PREFIX_TASK_DATE,
+                        PREFIX_TASK_TIME, PREFIX_TASK_VENUE);
 
         Index index;
 
-        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent()) {
+        if (argMultimap.getValue(PREFIX_TASK_DESCRIPTION).isPresent() ||
+                argMultimap.getValue(PREFIX_TASK_INDEX).isPresent() ||
+                argMultimap.getValue(PREFIX_TASK_DATE).isPresent() ||
+                argMultimap.getValue(PREFIX_TASK_TIME).isPresent() ||
+                argMultimap.getValue(PREFIX_TASK_VENUE).isPresent()) {
             return new EditTaskCommandParser().parse(args);
         }
 
