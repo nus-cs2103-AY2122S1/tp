@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -9,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.TaskMatchesKeywordPredicate;
 
 public class ViewTaskListCommand extends Command {
     public static final String COMMAND_WORD = "cat";
@@ -24,34 +26,75 @@ public class ViewTaskListCommand extends Command {
 
     public static final String MESSAGE_VIEW_TASKS_SUCCESS = "Viewing %1$s's tasks";
 
+    public static final String MESSAGE_VIEW_TASKS_ALL_SUCCESS = "Viewing all task list.";
+
     private final Index targetIndex;
 
-    /** Constructor for ViewTaskListCommand. */
+    private final boolean isDisplayAll;
+
+    private List<String> keywords = new ArrayList<>();
+
+    private boolean hasFilter = false;
+
+    /** Constructor used if user wants to view all task lists. */
+    public ViewTaskListCommand() {
+        isDisplayAll = true;
+        targetIndex = Index.fromOneBased(1);
+    }
+
+    /** Constructor used if user wants to view a specific {@code Person}'s task list . */
     public ViewTaskListCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
+        isDisplayAll = false;
+    }
+
+    /** Constructor for ViewTaskListCommand. */
+    public ViewTaskListCommand(Index targetIndex, List<String> keywords) {
+        this.targetIndex = targetIndex;
+        this.keywords = keywords;
+        this.hasFilter = true;
+        isDisplayAll = false;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (isDisplayAll) {
+            CommandResult cr = new CommandResult(MESSAGE_VIEW_TASKS_ALL_SUCCESS);
+            cr.setDisplayAllTaskList();
+            return cr;
+        }
+
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+        if ((targetIndex.getZeroBased() >= lastShownList.size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         Person personToView = lastShownList.get(targetIndex.getZeroBased());
 
-        model.displayPersonTaskList(personToView);
-        return new CommandResult(String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
+        if (hasFilter) {
+            TaskMatchesKeywordPredicate predicate = new TaskMatchesKeywordPredicate(keywords);
+            model.displayFilteredPersonTaskList(personToView, predicate);
+        } else {
+            model.displayPersonTaskList(personToView);
+        }
+
+        CommandResult commandResult = new CommandResult(
+                String.format(MESSAGE_VIEW_TASKS_SUCCESS, personToView.getName()));
+        commandResult.setDisplaySingleTaskList();
+
+        return commandResult;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ViewTaskListCommand // instanceof handles nulls
-                && targetIndex.equals(((ViewTaskListCommand) other).targetIndex)); // state check
+                && targetIndex.equals(((ViewTaskListCommand) other).targetIndex)
+                && keywords.equals(((ViewTaskListCommand) other).keywords)
+                && hasFilter == ((ViewTaskListCommand) other).hasFilter); // state check
     }
 
     public String getCommand() {

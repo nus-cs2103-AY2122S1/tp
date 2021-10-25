@@ -153,7 +153,9 @@ public class EditCommand extends Command {
 
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson)); // change
+            CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+            commandResult.setWriteCommand();
+            return commandResult;
         } else {
             requireNonNull(model);
             List<Person> lastShownList = model.getFilteredPersonList();
@@ -171,7 +173,9 @@ public class EditCommand extends Command {
 
             model.setPerson(personToEdit, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+            CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+            commandResult.setWriteCommand();
+            return commandResult;
         }
     }
 
