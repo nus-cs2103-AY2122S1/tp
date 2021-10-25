@@ -15,13 +15,14 @@ import org.junit.jupiter.api.Test;
 import seedu.programmer.model.student.Student;
 
 class FileManagerTest {
+    public static final String TEST_DATA_FOLDER = "src/test/data/FileManagerTest/";
+    private static final String VALID_JSON = TEST_DATA_FOLDER + "programmerError.json";
+    private static final String INVALID_JSON = TEST_DATA_FOLDER + "invalidProgrammerError.json";
+    private static final String VALID_CSV = TEST_DATA_FOLDER + "PE.csv";
+    private static final String WRONG_NUM_COLS_CSV = TEST_DATA_FOLDER + "programmerError.csv";
+    private static final String INVALID_FIELD_CSV = TEST_DATA_FOLDER + "invalidStudentIdPE.csv";
+    private static final String MISSING_FIELD_CSV = TEST_DATA_FOLDER + "missingClassIdPE.csv";
     private static final int DEFAULT_NUM_OF_STUDENTS = 36;
-    private static final String VALID_JSON = "src/test/data/FileManagerTest/programmerError.json";
-    private static final String INVALID_JSON = "src/test/data/FileManagerTest/invalidProgrammerError.json";
-    private static final String VALID_CSV = "src/test/data/FileManagerTest/PE.csv";
-    private static final String WRONG_NUM_COLS_CSV = "src/test/data/FileManagerTest/programmerError.csv";
-    private static final String INVALID_FIELD_CSV = "src/test/data/FileManagerTest/invalidStudentIdPE.csv";
-    private static final String MISSING_FIELD_CSV = "src/test/data/FileManagerTest/missingClassIdPE.csv";
     private FileManager fm;
 
     @BeforeEach
