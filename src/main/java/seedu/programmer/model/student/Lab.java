@@ -8,11 +8,11 @@ public class Lab {
     private Double actualScore;
     private Double totalScore;
 
-    public static final String LAB_TITLE_MESSAGE_CONSTRAINTS = "Lab number takes in a double integer value "
+    public static final String LAB_TITLE_MESSAGE_CONSTRAINTS = "Lab number takes in two string value "
             + "in the format XX.";
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
 
-    private static final String LAB_TITLE_VALIDATION_REGEX = "\\d{2}+";
+    private static final String LAB_TITLE_VALIDATION_REGEX = "\\s{2}+";
 
     /**
      * @param title the title of the lab
@@ -21,10 +21,10 @@ public class Lab {
      * */
     public Lab(String title, Double actualScore, Double totalScore) {
         requireNonNull(actualScore);
-        //requireNonNull(totalScore);
+        requireNonNull(totalScore);
         checkArgument(isValidLab(title), LAB_TITLE_MESSAGE_CONSTRAINTS);
-        //checkArgument(isValidScore(actualScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
-        //checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidScore(actualScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = actualScore;
         this.totalScore = totalScore;
@@ -36,9 +36,10 @@ public class Lab {
      * */
     public Lab(String title, Double totalScore) {
         requireNonNull(title);
-        // requireNonNull(totalScore);
+        System.out.println(totalScore);
+        requireNonNull(totalScore);
         checkArgument(isValidLab(title), LAB_TITLE_MESSAGE_CONSTRAINTS);
-        //checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
+        checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = Double.NaN;
         this.totalScore = totalScore;

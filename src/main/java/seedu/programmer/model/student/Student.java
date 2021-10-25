@@ -89,6 +89,7 @@ public class Student {
         return labResultList.get(index);
     }
 
+    //todo check comment out
     /**
      * Adds a lab result to all the student records
      * */

@@ -52,6 +52,7 @@ public class AddLabCommand extends Command {
                 exists = true;
             }
             model.setStudent(target, std);
+
         }
         if (exists) {
             throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));

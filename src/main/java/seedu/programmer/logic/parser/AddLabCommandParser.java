@@ -1,15 +1,11 @@
 package seedu.programmer.logic.parser;
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-//import static seedu.programmer.logic.parser.CliSyntax.PREFIX_INDEX;
-//import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
 import java.util.stream.Stream;
 
-//import seedu.programmer.commons.core.index.Index;
-//import seedu.programmer.logic.commands.AddCommand;
 import seedu.programmer.logic.commands.AddLabCommand;
 import seedu.programmer.logic.parser.exceptions.ParseException;
 import seedu.programmer.model.student.Lab;
