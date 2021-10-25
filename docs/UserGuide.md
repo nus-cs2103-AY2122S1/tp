@@ -154,7 +154,7 @@ Format: `list`
 
 Sorts the contacts list based on the specified field prefixes.
 
-Format: `sort [n/DIRECTION] [cn/DIRECTION]`
+Format: `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`
 
 * Sorts the contacts list from the first to the last specified field prefix.
 * At least one field prefix must be specified.
@@ -163,8 +163,8 @@ Format: `sort [n/DIRECTION] [cn/DIRECTION]`
 
 Examples:
 * `sort n/` sorts the contacts list by name (in ascending order by default).
-* `sort n/dsc` sorts the contacts list by name in descending order.
-* `sort n/ cs/asc` sorts the contacts list by name (in ascending order by default), then by case number in ascending order.
+* `sort sh/end:dsc` sorts the contacts list by end date of SHN period in descending order.
+* `sort sh/start: cn/asc` sorts the contacts list by start date of SHN period (in ascending order by default), then by case number in ascending order.
 
 ### Clearing all persons : `clear`
 
@@ -215,7 +215,7 @@ Action | Format, Examples
 **TShift** | `tshift [PLUS_MINUS_SIGN]DAYS`<br> e.g., `tshift 3`
 **Delete** | `delete [INDEX] [MORE_INDICES]`<br> e.g., `delete 3` `delete 1 4`
 **List** | `list`
-**Sort** | `sort [n/DIRECTION] [cn/DIRECTION]`<br> e.g., `sort n/` `sort n/dsc` `sort n/ cn/asc`
+**Sort** | `sort [n/DIRECTION] [cn/DIRECTION] [sh/start:DIRECTION] [sh/end:DIRECTION]`<br> e.g., `sort n/` `sort sort/end:dsc` `sort sh/start: cn/asc`
 **Clear** | `clear`
 **Help** | `help`
 **Exit** | `exit`

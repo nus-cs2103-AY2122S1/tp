@@ -72,6 +72,14 @@ public class ShnPeriod {
         }
     }
 
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
     /**
      * Returns true if this SHN period is completed by the given date.
      */
