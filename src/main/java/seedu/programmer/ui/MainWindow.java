@@ -105,6 +105,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        dashboardWindow = new DashboardWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -202,7 +203,10 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleDashboard() {
-        dashboardWindow = new DashboardWindow(new Stage());
+        if (dashboardWindow.isShowing()) {
+            dashboardWindow.focus();
+            return;
+        }
         dashboardWindow.show();
     }
 
