@@ -55,7 +55,7 @@ public class CommandTestUtil {
     public static final String VALID_GROUPNAME_G1 = "w14-4";
     public static final String VALID_GROUPNAME_G2 = "f01-3";
     public static final String VALID_YEAR_G1 = "AY20212022";
-    public static final String VALID_YEAR_G2 = "AY20212022";
+    public static final String VALID_YEAR_G2 = "AY20222023";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;

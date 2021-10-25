@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.MarkStudentAttCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -23,10 +26,21 @@ public class MarkStudentAttCommandParser implements Parser<MarkStudentAttCommand
 
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_WEEK);
-        Index index;
+
+        String trimmedArgs = argMultimap.getPreamble().trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MarkStudentAttCommand.MESSAGE_USAGE));
+        }
+
+        List<String> students = List.of(trimmedArgs.split("\\s+"));
+        List<Index> studentsToMark = new ArrayList<>();
 
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            for (String str : students) {
+                Index index = ParserUtil.parseIndex(str);
+                studentsToMark.add(index);
+            }
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     MarkStudentAttCommand.MESSAGE_USAGE), pe);
@@ -34,7 +48,7 @@ public class MarkStudentAttCommandParser implements Parser<MarkStudentAttCommand
 
         if (argMultimap.getValue(PREFIX_WEEK).isPresent()) {
             int week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
-            return new MarkStudentAttCommand(index, week);
+            return new MarkStudentAttCommand(studentsToMark, week);
         }
 
         throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,

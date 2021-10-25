@@ -333,7 +333,94 @@ Examples:
 * `deadline n/assignment submission on/2021-10-04` creates the deadline task "assignment submission", 
   with the deadline "2021-10-04" with LOW Priority.
 
+  which is to be completed by the given date with LOW Priority.
 
+
+### Marking a student's attendance: `marka`
+
+Marks the specified student(s) in the student list as present or absent.
+
+Format: `marka INDEX [MORE_INDEXES] /wWEEK NUMBER`
+
+* Marks the person(s) as present in the specified `INDEX(ES)`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+
+Examples:
+
+* `students` followed by `marka 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as present in week 1.
+* Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
+
+Sample Usage:
+
+`> marka 1 /w1`
+
+
+### Marking a student's participation: `markp`
+
+Marks the specified student(s) in the student list as participated or not participated.
+
+Format: `markp INDEX [MORE_INDEXES] /wWEEK NUMBER`
+
+* Marks the person(s) as present in the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+
+Examples:
+
+* `students` followed by `markp 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
+* Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
+
+Sample Usage:
+
+`> markp 1 /w1`
+
+    > Kho Tze Jit is marked as participated for week 1!
+
+`> markp 1 /w1`
+
+    > Kho Tze Jit is marked as not participated for week 1!
+
+### Deleting a student contact: `delete INDEX`
+
+Deletes the specified student from the student list.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+
+Examples:
+
+* `students` followed by `delete 1` removes the 1st person in the students list.
+
+Sample Usage:
+
+`> delete 1`
+
+    > Kho Tze Jit is removed from the student list!
+
+### Locating student by name: `findStudent`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `findStudent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Special characters will be ignored e.g. `Alice!` will match `Alice`
+* Partial names will be matched e.g. `Han` will match `Hans`
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `findStudent Joh@` returns `john` and `John Doe`
+* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Deleting a task: `deleteTask INDEX`
 

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 
@@ -37,8 +38,7 @@ public class AddStudentGroupCommand extends Command {
      * @param index of the student in the filtered student list to add to the group
      */
     public AddStudentGroupCommand(Index index, GroupName group) {
-        requireNonNull(index);
-        requireNonNull(group);
+        requireAllNonNull(index, group);
 
         this.index = index;
         this.group = group;
