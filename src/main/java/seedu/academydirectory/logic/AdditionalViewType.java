@@ -8,6 +8,11 @@ import seedu.academydirectory.logic.commands.VisualiseCommand;
 public enum AdditionalViewType {
     DEFAULT, HELP, VIEW, EXIT, VISUALISE;
 
+    /**
+     *
+     * @param command
+     * @return
+     */
     public static AdditionalViewType parse(Command command) {
         if (command instanceof ViewCommand) {
             return AdditionalViewType.VIEW;

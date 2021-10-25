@@ -2,7 +2,6 @@ package seedu.academydirectory.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;

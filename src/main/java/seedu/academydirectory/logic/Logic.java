@@ -1,15 +1,12 @@
 package seedu.academydirectory.logic;
 
 import java.nio.file.Path;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.GuiSettings;
-import seedu.academydirectory.logic.commands.Command;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
-import seedu.academydirectory.model.AdditionalInfo;
 import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.student.Student;
