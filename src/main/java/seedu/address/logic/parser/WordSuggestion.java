@@ -12,15 +12,26 @@ import java.util.Map;
 public class WordSuggestion {
 
     public static final String MESSAGE = "Did you mean %s?";
+    private static final String VALIDATION_REGEX = "[a-zA-Z]+";
 
     private final String word;
     private final List<String> validWords;
+    private final int distanceLimit;
     private final Map<String, Integer> editDistances = new HashMap<>();
     private int minDistance = Integer.MAX_VALUE;
 
     public WordSuggestion(String word, List<String> correctWords) {
         this.word = word;
         this.validWords = correctWords;
+        this.distanceLimit = Integer.MAX_VALUE;
+
+        computeAllLevenshteinDistance();
+    }
+
+    public WordSuggestion(String word, List<String> correctWords, int distanceLimit) {
+        this.word = word;
+        this.validWords = correctWords;
+        this.distanceLimit = distanceLimit;
 
         computeAllLevenshteinDistance();
     }
@@ -37,6 +48,10 @@ public class WordSuggestion {
     }
 
     public static int computeSingleLevenshteinDistance(String word1, String word2) {
+        if (!word1.matches(VALIDATION_REGEX) || !word2.matches(VALIDATION_REGEX)) {
+            return Integer.MAX_VALUE;
+        }
+
         word1 = word1.toLowerCase();
         word2 = word2.toLowerCase();
 
@@ -92,6 +107,10 @@ public class WordSuggestion {
     }
 
     public String getSuggestedWords() {
+        if (minDistance > distanceLimit) {
+            return "";
+        }
+
         return String.format(MESSAGE, String.join(", ", getSuggestedWordsList()));
     }
 }
