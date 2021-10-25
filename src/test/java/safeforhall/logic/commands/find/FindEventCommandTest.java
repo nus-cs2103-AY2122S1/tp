@@ -72,34 +72,33 @@ public class FindEventCommandTest {
     @Test
     public void execute_multipleKeywords_multipleEventsFound() {
         String expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        FindCompositePredicate predicate = preparePredicate("Football Training", null, null, null);
+        FindCompositePredicate predicate = preparePredicate("basketball powerlifting band", null, null, null);
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalEvents.BAND, TypicalEvents.BASKETBALL, TypicalEvents.POWERLIFTING),
+        assertEquals(Arrays.asList(TypicalEvents.BASKETBALL, TypicalEvents.POWERLIFTING, TypicalEvents.BAND),
                 model.getFilteredEventList());
     }
 
     @Test
-    public void execute_multiplePredicates_multipleEventsFound() {
+    public void execute_multipleKeywords_multipleEventsFound2() {
+        String expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, 2);
+        FindCompositePredicate predicate = preparePredicate("swim road relay", null, null, null);
+        FindEventCommand command = new FindEventCommand(predicate);
+        expectedModel.updateFilteredEventList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(TypicalEvents.SWIM, TypicalEvents.ROAD_RELAY),
+                model.getFilteredEventList());
+    }
+
+    @Test
+    public void execute_multipleKeywords_multipleEventsFound3() {
         String expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-        FindCompositePredicate predicate = preparePredicate(null, null, null, "3");
+        FindCompositePredicate predicate = preparePredicate("swim band volleyball", null, null, null);
         FindEventCommand command = new FindEventCommand(predicate);
         expectedModel.updateFilteredEventList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalEvents.BAND, TypicalEvents.BASKETBALL, TypicalEvents.POWERLIFTING),
-                model.getFilteredEventList());
-    }
-
-    @Test
-    public void execute_multiplePredicates_multipleEventsFound2() {
-        String expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, 4);
-        FindCompositePredicate predicate = preparePredicate("Running", null, "Track", null);
-        FindEventCommand command = new FindEventCommand(predicate);
-        expectedModel.updateFilteredEventList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(TypicalEvents.BAND, TypicalEvents.BASKETBALL, TypicalEvents.POWERLIFTING,
-                TypicalEvents.DANCE),
+        assertEquals(Arrays.asList(TypicalEvents.VOLLEYBALL, TypicalEvents.SWIM, TypicalEvents.BAND),
                 model.getFilteredEventList());
     }
 
@@ -111,36 +110,8 @@ public class FindEventCommandTest {
             FindEventCommand command = new FindEventCommand(predicate);
             expectedModel.updateFilteredEventList(predicate);
             assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            assertEquals(Arrays.asList(TypicalEvents.BAND, TypicalEvents.BASKETBALL, TypicalEvents.POWERLIFTING),
+            assertEquals(Arrays.asList(TypicalEvents.SWIM, TypicalEvents.BAND, TypicalEvents.VOLLEYBALL),
                     model.getFilteredEventList());
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertEquals(1, 1);
-        }
-    }
-
-    @Test
-    public void execute_invalidDate_fail() {
-        try {
-            String expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-            FindCompositePredicate predicate = preparePredicate(null, "03-01", null, null);
-            FindEventCommand command = new FindEventCommand(predicate);
-            expectedModel.updateFilteredEventList(predicate);
-            assertCommandSuccess(command, model, expectedMessage, expectedModel);
-            fail();
-        } catch (IllegalArgumentException e) {
-            assertEquals(1, 1);
-        }
-    }
-
-    @Test
-    public void execute_invalidDate2_fail() {
-        try {
-            String expectedMessage = String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, 3);
-            FindCompositePredicate predicate = preparePredicate(null, "03/01/2021", null, null);
-            FindEventCommand command = new FindEventCommand(predicate);
-            expectedModel.updateFilteredEventList(predicate);
-            assertCommandSuccess(command, model, expectedMessage, expectedModel);
             fail();
         } catch (IllegalArgumentException e) {
             assertEquals(1, 1);
