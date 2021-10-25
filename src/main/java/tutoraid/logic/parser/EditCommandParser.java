@@ -20,7 +20,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             Pattern.compile("(?<commandFlag>\\S+)(?<arguments>.*)");
 
     /**
-     * Parses user input into a specific add command for execution.
+     * Parses user input into a specific edit command for execution.
      *
      * @param userInput user input string after the 'edit' keyword has been removed
      * @return the specific edit command (edit student or edit lesson) based on the user input
