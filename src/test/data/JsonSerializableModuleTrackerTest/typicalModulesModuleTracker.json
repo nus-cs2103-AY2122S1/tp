@@ -55,7 +55,7 @@
     "mc": 4,
     "academicYear" : 2,
     "semester" : 1,
-    "tagged": [ "mathscience" ]
+    "tagged": [ "math science" ]
   }, {
     "code": "CS2102",
     "title": "Database Systems",
@@ -63,7 +63,7 @@
     "mc": 4,
     "academicYear" : 2,
     "semester" : 1,
-    "tagged": [ "breadthdepth" ]
+    "tagged": [ "breadth depth" ]
   }, {
     "code": "IS1103",
     "title": "Ethics in Computing",
@@ -71,7 +71,7 @@
     "mc": 4,
     "academicYear" : 2,
     "semester" : 1,
-    "tagged": [ "itprofessionalism" ]
+    "tagged": [ "it professionalism" ]
   }, {
     "code": "GEA1000",
     "title": "Quantitative Reasoning with Data",

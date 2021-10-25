@@ -72,6 +72,29 @@ public class ModuleTracker implements ReadOnlyModuleTracker {
         return this.userInfo.getMcGoal();
     }
 
+
+
+
+
+
+
+
+
+
+
+    public void updateUserInfo(UserInfo userInfo) {
+        this.userInfo.resetData(userInfo);
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * Replaces the contents of the Module list with {@code modules}.
      * {@code modules} must not contain duplicate modules.
