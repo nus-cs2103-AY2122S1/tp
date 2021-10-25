@@ -86,7 +86,7 @@ Exits the program and saves your data.
 Format: `exit`
 
 ## Working with people
-The base functionality of Notor is to allow you to mantain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
+The base functionality of Notor is to allow you to maintain notes on people who you mentor. These are the commands you can use with the `person` prefix to manage your contacts.
 
 ### Adding a person: `person (NAME) /create`
 
@@ -381,12 +381,13 @@ Find allows you to obtain the results that match with the keyword specified. You
 
 ### _Finding persons_ : `person /find (n:QUERY)`
 
-Finds all persons that match your search term.
+Finds all persons that match your search term. This will search for the term within the person's name.
 
 Format: `person  /find (n:QUERY)`<br>
 Advanced user Format:`p /f (n:QUERY)`
 
 * Finds all persons that match with given `QUERY`.
+* Substrings will match: `jo` will match `John` and `joanne`.
 
 Examples:
 
@@ -395,13 +396,14 @@ Examples:
 
 ### _Find a group or subgroup_ : `group /find (g:KEYWORD)`
 
-Find all the groups with the keyword specified. This can also be used to find all the subgroups with the group and subgroup name specified.
+Find all the groups with the keyword specified. This will search for the keyword within the group's name.
 
 Format:  `group /find g:KEYWORD`<br>
 Advanced user Format: `g /f g:KEYWORD`
 
-* Find all the group that matches the `KEYWORD`.
+* Find all the groups that match the `KEYWORD`.
 * The keyword must not include backslash (`/`) or underscore (`_`).
+* Substrings will match: `art` will match `Art Jammers`, `Smart cookie`, and `Artemis`
 
 Examples of finding group:
 
