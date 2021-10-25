@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.logic.Logic;
 
@@ -13,7 +14,6 @@ import javafx.event.EventHandler;
 
 public class ProfileWindow extends UiPart<Stage> {
 
-    // Update this...
     private static final String FXML = "ProfileWindow.fxml";
 
     private Logic logic;
@@ -21,6 +21,9 @@ public class ProfileWindow extends UiPart<Stage> {
 
     @FXML
     private Button submit;
+
+    @FXML
+    private Text message;
 
     @FXML
     private TextField name;
@@ -47,7 +50,7 @@ public class ProfileWindow extends UiPart<Stage> {
         super(FXML, stage);
         this.mainWindow = mainWindow;
         this.logic = logic;
-        submit.setOnAction(event());
+        //submit.setOnAction(event());
     }
 
     public void start() {
@@ -70,7 +73,12 @@ public class ProfileWindow extends UiPart<Stage> {
     }
 
     public void submit(ActionEvent event) {
-        event.consume();
+        //event.consume();
         System.out.println("Checking submit");
+
+
+
+
+        message.setText("Submitted!");
     }
 }
