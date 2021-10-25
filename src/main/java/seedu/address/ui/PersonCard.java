@@ -83,7 +83,11 @@ public class PersonCard extends UiPart<Region> {
         }
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+                .forEach(tag -> {
+                    Label l = new Label(tag.tagName);
+                    l.setStyle("-fx-background-color: " + tag.tagColour + ";");
+                    tags.getChildren().add(l);
+                });
         person.getSocialHandles().stream()
                 .sorted(Comparator.comparing(socialHandle -> socialHandle.platform))
                 .forEach(socialHandle -> socialHandles.getChildren()

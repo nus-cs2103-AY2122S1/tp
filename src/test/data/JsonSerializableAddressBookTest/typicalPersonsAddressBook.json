@@ -8,7 +8,10 @@
     "nationality": "Singapore ",
     "tutorialGroup": "T09",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ "friends" ],
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    } ],
     "socialHandles" : [ {
       "platform" : "tg",
       "value" : "alicep"
@@ -21,7 +24,13 @@
     "nationality": "China ",
     "tutorialGroup": "W08",
     "remark" : "He can't take beer!",
-    "tagged" : [ "owesMoney", "friends" ],
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    }, {
+      "tagName" : "owesMoney",
+      "tagColour" : "#3e7b91"
+    } ],
     "socialHandles" : [ {
       "platform" : "tg",
       "value" : "bensonm"
@@ -47,7 +56,10 @@
     "nationality": "Thailand ",
     "tutorialGroup": "T09",
     "remark" : "She likes aardvarks.",
-    "tagged" : [ "friends" ],
+    "tagged" : [ {
+      "tagName" : "friends",
+      "tagColour" : "#3e7b91"
+    } ],
     "socialHandles" : [ {
       "platform" : "tg",
       "value" : "danielm"
