@@ -3,7 +3,7 @@ theme: minima
 
 header_pages:
   - UserGuide.md
-  - DeveloperGuide.md
+  - DeveloperGuide - AB3.md
   - AboutUs.md
 
 markdown: kramdown

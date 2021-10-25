@@ -31,7 +31,7 @@ diagrams.
 
 ### Architecture
 
-![Architecture Diagram](images/ArchitectureDiagram.png)
+<img src="images/ArchitectureDiagram.png" width="280" />
 
 The ***Architecture Diagram*** given above explains the high-level design of the App.
 
@@ -40,8 +40,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** has two classes
-called [`Main`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/nus-cs2103-AY2122S1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It
+called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It
 is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
@@ -59,10 +59,9 @@ The rest of the App consists of four components.
 **How the architecture components interact with each other**
 
 The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues
-the command `delete Milk -c 5`.
+the command `delete 1`.
 
-//TODO: modify `saveInventory()` later
-![Delete Sequence Diagram](images/ArchitectureSequenceDiagram.png)
+<img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
@@ -75,14 +74,14 @@ the `LogicManager.java` class which follows the `Logic` interface. Other compone
 through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the
 implementation of a component), as illustrated in the (partial) class diagram below.
 
-![Component Managers](images/ComponentManagers.png)
+<img src="images/ComponentManagers.png" width="300" />
 
 The sections below give more details of each component.
 
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -110,7 +109,7 @@ API** : [`Logic.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/s
 
 Here's a (partial) class diagram of the `Logic` component:
 
-![Logic class diagram](images/LogicClassDiagram.png)
+<img src="images/LogicClassDiagram.png" width="550"/>
 
 How the `Logic` component works:
 
@@ -123,7 +122,7 @@ How the `Logic` component works:
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API
 call.
 
-![Interactions Inside the Logic Component for the `delete Milk -c 5` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -146,23 +145,39 @@ How the parsing works:
 **
 API** : [`Model.java`](https://github.com/AY2122S1-CS2103-F10-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-![Model class diagram](images/ModelClassDiagram.png)
+<img src="images/ModelClassDiagram.png" width="450" />
+
 
 The `Model` component
 
 - stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
-- stores the current order data i.e., an `Order` which contains all `Items` added to it.
-- stores the transaction history of orders i.e., a set of `TransactionRecord` objects.
-- stores the currently 'selected' `Item` objects (e.g., results of a search query) 
-  as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Item>`
-  that can be 'observed' e.g. the UI can be bound to this list 
-  so that the UI automatically updates when the data in the list change.
-- stores a `UserPref` object that represents the user’s preferences. 
-  This is exposed to the outside as a `ReadOnlyUserPref` objects.
-- does not depend on any of the other three components (as the Model represents data entities of the domain,
+- stores the order data i.e., an optional `Order` which contains all `Items` added to it.
+- stores the transaction history of orders i.e., a set of `TransactionRecord` objects. 
+- does not depend on any of the other three components (as the Model represents data entities of the domain, 
   they should make sense on their own without depending on other components)
-- it is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects.
-  i.e., updates `Inventory` when `Order` is placed by user, and keep the order histories as `TransactionRecord`.
+- Is in charge of internal interactions of `Item`, `Inventory`, `Order` and `TrasactionRecord` objects. 
+  i.e., updates `Inventory` when `Order` is placed by user, and note down `TransactionRecord`.
+
+
+<<<<<<< HEAD
+* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to
+=======
+* stores the inventory data i.e., all `Item` objects (which are contained in a `UniqueItemList` object).
+* stores the currently 'selected' `Item` objects (e.g., results of a search query) as a separate _filtered_ list which
+  is exposed to outsiders as an unmodifiable `ObservableList<Item>` that can be 'observed' e.g. the UI can be bound to
+>>>>>>> master
+  this list so that the UI automatically updates when the data in the list change.
+* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as
+  a `ReadOnlyUserPref` objects.
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they
+  should make sense on their own without depending on other components)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `Inventory`, which `Item` references. This allows `Inventory` to only require one `Tag` object per unique tag, instead of each `Item` needing their own `Tag` objects.<br>
+
+<img src="images/BetterModelClassDiagram.png" width="450" />
+
+</div>
 
 ### Storage component
 
