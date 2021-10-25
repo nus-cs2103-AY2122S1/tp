@@ -61,7 +61,6 @@ public class SortMemberCommandTest {
         SortMemberCommand command = new SortMemberCommand(byTag);
         expectedModel.sortMemberList(byTag);
         expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-        expectedModel.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
         String expectedMessage = String.format(SortMemberCommand.MESSAGE_SUCCESS, byTag);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
