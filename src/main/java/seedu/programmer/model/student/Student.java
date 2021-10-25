@@ -92,9 +92,15 @@ public class Student {
     /**
      * Adds a lab result to all the student records
      * */
-    public void addLabResult(Lab result) {
-        this.labResultList.add(result);
-        labResultList.sort(new SortByLabName());
+    public Boolean addLabResult(Lab result) {
+        int index = this.labResultList.indexOf(result);
+        if (index == -1) {
+            this.labResultList.add(result);
+            //labResultList.sort(new SortByLabName());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

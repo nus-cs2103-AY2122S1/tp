@@ -102,6 +102,14 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
         students.removeLab(lab);
     }
 
+    /**
+     * Adds {@code lab} from this {@code ProgrammerError}.
+     * {@code lab} must not exist in ProgrammerError.
+     */
+    public void addLab(Lab lab) {
+        students.addLab(lab);
+    }
+
     //// util methods
 
     @Override
