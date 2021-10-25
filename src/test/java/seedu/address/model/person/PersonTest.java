@@ -1,7 +1,6 @@
 package seedu.address.model.person;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GITHUB_BOB;
@@ -11,13 +10,58 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TELEGRAM_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_ADDRESS;
+import static seedu.address.testutil.TypicalPersons.ALICE_EMAIL;
+import static seedu.address.testutil.TypicalPersons.ALICE_GITHUB;
+import static seedu.address.testutil.TypicalPersons.ALICE_PHONE;
+import static seedu.address.testutil.TypicalPersons.ALICE_NAME;
+import static seedu.address.testutil.TypicalPersons.ALICE_TELEGRAM;
+import static seedu.address.testutil.TypicalPersons.ALICE_TAG_1;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.PersonBuilder;
 
+import java.util.Objects;
+
 public class PersonTest {
+
+    @Test
+    public void getName() {
+        Name expectedName = new Name(ALICE_NAME);
+        assertEquals(expectedName, ALICE.getName());
+    }
+
+    @Test
+    public void getTelegram() {
+        Telegram expectedTelegram = new Telegram(ALICE_TELEGRAM);
+        assertEquals(expectedTelegram, ALICE.getTelegram());
+    }
+
+    @Test
+    public void getGithub() {
+        Github expectedGithub = new Github(ALICE_GITHUB);
+        assertEquals(expectedGithub, ALICE.getGithub());
+    }
+
+    @Test
+    public void getPhone() {
+        Phone expectedPhone = new Phone(ALICE_PHONE);
+        assertEquals(expectedPhone, ALICE.getPhone());
+    }
+
+    @Test
+    public void getEmail() {
+        Email expectedEmail = new Email(ALICE_EMAIL);
+        assertEquals(expectedEmail, ALICE.getEmail());
+    }
+
+    @Test
+    public void getAddress() {
+        Address expectedAddress = new Address(ALICE_ADDRESS);
+        assertEquals(expectedAddress, ALICE.getAddress());
+    }
 
     @Test
     public void isFavourite_defaultAlice() {
@@ -36,6 +80,41 @@ public class PersonTest {
         ALICE.setIsFavourite();
         ALICE.setIsNotFavourite();
         assertFalse(ALICE.isFavourite());
+    }
+
+    @Test
+    public void compareTo() {
+        int expected = -1;
+        assertEquals(expected, ALICE.compareTo(BOB));
+    }
+
+    @Test
+    public void hashTest() {
+        int expected = 658747986;
+        assertEquals(expected, ALICE.hashCode());
+    }
+
+    @Test
+    public void profilePic() {
+        assertNotEquals(null, ALICE.getProfilePicture());
+    }
+
+    @Test
+    public void toStringTest() {
+        String expectedString = ALICE_NAME
+                + "; Telegram: "
+                + ALICE_TELEGRAM
+                + "; Github: "
+                + ALICE_GITHUB
+                + "; Phone: "
+                + ALICE_PHONE
+                + "; Email: "
+                + ALICE_EMAIL
+                + "; Address: "
+                + ALICE_ADDRESS
+                + "; Tags: "
+                + "[" + ALICE_TAG_1 + "]";
+        assertEquals(expectedString, ALICE.toString());
     }
 
     @Test
