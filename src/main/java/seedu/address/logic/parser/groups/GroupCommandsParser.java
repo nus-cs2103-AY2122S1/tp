@@ -10,7 +10,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.groups.DeleteGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.persons.GroupAddLessonParser;
 
 public class GroupCommandsParser {
 
