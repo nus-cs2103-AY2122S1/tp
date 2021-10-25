@@ -85,15 +85,20 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com r/A100 v/t f/SoC`
 * `add n/Betsy Crowe e/betsyc@example.com v/F r/B400 p/1234567 f/FASS fd/20-10-2021 cd/23-10-2021`
 
-### Viewing residents’ information : `view`
+#### Viewing residents’ information : `view`
 
 Shows a numbered list of all the residents in the address book.
 
-Format: `view`
+The index of the resident is the corresponding number in the list
+shown when `view` (without the [INDEX] parameter) is called.
+
+Format: `view [INDEX]`
+* For an index i, 1 ≤ i ≤ n, where n is the number of residents in the address book
 
 Examples:
 
-* `view` shows a numbered list of all the residents in the address book
+* `view` shows a list of all the residents
+* `view 30` shows the details of the resident at index 30
 
 #### Listing residents by fet/collection deadlines : `list`
 
