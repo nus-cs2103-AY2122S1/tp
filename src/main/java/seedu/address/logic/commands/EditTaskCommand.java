@@ -94,15 +94,17 @@ public class EditTaskCommand extends Command {
         if (taskToEdit.equals(editedTask)) {
             throw new CommandException(MESSAGE_DUPLICATE_TASK);
         }
-
         tasks.set(targetTaskIndex.getZeroBased(), editedTask);
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), personToEdit.getTags(), tasks, personToEdit.getDescription());
-
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask.toString()));
+
+        CommandResult commandResult = new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, editedTask));
+        commandResult.setWriteCommand();
+        return commandResult;
     }
 
     private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor editTaskDescriptor) {

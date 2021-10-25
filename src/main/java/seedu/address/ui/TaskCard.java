@@ -4,12 +4,13 @@ import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import seedu.address.model.task.Task;
 
 /**
@@ -26,7 +27,7 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label taskList;
+    private Text taskName;
 
     /**
      * Creates a {@code TaskCard} with the given {@code Task} and index to display.
@@ -38,14 +39,20 @@ public class TaskCard extends UiPart<Region> {
     }
 
     /**
-     * Initialises properties of FXML nodes of this TaskCard using {@code lc}'s properties.
+     * Initialises properties of FXML nodes of this TaskCard using {@code vbox}'s properties.
+     * @param value The extra amount to be reduced from the Text's width.
      */
-    public void initialise(ListCell<Task> lc) {
+    public void initialise(VBox vbox, double value) {
 
-        // Sets width property of HBox to be dependent on list cell's width and padding property.
+        // Sets width property of HBox to be dependent on VBox's width and padding property.
         descriptionPane.maxWidthProperty().bind(Bindings.createDoubleBinding(()->
-                lc.getWidth() - lc.getPadding().getLeft() - lc.getPadding().getRight() - 1,
-                lc.widthProperty(), lc.paddingProperty()));
+                vbox.getWidth() - vbox.getPadding().getLeft() - vbox.getPadding().getRight() - 1,
+                vbox.widthProperty(), vbox.paddingProperty()));
+
+        // Sets width property of Text to be dependent on VBox's width and padding property.
+        taskName.wrappingWidthProperty().bind(Bindings.createDoubleBinding(()->
+                        vbox.getWidth() - vbox.getPadding().getLeft() - vbox.getPadding().getRight() - value,
+                vbox.widthProperty(), vbox.paddingProperty()));
 
         id.setText(displayedIndex + ". ");
         String name = task.getTaskName().taskName;
@@ -68,6 +75,6 @@ public class TaskCard extends UiPart<Region> {
             descriptionPane.setBackground(new Background(
                     new BackgroundFill(javafx.scene.paint.Paint.valueOf("red"), CornerRadii.EMPTY, Insets.EMPTY)));
         }
-        taskList.setText(taskString);
+        taskName.setText(taskString);
     }
 }

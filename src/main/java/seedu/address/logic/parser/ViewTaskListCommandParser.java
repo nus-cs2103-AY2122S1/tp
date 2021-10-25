@@ -26,23 +26,31 @@ public class ViewTaskListCommandParser implements Parser<ViewTaskListCommand> {
      */
     public ViewTaskListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE));
+        if (trimmedArgs.equals("-A")) {
+            return new ViewTaskListCommand();
         } else {
-            Pattern validPatternWithoutFlags = Pattern.compile(VALID_INPUT_WITHOUT_FLAGS_REGEX);
-            Pattern validPatternWithFlags = Pattern.compile(VALID_INPUT_WITH_FLAGS_REGEX);
-            Matcher matcherWithoutFlags = validPatternWithoutFlags.matcher(trimmedArgs);
-            Matcher matcherWithFlags = validPatternWithFlags.matcher(trimmedArgs);
-            if (matcherWithoutFlags.matches()) {
-                Index index = ParserUtil.parseIndex(trimmedArgs);
-                return new ViewTaskListCommand(index);
-            } else if (matcherWithFlags.matches()) {
-                String[] flagAndKeywords = trimmedArgs.split(" ");
-                Index index = ParserUtil.parseIndex(flagAndKeywords[0]);
-                List<String> keywords = Arrays.asList(flagAndKeywords[2].split(" "));
-                return new ViewTaskListCommand(index, keywords);
-            } else {
+            try {
+                Pattern validPatternWithoutFlags = Pattern.compile(VALID_INPUT_WITHOUT_FLAGS_REGEX);
+                Pattern validPatternWithFlags = Pattern.compile(VALID_INPUT_WITH_FLAGS_REGEX);
+                Matcher matcherWithoutFlags = validPatternWithoutFlags.matcher(trimmedArgs);
+                Matcher matcherWithFlags = validPatternWithFlags.matcher(trimmedArgs);
+
+                if (matcherWithoutFlags.matches()) {
+                    Index index = ParserUtil.parseIndex(trimmedArgs);
+                    return new ViewTaskListCommand(index);
+                }
+
+                if (matcherWithFlags.matches()) {
+                    String[] flagAndKeywords = trimmedArgs.split(" ");
+                    Index index = ParserUtil.parseIndex(flagAndKeywords[0]);
+                    List<String> keywords = Arrays.asList(flagAndKeywords[2].split(" "));
+
+                    return new ViewTaskListCommand(index, keywords);
+                } else {
+                    throw new ParseException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE));
+                }
+            } catch (ParseException e) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewTaskListCommand.MESSAGE_USAGE));
             }

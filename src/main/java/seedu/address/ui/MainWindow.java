@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private AllTaskListPanel allTaskListPanel;
     private CommandBox commandBox;
 
     @FXML
@@ -159,6 +160,7 @@ public class MainWindow extends UiPart<Stage> {
         setAnchorProperties(personListSplitPanel);
 
         taskListPanel = new TaskListPanel(logic.getDisplayTaskList());
+        allTaskListPanel = new AllTaskListPanel(logic.getFilteredPersonList());
         taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
         setAnchorProperties(taskListSplitPanel);
 
@@ -212,8 +214,18 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+    @FXML
+    private void handleDisplayAllTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(allTaskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
+    }
+
+    @FXML
+    private void handleDisplaySingleTaskList() {
+        taskListSplitPanel.getChildren().clear();
+        taskListSplitPanel.getChildren().add(taskListPanel.getRoot());
+        setAnchorProperties(taskListSplitPanel);
     }
 
     /**
@@ -230,9 +242,17 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isExit()) {
                 handleExit();
+            }
+            if (commandResult.isDisplayAllTaskList()) {
+                handleDisplayAllTaskList();
+            }
+            if (commandResult.isDisplaySingleTaskList()) {
+                handleDisplaySingleTaskList();
+            }
+            if (commandResult.isWriteCommand()) {
+                allTaskListPanel.updateRootNode(logic.getFilteredPersonList());
             }
 
             return commandResult;
