@@ -247,7 +247,6 @@ public class ModelManager implements Model {
 
     private void sortMemberListByTags() {
         addressBook.sortMemberListByTags();
->>>>>>> master
     }
 
     @Override

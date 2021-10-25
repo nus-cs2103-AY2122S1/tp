@@ -303,12 +303,13 @@ Format: `import CSV_FILE_PATH`
    3) Availability
    4) Tags
 * When filling in the details of each member in the CSV file, the Names and Phone fields must be filled 
-  while Availability and Tagsfields are optional.
+  while Availability and Tags fields are optional.
 * `CSV_FILE_PATH` should be relative to the JAR file location.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Note:** The details imported from the CSV file will overwrite any existing details of the members.
+**:information_source: Note:** If there happens to be a duplicate member(same name) being imported using the
+CSV file, the details from the CSV file will overwrite the existing details, except the attendance data.
 </div>
 
 Examples: 
