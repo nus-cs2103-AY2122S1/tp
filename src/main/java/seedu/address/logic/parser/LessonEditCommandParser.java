@@ -69,7 +69,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             .ifPresent(editLessonDescriptor::setHomeworkSet);
 
         if (argMultimap.getValue(PREFIX_RATES).isPresent()) {
-            editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
+            editLessonDescriptor.setLessonRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
         }
 
         if (argMultimap.getValue(PREFIX_OUTSTANDING_FEES).isPresent()) {

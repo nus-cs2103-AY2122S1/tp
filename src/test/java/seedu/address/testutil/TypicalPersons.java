@@ -20,8 +20,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHOOL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FORGETFUL;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_ZOOM;
 import static seedu.address.testutil.LastUpdatedDateUtil.getTypicalLastUpdatedDate;
 
 import java.util.ArrayList;
@@ -46,15 +46,16 @@ public class TypicalPersons {
             .withAcadStream("IP")
             .withAcadLevel("Y6")
             .withRemark("She likes Cheesecake")
-            .withTags("friends").build();
+            .withTags("forgetful").build();
 
     // all fields present with multiple tags
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withParentPhone("94328765").withParentEmail("ben@example.com")
-            .withAddress("311, Clementi Ave 2, #02-25").withSchool("HCI")
-            .withAcadStream("IP").withAcadLevel("Y3").withRemark("He likes chocolate ice cream")
-            .withTags("owesMoney", "friends").build();
+            .withAddress("311, Clementi Ave 2, #02-25")
+            .withSchool("HCI").withAcadStream("IP").withAcadLevel("Y3")
+            .withRemark("He likes chocolate ice cream")
+            .withTags("unpaid", "forgetful").build();
 
     // some optional fields missing
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz")
@@ -68,7 +69,7 @@ public class TypicalPersons {
             .withEmail("cornelia@example.com")
             .withAddress("10th street")
             .withSchool("CCHM")
-            .withTags("friends").build();
+            .withTags("forgetful").build();
 
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer")
             .withPhone("94822244")
@@ -111,7 +112,7 @@ public class TypicalPersons {
             .withAcadStream(VALID_ACAD_STREAM_AMY)
             .withAcadLevel(VALID_ACAD_LEVEL_AMY)
             .withRemark(VALID_REMARK_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_FORGETFUL).build();
 
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB)
             .withPhone(VALID_PHONE_BOB)
@@ -123,13 +124,13 @@ public class TypicalPersons {
             .withAcadStream(VALID_ACAD_STREAM_BOB)
             .withAcadLevel(VALID_ACAD_LEVEL_BOB)
             .withRemark(VALID_REMARK_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_ZOOM, VALID_TAG_FORGETFUL).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER in name
 
     public static final String KEYWORD_MATCHING_AVE = "Ave"; // A keyword that matches AVE in address
 
-    public static final String KEYWORD_MATCHING_FRIENDS = "Friends"; // A keyword that matches the tag FRIENDS
+    public static final String KEYWORD_MATCHING_FORGETFUL = "Forgetful"; // A keyword that matches the tag FORGETFUL
 
     private TypicalPersons() {} // prevents instantiation
 

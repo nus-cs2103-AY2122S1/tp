@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import com.calendarfx.model.Calendar;
 
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
@@ -27,6 +28,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -177,7 +179,7 @@ public class AddCommandTest {
 
         @Override
         public Calendar getCalendar() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
@@ -192,12 +194,22 @@ public class AddCommandTest {
 
         @Override
         public LastUpdatedDate getLastUpdatedDate() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
 
         @Override
         public void setLastUpdatedDate() {
-            throw new AssertionError("This method should not be called.");
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public ObservableList<Tag> getObservableTagList() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
+        }
+
+        @Override
+        public ObservableMap<Tag, Integer> getTagCounter() {
+            throw new AssertionError(MESSAGE_UNEXPECTED_METHOD_CALL);
         }
     }
 

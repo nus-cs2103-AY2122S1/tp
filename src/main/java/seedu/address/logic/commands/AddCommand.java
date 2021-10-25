@@ -49,9 +49,9 @@ public class AddCommand extends UndoableCommand {
             + PREFIX_SCHOOL + "Nan Chiau High School "
             + PREFIX_ACAD_STREAM + "Express "
             + PREFIX_ACAD_LEVEL + "S1 "
-            + PREFIX_REMARK + "He owes me a dinner! "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "neighbour";
+            + PREFIX_REMARK + "weak at trigo "
+            + PREFIX_TAG + "retained "
+            + PREFIX_TAG + "new";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to TAB.\n"
             + "Parameters: " + COMMAND_PARAMETERS + "\n"

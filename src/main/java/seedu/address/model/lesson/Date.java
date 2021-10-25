@@ -93,7 +93,7 @@ public class Date implements Comparable<Date> {
      */
     public Date updateDate() {
         LocalDate laterDate = getLocalDate().isAfter(LocalDate.now()) ? getLocalDate() : LocalDate.now();
-        LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+        LocalDate updatedDate = laterDate.with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
         Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }

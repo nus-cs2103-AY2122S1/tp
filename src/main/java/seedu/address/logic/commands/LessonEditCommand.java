@@ -224,7 +224,7 @@ public class LessonEditCommand extends UndoableCommand {
             setTimeRange(toCopy.timeRange);
             setSubject(toCopy.subject);
             setHomeworkSet(toCopy.homeworkSet);
-            setRate(toCopy.rate);
+            setLessonRate(toCopy.rate);
             setOutstandingFees(toCopy.outstandingFees);
         }
 
@@ -232,7 +232,7 @@ public class LessonEditCommand extends UndoableCommand {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate);
+            return CollectionUtil.isAnyNonNull(date, timeRange, subject, homeworkSet, rate, outstandingFees);
         }
 
         public Optional<Date> getDate() {
@@ -282,7 +282,7 @@ public class LessonEditCommand extends UndoableCommand {
             return Optional.ofNullable(rate);
         }
 
-        public void setRate(LessonRates rate) {
+        public void setLessonRate(LessonRates rate) {
             this.rate = rate;
         }
 
@@ -313,7 +313,8 @@ public class LessonEditCommand extends UndoableCommand {
                 && getTimeRange().equals(e.getTimeRange())
                 && getSubject().equals(e.getSubject())
                 && getHomeworkSet().equals(e.getHomeworkSet())
-                && getRate().equals(e.getRate());
+                && getRate().equals(e.getRate())
+                && getOutstandingFees().equals(e.getOutstandingFees());
         }
     }
 }
