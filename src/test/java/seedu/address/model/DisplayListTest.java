@@ -7,11 +7,12 @@ import static seedu.address.testutil.TypicalItems.getTypicalInventory;
 import static seedu.address.testutil.TypicalItems.getTypicalItems;
 
 import java.util.Collection;
+
+import org.junit.jupiter.api.Test;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import org.junit.jupiter.api.Test;
-
 import seedu.address.model.item.Item;
 
 public class DisplayListTest {
@@ -41,7 +42,7 @@ public class DisplayListTest {
         ObservableList<Item> itemSource2 = FXCollections.observableArrayList(getTypicalItems());
         displayList.setItems(itemSource2);
 
-        itemSource1.add(BAGEL);  // Change in itemSource1 should no longer propagate to filteredList
+        itemSource1.add(BAGEL); // Change in itemSource1 should no longer propagate to filteredList
         assertEquals(itemSource2, filteredList);
     }
 
@@ -49,7 +50,7 @@ public class DisplayListTest {
     public void setItems_sameSource_success() {
         ObservableList<Item> itemSource = FXCollections.observableArrayList(getTypicalItems());
         displayList.setItems(itemSource);
-        displayList.setItems(itemSource);  // Attach to same source again
+        displayList.setItems(itemSource); // Attach to same source again
         assertSourceListening(filteredList, itemSource);
     }
 
