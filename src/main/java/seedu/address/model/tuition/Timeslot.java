@@ -1,5 +1,4 @@
 package seedu.address.model.tuition;
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
