@@ -69,6 +69,10 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    /**
+     * Execute a command by action, through using the equivalent GUI
+     * @param commandText execute the command
+     */
     public void execute(String commandText) {
         try {
             commandExecutor.execute(commandText);
