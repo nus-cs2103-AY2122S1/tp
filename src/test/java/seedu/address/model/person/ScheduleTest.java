@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 public class ScheduleTest {
     private static final LocalDate START_DATE = LocalDate.of(1, 1 , 1);
+    private static final LocalDate END_DATE = START_DATE.plusDays(7);
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -40,8 +41,8 @@ public class ScheduleTest {
         Schedule schedule = new Schedule();
         assertEquals(0, schedule.getTotalWorkingHour());
 
-        schedule.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
-        assertEquals(4, schedule.getTotalWorkingHour());
+        schedule.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
+        assertEquals(6, schedule.getTotalWorkingHour());
     }
 
 
@@ -51,12 +52,12 @@ public class ScheduleTest {
         DayOfWeek toAdd = DayOfWeek.MONDAY;
         Period testPeriod = createPeriod(1, 7);
         for (int i = 1; i <= 7; i++) {
-            testSchedule.addShift(toAdd, Slot.MORNING, START_DATE);
-            int result = testSchedule.getTotalWorkingHour(testPeriod, List.of());
+            testSchedule.addShift(toAdd, Slot.MORNING, START_DATE, END_DATE);
+            long result = testSchedule.getTotalWorkingHour(testPeriod, List.of());
             assertEquals(i * Schedule.HOURS_PER_SLOT, result);
             toAdd = toAdd.plus(1);
         }
-        int result = testSchedule.getTotalWorkingHour(testPeriod, List.of(createPeriod(1, 1)));
+        long result = testSchedule.getTotalWorkingHour(testPeriod, List.of(createPeriod(1, 1)));
         assertEquals(6 * Schedule.HOURS_PER_SLOT, result);
     }
 }

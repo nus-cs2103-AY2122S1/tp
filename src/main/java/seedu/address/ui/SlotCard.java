@@ -9,6 +9,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 
@@ -41,12 +42,13 @@ public class SlotCard extends UiPart<Region> {
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
-    public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist) {
+    public SlotCard(DayOfWeek day, Slot slot, ObservableList<Person> stafflist, Period period) {
         super(FXML);
         this.day = day;
         this.slot = slot;
         shiftName.setText(slot.toString());
-        ObservableList<Person> filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
+        ObservableList<Person> filteredList =
+                stafflist.filtered(p -> p.isWorking(day, slot.getOrder(), period));
         staffWorkingList.setItems(filteredList);
         staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }

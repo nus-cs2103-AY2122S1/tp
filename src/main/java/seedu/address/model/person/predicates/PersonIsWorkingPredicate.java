@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.util.function.Predicate;
 
 import seedu.address.logic.commands.ViewShiftCommand;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 
 public class PersonIsWorkingPredicate implements Predicate<Person> {
@@ -12,6 +13,7 @@ public class PersonIsWorkingPredicate implements Predicate<Person> {
     private final DayOfWeek dayOfWeek;
     private final int slotNum;
     private final LocalTime time;
+    private final Period period;
 
     /**
      * Constructs a PersonIsWorkingPredicate object which tests if a person is working on a specific day, at a
@@ -22,10 +24,12 @@ public class PersonIsWorkingPredicate implements Predicate<Person> {
      *                if the viewShift is by time.
      * @param time The time that will be checked. It will be null if the viewShift is by slot number.
      */
-    public PersonIsWorkingPredicate(DayOfWeek dayOfWeek, int slotNum, LocalTime time) {
+    public PersonIsWorkingPredicate(DayOfWeek dayOfWeek, int slotNum, LocalTime time, Period period) {
+        assert period != null;
         this.dayOfWeek = dayOfWeek;
         this.slotNum = slotNum;
         this.time = time;
+        this.period = period;
     }
 
     @Override
@@ -41,9 +45,9 @@ public class PersonIsWorkingPredicate implements Predicate<Person> {
     public boolean test(Person person) {
 
         if (time != null && dayOfWeek != null) {
-            return person.isWorking(dayOfWeek, time);
+            return person.isWorking(dayOfWeek, time, period);
         } else if (slotNum != ViewShiftCommand.INVALID_SLOT_NUMBER && dayOfWeek != null) {
-            return person.isWorking(dayOfWeek, slotNum);
+            return person.isWorking(dayOfWeek, slotNum, period);
         } else {
             return false; // can consider throwing an exception?
         }

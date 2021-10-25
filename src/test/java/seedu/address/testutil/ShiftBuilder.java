@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.model.EmptyShift;
-import seedu.address.model.person.Period;
+import seedu.address.model.RecurrencePeriod;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.Slot;
 import seedu.address.model.util.SampleDataUtil;
@@ -17,16 +17,20 @@ import seedu.address.model.util.SampleDataUtil;
  * Ultility class to help with building shift objects.
  */
 public class ShiftBuilder {
-    private static final List<Period> DEFAULT_HISTORY = List.of(createPeriod(1, 7), createPeriod(15, 20));
     private static final Slot DEFAULT_SLOT = Slot.MORNING;
+    private static final List<RecurrencePeriod> DEFAULT_HISTORY = List.of(createPeriod(1, 7), createPeriod(15, 20))
+            .stream()
+            .map(p -> new RecurrencePeriod(p, DEFAULT_SLOT))
+            .collect(Collectors.toList());
     private static final boolean DEFAULT_IS_WORKING = true;
     private static final LocalDate DEFAULT_START = LocalDate.of(2, 6, 1);
 
     private DayOfWeek day;
-    private List<Period> history;
+    private List<RecurrencePeriod> history;
     private LocalDate startDate;
     private Slot slot;
     private boolean isWorking;
+
 
     /**
      * Default shift builder.
@@ -44,10 +48,9 @@ public class ShiftBuilder {
      */
     public ShiftBuilder(Shift shiftToCopy) {
         this.day = shiftToCopy.getDayOfWeek();
-        this.history = shiftToCopy.getHistory();
+        this.history = shiftToCopy.getRecurrences();
         this.isWorking = !shiftToCopy.isEmpty();
         this.slot = shiftToCopy.getSlot();
-        this.startDate = shiftToCopy.getStartDate();
     }
 
     /**
@@ -62,13 +65,13 @@ public class ShiftBuilder {
 
     private Shift buildEmpty() {
         assert isWorking == false;
-        return new EmptyShift(day, slot, history);
+        return new EmptyShift(day, slot);
 
     }
 
     private Shift buildShift() {
         assert isWorking;
-        return new Shift(day, slot, startDate, history);
+        return new Shift(day, slot, history);
     }
 
     /**
@@ -99,6 +102,7 @@ public class ShiftBuilder {
     public void withHistory(String... periods) {
         this.history = SampleDataUtil.getPeriodSet(periods)
                 .stream()
+                .map(p -> new RecurrencePeriod(p, slot))
                 .collect(Collectors.toList());
     }
 

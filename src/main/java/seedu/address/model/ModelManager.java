@@ -182,23 +182,24 @@ public class ModelManager implements Model {
 
     @Override
     public void addShift(Person target, DayOfWeek dayOfWeek,
-                         Slot slot, LocalDate startDate) throws DuplicateShiftException {
-        requireAllNonNull(target, dayOfWeek, slot);
-        target.addShift(dayOfWeek, slot, startDate);
+                         Slot slot, LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
+        requireAllNonNull(target, dayOfWeek, slot, startDate, endDate);
+        target.addShift(dayOfWeek, slot, startDate, endDate);
 
     }
 
-    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                             LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
-        requireAllNonNull(target, dayOfWeek, slot, startTime, endTime);
-        target.setShiftTime(dayOfWeek, slot, startTime, endTime);
+        requireAllNonNull(target, dayOfWeek, slot, startTime, endTime, startDate, endDate);
+        target.setShiftTime(dayOfWeek, slot, startTime, endTime, startDate, endDate);
     }
 
     @Override
     public void deleteShift(Person target, DayOfWeek dayOfWeek,
-                            Slot slot, LocalDate endDate) throws NoShiftException {
-        requireAllNonNull(target, dayOfWeek, slot);
-        target.removeShift(dayOfWeek, slot, endDate);
+                            Slot slot, LocalDate startDate, LocalDate endDate) throws NoShiftException {
+        requireAllNonNull(target, dayOfWeek, slot, startDate, endDate);
+        target.removeShift(dayOfWeek, slot, startDate, endDate);
     }
 
     @Override

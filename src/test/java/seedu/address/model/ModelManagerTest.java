@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
@@ -28,6 +29,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
     private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
+    private static final LocalDate END_DATE = START_DATE.plusDays(7);
     private ModelManager modelManager = new ModelManager();
 
 
@@ -121,9 +123,9 @@ public class ModelManagerTest {
                 .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
-        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
         assertThrows(DuplicateShiftException.class, () ->
-                modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE));
+                modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE));
     }
 
     @Test
@@ -133,8 +135,9 @@ public class ModelManagerTest {
                 .withPhone("94351253").withRoles("floor").withSalary("1000000").withStatus("fulltime")
                 .withTags("friends").build();
         modelManager.addPerson(alice);
-        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
-        assertTrue(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON));
+        modelManager.addShift(alice, DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
+        assertTrue(alice.getSchedule().isWorking(DayOfWeek.MONDAY, Slot.AFTERNOON,
+                new Period(START_DATE, END_DATE)));
     }
 
     @Test

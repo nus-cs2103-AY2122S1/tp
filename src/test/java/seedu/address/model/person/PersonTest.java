@@ -24,6 +24,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
     private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
+    private static final LocalDate END_DATE = START_DATE.plusDays(7);
 
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
@@ -69,7 +70,7 @@ public class PersonTest {
                 .withTags("friends").build();
         assertEquals(0, alice.getTotalWeeklyWorkingHour());
 
-        alice.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE);
+        alice.addShift(DayOfWeek.MONDAY, Slot.AFTERNOON, START_DATE, END_DATE);
         assertEquals(4, alice.getTotalWeeklyWorkingHour());
 
         Schedule newSchedule = new Schedule();

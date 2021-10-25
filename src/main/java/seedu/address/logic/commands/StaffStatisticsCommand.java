@@ -58,11 +58,11 @@ public class StaffStatisticsCommand extends Command {
      * @param staffs The staffs to get the work time from.
      * @return the total work time in hours.
      */
-    private int totalWorkTime(List<? extends Person> staffs) {
+    private long totalWorkTime(List<? extends Person> staffs) {
         final Period period = getCurrentPeriod();
-        int result = staffs.stream()
-                .mapToInt(person -> person.getTotalWorkingHour(period))
-                .reduce(0, (x, y) -> x + y);
+        long result = staffs.stream()
+                .mapToLong(person -> person.getTotalWorkingHour(period))
+                .sum();
         return result;
     }
 

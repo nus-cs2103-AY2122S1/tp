@@ -76,13 +76,15 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate startDate)
+    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                         LocalDate startDate, LocalDate endDate)
             throws DuplicateShiftException {
         throw new AssertionError("This method should not be called");
     }
 
     @Override
-    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) {
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate startDate,
+                            LocalDate endDate) {
         throw new AssertionError("This method should not be called");
     }
 
@@ -123,7 +125,9 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime) {
+    public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot,
+                             LocalTime startTime, LocalTime endTime,
+                             LocalDate startDate, LocalDate endDate) {
         throw new AssertionError("This method should not be called");
     }
 }

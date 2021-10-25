@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.SetShiftTimeCommand.MESSAGE_USAGE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
@@ -31,21 +32,24 @@ public class SetShiftTimeCommandTest {
     public static final LocalTime[] TIMES = new LocalTime[]{LocalTime.of(18, 0), LocalTime.of(19,
             0)};
 
+    private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
+    private static final LocalDate END_DATE = START_DATE.plusDays(7);
+
     @Test
     public void equals() {
         SetShiftTimeCommand firstCommand = new SetShiftTimeCommand(Index.fromOneBased(1), new Name("testingName"),
-                "monday-1", TIMES);
+                "monday-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand secondCommand = new SetShiftTimeCommand(Index.fromOneBased(1), new Name("testingName"),
-                "MONDAY-1", TIMES);
+                "MONDAY-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand thirdCommand = new SetShiftTimeCommand(Index.fromOneBased(2), new Name("testingName"),
-                "monday-1", TIMES);
+                "monday-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand fourthCommand = new SetShiftTimeCommand(Index.fromOneBased(1), new Name("differentName"),
-                "monday-1", TIMES);
+                "monday-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand fifthCommand = new SetShiftTimeCommand(Index.fromOneBased(1), new Name("testingName"),
-                "tuesday-1", TIMES);
+                "tuesday-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand sixthCommand = new SetShiftTimeCommand(Index.fromOneBased(1), new Name("testingName"),
                 "tuesday-1", new LocalTime[]{LocalTime.of(18, 0),
-                LocalTime.of(20, 0)});
+                LocalTime.of(20, 0)}, START_DATE, END_DATE);
 
         // Object should equal itself
         assertEquals(firstCommand, firstCommand);
@@ -67,11 +71,11 @@ public class SetShiftTimeCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         SetShiftTimeCommand nameNotFoundCommand = new SetShiftTimeCommand(null, new Name("Cannot found"),
-                "monday-1", TIMES);
+                "monday-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand indexOutOfBoundCommand = new SetShiftTimeCommand(Index.fromOneBased(100),
-                new Name("Alice Pauline"), "monday-1", TIMES);
+                new Name("Alice Pauline"), "monday-1", TIMES, START_DATE, END_DATE);
         SetShiftTimeCommand personIsNullCommand = new SetShiftTimeCommand(null, null,
-                "monday-1", TIMES);
+                "monday-1", TIMES, START_DATE, END_DATE);
 
         assertCommandFailure(indexOutOfBoundCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         assertCommandFailure(personIsNullCommand, model, MESSAGE_USAGE);
@@ -95,10 +99,10 @@ public class SetShiftTimeCommandTest {
         expectedModel.addPerson(copyOfAlice);
 
         SetShiftTimeCommand firstCommand = new SetShiftTimeCommand(null, alice.getName(),
-                "tuesday-1", TIMES);
+                "tuesday-1", TIMES, START_DATE, END_DATE);
 
         expectedModel.findPersonByName(new Name("Alice Pauline")).setShiftTime(DayOfWeek.TUESDAY, Slot.AFTERNOON,
-                TIMES[0], TIMES[1]);
+                TIMES[0], TIMES[1], START_DATE, END_DATE);
         assertCommandSuccess(firstCommand, model, String.format(MESSAGE_SET_SHIFT_TIME_SUCCESS, alice.getName(),
                 DayOfWeek.TUESDAY, Slot.AFTERNOON, TIMES[0], TIMES[1]), expectedModel);
     }
@@ -121,10 +125,10 @@ public class SetShiftTimeCommandTest {
         expectedModel.addPerson(copyOfAlice);
 
         SetShiftTimeCommand firstCommand = new SetShiftTimeCommand(Index.fromOneBased(1), null,
-                "tuesday-1", TIMES);
+                "tuesday-1", TIMES, START_DATE, END_DATE);
 
         expectedModel.findPersonByName(new Name("Alice Pauline")).setShiftTime(DayOfWeek.TUESDAY, Slot.AFTERNOON,
-                TIMES[0], TIMES[1]);
+                TIMES[0], TIMES[1], START_DATE, END_DATE);
         assertCommandSuccess(firstCommand, model, String.format(MESSAGE_SET_SHIFT_TIME_SUCCESS, alice.getName(),
                 DayOfWeek.TUESDAY, Slot.AFTERNOON, TIMES[0], TIMES[1]), expectedModel);
     }
@@ -146,11 +150,11 @@ public class SetShiftTimeCommandTest {
                 LocalTime.of(23, 59)};
 
         SetShiftTimeCommand wrongOrderTimesCommand = new SetShiftTimeCommand(null, alice.getName(),
-                "monday-1", wrongOrderTimes);
+                "monday-1", wrongOrderTimes, START_DATE, END_DATE);
         SetShiftTimeCommand outOfBoundMorningCommand = new SetShiftTimeCommand(null, alice.getName(),
-                "monday-0", outOfBoundMorningTimes);
+                "monday-0", outOfBoundMorningTimes, START_DATE, END_DATE);
         SetShiftTimeCommand outOfBoundAfternoonCommand = new SetShiftTimeCommand(null, alice.getName(),
-                "monday-1", outOfBoundAfternoonTimes);
+                "monday-1", outOfBoundAfternoonTimes, START_DATE, END_DATE);
 
         assertThrows(CommandException.class, () -> wrongOrderTimesCommand.execute(model));
         assertThrows(CommandException.class, () -> outOfBoundMorningCommand.execute(model));

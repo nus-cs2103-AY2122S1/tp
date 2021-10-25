@@ -14,6 +14,8 @@ import seedu.address.model.person.Name;
 
 public class AddShiftCommandParserTest {
     private static final LocalDate START_DATE = LocalDate.of(1, 1, 1);
+    private static final LocalDate END_DATE = START_DATE.plusDays(7);
+
     private AddShiftCommandParser parser = new AddShiftCommandParser();
 
 
@@ -40,9 +42,9 @@ public class AddShiftCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         AddShiftCommand expectedNameCommand = new AddShiftCommand(null, new Name("testing"),
-                "monday-1", START_DATE);
+                "monday-1", START_DATE, END_DATE);
         AddShiftCommand expectedIndexCommand = new AddShiftCommand(Index.fromOneBased(1), null,
-                "monday-1", START_DATE);
+                "monday-1", START_DATE, END_DATE);
         assertParseSuccess(parser, " -n testing d/monday-1", expectedNameCommand);
         assertParseSuccess(parser, " -i 1 d/monday-1", expectedIndexCommand);
     }

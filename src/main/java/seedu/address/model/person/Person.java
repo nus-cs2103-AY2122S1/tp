@@ -101,12 +101,12 @@ public class Person {
         return schedule;
     }
 
-    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum) {
-        return schedule.isWorking(dayOfWeek, slotNum);
+    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum, Period period) {
+        return schedule.isWorking(dayOfWeek, slotNum, period);
     }
 
-    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time) {
-        return schedule.isWorking(dayOfWeek, time);
+    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time, Period period) {
+        return schedule.isWorking(dayOfWeek, time, period);
     }
 
     /**
@@ -142,9 +142,10 @@ public class Person {
      * @param endTime of the shift.
      * @throws InvalidShiftTimeException throws when the timings of Shift are invalid.
      */
-    public void setShiftTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+    public void setShiftTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                             LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
-        schedule.setTime(dayOfWeek, slot, startTime, endTime);
+        schedule.setTime(dayOfWeek, slot, startTime, endTime, startDate, endDate);
     }
 
 
@@ -180,8 +181,9 @@ public class Person {
      * @param startDate The date the shift starts at.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate) throws DuplicateShiftException {
-        schedule.addShift(dayOfWeek, slot, startDate);
+    public void addShift(DayOfWeek dayOfWeek, Slot slot,
+                         LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
+        schedule.addShift(dayOfWeek, slot, startDate, endDate);
         totalWeeklyWorkingHour = schedule.getTotalWorkingHour();
     }
 
@@ -193,8 +195,9 @@ public class Person {
      * @param endDate The date the shift ends at.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) throws NoShiftException {
-        schedule.removeShift(dayOfWeek, slot, endDate);
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot,
+                            LocalDate startDate, LocalDate endDate) throws NoShiftException {
+        schedule.removeShift(dayOfWeek, slot, startDate, endDate);
     }
 
     public void setSchedule(Schedule schedule) {
@@ -213,7 +216,7 @@ public class Person {
      * @param period The period to get the working hours over.
      * @return The total working hours over this period.
      */
-    public int getTotalWorkingHour(Period period) {
+    public long getTotalWorkingHour(Period period) {
         return this.schedule.getTotalWorkingHour(period, getAbsentDates());
     }
 

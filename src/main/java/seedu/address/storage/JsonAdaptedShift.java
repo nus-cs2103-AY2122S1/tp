@@ -1,11 +1,8 @@
 package seedu.address.storage;
 
-import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.model.person.Slot.isValidSlot;
 
 import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,9 +11,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.EmptyShift;
-import seedu.address.model.person.Period;
+import seedu.address.model.RecurrencePeriod;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.Slot;
 
@@ -26,29 +22,22 @@ public class JsonAdaptedShift {
 
     private final String dayOfWeek;
     private final String slot;
-    private final String startDate;
     private final String isWorking;
-    private final String startTime;
-    private final String endTime;
-    private final List<JsonAdaptedPeriod> history = new ArrayList<>();
+    private final List<JsonAdaptedRecurrencePeriod> history = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedRole} with the given Shift details.
      */
     @JsonCreator
     public JsonAdaptedShift(@JsonProperty("dayOfWeek") String dayOfWeek, @JsonProperty("slot") String slot,
-                            @JsonProperty("history") List<JsonAdaptedPeriod> history,
-                            @JsonProperty("startDate") String startDate, @JsonProperty("isWorking") String isWorking,
-                            @JsonProperty("startTime") String startTime, @JsonProperty("endTime") String endTime) {
+                            @JsonProperty("history") List<JsonAdaptedRecurrencePeriod> history,
+                            @JsonProperty("isWorking") String isWorking) {
         this.slot = slot;
         this.dayOfWeek = dayOfWeek;
         if (history != null) {
             this.history.addAll(history);
         }
-        this.startDate = startDate;
         this.isWorking = isWorking;
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
 
     /**
@@ -58,15 +47,12 @@ public class JsonAdaptedShift {
         assert shift != null;
         this.dayOfWeek = shift.getDayOfWeek().toString();
         this.slot = shift.getSlot().getValue();
-        this.startDate = shift.getStartDate().toString();
         this.isWorking = String.valueOf(!shift.isEmpty());
-        List<Period> history = shift.getHistory();
+        List<RecurrencePeriod> history = shift.getRecurrences();
         this.history.addAll(history
                 .stream()
-                .map(JsonAdaptedPeriod::new)
+                .map(JsonAdaptedRecurrencePeriod::new)
                 .collect(Collectors.toList()));
-        this.startTime = shift.getStartTime().toString();
-        this.endTime = shift.getEndTime().toString();
 
 
     }
@@ -82,31 +68,19 @@ public class JsonAdaptedShift {
         }
         Slot modelSlot = Slot.translateStringToSlot(slot);
         DayOfWeek modelDayOfWeek = DayOfWeek.valueOf(dayOfWeek);
-        List<Period> periods = new ArrayList<>();
-        for (JsonAdaptedPeriod period : history) {
+        List<RecurrencePeriod> periods = new ArrayList<>();
+        for (JsonAdaptedRecurrencePeriod period : history) {
             periods.add(period.toModelType());
         }
         if (!isWorking.equals("true") && !isWorking.equals("false")) {
             throw new IllegalValueException(BOOLEAN_CONSTRAINTS);
         }
         //empty case
-        if (isWorking.equals("true")) {
+        if (isWorking.equals("false")) {
             //create empty
-            return new EmptyShift(modelDayOfWeek, modelSlot, periods);
+            return new EmptyShift(modelDayOfWeek, modelSlot);
         }
-
-        LocalDate startDate = LocalDate.parse(this.startDate);
-        Shift result = new Shift(modelDayOfWeek, modelSlot, startDate, periods);
-        if (startTime == null || endTime == null) {
-            return result;
-        }
-        try {
-            LocalTime modelStartTime = LocalTime.parse(startTime, TIME_FORMATTER);
-            LocalTime modelEndTime = LocalTime.parse(endTime, TIME_FORMATTER);
-            result.setTime(modelStartTime, modelEndTime, modelSlot.getOrder());
-        } catch (InvalidShiftTimeException e) {
-            throw new IllegalValueException(e.getMessage());
-        }
+        Shift result = new Shift(modelDayOfWeek, modelSlot, periods);
         return result;
 
     }

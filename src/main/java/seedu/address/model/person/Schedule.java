@@ -20,7 +20,7 @@ import seedu.address.model.person.exceptions.NoShiftException;
 public class Schedule {
 
     public static final String MESSAGE_CONSTRAINTS = "Schedule json string error! Invalid format."; //todo idek if need
-    public static final int HOURS_PER_SLOT = 4;
+    public static final int HOURS_PER_SLOT = 6;
 
     private static final int DAY_OF_WEEK = 7;
     private static final int PERIOD_OF_DAY = 2;
@@ -76,18 +76,21 @@ public class Schedule {
      * @param slot The slot of the shift located.
      * @throws DuplicateShiftException throws when there is already a shift in the target slot.
      */
-    public void addShift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate) throws DuplicateShiftException {
+    public void addShift(DayOfWeek dayOfWeek, Slot slot,
+                         LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
         Shift shift = new Shift(dayOfWeek, slot);
+        shift = shift.add(startDate, endDate);
         Shift shift1 = shifts[dayOfWeek.getValue() - 1][slot.getOrder()];
 
         if (shift1 == null) {
             shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift;
+
             return;
         }
-        if (shift1.isWorking) {
+        if (!shift1.isEmpty()) {
             throw new DuplicateShiftException();
         }
-        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift1.activate(startDate);
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift1.add(startDate, endDate);
     }
 
     /**
@@ -98,12 +101,13 @@ public class Schedule {
      * @param endDate The date the endDate is at.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void removeShift(DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) throws NoShiftException {
+    public void removeShift(DayOfWeek dayOfWeek, Slot slot,
+                            LocalDate startDate, LocalDate endDate) throws NoShiftException {
         Shift shift = shifts[dayOfWeek.getValue() - 1][slot.getOrder()];
-        if (shift == null || !shift.isWorking || shift.canRemove(endDate)) {
+        if (shift == null || shift.isEmpty()) {
             throw new NoShiftException();
         }
-        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift.remove(endDate);
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shift.remove(startDate, endDate);
     }
 
     /**
@@ -112,8 +116,8 @@ public class Schedule {
      * @param dayOfWeek The day want to check.
      * @param slot The period want to check.
      */
-    public boolean isWorking(DayOfWeek dayOfWeek, Slot slot) {
-        return isWorking(dayOfWeek, slot.getOrder());
+    public boolean isWorking(DayOfWeek dayOfWeek, Slot slot, Period period) {
+        return isWorking(dayOfWeek, slot.getOrder(), period);
     }
 
     /**
@@ -122,10 +126,12 @@ public class Schedule {
      * @param dayOfWeek The day want to check.
      * @param slotNum The slot number want to check.
      */
-    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum) {
+    public boolean isWorking(DayOfWeek dayOfWeek, int slotNum, Period period) {
         // TODO change from slots 0 and 1 to checking by a specific timing?
-        return shifts[dayOfWeek.getValue() - 1][slotNum] != null
-                && shifts[dayOfWeek.getValue() - 1][slotNum].isWorking;
+        Shift shift = shifts[dayOfWeek.getValue() - 1][slotNum];
+        return shift != null
+                && !shift.isEmpty()
+                && shift.isWorking(period);
     }
 
     /**
@@ -133,12 +139,12 @@ public class Schedule {
      *
      * @param time The time to check if the staff is working at
      */
-    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time) {
+    public boolean isWorking(DayOfWeek dayOfWeek, LocalTime time, Period period) {
         for (Shift s : shifts[dayOfWeek.getValue() - 1]) {
             if (s == null) {
                 continue;
             }
-            if (s.isWorking(time)) {
+            if (s.isWorking(time, period)) {
                 return true;
             }
         }
@@ -173,12 +179,15 @@ public class Schedule {
      * @param slot of the shift.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    public void setTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+    public void setTime(DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                        LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
         if (shifts[dayOfWeek.getValue() - 1][slot.getOrder()] == null) {
             shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = new Shift(dayOfWeek, slot);
         }
-        shifts[dayOfWeek.getValue() - 1][slot.getOrder()].setTime(startTime, endTime, slot.getOrder());
+        shifts[dayOfWeek.getValue() - 1][slot.getOrder()] = shifts[dayOfWeek.getValue() - 1][slot.getOrder()]
+                .setTime(startTime, endTime, slot.getOrder(),
+                        startDate, endDate);
     }
 
     /**
@@ -219,10 +228,10 @@ public class Schedule {
      * Calculates the total working hours over {@code Period period}
      * of this schedule, while removing {@code Collection<Period> absentPeriods} from the count.
      */
-    public int getTotalWorkingHour(Period period, Collection<Period> absentPeriods) {
+    public long getTotalWorkingHour(Period period, Collection<Period> absentPeriods) {
         requireNonNull(period);
         requireNonNull(absentPeriods);
-        int totalHours = 0;
+        long totalHours = 0;
         List<LocalDate> datesNotCounted = absentPeriods
                 .stream()
                 .flatMap(p -> p.toList().stream())
@@ -232,14 +241,17 @@ public class Schedule {
             if (datesNotCounted.contains(date)) {
                 continue;
             }
-            //test both slots in a date
-            if (isWorking(date.getDayOfWeek(), Slot.MORNING)) {
-                totalHours += HOURS_PER_SLOT;
+            if (shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()] == null) {
+                continue;
             }
 
-            if (isWorking(date.getDayOfWeek(), Slot.AFTERNOON)) {
-                totalHours += HOURS_PER_SLOT;
+            totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.MORNING.getOrder()]
+                    .getWorkingHour(new Period(date));
+            if(shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()] == null) {
+                continue;
             }
+            totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()]
+                    .getWorkingHour(new Period(date));
         }
         return totalHours;
     }

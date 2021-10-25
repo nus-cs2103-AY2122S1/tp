@@ -110,7 +110,8 @@ public interface Model {
      * @param startDate The startDate of the shift.
      * @throws DuplicateShiftException Throws when there is already a shift at the target slot.
      */
-    void addShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate startDate) throws DuplicateShiftException;
+    void addShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                  LocalDate startDate, LocalDate endDate) throws DuplicateShiftException;
 
     /**
      * Deletes a shift from a target staff's schedule.
@@ -122,7 +123,8 @@ public interface Model {
      * @param endDate The date that the shift ends at.
      * @throws NoShiftException throws when a user tries to delete a shift that does not exist.
      */
-    void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate endDate) throws NoShiftException;
+    void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot, LocalDate startDate,
+                     LocalDate endDate) throws NoShiftException;
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
@@ -147,7 +149,8 @@ public interface Model {
      * @param endTime The end time of the shift.
      * @throws InvalidShiftTimeException throws when the timings of Shift are invalid.
      */
-    void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime)
+    void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
+                      LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException;
 
 }

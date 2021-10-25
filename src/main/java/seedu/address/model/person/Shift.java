@@ -1,18 +1,24 @@
 package seedu.address.model.person;
 
-import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
+import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_END_TIME;
+import static seedu.address.commons.util.TimeUtil.DEFAULT_AFTERNOON_START_TIME;
+import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_END_TIME;
+import static seedu.address.commons.util.TimeUtil.DEFAULT_MORNING_START_TIME;
 import static seedu.address.commons.util.TimeUtil.isValidTime;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.EmptyShift;
+import seedu.address.model.RecurrencePeriod;
 
 /**
  * Represents a piece of work for a staff.
@@ -20,18 +26,10 @@ import seedu.address.model.EmptyShift;
 public class Shift {
 
     public static final String DELIMITER = "-";
-    private static final LocalTime DEFAULT_MORNING_START_TIME = LocalTime.parse("10:00", TIME_FORMATTER);
-    private static final LocalTime DEFAULT_MORNING_END_TIME = LocalTime.parse("16:00", TIME_FORMATTER);
-    private static final LocalTime DEFAULT_AFTERNOON_START_TIME = LocalTime.parse("16:00", TIME_FORMATTER);
-    private static final LocalTime DEFAULT_AFTERNOON_END_TIME = LocalTime.parse("22:00", TIME_FORMATTER);
 
-    protected boolean isWorking;
     protected Slot slot;
     protected DayOfWeek dayOfWeek;
-    protected List<Period> history = new ArrayList<>();
-    private LocalDate startDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    protected List<RecurrencePeriod> recurrences = new ArrayList<>();
 
     /**
      * Constructor of Task given its weekday, time, and name.
@@ -42,22 +40,18 @@ public class Shift {
     public Shift(DayOfWeek dayOfWeek, Slot slot) {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
-        this.startDate = LocalDate.now();
-        isWorking = true;
-        setDefaultTimings(slot.getOrder());
+
     }
 
     /**
      * Creates a shift at {@code dayOfWeek} in {@code Slot slot} at {@code LocalDate startDate}
      * with a history of changes {@code Set<Shift> history}.
      */
-    public Shift(DayOfWeek dayOfWeek, Slot slot, LocalDate startDate, List<Period> history) {
+    public Shift(DayOfWeek dayOfWeek, Slot slot, List<RecurrencePeriod> recurrences) {
         this.dayOfWeek = dayOfWeek;
         this.slot = slot;
-        this.startDate = startDate;
-        this.history.addAll(history);
-        setDefaultTimings(slot.getOrder());
-        isWorking = true;
+        this.recurrences.addAll(recurrences);
+
     }
 
 
@@ -69,20 +63,9 @@ public class Shift {
         return this.dayOfWeek;
     }
 
-    public LocalDate getStartDate() {
-        return this.startDate;
-    }
 
-    public List<Period> getHistory() {
-        return Collections.unmodifiableList(history);
-    }
-
-    public LocalTime getStartTime() {
-        return this.startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return this.endTime;
+    public List<RecurrencePeriod> getRecurrences() {
+        return Collections.unmodifiableList(recurrences);
     }
 
     /**
@@ -90,16 +73,7 @@ public class Shift {
      *
      */
     public boolean isEmpty() {
-        return !isWorking;
-    }
-
-
-    /**
-     * Returns true if the input {@code endDate} can end this Shift.
-     */
-    public boolean canRemove(LocalDate endDate) {
-        return this.startDate.isBefore(endDate)
-                || startDate.equals(endDate);
+        return false;
     }
 
 
@@ -121,29 +95,90 @@ public class Shift {
         return this.slot.getValue().equals("afternoon");
     }
 
-    public boolean isWorking(LocalTime time) {
-        return isWithinSlotPeriod(time);
+    /**
+     * Returns whether the staff is working during this time
+     *
+     */
+    public boolean isWorking(LocalTime time, Period period) {
+        long numOfRecurrences = recurrences.stream()
+                .filter(p -> period.isWithin(p))
+                .filter(p -> p.isWithinSlotPeriod(time))
+                .count();
+        return numOfRecurrences != 0;
+    }
+
+    public long getWorkingHour(Period period) {
+        List<LocalDate> dates = period.toList()
+                .stream()
+                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
+                .collect(Collectors.toList());
+        return recurrences.stream()
+                .filter(p ->
+                        0 != dates.stream()
+                                .filter(date -> p.contains(date)) //find any date within the period that is in recurrence
+                                .count()
+                )
+                .mapToLong(p -> p.getWorkingHour())
+                .sum();
+
+
+    }
+
+    public boolean isWorking(Period period) {
+        List<LocalDate> dates = period.toList()
+                .stream()
+                .filter(p -> p.getDayOfWeek().equals(dayOfWeek))
+                .collect(Collectors.toList());
+
+        long numOfRecurrences = recurrences.stream()
+                .filter(p ->
+                    0 != dates.stream()
+                            .filter(date -> p.contains(date)) //find any date within the period that is in recurrence
+                            .count()
+                )
+                .count();
+
+        return numOfRecurrences != 0;
     }
 
 
 
+    /**
+     * Removes the shift that is withing the input dates.
+     */
+    public Shift remove(LocalDate startDate, LocalDate endDate) {
+        assert endDate.isAfter(startDate) || endDate.isEqual(startDate);
+        //check if this period is already within the current set
+        Period period = new Period(startDate, endDate);
+        this.recurrences = recurrences.stream()
+                .flatMap(p -> p.complementWithInformation(period).stream())
+                .collect(Collectors.toList());
+        if (this.recurrences.size() == 0) {
+            return new EmptyShift(dayOfWeek, slot);
+        }
+        return new Shift(dayOfWeek, slot, recurrences);
+
+    }
 
     /**
-     * Removes this shift by creating an {@code EmptyShift} in the place of it.
+     * Checks if the input date is already logged.
      */
-    public Shift remove(LocalDate endDate) {
-        assert endDate.isAfter(startDate);
-        Period period = new Period(startDate, endDate);
-        this.history.add(period);
-        return new EmptyShift(dayOfWeek, slot, history);
-
+    public boolean isRegistered(LocalDate date) {
+        long val = this.recurrences.stream()
+                .filter(p -> p.getPeriod().contains(date))
+                .count();
+        return val != 0;
     }
 
     /**
      * Makes this shift a working shift
      */
-    public Shift activate(LocalDate startDate) {
-        throw new UnsupportedOperationException("This method should not be called.");
+    public Shift add(LocalDate startDate, LocalDate endDate) {
+        Period period = new Period(startDate, endDate);
+        RecurrencePeriod recurrencePeriod = new RecurrencePeriod(period, slot);
+        List<RecurrencePeriod> recurrences = recurrencePeriod.unionByDuration(this.recurrences).stream()
+                .collect(Collectors.toList());
+        return new Shift(dayOfWeek, slot, recurrences);
     }
 
 
@@ -168,7 +203,27 @@ public class Shift {
      * @throws InvalidShiftTimeException Throws when the timing is invalid. There are two cases, one is the startTime
      * is later then the endTime, the other is that the time is out of the bound of the default one.
      */
-    public void setTime(LocalTime startTime, LocalTime endTime, int order) throws InvalidShiftTimeException {
+    public Shift setTime(LocalTime startTime, LocalTime endTime, int order,
+                        LocalDate startDate, LocalDate endDate) throws InvalidShiftTimeException {
+        checkTimeOrder(startTime, endTime, order);
+        List<RecurrencePeriod> result = new ArrayList<>();
+        result.addAll(recurrences);
+        Period period = new Period(startDate, endDate);
+        Collection<Period> intersects = period.intersect(recurrences);
+        Collection<RecurrencePeriod> recurrenceIntersects = recurrences.stream() //obtain the periods to remove
+                .filter(p -> intersects.contains(p.getPeriod()))
+                .collect(Collectors.toList());
+        result.removeAll(recurrenceIntersects);
+        recurrenceIntersects = intersects.stream()
+                .map(p -> new RecurrencePeriod(p, startTime, endTime))
+                .collect(Collectors.toList());
+        result.addAll(recurrenceIntersects);
+        return new Shift(dayOfWeek, slot, result);
+
+
+    }
+
+    private void checkTimeOrder(LocalTime startTime, LocalTime endTime, int order) throws InvalidShiftTimeException {
         if (startTime.isAfter(endTime)) {
             throw new InvalidShiftTimeException();
         }
@@ -181,35 +236,8 @@ public class Shift {
                 throw new InvalidShiftTimeException();
             }
         }
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
 
-    public void setDefaultTimings(int order) {
-        // TODO make this more flexible to change the timings if necessary
-        // Currently, assumed that morning shift is 10 - 4.00pm, night shift is 4 - 10
-        // Can consider having a settings page or smt pop out so they can set this?
-        if (order == 0) {
-            this.startTime = DEFAULT_MORNING_START_TIME;
-            this.endTime = DEFAULT_MORNING_END_TIME;
-        } else if (order == 1) {
-            this.startTime = DEFAULT_AFTERNOON_START_TIME;
-            this.endTime = DEFAULT_AFTERNOON_END_TIME;
-        } else {
-            System.out.println("Check the slot class"); //TODO make sure the order is checked before a slot is created
-        }
-    }
-
-    /**
-     * Checks if a specified timing is within the slot period.
-     *
-     * @param time The time which will be checked against.
-     * @return
-     */
-    public boolean isWithinSlotPeriod(LocalTime time) {
-        return time.equals(startTime) || time.equals(endTime)
-                || time.isBefore(endTime) && time.isAfter(startTime);
-    }
 
     /**
      * Returns if a given string is a valid shift.
@@ -243,11 +271,12 @@ public class Shift {
      * @param day day of shift to be compared to.
      * @param time time of shift to be compared to.
      */
-    public static String filterListByShift(ObservableList<Person> stafflist, DayOfWeek day, LocalTime time) {
+    public static String filterListByShift(ObservableList<Person> stafflist, DayOfWeek day,
+                                           LocalTime time, Period period) {
         StringBuilder result = new StringBuilder();
         int counter = 1;
         for (Person p : stafflist) {
-            boolean hasShift = p.isWorking(day, time);
+            boolean hasShift = p.isWorking(day, time, period);
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;
@@ -266,15 +295,10 @@ public class Shift {
         }
         Shift otherShift = (Shift) other;
         return slot.equals(otherShift.slot) && dayOfWeek.equals(otherShift.dayOfWeek)
-                && startTime.equals(otherShift.startTime)
-                && endTime.equals(otherShift.endTime);
+                && this.recurrences.equals(otherShift.recurrences);
     }
 
-    @Override
-    public String toString() {
-        return this.dayOfWeek.toString() + " " + this.slot.toString()
-                + "From " + startTime.toString() + " to " + endTime.toString();
-    }
+
 
 
 

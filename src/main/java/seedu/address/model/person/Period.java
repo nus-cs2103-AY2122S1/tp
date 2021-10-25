@@ -42,6 +42,25 @@ public class Period {
 
 
     /**
+     * Returns true if any dates within {@code period} is within
+     * {@code this}.
+     */
+    public boolean isWithin(Period period) {
+        return this.contains(period.startDate)
+                || this.contains(period.endDate);
+    }
+
+    /**
+     * Constructs a {@code Period} with the same data as
+     * {@code period}.
+     */
+    public Period(Period period) {
+        this.startDate = period.startDate;
+        this.endDate = period.endDate;
+    }
+
+
+    /**
      * Constructs a {@code Period} with a single {@code date}.
      */
     public Period(LocalDate date) {
@@ -138,6 +157,39 @@ public class Period {
 
         //when there is no need to
         return List.of(this);
+
+    }
+
+    /**
+     * Obtains the periods within the input set that lie in this.
+     * Assumes that the input periods do not have any overlaps.
+     */
+    public Collection<Period> intersect(Collection<? extends Period> periods) {
+        return periods.stream()
+                .flatMap(p -> this.intersect(p).stream())
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Finds the region in time where both {@code this}
+     * and {@code period} lie in.
+     *
+     */
+    public Collection<Period> intersect(Period period) {
+        requireNonNull(period);
+        if (this.contains(period)) {
+            return List.of(period);
+        }
+        if (period.contains(this)) {
+            return List.of(this);
+        }
+        if (this.contains(period.startDate)) {
+            return List.of(new Period(period.startDate, this.endDate));
+        }
+        if (this.contains(period.endDate)) {
+            return List.of(new Period(this.startDate, period.endDate));
+        }
+        return List.of();
 
     }
 

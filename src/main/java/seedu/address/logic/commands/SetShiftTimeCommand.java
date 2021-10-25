@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT_TIME;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -55,11 +56,14 @@ public class SetShiftTimeCommand extends Command {
     private final Slot slot;
     private final LocalTime startTime;
     private final LocalTime endTime;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
-     * Creates an AddShiftCommand to add the specified {@code Shift} to a {@code Person}.
+     * Creates an SetShiftCommand to add the specified {@code Shift} to a {@code Person}.
      */
-    public SetShiftTimeCommand(Index index, Name name, String shiftDateAndSlot, LocalTime[] shiftTimes) {
+    public SetShiftTimeCommand(Index index, Name name, String shiftDateAndSlot, LocalTime[] shiftTimes,
+                               LocalDate startDate, LocalDate endDate) {
         requireNonNull(shiftDateAndSlot);
         this.index = index;
         this.name = name;
@@ -68,6 +72,8 @@ public class SetShiftTimeCommand extends Command {
         slot = Slot.getSlotByOrder(strings[1]);
         this.startTime = shiftTimes[0];
         this.endTime = shiftTimes[1];
+        this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -99,7 +105,7 @@ public class SetShiftTimeCommand extends Command {
         }
 
         try {
-            model.setShiftTime(staffToEdit, dayOfWeek, slot, startTime, endTime);
+            model.setShiftTime(staffToEdit, dayOfWeek, slot, startTime, endTime, startDate, endDate);
         } catch (InvalidShiftTimeException e) {
             throw new CommandException(MESSAGE_SHIFT_TIME_OUT_OF_BOUND);
         }

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.WRONG_NUMBER_OF_DATES;
 import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
@@ -10,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
@@ -375,5 +378,24 @@ public class ParserUtil {
      */
     public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
+    /**
+     * Assumes that the input has two or one dates, and outputs the result in a {@code LocalDate[]} of size 2.
+     */
+    public static LocalDate[] extractTupleDates(ArgumentMultimap argMultimap) throws ParseException {
+        LocalDate[] dateArray = new LocalDate[2];
+        List<String> dates = argMultimap.getAllValues(PREFIX_DATE);
+        if (dates.size() == 2) {
+            dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
+            dateArray[1] = ParserUtil.parseLocalDate(dates.get(1));
+        } else if (dates.size() == 1){
+            dateArray[0] = ParserUtil.parseLocalDate(dates.get(0));
+            dateArray[1] = dateArray[0].plusDays(7);
+        } else {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    String.format(WRONG_NUMBER_OF_DATES, dates.size())));
+        }
+        return dateArray;
     }
 }

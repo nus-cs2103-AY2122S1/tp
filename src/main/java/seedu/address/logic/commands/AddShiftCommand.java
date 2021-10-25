@@ -45,16 +45,18 @@ public class AddShiftCommand extends Command {
     public static final String MESSAGE_ADD_SHIFT_SUCCESS = "New shift added to the schedule of %s: %s, %s.";
     public static final String MESSAGE_DUPLICATE_SHIFT = "This shift already exists in the staff's schedule.";
 
+
     private final Index index;
     private final Name name;
     private final DayOfWeek dayOfWeek;
     private final Slot slot;
     private final LocalDate startDate;
+    private final LocalDate endDate;
 
     /**
      * Creates an AddShiftCommand to add the specified {@code Shift} to a {@code Person}.
      */
-    public AddShiftCommand(Index index, Name name, String shiftDateAndSlot, LocalDate startDate) {
+    public AddShiftCommand(Index index, Name name, String shiftDateAndSlot, LocalDate startDate, LocalDate endDate) {
         requireNonNull(shiftDateAndSlot);
         this.index = index;
         this.name = name;
@@ -62,6 +64,7 @@ public class AddShiftCommand extends Command {
         dayOfWeek = DayOfWeek.valueOf(strings[0].toUpperCase());
         slot = Slot.getSlotByOrder(strings[1]);
         this.startDate = startDate;
+        this.endDate = endDate;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class AddShiftCommand extends Command {
         }
 
         try {
-            model.addShift(staffToEdit, dayOfWeek, slot, startDate);
+            model.addShift(staffToEdit, dayOfWeek, slot, startDate, endDate);
         } catch (DuplicateShiftException de) {
             throw new CommandException(MESSAGE_DUPLICATE_SHIFT);
         }

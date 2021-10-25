@@ -18,27 +18,25 @@ public class EmptyShift extends Shift {
      * Creates an {@code EmptyShift} object which represents a shift where the staff is not
      * working from the oldest date in its history to now and the future.
      */
-    public EmptyShift(DayOfWeek dayOfWeek, Slot slot, List<Period> history) {
+    public EmptyShift(DayOfWeek dayOfWeek, Slot slot) {
         super(dayOfWeek, slot);
-        this.history.addAll(history);
-        isWorking = false;
-
     }
 
 
 
     @Override
-    public boolean isWorking(LocalTime time) {
+    public boolean isWorking(LocalTime time, Period period) {
         return false;
     }
 
+
     @Override
-    public Shift activate(LocalDate startDate) {
-        return new Shift(dayOfWeek, slot, startDate, history);
+    public Shift add(LocalDate startDate, LocalDate endDate) {
+        return new Shift(dayOfWeek, slot, List.of(new RecurrencePeriod(new Period(startDate, endDate), slot)));
     }
 
     @Override
-    public Shift remove(LocalDate endDate) {
+    public Shift remove(LocalDate startDate, LocalDate endDate) {
         throw new UnsupportedOperationException("This method should not be called.");
     }
 

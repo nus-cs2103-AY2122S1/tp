@@ -1,11 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.DATES_IN_WRONG_ORDER;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY_SHIFT;
+import static seedu.address.logic.parser.ParserUtil.extractTupleDates;
 
 import java.time.LocalDate;
 import java.util.stream.Stream;
@@ -35,7 +37,9 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
         Index index = null;
         Name name = null;
         String shiftDayAndSlot;
-        LocalDate endDate = LocalDate.now();
+        LocalDate[] dates = new LocalDate[2];
+        dates[0] = LocalDate.now();
+        dates[1] = dates[0].plusDays(7);
         //PREFIX_DAY_SHIFT must exist and exactly one from PREFIX_DASH_INDEX and PREFIX_DASH_NAME must exist.
         if (!arePrefixesPresent(argMultimap, PREFIX_DAY_SHIFT)
                 || !argMultimap.getPreamble().isEmpty() || (!arePrefixesPresent(argMultimap, PREFIX_DASH_INDEX)
@@ -53,15 +57,20 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
             if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                endDate = ParserUtil.parseLocalDate(argMultimap.getValue(PREFIX_DATE).get());
+                extractTupleDates(argMultimap);
+
             }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteShiftCommand.MESSAGE_USAGE), pe);
         }
+        if (dates[0].isAfter(dates[1])) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DATES_IN_WRONG_ORDER));
+        }
 
-        return new DeleteShiftCommand(index, name, shiftDayAndSlot, endDate);
+        return new DeleteShiftCommand(index, name, shiftDayAndSlot, dates[0], dates[1]);
     }
 
     /**
