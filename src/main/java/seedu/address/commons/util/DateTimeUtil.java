@@ -65,7 +65,7 @@ public class DateTimeUtil {
      * Returns true if the datetime {@code test} is within the past 7 days.
      */
     public static boolean isLastSevenDays(LocalDateTime test) {
-        return !test.isAfter(LocalDateTime.now())
+        return test.isBefore(LocalDateTime.now())
                    && !test.isBefore(LocalDateTime.now().minusDays(7));
     }
 
@@ -73,7 +73,7 @@ public class DateTimeUtil {
      * Returns true if the datetime {@code test} is within the past 30 days.
      */
     public static boolean isLastThirtyDays(LocalDateTime test) {
-        return !test.isAfter(LocalDateTime.now())
+        return test.isBefore(LocalDateTime.now())
                    && !test.isBefore(LocalDateTime.now().minusDays(30));
     }
 
