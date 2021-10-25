@@ -10,6 +10,8 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+
 <fx:root resizable="false" title="User Profile" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <icons>
         <Image url="@/images/User_Avatar.png" />
@@ -19,25 +21,62 @@
             <stylesheets>
                 <URL value="@ProfileWindow.css" />
             </stylesheets>
+            <AnchorPane prefHeight="200" prefWidth="260">
+                <children>
+                    <HBox>
+                        <children>
+                            <ImageView fitHeight="260.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true">
+                                <image>
+                                    <Image url="@../images/logo_neon.png" />
+                                </image>
+                            </ImageView>
+                            <VBox>
+                                <children>
+                                    <GridPane alignment="center" hgap="10" vgap="18">
+                                        <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+                                        <Text fx:id="welcomeMessage" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                                              GridPane.columnSpan="2"/>
+                                        <TextField fx:id="name" promptText="Name" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+                                        <TextField fx:id="telegram" promptText="Telegram" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                                        <TextField fx:id="github" promptText="GitHub" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
 
-            <GridPane prefHeight="500" prefWidth="300" alignment="center" hgap="10" vgap="10">
-                <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+                                        <HBox spacing="10" alignment="bottom_center"
+                                              GridPane.columnSpan="2" GridPane.rowIndex="4">
+                                            <Button fx:id="submit" onAction="#submit" mnemonicParsing="false" text="Submit" />
+                                        </HBox>
 
-                <Text fx:id="welcomeMessage" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                      GridPane.columnSpan="2"/>
+                                        <Text fx:id="message"
+                                              GridPane.columnSpan="2" GridPane.rowIndex="5"/>
+                                    </GridPane>
+                                </children>
+                            </VBox>
+                            <!--
+                            <Text fx:id="welcomeMessage"/>
+                            -->
+                        </children>
+                    </HBox>
+                </children>
+<!--
+                <HBox AnchorPane.rightAnchor="0.0">
+                    <GridPane prefHeight="500" prefWidth="300" alignment="center" hgap="10" vgap="10">
+                        <padding><Insets top="25" right="25" bottom="10" left="25"/></padding>
+                        <Text fx:id="welcomeMessage" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                              GridPane.columnSpan="2"/>
+                        <TextField fx:id="name" promptText="Name" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
+                        <TextField fx:id="telegram" promptText="Telegram" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
+                        <TextField fx:id="github" promptText="GitHub" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
 
-                <TextField fx:id="name" promptText="Name" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
-                <TextField fx:id="telegram" promptText="Telegram" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
-                <TextField fx:id="github" promptText="GitHub" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
+                        <HBox spacing="10" alignment="bottom_center"
+                              GridPane.columnSpan="2" GridPane.rowIndex="4">
+                            <Button fx:id="submit" onAction="#submit" mnemonicParsing="false" text="Submit" />
+                        </HBox>
 
-                <HBox spacing="10" alignment="bottom_center"
-                      GridPane.columnSpan="2" GridPane.rowIndex="4">
-                    <Button fx:id="submit" onAction="#submit" mnemonicParsing="false" text="Submit" />
+                        <Text fx:id="message"
+                              GridPane.columnSpan="2" GridPane.rowIndex="5"/>
+                    </GridPane>
                 </HBox>
-
-                <Text fx:id="message"
-                      GridPane.columnSpan="2" GridPane.rowIndex="5"/>
-            </GridPane>
+                -->
+            </AnchorPane>
         </Scene>
     </scene>
 </fx:root>

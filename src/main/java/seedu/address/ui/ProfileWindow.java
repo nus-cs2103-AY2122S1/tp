@@ -2,7 +2,10 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
@@ -29,7 +32,7 @@ public class ProfileWindow extends UiPart<Stage> {
     private static final String INVALID_GITHUB_MESSAGE = "The GitHub Username Entered is Invalid";
     private static final String INVALID_NAME_MESSAGE = "The Name Entered is Invalid";
     private static final String INVALID_TELEGRAM_MESSAGE = "The Telegram Handle Entered is Invalid";
-    private static final String WELCOME_MESSAGE = "Welcome To CohortConnect!";
+    private static final String WELCOME_MESSAGE = "CohortConnect";
 
     private Logic logic;
     private MainWindow mainWindow;
