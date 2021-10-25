@@ -10,11 +10,11 @@ import seedu.programmer.model.student.Lab;
 
 public class TypicalLabs {
     public static final Lab LAB1 = new LabBuilder().withTitle("lab1").withResult(10.0).withTotal(20.0).build();
-    public static final Lab LAB2 = new LabBuilder().withTitle("2").withResult(0.0).withTotal(10.0).build();
-    public static final Lab LAB3 = new LabBuilder().withTitle("3").withResult(20.0).withTotal(20.0).build();
-    public static final Lab LAB4 = new LabBuilder().withTitle("4").withResult(30.0).withTotal(40.0).build();
-    public static final Lab LAB5 = new LabBuilder().withTitle("5").withResult(5.0).withTotal(20.0).build();
-    public static final Lab LAB6 = new LabBuilder().withTitle("6").withResult(0.0).withTotal(40.0).build();
+    public static final Lab LAB2 = new LabBuilder().withTitle("lab2").withResult(0.0).withTotal(10.0).build();
+    public static final Lab LAB3 = new LabBuilder().withTitle("lab3").withResult(20.0).withTotal(20.0).build();
+    public static final Lab LAB4 = new LabBuilder().withTitle("lab4").withResult(30.0).withTotal(40.0).build();
+    public static final Lab LAB5 = new LabBuilder().withTitle("lab5").withResult(5.0).withTotal(20.0).build();
+    public static final Lab LAB6 = new LabBuilder().withTitle("lab6").withResult(0.0).withTotal(40.0).build();
 
     private TypicalLabs() {
     } // prevents instantiation

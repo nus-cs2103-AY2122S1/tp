@@ -38,7 +38,7 @@ public class DeleteLabCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
-        Boolean exists = true;
+        boolean exists = true;
         for (Student std : lastShownList) {
             Student target = std;
             if (!target.delLabResult(this.result)) {
