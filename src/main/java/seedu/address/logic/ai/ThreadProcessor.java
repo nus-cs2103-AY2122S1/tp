@@ -19,10 +19,19 @@ public class ThreadProcessor {
         supervisor.start();
     }
 
+    /**
+     * Adds the given Thread to queue
+     *
+     * @param thread the Thread to add
+     */
     public static void addThread(Thread thread) {
         threadQueue.add(thread);
+        thread.start();
     }
 
+    /**
+     * Stops All Running Parallel Threads
+     */
     public static void stopAllThreads() {
         threadQueue.parallelStream().forEach(Thread::interrupt);
         supervisor.interrupt();

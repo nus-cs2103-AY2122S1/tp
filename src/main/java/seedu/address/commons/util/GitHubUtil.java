@@ -1,8 +1,13 @@
 package seedu.address.commons.util;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -99,7 +104,39 @@ public class GitHubUtil {
                 target = m.group();
             }
             target = target.split("src=")[1];
-            return new Image(target);
+            URL url = null;
+            try {
+                url = new URL(target);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            InputStream in = null;
+            try {
+                in = new BufferedInputStream(url.openStream());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int n = 0;
+            while (true) {
+                try {
+                    if (-1 == (n = in.read(buf))) {
+                        break;
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                out.write(buf, 0, n);
+            }
+            try {
+                out.close();
+                in.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            byte[] response = out.toByteArray();
+            return new Image(new ByteArrayInputStream(response));
         }
     }
 

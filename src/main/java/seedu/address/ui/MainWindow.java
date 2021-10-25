@@ -223,6 +223,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             logic.saveAddressBook(logic.getAddressBook());
         } catch (IOException e) {
+            e.printStackTrace();
             logger.severe("Unable to save Address Book to Memory");
         }
         helpWindow.hide();

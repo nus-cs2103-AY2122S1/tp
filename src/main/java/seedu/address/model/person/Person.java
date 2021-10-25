@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -33,7 +34,9 @@ public class Person implements Comparable<Person> {
 
     //Extra fields
     private Image profilePicture;
-    private Thread parallelTask;
+    private Thread getProfilePicThread;
+    private Thread getStatsThread;
+    private HashMap<String, Double> gitStats;
 
     /**
      * Every field must be present and not null.
@@ -50,10 +53,10 @@ public class Person implements Comparable<Person> {
         this.tags.addAll(tags);
         this.isFavourite = false;
         this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
-        this.parallelTask = new Thread(() -> {
+        this.getProfilePicThread = new Thread(() -> {
             profilePicture = GitHubUtil.getProfilePicture(github.value);
         });
-        parallelTask.start();
+        getProfilePicThread.start();
     }
 
     /**
@@ -61,20 +64,8 @@ public class Person implements Comparable<Person> {
      */
     public Person(Name name, Telegram telegram, Github github,
                   Phone phone, Email email, Address address, Set<Tag> tags, boolean isFavourite) {
-        requireAllNonNull(name, telegram, github, phone, email, address, tags);
-        this.name = name;
-        this.telegram = telegram;
-        this.github = github;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
-        this.tags.addAll(tags);
+        this(name, telegram, github, phone, email, address, tags);
         this.isFavourite = isFavourite;
-        this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
-        this.parallelTask = new Thread(() -> {
-            profilePicture = GitHubUtil.getProfilePicture(github.value);
-        });
-        parallelTask.start();
     }
 
     /**
@@ -92,10 +83,6 @@ public class Person implements Comparable<Person> {
         this.tags.addAll(tags);
         this.isFavourite = isFavourite;
         this.profilePicture = GitHubUtil.DEFAULT_USER_PROFILE_PICTURE;
-        this.parallelTask = new Thread(() -> {
-            profilePicture = GitHubUtil.getProfilePicture(github.value);
-        });
-        parallelTask.start();
         this.profilePicture = image;
     }
 
@@ -140,9 +127,9 @@ public class Person implements Comparable<Person> {
     }
 
     public Image getProfilePicture() {
-        if (parallelTask != null && parallelTask.isAlive()) {
+        if (getProfilePicThread != null && getProfilePicThread.isAlive()) {
             try {
-                parallelTask.join();
+                getProfilePicThread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

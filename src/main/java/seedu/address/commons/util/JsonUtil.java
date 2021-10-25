@@ -2,7 +2,9 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +12,7 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -26,10 +29,11 @@ import com.fasterxml.jackson.databind.ext.NioPathDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
-import javafx.scene.image.PixelFormat;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+
 
 /**
  * Converts a Java object instance to JSON and vice versa
@@ -38,7 +42,7 @@ public class JsonUtil {
 
     private static final Logger logger = LogsCenter.getLogger(JsonUtil.class);
 
-    private static ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
+    private static final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules()
             .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
             .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
             .setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE)
@@ -162,27 +166,9 @@ public class JsonUtil {
         }
 
         @Override
-        protected Image _deserialize(String value, DeserializationContext ctxt) {
-            return getImage(value);
-        }
-
-        /**
-         * Gets the logging level that matches loggingLevelString
-         * <p>
-         * Returns null if there are no matches
-         *
-         */
-        private Image getImage(String imageString) {
-            byte[] decodedBytes = Base64
-                    .getDecoder()
-                    .decode(imageString);
-
+        protected Image _deserialize(String value, DeserializationContext ctxt) throws IOException {
+            byte[] decodedBytes = Base64.getDecoder().decode(value);
             return new Image(new ByteArrayInputStream(decodedBytes));
-        }
-
-        @Override
-        public Class<Image> handledType() {
-            return Image.class;
         }
     }
 
@@ -192,14 +178,11 @@ public class JsonUtil {
     private static class ImageSerializer extends JsonSerializer<Image> {
         @Override
         public void serialize(Image value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-            int w = (int) value.getWidth();
-            int h = (int) value.getHeight();
-
-            byte[] buf = new byte[w * h * 4];
-
-            value.getPixelReader().getPixels(0, 0, w, h, PixelFormat.getByteBgraInstance(), buf, 0, w * 4);
-
-            gen.writeString(Base64.getEncoder().encodeToString(buf));
+            BufferedImage bImage = SwingFXUtils.fromFXImage(value, null);
+            ByteArrayOutputStream s = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "png", s);
+            byte[] res = s.toByteArray();
+            gen.writeString(Base64.getEncoder().encodeToString(res));
         }
     }
 
