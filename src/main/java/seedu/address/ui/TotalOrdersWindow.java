@@ -2,11 +2,14 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -34,6 +37,7 @@ public class TotalOrdersWindow extends UiPart<Stage> {
     public TotalOrdersWindow(Logic logic) {
         super(FXML, new Stage());
         this.logic = logic;
+        setCloseOnEsc();
         formatTotalColumn();
     }
 
@@ -106,5 +110,15 @@ public class TotalOrdersWindow extends UiPart<Stage> {
                 }
             }
         });
+    }
+
+    private void setCloseOnEsc() {
+        Stage stage = getRoot();
+        EventHandler<KeyEvent> escHandler = event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                stage.close();
+            }
+        };
+        stage.getScene().addEventHandler(KeyEvent.KEY_PRESSED, escHandler);
     }
 }
