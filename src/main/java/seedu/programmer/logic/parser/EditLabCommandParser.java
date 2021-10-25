@@ -29,7 +29,8 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LAB_TITLE, PREFIX_LAB_NEW_TITLE, PREFIX_LAB_TOTAL);
 
-        if (!argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_LAB_TITLE)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditLabCommand.MESSAGE_USAGE));
         }
 
@@ -45,14 +46,12 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             String newTitle = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NEW_TITLE).orElse(null));
             Lab labResult = new Lab(title);
             return new EditLabCommand(labResult, newTitle);
-        } else if (argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent()) {
+        } else {
+            assert(argMultimap.getValue(PREFIX_LAB_TOTAL).isPresent());
             String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(null));
             Double total = ParserUtil.parseResult(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
             Lab labResult = new Lab(title);
             return new EditLabCommand(labResult, total);
-        } else {
-            Lab labResult = new Lab(null);
-            return new EditLabCommand(labResult, null, null);
         }
     }
 

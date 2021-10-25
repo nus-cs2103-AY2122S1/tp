@@ -32,9 +32,9 @@ public class EditLabCommand extends Command {
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Student Updated: %1$s";
 
-    private String newTitle = null;
-    private Double total = null;
-    private Lab original = null;
+    private final String newTitle;
+    private final Double total;
+    private final Lab original;
 
     /**
      * @param original the lab to be edited.
@@ -50,6 +50,7 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Lab original, Double total) {
         this.original = original;
         this.total = total;
+        this.newTitle = null;
     }
 
     /**
@@ -58,6 +59,7 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Lab original, String newTitle) {
         this.original = original;
         this.newTitle = newTitle;
+        this.total = null;
     }
 
     @Override
