@@ -382,6 +382,44 @@ be shown till no more available. `↓` is used to go back to the next command. W
 in `ArrayList` is reached, the next `↓` will clear the command input field. At any time, user can choose to just stop
 and proceed on to edit or input the current history command.
 
+Given below is an example usage scenario and how `↑` and `↓` behaves at each step.
+
+Step 1. The user launches the application for the first time. The `ArrayList` will be initialized but empty as the user
+has yet to input any commands. The `Index` however, is set to `null` initially. At this step, neither `↑` and `↓` will
+not be usable.
+
+![CommandHistoryState0](images/CommandHistoryState0.png)
+
+Step 2. The user inputs `delete -c 5` command to delete the 5th client in the address book. `delete -c 5` will be stored
+into `ArrayList` and `Index` will be shifted to the newly input command.
+
+![CommandHistoryState1](images/CommandHistoryState1.png)
+
+Step 3. The user inputs `add -c Sora ...` command to add a new client. `add -c Sora ...` will be stored into `ArrayList`
+and `Index` will be shifted to the newly input command.
+
+![CommandHistoryState1](images/CommandHistoryState2.png)
+
+Step 4. The user presses `↑` key to go back to previous command. The command at `Index`, which is `add -c Sora ...` will
+be displayed in the input field.
+
+![CommandHistoryState1](images/CommandHistoryState3.png)
+
+Step 5. The user accidentally presses `↑` key again. `Index` decrease by 1 and the command, `delete -c 5`, will be
+displayed in the input field.
+
+![CommandHistoryState1](images/CommandHistoryState4.png)
+
+Step 6. The user presses `↓` key to go back to the next command. `Index` increase by 1 and the command,
+`add -c Sora ...`, will be displayed in the input field.
+
+![CommandHistoryState1](images/CommandHistoryState5.png)
+
+Step 7. The user changes the command from `add -c Sora ...` to `add -c Sky ...` and inputs it. `add -c Sky ...` will be
+stored into `ArrayList` and `Index` will be shifted to the newly input command.
+
+![CommandHistoryState1](images/CommandHistoryState6.png)
+
 ### \[Proposed\] Undo/Redo Feature
 
 #### Proposed Implementation

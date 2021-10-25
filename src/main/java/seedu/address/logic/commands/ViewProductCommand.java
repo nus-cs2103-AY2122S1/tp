@@ -51,7 +51,7 @@ public class ViewProductCommand extends Command {
         Product product = lastShownList.get(index.getZeroBased());
 
         return new CommandResult(String.format(Messages.MESSAGE_VIEW_PRODUCT, product.getId()),
-                false, false, true, product, false, false);
+                CommandType.VIEW, product, false);
     }
 
     @Override

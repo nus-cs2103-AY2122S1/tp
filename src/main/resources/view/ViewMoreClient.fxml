@@ -13,4 +13,5 @@
     <Label fx:id="phoneNumber" styleClass="cell_small_label" text="No phone number provided!" />
     <Label fx:id="email" styleClass="cell_small_label" text="No email provided!" />
     <Label fx:id="address" styleClass="cell_small_label" text="No address provided!" />
+    <Label fx:id="orders" styleClass="cell_small_label" text="No orders available!" />
 </VBox>

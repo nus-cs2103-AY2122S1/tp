@@ -2,7 +2,7 @@
 layout: page
 title: User Guide
 ---
-
+## Introduction
 **Sellah** is a desktop application optimized for online individual sellers who prefer CLI over GUI. It is used to keep
 track of the contact information of clients and details of the products in inventory.
 

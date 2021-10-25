@@ -48,7 +48,8 @@ Given below are my contributions to the project.
           [\#35](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/35),
           [\#40](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/40),
           [\#162](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/162),
-          [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181))
+          [\#181](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/181),
+          [\#193](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/193))
         * Added `Command Summary Table` (Pull requests
           [\#44](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/44),
           [\#46](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/46),
@@ -66,8 +67,12 @@ Given below are my contributions to the project.
           [\#50](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/50))
         * Added implementation details of the feature `edit`. (Pull request
           [\#132](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/132))
-        * Added implementation details of the feature `Command History`. (Pull request
-          [\#165](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/165))
+        * Added implementation details of the feature `Command History`. (Pull requests
+          [\#165](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/165),
+          [\#200](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/200))
+        * Added `Table of Content` (Pull requests
+          [\#188](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/188),
+          [\#191](https://github.com/AY2122S1-CS2103T-T12-1/tp/pull/191))
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments):
