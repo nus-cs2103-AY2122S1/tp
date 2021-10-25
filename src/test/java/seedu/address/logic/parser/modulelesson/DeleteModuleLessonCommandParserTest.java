@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.modulelesson.DeleteModuleLessonCommand;
@@ -30,7 +32,7 @@ public class DeleteModuleLessonCommandParserTest {
     public void parse_validModuleCode_returnsDeleteModuleLessonCommand() {
         String userInput = String.format(" m/%s", VALID_MODULE_CODE_CS2040);
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(
-                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2040));
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(VALID_MODULE_CODE_CS2040)));
 
         assertParseSuccess(parser, userInput, deleteModuleLessonCommand);
     }

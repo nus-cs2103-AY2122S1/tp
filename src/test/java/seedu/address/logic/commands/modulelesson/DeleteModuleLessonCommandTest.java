@@ -11,6 +11,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.address.testutil.TypicalModuleLessons.getTypicalAddressBook;
 
+import java.util.Collections;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
@@ -60,7 +62,7 @@ public class DeleteModuleLessonCommandTest {
     @Test
     public void execute_validModuleCodeUnfilteredList_success() {
         ModuleCodeContainsKeywordsPredicate predicate =
-                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2106);
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(VALID_MODULE_CODE_CS2106));
         ModuleLesson lessonToDelete = model.getFilteredModuleLessonList().get(INDEX_THIRD.getZeroBased());
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(predicate);
 
@@ -97,7 +99,9 @@ public class DeleteModuleLessonCommandTest {
 
     @Test
     public void execute_moduleCodeNotInUnfilteredList_throwsCommandException() {
-        ModuleCodeContainsKeywordsPredicate predicate = new ModuleCodeContainsKeywordsPredicate("CS2030S");
+        ModuleCodeContainsKeywordsPredicate predicate = new ModuleCodeContainsKeywordsPredicate(
+                Collections.singletonList("CS2030S")
+        );
         DeleteModuleLessonCommand deleteModuleLessonCommand = new DeleteModuleLessonCommand(predicate);
 
         assertCommandFailure(deleteModuleLessonCommand, model, DeletePersonCommand.MESSAGE_NO_SUCH_MODULE_CODE);
@@ -111,9 +115,9 @@ public class DeleteModuleLessonCommandTest {
         DeleteModuleLessonCommand deleteBatchCommand2 = new DeleteModuleLessonCommand(INDEX_FIRST, INDEX_THIRD);
 
         ModuleCodeContainsKeywordsPredicate firstPredicate =
-                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2106);
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(VALID_MODULE_CODE_CS2106));
         ModuleCodeContainsKeywordsPredicate secondPredicate =
-                new ModuleCodeContainsKeywordsPredicate(VALID_MODULE_CODE_CS2040);
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(VALID_MODULE_CODE_CS2040));
 
         DeleteModuleLessonCommand deleteModuleCommand1 = new DeleteModuleLessonCommand(firstPredicate);
         DeleteModuleLessonCommand deleteModuleCommand2 = new DeleteModuleLessonCommand(secondPredicate);

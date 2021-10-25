@@ -11,6 +11,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_MODULE_LESSON_DISPLAYED_INDEX = "The lesson index provided is invalid";
     public static final String MESSAGE_INVALID_RANGE = "The range provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
+    public static final String MESSAGE_LESSONS_LISTED_OVERVIEW = "%1$d lessons listed!";
 
 
 }

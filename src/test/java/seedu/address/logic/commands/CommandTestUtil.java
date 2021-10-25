@@ -15,6 +15,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -48,11 +49,13 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_TELE_HANDLE_AMY = "@amytang";
     public static final String VALID_TELE_HANDLE_BOB = "@bobgoh";
-    // Module Lesson
+    public static final String VALID_MODULE_CODE_CS2103 = "CS2103";
     public static final String VALID_LESSON_DAY_TUES = "2";
     public static final String VALID_LESSON_DAY_WED = "3";
+    public static final String VALID_LESSON_TIME_09 = "09:00";
     public static final String VALID_LESSON_TIME_11 = "11:00";
     public static final String VALID_LESSON_TIME_12 = "12:00";
+    public static final String VALID_LESSON_TIME_15 = "15:00";
     public static final String VALID_LESSON_TIME_11_12 = "11:00 12:00";
     public static final String VALID_LESSON_TIME_12_13 = "12:00 13:00";
     public static final String VALID_MODULE_LESSON_REMARK = "COM1-130";
@@ -205,7 +208,9 @@ public class CommandTestUtil {
 
         ModuleLesson lesson = model.getFilteredModuleLessonList().get(targetIndex.getZeroBased());
         final String moduleCode = lesson.getModuleCode().getModuleCodeName();
-        model.updateFilteredModuleLessonList(new ModuleCodeContainsKeywordsPredicate(moduleCode));
+        model.updateFilteredModuleLessonList(
+                new ModuleCodeContainsKeywordsPredicate(Collections.singletonList(moduleCode))
+        );
         System.out.println(model.getFilteredModuleLessonList());
 
         assertEquals(1, model.getFilteredModuleLessonList().size());
