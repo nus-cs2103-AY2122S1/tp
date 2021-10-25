@@ -97,6 +97,7 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-radius: 15;
 }
 
 .list-cell:filled:even {
@@ -312,12 +313,11 @@
 */
 .studentValueLabel {
     -fx-background-color: transparent #383838 transparent #383838;
-    -fx-background-insets: 0;
-    -fx-font-family: "Open Sans Light";
+    -fx-font-family: "Open Sans";
     -fx-font-size: 9pt;
     -fx-text-fill: white;
     -fx-text-alignment: center
-    -fx-padding: 0 2 0 2;
+    -fx-padding 5 5 5 5;
 }
 
 #cardPane {

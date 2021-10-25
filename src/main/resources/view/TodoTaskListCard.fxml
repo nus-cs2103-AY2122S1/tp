@@ -30,7 +30,7 @@
         </HBox>
         <HBox spacing="8" HBox.hgrow="ALWAYS">
           <padding>
-            <Insets bottom="10"/>
+            <Insets bottom="5"/>
           </padding>
           <Label fx:id="taskType" HBox.hgrow="ALWAYS">
             <minWidth>

@@ -2,11 +2,9 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.Pane?>
 <fx:root alignment="BOTTOM_LEFT" maxHeight="Infinity" maxWidth="Infinity" prefWidth="400.0"
          type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <Label fx:id="valueHeader" text="Attendance" wrapText="true"/>

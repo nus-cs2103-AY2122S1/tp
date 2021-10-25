@@ -41,10 +41,6 @@ public class StudentCard extends UiPart<Region> {
     private Label githubLink;
     @FXML
     private FlowPane tags;
-//    @FXML
-//    private Label attendance;
-//    @FXML
-//    private Label participation;
     @FXML
     private VBox studentValuesContainer;
 
@@ -56,10 +52,8 @@ public class StudentCard extends UiPart<Region> {
         this.student = student;
         id.setText(displayedIndex + ". ");
         name.setText(student.getName().fullName);
-        email.setText(student.getEmail().value);
-        studentNumber.setText(student.getStudentNumber().toString());
-//        attendance.setText(student.getAttendance().attendanceList.toString());
-//        participation.setText(student.getParticipation().participationList.toString());
+        email.setText("Email: " + student.getEmail().value);
+        studentNumber.setText("Student Number: " + student.getStudentNumber().toString());
 
         studentValuesContainer.getChildren().addAll(
                 new StudentValuesBox(StudentValuesBox.ATTENDANCE_HEADER, student.getAttendance()),

@@ -19,8 +19,13 @@ public class StudentValuesBox extends VBox {
     public static final String ATTENDANCE_HEADER = "Attendance";
     public static final String PARTICIPATION_HEADER = "Participation";
 
-    private static final String POSITIVE_STYLE_CLASS = "-fx-background-radius: 10;" +
-            "-fx-background-color: #3e7b91;";
+    private static final String POSITIVE_STYLE_CLASS = "-fx-background-color: #3e7b91;" +
+            "-fx-background-radius: 10;" +
+            "-fx-font-family: \"Open Sans\";" +
+            "-fx-font-size: 9pt;" +
+            "-fx-text-fill: white;" +
+            "-fx-text-alignment: center" +
+            "-fx-padding: 5 5 5 5;";
 
     @FXML
     private Label valueHeader;
