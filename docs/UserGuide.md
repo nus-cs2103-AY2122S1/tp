@@ -144,6 +144,23 @@ Format: `listm`
 
 [Back to Table of Contents](#table-of-contents)
 
+### Sorting member list: `sortm`
+
+Shows a list of your members, sorted in your specified order.
+
+Format: `sortm by/SORT_ORDER`
+
+* `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
+
+* `SORT_ORDER` is case-insensitive. Eg. `Name` will match `name`
+* Valid `SORT_ORDER`: `name` ,`tag`
+
+Examples:
+* `sortm by/name` returns a member list sorted by name.
+* `sortm by/tag` returns a member list sorted by number of tags, in descending order.
+
+[Back to Table of Contents](#table-of-contents)
+
 #### Deleting a member : `deletem`
 
 Deletes a member from your member list
@@ -537,6 +554,7 @@ Action | Format, Examples
 **Delete member**| `deletem INDEX` <br> eg. `deletem 1`
 **Edit member**| `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]` <br> eg. `editm 1 n/Jonathan p/93837283`
 **Find member**| `findm KEYWORD` <br> eg. `findm John`, `findm John Bob`
+**Sort members**| `sortm by/SORT_ORDER` <br> eg. `sortm by/name`, `sortm by/tag`
 **Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
 **Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`

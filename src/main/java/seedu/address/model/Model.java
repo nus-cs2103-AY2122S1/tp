@@ -13,6 +13,7 @@ import seedu.address.model.alias.CommandWord;
 import seedu.address.model.alias.Shortcut;
 import seedu.address.model.facility.Facility;
 import seedu.address.model.person.Person;
+import seedu.address.model.sort.SortOrder;
 
 
 /**
@@ -179,9 +180,9 @@ public interface Model {
     ObservableList<Facility> getFilteredFacilityList();
 
     /**
-     * Sorts the member list in alphabetical order.
+     * Sorts the member list in the specified order.
      */
-    void sortMemberList();
+    void sortMemberList(SortOrder sortOrder);
 
     /**
      * Clears the contents of the member list.

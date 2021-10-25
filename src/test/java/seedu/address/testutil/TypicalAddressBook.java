@@ -2,7 +2,8 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalFacilities.getTypicalFacilities;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.testutil.TypicalPersons.getTypicalPersonsUnsorted;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonsUnsortedName;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersonsUnsortedTag;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.facility.Facility;
@@ -28,9 +29,23 @@ public class TypicalAddressBook {
     /**
      * Returns an unsorted {@code AddressBook} with all the typical persons and facilities.
      */
-    public static AddressBook getUnsortedAddressBook() {
+    public static AddressBook getUnsortedNameAddressBook() {
         AddressBook ab = new AddressBook();
-        for (Person person: getTypicalPersonsUnsorted()) {
+        for (Person person: getTypicalPersonsUnsortedName()) {
+            ab.addPerson(person);
+        }
+        for (Facility facility: getTypicalFacilities()) {
+            ab.addFacility(facility);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an unsorted {@code AddressBook} with all the typical persons and facilities.
+     */
+    public static AddressBook getUnsortedTagAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person: getTypicalPersonsUnsortedTag()) {
             ab.addPerson(person);
         }
         for (Facility facility: getTypicalFacilities()) {
