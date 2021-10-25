@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_CLASS_ID;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_STUDENT_ID;
 
@@ -29,7 +29,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_STUDENT_ID, PREFIX_CLASS_ID, PREFIX_EMAIL,
-                        PREFIX_LAB_TITLE, PREFIX_LAB_RESULT);
+                        PREFIX_LAB_NUM, PREFIX_LAB_RESULT);
 
         Index index;
 
@@ -53,8 +53,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editstudentDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_LAB_TITLE).isPresent() && argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
-            String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(null));
+        if (argMultimap.getValue(PREFIX_LAB_NUM).isPresent() && argMultimap.getValue(PREFIX_LAB_RESULT).isPresent()) {
+            String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
             Double result = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_RESULT).orElse(null));
             Lab labResult = new Lab(title);
             editstudentDescriptor.setLab(labResult, result);

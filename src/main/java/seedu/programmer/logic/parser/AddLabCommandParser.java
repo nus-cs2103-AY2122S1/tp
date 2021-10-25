@@ -3,7 +3,7 @@ package seedu.programmer.logic.parser;
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 //import static seedu.programmer.logic.parser.CliSyntax.PREFIX_INDEX;
 //import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_RESULT;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
 import java.util.stream.Stream;
@@ -29,14 +29,14 @@ public class AddLabCommandParser implements Parser<AddLabCommand> {
      */
     public AddLabCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_LAB_TITLE, PREFIX_LAB_TOTAL);
+                ArgumentTokenizer.tokenize(args, PREFIX_LAB_NUM, PREFIX_LAB_TOTAL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_LAB_TITLE, PREFIX_LAB_TOTAL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_LAB_NUM, PREFIX_LAB_TOTAL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE));
         }
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_TITLE).orElse(null));
+        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
         Double total = ParserUtil.parseTotal(argMultimap.getValue(PREFIX_LAB_TOTAL).orElse(null));
         Lab labResult = new Lab(title, total);
 

@@ -1,7 +1,7 @@
 package seedu.programmer.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TITLE;
+import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_NUM;
 import static seedu.programmer.logic.parser.CliSyntax.PREFIX_LAB_TOTAL;
 
 import java.util.List;
@@ -20,10 +20,10 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lab to all the students in the list. "
             + "Parameters: "
-            + PREFIX_LAB_TITLE + "Lab Title "
+            + PREFIX_LAB_NUM + "Lab Number"
             + PREFIX_LAB_TOTAL + "Total Score"
             + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_LAB_TITLE + "1 "
+            + PREFIX_LAB_NUM + "1 "
             + PREFIX_LAB_TOTAL + "20";
 
     public static final String MESSAGE_ADD_LAB_SUCCESS = "Lab Added: %1$s";
