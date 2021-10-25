@@ -117,23 +117,17 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
         if (targetTaskIndex != null) {
-            requireNonNull(model);
-            List<Person> lastShownList = model.getFilteredPersonList();
-
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person personToEdit = lastShownList.get(index.getZeroBased());
-            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
             List<Task> tasks = new ArrayList<>();
             tasks.addAll(personToEdit.getTasks());
-
-            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
 
             if (targetTaskIndex.getZeroBased() >= tasks.size()) {
                 throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
@@ -150,29 +144,14 @@ public class EditCommand extends Command {
             editedPerson = new Person(
                     editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
                     editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription());
-
-            model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson)); // change
-        } else {
-            requireNonNull(model);
-            List<Person> lastShownList = model.getFilteredPersonList();
-
-            if (index.getZeroBased() >= lastShownList.size()) {
-                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-            }
-
-            Person personToEdit = lastShownList.get(index.getZeroBased());
-            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
-
-            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-            }
-
-            model.setPerson(personToEdit, editedPerson);
-            model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
         }
+        // If the edited details result in a duplicate person, throw an exception.
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        }
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
