@@ -55,6 +55,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private StudentCard studentParticular;
     private DashboardWindow dashboardWindow;
+    private boolean isDashboardShowing;
 
     @FXML
     private Scene primaryScene;
@@ -102,7 +103,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        dashboardWindow = new DashboardWindow(logic);
+        isDashboardShowing = false;
     }
 
     public Stage getPrimaryStage() {
@@ -201,10 +202,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleDashboard() {
-        if (dashboardWindow.isShowing()) {
+        dashboardWindow = new DashboardWindow(logic);
+
+        if (isDashboardShowing) {
             dashboardWindow.focus();
             return;
         }
+
         logger.fine("Showing dashboard window...");
         dashboardWindow.show();
     }

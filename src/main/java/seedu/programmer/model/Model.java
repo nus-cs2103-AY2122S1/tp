@@ -76,6 +76,8 @@ public interface Model {
      * */
     void addStudent(Student student);
 
+    void addLab(Lab lab);
+
     /**
      * Replaces the given student {@code target} with {@code editedStudent}.
      * {@code target} must exist in the ProgrammerError.

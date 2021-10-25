@@ -1,9 +1,12 @@
 package seedu.programmer.ui;
 
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
@@ -14,7 +17,7 @@ import seedu.programmer.model.student.ClassId;
 public class DashboardWindow extends PopupWindow {
 
     private static final String FXML = "DashboardWindow.fxml";
-
+    private final Logger logger = LogsCenter.getLogger(getClass());
     private Logic logic;
 
     @FXML
@@ -42,8 +45,12 @@ public class DashboardWindow extends PopupWindow {
     private void fillOverallStats() {
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         int numStudents = readOnlyPE.getStudentList().size();
+
         int numClasses = ClassId.getNumClasses();
-        int numLabs = 10;
+        int numLabs = readOnlyPE.getLabList().size();
+        logger.info("NUM STUDENTS: " + logic.getModel().getFilteredStudentList().size());
+        logger.info("NUM LABS: " + numLabs);
+
         String overallStats = "";
         overallStats += "No. of students: " + numStudents + "\n";
         overallStats += "No. of classes: " + numClasses + "\n";

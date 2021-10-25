@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
+import seedu.programmer.model.student.UniqueLabList;
 import seedu.programmer.model.student.UniqueStudentList;
 
 /**
@@ -14,7 +15,7 @@ import seedu.programmer.model.student.UniqueStudentList;
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class ProgrammerError implements ReadOnlyProgrammerError {
-
+    private final UniqueLabList labs;
     private final UniqueStudentList students;
 
     /*
@@ -26,6 +27,7 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
      */
     {
         students = new UniqueStudentList();
+        labs = new UniqueLabList();
     }
 
     public ProgrammerError() {}
@@ -36,10 +38,6 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     public ProgrammerError(ReadOnlyProgrammerError toBeCopied) {
         this();
         resetData(toBeCopied);
-    }
-
-    public int getTotalNumOfStudents() {
-        return students.getNumStudents();
     }
 
     //// list overwrite operations
@@ -78,6 +76,16 @@ public class ProgrammerError implements ReadOnlyProgrammerError {
     public void addStudent(Student p) {
         students.add(p);
     }
+
+    public void addLab(Lab l) {
+        labs.add(l);
+    }
+
+    @Override
+    public ObservableList<Lab> getLabList() {
+        return labs.asUnmodifiableObservableList();
+    }
+
 
     /**
      * Replaces the given student {@code target} in the list with {@code editedStudent}.

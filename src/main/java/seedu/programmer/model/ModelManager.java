@@ -108,6 +108,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void addLab(Lab lab) {
+        programmerError.addLab(lab);
+        updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
+    }
+
+    @Override
     public void setStudent(Student target, Student editedStudent) {
         requireAllNonNull(target, editedStudent);
         programmerError.setStudent(target, editedStudent);

@@ -156,8 +156,4 @@ public class UniqueStudentList implements Iterable<Student> {
         }
         return true;
     }
-
-    public int getNumStudents() {
-        return internalList.size();
-    }
 }

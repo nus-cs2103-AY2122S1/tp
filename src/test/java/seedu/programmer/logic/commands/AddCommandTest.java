@@ -134,6 +134,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addLab(Lab lab) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void setProgrammerError(ReadOnlyProgrammerError programmerError) {
             throw new AssertionError("This method should not be called.");
         }

@@ -87,6 +87,7 @@ public class ProgrammerErrorTest {
      */
     private static class ProgrammerErrorStub implements ReadOnlyProgrammerError {
         private final ObservableList<Student> persons = FXCollections.observableArrayList();
+        private final ObservableList<Lab> labs = FXCollections.observableArrayList();
 
         ProgrammerErrorStub(Collection<Student> persons) {
             this.persons.setAll(persons);
@@ -95,6 +96,11 @@ public class ProgrammerErrorTest {
         @Override
         public ObservableList<Student> getStudentList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Lab> getLabList() {
+            return labs;
         }
 
         @Override

@@ -40,6 +40,7 @@ public class AddLabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         // Gets the last filtered list displayed
         List<Student> lastShownList = model.getFilteredStudentList();
 
@@ -48,6 +49,8 @@ public class AddLabCommand extends Command {
             target.addLabResult(this.result);
             model.setStudent(target, std);
         }
+
+        model.addLab(result);
         return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
     }
 
