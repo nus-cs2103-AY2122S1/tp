@@ -29,18 +29,14 @@
                 <TextField fx:id="name" promptText="Name" GridPane.columnSpan="2" GridPane.rowIndex="1"/>
                 <TextField fx:id="telegram" promptText="Telegram" GridPane.columnSpan="2" GridPane.rowIndex="2"/>
                 <TextField fx:id="github" promptText="GitHub" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
-                <TextField fx:id="phone" promptText="Phone Number" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
-                <TextField fx:id="email" promptText="Email" GridPane.columnSpan="2" GridPane.rowIndex="5"/>
-                <TextField fx:id="address" promptText="Address" GridPane.columnSpan="2" GridPane.rowIndex="6"/>
-                <TextField fx:id="tag" promptText="Tag(s)" GridPane.columnSpan="2" GridPane.rowIndex="7"/>
 
                 <HBox spacing="10" alignment="bottom_center"
-                      GridPane.columnSpan="2" GridPane.rowIndex="8">
+                      GridPane.columnSpan="2" GridPane.rowIndex="4">
                     <Button fx:id="submit" onAction="#submit" mnemonicParsing="false" text="Submit" />
                 </HBox>
 
                 <Text fx:id="message"
-                      GridPane.columnSpan="2" GridPane.rowIndex="9"/>
+                      GridPane.columnSpan="2" GridPane.rowIndex="5"/>
             </GridPane>
         </Scene>
     </scene>

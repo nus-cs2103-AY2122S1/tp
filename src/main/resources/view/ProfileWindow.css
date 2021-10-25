@@ -3,7 +3,7 @@
      -fx-font-family: "Open Sans";
 }
 
-#name, #telegram, #github, #phone,#email, #address, #tag {
+#name, #telegram, #github {
     -fx-background-color: #383838;
     -fx-text-fill: white;
 }
@@ -18,6 +18,6 @@
 }
 
 #welcomeMessage {
-    -fx-font-size: 42px;
+    -fx-font-size: 36px;
     -fx-fill: white;
 }

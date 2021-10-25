@@ -26,11 +26,8 @@ public class ProfileWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(ProfileWindow.class);
 
     private static final String FXML = "ProfileWindow.fxml";
-    private static final String INVALID_ADDRESS_MESSAGE = "The Address Entered is Invalid";
-    private static final String INVALID_EMAIL_MESSAGE = "The Email Entered is Invalid";
     private static final String INVALID_GITHUB_MESSAGE = "The GitHub Username Entered is Invalid";
     private static final String INVALID_NAME_MESSAGE = "The Name Entered is Invalid";
-    private static final String INVALID_PHONE_MESSAGE = "The Phone Number Entered is Invalid";
     private static final String INVALID_TELEGRAM_MESSAGE = "The Telegram Handle Entered is Invalid";
     private static final String WELCOME_MESSAGE = "Welcome To CohortConnect!";
 
@@ -55,18 +52,6 @@ public class ProfileWindow extends UiPart<Stage> {
     @FXML
     private TextField github;
 
-    @FXML
-    private TextField phone;
-
-    @FXML
-    private TextField email;
-
-    @FXML
-    private TextField address;
-
-    @FXML
-    private TextField tag;
-
     public ProfileWindow(Stage stage, MainWindow mainWindow, Logic logic) {
         super(FXML, stage);
         this.mainWindow = mainWindow;
@@ -90,13 +75,8 @@ public class ProfileWindow extends UiPart<Stage> {
     }
 
     public void submit(ActionEvent event) {
-        //System.out.println("Checking submit");
-
-        String userAddress = address.getText();
-        String userEmail = email.getText();
         String userGithub = github.getText();
         String userName = name.getText();
-        String userPhone = phone.getText();
         String userTelegram = telegram.getText();
 
         Address address;
@@ -107,15 +87,15 @@ public class ProfileWindow extends UiPart<Stage> {
         Telegram telegram;
 
         if (areUserCredentialsValid()) {
-            address = new Address(userAddress);
+            address = new Address("");
 
-            email = new Email(userEmail);
+            email = new Email("");
 
             github = new Github(userGithub);
 
             name = new Name(userName);
 
-            phone = new Phone(userPhone);
+            phone = new Phone("");
 
             telegram = new Telegram(userTelegram);
 
@@ -134,30 +114,10 @@ public class ProfileWindow extends UiPart<Stage> {
     }
 
     public boolean areUserCredentialsValid() {
-        String userAddress = address.getText();
-        String userEmail = email.getText();
         String userGithub = github.getText();
         String userName = name.getText();
-        String userPhone = phone.getText();
         String userTelegram = telegram.getText();
 
-        if (!Address.isValidAddress(userAddress)) {
-            logger.info("Invalid Address Detected");
-            message.setText(INVALID_ADDRESS_MESSAGE);
-            return false;
-        }
-
-        if (!Email.isValidEmail(userEmail)) {
-            logger.info("Invalid Email Detected");
-            message.setText(INVALID_EMAIL_MESSAGE);
-            return false;
-        }
-
-        if (!Github.isValidGithub(userGithub)) {
-            logger.info("Invalid GitHub Username Detected");
-            message.setText(INVALID_GITHUB_MESSAGE);
-            return false;
-        }
 
         if (!Name.isValidName(userName)) {
             logger.info("Invalid Name Detected");
@@ -165,9 +125,9 @@ public class ProfileWindow extends UiPart<Stage> {
             return false;
         }
 
-        if (!Phone.isValidPhone(userPhone)) {
-            logger.info("Invalid Phone Number Detected");
-            message.setText(INVALID_PHONE_MESSAGE);
+        if (!Github.isValidGithub(userGithub)) {
+            logger.info("Invalid GitHub Username Detected");
+            message.setText(INVALID_GITHUB_MESSAGE);
             return false;
         }
 
