@@ -1,18 +1,20 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_NO_CURRENT_APPLICANTS;
 import static seedu.address.logic.commands.RejectionRateCommand.MESSAGE_SUCCESS;
 import static seedu.address.model.applicant.Application.ApplicationStatus.REJECTED;
+import static seedu.address.testutil.TypicalApplicants.getTypicalApplicantBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPositions.DATASCIENTIST;
 import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ApplicantBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,7 +28,10 @@ import seedu.address.testutil.PositionBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for {@code RejectionRateCommand}.
  */
 public class RejectionRateCommandTest {
-    private final Model model = new ModelManager(getTypicalPositionBook(), new UserPrefs());
+    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalApplicantBook(),
+            getTypicalPositionBook(), new UserPrefs());
+    private final Position position = new PositionBuilder().withTitle("software engineer").withDescription("This is a "
+            + "placeholder description").build();
 
     @Test
     public void constructor_nullPosition_throwsNullPointerException() {
@@ -48,15 +53,8 @@ public class RejectionRateCommandTest {
     public void execute_existingPositionWithExistingApplicant_successful() throws Exception {
         Applicant applicant = new ApplicantBuilder().build();
 
-        Position position = new PositionBuilder().build();
-
-        ApplicantBook applicantBook = new ApplicantBook();
-
-        applicantBook.addApplicant(applicant);
-
-        model.setApplicantBook(applicantBook);
-
         model.addPosition(position);
+        model.addApplicant(applicant);
 
         CommandResult commandResult = new RejectionRateCommand(position.getTitle()).execute(model);
         float rejectionRate = model.calculateRejectionRate(position.getTitle()); // 0%
@@ -69,14 +67,7 @@ public class RejectionRateCommandTest {
     public void execute_changeRejectionRateAfterUpdatingApplicant_successful() {
         Applicant applicant = new ApplicantBuilder().build();
 
-        Position position = new PositionBuilder().build();
-
-        ApplicantBook applicantBook = new ApplicantBook();
-
-        applicantBook.addApplicant(applicant);
-
-        model.setApplicantBook(applicantBook);
-
+        model.addApplicant(applicant);
         model.addPosition(position);
 
         float initialRejectionRate = model.calculateRejectionRate(position.getTitle()); // currently 0.0%
@@ -85,7 +76,7 @@ public class RejectionRateCommandTest {
 
         model.setApplicant(applicant, newApplicant);
 
-        float newRejectionRate = model.calculateRejectionRate(position.getTitle()); // now 100.0%
+        float newRejectionRate = model.calculateRejectionRate(position.getTitle()); // now 12.5%
 
         assertNotEquals(initialRejectionRate, newRejectionRate);
     }
@@ -95,13 +86,7 @@ public class RejectionRateCommandTest {
         // Create Amy and set status to REJECTED
         Applicant applicant = new ApplicantBuilder().build();
 
-        ApplicantBook applicantBook = new ApplicantBook();
-
-        applicantBook.addApplicant(applicant);
-
-        model.setApplicantBook(applicantBook);
-
-        Position position = new PositionBuilder().build();
+        model.addApplicant(applicant);
 
         model.addPosition(position);
 
@@ -109,17 +94,14 @@ public class RejectionRateCommandTest {
 
         model.setApplicant(applicant, newApplicant);
 
-        float initialRejectionRate = model.calculateRejectionRate(position.getTitle()); // 100%
+        float initialRejectionRate = model.calculateRejectionRate(position.getTitle()); // 12.5
 
         // Create Alice
         Applicant otherApplicant = new ApplicantBuilder().withName("Alice").build();
 
-        applicantBook.setApplicant(applicant, newApplicant);
-        applicantBook.addApplicant(otherApplicant);
+        model.addApplicant(otherApplicant);
 
-        model.setApplicantBook(applicantBook);
-
-        float newRejectionRate = model.calculateRejectionRate(position.getTitle()); // 50%
+        float newRejectionRate = model.calculateRejectionRate(position.getTitle()); // 11.1%
 
         assertNotEquals(initialRejectionRate, newRejectionRate);
     }
@@ -127,35 +109,52 @@ public class RejectionRateCommandTest {
     @Test
     public void execute_changeRejectionRateAfterDeletingApplicants_successful() {
         // Create Amy and set status to REJECTED
-        Position position = new PositionBuilder().build();
-
         model.addPosition(position);
 
         Applicant applicant = new ApplicantBuilder().build();
 
-        ApplicantBook applicantBook = new ApplicantBook();
-
-        applicantBook.addApplicant(applicant);
-
-        model.setApplicantBook(applicantBook);
+        model.addApplicant(applicant);
 
         Applicant newApplicant = applicant.markAs(REJECTED);
 
         // Create Alice
         Applicant otherApplicant = new ApplicantBuilder().withName("Alice").build();
 
-        applicantBook.setApplicant(applicant, newApplicant);
-        applicantBook.addApplicant(otherApplicant);
+        model.setApplicant(applicant, newApplicant);
 
-        model.setApplicantBook(applicantBook);
+        model.addApplicant(otherApplicant);
 
-        float oldRejectionRate = model.calculateRejectionRate(position.getTitle()); // 50%
+        float initialRejectionRate = model.calculateRejectionRate(position.getTitle()); // 11.1%
 
         model.deleteApplicant(newApplicant);
 
         float newRejectionRate = model.calculateRejectionRate(position.getTitle()); // 0%
 
-        assertNotEquals(oldRejectionRate, newRejectionRate);
+        assertNotEquals(initialRejectionRate, newRejectionRate);
+    }
+
+    @Test
+    public void equals() {
+        final RejectionRateCommand standardCommand = new RejectionRateCommand(position.getTitle());
+        Position otherPosition = DATASCIENTIST;
+
+        RejectionRateCommand sameCommand = new RejectionRateCommand(position.getTitle());
+        RejectionRateCommand otherCommand = new RejectionRateCommand(DATASCIENTIST.getTitle());
+
+        // same object -> returns true
+        assertEquals(standardCommand, standardCommand);
+
+        // duplicate command -> returns True
+        assertEquals(standardCommand, sameCommand);
+
+        // different types -> returns false
+        assertFalse(standardCommand.equals(1));
+
+        // null -> returns false
+        assertFalse(standardCommand.equals(null));
+
+        // different position -> returns false
+        assertFalse(standardCommand.equals(otherCommand));
     }
 }
 

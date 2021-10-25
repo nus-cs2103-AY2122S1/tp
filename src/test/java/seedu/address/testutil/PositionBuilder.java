@@ -8,9 +8,8 @@ import seedu.address.model.position.Title;
  * A utility class to help with building Position objects.
  */
 public class PositionBuilder {
-    public static final String DEFAULT_TITLE = "software engineer";
-    public static final String DEFAULT_DESCRIPTION = "This is a "
-            + "placeholder description";
+    public static final String DEFAULT_TITLE = "Software Engineer";
+    public static final String DEFAULT_DESCRIPTION = "code every day :/";
 
     private Title title;
     private Description description;
