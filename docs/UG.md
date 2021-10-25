@@ -19,21 +19,21 @@ layout: page title: User Guide
    4.2. [Add](#42-add) <br>
    &nbsp;&nbsp;&nbsp;&nbsp; 4.2.1. [Adding a Client](#421-adding-a-client) <br>
    &nbsp;&nbsp;&nbsp;&nbsp; 4.2.2. [Adding a Product](#422-adding-a-product) <br>
-   4.3. [Edit](#43-edit) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.3.1. [Editing a Client](#431-editing-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.3.2. [Editing a Product](#432-editing-a-product) <br>
-   4.4. [Delete](#44-delete) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.4.1. [Deleting a Client](#441-deleting-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.4.2. [Deleting a Product](#442-deleting-a-product) <br>
-   4.5. [View](#45-view) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.5.1. [Viewing a Client](#451-viewing-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.5.2. [Viewing a Product](#452-viewing-a-product) <br>
-   4.6. [Find](#46-find) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.6.1. [Finding a Client](#461-finding-a-client) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.6.2. [Finding a Product](#462-finding-a-product) <br>
-   4.7. [List](#47-list) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.7.1. [Listing all Clients](#471-listing-all-clients) <br>
-   &nbsp;&nbsp;&nbsp;&nbsp; 4.7.2. [Listing all Products](#472-listing-all-products) <br>
+   4.3. [Delete](#43-delete) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.3.1. [Deleting a Client](#431-deleting-a-client) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.3.2. [Deleting a Product](#432-deleting-a-product) <br>
+   4.4. [Edit](#44-edit) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.4.1. [Editing a Client](#441-editing-a-client) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.4.2. [Editing a Product](#442-editing-a-product) <br>
+   4.5. [Find](#45-find) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.5.1. [Finding a Client](#451-finding-a-client) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.5.2. [Finding a Product](#452-finding-a-product) <br>
+   4.6. [List](#46-list) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.6.1. [Listing all Clients](#461-listing-all-clients) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.6.2. [Listing all Products](#462-listing-all-products) <br>
+   4.7. [View](#47-view) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.7.1. [Viewing a Client](#471-viewing-a-client) <br>
+   &nbsp;&nbsp;&nbsp;&nbsp; 4.7.2. [Viewing a Product](#472-viewing-a-product) <br>
    4.8. [Clearing the all Data](#48-clearing-all-data) <br>
    4.9. [Navigating the Command History](#49-navigating-the-command-history) <br>
    4.10. [Viewing Statistics](#410-viewing-statistics) <br>
@@ -203,7 +203,36 @@ pens in stock.
 Expected Output:
 ![Ui](images/UIAddProductCommand.png)
 
-### 4.3 Edit
+### 4.3 Delete
+
+Deletes the specified client/product from Sellah.
+
+An error message will be displayed if the format of a parameter is incorrect. A different error message will be
+displayed if the client or product to be deleted does not exist in Sellah.
+
+#### 4.3.1 Deleting a Client
+
+Deletes the client at the specified index from Sellah.
+
+Format: `delete -c INDEX`
+
+Example : `delete -c 1` deletes the client with index 1 from Sellah.
+
+Expected Output:
+![Ui](images/UIDeleteClientCommand.png)
+
+#### 4.3.2 Deleting a Product
+
+Deletes the product at the specified index in Sellah.
+
+Format: `delete -p INDEX`
+
+Example : `delete -p 1` deletes the product with index 1 from Sellah.
+
+Expected Output:
+![Ui](images/UIDeleteProductCommand.png)
+
+### 4.4 Edit
 
 Edits an existing client or product in Sellah. You need to provide at least one of the optional field so that Sellah can
 update the client or product correctly.
@@ -211,7 +240,7 @@ update the client or product correctly.
 An error message will be displayed if the format of a parameter is incorrect. A different error message will be
 displayed if the client or product to be edited does not exist in Sellah.
 
-#### 4.3.1 Editing a Client
+#### 4.4.1 Editing a Client
 
 Edits the client (if he exists) at the specified index in Sellah.
 
@@ -238,7 +267,7 @@ Expected Output:
 
 </div>
 
-#### 4.3.2 Editing a Product
+#### 4.4.2 Editing a Product
 
 Edits the product (if it exists) at the specified index in Sellah.
 
@@ -250,43 +279,72 @@ to `20`.
 Expected Output:
 ![Ui](images/UIEditProductCommand.png)
 
-### 4.4 Delete
+### 4.5 Find
 
-Deletes the specified client/product from Sellah.
+Finds a client or product in Sellah, based on the name specified in `-n`.
 
-An error message will be displayed if the format of a parameter is incorrect. A different error message will be
-displayed if the client or product to be deleted does not exist in Sellah.
+An error message will be displayed if the format of a parameter is incorrect. The name you provided must fully match
+(case-insensitive) the name of the client or product in Sellah, otherwise you will receive an error message.
 
-#### 4.4.1 Deleting a Client
+#### 4.5.1 Finding a Client
 
-Deletes the client at the specified index from Sellah.
+Finds a client in Sellah.
 
-Format: `delete -c INDEX`
+Format : `find -c NAME`
 
-Example : `delete -c 1` deletes the client with index 1 from Sellah.
-
-Expected Output:
-![Ui](images/UIDeleteClientCommand.png)
-
-#### 4.4.2 Deleting a Product
-
-Deletes the product at the specified index in Sellah.
-
-Format: `delete -p INDEX`
-
-Example : `delete -p 1` deletes the product with index 1 from Sellah.
+Example : `find -c john` Shows a list of all clients with the `NAME` `john` in Sellah.
 
 Expected Output:
-![Ui](images/UIDeleteProductCommand.png)
+![Ui](images/UIFindClientCommand.png)
 
-### 4.5 View
+#### 4.5.2 Finding a Product
+
+Finds a product in Sellah.
+
+Format : `find -p NAME`
+
+Example : `find -c phone` Shows a list of all products with the `NAME` `phone` in Sellah.
+
+Expected Output:
+![Ui](images/UIFindProductCommand.png)
+
+### 4.6 List
+
+Displays a list of all the clients or products in Sellah. If there are no clients or products, a message will inform you
+that Sellah has no clients or product, depending on whether you are listing client or product.
+
+An error message will be displayed if the format of a parameter is incorrect.
+
+#### 4.6.1 Listing all Clients
+
+Lists all the clients in Sellah.
+
+Format : `list -c`
+
+Example : `list -c` Shows a list of all clients in Sellah.
+
+Expected Output:
+![Ui](images/UIListClientCommand.png)
+
+#### 4.6.2 Listing all Products
+
+Lists all the products in Sellah.
+
+Format : `list -p`
+
+Example : `list -p` Shows a list of all products in Sellah.
+
+Expected Output:
+![Ui](images/UIListProductCommand.png)
+
+### 4.7 View
 
 Views the details of a client or product. The details will be displayed in the second panel of Sellah.
 
 An error message will be displayed if the format of a parameter is incorrect. A different error message will be
 displayed if the client or product to be viewed does not exist in Sellah.
 
-#### 4.5.1 Viewing a Client
+#### 4.7.1 Viewing a Client
 
 Views a current client that exists in Sellah. You will see the details of the client in the second panel on the right.
 These details include ID, name, phone number, email, address and orders.
@@ -300,7 +358,7 @@ Example : `view -c 20` Views all the details of the client with `INDEX` of `20`.
 Expected Output:
 ![Ui](images/UIViewClientCommand.png)
 
-#### 4.5.2 Viewing a Product
+#### 4.7.2 Viewing a Product
 
 Views a current product that exists in Sellah. Details of the product will be presented to you in the second panel on
 the right. These details include ID, name, unit price and quantity.
@@ -313,64 +371,6 @@ Example : `view -p 5` Views all the details of the product with `INDEX` of `5`.
 
 Expected Output:
 ![Ui](images/UIViewProductCommand.png)
-
-### 4.6 Find
-
-Finds a client or product in Sellah, based on the name specified in `-n`.
-
-An error message will be displayed if the format of a parameter is incorrect. The name you provided must fully match
-(case-insensitive) the name of the client or product in Sellah, otherwise you will receive an error message.
-
-#### 4.6.1 Finding a Client
-
-Finds a client in Sellah.
-
-Format : `find -c NAME`
-
-Example : `find -c john` Shows a list of all clients with the `NAME` `john` in Sellah.
-
-Expected Output:
-![Ui](images/UIFindClientCommand.png)
-
-#### 4.6.2 Finding a Product
-
-Finds a product in Sellah.
-
-Format : `find -p NAME`
-
-Example : `find -c phone` Shows a list of all products with the `NAME` `phone` in Sellah.
-
-Expected Output:
-![Ui](images/UIFindProductCommand.png)
-
-### 4.7 List
-
-Displays a list of all the clients or products in Sellah. If there are no clients or products, a message will inform you
-that Sellah has no clients or product, depending on whether you are listing client or product.
-
-An error message will be displayed if the format of a parameter is incorrect.
-
-#### 4.7.1 Listing all Clients
-
-Lists all the clients in Sellah.
-
-Format : `list -c`
-
-Example : `list -c` Shows a list of all clients in Sellah.
-
-Expected Output:
-![Ui](images/UIListClientCommand.png)
-
-#### 4.7.2 Listing all Products
-
-Lists all the products in Sellah.
-
-Format : `list -p`
-
-Example : `list -p` Shows a list of all products in Sellah.
-
-Expected Output:
-![Ui](images/UIListProductCommand.png)
 
 ### 4.8 Clearing all Data
 
@@ -434,11 +434,11 @@ Action | Format
 [Help](#41-getting-help) | `help`
 [Exit](#411-exiting-sellah) | `exit`
 [Add](#42-add) | Client: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
-[Delete](#44-delete) | Client: `delete -c INDEX` <br> Product: `delete -p INDEX`
-[Edit](#43-edit) | Client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
-[Find](#46-find) | Client: `find -c NAME` <br> Product: `find -p NAME`
-[List](#47-list) | Client: `list -c` <br> Product: `list -p`
-[View](#45-view) | Client:`view -c INDEX` <br> Product: `view -c INDEX`
+[Delete](#43-delete) | Client: `delete -c INDEX` <br> Product: `delete -p INDEX`
+[Edit](#44-edit) | Client: `edit -c INDEX [-n NAME] [-pn PHONE_NUMBER] [-e EMAIL] [-a ADDRESS] [-o ORDER]...` <br> Product: `edit -p INDEX [-n NAME] [-$ UNIT_PRICE] [-q QUANTITY]`
+[Find](#45-find) | Client: `find -c NAME` <br> Product: `find -p NAME`
+[List](#46-list) | Client: `list -c` <br> Product: `list -p`
+[View](#47-view) | Client:`view -c INDEX` <br> Product: `view -c INDEX`
 [Clear](#48-clearing-all-data) | `clear`
 [Command History](#49-navigating-the-command-history) | Previous: `↑` <br> Next: `↓`
 [Statistics](#410-viewing-statistics) | `stat`
