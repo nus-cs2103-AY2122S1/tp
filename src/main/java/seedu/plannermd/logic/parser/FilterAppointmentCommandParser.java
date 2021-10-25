@@ -40,7 +40,7 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
      */
     public FilterAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(UNUSED_PREAMBLE + " " + args,
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(" " + args,
                 PREFIX_DOCTOR, PREFIX_PATIENT, PREFIX_START, PREFIX_END);
 
         AppointmentFilters filters = AppointmentFilters.allAppointmentsFilter();
@@ -48,7 +48,7 @@ public class FilterAppointmentCommandParser implements Parser<FilterAppointmentC
         boolean hasStartFilter = false;
         boolean hasEndFilter = false;
 
-        if (!argumentMultimap.getPreamble().equals(UNUSED_PREAMBLE)) {
+        if (!argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterAppointmentCommand.MESSAGE_USAGE));
         }

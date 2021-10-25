@@ -23,7 +23,6 @@ public class FilterUpcomingAppointmentCommandParser implements
 
     public static final String NO_ARGUMENTS_MESSAGE = "No arguments provided.\n"
             + FilterAppointmentCommand.MESSAGE_USAGE;
-    private static final String UNUSED_PREAMBLE = "0";
 
     /**
      * Parses the given {@code String} of arguments in the context of the FilterUpcomingAppointmentCommand
@@ -33,12 +32,12 @@ public class FilterUpcomingAppointmentCommandParser implements
      */
     public FilterUpcomingAppointmentCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(UNUSED_PREAMBLE + " " + args,
+        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(" " + args,
                 PREFIX_DOCTOR, PREFIX_PATIENT);
 
         AppointmentFilters filters = AppointmentFilters.upcomingAppointmentsFilter();
 
-        if (!argumentMultimap.getPreamble().equals(UNUSED_PREAMBLE)) {
+        if (!argumentMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterUpcomingAppointmentCommand.MESSAGE_USAGE));
         }
