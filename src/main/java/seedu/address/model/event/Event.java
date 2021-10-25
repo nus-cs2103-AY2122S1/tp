@@ -181,7 +181,17 @@ public class Event implements Comparable<Event> {
         }
 
         return otherEvent != null
-                && otherEvent.getName().equals(getName());
+                && otherEvent.getName().equals(getName())
+                && otherEvent.getDate().equals(getDate());
+    }
+
+    /**
+     * Removes this {@code Event} from the {@code participants} participating in it.
+     */
+    public void deleteFromParticipants() {
+        for (int i = participants.size() - 1; i >= 0; i--) {
+            participants.get(i).removeEvent(this);
+        }
     }
 
     /**

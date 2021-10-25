@@ -102,6 +102,7 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteParticipant(Participant target) {
+        requireNonNull(target);
         target.deleteFromEvents();
         addressBook.removeParticipant(target);
     }
@@ -197,6 +198,7 @@ public class ModelManager implements Model {
     @Override
     public void removeEvent(Event target) {
         requireNonNull(target);
+        target.deleteFromParticipants();
         addressBook.removeEvent(target);
     }
 
