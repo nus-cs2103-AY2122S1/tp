@@ -154,11 +154,17 @@ Examples:
 *  `edit 1 lv/` Removes the last visit for the 1st person. All other attributes are not modified.
 
 
-### Listing all persons : `list`
+### Listing all persons or persons with incoming visits: `list`
 
 Shows a list of all the elderly and their associated details in SeniorLove address book in alphabetical order of their name.
 
-Format: `list`
+Format: `list [w/] [m/]`
+- `list` without any prefix displays all the elderly.
+- `list w/` displays all the elderly with an incoming visit in the next week.
+- `list m/` displays all the elderly with an incoming visit in the next month.
+- `w/` and `m/` fields cannot be both present.
+
+Example: `list m/` displays all the elderly with an incoming visit in the next month. 
 
 ### Sort elderly by visit : `sort`
 
@@ -293,7 +299,7 @@ Action | Format, Examples
 **visit** | `visit INDEX at/VISIT [f/FREQUENCY o/OCCURRENCE]`<br> e.g.,`visit 3 at/1900-11-08 f/Weekly o/2`
 **edit** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [h/HEALTH_CONDITION]…​`<br> e.g.,`edit 3 n/James`
 **find** | `find KEYWORD [MORE_KEYWORDS]` <br> e.g., `find alex english`
-**list** | `list`
+**list** | `list [w/] [m/]`
 **sort** | `sort [FIELD_TO_BE_SORTED]`<br> e.g., `sort v/`<br> e.g., `sort lv/`
 **summary** | `summary`
 **clear** | `clear`

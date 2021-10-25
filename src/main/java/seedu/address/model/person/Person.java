@@ -209,4 +209,25 @@ public class Person {
         return formattedVisit;
     }
 
+    /**
+     * Returns if the person has a visit and the visit is in this week.
+     */
+    public boolean hasVisitThisWeek() {
+        if (!hasVisit()) {
+            return false;
+        }
+
+        return this.visit.get().isThisWeek();
+    }
+
+    /**
+     * Returns if the person has a visit and the visit is in this month.
+     */
+    public boolean hasVisitThisMonth() {
+        if (!hasVisit()) {
+            return false;
+        }
+
+        return this.visit.get().isThisMonth();
+    }
 }

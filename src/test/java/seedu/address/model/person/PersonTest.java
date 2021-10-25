@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
-
     @Test
     public void asObservableList_modifyList_throwsUnsupportedOperationException() {
         Person person = new PersonBuilder().build();
@@ -134,5 +133,17 @@ public class PersonTest {
         // not overdue in around 100 years
         editedAlice = new PersonBuilder(ALICE).withVisit("2103-01-01 08:00").build();
         assertFalse(editedAlice.isVisitOverdue());
+    }
+
+    @Test
+    public void hasVisitThisWeekOrMonth() {
+        // both visits' time are very far away from current time, a sanity check
+        Person editedAlicePast = new PersonBuilder(ALICE).withVisit("1900-01-01 10:00").build();
+        Person editedAliceFuture = new PersonBuilder(ALICE).withVisit("2077-01-01 10:00").build();
+
+        assertFalse(editedAlicePast.hasVisitThisMonth());
+        assertFalse(editedAlicePast.hasVisitThisWeek());
+        assertFalse(editedAliceFuture.hasVisitThisMonth());
+        assertFalse(editedAliceFuture.hasVisitThisMonth());
     }
 }
