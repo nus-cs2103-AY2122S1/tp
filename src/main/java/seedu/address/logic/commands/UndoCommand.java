@@ -10,17 +10,17 @@ public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
-    private static final String MESSAGE_UNDO_SUCCESS = "Undo successful";
+    private static final String MESSAGE_UNDO_SUCCESS = "Undo successful\nRemaining undo count: %d";
     private static final String MESSAGE_UNDO_FAILURE = "No commands to undo";
 
     @Override
     public CommandResult execute(Model model) {
         try {
-            model.undo();
+            int remaining = model.undo();
+            return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, remaining));
         } catch (OperationException e) {
             return new CommandResult(MESSAGE_UNDO_FAILURE);
         }
 
-        return new CommandResult(MESSAGE_UNDO_SUCCESS);
     }
 }

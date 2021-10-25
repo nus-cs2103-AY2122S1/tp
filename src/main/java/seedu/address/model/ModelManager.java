@@ -46,6 +46,17 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
+    @Override
+    public void setAll(ReadOnlyAddressBook addressBook,
+                       ReadOnlyUserPrefs userPrefs,
+                       Predicate<Person> filterPredicate) {
+        this.addressBook.resetData(addressBook);
+        this.userPrefs.setAddressBookFilePath(userPrefs.getAddressBookFilePath());
+        this.userPrefs.setGuiSettings(userPrefs.getGuiSettings());
+        this.userPrefs.resetData(userPrefs);
+        filteredPersons.setPredicate(filterPredicate == null ? PREDICATE_SHOW_ALL_PERSONS : filterPredicate);
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override
@@ -126,13 +137,13 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void undo() throws OperationException {
-        operations.undo();
+    public int undo() throws OperationException {
+        return operations.undo();
     }
 
     @Override
-    public void redo() throws OperationException {
-        operations.redo();
+    public int redo() throws OperationException {
+        return operations.redo();
     }
 
     /**

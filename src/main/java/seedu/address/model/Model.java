@@ -17,6 +17,11 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
+     * Sets address book, user prefs, and filter of filtered persons
+     */
+    void setAll(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs, Predicate<Person> predicate);
+
+    /**
      * Replaces user prefs data with the data in {@code userPrefs}.
      */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
@@ -92,10 +97,10 @@ public interface Model {
     /**
      * Undoes the last command executed. Returns true if undo was executed successfully.
      */
-    void undo() throws OperationException;
+    int undo() throws OperationException;
 
     /**
      * Redoes the last command undid, if available.  Returns true if redo was executed successfully.
      */
-    void redo() throws OperationException;
+    int redo() throws OperationException;
 }

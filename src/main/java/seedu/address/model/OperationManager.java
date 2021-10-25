@@ -45,26 +45,28 @@ class OperationManager {
      * Reruns the last operation that was reversed.
      * @throws OperationException when there are no operations to be redid
      */
-    void redo() throws OperationException {
+    int redo() throws OperationException {
         if (!canRedo()) {
             throw new OperationException("Unable to redo");
         }
         Operation op = redoStack.pop();
         op.redo();
         undoStack.push(op);
+        return redoStack.size();
     }
 
     /**
      * Reverses the latest operation executed
      * @throws OperationException when there are no operations to be undid
      */
-    void undo() throws OperationException {
+    int undo() throws OperationException {
         if (!canUndo()) {
             throw new OperationException("Unable to undo");
         }
         Operation op = undoStack.pop();
         op.undo();
         redoStack.push(op);
+        return undoStack.size();
     }
 
     /**
@@ -114,11 +116,9 @@ class OperationManager {
         @SuppressWarnings("unchecked")
         public void undo() {
             requireNonNull(model);
-            model.setAddressBook(new AddressBook(addressBookSnapshot));
-            model.setUserPrefs(new UserPrefs(userPrefsSnapshot));
-            if (filteredPersonsSnapshot.getPredicate() != null) {
-                model.updateFilteredPersonList((Predicate<Person>) filteredPersonsSnapshot.getPredicate());
-            }
+            model.setAll(new AddressBook(addressBookSnapshot),
+                    new UserPrefs(userPrefsSnapshot),
+                    (Predicate<Person>) filteredPersonsSnapshot.getPredicate());
         }
     }
 }
