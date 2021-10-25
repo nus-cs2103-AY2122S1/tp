@@ -8,7 +8,7 @@ import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.student.NameContainsKeywordsPredicate;
+import tutoraid.model.lesson.LessonNameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
 
 /**
@@ -42,7 +42,7 @@ public class ViewStudentCommand extends ViewCommand {
 
         Student studentToView = lastShownList.get(targetIndex.getZeroBased());
         model.viewStudent(studentToView);
-        model.updateFilteredLessonList(new NameContainsKeywordsPredicate(studentToView.getLessons()));
+        model.updateFilteredLessonList(new LessonNameContainsKeywordsPredicate(studentToView.getLessonList()));
         return new CommandResult(MESSAGE_VIEW_STUDENT_SUCCESS);
     }
 

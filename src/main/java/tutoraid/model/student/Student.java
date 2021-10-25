@@ -1,5 +1,6 @@
 package tutoraid.model.student;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import tutoraid.commons.util.CollectionUtil;
@@ -18,6 +19,7 @@ public class Student {
     private final Phone parentPhone;
 
     // Data fields
+    private final ArrayList<String> lessonList;
     private final ProgressList progressList;
     private final PaymentStatus paymentStatus;
 
@@ -25,12 +27,13 @@ public class Student {
      * Every field must be present and not null.
      */
     public Student(StudentName studentName, Phone studentPhone, ParentName parentName, Phone parentPhone,
-                   ProgressList progressList, PaymentStatus paymentStatus) {
+                   ArrayList<String> lessonList, ProgressList progressList, PaymentStatus paymentStatus) {
         CollectionUtil.requireAllNonNull(studentName, studentPhone, parentName, parentPhone);
         this.studentName = studentName;
         this.studentPhone = studentPhone;
         this.parentName = parentName;
         this.parentPhone = parentPhone;
+        this.lessonList = lessonList;
         this.progressList = progressList;
         this.paymentStatus = paymentStatus;
     }
@@ -49,6 +52,10 @@ public class Student {
 
     public Phone getParentPhone() {
         return parentPhone;
+    }
+
+    public ArrayList<String> getLessonList() {
+        return lessonList;
     }
 
     public ProgressList getProgressList() {

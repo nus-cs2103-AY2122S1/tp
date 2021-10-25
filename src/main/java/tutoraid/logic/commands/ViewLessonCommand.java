@@ -2,7 +2,6 @@ package tutoraid.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
 import java.util.List;
 
 import tutoraid.commons.core.Messages;

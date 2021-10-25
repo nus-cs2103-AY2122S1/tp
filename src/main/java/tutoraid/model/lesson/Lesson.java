@@ -1,7 +1,10 @@
 package tutoraid.model.lesson;
 
+import tutoraid.model.student.Student;
+
 import static tutoraid.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -14,15 +17,15 @@ public class Lesson {
     private final LessonName lessonName;
 
     // Data Fields
+    private final ArrayList<String> students;
     private final Capacity capacity;
     private final Price price;
-    private final Students students;
     private final Timing timing;
 
     /**
      * Every field must be present and not null.
      */
-    public Lesson(LessonName lessonName, Capacity capacity, Price price, Students students, Timing timing) {
+    public Lesson(LessonName lessonName, Capacity capacity, Price price, ArrayList<String> students, Timing timing) {
         requireAllNonNull(lessonName, capacity, price, students, timing);
         this.lessonName = lessonName;
         this.capacity = capacity;
@@ -43,7 +46,7 @@ public class Lesson {
         return price;
     }
 
-    public Students getStudents() {
+    public ArrayList<String> getStudents() {
         return students;
     }
 
