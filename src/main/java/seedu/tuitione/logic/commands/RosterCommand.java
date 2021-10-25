@@ -12,6 +12,7 @@ import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
 import seedu.tuitione.model.lesson.LessonIsOfSpecifiedLessonCode;
+import seedu.tuitione.model.student.StudentsIsOfSpecifiedLessonCode;
 
 /**
  * Display a list of students who are enrolled in a specific lesson in tuitone.
@@ -54,7 +55,7 @@ public class RosterCommand extends Command {
 
         if (lessonCodeToUse != null) {
             model.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lessonCodeToUse));
-            model.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lessonCodeToUse));
+            model.updateFilteredStudentList(new StudentsIsOfSpecifiedLessonCode(lessonCodeToUse));
             output = String.format(MESSAGE_ROSTER_LESSON_SUCCESS,
                     lessonCodeToUse.toString(),
                     model.getFilteredStudentList().size());
