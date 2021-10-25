@@ -126,7 +126,7 @@ are all sample data! Here are some commands you can try to see what they do:
     * `find pr/high`
     
 5. Try setting an appointment for him.
-    * `appt 1 d/2021-12-12 t/14:30 v/Buona Vista`
+    * `aa 1 d/2021-12-12 t/14:30 v/Buona Vista`
     
 <div markdown="block" class="alert alert-info">
 :information_source: When you are ready to use FAST to keep track of your own clients, you can use 
@@ -336,7 +336,7 @@ track of all your clients' appointment dates all within the same app. You can al
 
 Examples:
 * `aa 1 d/2021-03-27` adds an appointment with date `27 Mar 2021` to the first client in FAST.
-![result for `appt 1 d/2021-03-27`](images/appointment.png)
+![result for `aa 1 d/2021-03-27`](images/appointment.png)
 * `aa 3 d/2021-03-27 t/18:00` adds an appointment with date `27 Mar 2021` and time `1800hrs` to the third client in FAST.
 * `find Matthew John` followed by `aa 3 d/2021-03-27 t/18:00 v/Velocity` adds an appointment with date `27 Mar 2021`, 
   time `1800hrs` and venue `Velocity` to the third client in the results of the `find` command.
