@@ -16,7 +16,7 @@ import seedu.address.model.module.student.TeleHandle;
  */
 class JsonAdaptedStudent {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
+    public static final String STUDENT_MISSING_FIELD_MESSAGE_FORMAT = "Student's %s field is missing!";
 
     private final String name;
     private final String teleHandle;
@@ -25,7 +25,7 @@ class JsonAdaptedStudent {
 
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given student details.
+     * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("teleHandle") String teleHandle,
@@ -38,7 +38,7 @@ class JsonAdaptedStudent {
     }
 
     /**
-     * Converts a given {@code Person} into this class for Jackson use.
+     * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
         name = source.getName().fullName;
@@ -55,7 +55,8 @@ class JsonAdaptedStudent {
     public Student toModelType() throws IllegalValueException {
 
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(STUDENT_MISSING_FIELD_MESSAGE_FORMAT,
+                    Name.class.getSimpleName()));
         }
         if (!Name.isValidName(name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
@@ -63,7 +64,7 @@ class JsonAdaptedStudent {
         final Name modelName = new Name(name);
 
         if (teleHandle == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(STUDENT_MISSING_FIELD_MESSAGE_FORMAT,
                     TeleHandle.class.getSimpleName()));
         }
         if (!TeleHandle.isValidTeleHandle(teleHandle)) {
@@ -72,7 +73,8 @@ class JsonAdaptedStudent {
         final TeleHandle modelTeleHandle = new TeleHandle(teleHandle);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(STUDENT_MISSING_FIELD_MESSAGE_FORMAT,
+                    Email.class.getSimpleName()));
         }
         if (!Email.isValidEmail(email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
@@ -80,7 +82,7 @@ class JsonAdaptedStudent {
         final Email modelEmail = new Email(email);
 
         if (studentId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(STUDENT_MISSING_FIELD_MESSAGE_FORMAT,
                     StudentId.class.getSimpleName()));
         }
         if (!StudentId.isValidStudentId(studentId)) {
