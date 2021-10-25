@@ -13,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.done.Done;
 import seedu.address.model.interview.Interview;
+import seedu.address.model.notes.Notes;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.EmploymentType;
 import seedu.address.model.person.ExpectedSalary;
@@ -41,6 +42,7 @@ class JsonAdaptedPerson {
     private final String experience;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
     private final String interview;
+    private final String notes;
     private final String done;
 
     /**
@@ -58,6 +60,7 @@ class JsonAdaptedPerson {
             @JsonProperty("experience") String experience,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
             @JsonProperty("interview") String interview,
+            @JsonProperty("notes") String notes,
             @JsonProperty("done") String done) {
         this.name = name;
         this.phone = phone;
@@ -71,6 +74,7 @@ class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.interview = interview;
+        this.notes = notes;
         this.done = done;
     }
 
@@ -90,6 +94,7 @@ class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         interview = source.getInterview().orElse(Interview.EMPTY_INTERVIEW).parseTime;
+        notes = source.getNotes().orElse(new Notes("")).information;
         done = source.getDone().getDoneStatus();
     }
 
@@ -188,11 +193,19 @@ class JsonAdaptedPerson {
             modelInterview = Optional.ofNullable(new Interview(interview));
         }
 
+
+        if (notes == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Interview.class.getSimpleName()));
+        }
+        final Optional<Notes> modelNotes = Optional.ofNullable(new Notes(notes));
+
         final Done modelDone = new Done(done);
 
 
         return new Person(modelName, modelPhone, modelEmail, modelRole, modelEmploymentType,
-                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags, modelInterview, modelDone);
+                modelExpectedSalary, modelLevelOfEducation, modelExperience, modelTags,
+                modelInterview, modelNotes, modelDone);
     }
 
 }
