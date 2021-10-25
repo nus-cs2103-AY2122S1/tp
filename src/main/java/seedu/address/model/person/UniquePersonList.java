@@ -3,11 +3,7 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -169,11 +165,9 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
-     * Sorts the member list by tags.
-     * Members with more tags are larger.
-     * If members have the same number of tags,
-     * list is sorted by their first tag title lexicographically.
-     * Members with no tags are the smallest.
+     * Sorts the member list by number of tags.
+     * Members with more tags are first.
+     * Members with no tags are last.
      */
     public void sortMembersByTags() {
         Collections.sort(internalList, new Comparator<Person>() {
@@ -181,20 +175,8 @@ public class UniquePersonList implements Iterable<Person> {
             public int compare(Person o1, Person o2) {
                 Set<Tag> tagsO1 = o1.getTags();
                 Set<Tag> tagsO2 = o2.getTags();
-                if (tagsO1.isEmpty() && tagsO2.isEmpty()) {
-                    return 0;
-                } else if (tagsO1.isEmpty()) {
-                    return -1;
-                } else if (tagsO2.isEmpty()) {
-                    return 1;
-                } else if (tagsO1.size() == tagsO2.size()) {
-                    String tagO1Name = tagsO1.stream().findFirst().get().toString();
-                    String tagO2Name = tagsO2.stream().findFirst().get().toString();
-                    return -1 * tagO1Name.compareToIgnoreCase(tagO2Name);
-                }
-                return tagsO1.size() > tagsO2.size() ? 1 : -1;
+                return Integer.compare(tagsO2.size(), tagsO1.size());
             }
         });
-        Collections.reverse(internalList);
     }
 }

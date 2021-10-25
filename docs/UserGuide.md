@@ -265,7 +265,7 @@ Format: `sortm by/SORT_ORDER`
 
 Examples:
 * `sortm by/name` returns a member list sorted by name.
-* `sortm by/tag` returns a member list sortd by tag.
+* `sortm by/tag` returns a member list sorted by number of tags, in descending order.
 
 [Back to Table of Contents](#table-of-contents)
 
