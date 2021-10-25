@@ -292,11 +292,24 @@ List all the incomplete orders.
 
 Format: `incompleteorders`
 
-### Sorting orders by amount: `sortorders`
+### Sorting orders: `sortorders`
 
-Sorts all orders by their amount and lists them in descending order.
+Sorts all orders based on a chosen field and ordering.
 
-Format: `sortorders`
+Format: `sortorders f/FIELD o/ORDERING`
+
+* Your orders are sorted based on the `FIELD` chosen. You may choose between:
+  * The Date field, identified with a "d" or "date".
+  * The Amount field, identified with an "a" or "amount".
+* The direction of the sorting depends on the `ORDERING`, which is either:
+  * Ascending order, identified with an "asc" or "ascending".
+  * Descending order, identified with a "desc" or "descending".
+
+
+Examples:
+* `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
+* `sortorders f/d o/asc` sorts your orders in ascending order of date (orders with earlier dates shown first).
+* `sortorders f/a o/ascending` sorts your orders in ascending order of amount (orders for smaller amounts shown first).
 
 ### Viewing total orders: `totalorders`
 
@@ -394,7 +407,7 @@ Action | Format, Examples
 **MarkOrder** | `markorder INDEX` e.g. `markorder 2`
 **CompletedOrders** | `completedorders`
 **IncompleteOrders** | `incompleteorders`
-**SortOrders** | `sortorders`
+**SortOrders** | `sortorders f/FIELD o/ORDERING` e.g. `sortorders f/date o/descending`
 **ViewTotalOrders** | `totalorders`
 
 ###General Commands
