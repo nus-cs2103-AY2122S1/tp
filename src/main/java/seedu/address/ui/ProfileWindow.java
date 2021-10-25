@@ -1,11 +1,14 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.logging.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.model.person.Address;
@@ -15,10 +18,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Telegram;
-
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.logging.Logger;
 
 /**
  * Controller for the Profile Window.
