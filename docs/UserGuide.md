@@ -4,40 +4,59 @@ title: User Guide
 * Table of Contents
   {:toc}
 ---
-## Introduction
+## 1. Introduction
 ![NUS Mod Tracker Icon](images/nus_mod_tracker.png)
 
-NUS Mod Tracker is a **desktop app** for **NUS Computer Science (CS) students** to **manage their modules and track their course completion.**
+NUS Mod Tracker is a **desktop app** designed for **NUS Computer Science (CS) students who are enrolled before the Academic Year 2020/2021** to **create their own academic plan**,
+as well as to **keep track of their Modular Credits(MC) and modules taken**.
 It is optimized for use via a Command Line Interface (CLI), while still having the benefits of a Graphical User
 Interface (GUI).
-
-### Main Features
-
-Here is an overview of the main features that NUS Mod Tracker provides:
-* Keep track of your Modular Credits(MC).
-* Keep track of the modules that you have taken.
-* Create your own academic plan.
 
 For more information about our features, you can head over to our [Features](#features) section. Better yet, 
 head over to our [Quick Start](#quick-start) and try it out for yourself!
 
-### How to use the user guide 
+### 1.1 Is this guide for you?
 
-We strongly recommend first time users of our application to read through the user guide in the order that it is written. Throughout 
-the user guide, we include links which will jump to the corresponding section of the user guide. 
-These links help you to quickly navigate this document.
+Are you someone who is trying our application for the very first time? If so, our guide is just the thing you need to get started on your journey to create your very own academic plan! 
+Just simple read along and we will guide you step by step on how to use our application.
 
-### Table of Contents
+Are you someone who has maybe forgotten how some of our features work? Fret not, this user guide is also for you!
+Simply head over to either our [Features](#features) section or our [Command Summary](#command-summary) section to solve your problems.
 
-* [Quick Start](#quick-start)
-* [Features](#features)
-* [FAQ](#faq)
-* [Command Summary](#command-summary)
+### 1.2 How to use the user guide 
+
+We strongly recommend first time users of our application to read through the user guide in order to be familiarised with how our application works.
+Throughout our user guide, we have included links which will direct you to the corresponding sections of the user guide. We have also added certain useful tips and tricks 
+to help you get more out of our application. 
+If you ever want to skip through any section of our user guide, do feel free to refer to use the table of contents right below this section to help you with the navigation.
+
+### 1.3 Table of Contents
+
+* [1. Introduction](#1-introduction)
+    * [1.1 Is this guide for you?](#11-is-this-guide-for-you)
+    * [1.2 How to use the user guide](#12-how-to-use-the-user-guide)
+    * [1.3 Table of Contents](#13-table-of-contents)
+    
+* [2. Quick Start](#2-quick-start)
+  
+* [3. About](#3-about)
+  * [3.1 Special Icons](#31-special-icons)
+  * [3.2 Application homepage explanation](#32-application-homepage-explanation)
+  * [3.3 Command format](#33-command-format)
+  * [3.4 Command terminology](#34-command-terminology)    
+    
+* [4. Features](#4-features)
+  
+* [5. FAQ](#5-faq)
+  
+* [6. Command Summary](#6-command-summary)
 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Quick start
+## 2. Quick start
+
+This section gives you a quick summary on how to download and run our application.
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -45,7 +64,7 @@ These links help you to quickly navigate this document.
 
 1. Copy the file to the folder you want to use as the _home folder_ for your Mod Tracker.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The GUI similar to the one below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -62,99 +81,94 @@ Kindly refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## 3. About
+
+This section helps to familiarise you with how our application works as well as the terminologies we use throughout our application.
+
+### 3.1 Special Icons
+
+Here are some of the icons used in this user guide and what each of them represent.
+
+**Tips**
+
+Tips are useful information that can help you have a better experience with our application.
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+Tip: Tips are useful!
+</div>
+
+**Important Information**
+
+Important Information are messages that are crucial for you to know in order to use our application smoothly.
+
+<div markdown="span" class="alert alert-info">:information_source: **Info:**
+Important Information: Remember the importance of this icon!
+</div>
+
+### 3.2 Application homepage explanation
+
+-To be completed-
+
+### 3.3 Command format
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add m/MODULE`, `MODULE` is a parameter which can be used as `add m/GEQ1000`.
+* Words in `UPPER_CASE` are the inputs to be entered by the user.<br>
+  e.g. in `add m/MODULE`, `MODULE` is a parameter which is entered by the user(such as `add m/GEQ1000` or `add m/CS2030S`).
 
 * Items in square brackets are optional.<br>
   e.g. `c/CODE [tag/TAG]` can be used as `c/CS2103T tag/core` or as `c/CS2103T`.
 * If a parameter is expected only once in the command but you specified it multiple times, only the last occurrence of the parameter will be taken.<br>
   e.g. if you specify `m/GEQ1000 m/GEQ1000`, only `m/GEQ1000` will be taken.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Inputs for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 </div>
 
-### Viewing help : `help`
+### 3.4 Command terminology
 
-Shows a message explaining how to access the help page.
+`c/`
+* Represents code
 
-![help message](images/helpMessage.png)
+`t/`
+* Represents Title
 
-Format: `help`
+`d/`
+* Represents Description
 
-### Listing current modules: `list`
+`n/`
+* Represents MC
+
+`tag/`
+* Represents Tag
+
+`y/`
+* Represents Academic Year
+
+`s/`
+* Represents Semester
+
+--------------------------------------------------------------------------------------------------------------------
+
+## 4. Features
+
+This section gives you a detailed explanation on how each of our features work.
+
+For an easy reference, we have decided to split our features into 3 different sub-categories:
+* Academic Calendar features
+* Module features
+* Miscellaneous features
+
+### 4.1 Academic Calendar
+
+#### 4.1.1 Listing current modules: `list`
 
 Shows a list of all modules taken for the current semester.
 
 Format: `list`
-
-### Adding a module: `add`
-
-Adds a module to the module tracker.
-
-Format: `FORMAT: add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]`
-* Commands must follow the specified format, **no fields should be left blank**.
-* **MC** must be a **positive integer** (1,2,3...).
-* **CODE** must follow the NUSMods module code format.
-
-Examples:
-* `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core`
-
-### Finding a module: `find`
-
-Shows a list of all the modules that contains the given keyword.
-
-Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS`
-* **KEYWORDS** refers to the words that the application will search the modules by.
-* If no optional parameters are entered, the application will search within all the modules'
-  components for matching **KEYWORDS**
-* If optional parameters are entered, the application will search within the modules'
-  specified components for matching **KEYWORDS**
-
-Examples:
-* `find CS` displays any modules that contain the word "CS" in the code, title, description, mc or tag.
-* `find c/ t/ CS GE` displays any modules that contain the words "CS" or "GE" in the code or title.
-* `find c/ CS2040S` displays any modules that contain the word "CS2040S" in the code.
-* `find tag/ UE` displays any modules that contain the word "UE" in the tag.
-
-
-### Editing a module : `edit`
-
-Edits an existing module in the mod tracker.
-
-Format: `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]`
-
-* At least one of the optional fields must be provided.
-* The given value for the field must be different from the original one.
-* The given value for `CODE` field must not be duplicated with existing `CODE`
-* The INDEX refers to the index number shown in the displayed module list.
-* The INDEX must be a positive integer (1, 2, 3 ...).
-
-Examples:
-* `edit 2 c/CS2103T t/Software Engineering` Edits the code and title of the 1st module to be CS2103T and Software Engineering respectively.
-* `edit 3 n/2` Edits the MC for the 3rd module to be 2.
-
-
-### Deleting a module : `delete`
-
-Deletes a module from the module tracker
-
-Format: `delete INDEX`
-
-* Deletes a module at the specified `INDEX`.
-* The index refers to the index number shown in the displayed module list.
-* The index **must be a positive integer** 1, 2, 3, …​
-
-Example:
-* `delete 2` deletes the 2nd module in the module tracker.
-
 
 ### Taking a module : `take`
 
@@ -209,7 +223,7 @@ Shows a message containing user's Mc goal and current semester.
 
 ![info message](images/infoMessage.png)
 
-Format: `help`
+Format: `info`
 
 ### Setting user's Mc goal OR current semester : `set`
 
@@ -239,8 +253,79 @@ Examples:
 * `view y/2 s/1` - see all the modules the user have taken in year 2 semester 1.
 * `view y/2 s/3` - see all the modules taken in year 2 special Term 1.
 
+### 4.2 Module
 
-### Track the course completion
+### Adding a module: `add`
+
+Adds a module to the module tracker.
+
+Format: `FORMAT: add c/CODE t/TITLE d/DESCRIPTION n/MC [tag/TAG]`
+* Commands must follow the specified format, **no fields should be left blank**.
+* **MC** must be a **positive integer** (1,2,3...).
+* **CODE** must follow the NUSMods module code format.
+
+Examples:
+* `add c/CS2103T t/Software Engineering d/Covers the main areas of software development n/4 tag/core`
+
+### Finding a module: `find`
+
+Shows a list of all the modules that contains the given keyword.
+
+Format: `FORMAT: find [c/] [t/] [d/] [n/] [tag/] [y/] [s/] KEYWORDS`
+* **KEYWORDS** refers to the words that the application will search the modules by.
+* If no optional parameters are entered, the application will search within all the modules'
+  components for matching **KEYWORDS**
+* If optional parameters are entered, the application will search within the modules'
+  specified components for matching **KEYWORDS**
+
+Examples:
+* `find CS` displays any modules that contain the word "CS" in the code, title, description, mc or tag.
+* `find c/ t/ CS GE` displays any modules that contain the words "CS" or "GE" in the code or title.
+* `find c/ CS2040S` displays any modules that contain the word "CS2040S" in the code.
+* `find tag/ UE` displays any modules that contain the word "UE" in the tag.
+
+
+### Editing a module : `edit`
+
+Edits an existing module in the mod tracker.
+
+Format: `edit INDEX [c/CODE] [t/TITLE] [d/Description] [n/MC] [tag/TAG]`
+
+* At least one of the optional fields must be provided.
+* The given value for the field must be different from the original one.
+* The given value for `CODE` field must not be duplicated with existing `CODE`
+* The INDEX refers to the index number shown in the displayed module list.
+* The INDEX must be a positive integer (1, 2, 3 ...).
+
+Examples:
+* `edit 1 c/CS2103T t/Software Engineering` Edits the code and title of the 1st module to be CS2103T and Software Engineering respectively.
+* `edit 3 n/2` Edits the MC for the 3rd module to be 2.
+
+
+### Deleting a module : `delete`
+
+Deletes a module from the module tracker
+
+Format: `delete INDEX`
+
+* Deletes a module at the specified `INDEX`.
+* The index refers to the index number shown in the displayed module list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `delete 2` deletes the 2nd module in the module tracker.
+
+### 4.3 Miscellaneous
+
+#### 4.3.1 Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+![help message](images/helpMessage.png)
+
+Format: `help`
+
+#### 4.3.2 Track the course completion
 
 Tracks the number of Mcs completed in total, and for each course requirement. <br>
 The user's progress will be displayed in the panel on the right.
@@ -281,14 +366,18 @@ Notes:
 * If the Mc requirement is not satisfied, the completed Mcs and progress bar will be coloured pink.
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## 5. FAQ
+
+This section gives you the solutions to commonly asked questions.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## 6. Command summary
+
+This section gives you a summary on how to use each of the features.
 
 Action | Format, Examples
 --------|------------------
