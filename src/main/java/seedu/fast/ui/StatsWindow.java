@@ -140,6 +140,7 @@ public class StatsWindow extends UiPart<Stage> {
         PriorityData pData = fast.getPriorityData();
         addPriorityPieChartAnalysis(pData);
         addPriorityPieChartData(pData);
+        priorityPieChart.setLabelLineLength(30);
     }
 
     /**
@@ -150,6 +151,7 @@ public class StatsWindow extends UiPart<Stage> {
         InvestmentPlanData iData = fast.getInvestmentPlanData();
         addInvestmentPlanPieChartAnalysis(iData);
         addInvestmentPlanPieChartData(iData);
+        investmentPlanPieChart.setLabelLineLength(30);
     }
 
 
