@@ -1,7 +1,5 @@
 package seedu.anilist.model.stats;
 
-import seedu.anilist.model.genre.Genre;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -10,7 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import seedu.anilist.model.genre.Genre;
+
 public class Stats {
+    private static final int genreCountLimit = 6;
+
     //stats to be displayed
     private final int watchingCount;
     private final int toWatchCount;
@@ -20,10 +22,11 @@ public class Stats {
 
     private final int numUniqueGenres;
 
-    private static final int genreCountLimit = 6;
-
     private final HashMap<Genre, Integer> topGenres;
 
+    /**
+     * Creates a Stats object containing the user statistics.
+     */
     public Stats(int watchingCount, int toWatchCount, int finishedCount, int episodesCount,
                  HashMap<Genre, Integer> genres) {
         this.watchingCount = watchingCount;

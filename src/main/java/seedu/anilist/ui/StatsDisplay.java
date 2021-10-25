@@ -2,23 +2,17 @@ package seedu.anilist.ui;
 
 import static seedu.anilist.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.logging.Logger;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Side;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.genre.Genre;
@@ -32,7 +26,7 @@ public class StatsDisplay extends UiPart<Stage> {
     private static final String TOTAL_ANIMES_MSG = "You have %d anime(s) in AniList!";
     private static final String EPISODES_WATCHED_MSG = "Episode(s) watched: %d";
     private static final String NUM_ANIMES_WATCHING_MSG = "Watching (%d)";
-    private static final String NUM_ANIMES_TOWATCH_MSG  = "To Watch (%d)";
+    private static final String NUM_ANIMES_TOWATCH_MSG = "To Watch (%d)";
     private static final String NUM_ANIMES_FINISHED_MSG = "Finished (%d)";
     private static final String GENRES_MSG = "You have tagged animes with %d unique genre(s) in total.\n"
                                             + "Here are your top anime genres.";

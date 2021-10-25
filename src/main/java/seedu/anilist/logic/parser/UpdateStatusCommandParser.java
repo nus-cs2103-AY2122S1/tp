@@ -9,7 +9,7 @@ import seedu.anilist.logic.commands.UpdateStatusCommand;
 import seedu.anilist.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new UpdateStatusCommand object
  */
 public class UpdateStatusCommandParser implements Parser<UpdateStatusCommand> {
 

@@ -1,10 +1,8 @@
 package seedu.anilist.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.anilist.model.Model.PREDICATE_SHOW_ALL_ANIME;
 
 import seedu.anilist.model.Model;
-import seedu.anilist.ui.TabOption;
 
 /**
  * Displays the statistics of animes in the anime list.

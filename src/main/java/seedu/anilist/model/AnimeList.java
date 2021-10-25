@@ -97,6 +97,10 @@ public class AnimeList implements ReadOnlyAnimeList {
         animeList.remove(key);
     }
 
+    /**
+     * Fetches the user stats from the anime list
+     * @return the user stats
+     */
     public Stats fetchUserStats() {
         int watchingCount = 0;
         int toWatchCount = 0;

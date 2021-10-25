@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
@@ -17,10 +16,7 @@ import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
-import seedu.anilist.model.AnimeList;
-import seedu.anilist.model.ReadOnlyAnimeList;
 import seedu.anilist.model.anime.Anime;
-import seedu.anilist.model.anime.Status;
 
 /**
  * Panel containing the list of anime.

@@ -491,7 +491,7 @@ chart-pie-label-line {
     -fx-alignment: CENTER;
     -fx-stroke: WHITE;
     -fx-text-fill: WHITE;
-    -fx-tile-alignment: LEFT;
+
     -fx-tick-label-fill: white;
     -fx-background-radius: 5px;
 }

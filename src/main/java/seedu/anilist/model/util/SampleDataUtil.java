@@ -58,7 +58,7 @@ public class SampleDataUtil {
             new Anime(new Name("Blue Period"),
                     new Episode("0"),
                     new Status("t"),
-                    getGenreSet( "drama", "slice of life")),
+                    getGenreSet("drama", "slice of life")),
             new Anime(new Name("Komi-san wa, Comyushou desu."),
                     new Episode("0"),
                     new Status("t"),
@@ -66,16 +66,17 @@ public class SampleDataUtil {
         };
     }
 
-    //for testing
-//    public static Anime[] getSampleAnime() {
-//        Anime[] animeArr = new Anime[100];
-//        String animeName = "x";
-//        for (int i = 0; i < 100; i++) {
-//            animeArr[i] = new Anime(new Name(animeName), new Episode("0"), new Status("t"), getGenreSet("comedy", "slice of life"));
-//            animeName += "x";
-//        }
-//        return animeArr;
-//    }
+    //    for testing
+    //    public static Anime[] getSampleAnime() {
+    //        Anime[] animeArr = new Anime[100];
+    //        String animeName = "x";
+    //        for (int i = 0; i < 100; i++) {
+    //            animeArr[i] = new Anime(new Name(animeName),
+    //            new Episode("0"), new Status("t"), getGenreSet("comedy", "slice of life"));
+    //            animeName += "x";
+    //        }
+    //        return animeArr;
+    //     }
 
     public static ReadOnlyAnimeList getSampleAnimeList() {
         AnimeList sampleAb = new AnimeList();

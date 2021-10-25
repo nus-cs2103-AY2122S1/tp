@@ -2,10 +2,7 @@ package seedu.anilist.ui;
 
 import java.util.logging.Logger;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.MenuItem;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.GuiSettings;
@@ -14,8 +11,6 @@ import seedu.anilist.logic.Logic;
 import seedu.anilist.logic.commands.CommandResult;
 import seedu.anilist.logic.commands.exceptions.CommandException;
 import seedu.anilist.logic.parser.exceptions.ParseException;
-import seedu.anilist.model.AnimeList;
-import seedu.anilist.model.anime.Anime;
 
 /**
  * The Main Window. Provides the basic application layout containing
