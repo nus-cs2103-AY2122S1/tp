@@ -395,6 +395,7 @@ Action | Format, Examples
 **CompletedOrders** | `completedorders`
 **IncompleteOrders** | `incompleteorders`
 **SortOrders** | `sortorders`
+**ViewTotalOrders** | `totalorders`
 
 ###General Commands
 
