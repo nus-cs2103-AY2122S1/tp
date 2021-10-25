@@ -178,6 +178,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isClashAppointment(Appointment appointment) {
+        requireAllNonNull(appointment);
+        return plannerMd.isClashAppointment(appointment);
+    }
+
+    @Override
     public void deleteAppointment(Appointment target) {
         plannerMd.removeAppointment(target);
     }
@@ -252,6 +258,7 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return plannerMd.equals(other.plannerMd)
                 && userPrefs.equals(other.userPrefs)
                 && state.equals(other.state)

@@ -35,7 +35,7 @@ public class FilterAppointmentCommandTest {
     // Test appointment should have a different patient name and doctor than those in typical appointments
     // Test appointment should also have a later starting date than those in typical appointments
     private final Appointment testAppointment = new AppointmentBuilder()
-            .withPatient(new PatientBuilder().withName("George").build())
+            .withPatient(new PatientBuilder().withName("Shane").build())
             .withDoctor(new DoctorBuilder().withName("Pete").build())
             .withDate(startDateString).withSession("18:00", 10).build();
 
@@ -67,7 +67,7 @@ public class FilterAppointmentCommandTest {
 
         // Results found match test appointment
         AppointmentFilters filter = new AppointmentFiltersBuilder().withStartDate(sampleStartDate)
-                .withEndDate(sampleStartDate.plusDays(2)).withPatientKeywords("George")
+                .withEndDate(sampleStartDate.plusDays(2)).withPatientKeywords("Shane")
                 .withDoctorKeywords("Pete").build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
@@ -89,7 +89,7 @@ public class FilterAppointmentCommandTest {
         reinitialiseModel();
 
         // Results found match test appointment
-        AppointmentFilters filter = new AppointmentFiltersBuilder().withPatientKeywords("George").build();
+        AppointmentFilters filter = new AppointmentFiltersBuilder().withPatientKeywords("Shane").build();
         expectedModel.updateFilteredAppointmentList(filter.collectAllFilters());
         String expectedMessage = String.format(MESSAGE_APPOINTMENTS_LISTED_OVERVIEW, 1);
         FilterAppointmentCommand command = new FilterAppointmentCommand(filter);

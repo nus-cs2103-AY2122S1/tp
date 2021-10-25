@@ -1,6 +1,5 @@
 package seedu.plannermd.logic.commands;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.plannermd.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.plannermd.testutil.doctor.TypicalDoctors.DR_CARL;
@@ -12,6 +11,7 @@ import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.plannermd.logic.commands.apptcommand.AppointmentFilters;
 import seedu.plannermd.logic.commands.apptcommand.ListAppointmentCommand;
 import seedu.plannermd.model.Model;
 import seedu.plannermd.model.ModelManager;
@@ -28,7 +28,7 @@ public class ListAppointmentCommandTest {
     private final Appointment todayAppointment = new AppointmentBuilder().withPatient(ALICE)
             .withDoctor(DR_CARL)
             .withDate(LocalDate.now().format(AppointmentDate.DATE_FORMATTER))
-            .withSession("18:00", 10).build();
+            .withSession("20:00", 10).build();
 
     private final Appointment nextDayAppointment = new AppointmentBuilder(todayAppointment)
             .withDate(LocalDate.now().plusDays(1).format(AppointmentDate.DATE_FORMATTER)).build();
@@ -40,14 +40,19 @@ public class ListAppointmentCommandTest {
     public void setUp() {
         model = new ModelManager(new PlannerMd(), new UserPrefs());
         expectedModel = new ModelManager(new PlannerMd(), new UserPrefs());
+
         model.addAppointment(todayAppointment);
         model.addAppointment(nextDayAppointment);
         model.addAppointment(yesterdayAppointment);
+
         expectedModel.addAppointment(todayAppointment);
+        expectedModel.addAppointment(nextDayAppointment);
+        expectedModel.addAppointment(yesterdayAppointment);
     }
 
     @Test
     public void execute_showTodayAppointment_successful() {
+        expectedModel.updateFilteredAppointmentList(AppointmentFilters.todayAppointmentFilter().collectAllFilters());
         assertCommandSuccess(new ListAppointmentCommand(), model,
                 ListAppointmentCommand.MESSAGE_SUCCESS, expectedModel);
         assertEquals(Collections.singletonList(todayAppointment), model.getFilteredAppointmentList());
