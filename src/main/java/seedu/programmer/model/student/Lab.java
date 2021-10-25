@@ -12,8 +12,6 @@ public class Lab {
             + "in the format XX.";
     public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
 
-    private static final String LAB_TITLE_VALIDATION_REGEX = "\\s{2}+";
-
     /**
      * @param title the title of the lab
      * @param actualScore  the score obtained by the student
@@ -22,7 +20,6 @@ public class Lab {
     public Lab(String title, Double actualScore, Double totalScore) {
         requireNonNull(actualScore);
         requireNonNull(totalScore);
-        checkArgument(isValidLab(title), LAB_TITLE_MESSAGE_CONSTRAINTS);
         checkArgument(isValidScore(actualScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
@@ -36,9 +33,7 @@ public class Lab {
      * */
     public Lab(String title, Double totalScore) {
         requireNonNull(title);
-        System.out.println(totalScore);
         requireNonNull(totalScore);
-        checkArgument(isValidLab(title), LAB_TITLE_MESSAGE_CONSTRAINTS);
         checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = Double.NaN;
@@ -105,7 +100,7 @@ public class Lab {
      * Returns true if a given string is a valid lab title.
      */
     public static boolean isValidLab (String title) {
-        return title.matches(LAB_TITLE_VALIDATION_REGEX);
+        return title.length() == 2;
     }
 
     /**
