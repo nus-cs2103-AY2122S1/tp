@@ -43,6 +43,7 @@ public class CommandTestUtil {
     public static final String VALID_GRADE_BOB = "S1";
     public static final String VALID_REMARK_HUSBAND = "husband";
     public static final String VALID_REMARK_FRIEND = "friend";
+    public static final String VALID_REMARK_FINANCIAL_AID = "FA";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,6 +57,7 @@ public class CommandTestUtil {
     public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
     public static final String REMARK_DESC_FRIEND = " " + PREFIX_REMARK + VALID_REMARK_FRIEND;
     public static final String REMARK_DESC_HUSBAND = " " + PREFIX_REMARK + VALID_REMARK_HUSBAND;
+    public static final String REMARK_DESC_FINANCIAL_AID = " " + PREFIX_REMARK + VALID_REMARK_FINANCIAL_AID;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

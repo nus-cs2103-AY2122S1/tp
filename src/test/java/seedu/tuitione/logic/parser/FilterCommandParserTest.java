@@ -22,31 +22,35 @@ public class FilterCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsFilterCommand() {
-        FilterCommand expectedFilterCommandTest1 =
-                new FilterCommand(new Grade("S2"), null);
+        FilterCommand expectedFilterCommandTest1 = new FilterCommand(new Grade("S2"), null);
+        FilterCommand expectedFilterCommandTest2 = new FilterCommand(null, new Subject("English"));
+        FilterCommand expectedFilterCommandTest3 = new FilterCommand(new Grade("S2"), new Subject("English"));
 
         // no leading and trailing whitespaces, only grade used to filter
         assertParseSuccess(parser, " g/S2", expectedFilterCommandTest1);
 
         // multiple whitespaces, only grade used to filter
-        assertParseSuccess(parser, "     g/S2   ", expectedFilterCommandTest1);
+        assertParseSuccess(parser, "     g/S2    ", expectedFilterCommandTest1);
 
-        FilterCommand expectedFilterCommandTest2 =
-                new FilterCommand(null, new Subject("English"));
-
-        // only subject used to filter
+        // no leading and trailing whitespaces, only subject used to filter
         assertParseSuccess(parser, " s/English", expectedFilterCommandTest2);
 
+        // multiple whitespaces, only subject used to filter
+        assertParseSuccess(parser, "    s/English   ", expectedFilterCommandTest2);
 
-        FilterCommand expectedFilterCommandTest3 =
-                new FilterCommand(new Grade("S2"), new Subject("English"));
-
-        // both grade and student used to filter
+        // no leading and trailing whitespaces, both grade and student used to filter
         assertParseSuccess(parser, " g/S2 s/English", expectedFilterCommandTest3);
+
+        // multiple whitespaces, both grade and student used to filter
+        assertParseSuccess(parser, "   g/S2    s/English  ", expectedFilterCommandTest3);
     }
 
     @Test
     public void parse_invalidGrade_throwsParseException() {
+        // without input for subject field
         assertParseFailure(parser, " g/A5", Grade.GRADE_MESSAGE_CONSTRAINTS);
+
+        // with input for subject field
+        assertParseFailure(parser, " g/A5 s/English", Grade.GRADE_MESSAGE_CONSTRAINTS);
     }
 }
