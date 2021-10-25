@@ -53,15 +53,16 @@ This guide aims to help users get familiar with using RecruitIn's features.
     
     * **`list`** : Lists all applicants.
     
-    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn.
+    * **`add`**`n/John Doe p/98765432 e/johnd@example.com s/3000` : Adds an applicant named `John Doe` to RecruitIn,
+    where `98765432`is his phone number, `johnd@example.com` is his email and `3000` is his expected salary.
    
-    * **`find`**`n/John Mary` : Finds all applicants with either `John` or `Mary` as values for name prefix.
+    * **`find`**`n/John Mary` : Finds all applicants whose names are `John` or `Mary`.
 
     * **`delete`**`3` : Deletes the 3rd applicant shown in the list of all applicants.
 
-    * **`show`**`n/` : Displays a list of all unique applicant names.
+    * **`show`**`n/` : Displays all unique applicant names in RecruitIn.
 
-    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants.
+    * **`mark`**`1` : Marks the 1st applicant shown in the list of all applicants as done.
 
     * **`unmark`**`1` : Unmarks the 1st applicant shown in the list of all applicants.
 
@@ -112,7 +113,7 @@ Format: `help`
 
 Adds an applicant to RecruitIn.
 
-Format: `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​`
 
 Examples:
 * `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 i/2021-10-21 20:00`
@@ -125,11 +126,11 @@ Examples:
   * For example:
     * NAME inputs such as `John`, `Mary Sue` and `9ine 6ix` are acceptable.
     * NAME inputs such as `J@hn`, `Mary S^e` and `B{}b` are not acceptable.
-* ##### CONTACT_NUMBER `p/`
-  * A CONTACT_NUMBER should contain a minimum of 3 digits. No characters other than the digits 0-9 are allowed.
+* ##### PHONE_NUMBER `p/`
+  * A PHONE_NUMBER should contain a minimum of 3 digits. No characters other than the digits 0-9 are allowed.
   * For example:
-    * CONTACT_NUMBER inputs such as `99999999` and `999` are acceptable.
-    * CONTACT_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
+    * PHONE_NUMBER inputs such as `99999999` and `999` are acceptable.
+    * PHONE_NUMBER inputs such as `9999 9999` and `88` are not acceptable.
 * ##### EMAIL_ADDRESS `e/`
   * An EMAIL_ADDRESS should contain a **local part** and a **domain part**, separated by an `@` character.
   * The **local part**:
@@ -152,7 +153,7 @@ Examples:
   * An EMPLOYMENT_TYPE should be one of the following: `Full time`, `Part time`, `Temporary` or `Internship`.
   * An EMPLOYMENT_TYPE is **case-insensitive**.
   * For example:
-    * EMPLOYMENT_TYPE inputs such as 'Full time` and `Internship` are acceptable.
+    * EMPLOYMENT_TYPE inputs such as `Full time` and `Internship` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `fUlL tiMe` and `iNtErnShIP` are acceptable.
     * EMPLOYMENT_TYPE inputs such as `Long term` are not acceptable.
 * ##### EXPECTED_SALARY `s/`
@@ -195,7 +196,7 @@ Format: `list`
 
 Finds applicants by specific prefixes.
 
-Format: `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW]`
+Format: `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE]  [t/TAG]  [i/INTERVIEW]`
 
 * Find command must take **at least 1** prefix input.
 * If you input multiple of the same prefix, **only the last** prefix will be used for the search of that category.
@@ -219,9 +220,9 @@ Examples:
     * A `John` input can match with *Name*s such as `John Tan` or `John Lee`. 
     * A `John Mary` input can match with *Name*s such as `Mary John`, `Mary Lee` or `Long John`.
 
-* ##### CONTACT_NUMBER `p/`
-  * A CONTACT_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
-  * All keywords provided as CONTACT_NUMBER input must comply with input specifications for add given [**here**](#contact_number-p).
+* ##### PHONE_NUMBER `p/`
+  * A PHONE_NUMBER is considered matching with a ***Contact Number*** only if **at least 1** keyword is equal to **at least 1** word in the ***Contact Number***
+  * All keywords provided as PHONE_NUMBER input must comply with input specifications for add given [**here**](#phone_number-p).
   * For example:
     * A `99999999` input can only match with *Contact Number*s that are `99999999`.
     * A `99999999 88888888` input can only match with *Contact Number*s that are `99999999` and `88888888`.
@@ -312,9 +313,9 @@ Format: `delete INDEX...`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `delete 1` deletes the 1st applicant listed in RecruitIn.
-* `find n/John` followed by `delete 1` deletes the 1st applicant in the results of the `find` command.
-* `list` followed by `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
+* After using the command `list`, `delete 1` deletes the 1st applicant listed in RecruitIn.
+* After using the command `find n/John`, `delete 1` deletes the 1st applicant in the results of the `find` command.
+* After using the command `list`, `delete 2 4 7` deletes the 2nd, 4th and 7th applicants listed in RecruitIn.
 
 ### Showing search terms : `show`
 
@@ -346,9 +347,9 @@ Format: `mark INDEX…​`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
-* `find n/John` followed by `mark 1` marks the 1st applicant in the results of the `find` command.
-* `list` followed by `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
+* After using the command `list`, `mark 2` marks the 2nd applicant listed in RecruitIn as "Done".
+* After using the command `find n/John`, `mark 1` marks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `mark 2 4 6` marks the 2nd, 4th and 6th applicant listed in RecruitIn as "Done".
 
 ### Unmarking an applicant : `unmark`
 
@@ -364,9 +365,9 @@ Format: `unmark INDEX…​`
 * `INDEX` should not exceed the total number of applicants in the displayed applicants list.
 
 Examples:
-* `list` followed by `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
-* `find n/John` followed by `unmark 1` unmarks the 1st applicant in the results of the `find` command.
-* `list` followed by `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
+* After using the command `list`, `ummark 2` unmarks the 2nd applicant listed in RecruitIn to "Not Done".
+* After using the command `find n/John`, `unmark 1` unmarks the 1st applicant in the results of the `find` command.
+* After using the command `list`, `unmark 2 4 6` unmarks the 2nd, 4th and 6th applicant listed in RecruitIn to "Not Done".
 
 ### Deleting marked applicants: `delete_marked`
 
@@ -419,7 +420,7 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RecruitIn home folder.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -428,12 +429,12 @@ If your changes to the data file makes its format invalid, RecruitIn will discar
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/CONTACT_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL_ADDRESS r/ROLE et/EMPLOYMENT_TYPE s/EXPECTED_SALARY l/LEVEL_OF_EDUCATION y/YEARS_OF_EXPERIENCE [t/TAG] [i/INTERVIEW]​` <br> e.g., `add n/Bob p/87654321 e/bob@gmail.com r/Software Engineering et/Full time s/4000 l/High School y/2 t/friend i/2021-10-21, 20:00`
 **List** | `list`
 **Delete** | `delete INDEX...`<br> e.g., `delete 3 2 5 4`
-**Find** | `find [n/NAME] [p/CONTACT_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
+**Find** | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL_ADDRESS] [r/ROLE] [et/EMPLOYMENT_TYPE] [s/EXPECTED_SALARY] [l/LEVEL_OF_EDUCATION] [y/YEARS_OF_EXPERIENCE] [t/TAG] [i/INTERVIEW]`<br> e.g., `find n/John Mary`
 **Show** | `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`<br> e.g., `show r/ n/`
 **Mark** | `mark INDEX…​`<br> e.g., `mark 3`
 **Unmark** | `unmark INDEX…​`<br> e.g., `unmark 3`
-**Delete Marked** | `delete_marked`
+**Delete marked** | `delete_marked`
 **Help** | `help`
