@@ -153,7 +153,7 @@ public class ShowCommand extends Command {
 
     private List<String> getUniqueRoleInputs(ObservableList<Person> ol) {
         return ol.stream()
-                .map(x -> x.getRole().toString()).distinct().sorted().sorted().collect(Collectors.toList());
+                .map(x -> x.getRole().toString()).distinct().sorted().collect(Collectors.toList());
     }
 
     private List<String> getUniqueEmploymentTypeInputs(ObservableList<Person> ol) {
