@@ -204,7 +204,7 @@ public class CalendarEntryList {
     }
 
     public Optional<Entry<Lesson>> convertMakeUpLessonToEntry(Person owner, Lesson lesson) {
-        if (lesson.getCancelledDates().size() == 0) {
+        if (lesson.getCancelledDates().size() != 0) {
             return Optional.empty();
         }
         return Optional.of(convertToEntry(owner, lesson));

@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CANCEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HOMEWORK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RECURRING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBJECT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_UNCANCEL;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.LessonEditCommand;
 import seedu.address.logic.commands.LessonEditCommand.EditLessonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.lesson.Date;
 import seedu.address.model.lesson.Homework;
 
 /**
@@ -34,7 +37,7 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_RECURRING, PREFIX_DATE, PREFIX_TIME,
-                PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES);
+            PREFIX_SUBJECT, PREFIX_HOMEWORK, PREFIX_RATES, PREFIX_CANCEL, PREFIX_UNCANCEL);
 
         // don't allow changes to type of lesson
         if (argMultimap.getValue(PREFIX_RECURRING).isPresent()) {
@@ -71,6 +74,12 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             editLessonDescriptor.setRate(ParserUtil.parseLessonRates(argMultimap.getValue(PREFIX_RATES).get()));
         }
 
+        parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_CANCEL))
+                .ifPresent(editLessonDescriptor::setCancelledDates);
+
+        parseDatesForLessonEdit(argMultimap.getAllValues(PREFIX_UNCANCEL))
+                .ifPresent(editLessonDescriptor::setUncancelledDates);
+
         if (!editLessonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(LessonEditCommand.MESSAGE_NOT_EDITED);
         }
@@ -96,5 +105,22 @@ public class LessonEditCommandParser implements Parser<LessonEditCommand> {
             ? Collections.emptySet()
             : homework;
         return Optional.of(ParserUtil.parseHomeworkList(homeworkSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> homework} into a {@code Set<Homework>} if {@code homework} is non-empty.
+     * If {@code homework} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Homework>} containing zero homework.
+     */
+    private Optional<Set<Date>> parseDatesForLessonEdit(Collection<String> dates) throws ParseException {
+        assert dates != null;
+
+        if (dates.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> homeworkSet = dates.size() == 1 && dates.contains("")
+                ? Collections.emptySet()
+                : dates;
+        return Optional.of(ParserUtil.parseDates(homeworkSet));
     }
 }

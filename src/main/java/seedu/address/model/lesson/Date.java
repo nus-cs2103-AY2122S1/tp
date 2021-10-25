@@ -11,6 +11,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.TemporalAdjusters;
 import java.util.Locale;
+import java.util.Set;
 
 /**
  * Represents a Lesson's date in the address book.
@@ -82,8 +83,13 @@ public class Date implements Comparable<Date> {
      *
      * @return newDate The date of the same day on the week that has yet to pass.
      */
-    public Date updateDate() {
+    public Date updateDate(Set<Date> datesToSkip) {
         LocalDate updatedDate = LocalDate.now().with(TemporalAdjusters.nextOrSame(getDayOfWeek()));
+
+        while (datesToSkip.contains(new Date(updatedDate.format(FORMATTER)))) { // todo: improve design
+            updatedDate = updatedDate.plusWeeks(1);
+        }
+
         Date newDate = new Date(updatedDate.format(FORMATTER));
         return newDate;
     }

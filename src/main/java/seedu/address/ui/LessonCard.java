@@ -44,16 +44,19 @@ public class LessonCard extends UiPart<Region> {
         date.setText("Date: " + lesson.getDisplayDate().value);
         time.setText("Time: " + lesson.getTimeRange().toString());
         rates.setText("Rates: $" + lesson.getLessonRates().toString());
-        lesson.getHomework().stream()
-            .sorted(Comparator.comparing(homework -> homework.description))
-            .forEach(homework -> homeworkList.getChildren()
-                .add(homeworkLabel(homework.toString())));
         cancelledDates.setText("");
         if (lesson.isRecurring()){
-            cancelledDates.setText("Cancelled Dates: " + String.join("," + lesson.getCancelledDates()));
+            final StringBuilder builder = new StringBuilder();
+            builder.append("\nCancelled Dates:\n");
+            lesson.getCancelledDates().forEach(date -> builder.append(date + ",\n"));
+            cancelledDates.setText(builder.toString());
         } else if (lesson.getCancelledDates().size() > 0) {
             cancelledDates.setText("Cancelled!");
         }
+        lesson.getHomework().stream()
+                .sorted(Comparator.comparing(homework -> homework.description))
+                .forEach(homework -> homeworkList.getChildren()
+                        .add(homeworkLabel(homework.toString())));
     }
 
     private Label homeworkLabel(String homework) {

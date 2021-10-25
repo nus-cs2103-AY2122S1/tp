@@ -44,7 +44,7 @@ public class RecurringLesson extends Lesson {
      */
     @Override
     public Date getDisplayDate() {
-        return getStartDate().updateDate();
+        return getStartDate().updateDate(getCancelledDates());
     }
 
     /**
@@ -59,8 +59,14 @@ public class RecurringLesson extends Lesson {
             return getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         } else {
+            // makeup lesson is cancelled
+            if (otherLesson.getCancelledDates().contains(otherLesson.getStartDate())) {
+                return false;
+            }
+
             return getLocalDate().compareTo(otherLesson.getLocalDate()) <= 0 // same date or before
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
+                    && !getCancelledDates().contains(otherLesson.getStartDate())
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
     }

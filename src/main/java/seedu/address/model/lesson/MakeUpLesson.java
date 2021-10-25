@@ -57,11 +57,20 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public boolean isClashing(Lesson otherLesson) {
+        // makeup lesson is cancelled
+        if (getCancelledDates().contains(getStartDate())) {
+            return false;
+        }
         if (otherLesson.isRecurring()) {
             return getLocalDate().compareTo(otherLesson.getLocalDate()) >= 0 // same date or after
                     && getDayOfWeek().equals(otherLesson.getDayOfWeek()) // same day
-                    && getTimeRange().isClashing(otherLesson.getTimeRange());
+                    && getTimeRange().isClashing(otherLesson.getTimeRange())
+                    && !otherLesson.getCancelledDates().contains(getStartDate()); // recurring cancelled dates
         } else {
+            // other makeup lesson is cancelled
+            if (otherLesson.getCancelledDates().contains(otherLesson.getStartDate())) {
+                return false;
+            }
             return getLocalDate().equals(otherLesson.getLocalDate())
                     && getTimeRange().isClashing(otherLesson.getTimeRange());
         }
