@@ -88,6 +88,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Resets today's attendance for all members in list.
+     */
+    public void resetTodayAttendance() {
+        this.persons.resetAttendance();
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {

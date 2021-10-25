@@ -25,6 +25,7 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddMemberCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -35,7 +36,7 @@ public class AddMemberCommandParserTest {
     private AddMemberCommandParser parser = new AddMemberCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresent_success() throws ParseException {
         Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_Y2).build();
 
         // whitespace only preamble

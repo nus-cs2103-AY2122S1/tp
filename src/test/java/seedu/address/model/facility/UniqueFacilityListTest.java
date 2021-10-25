@@ -7,6 +7,7 @@ import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_OUTDOOR_TENNIS
 import static seedu.address.testutil.TypicalFacilities.KENT_RIDGE_SPORT_HALL_5_COURT_1;
 import static seedu.address.testutil.TypicalFacilities.TAMPINES_HUB_FIELD_SECTION_B;
 
+import java.time.DayOfWeek;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
@@ -51,18 +52,18 @@ public class UniqueFacilityListTest {
 
     @Test
     public void allocateMembersToFacilities_addsMembersToFacilities_success() {
-        uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
-        uniqueFacilityList.add(TAMPINES_HUB_FIELD_SECTION_B);
+        uniqueFacilityList.add(new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build());
+        uniqueFacilityList.add(new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build());
 
         ObservableList<Person> members = FXCollections.observableArrayList();
-        Person firstMember = new PersonBuilder().build();
-        firstMember.setDays(Arrays.asList("Mon", "Tue"));
-        Person secondMember = new PersonBuilder().build();
-        secondMember.setDays(Arrays.asList("Mon", "Thu"));
+        Person firstMember = new PersonBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
+                DayOfWeek.FRIDAY)).build();
+        Person secondMember = new PersonBuilder().withAvailability(Arrays.asList(DayOfWeek.MONDAY,
+                DayOfWeek.THURSDAY)).build();
         members.add(firstMember);
         members.add(secondMember);
 
-        Facility updatedFacility = KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1;
+        Facility updatedFacility = new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build();
         updatedFacility.addPersonToFacility(firstMember);
         updatedFacility.addPersonToFacility(secondMember);
         UniqueFacilityList expected = new UniqueFacilityList();

@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: page 
 title: User Guide
 ---
 
@@ -17,7 +17,7 @@ the end-to-end setup process to get you started.
 _____________________________________________________________________________________________________________
 ## Table of Contents
 * Table of Contents
-  {:toc}
+{:toc}
 
 _____________________________________________________________________________________________________________
 
@@ -254,20 +254,9 @@ Format: `listm`
 
 ### Sorting member list: `sortm`
 
-Shows a list of your members, sorted in your specified order.
+Shows a list of all members, sorted alphabetically
 
-Format: `sortm by/SORT_ORDER`
-
-* `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
-  
-* `SORT_ORDER` is case-insensitive. Eg. `Name` will match `name`
-* Valid `SORT_ORDER`: `name` ,`tag`
-
-Examples:
-* `sortm by/name` returns a member list sorted by name.
-* `sortm by/tag` returns a member list sorted by number of tags, in descending order.
-
-[Back to Table of Contents](#table-of-contents)
+Format: `sortm`
 
 ### Finding a member `findm`
 
@@ -379,9 +368,51 @@ Format: `split DAY`
 * `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
 
 Examples:
-
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user
+
+[Back to Table of Contents](#table-of-contents)
+  
+### Marking attendance of members : `mark`
+
+Marks attendance of members listed as present.
+
+Format: `mark INDEX/INDICES`
+
+* Marks the members at the specified `INDEX/INDICES` in the members list as present.
+* `INDEX` refers to the index number/position of the member in the displayed members list.
+* `INDICES` **must be positive integers** 1, 2, …​
+* `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+[Back to Table of Contents](#table-of-contents)
+
+### Unmarking attendance of members: `unmark`
+
+Unmarks attendance of members marked as present.
+
+Format `unmark INDEX/INDICES`
+
+*Unmarks the members at the specified `INDEX/INDICES` in the members list as absent.
+* `INDEX` refers to the index number/position of the member in the displayed members list.
+* `INDICES` **must be positive integers** 1, 2, …​
+* `INDICES` **must be separated only by whitespaces** 1 2 3 …​
+
+[Back to Table of Contents](#table-of-contents)
+
+###Clearing all attendance for today: `cleara`
+
+Clears all member's attendance for today.
+
+Format: `cleara`
+
+[Back to Table of Contents](#table-of-contents)
+
+###Clearing all entries in facility list: `clearf`
+
+Clears all entries in facility list.
+
+Format: `clearf`
+
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -393,11 +424,11 @@ file using `import`.
 Format: `import CSV_FILE_PATH`
 
 * Data imported from the CSV file **must** have 4 headers in this order:
-  1) Name
-  2) Phone number
-  3) Availability
-  4) Tags
-* When filling in the details of each member in the CSV file, the Names and Phone fields must be filled
+   1) Name
+   2) Phone number
+   3) Availability
+   4) Tags
+* When filling in the details of each member in the CSV file, the Names and Phone fields must be filled 
   while Availability and Tagsfields are optional.
 * `CSV_FILE_PATH` should be relative to the JAR file location.
 
@@ -406,7 +437,7 @@ Format: `import CSV_FILE_PATH`
 **:information_source: Note:** The details imported from the CSV file will overwrite any existing details of the members.
 </div>
 
-Examples:
+Examples: 
 
 * `import myFile.csv` imports member data from the CSV file in `[JAR_file_location]/myFile.csv`
 
@@ -508,8 +539,11 @@ Action | Format, Examples
 **Find facility**| `findf KEYWORD` <br> eg. `findf Clementi`, `findf Utown`
 **Help**| `help`
 **List members**| `listm`
-**Sort members**| `sortm by/SORT_ORDER` <br> eg. `sortm by/name`, `sortm by/tag` 
 **List facilities**| `listf`
+**Mark member attendance**| `mark INDEX/INDICES` <br> eg. `mark 1 2`
+**Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/Tue Wed`
+**Split members**| `split DAY` <br> eg. `split Mon`
+**Unmark member attendance**| `unmark INDEX/INDICES` <br> eg. `unmark 1 2`
 **Set member availability**| `setm INDEX/INDICES d/DAY(S)...` <br> eg.`setm 1 2 3 d/2 3 5`
 **Split members**| `split d/DAY` <br> eg. `split d/1`
 **Import multiple members**| `import CSV_FILE_PATH` <br> eg.`import myFile.csv`
