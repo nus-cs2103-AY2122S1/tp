@@ -32,12 +32,13 @@ public class TutorialClass {
     }
 
     /**
-     * Creates a dummy tutorial class for checking.
+     * Creates a tutorial class for checking.
      * @param classCode ClassCode of TutorialClass for checking.
      * @return The TutorialClass with a ClassCode.
      */
     public static TutorialClass createTestTutorialClass(ClassCode classCode) {
-        return new TutorialClass(classCode, new Schedule("dummy"), new HashSet<Tag>());
+        return new TutorialClass(classCode, new Schedule("tues 12:00pm to 2:00pm, friday 12:00pm to 2:00pm"),
+                new HashSet<Tag>());
     }
 
     public ClassCode getClassCode() {

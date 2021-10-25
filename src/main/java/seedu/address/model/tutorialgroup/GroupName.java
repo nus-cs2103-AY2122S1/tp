@@ -32,6 +32,10 @@ public class GroupName implements Comparable<GroupName> {
         return test.matches(GROUPNAME_REGEX);
     }
 
+    private Integer parseGroupName(String groupName) {
+        return parseInt(groupName);
+    }
+
     @Override
     public String toString() {
         return value;
@@ -51,13 +55,7 @@ public class GroupName implements Comparable<GroupName> {
 
     @Override
     public int compareTo(GroupName groupName) {
-        if (parseInt(this.value) > parseInt(groupName.value)) {
-            return 1;
-        } else if (parseInt(this.value) < parseInt(groupName.value)) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return parseGroupName(this.value).compareTo(parseGroupName(groupName.value));
     }
 
 }

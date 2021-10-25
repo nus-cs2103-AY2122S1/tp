@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
@@ -85,7 +88,7 @@ class AddGroupCommandTest {
         }
 
         @Override
-        public boolean hasTutorialClass(TutorialClass TutorialClass) {
+        public boolean hasTutorialClass(TutorialClass tutorialClass) {
             requireNonNull(tutorialClass);
             return this.tutorialClass.isSameTutorialClass(tutorialClass);
         }
@@ -98,7 +101,8 @@ class AddGroupCommandTest {
     }
 
     private class ModelStubAcceptingTutorialGroup extends ModelStub {
-        final ArrayList<TutorialClass> tutorialClassesAdded = new ArrayList<>(Arrays.asList(new TutorialClassBuilder().build()));
+        final ArrayList<TutorialClass> tutorialClassesAdded = new ArrayList<>(Arrays.asList(
+                new TutorialClassBuilder().build()));
         final ArrayList<TutorialGroup> tutorialGroupsAdded = new ArrayList<>();
 
         @Override

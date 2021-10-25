@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSCODE_DESC_G101;
 import static seedu.address.logic.commands.CommandTestUtil.CLASSCODE_DESC_G102;
@@ -8,30 +7,20 @@ import static seedu.address.logic.commands.CommandTestUtil.GROUPNAME_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.GROUPNAME_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.GROUPTYPE_DESC_OP1;
 import static seedu.address.logic.commands.CommandTestUtil.GROUPTYPE_DESC_OP2;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CLASSCODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUPNAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUPTYPE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_SCHEDULE;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.SCHEDULE_DESC_G1O1;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_MORNING;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G101;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPTYPE_OP1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_SCHEDULE_G101;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalTutorialGroups.G101_OP1_1;
+import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddClassCommand;
 import seedu.address.logic.commands.AddGroupCommand;
-import seedu.address.model.student.ClassCode;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tutorialclass.Schedule;
 import seedu.address.model.tutorialgroup.GroupName;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
@@ -39,12 +28,11 @@ import seedu.address.testutil.TutorialGroupBuilder;
 
 public class AddGroupCommandParserTest {
 
-
     private AddGroupCommandParser parser = new AddGroupCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        TutorialGroup expectedTutorialGroup = new TutorialGroupBuilder(G101_OP1_1).build();
+        TutorialGroup expectedTutorialGroup = new TutorialGroupBuilder(TUT_01).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUPNAME_DESC_1 + CLASSCODE_DESC_G101

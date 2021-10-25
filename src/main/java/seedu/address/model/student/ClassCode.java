@@ -2,8 +2,6 @@ package seedu.address.model.student;
 
 import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
-
 
 /**
  * Represents a Student's classcode in the ClassMATE.
@@ -46,12 +44,6 @@ public class ClassCode implements Comparable<ClassCode> {
 
     @Override
     public int compareTo(ClassCode classCode) {
-        if (parseInt(this.value.substring(1)) > parseInt(classCode.value.substring(1))) {
-            return 1;
-        } else if (parseInt(this.value.substring(1)) < parseInt(classCode.value.substring(1))) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Integer.compare(parseInt(this.value.substring(1)), parseInt(classCode.value.substring(1)));
     }
 }

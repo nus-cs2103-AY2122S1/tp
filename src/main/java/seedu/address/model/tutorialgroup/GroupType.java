@@ -27,6 +27,10 @@ public class GroupType implements Comparable<GroupType> {
         return test.equals("OP1") || test.equals("OP2");
     }
 
+    private Integer parseGroupType(String groupType) {
+        return parseInt(groupType.substring(2));
+    }
+
     @Override
     public String toString() {
         return value;
@@ -46,13 +50,7 @@ public class GroupType implements Comparable<GroupType> {
 
     @Override
     public int compareTo(GroupType groupType) {
-        if (parseInt(this.value.substring(2)) > parseInt(groupType.value.substring(2))) {
-            return 1;
-        } else if (parseInt(this.value.substring(2)) < parseInt(groupType.value.substring(2))) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return parseGroupType(this.value).compareTo(parseGroupType(groupType.value));
     }
 
 }

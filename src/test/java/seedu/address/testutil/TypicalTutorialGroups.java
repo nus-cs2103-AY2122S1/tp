@@ -18,9 +18,9 @@ import seedu.address.model.tutorialgroup.TutorialGroup;
  * A utility class containing a list of {@code TutorialGroup} objects to be used in tests.
  */
 public class TypicalTutorialGroups {
-    public static final TutorialGroup G101_OP1_1 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G101)
+    public static final TutorialGroup TUT_01 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G101)
             .withGroupName(VALID_GROUPNAME_1).withGroupType(VALID_GROUPTYPE_OP1).build();
-    public static final TutorialGroup G102_OP2_2 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G102)
+    public static final TutorialGroup TUT_02 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G102)
             .withGroupName(VALID_GROUPNAME_2).withGroupType(VALID_GROUPTYPE_OP2).build();
 
     // Prevent instantiation
@@ -38,7 +38,7 @@ public class TypicalTutorialGroups {
     }
 
     public static List<TutorialGroup> getTypicalTutorialGroups() {
-        return new ArrayList<>(Arrays.asList(G101_OP1_1, G102_OP2_2));
+        return new ArrayList<>(Arrays.asList(TUT_01, TUT_02));
     }
 
 }

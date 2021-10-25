@@ -1,12 +1,13 @@
 package seedu.address.model.tutorialgroup;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G102;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPTYPE_OP2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.testutil.TypicalTutorialGroups.G101_OP1_1;
-import static seedu.address.testutil.TypicalTutorialGroups.G102_OP2_2;
+import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
+import static seedu.address.testutil.TypicalTutorialGroups.TUT_02;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,67 +18,67 @@ class TutorialGroupTest {
     @Test
     public void isSameTutorialGroup() {
         // same object -> returns true
-        assertTrue(G101_OP1_1.isSameTutorialGroup(G101_OP1_1));
+        assertTrue(TUT_01.isSameTutorialGroup(TUT_01));
 
         // null -> returns false
-        assertFalse(G101_OP1_1.isSameTutorialGroup(null));
+        assertFalse(TUT_01.isSameTutorialGroup(null));
 
         // same class code, all other attributes different -> returns false
-        TutorialGroup editedG101_OP_1 = new TutorialGroupBuilder(G101_OP1_1).withGroupName(VALID_GROUPNAME_2)
+        TutorialGroup editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupName(VALID_GROUPNAME_2)
                 .withGroupType(VALID_GROUPTYPE_OP2).build();
-        assertFalse(G101_OP1_1.isSameTutorialGroup(editedG101_OP_1));
+        assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // same group name, all other attributes different -> returns false
-        editedG101_OP_1 = new TutorialGroupBuilder(G101_OP1_1).withClassCode(VALID_CLASSCODE_G102)
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G102)
                 .withGroupType(VALID_GROUPTYPE_OP2).build();
-        assertFalse(G101_OP1_1.isSameTutorialGroup(editedG101_OP_1));
+        assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // same group type, all other attributes different -> returns false
-        editedG101_OP_1 = new TutorialGroupBuilder(G101_OP1_1).withClassCode(VALID_CLASSCODE_G102)
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G102)
                 .withGroupName(VALID_GROUPNAME_2).build();
-        assertFalse(G101_OP1_1.isSameTutorialGroup(editedG101_OP_1));
+        assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // different class code, all other attributes same -> returns false
-        editedG101_OP_1 = new TutorialGroupBuilder(G101_OP1_1).withClassCode(VALID_NAME_BOB).build();
-        assertFalse(G101_OP1_1.isSameTutorialGroup(editedG101_OP_1));
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_NAME_BOB).build();
+        assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // different group name, all other attributes same -> returns false
-        editedG101_OP_1 = new TutorialGroupBuilder(G101_OP1_1).withGroupName(VALID_GROUPNAME_2).build();
-        assertFalse(G101_OP1_1.isSameTutorialGroup(editedG101_OP_1));
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupName(VALID_GROUPNAME_2).build();
+        assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // different group type, all other attributes same -> returns false
-        editedG101_OP_1 = new TutorialGroupBuilder(G101_OP1_1).withGroupType(VALID_GROUPTYPE_OP2).build();
-        assertFalse(G101_OP1_1.isSameTutorialGroup(editedG101_OP_1));
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupType(VALID_GROUPTYPE_OP2).build();
+        assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        TutorialGroup G101_OP1_1Copy = new TutorialGroupBuilder(G101_OP1_1).build();
-        assertTrue(G101_OP1_1.equals(G101_OP1_1Copy));
+        TutorialGroup tut01Copy = new TutorialGroupBuilder(TUT_01).build();
+        assertTrue(TUT_01.equals(tut01Copy));
 
         // same object -> returns true
-        assertTrue(G101_OP1_1.equals(G101_OP1_1));
+        assertTrue(TUT_01.equals(TUT_01));
 
         // null -> returns false
-        assertFalse(G101_OP1_1.equals(null));
+        assertFalse(TUT_01.equals(null));
 
         // different type -> returns false
-        assertFalse(G101_OP1_1.equals(5));
+        assertFalse(TUT_01.equals(5));
 
         // different groups -> returns false
-        assertFalse(G101_OP1_1.equals(G102_OP2_2));
+        assertFalse(TUT_01.equals(TUT_02));
 
         // different class code -> returns false
-        TutorialGroup editedG101_OP1_1 = new TutorialGroupBuilder(G101_OP1_1).withClassCode(VALID_CLASSCODE_G102).build();
-        assertFalse(G101_OP1_1.equals(editedG101_OP1_1));
+        TutorialGroup editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G102).build();
+        assertFalse(TUT_01.equals(editedTut01));
 
         // different group name -> returns false
-        editedG101_OP1_1 = new TutorialGroupBuilder(G101_OP1_1).withGroupName(VALID_GROUPNAME_2).build();
-        assertFalse(G101_OP1_1.equals(editedG101_OP1_1));
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupName(VALID_GROUPNAME_2).build();
+        assertFalse(TUT_01.equals(editedTut01));
 
         // different email -> returns false
-        editedG101_OP1_1 = new TutorialGroupBuilder(G101_OP1_1).withGroupType(VALID_GROUPTYPE_OP2).build();
-        assertFalse(G101_OP1_1.equals(editedG101_OP1_1));
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupType(VALID_GROUPTYPE_OP2).build();
+        assertFalse(TUT_01.equals(editedTut01));
     }
 }

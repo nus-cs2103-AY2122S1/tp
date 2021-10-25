@@ -40,7 +40,7 @@ public class Schedule {
         String finalSchedule = "";
         String[] lessonTimings = input.split(",");
         for (String lesson : lessonTimings) {
-            finalSchedule += lesson.trim();
+            finalSchedule += lesson.trim() + "\n";
         }
         return finalSchedule;
     }

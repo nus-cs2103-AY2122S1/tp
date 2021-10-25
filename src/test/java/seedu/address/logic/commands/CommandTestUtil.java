@@ -90,8 +90,10 @@ public class CommandTestUtil {
     //Verification not yet implemented
     public static final String INVALID_CLASSCODE_DESC = " " + PREFIX_TAG + "T03"; // Classcode must start with G
 
-    public static final String INVALID_GROUPNAME_DESC = " " + PREFIX_GROUPNAME + "a"; // only numbers are allowed for group name
-    public static final String INVALID_GROUPTYPE_DESC = " " + PREFIX_TYPE + "OP3"; // only OP1 and OP2 are allowed for group type
+    // only numbers are allowed for group name
+    public static final String INVALID_GROUPNAME_DESC = " " + PREFIX_GROUPNAME + "a";
+    // only OP1 and OP2 are allowed for group type
+    public static final String INVALID_GROUPTYPE_DESC = " " + PREFIX_TYPE + "OP3";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
