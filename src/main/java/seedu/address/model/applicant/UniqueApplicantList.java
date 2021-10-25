@@ -14,7 +14,6 @@ import seedu.address.logic.descriptors.EditApplicantDescriptor;
 import seedu.address.logic.descriptors.EditApplicationDescriptor;
 import seedu.address.model.applicant.exceptions.ApplicantNotFoundException;
 import seedu.address.model.applicant.exceptions.DuplicateApplicantException;
-import seedu.address.model.application.Application;
 import seedu.address.model.position.Position;
 
 /**
@@ -128,7 +127,6 @@ public class UniqueApplicantList implements Iterable<Applicant> {
         }
 
         //internalList.stream().filter(applicant -> isApplyingTo(positionToEdit))
-
     }
 
     public void setApplicants(UniqueApplicantList replacement) {
