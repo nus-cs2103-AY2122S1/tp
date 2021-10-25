@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,11 +17,9 @@ import seedu.address.model.task.exceptions.TaskNotFoundException;
  * implementation more straightforward.
  */
 public class TaskList implements Iterable<Task> {
-
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
     private final ObservableList<Task> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
-
 
     /**
      * Returns true if a task with the same identity as {@code task} exists in the task list.
@@ -48,6 +47,13 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
+    /**
+     * Removes all tasks matching predicate from the list.
+     */
+    public void removeIf(Predicate<Task> pred) {
+        requireNonNull(pred);
+        internalList.removeIf(pred);
+    }
 
     /**
      * Replaces the given task {@code target} in the list with {@code editedTask}.
@@ -81,7 +87,6 @@ public class TaskList implements Iterable<Task> {
         toMark.setIsDone(true);
         internalList.set(index, toMark);
     }
-
 
     public void setTasks(List<Task> tasks) {
         requireAllNonNull(tasks);

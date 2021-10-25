@@ -17,5 +17,10 @@
                 <fx:reference source="datatype" />
             </toggleGroup>
         </ToggleButton>
+        <ToggleButton fx:id="orders" mnemonicParsing="false" onAction="#handleOrdersPressed" prefWidth="100.0" text="Orders">
+            <toggleGroup>
+                <fx:reference source="datatype" />
+            </toggleGroup>
+        </ToggleButton>
     </HBox>
 </StackPane>
