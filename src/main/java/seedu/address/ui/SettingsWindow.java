@@ -10,7 +10,7 @@ import seedu.address.commons.core.GuiSettings.Theme;
 import seedu.address.commons.core.LogsCenter;
 
 public class SettingsWindow extends UiPart<Stage> {
-    private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
+    private static final Logger logger = LogsCenter.getLogger(SettingsWindow.class);
     private static final String FXML = "SettingsWindow.fxml";
 
     private final MainWindow mainWindow;
@@ -20,9 +20,9 @@ public class SettingsWindow extends UiPart<Stage> {
     private ComboBox<String> themeChooser;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new SettingsWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the SettingsWindow.
      */
     public SettingsWindow(Stage root, MainWindow window, GuiSettings settings) {
         super(FXML, root);
@@ -32,7 +32,7 @@ public class SettingsWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new SettingsWindow.
      */
     public SettingsWindow(MainWindow window, GuiSettings settings) {
         this(new Stage(), window, settings);
@@ -57,7 +57,7 @@ public class SettingsWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing settings for the application.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
