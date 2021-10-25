@@ -1,12 +1,12 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import seedu.address.commons.core.index.Index;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.Folder;
 import seedu.address.model.folder.FolderName;
 import seedu.address.model.folder.UniqueFolderList;

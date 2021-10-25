@@ -8,7 +8,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
 
-
 /**
  * Deletes folder name specified by user.
  */

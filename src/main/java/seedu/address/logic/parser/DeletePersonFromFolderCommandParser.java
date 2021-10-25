@@ -27,8 +27,8 @@ public class DeletePersonFromFolderCommandParser
                     DeletePersonFromFolderCommand.MESSAGE_USAGE));
         }
         String[] inputsToConvertToCommand = extractProperInputs(allValues);
-        assert inputsToConvertToCommand.length == 2 :
-                "Should have exactly 2 inputs of Index and Folder strings only!";
+        assert inputsToConvertToCommand.length == 2
+                : "Should have exactly 2 inputs of Index and Folder strings only!";
 
         Index indexToRemove = extractIndex(inputsToConvertToCommand);
         Folder folderToRemoveFrom = extractFolder(inputsToConvertToCommand);

@@ -1,15 +1,14 @@
 package seedu.address.model.folder;
 
-import seedu.address.commons.core.index.Index;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.folder.exceptions.ContactIndexOutOfBoundsInFolderException;
 import seedu.address.model.person.Person;
-
 
 /**
  * Represents a Folder in UNIon.
