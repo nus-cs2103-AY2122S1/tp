@@ -50,9 +50,8 @@ public class TaskCard extends UiPart<Region> {
         time.setText(task.getTime().value);
         date.setText(task.getDate().value);
         tag.setText(task.getTag().tagTaskName);
-        state.setStyle(task.getState().isMarkedDone()
-                ? "-fx-background-color: #00649e"
-                : "-fx-background-color: #009e3a");
+        String styleClass = "state-" + task.getState().toString();
+        state.getStyleClass().add(styleClass);
         state.setText(task.getState().toString());
     }
 
