@@ -31,8 +31,8 @@ import static seedu.address.testutil.TypicalMembers.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.member.PaddCommand;
-import seedu.address.logic.parser.member.PaddCommandParser;
+import seedu.address.logic.commands.member.MaddCommand;
+import seedu.address.logic.parser.member.MaddCommandParser;
 import seedu.address.model.module.Name;
 import seedu.address.model.module.member.Address;
 import seedu.address.model.module.member.Email;
@@ -41,8 +41,8 @@ import seedu.address.model.module.member.Phone;
 import seedu.address.model.module.member.position.Position;
 import seedu.address.testutil.MemberBuilder;
 
-public class PaddCommandParserTest {
-    private PaddCommandParser parser = new PaddCommandParser();
+public class MaddCommandParserTest {
+    private MaddCommandParser parser = new MaddCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -50,30 +50,30 @@ public class PaddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new MaddCommand(expectedMember));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new MaddCommand(expectedMember));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new MaddCommand(expectedMember));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new MaddCommand(expectedMember));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new PaddCommand(expectedMember));
+                + ADDRESS_DESC_BOB + POSITION_DESC_FRIEND, new MaddCommand(expectedMember));
 
         // multiple tags - all accepted
         Member expectedMemberMultiplePositions =
                 new MemberBuilder(BOB).withPositions(VALID_POSITION_FRIEND, VALID_POSITION_HUSBAND)
                         .build();
         assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new PaddCommand(expectedMemberMultiplePositions));
+                + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND, new MaddCommand(expectedMemberMultiplePositions));
     }
 
     @Test
@@ -81,27 +81,27 @@ public class PaddCommandParserTest {
         // zero tags
         Member expectedMember = new MemberBuilder(AMY).withPositions().build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new PaddCommand(expectedMember));
+                new MaddCommand(expectedMember));
 
         // no email
         expectedMember = new MemberBuilder(AMY).withEmail(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY + POSITION_DESC_FRIEND,
-                new PaddCommand(expectedMember));
+                new MaddCommand(expectedMember));
 
         // no address
         expectedMember = new MemberBuilder(AMY).withAddress(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + POSITION_DESC_FRIEND,
-                new PaddCommand(expectedMember));
+                new MaddCommand(expectedMember));
 
         // no address and no email
         expectedMember = new MemberBuilder(AMY).withEmail(null).withAddress(null).build();
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + POSITION_DESC_FRIEND,
-                new PaddCommand(expectedMember));
+                new MaddCommand(expectedMember));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MaddCommand.MESSAGE_USAGE);
 
         // missing name prefix
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -145,7 +145,7 @@ public class PaddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + POSITION_DESC_HUSBAND + POSITION_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MaddCommand.MESSAGE_USAGE));
 
     }
 }

@@ -8,8 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.member.EditCommand.EditMemberDescriptor;
-import seedu.address.logic.commands.member.PaddCommand;
+import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.model.module.member.Member;
 import seedu.address.model.module.member.position.Position;
 
@@ -22,7 +22,7 @@ public class MemberUtil {
      * Returns an add command string for adding the {@code member}.
      */
     public static String getPaddCommand(Member member) {
-        return PaddCommand.COMMAND_WORD + " " + getMemberDetails(member);
+        return MaddCommand.COMMAND_WORD + " " + getMemberDetails(member);
     }
 
     /**

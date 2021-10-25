@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.member;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MEMBERS;
 
 import seedu.address.commons.core.Messages;
@@ -24,8 +24,8 @@ public class MlistCommand extends Command {
     public static final String COMMAND_WORD = "mlist";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists all members in Ailurus with filters.\n"
-            + "Parameters: [" + PREFIX_EVENT + " EVENT_ID (must be a positive integer)]\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT + " 1";
+            + "Parameters: [" + PREFIX_EVENT_ID + "EVENT_ID (must be a positive integer)]\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_EVENT_ID + "1";
 
     public static final String MESSAGE_SUCCESS = "Members listed: %1$s members %2$s";
 

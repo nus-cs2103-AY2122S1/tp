@@ -31,7 +31,7 @@ public class EaddCommandParser implements Parser<EaddCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EaddCommand.MESSAGE_USAGE));
         }
@@ -44,13 +44,4 @@ public class EaddCommandParser implements Parser<EaddCommand> {
 
         return new EaddCommand(event, indexList);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

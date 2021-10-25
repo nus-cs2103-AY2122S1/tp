@@ -15,14 +15,14 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.member.DeleteCommand;
-import seedu.address.logic.commands.member.EditCommand;
-import seedu.address.logic.commands.member.EditCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.MdelCommand;
+import seedu.address.logic.commands.member.MeditCommand;
+import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.member.FindCommand;
+import seedu.address.logic.commands.member.MfindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.commands.member.PaddCommand;
+import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.logic.commands.task.TlistCommand;
@@ -43,8 +43,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Member member = new MemberBuilder().build();
-        PaddCommand command = (PaddCommand) parser.parseCommand(MemberUtil.getPaddCommand(member));
-        assertEquals(new PaddCommand(member), command);
+        MaddCommand command = (MaddCommand) parser.parseCommand(MemberUtil.getPaddCommand(member));
+        assertEquals(new MaddCommand(member), command);
     }
 
     @Test
@@ -65,18 +65,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_MEMBER.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_MEMBER), command);
+        MdelCommand command = (MdelCommand) parser.parseCommand(
+                MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_ID + INDEX_FIRST_MEMBER.getOneBased());
+        assertEquals(new MdelCommand(INDEX_FIRST_MEMBER), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
         Member member = new MemberBuilder().build();
         EditMemberDescriptor descriptor = new EditMemberDescriptorBuilder(member).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        MeditCommand command = (MeditCommand) parser.parseCommand(MeditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_MEMBER.getOneBased() + " " + MemberUtil.getEditMemberDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_MEMBER, descriptor), command);
+        assertEquals(new MeditCommand(INDEX_FIRST_MEMBER, descriptor), command);
     }
 
     @Test
@@ -88,9 +88,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate<Member>(keywords)), command);
+        MfindCommand command = (MfindCommand) parser.parseCommand(
+                MfindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new MfindCommand(new NameContainsKeywordsPredicate<Member>(keywords)), command);
     }
 
     @Test
@@ -102,7 +102,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(MlistCommand.COMMAND_WORD) instanceof MlistCommand);
-        assertTrue(parser.parseCommand(MlistCommand.COMMAND_WORD + " 3") instanceof MlistCommand);
+        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, MlistCommand.MESSAGE_USAGE), ()
+                -> parser.parseCommand(MlistCommand.COMMAND_WORD + " 3"));
     }
 
     @Test

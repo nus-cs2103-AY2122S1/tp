@@ -26,7 +26,7 @@ public class TdelCommandParser implements Parser<TdelCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_TASK_ID, PREFIX_MEMBER_ID_DEL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TASK_ID, PREFIX_MEMBER_ID_DEL)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_TASK_ID, PREFIX_MEMBER_ID_DEL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TdelCommand.MESSAGE_USAGE));
         }
@@ -35,13 +35,5 @@ public class TdelCommandParser implements Parser<TdelCommand> {
         Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID_DEL).get());
 
         return new TdelCommand(memberID, taskID);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

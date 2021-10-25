@@ -32,9 +32,9 @@ import seedu.address.model.module.task.TaskList;
 /**
  * Edits the details of an existing member in the address book.
  */
-public class EditCommand extends Command {
+public class MeditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "medit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the member identified "
             + "by the index number used in the displayed member list. "
@@ -60,7 +60,7 @@ public class EditCommand extends Command {
      * @param index of the member in the filtered member list to edit
      * @param editMemberDescriptor details to edit the member with
      */
-    public EditCommand(Index index, EditMemberDescriptor editMemberDescriptor) {
+    public MeditCommand(Index index, EditMemberDescriptor editMemberDescriptor) {
         requireNonNull(index);
         requireNonNull(editMemberDescriptor);
 
@@ -114,12 +114,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof MeditCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        MeditCommand e = (MeditCommand) other;
         return index.equals(e.index)
                 && editMemberDescriptor.equals(e.editMemberDescriptor);
     }

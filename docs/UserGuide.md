@@ -117,7 +117,7 @@ Example:
 
 Edits an existing member in Ailurus. 
 
-Format: `edit INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
+Format: `medit INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`
 
 * `INDEX` **must be a positive integer** 1, 2, 3, …​
 * Edits the member at the specified `INDEX`. The index refers to the index number shown in the displayed member list.
@@ -127,8 +127,8 @@ Format: `edit INDEX [/n NAME] [/ph PHONE] [/em EMAIL] [/a ADDRESS] [/p POSITION]
 * You can remove all the member’s positions by typing `/t` without specifying any positions after it.
 
 Examples:
-* `edit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
+* `medit 1 /p 91234567 /e johndoe@example.com` Edits the phone number and email address of the 1st member to be `91234567` and `johndoe@example.com` respectively.
+* `medit 2 /n Betsy Crower /t` Edits the name of the 2nd member to be `Betsy Crower` and clears all existing positions.
 
 #### Locating members by name: `mfind`
 
@@ -144,9 +144,9 @@ Format: `mfind KEYWORD [MORE_KEYWORDS]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavid.png)
+* `mfind John` returns `john` and `John Doe`
+* `mfind alex david` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'mfind alex david'](images/findAlexDavid.png)
 
 #### Deleting a member : `mdel`
 
@@ -290,7 +290,7 @@ Action | Format, Examples
 **help** | `help`
 **madd** | `madd /n NAME /ph PHONE_NUMBER /em EMAIL /a ADDRESS [/p POSITION]…​` <br> e.g., `madd /n James Ho /ph 22224444 /em jamesho@example.com /a 123, Clementi Rd, 1234665 /p friend /p colleague`
 **mlist** | `mlist [/e EVENT_ID]` <br> e.g., `mlist /e 3`
-**medit** | `medit INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`edit 2 /n James Lee /em jameslee@example.com`
+**medit** | `medit INDEX [/n NAME] [/ph PHONE_NUMBER] [/em EMAIL] [/a ADDRESS] [/p POSITION]…​`<br> e.g.,`medit 2 /n James Lee /em jameslee@example.com`
 **mfind** | `mfind KEYWORD [MORE_KEYWORDS]`<br> e.g., `mfind James Jake`
 **mdel** | `mdel /m MEMBER_ID` <br> e.g., `mdel /m 6`
 **tadd** | `tadd /n TASKNAME /m MEMBER_ID` <br> e.g., `tadd /n Collect payment from members /m 3`

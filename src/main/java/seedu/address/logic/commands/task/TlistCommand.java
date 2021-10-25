@@ -21,9 +21,9 @@ public class TlistCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows the task list of a member. "
             + "Parameters: "
-            + PREFIX_MEMBER_ID + " MEMBER_ID\n"
+            + PREFIX_MEMBER_ID + "MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MEMBER_ID + " 2";
+            + PREFIX_MEMBER_ID + "2";
 
     public final Index targetMemberID;
 

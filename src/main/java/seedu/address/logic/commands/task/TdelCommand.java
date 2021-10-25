@@ -24,11 +24,11 @@ public class TdelCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a task from the task list of a person. "
             + "Parameters: "
-            + PREFIX_TASK_ID + " TASK_ID "
-            + PREFIX_MEMBER_ID_DEL + " MEMBER_ID\n"
+            + PREFIX_TASK_ID + "TASK_ID "
+            + PREFIX_MEMBER_ID_DEL + "MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TASK_ID + " 3 "
-            + PREFIX_MEMBER_ID_DEL + " 2";
+            + PREFIX_TASK_ID + "3 "
+            + PREFIX_MEMBER_ID_DEL + "2";
 
     public static final String MESSAGE_SUCCESS = "This task is successfully deleted for %1$s: %2$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task list of the member";

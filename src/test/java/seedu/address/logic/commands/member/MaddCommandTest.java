@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.member.PaddCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -28,45 +27,45 @@ import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
 import seedu.address.testutil.MemberBuilder;
 
-public class PaddCommandTest {
+public class MaddCommandTest {
 
     @Test
     public void constructor_nullMember_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new PaddCommand(null));
+        assertThrows(NullPointerException.class, () -> new MaddCommand(null));
     }
 
     @Test
     public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
         Member validMember = new MemberBuilder().build();
-        CommandResult commandResult = new PaddCommand(validMember).execute(modelStub);
+        CommandResult commandResult = new MaddCommand(validMember).execute(modelStub);
 
-        assertEquals(String.format(PaddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
+        assertEquals(String.format(MaddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
     }
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
-        PaddCommand paddCommand = new PaddCommand(validMember);
+        MaddCommand maddCommand = new MaddCommand(validMember);
         ModelStub modelStub = new ModelStubWithMember(validMember);
 
-        assertThrows(CommandException.class, paddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
-                paddCommand.execute(modelStub));
+        assertThrows(CommandException.class, maddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
+                maddCommand.execute(modelStub));
     }
 
     @Test
     public void equals() {
         Member alice = new MemberBuilder().withName("Alice").build();
         Member bob = new MemberBuilder().withName("Bob").build();
-        PaddCommand addAliceCommand = new PaddCommand(alice);
-        PaddCommand addBobCommand = new PaddCommand(bob);
+        MaddCommand addAliceCommand = new MaddCommand(alice);
+        MaddCommand addBobCommand = new MaddCommand(bob);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        PaddCommand addAliceCommandCopy = new PaddCommand(alice);
+        MaddCommand addAliceCommandCopy = new MaddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false

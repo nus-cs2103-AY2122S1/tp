@@ -7,7 +7,6 @@ import static seedu.address.testutil.TypicalMembers.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.member.PaddCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -17,7 +16,7 @@ import seedu.address.testutil.MemberBuilder;
 /**
  * Contains integration tests (interaction with the Model) for {@code PaddCommand}.
  */
-public class PaddCommandIntegrationTest {
+public class MaddCommandIntegrationTest {
 
     private Model model;
 
@@ -32,14 +31,14 @@ public class PaddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addMember(validMember);
-        assertCommandSuccess(new PaddCommand(validMember), model,
-                String.format(PaddCommand.MESSAGE_SUCCESS, validMember), expectedModel);
+        assertCommandSuccess(new MaddCommand(validMember), model,
+                String.format(MaddCommand.MESSAGE_SUCCESS, validMember), expectedModel);
     }
 
     @Test
     public void execute_duplicateMember_throwsCommandException() {
         Member memberInList = model.getAddressBook().getMemberList().get(0);
-        assertCommandFailure(new PaddCommand(memberInList), model, PaddCommand.MESSAGE_DUPLICATE_MEMBER);
+        assertCommandFailure(new MaddCommand(memberInList), model, MaddCommand.MESSAGE_DUPLICATE_MEMBER);
     }
 
 }

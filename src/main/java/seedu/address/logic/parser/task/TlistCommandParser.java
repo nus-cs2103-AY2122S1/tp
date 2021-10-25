@@ -18,7 +18,7 @@ public class TlistCommandParser implements Parser<TlistCommand> {
      */
     public TlistCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MEMBER_ID);
-        if (!arePrefixesPresent(argMultimap, PREFIX_MEMBER_ID)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_MEMBER_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TlistCommand.MESSAGE_USAGE));
         }
@@ -26,13 +26,5 @@ public class TlistCommandParser implements Parser<TlistCommand> {
         Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
         return new TlistCommand(memberID);
 
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

@@ -18,9 +18,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.member.MdelCommand;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.commands.member.PaddCommand;
+import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -58,14 +60,15 @@ public class LogicManagerTest {
 
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
-        String deleteCommand = "delete 9";
+        String deleteCommand = MdelCommand.COMMAND_WORD + " " + CliSyntax.PREFIX_MEMBER_ID + "9";
         assertCommandException(deleteCommand, MESSAGE_INVALID_MEMBER_DISPLAYED_INDEX);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
         String mListCommand = MlistCommand.COMMAND_WORD;
-        assertCommandSuccess(mListCommand, MlistCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(mListCommand, String.format(MlistCommand.MESSAGE_SUCCESS,
+                model.getFilteredMemberList().size(), ""), model);
     }
 
     @Test
@@ -79,7 +82,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = PaddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+        String addCommand = MaddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY;
 
         Member expectedMember = new MemberBuilder(AMY).withPositions().build();

@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.event;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EVENT_ID;
 
 import java.util.List;
 
@@ -15,20 +16,20 @@ import seedu.address.model.module.event.Event;
 /**
  * Deletes a member identified using it's displayed index from the address book.
  */
-public class EdeleteCommand extends Command {
+public class EdelCommand extends Command {
 
-    public static final String COMMAND_WORD = "edelete";
+    public static final String COMMAND_WORD = "edel";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the event identified by the index number used in the displayed event list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: [" + PREFIX_EVENT_ID + " EVENT_ID (must be a positive integer)]\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_EVENT_SUCCESS = "Deleted Event: %1$s";
 
     private final Index targetIndex;
 
-    public EdeleteCommand(Index targetIndex) {
+    public EdelCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -49,7 +50,7 @@ public class EdeleteCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof EdeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((EdeleteCommand) other).targetIndex)); // state check
+                || (other instanceof EdelCommand // instanceof handles nulls
+                && targetIndex.equals(((EdelCommand) other).targetIndex)); // state check
     }
 }

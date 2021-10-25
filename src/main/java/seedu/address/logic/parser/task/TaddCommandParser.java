@@ -30,7 +30,7 @@ public class TaddCommandParser implements Parser<TaddCommand> {
                 ArgumentTokenizer.tokenize(
                         args, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID)
+        if (!ParserUtil.arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DATE, PREFIX_MEMBER_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaddCommand.MESSAGE_USAGE));
         }
@@ -41,13 +41,5 @@ public class TaddCommandParser implements Parser<TaddCommand> {
         Index memberID = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_MEMBER_ID).get());
 
         return new TaddCommand(memberID, task);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

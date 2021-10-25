@@ -7,21 +7,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.member.DeleteCommand;
+import seedu.address.logic.commands.member.MdelCommand;
 import seedu.address.logic.commands.event.EaddCommand;
-import seedu.address.logic.commands.event.EdeleteCommand;
-import seedu.address.logic.commands.member.EditCommand;
+import seedu.address.logic.commands.event.EdelCommand;
+import seedu.address.logic.commands.member.MeditCommand;
 import seedu.address.logic.commands.event.ElistCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.member.FindCommand;
+import seedu.address.logic.commands.member.MfindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.member.MlistCommand;
-import seedu.address.logic.commands.member.PaddCommand;
+import seedu.address.logic.commands.member.MaddCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
 import seedu.address.logic.commands.task.TlistCommand;
 import seedu.address.logic.parser.event.EaddCommandParser;
-import seedu.address.logic.parser.event.EdeleteCommandParser;
+import seedu.address.logic.parser.event.EdelCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.member.*;
 import seedu.address.logic.parser.task.TaddCommandParser;
@@ -55,17 +55,17 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case PaddCommand.COMMAND_WORD:
-            return new PaddCommandParser().parse(arguments);
+        case MaddCommand.COMMAND_WORD:
+            return new MaddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case MeditCommand.COMMAND_WORD:
+            return new MeditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+        case MdelCommand.COMMAND_WORD:
+            return new MdelCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+        case MfindCommand.COMMAND_WORD:
+            return new MfindCommandParser().parse(arguments);
 
         case MlistCommand.COMMAND_WORD:
             return new MlistCommandParser().parse(arguments);
@@ -79,8 +79,8 @@ public class AddressBookParser {
         case EaddCommand.COMMAND_WORD:
             return new EaddCommandParser().parse(arguments);
 
-        case EdeleteCommand.COMMAND_WORD:
-            return new EdeleteCommandParser().parse(arguments);
+        case EdelCommand.COMMAND_WORD:
+            return new EdelCommandParser().parse(arguments);
 
         case ElistCommand.COMMAND_WORD:
             return new ElistCommand();

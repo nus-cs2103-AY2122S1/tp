@@ -23,13 +23,13 @@ public class TaddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task list of a member. "
             + "Parameters: "
-            + PREFIX_NAME + " TASKNAME "
-            + PREFIX_DATE + " TASKDEADLINE "
-            + PREFIX_MEMBER_ID + " MEMBER_ID\n"
+            + PREFIX_NAME + "TASKNAME "
+            + PREFIX_DATE + "TASKDEADLINE "
+            + PREFIX_MEMBER_ID + "MEMBER_ID\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + " Submit form "
-            + PREFIX_DATE + " 21/10/2021 23:59 "
-            + PREFIX_MEMBER_ID + " 2";
+            + PREFIX_NAME + "Submit form "
+            + PREFIX_DATE + "21/10/2021 23:59 "
+            + PREFIX_MEMBER_ID + "2";
 
     public static final String MESSAGE_SUCCESS = "New task added for %1$s: %2$s";
 

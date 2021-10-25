@@ -12,7 +12,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_POSITION_HUSBAN
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.member.EditCommand.EditMemberDescriptor;
+import seedu.address.logic.commands.member.MeditCommand.EditMemberDescriptor;
 import seedu.address.testutil.EditMemberDescriptorBuilder;
 
 public class EditMemberDescriptorTest {
