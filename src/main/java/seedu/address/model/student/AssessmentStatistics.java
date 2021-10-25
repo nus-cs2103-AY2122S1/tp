@@ -20,9 +20,9 @@ import seedu.address.commons.util.ChartUtil;
  * Represents statistics about an assessment and the students' performance.
  */
 public class AssessmentStatistics {
-    private static final String CHART_TITLE = "Cohort Performance for %1$s";
-
     public static final double DEFAULT_BIN_SIZE = 10.0;
+
+    private static final String CHART_TITLE = "Cohort Performance for %1$s";
     private static final String CHART_X_AXIS_LABEL = "Scores";
     private static final String CHART_Y_AXIS_LABEL = "Number of Students";
 
