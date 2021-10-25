@@ -24,11 +24,10 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.FacilityBuilder;
 
 public class SplitCommandTest {
-    private Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-    private Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-
     @Test
     public void execute_validDay_success() {
+        Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
         SplitCommand command = new SplitCommand(1);
         String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS,
                 DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault()));
@@ -42,6 +41,7 @@ public class SplitCommandTest {
 
     @Test
     public void execute_noMembersAvailable_throwsCommandException() {
+        Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
         SplitCommand command = new SplitCommand(1);
         assertCommandFailure(command, model, String.format(
                 SplitCommand.MESSAGE_NO_MEMBERS_AVAILABLE,
