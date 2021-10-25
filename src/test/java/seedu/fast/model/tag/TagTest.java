@@ -15,6 +15,7 @@ public class TagTest {
     public static final String VALID_MIXED_TAG_TERM = "te12345test67890st";
     public static final String INVALID_TAG_TERM = "hi there";
     public static final String VALID_PRIORITY_TAG_TERM = "pr/low";
+    public static final String INVALID_TAG_LENGTH = "Loremipsumdolorsitama";
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -45,6 +46,20 @@ public class TagTest {
 
         //invalid Tag term
         assertFalse(Tag.isValidTagTerm(INVALID_TAG_TERM));
+    }
+
+    @Test
+    public void isValidTagLength() {
+        //null tag term
+        assertThrows(NullPointerException.class, () -> Tag.isValidTagLength(null));
+
+        //valid Tag terms
+        assertTrue(Tag.isValidTagTerm(VALID_ALPHABET_TAG_TERM));
+        assertTrue(Tag.isValidTagTerm(VALID_NUMBER_TAG_TERM));
+        assertTrue(Tag.isValidTagTerm(VALID_MIXED_TAG_TERM));
+
+        //invalid Tag term
+        assertFalse(Tag.isValidTagLength(INVALID_TAG_LENGTH)); // 21 characters
     }
 
     @Test

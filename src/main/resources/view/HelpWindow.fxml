@@ -64,7 +64,7 @@
               <Label fx:id="commandInstruction" styleClass="label-bright" text="Label" textAlignment="JUSTIFY"
                      wrapText="true" VBox.vgrow="ALWAYS">
                 <padding>
-                  <Insets left="5.0" right="5.0"/>
+                  <Insets left="10.0" right="5.0"/>
                 </padding>
               </Label>
 

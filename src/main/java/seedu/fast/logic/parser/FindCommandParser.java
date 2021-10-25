@@ -6,9 +6,12 @@ import java.util.Arrays;
 
 import seedu.fast.logic.commands.FindCommand;
 import seedu.fast.logic.parser.exceptions.ParseException;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.PriorityPredicate;
+import seedu.fast.model.person.RemarkContainsKeywordPredicate;
+import seedu.fast.model.person.TagMatchesKeywordPredicate;
 import seedu.fast.model.tag.PriorityTag;
+import seedu.fast.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -31,24 +34,54 @@ public class FindCommandParser implements Parser<FindCommand> {
                     PriorityTag.PRIORITY_TAG_PREFIX.length());
             String[] tags = tokenizedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            for (String tag:tags) {
-                if (isNotPriority(tag)) {
+            for (String tag : tags) {
+                if (!isPriority(tag)) {
                     throw new ParseException(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, Tag.MESSAGE_CONSTRAINTS));
                 }
             }
             return new FindCommand(new PriorityPredicate(Arrays.asList(tags)));
+
+        } else if (trimmedArgs.startsWith(FindCommand.TAG_PREFIX)) {
+            String tokenizedArgs = trimmedArgs.substring(
+                    FindCommand.TAG_PREFIX.length());
+            String[] tags = tokenizedArgs.split("\\s+");
+            // splits trimmedArgs according to whitespaces
+            checkForBlanks(tags);
+            return new FindCommand(new TagMatchesKeywordPredicate(Arrays.asList(tags)));
+
+        } else if (trimmedArgs.startsWith(FindCommand.REMARK_PREFIX)) {
+            String tokenizedArgs = trimmedArgs.substring(
+                    FindCommand.REMARK_PREFIX.length());
+            String[] queries = tokenizedArgs.split("\\s+");
+            // splits trimmedArgs according to whitespaces
+            checkForBlanks(queries);
+            return new FindCommand(new RemarkContainsKeywordPredicate(Arrays.asList(queries)));
+
         } else {
             String[] nameKeywords = trimmedArgs.split("\\s+");
             // splits trimmedArgs according to whitespaces
-            return new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+            return new FindCommand(new NameContainsQueriesPredicate(Arrays.asList(nameKeywords)));
         }
     }
 
-    private static boolean isNotPriority(String tag) {
-        return tag == PriorityTag.LowPriority.TERM
-                || tag == PriorityTag.MediumPriority.TERM
-                || tag == PriorityTag.HighPriority.TERM;
+    private void checkForBlanks(String[] tags) throws ParseException {
+        for (String tag : tags) {
+            if (isBlank(tag)) {
+                throw new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+            }
+        }
+    }
+
+    private static boolean isPriority(String tag) {
+        return PriorityTag.LowPriority.TERM.equals(tag)
+                || PriorityTag.MediumPriority.TERM.equals(tag)
+                || PriorityTag.HighPriority.TERM.equals(tag);
+    }
+
+    private static boolean isBlank(String string) {
+        return string.trim().equals("");
     }
 
 }

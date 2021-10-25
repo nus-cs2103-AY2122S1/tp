@@ -10,15 +10,22 @@ import seedu.fast.commons.util.TagUtil;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric, or follow the specified "
-            + "format for a PriorityTag";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric "
+            + "and not more than 20 characters long,\nor follow the specified"
+            + "format for a PriorityTag (\"pr/\" followed by low, med or high)\nor a InvestmentPlanTag "
+            + "(\"ip/\" followed by health, invest, life, motor, property, save or travel)";
 
-    public static final String MESSAGE_USAGE = "tag: label a person with a keyword or term. \n"
-        + "Tags can be applied using the Add or Edit command.\n\n"
+
+    public static final String MESSAGE_USAGE = "tag: label a client with a keyword or term. \n"
+        + "Tags can be applied using the Add,Edit or Tag command.\n\n"
         + "Parameters (using Edit): \n"
         + "edit INDEX t/TAG\n\n"
         + "Example: \n"
-        + "edit 1 t/High Value Client";
+        + "edit 1 t/High Value Client\n\n"
+        + "Parameters (using Tag): \n"
+        + "tag INDEX a/ADD_TAG d/DELETE_TAG\n\n"
+        + "Example: \n"
+        + "tag 1 a/Low Value Client d/Medium Value Client";
     public static final String VALIDATION_REGEX = "\\p{Alnum}+";
 
     public final String tagName;
@@ -41,22 +48,38 @@ public class Tag {
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && isValidTagLength(test);
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagTerm(String test) {
-        return test.matches(VALIDATION_REGEX) || test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        boolean isNormalTag = test.matches(VALIDATION_REGEX);
+        boolean isPriorityTag = test.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        boolean isInvestmentPlanTag = test.matches(InvestmentPlanTag.INVESTMENT_PLAN_VALIDATION_REGEX);
+        boolean isValidLength = isValidTagLength(test);
+        return (isNormalTag || isPriorityTag || isInvestmentPlanTag) && isValidLength;
+    }
+
+    /**
+     * Returns true if a given string has a valid length.
+     */
+    public static boolean isValidTagLength(String test) {
+        return test.length() <= TagUtil.MAX_LENGTH_TAG;
     }
 
     /**
      * Create either an instance of a Tag or a PriorityTag depending on the input term.
      */
     public static Tag createTag(String term) {
-        if (term.matches(PriorityTag.PRIORITY_VALIDATION_REGEX)) {
+        boolean hasPriorityTagTerm = term.matches(PriorityTag.PRIORITY_VALIDATION_REGEX);
+        if (hasPriorityTagTerm) {
             return new PriorityTag(term);
+        }
+        boolean hasInvestmentPlanTerm = term.matches(InvestmentPlanTag.INVESTMENT_PLAN_VALIDATION_REGEX);
+        if (hasInvestmentPlanTerm) {
+            return new InvestmentPlanTag(term);
         }
         return new Tag(term);
     }

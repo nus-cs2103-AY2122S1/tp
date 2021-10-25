@@ -22,6 +22,7 @@ import seedu.fast.model.person.Appointment;
 import seedu.fast.model.person.Email;
 import seedu.fast.model.person.Name;
 import seedu.fast.model.person.Phone;
+import seedu.fast.model.tag.InvestmentPlanTag;
 import seedu.fast.model.tag.PriorityTag;
 import seedu.fast.model.tag.Tag;
 
@@ -32,8 +33,12 @@ public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
 
-    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment", "Clear", "Delete",
-        "Edit", "Find", "List", "Help", "Remark", "Sort", "Tag", "Priority Tag", "Misc"};
+    public static final String[] COMMAND_LIST = new String[]{"Quick Start", "Add", "Appointment",
+        "Edit Appointment", "Delete Appointment", "Mark Appointment", "Clear", "Delete",
+        "Edit", "Find", "List", "Help", "Remark", "Sort", "Statistics", "Tag", "Investment Plan Tag",
+        "Priority Tag", "Misc"};
+
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -164,6 +169,10 @@ public class ParserUtil {
 
     /**
      * Parses {@code String tagName} and returns the corresponding priority tag name.
+     *
+     * Input will always be a valid priority tag command, as validated by Tag::createTag
+     * @param tagName The tag term to be parsed.
+     * @return The corresponding tag name.
      */
     public static String parsePriorityTag(String tagName) {
         switch (tagName) {
@@ -290,21 +299,29 @@ public class ParserUtil {
     }
 
     /**
-     * Checks if the retrieved venue from user input is too long.
-     * The venue description should not be longer than 50 characters.
+     * Parses {@code String tagName} and returns the corresponding investment plan tag name.
      *
-     * If the retrieved venue if longer than 30 characters, the string will be truncated.
-     *
-     * @param venue Time String retrieved from user input
-     * @return A String representing the venue (no longer than 50 characters).
+     * Input will always be a valid investment plan tag command, as validated by Tag::createTag
+     * @param tagName The tag term to be parsed.
+     * @return The corresponding tag name.
      */
-    public static String parseVenueString(String venue) throws ParseException {
-        if (venue.length() > 30) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    Appointment.INVALID_VENUE_INPUT));
+    public static String parseInvestmentPlanTag(String tagName) {
+        switch (tagName) {
+        case InvestmentPlanTag.LifeInsurance.COMMAND:
+            return InvestmentPlanTag.LifeInsurance.NAME;
+        case InvestmentPlanTag.MotorInsurance.COMMAND:
+            return InvestmentPlanTag.MotorInsurance.NAME;
+        case InvestmentPlanTag.HealthInsurance.COMMAND:
+            return InvestmentPlanTag.HealthInsurance.NAME;
+        case InvestmentPlanTag.TravelInsurance.COMMAND:
+            return InvestmentPlanTag.TravelInsurance.NAME;
+        case InvestmentPlanTag.PropertyInsurance.COMMAND:
+            return InvestmentPlanTag.PropertyInsurance.NAME;
+        case InvestmentPlanTag.Investment.COMMAND:
+            return InvestmentPlanTag.Investment.NAME;
+        default:
+            return InvestmentPlanTag.Savings.NAME;
+            //it is guaranteed that the default case will always be an savings investment plan tag.
         }
-
-        return venue;
     }
-
 }

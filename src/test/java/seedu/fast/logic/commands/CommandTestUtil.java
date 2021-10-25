@@ -18,7 +18,7 @@ import seedu.fast.logic.commands.EditAppointmentCommand.EditAppointmentDescripto
 import seedu.fast.logic.commands.exceptions.CommandException;
 import seedu.fast.model.Fast;
 import seedu.fast.model.Model;
-import seedu.fast.model.person.NameContainsKeywordsPredicate;
+import seedu.fast.model.person.NameContainsQueriesPredicate;
 import seedu.fast.model.person.Person;
 import seedu.fast.testutil.EditAppointmentDescriptorBuilder;
 import seedu.fast.testutil.EditPersonDescriptorBuilder;
@@ -131,6 +131,28 @@ public class CommandTestUtil {
         assertEquals(expectedAddressBook, actualModel.getFast());
         assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
     }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - model is modified until the first detect invalid input
+     * - the address book, filtered person list and selected person in {@code actualModel} is changed
+     * until the first detect invalid input.
+     */
+    // use for multiple delete
+    public static void assertCommandFailure(Command command, Model actualModel, Model expectedModel,
+                                            String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        Fast expectedAddressBook = new Fast(expectedModel.getFast());
+        List<Person> expectedFilteredList = new ArrayList<>(expectedModel.getFilteredPersonList());
+
+        assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
+        assertEquals(expectedAddressBook, actualModel.getFast());
+        assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+    }
+
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
@@ -140,7 +162,7 @@ public class CommandTestUtil {
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredPersonList(new NameContainsQueriesPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
     }
