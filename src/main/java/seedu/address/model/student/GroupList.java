@@ -90,10 +90,9 @@ public class GroupList {
     public void removeStudent(Student toRemove) {
         requireNonNull(toRemove);
 
-        for (Group group : toRemove.getGroups()) {
-            if (groups.contains(group)) {
-                Group groupInList = groups.get(groups.indexOf(group));
-                groupInList.removeStudent(toRemove.getId());
+        for (Group group : groups) {
+            if (group.hasStudent(toRemove.getId())) {
+                group.removeStudent(toRemove.getId());
             }
         }
     }
