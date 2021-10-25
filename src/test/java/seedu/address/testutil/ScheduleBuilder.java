@@ -19,6 +19,9 @@ public class ScheduleBuilder {
         this.shifts = new ShiftBuilder[shifts.length][shifts[1].length];
         for (int i = 0; i < 7; i++) {
             for (int j = 0; j < 2; j++) {
+                if (shifts[i][j] == null) {
+                    continue;
+                }
                 this.shifts[i][j] = new ShiftBuilder(shifts[i][j]);
             }
         }
