@@ -49,8 +49,7 @@ public class Tag {
     public void addClient(Client client) {
         requireNonNull(client);
         clients.add(client);
-        int nextVersion = getVersion();
-        setVersion(++nextVersion);
+        forceUpdate();
     }
 
     /**
@@ -68,10 +67,18 @@ public class Tag {
     }
 
     /**
-     * Sets the version of the tag to force {@code UniqueTagList} to fire an update.
+     * Sets the version of the tag.
      */
     public final void setVersion(int value) {
         versionProperty().set(value);
+    }
+
+    /**
+     * Forces the enclosing list to fire an update.
+     */
+    public void forceUpdate() {
+        int nextVersion = getVersion();
+        setVersion(++nextVersion);
     }
 
     /**
@@ -81,8 +88,7 @@ public class Tag {
      */
     public void removeClient(Client client) {
         clients.remove(client);
-        int nextVersion = getVersion();
-        setVersion(++nextVersion);
+        forceUpdate();
     }
 
     /**
@@ -132,6 +138,6 @@ public class Tag {
      */
     @Override
     public String toString() {
-        return tagName + " (" + getClients().size() + ")";
+        return tagName + " (" + clients.size() + ")";
     }
 }

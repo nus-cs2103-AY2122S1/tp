@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -22,7 +21,7 @@ public class TagsPanel extends UiPart<Region> {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private static final String FXML = "TagsPanel.fxml";
-    private final HashMap<Tag, Label> tagLabels = new HashMap<>();
+    private final HashMap<Tag, Region> tagLabels = new HashMap<>();
 
     @FXML
     private FlowPane tags;
@@ -30,25 +29,25 @@ public class TagsPanel extends UiPart<Region> {
     /**
      * Creates a {@code TagsPanel} with the given {@code CommandExecutor}.
      */
-    public TagsPanel(ObservableList<Tag> tagList) {
+    public TagsPanel(ObservableList<Tag> tagList, CommandBox commandBox) {
         super(FXML);
 
         tagList.stream()
                 .sorted(Comparator.comparing(Tag::getName))
                 .forEach(tag -> {
-                    Label tagLabel = new Label(tag.toString());
-                    tags.getChildren().add(tagLabel);
-                    tagLabels.put(tag, tagLabel);
+                    TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
+                    tags.getChildren().add(tagLabel.getRoot());
+                    tagLabels.put(tag, tagLabel.getRoot());
                 });
 
         tagList.addListener((ListChangeListener<Tag>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
                     Tag tag = change.getAddedSubList().get(0);
-                    Label tagLabel = new Label(tag.toString());
+                    TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
                     logger.fine(tag.getName() + "was added to the list!");
-                    tags.getChildren().add(tagLabel);
-                    tagLabels.put(tag, tagLabel);
+                    tags.getChildren().add(tagLabel.getRoot());
+                    tagLabels.put(tag, tagLabel.getRoot());
                 } else if (change.wasRemoved()) {
                     Tag tag = change.getRemoved().get(0);
                     logger.fine(tag.getName() + "was removed from the list!");
@@ -58,8 +57,8 @@ public class TagsPanel extends UiPart<Region> {
                     change.getList().stream()
                             .sorted(Comparator.comparing(Tag::getName))
                             .forEach(tag -> {
-                                Label tagLabel = new Label(tag.toString());
-                                tags.getChildren().add(tagLabel);
+                                TagLabel tagLabel = new TagLabel(tag.toString(), tag, commandBox);
+                                tags.getChildren().add(tagLabel.getRoot());
                             });
                 }
             }
