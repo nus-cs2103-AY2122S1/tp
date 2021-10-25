@@ -30,6 +30,9 @@ public class AddLabCommand extends Command {
 
     public static final String MESSAGE_LAB_ALREADY_EXISTS = "Lab Already Exists: %1$s";
 
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
+
+
     private final Lab result;
 
     /**
@@ -43,9 +46,13 @@ public class AddLabCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
         // Gets the last filtered list displayed
         List<Student> lastShownList = model.getFilteredStudentList();
         boolean exists = false;
+        if (result.getTotalScore() < 0.0) {
+            throw new CommandException(LAB_SCORE_MESSAGE_CONSTRAINTS);
+        }
         for (Student std: lastShownList) {
             Student target = std;
             if (!target.addLabResult(this.result)) {

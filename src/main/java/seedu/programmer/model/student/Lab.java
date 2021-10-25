@@ -18,8 +18,6 @@ public class Lab {
     public Lab(String title, Double actualScore, Double totalScore) {
         requireNonNull(actualScore);
         requireNonNull(totalScore);
-        checkArgument(isValidScore(actualScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
-        checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = actualScore;
         this.totalScore = totalScore;
@@ -32,7 +30,6 @@ public class Lab {
     public Lab(String title, Double totalScore) {
         requireNonNull(title);
         requireNonNull(totalScore);
-        checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = Double.NaN;
         this.totalScore = totalScore;

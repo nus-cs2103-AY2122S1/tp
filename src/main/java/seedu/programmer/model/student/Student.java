@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.programmer.logic.commands.exceptions.CommandException;
 //import seedu.programmer.model.student.comparator.SortByLabName;
 
 
@@ -24,6 +25,7 @@ public class Student {
     private final Email email;
     private ObservableList<Lab> labResultList;
 
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The lab total score should be a positive value.";
 
     /**
      * Every field must be present and not null.
@@ -117,6 +119,7 @@ public class Student {
     public void editLabResult(Lab lab , Double score) {
         int index = this.labResultList.indexOf(lab);
         Lab current = this.labResultList.get(index);
+
         current.updateActualScore(score);
     }
 
