@@ -58,7 +58,7 @@ public class Client {
      */
     public void addTags(Set<Tag> tags) {
         this.tags.addAll(tags);
-        this.tags.forEach(t -> t.addClient(this));
+        this.tags.forEach(tag -> tag.addClient(this));
     }
 
     /**
@@ -66,7 +66,9 @@ public class Client {
      * Invokes this when the client is no longer referenced.
      */
     public void delete() {
-        tags.forEach(t -> t.removeClient(this));
+        tags.forEach(tag -> {
+            tag.removeClient(this);
+        });
     }
 
     /**
@@ -142,6 +144,38 @@ public class Client {
 
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Client ID: ")
+                .append(getClientId())
+                .append("; Name: ")
+                .append(getName())
+                .append("; Email: ")
+                .append(getEmail())
+                .append("; Phone: ")
+                .append(getPhone())
+                .append("; Address: ")
+                .append(getAddress())
+                .append("; Risk Appetite: ")
+                .append(getRiskAppetite())
+                .append("; Disposable Income: ")
+                .append(getDisposableIncome())
+                .append("; current plans: ")
+                .append(getCurrentPlan())
+                .append("; Last Met: ")
+                .append(getLastMet())
+                .append("; Next Meeting: ")
+                .append(getNextMeeting());
+
+        Set<Tag> tags = getTags();
+        if (!tags.isEmpty()) {
+            builder.append("; Tags: ");
+            tags.forEach(builder::append);
+        }
+        return builder.toString();
+    }
+
     public ClientId getClientId() {
         return clientId;
     }
@@ -176,38 +210,6 @@ public class Client {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder builder = new StringBuilder();
-        builder.append("Client ID: ")
-                .append(getClientId())
-                .append("; Name: ")
-                .append(getName())
-                .append("; Email: ")
-                .append(getEmail())
-                .append("; Phone: ")
-                .append(getPhone())
-                .append("; Address: ")
-                .append(getAddress())
-                .append("; Risk Appetite: ")
-                .append(getRiskAppetite())
-                .append("; Disposable Income: ")
-                .append(getDisposableIncome())
-                .append("; current plans: ")
-                .append(getCurrentPlan())
-                .append("; Last Met: ")
-                .append(getLastMet())
-                .append("; Next Meeting: ")
-                .append(getNextMeeting());
-
-        Set<Tag> tags = getTags();
-        if (!tags.isEmpty()) {
-            builder.append("; Tags: ");
-            tags.forEach(builder::append);
-        }
-        return builder.toString();
     }
 
     public NextMeeting getNextMeeting() {

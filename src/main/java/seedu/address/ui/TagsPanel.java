@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -53,14 +54,13 @@ public class TagsPanel extends UiPart<Region> {
                     logger.fine(tag.getName() + "was removed from the list!");
                     tags.getChildren().remove(tagLabels.remove(change.getRemoved().get(0)));
                 } else if (change.wasUpdated()) {
-                    // TODO: update client count
-                    // System.out.println("Items from " + change.getFrom() + " to " + change.getTo() + " changed");
-                    // for (int i = change.getFrom(); i < change.getTo(); i++) {
-                    //     Tag tag = change.getList().get(i);
-                    //     Label label = new Label(tag.toString());
-                    //     tags.getChildren().set(i, label);
-                    //     tagLabels.replace(tag, label);
-                    // }
+                    tags.getChildren().clear();
+                    change.getList().stream()
+                            .sorted(Comparator.comparing(Tag::getName))
+                            .forEach(tag -> {
+                                Label tagLabel = new Label(tag.toString());
+                                tags.getChildren().add(tagLabel);
+                            });
                 }
             }
         });

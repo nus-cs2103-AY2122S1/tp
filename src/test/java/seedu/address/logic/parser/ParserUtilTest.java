@@ -294,7 +294,7 @@ public class ParserUtilTest {
     @Test
     public void parseNextMeeting_validValueWithoutWhitespace_returnsNextMeeting() throws Exception {
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-            "Starbucks @ UTown", "");
+                "Starbucks @ UTown", "");
         assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(VALID_NEXTMEETING));
     }
 
@@ -302,7 +302,7 @@ public class ParserUtilTest {
     public void parseNextMeeting_validValueWithWhitespace_returnsTrimmedNextMeeting() throws Exception {
         String nextMeetingWithWhitespace = WHITESPACE + VALID_NEXTMEETING + WHITESPACE;
         NextMeeting expectedNextMeeting = new NextMeeting("24-09-2021", "10:00", "12:00",
-            "Starbucks @ UTown", "");
+                "Starbucks @ UTown", "");
         assertEquals(expectedNextMeeting, ParserUtil.parseNextMeeting(nextMeetingWithWhitespace));
     }
 
@@ -406,18 +406,18 @@ public class ParserUtilTest {
         @Override
         public boolean hasTagName(String tagName) {
             requireNonNull(tagName);
-            return tagsAdded.stream().anyMatch(t -> t.getName().equals(tagName));
-        }
-
-        @Override
-        public Tag getTag(String tagName) {
-            return new Tag(tagName);
+            return tagsAdded.stream().anyMatch(tag -> tag.getName().equals(tagName));
         }
 
         @Override
         public void addTag(Tag tag) {
             requireNonNull(tag);
             tagsAdded.add(tag);
+        }
+
+        @Override
+        public Tag getTag(String tagName) {
+            return new Tag(tagName);
         }
     }
 }

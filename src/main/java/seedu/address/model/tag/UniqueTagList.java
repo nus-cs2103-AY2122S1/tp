@@ -18,7 +18,7 @@ public class UniqueTagList implements Iterable<Tag> {
 
     // TODO: fix bug where update event not fired
     private final ObservableList<Tag> internalList =
-            FXCollections.observableArrayList(tag -> new Observable[] {tag.getClients()});
+            FXCollections.observableArrayList(tag -> new Observable[] {tag.versionProperty()});
     private final ObservableList<Tag> internalUnmodifiableList = FXCollections.unmodifiableObservableList(internalList);
 
     /**

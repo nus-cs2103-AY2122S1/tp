@@ -3,6 +3,8 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.client.Client;
@@ -19,6 +21,7 @@ public class Tag {
     // TODO: tag color + FXML
     private final String tagName;
     private final ObservableList<Client> clients = FXCollections.observableArrayList();
+    private final IntegerProperty version = new SimpleIntegerProperty();
 
     /**
      * Constructs a {@code Tag}.
@@ -46,6 +49,29 @@ public class Tag {
     public void addClient(Client client) {
         requireNonNull(client);
         clients.add(client);
+        int nextVersion = getVersion();
+        setVersion(++nextVersion);
+    }
+
+    /**
+     * Returns the version property of the tag.
+     */
+    public final IntegerProperty versionProperty() {
+        return version;
+    }
+
+    /**
+     * Returns the version of the tag.
+     */
+    public final int getVersion() {
+        return versionProperty().get();
+    }
+
+    /**
+     * Sets the version of the tag to force {@code UniqueTagList} to fire an update.
+     */
+    public final void setVersion(int value) {
+        versionProperty().set(value);
     }
 
     /**
@@ -55,6 +81,8 @@ public class Tag {
      */
     public void removeClient(Client client) {
         clients.remove(client);
+        int nextVersion = getVersion();
+        setVersion(++nextVersion);
     }
 
     /**
