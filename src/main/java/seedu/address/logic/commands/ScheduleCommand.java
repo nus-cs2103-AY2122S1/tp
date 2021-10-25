@@ -7,7 +7,7 @@ public class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = "schedule";
 
-    public static final String COMMAND_ACTION = "View your weekly schedule.";
+    public static final String COMMAND_ACTION = "View Weekly Schedule";
 
     public static final String USER_TIP = "To view your weekly schedule, type: " + COMMAND_WORD;
 

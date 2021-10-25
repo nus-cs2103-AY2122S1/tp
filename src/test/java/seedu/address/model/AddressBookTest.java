@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalLessons.RECURRING_LESSON;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalTags.TAG_ZOOM;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -117,6 +118,16 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+    }
+
+    @Test
+    public void getTagList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagList().remove(0));
+    }
+
+    @Test
+    public void getTagCounter_modifyMap_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getTagCounter().put(TAG_ZOOM, 1));
     }
 
     /**

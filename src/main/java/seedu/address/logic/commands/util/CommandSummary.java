@@ -136,7 +136,7 @@ public class CommandSummary {
                         ViewCommand.COMMAND_EXAMPLE),
                 new CommandSummary(ClearCommand.COMMAND_ACTION, ClearCommand.COMMAND_WORD,
                         ClearCommand.COMMAND_WORD),
-                new CommandSummary(TagCommand.COMMAND_WORD, TagCommand.COMMAND_WORD, TagCommand.COMMAND_WORD),
+                new CommandSummary(TagCommand.COMMAND_ACTION, TagCommand.COMMAND_WORD, TagCommand.COMMAND_WORD),
                 new CommandSummary(ExitCommand.COMMAND_ACTION, ExitCommand.COMMAND_WORD,
                         ExitCommand.COMMAND_WORD));
     }
