@@ -137,6 +137,16 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean undo() {
+        return false;
+    }
+
+    @Override
+    public boolean redo() {
+        return false;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
