@@ -22,7 +22,13 @@ import seedu.anilist.model.genre.Genre;
  */
 public class GenreAddCommand extends GenreCommand {
 
-    public static final String MESSAGE_SUCCESS = "New genres %1$s added to anime %2$s";
+    public static final String MESSAGE_SUCCESS = "Genres %1$s added to anime.\n"
+            + "%2$s";
+    public static final String MESSAGE_FAILURE = "Genres %1$s are already present in anime.\n"
+            + "%2$s";
+    public static final String MESSAGE_PARTIAL_SUCCESS = "Genres %1$s added.\n"
+            + "Genres %2$s are already present in anime.\n"
+            + "%3$s";
 
     public GenreAddCommand(Index index, GenreCommand.GenresDescriptor genresDescriptor) {
         super(index, genresDescriptor);
@@ -42,7 +48,23 @@ public class GenreAddCommand extends GenreCommand {
 
         model.setAnime(animeToEdit, editedAnime);
         model.updateFilteredAnimeList(PREDICATE_SHOW_ALL_ANIME);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, getGenresDescriptor().toString(), editedAnime));
+
+        String resultMessage;
+        if (getGenresDescriptor().hasUnusedGenres() && getGenresDescriptor().hasUsedGenres()) {
+            resultMessage = String.format(MESSAGE_PARTIAL_SUCCESS,
+                    getGenresDescriptor().usedGenresString(),
+                    getGenresDescriptor().unusedGenresString(),
+                    editedAnime);
+        } else if (getGenresDescriptor().hasUsedGenres()) {
+            resultMessage = String.format(MESSAGE_SUCCESS,
+                    getGenresDescriptor().usedGenresString(),
+                    editedAnime);
+        } else {
+            resultMessage = String.format(MESSAGE_FAILURE,
+                    getGenresDescriptor().unusedGenresString(),
+                    editedAnime);
+        }
+        return new CommandResult(resultMessage);
     }
 
     /**
@@ -58,10 +80,22 @@ public class GenreAddCommand extends GenreCommand {
 
         Set<Genre> updatedGenres = new HashSet<>(animeToEdit.getGenres());
         Set<Genre> genresToAdd = genresDescriptor.getGenres().get();
+        Set<Genre> addedGenres = new HashSet<>();
+        Set<Genre> unusedGenres = new HashSet<>();
 
         assert genresToAdd != null;
 
-        updatedGenres.addAll(genresToAdd);
+        for (Genre genreToAdd : genresToAdd) {
+            boolean genreIsAdded = updatedGenres.add(genreToAdd);
+            if (genreIsAdded) {
+                addedGenres.add(genreToAdd);
+            } else {
+                unusedGenres.add(genreToAdd);
+            }
+        }
+
+        genresDescriptor.setUsedGenres(addedGenres);
+        genresDescriptor.setUnusedGenres(unusedGenres);
 
         return new Anime(updatedName, episode, status, updatedGenres);
     }
