@@ -13,6 +13,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.anilist.commons.core.LogsCenter;
 import seedu.anilist.model.genre.Genre;
@@ -39,6 +40,10 @@ public class StatsDisplay extends UiPart<Stage> {
 
     @FXML
     private BarChart<Number, String> barChart;
+
+    @FXML
+    private StackPane statusbarPlaceholder;
+
 
     /**
      * Creates a StatsDisplay UI component.

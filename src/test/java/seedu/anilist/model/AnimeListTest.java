@@ -11,6 +11,7 @@ import static seedu.anilist.testutil.TypicalAnimes.getTypicalAnimeList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.anilist.model.anime.Anime;
 import seedu.anilist.model.anime.exceptions.DuplicateAnimeException;
+import seedu.anilist.model.genre.Genre;
+import seedu.anilist.model.stats.Stats;
 import seedu.anilist.testutil.AnimeBuilder;
 
+/**
+ * Contains integration tests (interaction with Stats) for {@code AnimeList}.
+ */
 public class AnimeListTest {
 
     private final AnimeList animeList = new AnimeList();
@@ -80,6 +86,25 @@ public class AnimeListTest {
     @Test
     public void getAnimeList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> animeList.getAnimeList().remove(0));
+    }
+
+    @Test
+    public void fetchStats_emptyAnimeList_returnsTrue() {
+        HashMap<Genre, Integer> expectedGenreCountHashmap = new HashMap<>();
+        Stats expectedStats = new Stats(0, 0, 0, 0, expectedGenreCountHashmap);
+        assertEquals(expectedStats, animeList.fetchUserStats());
+    }
+
+    @Test
+    public void fetchStats_oneAnimeInAnimeList_returnsTrue() {
+        Anime animeSingleGenre = new AnimeBuilder().withGenres(VALID_GENRE_ACTION).build();
+        animeList.addAnime(animeSingleGenre);
+
+        HashMap<Genre, Integer> expectedGenreCountHashmap = new HashMap<>();
+        int actionGenreCount = 1;
+        expectedGenreCountHashmap.put(new Genre(VALID_GENRE_ACTION), actionGenreCount);
+        Stats expectedStats = new Stats(1 , 0, 0, 1, expectedGenreCountHashmap);
+        assertEquals(expectedStats, animeList.fetchUserStats());
     }
 
     /**

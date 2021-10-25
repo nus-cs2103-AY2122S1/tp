@@ -25,7 +25,7 @@
         <Scene>
             <HBox>
             <VBox alignment="CENTER">
-                <PieChart id="pieChartMain" fx:id="pieChart" stylesheets="@AnimeTheme.css"  />
+                <PieChart id="pieChartMain" fx:id="pieChart" stylesheets="@CharlotteTheme.css"/>
                 <opaqueInsets>
                     <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
                 </opaqueInsets>
@@ -35,7 +35,7 @@
             </VBox>
             <VBox alignment="CENTER">
                 <children>
-                    <BarChart fx:id="barChart" stylesheets="@AnimeTheme.css">
+                    <BarChart fx:id="barChart" stylesheets="@CharlotteTheme.css">
                         <xAxis>
                             <NumberAxis side="LEFT" />
                         </xAxis>

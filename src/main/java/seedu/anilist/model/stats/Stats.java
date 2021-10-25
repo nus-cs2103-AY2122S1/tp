@@ -89,4 +89,20 @@ public class Stats {
     public HashMap<Genre, Integer> getTopGenres() {
         return this.topGenres;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this // short circuit if same object
+                || (other instanceof Stats)) {
+            return true;
+        } // instanceof handles nulls
+
+        Stats otherStats = (Stats) other;
+        return this.watchingCount == otherStats.watchingCount
+                && this.toWatchCount == otherStats.toWatchCount
+                && this.finishedCount == otherStats.finishedCount
+                && this.episodesCount == otherStats.episodesCount
+                && this.numUniqueGenres == otherStats.numUniqueGenres
+                && this.topGenres.equals(otherStats.getTopGenres());
+    }
 }
