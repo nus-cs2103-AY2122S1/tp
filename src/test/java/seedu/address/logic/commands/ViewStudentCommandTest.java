@@ -11,7 +11,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.student.ContainsStudentNamePredicate;
 import seedu.address.model.student.Name;
 
 public class ViewStudentCommandTest {
