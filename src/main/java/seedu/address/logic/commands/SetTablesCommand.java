@@ -13,7 +13,7 @@ import seedu.address.model.table.Table;
  * Adds a set of tables to the address book.
  */
 public class SetTablesCommand extends Command {
-    public static final String COMMAND_WORD = "settables";
+    public static final String COMMAND_WORD = "setTables";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Set the number of tables and size of each table in the restaurant.\n"
             + "Parameters: number of seats in a table [separated by comma] "

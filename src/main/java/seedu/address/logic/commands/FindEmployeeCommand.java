@@ -12,7 +12,7 @@ import seedu.address.model.person.employee.EmployeeClassContainsKeywordsPredicat
  */
 public class FindEmployeeCommand extends Command {
 
-    public static final String COMMAND_WORD = "finde";
+    public static final String COMMAND_WORD = "findE";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all employees that contain "
             + "any of "

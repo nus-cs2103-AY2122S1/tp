@@ -19,7 +19,7 @@ import seedu.address.model.person.employee.Employee;
  * Adds an employee to the address book.
  */
 public class AddEmployeeCommand extends Command {
-    public static final String COMMAND_WORD = "adde";
+    public static final String COMMAND_WORD = "addE";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
             + "Parameters: "

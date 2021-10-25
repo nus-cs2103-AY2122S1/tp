@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CustomerCommand.SHOWING_SWITCH_MESSAGE;
 import static seedu.address.logic.commands.CustomerCommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.ListCustomerCommand.SHOWING_SWITCH_MESSAGE;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 
-public class CustomerCommandTest {
+public class ListCustomerCommandTest {
     private Model model = new ModelManager();
     private Model expectedModel = new ModelManager();
 
@@ -17,6 +17,6 @@ public class CustomerCommandTest {
     public void execute_customerSwitch_success() {
         CommandResult expectedCommandResult = new CommandResult(SHOWING_SWITCH_MESSAGE,
                 false, false, true, false, false, false);
-        assertCommandSuccess(new CustomerCommand(), model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(new ListCustomerCommand(), model, expectedCommandResult, expectedModel);
     }
 }
