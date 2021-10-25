@@ -184,6 +184,11 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+
+    private void handleCalendar() {
+        centerPanel.displaySchedulePanel();
+    }
+
     private void handleDay() {
         centerPanel.showDay();
     }
@@ -248,6 +253,10 @@ public class MainWindow extends UiPart<Stage> {
                 } else {
                     handlePersonGridPanel();
                 }
+                break;
+
+            case CALENDAR:
+                handleCalendar();
                 break;
 
             case DAY:

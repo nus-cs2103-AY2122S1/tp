@@ -15,6 +15,7 @@ public class CommandResult {
     public enum DisplayType {
         HELP, // Help information should be shown to the user.
         STUDENTS, // Show the list of students to the user.
+        CALENDAR, // Switch to calendar view.
         DAY, // Daily Schedule should be shown to the user.
         WEEK, // Weekly Schedule should be shown to the user.
         MONTH, // Monthly Schedule should be shown to the user.
