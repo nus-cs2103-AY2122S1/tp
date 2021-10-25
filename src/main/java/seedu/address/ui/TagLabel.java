@@ -18,6 +18,9 @@ public class TagLabel extends UiPart<Region> {
     @FXML
     private Label label;
 
+    /**
+     * Creates a {@code TagLabel} with the given {@code value}, {@code tag} and {@code commandBox}.
+     */
     public TagLabel(String value, Tag tag, CommandBox commandBox) {
         super(FXML);
 

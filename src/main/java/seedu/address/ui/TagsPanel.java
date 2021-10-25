@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -27,7 +26,7 @@ public class TagsPanel extends UiPart<Region> {
     private FlowPane tags;
 
     /**
-     * Creates a {@code TagsPanel} with the given {@code CommandExecutor}.
+     * Creates a {@code TagsPanel} with the given {@code tagList} and {@code commandBox}.
      */
     public TagsPanel(ObservableList<Tag> tagList, CommandBox commandBox) {
         super(FXML);
