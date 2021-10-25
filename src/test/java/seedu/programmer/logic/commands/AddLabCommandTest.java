@@ -50,7 +50,6 @@ public class AddLabCommandTest {
         assertCommandFailure(addLabCommand, model, expectedMessage);
     }
 
-    //TODO: It's failing because lab already exists when it actually does not.
     @Test
     public void execute_labAdded_success() {
         Lab labToAdd = sampleLabA;
