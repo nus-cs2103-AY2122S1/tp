@@ -10,7 +10,7 @@ import seedu.address.commons.core.Money;
  */
 public class Revenue {
 
-    public static final String MESSAGE_CONSTRAINTS = "Revenue can take any values, and it should not be negative";
+    public static final String MESSAGE_CONSTRAINTS = "Revenue can be any number with up to 2 decimal places but it should not be negative";
 
     public final Money value;
 
