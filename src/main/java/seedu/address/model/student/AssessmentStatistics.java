@@ -90,7 +90,7 @@ public class AssessmentStatistics {
             }
         }
 
-        // Should not happen since a Score must be between the minimum and maximum name (inclusive)
+        // Should not happen since a Score must be between the minimum and maximum value (inclusive)
         assert false;
 
         return null;
@@ -121,8 +121,7 @@ public class AssessmentStatistics {
         Optional<Double> min = scores.stream()
                 .map(Score::getNumericValue)
                 .min(Comparator.naturalOrder());
-        assert min.isPresent();
-        return min.get();
+        return min.orElse(Score.MIN_SCORE);
     }
 
     /**
@@ -133,8 +132,7 @@ public class AssessmentStatistics {
         Optional<Double> max = scores.stream()
                 .map(Score::getNumericValue)
                 .max(Comparator.naturalOrder());
-        assert max.isPresent();
-        return max.get();
+        return max.orElse(Score.MIN_SCORE);
     }
 
     /**
@@ -146,13 +144,19 @@ public class AssessmentStatistics {
                 .map(Score::getNumericValue)
                 .sorted().collect(Collectors.toList());
 
+        if (sorted.isEmpty()) {
+            return Score.MIN_SCORE;
+        }
+
         long size = sorted.size();
+        int midPos; // middle position of the sorted list
         if (size % 2 == 1) { // odd number of scores
-            return sorted.get((int) (size + 1) / 2 - 1);
+            midPos = (int) ((size + 1) / 2.0 - 1);
+            return sorted.get(midPos);
         } else { // even number of scores
-            long half = size / 2;
-            return (sorted.get((int) half - 1)
-                    + sorted.get((int) half)) / 2;
+            midPos = (int) (size / 2.0);
+            return (sorted.get(midPos - 1)
+                + sorted.get(midPos)) / 2.0;
         }
     }
 
@@ -160,7 +164,7 @@ public class AssessmentStatistics {
      * Returns the mean score for the {@code Assessment}.
      */
     public double getMean() {
-        return sumOfScores / numScores;
+        return numScores == 0 ? Score.MIN_SCORE : sumOfScores / numScores;
     }
 
     /**
@@ -174,15 +178,20 @@ public class AssessmentStatistics {
                 .map(Score::getNumericValue)
                 .sorted().collect(Collectors.toList());
 
+        if (sorted.isEmpty()) {
+            return Score.MIN_SCORE;
+        }
+
         long size = sorted.size();
-        return sorted.get(((int) Math.ceil(x / 100.0 * size)) - 1);
+        int xPercentilePos = (int) Math.ceil(x / 100.0 * size);
+        return sorted.get(xPercentilePos - 1); // list indexing starts at 0
     }
 
     /**
      * Returns a histogram representing the scores for the assessment.
      */
     public Chart toHistogram() {
-        return ChartUtil.createBarChart(String.format(CHART_TITLE, assessment.getValue()),
+        return ChartUtil.createBarChart(String.format(CHART_TITLE, assessment.getName()),
                 CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution());
     }
 
