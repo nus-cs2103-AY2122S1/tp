@@ -48,7 +48,7 @@ we have to offer!
 * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-## What is Command-line Interface (CLI?)
+## What is Command-line Interface (CLI?) <a name="what-is-cli"></a>
 A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
 you would type the command in text in the command box, and the programme will execute your command, and reflect its response in the response box.
 
@@ -71,7 +71,9 @@ all the details!<br>
 
 ## Quick start <a name="quick-start"></a>
 
-1. Ensure you have Java `11` or above installed in your Computer.
+1. Ensure you have Java `11` or above installed in your Computer. If you haven't installed, refer to these guides based on your operating software
+   [Windows](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk)
+   [macOS](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-F575EB4A-70D3-4AB4-A20E-DBE95171AB5F)
 
 2. Download the latest `plannermd.jar` from [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/releases).
 
@@ -297,7 +299,7 @@ Adds a doctor to the doctor records.
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dob/DATE_OF_BIRTH [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A patient can have any number of tags (including 0).
+A doctor can have any number of tags (including 0).
 </div>
 
 Examples:
