@@ -12,11 +12,10 @@ import seedu.address.logic.commands.event.EaddCommand;
 import seedu.address.logic.commands.event.EdeleteCommand;
 import seedu.address.logic.commands.member.EditCommand;
 import seedu.address.logic.commands.event.ElistCommand;
-import seedu.address.logic.commands.ElistmCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.member.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.member.ListCommand;
+import seedu.address.logic.commands.member.MlistCommand;
 import seedu.address.logic.commands.member.PaddCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
@@ -24,10 +23,7 @@ import seedu.address.logic.commands.task.TlistCommand;
 import seedu.address.logic.parser.event.EaddCommandParser;
 import seedu.address.logic.parser.event.EdeleteCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.member.DeleteCommandParser;
-import seedu.address.logic.parser.member.EditCommandParser;
-import seedu.address.logic.parser.member.FindCommandParser;
-import seedu.address.logic.parser.member.PaddCommandParser;
+import seedu.address.logic.parser.member.*;
 import seedu.address.logic.parser.task.TaddCommandParser;
 import seedu.address.logic.parser.task.TdelCommandParser;
 import seedu.address.logic.parser.task.TlistCommandParser;
@@ -71,8 +67,8 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case MlistCommand.COMMAND_WORD:
+            return new MlistCommandParser().parse(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -88,9 +84,6 @@ public class AddressBookParser {
 
         case ElistCommand.COMMAND_WORD:
             return new ElistCommand();
-
-        case ElistmCommand.COMMAND_WORD:
-            return new ElistmCommandParser().parse(arguments);
 
         case TaddCommand.COMMAND_WORD:
             return new TaddCommandParser().parse(arguments);

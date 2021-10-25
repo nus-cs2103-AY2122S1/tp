@@ -1,25 +1,24 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.member;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.task.TaddCommand;
-import seedu.address.logic.commands.task.TdelCommand;
+import seedu.address.logic.commands.member.PaddCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -27,73 +26,57 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.event.Event;
 import seedu.address.model.module.member.Member;
 import seedu.address.model.module.task.Task;
-import seedu.address.model.module.task.TaskList;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.MemberBuilder;
-import seedu.address.testutil.TaskBuilder;
 
+public class PaddCommandTest {
 
-class TdelCommandTest {
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new TdelCommand(null, null));
+    public void constructor_nullMember_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new PaddCommand(null));
     }
 
     @Test
-    public void execute_taskDeletedByModel_deleteSuccessful() throws Exception {
-        Index validMemberID = Index.fromOneBased(1);
-        Index validTaskID = Index.fromOneBased(1);
-        Task validTask = new TaskBuilder().build();
+    public void execute_memberAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingMemberAdded modelStub = new ModelStubAcceptingMemberAdded();
         Member validMember = new MemberBuilder().build();
-        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TaddCommand tAddCommand = new TaddCommand(validMemberID, validTask);
-        ModelStub modelStub = new ModelStubWithTask(addressBook, validTask, validMemberID);
-        tAddCommand.execute(modelStub);
-        CommandResult commandResult = new TdelCommand(validMemberID, validTaskID).execute(modelStub);
+        CommandResult commandResult = new PaddCommand(validMember).execute(modelStub);
 
-        assertEquals(String.format(TdelCommand.MESSAGE_SUCCESS, validMember.getName(), validTask.getName()),
-                commandResult.getFeedbackToUser());
+        assertEquals(String.format(PaddCommand.MESSAGE_SUCCESS, validMember), commandResult.getFeedbackToUser());
+        assertEquals(Arrays.asList(validMember), modelStub.membersAdded);
     }
 
     @Test
-    public void execute_taskNotPresent_throwsTaskNotFoundException() {
-        Index validMemberID = Index.fromOneBased(1);
-        Index validTaskID = Index.fromOneBased(1);
+    public void execute_duplicateMember_throwsCommandException() {
         Member validMember = new MemberBuilder().build();
-        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand = new TdelCommand(validMemberID, validTaskID);
-        ModelStubWithoutTask modelStub = new ModelStubWithoutTask(addressBook, validMemberID);
+        PaddCommand paddCommand = new PaddCommand(validMember);
+        ModelStub modelStub = new ModelStubWithMember(validMember);
 
-        assertThrows(CommandException.class, TdelCommand.MESSAGE_TASK_NOT_FOUND, () ->
-                tDelCommand.execute(modelStub));
+        assertThrows(CommandException.class, paddCommand.MESSAGE_DUPLICATE_MEMBER, () ->
+                paddCommand.execute(modelStub));
     }
 
-    //TODO
     @Test
-    void equals() {
-        Index validMemberID = Index.fromOneBased(1);
-        Index validTaskID1 = Index.fromOneBased(1);
-        Index validTaskID2 = Index.fromOneBased(2);
-        Member validMember = new MemberBuilder().build();
-        AddressBook addressBook = new AddressBookBuilder().withMember(validMember).build();
-        TdelCommand tDelCommand1 = new TdelCommand(validMemberID, validTaskID1);
-        TdelCommand tDelCommand2 = new TdelCommand(validMemberID, validTaskID2);
+    public void equals() {
+        Member alice = new MemberBuilder().withName("Alice").build();
+        Member bob = new MemberBuilder().withName("Bob").build();
+        PaddCommand addAliceCommand = new PaddCommand(alice);
+        PaddCommand addBobCommand = new PaddCommand(bob);
 
         // same object -> returns true
-        assertTrue(tDelCommand1.equals(tDelCommand1));
+        assertTrue(addAliceCommand.equals(addAliceCommand));
 
         // same values -> returns true
-        TdelCommand tDelCommand1Copy = new TdelCommand(validMemberID, validTaskID1);
-        assertTrue(tDelCommand1.equals(tDelCommand1Copy));
+        PaddCommand addAliceCommandCopy = new PaddCommand(alice);
+        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
 
         // different types -> returns false
-        assertFalse(tDelCommand1.equals(1));
+        assertFalse(addAliceCommand.equals(1));
 
         // null -> returns false
-        assertFalse(tDelCommand1.equals(null));
+        assertFalse(addAliceCommand.equals(null));
 
         // different member -> returns false
-        assertFalse(tDelCommand1.equals(tDelCommand2));
+        assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
     /**
@@ -259,115 +242,45 @@ class TdelCommandTest {
     }
 
     /**
-     * A Model stub that contains a single member with task.
+     * A Model stub that contains a single member.
      */
-    private class ModelStubWithTask extends ModelStub {
-        private final AddressBook addressBook;
+    private class ModelStubWithMember extends ModelStub {
         private final Member member;
-        private final Task task;
-        private TaskList taskListManager;
-        private final FilteredList<Member> filteredMembers;
 
-        ModelStubWithTask(ReadOnlyAddressBook addressBook, Task task, Index memberID) {
-            this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
-            this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
-            requireNonNull(task);
-            this.task = task;
-            this.taskListManager = new TaskList();
-        }
-
-        @Override
-        public ObservableList<Member> getFilteredMemberList() {
-            return filteredMembers;
-        }
-
-        @Override
-        public boolean hasTask(Member member, Task task) {
-            loadTaskList(member);
-            return taskListManager.contains(task);
-        }
-
-        @Override
-        public void addTask(Member member, Task task) {
+        ModelStubWithMember(Member member) {
             requireNonNull(member);
-            loadTaskList(member);
-            taskListManager.add(task);
+            this.member = member;
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return this.addressBook;
-        }
-
-        @Override
-        public void loadTaskList(Member member) {
+        public boolean hasMember(Member member) {
             requireNonNull(member);
-            if (this.taskListManager != member.getTaskList()) {
-                this.taskListManager = member.getTaskList();
-            }
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
-            loadTaskList(member);
-            taskListManager.remove(index);
+            return this.member.isSameType(member);
         }
     }
 
     /**
-     * A Model stub that contains a single member with task.
+     * A Model stub that always accept the member being added.
      */
-    private class ModelStubWithoutTask extends ModelStub {
-        private final AddressBook addressBook;
-        private final Member member;
-        private TaskList taskListManager;
-        private final FilteredList<Member> filteredMembers;
-
-        ModelStubWithoutTask(ReadOnlyAddressBook addressBook, Index memberID) {
-            this.addressBook = new AddressBook(addressBook);
-            requireNonNull(memberID);
-            this.filteredMembers = new FilteredList<>(this.addressBook.getMemberList());
-            this.member = filteredMembers.get(memberID.getZeroBased());
-            this.taskListManager = new TaskList();
-        }
+    private class ModelStubAcceptingMemberAdded extends ModelStub {
+        final ArrayList<Member> membersAdded = new ArrayList<>();
 
         @Override
-        public ObservableList<Member> getFilteredMemberList() {
-            return filteredMembers;
-        }
-
-        @Override
-        public boolean hasTask(Member member, Task task) {
-            loadTaskList(member);
-            return taskListManager.contains(task);
-        }
-
-        @Override
-        public void addTask(Member member, Task task) {
+        public boolean hasMember(Member member) {
             requireNonNull(member);
-            loadTaskList(member);
-            taskListManager.add(task);
+            return membersAdded.stream().anyMatch(member::isSameType);
+        }
+
+        @Override
+        public void addMember(Member member) {
+            requireNonNull(member);
+            membersAdded.add(member);
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
-            return this.addressBook;
-        }
-
-        @Override
-        public void loadTaskList(Member member) {
-            requireNonNull(member);
-            if (this.taskListManager != member.getTaskList()) {
-                this.taskListManager = member.getTaskList();
-            }
-        }
-
-        @Override
-        public void deleteTask(Member member, int index) {
-            loadTaskList(member);
-            taskListManager.remove(index);
+            return new AddressBook();
         }
     }
+
 }

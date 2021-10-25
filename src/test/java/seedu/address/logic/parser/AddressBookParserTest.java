@@ -21,7 +21,7 @@ import seedu.address.logic.commands.member.EditCommand.EditMemberDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.member.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.member.ListCommand;
+import seedu.address.logic.commands.member.MlistCommand;
 import seedu.address.logic.commands.member.PaddCommand;
 import seedu.address.logic.commands.task.TaddCommand;
 import seedu.address.logic.commands.task.TdelCommand;
@@ -101,8 +101,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(parser.parseCommand(MlistCommand.COMMAND_WORD) instanceof MlistCommand);
+        assertTrue(parser.parseCommand(MlistCommand.COMMAND_WORD + " 3") instanceof MlistCommand);
     }
 
     @Test
