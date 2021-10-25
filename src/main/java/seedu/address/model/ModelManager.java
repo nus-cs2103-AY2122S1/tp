@@ -196,10 +196,10 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void split(Predicate<Person> predicate) {
+    public int split(Predicate<Person> predicate) {
         FilteredList<Person> toAllocate = new FilteredList<Person>(addressBook.getPersonList());
         toAllocate.setPredicate(predicate);
-        addressBook.split(toAllocate);
+        return addressBook.split(toAllocate);
     }
 
     @Override
