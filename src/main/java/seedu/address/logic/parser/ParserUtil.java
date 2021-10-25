@@ -161,6 +161,18 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String alias}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code alias} is invalid.
+     */
+    public static String parseAlias(String alias) throws ParseException {
+        requireNonNull(alias);
+
+        return alias.trim();
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *

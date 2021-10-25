@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 
@@ -19,20 +20,21 @@ public class AliasCommand extends Command{
             + PREFIX_ALIAS + "ALIAS "
             + PREFIX_COMMAND + "COMMAND ";
 
-    public static final String MESSAGE_SUCCESS = "Alias successfully added.";
+    public static final String MESSAGE_SUCCESS = "Alias successfully added. Mapped `%s` to the command `%s`.";
 
     private final String alias;
     private final Command command;
+    private final String rawCommand;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AliasCommand(String alias, Command command) {
-        requireNonNull(alias);
-        requireNonNull(command);
+    public AliasCommand(String alias, Command command, String rawCommand) {
+        requireAllNonNull(alias, command, rawCommand);
 
         this.alias = alias;
         this.command = command;
+        this.rawCommand = rawCommand;
     }
 
     @Override
@@ -41,7 +43,7 @@ public class AliasCommand extends Command{
 
         CommandAliases.put(alias, command);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, alias, rawCommand));
     }
 
     @Override
@@ -49,6 +51,7 @@ public class AliasCommand extends Command{
         return other == this // short circuit if same object
                 || (other instanceof AliasCommand // instanceof handles nulls
                 && alias.equals(((AliasCommand) other).alias)
-                && command.equals(((AliasCommand) other).command));
+                && command.equals(((AliasCommand) other).command)
+                && rawCommand.equals(((AliasCommand) other).rawCommand));
     }
 }
