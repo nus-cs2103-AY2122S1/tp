@@ -1,9 +1,18 @@
 package seedu.programmer.model.student;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.programmer.commons.util.AppUtil.checkArgument;
+
 public class Lab {
     private String title;
     private Double actualScore;
     private Double totalScore;
+
+    public static final String LAB_TITLE_MESSAGE_CONSTRAINTS = "Lab number takes in a double integer value "
+            + "in the format XX.";
+    public static final String LAB_SCORE_MESSAGE_CONSTRAINTS = "The total score should be a positive value.";
+
+    private static final String LAB_TITLE_VALIDATION_REGEX = "\\d{2}+";
 
     /**
      * @param title the title of the lab
@@ -11,6 +20,11 @@ public class Lab {
      * @param totalScore the total score
      * */
     public Lab(String title, Double actualScore, Double totalScore) {
+        requireNonNull(actualScore);
+        //requireNonNull(totalScore);
+        checkArgument(isValidLab(title), LAB_TITLE_MESSAGE_CONSTRAINTS);
+        //checkArgument(isValidScore(actualScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
+        //checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = actualScore;
         this.totalScore = totalScore;
@@ -21,6 +35,10 @@ public class Lab {
      * @param totalScore the total score
      * */
     public Lab(String title, Double totalScore) {
+        requireNonNull(title);
+        // requireNonNull(totalScore);
+        checkArgument(isValidLab(title), LAB_TITLE_MESSAGE_CONSTRAINTS);
+        //checkArgument(isValidScore(totalScore), LAB_SCORE_MESSAGE_CONSTRAINTS);
         this.title = title;
         this.actualScore = Double.NaN;
         this.totalScore = totalScore;
@@ -80,6 +98,21 @@ public class Lab {
         return other == this // short circuit if same object
                 || (other instanceof Lab // instanceof handles nulls
                 && title.equals(((Lab) other).getTitle()));
+    }
+
+    /**
+     * Returns true if a given string is a valid lab title.
+     */
+    public static boolean isValidLab (String title) {
+        return title.matches(LAB_TITLE_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid score.
+     */
+    public static boolean isValidScore (Double score) {
+        System.out.println(score);
+        return score >= 0;
     }
 
     @Override
