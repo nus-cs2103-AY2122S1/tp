@@ -377,6 +377,21 @@ Step 4. The user decides to view the usage of `add` to learn to add a contact, a
 Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command.
 
 
+### \[Work in progress\] Birthday Reminder feature
+Shows a list of people with upcoming birthday.
+
+#### Proposed Implementation
+
+Step 1. On app startup sort people with birthday by birth month and day only into a list of person.
+
+Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
+to current day.
+
+Step 3. The rest of the list with birthday after this first person will be displayed in sorted order.
+
+Step 4. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
+earliest birthday and display remaining people in sorted order.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
