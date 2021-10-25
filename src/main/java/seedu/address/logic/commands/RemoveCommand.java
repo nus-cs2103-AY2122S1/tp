@@ -51,8 +51,9 @@ public class RemoveCommand extends Command {
             + PREFIX_LANGUAGE + "3";
 
     public static final String MESSAGE_REMOVE_FIELD_SUCCESS = "Remove data field: %1$s";
-    public static final String MESSAGE_NOT_REMOVED = "";
+    public static final String MESSAGE_NOT_REMOVED = "At least one field to remove must be provided";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in ComputingConnection.";
+    private static final String MESSAGE_INVALID_FIELD = "The specified index to delete is out of bounds!";
 
     private final Index index;
     private final RemovePersonDescriptor removePersonDescriptor;
@@ -91,7 +92,7 @@ public class RemoveCommand extends Command {
     }
 
     private static Person createRemovePerson(Person personToRemoveFrom, RemovePersonDescriptor
-    removePersonDescriptor) {
+    removePersonDescriptor) throws CommandException {
         assert personToRemoveFrom != null;
 
         Name previousName = personToRemoveFrom.getName();
@@ -123,7 +124,7 @@ public class RemoveCommand extends Command {
                 updatedSkills, updatedLanguages, updatedFrameworks, updatedTags);
     }
 
-    private static Set<Skill> removeFromSkills(Set<Index> indexesToRemove, Set<Skill> previousSkills) {
+    private static Set<Skill> removeFromSkills(Set<Index> indexesToRemove, Set<Skill> previousSkills) throws CommandException {
         // Arrange previous skills in an array
         Skill[] skillArray = previousSkills.toArray(new Skill[0]);
         Arrays.sort(skillArray, Comparator.comparing(skill -> skill.skillName));
@@ -141,6 +142,9 @@ public class RemoveCommand extends Command {
         // For each specified index, remove corresponding skill in skillArray
         for (int j = intIndexesArray.length; j >= 1; j --) {
             int indexOfSkillToRemove = intIndexesArray[j - 1];
+            if (indexOfSkillToRemove > skillArray.length - 1) {
+                throw new CommandException(MESSAGE_INVALID_FIELD);
+            }
             skillArray[indexOfSkillToRemove] = null;
         }
 
@@ -155,7 +159,8 @@ public class RemoveCommand extends Command {
         return updatedSkills;
     }
 
-    private static Set<Language> removeFromLanguages(Set<Index> indexesToRemove, Set<Language> previousLanguages) {
+    private static Set<Language> removeFromLanguages(Set<Index> indexesToRemove, Set<Language> previousLanguages)
+            throws CommandException {
         // Arrange previous languages in an array
         Language[] languageArray = previousLanguages.toArray(new Language[0]);
         Arrays.sort(languageArray, Comparator.comparing(language -> language.languageName));
@@ -173,6 +178,9 @@ public class RemoveCommand extends Command {
         // For each specified index, remove corresponding language in languageArray
         for (int j = intIndexesArray.length; j >= 1; j --) {
             int indexOfLanguageToRemove = intIndexesArray[j - 1];
+            if (indexOfLanguageToRemove > languageArray.length - 1) {
+                throw new CommandException(MESSAGE_INVALID_FIELD);
+            }
             languageArray[indexOfLanguageToRemove] = null;
         }
 
@@ -187,7 +195,7 @@ public class RemoveCommand extends Command {
         return updatedLanguages;
     }
 
-    private static Set<Framework> removeFromFrameworks(Set<Index> indexesToRemove, Set<Framework> previousFrameworks) {
+    private static Set<Framework> removeFromFrameworks(Set<Index> indexesToRemove, Set<Framework> previousFrameworks) throws CommandException {
         // Arrange previous frameworks in an array
         Framework[] frameworkArray = previousFrameworks.toArray(new Framework[0]);
         Arrays.sort(frameworkArray, Comparator.comparing(framework -> framework.frameworkName));
@@ -205,6 +213,9 @@ public class RemoveCommand extends Command {
         // For each specified index, remove corresponding framework in frameworkArray
         for (int j = intIndexesArray.length; j >= 1; j --) {
             int indexOfFrameworkToRemove = intIndexesArray[j - 1];
+            if (indexOfFrameworkToRemove > frameworkArray.length - 1) {
+                throw new CommandException(MESSAGE_INVALID_FIELD);
+            }
             frameworkArray[indexOfFrameworkToRemove] = null;
         }
 
@@ -219,7 +230,7 @@ public class RemoveCommand extends Command {
         return updatedFrameworks;
     }
 
-    private static Set<Tag> removeFromTags(Set<Index> indexesToRemove, Set<Tag> previousTags) {
+    private static Set<Tag> removeFromTags(Set<Index> indexesToRemove, Set<Tag> previousTags) throws CommandException {
         // Arrange previous tags in an array
         Tag[] tagArray = previousTags.toArray(new Tag[0]);
         Arrays.sort(tagArray, Comparator.comparing(tag -> tag.tagName));
@@ -237,6 +248,9 @@ public class RemoveCommand extends Command {
         // For each specified index, remove corresponding tag in tagArray
         for (int j = intIndexesArray.length; j >= 1; j --) {
             int indexOfTagToRemove = intIndexesArray[j - 1];
+            if (indexOfTagToRemove > tagArray.length - 1) {
+                throw new CommandException(MESSAGE_INVALID_FIELD);
+            }
             tagArray[indexOfTagToRemove] = null;
         }
 
