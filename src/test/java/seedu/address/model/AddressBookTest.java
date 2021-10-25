@@ -27,128 +27,128 @@ import seedu.address.testutil.ClientBuilder;
 
 public class AddressBookTest {
 
-        private final AddressBook addressBook = new AddressBook();
+    private final AddressBook addressBook = new AddressBook();
 
-        @Test
-        public void constructor() {
-                assertEquals(Collections.emptyList(), addressBook.getClientList());
+    @Test
+    public void constructor() {
+        assertEquals(Collections.emptyList(), addressBook.getClientList());
+    }
+
+    @Test
+    public void resetData_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+    }
+
+    @Test
+    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.resetData(newData);
+        assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void resetData_withDuplicateClients_throwsDuplicateClientException() {
+        // Two clients with the same identity fields
+        Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+            .build();
+        List<Client> newClients = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newClients);
+
+        assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
+    }
+
+    @Test
+    public void hasClient_nullClient_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> addressBook.hasClient(null));
+    }
+
+    @Test
+    public void hasClient_clientNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasClient(ALICE));
+    }
+
+    @Test
+    public void hasClient_clientInAddressBook_returnsTrue() {
+        addressBook.addClient(ALICE);
+        assertTrue(addressBook.hasClient(ALICE));
+    }
+
+    @Test
+    public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addClient(ALICE);
+        Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+            .build();
+        assertTrue(addressBook.hasClient(editedAlice));
+    }
+
+    @Test
+    public void getClientList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> addressBook.getClientList().remove(0));
+    }
+
+    @Test
+    public void updateLastMetDate_updatesCorrectly() {
+        Client expectedAlice = new ClientBuilder(ALICE).withNextMeeting("No next meeting").build();
+        addressBook.addClient(ALICE);
+        addressBook.updateLastMetDate();
+        assertEquals(addressBook.getClient(new ClientId("0")), expectedAlice);
+    }
+
+    /**
+     * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
+     */
+    private static class AddressBookStub implements ReadOnlyAddressBook {
+        private final ObservableList<Client> clients = FXCollections.observableArrayList();
+        private final ObservableList<Tag> tags = FXCollections.observableArrayList();
+        private final ObservableList<NextMeeting> nextMeetings = FXCollections.observableArrayList();
+        private String clientCounter = "0";
+
+        AddressBookStub(Collection<Client> clients) {
+            this.clients.setAll(clients);
         }
 
-        @Test
-        public void resetData_null_throwsNullPointerException() {
-                assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        @Override
+        public ObservableList<Client> getClientList() {
+            return clients;
         }
 
-        @Test
-        public void resetData_withValidReadOnlyAddressBook_replacesData() {
-                AddressBook newData = getTypicalAddressBook();
-                addressBook.resetData(newData);
-                assertEquals(newData, addressBook);
+        @Override
+        public ObservableList<NextMeeting> getNextMeetingsList() {
+            return nextMeetings;
         }
 
-        @Test
-        public void resetData_withDuplicateClients_throwsDuplicateClientException() {
-                // Two clients with the same identity fields
-                Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                    .build();
-                List<Client> newClients = Arrays.asList(ALICE, editedAlice);
-                AddressBookStub newData = new AddressBookStub(newClients);
-
-                assertThrows(DuplicateClientException.class, () -> addressBook.resetData(newData));
+        @Override
+        public String getClientCounter() {
+            return clientCounter;
         }
 
-        @Test
-        public void hasClient_nullClient_throwsNullPointerException() {
-                assertThrows(NullPointerException.class, () -> addressBook.hasClient(null));
+        @Override
+        public void setClientCounter(String clientCounter) {
+            this.clientCounter = clientCounter;
         }
 
-        @Test
-        public void hasClient_clientNotInAddressBook_returnsFalse() {
-                assertFalse(addressBook.hasClient(ALICE));
+        @Override
+        public ObservableList<NextMeeting> getSortedNextMeetingsList() {
+            return nextMeetings;
         }
 
-        @Test
-        public void hasClient_clientInAddressBook_returnsTrue() {
-                addressBook.addClient(ALICE);
-                assertTrue(addressBook.hasClient(ALICE));
+        @Override
+        public ObservableList<Tag> getTagList() {
+            return tags;
         }
 
-        @Test
-        public void hasClient_clientWithSameIdentityFieldsInAddressBook_returnsTrue() {
-                addressBook.addClient(ALICE);
-                Client editedAlice = new ClientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                    .build();
-                assertTrue(addressBook.hasClient(editedAlice));
+        @Override
+        public void incrementClientCounter() {
+            try {
+                int tempClientCounter = Integer.parseInt(this.clientCounter) + 1;
+                this.clientCounter = String.valueOf(tempClientCounter);
+            } catch (NumberFormatException e) {
+                this.clientCounter = "1";
+            }
         }
 
-        @Test
-        public void getClientList_modifyList_throwsUnsupportedOperationException() {
-                assertThrows(UnsupportedOperationException.class, () -> addressBook.getClientList().remove(0));
+        public Client getClient(ClientId clientId) {
+            return clients.get(0);
         }
-
-        @Test
-        public void updateLastMetDate_updatesCorrectly() {
-                Client expectedAlice = new ClientBuilder(ALICE).withNextMeeting("No next meeting").build();
-                addressBook.addClient(ALICE);
-                addressBook.updateLastMetDate();
-                assertEquals(addressBook.getClient(new ClientId("0")), expectedAlice);
-        }
-
-        /**
-         * A stub ReadOnlyAddressBook whose clients list can violate interface constraints.
-         */
-        private static class AddressBookStub implements ReadOnlyAddressBook {
-                private final ObservableList<Client> clients = FXCollections.observableArrayList();
-                private final ObservableList<Tag> tags = FXCollections.observableArrayList();
-                private final ObservableList<NextMeeting> nextMeetings = FXCollections.observableArrayList();
-                private String clientCounter = "0";
-
-                AddressBookStub(Collection<Client> clients) {
-                        this.clients.setAll(clients);
-                }
-
-                @Override
-                public ObservableList<Client> getClientList() {
-                        return clients;
-                }
-
-                @Override
-                public ObservableList<NextMeeting> getNextMeetingsList() {
-                        return nextMeetings;
-                }
-
-                @Override
-                public String getClientCounter() {
-                        return clientCounter;
-                }
-
-                @Override
-                public void setClientCounter(String clientCounter) {
-                        this.clientCounter = clientCounter;
-                }
-
-                @Override
-                public ObservableList<NextMeeting> getSortedNextMeetingsList() {
-                        return nextMeetings;
-                }
-
-                @Override
-                public ObservableList<Tag> getTagList() {
-                        return tags;
-                }
-
-                @Override
-                public void incrementClientCounter() {
-                        try {
-                                int tempClientCounter = Integer.parseInt(this.clientCounter) + 1;
-                                this.clientCounter = String.valueOf(tempClientCounter);
-                        } catch (NumberFormatException e) {
-                                this.clientCounter = "1";
-                        }
-                }
-
-                public Client getClient(ClientId clientId) {
-                        return clients.get(0);
-                }
-        }
+    }
 }
