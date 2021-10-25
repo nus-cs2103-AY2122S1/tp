@@ -6,7 +6,7 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "tagged" : [ "friends" ],
-    "insurances" : [ "Life" ],
+    "insurances" : [ {"insuranceType": "Life", "insuranceBrand": "AAA"} ],
     "note" : "Has asthma",
     "appointment": ""
   }, {
@@ -20,7 +20,11 @@
       "description": "Caused by a fall",
       "status": "completed"}
     ],
-    "insurances" : [ "Life", "Health", "General"],
+    "insurances" : [
+      {"insuranceType": "Health", "insuranceBrand": "AIA"},
+      {"insuranceType": "Life", "insuranceBrand": "AIA"},
+      {"insuranceType": "General", "insuranceBrand": "AIA"}
+    ],
     "note" : "Has cancer",
     "appointment": ""
   }, {
@@ -61,7 +65,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "tagged" : [ ],
-    "insurances": ["Health"],
+    "insurances": [{"insuranceType": "Health", "insuranceBrand": "Prudential"}],
     "note" : "Has covid",
     "appointment": ""
   } ]
