@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentMark;
 
 /**
  * Controller for a student display page
@@ -17,6 +19,8 @@ import seedu.address.model.student.Student;
 public class StudentWindow extends UiPart<Stage> {
 
     public static final String VIEW_MESSAGE = "Currently viewing: ";
+    public static final String SESSION_LABEL = "Session ";
+    public static final String SPACE = " ";
 
     private static final Logger logger = LogsCenter.getLogger(StudentWindow.class);
     private static final String FXML = "StudentWindow.fxml";
@@ -44,6 +48,9 @@ public class StudentWindow extends UiPart<Stage> {
 
     @FXML
     private FlowPane tags;
+
+    @FXML
+    private FlowPane marks;
 
     /**
      * Creates a new StudentWindow.
@@ -81,6 +88,7 @@ public class StudentWindow extends UiPart<Stage> {
      */
     public void show(Student student) {
         tags.getChildren().clear();
+        marks.getChildren().clear();
         logger.fine("Showing student information.");
         message.setText(VIEW_MESSAGE);
         name.setText(student.getName().fullName);
@@ -91,6 +99,13 @@ public class StudentWindow extends UiPart<Stage> {
         student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        List<StudentMark> studentMarkList = student.getMarks();
+        int marksCount = studentMarkList.size();
+        for (int i = marksCount; i > 0; i--) {
+            StudentMark mark = studentMarkList.get(i - 1);
+            Label markToAdd = new Label(SESSION_LABEL + i + SPACE + mark.name() + SPACE);
+            marks.getChildren().add(markToAdd);
+        }
         getRoot().show();
         getRoot().centerOnScreen();
     }

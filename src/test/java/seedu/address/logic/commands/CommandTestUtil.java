@@ -50,6 +50,8 @@ public class CommandTestUtil {
     public static final String VALID_SCHEDULE_G01 = "Monday 10am to 12pm, Thursday 10am to 12pm";
     public static final String VALID_SCHEDULE_G02 = "Tuesday 10am to 12pm, Friday 10am to 12pm";
     public static final String VALID_SCHEDULE_G06 = "Tuesday 12pm to 2pm, Friday 12pm to 2pm";
+    public static final String VALID_MARK = "GOOD";
+
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -79,6 +81,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_SCHEDULE = " " + PREFIX_SCHEDULE + " ";
+    public static final String INVALID_MARK = " " + "BAD"; //BAD is not a valid mark
 
 
     //Verification not yet implemented
@@ -93,7 +96,8 @@ public class CommandTestUtil {
     static {
         DESC_AMY = new EditStudentDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
-                .withClassCode(VALID_CLASSCODE_AMY).withTags(VALID_TAG_FRIEND).build();
+                .withClassCode(VALID_CLASSCODE_AMY).withTags(VALID_TAG_FRIEND)
+                .withMarks("LOW", "HIGH").build();
         DESC_BOB = new EditStudentDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withClassCode(VALID_CLASSCODE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
