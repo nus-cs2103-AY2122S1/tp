@@ -30,11 +30,11 @@ public class Person {
     private final ExpectedSalary expectedSalary;
     private final LevelOfEducation levelOfEducation;
     private final Experience experience;
-    private Optional<Interview> interview;
+    private final Optional<Interview> interview;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
-    private Optional<Notes> notes;
+    private final Optional<Notes> notes;
 
     // Status fields
     private final Done done;
