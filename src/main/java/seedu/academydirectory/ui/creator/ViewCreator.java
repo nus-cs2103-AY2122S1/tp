@@ -5,17 +5,13 @@ import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.Control;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import seedu.academydirectory.model.AdditionalInfo;
-import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.model.student.Student;
 import seedu.academydirectory.model.student.StudioRecord;
 import seedu.academydirectory.model.tag.Tag;
-import seedu.academydirectory.ui.UiPart;
 
 public class ViewCreator extends Creator {
 
@@ -47,9 +43,9 @@ public class ViewCreator extends Creator {
     @FXML
     private Label telegram;
 
-    public ViewCreator(AdditionalViewModel additionalViewModel) {
-        super(additionalViewModel, FXML);
-        this.student = (Student) additionalViewModel.getAdditionalInfo().get();
+    public ViewCreator(AdditionalInfo<?> additionalInfo) {
+        super(additionalInfo, FXML);
+        this.student = (Student) additionalInfo.get();
         name.setText(student.getName().fullName);
         phone.setText("Phone number: " + student.getPhone().value);
         email.setText("Email address: " + student.getEmail().value);
@@ -60,10 +56,8 @@ public class ViewCreator extends Creator {
             tagContainer.getChildren().add(checkBox);
         }
         StudioRecord studioRecord = student.getStudioRecord();
-        for (int sessionNumber = 0; sessionNumber < studioRecord.getNumberOfSessions(); sessionNumber++) {
-            Label displayedInfoPlaceholder = new Label(studioRecord.getStudioRecordsFrom(sessionNumber));
-            participation.getChildren().add(displayedInfoPlaceholder);
-        }
+        Label displayInfoPlaceHolder = new Label(studioRecord.getExtendedStudioRecords());
+        participation.getChildren().add(displayInfoPlaceHolder);
         String assessments = student.getAssessment().getVisualizerDisplay();
         testScores.getChildren().add(new Label(assessments));
     }

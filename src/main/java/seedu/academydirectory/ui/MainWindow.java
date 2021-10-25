@@ -188,17 +188,6 @@ public class MainWindow extends UiPart<Stage> {
         return studentListPanel;
     }
 
-    private void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
-        switch (additionalViewModel.getAdditionalViewType()) {
-        case VIEW:
-            visualizerDisplay.setVisualizer(new ViewCreator(additionalViewModel));
-        case VISUALISE:
-            visualizerDisplay.setVisualizer(new GraphCreator(additionalViewModel));
-        default:
-            visualizerDisplay.setVisualizer(new DefaultCreator(additionalViewModel));
-        }
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -209,7 +198,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            handleAdditionalInfo(logic.getAdditionalViewModel());
+            visualizerDisplay.handleAdditionalInfo(logic.getAdditionalViewModel());
 
             if (commandResult.isShowHelp()) {
                 showHelpFrom(commandResult.getHelpContent());

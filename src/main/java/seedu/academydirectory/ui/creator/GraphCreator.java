@@ -12,11 +12,12 @@ import seedu.academydirectory.ui.UiPart;
 
 public class GraphCreator extends Creator {
 
-    private static final String FXML = "";
+    private static final String FXML = "DefaultCreator.fxml";
 
-    private AdditionalInfo<? extends Object> additionalInfo;
-    public GraphCreator(AdditionalViewModel additionalViewModel) {
-        super(additionalViewModel, FXML);
+    private final AdditionalInfo<?> additionalInfo;
+    public GraphCreator(AdditionalInfo<?> additionalInfo) {
+        super(additionalInfo, FXML);
+        this.additionalInfo = additionalInfo;
     }
 
     @Override

@@ -22,8 +22,22 @@ public class VisualiserDisplay extends UiPart<Region> {
         super(FXML);
     }
 
-    public void setVisualizer(Creator creator) {
+    private void setVisualizer(Creator creator) {
         placeHolder.getChildren().clear();
         placeHolder.getChildren().add(creator.create());
+    }
+
+    public void handleAdditionalInfo(AdditionalViewModel additionalViewModel) {
+        switch (additionalViewModel.getAdditionalViewType()) {
+        case VIEW:
+            setVisualizer(new ViewCreator(additionalViewModel.getAdditionalInfo()));
+            break;
+        case VISUALISE:
+            setVisualizer(new GraphCreator(additionalViewModel.getAdditionalInfo()));
+            break;
+        default:
+            setVisualizer(new DefaultCreator(additionalViewModel.getAdditionalInfo()));
+            break;
+        }
     }
 }

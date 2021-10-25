@@ -106,6 +106,18 @@ public class Participation extends SortableInformation {
         }
     }
 
+    /**
+     * Get participation Score of student
+     * @param sessionNumber session number in need to retrieve information
+     * @return participation mark
+     */
+    public Integer getParticipationScoreFrom(Integer sessionNumber) {
+        if (sessionNumber < 0 || sessionNumber >= participationArray.length) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        return participationArray[sessionNumber];
+    }
+
     @Override
     public String toString() {
         String str = "";

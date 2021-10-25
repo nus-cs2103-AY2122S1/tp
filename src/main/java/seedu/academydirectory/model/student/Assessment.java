@@ -87,6 +87,22 @@ public class Assessment extends SortableInformation {
         return total;
     }
 
+    public String getVisualizerDisplay() {
+        StringBuilder displayedInfo = new StringBuilder();
+        displayedInfo.append("- Reading Assessment 1 score: ")
+                .append(getAssessmentGrade("RA1")).append("\n")
+                .append("- Midterm Examination score: ")
+                .append(getAssessmentGrade("MIDTERM")).append("\n")
+                .append("- Reading Assessment 2 score: ")
+                .append(getAssessmentGrade("RA2")).append("\n")
+                .append("- Practical Examination score: ")
+                .append(getAssessmentGrade("PE")).append("\n")
+                .append("- Final Examination score: ")
+                .append(getAssessmentGrade("FINAL")).append("\n")
+                .append("- Total grade: ").append(getTotalGrade());
+        return displayedInfo.toString();
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
@@ -124,7 +140,4 @@ public class Assessment extends SortableInformation {
             }
         };
     }
-
-
-
 }

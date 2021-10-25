@@ -1,27 +1,22 @@
 package seedu.academydirectory.ui.creator;
 
-import java.net.URL;
-
-import javafx.scene.control.Control;
+import javafx.scene.Node;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Region;
 import seedu.academydirectory.model.AdditionalInfo;
-import seedu.academydirectory.model.AdditionalViewModel;
-import seedu.academydirectory.ui.UiPart;
 
 public class DefaultCreator extends Creator {
 
-    private static final String FXML = "";
+    private static final String FXML = "DefaultCreator.fxml";
 
-    private final AdditionalInfo<? extends Object> additionalInfo;
+    private final AdditionalInfo<?> additionalInfo;
 
-    public DefaultCreator(AdditionalViewModel additionalViewModel) {
-        super(additionalViewModel, FXML);
-        additionalInfo = additionalViewModel.getAdditionalInfo();
+    public DefaultCreator(AdditionalInfo<?> additionalInfo) {
+        super(additionalInfo, FXML);
+        this.additionalInfo = additionalInfo;
     }
 
     @Override
-    public Control create() {
-        return new TextArea("Work In Progress");
+    public Node create() {
+        return getRoot();
     }
 }
