@@ -52,6 +52,7 @@ public class Assessment {
     }
 
     public AssessmentStatistics getStatistics() {
+        setStatistics();
         return statistics;
     }
 
