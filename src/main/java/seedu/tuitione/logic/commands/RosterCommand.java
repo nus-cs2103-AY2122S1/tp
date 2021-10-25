@@ -11,6 +11,7 @@ import seedu.tuitione.commons.core.Messages;
 import seedu.tuitione.model.Model;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.lesson.LessonCode;
+import seedu.tuitione.model.lesson.LessonIsOfSpecifiedLessonCode;
 
 /**
  * Display a list of students who are enrolled in a specific lesson in tuitone.
