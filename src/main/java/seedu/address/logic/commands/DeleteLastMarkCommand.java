@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MARK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 
 import java.util.ArrayList;
@@ -17,31 +16,26 @@ import seedu.address.model.student.StudentMark;
 /**
  * Edits the details of an existing student in the ClassMATE.
  */
-public class AddLastMarkCommand extends Command {
+public class DeleteLastMarkCommand extends Command {
 
-    public static final String COMMAND_WORD = "addlm";
+    public static final String COMMAND_WORD = "deletelm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds Mark to Student's Weekly Marks\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_MARK + "LOW";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes Student's Latest Mark\n"
+            + "Example: " + COMMAND_WORD + " 1 ";
 
-    public static final String MESSAGE_ADD_MARK_STUDENT_SUCCESS = "Added Mark to Student: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "Mark to add must be provided.";
+    public static final String MESSAGE_DELETE_MARK_STUDENT_SUCCESS = "Deleted Mark from Student: %1$s";
+    public static final String MESSAGE_NO_MARKS = "No Marks to Delete!";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the ClassMATE.";
 
     private final Index index;
-    private final StudentMark mark;
 
     /**
      * @param index of the student in the filtered student list to edit
-     * @param studentMark marks to add to Student
      */
-    public AddLastMarkCommand(Index index, StudentMark studentMark) {
+    public DeleteLastMarkCommand(Index index) {
         requireNonNull(index);
-        requireNonNull(studentMark);
 
         this.index = index;
-        this.mark = studentMark;
     }
 
     @Override
@@ -54,7 +48,7 @@ public class AddLastMarkCommand extends Command {
         }
 
         Student studentToEdit = lastShownList.get(index.getZeroBased());
-        Student editedStudent = addStudentMark(studentToEdit, mark);
+        Student editedStudent = deleteLastStudentMark(studentToEdit);
 
         if (!studentToEdit.isSameStudent(editedStudent) && model.hasStudent(editedStudent)) {
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
@@ -62,16 +56,19 @@ public class AddLastMarkCommand extends Command {
 
         model.setStudent(studentToEdit, editedStudent);
         model.updateFilteredStudentList(PREDICATE_SHOW_ALL_STUDENTS);
-        return new CommandResult(String.format(MESSAGE_ADD_MARK_STUDENT_SUCCESS, editedStudent));
+        return new CommandResult(String.format(MESSAGE_DELETE_MARK_STUDENT_SUCCESS, editedStudent));
     }
 
     /**
-     * Creates and returns a {@code Student} with the {@code StudentMark} added.
+     * Creates and returns a {@code Student} with the latest mark deleted.
      */
-    private static Student addStudentMark(Student studentToEdit, StudentMark mark) {
+    private static Student deleteLastStudentMark(Student studentToEdit) throws CommandException {
         assert studentToEdit != null;
         List<StudentMark> updatedMarks = new ArrayList<>(studentToEdit.getMarks());
-        updatedMarks.add(mark);
+        if (updatedMarks.isEmpty()) {
+            throw new CommandException(MESSAGE_NO_MARKS);
+        }
+        updatedMarks.remove(updatedMarks.size() - 1);
         return new Student(
                 studentToEdit.getName(),
                 studentToEdit.getPhone(),
@@ -90,13 +87,12 @@ public class AddLastMarkCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddLastMarkCommand)) {
+        if (!(other instanceof DeleteLastMarkCommand)) {
             return false;
         }
 
         // state check
-        AddLastMarkCommand e = (AddLastMarkCommand) other;
-        return index.equals(e.index)
-                && mark.equals(e.mark);
+        DeleteLastMarkCommand e = (DeleteLastMarkCommand) other;
+        return index.equals(e.index);
     }
 }
