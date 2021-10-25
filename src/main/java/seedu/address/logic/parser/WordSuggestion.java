@@ -84,7 +84,7 @@ public class WordSuggestion {
             int distance = entry.getValue();
 
             if (distance == minDistance) {
-                suggestions.add(suggestedWord);
+                suggestions.add(suggestedWord.substring(0, 1).toUpperCase() + suggestedWord.substring(1));
             }
         }
 
@@ -92,6 +92,6 @@ public class WordSuggestion {
     }
 
     public String getSuggestedWords() {
-        return String.format(MESSAGE, String.join(",", getSuggestedWordsList()));
+        return String.format(MESSAGE, String.join(", ", getSuggestedWordsList()));
     }
 }

@@ -3,12 +3,25 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+
 /**
  * Represents a Person's nationality in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidNationality(String)}
  */
 public class Nationality {
 
+    public static final List<String> validNationalities = new ArrayList<>();
     public static final String MESSAGE_CONSTRAINTS = "Nationality can take any values, and it should not be blank";
 
     /*
@@ -27,17 +40,40 @@ public class Nationality {
     public Nationality(String nationality) {
         requireNonNull(nationality);
         checkArgument(isValidNationality(nationality), MESSAGE_CONSTRAINTS);
+        readValidNationalities();
+
         value = nationality;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is inside the {@code validNationalities} list if {@code validNationalities} is
+     * non-empty. Otherwise, it can take any values.
      */
     public static boolean isValidNationality(String test) {
         if (test.isEmpty()) {
             return true;
         }
-        return test.matches(VALIDATION_REGEX);
+        return validNationalities.size() > 0
+                ? validNationalities.contains(test.toLowerCase())
+                : test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Reads a txt file located in data/nationalities.txt containing a list of nationalities and
+     * puts it into {@code validNationalities}
+     */
+    public static void readValidNationalities() {
+        try {
+            Scanner sc = new Scanner(new File("data/nationalities.txt"));
+
+            while (sc.hasNext()) {
+                validNationalities.add(sc.nextLine().toLowerCase());
+            }
+
+            sc.close();
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        }
     }
 
     @Override
