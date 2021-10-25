@@ -1,13 +1,5 @@
 package seedu.address.logic;
 
-import org.junit.jupiter.api.Test;
-import org.opentest4j.AssertionFailedError;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.product.Product;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.model.client.Client;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -20,6 +12,15 @@ import static seedu.address.testutil.TypicalClients.GEORGE;
 import static seedu.address.testutil.TypicalProducts.IPAD;
 import static seedu.address.testutil.TypicalProducts.IPHONE;
 import static seedu.address.testutil.TypicalProducts.MACBOOK;
+
+import org.junit.jupiter.api.Test;
+import org.opentest4j.AssertionFailedError;
+
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.client.Client;
+import seedu.address.model.product.Product;
+import seedu.address.model.util.SampleDataUtil;
 
 public class SampleDataUtilTest {
     @Test
