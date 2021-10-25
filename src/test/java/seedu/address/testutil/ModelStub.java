@@ -186,11 +186,6 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void setGroupToView(Group group) {
-        throw new AssertionError("This method should not be called.");
-    }
-
-    @Override
     public UniqueIdMapper<Person> getPersonMapper() {
         throw new AssertionError("This method should not be called.");
     }
