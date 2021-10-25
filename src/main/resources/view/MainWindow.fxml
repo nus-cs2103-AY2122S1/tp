@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="900" onCloseRequest="#handleExit" title="TuitiONE" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/TuitiONE.png" />
   </icons>
@@ -45,7 +45,7 @@
             <VBox fx:id="studentListLabel" styleClass="pane-with-no-border">
               <Text fill="WHITE" text="Student List">
                         <font>
-                           <Font name="System Bold" size="22.0" />
+                           <Font name="Montserrat Regular" size="22.0" />
                         </font>
                         <VBox.margin>
                            <Insets bottom="5.0" left="12.0" />
@@ -61,7 +61,7 @@
             <VBox fx:id="lessonListLabel" styleClass="pane-with-no-border">
               <Text fill="WHITE" text="Lesson List">
                         <font>
-                           <Font name="System Bold" size="22.0" />
+                           <Font name="Montserrat Medium" size="22.0" />
                         </font>
                         <VBox.margin>
                            <Insets bottom="5.0" left="12.0" />
