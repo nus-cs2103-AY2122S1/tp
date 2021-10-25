@@ -70,7 +70,7 @@
 
         </HBox>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="130" minHeight="130" prefHeight="130" styleClass="pane-with-border" VBox.vgrow="NEVER">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="160" minHeight="160" prefHeight="160" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
