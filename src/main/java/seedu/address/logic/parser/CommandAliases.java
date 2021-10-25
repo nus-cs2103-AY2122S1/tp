@@ -34,4 +34,7 @@ public class CommandAliases {
         return Optional.ofNullable(commandAliasMap.get(alias));
     }
 
+    public static Map<String, Command> getMap() {
+        return commandAliasMap;
+    }
 }

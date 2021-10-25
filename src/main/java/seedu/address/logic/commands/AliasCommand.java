@@ -10,7 +10,10 @@ import seedu.address.logic.parser.CommandAliases;
 import seedu.address.model.Model;
 
 
-public class AliasCommand extends Command{
+/**
+ * Creates a shortcut name for a command.
+ */
+public class AliasCommand extends Command {
 
     public static final String COMMAND_WORD = "alias";
 
@@ -27,7 +30,7 @@ public class AliasCommand extends Command{
     private final String rawCommand;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AliasCommand to map the specified {@code alias} to {@code command}
      */
     public AliasCommand(String alias, Command command, String rawCommand) {
         requireAllNonNull(alias, command, rawCommand);
@@ -51,7 +54,6 @@ public class AliasCommand extends Command{
         return other == this // short circuit if same object
                 || (other instanceof AliasCommand // instanceof handles nulls
                 && alias.equals(((AliasCommand) other).alias)
-                && command.equals(((AliasCommand) other).command)
-                && rawCommand.equals(((AliasCommand) other).rawCommand));
+                && command.equals(((AliasCommand) other).command));
     }
 }
