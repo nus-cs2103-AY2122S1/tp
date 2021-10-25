@@ -64,7 +64,7 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem calendarMenuItem;
-    
+
     @FXML
     private MenuItem tagsMenuItem;
 
