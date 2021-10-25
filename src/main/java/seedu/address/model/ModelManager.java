@@ -144,6 +144,26 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isUndoable() {
+        //TODO
+    }
+
+    @Override
+    public boolean isRedoable() {
+        //TODO
+    }
+
+    @Override
+    public void undo() {
+        //TODO
+    }
+
+    @Override
+    public void redo() {
+        //TODO
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

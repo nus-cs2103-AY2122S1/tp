@@ -96,4 +96,12 @@ public interface Model {
      * Returns summary of AddressBook.
      */
     Summary getSummary();
+
+    boolean isUndoable();
+
+    boolean isRedoable();
+
+    void undo();
+
+    void redo();
 }
