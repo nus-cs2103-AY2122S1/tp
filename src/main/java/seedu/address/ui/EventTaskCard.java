@@ -39,7 +39,9 @@ public class EventTaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label priority;
+    private Label taskType;
+    @FXML
+    private Label priorityLabel;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Task} and index to display.
@@ -47,12 +49,13 @@ public class EventTaskCard extends UiPart<Region> {
     public EventTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". [E]");
+        id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
         EventTask deadlineTask = (EventTask) task;
         status.setText(task.getStatusString());
         description.setText(task.getDescription());
-        priority.setText(task.getPriorityAsString());
+        priorityLabel.setText(task.getPriorityAsString());
+        taskType.setText("EVENT");
 
         taskDate.setText(deadlineTask.getTaskDate().toString());
 

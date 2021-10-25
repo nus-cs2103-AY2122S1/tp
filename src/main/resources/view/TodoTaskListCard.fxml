@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.text.Text?>
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <GridPane HBox.hgrow="ALWAYS">
     <columnConstraints>
@@ -29,11 +28,23 @@
           </Label>
           <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
         </HBox>
-        <FlowPane fx:id="tags" />
-<!--        <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />-->
+        <HBox spacing="8" HBox.hgrow="ALWAYS">
+          <Label fx:id="taskType" HBox.hgrow="ALWAYS">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <Label fx:id="priorityLabel" HBox.hgrow="ALWAYS">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
+          </Label>
+          <FlowPane fx:id="tags" />
+        </HBox>
         <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
         <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
-        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
       </VBox>
       <VBox>
         <padding>

@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.model.student.Student;
 
 /**
@@ -40,10 +41,12 @@ public class StudentCard extends UiPart<Region> {
     private Label githubLink;
     @FXML
     private FlowPane tags;
+//    @FXML
+//    private Label attendance;
+//    @FXML
+//    private Label participation;
     @FXML
-    private Label attendance;
-    @FXML
-    private Label participation;
+    private VBox studentValuesContainer;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -55,8 +58,12 @@ public class StudentCard extends UiPart<Region> {
         name.setText(student.getName().fullName);
         email.setText(student.getEmail().value);
         studentNumber.setText(student.getStudentNumber().toString());
-        attendance.setText(student.getAttendance().attendanceList.toString());
-        participation.setText(student.getParticipation().participationList.toString());
+//        attendance.setText(student.getAttendance().attendanceList.toString());
+//        participation.setText(student.getParticipation().participationList.toString());
+
+        studentValuesContainer.getChildren().addAll(
+                new StudentValuesBox(StudentValuesBox.ATTENDANCE_HEADER, student.getAttendance()),
+                new StudentValuesBox(StudentValuesBox.PARTICIPATION_HEADER, student.getParticipation()));
         githubLink.setText(student.getStudentLink());
 
         student.getTags().stream()

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextInputControl;
@@ -30,6 +31,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+    private static final String STUDENTS_LIST_NAME = "Students";
+    private static final String TASKS_LIST_NAME = "Tasks";
+    private static final String GROUPS_LIST_NAME = "Groups";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -59,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private Label listName;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -123,6 +130,8 @@ public class MainWindow extends UiPart<Stage> {
         studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
+        listName.setText(STUDENTS_LIST_NAME);
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -134,12 +143,15 @@ public class MainWindow extends UiPart<Stage> {
         if (logic.getDisplayType().equals(STUDENTS)) {
             studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
             studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
+            listName.setText(STUDENTS_LIST_NAME);
         } else if (logic.getDisplayType().equals(TASKS)) {
             taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
             studentListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
+            listName.setText(TASKS_LIST_NAME);
         } else if (logic.getDisplayType().equals(GROUPS)) {
             groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
             studentListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+            listName.setText(GROUPS_LIST_NAME);
         }
     }
 

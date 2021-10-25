@@ -9,7 +9,7 @@ import javafx.scene.layout.VBox;
 
 public class TerminalBox extends VBox {
 
-    public static final String ERROR_STYLE_CLASS = "error";
+    private static final String ERROR_STYLE_CLASS = "error";
     private static final String PREFIX = ">  ";
 
     @FXML

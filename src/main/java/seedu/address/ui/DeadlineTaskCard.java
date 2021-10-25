@@ -40,6 +40,10 @@ public class DeadlineTaskCard extends UiPart<Region> {
     private Label description;
     @FXML
     private Label priority;
+    @FXML
+    private Label taskType;
+    @FXML
+    private Label priorityLabel;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Student} and index to display.
@@ -47,12 +51,13 @@ public class DeadlineTaskCard extends UiPart<Region> {
     public DeadlineTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". [D]");
+        id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
         DeadlineTask deadlineTask = (DeadlineTask) task;
         status.setText(task.getStatusString());
         description.setText(task.getDescription());
-        priority.setText(task.getPriorityAsString());
+        priorityLabel.setText(task.getPriorityAsString());
+        taskType.setText("DEADLINE");
 
         taskDate.setText(deadlineTask.getDeadline().toString());
 

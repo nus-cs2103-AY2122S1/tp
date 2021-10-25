@@ -29,6 +29,7 @@
           </Label>
           <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
         </HBox>
+        <Label fx:id="taskType"/>
         <FlowPane fx:id="tags" />
         <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />
         <Label fx:id="status" styleClass="cell_small_label" text="\$status" />

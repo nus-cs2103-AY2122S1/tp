@@ -12,6 +12,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          title="Address App" minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
@@ -35,22 +37,31 @@
           </Menu>
         </MenuBar>
 
-        <SplitPane VBox.vgrow="ALWAYS">
-          <VBox fx:id="studentList" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+        <SplitPane VBox.vgrow="ALWAYS" dividerPositions="0.8f">
+          <VBox fx:id="studentList" styleClass="pane-with-border" VBox.vgrow="ALWAYS" prefWidth="400">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
+            <Label fx:id="listName" VBox.vgrow="NEVER">
+              <padding>
+                <Insets bottom="10" left="10" />
+              </padding>
+              <minWidth>
+                <!-- Ensures that the label text is never truncated -->
+                <Region fx:constant="USE_PREF_SIZE" />
+              </minWidth>
+            </Label>
             <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <VBox VBox.vgrow="ALWAYS">
+          <VBox VBox.vgrow="ALWAYS" prefWidth="50">
             <ScrollPane fx:id="scrollPane" fitToWidth="true" vvalue="1.0" VBox.vgrow="ALWAYS" styleClass="pane-with-border"
                         style="-fx-background: #383838;">
               <VBox fx:id="terminalContainer" VBox.vgrow="ALWAYS" style="-fx-background-color: #383838;"/>
             </ScrollPane>
 
             <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border"
-                       minHeight="100" prefHeight="100" maxHeight="100">
+                       minHeight="100" prefHeight="80" maxHeight="100">
               <padding>
                 <Insets top="5" right="10" bottom="5" left="10" />
               </padding>

@@ -37,9 +37,11 @@ public class ToDoTaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label priority;
-    @FXML
     private FlowPane tags;
+    @FXML
+    private Label taskType;
+    @FXML
+    private Label priorityLabel;
 
     /**
      * Creates a {@code StudentCode} with the given {@code Student} and index to display.
@@ -47,11 +49,12 @@ public class ToDoTaskCard extends UiPart<Region> {
     public ToDoTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". [T]");
+        id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
         status.setText(task.getStatusString());
         description.setText(task.getDescription());
-        priority.setText(task.getPriorityAsString());
+        priorityLabel.setText(task.getPriorityAsString());
+        taskType.setText("TODO");
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
