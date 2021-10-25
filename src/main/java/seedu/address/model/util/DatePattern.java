@@ -29,7 +29,7 @@ public enum DatePattern {
     /**
     * Returns a concatenated list of all the patterns in the DatePattern.
     *
-    * @return String concatenated list of patterns.
+    * @return concatenated String of patterns.
     */
     public static String printPatterns() {
         List<String> patterns = Arrays.stream(DatePattern.values())
