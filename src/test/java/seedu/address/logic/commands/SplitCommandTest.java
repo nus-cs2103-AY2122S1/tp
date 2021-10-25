@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
@@ -24,19 +23,19 @@ import seedu.address.model.person.PersonAvailableOnDayPredicate;
 import seedu.address.testutil.FacilityBuilder;
 
 public class SplitCommandTest {
+
     @Test
     public void execute_validDay_success() {
-        Model model = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
-        Model expectedModel = new ModelManager(new AddressBook(getTypicalAddressBook()), new UserPrefs());
+        Model model = new ModelManager(new AddressBook(), new UserPrefs());
         SplitCommand command = new SplitCommand(1);
-        String expectedMessage = String.format(SplitCommand.MESSAGE_SUCCESS,
-                DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault()));
-        // Amy is the only member available on Monday
-        model.setPerson(ALICE, AMY);
-        expectedModel.setPerson(ALICE, AMY);
+        model.addPerson(AMY);
+        Facility f = new FacilityBuilder().withCapacity("1").build();
+        model.addFacility(f);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         PersonAvailableOnDayPredicate predicate = new PersonAvailableOnDayPredicate(1);
         expectedModel.split(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertCommandSuccess(command, model, String.format(SplitCommand.MESSAGE_SUCCESS,
+                DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault())), expectedModel);
     }
 
     @Test
@@ -80,8 +79,6 @@ public class SplitCommandTest {
                 DayOfWeek.of(1).getDisplayName(TextStyle.FULL, Locale.getDefault()), 2);
         assertCommandFailure(command, model, expectedMessage);
     }
-
-
 
     @Test
     public void equals() {

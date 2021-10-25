@@ -22,6 +22,7 @@ import seedu.address.testutil.FacilityBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueFacilityListTest {
+    public final UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
     public final Facility facility = new Facility(
             new FacilityName("Court 1"),
             new Location("Kent Ridge Sports Hall"),
@@ -30,13 +31,11 @@ public class UniqueFacilityListTest {
 
     @Test
     public void add_null_exceptionThrown() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         assertThrows(NullPointerException.class, () -> uniqueFacilityList.add(null));
     }
 
     @Test
     public void setFacility_replaceExistingFacility_success() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         uniqueFacilityList.add(TAMPINES_HUB_FIELD_SECTION_B);
 
@@ -53,7 +52,6 @@ public class UniqueFacilityListTest {
 
     @Test
     public void allocateMembersToFacilities_addsMembersToFacilities_success() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build());
         uniqueFacilityList.add(new FacilityBuilder(TAMPINES_HUB_FIELD_SECTION_B).build());
 
@@ -78,7 +76,6 @@ public class UniqueFacilityListTest {
 
     @Test
     public void replaceFacility_replaceNonExistentFacility_exceptionThrown() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         uniqueFacilityList.add(TAMPINES_HUB_FIELD_SECTION_B);
 
@@ -90,26 +87,22 @@ public class UniqueFacilityListTest {
 
     @Test
     public void remove_nullFacility_throwsNullPointerException() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         assertThrows(NullPointerException.class, () -> uniqueFacilityList.remove(null));
     }
 
     @Test
     public void remove_facilityDoesNotExist_throwsFacilityNotFoundException() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         assertThrows(FacilityNotFoundException.class, () -> uniqueFacilityList.remove(facility));
     }
 
     @Test
     public void remove_existingFacility_removesFacility() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(facility);
         uniqueFacilityList.remove(facility);
     }
 
     @Test
     public void resetFacilities_clearsFacilityList() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         uniqueFacilityList.resetFacilities();
         UniqueFacilityList expectedUniqueFacilityList = new UniqueFacilityList();
@@ -118,28 +111,24 @@ public class UniqueFacilityListTest {
 
     @Test
     public void setFacility_nullTargetFacility_throwsNullPointerException() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         assertThrows(NullPointerException.class, () -> uniqueFacilityList
                 .setFacility(null, KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1));
     }
 
     @Test
     public void setFacility_nullEditedFacility_throwsNullPointerException() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         assertThrows(NullPointerException.class, () -> uniqueFacilityList
                 .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, null));
     }
 
     @Test
     public void setFacility_targetFacilityNotInList_throwsFacilityNotFoundException() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         assertThrows(FacilityNotFoundException.class, () -> uniqueFacilityList
                 .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1));
     }
 
     @Test
     public void setFacility_editedFacilityIsSameFacility_success() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         uniqueFacilityList
                 .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
@@ -150,7 +139,6 @@ public class UniqueFacilityListTest {
 
     @Test
     public void setFacility_editedFacilityHasSameParameter_success() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         Facility editedFacil = new FacilityBuilder(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1).build();
         uniqueFacilityList.setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, editedFacil);
@@ -161,7 +149,6 @@ public class UniqueFacilityListTest {
 
     @Test
     public void setFacility_editedFacilityHasDifferentParameter_success() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         uniqueFacilityList
                 .setFacility(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1, KENT_RIDGE_SPORT_HALL_5_COURT_1);
@@ -172,7 +159,6 @@ public class UniqueFacilityListTest {
 
     @Test
     public void setFacility_editedFacilityHasNonUniqueParameter_throwsDuplicateFacilityException() {
-        UniqueFacilityList uniqueFacilityList = new UniqueFacilityList();
         uniqueFacilityList.add(KENT_RIDGE_OUTDOOR_TENNIS_COURTS_COURT_1);
         uniqueFacilityList.add(KENT_RIDGE_SPORT_HALL_5_COURT_1);
         assertThrows(DuplicateFacilityException.class, () -> uniqueFacilityList
