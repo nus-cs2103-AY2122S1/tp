@@ -197,10 +197,13 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
+    public void show() {
         ProfileWindow profileWindow = new ProfileWindow(new Stage(), this, logic);
         profileWindow.start();
-        //primaryStage.show();
+    }
+
+    public void start() {
+        primaryStage.show();
     }
 
     /**
