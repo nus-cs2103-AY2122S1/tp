@@ -16,7 +16,7 @@ import seedu.programmer.model.student.Student;
 
 class FileManagerTest {
     private FileManager fm;
-    private final int defaultNumOfStudents = 36;
+    private final int DEFAULT_NUM_OF_STUDENTS = 36;
 
     @BeforeEach
     public void setUpTests() {
@@ -26,7 +26,7 @@ class FileManagerTest {
     @Test
     public void getJsonData_validJson_returnsCorrectNumberOfElements() {
         JSONArray result = fm.getJsonData("src/test/data/FileManagerTest/programmerError.json");
-        assertEquals(result.length(), defaultNumOfStudents);
+        assertEquals(result.length(), DEFAULT_NUM_OF_STUDENTS);
     }
 
     @Test
@@ -39,7 +39,7 @@ class FileManagerTest {
     public void getStudentsFromCsv_validCsv_returnsCorrectNumberOfStudents() throws IOException {
         File testFile = new File("src/test/data/FileManagerTest/PE.csv");
         List<Student> stuList = fm.getStudentsFromCsv(testFile);
-        assertEquals(stuList.size(), defaultNumOfStudents);
+        assertEquals(stuList.size(), DEFAULT_NUM_OF_STUDENTS);
     }
 
     @Test
