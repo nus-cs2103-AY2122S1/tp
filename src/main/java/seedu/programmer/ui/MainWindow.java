@@ -5,11 +5,14 @@ import static seedu.programmer.model.Model.PREDICATE_SHOW_ALL_STUDENTS;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 import org.json.JSONArray;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,6 +26,7 @@ import seedu.programmer.commons.core.GuiSettings;
 import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.logic.commands.CommandResult;
+import seedu.programmer.logic.commands.DashboardCommandResult;
 import seedu.programmer.logic.commands.DownloadCommandResult;
 import seedu.programmer.logic.commands.EditCommandResult;
 import seedu.programmer.logic.commands.ExitCommandResult;
@@ -53,6 +57,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private StudentCard studentParticular;
+    private DashboardWindow dashboardWindow;
 
     @FXML
     private Scene primaryScene;
@@ -100,6 +105,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        dashboardWindow = new DashboardWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -194,6 +200,18 @@ public class MainWindow extends UiPart<Stage> {
         }
         LabResultListPanel labResultListPanel = new LabResultListPanel(logic.getLabResultList(target));
         labResultListPanelPlaceholder.getChildren().add(labResultListPanel.getRoot());
+    }
+
+    private void handleDashboard() {
+        try {
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/view/DashboardWindow.fxml")));
+            primaryStage.getScene().setRoot(root);
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException e) {
+            logger.severe("DASHBOARD ERROR： " + e);
+        }
     }
 
     /**
@@ -347,6 +365,8 @@ public class MainWindow extends UiPart<Stage> {
             } else if (commandResult instanceof EditCommandResult) {
                 EditCommandResult editCommandResult = (EditCommandResult) commandResult;
                 handleShowResult(editCommandResult.getEditedStudent());
+            } else if (commandResult instanceof DashboardCommandResult) {
+                handleDashboard();
             }
 
             return commandResult;
