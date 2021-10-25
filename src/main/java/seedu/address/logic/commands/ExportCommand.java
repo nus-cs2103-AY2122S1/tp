@@ -86,7 +86,7 @@ public class ExportCommand extends Command {
     private void exportAddressBookToJson(ReadOnlyAddressBook currentAddressBook) throws IOException {
         Path filePath = Path.of(testPath + fileName);
         JsonAddressBookStorage temporaryStorage = new JsonAddressBookStorage(filePath);
-        temporaryStorage.saveAddressBook(currentAddressBook, filePath);
+        temporaryStorage.saveAddressBook(currentAddressBook, filePath, true);
     }
 
     private void exportAddressBookToCsv(ReadOnlyAddressBook currentAddressBook) throws IOException {

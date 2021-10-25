@@ -70,7 +70,7 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     /** Filenames for testing **/
-    public static final String VALID_FILENAME_JSON = "testFile.json";
+    public static final String VALID_FILENAME_JSON = "ImportNewPerson.json";
     public static final String VALID_FILENAME_CSV = "testFile.csv";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

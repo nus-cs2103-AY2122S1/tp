@@ -17,7 +17,7 @@ import seedu.address.testutil.PersonBuilder;
 
 public class ImportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
-    private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/FolderWithJson/";
+    private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/TestFiles/";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);

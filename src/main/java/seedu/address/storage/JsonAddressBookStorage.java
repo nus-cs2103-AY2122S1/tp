@@ -14,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
 
 /**
  * A class to access AddressBook data stored as a json file on the hard disk.
@@ -71,10 +72,19 @@ public class JsonAddressBookStorage implements AddressBookStorage {
      * @param filePath location of the data. Cannot be null.
      */
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        saveAddressBook(addressBook, filePath, false);
+    }
+
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}.
+     *
+     * @param filePath location of the data. Cannot be null.
+     */
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath, boolean isExport) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
-        if (FileUtil.isFileExists(filePath)) {
+        if (isExport && FileUtil.isFileExists(filePath)) {
             throw new FileAlreadyExistsException("File exists");
         }
 

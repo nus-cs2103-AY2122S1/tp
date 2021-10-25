@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
 
 public class ExportCommandTest {
     private static final String PATH_EMPTY_FOLDER = "src/test/data/ExportImportCommandTest/EmptyFolder/";
-    private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/FolderWithJson/";
+    private static final String PATH_FOLDER_WITH_JSON = "src/test/data/ExportImportCommandTest/TestFiles/";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), null);
@@ -59,7 +59,7 @@ public class ExportCommandTest {
         try {
             FileUtil.deleteFileIfExists(Path.of(PATH_EMPTY_FOLDER + VALID_FILENAME_JSON));
         } catch (IOException ioe) {
-            System.out.println("Error deleting testFile.json");
+            System.out.println("Error deleting ImportNewPerson.json");
         }
     }
 
