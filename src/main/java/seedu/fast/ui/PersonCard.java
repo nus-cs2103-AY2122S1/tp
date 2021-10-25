@@ -8,7 +8,6 @@ import static seedu.fast.ui.UiUtil.TAG_IMAGE;
 import static seedu.fast.ui.UiUtil.TIME_IMAGE;
 import static seedu.fast.ui.UiUtil.VENUE_IMAGE;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -57,7 +56,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private VBox appointmentTime;
     @FXML
-    private Label appointmentVenue;
+    private VBox appointmentVenue;
     @FXML
     private Label appointmentCount;
 
@@ -76,13 +75,13 @@ public class PersonCard extends UiPart<Region> {
         tags.getChildren().add(new TagComponent(person.getTags(), TAG_IMAGE));
         appointmentDate.getChildren().add(new ItemComponent(checkDateAndAddHeader(person.getAppointment().getDate()),
                 DATE_IMAGE));
-//        appointmentDate.setText(checkDateAndAddHeader(person.getAppointment().getDate()));
         appointmentTime.getChildren().add(new ItemComponent(
                 checkTimeVenueAndAddHeader(
-                        person.getAppointment().getTimeFormatted(), "Time", person.getAppointment().getDate()),
-                TIME_IMAGE));
-        appointmentVenue.setText(checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
-                person.getAppointment().getDate()));
+                        person.getAppointment().getTimeFormatted(), "Time",
+                        person.getAppointment().getDate()), TIME_IMAGE));
+        appointmentVenue.getChildren().add(new ItemComponent(
+                checkTimeVenueAndAddHeader(person.getAppointment().getVenue(), "Venue",
+                        person.getAppointment().getDate()), VENUE_IMAGE));
         appointmentCount.setText("Appointment: " + person.getCount());
     }
 
