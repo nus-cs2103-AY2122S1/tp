@@ -37,7 +37,7 @@ If you are interested, jump to [Quick start](#quick-start) to learn how to start
 
 ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
 
   Some example commands you can try:
 
