@@ -106,7 +106,7 @@ public class DeleteFolderCommandTest {
 
         @Override
         public void deletePersonFromFolder(
-                Index targetIndex,
+                Person personToRemove,
                 Folder targetFolder) {
             throw new AssertionError("This method should not be called.");
         }

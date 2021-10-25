@@ -3,10 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.folder.Folder;
+import seedu.address.model.person.Person;
+
+import java.util.List;
 
 /**
  * Deletes the contact that belongs to an existing
@@ -18,6 +22,7 @@ public class DeletePersonFromFolderCommand extends Command {
     public static final String COMMAND_IDENTIFIER = ">>";
 
     public static final String MESSAGE_NO_SUCH_FOLDER = "No such folder found in UNIon";
+    public static final String MESSAGE_NO_CONTACT_IN_FOLDER = "No such contact in folder";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number from the folder specified.\n"
             + "Parameters: INDEX (must be a positive integer) + "
@@ -50,11 +55,24 @@ public class DeletePersonFromFolderCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
         if (!model.hasFolder(targetFolder)) {
             throw new CommandException(MESSAGE_NO_SUCH_FOLDER);
         }
 
-        model.deletePersonFromFolder(targetIndex, targetFolder);
+        Person personToRemove = lastShownList.get(targetIndex.getZeroBased());
+
+        if (!model.folderContainsPerson(personToRemove,
+                this.targetFolder.getFolderName())) {
+            throw new CommandException(MESSAGE_NO_CONTACT_IN_FOLDER);
+        }
+
+        model.deletePersonFromFolder(personToRemove, targetFolder);
         return new CommandResult(
                 String.format(MESSAGE_DELETE_PERSON_FROM_FOLDER_SUCCESS,
                 targetFolder));
