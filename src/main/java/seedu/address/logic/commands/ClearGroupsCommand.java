@@ -8,9 +8,9 @@ import seedu.address.model.Model;
 /**
  * Clears the address book.
  */
-public class ClearStudentsCommand extends Command {
+public class ClearGroupsCommand extends Command {
 
-    public static final String COMMAND_WORD = "clearStudents";
+    public static final String COMMAND_WORD = "clearGroups";
     public static final String MESSAGE_SUCCESS = "Group list has been cleared!";
 
     @Override
