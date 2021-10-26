@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     public static final String DESCRIPTION = "Adds a person to the address book.";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + DESCRIPTION
-            + " Parameters: "
+            + "\n" + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "

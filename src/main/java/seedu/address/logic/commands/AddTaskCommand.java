@@ -35,7 +35,7 @@ public class AddTaskCommand extends Command {
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
             + "[" + PREFIX_TASK_VENUE + " TASK_VENUE] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_DESCRIPTION + "Likes to swim.";
+            + PREFIX_TASK_DESCRIPTION + " Likes to swim.";
 
     public static final String DESCRIPTION = "Add to the task list of the person specified by INDEX";
 

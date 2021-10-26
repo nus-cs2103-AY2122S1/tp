@@ -42,8 +42,8 @@ public class EditTaskCommand extends Command {
             + "[" + PREFIX_TASK_TIME + " TASK_TIME] "
             + "[" + PREFIX_TASK_VENUE + " TASK_ADDRESS] \n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_TASK_INDEX + "2 "
-            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion"
+            + PREFIX_TASK_INDEX + " 2 "
+            + PREFIX_TASK_DESCRIPTION + "Assignment Discussion";
             + PREFIX_IMPORTANCE + "false";
 
     public static final String DESCRIPTION = "Edits the details of the task identified";
