@@ -1,7 +1,15 @@
 package seedu.address.ui;
 
-import java.time.DayOfWeek;
+import static javafx.collections.FXCollections.observableList;
 
+import java.time.DayOfWeek;
+import java.util.List;
+import java.util.logging.Logger;
+
+import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,7 +17,10 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.util.Callback;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Slot;
 
 /**
@@ -18,6 +29,7 @@ import seedu.address.model.person.Slot;
 public class SlotCard extends UiPart<Region> {
 
     private static final String FXML = "SlotCard.fxml";
+    private final Logger logger = LogsCenter.getLogger(SlotCard.class);
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -29,6 +41,8 @@ public class SlotCard extends UiPart<Region> {
 
     private final DayOfWeek day;
     private final Slot slot;
+    ObservableList<Person> filteredList;
+    ObservableList<Person> stafflist;
 
     @FXML
     private VBox slotPane;
@@ -46,11 +60,27 @@ public class SlotCard extends UiPart<Region> {
         this.day = day;
         this.slot = slot;
         shiftName.setText(slot.toString());
-        ObservableList<Person> filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
+        filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
+//        Callback<Person, Observable[]> scheduleCallback = param -> {
+//            StringProperty scheduleString = new SimpleStringProperty(param.getSchedule().toString());
+//            return new Observable[]{
+//                    scheduleString
+//            };
+//        };
+//        trackedList = observableList(filteredList, scheduleCallback);
         staffWorkingList.setItems(filteredList);
+        stafflist.addListener((ListChangeListener<? super Person>) change -> {
+            System.out.println("change detected");
+
+        });
         staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
 
+    private void updateList() {
+        filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
+        staffWorkingList.setItems(filteredList);
+        staffWorkingList.refresh();
+    }
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
@@ -60,28 +90,10 @@ public class SlotCard extends UiPart<Region> {
             super.updateItem(staff, empty);
 
             if (empty || staff == null) {
-                setGraphic(null);
                 setText(null);
             } else {
                 setText(staff.getName().toString());
             }
         }
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof SlotCard)) {
-            return false;
-        }
-
-        // state check
-        SlotCard card = (SlotCard) other;
-        return day.equals(card.day) && slot.equals(card.slot);
     }
 }

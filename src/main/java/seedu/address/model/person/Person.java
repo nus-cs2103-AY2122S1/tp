@@ -244,6 +244,7 @@ public class Person {
                 && otherStaff.getSalary().equals(getSalary())
                 && otherStaff.getStatus().equals(getStatus())
                 && otherStaff.getTags().equals(getTags())
+                && otherStaff.getSchedule().equals(getSchedule())
                 && periods.containsAll(otherPeriods)
                 && otherPeriods.containsAll(periods)
                 && otherStaff.totalWeeklyWorkingHour == totalWeeklyWorkingHour;
@@ -253,7 +254,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, schedule);
     }
 
     @Override
