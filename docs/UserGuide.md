@@ -207,6 +207,11 @@ Prefix refers to the word symbol used before the parameter.
 <br> <br>
 
 ### **Command Parameters**
+This subsection serves to list out the parameters used in FAST.
+
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+To achieve the best possible experience, avoid adding excessively long input to FAST.
+</div><br>
 
 `ADDRESS` 
 * The address of your client
@@ -240,7 +245,7 @@ Prefix refers to the word symbol used before the parameter.
 
 
 `INDEX`
-* Refers to the number shown in the client list
+* Refers to the number shown in the displayed client list
 * **Must be a positive integer** 1, 2, 3, …​
 
 
@@ -328,6 +333,13 @@ You can use this command to add a client to FAST.
 
 **Format**: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
 
+**Parameter**:
+* [`NAME`](#NAME)
+* [`PHONE_NUMBER`](#PHONE)
+* [`EMAIL`](#EMAIL)
+* [`ADDRESS`](#ADDRESS)
+* [`TAG`](#TAG)
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A client can have any number of tags (including 0)
 </div>
@@ -349,16 +361,30 @@ This can be used if the client's information has changed, or if you entered an i
 
 **Format**: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
-* At least one of the optional fields must be provided.
-* Only the edited fields will be updated to the input values, while the unedited values are unchanged.
-* When editing tags, all existing tags of the client will be replaced with the new tags.
-* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
-* For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
+**Parameter**:
+* [`INDEX`](#INDEX)
+* [`NAME`](#NAME)
+* [`PHONE_NUMBER`](#PHONE)
+* [`EMAIL`](#EMAIL)
+* [`ADDRESS`](#ADDRESS)
+* [`TAG`](#TAG)
+
+* Edits the client at the specified `INDEX`.
 
 **Examples**:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the first client to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the second client to be `Betsy Crower` and clears all existing tags.
+
+<div markdown="block" class="alert alert-info"> :information_source: 
+* Only the edited fields will be updated to the input values, while the unedited values are unchanged.
+* You can remove all the client’s tags by typing `t/` without specifying any tags after it.
+* For further information on the type of tags available and how to use them, refer to the [Tags](#tags) section.
+</div>
+
+<div markdown="span" class="alert alert-warning"> :exclamation: 
+* At least one of the optional fields must be provided.
+* When editing tags, all existing tags of the client will be replaced with the new tags.
+</div>
 
 <br> <br>
 
@@ -366,10 +392,13 @@ This can be used if the client's information has changed, or if you entered an i
 
 You can delete the specified client from FAST. This is useful when a client has stopped using your services.
 
-**Format**: `del INDEX`
+**Format 1**: `del INDEX...`
+**Format 2**: `del INDEX-INDEX`
+
+**Parameter**:
+* [`INDEX`](#INDEX)
 
 * Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
 
 **Examples**:
 * `list` followed by `del 2` deletes the second clients in FAST.
@@ -377,14 +406,11 @@ You can delete the specified client from FAST. This is useful when a client has 
 
 <div markdown="span" class="alert alert-primary">:bulb: Tip:
 Can be used to delete up to **10** contacts in a single `del` command by supplying more `INDEX`.
-
-**Format** 1: `del INDEX INDEX [INDEX]...` <br>
-**Format** 2: `del INDEX-INDEX`
-
-<div markdown="span" class="alert alert-primary">:exclamation: Reminder:
-If *Format 1* is used, there should be a space in between each `INDEX`. <br>
-If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'. 
 </div>
+
+<div markdown="span" class="alert alert-primary">:exclamation: Warning:
+If *Format 1* is used, there should be a space in between each `INDEX` if multiple `INDEX` are input. <br>
+If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. There *should not* be any spaces in between '`INDEX`-`INDEX`'.
 </div>
 
 **Examples**:
@@ -393,24 +419,26 @@ If *Format 2* is used, first `INDEX` should not be larger than second `INDEX`. T
 
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-This CANNOT be undone!</div>
+This CANNOT be undone!
+</div>
 
 <br> <br>
 
 #### Adding a remark to your client: `rmk`
 
-You can add a remark to an existing client in FAST. This is useful for adding additional client notes such 
-as their preferred meeting timing, allowing you to better serve your clients!
+You can add a remark to an existing client at the specified [`INDEX`](#INDEX) in FAST. <br>
+This is useful for adding additional client notes such as their preferred meeting timing, allowing you to better serve your clients!
 
-**Format**: `rmk INDEX [r/REMARK]`
+<div markdown="block" class="alert alert-info">
+:information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
+which should mostly be one or two words.<br>
+</div>
 
-* Adds a remark to the client at the specified `INDEX`.
-* Remarks have a character limit of 100 characters.
-* To delete a remark, leave the remark parameter `[r/REMARK]` empty.
-   <div markdown="block" class="alert alert-info">
-   :information_source: Remarks should be used to annotate contacts with longer and more specific things compared to tags,
-   which should mostly be one or two words.<br>
-   </div>
+**Format**: `rmk [`INDEX`](#INDEX) [r/[`REMARK`](#REMARK)]`
+
+<div markdown="span" class="alert alert-primary">:bulb: Tip:
+To delete a remark, leave the remark parameter `[r/[`REMARK`](#REMARK)]` empty.
+</div>
 
 **Examples**:
 * `rmk 1 r/loves to eat`  adds a remark `loves to eat` to the first client.
@@ -729,8 +757,6 @@ FAST will start with an empty data file on the next run!
 </div>
 
 
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **FAQs**
@@ -748,13 +774,13 @@ FAST will start with an empty data file on the next run!
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Command summary**
-The tables below provides you with a summary for **all** the available commands in FAST. 
+The tables below provides you with a summary for **all** the available commands in FAST. You can use this section to quickly refresh your memory on the different command formats. 
 The commands are categorised (based on their purpose) into 5 different categories:
-* Contact Management [Contact Management](#Contact Management)
-* Appointment [Appointment](#Appointment)
-* Tags [Tags](#Tags)
-* Navigation [Navigation](#Navigation)
-* Others [Others](#Others)
+* [Contact Management](#Contact Management)
+* [Appointment](#Appointment)
+* [Tags](#Tags)
+* [Navigation](#Navigation)
+* [Others](#Others)
 
 ### Contact Management
 Action|Format, Examples
