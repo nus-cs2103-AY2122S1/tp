@@ -112,6 +112,37 @@ public class AddAppCommandTest {
             -> commandResult.execute(modelStub));
     }
 
+    @Test
+    public void execute_duplicateAppointmentTime_returnInvalid() {
+        ArrayList<Index> indexOne = new ArrayList<>();
+        indexOne.add(Index.fromZeroBased(0));
+        ArrayList<Index> indexTwo = new ArrayList<>();
+        indexTwo.add(Index.fromZeroBased(1));
+        ModelStubAcceptingAppointmentAdded modelTester = new ModelStubAcceptingAppointmentAdded();
+        modelTester.addPerson(new PersonBuilder().withName("ALICE").build());
+        modelTester.addPerson(new PersonBuilder().withName("BOB").build());
+        Command initialCommand = new AddAppCommand(
+                indexOne,
+                new Address("vivocity"),
+                LocalDate.of(2021, 01, 01),
+                LocalTime.of(18, 00),
+                "Halloween Sales");
+        Command commandResult = new AddAppCommand(
+                indexTwo,
+                new Address("vivocity"),
+                LocalDate.of(2021, 01, 01),
+                LocalTime.of(18, 00),
+                "Halloween Sales");
+        try {
+            initialCommand.execute(modelTester);
+        } catch (CommandException e) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        assertThrows(CommandException.class, ()
+            -> commandResult.execute(modelTester));
+    }
+
 
     private class ModelStub implements Model {
         @Override
@@ -237,7 +268,7 @@ public class AddAppCommandTest {
      * A Model stub that always accept the person being added.
      */
     private class ModelStubAcceptingAppointmentAdded extends AddAppCommandTest.ModelStub {
-        final ArrayList<Appointment> appointmentAdded = new ArrayList<>();
+        final ObservableList<Appointment> appointmentAdded = FXCollections.observableArrayList();
         final ObservableList<Person> personsAdded = FXCollections.observableArrayList();
 
         @Override
@@ -261,6 +292,11 @@ public class AddAppCommandTest {
         public void addAppointment(Appointment a) {
             requireNonNull(a);
             appointmentAdded.add(a);
+        }
+
+        @Override
+        public ObservableList<Appointment> getFilteredAppointmentList() {
+            return appointmentAdded;
         }
 
         @Override
