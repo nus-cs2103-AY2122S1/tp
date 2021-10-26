@@ -46,7 +46,7 @@ video here
 ## <u>How to use this User Guide</u>
 
 * Go to the [Getting Started](#ugetting-startedu) section if you want to know how to set things up.
-* If you want to dive straight into features, you can check out our [Features](#ugetting-startedu) section.
+* If you want to dive straight into features, you can check out our [Features](#ufeaturesu) section.
 * For a quick recap of the commands, you can take a look at our [Command Summary](#ucommand-summaryu) section.
 
 
