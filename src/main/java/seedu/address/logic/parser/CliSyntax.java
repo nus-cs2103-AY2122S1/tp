@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_EVENT = new Prefix("/v");
     public static final Prefix PREFIX_TASK_ID = new Prefix("/t");
     public static final Prefix PREFIX_MEMBER_ID_DEL = new Prefix("/for");
+    public static final Prefix PREFIX_STATUS = new Prefix("/s");
 }
