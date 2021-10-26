@@ -18,13 +18,6 @@ public class HelpCommandTest {
     private Model expectedModel = new ModelManager();
 
     @Test
-    public void execute_validCommand_success() {
-        HelpCommand helpCommand = new HelpCommand(UntagCommand.COMMAND_WORD);
-        CommandResult expectedCommandResult = new CommandResult(UntagCommand.MESSAGE_USAGE, false, false);
-        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
-    }
-
-    @Test
     public void execute_noCommand_success() {
         HelpCommand helpCommand = new HelpCommand(HelpCommand.EMPTY);
         CommandResult expectedCommandResult = new CommandResult(HelpCommand.HELP_MESSAGE, false, false);
@@ -34,7 +27,110 @@ public class HelpCommandTest {
     @Test
     public void execute_moreHelp_success() {
         HelpCommand helpCommand = new HelpCommand(HelpCommand.MORE);
-        CommandResult expectedCommandResult = new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE, true, false);
+        CommandResult expectedCommandResult = new CommandResult(HelpCommand.SHOWING_HELP_MESSAGE,
+                true, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_addCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(AddCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(AddCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_editCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(EditCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(EditCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_untagCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(UntagCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(UntagCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_tagCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(TagCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(TagCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(DeleteCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(DeleteCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_deletemCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(DeleteMultipleCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(DeleteMultipleCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_clearCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(ClearCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(ClearCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_findCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(FindCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(FindCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_findOrCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(FindOrCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(FindOrCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_listCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(ListCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(ListCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_exitCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(ExitCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_helpCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(HelpCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(HelpCommand.MESSAGE_USAGE, false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_findTagCaseInsensitiveCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(FindTagCaseInsensitiveCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(FindTagCaseInsensitiveCommand.MESSAGE_USAGE,
+                false, false);
+        assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
+    }
+
+    @Test
+    public void execute_findTagCaseSensitiveCommand_success() {
+        HelpCommand helpCommand = new HelpCommand(FindTagCaseSensitiveCommand.COMMAND_WORD);
+        CommandResult expectedCommandResult = new CommandResult(FindTagCaseSensitiveCommand.MESSAGE_USAGE,
+                false, false);
         assertCommandSuccess(helpCommand, model, expectedCommandResult, expectedModel);
     }
 
