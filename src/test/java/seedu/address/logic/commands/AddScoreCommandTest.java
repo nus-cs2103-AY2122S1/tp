@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ID_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SCORE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailureWithFilteredListChange;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -147,7 +148,10 @@ public class AddScoreCommandTest {
 
         String expectedMessage = AddScoreCommand.MESSAGE_DUPLICATE_STUDENT_NAME;
 
-        assertCommandFailure(addScoreCommand, model, expectedMessage);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        assertCommandFailureWithFilteredListChange(addScoreCommand, model, expectedMessage, expectedModel,
+                VALID_NAME_AMY);
     }
 
     @Test

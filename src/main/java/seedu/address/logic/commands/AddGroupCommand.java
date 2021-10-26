@@ -11,11 +11,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Group;
+import seedu.address.model.student.Name;
+import seedu.address.model.student.NameEqualsPredicate;
 import seedu.address.model.student.Student;
 
 /**
@@ -80,6 +83,11 @@ public class AddGroupCommand extends Command {
             Student studentToEdit = matchedStudents.get(0);
 
             if (matchedStudents.size() > 1) {
+                List<String> matchedIds = matchedStudents.stream()
+                        .map(Student::getName).map(Name::toString)
+                        .collect(Collectors.toList());
+                Predicate<Student> predicate = new NameEqualsPredicate(matchedIds.get(0));
+                model.updateFilteredStudentList(predicate);
                 throw new CommandException(String.format(MESSAGE_DUPLICATE_STUDENT, studentToEdit.getName()));
             }
 

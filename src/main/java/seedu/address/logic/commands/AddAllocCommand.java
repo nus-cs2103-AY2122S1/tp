@@ -20,6 +20,7 @@ import seedu.address.model.student.Assessment;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.Name;
+import seedu.address.model.student.NameEqualsPredicate;
 import seedu.address.model.student.Score;
 import seedu.address.model.student.Student;
 import seedu.address.model.tag.Tag;
@@ -75,6 +76,11 @@ public class AddAllocCommand extends Command {
         }
 
         if (studentsToEdit.size() > 1) {
+            List<String> matchedIds = studentsToEdit.stream()
+                    .map(Student::getName).map(Name::toString)
+                    .collect(Collectors.toList());
+            Predicate<Student> predicate = new NameEqualsPredicate(matchedIds.get(0));
+            model.updateFilteredStudentList(predicate);
             throw new CommandException(MESSAGE_DUPLICATE_STUDENT_NAME);
         }
 
