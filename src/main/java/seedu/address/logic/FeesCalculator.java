@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.LastUpdatedDate;
 import seedu.address.model.Model;
 import seedu.address.model.lesson.Date;
@@ -16,6 +17,7 @@ import seedu.address.model.lesson.Homework;
 import seedu.address.model.lesson.Lesson;
 import seedu.address.model.lesson.LessonRates;
 import seedu.address.model.lesson.MakeUpLesson;
+import seedu.address.model.lesson.Money;
 import seedu.address.model.lesson.OutstandingFees;
 import seedu.address.model.lesson.RecurringLesson;
 import seedu.address.model.lesson.Subject;
@@ -28,6 +30,8 @@ import seedu.address.model.util.PersonUtil;
  * Many lessons to 1 FeeCalculator.
  */
 public class FeesCalculator implements Calculator {
+    public static final String MESSAGE_PAY_TOO_MUCH = "Payment amount exceeds current "
+            + "Outstanding Fees. Invalid transcation.";
 
     private static final float numberOfMinutesInAnHour = 60.00F;
     private static final LocalDateTime currentDateTime = LocalDateTime.now();
@@ -122,7 +126,7 @@ public class FeesCalculator implements Calculator {
         // get the number of weeks past since lastAdded date
         LocalDateTime startDate = lastUpdated.dateTime;
         int numberOfWeeksBetween = (int) ChronoUnit.WEEKS.between(startDate, currentDateTime);
-        
+
         // If today is after the update day or if today is the update day, update the fees for this week's lesson.
         if (currentDateTime.isAfter(updateDateTime)) {
             numberOfWeeksBetween += 1;
@@ -131,5 +135,21 @@ public class FeesCalculator implements Calculator {
         // isCancelled deduction logic goes here
 
         return numberOfWeeksBetween;
+    }
+
+    /**
+     * Returns the outstanding fees after payment.
+     *F
+     * @param payment Amount paid.
+     * @return Updated OutstandingFees.
+     */
+    public static String pay(OutstandingFees toPay, Money payment) throws IllegalValueException {
+        float newOutstandingFees = toPay.getMonetaryValueInFloat() - payment.getMonetaryValueInFloat();
+
+        if (newOutstandingFees < 0) {
+            throw new IllegalValueException(MESSAGE_PAY_TOO_MUCH);
+        }
+        String parseValueToString = Float.toString(newOutstandingFees);
+        return parseValueToString;
     }
 }
