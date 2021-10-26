@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import seedu.academydirectory.model.AdditionalInfo;
@@ -29,10 +31,10 @@ public class ViewCreator extends Creator {
     private HBox tagContainer;
 
     @FXML
-    private StackPane participation;
+    private ScrollPane participation;
 
     @FXML
-    private StackPane testScores;
+    private ScrollPane testScores;
 
     @FXML
     private Label phone;
@@ -61,9 +63,9 @@ public class ViewCreator extends Creator {
         }
         StudioRecord studioRecord = student.getStudioRecord();
         Label displayInfoPlaceHolder = new Label(studioRecord.getExtendedStudioRecords());
-        participation.getChildren().add(displayInfoPlaceHolder);
+        participation.setContent(displayInfoPlaceHolder);
         String assessments = student.getAssessment().getVisualizerDisplay();
-        testScores.getChildren().add(new Label(assessments));
+        testScores.setContent(new Label(assessments));
     }
 
     @Override

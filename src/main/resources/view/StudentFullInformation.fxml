@@ -19,14 +19,14 @@
       <HBox fx:id="tagContainer" alignment="CENTER" />
       <Accordion>
         <panes>
-          <TitledPane animated="false" text="View Participation">
+          <TitledPane fx:id="container1" animated="false" text="View Participation">
             <content>
-              <StackPane fx:id="participation"  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <ScrollPane fx:id="participation"  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </TitledPane>
-          <TitledPane animated="false" text="View Test Score">
+          <TitledPane fx:id="container2" animated="false" text="View Test Score">
             <content>
-              <StackPane fx:id="testScores"  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <ScrollPane fx:id="testScores"  minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </TitledPane>
         </panes>
