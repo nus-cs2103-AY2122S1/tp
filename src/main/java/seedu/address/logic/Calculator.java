@@ -7,6 +7,7 @@ import seedu.address.model.Model;
 import seedu.address.model.lesson.Lesson;
 
 public interface Calculator {
+    static final float lessonCycle = 4.00F;
     /**
      * Calculate and update all student's lesson's outstanding fees.
      *
@@ -32,6 +33,6 @@ public interface Calculator {
      * For reminding when the fees are due. In cycles of 4 lessons.
      */
     static float getThreshold(float costPerLesson) {
-        return costPerLesson * 4;
+        return costPerLesson * lessonCycle;
     }
 }

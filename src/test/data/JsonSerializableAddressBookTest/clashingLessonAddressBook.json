@@ -19,6 +19,7 @@
       "subject" : "Math",
       "homework" : [ ],
       "lessonRates" : "37.50",
+      "outstandingFees" : "100.00",
       "isRecurring" : true
     } ]
   }, {
@@ -40,7 +41,11 @@
       "subject" : "Science",
       "homework" : [ "TYS Page 2" ],
       "lessonRates" : "37.50",
+      "outstandingFees" : "100.00",
       "isRecurring" : false
     } ]
-  } ]
+  } ],
+  "lastUpdated": {
+    "dateTime": "2021-10-23T10:15:30"
+  }
 }

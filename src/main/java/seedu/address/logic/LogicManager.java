@@ -35,7 +35,7 @@ public class LogicManager implements Logic {
     private final Storage storage;
     private final UndoRedoStack undoRedoStack;
     private final AddressBookParser addressBookParser;
-    private final FeesCalculator feesCalculator;
+    private final Calculator feesCalculator;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.

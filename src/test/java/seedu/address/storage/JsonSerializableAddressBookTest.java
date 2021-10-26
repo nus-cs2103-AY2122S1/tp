@@ -64,6 +64,8 @@ public class JsonSerializableAddressBookTest {
         assertThrows(IllegalValueException.class, LastUpdatedDate.MESSAGE_CONSTRAINTS,
                 dateFromFile::toModelType);
     }
+
+    @Test
     public void toModelType_clashingLessons_throwsIllegalValueException() throws Exception {
         JsonSerializableAddressBook dataFromFile = JsonUtil.readJsonFile(CLASHING_LESSON_FILE,
                 JsonSerializableAddressBook.class).get();

@@ -77,15 +77,6 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Returns the day the outstanding fees for the lessons should be updated.
-     *
-     * @return 1 day after the day of the lesson.
-     */
-    public DayOfWeek getUpdateFeesDay() {
-        return getDayOfWeek().plus(1);
-    }
-
-    /**
      * Update the lesson date to the same day on the most recent week
      * that has yet to be pass.
      *

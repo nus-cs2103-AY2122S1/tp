@@ -51,7 +51,7 @@ public class MakeUpLesson extends Lesson {
      */
     @Override
     public boolean hasEnded() {
-        LocalDate updateDate = LocalDate.now().plus(1, ChronoUnit.DAYS);
+        LocalDate updateDate = LocalDate.now().plus(1, ChronoUnit.MINUTES);
         return getStartDate().getLocalDate().isBefore(updateDate);
     }
 
