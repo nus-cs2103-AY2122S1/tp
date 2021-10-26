@@ -120,6 +120,8 @@ Format: `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 
 Examples:
 
+![UI](images/filter.png)
+
 - `filter -sid A1234567X` Lists all students whose student ID contains `A1234567X`.
 - `filter -n abc` Lists all students whose name contains `abc`.
 - `filter -cid B01` Lists all students whose class ID contains the character sequence `B01`.
