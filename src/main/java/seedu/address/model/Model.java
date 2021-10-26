@@ -60,7 +60,7 @@ public interface Model {
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * {@code person} must exist in the address book.
      */
     void deletePerson(Person target);
 
@@ -87,7 +87,13 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns summary of AddressBook
+     * Exports the given person.
+     * {@code person} must exist in the address book.
+     */
+    void exportPerson(Person person);
+
+    /**
+     * Returns summary of AddressBook.
      */
     Summary getSummary();
 

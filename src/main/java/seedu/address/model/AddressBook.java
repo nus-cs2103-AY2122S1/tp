@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.storage.ExportStorage;
 
 /**
  * Wraps all data at the address-book level
@@ -91,6 +92,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    /**
+     * Exports {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void exportPerson(Person key) {
+        // Write to file
+        ExportStorage.addToStorage(key.toString());
     }
 
     //// util methods

@@ -120,6 +120,11 @@ public class ModelManager implements Model {
     public void sortList(String sortBy) {
         addressBook.sortList(sortBy);
     }
+  
+    @Override 
+    public void exportPerson(Person person) {
+        addressBook.exportPerson(person);
+    }
 
     //=========== Filtered Person List Accessors =============================================================
 
