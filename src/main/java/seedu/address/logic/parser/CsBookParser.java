@@ -12,10 +12,12 @@ import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ChangeGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DecryptCommand;
 import seedu.address.logic.commands.DeleteAssessmentCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EncryptCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -75,6 +77,12 @@ public class CsBookParser {
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
+
+        case EncryptCommand.COMMAND_WORD:
+            return new EncryptCommand();
+
+        case DecryptCommand.COMMAND_WORD:
+            return new DecryptCommand();
 
         case ChangeGroupCommand.COMMAND_WORD:
             return new ChangeGroupCommandParser().parse(arguments);
