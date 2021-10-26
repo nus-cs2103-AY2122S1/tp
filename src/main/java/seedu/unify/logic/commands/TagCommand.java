@@ -129,7 +129,7 @@ public class TagCommand extends Command {
         }
 
         public void setTags(Set<Tag> tags) {
-            this.tags = (tags != null)  ? new HashSet<>(tags) : null;
+            this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
 
         public Optional<Set<Tag>> getTags() {
