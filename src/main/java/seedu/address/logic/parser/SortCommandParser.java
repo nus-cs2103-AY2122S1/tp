@@ -32,12 +32,18 @@ public class SortCommandParser implements Parser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public SortCommand parse(String args) throws ParseException {
-        String argsTrimmed = args.trim();
-        if (argsTrimmed.contains(" ")) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        boolean reverse;
+        List<String> argList = Arrays.asList(args.trim().split("\\s+"));
+        if (argList.size() == 2 && argList.get(1).equals("-r")) {
+            reverse = true;
+        } else if (argList.size() == 1 && argList.get(0).equals("-r")) {
+            reverse = true;
+        } else {
+            reverse = false;
         }
+        String argsTrimmed = argList.get(0);
         Prefix prefix;
-        if (argsTrimmed.isEmpty()) {
+        if (argsTrimmed.isEmpty() || argsTrimmed.equals("-r")) {
             prefix = new Prefix("n/");
         } else {
             prefix = new Prefix(argsTrimmed);
@@ -45,6 +51,7 @@ public class SortCommandParser implements Parser {
         if (!prefixList.contains(prefix)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
-        return new SortCommand(prefix);
+        System.out.print(argsTrimmed + " " + reverse + "\n");
+        return new SortCommand(prefix, reverse);
     }
 }

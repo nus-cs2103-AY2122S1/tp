@@ -138,9 +138,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void sortFilteredPersonList(Prefix prefix) {
+    public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
         requireNonNull(prefix);
-        addressBook.sortList(prefix);
+        addressBook.sortList(prefix, reverse);
     }
 
     @Override

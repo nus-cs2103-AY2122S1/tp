@@ -101,9 +101,9 @@ public class UniquePersonList implements Iterable<Person> {
     /**
      * Sorts the contents of this list using {@code prefix}
      */
-    public void sort(Prefix prefix) {
+    public void sort(Prefix prefix, boolean reverse) {
         requireNonNull(prefix);
-        internalList.sort(new PersonComparator(prefix));
+        internalList.sort(new PersonComparator(prefix, reverse));
     }
 
     /**

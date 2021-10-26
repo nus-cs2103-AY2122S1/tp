@@ -155,7 +155,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void sortFilteredPersonList(Prefix prefix) {
+        public void sortFilteredPersonList(Prefix prefix, boolean reverse) {
             throw new AssertionError("This method should not be called.");
         }
     }

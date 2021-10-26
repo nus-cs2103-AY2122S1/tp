@@ -16,10 +16,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TUTORIAL_ID_BOB
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TYPE_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.parser.Prefix;
 import seedu.address.testutil.PersonBuilder;
 
 public class PersonTest {
@@ -74,6 +76,41 @@ public class PersonTest {
 
         // same person
         assertTrue(ALICE.isSamePerson(ALICE));
+    }
+
+    @Test
+    public void compare() {
+
+        //compare name
+        assertTrue(ALICE.compare(BENSON, new Prefix("n/")) < 0);
+
+        //compare phone
+        assertTrue(ALICE.compare(BENSON, new Prefix("p/")) < 0);
+
+        //compare email
+        assertTrue(ALICE.compare(BENSON, new Prefix("e/")) < 0);
+
+        //compare number of Tags
+        assertTrue(ALICE.compare(BENSON, new Prefix("t/")) < 0);
+
+        //compare address
+        assertTrue(ALICE.compare(BENSON, new Prefix("a/")) < 0);
+
+        //compare Student ID
+        assertTrue(ALICE.compare(BENSON, new Prefix("s/")) < 0);
+
+        //compare Github ID
+        assertTrue(ALICE.compare(BENSON, new Prefix("g/")) < 0);
+
+        //compare Tutorial ID
+        assertTrue(ALICE.compare(BENSON, new Prefix("T/")) < 0);
+
+        //compare type
+        Person editedBenson = new PersonBuilder(BENSON).withType("tutor").build();
+        assertTrue(ALICE.compare(BENSON, new Prefix("r/")) < 0);
+
+        //compare NUS Network ID
+        assertTrue(ALICE.compare(BENSON, new Prefix("N/")) < 0);
     }
 
     @Test

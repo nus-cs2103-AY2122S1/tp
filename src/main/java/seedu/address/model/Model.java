@@ -94,5 +94,5 @@ public interface Model {
      * Sorts the filtered person list by the given {@code prefix}
      * @param prefix
      */
-    void sortFilteredPersonList(Prefix prefix);
+    void sortFilteredPersonList(Prefix prefix, boolean reverse);
 }

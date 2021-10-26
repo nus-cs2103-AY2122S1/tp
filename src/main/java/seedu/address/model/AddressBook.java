@@ -111,8 +111,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Sorts {@code UniquePersonList} by the given prefix
      */
-    public void sortList(Prefix prefix) {
-        persons.sort(prefix);
+    public void sortList(Prefix prefix, boolean reverse) {
+        persons.sort(prefix, reverse);
     }
 
     /**

@@ -22,19 +22,21 @@ public class SortCommand extends Command {
     public static final String MESSAGE_SUCCESS = "List sorted.";
 
     private final Prefix prefix;
+    private final boolean reverse;
 
     /**
      * Creates a SortCommand to sort the observable list by the prefix given
      */
 
-    public SortCommand(Prefix prefix) {
+    public SortCommand(Prefix prefix, boolean reverse) {
         this.prefix = prefix;
+        this.reverse = reverse;
     }
 
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.sortFilteredPersonList(this.prefix);
+        model.sortFilteredPersonList(this.prefix, this.reverse);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
@@ -48,6 +50,6 @@ public class SortCommand extends Command {
             return false;
         }
         SortCommand e = (SortCommand) other;
-        return prefix.equals(e.prefix);
+        return prefix.equals(e.prefix) && reverse == (e.reverse);
     }
 }
