@@ -84,4 +84,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /** Returns an unmodifiable view of person sorted by with upcoming birthday at the top list */
+    ObservableList<Person> getBirthdayReminderList();
 }

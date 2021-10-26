@@ -126,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        birthdayReminderListPanel = new BirthdayReminderListPanel(logic.getFilteredPersonList());
+        birthdayReminderListPanel = new BirthdayReminderListPanel(logic.getBirthdayReminderList());
         birthdayReminderListPanelPlaceholder.getChildren().add(birthdayReminderListPanel.getRoot());
     }
 
