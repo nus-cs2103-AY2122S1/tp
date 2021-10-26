@@ -69,7 +69,7 @@ public class DashboardWindow extends PopupWindow {
         }
 
         for (Student s : stuList) {
-            ObservableList<Lab> stuLabs = s.getLabResultList();
+            ObservableList<Lab> stuLabs = s.getLabList();
             for (Lab l : stuLabs) {
                 if (!l.isMarked()) {
                     ClassId cid = s.getClassId();
