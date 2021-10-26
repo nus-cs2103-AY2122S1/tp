@@ -34,28 +34,16 @@ Here is an overview of the features FAST offers:
 * Tag your clients with the insurance plan they have purchased or are interested in.
 * View built-in analysis of your client base to better understand your portfolio.
 
-
-### Structure of this document
-To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
-As such, this user guide has been structured to help you find what you are looking for.
-
-In [How to use this user guide](#how-to-use-this-user-guide), you can learn how to most effectively read through this guide.
-
-In [Quick start](#quick-start), you will find simple instructions on how to quickly begin using FAST.
-
-In [Features](#features), you can find documentation on how to use the features available in FAST.
-
-In [FAQs](#faqs), you may find answers to questions or problems you might have while using FAST.
-
-In [Command summary](#command-summary), you will find a summary of the commands available in FAST.
-
-In [Glossary](#glossary), you will find useful descriptions and meanings of terms used in this document.
-
+### Purpose of this guide
+This guide aims to help new users to be familar with FAST. After reading this guide, new users will be more familar with the different features available in FAST.
+This guide also serves as a reminder for existing users to quickly search for specific information if they are unsure of how to use certain features, 
+by clicking on the links, to jump to the section where the information which they are looking for exists.
 
 ## How to use this user guide
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links like [this](#how-to-use-this-user-guide) which will jump to the 
-corresponding section of the user guide. These links allow you to quickly navigate this document.
+corresponding section of the user guide. These links allow you to quickly navigate this document. 
+This guide follows the structure as stated [this](#structure-of-this-document).
 
 We also use special formats to highlight information that will be important or useful to you.
 These include:
@@ -90,7 +78,21 @@ Messages that appear in these boxes will be useful in helping you to understand 
 
 Messages that appear in these boxes indicate that the message is of a more technical nature, such as user input.
 
+### Structure of this document
+To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
+As such, this user guide has been structured to help you find what you are looking for.
 
+In [How to use this user guide](#how-to-use-this-user-guide), you can learn how to most effectively read through this guide.
+
+In [Quick start](#quick-start), you will find simple instructions on how to quickly begin using FAST.
+
+In [Features](#features), you can find documentation on how to use the features available in FAST.
+
+In [FAQs](#faqs), you may find answers to questions or problems you might have while using FAST.
+
+In [Command summary](#command-summary), you will find a summary of the commands available in FAST.
+
+In [Glossary](#glossary), you will find useful descriptions and meanings of terms used in this document.
 
 ## **Quick start**
 
