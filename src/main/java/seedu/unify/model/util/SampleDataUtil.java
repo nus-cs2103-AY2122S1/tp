@@ -24,7 +24,7 @@ public class SampleDataUtil {
                 getTagSet("friends")),
             new Task(new Name("Bernice Yu"), new Time("10:10"),
                 new Date("2020-10-10"),
-                getTagSet("colleagues","friends")),
+                getTagSet("colleagues", "friends")),
             new Task(new Name("Charlotte Oliveiro"), new Time("10:10"),
                 new Date("2020-10-10"),
                 getTagSet("neighbours")),
