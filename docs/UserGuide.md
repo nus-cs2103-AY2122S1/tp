@@ -36,19 +36,14 @@ If you ever want to skip through any section of our user guide, do feel free to 
     * [1.1 Is this guide for you?](#11-is-this-guide-for-you)
     * [1.2 How to use the user guide](#12-how-to-use-the-user-guide)
     * [1.3 Table of Contents](#13-table-of-contents)
-    
 * [2. Quick Start](#2-quick-start)
-  
 * [3. About](#3-about)
-  * [3.1 Special Icons](#31-special-icons)
-  * [3.2 Application homepage explanation](#32-application-homepage-explanation)
-  * [3.3 Command format](#33-command-format)
-  * [3.4 Command terminology](#34-command-terminology)    
-    
+    * [3.1 Special Icons](#31-special-icons)
+    * [3.2 Application homepage explanation](#32-application-homepage-explanation)
+    * [3.3 Command format](#33-command-format)
+    * [3.4 Command terminology](#34-command-terminology)
 * [4. Features](#4-features)
-  
 * [5. FAQ](#5-faq)
-  
 * [6. Command Summary](#6-command-summary)
 
 
