@@ -361,7 +361,7 @@
 
 #terminalScrollPane {
     -fx-background-color: #383838;
-    -fx-padding: 5 10 5 10;
+    -fx-padding: 15 10 15 10;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
 }

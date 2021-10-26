@@ -15,7 +15,7 @@ import seedu.address.model.student.Student;
  */
 public class DeleteStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "removeStudent";
+    public static final String COMMAND_WORD = "deleteStudent";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the student identified by the index number used in the displayed student list.\n"
@@ -40,7 +40,7 @@ public class DeleteStudentCommand extends Command {
         }
 
         Student studentToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.removeStudent(studentToDelete);
+        model.deleteStudent(studentToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_STUDENT_SUCCESS, studentToDelete));
     }
 

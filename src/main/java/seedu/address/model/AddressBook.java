@@ -173,9 +173,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeStudent(Student key) {
+    public void deleteStudent(Student key) {
         requireNonNull(key);
-
         students.remove(key);
     }
 
@@ -183,7 +182,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from the {@code group} in the {@code AddressBook}.
      * {@code key} and {@code group} must exist in the address book.
      */
-    public void removeStudentFromGroup(Student key, Group group) {
+    public void deleteStudentFromGroup(Student key, Group group) {
         requireAllNonNull(key, group);
         groups.removeStudentFromGroup(key, group);
     }
@@ -194,7 +193,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeGroupFromStudent(Student key) {
         requireNonNull(key);
-
         students.removeGroupFromStudent(key);
     }
 
@@ -242,7 +240,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeGroup(Group key) {
+    public void deleteGroup(Group key) {
         groups.remove(key);
     }
 
