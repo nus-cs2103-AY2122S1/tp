@@ -47,30 +47,25 @@ public class RosterCommand extends Command {
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_LESSON_DISPLAYED_INDEX);
         }
-
-        StringBuilder outputSb = new StringBuilder();
-
         Lesson lessonToShow = lastShownList.get(targetIndex.getZeroBased());
         LessonCode lessonCodeToUse = lessonToShow.getLessonCode();
 
-        if (lessonCodeToUse != null) {
-            model.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lessonCodeToUse));
-            model.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lessonCodeToUse));
+        model.updateFilteredLessonList(new LessonIsOfSpecifiedLessonCode(lessonCodeToUse));
+        model.updateFilteredStudentList(new StudentIsOfSpecifiedLessonCode(lessonCodeToUse));
 
-            List<Student> filteredStudents = model.getFilteredStudentList();
-            outputSb.append(String.format(MESSAGE_ROSTER_LESSON_SUCCESS, lessonCodeToUse, filteredStudents.size()));
+        List<Student> filteredStudents = model.getFilteredStudentList();
+        StringBuilder outputSb = new StringBuilder();
+        outputSb.append(String.format(MESSAGE_ROSTER_LESSON_SUCCESS, lessonCodeToUse, filteredStudents.size()));
 
-            if (!filteredStudents.isEmpty()) {
-                outputSb.append(MESSAGE_ENROLLED_STUDENT_HEADER);
-                filteredStudents.stream()
-                        .map(s -> s.getName().fullName)
-                        .sorted()
-                        .forEach(n -> outputSb.append(n).append(", "));
-                outputSb.delete(outputSb.length() - 2, outputSb.length());
-            }
+        if (!filteredStudents.isEmpty()) {
+            outputSb.append(MESSAGE_ENROLLED_STUDENT_HEADER);
+            filteredStudents.stream()
+                    .map(s -> s.getName().fullName)
+                    .sorted()
+                    .forEach(n -> outputSb.append(n).append(", "));
+            outputSb.delete(outputSb.length() - 2, outputSb.length());
         }
-
-        return new CommandResult(outputSb.toString()); // output should never be empty string
+        return new CommandResult(outputSb.toString());
 
     }
 
