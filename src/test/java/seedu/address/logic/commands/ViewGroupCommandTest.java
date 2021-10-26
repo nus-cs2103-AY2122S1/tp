@@ -17,8 +17,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.group.Description;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
-import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 import seedu.address.model.student.Student;
+import seedu.address.model.student.StudentGroupNameEqualsPredicate;
 import seedu.address.testutil.StudentBuilder;
 
 public class ViewGroupCommandTest {
