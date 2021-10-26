@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.InvalidAlgorithmParameterException;
@@ -200,7 +199,7 @@ public class MainApp extends Application {
 
         try {
             Path target = Paths.get(home, "imports", "importTemplate.csv");
-            Files.copy(src, target);
+            FileUtil.copyFileIfMissing(src, target);
         } catch (IOException e) {
             logger.warning("Failed to retrieve importTemplate.csv : " + StringUtil.getDetails(e));
         }
