@@ -50,12 +50,11 @@ public interface Logic {
     ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Saves the AddressBook
+     * Saves all data to their respective files
      *
-     * @param addressBook the addressbook to save
      * @throws IOException if file write error
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveAllData() throws IOException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Person> getFilteredPersonList();
@@ -108,4 +107,8 @@ public interface Logic {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    ObservableList<Person> getModifiableList();
+
+    void sort();
 }

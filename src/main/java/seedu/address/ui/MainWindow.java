@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
+import seedu.address.logic.ai.ThreadProcessor;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -60,6 +61,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane progressPlaceHolder;
 
     @FXML
     private StackPane tabPanePlaceholder;
@@ -163,8 +167,10 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        ProgressIndicatorRegion progressIndicator = new ProgressIndicatorRegion();
+        personListPanelPlaceholder.getChildren().add(progressIndicator.getRoot());
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        tabPaneHeader = new TabPaneHeader(logic);
+        tabPaneHeader = new TabPaneHeader(logic, progressIndicator);
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
         tabPanePlaceholder.getChildren().add(tabPaneHeader.getRoot());
         personListPanel.setTabPaneHeader(tabPaneHeader);
@@ -221,12 +227,14 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         try {
-            logic.saveAddressBook(logic.getAddressBook());
+            logic.saveAllData();
         } catch (IOException e) {
+            e.printStackTrace();
             logger.severe("Unable to save Address Book to Memory");
         }
         helpWindow.hide();
         primaryStage.hide();
+        ThreadProcessor.stopAllThreads();
     }
 
     public PersonListPanel getPersonListPanel() {
