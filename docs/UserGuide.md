@@ -14,7 +14,7 @@ help you allocate available members into the various facilities according to the
 
 As SportsPA mainly uses a CLI (Command Line Interface), you simply have to type in commands to use it. This user
 guide provides an in-depth documentation on the all the commands available. If this is your first time using SportsPA,
-we also provide a quick start guide that demonstrates the end-to-end setup process to get you started.
+we also provide a [quick start guide](#quick-start) that demonstrates the end-to-end setup process to get you started.
 
 _____________________________________________________________________________________________________________
 <a name="table-of-contents"></a>
@@ -35,11 +35,13 @@ The table below summarizes the meaning of the icons and text styles used in this
 Icon / Text Style | Description
 ----------------- | ------------------
 **bold**        | Highlights important information such as components of SportsPA or constraints of command parameters
-`inline code`          | Represents commands in the format that the user should follow when typing them
-UPPER_CASE     | Represents parameters to be supplied by the user for commands
+`inline code`          | Represents commands in the format that you should follow when typing them
+UPPER_CASE     | Represents parameters to be supplied by you for commands
 [link](#table-of-contents) | Represents links that can be clicked on to be navigate to a different section of the User Guide or a different site
 **:information_source: Notes:** | Represents important information regarding commands such as their format and constraints
 **:exclamation: Caution:**| Represents warnings for actions that can result in the unintentional and irreversible removal of data
+**:bulb: Tip:**| Represents useful tips that we would like to share
+:camera:| Signifies that a screenshot of the outcome of the command is provided below
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -54,7 +56,7 @@ ________________________________________________________________________________
 
 4. Double-click the file to start the app. The GUI similar to the image below should appear in a few seconds. The app
    provides some sample data for you to play around with and familiarize yourself with the commands.<br><br>
-   ![Ui](images/Ui.png)
+   ![FirstLook](images/FirstLook.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -96,7 +98,9 @@ Here are some example commands you can try:
 ## Features
 
 This section documents all the commands available in SportsPA, guiding you through its function, format, example usages
-and any other noteworthy tips. For a summary of all the commands, refer to the [Command Summary](#command-summary). If this
+and any other noteworthy tips. **Note that examples ending with :camera: means that a screenshot of the outcome is provided below.** 
+
+For a summary of all the commands, refer to the [Command Summary](#command-summary). If this
 is your first read, do go through the following notes about the command format to help you better understand the
 documentation.
 
@@ -137,12 +141,12 @@ documentation.
 
 Adds a member to your members list.
 
-Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(S)] [t/TAG]...`
+Format: `addm n/NAME p/PHONE_NUMBER [d/DAY(s)] [t/TAG]...`
 
-* `DAYS` is an optional field indicating a list of days for which the member is available for that week
-* `DAYS` should be provided as numerical index, where `1` represents Monday, `2` represents Tuesday … and `7` represents
+* `DAY(s)` is an optional field indicating a list of days for which the member is available for that week
+* `DAY(s)` should be provided as numerical index, where `1` represents Monday, `2` represents Tuesday … and `7` represents
   Sunday
-* Members added without `DAYS` will have an empty list of days by default
+* Members added without `DAY(s)` will have no available days by default
 * `TAG` is an optional field indicating the tags associated with the member
 
 <div markdown="block" class="alert alert-info">
@@ -153,10 +157,12 @@ considered duplicates.
 
 Examples:
 
-* `addm n/John p/91234567 d/1 3 5` adds John to the member list and indicates his availability on Monday, Tuesday and
+* `addm n/Bob Chia p/91228372` adds Bob Chia to the member list with zero available days by default
+* `addm n/John Tan p/91234567 d/1 3 5` adds John Tan to the member list and indicates his availability on Monday, Tuesday and
   Friday
-* `addm n/John p/91234567 t/exco t/y2` adds John to the member list and tags him as 'exco' and 'y2'.
-* `addm n/Bob p/91228372` adds Bob to the member list with zero available days by default.
+* `addm n/Harry Li p/91234567 d/1 t/exco t/y2` adds Harry Li to the member list, indicates his availability on Monday and tags him as 'exco' and 'y2' :camera:
+
+![addmExample](images/addmExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -165,23 +171,6 @@ Examples:
 Shows a list of your members.
 
 Format: `listm`
-
-[Back to Table of Contents](#table-of-contents)
-
-#### Sorting member list: `sortm`
-
-Shows a list of your members, sorted in your specified order.
-
-Format: `sortm by/SORT_ORDER`
-
-* `SORT_ORDER` is a compulsory field and must be a valid `SORT_ORDER`
-
-* `SORT_ORDER` is case-insensitive. e.g. `Name` will match `name`
-* Valid `SORT_ORDER`: `name` ,`tag`
-
-Examples:
-* `sortm by/name` returns a member list sorted by name.
-* `sortm by/tag` returns a member list sorted by number of tags, in descending order.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -206,7 +195,7 @@ Examples:
 
 Edits an existing member from your member list.
 
-Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]`
+Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [t/tags]`
 
 * Edits the member at the specified `INDEX`
 * `INDEX` refers to the index number shown in the displayed member list
@@ -220,11 +209,24 @@ Format: `editm INDEX [n/NAME] [p/PHONE_NUMBER] [d/DAYS]`
 member as they are considered duplicates.
 </div>
 
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Tip 1:** Didn't tag a member when you added them? It's not too late, just tag them using this command!
+</div>
+
+<div markdown="span" class="alert alert-primary">
+
+**:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting memebr availability](#setting-member-availability-setm).
+</div>
+
 Examples:
 
 * `editm 1 n/Jonathan` edits the name of the 1st member to be `Jonathan`
 * `editm 2 n/Jonathan p/93837283` edits the name and phone number of the 2nd member to be `Jonathan` and `93837283`
   respectively
+* `editm 2 t/exco t/y1` edits the 2nd member to have tags `exco` and `y1` :camera:
+
+![editmExample](images/editmExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -243,13 +245,15 @@ Format: `findm KEYWORD [MORE_KEYWORDS]`
 Examples:
 
 * `findm Bob` returns `bob` and `Bob Doe`
-* `findm john bobby` returns `John Lee`, `Bobby Tan`
+* `findm alex irfan` returns `Alex Yeoh`, `Irfan Ibrahim` :camera:
+
+![findmExample](images/findmExample.png)
 
 [Back to Table of Contents](#table-of-contents)
 
 #### Sorting member list: `sortm`
 
-Shows a list of all members, sorted alphabetically
+Shows a list of all members, sorted alphabetically.
 
 Format: `sortm`
 
@@ -257,8 +261,7 @@ Format: `sortm`
 
 #### Setting member availability: `setm`
 
-We know that the availability of your members can change frequently. Thus, instead of having to individually edit your
-members' availability, use
+The availability of your members can change frequently. Thus, instead of having to individually edit your members' availability, use
 `setm` to set the availability of given member(s) at one go.
 
 Format: `setm INDEX/INDICES d/DAY(S)`
@@ -273,10 +276,11 @@ Format: `setm INDEX/INDICES d/DAY(S)`
 
 Examples:
 
-* `listm` followed by `setm 5 d/1 2` sets the availability of the person at index 5 in the member list to be Monday and
-  Tuesday
 * `findm John` followed by `setm 2 d/1` sets the availability of the person at index 2 in the results of the `findm`
   command to be Monday
+* `listm` followed by `setm 5 d/1 2` sets the availability of the person at index 5 in the member list to be Monday and
+  Tuesday
+* `listm` followed by `setm 1 2 3 d/3 4` sets the availability of the first three members in the member list to be Tuesday and Thursday :camera:
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -567,8 +571,9 @@ Format: `exit`
 **A**: Visit [this site](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 and follow the instructions specific to your operating system. You may have to download and run an installer to install Java 11 on your computer.<br><br>
 **Q**: How do I transfer my data in SportsPA to another Computer?<br>
-**A**: On your current computer, navigate to `[JAR file location]/data/sportspa.json`. Make a copy of the `sportspa.json` file and transfer it to your other computer.\
-On the other computer, navigate to
+**A**: 
+1. On your current computer, navigate to `[JAR file location]/data/sportspa.json`. Make a copy of the `sportspa.json` file and transfer it to your other computer.
+2. On the other computer, navigate to
 `[JAR file location]/data/sportspa.json` and replace the empty data file it creates with the data file you have just copied.
 
 [Back to Table of Contents](#table-of-contents)
