@@ -15,15 +15,15 @@ title: User Guide
 
 Welcome and thank you for downloading **FAST**! Are you a financial advisor having troubles managing your contacts
 on your phone? Do you find existing contact management software troublesome and not intuitive to use? Do you want
-a cheaper alternative compared to those paid contact management software? If you answered "YES!" to any those questions
-then FAST is right for you!
+a free alternative compared to those paid contact management software? If you answered "YES!" to any those questions,
+then FAST is for you!
 
 FAST stands for Financial Advisor Smart Tracker (FAST), and as its name implies, we strive to be the fastest, and most
 efficient when it comes to managing your contacts.
-FAST is a **free open-source desktop app for Financial Advisors to manage their contacts.**
+FAST is a **free and open-source desktop app for Financial Advisors to manage their contacts.**
 More importantly, FAST is **optimized for those who prefer to work with a Command Line
 Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI).
-For Financial Advisors that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
+If you are a Financial Advisor that can type fast, FAST will get your contact management tasks done faster than traditional GUI apps!
 
 
 ### Features overview
@@ -45,7 +45,7 @@ by clicking on the links, to jump to the section where the information which the
 We recommend first time users to read the user guide in the order that is written.
 Throughout the user guide, we include links like [this](#how-to-use-this-user-guide) which will jump to the 
 corresponding section of the user guide. These links allow you to quickly navigate this document. 
-This guide follows the structure as stated [this](#structure-of-this-document).
+This guide follows the structure as stated [here](#structure-of-this-document).
 
 We also use special formats to highlight information that will be important or useful to you.
 These include:
@@ -78,7 +78,7 @@ Messages that appear in these boxes will be useful in helping you to understand 
 
 `Example technical information`
 
-Messages that appear in these boxes indicate that the message is of a more technical nature, such as user input.
+Messages that appear in these boxes indicate that the text is of a more technical nature, such as user input.
 
 ### Structure of this document
 To help you make the most of your time, we have added a multitude of features to FAST, which will help you efficiently manage your contacts.
@@ -301,7 +301,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   1. Normal Tags: should not be longer than 20 characters
   2. Priority Tag: either one of the 3 priorities (low, med, high)
   3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
-* Refer to [Tags](#tags) to find out more about each tag
+* Refer to [Tags](#tag) to find out more about each tag
 
 #### `TIME`
 * The timing of an appointment with your client
