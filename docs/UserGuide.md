@@ -27,7 +27,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    2.2 [Try it yourself!](#22-try-it-yourself)
 
 3. [Features](#3-features)
-
+1
    3.1 [Add student/class](#31-add-studenttuition-class)
 
    3.2 [View student/class](#32-view-studenttuition-class)
@@ -88,17 +88,17 @@ countless hours on administrative duties such as scheduling classes and updating
 
 If the above situation sounds familiar to you, fret not, TutAssistor is here to save the day!
 
-TutAssistor is a ***desktop app intended for private tutors like yourself to 
+**TutAssistor** is a ***desktop app intended for private tutors like yourself to 
 manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
 
-TutAssistor uses Command Line Interface (CLI); this means that you operate the application by typing commands into a Command Box. 
+**TutAssistor** uses Command Line Interface (CLI); this means that you operate the application by typing commands into a Command Box. 
 If you are a fast typer, you can operate the application more easily and faster than
 Graphical User Interface (GUI) applications; GUI applications allow users to interact 
 with the application via graphical icons such as buttons.
 
 You do not have to worry at all even if you are new to CLI applications as 
 this user guide will take you through step by step on how various 
-features of the TutAssistor can be utilised, all directed towards 
+features of the **TutAssistor** can be utilised, all directed towards 
 providing the best possible experience to the user.
 
 ### 1.2 What can TutAssistor do for you?
@@ -109,7 +109,7 @@ regarding your students and lessons stress-free and efficiently. In the latest v
 * Track student details
 * Keep student details up-to-date
 * Resolve conflicting tuition timeslots
-* Efficiently make notes for each lesson
+* Efficiently create notes for each class/student
 
 ### 1.3 How to use this guide?
 
@@ -166,6 +166,7 @@ Jump right in to the next section: [2 Get Started](#2-get-started) to get you st
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 ![Ui](images/ui_ug.png)
+<p align="center"><i>Figure 1: CLI of TutAssistor</i></p>
 
 
 ### 2.2 Try it yourself!
@@ -266,7 +267,7 @@ or
 vs 2
 ```
 ![view student](images/student_view.png)
-align="center">*Displaying a student's details in the information page.*
+<p align="center"><i>Figure 2: Displaying a student's details in the information page</i></p>
 
 #### 3.2.2 Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
@@ -280,9 +281,7 @@ or
 vc 3
 ```
 ![view class](images/class_view.png)
-<p align="center">
-*Displaying a class' details in the information page.*
-</p>
+<p align="center"><i>Figure 3: Displaying details of a class in the information page</i></p>
 
 ### 3.3 Edit student/tuition class
 Edits an existing student or tuition class.
@@ -401,11 +400,11 @@ Users can add, remove, or edit remarks through the editor window.
 </div>
 
 ![Remark editor](images/remark_editor_student.png)
-*Editing remarks with editor window*
+<p align="center"><i>Figure 4: Editing remarks with editor window</i></p>
 
 #### Adding remark to a student: `remark` | `re`
 
-Adds a remark for a student.
+Adds a remark for a student. 
 
 Format: `remark STUDENT_INDEX`
 
@@ -474,7 +473,7 @@ TutAssistor will display a list of all classes with `physics` or `chemistry` in 
 
 The filtered list should look similar to the example shown below: <br>
 ![FindCommand example](images/find_screenshot.png)
-*Example of executing `find alice tan` command*
+<p align="center"><i>Figure 5: Example of executing `find alice tan` command</i></p>
 
 ### 3.8 List all students/tuition classes
 Shows the full list of students or classes.
@@ -520,7 +519,7 @@ timetable
 ```
 
 ![Timetable](images/time_table.png)
-*A weekly view of all classes.*
+<p align="center"><i>Figure 6: A timetable view of all tuition classes in a week</i></p>
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today. <br>
@@ -528,7 +527,7 @@ Also, a reminder of classes happening today will be displayed
 when the TutAssistor is reopened.
 
 ![Today view](images/today_view.png)
-*A list of view of all classes happening today.*
+<p align="center"><i>Figure 7: List view of all the classes scheduled today</i></p>
 
 ### 3.12 View help: `help` | `h`
 
@@ -537,8 +536,7 @@ Shows a command summary, as well as a link to the user guide. <br>
 Format: `help`
 
 ![Help window](images/helpWindow.png)
-
-*The help window*
+<p align="center"><i>Figure 8: The help window</i></p>
 
 ### 3.13 Navigate input history
 
@@ -617,11 +615,14 @@ For example, if the list consists of `5` students/tuition classes:
 ## 5 FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.<br>
 
 **Q**: Do I lose all the details of classes and students when I close the application?<br>
 **A**: All of your data is stored locally in a file under the data folder and will be loaded upon the next entry,
-hence you do not lose any data.
+hence you do not lose any data.<br>
+
+**Q**: What should I do if I am unsure of the command formats?<br>
+**A**: Please type `help` to learn the command formats.<br>
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
 
