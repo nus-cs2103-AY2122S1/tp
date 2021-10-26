@@ -20,15 +20,15 @@ import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.AddGroupCommand;
+import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.TutorialGroupBuilder;
 
-public class AddGroupCommandParserTest {
+class DeleteGroupCommandParserTest {
 
-    private AddGroupCommandParser parser = new AddGroupCommandParser();
+    private DeleteGroupCommandParser parser = new DeleteGroupCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -36,25 +36,25 @@ public class AddGroupCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUPNUMBER_DESC_1 + CLASSCODE_DESC_G01
-                + GROUPTYPE_DESC_OP1, new AddGroupCommand(expectedTutorialGroup));
+                + GROUPTYPE_DESC_OP1, new DeleteGroupCommand(expectedTutorialGroup));
 
         // multiple classCodes - last classCode accepted
         assertParseSuccess(parser, GROUPNUMBER_DESC_1 + CLASSCODE_DESC_G02 + CLASSCODE_DESC_G01
-                + GROUPTYPE_DESC_OP1, new AddGroupCommand(expectedTutorialGroup));
+                + GROUPTYPE_DESC_OP1, new DeleteGroupCommand(expectedTutorialGroup));
 
         // multiple group names - last group name accepted
         assertParseSuccess(parser, GROUPNUMBER_DESC_2 + GROUPNUMBER_DESC_1 + CLASSCODE_DESC_G01
-                + GROUPTYPE_DESC_OP1, new AddGroupCommand(expectedTutorialGroup));
+                + GROUPTYPE_DESC_OP1, new DeleteGroupCommand(expectedTutorialGroup));
 
         // multiple group types - last group type accepted
         assertParseSuccess(parser, GROUPNUMBER_DESC_1 + CLASSCODE_DESC_G01 + GROUPTYPE_DESC_OP2
-                + GROUPTYPE_DESC_OP1, new AddGroupCommand(expectedTutorialGroup));
+                + GROUPTYPE_DESC_OP1, new DeleteGroupCommand(expectedTutorialGroup));
 
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE);
 
         // missing ClassCode Prefix
         assertParseFailure(parser, VALID_CLASSCODE_G01 + GROUPNUMBER_DESC_1 + GROUPTYPE_DESC_OP1, expectedMessage);
@@ -90,6 +90,7 @@ public class AddGroupCommandParserTest {
 
         // preamble not empty
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CLASSCODE_DESC_G01 + GROUPNUMBER_DESC_1 + GROUPTYPE_DESC_OP1,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE));
     }
+
 }

@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tutorialclass.exceptions.DuplicateTutorialClassException;
 import seedu.address.model.tutorialclass.exceptions.TutorialClassNotFoundException;
 import seedu.address.model.tutorialgroup.TutorialGroup;
-import seedu.address.model.tutorialgroup.exceptions.DuplicateGroupException;
 import seedu.address.model.tutorialgroup.exceptions.DuplicateTutorialGroupException;
 
 /**

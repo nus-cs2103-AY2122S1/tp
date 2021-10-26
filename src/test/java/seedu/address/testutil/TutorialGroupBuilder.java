@@ -8,7 +8,7 @@ import seedu.address.model.tutorialgroup.TutorialGroup;
 public class TutorialGroupBuilder {
 
     public static final String DEFAULT_CLASSCODE = "G06";
-    public static final String DEFAULT_GROUPNAME = "1";
+    public static final String DEFAULT_GROUPNUMBER = "1";
     public static final String DEFAULT_GROUPTYPE = "OP1";
 
     private ClassCode classCode;
@@ -20,7 +20,7 @@ public class TutorialGroupBuilder {
      */
     public TutorialGroupBuilder() {
         classCode = new ClassCode(DEFAULT_CLASSCODE);
-        groupNumber = new GroupNumber(DEFAULT_GROUPNAME);
+        groupNumber = new GroupNumber(DEFAULT_GROUPNUMBER);
         groupType = new GroupType(DEFAULT_GROUPTYPE);
     }
 
@@ -29,7 +29,7 @@ public class TutorialGroupBuilder {
      */
     public TutorialGroupBuilder(TutorialGroup tutorialGroupToCopy) {
         classCode = tutorialGroupToCopy.getClassCode();
-        groupNumber = tutorialGroupToCopy.getGroupName();
+        groupNumber = tutorialGroupToCopy.getGroupNumber();
         groupType = tutorialGroupToCopy.getGroupType();
     }
 
@@ -44,8 +44,8 @@ public class TutorialGroupBuilder {
     /**
      * Sets the {@code ClassCode} of the {@code TutorialClass} that we are building.
      */
-    public TutorialGroupBuilder withGroupName(String groupName) {
-        this.groupNumber = new GroupNumber(groupName);
+    public TutorialGroupBuilder withGroupNumber(String groupNumber) {
+        this.groupNumber = new GroupNumber(groupNumber);
         return this;
     }
 

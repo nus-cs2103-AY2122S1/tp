@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
 import java.util.stream.Stream;
@@ -23,14 +23,14 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
      */
     public AddGroupCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GROUPNAME, PREFIX_CLASSCODE, PREFIX_TYPE);
+                ArgumentTokenizer.tokenize(args, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNAME, PREFIX_CLASSCODE, PREFIX_TYPE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUPNUMBER, PREFIX_CLASSCODE, PREFIX_TYPE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupCommand.MESSAGE_USAGE));
         }
 
-        GroupNumber groupNumber = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPNAME).get());
+        GroupNumber groupNumber = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_GROUPNUMBER).get());
         ClassCode classCode = ParserUtil.parseClassCode(argMultimap.getValue(PREFIX_CLASSCODE).get());
         GroupType groupType = ParserUtil.parseGroupType(argMultimap.getValue(PREFIX_TYPE).get());
 

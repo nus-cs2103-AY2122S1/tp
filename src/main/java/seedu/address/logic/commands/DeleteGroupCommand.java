@@ -2,13 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSCODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUPNUMBER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TYPE;
 
-import java.util.List;
-
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tutorialclass.TutorialClass;
@@ -19,13 +15,13 @@ public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "deletecg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the group identified by the class code, group number and type used in the displayed class list.\n"
+            + ": Deletes the group identified by class code, group number and type used in the displayed class list.\n"
             + "Parameters: "
-            + PREFIX_GROUPNAME + "GROUPNAME "
+            + PREFIX_GROUPNUMBER + "GROUPNAME "
             + PREFIX_CLASSCODE + "CLASSCODE "
             + PREFIX_TYPE + "TYPE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUPNAME + "1 "
+            + PREFIX_GROUPNUMBER + "1 "
             + PREFIX_CLASSCODE + "G06 "
             + PREFIX_TYPE + "OP1 ";
 

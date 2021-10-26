@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G01;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G02;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_2;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNUMBER_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPTYPE_OP2;
 import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 import static seedu.address.testutil.TypicalTutorialGroups.TUT_02;
@@ -24,7 +24,7 @@ class TutorialGroupTest {
         assertFalse(TUT_01.isSameTutorialGroup(null));
 
         // same class code, all other attributes different -> returns false
-        TutorialGroup editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupName(VALID_GROUPNAME_2)
+        TutorialGroup editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupNumber(VALID_GROUPNUMBER_2)
                 .withGroupType(VALID_GROUPTYPE_OP2).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
@@ -35,7 +35,7 @@ class TutorialGroupTest {
 
         // same group type, all other attributes different -> returns false
         editedTut01 = new TutorialGroupBuilder(TUT_01).withClassCode(VALID_CLASSCODE_G02)
-                .withGroupName(VALID_GROUPNAME_2).build();
+                .withGroupNumber(VALID_GROUPNUMBER_2).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // different class code, all other attributes same -> returns false
@@ -43,7 +43,7 @@ class TutorialGroupTest {
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // different group name, all other attributes same -> returns false
-        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupName(VALID_GROUPNAME_2).build();
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupNumber(VALID_GROUPNUMBER_2).build();
         assertFalse(TUT_01.isSameTutorialGroup(editedTut01));
 
         // different group type, all other attributes same -> returns false
@@ -74,7 +74,7 @@ class TutorialGroupTest {
         assertFalse(TUT_01.equals(editedTut01));
 
         // different group name -> returns false
-        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupName(VALID_GROUPNAME_2).build();
+        editedTut01 = new TutorialGroupBuilder(TUT_01).withGroupNumber(VALID_GROUPNUMBER_2).build();
         assertFalse(TUT_01.equals(editedTut01));
 
         // different email -> returns false
