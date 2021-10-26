@@ -245,12 +245,19 @@ Format:
 
 
 * `DATE` is formatted as `yyyy-MM-dd`
-* `TIME` has to be formatted on the hour as `HH00`
+* `TIME` is formatted as `HH00`
 
 Examples:
 * `check 2021-09-19 1800`
 * `check 2021-09-19`
 * `check 1800`
+
+<div markdown="block" class="alert alert-warning">
+:information_source: **Notes:**<br>
+
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+
+</div>
 
 ### Set the tables for the restaurant: `settables`
 
