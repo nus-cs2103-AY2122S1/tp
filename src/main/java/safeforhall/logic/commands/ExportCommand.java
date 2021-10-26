@@ -2,6 +2,7 @@ package safeforhall.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class ExportCommand extends Command {
      * @param filename filename of csv to be created.
      */
     public ExportCommand(String filename) {
-        this.filename = filename + ".csv";
+        this.filename = "data/exports/" + filename + ".csv";
     }
 
     /**
@@ -67,11 +68,23 @@ public class ExportCommand extends Command {
      */
     public void writeCsv(ArrayList<String[]> content) throws CommandException {
         try {
-            CSVWriter writer = new CSVWriter(new FileWriter(filename));
-            writer.writeAll(content);
-            writer.close();
+            File f = new File(filename);
+            if (f.exists() && !f.isDirectory()) {
+                throw new CommandException(MESSAGE_DUPLICATE_FILE_ERROR);
+            } else {
+                CSVWriter writer = new CSVWriter(new FileWriter(filename));
+                writer.writeAll(content);
+                writer.close();
+            }
         } catch (IOException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ExportCommand // instanceof handles nulls
+                && this.filename.equals(((ExportCommand) other).filename)); // state check
     }
 }

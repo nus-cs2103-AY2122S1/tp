@@ -3,6 +3,7 @@ package safeforhall.storage;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -57,6 +58,11 @@ public class JsonAddressBookStorage implements AddressBookStorage {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
+    }
+
+    @Override
+    public void createExportsFolder(Path filePath) throws IOException {
+        Files.createDirectories(filePath);
     }
 
     @Override
