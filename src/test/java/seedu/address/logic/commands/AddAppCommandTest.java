@@ -168,7 +168,7 @@ public class AddAppCommandTest {
         }
 
         assertThrows(CommandException.class, ()
-                -> commandResult.execute(modelTester));
+            -> commandResult.execute(modelTester));
     }
 
     private class ModelStub implements Model {

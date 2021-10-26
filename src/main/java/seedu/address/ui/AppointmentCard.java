@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -10,9 +8,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-
 import javafx.scene.paint.Color;
-
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Appointment;
 
