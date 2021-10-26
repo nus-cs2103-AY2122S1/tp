@@ -1,14 +1,44 @@
 ---
 layout: page
-title: User Guide
+title: ComputingConnection User Guide
 ---
 
-ComputingConnection is for entrepreneurial students in NUS Computing who want to keep track of other students’ skill sets so that they can easily look for suitable people to work with on future projects. The users should prefer to use the Command Line Interface (CLI) over a Graphical User Interface (GUI) for efficiency with a keyboard.
+## Product overview
 
-Through an address book, this product aims to store information such as faculty, major, programming languages, interests, past projects, remarks of peers that the user has encountered throughout university. ComputingConnection will help the student remember and document his/her network of students encountered in NUS for easy reference in the future.
+*ComputingConnection* is for entrepreneurial students in NUS Computing who want to **keep track of other students’ skill sets so that they can easily look for suitable people to work with on future projects.** *ComputingConnection* is optimized for Command Line Interface (CLI) over a Graphical User Interface (GUI) for efficiency with a keyboard.
+
+You can use *ComputingConnection* to efficiently record information such as faculty, major, skills, programming languages, and remarks (and more!) of peers that you have encountered throughout university. *ComputingConnection* will allow you to remember and document your network of potential student partners for projects in the future.
 
 * Table of Contents
 {:toc}
+
+--------------------------------------------------------------------------------------------------------------------
+## About (using this user guide)
+In this section, you will learn how to use the *ComputingConnection* user guide efficiently and effectively.
+
+### Navigating
+1. Chronological navigation by scrolling 
+- If this is your first time using ComputingConnection, we recommend this for a comprehensive walkthrough.
+
+2. Targeted search by jumping 
+- If you know what you're looking for and want to be efficient. 
+- Skip to sections via the Table of Contents or navigable texts.
+- CTRL + F to find specific keywords. 
+
+### Text formatting
+This user guide is formatted using the following conventions:
+
+Syntax          | Interpretation
+----------------|-------------
+*Italic text*   | 
+**Bold text**   |
+```Block text```| 
+Orange text     | Headings and subheadings of various size
+
+### Icons and symbols
+
+> :bulb: Call out bar with light bulb for tips
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -40,8 +70,29 @@ Through an address book, this product aims to store information such as faculty,
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Understanding the features section
+In this section, you will learn how to utilise the features and commands available in *ComputingConnection*, as seen in the [Features](#features) section. 
+
+### Terminologies used
+```TODO: Explain...? ```
+
+### Contact
+Understanding the structure of a **contact** in ComputingConnection is important in enabling you to do more.
+
+Category        | Specific fields | Description
+----------------|-----------------|-----------------
+Personal data fields  | 1. ```n/```: Name <br /> 2. ```e/```: Email | Cannot be empty
+University data fields   | 3. ```f/:``` Faculty <br /> 4. ```m/:``` Major | Cannot be empty
+Skill data fields | 5. ```s/```:Skill <br /> 6. ```l/```: Programming Language <br /> 7. ```fr/```: Framework | Each field can have 0 or more values 
+Miscellaneous data fields| 8. ```r/```: Remark <br /> 9. ```int/```: Interaction | Each field can have 0 or more values
+
+
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Features
 
+> The table below consists of important syntax regarding commands available
 
 ### Viewing help: `help`
 Shows a message explaining how to access the help page.
@@ -58,24 +109,6 @@ Examples:
 
 * `add n/John Doe p/98765432 e/johnd@nus.edu.sg r/staff f/computing m/computer science mod/CS2040S`
 * `add n/Seth r/student f/computing m/computer science mod/CS2103T`
-
-List of personal detail fields:
-* n/: name
-* e/: email
-
-List of school-related fields:
-* f/: faculty
-* m/: major
-* s/: skill
-* l/: language
-* fr/: framework
-* t/: tags
-
-List of entrepreneurship-related fields:
-* r/: remarks (To be implemented)
-* i/: interest (To be implemented)
-* int/: interactions
-* p/: projects (To be implemented)
 
 ### Search Contacts : `search`
 Search for contacts with specified keyword.
