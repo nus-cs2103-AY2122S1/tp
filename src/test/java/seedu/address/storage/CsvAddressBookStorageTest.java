@@ -74,7 +74,11 @@ public class CsvAddressBookStorageTest {
         csvAddressBookStorage.saveAddressBook(original, filePathExported);
         ReadOnlyAddressBook readBack = csvAddressBookStorage.readAddressBook(filePathExported).get();
         assertEquals(original, new AddressBook(readBack));
-        FileUtil.deleteFileIfExists(filePathExported);
+        try {
+            FileUtil.deleteFileIfExists(filePathExported);
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error deleting the file.", ioe);
+        }
 
         // Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
@@ -82,7 +86,11 @@ public class CsvAddressBookStorageTest {
         csvAddressBookStorage.saveAddressBook(original, filePathExported);
         readBack = csvAddressBookStorage.readAddressBook(filePathExported).get();
         assertEquals(original, new AddressBook(readBack));
-        FileUtil.deleteFileIfExists(filePathExported);
+        try {
+            FileUtil.deleteFileIfExists(filePathExported);
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error deleting the file.", ioe);
+        }
 
         // Save and read without specifying file path. The original file will be read.
         original.addPerson(IDA);
