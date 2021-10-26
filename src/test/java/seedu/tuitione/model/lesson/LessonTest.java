@@ -114,18 +114,53 @@ public class LessonTest {
 
     @Test
     public void updateStudent_previouslyEnrolledStudent() {
-        StudentBuilder sb = new StudentBuilder().withGrade(defaultLesson.getGrade().value);
-        Student student = sb.build();
+        Student student = new StudentBuilder().withGrade(defaultLesson.getGrade().value).build();
         defaultLesson.enrollStudent(student);
 
-        // mock we edit a student details (i.e. name)
-        Student editedStudent = sb.withName("Edited Name Here").build();
-        defaultLesson.updateStudent(student, editedStudent);
-        assertTrue(editedStudent.containsLesson(defaultLesson));
+        // edit Name
+        Student editedNameStudent = new StudentBuilder(student).withName("Edited Name Here").build();
+        defaultLesson.updateStudent(student, editedNameStudent);
+        assertTrue(editedNameStudent.containsLesson(defaultLesson));
         assertFalse(student.containsLesson(defaultLesson));
-
         assertEquals(1, defaultLesson.getStudents().size());
-        assertEquals(defaultLesson.getStudents().get(0), editedStudent);
+        assertEquals(defaultLesson.getStudents().get(0), editedNameStudent);
+        defaultLesson.updateStudent(editedNameStudent, student); // revert back
+
+        // edit Parent Contact
+        Student editedParentContact = new StudentBuilder(student).withPhone("123456789").build();
+        defaultLesson.updateStudent(student, editedParentContact);
+        assertTrue(editedParentContact.containsLesson(defaultLesson));
+        assertFalse(student.containsLesson(defaultLesson));
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertEquals(defaultLesson.getStudents().get(0), editedParentContact);
+        defaultLesson.updateStudent(editedParentContact, student); // revert back
+
+        // edit Email
+        Student editedEmailStudent = new StudentBuilder(student).withEmail("fake@gmail.com").build();
+        defaultLesson.updateStudent(student, editedEmailStudent);
+        assertTrue(editedEmailStudent.containsLesson(defaultLesson));
+        assertFalse(student.containsLesson(defaultLesson));
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertEquals(defaultLesson.getStudents().get(0), editedEmailStudent);
+        defaultLesson.updateStudent(editedEmailStudent, student); // revert back
+
+        // edit Address
+        Student editedAddressStudent = new StudentBuilder(student).withAddress("Blk 75, Dover Cresent Rd").build();
+        defaultLesson.updateStudent(student, editedAddressStudent);
+        assertTrue(editedAddressStudent.containsLesson(defaultLesson));
+        assertFalse(student.containsLesson(defaultLesson));
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertEquals(defaultLesson.getStudents().get(0), editedAddressStudent);
+        defaultLesson.updateStudent(editedAddressStudent, student); // revert back
+
+        // edit Remarks
+        Student editedRemarksStudent = new StudentBuilder(student).withRemarks("Remark", "Remarks", "Mark").build();
+        defaultLesson.updateStudent(student, editedRemarksStudent);
+        assertTrue(editedRemarksStudent.containsLesson(defaultLesson));
+        assertFalse(student.containsLesson(defaultLesson));
+        assertEquals(1, defaultLesson.getStudents().size());
+        assertEquals(defaultLesson.getStudents().get(0), editedRemarksStudent);
+        defaultLesson.updateStudent(editedRemarksStudent, student); // revert back
     }
 
     @Test
