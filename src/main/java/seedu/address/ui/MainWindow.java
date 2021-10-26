@@ -42,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private final HelpWindow helpWindow;
+    private final UserProfileWindow userProfileWindow;
     private TabPaneHeader tabPaneHeader;
 
     @FXML
@@ -109,6 +110,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+
+        userProfileWindow = new UserProfileWindow(logic);
 
         eventsIcon.setOnMouseClicked(event -> {
             tabPaneHeader.getTabPane().getSelectionModel().select(2);
@@ -204,6 +207,17 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Opens the user profile window or focuses on it if it's already opened.
+     */
+    public void handleUserProfileWindow() {
+        if (!userProfileWindow.isShowing()) {
+            userProfileWindow.show();
+        } else {
+            userProfileWindow.focus();
+        }
+    }
+
+    /**
      * Launches the {@code ProfileWindow}.
      */
     public void show() {
@@ -233,6 +247,7 @@ public class MainWindow extends UiPart<Stage> {
             logger.severe("Unable to save Address Book to Memory");
         }
         helpWindow.hide();
+        userProfileWindow.hide();
         primaryStage.hide();
         ThreadProcessor.stopAllThreads();
     }
