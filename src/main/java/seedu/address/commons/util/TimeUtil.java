@@ -54,7 +54,7 @@ public class TimeUtil {
      * @return default morning shift end time.
      */
     public static LocalTime getDefaultMorningEndTime() {
-        return defaultMorningStartTime;
+        return defaultMorningEndTime;
     }
 
     /**
@@ -62,7 +62,7 @@ public class TimeUtil {
      * @return default afternoon shift start time.
      */
     public static LocalTime getDefaultAfternoonStartTime() {
-        return defaultMorningStartTime;
+        return defaultAfternoonStartTime;
     }
 
     /**
@@ -70,6 +70,6 @@ public class TimeUtil {
      * @return default afternoon shift end time.
      */
     public static LocalTime getDefaultAfternoonEndTime() {
-        return defaultMorningStartTime;
+        return defaultAfternoonEndTime;
     }
 }
