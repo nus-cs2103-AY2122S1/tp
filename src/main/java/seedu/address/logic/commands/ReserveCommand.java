@@ -6,14 +6,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationsManager;
 import seedu.address.model.reservation.exception.ReservationException;
 import seedu.address.model.table.Table;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the command to add reservation
@@ -22,9 +27,9 @@ public class ReserveCommand extends Command {
     public static final String COMMAND_WORD = "addr";
     public static final String MESSAGE_USAGE = String.format(
             "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
-            + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME (minutes must be 00)\n"
-            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1900.",
-            COMMAND_WORD,
+            + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"
+            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1930.",
+            CommandUtil.formatCommandWord(COMMAND_WORD),
             PREFIX_PHONE, PREFIX_TIME
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
@@ -35,15 +40,19 @@ public class ReserveCommand extends Command {
     private Phone phone;
     private int numberOfPeople;
     private LocalDateTime dateTime;
+    private Remark remark;
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates a command to add a reservation
      */
-    public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime dateTime) {
-        requireAllNonNull(phone, dateTime);
+    public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime dateTime, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(phone, dateTime, tags);
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
         this.dateTime = dateTime;
+        this.remark = remark;
+        this.tags.addAll(tags);
     }
 
     /**
@@ -58,7 +67,7 @@ public class ReserveCommand extends Command {
         ReservationsManager reservationsManager = model.getReservationsManager();
         try {
             Table tableToBeAssigned = reservationsManager.getAvailableTable(model, numberOfPeople, dateTime);
-            Reservation reservation = new Reservation(phone, numberOfPeople, dateTime, tableToBeAssigned);
+            Reservation reservation = new Reservation(phone, numberOfPeople, dateTime, tableToBeAssigned, remark, tags);
             if (model.hasReservation(reservation)) {
                 throw new CommandException(String.format(MESSAGE_RESERVATION_EXISTS, reservation));
             }
@@ -85,6 +94,7 @@ public class ReserveCommand extends Command {
         ReserveCommand that = (ReserveCommand) o;
         return phone.equals(that.phone)
                 && numberOfPeople == that.numberOfPeople
-                && dateTime.equals(that.dateTime);
+                && dateTime.equals(that.dateTime)
+                && tags.equals(that.tags);
     }
 }

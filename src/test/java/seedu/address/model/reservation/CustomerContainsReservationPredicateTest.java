@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.customer.Customer;
 import seedu.address.model.table.Table;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.CustomerBuilder;
 
 class CustomerContainsReservationPredicateTest {
@@ -22,7 +24,9 @@ class CustomerContainsReservationPredicateTest {
 
         Phone phone1 = new Phone("99999999");
         Table table1 = new Table(5, 10);
-        Reservation reservation1 = new Reservation(phone1, numberOfCustomer, dateTime, table1);
+        Remark remark = new Remark("");
+        Set<Tag> tags = Set.of();
+        Reservation reservation1 = new Reservation(phone1, numberOfCustomer, dateTime, table1, remark, tags);
         ReservationList reservationList1 = new ReservationList();
         reservationList1.add(reservation1);
         FilteredList<Reservation> filteredList1 = new FilteredList<>(reservationList1.asUnmodifiableObservableList());
@@ -30,7 +34,7 @@ class CustomerContainsReservationPredicateTest {
 
         Phone phone2 = new Phone("88888888");
         Table table2 = new Table(5, 11);
-        Reservation reservation2 = new Reservation(phone2, numberOfCustomer, dateTime, table2);
+        Reservation reservation2 = new Reservation(phone2, numberOfCustomer, dateTime, table2, remark, tags);
         ReservationList reservationList2 = new ReservationList();
         reservationList2.add(reservation2);
         FilteredList<Reservation> filteredList2 = new FilteredList<>(reservationList2.asUnmodifiableObservableList());
@@ -62,7 +66,9 @@ class CustomerContainsReservationPredicateTest {
 
         Phone phone = new Phone("99999999");
         Table table = new Table(5, 10);
-        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table);
+        Remark remark = new Remark("");
+        Set<Tag> tags = Set.of();
+        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table, remark, tags);
         ReservationList reservationList = new ReservationList();
         reservationList.add(reservation);
         FilteredList<Reservation> filteredList = new FilteredList<>(reservationList.asUnmodifiableObservableList());
@@ -81,7 +87,9 @@ class CustomerContainsReservationPredicateTest {
 
         Phone phone = new Phone("99999999");
         Table table = new Table(5, 10);
-        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table);
+        Remark remark = new Remark("");
+        Set<Tag> tags = Set.of();
+        Reservation reservation = new Reservation(phone, numberOfCustomer, dateTime, table, remark, tags);
         ReservationList reservationList = new ReservationList();
         reservationList.add(reservation);
         FilteredList<Reservation> filteredList = new FilteredList<>(reservationList.asUnmodifiableObservableList());

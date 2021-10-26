@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SUPPLY_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.supplier.Supplier;
 
@@ -19,22 +20,25 @@ import seedu.address.model.person.supplier.Supplier;
 public class AddSupplierCommand extends Command {
     public static final String COMMAND_WORD = "adds";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]"
-            + PREFIX_SUPPLY_TYPE + "TYPE OF SUPPLY"
+            + PREFIX_SUPPLY_TYPE + "TYPE OF SUPPLY "
             + PREFIX_DELIVERY_DETAILS + "DELIVERY DETAILS...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "owesMoney "
+            + PREFIX_SUPPLY_TYPE + "Chicken "
+            + PREFIX_DELIVERY_DETAILS + "12:00 10-11-2021";
 
     public static final String MESSAGE_SUCCESS = "New supplier added: %1$s";
     public static final String MESSAGE_DUPLICATE_SUPPLIER = "This supplier already exists in the address book";

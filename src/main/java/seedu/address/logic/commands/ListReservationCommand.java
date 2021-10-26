@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 
 /**
@@ -12,9 +13,9 @@ public class ListReservationCommand extends Command {
 
     public static final String COMMAND_WORD = "listr";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to reservation view and shows all "
-            + "reservations.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Switches to reservation view and shows all reservations.\n"
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD);
 
     public static final String SHOWING_SWITCH_MESSAGE = "Switched to Reservation View.";
 

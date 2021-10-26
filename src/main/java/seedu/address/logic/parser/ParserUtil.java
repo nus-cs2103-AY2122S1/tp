@@ -16,6 +16,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.SortOrder;
 import seedu.address.model.person.customer.Allergy;
 import seedu.address.model.person.customer.LoyaltyPoints;
 import seedu.address.model.person.customer.SpecialRequest;
@@ -24,6 +25,7 @@ import seedu.address.model.person.employee.Leaves;
 import seedu.address.model.person.employee.Salary;
 import seedu.address.model.person.employee.Shift;
 import seedu.address.model.person.supplier.DeliveryDetails;
+import seedu.address.model.person.supplier.SortBySupplier;
 import seedu.address.model.person.supplier.SupplyType;
 import seedu.address.model.tag.Tag;
 
@@ -333,6 +335,36 @@ public class ParserUtil {
             throw new ParseException(DeliveryDetails.MESSAGE_CONSTRAINTS);
         }
         return new DeliveryDetails(trimmedDeliveryDetails);
+    }
+
+    /**
+     * Parses a {@code String sortingOrder} into a {@code SortOrder}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortOrder parseSortingOrder(String sortingOrder) throws ParseException {
+        requireNonNull(sortingOrder);
+        String trimmedSortingOrder = sortingOrder.trim().toLowerCase();
+        if (!SortOrder.isValidSortingOrder(trimmedSortingOrder)) {
+            throw new ParseException(SortOrder.MESSAGE_CONSTRAINTS);
+        }
+        return new SortOrder(trimmedSortingOrder);
+    }
+
+    /**
+     * Parses a {@code String sortBy} into a {@code SortBy}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code} is invalid.
+     */
+    public static SortBySupplier parseSortBySupplier(String sortBy) throws ParseException {
+        requireNonNull(sortBy);
+        String trimmedSortBy = sortBy.trim().toLowerCase();
+        if (!SortBySupplier.isValidSortingOrder(trimmedSortBy)) {
+            throw new ParseException(SortBySupplier.MESSAGE_CONSTRAINTS);
+        }
+        return new SortBySupplier(trimmedSortBy);
     }
 
     /**
