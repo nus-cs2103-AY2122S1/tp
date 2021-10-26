@@ -205,7 +205,11 @@ Adds a client with name, phone number and optional email, address and orders.
 
 Format: `add -c NAME -pn PHONE_NUMBER [-e EMAIL] [-a ADDRESS] [-o ORDER]...`
 
-Example: `add -c Ben -pn 98765432` adds a new `Client` `Ben`, whose `PHONE_NUMBER` is `98765432`.
+> Note: the format of `ORDER` is `PRODUCT_ID QUANTITY DATE`, e.g. `-o 0 10 10/26` represents an order made on 26 Oct of
+the current year, the product requested has `PRODUCT_ID` = `0` and `QUANTITY` = `10`.
+
+Example: `add -c Ben -pn 12345678 -e test@xyz.com -a 12 Clementi Road` adds a new `Client` `Ben`, whose 
+`PHONE_NUMBER` is `98765432`, `EMAIL` is `test@xyz.com` and `ADDRESS` is `12 Clementi Road`.
 
 Expected Output:
 ![Ui](images/UIAddClientCommand.png)
@@ -217,7 +221,7 @@ Adds a product with name, unit price and optional quantity. If quantity is not s
 
 Format: `add -p NAME -$ UNIT_PRICE [-q QUANTITY]`
 
-Example: `add -p pen -$ 10.00 -q 150` adds a new `Product` `pen` with a `UNIT_PRICE` of `$10.00` and there are `150`
+Example: `add -p pen -$ 5 -q 150` adds a new `Product` `pen` with a `UNIT_PRICE` of `$5` and there are `150`
 pens in stock.
 
 Expected Output:
