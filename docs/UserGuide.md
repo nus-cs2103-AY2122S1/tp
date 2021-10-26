@@ -371,23 +371,26 @@ Adds a time period where the staff is working to the staff’s schedule.
 * If only one date input is provided, it assumes that the period is for the seven days after the date.
 
 Formats:  
-`addShift -n name d/fullDayName-shiftNumber`  
-`addShift -i index d/fullDayName-shiftNumber`
+`addShift -n name d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`  
+`addShift -i index d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
 
 Examples:  
-`addShift -n Candice d/Monday-1`   
+`addShift -n Candice d/Monday-1 da/2021-10-01`   
 `addShift -i 1234 d/tuesday-0`
 
 
 #### Swapping shifts: `swapShift`
 Swaps shifts between 2 staffs. The 2 staffs are identified using their names.
 
+* If no date input is provided, it assumes that the period is from the current date to the next seven days.
+* If only one date input is provided, it assumes that the period is for the seven days after the date.
+
 Formats:  
-`swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number`  
-`swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
+`swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]`  
+`swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
 
 Examples:  
-`swapShift -n Candice -n Bob d/monday-0 d/tuesday-1`  
+`swapShift -n Candice -n Bob d/monday-0 d/tuesday-1 da/2021-10-01`  
 `swapShift -n Candice d/monday-0 -n Bob d/tuesday-1`
 
 Note:
@@ -399,9 +402,12 @@ Note:
 
 Updates the start time and end time of a specific shift of a specific staff.
 
+* If no date input is provided, it assumes that the period is from the current date to the next seven days.
+* If only one date input is provided, it assumes that the period is for the seven days after the date.
+
 Formats:  
-`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm`
-`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm`
+`setShiftTime -n name d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
+`setShiftTime -i index d/fullDayName-shiftNumber st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
 
 * Start time and end time must follow the format (hh:mm).
 * Start time must be earlier than end time.
@@ -409,7 +415,7 @@ Formats:
 * If the shift does not exist in the staff's schedule, it will be created.
 
 Examples:  
-`setShiftTime -n Candice d/Monday-0 st/10:30-12:30`
+`setShiftTime -n Candice d/Monday-0 st/10:30-12:30 da/2021-10-01`
 `setShiftTime -i 12 d/tuesday-1 st/17:00-21:30`
 
 
@@ -418,23 +424,12 @@ Examples:
 Deletes a time period from the staff schedule.  There are two ways to identify the staff to delete the time period from: by their `name` or by their staff `index`. The deleted period must be the same as a period previously entered by the manager.
 
 Formats:  
-`deleteShift -n NAME d/fullDayName-shiftNumber`  
-`deleteShift -i INDEX d/fullDayName-shiftNumber`
+`deleteShift -n NAME d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`  
+`deleteShift -i INDEX d/fullDayName-shiftNumber [da/START_DATE] [da/END_DATE]`
 
 Examples:  
-`deleteShift -n Joe d/tuesday-2`  
+`deleteShift -n Joe d/tuesday-2 da/2021-10-01`  
 `deleteShift -i 1278 d/friday-1`
-
-#### Editing a staff schedule : `editSchedule`
-Edits a staff schedule start and end date time. There are two ways to identify the staff who’s schedule will be edited: by their name or by their staff ID.
-
-Formats:  
-`editSchedule n/name old/fullDayName-shiftNumber new/fullDayName-shiftNumber`  
-`editSchedule id/ID old/fullDayName-shiftNumber new/fullDayName-shiftNumber`
-
-Examples:  
-`editSchedule n/Candice old/tuesday-1 new/tuesday-2`  
-`editSchedule n/12345678 old/wednesday-2 new/thursday-2`  
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -448,11 +443,11 @@ Action | Format, Examples
 **Edit** | `edit -n NAME [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...` <br> `edit -i INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [$/SALARY] [s/STATUS] [r/ROLE]... [t/TAG]...`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **View staff schedule** | `viewSchedule [-n NAME] [-i INDEX] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... [-t TAG]...`
-**Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER`
-**Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number`
-**Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm`
-**Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER`
-**View shift** | `viewShift -d DAY-SHIFTNUMBER` <br> `viewShift -ti DAY-HH:mm`
+**Add staff to shift** | `addShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `addShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
+**Swap shifts** | `swapShift -n NAME -n NAME d/day-shift_number d/day-shift_number [da/START_DATE] [da/END_DATE]` <br> `swapShift -n NAME d/day-shift_number -n NAME d/day-shift_number [da/START_DATE] [da/END_DATE]`
+**Set shift time** | `setShiftTime -n NAME d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]` <br> `setShiftTime -i INDEX d/FULLDAYNAME-SHIFTNUMBER st/hh:mm-hh:mm [da/START_DATE] [da/END_DATE]`
+**Delete staff shift** | `deleteShift -n NAME d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `deleteShift -i INDEX d/DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]`
+**View shift** | `viewShift -d DAY-SHIFTNUMBER [da/START_DATE] [da/END_DATE]` <br> `viewShift -ti DAY-HH:mm [da/START_DATE] [da/END_DATE]`
 **Mark absent** | `mark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 **Remove mark** | `unmark [-i INDEX] [-n NAME] [-p PHONE] [-e EMAIL] [-a ADDRESS] [-$ SALARY] [-s STATUS] [-r ROLE]... d/DATE [d/END DATE]`
 **List** | `list`
