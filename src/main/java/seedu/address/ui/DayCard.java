@@ -34,8 +34,8 @@ public class DayCard extends UiPart<Region> {
      */
 
     private final DayOfWeek day;
-    private static SlotCard morningSlot;
-    private static SlotCard afternoonSlot;
+    private SlotCard morningSlot;
+    private SlotCard afternoonSlot;
 
     @FXML
     private VBox slotPane;

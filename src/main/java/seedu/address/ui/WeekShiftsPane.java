@@ -76,7 +76,6 @@ public class WeekShiftsPane extends UiPart<Region> {
             sunday.refreshSlotCard(slot);
             break;
         }
-
     }
 }
 

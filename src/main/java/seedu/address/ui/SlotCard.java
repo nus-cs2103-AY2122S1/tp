@@ -65,16 +65,17 @@ public class SlotCard extends UiPart<Region> {
         shiftName.setText(slot.toString());
         refresh();
         stafflist.addListener((ListChangeListener<? super Person>) change -> {
+            System.out.println("stafflist change");
             refresh();
         });
+        staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
 
     public void refresh() {
-        System.out.println("refreshed");
+        System.out.println("refreshed" + day.toString() + slot.toString());
         filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
         staffWorkingList.setItems(filteredList);
         staffWorkingList.refresh();
-        staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
