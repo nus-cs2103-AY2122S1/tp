@@ -46,6 +46,8 @@ public class EditLabCommandParser implements Parser<EditLabCommand> {
             // Provided new lab number only
             int labNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NUM).orElse(null));
             int newLabNum = ParserUtil.parseLabNum(argMultimap.getValue(PREFIX_LAB_NEW_LAB_NUM).orElse(null));
+            // TODO: find out the labNum's total score
+            // Lab labResult = new Lab(labNum, totalScore)
             Lab labResult = new Lab(labNum);
             return new EditLabCommand(labResult, newLabNum);
         } else {

@@ -60,7 +60,7 @@ public class EditLabCommand extends Command {
     public EditLabCommand(Lab original, int newLabNum) {
         this.original = original;
         this.newLabNum = newLabNum;
-        this.total = null;
+        this.total = original.getTotalScore();
     }
 
     @Override
