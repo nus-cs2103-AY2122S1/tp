@@ -27,8 +27,7 @@ public class DoneCommandParser {
             Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
 
             Set<Index> taskIndexSet = ParserUtil.parseTaskIndexes(argMultimap.getAllValues(PREFIX_TASK_INDEX));
-            List<Index> taskIndex = new ArrayList<>();
-            taskIndex.addAll(taskIndexSet);
+            List<Index> taskIndex = new ArrayList<>(taskIndexSet);
 
             return new DoneCommand(index, taskIndex);
         } catch (ParseException pe) {

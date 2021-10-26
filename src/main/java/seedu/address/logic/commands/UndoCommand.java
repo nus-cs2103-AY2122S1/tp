@@ -62,12 +62,10 @@ public class UndoCommand extends Command {
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
 
         //Make new copy for defensive programming.
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(personToEdit.getTasks());
-        List<Index> copyOfIndexList = new ArrayList<>();
-        copyOfIndexList.addAll(targetTaskIndexes);
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
+        List<Index> copyOfIndexList = new ArrayList<>(targetTaskIndexes);
 
-        Collections.sort(copyOfIndexList, Collections.reverseOrder());
+        copyOfIndexList.sort(Collections.reverseOrder());
 
         for (Index targetTaskIndex : targetTaskIndexes) {
             if (targetTaskIndex.getZeroBased() >= tasks.size()) {

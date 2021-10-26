@@ -40,6 +40,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private FlowPane importance;
+    @FXML
     private FlowPane tags;
     @FXML
     private Text taskList;
@@ -59,6 +61,9 @@ public class PersonCard extends UiPart<Region> {
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         taskList.setText(person.getDescription().toString());
+        if (person.isImportant()) {
+            importance.getChildren().add(new Label("Important!"));
+        }
     }
 
     @Override

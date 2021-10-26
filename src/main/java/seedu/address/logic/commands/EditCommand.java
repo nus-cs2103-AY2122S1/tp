@@ -143,7 +143,9 @@ public class EditCommand extends Command {
             tasks.set(targetTaskIndex.getZeroBased(), editedTask);
             editedPerson = new Person(
                     editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
-                    editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription());
+                    editedPerson.getAddress(), editedPerson.getTags(), tasks, editedPerson.getDescription(),
+                    editedPerson.isImportant()
+            );
         }
         // If the edited details result in a duplicate person, throw an exception.
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -168,7 +170,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Description updatedDescription = editPersonDescriptor.getDescription().orElse(personToEdit.getDescription());
         List<Task> tasks = editPersonDescriptor.getTasks().orElse(personToEdit.getTasks());
-        boolean updatedisImportant = editPersonDescriptor.getImportance().orElse(personToEdit.isImportant());
+        Boolean updatedisImportant = editPersonDescriptor.getImportance().orElse(personToEdit.isImportant());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, tasks,
                 updatedDescription, updatedisImportant);
@@ -225,7 +227,7 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private Description description;
         private List<Task> tasks;
-        private boolean isImportant;
+        private Boolean isImportant;
 
         public EditPersonDescriptor() {}
 
@@ -299,7 +301,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(tasks);
         }
 
-        public void setImportance(boolean isImportant) {
+        public void setImportance(Boolean isImportant) {
             this.isImportant = isImportant;
         }
 

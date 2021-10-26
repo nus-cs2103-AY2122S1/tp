@@ -81,8 +81,7 @@ public class EditTaskCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(targetPersonIndex.getZeroBased());
-        List<Task> tasks = new ArrayList<>();
-        tasks.addAll(personToEdit.getTasks());
+        List<Task> tasks = new ArrayList<>(personToEdit.getTasks());
 
         if (targetTaskIndex.getZeroBased() >= tasks.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_TASK, personToEdit.getName()));
@@ -203,7 +202,7 @@ public class EditTaskCommand extends Command {
         }
 
         public void setTaskVenue(Venue venue) {
-            this.taskVenue = taskVenue;
+            this.taskVenue = venue;
         }
 
         public Optional<Venue> getTaskVenue() {

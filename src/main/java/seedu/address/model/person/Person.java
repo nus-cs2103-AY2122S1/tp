@@ -27,7 +27,7 @@ public class Person implements Comparable<Person> {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Description description;
-    private final boolean isImportant;
+    private final Boolean isImportant;
 
     // TaskList
     private final List<Task> tasks = new ArrayList<>();
@@ -99,6 +99,15 @@ public class Person implements Comparable<Person> {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * Returns true if both persons have the same name.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public static boolean isValidImportance(String input) {
+        String lowerCaseInput = input.toLowerCase();
+        return lowerCaseInput.equals("true") || lowerCaseInput.equals("false");
     }
 
     /**
