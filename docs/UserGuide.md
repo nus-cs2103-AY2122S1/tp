@@ -5,6 +5,8 @@ title: User Guide
 
 **PlaceBook (PB) is a desktop app for managing contacts and appointments, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).** If you can type fast, PB can get your contact management tasks done faster than traditional GUI apps.
 
+It is most beneficial to Sales or Marketing staff who have to manage various appointments with potential clients and customers on a daily basis.
+
 * Table of Contents
 {:toc}
 
@@ -127,7 +129,28 @@ Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex` returns `Alex Yeoh`<br>
   
-  ![result for 'find alex'](images/findAlexResult.png)
+![result for 'find alex'](images/findAlexResult.png)
+
+### Locating persons by tags: `findTags`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `findTags KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `fRieNds` will match `friends`
+* Only the tags are searched.
+* Only full words will be matched e.g. `colleague` will not match `colleagues`
+* Persons matching at least one tag keyword will be returned (i.e. `OR` search).
+  e.g. `friends colleagues` will return persons with either `friends`, `colleagues` or both tags
+
+Examples:
+* `findTags friends` returns `Alex Yeoh` and `Bernice Yu`, who both have the `friends` tag
+
+![result for 'findTags friends'](images/findTagsFriendsResult.png)
+* `findTags friends colleagues` returns `Alex Yeoh`, `Bernice Yu` and `Roy Balakrishnan`, who all have either
+one or both of the `friends` and `colleagues` tags
+
+![result for 'findTags friends colleagues'](images/findTagsFriendsColleaguesResult.png)
 
 ### Deleting a person : `delete`
 
@@ -161,27 +184,45 @@ creates an appointment with Alex Yeoh and Irfan Ibrahim on 14-12-2021 at 1400 hr
 
 Edits an existing appointment, rewriting all the data in the appointment.
 
-Format: `editApp [INDEX] n/NAME d/DATE [ti/TIME] ds/DESCRIPTION`
+Format: `editApp ai/INDEX a/ADDRESS d/DATE ti/TIME ds/DESCRIPTION`
 
 * Edits the appointment at the specified `INDEX`.
 * The details of the appointment will be changed accordingly.
+* The persons in the appointment will remain the same.
 
 Examples:
-* `editApp id/2 n/John Doe d/21-12-2021 t/1500 ds/dicuss marketing strategies`
-  edits the time of the above created appointment with John Doe to 21-12-2021 at 1500 hrs
+* `editApp ai/1 a/UTown d/28-10-2021 ti/1400 ds/discuss UG and DG stuff`
+  edits the details of a prior created group appointment, changing it to meet at UTown on 28-12-2021 at 1400 hrs
+
+Before:
+![result for 'editApp' before change](images/editAppResultBefore.png)
+
+After:
+![result for 'editApp' after change](images/editAppResultAfter.png)
 
 ### Deleting an appointment: `delApp`
 
 * Deletes an appointment at the specified `INDEX`
+* A popup will appear asking for confirmation before actually deleting the appointment.
+* If the user chooses to cancel the deletion, the appointment will not be deleted.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Format: delApp INDEX
 
 Examples:
-* `delApp 1`
+* `delApp 2` and the user selects 'OK' in the popup
 
-### Locating appointments by description: `find`
+Before:
+![result for 'delApp' before change](images/delAppResultBefore.png)
+
+Confirmation:
+![result for 'delApp' confirmation stage](images/delAppResultConfirmation.png)
+
+After:
+![result for 'delApp' after change](images/delAppResultAfter.png)
+
+### Locating appointments by description: `findApp`
 
 Finds appointments whose descriptions contain any of the given keywords.
 
@@ -253,8 +294,9 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **DelApp** | `delApp INDEX` <br> e.g., `delApp 1`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**EditApp** | `editApp [INDEX] n/NAME d/DATE [ti/TIME] ds/DESCRIPTION`
+**EditApp** | `editApp ai/INDEX a/ADDRESS d/DATE ti/TIME ds/DESCRIPTION` <br> e.g., `editApp ai/1 a/UTown d/27-12-2021 ti/1400 ds/discuss UG and DG stuff`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindTags** | `findTags KEYWORD [MORE_KEYWORDS]` <br> e.g., `findTags friends`
 **FindApp** | `findApp KEYWORD [MORE KEYWORDS`<br> e.g., `findApp Zoom Meeting`
 **List** | `list`
 **ListApp** | `listapp [Date / Duration]`
