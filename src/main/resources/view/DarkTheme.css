@@ -130,14 +130,16 @@
 
 .cell_big_label {
     -fx-font-family: "Open Sans Semibold";
-    -fx-font-size: 16px;
+    -fx-font-size: 17px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 0 3 0;
 }
 
 .cell_small_label {
     -fx-font-family: "Open Sans Regular";
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-text-fill: #010504;
+    -fx-padding: 0 0 1 0;
 }
 
 .stack-pane {
@@ -308,16 +310,25 @@
 .studentValueLabel {
     -fx-background-color: transparent #383838 transparent #383838;
     -fx-font-family: "Open Sans";
-    -fx-font-size: 9pt;
+    -fx-font-size: 10pt;
     -fx-text-fill: white;
     -fx-text-alignment: center;
     -display: inline-block;
-    -fx-padding: 0 4 0 4;
+    -fx-padding: 0 1 0 1;
 }
 
 .studentValuePositive {
-    -fx-background-color: #478D54 !important;
+    -fx-background-color: #28a745 !important;
     -fx-background-radius: 5 !important;
+    -fx-padding: 0 5 0 5 !important;
+    -fx-font-family: "Open Sans Bold" !important;
+}
+
+.studentValueNegative {
+    -fx-background-color: #343a40 !important;
+    -fx-background-radius: 5 !important;
+    -fx-padding: 0 5 0 5 !important;
+    -fx-font-family: "Open Sans Bold" !important;
 }
 
 #cardPane {
@@ -419,13 +430,27 @@
 #tags {
     -fx-hgap: 7;
     -fx-vgap: 3;
+    -fx-padding: 0 0 4 0;
+
 }
 
 #tags .label {
     -fx-text-fill: white;
     -fx-background-color: #3e7b91;
-    -fx-padding: 2 4 2 4;
+    -fx-padding: 2 10 2 10;
     -fx-border-radius: 10;
     -fx-background-radius: 10;
-    -fx-font-size: 11;
+    -fx-font-size: 12;
+}
+
+#valueHeader {
+    -fx-padding: 0 0 1 0;
+}
+
+#valueArrayGrid {
+    -fx-padding: 0 0 5 0;
+}
+
+#memberListPanelPlaceholder {
+    -fx-padding: 10 0 0 0;
 }

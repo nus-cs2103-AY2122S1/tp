@@ -15,7 +15,7 @@
             <Region fx:constant="USE_PREF_SIZE" />
         </minWidth>
         <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" minWidth="15" maxWidth="15" prefWidth="15" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="20" maxWidth="20" prefWidth="20" />
         </columnConstraints>
 
         <Label text="1" minWidth="15" styleClass="studentValueLabel" GridPane.columnIndex="0" GridPane.rowIndex="0"/>

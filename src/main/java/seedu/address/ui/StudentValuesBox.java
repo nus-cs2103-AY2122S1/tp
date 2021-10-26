@@ -43,6 +43,8 @@ public class StudentValuesBox extends VBox {
         for (int i = 0; i < children.size(); i++) {
             if (attendance.checkPresent(i) == 1) {
                 children.get(i).getStyleClass().add("studentValuePositive");
+            } else {
+                children.get(i).getStyleClass().add("studentValueNegative");
             }
         }
     }
@@ -65,6 +67,8 @@ public class StudentValuesBox extends VBox {
         for (int i = 0; i < children.size(); i++) {
             if (participation.checkPresent(i) == 1) {
                 children.get(i).getStyleClass().add("studentValuePositive");
+            } else {
+                children.get(i).getStyleClass().add("studentValueNegative");
             }
         }
     }
