@@ -474,8 +474,8 @@ public class ParserUtil {
         }
 
         for (int i = 0; i < 3; i++) {
-            // if i < (i + 1)
-            if (timings[i].compareTo(timings[i + 1]) >= 0) {
+            // if i > (i + 1)
+            if (timings[i].compareTo(timings[i + 1]) > 0) {
                 throw SetDefaultShiftTimingsCommandParser.DEFAULT_ERROR;
             }
         }
