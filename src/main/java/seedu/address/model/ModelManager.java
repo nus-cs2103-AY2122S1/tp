@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
+import static javafx.collections.FXCollections.observableArrayList;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
@@ -9,8 +10,11 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.claim.Claim;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 /**
@@ -121,6 +125,20 @@ public class ModelManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return filteredPersons;
+    }
+
+    /**
+     * Retrieves a list of claims of the persons in the filteredList
+     */
+    public ObservableList<Pair<Claim, Name>> getClaimList() {
+        ObservableList<Pair<Claim, Name>> claimList = observableArrayList();
+        filteredPersons.stream().forEach(person -> {
+            person.getClaims().stream().forEach(claim -> {
+                Pair<Claim, Name> claimAndName = new Pair<>(claim, person.getName());
+                claimList.add(claimAndName);
+            });
+        });
+        return claimList;
     }
 
     @Override
