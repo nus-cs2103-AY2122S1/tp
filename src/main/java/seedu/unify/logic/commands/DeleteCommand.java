@@ -1,8 +1,12 @@
 package seedu.unify.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.unify.commons.core.Messages.MESSAGE_DUPLICATE_INDEX;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import seedu.unify.commons.core.Messages;
 import seedu.unify.commons.core.index.Index;
@@ -18,36 +22,58 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the task identified by the index number used in the displayed task list.\n"
-            + "Parameters: task_id\n"
+            + ": Deletes the task(s) identified by the index number(s) used in the displayed task list.\n"
+            + "Parameters: task_id (task_id)...\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task(s): %1$s";
 
-    private final Index targetIndex;
+    private final List<Index> targetIndexes;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(List<Index> targetIndexes) {
+        this.targetIndexes = targetIndexes;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Task> deletedTasks = new ArrayList<>();
+
+        // Checks for duplicates
+        Set<Integer> indexSet = new HashSet<>();
+        for (Index index : targetIndexes) {
+            indexSet.add(index.getZeroBased());
+        }
+        if (indexSet.size() < targetIndexes.size()) {
+            throw new CommandException(MESSAGE_DUPLICATE_INDEX);
         }
 
-        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteTask(taskToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
+        // Deletes from the last item to prevent future deletes operating on wrong indexes
+        for (int i = targetIndexes.size() - 1; i >= 0; i--) {
+            if (targetIndexes.get(i).getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+            }
+
+            Task taskToDelete = lastShownList.get(targetIndexes.get(i).getZeroBased());
+            deletedTasks.add(0, taskToDelete);
+            model.deleteTask(taskToDelete);
+        }
+
+        String deletedTasksString = "\n";
+
+        for (Task task : deletedTasks) {
+            deletedTasksString += task.toString() + "\n";
+        }
+
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTasksString));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && targetIndexes.equals(((DeleteCommand) other).targetIndexes)); // state check
     }
 }

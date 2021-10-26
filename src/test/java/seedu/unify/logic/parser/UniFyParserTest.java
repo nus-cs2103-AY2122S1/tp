@@ -6,6 +6,7 @@ import static seedu.unify.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.unify.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.unify.testutil.Assert.assertThrows;
 import static seedu.unify.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static seedu.unify.testutil.TypicalIndexes.INDEX_LIST_FIRST_TASK;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,7 +51,7 @@ public class UniFyParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_TASK.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_TASK), command);
+        assertEquals(new DeleteCommand(INDEX_LIST_FIRST_TASK), command);
     }
 
     @Test

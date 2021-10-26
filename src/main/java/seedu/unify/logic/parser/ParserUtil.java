@@ -2,8 +2,11 @@ package seedu.unify.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.unify.commons.core.index.Index;
@@ -33,6 +36,30 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code multipleIndexes} into a list of {@code Index} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if any of the specified indexes are invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseIndexes(String multipleIndexes) throws ParseException {
+        String trimmedIndexes = multipleIndexes.trim();
+        List<String> indexes = Arrays.asList(trimmedIndexes.split("\\s+"));
+        List<Index> parsedIndexes = new ArrayList<>();
+
+        for (String index : indexes) {
+            if (!StringUtil.isNonZeroUnsignedInteger(index)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            }
+            parsedIndexes.add(Index.fromOneBased(Integer.parseInt(index)));
+        }
+
+        // Sorts so that list will always delete from the last item to prevent future deletes operating on wrong indexes
+        parsedIndexes.sort((p1, p2) -> p1.getOneBased() - p2.getOneBased());
+
+        return parsedIndexes;
     }
 
     /**
