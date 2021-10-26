@@ -72,7 +72,7 @@ public class MarkTaskUndoneCommand extends MarkTaskCommand {
                 List<Student> studentList = module.getFilteredStudentList();
                 for (Student student : studentList) {
                     if (student.getStudentId().equals(studentId)) {
-                        setTaskIsComplete(student, taskId);
+                        setTaskAsIncomplete(student, taskId);
                     }
                 }
             }
@@ -81,7 +81,7 @@ public class MarkTaskUndoneCommand extends MarkTaskCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskId, studentId));
     }
 
-    public void setTaskIsComplete(Student student, TaskId taskId) {
+    public void setTaskAsIncomplete(Student student, TaskId taskId) {
         UniqueTaskList taskList = student.getTaskList();
         for (Task t : taskList) {
             if (t.getTaskId().equals(taskId)) {
