@@ -20,10 +20,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Stream;
 
 import seedu.address.commons.core.Messages;
@@ -47,6 +44,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -227,7 +225,7 @@ public class ParserUtil {
         }
 
         try {
-            LocalTime.parse(strings[1], DateTimeFormatter.ofPattern("HH:mm"));
+            LocalTime.parse(strings[1], TIME_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParseException(messageConstraints);
         }
@@ -451,6 +449,28 @@ public class ParserUtil {
     public static Period extractPeriodDates(ArgumentMultimap argMultimap) throws ParseException {
         LocalDate[] dates = extractTupleDates(argMultimap);
         return new Period(dates[0], dates[1]);
+    }
+
+    /**
+     * Parses a String array of timings to form a LocalTime array of those timings.
+     *
+     * @param stringTimings The String array of timings to be parsed.
+     * @return A corresponding array of timings as LocalTime.
+     */
+    public static LocalTime[] parseTimingsArr(String[] stringTimings) throws ParseException {
+        if (stringTimings.length != 4) {
+            throw SetRoleReqCommandParser.DEFAULT_ERROR;
+        }
+
+        LocalTime[] timings = new LocalTime[4];
+        try {
+            for (int i = 0; i < 4; i++) {
+                timings[i] = LocalTime.parse(stringTimings[i], TIME_FORMATTER);
+            }
+        } catch (DateTimeParseException e) {
+            throw new ParseException(e.getMessage());
+        }
+        return timings;
     }
 
 }

@@ -122,4 +122,9 @@ public class RecurrencePeriod extends Period {
         return time.equals(startTime) || time.equals(endTime)
                 || time.isBefore(endTime) && time.isAfter(startTime);
     }
+
+    @Override
+    public String toString() {
+        return getStartTime() + "-" + getEndTime();
+    }
 }

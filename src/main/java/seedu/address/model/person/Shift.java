@@ -317,8 +317,14 @@ public class Shift {
                 && this.recurrences.equals(otherShift.recurrences);
     }
 
+    @Override
+    public String toString() {
+        String resultString = "";
 
-
-
+        for (RecurrencePeriod rp : recurrences) {
+            resultString += rp.toString() + "\n";
+        }
+        return resultString;
+    }
 
 }

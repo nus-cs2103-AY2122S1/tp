@@ -15,4 +15,5 @@ public class Messages {
     public static final String MESSAGE_INVALID_TIME = "The format or range of input time is invalid";
     public static final String WRONG_NUMBER_OF_DATES = "Expects 0, 1 or 2 dates as input, received $d";
     public static final String DATES_IN_WRONG_ORDER = "End date keyed in is after startDate.";
+    public static final String FILE_NOT_FOUND = "The following file could not be accessed: ";
 }

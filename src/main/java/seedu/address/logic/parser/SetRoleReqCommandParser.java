@@ -16,8 +16,8 @@ public class SetRoleReqCommandParser {
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, SetRoleReqCommand.HELP_MESSAGE));
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns a FindCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the SetRoleReqCommand
+     * and returns a SetRoleReqCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
