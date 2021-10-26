@@ -4,11 +4,13 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.event.Event;
+import seedu.address.model.module.member.Member;
 
 /**
  * Panel containing the list of events.
@@ -18,6 +20,8 @@ public class EventListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML
+    private Label eventListTitle;
+    @FXML
     private ListView<Event> eventListView;
 
     /**
@@ -25,6 +29,17 @@ public class EventListPanel extends UiPart<Region> {
      */
     public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
+        eventListTitle.setText("Listing All Events");
+        eventListView.setItems(eventList);
+        eventListView.setCellFactory(listView -> new EventListViewCell());
+    }
+
+    /**
+     * Creates a {@code EventListPanel} with the given {@code ObservableList} and {@code Member}.
+     */
+    public EventListPanel(ObservableList<Event> eventList, Member member) {
+        super(FXML);
+        eventListTitle.setText(member.getName().fullName);
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
     }

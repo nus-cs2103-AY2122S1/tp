@@ -390,3 +390,7 @@
 #taskListTitle {
     -fx-text-fill: white;
 }
+
+#eventListTitle {
+    -fx-text-fill: white;
+}

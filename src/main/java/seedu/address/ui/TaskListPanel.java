@@ -29,7 +29,7 @@ public class TaskListPanel extends UiPart<Region> {
      */
     public TaskListPanel(ObservableList<Task> taskList) {
         super(FXML);
-        taskListTitle.setText("No Member Displayed");
+        taskListTitle.setText("Member Not Chosen");
         taskListView.setItems(taskList);
         taskListView.setCellFactory(listView -> new TaskListViewCell());
     }
