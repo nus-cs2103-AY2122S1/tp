@@ -21,7 +21,9 @@ public class Timing {
      */
     public Timing(String timing) {
         requireNonNull(timing);
-        checkArgument(isValidTiming(timing), MESSAGE_CONSTRAINTS);
+        if (!timing.equals("")) {
+            checkArgument(isValidTiming(timing), MESSAGE_CONSTRAINTS);
+        }
         this.timing = timing;
     }
 
@@ -34,6 +36,9 @@ public class Timing {
 
     @Override
     public String toString() {
+        if (timing.equals("")) {
+            return "No timing";
+        }
         return timing;
     }
 
