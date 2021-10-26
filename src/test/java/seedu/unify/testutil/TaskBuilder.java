@@ -1,15 +1,15 @@
 package seedu.unify.testutil;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
 import seedu.unify.model.task.State;
-import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Task;
 import seedu.unify.model.task.Time;
 import seedu.unify.model.util.SampleDataUtil;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A utility class to help with building Task objects.

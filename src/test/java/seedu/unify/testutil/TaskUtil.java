@@ -5,12 +5,12 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Set;
+
 import seedu.unify.logic.commands.AddCommand;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Task;
-
-import java.util.Set;
 
 /**
  * A utility class for Task.
@@ -32,8 +32,9 @@ public class TaskUtil {
         sb.append(PREFIX_NAME + task.getName().taskName + " ");
         sb.append(PREFIX_TIME + task.getTime().value + " ");
         sb.append(PREFIX_DATE + task.getDate().value + " ");
-        task.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagTaskName + " ")
+        task.getTags()
+                .stream()
+                .forEach(s -> sb.append(PREFIX_TAG + s.tagTaskName + " ")
         );
         return sb.toString();
     }
@@ -48,7 +49,7 @@ public class TaskUtil {
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
-            if(tags.isEmpty()) {
+            if (tags.isEmpty()) {
                 sb.append(PREFIX_TAG);
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagTaskName).append(" "));
