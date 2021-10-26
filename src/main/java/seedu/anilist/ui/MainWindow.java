@@ -233,6 +233,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleStats() {
+        updateStatsDisplay();
         if (!statsDisplay.isShowing()) {
             statsDisplay.show();
             updateStatsDisplay();
