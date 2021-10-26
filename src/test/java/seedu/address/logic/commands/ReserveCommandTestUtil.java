@@ -16,7 +16,7 @@ public class ReserveCommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final int VALID_NUMBER_OF_PEOPLE_AMY = 5;
     public static final int VALID_NUMBER_OF_PEOPLE_BOB = 2;
-    public static final String VALID_DATE_TIME_AMY = "2021-11-11 2030";
+    public static final String VALID_DATE_TIME_AMY = "2021-11-11 2000";
     public static final String VALID_DATE_TIME_BOB = "2021-12-01 1900";
 
     /**

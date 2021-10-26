@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_RESERVATION_MINUTES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
@@ -27,6 +28,10 @@ public class ReserveCommandParser implements Parser<ReserveCommand> {
         int numberOfPeople = ParserUtil.parseNumberOfPeople(argMultimap.getPreamble());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         LocalDateTime time = ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_TIME).get());
+
+        if (time.getMinute() != 0) {
+            throw new ParseException(MESSAGE_INVALID_RESERVATION_MINUTES);
+        }
 
         assert numberOfPeople > 0;
         assert phone.value.length() > 0;

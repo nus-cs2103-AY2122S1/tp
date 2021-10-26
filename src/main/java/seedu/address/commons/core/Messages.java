@@ -25,4 +25,6 @@ public class Messages {
             "%1$d person(s) have reservations on %2$te %2$th %2$tY";
     public static final String MESSAGE_RESERVATIONS_LISTED_TIME_ONLY =
             "%1$d person(s) have reservations on %2$te %2$th %2$tY (Today), %2$tl:%2$tM %2$tp";
+    public static final String MESSAGE_INVALID_RESERVATION_MINUTES =
+            "Timing has to be on the hour (i.e. hh00)";
 }

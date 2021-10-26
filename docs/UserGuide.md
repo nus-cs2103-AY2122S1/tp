@@ -242,7 +242,8 @@ Format:
   * Returns all reservations on **today's date**, at `TIME` 
 
 
-* `DATE` is formatted as `yyyy-MM-dd`, `TIME` is formatted as `HHmm`
+* `DATE` is formatted as `yyyy-MM-dd`
+* `TIME` has to be formatted on the hour as `HH00`
 
 Examples:
 * `check 2021-09-19 1800`
@@ -256,7 +257,8 @@ customer's phone number and the date & time.
 
 Format: `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
 
-* Date-time format is `yyyy-MM-dd HHmm`, e.g. `2021-11-11 2030`
+* Date-time format is `yyyy-MM-dd HHmm`, e.g. `2021-11-11 2000`
+  * Time has to be formatted on the hour (i.e. `HH00`)
 
 Examples: 
 * `reserve 2 p/98765432 at/2021-12-24 2000`
@@ -344,7 +346,7 @@ Action | Format, Examples
 **Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
 **Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Create reservation** | `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`<br> e.g., `reserve 2 p/98765432 at/2021-12-24 2000`
+**Set Tables** | `settables SIZE_OF_TABLES`<br> e.g., `settables 10x4,8x5,3,1x4`
 **Find [COMING SOON]** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List [COMING SOON]** | `list`
 **Help [COMING SOON]** | `help`
