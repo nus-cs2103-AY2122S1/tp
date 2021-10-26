@@ -79,10 +79,11 @@ Format: `help`
 
 ### Toggling between tabs: `toggle`
 
-Toggles between `Patients` tab and `Doctors` tab.<br>
-Commands entered while the `Patients` tab is displayed will only affect patients whereas commands entered while the `Doctors` tab is displayed will only affect doctors.
+Toggles between `Patients` and `Doctors` tab.<br>
+Commands enters only applies on the currently displayed tab. (eg. If the currently displayed tab the `add` command will add a patient to the records.)
 
 Format: `toggle`
+* toggles to the other tab (eg. if the currently displayed tab is the patient tab, `toggle` switches the displayed tab to the doctor tab)
 
 ---
 
@@ -370,10 +371,6 @@ PlannerMD data are saved as a JSON file `[JAR file location]/data/plannermd.json
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, PlannerMD will discard all data and start with an empty data file at the next run.
 </div>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
