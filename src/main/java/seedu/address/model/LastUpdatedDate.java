@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 /**
@@ -25,7 +26,7 @@ public class LastUpdatedDate {
      * The constructor to update the LastUpdatedDate.
      */
     public LastUpdatedDate() {
-        dateTime = LocalDateTime.now();
+        dateTime = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
         value = dateTime.toString();
     }
 

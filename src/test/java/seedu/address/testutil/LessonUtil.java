@@ -62,7 +62,7 @@ public class LessonUtil {
         sb.append(PREFIX_DATE + lesson.getStartDate().toString() + " ");
         sb.append(PREFIX_TIME + lesson.getTimeRange().toString() + " ");
         sb.append(PREFIX_SUBJECT + lesson.getSubject().toString() + " ");
-        sb.append(PREFIX_RATES + lesson.getLessonRates().toString() + " ");
+        sb.append(PREFIX_RATES + lesson.getLessonRates().value + " ");
         sb.append(PREFIX_OUTSTANDING_FEES + lesson.getOutstandingFees().value + " ");
 
         lesson.getHomework().stream().forEach(

@@ -30,9 +30,9 @@ class JsonAdaptedLessonTest {
 
     private static final String VALID_DATE = RECURRING_LESSON.getDisplayDate().toString();
     private static final String VALID_TIME_RANGE = RECURRING_LESSON.getTimeRange().toString();
-    private static final String VALID_LESSON_RATES = RECURRING_LESSON.getLessonRates().toString();
+    private static final String VALID_LESSON_RATES = RECURRING_LESSON.getLessonRates().value;
     private static final String VALID_SUBJECT = RECURRING_LESSON.getSubject().toString();
-    private static final String VALID_OUTSTANDING_FEES = RECURRING_LESSON.getOutstandingFees().toString();
+    private static final String VALID_OUTSTANDING_FEES = RECURRING_LESSON.getOutstandingFees().value;
     private static final List<JsonAdaptedHomework> VALID_HOMEWORK_PIECES = RECURRING_LESSON
         .getHomework()
         .stream()

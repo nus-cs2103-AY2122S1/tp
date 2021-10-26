@@ -1,5 +1,7 @@
 package seedu.address.model.lesson;
 
+import java.text.DecimalFormat;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -17,6 +19,7 @@ public class Money {
                     + "2. Money-related fields should not start or end with a decimal point"
                     + " and should have at most two decimal places.";
     public static final String VALIDATION_REGEX = "^[0-9]+(\\.[0-9]{1,2})?$";
+    public static final DecimalFormat df = new DecimalFormat("0.00");
     public final String value;
 
     /**
@@ -27,7 +30,7 @@ public class Money {
     public Money(String amount) {
         requireNonNull(amount);
         checkArgument(isValidMonetaryField(amount));
-        value = formattedValue(fillEmptyString(amount));
+        value = formatValue(fillEmptyString(amount));
     }
 
     private String fillEmptyString(String amount) {
@@ -41,7 +44,7 @@ public class Money {
      * @param value A valid value that represents Money.
      * @return The formatted value.
      */
-    public static String formattedValue(String value) {
+    public static String formatValue(String value) {
         String formattedValue = value;
         if (formattedValue.startsWith("0")) { // remove all leading zeroes
             formattedValue = formattedValue.replaceFirst("^0+", "");
@@ -72,7 +75,7 @@ public class Money {
 
     @Override
     public String toString() {
-        return value;
+        return df.format(value);
     }
 
     @Override

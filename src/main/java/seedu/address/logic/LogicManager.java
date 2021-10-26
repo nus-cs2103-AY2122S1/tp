@@ -2,6 +2,8 @@ package seedu.address.logic;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.logging.Logger;
 
 import com.calendarfx.model.Calendar;
@@ -41,7 +43,7 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
-        feesCalculator = new FeesCalculator(model.getLastUpdatedDate());
+        feesCalculator = new FeesCalculator(model.getLastUpdatedDate(), LocalDateTime.now());
         this.model = feesCalculator.updateAllLessonOutstandingFees(model);
 
         // After model is updated. Save model to storage.

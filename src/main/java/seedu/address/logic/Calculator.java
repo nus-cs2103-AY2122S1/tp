@@ -21,12 +21,12 @@ public interface Calculator {
      * fees from their lessons.
      */
     static float getStudentTotalFees(Set<Lesson> lessons) {
-        Optional<Float> total = lessons
+        float total = lessons
                 .stream()
                 .map(lesson -> lesson.getOutstandingFees().getMonetaryValueInFloat())
-                .reduce((curr, next) -> curr + next);
+                .reduce(0.00F, (curr, next) -> curr + next);
 
-        return total.get();
+        return total;
     }
 
     /**

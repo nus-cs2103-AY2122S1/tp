@@ -1,8 +1,12 @@
 package seedu.address.logic;
 
+import java.time.DayOfWeek;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,14 +35,15 @@ import seedu.address.model.util.PersonUtil;
  */
 public class FeesCalculator implements Calculator {
     public static final String MESSAGE_PAY_TOO_MUCH = "Payment amount exceeds current "
-            + "Outstanding Fees. Invalid transcation.";
+            + "uutstanding fees. Invalid transaction.";
 
     private static final float numberOfMinutesInAnHour = 60.00F;
-    private static final LocalDateTime currentDateTime = LocalDateTime.now();
+    private final LocalDateTime currentDateTime;
     private final LastUpdatedDate lastUpdated;
 
-    public FeesCalculator(LastUpdatedDate lastUpdatedDate) {
+    public FeesCalculator(LastUpdatedDate lastUpdatedDate, LocalDateTime currentDateTime) {
         lastUpdated = lastUpdatedDate;
+        this.currentDateTime = currentDateTime.truncatedTo(ChronoUnit.MINUTES);
     }
 
     @Override
@@ -84,9 +89,11 @@ public class FeesCalculator implements Calculator {
                 ? null
                 : new HashSet<>(lesson.getHomework());
 
+        OutstandingFees currentOutstanding = lesson.getOutstandingFees();
+
         // update outstanding fees after calculation
         OutstandingFees updatedOutstandingFees = lesson.hasStarted() && !lesson.hasEnded()
-                ? getUpdatedOutstandingFees(lesson.getEndDateTime(), copiedTimeRange, copiedLessonRates)
+                ? getUpdatedOutstandingFees(currentOutstanding, lesson.getDayOfWeek(), copiedTimeRange, copiedLessonRates)
                 : new OutstandingFees(lesson.getOutstandingFees().value);
 
         return lesson.isRecurring()
@@ -99,18 +106,19 @@ public class FeesCalculator implements Calculator {
     /**
      * Updates the Outstanding Fees field to most recent value and modify the lastAdded date.
      *
-     * @param updateDateTime Date and Time when lesson ends.
+     * @param original Outstanding Fees of current amount.
+     * @param updateDay Day of the lesson.
      * @param timeRange Duration per lesson.
      * @param lessonRates Cost per hour for the lesson.
      * @return Updated Outstanding Fees object.
      */
-    public OutstandingFees getUpdatedOutstandingFees(LocalDateTime updateDateTime, TimeRange timeRange,
+    public OutstandingFees getUpdatedOutstandingFees(OutstandingFees original, DayOfWeek updateDay, TimeRange timeRange,
                                                      LessonRates lessonRates) {
 
         // updated fee values
-        int numberOfLessons = numOfLessonsSinceLastUpdate(updateDateTime);
+        int numberOfLessons = getNumOfLessonsSinceLastUpdate(updateDay, timeRange.getStart());
         float costPerLesson = getCostPerLesson(timeRange, lessonRates);
-        double updatedFees = costPerLesson * numberOfLessons;
+        float updatedFees = costPerLesson * (float) numberOfLessons + original.getMonetaryValueInFloat();
 
         return new OutstandingFees(Double.toString(updatedFees));
     }
@@ -122,19 +130,52 @@ public class FeesCalculator implements Calculator {
         return costPerLesson;
     }
 
-    private int numOfLessonsSinceLastUpdate(LocalDateTime updateDateTime) {
-        // get the number of weeks passed since lastAdded date
-        LocalDateTime startDate = lastUpdated.dateTime;
-        int numberOfWeeksBetween = (int) ChronoUnit.WEEKS.between(startDate, currentDateTime);
+    public int getNumOfLessonsSinceLastUpdate(DayOfWeek updateDay, LocalTime endTime) {
+        int numOfLessons = 0;
 
-        // If today is after the update day or if today is the update day, update the fees for this week's lesson.
-        if (currentDateTime.isAfter(updateDateTime)) {
-            numberOfWeeksBetween += 1;
+        int lastUpdatedDay = lastUpdated.dateTime.getDayOfWeek().getValue();
+        int currentUpdatedDay = currentDateTime.getDayOfWeek().getValue();
+
+        // Get the nearest Monday
+        LocalDate nearestNextMondayToLastUpdated =
+                lastUpdated.dateTime.toLocalDate().with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY));
+        long numOfDaysBeforeMonday = lastUpdated.dateTime.toLocalDate().until(nearestNextMondayToLastUpdated, ChronoUnit.DAYS);
+
+        // if lesson is same day of week as last updated, check if last updated is after lesson
+        boolean isSameDayLessonBeforeUpdate = updateDay.getValue() != lastUpdatedDay || lastUpdated.dateTime.toLocalTime().isBefore(endTime);
+
+        // If lesson does not fall on a Monday itself
+        // check if the lastUpdated day is it on the lesson's update day or after the updated day
+        // if it is on update day check if the last update was before lesson endTime
+        // if all true
+        boolean isLessonBetweenLastUpdateAndMonday = numOfDaysBeforeMonday > 0
+                && updateDay.getValue() >= lastUpdatedDay
+                && isSameDayLessonBeforeUpdate;
+
+        if (isLessonBetweenLastUpdateAndMonday) {
+            numOfLessons += 1;
+        }
+
+        LocalDate nearestPreviousMondayToCurrent =
+                currentDateTime.toLocalDate().with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY));
+
+        numOfLessons += ChronoUnit.WEEKS.between(nearestNextMondayToLastUpdated, nearestPreviousMondayToCurrent);
+
+        long numOfDaysAfterMonday = nearestPreviousMondayToCurrent.until(currentDateTime.toLocalDate(), ChronoUnit.DAYS);
+
+        boolean isSameDayLessonAfterCurrent = updateDay.getValue() != currentUpdatedDay || lastUpdated.dateTime.toLocalTime().isAfter(endTime);
+
+        boolean isLessonBetweenMondayAndToday = numOfDaysAfterMonday > 0
+                && updateDay.getValue() <= currentUpdatedDay
+                && isSameDayLessonAfterCurrent;
+
+        if (isLessonBetweenMondayAndToday) {
+            numOfLessons += 1;
         }
 
         // isCancelled deduction logic goes here
 
-        return numberOfWeeksBetween;
+        return numOfLessons;
     }
 
     /**

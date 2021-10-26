@@ -20,11 +20,11 @@ class LastUpdatedDateTest {
         // invalid date
         assertFalse(LastUpdatedDate.isValidLastUpdatedDateTime("")); // empty string
         assertFalse(LastUpdatedDate.isValidLastUpdatedDateTime(" ")); // spaced only
-        assertFalse(LastUpdatedDate.isValidLastUpdatedDateTime("2021-02-31")); // no such date
-        assertFalse(LastUpdatedDate.isValidLastUpdatedDateTime("2021-13-23")); // invalid month
+        assertFalse(LastUpdatedDate.isValidLastUpdatedDateTime("2021-02-31T00:00")); // no such date
+        assertFalse(LastUpdatedDate.isValidLastUpdatedDateTime("2021-13-23T00:00")); // invalid month
 
         //valid date
-        assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2020-02-29")); // leap year
-        assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2021-10-23"));;
+        assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2020-02-29T00:00")); // leap year
+        assertTrue(LastUpdatedDate.isValidLastUpdatedDateTime("2021-10-23T00:00"));;
     }
 }
