@@ -177,7 +177,7 @@ public class HelpWindow extends UiPart<Stage> {
         try {
             Desktop.getDesktop().browse(new URL(USERGUIDE_URL).toURI());
         } catch (IOException e) {
-            logger.severe("Could not open browser to show user guide.");
+            logger.severe("Could not open the browser to show the user guide.");
         } catch (URISyntaxException e) {
             logger.severe("URL to user guide not formatted well.");
         }
