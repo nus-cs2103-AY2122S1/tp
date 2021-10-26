@@ -317,6 +317,13 @@ but not with *Role*s such as `Software` or `Software Developer`.
         * A `20:21` input can match with applicants that have the *Interview* at time 20:21 on any date.
         * A `21` input can match with *Interviews* `2021-10-10, 10:00`, `2020-10-21, 10:00`, `2020-10-10, 21:00` or `2020-10-10, 10:21`.
 
+* ##### NOTES `nt/`
+    * NOTES are considered matching with  ***Notes*** only if  ***Notes*** contains **the entire** keyword.
+    * All keywords provided as NOTES input must comply with input specifications for add given [**here**](#notes-nt).
+    * For example:
+        * A `good in this field` input can match with applicants that have *Notes* containing the `good in this field`.
+        * A `passionate` input can match with applicants that have Notes such as `passionate but inexperienced` and `passionate and experienced`.
+
 ### Deleting an applicant : `delete`
 
 Deletes applicants by their index from the list in RecruitIn.
@@ -347,7 +354,7 @@ Format: `show [n/] [p/] [e/] [r/] [et/] [s/] [l/] [y/] [t/]`
 
 Examples:
 
-**Note**: Suppose the applicant data includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
+Suppose the applicant data includes 3 applicants with name and role `John, Software Developer`, `Mary, Cook` and `Mary, Cleaner`.
 * `show n/` will display a list consisting of `John` and `Mary`.
 * `show r/ n/` will display a list consisting of `Software Developer`, `Cleaner` and `Cook`.
 
