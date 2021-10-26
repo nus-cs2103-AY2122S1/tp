@@ -14,7 +14,7 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `rhrh.jar` from [here]().
+2. Download the latest `rhrh.jar` from [here](https://github.com/AY2122S1-CS2103T-T17-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for your RHRH.
 
@@ -38,6 +38,8 @@ Restaurant HR Helper (RHRH) is a **desktop app for managing restaurant contacts 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+
+* Commands are case-insensitive
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
   e.g. in `add customer n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
@@ -253,44 +255,51 @@ Examples:
 ### Set the tables for the restaurant: `settables`
 
 <div markdown="block" class="alert alert-danger">
-:grey_exclamation: This command will remove **ALL** reservations and overwrite previously set tables <br>
+:bangbang: This command will remove **ALL** reservations and overwrite previously set tables <br>
 </div>
 
 Sets the tables with the sizes specified so that reservations can be made
 
 Format:
 * `settables LIST_OF_TABLE_SIZES`
-
-
-* `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
-  * **(size of one table)**
-  * **(size of one table)x(number of tables with this size)**,<br>
-    each comma-separated from the next.
-* Values must be positive integers 
+  * `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
+    * **(size of one table)**
+    * **(size of one table)x(number of tables with this size)**,<br>
+      each comma-separated from the next.
 
 Examples:
 * `settables 10,8,8,4,4,2x6,1x4`
 
-
-### Create a reservation: `reserve` 
-
 <div markdown="block" class="alert alert-warning">
-:information_source: Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant:-`settables`)
+:information_source:<br>
+
+* Size of tables and Number of tables with specified size has to be a positive integer
+
 </div>
+
+### Create a reservation: `addr`
 
 Add a new reservation with number of people, 
 customer's phone number and the date & time.
 
-Format: `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
+Format: `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME`
 
-* Date-time format is `yyyy-MM-dd HHmm`, e.g. `2021-11-11 2000`
-  * Time has to be formatted on the hour (i.e. `HH00`)
+* Date-time format is `yyyy-MM-dd HH00`, e.g. `2021-11-11 2000`
 
 Examples: 
-* `reserve 2 p/98765432 at/2021-12-24 2000`
-* `reserve 5 p/12345668 at/2021-02-14 1200`
+* `addr 2 p/98765432 at/2021-12-24 2000`
+* `addr 5 p/12345668 at/2021-02-14 1200`
 
-Note: System will reject if time slot is not available
+<div markdown="block" class="alert alert-warning">
+:information_source:<br>
+
+* Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant-settables)
+
+* Phone number has to be a valid phone number from a customer
+
+* Time has to be formatted on the hour (i.e. minutes of the time is **00**)
+
+</div>
 
 ---
 
@@ -337,7 +346,7 @@ RHRH data are saved in the hard disk automatically after any command that change
 
 ### Editing the data file
 
-RHRH data are saved as a JSON file `[JAR file location]/data/rhrh.json`. Advanced users are welcome to update data directly by editing that data file.
+RHRH data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, RHRH will discard all data and start with an empty data file at the next run.
@@ -364,15 +373,14 @@ Action | Format, Examples
 **Add Employee** | `addemployee n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS l/LEAVES sal/SALARY jt/JOBTITLE [t/TAG]` <br> e.g. `add employee n/John Doe p/87654321 e/e12345@u.nus.edu a/Blk 20 Sengkang Ave 2 l/14 sal/4000 jt/Project Manager`
 **Add supplier** | `addsupplier n/NAME p/PHONE_NUMBER e/EMAIL st/SUPPLYTYPE dd/DELIVERYDETAILS [t/TAG]` <br> e.g. `add supplier n/John Doe p/87654321 e/e12345@u.nus.edu st/Chicken dd/Every Monday`
 **Check a reservation availability** | `check DATE TIME`, `check DATE`, `check TIME` <br> e.g. `check 2021-09-19 1800`, `check 2021-09-19`, `check 1800`
-**Create reservation** | `reserve NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `reserve 2 p/98765432 at/2021-12-24 2000`
-**Clear [COMING SOON]** | `clear`
+**Create reservation** | `addr NUMBER_OF_PEOPLE p/PHONE at/DATE_TIME` <br> e.g. `addr 2 p/98765432 at/2021-12-24 2000`
 **Delete Employee** | `deleteemployee INDEX`<br> e.g., `delete 1`
 **Delete Supplier** | `deletesupplier INDEX`<br> e.g., `delete 2`
 **Delete Customer** | `deletecustomer INDEX`<br> e.g., `delete 3`
 **Edit Employee** | `editemployee INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [l/LEAVES] [sal/SALARY] [jt/JOBTITLE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com sal/7000`
 **Edit Supplier** | `editsupplier INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [st/SUPPLYTYPE] [dd/DELIVERYDETAILS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com st/Beef`
 **Edit Customer** | `editcustomer INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [alg/ALLERGIES] [sr/SPECIALREQUESTS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com alg/Kiwi`
-**Set Tables** | `settables SIZE_OF_TABLES`<br> e.g., `settables 10x4,8x5,3,1x4`
+**Set Tables** | `settables LIST_OF_TABLE_SIZES`<br> e.g., `settables 10,8,8,4,4,2x6,1x4`
 **Find [COMING SOON]** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List [COMING SOON]** | `list`
 **Help [COMING SOON]** | `help`
