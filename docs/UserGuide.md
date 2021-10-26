@@ -216,7 +216,7 @@ member as they are considered duplicates.
 
 <div markdown="span" class="alert alert-primary">
 
-**:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting memebr availability](#setting-member-availability-setm).
+**:bulb: Tip 2:** If you are looking to edit a member's availability, look at [Setting member availability](#setting-member-availability-setm).
 </div>
 
 Examples:
