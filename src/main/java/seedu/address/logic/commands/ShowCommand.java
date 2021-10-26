@@ -7,11 +7,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Assessment;
 import seedu.address.model.student.AssessmentStatistics;
+import seedu.address.model.student.GroupStatistics;
 import seedu.address.model.student.Group;
 import seedu.address.model.student.ID;
 import seedu.address.model.student.IdContainsKeywordsPredicate;
@@ -98,6 +99,8 @@ public class ShowCommand extends Command {
                 ? showStudentByIndex(model)
                 : getAssessment().isPresent()
                 ? showAssessment(model)
+                : getGroup().isPresent()
+                ? showGroup(model)
                 : showStudentByPrefixes(model);
     }
 
@@ -105,6 +108,8 @@ public class ShowCommand extends Command {
      * Executes command when a {@code Student} info is requested by index.
      */
     private CommandResult showStudentByIndex(Model model) throws CommandException {
+        assert getIndex().isPresent();
+
         List<Student> students = model.getFilteredStudentList();
 
         if (index.getZeroBased() >= students.size()) {
@@ -122,9 +127,10 @@ public class ShowCommand extends Command {
      * Executes command when a {@code Student} info is requested by name or ID.
      */
     private CommandResult showStudentByPrefixes(Model model) throws CommandException {
-        Predicate<Student> predicate = createStudentPredicate();
-        assert predicate != null;
+        assert getName().isPresent() || getId().isPresent();
 
+        // filter student list into students with matched identity
+        Predicate<Student> predicate = createStudentPredicate();
         model.updateFilteredStudentList(predicate);
         List<Student> matchedStudents = model.getFilteredStudentList();
 
@@ -170,22 +176,36 @@ public class ShowCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_GROUP);
         }
 
+        // filter student list into students in matched group
+        // (to allow easier reference to students in the interest group)
+        group = matchedGroup;
+        Predicate<Student> predicate = createStudentPredicate();
+        model.updateFilteredStudentList(predicate);
+
         Info info = new Info(matchedGroup);
-        // uncomment when merging with graph display
-        // GroupStatistics statistics = new GroupStatistics(matchedGroup);
-        // return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
-        return new CommandResult(MESSAGE_SUCCESS, info); // delete when merging
+        GroupStatistics statistics = new GroupStatistics(matchedGroup, model);
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
     }
 
     /**
      * Creates a {@code Predicate} checking if a student has a matched name or ID.
      */
     private Predicate<Student> createStudentPredicate() {
-        return getName().isPresent()
-                ? new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")))
-                : getId().isPresent()
-                ? new IdContainsKeywordsPredicate(Collections.singletonList(id.toString()))
-                : null;
+        if (getName().isPresent()) {
+            return new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")));
+        }
+
+        if (getId().isPresent()) {
+            return new IdContainsKeywordsPredicate(List.of(id.toString()));
+        }
+
+        if (getGroup().isPresent()) {
+            List<String> ids = group.getStudents().stream()
+                    .map(ID::toString).collect(Collectors.toList());
+            return new IdContainsKeywordsPredicate(ids);
+        }
+
+        return null;
     }
 
     @Override
