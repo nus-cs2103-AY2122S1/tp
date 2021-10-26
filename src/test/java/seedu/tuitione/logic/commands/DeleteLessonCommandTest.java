@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.tuitione.testutil.TypicalGrades.GRADE_S2;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalLessons.getTypicalTuitione;
@@ -16,6 +17,7 @@ import seedu.tuitione.model.Model;
 import seedu.tuitione.model.ModelManager;
 import seedu.tuitione.model.UserPrefs;
 import seedu.tuitione.model.lesson.Lesson;
+import seedu.tuitione.model.lesson.LessonIsOfSpecifiedGrade;
 
 public class DeleteLessonCommandTest {
     private Model model = new ModelManager(getTypicalTuitione(), new UserPrefs());
@@ -42,7 +44,10 @@ public class DeleteLessonCommandTest {
     }
 
     // Wait till v1.3 when find lesson feature implemented, to implement execute_validIndexFilteredList_success() test
-
+    @Test
+    public void execute_validIndexFilteredList_success() {
+        model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(GRADE_S2));
+    }
 
     // Wait till v1.3 when find lesson feature implemented, to implement
     // execute_invalidIndexFilteredList_throwsCommandException() test

@@ -13,7 +13,7 @@ import seedu.tuitione.commons.util.JsonUtil;
 import seedu.tuitione.model.Tuitione;
 import seedu.tuitione.testutil.TypicalLessons;
 import seedu.tuitione.testutil.TypicalStudents;
-import seedu.tuitione.testutil.TypicalTuition;
+import seedu.tuitione.testutil.TypicalTuitione;
 
 public class JsonSerializableTuitioneTest {
 
@@ -53,7 +53,7 @@ public class JsonSerializableTuitioneTest {
         JsonSerializableTuitione dataFromFile = JsonUtil.readJsonFile(TYPICAL_TUITION_FILE,
                 JsonSerializableTuitione.class).get();
         Tuitione tuitioneFromFile = dataFromFile.toModelType();
-        Tuitione typicalTuitionTuitione = TypicalTuition.getTypicalTuitione();
+        Tuitione typicalTuitionTuitione = TypicalTuitione.getTypicalTuitione();
         assertEquals(typicalTuitionTuitione, tuitioneFromFile);
     }
 

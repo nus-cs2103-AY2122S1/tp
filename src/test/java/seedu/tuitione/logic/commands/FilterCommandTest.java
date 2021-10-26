@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.tuitione.testutil.TypicalTuition.BENSON;
-import static seedu.tuitione.testutil.TypicalTuition.MATH_S2;
-import static seedu.tuitione.testutil.TypicalTuition.PHYSICS_S2;
-import static seedu.tuitione.testutil.TypicalTuition.SCIENCE_P2;
-import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
+import static seedu.tuitione.testutil.TypicalTuitione.BENSON;
+import static seedu.tuitione.testutil.TypicalTuitione.MATH_S2;
+import static seedu.tuitione.testutil.TypicalTuitione.PHYSICS_S2;
+import static seedu.tuitione.testutil.TypicalTuitione.SCIENCE_P2;
+import static seedu.tuitione.testutil.TypicalTuitione.getTypicalTuitione;
 
 import java.util.Arrays;
 import java.util.Collections;

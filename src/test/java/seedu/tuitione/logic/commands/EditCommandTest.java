@@ -13,7 +13,7 @@ import static seedu.tuitione.logic.commands.CommandTestUtil.assertCommandSuccess
 import static seedu.tuitione.logic.commands.CommandTestUtil.showStudentAtIndex;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
-import static seedu.tuitione.testutil.TypicalTuition.MATH_S2;
+import static seedu.tuitione.testutil.TypicalTuitione.MATH_S2;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -31,7 +31,7 @@ import seedu.tuitione.model.student.Student;
 import seedu.tuitione.testutil.EditStudentDescriptorBuilder;
 import seedu.tuitione.testutil.StudentBuilder;
 import seedu.tuitione.testutil.TypicalStudents;
-import seedu.tuitione.testutil.TypicalTuition;
+import seedu.tuitione.testutil.TypicalTuitione;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -180,7 +180,7 @@ public class EditCommandTest {
     @Test
     public void execute_gradeFieldChangedStudentUnenrolledFromLesson_success() {
         // for integration testing
-        Model modelWithStudentsAndLessons = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
+        Model modelWithStudentsAndLessons = new ModelManager(TypicalTuitione.getTypicalTuitione(), new UserPrefs());
 
         // get student BENSON
         Student secondStudent = modelWithStudentsAndLessons
@@ -208,7 +208,7 @@ public class EditCommandTest {
     @Test
     public void execute_gradeFieldNotChangedStudentStillEnrolledForLesson_success() {
         // for integration testing
-        Model modelWithStudentsAndLessons = new ModelManager(TypicalTuition.getTypicalTuitione(), new UserPrefs());
+        Model modelWithStudentsAndLessons = new ModelManager(TypicalTuitione.getTypicalTuitione(), new UserPrefs());
 
         // get student BENSON
         Student secondStudent = modelWithStudentsAndLessons

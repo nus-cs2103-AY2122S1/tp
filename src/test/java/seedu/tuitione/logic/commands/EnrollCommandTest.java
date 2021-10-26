@@ -9,7 +9,7 @@ import static seedu.tuitione.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_LESSON;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_SECOND_STUDENT;
 import static seedu.tuitione.testutil.TypicalIndexes.INDEX_THIRD_STUDENT;
-import static seedu.tuitione.testutil.TypicalTuition.getTypicalTuitione;
+import static seedu.tuitione.testutil.TypicalTuitione.getTypicalTuitione;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

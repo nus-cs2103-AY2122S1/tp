@@ -11,7 +11,7 @@ import seedu.tuitione.model.Tuitione;
 import seedu.tuitione.model.lesson.Lesson;
 import seedu.tuitione.model.student.Student;
 
-public class TypicalTuition {
+public class TypicalTuitione {
 
     // Test Lessons, direct copy from json equivalent
     public static final Student ALICE = TypicalStudents.ALICE;
@@ -21,7 +21,7 @@ public class TypicalTuition {
     public static final Lesson MATH_S2 = TypicalLessons.MATH_S2;
     public static final Lesson PHYSICS_S2 = TypicalLessons.PHYSICS_S2;
 
-    private TypicalTuition() {} //prevents instantiation
+    private TypicalTuitione() {} //prevents instantiation
 
     /**
      * Returns an {@code Tuitione} with a typical tuition setup.
