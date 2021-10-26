@@ -26,10 +26,7 @@ public class CsvAddressBookStorageTest {
     @TempDir
     public Path testFolder;
 
-    @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
-    }
+    // Helper methods
 
     private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
         return new CsvAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
@@ -41,13 +38,38 @@ public class CsvAddressBookStorageTest {
                 : null;
     }
 
+    /**
+     * Saves {@code addressBook} at the specified {@code filePath}.
+     */
+    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+        try {
+            new CsvAddressBookStorage(Paths.get(filePath))
+                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
+    }
+
+    // Test cases
+    @Test
+    public void getAddressBookFilePath_testFilePath_correctFilePath() {
+        Path filePath = addToTestDataPathIfNotNull("invalidPersonAddressBook.csv");
+        assertEquals(filePath, new CsvAddressBookStorage(filePath).getAddressBookFilePath());
+    }
+
+    @Test
+    public void readAddressBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    }
+
     @Test
     public void read_missingFile_emptyResult() throws Exception {
         assertFalse(readAddressBook("NonExistentFile.csv").isPresent());
     }
 
     @Test
-    public void read_notCsvFormat_exceptionThrown() {assertThrows(DataConversionException.class, () -> readAddressBook("notCsvFormatAddressBook.csv"));
+    public void read_notCsvFormat_exceptionThrown() {
+        assertThrows(DataConversionException.class, () -> readAddressBook("notCsvFormatAddressBook.csv"));
     }
 
     @Test
@@ -97,24 +119,11 @@ public class CsvAddressBookStorageTest {
         csvAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = csvAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new AddressBook(readBack));
-
     }
 
     @Test
     public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.csv"));
-    }
-
-    /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
-     */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
-        try {
-            new CsvAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
-        } catch (IOException ioe) {
-            throw new AssertionError("There should not be an error writing to the file.", ioe);
-        }
     }
 
     @Test
