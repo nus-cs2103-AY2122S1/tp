@@ -91,64 +91,43 @@ Examples:
 * `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user` adds John Doe to the list and displays a confirmation
   output without a proper Github link, but storing the `GITHUB USERNAME` in memory nonetheless.
   
+### Marking a student's attendance: `marka`
 
-### Marking a student as present: `marka`
+Marks the specified student(s) in the student list as present or absent.
 
-Marks the specified student in the student list as present or absent.
+Format: `marka INDEX [MORE_INDEXES] /wWEEK NUMBER`
 
-Format: `marka INDEX /wWEEK NUMBER`
-
-* Marks the person as present in the specified `INDEX`.
+* Marks the person(s) as present in the specified `INDEX(ES)`.
 * The index must refer to the index number shown in the displayed students list.
 * The index and week number must be a positive number: 1, 2, 3…
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `marka 1 /w1` marks the 1st person in the students list as present in week 1.
+* `students` followed by `marka 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as present in week 1.
 * Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
-
-Sample Usage:
-
-`> marka 1 /w1`
-
-    > Kho Tze Jit is marked as present for week 1!
-
-`> marka 1 /w1`
-
-    > Kho Tze Jit is marked as absent for week 1!
 
 ### Marking a student's participation: `markp`
 
-Marks the specified student in the student list as participated or not participated.
+Marks the specified student(s) in the student list as participated or not participated.
 
-Format: `markp INDEX /wWEEK NUMBER`
+Format: `markp INDEX [MORE_INDEXES] /wWEEK NUMBER`
 
-* Marks the person as present in the specified `INDEX`.
+* Marks the person(s) as present in the specified `INDEX`.
 * The index must refer to the index number shown in the displayed students list.
 * The index and week number must be a positive number: 1, 2, 3…
 * If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
 
 Examples:
 
-* `students` followed by `markp 1 /w1` marks the 1st person in the students list as participated in week 1.
+* `students` followed by `markp 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
 * Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
 
-Sample Usage:
-
-`> markp 1 /w1`
-
-    > Kho Tze Jit is marked as participated for week 1!
-
-`> markp 1 /w1`
-
-    > Kho Tze Jit is marked as not participated for week 1!
-
-### Deleting a student contact: `delete INDEX`
+### Deleting a student contact: `deleteStudent INDEX`
 
 Deletes the specified student from the student list.
 
-Format: `delete INDEX`
+Format: `deleteStudent INDEX`
 
 * Deletes the person at the specified `INDEX`.
 * The index must refer to the index number shown in the displayed students list.
@@ -156,13 +135,7 @@ Format: `delete INDEX`
 
 Examples:
 
-* `students` followed by `delete 1` removes the 1st person in the students list.
-
-Sample Usage:
-
-`> delete 1`
-
-    > Kho Tze Jit is removed from the student list!
+* `students` followed by `deleteStudent 1` removes the 1st person in the students list.
 
 ### Locating student by name: `findStudent`
 
@@ -235,8 +208,7 @@ Format: `addSG INDEX g/GROUP`
 Examples:
 * `addSG 1 g/W14-4` adds the student with index 1 in the student list to group W14-4 and displays a confirmation output
   that the student has been added to the group
-
-
+  
 ### Add a Github link to a group: `addGG`
 
 Adds a Github link to a specified group.
@@ -318,7 +290,7 @@ Examples:
 
 ### Adding an deadline task: `deadline`
 
-Adds an deadline task with the given name and a specified taskDate.
+Adds a deadline task with the given name, and a specified taskDate.
 
 Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
@@ -328,100 +300,11 @@ Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]
 * Priority, description and tags are similar to Todo Tasks.
 
 Examples:
-* `deadline n/tutorial participation on/2021-09-23 p/H` creates the deadline task "tutorial participation", 
+* `deadline n/tutorial participation by/2021-09-23 p/H` creates the deadline task "tutorial participation", 
   with deadline "2021-09-23" with High Priority.
-* `deadline n/assignment submission on/2021-10-04` creates the deadline task "assignment submission", 
+* `deadline n/assignment submission by/2021-10-04` creates the deadline task "assignment submission", 
   with the deadline "2021-10-04" with LOW Priority.
-
-  which is to be completed by the given date with LOW Priority.
-
-
-### Marking a student's attendance: `marka`
-
-Marks the specified student(s) in the student list as present or absent.
-
-Format: `marka INDEX [MORE_INDEXES] /wWEEK NUMBER`
-
-* Marks the person(s) as present in the specified `INDEX(ES)`.
-* The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number: 1, 2, 3…
-* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
-
-Examples:
-
-* `students` followed by `marka 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as present in week 1.
-* Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
-
-Sample Usage:
-
-`> marka 1 /w1`
-
-
-### Marking a student's participation: `markp`
-
-Marks the specified student(s) in the student list as participated or not participated.
-
-Format: `markp INDEX [MORE_INDEXES] /wWEEK NUMBER`
-
-* Marks the person(s) as present in the specified `INDEX`.
-* The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number: 1, 2, 3…
-* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
-
-Examples:
-
-* `students` followed by `markp 1 2 3 /w1` marks the 1st, 2nd and 3rd person in the students list as participated in week 1.
-* Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
-
-Sample Usage:
-
-`> markp 1 /w1`
-
-    > Kho Tze Jit is marked as participated for week 1!
-
-`> markp 1 /w1`
-
-    > Kho Tze Jit is marked as not participated for week 1!
-
-### Deleting a student contact: `delete INDEX`
-
-Deletes the specified student from the student list.
-
-Format: `delete INDEX`
-
-* Deletes the person at the specified `INDEX`.
-* The index must refer to the index number shown in the displayed students list.
-* The index and week number must be a positive number: 1, 2, 3…
-
-Examples:
-
-* `students` followed by `delete 1` removes the 1st person in the students list.
-
-Sample Usage:
-
-`> delete 1`
-
-    > Kho Tze Jit is removed from the student list!
-
-### Locating student by name: `findStudent`
-
-Finds persons whose names contain any of the given keywords.
-
-Format: `findStudent KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Special characters will be ignored e.g. `Alice!` will match `Alice`
-* Partial names will be matched e.g. `Han` will match `Hans`
-* Students matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `findStudent Joh@` returns `john` and `John Doe`
-* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
-
+  
 ### Deleting a task: `deleteTask INDEX`
 
 Deletes the specified task from the task list.
@@ -440,7 +323,6 @@ Sample Usage:
 
 `> deleteTask 1` removes the first Task from the task list.
 
-
 ### Marking a task as done: : `doneTask`
 
 Mark the specified task from the list as done.
@@ -453,8 +335,6 @@ Format: `doneTask INDEX`
 
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed.
-
-
 
 ### Clearing all entries from student list: `clearStudents`
 
@@ -490,19 +370,17 @@ Format: `exit`
 
 tApp data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-[comment]: <> (TODO)
-### Viewing help : `help` `[coming in v1.3]`
+### Viewing help : `help`
 
-Shows a message explaning how to access the help page.
+Shows a popup with all the available commands.
 
 ![help message](images/helpMessage.png)
 
 Format: `help`
 
-[comment]: <> (TODO)
-### Editing a person : `edit` `[coming in v1.3]`
+### Editing a student : `editStudent`
 
-Edits an existing person in the students list.
+Edits an existing student in the students list.
 
 Format: `edit INDEX [n/NAME] [s/STUDENT_NUMBER] [e/EMAIL] [g/GITHUB_LINK] [t/TAG]…​`
 
@@ -517,7 +395,7 @@ Examples:
 *  `edit 1 s/A0221111L e/johndoe@example.com` Edits the student number and email address of the 1st person to be `A0221111L` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Editing the data file `[coming in v1.3]`
+### Editing the data file
 
 tApp data are saved as a JSON file `[JAR file location]/data/tApp.json`. Advanced users are welcome to update data directly by editing that data file.
 
@@ -525,13 +403,8 @@ tApp data are saved as a JSON file `[JAR file location]/data/tApp.json`. Advance
 If your changes to the data file makes its format invalid, tApp will discard all data and start with an empty data file at the next run.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
-[comment]: <> (TODO)
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
