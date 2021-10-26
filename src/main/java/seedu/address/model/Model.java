@@ -60,11 +60,6 @@ public interface Model {
     boolean hasStudent(Student student);
 
     /**
-     * Returns student in address book with same identity as {@code studentToMatch} if exists.
-     */
-    Student getStudent(Student studentToMatch);
-
-    /**
      * Deletes the given student.
      * The student must exist in the address book.
      */

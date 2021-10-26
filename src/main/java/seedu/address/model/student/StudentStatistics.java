@@ -53,6 +53,7 @@ public class StudentStatistics {
             mean.put(assessment.getName(), statistics.getMean());
             median.put(assessment.getName(), statistics.getMedian());
         });
+        @SuppressWarnings("unchecked")
         Map<String, Number>[] dataSet = new Map[]{mean, median};
         return dataSet;
     }
@@ -63,6 +64,6 @@ public class StudentStatistics {
     public Chart toLineChart() {
         Map<String, Number>[] dataSet = getDataSet();
         return ChartUtil.createLineChart(student.getName() + CHART_TITLE,
-                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, getScoreDistribution(), dataSet[0], dataSet[1]);
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, "score", getScoreDistribution(), dataSet[0], dataSet[1]);
     }
 }

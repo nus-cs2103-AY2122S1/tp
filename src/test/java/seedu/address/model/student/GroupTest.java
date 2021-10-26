@@ -50,7 +50,7 @@ public class GroupTest {
 
     @Test
     public void getValue() {
-        assertEquals(new Group("T02A").getValue(), "T02A");
+        assertEquals(new Group("T02A").getName(), "T02A");
     }
 
     @Test

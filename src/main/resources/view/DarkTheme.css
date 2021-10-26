@@ -341,15 +341,13 @@
     -fx-text-fill: white;
 }
 
-.default-color1.chart-series-line {
+#chart1 .default-color1.chart-series-line {
     -fx-stroke: transparent;
 }
 
-.default-color2.chart-series-line {
+#chart1 .default-color2.chart-series-line {
     -fx-stroke: transparent;
 }
-
-
 
 
 #cardPane {
