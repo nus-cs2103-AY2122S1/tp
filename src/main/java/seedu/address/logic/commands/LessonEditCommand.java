@@ -274,7 +274,7 @@ public class LessonEditCommand extends UndoableCommand {
         // state check
         LessonEditCommand e = (LessonEditCommand) other;
         return index.equals(e.index)
-                && lessonIndex.equals(lessonIndex)
+                && lessonIndex.equals(e.lessonIndex)
                 && editLessonDescriptor.equals(e.editLessonDescriptor);
     }
 
