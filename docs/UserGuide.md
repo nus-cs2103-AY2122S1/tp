@@ -138,7 +138,7 @@ This section lists the types of commands that TutorAid can execute. For more inf
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help message](images/helpWindow.png)
 
 Format: `help`
 
@@ -176,11 +176,11 @@ Format: `del -s STUDENT_INDEX`
 Example:
 * `del -s 2` deletes the 2nd student in TutorAid.
 
-### Editing a student : `edit`
+### Editing a student : `edit -s`
 
 Edits the specified student with the given student index from TutorAid.
 
-Format: `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
+Format: `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`
 
 * Edits the student at the specified STUDENT_INDEX.
 * The index refers to the index number shown in the displayed student list.
@@ -255,33 +255,94 @@ Format: `del -p STUDENT_INDEX`
 Examples:
 * `list` followed by `del -p 2` deletes the progress of the 2nd student in the list.
 
-### Set payment made: `paid`
+### Setting payment made: `paid`
 
-Sets the payment status of the specified student to `paid` for the current month.
+Sets the payment status of the specified student to `Paid for the current month`.
 
 Format: `paid STUDENT_INDEX`
 
-- Sets the payment status for the student at the specified `STUDENT_INDEX` as "paid" for the current month.
+- Sets the payment status for the student at the specified `STUDENT_INDEX` as `Paid for the current month`.
 - The index refers to the index number shown in the displayed student list.
 - The index must be a **positive integer** 1, 2, 3, ...
 
 Example:
 
-- `paid 3` updates the 3rd student's payment status to "paid".
+- `paid 3` updates the 3rd student's payment status to `Paid for the current month`.
 
-### Unset payment made: `unpaid`
+### Unsetting payment made: `unpaid`
 
-Sets the payment status of the specified student to ‘unpaid’ for the current month.
+Sets the payment status of the specified student to `Has not paid for the current month`.
 
 Format: `unpaid STUDENT_INDEX`
 
-- Sets the payment status for the student at the specified `STUDENT_INDEX` as "unpaid" for the current month.
+- Sets the payment status for the student at the specified `STUDENT_INDEX` as `Has not paid for the current month`.
 - The index refers to the index number shown in the displayed student list.
 - The index must be a **positive integer** 1, 2, 3, …
 
 Examples:
 
-- `unpaid 3` updates the 3rd student's payment status to "unpaid".
+- `unpaid 3` updates the 3rd student's payment status to `Has not paid for the current month`.
+
+### Adding a lesson: `add -l`
+
+Adds a new lesson to TutorAid.
+
+Format: `add -l n/LESSON_NAME [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`
+
+* The lesson name should only contain alphanumeric characters and spaces.
+* If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
+* If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
+
+Examples:
+* `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+
+> :bulb: The lesson's capacity, price and timing are optional details for tutors to include.
+
+### Deleting a lesson : `del -l`
+
+Deletes the specified lesson with the given lesson index from TutorAid.
+
+Format: `del -l LESSON_INDEX`
+
+* Deletes the lesson at the specified `LESSON_INDEX`.
+* `LESSON_INDEX` refers to the index number shown in the displayed lesson list.
+* `LESSON_INDEX` must be a **positive integer** 1,2,3, …​
+
+Examples:
+* `del -l 3`
+
+### Editing a lesson: `edit -l`
+
+Edits the specified lesson by updating its fields
+
+Format: `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`
+
+* If provided, the lesson name should only contain alphanumeric characters and spaces.
+* If provided, the lesson's capacity must be a **positive integer** 1, 2, 3, …
+* If provided, the lesson's price must be a **non-negative number** with either 0 or 2 decimal places. Examples of a valid price are `80` and `85.50`.
+* At least 1 out of 4 optional fields must be provided. 
+
+Examples:
+* `edit -l c/20 p/80`
+
+### Locating students or lessons by name: `find -s` / `find -l`
+
+Finds students or lessons whose names contain any of the given keywords. Use `-s` flag to search for students and
+`-l` to search for lessons.
+
+Format: `find FLAG KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Partial keywords will be matched e.g. `Han` will match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find -s John` returns `john`, `John Doe` and `Johnny Liu`
+* `find -l maths` returns `maths`, `Maths 1` and `Mathematics`
+* `find -s alex david` returns `Alex Yeoh`, `David Li`<br>
 <hr>
 
 # 5. FAQ
@@ -296,7 +357,7 @@ Action | Format, Examples
 **Add student** | `add -s sn/STUDENT_NAME [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]…​` <br> e.g., `add -s sn/John Does sp/81234567 pn/Mrs Doe pp/91234567`
 **Clear** | `clear`
 **Delete student** | `del -s STUDENT_INDEX`<br> e.g., `delete 3`
-**Edit student** | `edit STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit 2 pp/91112222`
+**Edit student** | `edit -s STUDENT_INDEX [sn/STUDENT_NAME] [sp/STUDENT_PHONE] [pn/PARENT_NAME] [pp/PARENT_PHONE]`<br>e.g., `edit -s 2 pp/91112222`
 **List** | `list [-a]`<br>e.g., `list`, `list -a`
 **Help** | `help`
 **Set payment made** | `paid STUDENT_INDEX`<br>e.g., `paid 3`
@@ -304,4 +365,9 @@ Action | Format, Examples
 **Add Progress** | `add -p STUDENT_INDEX PROGRESS` <br> e.g., `add -p 2 completed homework`
 **Delete Progress** | `del -p STUDENT_INDEX` <br> e.g., `del -p 2`
 **View** | `view STUDENT_INDEX`<br> e.g., `view 2`
+**Add lesson** | `add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`<br>e.g.,`add -l n/P6 Maths c/20 p/80 t/Monday 1200-1400`
+**Delete lesson** | `del -l LESSON_INDEX` <br>e.g.,`del -l 3`
+**Edit lesson** | `edit -l LESSON_INDEX [n/LESSON_NAME] [c/LESSON_CAPACITY] [p/LESSON_PRICE] [t/LESSON_TIMING]`<br>e.g., `edit -l c/20 p/80` 
+**Find student** | `find -s KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -s roy`
+**Find lesson** | `find -l KEYWORD [MORE_KEYWORDS]`<br>e.g., `find -l maths`
 **Exit** | `exit`
