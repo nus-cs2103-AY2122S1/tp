@@ -6,8 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -116,7 +114,7 @@ public class ShowCommand extends Command {
         if (index.getZeroBased() >= students.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
         }
-        
+
         Student matchedStudent = students.get(index.getZeroBased());
 
         Info info = new Info(matchedStudent);
@@ -193,7 +191,7 @@ public class ShowCommand extends Command {
      */
     private Predicate<Student> createStudentPredicate() {
         if (getName().isPresent()) {
-            return new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")));
+            return new NameEqualsPredicate(name.fullName);
         }
 
         if (getId().isPresent()) {
@@ -276,14 +274,9 @@ public class ShowCommand extends Command {
      * Stores info of a student or an assessment.
      */
     public static class Info {
-        private Index index;
         private Student student;
         private Assessment assessment;
         private Group group;
-
-        public Info(Index index) {
-            setIndex(index);
-        }
 
         public Info(Student student) {
             setStudent(student);
