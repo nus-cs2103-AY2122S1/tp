@@ -1,5 +1,7 @@
 package seedu.address.model.done;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Represents an Applicant's status in RecruitIn; if an Applicant is considered Done, it means that
  * the recruiter has finished helping an Applicant out and will no longer need to contact the Applicant.
@@ -22,7 +24,8 @@ public class Done {
      * Secondary constructor for Done.
      */
     public Done(String doneStatus) {
-        assert (doneStatus.equals(STATUS_DONE) || doneStatus.equals(STATUS_UNDONE));
+        requireNonNull(doneStatus);
+        assert (doneStatus.equalsIgnoreCase(STATUS_DONE) || doneStatus.equalsIgnoreCase(STATUS_UNDONE));
         this.doneStatus = doneStatus;
     }
 
