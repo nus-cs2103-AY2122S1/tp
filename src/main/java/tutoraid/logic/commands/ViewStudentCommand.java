@@ -8,7 +8,6 @@ import tutoraid.commons.core.Messages;
 import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
-import tutoraid.model.lesson.LessonNameContainsKeywordsPredicate;
 import tutoraid.model.student.Student;
 
 /**

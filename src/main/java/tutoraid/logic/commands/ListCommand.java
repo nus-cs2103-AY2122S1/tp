@@ -34,7 +34,7 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
-        model.updateFilteredLessonList(model.PREDICATE_SHOW_ALL_LESSONS);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(viewAll);
         return new CommandResult(MESSAGE_SUCCESS);
     }

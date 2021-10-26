@@ -9,7 +9,6 @@ import tutoraid.commons.core.index.Index;
 import tutoraid.logic.commands.exceptions.CommandException;
 import tutoraid.model.Model;
 import tutoraid.model.lesson.Lesson;
-import tutoraid.model.student.NameContainsKeywordsPredicate;
 
 /**
  * List all details for a lesson in TutorAid to the user.
