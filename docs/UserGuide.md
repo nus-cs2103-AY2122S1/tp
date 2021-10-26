@@ -152,7 +152,7 @@ Examples:
 Mark the specified task from the specified module under the specified student as done.
 This means that this student has completed this task of this module.
 
-Format: `mark done m/<module name> i/<student id> ti<task id>`
+Format: `mark done m/<module name> i/<student id> ti/<task id>`
 
 Examples:
 * `mark done m/CS2103 i/A1234567A ti/T1`:
@@ -164,7 +164,7 @@ Examples:
 Mark the specified task from the specified module under the specified student as undone.
 This means that this student has not completed this task of this module, possibly to correct a mistake by the TA.
 
-Format: `mark undone m/<module name> i/<student id> ti<task id>`
+Format: `mark undone m/<module name> i/<student id> ti/<task id>`
 
 Examples:
 * `mark undone m/CS2103 i/A1234567A ti/T1`:
