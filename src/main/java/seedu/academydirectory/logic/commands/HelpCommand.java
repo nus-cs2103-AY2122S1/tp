@@ -4,8 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.commons.util.CollectionUtil.requireAllNonNull;
 
 import seedu.academydirectory.commons.core.Messages;
+import seedu.academydirectory.logic.AdditionalViewType;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.VersionedModel;
 
 /**
  * Format full help instructions for every command for display.
@@ -45,11 +46,12 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(VersionedModel model) throws CommandException {
         requireNonNull(model);
         if (this.commandWord == null || this.helpMessage == null) {
             throw new CommandException(Messages.MESSAGE_HELP_NOT_EXIST);
         }
+        model.setAdditionalViewType(AdditionalViewType.HELP);
         if (isGeneralHelp) {
             return new CommandResult(MESSAGE_HELP_SUCCESS_GENERAL, this.helpMessage);
         } else {

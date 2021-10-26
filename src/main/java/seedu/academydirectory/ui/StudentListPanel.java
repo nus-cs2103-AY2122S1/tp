@@ -20,13 +20,16 @@ public class StudentListPanel extends UiPart<Region> {
     @FXML
     private ListView<Student> studentListView;
 
+    private final CommandBox commandBox;
+
     /**
      * Creates a {@code StudentListPanel} with the given {@code ObservableList}.
      */
-    public StudentListPanel(ObservableList<Student> studentList) {
+    public StudentListPanel(ObservableList<Student> studentList, CommandBox commandBox) {
         super(FXML);
         studentListView.setItems(studentList);
         studentListView.setCellFactory(listView -> new StudentListViewCell());
+        this.commandBox = commandBox;
     }
 
     /**
@@ -41,7 +44,7 @@ public class StudentListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new StudentCard(student, getIndex() + 1).getRoot());
+                setGraphic(new StudentCard(student, getIndex() + 1, commandBox).getRoot());
             }
         }
     }

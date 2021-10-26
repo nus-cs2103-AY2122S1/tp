@@ -7,6 +7,7 @@ import seedu.academydirectory.commons.core.GuiSettings;
 import seedu.academydirectory.logic.commands.CommandResult;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
 import seedu.academydirectory.logic.parser.exceptions.ParseException;
+import seedu.academydirectory.model.AdditionalViewModel;
 import seedu.academydirectory.model.ReadOnlyAcademyDirectory;
 import seedu.academydirectory.model.student.Student;
 
@@ -47,4 +48,6 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    AdditionalViewModel getAdditionalViewModel();
 }

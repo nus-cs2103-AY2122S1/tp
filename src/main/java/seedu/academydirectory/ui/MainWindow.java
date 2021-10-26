@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
     private StudentListPanel studentListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private VisualiserDisplay visualizerDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -47,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane visualiserDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -111,16 +115,19 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        studentListPanel = new StudentListPanel(logic.getFilteredStudentList());
+        CommandBox commandBox = new CommandBox(this::executeCommand);
+        studentListPanel = new StudentListPanel(logic.getFilteredStudentList(), commandBox);
         studentListPanelPlaceholder.getChildren().add(studentListPanel.getRoot());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        visualizerDisplay = new VisualiserDisplay();
+        visualiserDisplayPlaceholder.getChildren().add(visualizerDisplay.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAcademyDirectoryFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -187,6 +194,7 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            visualizerDisplay.handleAdditionalInfo(logic.getAdditionalViewModel());
 
             if (commandResult.isShowHelp()) {
                 showHelpFrom(commandResult.getHelpContent());

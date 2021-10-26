@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.academydirectory.logic.parser.CliSyntax.PREFIX_TELEGRAM;
 
 import java.util.Collections;
@@ -17,7 +16,7 @@ import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.commons.core.index.Index;
 import seedu.academydirectory.commons.util.CollectionUtil;
 import seedu.academydirectory.logic.commands.exceptions.CommandException;
-import seedu.academydirectory.model.Model;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Email;
 import seedu.academydirectory.model.student.Name;
@@ -58,10 +57,9 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_TELEGRAM + "TELEGRAM] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com"
+            + PREFIX_EMAIL + "johndoe@example.com "
             + PREFIX_TELEGRAM + "@johndoe";
 
     public static final String MESSAGE_EDIT_STUDENT_SUCCESS = "Edited Student: %1$s";
@@ -83,7 +81,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(VersionedModel model) throws CommandException {
         requireNonNull(model);
         List<Student> lastShownList = model.getFilteredStudentList();
 
@@ -99,7 +97,9 @@ public class EditCommand extends Command {
         }
 
         model.setStudent(studentToEdit, editedStudent);
-        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent));
+
+        return new CommandResult(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent),
+                Optional.of(String.format(MESSAGE_EDIT_STUDENT_SUCCESS, editedStudent.getName())));
     }
 
     /**

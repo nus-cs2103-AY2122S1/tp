@@ -18,9 +18,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.academydirectory.commons.core.Messages;
 import seedu.academydirectory.logic.parser.Prefix;
-import seedu.academydirectory.model.Model;
 import seedu.academydirectory.model.ModelManager;
 import seedu.academydirectory.model.UserPrefs;
+import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Information;
 import seedu.academydirectory.model.student.InformationWantedFunction;
 import seedu.academydirectory.model.student.Name;
@@ -28,36 +28,36 @@ import seedu.academydirectory.model.student.Name;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-public class RetrieveCommandTest {
-    private final Model model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
-    private final Model expectedModel = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
+public class GetCommandTest {
+    private final VersionedModel model = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
+    private final VersionedModel expectedModel = new ModelManager(getTypicalAcademyDirectory(), new UserPrefs());
 
     @Test
     public void equals() {
         InformationWantedFunction emailRetrieveFunction = new InformationWantedFunction(PREFIX_EMAIL);
         InformationWantedFunction telegramRetrieveFunction = new InformationWantedFunction(PREFIX_TELEGRAM);
 
-        RetrieveCommand emailRetrieveCommand = new RetrieveCommand(emailRetrieveFunction);
-        RetrieveCommand telegramRetrieveCommand = new RetrieveCommand(telegramRetrieveFunction);
+        GetCommand emailGetCommand = new GetCommand(emailRetrieveFunction);
+        GetCommand telegramGetCommand = new GetCommand(telegramRetrieveFunction);
 
         // same object -> returns true
-        assertEquals(emailRetrieveCommand, emailRetrieveCommand);
-        assertEquals(telegramRetrieveCommand, telegramRetrieveCommand);
+        assertEquals(emailGetCommand, emailGetCommand);
+        assertEquals(telegramGetCommand, telegramGetCommand);
 
         // same values -> returns true
-        RetrieveCommand emailRetrieveCommandCopy = new RetrieveCommand(emailRetrieveFunction);
-        assertEquals(emailRetrieveCommand, emailRetrieveCommandCopy);
+        GetCommand emailGetCommandCopy = new GetCommand(emailRetrieveFunction);
+        assertEquals(emailGetCommand, emailGetCommandCopy);
 
         // different types -> returns false
-        assertNotEquals(1, emailRetrieveCommand);
-        assertNotEquals(0, telegramRetrieveCommand);
+        assertNotEquals(1, emailGetCommand);
+        assertNotEquals(0, telegramGetCommand);
 
         // null -> returns false
-        assertFalse(emailRetrieveCommand.equals(null));
-        assertFalse(telegramRetrieveCommand.equals(null));
+        assertFalse(emailGetCommand.equals(null));
+        assertFalse(telegramGetCommand.equals(null));
 
         // different student -> returns false
-        assertNotEquals(emailRetrieveCommand, telegramRetrieveCommand);
+        assertNotEquals(emailGetCommand, telegramGetCommand);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class RetrieveCommandTest {
         ;
     }
 
-    private void execute_singlePrefix(Prefix prefix, Model model, Name name) {
+    private void execute_singlePrefix(Prefix prefix, VersionedModel model, Name name) {
         InformationWantedFunction function = new InformationWantedFunction(prefix, name);
 
         ObservableList<Information> expectedResponse = model.getAcademyDirectory()
@@ -94,19 +94,19 @@ public class RetrieveCommandTest {
                 .map(Object::toString)
                 .collect(Collectors.joining("\n"));
 
-        RetrieveCommand command = new RetrieveCommand(function);
+        GetCommand command = new GetCommand(function);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_singlePrefixEmptyModel() {
-        Model emptyModel = new ModelManager();
+        VersionedModel emptyModel = new ModelManager();
         String expectedMessage = String.format(Messages.MESSAGE_STUDENTS_LISTED_OVERVIEW, 0);
 
         InformationWantedFunction.SUPPORTED_PREFIX.forEach(prefix -> {
             InformationWantedFunction function = new InformationWantedFunction(prefix);
 
-            RetrieveCommand command = new RetrieveCommand(function);
+            GetCommand command = new GetCommand(function);
             assertCommandSuccess(command, emptyModel, expectedMessage, emptyModel);
         });
     }
