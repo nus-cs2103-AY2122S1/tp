@@ -156,6 +156,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public Group getGroup(Group groupToMatch) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAssessment(Assessment assessment) {
             throw new AssertionError("This method should not be called.");
         }
