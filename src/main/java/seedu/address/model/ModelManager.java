@@ -120,8 +120,8 @@ public class ModelManager implements Model {
     public void sortList(String sortBy) {
         addressBook.sortList(sortBy);
     }
-  
-    @Override 
+
+    @Override
     public void exportPerson(Person person) {
         addressBook.exportPerson(person);
     }
