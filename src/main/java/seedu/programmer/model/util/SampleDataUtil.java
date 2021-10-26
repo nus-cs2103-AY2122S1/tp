@@ -122,7 +122,7 @@ public class SampleDataUtil {
                     double randomLabScore = getRandomLabScore(sampleLab);
                     sampleLab.updateActualScore(randomLabScore);
                 }
-                sampleStudent.addLabResult(sampleLab);
+                sampleStudent.addLab(sampleLab);
             }
             sampleAb.addStudent(sampleStudent);
         }

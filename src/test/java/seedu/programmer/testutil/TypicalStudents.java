@@ -70,7 +70,7 @@ public class TypicalStudents {
     public static ProgrammerError getTypicalProgrammerError() {
         ProgrammerError ab = new ProgrammerError();
         for (Student student : getTypicalStudents()) {
-            student.setLabResultList(getTypicalLabList());
+            student.setLabList(getTypicalLabList());
             ab.addStudent(student);
         }
         return ab;

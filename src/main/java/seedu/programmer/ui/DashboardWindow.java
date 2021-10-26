@@ -80,7 +80,7 @@ public class DashboardWindow extends PopupWindow {
 
         int numStudents = stuList.size();
         int numClasses = classes.size();
-        int numLabs = stuList.size() > 0 ? stuList.get(0).getLabResultList().size() : 0;
+        int numLabs = stuList.size() > 0 ? stuList.get(0).getLabList().size() : 0;
 
         String dataToDisplay = formatDataToDisplay(numStudents, numClasses, numLabs);
         Label label = new Label(dataToDisplay);
