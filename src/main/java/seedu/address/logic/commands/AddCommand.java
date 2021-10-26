@@ -43,7 +43,7 @@ public class AddCommand extends UndoableCommand {
 
     public static final String COMMAND_EXAMPLE = COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_ADDRESS + "S712345 "
+            + PREFIX_ADDRESS + "311 Dover Rd, #02-25 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@gmail.com "
             + PREFIX_PARENT_PHONE + "91234567 "
