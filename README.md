@@ -21,9 +21,9 @@
 5. Create records of individual students
     - Name, Student ID, Class ID, Email as a placeholder for default
     - `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
-6. Create Lab records with Lab number and total score for all students
+6. Add Lab records with Lab number and total score for all students
    - allow user to create new Lab report instances with a Lab number and total score for that lab report. 
-   - `create lab -t 1 -ts 20`
+   - `addlab -t 1 -ts 20`
 7. Filters the records of individual students using query parameters
     - Filters the list of students based on any combination of the following parameters: Name, Student ID, Class ID, Email
     - `filter -cid <CLASS_ID>`
