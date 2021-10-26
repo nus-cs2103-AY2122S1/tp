@@ -12,7 +12,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.EditCommand.EditClientDescriptor;
 import seedu.address.model.client.Client;
 import seedu.address.model.client.ClientId;
-import seedu.address.model.client.NextMeeting;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -116,11 +115,6 @@ public interface Model {
     List<Client> deleteClientByClientIds(List<ClientId> clientIds);
 
     /**
-     * Deletes the meetings from the belonging to the deleted persons
-     */
-    void deleteMeetingsByClients(List<Client> toDelete);
-
-    /**
      * Adds the given client..
      * {@code client} must not already exist in the address book.
      */
@@ -174,14 +168,9 @@ public interface Model {
     ObservableList<Client> getFilteredClientList();
 
     /**
-     * Adds a meeting to the current meeting list
+     * Returns an unmodifiable view of the clients filtered by next meetings for current user.
      */
-    void addNextMeeting(NextMeeting nextMeeting);
-
-    /**
-     * Returns an unmodifiable view of the meetings for current user.
-     */
-    ObservableList<NextMeeting> getSortedNextMeetingList();
+    ObservableList<Client> getSortedNextMeetingList();
 
     /**
      * Updates the filter of the filtered client list to filter by the given {@code predicate}.

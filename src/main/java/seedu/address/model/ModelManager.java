@@ -34,7 +34,8 @@ public class ModelManager implements Model {
     private final SortedList<Client> sortedClients;
     private final FilteredList<Client> filteredClients;
     private final FilteredList<Client> clientToView;
-    private final SortedList<NextMeeting> sortedNextMeetings;
+    private final SortedList<Client> sortedNextMeetings;
+    private final FilteredList<Client> shownNextMeetings;
     private final FilteredList<Tag> filteredTags;
     private final AddressBookList addressBookList;
 
@@ -54,7 +55,8 @@ public class ModelManager implements Model {
         sortedClients = new SortedList<>(this.addressBook.getClientList());
         filteredClients = new FilteredList<>(sortedClients);
 
-        sortedNextMeetings = new SortedList<>(this.addressBook.getSortedNextMeetingsList());
+        sortedNextMeetings = new SortedList<>(checkAllNextMeetings(this.addressBook.getClientList()));
+        shownNextMeetings = new FilteredList<>(sortedNextMeetings);
         filteredTags = new FilteredList<>(this.addressBook.getTagList());
 
         clientToView = new FilteredList<>(this.addressBook.getClientList());
@@ -160,10 +162,6 @@ public class ModelManager implements Model {
         return addressBook.deleteClientByClientIds(clientIds);
     }
 
-    public void deleteMeetingsByClients(List<Client> toDelete) {
-        addressBook.deleteMeetingsByClients(toDelete);
-    }
-
     @Override
     public void addClient(Client client) {
         addressBook.addClient(client);
@@ -174,10 +172,6 @@ public class ModelManager implements Model {
     public List<Client> setClientByClientIds(List<ClientId> clientIds, EditClientDescriptor editedClientDescriptor) {
         requireAllNonNull(clientIds, editedClientDescriptor);
         return addressBook.setClientByClientIds(clientIds, editedClientDescriptor);
-    }
-
-    public void addNextMeeting(NextMeeting nextMeeting) {
-        addressBook.addNextMeeting(nextMeeting);
     }
 
     @Override
@@ -222,8 +216,9 @@ public class ModelManager implements Model {
         return filteredClients;
     }
 
-    public ObservableList<NextMeeting> getSortedNextMeetingList() {
-        return sortedNextMeetings;
+    public ObservableList<Client> getSortedNextMeetingList() {
+        shownNextMeetings.setPredicate((client) -> client.hasNextMeeting());
+        return shownNextMeetings;
     }
 
     @Override
@@ -245,6 +240,22 @@ public class ModelManager implements Model {
     @Override
     public void sortFilteredClientList(Comparator<Client> sorter) {
         sortedClients.setComparator(sorter);
+    }
+
+    private SortedList<Client> checkAllNextMeetings(ObservableList<Client> filteredClients) {
+        SortedList<Client> sortedMeetings = new SortedList<>(filteredClients);
+        sortedMeetings.setComparator((currentPerson, nextPerson) -> {
+            NextMeeting currentMeeting = currentPerson.getNextMeeting();
+            NextMeeting nextMeeting = nextPerson.getNextMeeting();
+            return currentMeeting.isNullMeeting() || nextMeeting.isNullMeeting() ? 1
+                : currentMeeting.date.compareTo(nextMeeting.date) != 0
+                    ? currentMeeting.date.compareTo(nextMeeting.date)
+                    : (currentMeeting.startTime.compareTo(nextMeeting.startTime) != 0
+                    ? currentMeeting.startTime.compareTo(nextMeeting.startTime)
+                    : (currentMeeting.endTime.compareTo(nextMeeting.endTime)));
+        });
+
+        return sortedMeetings;
     }
 
     //=========== Client To View List Accessors =============================================================
