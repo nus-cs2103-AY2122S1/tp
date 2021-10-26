@@ -74,11 +74,11 @@ If you are interested, jump to [Section 2 - Quick Start](#2-quick-start) to lear
 
 1. Download the latest `sellah.jar` from [here](https://github.com/AY2122S1-CS2103T-T12-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your **Sellah**.
+1. Copy the file to the folder you want to use as the _home directory_ for your **Sellah**.
 
 1. Double-click the file to start the app.
 
-1. Alternatively, if you wish to open **Sellah** using command prompt or terminal, key in `java -jar Sellah.jar` and
+1. Alternatively, if you wish to open **Sellah** using command prompt or terminal, key in `java -jar sellah.jar` and
    press `enter` to launch the **Sellah** application.
 
 1. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data. You can use
@@ -435,7 +435,7 @@ Format : `exit`
 Sellah's data are saved in the hard disk automatically after any command that changes the data. There is no need to save
 manually. <br>
 
-Your saved data can be found in the data folder within your home folder of Sellah.
+Your saved data can be found in the data folder within your home directory of Sellah.
 
 In the data folder you will find the text file as shown below.
 
