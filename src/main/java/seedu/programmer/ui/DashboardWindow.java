@@ -1,7 +1,7 @@
 package seedu.programmer.ui;
 
-import java.util.TreeMap;
 import java.util.HashSet;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -98,9 +98,9 @@ public class DashboardWindow extends PopupWindow {
     }
 
     private String formatDataToDisplay(int numStudents, int numClasses, int numLabs) {
-        return "No. of students: " + numStudents + "\n" +
-                "No. of classes: " + numClasses + "\n" +
-                "No. of labs: " + numLabs + "\n\n";
+        return "No. of students: " + numStudents + "\n"
+                + "No. of classes: " + numClasses + "\n"
+                + "No. of labs: " + numLabs + "\n\n";
     }
 
     private String formatLabsToDisplay(TreeMap<ClassId, Integer> labMap) {
