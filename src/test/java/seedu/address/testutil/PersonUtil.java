@@ -19,13 +19,6 @@ import seedu.address.model.person.Person;
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
-     */
-    public static String getAddCommand(Person person) {
-        return "add " + getPersonDetails(person);
-    }
-
-    /**
      * Returns the part of command string for the given {@code person}'s details.
      */
     public static String getPersonDetails(Person person) {
