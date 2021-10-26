@@ -261,8 +261,7 @@ This command will remove **ALL** reservations and overwrite previously set table
 
 Sets the tables with the sizes specified so that reservations can be made
 
-Format:
-* `settables LIST_OF_TABLE_SIZES`
+Format: `settables LIST_OF_TABLE_SIZES`
   * `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
     * **(size of one table)**
     * **(size of one table)x(number of tables with this size)**,<br>
