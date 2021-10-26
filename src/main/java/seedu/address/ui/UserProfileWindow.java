@@ -24,7 +24,7 @@ public class UserProfileWindow extends UiPart<Stage> {
     private Logic logic;
 
     @FXML
-    private Label heading;
+    private Text heading;
 
     @FXML
     private Label userName;
@@ -41,7 +41,6 @@ public class UserProfileWindow extends UiPart<Stage> {
     public UserProfileWindow(Stage root, Logic logic) {
         super(FXML, root);
         this.logic = logic;
-        initializeFields();
     }
 
     public UserProfileWindow(Logic logic) {
@@ -50,6 +49,7 @@ public class UserProfileWindow extends UiPart<Stage> {
 
     public void show() {
         logger.fine("Showing user profile window");
+        initializeFields();
         getRoot().show();
         getRoot().centerOnScreen();
         getRoot().requestFocus();
