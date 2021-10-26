@@ -202,6 +202,11 @@ public class ModelManager implements Model {
         taskListManager.setToDisplayTaskList(person.getName(), true);
     }
 
+    @Override
+    public void displayFilteredTaskList(Predicate<Task> predicate) {
+        taskListManager.setFilteredTasksPredicate(predicate);
+    }
+
     //=========== cache operation =============================================================
     /** Get the next input command in the cache */
     public String getAfter() {
