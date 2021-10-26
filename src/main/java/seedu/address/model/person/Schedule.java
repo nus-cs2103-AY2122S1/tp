@@ -4,12 +4,7 @@ import static seedu.address.model.person.Shift.isValidShift;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.Objects;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -235,27 +230,5 @@ public class Schedule {
             }
         }
         return true;
-    }
-
-    @Override
-    public boolean equals (Object other){
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Schedule)) {
-            return false;
-        }
-        Schedule otherSchedule = (Schedule) other;
-        boolean result = false;
-        int shiftNum = shifts[1].length;
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < shiftNum; j++) {
-                result &= shifts[i][j].equals(otherSchedule.shifts[i][j]);
-            }
-        }
-        return result;
-    }
-    public IntegerProperty getObservable(){
-        return new SimpleIntegerProperty(getTotalWorkingHour());
     }
 }
