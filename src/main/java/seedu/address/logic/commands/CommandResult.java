@@ -32,10 +32,6 @@ public class CommandResult {
 
     private Summary summary;
 
-    private boolean isSorted;
-
-    private String sortBy;
-
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
@@ -93,38 +89,6 @@ public class CommandResult {
         this.showCommandSummary = false;
     }
 
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * the specified {@code isSorted} and other fields set to their default value.
-     * This constructor is called by ListCommand#execute to reset the sorted list
-     * back to the original order.
-     */
-    public CommandResult(String feedbackToUser, boolean isSorted) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = false;
-        this.exit = false;
-        this.display = false;
-        this.displaySummary = false;
-        this.isSorted = isSorted;
-        this.showCommandSummary = false;
-    }
-
-    /**
-     * Constructs a {@code CommandResult} with the specified {@code feedbackToUser},
-     * the specified {@code sortBy} and other fields except for isSorted set to their default value.
-     * isSorted is set to true.
-     */
-    public CommandResult(String feedbackToUser, String sortBy) {
-        this.feedbackToUser = requireNonNull(feedbackToUser);
-        this.showHelp = false;
-        this.exit = false;
-        this.display = false;
-        this.displaySummary = false;
-        this.isSorted = true;
-        this.sortBy = sortBy;
-        this.showCommandSummary = false;
-    }
-
     public String getFeedbackToUser() {
         return feedbackToUser;
     }
@@ -149,20 +113,12 @@ public class CommandResult {
         return displaySummary;
     }
 
-    public boolean isShowSortedList() {
-        return isSorted;
-    }
-
     public Person getPersonToDisplay() {
         return personToDisplay;
     }
 
     public Summary getSummaryToDisplay() {
         return summary;
-    }
-
-    public String getSortBy() {
-        return sortBy;
     }
 
     @Override

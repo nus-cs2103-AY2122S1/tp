@@ -90,4 +90,9 @@ public interface Model {
      * Returns summary of AddressBook
      */
     Summary getSummary();
+
+    /**
+     * Sorts the person list based on {@code sortBy}.
+     */
+    void sortList(String sortBy);
 }

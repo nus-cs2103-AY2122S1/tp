@@ -1,11 +1,7 @@
 package seedu.address.ui;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -74,29 +70,6 @@ public class PersonListPanel extends UiPart<Region> {
     public void handleDisplay(Summary summary) {
         selected.updateSummary(summary);
         selected.setSummary();
-    }
-
-    /**
-     * Resets the display of the sorted contact list to the original order.
-     */
-    public void resetDisplay() {
-        personListView.setItems(personList);
-    }
-
-    /**
-     * Sorts the display of the contact list according to the parameter.
-     * @param sortBy The parameter the comparator compares the contacts by.
-     */
-    public void sortDisplay(String sortBy) {
-        Comparator<Person> compare = null;
-        if (sortBy == "name") {
-            compare = Comparator.comparing(Person::getName);
-        } else if (sortBy == "rating") {
-            compare = Comparator.comparing(Person::getRating).reversed();
-        }
-        List<Person> modifiableList = new ArrayList<>(personList);
-        modifiableList.sort(compare);
-        personListView.setItems(FXCollections.observableList(modifiableList).filtered(unused -> true));
     }
 
     public void setSelectedPersonPanel() {

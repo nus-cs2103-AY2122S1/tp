@@ -14,6 +14,7 @@ public class SortCommandName extends SortCommand {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return new CommandResult(String.format(MESSAGE_SORT_CONTACT_SUCCESS, MESSAGE_SORTED_BY_SUCCESS), "name");
+        model.sortList("name");
+        return new CommandResult(String.format(MESSAGE_SORT_CONTACT_SUCCESS, MESSAGE_SORTED_BY_SUCCESS));
     }
 }

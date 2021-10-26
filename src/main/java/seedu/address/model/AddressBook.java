@@ -95,6 +95,13 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// util methods
 
+    /**
+     * Sorts {@code AddressBook} by {@code sortBy}.
+     */
+    public void sortList(String sortBy) {
+        persons.sortList(sortBy);
+    }
+
     @Override
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons";
