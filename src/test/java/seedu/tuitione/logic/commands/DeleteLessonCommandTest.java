@@ -47,6 +47,15 @@ public class DeleteLessonCommandTest {
     @Test
     public void execute_validIndexFilteredList_success() {
         model.updateFilteredLessonList(new LessonIsOfSpecifiedGrade(GRADE_S2));
+        Lesson lessonToDelete = model.getFilteredLessonList().get(INDEX_FIRST_LESSON.getZeroBased());
+        DeleteLessonCommand deleteLessonCommand = new DeleteLessonCommand(INDEX_FIRST_LESSON);
+
+        String expectedMessage = String.format(DeleteLessonCommand.MESSAGE_DELETE_LESSON_SUCCESS, lessonToDelete);
+
+        ModelManager expectedModel = new ModelManager(model.getTuitione(), new UserPrefs());
+        expectedModel.deleteLesson(lessonToDelete);
+
+        assertCommandSuccess(deleteLessonCommand, model, expectedMessage, expectedModel);
     }
 
     // Wait till v1.3 when find lesson feature implemented, to implement
