@@ -29,9 +29,14 @@ Our app makes it easy to connect with like minded students in your module. Our *
     - [Show a Student Contact - show](#Show)
     - [Importing Student Contacts - import ](#Import)
     - [Exporting Student Contacts - export](#Export)
-  - [Coming Soon](#ComingSoon)
-  - [FAQ](#FAQ)
-  - [Command Summary](#CommandSummary)
+    - [Setting a Contact as Favourite - fav](#SetFavourite)
+    - [Setting a Contact as Unfavourite - unfav](#SetUnFavourite)
+    - [Displaying the Help Window - help](#Help)
+    - [Listing All Student Contacts - list](#List)
+    - [Exiting the App - exit](#Exit)
+ - [Coming Soon](#ComingSoon)
+ - [FAQ](#FAQ)
+ - [Command Summary](#CommandSummary)
 
 <h2 id = "Purpose"> </h2>
 
@@ -50,8 +55,22 @@ This document is the User Guide of CohortConnect. It is intended to provide all 
 5. The UI would look like this:
 
 <p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/WelcomeSplashScreenUi.png?raw=true">
+</p>
+
+> * Welcome Splash Screen
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/ProfileWindowUi.png?raw=true">
+</p>
+
+> * This Window is only displayed once, when the Student launches the App for the first time.
+
+<p align="center">
 <img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/Ui.png?raw=true">
 </p>
+
+> * Main Window.
   
 <h2 id = "Features"> </h2>
 
@@ -65,7 +84,7 @@ Notes about command format:
 
 ## Adding a new Student - `add`
 
-Adds a student to the address book.
+Adds a Student to the Address Book.
 
 Format:
 
@@ -83,7 +102,7 @@ add n/John Doe te/@johndoe123 g/john-doe p/98765432 e/johnd@example.com a/John s
 
 ## Delete a Student - `delete`
 
-Deletes the specified student from the address book.
+Deletes the specified Student Contact from the Address Book.
 
 Format:
 
@@ -101,7 +120,7 @@ delete 7
 
 ## Edit a Student - `edit`
 
-Edits an existing student in the address book.
+Edits an existing Student Contact in the Address Book.
 
 Format: 
 
@@ -119,7 +138,7 @@ edit 1 n/John te/john_123 t/TA
 
 ## Find a Student - `find`
 
-Finds an existing student by name(s), tag(s), or telegram handle(s).
+Finds an existing Student Contact by name(s), tag(s), or telegram handle(s).
 
 Format 1: 
 
@@ -161,7 +180,8 @@ find @alex_1 bobx2
 
 ## Show a Student Contact - `show`
 
-Shows detailed information of a contact. This can be done using the name of the contact or the index.
+Shows detailed information of a Student Contact. This can be done using the name 
+of the contact or the index.
 
 Format 1: 
 
@@ -193,7 +213,7 @@ show 4
 
 ## Importing Student Contacts - `import`
 
-Imports contacts from the specified JSON file.
+Imports Student Contacts from the specified JSON file.
 
 Format:
 
@@ -211,7 +231,7 @@ import CS2103T.JSON
 
 ## Exporting Student Contacts - `export`
 
-Exports contacts to the specified JSON file.
+Exports the Student Contacts to the specified JSON file.
 
 Format
 
@@ -223,6 +243,122 @@ Example:
 
 ```
 export Friends.JSON
+```
+
+<h3 id = "SetFavourite"> </h3>
+
+## Setting a Contact as Favourite - `fav`
+
+Helps to set a particular Student Contact as a Favourite.
+
+Format
+
+```
+fav <INDEX>
+```
+
+Example:
+
+```
+fav 1
+```
+
+<h3 id = "SetUnFavourite"> </h3>
+
+## Setting a Contact as Unfavourite - `unfav`
+
+Helps to set a particular Student Contact as an Unfavourite, only if it
+was set as a Favourite earlier.
+
+Format
+
+```
+unfav <INDEX>
+```
+
+Example:
+
+```
+unfav 1
+```
+
+<h3 id = "Help"> </h3>
+
+## Displaying the Help Window - `help`
+
+Displays the Help Window, which consists of a list
+of possible Commands, and a link to this UserGuide.
+
+Format
+
+```
+help
+```
+
+Example:
+
+```
+help
+```
+
+<p align="center">
+<img src="https://github.com/AY2122S1-CS2103T-T10-1/tp/blob/master/docs/images/HelpWindowUi.png?raw=true">
+</p>
+
+<h3 id = "List"> </h3>
+
+## Listing All Student Contacts - `list`
+
+Lists all the Student Contacts present.
+
+Format
+
+```
+list
+```
+
+Example:
+
+```
+list
+```
+
+<h3 id = "Clear"> </h3>
+
+## Listing All Student Contacts - `clear`
+
+Deletes all the Student Contacts present.
+
+Format
+
+```
+clear
+```
+
+Example:
+
+```
+clear
+```
+
+> WARNING: Use With Caution!
+
+<h3 id = "Exit"> </h3>
+
+## Exiting the App - `exit`
+
+Exits the App.
+
+Format
+
+```
+exit
+```
+
+Example:
+
+```
+exit
 ```
 
 <h2 id = "ComingSoon"> </h2>
@@ -251,13 +387,19 @@ A: Please **strictly** follow the command format to avoid such issues.
 
 | Feature | Command(s) |
 | ------ | ------ |
-| Add a new Student | add n/\<NAME> te/\<TELEGRAM> g/\<GITHUB> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
-| Delete a Student | delete \<INDEX> |
-| Edit a Student | edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [g/\<GITHUB>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>] |
-| Find a Student (by Name) | find \<STRING> |
-| Find a Student (by Tag) | find t/\<TAG> |
-| Find a Student (by Telegram Handle) | find @\<TELEGRAM> |
-| Show a Student Contact (by Name)| show \<NAME> |
-| Show a Student Contact (by Index) | show \<INDEX> |
-| Import Student Contacts | import filename.JSON |
-| Exporting Student Contacts | export filename.JSON |
+| Add a new Student | `add n/\<NAME> te/\<TELEGRAM> g/\<GITHUB> [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>]` |
+| Delete All Student Contacts Present | `clear` |
+| Delete a Student | `delete \<INDEX> ` |
+| Exit the App | `exit` |
+| Edit a Student | `edit \<INDEX> [n/\<NAME>] [te/\<TELEGRAM>] [g/\<GITHUB>] [p/\<PHONE>] [e/\<EMAIL>] [a/\<ADDRESS>] [t/\<TAG>]` |
+| Exporting Student Contacts | `export filename.JSON` |
+| Favourite a Student Contact | `fav \<INDEX>` |
+| Find a Student (by Name) | `find \<STRING> ` |
+| Find a Student (by Tag) | `find t/\<TAG>` |
+| Find a Student (by Telegram Handle) | `find @\<TELEGRAM>` |
+| Show the Help Window | `help` |
+| Import Student Contacts | `import filename.JSON` |
+| List all the Student Contacts Present | `list` |
+| Show a Student Contact (by Name)| `show \<NAME>` |
+| Show a Student Contact (by Index) | `show \<INDEX>` |
+| Unfavourite a Student Contact | `unfav \<INDEX>` |
