@@ -367,6 +367,10 @@ All member data will be removed immediately after this command is executed. This
 [Back to Table of Contents](#table-of-contents)
 
 ### Facility-Specific Features
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:** Facilities are assumed to be available on every day of the week.
+</div>
 
 #### Adding a facility: `addf`
 
@@ -474,6 +478,42 @@ Format: `split DAY`
 Examples:
 * `split 1` splits members into groups for training on Monday of that week and displays the list of allocations to the
   user
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Allocating a member to a facility : `allocate`
+
+If the allocations of the `split` command are undesirable, you can manually allocate a member to a facility <br>
+on a specified day if they are available and the facility is not already at max capacity, using `allocate`.
+
+Format: `allocate MEMBER_INDEX FACILITY_INDEX DAY`
+
+* `MEMBER_INDEX` refers to the index shown in the displayed member list. 
+* `FACILITY_INDEX` refers to the index shown in the displayed facility list.
+* Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+
+Examples:
+* `allocate 1 2 3` adds the member at index 1 in the displayed member list to the allocation list <br> of the facility
+  at index 2 in the displayed facility list on Wednesday.
+
+[Back to Table of Contents](#table-of-contents)
+
+#### Deallocating a member from a facility : `deallocate`
+
+You can easily accommodate changes in member's availability by deallocating a member from a facility they were <br> 
+previously allocated to on a specified day, using `deallocate`.
+
+Format: `deallocate MEMBER_INDEX FACILITY_INDEX DAY`
+
+* `MEMBER_INDEX` refers to the index shown in the displayed member list.
+* `FACILITY_INDEX` refers to the index shown in the displayed facility list.
+* Both `MEMBER_INDEX` and `FACILITY_INDEX` **must be positive integers** 1, 2, 3…
+* `DAY` **must be a positive integer from 1 to 7**, whereby 1 represents Monday and 7 represents Sunday.
+
+Examples:
+* `deallocate 2 4 5` removes the member at index 2 in the displayed member list from the allocation list <br> of the facility
+at index 4 in the displayed facility list on Friday.
 
 [Back to Table of Contents](#table-of-contents)
 
@@ -615,6 +655,8 @@ Action | Format, Examples
 **Edit facility**| `editf INDEX [n/NAME] [l/LOCATION] [t/TIME] [c/CAPACITY]` <br> e.g. `editf 2 n/Court 20 l/University Sports Hall`
 **Find facility**| `findf KEYWORD` <br> e.g. `findf Clementi`, `findf Utown`
 **Split members into facilities**| `split DAY` <br> e.g. `split Mon`
+**Allocate member to a facility**|`allocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `allocate 1 2 5`
+**Deallocate member from a facility**|`deallocate MEMBER_INDEX FACILITY_INDEX DAY` <br> e.g. `deallocate 2 3 4`
 **Clear facilities**|`clearf`
 
 [Back to Table of Contents](#table-of-contents)

@@ -50,8 +50,16 @@ public class Facility {
         return capacity;
     }
 
+    public boolean isMaxCapacity() {
+        return !capacity.isWithinCapacity(personAllocatedList.size());
+    }
+
     public void clearAllocationList() {
         personAllocatedList = new ArrayList<>();
+    }
+
+    public boolean isPersonAllocated(Person person) {
+        return personAllocatedList.contains(person);
     }
 
     public String getPersonsAsString() {
@@ -72,6 +80,10 @@ public class Facility {
 
     public void addPersonToFacility(Person person) {
         personAllocatedList.add(person);
+    }
+
+    public void removePersonFromFacility(Person person) {
+        personAllocatedList.remove(person);
     }
 
     /**
