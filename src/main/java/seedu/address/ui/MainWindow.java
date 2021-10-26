@@ -184,11 +184,9 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Handles the exporting of mailing list.
-     * receives a List of Person objects and calls the serializer
-     * then writes the file
      */
     @FXML
-    private void handleMailingList(CommandResult commandResult) {
+    private void handleMailingList() {
 
         File file = fileChooser.showSaveDialog(primaryStage);
         String pathStr = file.getPath();
@@ -233,7 +231,7 @@ public class MainWindow extends UiPart<Stage> {
             }
 
             if (commandResult.isChooseFile()) {
-                handleMailingList(commandResult);
+                handleMailingList();
             }
 
             return commandResult;
