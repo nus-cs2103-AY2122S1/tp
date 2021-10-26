@@ -36,6 +36,9 @@ public class Capacity {
      * Returns the capacity in integer.
      */
     public int getCapacity() {
+        if (capacity.equals("")) {
+            return Integer.MAX_VALUE;
+        }
         return Integer.parseInt(capacity);
     }
 
