@@ -40,14 +40,6 @@ public class FindEventCommandParserTest {
     private static final String VALID_ROOM_FOR_FIND2 = "A1";
     private static final String VALID_ROOM_FOR_FIND3 = "E200";
 
-    private static final String INVALID_ROOM_DESC1 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND1;
-    private static final String INVALID_ROOM_DESC2 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND2;
-    private static final String INVALID_ROOM_DESC3 = " " + PREFIX_ROOM + INVALID_ROOM_FOR_FIND3;
-
-    private static final String VALID_ROOM_DESC1 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND1;
-    private static final String VALID_ROOM_DESC2 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND2;
-    private static final String VALID_ROOM_DESC3 = " " + PREFIX_ROOM + VALID_ROOM_FOR_FIND3;
-
     private FindEventCommandParser parser = new FindEventCommandParser();
 
     @Test
