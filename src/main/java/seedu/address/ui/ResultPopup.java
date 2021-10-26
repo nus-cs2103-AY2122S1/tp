@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.animation.PauseTransition;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,11 +11,11 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import static java.util.Objects.requireNonNull;
-
 public class ResultPopup extends UiPart<Region> {
 
     private static final String FXML = "ResultPopup.fxml";
+
+    private static final int POPUP_DISPLAY_DURATION_SECONDS = 3;
 
     private Stage primaryStage;
 
@@ -23,6 +25,10 @@ public class ResultPopup extends UiPart<Region> {
     @FXML
     private Label result;
 
+    /**
+     * Creates a result popup.
+     * @param primaryStage stage to show popup on
+     */
     public ResultPopup(Stage primaryStage) {
         super(FXML);
         this.primaryStage = primaryStage;
@@ -30,9 +36,12 @@ public class ResultPopup extends UiPart<Region> {
         popup.getContent().add(result);
     }
 
+    /**
+     * Displays popup on primary stage for POPUP_DISPLAY_DURATION_SECONDS.
+     */
     public void show() {
         popup.show(primaryStage);
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
+        PauseTransition delay = new PauseTransition(Duration.seconds(POPUP_DISPLAY_DURATION_SECONDS));
         delay.setOnFinished(event -> popup.hide());
         delay.play();
     }
@@ -43,7 +52,7 @@ public class ResultPopup extends UiPart<Region> {
         if (isError && !styleClass.contains("command-error")) {
             styleClass.add("command-error");
         }
-        if(!isError){
+        if (!isError) {
             styleClass.remove("command-error");
         }
         result.setText(feedbackToUser);
