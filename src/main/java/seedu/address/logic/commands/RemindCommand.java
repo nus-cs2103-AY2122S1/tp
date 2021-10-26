@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 /**
- * Displays a list upcoming lessons within two days from current time.
+ * Displays a list of upcoming lessons within two days from current time.
  */
 public class RemindCommand extends Command {
     public static final String COMMAND_WORD = "remind";

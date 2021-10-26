@@ -20,7 +20,7 @@ import seedu.address.model.lesson.Lesson;
 public class ReminderWindow extends ExternalWindow {
     private static final String FXML = "ReminderWindow.fxml";
     private static final Logger logger = LogsCenter.getLogger(ReminderWindow.class);
-    private static final String PLACEHOLDER_MESSAGE = "There is no upcoming lessons.";
+    private static final String PLACEHOLDER_MESSAGE = "There is no upcoming lesson.";
 
     @FXML
     private ListView<Entry<Lesson>> lessonsList;
@@ -62,7 +62,8 @@ public class ReminderWindow extends ExternalWindow {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of an upcoming {@code Lesson}
+     * using a {@code ReminderLessonCard}.
      */
     class LessonListViewCell extends ListCell<Entry<Lesson>> {
         @Override
