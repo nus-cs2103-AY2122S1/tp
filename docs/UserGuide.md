@@ -213,12 +213,12 @@ This subsection serves to list out the parameters used in FAST.
 To achieve the best possible experience, avoid adding excessively long input to FAST.
 </div><br>
 
-####`ADDRESS` 
+#### `ADDRESS` 
 * The address of your client
 * Can take any value (should not be *blank*)
 
 
-####`COMMAND`
+#### `COMMAND`
 * The type of command available in FAST:
   * `Quick Start`
   * `Add`
@@ -241,7 +241,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * `Misc`
 
 
-####`DATE`
+#### `DATE`
 * The date of an appointment with your client
 * Should be in this format: `yyyy-mm-dd` 
   * e.g. `2023-05-15` 
@@ -251,7 +251,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * `dd` (day): should be a valid calendar day between 01 - 31 (might be less than 31 depending on the month)
 
 
-####`EMAIL`
+#### `EMAIL`
 * The email address of your client
 * Should be in this format: `local-part@domain`
 * `local-part`: 
@@ -263,34 +263,34 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * each domain label is separated using hyphens (if any)
 
 
-####`INDEX`
+#### `INDEX`
 * Refers to the number shown in the displayed client list
 * **Must be a positive integer** 1, 2, 3, …​
 
 
-####`NAME`
+#### `NAME`
 * Name of your client
 * Should only contain alphanumeric characters and spaces (should not be blank)
 
 
-####`PHONE`
+#### `PHONE`
 * The contact number of your client
 * Should only contain numbers
 * Should be at least **3** digit long
 
 
-####`QUERY`
+#### `QUERY`
 * The term used to search for clients in FAST
 * `MORE QUERIES` also follows this definition
 * Can be any value but blank
 
 
-####`REMARK`
+#### `REMARK`
 * Extra notes given for your client
 * Should not be more than **75** characters
 
 
-####`TAG`
+#### `TAG`
 * A label given to your client
 * There are 3 types of `TAG` in FAST:
   1. Normal Tags: should not be longer than 20 characters
@@ -298,7 +298,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   3. Investment Plan Tag: either one of the 7 plans (health, invest, life, motor, property, save or travel)
 * Refer to [Tags](#tags) to find out more about each tag
 
-####`TIME`
+#### `TIME`
 * The timing of an appointment with your client
 * 24-hour format
 * Should be in this format: `HH:mm` 
@@ -308,7 +308,7 @@ To achieve the best possible experience, avoid adding excessively long input to 
   * `mm` (minute): should be between 00 and 59
 
 
-####`Venue`
+#### `Venue`
 * The location of an appointment with your client
 * Should not be longer than **30** characters long
 <br> <br>
