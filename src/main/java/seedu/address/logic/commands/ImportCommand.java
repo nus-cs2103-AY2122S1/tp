@@ -100,6 +100,7 @@ public class ImportCommand extends Command {
                 Person person = new Person(name, phone, availability, tags);
                 personList.add(person);
             }
+            br.close();
             return personList;
         } catch (FileNotFoundException e) {
             throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, filePath));

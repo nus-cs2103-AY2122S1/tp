@@ -50,10 +50,19 @@ public class Facility {
         return capacity;
     }
 
+    public List<Person> getPersonAllocatedList() {
+        return personAllocatedList;
+    }
+
     public void clearAllocationList() {
         personAllocatedList = new ArrayList<>();
     }
 
+    /**
+     * Returns the allocated list as a String separated by commas.
+     *
+     * @return the allocated list as a String.
+     */
     public String getPersonsAsString() {
         if (personAllocatedList == null) {
             return "no person allocated";
@@ -63,6 +72,9 @@ public class Facility {
         personAllocatedList.forEach(person -> builder
                 .append(person.getName()).append(", "));
 
+        if (builder.length() != 0) {
+            builder.deleteCharAt(builder.length() - 2);
+        }
         return builder.toString();
     }
 
