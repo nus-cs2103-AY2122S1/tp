@@ -14,7 +14,6 @@ import seedu.programmer.model.student.UniqueStudentList;
  * Duplicates are not allowed (by .isSameStudent comparison)
  */
 public class ProgrammerError implements ReadOnlyProgrammerError {
-
     private final UniqueStudentList students;
 
     /*

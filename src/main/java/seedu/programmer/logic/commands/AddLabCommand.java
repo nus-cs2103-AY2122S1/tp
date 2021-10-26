@@ -64,6 +64,7 @@ public class AddLabCommand extends Command {
         if (exists) {
             throw new CommandException(String.format(MESSAGE_LAB_ALREADY_EXISTS, result));
         } else {
+            model.addLab(result);
             return new CommandResult(String.format(MESSAGE_ADD_LAB_SUCCESS, result));
         }
     }
