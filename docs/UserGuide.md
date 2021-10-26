@@ -88,7 +88,7 @@ Here are some of the icons used in this user guide and what each of them represe
 
 Tips are useful information that can help you have a better experience with our application.
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<div markdown="span" class="alert alert-primary">:bulb:
 Tip: Tips are useful!
 </div>
 
@@ -96,7 +96,7 @@ Tip: Tips are useful!
 
 Important Information are messages that are crucial for you to know in order to use our application smoothly.
 
-<div markdown="span" class="alert alert-info">:information_source: **Info:**
+<div markdown="span" class="alert alert-info">:information_source:
 Important Information: Remember the importance of this icon!
 </div>
 
