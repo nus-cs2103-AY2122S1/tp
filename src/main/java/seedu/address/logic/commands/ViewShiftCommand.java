@@ -6,14 +6,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TIME;
 
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Period;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Shift;
 import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
+import seedu.address.storage.RoleReqStorage;
 
 
 /**
@@ -21,7 +24,7 @@ import seedu.address.model.person.predicates.PersonIsWorkingPredicate;
  * which views the schedule by Person.
  */
 public class ViewShiftCommand extends Command {
-    public static final String DEFAULT_MESSAGE = "Staff working on shift ";
+
     public static final String COMMAND_WORD = "viewShift";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": find the staff working at the specified shift\n\n"
             + "Parameters:\n"
@@ -43,6 +46,10 @@ public class ViewShiftCommand extends Command {
     private final PersonIsWorkingPredicate isWorkingPredicate;
     private final Period periodToLookAt;
 
+    private String defaultMessage = "Staff working on shift: ";
+    private int[] finalRoleReqCheck = new int[]{};
+    private String finalRoleReqMessage;
+
     /**
      * Constructs a ViewShiftCommand object.
      *
@@ -54,8 +61,8 @@ public class ViewShiftCommand extends Command {
         this.dayOfWeek = dayOfWeek;
         this.slotNum = slotNum;
         this.time = time;
-        this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time, period);
         this.periodToLookAt = period;
+        this.isWorkingPredicate = new PersonIsWorkingPredicate(dayOfWeek, slotNum, time, period);
     }
 
     @Override
@@ -66,11 +73,15 @@ public class ViewShiftCommand extends Command {
             throw new CommandException(STAFF_LIST_EMPTY);
         }
         model.updateFilteredPersonList(isWorkingPredicate);
+        setRoleReqMessage(model);
         staffs = model.getFilteredPersonList();
+
         // Assumes either time is null, or dayOfWeek and slotNum is null (as passed in by ViewShiftCommandParser)
         if (time != null && dayOfWeek != null) {
+            this.defaultMessage += String.format("%s-%s\n", dayOfWeek, time);
             return executeViewShiftByTime(staffs);
         } else if (slotNum != INVALID_SLOT_NUMBER && dayOfWeek != null) {
+            this.defaultMessage += String.format("%s-%s\n", dayOfWeek, slotNum);
             return executeViewShiftBySlot(staffs);
         } else {
             throw new CommandException(HELP_MESSAGE);
@@ -88,7 +99,6 @@ public class ViewShiftCommand extends Command {
         int counter = 1;
         for (Person p : staffs) {
             boolean hasShift = p.isWorking(dayOfWeek, slotNum, periodToLookAt);
-            result.append(dayOfWeek).append(" ").append(slotNum).append(":\n");
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;
@@ -97,7 +107,7 @@ public class ViewShiftCommand extends Command {
         if (counter == 0) {
             return new CommandResult(NO_STAFF_WORKING);
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result.toString());
+            return new CommandResult(defaultMessage + result.toString() + finalRoleReqMessage);
         }
     }
 
@@ -114,7 +124,7 @@ public class ViewShiftCommand extends Command {
         } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
             return new CommandResult(HELP_MESSAGE + getWorkingStaffByTime(staffs));
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result);
+            return new CommandResult(defaultMessage + result + finalRoleReqMessage);
         }
     }
 
@@ -138,5 +148,44 @@ public class ViewShiftCommand extends Command {
                 && (this.dayOfWeek == null || this.dayOfWeek.equals(((ViewShiftCommand) other).dayOfWeek))
                 && (this.slotNum != INVALID_SLOT_NUMBER || this.slotNum == ((ViewShiftCommand) other).slotNum)
                 && (this.time == null || this.time.equals(((ViewShiftCommand) other).time)));
+    }
+
+    private boolean checkRoleReq(Model model) {
+        int[] roleReqCheck = new int[]{0, 0, 0}; // bartender, floor, kitchen
+        ObservableList<Person> staffWorking = model.getFilteredPersonList();
+
+        for (Person p : staffWorking) {
+            Set<Role> pRoles = p.getRoles();
+            for (Role r : pRoles) {
+                if (r.getValue().equals("bartender")) {
+                    roleReqCheck[0] += 1;
+                } else if (r.getValue().equals("floor")) {
+                    roleReqCheck[1] += 1;
+                } else if (r.getValue().equals("kitchen")) {
+                    roleReqCheck[2] += 1;
+                }
+            }
+        }
+
+        finalRoleReqCheck = roleReqCheck;
+        if (roleReqCheck[0] < RoleReqStorage.getMinNumBartender()) {
+            return false;
+        } else if (roleReqCheck[1] < RoleReqStorage.getMinNumFloor()) {
+            return false;
+        } else {
+            return roleReqCheck[2] >= RoleReqStorage.getMinNumKitchen();
+        }
+    }
+
+    private void setRoleReqMessage(Model model) {
+        String roleReqMessage = checkRoleReq(model)
+                ? ""
+                : "\n\nThere is a manpower shortage! You are supposed to have:\n"
+                + RoleReqStorage.getRoleReqs() + "\n\n"
+                + "But you currently have:\n"
+                + "Bartender: " + finalRoleReqCheck[0] + "\n"
+                + "Floor: " + finalRoleReqCheck[1] + "\n"
+                + "Kitchen: " + finalRoleReqCheck[2] + "\n";
+        finalRoleReqMessage = roleReqMessage;
     }
 }

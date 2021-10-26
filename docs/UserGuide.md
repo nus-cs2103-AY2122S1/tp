@@ -115,19 +115,31 @@ Flags|Name
 ### Utility Features
 
 #### Viewing help : `help`
-
-Shows a message explaning how to access the help page.
+Shows a message explaining how to access the help page.
 
 Format: `help`
 
 ![help message](images/helpMessage.png)
 
 #### Changing tabs : `tab`
-
 Switches between the tabs: staff view and schedule.
 
 Format: `tab`
 
+#### Setting Role Requirements : `setRoleReq `
+
+Set the minimum number of staff required for each shift. The three roles are: kitchen, floor and bartender. 
+Multiple roles can be set with this same command, but if the same role occurs multiple times, the last instance will be
+used.
+
+Format:
+
+`setRoleReq r/ROLE-NUMBER_REQUIRED...`
+
+Examples:
+
+`setRoleReq r/floor-3`\
+`setRoleReq r/kitchen-4 r/bartender-2`
 
 #### Listing all persons : `list`
 
