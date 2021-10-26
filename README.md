@@ -24,20 +24,26 @@
 6. Add Lab records with Lab number and total score for all students
    - allow user to create new Lab report instances with a Lab number and total score for that lab report. 
    - `addlab -t 1 -ts 20`
-7. Filters the records of individual students using query parameters
+7. Edit Lab records with Lab number and total score for all students
+   - allow user to edit existing Lab report title and total score.
+   - `editlab -i 1 -t 1 -s 15`
+8. Delete Lab records with Lab number and total score for all students
+    - allow user delete an existing Lab report instances.
+    - `dellab -t 1`
+9. Filters the records of individual students using query parameters
     - Filters the list of students based on any combination of the following parameters: Name, Student ID, Class ID, Email
     - `filter -cid <CLASS_ID>`
-8. Edit a student's record
-    - Edit a student's details at a particular given index off the list
-    - Details that can be edited include Name Student ID, Class ID, Email, Lab scores
-    - `edit <INDEX> -cid <NEW CLASS_ID>`
-10. Delete a student's record
+10. Edit a student's record
+     - Edit a student's details at a particular given index off the list
+     - Details that can be edited include Name Student ID, Class ID, Email, Lab scores
+     - `edit <INDEX> -cid <NEW CLASS_ID>`
+11. Delete a student's record
      - Delete the entry of the entire student based on a given index off the list
      - `delete <INDEX>`
-11. Automatically Sorted Class Records
+12. Automatically Sorted Class Records
      - List will always display the students in a sorted order
      - Sorting key(s): Class ID then Student's Name
-12. Save data to Hard Disk
+13. Save data to Hard Disk
     - Save whenever there is a change (create/edit/delete)
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
