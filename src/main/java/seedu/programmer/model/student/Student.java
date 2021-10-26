@@ -89,8 +89,8 @@ public class Student {
         return labList;
     }
 
-    public Lab getLab(int index) {
-        return labList.stream().findFirst().orElse(null);
+    public Lab getLab(int labNum) {
+        return labList.stream().filter(x -> x.getLabNum() == labNum).findFirst().orElse(null);
     }
 
     //todo check comment out
