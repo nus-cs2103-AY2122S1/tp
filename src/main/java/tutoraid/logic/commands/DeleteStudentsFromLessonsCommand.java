@@ -171,6 +171,7 @@ public class DeleteStudentsFromLessonsCommand extends DeleteCommand {
         }
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(true);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentsToEdit, lessonsToEdit));

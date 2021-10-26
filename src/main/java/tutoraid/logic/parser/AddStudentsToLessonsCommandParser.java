@@ -12,13 +12,13 @@ import tutoraid.logic.commands.AddStudentsToLessonsCommand;
 import tutoraid.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new PaidCommand object
+ * Parses input arguments and creates a new AddStudentsToLessonsCommand object
  */
 public class AddStudentsToLessonsCommandParser implements Parser<AddStudentsToLessonsCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of AddProgressCommand
-     * and returns an AddProgressCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of AddStudentsToLessonsCommand
+     * and returns an AddStudentsToLessonsCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentsToLessonsCommand parse(String args) throws ParseException {

@@ -16,7 +16,7 @@ import tutoraid.model.student.Student;
 
 
 /**
- * Adds progress string to an exiting student in TutorAid. Updates the progress if one already exists.
+ * Adds students to lessons in TutorAid.
  */
 public class AddStudentsToLessonsCommand extends AddCommand {
 
@@ -77,7 +77,6 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      */
     private boolean isAnyOfTheseStudentsAttendingAnyOfTheseLessons(
             ArrayList<Student> students, ArrayList<Lesson> lessons) {
-
         requireNonNull(students);
         requireNonNull(lessons);
         for (Lesson lesson : lessons) {
@@ -138,7 +137,6 @@ public class AddStudentsToLessonsCommand extends AddCommand {
      */
     public ArrayList<Student> getStudentsToAdd (
             List<Student> lastShownStudentList, ArrayList<Index> targetIndexesForStudents) throws CommandException {
-
         ArrayList<Student> studentsToEdit = new ArrayList<>();
         for (Index index : targetIndexesForStudents) {
             requireNonNull(index);
@@ -198,6 +196,7 @@ public class AddStudentsToLessonsCommand extends AddCommand {
         }
 
         model.updateFilteredStudentList(Model.PREDICATE_SHOW_ALL_STUDENTS);
+        model.updateFilteredLessonList(Model.PREDICATE_SHOW_ALL_LESSONS);
         model.viewList(true);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, studentsToEdit, lessonsToEdit));
