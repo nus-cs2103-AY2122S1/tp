@@ -126,6 +126,11 @@ public class GroupList {
         Collections.copy(groups, group.groups);
     }
 
+    //TODO: delete
+    public List<Group> getGroups() {
+        return groups;
+    }
+
     /**
      * Replaces the contents of this list with {@code groups}.
      * {@code groups} must not contain duplicate groups.

@@ -100,6 +100,9 @@ public interface Model {
      */
     Assessment getAssessment(Assessment assessmentToMatch);
 
+    //TODO: delete
+    Group getGroup(Group assessmentToMatch);
+
     /**
      * Adds the given assessment.
      * {@code assessment} must not already exist in the address book.

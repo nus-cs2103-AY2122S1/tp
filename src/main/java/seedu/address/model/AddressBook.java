@@ -174,6 +174,17 @@ public class AddressBook implements ReadOnlyAddressBook {
         return null;
     }
 
+    //TODO: delete
+    public Group getGroup(Group assessmentToMatch) {
+        requireNonNull(assessmentToMatch);
+        for (Group group : groups.getGroups()) {
+            if (group.getName().equals(assessmentToMatch.getName())) {
+                return group;
+            }
+        }
+        return null;
+    }
+
     /**
      * Adds an assessment to the address book.
      * The assessment must not already exist in the address book.

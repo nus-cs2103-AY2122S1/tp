@@ -129,6 +129,6 @@ public class GroupStatistics {
     public Chart toLineChart() {
         Map<String, Number>[] dataSet = getDataSet();
         return ChartUtil.createLineChart(String.format(CHART_TITLE, group.getName()),
-                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, dataSet[0], dataSet[2], dataSet[3]);
+                CHART_X_AXIS_LABEL, CHART_Y_AXIS_LABEL, dataSet[0], dataSet[1], dataSet[2], dataSet[3]);
     }
 }
