@@ -53,9 +53,9 @@ public class StudentStatistics {
             mean.put(assessment.getName(), statistics.getMean());
             median.put(assessment.getName(), statistics.getMedian());
         });
-//        Map<String, Number>[] dataSet = new Map[]{mean, median};
-//        return dataSet;
-        return new Map[]{mean, median};
+        @SuppressWarnings("unchecked")
+        Map<String, Number>[] dataSet = new Map[]{mean, median};
+        return dataSet;
     }
 
     /**
