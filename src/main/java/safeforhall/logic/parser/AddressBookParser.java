@@ -10,6 +10,7 @@ import safeforhall.logic.commands.ClearCommand;
 import safeforhall.logic.commands.Command;
 import safeforhall.logic.commands.DeadlineCommand;
 import safeforhall.logic.commands.ExitCommand;
+import safeforhall.logic.commands.ExportCommand;
 import safeforhall.logic.commands.HelpCommand;
 import safeforhall.logic.commands.ImportCommand;
 import safeforhall.logic.commands.IncludeCommand;
@@ -119,6 +120,9 @@ public class AddressBookParser {
 
         case ImportCommand.COMMAND_WORD:
             return new ImportCommandParser().parse(arguments);
+
+        case ExportCommand.COMMAND_WORD:
+            return new ExportCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
