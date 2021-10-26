@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ASSESSMENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SCORE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TELEGRAM_HANDLE;
@@ -66,8 +67,8 @@ public class CommandTestUtil {
     public static final String TELEGRAM_HANDLE_DESC_BOB = " " + PREFIX_TELEGRAM_HANDLE + VALID_TELEGRAM_HANDLE_BOB;
     public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String GROUP_NAME_DESC_AMY = " " + VALID_GROUP_NAME_AMY;
-    public static final String GROUP_NAME_DESC_BOB = " " + VALID_GROUP_NAME_BOB;
+    public static final String GROUP_NAME_DESC_AMY = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_AMY;
+    public static final String GROUP_NAME_DESC_BOB = " " + PREFIX_GROUP_NAME + VALID_GROUP_NAME_BOB;
     public static final String ASSESSMENT_NAME_DESC_QUIZ1 = " " + PREFIX_ASSESSMENT_NAME + VALID_ASSESSMENT_NAME_QUIZ1;
     public static final String ASSESSMENT_NAME_DESC_LAB5 = " " + PREFIX_ASSESSMENT_NAME + VALID_ASSESSMENT_NAME_LAB5;
     public static final String SCORE_DESC_QUIZ1 = " " + PREFIX_SCORE + VALID_SCORE_QUIZ1;

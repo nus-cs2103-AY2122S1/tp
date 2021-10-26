@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_NAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -15,8 +18,7 @@ public class DeleteGroupCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        String validGroupName = "CS2103T";
-        assertParseSuccess(parser, validGroupName, new DeleteGroupCommand(new GroupName(validGroupName)));
+        assertParseSuccess(parser, GROUP_NAME_DESC_AMY, new DeleteGroupCommand(new GroupName(VALID_GROUP_NAME_AMY)));
     }
 
     @Test
@@ -24,4 +26,7 @@ public class DeleteGroupCommandParserTest {
         assertParseFailure(parser, "%",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteGroupCommand.MESSAGE_USAGE));
     }
+
+
+
 }
