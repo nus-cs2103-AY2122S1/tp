@@ -94,11 +94,15 @@ The features in this guide are formatted with the following conventions:
 
 For additional information accompanying each segment, look for the following icons:
 
+<div>
+  
 &emsp; ℹ️ precedes information that are useful to remember. 
 
 &emsp; 💡 precedes information that serve as tips for a feature.
 
 &emsp; ⚠️ precedes information as an important warning.
+  
+</div>
 
 Jump right in to the next section [2 Get Started](#2-get-started) to get you started!
 
