@@ -1,5 +1,6 @@
 package seedu.address.model.schedule;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javafx.collections.ObservableList;
@@ -60,6 +61,21 @@ public class Appointment {
     }
 
     /**
+     * Returns the urgency of this appointment.
+     * Returns HIGH if appointment is in 2 days, MEDIUM if it is in a week and LOW otherwise
+     * @return the urgency of this appointment.
+     */
+    public Urgency getUrgency() {
+        if (LocalDateTime.now().plusDays(2).isAfter(timePeriod.getStartDateTime())) {
+            return Urgency.HIGH;
+        } else if (LocalDateTime.now().plusDays(8).isAfter(timePeriod.getStartDateTime())) {
+            return Urgency.MEDIUM;
+        } else {
+            return Urgency.LOW;
+        }
+    }
+
+    /**
      * Checks if this appointment is related to the client.
      * @param person the client to check with.
      * @return true if the client is related and false otherwise.
@@ -68,6 +84,29 @@ public class Appointment {
         return this.clients.contains(person);
     }
 
+    /**
+     * Checks whether this {@Code Appointment}'s client list is empty.
+     * @return A boolean value indicating whether the client list is empty.
+     */
+    public boolean isClientListEmpty() {
+        return this.clients.isEmpty();
+    }
+
+    /**
+     * Remove a given person from the client list of this {@code Appointment}.
+     * @param personToRemove the given person to be removed.
+     */
+    public void removeClient(Person personToRemove) {
+        this.clients.remove(personToRemove);
+    }
+
+    /**
+     * Add a given person to the client list of this {@Code Appointment}.
+     * @param personToAdd the given person to be added.
+     */
+    public void addClient(Person personToAdd) {
+        this.clients.add(personToAdd);
+    }
     /**
      * Returns true if both Appointments have the same fields.
      */
@@ -86,6 +125,15 @@ public class Appointment {
                 && otherApp.getLocation().equals(getLocation())
                 && otherApp.getTimePeriod().equals(getTimePeriod())
                 && otherApp.getDescription().equals(getDescription());
+    }
+
+    /**
+     * Checks whether the given client is the only client in the client list of this {@Code Appointment}.
+     * @param client the given client.
+     * @return A boolean value indicating whether the given client is the only client.
+     */
+    public boolean isTheOnlyClient(Person client) {
+        return this.hasClient(client) && this.getClientList().size() == 1;
     }
 
     @Override

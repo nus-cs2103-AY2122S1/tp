@@ -98,6 +98,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Checks whether this {@Code UniquePersonList} is empty.
+     * @return a boolean value indicting whether this {@Code UniquePersonList} is empty.
+     */
+    public boolean isEmpty() {
+        return this.internalList.isEmpty();
+    }
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
