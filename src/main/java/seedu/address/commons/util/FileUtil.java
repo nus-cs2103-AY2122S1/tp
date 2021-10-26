@@ -1,6 +1,8 @@
 package seedu.address.commons.util;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
@@ -80,4 +82,15 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Gets the path of the folder which the jar file is located in (or whatever is used to launch the app)
+     */
+    public static Path getAppEnclosingFolder() {
+        try {
+            return Path.of(new File(FileUtil.class.getProtectionDomain()
+                    .getCodeSource().getLocation().toURI()).getPath()).getParent();
+        } catch (URISyntaxException e) {
+            return null;
+        }
+    }
 }
