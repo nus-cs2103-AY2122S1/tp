@@ -1,5 +1,7 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -58,6 +60,7 @@ public class MainApp extends Application {
 
     private Stage stage;
     private UserPrefs userPrefs;
+    private boolean isLoggedIn;
 
     @Override
     public void init() throws Exception {
@@ -207,30 +210,49 @@ public class MainApp extends Application {
      * Attempts to log in with the given password.
      *
      * @param input The input password from user.
+     * @return {@code true} if the password is correct, {@code false} otherwise
      * @throws UnsupportedPasswordException If error occurs when generating the encryption key.
      * @throws NoSuchPaddingException If the padding does not exist.
      * @throws NoSuchAlgorithmException If the specified algorithm does not exist.
+     * @throws InvalidAlgorithmParameterException
+     * @throws InvalidKeyException
      */
-    public void logIn(String input) throws UnsupportedPasswordException, NoSuchPaddingException,
-            NoSuchAlgorithmException, InvalidAlgorithmParameterException, IOException, InvalidKeyException {
-        Encryption cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
-        if (!hasEncryptedFile()) {
-            logger.info("Data file not found. Will be starting with a sample AddressBook");
-            try {
-                storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
-                FileUtil.createFile(userPrefs.getEncryptedFilePath());
-                cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
-            } catch (IOException | InvalidKeyException e) {
-                e.printStackTrace();
-            }
+    public boolean logIn(String input) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            UnsupportedPasswordException, InvalidKeyException, InvalidAlgorithmParameterException {
+        Encryption cryptor = null;
+        cryptor = new EncryptionManager(EncryptionKeyGenerator.generateKey(input), CIPHER_TRANSFORMATION);
+        createEncryptedFile(cryptor);
+        try {
+            cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+        } catch (IOException e) {
+            return false;
         }
-        cryptor.decrypt(userPrefs.getEncryptedFilePath(), storage.getAddressBookFilePath());
+        
         FileUtil.deleteFile(storage.getAddressBookFilePath());
         model = initModelManager(storage, userPrefs, cryptor);
         logic = new LogicManager(model, storage, cryptor, userPrefs.getEncryptedFilePath());
         new UiManager(logic).start(stage);
+
+        return true;
     }
 
+    /**
+     * This method fails silently if encrypted file already exists.
+     */
+    private void createEncryptedFile(Encryption cryptor) {
+        requireNonNull(cryptor);
+        if (hasEncryptedFile()) {
+            return;
+        }
+        logger.info("Data file not found. Will be starting with a sample AddressBook");
+        try {
+            storage.saveAddressBook(SampleDataUtil.getSampleAddressBook());
+            FileUtil.createFile(userPrefs.getEncryptedFilePath());
+            cryptor.encrypt(storage.getAddressBookFilePath(), userPrefs.getEncryptedFilePath());
+        } catch (IOException | InvalidKeyException e) {
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Checks if the user has existing data.
@@ -245,12 +267,16 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         this.stage = primaryStage;
+        isLoggedIn = false;
         new LoginScreen(this, !hasEncryptedFile(), primaryStage).show();
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
+        if (!isLoggedIn) {
+            return;
+        }
         try {
             storage.saveUserPrefs(model.getUserPrefs());
         } catch (IOException e) {

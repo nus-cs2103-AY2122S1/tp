@@ -73,7 +73,7 @@ public class EncryptionManager implements Encryption {
         byte[] iv = cipher.getIV();
 
         try (FileOutputStream fileOut = new FileOutputStream(destinationFilePath.toString());
-             CipherOutputStream cipherOut = new CipherOutputStream(fileOut, cipher)) {
+                CipherOutputStream cipherOut = new CipherOutputStream(fileOut, cipher)) {
             fileOut.write(iv);
             cipherOut.write(content.getBytes());
             logger.fine("Content encrypted.");
@@ -110,6 +110,7 @@ public class EncryptionManager implements Encryption {
         while ((line = reader.readLine()) != null) {
             sb.append(line).append(System.lineSeparator());
         }
+        reader.close();
 
         logger.fine("Content decrypted.");
 
