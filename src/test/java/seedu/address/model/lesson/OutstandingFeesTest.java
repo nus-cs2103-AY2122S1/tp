@@ -1,15 +1,13 @@
 package seedu.address.model.lesson;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PAYMENT;
 import static seedu.address.testutil.Assert.assertThrows;
 
-
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 class OutstandingFeesTest {

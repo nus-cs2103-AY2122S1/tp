@@ -21,7 +21,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_FUTURE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_POETRY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_HOMEWORK_TEXTBOOK;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_LESSON_RATES;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_OUTSTANDING_FEES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_SUBJECT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TIME_RANGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OUTSTANDING_FEES;

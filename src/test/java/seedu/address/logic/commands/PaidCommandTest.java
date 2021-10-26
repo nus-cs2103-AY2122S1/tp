@@ -15,6 +15,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.UndoRedoStack;
@@ -35,7 +36,8 @@ class PaidCommandTest {
 
     @Test
     public void constructor_nullAmount_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> preparePaidCommand(INDEX_FIRST_PERSON, INDEX_FIRST_LESSON, null));
+        assertThrows(NullPointerException.class, () -> preparePaidCommand(INDEX_FIRST_PERSON,
+                INDEX_FIRST_LESSON, null));
     }
 
     @Test
@@ -88,11 +90,11 @@ class PaidCommandTest {
 
         String expectedMessage = String.format(PaidCommand.MESSAGE_PAID_LESSON_SUCCESS, personAfterLessonPaid.getName(),
                 formerLesson, paidLesson);
-       Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-       expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()),
                personAfterLessonPaid);
 
-       assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(paidCommand, model, expectedMessage, expectedModel);
     }
 
     /**
