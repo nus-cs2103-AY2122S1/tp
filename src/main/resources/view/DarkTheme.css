@@ -379,3 +379,11 @@
     -fx-font-size: 11;
 }
 
+#titleHolder {
+    -fx-background-color: #055943;
+}
+
+#memberListTitle {
+    -fx-text-fill: white;
+}
+
