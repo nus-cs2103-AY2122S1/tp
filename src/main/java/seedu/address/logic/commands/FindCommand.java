@@ -15,14 +15,15 @@ import seedu.address.model.person.FindPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain ALL of "
+    public static final String COMMAND_DESCRIPTION = "Finds all persons whose names contain ALL of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/[name] ... t/[tag] ...\n"
-            + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues\n"
             + "Note that users can opt for case-sensitive search on Tags by including the 'c/' flag"
-            + "after the command word\n"
-            + "Example: " + COMMAND_WORD + " c/ n/alice n/bob t/friends t/colleagues\n";
+            + "after the command word\n";
+    public static final String COMMAND_EXAMPLE = "Parameters: n/[name] ... t/[tag] ...\n"
+            + "Example: " + COMMAND_WORD + " n/alice n/bob t/friends t/colleagues";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": " + COMMAND_DESCRIPTION + COMMAND_EXAMPLE;
 
     private final FindPredicate findPredicate;
 
