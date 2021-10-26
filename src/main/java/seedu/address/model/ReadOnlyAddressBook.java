@@ -18,13 +18,13 @@ public interface ReadOnlyAddressBook {
 
     /**
      * Returns an unmodifiable view of the customers list.
-     * This list will not contain any duplicate persons.
+     * This list will not contain any duplicate customers.
      */
     ObservableList<Customer> getCustomerList();
 
     /**
      * Returns an unmodifiable view of the employees list.
-     * This list will not contain any duplicate employee.
+     * This list will not contain any duplicate employees.
      */
     ObservableList<Employee> getEmployeeList();
 

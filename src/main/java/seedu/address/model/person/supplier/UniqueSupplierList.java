@@ -3,6 +3,7 @@ package seedu.address.model.person.supplier;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
     private final ObservableList<Supplier> internalList = FXCollections.observableArrayList();
     private final ObservableList<Supplier> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
+    private Comparator<Supplier> supplierComparator = SupplierComparator.getDefaultComparator();
 
     /**
      * Returns true if the list contains an equivalent supplier as the given argument.
@@ -46,6 +48,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
             throw new DuplicateSupplierException();
         }
         internalList.add(toAdd);
+        internalList.sort(supplierComparator);
     }
 
     /**
@@ -66,6 +69,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
         }
 
         internalList.set(index, editedSupplier);
+        internalList.sort(supplierComparator);
     }
 
     /**
@@ -77,6 +81,7 @@ public class UniqueSupplierList implements Iterable<Supplier> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        internalList.sort(supplierComparator);
     }
 
     public void setSuppliers(seedu.address.model.person.supplier.UniqueSupplierList replacement) {
@@ -102,6 +107,28 @@ public class UniqueSupplierList implements Iterable<Supplier> {
      */
     public ObservableList<Supplier> asUnmodifiableObservableList() {
         return internalUnmodifiableList;
+    }
+
+    /**
+     * Resets the supplier list to its default sorting state.
+     */
+    public void resetSupplierListToDefaultSortState() {
+        internalList.sort(SupplierComparator.getDefaultComparator());
+    }
+
+    /**
+     * Returns the backing list as a sortable {@code ObservableList}.
+     */
+    public ObservableList<Supplier> asSortableObservableList() {
+        return internalList;
+    }
+
+    public void setComparator(Comparator<Supplier> comparator) {
+        supplierComparator = comparator;
+    }
+
+    public Comparator<Supplier> getComparator() {
+        return supplierComparator;
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.reservation.Reservation;
 
@@ -17,10 +18,10 @@ public class DeleteReservationCommand extends Command {
 
     public static final String COMMAND_WORD = "deleter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
             + ": Deletes the reservation identified by the index number used in the displayed reservation list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " 1";
 
     public static final String MESSAGE_DELETE_RESERVATION_SUCCESS = "Deleted Reservation: %1$s";
 

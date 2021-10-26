@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
 import seedu.address.model.reservation.Remark;
@@ -26,9 +27,9 @@ public class ReserveCommand extends Command {
     public static final String COMMAND_WORD = "addr";
     public static final String MESSAGE_USAGE = String.format(
             "%1$s: add a new reservation with customer's phone number, number of people and time.\n"
-            + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME (minutes must be 00)\n"
-            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1900.",
-            COMMAND_WORD,
+            + "Parameters: NUMBER_OF_PEOPLE %2$sPHONE (must be a positive integer) %3$sTIME\n"
+            + "Example: %1$s 2 %2$s98765432 %3$s2021-12-24 1930.",
+            CommandUtil.formatCommandWord(COMMAND_WORD),
             PREFIX_PHONE, PREFIX_TIME
     );
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";

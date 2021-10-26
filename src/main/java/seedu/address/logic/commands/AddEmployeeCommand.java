@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SHIFT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.employee.Employee;
 
@@ -21,7 +22,8 @@ import seedu.address.model.person.employee.Employee;
 public class AddEmployeeCommand extends Command {
     public static final String COMMAND_WORD = "adde";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an employee to the address book. "
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Adds an employee to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -32,7 +34,7 @@ public class AddEmployeeCommand extends Command {
             + PREFIX_JOBTITLE + " JOB TITLE "
             + "[" + PREFIX_SHIFT + "SHIFT]"
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

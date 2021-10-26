@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EMPLOYEES;
 
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 
 /**
@@ -12,8 +13,9 @@ public class ListEmployeeCommand extends Command {
 
     public static final String COMMAND_WORD = "liste";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Switches to employee view and shows all employees.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Switches to employee view and shows all employees.\n"
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD);
 
     public static final String SHOWING_SWITCH_MESSAGE = "Switched to Employee View.";
 

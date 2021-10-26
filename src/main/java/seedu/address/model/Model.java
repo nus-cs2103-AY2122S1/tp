@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -211,8 +212,17 @@ public interface Model {
      */
     void setSupplier(Supplier target, Supplier editedSupplier);
 
+    /** Sets the comparator for the supplier list */
+    void setSupplierComparator(Comparator<Supplier> supplierComparator);
+
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();
+
+    /** Returns a sortable view of the supplier list */
+    ObservableList<Supplier> getSortableSupplierList();
+
+    /** Resets the supplier list to its default sorting state */
+    void resetSupplierListToDefaultSortState();
 
     /**
      * Updates the filter of the filtered supplier list to filter by the given {@code predicate}.

@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SPECIALREQUESTS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.util.CommandUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.customer.Customer;
 
@@ -18,7 +19,8 @@ public class AddCustomerCommand extends Command {
 
     public static final String COMMAND_WORD = "addc";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a customer to the address book. "
+    public static final String MESSAGE_USAGE = CommandUtil.formatCommandWord(COMMAND_WORD)
+            + ": Adds a customer to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -28,7 +30,7 @@ public class AddCustomerCommand extends Command {
             + PREFIX_ALLERGIES + "ALLERGIES "
             + PREFIX_SPECIALREQUESTS + "SPECIAL REQUESTS "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + CommandUtil.formatCommandWord(COMMAND_WORD) + " "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
