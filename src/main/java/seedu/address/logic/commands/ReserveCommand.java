@@ -7,13 +7,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDateTime;
 
+import java.util.HashSet;
+import java.util.Set;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.ReservationsManager;
 import seedu.address.model.reservation.exception.ReservationException;
 import seedu.address.model.table.Table;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents the command to add reservation
@@ -35,9 +39,23 @@ public class ReserveCommand extends Command {
     private Phone phone;
     private int numberOfPeople;
     private LocalDateTime dateTime;
+    Remark remark;
+    Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates a command to add a reservation
+     */
+    public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime dateTime, Remark remark, Set<Tag> tags) {
+        requireAllNonNull(phone, dateTime, tags);
+        this.phone = phone;
+        this.numberOfPeople = numberOfPeople;
+        this.dateTime = dateTime;
+        this.remark = remark;
+        this.tags.addAll(tags);
+    }
+
+    /**
+     * Creates a command to add a reservation without remark and tags
      */
     public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime dateTime) {
         requireAllNonNull(phone, dateTime);
@@ -58,7 +76,7 @@ public class ReserveCommand extends Command {
         ReservationsManager reservationsManager = model.getReservationsManager();
         try {
             Table tableToBeAssigned = reservationsManager.getAvailableTable(model, numberOfPeople, dateTime);
-            Reservation reservation = new Reservation(phone, numberOfPeople, dateTime, tableToBeAssigned);
+            Reservation reservation = new Reservation(phone, numberOfPeople, dateTime, tableToBeAssigned, remark, tags);
             if (model.hasReservation(reservation)) {
                 throw new CommandException(String.format(MESSAGE_RESERVATION_EXISTS, reservation));
             }
@@ -85,6 +103,8 @@ public class ReserveCommand extends Command {
         ReserveCommand that = (ReserveCommand) o;
         return phone.equals(that.phone)
                 && numberOfPeople == that.numberOfPeople
-                && dateTime.equals(that.dateTime);
+                && dateTime.equals(that.dateTime)
+                && remark.equals(that.remark)
+                && tags.equals(that.tags);
     }
 }

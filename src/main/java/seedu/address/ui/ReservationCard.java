@@ -2,8 +2,10 @@ package seedu.address.ui;
 
 import java.time.format.DateTimeFormatter;
 
+import java.util.Comparator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.reservation.Reservation;
@@ -41,6 +43,12 @@ public class ReservationCard extends UiPart<Region> {
     @FXML
     private Label dateTime;
 
+    @FXML
+    private Label remark;
+
+    @FXML
+    private FlowPane tags;
+
     /**
      * Creates a {@code ReservationCard} with the given {@code Reservation} and index to display.
      */
@@ -52,6 +60,13 @@ public class ReservationCard extends UiPart<Region> {
         phone.setText("Phone: " + reservation.getPhone().value);
         numberOfPeople.setText(String.format("Table for %d", reservation.getNumberOfPeople()));
         dateTime.setText("On: " + reservation.getDateTime().format(DATE_TIME_PRINTING_FORMAT));
+        remark.setText("Remark: "
+                + (reservation.getRemark() == null || reservation.getRemark().value.isEmpty()
+                    ? "none"
+                    : reservation.getRemark().value));
+        reservation.getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override

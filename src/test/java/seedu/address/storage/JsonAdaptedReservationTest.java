@@ -8,10 +8,12 @@ import static seedu.address.storage.JsonAdaptedReservation.TABLE_ID_CONSTRAINT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reservation.Remark;
 
 class JsonAdaptedReservationTest {
     private static final String VALID_PHONE = "98765432";
@@ -22,6 +24,8 @@ class JsonAdaptedReservationTest {
     private static final int INVALID_NUMBER_OF_PEOPLE = -1;
     private static final String INVALID_DATE_TIME = "2021-11-11 17:00";
     private static final int INVALID_TABLE_ID = -1;
+    private static final String REMARK_NONE = "";
+    private static final List<JsonAdaptedTag> TAGS_EMPTY = List.of();
 
     @Test
     public void toModelType_validReservationDetails_returnsReservation() throws Exception {
@@ -32,7 +36,7 @@ class JsonAdaptedReservationTest {
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         JsonAdaptedReservation reservation = new JsonAdaptedReservation(
-                null, VALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, VALID_TABLE_ID
+                null, VALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, VALID_TABLE_ID, REMARK_NONE, TAGS_EMPTY
         );
         String expectedMessage = String.format(
                 MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()
@@ -47,7 +51,7 @@ class JsonAdaptedReservationTest {
     @Test
     public void toModelType_nullDateTime_throwsIllegalValueException() {
         JsonAdaptedReservation reservation = new JsonAdaptedReservation(
-                VALID_PHONE, VALID_NUMBER_OF_PEOPLE, null, VALID_TABLE_ID
+                VALID_PHONE, VALID_NUMBER_OF_PEOPLE, null, VALID_TABLE_ID, REMARK_NONE, TAGS_EMPTY
         );
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "date time");
         assertThrows(
@@ -60,7 +64,7 @@ class JsonAdaptedReservationTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         JsonAdaptedReservation reservation = new JsonAdaptedReservation(
-                INVALID_PHONE, VALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, VALID_TABLE_ID
+                INVALID_PHONE, VALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, VALID_TABLE_ID, REMARK_NONE, TAGS_EMPTY
         );
         String expectedMessage = Phone.MESSAGE_CONSTRAINTS;
         assertThrows(
@@ -73,7 +77,7 @@ class JsonAdaptedReservationTest {
     @Test
     public void toModelType_invalidNumberOfPeople_throwsIllegalValueException() {
         JsonAdaptedReservation reservation = new JsonAdaptedReservation(
-                VALID_PHONE, INVALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, VALID_TABLE_ID
+                VALID_PHONE, INVALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, VALID_TABLE_ID, REMARK_NONE, TAGS_EMPTY
         );
         String expectedMessage = NUMBER_OF_PEOPLE_CONSTRAINT;
         assertThrows(
@@ -86,7 +90,7 @@ class JsonAdaptedReservationTest {
     @Test
     public void toModelType_invalidDateTime_throwsIllegalValueException() {
         JsonAdaptedReservation reservation = new JsonAdaptedReservation(
-                VALID_PHONE, VALID_NUMBER_OF_PEOPLE, INVALID_DATE_TIME, VALID_TABLE_ID
+                VALID_PHONE, VALID_NUMBER_OF_PEOPLE, INVALID_DATE_TIME, VALID_TABLE_ID, REMARK_NONE, TAGS_EMPTY
         );
         String expectedMessage = DATE_TIME_CONSTRAINT;
         assertThrows(
@@ -99,7 +103,7 @@ class JsonAdaptedReservationTest {
     @Test
     public void toModelType_invalidTableId_throwsIllegalValueException() {
         JsonAdaptedReservation reservation = new JsonAdaptedReservation(
-                VALID_PHONE, VALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, INVALID_TABLE_ID
+                VALID_PHONE, VALID_NUMBER_OF_PEOPLE, VALID_DATE_TIME, INVALID_TABLE_ID, REMARK_NONE, TAGS_EMPTY
         );
         String expectedMessage = TABLE_ID_CONSTRAINT;
         assertThrows(
