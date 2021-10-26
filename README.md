@@ -18,21 +18,25 @@
     - allow user to use flags to execute operations
     - e.g. `add -n <NAME> -sid <STUDENT_ID>`
 5. Create records of individual students
-    - Name, Student ID, Class ID, NULL grade as a placeholder for default
-    - `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
-6. Filters the records of individual students using query parameters
-    - Filters the list of students based on any combination of the following parameters: Name, Student ID, Class ID
+    - Name, Student ID, Class ID, Email as a placeholder for default
+    - `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
+6. Create Lab records with Lab number and total score for all students
+   - allow user to create new Lab report instances with a Lab number and total score for that lab report. 
+   - `create lab -t 1 -ts 20`
+7. Filters the records of individual students using query parameters
+    - Filters the list of students based on any combination of the following parameters: Name, Student ID, Class ID, Email
     - `filter -cid <CLASS_ID>`
-7. Edit a student's record
-    - Edit a student's details at a particular given index
+8. Edit a student's record
+    - Edit a student's details at a particular given index off the list
+    - Details that can be edited include name Name, Student ID, Class ID, Email, Lab scores
     - `edit <INDEX> -cid <NEW CLASS_ID>`
-8. Delete a student's record
-    - Delete the entry of the entire student based on a given index
-    - `delete <INDEX>`
-9. Automatically Sorted Class Records
-    - List will always display the students in a sorted order
-    - Sorting key: Student's Name
-10. Save data to Hard Disk
+10. Delete a student's record
+     - Delete the entry of the entire student based on a given index off the list
+     - `delete <INDEX>`
+11. Automatically Sorted Class Records
+     - List will always display the students in a sorted order
+     - Sorting key(s): Class ID then Student's Name
+12. Save data to Hard Disk
     - Save whenever there is a change (create/edit/delete)
 
 This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
