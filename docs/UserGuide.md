@@ -1,14 +1,12 @@
-# PlannerMD User Guide
-
 PlannerMD is an easy-to-use command-line interface (CLI) application that helps clinic receptionists seamlessly integrate the daily appointments and the unique requirements of each patient into a single application. PlannerMD expedites the manual processes found in a clinic and saves clinics receptionists plenty of time while also reducing human error.
 
 If you are new, this guide is meant to introduce you to PlannerMD as well as guide you through our features and how to use them. If you are already 
-experienced with PlannerMD, we hope that our comprehensive user guide will help clarify any that you have! Refer to our [table of contents](#toc) to see what
+experienced with PlannerMD, we hope that our comprehensive user guide will help clarify any queries you have! Refer to our [table of contents](#toc) to see what
 we have to offer!
 
 ## Table Of Contents <a name="toc"></a>
-* [What is Command-line Interface (CLI)?](#what-is-cli)
 * [Quick start](#quick-start)
+* [What is Command-line Interface (CLI)?](#what-is-cli)
 * [Features](#features)
   * [General](#general)
     * [help](#help)
@@ -48,39 +46,18 @@ we have to offer!
 * [Command Summary](#command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
-## What is Command-line Interface (CLI?) <a name="what-is-cli"></a>
-A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
-you would type the command in text in the command box, and the programme will execute your command, and reflect its response in the response box.
-
-![get format](images/user-guide/commandBox.png)
-
-### Why CLI? 
-We want to give you an experience that is as similar as writing with pen-and-paper, to help you clinic receptionists adapt easily. With a CLI,
-you can imagine the keyboard as your pen, and a command box as your paper. To clinic receptionists who are already using a different application
-with a Graphical User Interface (GUI), our application removes the need to constantly access your mouse and speed up your arduous process of managing
-patients, doctors and appointments.
-
-### How to use a CLI?
-Just type your command in the command box with the format we have provided. Simple as that!
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You can type the command keyword and leave the details blank and click enter to access the teamplte so you don't have to remember
-all the details!<br>
-
-![get format](images/user-guide/tipGetFormat.png)
-
---------------------------------------------------------------------------------------------------------------------
 
 ## Quick start <a name="quick-start"></a>
 
-1. Ensure you have Java `11` or above installed in your Computer. If you haven't installed, refer to these guides based on your operating software
-   [Windows](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk)
+1. Ensure you have Java `11` or above installed in your Computer. If you haven't installed, refer to these guides based on your operating software: \
+   [Windows](https://www.codejava.net/java-se/download-and-install-java-11-openjdk-and-oracle-jdk) \
    [macOS](https://docs.oracle.com/en/java/javase/11/install/installation-jdk-macos.html#GUID-F575EB4A-70D3-4AB4-A20E-DBE95171AB5F)
 
 2. Download the latest `plannermd.jar` from [here](https://github.com/AY2122S1-CS2103T-T11-3/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for plannerMD.
 
-4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Double-click the file to start the app. The GUI similar to the image displayed below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -101,6 +78,29 @@ all the details!<br>
    * **`exit`** : Exits the app.
 
 6. Refer to the [Features](#features) below for details of each command.
+
+--------------------------------------------------------------------------------------------------------------------
+## What is Command-line Interface (CLI?) <a name="what-is-cli"></a>
+A Command-line interface helps process commands that you enter through text. Instead of clicking buttons, to execute a certain command,
+you would type the command in text in the command box, and the programme will execute your command, and reflect its response in the response box.
+
+![get format](images/user-guide/commandBox.png)
+
+### Why CLI?
+We want to give you an experience that is as similar as writing with pen-and-paper, to help you clinic receptionists adapt easily. With a CLI,
+you can imagine the keyboard as your pen, and a command box as your paper. To clinic receptionists who are already using a different application
+with a Graphical User Interface (GUI), our application removes the need to constantly access your mouse and speed up your arduous process of managing
+patients, doctors and appointments.
+
+### How to use a CLI?
+Just type your command in the command box with the format we have provided. Simple as that!
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You can type the command keyword and leave the details blank and click enter to access the teamplte so you don't have to remember
+all the details!<br>
+</div>
+
+![get format](images/user-guide/tipGetFormat.png)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -133,10 +133,13 @@ all the details!<br>
 
 ### Viewing help : `help` <a name="help"/>
 
-Shows a message explaining how to access the help page. You can click on the help button on the top left 
-corner of the application.
+Shows a message explaining how to access the help page.
 
 ![help message](images/user-guide/helpMessage.png)
+
+Alternatively, you can click on the help button in the top left
+corner.
+
 ![help button](images/user-guide/helpButton.png)
 
 Format: `help`
