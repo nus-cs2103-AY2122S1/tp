@@ -158,14 +158,20 @@ Examples:
 - `delete -sid A1234567X` Deletes the data of the student with student ID A1234567X
 - `delete -sid A2345678X` Deletes the data of the student with student ID A2345678X
 
-### <a name="exit"></a>9. Exit: `exit`
+### <a name="download-data"></a>9. Download Data
+
+ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button or the enter command `download`. The TA will need
+to specify the directory to download the file to.
+
+### <a name="download-data"></a>10. Upload Data
+
+ProgrammerError data can be uploaded by a CSV file by clicking the 'Upload' button or enter the command `upload`. The TA will need
+to specify the directory to upload the file from.
+
+### <a name="exit"></a>11. Exit: `exit`
 
 Exits ProgrammerError and closes the GUI.
 
-### <a name="download-data"></a>10. Download Data
-
-ProgrammerError data can be downloaded to a CSV file by clicking the 'Download' button under 'Files'. The TA will need
-to specify the directory to download the file to.
 
 ## <a name="command-summary"></a>Command Summary
 
@@ -173,9 +179,12 @@ Command | Format & Examples
 --------| ----------------------
 **Add** | `add -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID>`
 **Delete** | `delete <INDEX_IN_LIST>`
+**Download** | `download`
 **Edit** | `edit <INDEX_IN_LIST> -n <NAME> -sid <STUDENT_ID> -grade <GRADE_SCORE>`
 **Exit** | `exit`
 **Fill** | `fill`
 **Filter** | `filter -n <NAME> -sid <STUDENT_ID> -cid <CLASS_ID> -email <EMAIL>`
 **Help** | `help`
 **Purge** | `purge`
+**Upload** | `upload`
+
