@@ -57,7 +57,7 @@ public class DeleteShiftCommandParser implements Parser<DeleteShiftCommand> {
                 name = ParserUtil.parseName(argMultimap.getValue(PREFIX_DASH_NAME).get());
             }
             if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-                extractTupleDates(argMultimap);
+                dates = extractTupleDates(argMultimap);
 
             }
             shiftDayAndSlot = ParserUtil.parseDayOfWeekAndSlot(argMultimap.getValue(PREFIX_DAY_SHIFT).get());

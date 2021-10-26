@@ -52,4 +52,21 @@ public class ShiftTest {
 
 
     }
+
+    @Test
+    public void remove_successTest() {
+        //EP: same period
+        Shift toTest = firstShift.add(LocalDate.of(1, 1, 1),
+                LocalDate.of(1, 1, 30));
+        Shift result = toTest.remove(LocalDate.of(1, 1, 1),
+                LocalDate.of(1, 1, 30));
+        assertTrue(result.isEmpty());
+
+        toTest = firstShift.add(LocalDate.of(2021, 1, 1),
+                LocalDate.of(2022, 1, 1));
+        result = toTest.remove(LocalDate.of(2021, 1, 1),
+                LocalDate.of(2022, 1, 1));
+        assertTrue(result.isEmpty());
+
+    }
 }
