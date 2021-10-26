@@ -7,10 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import javafx.collections.ObservableList;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.student.Assessment;
@@ -32,7 +35,8 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows performance analysis of a student or an assessment. "
             + "Parameters: "
-            + "(" + PREFIX_NAME + "<student_name> | "
+            + "( INDEX | "
+            + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name>)";
 
@@ -42,6 +46,7 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_DUPLICATE_STUDENT_NAME =
             "This student needs to be specified using ID due to duplicate naming.";
 
+    private Index index;
     private Name name;
     private ID id;
     private Assessment assessment;
@@ -49,39 +54,65 @@ public class ShowCommand extends Command {
     /**
      * Constructor for a {@code ShowCommand}.
      */
-    public ShowCommand(Name name, ID id, Assessment assessment) {
+    public ShowCommand(Index index, Name name, ID id, Assessment assessment) {
+        setIndex(index);
         setName(name);
         setId(id);
         setAssessment(assessment);
     }
 
+    public ShowCommand(Index index) {
+        this(index, null, null, null);
+    }
+
     public ShowCommand(Name name) {
-        this(name, null, null);
+        this(null, name, null, null);
     }
 
     public ShowCommand(ID id) {
-        this(null, id, null);
+        this(null, null, id, null);
     }
 
     public ShowCommand(Assessment assessment) {
-        this(null, null, assessment);
+        this(null, null, null, assessment);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        return getAssessment().isEmpty() ? showStudent(model) : showAssessment(model);
+        return getIndex().isPresent()
+                ? showStudentByIndex(model)
+                : getAssessment().isPresent()
+                ? showAssessment(model)
+                : showStudentByPrefixes(model);
     }
 
     /**
-     * Executes command when a {@code Student} info is requested.
+     * Executes command when a {@code Student} info is requested by index.
      */
-    private CommandResult showStudent(Model model) throws CommandException {
+    private CommandResult showStudentByIndex(Model model) throws CommandException {
+        List<Student> students = model.getFilteredStudentList();
+
+        if (index.getZeroBased() >= students.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_STUDENT_DISPLAYED_INDEX);
+        }
+
+        Student matchedStudent = students.get(index.getZeroBased());
+
+        Info info = new Info(matchedStudent);
+        StudentStatistics statistics = new StudentStatistics(matchedStudent);
+        return new CommandResult(MESSAGE_SUCCESS, info, statistics.toLineChart());
+    }
+
+    /**
+     * Executes command when a {@code Student} info is requested by name or ID.
+     */
+    private CommandResult showStudentByPrefixes(Model model) throws CommandException {
         Predicate<Student> predicate = createStudentPredicate();
         assert predicate != null;
 
         model.updateFilteredStudentList(predicate);
-        ObservableList<Student> matchedStudents = model.getFilteredStudentList();
+        List<Student> matchedStudents = model.getFilteredStudentList();
 
         if (matchedStudents.size() == 0) {
             throw new CommandException(MESSAGE_NONEXISTENT_STUDENT);
@@ -118,8 +149,11 @@ public class ShowCommand extends Command {
      * Creates a {@code Predicate} checking if a student has a matched name or ID.
      */
     private Predicate<Student> createStudentPredicate() {
-        return name != null ? new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")))
-                : id != null ? new IdContainsKeywordsPredicate(Collections.singletonList(id.toString())) : null;
+        return getName().isPresent()
+                ? new NameContainsKeywordsPredicate(Arrays.asList(name.toString().split("\\s+")))
+                : getId().isPresent()
+                ? new IdContainsKeywordsPredicate(Collections.singletonList(id.toString()))
+                : null;
     }
 
     @Override
@@ -136,12 +170,16 @@ public class ShowCommand extends Command {
 
         // state check
         ShowCommand toCompare = (ShowCommand) other;
-        boolean isNameEquals = (name != null && name.equals(toCompare.name)) || name == toCompare.name;
-        boolean isIdEquals = (id != null && id.equals(toCompare.id)) || id == toCompare.id;
-        boolean isAssessmentEquals = (assessment != null && assessment.equals(toCompare.assessment))
-                || assessment == toCompare.assessment;
+        boolean isIndexEquals = Objects.equals(index, toCompare.index);
+        boolean isNameEquals = Objects.equals(name, toCompare.name);
+        boolean isIdEquals = Objects.equals(id, toCompare.id);
+        boolean isAssessmentEquals = Objects.equals(assessment, toCompare.assessment);
 
-        return isNameEquals && isIdEquals && isAssessmentEquals;
+        return isIndexEquals && isNameEquals && isIdEquals && isAssessmentEquals;
+    }
+
+    public void setIndex(Index index) {
+        this.index = index;
     }
 
     public void setName(Name name) {
@@ -154,6 +192,10 @@ public class ShowCommand extends Command {
 
     public void setAssessment(Assessment assessment) {
         this.assessment = assessment;
+    }
+
+    public Optional<Index> getIndex() {
+        return Optional.ofNullable(index);
     }
 
     public Optional<Name> getName() {
@@ -172,8 +214,13 @@ public class ShowCommand extends Command {
      * Stores info of a student or an assessment.
      */
     public static class Info {
+        private Index index;
         private Student student;
         private Assessment assessment;
+
+        public Info(Index index) {
+            setIndex(index);
+        }
 
         public Info(Student student) {
             setStudent(student);
@@ -183,12 +230,20 @@ public class ShowCommand extends Command {
             setAssessment(assessment);
         }
 
+        public void setIndex(Index index) {
+            this.index = index;
+        }
+
         public void setStudent(Student student) {
             this.student = student;
         }
 
         public void setAssessment(Assessment assessment) {
             this.assessment = assessment;
+        }
+
+        public Optional<Index> getIndex() {
+            return Optional.ofNullable(index);
         }
 
         public Optional<Student> getStudent() {
@@ -214,7 +269,8 @@ public class ShowCommand extends Command {
             // state check
             Info e = (Info) other;
 
-            return getStudent().equals(e.getStudent())
+            return getIndex().equals(e.getIndex())
+                    && getStudent().equals(e.getStudent())
                     && getAssessment().equals(e.getAssessment());
         }
     }
