@@ -6,9 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.time.LocalDateTime;
-
 import java.util.HashSet;
 import java.util.Set;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Phone;
@@ -39,8 +39,8 @@ public class ReserveCommand extends Command {
     private Phone phone;
     private int numberOfPeople;
     private LocalDateTime dateTime;
-    Remark remark;
-    Set<Tag> tags = new HashSet<>();
+    private Remark remark;
+    private Set<Tag> tags = new HashSet<>();
 
     /**
      * Creates a command to add a reservation
@@ -52,16 +52,6 @@ public class ReserveCommand extends Command {
         this.dateTime = dateTime;
         this.remark = remark;
         this.tags.addAll(tags);
-    }
-
-    /**
-     * Creates a command to add a reservation without remark and tags
-     */
-    public ReserveCommand(Phone phone, int numberOfPeople, LocalDateTime dateTime) {
-        requireAllNonNull(phone, dateTime);
-        this.phone = phone;
-        this.numberOfPeople = numberOfPeople;
-        this.dateTime = dateTime;
     }
 
     /**
@@ -104,7 +94,6 @@ public class ReserveCommand extends Command {
         return phone.equals(that.phone)
                 && numberOfPeople == that.numberOfPeople
                 && dateTime.equals(that.dateTime)
-                && remark.equals(that.remark)
                 && tags.equals(that.tags);
     }
 }

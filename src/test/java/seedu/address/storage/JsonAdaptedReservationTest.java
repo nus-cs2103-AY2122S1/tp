@@ -9,11 +9,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalReservation.ALICE_RESERVATION;
 
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Phone;
-import seedu.address.model.reservation.Remark;
 
 class JsonAdaptedReservationTest {
     private static final String VALID_PHONE = "98765432";

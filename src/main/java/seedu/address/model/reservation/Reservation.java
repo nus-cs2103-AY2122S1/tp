@@ -7,9 +7,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
-
 import java.util.Set;
-import java.util.stream.Collectors;
+
 import seedu.address.model.person.Phone;
 import seedu.address.model.table.Table;
 import seedu.address.model.tag.Tag;
@@ -31,7 +30,10 @@ public class Reservation {
     /**
      * Creates a reservation with remark and tags
      */
-    public Reservation(Phone phone, int numberOfPeople, LocalDateTime dateTime, Table table, Remark remark, Set<Tag> tags) {
+    public Reservation(
+            Phone phone, int numberOfPeople, LocalDateTime dateTime,
+            Table table, Remark remark, Set<Tag> tags
+    ) {
         requireAllNonNull(phone, numberOfPeople, dateTime, tags);
         this.phone = phone;
         this.numberOfPeople = numberOfPeople;
@@ -39,17 +41,6 @@ public class Reservation {
         this.table = table;
         this.remark = remark;
         this.tags.addAll(tags);
-    }
-
-    /**
-     * Creates a reservation without remark and tag
-     */
-    public Reservation(Phone phone, int numberOfPeople, LocalDateTime dateTime, Table table) {
-        requireAllNonNull(phone, numberOfPeople, dateTime);
-        this.phone = phone;
-        this.numberOfPeople = numberOfPeople;
-        this.dateTime = dateTime;
-        this.table = table;
     }
 
     public Phone getPhone() {
