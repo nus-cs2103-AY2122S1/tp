@@ -15,7 +15,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 1. [Introduction](#1-introduction)
 
    1.1 [What is TutAssistor?](#11-what-is-tutassistor)
-   
+
    1.2 [What can TutAssistor do for you?](#12-what-can-tutassistor-do-for-you)
    
    1.3 [How to use this guide?](13-how-to-use-this-guide)
@@ -25,7 +25,6 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    2.1 [Installation guide](#21-installation-guide)
   
    2.2 [Try it yourself!](#22-try-it-yourself)
-
 
 3. [Features](#3-features)
 
@@ -61,7 +60,7 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
    
    3.16 [Track payment `coming in v2.0`](#316-track-payment-coming-in-v20)
 
-4. [Additional Command Format Information](#4-additional-command-format-information)
+5. [Additional Command Format Information](#4-additional-command-format-information)
    
    4.1 [Name](#41-name)
    
@@ -73,8 +72,8 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 
    4.5 [Index](#45-index)
 
-5. [FAQ](#5-faq)
-6. [Command Summary](#6-command-summary)
+6. [FAQ](#5-faq)
+7. [Command Summary](#6-command-summary)
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -82,19 +81,35 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 ## 1 Introduction
 
 ### 1.1 What is TutAssistor?
-TutAssistor is a ***desktop app intended for private tutors to manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
+Welcome to the user guide of TutAssistor!
 
-The CLI is...
+Are you a private tutor struggling to keep track of all your classes and students? Do you spend 
+countless hours on administrative duties such as scheduling classes and updating numerous students' records?
 
-Don't worry if
+If the above situation sounds familiar to you, fret not, **TutAssistor** is here to save the day!
+
+**TutAssistor** is a ***desktop app intended for private tutors like yourself to 
+manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
+
+**TutAssistor** uses Command Line Interface (CLI); this means that you operate the application by typing commands into a Command Box. 
+If you are a fast typer, you can operate the application more easily and faster than
+Graphical User Interface (GUI) applications; GUI applications allow users to interact 
+with the application via graphical icons such as buttons.
+
+You do not have to worry at all even if you are new to CLI applications as 
+this user guide will take you through step by step on how various 
+features of the **TutAssistor** can be utilised, all directed towards 
+providing the best possible experience to the user.
 
 ### 1.2 What can TutAssistor do for you?
 
-TutAssistor provides an all-in-one platform for you to manage information regarding your students and lessons stress-free and efficiently. In the latest version, we offer you the ability to: 
+TutAssistor provides an all-in-one platform for you to manage information 
+regarding your students and lessons stress-free and efficiently. In the latest version, we offer you the ability to: 
 
 * Track student details
+* Keep student details up-to-date
 * Resolve conflicting tuition timeslots
-* Efficiently make notes for each lesson
+* Efficiently create notes for each class/student
 
 ### 1.3 How to use this guide?
 
@@ -108,17 +123,18 @@ The features in this guide are formatted with the following conventions:
 * **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
 
 
-#### Icons used in this guide
+#### General symbols and syntax used in this guide
 
-For additional information accompanying each segment, look for the following icons:
+For additional information accompanying each segment, look for the following symbols:
 
-&emsp; :information_source: precedes information that are useful to remember. 
+Syntax | What it means 
+-------|--------
+&emsp; :information_source: | precedes information that are useful to remember
+&emsp; :bulb: | precedes information that serve as tips for a feature
+&emsp; :warning: | precedes information as an important warning
 
-&emsp; :bulb: precedes information that serve as tips for a feature.
 
-&emsp; :warning: precedes information as an important warning.
-
-Jump right in to the next section [2 Get Started](#2-get-started) to get you started!
+Jump right in to the next section: [2 Get Started](#2-get-started) to get you started!
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -151,6 +167,7 @@ Jump right in to the next section [2 Get Started](#2-get-started) to get you sta
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 ![Ui](images/ui_ug.png)
+<p align="center"><i>Figure 1: CLI of TutAssistor</i></p>
 
 
 ### 2.2 Try it yourself!
@@ -161,7 +178,7 @@ Type the command in the command box and press Enter to execute it. e.g. typing h
 
 Some example commands you can try:
 
-* `view 1`: Views the 1st student show in the student list.
+* `view 1`: Views the first student show in the student list.
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the TutAssistor.
 * `addtoclass si/3 tc/1`: Adds the 3rd student in the student list to the 1st class in the tuition class list.
 * `deleteclass 2`: Deletes the 2nd class shown in the tuition class list.
@@ -201,7 +218,6 @@ Refer to the [Additional Command Format Information](#4-additional-command-forma
 </div>
 
 ### 3.1 Add student/tuition class
-
 #### Adding a student: `add` | `a`
 Adds a student with the specified information such as name, phone number, etc. 
 > [Read more on the requirements of the various parameters used.](#4-additional-command-format-information)
@@ -240,7 +256,7 @@ ac n/Math l/8 ts/Mon 11:00-14:00 r/Quiz on final lesson
 ### 3.2 View student/tuition class
 Displays the details the specified student or class in the information page.
 
-#### Viewing a student: `student` | `vs`
+#### 3.2.1 Viewing a student: `student` | `vs`
 Format: `student INDEX`
 
 Example:
@@ -252,9 +268,9 @@ or
 vs 2
 ```
 ![view student](images/student_view.png)
-*Displaying a student's details in the information page.*
+<p align="center"><i>Figure 2: Displaying a student's details in the information page</i></p>
 
-#### Viewing a tuition class: `class` | `vc`
+#### 3.2.2 Viewing a tuition class: `class` | `vc`
 Format: `class INDEX`
 
 Example:
@@ -266,7 +282,7 @@ or
 vc 3
 ```
 ![view class](images/class_view.png)
-*Displaying a class' details in the information page.*
+<p align="center"><i>Figure 3: Displaying details of a class in the information page</i></p>
 
 ### 3.3 Edit student/tuition class
 Edits an existing student or tuition class.
@@ -385,11 +401,11 @@ Users can add, remove, or edit remarks through the editor window.
 </div>
 
 ![Remark editor](images/remark_editor_student.png)
-*Editing remarks with editor window*
+<p align="center"><i>Figure 4: Editing remarks with editor window</i></p>
 
 #### Adding remark to a student: `remark` | `re`
 
-Adds a remark for a student.
+Adds a remark for a student. 
 
 Format: `remark STUDENT_INDEX`
 
@@ -458,7 +474,7 @@ TutAssistor will display a list of all classes with `physics` or `chemistry` in 
 
 The filtered list should look similar to the example shown below: <br>
 ![FindCommand example](images/find_screenshot.png)
-*Example of executing `find alice tan` command*
+<p align="center"><i>Figure 5: Example of executing `find alice tan` command</i></p>
 
 ### 3.8 List all students/tuition classes
 Shows the full list of students or classes.
@@ -504,7 +520,7 @@ timetable
 ```
 
 ![Timetable](images/time_table.png)
-*A weekly view of all classes.*
+<p align="center"><i>Figure 6: A timetable view of all tuition classes in a week</i></p>
 
 ### 3.11 View today's classes: `today` | `td`
 Displays an overview of all classes happening today. <br>
@@ -512,7 +528,7 @@ Also, a reminder of classes happening today will be displayed
 when the TutAssistor is reopened.
 
 ![Today view](images/today_view.png)
-*A list of view of all classes happening today.*
+<p align="center"><i>Figure 7: List view of all the classes scheduled today</i></p>
 
 ### 3.12 View help: `help` | `h`
 
@@ -521,8 +537,7 @@ Shows a command summary, as well as a link to the user guide. <br>
 Format: `help`
 
 ![Help window](images/helpWindow.png)
-
-*The help window*
+<p align="center"><i>Figure 8: The help window</i></p>
 
 ### 3.13 Navigate input history
 
@@ -544,7 +559,7 @@ Exits the program.
 Format: `exit`
 
 ### 3.16 Track payment `coming in v2.0`
-_Detais coming soon..._
+_Details coming soon..._
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -601,7 +616,14 @@ For example, if the list consists of `5` students/tuition classes:
 ## 5 FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous TutAssistor home folder.<br>
+
+**Q**: Do I lose all the details of classes and students when I close the application?<br>
+**A**: All of your data is stored locally in a file under the data folder and will be loaded upon the next entry,
+hence you do not lose any data.<br>
+
+**Q**: What should I do if I am unsure of the command formats?<br>
+**A**: Please type `help` to learn the command formats.<br>
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -610,26 +632,26 @@ For example, if the list consists of `5` students/tuition classes:
 
 Action | Format | Shortcut
 -------|--------|---------
-***Add Student*** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
-***Add Class*** | `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
-***View Student*** | `student INDEX` | `vs`
-***View Class*** | `class INDEX` | `vc`
-***Edit Student*** | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` | `e`
-***Edit Class*** | `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]` | `ec`
-***Delete Student*** | `delete INDEX_STUDENT [INDEX_STUDENT]...` | `del`
-***Delete Class*** | `deleteclass INDEX_CLASS [INDEX_CLASS]...` | `delc`
-***Add Student to Class*** | `addtoclass si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS`<br>or<br>`addtoclass s/NAME[,NAME...] tc/INDEX_CLASS` | `atc`
-***Remove Students from Class*** | `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS` | `rm`
-***Add Remarks to Student*** | `remark INDEX_STUDENT` | `re`
-***Add Remarks to Class*** | `remarkclass INDEX_CLASS` | `rec`
-***Find Student by Name*** | `find KEYWORD [KEYWORD]...` | `f`
-***Find Class by Name*** | `findclass KEYWORD [KEYWORD]...` | `fc`
-***List all Students*** | `list` | `l`
-***List all Classes*** | `listclass` | `lc`
-***Sort Tuition Class*** | `sort [o/ORDER]` | `s`
-***View Timetable*** | `timetable` | `tt`
-***View Today's Classes*** | `today` | `td`
-***Help*** | `help` | `h`
-***Clear all data*** | `clear` | -
-***Exit*** | `exit` | -
+[**Add Student**](#31-add-studenttuition-class) | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` | `a`
+[***Add Class***](#31-add-studenttuition-class) |`addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]` | `ac`
+[***View Student***](#32-view-studenttuition-class) | `student INDEX` | `vs`
+[***View Class***](#32-view-studenttuition-class) | `class INDEX` | `vc`
+[***Edit Student***](#33-edit-studenttuition-class) | `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` | `e`
+[***Edit Class***](#33-edit-studenttuition-class) | `editclass INDEX [n/NAME] [l/LIMIT] [ts/TIMESLOT]` | `ec`
+[***Delete Student***](#34-delete-studenttuition-class) | `delete INDEX_STUDENT [INDEX_STUDENT]...` | `del`
+[***Delete Class***](#34-delete-studenttuition-class) | `deleteclass INDEX_CLASS [INDEX_CLASS]...` | `delc`
+[***Add Student to Class***](#35-addremove-student-from-class) | `addtoclass si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS`<br>or<br>`addtoclass s/NAME[,NAME...] tc/INDEX_CLASS` | `atc`
+[***Remove Students from Class***](#35-addremove-student-from-class) | `remove si/INDEX_STUDENT [INDEX_STUDENT]... tc/INDEX_CLASS` | `rm`
+[***Add Remarks to Student***](#36-add-remark-to-studenttuition-class) | `remark INDEX_STUDENT` | `re`
+[***Add Remarks to Class***](#36-add-remark-to-studenttuition-class) | `remarkclass INDEX_CLASS` | `rec`
+[***Find Student by Name***](#37-find-studenttuition-class) | `find KEYWORD [KEYWORD]...` | `f`
+[***Find Class by Name***](#37-find-studenttuition-class) | `findclass KEYWORD [KEYWORD]...` | `fc`
+[***List all Students***](#38-list-all-studentstuition-classes) | `list` | `l`
+[***List all Classes***](#38-list-all-studentstuition-classes) | `listclass` | `lc`
+[***Sort Tuition Class***](#39-sort-tuition-classes-sort--s) | `sort [o/ORDER]` | `s`
+[***View Timetable***](#310-view-timetable-timetable--tt) | `timetable` | `tt`
+[***View Today's Classes***](#311-view-todays-classes-today--td) | `today` | `td`
+[***Help***](#312-view-help-help--h) | `help` | `h`
+[***Clear all data***](#314-clear-data-clear) | `clear` | -
+[***Exit***](#315-exit-the-app-exit) | `exit` | -
 
