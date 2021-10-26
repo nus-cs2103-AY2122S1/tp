@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalPositions.getTypicalPositionBook;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.applicant.Applicant;
@@ -28,10 +27,9 @@ import seedu.address.testutil.PositionBuilder;
  * Contains integration tests (interaction with the Model) and unit tests for {@code RejectionRateCommand}.
  */
 public class RejectionRateCommandTest {
-    private final Model model = new ModelManager(getTypicalAddressBook(), getTypicalApplicantBook(),
+    private final ModelManager model = new ModelManager(getTypicalAddressBook(), getTypicalApplicantBook(),
             getTypicalPositionBook(), new UserPrefs());
-    private final Position position = new PositionBuilder().withTitle("software engineer").withDescription("This is a "
-            + "placeholder description").build();
+    private final Position position = new PositionBuilder().build();
 
     @Test
     public void constructor_nullPosition_throwsNullPointerException() {
@@ -45,8 +43,9 @@ public class RejectionRateCommandTest {
 
     @Test
     public void execute_existingPositionWithoutApplicant_successful() throws Exception {
+        model.addPosition(position);
         assertEquals(new CommandResult(MESSAGE_NO_CURRENT_APPLICANTS),
-                new RejectionRateCommand(DATASCIENTIST.getTitle()).execute(model));
+                new RejectionRateCommand(position.getTitle()).execute(model));
     }
 
     @Test
