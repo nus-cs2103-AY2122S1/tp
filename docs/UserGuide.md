@@ -191,19 +191,33 @@ Example:
 
 * `edit 2 pp/91112222` changes the 2nd student's parent contact number in TutorAid to 91112222.
 
-### Viewing a student : `view`
+### Viewing a student : `view -s`
 
-Displays the specified student’s name, phone number, progress and payment status, along with their parent’s name and phone number.
+Displays the specified student’s name, phone number, progress, lessons and payment status, along with their parent’s name and phone number.
 
-Format: `view STUDENT_INDEX`
+Format: `view -s STUDENT_INDEX`
 
 * Display details of the student at the specified STUDENT_INDEX.
+* Display details of the lessons the student at the specified STUDENT_INDEX has.
 * The index refers to the index number shown in the displayed student list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `view 2` shows the details associated with the 2nd student
+Example:
+* `view -s 2` shows the details associated with the 2nd student
 
+### Viewing a lesson : `view -l`
+
+Displays the specified lesson’s name, capacity, price and timing, along with names of students who have the specified lesson.
+
+Format: `view -l LESSON_INDEX`
+
+* Display details of the lesson at the specified LESSON_INDEX.
+* Display details of the students that have the lesson at the specified LESSON_INDEX.
+* The index refers to the index number shown in the displayed lesson list.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `view -l 2` shows the details associated with the 2nd lesson
 
 ### Clearing all entries : `clear`
 
