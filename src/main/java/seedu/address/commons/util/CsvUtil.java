@@ -88,10 +88,6 @@ public class CsvUtil {
             String address = row.get("address");
             String phone = row.get("phone");
             String tagged = row.get("tagged");
-            if (name == null | github == null | telegram == null | email == null
-                    | address == null | phone == null | tagged == null) {
-                throw new IllegalValueException("Missing header");
-            }
             CsvAdaptedPerson person = new CsvAdaptedPerson(name, telegram, github, phone, email, address, tagged);
             csvAdaptedPersons.add(person);
         }

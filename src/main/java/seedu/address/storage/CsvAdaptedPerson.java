@@ -21,7 +21,7 @@ import seedu.address.model.tag.Tag;
 /**
  * A Jackson-CSV-Friendly version of {@link Person}
  */
-@JsonPropertyOrder({"name", "github", "telegram", "address", "phone", "email", "tags"}) // sequence in csv
+@JsonPropertyOrder({"name", "github", "telegram", "address", "phone", "email", "tagged"}) // sequence in csv
 public class CsvAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -32,20 +32,20 @@ public class CsvAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String tags;
+    private final String tagged;
 
     /**
      * Constructs a {@code CsvAdaptedPerson} with the given person details.
      */
     public CsvAdaptedPerson(String name, String telegram, String github, String phone,
-            String email, String address, String tags) {
+            String email, String address, String tagged) {
         this.name = name;
         this.telegram = telegram;
         this.github = github;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags = tags;
+        this.tagged = tagged;
     }
 
     /**
@@ -62,7 +62,7 @@ public class CsvAdaptedPerson {
                 .stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList());
-        tags = String.join(" ", tagsString);
+        tagged = String.join(" ", tagsString);
     }
 
     public String getName() {
@@ -89,8 +89,8 @@ public class CsvAdaptedPerson {
         return address;
     }
 
-    public String getTags() {
-        return tags;
+    public String getTagged() {
+        return tagged;
     }
 
     /**
@@ -99,8 +99,12 @@ public class CsvAdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
+        if (tagged == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Tag.class.getSimpleName()));
+
+        }
         List<Tag> personTags = new ArrayList<>();
-        String[] stringTags = tags.split(" ");
+        String[] stringTags = tagged.split(" ");
         for (String tagString : stringTags) {
             if (tagString.isEmpty()) {
                 continue;
