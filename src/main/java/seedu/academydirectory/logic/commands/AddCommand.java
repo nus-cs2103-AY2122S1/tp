@@ -58,6 +58,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
+    public static final String INVALID_FORMAT = "To know how to use `add`, type in `help add` for information";
+
     public static final String MESSAGE_SUCCESS = "New student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the academy directory";
 
