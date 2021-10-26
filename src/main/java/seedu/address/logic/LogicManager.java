@@ -79,8 +79,10 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        storage.saveAddressBook(addressBook);
+    public void saveAllData() throws IOException {
+        storage.saveAddressBook(model.getAddressBook());
+        storage.saveUserProfile(new JsonSerializableUserProfile(new JsonAdaptedPerson(model.getUserProfile())));
+        storage.saveUserPrefs(model.getUserPrefs());
     }
 
     @Override
@@ -126,5 +128,15 @@ public class LogicManager implements Logic {
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         model.updateFilteredPersonList(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getModifiableList() {
+        return model.getAddressBook().getModifiableList();
+    }
+
+    @Override
+    public void sort() {
+        model.getAddressBook().sort();
     }
 }

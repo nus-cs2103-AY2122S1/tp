@@ -97,6 +97,18 @@ public class AddressBookTest {
         public ObservableList<Person> getPersonList() {
             return persons;
         }
+
+        @Override
+        public ObservableList<Person> getModifiableList() {
+            return null;
+        }
+
+        @Override
+        public void sort() {
+
+        }
+
+
     }
 
 }

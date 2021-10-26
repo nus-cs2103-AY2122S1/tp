@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javafx.scene.image.Image;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -33,7 +35,9 @@ public class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
-    private final boolean isFavourite;
+    private boolean isFavourite;
+    private final HashMap<String, Double> gitStats;
+    private final Image image;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -47,7 +51,9 @@ public class JsonAdaptedPerson {
             @JsonProperty("email") String email,
             @JsonProperty("address") String address,
             @JsonProperty("tagged") List<JsonAdaptedTag> tagged,
-            @JsonProperty("isFavourite") boolean isFavourite) {
+            @JsonProperty("isFavourite") boolean isFavourite,
+            @JsonProperty("gitStats") HashMap<String, Double> gitStats,
+            @JsonProperty("image") Image image) {
         this.name = name;
         this.telegram = telegram;
         this.github = github;
@@ -58,6 +64,8 @@ public class JsonAdaptedPerson {
             this.tagged.addAll(tagged);
         }
         this.isFavourite = isFavourite;
+        this.gitStats = gitStats;
+        this.image = image;
     }
 
     /**
@@ -74,6 +82,8 @@ public class JsonAdaptedPerson {
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
         isFavourite = source.isFavourite();
+        image = source.getProfilePicture();
+        gitStats = source.getGitStats();
     }
 
     /**
@@ -141,8 +151,19 @@ public class JsonAdaptedPerson {
         final boolean modelIsFavourite = isFavourite;
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelTelegram, modelGithub, modelPhone,
-                modelEmail, modelAddress, modelTags, modelIsFavourite);
+
+        if (image == null) {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite);
+        }
+
+        if (gitStats == null || gitStats.isEmpty()) {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite, image);
+        } else {
+            return new Person(modelName, modelTelegram, modelGithub, modelPhone,
+                    modelEmail, modelAddress, modelTags, modelIsFavourite, image, gitStats);
+        }
     }
 
 }
