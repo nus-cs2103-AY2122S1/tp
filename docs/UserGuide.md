@@ -134,7 +134,7 @@ Format: `genre INDEX c/ACTION g/GENRE [g/GENRE]`
 - Updates the anime at the specified `INDEX`
 - The index must be a positive integer 1, 2, 3, ...
 
-  
+
   Examples:
 *  `genre 1 c/add g/shounen g/medieval fantasy g/isekai`
 *  `genre 1 c/delete g/shounen g/medieval fantasy g/isekai`
@@ -156,8 +156,8 @@ Format: `find [n/NAME KEYWORD]... [g/GENRE KEYWORD]...`
 
 - `NAME KEYWORD` refers to the name keyword(s) you are searching for
 - `GENRE KEYWORD` refers to the genre keyword(s) you are searching for
-- `find` has to be followed by at least one search term  
-  
+- `find` has to be followed by at least one search term
+
 Example:
 *  `find n/boku no n/hero g/comedy`
 
