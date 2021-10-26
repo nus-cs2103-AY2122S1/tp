@@ -68,10 +68,12 @@ public class StudentCard extends UiPart<Region> {
                 .forEach(remark -> remarks.getChildren().add(new Label(remark.remarkName)));
 
         if (student.getNumberOfLessonsEnrolled() > 0) {
-            lessons.setText(student.getLessonCodes().stream()
+            StringBuilder lessonSb = new StringBuilder();
+            student.getLessonCodes().stream()
                     .map(LessonCode::toString)
                     .sorted()
-                    .reduce("", (l1, l2) -> l1 + "  " + l2));
+                    .forEach(lc -> lessonSb.append(lc).append("   "));
+            lessons.setText(lessonSb.toString());
         } else {
             lessons.setText("-");
         }
