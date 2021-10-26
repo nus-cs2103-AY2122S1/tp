@@ -6,6 +6,8 @@ import java.util.List;
 
 import seedu.address.model.TeachingAssistantBuddy;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.student.Student;
+import seedu.address.model.task.Task;
 
 public class TypicalModules {
 
@@ -33,7 +35,22 @@ public class TypicalModules {
     public static TeachingAssistantBuddy getTypicalBuddy() {
         TeachingAssistantBuddy tab = new TeachingAssistantBuddy();
         for (Module module: getTypicalModules()) {
-            tab.addModule(module);
+            List<Student> studentList = new ArrayList<>();
+            for (Student student : module.getFilteredStudentList()) {
+                Student studentToBeAdded = new StudentBuilder().withName(student.getName().fullName)
+                        .withStudentId(student.getStudentId().value).withEmail(student.getEmail().value)
+                        .withTeleHandle(student.getTeleHandle().value).build();
+                studentList.add(studentToBeAdded);
+            }
+            List<Task> taskList = new ArrayList<>();
+            for (Task task : module.getTaskList()) {
+                Task taskToBeAdded = new TaskBuilder().withName(task.getTaskName().taskName)
+                        .withId(task.getTaskId().value).withDeadline(task.getTaskDeadline().value).build();
+                taskList.add(taskToBeAdded);
+            }
+            Module moduleToBeAdded = new ModuleBuilder().withName(module.getName().toString())
+                    .withStudents(studentList).withTasks(taskList).build();
+            tab.addModule(moduleToBeAdded);
         }
         return tab;
     }

@@ -43,7 +43,7 @@ public class AddStudentCommand extends AddCommand {
             + PREFIX_EMAIL + "johnd@example.com ";
 
     public static final String MESSAGE_ADD_STUDENT_SUCCESS = "New student added to the module: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the module";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This student already exists in the module";
 
     private final Student studentToAdd;
     private ModuleName moduleName;
@@ -71,7 +71,7 @@ public class AddStudentCommand extends AddCommand {
                 module = mod;
 
                 if (module.hasStudent(studentToAdd)) {
-                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+                    throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
                 }
 
                 module.addStudent(studentToAdd);

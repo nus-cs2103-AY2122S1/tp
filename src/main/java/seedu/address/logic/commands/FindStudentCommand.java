@@ -16,7 +16,7 @@ import seedu.address.model.module.ModuleName;
 import seedu.address.model.module.ModuleNameEqualsKeywordsPredicate;
 import seedu.address.model.module.student.Student;
 import seedu.address.model.module.student.StudentId;
-import seedu.address.model.module.student.StudentIdEqualsKeywordsPredicate;
+import seedu.address.model.module.student.StudentIdEqualsKeywordPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -59,7 +59,7 @@ public class FindStudentCommand extends Command {
                 ModuleNameEqualsKeywordsPredicate predicate =
                         new ModuleNameEqualsKeywordsPredicate(Arrays.asList(moduleNameKeywords));
                 model.updateFilteredModuleList(predicate);
-                findStudentFromModule(module);
+                findStudentFromModule(module, model);
                 return new CommandResult(String.format(MESSAGE_FIND_STUDENT_SUCCESS, studentId));
             }
         }
@@ -72,16 +72,17 @@ public class FindStudentCommand extends Command {
      * @param module The module the student will be searched from.
      * @throws CommandException Exception thrown when student is not found.
      */
-    public void findStudentFromModule(Module module) throws CommandException {
+    public void findStudentFromModule(Module module, Model model) throws CommandException {
         List<Student> studentList = module.getFilteredStudentList();
         for (Student student : studentList) {
             if (student.getStudentId().equals(studentId)) {
-                StudentIdEqualsKeywordsPredicate predicate =
-                        new StudentIdEqualsKeywordsPredicate(studentId.value);
+                StudentIdEqualsKeywordPredicate predicate =
+                        new StudentIdEqualsKeywordPredicate(studentId.value);
                 module.updateFilteredStudentList(predicate);
                 return;
             }
         }
+        model.updateFilteredModuleList(Model.PREDICATE_SHOW_ALL_MODULES);
         throw new CommandException(String.format(Messages.MESSAGE_STUDENT_NOT_FOUND, studentId));
     }
 
