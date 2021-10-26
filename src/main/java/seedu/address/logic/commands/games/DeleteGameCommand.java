@@ -18,6 +18,7 @@ public class DeleteGameCommand extends Command {
             + "Parameters: GAME_ID (must be an existing game id)\n"
             + "Example: " + COMMAND_WORD + " CSGO";
     public static final String MESSAGE_DELETE_GAME_SUCCESS = "Deleted Game: %1$s";
+
     private GameId gameToDeleteId;
 
     /**
@@ -38,13 +39,14 @@ public class DeleteGameCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        if (model.hasGameWithId(gameToDeleteId)) {
-            model.deleteGame(gameToDeleteId);
-            return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, gameToDeleteId),
-                    CommandType.GAME_DELETE);
-        } else {
+        if (!model.hasGameWithId(gameToDeleteId)) {
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_GAME_ID);
         }
+
+        model.removeLinkAllFriends(gameToDeleteId);
+        model.deleteGame(gameToDeleteId);
+        return new CommandResult(String.format(MESSAGE_DELETE_GAME_SUCCESS, gameToDeleteId),
+                CommandType.GAME_DELETE);
     }
 
     @Override

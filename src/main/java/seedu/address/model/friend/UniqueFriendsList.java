@@ -125,6 +125,19 @@ public class UniqueFriendsList implements Iterable<Friend> {
     }
 
     /**
+     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     */
+    public void removeLinkAllFriends(GameId gameId) {
+        for (Friend currFriend : internalList) {
+            Set<GameFriendLink> currSet = new HashSet<>(currFriend.getGameFriendLinks());
+            currSet.removeIf(gameFriendLink -> gameFriendLink.getGameId().equals(gameId));
+            Friend editedFriend = new Friend(currFriend.getFriendId(), currFriend.getFriendName(),
+                    currSet, currFriend.getSchedule());
+            this.setFriend(currFriend, editedFriend);
+        }
+    }
+
+    /**
      * Unlinks a Friend {@code friendtoUnlink} with game {@code gameToUnlink}.
      * The friend must exist in the list.
      */

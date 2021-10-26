@@ -119,6 +119,11 @@ public interface Model {
     void linkFriend(Friend toLink, GameFriendLink gameFriendLink);
 
     /**
+     * Removes the {@code GameFriendLink} from all friends that are associated with the game of {@code gameId}.
+     */
+    void removeLinkAllFriends(GameId gameId);
+
+    /**
      * Unlinks the friend {@code toUnlink} with the Game {@code game}.
      */
     void unlinkFriend(Friend toUnlink, Game game);

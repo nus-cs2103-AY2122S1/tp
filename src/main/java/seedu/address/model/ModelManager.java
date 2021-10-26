@@ -147,6 +147,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void removeLinkAllFriends(GameId gameId) {
+        friendsList.removeLinkAllFriends(gameId);
+    }
+
+    @Override
     public void unlinkFriend(Friend toUnlink, Game game) {
         friendsList.unlinkFriend(toUnlink, game);
     }
@@ -194,14 +199,8 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteGame(GameId targetId) {
-        // TODO: Check for gameId not found for DELETE.
-        Game gameToDelete =
-                this.getGamesList().getGamesList()
-                        .stream()
-                        .filter(game -> game.getGameId().equals(targetId))
-                        .findFirst()
-                        .get();
-        gamesList.removeGame(gameToDelete);
+        requireNonNull(targetId);
+        gamesList.removeGame(getGame(targetId));
     }
 
     @Override
