@@ -20,6 +20,8 @@ If you are already familiar with Unix commands, then UNIon will be easy for you 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   
+
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -261,6 +263,7 @@ Action | Format, Examples
 **Clear contacts** | `rm -contacts`
 **Add new folder** | `mkdir FOLDER_NAME` e.g. `mkdir CS2103`
 **Add contact to folder** | `echo INDEX >> FOLDER_NAME` e.g. `echo 3 >> CS2103`
+**Add multiple contacts to folder** | `echo INDEX INDEX INDEX >> FOLDER_NAME` e.g. `echo 3 4 1 9 10 >> CS2103`
 **List folders** | `ls -folders`
 **Edit folder name** | `mv OLD_FOLDER_NAME` &#124; `NEW_FOLDER_NAME` e.g. `mv CS2103` &#124; `CS2102
 **Find folders** | `find -folders KEYWORD [MORE_KEYWORDS]`<br> e.g., `find -folders CS2103``
