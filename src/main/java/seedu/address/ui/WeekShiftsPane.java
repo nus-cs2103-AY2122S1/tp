@@ -23,7 +23,7 @@ public class WeekShiftsPane extends UiPart<Region> {
     private static DayCard friday;
     private static DayCard saturday;
     private static DayCard sunday;
-    private static WeekShiftsPane main_instance;
+    private static WeekShiftsPane mainInstance;
     private final Logger logger = LogsCenter.getLogger(WeekShiftsPane.class);
 
     @FXML
@@ -46,12 +46,17 @@ public class WeekShiftsPane extends UiPart<Region> {
     }
 
     public static WeekShiftsPane getInstance(ObservableList<Person> stafflist) {
-        if (main_instance == null) {
-            main_instance = new WeekShiftsPane(stafflist);
+        if (mainInstance == null) {
+            mainInstance = new WeekShiftsPane(stafflist);
         }
-        return main_instance;
+        return mainInstance;
     }
 
+    /**
+     * Refreshes the listView in the SlotCard specified.
+     * @param day Day of the slotCard of the listView to be refreshed.
+     * @param slot Slot of the slotCard of the listView to be refreshed.
+     */
     public static void refreshDayCard(DayOfWeek day, Slot slot) {
         switch (day) {
         case MONDAY:
@@ -74,6 +79,8 @@ public class WeekShiftsPane extends UiPart<Region> {
             break;
         case SUNDAY:
             sunday.refreshSlotCard(slot);
+            break;
+        default:
             break;
         }
     }

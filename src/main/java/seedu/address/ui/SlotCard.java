@@ -1,16 +1,8 @@
 package seedu.address.ui;
 
-import static javafx.collections.FXCollections.observableList;
-
 import java.time.DayOfWeek;
-import java.util.List;
 import java.util.logging.Logger;
 
-import javafx.beans.Observable;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,10 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.util.Callback;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Slot;
 
 /**
@@ -43,8 +33,8 @@ public class SlotCard extends UiPart<Region> {
 
     private final DayOfWeek day;
     private final Slot slot;
-    ObservableList<Person> filteredList;
-    ObservableList<Person> stafflist;
+    private ObservableList<Person> filteredList;
+    private ObservableList<Person> stafflist;
 
     @FXML
     private VBox slotPane;
@@ -70,11 +60,15 @@ public class SlotCard extends UiPart<Region> {
         staffWorkingList.setCellFactory(listView -> new PersonNameCell());
     }
 
+    /**
+     * Refreshes the listView in this slotCard instance.
+     */
     public void refresh() {
         filteredList = stafflist.filtered(p -> p.isWorking(day, slot.getOrder()));
         staffWorkingList.setItems(filteredList);
         staffWorkingList.refresh();
     }
+
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
