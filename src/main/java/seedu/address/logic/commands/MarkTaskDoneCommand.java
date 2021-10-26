@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.Messages;
@@ -35,15 +36,15 @@ public class MarkTaskDoneCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Task> lastShownList = model.getFilteredTaskList();
+        List<Task> savedStateList = new ArrayList<>(model.getFilteredTaskList());
         StringBuilder result = new StringBuilder();
 
         for (Index targetIndex : targetIndexList) {
-            if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            if (targetIndex.getZeroBased() >= savedStateList.size()) {
                 throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
             }
 
-            Task taskToMarkCompleted = lastShownList.get(targetIndex.getZeroBased());
+            Task taskToMarkCompleted = savedStateList.get(targetIndex.getZeroBased());
             model.completeTask(taskToMarkCompleted);
             result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted));
         }
