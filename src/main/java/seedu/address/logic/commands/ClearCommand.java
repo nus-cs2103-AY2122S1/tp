@@ -12,6 +12,9 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String DESCRIPTION = "Clears the screen.";
     public static final String MESSAGE_SUCCESS = "Screen has been cleared!";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": " + DESCRIPTION + "\n"
+            + "Example: " + COMMAND_WORD;
 
 
     @Override
