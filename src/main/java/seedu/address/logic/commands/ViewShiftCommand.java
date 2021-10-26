@@ -43,8 +43,8 @@ public class ViewShiftCommand extends Command {
     private final int slotNum;
     private final LocalTime time;
     private final PersonIsWorkingPredicate isWorkingPredicate;
-    private int[] ROLE_REQ_CHECK = new int[]{};
-    private String ROLE_REQ_MESSAGE;
+    private int[] finalRoleReqCheck = new int[]{};
+    private String finalRoleReqMessage;
 
     /**
      * Constructs a ViewShiftCommand object.
@@ -92,7 +92,6 @@ public class ViewShiftCommand extends Command {
         int counter = 1;
         for (Person p : staffs) {
             boolean hasShift = p.isWorking(dayOfWeek, slotNum);
-//            result.append(dayOfWeek).append(" ").append(slotNum).append(":\n");
             if (hasShift) {
                 result.append(counter).append(". ").append(p.getName()).append("\n");
                 counter++;
@@ -101,7 +100,7 @@ public class ViewShiftCommand extends Command {
         if (counter == 0) {
             return new CommandResult(NO_STAFF_WORKING);
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result.toString() + ROLE_REQ_MESSAGE);
+            return new CommandResult(DEFAULT_MESSAGE + result.toString() + finalRoleReqMessage);
         }
     }
 
@@ -118,7 +117,7 @@ public class ViewShiftCommand extends Command {
         } else if (slotNum == INVALID_SLOT_NUMBER_INDICATING_EMPTY_PREFIXES) {
             return new CommandResult(HELP_MESSAGE + getWorkingStaffByTime(staffs));
         } else {
-            return new CommandResult(DEFAULT_MESSAGE + result + ROLE_REQ_MESSAGE);
+            return new CommandResult(DEFAULT_MESSAGE + result + finalRoleReqMessage);
         }
     }
 
@@ -155,18 +154,20 @@ public class ViewShiftCommand extends Command {
                     roleReqCheck[0] += 1;
                 } else if (r.getValue().equals("floor")) {
                     roleReqCheck[1] += 1;
-                } else if (r.getValue().equals("kitchen")){
+                } else if (r.getValue().equals("kitchen")) {
                     roleReqCheck[2] += 1;
                 }
             }
         }
 
-        ROLE_REQ_CHECK = roleReqCheck;
+        finalRoleReqCheck = roleReqCheck;
         if (roleReqCheck[0] < RoleReqStorage.getMinNumBartender()) {
             return false;
         } else if (roleReqCheck[1] < RoleReqStorage.getMinNumFloor()) {
             return false;
-        } else return roleReqCheck[2] >= RoleReqStorage.getMinNumKitchen();
+        } else {
+            return roleReqCheck[2] >= RoleReqStorage.getMinNumKitchen();
+        }
     }
 
     private void setRoleReqMessage(Model model) {
@@ -175,9 +176,9 @@ public class ViewShiftCommand extends Command {
                 : "\n\nThere is a manpower shortage! You are supposed to have:\n"
                 + RoleReqStorage.getRoleReqs() + "\n\n"
                 + "But you currently have:\n"
-                + "Bartender: " + ROLE_REQ_CHECK[0] + "\n"
-                + "Floor: " + ROLE_REQ_CHECK[1] + "\n"
-                + "Kitchen: " + ROLE_REQ_CHECK[2] + "\n";
-        ROLE_REQ_MESSAGE = roleReqMessage;
+                + "Bartender: " + finalRoleReqCheck[0] + "\n"
+                + "Floor: " + finalRoleReqCheck[1] + "\n"
+                + "Kitchen: " + finalRoleReqCheck[2] + "\n";
+        finalRoleReqMessage = roleReqMessage;
     }
 }

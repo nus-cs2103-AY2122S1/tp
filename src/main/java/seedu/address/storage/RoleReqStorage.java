@@ -26,12 +26,12 @@ public class RoleReqStorage {
                 file.getParentFile().mkdir();
             }
             file.createNewFile(); // Create the duke.txt file.
-            update(); // TODO check if this works
+            update();
             return requirements; // default should be 0, 0, 0
         }
 
         if (file.length() == 0) {
-            update(); // TODO check if this works
+            update();
             return requirements; // default should be 0, 0, 0
         }
 

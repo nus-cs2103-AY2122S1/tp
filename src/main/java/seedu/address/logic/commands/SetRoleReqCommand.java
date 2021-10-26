@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
+
+import java.io.FileNotFoundException;
+import java.util.Set;
+
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.storage.RoleReqStorage;
-
-import java.io.FileNotFoundException;
-import java.util.Set;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 public class SetRoleReqCommand extends Command {
     public static final String COMMAND_WORD = "setRoleReq";

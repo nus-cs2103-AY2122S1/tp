@@ -2,7 +2,15 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.TimeUtil.TIME_FORMATTER;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_ROLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_SALARY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DASH_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.model.person.Shift.isValidDayOfWeek;
 
 import java.time.LocalDate;
@@ -364,6 +372,13 @@ public class ParserUtil {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Parses the role requirements of form "role-number".
+     *
+     * @param roles The set of roles.
+     * @return A parsed set of role requirements as Strings of form "role-number".
+     * @throws ParseException If the roles cannot be parsed.
+     */
     public static Set<String> parseRoleRequirements(Collection<String> roles) throws ParseException {
         requireNonNull(roles);
         final Set<String> roleSet = new HashSet<>();
