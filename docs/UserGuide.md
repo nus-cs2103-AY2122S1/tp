@@ -250,7 +250,33 @@ Examples:
 * `check 2021-09-19`
 * `check 1800`
 
+### Set the tables for the restaurant: `settables`
+
+<div markdown="block" class="alert alert-danger">
+:grey_exclamation: This command will remove **ALL** reservations and overwrite previously set tables <br>
+</div>
+
+Sets the tables with the sizes specified so that reservations can be made
+
+Format:
+* `settables LIST_OF_TABLE_SIZES`
+
+
+* `LIST_OF_TABLE_SIZES` is formatted as any combination of the following:
+  * **(size of one table)**
+  * **(size of one table)x(number of tables with this size)**,<br>
+    each comma-separated from the next.
+* Values must be positive integers 
+
+Examples:
+* `settables 10,8,8,4,4,2x6,1x4`
+
+
 ### Create a reservation: `reserve` 
+
+<div markdown="block" class="alert alert-warning">
+:information_source: Tables must be set before reservations can be made. See [settables](#set-the-tables-for-the-restaurant:-`settables`)
+</div>
 
 Add a new reservation with number of people, 
 customer's phone number and the date & time.
