@@ -57,34 +57,38 @@ public class ShowCommand extends Command {
     private Group group;
 
     /**
-     * Constructor for a {@code ShowCommand}.
+     * Constructor for a {@code ShowCommand} with given {@code Index}.
      */
-    public ShowCommand(Index index, Name name, ID id, Assessment assessment, Group group) {
-        setIndex(index);
-        setName(name);
-        setId(id);
-        setAssessment(assessment);
-        setGroup(group);
-    }
-
     public ShowCommand(Index index) {
-        this(index, null, null, null, null);
+        setIndex(index);
     }
 
+    /**
+     * Constructor for a {@code ShowCommand} with given {@code Name}.
+     */
     public ShowCommand(Name name) {
-        this(null, name, null, null, null);
+        setName(name);
     }
 
+    /**
+     * Constructor for a {@code ShowCommand} with given {@code ID}.
+     */
     public ShowCommand(ID id) {
-        this(null, null, id, null, null);
+        setId(id);
     }
 
+    /**
+     * Constructor for a {@code ShowCommand} with given {@code Assessment}.
+     */
     public ShowCommand(Assessment assessment) {
-        this(null, null, null, assessment, null);
+        setAssessment(assessment);
     }
 
+    /**
+     * Constructor for a {@code ShowCommand} with given {@code ShowCommand}.
+     */
     public ShowCommand(Group group) {
-        this(null, null, null, null, group);
+        setGroup(group);
     }
 
     @Override
