@@ -13,7 +13,6 @@ public class JsonAdaptedTimePeriod {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "TimePeriod's %s field is missing!";
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
     private final String startDateTime;
     private final String endDateTime;
 
@@ -31,6 +30,7 @@ public class JsonAdaptedTimePeriod {
      * Converts a given {@code TimePeriod} into this class for Jackson use.
      */
     public JsonAdaptedTimePeriod(TimePeriod source) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         this.startDateTime = source.getStartDateTime().format(formatter);
         this.endDateTime = source.getEndDateTime().format(formatter);
     }
@@ -41,6 +41,7 @@ public class JsonAdaptedTimePeriod {
      * @throws IllegalValueException if there were any data constraints violated in the adapted TimePeriod.
      */
     public TimePeriod toModelType() throws IllegalValueException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
 
         if (startDateTime == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

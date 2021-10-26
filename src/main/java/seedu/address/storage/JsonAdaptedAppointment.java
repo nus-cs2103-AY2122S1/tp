@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +24,7 @@ public class JsonAdaptedAppointment {
 
     private final List<JsonAdaptedPerson> clients = new ArrayList<>();
     private final String location;
-    private final String timePeriod;
+    private final JsonAdaptedTimePeriod timePeriod;
     private final String description;
 
     /**
@@ -34,7 +32,7 @@ public class JsonAdaptedAppointment {
      */
     @JsonCreator
     public JsonAdaptedAppointment(@JsonProperty("clients") List<JsonAdaptedPerson> clients,
-            @JsonProperty("location") String location, @JsonProperty("timePeriod") String timePeriod,
+            @JsonProperty("location") String location, @JsonProperty("timePeriod") JsonAdaptedTimePeriod timePeriod,
             @JsonProperty("description") String description) {
         this.clients.addAll(clients);
         this.location = location;
@@ -48,14 +46,14 @@ public class JsonAdaptedAppointment {
     public JsonAdaptedAppointment(Appointment source) {
         clients.addAll(source.getClientList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
         location = source.getLocation().toString();
-        timePeriod = source.getTimePeriod().toString();
+        timePeriod = new JsonAdaptedTimePeriod(source.getTimePeriod());
         description = source.getDescription();
     }
 
     /**
      * Converts this Jackson-friendly adapted person object into the model's {@code Appointment} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted appointment.
      */
     public Appointment toModelType() throws IllegalValueException {
 
@@ -74,12 +72,9 @@ public class JsonAdaptedAppointment {
 
         if (timePeriod == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    LocalDate.class.getSimpleName()));
+                    TimePeriod.class.getSimpleName()));
         }
-        String[] timePeriodArgs = timePeriod.split("-");
-        LocalDateTime startDateTime = LocalDateTime.parse(timePeriodArgs[0]);
-        LocalDateTime endDateTime = LocalDateTime.parse(timePeriodArgs[1]);
-        final TimePeriod modelTimePeriod = new TimePeriod(startDateTime, endDateTime);
+        final TimePeriod modelTimePeriod = timePeriod.toModelType();
 
         if (description == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, String.class.getSimpleName()));
