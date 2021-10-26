@@ -1,6 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
+import seedu.address.logic.parser.*;
 import seedu.address.model.Model;
+
+import java.util.List;
 
 /**
  * Format full help instructions for every command for display.
@@ -17,7 +23,7 @@ public class HelpCommand extends Command {
 
     private boolean isShowHelp = false;
 
-    private String commandSpecified = null;
+    private String commandWord = null;
 
     /**
      * Constructor for a HelpCommand to show help window.
@@ -31,7 +37,7 @@ public class HelpCommand extends Command {
      * @param commandSpecified The command specified to show help for.
      */
     public HelpCommand(String commandSpecified) {
-        this.commandSpecified = commandSpecified;
+        this.commandWord = commandSpecified;
     }
 
     @Override
@@ -39,7 +45,74 @@ public class HelpCommand extends Command {
         if (isShowHelp) {
             return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
         } else {
-            
+            requireNonNull(commandWord);
+            CommandResult commandResult = new CommandResult(DESCRIPTION);
+
+            switch (commandWord) {
+
+            case AddCommand.COMMAND_WORD:
+                commandResult = new CommandResult(AddCommand.MESSAGE_USAGE);
+                break;
+
+            case EditCommand.COMMAND_WORD:
+                commandResult = new CommandResult(EditCommand.MESSAGE_USAGE);
+                break;
+
+            case DeleteCommand.COMMAND_WORD:
+                commandResult = new CommandResult(DeleteCommand.MESSAGE_USAGE);
+                break;
+
+            case ClearCommand.COMMAND_WORD:
+                commandResult = new CommandResult(ClearCommand.DESCRIPTION);
+                break;
+
+            case FindCommand.COMMAND_WORD:
+                commandResult = new CommandResult(FindCommand.MESSAGE_USAGE);
+                break;
+
+            case SortCommand.COMMAND_WORD:
+                commandResult = new CommandResult(SortCommand.MESSAGE_USAGE);
+                break;
+
+            case ListCommand.COMMAND_WORD:
+                commandResult = new CommandResult(ListCommand.DESCRIPTION);
+                break;
+
+            case ExitCommand.COMMAND_WORD:
+                commandResult = new CommandResult(ExitCommand.MESSAGE_USAGE);
+                break;
+
+            case HelpCommand.COMMAND_WORD:
+                commandResult = new CommandResult(HelpCommand.MESSAGE_USAGE);
+                break;
+
+            case AddTaskCommand.COMMAND_WORD:
+                commandResult = new CommandResult(AddTaskCommand.MESSAGE_USAGE);
+                break;
+
+            case DeleteTaskCommand.COMMAND_WORD:
+                commandResult = new CommandResult(DeleteTaskCommand.MESSAGE_USAGE);
+                break;
+
+            case EditTaskCommand.COMMAND_WORD:
+                commandResult = new CommandResult(EditTaskCommand.MESSAGE_USAGE);
+                break;
+
+            case ViewTaskListCommand.COMMAND_WORD:
+                commandResult = new CommandResult(ViewTaskListCommand.MESSAGE_USAGE);
+                break;
+
+            case DoneCommand.COMMAND_WORD:
+                commandResult = new CommandResult(DoneCommand.MESSAGE_USAGE);
+                break;
+
+            case UndoCommand.COMMAND_WORD:
+                commandResult = new CommandResult(UndoCommand.MESSAGE_USAGE);
+                break;
+            }
+
+            commandResult.setWriteCommand();
+            return commandResult;
         }
     }
 
