@@ -15,11 +15,19 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 1. [Introduction](#1-introduction)
 
    1.1 [What is TutAssistor?](#11-what-is-tutassistor)
+   
+   1.2 [What can TutAssistor do for you?](#12-what-can-tutassistor-do-for-you)
+   
+   1.3 [How to use this guide?](13-how-to-use-this-guide)
 
-   1.2 [How to use this guide?](12-how-to-use-this-guide)
+2. [Get started](#2-get-started)
 
-3. [Get started](#2-get-started)
-4. [Features](#3-features)
+   2.1 [Installation guide](#21-installation-guide)
+  
+   2.2 [Try it yourself!](#22-try-it-yourself)
+
+
+3. [Features](#3-features)
 
    3.1 [Add student/class](#31-add-studenttuition-class)
 
@@ -76,17 +84,27 @@ Welcome to the _TutAssistor User Guide_! Simply choose a topic below to find ans
 ### 1.1 What is TutAssistor?
 TutAssistor is a ***desktop app intended for private tutors to manage their students and classes, and it is optimized for use via a Command Line Interface (CLI)***.
 
-TutAssistor provides an all-in-one platform for tutors to track student details, resolve conflicting tuition timeslots, and efficiently make notes for each lesson.
+The CLI is...
 
-### 1.2 How to use this guide?
+Don't worry if
 
-#### Step-by-step guide for each features
+### 1.2 What can TutAssistor do for you?
+
+TutAssistor provides an all-in-one platform for you to manage information regarding your students and lessons stress-free and efficiently. In the latest version, we offer you the ability to: 
+
+* Track student details
+* Resolve conflicting tuition timeslots
+* Efficiently make notes for each lesson
+
+### 1.3 How to use this guide?
+
+#### Step-by-step guide for each feature
 
 The features in this guide are formatted with the following conventions:
 
-* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the <code>&#124;</code> symbol. The user can use the command shortcuts to reduce typing. 
-* **Command Format** - Each command is accompanied by a set of information provided by the user. Refer to the [Features](#3-features) below for details of each command.
-* **Example** - Possible usage of each features are provided. Users may follow these examples when familiarising with the app. 
+* **Command Keyword** - Each feature is executed by a command keyword. The shortcut for each command is shown together with its full command keyword separated by the <code>&#124;</code> symbol. You can use the command shortcuts to reduce typing. 
+* **Command Format** - Each command is accompanied by a set of information that you provide. Refer to the [Features](#3-features) below for details of each command.
+* **Examples** - Possible usage of each features are provided. You may follow these examples when familiarising with the app. 
 * **Screenshots** - A visualisation of the expected outcome is provided for some of the features.
 
 
@@ -94,15 +112,11 @@ The features in this guide are formatted with the following conventions:
 
 For additional information accompanying each segment, look for the following icons:
 
-<div>
-  
-&emsp; ℹ️ precedes information that are useful to remember. 
+&emsp; :information_source: precedes information that are useful to remember. 
 
-&emsp; 💡 precedes information that serve as tips for a feature.
+&emsp; :bulb: precedes information that serve as tips for a feature.
 
-&emsp; ⚠️ precedes information as an important warning.
-  
-</div>
+&emsp; :warning: precedes information as an important warning.
 
 Jump right in to the next section [2 Get Started](#2-get-started) to get you started!
 
@@ -111,12 +125,14 @@ Jump right in to the next section [2 Get Started](#2-get-started) to get you sta
 
 ## 2 Get Started
 
-### For Windows
+### 2.1 Installation guide
+
+#### For Windows
 1. Ensure you have Java 11 or above installed in your Computer. You may install it [here](https://www.oracle.com/java/technologies/downloads/).
 2. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
 3. Double click the downloaded TutAssistor.jar file to launch TutAssistor.
 
-### For Mac
+#### For Mac
 1. Ensure you have Java 11 or above installed in your Computer. You may install it [here](https://www.oracle.com/java/technologies/downloads/).
 2. Download the latest TutAssistor release from [our github site](https://github.com/AY2122S1-CS2103T-T12-4/tp/releases).
 3. Open Terminal.
@@ -135,6 +151,24 @@ Jump right in to the next section [2 Get Started](#2-get-started) to get you sta
 
 After launching the app, the GUI similar to the one shown below should appear in a few seconds. Note how the app contains some sample data.
 ![Ui](images/ui_ug.png)
+
+
+### 2.2 Try it yourself!
+
+Once you have installed the latest TutAssistor, why not give it a try?
+
+Type the command in the command box and press Enter to execute it. e.g. typing help and pressing **Enter** will open the help window.
+
+Some example commands you can try:
+
+* `view 1`: Views the 1st student show in the student list.
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`: Adds a student named `John Doe` to the TutAssistor.
+* `addtoclass si/3 tc/1`: Adds the 3rd student in the student list to the 1st class in the tuition class list.
+* `deleteclass 2`: Deletes the 2nd class shown in the tuition class list.
+* `clear`: Deletes all students and classes. Note that this action is irreversible.
+* `exit`: Exits the app.
+
+Now that you are more familiar with our app, make it yours! Head over to section [3 Features](#3-features) to learn more about the features TutAssistor can offer you!  
 
 --------------------------------------------------------------------------------------------------------------------
 <div style="page-break-after: always;"></div>
@@ -169,7 +203,8 @@ Refer to the [Additional Command Format Information](#4-additional-command-forma
 ### 3.1 Add student/tuition class
 
 #### Adding a student: `add` | `a`
-Adds a student with the specified information such as name, phone number, etc.
+Adds a student with the specified information such as name, phone number, etc. 
+> [Read more on the requirements of the various parameters used.](#4-additional-command-format-information)
 
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]`
 
@@ -183,7 +218,7 @@ a n/Richard Ng p/97865342 e/richardng@example.com a/Yishun Ave 1 block 60, #07-1
 ```
 
 #### Adding a tuition class: `addclass` | `ac`
-Adds a tuition class with a set limit of students at a specified timeslot. TutAssistor will notify the user if there are any conflicting timeslots.
+Adds a tuition class with a set limit of students at a specified [timeslot](#44-timeslot). TutAssistor will notify you if there are any conflicting timeslots.
 
 Format: `addclass n/NAME l/LIMIT ts/TIMESLOT [s/NAME,NAME,NAME...] [r/REMARK]`
 
@@ -266,7 +301,7 @@ Deletes a student or a tuition class from TutAssistor.
 * Provide multiple indices to delete multiple students or classes at once.
 
 <div markdown="span" class="alert alert-primary">
-⚠️ THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL DATA OF THE IDENTIFIED STUDENT OR CLASS.
+:warning: THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL DATA OF THE IDENTIFIED STUDENT OR CLASS.
 </div>
 
 #### Deleting students: `delete` | `del`
@@ -343,7 +378,7 @@ rm si/1 2 3 4 tc/2
 ```
 
 ### 3.6 Add remark to student/tuition class
-Upon entering the command, a pop-up window with a text box is displayed for the user to edit remarks.
+Upon entering the command, a pop-up window with a text box is displayed for you to edit remarks.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 Users can add, remove, or edit remarks through the editor window.
@@ -383,7 +418,7 @@ rec 1
 ```
 
 <div markdown="span" class="alert alert-primary">
-ℹ️ Note: When creating a new student or tuition class with the `add` command, you can use the `r/` tag to add remarks  directly.
+:information_source: Note: When creating a new student or tuition class with the `add` command, you can use the optional `r/REMARK` parameter to add remarks  directly.
 </div>
 
 ### 3.7 Find student/tuition class
@@ -444,10 +479,15 @@ Format: `listclass`
 
 Sorts tuition class list according to time or alphabetical order.
 
-* After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
-* The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
-
-Format: `sort [o/ORDER]`
+<div markdown="block" class="alert alert-primary"> 
+  
+:information_source: Note: <br>
+  
+  * After the user executes the `sort` command, the list will continue to remain sorted even after adding or editing classes.
+  
+  * The list will not be automatically sorted upon restarting TutAssistor, i.e., the user will have to execute the `sort` command again.
+  
+</div>
 
 The possible usages of `sort` are given below:
 * `sort` sorts by time
@@ -494,7 +534,7 @@ Clears all current student and tuition class data.
 Format: `clear`
 
 <div markdown="span" class="alert alert-primary">
-⚠️ THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA.
+:warning: THIS COMMAND IS IRREVERSIBLE. IT WILL DELETE ALL EXISTING STUDENT AND CLASS DATA.
 </div>
 
 ### 3.15 Exit the app: `exit`
