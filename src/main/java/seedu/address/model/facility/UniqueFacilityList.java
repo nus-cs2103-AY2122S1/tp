@@ -115,6 +115,17 @@ public class UniqueFacilityList implements Iterable<Facility> {
     }
 
     /**
+     * Returns the total capacity of the facilities in the list.
+     */
+    public int getTotalCapacity() {
+        int count = 0;
+        for (Facility facility: facilityList) {
+            count += Integer.parseInt(facility.getCapacity().capacity);
+        }
+        return count;
+    }
+
+    /**
      * Allocates members into the different facilities.
      *
      * @param members Members to be allocated.

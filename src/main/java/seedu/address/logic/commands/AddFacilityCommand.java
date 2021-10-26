@@ -50,7 +50,8 @@ public class AddFacilityCommand extends Command {
         }
 
         model.addFacility(facility);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, facility));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, facility),
+                false, true, false);
     }
 
     @Override

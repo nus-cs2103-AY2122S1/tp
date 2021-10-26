@@ -3,13 +3,17 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.tag.Tag;
 
 
 /**
@@ -98,12 +102,6 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.setAll(persons);
     }
 
-    /**
-     * Replaces the contents of this list with empty list.
-     */
-    public void resetPersons() {
-        internalList.setAll();
-    }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
@@ -144,9 +142,50 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Resets today's attendance of all members in list.
+     */
+    public void resetAttendance() {
+        for (Person person : internalList) {
+            Person toEdit = person;
+            toEdit.clearTodayAttendance();
+            setPerson(person, toEdit);
+        }
+    }
+
+    /**
      * Replaces the contents of this list with empty list.
      */
     public void resetMembers() {
         internalList.setAll();
+    }
+
+    /**
+     * Sorts the member list in alphabetical order.
+     */
+    public void sortMembersByName() {
+        Collections.sort(internalList, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                String name1 = o1.getName().toString();
+                String name2 = o2.getName().toString();
+                return name1.compareToIgnoreCase(name2);
+            }
+        });
+    }
+
+    /**
+     * Sorts the member list by number of tags.
+     * Members with more tags are first.
+     * Members with no tags are last.
+     */
+    public void sortMembersByTags() {
+        Collections.sort(internalList, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                Set<Tag> tagsO1 = o1.getTags();
+                Set<Tag> tagsO2 = o2.getTags();
+                return Integer.compare(tagsO2.size(), tagsO1.size());
+            }
+        });
     }
 }

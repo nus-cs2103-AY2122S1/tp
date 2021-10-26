@@ -18,6 +18,6 @@ public class ClearMembersCommand extends Command {
         requireNonNull(model);
         model.resetMemberList();
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, false, true);
     }
 }
