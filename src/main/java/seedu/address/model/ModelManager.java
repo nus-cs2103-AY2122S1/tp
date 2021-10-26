@@ -153,32 +153,30 @@ public class ModelManager implements Model {
 
     @Override
     public void markStudentAttendance(Student target, int week) {
-        requireAllNonNull(target);
-        Student newPerson = target;
-
-        newPerson.getAttendance().toggleAttendance(week);
-        addressBook.setStudent(target, newPerson);
+        requireAllNonNull(target, week);
+        Student newStudent = target;
+        newStudent.toggleAttendance(week);
+        setStudent(target, newStudent);
     }
 
     @Override
     public String getStudentAttendance(Student target, int week) {
-        requireAllNonNull(target);
-        return target.getAttendance().checkPresent(week) == 1 ? "present" : "absent";
+        requireAllNonNull(target, week);
+        return target.checkPresent(week) == 1 ? "present" : "absent";
     }
 
     @Override
     public void markStudentParticipation(Student target, int week) {
-        requireAllNonNull(target);
-        Student newPerson = target;
-
-        newPerson.getParticipation().toggleParticipation(week);
-        addressBook.setStudent(target, newPerson);
+        requireAllNonNull(target, week);
+        Student newStudent = target;
+        newStudent.getParticipation().toggleParticipation(week);
+        setStudent(target, newStudent);
     }
 
     @Override
     public String getStudentParticipation(Student target, int week) {
-        requireAllNonNull(target);
-        return target.getParticipation().checkPresent(week) == 1 ? "participated" : "not participated";
+        requireAllNonNull(target, week);
+        return target.checkParticipated(week) == 1 ? "participated" : "not participated";
     }
 
     @Override

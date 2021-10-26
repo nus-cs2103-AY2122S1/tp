@@ -130,6 +130,22 @@ public class Student {
         return Collections.unmodifiableSet(tags);
     }
 
+    public int checkPresent(int week) {
+        return attendance.checkPresent(week);
+    }
+
+    public void toggleAttendance(int week) {
+        attendance.toggleAttendance(week);
+    }
+
+    public int checkParticipated(int week) {
+        return participation.checkParticipated(week);
+    }
+
+    public void toggleParticipation(int week) {
+        participation.toggleParticipation(week);
+    }
+
     /**
      * Returns true if both students have the same name.
      * This defines a weaker notion of equality between two students.

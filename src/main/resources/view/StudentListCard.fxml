@@ -17,9 +17,9 @@
     <HBox>
       <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
         <padding>
-          <Insets top="5" right="10" bottom="5" left="15" />
+          <Insets top="15" right="20" bottom="15" left="20" />
         </padding>
-        <HBox spacing="5" alignment="CENTER_LEFT">
+        <HBox spacing="10" alignment="CENTER_LEFT">
           <minWidth>
             <!-- Ensures that the label text is never truncated -->
             <Region fx:constant="USE_PREF_SIZE" />

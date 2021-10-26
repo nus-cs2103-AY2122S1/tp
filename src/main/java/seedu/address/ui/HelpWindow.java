@@ -96,6 +96,7 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.setText(HELP_MESSAGE);
         TableColumn<CommandCell, String> column1 = new TableColumn<>("Command");
         column1.setCellValueFactory(new PropertyValueFactory<>("commandWord"));
+        column1.setPrefWidth(150);
 
         TableColumn<CommandCell, String> column2 = new TableColumn<>("Usage");
         column2.setCellValueFactory(new PropertyValueFactory<>("usage"));
