@@ -5,11 +5,13 @@ import java.util.function.Predicate;
 
 import seedu.address.model.skill.Skill;
 
-
-
 public class ContactHasSkillPredicate implements Predicate<Person> {
     private final List<String> tags;
-    public ContactHasSkillPredicate(List<String> tags) { this.tags = tags; }
+
+    public ContactHasSkillPredicate(List<String> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public boolean test(Person person) {
         if (!tags.isEmpty()) {

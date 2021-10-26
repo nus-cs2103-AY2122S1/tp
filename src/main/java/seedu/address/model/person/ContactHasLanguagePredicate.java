@@ -7,7 +7,11 @@ import seedu.address.model.skill.Language;
 
 public class ContactHasLanguagePredicate implements Predicate<Person> {
     private final List<String> tags;
-    public ContactHasLanguagePredicate(List<String> tags) { this.tags = tags; }
+
+    public ContactHasLanguagePredicate(List<String> tags) {
+        this.tags = tags;
+    }
+
     @Override
     public boolean test(Person person) {
         if (!tags.isEmpty()) {
