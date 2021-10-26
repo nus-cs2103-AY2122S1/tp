@@ -11,10 +11,13 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.parser.Alias;
 import seedu.address.model.student.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -91,6 +94,35 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredStudentList().remove(0));
+    }
+
+    @Test
+    public void setAndGetAliases_returnsEqualMap() {
+        ModelManager modelManager = new ModelManager();
+        Map<String, String> aliases = new HashMap<>();
+        aliases.put("bye", "exit");
+        modelManager.setAliases(aliases);
+        assertEquals(modelManager.getAliases(), aliases);
+    }
+
+    @Test
+    public void addAlias_getAlias_returnsExpectedMap() {
+        ModelManager modelManager = new ModelManager();
+        Alias alias = new Alias("bye", "exit");
+        modelManager.addAlias(alias);
+
+        Map<String, String> expectedAliases = new HashMap<>();
+        expectedAliases.put("bye", "exit");
+        assertEquals(modelManager.getAliases(), expectedAliases);
+    }
+
+    @Test
+    public void removeAlias() {
+        ModelManager modelManager = new ModelManager();
+        Alias alias = new Alias("bye", "exit");
+        modelManager.addAlias(alias);
+        modelManager.removeAlias(alias.getAliasWord());
+        assertEquals(modelManager.getAliases(), new HashMap<>());
     }
 
     @Test

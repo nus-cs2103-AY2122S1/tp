@@ -67,7 +67,7 @@ public class UserPrefs implements ReadOnlyUserPrefs {
 
     public void setAliases(Map<String, String> aliases) {
         requireNonNull(aliases);
-        this.aliases = aliases;
+        this.aliases = new HashMap<>(aliases);
     }
 
     public void addAlias(Alias alias) {

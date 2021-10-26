@@ -7,6 +7,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -104,6 +106,9 @@ public class JsonUserPrefsStorageTest {
 
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(new GuiSettings(1200, 200, 0, 2, 0.5));
+        Map<String, String> aliases = new HashMap<>();
+        aliases.put("bye", "exit");
+        original.setAliases(aliases);
 
         Path pefsFilePath = testFolder.resolve("TempPrefs.json");
         JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
@@ -115,6 +120,8 @@ public class JsonUserPrefsStorageTest {
 
         //Try saving when the file exists
         original.setGuiSettings(new GuiSettings(5, 5, 5, 5, 0.5));
+        aliases.put("purge", "clear");
+        original.setAliases(aliases);
         jsonUserPrefsStorage.saveUserPrefs(original);
         readBack = jsonUserPrefsStorage.readUserPrefs().get();
         assertEquals(original, readBack);
