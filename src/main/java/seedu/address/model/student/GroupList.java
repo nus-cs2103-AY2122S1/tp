@@ -118,11 +118,6 @@ public class GroupList {
         }
     }
 
-    //TODO: delete
-    public List<Group> getGroups() {
-        return groups;
-    }
-
     /**
      * Replaces the contents of this list with {@code Group}.
      */
