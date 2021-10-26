@@ -102,7 +102,7 @@ public class AppointmentBuilder {
      * Sets the {@code TimePeriod} of the {@code Appointment} that we are building.
      */
     public AppointmentBuilder withTimePeriod(String startTime, String endTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
         this.timePeriod = new TimePeriod(LocalDateTime.parse(startTime, formatter),
                 LocalDateTime.parse(endTime, formatter));
         return this;

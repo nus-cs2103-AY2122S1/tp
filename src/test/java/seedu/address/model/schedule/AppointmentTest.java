@@ -28,8 +28,8 @@ public class AppointmentTest {
         // same attributes, different object
         Appointment similarAliceAppointment = new Appointment(testClients,
                 new Address("369 Tanjong Rhu"),
-                new TimePeriod(LocalDateTime.of(2021, 12, 25, 21, 30),
-                        LocalDateTime.of(2021, 12, 25, 22, 30)),
+                new TimePeriod(LocalDateTime.of(2021, 12, 25, 10, 00),
+                        LocalDateTime.of(2021, 12, 25, 11, 00)),
                 "Talk about sales");
         assertTrue(ALICE_APPOINTMENT.equals(similarAliceAppointment));
 

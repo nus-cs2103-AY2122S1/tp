@@ -132,4 +132,19 @@ public class TimePeriod implements Comparable<TimePeriod> {
 
         return builder.toString();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof TimePeriod)) {
+            return false;
+        }
+
+        TimePeriod otherTimePeriod = (TimePeriod) other;
+        return otherTimePeriod.startDateTime.equals(startDateTime)
+                && otherTimePeriod.endDateTime.equals(endDateTime);
+    }
 }
