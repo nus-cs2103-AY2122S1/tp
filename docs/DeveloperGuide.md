@@ -234,9 +234,39 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
-### \[Proposed\] Data archiving
+### Tags
 
-_{Explain here how the data archiving feature will be implemented}_
+#### Implementation
+
+Tags for contacts are implemented as a `Tag` class, and are stored internally in a `Set<Tag>` within the `Person` object. Tags are parsed and created through the `add`, `edit` and `tag` commands, and removed through the `edit` and `untag` commands. Multiple **distinct** tags can also be added for each person.
+
+#### Usage
+
+Given below is an example usage scenario and how the Tag mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `add ... t/friend` command to add a person tagged with `friend` into CONNECTIONS.
+
+Step 3. CONNECTIONS displays the newly added contact with the added tag.
+
+Step 4. The user decides to add additional tags to the contact at index 1, and executes `tag 1 t/classmate`.
+
+Step 5. CONNECTIONS will update the specified contact to include the new tag `classmate`
+
+Step 6. The user decides to remove the tag `student` from a contact at index 3, and executes `untag 3 t/student`.
+
+Step 7. CONNECTIONS updates and removes the tag `student` from the contact.
+
+#### Design considerations:
+
+* **Current implementation: Tags are saved within a `Set<Tag>` within `Person`**
+  * Pros: Easy to implement and doesn't allow for duplicates. 
+  * Cons: Searching for contacts by tags may be slow, especially if there are many contacts, with each contact having multiple tags.
+  
+* **Alternative: Utilise a separate `HashMap` data structure to map contacts to tags.**
+  * Pros: Fast retrieval of tagged contacts.
+  * Cons: Difficult to maintain a separate data structure.
 
 ### \[Work in progress\] Pin feature
 
@@ -271,6 +301,96 @@ The following sequence diagram shows how the pin operation works:
 * **Alternative 2 (current choice):** Person has Pin object to indicate if the person is pinned or not
     * Pros: More flexible to expand, other methods can be added to Pin if needed.
     * Cons: Will use more memory.
+    
+
+### Find feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindCommand#Execute`
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application.
+
+Step 2. The user executes `find n/David t/friend t/football` to search for a matching entry.
+
+Step 3. Connections displays any person whose name contains `David` **while also having** `friend` **and** 
+`football` tagged to them.
+
+#### Design considerations:
+
+**Aspect: How Find executes:**
+
+* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+    * Pros: Straightforward.
+    * Cons: Introduces additional and unnecessary complexities to ModelManager.
+
+* **Alternative 2 (current choice):** Create a FindPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of Find.
+    * Cons: More code.
+
+### FindOr feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `FindOrCommand#Execute`
+
+Given below is an example usage scenario and how the Find mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `findOr n/David n/Henry t/friend t/footnall` to search for a matching entry.
+
+Step 3. Connections displays all persons whose name contains **either** `David` **or** `Henry` **OR** are 
+tagged to **either** `friend` **or** `football`.
+
+#### Design considerations:
+
+**Aspect: How FindOr executes:**
+
+* **Alternative 1:** Utilise NameContainsKeywordsPredicate and PersonsTagsContainsCaseInsensitiveTags
+    * Pros: Straightforward.
+    * Cons: Introduces additional and unnecessary complexities to ModelManager.
+
+* **Alternative 2 (current choice):** Create a FindOrPredicate to store Name(s) and Tag(s)
+    * Pros: Cleaner implementation. Only need to modify a method to modify the functionality of FindOr.
+    * Cons: More code.
+
+
+### \[Work in progress\] Help feature
+
+#### Implementation
+
+The operation are exposed in the `Command` interface as `Command#Execute`, specifically in `HelpCommand#Execute`
+
+Given below is an example usage scenario and how the Help mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `help` to seek help on CONNECTION's usage.
+
+Step 3. CONNECTIONS displays a list of available commands.
+
+Step 4. The user decides to view the usage of `add` to learn to add a contact, and executes `help add`.
+
+Step 5. CONNECTIONS will display a detailed help message on the usage of `add` command.
+
+
+### \[Work in progress\] Birthday Reminder feature
+Shows a list of people with upcoming birthday.
+
+#### Proposed Implementation
+
+Step 1. On app startup sort people with birthday by birth month and day only into a list of person.
+
+Step 2. The first person in the birthday reminder list will have the next birth month and day with respect 
+to current day.
+
+Step 3. The rest of the list with birthday after this first person will be displayed in sorted order.
+
+Step 4. Once at the end of the list (at person with latest birthday), cycle back to the person with the 
+earliest birthday and display remaining people in sorted order.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -468,7 +588,7 @@ Future versions user stories
 
 1.  User chooses to look for an entry
 2.  Use provides the search term
-3.  Connections return all entries that matches the search term
+3.  Connections returns all entries that matches all search terms provided
 
     Use case ends.
 
@@ -480,11 +600,15 @@ Future versions user stories
     
       Use case ends.
 
-* 2a. No existing entries match the search term provided
+* 2b. No existing entries match the search term provided
     
-    * 2a1. Connections display a message to indicate no matching entries
+    * 2b1. Connections display a message to indicate no matching entries
     
       Use case resumes at step 2.
+    
+* 2c. FindOr command is used
+    
+    * 2c1. Connections return all entries that matches any of the search terms provided.
 
 **Use case: Find people via Tags**
 
@@ -601,6 +725,27 @@ Future versions user stories
     * 3b1. Connections display an error message
 
       Use case resumes at step 2.
+
+**Use case: Getting help**
+
+**MSS**
+
+1.  User requests to show help for a command
+2.  Connections show the guide on how to use the command
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. Command was not provided
+  * 2a1. Connections show all available commands
+
+      Use case ends.
+
+* 2b. Command provided is invalid
+  * 2a1. Connections display an error message followed by a list of valid commands
+
+  Use case ends.
     
 *{More to be added}*
 

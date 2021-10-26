@@ -1,6 +1,8 @@
 [![Java CI](https://github.com/AY2122S1-CS2103-F09-4/tp/actions/workflows/gradle.yml/badge.svg)](https://github.com/AY2122S1-CS2103-F09-4/tp/actions/workflows/gradle.yml)
 ![Ui](docs/images/Ui.png)
+
 ##Connections
+
 Connections is an address book application with a text based UI built for university students who possess
 any combination of the following traits:
   * Forgetful
