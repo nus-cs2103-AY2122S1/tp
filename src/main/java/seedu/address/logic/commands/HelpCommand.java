@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import seedu.address.logic.parser.*;
 import seedu.address.model.Model;
-
-import java.util.List;
 
 /**
  * Format full help instructions for every command for display.
@@ -112,6 +108,9 @@ public class HelpCommand extends Command {
 
             case UndoCommand.COMMAND_WORD:
                 commandResult = new CommandResult(UndoCommand.MESSAGE_USAGE);
+                break;
+
+            default:
                 break;
             }
 

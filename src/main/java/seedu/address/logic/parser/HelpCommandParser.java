@@ -3,13 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteTaskCommand;
 import seedu.address.logic.commands.DoneCommand;
@@ -29,6 +25,13 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class HelpCommandParser {
 
+    /**
+     * Parses the given {@code String} of argument in the context of the HelpCommand
+     * and returns a HelpCommand object for execution.
+     * @param args String argument
+     * @return HelpCommand
+     * @throws ParseException if the user input does not conform to the expected format
+     */
     public HelpCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         String[] argsArray = trimmedArgs.split(" ");
