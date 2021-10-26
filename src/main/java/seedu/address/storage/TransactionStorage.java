@@ -47,8 +47,8 @@ public class TransactionStorage {
 
         try {
             return Optional.of(jsonTransaction.get().toModelType());
-        } catch (IllegalValueException ive) {
-            throw new DataConversionException(ive);
+        } catch (IllegalValueException e) {
+            throw new DataConversionException(e);
         }
     }
 }

@@ -169,4 +169,8 @@ public interface Model {
      * @see Model.DisplayMode
      */
     DisplayMode getDisplayMode();
+
+    void addCostBookKeeping(Double cost);
+
+    void addRevenueBookKeeping(Double revenue);
 }
