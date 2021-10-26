@@ -3,15 +3,23 @@ package seedu.address.storage;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.BookKeeping;
 
 @JsonRootName(value = "bookKeeping")
 public class JsonSerializableBookKeeping {
-    Double revenue;
-    Double cost;
-    Double profit;
+    private Double revenue;
+    private Double cost;
+    private Double profit;
 
+    /**
+     * Constructor that supports json.
+     *
+     * @param revenue current revenue.
+     * @param cost current cost.
+     * @param profit current profit
+     */
     @JsonCreator
     public JsonSerializableBookKeeping(@JsonProperty("revenue") Double revenue,
                                        @JsonProperty("cost") Double cost,
@@ -21,6 +29,11 @@ public class JsonSerializableBookKeeping {
         this.profit = profit;
     }
 
+    /**
+     * Constructor for JsonSerializableBookKeeping.
+     *
+     * @param bookKeeping current bookKeeping.
+     */
     public JsonSerializableBookKeeping(BookKeeping bookKeeping) {
         this.revenue = bookKeeping.getRevenue();
         this.cost = bookKeeping.getCost();

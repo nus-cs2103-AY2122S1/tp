@@ -333,19 +333,34 @@ public class ModelManager implements Model {
 
     //=========== BookKeeping ================================================================================
 
+    /**
+     * Save the BookKeeping to json.
+     *
+     * @param bookKeeping current bookKeeping.
+     */
     public void saveBookKeeping(BookKeeping bookKeeping) {
         try {
-            new BookKeepingStorage().saveTransaction(bookKeeping, userPrefs.getBookKeepingFilePath());
+            new BookKeepingStorage().saveBookKeeping(bookKeeping, userPrefs.getBookKeepingFilePath());
         } catch (IOException e) {
             System.out.println(e);
         }
     }
 
+    /**
+     * Add cost to bookKeeping.
+     *
+     * @param cost cost to add.
+     */
     public void addCostBookKeeping(Double cost) {
         bookKeeping.addCost(cost);
         saveBookKeeping(bookKeeping);
     }
 
+    /**
+     * Add revenue to bookKeeping.
+     *
+     * @param revenue revenue to add.
+     */
     public void addRevenueBookKeeping(Double revenue) {
         bookKeeping.addRevenue(revenue);
         saveBookKeeping(bookKeeping);
