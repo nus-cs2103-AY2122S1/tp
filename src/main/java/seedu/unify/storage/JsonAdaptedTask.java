@@ -37,11 +37,13 @@ class JsonAdaptedTask {
      */
     @JsonCreator
     public JsonAdaptedTask(@JsonProperty("name") String name, @JsonProperty("time") String time,
-            @JsonProperty("date") String date, @JsonProperty("state") String state, @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
+            @JsonProperty("date") String date,
+                           @JsonProperty("state") String state,
+                           @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.name = name;
         this.time = time;
         this.date = date;
-        if(tagged != null) {
+        if (tagged != null) {
             this.tagged.addAll(tagged);
         }
         this.state = state;
