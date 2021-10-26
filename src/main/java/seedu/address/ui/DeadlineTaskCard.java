@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import seedu.address.model.task.Task;
 public class DeadlineTaskCard extends UiPart<Region> {
 
     private static final String FXML = "DeadlineTaskListCard.fxml";
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -38,8 +40,6 @@ public class DeadlineTaskCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label description;
-    @FXML
-    private Label priority;
 
     /**
      * Creates a {@code TaskCode} with the given {@code Student} and index to display.
@@ -47,14 +47,19 @@ public class DeadlineTaskCard extends UiPart<Region> {
     public DeadlineTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". [D]");
+        id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
         DeadlineTask deadlineTask = (DeadlineTask) task;
-        status.setText(task.getStatusString());
+        status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
-        priority.setText(task.getPriorityAsString());
 
-        taskDate.setText(deadlineTask.getDeadline().toString());
+        Label priorityLabel = new Label("priority: " + task.getPriorityAsString());
+        Label taskType = new Label("Deadline");
+        tags.getChildren().addAll(taskType, priorityLabel);
+        priorityLabel.getStyleClass().add("priorityLabel");
+        taskType.getStyleClass().add("taskType");
+
+        taskDate.setText("Date: " + deadlineTask.getDeadline().getDeadline().format(formatter));
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
 
 /**
- * An UI component that displays information of a {@code Student}.
+ * A UI component that displays information of a {@code Student}.
  */
 public class ToDoTaskCard extends UiPart<Region> {
 
@@ -37,8 +37,6 @@ public class ToDoTaskCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label priority;
-    @FXML
     private FlowPane tags;
 
     /**
@@ -47,11 +45,16 @@ public class ToDoTaskCard extends UiPart<Region> {
     public ToDoTaskCard(Task task, int displayedIndex) {
         super(FXML);
         this.task = task;
-        id.setText(displayedIndex + ". [T]");
+        id.setText(displayedIndex + ". ");
         name.setText(task.getName().toString());
-        status.setText(task.getStatusString());
+        status.setText("Status: " + task.getStatusString());
         description.setText(task.getDescription());
-        priority.setText(task.getPriorityAsString());
+
+        Label priorityLabel = new Label("priority: " + task.getPriorityAsString());
+        Label taskType = new Label("Todo");
+        tags.getChildren().addAll(taskType, priorityLabel);
+        priorityLabel.getStyleClass().add("priorityLabel");
+        taskType.getStyleClass().add("taskType");
 
         task.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
