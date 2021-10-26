@@ -1,5 +1,6 @@
 package seedu.programmer.ui;
 
+import java.util.TreeMap;
 import java.util.HashSet;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import seedu.programmer.commons.core.LogsCenter;
 import seedu.programmer.logic.Logic;
 import seedu.programmer.model.ReadOnlyProgrammerError;
 import seedu.programmer.model.student.ClassId;
+import seedu.programmer.model.student.Lab;
 import seedu.programmer.model.student.Student;
 
 /**
@@ -48,10 +50,34 @@ public class DashboardWindow extends PopupWindow {
     private void fillOverallStats() {
         ReadOnlyProgrammerError readOnlyPE = logic.getProgrammerError();
         ObservableList<Student> stuList = readOnlyPE.getStudentList();
+        TreeMap<Integer, Integer> labsMarkedMap= new TreeMap<>();
         HashSet<ClassId> classes = new HashSet<>();
         for (Student s: stuList) {
             classes.add(s.getClassId());
         }
+
+        for (ClassId cid : classes) {
+            if (!labsMarkedMap.containsKey(cid.getClassNum())) {
+                labsMarkedMap.put(cid.getClassNum(), 0);
+            }
+        }
+
+        for (Student s : stuList) {
+            ObservableList<Lab> stuLabs = s.getLabResultList();
+            for (Lab l : stuLabs) {
+                if (!l.isMarked()) {
+                    ClassId cid = s.getClassId();
+                    labsMarkedMap.put(cid.getClassNum(), labsMarkedMap.get(cid.getClassNum()) + 1);
+                }
+            }
+        }
+
+        for (Integer cid: labsMarkedMap.keySet()) {
+            String key = cid.toString();
+            String value = labsMarkedMap.get(cid).toString();
+            System.out.println(key + " " + value);
+        }
+
         int numStudents = stuList.size();
         int numClasses = classes.size();
         int numLabs = stuList.size() > 0 ? stuList.get(0).getLabResultList().size() : 0;
