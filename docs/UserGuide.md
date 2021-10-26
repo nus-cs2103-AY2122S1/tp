@@ -21,7 +21,7 @@ Academy Directory (AD) is a **desktop app for CS1101S tutors to manage studentsâ
   * [List All Students](#listing-all-students--list)
   * [Clear Student List](#clearing-all-students--clear)
   * [Sort Student List](#sorting-the-list--sort)
-  * [Visualise all Grades](#visualizing-assessments-grades-of-the-entire-class-visualise)
+  * [Visualize all Grades](#visualizing-assessments-grades-of-the-entire-class-visualize)
   * [Help](#seeking-help--help)
     * [General Help](#viewing-general-help)
     * [Help with Specific Command](#viewing-specific-help)
@@ -271,11 +271,11 @@ Examples:
 * `sort attr/RA1 ord/desc` sorts the list in descending order based on their `RA1` grades.
 * `sort attr/participation ord/asc` sorts the list in ascending order based on their participation score.
 
-### Visualizing assessments' grades of the entire class: `visualise`
-Avengers will be able to view the grades and the average score of all the students
-for a particular assessment.
+### Visualizing assessments' grades of the entire class: `visualize`
+Avengers will be able to visualize the grades and the average score of all the students
+for all assessments.
 
-Format: `visualise`
+Format: `visualize`
 
 * Visualize assessment grades of the class with Box & Whisker plot
 * Any grade of any student that is not yet entered will be counted as `0`
@@ -395,7 +395,7 @@ Action | Format, Examples
 [**Edit Studio Participation**](#editing-a-students-studio-participation-participation) | `participation INDEX ses/STUDIO_SESSION add/PARTICIPATION_TO_ADD`<br> e.g., `participation 1 ses/12 att/0`
 [**Grade**](#adding-grades-for-an-assessment--grade) | `grade INDEX as/ASSESSMENT g/GRADE` <br> e.g., `grade INDEX as/RA1 g/15`
 [**Show Grades**](#displaying-the-grades-for-an-assessment--show) | `show ASSESSMENT` <br> e.g., `show RA1`
-[**Visualise all grades**](#visualizing-assessments-grades-of-the-entire-class-visualise) | `visualise`
+[**Visualize all grades**](#visualizing-assessments-grades-of-the-entire-class-visualize) | `visualize`
 [**List All Students**](#listing-all-students--list) | `list`
 [**Clear Student List**](#clearing-all-students--clear) | `clear`
 [**Sort Student List**](#sorting-the-list--sort) | `sort attr/ATTRIBUTE ord/ORDER`<br> e.g., `sort attr/average ord/asc`

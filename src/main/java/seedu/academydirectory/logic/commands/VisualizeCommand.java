@@ -13,23 +13,23 @@ import seedu.academydirectory.model.VersionedModel;
 import seedu.academydirectory.model.student.Assessment;
 import seedu.academydirectory.model.student.Student;
 
-public class VisualiseCommand extends Command {
+public class VisualizeCommand extends Command {
 
-    public static final String COMMAND_WORD = "visualise";
+    public static final String COMMAND_WORD = "visualize";
 
-    public static final String HELP_MESSAGE = "### Visualise class assessment statistic : `visualise`\n"
+    public static final String HELP_MESSAGE = "### Visualize class assessment statistic : `visualize`\n"
             + "\n"
-            + "Tutors will be able to visualise class performance in assessment with box and whisker plot.\n"
+            + "Tutors will be able to visualize class performance in assessment with box and whisker plot.\n"
             + "\n"
-            + "Format: `visualise`\n"
+            + "Format: `visualize`\n"
             + "\n"
             + "Examples:\n"
-            + "* `visualise`";
+            + "* `visualize`";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "visualise class performance in assessment with box and whisker plot. ";
+            + "visualize class performance in assessment with box and whisker plot. ";
 
-    public static final String MESSAGE_VISUALISE_SUCCESS = "Class Performance in Assessment shown";
+    public static final String MESSAGE_VISUALIZE_SUCCESS = "Class Performance in Assessment shown";
 
     /**
      * Executes the command and returns the result message.
@@ -53,9 +53,9 @@ public class VisualiseCommand extends Command {
                                         Map.Entry::getKey,
                                         Collectors.mapping(Map.Entry::getValue, Collectors.toList())));
 
-        model.setAdditionalViewType(AdditionalViewType.VISUALISE);
+        model.setAdditionalViewType(AdditionalViewType.VISUALIZE);
         model.setAdditionalInfo(AdditionalInfo.of(classAssessmentResults));
 
-        return new CommandResult(MESSAGE_VISUALISE_SUCCESS);
+        return new CommandResult(MESSAGE_VISUALIZE_SUCCESS);
     }
 }
