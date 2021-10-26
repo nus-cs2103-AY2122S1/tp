@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -210,6 +211,9 @@ public interface Model {
      * book.
      */
     void setSupplier(Supplier target, Supplier editedSupplier);
+
+    /** Sets the comparator for the supplier list */
+    void setSupplierComparator(Comparator<Supplier> supplierComparator);
 
     /** Returns an unmodifiable view of the filtered supplier list */
     ObservableList<Supplier> getFilteredSupplierList();

@@ -45,6 +45,7 @@ public class SortSupplierCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.getSortableSupplierList().sort(comparator);
+        model.setSupplierComparator(comparator);
         return new CommandResult(String.format(MESSAGE_SUCCESS, sortBy, sortingOrder),
                 false, false, false, false, true, false);
     }

@@ -33,16 +33,4 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate suppliers.
      */
     ObservableList<Supplier> getSupplierList();
-
-    /**
-     * Returns a sortable view of the supplier's list.
-     * This list will not contain any duplicate suppliers.
-     */
-    ObservableList<Supplier> getSortableSupplierList();
-
-    /**
-     * Returns a supplier list that has been reset to its default sort state.
-     * This list will not contain any duplicate suppliers.
-     */
-    void resetSupplierListToDefaultSortState();
 }

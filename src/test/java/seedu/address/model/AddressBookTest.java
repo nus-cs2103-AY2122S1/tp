@@ -266,15 +266,6 @@ public class AddressBookTest {
         public ObservableList<Reservation> getReservationList() {
             return null;
         }
-
-        @Override
-        public ObservableList<Supplier> getSortableSupplierList() {
-            return null;
-        }
-
-        @Override
-        public void resetSupplierListToDefaultSortState() {
-        }
     }
 
 }

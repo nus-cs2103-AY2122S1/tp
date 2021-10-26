@@ -9,6 +9,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -260,6 +261,11 @@ public class AddSupplierCommandTest {
 
         @Override
         public void addSupplier(Supplier supplier) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setSupplierComparator(Comparator<Supplier> supplierComparator) {
             throw new AssertionError("This method should not be called.");
         }
 

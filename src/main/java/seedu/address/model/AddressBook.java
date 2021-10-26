@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -101,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setTables(newData.getTableList());
     }
 
-    //// person-level operations
+    //// customer-level operations
 
     /**
      * Returns true if a customer with the same identity as {@code customer} exists in the address book.
@@ -139,6 +140,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         customers.setCustomer(target, editedCustomer);
     }
 
+    public void removeCustomer(Customer key) {
+        customers.remove(key);
+    }
+
     /// supplier level operations
     /**
      * Returns true if a supplier with the same identity as {@code supplier} exists in the address book.
@@ -169,12 +174,31 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Sets the supplier comparator to sort the supplier list.
+     * @param supplierComparator The comparator to sort the supplier list.
+     */
+    public void setSupplierComparator(Comparator<Supplier> supplierComparator) {
+        suppliers.setComparator(supplierComparator);
+    }
+
+    /**
+     * Returns a sortable supplier list
+     */
+    public ObservableList<Supplier> getSortableSupplierList() {
+        return suppliers.asSortableObservableList();
+    }
+
+    /**
+     * Resets the supplier list sorting to its default state.
+     */
+    public void resetSupplierListToDefaultSortState() {
+        suppliers.resetSupplierListToDefaultSortState();
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
-    public void removeCustomer(Customer key) {
-        customers.remove(key);
-    }
     public void removeSupplier(Supplier key) {
         suppliers.remove(key);
     }
@@ -290,16 +314,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Supplier> getSupplierList() {
         return suppliers.asUnmodifiableObservableList();
-    }
-
-    @Override
-    public ObservableList<Supplier> getSortableSupplierList() {
-        return suppliers.asSortableObservableList();
-    }
-
-    @Override
-    public void resetSupplierListToDefaultSortState() {
-        suppliers.resetSupplierListToDefaultSortState();
     }
 
     @Override
