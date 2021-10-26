@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUS_NETWORK_ID_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NUS_NETWORK_ID_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +49,10 @@ public class NusNetworkIdTest {
         NusNetworkId nusNetworkId = new NusNetworkId("E1234567");
         NusNetworkId differentNusNetworkId = new NusNetworkId("e0000000");
         NusNetworkId sameNusNetworkId = new NusNetworkId("E1234567");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(nusNetworkId.equals(person));
 
         // Different NusNetworkId
         assertFalse(nusNetworkId.equals(differentNusNetworkId));

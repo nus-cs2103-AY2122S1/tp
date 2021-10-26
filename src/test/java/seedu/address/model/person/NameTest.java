@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import org.junit.jupiter.api.Test;
 
@@ -47,6 +48,10 @@ public class NameTest {
         Name name = new Name("peter jack");
         Name differentName = new Name("David Roger Jackson Ray Jr 2nd");
         Name sameName = new Name("peter jack");
+        Person person = ALICE;
+
+        //Different Objects
+        assertFalse(name.equals(person));
 
         // Different Name
         assertFalse(name.equals(differentName));
