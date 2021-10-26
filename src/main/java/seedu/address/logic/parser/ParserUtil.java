@@ -80,7 +80,17 @@ public class ParserUtil {
         requireNonNull(nationality);
         String trimmedNationality = nationality.trim();
         if (!Nationality.isValidNationality(trimmedNationality)) {
-            throw new ParseException(Nationality.MESSAGE_CONSTRAINTS);
+            String exceptionMessage = Nationality.MESSAGE_CONSTRAINTS;
+
+            // Check for suggestions
+            if (Nationality.VALID_NATIONALITIES.size() > 0) {
+                WordSuggestion nationalitiesSuggestion = new WordSuggestion(trimmedNationality,
+                        Nationality.VALID_NATIONALITIES);
+
+                exceptionMessage = nationalitiesSuggestion.getSuggestedWords();
+            }
+
+            throw new ParseException(exceptionMessage);
         }
         return new Nationality(trimmedNationality);
     }
@@ -158,6 +168,18 @@ public class ParserUtil {
             throw new ParseException(Remark.MESSAGE_CONSTRAINTS);
         }
         return new Remark(trimmedRemark);
+    }
+
+    /**
+     * Parses a {@code String alias}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code alias} is invalid.
+     */
+    public static String parseAlias(String alias) throws ParseException {
+        requireNonNull(alias);
+
+        return alias.trim();
     }
 
     /**

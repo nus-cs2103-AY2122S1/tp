@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ALIAS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,8 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_PHONE_BOB = "22222222";
     public static final String VALID_EMAIL_AMY = "amy@example.com";
     public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_NATIONALITY_AMY = "Singapore";
-    public static final String VALID_NATIONALITY_BOB = "Malaysia";
+    public static final String VALID_NATIONALITY_AMY = "Singaporean";
+    public static final String VALID_NATIONALITY_BOB = "Malaysian";
     public static final String VALID_TUTORIAL_GROUP_AMY = "T09";
     public static final String VALID_TUTORIAL_GROUP_BOB = "T28";
     public static final String VALID_SOCIAL_HANDLE_AMY = "@amyb";
@@ -71,6 +73,18 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND + TAG_COLOUR_DELIMITER
             + VALID_TAG_COLOUR;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
+    public static final String VALID_ALIAS = "myalias";
+    public static final String VALID_ADD_INPUT = "add n/" + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
+            + NATIONALITY_DESC_BOB + TUTORIAL_GROUP_DESC_BOB + SOCIAL_HANDLE_DESC_BOB + GENDER_DESC_BOB
+            + REMARK_DESC_BOB + TAG_DESC_FRIEND;
+    public static final String VALID_STATISTICS_INPUT = "stat " + VALID_TUTORIAL_GROUP_AMY;
+    public static final String UNKNOWN_LONG_COMMAND_INPUT = "asdhasdhashasdhs";
+
+    public static final String ALIAS = " " + PREFIX_ALIAS + VALID_ALIAS;
+    public static final String ADD_COMMAND = " " + PREFIX_COMMAND + VALID_ADD_INPUT;
+    public static final String STATISTICS_COMMAND = " " + PREFIX_COMMAND + VALID_STATISTICS_INPUT;
+    public static final String UNKNOWN_COMMAND = " " + PREFIX_COMMAND + UNKNOWN_LONG_COMMAND_INPUT;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "B"; // only 'M', 'F' and 'O' are allowed
