@@ -12,7 +12,7 @@ Socius helps you to gather information about your CS2103T tutorial classmates an
 Given below are my contributions to the project.
 
 * **New Feature**: Added the Nationality and Remark models to a Person.
-  * What it does: allows a person's contact to contain nationality and a unique remark defined by the user. 
+  * What it does: allows a person's contact to contain nationality and a unique remark defined by the user.
   * Justification: This feature improves the product by offering more personal details of a classmate and allows user to customise messages for his classmate based on his impression of the person.
   * Highlights: This enhancement affects existing commands and commands to be added in future as it introduces new parameters to the Person class.
   * Credits: The remark model was taught in Week 6, extracted from AB-3.
@@ -28,7 +28,7 @@ Given below are my contributions to the project.
   * [SAMPLE] Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
   * Arranged and led the weekly team discussions in setting goals and dividing work amongst members.
   * Set up issues and milestones on GitHub.
-  * Keep track of team progress and weekly submission deadlines. 
+  * Keep track of team progress and weekly submission deadlines.
 
 * **Enhancements to existing features**:
   * [SAMPLE] Updated the GUI color scheme (Pull requests [\#33](), [\#34]())

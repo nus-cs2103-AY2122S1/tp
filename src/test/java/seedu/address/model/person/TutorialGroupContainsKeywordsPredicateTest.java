@@ -64,7 +64,7 @@ public class TutorialGroupContainsKeywordsPredicateTest {
         predicate = new TutorialGroupContainsKeywordsPredicate(
                 Arrays.asList("T20", "T21", "T22", "T23"));
         assertFalse(predicate.test(new PersonBuilder().withName("Amy Bee").withPhone("12345")
-                .withEmail("alice@email.com").withNationality("North Korea").withTutorialGroup("T19")
+                .withEmail("alice@email.com").withNationality("North Korean").withTutorialGroup("T19")
                 .withTags("Meh").build()));
     }
 }

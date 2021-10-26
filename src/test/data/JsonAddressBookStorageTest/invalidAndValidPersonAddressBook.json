@@ -4,7 +4,7 @@
     "gender": "M",
     "phone": "9482424",
     "email": "hans@example.com",
-    "nationality": "Singapore ",
+    "nationality": "Singaporean ",
     "tutorialGroup": "T09",
     "remark": "likes coding",
     "tagged" : [ "friends", "classmate" ],
@@ -17,7 +17,7 @@
     "gender": "M",
     "phone": "948asdf2424",
     "email": "hans@example.com",
-    "nationality": "Singapore ",
+    "nationality": "Singaporean ",
     "tutorialGroup": "T28",
     "remark": "likes coding"
   } ]

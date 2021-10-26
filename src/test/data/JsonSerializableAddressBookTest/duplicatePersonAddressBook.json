@@ -4,7 +4,7 @@
     "gender": "F",
     "phone": "94351253",
     "email": "alice@example.com",
-    "nationality": "Singapore ",
+    "nationality": "Singaporean ",
     "tutorialGroup": "T09",
     "remark": "likes coding",
     "tagged" : [ {
@@ -16,7 +16,7 @@
     "gender": "F",
     "phone": "94351253",
     "email": "pauline@example.com",
-    "nationality": "Singapore ",
+    "nationality": "Singaporean ",
     "tutorialGroup": "T09",
     "remark": "likes coding"
   } ]

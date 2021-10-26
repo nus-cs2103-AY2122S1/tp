@@ -34,10 +34,10 @@ public class NationalityComparatorTest {
     public void test_compareNationalityComparator_returnsTrue() {
         Comparator<Person> comparator = new NationalityComparator();
 
-        Person p1 = new PersonBuilder().withNationality("America").build();
-        Person p2 = new PersonBuilder().withNationality("America").build();
-        Person p3 = new PersonBuilder().withNationality("Singapore").build();
-        Person p4 = new PersonBuilder().withNationality("Taiwan").build();
+        Person p1 = new PersonBuilder().withNationality("American").build();
+        Person p2 = new PersonBuilder().withNationality("American").build();
+        Person p3 = new PersonBuilder().withNationality("Singaporean").build();
+        Person p4 = new PersonBuilder().withNationality("Taiwanese").build();
         Person p5 = new PersonBuilder().withNationality("").build();
         Person p6 = new PersonBuilder().withNationality("").build();
 
