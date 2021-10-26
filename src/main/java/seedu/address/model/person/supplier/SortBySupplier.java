@@ -31,7 +31,7 @@ public class SortBySupplier {
     private final String sortBy;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs an {@code SortBySupplier}.
      *
      * @param sortBy A valid sorting type.
      */
