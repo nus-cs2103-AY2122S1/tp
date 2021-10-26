@@ -51,6 +51,9 @@ public class Availability {
         return values.contains(day);
     }
 
+    public boolean containsAll(Availability availability) {
+        return this.values.containsAll(availability.values);
+    }
     /**
      * Returns true if availability list is empty.
      */
