@@ -53,7 +53,7 @@ public class SetMemberAvailabilityCommand extends Command {
 
             Person personToEdit = lastShownList.get(i.getZeroBased());
             Person editedPerson = new Person(
-                    personToEdit.getName(), personToEdit.getPhone(), availability);
+                    personToEdit.getName(), personToEdit.getPhone(), availability, personToEdit.getTags());
 
             model.setPerson(personToEdit, editedPerson);
         }
@@ -65,7 +65,8 @@ public class SetMemberAvailabilityCommand extends Command {
             names.append(", ");
         }
 
-        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability));
+        return new CommandResult(String.format(MESSAGE_SET_AVAILABILITY_SUCCESS, names, availability),
+                false, false, true);
     }
 
     @Override

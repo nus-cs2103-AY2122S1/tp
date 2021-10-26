@@ -18,6 +18,6 @@ public class ListFacilityCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredFacilityList(PREDICATE_SHOW_ALL_FACILITIES);
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS, false, true, false);
     }
 }
