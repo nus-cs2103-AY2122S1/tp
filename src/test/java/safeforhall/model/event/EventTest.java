@@ -1,5 +1,6 @@
 package safeforhall.model.event;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_CAPACITY_BASKETBALL;
@@ -8,6 +9,8 @@ import static safeforhall.logic.commands.CommandTestUtil.VALID_NAME_VOLLEYBALL;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VENUE_BASKETBALL;
 import static safeforhall.logic.commands.CommandTestUtil.VALID_VENUE_FOOTBALL_TRAINING;
 import static safeforhall.testutil.TypicalEvents.BASKETBALL;
+import static safeforhall.testutil.TypicalEvents.DANCE;
+import static safeforhall.testutil.TypicalEvents.SWIM;
 import static safeforhall.testutil.TypicalEvents.VOLLEYBALL;
 
 import org.junit.jupiter.api.Test;
@@ -42,6 +45,24 @@ public class EventTest {
         String nameWithTrailingSpaces = VALID_NAME_VOLLEYBALL + " ";
         editedVolleyball = new EventBuilder(VOLLEYBALL).withEventName(nameWithTrailingSpaces).build();
         assertFalse(VOLLEYBALL.isSameEvent(editedVolleyball));
+    }
+
+    @Test
+    public void hasUnvaccinatedResident() {
+        // vaccinated
+        assertFalse(BASKETBALL.hasUnvaccinatedResident());
+
+        // non-vaccinated
+        assertTrue(SWIM.hasUnvaccinatedResident());
+    }
+
+    @Test
+    public void numOfUnvaccinatedResidents() {
+        assertEquals(0, BASKETBALL.numOfUnvaccinatedResidents());
+
+        assertEquals(1, SWIM.numOfUnvaccinatedResidents());
+
+        assertEquals(2, DANCE.numOfUnvaccinatedResidents());
     }
 
     @Test

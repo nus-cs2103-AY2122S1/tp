@@ -48,8 +48,15 @@ public class ResidentListTest {
 
     @Test
     public void hasUnvaccinatedResident() {
-        ResidentList emptyResidentList = new ResidentList("");
+        ResidentList emptyResidentList = new ResidentList(ResidentList.EMPTY_STRING);
         assertFalse(emptyResidentList.hasUnvaccinatedResident());
+    }
+
+    @Test
+    public void numOfUnvaccinatedResidents() {
+        ResidentList residentList = new ResidentList(ResidentList.DEFAULT_LIST);
+
+        assertEquals(0, residentList.numOfUnvaccinatedResidents());
     }
 
     @Test
