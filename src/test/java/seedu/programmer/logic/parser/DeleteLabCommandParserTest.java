@@ -2,14 +2,16 @@ package seedu.programmer.logic.parser;
 
 
 import static seedu.programmer.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.programmer.logic.commands.CommandTestUtil.LAB_NUM;
+import static seedu.programmer.logic.commands.CommandTestUtil.VALID_LAB_NO;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.programmer.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.programmer.testutil.TypicalIndexes.INDEX_FIRST_STUDENT;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.programmer.logic.commands.DeleteCommand;
 import seedu.programmer.logic.commands.DeleteLabCommand;
+import seedu.programmer.model.student.Lab;
+import seedu.programmer.testutil.LabBuilder;
 
 
 public class DeleteLabCommandParserTest {
@@ -18,7 +20,8 @@ public class DeleteLabCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, 1, new DeleteLabCommand(LAB_NUM));
+        Lab deleteLab = new LabBuilder().withLabNum(VALID_LAB_NO).build();
+        assertParseSuccess(parser, LAB_NUM, new DeleteLabCommand(deleteLab));
     }
 
     @Test
