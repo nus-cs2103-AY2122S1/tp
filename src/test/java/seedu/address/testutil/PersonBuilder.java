@@ -107,6 +107,9 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Copies the task completion map into {@code tasksCompletion} of the {@code Person} that we are building.
+     */
     public PersonBuilder withTasksCompletion(Map<UniqueId, Boolean> tasksCompletion) {
         this.tasksCompletion = new HashMap<>(tasksCompletion);
         return this;
