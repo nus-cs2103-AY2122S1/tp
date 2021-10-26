@@ -11,7 +11,7 @@ import seedu.address.model.game.Game;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
 /**
- * Table showing Friends/Games and their corresponding usernames and skills levels.
+ * Table showing friends that are linked a game, and their corresponding usernames and skills levels.
  */
 public class GameMainCardTable extends UiPart<Region> {
 
@@ -29,6 +29,11 @@ public class GameMainCardTable extends UiPart<Region> {
     @FXML
     private TableColumn<Friend, String> skillCol;
 
+    /**
+     * Constructor to create GameMainCardTable Ui component.
+     * @param friendList List of friend that is linked to the Game to get.
+     * @param gameToGet Game to get.
+     */
     public GameMainCardTable(ObservableList<Friend> friendList, Game gameToGet) {
         super(FXML);
 
@@ -43,6 +48,9 @@ public class GameMainCardTable extends UiPart<Region> {
                 .toString()));
     }
 
+    /**
+     * Default constructor to create an empty table.
+     */
     public GameMainCardTable() {
         super(FXML);
     }

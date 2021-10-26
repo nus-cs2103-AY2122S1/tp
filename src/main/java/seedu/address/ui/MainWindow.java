@@ -1,5 +1,9 @@
 package seedu.address.ui;
 
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,9 +25,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.game.Game;
 
-import java.util.List;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -244,26 +245,26 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     private void handleFriendGet(Friend friendToGet) {
-            currentFriendToGet = friendToGet;
-            if (currentFriendToGet == null) {
-                rightMainCard.getChildren().clear();
-                return;
-            }
-            if (this.friendList.stream().filter(x -> x.isSameFriendId(currentFriendToGet)).count() != 0) {
-                friendToGet = this.friendList
-                        .stream()
-                        .filter(x -> x.isSameFriendId(currentFriendToGet))
-                        .findFirst()
-                        .get();
+        currentFriendToGet = friendToGet;
+        if (currentFriendToGet == null) {
+            rightMainCard.getChildren().clear();
+            return;
+        }
+        if (this.friendList.stream().filter(x -> x.isSameFriendId(currentFriendToGet)).count() != 0) {
+            friendToGet = this.friendList
+                    .stream()
+                    .filter(x -> x.isSameFriendId(currentFriendToGet))
+                    .findFirst()
+                    .get();
 
-                friendMainCardTable = new FriendMainCardTable(friendToGet);
-                rightMainCard.getChildren().clear();
-                rightMainCard.getChildren().add(friendMainCardTable.getRoot());
-            } else {
-                rightMainCard.getChildren().clear();
-                friendMainCardTable = new FriendMainCardTable();
-                rightMainCard.getChildren().add(friendMainCardTable.getRoot());
-            }
+            friendMainCardTable = new FriendMainCardTable(friendToGet);
+            rightMainCard.getChildren().clear();
+            rightMainCard.getChildren().add(friendMainCardTable.getRoot());
+        } else {
+            rightMainCard.getChildren().clear();
+            friendMainCardTable = new FriendMainCardTable();
+            rightMainCard.getChildren().add(friendMainCardTable.getRoot());
+        }
     }
 
     private void handleGameGet(Game gameToGet) {

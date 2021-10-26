@@ -18,6 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.gamefriendlink.GameFriendLink;
+import seedu.address.model.gamefriendlink.SkillValue;
 import seedu.address.model.gamefriendlink.UserName;
 
 /**
@@ -37,7 +38,7 @@ public class LinkFriendCommandTest {
         ModelManager expectedModel = new ModelManager(model.getFriendsList(), model.getGamesList(),
                 model.getUserPrefs());
         GameFriendLink gameFriendLink = new GameFriendLink(GENSHIN_IMPACT.getGameId(), friendToLink.getFriendId(),
-                userName);
+                userName, new SkillValue(0));
 
         expectedModel.linkFriend(friendToLink, gameFriendLink);
         assertCommandSuccess(linkFriendCommand, model, linkFriendCommand.generateSuccessMessage(friendToLink),

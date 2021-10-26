@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,10 +12,8 @@ import javafx.scene.layout.Region;
 import seedu.address.model.friend.Friend;
 import seedu.address.model.gamefriendlink.GameFriendLink;
 
-import java.util.ArrayList;
-
 /**
- * Table showing Friends/Games and their corresponding usernames and skills levels.
+ * Table showing games that are linked to a friend, and their corresponding usernames and skills levels.
  */
 public class FriendMainCardTable extends UiPart<Region> {
 
@@ -32,14 +32,18 @@ public class FriendMainCardTable extends UiPart<Region> {
     @FXML
     private TableColumn<GameFriendLink, String> skillCol;
 
+    /**
+     * Constructor for FriendMainCardTable Ui component.
+     * @param friend Friend to display information for.
+     */
     public FriendMainCardTable(Friend friend) {
         super(FXML);
 
-            tableView.setItems(FXCollections.observableList(new ArrayList<>(friend.getGameFriendLinks())));
+        tableView.setItems(FXCollections.observableList(new ArrayList<>(friend.getGameFriendLinks())));
 
-            gameCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getGameId().toString()));
-            usernameCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getUserName().toString()));
-            skillCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getSkillValue().toString()));
+        gameCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getGameId().toString()));
+        usernameCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getUserName().toString()));
+        skillCol.setCellValueFactory(link -> new SimpleStringProperty(link.getValue().getSkillValue().toString()));
 
     }
 
