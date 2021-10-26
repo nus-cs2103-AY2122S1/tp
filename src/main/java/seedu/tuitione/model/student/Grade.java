@@ -9,7 +9,7 @@ import java.util.Objects;
  * Represents the grade of the student
  */
 public class Grade {
-    public static final String GRADE_MESSAGE_CONSTRAINTS = "Prefix should be in capital letters, "
+    public static final String GRADE_MESSAGE_CONSTRAINTS = "Prefix can be upper or lower case letters, "
             + "and is either S (to denote secondary) "
             + "or P (to denote Primary). "
             + "\nLevel number should be from 1 to 6 for primary and 1 to 4 for secondary."
@@ -26,7 +26,7 @@ public class Grade {
     public Grade(String value) {
         requireAllNonNull(value);
         checkArgument(isValidGrade(value), GRADE_MESSAGE_CONSTRAINTS);
-        this.value = value;
+        this.value = value.toUpperCase();
     }
 
     /**
@@ -34,7 +34,7 @@ public class Grade {
      */
     public static boolean isValidGrade(String grade) {
         for (String validGrade : VALID_GRADES) {
-            if (grade.equals(validGrade)) {
+            if (grade.toUpperCase().equals(validGrade)) {
                 return true;
             }
         }

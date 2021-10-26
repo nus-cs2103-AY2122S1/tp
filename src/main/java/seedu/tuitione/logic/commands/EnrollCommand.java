@@ -18,15 +18,26 @@ public class EnrollCommand extends Command {
 
     public static final String COMMAND_WORD = "enroll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Enrolls a specified student "
-            + "from a given TuitiONE lesson\n"
+    public static final String MESSAGE_USAGE = "Command: "
+            + COMMAND_WORD + "\nEnrolls a specified student "
+            + "from a given TuitiONE lesson\n\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
             + "l/LESSON_INDEX\n"
             + "Example: " + "enroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_STUDENT_IN_LESSON = "%1$s is already enrolled in the existing %2$s";
-    public static final String MESSAGE_UNABLE_TO_ENROLL = "%1$s cannot be enrolled into %2$s";
-    public static final String MESSAGE_SUCCESS = "%1$s enrolled into lesson: %2$s";
+
+    public static final String MESSAGE_STUDENT_IN_LESSON =
+            "⚠\tAlert:\n\n%1$s is already enrolled in the existing %2$s";
+    public static final String MESSAGE_UNABLE_TO_ENROLL = "⚠\tAlert:\n\n%1$s cannot be enrolled into %2$s";
+    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\n%1$s enrolled into lesson:\n%2$s";
+    public static final String MESSAGE_MORE_THAN_MAX_LESSONS = "⚠\tAlert:\n\n"
+            + "%1$s is currently enrolled in more than %2$s lessons, "
+            + "and cannot be enrolled in one more. "
+            + "Please unenroll the student from a lesson before enrolling them in another.";
+    public static final String MESSAGE_MORE_THAN_MAX_STUDENTS = "⚠\tAlert:\n\n"
+            + "%1$s currently has %2$s students enrolled, "
+            + "and cannot enroll anymore students.";
+
 
     private final Index indexStudent;
     private final Index indexLesson;
@@ -64,6 +75,18 @@ public class EnrollCommand extends Command {
         }
         if (!lesson.isAbleToEnroll(studentToEnroll)) {
             throw new CommandException(String.format(MESSAGE_UNABLE_TO_ENROLL, studentToEnroll.getName(), lesson));
+        }
+
+        if (!studentToEnroll.isAbleToEnrollForMoreLessons()) {
+            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_LESSONS,
+                    studentToEnroll.getName(),
+                    Student.MAX_LESSON_SIZE));
+        }
+
+        if (!lesson.isAbleToEnrollForMoreStudents()) {
+            throw new CommandException(String.format(MESSAGE_MORE_THAN_MAX_STUDENTS,
+                    lesson.getLessonCode(),
+                    Lesson.MAX_STUDENT_SIZE));
         }
 
         lesson.enrollStudent(studentToEnroll);

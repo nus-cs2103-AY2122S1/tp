@@ -18,12 +18,13 @@ public class DeleteLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the lesson identified by the index number used in the displayed lesson list.\n"
+    public static final String MESSAGE_USAGE = "Command: "
+            + COMMAND_WORD
+            + "\nDeletes the lesson identified by the index number used in the displayed lesson list.\n\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "Deleted Lesson: %1$s";
+    public static final String MESSAGE_DELETE_LESSON_SUCCESS = "✔\tSuccess:\n\nDeleted Lesson:\n%1$s";
 
     private final Index targetIndex;
 

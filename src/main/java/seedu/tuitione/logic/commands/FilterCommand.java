@@ -20,8 +20,9 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": filters out students and lessons if they are"
-            + " of the specified grade.\n"
+    public static final String MESSAGE_USAGE = "Command: "
+            + COMMAND_WORD + "\nfilters out students and lessons if they are"
+            + " of the specified grade.\n\n"
             + "Parameters: "
             + "[" + PREFIX_GRADE + "GRADE] "
             + "[" + PREFIX_SUBJECT + "SUBJECT] "
@@ -82,11 +83,11 @@ public class FilterCommand extends Command {
     }
 
     private String lessonFoundOutput (int size) {
-        return String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW, size);
+        return String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_LESSON_FOUND_OVERVIEW, size);
     }
 
     private String studentAndLessonFoundOutput (int studentListSize, int lessonListSize) {
-        return String.format(Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW,
+        return String.format("ℹ\tUpdate:\n\n" + Messages.MESSAGE_STUDENTS_FOUND_OVERVIEW,
                 studentListSize)
                 + "\n"
                 + String.format(Messages.MESSAGE_LESSON_FOUND_OVERVIEW,

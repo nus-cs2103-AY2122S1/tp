@@ -21,14 +21,17 @@ public class UnenrollCommand extends Command {
 
     public static final String COMMAND_WORD = "unenroll";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Unenroll a specified student "
-            + "from a given TuitiONE lesson\n"
+    public static final String MESSAGE_USAGE = "Command: "
+            + COMMAND_WORD + "\nUnenroll a specified student "
+            + "from a given TuitiONE lesson\n\n"
             + "Parameters: STUDENT_INDEX (must be a positive integer) "
             + "l/LESSON_INDEX\n"
             + "Example: " + "unenroll 1 " + PREFIX_LESSON + "1";
 
-    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS = "Unenrolled Student: %1$s from lesson: %2$s";
-    public static final String MESSAGE_STUDENT_NOT_IN_LESSON = "%1$s is not currently enrolled in the lesson: %2$s";
+    public static final String MESSAGE_UNENROLL_STUDENT_SUCCESS =
+            "✔\tSuccess:\n\nUnenrolled Student:\n%1$s from lesson: %2$s";
+    public static final String MESSAGE_STUDENT_NOT_IN_LESSON =
+            "⚠\tAlert:\n\n%1$s is not currently enrolled in the lesson: %2$s";
 
     private final Index indexStudent;
 

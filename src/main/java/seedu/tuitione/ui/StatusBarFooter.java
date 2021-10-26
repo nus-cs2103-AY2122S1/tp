@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 public class StatusBarFooter extends UiPart<Region> {
 
     private static final String FXML = "StatusBarFooter.fxml";
-    private static final String INTRO_SAVE_DATA_LOCATION = "Data is saved at: \"%s\"";
+    private static final String INTRO_SAVE_DATA_LOCATION = "🔁\tData is saved at: \"%s\"";
 
     @FXML
     private Label saveLocationStatus;

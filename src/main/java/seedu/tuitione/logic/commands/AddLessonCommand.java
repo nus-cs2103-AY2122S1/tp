@@ -18,7 +18,8 @@ public class AddLessonCommand extends Command {
 
     public static final String COMMAND_WORD = "add-l";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson to TuitiONE. "
+    public static final String MESSAGE_USAGE = "Command: "
+            + COMMAND_WORD + "\nAdds a lesson to TuitiONE.\n\n"
             + "Parameters: "
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_GRADE + "GRADE "
@@ -27,8 +28,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_COST + "COST\n"
             + "Example: " + "add-l s/Science g/P5 d/Wed t/1200 c/10.50";
 
-    public static final String MESSAGE_SUCCESS = "New lesson created: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This lesson already exists in TuitiONE";
+    public static final String MESSAGE_SUCCESS = "✔\tSuccess:\n\nNew lesson created:\n%1$s";
+    public static final String MESSAGE_DUPLICATE_LESSON = "⚠\tAlert:\n\nThis lesson already exists in TuitiONE";
 
     private final Lesson toAdd;
 
