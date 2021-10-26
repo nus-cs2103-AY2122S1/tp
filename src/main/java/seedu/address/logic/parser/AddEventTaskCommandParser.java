@@ -19,7 +19,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 
-public class AddEventTaskCommandParser {
+public class AddEventTaskCommandParser implements Parser<AddEventTaskCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddTaskCommand
      * and returns an AddTaskCommand object for execution.

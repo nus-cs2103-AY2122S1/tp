@@ -19,7 +19,7 @@ public class MarkTaskDoneCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task Completed: %1$s";
+    public static final String MESSAGE_MARK_TASK_DONE_SUCCESS = "Task Completed: %1$s\n";
 
     private final List<Index> targetIndexList;
 
@@ -45,8 +45,7 @@ public class MarkTaskDoneCommand extends Command {
 
             Task taskToMarkCompleted = lastShownList.get(targetIndex.getZeroBased());
             model.completeTask(taskToMarkCompleted);
-            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted))
-                    .append("\n");
+            result.append(String.format(MESSAGE_MARK_TASK_DONE_SUCCESS, taskToMarkCompleted));
         }
 
         return new CommandResult(result.toString());

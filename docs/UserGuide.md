@@ -90,7 +90,100 @@ Examples:
   and displays a confirmation output with a proper Github link
 * `addStudent n/John Doe e/johnd@example.com s/A0123456B u/user` adds John Doe to the list and displays a confirmation
   output without a proper Github link, but storing the `GITHUB USERNAME` in memory nonetheless.
+  
 
+### Marking a student as present: `marka`
+
+Marks the specified student in the student list as present or absent.
+
+Format: `marka INDEX /wWEEK NUMBER`
+
+* Marks the person as present in the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+
+Examples:
+
+* `students` followed by `marka 1 /w1` marks the 1st person in the students list as present in week 1.
+* Another `marka 1 /w1` instance will mark the 1st person in the student list as absent in week 1.
+
+Sample Usage:
+
+`> marka 1 /w1`
+
+    > Kho Tze Jit is marked as present for week 1!
+
+`> marka 1 /w1`
+
+    > Kho Tze Jit is marked as absent for week 1!
+
+### Marking a student's participation: `markp`
+
+Marks the specified student in the student list as participated or not participated.
+
+Format: `markp INDEX /wWEEK NUMBER`
+
+* Marks the person as present in the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+* If the student at the specified `INDEX` is marked as present, the command toggles the attendance to absent.
+
+Examples:
+
+* `students` followed by `markp 1 /w1` marks the 1st person in the students list as participated in week 1.
+* Another `mark 1 /w1` instance will mark the 1st person in the student list as not participated in week 1.
+
+Sample Usage:
+
+`> markp 1 /w1`
+
+    > Kho Tze Jit is marked as participated for week 1!
+
+`> markp 1 /w1`
+
+    > Kho Tze Jit is marked as not participated for week 1!
+
+### Deleting a student contact: `delete INDEX`
+
+Deletes the specified student from the student list.
+
+Format: `delete INDEX`
+
+* Deletes the person at the specified `INDEX`.
+* The index must refer to the index number shown in the displayed students list.
+* The index and week number must be a positive number: 1, 2, 3…
+
+Examples:
+
+* `students` followed by `delete 1` removes the 1st person in the students list.
+
+Sample Usage:
+
+`> delete 1`
+
+    > Kho Tze Jit is removed from the student list!
+
+### Locating student by name: `findStudent`
+
+Finds persons whose names contain any of the given keywords.
+
+Format: `findStudent KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Special characters will be ignored e.g. `Alice!` will match `Alice`
+* Partial names will be matched e.g. `Han` will match `Hans`
+* Students matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `findStudent Joh@` returns `john` and `John Doe`
+* `findStudent alex! davi` returns `Alex Yeoh`, `David Li`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+-----
 
 ### Lists all groups: `groups`
 
@@ -107,7 +200,7 @@ Adds a group to the group list. The group will only be initialized with a `GROUP
 
 Format: `addGroup g/GROUP NAME [t/TAG]...`
 
-* `GROUP NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit. 
+* `GROUP NAME` must be contain a character, followed by 2 digits, a dash (-), followed by another digit.
   The case of the character does not matter.
 
 Examples:
@@ -126,11 +219,11 @@ Format: `deleteGroup INDEX`
 
 Examples:
 * `deleteGroup 1` deletes the group with index 1 in group list and displays a confirmation output with the group members and Github
-link of the group deleted
+  link of the group deleted
 
 ### Add a student to a group: `addSG`
 
-Adds a student in student list to an existing group in the group list. 
+Adds a student in student list to an existing group in the group list.
 
 Format: `addSG INDEX g/GROUP`
 
@@ -157,65 +250,89 @@ Format: `addGG INDEX y/YEAR r/REPO NAME`
 
 Examples:
 * `addGG 1 y/AY20212022 r/tp` adds a Github link in the above format to the group with index 1 in the group list and
-displays a confirmation output the link has been added to the group.
+  displays a confirmation output the link has been added to the group.
 
+### Locating group by name: `findGroup`
+
+Find groups whose names contain any of the given keywords.
+
+Format: `findGroup KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `w14-4` will match `W14-4`
+* The order of the keywords does not matter. e.g. `w14 w15` will match `w15 w14`
+* Only the group name is searched.
+* Most special characters will be ignored e.g. `w14!` will match `w14` except dashes: `-`
+* Partial group names will be matched e.g. `w14` will match `w14-4`
+* Groups matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `w14 w15` will return `w14-4`, `w14-3`, `w15-1`
+
+Examples:
+* `findGroup w14` returns `W14-3` and `W14-4`
+* `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
+  ![result for 'find alex david'](images/findAlexDavidResult.png)
+
+---------------------------
 
 ### Listing the task list : `tasks`
 
-Displays all the tasks currently in the list.
+Displays all the tasks currently in the task list.
 
 Format: `tasks`
 
-### Adding a todo task: `todo n/TASK_NAME`
+### Adding a todo task: `todo`
 
-Adds a TODO task with the given name.
+Adds a TODO task with the given TASK_NAME.
 
-Format: `todo n/TASK_NAME p/TASK_PRIORITY`
+Format: `todo n/TASK_NAME [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
-* Adds a todo task with the specified `TASK_NAME` and `TASK_PRIORITY`
+* Adds a todo task with the specified `TASK_NAME`
 * The possible priorities are High, Medium and Low.
-* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as LOW Priority.
-* Tasks that are not specified a priority will be by default LOW Priority.
+* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as Low Priority.
+* The priority parameter accepts partial words and is case-insensitive.
+* Tasks that are not specified a priority level will be by default Low Priority.
+* `DESCRIPTION` should only contain alphanumerical characters.
 
 Examples:
-* `todo n/study p/H` creates the todo task "study" and marks it as High Priority.
-* `todo n/play` creates the todo task "play" with the default Low Priority.
+* `todo n/play` creates the todo task "play" with the default LOW Priority.
+* `todo n/study p/H` creates the todo task "study" and marks it as HIGH Priority.
+* `todo n/CS2103 d/Prepare for Tutorial p/M` creates the todo task "CS2103" with the description 
+"Prepare for tutorial" and with MEDIUM Priority.
+* `todo n/Complete tP d/Last chance to add features t/CS2103 t/work p/H` creates a todo task 'Complete tP'
+with the description "Last chance to add features" and tags "CS2103" & "work" with High Priority.  
 
-### Adding an event task: `event n/TASK_NAME on/DATE`
+### Adding an event task: `event`
 
-Adds an event task with the given name and a specified taskDate.
+Adds an event task with the given TASK_NAME for a specified DATE.
 
-Format: `event n/TASK_NAME on/DATE p/TASK_PRIORITY`
+Format: `event n/TASK_NAME on/EVENT_DATE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
 * Adds an event task with the specified `TASK_NAME`
 * The event task has the taskDate `DATE`
 * The taskDate must be in the format `YYYY-MM-dd`
-* The possible priorities are High, Medium and Low.
-* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as LOW Priority.
-* Tasks that are not specified a priority will be by default LOW Priority.
+* Priority, description and tags are similar to Todo Tasks.
 
 Examples:
-* `event n/party on/2021-09-23 p/M` creates the event task "party", which is to be held on the given date with 
+* `event n/Party on/2021-09-23 p/M` creates the event task "party", on "2021-09-23" with 
   Medium Priority.
-* `event n/exam on/2021-10-04` creates the event task "exam", which is to be held on the given date, with Low Priority.
+* `event n/Exam on/2021-10-04` creates the event task "exam", on "2021-10-04", with Low Priority.
 
-### Adding an deadline task: `deadline n/TASK_NAME by/DATE`
+### Adding an deadline task: `deadline`
 
 Adds an deadline task with the given name and a specified taskDate.
 
-Format: `event n/TASK_NAME by/DATE`
+Format: `event n/TASK_NAME by/DEADLINE [d/DESCRIPTION] [p/TASK_PRIORITY] [t/TAG]…​`
 
 * Adds a deadline task with the specified `TASK_NAME`
-* The deadline task has the taskDate `DATE`
+* The deadline task has the task date `DATE`
 * The taskDate must be in the format `YYYY-MM-dd`
-* The possible priorities are High, Medium and Low.
-* `p/H` marks a task as High Priority, `p/M` marks a task as Medium Priority, `p/L` marks a task as LOW Priority.
-* Tasks that are not specified a priority will be by default LOW Priority.
+* Priority, description and tags are similar to Todo Tasks.
 
 Examples:
 * `deadline n/tutorial participation on/2021-09-23 p/H` creates the deadline task "tutorial participation", 
-  which is to be completed by the given date with High Priority.
+  with deadline "2021-09-23" with High Priority.
 * `deadline n/assignment submission on/2021-10-04` creates the deadline task "assignment submission", 
+  with the deadline "2021-10-04" with LOW Priority.
+
   which is to be completed by the given date with LOW Priority.
 
 
@@ -239,11 +356,6 @@ Sample Usage:
 
 `> marka 1 /w1`
 
-    > Kho Tze Jit is marked as present for week 1!
-
-`> marka 1 /w1`
-    
-    > Kho Tze Jit is marked as absent for week 1!
 
 ### Marking a student's participation: `markp`
 
@@ -326,9 +438,8 @@ Examples:
 
 Sample Usage:
 
-`> deleteTask 1`
+`> deleteTask 1` removes the first Task from the task list.
 
-    > Studying is removed from the student list!
 
 ### Marking a task as done: : `doneTask`
 
@@ -343,24 +454,7 @@ Format: `doneTask INDEX`
 Examples:
 * `doneTask 2` marks the 2nd task in the task list as completed.
 
-### Locating group by name: `findGroup`
 
-Find groups whose names contain any of the given keywords.
-
-Format: `findGroup KEYWORD [MORE_KEYWORDS]`
-
-* The search is case-insensitive. e.g `w14-4` will match `W14-4`
-* The order of the keywords does not matter. e.g. `w14 w15` will match `w15 w14`
-* Only the group name is searched.
-* Most special characters will be ignored e.g. `w14!` will match `w14` except dashes: `-`
-* Partial group names will be matched e.g. `w14` will match `w14-4`
-* Groups matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `w14 w15` will return `w14-4`, `w14-3`, `w15-1`
-
-Examples:
-* `findGroup w14` returns `W14-3` and `W14-4`
-* `findGroup w14 w15` returns `W14-3`, `W14-4`, `W15-2`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
 
 ### Clearing all entries from student list: `clearStudents`
 

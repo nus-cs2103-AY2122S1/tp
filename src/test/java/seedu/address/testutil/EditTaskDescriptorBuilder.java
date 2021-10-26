@@ -18,6 +18,7 @@ import seedu.address.model.task.TaskName;
 public class EditTaskDescriptorBuilder {
 
     private EditTaskCommand.EditTaskDescriptor descriptor;
+    private Task.Priority priority;
 
     public EditTaskDescriptorBuilder() {
         descriptor = new EditTaskCommand.EditTaskDescriptor();
@@ -67,6 +68,20 @@ public class EditTaskDescriptorBuilder {
     public EditTaskDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code description} into a {@code Task} and set it to the {@code Task} that we are building.
+     */
+    public EditTaskDescriptorBuilder withPriority(String description) {
+        if (description.contains("H") || description.contains("h")) {
+            this.priority = Task.Priority.HIGH;
+        } else if (description.contains("M") || description.contains("m")) {
+            this.priority = Task.Priority.MEDIUM;
+        } else {
+            this.priority = Task.Priority.LOW;
+        }
         return this;
     }
 
