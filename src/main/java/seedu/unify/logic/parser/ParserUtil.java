@@ -11,7 +11,7 @@ import seedu.unify.commons.util.StringUtil;
 import seedu.unify.logic.parser.exceptions.ParseException;
 import seedu.unify.model.task.Date;
 import seedu.unify.model.task.Name;
-import seedu.unify.model.task.Tag;
+import seedu.unify.model.tag.Tag;
 import seedu.unify.model.task.Time;
 
 /**

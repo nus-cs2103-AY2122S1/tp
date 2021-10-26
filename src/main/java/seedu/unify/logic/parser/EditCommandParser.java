@@ -7,10 +7,16 @@ import static seedu.unify.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.unify.logic.parser.CliSyntax.PREFIX_TIME;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Optional;
+import java.util.Set;
+
 import seedu.unify.commons.core.index.Index;
 import seedu.unify.logic.commands.EditCommand;
 import seedu.unify.logic.commands.EditCommand.EditTaskDescriptor;
 import seedu.unify.logic.parser.exceptions.ParseException;
+import seedu.unify.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -45,14 +51,22 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editTaskDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
-            editTaskDescriptor.setTag(ParserUtil.parseTag(argMultimap.getValue(PREFIX_TAG).get()));
-        }
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editTaskDescriptor::setTags);
         if (!editTaskDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editTaskDescriptor);
+    }
+
+    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
+        assert tags != null;
+
+        if (tags.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
+        return Optional.of(ParserUtil.parseTags(tagSet));
     }
 
 }
