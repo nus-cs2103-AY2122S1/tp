@@ -47,6 +47,9 @@
                         <font>
                            <Font name="Montserrat Medium" size="22.0" />
                         </font>
+                       <VBox.margin>
+                         <Insets top="5.0" bottom="5.0" left="12.0" />
+                       </VBox.margin>
                      </Text>
             </VBox>
             <StackPane fx:id="studentListPanelPlaceholder" VBox.vgrow="ALWAYS" />
@@ -62,7 +65,7 @@
                            <Font name="Montserrat Medium" size="22.0" />
                         </font>
                         <VBox.margin>
-                           <Insets bottom="5.0" left="12.0" />
+                           <Insets top="5.0" bottom="5.0" left="12.0" />
                         </VBox.margin></Text>
             </VBox>
             <StackPane fx:id="lessonListPanelPlaceholder" VBox.vgrow="ALWAYS" />
