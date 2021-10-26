@@ -90,7 +90,7 @@ Tips are useful information that can help you have a better experience with our 
 
 <div markdown="span" class="alert alert-primary">:bulb:
 Tip: Tips are useful!
-</div>
+</div><br>
 
 **Important Information**
 
@@ -101,6 +101,24 @@ Important Information: Remember the importance of this icon!
 </div>
 
 ### 3.2 Application homepage explanation
+
+Here is how our application's homepage works
+
+![UiExplanation](images/UiExplanation.png)
+
+#### 3.2.1 Help Buttons (pink)
+
+#### 3.2.2 Command Box (yellow)
+
+#### 3.2.3 Output Display (orange)
+
+#### 3.2.4 Module List (purple)
+
+#### 3.2.5 MC goal Progress (green)
+
+#### 3.2.6 Current Semester (dark blue)
+
+#### 3.2.7 Current MC goal (light blue)
 
 -To be completed-
 
