@@ -33,15 +33,12 @@ public class AddLabCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLabCommand.MESSAGE_USAGE);
 
         // missing labNum prefix
-        assertParseFailure(parser, VALID_LAB_NO + LAB_TOTAL,
-                expectedMessage);
+        assertParseFailure(parser, VALID_LAB_NO + LAB_TOTAL, expectedMessage);
 
         // missing totalScore prefix
-        assertParseFailure(parser, LAB_NUM + VALID_TOTAL_SCORE,
-                expectedMessage);
+        assertParseFailure(parser, LAB_NUM + VALID_TOTAL_SCORE, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_LAB_NO + VALID_TOTAL_SCORE.toString(),
-                expectedMessage);
+        assertParseFailure(parser, VALID_LAB_NO + VALID_TOTAL_SCORE.toString(), expectedMessage);
     }
 }
