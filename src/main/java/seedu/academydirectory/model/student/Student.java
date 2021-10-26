@@ -56,6 +56,22 @@ public class Student {
         this.assessment = assessment;
     }
 
+    /**
+     * Constructor for Student with Assessment.
+     */
+
+    public Student(Name name, Phone phone, Email email, Telegram telegram,
+                   Assessment assessment, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, telegram, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.telegram = telegram;
+        this.tags.addAll(tags);
+        this.studioRecord = new StudioRecord(12);
+        this.assessment = assessment;
+    }
+
     public void setAttendance(Attendance attendance) {
         this.studioRecord = new StudioRecord(attendance, studioRecord.getParticipation());
     }
