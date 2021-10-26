@@ -52,7 +52,7 @@ public class TagCommandTest {
         PersonBuilder personInList = new PersonBuilder(personToEdit);
         Person editedPerson = personInList.withTags(
                 normalTag.tagName, priorityTag.tagName, investmentPlanTag.tagName).build();
-        modelLastPersonTagsAdded  = new ModelManager(new Fast(model.getFast()), new UserPrefs());
+        modelLastPersonTagsAdded = new ModelManager(new Fast(model.getFast()), new UserPrefs());
         modelLastPersonTagsAdded.setPerson(personToEdit, editedPerson);
 
         //set up tag sets
