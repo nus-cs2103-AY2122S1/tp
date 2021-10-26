@@ -20,7 +20,7 @@ import seedu.address.model.task.TaskDate;
 import seedu.address.model.task.TaskName;
 
 
-public class AddDeadlineTaskCommandParser {
+public class AddDeadlineTaskCommandParser implements Parser<AddDeadlineTaskCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddTaskCommand
      * and returns an AddTaskCommand object for execution.

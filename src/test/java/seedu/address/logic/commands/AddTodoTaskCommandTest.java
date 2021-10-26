@@ -1,12 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -23,7 +25,7 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.LinkYear;
 import seedu.address.model.student.Student;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.DeadlineAndEventTaskBuilder;
+import seedu.address.testutil.TodoTaskBuilder;
 
 public class AddTodoTaskCommandTest {
 
@@ -32,23 +34,23 @@ public class AddTodoTaskCommandTest {
         assertThrows(NullPointerException.class, () -> new AddTodoTaskCommand(null));
     }
 
-    /*
+
     @Test
     public void execute_taskAcceptedByModel_addSuccessful() throws Exception {
         AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded modelStub =
                 new AddTodoTaskCommandTest.ModelStubAcceptingTaskAdded();
-        Task validTask = new DeadlineAndEventTaskBuilder().build();
+        Task validTask = new TodoTaskBuilder().build();
 
         CommandResult commandResult = new AddTodoTaskCommand(validTask).execute(modelStub);
 
         assertEquals(String.format(AddTodoTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
     }
-     */
+
 
     @Test
     public void execute_duplicateTask_throwsCommandException() {
-        Task validTask = new DeadlineAndEventTaskBuilder().build();
+        Task validTask = new TodoTaskBuilder().build();
         AddTodoTaskCommand addTodoTaskCommand = new AddTodoTaskCommand(validTask);
         AddTodoTaskCommandTest.ModelStub modelStub = new AddTodoTaskCommandTest.ModelStubWithTask(validTask);
 
@@ -58,26 +60,32 @@ public class AddTodoTaskCommandTest {
 
     @Test
     public void equals() {
-        Task alice = new DeadlineAndEventTaskBuilder().withName("Alice").build();
-        Task bob = new DeadlineAndEventTaskBuilder().withName("Bob").build();
-        AddTodoTaskCommand addAliceCommand = new AddTodoTaskCommand(alice);
-        AddTodoTaskCommand addBobCommand = new AddTodoTaskCommand(bob);
+        Task todoIp = new TodoTaskBuilder().withName("Complete iP").build();
+        Task todoTp = new TodoTaskBuilder().withName("Complete tP").build();
+        Task todoTpFinalFeature = new TodoTaskBuilder().withName("Complete tP")
+                .withDescription("Implement the final feature").build();
+        AddTodoTaskCommand todoIpCommand = new AddTodoTaskCommand(todoIp);
+        AddTodoTaskCommand todoTpCommand = new AddTodoTaskCommand(todoTp);
+        AddTodoTaskCommand todoFinalFeature = new AddTodoTaskCommand(todoTpFinalFeature);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(todoIpCommand.equals(todoIpCommand));
 
         // same values -> returns true
-        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddTodoTaskCommand addAliceCommandCopy = new AddTodoTaskCommand(todoIp);
+        assertTrue(todoIpCommand.equals(addAliceCommandCopy));
+
+        // tasks have different description -> returns false
+        assertFalse(todoFinalFeature.equals(todoTpCommand));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(todoIpCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(todoIpCommand.equals(null));
 
         // different task -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(todoIpCommand.equals(todoTpCommand));
     }
 
     /**

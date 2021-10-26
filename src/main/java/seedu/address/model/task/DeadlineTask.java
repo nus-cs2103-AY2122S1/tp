@@ -67,7 +67,7 @@ public class DeadlineTask extends Task {
                 .append("\nStatus: ")
                 .append(getStatusString())
                 .append("\nPriority: ")
-                .append(getPriority().toString());
+                .append(getPriorityAsString());
 
         Set<Tag> tags = getTags();
         if (!tags.isEmpty()) {

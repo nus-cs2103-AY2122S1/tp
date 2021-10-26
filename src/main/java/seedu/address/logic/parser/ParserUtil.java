@@ -99,7 +99,7 @@ public class ParserUtil {
     public static Description parseDescription(String description) throws ParseException {
         String trimmedDescription = description.trim();
         if (!Description.isValidDescription(trimmedDescription)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Description.MESSAGE_CONSTRAINTS);
         }
         return new Description(trimmedDescription);
     }
@@ -213,7 +213,7 @@ public class ParserUtil {
         requireNonNull(taskDate);
         String trimmedTaskDate = taskDate.trim();
         if (!TaskDate.isValidDeadline(trimmedTaskDate)) {
-            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS + " HUH:" + trimmedTaskDate);
+            throw new ParseException(TaskDate.MESSAGE_CONSTRAINTS);
         }
         return new TaskDate(trimmedTaskDate);
     }

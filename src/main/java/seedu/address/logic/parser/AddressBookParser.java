@@ -15,9 +15,9 @@ import seedu.address.logic.commands.AddStudentGroupCommand;
 import seedu.address.logic.commands.AddTodoTaskCommand;
 import seedu.address.logic.commands.BackCommand;
 import seedu.address.logic.commands.ClearAllCommand;
-import seedu.address.logic.commands.ClearAllTasksCommand;
 import seedu.address.logic.commands.ClearGroupsCommand;
 import seedu.address.logic.commands.ClearStudentsCommand;
+import seedu.address.logic.commands.ClearTasksCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DeleteStudentCommand;
@@ -86,8 +86,8 @@ public class AddressBookParser {
         case ClearAllCommand.COMMAND_WORD:
             return new ClearAllCommand();
 
-        case ClearAllTasksCommand.COMMAND_WORD:
-            return new ClearAllTasksCommand();
+        case ClearTasksCommand.COMMAND_WORD:
+            return new ClearTasksCommand();
 
         case ClearStudentsCommand.COMMAND_WORD:
             return new ClearStudentsCommand();
