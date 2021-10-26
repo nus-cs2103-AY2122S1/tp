@@ -267,16 +267,31 @@ Format: `elist [/m MEMBER_ID]`
 
 #### Marking participants as attended : `emark`
 
-Marks participants as attended for a specific event.
+Marks the attendance of a participant for a specific event.
 
 Format: `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
 
 * `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
-* Multiple members under the event can be marked as attended when more than one `MEMBER_ID` is provided.
+* Multiple members under the event can be marked when more than one `MEMBER_ID` is provided.
 * It is recommended for `emark` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
+* If the specified member is not participating in the event, an error is thrown to the user.
 
 Examples:
-* `emark /e 1 /m 2 /m 3` marks the 2nd and 3rd person in the member list as attended in Event 1. 
+* `emark /e 1 /m 2 /m 3` marks the attendance of the 2nd and 3rd person in the member list in Event 1. 
+
+#### Undo marking participants as attended : `eunmark`
+
+Undo the marking of the attendance of a participant for a specific event.
+
+Format: `unmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​`
+
+* `EVENT_ID` and `MEMBER_ID` **must be a positive integer** 1, 2, 3, …​
+* Multiple members under the event can be unmarked when more than one `MEMBER_ID` is provided.
+* It is recommended for `eunmark` to be used when the member list shows all entries that are participating in the event (accessible via `mlist /e EVENT_ID`).
+* If the specified member is not participating in the event, an error is thrown to the user.
+
+Examples:
+* `eunmark /e 2 /m 3 /m 4` unmarks the attendance of the 3rd and 4th person in the member list in Event 2.
 
 #### Editing an event : `eedit`
 
@@ -354,6 +369,7 @@ Action | Format, Examples
 **eadd** | `eadd /n EVENTNAME [/m MEMBER_ID]…​` <br> e.g., `eadd /n Computing Freshmen Orientation Camp 2021 /m 4 /m 5 /m 6`
 **elist** | `elist [/m MEMBER_ID]` <br> e.g., `elist /m 1`
 **emark** | `emark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `emark /e 1 /m 2 /m 3`
+**eunmark* | `unmark /e EVENT_ID /m MEMBER_ID [/m MORE_MEMBER_ID]…​` <br> e.g. `eunmark /e 2 /m 2 /m 5`
 **eedit** | `eedit /e EVENT_ID [/n EVENT_NAME] [/d EVENT_DATE] [/m MEMBER_ID]…​` <br> e.g. `eedit /e 1 /n Freshman Orientation Project Discussion`
 **edel** | `edel /e EVENT_ID [/e MORE_EVENT_ID]…​` <br> e.g., `edel /e 7 /e 9`
 **exit** | `exit`
