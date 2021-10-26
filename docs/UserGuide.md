@@ -312,9 +312,13 @@ Format: `sortorders f/FIELD o/ORDERING`
 * Your orders are sorted based on the `FIELD` chosen. You may choose between:
   * The Date field, identified with a "d" or "date".
   * The Amount field, identified with an "a" or "amount".
-* The direction of the sorting depends on the `ORDERING`, which is either:
+* By default, the orders are sorted in the sequence they are added. This is also used as a tiebreaker when two or more orders have an identical value for the `FIELD` chosen.
+* The direction of the sorting depends on the `ORDERING`, which is either in:
   * Ascending order, identified with an "asc" or "ascending".
   * Descending order, identified with a "desc" or "descending".
+
+<div markdown="span" class="alert alert-primary">:information_source: **Note:**
+Adding / Deleting an order reverts the list to the default ordering.</div>
 
 Examples:
 * `sortorders f/date o/descending` sorts your orders in descending order of date (orders with later dates shown first).
