@@ -8,9 +8,11 @@
       "tagged" : [ "friends" ]
     } ],
     "location" : "369 Tanjong Rhu",
-    "date" : "2021-12-25",
-    "description" : "Talk about sales",
-    "time" : "21:30"
+    "timePeriod" : {
+      "startDateTime" : "25-12-2021 1000",
+      "endDateTime" : "25-12-2021 1100"
+    },
+    "description" : "Talk about sales"
   }, {
     "clients" : [ {
       "name" : "Alice Pauline",
@@ -20,8 +22,10 @@
       "tagged" : [ "friends" ]
     } ],
     "location" : "369 Tanjong Rhu",
-    "date" : "2021-12-25",
-    "description" : "Talk about sales",
-    "time" : "21:30"
+    "timePeriod" : {
+      "startDateTime" : "25-12-2021 1000",
+      "endDateTime" : "25-12-2021 1100"
+    },
+    "description" : "Talk about sales"
   } ]
 }
