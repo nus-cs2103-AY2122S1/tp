@@ -19,6 +19,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.InvalidShiftTimeException;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Schedule;
 import seedu.address.model.person.Slot;
 import seedu.address.model.person.exceptions.DuplicateShiftException;
 import seedu.address.model.person.exceptions.NoShiftException;
@@ -181,13 +182,17 @@ public class ModelManager implements Model {
 
 
     @Override
-    public void addShift(Person target, DayOfWeek dayOfWeek,
-                         Slot slot, LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
+    public void addShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                LocalDate startDate, LocalDate endDate) throws DuplicateShiftException {
         requireAllNonNull(target, dayOfWeek, slot, startDate, endDate);
-        target.addShift(dayOfWeek, slot, startDate, endDate);
-
+        Person staffToReplaceWith = Person.copy(target);
+        Schedule editSchedule = target.getSchedule();
+        editSchedule.addShift(dayOfWeek, slot, startDate, endDate);
+        staffToReplaceWith.setSchedule(editSchedule);
+        setPerson(target, staffToReplaceWith);
     }
 
+    @Override
     public void setShiftTime(Person target, DayOfWeek dayOfWeek, Slot slot, LocalTime startTime, LocalTime endTime,
                              LocalDate startDate, LocalDate endDate)
             throws InvalidShiftTimeException {
@@ -196,10 +201,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void deleteShift(Person target, DayOfWeek dayOfWeek,
-                            Slot slot, LocalDate startDate, LocalDate endDate) throws NoShiftException {
-        requireAllNonNull(target, dayOfWeek, slot, startDate, endDate);
-        target.removeShift(dayOfWeek, slot, startDate, endDate);
+    public void deleteShift(Person target, DayOfWeek dayOfWeek, Slot slot,
+                            LocalDate startDate, LocalDate endDate) throws NoShiftException {
+        requireAllNonNull(target, dayOfWeek, slot);
+        Person staffToReplaceWith = Person.copy(target);
+        Schedule editSchedule = target.getSchedule();
+        editSchedule.removeShift(dayOfWeek, slot, startDate, endDate);
+        staffToReplaceWith.setSchedule(editSchedule);
+        setPerson(target, staffToReplaceWith);
     }
 
     @Override
@@ -220,5 +229,4 @@ public class ModelManager implements Model {
                 && userPrefs.equals(other.userPrefs)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

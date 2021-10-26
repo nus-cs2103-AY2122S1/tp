@@ -250,12 +250,13 @@ public class Schedule {
             if (shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()] != null) {
                 totalHours += shifts[date.getDayOfWeek().getValue() - 1][Slot.AFTERNOON.getOrder()]
                         .getWorkingHour(new Period(date));
+
+
             }
 
         }
         return totalHours;
     }
-
 
 
     /**
@@ -273,5 +274,4 @@ public class Schedule {
         }
         return true;
     }
-
 }
