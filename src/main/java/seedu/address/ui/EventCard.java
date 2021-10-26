@@ -51,9 +51,9 @@ public class EventCard extends UiPart<Region> {
                 .forEach(member -> {
                     Label participantLabel = new Label(member.getName().fullName);
                     if (event.hasAttended(member)) {
-                        participantLabel.setStyle("-fx-background-color: #64725a");
+                        participantLabel.setStyle("-fx-background-color: #549a1f");
                     } else {
-                        participantLabel.setStyle("-fx-background-color: #b43360");
+                        participantLabel.setStyle("-fx-background-color: #c51162");
                     }
                     participants.getChildren().add(participantLabel);
                 });
