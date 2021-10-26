@@ -35,7 +35,7 @@ public class ShowCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Shows performance analysis of a student or an assessment. "
             + "Parameters: "
-            + "( INDEX | "
+            + "(<index> | "
             + PREFIX_NAME + "<student_name> | "
             + PREFIX_ID + "<student_id> | "
             + PREFIX_ASSESSMENT + "<assessment_name>)";

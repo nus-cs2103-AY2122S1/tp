@@ -172,13 +172,33 @@ Examples:
 * `search -g T02B R03C`
 * `search -t friends colleagues`
 
+### Showing assessment result analysis: `show`
+
+Shows the in-depth data analysis of individual, group, and cohort's performance for assessments.
+
+Format: `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name> ) [-f]`
+
+* Using `<index>`, `-n <student_name>` or `-i <student_id>` displays the information of the particular student's performance in all his graded assessments. 
+* The `<index>` refers to the index number shown in the displayed person list. The `<index>` must be a positive integer 1, 2, 3, …
+* Using `-a <assessment_name>` displays the information of the cohort's performance in the particular assessments. 
+* Using `-g <group_name>` displays the information of the group's performance in all their graded assessments. 
+* Does not support partial searching. e.g. `T01` does not match `T01A`. Full name must be entered. 
+* Entering `-f` exports the graph produced from the command. 
+
+Examples:
+* `show -n Alex Yeoh` displays line chart of Alex Yeoh's performance in his assessments. 
+* `show 2 -f` exports the line chart produced of the 2nd person in the address book. 
+* `show -g T02A` displays line chart of group T02A's performance in their assessments. 
+* `show -a P01` displays bar chart of the distribution of scores in assessment P01. 
+
+
 ### Editing a student: `edit`
 
 Edits the information of an existing student.
 
 Format: `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...`
 
-* Edits the person at the specified index. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
+* Edits the person at the specified `<index>`. The `<index>` refers to the index number shown in the displayed person list. The `<index>` must be a positive integer 1, 2, 3, …
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags and groups, the existing tags and groups of the person will be removed i.e adding of tags and groups are not cumulative.
@@ -196,8 +216,8 @@ Deletes the specified person from the address book.
 Format: `delete <index>`
 
 * Deletes the person at the specified `<index>`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …
+* The `<index>` refers to the index number shown in the displayed person list.
+* The `<index>` **must be a positive integer** 1, 2, 3, …
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
@@ -281,7 +301,8 @@ Action | Format | Examples
 **Add Allocation** | `add alloc -g <group_name> (-n <student_name> | -i <student_id>)` | e.g. `add alloc -g T01A -n John Doe`, `add alloc -g T02A -i E0123456`
 **Add Assessment** | `add assessment -a <assessment_name>` | e.g. `add assessment -a P01`
 **Add Score** | `add score -a <assessment_name> (-n <student_name> | -i <student_id>) -s <score>` | e.g. `add score -a P01 -n John Doe -s 12`, `add score -a P02 -i E0123456 -s 12.5`
-**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe` , `search -g T02B R04D`
+**Search** | `search (-n <student_name> | -i <student_id> | -g <group_name> | -t <tag>)` | e.g. `search -n John Doe`, `search -g T02B R04D`
+**Show Analysis** | `show (<index> | -n <student_name> | -i <student_id> | -g <group_name> | -a <assessment_name>) [-f]` | e.g. `show -n Alex Yeoh`, `show -a P01`
 **Edit Student** | `edit <index> [-n <student_name>] [-i <student_id>] [-g <group_name>]... [-t <tag>]...` | e.g.`edit 1 -n John Doe -i E1234567 -g T01 -g R01`
 **Delete Student** | `delete <index>` | e.g. `delete 2`
 **Import Data** | `import -f <file_path> [-g <number_of_group_columns>] [-a <number_of_assessment_columns>] [-t <number_of_tag_columns>]` | e.g. `import -f student_data.csv -g 2 -a 10 -t 1`

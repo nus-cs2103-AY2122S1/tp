@@ -70,12 +70,10 @@ public class GroupStatistics {
         List<Double> sorted = scores.stream()
                 .map(Score::getNumericValue)
                 .sorted().collect(Collectors.toList());
-        int midPos; // middle position of the sorted list
+        int midPos = count / 2; // middle position of the sorted list
         if (count % 2 == 1) { // odd number of scores
-            midPos = (int) ((count + 1) / 2.0 - 1);
             median = sorted.get(midPos);
         } else { // even number of scores
-            midPos = (int) (count / 2.0);
             median = (sorted.get(midPos - 1)
                     + sorted.get(midPos)) / 2.0;
         }
