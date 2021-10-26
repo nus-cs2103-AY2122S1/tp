@@ -52,8 +52,8 @@ class AddGroupCommandTest {
 
     @Test
     public void equals() {
-        TutorialGroup a = new TutorialGroupBuilder().withClassCode("a").build();
-        TutorialGroup b = new TutorialGroupBuilder().withClassCode("b").build();
+        TutorialGroup a = new TutorialGroupBuilder().withClassCode("G01").build();
+        TutorialGroup b = new TutorialGroupBuilder().withClassCode("G02").build();
 
         AddGroupCommand addACommand = new AddGroupCommand(a);
         AddGroupCommand addBCommand = new AddGroupCommand(b);

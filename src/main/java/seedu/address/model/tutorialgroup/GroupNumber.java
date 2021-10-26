@@ -4,7 +4,7 @@ import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class GroupName implements Comparable<GroupName> {
+public class GroupNumber implements Comparable<GroupNumber> {
     public static final String MESSAGE_CONSTRAINTS = "GroupName must be a single digit, and it should not be blank";
 
     private static final String GROUPNAME_REGEX = "\\d";
@@ -16,7 +16,7 @@ public class GroupName implements Comparable<GroupName> {
      *
      * @param groupName A valid groupName.
      */
-    public GroupName (String groupName) {
+    public GroupNumber(String groupName) {
         requireNonNull(groupName);
         checkArgument(isValidGroupName(groupName), MESSAGE_CONSTRAINTS);
         value = groupName;
@@ -44,8 +44,8 @@ public class GroupName implements Comparable<GroupName> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof GroupName // instanceof handles nulls
-                && value.equals(((GroupName) other).value)); // state check
+                || (other instanceof GroupNumber // instanceof handles nulls
+                && value.equals(((GroupNumber) other).value)); // state check
     }
 
     @Override
@@ -54,8 +54,8 @@ public class GroupName implements Comparable<GroupName> {
     }
 
     @Override
-    public int compareTo(GroupName groupName) {
-        return parseGroupName(this.value).compareTo(parseGroupName(groupName.value));
+    public int compareTo(GroupNumber groupNumber) {
+        return parseGroupName(this.value).compareTo(parseGroupName(groupNumber.value));
     }
 
 }

@@ -21,7 +21,7 @@ import static seedu.address.testutil.TypicalTutorialGroups.TUT_01;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddGroupCommand;
-import seedu.address.model.tutorialgroup.GroupName;
+import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 import seedu.address.testutil.TutorialGroupBuilder;
@@ -78,7 +78,7 @@ public class AddGroupCommandParserTest {
 
         // invalid group name
         assertParseFailure(parser, INVALID_GROUPNAME_DESC + CLASSCODE_DESC_G01 + GROUPTYPE_DESC_OP1,
-                GroupName.MESSAGE_CONSTRAINTS);
+                GroupNumber.MESSAGE_CONSTRAINTS);
 
         // invalid group type
         assertParseFailure(parser, GROUPNAME_DESC_1 + CLASSCODE_DESC_G01 + INVALID_GROUPTYPE_DESC,
@@ -86,7 +86,7 @@ public class AddGroupCommandParserTest {
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_GROUPNAME_DESC + CLASSCODE_DESC_G01 + INVALID_GROUPTYPE_DESC,
-                GroupName.MESSAGE_CONSTRAINTS);
+                GroupNumber.MESSAGE_CONSTRAINTS);
 
         // preamble not empty
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + CLASSCODE_DESC_G01 + GROUPNAME_DESC_1 + GROUPTYPE_DESC_OP1,

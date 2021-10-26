@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G101;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G102;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G01;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASSCODE_G02;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPNAME_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUPTYPE_OP1;
@@ -18,9 +18,9 @@ import seedu.address.model.tutorialgroup.TutorialGroup;
  * A utility class containing a list of {@code TutorialGroup} objects to be used in tests.
  */
 public class TypicalTutorialGroups {
-    public static final TutorialGroup TUT_01 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G101)
+    public static final TutorialGroup TUT_01 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G01)
             .withGroupName(VALID_GROUPNAME_1).withGroupType(VALID_GROUPTYPE_OP1).build();
-    public static final TutorialGroup TUT_02 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G102)
+    public static final TutorialGroup TUT_02 = new TutorialGroupBuilder().withClassCode(VALID_CLASSCODE_G02)
             .withGroupName(VALID_GROUPNAME_2).withGroupType(VALID_GROUPTYPE_OP2).build();
 
     // Prevent instantiation

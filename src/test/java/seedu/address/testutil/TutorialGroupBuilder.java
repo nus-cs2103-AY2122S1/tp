@@ -1,18 +1,18 @@
 package seedu.address.testutil;
 
 import seedu.address.model.student.ClassCode;
-import seedu.address.model.tutorialgroup.GroupName;
+import seedu.address.model.tutorialgroup.GroupNumber;
 import seedu.address.model.tutorialgroup.GroupType;
 import seedu.address.model.tutorialgroup.TutorialGroup;
 
 public class TutorialGroupBuilder {
 
-    public static final String DEFAULT_CLASSCODE = "G01";
+    public static final String DEFAULT_CLASSCODE = "G06";
     public static final String DEFAULT_GROUPNAME = "1";
     public static final String DEFAULT_GROUPTYPE = "OP1";
 
     private ClassCode classCode;
-    private GroupName groupName;
+    private GroupNumber groupNumber;
     private GroupType groupType;
 
     /**
@@ -20,7 +20,7 @@ public class TutorialGroupBuilder {
      */
     public TutorialGroupBuilder() {
         classCode = new ClassCode(DEFAULT_CLASSCODE);
-        groupName = new GroupName(DEFAULT_GROUPNAME);
+        groupNumber = new GroupNumber(DEFAULT_GROUPNAME);
         groupType = new GroupType(DEFAULT_GROUPTYPE);
     }
 
@@ -29,7 +29,7 @@ public class TutorialGroupBuilder {
      */
     public TutorialGroupBuilder(TutorialGroup tutorialGroupToCopy) {
         classCode = tutorialGroupToCopy.getClassCode();
-        groupName = tutorialGroupToCopy.getGroupName();
+        groupNumber = tutorialGroupToCopy.getGroupName();
         groupType = tutorialGroupToCopy.getGroupType();
     }
 
@@ -45,7 +45,7 @@ public class TutorialGroupBuilder {
      * Sets the {@code ClassCode} of the {@code TutorialClass} that we are building.
      */
     public TutorialGroupBuilder withGroupName(String groupName) {
-        this.groupName = new GroupName(groupName);
+        this.groupNumber = new GroupNumber(groupName);
         return this;
     }
 
@@ -58,6 +58,6 @@ public class TutorialGroupBuilder {
     }
 
     public TutorialGroup build() {
-        return new TutorialGroup(groupName, classCode, groupType);
+        return new TutorialGroup(groupNumber, classCode, groupType);
     }
 }
