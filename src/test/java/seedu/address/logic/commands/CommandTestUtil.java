@@ -81,6 +81,7 @@ public class CommandTestUtil {
     public static final String INVALID_ASSESSMENT_NAME_DESC = " " + PREFIX_ASSESSMENT_NAME
             + "Fin@ls"; // '@' not allowed in assessment names
     public static final String INVALID_SCORE_DESC = " " + PREFIX_SCORE + "60100"; // missing delimiter
+    public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_GROUP_NAME + "!$%";
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
